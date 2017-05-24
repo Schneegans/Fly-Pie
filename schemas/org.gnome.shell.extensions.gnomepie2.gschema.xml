@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+
+  <schema path="/org/gnome/shell/extensions/gnomepie2/" id="org.gnome.shell.extensions.gnomepie2">
+
+    <key name="real-shortcut" type="as">
+      <default><![CDATA[['F12']]]></default>
+      <summary>An internal key that must not be changed manually</summary>
+      <description>
+        'Above_Tab' is displayed as 'Disabled' in a GtkCellRendererAccel and that really looks bad.
+        This is why there is this special key which is the final, real shortcut used, and which is not displayed
+        in the preferences UI.
+      </description>
+    </key>
+
+  </schema>
+</schemalist>
+

@@ -9,19 +9,35 @@
 //                                                                                     //
 /////////////////////////////////////////////////////////////////////////////////////////
 
-const ExtensionUtils = imports.misc.extensionUtils;
+const Main = imports.ui.main;
+const Lang = imports.lang;
 
-const Me = ExtensionUtils.getCurrentExtension();
-const DBusInterface = Me.imports.dbusInterface;
+// based on code by azuri (https://github.com/HROMANO/nohotcorner/), thank you!
 
-let dbusInterface;
+const HotCorner = new Lang.Class({
+  Name : 'HotCorner',
 
-function init() {}
+  disable : function() {
+    this._disable_hot_corners();
+    this.id = Main.layoutManager.connect('hot-corners-changed', 
+                                         this._disable_hot_corners);
+  },
 
-function enable() { 
-  dbusInterface = new DBusInterface.DBusInterface(); 
-}
+  enable : function() {
+    // Disconnects the callback and re-creates the hot corners
+    Main.layoutManager.disconnect(this.id);
+    Main.layoutManager._updateHotCorners();
+  },
 
-function disable() { 
-  // dbusInterface._destroy();
-};
+  _disable_hot_corners : function() {
+    // Disables all hot corners
+    Main.layoutManager.hotCorners.forEach(function(hot_corner) {
+      if (!hot_corner) {
+        return;
+      }
+
+      hot_corner._toggleOverview = function() {};
+      hot_corner._pressureBarrier._trigger = function() {};
+    });
+  }
+});

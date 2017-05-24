@@ -1,9 +1,18 @@
+/*///////////////////////////////////////////////////////////////////////////////////////
+//                                                                                     //
+//    _____                    ___  _     ___       This software may be modified      //
+//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the          //
+//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See      //
+//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.      //
+//                                                                                     //
+//  Authors: Simon Schneegans (code@simonschneegans.de)                                //
+//                                                                                     //
+///////////////////////////////////////////////////////////////////////////////////////*/
 
-.helloworld-label {
-    font-size: 36px;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: rgba(10,10,10,0.7);
-    border-radius: 5px;
-    padding: .5em;
+.pie-background{
+    background-color: rgba(10,10,10,0.1);
+}
+
+.pie-container{
+    /*background-color: rgba(255,10,10,0.5);*/
 }
