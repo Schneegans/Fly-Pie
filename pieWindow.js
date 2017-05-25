@@ -11,7 +11,6 @@
 
 const Clutter        = imports.gi.Clutter;
 const ExtensionUtils = imports.misc.extensionUtils;
-const Gio            = imports.gi.Gio;
 const Lang           = imports.lang;
 const Main           = imports.ui.main;
 const St             = imports.gi.St;
@@ -19,20 +18,14 @@ const Tweener        = imports.ui.tweener;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
-const HotCorner     = Me.imports.hotCorner;
-const KeyBindings   = Me.imports.keyBindings;
-const DBusInterface = Me.imports.dbusInterface;
+const HotCorner     = Me.imports.hotCorner.HotCorner;
 
 const PieWindow = new Lang.Class({
   Name : 'PieWindow',
 
   _init : function(monitor) {
-
-    this._settings  = this._initSettings();
-    this._hotCorner = new HotCorner.HotCorner();
-
-    this._keybindings = new KeyBindings.KeyBindings();
-    this._keybindings.bindShortcut(this._settings, Lang.bind(this, this.toggle));
+    
+    this._hotCorner = new HotCorner();
 
     this._background = new St.Widget({
       style_class: 'pie-background',
@@ -104,21 +97,6 @@ const PieWindow = new Lang.Class({
     }
   },
 
-  _initSettings : function () {
-    let path = Me.dir.get_child('schemas').get_path();
-    let defaultSource = Gio.SettingsSchemaSource.get_default();
-    let source = Gio.SettingsSchemaSource.new_from_directory(path, defaultSource, false);
-
-    let schemaId = "org.gnome.shell.extensions.gnomepie2";
-    let schema = source.lookup(schemaId, false); 
-
-    if (!schema) {
-      throw new Error("Schema " + schemaId + " could not be found in the path " + path);
-    }
-
-    return new Gio.Settings({settings_schema : schema});
-  },
-
   _onMouseMove : function(actor, event) {
     let absX, absY;
     [absX, absY] = event.get_coords();
@@ -148,8 +126,7 @@ const PieWindow = new Lang.Class({
     return true;
   },
 
-  _destroy : function() {
+  destroy : function() {
     this.hide();
-    this._keybindings.unbindShortcut();
   }
 });

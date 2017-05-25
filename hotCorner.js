@@ -12,8 +12,7 @@
 const Main = imports.ui.main;
 const Lang = imports.lang;
 
-// based on code by azuri (https://github.com/HROMANO/nohotcorner/), thank you!
-
+// based on code by azuri (https://github.com/HROMANO/nohotcorner/)
 const HotCorner = new Lang.Class({
   Name : 'HotCorner',
 

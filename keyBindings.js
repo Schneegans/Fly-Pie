@@ -14,11 +14,9 @@ const Lang = imports.lang;
 const Shell = imports.gi.Shell;
 const Meta = imports.gi.Meta;
 
-// based on code by zzrough (https://github.com/zzrough/gs-extensions-drop-down-terminal)
-// thank you!
-
 const REAL_SHORTCUT_SETTING_KEY = "real-shortcut";
 
+// based on code by zzrough (https://github.com/zzrough/gs-extensions-drop-down-terminal)
 const KeyBindings = new Lang.Class({
   Name : 'KeyBindings',
 

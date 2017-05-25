@@ -12,16 +12,20 @@
 const ExtensionUtils = imports.misc.extensionUtils;
 
 const Me = ExtensionUtils.getCurrentExtension();
-const DBusInterface = Me.imports.dbusInterface;
 
-let dbusInterface;
+const Server = Me.imports.server.Server;
+const Client = Me.imports.client.Client;
+
+let server, client;
 
 function init() {}
 
 function enable() { 
-  dbusInterface = new DBusInterface.DBusInterface(); 
+  server = new Server(); 
+  client = new Client(); 
 }
 
 function disable() { 
-  // dbusInterface._destroy();
+  server.destroy();
+  client.destroy();
 };
