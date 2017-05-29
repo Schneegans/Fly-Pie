@@ -16,9 +16,15 @@ const Meta = imports.gi.Meta;
 
 const REAL_SHORTCUT_SETTING_KEY = "real-shortcut";
 
-// based on code by zzrough (https://github.com/zzrough/gs-extensions-drop-down-terminal)
+/////////////////////////////////////////////////////////////////////////////////////////
+// This class can be used to bind functions to global hot keys. The code is based on   //
+// code by zzrough (https://github.com/zzrough/gs-extensions-drop-down-terminal)       //
+/////////////////////////////////////////////////////////////////////////////////////////
+
 const KeyBindings = new Lang.Class({
   Name : 'KeyBindings',
+
+  // ------------------------------------------------------------------- public interface
 
   bindShortcut : function(settings, func) {
     if (Main.wm.addKeybinding && Shell.ActionMode) // introduced in 3.16

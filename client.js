@@ -26,6 +26,8 @@ const DBusWrapper    = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
 const Client = new Lang.Class({
   Name : 'Client',
 
+  // ----------------------------------------------------------- constructor / destructor
+
   _init : function () {
     this._settings = this._initSettings();
     
@@ -44,6 +46,8 @@ const Client = new Lang.Class({
     this._keybindings.unbindShortcut();
   },
 
+  // ------------------------------------------------------------------- public interface
+
   toggle : function () {
     let menu = '{"name":"foo","icon":"link","subs":[{"name":"bar","icon":"user"},{"name":"horst","icon":"pixel"}]}';
     this._wrapper.ShowMenuRemote(menu, Lang.bind(this, function(id) {
@@ -51,10 +55,12 @@ const Client = new Lang.Class({
     }));
   },
 
+  // ---------------------------------------------------------------------- private stuff
+
   _initSettings : function () {
     let path = Me.dir.get_child('schemas').get_path();
-    let defaultSource = Gio.SettingsSchemaSource.get_default();
-    let source = Gio.SettingsSchemaSource.new_from_directory(path, defaultSource, false);
+    let default = Gio.SettingsSchemaSource.get_default();
+    let source = Gio.SettingsSchemaSource.new_from_directory(path, default, false);
 
     let schemaId = "org.gnome.shell.extensions.gnomepie2";
     let schema = source.lookup(schemaId, false); 

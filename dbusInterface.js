@@ -9,6 +9,42 @@
 //                                                                                     //
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////////////////////////////////////
+// First, you should call the ShowMenu method. As argument a menu description has to   //
+// provided. This is a JSON string like this:                                          //
+//                                                                                     //
+//   {                                                                                 //
+//    "subs":[{                                                                        //
+//      "name":"Unique Item Title 1",                                                  //
+//      "icon":"icon-name-or-path",                                                    //
+//      "subs":[{                                                                      //
+//          "name":"Unique Item Title 11",                                             //
+//          "icon":"icon-name-or-path"                                                 //
+//        },{                                                                          //
+//          "name":"Unique Item Title 12",                                             //
+//          "icon":"icon-name-or-path"                                                 //
+//      }]},{                                                                          //
+//        "name":"Unique Item Title 2",                                                //
+//        "icon":"icon-name-or-path"                                                   //
+//      },{                                                                            //
+//        "name":"Unique Item Title 3",                                                //
+//        "icon":"icon-name-or-path"                                                   //
+//      }]                                                                             //
+//    }                                                                                //
+//                                                                                     //
+// The returned integer is either negative (the server failed to parse the provided    //
+// description) or a positive ID which will be passed to the signals of the interface. //
+// There are two signals; OnCancel will be fired when the user aborts the selection in //
+// a menu, OnSelect is activated when the user makes a selection. Both signals send    //
+// the ID which has been reported by the corresponding ShowMenu call, in addition      //
+// OnSelect sends the path to the selected item. Like this:                            //
+//                                                                                     //
+// "/Unique Item Title 1/Unique Item Title 12"                                         //
+//                                                                                     //
+// If there are slashes (/) in the item names, they will be escaped with the HTML      //
+// code &#47;                                                                          //
+/////////////////////////////////////////////////////////////////////////////////////////
+
 const DBusInterface =
   '<node>                                                                               \
     <interface name="org.gnome.Shell.Extensions.GnomePie2">                             \
