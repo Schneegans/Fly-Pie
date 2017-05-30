@@ -51,7 +51,7 @@ const Client = new Lang.Class({
   toggle : function () {
     let menu = '{"name":"foo","icon":"link","subs":[{"name":"bar","icon":"user"},{"name":"horst","icon":"pixel"}]}';
     this._wrapper.ShowMenuRemote(menu, Lang.bind(this, function(id) {
-      debug(id);
+      debug("ID: " + id);
     }));
   },
 
@@ -59,8 +59,8 @@ const Client = new Lang.Class({
 
   _initSettings : function () {
     let path = Me.dir.get_child('schemas').get_path();
-    let default = Gio.SettingsSchemaSource.get_default();
-    let source = Gio.SettingsSchemaSource.new_from_directory(path, default, false);
+    let defaultSource = Gio.SettingsSchemaSource.get_default();
+    let source = Gio.SettingsSchemaSource.new_from_directory(path, defaultSource, false);
 
     let schemaId = "org.gnome.shell.extensions.gnomepie2";
     let schema = source.lookup(schemaId, false); 

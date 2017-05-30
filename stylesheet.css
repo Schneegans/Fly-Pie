@@ -9,6 +9,26 @@
 //                                                                                     //
 ///////////////////////////////////////////////////////////////////////////////////////*/
 
-.pie-container{
-    /*background-color: rgba(255,10,10,0.5);*/
+.tile-menu-modal {
+    padding: 5px;
+    margin: 0;
 }
+
+.tile-menu-content {
+    padding: 0;
+    margin: 0;
+}
+
+.tile-menu-item-icon {
+}
+
+.tile-menu-item-label {
+    text-align: center;
+    max-width: 80px;
+}
+
+.tile-menu-item-button {
+    margin: 0;
+    padding: 5px;
+}
+
