@@ -35,7 +35,8 @@ const Server = new Lang.Class({
     this._bus = Gio.DBusExportedObject.wrapJSObject(DBusInterface.DBusInterface, this);
     this._bus.export(Gio.DBus.session, "/org/gnome/shell/extensions/gnomepie2");
 
-    this._menu = new TileMenu();
+    this._menu = new TileMenu(Lang.bind(this, this._onSelect), 
+                              Lang.bind(this, this._onCancel));
     this._nextID = 1;
     this._openMenus = {};
   },
@@ -54,31 +55,35 @@ const Server = new Lang.Class({
     try {
       var menu = JSON.parse(description);
     } catch (error) {
-      debug("failed to parse menu: " + error);
+      debug("Failed to parse menu: " + error);
       return -1;
     }
 
     this._debugPrintMenu(menu, 0);
 
-    if (!this._menu.show()) {
-      debug("failed to show menu!");
-      return -1;
-    }
-    // this._bus.emit_signal("OnSelect", GLib.Variant.new("(is)", [42, "ForkUserShellFailed"]));
-    // this._bus.emit_signal("OnCancel", GLib.Variant.new("(i)", [42]));
-
     let id = this._nextID++
 
-    this._openMenus[id] = menu;
+    if (!this._menu.show(id, description)) {
+      debug("Failed to show menu!");
+      return -1;
+    }
 
+    this._openMenus[id] = menu;
 
     return id;
   },
 
   // ---------------------------------------------------------------------- private stuff
 
-  _debugPrintMenu(menu, indent) {
+  _onSelect : function(id, item) {
+    this._bus.emit_signal("OnSelect", GLib.Variant.new("(is)", [id, item]));
+  },
 
+  _onCancel : function(id) {
+    this._bus.emit_signal("OnCancel", GLib.Variant.new("(i)", [id]));
+  },
+
+  _debugPrintMenu : function(menu, indent) {
     let name = menu.name ? menu.name : "No Name";
     let icon = menu.icon ? menu.icon : "No Icon";
     debug("  ".repeat(indent) + name + " (" + icon + ")");

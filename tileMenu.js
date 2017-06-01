@@ -13,7 +13,6 @@ const Clutter        = imports.gi.Clutter;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Lang           = imports.lang;
 const Main           = imports.ui.main;
-const Shell          = imports.gi.Shell;
 const Tweener        = imports.ui.tweener;
 const St             = imports.gi.St;
 
@@ -22,19 +21,28 @@ const Me = ExtensionUtils.getCurrentExtension();
 const Background     = Me.imports.background.Background;
 const debug          = Me.imports.debug.debug;
 
+const MONITOR_MARGIN = 10;
+const ITEM_MARGIN    = 0;
+const ICON_SIZE      = 90;
+const ITEM_SIZE      = 130;
+
 const TileMenu = new Lang.Class({
   Name : 'TileMenu',
 
   // ----------------------------------------------------------- constructor / destructor
 
-  _init : function() {
+  _init : function(onSelect, onCancel) {
+
+    this._onSelect = onSelect;
+    this._onCancel = onCancel;
 
     this._background = new Background(new Clutter.Color({
         red: 0, green: 0, blue: 0, alpha: 90
     }));
 
     this._window = new St.Bin({
-      style_class : 'popup-menu modal-dialog tile-menu-modal'
+      style_class : 'popup-menu modal-dialog tile-menu-modal',
+      reactive: true
     });
 
     this._window.set_pivot_point(0.5, 0.5);
@@ -47,16 +55,12 @@ const TileMenu = new Lang.Class({
 
     this._background.actor.add_actor(this._window);
 
-    this._background.actor.connect('motion-event', 
-                                   Lang.bind(this, this._onMouseMove));
-    this._background.actor.connect('button-press-event', 
-                                   Lang.bind(this, this._onButtonPress));
     this._background.actor.connect('button-release-event', 
                                    Lang.bind(this, this._onButtonRelease));
-    this._background.actor.connect('key-press-event', 
-                                   Lang.bind(this, this._onKeyPress));
     this._background.actor.connect('key-release-event', 
                                    Lang.bind(this, this._onKeyRelease));
+    this._window.connect('button-release-event', 
+                                   Lang.bind(this, this._onButtonRelease));
 
     this._addItem("Firefox", "firefox");
     this._addItem("Thunderbird", "thunderbird");
@@ -77,19 +81,40 @@ const TileMenu = new Lang.Class({
 
   // ------------------------------------------------------------------- public interface
 
-  show : function() {
-
-    // let monitor = Main.layoutManager.primaryMonitor;
-    // let size = 380;
-
-    let [x, y, mods] = global.get_pointer();
-    this._window.set_position(Math.floor(x-this._window.width/2), Math.floor(y-this._window.height/2));
-    this._window.set_scale(0.5, 0.5);
-
+  show : function(id, description) {
+    // display the background actor
     if (!this._background.show()) {
+      // something went wrong, most likely we failed to get the pointer grab
       return false;
     }
 
+    this._currentID = id;
+
+    // calculate window position 
+    let [pointerX, pointerY, mods] = global.get_pointer();
+    let monitor = Main.layoutManager.currentMonitor;
+
+    let halfWindowWidth = this._window.width/2;
+    let halfWindowHeight = this._window.height/2;
+
+    let minX = MONITOR_MARGIN + halfWindowWidth; 
+    let minY = MONITOR_MARGIN + halfWindowHeight; 
+
+    let maxX = monitor.width - MONITOR_MARGIN - halfWindowWidth;
+    let maxY = monitor.height - MONITOR_MARGIN - halfWindowHeight;
+
+    let posX = Math.min(Math.max(pointerX, minX), maxX);
+    let posY = Math.min(Math.max(pointerY, minY), maxY);
+    
+    this._window.set_position(Math.floor(posX-halfWindowWidth), 
+                              Math.floor(posY-halfWindowHeight));
+
+    // do pointer warp ... TODO: Is there a better way of doing this?
+    // let pointer = global.gdk_screen.get_display().get_default_seat().get_pointer();
+    // pointer.warp(global.gdk_screen, posX, posY);
+
+    // add an animation for the window scale
+    this._window.set_scale(0.5, 0.5);
     Tweener.addTween(this._window, {
       time: 0.2,
       transition: "easeOutBack",
@@ -101,7 +126,6 @@ const TileMenu = new Lang.Class({
   },
 
   hide : function() {
-
     Tweener.addTween(this._window, {
       time: 0.2,
       transition: "easeInBack",
@@ -118,7 +142,7 @@ const TileMenu = new Lang.Class({
     let iconActor = new St.Icon({
       icon_name: icon,
       style_class: 'tile-menu-item-icon',
-      icon_size: 90
+      icon_size: ICON_SIZE
     });
 
     let labelActor = new St.Label({ 
@@ -136,8 +160,12 @@ const TileMenu = new Lang.Class({
     let button = new St.Button({
       style_class: 'popup-menu-item tile-menu-item-button',
       reactive: true,
-      track_hover: true
+      track_hover: true,
+      width: ITEM_SIZE,
+      height: ITEM_SIZE
     });
+
+    button._menuItemName = label;
 
     button.connect('notify::hover', Lang.bind(this, function (actor) {
       if (actor.hover) {
@@ -145,11 +173,14 @@ const TileMenu = new Lang.Class({
         actor.grab_key_focus();
       } else {
         actor.remove_style_class_name('selected');
-        actor.remove_style_pseudo_class ('active');
+        actor.remove_style_pseudo_class('active');
       }
     }));
 
+    button.connect('clicked', Lang.bind(this, this._onItemClicked));
+
     button.set_child(item);
+
 
     this._menu.add_actor(button);
   },
@@ -171,49 +202,40 @@ const TileMenu = new Lang.Class({
   },
 
   _updateItemPositions : function() {
-
     let children = this._menu.get_children();
     let columns = this._getColumnCount();
 
-    // distribute children in a square --- if thats not possible, try to make
+    // distribute children in a square --- if that's not possible, try to make
     // the resulting shape in x direction larger than in y direction
     for (let i=0; i<children.length; i++) {
       children[i].set_position(
-        i%columns * 110,
-        Math.floor(i/columns) * 130, 0
+        i%columns * (ITEM_SIZE + ITEM_MARGIN),
+        Math.floor(i/columns) * (ITEM_SIZE + ITEM_MARGIN), 0
       );
 
       // calculate_positions(child);
     }
   },
 
-  _onMouseMove : function(actor, event) {
-    // let absX, absY;
-    // [absX, absY] = event.get_coords();
-    // this._window.translation_x = absX - 40;
-    // this._window.translation_y = absY - 40;
-  },
-
-  _onButtonPress : function(actor, event) {
-    debug("onButtonPress");
-  },
-
-  _onKeyPress : function(actor, event) {
-    debug("onKeyPress");
+  _onItemClicked : function(actor) {
+    this.hide();
+    this._onSelect(this._currentID, actor._menuItemName);
   },
 
   _onButtonRelease : function(actor, event) {
-    if (event.get_button() == 3) {
+    if ((actor == this._background.actor && event.get_button() == 1) || event.get_button() == 3) {
       this.hide();
+      this._onCancel(this._currentID);
     } 
-    return true;
+    return Clutter.EVENT_STOP;
   },
 
   _onKeyRelease : function(actor, event) {
     if (event.get_key_symbol() == Clutter.Escape) {
       this.hide();
+      this._onCancel(this._currentID);
     }
-    return true;
+    return Clutter.EVENT_STOP;
   }
 
 });

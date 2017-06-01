@@ -34,10 +34,13 @@ const Client = new Lang.Class({
     this._keybindings = new KeyBindings();
     this._keybindings.bindShortcut(this._settings, Lang.bind(this, this.toggle));
 
+    this._openMenuID = 0;
+
     new DBusWrapper(Gio.DBus.session, "org.gnome.Shell", 
       "/org/gnome/shell/extensions/gnomepie2", Lang.bind(this, function(wrapper) {
         this._wrapper = wrapper;
-        debug('foo');
+        this._wrapper.connectSignal("OnSelect", Lang.bind(this, this._onSelect));
+        this._wrapper.connectSignal("OnCancel", Lang.bind(this, this._onCancel));
       })
     );
   },
@@ -49,9 +52,28 @@ const Client = new Lang.Class({
   // ------------------------------------------------------------------- public interface
 
   toggle : function () {
+    if (this._openMenuID > 0) {
+      debug("A menu is already opend.");
+      return;
+    }
+
+    if (this._openMenuID < 0) {
+      debug("A menu open request is still pending.");
+      return;
+    }
+
+    // a menu is about to be opened, however we did not get an ID yet
+    this._openMenuID = -1;
+
     let menu = '{"name":"foo","icon":"link","subs":[{"name":"bar","icon":"user"},{"name":"horst","icon":"pixel"}]}';
     this._wrapper.ShowMenuRemote(menu, Lang.bind(this, function(id) {
-      debug("ID: " + id);
+      if (id > 0) {
+        // the menu has been shown successfully - we store the ID and wait for a call of
+        // _onSelect or _onCancel
+        this._openMenuID = id;
+      } else {
+        debug("The server reported an error showing the menu!");
+      }
     }));
   },
 
@@ -66,9 +88,23 @@ const Client = new Lang.Class({
     let schema = source.lookup(schemaId, false); 
 
     if (!schema) {
-      throw new Error("Schema " + schemaId + " could not be found in the path " + path);
+      debug("Schema " + schemaId + " could not be found in the path " + path);
     }
 
     return new Gio.Settings({settings_schema : schema});
+  },
+
+  _onSelect : function(proxy, sender, [id, item]) {
+    if (id == this._openMenuID) {
+      debug("Selected: " + item);
+      this._openMenuID = 0;
+    }
+  },
+
+  _onCancel : function(proxy, sender, [id]) {
+    if (id == this._openMenuID) {
+      debug("Canceled: " + id);
+      this._openMenuID = 0;
+    }
   }
 });

@@ -26,7 +26,7 @@ const Background = new Lang.Class({
 
   _init : function(color) {
     
-    let monitor = Main.layoutManager.primaryMonitor;
+    let monitor = Main.layoutManager.currentMonitor;
 
     this.actor = new Clutter.Actor({
       height: monitor.height,
