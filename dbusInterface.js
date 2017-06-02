@@ -11,7 +11,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // First, you should call the ShowMenu method. As argument a menu description has to   //
-// provided. This is a JSON string like this:                                          //
+// be provided. This is a JSON string like this:                                       //
 //                                                                                     //
 //   {                                                                                 //
 //    "subs":[{                                                                        //
@@ -37,12 +37,7 @@
 // There are two signals; OnCancel will be fired when the user aborts the selection in //
 // a menu, OnSelect is activated when the user makes a selection. Both signals send    //
 // the ID which has been reported by the corresponding ShowMenu call, in addition      //
-// OnSelect sends the path to the selected item. Like this:                            //
-//                                                                                     //
-// "/Unique Item Title 1/Unique Item Title 12"                                         //
-//                                                                                     //
-// If there are slashes (/) in the item names, they will be escaped with the HTML      //
-// code &#47;                                                                          //
+// OnSelect sends the path to the selected item. Like this: "/0/1"                     //
 /////////////////////////////////////////////////////////////////////////////////////////
 
 const DBusInterface =

@@ -65,12 +65,13 @@ const Client = new Lang.Class({
     // a menu is about to be opened, however we did not get an ID yet
     this._openMenuID = -1;
 
-    let menu = '{"name":"foo","icon":"link","subs":[{"name":"bar","icon":"user"},{"name":"horst","icon":"pixel"}]}';
+    let menu = '{"name":"foo","icon":"link","subs":[{"name":"Firefox","icon":"firefox"},{"name":"Thunderbird","icon":"thunderbird"}]}';
     this._wrapper.ShowMenuRemote(menu, Lang.bind(this, function(id) {
       if (id > 0) {
         // the menu has been shown successfully - we store the ID and wait for a call of
         // _onSelect or _onCancel
         this._openMenuID = id;
+        debug("Got ID: " + id);
       } else {
         debug("The server reported an error showing the menu!");
       }

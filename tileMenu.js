@@ -62,16 +62,6 @@ const TileMenu = new Lang.Class({
     this._window.connect('button-release-event', 
                                    Lang.bind(this, this._onButtonRelease));
 
-    this._addItem("Firefox", "firefox");
-    this._addItem("Thunderbird", "thunderbird");
-    this._addItem("Gedit", "gedit");
-    this._addItem("Rhythmbox bla bla blas asd asf adf sdf sdfds", "rhythmbox");
-    this._addItem("Terminal", "terminal");
-    this._addItem("Sublime Text", "sublime");
-    this._addItem("Nautilus", "nautilus");
-    this._addItem("Atom", "atom");
-
-    this._updateItemPositions();
     this._window.add_actor(this._menu, {x_fill:true, y_fill:true});
   },
 
@@ -81,14 +71,28 @@ const TileMenu = new Lang.Class({
 
   // ------------------------------------------------------------------- public interface
 
-  show : function(id, description) {
+  show : function(menu) {
+
+    this._menu.remove_all_children();
+
+    if (menu.subs) {
+      let i = 0;
+
+      for (let item of menu.subs) {
+        let name = item.name ? item.name : "No Name";
+        let icon = item.icon ? item.icon : "No Icon";
+        this._addItem(name, icon, "/" + i);
+        ++i;
+      }
+    }
+
+    this._updateItemPositions();
+
     // display the background actor
     if (!this._background.show()) {
       // something went wrong, most likely we failed to get the pointer grab
       return false;
     }
-
-    this._currentID = id;
 
     // calculate window position 
     let [pointerX, pointerY, mods] = global.get_pointer();
@@ -109,7 +113,8 @@ const TileMenu = new Lang.Class({
     this._window.set_position(Math.floor(posX-halfWindowWidth), 
                               Math.floor(posY-halfWindowHeight));
 
-    // do pointer warp ... TODO: Is there a better way of doing this?
+    // do pointer warp ... 
+    // TODO: Is there a better way of doing this? can this be done on wayland?
     // let pointer = global.gdk_screen.get_display().get_default_seat().get_pointer();
     // pointer.warp(global.gdk_screen, posX, posY);
 
@@ -138,7 +143,7 @@ const TileMenu = new Lang.Class({
 
   // ---------------------------------------------------------------------- private stuff
 
-  _addItem : function(label, icon) {
+  _addItem : function(label, icon, path) {
     let iconActor = new St.Icon({
       icon_name: icon,
       style_class: 'tile-menu-item-icon',
@@ -165,22 +170,12 @@ const TileMenu = new Lang.Class({
       height: ITEM_SIZE
     });
 
-    button._menuItemName = label;
+    button._menuPath = path;
 
-    button.connect('notify::hover', Lang.bind(this, function (actor) {
-      if (actor.hover) {
-        actor.add_style_class_name('selected');
-        actor.grab_key_focus();
-      } else {
-        actor.remove_style_class_name('selected');
-        actor.remove_style_pseudo_class('active');
-      }
-    }));
-
+    button.connect('notify::hover', Lang.bind(this, this._onItemHover));
     button.connect('clicked', Lang.bind(this, this._onItemClicked));
 
     button.set_child(item);
-
 
     this._menu.add_actor(button);
   },
@@ -217,15 +212,25 @@ const TileMenu = new Lang.Class({
     }
   },
 
+  _onItemHover : function(actor) {
+    if (actor.hover) {
+      actor.add_style_class_name('selected');
+      actor.grab_key_focus();
+    } else {
+      actor.remove_style_class_name('selected');
+      actor.remove_style_pseudo_class('active');
+    }
+  },
+
   _onItemClicked : function(actor) {
     this.hide();
-    this._onSelect(this._currentID, actor._menuItemName);
+    this._onSelect(actor._menuPath);
   },
 
   _onButtonRelease : function(actor, event) {
     if ((actor == this._background.actor && event.get_button() == 1) || event.get_button() == 3) {
       this.hide();
-      this._onCancel(this._currentID);
+      this._onCancel();
     } 
     return Clutter.EVENT_STOP;
   },
@@ -233,7 +238,7 @@ const TileMenu = new Lang.Class({
   _onKeyRelease : function(actor, event) {
     if (event.get_key_symbol() == Clutter.Escape) {
       this.hide();
-      this._onCancel(this._currentID);
+      this._onCancel();
     }
     return Clutter.EVENT_STOP;
   }

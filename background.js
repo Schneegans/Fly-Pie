@@ -15,15 +15,17 @@ const Lang           = imports.lang;
 const Main           = imports.ui.main;
 const Tweener        = imports.ui.tweener;
 
-const Me = ExtensionUtils.getCurrentExtension();
-
-const debug         = Me.imports.debug.debug;
+/////////////////////////////////////////////////////////////////////////////////////////
+// The Background is a fullscreen modal actor which effectively capture the entire     //
+// user input.                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////
 
 const Background = new Lang.Class({
   Name : 'Background',
 
   // ----------------------------------------------------------- constructor / destructor
 
+  // Creates the initially invisible background actor.
   _init : function(color) {
     
     let monitor = Main.layoutManager.currentMonitor;
@@ -39,12 +41,18 @@ const Background = new Lang.Class({
     Main.uiGroup.add_actor(this.actor);
   },
 
+  // Removes the background without any animation.
   destroy : function() {
     Main.uiGroup.remove_actor(this.actor);
+    this.actor = null;
   },
 
   // ------------------------------------------------------------------- public interface
 
+  // This shows the background, blocking all user input. A subtle animation is used to
+  // fade in the background. Returns false if the background failed to grab the input.
+  // It will not be shown in this case, if everything worked as supposed, true will be
+  // returned.
   show : function() {
     if (this.actor.visible) {
       return true;
@@ -66,6 +74,8 @@ const Background = new Lang.Class({
     return true;
   },
 
+  // This hides the background again. The input will not be grabbed anymore. For now,
+  // this function always returns true but this may change in future.
   hide : function() {
     if (!this.actor.visible) {
       return true;

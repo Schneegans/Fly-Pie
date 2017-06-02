@@ -38,7 +38,7 @@ const Server = new Lang.Class({
     this._menu = new TileMenu(Lang.bind(this, this._onSelect), 
                               Lang.bind(this, this._onCancel));
     this._nextID = 1;
-    this._openMenus = {};
+    this._currentID = 0;
   },
 
   destroy : function() {
@@ -50,7 +50,9 @@ const Server = new Lang.Class({
 
   ShowMenu : function(description) {
 
-    debug("Got a request: " + description);
+    if (this._currentID > 0) {
+      return -1;
+    }    
 
     try {
       var menu = JSON.parse(description);
@@ -59,28 +61,28 @@ const Server = new Lang.Class({
       return -1;
     }
 
-    this._debugPrintMenu(menu, 0);
+    // this._debugPrintMenu(menu, 0);
 
-    let id = this._nextID++
+    this._currentID = this._nextID++
 
-    if (!this._menu.show(id, description)) {
+    if (!this._menu.show(menu)) {
       debug("Failed to show menu!");
       return -1;
     }
 
-    this._openMenus[id] = menu;
-
-    return id;
+    return this._currentID;
   },
 
   // ---------------------------------------------------------------------- private stuff
 
-  _onSelect : function(id, item) {
-    this._bus.emit_signal("OnSelect", GLib.Variant.new("(is)", [id, item]));
+  _onSelect : function(item) {
+    this._bus.emit_signal("OnSelect", GLib.Variant.new("(is)", [this._currentID, item]));
+    this._currentID = 0;
   },
 
-  _onCancel : function(id) {
-    this._bus.emit_signal("OnCancel", GLib.Variant.new("(i)", [id]));
+  _onCancel : function() {
+    this._bus.emit_signal("OnCancel", GLib.Variant.new("(i)", [this._currentID]));
+    this._currentID = 0;
   },
 
   _debugPrintMenu : function(menu, indent) {
