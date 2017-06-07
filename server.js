@@ -33,7 +33,7 @@ const Server = new Lang.Class({
 
   _init : function () {
     this._bus = Gio.DBusExportedObject.wrapJSObject(DBusInterface.DBusInterface, this);
-    this._bus.export(Gio.DBus.session, "/org/gnome/shell/extensions/gnomepie2");
+    this._bus.export(Gio.DBus.session, '/org/gnome/shell/extensions/gnomepie2');
 
     this._menu = new TileMenu(Lang.bind(this, this._onSelect), 
                               Lang.bind(this, this._onCancel));
@@ -57,7 +57,7 @@ const Server = new Lang.Class({
     try {
       var menu = JSON.parse(description);
     } catch (error) {
-      debug("Failed to parse menu: " + error);
+      debug('Failed to parse menu: ' + error);
       return -1;
     }
 
@@ -66,7 +66,7 @@ const Server = new Lang.Class({
     this._currentID = this._nextID++
 
     if (!this._menu.show(menu)) {
-      debug("Failed to show menu!");
+      debug('Failed to show menu!');
       return -1;
     }
 
@@ -76,19 +76,19 @@ const Server = new Lang.Class({
   // ---------------------------------------------------------------------- private stuff
 
   _onSelect : function(item) {
-    this._bus.emit_signal("OnSelect", GLib.Variant.new("(is)", [this._currentID, item]));
+    this._bus.emit_signal('OnSelect', GLib.Variant.new('(is)', [this._currentID, item]));
     this._currentID = 0;
   },
 
   _onCancel : function() {
-    this._bus.emit_signal("OnCancel", GLib.Variant.new("(i)", [this._currentID]));
+    this._bus.emit_signal('OnCancel', GLib.Variant.new('(i)', [this._currentID]));
     this._currentID = 0;
   },
 
   _debugPrintMenu : function(menu, indent) {
-    let name = menu.name ? menu.name : "No Name";
-    let icon = menu.icon ? menu.icon : "No Icon";
-    debug("  ".repeat(indent) + name + " (" + icon + ")");
+    let name = menu.name ? menu.name : 'No Name';
+    let icon = menu.icon ? menu.icon : 'No Icon';
+    debug('  '.repeat(indent) + name + ' (' + icon + ')');
 
     if (menu.subs) {
       for (let item of menu.subs) {

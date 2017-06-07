@@ -44,7 +44,7 @@ function getStack() {
   let err = new Error();
 
   // Evaluate `err.stack`, which calls our new `Error.prepareStackTrace`
-  let stack = err.stack.split("\n");
+  let stack = err.stack.split('\n');
 
   // Restore original `Error.prepareStackTrace`
   Error.prepareStackTrace = origPrepareStackTrace;

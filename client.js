@@ -20,8 +20,14 @@ const Me = ExtensionUtils.getCurrentExtension();
 const DBusInterface  = Me.imports.dbusInterface.DBusInterface;
 const KeyBindings    = Me.imports.keyBindings.KeyBindings;
 const debug          = Me.imports.debug.debug;
+const RecentGroup    = Me.imports.itemGroups.RecentGroup;
 
 const DBusWrapper    = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// The Client sends ShowMenu-requests requests over the DBUS to the Server. It listens //
+// to OnSelect and OnCancel signals of the Server and executes the according actions.  // 
+/////////////////////////////////////////////////////////////////////////////////////////
 
 const Client = new Lang.Class({
   Name : 'Client',
@@ -36,11 +42,11 @@ const Client = new Lang.Class({
 
     this._openMenuID = 0;
 
-    new DBusWrapper(Gio.DBus.session, "org.gnome.Shell", 
-      "/org/gnome/shell/extensions/gnomepie2", Lang.bind(this, function(wrapper) {
+    new DBusWrapper(Gio.DBus.session, 'org.gnome.Shell', 
+      '/org/gnome/shell/extensions/gnomepie2', Lang.bind(this, function(wrapper) {
         this._wrapper = wrapper;
-        this._wrapper.connectSignal("OnSelect", Lang.bind(this, this._onSelect));
-        this._wrapper.connectSignal("OnCancel", Lang.bind(this, this._onCancel));
+        this._wrapper.connectSignal('OnSelect', Lang.bind(this, this._onSelect));
+        this._wrapper.connectSignal('OnCancel', Lang.bind(this, this._onCancel));
       })
     );
   },
@@ -53,27 +59,37 @@ const Client = new Lang.Class({
 
   toggle : function () {
     if (this._openMenuID > 0) {
-      debug("A menu is already opend.");
+      debug('A menu is already opend.');
       return;
     }
 
     if (this._openMenuID < 0) {
-      debug("A menu open request is still pending.");
+      debug('A menu open request is still pending.');
       return;
     }
 
     // a menu is about to be opened, however we did not get an ID yet
     this._openMenuID = -1;
 
-    let menu = '{"name":"foo","icon":"link","subs":[{"name":"Firefox","icon":"firefox"},{"name":"Thunderbird","icon":"thunderbird"}]}';
-    this._wrapper.ShowMenuRemote(menu, Lang.bind(this, function(id) {
+    let test = new RecentGroup();
+    this._lastMenu = test.getItems();
+
+    // let menu = '{"subs":[{"name":"Firefox","icon":"firefox"},{"name":"Thunderbird","icon":"thunderbird"}]}';
+    let menu = {};
+    menu.subs = [];
+
+    for (let i=0; i<this._lastMenu.length; ++i) {
+      menu.subs.push({name:this._lastMenu[i].name, icon:this._lastMenu[i].icon});
+    }
+
+    this._wrapper.ShowMenuRemote(JSON.stringify(menu), Lang.bind(this, function(id) {
       if (id > 0) {
         // the menu has been shown successfully - we store the ID and wait for a call of
         // _onSelect or _onCancel
         this._openMenuID = id;
-        debug("Got ID: " + id);
+        debug('Got ID: ' + id);
       } else {
-        debug("The server reported an error showing the menu!");
+        debug('The server reported an error showing the menu!');
       }
     }));
   },
@@ -85,11 +101,11 @@ const Client = new Lang.Class({
     let defaultSource = Gio.SettingsSchemaSource.get_default();
     let source = Gio.SettingsSchemaSource.new_from_directory(path, defaultSource, false);
 
-    let schemaId = "org.gnome.shell.extensions.gnomepie2";
+    let schemaId = 'org.gnome.shell.extensions.gnomepie2';
     let schema = source.lookup(schemaId, false); 
 
     if (!schema) {
-      debug("Schema " + schemaId + " could not be found in the path " + path);
+      debug('Schema ' + schemaId + ' could not be found in the path ' + path);
     }
 
     return new Gio.Settings({settings_schema : schema});
@@ -97,14 +113,16 @@ const Client = new Lang.Class({
 
   _onSelect : function(proxy, sender, [id, item]) {
     if (id == this._openMenuID) {
-      debug("Selected: " + item);
+      this._lastMenu[item].activate();
+      // Gio.DesktopAppInfo.new(app.get_id());
+      // Gio.app_info_launch_default_for_uri('firefox', global.create_app_launch_context(0, -1));
       this._openMenuID = 0;
     }
   },
 
   _onCancel : function(proxy, sender, [id]) {
     if (id == this._openMenuID) {
-      debug("Canceled: " + id);
+      debug('Canceled: ' + id);
       this._openMenuID = 0;
     }
   }

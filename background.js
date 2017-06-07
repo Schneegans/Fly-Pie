@@ -16,7 +16,7 @@ const Main           = imports.ui.main;
 const Tweener        = imports.ui.tweener;
 
 /////////////////////////////////////////////////////////////////////////////////////////
-// The Background is a fullscreen modal actor which effectively capture the entire     //
+// The Background is a fullscreen modal actor which effectively captures the entire    //
 // user input.                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -25,7 +25,8 @@ const Background = new Lang.Class({
 
   // ----------------------------------------------------------- constructor / destructor
 
-  // Creates the initially invisible background actor.
+  // Creates the initially invisible background actor. It will be colored according to
+  // the color parameter after being shown.
   _init : function(color) {
     
     let monitor = Main.layoutManager.currentMonitor;
@@ -67,7 +68,7 @@ const Background = new Lang.Class({
 
     Tweener.addTween(this.actor, {
       time: 0.2,
-      transition: "easeOutQuad",
+      transition: 'easeOutQuad',
       opacity: 255
     });
 
@@ -85,7 +86,7 @@ const Background = new Lang.Class({
 
     Tweener.addTween(this.actor, {
       time: 0.2,
-      transition: "easeOutQuad",
+      transition: 'easeOutQuad',
       opacity: 0,
       onComplete: Lang.bind(this, function () {
         this.actor.visible = false;
@@ -94,7 +95,5 @@ const Background = new Lang.Class({
     
     return true;
   }
-
-  // ---------------------------------------------------------------------- private stuff
 
 });

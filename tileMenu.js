@@ -15,6 +15,7 @@ const Lang           = imports.lang;
 const Main           = imports.ui.main;
 const Tweener        = imports.ui.tweener;
 const St             = imports.gi.St;
+const Gio            = imports.gi.Gio;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
@@ -23,8 +24,8 @@ const debug          = Me.imports.debug.debug;
 
 const MONITOR_MARGIN = 10;
 const ITEM_MARGIN    = 0;
-const ICON_SIZE      = 90;
-const ITEM_SIZE      = 130;
+const ICON_SIZE      = 60;
+const ITEM_SIZE      = 90;
 
 const TileMenu = new Lang.Class({
   Name : 'TileMenu',
@@ -79,9 +80,9 @@ const TileMenu = new Lang.Class({
       let i = 0;
 
       for (let item of menu.subs) {
-        let name = item.name ? item.name : "No Name";
-        let icon = item.icon ? item.icon : "No Icon";
-        this._addItem(name, icon, "/" + i);
+        let name = item.name ? item.name : 'No Name';
+        let icon = item.icon ? item.icon : 'No Icon';
+        this._addItem(name, icon, ''+i);
         ++i;
       }
     }
@@ -101,8 +102,8 @@ const TileMenu = new Lang.Class({
     let halfWindowWidth = this._window.width/2;
     let halfWindowHeight = this._window.height/2;
 
-    let minX = MONITOR_MARGIN + halfWindowWidth; 
-    let minY = MONITOR_MARGIN + halfWindowHeight; 
+    let minX = MONITOR_MARGIN + halfWindowWidth;
+    let minY = MONITOR_MARGIN + halfWindowHeight;
 
     let maxX = monitor.width - MONITOR_MARGIN - halfWindowWidth;
     let maxY = monitor.height - MONITOR_MARGIN - halfWindowHeight;
@@ -113,8 +114,8 @@ const TileMenu = new Lang.Class({
     this._window.set_position(Math.floor(posX-halfWindowWidth), 
                               Math.floor(posY-halfWindowHeight));
 
-    // do pointer warp ... 
-    // TODO: Is there a better way of doing this? can this be done on wayland?
+    // TODO: do pointer warp ... 
+    // Is there a better way of doing this? can this be done on wayland?
     // let pointer = global.gdk_screen.get_display().get_default_seat().get_pointer();
     // pointer.warp(global.gdk_screen, posX, posY);
 
@@ -122,7 +123,7 @@ const TileMenu = new Lang.Class({
     this._window.set_scale(0.5, 0.5);
     Tweener.addTween(this._window, {
       time: 0.2,
-      transition: "easeOutBack",
+      transition: 'easeOutBack',
       scale_x: 1,
       scale_y: 1
     });
@@ -133,7 +134,7 @@ const TileMenu = new Lang.Class({
   hide : function() {
     Tweener.addTween(this._window, {
       time: 0.2,
-      transition: "easeInBack",
+      transition: 'easeInBack',
       scale_x: 0.5,
       scale_y: 0.5
     });
@@ -144,8 +145,11 @@ const TileMenu = new Lang.Class({
   // ---------------------------------------------------------------------- private stuff
 
   _addItem : function(label, icon, path) {
+
+    let gicon = Gio.Icon.new_for_string(icon);
+
     let iconActor = new St.Icon({
-      icon_name: icon,
+      gicon: gicon,
       style_class: 'tile-menu-item-icon',
       icon_size: ICON_SIZE
     });
