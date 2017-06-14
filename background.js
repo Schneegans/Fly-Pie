@@ -34,10 +34,13 @@ const Background = new Lang.Class({
     this.actor = new Clutter.Actor({
       height: monitor.height,
       width: monitor.width,
-      reactive: true,
+      reactive: false,
       visible: false,
+      opacity: 0,
       background_color: color,
     });
+
+    this._visible = false;
 
     Main.uiGroup.add_actor(this.actor);
   },
@@ -55,7 +58,7 @@ const Background = new Lang.Class({
   // It will not be shown in this case, if everything worked as supposed, true will be
   // returned.
   show : function() {
-    if (this.actor.visible) {
+    if (this._visible) {
       return true;
     }
 
@@ -63,9 +66,11 @@ const Background = new Lang.Class({
       return false;
     }
 
-    this.actor.opacity = 0;
+    this._visible = true;
+    this.actor.reactive = true;
     this.actor.visible = true;
 
+    Tweener.removeTweens(this.actor);
     Tweener.addTween(this.actor, {
       time: 0.2,
       transition: 'easeOutQuad',
@@ -78,12 +83,16 @@ const Background = new Lang.Class({
   // This hides the background again. The input will not be grabbed anymore. For now,
   // this function always returns true but this may change in future.
   hide : function() {
-    if (!this.actor.visible) {
+    if (!this._visible) {
       return true;
     }
 
     Main.popModal(this.actor);
 
+    this._visible = false;
+    this.actor.reactive = false;
+
+    Tweener.removeTweens(this.actor);
     Tweener.addTween(this.actor, {
       time: 0.2,
       transition: 'easeOutQuad',
