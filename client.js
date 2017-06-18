@@ -72,17 +72,9 @@ const Client = new Lang.Class({
     this._openMenuID = -1;
 
     let test = new RecentGroup();
-    this._lastMenu = test.getItems();
+    this._lastMenu = test.getUserDirectoriesItems();
 
-    // let menu = '{"subs":[{"name":"Firefox","icon":"firefox"},{"name":"Thunderbird","icon":"thunderbird"}]}';
-    let menu = {};
-    menu.subs = [];
-
-    for (let i=0; i<this._lastMenu.length; ++i) {
-      menu.subs.push({name:this._lastMenu[i].name, icon:this._lastMenu[i].icon});
-    }
-
-    this._wrapper.ShowMenuRemote(JSON.stringify(menu), Lang.bind(this, function(id) {
+    this._wrapper.ShowMenuRemote(JSON.stringify(this._lastMenu), Lang.bind(this, function(id) {
       if (id > 0) {
         // the menu has been shown successfully - we store the ID and wait for a call of
         // _onSelect or _onCancel
@@ -111,11 +103,22 @@ const Client = new Lang.Class({
     return new Gio.Settings({settings_schema : schema});
   },
 
-  _onSelect : function(proxy, sender, [id, item]) {
+  _onSelect : function(proxy, sender, [id, path]) {
     if (id == this._openMenuID) {
-      this._lastMenu[item].activate();
-      // Gio.DesktopAppInfo.new(app.get_id());
-      // Gio.app_info_launch_default_for_uri('firefox', global.create_app_launch_context(0, -1));
+      let pathElements = path.split('/');
+
+      if (pathElements.length < 2) {
+        debug('The server reported an impossible selection!');
+      }
+
+      let menu = this._lastMenu;
+
+      for (let i=1; i<pathElements.length; ++i) {
+        menu = menu.items[pathElements[i]];
+      }
+
+      menu.activate();
+
       this._openMenuID = 0;
     }
   },

@@ -14,20 +14,20 @@
 // be provided. This is a JSON string like this:                                       //
 //                                                                                     //
 //   {                                                                                 //
-//    'subs':[{                                                                        //
-//      'name':'Unique Item Title 1',                                                  //
+//    'items':[{                                                                        //
+//      'name':'Item Title 1',                                                         //
 //      'icon':'icon-name-or-path',                                                    //
-//      'subs':[{                                                                      //
-//          'name':'Unique Item Title 11',                                             //
+//      'items':[{                                                                      //
+//          'name':'Item Title 11',                                                    //
 //          'icon':'icon-name-or-path'                                                 //
 //        },{                                                                          //
-//          'name':'Unique Item Title 12',                                             //
+//          'name':'Item Title 12',                                                    //
 //          'icon':'icon-name-or-path'                                                 //
 //      }]},{                                                                          //
-//        'name':'Unique Item Title 2',                                                //
+//        'name':'Item Title 2',                                                       //
 //        'icon':'icon-name-or-path'                                                   //
 //      },{                                                                            //
-//        'name':'Unique Item Title 3',                                                //
+//        'name':'Item Title 3',                                                       //
 //        'icon':'icon-name-or-path'                                                   //
 //      }]                                                                             //
 //    }                                                                                //
@@ -37,7 +37,7 @@
 // There are two signals; OnCancel will be fired when the user aborts the selection in //
 // a menu, OnSelect is activated when the user makes a selection. Both signals send    //
 // the ID which has been reported by the corresponding ShowMenu call, in addition      //
-// OnSelect sends the path to the selected item. Like this: '0/1'                      //
+// OnSelect sends the path to the selected item. Like this: '/0/1'                     //
 /////////////////////////////////////////////////////////////////////////////////////////
 
 const DBusInterface =
@@ -49,7 +49,7 @@ const DBusInterface =
         </method>                                                                       \
         <signal name="OnSelect">                                                        \
             <arg type="i" name="id"/>                                                   \
-            <arg type="s" name="item"/>                                                 \
+            <arg type="s" name="path"/>                                                 \
         </signal>                                                                       \
         <signal name="OnCancel">                                                        \
             <arg type="i" name="id"/>                                                   \

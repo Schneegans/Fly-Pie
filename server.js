@@ -50,8 +50,6 @@ const Server = new Lang.Class({
 
   ShowMenu : function(description) {
 
-    debug("ShowMenu: " + this._currentID);
-
     if (this._currentID > 0) {
       return -1;
     }    
@@ -78,13 +76,11 @@ const Server = new Lang.Class({
   _onSelect : function(item) {
     this._bus.emit_signal('OnSelect', GLib.Variant.new('(is)', [this._currentID, item]));
     this._currentID = 0;
-    debug("OnSelect: " + this._currentID);
   },
 
   _onCancel : function() {
     this._bus.emit_signal('OnCancel', GLib.Variant.new('(i)', [this._currentID]));
     this._currentID = 0;
-    debug("OnCancel: " + this._currentID);
   },
 
   _debugPrintMenu : function(menu, indent) {
@@ -92,8 +88,8 @@ const Server = new Lang.Class({
     let icon = menu.icon ? menu.icon : 'No Icon';
     debug('  '.repeat(indent) + name + ' (' + icon + ')');
 
-    if (menu.subs) {
-      for (let item of menu.subs) {
+    if (menu.items) {
+      for (let item of menu.items) {
         this._debugPrintMenu(item, indent+1);
       }
     }

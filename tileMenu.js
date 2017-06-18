@@ -41,29 +41,21 @@ const TileMenu = new Lang.Class({
         red: 0, green: 0, blue: 0, alpha: 90
     }));
 
-    this._window = new St.Bin({
+    this._rootMenu = new St.Bin({
       style_class : 'popup-menu modal-dialog tile-menu-modal',
       reactive: true
     });
 
-    this._window.set_pivot_point(0.5, 0.5);
+    this._rootMenu.set_pivot_point(0.5, 0.5);
 
-
-    this._menu = new St.Widget({
-      style_class : 'popup-menu-content tile-menu-content'
-    });
-
-
-    this._background.actor.add_actor(this._window);
+    this._background.actor.add_actor(this._rootMenu);
 
     this._background.actor.connect('button-release-event', 
                                    Lang.bind(this, this._onButtonRelease));
     this._background.actor.connect('key-release-event', 
                                    Lang.bind(this, this._onKeyRelease));
-    this._window.connect('button-release-event', 
+    this._rootMenu.connect('button-release-event', 
                                    Lang.bind(this, this._onButtonRelease));
-
-    this._window.add_actor(this._menu, {x_fill:true, y_fill:true});
   },
 
   destroy : function() {
@@ -74,20 +66,12 @@ const TileMenu = new Lang.Class({
 
   show : function(menu) {
 
-    this._menu.remove_all_children();
-
-    if (menu.subs) {
-      let i = 0;
-
-      for (let item of menu.subs) {
-        let name = item.name ? item.name : 'No Name';
-        let icon = item.icon ? item.icon : 'No Icon';
-        this._addItem(name, icon, ''+i);
-        ++i;
-      }
-    }
-
-    this._updateItemPositions();
+    this._rootMenu.remove_all_children();
+    this._rootMenu.itemContainer = null;
+    this._rootMenu.itemPath = '';
+    
+    this._createMenuItems(this._rootMenu, menu);
+    this._updateMenuItemPositions(this._rootMenu);
 
     // display the background actor
     if (!this._background.show()) {
@@ -99,8 +83,8 @@ const TileMenu = new Lang.Class({
     let [pointerX, pointerY, mods] = global.get_pointer();
     let monitor = Main.layoutManager.currentMonitor;
 
-    let halfWindowWidth = this._window.width/2;
-    let halfWindowHeight = this._window.height/2;
+    let halfWindowWidth = this._rootMenu.width/2;
+    let halfWindowHeight = this._rootMenu.height/2;
 
     let minX = MONITOR_MARGIN + halfWindowWidth;
     let minY = MONITOR_MARGIN + halfWindowHeight;
@@ -111,7 +95,7 @@ const TileMenu = new Lang.Class({
     let posX = Math.min(Math.max(pointerX, minX), maxX);
     let posY = Math.min(Math.max(pointerY, minY), maxY);
     
-    this._window.set_position(Math.floor(posX-halfWindowWidth), 
+    this._rootMenu.set_position(Math.floor(posX-halfWindowWidth), 
                               Math.floor(posY-halfWindowHeight));
 
     // TODO: do pointer warp ... 
@@ -120,8 +104,8 @@ const TileMenu = new Lang.Class({
     // pointer.warp(global.gdk_screen, posX, posY);
 
     // add an animation for the window scale
-    this._window.set_scale(0.5, 0.5);
-    Tweener.addTween(this._window, {
+    this._rootMenu.set_scale(0.5, 0.5);
+    Tweener.addTween(this._rootMenu, {
       time: 0.2,
       transition: 'easeOutBack',
       scale_x: 1,
@@ -132,7 +116,7 @@ const TileMenu = new Lang.Class({
   },
 
   hide : function() {
-    Tweener.addTween(this._window, {
+    Tweener.addTween(this._rootMenu, {
       time: 0.2,
       transition: 'easeInBack',
       scale_x: 0.5,
@@ -144,7 +128,33 @@ const TileMenu = new Lang.Class({
 
   // ---------------------------------------------------------------------- private stuff
 
-  _addItem : function(label, icon, path) {
+  _createMenuItems : function(parent, menu) {
+    if (menu.items) {
+
+      if (!parent.itemContainer) {
+        parent.itemContainer = new St.Widget({
+          style_class : 'popup-menu-content tile-menu-content'
+        });
+        parent.add_actor(parent.itemContainer, {x_fill:true, y_fill:true});
+      }
+
+      let i = 0;
+
+      for (let item of menu.items) {
+        let button = this._createButton(item);
+        button.itemPath = parent.itemPath + '/' + i;
+
+        this._createMenuItems(button, item);
+        parent.itemContainer.add_actor(button);
+
+        ++i;
+      }
+    }
+  },
+
+  _createButton : function(menu) {
+    let name = menu.name ? menu.name : 'No Name';
+    let icon = menu.icon ? menu.icon : 'No Icon';
 
     let gicon = Gio.Icon.new_for_string(icon);
 
@@ -156,7 +166,7 @@ const TileMenu = new Lang.Class({
 
     let labelActor = new St.Label({ 
       style_class: 'tile-menu-item-label',
-      text: label
+      text: name
     });
 
     let item = new St.BoxLayout({ 
@@ -174,45 +184,56 @@ const TileMenu = new Lang.Class({
       height: ITEM_SIZE
     });
 
-    button._menuPath = path;
-
     button.connect('notify::hover', Lang.bind(this, this._onItemHover));
     button.connect('clicked', Lang.bind(this, this._onItemClicked));
 
     button.set_child(item);
 
-    this._menu.add_actor(button);
+    return button;
   },
 
-  _getColumnCount : function() {
-    let count = this._menu.get_children().length;
+  _getColumnCount : function(menu) {
+    let count = menu.itemContainer.get_children().length;
     if (count == 0) {
       return 0;
     }
     return Math.ceil(Math.sqrt(count));
   },
 
-  _getRowCount : function() {
-    let count = this._menu.get_children().length;
+  _getRowCount : function(menu) {
+    let count = menu.itemContainer.get_children().length;
     if (count == 0) {
       return 0;
     }
     return Math.ceil(this._getColumnCount()/count);
   },
 
-  _updateItemPositions : function() {
-    let children = this._menu.get_children();
-    let columns = this._getColumnCount();
+  _updateMenuItemPositions : function(menu) {
+    if (!menu.itemContainer) {
+      return;
+    }
+
+    let items = menu.itemContainer.get_children();
+    let columns = this._getColumnCount(menu);
 
     // distribute children in a square --- if that's not possible, try to make
     // the resulting shape in x direction larger than in y direction
-    for (let i=0; i<children.length; i++) {
-      children[i].set_position(
+    for (let i=0; i<items.length; i++) {
+      this._updateMenuItemPositions(items[i]);
+
+      items[i].set_position(
         i%columns * (ITEM_SIZE + ITEM_MARGIN),
         Math.floor(i/columns) * (ITEM_SIZE + ITEM_MARGIN), 0
       );
+    }
 
-      // calculate_positions(child);
+    if (menu != this._rootMenu) {
+      let themeNode = menu.get_theme_node();
+      let padding = themeNode.get_padding(St.Side.LEFT);
+
+      let subMenuSize = menu.itemContainer.width;
+      let scale = (ITEM_SIZE-2*padding) / subMenuSize;
+      menu.itemContainer.set_scale(scale, scale);
     }
   },
 
@@ -228,7 +249,7 @@ const TileMenu = new Lang.Class({
 
   _onItemClicked : function(actor) {
     this.hide();
-    this._onSelect(actor._menuPath);
+    this._onSelect(actor.itemPath);
   },
 
   _onButtonRelease : function(actor, event) {
