@@ -87,7 +87,7 @@ const RecentGroup = new Lang.Class({
 
   getUserDirectoriesItems : function () {
     let recentFiles = this._recentManager.get_items();
-    let result = {items:[]};
+    let result = {name:"Places", icon:"nautilus", items:[]};
 
     this._pushFileInfo(result, new FileInfo(Gio.File.new_for_path(GLib.get_home_dir())));
 

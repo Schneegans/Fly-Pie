@@ -72,7 +72,9 @@ const Client = new Lang.Class({
     this._openMenuID = -1;
 
     let test = new RecentGroup();
-    this._lastMenu = test.getUserDirectoriesItems();
+    this._lastMenu = test.getAppMenuItems();
+    this._lastMenu.items.push(test.getUserDirectoriesItems());
+    
 
     this._wrapper.ShowMenuRemote(JSON.stringify(this._lastMenu), Lang.bind(this, function(id) {
       if (id > 0) {

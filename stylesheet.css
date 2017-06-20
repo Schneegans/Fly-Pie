@@ -9,28 +9,35 @@
 //                                                                                     //
 ///////////////////////////////////////////////////////////////////////////////////////*/
 
+.tile-menu-background {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 .tile-menu-modal {
-    padding: 5px;
-    margin: 0;
+    /*padding: 0;*/
+    /*margin: 0;*/
     min-width: 0;
     font-size: 90%;
 }
 
-.tile-menu-content {
-    padding: 0;
-    margin: 0;
+.tile-menu-item-container {
+    /*background-color: rgba(250, 0, 0, 0.2);*/
+    margin: 5px;
+}
+
+.tile-menu-child-container {
 }
 
 .tile-menu-item-icon {
+    /*background-color: rgba(0, 250, 0, 0.2);*/
 }
 
 .tile-menu-item-label {
+    /*background-color: rgba(0, 0, 250, 0.2);*/
     text-align: center;
-    /*max-width: 80px;*/
 }
 
 .tile-menu-item-button {
+    padding: 0;
     margin: 0;
-    padding: 5px;
 }
-
