@@ -112,7 +112,7 @@ const RecentGroup = new Lang.Class({
 
   getRecentItems : function () {
     let recentFiles = this._recentManager.get_items();
-    let result = {items:[]};
+    let result = {name:"Recent", icon:"document-open-recent", items:[]};
 
     for (let i=0; i<recentFiles.length; ++i) {
       this._pushRecentInfo(result, recentFiles[i]);

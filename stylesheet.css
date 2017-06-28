@@ -14,27 +14,27 @@
 }
 
 .tile-menu-modal {
-    /*padding: 0;*/
-    /*margin: 0;*/
     min-width: 0;
     font-size: 90%;
 }
 
 .tile-menu-item-container {
     /*background-color: rgba(250, 0, 0, 0.2);*/
-    margin: 5px;
 }
 
 .tile-menu-child-container {
+    /*background-color: rgba(250, 0, 0, 0.2);*/
+    margin: 5px;
 }
 
 .tile-menu-item-icon {
     /*background-color: rgba(0, 250, 0, 0.2);*/
+    margin-top: 5px;
 }
 
 .tile-menu-item-label {
+    margin-bottom: 5px;
     /*background-color: rgba(0, 0, 250, 0.2);*/
-    text-align: center;
 }
 
 .tile-menu-item-button {

@@ -77,11 +77,10 @@ const Background = new Lang.Class({
     return true;
   },
 
-  // This hides the background again. The input will not be grabbed anymore. For now,
-  // this function always returns true but this may change in future.
+  // This hides the background again. The input will not be grabbed anymore. 
   hide : function() {
     if (!this.actor.reactive) {
-      return true;
+      return;
     }
 
     Main.popModal(this.actor);
@@ -97,8 +96,6 @@ const Background = new Lang.Class({
         this.actor.visible = false;
       })
     });
-    
-    return true;
   }
 
 });
