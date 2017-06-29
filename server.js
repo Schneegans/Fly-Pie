@@ -1,13 +1,13 @@
-/////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                     //
-//    _____                    ___  _     ___       This software may be modified      //
-//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the          //
-//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See      //
-//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.      //
-//                                                                                     //
-//  Authors: Simon Schneegans (code@simonschneegans.de)                                //
-//                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//    _____                    ___  _     ___       This software may be modified       //
+//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the           //
+//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
+//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
+//                                                                                      //
+//  Authors: Simon Schneegans (code@simonschneegans.de)                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 const Lang           = imports.lang;
 const Gio            = imports.gi.Gio;
@@ -21,15 +21,15 @@ const TileMenu       = Me.imports.tileMenu.TileMenu;
 const DBusInterface  = Me.imports.dbusInterface;
 const debug          = Me.imports.debug.debug;
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// The server listens on the DBus for requests. For details on the interface refer to  //
-// dbusInterface.js. When a valid request is received, an menu is shown accordingly.   //
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// The server listens on the DBus for requests. For details on the interface refer to   //
+// dbusInterface.js. When a valid request is received, an menu is shown accordingly.    //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 const Server = new Lang.Class({
   Name : 'Server',
 
-  // ----------------------------------------------------------- constructor / destructor
+  // ------------------------------------------------------------ constructor / destructor
 
   _init : function () {
     this._bus = Gio.DBusExportedObject.wrapJSObject(DBusInterface.DBusInterface, this);
@@ -46,7 +46,7 @@ const Server = new Lang.Class({
     this._bus.unexport();
   },
 
-  // ------------------------------------------------------------------- public interface
+  // -------------------------------------------------------------------- public interface
 
   ShowMenu : function(description) {
 
@@ -71,7 +71,7 @@ const Server = new Lang.Class({
     return this._currentID;
   },
 
-  // ---------------------------------------------------------------------- private stuff
+  // ----------------------------------------------------------------------- private stuff
 
   _onSelect : function(item) {
     this._bus.emit_signal('OnSelect', GLib.Variant.new('(is)', [this._currentID, item]));

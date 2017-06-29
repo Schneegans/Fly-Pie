@@ -1,15 +1,16 @@
-/////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                     //
-//    _____                    ___  _     ___       This software may be modified      //
-//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the          //
-//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See      //
-//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.      //
-//                                                                                     //
-//  Authors: Simon Schneegans (code@simonschneegans.de)                                //
-//                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//    _____                    ___  _     ___       This software may be modified       //
+//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the           //
+//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
+//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
+//                                                                                      //
+//  Authors: Simon Schneegans (code@simonschneegans.de)                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 const Clutter        = imports.gi.Clutter;
+const Pango          = imports.gi.Pango;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Lang           = imports.lang;
 const Main           = imports.ui.main;
@@ -22,11 +23,14 @@ const Me = ExtensionUtils.getCurrentExtension();
 const Background     = Me.imports.background.Background;
 const debug          = Me.imports.debug.debug;
 
+const ANIMATION_SPEED = 1.0;
+
 const MONITOR_MARGIN = 10;
-const ITEM_SPACING   = 0;
+const ITEM_MARGIN    = 0;
+const ITEM_PADDING   = 5;
 const ICON_SIZE      = 80;
 const ITEM_SIZE      = 110;
-const DEPTH_SPACING  = 320;
+const DEPTH_SPACING  = 50;
 
 const ACTIVE_ICON_OPACITY  = 255;
 const ACTIVE_LABEL_OPACITY = 255;
@@ -40,7 +44,7 @@ const SUB_LABEL_OPACITY = 0;
 const TileMenu = new Lang.Class({
   Name : 'TileMenu',
 
-  // ----------------------------------------------------------- constructor / destructor
+  // ------------------------------------------------------------ constructor / destructor
 
   _init : function(onSelect, onCancel) {
 
@@ -50,7 +54,8 @@ const TileMenu = new Lang.Class({
     this._background = new Background();
 
     this._window = new St.Widget({
-      style_class : 'modal-dialog popup-menu tile-menu-modal'
+      // style_class : 'modal-dialog popup-menu tile-menu-modal'
+      style_class : 'tile-menu-modal'
     });
 
     this._window.set_pivot_point(0.5, 0.5);
@@ -60,7 +65,8 @@ const TileMenu = new Lang.Class({
       style_class : 'tile-menu-child-container'
     });
 
-    this._window.childItemContainer = itemContainer;
+    this._window.subMenus = [];
+    this._window.subMenuContainer = itemContainer;
     this._window.add_child(itemContainer);
 
     this._background.actor.connect('button-release-event', 
@@ -69,31 +75,35 @@ const TileMenu = new Lang.Class({
                                    Lang.bind(this, this._onKeyRelease));
     this._window.connect('button-release-event', 
                                    Lang.bind(this, this._onButtonRelease));
-    this._openSubMenus = [];
+    this._openMenus = [];
   },
 
   destroy : function() {
     this._background.destroy();
   },
 
-  // ------------------------------------------------------------------- public interface
+  // -------------------------------------------------------------------- public interface
 
   show : function(menu) {
-    this._openSubMenus = [];
-    this._window.childItemContainer.remove_all_children();
+    this._openMenus = [this._window];
+    this._window.subMenuContainer.remove_all_children();
+    this._window.subMenus = [];
     
-    this._createMenuItems(this._window.childItemContainer, menu, '');
-    this._updateMenuItemPositions(this._window.childItemContainer);
+    this._createMenuItems(this._window, menu, '');
+    this._updateMenuItemPositions(this._window);
 
     this._updateMenuOpacity();
     this._updateMenuReactiveness();
-    // this._updateMenuDepth();
+    this._updateMenuDepth();
 
     // display the background actor
     if (!this._background.show()) {
       // something went wrong, most likely we failed to get the pointer grab
       return false;
     }
+
+    this._window.subMenuContainer.width = this._getMenuWidth(this._window);
+    this._window.subMenuContainer.height = this._getMenuHeight(this._window);
 
     // calculate window position 
     let [pointerX, pointerY, mods] = global.get_pointer();
@@ -106,7 +116,7 @@ const TileMenu = new Lang.Class({
     // add an animation for the window scale
     this._window.set_scale(0.5, 0.5);
     Tweener.addTween(this._window, {
-      time: 0.2,
+      time: 0.3 * ANIMATION_SPEED,
       transition: 'easeOutBack',
       scale_x: 1, scale_y: 1
     });
@@ -132,19 +142,19 @@ const TileMenu = new Lang.Class({
   },
 
   _hideLevel : function() {
-    if (this._openSubMenus.length > 0) {
-      let item = this._openSubMenus.pop();
-      let scale = this._getSubMenuCollapsedScale(item.childItemContainer);
-      Tweener.addTween(item.childItemContainer, {
-        time: 0.3,
-        transition: 'easeOutBack',
+    if (this._openMenus.length > 1) {
+      let menu = this._openMenus.pop();
+      let scale = this._getMenuCollapsedScale(menu);
+      Tweener.addTween(menu.subMenuContainer, {
+        time: 0.2 * ANIMATION_SPEED,
+        transition: 'easeInOutCubic',
         scale_x: scale, scale_y: scale,
         translation_x: 0, translation_y: 0
       });
 
       this._updateMenuOpacity();
       this._updateMenuReactiveness();
-      // this._updateMenuDepth();
+      this._updateMenuDepth();
 
       return false;
     } else {
@@ -155,8 +165,10 @@ const TileMenu = new Lang.Class({
   },
 
   _hideAll : function() {
+    this._openMenus = [];
+
     Tweener.addTween(this._window, {
-      time: 0.2,
+      time: 0.3 * ANIMATION_SPEED,
       transition: 'easeInBack',
       scale_x: 0.5, scale_y: 0.5
     });
@@ -164,202 +176,192 @@ const TileMenu = new Lang.Class({
     this._background.hide();
   },
 
-  // ---------------------------------------------------------------------- private stuff
+  // ----------------------------------------------------------------------- private stuff
 
-  _createMenuItems : function(parentItem, menu, path) {
-    if (!menu.items) {
+  _createMenuItems : function(parentItem, description, path) {
+    if (!description.items) {
       return;
     }
 
-    for (let i=0; i<menu.items.length; i++) {
+    for (let i=0; i<description.items.length; i++) {
 
-      let menuItemContainer = new St.Widget({
-        layout_manager: new Clutter.BinLayout(),
+      let menu = new St.Widget({
+        style_class: 'tile-menu-item-container',
+        // layout_manager: new Clutter.BinLayout(),
         width: ITEM_SIZE,
-        height: ITEM_SIZE
+        height: ITEM_SIZE,
+        track_hover: true
       });
-
-      // create background --------------------------------------------------------------
-      // as separate actor since it has to be made transparent when submenu is collapsed
-
-      // let background = new St.Widget({
-      //   style_class: 'modal-dialog'
-      //   // x_expand: true,
-      //   // y_expand: true
-      // });
-
-      // menuItemContainer.add_child(background);
       
-      // create container for all submenu items -----------------------------------------
+      // create container for all submenu items ------------------------------------------
 
-      let childItemContainer = new St.Widget({
-        style_class: 'modal-dialog tile-menu-child-container'
+      let subMenuContainer = new St.Widget({
+        x: ITEM_PADDING,
+        y: ITEM_PADDING
       });
 
-      menuItemContainer.add_child(childItemContainer);
+      menu.add_child(subMenuContainer);
 
-      // create container for name label and icon ---------------------------------------
+      // create background ---------------------------------------------------------------
+      // as separate actor since it has to be made transparent when submenu is collapsed
+      
+      let background = new St.Widget({
+        style_class: 'tile-menu-child-container',
+        opacity: 0
+      });
 
-      let name = menu.items[i].name ? menu.items[i].name : 'No Name';
-      let icon = menu.items[i].icon ? menu.items[i].icon : 'No Icon';
+      subMenuContainer.add_child(background);
 
-      let iconActor = new St.Icon({
-        gicon: Gio.Icon.new_for_string(icon),
+      // create container for name label and icon ----------------------------------------
+
+      let labelText = description.items[i].name ? description.items[i].name : 'No Name';
+      let iconName = description.items[i].icon ? description.items[i].icon : 'No Icon';
+
+      let icon = new St.Icon({
+        gicon: Gio.Icon.new_for_string(iconName),
         style_class: 'tile-menu-item-icon',
         icon_size: ICON_SIZE,
         opacity: SUB_ICON_OPACITY,
-        x_expand: true,
-        y_expand: true,
-        x_align: Clutter.ActorAlign.CENTER,
-        y_align: Clutter.ActorAlign.START
+        x: (ITEM_SIZE - ICON_SIZE)*0.5,
+        y: ITEM_PADDING
       });
 
-      let labelActor = new St.Label({ 
+      let label = new St.Label({ 
         style_class: 'tile-menu-item-label',
-        text: name,
-        opacity: SUB_LABEL_OPACITY,
-        x_expand: true,
-        y_expand: true,
-        x_align: Clutter.ActorAlign.CENTER,
-        y_align: Clutter.ActorAlign.END
+        text: labelText,
+        opacity: SUB_LABEL_OPACITY
       });
 
-      menuItemContainer.add_child(iconActor);
-      menuItemContainer.add_child(labelActor);
+      menu.add_child(icon);
+      menu.add_child(label);
 
-      // create main button ------------------------------------------------------------- 
+      // create main button -------------------------------------------------------------- 
 
-      let button = new St.Button({
-        style_class: 'popup-menu-item tile-menu-item-button',
-        reactive: false
-      });
+      menu.connect('notify::hover', Lang.bind(this, this._onItemHover));
+      menu.connect('button-release-event', Lang.bind(this, this._onItemClicked));
 
-      button.connect('notify::hover', Lang.bind(this, this._onItemHover));
-      button.connect('clicked', Lang.bind(this, this._onItemClicked));
+      menu.subMenus = [];
+      menu.subMenuContainer = subMenuContainer;
+      menu.label = label;
+      menu.icon = icon;
+      menu.path = path + '/' + i;
+      menu.parentItem = parentItem;
+      menu.background = background;
 
-      button.set_child(menuItemContainer);
+      parentItem.subMenuContainer.add_child(menu);
+      parentItem.subMenus.push(menu);
 
-      button.childItemContainer = childItemContainer;
-      button.labelActor = labelActor;
-      button.iconActor = iconActor;
-      button.path = path + '/' + i;
-      button.parentItem = parentItem;
+      this._createMenuItems(menu, description.items[i], menu.path);
 
-      parentItem.add_child(button);
+      background.width = this._getMenuWidth(menu);
+      background.height = this._getMenuHeight(menu);
 
-      this._createMenuItems(button.childItemContainer, menu.items[i], button.path);
+      // center label
+      label.width = Math.min(label.width, ITEM_SIZE-2*ITEM_PADDING);
+      label.x = Math.floor((ITEM_SIZE-2*ITEM_PADDING-label.width)/2) + ITEM_PADDING;
+      label.y = ITEM_SIZE - label.height - ITEM_PADDING;
     }
   },
 
-  _getSubMenuSize : function(childItemContainer) {
-    let columns = this._getColumnCount(childItemContainer);
-    return columns * ITEM_SIZE + (columns-1) * ITEM_SPACING;
+  _getMenuWidth : function(menu) {
+    let columns = this._getColumnCount(menu);
+    return columns * ITEM_SIZE + (columns-1) * ITEM_MARGIN + 2 * ITEM_PADDING;
   },
 
-  _getSubMenuCollapsedScale : function(childItemContainer) {
-    // todo: this does not work well with various themes
-    let theme = childItemContainer.get_theme_node();
-    let margin = theme.get_margin(St.Side.LEFT);
-
-    let subMenuSize = this._getSubMenuSize(childItemContainer);
-    return (ITEM_SIZE-2*margin) / subMenuSize;
+  _getMenuHeight : function(menu) {
+    let columns = this._getRowCount(menu);
+    return columns * ITEM_SIZE + (columns-1) * ITEM_MARGIN + 2 * ITEM_PADDING;
   },
 
-  _getColumnCount : function(childItemContainer) {
-    let count = childItemContainer.get_children().length;
+  _getMenuCollapsedScale : function(menu) {
+    let subMenuSize = this._getMenuWidth(menu);
+    return (ITEM_SIZE-2*ITEM_PADDING) / subMenuSize;
+  },
+
+  _getColumnCount : function(menu) {
+    let count = menu.subMenus.length;
     if (count == 0) {
       return 0;
     }
     return Math.ceil(Math.sqrt(count));
   },
 
-  _getRowCount : function(childItemContainer) {
-    let count = childItemContainer.get_children().length;
+  _getRowCount : function(menu) {
+    let count = menu.subMenus.length;
     if (count == 0) {
       return 0;
     }
-    return Math.ceil(this._getColumnCount()/count);
+    return Math.ceil(count/this._getColumnCount(menu));
   },
 
-  _updateMenuItemPositions : function(childItemContainer) {
-    let items = childItemContainer.get_children();
-
-    if (items.length == 0) {
+  _updateMenuItemPositions : function(menu) {
+    if (menu.subMenus.length == 0) {
       return;
     }
 
-    let columns = this._getColumnCount(childItemContainer);
+    let columns = this._getColumnCount(menu);
 
     // distribute children in a square --- if that's not possible, try to make
     // the resulting shape in x direction larger than in y direction
-    for (let i=0; i<items.length; i++) {
-      this._updateMenuItemPositions(items[i].childItemContainer);
+    for (let i=0; i<menu.subMenus.length; i++) {
+      this._updateMenuItemPositions(menu.subMenus[i]);
 
-      items[i].set_position(
-        (i%columns) * (ITEM_SIZE + ITEM_SPACING),
-        (Math.floor(i/columns)) * (ITEM_SIZE + ITEM_SPACING), 0
+      menu.subMenus[i].set_position(
+        (i%columns) * (ITEM_SIZE + ITEM_MARGIN) + ITEM_PADDING,
+        (Math.floor(i/columns)) * (ITEM_SIZE + ITEM_MARGIN) + ITEM_PADDING, 0
       );
     }
 
     // scale down sub menu items
-    if (childItemContainer != this._window.childItemContainer) {
-      let scale = this._getSubMenuCollapsedScale(childItemContainer);
-      childItemContainer.set_scale(scale, scale);
+    if (menu != this._window) {
+      let scale = this._getMenuCollapsedScale(menu);
+      menu.subMenuContainer.set_scale(scale, scale);
     }
   },
 
   _updateMenuOpacity : function() {
-    // set opacity of main menu
-    let menus = [this._window.childItemContainer];
-
-    // and all open sub menus
-    for (let i=0; i<this._openSubMenus.length; i++) {
-      menus.push(this._openSubMenus[i].childItemContainer);
-    }
-
     let tween = function(actor, opacity) {
-      // actor.opacity = opacity;
-      Tweener.addTween(actor, {
-        time: 0.5, transition: 'ease', opacity: opacity
+      Tweener.addTween(actor, { 
+        time: 0.5 * ANIMATION_SPEED, transition: 'ease', opacity: opacity 
       });
     };
 
-    for (let i=0; i<menus.length; i++) {
-      let items = menus[i].get_children();
-      for (let j=0; j<items.length; j++) {
+    for (let i=0; i<this._openMenus.length; i++) {
 
-        if (i == menus.length-1) {
-          tween(items[j].labelActor, ACTIVE_LABEL_OPACITY);
-          tween(items[j].iconActor, ACTIVE_ICON_OPACITY);
+      let subMenus = this._openMenus[i].subMenus;
+
+      for (let j=0; j<subMenus.length; j++) {
+        if (i == this._openMenus.length-1) {
+          tween(subMenus[j].label, ACTIVE_LABEL_OPACITY);
+          tween(subMenus[j].icon, ACTIVE_ICON_OPACITY);
+          tween(subMenus[j].background, 0);
         } else {
-          tween(items[j].labelActor, INACTIVE_LABEL_OPACITY);
-          tween(items[j].iconActor, INACTIVE_ICON_OPACITY);
+          tween(subMenus[j].label, INACTIVE_LABEL_OPACITY);
+          tween(subMenus[j].icon, INACTIVE_ICON_OPACITY);
         }
 
-        let subs = items[j].childItemContainer.get_children();
+        let subs = subMenus[j].subMenus;
         for (let s=0; s<subs.length; s++) {
-          tween(subs[s].labelActor, SUB_LABEL_OPACITY);
-          tween(subs[s].iconActor, SUB_ICON_OPACITY);
+          tween(subs[s].label, SUB_LABEL_OPACITY);
+          tween(subs[s].icon, SUB_ICON_OPACITY);
         }
+      }
+
+      if (i > 0) {
+        tween(this._openMenus[i].label, 0);
+        tween(this._openMenus[i].icon, 0);
+        tween(this._openMenus[i].background, 255);
       }
     }
   },
 
   _updateMenuReactiveness : function() {
-    // set responsiveness of main menu
-    let menus = [this._window.childItemContainer];
-
-    // and all open sub menus
-    for (let i=0; i<this._openSubMenus.length; i++) {
-      menus.push(this._openSubMenus[i].childItemContainer);
-    }
-
-    for (let i=0; i<menus.length; i++) {
-      let items = menus[i].get_children();
+    for (let i=0; i<this._openMenus.length; i++) {
+      let items = this._openMenus[i].subMenus;
       for (let j=0; j<items.length; j++) {
-        items[j].reactive = (i == menus.length-1);
+        items[j].reactive = (i == this._openMenus.length-1);
 
-        let subs = items[j].childItemContainer.get_children();
+        let subs = items[j].subMenus;
         for (let s=0; s<subs.length; s++) {
           subs[s].reactive = false;
         }
@@ -367,23 +369,28 @@ const TileMenu = new Lang.Class({
     }
   },
 
-  // _updateMenuDepth : function() {
-  //   Tweener.addTween(this._window, {
-  //     time: 0.3, transition: 'easeOutBack',
-  //     z_position: -DEPTH_SPACING * this._openSubMenus.length
-  //   });
+  _updateMenuDepth : function() {
+    let tween = function(actor, depth) {
+      Tweener.addTween(actor, { 
+        time: 0.2 * ANIMATION_SPEED, transition: 'easeInOutCubic', z_position: depth 
+      });
+    };
 
-  //   for (let i=0; i<this._openSubMenus.length; i++) {
-  //     let items = this._openSubMenus[i].childItemContainer.get_children();
-  //     for (let j=0; j<items.length; j++) {
-  //       items[j].childItemContainer.z_position = 0;
-  //     }
-  //     Tweener.addTween(this._openSubMenus[i].childItemContainer, {
-  //       time: 0.3, transition: 'easeOutBack',
-  //       z_position: DEPTH_SPACING
-  //     });
-  //   }
-  // },
+    for (let i=0; i<this._openMenus.length; i++) {
+      if (i == 0) {
+        tween(this._openMenus[i], -DEPTH_SPACING * (this._openMenus.length-1));
+      } else {
+        tween(this._openMenus[i], DEPTH_SPACING);
+      }
+
+      if (i == this._openMenus.length-1) {
+        let items = this._openMenus[i].subMenus;
+        for (let j=0; j<items.length; j++) {
+          tween(items[j], 0);
+        }
+      }
+    }
+  },
 
   _onItemHover : function(button) {
     if (button.hover) {
@@ -395,46 +402,47 @@ const TileMenu = new Lang.Class({
     }
   },
 
-  _onItemClicked : function(item) {
-    if (item.childItemContainer.get_children().length > 0) {
-      let size = this._getSubMenuSize(item.childItemContainer);
-      let margin = item.childItemContainer.get_theme_node().get_margin(St.Side.LEFT);
-      let offset = (-size+ITEM_SIZE)*0.5-margin;
+  _onItemClicked : function(menu, event) {
+    if (event.get_button() != 1) {
+      return Clutter.EVENT_PROPAGATE;
+    }
+    
+    if (menu.subMenus.length > 0) {
+      let width = this._getMenuWidth(menu);
+      let height = this._getMenuHeight(menu);
+      let offsetX = (-width+ITEM_SIZE)*0.5-ITEM_PADDING;
+      let offsetY = (-height+ITEM_SIZE)*0.5-ITEM_PADDING;
 
-      let [worldX, worldY] = item.childItemContainer.get_transformed_position();
-      let [clampedX, clampedY] = this._clampToToMonitor(worldX+offset, worldY+offset, 
-                                                        size, size, MONITOR_MARGIN);
-      Tweener.addTween(item.childItemContainer, {
-        time: 0.3,
-        transition: 'easeInOutBack',
+      let [worldX, worldY] = menu.subMenuContainer.get_transformed_position();
+      let [clampedX, clampedY] = this._clampToToMonitor(worldX+offsetX, worldY+offsetY, 
+                                                        width, height, MONITOR_MARGIN);
+      Tweener.addTween(menu.subMenuContainer, {
+        time: 0.2 * ANIMATION_SPEED,
+        transition: 'easeInOutCubic',
+        // transition: 'easeOutBack',
         scale_x: 1, scale_y: 1,
         translation_x: clampedX - worldX,
         translation_y: clampedY - worldY
       });
 
-      item.parentItem.set_child_above_sibling(item, null);
+      menu.parentItem.subMenuContainer.set_child_above_sibling(menu, null);
 
-      this._openSubMenus.push(item);
+      this._openMenus.push(menu);
 
       this._updateMenuOpacity();
       this._updateMenuReactiveness();
-      // this._updateMenuDepth();
-
-      Tweener.addTween(item.labelActor, {
-        time: 0.5, transition: 'ease', opacity: 0
-      });
-
-      Tweener.addTween(item.iconActor, {
-        time: 0.5, transition: 'ease', opacity: 0
-      });
+      this._updateMenuDepth();
 
     } else {
       this._hideAll();
-      this._onSelect(item.path);
+      this._onSelect(menu.path);
     }
+
+    return Clutter.EVENT_STOP;
   },
 
   _onButtonRelease : function(actor, event) {
+    debug("_onButtonRelease");
     if ((actor == this._background.actor && event.get_button() == 1) || event.get_button() == 3) {
       if (this._hideLevel()) {
         this._onCancel();

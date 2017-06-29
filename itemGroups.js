@@ -1,13 +1,13 @@
-/////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                     //
-//    _____                    ___  _     ___       This software may be modified      //
-//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the          //
-//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See      //
-//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.      //
-//                                                                                     //
-//  Authors: Simon Schneegans (code@simonschneegans.de)                                //
-//                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//    _____                    ___  _     ___       This software may be modified       //
+//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the           //
+//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
+//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
+//                                                                                      //
+//  Authors: Simon Schneegans (code@simonschneegans.de)                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 const Lang           = imports.lang;
 const Gtk            = imports.gi.Gtk;
@@ -22,10 +22,10 @@ const Me = ExtensionUtils.getCurrentExtension();
 
 const debug = Me.imports.debug.debug;
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// Parts of this code is based on the Gno-Menu extension by Panacier                   //
-// (https://github.com/The-Panacea-Projects/Gnomenu)                                   //
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// Parts of this code is based on the Gno-Menu extension by Panacier                    //
+// (https://github.com/The-Panacea-Projects/Gnomenu)                                    //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 // const PlaceType = Object.freeze({RED: 0, GREEN: 1, BLUE: 2});
 
@@ -71,19 +71,19 @@ const FileInfo = new Lang.Class({
   }
 });
 
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 
 const RecentGroup = new Lang.Class({
   Name : 'RecentGroup',
 
-  // ----------------------------------------------------------- constructor / destructor
+  // ------------------------------------------------------------ constructor / destructor
 
   _init : function () {
     this._recentManager = Gtk.RecentManager.get_default();
   },
 
-  // ------------------------------------------------------------------- public interface
+  // -------------------------------------------------------------------- public interface
 
   getUserDirectoriesItems : function () {
     let recentFiles = this._recentManager.get_items();
@@ -174,7 +174,7 @@ const RecentGroup = new Lang.Class({
     return result;
   },
 
-  // ---------------------------------------------------------------------- private stuff
+  // ----------------------------------------------------------------------- private stuff
 
   _pushMenuItems : function(menu, dir) {
 

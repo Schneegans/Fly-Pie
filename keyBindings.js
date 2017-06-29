@@ -1,13 +1,13 @@
-/////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                     //
-//    _____                    ___  _     ___       This software may be modified      //
-//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the          //
-//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See      //
-//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.      //
-//                                                                                     //
-//  Authors: Simon Schneegans (code@simonschneegans.de)                                //
-//                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//    _____                    ___  _     ___       This software may be modified       //
+//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the           //
+//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
+//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
+//                                                                                      //
+//  Authors: Simon Schneegans (code@simonschneegans.de)                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 const Main = imports.ui.main;
 const Lang = imports.lang;
@@ -16,15 +16,15 @@ const Meta = imports.gi.Meta;
 
 const REAL_SHORTCUT_SETTING_KEY = "real-shortcut";
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// This class can be used to bind functions to global hot keys. The code is based on   //
-// code by zzrough (https://github.com/zzrough/gs-extensions-drop-down-terminal)       //
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// This class can be used to bind functions to global hot keys. The code is based on    //
+// code by zzrough (https://github.com/zzrough/gs-extensions-drop-down-terminal)        //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 const KeyBindings = new Lang.Class({
   Name : 'KeyBindings',
 
-  // ------------------------------------------------------------------- public interface
+  // -------------------------------------------------------------------- public interface
 
   bindShortcut : function(settings, func) {
     if (Main.wm.addKeybinding && Shell.ActionMode) // introduced in 3.16

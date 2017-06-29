@@ -1,13 +1,13 @@
-/////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                     //
-//    _____                    ___  _     ___       This software may be modified      //
-//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the          //
-//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See      //
-//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.      //
-//                                                                                     //
-//  Authors: Simon Schneegans (code@simonschneegans.de)                                //
-//                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//    _____                    ___  _     ___       This software may be modified       //
+//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the           //
+//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
+//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
+//                                                                                      //
+//  Authors: Simon Schneegans (code@simonschneegans.de)                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 const Lang           = imports.lang;
 const Gio            = imports.gi.Gio;
@@ -24,15 +24,15 @@ const RecentGroup    = Me.imports.itemGroups.RecentGroup;
 
 const DBusWrapper    = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// The Client sends ShowMenu-requests requests over the DBUS to the Server. It listens //
-// to OnSelect and OnCancel signals of the Server and executes the according actions.  // 
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// The Client sends ShowMenu-requests requests over the DBUS to the Server. It listens  //
+// to OnSelect and OnCancel signals of the Server and executes the according actions.   // 
+//////////////////////////////////////////////////////////////////////////////////////////
 
 const Client = new Lang.Class({
   Name : 'Client',
 
-  // ----------------------------------------------------------- constructor / destructor
+  // ------------------------------------------------------------ constructor / destructor
 
   _init : function () {
     this._settings = this._initSettings();
@@ -55,7 +55,7 @@ const Client = new Lang.Class({
     this._keybindings.unbindShortcut();
   },
 
-  // ------------------------------------------------------------------- public interface
+  // -------------------------------------------------------------------- public interface
 
   toggle : function () {
     if (this._openMenuID > 0) {
@@ -73,11 +73,11 @@ const Client = new Lang.Class({
 
     let test = new RecentGroup();
     this._lastMenu = test.getAppMenuItems();
-    this._lastMenu.items.push(test.getUserDirectoriesItems());
-    this._lastMenu.items.push(test.getRecentItems());
-    
+    // this._lastMenu.items.push(test.getUserDirectoriesItems());
+    // this._lastMenu.items.push(test.getRecentItems());
 
-    this._wrapper.ShowMenuRemote(JSON.stringify(this._lastMenu), Lang.bind(this, function(id) {
+    this._wrapper.ShowMenuRemote(JSON.stringify(this._lastMenu), 
+                                 Lang.bind(this, function(id) {
       if (id > 0) {
         // the menu has been shown successfully - we store the ID and wait for a call of
         // _onSelect or _onCancel
@@ -89,7 +89,7 @@ const Client = new Lang.Class({
     }));
   },
 
-  // ---------------------------------------------------------------------- private stuff
+  // ----------------------------------------------------------------------- private stuff
 
   _initSettings : function () {
     let path = Me.dir.get_child('schemas').get_path();
