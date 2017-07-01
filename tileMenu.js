@@ -23,24 +23,6 @@ const Me = ExtensionUtils.getCurrentExtension();
 const Background     = Me.imports.background.Background;
 const debug          = Me.imports.debug.debug;
 
-const ANIMATION_SPEED = 1.0;
-
-const MONITOR_MARGIN = 10;
-const ITEM_MARGIN    = 0;
-const ITEM_PADDING   = 5;
-const ICON_SIZE      = 80;
-const ITEM_SIZE      = 110;
-const DEPTH_SPACING  = 50;
-
-const ACTIVE_ICON_OPACITY  = 255;
-const ACTIVE_LABEL_OPACITY = 255;
-
-const INACTIVE_ICON_OPACITY  = 255;
-const INACTIVE_LABEL_OPACITY = 0;
-
-const SUB_ICON_OPACITY  = 50;
-const SUB_LABEL_OPACITY = 0;
-
 const TileMenu = new Lang.Class({
   Name : 'TileMenu',
 
@@ -53,16 +35,13 @@ const TileMenu = new Lang.Class({
 
     this._background = new Background();
 
-    this._window = new St.Widget({
-      // style_class : 'modal-dialog popup-menu tile-menu-modal'
-      style_class : 'tile-menu-modal'
-    });
+    this._window = new Clutter.Actor();
 
     this._window.set_pivot_point(0.5, 0.5);
     this._background.actor.add_child(this._window);
 
     let itemContainer = new St.Widget({
-      style_class : 'tile-menu-child-container'
+      style_class: "switcher-list"
     });
 
     this._window.subMenus = [];
@@ -76,6 +55,7 @@ const TileMenu = new Lang.Class({
     this._window.connect('button-release-event', 
                                    Lang.bind(this, this._onButtonRelease));
     this._openMenus = [];
+    this._theme = {};
   },
 
   destroy : function() {
@@ -88,7 +68,9 @@ const TileMenu = new Lang.Class({
     this._openMenus = [this._window];
     this._window.subMenuContainer.remove_all_children();
     this._window.subMenus = [];
-    
+
+    this._loadTheme();
+
     this._createMenuItems(this._window, menu, '');
     this._updateMenuItemPositions(this._window);
 
@@ -110,18 +92,37 @@ const TileMenu = new Lang.Class({
     let [posX, posY] = this._clampToToMonitor(pointerX-this._window.width/2, 
                                               pointerY-this._window.height/2, 
                                               this._window.width, this._window.height, 
-                                              MONITOR_MARGIN);
+                                              this._theme.monitorPadding);
     this._window.set_position(posX, posY);
 
     // add an animation for the window scale
     this._window.set_scale(0.5, 0.5);
     Tweener.addTween(this._window, {
-      time: 0.3 * ANIMATION_SPEED,
+      time: 0.3 * this._theme.animationSpeed,
       transition: 'easeOutBack',
       scale_x: 1, scale_y: 1
     });
 
     return true;
+  },
+
+  _loadTheme : function() {
+    let switcherStyle = this._window.subMenuContainer.get_theme_node();
+
+    this._theme.animationSpeed       = 1.0;
+    this._theme.menuPadding          = switcherStyle.get_padding(St.Side.LEFT);
+    this._theme.itemSpacing          = 8;
+    this._theme.itemPadding          = 4;
+    this._theme.monitorPadding       = 8;
+    this._theme.iconSize             = 100;
+    this._theme.itemSize             = 130;
+    this._theme.depthSpacing         = 50;
+    this._theme.activeIconOpacity    = 255;
+    this._theme.activeLabelOpacity   = 255;
+    this._theme.inactiveIconOpacity  = 255;
+    this._theme.inactiveLabelOpacity = 0;
+    this._theme.subIconOpacity       = 50;
+    this._theme.subLabelOpacity      = 0;
   },
 
   // (x, y) is the top left corner of the box to be clamped, 
@@ -146,7 +147,7 @@ const TileMenu = new Lang.Class({
       let menu = this._openMenus.pop();
       let scale = this._getMenuCollapsedScale(menu);
       Tweener.addTween(menu.subMenuContainer, {
-        time: 0.2 * ANIMATION_SPEED,
+        time: 0.2 * this._theme.animationSpeed,
         transition: 'easeInOutCubic',
         scale_x: scale, scale_y: scale,
         translation_x: 0, translation_y: 0
@@ -168,7 +169,7 @@ const TileMenu = new Lang.Class({
     this._openMenus = [];
 
     Tweener.addTween(this._window, {
-      time: 0.3 * ANIMATION_SPEED,
+      time: 0.3 * this._theme.animationSpeed,
       transition: 'easeInBack',
       scale_x: 0.5, scale_y: 0.5
     });
@@ -186,18 +187,17 @@ const TileMenu = new Lang.Class({
     for (let i=0; i<description.items.length; i++) {
 
       let menu = new St.Widget({
-        style_class: 'tile-menu-item-container',
-        // layout_manager: new Clutter.BinLayout(),
-        width: ITEM_SIZE,
-        height: ITEM_SIZE,
-        track_hover: true
+        style_class: "item-box",
+        track_hover: true,
+        width: this._theme.itemSize,
+        height: this._theme.itemSize
       });
       
       // create container for all submenu items ------------------------------------------
 
       let subMenuContainer = new St.Widget({
-        x: ITEM_PADDING,
-        y: ITEM_PADDING
+        x: this._theme.itemPadding,
+        y: this._theme.itemPadding
       });
 
       menu.add_child(subMenuContainer);
@@ -206,7 +206,7 @@ const TileMenu = new Lang.Class({
       // as separate actor since it has to be made transparent when submenu is collapsed
       
       let background = new St.Widget({
-        style_class: 'tile-menu-child-container',
+        style_class: "switcher-list",
         opacity: 0
       });
 
@@ -219,21 +219,26 @@ const TileMenu = new Lang.Class({
 
       let icon = new St.Icon({
         gicon: Gio.Icon.new_for_string(iconName),
-        style_class: 'tile-menu-item-icon',
-        icon_size: ICON_SIZE,
-        opacity: SUB_ICON_OPACITY,
-        x: (ITEM_SIZE - ICON_SIZE)*0.5,
-        y: ITEM_PADDING
+        icon_size: this._theme.iconSize,
+        opacity: this._theme.subIconOpacity,
+        x: (this._theme.itemSize - this._theme.iconSize)*0.5,
+        y: this._theme.itemPadding
       });
 
       let label = new St.Label({ 
-        style_class: 'tile-menu-item-label',
         text: labelText,
-        opacity: SUB_LABEL_OPACITY
+        opacity: this._theme.subLabelOpacity
+      });
+
+      let labelBox = new St.Widget({
+        layout_manager: new Clutter.BinLayout(),
+        width: this._theme.itemSize-2*this._theme.itemPadding,
+        x: this._theme.itemPadding
       });
 
       menu.add_child(icon);
-      menu.add_child(label);
+      menu.add_child(labelBox);
+      labelBox.add_child(label);
 
       // create main button -------------------------------------------------------------- 
 
@@ -255,27 +260,23 @@ const TileMenu = new Lang.Class({
 
       background.width = this._getMenuWidth(menu);
       background.height = this._getMenuHeight(menu);
-
-      // center label
-      label.width = Math.min(label.width, ITEM_SIZE-2*ITEM_PADDING);
-      label.x = Math.floor((ITEM_SIZE-2*ITEM_PADDING-label.width)/2) + ITEM_PADDING;
-      label.y = ITEM_SIZE - label.height - ITEM_PADDING;
+      labelBox.y = this._theme.itemSize - label.height - this._theme.itemPadding;
     }
   },
 
   _getMenuWidth : function(menu) {
     let columns = this._getColumnCount(menu);
-    return columns * ITEM_SIZE + (columns-1) * ITEM_MARGIN + 2 * ITEM_PADDING;
+    return columns * this._theme.itemSize + (columns-1) * this._theme.itemSpacing + 2 * this._theme.menuPadding;
   },
 
   _getMenuHeight : function(menu) {
     let columns = this._getRowCount(menu);
-    return columns * ITEM_SIZE + (columns-1) * ITEM_MARGIN + 2 * ITEM_PADDING;
+    return columns * this._theme.itemSize + (columns-1) * this._theme.itemSpacing + 2 * this._theme.menuPadding;
   },
 
   _getMenuCollapsedScale : function(menu) {
     let subMenuSize = this._getMenuWidth(menu);
-    return (ITEM_SIZE-2*ITEM_PADDING) / subMenuSize;
+    return (this._theme.itemSize-2*this._theme.itemPadding) / subMenuSize;
   },
 
   _getColumnCount : function(menu) {
@@ -307,8 +308,8 @@ const TileMenu = new Lang.Class({
       this._updateMenuItemPositions(menu.subMenus[i]);
 
       menu.subMenus[i].set_position(
-        (i%columns) * (ITEM_SIZE + ITEM_MARGIN) + ITEM_PADDING,
-        (Math.floor(i/columns)) * (ITEM_SIZE + ITEM_MARGIN) + ITEM_PADDING, 0
+        (i%columns) * (this._theme.itemSize + this._theme.itemSpacing) + this._theme.menuPadding,
+        (Math.floor(i/columns)) * (this._theme.itemSize + this._theme.itemSpacing) + this._theme.menuPadding, 0
       );
     }
 
@@ -322,7 +323,7 @@ const TileMenu = new Lang.Class({
   _updateMenuOpacity : function() {
     let tween = function(actor, opacity) {
       Tweener.addTween(actor, { 
-        time: 0.5 * ANIMATION_SPEED, transition: 'ease', opacity: opacity 
+        time: 0.5 * this._theme.animationSpeed, transition: 'ease', opacity: opacity 
       });
     };
 
@@ -332,25 +333,25 @@ const TileMenu = new Lang.Class({
 
       for (let j=0; j<subMenus.length; j++) {
         if (i == this._openMenus.length-1) {
-          tween(subMenus[j].label, ACTIVE_LABEL_OPACITY);
-          tween(subMenus[j].icon, ACTIVE_ICON_OPACITY);
-          tween(subMenus[j].background, 0);
+          Lang.bind(this, tween)(subMenus[j].label, this._theme.activeLabelOpacity);
+          Lang.bind(this, tween)(subMenus[j].icon, this._theme.activeIconOpacity);
+          Lang.bind(this, tween)(subMenus[j].background, 0);
         } else {
-          tween(subMenus[j].label, INACTIVE_LABEL_OPACITY);
-          tween(subMenus[j].icon, INACTIVE_ICON_OPACITY);
+          Lang.bind(this, tween)(subMenus[j].label, this._theme.inactiveLabelOpacity);
+          Lang.bind(this, tween)(subMenus[j].icon, this._theme.inactiveIconOpacity);
         }
 
         let subs = subMenus[j].subMenus;
         for (let s=0; s<subs.length; s++) {
-          tween(subs[s].label, SUB_LABEL_OPACITY);
-          tween(subs[s].icon, SUB_ICON_OPACITY);
+          Lang.bind(this, tween)(subs[s].label, this._theme.subLabelOpacity);
+          Lang.bind(this, tween)(subs[s].icon, this._theme.subIconOpacity);
         }
       }
 
       if (i > 0) {
-        tween(this._openMenus[i].label, 0);
-        tween(this._openMenus[i].icon, 0);
-        tween(this._openMenus[i].background, 255);
+        Lang.bind(this, tween)(this._openMenus[i].label, 0);
+        Lang.bind(this, tween)(this._openMenus[i].icon, 0);
+        Lang.bind(this, tween)(this._openMenus[i].background, 255);
       }
     }
   },
@@ -372,21 +373,21 @@ const TileMenu = new Lang.Class({
   _updateMenuDepth : function() {
     let tween = function(actor, depth) {
       Tweener.addTween(actor, { 
-        time: 0.2 * ANIMATION_SPEED, transition: 'easeInOutCubic', z_position: depth 
+        time: 0.2 * this._theme.animationSpeed, transition: 'easeInOutCubic', z_position: depth 
       });
     };
 
     for (let i=0; i<this._openMenus.length; i++) {
       if (i == 0) {
-        tween(this._openMenus[i], -DEPTH_SPACING * (this._openMenus.length-1));
+        Lang.bind(this, tween)(this._openMenus[i], -this._theme.depthSpacing * (this._openMenus.length-1));
       } else {
-        tween(this._openMenus[i], DEPTH_SPACING);
+        Lang.bind(this, tween)(this._openMenus[i], this._theme.depthSpacing);
       }
 
       if (i == this._openMenus.length-1) {
         let items = this._openMenus[i].subMenus;
         for (let j=0; j<items.length; j++) {
-          tween(items[j], 0);
+          Lang.bind(this, tween)(items[j], 0);
         }
       }
     }
@@ -395,10 +396,14 @@ const TileMenu = new Lang.Class({
   _onItemHover : function(button) {
     if (button.hover) {
       button.add_style_class_name('selected');
+      button.add_style_pseudo_class('highlighted');
+      button.add_style_pseudo_class('selected');
       button.grab_key_focus();
     } else {
       button.remove_style_class_name('selected');
       button.remove_style_pseudo_class('active');
+      button.remove_style_pseudo_class('highlighted');
+      button.remove_style_pseudo_class('selected');
     }
   },
 
@@ -410,14 +415,14 @@ const TileMenu = new Lang.Class({
     if (menu.subMenus.length > 0) {
       let width = this._getMenuWidth(menu);
       let height = this._getMenuHeight(menu);
-      let offsetX = (-width+ITEM_SIZE)*0.5-ITEM_PADDING;
-      let offsetY = (-height+ITEM_SIZE)*0.5-ITEM_PADDING;
+      let offsetX = (-width+this._theme.itemSize)*0.5-this._theme.itemPadding;
+      let offsetY = (-height+this._theme.itemSize)*0.5-this._theme.itemPadding;
 
       let [worldX, worldY] = menu.subMenuContainer.get_transformed_position();
       let [clampedX, clampedY] = this._clampToToMonitor(worldX+offsetX, worldY+offsetY, 
-                                                        width, height, MONITOR_MARGIN);
+                                                        width, height, this._theme.monitorPadding);
       Tweener.addTween(menu.subMenuContainer, {
-        time: 0.2 * ANIMATION_SPEED,
+        time: 0.2 * this._theme.animationSpeed,
         transition: 'easeInOutCubic',
         // transition: 'easeOutBack',
         scale_x: 1, scale_y: 1,
@@ -442,7 +447,6 @@ const TileMenu = new Lang.Class({
   },
 
   _onButtonRelease : function(actor, event) {
-    debug("_onButtonRelease");
     if ((actor == this._background.actor && event.get_button() == 1) || event.get_button() == 3) {
       if (this._hideLevel()) {
         this._onCancel();
