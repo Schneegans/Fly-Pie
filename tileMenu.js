@@ -22,6 +22,7 @@ const Me = ExtensionUtils.getCurrentExtension();
 
 const Background     = Me.imports.background.Background;
 const debug          = Me.imports.debug.debug;
+const getIconColor   = Me.imports.utils.getIconColor;
 
 const TileMenu = new Lang.Class({
   Name : 'TileMenu',
@@ -111,17 +112,20 @@ const TileMenu = new Lang.Class({
 
     this._theme.animationSpeed       = 1.0;
     this._theme.menuPadding          = switcherStyle.get_padding(St.Side.LEFT);
-    this._theme.itemSpacing          = 8;
-    this._theme.itemPadding          = 4;
+    this._theme.itemSpacing          = 4;
+    this._theme.itemPadding          = 6;
     this._theme.monitorPadding       = 8;
     this._theme.iconSize             = 100;
     this._theme.itemSize             = 130;
     this._theme.depthSpacing         = 50;
+    this._theme.activeItemOpacity    = 255;
     this._theme.activeIconOpacity    = 255;
     this._theme.activeLabelOpacity   = 255;
+    this._theme.inactiveItemOpacity  = 100;
     this._theme.inactiveIconOpacity  = 255;
-    this._theme.inactiveLabelOpacity = 0;
-    this._theme.subIconOpacity       = 50;
+    this._theme.inactiveLabelOpacity = 255;
+    this._theme.subItemOpacity       = 100;
+    this._theme.subIconOpacity       = 150;
     this._theme.subLabelOpacity      = 0;
   },
 
@@ -190,7 +194,8 @@ const TileMenu = new Lang.Class({
         style_class: "item-box",
         track_hover: true,
         width: this._theme.itemSize,
-        height: this._theme.itemSize
+        height: this._theme.itemSize,
+        opacity: 0
       });
       
       // create container for all submenu items ------------------------------------------
@@ -224,6 +229,9 @@ const TileMenu = new Lang.Class({
         x: (this._theme.itemSize - this._theme.iconSize)*0.5,
         y: this._theme.itemPadding
       });
+
+      menu.color = getIconColor(Gio.Icon.new_for_string(iconName));
+      menu.style = "background-color: rgba(" + menu.color.red + ", " + menu.color.green + ", " + menu.color.blue + ", 0.3)";
 
       let label = new St.Label({ 
         text: labelText,
@@ -327,6 +335,7 @@ const TileMenu = new Lang.Class({
       });
     };
 
+    // update opacity of all open menus and their children
     for (let i=0; i<this._openMenus.length; i++) {
 
       let subMenus = this._openMenus[i].subMenus;
@@ -336,22 +345,27 @@ const TileMenu = new Lang.Class({
           Lang.bind(this, tween)(subMenus[j].label, this._theme.activeLabelOpacity);
           Lang.bind(this, tween)(subMenus[j].icon, this._theme.activeIconOpacity);
           Lang.bind(this, tween)(subMenus[j].background, 0);
+          Lang.bind(this, tween)(subMenus[j], this._theme.activeItemOpacity);
         } else {
           Lang.bind(this, tween)(subMenus[j].label, this._theme.inactiveLabelOpacity);
           Lang.bind(this, tween)(subMenus[j].icon, this._theme.inactiveIconOpacity);
+          Lang.bind(this, tween)(subMenus[j], this._theme.inactiveItemOpacity);
         }
 
         let subs = subMenus[j].subMenus;
         for (let s=0; s<subs.length; s++) {
           Lang.bind(this, tween)(subs[s].label, this._theme.subLabelOpacity);
           Lang.bind(this, tween)(subs[s].icon, this._theme.subIconOpacity);
+          Lang.bind(this, tween)(subs[s], this._theme.subItemOpacity);
         }
       }
 
       if (i > 0) {
+        // hide the label and a icon of the top most menu but show its background 
         Lang.bind(this, tween)(this._openMenus[i].label, 0);
         Lang.bind(this, tween)(this._openMenus[i].icon, 0);
-        Lang.bind(this, tween)(this._openMenus[i].background, 255);
+        Lang.bind(this, tween)(this._openMenus[i].background, this._theme.activeItemOpacity);
+        Lang.bind(this, tween)(this._openMenus[i], this._theme.activeItemOpacity);
       }
     }
   },
@@ -379,15 +393,15 @@ const TileMenu = new Lang.Class({
 
     for (let i=0; i<this._openMenus.length; i++) {
       if (i == 0) {
-        Lang.bind(this, tween)(this._openMenus[i], -this._theme.depthSpacing * (this._openMenus.length-1));
+        Lang.bind(this, tween)(this._openMenus[i].subMenuContainer, -this._theme.depthSpacing * (this._openMenus.length-1));
       } else {
-        Lang.bind(this, tween)(this._openMenus[i], this._theme.depthSpacing);
+        Lang.bind(this, tween)(this._openMenus[i].subMenuContainer, this._theme.depthSpacing);
       }
 
       if (i == this._openMenus.length-1) {
         let items = this._openMenus[i].subMenus;
         for (let j=0; j<items.length; j++) {
-          Lang.bind(this, tween)(items[j], 0);
+          Lang.bind(this, tween)(items[j].subMenuContainer, 0);
         }
       }
     }
@@ -395,15 +409,13 @@ const TileMenu = new Lang.Class({
 
   _onItemHover : function(button) {
     if (button.hover) {
-      button.add_style_class_name('selected');
-      button.add_style_pseudo_class('highlighted');
-      button.add_style_pseudo_class('selected');
+      debug("hover");
+      let color = button.color.lighten();
+      // button.style = "background-color: rgba(" + color.red + ", " + color.green + ", " + color.blue + ", 0.4)";
+      button.style = "background-color: rgba(" + button.color.red + ", " + button.color.green + ", " + button.color.blue + ", 0.5)";
       button.grab_key_focus();
     } else {
-      button.remove_style_class_name('selected');
-      button.remove_style_pseudo_class('active');
-      button.remove_style_pseudo_class('highlighted');
-      button.remove_style_pseudo_class('selected');
+      button.style = "background-color: rgba(" + button.color.red + ", " + button.color.green + ", " + button.color.blue + ", 0.3)";
     }
   },
 

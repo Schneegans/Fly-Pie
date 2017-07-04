@@ -73,7 +73,14 @@ const Client = new Lang.Class({
 
     let test = new RecentGroup();
     this._lastMenu = test.getAppMenuItems();
-    // this._lastMenu.items.push(test.getUserDirectoriesItems());
+    this._lastMenu.items.push(test.getUserDirectoriesItems());
+    this._lastMenu.items.push({
+      name: "Test",
+      icon: "/home/simon/Pictures/Eigene/avatar128.png",
+      activate: function() {
+        debug("Test!");
+      }
+    });
     // this._lastMenu.items.push(test.getRecentItems());
 
     this._wrapper.ShowMenuRemote(JSON.stringify(this._lastMenu), 
