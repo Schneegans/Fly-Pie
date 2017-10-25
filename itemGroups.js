@@ -87,7 +87,7 @@ const RecentGroup = new Lang.Class({
 
   getUserDirectoriesItems : function () {
     let recentFiles = this._recentManager.get_items();
-    let result = {name:"Places", icon:"nautilus", items:[]};
+    let result = {name:"Places", icon:"system-file-manager", items:[]};
 
     this._pushFileInfo(result, new FileInfo(Gio.File.new_for_path(GLib.get_home_dir())));
 
@@ -123,7 +123,7 @@ const RecentGroup = new Lang.Class({
 
   getFavoriteItems : function () {
     let apps = global.settings.get_strv('favorite-apps');
-    let result = {items:[]};
+    let result = {name:"Favorites", icon:"emblem-favorite", items:[]};
 
     for (let i=0; i<apps.length; ++i) {
       let app = Shell.AppSystem.get_default().lookup_app(apps[i]);
@@ -135,7 +135,7 @@ const RecentGroup = new Lang.Class({
 
   getFrequentItems : function () {
     let apps = Shell.AppUsage.get_default().get_most_used('');
-    let result = {items:[]};
+    let result = {name:"Frequently Used", icon:"emblem-default", items:[]};
 
     for (let i=0; i<apps.length; ++i) {
       this._pushShellApp(result, apps[i]);
@@ -146,7 +146,7 @@ const RecentGroup = new Lang.Class({
 
   getRunningAppsItems : function () {
     let apps = Shell.AppSystem.get_default().get_running();
-    let result = {items:[]};
+    let result = {name:"Running Apps", icon:"preferences-system-windows", items:[]};
 
     for (let i=0; i<apps.length; ++i) {
       let windows = apps[i].get_windows();
@@ -167,7 +167,7 @@ const RecentGroup = new Lang.Class({
 
     menu.load_sync();
 
-    let result = {items:[]};
+    let result = {name:"Applications", icon:"applications-system", items:[]};
 
     this._pushMenuItems(result, menu.get_root_directory());
 

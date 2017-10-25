@@ -16,6 +16,10 @@ const Main           = imports.ui.main;
 const Tweener        = imports.ui.tweener;
 const St             = imports.gi.St;
 
+const Me    = ExtensionUtils.getCurrentExtension();
+const Timer = Me.imports.timer.Timer;
+const debug = Me.imports.debug.debug;
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Background is a fullscreen modal actor which effectively captures the entire     //
 // user input.                                                                          //
@@ -56,6 +60,9 @@ const Background = new Lang.Class({
   // It will not be shown in this case, if everything worked as supposed, true will be
   // returned.
   show : function() {
+
+    let timer = new Timer();
+
     if (this.actor.reactive) {
       return true;
     }
@@ -64,15 +71,22 @@ const Background = new Lang.Class({
       return false;
     }
 
+    timer.printElapsedAndReset('[B] Push modal');
+
     this.actor.reactive = true;
     this.actor.visible = true;
 
+    timer.printElapsedAndReset('[B] Make visible');
+
     Tweener.removeTweens(this.actor);
+
     Tweener.addTween(this.actor, {
       time: 0.3,
       transition: 'ease',
       opacity: 255
     });
+
+    timer.printElapsedAndReset('[B] Add tweens');
 
     return true;
   },

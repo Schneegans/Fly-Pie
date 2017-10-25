@@ -23,6 +23,7 @@ const Me = ExtensionUtils.getCurrentExtension();
 const Background     = Me.imports.background.Background;
 const debug          = Me.imports.debug.debug;
 const getIconColor   = Me.imports.utils.getIconColor;
+const Timer          = Me.imports.timer.Timer;
 
 const TileMenu = new Lang.Class({
   Name : 'TileMenu',
@@ -35,9 +36,7 @@ const TileMenu = new Lang.Class({
     this._onCancel = onCancel;
 
     this._background = new Background();
-
     this._window = new Clutter.Actor();
-
     this._window.set_pivot_point(0.5, 0.5);
     this._background.actor.add_child(this._window);
 
@@ -46,6 +45,9 @@ const TileMenu = new Lang.Class({
     });
 
     this._window.subMenus = [];
+    this._window.label = undefined;
+    this._window.icon = undefined;
+    this._window.background = undefined;
     this._window.subMenuContainer = itemContainer;
     this._window.add_child(itemContainer);
 
@@ -75,15 +77,18 @@ const TileMenu = new Lang.Class({
     this._createMenuItems(this._window, menu, '');
     this._updateMenuItemPositions(this._window);
 
-    this._updateMenuOpacity();
-    this._updateMenuReactiveness();
-    this._updateMenuDepth();
-
+    this._updateMenuOpacity(this._window, true);
+    this._setChildrenReactiveness(this._window, true);
+    
+    let timer = new Timer();
+    
     // display the background actor
     if (!this._background.show()) {
       // something went wrong, most likely we failed to get the pointer grab
       return false;
     }
+
+    timer.printElapsedAndReset('[M] Show background');
 
     this._window.subMenuContainer.width = this._getMenuWidth(this._window);
     this._window.subMenuContainer.height = this._getMenuHeight(this._window);
@@ -103,30 +108,27 @@ const TileMenu = new Lang.Class({
       transition: 'easeOutBack',
       scale_x: 1, scale_y: 1
     });
+    timer.printElapsedAndReset('[M] setup window');
 
     return true;
   },
 
   _loadTheme : function() {
     let switcherStyle = this._window.subMenuContainer.get_theme_node();
+    let padding = switcherStyle.get_padding(St.Side.LEFT);
 
-    this._theme.animationSpeed       = 1.0;
-    this._theme.menuPadding          = switcherStyle.get_padding(St.Side.LEFT);
-    this._theme.itemSpacing          = 4;
-    this._theme.itemPadding          = 6;
-    this._theme.monitorPadding       = 8;
-    this._theme.iconSize             = 100;
-    this._theme.itemSize             = 130;
-    this._theme.depthSpacing         = 50;
-    this._theme.activeItemOpacity    = 255;
-    this._theme.activeIconOpacity    = 255;
-    this._theme.activeLabelOpacity   = 255;
-    this._theme.inactiveItemOpacity  = 100;
-    this._theme.inactiveIconOpacity  = 255;
-    this._theme.inactiveLabelOpacity = 255;
-    this._theme.subItemOpacity       = 100;
-    this._theme.subIconOpacity       = 150;
-    this._theme.subLabelOpacity      = 0;
+    this._theme.animationSpeed            = 1.0;
+    this._theme.coloredBackground         = true;
+    this._theme.menuPadding               = padding;
+    this._theme.itemSpacing               = 4;
+    this._theme.itemPadding               = 2;
+    this._theme.monitorPadding            = 8;
+    this._theme.iconSize                  = 64;
+    this._theme.itemSize                  = 90;
+    this._theme.depthSpacing              = 50;
+
+    this._theme.activeBackgroundOpacity   = 100;
+    this._theme.inactiveBackgroundOpacity = 50;
   },
 
   // (x, y) is the top left corner of the box to be clamped, 
@@ -157,9 +159,10 @@ const TileMenu = new Lang.Class({
         translation_x: 0, translation_y: 0
       });
 
-      this._updateMenuOpacity();
-      this._updateMenuReactiveness();
-      this._updateMenuDepth();
+      this._updateMenuOpacity(menu, false);
+      this._updateMenuDepth(menu, false);
+      this._setChildrenReactiveness(menu, false);
+      this._setChildrenReactiveness(this._openMenus[this._openMenus.length-1], true);
 
       return false;
     } else {
@@ -188,19 +191,17 @@ const TileMenu = new Lang.Class({
       return;
     }
 
-    for (let i=0; i<description.items.length; i++) {
+    let count = description.items.length;
+    for (let i=0; i<count; i++) {
 
-      let menu = new St.Widget({
-        style_class: "item-box",
-        track_hover: true,
-        width: this._theme.itemSize,
-        height: this._theme.itemSize,
-        opacity: 0
+      let menu = new Clutter.Actor({
+        width:    this._theme.itemSize,
+        height:   this._theme.itemSize,
+        reactive: false
       });
       
       // create container for all submenu items ------------------------------------------
-
-      let subMenuContainer = new St.Widget({
+      let subMenuContainer = new Clutter.Actor({
         x: this._theme.itemPadding,
         y: this._theme.itemPadding
       });
@@ -209,7 +210,6 @@ const TileMenu = new Lang.Class({
 
       // create background ---------------------------------------------------------------
       // as separate actor since it has to be made transparent when submenu is collapsed
-      
       let background = new St.Widget({
         style_class: "switcher-list",
         opacity: 0
@@ -218,27 +218,38 @@ const TileMenu = new Lang.Class({
       subMenuContainer.add_child(background);
 
       // create container for name label and icon ----------------------------------------
-
       let labelText = description.items[i].name ? description.items[i].name : 'No Name';
       let iconName = description.items[i].icon ? description.items[i].icon : 'No Icon';
 
       let icon = new St.Icon({
         gicon: Gio.Icon.new_for_string(iconName),
+        fallback_icon_name: "image-missing",
         icon_size: this._theme.iconSize,
-        opacity: this._theme.subIconOpacity,
         x: (this._theme.itemSize - this._theme.iconSize)*0.5,
-        y: this._theme.itemPadding
+        y: this._theme.itemPadding,
+        opacity: 0
       });
 
-      menu.color = getIconColor(Gio.Icon.new_for_string(iconName));
-      menu.style = "background-color: rgba(" + menu.color.red + ", " + menu.color.green + ", " + menu.color.blue + ", 0.3)";
+      if (this._theme.coloredBackground) {
+        let color = getIconColor(Gio.Icon.new_for_string(iconName));
+        menu.background_color = new Clutter.Color({red:   color.red,
+                                                   green: color.green,
+                                                   blue:  color.blue,
+                                                   alpha: this._theme.inactiveBackgroundOpacity});
+      } else {
+        menu.background_color = new Clutter.Color({red:   255,
+                                                   green: 255,
+                                                   blue:  255,
+                                                   alpha: this._theme.inactiveBackgroundOpacity});
+      }
 
       let label = new St.Label({ 
         text: labelText,
-        opacity: this._theme.subLabelOpacity
+        opacity: 0,
+        style: "font-size: 80%"
       });
 
-      let labelBox = new St.Widget({
+      let labelBox = new Clutter.Actor({
         layout_manager: new Clutter.BinLayout(),
         width: this._theme.itemSize-2*this._theme.itemPadding,
         x: this._theme.itemPadding
@@ -249,8 +260,8 @@ const TileMenu = new Lang.Class({
       labelBox.add_child(label);
 
       // create main button -------------------------------------------------------------- 
-
-      menu.connect('notify::hover', Lang.bind(this, this._onItemHover));
+      menu.connect('enter-event', Lang.bind(this, this._onItemEnter));
+      menu.connect('leave-event', Lang.bind(this, this._onItemLeave));
       menu.connect('button-release-event', Lang.bind(this, this._onItemClicked));
 
       menu.subMenus = [];
@@ -312,7 +323,8 @@ const TileMenu = new Lang.Class({
 
     // distribute children in a square --- if that's not possible, try to make
     // the resulting shape in x direction larger than in y direction
-    for (let i=0; i<menu.subMenus.length; i++) {
+    let count = menu.subMenus.length;
+    for (let i=0; i<count; i++) {
       this._updateMenuItemPositions(menu.subMenus[i]);
 
       menu.subMenus[i].set_position(
@@ -328,101 +340,71 @@ const TileMenu = new Lang.Class({
     }
   },
 
-  _updateMenuOpacity : function() {
+  _updateMenuOpacity : function(menu, open) {
+    let speed = this._theme.animationSpeed;
+
     let tween = function(actor, opacity) {
-      Tweener.addTween(actor, { 
-        time: 0.5 * this._theme.animationSpeed, transition: 'ease', opacity: opacity 
-      });
+      if (actor) {
+        Tweener.addTween(actor, { 
+          time: 0.5 * speed, transition: 'ease', opacity: opacity 
+        });
+      }
     };
 
-    // update opacity of all open menus and their children
-    for (let i=0; i<this._openMenus.length; i++) {
-
-      let subMenus = this._openMenus[i].subMenus;
-
-      for (let j=0; j<subMenus.length; j++) {
-        if (i == this._openMenus.length-1) {
-          Lang.bind(this, tween)(subMenus[j].label, this._theme.activeLabelOpacity);
-          Lang.bind(this, tween)(subMenus[j].icon, this._theme.activeIconOpacity);
-          Lang.bind(this, tween)(subMenus[j].background, 0);
-          Lang.bind(this, tween)(subMenus[j], this._theme.activeItemOpacity);
-        } else {
-          Lang.bind(this, tween)(subMenus[j].label, this._theme.inactiveLabelOpacity);
-          Lang.bind(this, tween)(subMenus[j].icon, this._theme.inactiveIconOpacity);
-          Lang.bind(this, tween)(subMenus[j], this._theme.inactiveItemOpacity);
-        }
-
-        let subs = subMenus[j].subMenus;
-        for (let s=0; s<subs.length; s++) {
-          Lang.bind(this, tween)(subs[s].label, this._theme.subLabelOpacity);
-          Lang.bind(this, tween)(subs[s].icon, this._theme.subIconOpacity);
-          Lang.bind(this, tween)(subs[s], this._theme.subItemOpacity);
-        }
-      }
-
-      if (i > 0) {
-        // hide the label and a icon of the top most menu but show its background 
-        Lang.bind(this, tween)(this._openMenus[i].label, 0);
-        Lang.bind(this, tween)(this._openMenus[i].icon, 0);
-        Lang.bind(this, tween)(this._openMenus[i].background, this._theme.activeItemOpacity);
-        Lang.bind(this, tween)(this._openMenus[i], this._theme.activeItemOpacity);
-      }
+    tween(menu.label, open ? 0 : 255);
+    tween(menu.icon, open ? 0 : 255);
+    tween(menu.background, open ? 255 : 0);
+    
+    for (let i=menu.subMenus.length-1; i>=0; i--) {
+      tween(menu.subMenus[i].label, open ? 255 : 0);
+      tween(menu.subMenus[i].icon, open ? 255 : 0);
     }
   },
 
-  _updateMenuReactiveness : function() {
-    for (let i=0; i<this._openMenus.length; i++) {
-      let items = this._openMenus[i].subMenus;
-      for (let j=0; j<items.length; j++) {
-        items[j].reactive = (i == this._openMenus.length-1);
-
-        let subs = items[j].subMenus;
-        for (let s=0; s<subs.length; s++) {
-          subs[s].reactive = false;
-        }
-      }
+  _setChildrenReactiveness : function(menu, reactive) {
+    for (let j=menu.subMenus.length-1; j>=0; j--) {
+      menu.subMenus[j].reactive = reactive;
     }
   },
 
-  _updateMenuDepth : function() {
-    let tween = function(actor, depth) {
-      Tweener.addTween(actor, { 
-        time: 0.2 * this._theme.animationSpeed, transition: 'easeInOutCubic', z_position: depth 
-      });
+  _updateMenuDepth : function(menu, open) {
+    let timer = new Timer();
+    let tween = function(actor, scale) {
+      Tweener.addTween(actor, { time: 0.2 * this._theme.animationSpeed, transition: 'easeInOutCubic', depth: scale });
     };
 
-    for (let i=0; i<this._openMenus.length; i++) {
-      if (i == 0) {
-        Lang.bind(this, tween)(this._openMenus[i].subMenuContainer, -this._theme.depthSpacing * (this._openMenus.length-1));
-      } else {
-        Lang.bind(this, tween)(this._openMenus[i].subMenuContainer, this._theme.depthSpacing);
-      }
+    Lang.bind(this, tween)(this._openMenus[0].subMenuContainer, -this._theme.depthSpacing * (this._openMenus.length-1));
 
-      if (i == this._openMenus.length-1) {
-        let items = this._openMenus[i].subMenus;
-        for (let j=0; j<items.length; j++) {
-          Lang.bind(this, tween)(items[j].subMenuContainer, 0);
-        }
-      }
-    }
-  },
-
-  _onItemHover : function(button) {
-    if (button.hover) {
-      debug("hover");
-      let color = button.color.lighten();
-      // button.style = "background-color: rgba(" + color.red + ", " + color.green + ", " + color.blue + ", 0.4)";
-      button.style = "background-color: rgba(" + button.color.red + ", " + button.color.green + ", " + button.color.blue + ", 0.5)";
-      button.grab_key_focus();
+    if (open) {  
+      Lang.bind(this, tween)(menu.subMenuContainer, this._theme.depthSpacing);
     } else {
-      button.style = "background-color: rgba(" + button.color.red + ", " + button.color.green + ", " + button.color.blue + ", 0.3)";
+      Lang.bind(this, tween)(menu.subMenuContainer, 0);
     }
+    
+    timer.printElapsedAndReset('[M] Update submenu depth');
+  },
+
+  _onItemEnter : function(menu) {
+    menu.background_color = new Clutter.Color({red:   menu.background_color.red,
+                                               green: menu.background_color.green,
+                                               blue:  menu.background_color.blue,
+                                               alpha: this._theme.activeBackgroundOpacity});
+    menu.grab_key_focus();
+  },
+
+  _onItemLeave : function(menu) {
+    menu.background_color = new Clutter.Color({red:   menu.background_color.red,
+                                               green: menu.background_color.green,
+                                               blue:  menu.background_color.blue,
+                                               alpha: this._theme.inactiveBackgroundOpacity});
   },
 
   _onItemClicked : function(menu, event) {
     if (event.get_button() != 1) {
       return Clutter.EVENT_PROPAGATE;
     }
+
+    let timer = new Timer();
     
     if (menu.subMenus.length > 0) {
       let width = this._getMenuWidth(menu);
@@ -433,10 +415,10 @@ const TileMenu = new Lang.Class({
       let [worldX, worldY] = menu.subMenuContainer.get_transformed_position();
       let [clampedX, clampedY] = this._clampToToMonitor(worldX+offsetX, worldY+offsetY, 
                                                         width, height, this._theme.monitorPadding);
+
       Tweener.addTween(menu.subMenuContainer, {
         time: 0.2 * this._theme.animationSpeed,
         transition: 'easeInOutCubic',
-        // transition: 'easeOutBack',
         scale_x: 1, scale_y: 1,
         translation_x: clampedX - worldX,
         translation_y: clampedY - worldY
@@ -446,14 +428,17 @@ const TileMenu = new Lang.Class({
 
       this._openMenus.push(menu);
 
-      this._updateMenuOpacity();
-      this._updateMenuReactiveness();
-      this._updateMenuDepth();
-
+      this._setChildrenReactiveness(this._openMenus[this._openMenus.length-2], false);
+      this._setChildrenReactiveness(this._openMenus[this._openMenus.length-1], true);
+      this._updateMenuOpacity(this._openMenus[this._openMenus.length-1], true);
+      this._updateMenuDepth(this._openMenus[this._openMenus.length-1], true);
+      
     } else {
       this._hideAll();
       this._onSelect(menu.path);
     }
+
+    timer.printElapsedAndReset('[M] On Click');
 
     return Clutter.EVENT_STOP;
   },

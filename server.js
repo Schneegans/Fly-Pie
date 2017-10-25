@@ -20,6 +20,7 @@ const Me = ExtensionUtils.getCurrentExtension();
 const TileMenu       = Me.imports.tileMenu.TileMenu;
 const DBusInterface  = Me.imports.dbusInterface;
 const debug          = Me.imports.debug.debug;
+const Timer          = Me.imports.timer.Timer;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The server listens on the DBus for requests. For details on the interface refer to   //
@@ -54,12 +55,16 @@ const Server = new Lang.Class({
       return -1;
     }    
 
+    let timer = new Timer();
+
     try {
       var menu = JSON.parse(description);
     } catch (error) {
       debug('Failed to parse menu: ' + error);
       return -1;
     }
+
+    timer.printElapsedAndReset('[S] Parse menu');
 
     if (!this._menu.show(menu)) {
       debug('Failed to show menu!');

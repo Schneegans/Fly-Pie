@@ -21,6 +21,7 @@ const DBusInterface  = Me.imports.dbusInterface.DBusInterface;
 const KeyBindings    = Me.imports.keyBindings.KeyBindings;
 const debug          = Me.imports.debug.debug;
 const RecentGroup    = Me.imports.itemGroups.RecentGroup;
+const Timer          = Me.imports.timer.Timer;
 
 const DBusWrapper    = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
 
@@ -68,12 +69,19 @@ const Client = new Lang.Class({
       return;
     }
 
+    let timer = new Timer();
+
     // a menu is about to be opened, however we did not get an ID yet
     this._openMenuID = -1;
 
     let test = new RecentGroup();
-    this._lastMenu = test.getAppMenuItems();
+    this._lastMenu = {items:[]};
+    this._lastMenu.items.push(test.getAppMenuItems());
     this._lastMenu.items.push(test.getUserDirectoriesItems());
+    this._lastMenu.items.push(test.getRecentItems());
+    this._lastMenu.items.push(test.getFavoriteItems());
+    this._lastMenu.items.push(test.getFrequentItems());
+    this._lastMenu.items.push(test.getRunningAppsItems());
     this._lastMenu.items.push({
       name: "Test",
       icon: "/home/simon/Pictures/Eigene/avatar128.png",
@@ -81,10 +89,12 @@ const Client = new Lang.Class({
         debug("Test!");
       }
     });
-    // this._lastMenu.items.push(test.getRecentItems());
+
+    timer.printElapsedAndReset('[C] Build menu');
 
     this._wrapper.ShowMenuRemote(JSON.stringify(this._lastMenu), 
                                  Lang.bind(this, function(id) {
+      timer.printElapsedAndReset('[C] Got Response');
       if (id > 0) {
         // the menu has been shown successfully - we store the ID and wait for a call of
         // _onSelect or _onCancel
@@ -94,6 +104,9 @@ const Client = new Lang.Class({
         debug('The server reported an error showing the menu!');
       }
     }));
+
+    timer.printElapsedAndReset('[C] Sent request');
+
   },
 
   // ----------------------------------------------------------------------- private stuff
