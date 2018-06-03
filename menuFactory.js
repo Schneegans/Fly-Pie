@@ -57,7 +57,7 @@ const FileInfo = new Lang.Class({
       let info = this._file.query_info("standard::icon", 0, null);
       return info.get_icon().to_string();
     } catch(e) {
-      return 'firefox';
+      return 'missing-image';
     }
   },
 
@@ -74,8 +74,8 @@ const FileInfo = new Lang.Class({
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 
-const RecentGroup = new Lang.Class({
-  Name : 'RecentGroup',
+const MenuFactory = new Lang.Class({
+  Name : 'MenuFactory',
 
   // ------------------------------------------------------------ constructor / destructor
 

@@ -70,6 +70,7 @@ const TileMenu = new Lang.Class({
   show : function(menu) {
     this._openMenus = [this._window];
     this._window.subMenuContainer.remove_all_children();
+    this._window.subMenuContainer.depth = 0;
     this._window.subMenus = [];
 
     this._loadTheme();
@@ -380,7 +381,7 @@ const TileMenu = new Lang.Class({
     } else {
       Lang.bind(this, tween)(menu.subMenuContainer, 0);
     }
-    
+
     timer.printElapsedAndReset('[M] Update submenu depth');
   },
 
