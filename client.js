@@ -5,8 +5,6 @@
 //  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
 //  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
 //                                                                                      //
-//  Authors: Simon Schneegans (code@simonschneegans.de)                                 //
-//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 const Lang           = imports.lang;
@@ -17,17 +15,17 @@ const ExtensionUtils = imports.misc.extensionUtils;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
-const DBusInterface  = Me.imports.dbusInterface.DBusInterface;
-const KeyBindings    = Me.imports.keyBindings.KeyBindings;
-const debug          = Me.imports.debug.debug;
-const MenuFactory    = Me.imports.menuFactory.MenuFactory;
-const Timer          = Me.imports.timer.Timer;
+const DBusInterface = Me.imports.dbusInterface.DBusInterface;
+const KeyBindings   = Me.imports.keyBindings.KeyBindings;
+const debug         = Me.imports.debug.debug;
+const MenuFactory   = Me.imports.menuFactory.MenuFactory;
+const Timer         = Me.imports.timer.Timer;
 
-const DBusWrapper    = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
+const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Client sends ShowMenu-requests requests over the DBUS to the Server. It listens  //
-// to OnSelect and OnCancel signals of the Server and executes the according actions.   // 
+// to OnSelect and OnCancel signals of the Server and executes the according actions.   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 const Client = new Lang.Class({
@@ -35,47 +33,38 @@ const Client = new Lang.Class({
 
   // ------------------------------------------------------------ constructor / destructor
 
-  _init : function () {
+  _init : function() {
     this._settings = this._initSettings();
-    
+
     this._keybindings = new KeyBindings();
     this._keybindings.bindShortcut(this._settings, Lang.bind(this, this.toggle));
 
-    this._openMenuID = 0;
+    this._menuOpened = false;
 
-    new DBusWrapper(Gio.DBus.session, 'org.gnome.Shell', 
-      '/org/gnome/shell/extensions/gnomepie2', Lang.bind(this, function(wrapper) {
-        this._wrapper = wrapper;
-        this._wrapper.connectSignal('OnSelect', Lang.bind(this, this._onSelect));
-        this._wrapper.connectSignal('OnCancel', Lang.bind(this, this._onCancel));
-      })
-    );
+    this._wrapper = new DBusWrapper(
+      Gio.DBus.session, 'org.openpie.Daemon', '/org/openpie/Daemon/MenuService');
+
+    this._wrapper.connectSignal('OnSelect', Lang.bind(this, this._onSelect));
+    this._wrapper.connectSignal('OnHover', Lang.bind(this, this._onHover));
+    this._wrapper.connectSignal('OnCancel', Lang.bind(this, this._onCancel));
   },
 
-  destroy : function() {
-    this._keybindings.unbindShortcut();
-  },
+  destroy : function() { this._keybindings.unbindShortcut(); },
 
   // -------------------------------------------------------------------- public interface
 
-  toggle : function () {
-    if (this._openMenuID > 0) {
+  toggle : function() {
+    if (this._menuOpened) {
       debug('A menu is already opend.');
       return;
     }
 
-    if (this._openMenuID < 0) {
-      debug('A menu open request is still pending.');
-      return;
-    }
+    this._menuOpened = true;
 
     let timer = new Timer();
 
-    // a menu is about to be opened, however we did not get an ID yet
-    this._openMenuID = -1;
-
-    let factory = new MenuFactory();
-    this._lastMenu = {items:[]};
+    let factory    = new MenuFactory();
+    this._lastMenu = {items : []};
     this._lastMenu.items.push(factory.getAppMenuItems());
     timer.printElapsedAndReset('[C] getAppMenuItems');
     this._lastMenu.items.push(factory.getUserDirectoriesItems());
@@ -89,41 +78,27 @@ const Client = new Lang.Class({
     this._lastMenu.items.push(factory.getRunningAppsItems());
     timer.printElapsedAndReset('[C] getRunningAppsItems');
     this._lastMenu.items.push({
-      name: "Test",
-      icon: "/home/simon/Pictures/Eigene/avatar128.png",
-      activate: function() {
-        debug("Test!");
-      }
+      name : "Test",
+      icon : "/home/simon/Pictures/Eigene/avatar128.png",
+      activate : function() { debug("Test!"); }
     });
 
     timer.printElapsedAndReset('[C] avatar128');
 
-    this._wrapper.ShowMenuRemote(JSON.stringify(this._lastMenu), 
-                                 Lang.bind(this, function(id) {
-      timer.printElapsedAndReset('[C] Got Response');
-      if (id > 0) {
-        // the menu has been shown successfully - we store the ID and wait for a call of
-        // _onSelect or _onCancel
-        this._openMenuID = id;
-        debug('Got ID: ' + id);
-      } else {
-        debug('The server reported an error showing the menu!');
-      }
-    }));
+    this._wrapper.ShowMenuSync(JSON.stringify(this._lastMenu));
 
     timer.printElapsedAndReset('[C] Sent request');
-
   },
 
   // ----------------------------------------------------------------------- private stuff
 
-  _initSettings : function () {
-    let path = Me.dir.get_child('schemas').get_path();
+  _initSettings : function() {
+    let path          = Me.dir.get_child('schemas').get_path();
     let defaultSource = Gio.SettingsSchemaSource.get_default();
     let source = Gio.SettingsSchemaSource.new_from_directory(path, defaultSource, false);
 
     let schemaId = 'org.gnome.shell.extensions.gnomepie2';
-    let schema = source.lookup(schemaId, false); 
+    let schema   = source.lookup(schemaId, false);
 
     if (!schema) {
       debug('Schema ' + schemaId + ' could not be found in the path ' + path);
@@ -132,30 +107,44 @@ const Client = new Lang.Class({
     return new Gio.Settings({settings_schema : schema});
   },
 
-  _onSelect : function(proxy, sender, [id, path]) {
-    if (id == this._openMenuID) {
-      let pathElements = path.split('/');
+  _onSelect : function(proxy, sender, [ path ]) {
+    let pathElements = path.split('/');
 
-      if (pathElements.length < 2) {
-        debug('The server reported an impossible selection!');
-      }
-
-      let menu = this._lastMenu;
-
-      for (let i=1; i<pathElements.length; ++i) {
-        menu = menu.items[pathElements[i]];
-      }
-
-      menu.activate();
-
-      this._openMenuID = 0;
+    debug('OnSelect ' + path);
+    if (pathElements.length < 2) {
+      debug('The server reported an impossible selection!');
     }
+
+    let menu = this._lastMenu;
+
+    for (let i = 1; i < pathElements.length; ++i) {
+      menu = menu.items[pathElements[i]];
+    }
+
+    menu.activate();
+
+    this._menuOpened = false;
   },
 
-  _onCancel : function(proxy, sender, [id]) {
-    if (id == this._openMenuID) {
-      debug('Canceled: ' + id);
-      this._openMenuID = 0;
+  _onHover : function(proxy, sender, [ path ]) {
+    let pathElements = path.split('/');
+
+    if (pathElements.length < 2) {
+      debug('The server reported an impossibly hovered item!');
     }
+
+    let menu = this._lastMenu;
+
+    for (let i = 1; i < pathElements.length; ++i) {
+      menu = menu.items[pathElements[i]];
+    }
+
+    debug('Hovering ' + path);
+    // menu.activate();
+  },
+
+  _onCancel : function(proxy, sender) {
+    debug('Canceled');
+    this._menuOpened = false;
   }
 });
