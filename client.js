@@ -7,10 +7,7 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-const Lang           = imports.lang;
 const Gio            = imports.gi.Gio;
-const GLib           = imports.gi.GLib;
-const Main           = imports.ui.main;
 const ExtensionUtils = imports.misc.extensionUtils;
 
 const Me = ExtensionUtils.getCurrentExtension();
@@ -28,71 +25,90 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
 // to OnSelect and OnCancel signals of the Server and executes the according actions.   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-const Client = new Lang.Class({
-  Name : 'Client',
+var Client = class Client {
 
   // ------------------------------------------------------------ constructor / destructor
 
-  _init : function() {
+  constructor() {
     this._settings = this._initSettings();
 
     this._keybindings = new KeyBindings();
-    this._keybindings.bindShortcut(this._settings, Lang.bind(this, this.toggle));
+    this._keybindings.bindShortcut(this._settings, () => this.toggle());
 
     this._menuOpened = false;
+    this._wrapper    = null;
 
-    this._wrapper = new DBusWrapper(
-      Gio.DBus.session, 'org.openpie.Daemon', '/org/openpie/Daemon/MenuService');
+    new DBusWrapper(
+      Gio.DBus.session,
+      'org.gnome.Shell',
+      '/org/gnome/shell/extensions/gnomepie2',
+      (proxy) => {
+        this._wrapper = proxy;
+        this._wrapper.connectSignal('OnSelect', () => this._onSelect());
+        this._wrapper.connectSignal('OnHover', () => this._onHover());
+        this._wrapper.connectSignal('OnCancel', () => this._onCancel());
+      });
+  }
 
-    this._wrapper.connectSignal('OnSelect', Lang.bind(this, this._onSelect));
-    this._wrapper.connectSignal('OnHover', Lang.bind(this, this._onHover));
-    this._wrapper.connectSignal('OnCancel', Lang.bind(this, this._onCancel));
-  },
-
-  destroy : function() { this._keybindings.unbindShortcut(); },
+  destroy() { this._keybindings.unbindShortcut(); }
 
   // -------------------------------------------------------------------- public interface
 
-  toggle : function() {
-    if (this._menuOpened) {
-      debug('A menu is already opend.');
+  toggle() {
+    if (!this._wrapper) {
+      debug('Not connected to the D-Bus.');
       return;
     }
 
-    this._menuOpened = true;
+    // if (this._menuOpened) {
+    //   debug('A menu is already opend.');
+    //   return;
+    // }
 
-    let timer = new Timer();
+    // this._menuOpened = true;
 
-    let factory    = new MenuFactory();
+    // let timer = new Timer();
+
+    let factory = new MenuFactory();
+    // this._lastMenu = {
+    //   "items" : [
+    //     {"name" : "Foo", "icon" : "terminal"},
+    //     {
+    //       "name" : "Applications",
+    //       "icon" : "applications-system",
+    //       "items" : [
+    //         {"name" : "Gedit", "icon" : "gedit"},
+    //         {"name" : "Terminal", "icon" : "firefox"},
+    //         {"name" : "Nautilus", "icon" : "cheese"}
+    //       ]
+    //     }
+    //   ]
+    // };
     this._lastMenu = {items : []};
     this._lastMenu.items.push(factory.getAppMenuItems());
-    timer.printElapsedAndReset('[C] getAppMenuItems');
     this._lastMenu.items.push(factory.getUserDirectoriesItems());
-    timer.printElapsedAndReset('[C] getUserDirectoriesItems');
     this._lastMenu.items.push(factory.getRecentItems());
-    timer.printElapsedAndReset('[C] getRecentItems');
     this._lastMenu.items.push(factory.getFavoriteItems());
-    timer.printElapsedAndReset('[C] getFavoriteItems');
     this._lastMenu.items.push(factory.getFrequentItems());
-    timer.printElapsedAndReset('[C] getFrequentItems');
     this._lastMenu.items.push(factory.getRunningAppsItems());
-    timer.printElapsedAndReset('[C] getRunningAppsItems');
     this._lastMenu.items.push({
       name : "Test",
       icon : "/home/simon/Pictures/Eigene/avatar128.png",
       activate : function() { debug("Test!"); }
     });
 
-    timer.printElapsedAndReset('[C] avatar128');
+    // timer.printElapsedAndReset('[C] avatar128');
 
-    this._wrapper.ShowMenuSync(JSON.stringify(this._lastMenu));
+    try {
+      this._wrapper.ShowMenuRemote(JSON.stringify(this._lastMenu));
+    } catch (e) { debug(e.message); }
 
-    timer.printElapsedAndReset('[C] Sent request');
-  },
+    // timer.printElapsedAndReset('[C] Sent request');
+  }
 
   // ----------------------------------------------------------------------- private stuff
 
-  _initSettings : function() {
+  _initSettings() {
     let path          = Me.dir.get_child('schemas').get_path();
     let defaultSource = Gio.SettingsSchemaSource.get_default();
     let source = Gio.SettingsSchemaSource.new_from_directory(path, defaultSource, false);
@@ -105,9 +121,9 @@ const Client = new Lang.Class({
     }
 
     return new Gio.Settings({settings_schema : schema});
-  },
+  }
 
-  _onSelect : function(proxy, sender, [ path ]) {
+  _onSelect(proxy, sender, [ path ]) {
     let pathElements = path.split('/');
 
     debug('OnSelect ' + path);
@@ -124,27 +140,12 @@ const Client = new Lang.Class({
     menu.activate();
 
     this._menuOpened = false;
-  },
+  }
 
-  _onHover : function(proxy, sender, [ path ]) {
-    let pathElements = path.split('/');
+  _onHover(proxy, sender, [ path ]) { debug('Hovering ' + path); }
 
-    if (pathElements.length < 2) {
-      debug('The server reported an impossibly hovered item!');
-    }
-
-    let menu = this._lastMenu;
-
-    for (let i = 1; i < pathElements.length; ++i) {
-      menu = menu.items[pathElements[i]];
-    }
-
-    debug('Hovering ' + path);
-    // menu.activate();
-  },
-
-  _onCancel : function(proxy, sender) {
+  _onCancel(proxy, sender) {
     debug('Canceled');
     this._menuOpened = false;
   }
-});
+};

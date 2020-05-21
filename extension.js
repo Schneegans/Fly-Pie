@@ -11,6 +11,7 @@ const ExtensionUtils = imports.misc.extensionUtils;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
+const Server = Me.imports.server.Server;
 const Client = Me.imports.client.Client;
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -29,10 +30,16 @@ const Client = Me.imports.client.Client;
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var client;
+var server, client;
 
 function init() {}
 
-function enable() { client = new Client(); }
+function enable() {
+  server = new Server();
+  client = new Client();
+}
 
-function disable() { client.destroy(); };
+function disable() {
+  server.destroy();
+  client.destroy();
+}

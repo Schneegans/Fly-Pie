@@ -38,20 +38,19 @@
 // OnSelect sends the path to the selected item. Like this: '/0/1'                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-const DBusInterface = '<node>                               \
-    <interface name="org.openpie.Daemon.MenuService">       \
-      <method name="ShowMenu">                              \
-        <arg name="description" type="s" direction="in"/>   \
-      </method>                                             \
-      <method name="ShowSettings">                          \
-      </method>                                             \
-      <signal name="OnSelect">                              \
-          <arg name="path" type="s"/>                       \
-      </signal>                                             \
-      <signal name="OnHover">                               \
-          <arg name="path" type="s"/>                       \
-      </signal>                                             \
-      <signal name="OnCancel">                              \
-      </signal>                                             \
-    </interface>                                            \
+var DBusInterface =
+  '<node>                                                                                \
+    <interface name="org.gnome.Shell.Extensions.GnomePie2">                              \
+        <method name="ShowMenu">                                                         \
+          <arg name="description" type="s" direction="in"/>                              \
+          <arg name="id" type="i" direction="out"/>                                      \
+        </method>                                                                        \
+        <signal name="OnSelect">                                                         \
+            <arg type="i" name="id"/>                                                    \
+            <arg type="s" name="path"/>                                                  \
+        </signal>                                                                        \
+        <signal name="OnCancel">                                                         \
+            <arg type="i" name="id"/>                                                    \
+        </signal>                                                                        \
+    </interface>                                                                         \
   </node>';

@@ -8,7 +8,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 
 const Main  = imports.ui.main;
-const Lang  = imports.lang;
 const Shell = imports.gi.Shell;
 const Meta  = imports.gi.Meta;
 
@@ -19,46 +18,41 @@ const REAL_SHORTCUT_SETTING_KEY = "real-shortcut";
 // code by zzrough (https://github.com/zzrough/gs-extensions-drop-down-terminal)        //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-const KeyBindings = new Lang.Class({
-  Name : 'KeyBindings',
+var KeyBindings = class KeyBindings {
 
   // -------------------------------------------------------------------- public interface
 
-  bindShortcut : function(settings, func) {
+  bindShortcut(settings, func) {
     if (Main.wm.addKeybinding && Shell.ActionMode) // introduced in 3.16
       Main.wm.addKeybinding(
         REAL_SHORTCUT_SETTING_KEY,
         settings,
         Meta.KeyBindingFlags.NONE,
         Shell.ActionMode.NORMAL,
-        Lang.bind(this, func));
+        func);
     else if (Main.wm.addKeybinding && Shell.KeyBindingMode) // introduced in 3.7.5
       Main.wm.addKeybinding(
         REAL_SHORTCUT_SETTING_KEY,
         settings,
         Meta.KeyBindingFlags.NONE,
         Shell.KeyBindingMode.NORMAL,
-        Lang.bind(this, func));
+        func);
     else if (Main.wm.addKeybinding && Main.KeybindingMode) // introduced in 3.7.2
       Main.wm.addKeybinding(
         REAL_SHORTCUT_SETTING_KEY,
         settings,
         Meta.KeyBindingFlags.NONE,
         Main.KeybindingMode.NORMAL,
-        Lang.bind(this, func));
+        func);
     else
       global.display.add_keybinding(
-        REAL_SHORTCUT_SETTING_KEY,
-        settings,
-        Meta.KeyBindingFlags.NONE,
-        Lang.bind(this, func));
+        REAL_SHORTCUT_SETTING_KEY, settings, Meta.KeyBindingFlags.NONE, func);
+  }
 
-  },
-
-  unbindShortcut : function() {
+  unbindShortcut() {
     if (Main.wm.removeKeybinding) // introduced in 3.7.2
       Main.wm.removeKeybinding(REAL_SHORTCUT_SETTING_KEY);
     else
       global.display.remove_keybinding(REAL_SHORTCUT_SETTING_KEY);
   }
-});
+};

@@ -7,27 +7,24 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-const Lang           = imports.lang;
 const ExtensionUtils = imports.misc.extensionUtils;
-
-const Me    = ExtensionUtils.getCurrentExtension();
-const debug = Me.imports.debug.debug;
+const Me             = ExtensionUtils.getCurrentExtension();
+const debug          = Me.imports.debug.debug;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 
-const Timer = new Lang.Class({
-  Name : 'Timer',
+var Timer = class Timer {
 
   // -------------------------------------------------------------------- public interface
-  _init : function() { this.reset(); },
+  constructor() { this.reset(); }
 
-  getElapsed : function() { return Date.now() - this._now; },
+  getElapsed() { return Date.now() - this._now; }
 
-  reset : function() { this._now = Date.now(); },
+  reset() { this._now = Date.now(); }
 
-  printElapsedAndReset : function(message) {
+  printElapsedAndReset(message) {
     debug(message + ": " + this.getElapsed() + " ms");
     this.reset();
   }
-});
+};
