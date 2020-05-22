@@ -19,10 +19,10 @@ const Gio            = imports.gi.Gio;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
-const debug        = Me.imports.common.debug.debug;
-const Timer        = Me.imports.common.timer.Timer;
-const Background   = Me.imports.server.background.Background;
-const getIconColor = Me.imports.server.utils.getIconColor;
+const debug      = Me.imports.common.debug.debug;
+const Timer      = Me.imports.common.Timer.Timer;
+const Background = Me.imports.server.Background.Background;
+const utils      = Me.imports.server.utils;
 
 var TileMenu = class TileMenu {
 
@@ -219,7 +219,7 @@ var TileMenu = class TileMenu {
       });
 
       if (this._theme.coloredBackground) {
-        let color             = getIconColor(Gio.Icon.new_for_string(iconName));
+        let color             = utils.getIconColor(Gio.Icon.new_for_string(iconName));
         menu.background_color = new Clutter.Color({
           red : color.red,
           green : color.green,

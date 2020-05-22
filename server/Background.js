@@ -18,7 +18,7 @@ const Tweener        = imports.ui.tweener;
 const St             = imports.gi.St;
 
 const Me    = ExtensionUtils.getCurrentExtension();
-const Timer = Me.imports.common.timer.Timer;
+const Timer = Me.imports.common.Timer.Timer;
 const debug = Me.imports.common.debug.debug;
 
 //////////////////////////////////////////////////////////////////////////////////////////

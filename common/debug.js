@@ -11,44 +11,24 @@
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 
-// code taken from the desk-changer extemsion (https://github.com/BigE/desk-changer/)
+//////////////////////////////////////////////////////////////////////////////////////////
+// This method can be used to write a message to Gnome-Shell's log. This is enhances    //
+// the standard log() functionality by prepending the extensions name and the location  //
+// where the message was logged. As the extensions name is part of the location, you    //
+// can more effectively watch the log output of Gnome-Shell:                            //
+// journalctl /usr/bin/gnome-shell -f -o cat | grep gnomepie -B 2 -A 2                  //
+//////////////////////////////////////////////////////////////////////////////////////////
+
 function debug(message) {
-  let caller = getCaller();
-  let output = '[' + Me.metadata.uuid + '/' + caller.split('/').pop() + '] ' + message
-  log(output);
-}
+  let stack = new Error().stack.split('\n');
 
-// Implemented the two functions below using tweaked code from:
-// http://stackoverflow.com/a/13227808
-function getCaller() {
-  let stack = getStack();
+  // Remove superfluous function calls on stack.
+  stack.shift();
+  stack.shift();
 
-  // Remove superfluous function calls on stack
-  stack.shift(); // getCaller --> getStack
-  stack.shift(); // debug --> getCaller
+  // Find the index of the extension directory (e.g. gnomepie2@code.simonschneegans.de) in
+  // the stack entry. We do not want to print the entire absolute file path.
+  let extensionRoot = stack[0].indexOf(Me.metadata.uuid);
 
-  // Return caller's caller
-  return stack[0];
-}
-
-function getStack() {
-  // Save original Error.prepareStackTrace
-  let origPrepareStackTrace = Error.prepareStackTrace;
-
-  // Override with function that just returns `stack`
-  Error.prepareStackTrace = function(_, stack) { return stack; };
-
-  // Create a new `Error`, which automatically gets `stack`
-  let err = new Error();
-
-  // Evaluate `err.stack`, which calls our new `Error.prepareStackTrace`
-  let stack = err.stack.split('\n');
-
-  // Restore original `Error.prepareStackTrace`
-  Error.prepareStackTrace = origPrepareStackTrace;
-
-  // Remove superfluous function call on stack
-  stack.shift(); // getStack --> Error
-
-  return stack
+  log('[' + stack[0].slice(extensionRoot) + '] ' + message);
 }

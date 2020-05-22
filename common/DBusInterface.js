@@ -7,6 +7,8 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // First, you should call the ShowMenu method. As argument a menu description has to    //
 // be provided. This is a JSON string like this:                                        //
@@ -37,8 +39,6 @@
 // the ID which has been reported by the corresponding ShowMenu call, in addition       //
 // OnSelect sends the path to the selected item. Like this: '/0/1'                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-
-'use strict';
 
 var DBusInterface =
   '<node>                                                                                \

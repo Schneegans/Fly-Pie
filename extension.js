@@ -13,8 +13,8 @@ const ExtensionUtils = imports.misc.extensionUtils;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
-const Server = Me.imports.server.server.Server;
-const Client = Me.imports.client.client.Client;
+const Server = Me.imports.server.Server.Server;
+const Client = Me.imports.client.Client.Client;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -32,7 +32,7 @@ const Client = Me.imports.client.client.Client;
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var server, client;
+let server, client;
 
 // This function is called once when the extension is loaded, not enabled.
 function init() {}
@@ -49,4 +49,7 @@ function enable() {
 function disable() {
   server.destroy();
   client.destroy();
+
+  server = null;
+  client = null;
 }

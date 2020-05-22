@@ -14,16 +14,17 @@ const ExtensionUtils = imports.misc.extensionUtils;
 const Me             = ExtensionUtils.getCurrentExtension();
 
 const debug         = Me.imports.common.debug.debug;
-const Timer         = Me.imports.common.timer.Timer;
-const DBusInterface = Me.imports.common.dbusInterface.DBusInterface;
-const KeyBindings   = Me.imports.client.keyBindings.KeyBindings;
-const MenuFactory   = Me.imports.client.menuFactory.MenuFactory;
+const Timer         = Me.imports.common.Timer.Timer;
+const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
+const KeyBindings   = Me.imports.client.KeyBindings.KeyBindings;
+const MenuFactory   = Me.imports.client.MenuFactory.MenuFactory;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Client sends ShowMenu-requests requests over the DBUS to the Server. It listens  //
-// to OnSelect and OnCancel signals of the Server and executes the according actions.   //
+// to OnSelect, OnHover and OnCancel signals of the Server and executes the according   //
+// actions.                                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var Client = class Client {
@@ -37,17 +38,19 @@ var Client = class Client {
     this._keybindings.bindShortcut(this._settings, () => this.toggle());
 
     this._menuOpened = false;
-    this._wrapper    = null;
+
+    // Create DBUS wrapper asynchronously.
+    this._dbus = null;
 
     new DBusWrapper(
       Gio.DBus.session,
       'org.gnome.Shell',
       '/org/gnome/shell/extensions/gnomepie2',
       (proxy) => {
-        this._wrapper = proxy;
-        this._wrapper.connectSignal('OnSelect', () => this._onSelect());
-        this._wrapper.connectSignal('OnHover', () => this._onHover());
-        this._wrapper.connectSignal('OnCancel', () => this._onCancel());
+        this._dbus = proxy;
+        this._dbus.connectSignal('OnSelect', () => this._onSelect());
+        this._dbus.connectSignal('OnHover', () => this._onHover());
+        this._dbus.connectSignal('OnCancel', () => this._onCancel());
       });
   }
 
@@ -56,7 +59,7 @@ var Client = class Client {
   // -------------------------------------------------------------------- public interface
 
   toggle() {
-    if (!this._wrapper) {
+    if (!this._dbus) {
       debug('Not connected to the D-Bus.');
       return;
     }
@@ -68,7 +71,7 @@ var Client = class Client {
 
     // this._menuOpened = true;
 
-    // let timer = new Timer();
+    let timer = new Timer();
 
     let factory = new MenuFactory();
     // this._lastMenu = {
@@ -98,13 +101,13 @@ var Client = class Client {
       activate : function() { debug("Test!"); }
     });
 
-    // timer.printElapsedAndReset('[C] avatar128');
+    timer.printElapsedAndReset('[C] Create menu');
 
     try {
-      this._wrapper.ShowMenuRemote(JSON.stringify(this._lastMenu));
+      this._dbus.ShowMenuRemote(JSON.stringify(this._lastMenu));
     } catch (e) { debug(e.message); }
 
-    // timer.printElapsedAndReset('[C] Sent request');
+    timer.printElapsedAndReset('[C] Sent request');
   }
 
   // ----------------------------------------------------------------------- private stuff

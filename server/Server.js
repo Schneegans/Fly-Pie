@@ -16,10 +16,10 @@ const ExtensionUtils = imports.misc.extensionUtils;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
-const DBusInterface = Me.imports.common.dbusInterface;
+const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const debug         = Me.imports.common.debug.debug;
-const Timer         = Me.imports.common.timer.Timer;
-const TileMenu      = Me.imports.server.tileMenu.TileMenu;
+const Timer         = Me.imports.common.Timer.Timer;
+const TileMenu      = Me.imports.server.TileMenu.TileMenu;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The server listens on the DBus for requests. For details on the interface refer to   //
@@ -31,7 +31,7 @@ var Server = class Server {
   // ------------------------------------------------------------ constructor / destructor
 
   constructor() {
-    this._bus = Gio.DBusExportedObject.wrapJSObject(DBusInterface.DBusInterface, this);
+    this._bus = Gio.DBusExportedObject.wrapJSObject(DBusInterface, this);
     this._bus.export(Gio.DBus.session, '/org/gnome/shell/extensions/gnomepie2');
 
     this._menu      = new TileMenu(() => this._onSelect(), () => this._onCancel());
