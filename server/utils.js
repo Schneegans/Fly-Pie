@@ -7,6 +7,8 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 const St             = imports.gi.St;
 const Gtk            = imports.gi.Gtk;
 const Clutter        = imports.gi.Clutter;
@@ -14,7 +16,7 @@ const ExtensionUtils = imports.misc.extensionUtils;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
-const debug = Me.imports.debug.debug;
+const debug = Me.imports.common.debug.debug;
 
 function getIconColor(icon) {
   let theme = Gtk.IconTheme.get_default();

@@ -7,12 +7,14 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 const ExtensionUtils = imports.misc.extensionUtils;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
-const Server = Me.imports.server.Server;
-const Client = Me.imports.client.Client;
+const Server = Me.imports.server.server.Server;
+const Client = Me.imports.client.client.Client;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -32,13 +34,18 @@ const Client = Me.imports.client.Client;
 
 var server, client;
 
+// This function is called once when the extension is loaded, not enabled.
 function init() {}
 
+// This function could be called after the extension is enabled, which could be done from
+// GNOME Tweaks, when you log in or when the screen is unlocked.
 function enable() {
   server = new Server();
   client = new Client();
 }
 
+// This function could be called after the extension is uninstalled, disabled in GNOME
+// Tweaks, when you log out or when the screen locks.
 function disable() {
   server.destroy();
   client.destroy();

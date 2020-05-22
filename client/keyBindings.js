@@ -7,6 +7,8 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 const Main  = imports.ui.main;
 const Shell = imports.gi.Shell;
 const Meta  = imports.gi.Meta;

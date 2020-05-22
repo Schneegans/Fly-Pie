@@ -1,7 +1,10 @@
 {
-    "uuid": "gnomepie2@code.simonschneegans.de", 
-    "description": "Do things quickly", 
-    "name": "Gnome-Pie 2", 
-    "settings-schema": "org.gnome.shell.extensions.gnomepie2", 
-    "shell-version": ["3.24.0"]
+    "uuid": "gnomepie2@code.simonschneegans.de",
+    "description": "Do things quickly",
+    "name": "Gnome-Pie 2",
+    "settings-schema": "org.gnome.shell.extensions.gnomepie2",
+    "shell-version": [
+        "3.24.0"
+    ],
+    "url": "https://github.com/Schneegans/Gnome-Pie-2"
 }

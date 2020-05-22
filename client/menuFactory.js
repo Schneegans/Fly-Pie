@@ -7,6 +7,8 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 const Gtk            = imports.gi.Gtk;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Main           = imports.ui.main;
@@ -17,7 +19,7 @@ const GMenu          = imports.gi.GMenu;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
-const debug = Me.imports.debug.debug;
+const debug = Me.imports.common.debug.debug;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Parts of this code is based on the Gno-Menu extension by Panacier                    //

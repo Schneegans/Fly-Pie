@@ -7,6 +7,8 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 const Clutter        = imports.gi.Clutter;
 const Pango          = imports.gi.Pango;
 const ExtensionUtils = imports.misc.extensionUtils;
@@ -17,10 +19,10 @@ const Gio            = imports.gi.Gio;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
-const Background   = Me.imports.background.Background;
-const debug        = Me.imports.debug.debug;
-const getIconColor = Me.imports.utils.getIconColor;
-const Timer        = Me.imports.timer.Timer;
+const debug        = Me.imports.common.debug.debug;
+const Timer        = Me.imports.common.timer.Timer;
+const Background   = Me.imports.server.background.Background;
+const getIconColor = Me.imports.server.utils.getIconColor;
 
 var TileMenu = class TileMenu {
 

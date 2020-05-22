@@ -7,6 +7,8 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 
 // code taken from the desk-changer extemsion (https://github.com/BigE/desk-changer/)

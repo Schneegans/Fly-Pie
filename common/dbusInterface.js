@@ -38,6 +38,8 @@
 // OnSelect sends the path to the selected item. Like this: '/0/1'                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 var DBusInterface =
   '<node>                                                                                \
     <interface name="org.gnome.Shell.Extensions.GnomePie2">                              \

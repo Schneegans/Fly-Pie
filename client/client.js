@@ -7,16 +7,17 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 const Gio            = imports.gi.Gio;
 const ExtensionUtils = imports.misc.extensionUtils;
+const Me             = ExtensionUtils.getCurrentExtension();
 
-const Me = ExtensionUtils.getCurrentExtension();
-
-const DBusInterface = Me.imports.dbusInterface.DBusInterface;
-const KeyBindings   = Me.imports.keyBindings.KeyBindings;
-const debug         = Me.imports.debug.debug;
-const MenuFactory   = Me.imports.menuFactory.MenuFactory;
-const Timer         = Me.imports.timer.Timer;
+const debug         = Me.imports.common.debug.debug;
+const Timer         = Me.imports.common.timer.Timer;
+const DBusInterface = Me.imports.common.dbusInterface.DBusInterface;
+const KeyBindings   = Me.imports.client.keyBindings.KeyBindings;
+const MenuFactory   = Me.imports.client.menuFactory.MenuFactory;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
 

@@ -7,6 +7,8 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 const Gio            = imports.gi.Gio;
 const GLib           = imports.gi.GLib;
 const Main           = imports.ui.main;
@@ -14,10 +16,10 @@ const ExtensionUtils = imports.misc.extensionUtils;
 
 const Me = ExtensionUtils.getCurrentExtension();
 
-const TileMenu      = Me.imports.tileMenu.TileMenu;
-const DBusInterface = Me.imports.dbusInterface;
-const debug         = Me.imports.debug.debug;
-const Timer         = Me.imports.timer.Timer;
+const DBusInterface = Me.imports.common.dbusInterface;
+const debug         = Me.imports.common.debug.debug;
+const Timer         = Me.imports.common.timer.Timer;
+const TileMenu      = Me.imports.server.tileMenu.TileMenu;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The server listens on the DBus for requests. For details on the interface refer to   //

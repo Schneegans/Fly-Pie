@@ -9,6 +9,8 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict';
+
 const Clutter        = imports.gi.Clutter;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Main           = imports.ui.main;
@@ -16,8 +18,8 @@ const Tweener        = imports.ui.tweener;
 const St             = imports.gi.St;
 
 const Me    = ExtensionUtils.getCurrentExtension();
-const Timer = Me.imports.timer.Timer;
-const debug = Me.imports.debug.debug;
+const Timer = Me.imports.common.timer.Timer;
+const debug = Me.imports.common.debug.debug;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Background is a fullscreen modal actor which effectively captures the entire     //
