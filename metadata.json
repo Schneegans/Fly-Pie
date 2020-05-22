@@ -4,7 +4,7 @@
     "name": "Gnome-Pie 2",
     "settings-schema": "org.gnome.shell.extensions.gnomepie2",
     "shell-version": [
-        "3.24.0"
+        "3.36.2"
     ],
     "url": "https://github.com/Schneegans/Gnome-Pie-2"
 }

@@ -18,12 +18,12 @@ const Me = ExtensionUtils.getCurrentExtension();
 
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const debug         = Me.imports.common.debug.debug;
-const Timer         = Me.imports.common.Timer.Timer;
 const TileMenu      = Me.imports.server.TileMenu.TileMenu;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The server listens on the DBus for requests. For details on the interface refer to   //
-// dbusInterface.js. When a valid request is received, an menu is shown accordingly.    //
+// common/DBusInterface.js. When a valid request is received, an menu is shown          //
+// accordingly.                                                                         //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var Server = class Server {
@@ -31,36 +31,35 @@ var Server = class Server {
   // ------------------------------------------------------------ constructor / destructor
 
   constructor() {
-    this._bus = Gio.DBusExportedObject.wrapJSObject(DBusInterface, this);
-    this._bus.export(Gio.DBus.session, '/org/gnome/shell/extensions/gnomepie2');
+    this._dbus = Gio.DBusExportedObject.wrapJSObject(DBusInterface, this);
+    this._dbus.export(Gio.DBus.session, '/org/gnome/shell/extensions/gnomepie2');
 
-    this._menu      = new TileMenu(() => this._onSelect(), () => this._onCancel());
-    this._nextID    = 1;
-    this._currentID = 0;
+    this._menu = new TileMenu((item) => this._onSelect(item), () => this._onCancel());
+
+    this._nextID    = 0;
+    this._currentID = -1;
   }
 
   destroy() {
     this._menu.destroy();
-    this._bus.unexport();
+    this._dbus.unexport();
   }
 
   // -------------------------------------------------------------------- public interface
 
+  // This is directly called via the DBus. See common/DBusInterface.js for a description
+  // of Gnome-Pie 2's DBusInterface.
   ShowMenu(description) {
-    if (this._currentID > 0) { return -1; }
+    if (this._currentID >= 0) { return -1; }
 
-    let timer = new Timer();
+    let menu;
 
     try {
-      var menu = JSON.parse(description);
-    }
-
-    catch (error) {
+      menu = JSON.parse(description);
+    } catch (error) {
       debug('Failed to parse menu: ' + error);
       return -1;
     }
-
-    timer.printElapsedAndReset('[S] Parse menu');
 
     if (!this._menu.show(menu)) {
       debug('Failed to show menu!');
@@ -73,26 +72,18 @@ var Server = class Server {
 
   // ----------------------------------------------------------------------- private stuff
 
+  // Called when the user selects an item in the menu. This calls the OnSelect signal of
+  // the DBusInterface.
   _onSelect(item) {
-    this._bus.emit_signal(
+    this._dbus.emit_signal(
       'OnSelect', GLib.Variant.new('(is)', [ this._currentID, item ]));
-    this._currentID = 0;
+    this._currentID = -1;
   }
 
+  // Called when the user does no select anything in the menu. This calls the OnCancel
+  // signal of the DBusInterface.
   _onCancel() {
-    this._bus.emit_signal('OnCancel', GLib.Variant.new('(i)', [ this._currentID ]));
-    this._currentID = 0;
-  }
-
-  _debugPrintMenu(menu, indent) {
-    let name = menu.name ? menu.name : 'No Name';
-    let icon = menu.icon ? menu.icon : 'No Icon';
-    debug('  '.repeat(indent) + name + ' (' + icon + ')');
-
-    if (menu.items) {
-      for (let item of menu.items) {
-        this._debugPrintMenu(item, indent + 1);
-      }
-    }
+    this._dbus.emit_signal('OnCancel', GLib.Variant.new('(i)', [ this._currentID ]));
+    this._currentID = -1;
   }
 };

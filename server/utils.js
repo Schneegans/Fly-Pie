@@ -18,6 +18,8 @@ const Me = ExtensionUtils.getCurrentExtension();
 
 const debug = Me.imports.common.debug.debug;
 
+// Returns a representative average Clutter.Color for a given Gio.Icon. The alpha value
+// will always be 255. This is based on code from the original Gnome-Pie.
 function getIconColor(icon) {
   let theme = Gtk.IconTheme.get_default();
   let info  = theme.lookup_by_gicon(icon, 24, Gtk.IconLookupFlags.FORCE_SIZE);

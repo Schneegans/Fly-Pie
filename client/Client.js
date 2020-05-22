@@ -37,7 +37,7 @@ var Client = class Client {
     this._keybindings = new KeyBindings();
     this._keybindings.bindShortcut(this._settings, () => this.toggle());
 
-    this._menuOpened = false;
+    this._lastID = -1;
 
     // Create DBUS wrapper asynchronously.
     this._dbus = null;
@@ -48,9 +48,9 @@ var Client = class Client {
       '/org/gnome/shell/extensions/gnomepie2',
       (proxy) => {
         this._dbus = proxy;
-        this._dbus.connectSignal('OnSelect', () => this._onSelect());
-        this._dbus.connectSignal('OnHover', () => this._onHover());
-        this._dbus.connectSignal('OnCancel', () => this._onCancel());
+        this._dbus.connectSignal('OnSelect', (...args) => this._onSelect(...args));
+        this._dbus.connectSignal('OnHover', (...args) => this._onHover(...args));
+        this._dbus.connectSignal('OnCancel', (...args) => this._onCancel(...args));
       });
   }
 
@@ -64,12 +64,10 @@ var Client = class Client {
       return;
     }
 
-    // if (this._menuOpened) {
-    //   debug('A menu is already opend.');
-    //   return;
-    // }
-
-    // this._menuOpened = true;
+    if (this._lastID >= 0) {
+      debug('A menu is already opened.');
+      return;
+    }
 
     let timer = new Timer();
 
@@ -104,7 +102,10 @@ var Client = class Client {
     timer.printElapsedAndReset('[C] Create menu');
 
     try {
-      this._dbus.ShowMenuRemote(JSON.stringify(this._lastMenu));
+      this._dbus.ShowMenuRemote(JSON.stringify(this._lastMenu), (id) => {
+        this._lastID = id;
+        debug("Opened menu " + this._lastID);
+      });
     } catch (e) { debug(e.message); }
 
     timer.printElapsedAndReset('[C] Sent request');
@@ -127,7 +128,7 @@ var Client = class Client {
     return new Gio.Settings({settings_schema : schema});
   }
 
-  _onSelect(proxy, sender, [ path ]) {
+  _onSelect(proxy, sender, [ id, path ]) {
     let pathElements = path.split('/');
 
     debug('OnSelect ' + path);
@@ -143,13 +144,13 @@ var Client = class Client {
 
     menu.activate();
 
-    this._menuOpened = false;
+    this._lastID = -1;
   }
 
-  _onHover(proxy, sender, [ path ]) { debug('Hovering ' + path); }
+  _onHover(proxy, sender, [ id, path ]) { debug('Hovering ' + path); }
 
-  _onCancel(proxy, sender) {
-    debug('Canceled');
-    this._menuOpened = false;
+  _onCancel(proxy, sender, [ id ]) {
+    debug('Canceled ' + id);
+    this._lastID = -1;
   }
 };

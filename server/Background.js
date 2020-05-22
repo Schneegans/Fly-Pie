@@ -18,7 +18,6 @@ const Tweener        = imports.ui.tweener;
 const St             = imports.gi.St;
 
 const Me    = ExtensionUtils.getCurrentExtension();
-const Timer = Me.imports.common.Timer.Timer;
 const debug = Me.imports.common.debug.debug;
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -32,12 +31,10 @@ var Background = class Background {
 
   // Creates the initially invisible background actor.
   constructor() {
-    let monitor = Main.layoutManager.currentMonitor;
-
     this.actor = new St.Widget({
       style_class : 'tile-menu-background',
-      height : monitor.height,
-      width : monitor.width,
+      height : Main.layoutManager.currentMonitor.height,
+      width : Main.layoutManager.currentMonitor.width,
       reactive : false,
       visible : false,
       opacity : 0
@@ -48,7 +45,7 @@ var Background = class Background {
 
   // Removes the background without any animation.
   destroy() {
-    Main.uiGroup.remove_actor(this.actor);
+    Main.uiGroup.removeactor(this.actor);
     this.actor = null;
   }
 
@@ -59,36 +56,35 @@ var Background = class Background {
   // It will not be shown in this case, if everything worked as supposed, true will be
   // returned.
   show() {
-    let timer = new Timer();
-
+    // The background is already active.
     if (this.actor.reactive) { return true; }
 
+    // Something went wrong. Let's abort this.
     if (!Main.pushModal(this.actor)) { return false; }
 
-    timer.printElapsedAndReset('[B] Push modal');
-
+    // Make the actor visible and clickable.
     this.actor.reactive = true;
     this.actor.visible  = true;
 
-    timer.printElapsedAndReset('[B] Make visible');
-
+    // Add the fade-in animation.
     Tweener.removeTweens(this.actor);
-
     Tweener.addTween(this.actor, {time : 0.3, transition : 'ease', opacity : 255});
-
-    timer.printElapsedAndReset('[B] Add tweens');
 
     return true;
   }
 
   // This hides the background again. The input will not be grabbed anymore.
   hide() {
+    // The actor is not active. Nothing to be done.
     if (!this.actor.reactive) { return; }
 
+    // Un-grab the input.
     Main.popModal(this.actor);
 
+    // Do not receive input events anymore.
     this.actor.reactive = false;
 
+    // Add the fade-out animation.
     Tweener.removeTweens(this.actor);
     Tweener.addTween(this.actor, {
       time : 0.5,
