@@ -22,17 +22,21 @@ const Me = ExtensionUtils.getCurrentExtension();
 const debug = Me.imports.common.debug.debug;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Parts of this code is based on the Gno-Menu extension by Panacier                    //
-// (https://github.com/The-Panacea-Projects/Gnomenu)                                    //
+// This is a small helper class for adding menu items for files to the menus created by //
+// the MenuFactory class.                                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var FileInfo = class FileInfo {
 
+  // ------------------------------------------------------------ constructor / destructor
+
   constructor(file) { this._file = file; }
 
+  // -------------------------------------------------------------------- public interface
+
+  // Opens the file in the system's default application for this file type.
   openDefault() {
     let launchContext = global.create_app_launch_context(0, -1);
-    // launchContext.set_timestamp(timestamp);
 
     try {
       Gio.AppInfo.launch_default_for_uri(this._file.get_uri(), launchContext);
@@ -41,6 +45,7 @@ var FileInfo = class FileInfo {
     }
   }
 
+  // Returns a string representation for an icon representing this file.
   getIcon() {
     try {
       let info = this._file.query_info("standard::icon", 0, null);
@@ -48,6 +53,7 @@ var FileInfo = class FileInfo {
     } catch (e) { return 'missing-image'; }
   }
 
+  // Returns a name for the file which can be presented to the user.
   getName() {
     try {
       let info = this._file.query_info('standard::display-name', 0, null);
@@ -57,12 +63,17 @@ var FileInfo = class FileInfo {
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// This class contains several static methods which can be used to create some          //
+// standard items for menus. This includes for example items for user directories,      //
+// frequently used applications or currently running applications.                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var MenuFactory = class MenuFactory {
 
   // -------------------------------------------------------------------- public interface
 
+  // Returns an item with entries for each user directory. Like Home, Desktop, Download,
+  // Videos and so on.
   static getUserDirectoriesItems() {
     let result = {name : "Places", icon : "system-file-manager", items : []};
 
@@ -87,6 +98,8 @@ var MenuFactory = class MenuFactory {
     return result;
   }
 
+  // Returns an item with entries for each recently used file, as reported by
+  // Gtk.RecentManager.
   static getRecentItems() {
     let recentFiles = Gtk.RecentManager.get_default().get_items();
     let result      = {name : "Recent", icon : "document-open-recent", items : []};
@@ -104,6 +117,8 @@ var MenuFactory = class MenuFactory {
     return result;
   }
 
+  // Returns an item with entries for each "favorite application", as reported by
+  // Gnome-Shell.
   static getFavoriteItems() {
     let apps   = global.settings.get_strv('favorite-apps');
     let result = {name : "Favorites", icon : "emblem-favorite", items : []};
@@ -116,6 +131,8 @@ var MenuFactory = class MenuFactory {
     return result;
   }
 
+  // Returns an item with entries for each "frequently used application", as reported by
+  // Gnome-Shell.
   static getFrequentItems() {
     let apps   = Shell.AppUsage.get_default().get_most_used();
     let result = {name : "Frequently Used", icon : "emblem-default", items : []};
@@ -127,6 +144,8 @@ var MenuFactory = class MenuFactory {
     return result;
   }
 
+  // Returns an item with entries for all running applications. Clicking these will bring
+  // the corresponding app to the foreground. Like Alt-Tab.
   static getRunningAppsItems() {
     let apps   = Shell.AppSystem.get_default().get_running();
     let result = {name : "Running Apps", icon : "preferences-system-windows", items : []};
@@ -146,6 +165,7 @@ var MenuFactory = class MenuFactory {
     return result;
   }
 
+  // Returns an item containing the menu tree of all installed applications.
   static getAppMenuItems() {
     let menu =
       new GMenu.Tree({menu_basename : 'applications.menu', flags : GMenu.TreeFlags.NONE});
@@ -161,14 +181,17 @@ var MenuFactory = class MenuFactory {
 
   // ----------------------------------------------------------------------- private stuff
 
+  // This is used to recursively populate the item with all installed applications.
   static _pushMenuItems(menu, dir) {
     let iter = dir.iter(), nodeType, item;
 
     while ((nodeType = iter.next()) !== GMenu.TreeItemType.INVALID) {
       switch (nodeType) {
+
+      // Add an item for each application.
       case GMenu.TreeItemType.ENTRY:
         let app  = iter.get_entry().get_app_info();
-        let icon = "foo";
+        let icon = "missing-image";
         if (app.get_icon()) { icon = app.get_icon().to_string(); }
         item = {
           name : app.get_name(),
@@ -177,6 +200,8 @@ var MenuFactory = class MenuFactory {
         };
         menu.items.push(item);
         break;
+
+      // Recursively add child items to directories.
       case GMenu.TreeItemType.DIRECTORY:
         let directory = iter.get_directory();
         item          = {
@@ -186,16 +211,18 @@ var MenuFactory = class MenuFactory {
         };
 
         this._pushMenuItems(item, directory);
-
         menu.items.push(item);
-
         break;
-      default: // SEPARATOR, HEADER, ALIAS. skip for now.
+
+      // SEPARATOR, HEADER, ALIAS. skip for now.
+      default:
         break;
       }
     }
   }
 
+  // This adds an entry for a Shell.App. Clicking the item will open a new window for the
+  // given App.
   static _pushShellApp(menu, app) {
     if (app && app.get_app_info().should_show()) {
       menu.items.push({
@@ -206,6 +233,8 @@ var MenuFactory = class MenuFactory {
     }
   }
 
+  // Adds an item for the given FileInfo object. The FileInfo class is defined at the top
+  // of this file.
   static _pushFileInfo(menu, file) {
     menu.items.push({
       name : file.getName(),
