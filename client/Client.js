@@ -22,7 +22,7 @@ const MenuFactory   = Me.imports.client.MenuFactory.MenuFactory;
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The Client sends ShowMenu-requests requests over the DBUS to the Server. It listens  //
+// The Client sends ShowMenu-requests requests over the D-Bus to the Server. It listens //
 // to OnSelect, OnHover and OnCancel signals of the Server and executes the according   //
 // actions.                                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -32,14 +32,19 @@ var Client = class Client {
   // ------------------------------------------------------------ constructor / destructor
 
   constructor() {
-    this._settings = this._initSettings();
+    let schema = Gio.SettingsSchemaSource.new_from_directory(
+      Me.dir.get_child('schemas').get_path(),
+      Gio.SettingsSchemaSource.get_default(),
+      false);
 
-    this._keybindings = new KeyBindings();
-    this._keybindings.bindShortcut(this._settings, () => this.toggle());
+    this._settings = new Gio.Settings(
+      {settings_schema : schema.lookup('org.gnome.shell.extensions.gnomepie2', true)});
+
+    KeyBindings.bindShortcut(this._settings, "toggle-shortcut", () => this.toggle());
 
     this._lastID = -1;
 
-    // Create DBUS wrapper asynchronously.
+    // Create D-Bus wrapper asynchronously.
     this._dbus = null;
 
     new DBusWrapper(
@@ -54,24 +59,23 @@ var Client = class Client {
       });
   }
 
-  destroy() { this._keybindings.unbindShortcut(); }
+  destroy() { KeyBindings.unbindShortcut("toggle-shortcut"); }
 
   // -------------------------------------------------------------------- public interface
 
   toggle() {
+    // We cannot open a menu when not connected to the D-Bus.
     if (!this._dbus) {
       debug('Not connected to the D-Bus.');
       return;
     }
 
+    // We already have a pending request.
     if (this._lastID >= 0) {
       debug('A menu is already opened.');
       return;
     }
 
-    let timer = new Timer();
-
-    let factory = new MenuFactory();
     // this._lastMenu = {
     //   "items" : [
     //     {"name" : "Foo", "icon" : "terminal"},
@@ -87,69 +91,74 @@ var Client = class Client {
     //   ]
     // };
     this._lastMenu = {items : []};
-    this._lastMenu.items.push(factory.getAppMenuItems());
-    this._lastMenu.items.push(factory.getUserDirectoriesItems());
-    this._lastMenu.items.push(factory.getRecentItems());
-    this._lastMenu.items.push(factory.getFavoriteItems());
-    this._lastMenu.items.push(factory.getFrequentItems());
-    this._lastMenu.items.push(factory.getRunningAppsItems());
+    this._lastMenu.items.push(MenuFactory.getAppMenuItems());
+    this._lastMenu.items.push(MenuFactory.getUserDirectoriesItems());
+    this._lastMenu.items.push(MenuFactory.getRecentItems());
+    this._lastMenu.items.push(MenuFactory.getFavoriteItems());
+    this._lastMenu.items.push(MenuFactory.getFrequentItems());
+    this._lastMenu.items.push(MenuFactory.getRunningAppsItems());
     this._lastMenu.items.push({
       name : "Test",
       icon : "/home/simon/Pictures/Eigene/avatar128.png",
       activate : function() { debug("Test!"); }
     });
 
-    timer.printElapsedAndReset('[C] Create menu');
-
     try {
+      // Open the menu on the server side. Once this is done sucessfully, we store the
+      // returned menu ID.
       this._dbus.ShowMenuRemote(JSON.stringify(this._lastMenu), (id) => {
         this._lastID = id;
         debug("Opened menu " + this._lastID);
       });
     } catch (e) { debug(e.message); }
-
-    timer.printElapsedAndReset('[C] Sent request');
   }
 
   // ----------------------------------------------------------------------- private stuff
 
-  _initSettings() {
-    let path          = Me.dir.get_child('schemas').get_path();
-    let defaultSource = Gio.SettingsSchemaSource.get_default();
-    let source = Gio.SettingsSchemaSource.new_from_directory(path, defaultSource, false);
-
-    let schemaId = 'org.gnome.shell.extensions.gnomepie2';
-    let schema   = source.lookup(schemaId, false);
-
-    if (!schema) {
-      debug('Schema ' + schemaId + ' could not be found in the path ' + path);
-    }
-
-    return new Gio.Settings({settings_schema : schema});
-  }
-
+  // This gets called once the user made a selection in the menu.
   _onSelect(proxy, sender, [ id, path ]) {
+
+    // For some reason it wasn't our menu.
+    if (this._lastID != id) { return; }
+
+    // The path is a string like /2/2/4 indicating that the fourth entry in the second
+    // entry of the second entry was clicked on.
     let pathElements = path.split('/');
 
     debug('OnSelect ' + path);
+
     if (pathElements.length < 2) {
       debug('The server reported an impossible selection!');
     }
 
+    // Now follow the path in our menu structure.
     let menu = this._lastMenu;
-
     for (let i = 1; i < pathElements.length; ++i) {
       menu = menu.items[pathElements[i]];
     }
 
+    // And finally activate the item!
     menu.activate();
 
     this._lastID = -1;
   }
 
-  _onHover(proxy, sender, [ id, path ]) { debug('Hovering ' + path); }
+  // This gets called when the user hovers over an item, potentially selecting it. This
+  // could be used to preview something, but we do not use it here.
+  _onHover(proxy, sender, [ id, path ]) {
 
+    // For some reason it wasn't our menu.
+    if (this._lastID != id) { return; }
+
+    debug('Hovering ' + path);
+  }
+
+  // This gets called when the user did not select anything in the menu.
   _onCancel(proxy, sender, [ id ]) {
+
+    // For some reason it wasn't our menu.
+    if (this._lastID != id) { return; }
+
     debug('Canceled ' + id);
     this._lastID = -1;
   }

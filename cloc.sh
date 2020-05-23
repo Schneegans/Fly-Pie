@@ -43,10 +43,10 @@ COMMENT_LINES=$(($COMMENT_LINES - 6 * $NUMBER_OF_FILES - $DUMB_COMMENTS))
 if [[ $* == *--percentage-only* ]]
 then
   awk -v a=$COMMENT_LINES -v b=$LINES_OF_CODE \
-      'BEGIN {printf "%3.4f\n", 100*a/b}'
+      'BEGIN {printf "%3.1f\n", 100*a/b}'
 else
   awk -v a=$LINES_OF_CODE \
-      'BEGIN {printf "Lines of source code:  %6.1fk\n", a/1000}'
+      'BEGIN {printf "Lines of source code: %6.1fk\n", a/1000}'
   awk -v a=$COMMENT_LINES \
-      'BEGIN {printf "Lines of comments:     %6.1fk\n", a/1000}'
+      'BEGIN {printf "Lines of comments:    %6.1fk\n", a/1000}'
 fi

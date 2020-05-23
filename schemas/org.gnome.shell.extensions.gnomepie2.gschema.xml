@@ -3,7 +3,7 @@
 
   <schema path="/org/gnome/shell/extensions/gnomepie2/" id="org.gnome.shell.extensions.gnomepie2">
 
-    <key name="real-shortcut" type="as">
+    <key name="toggle-shortcut" type="as">
       <default><![CDATA[['F12']]]></default>
       <summary>An internal key that must not be changed manually</summary>
       <description>

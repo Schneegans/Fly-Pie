@@ -61,15 +61,10 @@ var FileInfo = class FileInfo {
 
 var MenuFactory = class MenuFactory {
 
-  // ----------------------------------------------------------- constructor / desctructor
-
-  constructor() { this._recentManager = Gtk.RecentManager.get_default(); }
-
   // -------------------------------------------------------------------- public interface
 
-  getUserDirectoriesItems() {
-    let recentFiles = this._recentManager.get_items();
-    let result      = {name : "Places", icon : "system-file-manager", items : []};
+  static getUserDirectoriesItems() {
+    let result = {name : "Places", icon : "system-file-manager", items : []};
 
     this._pushFileInfo(result, new FileInfo(Gio.File.new_for_path(GLib.get_home_dir())));
 
@@ -92,18 +87,24 @@ var MenuFactory = class MenuFactory {
     return result;
   }
 
-  getRecentItems() {
-    let recentFiles = this._recentManager.get_items();
+  static getRecentItems() {
+    let recentFiles = Gtk.RecentManager.get_default().get_items();
     let result      = {name : "Recent", icon : "document-open-recent", items : []};
 
-    for (let i = 0; i < recentFiles.length; ++i) {
-      this._pushRecentInfo(result, recentFiles[i]);
-    }
+    recentFiles.forEach(recentFile => {
+      if (recentFile.exists()) {
+        result.items.push({
+          name : recentFile.get_display_name(),
+          icon : recentFile.get_gicon().to_string(),
+          activate : () => this._openUri(recentFile.get_uri())
+        });
+      }
+    });
 
     return result;
   }
 
-  getFavoriteItems() {
+  static getFavoriteItems() {
     let apps   = global.settings.get_strv('favorite-apps');
     let result = {name : "Favorites", icon : "emblem-favorite", items : []};
 
@@ -115,7 +116,7 @@ var MenuFactory = class MenuFactory {
     return result;
   }
 
-  getFrequentItems() {
+  static getFrequentItems() {
     let apps   = Shell.AppUsage.get_default().get_most_used();
     let result = {name : "Frequently Used", icon : "emblem-default", items : []};
 
@@ -126,22 +127,26 @@ var MenuFactory = class MenuFactory {
     return result;
   }
 
-  getRunningAppsItems() {
+  static getRunningAppsItems() {
     let apps   = Shell.AppSystem.get_default().get_running();
     let result = {name : "Running Apps", icon : "preferences-system-windows", items : []};
 
     for (let i = 0; i < apps.length; ++i) {
       let windows = apps[i].get_windows();
       let icon    = apps[i].get_app_info().get_icon().to_string();
-      for (let j = 0; j < windows.length; ++j) {
-        this._pushWindow(result, windows[j], icon);
-      }
+      windows.forEach(window => {
+        result.items.push({
+          name : window.get_title(),
+          icon : icon,
+          activate : () => window.activate(0 /*timestamp*/)
+        });
+      });
     }
 
     return result;
   }
 
-  getAppMenuItems() {
+  static getAppMenuItems() {
     let menu =
       new GMenu.Tree({menu_basename : 'applications.menu', flags : GMenu.TreeFlags.NONE});
 
@@ -156,7 +161,7 @@ var MenuFactory = class MenuFactory {
 
   // ----------------------------------------------------------------------- private stuff
 
-  _pushMenuItems(menu, dir) {
+  static _pushMenuItems(menu, dir) {
     let iter = dir.iter(), nodeType, item;
 
     while ((nodeType = iter.next()) !== GMenu.TreeItemType.INVALID) {
@@ -191,7 +196,7 @@ var MenuFactory = class MenuFactory {
     }
   }
 
-  _pushShellApp(menu, app) {
+  static _pushShellApp(menu, app) {
     if (app && app.get_app_info().should_show()) {
       menu.items.push({
         name : app.get_name(),
@@ -201,27 +206,7 @@ var MenuFactory = class MenuFactory {
     }
   }
 
-  _pushWindow(menu, win, icon) {
-    if (win) {
-      menu.items.push({
-        name : win.get_title(),
-        icon : icon,
-        activate : () => win.activate(0 /*timestamp*/)
-      });
-    }
-  }
-
-  _pushRecentInfo(menu, info) {
-    if (info.exists()) {
-      menu.items.push({
-        name : info.get_display_name(),
-        icon : info.get_gicon().to_string(),
-        activate : () => this._openUri(info.get_uri())
-      });
-    }
-  }
-
-  _pushFileInfo(menu, file) {
+  static _pushFileInfo(menu, file) {
     menu.items.push({
       name : file.getName(),
       icon : file.getIcon(),
@@ -229,18 +214,18 @@ var MenuFactory = class MenuFactory {
     });
   }
 
-  _openUri(uri) {
+  // Uses the system's default application for opening the given URI.
+  static _openUri(uri) {
     let ctx = global.create_app_launch_context(0, -1);
-    // ctx.set_timestamp(global.get_current_time());
 
     try {
       Gio.AppInfo.launch_default_for_uri(uri, ctx);
     } catch (e) { Main.notifyError("Failed to open URI!", e.message); }
   }
 
-  _launchApp(app) {
+  // Launches the application described by the given Gio.AppInfo object.
+  static _launchApp(app) {
     let ctx = global.create_app_launch_context(0, -1);
-    // ctx.set_timestamp(global.get_current_time());
 
     try {
       app.launch([], ctx);
