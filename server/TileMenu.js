@@ -46,10 +46,10 @@ var TileMenu = class TileMenu {
     this._window.subMenuContainer = itemContainer;
     this._window.add_child(itemContainer);
 
-    this._background.actor.connect(
-      'button-release-event', (a, e) => this._onButtonRelease(a, e));
-    this._background.actor.connect(
-      'key-release-event', (a, e) => this._onKeyRelease(a, e));
+    this._background.actor.connect('button-release-event',
+                                   (a, e) => this._onButtonRelease(a, e));
+    this._background.actor.connect('key-release-event',
+                                   (a, e) => this._onKeyRelease(a, e));
     this._window.connect('button-release-event', (a, e) => this._onButtonRelease(a, e));
     this._openMenus = [];
     this._theme     = {};
@@ -88,11 +88,8 @@ var TileMenu = class TileMenu {
     // calculate window position
     let [pointerX, pointerY, mods] = global.get_pointer();
     let [posX, posY]               = this._clampToToMonitor(
-      pointerX - this._window.width / 2,
-      pointerY - this._window.height / 2,
-      this._window.width,
-      this._window.height,
-      this._theme.monitorPadding);
+        pointerX - this._window.width / 2, pointerY - this._window.height / 2,
+        this._window.width, this._window.height, this._theme.monitorPadding);
     this._window.set_position(posX, posY);
 
     // add an animation for the window scale
@@ -185,17 +182,22 @@ var TileMenu = class TileMenu {
   // ----------------------------------------------------------------------- private stuff
 
   _createMenuItems(parentItem, description, path) {
-    if (!description.items) { return; }
+    if (!description.items) {
+      return;
+    }
 
     let count = description.items.length;
     for (let i = 0; i < count; i++) {
 
-      let menu = new Clutter.Actor(
-        {width : this._theme.itemSize, height : this._theme.itemSize, reactive : false});
+      let menu = new Clutter.Actor({
+        width : this._theme.itemSize,
+        height : this._theme.itemSize,
+        reactive : false
+      });
 
       // create container for all submenu items ------------------------------------------
       let subMenuContainer =
-        new Clutter.Actor({x : this._theme.itemPadding, y : this._theme.itemPadding});
+          new Clutter.Actor({x : this._theme.itemPadding, y : this._theme.itemPadding});
 
       menu.add_child(subMenuContainer);
 
@@ -290,18 +292,24 @@ var TileMenu = class TileMenu {
 
   _getColumnCount(menu) {
     let count = menu.subMenus.length;
-    if (count == 0) { return 0; }
+    if (count == 0) {
+      return 0;
+    }
     return Math.ceil(Math.sqrt(count));
   }
 
   _getRowCount(menu) {
     let count = menu.subMenus.length;
-    if (count == 0) { return 0; }
+    if (count == 0) {
+      return 0;
+    }
     return Math.ceil(count / this._getColumnCount(menu));
   }
 
   _updateMenuItemPositions(menu) {
-    if (menu.subMenus.length == 0) { return; }
+    if (menu.subMenus.length == 0) {
+      return;
+    }
 
     let columns = this._getColumnCount(menu);
 
@@ -312,10 +320,10 @@ var TileMenu = class TileMenu {
       this._updateMenuItemPositions(menu.subMenus[i]);
 
       menu.subMenus[i].set_position(
-        (i % columns) * (this._theme.itemSize + this._theme.itemSpacing) +
-          this._theme.menuPadding,
-        (Math.floor(i / columns)) * (this._theme.itemSize + this._theme.itemSpacing) +
-          this._theme.menuPadding);
+          (i % columns) * (this._theme.itemSize + this._theme.itemSpacing) +
+              this._theme.menuPadding,
+          (Math.floor(i / columns)) * (this._theme.itemSize + this._theme.itemSpacing) +
+              this._theme.menuPadding);
     }
 
     // scale down sub menu items
@@ -330,8 +338,8 @@ var TileMenu = class TileMenu {
 
     let tween = function(actor, opacity) {
       if (actor) {
-        Tweener.addTween(
-          actor, {time : 0.5 * speed, transition : 'ease', opacity : opacity});
+        Tweener.addTween(actor,
+                         {time : 0.5 * speed, transition : 'ease', opacity : opacity});
       }
     };
 
@@ -361,9 +369,8 @@ var TileMenu = class TileMenu {
       });
     };
 
-    tween(
-      this._openMenus[0].subMenuContainer,
-      -this._theme.depthSpacing * (this._openMenus.length - 1));
+    tween(this._openMenus[0].subMenuContainer,
+          -this._theme.depthSpacing * (this._openMenus.length - 1));
 
     if (open) {
       tween(menu.subMenuContainer, this._theme.depthSpacing);
@@ -394,7 +401,9 @@ var TileMenu = class TileMenu {
   }
 
   _onItemClicked(menu, event) {
-    if (event.get_button() != 1) { return Clutter.EVENT_PROPAGATE; }
+    if (event.get_button() != 1) {
+      return Clutter.EVENT_PROPAGATE;
+    }
 
     let timer = new Timer();
 
@@ -406,7 +415,7 @@ var TileMenu = class TileMenu {
 
       let [worldX, worldY]     = menu.subMenuContainer.get_transformed_position();
       let [clampedX, clampedY] = this._clampToToMonitor(
-        worldX + offsetX, worldY + offsetY, width, height, this._theme.monitorPadding);
+          worldX + offsetX, worldY + offsetY, width, height, this._theme.monitorPadding);
 
       Tweener.addTween(menu.subMenuContainer, {
         time : 0.2 * this._theme.animationSpeed,
@@ -437,17 +446,20 @@ var TileMenu = class TileMenu {
   }
 
   _onButtonRelease(actor, event) {
-    if (
-      (actor == this._background.actor && event.get_button() == 1) ||
-      event.get_button() == 3) {
-      if (this._hideLevel()) { this._onCancel(); }
+    if ((actor == this._background.actor && event.get_button() == 1) ||
+        event.get_button() == 3) {
+      if (this._hideLevel()) {
+        this._onCancel();
+      }
     }
     return Clutter.EVENT_STOP;
   }
 
   _onKeyRelease(actor, event) {
     if (event.get_key_symbol() == Clutter.Escape) {
-      if (this._hideLevel()) { this._onCancel(); }
+      if (this._hideLevel()) {
+        this._onCancel();
+      }
     }
     return Clutter.EVENT_STOP;
   }

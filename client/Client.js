@@ -33,12 +33,11 @@ var Client = class Client {
 
   constructor() {
     let schema = Gio.SettingsSchemaSource.new_from_directory(
-      Me.dir.get_child('schemas').get_path(),
-      Gio.SettingsSchemaSource.get_default(),
-      false);
+        Me.dir.get_child('schemas').get_path(), Gio.SettingsSchemaSource.get_default(),
+        false);
 
     this._settings = new Gio.Settings(
-      {settings_schema : schema.lookup('org.gnome.shell.extensions.gnomepie2', true)});
+        {settings_schema : schema.lookup('org.gnome.shell.extensions.gnomepie2', true)});
 
     KeyBindings.bindShortcut(this._settings, "toggle-shortcut", () => this.toggle());
 
@@ -48,15 +47,13 @@ var Client = class Client {
     this._dbus = null;
 
     new DBusWrapper(
-      Gio.DBus.session,
-      'org.gnome.Shell',
-      '/org/gnome/shell/extensions/gnomepie2',
-      (proxy) => {
-        this._dbus = proxy;
-        this._dbus.connectSignal('OnSelect', (...args) => this._onSelect(...args));
-        this._dbus.connectSignal('OnHover', (...args) => this._onHover(...args));
-        this._dbus.connectSignal('OnCancel', (...args) => this._onCancel(...args));
-      });
+        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/gnomepie2',
+        (proxy) => {
+          this._dbus = proxy;
+          this._dbus.connectSignal('OnSelect', (...args) => this._onSelect(...args));
+          this._dbus.connectSignal('OnHover', (...args) => this._onHover(...args));
+          this._dbus.connectSignal('OnCancel', (...args) => this._onCancel(...args));
+        });
   }
 
   destroy() { KeyBindings.unbindShortcut("toggle-shortcut"); }
@@ -110,7 +107,9 @@ var Client = class Client {
         this._lastID = id;
         debug("Opened menu " + this._lastID);
       });
-    } catch (e) { debug(e.message); }
+    } catch (e) {
+      debug(e.message);
+    }
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -119,7 +118,9 @@ var Client = class Client {
   _onSelect(proxy, sender, [ id, path ]) {
 
     // For some reason it wasn't our menu.
-    if (this._lastID != id) { return; }
+    if (this._lastID != id) {
+      return;
+    }
 
     // The path is a string like /2/2/4 indicating that the fourth entry in the second
     // entry of the second entry was clicked on.
@@ -148,7 +149,9 @@ var Client = class Client {
   _onHover(proxy, sender, [ id, path ]) {
 
     // For some reason it wasn't our menu.
-    if (this._lastID != id) { return; }
+    if (this._lastID != id) {
+      return;
+    }
 
     debug('Hovering ' + path);
   }
@@ -157,7 +160,9 @@ var Client = class Client {
   _onCancel(proxy, sender, [ id ]) {
 
     // For some reason it wasn't our menu.
-    if (this._lastID != id) { return; }
+    if (this._lastID != id) {
+      return;
+    }
 
     debug('Canceled ' + id);
     this._lastID = -1;

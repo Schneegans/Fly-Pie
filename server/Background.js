@@ -57,10 +57,14 @@ var Background = class Background {
   // returned.
   show() {
     // The background is already active.
-    if (this.actor.reactive) { return true; }
+    if (this.actor.reactive) {
+      return true;
+    }
 
     // Something went wrong. Let's abort this.
-    if (!Main.pushModal(this.actor)) { return false; }
+    if (!Main.pushModal(this.actor)) {
+      return false;
+    }
 
     // Make the actor visible and clickable.
     this.actor.reactive = true;
@@ -76,7 +80,9 @@ var Background = class Background {
   // This hides the background again. The input will not be grabbed anymore.
   hide() {
     // The actor is not active. Nothing to be done.
-    if (!this.actor.reactive) { return; }
+    if (!this.actor.reactive) {
+      return;
+    }
 
     // Un-grab the input.
     Main.popModal(this.actor);

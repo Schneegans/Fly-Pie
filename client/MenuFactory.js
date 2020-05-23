@@ -50,7 +50,9 @@ var FileInfo = class FileInfo {
     try {
       let info = this._file.query_info("standard::icon", 0, null);
       return info.get_icon().to_string();
-    } catch (e) { return 'missing-image'; }
+    } catch (e) {
+      return 'missing-image';
+    }
   }
 
   // Returns a name for the file which can be presented to the user.
@@ -58,7 +60,9 @@ var FileInfo = class FileInfo {
     try {
       let info = this._file.query_info('standard::display-name', 0, null);
       return info.get_display_name();
-    } catch (e) { return this._file.get_basename(); }
+    } catch (e) {
+      return this._file.get_basename();
+    }
   }
 };
 
@@ -80,14 +84,10 @@ var MenuFactory = class MenuFactory {
     this._pushFileInfo(result, new FileInfo(Gio.File.new_for_path(GLib.get_home_dir())));
 
     const DEFAULT_DIRECTORIES = [
-      GLib.UserDirectory.DIRECTORY_DESKTOP,
-      GLib.UserDirectory.DIRECTORY_DOCUMENTS,
-      GLib.UserDirectory.DIRECTORY_DOWNLOAD,
-      GLib.UserDirectory.DIRECTORY_MUSIC,
-      GLib.UserDirectory.DIRECTORY_PICTURES,
-      GLib.UserDirectory.DIRECTORY_TEMPLATES,
-      GLib.UserDirectory.DIRECTORY_PUBLIC_SHARE,
-      GLib.UserDirectory.DIRECTORY_VIDEOS
+      GLib.UserDirectory.DIRECTORY_DESKTOP, GLib.UserDirectory.DIRECTORY_DOCUMENTS,
+      GLib.UserDirectory.DIRECTORY_DOWNLOAD, GLib.UserDirectory.DIRECTORY_MUSIC,
+      GLib.UserDirectory.DIRECTORY_PICTURES, GLib.UserDirectory.DIRECTORY_TEMPLATES,
+      GLib.UserDirectory.DIRECTORY_PUBLIC_SHARE, GLib.UserDirectory.DIRECTORY_VIDEOS
     ];
 
     for (let i = 0; i < DEFAULT_DIRECTORIES.length; ++i) {
@@ -167,8 +167,8 @@ var MenuFactory = class MenuFactory {
 
   // Returns an item containing the menu tree of all installed applications.
   static getAppMenuItems() {
-    let menu =
-      new GMenu.Tree({menu_basename : 'applications.menu', flags : GMenu.TreeFlags.NONE});
+    let menu = new GMenu.Tree(
+        {menu_basename : 'applications.menu', flags : GMenu.TreeFlags.NONE});
 
     menu.load_sync();
 
@@ -192,7 +192,9 @@ var MenuFactory = class MenuFactory {
       case GMenu.TreeItemType.ENTRY:
         let app  = iter.get_entry().get_app_info();
         let icon = "missing-image";
-        if (app.get_icon()) { icon = app.get_icon().to_string(); }
+        if (app.get_icon()) {
+          icon = app.get_icon().to_string();
+        }
         item = {
           name : app.get_name(),
           icon : icon,
@@ -249,7 +251,9 @@ var MenuFactory = class MenuFactory {
 
     try {
       Gio.AppInfo.launch_default_for_uri(uri, ctx);
-    } catch (e) { Main.notifyError("Failed to open URI!", e.message); }
+    } catch (e) {
+      Main.notifyError("Failed to open URI!", e.message);
+    }
   }
 
   // Launches the application described by the given Gio.AppInfo object.
@@ -258,6 +262,8 @@ var MenuFactory = class MenuFactory {
 
     try {
       app.launch([], ctx);
-    } catch (e) { Main.notifyError("Failed to launch app!", e.message); }
+    } catch (e) {
+      Main.notifyError("Failed to launch app!", e.message);
+    }
   }
 };

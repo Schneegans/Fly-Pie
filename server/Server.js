@@ -50,7 +50,9 @@ var Server = class Server {
   // This is directly called via the DBus. See common/DBusInterface.js for a description
   // of Gnome-Pie 2's DBusInterface.
   ShowMenu(description) {
-    if (this._currentID >= 0) { return -1; }
+    if (this._currentID >= 0) {
+      return -1;
+    }
 
     let menu;
 
@@ -75,8 +77,8 @@ var Server = class Server {
   // Called when the user selects an item in the menu. This calls the OnSelect signal of
   // the DBusInterface.
   _onSelect(item) {
-    this._dbus.emit_signal(
-      'OnSelect', GLib.Variant.new('(is)', [ this._currentID, item ]));
+    this._dbus.emit_signal('OnSelect',
+                           GLib.Variant.new('(is)', [ this._currentID, item ]));
     this._currentID = -1;
   }
 

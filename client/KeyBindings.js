@@ -26,14 +26,14 @@ var KeyBindings = class KeyBindings {
   // The settings parameter must be a Gio.Settings object.
   static bindShortcut(settings, key, func) {
     if (Main.wm.addKeybinding && Shell.ActionMode) // introduced in 3.16
-      Main.wm.addKeybinding(
-        key, settings, Meta.KeyBindingFlags.NONE, Shell.ActionMode.NORMAL, func);
+      Main.wm.addKeybinding(key, settings, Meta.KeyBindingFlags.NONE,
+                            Shell.ActionMode.NORMAL, func);
     else if (Main.wm.addKeybinding && Shell.KeyBindingMode) // introduced in 3.7.5
-      Main.wm.addKeybinding(
-        key, settings, Meta.KeyBindingFlags.NONE, Shell.KeyBindingMode.NORMAL, func);
+      Main.wm.addKeybinding(key, settings, Meta.KeyBindingFlags.NONE,
+                            Shell.KeyBindingMode.NORMAL, func);
     else if (Main.wm.addKeybinding && Main.KeybindingMode) // introduced in 3.7.2
-      Main.wm.addKeybinding(
-        key, settings, Meta.KeyBindingFlags.NONE, Main.KeybindingMode.NORMAL, func);
+      Main.wm.addKeybinding(key, settings, Meta.KeyBindingFlags.NONE,
+                            Main.KeybindingMode.NORMAL, func);
     else
       global.display.add_keybinding(key, settings, Meta.KeyBindingFlags.NONE, func);
   }

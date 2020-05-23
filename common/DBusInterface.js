@@ -41,18 +41,18 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var DBusInterface =
-  '<node>                                                                                \
-    <interface name="org.gnome.Shell.Extensions.GnomePie2">                              \
-        <method name="ShowMenu">                                                         \
-          <arg name="description" type="s" direction="in"/>                              \
-          <arg name="id" type="i" direction="out"/>                                      \
-        </method>                                                                        \
-        <signal name="OnSelect">                                                         \
-            <arg type="i" name="id"/>                                                    \
-            <arg type="s" name="path"/>                                                  \
-        </signal>                                                                        \
-        <signal name="OnCancel">                                                         \
-            <arg type="i" name="id"/>                                                    \
-        </signal>                                                                        \
-    </interface>                                                                         \
-  </node>';
+    '<node>                                                                              \
+      <interface name="org.gnome.Shell.Extensions.GnomePie2">                            \
+          <method name="ShowMenu">                                                       \
+            <arg name="description" type="s" direction="in"/>                            \
+            <arg name="id" type="i" direction="out"/>                                    \
+          </method>                                                                      \
+          <signal name="OnSelect">                                                       \
+              <arg type="i" name="id"/>                                                  \
+              <arg type="s" name="path"/>                                                \
+          </signal>                                                                      \
+          <signal name="OnCancel">                                                       \
+              <arg type="i" name="id"/>                                                  \
+          </signal>                                                                      \
+      </interface>                                                                       \
+    </node>';
