@@ -32,3 +32,9 @@ function debug(message) {
 
   log('[' + stack[0].slice(extensionRoot) + '] ' + message);
 }
+
+function logProperties(object) {
+  for (let element in object) {
+    debug(`${element} [${typeof (object[element])}]`);
+  }
+}

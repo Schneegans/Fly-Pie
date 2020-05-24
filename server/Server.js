@@ -11,17 +11,14 @@
 
 const Gio            = imports.gi.Gio;
 const GLib           = imports.gi.GLib;
-const Main           = imports.ui.main;
 const ExtensionUtils = imports.misc.extensionUtils;
 
-const Me = ExtensionUtils.getCurrentExtension();
-
+const Me            = ExtensionUtils.getCurrentExtension();
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
-const debug         = Me.imports.common.debug.debug;
-const TileMenu      = Me.imports.server.TileMenu.TileMenu;
+const Menu          = Me.imports.server.Menu.Menu;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The server listens on the DBus for requests. For details on the interface refer to   //
+// The server listens on the D-Bus for requests. For details on the interface refer to  //
 // common/DBusInterface.js. When a valid request is received, an menu is shown          //
 // accordingly.                                                                         //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -31,13 +28,30 @@ var Server = class Server {
   // ------------------------------------------------------------ constructor / destructor
 
   constructor() {
-    this._dbus = Gio.DBusExportedObject.wrapJSObject(DBusInterface, this);
+
+    // Make the ShowMenu() method available on the D-Bus.
+    this._dbus = Gio.DBusExportedObject.wrapJSObject(DBusInterface.description, this);
     this._dbus.export(Gio.DBus.session, '/org/gnome/shell/extensions/gnomepie2');
 
-    this._menu = new TileMenu((item) => this._onSelect(item), () => this._onCancel());
+    // Initialize the menu.
+    this._menu = new Menu(
+        // Called when the user hovers over an item in the menu. This calls the
+        // OnHover signal of the DBusInterface.
+        (menuID, item) =>
+            this._dbus.emit_signal('OnHover', GLib.Variant.new('(is)', [menuID, item])),
 
-    this._nextID    = 0;
-    this._currentID = -1;
+        // Called when the user selects an item in the menu. This calls the OnSelect
+        // signal of the DBusInterface.
+        (menuID, item) =>
+            this._dbus.emit_signal('OnSelect', GLib.Variant.new('(is)', [menuID, item])),
+
+        // Called when the user does no select anything in the menu. This calls the
+        // OnCancel signal of the DBusInterface.
+        (menuID) =>
+            this._dbus.emit_signal('OnCancel', GLib.Variant.new('(i)', [menuID])));
+
+    // This is increased once for every menu request.
+    this._nextID = 0;
   }
 
   destroy() {
@@ -49,43 +63,19 @@ var Server = class Server {
 
   // This is directly called via the DBus. See common/DBusInterface.js for a description
   // of Gnome-Pie 2's DBusInterface.
-  ShowMenu(description) {
-    if (this._currentID >= 0) {
-      return -1;
-    }
+  ShowMenu(json) {
 
-    let menu;
-
+    // Try to parse the menu description.
+    let description;
     try {
-      menu = JSON.parse(description);
+      description = JSON.parse(json);
     } catch (error) {
-      debug('Failed to parse menu: ' + error);
-      return -1;
+      logError(error);
+      return DBusInterface.errorCodes.eInvalidJSON;
     }
 
-    if (!this._menu.show(menu)) {
-      debug('Failed to show menu!');
-      return -1;
-    }
-
-    this._currentID = this._nextID++;
-    return this._currentID;
-  }
-
-  // ----------------------------------------------------------------------- private stuff
-
-  // Called when the user selects an item in the menu. This calls the OnSelect signal of
-  // the DBusInterface.
-  _onSelect(item) {
-    this._dbus.emit_signal('OnSelect',
-                           GLib.Variant.new('(is)', [ this._currentID, item ]));
-    this._currentID = -1;
-  }
-
-  // Called when the user does no select anything in the menu. This calls the OnCancel
-  // signal of the DBusInterface.
-  _onCancel() {
-    this._dbus.emit_signal('OnCancel', GLib.Variant.new('(i)', [ this._currentID ]));
-    this._currentID = -1;
+    // Try to open the menu. This will return the menu's ID on success or an error
+    // code on failure. See common/DBusInterface.js for a list of error codes.
+    return this._menu.show(this._nextID++, description);
   }
 };

@@ -18,17 +18,19 @@
 //      'name':'Item Title 1',                                                          //
 //      'icon':'icon-name-or-path',                                                     //
 //      'items':[{                                                                      //
-//          'name':'Item Title 11',                                                     //
-//          'icon':'icon-name-or-path'                                                  //
+//          'name':  'Item Title 11',                                                   //
+//          'angle': 90,                                                                //
+//          'icon':  'icon-name-or-path'                                                //
 //        },{                                                                           //
-//          'name':'Item Title 12',                                                     //
-//          'icon':'icon-name-or-path'                                                  //
+//          'name':  'Item Title 12',                                                   //
+//          'angle': 270,                                                               //
+//          'icon':  'icon-name-or-path'                                                //
 //      }]},{                                                                           //
-//        'name':'Item Title 2',                                                        //
-//        'icon':'icon-name-or-path'                                                    //
+//        'name': 'Item Title 2',                                                       //
+//        'icon': 'icon-name-or-path'                                                   //
 //      },{                                                                             //
-//        'name':'Item Title 3',                                                        //
-//        'icon':'icon-name-or-path'                                                    //
+//        'name': 'Item Title 3',                                                       //
+//        'icon': 'icon-name-or-path'                                                   //
 //      }]                                                                              //
 //    }                                                                                 //
 //                                                                                      //
@@ -40,9 +42,10 @@
 // OnSelect sends the path to the selected item. Like this: '/0/1'                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var DBusInterface =
-    '<node>                                                                              \
-      <interface name="org.gnome.Shell.Extensions.GnomePie2">                            \
+var DBusInterface = {
+  description:
+      '<node>                                                                            \
+        <interface name="org.gnome.Shell.Extensions.GnomePie2">                          \
           <method name="ShowMenu">                                                       \
             <arg name="description" type="s" direction="in"/>                            \
             <arg name="id" type="i" direction="out"/>                                    \
@@ -55,4 +58,11 @@ var DBusInterface =
               <arg type="i" name="id"/>                                                  \
           </signal>                                                                      \
       </interface>                                                                       \
-    </node>';
+    </node>',
+  errorCodes: {
+    eUnknownError: -1,   // An unknown error occurred.
+    eAlreadyActive: -2,  // A menu is already opened; try again later.
+    eInvalidJSON: -3,    // The provided menu description was not valid JSON.
+    eInvalidAngles: -4   // The angles of the items did not follow the rules above.
+  }
+};

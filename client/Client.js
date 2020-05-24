@@ -19,7 +19,7 @@ const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const KeyBindings   = Me.imports.client.KeyBindings.KeyBindings;
 const MenuFactory   = Me.imports.client.MenuFactory.MenuFactory;
 
-const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
+const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Client sends ShowMenu-requests requests over the D-Bus to the Server. It listens //
@@ -28,7 +28,6 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface);
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var Client = class Client {
-
   // ------------------------------------------------------------ constructor / destructor
 
   constructor() {
@@ -37,9 +36,9 @@ var Client = class Client {
         false);
 
     this._settings = new Gio.Settings(
-        {settings_schema : schema.lookup('org.gnome.shell.extensions.gnomepie2', true)});
+        {settings_schema: schema.lookup('org.gnome.shell.extensions.gnomepie2', true)});
 
-    KeyBindings.bindShortcut(this._settings, "toggle-shortcut", () => this.toggle());
+    KeyBindings.bindShortcut(this._settings, 'toggle-shortcut', () => this.toggle());
 
     this._lastID = -1;
 
@@ -56,7 +55,9 @@ var Client = class Client {
         });
   }
 
-  destroy() { KeyBindings.unbindShortcut("toggle-shortcut"); }
+  destroy() {
+    KeyBindings.unbindShortcut('toggle-shortcut');
+  }
 
   // -------------------------------------------------------------------- public interface
 
@@ -73,21 +74,7 @@ var Client = class Client {
       return;
     }
 
-    // this._lastMenu = {
-    //   "items" : [
-    //     {"name" : "Foo", "icon" : "terminal"},
-    //     {
-    //       "name" : "Applications",
-    //       "icon" : "applications-system",
-    //       "items" : [
-    //         {"name" : "Gedit", "icon" : "gedit"},
-    //         {"name" : "Terminal", "icon" : "firefox"},
-    //         {"name" : "Nautilus", "icon" : "cheese"}
-    //       ]
-    //     }
-    //   ]
-    // };
-    this._lastMenu = {items : []};
+    this._lastMenu = {items: []};
     this._lastMenu.items.push(MenuFactory.getAppMenuItems());
     this._lastMenu.items.push(MenuFactory.getUserDirectoriesItems());
     this._lastMenu.items.push(MenuFactory.getRecentItems());
@@ -95,9 +82,11 @@ var Client = class Client {
     this._lastMenu.items.push(MenuFactory.getFrequentItems());
     this._lastMenu.items.push(MenuFactory.getRunningAppsItems());
     this._lastMenu.items.push({
-      name : "Test",
-      icon : "/home/simon/Pictures/Eigene/avatar128.png",
-      activate : function() { debug("Test!"); }
+      name: 'Test',
+      icon: '/home/simon/Pictures/Eigene/avatar128.png',
+      activate: function() {
+        debug('Test!');
+      }
     });
 
     try {
@@ -105,7 +94,7 @@ var Client = class Client {
       // returned menu ID.
       this._dbus.ShowMenuRemote(JSON.stringify(this._lastMenu), (id) => {
         this._lastID = id;
-        debug("Opened menu " + this._lastID);
+        debug('Opened menu ' + this._lastID);
       });
     } catch (e) {
       debug(e.message);
@@ -115,8 +104,7 @@ var Client = class Client {
   // ----------------------------------------------------------------------- private stuff
 
   // This gets called once the user made a selection in the menu.
-  _onSelect(proxy, sender, [ id, path ]) {
-
+  _onSelect(proxy, sender, [id, path]) {
     // For some reason it wasn't our menu.
     if (this._lastID != id) {
       return;
@@ -146,8 +134,7 @@ var Client = class Client {
 
   // This gets called when the user hovers over an item, potentially selecting it. This
   // could be used to preview something, but we do not use it here.
-  _onHover(proxy, sender, [ id, path ]) {
-
+  _onHover(proxy, sender, [id, path]) {
     // For some reason it wasn't our menu.
     if (this._lastID != id) {
       return;
@@ -157,8 +144,7 @@ var Client = class Client {
   }
 
   // This gets called when the user did not select anything in the menu.
-  _onCancel(proxy, sender, [ id ]) {
-
+  _onCancel(proxy, sender, [id]) {
     // For some reason it wasn't our menu.
     if (this._lastID != id) {
       return;
