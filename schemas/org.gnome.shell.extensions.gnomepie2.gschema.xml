@@ -1,16 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-
   <schema path="/org/gnome/shell/extensions/gnomepie2/" id="org.gnome.shell.extensions.gnomepie2">
+
+    <!-- Client settings -->
 
     <key name="toggle-shortcut" type="as">
       <default><![CDATA[['F12']]]></default>
-      <summary>An internal key that must not be changed manually</summary>
-      <description>
-        'Above_Tab' is displayed as 'Disabled' in a GtkCellRendererAccel and that really looks bad.
-        This is why there is this special key which is the final, real shortcut used, and which is not displayed
-        in the preferences UI.
-      </description>
+      <summary>Menu hotkey</summary>
+      <description>This opens the testing menu.</description>
+    </key>
+
+    <!-- Server settings -->
+
+    <key name="background-color" type="s">
+      <default>"rgba(0, 0, 0, 0.2)"</default>
+      <summary>Background Color</summary>
+      <description>The color of the menu backdrop.</description>
+    </key>
+
+    <key name="menu-color" type="s">
+      <default>"rgb(200, 200, 200)"</default>
+      <summary>Menu Color</summary>
+      <description>The color of the menu.</description>
+    </key>
+
+    <key name="text-color" type="s">
+      <default>"rgb(0, 0, 0)"</default>
+      <summary>Text Color</summary>
+      <description>The color of the menu text.</description>
+    </key>
+
+    <key name="global-scale" type="d">
+      <default>1.0</default>
+      <summary>Global Scale</summary>
+      <description>A global scale factor for the menu.</description>
+    </key>
+
+    <key name="center-size" type="i">
+      <default>100</default>
+      <summary>Center Size</summary>
+      <description>The size of the center element in pixels.</description>
+    </key>
+
+    <key name="center-icon-scale" type="d">
+      <default>0.7</default>
+      <summary>Center Icon Scale</summary>
+      <description>A scale factor for the center icon.</description>
+    </key>
+
+    <key name="child-size" type="i">
+      <default>50</default>
+      <summary>Child Size</summary>
+      <description>The size of the children elements in pixels.</description>
+    </key>
+
+    <key name="child-offset" type="i">
+      <default>100</default>
+      <summary>Child Offset</summary>
+      <description>The offset of the children elements in pixels.</description>
+    </key>
+
+    <key name="child-icon-scale" type="d">
+      <default>0.9</default>
+      <summary>Child Icon Scale</summary>
+      <description>A scale factor for child icons.</description>
+    </key>
+
+    <key name="grandchild-size" type="i">
+      <default>10</default>
+      <summary>grandChild Size</summary>
+      <description>The size of the grandchildren elements in pixels.</description>
+    </key>
+
+    <key name="grandchild-offset" type="i">
+      <default>25</default>
+      <summary>Grandchild Offset</summary>
+      <description>The offset of the grandchildren elements in pixels.</description>
     </key>
 
   </schema>

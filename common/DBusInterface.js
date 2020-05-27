@@ -60,9 +60,10 @@ var DBusInterface = {
       </interface>                                                                       \
     </node>',
   errorCodes: {
-    eUnknownError: -1,   // An unknown error occurred.
-    eAlreadyActive: -2,  // A menu is already opened; try again later.
-    eInvalidJSON: -3,    // The provided menu description was not valid JSON.
-    eInvalidAngles: -4   // The angles of the items did not follow the rules above.
+    eUnknownError: -1,     // An unknown error occurred.
+    eAlreadyActive: -2,    // A menu is already opened; try again later.
+    eInvalidJSON: -3,      // The provided menu description was no valid JSON.
+    ePropertyMissing: -4,  // The provided menu description lacks required properties.
+    eInvalidAngles: -5     // The angles of the items did not follow the rules above.
   }
 };

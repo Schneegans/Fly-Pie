@@ -9,7 +9,8 @@
 
 'use strict';
 
-const Me = imports.misc.extensionUtils.getCurrentExtension();
+const GLib = imports.gi.GLib;
+const Me   = imports.misc.extensionUtils.getCurrentExtension();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This method can be used to write a message to Gnome-Shell's log. This is enhances    //
@@ -22,8 +23,7 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 function debug(message) {
   let stack = new Error().stack.split('\n');
 
-  // Remove superfluous function calls on stack.
-  stack.shift();
+  // Remove debug() function call from stack.
   stack.shift();
 
   // Find the index of the extension directory (e.g. gnomepie2@code.simonschneegans.de) in
@@ -32,6 +32,22 @@ function debug(message) {
 
   log('[' + stack[0].slice(extensionRoot) + '] ' + message);
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Especially the code in prefs.js is hard to debug, as the information is nowhere to   //
+// be found. This method can be used to get at least some idea what is going on...      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+function notification(message) {
+  GLib.spawn_async(
+      null, ['/usr/bin/notify-send', '-u', 'low', 'Gnome-Pie 2', message], null,
+      GLib.SpawnFlags.DO_NOT_REAP_CHILD, null);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// This can be used to print all properties of an object. Can be helpful if             //
+// documentation is sparse or outdated...                                               //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 function logProperties(object) {
   for (let element in object) {

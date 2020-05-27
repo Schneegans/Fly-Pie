@@ -16,19 +16,22 @@ const ExtensionUtils = imports.misc.extensionUtils;
 const Me             = ExtensionUtils.getCurrentExtension();
 const debug          = Me.imports.common.debug.debug;
 
-// Returns a representative average Clutter.Color for a given Gio.Icon. The alpha value
-// will always be 255. This is based on code from the original Gnome-Pie.
+//////////////////////////////////////////////////////////////////////////////////////////
+// Returns a representative average Clutter.Color for a given Gio.Icon. The alpha value //
+// will always be 255. This is based on code from the original Gnome-Pie.               //
+//////////////////////////////////////////////////////////////////////////////////////////
+
 function getIconColor(icon) {
   let theme = Gtk.IconTheme.get_default();
   let info  = theme.lookup_by_gicon(icon, 24, Gtk.IconLookupFlags.FORCE_SIZE);
 
   if (info == null) {
-    debug("Failed to find icon " + icon.to_string() + "! Using default...");
-    info = theme.lookup_icon("image-missing", 24, Gtk.IconLookupFlags.FORCE_SIZE);
+    debug('Failed to find icon ' + icon.to_string() + '! Using default...');
+    info = theme.lookup_icon('image-missing', 24, Gtk.IconLookupFlags.FORCE_SIZE);
 
     if (info == null) {
-      debug("Failed to find default icon!");
-      return new Clutter.Color({red : 255, green : 255, blue : 255, alpha : 255});
+      debug('Failed to find default icon!');
+      return new Clutter.Color({red: 255, green: 255, blue: 255, alpha: 255});
     }
   }
 
@@ -55,9 +58,19 @@ function getIconColor(icon) {
   }
 
   return new Clutter.Color({
-    red : rTotal / total * 255,
-    green : gTotal / total * 255,
-    blue : bTotal / total * 255,
-    alpha : 255
+    red: rTotal / total * 255,
+    green: gTotal / total * 255,
+    blue: bTotal / total * 255,
+    alpha: 255
   });
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// This rounds the given number to the nearest multiple of base. This works for integer //
+// and floating point values and both for positive and negative numbers.                //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+function roundToMultiple(number, base) {
+  return ((number % base) > base / 2) ? number + base - number % base :
+                                        number - number % base;
 }

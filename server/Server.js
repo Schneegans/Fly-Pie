@@ -65,10 +65,10 @@ var Server = class Server {
   // of Gnome-Pie 2's DBusInterface.
   ShowMenu(json) {
 
-    // Try to parse the menu description.
-    let description;
+    // Try to parse the menu structure.
+    let structure;
     try {
-      description = JSON.parse(json);
+      structure = JSON.parse(json);
     } catch (error) {
       logError(error);
       return DBusInterface.errorCodes.eInvalidJSON;
@@ -76,6 +76,12 @@ var Server = class Server {
 
     // Try to open the menu. This will return the menu's ID on success or an error
     // code on failure. See common/DBusInterface.js for a list of error codes.
-    return this._menu.show(this._nextID++, description);
+    try {
+      return this._menu.show(this._nextID++, structure);
+    } catch (error) {
+      logError(error);
+    }
+
+    return DBusInterface.errorCodes.eUnknownError;
   }
 };

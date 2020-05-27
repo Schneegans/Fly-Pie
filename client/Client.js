@@ -74,7 +74,7 @@ var Client = class Client {
       return;
     }
 
-    this._lastMenu = {items: []};
+    this._lastMenu = {icon: 'firefox', name: 'Main Menu', items: []};
     this._lastMenu.items.push(MenuFactory.getAppMenuItems());
     this._lastMenu.items.push(MenuFactory.getUserDirectoriesItems());
     this._lastMenu.items.push(MenuFactory.getRecentItems());
@@ -90,11 +90,17 @@ var Client = class Client {
     });
 
     try {
-      // Open the menu on the server side. Once this is done sucessfully, we store the
+      // Open the menu on the server side. Once this is done successfully, we store the
       // returned menu ID.
       this._dbus.ShowMenuRemote(JSON.stringify(this._lastMenu), (id) => {
-        this._lastID = id;
-        debug('Opened menu ' + this._lastID);
+        if (id) {
+          if (id >= 0) {
+            this._lastID = id;
+            debug('Opened menu ' + this._lastID);
+          } else {
+            Main.notifyError('Failed to open a Gnome-Pie 2 menu!');
+          }
+        }
       });
     } catch (e) {
       debug(e.message);
