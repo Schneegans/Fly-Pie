@@ -9,11 +9,9 @@
 
 'use strict';
 
-const Gio            = imports.gi.Gio;
-const GLib           = imports.gi.GLib;
-const ExtensionUtils = imports.misc.extensionUtils;
+const {Gio, GLib} = imports.gi;
 
-const Me            = ExtensionUtils.getCurrentExtension();
+const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const Menu          = Me.imports.server.Menu.Menu;
 
@@ -61,10 +59,19 @@ var Server = class Server {
 
   // -------------------------------------------------------------------- public interface
 
-  // This is directly called via the DBus. See common/DBusInterface.js for a description
+  // These are directly called via the DBus. See common/DBusInterface.js for a description
   // of Gnome-Pie 2's DBusInterface.
   ShowMenu(json) {
+    return this._openMenu(json, false);
+  }
 
+  EditMenu(json) {
+    return this._openMenu(json, true);
+  }
+
+  // ----------------------------------------------------------------------- private stuff
+
+  _openMenu(json, editMode) {
     // Try to parse the menu structure.
     let structure;
     try {
@@ -77,7 +84,7 @@ var Server = class Server {
     // Try to open the menu. This will return the menu's ID on success or an error
     // code on failure. See common/DBusInterface.js for a list of error codes.
     try {
-      return this._menu.show(this._nextID++, structure);
+      return this._menu.show(this._nextID++, structure, editMode);
     } catch (error) {
       logError(error);
     }

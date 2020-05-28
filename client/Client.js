@@ -9,11 +9,10 @@
 
 'use strict';
 
-const Gio            = imports.gi.Gio;
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me             = ExtensionUtils.getCurrentExtension();
+const Gio = imports.gi.Gio;
 
-const debug         = Me.imports.common.debug.debug;
+const Me            = imports.misc.extensionUtils.getCurrentExtension();
+const utils         = Me.imports.common.utils;
 const Timer         = Me.imports.common.Timer.Timer;
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const KeyBindings   = Me.imports.client.KeyBindings.KeyBindings;
@@ -64,13 +63,13 @@ var Client = class Client {
   toggle() {
     // We cannot open a menu when not connected to the D-Bus.
     if (!this._dbus) {
-      debug('Not connected to the D-Bus.');
+      utils.debug('Not connected to the D-Bus.');
       return;
     }
 
     // We already have a pending request.
     if (this._lastID >= 0) {
-      debug('A menu is already opened.');
+      utils.debug('A menu is already opened.');
       return;
     }
 
@@ -85,25 +84,25 @@ var Client = class Client {
       name: 'Test',
       icon: '/home/simon/Pictures/Eigene/avatar128.png',
       activate: function() {
-        debug('Test!');
+        utils.debug('Test!');
       }
     });
 
     try {
       // Open the menu on the server side. Once this is done successfully, we store the
       // returned menu ID.
-      this._dbus.ShowMenuRemote(JSON.stringify(this._lastMenu), (id) => {
+      this._dbus.EditMenuRemote(JSON.stringify(this._lastMenu), (id) => {
         if (id) {
           if (id >= 0) {
             this._lastID = id;
-            debug('Opened menu ' + this._lastID);
+            utils.debug('Opened menu ' + this._lastID);
           } else {
             Main.notifyError('Failed to open a Gnome-Pie 2 menu!');
           }
         }
       });
     } catch (e) {
-      debug(e.message);
+      utils.debug(e.message);
     }
   }
 
@@ -120,10 +119,10 @@ var Client = class Client {
     // entry of the second entry was clicked on.
     let pathElements = path.split('/');
 
-    debug('OnSelect ' + path);
+    utils.debug('OnSelect ' + path);
 
     if (pathElements.length < 2) {
-      debug('The server reported an impossible selection!');
+      utils.debug('The server reported an impossible selection!');
     }
 
     // Now follow the path in our menu structure.
@@ -146,7 +145,7 @@ var Client = class Client {
       return;
     }
 
-    debug('Hovering ' + path);
+    utils.debug('Hovering ' + path);
   }
 
   // This gets called when the user did not select anything in the menu.
@@ -156,7 +155,7 @@ var Client = class Client {
       return;
     }
 
-    debug('Canceled ' + id);
+    utils.debug('Canceled ' + id);
     this._lastID = -1;
   }
 };

@@ -9,16 +9,12 @@
 
 'use strict';
 
-const Cairo   = imports.cairo;
-const Clutter = imports.gi.Clutter;
-const Gio     = imports.gi.Gio;
-const GObject = imports.gi.GObject;
-const St      = imports.gi.St;
+const Cairo                       = imports.cairo;
+const {Clutter, Gio, GObject, St} = imports.gi;
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me             = ExtensionUtils.getCurrentExtension();
-const debug          = Me.imports.common.debug.debug;
-const Theme          = Me.imports.server.Theme.Theme;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.common.utils;
+const Theme = Me.imports.server.Theme.Theme;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////

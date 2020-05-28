@@ -9,9 +9,8 @@
 
 'use strict';
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me             = ExtensionUtils.getCurrentExtension();
-const debug          = Me.imports.common.debug.debug;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This can be used for some basic profiling by measuring roughly the time some parts   //
@@ -22,18 +21,24 @@ var Timer = class Timer {
 
   // -------------------------------------------------------------------- public interface
 
-  constructor() { this.reset(); }
+  constructor() {
+    this.reset();
+  }
 
   // Returns the time in milliseconds since the last time reset() was called.
-  getElapsed() { return Date.now() - this._now; }
+  getElapsed() {
+    return Date.now() - this._now;
+  }
 
   // Stores the current date for future getElapsed() calls.
-  reset() { this._now = Date.now(); }
+  reset() {
+    this._now = Date.now();
+  }
 
   // Prints the given message together with the time since the last call to reset() or
   // printElapsedAndReset().
   printElapsedAndReset(message) {
-    debug(message + ": " + this.getElapsed() + " ms");
+    utils.debug(message + ': ' + this.getElapsed() + ' ms');
     this.reset();
   }
 };

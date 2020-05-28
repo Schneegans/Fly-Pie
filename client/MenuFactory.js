@@ -9,17 +9,10 @@
 
 'use strict';
 
-const Gtk            = imports.gi.Gtk;
-const ExtensionUtils = imports.misc.extensionUtils;
-const Main           = imports.ui.main;
-const Gio            = imports.gi.Gio;
-const Shell          = imports.gi.Shell;
-const GLib           = imports.gi.GLib;
-const GMenu          = imports.gi.GMenu;
+const Main                           = imports.ui.main;
+const {Gtk, Gio, Shell, GLib, GMenu} = imports.gi;
 
-const Me = ExtensionUtils.getCurrentExtension();
-
-const debug = Me.imports.common.debug.debug;
+const Me = imports.misc.extensionUtils.getCurrentExtension();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This is a small helper class for adding menu items for files to the menus created by //
@@ -30,7 +23,9 @@ var FileInfo = class FileInfo {
 
   // ------------------------------------------------------------ constructor / destructor
 
-  constructor(file) { this._file = file; }
+  constructor(file) {
+    this._file = file;
+  }
 
   // -------------------------------------------------------------------- public interface
 
@@ -41,14 +36,14 @@ var FileInfo = class FileInfo {
     try {
       Gio.AppInfo.launch_default_for_uri(this._file.get_uri(), launchContext);
     } catch (e) {
-      Main.notifyError("Failed to open \"%s\"".format(this.name), e.message);
+      Main.notifyError('Failed to open "%s"'.format(this.name), e.message);
     }
   }
 
   // Returns a string representation for an icon representing this file.
   getIcon() {
     try {
-      let info = this._file.query_info("standard::icon", 0, null);
+      let info = this._file.query_info('standard::icon', 0, null);
       return info.get_icon().to_string();
     } catch (e) {
       return 'missing-image';
@@ -79,7 +74,7 @@ var MenuFactory = class MenuFactory {
   // Returns an item with entries for each user directory. Like Home, Desktop, Download,
   // Videos and so on.
   static getUserDirectoriesItems() {
-    let result = {name : "Places", icon : "system-file-manager", items : []};
+    let result = {name: 'Places', icon: 'system-file-manager', items: []};
 
     this._pushFileInfo(result, new FileInfo(Gio.File.new_for_path(GLib.get_home_dir())));
 
@@ -102,14 +97,14 @@ var MenuFactory = class MenuFactory {
   // Gtk.RecentManager.
   static getRecentItems() {
     let recentFiles = Gtk.RecentManager.get_default().get_items();
-    let result      = {name : "Recent", icon : "document-open-recent", items : []};
+    let result      = {name: 'Recent', icon: 'document-open-recent', items: []};
 
     recentFiles.forEach(recentFile => {
       if (recentFile.exists()) {
         result.items.push({
-          name : recentFile.get_display_name(),
-          icon : recentFile.get_gicon().to_string(),
-          activate : () => this._openUri(recentFile.get_uri())
+          name: recentFile.get_display_name(),
+          icon: recentFile.get_gicon().to_string(),
+          activate: () => this._openUri(recentFile.get_uri())
         });
       }
     });
@@ -121,7 +116,7 @@ var MenuFactory = class MenuFactory {
   // Gnome-Shell.
   static getFavoriteItems() {
     let apps   = global.settings.get_strv('favorite-apps');
-    let result = {name : "Favorites", icon : "emblem-favorite", items : []};
+    let result = {name: 'Favorites', icon: 'emblem-favorite', items: []};
 
     for (let i = 0; i < apps.length; ++i) {
       let app = Shell.AppSystem.get_default().lookup_app(apps[i]);
@@ -135,7 +130,7 @@ var MenuFactory = class MenuFactory {
   // Gnome-Shell.
   static getFrequentItems() {
     let apps   = Shell.AppUsage.get_default().get_most_used();
-    let result = {name : "Frequently Used", icon : "emblem-default", items : []};
+    let result = {name: 'Frequently Used', icon: 'emblem-default', items: []};
 
     for (let i = 0; i < apps.length; ++i) {
       this._pushShellApp(result, apps[i]);
@@ -148,16 +143,16 @@ var MenuFactory = class MenuFactory {
   // the corresponding app to the foreground. Like Alt-Tab.
   static getRunningAppsItems() {
     let apps   = Shell.AppSystem.get_default().get_running();
-    let result = {name : "Running Apps", icon : "preferences-system-windows", items : []};
+    let result = {name: 'Running Apps', icon: 'preferences-system-windows', items: []};
 
     for (let i = 0; i < apps.length; ++i) {
       let windows = apps[i].get_windows();
       let icon    = apps[i].get_app_info().get_icon().to_string();
       windows.forEach(window => {
         result.items.push({
-          name : window.get_title(),
-          icon : icon,
-          activate : () => window.activate(0 /*timestamp*/)
+          name: window.get_title(),
+          icon: icon,
+          activate: () => window.activate(0 /*timestamp*/)
         });
       });
     }
@@ -167,12 +162,12 @@ var MenuFactory = class MenuFactory {
 
   // Returns an item containing the menu tree of all installed applications.
   static getAppMenuItems() {
-    let menu = new GMenu.Tree(
-        {menu_basename : 'applications.menu', flags : GMenu.TreeFlags.NONE});
+    let menu =
+        new GMenu.Tree({menu_basename: 'applications.menu', flags: GMenu.TreeFlags.NONE});
 
     menu.load_sync();
 
-    let result = {name : "Applications", icon : "applications-system", items : []};
+    let result = {name: 'Applications', icon: 'applications-system', items: []};
 
     this._pushMenuItems(result, menu.get_root_directory());
 
@@ -188,37 +183,33 @@ var MenuFactory = class MenuFactory {
     while ((nodeType = iter.next()) !== GMenu.TreeItemType.INVALID) {
       switch (nodeType) {
 
-      // Add an item for each application.
-      case GMenu.TreeItemType.ENTRY:
-        let app  = iter.get_entry().get_app_info();
-        let icon = "missing-image";
-        if (app.get_icon()) {
-          icon = app.get_icon().to_string();
-        }
-        item = {
-          name : app.get_name(),
-          icon : icon,
-          activate : () => this._launchApp(app)
-        };
-        menu.items.push(item);
-        break;
+        // Add an item for each application.
+        case GMenu.TreeItemType.ENTRY:
+          let app  = iter.get_entry().get_app_info();
+          let icon = 'missing-image';
+          if (app.get_icon()) {
+            icon = app.get_icon().to_string();
+          }
+          item = {name: app.get_name(), icon: icon, activate: () => this._launchApp(app)};
+          menu.items.push(item);
+          break;
 
-      // Recursively add child items to directories.
-      case GMenu.TreeItemType.DIRECTORY:
-        let directory = iter.get_directory();
-        item          = {
-          name : directory.get_name(),
-          icon : directory.get_icon().to_string(),
-          items : []
-        };
+        // Recursively add child items to directories.
+        case GMenu.TreeItemType.DIRECTORY:
+          let directory = iter.get_directory();
+          item          = {
+            name: directory.get_name(),
+            icon: directory.get_icon().to_string(),
+            items: []
+          };
 
-        this._pushMenuItems(item, directory);
-        menu.items.push(item);
-        break;
+          this._pushMenuItems(item, directory);
+          menu.items.push(item);
+          break;
 
-      // SEPARATOR, HEADER, ALIAS. skip for now.
-      default:
-        break;
+        // SEPARATOR, HEADER, ALIAS. skip for now.
+        default:
+          break;
       }
     }
   }
@@ -228,9 +219,9 @@ var MenuFactory = class MenuFactory {
   static _pushShellApp(menu, app) {
     if (app && app.get_app_info().should_show()) {
       menu.items.push({
-        name : app.get_name(),
-        icon : app.get_app_info().get_icon().to_string(),
-        activate : () => app.open_new_window(-1)
+        name: app.get_name(),
+        icon: app.get_app_info().get_icon().to_string(),
+        activate: () => app.open_new_window(-1)
       });
     }
   }
@@ -238,11 +229,8 @@ var MenuFactory = class MenuFactory {
   // Adds an item for the given FileInfo object. The FileInfo class is defined at the top
   // of this file.
   static _pushFileInfo(menu, file) {
-    menu.items.push({
-      name : file.getName(),
-      icon : file.getIcon(),
-      activate : () => file.openDefault()
-    });
+    menu.items.push(
+        {name: file.getName(), icon: file.getIcon(), activate: () => file.openDefault()});
   }
 
   // Uses the system's default application for opening the given URI.
@@ -252,7 +240,7 @@ var MenuFactory = class MenuFactory {
     try {
       Gio.AppInfo.launch_default_for_uri(uri, ctx);
     } catch (e) {
-      Main.notifyError("Failed to open URI!", e.message);
+      Main.notifyError('Failed to open URI!', e.message);
     }
   }
 
@@ -263,7 +251,7 @@ var MenuFactory = class MenuFactory {
     try {
       app.launch([], ctx);
     } catch (e) {
-      Main.notifyError("Failed to launch app!", e.message);
+      Main.notifyError('Failed to launch app!', e.message);
     }
   }
 };

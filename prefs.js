@@ -16,7 +16,6 @@ const Gtk  = imports.gi.Gtk;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me             = ExtensionUtils.getCurrentExtension();
-const debug          = Me.imports.common.debug;
 
 let widgetSignalHandlers = {};
 let settings             = null;

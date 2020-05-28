@@ -50,12 +50,23 @@ var DBusInterface = {
             <arg name="description" type="s" direction="in"/>                            \
             <arg name="id" type="i" direction="out"/>                                    \
           </method>                                                                      \
+          <method name="EditMenu">                                                       \
+            <arg name="description" type="s" direction="in"/>                            \
+            <arg name="id" type="i" direction="out"/>                                    \
+          </method>                                                                      \
           <signal name="OnSelect">                                                       \
               <arg type="i" name="id"/>                                                  \
               <arg type="s" name="path"/>                                                \
           </signal>                                                                      \
           <signal name="OnCancel">                                                       \
               <arg type="i" name="id"/>                                                  \
+          </signal>                                                                      \
+          <signal name="OnCancelEdit">                                                   \
+              <arg type="i" name="id"/>                                                  \
+          </signal>                                                                      \
+          <signal name="OnFinishEdit">                                                   \
+              <arg type="i" name="id"/>                                                  \
+              <arg type="s" name="description"/>                                         \
           </signal>                                                                      \
       </interface>                                                                       \
     </node>',

@@ -11,9 +11,7 @@
 
 const Clutter = imports.gi.Clutter;
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me             = ExtensionUtils.getCurrentExtension();
-const debug          = Me.imports.common.debug.debug;
+const Me = imports.misc.extensionUtils.getCurrentExtension();
 
 var InputManipulator = class InputManipulator {
   constructor() {

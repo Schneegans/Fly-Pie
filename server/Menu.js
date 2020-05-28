@@ -9,20 +9,16 @@
 
 'use strict';
 
-const Clutter        = imports.gi.Clutter;
-const Gio            = imports.gi.Gio;
-const Gdk            = imports.gi.Gdk;
-const Main           = imports.ui.main;
-const ExtensionUtils = imports.misc.extensionUtils;
+const Main                = imports.ui.main;
+const {Clutter, Gio, Gdk} = imports.gi;
 
-const Me               = ExtensionUtils.getCurrentExtension();
+const Me               = imports.misc.extensionUtils.getCurrentExtension();
+const Background       = Me.imports.server.Background.Background;
 const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
-const debug            = Me.imports.common.debug.debug;
 const InputManipulator = Me.imports.server.InputManipulator.InputManipulator;
-const logProperties    = Me.imports.common.debug.logProperties;
 const MenuItem         = Me.imports.server.MenuItem.MenuItem;
 const Theme            = Me.imports.server.Theme.Theme;
-const utils            = Me.imports.server.utils;
+const utils            = Me.imports.common.utils;
 
 var Menu = class Menu {
 
@@ -44,41 +40,28 @@ var Menu = class Menu {
     this._onCancel  = onCancel;
     this._menuID    = null;
     this._structure = {};
+    this._editMode  = false;
 
     this._input = new InputManipulator();
 
-    this._background = new Clutter.Actor({
-      height: Main.layoutManager.currentMonitor.height,
-      width: Main.layoutManager.currentMonitor.width,
-      reactive: false,
-      visible: false,
-      opacity: 0
-    });
-
-    let settingSignalHandler = () => {
-      let color =
-          Clutter.Color.from_string(this._settings.get_string('background-color'))[1];
-      this._background.backgroundColor = color;
-    };
-
-    this._settings.connect('changed::background-color', settingSignalHandler);
-
-    settingSignalHandler();
-
-    this._background.set_easing_duration(300);
-    this._background.connect('transitions-completed', () => {
-      if (this._background.opacity == 0) {
-        this._background.visible = false;
-      }
-    });
-
-    Main.uiGroup.add_actor(this._background);
+    this._background = new Background();
+    Main.layoutManager.addChrome(this._background);
 
     this._background.connect('button-release-event', (actor, event) => {
-      if (event.get_button() == 3) {
+      if (event.get_button() == 3 && !this._editMode) {
         this._onCancel(this._menuID);
         this._hide();
       }
+    });
+
+    this._background.connect('edit-cancel', () => {
+      this._onCancel(this._menuID);
+      this._hide();
+    });
+
+    this._background.connect('edit-save', () => {
+      this._onCancel(this._menuID);
+      this._hide();
     });
 
     this._background.connect(
@@ -94,7 +77,7 @@ var Menu = class Menu {
   }
 
   destroy() {
-    Main.uiGroup.remove_actor(this._background);
+    Main.layoutManager.removeChrome(this._background);
     this._background = null;
   }
 
@@ -102,7 +85,7 @@ var Menu = class Menu {
 
   // This shows the menu, blocking all user input. A subtle animation is used to fade in
   // the menu. Returns an error code if something went wrong.
-  show(menuID, structure) {
+  show(menuID, structure, editMode) {
 
     // The menu is already active.
     if (this._menuID) {
@@ -114,8 +97,14 @@ var Menu = class Menu {
       return DBusInterface.errorCodes.ePropertyMissing;
     }
 
+    // Remove any previous menus.
+    if (this._structure && this._structure.actor) {
+      this._background.remove_child(this._structure.actor);
+    }
+
     // Store the structure.
     this._structure = structure;
+    this._editMode  = editMode;
 
     // Calculate and verify all item angles.
     if (!this._updateItemAngles(this._structure.items)) {
@@ -126,23 +115,13 @@ var Menu = class Menu {
     this._updateItemIDs(this._structure.items);
 
     // Try to grab the complete input.
-    if (!Main.pushModal(this._background)) {
+    if (!this._background.show(editMode)) {
       // Something went wrong while grabbing the input. Let's abort this.
       return DBusInterface.errorCodes.eUnknownError;
     }
 
-    // debug(JSON.stringify(this._structure));
-
     // Everything seems alright, start opening the menu!
     this._menuID = menuID;
-
-    // Make the background visible and clickable.
-    this._background.reactive = true;
-    this._background.visible  = true;
-
-    // Add the fade-in animation.
-    this._background.remove_all_children();
-    this._background.opacity = 255;
 
     this._structure.actor = new MenuItem({
       height: 100,
@@ -153,11 +132,17 @@ var Menu = class Menu {
     });
     this._background.add_child(this._structure.actor);
 
-    // Calculate window position.
-    let [pointerX, pointerY] = global.get_pointer();
-    let [posX, posY]         = this._clampToToMonitor(
-        pointerX, pointerY, this._structure.actor.width, this._structure.actor.height, 8);
-    this._structure.actor.set_position(posX, posY);
+    // Calculate menu position. In edit mode, we center the menu, else we position it at
+    // the mouse pointer.
+    if (editMode) {
+      this._structure.actor.set_position(
+          this._background.width / 2, this._background.height / 2);
+    } else {
+      let [x, y] = global.get_pointer();
+      [x, y]     = this._clampToToMonitor(
+          x, y, this._structure.actor.width, this._structure.actor.height, 8);
+      this._structure.actor.set_position(x, y);
+    }
 
     this._structure.items.forEach(item => {
       item.actor = new MenuItem({
@@ -196,18 +181,11 @@ var Menu = class Menu {
       return;
     }
 
-    // Un-grab the input.
-    Main.popModal(this._background);
+    // Fade out the background actor.
+    this._background.hide();
 
-    // Do not receive input events anymore.
-    this._background.reactive = false;
-
-    // Add the fade-out animation.
-    this._background.opacity = 0;
-
-    // Rest some members.
-    this._menuID    = null;
-    this._structure = {};
+    // Rest menu ID. With this set to null, we can accept new menu requests.
+    this._menuID = null;
   }
 
   // This method recursively traverses the menu structure and assigns an ID to each
