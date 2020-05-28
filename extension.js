@@ -9,10 +9,7 @@
 
 'use strict';
 
-const ExtensionUtils = imports.misc.extensionUtils;
-
-const Me = ExtensionUtils.getCurrentExtension();
-
+const Me     = imports.misc.extensionUtils.getCurrentExtension();
 const Server = Me.imports.server.Server.Server;
 const Client = Me.imports.client.Client.Client;
 

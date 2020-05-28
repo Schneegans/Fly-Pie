@@ -17,6 +17,11 @@ const utils = Me.imports.common.utils;
 const Theme = Me.imports.server.Theme.Theme;
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// This Clutter.Actor represents the background behind the menu. It can be shown in     //
+// normal mode and in edit mode. In normal mode, the background covers the entire       //
+// screen and is pushed as modal, grabbing the complete user input. In edit mode the    //
+// background covers only one half of the monitor. Furthermore, the control buttons are //
+// shown.                                                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 // clang-format off
@@ -30,6 +35,8 @@ var Background = GObject.registerClass({
 },
 class Background extends Clutter.Actor {
   // clang-format on
+
+  // ------------------------------------------------------------ constructor / destructor
 
   _init(params = {}) {
     super._init(params);
@@ -92,20 +99,37 @@ class Background extends Clutter.Actor {
     this.add_child(this._controlButtons);
   }
 
+  // -------------------------------------------------------------------- public interface
+
+  // This makes the background visible. In normal mode, the background covers the entire
+  // screen and is pushed as modal, grabbing the complete user input. In edit mode the
+  // background covers only one half of the monitor. Furthermore, the control buttons are
+  // shown.
   show(editMode) {
 
-    this._editMode               = editMode;
-    this._controlButtons.visible = editMode;
+    this._editMode = editMode;
 
     if (this._editMode) {
+
+      // Show the control buttons in edit mode.
+      this._controlButtons.visible = true;
+
+      // Set background size to one half of the monitor.
       this.width = Main.layoutManager.currentMonitor.width / 2;
       this.x     = this._settings.get_boolean('edit-mode-on-right-side') ? this.width : 0;
+
+      // Put control buttons at the lower center.
       this._controlButtons.x =
           Main.layoutManager.currentMonitor.width / 4 - this._controlButtons.width / 2;
       this._controlButtons.y = Main.layoutManager.currentMonitor.height - 150;
+
     } else {
-      this.width = Main.layoutManager.currentMonitor.width;
-      this.x     = 0;
+
+      // In normal mode, the background covers the entire screen and is pushed as modal,
+      // grabbing the complete user input.
+      this._controlButtons.visible = false;
+      this.width                   = Main.layoutManager.currentMonitor.width;
+      this.x                       = 0;
 
       // Try to grab the complete input.
       if (!Main.pushModal(this)) {
@@ -122,6 +146,9 @@ class Background extends Clutter.Actor {
     return true;
   }
 
+  // This hides the background again. A fade-out animation is used for the opacity, but
+  // the input is immediately un-grabbed allowing the user to click through the fading
+  // background.
   hide() {
     // Un-grab the input.
     if (!this._editMode) {
@@ -135,8 +162,12 @@ class Background extends Clutter.Actor {
     this.opacity = 0;
   }
 
-  _addControlButton(labelText, iconName, callback) {
+  // ----------------------------------------------------------------------- private stuff
 
+  // This adds one button to the row of control buttons. We use a combination of app
+  // switcher and dash button class names hoping that this looks good with most Gnome
+  // Shell themes.
+  _addControlButton(labelText, iconName, callback) {
     let icon = new St.Icon({
       gicon: Gio.Icon.new_for_string(iconName),
       fallback_icon_name: 'image-missing',
@@ -152,7 +183,6 @@ class Background extends Clutter.Actor {
     });
     box.add_actor(icon);
     box.add_actor(label);
-
 
     let button = new St.Button({style_class: 'app-well-app'});
     button.set_child(box);

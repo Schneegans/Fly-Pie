@@ -2,7 +2,9 @@
 <schemalist>
   <schema path="/org/gnome/shell/extensions/gnomepie2/" id="org.gnome.shell.extensions.gnomepie2">
 
-    <!-- Client settings -->
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!--                        Client settings                                        -->
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <key name="toggle-shortcut" type="as">
       <default><![CDATA[['F12']]]></default>
@@ -10,18 +12,16 @@
       <description>This opens the testing menu.</description>
     </key>
 
-    <!-- Server settings -->
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!--                          Server settings                                      -->
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-    <key name="background-color" type="s">
-      <default>"rgba(0, 0, 0, 0.2)"</default>
-      <summary>Background Color</summary>
-      <description>The color of the menu backdrop.</description>
-    </key>
+    <!-- General Settings -->
 
-    <key name="menu-color" type="s">
-      <default>"rgb(200, 200, 200)"</default>
-      <summary>Menu Color</summary>
-      <description>The color of the menu.</description>
+    <key name="global-scale" type="d">
+      <default>1.0</default>
+      <summary>Global Scale</summary>
+      <description>A global scale factor for the menu.</description>
     </key>
 
     <key name="text-color" type="s">
@@ -30,10 +30,37 @@
       <description>The color of the menu text.</description>
     </key>
 
-    <key name="global-scale" type="d">
-      <default>1.0</default>
-      <summary>Global Scale</summary>
-      <description>A global scale factor for the menu.</description>
+    <key name="background-color" type="s">
+      <default>"rgba(0, 0, 0, 0.2)"</default>
+      <summary>Background Color</summary>
+      <description>The color of the menu backdrop.</description>
+    </key>
+
+    <key name="auto-color-saturation" type="d">
+      <default>0.5</default>
+      <summary>Auto Color Saturation</summary>
+      <description>The saturation of automatically generated item colors.</description>
+    </key>
+
+    <key name="auto-color-brightness" type="d">
+      <default>0.5</default>
+      <summary>Auto Color Brightness</summary>
+      <description>The brightness of automatically generated item colors.</description>
+    </key>
+
+
+    <!-- Center Item Settings -->
+
+    <key name="center-auto-color" type="b">
+      <default>true</default>
+      <summary>Center Auto Color</summary>
+      <description>If set to true, the menu's center element will be colored according to its icon.</description>
+    </key>
+
+    <key name="center-color" type="s">
+      <default>"rgb(200, 200, 200)"</default>
+      <summary>Center Color</summary>
+      <description>The color of the menu's center element.</description>
     </key>
 
     <key name="center-size" type="i">
@@ -46,6 +73,21 @@
       <default>0.7</default>
       <summary>Center Icon Scale</summary>
       <description>A scale factor for the center icon.</description>
+    </key>
+
+
+    <!-- Child Item Settings -->
+
+    <key name="child-auto-color" type="b">
+      <default>true</default>
+      <summary>Child Auto Color</summary>
+      <description>If set to true, the menu's children elements will be colored according to its icon.</description>
+    </key>
+
+    <key name="child-color" type="s">
+      <default>"rgb(200, 200, 200)"</default>
+      <summary>Child Color</summary>
+      <description>The color of the menu's child element.</description>
     </key>
 
     <key name="child-size" type="i">
@@ -66,6 +108,21 @@
       <description>A scale factor for child icons.</description>
     </key>
 
+
+    <!-- Grandchild Item Settings -->
+
+    <key name="grandchild-auto-color" type="b">
+      <default>true</default>
+      <summary>Grandchild Auto Color</summary>
+      <description>If set to true, the menu's grandchildren elements will be colored according to its icon.</description>
+    </key>
+
+    <key name="grandchild-color" type="s">
+      <default>"rgb(200, 200, 200)"</default>
+      <summary>Grandchild Color</summary>
+      <description>The color of the menu's grandchild element.</description>
+    </key>
+
     <key name="grandchild-size" type="i">
       <default>10</default>
       <summary>grandChild Size</summary>
@@ -77,6 +134,9 @@
       <summary>Grandchild Offset</summary>
       <description>The offset of the grandchildren elements in pixels.</description>
     </key>
+
+
+    <!-- Miscellaneous -->
 
     <key name="edit-mode-on-right-side" type="b">
       <default>true</default>

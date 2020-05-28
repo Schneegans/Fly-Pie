@@ -13,15 +13,16 @@ const GObject = imports.gi.GObject;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-const doubleProperty = function(name, min, max, def) {
+const doubleProperty = function(name, value) {
   return GObject.ParamSpec.double(
-      name, name, name, GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT, min,
-      max, def);
+      name, name, name, GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT, 0, 1,
+      value);
 };
 
-const stringProperty = function(name, def) {
+const stringProperty = function(name, value) {
   return GObject.ParamSpec.string(
-      name, name, name, GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT, def);
+      name, name, name, GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT,
+      value);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -29,9 +30,9 @@ const stringProperty = function(name, def) {
 // clang-format off
 var Theme = GObject.registerClass({
   Properties: {
-    'scale':            doubleProperty('scale',            0.5, 5.0, 1.0),
-    'iconMargin':       doubleProperty('iconMargin',       0.0, 1.0, 0.3),
-    'childIconMargin':  doubleProperty('childIconMargin',  0.0, 1.0, 0.1),
+    'scale':            doubleProperty('scale',            1.0),
+    'iconMargin':       doubleProperty('iconMargin',       0.3),
+    'childIconMargin':  doubleProperty('childIconMargin',  0.1),
     'menuColor':        stringProperty('menuColor',        'rgba(100, 100, 100, 0.8)'),
     'backgroundColor':  stringProperty('backgroundColor',  'rgba(0, 0, 0, 0.2)')
   }

@@ -10,6 +10,7 @@
 'use strict';
 
 const Main                = imports.ui.main;
+const Cairo               = imports.cairo;
 const {Clutter, Gio, Gdk} = imports.gi;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
@@ -28,12 +29,7 @@ var Menu = class Menu {
 
     this._theme = new Theme();
 
-    let schema = Gio.SettingsSchemaSource.new_from_directory(
-        Me.dir.get_child('schemas').get_path(), Gio.SettingsSchemaSource.get_default(),
-        false);
-
-    this._settings = new Gio.Settings(
-        {settings_schema: schema.lookup('org.gnome.shell.extensions.gnomepie2', true)});
+    this._settings = utils.createSettings();
 
     this._onHover   = onHover;
     this._onSelect  = onSelect;
@@ -46,6 +42,13 @@ var Menu = class Menu {
 
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
+
+    this._centerCanvas =
+        this._createItemBackground(100, this._settings.get_string('center-color'));
+    this._childCanvas =
+        this._createItemBackground(50, this._settings.get_string('child-color'));
+    this._grandchildCanvas =
+        this._createItemBackground(10, this._settings.get_string('grandchild-color'));
 
     this._background.connect('button-release-event', (actor, event) => {
       if (event.get_button() == 3 && !this._editMode) {
@@ -128,7 +131,10 @@ var Menu = class Menu {
       width: 100,
       reactive: false,
       icon: Gio.Icon.new_for_string(this._structure.icon),
-      theme: this._theme
+      theme: this._theme,
+      center_canvas: this._centerCanvas,
+      child_canvas: this._childCanvas,
+      grandchild_canvas: this._grandchildCanvas
     });
     this._background.add_child(this._structure.actor);
 
@@ -150,7 +156,10 @@ var Menu = class Menu {
         width: 50,
         reactive: false,
         icon: Gio.Icon.new_for_string(item.icon),
-        theme: this._theme
+        theme: this._theme,
+        center_canvas: this._centerCanvas,
+        child_canvas: this._childCanvas,
+        grandchild_canvas: this._grandchildCanvas
       });
 
       let angle = item.angle * Math.PI / 180.0;
@@ -159,8 +168,15 @@ var Menu = class Menu {
 
       if (item.items) {
         item.items.forEach(child => {
-          child.actor =
-              new MenuItem({height: 10, width: 10, reactive: false, theme: this._theme});
+          child.actor = new MenuItem({
+            height: 10,
+            width: 10,
+            reactive: false,
+            theme: this._theme,
+            center_canvas: this._centerCanvas,
+            child_canvas: this._childCanvas,
+            grandchild_canvas: this._grandchildCanvas
+          });
 
           let angle = child.angle * Math.PI / 180.0;
           child.actor.set_position(Math.sin(angle) * 25, -Math.cos(angle) * 25);
@@ -334,6 +350,30 @@ var Menu = class Menu {
     });
 
     return true;
+  }
+
+  // For performance reasons, all menu items share the same Clutter.Canvas for their
+  // background. This method creates it.
+  _createItemBackground(size, colorString) {
+    let canvas = new Clutter.Canvas({height: size, width: size});
+
+    let rgba = new Gdk.RGBA();
+    rgba.parse(colorString);
+
+    canvas.connect('draw', (canvas, ctx, width, height) => {
+      ctx.setOperator(Cairo.Operator.CLEAR);
+      ctx.paint();
+      ctx.setOperator(Cairo.Operator.OVER);
+      ctx.scale(width, height);
+      ctx.translate(0.5, 0.5);
+      ctx.arc(0, 0, 0.5, 0, 2.0 * Math.PI);
+      ctx.setSourceRGBA(rgba.red, rgba.green, rgba.blue, rgba.alpha);
+      ctx.fill();
+    });
+
+    canvas.invalidate();
+
+    return canvas;
   }
 
   // x and y are the center coordinates of a box of size [width, height]. This method

@@ -9,7 +9,6 @@
 
 'use strict';
 
-const Cairo                       = imports.cairo;
 const {Clutter, Gio, GObject, St} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
@@ -27,58 +26,72 @@ var MenuItem = GObject.registerClass({
         GObject.ParamFlags.READWRITE, Gio.Icon.$gtype),
     'theme': GObject.ParamSpec.object(
         'theme', 'theme', 'The theme to be used by this menu item.',
-        GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, Theme.$gtype)
+        GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, Theme.$gtype),
+    'center-canvas': GObject.ParamSpec.object(
+        'center-canvas', 'center-canvas',
+        'The Clutter.Content to be used by this menu item when shown as center element.',
+        GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, Clutter.Content.$gtype),
+    'child-canvas': GObject.ParamSpec.object(
+        'child-canvas', 'child-canvas',
+        'The Clutter.Content to be used by this menu item when shown as child element.',
+        GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, Clutter.Content.$gtype),
+    'grandchild-canvas': GObject.ParamSpec.object(
+        'grandchild-canvas', 'grandchild-canvas',
+        'The Clutter.Content to be used by this menu item when shown as grandchild element.',
+        GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, Clutter.Content.$gtype)
   }
 },
 class MenuItem extends Clutter.Actor {
   // clang-format on
 
   _init(params = {}) {
-    this._icon = new St.Icon({fallback_icon_name: 'image-missing'});
+    this._centerIcon = new St.Icon({fallback_icon_name: 'image-missing'});
+    this._centerIcon.set_easing_duration(300);
+    this._childIcon = new St.Icon({fallback_icon_name: 'image-missing'});
+    this._childIcon.set_easing_duration(300);
 
     super._init(params);
 
-    this._icon.icon_size = super.width / 2;
-    this._icon.set_translation(-super.width / 4, -super.height / 4, 0);
+    this._centerIcon.icon_size = this.width / 2;
+    this._childIcon.icon_size  = this.width / 2;
+
+    this._centerIcon.set_translation(-this.width / 4, -this.height / 4, 0);
+    this._childIcon.set_translation(-this.width / 4, -this.height / 4, 0);
 
 
-    this._background =
-        new Clutter.Actor({height: super.height, width: super.width, reactive: false});
-    super.add_child(this._background);
+    this._centerBackground = new Clutter.Actor(
+        {height: this.height, width: this.width, reactive: false, opacity: 255});
+    this._centerBackground.set_easing_duration(300);
+    this._childBackground = new Clutter.Actor(
+        {height: this.height, width: this.width, reactive: false, opacity: 255});
+    this._childBackground.set_easing_duration(300);
+    this._grandchildBackground = new Clutter.Actor(
+        {height: this.height, width: this.width, reactive: false, opacity: 255});
+    this._grandchildBackground.set_easing_duration(300);
 
-    this._background.set_translation(-super.width / 2, -super.height / 2, 0);
+    this.add_child(this._centerBackground);
 
-    let canvas = new Clutter.Canvas({height: super.height, width: super.width});
+    this._centerBackground.set_translation(-this.width / 2, -this.height / 2, 0);
+    this._childBackground.set_translation(-this.width / 2, -this.height / 2, 0);
+    this._grandchildBackground.set_translation(-this.width / 2, -this.height / 2, 0);
 
-    // let color = Clutter.Color.new(this.theme.menuColor);
 
-    canvas.connect('draw', (canvas, ctx, width, height) => {
-      ctx.setOperator(Cairo.Operator.CLEAR);
-      ctx.paint();
-      ctx.setOperator(Cairo.Operator.OVER);
-      ctx.scale(width, height);
-      ctx.translate(0.5, 0.5);
-      ctx.arc(0, 0, 0.5, 0, 2.0 * Math.PI);
-      // ctx.setSourceRGBA(
-      //     color.red / 255.0, color.green / 255.0, color.blue / 255.0,
-      //     color.alpha / 255.0);
-      ctx.fill();
-    });
+    this._centerBackground.set_content(this.center_canvas);
+    this._childBackground.set_content(this.child_canvas);
+    this._grandchildBackground.set_content(this.grandchild_canvas);
 
-    this._background.set_content(canvas);
-    canvas.invalidate();
-
-    super.add_child(this._icon);
+    this.add_child(this._centerIcon);
+    // this.add_child(this._childIcon);
   }
 
   get icon() {
-    return this._icon.get_gicon();
+    return this._centerIcon.get_gicon();
   }
 
   set icon(value) {
-    if (this._icon.gicon !== value) {
-      this._icon.set_gicon(value);
-      this.notify('icon');
+    if (this._centerIcon.gicon !== value) {
+      this._centerIcon.set_gicon(value);
+      this._childIcon.set_gicon(value);
     }
   }
 });

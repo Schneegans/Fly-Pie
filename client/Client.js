@@ -30,12 +30,7 @@ var Client = class Client {
   // ------------------------------------------------------------ constructor / destructor
 
   constructor() {
-    let schema = Gio.SettingsSchemaSource.new_from_directory(
-        Me.dir.get_child('schemas').get_path(), Gio.SettingsSchemaSource.get_default(),
-        false);
-
-    this._settings = new Gio.Settings(
-        {settings_schema: schema.lookup('org.gnome.shell.extensions.gnomepie2', true)});
+    this._settings = utils.createSettings();
 
     KeyBindings.bindShortcut(this._settings, 'toggle-shortcut', () => this.toggle());
 

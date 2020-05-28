@@ -14,12 +14,97 @@ const Gio  = imports.gi.Gio;
 const Gdk  = imports.gi.Gdk;
 const Gtk  = imports.gi.Gtk;
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me             = ExtensionUtils.getCurrentExtension();
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.common.utils;
 
-let widgetSignalHandlers = {};
-let settings             = null;
-let builder              = null;
+var Settings = class Settings {
+  constructor() {
+    this._widgetSignalHandlers = {};
+    this._builder              = null;
+    this._settings             = utils.createSettings();
+
+    this._builder = new Gtk.Builder();
+    this._builder.add_from_file(Me.path + '/prefs.ui');
+    this._builder.connect_signals_full((builder, object, signal, handler) => {
+      object.connect(signal, (...args) => this._widgetSignalHandlers[handler](...args));
+    });
+
+
+    // General Settings.
+    this._bindSlider('global-scale');
+    this._bindColorButton('text-color');
+    this._bindColorButton('background-color');
+    this._bindSlider('auto-color-saturation');
+    this._bindSlider('auto-color-brightness');
+
+    // Center Item Settings.
+    this._bindSwitch('center-auto-color');
+    this._bindColorButton('center-color');
+    this._bindSlider('center-size');
+    this._bindSlider('center-icon-scale');
+
+    // Child Item Settings.
+    this._bindSwitch('child-auto-color');
+    this._bindColorButton('child-color');
+    this._bindSlider('child-size');
+    this._bindSlider('child-offset');
+    this._bindSlider('child-icon-scale');
+
+    // Grandchild Item Settings.
+    this._bindSwitch('grandchild-auto-color');
+    this._bindColorButton('grandchild-color');
+    this._bindSlider('grandchild-size');
+    this._bindSlider('grandchild-offset');
+
+    this.widget = this._builder.get_object('main-notebook');
+  }
+
+  _bindResetButton(settingsKey) {
+    let resetButton = this._builder.get_object('reset-' + settingsKey);
+    if (resetButton) {
+      resetButton.connect('clicked', () => this._settings.reset(settingsKey));
+    }
+  }
+
+  _bindSlider(settingsKey) {
+    this._settings.bind(
+        settingsKey, this._builder.get_object(settingsKey), 'value',
+        Gio.SettingsBindFlags.DEFAULT);
+
+    this._bindResetButton(settingsKey);
+  }
+
+  _bindSwitch(settingsKey) {
+    this._settings.bind(
+        settingsKey, this._builder.get_object(settingsKey), 'active',
+        Gio.SettingsBindFlags.DEFAULT);
+
+    this._bindResetButton(settingsKey);
+  }
+
+  // Gio.Settings.bind_with_mapping is not available yet, so we need to do the color
+  // conversion like this. This requires the settingsKey + '-changed' signal to be added
+  // to the ColorChooserButton in Glade.
+  _bindColorButton(settingsKey) {
+    let colorChooser = this._builder.get_object(settingsKey);
+
+    this._widgetSignalHandlers[settingsKey + '-changed'] = () => this._settings.set_value(
+        settingsKey, new GLib.Variant('s', colorChooser.get_rgba().to_string()));
+
+    let settingSignalHandler = () => {
+      let rgba = new Gdk.RGBA();
+      rgba.parse(this._settings.get_string(settingsKey));
+      colorChooser.rgba = rgba;
+    };
+
+    this._settings.connect('changed::' + settingsKey, settingSignalHandler);
+
+    settingSignalHandler();
+
+    this._bindResetButton(settingsKey);
+  }
+}
+
 
 // Like 'extension.js' this is used for any one-time setup like translations.
 function init() {}
@@ -27,67 +112,6 @@ function init() {}
 // This function is called when the preferences window is first created to build
 // and return a Gtk widget.
 function buildPrefsWidget() {
-  let schema = Gio.SettingsSchemaSource.new_from_directory(
-      Me.dir.get_child('schemas').get_path(), Gio.SettingsSchemaSource.get_default(),
-      false);
-
-  settings = new Gio.Settings(
-      {settings_schema: schema.lookup('org.gnome.shell.extensions.gnomepie2', true)});
-
-  builder = new Gtk.Builder();
-  builder.add_from_file(Me.path + '/prefs.ui');
-  builder.connect_signals_full((builder, object, signal, handler) => {
-    object.connect(signal, (...args) => widgetSignalHandlers[handler](...args));
-  });
-
-  _bindSlider('global-scale');
-  _bindSlider('center-size');
-  _bindSlider('center-icon-scale');
-  _bindSlider('child-size');
-  _bindSlider('child-offset');
-  _bindSlider('child-icon-scale');
-  _bindSlider('grandchild-size');
-  _bindSlider('grandchild-offset');
-
-  _bindColorButton('background-color');
-  _bindColorButton('menu-color');
-  _bindColorButton('text-color');
-
-  return builder.get_object('main-notebook');
-}
-
-function _bindResetButton(settingsKey) {
-  let resetButton = builder.get_object('reset-' + settingsKey);
-  if (resetButton) {
-    resetButton.connect('clicked', () => settings.reset(settingsKey));
-  }
-}
-
-function _bindSlider(settingsKey) {
-  settings.bind(
-      settingsKey, builder.get_object(settingsKey), 'value',
-      Gio.SettingsBindFlags.DEFAULT);
-
-  _bindResetButton(settingsKey);
-}
-
-// Gio.Settings.bind_with_mapping is not available yet, so we need to do the color
-// conversion like this.
-function _bindColorButton(settingsKey) {
-  let colorChooser = builder.get_object(settingsKey);
-
-  widgetSignalHandlers[settingsKey + '-changed'] = () => settings.set_value(
-      settingsKey, new GLib.Variant('s', colorChooser.get_rgba().to_string()));
-
-  let settingSignalHandler = () => {
-    let rgba = new Gdk.RGBA();
-    rgba.parse(settings.get_string(settingsKey));
-    colorChooser.rgba = rgba;
-  };
-
-  settings.connect('changed::' + settingsKey, settingSignalHandler);
-
-  settingSignalHandler();
-
-  _bindResetButton(settingsKey);
+  let settings = new Settings();
+  return settings.widget;
 }
