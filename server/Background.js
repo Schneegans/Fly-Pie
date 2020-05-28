@@ -14,7 +14,6 @@ const {Clutter, Gio, GObject, St} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
-const Theme = Me.imports.server.Theme.Theme;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This Clutter.Actor represents the background behind the menu. It can be shown in     //

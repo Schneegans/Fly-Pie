@@ -18,7 +18,6 @@ const Background       = Me.imports.server.Background.Background;
 const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
 const InputManipulator = Me.imports.server.InputManipulator.InputManipulator;
 const MenuItem         = Me.imports.server.MenuItem.MenuItem;
-const Theme            = Me.imports.server.Theme.Theme;
 const utils            = Me.imports.common.utils;
 
 var Menu = class Menu {
@@ -26,8 +25,6 @@ var Menu = class Menu {
   // ------------------------------------------------------------ constructor / destructor
 
   constructor(onHover, onSelect, onCancel) {
-
-    this._theme = new Theme();
 
     this._settings = utils.createSettings();
 
@@ -131,7 +128,6 @@ var Menu = class Menu {
       width: 100,
       reactive: false,
       icon: Gio.Icon.new_for_string(this._structure.icon),
-      theme: this._theme,
       center_canvas: this._centerCanvas,
       child_canvas: this._childCanvas,
       grandchild_canvas: this._grandchildCanvas
@@ -156,7 +152,6 @@ var Menu = class Menu {
         width: 50,
         reactive: false,
         icon: Gio.Icon.new_for_string(item.icon),
-        theme: this._theme,
         center_canvas: this._centerCanvas,
         child_canvas: this._childCanvas,
         grandchild_canvas: this._grandchildCanvas
@@ -172,7 +167,6 @@ var Menu = class Menu {
             height: 10,
             width: 10,
             reactive: false,
-            theme: this._theme,
             center_canvas: this._centerCanvas,
             child_canvas: this._childCanvas,
             grandchild_canvas: this._grandchildCanvas

@@ -13,7 +13,6 @@ const {Clutter, Gio, GObject, St} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
-const Theme = Me.imports.server.Theme.Theme;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -24,9 +23,6 @@ var MenuItem = GObject.registerClass({
     'icon': GObject.ParamSpec.object(
         'icon', 'icon', 'The gio icon to be used by this menu item.',
         GObject.ParamFlags.READWRITE, Gio.Icon.$gtype),
-    'theme': GObject.ParamSpec.object(
-        'theme', 'theme', 'The theme to be used by this menu item.',
-        GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, Theme.$gtype),
     'center-canvas': GObject.ParamSpec.object(
         'center-canvas', 'center-canvas',
         'The Clutter.Content to be used by this menu item when shown as center element.',
