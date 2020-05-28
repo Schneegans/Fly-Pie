@@ -86,7 +86,7 @@ var Client = class Client {
     try {
       // Open the menu on the server side. Once this is done successfully, we store the
       // returned menu ID.
-      this._dbus.EditMenuRemote(JSON.stringify(this._lastMenu), (id) => {
+      this._dbus.ShowMenuRemote(JSON.stringify(this._lastMenu), (id) => {
         if (id) {
           if (id >= 0) {
             this._lastID = id;

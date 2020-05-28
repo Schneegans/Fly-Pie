@@ -158,7 +158,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">You can also open your own menus from the Menus tab</property>
+                                    <property name="label" translatable="yes">You may also open one of your own menus from the Menus tab.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -204,7 +204,7 @@
                                         <property name="can_focus">False</property>
                                         <property name="halign">start</property>
                                         <property name="vexpand">True</property>
-                                        <property name="label" translatable="yes">Preview</property>
+                                        <property name="label" translatable="yes">Live Preview</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">1</property>
@@ -358,7 +358,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Useful on High-DPI Displays</property>
+                                    <property name="label" translatable="yes">Useful on High-DPI Displays.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -660,7 +660,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Relative to the item's size</property>
+                                    <property name="label" translatable="yes">Relative to the item's size.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -849,7 +849,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Used if automatic coloring is disabled</property>
+                                    <property name="label" translatable="yes">Used if automatic coloring is disabled.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -889,7 +889,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Choose a color based on the item's icon</property>
+                                    <property name="label" translatable="yes">Choose a color based on the item's icon.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -1015,7 +1015,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Relative to the item's size</property>
+                                    <property name="label" translatable="yes">Relative to the item's size.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -1255,7 +1255,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Choose a color based on the item's icon</property>
+                                    <property name="label" translatable="yes">Choose a color based on the item's icon.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -1295,7 +1295,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Used if automatic coloring is disabled</property>
+                                    <property name="label" translatable="yes">Used if automatic coloring is disabled.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -1575,7 +1575,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Used if automatic coloring is disabled</property>
+                                    <property name="label" translatable="yes">Used if automatic coloring is disabled.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -1615,7 +1615,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Choose a color based on the parent's icon</property>
+                                    <property name="label" translatable="yes">Choose a color based on the parent's icon.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>

@@ -14,10 +14,19 @@ const Gio  = imports.gi.Gio;
 const Gdk  = imports.gi.Gdk;
 const Gtk  = imports.gi.Gtk;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.common.utils;
+const Me            = imports.misc.extensionUtils.getCurrentExtension();
+const utils         = Me.imports.common.utils;
+const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 
-var Settings = class Settings {
+const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
+
+let previewMenu = {
+  name: 'Preview',
+  icon: 'glade',
+  items: [{name: 'Thunderbird', icon: 'thunderbird'}, {name: 'Firefox', icon: 'firefox'}]
+}
+
+let Settings = class Settings {
   constructor() {
     this._widgetSignalHandlers = {};
     this._builder              = null;
@@ -29,6 +38,20 @@ var Settings = class Settings {
       object.connect(signal, (...args) => this._widgetSignalHandlers[handler](...args));
     });
 
+    // Connect to the server so that we can toggle menus also from the preferences.
+    new DBusWrapper(
+        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/gnomepie2',
+        (proxy) => {
+          this._dbus = proxy;
+        });
+
+    // Preview Button.
+    let previewButton = this._builder.get_object('preview-button');
+    previewButton.connect('clicked', () => {
+      if (this._dbus) {
+        this._dbus.EditMenuRemote(JSON.stringify(previewMenu), () => {});
+      }
+    });
 
     // General Settings.
     this._bindSlider('global-scale');
