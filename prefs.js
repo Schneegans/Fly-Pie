@@ -28,15 +28,11 @@ let previewMenu = {
 
 let Settings = class Settings {
   constructor() {
-    this._widgetSignalHandlers = {};
-    this._builder              = null;
-    this._settings             = utils.createSettings();
+    this._builder  = null;
+    this._settings = utils.createSettings();
 
     this._builder = new Gtk.Builder();
     this._builder.add_from_file(Me.path + '/prefs.ui');
-    this._builder.connect_signals_full((builder, object, signal, handler) => {
-      object.connect(signal, (...args) => this._widgetSignalHandlers[handler](...args));
-    });
 
     // Connect to the server so that we can toggle menus also from the preferences.
     new DBusWrapper(
@@ -61,20 +57,20 @@ let Settings = class Settings {
     this._bindSlider('auto-color-brightness');
 
     // Center Item Settings.
-    this._bindSwitch('center-auto-color');
+    this._bindRadioGroup('center-color-mode', ['fixed', 'auto']);
     this._bindColorButton('center-color');
     this._bindSlider('center-size');
     this._bindSlider('center-icon-scale');
 
     // Child Item Settings.
-    this._bindSwitch('child-auto-color');
+    this._bindRadioGroup('child-color-mode', ['fixed', 'auto', 'parent']);
     this._bindColorButton('child-color');
     this._bindSlider('child-size');
     this._bindSlider('child-offset');
     this._bindSlider('child-icon-scale');
 
     // Grandchild Item Settings.
-    this._bindSwitch('grandchild-auto-color');
+    this._bindRadioGroup('grandchild-color-mode', ['fixed', 'parent']);
     this._bindColorButton('grandchild-color');
     this._bindSlider('grandchild-size');
     this._bindSlider('grandchild-offset');
@@ -105,14 +101,38 @@ let Settings = class Settings {
     this._bindResetButton(settingsKey);
   }
 
+  _bindRadioGroup(settingsKey, possibleValues) {
+    possibleValues.forEach(value => {
+      let button = this._builder.get_object(settingsKey + '-' + value);
+      button.connect('toggled', () => {
+        if (button.active) {
+          this._settings.set_string(settingsKey, value);
+        }
+      });
+    });
+
+    let settingSignalHandler = () => {
+      let value     = this._settings.get_string(settingsKey);
+      let button    = this._builder.get_object(settingsKey + '-' + value);
+      button.active = true;
+    };
+
+    this._settings.connect('changed::' + settingsKey, settingSignalHandler);
+
+    // Initialize the button with the state in the settings.
+    settingSignalHandler();
+
+    this._bindResetButton(settingsKey);
+  }
+
   // Gio.Settings.bind_with_mapping is not available yet, so we need to do the color
-  // conversion like this. This requires the settingsKey + '-changed' signal to be added
-  // to the ColorChooserButton in Glade.
+  // conversion like this.
   _bindColorButton(settingsKey) {
     let colorChooser = this._builder.get_object(settingsKey);
 
-    this._widgetSignalHandlers[settingsKey + '-changed'] = () => this._settings.set_value(
-        settingsKey, new GLib.Variant('s', colorChooser.get_rgba().to_string()));
+    colorChooser.connect('color-set', () => {
+      this._settings.set_string(settingsKey, colorChooser.get_rgba().to_string());
+    });
 
     let settingSignalHandler = () => {
       let rgba = new Gdk.RGBA();
@@ -122,6 +142,7 @@ let Settings = class Settings {
 
     this._settings.connect('changed::' + settingsKey, settingSignalHandler);
 
+    // Initialize the button with the state in the settings.
     settingSignalHandler();
 
     this._bindResetButton(settingsKey);

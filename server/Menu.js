@@ -18,6 +18,7 @@ const Background       = Me.imports.server.Background.Background;
 const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
 const InputManipulator = Me.imports.server.InputManipulator.InputManipulator;
 const MenuItem         = Me.imports.server.MenuItem.MenuItem;
+const MenuItemState    = Me.imports.server.MenuItem.MenuItemState;
 const utils            = Me.imports.common.utils;
 
 var Menu = class Menu {
@@ -127,11 +128,12 @@ var Menu = class Menu {
       height: 100,
       width: 100,
       reactive: false,
-      icon: Gio.Icon.new_for_string(this._structure.icon),
       center_canvas: this._centerCanvas,
       child_canvas: this._childCanvas,
-      grandchild_canvas: this._grandchildCanvas
+      grandchild_canvas: this._grandchildCanvas,
+      state: MenuItemState.ACTIVE
     });
+    this._structure.actor.setIcon(Gio.Icon.new_for_string(this._structure.icon));
     this._background.add_child(this._structure.actor);
 
     // Calculate menu position. In edit mode, we center the menu, else we position it at
@@ -151,11 +153,12 @@ var Menu = class Menu {
         height: 50,
         width: 50,
         reactive: false,
-        icon: Gio.Icon.new_for_string(item.icon),
         center_canvas: this._centerCanvas,
         child_canvas: this._childCanvas,
-        grandchild_canvas: this._grandchildCanvas
+        grandchild_canvas: this._grandchildCanvas,
+        state: MenuItemState.CHILD
       });
+      item.actor.setIcon(Gio.Icon.new_for_string(item.icon));
 
       let angle = item.angle * Math.PI / 180.0;
       item.actor.set_position(Math.sin(angle) * 100, -Math.cos(angle) * 100);
@@ -169,7 +172,8 @@ var Menu = class Menu {
             reactive: false,
             center_canvas: this._centerCanvas,
             child_canvas: this._childCanvas,
-            grandchild_canvas: this._grandchildCanvas
+            grandchild_canvas: this._grandchildCanvas,
+            state: MenuItemState.GRANDCHILD
           });
 
           let angle = child.angle * Math.PI / 180.0;

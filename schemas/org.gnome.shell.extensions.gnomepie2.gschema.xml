@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                enums                                            -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <enum id='org.gnome.shell.extensions.gnomepie2.CenterColorMode'>
+    <value value='0' nick='fixed'/>
+    <value value='1' nick='auto'/>
+  </enum>
+
+  <enum id='org.gnome.shell.extensions.gnomepie2.ChildColorMode'>
+    <value value='0' nick='fixed'/>
+    <value value='1' nick='auto'/>
+    <value value='2' nick='parent'/>
+  </enum>
+
+  <enum id='org.gnome.shell.extensions.gnomepie2.GrandchildColorMode'>
+    <value value='0' nick='fixed'/>
+    <value value='1' nick='parent'/>
+  </enum>
+
+
   <schema path="/org/gnome/shell/extensions/gnomepie2/" id="org.gnome.shell.extensions.gnomepie2">
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -51,10 +73,11 @@
 
     <!-- Center Item Settings -->
 
-    <key name="center-auto-color" type="b">
-      <default>true</default>
-      <summary>Center Auto Color</summary>
-      <description>If set to true, the menu's center element will be colored according to its icon.</description>
+    <key name="center-color-mode" enum="org.gnome.shell.extensions.gnomepie2.CenterColorMode">
+      <default>"fixed"</default>
+      <summary>Center Color Mode</summary>
+      <description>If set to auto, the menu's center element will be colored
+                   according to its icon. Else the 'center-color' will be used.</description>
     </key>
 
     <key name="center-color" type="s">
@@ -78,10 +101,11 @@
 
     <!-- Child Item Settings -->
 
-    <key name="child-auto-color" type="b">
-      <default>true</default>
-      <summary>Child Auto Color</summary>
-      <description>If set to true, the menu's children elements will be colored according to its icon.</description>
+    <key name="child-color-mode" enum="org.gnome.shell.extensions.gnomepie2.ChildColorMode">
+      <default>"fixed"</default>
+      <summary>Child Color Mode</summary>
+      <description>If set to auto, the menu's child elements will be colored
+                   according to their icons. Else the 'child-color' will be used.</description>
     </key>
 
     <key name="child-color" type="s">
@@ -111,10 +135,11 @@
 
     <!-- Grandchild Item Settings -->
 
-    <key name="grandchild-auto-color" type="b">
-      <default>true</default>
-      <summary>Grandchild Auto Color</summary>
-      <description>If set to true, the menu's grandchildren elements will be colored according to its icon.</description>
+    <key name="grandchild-color-mode" enum="org.gnome.shell.extensions.gnomepie2.GrandchildColorMode">
+      <default>"fixed"</default>
+      <summary>Grandchild Color Mode</summary>
+      <description>If set to parent, the menu's grandchild elements will be colored
+                   according to their parent's icons. Else the 'grandchild-color' will be used.</description>
     </key>
 
     <key name="grandchild-color" type="s">
