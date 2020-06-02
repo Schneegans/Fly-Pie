@@ -39,7 +39,7 @@ function debug(message) {
 // be found. This method can be used to get at least some idea what is going on...      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function printNotification(message) {
+function notification(message) {
   GLib.spawn_async(
       null, ['/usr/bin/notify-send', '-u', 'low', 'Gnome-Pie 2', message], null,
       GLib.SpawnFlags.DO_NOT_REAP_CHILD, null);

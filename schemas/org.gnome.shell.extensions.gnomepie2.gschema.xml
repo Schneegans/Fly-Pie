@@ -46,6 +46,12 @@
       <description>A global scale factor for the menu.</description>
     </key>
 
+    <key name="animation-duration" type="d">
+      <default>0.3</default>
+      <summary>Animation Duration</summary>
+      <description>The base animation duration in seconds.</description>
+    </key>
+
     <key name="text-color" type="s">
       <default>"rgb(0, 0, 0)"</default>
       <summary>Text Color</summary>
@@ -68,6 +74,33 @@
       <default>0.5</default>
       <summary>Auto Color Brightness</summary>
       <description>The brightness of automatically generated item colors.</description>
+    </key>
+
+
+    <!-- Wedge Settings -->
+
+    <key name="wedge-size" type="d">
+      <default>200</default>
+      <summary>Wedge Size</summary>
+      <description>The radius of the wedges in pixels.</description>
+    </key>
+
+    <key name="wedge-color" type="s">
+      <default>"rgba(0, 0, 0, 0.4)"</default>
+      <summary>Wedge Color</summary>
+      <description>The color of the menu's inactive wedges.</description>
+    </key>
+
+    <key name="active-wedge-color" type="s">
+      <default>"rgba(100, 100, 100, 0.2)"</default>
+      <summary>Active Wedge Color</summary>
+      <description>The color of the menu's active wedges.</description>
+    </key>
+
+    <key name="wedge-separator-color" type="s">
+      <default>"rgba(100, 100, 100, 0.5)"</default>
+      <summary>Wedge Separator Color</summary>
+      <description>The color of the separators between the menu's wedges.</description>
     </key>
 
 

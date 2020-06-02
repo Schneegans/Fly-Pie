@@ -32,6 +32,11 @@ var MenuItem = GObject.registerClass({
     'state': GObject.ParamSpec.int(
         'state', 'state', 'The state the MenuItem is currently in.',
         GObject.ParamFlags.READWRITE, 0, 3, 0),
+    'icon': GObject.ParamSpec.string(
+        'icon', 'icon',
+        'The icon to be used by this menu item. ' +
+        'Can be an "icon-name", an ":emoji:" or a path like "file://../icon.png".',
+        GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, 'image-missing'),
     'center-canvas': GObject.ParamSpec.object(
         'center-canvas', 'center-canvas',
         'The Clutter.Content to be used by this menu item when shown as center element.',
@@ -52,9 +57,15 @@ class MenuItem extends Clutter.Actor {
   _init(params = {}) {
     super._init(params);
 
-    this._centerIcon = new St.Icon({fallback_icon_name: 'image-missing'});
+    this._iconColor = utils.getIconColor(Gio.Icon.new_for_string(this.icon));
+
+    this._centerIcon = new St.Icon(
+        {gicon: Gio.Icon.new_for_string(this.icon), fallback_icon_name: 'image-missing'});
+
     this._centerIcon.set_easing_duration(300);
-    this._childIcon = new St.Icon({fallback_icon_name: 'image-missing'});
+    this._childIcon = new St.Icon(
+        {gicon: Gio.Icon.new_for_string(this.icon), fallback_icon_name: 'image-missing'});
+
     this._childIcon.set_easing_duration(300);
 
     this._centerIcon.icon_size = this.width / 2;
@@ -66,17 +77,19 @@ class MenuItem extends Clutter.Actor {
     this._centerBackground = new Clutter.Actor(
         {height: this.height, width: this.width, reactive: false, opacity: 255});
     this._centerBackground.set_easing_duration(300);
-    this._centerBackground.add_effect(new Clutter.ColorizeEffect());
+    this._centerBackground.add_effect(
+        new Clutter.ColorizeEffect({tint: this._iconColor}));
 
     this._childBackground = new Clutter.Actor(
         {height: this.height, width: this.width, reactive: false, opacity: 255});
     this._childBackground.set_easing_duration(300);
-    this._childBackground.add_effect(new Clutter.ColorizeEffect());
+    this._childBackground.add_effect(new Clutter.ColorizeEffect({tint: this._iconColor}));
 
     this._grandchildBackground = new Clutter.Actor(
         {height: this.height, width: this.width, reactive: false, opacity: 255});
     this._grandchildBackground.set_easing_duration(300);
-    this._grandchildBackground.add_effect(new Clutter.ColorizeEffect());
+    this._grandchildBackground.add_effect(
+        new Clutter.ColorizeEffect({tint: this._iconColor}));
 
 
     this.add_child(this._centerBackground);
@@ -96,24 +109,6 @@ class MenuItem extends Clutter.Actor {
 
     this.connect('notify::state', this._onStateChange.bind(this));
     this._onStateChange();
-  }
-
-  setIcon(value) {
-    if (this._centerIcon.gicon !== value) {
-      this._centerIcon.set_gicon(value);
-      this._childIcon.set_gicon(value);
-
-      // TODO
-      // Add schema enum for color mode
-      // Adapt prefs.js accordingly
-      // Icon should be a string property construct-only
-      // Then three string color properties for center, child and grandchild. Either
-      // 'auto' or color
-      this._iconColor                                  = utils.getIconColor(value);
-      this._centerBackground.get_effects()[0].tint     = this._iconColor;
-      this._childBackground.get_effects()[0].tint      = this._iconColor;
-      this._grandchildBackground.get_effects()[0].tint = this._iconColor;
-    }
   }
 
   _onStateChange() {

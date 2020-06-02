@@ -9,10 +9,7 @@
 
 'use strict';
 
-const GLib = imports.gi.GLib;
-const Gio  = imports.gi.Gio;
-const Gdk  = imports.gi.Gdk;
-const Gtk  = imports.gi.Gtk;
+const {Gtk, Gio, Gdk, GLib} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
@@ -49,12 +46,21 @@ let Settings = class Settings {
       }
     });
 
+    this._createAppearanceTabIcons();
+
     // General Settings.
     this._bindSlider('global-scale');
+    this._bindSlider('animation-duration');
     this._bindColorButton('text-color');
     this._bindColorButton('background-color');
     this._bindSlider('auto-color-saturation');
     this._bindSlider('auto-color-brightness');
+
+    // Wedge Settings.
+    this._bindSlider('wedge-size');
+    this._bindColorButton('wedge-color');
+    this._bindColorButton('active-wedge-color');
+    this._bindColorButton('wedge-separator-color');
 
     // Center Item Settings.
     this._bindRadioGroup('center-color-mode', ['fixed', 'auto']);
@@ -146,6 +152,99 @@ let Settings = class Settings {
     settingSignalHandler();
 
     this._bindResetButton(settingsKey);
+  }
+
+  _createAppearanceTabIcons() {
+
+    let tabEvents = Gdk.EventMask.BUTTON_PRESS_MASK | Gdk.EventMask.BUTTON_RELEASE_MASK;
+
+    // Draw six lines representing the wedge separators.
+
+    let tabIcon = this._builder.get_object('wedges-tab-icon');
+    tabIcon.add_events(tabEvents);
+    tabIcon.connect('draw', (widget, ctx) => {
+      let size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      let color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+
+      ctx.translate(size / 2, size / 2);
+      ctx.rotate(2 * Math.PI / 12);
+
+      for (let i = 0; i < 6; i++) {
+        ctx.moveTo(size / 5, 0);
+        ctx.lineTo(size / 2, 0);
+        ctx.rotate(2 * Math.PI / 6);
+      }
+
+      ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
+      ctx.setLineWidth(2);
+      ctx.stroke();
+
+      return false;
+    });
+
+    // Draw on circle representing the center item.
+    tabIcon = this._builder.get_object('center-tab-icon');
+    tabIcon.add_events(tabEvents);
+    tabIcon.connect('draw', (widget, ctx) => {
+      let size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      let color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+
+      ctx.translate(size / 2, size / 2);
+      ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
+      ctx.arc(0, 0, size / 4, 0, 2 * Math.PI);
+      ctx.fill();
+
+      return false;
+    });
+
+    // Draw six circles representing child items.
+    tabIcon = this._builder.get_object('children-tab-icon');
+    tabIcon.add_events(tabEvents);
+    tabIcon.connect('draw', (widget, ctx) => {
+      let size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      let color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+
+      ctx.translate(size / 2, size / 2);
+      ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
+
+      for (let i = 0; i < 6; i++) {
+        ctx.rotate(2 * Math.PI / 6);
+        ctx.arc(size / 3, 0, size / 10, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+
+      return false;
+    });
+
+    // Draw six groups of five grandchildren each. The grandchild at the back-navigation
+    // position is skipped.
+    tabIcon = this._builder.get_object('grandchildren-tab-icon');
+    tabIcon.add_events(tabEvents);
+    tabIcon.connect('draw', (widget, ctx) => {
+      let size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      let color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+
+      ctx.translate(size / 2, size / 2);
+      ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
+
+      for (let i = 0; i < 6; i++) {
+        ctx.rotate(2 * Math.PI / 6);
+
+        ctx.save()
+        ctx.translate(size / 3, 0);
+        ctx.rotate(Math.PI);
+
+        for (let j = 0; j < 5; j++) {
+          ctx.rotate(2 * Math.PI / 6);
+          ctx.arc(size / 10, 0, size / 20, 0, 2 * Math.PI);
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+
+      return false;
+    });
   }
 }
 
