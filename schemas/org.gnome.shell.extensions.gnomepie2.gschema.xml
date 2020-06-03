@@ -53,16 +53,22 @@
       <description>The base animation duration in seconds.</description>
     </key>
 
+    <key name="background-color" type="s">
+      <default>"rgba(0, 0, 0, 0.2)"</default>
+      <summary>Background Color</summary>
+      <description>The color of the menu backdrop.</description>
+    </key>
+
     <key name="text-color" type="s">
       <default>"rgb(0, 0, 0)"</default>
       <summary>Text Color</summary>
       <description>The color of the menu text.</description>
     </key>
 
-    <key name="background-color" type="s">
-      <default>"rgba(0, 0, 0, 0.2)"</default>
-      <summary>Background Color</summary>
-      <description>The color of the menu backdrop.</description>
+    <key name="font" type="s">
+      <default>"Sans 12"</default>
+      <summary>Center Font</summary>
+      <description>The font used in the menu.</description>
     </key>
 
     <key name="auto-color-saturation" type="d">

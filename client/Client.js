@@ -68,7 +68,7 @@ var Client = class Client {
       return;
     }
 
-    this._lastMenu = {icon: 'firefox', name: 'Main Menu', items: []};
+    this._lastMenu = {icon: '🌀', name: 'Main Menu', items: []};
     this._lastMenu.items.push(MenuFactory.getAppMenuItems());
     this._lastMenu.items.push(MenuFactory.getUserDirectoriesItems());
     this._lastMenu.items.push(MenuFactory.getRecentItems());
@@ -76,10 +76,17 @@ var Client = class Client {
     this._lastMenu.items.push(MenuFactory.getFrequentItems());
     this._lastMenu.items.push(MenuFactory.getRunningAppsItems());
     this._lastMenu.items.push({
-      name: 'Test',
+      name: 'Test 2',
       icon: '/home/simon/Pictures/Eigene/avatar128.png',
       activate: function() {
-        utils.debug('Test!');
+        utils.debug('Test 2!');
+      }
+    });
+    this._lastMenu.items.push({
+      name: 'Test 3',
+      icon: '😆',
+      activate: function() {
+        utils.debug('Test 3!');
       }
     });
 

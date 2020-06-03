@@ -42,11 +42,11 @@ var Menu = class Menu {
     Main.layoutManager.addChrome(this._background);
 
     this._centerCanvas =
-        this._createItemBackground(100, this._settings.get_string('center-color'));
+        this._createItemBackground(this._settings.get_string('center-color'));
     this._childCanvas =
-        this._createItemBackground(50, this._settings.get_string('child-color'));
+        this._createItemBackground(this._settings.get_string('child-color'));
     this._grandchildCanvas =
-        this._createItemBackground(10, this._settings.get_string('grandchild-color'));
+        this._createItemBackground(this._settings.get_string('grandchild-color'));
 
     this._background.connect('button-release-event', (actor, event) => {
       if (event.get_button() == 3 && !this._editMode) {
@@ -75,6 +75,9 @@ var Menu = class Menu {
     // For some reason this has to be set explicitly to true before it can be set to
     // false.
     global.stage.cursor_visible = true;
+
+    this._settings.connect('changed', this._onSettingsChange.bind(this));
+    this._onSettingsChange();
   }
 
   destroy() {
@@ -211,6 +214,8 @@ var Menu = class Menu {
         state: state
       });
 
+      item.actor.setSettings(this._settings);
+
       parent.insert_child_at_index(item.actor, 0);
     }
   }
@@ -340,10 +345,29 @@ var Menu = class Menu {
     return true;
   }
 
+  _onSettingsChange() {
+    let globalScale = this._settings.get_double('global-scale');
+
+    this._centerCanvas.scale_factor = this._settings.get_int('center-size') * globalScale;
+    this._childCanvas.scale_factor  = this._settings.get_int('child-size') * globalScale;
+    this._grandchildCanvas.scale_factor =
+        this._settings.get_int('grandchild-size') * globalScale;
+
+    if (this._structure.actor) {
+      this._structure.actor.set_scale(globalScale, globalScale);
+    }
+
+    this._foreachItem(item => {
+      if (item.actor) {
+        item.actor.setSettings(this._settings);
+      }
+    });
+  }
+
   // For performance reasons, all menu items share the same Clutter.Canvas for their
   // background. This method creates it.
-  _createItemBackground(size, colorString) {
-    let canvas = new Clutter.Canvas({height: size, width: size});
+  _createItemBackground(colorString) {
+    let canvas = new Clutter.Canvas({height: 1, width: 1});
 
     let rgba = new Gdk.RGBA();
     rgba.parse(colorString);
@@ -380,5 +404,19 @@ var Menu = class Menu {
     let posY = Math.min(Math.max(y, minY), maxY);
 
     return [Math.floor(posX), Math.floor(posY)];
+  }
+
+  _foreachItem(func, parentItem) {
+    let item = parentItem || this._structure;
+
+    if (item) {
+      func(item);
+
+      if (item.items) {
+        item.items.forEach(child => {
+          this._foreachItem(func, child);
+        });
+      }
+    }
   }
 };

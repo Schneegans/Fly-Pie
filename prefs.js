@@ -17,18 +17,6 @@ const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
-let previewMenu = {
-  name: 'Preview',
-  icon: 'glade',
-  items: [
-    {name: 'Thunderbird', icon: 'thunderbird'}, {
-      name: 'Firefox',
-      icon: 'firefox',
-      items: [{name: 'Gedit', icon: 'gedit'}, {name: 'Glade', icon: 'glade'}]
-    }
-  ]
-}
-
 let Settings = class Settings {
   constructor() {
     this._builder  = null;
@@ -48,7 +36,7 @@ let Settings = class Settings {
     let previewButton = this._builder.get_object('preview-button');
     previewButton.connect('clicked', () => {
       if (this._dbus) {
-        this._dbus.EditMenuRemote(JSON.stringify(previewMenu), () => {});
+        this._dbus.EditMenuRemote(JSON.stringify(this._createDemoMenu()), () => {});
       }
     });
 
@@ -57,8 +45,9 @@ let Settings = class Settings {
     // General Settings.
     this._bindSlider('global-scale');
     this._bindSlider('animation-duration');
-    this._bindColorButton('text-color');
     this._bindColorButton('background-color');
+    this._bindColorButton('text-color');
+    this._bindFontButton('font');
     this._bindSlider('auto-color-saturation');
     this._bindSlider('auto-color-brightness');
 
@@ -110,6 +99,14 @@ let Settings = class Settings {
   _bindSwitch(settingsKey) {
     this._settings.bind(
         settingsKey, this._builder.get_object(settingsKey), 'active',
+        Gio.SettingsBindFlags.DEFAULT);
+
+    this._bindResetButton(settingsKey);
+  }
+
+  _bindFontButton(settingsKey) {
+    this._settings.bind(
+        settingsKey, this._builder.get_object(settingsKey), 'font-name',
         Gio.SettingsBindFlags.DEFAULT);
 
     this._bindResetButton(settingsKey);
@@ -253,6 +250,79 @@ let Settings = class Settings {
 
       return false;
     });
+  }
+
+  _createDemoMenu() {
+    return {
+      name: 'Demo Menu', icon: '🎂', items: [
+        {
+          name: 'Smileys',
+          icon: '😀',
+          items: [
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+          ]
+        },
+        {
+          name: 'Animals',
+          icon: '🐵',
+          items: [
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+          ]
+        },
+        {
+          name: 'Fruits',
+          icon: '🥝',
+          items: [
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+          ]
+        },
+        {
+          name: 'Sports',
+          icon: '⚽',
+          items: [
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+          ]
+        },
+        {
+          name: 'Vehicles',
+          icon: '🚀',
+          items: [
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+          ]
+        },
+        {
+          name: 'Symbols',
+          icon: '♍',
+          items: [
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+            {name: 'Doughnut', icon: '🍩'},
+          ]
+        },
+      ]
+    }
   }
 }
 

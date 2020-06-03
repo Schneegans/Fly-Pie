@@ -9,7 +9,8 @@
 
 'use strict';
 
-const {Clutter, Gio, GObject, St} = imports.gi;
+const Cairo                             = imports.cairo;
+const {Gdk, Gtk, Clutter, Gio, GObject} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
@@ -40,7 +41,7 @@ var MenuItem = GObject.registerClass({
     'icon': GObject.ParamSpec.string(
         'icon', 'icon',
         'The icon to be used by this menu item. ' +
-        'Can be an "icon-name", an ":emoji:" or a path like "file://../icon.png".',
+        'Can be an "icon-name", an ":emoji:" or a path like "../icon.png".',
         GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, 'image-missing'),
     'center-canvas': GObject.ParamSpec.object(
         'center-canvas', 'center-canvas',
@@ -62,94 +63,83 @@ class MenuItem extends Clutter.Actor {
   _init(params = {}) {
     super._init(params);
 
+    // Create Background Actors.
+    this._centerBackgroundActor = new Clutter.Actor();
+    this._centerBackgroundActor.add_effect(new Clutter.ColorizeEffect());
+    this._centerBackgroundActor.set_content(this.center_canvas);
 
+    this._childBackgroundActor = new Clutter.Actor();
+    this._childBackgroundActor.add_effect(new Clutter.ColorizeEffect());
+    this._childBackgroundActor.set_content(this.child_canvas);
 
-    this._centerBackground = new Clutter.Actor();
-    this._centerBackground.set_easing_duration(300);
-    this._centerBackground.add_effect(new Clutter.ColorizeEffect());
+    this._grandchildBackgroundActor = new Clutter.Actor();
+    this._grandchildBackgroundActor.add_effect(new Clutter.ColorizeEffect());
+    this._grandchildBackgroundActor.set_content(this.grandchild_canvas);
 
-    this._childBackground = new Clutter.Actor();
-    this._childBackground.set_easing_duration(300);
-    this._childBackground.add_effect(new Clutter.ColorizeEffect());
-
-    this._grandchildBackground = new Clutter.Actor();
-    this._grandchildBackground.set_easing_duration(300);
-    this._grandchildBackground.add_effect(new Clutter.ColorizeEffect());
-
-    this.add_child(this._centerBackground);
-    this.add_child(this._childBackground);
-    this.add_child(this._grandchildBackground);
-
-
-    this._centerBackground.set_content(this.center_canvas);
-    this._childBackground.set_content(this.child_canvas);
-    this._grandchildBackground.set_content(this.grandchild_canvas);
+    this.add_child(this._centerBackgroundActor);
+    this.add_child(this._childBackgroundActor);
+    this.add_child(this._grandchildBackgroundActor);
 
     this.connect('notify::state', this._onStateChange.bind(this));
+  }
+
+  setSettings(settings) {
+    this._centerBackgroundActor.set_easing_duration(300);
+    this._childBackgroundActor.set_easing_duration(300);
+    this._grandchildBackgroundActor.set_easing_duration(300);
+
     this._onStateChange();
   }
 
   _onStateChange() {
-    if (this._centerIcon) {
-      this._centerIcon.opacity = 0;
-      this._centerIcon.visible = false;
+    if (this._iconActor) {
+      this._iconActor.opacity = 0;
+      this._iconActor.visible = false;
     }
 
-    if (this._childIcon) {
-      this._childIcon.opacity = 0;
-      this._childIcon.visible = false;
-    }
-
-    this._centerBackground.opacity     = 0;
-    this._childBackground.opacity      = 0;
-    this._grandchildBackground.opacity = 0;
+    this._centerBackgroundActor.opacity     = 0;
+    this._childBackgroundActor.opacity      = 0;
+    this._grandchildBackgroundActor.opacity = 0;
 
     if (this.state == MenuItemState.ACTIVE) {
-      if (!this._centerIcon) {
-        this._centerIcon = new St.Icon({
-          gicon: Gio.Icon.new_for_string(this.icon),
-          fallback_icon_name: 'image-missing',
-        });
-        this._centerIcon.set_easing_duration(300);
-        this.add_child(this._centerIcon);
+      if (!this._iconActor) {
+        this._createIcon();
       }
 
-      this._centerIcon.opacity       = 255;
-      this._centerBackground.opacity = 255;
-      this._centerIcon.icon_size     = 50;
-      this._centerIcon.visible       = true;
-      this._centerIcon.set_position(-50 / 2, -50 / 2);
+      this._iconActor.opacity = 255;
+      this._iconActor.set_size(50, 50);
+      this._iconActor.set_position(-50 / 2, -50 / 2);
+      this._centerBackgroundActor.opacity = 255;
       this.set_position(0, 0);
 
     } else if (this.state == MenuItemState.CHILD) {
-      if (!this._childIcon) {
-        this._childIcon = new St.Icon({
-          gicon: Gio.Icon.new_for_string(this.icon),
-        });
-        this._childIcon.set_easing_duration(300);
-        this.add_child(this._childIcon);
+      if (!this._iconActor) {
+        this._createIcon();
       }
 
-      this._childIcon.opacity       = 255;
-      this._childBackground.opacity = 255;
-      this._childIcon.icon_size     = 25;
-      this._childIcon.visible       = true;
-      this._childIcon.set_position(-25 / 2, -25 / 2);
-      this.set_position(Math.sin(this.angle) * 100, -Math.cos(this.angle) * 100);
+      this._childBackgroundActor.opacity = 255;
+      this._iconActor.opacity            = 255;
+      this._iconActor.set_size(32, 32);
+      this._iconActor.set_position(-32 / 2, -32 / 2);
+      this.set_position(
+          Math.floor(Math.sin(this.angle) * 100),
+          -Math.floor(Math.cos(this.angle) * 100));
 
     } else if (this.state == MenuItemState.GRANDCHILD) {
-      this._grandchildBackground.opacity = 255;
-      this.set_position(Math.sin(this.angle) * 25, -Math.cos(this.angle) * 25);
+      this._grandchildBackgroundActor.opacity = 255;
+      this.set_position(
+          Math.floor(Math.sin(this.angle) * 25), -Math.floor(Math.cos(this.angle) * 25));
     }
 
     if (this.state == MenuItemState.ACTIVE || this.state == MenuItemState.CHILD) {
       if (!this._iconColor) {
-        this._iconColor = utils.getIconColor(Gio.Icon.new_for_string(this.icon));
+        let iconSurface = utils.getIcon(this.icon, 24);
+        this._iconColor = utils.getAverageIconColor(iconSurface, 24, 0.0, 0.5);
       }
 
-      this._centerBackground.get_effects()[0].tint     = this._iconColor;
-      this._childBackground.get_effects()[0].tint      = this._iconColor;
-      this._grandchildBackground.get_effects()[0].tint = this._iconColor;
+      this._centerBackgroundActor.get_effects()[0].tint     = this._iconColor;
+      this._childBackgroundActor.get_effects()[0].tint      = this._iconColor;
+      this._grandchildBackgroundActor.get_effects()[0].tint = this._iconColor;
     }
 
     if (this.state == MenuItemState.HIDDEN) {
@@ -157,12 +147,35 @@ class MenuItem extends Clutter.Actor {
     } else {
       this.visible = true;
 
-      this._centerBackground.set_position(-100 / 2, -100 / 2);
-      this._centerBackground.set_size(100, 100);
-      this._childBackground.set_position(-50 / 2, -50 / 2);
-      this._childBackground.set_size(50, 50);
-      this._grandchildBackground.set_position(-10 / 2, -10 / 2);
-      this._grandchildBackground.set_size(10, 10);
+      this._centerBackgroundActor.set_position(-100 / 2, -100 / 2);
+      this._centerBackgroundActor.set_size(100, 100);
+      this._childBackgroundActor.set_position(-50 / 2, -50 / 2);
+      this._childBackgroundActor.set_size(50, 50);
+      this._grandchildBackgroundActor.set_position(-10 / 2, -10 / 2);
+      this._grandchildBackgroundActor.set_size(10, 10);
     }
+  }
+
+  _createIcon() {
+    // Create Icon Actor.
+    this._iconCanvas = new Clutter.Canvas({height: 32, width: 32});
+    this._iconCanvas.connect('draw', (canvas, ctx, width, height) => {
+      ctx.setOperator(Cairo.Operator.CLEAR);
+      ctx.paint();
+      ctx.setOperator(Cairo.Operator.OVER);
+
+      let iconSurface = utils.getIcon(this.icon, Math.min(width, height));
+      ctx.setSourceSurface(iconSurface, 0, 0);
+      ctx.paint();
+    });
+
+    this._iconCanvas.invalidate();
+
+    this._iconActor = new Clutter.Actor();
+    this._iconActor.set_content(this._iconCanvas);
+    this._iconActor.set_easing_duration(300);
+    this._iconActor.minification_filter = Clutter.ScalingFilter.TRILINEAR;
+
+    this.add_child(this._iconActor);
   }
 });

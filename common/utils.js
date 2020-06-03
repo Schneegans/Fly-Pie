@@ -9,9 +9,11 @@
 
 'use strict';
 
-const {Gtk, Gio, Clutter, GLib} = imports.gi;
+const Cairo                                             = imports.cairo;
+const {Gdk, Gtk, Gio, Pango, PangoCairo, Clutter, GLib} = imports.gi;
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This method can be used to write a message to Gnome-Shell's log. This is enhances    //
@@ -34,6 +36,7 @@ function debug(message) {
   log('[' + stack[0].slice(extensionRoot) + '] ' + message);
 }
 
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // Especially the code in prefs.js is hard to debug, as the information is nowhere to   //
 // be found. This method can be used to get at least some idea what is going on...      //
@@ -44,6 +47,7 @@ function notification(message) {
       null, ['/usr/bin/notify-send', '-u', 'low', 'Gnome-Pie 2', message], null,
       GLib.SpawnFlags.DO_NOT_REAP_CHILD, null);
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Creates a new Gio.Settings object for org.gnome.shell.extensions.gnomepie2 and       //
@@ -59,6 +63,7 @@ function createSettings() {
       {settings_schema: schema.lookup('org.gnome.shell.extensions.gnomepie2', true)});
 }
 
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // This can be used to print all properties of an object. Can be helpful if             //
 // documentation is sparse or outdated...                                               //
@@ -72,25 +77,64 @@ function logProperties(object) {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Returns a representative average Clutter.Color for a given Gio.Icon. The alpha value //
-// will always be 255. This is based on code from the original Gnome-Pie.               //
+// This returns a square-shaped Cairo.ImageSurface of the given size containing an      //
+// icon. The name can either be an icon name from the current icon theme or a path to   //
+// an image file. If neither is found, the given name is written to the image - This is //
+// very useful for emojis like 😆 or 🌟!                                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function getIconColor(icon) {
+function getIcon(name, size) {
+
+  // First try to find the icon in the theme. This will also load images from disc if the
+  // icon name is actually a file path.
   let theme = Gtk.IconTheme.get_default();
-  let info  = theme.lookup_by_gicon(icon, 24, Gtk.IconLookupFlags.FORCE_SIZE);
+  let info  = theme.lookup_by_gicon(
+      Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
 
-  if (info == null) {
-    debug('Failed to find icon ' + icon.to_string() + '! Using default...');
-    info = theme.lookup_icon('image-missing', 24, Gtk.IconLookupFlags.FORCE_SIZE);
-
-    if (info == null) {
-      debug('Failed to find default icon!');
-      return new Clutter.Color({red: 255, green: 255, blue: 255, alpha: 255});
-    }
+  // We got something, return it!
+  if (info != null) {
+    return info.load_surface(null);
   }
 
-  let pixbuf = info.load_icon();
+  // If no icon was found, write it as plain text.
+  let surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, size, size);
+  let ctx     = new Cairo.Context(surface);
+
+  ctx.setSourceRGBA(0, 0, 0, 1);
+
+  let layout = PangoCairo.create_layout(ctx);
+  layout.set_width(Pango.units_from_double(size));
+
+  let font_description = Pango.FontDescription.from_string('Sans');
+  font_description.set_absolute_size(Pango.units_from_double(size * 0.9));
+
+  layout.set_font_description(font_description);
+  layout.set_text(name, -1);
+  layout.set_alignment(Pango.Alignment.CENTER);
+
+  let extents = layout.get_pixel_extents()[1];
+  ctx.moveTo(0, (size - extents.height) / 2);
+
+  PangoCairo.update_layout(ctx, layout);
+  PangoCairo.show_layout(ctx, layout);
+
+  return surface;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Returns a representative average Clutter.Color for a given Cairo.Surface. The alpha  //
+// value will always be 255. The saturationModifier and the luminanceModifier (both in  //
+// range [-1, 1]) can be used to tweak the resulting saturation and luminance values.   //
+// This is based on code from the original Gnome-Pie.                                   //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+function getAverageIconColor(
+    iconSurface, iconSize, saturationModifier, luminanceModifier) {
+
+  // surface.get_data() as well as surface.get_width() are not available somehow. Therefor
+  // we have to pass in the icon size and use the pixbuf conversion below.
+  let pixbuf = Gdk.pixbuf_get_from_surface(iconSurface, 0, 0, iconSize, iconSize);
   let pixels = pixbuf.get_pixels();
   let count  = pixels.length;
 
@@ -112,13 +156,22 @@ function getIconColor(icon) {
     total += relevance;
   }
 
-  return new Clutter.Color({
+  let color = new Clutter.Color({
     red: rTotal / total * 255,
     green: gTotal / total * 255,
-    blue: bTotal / total * 255,
-    alpha: 255
+    blue: bTotal / total * 255
   });
+
+  let [h, l, s] = color.to_hls();
+
+  s = Math.pow(
+      s, Math.tan((1 - Math.min(Math.max(saturationModifier, -1), 1)) * Math.PI / 4));
+  l = Math.pow(
+      l, Math.tan((1 - Math.min(Math.max(luminanceModifier, -1), 1)) * Math.PI / 4));
+
+  return Clutter.Color.from_hls(h, l, s);
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This rounds the given number to the nearest multiple of base. This works for integer //
