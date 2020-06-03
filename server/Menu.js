@@ -107,7 +107,12 @@ var Menu = class Menu {
     this._structure = structure;
     this._editMode  = editMode;
 
+    // To avoid frequent checks for the existence of the items list member, we add an
+    // empty list for items without children.
+    this._createEmptyChildrenLists(this._structure);
+
     // Calculate and verify all item angles.
+    this._structure.angle = 0;
     if (!this._updateItemAngles(this._structure.items)) {
       return DBusInterface.errorCodes.eInvalidAngles;
     }
@@ -124,17 +129,16 @@ var Menu = class Menu {
     // Everything seems alright, start opening the menu!
     this._menuID = menuID;
 
-    this._structure.actor = new MenuItem({
-      height: 100,
-      width: 100,
-      reactive: false,
-      icon: this._structure.icon,
-      center_canvas: this._centerCanvas,
-      child_canvas: this._childCanvas,
-      grandchild_canvas: this._grandchildCanvas,
-      state: MenuItemState.ACTIVE
+    // Create all visible Clutter.Actors for the items.
+    this._createActor(this._structure, this._background, MenuItemState.ACTIVE);
+
+    this._structure.items.forEach(item => {
+      this._createActor(item, this._structure.actor, MenuItemState.CHILD);
+
+      item.items.forEach(child => {
+        this._createActor(child, item.actor, MenuItemState.GRANDCHILD);
+      });
     });
-    this._background.add_child(this._structure.actor);
 
     // Calculate menu position. In edit mode, we center the menu, else we position it at
     // the mouse pointer.
@@ -147,42 +151,6 @@ var Menu = class Menu {
           x, y, this._structure.actor.width, this._structure.actor.height, 8);
       this._structure.actor.set_position(x, y);
     }
-
-    this._structure.items.forEach(item => {
-      item.actor = new MenuItem({
-        height: 50,
-        width: 50,
-        reactive: false,
-        icon: item.icon,
-        center_canvas: this._centerCanvas,
-        child_canvas: this._childCanvas,
-        grandchild_canvas: this._grandchildCanvas,
-        state: MenuItemState.CHILD
-      });
-
-      let angle = item.angle * Math.PI / 180.0;
-      item.actor.set_position(Math.sin(angle) * 100, -Math.cos(angle) * 100);
-      this._structure.actor.insert_child_at_index(item.actor, 0);
-
-      if (item.items) {
-        item.items.forEach(child => {
-          child.actor = new MenuItem({
-            height: 10,
-            width: 10,
-            reactive: false,
-            icon: child.icon,
-            center_canvas: this._centerCanvas,
-            child_canvas: this._childCanvas,
-            grandchild_canvas: this._grandchildCanvas,
-            state: MenuItemState.GRANDCHILD
-          });
-
-          let angle = child.angle * Math.PI / 180.0;
-          child.actor.set_position(Math.sin(angle) * 25, -Math.cos(angle) * 25);
-          item.actor.insert_child_at_index(child.actor, 0);
-        });
-      }
-    });
 
     return this._menuID;
   }
@@ -218,9 +186,32 @@ var Menu = class Menu {
       }
 
       // Proceed recursively with the children.
-      if (item.items) {
-        this._updateItemIDs(item.items, item.id);
-      }
+      this._updateItemIDs(item.items, item.id);
+    }
+  }
+
+  _createEmptyChildrenLists(item) {
+    if (item.items) {
+      item.items.forEach(child => {
+        this._createEmptyChildrenLists(child);
+      });
+    } else {
+      item.items = [];
+    }
+  }
+
+  _createActor(item, parent, state) {
+    if (!item.actor) {
+      item.actor = new MenuItem({
+        icon: item.icon,
+        angle: item.angle * Math.PI / 180,
+        center_canvas: this._centerCanvas,
+        child_canvas: this._childCanvas,
+        grandchild_canvas: this._grandchildCanvas,
+        state: state
+      });
+
+      parent.insert_child_at_index(item.actor, 0);
     }
   }
 
@@ -341,10 +332,8 @@ var Menu = class Menu {
 
     // Now that all angles are set, update the child items.
     items.forEach(item => {
-      if (item.items) {
-        if (!this._updateItemAngles(item.items, (item.angle + 180) % 360)) {
-          return false;
-        }
+      if (!this._updateItemAngles(item.items, (item.angle + 180) % 360)) {
+        return false;
       }
     });
 

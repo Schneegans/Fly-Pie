@@ -22,7 +22,8 @@
   </enum>
 
 
-  <schema path="/org/gnome/shell/extensions/gnomepie2/" id="org.gnome.shell.extensions.gnomepie2">
+  <schema path="/org/gnome/shell/extensions/gnomepie2/" 
+             id="org.gnome.shell.extensions.gnomepie2">
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <!--                        Client settings                                        -->
@@ -138,7 +139,8 @@
       <default>"fixed"</default>
       <summary>Child Color Mode</summary>
       <description>If set to auto, the menu's child elements will be colored
-                   according to their icons. Else the 'child-color' will be used.</description>
+                   according to their icons. Else the 'child-color' will be
+                   used.</description>
     </key>
 
     <key name="child-color" type="s">
@@ -165,6 +167,12 @@
       <description>A scale factor for child icons.</description>
     </key>
 
+    <key name="child-draw-above" type="b">
+      <default>false</default>
+      <summary>Child Draw Above</summary>
+      <description>If true, children are drawn above their parents.</description>
+    </key>
+
 
     <!-- Grandchild Item Settings -->
 
@@ -172,7 +180,8 @@
       <default>"fixed"</default>
       <summary>Grandchild Color Mode</summary>
       <description>If set to parent, the menu's grandchild elements will be colored
-                   according to their parent's icons. Else the 'grandchild-color' will be used.</description>
+                   according to their parent's icons. Else the 'grandchild-color'
+                   will be used.</description>
     </key>
 
     <key name="grandchild-color" type="s">
@@ -193,13 +202,20 @@
       <description>The offset of the grandchildren elements in pixels.</description>
     </key>
 
+    <key name="grandchild-draw-above" type="b">
+      <default>false</default>
+      <summary>Grandchild Draw Above</summary>
+      <description>If true, grandchildren are drawn above their parents.</description>
+    </key>
+
 
     <!-- Miscellaneous -->
 
     <key name="edit-mode-on-right-side" type="b">
       <default>true</default>
       <summary>Edit mode monitor side</summary>
-      <description>If set to true, the edit mode window opens on the right hand side of the current montor.</description>
+      <description>If set to true, the edit mode window opens on the right hand side
+                   of the current montor.</description>
     </key>
 
   </schema>

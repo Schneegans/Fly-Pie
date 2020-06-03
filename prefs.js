@@ -20,7 +20,13 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 let previewMenu = {
   name: 'Preview',
   icon: 'glade',
-  items: [{name: 'Thunderbird', icon: 'thunderbird'}, {name: 'Firefox', icon: 'firefox'}]
+  items: [
+    {name: 'Thunderbird', icon: 'thunderbird'}, {
+      name: 'Firefox',
+      icon: 'firefox',
+      items: [{name: 'Gedit', icon: 'gedit'}, {name: 'Glade', icon: 'glade'}]
+    }
+  ]
 }
 
 let Settings = class Settings {
@@ -74,12 +80,14 @@ let Settings = class Settings {
     this._bindSlider('child-size');
     this._bindSlider('child-offset');
     this._bindSlider('child-icon-scale');
+    this._bindSwitch('child-draw-above');
 
     // Grandchild Item Settings.
     this._bindRadioGroup('grandchild-color-mode', ['fixed', 'parent']);
     this._bindColorButton('grandchild-color');
     this._bindSlider('grandchild-size');
     this._bindSlider('grandchild-offset');
+    this._bindSwitch('grandchild-draw-above');
 
     this.widget = this._builder.get_object('main-notebook');
   }
