@@ -73,7 +73,7 @@ let Settings = class Settings {
     this._bindRadioGroup('center-color-mode', ['fixed', 'auto']);
     this._bindColorButton('center-color');
     this._bindSlider('center-auto-color-saturation');
-    this._bindSlider('center-auto-color-brightness');
+    this._bindSlider('center-auto-color-luminance');
     this._bindSlider('center-size');
     this._bindSlider('center-icon-scale');
 
@@ -81,7 +81,7 @@ let Settings = class Settings {
     this._bindRadioGroup('child-color-mode', ['fixed', 'auto', 'parent']);
     this._bindColorButton('child-color');
     this._bindSlider('child-auto-color-saturation');
-    this._bindSlider('child-auto-color-brightness');
+    this._bindSlider('child-auto-color-luminance');
     this._bindSlider('child-size');
     this._bindSlider('child-offset');
     this._bindSlider('child-icon-scale');
@@ -338,10 +338,10 @@ let Settings = class Settings {
   // This creates a Demo Menu structure which is shown when the preview button is pressed.
   _createDemoMenu() {
     return {
-      name: 'Demo Menu', icon: '🎂', items: [
+      name: 'Demo Menu', icon: 'firefox', items: [
         {
           name: 'Smileys',
-          icon: '😀',
+          icon: 'firefox',
           items: [
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
@@ -352,7 +352,7 @@ let Settings = class Settings {
         },
         {
           name: 'Animals',
-          icon: '🐵',
+          icon: 'folder',
           items: [
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},

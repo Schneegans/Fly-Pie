@@ -9,7 +9,7 @@
     <property name="step_increment">0.01</property>
     <property name="page_increment">0.10000000000000001</property>
   </object>
-  <object class="GtkAdjustment" id="center-auto-color-brightness">
+  <object class="GtkAdjustment" id="center-auto-color-luminance">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
     <property name="page_increment">0.10000000000000001</property>
@@ -33,13 +33,13 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkAdjustment" id="child-auto-color-brightness">
+  <object class="GtkAdjustment" id="child-auto-color-luminance">
     <property name="upper">1</property>
     <property name="value">0.5</property>
     <property name="step_increment">0.01</property>
     <property name="page_increment">0.10000000000000001</property>
   </object>
-  <object class="GtkAdjustment" id="child-auto-color-brightness-hover">
+  <object class="GtkAdjustment" id="child-auto-color-luminance-hover">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
     <property name="page_increment">0.10000000000000001</property>
@@ -1586,7 +1586,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkButton" id="reset-center-auto-color-brightness">
+                                  <object class="GtkButton" id="reset-center-auto-color-luminance">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
@@ -1628,7 +1628,7 @@
                                     <property name="can_focus">True</property>
                                     <property name="margin_right">10</property>
                                     <property name="hexpand">True</property>
-                                    <property name="adjustment">center-auto-color-brightness</property>
+                                    <property name="adjustment">center-auto-color-luminance</property>
                                     <property name="restrict_to_fill_level">False</property>
                                     <property name="fill_level">0</property>
                                     <property name="round_digits">2</property>
@@ -1665,7 +1665,7 @@
                                     <property name="halign">start</property>
                                     <property name="valign">center</property>
                                     <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Brightness</property>
+                                    <property name="label" translatable="yes">Luminance</property>
                                     <property name="justify">right</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -2493,7 +2493,7 @@
                                     <property name="can_focus">True</property>
                                     <property name="margin_right">5</property>
                                     <property name="hexpand">True</property>
-                                    <property name="adjustment">child-auto-color-brightness</property>
+                                    <property name="adjustment">child-auto-color-luminance</property>
                                     <property name="restrict_to_fill_level">False</property>
                                     <property name="fill_level">0</property>
                                     <property name="round_digits">2</property>
@@ -2530,7 +2530,7 @@
                                     <property name="halign">start</property>
                                     <property name="valign">center</property>
                                     <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Brightness</property>
+                                    <property name="label" translatable="yes">Luminance</property>
                                     <property name="justify">right</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -2573,7 +2573,7 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkButton" id="reset-child-auto-color-brightness">
+                                  <object class="GtkButton" id="reset-child-auto-color-luminance">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
@@ -2615,7 +2615,7 @@
                                     <property name="can_focus">True</property>
                                     <property name="margin_right">5</property>
                                     <property name="hexpand">True</property>
-                                    <property name="adjustment">child-auto-color-brightness-hover</property>
+                                    <property name="adjustment">child-auto-color-luminance-hover</property>
                                     <property name="restrict_to_fill_level">False</property>
                                     <property name="fill_level">0</property>
                                     <property name="round_digits">2</property>
@@ -2652,7 +2652,7 @@
                                     <property name="halign">start</property>
                                     <property name="valign">center</property>
                                     <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Brightness</property>
+                                    <property name="label" translatable="yes">Luminance</property>
                                     <property name="justify">right</property>
                                     <style>
                                       <class name="dim-label"/>

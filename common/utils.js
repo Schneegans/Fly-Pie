@@ -182,6 +182,16 @@ function getAverageIconColor(iconSurface, iconSize, saturation, luminance) {
   return Clutter.Color.from_hls(h, l, s);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+// A simple convenience method to convert a string to a Gdk.RGBA                        //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+function stringToRGBA(string) {
+  let rgba = new Gdk.RGBA();
+  rgba.parse(string);
+  return rgba;
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This rounds the given number to the nearest multiple of base. This works for integer //

@@ -21,12 +21,12 @@ const utils = Me.imports.common.utils;
 // This could be a static member of the class below, but this seems to be not supported
 // yet.
 var MenuItemState = {
-  HIDDEN: 0,
+  INVISIBLE: 0,
   ACTIVE: 1,
   CHILD: 2,
   HOVERED_CHILD: 3,
   GRANDCHILD: 4,
-  PARENT: 5,
+  HOVERED_GRANDCHILD: 5,
 };
 
 // clang-format off
@@ -34,7 +34,7 @@ var MenuItem = GObject.registerClass({
   Properties: {
     'state': GObject.ParamSpec.int(
         'state', 'state', 'The state the MenuItem is currently in.',
-        GObject.ParamFlags.READWRITE, 0, 5, MenuItemState.HIDDEN),
+        GObject.ParamFlags.READWRITE, 0, 5, MenuItemState.INVISIBLE),
     'angle': GObject.ParamSpec.double(
         'angle', 'angle', 'The angle of the MenuItem.',
         GObject.ParamFlags.READWRITE, 0, 2 * Math.PI, 0),
@@ -43,18 +43,10 @@ var MenuItem = GObject.registerClass({
         'The icon to be used by this menu item. ' +
         'Can be an "icon-name", an ":emoji:" or a path like "../icon.png".',
         GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, 'image-missing'),
-    'center-canvas': GObject.ParamSpec.object(
-        'center-canvas', 'center-canvas',
-        'The Clutter.Content to be used by this menu item when shown as center element.',
+    'background-canvas': GObject.ParamSpec.object(
+        'background-canvas', 'background-canvas',
+        'The Clutter.Content to be used by this menu as background.',
         GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, Clutter.Content.$gtype),
-    'child-canvas': GObject.ParamSpec.object(
-        'child-canvas', 'child-canvas',
-        'The Clutter.Content to be used by this menu item when shown as child element.',
-        GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, Clutter.Content.$gtype),
-    'grandchild-canvas': GObject.ParamSpec.object(
-        'grandchild-canvas', 'grandchild-canvas',
-        'The Clutter.Content to be used by this menu item when shown as grandchild element.',
-        GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, Clutter.Content.$gtype)
   }
 },
 class MenuItem extends Clutter.Actor {
@@ -64,118 +56,164 @@ class MenuItem extends Clutter.Actor {
     super._init(params);
 
     // Create Background Actors.
-    this._centerBackgroundActor = new Clutter.Actor();
-    this._centerBackgroundActor.add_effect(new Clutter.ColorizeEffect());
-    this._centerBackgroundActor.set_content(this.center_canvas);
+    this._background                     = new Clutter.Actor();
+    this._background.minification_filter = Clutter.ScalingFilter.TRILINEAR;
+    this._background.add_effect(new Clutter.ColorizeEffect());
+    this._background.set_content(this.background_canvas);
 
-    this._childBackgroundActor = new Clutter.Actor();
-    this._childBackgroundActor.add_effect(new Clutter.ColorizeEffect());
-    this._childBackgroundActor.set_content(this.child_canvas);
-
-    this._grandchildBackgroundActor = new Clutter.Actor();
-    this._grandchildBackgroundActor.add_effect(new Clutter.ColorizeEffect());
-    this._grandchildBackgroundActor.set_content(this.grandchild_canvas);
-
-    this.add_child(this._centerBackgroundActor);
-    this.add_child(this._childBackgroundActor);
-    this.add_child(this._grandchildBackgroundActor);
+    this.add_child(this._background);
 
     this.connect('notify::state', this._onStateChange.bind(this));
   }
 
   setSettings(settings) {
-    this._centerBackgroundActor.set_easing_duration(300);
-    this._childBackgroundActor.set_easing_duration(300);
-    this._grandchildBackgroundActor.set_easing_duration(300);
 
+    // First reset some members to force re-creation during the next state change.
+    if (this._centerIcon) {
+      this._centerIcon.destroy();
+      delete this._centerIcon;
+    }
+
+    if (this._childIcon) {
+      this._childIcon.destroy();
+      delete this._childIcon;
+    }
+
+    // Then parse all settings required during state change.
+    let globalScale = settings.get_double('global-scale');
+
+    // clang-format off
+    this._settings = {
+      animationDuration:             settings.get_double('animation-duration'),
+      textColor:                     utils.stringToRGBA(settings.get_string('text-color')),
+      font:                          settings.get_string('font'),
+      centerSize:                    settings.get_double('center-size')             * globalScale,
+      centerIconScale:               settings.get_double('center-icon-scale'),
+      centerAutoColorSaturation:     settings.get_double('center-auto-color-saturation'),
+      centerAutoColorLuminance:      settings.get_double('center-auto-color-luminance'),
+      childSize:                     settings.get_double('child-size')              * globalScale,
+      childSizeHover:                settings.get_double('child-size-hover')        * globalScale,
+      childOffset:                   settings.get_double('child-offset')            * globalScale,
+      childOffsetHover:              settings.get_double('child-offset-hover')      * globalScale,
+      childIconScale:                settings.get_double('child-icon-scale'),
+      childIconScaleHover:           settings.get_double('child-icon-scale-hover'),
+      childAutoColorSaturation:      settings.get_double('child-auto-color-saturation'),
+      childAutoColorSaturationHover: settings.get_double('child-auto-color-saturation-hover'),
+      childAutoColorLuminance:       settings.get_double('child-auto-color-luminance'),
+      childAutoColorLuminanceHover:  settings.get_double('child-auto-color-luminance-hover'),
+      grandchildSize:                settings.get_double('grandchild-size')         * globalScale,
+      grandchildSizeHover:           settings.get_double('grandchild-size-hover')   * globalScale,
+      grandchildOffset:              settings.get_double('grandchild-offset')       * globalScale,
+      grandchildOffsetHover:         settings.get_double('grandchild-offset-hover') * globalScale,
+    };
+    // clang-format on
+
+    this._background.set_easing_duration(this._settings.animationDuration);
+
+    // Then execute a full state change.
     this._onStateChange();
   }
 
   _onStateChange() {
-    if (this._iconActor) {
-      this._iconActor.opacity = 0;
-      this._iconActor.visible = false;
-    }
 
-    this._centerBackgroundActor.opacity     = 0;
-    this._childBackgroundActor.opacity      = 0;
-    this._grandchildBackgroundActor.opacity = 0;
+    let setSizeAndOpacity = (actor, size, opacity) => {
+      let size2     = Math.floor(size / 2);
+      actor.opacity = opacity;
+      actor.set_size(size, size);
+      actor.set_position(-size2, -size2);
+    };
 
     if (this.state == MenuItemState.ACTIVE) {
-      if (!this._iconActor) {
-        this._createIcon();
+
+      let size     = this._settings.centerSize;
+      let iconSize = size * this._settings.centerIconScale;
+
+      if (!this._centerIcon) {
+        this._centerIcon = this._createIcon(iconSize);
+        this._centerIcon.set_easing_duration(this._settings.animationDuration);
+        this.add_child(this._centerIcon);
+        this._centerIconColor = utils.getAverageIconColor(
+            utils.getIcon(this.icon, 24), 24, this._settings.centerAutoColorSaturation,
+            this._settings.centerAutoColorLuminance);
       }
 
-      this._iconActor.opacity = 255;
-      this._iconActor.set_size(50, 50);
-      this._iconActor.set_position(-50 / 2, -50 / 2);
-      this._centerBackgroundActor.opacity = 255;
-      this.set_position(0, 0);
+      setSizeAndOpacity(this._centerIcon, iconSize, 255);
+      setSizeAndOpacity(this._background, size, 255);
+
+      if (this._childIcon) {
+        setSizeAndOpacity(this._childIcon, iconSize, 0);
+      }
+
+      this._background.get_effects()[0].tint = this._centerIconColor;
 
     } else if (this.state == MenuItemState.CHILD) {
-      if (!this._iconActor) {
-        this._createIcon();
+
+      let size     = this._settings.childSize;
+      let iconSize = size * this._settings.childIconScale;
+
+      if (!this._childIcon) {
+        this._childIcon = this._createIcon(iconSize);
+        this._childIcon.set_easing_duration(this._settings.animationDuration);
+        this.add_child(this._childIcon);
+        this._childIconColor = utils.getAverageIconColor(
+            utils.getIcon(this.icon, 24), 24, this._settings.childAutoColorSaturation,
+            this._settings.childAutoColorLuminance);
       }
 
-      this._childBackgroundActor.opacity = 255;
-      this._iconActor.opacity            = 255;
-      this._iconActor.set_size(32, 32);
-      this._iconActor.set_position(-32 / 2, -32 / 2);
+      setSizeAndOpacity(this._childIcon, iconSize, 255);
+      setSizeAndOpacity(this._background, size, 255);
+
+      if (this._centerIcon) {
+        setSizeAndOpacity(this._centerIcon, iconSize, 0);
+      }
+
+      this._background.get_effects()[0].tint = this._childIconColor;
+
       this.set_position(
-          Math.floor(Math.sin(this.angle) * 100),
-          -Math.floor(Math.cos(this.angle) * 100));
+          Math.floor(Math.sin(this.angle) * this._settings.childOffset),
+          -Math.floor(Math.cos(this.angle) * this._settings.childOffset));
 
     } else if (this.state == MenuItemState.GRANDCHILD) {
-      this._grandchildBackgroundActor.opacity = 255;
-      this.set_position(
-          Math.floor(Math.sin(this.angle) * 25), -Math.floor(Math.cos(this.angle) * 25));
-    }
 
-    if (this.state == MenuItemState.ACTIVE || this.state == MenuItemState.CHILD) {
-      if (!this._iconColor) {
-        let iconSurface = utils.getIcon(this.icon, 24);
-        this._iconColor = utils.getAverageIconColor(iconSurface, 24, 0.25, 0.25);
+      let size     = this._settings.grandchildSize;
+      let iconSize = size * this._settings.childIconScale;
+
+      if (this._centerIcon) {
+        setSizeAndOpacity(this._centerIcon, iconSize, 0);
       }
 
-      this._centerBackgroundActor.get_effects()[0].tint     = this._iconColor;
-      this._childBackgroundActor.get_effects()[0].tint      = this._iconColor;
-      this._grandchildBackgroundActor.get_effects()[0].tint = this._iconColor;
+      if (this._childIcon) {
+        setSizeAndOpacity(this._childIcon, iconSize, 0);
+      }
+
+      setSizeAndOpacity(this._background, size, 255);
+
+      this.set_position(
+          Math.floor(Math.sin(this.angle) * this._settings.grandchildOffset),
+          -Math.floor(Math.cos(this.angle) * this._settings.grandchildOffset));
     }
 
-    if (this.state == MenuItemState.HIDDEN) {
-      this.visible = false;
-    } else {
-      this.visible = true;
-
-      this._centerBackgroundActor.set_position(-100 / 2, -100 / 2);
-      this._centerBackgroundActor.set_size(100, 100);
-      this._childBackgroundActor.set_position(-50 / 2, -50 / 2);
-      this._childBackgroundActor.set_size(50, 50);
-      this._grandchildBackgroundActor.set_position(-10 / 2, -10 / 2);
-      this._grandchildBackgroundActor.set_size(10, 10);
-    }
+    this.visible = this.state != MenuItemState.INVISIBLE;
   }
 
-  _createIcon() {
-    // Create Icon Actor.
-    this._iconCanvas = new Clutter.Canvas({height: 32, width: 32});
-    this._iconCanvas.connect('draw', (canvas, ctx, width, height) => {
+  // Create Icon Actor.
+  _createIcon(size) {
+    let canvas = new Clutter.Canvas({height: size, width: size});
+    canvas.connect('draw', (c, ctx, width, height) => {
       ctx.setOperator(Cairo.Operator.CLEAR);
       ctx.paint();
       ctx.setOperator(Cairo.Operator.OVER);
 
-      let iconSurface = utils.getIcon(this.icon, Math.min(width, height));
-      ctx.setSourceSurface(iconSurface, 0, 0);
+      let icon = utils.getIcon(this.icon, size);
+      ctx.setSourceSurface(icon, 0, 0);
       ctx.paint();
     });
 
-    this._iconCanvas.invalidate();
+    canvas.invalidate();
 
-    this._iconActor = new Clutter.Actor();
-    this._iconActor.set_content(this._iconCanvas);
-    this._iconActor.set_easing_duration(300);
-    this._iconActor.minification_filter = Clutter.ScalingFilter.TRILINEAR;
+    let actor = new Clutter.Actor();
+    actor.set_content(canvas);
 
-    this.add_child(this._iconActor);
+    return actor;
   }
 });

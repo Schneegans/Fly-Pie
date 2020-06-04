@@ -120,13 +120,13 @@
       <description>The saturation of automatically generated item colors.</description>
     </key>
 
-    <key name="center-auto-color-brightness" type="d">
+    <key name="center-auto-color-luminance" type="d">
       <default>0.5</default>
-      <summary>Center Auto Color Brightness</summary>
-      <description>The brightness of automatically generated item colors.</description>
+      <summary>Center Auto Color Luminance</summary>
+      <description>The luminance of automatically generated item colors.</description>
     </key>
 
-    <key name="center-size" type="i">
+    <key name="center-size" type="d">
       <default>100</default>
       <summary>Center Size</summary>
       <description>The size of the center element in pixels.</description>
@@ -178,34 +178,34 @@
       <description>The saturation of automatically generated item colors when hovered.</description>
     </key>
 
-    <key name="child-auto-color-brightness" type="d">
+    <key name="child-auto-color-luminance" type="d">
       <default>0.5</default>
-      <summary>Child Auto Color Brightness</summary>
-      <description>The brightness of automatically generated item colors.</description>
+      <summary>Child Auto Color Luminance</summary>
+      <description>The luminance of automatically generated item colors.</description>
     </key>
-    <key name="child-auto-color-brightness-hover" type="d">
+    <key name="child-auto-color-luminance-hover" type="d">
       <default>0.5</default>
-      <summary>Child Auto Color Brightness Hover</summary>
-      <description>The brightness of automatically generated item colors when hovered.</description>
+      <summary>Child Auto Color Luminance Hover</summary>
+      <description>The luminance of automatically generated item colors when hovered.</description>
     </key>
 
-    <key name="child-size" type="i">
+    <key name="child-size" type="d">
       <default>50</default>
       <summary>Child Size</summary>
       <description>The size of the children elements in pixels.</description>
     </key>
-    <key name="child-size-hover" type="i">
+    <key name="child-size-hover" type="d">
       <default>50</default>
       <summary>Child Size Hover</summary>
       <description>The size of the children elements in pixels when hovered.</description>
     </key>
 
-    <key name="child-offset" type="i">
+    <key name="child-offset" type="d">
       <default>100</default>
       <summary>Child Offset</summary>
       <description>The offset of the children elements in pixels.</description>
     </key>
-    <key name="child-offset-hover" type="i">
+    <key name="child-offset-hover" type="d">
       <default>100</default>
       <summary>Child Offset Hover</summary>
       <description>The offset of the children elements in pixels when hovered.</description>
@@ -257,23 +257,23 @@
       <description>The color of the menu's grandchild element when hovered.</description>
     </key>
 
-    <key name="grandchild-size" type="i">
+    <key name="grandchild-size" type="d">
       <default>10</default>
       <summary>grandChild Size</summary>
       <description>The size of the grandchildren elements in pixels.</description>
     </key>
-    <key name="grandchild-size-hover" type="i">
+    <key name="grandchild-size-hover" type="d">
       <default>10</default>
       <summary>grandChild Size Hover</summary>
       <description>The size of the grandchildren elements in pixels when hovered.</description>
     </key>
 
-    <key name="grandchild-offset" type="i">
+    <key name="grandchild-offset" type="d">
       <default>25</default>
       <summary>Grandchild Offset</summary>
       <description>The offset of the grandchildren elements in pixels.</description>
     </key>
-    <key name="grandchild-offset-hover" type="i">
+    <key name="grandchild-offset-hover" type="d">
       <default>25</default>
       <summary>Grandchild Offset Hover</summary>
       <description>The offset of the grandchildren elements in pixels when hovered.</description>

@@ -68,7 +68,7 @@ var Client = class Client {
       return;
     }
 
-    this._lastMenu = {icon: '🌀', name: 'Main Menu', items: []};
+    this._lastMenu = {icon: 'firefox', name: 'Main Menu', items: []};
     this._lastMenu.items.push(MenuFactory.getAppMenuItems());
     this._lastMenu.items.push(MenuFactory.getUserDirectoriesItems());
     this._lastMenu.items.push(MenuFactory.getRecentItems());

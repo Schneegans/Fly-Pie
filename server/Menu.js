@@ -41,12 +41,7 @@ var Menu = class Menu {
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
 
-    this._centerCanvas =
-        this._createItemBackground(this._settings.get_string('center-color'));
-    this._childCanvas =
-        this._createItemBackground(this._settings.get_string('child-color'));
-    this._grandchildCanvas =
-        this._createItemBackground(this._settings.get_string('grandchild-color'));
+    this._itemBackground = this._createItemBackground();
 
     this._background.connect('button-release-event', (actor, event) => {
       if (event.get_button() == 3 && !this._editMode) {
@@ -82,7 +77,7 @@ var Menu = class Menu {
 
   destroy() {
     Main.layoutManager.removeChrome(this._background);
-    this._background = null;
+    this._background.destroy();
   }
 
   // -------------------------------------------------------------------- public interface
@@ -103,7 +98,7 @@ var Menu = class Menu {
 
     // Remove any previous menus.
     if (this._structure && this._structure.actor) {
-      this._background.remove_child(this._structure.actor);
+      this._structure.actor.destroy();
     }
 
     // Store the structure.
@@ -208,9 +203,7 @@ var Menu = class Menu {
       item.actor = new MenuItem({
         icon: item.icon,
         angle: item.angle * Math.PI / 180,
-        center_canvas: this._centerCanvas,
-        child_canvas: this._childCanvas,
-        grandchild_canvas: this._grandchildCanvas,
+        backgroundCanvas: this._itemBackground,
         state: state
       });
 
@@ -348,14 +341,19 @@ var Menu = class Menu {
   _onSettingsChange() {
     let globalScale = this._settings.get_double('global-scale');
 
-    this._centerCanvas.scale_factor = this._settings.get_int('center-size') * globalScale;
-    this._childCanvas.scale_factor  = this._settings.get_int('child-size') * globalScale;
-    this._grandchildCanvas.scale_factor =
-        this._settings.get_int('grandchild-size') * globalScale;
+    let itemBackgroundSizes = [
+      this._settings.get_double('center-size'),
+      this._settings.get_double('child-size'),
+      this._settings.get_double('child-size-hover'),
+      this._settings.get_double('grandchild-size'),
+      this._settings.get_double('grandchild-size-hover'),
+    ];
+    let maxItemBackgroundSize = 0;
+    itemBackgroundSizes.forEach(size => {
+      maxItemBackgroundSize = Math.max(size, maxItemBackgroundSize);
+    });
 
-    if (this._structure.actor) {
-      this._structure.actor.set_scale(globalScale, globalScale);
-    }
+    this._itemBackground.scale_factor = maxItemBackgroundSize * globalScale;
 
     this._foreachItem(item => {
       if (item.actor) {
@@ -365,12 +363,11 @@ var Menu = class Menu {
   }
 
   // For performance reasons, all menu items share the same Clutter.Canvas for their
-  // background. This method creates it.
-  _createItemBackground(colorString) {
+  // background. This method creates it. It has a width and height of one.
+  // Clutter.Canvas.scale_factor() is later used to scale the canvas to an appropriate
+  // size.
+  _createItemBackground() {
     let canvas = new Clutter.Canvas({height: 1, width: 1});
-
-    let rgba = new Gdk.RGBA();
-    rgba.parse(colorString);
 
     canvas.connect('draw', (canvas, ctx, width, height) => {
       ctx.setOperator(Cairo.Operator.CLEAR);
@@ -379,7 +376,7 @@ var Menu = class Menu {
       ctx.scale(width, height);
       ctx.translate(0.5, 0.5);
       ctx.arc(0, 0, 0.5, 0, 2.0 * Math.PI);
-      ctx.setSourceRGBA(rgba.red, rgba.green, rgba.blue, rgba.alpha);
+      ctx.setSourceRGB(1, 1, 1);
       ctx.fill();
     });
 
