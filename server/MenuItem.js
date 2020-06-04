@@ -87,10 +87,14 @@ class MenuItem extends Clutter.Actor {
       animationDuration:             settings.get_double('animation-duration'),
       textColor:                     utils.stringToRGBA(settings.get_string('text-color')),
       font:                          settings.get_string('font'),
+      centerColorMode:               settings.get_string('center-color-mode'),
+      centerColor:                   Clutter.Color.from_string(settings.get_string('center-color'))[1],
       centerSize:                    settings.get_double('center-size')             * globalScale,
       centerIconScale:               settings.get_double('center-icon-scale'),
       centerAutoColorSaturation:     settings.get_double('center-auto-color-saturation'),
       centerAutoColorLuminance:      settings.get_double('center-auto-color-luminance'),
+      childColorMode:                settings.get_string('child-color-mode'),
+      childColor:                    Clutter.Color.from_string(settings.get_string('child-color'))[1],
       childSize:                     settings.get_double('child-size')              * globalScale,
       childSizeHover:                settings.get_double('child-size-hover')        * globalScale,
       childOffset:                   settings.get_double('child-offset')            * globalScale,
@@ -101,6 +105,8 @@ class MenuItem extends Clutter.Actor {
       childAutoColorSaturationHover: settings.get_double('child-auto-color-saturation-hover'),
       childAutoColorLuminance:       settings.get_double('child-auto-color-luminance'),
       childAutoColorLuminanceHover:  settings.get_double('child-auto-color-luminance-hover'),
+      grandchildColorMode:           settings.get_string('grandchild-color-mode'),
+      grandchildColor:               Clutter.Color.from_string(settings.get_string('grandchild-color'))[1],
       grandchildSize:                settings.get_double('grandchild-size')         * globalScale,
       grandchildSizeHover:           settings.get_double('grandchild-size-hover')   * globalScale,
       grandchildOffset:              settings.get_double('grandchild-offset')       * globalScale,
@@ -132,9 +138,12 @@ class MenuItem extends Clutter.Actor {
         this._centerIcon = this._createIcon(iconSize);
         this._centerIcon.set_easing_duration(this._settings.animationDuration);
         this.add_child(this._centerIcon);
-        this._centerIconColor = utils.getAverageIconColor(
-            utils.getIcon(this.icon, 24), 24, this._settings.centerAutoColorSaturation,
-            this._settings.centerAutoColorLuminance);
+
+        if (this._settings.centerColorMode == 'auto') {
+          this._centerIconColor = utils.getAverageIconColor(
+              utils.getIcon(this.icon, 24), 24, this._settings.centerAutoColorSaturation,
+              this._settings.centerAutoColorLuminance);
+        }
       }
 
       setSizeAndOpacity(this._centerIcon, iconSize, 255);
@@ -144,7 +153,11 @@ class MenuItem extends Clutter.Actor {
         setSizeAndOpacity(this._childIcon, iconSize, 0);
       }
 
-      this._background.get_effects()[0].tint = this._centerIconColor;
+      if (this._settings.centerColorMode == 'auto') {
+        this._background.get_effects()[0].tint = this._centerIconColor;
+      } else {
+        this._background.get_effects()[0].tint = this._settings.centerColor;
+      }
 
     } else if (this.state == MenuItemState.CHILD) {
 
@@ -155,9 +168,12 @@ class MenuItem extends Clutter.Actor {
         this._childIcon = this._createIcon(iconSize);
         this._childIcon.set_easing_duration(this._settings.animationDuration);
         this.add_child(this._childIcon);
-        this._childIconColor = utils.getAverageIconColor(
-            utils.getIcon(this.icon, 24), 24, this._settings.childAutoColorSaturation,
-            this._settings.childAutoColorLuminance);
+
+        if (this._settings.childColorMode == 'auto') {
+          this._childIconColor = utils.getAverageIconColor(
+              utils.getIcon(this.icon, 24), 24, this._settings.childAutoColorSaturation,
+              this._settings.childAutoColorLuminance);
+        }
       }
 
       setSizeAndOpacity(this._childIcon, iconSize, 255);
@@ -167,7 +183,11 @@ class MenuItem extends Clutter.Actor {
         setSizeAndOpacity(this._centerIcon, iconSize, 0);
       }
 
-      this._background.get_effects()[0].tint = this._childIconColor;
+      if (this._settings.childColorMode == 'auto') {
+        this._background.get_effects()[0].tint = this._childIconColor;
+      } else {
+        this._background.get_effects()[0].tint = this._settings.childColor;
+      }
 
       this.set_position(
           Math.floor(Math.sin(this.angle) * this._settings.childOffset),
@@ -187,6 +207,8 @@ class MenuItem extends Clutter.Actor {
       }
 
       setSizeAndOpacity(this._background, size, 255);
+
+      this._background.get_effects()[0].tint = this._settings.grandchildColor;
 
       this.set_position(
           Math.floor(Math.sin(this.angle) * this._settings.grandchildOffset),
