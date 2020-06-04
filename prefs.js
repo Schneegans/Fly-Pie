@@ -62,8 +62,6 @@ let Settings = class Settings {
     this._bindColorButton('background-color');
     this._bindColorButton('text-color');
     this._bindFontButton('font');
-    this._bindSlider('auto-color-saturation');
-    this._bindSlider('auto-color-brightness');
 
     // Wedge Settings.
     this._bindSlider('wedge-size');
@@ -74,12 +72,16 @@ let Settings = class Settings {
     // Center Item Settings.
     this._bindRadioGroup('center-color-mode', ['fixed', 'auto']);
     this._bindColorButton('center-color');
+    this._bindSlider('center-auto-color-saturation');
+    this._bindSlider('center-auto-color-brightness');
     this._bindSlider('center-size');
     this._bindSlider('center-icon-scale');
 
     // Child Item Settings.
     this._bindRadioGroup('child-color-mode', ['fixed', 'auto', 'parent']);
     this._bindColorButton('child-color');
+    this._bindSlider('child-auto-color-saturation');
+    this._bindSlider('child-auto-color-brightness');
     this._bindSlider('child-size');
     this._bindSlider('child-offset');
     this._bindSlider('child-icon-scale');
@@ -107,40 +109,54 @@ let Settings = class Settings {
 
   // This is used by all the methods below. It checks whether there is a button called
   // 'reset-*whatever*' in the user interface. If so, it binds a click-handler to that
-  // button resetting the corresponding settings key.
+  // button resetting the corresponding settings key. It will also reset any setting
+  // called 'settingsKey-hover' if one such exists.
   _bindResetButton(settingsKey) {
     let resetButton = this._builder.get_object('reset-' + settingsKey);
     if (resetButton) {
-      resetButton.connect('clicked', () => this._settings.reset(settingsKey));
+      resetButton.connect('clicked', () => {
+        this._settings.reset(settingsKey);
+        if (this._settings.settings_schema.has_key(settingsKey + '-hover')) {
+          this._settings.reset(settingsKey + '-hover');
+        }
+      });
     }
   }
 
   // Connects a Gtk.Range (or anything else which has a 'value' property) to a settings
-  // key. It also binds any corresponding reset buttons.
+  // key. It also binds any corresponding reset buttons and '-hover' variants if they
+  // exist.
   _bindSlider(settingsKey) {
-    this._settings.bind(
-        settingsKey, this._builder.get_object(settingsKey), 'value',
-        Gio.SettingsBindFlags.DEFAULT);
-
-    this._bindResetButton(settingsKey);
+    this._bind(settingsKey, 'value');
   }
 
   // Connects a Gtk.Switch (or anything else which has an 'active' property) to a settings
-  // key. It also binds any corresponding reset buttons.
+  // key. It also binds any corresponding reset buttons and '-hover' variants if they
+  // exist.
   _bindSwitch(settingsKey) {
-    this._settings.bind(
-        settingsKey, this._builder.get_object(settingsKey), 'active',
-        Gio.SettingsBindFlags.DEFAULT);
-
-    this._bindResetButton(settingsKey);
+    this._bind(settingsKey, 'active');
   }
 
   // Connects a Gtk.FontButton (or anything else which has a 'font-name' property) to a
-  // settings key. It also binds any corresponding reset buttons.
+  // settings key. It also binds any corresponding reset buttons and '-hover' variants if
+  // they exist.
   _bindFontButton(settingsKey) {
+    this._bind(settingsKey, 'font-name');
+  }
+
+  // Connects any widget's property to a settings key. The widget must have the same ID as
+  // the settings key. It also binds any corresponding reset buttons and '-hover' variants
+  // if they exist.
+  _bind(settingsKey, property) {
     this._settings.bind(
-        settingsKey, this._builder.get_object(settingsKey), 'font-name',
+        settingsKey, this._builder.get_object(settingsKey), property,
         Gio.SettingsBindFlags.DEFAULT);
+
+    if (this._settings.settings_schema.has_key(settingsKey + '-hover')) {
+      this._settings.bind(
+          settingsKey + '-hover', this._builder.get_object(settingsKey + '-hover'),
+          property, Gio.SettingsBindFlags.DEFAULT);
+    }
 
     this._bindResetButton(settingsKey);
   }
@@ -150,51 +166,77 @@ let Settings = class Settings {
   // 'settingsKey-value'. This handler sets the 'settingsKey' to 'value'. The button state
   // is also updated when the corresponding setting changes.
   _bindRadioGroup(settingsKey, possibleValues) {
-    possibleValues.forEach(value => {
-      let button = this._builder.get_object(settingsKey + '-' + value);
-      button.connect('toggled', () => {
-        if (button.active) {
-          this._settings.set_string(settingsKey, value);
-        }
-      });
-    });
 
-    // Update the button state when the settings change.
-    let settingSignalHandler = () => {
-      let value     = this._settings.get_string(settingsKey);
-      let button    = this._builder.get_object(settingsKey + '-' + value);
-      button.active = true;
+    // This is called once for 'settingsKey' and once for 'settingsKey-hover'.
+    let impl = (settingsKey, possibleValues) => {
+      possibleValues.forEach(value => {
+        let button = this._builder.get_object(settingsKey + '-' + value);
+        button.connect('toggled', () => {
+          if (button.active) {
+            this._settings.set_string(settingsKey, value);
+          }
+        });
+      });
+
+      // Update the button state when the settings change.
+      let settingSignalHandler = () => {
+        let value     = this._settings.get_string(settingsKey);
+        let button    = this._builder.get_object(settingsKey + '-' + value);
+        button.active = true;
+      };
+
+      this._settings.connect('changed::' + settingsKey, settingSignalHandler);
+
+      // Initialize the button with the state in the settings.
+      settingSignalHandler();
     };
 
-    this._settings.connect('changed::' + settingsKey, settingSignalHandler);
+    // Bind the normal settingsKey.
+    impl(settingsKey, possibleValues);
 
-    // Initialize the button with the state in the settings.
-    settingSignalHandler();
+    // And any '-hover' variant if present.
+    if (this._settings.settings_schema.has_key(settingsKey + '-hover')) {
+      impl(settingsKey + '-hover', possibleValues);
+    }
 
+    // And bind the corresponding reset button.
     this._bindResetButton(settingsKey);
   }
 
   // Colors are stored as strings like 'rgb(1, 0.5, 0)'. As Gio.Settings.bind_with_mapping
   // is not available yet, so we need to do the color conversion manually.
   _bindColorButton(settingsKey) {
-    let colorChooser = this._builder.get_object(settingsKey);
 
-    colorChooser.connect('color-set', () => {
-      this._settings.set_string(settingsKey, colorChooser.get_rgba().to_string());
-    });
+    // This is called once for 'settingsKey' and once for 'settingsKey-hover'.
+    let impl = (settingsKey) => {
+      let colorChooser = this._builder.get_object(settingsKey);
 
-    // Update the button state when the settings change.
-    let settingSignalHandler = () => {
-      let rgba = new Gdk.RGBA();
-      rgba.parse(this._settings.get_string(settingsKey));
-      colorChooser.rgba = rgba;
+      colorChooser.connect('color-set', () => {
+        this._settings.set_string(settingsKey, colorChooser.get_rgba().to_string());
+      });
+
+      // Update the button state when the settings change.
+      let settingSignalHandler = () => {
+        let rgba = new Gdk.RGBA();
+        rgba.parse(this._settings.get_string(settingsKey));
+        colorChooser.rgba = rgba;
+      };
+
+      this._settings.connect('changed::' + settingsKey, settingSignalHandler);
+
+      // Initialize the button with the state in the settings.
+      settingSignalHandler();
     };
 
-    this._settings.connect('changed::' + settingsKey, settingSignalHandler);
+    // Bind the normal settingsKey.
+    impl(settingsKey);
 
-    // Initialize the button with the state in the settings.
-    settingSignalHandler();
+    // And any '-hover' variant if present.
+    if (this._settings.settings_schema.has_key(settingsKey + '-hover')) {
+      impl(settingsKey + '-hover');
+    }
 
+    // And bind the corresponding reset button.
     this._bindResetButton(settingsKey);
   }
 
@@ -368,6 +410,7 @@ let Settings = class Settings {
   }
 }
 
+// ------------------------------------------------------------------------ global methods
 
 // Like 'extension.js' this is used for any one-time setup like translations.
 function init() {}
