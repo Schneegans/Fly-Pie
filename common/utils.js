@@ -124,13 +124,12 @@ function getIcon(name, size) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Returns a representative average Clutter.Color for a given Cairo.Surface. The alpha  //
-// value will always be 255. The saturationModifier and the luminanceModifier (both in  //
-// range [-1, 1]) can be used to tweak the resulting saturation and luminance values.   //
+// value will always be 255. The saturation and the luminance (both in range [0, 1])    //
+// can be used to tweak the resulting saturation and luminance values.                  //
 // This is based on code from the original Gnome-Pie.                                   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function getAverageIconColor(
-    iconSurface, iconSize, saturationModifier, luminanceModifier) {
+function getAverageIconColor(iconSurface, iconSize, saturation, luminance) {
 
   // surface.get_data() as well as surface.get_width() are not available somehow. Therefor
   // we have to pass in the icon size and use the pixbuf conversion below.
@@ -146,6 +145,7 @@ function getAverageIconColor(
     let b = pixels[i + 2] / 255;
     let a = pixels[i + 3] / 255;
 
+    // Put mor weight on non-transparent and more saturated colors.
     let saturation = Math.max(r, Math.max(g, b)) - Math.min(r, Math.min(g, b));
     let relevance  = 0.1 + 0.9 * a * saturation;
 
@@ -156,6 +156,7 @@ function getAverageIconColor(
     total += relevance;
   }
 
+  // Create a Clutter.Color based on the calculated values.
   let color = new Clutter.Color({
     red: rTotal / total * 255,
     green: gTotal / total * 255,
@@ -164,10 +165,19 @@ function getAverageIconColor(
 
   let [h, l, s] = color.to_hls();
 
-  s = Math.pow(
-      s, Math.tan((1 - Math.min(Math.max(saturationModifier, -1), 1)) * Math.PI / 4));
-  l = Math.pow(
-      l, Math.tan((1 - Math.min(Math.max(luminanceModifier, -1), 1)) * Math.PI / 4));
+  // Now we modify this color based on luminance and saturation. First we
+  // increase the base luminance to 0.5 so that we do not create pitch black colors.
+  l = 0.5 + l * 0.5;
+
+  let lFac = luminance * 2 - 1;
+  l        = lFac > 0 ? l * (1 - lFac) + 1 * lFac : l * (lFac + 1);
+
+  // We only modify the saturation if it's not too low. Else we will get artificial colors
+  // for already quite desaturated icons.
+  if (s > 0.1) {
+    let sFac = saturation * 2 - 1;
+    s        = sFac > 0 ? s * (1 - sFac) + 1 * sFac : s * (sFac + 1);
+  }
 
   return Clutter.Color.from_hls(h, l, s);
 }

@@ -84,7 +84,7 @@ var Client = class Client {
     });
     this._lastMenu.items.push({
       name: 'Test 3',
-      icon: '😆',
+      icon: 'X',
       activate: function() {
         utils.debug('Test 3!');
       }

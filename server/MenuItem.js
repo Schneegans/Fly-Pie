@@ -134,7 +134,7 @@ class MenuItem extends Clutter.Actor {
     if (this.state == MenuItemState.ACTIVE || this.state == MenuItemState.CHILD) {
       if (!this._iconColor) {
         let iconSurface = utils.getIcon(this.icon, 24);
-        this._iconColor = utils.getAverageIconColor(iconSurface, 24, 0.0, 0.5);
+        this._iconColor = utils.getAverageIconColor(iconSurface, 24, 0.25, 0.25);
       }
 
       this._centerBackgroundActor.get_effects()[0].tint     = this._iconColor;

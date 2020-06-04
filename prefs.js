@@ -19,20 +19,20 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
 let Settings = class Settings {
   constructor() {
-    this._builder  = null;
+
+    // Create the Gio.Settings object.
     this._settings = utils.createSettings();
 
+    // Load the user interface file.
     this._builder = new Gtk.Builder();
     this._builder.add_from_file(Me.path + '/prefs.ui');
 
     // Connect to the server so that we can toggle menus also from the preferences.
     new DBusWrapper(
         Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/gnomepie2',
-        (proxy) => {
-          this._dbus = proxy;
-        });
+        proxy => this._dbus = proxy);
 
-    // Preview Button.
+    // Show the Demo Menu when the Preview Button is pressed.
     let previewButton = this._builder.get_object('preview-button');
     previewButton.connect('clicked', () => {
       if (this._dbus) {
@@ -40,7 +40,13 @@ let Settings = class Settings {
       }
     });
 
+    // Draw icons to the Gtk.DrawingAreas of the appearance tabs.
     this._createAppearanceTabIcons();
+
+    // Now connect the user interface elements to the setting items of the Gio.Settings at
+    // org.gnome.shell.extensions.gnomepie2. All these connections work both ways - when a
+    // slider is moved in the user interface the corresponding settings key will be
+    // updated and when a settings key is modified, the corresponding slider is moved.
 
     // General Settings.
     this._bindSlider('global-scale');
@@ -78,9 +84,13 @@ let Settings = class Settings {
     this._bindSlider('grandchild-offset');
     this._bindSwitch('grandchild-draw-above');
 
+    // This is our top-level widget which we will return later.
     this.widget = this._builder.get_object('main-notebook');
   }
 
+  // This is used by all the methods below. It checks whether there is a button called
+  // 'reset-*whatever*' in the user interface. If so, it binds a click-handler to that
+  // button resetting the corresponding settings key.
   _bindResetButton(settingsKey) {
     let resetButton = this._builder.get_object('reset-' + settingsKey);
     if (resetButton) {
@@ -88,6 +98,8 @@ let Settings = class Settings {
     }
   }
 
+  // Connects a Gtk.Range (or anything else which has a 'value' property) to a settings
+  // key. It also binds any corresponding reset buttons.
   _bindSlider(settingsKey) {
     this._settings.bind(
         settingsKey, this._builder.get_object(settingsKey), 'value',
@@ -96,6 +108,8 @@ let Settings = class Settings {
     this._bindResetButton(settingsKey);
   }
 
+  // Connects a Gtk.Switch (or anything else which has an 'active' property) to a settings
+  // key. It also binds any corresponding reset buttons.
   _bindSwitch(settingsKey) {
     this._settings.bind(
         settingsKey, this._builder.get_object(settingsKey), 'active',
@@ -104,6 +118,8 @@ let Settings = class Settings {
     this._bindResetButton(settingsKey);
   }
 
+  // Connects a Gtk.FontButton (or anything else which has a 'font-name' property) to a
+  // settings key. It also binds any corresponding reset buttons.
   _bindFontButton(settingsKey) {
     this._settings.bind(
         settingsKey, this._builder.get_object(settingsKey), 'font-name',
@@ -112,6 +128,10 @@ let Settings = class Settings {
     this._bindResetButton(settingsKey);
   }
 
+  // Connects a group of Gtk.RadioButtons to a string property of the settings. Foreach
+  // 'value' in 'possibleValues', a toggle-handler is added to a button called
+  // 'settingsKey-value'. This handler sets the 'settingsKey' to 'value'. The button state
+  // is also updated when the corresponding setting changes.
   _bindRadioGroup(settingsKey, possibleValues) {
     possibleValues.forEach(value => {
       let button = this._builder.get_object(settingsKey + '-' + value);
@@ -122,6 +142,7 @@ let Settings = class Settings {
       });
     });
 
+    // Update the button state when the settings change.
     let settingSignalHandler = () => {
       let value     = this._settings.get_string(settingsKey);
       let button    = this._builder.get_object(settingsKey + '-' + value);
@@ -136,8 +157,8 @@ let Settings = class Settings {
     this._bindResetButton(settingsKey);
   }
 
-  // Gio.Settings.bind_with_mapping is not available yet, so we need to do the color
-  // conversion like this.
+  // Colors are stored as strings like 'rgb(1, 0.5, 0)'. As Gio.Settings.bind_with_mapping
+  // is not available yet, so we need to do the color conversion manually.
   _bindColorButton(settingsKey) {
     let colorChooser = this._builder.get_object(settingsKey);
 
@@ -145,6 +166,7 @@ let Settings = class Settings {
       this._settings.set_string(settingsKey, colorChooser.get_rgba().to_string());
     });
 
+    // Update the button state when the settings change.
     let settingSignalHandler = () => {
       let rgba = new Gdk.RGBA();
       rgba.parse(this._settings.get_string(settingsKey));
@@ -159,12 +181,14 @@ let Settings = class Settings {
     this._bindResetButton(settingsKey);
   }
 
+  // This draws the custom icons of the appearance settings tabs.
   _createAppearanceTabIcons() {
 
+    // We have to add these events to the Gtk.DrawingAreas to make them actually
+    // clickable. Else it would not be possible to select the tabs.
     let tabEvents = Gdk.EventMask.BUTTON_PRESS_MASK | Gdk.EventMask.BUTTON_RELEASE_MASK;
 
     // Draw six lines representing the wedge separators.
-
     let tabIcon = this._builder.get_object('wedges-tab-icon');
     tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {
@@ -252,6 +276,7 @@ let Settings = class Settings {
     });
   }
 
+  // This creates a Demo Menu structure which is shown when the preview button is pressed.
   _createDemoMenu() {
     return {
       name: 'Demo Menu', icon: '🎂', items: [
