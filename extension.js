@@ -16,16 +16,16 @@ const Client = Me.imports.client.Client.Client;
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 //                    .-----------.           This extension consists of two major      //
-//                    | server.js |           parts: A server and a client. The server  //
-//                    '-----------'           listens on the DBus for incoming Menu-    //
-//                        |                   Toggle requests. These can be issued      //
+//                    | Server.js |           parts: A server and a client. The server  //
+//                    '-----------'           listens on the DBus for incoming Show-    //
+//                        |                   Menu requests. These can be issued        //
 //   .-----------------------------------.    either by the client or by any other      //
-//   |     DBUS (dbusInterface.js)       |    application. The client registers key     //
-//   '-----------------------------------'    bindings and issues Menu-Toggle requests  //
-//             |                   |                          over the DBus when the    //
-//   .-------------------.   .-----------.      .---------.   keys are pressed. The     //
-//   | Other Application |   | client.js | --- | prefs.js |   keys can be configured    //
-//   '-------------------'   '-----------'     '----------'   via the preferences.      //
+//   |     DBus (DBusInterface.js)       |    application. The client registers key     //
+//   '-----------------------------------'    bindings and issues Show-Menu requests    //
+//             |                   |          over the DBus when the keys are pressed.  //
+//   .--------------------.  .-----------.                                              //
+//   | Other Applications |  | Client.js |                                              //
+//   '--------------------'  '-----------'                                              //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 

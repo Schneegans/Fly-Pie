@@ -17,7 +17,18 @@ const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
+//////////////////////////////////////////////////////////////////////////////////////////
+// This class loads the user interface defined in prefs.ui and connects all elements to //
+// the corresponding settings items of the Gio.Settings at                              //
+// org.gnome.shell.extensions.gnomepie2. All these connections work both ways - when a  //
+// slider is moved in the user interface the corresponding settings key will be         //
+// updated and when a settings key is modified, the corresponding slider is moved.      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
 let Settings = class Settings {
+
+  // ------------------------------------------------------------ constructor / destructor
+
   constructor() {
 
     // Create the Gio.Settings object.
@@ -43,10 +54,7 @@ let Settings = class Settings {
     // Draw icons to the Gtk.DrawingAreas of the appearance tabs.
     this._createAppearanceTabIcons();
 
-    // Now connect the user interface elements to the setting items of the Gio.Settings at
-    // org.gnome.shell.extensions.gnomepie2. All these connections work both ways - when a
-    // slider is moved in the user interface the corresponding settings key will be
-    // updated and when a settings key is modified, the corresponding slider is moved.
+    // Now connect the user interface elements to the settings items.
 
     // General Settings.
     this._bindSlider('global-scale');
@@ -85,8 +93,17 @@ let Settings = class Settings {
     this._bindSwitch('grandchild-draw-above');
 
     // This is our top-level widget which we will return later.
-    this.widget = this._builder.get_object('main-notebook');
+    this._widget = this._builder.get_object('main-notebook');
   }
+
+  // -------------------------------------------------------------------- public interface
+
+  // Returns the widget used for the settings of this extension.
+  getWidget() {
+    return this._widget;
+  }
+
+  // ----------------------------------------------------------------------- private stuff
 
   // This is used by all the methods below. It checks whether there is a button called
   // 'reset-*whatever*' in the user interface. If so, it binds a click-handler to that
@@ -359,5 +376,5 @@ function init() {}
 // and return a Gtk widget.
 function buildPrefsWidget() {
   let settings = new Settings();
-  return settings.widget;
+  return settings.getWidget();
 }
