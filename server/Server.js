@@ -52,6 +52,7 @@ var Server = class Server {
     this._nextID = 0;
   }
 
+  // Cleans up stuff which is not cleaned up automatically.
   destroy() {
     this._menu.destroy();
     this._dbus.unexport();
@@ -71,8 +72,12 @@ var Server = class Server {
 
   // ----------------------------------------------------------------------- private stuff
 
+  // Open the menu described by 'json', optionally in edit mode. This will return the
+  // menu's ID on success or an error code on failure. See common/DBusInterface.js for a
+  // list of error codes.
   _openMenu(json, editMode) {
-    // Try to parse the menu structure.
+
+    // First try to parse the menu structure.
     let structure;
     try {
       structure = JSON.parse(json);
@@ -81,8 +86,8 @@ var Server = class Server {
       return DBusInterface.errorCodes.eInvalidJSON;
     }
 
-    // Try to open the menu. This will return the menu's ID on success or an error
-    // code on failure. See common/DBusInterface.js for a list of error codes.
+    // Then try to open the menu. This will return the menu's ID on success or an error
+    // code on failure.
     try {
       return this._menu.show(this._nextID++, structure, editMode);
     } catch (error) {
