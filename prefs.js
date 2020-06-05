@@ -79,6 +79,7 @@ let Settings = class Settings {
     this._bindColorButton('center-fixed-color');
     this._bindSlider('center-auto-color-saturation');
     this._bindSlider('center-auto-color-luminance');
+    this._bindSlider('center-auto-color-alpha');
     this._bindSlider('center-size');
     this._bindSlider('center-icon-scale');
 
@@ -88,6 +89,7 @@ let Settings = class Settings {
       this._settings.reset('center-fixed-color');
       this._settings.reset('center-auto-color-saturation');
       this._settings.reset('center-auto-color-luminance');
+      this._settings.reset('center-auto-color-alpha');
     });
 
 
@@ -104,6 +106,7 @@ let Settings = class Settings {
     this._bindColorButton('child-fixed-color');
     this._bindSlider('child-auto-color-saturation');
     this._bindSlider('child-auto-color-luminance');
+    this._bindSlider('child-auto-color-alpha');
     this._bindSlider('child-size');
     this._bindSlider('child-offset');
     this._bindSlider('child-icon-scale');
@@ -116,9 +119,11 @@ let Settings = class Settings {
       this._settings.reset('child-fixed-color');
       this._settings.reset('child-auto-color-saturation');
       this._settings.reset('child-auto-color-luminance');
+      this._settings.reset('child-auto-color-alpha');
       this._settings.reset('child-fixed-color-hover');
       this._settings.reset('child-auto-color-saturation-hover');
       this._settings.reset('child-auto-color-luminance-hover');
+      this._settings.reset('child-auto-color-alpha-hover');
     });
 
 

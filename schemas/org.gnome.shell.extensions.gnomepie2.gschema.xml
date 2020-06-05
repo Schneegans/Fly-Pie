@@ -126,6 +126,12 @@
       <description>The luminance of automatically generated item colors.</description>
     </key>
 
+    <key name="center-auto-color-alpha" type="d">
+      <default>1.0</default>
+      <summary>Center Auto Color Alpha</summary>
+      <description>The alpha value of automatically generated item colors.</description>
+    </key>
+
     <key name="center-size" type="d">
       <default>100</default>
       <summary>Center Size</summary>
@@ -187,6 +193,17 @@
       <default>0.5</default>
       <summary>Child Auto Color Luminance Hover</summary>
       <description>The luminance of automatically generated item colors when hovered.</description>
+    </key>
+
+    <key name="child-auto-color-alpha" type="d">
+      <default>1.0</default>
+      <summary>Child Auto Color Alpha</summary>
+      <description>The alpha value of automatically generated item colors.</description>
+    </key>
+    <key name="child-auto-color-alpha-hover" type="d">
+      <default>1.0</default>
+      <summary>Child Auto Color Alpha Hover</summary>
+      <description>The alpha value of automatically generated item colors when hovered.</description>
     </key>
 
     <key name="child-size" type="d">

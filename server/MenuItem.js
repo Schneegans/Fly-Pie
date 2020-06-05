@@ -101,6 +101,7 @@ class MenuItem extends Clutter.Actor {
       centerIconScale:               settings.get_double('center-icon-scale'),
       centerAutoColorSaturation:     settings.get_double('center-auto-color-saturation'),
       centerAutoColorLuminance:      settings.get_double('center-auto-color-luminance'),
+      centerAutoColorAlpha:          settings.get_double('center-auto-color-alpha')      * 255,
       childColorMode:                settings.get_string('child-color-mode'),
       childFixedColor:               Clutter.Color.from_string(settings.get_string('child-fixed-color'))[1],
       childSize:                     settings.get_double('child-size')              * globalScale,
@@ -113,6 +114,8 @@ class MenuItem extends Clutter.Actor {
       childAutoColorSaturationHover: settings.get_double('child-auto-color-saturation-hover'),
       childAutoColorLuminance:       settings.get_double('child-auto-color-luminance'),
       childAutoColorLuminanceHover:  settings.get_double('child-auto-color-luminance-hover'),
+      childAutoColorAlpha:           settings.get_double('child-auto-color-alpha')       * 255,
+      childAutoColorAlphaHover:      settings.get_double('child-auto-color-alpha-hover') * 255,
       childDrawAbove:                settings.get_boolean('child-draw-above'),
       grandchildColorMode:           settings.get_string('grandchild-color-mode'),
       grandchildFixedColor:          Clutter.Color.from_string(settings.get_string('grandchild-fixed-color'))[1],
@@ -159,15 +162,9 @@ class MenuItem extends Clutter.Actor {
         if (this._settings.centerColorMode == 'auto') {
           this._centerAutoColor = utils.getAverageIconColor(
               utils.getIcon(this.icon, 24), 24, this._settings.centerAutoColorSaturation,
-              this._settings.centerAutoColorLuminance);
+              this._settings.centerAutoColorLuminance,
+              this._settings.centerAutoColorAlpha);
         }
-      }
-
-      setSizeAndOpacity(this._centerIcon, iconSize, 255);
-      setSizeAndOpacity(this._background, size, 255);
-
-      if (this._childIcon) {
-        setSizeAndOpacity(this._childIcon, iconSize, 0);
       }
 
       if (this._settings.centerColorMode == 'auto') {
@@ -175,6 +172,16 @@ class MenuItem extends Clutter.Actor {
       } else {
         this._background.get_effects()[0].tint = this._settings.centerColor;
       }
+
+      setSizeAndOpacity(this._centerIcon, iconSize, 255);
+      setSizeAndOpacity(
+          this._background, size, this._background.get_effects()[0].tint.alpha);
+
+      if (this._childIcon) {
+        setSizeAndOpacity(this._childIcon, iconSize, 0);
+      }
+
+
 
     } else if (this.state == MenuItemState.CHILD) {
 
@@ -195,15 +202,8 @@ class MenuItem extends Clutter.Actor {
         if (this._settings.childColorMode == 'auto') {
           this._childAutoColor = utils.getAverageIconColor(
               utils.getIcon(this.icon, 24), 24, this._settings.childAutoColorSaturation,
-              this._settings.childAutoColorLuminance);
+              this._settings.childAutoColorLuminance, this._settings.childAutoColorAlpha);
         }
-      }
-
-      setSizeAndOpacity(this._childIcon, iconSize, 255);
-      setSizeAndOpacity(this._background, size, 255);
-
-      if (this._centerIcon) {
-        setSizeAndOpacity(this._centerIcon, iconSize, 0);
       }
 
       if (this._settings.childColorMode == 'auto') {
@@ -211,6 +211,15 @@ class MenuItem extends Clutter.Actor {
       } else {
         this._background.get_effects()[0].tint = this._settings.childFixedColor;
       }
+
+      setSizeAndOpacity(this._childIcon, iconSize, 255);
+      setSizeAndOpacity(
+          this._background, size, this._background.get_effects()[0].tint.alpha);
+
+      if (this._centerIcon) {
+        setSizeAndOpacity(this._centerIcon, iconSize, 0);
+      }
+
 
       this.set_position(
           Math.floor(Math.sin(this.angle) * this._settings.childOffset),
@@ -229,9 +238,11 @@ class MenuItem extends Clutter.Actor {
         setSizeAndOpacity(this._childIcon, iconSize, 0);
       }
 
-      setSizeAndOpacity(this._background, size, 255);
-
       this._background.get_effects()[0].tint = this._settings.grandchildFixedColor;
+
+      setSizeAndOpacity(
+          this._background, size, this._background.get_effects()[0].tint.alpha);
+
 
       this.set_position(
           Math.floor(Math.sin(this.angle) * this._settings.grandchildOffset),

@@ -124,12 +124,12 @@ function getIcon(name, size) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Returns a representative average Clutter.Color for a given Cairo.Surface. The alpha  //
-// value will always be 255. The saturation and the luminance (both in range [0, 1])    //
+// can be passed as parameter. The saturation and the luminance (both in range [0, 1])  //
 // can be used to tweak the resulting saturation and luminance values.                  //
 // This is based on code from the original Gnome-Pie.                                   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function getAverageIconColor(iconSurface, iconSize, saturation, luminance) {
+function getAverageIconColor(iconSurface, iconSize, saturation, luminance, alpha) {
 
   // surface.get_data() as well as surface.get_width() are not available somehow. Therefor
   // we have to pass in the icon size and use the pixbuf conversion below.
@@ -179,7 +179,10 @@ function getAverageIconColor(iconSurface, iconSize, saturation, luminance) {
     s        = sFac > 0 ? s * (1 - sFac) + 1 * sFac : s * (sFac + 1);
   }
 
-  return Clutter.Color.from_hls(h, l, s);
+  color       = Clutter.Color.from_hls(h, l, s);
+  color.alpha = alpha;
+
+  return color;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
