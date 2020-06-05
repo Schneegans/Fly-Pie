@@ -63,10 +63,18 @@ class MenuItem extends Clutter.Actor {
 
     this.add_child(this._background);
 
+    // Create Children Container.
+    this._childrenContainer = new Clutter.Actor();
+    this.add_child(this._childrenContainer);
+
     this.connect('notify::state', this._onStateChange.bind(this));
   }
 
-  setSettings(settings) {
+  getChildrenContainer() {
+    return this._childrenContainer;
+  }
+
+  onSettingsChange(settings) {
 
     // First reset some members to force re-creation during the next state change.
     if (this._centerIcon) {
@@ -105,15 +113,18 @@ class MenuItem extends Clutter.Actor {
       childAutoColorSaturationHover: settings.get_double('child-auto-color-saturation-hover'),
       childAutoColorLuminance:       settings.get_double('child-auto-color-luminance'),
       childAutoColorLuminanceHover:  settings.get_double('child-auto-color-luminance-hover'),
+      childDrawAbove:                settings.get_boolean('child-draw-above'),
       grandchildColorMode:           settings.get_string('grandchild-color-mode'),
       grandchildFixedColor:          Clutter.Color.from_string(settings.get_string('grandchild-fixed-color'))[1],
       grandchildSize:                settings.get_double('grandchild-size')         * globalScale,
       grandchildSizeHover:           settings.get_double('grandchild-size-hover')   * globalScale,
       grandchildOffset:              settings.get_double('grandchild-offset')       * globalScale,
       grandchildOffsetHover:         settings.get_double('grandchild-offset-hover') * globalScale,
+      grandchildDrawAbove:           settings.get_boolean('grandchild-draw-above'),
     };
     // clang-format on
 
+    // The background always exists, so we update it here.
     this._background.set_easing_duration(this._settings.animationDuration);
 
     // Then execute a full state change.
@@ -130,6 +141,12 @@ class MenuItem extends Clutter.Actor {
     };
 
     if (this.state == MenuItemState.ACTIVE) {
+
+      if (this._settings.childDrawAbove) {
+        this.set_child_above_sibling(this._childrenContainer, null);
+      } else {
+        this.set_child_below_sibling(this._childrenContainer, null);
+      }
 
       let size     = this._settings.centerSize;
       let iconSize = size * this._settings.centerIconScale;
@@ -160,6 +177,12 @@ class MenuItem extends Clutter.Actor {
       }
 
     } else if (this.state == MenuItemState.CHILD) {
+
+      if (this._settings.grandchildDrawAbove) {
+        this.set_child_above_sibling(this._childrenContainer, null);
+      } else {
+        this.set_child_below_sibling(this._childrenContainer, null);
+      }
 
       let size     = this._settings.childSize;
       let iconSize = size * this._settings.childIconScale;

@@ -126,10 +126,12 @@ var Menu = class Menu {
     this._createActor(this._structure, this._background, MenuItemState.ACTIVE);
 
     this._structure.items.forEach(item => {
-      this._createActor(item, this._structure.actor, MenuItemState.CHILD);
+      this._createActor(
+          item, this._structure.actor.getChildrenContainer(), MenuItemState.CHILD);
 
       item.items.forEach(child => {
-        this._createActor(child, item.actor, MenuItemState.GRANDCHILD);
+        this._createActor(
+            child, item.actor.getChildrenContainer(), MenuItemState.GRANDCHILD);
       });
     });
 
@@ -202,9 +204,9 @@ var Menu = class Menu {
         state: state
       });
 
-      item.actor.setSettings(this._settings);
+      parent.add_child(item.actor);
 
-      parent.insert_child_at_index(item.actor, 0);
+      item.actor.onSettingsChange(this._settings);
     }
   }
 
@@ -333,9 +335,13 @@ var Menu = class Menu {
     return true;
   }
 
+  // This is called every time a settings key changes.
   _onSettingsChange() {
-    let globalScale = this._settings.get_double('global-scale');
 
+    // First update the scale factor of our item background circle. We make it as large as
+    // it can possible get. Usually this will be 'center-size' * 'global-scale', but in
+    // theory children items could be scaled larger than the center, so we check all of
+    // them to be on the safe side.
     let itemBackgroundSizes = [
       this._settings.get_double('center-size'),
       this._settings.get_double('child-size'),
@@ -343,16 +349,20 @@ var Menu = class Menu {
       this._settings.get_double('grandchild-size'),
       this._settings.get_double('grandchild-size-hover'),
     ];
+
     let maxItemBackgroundSize = 0;
     itemBackgroundSizes.forEach(size => {
       maxItemBackgroundSize = Math.max(size, maxItemBackgroundSize);
     });
 
-    this._itemBackground.scale_factor = maxItemBackgroundSize * globalScale;
+    this._itemBackground.scale_factor =
+        maxItemBackgroundSize * this._settings.get_double('global-scale');
 
+    // Then call onSettingsChange() for each item of our menu. This ensures that the menu
+    // is instantly updated in edit mode.
     this._foreachItem(item => {
       if (item.actor) {
-        item.actor.setSettings(this._settings);
+        item.actor.onSettingsChange(this._settings);
       }
     });
   }
