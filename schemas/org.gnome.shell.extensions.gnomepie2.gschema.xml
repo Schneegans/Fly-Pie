@@ -229,7 +229,7 @@
     </key>
 
     <key name="child-icon-scale" type="d">
-      <default>0.9</default>
+      <default>0.7</default>
       <summary>Child Icon Scale</summary>
       <description>A scale factor for child icons.</description>
     </key>

@@ -38,29 +38,8 @@ let Settings = class Settings {
     this._builder = new Gtk.Builder();
     this._builder.add_from_file(Me.path + '/prefs.ui');
 
-    // Add all presets to the user interface.
-    this._presetDirectory = Gio.File.new_for_path(Me.path + '/presets');
-    let presets           = this._presetDirectory.enumerate_children(
-        'standard::*', Gio.FileQueryInfoFlags.NONE, null);
-    let presetList = this._builder.get_object('preset-list');
-
-    let presetInfo;
-    while (presetInfo = presets.next_file(null)) {
-      if (presetInfo.get_file_type() == Gio.FileType.REGULAR) {
-        let presetFile = this._presetDirectory.get_child(presetInfo.get_name());
-        let row        = presetList.append();
-        presetList.set_value(row, 0, presetInfo.get_display_name());
-        presetList.set_value(row, 1, presetFile.get_path());
-      }
-    }
-
-    this._builder.get_object('preset-combobox').connect('changed', (combobox) => {
-      utils.notification(combobox.active);
-    });
-
-    this._builder.get_object('open-preset-directory-button').connect('clicked', () => {
-      Gio.AppInfo.launch_default_for_uri(this._presetDirectory.get_uri(), null);
-    });
+    // Initialize all buttons of the preset area.
+    this._initializePresetButtons();
 
     // Connect to the server so that we can toggle menus also from the preferences.
     new DBusWrapper(
@@ -184,6 +163,226 @@ let Settings = class Settings {
   }
 
   // ----------------------------------------------------------------------- private stuff
+
+  _initializePresetButtons() {
+    // Add all presets to the user interface.
+    this._presetDirectory = Gio.File.new_for_path(Me.path + '/presets');
+    this._presetList      = this._builder.get_object('preset-list');
+    let presets           = this._presetDirectory.enumerate_children(
+        'standard::*', Gio.FileQueryInfoFlags.NONE, null);
+
+    let presetInfo;
+    while (presetInfo = presets.next_file(null)) {
+      if (presetInfo.get_file_type() == Gio.FileType.REGULAR) {
+        let suffixPos = presetInfo.get_display_name().indexOf('.json');
+        if (suffixPos > 0) {
+          let presetFile = this._presetDirectory.get_child(presetInfo.get_name());
+          let row        = this._presetList.append();
+          this._presetList.set_value(
+              row, 0, presetInfo.get_display_name().slice(0, suffixPos));
+          this._presetList.set_value(row, 1, presetFile.get_path());
+        }
+      }
+    }
+
+    this._builder.get_object('preset-combobox').connect('changed', (combobox) => {
+      this._presetList = this._builder.get_object('preset-list');
+      let row          = combobox.get_active_iter()[1];
+      let path         = this._presetList.get_value(row, 1);
+
+      let file                = Gio.File.new_for_path(path);
+      let [success, contents] = file.load_contents(null);
+
+      try {
+        if (success) {
+          let settings = JSON.parse(contents);
+
+          let read = (key) => {
+            if (key in settings) {
+              let value = settings[key];
+              if (typeof value === 'string') {
+                this._settings.set_string(key, value);
+              } else if (typeof value === 'number') {
+                this._settings.set_double(key, value);
+              } else if (typeof value === 'boolean') {
+                this._settings.set_boolean(key, value);
+              }
+            }
+          };
+
+          read('animation-duration');
+          read('background-color');
+          read('text-color');
+          read('font');
+          read('wedge-size');
+          read('wedge-color');
+          read('active-wedge-color');
+          read('wedge-separator-color');
+          read('center-color-mode');
+          read('center-fixed-color');
+          read('center-auto-color-saturation');
+          read('center-auto-color-luminance');
+          read('center-auto-color-alpha');
+          read('center-size');
+          read('center-icon-scale');
+          read('child-color-mode');
+          read('child-color-mode-hover');
+          read('child-fixed-color');
+          read('child-fixed-color-hover');
+          read('child-auto-color-saturation');
+          read('child-auto-color-saturation-hover');
+          read('child-auto-color-luminance');
+          read('child-auto-color-luminance-hover');
+          read('child-auto-color-alpha');
+          read('child-auto-color-alpha-hover');
+          read('child-size');
+          read('child-size-hover');
+          read('child-offset');
+          read('child-offset-hover');
+          read('child-icon-scale');
+          read('child-icon-scale-hover');
+          read('child-draw-above');
+          read('grandchild-color-mode');
+          read('grandchild-color-mode-hover');
+          read('grandchild-fixed-color');
+          read('grandchild-fixed-color-hover');
+          read('grandchild-size');
+          read('grandchild-size-hover');
+          read('grandchild-offset');
+          read('grandchild-offset-hover');
+          read('grandchild-draw-above');
+        }
+
+      } catch (error) {
+        utils.notification('Failed to load preset: ' + error);
+      }
+    });
+
+    this._builder.get_object('save-preset-button').connect('clicked', (button) => {
+      let saver = new Gtk.FileChooserDialog({
+        title: 'Save Preset',
+        action: Gtk.FileChooserAction.SAVE,
+        do_overwrite_confirmation: true
+      });
+
+      let jsonFilter = new Gtk.FileFilter();
+      jsonFilter.set_name('JSON Files');
+      jsonFilter.add_mime_type('application/json');
+
+      let allFilter = new Gtk.FileFilter();
+      allFilter.add_pattern('*');
+      allFilter.set_name('All Files');
+
+      saver.add_filter(jsonFilter);
+      saver.add_filter(allFilter);
+
+      saver.add_button('Cancel', Gtk.ResponseType.CANCEL);
+      saver.add_button('Save', Gtk.ResponseType.OK);
+
+      saver.set_current_folder_uri(this._presetDirectory.get_uri());
+
+      saver.connect('response', (dialog, response_id) => {
+        if (response_id === Gtk.ResponseType.OK) {
+          try {
+            let settings = {};
+
+            let write = (key) => {
+              if (this._settings.settings_schema.get_key(key)
+                      .get_value_type()
+                      .dup_string() === 's') {
+                settings[key] = this._settings.get_string(key);
+              } else if (
+                  this._settings.settings_schema.get_key(key)
+                      .get_value_type()
+                      .dup_string() === 'd') {
+                settings[key] = this._settings.get_double(key);
+              } else if (
+                  this._settings.settings_schema.get_key(key)
+                      .get_value_type()
+                      .dup_string() === 'b') {
+                settings[key] = this._settings.get_boolean(key);
+              }
+            };
+
+            write('animation-duration');
+            write('background-color');
+            write('text-color');
+            write('font');
+            write('wedge-size');
+            write('wedge-color');
+            write('active-wedge-color');
+            write('wedge-separator-color');
+            write('center-color-mode');
+            write('center-fixed-color');
+            write('center-auto-color-saturation');
+            write('center-auto-color-luminance');
+            write('center-auto-color-alpha');
+            write('center-size');
+            write('center-icon-scale');
+            write('child-color-mode');
+            write('child-color-mode-hover');
+            write('child-fixed-color');
+            write('child-fixed-color-hover');
+            write('child-auto-color-saturation');
+            write('child-auto-color-saturation-hover');
+            write('child-auto-color-luminance');
+            write('child-auto-color-luminance-hover');
+            write('child-auto-color-alpha');
+            write('child-auto-color-alpha-hover');
+            write('child-size');
+            write('child-size-hover');
+            write('child-offset');
+            write('child-offset-hover');
+            write('child-icon-scale');
+            write('child-icon-scale-hover');
+            write('child-draw-above');
+            write('grandchild-color-mode');
+            write('grandchild-color-mode-hover');
+            write('grandchild-fixed-color');
+            write('grandchild-fixed-color-hover');
+            write('grandchild-size');
+            write('grandchild-size-hover');
+            write('grandchild-offset');
+            write('grandchild-offset-hover');
+            write('grandchild-draw-above');
+
+            let filename = dialog.get_filename();
+            if (!filename.endsWith('.json')) {
+              filename += '.json';
+            }
+
+            let file   = Gio.File.new_for_path(filename);
+            let exists = file.query_exists(null);
+
+            let success = file.replace_contents(
+                JSON.stringify(settings, null, 2), null, false,
+                Gio.FileCreateFlags.REPLACE_DESTINATION, null);
+
+            if (success && !exists) {
+              let fileInfo =
+                  file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
+              let suffixPos = fileInfo.get_display_name().indexOf('.json');
+              let row       = this._presetList.append();
+              this._presetList.set_value(
+                  row, 0, fileInfo.get_display_name().slice(0, suffixPos));
+              this._presetList.set_value(row, 1, file.get_path());
+            }
+
+          } catch (error) {
+            utils.notification('Failed to save preset: ' + error);
+          }
+        }
+
+        dialog.destroy();
+      });
+
+      saver.show();
+    });
+
+    this._builder.get_object('open-preset-directory-button').connect('clicked', () => {
+      Gio.AppInfo.launch_default_for_uri(this._presetDirectory.get_uri(), null);
+    });
+  }
 
   // This is used by all the methods below. It checks whether there is a button called
   // 'reset-*whatever*' in the user interface. If so, it binds a click-handler to that
