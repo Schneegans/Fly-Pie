@@ -38,6 +38,30 @@ let Settings = class Settings {
     this._builder = new Gtk.Builder();
     this._builder.add_from_file(Me.path + '/prefs.ui');
 
+    // Add all presets to the user interface.
+    this._presetDirectory = Gio.File.new_for_path(Me.path + '/presets');
+    let presets           = this._presetDirectory.enumerate_children(
+        'standard::*', Gio.FileQueryInfoFlags.NONE, null);
+    let presetList = this._builder.get_object('preset-list');
+
+    let presetInfo;
+    while (presetInfo = presets.next_file(null)) {
+      if (presetInfo.get_file_type() == Gio.FileType.REGULAR) {
+        let presetFile = this._presetDirectory.get_child(presetInfo.get_name());
+        let row        = presetList.append();
+        presetList.set_value(row, 0, presetInfo.get_display_name());
+        presetList.set_value(row, 1, presetFile.get_path());
+      }
+    }
+
+    this._builder.get_object('preset-combobox').connect('changed', (combobox) => {
+      utils.notification(combobox.active);
+    });
+
+    this._builder.get_object('open-preset-directory-button').connect('clicked', () => {
+      Gio.AppInfo.launch_default_for_uri(this._presetDirectory.get_uri(), null);
+    });
+
     // Connect to the server so that we can toggle menus also from the preferences.
     new DBusWrapper(
         Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/gnomepie2',
