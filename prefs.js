@@ -166,9 +166,12 @@ let Settings = class Settings {
 
   _initializePresetButtons() {
     // Add all presets to the user interface.
-    this._presetDirectory = Gio.File.new_for_path(Me.path + '/presets');
-    this._presetList      = this._builder.get_object('preset-list');
-    let presets           = this._presetDirectory.enumerate_children(
+    this._presetDirectory  = Gio.File.new_for_path(Me.path + '/presets');
+    this._presetList       = this._builder.get_object('preset-list');
+    this._presetListSorted = this._builder.get_object('preset-list-sorted');
+    this._presetListSorted.set_sort_column_id(1, Gtk.SortType.ASCENDING);
+
+    let presets = this._presetDirectory.enumerate_children(
         'standard::*', Gio.FileQueryInfoFlags.NONE, null);
 
     let presetInfo;
@@ -186,9 +189,8 @@ let Settings = class Settings {
     }
 
     this._builder.get_object('preset-combobox').connect('changed', (combobox) => {
-      this._presetList = this._builder.get_object('preset-list');
-      let row          = combobox.get_active_iter()[1];
-      let path         = this._presetList.get_value(row, 1);
+      let row  = combobox.get_active_iter()[1];
+      let path = this._presetListSorted.get_value(row, 1);
 
       let file                = Gio.File.new_for_path(path);
       let [success, contents] = file.load_contents(null);

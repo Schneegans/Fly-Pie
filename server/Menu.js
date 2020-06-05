@@ -66,7 +66,7 @@ var Menu = class Menu {
     // false.
     global.stage.cursor_visible = true;
 
-    this._settings.connect('changed', this._onSettingsChange.bind(this));
+    this._settings.connect('change-event', this._onSettingsChange.bind(this));
     this._onSettingsChange();
   }
 
