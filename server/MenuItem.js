@@ -55,6 +55,9 @@ class MenuItem extends Clutter.Actor {
   _init(params = {}) {
     super._init(params);
 
+    this._oldCenterIconSize = 0;
+    this._oldChildIconSize  = 0;
+
     // Create Background Actors.
     this._background                     = new Clutter.Actor();
     this._background.minification_filter = Clutter.ScalingFilter.TRILINEAR;
@@ -77,12 +80,19 @@ class MenuItem extends Clutter.Actor {
   onSettingsChange(settings) {
 
     // First reset some members to force re-creation during the next state change.
+
     if (this._centerIcon) {
+      // We store the icon size so that we can create the new one at the same size later.
+      // This allows for smooth icon size transitions in edit mode.
+      this._oldCenterIconSize = this._centerIcon.width;
       this._centerIcon.destroy();
       delete this._centerIcon;
     }
 
     if (this._childIcon) {
+      // We store the icon size so that we can create the new one at the same size later.
+      // This allows for smooth icon size transitions in edit mode.
+      this._oldChildIconSize = this._childIcon.width;
       this._childIcon.destroy();
       delete this._childIcon;
     }
@@ -92,7 +102,7 @@ class MenuItem extends Clutter.Actor {
 
     // clang-format off
     this._settings = {
-      animationDuration:             settings.get_double('animation-duration'),
+      animationDuration:             settings.get_double('animation-duration')      * 1000,
       textColor:                     utils.stringToRGBA(settings.get_string('text-color')),
       font:                          settings.get_string('font'),
       centerColorMode:               settings.get_string('center-color-mode'),
@@ -127,8 +137,9 @@ class MenuItem extends Clutter.Actor {
     };
     // clang-format on
 
-    // The background always exists, so we update it here.
+    // Some settings we can apply here.
     this._background.set_easing_duration(this._settings.animationDuration);
+    this.set_easing_duration(this._settings.animationDuration);
 
     // Then execute a full state change.
     this._onStateChange();
@@ -156,6 +167,7 @@ class MenuItem extends Clutter.Actor {
 
       if (!this._centerIcon) {
         this._centerIcon = this._createIcon(iconSize);
+        setSizeAndOpacity(this._centerIcon, this._oldCenterIconSize, 255);
         this._centerIcon.set_easing_duration(this._settings.animationDuration);
         this.add_child(this._centerIcon);
 
@@ -196,6 +208,7 @@ class MenuItem extends Clutter.Actor {
 
       if (!this._childIcon) {
         this._childIcon = this._createIcon(iconSize);
+        setSizeAndOpacity(this._childIcon, this._oldChildIconSize, 255);
         this._childIcon.set_easing_duration(this._settings.animationDuration);
         this.add_child(this._childIcon);
 
