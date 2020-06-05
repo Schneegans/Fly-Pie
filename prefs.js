@@ -56,30 +56,52 @@ let Settings = class Settings {
 
     // Now connect the user interface elements to the settings items.
 
-    // General Settings.
+    // General Settings. -----------------------------------------------------------------
     this._bindSlider('global-scale');
     this._bindSlider('animation-duration');
     this._bindColorButton('background-color');
     this._bindColorButton('text-color');
     this._bindFontButton('font');
 
-    // Wedge Settings.
+    // Wedge Settings. -------------------------------------------------------------------
     this._bindSlider('wedge-size');
     this._bindColorButton('wedge-color');
     this._bindColorButton('active-wedge-color');
     this._bindColorButton('wedge-separator-color');
 
-    // Center Item Settings.
+    // Center Item Settings. -------------------------------------------------------------
+
+    // Toggle the color revealers when the color mode radio buttons are toggled.
+    this._bindRevealer('center-color-mode-fixed', 'center-fixed-color-revealer');
+    this._bindRevealer('center-color-mode-auto', 'center-auto-color-revealer');
+
     this._bindRadioGroup('center-color-mode', ['fixed', 'auto']);
-    this._bindColorButton('center-color');
+    this._bindColorButton('center-fixed-color');
     this._bindSlider('center-auto-color-saturation');
     this._bindSlider('center-auto-color-luminance');
     this._bindSlider('center-size');
     this._bindSlider('center-icon-scale');
 
-    // Child Item Settings.
+    // The color reset button resets various settings, so we bind it manually.
+    this._builder.get_object('reset-center-color').connect('clicked', () => {
+      this._settings.reset('center-color-mode');
+      this._settings.reset('center-fixed-color');
+      this._settings.reset('center-auto-color-saturation');
+      this._settings.reset('center-auto-color-luminance');
+    });
+
+
+    // Child Item Settings. --------------------------------------------------------------
+
+    // Toggle the color revealers when the color mode radio buttons are toggled.
+    this._bindRevealer('child-color-mode-fixed', 'child-fixed-color-revealer');
+    this._bindRevealer('child-color-mode-auto', 'child-auto-color-revealer');
+    this._bindRevealer(
+        'child-color-mode-hover-fixed', 'child-fixed-color-hover-revealer');
+    this._bindRevealer('child-color-mode-hover-auto', 'child-auto-color-hover-revealer');
+
     this._bindRadioGroup('child-color-mode', ['fixed', 'auto', 'parent']);
-    this._bindColorButton('child-color');
+    this._bindColorButton('child-fixed-color');
     this._bindSlider('child-auto-color-saturation');
     this._bindSlider('child-auto-color-luminance');
     this._bindSlider('child-size');
@@ -87,12 +109,39 @@ let Settings = class Settings {
     this._bindSlider('child-icon-scale');
     this._bindSwitch('child-draw-above');
 
-    // Grandchild Item Settings.
+    // The color reset button resets various settings, so we bind it manually.
+    this._builder.get_object('reset-child-color').connect('clicked', () => {
+      this._settings.reset('child-color-mode');
+      this._settings.reset('child-color-mode-hover');
+      this._settings.reset('child-fixed-color');
+      this._settings.reset('child-auto-color-saturation');
+      this._settings.reset('child-auto-color-luminance');
+      this._settings.reset('child-fixed-color-hover');
+      this._settings.reset('child-auto-color-saturation-hover');
+      this._settings.reset('child-auto-color-luminance-hover');
+    });
+
+
+    // Grandchild Item Settings. ---------------------------------------------------------
+
+    // Toggle the color revealers when the color mode radio buttons are toggled.
+    this._bindRevealer('grandchild-color-mode-fixed', 'grandchild-fixed-color-revealer');
+    this._bindRevealer(
+        'grandchild-color-mode-hover-fixed', 'grandchild-fixed-color-hover-revealer');
+
     this._bindRadioGroup('grandchild-color-mode', ['fixed', 'parent']);
-    this._bindColorButton('grandchild-color');
+    this._bindColorButton('grandchild-fixed-color');
     this._bindSlider('grandchild-size');
     this._bindSlider('grandchild-offset');
     this._bindSwitch('grandchild-draw-above');
+
+    // The color reset button resets various settings, so we bind it manually.
+    this._builder.get_object('reset-grandchild-color').connect('clicked', () => {
+      this._settings.reset('grandchild-color-mode');
+      this._settings.reset('grandchild-color-mode-hover');
+      this._settings.reset('grandchild-fixed-color');
+      this._settings.reset('grandchild-fixed-color-hover');
+    });
 
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
@@ -238,6 +287,15 @@ let Settings = class Settings {
 
     // And bind the corresponding reset button.
     this._bindResetButton(settingsKey);
+  }
+
+  _bindRevealer(toggleButtonID, revealerID) {
+    this._builder.get_object(toggleButtonID).connect('toggled', (button) => {
+      this._builder.get_object(revealerID).reveal_child = button.active;
+    });
+
+    this._builder.get_object(revealerID).reveal_child =
+        this._builder.get_object(toggleButtonID).active;
   }
 
   // This draws the custom icons of the appearance settings tabs.

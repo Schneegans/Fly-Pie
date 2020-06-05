@@ -108,7 +108,7 @@
                    according to its icon. Else the 'center-color' will be used.</description>
     </key>
 
-    <key name="center-color" type="s">
+    <key name="center-fixed-color" type="s">
       <default>"rgb(200, 200, 200)"</default>
       <summary>Center Color</summary>
       <description>The color of the menu's center element.</description>
@@ -156,12 +156,12 @@
                    used.</description>
     </key>
 
-    <key name="child-color" type="s">
+    <key name="child-fixed-color" type="s">
       <default>"rgb(200, 200, 200)"</default>
       <summary>Child Color</summary>
       <description>The color of the menu's child element.</description>
     </key>
-    <key name="child-color-hover" type="s">
+    <key name="child-fixed-color-hover" type="s">
       <default>"rgb(200, 200, 200)"</default>
       <summary>Child Color Hover</summary>
       <description>The color of the menu's child element when hovered.</description>
@@ -246,12 +246,12 @@
                    will be used.</description>
     </key>
 
-    <key name="grandchild-color" type="s">
+    <key name="grandchild-fixed-color" type="s">
       <default>"rgb(200, 200, 200)"</default>
       <summary>Grandchild Color</summary>
       <description>The color of the menu's grandchild element.</description>
     </key>
-    <key name="grandchild-color-hover" type="s">
+    <key name="grandchild-fixed-color-hover" type="s">
       <default>"rgb(200, 200, 200)"</default>
       <summary>Grandchild Color Hover</summary>
       <description>The color of the menu's grandchild element when hovered.</description>

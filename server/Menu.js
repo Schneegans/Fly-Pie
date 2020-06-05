@@ -50,12 +50,7 @@ var Menu = class Menu {
       }
     });
 
-    this._background.connect('edit-cancel', () => {
-      this._onCancel(this._menuID);
-      this._hide();
-    });
-
-    this._background.connect('edit-save', () => {
+    this._background.connect('edit-close', () => {
       this._onCancel(this._menuID);
       this._hide();
     });

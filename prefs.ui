@@ -1226,21 +1226,11 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">7</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkGrid">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
+                                <property name="valign">center</property>
                                 <property name="margin_right">20</property>
                                 <property name="row_spacing">2</property>
                                 <child>
@@ -1248,7 +1238,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Fixed Color</property>
+                                    <property name="label" translatable="yes">Background Color</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
@@ -1260,7 +1250,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Used for Color Mode 'Fixed'.</property>
+                                    <property name="label" translatable="yes">'Auto' uses the item's icon.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -1273,139 +1263,6 @@
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Color Mode</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">'Auto' will be based on the item's icon.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkColorButton" id="center-color">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="use_alpha">True</property>
-                                <property name="title" translatable="yes">Pick Center Item Color</property>
-                                <property name="show_editor">True</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButtonBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="layout_style">expand</property>
-                                <child>
-                                  <object class="GtkRadioButton" id="center-color-mode-fixed">
-                                    <property name="label" translatable="yes">Fixed</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="active">True</property>
-                                    <property name="draw_indicator">False</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkRadioButton" id="center-color-mode-auto">
-                                    <property name="label" translatable="yes">Auto</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="draw_indicator">False</property>
-                                    <property name="group">center-color-mode-fixed</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-center-color">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-center-color-mode">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
                                 <property name="top_attach">2</property>
                               </packing>
                             </child>
@@ -1426,14 +1283,204 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
+                              <object class="GtkButton" id="reset-center-color">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="top_attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkButtonBox">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="homogeneous">True</property>
+                                    <property name="layout_style">expand</property>
+                                    <child>
+                                      <object class="GtkRadioButton" id="center-color-mode-fixed">
+                                        <property name="label" translatable="yes">Fixed</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="active">True</property>
+                                        <property name="draw_indicator">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="center-color-mode-auto">
+                                        <property name="label" translatable="yes">Auto</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">center-color-mode-fixed</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRevealer" id="center-fixed-color-revealer">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="transition_type">slide-up</property>
+                                    <property name="reveal_child">True</property>
+                                    <child>
+                                      <object class="GtkColorButton" id="center-fixed-color">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="margin_top">5</property>
+                                        <property name="use_alpha">True</property>
+                                        <property name="title" translatable="yes">Pick Center Item Color</property>
+                                        <property name="show_editor">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRevealer" id="center-auto-color-revealer">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="transition_type">slide-up</property>
+                                    <property name="reveal_child">True</property>
+                                    <child>
+                                      <object class="GtkGrid">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_top">5</property>
+                                        <property name="row_spacing">4</property>
+                                        <property name="column_spacing">4</property>
+                                        <child>
+                                          <object class="GtkScale">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="margin_right">10</property>
+                                            <property name="hexpand">True</property>
+                                            <property name="adjustment">center-auto-color-saturation</property>
+                                            <property name="restrict_to_fill_level">False</property>
+                                            <property name="fill_level">0</property>
+                                            <property name="round_digits">2</property>
+                                            <property name="digits">2</property>
+                                            <property name="value_pos">right</property>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="top_attach">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkScale">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="margin_right">10</property>
+                                            <property name="hexpand">True</property>
+                                            <property name="adjustment">center-auto-color-luminance</property>
+                                            <property name="restrict_to_fill_level">False</property>
+                                            <property name="fill_level">0</property>
+                                            <property name="round_digits">2</property>
+                                            <property name="digits">2</property>
+                                            <property name="value_pos">right</property>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="top_attach">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="valign">center</property>
+                                            <property name="vexpand">True</property>
+                                            <property name="label" translatable="yes">Saturation</property>
+                                            <property name="justify">right</property>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">0</property>
+                                            <property name="top_attach">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="valign">center</property>
+                                            <property name="vexpand">True</property>
+                                            <property name="label" translatable="yes">Luminance</property>
+                                            <property name="justify">right</property>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">0</property>
+                                            <property name="top_attach">1</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">2</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Size</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">9</property>
-                                <property name="width">3</property>
+                                <property name="top_attach">4</property>
                               </packing>
                             </child>
                             <child>
@@ -1473,20 +1520,23 @@
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">10</property>
+                                <property name="top_attach">6</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkScale">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="label" translatable="yes">Size</property>
+                                <property name="can_focus">True</property>
+                                <property name="adjustment">center-size</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">0</property>
+                                <property name="digits">0</property>
+                                <property name="value_pos">left</property>
                               </object>
                               <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">8</property>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">4</property>
                               </packing>
                             </child>
                             <child>
@@ -1503,42 +1553,7 @@
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="top_attach">10</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="adjustment">center-size</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">0</property>
-                                <property name="digits">0</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">8</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-center-icon-scale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="top_attach">10</property>
+                                <property name="top_attach">6</property>
                               </packing>
                             </child>
                             <child>
@@ -1557,170 +1572,25 @@
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
-                                <property name="top_attach">8</property>
+                                <property name="top_attach">4</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkButton" id="reset-center-icon-scale">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="row_spacing">4</property>
-                                <property name="column_spacing">4</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                 <child>
-                                  <object class="GtkButton" id="reset-center-auto-color-saturation">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="icon_name">edit-clear-all-symbolic</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">2</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="reset-center-auto-color-luminance">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="icon_name">edit-clear-all-symbolic</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">2</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkScale">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="margin_right">10</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="adjustment">center-auto-color-saturation</property>
-                                    <property name="restrict_to_fill_level">False</property>
-                                    <property name="fill_level">0</property>
-                                    <property name="round_digits">2</property>
-                                    <property name="digits">2</property>
-                                    <property name="value_pos">right</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkScale">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="margin_right">10</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="adjustment">center-auto-color-luminance</property>
-                                    <property name="restrict_to_fill_level">False</property>
-                                    <property name="fill_level">0</property>
-                                    <property name="round_digits">2</property>
-                                    <property name="digits">2</property>
-                                    <property name="value_pos">right</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">center</property>
-                                    <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Saturation</property>
-                                    <property name="justify">right</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
                                   </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">center</property>
-                                    <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Luminance</property>
-                                    <property name="justify">right</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
                                 </child>
                               </object>
                               <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">6</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="valign">center</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Auto Color</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Used for Color Mode 'Auto'.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
+                                <property name="left_attach">2</property>
                                 <property name="top_attach">6</property>
                               </packing>
                             </child>
@@ -1770,55 +1640,6 @@
                             <property name="row_spacing">10</property>
                             <property name="column_spacing">10</property>
                             <child>
-                              <object class="GtkButton" id="reset-child-icon-scale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">4</property>
-                                <property name="top_attach">13</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">12</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-child-offset">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">4</property>
-                                <property name="top_attach">11</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkSeparator">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -1826,26 +1647,7 @@
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">10</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-child-size">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">4</property>
-                                <property name="top_attach">9</property>
+                                <property name="width">5</property>
                               </packing>
                             </child>
                             <child>
@@ -1871,10 +1673,22 @@
                               </packing>
                             </child>
                             <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">4</property>
+                                <property name="width">2</property>
+                              </packing>
+                            </child>
+                            <child>
                               <object class="GtkGrid">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
+                                <property name="valign">center</property>
                                 <property name="margin_right">20</property>
                                 <property name="row_spacing">2</property>
                                 <child>
@@ -1894,7 +1708,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Used if the above is set to 'Fixed'.</property>
+                                    <property name="label" translatable="yes">'Auto' uses the item's icon.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -1907,238 +1721,6 @@
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">5</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkColorButton" id="child-color">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="use_alpha">True</property>
-                                <property name="title" translatable="yes">Pick Child Item Color</property>
-                                <property name="show_editor">True</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">5</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkColorButton" id="child-color-hover">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="use_alpha">True</property>
-                                <property name="title" translatable="yes">Pick Child Item Color</property>
-                                <property name="show_editor">True</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">5</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-child-color">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">4</property>
-                                <property name="top_attach">5</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">4</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Color Mode</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">'Auto' will be based on the item's icon.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButtonBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="layout_style">expand</property>
-                                <child>
-                                  <object class="GtkRadioButton" id="child-color-mode-fixed">
-                                    <property name="label" translatable="yes">Fixed</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="active">True</property>
-                                    <property name="draw_indicator">False</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkRadioButton" id="child-color-mode-auto">
-                                    <property name="label" translatable="yes">Auto</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="draw_indicator">False</property>
-                                    <property name="group">child-color-mode-fixed</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkRadioButton" id="child-color-mode-parent">
-                                    <property name="label" translatable="yes">Parent</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="draw_indicator">False</property>
-                                    <property name="group">child-color-mode-fixed</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButtonBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="homogeneous">True</property>
-                                <property name="layout_style">expand</property>
-                                <child>
-                                  <object class="GtkRadioButton" id="child-color-mode-hover-fixed">
-                                    <property name="label" translatable="yes">Fixed</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="active">True</property>
-                                    <property name="draw_indicator">False</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkRadioButton" id="child-color-mode-hover-auto">
-                                    <property name="label" translatable="yes">Auto</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="draw_indicator">False</property>
-                                    <property name="group">child-color-mode-hover-fixed</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkRadioButton" id="child-color-mode-hover-parent">
-                                    <property name="label" translatable="yes">Parent</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="draw_indicator">False</property>
-                                    <property name="group">child-color-mode-hover-fixed</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-child-color-mode">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">4</property>
                                 <property name="top_attach">3</property>
                               </packing>
                             </child>
@@ -2198,9 +1780,491 @@
                                 <property name="can_focus">False</property>
                               </object>
                               <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">4</property>
+                                <property name="width">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">8</property>
+                                <property name="width">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">6</property>
+                                <property name="width">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="top_attach">3</property>
+                                <property name="height">7</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkButtonBox">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="homogeneous">True</property>
+                                    <property name="layout_style">expand</property>
+                                    <child>
+                                      <object class="GtkRadioButton" id="child-color-mode-fixed">
+                                        <property name="label" translatable="yes">Fixed</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="active">True</property>
+                                        <property name="draw_indicator">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="child-color-mode-auto">
+                                        <property name="label" translatable="yes">Auto</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">child-color-mode-fixed</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="child-color-mode-parent">
+                                        <property name="label" translatable="yes">Parent</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">child-color-mode-fixed</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRevealer" id="child-fixed-color-revealer">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="transition_type">slide-up</property>
+                                    <property name="reveal_child">True</property>
+                                    <child>
+                                      <object class="GtkColorButton" id="child-fixed-color">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="margin_top">5</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="use_alpha">True</property>
+                                        <property name="title" translatable="yes">Pick Child Item Color</property>
+                                        <property name="show_editor">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRevealer" id="child-auto-color-revealer">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="transition_type">slide-up</property>
+                                    <child>
+                                      <object class="GtkGrid">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_top">5</property>
+                                        <property name="row_spacing">4</property>
+                                        <property name="column_spacing">4</property>
+                                        <child>
+                                          <object class="GtkScale">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="margin_right">5</property>
+                                            <property name="hexpand">True</property>
+                                            <property name="adjustment">child-auto-color-saturation</property>
+                                            <property name="restrict_to_fill_level">False</property>
+                                            <property name="fill_level">0</property>
+                                            <property name="round_digits">2</property>
+                                            <property name="digits">2</property>
+                                            <property name="value_pos">right</property>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="top_attach">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkScale">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="margin_right">5</property>
+                                            <property name="hexpand">True</property>
+                                            <property name="adjustment">child-auto-color-luminance</property>
+                                            <property name="restrict_to_fill_level">False</property>
+                                            <property name="fill_level">0</property>
+                                            <property name="round_digits">2</property>
+                                            <property name="digits">2</property>
+                                            <property name="value_pos">right</property>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="top_attach">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="valign">center</property>
+                                            <property name="vexpand">True</property>
+                                            <property name="label" translatable="yes">Saturation</property>
+                                            <property name="justify">right</property>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">0</property>
+                                            <property name="top_attach">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="valign">center</property>
+                                            <property name="vexpand">True</property>
+                                            <property name="label" translatable="yes">Luminance</property>
+                                            <property name="justify">right</property>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">0</property>
+                                            <property name="top_attach">1</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">2</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkButtonBox">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="homogeneous">True</property>
+                                    <property name="layout_style">expand</property>
+                                    <child>
+                                      <object class="GtkRadioButton" id="child-color-mode-hover-fixed">
+                                        <property name="label" translatable="yes">Fixed</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="active">True</property>
+                                        <property name="draw_indicator">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="child-color-mode-hover-auto">
+                                        <property name="label" translatable="yes">Auto</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">child-color-mode-hover-fixed</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="child-color-mode-hover-parent">
+                                        <property name="label" translatable="yes">Parent</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">child-color-mode-hover-fixed</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRevealer" id="child-fixed-color-hover-revealer">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="transition_type">slide-up</property>
+                                    <property name="reveal_child">True</property>
+                                    <child>
+                                      <object class="GtkColorButton" id="child-fixed-color-hover">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="margin_top">5</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="use_alpha">True</property>
+                                        <property name="title" translatable="yes">Pick Child Item Color</property>
+                                        <property name="show_editor">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRevealer" id="child-auto-color-hover-revealer">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="transition_type">slide-up</property>
+                                    <child>
+                                      <object class="GtkGrid">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="margin_top">5</property>
+                                        <property name="row_spacing">4</property>
+                                        <property name="column_spacing">4</property>
+                                        <child>
+                                          <object class="GtkScale">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="hexpand">True</property>
+                                            <property name="adjustment">child-auto-color-saturation-hover</property>
+                                            <property name="restrict_to_fill_level">False</property>
+                                            <property name="fill_level">0</property>
+                                            <property name="round_digits">2</property>
+                                            <property name="digits">2</property>
+                                            <property name="value_pos">right</property>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="top_attach">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkScale">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">True</property>
+                                            <property name="hexpand">True</property>
+                                            <property name="adjustment">child-auto-color-luminance-hover</property>
+                                            <property name="restrict_to_fill_level">False</property>
+                                            <property name="fill_level">0</property>
+                                            <property name="round_digits">2</property>
+                                            <property name="digits">2</property>
+                                            <property name="value_pos">right</property>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="top_attach">1</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="valign">center</property>
+                                            <property name="vexpand">True</property>
+                                            <property name="label" translatable="yes">Saturation</property>
+                                            <property name="justify">right</property>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">0</property>
+                                            <property name="top_attach">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="valign">center</property>
+                                            <property name="vexpand">True</property>
+                                            <property name="label" translatable="yes">Luminance</property>
+                                            <property name="justify">right</property>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">0</property>
+                                            <property name="top_attach">1</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">2</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-child-color">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Size</property>
+                              </object>
+                              <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">14</property>
-                                <property name="width">5</property>
+                                <property name="top_attach">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Offset</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">7</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_right">20</property>
+                                <property name="row_spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Icon Scale</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Relative to the item's size.</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">9</property>
                               </packing>
                             </child>
                             <child>
@@ -2240,106 +2304,8 @@
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">15</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Icon Scale</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Relative to the item's size.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">13</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="label" translatable="yes">Offset</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
                                 <property name="top_attach">11</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="label" translatable="yes">Size</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">9</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="adjustment">child-icon-scale</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">2</property>
-                                <property name="digits">2</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">13</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="adjustment">child-offset</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">0</property>
-                                <property name="digits">0</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">11</property>
+                                <property name="width">3</property>
                               </packing>
                             </child>
                             <child>
@@ -2356,19 +2322,7 @@
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="top_attach">9</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSwitch" id="child-draw-above">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="halign">end</property>
-                                <property name="valign">center</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">15</property>
+                                <property name="top_attach">5</property>
                               </packing>
                             </child>
                             <child>
@@ -2376,24 +2330,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="hexpand">True</property>
-                                <property name="adjustment">child-icon-scale-hover</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">2</property>
-                                <property name="digits">2</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">13</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="adjustment">child-offset-hover</property>
+                                <property name="adjustment">child-offset</property>
                                 <property name="restrict_to_fill_level">False</property>
                                 <property name="fill_level">0</property>
                                 <property name="round_digits">0</property>
@@ -2401,8 +2338,25 @@
                                 <property name="value_pos">left</property>
                               </object>
                               <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">11</property>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">7</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkScale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="adjustment">child-icon-scale</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">2</property>
+                                <property name="digits">2</property>
+                                <property name="value_pos">left</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">9</property>
                               </packing>
                             </child>
                             <child>
@@ -2419,255 +2373,98 @@
                               </object>
                               <packing>
                                 <property name="left_attach">3</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">5</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkScale">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="valign">center</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Auto Color</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Used for Color Mode 'Auto'.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">7</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="row_spacing">4</property>
-                                <property name="column_spacing">4</property>
-                                <child>
-                                  <object class="GtkScale">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="margin_right">5</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="adjustment">child-auto-color-saturation</property>
-                                    <property name="restrict_to_fill_level">False</property>
-                                    <property name="fill_level">0</property>
-                                    <property name="round_digits">2</property>
-                                    <property name="digits">2</property>
-                                    <property name="value_pos">right</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkScale">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="margin_right">5</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="adjustment">child-auto-color-luminance</property>
-                                    <property name="restrict_to_fill_level">False</property>
-                                    <property name="fill_level">0</property>
-                                    <property name="round_digits">2</property>
-                                    <property name="digits">2</property>
-                                    <property name="value_pos">right</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">center</property>
-                                    <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Saturation</property>
-                                    <property name="justify">right</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">center</property>
-                                    <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Luminance</property>
-                                    <property name="justify">right</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">7</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="row_spacing">4</property>
-                                <property name="column_spacing">4</property>
-                                <child>
-                                  <object class="GtkButton" id="reset-child-auto-color-saturation">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="icon_name">edit-clear-all-symbolic</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">2</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="reset-child-auto-color-luminance">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="icon_name">edit-clear-all-symbolic</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">2</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkScale">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="margin_right">5</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="adjustment">child-auto-color-saturation-hover</property>
-                                    <property name="restrict_to_fill_level">False</property>
-                                    <property name="fill_level">0</property>
-                                    <property name="round_digits">2</property>
-                                    <property name="digits">2</property>
-                                    <property name="value_pos">right</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkScale">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="margin_right">5</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="adjustment">child-auto-color-luminance-hover</property>
-                                    <property name="restrict_to_fill_level">False</property>
-                                    <property name="fill_level">0</property>
-                                    <property name="round_digits">2</property>
-                                    <property name="digits">2</property>
-                                    <property name="value_pos">right</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">center</property>
-                                    <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Saturation</property>
-                                    <property name="justify">right</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">center</property>
-                                    <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Luminance</property>
-                                    <property name="justify">right</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="adjustment">child-offset-hover</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">0</property>
+                                <property name="digits">0</property>
+                                <property name="value_pos">left</property>
                               </object>
                               <packing>
                                 <property name="left_attach">3</property>
                                 <property name="top_attach">7</property>
-                                <property name="width">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkScale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="adjustment">child-icon-scale-hover</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">2</property>
+                                <property name="digits">2</property>
+                                <property name="value_pos">left</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">9</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-child-size">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="top_attach">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-child-offset">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="top_attach">7</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-child-icon-scale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="top_attach">9</property>
                               </packing>
                             </child>
                             <child>
@@ -2686,81 +2483,20 @@
                               </object>
                               <packing>
                                 <property name="left_attach">4</property>
-                                <property name="top_attach">15</property>
+                                <property name="top_attach">11</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
+                              <object class="GtkSwitch" id="child-draw-above">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="can_focus">True</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
                               </object>
                               <packing>
                                 <property name="left_attach">3</property>
-                                <property name="top_attach">4</property>
-                                <property name="width">2</property>
+                                <property name="top_attach">11</property>
                               </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">12</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">10</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">8</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">6</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="orientation">vertical</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="top_attach">3</property>
-                                <property name="height">11</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <placeholder/>
-                            </child>
-                            <child>
-                              <placeholder/>
                             </child>
                             <child>
                               <placeholder/>
@@ -2844,212 +2580,6 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton" id="reset-grandchild-color">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">4</property>
-                                <property name="top_attach">5</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-grandchild-color-mode">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">4</property>
-                                <property name="top_attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-grandchild-size">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">4</property>
-                                <property name="top_attach">7</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-grandchild-offset">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">4</property>
-                                <property name="top_attach">9</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSwitch" id="grandchild-draw-above">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="halign">end</property>
-                                <property name="valign">center</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">11</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Draw Above</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Render grandchildren above children items.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">11</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-grandchild-draw-above">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">4</property>
-                                <property name="top_attach">11</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">10</property>
-                                <property name="width">5</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="label" translatable="yes">Offset</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">9</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="adjustment">grandchild-offset</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">0</property>
-                                <property name="digits">0</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">9</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="adjustment">grandchild-offset-hover</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">0</property>
-                                <property name="digits">0</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">9</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkSeparator">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -3057,54 +2587,7 @@
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">8</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="label" translatable="yes">Size</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">7</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="adjustment">grandchild-size</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">0</property>
-                                <property name="digits">0</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">7</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="adjustment">grandchild-size-hover</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">0</property>
-                                <property name="digits">0</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">7</property>
+                                <property name="width">5</property>
                               </packing>
                             </child>
                             <child>
@@ -3116,76 +2599,6 @@
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">6</property>
                                 <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Background Color</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Used if the above is set to 'Fixed'.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">5</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkColorButton" id="grandchild-color">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="use_alpha">True</property>
-                                <property name="title" translatable="yes">Pick Grandchild Item Color</property>
-                                <property name="show_editor">True</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">5</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkColorButton" id="grandchild-color-hover">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="use_alpha">True</property>
-                                <property name="title" translatable="yes">Pick Grandchild Item Color</property>
-                                <property name="show_editor">True</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">5</property>
                               </packing>
                             </child>
                             <child>
@@ -3204,94 +2617,11 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="label" translatable="yes">Color Mode</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Background Color</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButtonBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="homogeneous">True</property>
-                                <property name="layout_style">expand</property>
-                                <child>
-                                  <object class="GtkRadioButton" id="grandchild-color-mode-fixed">
-                                    <property name="label" translatable="yes">Fixed</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="active">True</property>
-                                    <property name="draw_indicator">False</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkRadioButton" id="grandchild-color-mode-parent">
-                                    <property name="label" translatable="yes">Parent</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="draw_indicator">False</property>
-                                    <property name="group">grandchild-color-mode-fixed</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButtonBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="homogeneous">True</property>
-                                <property name="layout_style">expand</property>
-                                <child>
-                                  <object class="GtkRadioButton" id="grandchild-color-mode-hover-fixed">
-                                    <property name="label" translatable="yes">Fixed</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="active">True</property>
-                                    <property name="draw_indicator">False</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkRadioButton" id="grandchild-color-mode-hover-parent">
-                                    <property name="label" translatable="yes">Parent</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="draw_indicator">False</property>
-                                    <property name="group">grandchild-color-mode-hover-fixed</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
                                 <property name="top_attach">3</property>
                               </packing>
                             </child>
@@ -3332,23 +2662,12 @@
                               <object class="GtkSeparator">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">3</property>
-                                <property name="top_attach">8</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="orientation">vertical</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
                                 <property name="top_attach">3</property>
-                                <property name="height">7</property>
+                                <property name="height">5</property>
                               </packing>
                             </child>
                             <child>
@@ -3376,7 +2695,381 @@
                               </packing>
                             </child>
                             <child>
-                              <placeholder/>
+                              <object class="GtkButton" id="reset-grandchild-color">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkButtonBox">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="homogeneous">True</property>
+                                    <property name="layout_style">expand</property>
+                                    <child>
+                                      <object class="GtkRadioButton" id="grandchild-color-mode-fixed">
+                                        <property name="label" translatable="yes">Fixed</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="active">True</property>
+                                        <property name="draw_indicator">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="grandchild-color-mode-parent">
+                                        <property name="label" translatable="yes">Parent</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">grandchild-color-mode-fixed</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRevealer" id="grandchild-fixed-color-revealer">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="transition_type">slide-up</property>
+                                    <property name="reveal_child">True</property>
+                                    <child>
+                                      <object class="GtkColorButton" id="grandchild-fixed-color">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="margin_top">5</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="use_alpha">True</property>
+                                        <property name="title" translatable="yes">Pick Grandchild Item Color</property>
+                                        <property name="show_editor">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <child>
+                                  <object class="GtkButtonBox">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="homogeneous">True</property>
+                                    <property name="layout_style">expand</property>
+                                    <child>
+                                      <object class="GtkRadioButton" id="grandchild-color-mode-hover-fixed">
+                                        <property name="label" translatable="yes">Fixed</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="active">True</property>
+                                        <property name="draw_indicator">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkRadioButton" id="grandchild-color-mode-hover-parent">
+                                        <property name="label" translatable="yes">Parent</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">False</property>
+                                        <property name="draw_indicator">False</property>
+                                        <property name="group">grandchild-color-mode-hover-fixed</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkRevealer" id="grandchild-fixed-color-hover-revealer">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="transition_type">slide-up</property>
+                                    <property name="reveal_child">True</property>
+                                    <child>
+                                      <object class="GtkColorButton" id="grandchild-fixed-color-hover">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="margin_top">5</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="use_alpha">True</property>
+                                        <property name="title" translatable="yes">Pick Grandchild Item Color</property>
+                                        <property name="show_editor">True</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Size</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Offset</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">7</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkScale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="adjustment">grandchild-size</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">0</property>
+                                <property name="digits">0</property>
+                                <property name="value_pos">left</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkScale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="adjustment">grandchild-offset</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">0</property>
+                                <property name="digits">0</property>
+                                <property name="value_pos">left</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">7</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkScale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="adjustment">grandchild-size-hover</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">0</property>
+                                <property name="digits">0</property>
+                                <property name="value_pos">left</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkScale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="adjustment">grandchild-offset-hover</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">0</property>
+                                <property name="digits">0</property>
+                                <property name="value_pos">left</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">7</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-grandchild-size">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="top_attach">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-grandchild-offset">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="top_attach">7</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-grandchild-draw-above">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="top_attach">9</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="grandchild-draw-above">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">9</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="row_spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Draw Above</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Render grandchildren above children items.</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">9</property>
+                                <property name="width">3</property>
+                              </packing>
                             </child>
                             <child>
                               <placeholder/>

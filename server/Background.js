@@ -26,10 +26,8 @@ const utils = Me.imports.common.utils;
 // clang-format off
 var Background = GObject.registerClass({
   Signals: {
-    // Emitted when the save button is clicked.
-    'edit-save': {},
-    // Emitted when the cancel button is clicked.
-    'edit-cancel': {}
+    // Emitted when the close button is clicked.
+    'edit-close': {}
   }
 },
 class Background extends Clutter.Actor {
@@ -82,12 +80,8 @@ class Background extends Clutter.Actor {
       layout_manager: new Clutter.BoxLayout({spacing: 10})
     });
 
-    this._addControlButton('Save', 'document-save-symbolic', () => {
-      this.emit('edit-save');
-    });
-
-    this._addControlButton('Cancel', 'window-close-symbolic', () => {
-      this.emit('edit-cancel');
+    this._addControlButton('Close', 'window-close-symbolic', () => {
+      this.emit('edit-close');
     });
 
     this._addControlButton('Flip Side', 'object-flip-horizontal-symbolic', () => {
