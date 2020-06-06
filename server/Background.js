@@ -38,11 +38,10 @@ class Background extends Clutter.Actor {
   _init(params = {}) {
     super._init(params);
 
-    this.height   = Main.layoutManager.currentMonitor.height;
-    this.width    = Main.layoutManager.currentMonitor.width;
-    this.reactive = false;
-    this.visible  = false;
-    this.opacity  = 0;
+    this.height  = Main.layoutManager.currentMonitor.height;
+    this.width   = Main.layoutManager.currentMonitor.width;
+    this.visible = false;
+    this.opacity = 0;
 
     // We transition everything. This is used for the position when in edit mode, the
     // opacity and the color.

@@ -69,14 +69,9 @@ var Client = class Client {
     }
 
     this._lastMenu = {icon: 'firefox', name: 'Main Menu', items: []};
-    this._lastMenu.items.push(MenuFactory.getAppMenuItems());
-    this._lastMenu.items.push(MenuFactory.getUserDirectoriesItems());
-    this._lastMenu.items.push(MenuFactory.getRecentItems());
-    this._lastMenu.items.push(MenuFactory.getFavoriteItems());
-    this._lastMenu.items.push(MenuFactory.getFrequentItems());
-    this._lastMenu.items.push(MenuFactory.getRunningAppsItems());
     this._lastMenu.items.push({
       name: 'Test 2',
+      angle: 50,
       icon: '/home/simon/Pictures/Eigene/avatar128.png',
       activate: function() {
         utils.debug('Test 2!');
@@ -84,11 +79,18 @@ var Client = class Client {
     });
     this._lastMenu.items.push({
       name: 'Test 3',
-      icon: 'X',
+      angle: 225,
+      icon: '🐹',
       activate: function() {
         utils.debug('Test 3!');
       }
     });
+    this._lastMenu.items.push(MenuFactory.getAppMenuItems());
+    this._lastMenu.items.push(MenuFactory.getUserDirectoriesItems());
+    // this._lastMenu.items.push(MenuFactory.getRecentItems());
+    this._lastMenu.items.push(MenuFactory.getFavoriteItems());
+    // this._lastMenu.items.push(MenuFactory.getFrequentItems());
+    this._lastMenu.items.push(MenuFactory.getRunningAppsItems());
 
     try {
       // Open the menu on the server side. Once this is done successfully, we store the

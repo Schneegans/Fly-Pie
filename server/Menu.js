@@ -18,6 +18,7 @@ const Background       = Me.imports.server.Background.Background;
 const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
 const InputManipulator = Me.imports.server.InputManipulator.InputManipulator;
 const MenuItem         = Me.imports.server.MenuItem.MenuItem;
+const Wedges           = Me.imports.server.Wedges.Wedges;
 const MenuItemState    = Me.imports.server.MenuItem.MenuItemState;
 const utils            = Me.imports.common.utils;
 
@@ -41,6 +42,9 @@ var Menu = class Menu {
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
 
+    this._wedges = new Wedges();
+    this._background.add_child(this._wedges);
+
     this._itemBackground = this._createItemBackground();
 
     this._background.connect('button-release-event', (actor, event) => {
@@ -55,12 +59,10 @@ var Menu = class Menu {
       this._hide();
     });
 
-    this._background.connect(
-        'motion-event',
-        (actor, event) => {
-            // let [x, y] = event.get_coords();
-            // this._structure.actor.set_position(x, y);
-        });
+    this._background.connect('motion-event', (actor, event) => {
+      let [x, y] = event.get_coords();
+      this._wedges.setPointerPosition(x - this._wedges.x, y - this._wedges.y);
+    });
 
     // For some reason this has to be set explicitly to true before it can be set to
     // false.
@@ -123,29 +125,46 @@ var Menu = class Menu {
     this._menuID = menuID;
 
     // Create all visible Clutter.Actors for the items.
-    this._createActor(this._structure, this._background, MenuItemState.ACTIVE);
+    this._structure.actor = this._createActor(
+        this._structure.icon, this._structure.angle, MenuItemState.ACTIVE);
+    this._structure.actor.onSettingsChange(this._settings);
+    this._background.add_child(this._structure.actor);
+
+    let itemAngles = [];
 
     this._structure.items.forEach(item => {
-      this._createActor(
-          item, this._structure.actor.getChildrenContainer(), MenuItemState.CHILD);
+      itemAngles.push(item.angle);
+
+      item.actor = this._createActor(item.icon, item.angle, MenuItemState.CHILD);
+      item.actor.onSettingsChange(this._settings);
+      this._structure.actor.getChildrenContainer().add_child(item.actor);
 
       item.items.forEach(child => {
-        this._createActor(
-            child, item.actor.getChildrenContainer(), MenuItemState.GRANDCHILD);
+        child.actor =
+            this._createActor(child.icon, child.angle, MenuItemState.GRANDCHILD);
+        child.actor.onSettingsChange(this._settings);
+        item.actor.getChildrenContainer().add_child(child.actor);
       });
     });
 
+    this._wedges.setItemAngles(itemAngles);
+
     // Calculate menu position. In edit mode, we center the menu, else we position it at
     // the mouse pointer.
+    this._structure.actor.set_easing_duration(0);
     if (editMode) {
       this._structure.actor.set_position(
           this._background.width / 2, this._background.height / 2);
+      this._wedges.set_position(this._background.width / 2, this._background.height / 2);
     } else {
       let [x, y] = global.get_pointer();
       [x, y]     = this._clampToToMonitor(
           x, y, this._structure.actor.width, this._structure.actor.height, 8);
       this._structure.actor.set_position(x, y);
+      this._wedges.set_position(x, y);
     }
+    this._structure.actor.set_easing_duration(
+        this._settings.get_double('animation-duration') * 1000);
 
     return this._menuID;
   }
@@ -195,19 +214,13 @@ var Menu = class Menu {
     }
   }
 
-  _createActor(item, parent, state) {
-    if (!item.actor) {
-      item.actor = new MenuItem({
-        icon: item.icon,
-        angle: item.angle * Math.PI / 180,
-        backgroundCanvas: this._itemBackground,
-        state: state
-      });
-
-      parent.add_child(item.actor);
-
-      item.actor.onSettingsChange(this._settings);
-    }
+  _createActor(icon, angle, state) {
+    return new MenuItem({
+      icon: icon,
+      angle: angle * Math.PI / 180,
+      backgroundCanvas: this._itemBackground,
+      state: state
+    });
   }
 
   // This method recursively traverses the menu structure and assigns an angle to each
@@ -227,7 +240,7 @@ var Menu = class Menu {
     // fixed angles.
     let fixedAngles = [];
     items.forEach((item, index) => {
-      if (item.angle) {
+      if ('angle' in item) {
         fixedAngles.push({angle: item.angle, index: index});
       }
     });
@@ -245,7 +258,7 @@ var Menu = class Menu {
 
     // Make sure that the parent link does not collide with a fixed item. For now, we
     // consider a difference of less than 1° a collision.
-    if (parentAngle) {
+    if (parentAngle != undefined) {
       for (let i = 0; i < fixedAngles.length; i++) {
         if (Math.abs(fixedAngles[i].angle - parentAngle) < 1.0) {
           return false;
@@ -257,7 +270,7 @@ var Menu = class Menu {
     // or right, depending on the position of the parent item.
     if (fixedAngles.length == 0) {
       let firstAngle = 90;
-      if (parentAngle && parentAngle < 180) {
+      if (parentAngle != undefined && parentAngle < 180) {
         firstAngle = 270;
       }
       fixedAngles.push({angle: firstAngle, index: 0});
@@ -273,12 +286,10 @@ var Menu = class Menu {
       let wedgeEndIndex   = fixedAngles[(i + 1) % fixedAngles.length].index;
       let wedgeEndAngle   = fixedAngles[(i + 1) % fixedAngles.length].angle;
 
-
       // Make sure we loop around.
-      if (wedgeBeginAngle <= wedgeEndAngle) {
+      if (wedgeEndAngle <= wedgeBeginAngle) {
         wedgeEndAngle += 360;
       }
-
 
       // Calculate the number of items between the begin and end indices.
       let wedgeItemCount =
@@ -365,12 +376,13 @@ var Menu = class Menu {
         item.actor.onSettingsChange(this._settings);
       }
     });
+
+    this._wedges.onSettingsChange(this._settings);
   }
 
   // For performance reasons, all menu items share the same Clutter.Canvas for their
   // background. This method creates it. It has a width and height of one.
-  // Clutter.Canvas.scale_factor() is later used to scale the canvas to an appropriate
-  // size.
+  // Clutter.Canvas.scale_factor is later used to scale the canvas to an appropriate size.
   _createItemBackground() {
     let canvas = new Clutter.Canvas({height: 1, width: 1});
 
