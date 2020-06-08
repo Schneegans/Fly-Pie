@@ -74,10 +74,16 @@
 
     <!-- Wedge Settings -->
 
-    <key name="wedge-size" type="d">
-      <default>200</default>
-      <summary>Wedge Size</summary>
-      <description>The radius of the wedges in pixels.</description>
+    <key name="wedge-width" type="d">
+      <default>500</default>
+      <summary>Wedge Width</summary>
+      <description>The width of the wedges in pixels.</description>
+    </key>
+
+    <key name="wedge-inner-radius" type="d">
+      <default>50</default>
+      <summary>Wedge Inner Radius</summary>
+      <description>The inner radius of the wedges in pixels.</description>
     </key>
 
     <key name="wedge-color" type="s">

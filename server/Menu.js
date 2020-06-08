@@ -18,7 +18,7 @@ const Background       = Me.imports.server.Background.Background;
 const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
 const InputManipulator = Me.imports.server.InputManipulator.InputManipulator;
 const MenuItem         = Me.imports.server.MenuItem.MenuItem;
-const Wedges           = Me.imports.server.Wedges.Wedges;
+const SelectionWedges  = Me.imports.server.SelectionWedges.SelectionWedges;
 const MenuItemState    = Me.imports.server.MenuItem.MenuItemState;
 const utils            = Me.imports.common.utils;
 
@@ -42,8 +42,8 @@ var Menu = class Menu {
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
 
-    this._wedges = new Wedges();
-    this._background.add_child(this._wedges);
+    this._selectionWedges = new SelectionWedges();
+    this._background.add_child(this._selectionWedges);
 
     this._itemBackground = this._createItemBackground();
 
@@ -61,7 +61,9 @@ var Menu = class Menu {
 
     this._background.connect('motion-event', (actor, event) => {
       let [x, y] = event.get_coords();
-      this._wedges.setPointerPosition(x - this._wedges.x, y - this._wedges.y);
+      this._selectionWedges.setPointerPosition(
+          x - this._selectionWedges.x - this._background.x,
+          y - this._selectionWedges.y - this._background.y);
     });
 
     // For some reason this has to be set explicitly to true before it can be set to
@@ -147,24 +149,28 @@ var Menu = class Menu {
       });
     });
 
-    this._wedges.setItemAngles(itemAngles);
+    this._selectionWedges.setItemAngles(itemAngles);
 
     // Calculate menu position. In edit mode, we center the menu, else we position it at
     // the mouse pointer.
     this._structure.actor.set_easing_duration(0);
+    this._selectionWedges.set_easing_duration(0);
     if (editMode) {
       this._structure.actor.set_position(
           this._background.width / 2, this._background.height / 2);
-      this._wedges.set_position(this._background.width / 2, this._background.height / 2);
+      this._selectionWedges.set_position(
+          this._background.width / 2, this._background.height / 2);
     } else {
       let [x, y] = global.get_pointer();
       [x, y]     = this._clampToToMonitor(
           x, y, this._structure.actor.width, this._structure.actor.height, 8);
       this._structure.actor.set_position(x, y);
-      this._wedges.set_position(x, y);
+      this._selectionWedges.set_position(x, y);
     }
-    this._structure.actor.set_easing_duration(
-        this._settings.get_double('animation-duration') * 1000);
+
+    let animationDuration = this._settings.get_double('animation-duration') * 1000;
+    this._structure.actor.set_easing_duration(animationDuration);
+    this._selectionWedges.set_easing_duration(animationDuration);
 
     return this._menuID;
   }
@@ -377,7 +383,7 @@ var Menu = class Menu {
       }
     });
 
-    this._wedges.onSettingsChange(this._settings);
+    this._selectionWedges.onSettingsChange(this._settings);
   }
 
   // For performance reasons, all menu items share the same Clutter.Canvas for their

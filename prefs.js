@@ -67,7 +67,8 @@ let Settings = class Settings {
     this._bindFontButton('font');
 
     // Wedge Settings. -------------------------------------------------------------------
-    this._bindSlider('wedge-size');
+    this._bindSlider('wedge-width');
+    this._bindSlider('wedge-inner-radius');
     this._bindColorButton('wedge-color');
     this._bindColorButton('active-wedge-color');
     this._bindColorButton('wedge-separator-color');
@@ -209,6 +210,8 @@ let Settings = class Settings {
               } else if (typeof value === 'boolean') {
                 this._settings.set_boolean(key, value);
               }
+            } else if (this._settings.settings_schema.has_key(key)) {
+              this._settings.reset(key);
             }
           };
 
@@ -216,7 +219,8 @@ let Settings = class Settings {
           read('background-color');
           read('text-color');
           read('font');
-          read('wedge-size');
+          read('wedge-width');
+          read('wedge-inner-radius');
           read('wedge-color');
           read('active-wedge-color');
           read('wedge-separator-color');
@@ -261,124 +265,136 @@ let Settings = class Settings {
     });
 
     this._builder.get_object('save-preset-button').connect('clicked', (button) => {
-      let saver = new Gtk.FileChooserDialog({
-        title: 'Save Preset',
-        action: Gtk.FileChooserAction.SAVE,
-        do_overwrite_confirmation: true
-      });
+      try {
+        let saver = new Gtk.FileChooserDialog({
+          title: 'Save Preset',
+          action: Gtk.FileChooserAction.SAVE,
+          do_overwrite_confirmation: true,
+          transient_for: button.get_toplevel(),
+          modal: true
+        });
 
-      let jsonFilter = new Gtk.FileFilter();
-      jsonFilter.set_name('JSON Files');
-      jsonFilter.add_mime_type('application/json');
+        let jsonFilter = new Gtk.FileFilter();
+        jsonFilter.set_name('JSON Files');
+        jsonFilter.add_mime_type('application/json');
 
-      let allFilter = new Gtk.FileFilter();
-      allFilter.add_pattern('*');
-      allFilter.set_name('All Files');
+        let allFilter = new Gtk.FileFilter();
+        allFilter.add_pattern('*');
+        allFilter.set_name('All Files');
 
-      saver.add_filter(jsonFilter);
-      saver.add_filter(allFilter);
+        saver.add_filter(jsonFilter);
+        saver.add_filter(allFilter);
 
-      saver.add_button('Cancel', Gtk.ResponseType.CANCEL);
-      saver.add_button('Save', Gtk.ResponseType.OK);
+        saver.add_button('Cancel', Gtk.ResponseType.CANCEL);
+        saver.add_button('Save', Gtk.ResponseType.OK);
 
-      saver.set_current_folder_uri(this._presetDirectory.get_uri());
+        saver.set_current_folder_uri(this._presetDirectory.get_uri());
 
-      saver.connect('response', (dialog, response_id) => {
-        if (response_id === Gtk.ResponseType.OK) {
-          try {
-            let settings = {};
-
-            let write = (key) => {
-              if (this._settings.settings_schema.get_key(key)
-                      .get_value_type()
-                      .dup_string() === 's') {
-                settings[key] = this._settings.get_string(key);
-              } else if (
-                  this._settings.settings_schema.get_key(key)
-                      .get_value_type()
-                      .dup_string() === 'd') {
-                settings[key] = this._settings.get_double(key);
-              } else if (
-                  this._settings.settings_schema.get_key(key)
-                      .get_value_type()
-                      .dup_string() === 'b') {
-                settings[key] = this._settings.get_boolean(key);
-              }
-            };
-
-            write('animation-duration');
-            write('background-color');
-            write('text-color');
-            write('font');
-            write('wedge-size');
-            write('wedge-color');
-            write('active-wedge-color');
-            write('wedge-separator-color');
-            write('center-color-mode');
-            write('center-fixed-color');
-            write('center-auto-color-saturation');
-            write('center-auto-color-luminance');
-            write('center-auto-color-alpha');
-            write('center-size');
-            write('center-icon-scale');
-            write('child-color-mode');
-            write('child-color-mode-hover');
-            write('child-fixed-color');
-            write('child-fixed-color-hover');
-            write('child-auto-color-saturation');
-            write('child-auto-color-saturation-hover');
-            write('child-auto-color-luminance');
-            write('child-auto-color-luminance-hover');
-            write('child-auto-color-alpha');
-            write('child-auto-color-alpha-hover');
-            write('child-size');
-            write('child-size-hover');
-            write('child-offset');
-            write('child-offset-hover');
-            write('child-icon-scale');
-            write('child-icon-scale-hover');
-            write('child-draw-above');
-            write('grandchild-color-mode');
-            write('grandchild-color-mode-hover');
-            write('grandchild-fixed-color');
-            write('grandchild-fixed-color-hover');
-            write('grandchild-size');
-            write('grandchild-size-hover');
-            write('grandchild-offset');
-            write('grandchild-offset-hover');
-            write('grandchild-draw-above');
-
-            let filename = dialog.get_filename();
-            if (!filename.endsWith('.json')) {
-              filename += '.json';
-            }
-
-            let file   = Gio.File.new_for_path(filename);
-            let exists = file.query_exists(null);
-
-            let success = file.replace_contents(
-                JSON.stringify(settings, null, 2), null, false,
-                Gio.FileCreateFlags.REPLACE_DESTINATION, null);
-
-            if (success && !exists) {
-              let fileInfo =
-                  file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
-              let suffixPos = fileInfo.get_display_name().indexOf('.json');
-              let row       = this._presetList.append();
-              this._presetList.set_value(
-                  row, 0, fileInfo.get_display_name().slice(0, suffixPos));
-              this._presetList.set_value(row, 1, file.get_path());
-            }
-
-          } catch (error) {
-            utils.notification('Failed to save preset: ' + error);
-          }
+        let presetCombobox = this._builder.get_object('preset-combobox');
+        if (presetCombobox.active_id) {
+          saver.set_current_name(presetCombobox.active_id + '.json');
         }
 
-        dialog.destroy();
-      });
+        saver.connect('response', (dialog, response_id) => {
+          if (response_id === Gtk.ResponseType.OK) {
+            try {
+              let settings = {};
 
-      saver.show();
+              let write = (key) => {
+                if (this._settings.settings_schema.get_key(key)
+                        .get_value_type()
+                        .dup_string() === 's') {
+                  settings[key] = this._settings.get_string(key);
+                } else if (
+                    this._settings.settings_schema.get_key(key)
+                        .get_value_type()
+                        .dup_string() === 'd') {
+                  settings[key] = this._settings.get_double(key);
+                } else if (
+                    this._settings.settings_schema.get_key(key)
+                        .get_value_type()
+                        .dup_string() === 'b') {
+                  settings[key] = this._settings.get_boolean(key);
+                }
+              };
+
+              write('animation-duration');
+              write('background-color');
+              write('text-color');
+              write('font');
+              write('wedge-width');
+              write('wedge-inner-radius');
+              write('wedge-color');
+              write('active-wedge-color');
+              write('wedge-separator-color');
+              write('center-color-mode');
+              write('center-fixed-color');
+              write('center-auto-color-saturation');
+              write('center-auto-color-luminance');
+              write('center-auto-color-alpha');
+              write('center-size');
+              write('center-icon-scale');
+              write('child-color-mode');
+              write('child-color-mode-hover');
+              write('child-fixed-color');
+              write('child-fixed-color-hover');
+              write('child-auto-color-saturation');
+              write('child-auto-color-saturation-hover');
+              write('child-auto-color-luminance');
+              write('child-auto-color-luminance-hover');
+              write('child-auto-color-alpha');
+              write('child-auto-color-alpha-hover');
+              write('child-size');
+              write('child-size-hover');
+              write('child-offset');
+              write('child-offset-hover');
+              write('child-icon-scale');
+              write('child-icon-scale-hover');
+              write('child-draw-above');
+              write('grandchild-color-mode');
+              write('grandchild-color-mode-hover');
+              write('grandchild-fixed-color');
+              write('grandchild-fixed-color-hover');
+              write('grandchild-size');
+              write('grandchild-size-hover');
+              write('grandchild-offset');
+              write('grandchild-offset-hover');
+              write('grandchild-draw-above');
+
+              let filename = dialog.get_filename();
+              if (!filename.endsWith('.json')) {
+                filename += '.json';
+              }
+
+              let file   = Gio.File.new_for_path(filename);
+              let exists = file.query_exists(null);
+
+              let success = file.replace_contents(
+                  JSON.stringify(settings, null, 2), null, false,
+                  Gio.FileCreateFlags.REPLACE_DESTINATION, null);
+
+              if (success && !exists) {
+                let fileInfo =
+                    file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
+                let suffixPos = fileInfo.get_display_name().indexOf('.json');
+                let row       = this._presetList.append();
+                this._presetList.set_value(
+                    row, 0, fileInfo.get_display_name().slice(0, suffixPos));
+                this._presetList.set_value(row, 1, file.get_path());
+              }
+
+            } catch (error) {
+              utils.notification('Failed to save preset: ' + error);
+            }
+          }
+
+          dialog.destroy();
+        });
+
+        saver.show();
+      } catch (error) {
+        utils.notification('Failed to save preset: ' + error);
+      }
     });
 
     this._builder.get_object('open-preset-directory-button').connect('clicked', () => {
