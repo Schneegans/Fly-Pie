@@ -25,6 +25,7 @@ const utils = Me.imports.common.utils;
 
 // clang-format off
 var Background = GObject.registerClass({
+  Properties: {},
   Signals: {
     // Emitted when the close button is clicked.
     'edit-close': {}
@@ -110,6 +111,9 @@ class Background extends Clutter.Actor {
       this.width = Main.layoutManager.currentMonitor.width / 2;
       this.x     = this._settings.get_boolean('edit-mode-on-right-side') ? this.width : 0;
 
+      // Do not draw outside our edit-mode screen-side.
+      this.set_clip(0, 0, this.width, this.height);
+
       // Put control buttons at the lower center.
       this._controlButtons.x =
           Main.layoutManager.currentMonitor.width / 4 - this._controlButtons.width / 2;
@@ -122,6 +126,9 @@ class Background extends Clutter.Actor {
       this._controlButtons.visible = false;
       this.width                   = Main.layoutManager.currentMonitor.width;
       this.x                       = 0;
+
+      // Remove any previous clips set in edit mode.
+      this.remove_clip();
 
       // Try to grab the complete input.
       if (!Main.pushModal(this)) {
