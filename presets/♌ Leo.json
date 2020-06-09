@@ -3,7 +3,7 @@
   "background-color": "rgba(0, 0, 0, 0.2)",
   "text-color": "rgb(0, 0, 0)",
   "font": "Sans 12",
-  "wedge-size": 554,
+  "wedge-width": 554,
   "wedge-color": "rgba(0,0,0,0)",
   "active-wedge-color": "rgba(100,100,100,0.317568)",
   "wedge-separator-color": "rgba(255,255,255,0.800676)",
