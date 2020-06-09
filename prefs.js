@@ -70,8 +70,8 @@ let Settings = class Settings {
     this._bindSlider('wedge-width');
     this._bindSlider('wedge-inner-radius');
     this._bindColorButton('wedge-color');
-    this._bindColorButton('active-wedge-color');
     this._bindColorButton('wedge-separator-color');
+    this._bindSlider('wedge-separator-width');
 
     // Center Item Settings. -------------------------------------------------------------
 
@@ -189,14 +189,14 @@ let Settings = class Settings {
       }
     }
 
-    this._builder.get_object('preset-combobox').connect('changed', (combobox) => {
-      let row  = combobox.get_active_iter()[1];
-      let path = this._presetListSorted.get_value(row, 1);
-
-      let file                = Gio.File.new_for_path(path);
-      let [success, contents] = file.load_contents(null);
-
+    this._builder.get_object('preset-selection').connect('changed', (selection) => {
       try {
+        let [ok, model, iter] = selection.get_selected();
+        let path              = model.get_value(iter, 1);
+
+        let file                = Gio.File.new_for_path(path);
+        let [success, contents] = file.load_contents(null);
+
         if (success) {
           let settings = JSON.parse(contents);
 
@@ -222,8 +222,9 @@ let Settings = class Settings {
           read('wedge-width');
           read('wedge-inner-radius');
           read('wedge-color');
-          read('active-wedge-color');
+          read('wedge-color-hover');
           read('wedge-separator-color');
+          read('wedge-separator-width');
           read('center-color-mode');
           read('center-fixed-color');
           read('center-auto-color-saturation');
@@ -290,9 +291,11 @@ let Settings = class Settings {
 
         saver.set_current_folder_uri(this._presetDirectory.get_uri());
 
-        let presetCombobox = this._builder.get_object('preset-combobox');
-        if (presetCombobox.active_id) {
-          saver.set_current_name(presetCombobox.active_id + '.json');
+        let presetSelection   = this._builder.get_object('preset-selection');
+        let [ok, model, iter] = presetSelection.get_selected();
+        if (ok) {
+          let name = model.get_value(iter, 0);
+          saver.set_current_name(name + '.json');
         }
 
         saver.connect('response', (dialog, response_id) => {
@@ -325,8 +328,9 @@ let Settings = class Settings {
               write('wedge-width');
               write('wedge-inner-radius');
               write('wedge-color');
-              write('active-wedge-color');
+              write('wedge-color-hover');
               write('wedge-separator-color');
+              write('wedge-separator-width');
               write('center-color-mode');
               write('center-fixed-color');
               write('center-auto-color-saturation');
@@ -399,6 +403,73 @@ let Settings = class Settings {
 
     this._builder.get_object('open-preset-directory-button').connect('clicked', () => {
       Gio.AppInfo.launch_default_for_uri(this._presetDirectory.get_uri(), null);
+    });
+
+    this._builder.get_object('random-preset-button').connect('clicked', () => {
+      let setRandomDouble = (key, min, max) => {
+        this._settings.set_double(key, min + Math.random() * (max - min));
+      };
+
+      let setRandomString = (key, values) => {
+        let index = Math.floor(Math.random() * values.length);
+        this._settings.set_string(key, values[index]);
+      };
+
+      let setRandomBool = (key) => {
+        this._settings.set_boolean(key, Math.random() > 0.5);
+      };
+
+      let setRandomColor = (key) => {
+        let color   = new Gdk.RGBA();
+        color.red   = Math.random();
+        color.green = Math.random();
+        color.blue  = Math.random();
+        color.alpha = Math.random();
+        this._settings.set_string(key, color.to_string());
+      };
+
+      setRandomDouble('animation-duration', 0.1, 0.3);
+      setRandomColor('background-color');
+      setRandomColor('text-color');
+      setRandomDouble('wedge-width', 100, 500);
+      setRandomDouble('wedge-inner-radius', 50, 100);
+      setRandomColor('wedge-color');
+      setRandomColor('wedge-color-hover');
+      setRandomColor('wedge-separator-color');
+      setRandomDouble('wedge-separator-width', 1, 5);
+      setRandomString('center-color-mode', ['fixed', 'auto']);
+      setRandomColor('center-fixed-color');
+      setRandomDouble('center-auto-color-saturation', 0, 1);
+      setRandomDouble('center-auto-color-luminance', 0, 1);
+      setRandomDouble('center-auto-color-alpha', 0, 1);
+      setRandomDouble('center-size', 50, 150);
+      setRandomDouble('center-icon-scale', 0.5, 1.0);
+      setRandomString('child-color-mode', ['fixed', 'auto', 'parent']);
+      setRandomString('child-color-mode-hover', ['fixed', 'auto', 'parent']);
+      setRandomColor('child-fixed-color');
+      setRandomColor('child-fixed-color-hover');
+      setRandomDouble('child-auto-color-saturation', 0, 1);
+      setRandomDouble('child-auto-color-saturation-hover', 0, 1);
+      setRandomDouble('child-auto-color-luminance', 0, 1);
+      setRandomDouble('child-auto-color-luminance-hover', 0, 1);
+      setRandomDouble('child-auto-color-alpha', 0, 1);
+      setRandomDouble('child-auto-color-alpha-hover', 0, 1);
+      setRandomDouble('child-size', 30, 80);
+      setRandomDouble('child-size-hover', 30, 80);
+      setRandomDouble('child-offset', 50, 150);
+      setRandomDouble('child-offset-hover', 50, 150);
+      setRandomDouble('child-icon-scale', 0.5, 1.0);
+      setRandomDouble('child-icon-scale-hover', 0.5, 1.0);
+      setRandomBool('child-draw-above');
+      setRandomString('grandchild-color-mode', ['fixed', 'parent']);
+      setRandomString('grandchild-color-mode-hover', ['fixed', 'parent']);
+      setRandomColor('grandchild-fixed-color');
+      setRandomColor('grandchild-fixed-color-hover');
+      setRandomDouble('grandchild-size', 3, 20);
+      setRandomDouble('grandchild-size-hover', 3, 20);
+      setRandomDouble('grandchild-offset', 15, 40);
+      setRandomDouble('grandchild-offset-hover', 15, 40);
+      setRandomBool('grandchild-draw-above');
     });
   }
 
