@@ -38,11 +38,12 @@ class SelectionWedges extends Clutter.Actor {
     this._separatorAngles = [];
     this._activeWedge     = -1;
 
-    this._shader = new Clutter.ShaderEffect({
+    this._wedgeActor  = new Clutter.Actor();
+    this._wedgeShader = new Clutter.ShaderEffect({
       shader_type: Clutter.ShaderType.FRAGMENT_SHADER,
     });
 
-    this._shader.set_shader_source(`
+    this._wedgeShader.set_shader_source(`
       uniform float r;
       uniform float g;
       uniform float b;
@@ -53,6 +54,7 @@ class SelectionWedges extends Clutter.Actor {
       uniform float bHover;
       uniform float aHover;
 
+      uniform float innerRadius;
       uniform float startAngle;
       uniform float endAngle;
 
@@ -63,21 +65,22 @@ class SelectionWedges extends Clutter.Actor {
 
         float distance = sqrt(pos.x * pos.x + pos.y * pos.y);
         float angle    = 0;
-        if (distance > 0) {
+        if (distance > innerRadius) {
           angle = acos(pos.x / distance) * 180 / 3.141592653589793;
           if (pos.y < 0) {
             angle = 360 - angle;
           }
+          
+          angle = mod((angle + 90), 360);
+          if (angle > startAngle && angle <= endAngle ||
+              angle + 360 > startAngle && angle + 360 <= endAngle) {
+
+            color = vec3(rHover, gHover, bHover);
+            alpha = aHover;
+          }
         }
 
-        angle = mod((angle + 90), 360);
-        if (angle > startAngle && angle <= endAngle ||
-            angle + 360 > startAngle && angle + 360 <= endAngle) {
-          color = vec3(rHover, gHover, bHover);
-          alpha = aHover;
-        }
-
-        float distFac  = 1.0 - min(1.0, length(pos));
+        float distFac  = 1.0 - clamp((length(pos) - innerRadius) / (1.0-innerRadius), 0.0, 1.0);
         alpha *= distFac * cogl_color_in.a;
 
         cogl_color_out.rgb = color * alpha;
@@ -85,9 +88,32 @@ class SelectionWedges extends Clutter.Actor {
       }
     `);
 
-    this.add_effect(this._shader);
+    this._wedgeActor.add_effect(this._wedgeShader);
+    this.add_child(this._wedgeActor);
 
-    // utils.debug(' ' + this._program.get_target());
+    this._separatorCanvas = new Clutter.Canvas();
+    this._separatorCanvas.connect('draw', (canvas, ctx, width, height) => {
+      ctx.setOperator(Cairo.Operator.CLEAR);
+      ctx.paint();
+      ctx.setOperator(Cairo.Operator.OVER);
+
+      let gradient =
+          new Cairo.LinearGradient(this._settings.wedgeInnerRadius, 0, width, 0);
+      let color = this._settings.wedgeSeparatorColor;
+      gradient.addColorStopRGBA(0, color.red, color.green, color.blue, color.alpha);
+      gradient.addColorStopRGBA(1, color.red, color.green, color.blue, 0);
+
+      ctx.setLineWidth(this._settings.wedgeSeparatorWidth);
+      ctx.setLineCap(Cairo.LineCap.ROUND);
+      ctx.moveTo(this._settings.wedgeInnerRadius, height / 2);
+      ctx.lineTo(width, height / 2);
+      ctx.setSource(gradient);
+      ctx.stroke();
+    });
+
+    this._separators = new Clutter.Actor();
+    this.add_child(this._separators);
+
 
     // this._canvas.connect('draw', (canvas, ctx, width, height) => {
     //   ctx.setOperator(Cairo.Operator.CLEAR);
@@ -97,8 +123,8 @@ class SelectionWedges extends Clutter.Actor {
 
     //   let wedgeColor = this._createRadialGradient(
     //       this._settings.wedgeColor, this._settings.wedgeInnerRadius, width / 2);
-    //   let activeWedgeColor = this._createRadialGradient(
-    //       this._settings.activeWedgeColor, this._settings.wedgeInnerRadius, width /
+    //   let wedgeColorHover = this._createRadialGradient(
+    //       this._settings.wedgeColorHover, this._settings.wedgeInnerRadius, width /
     //       2);
 
     //   ctx.save();
@@ -113,7 +139,7 @@ class SelectionWedges extends Clutter.Actor {
     //     }
 
     //     if (i == this._activeWedge) {
-    //       ctx.setSource(activeWedgeColor);
+    //       ctx.setSource(wedgeColorHover);
     //     } else {
     //       ctx.setSource(wedgeColor);
     //     }
@@ -162,34 +188,47 @@ class SelectionWedges extends Clutter.Actor {
       wedgeWidth:            settings.get_double('wedge-width')          * globalScale,
       wedgeInnerRadius:      settings.get_double('wedge-inner-radius')   * globalScale,
       wedgeColor:            utils.stringToRGBA(settings.get_string('wedge-color')),
-      activeWedgeColor:      utils.stringToRGBA(settings.get_string('active-wedge-color')),
+      wedgeColorHover:       utils.stringToRGBA(settings.get_string('wedge-color-hover')),
       wedgeSeparatorColor:   utils.stringToRGBA(settings.get_string('wedge-separator-color')),
+      wedgeSeparatorWidth:   settings.get_double('wedge-separator-width') * globalScale,
     };
     // clang-format on
 
     this.set_easing_duration(this._settings.animationDuration);
 
-    let radius = this._settings.wedgeInnerRadius + this._settings.wedgeWidth;
-    this.set_size(radius * 2, radius * 2);
-    this.set_translation(-radius, -radius, 0);
+    let outerRadius = this._settings.wedgeInnerRadius + this._settings.wedgeWidth;
+    this._wedgeActor.set_size(outerRadius * 2, outerRadius * 2);
+    this._wedgeActor.set_translation(-outerRadius, -outerRadius, 0);
 
-    this._shader.set_uniform_value('r', this._settings.wedgeColor.red + 0.0000001);
-    this._shader.set_uniform_value('g', this._settings.wedgeColor.green + 0.0000001);
-    this._shader.set_uniform_value('b', this._settings.wedgeColor.blue + 0.0000001);
-    this._shader.set_uniform_value('a', this._settings.wedgeColor.alpha + 0.0000001);
+    this._separatorCanvas.set_size(
+        this._settings.wedgeInnerRadius + this._settings.wedgeWidth,
+        this._settings.wedgeSeparatorWidth + 10);
+    this._separatorCanvas.invalidate();
 
-    this._shader.set_uniform_value(
-        'rHover', this._settings.activeWedgeColor.red + 0.0000001);
-    this._shader.set_uniform_value(
-        'gHover', this._settings.activeWedgeColor.green + 0.0000001);
-    this._shader.set_uniform_value(
-        'bHover', this._settings.activeWedgeColor.blue + 0.0000001);
-    this._shader.set_uniform_value(
-        'aHover', this._settings.activeWedgeColor.alpha + 0.0000001);
+    this._separators.get_children().forEach(child => {
+      child.set_size(
+          this._settings.wedgeInnerRadius + this._settings.wedgeWidth,
+          this._settings.wedgeSeparatorWidth + 10);
+      child.translation_y = -child.height / 2;
+    });
+
+    this._setUniform('innerRadius', this._settings.wedgeInnerRadius / outerRadius);
+
+    this._setUniform('r', this._settings.wedgeColor.red);
+    this._setUniform('g', this._settings.wedgeColor.green);
+    this._setUniform('b', this._settings.wedgeColor.blue);
+    this._setUniform('a', this._settings.wedgeColor.alpha);
+
+    this._setUniform('rHover', this._settings.wedgeColorHover.red);
+    this._setUniform('gHover', this._settings.wedgeColorHover.green);
+    this._setUniform('bHover', this._settings.wedgeColorHover.blue);
+    this._setUniform('aHover', this._settings.wedgeColorHover.alpha);
   }
 
   setItemAngles(itemAngles) {
     this._separatorAngles = [];
+
+    this._separators.destroy_all_children();
 
     if (itemAngles.length >= 2) {
       for (let i = 0; i < itemAngles.length; i++) {
@@ -200,7 +239,20 @@ class SelectionWedges extends Clutter.Actor {
           nextAngle += 360;
         }
 
-        this._separatorAngles.push((angle + nextAngle) / 2);
+        let separatorAngle = (angle + nextAngle) / 2;
+        this._separatorAngles.push(separatorAngle);
+
+        let separator = new Clutter.Actor({
+          width: this._settings.wedgeInnerRadius + this._settings.wedgeWidth,
+          height: this._settings.wedgeSeparatorWidth + 10
+        });
+
+        separator.rotation_angle_z = separatorAngle - 90;
+        // separator.translation_x    = -separator.width / 2;
+        separator.translation_y = -separator.height / 2;
+        separator.set_pivot_point(0, 0.5);
+        separator.set_content(this._separatorCanvas);
+        this._separators.add_child(separator);
       }
     }
   }
@@ -217,10 +269,9 @@ class SelectionWedges extends Clutter.Actor {
 
     angle = (angle + 90) % 360;
 
-    let newActiveWedge = -1;
-
-    this._shader.set_uniform_value('startAngle', 0 + 0.0000001);
-    this._shader.set_uniform_value('endAngle', 0 + 0.0000001);
+    let activeWedge           = -1;
+    let activeWedgeStartAngle = 0;
+    let activeWedgeEndAngle   = 0;
 
     if (distance > this._settings.wedgeInnerRadius) {
       for (let i = 0; i < this._separatorAngles.length; i++) {
@@ -233,20 +284,28 @@ class SelectionWedges extends Clutter.Actor {
 
         if (angle > startAngle && angle <= endAngle ||
             angle + 360 > startAngle && angle + 360 <= endAngle) {
-          newActiveWedge = i;
-
-          this._shader.set_uniform_value('startAngle', startAngle + 0.0000001);
-          this._shader.set_uniform_value('endAngle', endAngle + 0.0000001);
+          activeWedge           = i;
+          activeWedgeStartAngle = startAngle;
+          activeWedgeEndAngle   = endAngle;
           break
         }
       }
     }
 
-    if (newActiveWedge != this._activeWedge) {
-      this._activeWedge = newActiveWedge;
+    if (activeWedge != this._activeWedge) {
+      this._setUniform('startAngle', activeWedgeStartAngle);
+      this._setUniform('endAngle', activeWedgeEndAngle);
+      this._activeWedge = activeWedge;
     }
   }
 
 
   // ----------------------------------------------------------------------- private stuff
+
+  _setUniform(name, value) {
+    if (Number.isInteger(value)) {
+      value += 0.0000001;
+    }
+    this._wedgeShader.set_uniform_value(name, value);
+  }
 });

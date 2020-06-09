@@ -47,7 +47,8 @@ var MenuItem = GObject.registerClass({
         'background-canvas', 'background-canvas',
         'The Clutter.Content to be used by this menu as background.',
         GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, Clutter.Content.$gtype),
-  }
+  },
+  Signals: {}
 },
 class MenuItem extends Clutter.Actor {
   // clang-format on
