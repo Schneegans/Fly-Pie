@@ -45,6 +45,28 @@ var Menu = class Menu {
     this._selectionWedges = new SelectionWedges();
     this._background.add_child(this._selectionWedges);
 
+    this._selectionWedges.connect('hovered-wedge-change-event', (o, index) => {
+      if (index == -1) {
+        this._structure.actor.set_property('state', MenuItemState.ACTIVE);
+      } else {
+        this._structure.actor.set_property('state', MenuItemState.ACTIVE_HOVER);
+      }
+
+      for (let i = 0; i < this._structure.items.length; i++) {
+        const item = this._structure.items[i];
+        if (i == index) {
+          item.actor.set_property('state', MenuItemState.CHILD_HOVER);
+          item.items.forEach(
+              child => {
+                  child.actor.set_property('state', MenuItemState.GRANDCHILD_HOVER)});
+        } else {
+          item.actor.set_property('state', MenuItemState.CHILD);
+          item.items.forEach(
+              child => {child.actor.set_property('state', MenuItemState.GRANDCHILD)});
+        }
+      }
+    });
+
     this._itemBackground = this._createItemBackground();
 
     this._background.connect('button-release-event', (actor, event) => {
@@ -54,13 +76,13 @@ var Menu = class Menu {
       }
     });
 
-    this._background.connect('edit-close', () => {
+    this._background.connect('close-event', () => {
       this._onCancel(this._menuID);
       this._hide();
     });
 
     this._background.connect('motion-event', (actor, event) => {
-      let [x, y] = event.get_coords();
+      const [x, y] = event.get_coords();
       this._selectionWedges.setPointerPosition(
           x - this._selectionWedges.x - this._background.x,
           y - this._selectionWedges.y - this._background.y);
@@ -132,7 +154,7 @@ var Menu = class Menu {
     this._structure.actor.onSettingsChange(this._settings);
     this._background.add_child(this._structure.actor);
 
-    let itemAngles = [];
+    const itemAngles = [];
 
     this._structure.items.forEach(item => {
       itemAngles.push(item.angle);
@@ -168,7 +190,7 @@ var Menu = class Menu {
       this._selectionWedges.set_position(x, y);
     }
 
-    let animationDuration = this._settings.get_double('animation-duration') * 1000;
+    const animationDuration = this._settings.get_double('animation-duration') * 1000;
     this._structure.actor.set_easing_duration(animationDuration);
     this._selectionWedges.set_easing_duration(animationDuration);
 
@@ -244,7 +266,7 @@ var Menu = class Menu {
 
     // First we calculate all angles for the current menu level. We begin by storing all
     // fixed angles.
-    let fixedAngles = [];
+    const fixedAngles = [];
     items.forEach((item, index) => {
       if ('angle' in item) {
         fixedAngles.push({angle: item.angle, index: index});
@@ -318,7 +340,7 @@ var Menu = class Menu {
       }
 
       // Calculate the angular difference between consecutive items in the current wedge.
-      let wedgeItemGap = (wedgeEndAngle - wedgeBeginAngle) / (wedgeItemCount + 1);
+      const wedgeItemGap = (wedgeEndAngle - wedgeBeginAngle) / (wedgeItemCount + 1);
 
       // Now we assign an angle to each item between the begin and end indices.
       let index             = (wedgeBeginIndex + 1) % items.length;
@@ -359,7 +381,7 @@ var Menu = class Menu {
     // it can possible get. Usually this will be 'center-size' * 'global-scale', but in
     // theory children items could be scaled larger than the center, so we check all of
     // them to be on the safe side.
-    let itemBackgroundSizes = [
+    const itemBackgroundSizes = [
       this._settings.get_double('center-size'),
       this._settings.get_double('child-size'),
       this._settings.get_double('child-size-hover'),
@@ -390,7 +412,7 @@ var Menu = class Menu {
   // background. This method creates it. It has a width and height of one.
   // Clutter.Canvas.scale_factor is later used to scale the canvas to an appropriate size.
   _createItemBackground() {
-    let canvas = new Clutter.Canvas({height: 1, width: 1});
+    const canvas = new Clutter.Canvas({height: 1, width: 1});
 
     canvas.connect('draw', (canvas, ctx, width, height) => {
       ctx.setOperator(Cairo.Operator.CLEAR);
@@ -412,22 +434,22 @@ var Menu = class Menu {
   // returns a new position [x, y] which ensures that the box is inside the current
   // monitor's bounds, including the specified padding.
   _clampToToMonitor(x, y, width, height, margin) {
-    let monitor = Main.layoutManager.currentMonitor;
+    const monitor = Main.layoutManager.currentMonitor;
 
-    let minX = margin + width / 2;
-    let minY = margin + height / 2;
+    const minX = margin + width / 2;
+    const minY = margin + height / 2;
 
-    let maxX = monitor.width - margin - width / 2;
-    let maxY = monitor.height - margin - height / 2;
+    const maxX = monitor.width - margin - width / 2;
+    const maxY = monitor.height - margin - height / 2;
 
-    let posX = Math.min(Math.max(x, minX), maxX);
-    let posY = Math.min(Math.max(y, minY), maxY);
+    const posX = Math.min(Math.max(x, minX), maxX);
+    const posY = Math.min(Math.max(y, minY), maxY);
 
     return [Math.floor(posX), Math.floor(posY)];
   }
 
   _foreachItem(func, parentItem) {
-    let item = parentItem || this._structure;
+    const item = parentItem || this._structure;
 
     if (item) {
       func(item);

@@ -28,7 +28,7 @@ var Background = GObject.registerClass({
   Properties: {},
   Signals: {
     // Emitted when the close button is clicked.
-    'edit-close': {}
+    'close-event': {}
   }
 },
 class Background extends Clutter.Actor {
@@ -81,11 +81,11 @@ class Background extends Clutter.Actor {
     });
 
     this._addControlButton('Close', 'window-close-symbolic', () => {
-      this.emit('edit-close');
+      this.emit('close-event');
     });
 
     this._addControlButton('Flip Side', 'object-flip-horizontal-symbolic', () => {
-      let key = 'edit-mode-on-right-side';
+      const key = 'edit-mode-on-right-side';
       this._settings.set_boolean(key, !this._settings.get_boolean(key));
     });
 
@@ -167,15 +167,15 @@ class Background extends Clutter.Actor {
   // switcher and dash button class names hoping that this looks good with most Gnome
   // Shell themes.
   _addControlButton(labelText, iconName, callback) {
-    let icon = new St.Icon({
+    const icon = new St.Icon({
       gicon: Gio.Icon.new_for_string(iconName),
       fallback_icon_name: 'image-missing',
       icon_size: 32
     });
 
-    let label = new St.Label({text: labelText});
+    const label = new St.Label({text: labelText});
 
-    let box = new St.Widget({
+    const box = new St.Widget({
       style_class: 'overview-icon',
       width: 100,
       layout_manager: new Clutter.BoxLayout({vertical: true, spacing: 5})
@@ -183,7 +183,7 @@ class Background extends Clutter.Actor {
     box.add_actor(icon);
     box.add_actor(label);
 
-    let button = new St.Button({style_class: 'app-well-app'});
+    const button = new St.Button({style_class: 'app-well-app'});
     button.set_child(box);
     button.connect('clicked', callback);
 

@@ -119,11 +119,22 @@
       <description>If set to auto, the menu's center element will be colored
                    according to its icon. Else the 'center-color' will be used.</description>
     </key>
+    <key name="center-color-mode-hover" enum="org.gnome.shell.extensions.gnomepie2.CenterColorMode">
+      <default>"fixed"</default>
+      <summary>Center Color Mode Hover</summary>
+      <description>If set to auto, the menu's center element will be colored
+                   according to its icon. Else the 'center-color' will be used.</description>
+    </key>
 
     <key name="center-fixed-color" type="s">
       <default>"rgb(200, 200, 200)"</default>
       <summary>Center Color</summary>
       <description>The color of the menu's center element.</description>
+    </key>
+    <key name="center-fixed-color-hover" type="s">
+      <default>"rgb(200, 200, 200)"</default>
+      <summary>Center Color Hover</summary>
+      <description>The color of the menu's center element when a child is hovered.</description>
     </key>
 
     <key name="center-auto-color-saturation" type="d">
@@ -131,11 +142,21 @@
       <summary>Center Auto Color Saturation</summary>
       <description>The saturation of automatically generated item colors.</description>
     </key>
+    <key name="center-auto-color-saturation-hover" type="d">
+      <default>0.5</default>
+      <summary>Center Auto Color Saturation Hover</summary>
+      <description>The saturation of automatically generated item colors when a child is hovered.</description>
+    </key>
 
     <key name="center-auto-color-luminance" type="d">
       <default>0.5</default>
       <summary>Center Auto Color Luminance</summary>
       <description>The luminance of automatically generated item colors.</description>
+    </key>
+    <key name="center-auto-color-luminance-hover" type="d">
+      <default>0.5</default>
+      <summary>Center Auto Color Luminance Hover</summary>
+      <description>The luminance of automatically generated item colors when a child is hovered.</description>
     </key>
 
     <key name="center-auto-color-alpha" type="d">
@@ -143,17 +164,32 @@
       <summary>Center Auto Color Alpha</summary>
       <description>The alpha value of automatically generated item colors.</description>
     </key>
+    <key name="center-auto-color-alpha-hover" type="d">
+      <default>1.0</default>
+      <summary>Center Auto Color Alpha Hover</summary>
+      <description>The alpha value of automatically generated item colors when a child is hovered.</description>
+    </key>
 
     <key name="center-size" type="d">
       <default>100</default>
       <summary>Center Size</summary>
       <description>The size of the center element in pixels.</description>
     </key>
+    <key name="center-size-hover" type="d">
+      <default>100</default>
+      <summary>Center Size Hover</summary>
+      <description>The size of the center element in pixels when a child is hovered.</description>
+    </key>
 
     <key name="center-icon-scale" type="d">
       <default>0.7</default>
       <summary>Center Icon Scale</summary>
       <description>A scale factor for the center icon.</description>
+    </key>
+    <key name="center-icon-scale-hover" type="d">
+      <default>0.7</default>
+      <summary>Center Icon Scale Hover</summary>
+      <description>A scale factor for the center icon when a child is hovered.</description>
     </key>
 
 

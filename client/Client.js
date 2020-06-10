@@ -121,7 +121,7 @@ var Client = class Client {
 
     // The path is a string like /2/2/4 indicating that the fourth entry in the second
     // entry of the second entry was clicked on.
-    let pathElements = path.split('/');
+    const pathElements = path.split('/');
 
     utils.debug('OnSelect ' + path);
 

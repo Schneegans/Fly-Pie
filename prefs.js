@@ -78,6 +78,10 @@ let Settings = class Settings {
     // Toggle the color revealers when the color mode radio buttons are toggled.
     this._bindRevealer('center-color-mode-fixed', 'center-fixed-color-revealer');
     this._bindRevealer('center-color-mode-auto', 'center-auto-color-revealer');
+    this._bindRevealer(
+        'center-color-mode-hover-fixed', 'center-fixed-color-hover-revealer');
+    this._bindRevealer(
+        'center-color-mode-hover-auto', 'center-auto-color-hover-revealer');
 
     this._bindRadioGroup('center-color-mode', ['fixed', 'auto']);
     this._bindColorButton('center-fixed-color');
@@ -90,10 +94,15 @@ let Settings = class Settings {
     // The color reset button resets various settings, so we bind it manually.
     this._builder.get_object('reset-center-color').connect('clicked', () => {
       this._settings.reset('center-color-mode');
+      this._settings.reset('center-color-mode-hover');
       this._settings.reset('center-fixed-color');
+      this._settings.reset('center-fixed-color-hover');
       this._settings.reset('center-auto-color-saturation');
+      this._settings.reset('center-auto-color-saturation-hover');
       this._settings.reset('center-auto-color-luminance');
+      this._settings.reset('center-auto-color-luminance-hover');
       this._settings.reset('center-auto-color-alpha');
+      this._settings.reset('center-auto-color-alpha-hover');
     });
 
 
@@ -226,12 +235,19 @@ let Settings = class Settings {
           read('wedge-separator-color');
           read('wedge-separator-width');
           read('center-color-mode');
+          read('center-color-mode-hover');
           read('center-fixed-color');
+          read('center-fixed-color-hover');
           read('center-auto-color-saturation');
+          read('center-auto-color-saturation-hover');
           read('center-auto-color-luminance');
+          read('center-auto-color-luminance-hover');
           read('center-auto-color-alpha');
+          read('center-auto-color-alpha-hover');
           read('center-size');
+          read('center-size-hover');
           read('center-icon-scale');
+          read('center-icon-scale-hover');
           read('child-color-mode');
           read('child-color-mode-hover');
           read('child-fixed-color');
@@ -332,12 +348,19 @@ let Settings = class Settings {
               write('wedge-separator-color');
               write('wedge-separator-width');
               write('center-color-mode');
+              write('center-color-mode-hover');
               write('center-fixed-color');
+              write('center-fixed-color-hover');
               write('center-auto-color-saturation');
+              write('center-auto-color-saturation-hover');
               write('center-auto-color-luminance');
+              write('center-auto-color-luminance-hover');
               write('center-auto-color-alpha');
+              write('center-auto-color-alpha-hover');
               write('center-size');
+              write('center-size-hover');
               write('center-icon-scale');
+              write('center-icon-scale-hover');
               write('child-color-mode');
               write('child-color-mode-hover');
               write('child-fixed-color');
@@ -438,12 +461,19 @@ let Settings = class Settings {
       setRandomColor('wedge-separator-color');
       setRandomDouble('wedge-separator-width', 1, 5);
       setRandomString('center-color-mode', ['fixed', 'auto']);
+      setRandomString('center-color-mode-hover', ['fixed', 'auto']);
       setRandomColor('center-fixed-color');
+      setRandomColor('center-fixed-color-hover');
       setRandomDouble('center-auto-color-saturation', 0, 1);
+      setRandomDouble('center-auto-color-saturation-hover', 0, 1);
       setRandomDouble('center-auto-color-luminance', 0, 1);
+      setRandomDouble('center-auto-color-luminance-hover', 0, 1);
       setRandomDouble('center-auto-color-alpha', 0, 1);
+      setRandomDouble('center-auto-color-alpha-hover', 0, 1);
       setRandomDouble('center-size', 50, 150);
+      setRandomDouble('center-size-hover', 50, 150);
       setRandomDouble('center-icon-scale', 0.5, 1.0);
+      setRandomDouble('center-icon-scale-hover', 0.5, 1.0);
       setRandomString('child-color-mode', ['fixed', 'auto', 'parent']);
       setRandomString('child-color-mode-hover', ['fixed', 'auto', 'parent']);
       setRandomColor('child-fixed-color');
@@ -455,20 +485,20 @@ let Settings = class Settings {
       setRandomDouble('child-auto-color-alpha', 0, 1);
       setRandomDouble('child-auto-color-alpha-hover', 0, 1);
       setRandomDouble('child-size', 30, 80);
-      setRandomDouble('child-size-hover', 30, 80);
+      setRandomDouble('child-size-hover', 50, 100);
       setRandomDouble('child-offset', 50, 150);
-      setRandomDouble('child-offset-hover', 50, 150);
+      setRandomDouble('child-offset-hover', 80, 180);
       setRandomDouble('child-icon-scale', 0.5, 1.0);
-      setRandomDouble('child-icon-scale-hover', 0.5, 1.0);
+      setRandomDouble('child-icon-scale-hover', 0.8, 1.0);
       setRandomBool('child-draw-above');
       setRandomString('grandchild-color-mode', ['fixed', 'parent']);
       setRandomString('grandchild-color-mode-hover', ['fixed', 'parent']);
       setRandomColor('grandchild-fixed-color');
       setRandomColor('grandchild-fixed-color-hover');
-      setRandomDouble('grandchild-size', 3, 20);
-      setRandomDouble('grandchild-size-hover', 3, 20);
+      setRandomDouble('grandchild-size', 3, 15);
+      setRandomDouble('grandchild-size-hover', 8, 25);
       setRandomDouble('grandchild-offset', 15, 40);
-      setRandomDouble('grandchild-offset-hover', 15, 40);
+      setRandomDouble('grandchild-offset-hover', 25, 60);
       setRandomBool('grandchild-draw-above');
     });
   }

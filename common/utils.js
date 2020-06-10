@@ -24,14 +24,14 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function debug(message) {
-  let stack = new Error().stack.split('\n');
+  const stack = new Error().stack.split('\n');
 
   // Remove debug() function call from stack.
   stack.shift();
 
   // Find the index of the extension directory (e.g. gnomepie2@code.simonschneegans.de) in
   // the stack entry. We do not want to print the entire absolute file path.
-  let extensionRoot = stack[0].indexOf(Me.metadata.uuid);
+  const extensionRoot = stack[0].indexOf(Me.metadata.uuid);
 
   log('[' + stack[0].slice(extensionRoot) + '] ' + message);
 }
@@ -55,7 +55,7 @@ function notification(message) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function createSettings() {
-  let schema = Gio.SettingsSchemaSource.new_from_directory(
+  const schema = Gio.SettingsSchemaSource.new_from_directory(
       Me.dir.get_child('schemas').get_path(), Gio.SettingsSchemaSource.get_default(),
       false);
 
@@ -70,55 +70,53 @@ function createSettings() {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function logProperties(object) {
-  for (let element in object) {
+  for (const element in object) {
     debug(`${element} [${typeof (object[element])}]`);
   }
 }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// This returns a square-shaped Cairo.ImageSurface of the given size containing an      //
-// icon. The name can either be an icon name from the current icon theme or a path to   //
+// This draws a square-shaped icon to the given Cairo.Context of the given size.        //
+// The name can either be an icon name from the current icon theme or a path to         //
 // an image file. If neither is found, the given name is written to the image - This is //
-// very useful for emojis like 😆 or 🌟!                                                //
+// very useful for emojis like 😆 or 🌟!                                                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function getIcon(name, size) {
+function paintIcon(ctx, name, size) {
 
   // First try to find the icon in the theme. This will also load images from disc if the
   // icon name is actually a file path.
-  let theme = Gtk.IconTheme.get_default();
-  let info  = theme.lookup_by_gicon(
+  const theme = Gtk.IconTheme.get_default();
+  const info  = theme.lookup_by_gicon(
       Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
 
   // We got something, return it!
   if (info != null) {
-    return info.load_surface(null);
+    Gdk.cairo_set_source_pixbuf(ctx, info.load_icon(), 0, 0);
+    ctx.paint();
+
+  } else {
+
+    // If no icon was found, write it as plain text.
+    ctx.setSourceRGBA(0, 0, 0, 1);
+
+    const layout = PangoCairo.create_layout(ctx);
+    layout.set_width(Pango.units_from_double(size));
+
+    const font_description = Pango.FontDescription.from_string('Sans');
+    font_description.set_absolute_size(Pango.units_from_double(size * 0.9));
+
+    layout.set_font_description(font_description);
+    layout.set_text(name, -1);
+    layout.set_alignment(Pango.Alignment.CENTER);
+
+    const extents = layout.get_pixel_extents()[1];
+    ctx.moveTo(0, (size - extents.height) / 2);
+
+    PangoCairo.update_layout(ctx, layout);
+    PangoCairo.show_layout(ctx, layout);
   }
-
-  // If no icon was found, write it as plain text.
-  let surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, size, size);
-  let ctx     = new Cairo.Context(surface);
-
-  ctx.setSourceRGBA(0, 0, 0, 1);
-
-  let layout = PangoCairo.create_layout(ctx);
-  layout.set_width(Pango.units_from_double(size));
-
-  let font_description = Pango.FontDescription.from_string('Sans');
-  font_description.set_absolute_size(Pango.units_from_double(size * 0.9));
-
-  layout.set_font_description(font_description);
-  layout.set_text(name, -1);
-  layout.set_alignment(Pango.Alignment.CENTER);
-
-  let extents = layout.get_pixel_extents()[1];
-  ctx.moveTo(0, (size - extents.height) / 2);
-
-  PangoCairo.update_layout(ctx, layout);
-  PangoCairo.show_layout(ctx, layout);
-
-  return surface;
 }
 
 
@@ -133,21 +131,21 @@ function getAverageIconColor(iconSurface, iconSize, saturation, luminance, alpha
 
   // surface.get_data() as well as surface.get_width() are not available somehow. Therefor
   // we have to pass in the icon size and use the pixbuf conversion below.
-  let pixbuf = Gdk.pixbuf_get_from_surface(iconSurface, 0, 0, iconSize, iconSize);
-  let pixels = pixbuf.get_pixels();
-  let count  = pixels.length;
+  const pixbuf = Gdk.pixbuf_get_from_surface(iconSurface, 0, 0, iconSize, iconSize);
+  const pixels = pixbuf.get_pixels();
+  const count  = pixels.length;
 
   let total = 0, rTotal = 0, gTotal = 0, bTotal = 0;
 
   for (let i = 0; i < count; i += 4) {
-    let r = pixels[i + 0] / 255;
-    let g = pixels[i + 1] / 255;
-    let b = pixels[i + 2] / 255;
-    let a = pixels[i + 3] / 255;
+    const r = pixels[i + 0] / 255;
+    const g = pixels[i + 1] / 255;
+    const b = pixels[i + 2] / 255;
+    const a = pixels[i + 3] / 255;
 
     // Put mor weight on non-transparent and more saturated colors.
-    let saturation = Math.max(r, Math.max(g, b)) - Math.min(r, Math.min(g, b));
-    let relevance  = 0.1 + 0.9 * a * saturation;
+    const saturation = Math.max(r, Math.max(g, b)) - Math.min(r, Math.min(g, b));
+    const relevance  = 0.1 + 0.9 * a * saturation;
 
     rTotal += r * relevance;
     gTotal += g * relevance;
@@ -169,14 +167,14 @@ function getAverageIconColor(iconSurface, iconSize, saturation, luminance, alpha
   // increase the base luminance to 0.5 so that we do not create pitch black colors.
   l = 0.5 + l * 0.5;
 
-  let lFac = luminance * 2 - 1;
-  l        = lFac > 0 ? l * (1 - lFac) + 1 * lFac : l * (lFac + 1);
+  const lFac = luminance * 2 - 1;
+  l          = lFac > 0 ? l * (1 - lFac) + 1 * lFac : l * (lFac + 1);
 
   // We only modify the saturation if it's not too low. Else we will get artificial colors
   // for already quite desaturated icons.
   if (s > 0.1) {
-    let sFac = saturation * 2 - 1;
-    s        = sFac > 0 ? s * (1 - sFac) + 1 * sFac : s * (sFac + 1);
+    const sFac = saturation * 2 - 1;
+    s          = sFac > 0 ? s * (1 - sFac) + 1 * sFac : s * (sFac + 1);
   }
 
   color       = Clutter.Color.from_hls(h, l, s);
@@ -190,7 +188,7 @@ function getAverageIconColor(iconSurface, iconSize, saturation, luminance, alpha
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function stringToRGBA(string) {
-  let rgba = new Gdk.RGBA();
+  const rgba = new Gdk.RGBA();
   rgba.parse(string);
   return rgba;
 }

@@ -23,10 +23,11 @@ const utils = Me.imports.common.utils;
 var MenuItemState = {
   INVISIBLE: 0,
   ACTIVE: 1,
-  CHILD: 2,
-  HOVERED_CHILD: 3,
-  GRANDCHILD: 4,
-  HOVERED_GRANDCHILD: 5,
+  ACTIVE_HOVER: 2,
+  CHILD: 3,
+  CHILD_HOVER: 4,
+  GRANDCHILD: 5,
+  GRANDCHILD_HOVER: 6,
 };
 
 // clang-format off
@@ -34,7 +35,7 @@ var MenuItem = GObject.registerClass({
   Properties: {
     'state': GObject.ParamSpec.int(
         'state', 'state', 'The state the MenuItem is currently in.',
-        GObject.ParamFlags.READWRITE, 0, 5, MenuItemState.INVISIBLE),
+        GObject.ParamFlags.READWRITE, 0, 6, MenuItemState.INVISIBLE),
     'angle': GObject.ParamSpec.double(
         'angle', 'angle', 'The angle of the MenuItem.',
         GObject.ParamFlags.READWRITE, 0, 2 * Math.PI, 0),
@@ -56,8 +57,7 @@ class MenuItem extends Clutter.Actor {
   _init(params = {}) {
     super._init(params);
 
-    this._oldCenterIconSize = 0;
-    this._oldChildIconSize  = 0;
+    this._lastIconSize = 0;
 
     // Create Background Actors.
     this._background                     = new Clutter.Actor();
@@ -71,7 +71,15 @@ class MenuItem extends Clutter.Actor {
     this._childrenContainer = new Clutter.Actor();
     this.add_child(this._childrenContainer);
 
-    this.connect('notify::state', this._onStateChange.bind(this));
+    this._handlers = {
+      state: this.connect('notify::state', () => this._onStateChange()),
+      destroy: this.connect(
+          'destroy',
+          () => {
+            this.disconnect(this._handlers['state']);
+            this.disconnect(this._handlers['destroy']);
+          }),
+    };
   }
 
   getChildrenContainer() {
@@ -81,60 +89,99 @@ class MenuItem extends Clutter.Actor {
   onSettingsChange(settings) {
 
     // First reset some members to force re-creation during the next state change.
+    const resetIcon = (propertyName) => {
+      if (this[propertyName]) {
+        this[propertyName].destroy();
+        delete this[propertyName];
+      }
+    };
 
-    if (this._centerIcon) {
-      // We store the icon size so that we can create the new one at the same size later.
-      // This allows for smooth icon size transitions in edit mode.
-      this._oldCenterIconSize = this._centerIcon.width;
-      this._centerIcon.destroy();
-      delete this._centerIcon;
-    }
-
-    if (this._childIcon) {
-      // We store the icon size so that we can create the new one at the same size later.
-      // This allows for smooth icon size transitions in edit mode.
-      this._oldChildIconSize = this._childIcon.width;
-      this._childIcon.destroy();
-      delete this._childIcon;
-    }
+    resetIcon('_centerIcon');
+    resetIcon('_centerIconHover');
+    resetIcon('_childIcon');
+    resetIcon('_childIconHover');
 
     // Then parse all settings required during state change.
-    let globalScale = settings.get_double('global-scale');
+    const globalScale = settings.get_double('global-scale');
 
     // clang-format off
     this._settings = {
-      animationDuration:             settings.get_double('animation-duration')      * 1000,
-      textColor:                     utils.stringToRGBA(settings.get_string('text-color')),
-      font:                          settings.get_string('font'),
-      centerColorMode:               settings.get_string('center-color-mode'),
-      centerColor:                   Clutter.Color.from_string(settings.get_string('center-fixed-color'))[1],
-      centerSize:                    settings.get_double('center-size')             * globalScale,
-      centerIconScale:               settings.get_double('center-icon-scale'),
-      centerAutoColorSaturation:     settings.get_double('center-auto-color-saturation'),
-      centerAutoColorLuminance:      settings.get_double('center-auto-color-luminance'),
-      centerAutoColorAlpha:          settings.get_double('center-auto-color-alpha')      * 255,
-      childColorMode:                settings.get_string('child-color-mode'),
-      childFixedColor:               Clutter.Color.from_string(settings.get_string('child-fixed-color'))[1],
-      childSize:                     settings.get_double('child-size')              * globalScale,
-      childSizeHover:                settings.get_double('child-size-hover')        * globalScale,
-      childOffset:                   settings.get_double('child-offset')            * globalScale,
-      childOffsetHover:              settings.get_double('child-offset-hover')      * globalScale,
-      childIconScale:                settings.get_double('child-icon-scale'),
-      childIconScaleHover:           settings.get_double('child-icon-scale-hover'),
-      childAutoColorSaturation:      settings.get_double('child-auto-color-saturation'),
-      childAutoColorSaturationHover: settings.get_double('child-auto-color-saturation-hover'),
-      childAutoColorLuminance:       settings.get_double('child-auto-color-luminance'),
-      childAutoColorLuminanceHover:  settings.get_double('child-auto-color-luminance-hover'),
-      childAutoColorAlpha:           settings.get_double('child-auto-color-alpha')       * 255,
-      childAutoColorAlphaHover:      settings.get_double('child-auto-color-alpha-hover') * 255,
-      childDrawAbove:                settings.get_boolean('child-draw-above'),
-      grandchildColorMode:           settings.get_string('grandchild-color-mode'),
-      grandchildFixedColor:          Clutter.Color.from_string(settings.get_string('grandchild-fixed-color'))[1],
-      grandchildSize:                settings.get_double('grandchild-size')         * globalScale,
-      grandchildSizeHover:           settings.get_double('grandchild-size-hover')   * globalScale,
-      grandchildOffset:              settings.get_double('grandchild-offset')       * globalScale,
-      grandchildOffsetHover:         settings.get_double('grandchild-offset-hover') * globalScale,
-      grandchildDrawAbove:           settings.get_boolean('grandchild-draw-above'),
+      animationDuration:       settings.get_double('animation-duration')      * 1000,
+      textColor:               utils.stringToRGBA(settings.get_string('text-color')),
+      font:                    settings.get_string('font'),
+      state: new Map ([
+        [MenuItemState.ACTIVE, {
+          colorMode:           settings.get_string('center-color-mode'),
+          fixedColor:          Clutter.Color.from_string(settings.get_string('center-fixed-color'))[1],
+          size:                settings.get_double('center-size')  * globalScale,
+          offset:              0,
+          iconProperty:        '_centerIcon',
+          iconSize:            settings.get_double('center-size')  * globalScale *
+                               settings.get_double('center-icon-scale'),
+          autoColorSaturation: settings.get_double('center-auto-color-saturation'),
+          autoColorLuminance:  settings.get_double('center-auto-color-luminance'),
+          autoColorAlpha:      settings.get_double('center-auto-color-alpha') * 255,
+          drawChildrenAbove:   settings.get_boolean('child-draw-above'),
+        }],
+        [MenuItemState.ACTIVE_HOVER, {
+          colorMode:           settings.get_string('center-color-mode-hover'),
+          fixedColor:          Clutter.Color.from_string(settings.get_string('center-fixed-color-hover'))[1],
+          size:                settings.get_double('center-size-hover')  * globalScale,
+          offset:              0,
+          iconProperty:        '_centerIconHover',
+          iconSize:            settings.get_double('center-size-hover')  * globalScale * 
+                               settings.get_double('center-icon-scale-hover'),
+          autoColorSaturation: settings.get_double('center-auto-color-saturation-hover'),
+          autoColorLuminance:  settings.get_double('center-auto-color-luminance-hover'),
+          autoColorAlpha:      settings.get_double('center-auto-color-alpha-hover') * 255,
+          drawChildrenAbove:   settings.get_boolean('child-draw-above'),
+        }],
+        [MenuItemState.CHILD, {
+          colorMode:           settings.get_string('child-color-mode'),
+          fixedColor:          Clutter.Color.from_string(settings.get_string('child-fixed-color'))[1],
+          size:                settings.get_double('child-size')     * globalScale,
+          offset:              settings.get_double('child-offset')   * globalScale,
+          iconProperty:        '_childIcon',
+          iconSize:            settings.get_double('child-size')     * globalScale * 
+                               settings.get_double('child-icon-scale'),
+          autoColorSaturation: settings.get_double('child-auto-color-saturation'),
+          autoColorLuminance:  settings.get_double('child-auto-color-luminance'),
+          autoColorAlpha:      settings.get_double('child-auto-color-alpha')  * 255,
+          drawChildrenAbove:   settings.get_boolean('grandchild-draw-above'),
+        }],
+        [MenuItemState.CHILD_HOVER, {
+          colorMode:           settings.get_string('child-color-mode-hover'),
+          fixedColor:          Clutter.Color.from_string(settings.get_string('child-fixed-color-hover'))[1],
+          size:                settings.get_double('child-size-hover')    * globalScale,
+          offset:              settings.get_double('child-offset-hover')  * globalScale,
+          iconProperty:        '_childIconHover',
+          iconSize:            settings.get_double('child-size-hover')    * globalScale * 
+                               settings.get_double('child-icon-scale-hover'),
+          autoColorSaturation: settings.get_double('child-auto-color-saturation-hover'),
+          autoColorLuminance:  settings.get_double('child-auto-color-luminance-hover'),
+          autoColorAlpha:      settings.get_double('child-auto-color-alpha-hover') * 255,
+          drawChildrenAbove:   settings.get_boolean('grandchild-draw-above'),
+        }],
+        [MenuItemState.GRANDCHILD, {
+          colorMode:           settings.get_string('grandchild-color-mode'),
+          fixedColor:          Clutter.Color.from_string(settings.get_string('grandchild-fixed-color'))[1],
+          size:                settings.get_double('grandchild-size')    * globalScale,
+          offset:              settings.get_double('grandchild-offset')  * globalScale,
+          iconProperty:        '',
+          iconSize:            settings.get_double('child-size')         * globalScale *
+                               settings.get_double('child-icon-scale'),
+          drawAbove:           settings.get_boolean('grandchild-draw-above'),
+        }],
+        [MenuItemState.GRANDCHILD_HOVER, {
+          colorMode:           settings.get_string('grandchild-color-mode-hover'),
+          fixedColor:          Clutter.Color.from_string(settings.get_string('grandchild-fixed-color-hover'))[1],
+          size:                settings.get_double('grandchild-size-hover')   * globalScale,
+          offset:              settings.get_double('grandchild-offset-hover') * globalScale,
+          iconProperty:        '',
+          iconSize:            settings.get_double('child-size-hover') * globalScale * settings.get_double('child-icon-scale-hover'),
+          drawAbove:           settings.get_boolean('grandchild-draw-above'),
+        }]
+      ]),
     };
     // clang-format on
 
@@ -148,142 +195,98 @@ class MenuItem extends Clutter.Actor {
 
   _onStateChange() {
 
-    let setSizeAndOpacity = (actor, size, opacity) => {
-      let size2     = Math.floor(size / 2);
-      actor.opacity = opacity;
-      actor.set_size(size, size);
-      actor.set_position(-size2, -size2);
-    };
+    this.visible = this.state != MenuItemState.INVISIBLE;
 
-    if (this.state == MenuItemState.ACTIVE) {
-
-      if (this._settings.childDrawAbove) {
-        this.set_child_above_sibling(this._childrenContainer, null);
-      } else {
-        this.set_child_below_sibling(this._childrenContainer, null);
-      }
-
-      let size     = this._settings.centerSize;
-      let iconSize = size * this._settings.centerIconScale;
-
-      if (!this._centerIcon) {
-        this._centerIcon = this._createIcon(iconSize);
-        setSizeAndOpacity(this._centerIcon, this._oldCenterIconSize, 255);
-        this._centerIcon.set_easing_duration(this._settings.animationDuration);
-        this.add_child(this._centerIcon);
-
-        if (this._settings.centerColorMode == 'auto') {
-          this._centerAutoColor = utils.getAverageIconColor(
-              utils.getIcon(this.icon, 24), 24, this._settings.centerAutoColorSaturation,
-              this._settings.centerAutoColorLuminance,
-              this._settings.centerAutoColorAlpha);
-        }
-      }
-
-      if (this._settings.centerColorMode == 'auto') {
-        this._background.get_effects()[0].tint = this._centerAutoColor;
-      } else {
-        this._background.get_effects()[0].tint = this._settings.centerColor;
-      }
-
-      setSizeAndOpacity(this._centerIcon, iconSize, 255);
-      setSizeAndOpacity(
-          this._background, size, this._background.get_effects()[0].tint.alpha);
-
-      if (this._childIcon) {
-        setSizeAndOpacity(this._childIcon, iconSize, 0);
-      }
-
-
-
-    } else if (this.state == MenuItemState.CHILD) {
-
-      if (this._settings.grandchildDrawAbove) {
-        this.set_child_above_sibling(this._childrenContainer, null);
-      } else {
-        this.set_child_below_sibling(this._childrenContainer, null);
-      }
-
-      let size     = this._settings.childSize;
-      let iconSize = size * this._settings.childIconScale;
-
-      if (!this._childIcon) {
-        this._childIcon = this._createIcon(iconSize);
-        setSizeAndOpacity(this._childIcon, this._oldChildIconSize, 255);
-        this._childIcon.set_easing_duration(this._settings.animationDuration);
-        this.add_child(this._childIcon);
-
-        if (this._settings.childColorMode == 'auto') {
-          this._childAutoColor = utils.getAverageIconColor(
-              utils.getIcon(this.icon, 24), 24, this._settings.childAutoColorSaturation,
-              this._settings.childAutoColorLuminance, this._settings.childAutoColorAlpha);
-        }
-      }
-
-      if (this._settings.childColorMode == 'auto') {
-        this._background.get_effects()[0].tint = this._childAutoColor;
-      } else {
-        this._background.get_effects()[0].tint = this._settings.childFixedColor;
-      }
-
-      setSizeAndOpacity(this._childIcon, iconSize, 255);
-      setSizeAndOpacity(
-          this._background, size, this._background.get_effects()[0].tint.alpha);
-
-      if (this._centerIcon) {
-        setSizeAndOpacity(this._centerIcon, iconSize, 0);
-      }
-
-
-      this.set_position(
-          Math.floor(Math.sin(this.angle) * this._settings.childOffset),
-          -Math.floor(Math.cos(this.angle) * this._settings.childOffset));
-
-    } else if (this.state == MenuItemState.GRANDCHILD) {
-
-      let size     = this._settings.grandchildSize;
-      let iconSize = size * this._settings.childIconScale;
-
-      if (this._centerIcon) {
-        setSizeAndOpacity(this._centerIcon, iconSize, 0);
-      }
-
-      if (this._childIcon) {
-        setSizeAndOpacity(this._childIcon, iconSize, 0);
-      }
-
-      this._background.get_effects()[0].tint = this._settings.grandchildFixedColor;
-
-      setSizeAndOpacity(
-          this._background, size, this._background.get_effects()[0].tint.alpha);
-
-
-      this.set_position(
-          Math.floor(Math.sin(this.angle) * this._settings.grandchildOffset),
-          -Math.floor(Math.cos(this.angle) * this._settings.grandchildOffset));
+    if (this.state == MenuItemState.INVISIBLE) {
+      return;
     }
 
-    this.visible = this.state != MenuItemState.INVISIBLE;
+    const state = this._settings.state.get(this.state);
+
+    if (state.drawChildrenAbove) {
+      this.set_child_above_sibling(this._childrenContainer, null);
+    } else {
+      this.set_child_below_sibling(this._childrenContainer, null);
+    }
+
+    if (this.state != MenuItemState.ACTIVE && this.state != MenuItemState.ACTIVE_HOVER) {
+      this.set_translation(
+          Math.floor(Math.sin(this.angle) * state.offset),
+          -Math.floor(Math.cos(this.angle) * state.offset), 0);
+    }
+
+    if (state.iconProperty != '' && !this[state.iconProperty]) {
+      this[state.iconProperty] = this._createIcon(state.iconSize);
+
+      this._setSizeAndOpacity(
+          state.iconProperty,
+          this._lastIconSize > 0 ? this._lastIconSize : state.iconSize, 255);
+      this[state.iconProperty].set_easing_duration(this._settings.animationDuration);
+      this.add_child(this[state.iconProperty]);
+
+      if (state.colorMode == 'auto') {
+        const icon = new Cairo.ImageSurface(Cairo.Format.ARGB32, 24, 24);
+        const ctx  = new Cairo.Context(icon);
+        utils.paintIcon(ctx, this.icon, 24);
+        this[state.iconProperty + 'Color'] = utils.getAverageIconColor(
+            icon, 24, state.autoColorSaturation, state.autoColorLuminance,
+            state.autoColorAlpha);
+        ctx.$dispose();
+      }
+    }
+
+    if (state.colorMode == 'auto') {
+      this._background.get_effects()[0].tint = this[state.iconProperty + 'Color'];
+      // this._background.get_effects()[0].tint = state.fixedColor;
+    } else {
+      this._background.get_effects()[0].tint = state.fixedColor;
+    }
+
+    this._setSizeAndOpacity(
+        '_centerIcon', state.iconSize, state.iconProperty == '_centerIcon' ? 255 : 0);
+    this._setSizeAndOpacity(
+        '_centerIconHover', state.iconSize,
+        state.iconProperty == '_centerIconHover' ? 255 : 0);
+    this._setSizeAndOpacity(
+        '_childIcon', state.iconSize, state.iconProperty == '_childIcon' ? 255 : 0);
+    this._setSizeAndOpacity(
+        '_childIconHover', state.iconSize,
+        state.iconProperty == '_childIconHover' ? 255 : 0);
+    this._setSizeAndOpacity(
+        '_background', state.size, this._background.get_effects()[0].tint.alpha);
+
+    this._lastIconSize = state.iconSize;
   }
 
   // Create Icon Actor.
   _createIcon(size) {
-    let canvas = new Clutter.Canvas({height: size, width: size});
+    const canvas = new Clutter.Canvas({height: size, width: size});
     canvas.connect('draw', (c, ctx, width, height) => {
       ctx.setOperator(Cairo.Operator.CLEAR);
       ctx.paint();
       ctx.setOperator(Cairo.Operator.OVER);
+      utils.paintIcon(ctx, this.icon, width);
 
-      let icon = utils.getIcon(this.icon, size);
-      ctx.setSourceSurface(icon, 0, 0);
-      ctx.paint();
+      // Explicitly tell Cairo to free the context memory. Is this really necessary?
+      // https://wiki.gnome.org/Projects/GnomeShell/Extensions/TipsOnMemoryManagement#Cairo
+      ctx.$dispose();
     });
 
     canvas.invalidate();
 
-    let actor = new Clutter.Actor();
+    const actor = new Clutter.Actor();
     actor.set_content(canvas);
 
     return actor;
+  }
+
+  _setSizeAndOpacity(actorName, size, opacity) {
+    const actor = this[actorName];
+    if (actor) {
+      const size2   = Math.floor(size / 2);
+      actor.opacity = opacity;
+      actor.set_size(size, size);
+      actor.set_translation(-size2, -size2, 0);
+    }
   }
 });
