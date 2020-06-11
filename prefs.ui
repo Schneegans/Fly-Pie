@@ -2316,7 +2316,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Child Hovered State</property>
+                                <property name="label" translatable="yes">Hovered State</property>
                               </object>
                               <packing>
                                 <property name="left_attach">3</property>

@@ -33,9 +33,6 @@ var MenuItemState = {
 // clang-format off
 var MenuItem = GObject.registerClass({
   Properties: {
-    'state': GObject.ParamSpec.int(
-        'state', 'state', 'The state the MenuItem is currently in.',
-        GObject.ParamFlags.READWRITE, 0, 6, MenuItemState.INVISIBLE),
     'angle': GObject.ParamSpec.double(
         'angle', 'angle', 'The angle of the MenuItem.',
         GObject.ParamFlags.READWRITE, 0, 2 * Math.PI, 0),
@@ -54,10 +51,13 @@ var MenuItem = GObject.registerClass({
 class MenuItem extends Clutter.Actor {
   // clang-format on
 
-  _init(params = {}) {
+  _init(state, params = {}) {
     super._init(params);
 
+    this._state        = state;
     this._lastIconSize = 0;
+
+    this._parentColor = new Clutter.Color({red: 255, green: 255, blue: 255});
 
     // Create Background Actors.
     this._background                     = new Clutter.Actor();
@@ -70,16 +70,6 @@ class MenuItem extends Clutter.Actor {
     // Create Children Container.
     this._childrenContainer = new Clutter.Actor();
     this.add_child(this._childrenContainer);
-
-    this._handlers = {
-      state: this.connect('notify::state', () => this._onStateChange()),
-      destroy: this.connect(
-          'destroy',
-          () => {
-            this.disconnect(this._handlers['state']);
-            this.disconnect(this._handlers['destroy']);
-          }),
-    };
   }
 
   getChildrenContainer() {
@@ -189,73 +179,116 @@ class MenuItem extends Clutter.Actor {
     this._background.set_easing_duration(this._settings.animationDuration);
     this.set_easing_duration(this._settings.animationDuration);
 
-    // Then execute a full state change.
-    this._onStateChange();
+    // Then execute a full state change to apply the new settings.
+    this.redraw();
   }
 
-  _onStateChange() {
+  setParentColor(color) {
+    this._parentColor = color;
+  }
 
-    this.visible = this.state != MenuItemState.INVISIBLE;
+  setState(state, activeChildIndex) {
+    this._state = state;
 
-    if (this.state == MenuItemState.INVISIBLE) {
-      return;
-    }
+    const children = this._childrenContainer.get_children();
+    for (let i = 0; i < children.length; i++) {
 
-    const state = this._settings.state.get(this.state);
+      if (state == MenuItemState.ACTIVE_HOVER) {
+        children[i].setState(MenuItemState.CHILD, -1);
 
-    if (state.drawChildrenAbove) {
-      this.set_child_above_sibling(this._childrenContainer, null);
-    } else {
-      this.set_child_below_sibling(this._childrenContainer, null);
-    }
+      } else if (state == MenuItemState.ACTIVE) {
+        if (i == activeChildIndex) {
+          children[i].setState(MenuItemState.CHILD_HOVER, -1);
+        } else {
+          children[i].setState(MenuItemState.CHILD, -1);
+        }
 
-    if (this.state != MenuItemState.ACTIVE && this.state != MenuItemState.ACTIVE_HOVER) {
-      this.set_translation(
-          Math.floor(Math.sin(this.angle) * state.offset),
-          -Math.floor(Math.cos(this.angle) * state.offset), 0);
-    }
+      } else if (state == MenuItemState.CHILD) {
+        children[i].setState(MenuItemState.GRANDCHILD, -1);
 
-    if (state.iconProperty != '' && !this[state.iconProperty]) {
-      this[state.iconProperty] = this._createIcon(state.iconSize);
+      } else if (state == MenuItemState.CHILD_HOVER) {
+        children[i].setState(MenuItemState.GRANDCHILD_HOVER, -1);
 
-      this._setSizeAndOpacity(
-          state.iconProperty,
-          this._lastIconSize > 0 ? this._lastIconSize : state.iconSize, 255);
-      this[state.iconProperty].set_easing_duration(this._settings.animationDuration);
-      this.add_child(this[state.iconProperty]);
-
-      if (state.colorMode == 'auto') {
-        const icon = new Cairo.ImageSurface(Cairo.Format.ARGB32, 24, 24);
-        const ctx  = new Cairo.Context(icon);
-        utils.paintIcon(ctx, this.icon, 24);
-        this[state.iconProperty + 'Color'] = utils.getAverageIconColor(
-            icon, 24, state.autoColorSaturation, state.autoColorLuminance,
-            state.autoColorAlpha);
-        ctx.$dispose();
+      } else {
+        children[i].setState(MenuItemState.INVISIBLE, -1);
       }
     }
+  }
 
-    if (state.colorMode == 'auto') {
-      this._background.get_effects()[0].tint = this[state.iconProperty + 'Color'];
-      // this._background.get_effects()[0].tint = state.fixedColor;
-    } else {
-      this._background.get_effects()[0].tint = state.fixedColor;
+  redraw() {
+
+    this.visible = this._state != MenuItemState.INVISIBLE;
+
+    if (this.visible) {
+
+      const settings = this._settings.state.get(this._state);
+
+      if (settings.drawChildrenAbove) {
+        this.set_child_above_sibling(this._childrenContainer, null);
+      } else {
+        this.set_child_below_sibling(this._childrenContainer, null);
+      }
+
+      if (this._state != MenuItemState.ACTIVE &&
+          this._state != MenuItemState.ACTIVE_HOVER) {
+        this.set_translation(
+            Math.floor(Math.sin(this.angle) * settings.offset),
+            -Math.floor(Math.cos(this.angle) * settings.offset), 0);
+      }
+
+      if (settings.iconProperty != '' && !this[settings.iconProperty]) {
+        this[settings.iconProperty] = this._createIcon(settings.iconSize);
+
+        this._setSizeAndOpacity(
+            settings.iconProperty,
+            this._lastIconSize > 0 ? this._lastIconSize : settings.iconSize, 255);
+        this[settings.iconProperty].set_easing_duration(this._settings.animationDuration);
+        this.add_child(this[settings.iconProperty]);
+
+        if (settings.colorMode == 'auto') {
+          const icon = new Cairo.ImageSurface(Cairo.Format.ARGB32, 24, 24);
+          const ctx  = new Cairo.Context(icon);
+          utils.paintIcon(ctx, this.icon, 24);
+          this[settings.iconProperty + 'Color'] = utils.getAverageIconColor(
+              icon, 24, settings.autoColorSaturation, settings.autoColorLuminance,
+              settings.autoColorAlpha);
+
+          // Explicitly tell Cairo to free the context memory. Is this really necessary?
+          // https://wiki.gnome.org/Projects/GnomeShell/Extensions/TipsOnMemoryManagement#Cairo
+          ctx.$dispose();
+        }
+      }
+
+      if (settings.colorMode == 'auto') {
+        this._background.get_effects()[0].tint = this[settings.iconProperty + 'Color'];
+      } else if (settings.colorMode == 'parent') {
+        this._background.get_effects()[0].tint = this._parentColor;
+      } else {
+        this._background.get_effects()[0].tint = settings.fixedColor;
+      }
+
+      this._setSizeAndOpacity(
+          '_centerIcon', settings.iconSize,
+          settings.iconProperty == '_centerIcon' ? 255 : 0);
+      this._setSizeAndOpacity(
+          '_centerIconHover', settings.iconSize,
+          settings.iconProperty == '_centerIconHover' ? 255 : 0);
+      this._setSizeAndOpacity(
+          '_childIcon', settings.iconSize,
+          settings.iconProperty == '_childIcon' ? 255 : 0);
+      this._setSizeAndOpacity(
+          '_childIconHover', settings.iconSize,
+          settings.iconProperty == '_childIconHover' ? 255 : 0);
+      this._setSizeAndOpacity(
+          '_background', settings.size, this._background.get_effects()[0].tint.alpha);
+
+      this._lastIconSize = settings.iconSize;
     }
 
-    this._setSizeAndOpacity(
-        '_centerIcon', state.iconSize, state.iconProperty == '_centerIcon' ? 255 : 0);
-    this._setSizeAndOpacity(
-        '_centerIconHover', state.iconSize,
-        state.iconProperty == '_centerIconHover' ? 255 : 0);
-    this._setSizeAndOpacity(
-        '_childIcon', state.iconSize, state.iconProperty == '_childIcon' ? 255 : 0);
-    this._setSizeAndOpacity(
-        '_childIconHover', state.iconSize,
-        state.iconProperty == '_childIconHover' ? 255 : 0);
-    this._setSizeAndOpacity(
-        '_background', state.size, this._background.get_effects()[0].tint.alpha);
-
-    this._lastIconSize = state.iconSize;
+    this._childrenContainer.get_children().forEach(child => {
+      child.setParentColor(this._background.get_effects()[0].tint);
+      child.redraw();
+    });
   }
 
   // Create Icon Actor.

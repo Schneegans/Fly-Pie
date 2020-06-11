@@ -47,24 +47,12 @@ var Menu = class Menu {
 
     this._selectionWedges.connect('hovered-wedge-change-event', (o, index) => {
       if (index == -1) {
-        this._structure.actor.set_property('state', MenuItemState.ACTIVE);
+        this._structure.actor.setState(MenuItemState.ACTIVE_HOVER, index);
       } else {
-        this._structure.actor.set_property('state', MenuItemState.ACTIVE_HOVER);
+        this._structure.actor.setState(MenuItemState.ACTIVE, index);
       }
 
-      for (let i = 0; i < this._structure.items.length; i++) {
-        const item = this._structure.items[i];
-        if (i == index) {
-          item.actor.set_property('state', MenuItemState.CHILD_HOVER);
-          item.items.forEach(
-              child => {
-                  child.actor.set_property('state', MenuItemState.GRANDCHILD_HOVER)});
-        } else {
-          item.actor.set_property('state', MenuItemState.CHILD);
-          item.items.forEach(
-              child => {child.actor.set_property('state', MenuItemState.GRANDCHILD)});
-        }
-      }
+      this._structure.actor.redraw();
     });
 
     this._itemBackground = this._createItemBackground();
@@ -150,7 +138,7 @@ var Menu = class Menu {
 
     // Create all visible Clutter.Actors for the items.
     this._structure.actor = this._createActor(
-        this._structure.icon, this._structure.angle, MenuItemState.ACTIVE);
+        MenuItemState.ACTIVE_HOVER, this._structure.icon, this._structure.angle);
     this._structure.actor.onSettingsChange(this._settings);
     this._background.add_child(this._structure.actor);
 
@@ -159,17 +147,19 @@ var Menu = class Menu {
     this._structure.items.forEach(item => {
       itemAngles.push(item.angle);
 
-      item.actor = this._createActor(item.icon, item.angle, MenuItemState.CHILD);
+      item.actor = this._createActor(MenuItemState.CHILD, item.icon, item.angle);
       item.actor.onSettingsChange(this._settings);
       this._structure.actor.getChildrenContainer().add_child(item.actor);
 
       item.items.forEach(child => {
         child.actor =
-            this._createActor(child.icon, child.angle, MenuItemState.GRANDCHILD);
+            this._createActor(MenuItemState.GRANDCHILD, child.icon, child.angle);
         child.actor.onSettingsChange(this._settings);
         item.actor.getChildrenContainer().add_child(child.actor);
       });
     });
+
+    this._structure.actor.redraw();
 
     this._selectionWedges.setItemAngles(itemAngles);
 
@@ -242,12 +232,11 @@ var Menu = class Menu {
     }
   }
 
-  _createActor(icon, angle, state) {
-    return new MenuItem({
+  _createActor(state, icon, angle) {
+    return new MenuItem(state, {
       icon: icon,
       angle: angle * Math.PI / 180,
       backgroundCanvas: this._itemBackground,
-      state: state
     });
   }
 
