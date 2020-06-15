@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-//    _____                    ___  _     ___       This software may be modified       //
-//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the           //
-//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
-//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
+//       ___                       __               This software may be modified       //
+//      (_  `     o  _   _        )_) o  _          and distributed under the           //
+//    .___) )_)_) ( ) ) (_(  --  /    ) (/_         terms of the MIT license. See       //
+//                        _)                        the LICENSE file for details.       //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -40,7 +40,7 @@ var Client = class Client {
     this._dbus = null;
 
     new DBusWrapper(
-        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/gnomepie2',
+        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/swingpie',
         (proxy) => {
           this._dbus = proxy;
           this._dbus.connectSignal('OnSelect', (...args) => this._onSelect(...args));
@@ -70,7 +70,7 @@ var Client = class Client {
 
     this._lastMenu = {icon: 'firefox', name: 'Main Menu', items: []};
     this._lastMenu.items.push({
-      name: 'Test 2',
+      name: 'Intriguingly looooooooooooooooooooooong caption',
       angle: 50,
       icon: '/home/simon/Pictures/Eigene/avatar128.png',
       activate: function() {
@@ -78,8 +78,8 @@ var Client = class Client {
       }
     });
     this._lastMenu.items.push({
-      name: 'Test 3',
-      angle: 225,
+      name: 'Emoji 🐵 caption! 😆',
+      angle: 120,
       icon: '🐹',
       activate: function() {
         utils.debug('Test 3!');
@@ -92,6 +92,8 @@ var Client = class Client {
     // this._lastMenu.items.push(MenuFactory.getFrequentItems());
     this._lastMenu.items.push(MenuFactory.getRunningAppsItems());
 
+    this._lastMenu.items[4].angle = 250;
+
     try {
       // Open the menu on the server side. Once this is done successfully, we store the
       // returned menu ID.
@@ -101,7 +103,7 @@ var Client = class Client {
             this._lastID = id;
             utils.debug('Opened menu ' + this._lastID);
           } else {
-            Main.notifyError('Failed to open a Gnome-Pie 2 menu!');
+            Main.notifyError('Failed to open a Swing-Pie menu!');
           }
         }
       });

@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-//    _____                    ___  _     ___       This software may be modified       //
-//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the           //
-//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
-//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
+//       ___                       __               This software may be modified       //
+//      (_  `     o  _   _        )_) o  _          and distributed under the           //
+//    .___) )_)_) ( ) ) (_(  --  /    ) (/_         terms of the MIT license. See       //
+//                        _)                        the LICENSE file for details.       //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -20,7 +20,7 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class loads the user interface defined in prefs.ui and connects all elements to //
 // the corresponding settings items of the Gio.Settings at                              //
-// org.gnome.shell.extensions.gnomepie2. All these connections work both ways - when a  //
+// org.gnome.shell.extensions.swingpie. All these connections work both ways - when a  //
 // slider is moved in the user interface the corresponding settings key will be         //
 // updated and when a settings key is modified, the corresponding slider is moved.      //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ let Settings = class Settings {
 
     // Connect to the server so that we can toggle menus also from the preferences.
     new DBusWrapper(
-        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/gnomepie2',
+        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/swingpie',
         proxy => this._dbus = proxy);
 
     // Show the Demo Menu when the Preview Button is pressed.
@@ -87,9 +87,11 @@ let Settings = class Settings {
     this._bindColorButton('center-fixed-color');
     this._bindSlider('center-auto-color-saturation');
     this._bindSlider('center-auto-color-luminance');
-    this._bindSlider('center-auto-color-alpha');
+    this._bindSlider('center-auto-color-opacity');
     this._bindSlider('center-size');
     this._bindSlider('center-icon-scale');
+    this._bindSlider('center-icon-opacity');
+
 
     // The color reset button resets various settings, so we bind it manually.
     this._builder.get_object('reset-center-color').connect('clicked', () => {
@@ -101,8 +103,8 @@ let Settings = class Settings {
       this._settings.reset('center-auto-color-saturation-hover');
       this._settings.reset('center-auto-color-luminance');
       this._settings.reset('center-auto-color-luminance-hover');
-      this._settings.reset('center-auto-color-alpha');
-      this._settings.reset('center-auto-color-alpha-hover');
+      this._settings.reset('center-auto-color-opacity');
+      this._settings.reset('center-auto-color-opacity-hover');
     });
 
 
@@ -119,10 +121,11 @@ let Settings = class Settings {
     this._bindColorButton('child-fixed-color');
     this._bindSlider('child-auto-color-saturation');
     this._bindSlider('child-auto-color-luminance');
-    this._bindSlider('child-auto-color-alpha');
+    this._bindSlider('child-auto-color-opacity');
     this._bindSlider('child-size');
     this._bindSlider('child-offset');
     this._bindSlider('child-icon-scale');
+    this._bindSlider('child-icon-opacity');
     this._bindSwitch('child-draw-above');
 
     // The color reset button resets various settings, so we bind it manually.
@@ -132,11 +135,11 @@ let Settings = class Settings {
       this._settings.reset('child-fixed-color');
       this._settings.reset('child-auto-color-saturation');
       this._settings.reset('child-auto-color-luminance');
-      this._settings.reset('child-auto-color-alpha');
+      this._settings.reset('child-auto-color-opacity');
       this._settings.reset('child-fixed-color-hover');
       this._settings.reset('child-auto-color-saturation-hover');
       this._settings.reset('child-auto-color-luminance-hover');
-      this._settings.reset('child-auto-color-alpha-hover');
+      this._settings.reset('child-auto-color-opacity-hover');
     });
 
 
@@ -242,12 +245,14 @@ let Settings = class Settings {
           read('center-auto-color-saturation-hover');
           read('center-auto-color-luminance');
           read('center-auto-color-luminance-hover');
-          read('center-auto-color-alpha');
-          read('center-auto-color-alpha-hover');
+          read('center-auto-color-opacity');
+          read('center-auto-color-opacity-hover');
           read('center-size');
           read('center-size-hover');
           read('center-icon-scale');
           read('center-icon-scale-hover');
+          read('center-icon-opacity');
+          read('center-icon-opacity-hover');
           read('child-color-mode');
           read('child-color-mode-hover');
           read('child-fixed-color');
@@ -256,14 +261,16 @@ let Settings = class Settings {
           read('child-auto-color-saturation-hover');
           read('child-auto-color-luminance');
           read('child-auto-color-luminance-hover');
-          read('child-auto-color-alpha');
-          read('child-auto-color-alpha-hover');
+          read('child-auto-color-opacity');
+          read('child-auto-color-opacity-hover');
           read('child-size');
           read('child-size-hover');
           read('child-offset');
           read('child-offset-hover');
           read('child-icon-scale');
           read('child-icon-scale-hover');
+          read('child-icon-opacity');
+          read('child-icon-opacity-hover');
           read('child-draw-above');
           read('grandchild-color-mode');
           read('grandchild-color-mode-hover');
@@ -355,12 +362,14 @@ let Settings = class Settings {
               write('center-auto-color-saturation-hover');
               write('center-auto-color-luminance');
               write('center-auto-color-luminance-hover');
-              write('center-auto-color-alpha');
-              write('center-auto-color-alpha-hover');
+              write('center-auto-color-opacity');
+              write('center-auto-color-opacity-hover');
               write('center-size');
               write('center-size-hover');
               write('center-icon-scale');
               write('center-icon-scale-hover');
+              write('center-icon-opacity');
+              write('center-icon-opacity-hover');
               write('child-color-mode');
               write('child-color-mode-hover');
               write('child-fixed-color');
@@ -369,14 +378,16 @@ let Settings = class Settings {
               write('child-auto-color-saturation-hover');
               write('child-auto-color-luminance');
               write('child-auto-color-luminance-hover');
-              write('child-auto-color-alpha');
-              write('child-auto-color-alpha-hover');
+              write('child-auto-color-opacity');
+              write('child-auto-color-opacity-hover');
               write('child-size');
               write('child-size-hover');
               write('child-offset');
               write('child-offset-hover');
               write('child-icon-scale');
               write('child-icon-scale-hover');
+              write('child-icon-opacity');
+              write('child-icon-opacity-hover');
               write('child-draw-above');
               write('grandchild-color-mode');
               write('grandchild-color-mode-hover');
@@ -468,12 +479,14 @@ let Settings = class Settings {
       setRandomDouble('center-auto-color-saturation-hover', 0, 1);
       setRandomDouble('center-auto-color-luminance', 0, 1);
       setRandomDouble('center-auto-color-luminance-hover', 0, 1);
-      setRandomDouble('center-auto-color-alpha', 0, 1);
-      setRandomDouble('center-auto-color-alpha-hover', 0, 1);
+      setRandomDouble('center-auto-color-opacity', 0, 1);
+      setRandomDouble('center-auto-color-opacity-hover', 0, 1);
       setRandomDouble('center-size', 50, 150);
       setRandomDouble('center-size-hover', 50, 150);
       setRandomDouble('center-icon-scale', 0.5, 1.0);
       setRandomDouble('center-icon-scale-hover', 0.5, 1.0);
+      setRandomDouble('center-icon-opacity', 0.0, 0.5);
+      setRandomDouble('center-icon-opacity-hover', 1.0, 1.0);
       setRandomString('child-color-mode', ['fixed', 'auto', 'parent']);
       setRandomString('child-color-mode-hover', ['fixed', 'auto', 'parent']);
       setRandomColor('child-fixed-color');
@@ -482,14 +495,16 @@ let Settings = class Settings {
       setRandomDouble('child-auto-color-saturation-hover', 0, 1);
       setRandomDouble('child-auto-color-luminance', 0, 1);
       setRandomDouble('child-auto-color-luminance-hover', 0, 1);
-      setRandomDouble('child-auto-color-alpha', 0, 1);
-      setRandomDouble('child-auto-color-alpha-hover', 0, 1);
+      setRandomDouble('child-auto-color-opacity', 0, 1);
+      setRandomDouble('child-auto-color-opacity-hover', 0, 1);
       setRandomDouble('child-size', 30, 80);
       setRandomDouble('child-size-hover', 50, 100);
       setRandomDouble('child-offset', 50, 150);
       setRandomDouble('child-offset-hover', 80, 180);
       setRandomDouble('child-icon-scale', 0.5, 1.0);
       setRandomDouble('child-icon-scale-hover', 0.8, 1.0);
+      setRandomDouble('child-icon-opacity', 0.5, 1.0);
+      setRandomDouble('child-icon-opacity-hover', 1.0, 1.0);
       setRandomBool('child-draw-above');
       setRandomString('grandchild-color-mode', ['fixed', 'parent']);
       setRandomString('grandchild-color-mode-hover', ['fixed', 'parent']);

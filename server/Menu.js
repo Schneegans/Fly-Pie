@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-//    _____                    ___  _     ___       This software may be modified       //
-//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the           //
-//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
-//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
+//       ___                       __               This software may be modified       //
+//      (_  `     o  _   _        )_) o  _          and distributed under the           //
+//    .___) )_)_) ( ) ) (_(  --  /    ) (/_         terms of the MIT license. See       //
+//                        _)                        the LICENSE file for details.       //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -47,9 +47,9 @@ var Menu = class Menu {
 
     this._selectionWedges.connect('hovered-wedge-change-event', (o, index) => {
       if (index == -1) {
-        this._structure.actor.setState(MenuItemState.ACTIVE_HOVER, index);
+        this._structure.actor.setState(MenuItemState.CENTER_HOVERED, index);
       } else {
-        this._structure.actor.setState(MenuItemState.ACTIVE, index);
+        this._structure.actor.setState(MenuItemState.CENTER, index);
       }
 
       this._structure.actor.redraw();
@@ -137,9 +137,9 @@ var Menu = class Menu {
     this._menuID = menuID;
 
     // Create all visible Clutter.Actors for the items.
-    this._structure.actor = this._createActor(
-        MenuItemState.ACTIVE_HOVER, this._structure.icon, this._structure.angle);
-    this._structure.actor.onSettingsChange(this._settings);
+    this._structure.actor = this._createMenuItem(
+        MenuItemState.CENTER_HOVERED, this._structure.name, this._structure.icon,
+        this._structure.angle);
     this._background.add_child(this._structure.actor);
 
     const itemAngles = [];
@@ -147,18 +147,18 @@ var Menu = class Menu {
     this._structure.items.forEach(item => {
       itemAngles.push(item.angle);
 
-      item.actor = this._createActor(MenuItemState.CHILD, item.icon, item.angle);
-      item.actor.onSettingsChange(this._settings);
-      this._structure.actor.getChildrenContainer().add_child(item.actor);
+      item.actor =
+          this._createMenuItem(MenuItemState.CHILD, item.name, item.icon, item.angle);
+      this._structure.actor.addMenuItem(item.actor);
 
       item.items.forEach(child => {
-        child.actor =
-            this._createActor(MenuItemState.GRANDCHILD, child.icon, child.angle);
-        child.actor.onSettingsChange(this._settings);
-        item.actor.getChildrenContainer().add_child(child.actor);
+        child.actor = this._createMenuItem(
+            MenuItemState.GRANDCHILD, child.name, child.icon, child.angle);
+        item.actor.addMenuItem(child.actor);
       });
     });
 
+    this._structure.actor.onSettingsChange(this._settings);
     this._structure.actor.redraw();
 
     this._selectionWedges.setItemAngles(itemAngles);
@@ -232,8 +232,9 @@ var Menu = class Menu {
     }
   }
 
-  _createActor(state, icon, angle) {
+  _createMenuItem(state, caption, icon, angle) {
     return new MenuItem(state, {
+      caption: caption,
       icon: icon,
       angle: angle * Math.PI / 180,
       backgroundCanvas: this._itemBackground,
@@ -388,13 +389,12 @@ var Menu = class Menu {
 
     // Then call onSettingsChange() for each item of our menu. This ensures that the menu
     // is instantly updated in edit mode.
-    this._foreachItem(item => {
-      if (item.actor) {
-        item.actor.onSettingsChange(this._settings);
-      }
-    });
-
     this._selectionWedges.onSettingsChange(this._settings);
+
+    if (this._structure != undefined && this._structure.actor != undefined) {
+      this._structure.actor.onSettingsChange(this._settings);
+      this._structure.actor.redraw();
+    }
   }
 
   // For performance reasons, all menu items share the same Clutter.Canvas for their

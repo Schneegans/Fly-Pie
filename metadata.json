@@ -1,10 +1,10 @@
 {
-    "uuid": "gnomepie2@code.simonschneegans.de",
+    "uuid": "swingpie@code.simonschneegans.de",
     "description": "Do things quickly",
-    "name": "Gnome-Pie 2",
-    "settings-schema": "org.gnome.shell.extensions.gnomepie2",
+    "name": "Swing-Pie",
+    "settings-schema": "org.gnome.shell.extensions.swingpie",
     "shell-version": [
         "3.36.2"
     ],
-    "url": "https://github.com/Schneegans/Gnome-Pie-2"
+    "url": "https://github.com/Schneegans/Swing-Pie"
 }

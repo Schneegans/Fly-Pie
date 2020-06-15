@@ -6,20 +6,22 @@
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![comments](https://img.shields.io/badge/Comments-20.4%25-green.svg)](cloc.sh)
 
-journalctl /usr/bin/gnome-shell -f -o cat | grep gnomepie -B 2 -A 2
-gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/gnomepie2 --method org.gnome.Shell.Extensions.GnomePie2.ShowMenu '{"items":[{"name":"bar","icon":"user"},{"name":"horst","icon":"pixel"}]}'
+```bash
+journalctl /usr/bin/gnome-shell -f -o cat | grep swingpie -B 2 -A 2
+gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/swingpie --method org.gnome.Shell.Extensions.swingpie.ShowMenu '{"items":[{"name":"bar","icon":"user"},{"name":"horst","icon":"pixel"}]}'
+```
 
-# Contributing to Gnome-Pie 2
+# Contributing to Swing-Pie
 
 Whenever you encounter a :beetle: **bug** or have :tada: **feature request**, 
-report this via [Github issues](https://github.com/schneegans/gnome-pie-2/issues).
+report this via [Github issues](https://github.com/schneegans/swingpie/issues).
 
-We are happy to receive contributions to Gnome-Pie 2 in the form of **pull requests** via Github.
+We are happy to receive contributions to Swing-Pie in the form of **pull requests** via Github.
 Feel free to fork the repository, implement your changes and create a merge request to the `develop` branch.
 
 ## Branching Guidelines
 
-The development of Gnome-Pie 2 follows a simplified version of **git-flow**: The `master` branch always contains stable code.
+The development of Swing-Pie follows a simplified version of **git-flow**: The `master` branch always contains stable code.
 New features and bug fixes are implemented in `feature/*` branches and are merged to `develop` once they are finished.
 When a new milestone is reached, the content of `develop` will be merged to `master` and a tag is created.
 

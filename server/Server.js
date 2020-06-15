@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-//    _____                    ___  _     ___       This software may be modified       //
-//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the           //
-//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
-//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
+//       ___                       __               This software may be modified       //
+//      (_  `     o  _   _        )_) o  _          and distributed under the           //
+//    .___) )_)_) ( ) ) (_(  --  /    ) (/_         terms of the MIT license. See       //
+//                        _)                        the LICENSE file for details.       //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -29,7 +29,7 @@ var Server = class Server {
 
     // Make the ShowMenu() method available on the D-Bus.
     this._dbus = Gio.DBusExportedObject.wrapJSObject(DBusInterface.description, this);
-    this._dbus.export(Gio.DBus.session, '/org/gnome/shell/extensions/gnomepie2');
+    this._dbus.export(Gio.DBus.session, '/org/gnome/shell/extensions/swingpie');
 
     // Initialize the menu.
     this._menu = new Menu(
@@ -61,7 +61,7 @@ var Server = class Server {
   // -------------------------------------------------------------------- public interface
 
   // These are directly called via the DBus. See common/DBusInterface.js for a description
-  // of Gnome-Pie 2's DBusInterface.
+  // of Swing-Pie's DBusInterface.
   ShowMenu(json) {
     return this._openMenu(json, false);
   }

@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-//    _____                    ___  _     ___       This software may be modified       //
-//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the           //
-//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
-//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
+//       ___                       __               This software may be modified       //
+//      (_  `     o  _   _        )_) o  _          and distributed under the           //
+//    .___) )_)_) ( ) ) (_(  --  /    ) (/_         terms of the MIT license. See       //
+//                        _)                        the LICENSE file for details.       //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -20,7 +20,7 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 // the standard log() functionality by prepending the extensions name and the location  //
 // where the message was logged. As the extensions name is part of the location, you    //
 // can more effectively watch the log output of Gnome-Shell:                            //
-// journalctl /usr/bin/gnome-shell -f -o cat | grep gnomepie -B 2 -A 2                  //
+// journalctl /usr/bin/gnome-shell -f -o cat | grep swingpie -B 2 -A 2                  //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function debug(message) {
@@ -29,7 +29,7 @@ function debug(message) {
   // Remove debug() function call from stack.
   stack.shift();
 
-  // Find the index of the extension directory (e.g. gnomepie2@code.simonschneegans.de) in
+  // Find the index of the extension directory (e.g. swingpie@code.simonschneegans.de) in
   // the stack entry. We do not want to print the entire absolute file path.
   const extensionRoot = stack[0].indexOf(Me.metadata.uuid);
 
@@ -44,13 +44,13 @@ function debug(message) {
 
 function notification(message) {
   GLib.spawn_async(
-      null, ['/usr/bin/notify-send', '-u', 'low', 'Gnome-Pie 2', message], null,
+      null, ['/usr/bin/notify-send', '-u', 'low', 'Swing-Pie', message], null,
       GLib.SpawnFlags.DO_NOT_REAP_CHILD, null);
 }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Creates a new Gio.Settings object for org.gnome.shell.extensions.gnomepie2 and       //
+// Creates a new Gio.Settings object for org.gnome.shell.extensions.swingpie and       //
 // returns it.                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -60,7 +60,7 @@ function createSettings() {
       false);
 
   return new Gio.Settings(
-      {settings_schema: schema.lookup('org.gnome.shell.extensions.gnomepie2', true)});
+      {settings_schema: schema.lookup('org.gnome.shell.extensions.swingpie', true)});
 }
 
 
@@ -104,10 +104,10 @@ function paintIcon(ctx, name, size) {
     const layout = PangoCairo.create_layout(ctx);
     layout.set_width(Pango.units_from_double(size));
 
-    const font_description = Pango.FontDescription.from_string('Sans');
-    font_description.set_absolute_size(Pango.units_from_double(size * 0.9));
+    const fontDescription = Pango.FontDescription.from_string('Sans');
+    fontDescription.set_absolute_size(Pango.units_from_double(size * 0.9));
 
-    layout.set_font_description(font_description);
+    layout.set_font_description(fontDescription);
     layout.set_text(name, -1);
     layout.set_alignment(Pango.Alignment.CENTER);
 

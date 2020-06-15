@@ -5,25 +5,25 @@
   <!--                                enums                                            -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-  <enum id='org.gnome.shell.extensions.gnomepie2.CenterColorMode'>
+  <enum id='org.gnome.shell.extensions.swingpie.CenterColorMode'>
     <value value='0' nick='fixed'/>
     <value value='1' nick='auto'/>
   </enum>
 
-  <enum id='org.gnome.shell.extensions.gnomepie2.ChildColorMode'>
+  <enum id='org.gnome.shell.extensions.swingpie.ChildColorMode'>
     <value value='0' nick='fixed'/>
     <value value='1' nick='auto'/>
     <value value='2' nick='parent'/>
   </enum>
 
-  <enum id='org.gnome.shell.extensions.gnomepie2.GrandchildColorMode'>
+  <enum id='org.gnome.shell.extensions.swingpie.GrandchildColorMode'>
     <value value='0' nick='fixed'/>
     <value value='1' nick='parent'/>
   </enum>
 
 
-  <schema path="/org/gnome/shell/extensions/gnomepie2/" 
-             id="org.gnome.shell.extensions.gnomepie2">
+  <schema path="/org/gnome/shell/extensions/swingpie/" 
+             id="org.gnome.shell.extensions.swingpie">
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <!--                        Client settings                                        -->
@@ -113,13 +113,13 @@
 
     <!-- Center Item Settings -->
 
-    <key name="center-color-mode" enum="org.gnome.shell.extensions.gnomepie2.CenterColorMode">
+    <key name="center-color-mode" enum="org.gnome.shell.extensions.swingpie.CenterColorMode">
       <default>"fixed"</default>
       <summary>Center Color Mode</summary>
       <description>If set to auto, the menu's center element will be colored
                    according to its icon. Else the 'center-color' will be used.</description>
     </key>
-    <key name="center-color-mode-hover" enum="org.gnome.shell.extensions.gnomepie2.CenterColorMode">
+    <key name="center-color-mode-hover" enum="org.gnome.shell.extensions.swingpie.CenterColorMode">
       <default>"fixed"</default>
       <summary>Center Color Mode Hover</summary>
       <description>If set to auto, the menu's center element will be colored
@@ -159,15 +159,15 @@
       <description>The luminance of automatically generated item colors when a child is hovered.</description>
     </key>
 
-    <key name="center-auto-color-alpha" type="d">
+    <key name="center-auto-color-opacity" type="d">
       <default>1.0</default>
-      <summary>Center Auto Color Alpha</summary>
-      <description>The alpha value of automatically generated item colors.</description>
+      <summary>Center Auto Color Opacity</summary>
+      <description>The opacity value of automatically generated item colors.</description>
     </key>
-    <key name="center-auto-color-alpha-hover" type="d">
+    <key name="center-auto-color-opacity-hover" type="d">
       <default>1.0</default>
-      <summary>Center Auto Color Alpha Hover</summary>
-      <description>The alpha value of automatically generated item colors when a child is hovered.</description>
+      <summary>Center Auto Color Opacity Hover</summary>
+      <description>The opacity value of automatically generated item colors when a child is hovered.</description>
     </key>
 
     <key name="center-size" type="d">
@@ -192,17 +192,28 @@
       <description>A scale factor for the center icon when a child is hovered.</description>
     </key>
 
+    <key name="center-icon-opacity" type="d">
+      <default>1.0</default>
+      <summary>Center Icon Opacity</summary>
+      <description>The opacity of center icons.</description>
+    </key>
+    <key name="center-icon-opacity-hover" type="d">
+      <default>1.0</default>
+      <summary>Center Icon Opacity Hover</summary>
+      <description>The opacity of center icons when hovered.</description>
+    </key>
+
 
     <!-- Child Item Settings -->
 
-    <key name="child-color-mode" enum="org.gnome.shell.extensions.gnomepie2.ChildColorMode">
+    <key name="child-color-mode" enum="org.gnome.shell.extensions.swingpie.ChildColorMode">
       <default>"fixed"</default>
       <summary>Child Color Mode</summary>
       <description>If set to auto, the menu's child elements will be colored
                    according to their icons. Else the 'child-color' will be
                    used.</description>
     </key>
-    <key name="child-color-mode-hover" enum="org.gnome.shell.extensions.gnomepie2.ChildColorMode">
+    <key name="child-color-mode-hover" enum="org.gnome.shell.extensions.swingpie.ChildColorMode">
       <default>"fixed"</default>
       <summary>Child Color Mode Hover</summary>
       <description>If set to auto, the menu's child elements will be colored
@@ -243,15 +254,15 @@
       <description>The luminance of automatically generated item colors when hovered.</description>
     </key>
 
-    <key name="child-auto-color-alpha" type="d">
+    <key name="child-auto-color-opacity" type="d">
       <default>1.0</default>
-      <summary>Child Auto Color Alpha</summary>
-      <description>The alpha value of automatically generated item colors.</description>
+      <summary>Child Auto Color Opacity</summary>
+      <description>The opacity value of automatically generated item colors.</description>
     </key>
-    <key name="child-auto-color-alpha-hover" type="d">
+    <key name="child-auto-color-opacity-hover" type="d">
       <default>1.0</default>
-      <summary>Child Auto Color Alpha Hover</summary>
-      <description>The alpha value of automatically generated item colors when hovered.</description>
+      <summary>Child Auto Color Opacity Hover</summary>
+      <description>The opacity value of automatically generated item colors when hovered.</description>
     </key>
 
     <key name="child-size" type="d">
@@ -287,6 +298,17 @@
       <description>A scale factor for child icons when hovered.</description>
     </key>
 
+    <key name="child-icon-opacity" type="d">
+      <default>1.0</default>
+      <summary>Child Icon Opacity</summary>
+      <description>The opacity of child icons.</description>
+    </key>
+    <key name="child-icon-opacity-hover" type="d">
+      <default>1.0</default>
+      <summary>Child Icon Opacity Hover</summary>
+      <description>The opacity of child icons when hovered.</description>
+    </key>
+
     <key name="child-draw-above" type="b">
       <default>false</default>
       <summary>Child Draw Above</summary>
@@ -296,14 +318,14 @@
 
     <!-- Grandchild Item Settings -->
 
-    <key name="grandchild-color-mode" enum="org.gnome.shell.extensions.gnomepie2.GrandchildColorMode">
+    <key name="grandchild-color-mode" enum="org.gnome.shell.extensions.swingpie.GrandchildColorMode">
       <default>"fixed"</default>
       <summary>Grandchild Color Mode</summary>
       <description>If set to parent, the menu's grandchild elements will be colored
                    according to their parent's icons. Else the 'grandchild-color'
                    will be used.</description>
     </key>
-    <key name="grandchild-color-mode-hover" enum="org.gnome.shell.extensions.gnomepie2.GrandchildColorMode">
+    <key name="grandchild-color-mode-hover" enum="org.gnome.shell.extensions.swingpie.GrandchildColorMode">
       <default>"fixed"</default>
       <summary>Grandchild Color Mode Hover</summary>
       <description>If set to parent, the menu's grandchild elements will be colored

@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-//    _____                    ___  _     ___       This software may be modified       //
-//   / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the           //
-//  / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See       //
-//  \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.       //
+//       ___                       __               This software may be modified       //
+//      (_  `     o  _   _        )_) o  _          and distributed under the           //
+//    .___) )_)_) ( ) ) (_(  --  /    ) (/_         terms of the MIT license. See       //
+//                        _)                        the LICENSE file for details.       //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -254,8 +254,8 @@ class SelectionWedges extends Clutter.Actor {
   }
 
   // Given the relative pointer position, this calculates the currently active child
-  // wedge. The pointer position must be farther away from the center than defined by the
-  // wedge-inner-radius settings key.
+  // wedge. For a wedge to become active, the pointer position must be farther away from
+  // the center than defined by the wedge-inner-radius settings key.
   setPointerPosition(x, y) {
     const distance             = Math.sqrt(x * x + y * y);
     let hoveredWedge           = -1;
