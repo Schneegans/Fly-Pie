@@ -1,5 +1,5 @@
 {
-  "animation-duration": 0.3,
+  "easing-duration": 0.3,
   "background-color": "rgba(0,0,0,0.506757)",
   "text-color": "rgb(0, 0, 0)",
   "font": "Sans 12",

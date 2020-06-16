@@ -1,12 +1,11 @@
 #!/bin/bash
 
 #////////////////////////////////////////////////////////////////////////////////////////#
-#                                                                                        #
-#     _____                    ___  _     ___       This software may be modified        #
-#    / ___/__  ___  __ _  ___ / _ \(_)__ |_  |      and distributed under the            #
-#   / (_ / _ \/ _ \/  ' \/ -_) ___/ / -_) __/       terms of the MIT license. See        #
-#   \___/_//_/\___/_/_/_/\__/_/  /_/\__/____/       the LICENSE file for details.        #
-#                                                                                        #
+#    _____       _             _____ _                                                   #
+#   |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-   #
+#   |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.   #
+#   |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.           #
+#                     |___|                                                              #
 #////////////////////////////////////////////////////////////////////////////////////////#
 
 # This scripts counts the lines of code and comments in all JavaScript files.
@@ -32,12 +31,12 @@ COMMENT_LINES=${TOKENS[3]}
 LINES_OF_CODE=${TOKENS[4]}
 
 # To make the estimate of commented lines more accurate, we have to substract the
-# copyright header which is included in each file. This header has the length of six
+# copyright header which is included in each file. This header has the length of five
 # lines. All dumb comments like those /////////// or those // ------------ are also
 # substracted. As cloc does not count inline comments, the overall estimate should be
 # rather conservative.
 DUMB_COMMENTS="$(grep -r -E '//////|// -----' "${SCRIPT_DIR}" | wc -l)"
-COMMENT_LINES=$(($COMMENT_LINES - 6 * $NUMBER_OF_FILES - $DUMB_COMMENTS))
+COMMENT_LINES=$(($COMMENT_LINES - 5 * $NUMBER_OF_FILES - $DUMB_COMMENTS))
 
 # Print results.
 if [[ $* == *--percentage-only* ]]

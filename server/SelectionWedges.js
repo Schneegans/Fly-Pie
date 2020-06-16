@@ -1,10 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//       ___                       __               This software may be modified       //
-//      (_  `     o  _   _        )_) o  _          and distributed under the           //
-//    .___) )_)_) ( ) ) (_(  --  /    ) (/_         terms of the MIT license. See       //
-//                        _)                        the LICENSE file for details.       //
-//                                                                                      //
+//   _____       _             _____ _                                                  //
+//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
+//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
+//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
+//                    |___|                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -167,7 +166,7 @@ class SelectionWedges extends Clutter.Actor {
 
     // clang-format off
     this._settings = {
-      animationDuration:     settings.get_double('animation-duration')   * 1000,
+      easingDuration:     settings.get_double('easing-duration')   * 1000,
       wedgeWidth:            settings.get_double('wedge-width')          * globalScale,
       wedgeInnerRadius:      settings.get_double('wedge-inner-radius')   * globalScale,
       wedgeColor:            utils.stringToRGBA(settings.get_string('wedge-color')),
@@ -179,7 +178,7 @@ class SelectionWedges extends Clutter.Actor {
 
     // Color values are not transitioned at all, but we use this for the position of the
     // wedges.
-    this.set_easing_duration(this._settings.animationDuration);
+    this.set_easing_duration(this._settings.easingDuration);
 
     // Update the size and position of the wedge actor.
     const outerRadius = this._settings.wedgeInnerRadius + this._settings.wedgeWidth;

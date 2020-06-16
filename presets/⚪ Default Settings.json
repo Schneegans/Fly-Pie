@@ -1,5 +1,6 @@
 {
-  "animation-duration": 0.3,
+  "easing-duration": 0.2,
+  "easing-mode": "ease-out",
   "background-color": "rgba(0,0,0,0.266892)",
   "text-color": "rgb(37,37,37)",
   "font": "Roboto 11",

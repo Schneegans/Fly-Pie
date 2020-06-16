@@ -29,18 +29,17 @@ When a new milestone is reached, the content of `develop` will be merged to `mas
 
 Commits should start with a Capital letter and should be written in present tense (e.g. __:tada: Add cool new feature__ instead of __:tada: Added cool new feature__).
 It's a great idea to start the commit message with an applicable emoji. This does not only look great but also makes you rethink what to add to a commit.
-* :tada: `:tada:` when when adding a cool new feature
-* :wrench: `:wrench:` when refactoring / improving a small piece of code
-* :hammer: `:hammer:` when refactoring / improving large parts of the code
-* :sparkles: `:sparkles:` when applying clang-format
-* :art: `:art:` improving / adding assets like textures or 3D-models
-* :rocket: `:rocket:` when improving performance
-* :memo: `:memo:` when writing docs
-* :beetle: `:beetle:` when fixing a bug
-* :green_heart: `:green_heart:` when fixing the CI build
-* :heavy_check_mark: `:heavy_check_mark:` when working on tests
-* :arrow_up_small: `:arrow_up_small:` when adding / upgrading dependencies
-* :arrow_down_small: `:arrow_down_small:` when removing / downgrading dependencies
-* :twisted_rightwards_arrows: `:twisted_rightwards_arrows:` when merging branches
-* :fire: `:fire:` when removing files
-* :truck: `:truck:` when moving / renaming files or namespaces
+
+Emoji | Description
+------|------------
+:tada: `:tada:` | Added a cool new feature
+:wrench: `:wrench:` | Refactored / improved a small piece of code
+:hammer: `:hammer:` | Refactored / improved large parts of the code
+:sparkles: `:sparkles:` | Applied clang-format
+:art: `:art:` | Improved / added assets like themes
+:rocket: `:rocket:` | Improved performance
+:memo: `:memo:` | Wrote documentation
+:beetle: `:beetle:` | Fixed a bug
+:twisted_rightwards_arrows: `:twisted_rightwards_arrows:` | Merged a branch
+:fire: `:fire:` | Removed something
+:truck: `:truck:` | Moved / renamed something

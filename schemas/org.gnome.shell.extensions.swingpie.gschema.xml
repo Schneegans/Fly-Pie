@@ -1,3 +1,11 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<!--  _____       _             _____ _                                                -->
+<!-- |   __|_ _ _|_|___ ___ ___|  _  |_|___  This software may be modified and distri- -->
+<!-- |__   | | | | |   | . |___|   __| | -_| buted under the terms of the MIT license. -->
+<!-- |_____|_____|_|_|_|_  |   |__|  |_|___| See the LICENSE file for details.         -->
+<!--                   |___|                                                           -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
 
@@ -19,6 +27,20 @@
   <enum id='org.gnome.shell.extensions.swingpie.GrandchildColorMode'>
     <value value='0' nick='fixed'/>
     <value value='1' nick='parent'/>
+  </enum>
+
+  <enum id='org.gnome.shell.extensions.swingpie.EasingMode'>
+    <value value='1'  nick='linear' />
+    <value value='36' nick='ease' />
+    <value value='37' nick='ease-in' />
+    <value value='38' nick='ease-out' />
+    <value value='39' nick='ease-in-out,' />
+    <value value='2'  nick='ease-in-quad' />
+    <value value='3'  nick='ease-out-quad' />
+    <value value='4'  nick='ease-in-out-quad' />
+    <value value='26' nick='ease-in-back' />
+    <value value='27' nick='ease-out-back' />
+    <value value='28' nick='ease-in-out-back' />
   </enum>
 
 
@@ -47,10 +69,16 @@
       <description>A global scale factor for the menu.</description>
     </key>
 
-    <key name="animation-duration" type="d">
+    <key name="easing-duration" type="d">
       <default>0.3</default>
-      <summary>Animation Duration</summary>
-      <description>The base animation duration in seconds.</description>
+      <summary>Easing Duration</summary>
+      <description>The base easing duration in seconds.</description>
+    </key>
+
+    <key name="easing-mode" enum="org.gnome.shell.extensions.swingpie.EasingMode">
+      <default>"linear"</default>
+      <summary>Easing Mode</summary>
+      <description>The easing mode used for position and scale transitions.</description>
     </key>
 
     <key name="background-color" type="s">

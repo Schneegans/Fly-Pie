@@ -1,10 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//       ___                       __               This software may be modified       //
-//      (_  `     o  _   _        )_) o  _          and distributed under the           //
-//    .___) )_)_) ( ) ) (_(  --  /    ) (/_         terms of the MIT license. See       //
-//                        _)                        the LICENSE file for details.       //
-//                                                                                      //
+//   _____       _             _____ _                                                  //
+//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
+//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
+//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
+//                    |___|                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -61,7 +60,8 @@ let Settings = class Settings {
 
     // General Settings. -----------------------------------------------------------------
     this._bindSlider('global-scale');
-    this._bindSlider('animation-duration');
+    this._bindSlider('easing-duration');
+    this._bindCombobox('easing-mode');
     this._bindColorButton('background-color');
     this._bindColorButton('text-color');
     this._bindFontButton('font');
@@ -227,7 +227,8 @@ let Settings = class Settings {
             }
           };
 
-          read('animation-duration');
+          read('easing-duration');
+          read('easing-mode');
           read('background-color');
           read('text-color');
           read('font');
@@ -344,7 +345,8 @@ let Settings = class Settings {
                 }
               };
 
-              write('animation-duration');
+              write('easing-duration');
+              write('easing-mode');
               write('background-color');
               write('text-color');
               write('font');
@@ -462,7 +464,7 @@ let Settings = class Settings {
         this._settings.set_string(key, color.to_string());
       };
 
-      setRandomDouble('animation-duration', 0.1, 0.3);
+      setRandomDouble('easing-duration', 0.1, 0.3);
       setRandomColor('background-color');
       setRandomColor('text-color');
       setRandomDouble('wedge-width', 100, 500);
@@ -553,6 +555,13 @@ let Settings = class Settings {
   // they exist.
   _bindFontButton(settingsKey) {
     this._bind(settingsKey, 'font-name');
+  }
+
+  // Connects a Gtk.ComboBox (or anything else which has an 'active-id' property) to a
+  // settings key. It also binds any corresponding reset buttons and '-hover' variants if
+  // they exist.
+  _bindCombobox(settingsKey) {
+    this._bind(settingsKey, 'active-id');
   }
 
   // Connects any widget's property to a settings key. The widget must have the same ID as

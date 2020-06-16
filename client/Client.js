@@ -1,10 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//       ___                       __               This software may be modified       //
-//      (_  `     o  _   _        )_) o  _          and distributed under the           //
-//    .___) )_)_) ( ) ) (_(  --  /    ) (/_         terms of the MIT license. See       //
-//                        _)                        the LICENSE file for details.       //
-//                                                                                      //
+//   _____       _             _____ _                                                  //
+//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
+//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
+//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
+//                    |___|                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';

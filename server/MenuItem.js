@@ -1,10 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//       ___                       __               This software may be modified       //
-//      (_  `     o  _   _        )_) o  _          and distributed under the           //
-//    .___) )_)_) ( ) ) (_(  --  /    ) (/_         terms of the MIT license. See       //
-//                        _)                        the LICENSE file for details.       //
-//                                                                                      //
+//   _____       _             _____ _                                                  //
+//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
+//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
+//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
+//                    |___|                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -126,7 +125,7 @@ class MenuItem extends Clutter.Actor {
     this.add_child(this._caption);
   }
 
-  // This is called be the Menu to add child MenuItems to this MenuItem.
+  // This is called by the Menu to add child MenuItems to this MenuItem.
   addMenuItem(menuItem) {
     this._childrenContainer.add_child(menuItem);
   }
@@ -147,6 +146,7 @@ class MenuItem extends Clutter.Actor {
     this._state            = state;
     this._activeChildIndex = activeChildIndex;
 
+    // Now call setState() recursively on all children.
     this._childrenContainer.get_children().forEach((child, index) => {
       if (state == MenuItemState.CENTER_HOVERED) {
 
@@ -200,7 +200,8 @@ class MenuItem extends Clutter.Actor {
 
     // clang-format off
     this._settings = {
-      animationDuration:       settings.get_double('animation-duration')      * 1000,
+      easingDuration:          settings.get_double('easing-duration')      * 1000,
+      easingMode:              settings.get_enum('easing-mode'),
       textColor:               Clutter.Color.from_string(settings.get_string('text-color'))[1],
       font:                    settings.get_string('font'),
       state: new Map ([
@@ -283,7 +284,6 @@ class MenuItem extends Clutter.Actor {
     // some caption settings we can apply here as they won't be affected by state changes.
     const captionWidth = this._settings.state.get(MenuItemState.CENTER).size * 0.8;
     this._caption.set_size(captionWidth, captionWidth);
-    this._caption.set_easing_duration(this._settings.animationDuration);
     this._caption.set_color(this._settings.textColor);
 
     // Multiply the size of the font by globalScale.
@@ -300,7 +300,9 @@ class MenuItem extends Clutter.Actor {
         child => child.onSettingsChange(settings));
   }
 
-
+  // This updates all parameters (such as position, opacity or colors) of the individual
+  // actors of this MenuItem. It is usually called after the setState() above. It
+  // automatically calls redraw() on all child MenuItems of this.
   redraw() {
 
     this.visible = this._state != MenuItemState.INVISIBLE;
@@ -311,15 +313,15 @@ class MenuItem extends Clutter.Actor {
       const settings = this._settings.state.get(this._state);
 
       // Depending on the corresponding settings key, raise or lower the child MenuItems
-      // of this above or below all other actors of this.
+      // of this above or below the background.
       if (settings.drawChildrenAbove) {
-        this.set_child_above_sibling(this._childrenContainer, null);
+        this.set_child_above_sibling(this._childrenContainer, this._background);
       } else {
-        this.set_child_below_sibling(this._childrenContainer, null);
+        this.set_child_below_sibling(this._childrenContainer, this._background);
       }
 
-      // If our state is MenuItemState.CENTER (that is center and some child is hovered),
-      // redraw the caption text. Else hide the caption by setting its opacity to zero.
+      // If our state is MenuItemState.CENTER, redraw the caption text. Else hide the
+      // caption by setting its opacity to zero.
       if (this._state == MenuItemState.CENTER && this._activeChildIndex >= 0) {
         const child = this._childrenContainer.get_children()[this._activeChildIndex];
         this._caption.set_text(child.caption);
@@ -327,42 +329,62 @@ class MenuItem extends Clutter.Actor {
         const captionHeight = this._caption.get_layout().get_pixel_extents()[1].height;
         this._caption.set_translation(
             Math.floor(-this._caption.width / 2), Math.floor(-captionHeight / 2), 0);
-        this._caption.set_easing_duration(this._settings.animationDuration);
+        this._caption.set_easing_duration(this._settings.easingDuration);
 
         this._caption.opacity = 255;
       } else {
         this._caption.opacity = 0;
       }
 
+      // This easing duration and mode are used for size and position transitions further
+      // below. We set the easing duration to zero for the initial call to redraw() in
+      // order to avoid animations when the menu shows up.
+      let easingDuration = this._firstRedraw ? 0 : this._settings.easingDuration;
+      let easingMode     = this._settings.easingMode;
+      this._firstRedraw  = false;
+
       // If our state is some child or grandchild state, set the translation based on the
       // angle and the specified offset.
       if (this._state != MenuItemState.CENTER &&
           this._state != MenuItemState.CENTER_HOVERED) {
+        this.set_easing_duration(easingDuration);
+        this.set_easing_mode(easingMode);
         this.set_translation(
             Math.floor(Math.sin(this.angle) * settings.offset),
             -Math.floor(Math.cos(this.angle) * settings.offset), 0);
       }
 
+      // If we are in some center- or child-state and have no icon for this state yet,
+      // create a new icon! This will also happen after a settings change, as icons are
+      // deleted to force a re-creation here.
       if ((this._state == MenuItemState.CENTER ||
            this._state == MenuItemState.CENTER_HOVERED ||
            this._state == MenuItemState.CHILD ||
            this._state == MenuItemState.CHILD_HOVERED) &&
           this._iconContainer[this._state] == undefined) {
 
+        // Create and save a reference to the icon.
         const icon                       = this._createIcon(this.icon, settings.iconSize);
         this._iconContainer[this._state] = icon;
-
-        this._setSizeAndOpacity(
-            icon, this._lastIconSize > 0 ? this._lastIconSize : settings.iconSize,
-            this._lastIconOpacity > 0 ? this._lastIconOpacity : settings.iconOpacity);
-
-        icon.set_easing_duration(this._settings.animationDuration);
         this._iconContainer.add_child(icon);
 
+        // For the initial icon size and opacity we use _lastIconSize and _lastIconOpacity
+        // if available. When the settings are modified (especially when a menu is shown
+        // in edit mode), the icons are completely reloaded. To make this jitter-free,
+        // _lastIconSize and _lastIconOpacity contain the corresponding values of the
+        // previously deleted icon.
+        this._setSizeAndOpacity(
+            icon, this._lastIconSize > 0 ? this._lastIconSize : settings.iconSize,
+            this._lastIconOpacity > 0 ? this._lastIconOpacity : settings.iconOpacity, 0,
+            Clutter.AnimationMode.LINEAR);
+
+        // If the color mode is 'auto', we calculate an average color of the icon.
         if (settings.colorMode == 'auto') {
           const tmp = new Cairo.ImageSurface(Cairo.Format.ARGB32, 24, 24);
           const ctx = new Cairo.Context(tmp);
           utils.paintIcon(ctx, this.icon, 24);
+
+          // We store the average color as a property of the icon it belongs to.
           icon.averageColor = utils.getAverageIconColor(
               tmp, 24, settings.autoColorSaturation, settings.autoColorLuminance,
               settings.autoColorOpacity);
@@ -373,6 +395,7 @@ class MenuItem extends Clutter.Actor {
         }
       }
 
+      // Set the background color depending on the background color mode.
       if (settings.colorMode == 'auto') {
         this._background.get_effects()[0].tint =
             this._iconContainer[this._state].averageColor;
@@ -382,11 +405,18 @@ class MenuItem extends Clutter.Actor {
         this._background.get_effects()[0].tint = settings.fixedColor;
       }
 
+      // Now we update the size, position and opacity of the the background actor.
+      this._setSizeAndOpacity(
+          this._background, settings.size, this._background.get_effects()[0].tint.alpha,
+          easingDuration, easingMode);
+
+      // Now we update the size, position and opacity of the individual icons.
       const updateIconState = (state) => {
         if (this._iconContainer[state] != undefined) {
           this._setSizeAndOpacity(
               this._iconContainer[state], settings.iconSize,
-              this._state == state ? settings.iconOpacity : 0);
+              this._state == state ? settings.iconOpacity : 0, easingDuration,
+              easingMode);
         }
       };
 
@@ -395,22 +425,14 @@ class MenuItem extends Clutter.Actor {
       updateIconState(MenuItemState.CHILD);
       updateIconState(MenuItemState.CHILD_HOVERED);
 
-      this._setSizeAndOpacity(
-          this._background, settings.size, this._background.get_effects()[0].tint.alpha);
-
+      // When the settings are modified (especially when a menu is shown in edit mode),
+      // most icons are completely reloaded from disc. To make this less apparent, their
+      // current size and opacity are stored in the members below.
       this._lastIconSize    = settings.iconSize;
       this._lastIconOpacity = settings.iconOpacity;
     }
 
-    // We set the easing duration of this after the initial call to redraw() in order to
-    // avoid animations when the menu shows up.
-    if (this._firstRedraw) {
-      this.set_easing_duration(this._settings.animationDuration);
-      this._background.set_easing_duration(this._settings.animationDuration);
-      this._firstRedraw = false;
-    }
-
-    // Call redraw() recursively on all children.
+    // Finally call redraw() recursively on all children.
     this._childrenContainer.get_children().forEach(child => {
       child.setParentColor(this._background.get_effects()[0].tint);
       child.redraw();
@@ -445,10 +467,27 @@ class MenuItem extends Clutter.Actor {
     return actor;
   }
 
-  _setSizeAndOpacity(actor, size, opacity) {
+  // A small utility which sets the size, translation, and opacity of the given actor
+  // using the given easing parameters. The opacity is always transitioned using
+  // Clutter.AnimationMode.LINEAR. The translation is updated so that the actor is
+  // centered.
+  _setSizeAndOpacity(actor, size, opacity, easingDuration, easingMode) {
+
+    // Set easing state.
+    actor.save_easing_state();
+    actor.set_easing_duration(easingDuration);
+    actor.set_easing_mode(easingMode);
+
+    // Set size and translation.
     const size2 = Math.floor(size / 2);
     actor.set_translation(-size2, -size2, 0);
-    actor.set_opacity(opacity);
     actor.set_size(size, size);
+
+    // Set opacity using linear easing mode.
+    actor.set_easing_mode(Clutter.AnimationMode.LINEAR);
+    actor.set_opacity(opacity);
+
+    // Restore previous easing state.
+    actor.restore_easing_state();
   }
 });
