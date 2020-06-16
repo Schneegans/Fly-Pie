@@ -41,13 +41,14 @@ var Settings = class Settings {
     // Initialize all buttons of the preset area.
     this._initializePresetButtons();
 
-    // Connect to the server so that we can toggle menus also from the preferences.
+    // Connect to the server so that we can toggle menus also from the preferences. This
+    // is, for example, used for toggling the Live-Preview.
     new DBusWrapper(
         Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/swingpie',
         proxy => this._dbus = proxy);
 
     // Show the Demo Menu when the Preview Button is pressed.
-    let previewButton = this._builder.get_object('preview-button');
+    const previewButton = this._builder.get_object('preview-button');
     previewButton.connect('clicked', () => {
       if (this._dbus) {
         this._dbus.EditMenuRemote(JSON.stringify(this._createDemoMenu()), () => {});
@@ -57,9 +58,12 @@ var Settings = class Settings {
     // Draw icons to the Gtk.DrawingAreas of the appearance tabs.
     this._createAppearanceTabIcons();
 
-    // Now connect the user interface elements to the settings items.
+    // Now connect the user interface elements to the settings items. All user interface
+    // elements have the same ID as the corresponding settings key. Sometimes there is
+    // also a <key>-hover variant and a reset-<key> button. All three are connected with
+    // the _bind* calls.
 
-    // General Settings. -----------------------------------------------------------------
+    // General Settings.
     this._bindSlider('global-scale');
     this._bindSlider('easing-duration');
     this._bindCombobox('easing-mode');
@@ -67,23 +71,15 @@ var Settings = class Settings {
     this._bindColorButton('text-color');
     this._bindFontButton('font');
 
-    // Wedge Settings. -------------------------------------------------------------------
+
+    // Wedge Settings.
     this._bindSlider('wedge-width');
     this._bindSlider('wedge-inner-radius');
     this._bindColorButton('wedge-color');
     this._bindColorButton('wedge-separator-color');
     this._bindSlider('wedge-separator-width');
 
-    // Center Item Settings. -------------------------------------------------------------
-
-    // Toggle the color revealers when the color mode radio buttons are toggled.
-    this._bindRevealer('center-color-mode-fixed', 'center-fixed-color-revealer');
-    this._bindRevealer('center-color-mode-auto', 'center-auto-color-revealer');
-    this._bindRevealer(
-        'center-color-mode-hover-fixed', 'center-fixed-color-hover-revealer');
-    this._bindRevealer(
-        'center-color-mode-hover-auto', 'center-auto-color-hover-revealer');
-
+    // Center Item Settings.
     this._bindRadioGroup('center-color-mode', ['fixed', 'auto']);
     this._bindColorButton('center-fixed-color');
     this._bindSlider('center-auto-color-saturation');
@@ -93,6 +89,13 @@ var Settings = class Settings {
     this._bindSlider('center-icon-scale');
     this._bindSlider('center-icon-opacity');
 
+    // Toggle the color revealers when the color mode radio buttons are toggled.
+    this._bindRevealer('center-color-mode-fixed', 'center-fixed-color-revealer');
+    this._bindRevealer('center-color-mode-auto', 'center-auto-color-revealer');
+    this._bindRevealer(
+        'center-color-mode-hover-fixed', 'center-fixed-color-hover-revealer');
+    this._bindRevealer(
+        'center-color-mode-hover-auto', 'center-auto-color-hover-revealer');
 
     // The color reset button resets various settings, so we bind it manually.
     this._builder.get_object('reset-center-color').connect('clicked', () => {
@@ -109,15 +112,7 @@ var Settings = class Settings {
     });
 
 
-    // Child Item Settings. --------------------------------------------------------------
-
-    // Toggle the color revealers when the color mode radio buttons are toggled.
-    this._bindRevealer('child-color-mode-fixed', 'child-fixed-color-revealer');
-    this._bindRevealer('child-color-mode-auto', 'child-auto-color-revealer');
-    this._bindRevealer(
-        'child-color-mode-hover-fixed', 'child-fixed-color-hover-revealer');
-    this._bindRevealer('child-color-mode-hover-auto', 'child-auto-color-hover-revealer');
-
+    // Child Item Settings.
     this._bindRadioGroup('child-color-mode', ['fixed', 'auto', 'parent']);
     this._bindColorButton('child-fixed-color');
     this._bindSlider('child-auto-color-saturation');
@@ -128,6 +123,13 @@ var Settings = class Settings {
     this._bindSlider('child-icon-scale');
     this._bindSlider('child-icon-opacity');
     this._bindSwitch('child-draw-above');
+
+    // Toggle the color revealers when the color mode radio buttons are toggled.
+    this._bindRevealer('child-color-mode-fixed', 'child-fixed-color-revealer');
+    this._bindRevealer('child-color-mode-auto', 'child-auto-color-revealer');
+    this._bindRevealer(
+        'child-color-mode-hover-fixed', 'child-fixed-color-hover-revealer');
+    this._bindRevealer('child-color-mode-hover-auto', 'child-auto-color-hover-revealer');
 
     // The color reset button resets various settings, so we bind it manually.
     this._builder.get_object('reset-child-color').connect('clicked', () => {
@@ -144,18 +146,17 @@ var Settings = class Settings {
     });
 
 
-    // Grandchild Item Settings. ---------------------------------------------------------
-
-    // Toggle the color revealers when the color mode radio buttons are toggled.
-    this._bindRevealer('grandchild-color-mode-fixed', 'grandchild-fixed-color-revealer');
-    this._bindRevealer(
-        'grandchild-color-mode-hover-fixed', 'grandchild-fixed-color-hover-revealer');
-
+    // Grandchild Item Settings.
     this._bindRadioGroup('grandchild-color-mode', ['fixed', 'parent']);
     this._bindColorButton('grandchild-fixed-color');
     this._bindSlider('grandchild-size');
     this._bindSlider('grandchild-offset');
     this._bindSwitch('grandchild-draw-above');
+
+    // Toggle the color revealers when the color mode radio buttons are toggled.
+    this._bindRevealer('grandchild-color-mode-fixed', 'grandchild-fixed-color-revealer');
+    this._bindRevealer(
+        'grandchild-color-mode-hover-fixed', 'grandchild-fixed-color-hover-revealer');
 
     // The color reset button resets various settings, so we bind it manually.
     this._builder.get_object('reset-grandchild-color').connect('clicked', () => {
@@ -178,45 +179,55 @@ var Settings = class Settings {
 
   // ----------------------------------------------------------------------- private stuff
 
+  // This initializes the widgets related to the presets.
   _initializePresetButtons() {
-    // Add all presets to the user interface.
-    this._presetDirectory  = Gio.File.new_for_path(Me.path + '/presets');
-    this._presetList       = this._builder.get_object('preset-list');
-    this._presetListSorted = this._builder.get_object('preset-list-sorted');
-    this._presetListSorted.set_sort_column_id(1, Gtk.SortType.ASCENDING);
 
-    let presets = this._presetDirectory.enumerate_children(
+    // We use a Gtk.TreeModelSort to sort the list of presets alphabetically. The sort
+    // column and type cannot be set in glade, so we do this here.
+    this._builder.get_object('preset-list-sorted')
+        .set_sort_column_id(1, Gtk.SortType.ASCENDING);
+
+    // Store some members will will use frequently.
+    this._presetDirectory = Gio.File.new_for_path(Me.path + '/presets');
+    this._presetList      = this._builder.get_object('preset-list');
+
+    // Now add all presets to the user interface. We simply assume all *.json files in the
+    // preset directory to be presets. No further checks are done for now...
+    const presets = this._presetDirectory.enumerate_children(
         'standard::*', Gio.FileQueryInfoFlags.NONE, null);
 
     let presetInfo;
     while (presetInfo = presets.next_file(null)) {
       if (presetInfo.get_file_type() == Gio.FileType.REGULAR) {
-        let suffixPos = presetInfo.get_display_name().indexOf('.json');
+        const suffixPos = presetInfo.get_display_name().indexOf('.json');
         if (suffixPos > 0) {
-          let presetFile = this._presetDirectory.get_child(presetInfo.get_name());
-          let row        = this._presetList.append();
-          this._presetList.set_value(
-              row, 0, presetInfo.get_display_name().slice(0, suffixPos));
+          const presetFile = this._presetDirectory.get_child(presetInfo.get_name());
+          const row        = this._presetList.append();
+          const presetName = presetInfo.get_display_name().slice(0, suffixPos);
+          this._presetList.set_value(row, 0, presetName);
           this._presetList.set_value(row, 1, presetFile.get_path());
         }
       }
     }
 
+    // Load a preset whenever the selection changes.
     this._builder.get_object('preset-selection').connect('changed', (selection) => {
       try {
-        let [ok, model, iter] = selection.get_selected();
-        let path              = model.get_value(iter, 1);
-        let file              = Gio.File.new_for_path(path);
-        Preset.load(file);
+        const [ok, model, iter] = selection.get_selected();
+        if (ok) {
+          const path = model.get_value(iter, 1);
+          Preset.load(Gio.File.new_for_path(path));
+        }
 
       } catch (error) {
         utils.notification('Failed to load Preset: ' + error);
       }
     });
 
+    // Open a save-dialog when the save button is pressed.
     this._builder.get_object('save-preset-button').connect('clicked', (button) => {
       try {
-        let saver = new Gtk.FileChooserDialog({
+        const saver = new Gtk.FileChooserDialog({
           title: 'Save Preset',
           action: Gtk.FileChooserAction.SAVE,
           do_overwrite_confirmation: true,
@@ -224,50 +235,58 @@ var Settings = class Settings {
           modal: true
         });
 
-        let jsonFilter = new Gtk.FileFilter();
+        // Show only *.json files per default.
+        const jsonFilter = new Gtk.FileFilter();
         jsonFilter.set_name('JSON Files');
         jsonFilter.add_mime_type('application/json');
+        saver.add_filter(jsonFilter);
 
-        let allFilter = new Gtk.FileFilter();
+        // But allow showing all files if required.
+        const allFilter = new Gtk.FileFilter();
         allFilter.add_pattern('*');
         allFilter.set_name('All Files');
-
-        saver.add_filter(jsonFilter);
         saver.add_filter(allFilter);
 
+        // Add our action buttons.
         saver.add_button('Cancel', Gtk.ResponseType.CANCEL);
         saver.add_button('Save', Gtk.ResponseType.OK);
 
+        // Show the preset directory per default.
         saver.set_current_folder_uri(this._presetDirectory.get_uri());
 
-        let presetSelection   = this._builder.get_object('preset-selection');
-        let [ok, model, iter] = presetSelection.get_selected();
+        // Also make updating presets easier by pre-filling the file input field with the
+        // currently selected preset.
+        const presetSelection   = this._builder.get_object('preset-selection');
+        const [ok, model, iter] = presetSelection.get_selected();
         if (ok) {
-          let name = model.get_value(iter, 0);
+          const name = model.get_value(iter, 0);
           saver.set_current_name(name + '.json');
         }
 
+        // Save preset file when the OK button is clicked.
         saver.connect('response', (dialog, response_id) => {
           if (response_id === Gtk.ResponseType.OK) {
             try {
+              const path = dialog.get_filename();
 
-              let path = dialog.get_filename();
+              // Make sure we have a *.json extension.
               if (!path.endsWith('.json')) {
                 path += '.json';
               }
 
-              let file   = Gio.File.new_for_path(path);
-              let exists = file.query_exists(null);
+              // Now save the preset!
+              const file    = Gio.File.new_for_path(path);
+              const exists  = file.query_exists(null);
+              const success = Preset.save(file);
 
-              let success = Preset.save(file);
-
+              // If this was successful, we add the new preset to the list.
               if (success && !exists) {
-                let fileInfo =
+                const fileInfo =
                     file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
-                let suffixPos = fileInfo.get_display_name().indexOf('.json');
-                let row       = this._presetList.append();
-                this._presetList.set_value(
-                    row, 0, fileInfo.get_display_name().slice(0, suffixPos));
+                const suffixPos  = fileInfo.get_display_name().indexOf('.json');
+                const row        = this._presetList.append();
+                const presetName = fileInfo.get_display_name().slice(0, suffixPos);
+                this._presetList.set_value(row, 0, presetName);
                 this._presetList.set_value(row, 1, file.get_path());
               }
 
@@ -285,10 +304,12 @@ var Settings = class Settings {
       }
     });
 
+    // Open the preset directory with the default file manager.
     this._builder.get_object('open-preset-directory-button').connect('clicked', () => {
       Gio.AppInfo.launch_default_for_uri(this._presetDirectory.get_uri(), null);
     });
 
+    // Create a random preset when the corresponding button is pressed.
     this._builder.get_object('random-preset-button').connect('clicked', () => {
       Preset.random();
     });
@@ -299,7 +320,7 @@ var Settings = class Settings {
   // button resetting the corresponding settings key. It will also reset any setting
   // called 'settingsKey-hover' if one such exists.
   _bindResetButton(settingsKey) {
-    let resetButton = this._builder.get_object('reset-' + settingsKey);
+    const resetButton = this._builder.get_object('reset-' + settingsKey);
     if (resetButton) {
       resetButton.connect('clicked', () => {
         this._settings.reset(settingsKey);
@@ -362,9 +383,9 @@ var Settings = class Settings {
   _bindRadioGroup(settingsKey, possibleValues) {
 
     // This is called once for 'settingsKey' and once for 'settingsKey-hover'.
-    let impl = (settingsKey, possibleValues) => {
+    const impl = (settingsKey, possibleValues) => {
       possibleValues.forEach(value => {
-        let button = this._builder.get_object(settingsKey + '-' + value);
+        const button = this._builder.get_object(settingsKey + '-' + value);
         button.connect('toggled', () => {
           if (button.active) {
             this._settings.set_string(settingsKey, value);
@@ -373,9 +394,9 @@ var Settings = class Settings {
       });
 
       // Update the button state when the settings change.
-      let settingSignalHandler = () => {
-        let value     = this._settings.get_string(settingsKey);
-        let button    = this._builder.get_object(settingsKey + '-' + value);
+      const settingSignalHandler = () => {
+        const value   = this._settings.get_string(settingsKey);
+        const button  = this._builder.get_object(settingsKey + '-' + value);
         button.active = true;
       };
 
@@ -402,16 +423,16 @@ var Settings = class Settings {
   _bindColorButton(settingsKey) {
 
     // This is called once for 'settingsKey' and once for 'settingsKey-hover'.
-    let impl = (settingsKey) => {
-      let colorChooser = this._builder.get_object(settingsKey);
+    const impl = (settingsKey) => {
+      const colorChooser = this._builder.get_object(settingsKey);
 
       colorChooser.connect('color-set', () => {
         this._settings.set_string(settingsKey, colorChooser.get_rgba().to_string());
       });
 
       // Update the button state when the settings change.
-      let settingSignalHandler = () => {
-        let rgba = new Gdk.RGBA();
+      const settingSignalHandler = () => {
+        const rgba = new Gdk.RGBA();
         rgba.parse(this._settings.get_string(settingsKey));
         colorChooser.rgba = rgba;
       };
@@ -448,14 +469,14 @@ var Settings = class Settings {
 
     // We have to add these events to the Gtk.DrawingAreas to make them actually
     // clickable. Else it would not be possible to select the tabs.
-    let tabEvents = Gdk.EventMask.BUTTON_PRESS_MASK | Gdk.EventMask.BUTTON_RELEASE_MASK;
+    const tabEvents = Gdk.EventMask.BUTTON_PRESS_MASK | Gdk.EventMask.BUTTON_RELEASE_MASK;
 
     // Draw six lines representing the wedge separators.
     let tabIcon = this._builder.get_object('wedges-tab-icon');
     tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {
-      let size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      let color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
       ctx.translate(size / 2, size / 2);
       ctx.rotate(2 * Math.PI / 12);
@@ -477,8 +498,8 @@ var Settings = class Settings {
     tabIcon = this._builder.get_object('center-tab-icon');
     tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {
-      let size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      let color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
@@ -492,8 +513,8 @@ var Settings = class Settings {
     tabIcon = this._builder.get_object('children-tab-icon');
     tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {
-      let size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      let color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
@@ -512,8 +533,8 @@ var Settings = class Settings {
     tabIcon = this._builder.get_object('grandchildren-tab-icon');
     tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {
-      let size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      let color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
