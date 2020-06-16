@@ -4,7 +4,7 @@
 
 [![license](https://img.shields.io/badge/Gnome_Shell-3.36.2-blue.svg)](LICENSE)
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
-[![comments](https://img.shields.io/badge/Comments-20.4%25-green.svg)](cloc.sh)
+[![comments](https://img.shields.io/badge/Comments-27.5%25-green.svg)](cloc.sh)
 
 ```bash
 journalctl /usr/bin/gnome-shell -f -o cat | grep swingpie -B 2 -A 2

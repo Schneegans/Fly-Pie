@@ -210,7 +210,7 @@ var Settings = class Settings {
         Preset.load(file);
 
       } catch (error) {
-        utils.notification('Foo: ' + error);
+        utils.notification('Failed to load Preset: ' + error);
       }
     });
 
@@ -272,7 +272,7 @@ var Settings = class Settings {
               }
 
             } catch (error) {
-              utils.notification('Bar: ' + error);
+              utils.notification('Failed to save preset: ' + error);
             }
           }
 

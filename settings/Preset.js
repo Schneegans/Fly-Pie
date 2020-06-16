@@ -14,9 +14,16 @@ const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// Presets of Swing-Pie are stored in the JSON format. These files contain values for a //
+// subset of Swing-Pie's settings. The subset is defined in the presetKeys list below.  //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-let settingsKeys = [
+// These settings keys are stored in a preset. The load() and save() methods below just
+// iterate over this list and read / write the corresponding settings values from / to a
+// JSON file. For now, this works for settings keys of type double, string, boolean and
+// for enums. If new settings types are added, the save() and load() methods below need to
+// be changed.
+let presetKeys = [
   'easing-duration',
   'easing-mode',
   'background-color',
@@ -78,64 +85,58 @@ var Preset = class Preset {
 
   // ---------------------------------------------------------------------- static methods
 
+  // Initializes all presetKeys of 'org.gnome.shell.extensions.swingpie' to the values set
+  // in the given JSON Gio.File. This may throw an error if something goes wrong.
   static load(file) {
-    try {
+
+    const [success, contents] = file.load_contents(null);
+
+    if (success) {
+      const preset   = JSON.parse(contents);
       const settings = utils.createSettings();
 
-      let [success, contents] = file.load_contents(null);
-
-      if (success) {
-        let preset = JSON.parse(contents);
-
-        settingsKeys.forEach(key => {
-          if (key in preset) {
-            let value = preset[key];
-            if (typeof value === 'string') {
-              settings.set_string(key, value);
-            } else if (typeof value === 'number') {
-              settings.set_double(key, value);
-            } else if (typeof value === 'boolean') {
-              settings.set_boolean(key, value);
-            }
-          } else if (settings.settings_schema.has_key(key)) {
-            settings.reset(key);
+      presetKeys.forEach(key => {
+        if (key in preset) {
+          const value = preset[key];
+          if (typeof value === 'string') {
+            settings.set_string(key, value);
+          } else if (typeof value === 'number') {
+            settings.set_double(key, value);
+          } else if (typeof value === 'boolean') {
+            settings.set_boolean(key, value);
           }
-        });
-      }
-
-    } catch (error) {
-      utils.notification('Failed to load preset: ' + error);
-    }
-  }
-
-  static save(file) {
-    try {
-      const settings = utils.createSettings();
-      let preset     = {};
-
-      settingsKeys.forEach(key => {
-        if (settings.settings_schema.get_key(key).get_value_type().dup_string() === 's') {
-          preset[key] = settings.get_string(key);
-        } else if (
-            settings.settings_schema.get_key(key).get_value_type().dup_string() === 'd') {
-          preset[key] = settings.get_double(key);
-        } else if (
-            settings.settings_schema.get_key(key).get_value_type().dup_string() === 'b') {
-          preset[key] = settings.get_boolean(key);
+        } else if (settings.settings_schema.has_key(key)) {
+          settings.reset(key);
         }
       });
-
-      return file.replace_contents(
-          JSON.stringify(preset, null, 2), null, false,
-          Gio.FileCreateFlags.REPLACE_DESTINATION, null);
-
-    } catch (error) {
-      utils.notification('Failed to save preset: ' + error);
     }
-
-    return false;
   }
 
+  // Retrieves all presetKeys from 'org.gnome.shell.extensions.swingpie' and stores them
+  // in the given Gio.File in the JSON format. This may throw an error if something goes
+  // wrong.
+  static save(file) {
+    const settings = utils.createSettings();
+    let preset     = {};
+
+    presetKeys.forEach(key => {
+      const type = settings.settings_schema.get_key(key).get_value_type().dup_string();
+      if (type === 's') {
+        preset[key] = settings.get_string(key);
+      } else if (type === 'd') {
+        preset[key] = settings.get_double(key);
+      } else if (type === 'b') {
+        preset[key] = settings.get_boolean(key);
+      }
+    });
+
+    return file.replace_contents(
+        JSON.stringify(preset, null, 2), null, false,
+        Gio.FileCreateFlags.REPLACE_DESTINATION, null);
+  }
+
+  // This initializes most presetKeys to random values. This is more fun than actually
+  // useful...
   static random() {
 
     const settings = utils.createSettings();
