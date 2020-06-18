@@ -37,13 +37,36 @@ const utils = Me.imports.common.utils;
 // This could be a static member of the class below, but this seems to be not supported
 // yet.
 var MenuItemState = {
+  // This is the default state. It is also used for children of grandchildren - those are
+  // not shown at all.
   INVISIBLE: 0,
+
+  // This is the state of a MenuItem which is currently active but without the pointer
+  // hoovering it. That means that any of its children is currently hovered.
   CENTER: 1,
+
+  // Same as above, but without any hovered child. That means, the pointer is currently in
+  // the center of the menu.
   CENTER_HOVERED: 2,
+
+  // This is used for direct inactive children of the center element.
   CHILD: 3,
+
+  // This is used for the currently active (hovered) direct child item of the center.
   CHILD_HOVERED: 4,
+
+  // This is used for the children of the children of the center.
   GRANDCHILD: 5,
+
+  // This is used for the children of the currently hovered child of the center.
   GRANDCHILD_HOVERED: 6,
+
+  // This is used for the back-link children. In the menu hierarchy they are the parents
+  // but they are drawn in a similar fashion as normal children.
+  PARENT: 7,
+
+  // Same as above, but currently hovered.
+  PARENT_HOVERED: 8,
 };
 
 // clang-format off
@@ -71,18 +94,18 @@ var MenuItem = GObject.registerClass({
 class MenuItem extends Clutter.Actor {
   // clang-format on
 
-  _init(state, params = {}) {
+  _init(params = {}) {
     super._init(params);
 
     // The state this MenuItem currently is in. This can be changed with setState(). To
     // reflect the new state, a redraw() will be required.
-    this._state = state;
+    this._state = MenuItemState.INVISIBLE;
 
     // When the settings are modified (especially when a menu is shown in edit mode), most
     // icons are completely reloaded from disc. To make this less apparent, their current
     // size and opacity are stored in the members below.
-    this._lastIconSize    = 0;
-    this._lastIconOpacity = 0;
+    this._lastIconSize    = -1;
+    this._lastIconOpacity = -1;
 
     // This will be set to false upon the first call to redraw(). It is used to initialize
     // the MenuItem's appearance without animations.
@@ -136,46 +159,67 @@ class MenuItem extends Clutter.Actor {
     this._parentColor = color;
   }
 
-  // This is called on the currently active MenuItem (with MenuItemState.CENTER or
-  // MenuItemState.CENTER_HOVERED). It will call itself recursively for the entire menu
-  // tree below the active item, updating each child's state accordingly.
+  // This is called for each item in the current menu selection chain. That is for each
+  // item which is either CENTER, CENTER_HOVERED, PARENT, or PARENT_HOVERED. It will call
+  // itself recursively for the entire menu tree below the active item, updating each
+  // child's state accordingly. An exception are the PARENT and PARENT_HOVERED states,
+  // here only the inactive children are set to GRANDCHILD and GRANDCHILD_HOVERED
+  // respectively. It's not called for the active child.
   setState(state, activeChildIndex) {
 
     // Store the state and the active child's index as members. They will be used during
     // the next call to redraw().
-    this._state            = state;
-    this._activeChildIndex = activeChildIndex;
+    this._state = state;
+
+    if (activeChildIndex != undefined) {
+      this._activeChildIndex = activeChildIndex;
+    }
 
     // Now call setState() recursively on all children.
     this._childrenContainer.get_children().forEach((child, index) => {
-      if (state == MenuItemState.CENTER_HOVERED) {
+      switch (state) {
 
         // If the center item is hovered, no child is hovered.
-        child.setState(MenuItemState.CHILD, -1);
-
-      } else if (state == MenuItemState.CENTER) {
-
-        // If the center item is not hovered, the child with the given index is hovered..
-        if (index == activeChildIndex) {
-          child.setState(MenuItemState.CHILD_HOVERED, -1);
-        } else {
+        case MenuItemState.CENTER_HOVERED:
           child.setState(MenuItemState.CHILD, -1);
-        }
+          break;
 
-      } else if (state == MenuItemState.CHILD) {
+        // If the center item is not hovered, the child with the given index is hovered.
+        case MenuItemState.CENTER:
+          if (index == this._activeChildIndex) {
+            child.setState(MenuItemState.CHILD_HOVERED, -1);
+          } else {
+            child.setState(MenuItemState.CHILD, -1);
+          }
+          break;
 
         // All children of children become grandchildren.
-        child.setState(MenuItemState.GRANDCHILD, -1);
-
-      } else if (state == MenuItemState.CHILD_HOVERED) {
+        case MenuItemState.CHILD:
+          child.setState(MenuItemState.GRANDCHILD, -1);
+          break;
 
         // All children of hovered children become hovered grandchildren.
-        child.setState(MenuItemState.GRANDCHILD_HOVERED, -1);
+        case MenuItemState.CHILD_HOVERED:
+          child.setState(MenuItemState.GRANDCHILD_HOVERED, -1);
+          break;
 
-      } else {
+        // Children of parents are drawn like grandchildren.
+        case MenuItemState.PARENT:
+          if (index != this._activeChildIndex) {
+            child.setState(MenuItemState.GRANDCHILD, -1);
+          }
+          break;
+
+        // Children of hovered parents are drawn like hovered grandchildren.
+        case MenuItemState.PARENT_HOVERED:
+          if (index != this._activeChildIndex) {
+            child.setState(MenuItemState.GRANDCHILD_HOVERED, -1);
+          }
+          break;
 
         // Children of invisible items are invisible as well.
-        child.setState(MenuItemState.INVISIBLE, -1);
+        default:
+          child.setState(MenuItemState.INVISIBLE, -1);
       }
     });
   }
@@ -205,6 +249,12 @@ class MenuItem extends Clutter.Actor {
       textColor:               Clutter.Color.from_string(settings.get_string('text-color'))[1],
       font:                    settings.get_string('font'),
       state: new Map ([
+        [MenuItemState.INVISIBLE, {
+          size:                0,
+          offset:              0,
+          iconSize:            0,
+          iconOpacity:         0,
+        }],
         [MenuItemState.CENTER, {
           colorMode:           settings.get_string('center-color-mode'),
           fixedColor:          Clutter.Color.from_string(settings.get_string('center-fixed-color'))[1],
@@ -262,8 +312,7 @@ class MenuItem extends Clutter.Actor {
           fixedColor:          Clutter.Color.from_string(settings.get_string('grandchild-fixed-color'))[1],
           size:                settings.get_double('grandchild-size')    * globalScale,
           offset:              settings.get_double('grandchild-offset')  * globalScale,
-          iconSize:            settings.get_double('child-size')         * globalScale *
-                               settings.get_double('child-icon-scale'),
+          iconSize:            0,
           iconOpacity:         0,
           drawAbove:           settings.get_boolean('grandchild-draw-above'),
         }],
@@ -272,7 +321,7 @@ class MenuItem extends Clutter.Actor {
           fixedColor:          Clutter.Color.from_string(settings.get_string('grandchild-fixed-color-hover'))[1],
           size:                settings.get_double('grandchild-size-hover')   * globalScale,
           offset:              settings.get_double('grandchild-offset-hover') * globalScale,
-          iconSize:            settings.get_double('child-size-hover') * globalScale * settings.get_double('child-icon-scale-hover'),
+          iconSize:            0,
           iconOpacity:         0,
           drawAbove:           settings.get_boolean('grandchild-draw-above'),
         }]
@@ -305,118 +354,137 @@ class MenuItem extends Clutter.Actor {
   // automatically calls redraw() on all child MenuItems of this.
   redraw() {
 
-    this.visible = this._state != MenuItemState.INVISIBLE;
+    // The _settings member contains a Map of settings for each MenuItemState. PARENT
+    // items and PARENT_HOVERED items are drawn like CHILD and CHILD_HOVERED items
+    // respectively.
+    let visualState = this._state;
 
-    if (this.visible) {
+    switch (this._state) {
+      case MenuItemState.PARENT:
+        visualState = MenuItemState.CHILD;
+        break;
+      case MenuItemState.PARENT_HOVERED:
+        visualState = MenuItemState.CHILD_HOVERED;
+        break;
+    }
 
-      // The _settings member contains a Map of settings for each MenuItemState.
-      const settings = this._settings.state.get(this._state);
+    const settings = this._settings.state.get(visualState);
 
-      // Depending on the corresponding settings key, raise or lower the child MenuItems
-      // of this above or below the background.
+    // Depending on the corresponding settings key, raise or lower the child MenuItems
+    // of this above or below the background.
+    if (visualState != MenuItemState.INVISIBLE) {
       if (settings.drawChildrenAbove) {
         this.set_child_above_sibling(this._childrenContainer, this._background);
       } else {
         this.set_child_below_sibling(this._childrenContainer, this._background);
       }
+    }
 
-      // If our state is MenuItemState.CENTER, redraw the caption text. Else hide the
-      // caption by setting its opacity to zero.
-      if (this._state == MenuItemState.CENTER && this._activeChildIndex >= 0) {
-        const child = this._childrenContainer.get_children()[this._activeChildIndex];
-        this._caption.set_text(child.caption);
-        this._caption.set_easing_duration(0);
-        const captionHeight = this._caption.get_layout().get_pixel_extents()[1].height;
-        this._caption.set_translation(
-            Math.floor(-this._caption.width / 2), Math.floor(-captionHeight / 2), 0);
-        this._caption.set_easing_duration(this._settings.easingDuration);
+    // If our state is MenuItemState.CENTER, redraw the caption text. Else hide the
+    // caption by setting its opacity to zero.
+    if (visualState == MenuItemState.CENTER && this._activeChildIndex >= 0) {
+      const child = this._childrenContainer.get_children()[this._activeChildIndex];
+      this._caption.set_text(child.caption);
+      this._caption.set_easing_duration(0);
+      const captionHeight = this._caption.get_layout().get_pixel_extents()[1].height;
+      this._caption.set_translation(
+          Math.floor(-this._caption.width / 2), Math.floor(-captionHeight / 2), 0);
+      this._caption.set_easing_duration(this._settings.easingDuration);
 
-        this._caption.opacity = 255;
-      } else {
-        this._caption.opacity = 0;
+      this._caption.opacity = 255;
+    } else {
+      this._caption.opacity = 0;
+    }
+
+    // This easing duration and mode are used for size and position transitions further
+    // below. We set the easing duration to zero for the initial call to redraw() in
+    // order to avoid animations when the menu shows up.
+    let easingDuration = this._firstRedraw ? 0 : this._settings.easingDuration;
+    this._firstRedraw  = false;
+
+    this.set_easing_duration(easingDuration);
+    this.set_easing_mode(this._settings.easingMode);
+
+    // If our state is some child or grandchild state, set the translation based on the
+    // angle and the specified offset.
+    if (visualState != MenuItemState.CENTER &&
+        visualState != MenuItemState.CENTER_HOVERED &&
+        this._state != MenuItemState.PARENT &&
+        this._state != MenuItemState.PARENT_HOVERED) {
+
+      this.set_translation(
+          Math.floor(Math.sin(this.angle) * settings.offset),
+          -Math.floor(Math.cos(this.angle) * settings.offset), 0);
+    }
+
+    // If we are in some center- or child-state and have no icon for this state yet,
+    // create a new icon! This will also happen after a settings change, as icons are
+    // deleted to force a re-creation here.
+    if ((visualState == MenuItemState.CENTER ||
+         visualState == MenuItemState.CENTER_HOVERED ||
+         visualState == MenuItemState.CHILD ||
+         visualState == MenuItemState.CHILD_HOVERED) &&
+        this._iconContainer[visualState] == undefined) {
+
+      // Create and save a reference to the icon.
+      const icon                       = this._createIcon(this.icon, settings.iconSize);
+      this._iconContainer[visualState] = icon;
+      this._iconContainer.add_child(icon);
+
+      // For the initial icon size and opacity we use _lastIconSize and _lastIconOpacity
+      // if available. When the settings are modified (especially when a menu is shown
+      // in edit mode), the icons are completely reloaded. To make this jitter-free,
+      // _lastIconSize and _lastIconOpacity contain the corresponding values of the
+      // previously deleted icon.
+      this._setSizeAndOpacity(
+          icon, this._lastIconSize >= 0 ? this._lastIconSize : settings.iconSize,
+          this._lastIconOpacity >= 0 ? this._lastIconOpacity : settings.iconOpacity, 0,
+          Clutter.AnimationMode.LINEAR);
+
+      // If the color mode is 'auto', we calculate an average color of the icon.
+      if (settings.colorMode == 'auto') {
+        const tmp = new Cairo.ImageSurface(Cairo.Format.ARGB32, 24, 24);
+        const ctx = new Cairo.Context(tmp);
+        utils.paintIcon(ctx, this.icon, 24);
+
+        // We store the average color as a property of the icon it belongs to.
+        icon.averageColor = utils.getAverageIconColor(
+            tmp, 24, settings.autoColorSaturation, settings.autoColorLuminance,
+            settings.autoColorOpacity);
+
+        // Explicitly tell Cairo to free the context memory. Is this really necessary?
+        // https://wiki.gnome.org/Projects/GnomeShell/Extensions/TipsOnMemoryManagement#Cairo
+        ctx.$dispose();
       }
+    }
 
-      // This easing duration and mode are used for size and position transitions further
-      // below. We set the easing duration to zero for the initial call to redraw() in
-      // order to avoid animations when the menu shows up.
-      let easingDuration = this._firstRedraw ? 0 : this._settings.easingDuration;
-      let easingMode     = this._settings.easingMode;
-      this._firstRedraw  = false;
-
-      // If our state is some child or grandchild state, set the translation based on the
-      // angle and the specified offset.
-      if (this._state != MenuItemState.CENTER &&
-          this._state != MenuItemState.CENTER_HOVERED) {
-        this.set_easing_duration(easingDuration);
-        this.set_easing_mode(easingMode);
-        this.set_translation(
-            Math.floor(Math.sin(this.angle) * settings.offset),
-            -Math.floor(Math.cos(this.angle) * settings.offset), 0);
-      }
-
-      // If we are in some center- or child-state and have no icon for this state yet,
-      // create a new icon! This will also happen after a settings change, as icons are
-      // deleted to force a re-creation here.
-      if ((this._state == MenuItemState.CENTER ||
-           this._state == MenuItemState.CENTER_HOVERED ||
-           this._state == MenuItemState.CHILD ||
-           this._state == MenuItemState.CHILD_HOVERED) &&
-          this._iconContainer[this._state] == undefined) {
-
-        // Create and save a reference to the icon.
-        const icon                       = this._createIcon(this.icon, settings.iconSize);
-        this._iconContainer[this._state] = icon;
-        this._iconContainer.add_child(icon);
-
-        // For the initial icon size and opacity we use _lastIconSize and _lastIconOpacity
-        // if available. When the settings are modified (especially when a menu is shown
-        // in edit mode), the icons are completely reloaded. To make this jitter-free,
-        // _lastIconSize and _lastIconOpacity contain the corresponding values of the
-        // previously deleted icon.
-        this._setSizeAndOpacity(
-            icon, this._lastIconSize > 0 ? this._lastIconSize : settings.iconSize,
-            this._lastIconOpacity > 0 ? this._lastIconOpacity : settings.iconOpacity, 0,
-            Clutter.AnimationMode.LINEAR);
-
-        // If the color mode is 'auto', we calculate an average color of the icon.
-        if (settings.colorMode == 'auto') {
-          const tmp = new Cairo.ImageSurface(Cairo.Format.ARGB32, 24, 24);
-          const ctx = new Cairo.Context(tmp);
-          utils.paintIcon(ctx, this.icon, 24);
-
-          // We store the average color as a property of the icon it belongs to.
-          icon.averageColor = utils.getAverageIconColor(
-              tmp, 24, settings.autoColorSaturation, settings.autoColorLuminance,
-              settings.autoColorOpacity);
-
-          // Explicitly tell Cairo to free the context memory. Is this really necessary?
-          // https://wiki.gnome.org/Projects/GnomeShell/Extensions/TipsOnMemoryManagement#Cairo
-          ctx.$dispose();
-        }
-      }
-
-      // Set the background color depending on the background color mode.
+    // Set the background color depending on the background color mode.
+    if (visualState == MenuItemState.INVISIBLE) {
+      this._background.get_effects()[0].tint = this._parentColor;
+    } else {
       if (settings.colorMode == 'auto') {
         this._background.get_effects()[0].tint =
-            this._iconContainer[this._state].averageColor;
+            this._iconContainer[visualState].averageColor;
       } else if (settings.colorMode == 'parent') {
         this._background.get_effects()[0].tint = this._parentColor;
       } else {
         this._background.get_effects()[0].tint = settings.fixedColor;
       }
+    }
 
-      // Now we update the size, position and opacity of the the background actor.
-      this._setSizeAndOpacity(
-          this._background, settings.size, this._background.get_effects()[0].tint.alpha,
-          easingDuration, easingMode);
+    // Now we update the size, position and opacity of the the background actor.
+    this._setSizeAndOpacity(
+        this._background, settings.size, this._background.get_effects()[0].tint.alpha,
+        easingDuration, this._settings.easingMode);
 
-      // Now we update the size, position and opacity of the individual icons.
+    // Now we update the size, position and opacity of the individual icons.
+    if (visualState != MenuItemState.INVISIBLE) {
       const updateIconState = (state) => {
         if (this._iconContainer[state] != undefined) {
           this._setSizeAndOpacity(
               this._iconContainer[state], settings.iconSize,
-              this._state == state ? settings.iconOpacity : 0, easingDuration,
-              easingMode);
+              visualState == state ? settings.iconOpacity : 0, easingDuration,
+              this._settings.easingMode);
         }
       };
 
@@ -424,19 +492,21 @@ class MenuItem extends Clutter.Actor {
       updateIconState(MenuItemState.CENTER_HOVERED);
       updateIconState(MenuItemState.CHILD);
       updateIconState(MenuItemState.CHILD_HOVERED);
-
-      // When the settings are modified (especially when a menu is shown in edit mode),
-      // most icons are completely reloaded from disc. To make this less apparent, their
-      // current size and opacity are stored in the members below.
-      this._lastIconSize    = settings.iconSize;
-      this._lastIconOpacity = settings.iconOpacity;
     }
 
+    // When the settings are modified (especially when a menu is shown in edit mode),
+    // most icons are completely reloaded from disc. To make this less apparent, their
+    // current size and opacity are stored in the members below.
+    this._lastIconSize    = settings.iconSize;
+    this._lastIconOpacity = settings.iconOpacity;
+
     // Finally call redraw() recursively on all children.
-    this._childrenContainer.get_children().forEach(child => {
-      child.setParentColor(this._background.get_effects()[0].tint);
-      child.redraw();
-    });
+    if (visualState != MenuItemState.INVISIBLE) {
+      this._childrenContainer.get_children().forEach(child => {
+        child.setParentColor(this._background.get_effects()[0].tint);
+        child.redraw();
+      });
+    }
   }
 
   // This creates a Clutter.Actor with an attached Clutter.Canvas containing an image of

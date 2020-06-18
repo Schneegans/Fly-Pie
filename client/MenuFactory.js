@@ -11,7 +11,8 @@
 const Main                           = imports.ui.main;
 const {Gtk, Gio, Shell, GLib, GMenu} = imports.gi;
 
-const Me = imports.misc.extensionUtils.getCurrentExtension();
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This is a small helper class for adding menu items for files to the menus created by //
@@ -95,7 +96,8 @@ var MenuFactory = class MenuFactory {
   // Returns an item with entries for each recently used file, as reported by
   // Gtk.RecentManager.
   static getRecentItems() {
-    let recentFiles = Gtk.RecentManager.get_default().get_items();
+    let maxNum      = 9;
+    let recentFiles = Gtk.RecentManager.get_default().get_items().slice(0, maxNum);
     let result      = {name: 'Recent', icon: 'document-open-recent', items: []};
 
     recentFiles.forEach(recentFile => {
@@ -114,13 +116,13 @@ var MenuFactory = class MenuFactory {
   // Returns an item with entries for each "favorite application", as reported by
   // Gnome-Shell.
   static getFavoriteItems() {
-    let apps   = global.settings.get_strv('favorite-apps');
+    let maxNum = 9;
+    let apps   = global.settings.get_strv('favorite-apps').slice(0, maxNum);
     let result = {name: 'Favorites', icon: 'emblem-favorite', items: []};
 
-    for (let i = 0; i < apps.length; ++i) {
-      let app = Shell.AppSystem.get_default().lookup_app(apps[i]);
-      this._pushShellApp(result, app);
-    }
+    apps.forEach(app => {
+      this._pushShellApp(result, Shell.AppSystem.get_default().lookup_app(app));
+    });
 
     return result;
   }
@@ -128,12 +130,14 @@ var MenuFactory = class MenuFactory {
   // Returns an item with entries for each "frequently used application", as reported by
   // Gnome-Shell.
   static getFrequentItems() {
-    let apps   = Shell.AppUsage.get_default().get_most_used();
+    let maxNum = 9;
+    let apps   = Shell.AppUsage.get_default().get_most_used().slice(0, maxNum);
     let result = {name: 'Frequently Used', icon: 'emblem-default', items: []};
 
-    for (let i = 0; i < apps.length; ++i) {
-      this._pushShellApp(result, apps[i]);
-    }
+
+    apps.forEach(app => {
+      this._pushShellApp(result, app);
+    });
 
     return result;
   }
@@ -216,7 +220,7 @@ var MenuFactory = class MenuFactory {
   // This adds an entry for a Shell.App. Clicking the item will open a new window for the
   // given App.
   static _pushShellApp(menu, app) {
-    if (app && app.get_app_info().should_show()) {
+    if (app) {
       menu.items.push({
         name: app.get_name(),
         icon: app.get_app_info().get_icon().to_string(),

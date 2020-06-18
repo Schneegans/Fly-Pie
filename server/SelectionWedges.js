@@ -39,9 +39,11 @@ const utils = Me.imports.common.utils;
 var SelectionWedges = GObject.registerClass({
   Properties: {},
   Signals: {
-    "hovered-wedge-change-event":{
-      param_types: [GObject.TYPE_INT],
-    },
+    "child-hovered-event":    { param_types: [GObject.TYPE_INT] },
+    "child-selected-event":   { param_types: [GObject.TYPE_INT] },
+    "parent-hovered-event":   {},
+    "parent-selected-event":  {},
+    "cancel-selection-event": {},
   }
 },
 class SelectionWedges extends Clutter.Actor {
@@ -58,6 +60,8 @@ class SelectionWedges extends Clutter.Actor {
 
     // This is the index of the currently hovered wedge.
     this._hoveredWedge = -1;
+
+    this._parentIndex = -1;
 
     // This is attached as a child to *this* and is responsible for drawing the
     // wedge-gradient. This is done with a Clutter.ShaderEffect as this is much faster
@@ -166,19 +170,14 @@ class SelectionWedges extends Clutter.Actor {
 
     // clang-format off
     this._settings = {
-      easingDuration:     settings.get_double('easing-duration')   * 1000,
-      wedgeWidth:            settings.get_double('wedge-width')          * globalScale,
-      wedgeInnerRadius:      settings.get_double('wedge-inner-radius')   * globalScale,
-      wedgeColor:            utils.stringToRGBA(settings.get_string('wedge-color')),
-      wedgeColorHover:       utils.stringToRGBA(settings.get_string('wedge-color-hover')),
-      wedgeSeparatorColor:   utils.stringToRGBA(settings.get_string('wedge-separator-color')),
-      wedgeSeparatorWidth:   settings.get_double('wedge-separator-width') * globalScale,
+      wedgeWidth:          settings.get_double('wedge-width')          * globalScale,
+      wedgeInnerRadius:    settings.get_double('wedge-inner-radius')   * globalScale,
+      wedgeColor:          utils.stringToRGBA(settings.get_string('wedge-color')),
+      wedgeColorHover:     utils.stringToRGBA(settings.get_string('wedge-color-hover')),
+      wedgeSeparatorColor: utils.stringToRGBA(settings.get_string('wedge-separator-color')),
+      wedgeSeparatorWidth: settings.get_double('wedge-separator-width') * globalScale,
     };
     // clang-format on
-
-    // Color values are not transitioned at all, but we use this for the position of the
-    // wedges.
-    this.set_easing_duration(this._settings.easingDuration);
 
     // Update the size and position of the wedge actor.
     const outerRadius = this._settings.wedgeInnerRadius + this._settings.wedgeWidth;
@@ -215,7 +214,38 @@ class SelectionWedges extends Clutter.Actor {
 
   // Given the angular positions of all child items, this calculates the separator angles.
   // It deletes all previous separator actors and creates new ones accordingly.
-  setItemAngles(itemAngles) {
+  setItemAngles(itemAngles, parentAngle) {
+
+    this._hoveredWedge = -1;
+    this._parentIndex  = -1;
+
+    this._setFloatUniform('startAngle', 0);
+    this._setFloatUniform('endAngle', 0);
+
+    if (parentAngle != undefined) {
+      for (let i = 0; i <= itemAngles.length; i++) {
+        let doInsertion = false;
+
+        if (i == itemAngles.length) doInsertion = true;
+
+        if (i > 0) {
+
+          if (itemAngles[i - 1] < parentAngle && parentAngle < itemAngles[i])
+            doInsertion = true;
+
+          if (itemAngles[i - 1] > itemAngles[i]) {
+            if (parentAngle < itemAngles[i]) doInsertion = true;
+            if (parentAngle > itemAngles[i - 1]) doInsertion = true;
+          }
+        }
+
+        if (doInsertion) {
+          this._parentIndex = i;
+          itemAngles.splice(i, 0, parentAngle);
+          break;
+        }
+      }
+    }
 
     // Destroy obsolete actors.
     this._separatorAngles = [];
@@ -252,10 +282,33 @@ class SelectionWedges extends Clutter.Actor {
     }
   }
 
+  onButtonReleaseEvent(event) {
+    if (event.get_button() == 1) {
+      if (this._hoveredWedge >= 0) {
+        if (this._hoveredWedge == this._parentIndex) {
+          this.emit('parent-selected-event');
+        } else {
+          this.emit(
+              'child-selected-event',
+              (this._parentIndex >= 0 && this._hoveredWedge > this._parentIndex) ?
+                  this._hoveredWedge - 1 :
+                  this._hoveredWedge);
+        }
+      }
+
+    } else if (event.get_button() == 3) {
+      this.emit('cancel-selection-event');
+    }
+  }
+
   // Given the relative pointer position, this calculates the currently active child
   // wedge. For a wedge to become active, the pointer position must be farther away from
   // the center than defined by the wedge-inner-radius settings key.
-  setPointerPosition(x, y) {
+  onMotionEvent(event) {
+    let [x, y] = event.get_coords();
+    let ok;
+    [ok, x, y] = this.transform_stage_point(x, y);
+
     const distance             = Math.sqrt(x * x + y * y);
     let hoveredWedge           = -1;
     let hoveredWedgeStartAngle = 0;
@@ -296,7 +349,16 @@ class SelectionWedges extends Clutter.Actor {
       this._setFloatUniform('startAngle', hoveredWedgeStartAngle);
       this._setFloatUniform('endAngle', hoveredWedgeEndAngle);
       this._hoveredWedge = hoveredWedge;
-      this.emit('hovered-wedge-change-event', hoveredWedge);
+
+      if (hoveredWedge >= 0 && hoveredWedge == this._parentIndex) {
+        this.emit('parent-hovered-event');
+      } else {
+        this.emit(
+            'child-hovered-event',
+            (this._parentIndex >= 0 && hoveredWedge > this._parentIndex) ?
+                hoveredWedge - 1 :
+                hoveredWedge);
+      }
     }
   }
 

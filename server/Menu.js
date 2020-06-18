@@ -36,31 +36,17 @@ var Menu = class Menu {
     this._structure = {};
     this._editMode  = false;
 
+    this._menuSelectionChain = [];
+
     this._input = new InputManipulator();
+
+    this._itemBackground = this._createItemBackground();
 
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
 
-    this._selectionWedges = new SelectionWedges();
-    this._background.add_child(this._selectionWedges);
-
-    this._selectionWedges.connect('hovered-wedge-change-event', (o, index) => {
-      if (index == -1) {
-        this._structure.actor.setState(MenuItemState.CENTER_HOVERED, index);
-      } else {
-        this._structure.actor.setState(MenuItemState.CENTER, index);
-      }
-
-      this._structure.actor.redraw();
-    });
-
-    this._itemBackground = this._createItemBackground();
-
     this._background.connect('button-release-event', (actor, event) => {
-      if (event.get_button() == 3 && !this._editMode) {
-        this._onCancel(this._menuID);
-        this._hide();
-      }
+      this._selectionWedges.onButtonReleaseEvent(event);
     });
 
     this._background.connect('close-event', () => {
@@ -69,11 +55,112 @@ var Menu = class Menu {
     });
 
     this._background.connect('motion-event', (actor, event) => {
-      const [x, y] = event.get_coords();
-      this._selectionWedges.setPointerPosition(
-          x - this._selectionWedges.x - this._background.x,
-          y - this._selectionWedges.y - this._background.y);
+      this._selectionWedges.onMotionEvent(event);
     });
+
+
+    this._selectionWedges = new SelectionWedges();
+    this._background.add_child(this._selectionWedges);
+
+    this._selectionWedges.connect('child-hovered-event', (o, index) => {
+      if (index == -1) {
+        this._menuSelectionChain[0].actor.setState(MenuItemState.CENTER_HOVERED, -1);
+      } else {
+        this._menuSelectionChain[0].actor.setState(MenuItemState.CENTER, index);
+      }
+
+      if (this._menuSelectionChain.length > 1) {
+        this._menuSelectionChain[1].actor.setState(MenuItemState.PARENT);
+      }
+
+      this._structure.actor.redraw();
+    });
+
+    this._selectionWedges.connect('parent-hovered-event', () => {
+      this._menuSelectionChain[0].actor.setState(MenuItemState.CENTER_HOVERED, -1);
+      this._menuSelectionChain[1].actor.setState(MenuItemState.PARENT_HOVERED);
+      this._structure.actor.redraw();
+    });
+
+
+    this._selectionWedges.connect('child-selected-event', (o, index) => {
+      const parent = this._menuSelectionChain[0];
+      parent.actor.setState(MenuItemState.PARENT, index);
+
+      const child = this._menuSelectionChain[0].items[index];
+      this._menuSelectionChain.unshift(child);
+
+      let [x, y] = global.get_pointer();
+      [x, y]     = this._clampToToMonitor(x, y, 10);
+
+      if (child.items.length > 0) {
+        const itemAngles = [];
+        child.items.forEach(item => {
+          itemAngles.push(item.angle);
+        });
+        this._selectionWedges.setItemAngles(itemAngles, (child.angle + 180) % 360);
+
+        this._selectionWedges.set_translation(
+            x - this._background.x, y - this._background.y, 0);
+      }
+
+      this._input.warpPointer(x, y);
+
+      let ok;
+      [ok, x, y] = parent.actor.transform_stage_point(x, y);
+      child.actor.set_translation(x, y, 0);
+      child.actor.setState(MenuItemState.CENTER_HOVERED);
+
+      this._structure.actor.redraw();
+
+      if (child.items.length == 0) {
+        this._onSelect(this._menuID, child.id);
+        this._hide();
+      }
+    });
+
+    this._selectionWedges.connect('parent-selected-event', () => {
+      const parent = this._menuSelectionChain[1];
+      parent.actor.setState(MenuItemState.CENTER_HOVERED, -1);
+
+      this._menuSelectionChain.shift();
+
+      let [x, y] = global.get_pointer();
+      [x, y]     = this._clampToToMonitor(x, y, 10);
+
+      const itemAngles = [];
+      parent.items.forEach(item => {
+        itemAngles.push(item.angle);
+      });
+
+      if (this._menuSelectionChain.length > 1) {
+        this._selectionWedges.setItemAngles(itemAngles, (parent.angle + 180) % 360);
+      } else {
+        this._selectionWedges.setItemAngles(itemAngles);
+      }
+
+      this._selectionWedges.set_translation(
+          x - this._background.x, y - this._background.y, 0);
+      this._input.warpPointer(x, y);
+
+      let ok;
+      if (this._menuSelectionChain.length > 1) {
+        [ok, x, y] = this._menuSelectionChain[1].actor.transform_stage_point(x, y);
+      } else {
+        [ok, x, y] = this._background.transform_stage_point(x, y);
+      }
+
+      parent.actor.set_translation(x, y, 0);
+
+      this._structure.actor.redraw();
+    });
+
+
+    this._selectionWedges.connect('cancel-selection-event', () => {
+      this._onCancel(this._menuID);
+      this._hide();
+    });
+
 
     // For some reason this has to be set explicitly to true before it can be set to
     // false.
@@ -136,52 +223,43 @@ var Menu = class Menu {
     this._menuID = menuID;
 
     // Create all visible Clutter.Actors for the items.
-    this._structure.actor = this._createMenuItem(
-        MenuItemState.CENTER_HOVERED, this._structure.name, this._structure.icon,
-        this._structure.angle);
-    this._background.add_child(this._structure.actor);
-
-    const itemAngles = [];
-
-    this._structure.items.forEach(item => {
-      itemAngles.push(item.angle);
-
-      item.actor =
-          this._createMenuItem(MenuItemState.CHILD, item.name, item.icon, item.angle);
-      this._structure.actor.addMenuItem(item.actor);
-
+    const createMenuItem = (item) => {
+      item.actor = this._createMenuItem(item);
       item.items.forEach(child => {
-        child.actor = this._createMenuItem(
-            MenuItemState.GRANDCHILD, child.name, child.icon, child.angle);
-        item.actor.addMenuItem(child.actor);
+        item.actor.addMenuItem(createMenuItem(child, item.actor));
       });
-    });
+      return item.actor;
+    };
 
+    const rootMenuItem = createMenuItem(this._structure, this._background);
+    this._background.add_child(rootMenuItem);
+
+    this._menuSelectionChain.push(this._structure);
+
+    this._structure.actor.setState(MenuItemState.CENTER_HOVERED, -1);
     this._structure.actor.onSettingsChange(this._settings);
     this._structure.actor.redraw();
 
+    const itemAngles = [];
+    this._structure.items.forEach(item => {
+      itemAngles.push(item.angle);
+    });
     this._selectionWedges.setItemAngles(itemAngles);
 
     // Calculate menu position. In edit mode, we center the menu, else we position it at
     // the mouse pointer.
-    this._structure.actor.set_easing_duration(0);
-    this._selectionWedges.set_easing_duration(0);
     if (editMode) {
-      this._structure.actor.set_position(
-          this._background.width / 2, this._background.height / 2);
-      this._selectionWedges.set_position(
-          this._background.width / 2, this._background.height / 2);
+      this._structure.actor.set_translation(
+          this._background.width / 2, this._background.height / 2, 0);
+      this._selectionWedges.set_translation(
+          this._background.width / 2, this._background.height / 2, 0);
     } else {
       let [x, y] = global.get_pointer();
-      [x, y]     = this._clampToToMonitor(
-          x, y, this._structure.actor.width, this._structure.actor.height, 8);
-      this._structure.actor.set_position(x, y);
-      this._selectionWedges.set_position(x, y);
+      [x, y]     = this._clampToToMonitor(x, y, 10);
+      this._structure.actor.set_translation(x, y, 0);
+      this._selectionWedges.set_translation(x, y, 0);
+      this._input.warpPointer(x, y);
     }
-
-    const easingDuration = this._settings.get_double('easing-duration') * 1000;
-    this._structure.actor.set_easing_duration(easingDuration);
-    this._selectionWedges.set_easing_duration(easingDuration);
 
     return this._menuID;
   }
@@ -200,6 +278,8 @@ var Menu = class Menu {
 
     // Rest menu ID. With this set to null, we can accept new menu requests.
     this._menuID = null;
+
+    this._menuSelectionChain = [];
   }
 
   // This method recursively traverses the menu structure and assigns an ID to each
@@ -231,11 +311,11 @@ var Menu = class Menu {
     }
   }
 
-  _createMenuItem(state, caption, icon, angle) {
-    return new MenuItem(state, {
-      caption: caption,
-      icon: icon,
-      angle: angle * Math.PI / 180,
+  _createMenuItem(item) {
+    return new MenuItem({
+      caption: item.name,
+      icon: item.icon,
+      angle: item.angle * Math.PI / 180,
       backgroundCanvas: this._itemBackground,
     });
   }
@@ -372,6 +452,7 @@ var Menu = class Menu {
     // them to be on the safe side.
     const itemBackgroundSizes = [
       this._settings.get_double('center-size'),
+      this._settings.get_double('center-size-hover'),
       this._settings.get_double('child-size'),
       this._settings.get_double('child-size-hover'),
       this._settings.get_double('grandchild-size'),
@@ -418,35 +499,45 @@ var Menu = class Menu {
     return canvas;
   }
 
-  // x and y are the center coordinates of a box of size [width, height]. This method
-  // returns a new position [x, y] which ensures that the box is inside the current
-  // monitor's bounds, including the specified padding.
-  _clampToToMonitor(x, y, width, height, margin) {
+  // x and y are the center coordinates of a MenuItem. This method returns a new position
+  // [x, y] which ensures that the MenuItem and all of its children and grandchildren are
+  // inside the current monitor's bounds, including the specified margin. This is done by
+  // calculating the theoretically largest extends based on the current appearance
+  // settings.
+  _clampToToMonitor(x, y, margin) {
+
+    const wedgeRadius  = this._settings.get_double('wedge-inner-radius');
+    const centerRadius = Math.max(
+        this._settings.get_double('center-size') / 2,
+        this._settings.get_double('center-size-hover') / 2);
+    const childRadius = Math.max(
+        this._settings.get_double('child-size') / 2 +
+            this._settings.get_double('child-offset'),
+        this._settings.get_double('child-size-hover') / 2 +
+            this._settings.get_double('child-offset-hover'));
+    const grandchildRadius = Math.max(
+        this._settings.get_double('child-offset') +
+            this._settings.get_double('grandchild-size') / 2 +
+            this._settings.get_double('grandchild-offset'),
+        this._settings.get_double('child-offset-hover') +
+            this._settings.get_double('grandchild-size-hover') / 2 +
+            this._settings.get_double('grandchild-offset-hover'));
+
+    let maxSize = wedgeRadius;
+    maxSize     = Math.max(maxSize, centerRadius);
+    maxSize     = Math.max(maxSize, childRadius);
+    maxSize     = Math.max(maxSize, grandchildRadius);
+    maxSize *= 2 * this._settings.get_double('global-scale');
+
     const monitor = Main.layoutManager.currentMonitor;
 
-    const minX = margin + width / 2;
-    const minY = margin + height / 2;
+    const min  = margin + maxSize / 2;
+    const maxX = monitor.width - min;
+    const maxY = monitor.height - min;
 
-    const maxX = monitor.width - margin - width / 2;
-    const maxY = monitor.height - margin - height / 2;
-
-    const posX = Math.min(Math.max(x, minX), maxX);
-    const posY = Math.min(Math.max(y, minY), maxY);
+    const posX = Math.min(Math.max(x, min), maxX);
+    const posY = Math.min(Math.max(y, min), maxY);
 
     return [Math.floor(posX), Math.floor(posY)];
-  }
-
-  _foreachItem(func, parentItem) {
-    const item = parentItem || this._structure;
-
-    if (item) {
-      func(item);
-
-      if (item.items) {
-        item.items.forEach(child => {
-          this._foreachItem(func, child);
-        });
-      }
-    }
   }
 };

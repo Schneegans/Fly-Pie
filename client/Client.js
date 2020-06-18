@@ -70,7 +70,7 @@ var Client = class Client {
     this._lastMenu = {icon: 'firefox', name: 'Main Menu', items: []};
     this._lastMenu.items.push({
       name: 'Intriguingly looooooooooooooooooooooong caption',
-      angle: 50,
+      angle: 20,
       icon: '/home/simon/Pictures/Eigene/avatar128.png',
       activate: function() {
         utils.debug('Test 2!');
@@ -78,7 +78,7 @@ var Client = class Client {
     });
     this._lastMenu.items.push({
       name: 'Emoji 🐵 caption! 😆',
-      angle: 120,
+      angle: 90,
       icon: '🐹',
       activate: function() {
         utils.debug('Test 3!');
@@ -86,12 +86,10 @@ var Client = class Client {
     });
     this._lastMenu.items.push(MenuFactory.getAppMenuItems());
     this._lastMenu.items.push(MenuFactory.getUserDirectoriesItems());
-    // this._lastMenu.items.push(MenuFactory.getRecentItems());
+    this._lastMenu.items.push(MenuFactory.getRecentItems());
     this._lastMenu.items.push(MenuFactory.getFavoriteItems());
-    // this._lastMenu.items.push(MenuFactory.getFrequentItems());
+    this._lastMenu.items.push(MenuFactory.getFrequentItems());
     this._lastMenu.items.push(MenuFactory.getRunningAppsItems());
-
-    this._lastMenu.items[4].angle = 250;
 
     try {
       // Open the menu on the server side. Once this is done successfully, we store the

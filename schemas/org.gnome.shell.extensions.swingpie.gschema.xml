@@ -70,13 +70,13 @@
     </key>
 
     <key name="easing-duration" type="d">
-      <default>0.3</default>
+      <default>0.2</default>
       <summary>Easing Duration</summary>
       <description>The base easing duration in seconds.</description>
     </key>
 
     <key name="easing-mode" enum="org.gnome.shell.extensions.swingpie.EasingMode">
-      <default>"linear"</default>
+      <default>"ease"</default>
       <summary>Easing Mode</summary>
       <description>The easing mode used for position and scale transitions.</description>
     </key>
