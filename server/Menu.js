@@ -40,8 +40,6 @@ var Menu = class Menu {
 
     this._input = new InputManipulator();
 
-    this._itemBackground = this._createItemBackground();
-
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
 
@@ -224,7 +222,8 @@ var Menu = class Menu {
 
     // Create all visible Clutter.Actors for the items.
     const createMenuItem = (item) => {
-      item.actor = this._createMenuItem(item);
+      item.actor = new MenuItem(
+          {caption: item.name, icon: item.icon, angle: item.angle * Math.PI / 180});
       item.items.forEach(child => {
         item.actor.addMenuItem(createMenuItem(child, item.actor));
       });
@@ -309,15 +308,6 @@ var Menu = class Menu {
     } else {
       item.items = [];
     }
-  }
-
-  _createMenuItem(item) {
-    return new MenuItem({
-      caption: item.name,
-      icon: item.icon,
-      angle: item.angle * Math.PI / 180,
-      backgroundCanvas: this._itemBackground,
-    });
   }
 
   // This method recursively traverses the menu structure and assigns an angle to each
@@ -446,27 +436,6 @@ var Menu = class Menu {
   // This is called every time a settings key changes.
   _onSettingsChange() {
 
-    // First update the scale factor of our item background circle. We make it as large as
-    // it can possible get. Usually this will be 'center-size' * 'global-scale', but in
-    // theory children items could be scaled larger than the center, so we check all of
-    // them to be on the safe side.
-    const itemBackgroundSizes = [
-      this._settings.get_double('center-size'),
-      this._settings.get_double('center-size-hover'),
-      this._settings.get_double('child-size'),
-      this._settings.get_double('child-size-hover'),
-      this._settings.get_double('grandchild-size'),
-      this._settings.get_double('grandchild-size-hover'),
-    ];
-
-    let maxItemBackgroundSize = 0;
-    itemBackgroundSizes.forEach(size => {
-      maxItemBackgroundSize = Math.max(size, maxItemBackgroundSize);
-    });
-
-    this._itemBackground.scale_factor =
-        maxItemBackgroundSize * this._settings.get_double('global-scale');
-
     // Then call onSettingsChange() for each item of our menu. This ensures that the menu
     // is instantly updated in edit mode.
     this._selectionWedges.onSettingsChange(this._settings);
@@ -475,28 +444,6 @@ var Menu = class Menu {
       this._structure.actor.onSettingsChange(this._settings);
       this._structure.actor.redraw();
     }
-  }
-
-  // For performance reasons, all menu items share the same Clutter.Canvas for their
-  // background. This method creates it. It has a width and height of one.
-  // Clutter.Canvas.scale_factor is later used to scale the canvas to an appropriate size.
-  _createItemBackground() {
-    const canvas = new Clutter.Canvas({height: 1, width: 1});
-
-    canvas.connect('draw', (canvas, ctx, width, height) => {
-      ctx.setOperator(Cairo.Operator.CLEAR);
-      ctx.paint();
-      ctx.setOperator(Cairo.Operator.OVER);
-      ctx.scale(width, height);
-      ctx.translate(0.5, 0.5);
-      ctx.arc(0, 0, 0.5, 0, 2.0 * Math.PI);
-      ctx.setSourceRGB(1, 1, 1);
-      ctx.fill();
-    });
-
-    canvas.invalidate();
-
-    return canvas;
   }
 
   // x and y are the center coordinates of a MenuItem. This method returns a new position

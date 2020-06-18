@@ -209,17 +209,6 @@
       <description>The size of the center element in pixels when a child is hovered.</description>
     </key>
 
-    <key name="center-icon-scale" type="d">
-      <default>0.7</default>
-      <summary>Center Icon Scale</summary>
-      <description>A scale factor for the center icon.</description>
-    </key>
-    <key name="center-icon-scale-hover" type="d">
-      <default>0.7</default>
-      <summary>Center Icon Scale Hover</summary>
-      <description>A scale factor for the center icon when a child is hovered.</description>
-    </key>
-
     <key name="center-icon-opacity" type="d">
       <default>1.0</default>
       <summary>Center Icon Opacity</summary>
@@ -231,6 +220,11 @@
       <description>The opacity of center icons when hovered.</description>
     </key>
 
+    <key name="center-icon-scale" type="d">
+      <default>0.7</default>
+      <summary>Center Icon Scale</summary>
+      <description>A scale factor for the center icon.</description>
+    </key>
 
     <!-- Child Item Settings -->
 
@@ -315,17 +309,6 @@
       <description>The offset of the children elements in pixels when hovered.</description>
     </key>
 
-    <key name="child-icon-scale" type="d">
-      <default>0.7</default>
-      <summary>Child Icon Scale</summary>
-      <description>A scale factor for child icons.</description>
-    </key>
-    <key name="child-icon-scale-hover" type="d">
-      <default>0.9</default>
-      <summary>Child Icon Scale Hover</summary>
-      <description>A scale factor for child icons when hovered.</description>
-    </key>
-
     <key name="child-icon-opacity" type="d">
       <default>1.0</default>
       <summary>Child Icon Opacity</summary>
@@ -335,6 +318,12 @@
       <default>1.0</default>
       <summary>Child Icon Opacity Hover</summary>
       <description>The opacity of child icons when hovered.</description>
+    </key>
+
+    <key name="child-icon-scale" type="d">
+      <default>0.7</default>
+      <summary>Child Icon Scale</summary>
+      <description>A scale factor for child icons.</description>
     </key>
 
     <key name="child-draw-above" type="b">

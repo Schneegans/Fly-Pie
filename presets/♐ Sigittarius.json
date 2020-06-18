@@ -29,7 +29,6 @@
   "child-offset": 119,
   "child-offset-hover": 100,
   "child-icon-scale": 0.7,
-  "child-icon-scale-hover": 0.9,
   "child-draw-above": true,
   "grandchild-color-mode": "fixed",
   "grandchild-color-mode-hover": "fixed",
