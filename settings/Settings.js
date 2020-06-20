@@ -561,6 +561,34 @@ var Settings = class Settings {
 
       return false;
     });
+
+    // Draw a line and some circles representing a trace.
+    tabIcon = this._builder.get_object('trace-tab-icon');
+    tabIcon.add_events(tabEvents);
+    tabIcon.connect('draw', (widget, ctx) => {
+      const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+
+      ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
+
+      ctx.moveTo(0.2 * size, 0.2 * size);
+      ctx.lineTo(0.4 * size, 0.6 * size);
+      ctx.lineTo(0.9 * size, 0.7 * size);
+
+      ctx.setLineWidth(2);
+      ctx.stroke();
+
+      ctx.arc(0.2 * size, 0.2 * size, 0.15 * size, 0, 2 * Math.PI);
+      ctx.fill();
+
+      ctx.arc(0.4 * size, 0.6 * size, 0.1 * size, 0, 2 * Math.PI);
+      ctx.fill();
+
+      ctx.arc(0.9 * size, 0.7 * size, 0.1 * size, 0, 2 * Math.PI);
+      ctx.fill();
+
+      return false;
+    });
   }
 
   // This creates a Demo Menu structure which is shown when the preview button is pressed.
