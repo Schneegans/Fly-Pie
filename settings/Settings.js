@@ -166,6 +166,10 @@ var Settings = class Settings {
       this._settings.reset('grandchild-fixed-color-hover');
     });
 
+
+    // Trace Settings.
+    this._bindSlider('trace-min-length');
+
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
   }

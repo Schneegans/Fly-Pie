@@ -88,8 +88,9 @@ var Menu = class Menu {
       const child = this._menuSelectionChain[0].items[index];
       this._menuSelectionChain.unshift(child);
 
-      let [x, y] = global.get_pointer();
-      [x, y]     = this._clampToToMonitor(x, y, 10);
+      const [pointerX, pointerY]   = global.get_pointer();
+      const [absoluteX, absoluteY] = this._clampToToMonitor(pointerX, pointerY, 10);
+      this._input.warpPointer(absoluteX, absoluteY);
 
       if (child.items.length > 0) {
         const itemAngles = [];
@@ -99,14 +100,27 @@ var Menu = class Menu {
         this._selectionWedges.setItemAngles(itemAngles, (child.angle + 180) % 360);
 
         this._selectionWedges.set_translation(
-            x - this._background.x, y - this._background.y, 0);
+            absoluteX - this._background.x, absoluteY - this._background.y, 0);
       }
 
-      this._input.warpPointer(x, y);
+      const [ok, relativeX, relativeY] =
+          parent.actor.transform_stage_point(absoluteX, absoluteY);
 
-      let ok;
-      [ok, x, y] = parent.actor.transform_stage_point(x, y);
-      child.actor.set_translation(x, y, 0);
+      const currentTraceLength = Math.sqrt(relativeX * relativeX + relativeY * relativeY);
+      const idealTraceLength =
+          Math.max(this._settings.get_double('trace-min-length'), currentTraceLength);
+
+      const idealX = Math.floor(Math.sin(child.actor.angle) * idealTraceLength);
+      const idealY = -Math.floor(Math.cos(child.actor.angle) * idealTraceLength);
+
+      const requiredOffsetX = relativeX - idealX;
+      const requiredOffsetY = relativeY - idealY;
+
+      const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
+      root.actor.translation_x = root.actor.translation_x + requiredOffsetX;
+      root.actor.translation_y = root.actor.translation_y + requiredOffsetY;
+
+      child.actor.set_translation(idealX, idealY, 0);
       child.actor.setState(MenuItemState.CENTER_HOVERED);
 
       this._structure.actor.redraw();
@@ -123,8 +137,9 @@ var Menu = class Menu {
 
       this._menuSelectionChain.shift();
 
-      let [x, y] = global.get_pointer();
-      [x, y]     = this._clampToToMonitor(x, y, 10);
+      const [pointerX, pointerY]   = global.get_pointer();
+      const [absoluteX, absoluteY] = this._clampToToMonitor(pointerX, pointerY, 10);
+      this._input.warpPointer(absoluteX, absoluteY);
 
       const itemAngles = [];
       parent.items.forEach(item => {
@@ -138,17 +153,23 @@ var Menu = class Menu {
       }
 
       this._selectionWedges.set_translation(
-          x - this._background.x, y - this._background.y, 0);
-      this._input.warpPointer(x, y);
+          absoluteX - this._background.x, absoluteY - this._background.y, 0);
 
-      let ok;
+
       if (this._menuSelectionChain.length > 1) {
-        [ok, x, y] = this._menuSelectionChain[1].actor.transform_stage_point(x, y);
+        const [ok, relativeX, relativeY] =
+            parent.actor.transform_stage_point(absoluteX, absoluteY);
+
+        const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
+        root.actor.translation_x = root.actor.translation_x + relativeX;
+        root.actor.translation_y = root.actor.translation_y + relativeY;
+
       } else {
-        [ok, x, y] = this._background.transform_stage_point(x, y);
+        const [ok, relativeX, relativeY] =
+            this._background.transform_stage_point(absoluteX, absoluteY);
+        parent.actor.set_translation(relativeX, relativeY, 0);
       }
 
-      parent.actor.set_translation(x, y, 0);
 
       this._structure.actor.redraw();
     });

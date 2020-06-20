@@ -78,7 +78,8 @@ let presetKeys = [
   'grandchild-size-hover',
   'grandchild-offset',
   'grandchild-offset-hover',
-  'grandchild-draw-above'
+  'grandchild-draw-above',
+  'trace-min-length'
 ];
 
 var Preset = class Preset {
@@ -216,5 +217,6 @@ var Preset = class Preset {
     setRandomDouble('grandchild-offset', 15, 40);
     setRandomDouble('grandchild-offset-hover', 25, 60);
     setRandomBool('grandchild-draw-above');
+    setRandomDouble('trace-min-length', 200, 400);
   }
 }

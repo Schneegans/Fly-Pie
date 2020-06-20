@@ -400,6 +400,13 @@
       <description>If true, grandchildren are drawn above their parents.</description>
     </key>
 
+    <!-- Trace Settings -->
+
+    <key name="trace-min-length" type="d">
+      <default>200</default>
+      <summary>Trace Min Length</summary>
+      <description>The minimum visualized trace segment length.</description>
+    </key>
 
     <!-- Miscellaneous -->
 

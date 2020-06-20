@@ -246,6 +246,7 @@ class MenuItem extends Clutter.Actor {
       font:                    settings.get_string('font'),
       state: new Map ([
         [MenuItemState.INVISIBLE, {
+          colorMode:           '',
           size:                0,
           offset:              0,
           iconOpacity:         0,
