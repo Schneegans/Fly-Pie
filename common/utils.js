@@ -82,7 +82,7 @@ function logProperties(object) {
 // very useful for emojis like 😆 or 🌟!                                                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function paintIcon(ctx, name, size) {
+function paintIcon(ctx, name, size, opacity) {
 
   // First try to find the icon in the theme. This will also load images from disc if the
   // icon name is actually a file path.
@@ -93,12 +93,12 @@ function paintIcon(ctx, name, size) {
   // We got something, return it!
   if (info != null) {
     Gdk.cairo_set_source_pixbuf(ctx, info.load_icon(), 0, 0);
-    ctx.paint();
+    ctx.paintWithAlpha(opacity);
 
   } else {
 
     // If no icon was found, write it as plain text.
-    ctx.setSourceRGBA(0, 0, 0, 1);
+    ctx.setSourceRGBA(0, 0, 0, opacity);
 
     const layout = PangoCairo.create_layout(ctx);
     layout.set_width(Pango.units_from_double(size));
@@ -113,20 +113,21 @@ function paintIcon(ctx, name, size) {
     const extents = layout.get_pixel_extents()[1];
     ctx.moveTo(0, (size - extents.height) / 2);
 
+    ctx.pushGroup();
     PangoCairo.update_layout(ctx, layout);
     PangoCairo.show_layout(ctx, layout);
+    ctx.popGroupToSource();
+    ctx.paintWithAlpha(opacity);
   }
 }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Returns a representative average Clutter.Color for a given Cairo.Surface. The alpha  //
-// can be passed as parameter. The saturation and the luminance (both in range [0, 1])  //
-// can be used to tweak the resulting saturation and luminance values.                  //
+// Returns a representative average Clutter.Color for a given Cairo.Surface.            //
 // This is based on code from the original Gnome-Pie.                                   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function getAverageIconColor(iconSurface, iconSize, saturation, luminance, alpha) {
+function getAverageIconColor(iconSurface, iconSize) {
 
   // surface.get_data() as well as surface.get_width() are not available somehow. Therefor
   // we have to pass in the icon size and use the pixbuf conversion below.
@@ -154,32 +155,11 @@ function getAverageIconColor(iconSurface, iconSize, saturation, luminance, alpha
   }
 
   // Create a Clutter.Color based on the calculated values.
-  let color = new Clutter.Color({
+  return new Clutter.Color({
     red: rTotal / total * 255,
     green: gTotal / total * 255,
     blue: bTotal / total * 255
   });
-
-  let [h, l, s] = color.to_hls();
-
-  // Now we modify this color based on luminance and saturation. First we
-  // increase the base luminance to 0.5 so that we do not create pitch black colors.
-  l = 0.5 + l * 0.5;
-
-  const lFac = luminance * 2 - 1;
-  l          = lFac > 0 ? l * (1 - lFac) + 1 * lFac : l * (lFac + 1);
-
-  // We only modify the saturation if it's not too low. Else we will get artificial colors
-  // for already quite desaturated icons.
-  if (s > 0.1) {
-    const sFac = saturation * 2 - 1;
-    s          = sFac > 0 ? s * (1 - sFac) + 1 * sFac : s * (sFac + 1);
-  }
-
-  color       = Clutter.Color.from_hls(h, l, s);
-  color.alpha = alpha;
-
-  return color;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
