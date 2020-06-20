@@ -25,11 +25,13 @@ const utils = Me.imports.common.utils;
 //         |                                                                            //
 //         |        .--------------------.   This contains up to six actors, one for    //
 //         |--------| _iconContainer     |   each of the CENTER, CHILD or GRANDCHILD    //
-//         |        '--------------------'   with their _HOVERED variants.              //
+//         |        '--------------------'   with their _HOVERED variants. Usually,     //
+//         |                                 only one of them is visible at a time.     //
 //         |                                                                            //
 //         |        .--------------------.   This contains a MenuItem for each child    //
 //         '--------| _childrenContainer |   in the menu tree hierarchy. Based on the   //
-//                  '--------------------'   settings, this could be above the icons.   //
+//                  '--------------------'   drawChildrenAbove-settings, this could     //
+//                                           also be above the _iconContainer.          //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -41,7 +43,7 @@ var MenuItemState = {
   INVISIBLE: 0,
 
   // This is the state of a MenuItem which is currently active but without the pointer
-  // hoovering it. That means that any of its children is currently hovered.
+  // hoovering it. That means that one of its children is currently hovered.
   CENTER: 1,
 
   // Same as above, but without any hovered child. That means, the pointer is currently in
@@ -81,7 +83,7 @@ var MenuItem = GObject.registerClass({
     'icon': GObject.ParamSpec.string(
       'icon', 'icon',
       'The icon to be used by this menu item. ' +
-      'Can be an "icon-name", an ":emoji:" or a path like "../icon.png".',
+      'Can be an "icon-name", an emoji like "🚀" or a path like "../icon.png".',
       GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, 'image-missing')
   },
   Signals: {}
@@ -100,6 +102,12 @@ class MenuItem extends Clutter.Actor {
     // the MenuItem's appearance without animations.
     this._firstRedraw = true;
 
+    // This is set to true when the icons were deleted due to the user modifying the
+    // appearance settings in edit mode. If it is true, the icons will be re-created with
+    // full opacity as they are obviously already visible. Else there would be heavy
+    // preview-flickering when changing settings.
+    this._forceRecreation = false;
+
     // This is recursively updated using setParentColor(). It is used for the background
     // coloring when the color mode is set to 'parent'.
     this._parentColor = new Clutter.Color({red: 255, green: 255, blue: 255});
@@ -109,11 +117,12 @@ class MenuItem extends Clutter.Actor {
     this._childrenContainer = new Clutter.Actor();
     this.add_child(this._childrenContainer);
 
-    // Create the Icon Container. This eventually will contain one actor for each
-    // MenuItemState which has an associated icon. That means one icon for CENTER,
-    // CENTER_HOVERED, CHILD, and CHILD_HOVERED. There is one icon for each state as they
-    // most likely have different resolutions. We do not simply scale them because we want
-    // no blurry icons.
+    // Create the Icon Container. This eventually will contain one actor for each visible
+    // MenuItemState, except for the PARENT* states, as they are drawn like CHILDREN*. We
+    // create one icon for each state as they most likely have different resolutions and
+    // background colors. They are created lazily and usually only one of them is visible
+    // at a time (based on the current MenuItemState). We use a Clutter.BinLayout to
+    // position them exactly on top of each other to allow for smooth transitions.
     this._iconContainer = new Clutter.Actor();
     this._iconContainer.set_layout_manager(new Clutter.BinLayout());
     this.add_child(this._iconContainer);
@@ -146,7 +155,9 @@ class MenuItem extends Clutter.Actor {
   // itself recursively for the entire menu tree below the active item, updating each
   // child's state accordingly. An exception are the PARENT and PARENT_HOVERED states,
   // here only the inactive children are set to GRANDCHILD and GRANDCHILD_HOVERED
-  // respectively. It's not called for the active child.
+  // respectively. It's not called for the active child, as it's the responsibility to set
+  // the state of the active child in this case.
+  // The activeChildIndex can be omitted to indicate that it did not change.
   setState(state, activeChildIndex) {
 
     // Store the state and the active child's index as members. They will be used during
@@ -212,9 +223,9 @@ class MenuItem extends Clutter.Actor {
   onSettingsChange(settings) {
 
     // First we reset the icon members to force their re-creation during the next state
-    // change. As many settings affect the icon size or color, we simply do this in any
-    // case. This could be optimized by limiting this to the cases where settings keys
-    // were changed which actually affect the icons.
+    // change. As many settings affect the icon size or background color, we simply do
+    // this in any case. This could be optimized by limiting this to the cases where
+    // settings keys were changed which actually affect the icons.
     this._iconContainer.destroy_all_children();
     delete this._iconContainer[MenuItemState.CENTER];
     delete this._iconContainer[MenuItemState.CENTER_HOVERED];
@@ -334,7 +345,7 @@ class MenuItem extends Clutter.Actor {
 
     // PARENT items and PARENT_HOVERED items are drawn like CHILD and CHILD_HOVERED items
     // respectively. Therefore we create a variable for the "visual state" which is the
-    // same as the _state but CHILD and CHILD_HOVERED if _state is PARENT items or
+    // same as the _state but CHILD and CHILD_HOVERED if _state is PARENT or
     // PARENT_HOVERED.
     let visualState = this._state;
 
@@ -344,6 +355,7 @@ class MenuItem extends Clutter.Actor {
       visualState = MenuItemState.CHILD_HOVERED;
     }
 
+    // Hide the item completely if invisible.
     this.visible = visualState != MenuItemState.INVISIBLE;
 
     // The _settings member contains a Map of settings for each MenuItemState.
@@ -381,18 +393,35 @@ class MenuItem extends Clutter.Actor {
     let easingDuration = this._firstRedraw ? 0 : this._settings.easingDuration;
     this._firstRedraw  = false;
 
+    this.set_easing_duration(easingDuration);
+    this.set_easing_mode(this._settings.easingMode);
 
+    // If our state is some child or grandchild state, set the translation based on the
+    // angle and the specified offset.
+    if (visualState != MenuItemState.CENTER &&
+        visualState != MenuItemState.CENTER_HOVERED &&
+        this._state != MenuItemState.PARENT &&
+        this._state != MenuItemState.PARENT_HOVERED) {
+
+      this.set_translation(
+          Math.floor(Math.sin(this.angle) * settings.offset),
+          -Math.floor(Math.cos(this.angle) * settings.offset), 0);
+    }
+
+    // No we compute the background color for the currently visible icon. This will be
+    // propagated as parent color to all children.
     let backgroundColor = settings.fixedColor;
 
     // If the color mode is 'auto', we calculate an average color of the icon.
     if (settings.colorMode == 'auto') {
 
+      // This won't change, so we need to compute it only once.
       if (this._averageIconColor == undefined) {
         const tmp = new Cairo.ImageSurface(Cairo.Format.ARGB32, 24, 24);
         const ctx = new Cairo.Context(tmp);
         utils.paintIcon(ctx, this.icon, 24, 1);
 
-        // We store the average color as a property of the icon it belongs to.
+        // We store the average color as a property of this.
         this._averageIconColor = utils.getAverageIconColor(tmp, 24);
 
         // Explicitly tell Cairo to free the context memory. Is this really necessary?
@@ -400,14 +429,14 @@ class MenuItem extends Clutter.Actor {
         ctx.$dispose();
       }
 
-      // The saturation and the luminance (both in range [0, 1]) can be used to tweak
-      // the resulting saturation and luminance values.
+      // Now we modify this color based on luminance and saturation.
       let [h, l, s] = this._averageIconColor.to_hls();
 
-      // Now we modify this color based on luminance and saturation. First we
-      // increase the base luminance to 0.5 so that we do not create pitch black colors.
+      // First we increase the base luminance to 0.5 so that we do not create pitch black
+      // colors.
       l = 0.5 + l * 0.5;
 
+      // Tweak the luminance based on the settings values.
       const lFac = settings.autoColorLuminance * 2 - 1;
       l          = lFac > 0 ? l * (1 - lFac) + 1 * lFac : l * (lFac + 1);
 
@@ -425,25 +454,9 @@ class MenuItem extends Clutter.Actor {
       backgroundColor = this._parentColor;
     }
 
-
-    this.set_easing_duration(easingDuration);
-    this.set_easing_mode(this._settings.easingMode);
-
-    // If our state is some child or grandchild state, set the translation based on the
-    // angle and the specified offset.
-    if (visualState != MenuItemState.CENTER &&
-        visualState != MenuItemState.CENTER_HOVERED &&
-        this._state != MenuItemState.PARENT &&
-        this._state != MenuItemState.PARENT_HOVERED) {
-
-      this.set_translation(
-          Math.floor(Math.sin(this.angle) * settings.offset),
-          -Math.floor(Math.cos(this.angle) * settings.offset), 0);
-    }
-
-    // If we are in some center- or child-state and have no icon for this state yet,
-    // create a new icon! This will also happen after a settings change, as icons are
-    // deleted to force a re-creation here.
+    // If we are in some center- or child- or grandchild-state and have no icon for this
+    // state yet, create a new icon! This will also happen after a settings change, as
+    // icons are deleted to force a re-creation here.
     if ((visualState == MenuItemState.CENTER ||
          visualState == MenuItemState.CENTER_HOVERED ||
          visualState == MenuItemState.CHILD ||
@@ -452,9 +465,7 @@ class MenuItem extends Clutter.Actor {
          visualState == MenuItemState.GRANDCHILD_HOVERED) &&
         this._iconContainer[visualState] == undefined) {
 
-      // Create and save a reference to the icon.
       let icon;
-
       if (visualState == MenuItemState.CENTER ||
           visualState == MenuItemState.CENTER_HOVERED ||
           visualState == MenuItemState.CHILD ||
@@ -463,33 +474,38 @@ class MenuItem extends Clutter.Actor {
             backgroundColor, settings.size, this.icon, settings.iconScale,
             settings.iconOpacity);
       } else {
+        // Grandchildren have only a circle as icon. Therefore no icon name is passed to
+        // this method.
         icon = this._createIcon(backgroundColor, settings.size);
       }
 
       this._iconContainer[visualState] = icon;
       this._iconContainer.add_child(icon);
 
-      // For the initial icon size and opacity we use _lastSize and _lastIconOpacity
-      // if available. When the settings are modified (especially when a menu is shown
+      // When the settings are modified (especially when a menu is shown
       // in edit mode), the icons are completely reloaded. To make this jitter-free,
-      // _lastSize and _lastIconOpacity contain the corresponding values of the
-      // previously deleted icon.
+      // the _forceRecreation tells us whether we have to load the icon at full opacity.
       icon.set_opacity(this._forceRecreation ? 255 : 0);
       this._forceRecreation = false;
     }
 
-    // Now we update the size, position and opacity of the individual icons.
+    // Now we update the opacity of the individual icons. Only one icon - the one for the
+    // current state - should be visible. There is however, a transition phase were
+    // multiple might be visible at the same time.
     const updateOpacity = (state) => {
       const icon = this._iconContainer[state];
       if (icon != undefined) {
-        // Set easing state.
-        icon.set_easing_duration(easingDuration);
 
-        // Set opacity using linear easing mode.
+        // Set opacity to 255 only for the current state.
         const opacity = visualState == state ? 255 : 0;
+
+        // Use different easing modes when fading out or fading in. If we would use a
+        // linear transition, the opacity of two cross-fading icons would not add up to
+        // 255. If done like this, it's not correct either but looks very good.
         icon.set_easing_mode(
             icon.opacity > opacity ? Clutter.AnimationMode.EASE_IN_QUAD :
                                      Clutter.AnimationMode.EASE_OUT_QUAD);
+        icon.set_easing_duration(easingDuration);
         icon.set_opacity(opacity);
       }
     };
@@ -501,15 +517,15 @@ class MenuItem extends Clutter.Actor {
     updateOpacity(MenuItemState.GRANDCHILD);
     updateOpacity(MenuItemState.GRANDCHILD_HOVERED);
 
+    // Now update the size of the icon container. As there is a layout manager in action,
+    // all icons will update their size accordingly.
     this._iconContainer.set_easing_duration(easingDuration);
     this._iconContainer.set_easing_mode(this._settings.easingMode);
 
-    // Set size and translation.
     const size2 = Math.floor(settings.size / 2);
     this._iconContainer.set_translation(-size2, -size2, 0);
     this._iconContainer.set_size(100, 100);
     this._iconContainer.set_scale(settings.size / 100, settings.size / 100);
-
 
     // Finally call redraw() recursively on all children.
     if (visualState != MenuItemState.INVISIBLE) {
