@@ -408,9 +408,9 @@
       <description>The minimum visualized trace segment length.</description>
     </key>
 
-    <key name="trace-width" type="d">
+    <key name="trace-thickness" type="d">
       <default>8</default>
-      <summary>Trace Width</summary>
+      <summary>Trace Thickness</summary>
       <description>The trace width in pixels.</description>
     </key>
 

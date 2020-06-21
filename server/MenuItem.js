@@ -248,7 +248,7 @@ class MenuItem extends Clutter.Actor {
       easingMode:              settings.get_enum('easing-mode'),
       textColor:               Clutter.Color.from_string(settings.get_string('text-color'))[1],
       font:                    settings.get_string('font'),
-      traceWidth:              settings.get_double('trace-width') * globalScale,
+      traceThickness:          settings.get_double('trace-thickness') * globalScale,
       traceColor:              Clutter.Color.from_string(settings.get_string('trace-color'))[1],
       state: new Map ([
         [MenuItemState.INVISIBLE, {
@@ -340,6 +340,7 @@ class MenuItem extends Clutter.Actor {
     fontDescription.set_size(fontSize * globalScale);
     this._caption.set_font_description(fontDescription);
 
+    // We also re-draw the trace line to the currently active child if there is any.
     if (this._trace != undefined) {
       this._trace.get_content().invalidate();
     }
@@ -539,10 +540,11 @@ class MenuItem extends Clutter.Actor {
     this._iconContainer.set_scale(settings.size / 100, settings.size / 100);
 
 
-
+    // Now update the trace line to the currently active child if we are a PARENT*.
     if (this._state == MenuItemState.PARENT ||
         this._state == MenuItemState.PARENT_HOVERED) {
 
+      // We need to create the _trace actor if it's not there yet.
       if (this._trace == undefined) {
         this._trace = new Clutter.Actor({width: 10});
         this._trace.set_pivot_point(0, 0.5);
@@ -553,11 +555,12 @@ class MenuItem extends Clutter.Actor {
           ctx.paint();
           ctx.setOperator(Cairo.Operator.OVER);
 
+          // Simply draw a line in the middle of the canvas from left to right.
           ctx.setSourceRGBA(
               this._settings.traceColor.red / 255, this._settings.traceColor.green / 255,
               this._settings.traceColor.blue / 255,
               this._settings.traceColor.alpha / 255);
-          ctx.setLineWidth(this._settings.traceWidth);
+          ctx.setLineWidth(this._settings.traceThickness);
           ctx.moveTo(0, height / 2);
           ctx.lineTo(width, height / 2);
           ctx.stroke();
@@ -566,27 +569,35 @@ class MenuItem extends Clutter.Actor {
           ctx.$dispose();
         });
 
-
         this._trace.set_content(canvas);
-
         this.insert_child_below(this._trace, null);
       }
 
+      // First we update the trace's thickness (if the settings changed) and its rotation.
+      // For this we do not want animations.
       this._trace.set_easing_duration(0);
 
-      if (this._trace.get_content().height != this._settings.traceWidth + 2) {
-        this._trace.set_height(this._settings.traceWidth + 2);
+      // Update the trace's thickness (height). We add on pixel padding on each side to
+      // get smooth antialiasing.
+      if (this._trace.get_content().height != this._settings.traceThickness + 2) {
+        this._trace.set_height(this._settings.traceThickness + 2);
         this._trace.set_translation(0, -this._trace.get_height() / 2, 0);
-        this._trace.get_content().set_size(10, this._settings.traceWidth + 2);
+        this._trace.get_content().set_size(10, this._settings.traceThickness + 2);
         this._trace.get_content().invalidate();
       }
 
+      // Then update the direction.
       const child = this._childrenContainer.get_children()[this._activeChildIndex];
       this._trace.rotation_angle_z = child.angle * 180 / Math.PI - 90;
 
+      // Fade-in the trace it it's currently invisible.
       this._trace.set_easing_duration(easingDuration);
       this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
       this._trace.set_opacity(255);
+
+      // Now we calculate the desired length by computing the distance to the currently
+      // active child. As there is most likely a transition in progress which moves the
+      // currently active child somewhere, we access the target value of the transition.
       this._trace.set_easing_mode(this._settings.easingMode);
 
       let translationX = child.translation_x;
@@ -602,15 +613,20 @@ class MenuItem extends Clutter.Actor {
         translationY = transitionY.interval.final;
       }
 
+      // Now set the width to the child's distance.
       this._trace.set_width(
           Math.sqrt(translationX * translationX + translationY * translationY));
 
     } else if (this._trace != undefined) {
+
+      // If we are no PARENT, but have a trace, make it invisible so that we can use it
+      // later again.
       this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
       this._trace.set_opacity(0);
       this._trace.set_easing_mode(this._settings.easingMode);
       this._trace.set_width(0);
     }
+
 
     // Finally call redraw() recursively on all children.
     if (visualState != MenuItemState.INVISIBLE) {
