@@ -29,9 +29,13 @@ const utils = Me.imports.common.utils;
 //         |                                 only one of them is visible at a time.     //
 //         |                                                                            //
 //         |        .--------------------.   This contains a MenuItem for each child    //
-//         '--------| _childrenContainer |   in the menu tree hierarchy. Based on the   //
-//                  '--------------------'   drawChildrenAbove-settings, this could     //
-//                                           also be above the _iconContainer.          //
+//         |--------| _childrenContainer |   in the menu tree hierarchy. Based on the   //
+//         |        '--------------------'   drawChildrenAbove-settings, this could     //
+//         |                                 also be above the _iconContainer.          //
+//         |                                                                            //
+//         |        .--------------------.   This represents the connection line to the //
+//         '--------| _trace             |   active child. It is lazily allocated when  //
+//                  '--------------------'   the state changes to PARENT.               //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -240,10 +244,12 @@ class MenuItem extends Clutter.Actor {
 
     // clang-format off
     this._settings = {
-      easingDuration:          settings.get_double('easing-duration')      * 1000,
+      easingDuration:          settings.get_double('easing-duration') * 1000,
       easingMode:              settings.get_enum('easing-mode'),
       textColor:               Clutter.Color.from_string(settings.get_string('text-color'))[1],
       font:                    settings.get_string('font'),
+      traceWidth:              settings.get_double('trace-width') * globalScale,
+      traceColor:              Clutter.Color.from_string(settings.get_string('trace-color'))[1],
       state: new Map ([
         [MenuItemState.INVISIBLE, {
           colorMode:           '',
@@ -333,6 +339,10 @@ class MenuItem extends Clutter.Actor {
     }
     fontDescription.set_size(fontSize * globalScale);
     this._caption.set_font_description(fontDescription);
+
+    if (this._trace != undefined) {
+      this._trace.get_content().invalidate();
+    }
 
     // Finally, call this recursively for all children.
     this._childrenContainer.get_children().forEach(
@@ -527,6 +537,80 @@ class MenuItem extends Clutter.Actor {
     this._iconContainer.set_translation(-size2, -size2, 0);
     this._iconContainer.set_size(100, 100);
     this._iconContainer.set_scale(settings.size / 100, settings.size / 100);
+
+
+
+    if (this._state == MenuItemState.PARENT ||
+        this._state == MenuItemState.PARENT_HOVERED) {
+
+      if (this._trace == undefined) {
+        this._trace = new Clutter.Actor({width: 10});
+        this._trace.set_pivot_point(0, 0.5);
+
+        const canvas = new Clutter.Canvas();
+        canvas.connect('draw', (canvas, ctx, width, height) => {
+          ctx.setOperator(Cairo.Operator.CLEAR);
+          ctx.paint();
+          ctx.setOperator(Cairo.Operator.OVER);
+
+          ctx.setSourceRGBA(
+              this._settings.traceColor.red / 255, this._settings.traceColor.green / 255,
+              this._settings.traceColor.blue / 255,
+              this._settings.traceColor.alpha / 255);
+          ctx.setLineWidth(this._settings.traceWidth);
+          ctx.moveTo(0, height / 2);
+          ctx.lineTo(width, height / 2);
+          ctx.stroke();
+
+          // Explicitly tell Cairo to free the context memory. Is this really necessary?
+          ctx.$dispose();
+        });
+
+
+        this._trace.set_content(canvas);
+
+        this.insert_child_below(this._trace, null);
+      }
+
+      this._trace.set_easing_duration(0);
+
+      if (this._trace.get_content().height != this._settings.traceWidth + 2) {
+        this._trace.set_height(this._settings.traceWidth + 2);
+        this._trace.set_translation(0, -this._trace.get_height() / 2, 0);
+        this._trace.get_content().set_size(10, this._settings.traceWidth + 2);
+        this._trace.get_content().invalidate();
+      }
+
+      const child = this._childrenContainer.get_children()[this._activeChildIndex];
+      this._trace.rotation_angle_z = child.angle * 180 / Math.PI - 90;
+
+      this._trace.set_easing_duration(easingDuration);
+      this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
+      this._trace.set_opacity(255);
+      this._trace.set_easing_mode(this._settings.easingMode);
+
+      let translationX = child.translation_x;
+      let translationY = child.translation_y;
+
+      const transitionX = child.get_transition('translation-x');
+      if (transitionX) {
+        translationX = transitionX.interval.final;
+      }
+
+      const transitionY = child.get_transition('translation-y');
+      if (transitionY) {
+        translationY = transitionY.interval.final;
+      }
+
+      this._trace.set_width(
+          Math.sqrt(translationX * translationX + translationY * translationY));
+
+    } else if (this._trace != undefined) {
+      this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
+      this._trace.set_opacity(0);
+      this._trace.set_easing_mode(this._settings.easingMode);
+      this._trace.set_width(0);
+    }
 
     // Finally call redraw() recursively on all children.
     if (visualState != MenuItemState.INVISIBLE) {

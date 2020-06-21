@@ -408,6 +408,18 @@
       <description>The minimum visualized trace segment length.</description>
     </key>
 
+    <key name="trace-width" type="d">
+      <default>8</default>
+      <summary>Trace Width</summary>
+      <description>The trace width in pixels.</description>
+    </key>
+
+     <key name="trace-color" type="s">
+      <default>"rgba(200, 200, 200, 0.8)"</default>
+      <summary>Trace Color</summary>
+      <description>The color of the menu's trace.</description>
+    </key>
+
     <!-- Miscellaneous -->
 
     <key name="edit-mode-on-right-side" type="b">

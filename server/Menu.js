@@ -56,7 +56,6 @@ var Menu = class Menu {
       this._selectionWedges.onMotionEvent(event);
     });
 
-
     this._selectionWedges = new SelectionWedges();
     this._background.add_child(this._selectionWedges);
 
@@ -107,8 +106,10 @@ var Menu = class Menu {
           parent.actor.transform_stage_point(absoluteX, absoluteY);
 
       const currentTraceLength = Math.sqrt(relativeX * relativeX + relativeY * relativeY);
-      const idealTraceLength =
-          Math.max(this._settings.get_double('trace-min-length'), currentTraceLength);
+      const idealTraceLength   = Math.max(
+          this._settings.get_double('trace-min-length') *
+              this._settings.get_double('global-scale'),
+          currentTraceLength);
 
       const idealX = Math.floor(Math.sin(child.actor.angle) * idealTraceLength);
       const idealY = -Math.floor(Math.cos(child.actor.angle) * idealTraceLength);
@@ -117,6 +118,7 @@ var Menu = class Menu {
       const requiredOffsetY = relativeY - idealY;
 
       const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
+
       root.actor.translation_x = root.actor.translation_x + requiredOffsetX;
       root.actor.translation_y = root.actor.translation_y + requiredOffsetY;
 
@@ -127,7 +129,10 @@ var Menu = class Menu {
 
       if (child.items.length == 0) {
         this._onSelect(this._menuID, child.id);
+        this._background.set_easing_delay(
+            this._settings.get_double('easing-duration') * 1000);
         this._hide();
+        this._background.set_easing_delay(0);
       }
     });
 
@@ -169,7 +174,6 @@ var Menu = class Menu {
             this._background.transform_stage_point(absoluteX, absoluteY);
         parent.actor.set_translation(relativeX, relativeY, 0);
       }
-
 
       this._structure.actor.redraw();
     });

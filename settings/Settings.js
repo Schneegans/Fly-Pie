@@ -169,6 +169,8 @@ var Settings = class Settings {
 
     // Trace Settings.
     this._bindSlider('trace-min-length');
+    this._bindSlider('trace-width');
+    this._bindColorButton('trace-color');
 
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
