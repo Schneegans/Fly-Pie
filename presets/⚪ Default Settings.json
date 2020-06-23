@@ -1,10 +1,10 @@
 {
-  "easing-duration": 0.2,
+  "easing-duration": 0.25,
   "easing-mode": "ease-out",
   "background-color": "rgba(0,0,0,0.266892)",
   "text-color": "rgb(37,37,37)",
   "font": "Roboto 11",
-  "wedge-width": 508,
+  "wedge-width": 300,
   "wedge-inner-radius": 58,
   "wedge-color": "rgba(0,0,0,0.192568)",
   "wedge-color-hover": "rgba(47,47,47,0.192554)",
@@ -23,6 +23,7 @@
   "center-size": 110,
   "center-size-hover": 90,
   "center-icon-scale": 0.74,
+  "center-icon-scale-hover": 0.7,
   "center-icon-opacity": 0.17,
   "center-icon-opacity-hover": 1,
   "child-color-mode": "auto",
@@ -40,6 +41,7 @@
   "child-offset": 106,
   "child-offset-hover": 113,
   "child-icon-scale": 0.73,
+  "child-icon-scale-hover": 0.9,
   "child-icon-opacity": 1,
   "child-icon-opacity-hover": 1,
   "child-draw-above": true,
@@ -51,5 +53,8 @@
   "grandchild-size-hover": 25,
   "grandchild-offset": 22,
   "grandchild-offset-hover": 32,
-  "grandchild-draw-above": false
+  "grandchild-draw-above": false,
+  "trace-min-length": 200,
+  "trace-thickness": 8,
+  "trace-color": "rgba(200, 200, 200, 0.8)"
 }
