@@ -40,8 +40,10 @@ var SelectionWedges = GObject.registerClass({
   Properties: {},
   Signals: {
     "child-hovered-event":    { param_types: [GObject.TYPE_INT] },
+    "child-pressed-event":    { param_types: [GObject.TYPE_INT] },
     "child-selected-event":   { param_types: [GObject.TYPE_INT] },
     "parent-hovered-event":   {},
+    "parent-pressed-event":   {},
     "parent-selected-event":  {},
     "cancel-selection-event": {},
   }
@@ -282,7 +284,26 @@ class SelectionWedges extends Clutter.Actor {
     }
   }
 
+  onButtonPressEvent(event) {
+    utils.debug('press');
+    if (event.get_button() == 1) {
+      if (this._hoveredWedge >= 0) {
+        if (this._hoveredWedge == this._parentIndex) {
+          this.emit('parent-pressed-event');
+        } else {
+          this.emit(
+              'child-pressed-event',
+              (this._parentIndex >= 0 && this._hoveredWedge > this._parentIndex) ?
+                  this._hoveredWedge - 1 :
+                  this._hoveredWedge);
+        }
+      }
+    }
+  }
+
   onButtonReleaseEvent(event) {
+    utils.debug('release');
+
     if (event.get_button() == 1) {
       if (this._hoveredWedge >= 0) {
         if (this._hoveredWedge == this._parentIndex) {
@@ -350,11 +371,14 @@ class SelectionWedges extends Clutter.Actor {
       this._setFloatUniform('endAngle', hoveredWedgeEndAngle);
       this._hoveredWedge = hoveredWedge;
 
+      const [x, y, mods]       = global.get_pointer();
+      const mouseButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
+
       if (hoveredWedge >= 0 && hoveredWedge == this._parentIndex) {
-        this.emit('parent-hovered-event');
+        this.emit(mouseButtonPressed ? 'parent-pressed-event' : 'parent-hovered-event');
       } else {
         this.emit(
-            'child-hovered-event',
+            mouseButtonPressed ? 'child-pressed-event' : 'child-hovered-event',
             (this._parentIndex >= 0 && hoveredWedge > this._parentIndex) ?
                 hoveredWedge - 1 :
                 hoveredWedge);

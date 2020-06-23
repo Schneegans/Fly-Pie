@@ -60,18 +60,30 @@ var MenuItemState = {
   // This is used for the currently active (hovered) direct child item of the center.
   CHILD_HOVERED: 4,
 
+  CHILD_PRESSED: 5,
+
+  // When the mouse gets pressed above a child, it gets this state. They are drawn in a
+  // similar fashion as hovered children but do not automatically update their position.
+  CHILD_DRAGGED: 6,
+
   // This is used for the children of the children of the center.
-  GRANDCHILD: 5,
+  GRANDCHILD: 7,
 
   // This is used for the children of the currently hovered child of the center.
-  GRANDCHILD_HOVERED: 6,
+  GRANDCHILD_HOVERED: 8,
 
   // This is used for the back-link children. In the menu hierarchy they are the parents
   // but they are drawn in a similar fashion as normal children.
-  PARENT: 7,
+  PARENT: 9,
 
   // Same as above, but currently hovered.
-  PARENT_HOVERED: 8,
+  PARENT_HOVERED: 10,
+
+  // When the mouse gets pressed above a parent, it gets this state. It's drawn in a
+  // similar fashion as hovered children but does not automatically update its position.
+  PARENT_DRAGGED: 11,
+
+  PARENT_PRESSED: 12,
 };
 
 // clang-format off
@@ -141,6 +153,17 @@ class MenuItem extends Clutter.Actor {
     this._caption.set_line_alignment(Pango.Alignment.CENTER);
     this._caption.set_opacity(0);
     this.add_child(this._caption);
+
+    this.connect('allocation-changed', () => {
+      if (this._state == MenuItemState.CENTER ||
+          this._state == MenuItemState.CENTER_HOVERED ||
+          this._state == MenuItemState.CHILD_PRESSED ||
+          this._state == MenuItemState.CHILD_DRAGGED) {
+
+        const parent = this.get_parent().get_parent();
+        utils.debug('update');
+      }
+    });
   }
 
   // This is called by the Menu to add child MenuItems to this MenuItem.
@@ -197,6 +220,8 @@ class MenuItem extends Clutter.Actor {
 
         // All children of hovered children become hovered grandchildren.
         case MenuItemState.CHILD_HOVERED:
+        case MenuItemState.CHILD_PRESSED:
+        case MenuItemState.CHILD_DRAGGED:
           child.setState(MenuItemState.GRANDCHILD_HOVERED, -1);
           break;
 
@@ -209,6 +234,8 @@ class MenuItem extends Clutter.Actor {
 
         // Children of hovered parents are drawn like hovered grandchildren.
         case MenuItemState.PARENT_HOVERED:
+        case MenuItemState.PARENT_PRESSED:
+        case MenuItemState.PARENT_DRAGGED:
           if (index != this._activeChildIndex) {
             child.setState(MenuItemState.GRANDCHILD_HOVERED, -1);
           }
@@ -219,6 +246,10 @@ class MenuItem extends Clutter.Actor {
           child.setState(MenuItemState.INVISIBLE, -1);
       }
     });
+  }
+
+  getState() {
+    return this._state;
   }
 
   // This is called once after construction and then whenever something in the appearance
@@ -356,14 +387,19 @@ class MenuItem extends Clutter.Actor {
   redraw() {
 
     // PARENT items and PARENT_HOVERED items are drawn like CHILD and CHILD_HOVERED items
-    // respectively. Therefore we create a variable for the "visual state" which is the
-    // same as the _state but CHILD and CHILD_HOVERED if _state is PARENT or
-    // PARENT_HOVERED.
+    // respectively; *_DRAGGED items are drawn like CHILD_HOVERED items. Therefore we
+    // create a variable for the "visual state" which is the same as the _state in all
+    // other cases.
     let visualState = this._state;
 
     if (this._state == MenuItemState.PARENT) {
       visualState = MenuItemState.CHILD;
-    } else if (this._state == MenuItemState.PARENT_HOVERED) {
+    } else if (
+        this._state == MenuItemState.CHILD_PRESSED ||
+        this._state == MenuItemState.CHILD_DRAGGED ||
+        this._state == MenuItemState.PARENT_HOVERED ||
+        this._state == MenuItemState.PARENT_PRESSED ||
+        this._state == MenuItemState.PARENT_DRAGGED) {
       visualState = MenuItemState.CHILD_HOVERED;
     }
 
@@ -413,7 +449,11 @@ class MenuItem extends Clutter.Actor {
     if (visualState != MenuItemState.CENTER &&
         visualState != MenuItemState.CENTER_HOVERED &&
         this._state != MenuItemState.PARENT &&
-        this._state != MenuItemState.PARENT_HOVERED) {
+        this._state != MenuItemState.PARENT_HOVERED &&
+        this._state != MenuItemState.PARENT_PRESSED &&
+        this._state != MenuItemState.CHILD_DRAGGED &&
+        this._state != MenuItemState.CHILD_PRESSED &&
+        this._state != MenuItemState.PARENT_DRAGGED) {
 
       this.set_translation(
           Math.floor(Math.sin(this.angle) * settings.offset),
@@ -540,14 +580,31 @@ class MenuItem extends Clutter.Actor {
     this._iconContainer.set_scale(settings.size / 100, settings.size / 100);
 
 
+    this.redrawTrace();
+
+
+    // Finally call redraw() recursively on all children.
+    if (visualState != MenuItemState.INVISIBLE) {
+      this._childrenContainer.get_children().forEach(child => {
+        child.setParentColor(backgroundColor);
+        child.redraw();
+      });
+    }
+  }
+
+  // While implementing this trace segment visualization I ran into several Clutter
+  // issues. Therefore the code below is more complicated than it should be.
+  // * button release not firing when _trace width is set
+  // * trace length not animated to final value
+  redrawTrace() {
     // Now update the trace line to the currently active child if we are a PARENT*.
     if (this._state == MenuItemState.PARENT ||
         this._state == MenuItemState.PARENT_HOVERED) {
 
       // We need to create the _trace actor if it's not there yet.
       if (this._trace == undefined) {
-        this._trace = new Clutter.Actor({width: 10});
-        this._trace.set_pivot_point(0, 0.5);
+        this._traceContainer = new Clutter.Actor();
+        this._trace          = new Clutter.Actor({width: 1});
 
         const canvas = new Clutter.Canvas();
         canvas.connect('draw', (canvas, ctx, width, height) => {
@@ -570,70 +627,55 @@ class MenuItem extends Clutter.Actor {
         });
 
         this._trace.set_content(canvas);
-        this.insert_child_below(this._trace, null);
+        this.insert_child_below(this._traceContainer, null);
+        this._traceContainer.add_child(this._trace);
       }
 
       // First we update the trace's thickness (if the settings changed) and its rotation.
-      // For this we do not want animations.
-      this._trace.set_easing_duration(0);
-
-      // Update the trace's thickness (height). We add on pixel padding on each side to
-      // get smooth antialiasing.
-      if (this._trace.get_content().height != this._settings.traceThickness + 2) {
+      // For this we do not want animations. We add on pixel padding on each side to get
+      // smooth antialiasing.
+      if (this._trace.get_height() != this._settings.traceThickness + 2) {
         this._trace.set_height(this._settings.traceThickness + 2);
         this._trace.set_translation(0, -this._trace.get_height() / 2, 0);
-        this._trace.get_content().set_size(10, this._settings.traceThickness + 2);
-        this._trace.get_content().invalidate();
+        this._trace.get_content().set_size(1, this._settings.traceThickness + 2);
       }
-
-      // Then update the direction.
-      const child = this._childrenContainer.get_children()[this._activeChildIndex];
-      this._trace.rotation_angle_z = child.angle * 180 / Math.PI - 90;
 
       // Fade-in the trace it it's currently invisible.
-      this._trace.set_easing_duration(easingDuration);
-      this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
-      this._trace.set_opacity(255);
+      this._traceContainer.set_easing_duration(this._settings.easingDuration);
+      this._traceContainer.set_easing_mode(Clutter.AnimationMode.LINEAR);
+      this._traceContainer.set_opacity(255);
+      this._traceContainer.set_easing_duration(0);
 
       // Now we calculate the desired length by computing the distance to the currently
-      // active child. As there is most likely a transition in progress which moves the
-      // currently active child somewhere, we access the target value of the transition.
-      this._trace.set_easing_mode(this._settings.easingMode);
-
-      let translationX = child.translation_x;
-      let translationY = child.translation_y;
-
-      const transitionX = child.get_transition('translation-x');
-      if (transitionX) {
-        translationX = transitionX.interval.final;
-      }
-
-      const transitionY = child.get_transition('translation-y');
-      if (transitionY) {
-        translationY = transitionY.interval.final;
-      }
+      // active child.
+      const child = this._childrenContainer.get_children()[this._activeChildIndex];
 
       // Now set the width to the child's distance.
-      this._trace.set_width(
-          Math.sqrt(translationX * translationX + translationY * translationY));
+      this._trace.set_scale(
+          Math.sqrt(
+              child.translation_x * child.translation_x +
+              child.translation_y * child.translation_y),
+          1);
+
+      // Then update the direction.
+      let targetAngle =
+          Math.atan2(child.translation_y, child.translation_x) * 180 / Math.PI;
+      if (targetAngle - this._traceContainer.rotation_angle_z > 180) {
+        targetAngle -= 360;
+      }
+      if (targetAngle - this._traceContainer.rotation_angle_z < -180) {
+        targetAngle += 360;
+      }
+      this._traceContainer.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, targetAngle);
 
     } else if (this._trace != undefined) {
 
       // If we are no PARENT, but have a trace, make it invisible so that we can use it
       // later again.
-      this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
-      this._trace.set_opacity(0);
-      this._trace.set_easing_mode(this._settings.easingMode);
-      this._trace.set_width(0);
-    }
-
-
-    // Finally call redraw() recursively on all children.
-    if (visualState != MenuItemState.INVISIBLE) {
-      this._childrenContainer.get_children().forEach(child => {
-        child.setParentColor(backgroundColor);
-        child.redraw();
-      });
+      this._traceContainer.set_easing_duration(this._settings.easingDuration);
+      this._traceContainer.set_easing_mode(Clutter.AnimationMode.LINEAR);
+      this._traceContainer.set_opacity(0);
+      this._traceContainer.set_easing_duration(0);
     }
   }
 

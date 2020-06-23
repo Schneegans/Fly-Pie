@@ -169,7 +169,7 @@ var Settings = class Settings {
 
     // Trace Settings.
     this._bindSlider('trace-min-length');
-    this._bindSlider('trace-width');
+    this._bindSlider('trace-thickness');
     this._bindColorButton('trace-color');
 
     // This is our top-level widget which we will return later.

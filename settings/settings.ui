@@ -4416,7 +4416,7 @@ will cancel the selection.</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton" id="reset-trace-width">
+                              <object class="GtkButton" id="reset-trace-thickness">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
