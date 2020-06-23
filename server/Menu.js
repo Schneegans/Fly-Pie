@@ -80,8 +80,7 @@ var Menu = class Menu {
         this._draggedChild.set_easing_mode(Clutter.AnimationMode.LINEAR);
         this._draggedChild.set_translation(x, y, 0);
 
-        // parent.redrawTrace();
-        // this._background.queue_redraw();
+        this._background.queue_redraw();
       }
 
       return Clutter.EVENT_STOP;
@@ -122,7 +121,6 @@ var Menu = class Menu {
 
       this._menuSelectionChain.unshift(child);
 
-      this._structure.actor.redraw();
 
 
       const [pointerX, pointerY]   = global.get_pointer();
@@ -168,6 +166,7 @@ var Menu = class Menu {
 
       this._draggedChild = null;
 
+      this._structure.actor.redraw();
 
       if (child.items.length == 0) {
         this._onSelect(this._menuID, child.id);

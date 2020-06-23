@@ -553,7 +553,7 @@ class MenuItem extends Clutter.Actor {
     this._iconContainer.set_scale(settings.size / 100, settings.size / 100);
 
 
-    // this.redrawTrace();
+    this.redrawTrace();
 
 
     // Finally call redraw() recursively on all children.
@@ -615,25 +615,28 @@ class MenuItem extends Clutter.Actor {
       }
 
       // Fade-in the trace it it's currently invisible.
-      this._traceContainer.set_easing_duration(this._settings.easingDuration);
-      this._traceContainer.set_easing_mode(Clutter.AnimationMode.LINEAR);
-      this._traceContainer.set_opacity(255);
-      this._traceContainer.set_easing_duration(0);
+      this._trace.set_easing_duration(this._settings.easingDuration);
+      this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
+      this._trace.set_opacity(255);
+      this._trace.set_easing_mode(this._settings.easingMode);
 
       // Now we calculate the desired length by computing the distance to the currently
       // active child.
       const child = this._childrenContainer.get_children()[this._activeChildIndex];
+      let x       = child.translation_x;
+      let y       = child.translation_y;
+
+      const tx = child.get_transition('translation-x');
+      const ty = child.get_transition('translation-y');
+
+      if (tx) x = tx.interval.final;
+      if (ty) y = ty.interval.final;
 
       // Now set the width to the child's distance.
-      this._trace.set_scale(
-          Math.sqrt(
-              child.translation_x * child.translation_x +
-              child.translation_y * child.translation_y),
-          1);
+      this._trace.set_scale(Math.sqrt(x * x + y * y), 1);
 
       // Then update the direction.
-      let targetAngle =
-          Math.atan2(child.translation_y, child.translation_x) * 180 / Math.PI;
+      let targetAngle = Math.atan2(y, x) * 180 / Math.PI;
       if (targetAngle - this._traceContainer.rotation_angle_z > 180) {
         targetAngle -= 360;
       }
@@ -646,10 +649,11 @@ class MenuItem extends Clutter.Actor {
 
       // If we are no PARENT, but have a trace, make it invisible so that we can use it
       // later again.
-      this._traceContainer.set_easing_duration(this._settings.easingDuration);
-      this._traceContainer.set_easing_mode(Clutter.AnimationMode.LINEAR);
-      this._traceContainer.set_opacity(0);
-      this._traceContainer.set_easing_duration(0);
+      this._trace.set_easing_duration(this._settings.easingDuration);
+      this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
+      this._trace.set_opacity(0);
+      this._trace.set_easing_mode(this._settings.easingMode);
+      this._trace.set_scale(1, 1);
     }
   }
 
