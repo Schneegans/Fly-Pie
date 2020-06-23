@@ -57,6 +57,16 @@ var Menu = class Menu {
     this._background.connect('motion-event', (actor, event) => {
       this._selectionWedges.onMotionEvent(event);
 
+      if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK &&
+          this._draggedChild == null) {
+        const index = this._selectionWedges.getHoveredWedge();
+        if (index >= 0) {
+          const child = this._menuSelectionChain[0].items[index].actor;
+          child.setState(MenuItemState.CHILD_DRAGGED);
+          this._draggedChild = child;
+        }
+      }
+
 
       if (this._draggedChild != null) {
 

@@ -212,6 +212,19 @@ class SelectionWedges extends Clutter.Actor {
     this._setFloatUniform('innerRadius', this._settings.wedgeInnerRadius / outerRadius);
   }
 
+  getHoveredWedge() {
+    if (this._parentIndex < 0) {
+      return this._hoveredWedge;
+    }
+
+    if (this._parentIndex == this._hoveredWedge) {
+      return -1;
+    }
+
+    return (this._hoveredWedge > this._parentIndex) ? this._hoveredWedge - 1 :
+                                                      this._hoveredWedge;
+  }
+
   // Given the angular positions of all child items, this calculates the separator angles.
   // It deletes all previous separator actors and creates new ones accordingly.
   setItemAngles(itemAngles, parentAngle) {
@@ -288,11 +301,7 @@ class SelectionWedges extends Clutter.Actor {
         if (this._hoveredWedge == this._parentIndex) {
           this.emit('parent-selected-event');
         } else {
-          this.emit(
-              'child-selected-event',
-              (this._parentIndex >= 0 && this._hoveredWedge > this._parentIndex) ?
-                  this._hoveredWedge - 1 :
-                  this._hoveredWedge);
+          this.emit('child-selected-event', this.getHoveredWedge());
         }
       }
 
@@ -353,11 +362,7 @@ class SelectionWedges extends Clutter.Actor {
       if (hoveredWedge >= 0 && hoveredWedge == this._parentIndex) {
         this.emit('parent-hovered-event');
       } else {
-        this.emit(
-            'child-hovered-event',
-            (this._parentIndex >= 0 && hoveredWedge > this._parentIndex) ?
-                hoveredWedge - 1 :
-                hoveredWedge);
+        this.emit('child-hovered-event', this.getHoveredWedge());
       }
     }
   }
