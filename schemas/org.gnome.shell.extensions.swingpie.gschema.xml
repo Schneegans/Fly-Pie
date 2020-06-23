@@ -414,11 +414,44 @@
       <description>The trace width in pixels.</description>
     </key>
 
-     <key name="trace-color" type="s">
+    <key name="trace-color" type="s">
       <default>"rgba(200, 200, 200, 0.8)"</default>
       <summary>Trace Color</summary>
       <description>The color of the menu's trace.</description>
     </key>
+
+    <!-- Trail Settings -->
+
+    <key name="trail-start-color" type="s">
+      <default>"rgba(200, 200, 200, 0.8)"</default>
+      <summary>Trail Start Color</summary>
+      <description>The color of the beginning of the pointer trail.</description>
+    </key>
+
+    <key name="trail-end-color" type="s">
+      <default>"rgba(200, 200, 200, 0.8)"</default>
+      <summary>Trail End Color</summary>
+      <description>The color of the end of the pointer trail.</description>
+    </key>
+
+    <key name="trail-length" type="d">
+      <default>1.0</default>
+      <summary>Trail Length</summary>
+      <description>The trail length in seconds.</description>
+    </key>
+
+    <key name="trail-start-thickness" type="d">
+      <default>5.0</default>
+      <summary>Trail Start Thickness</summary>
+      <description>The thickness of the trail's beginning.</description>
+    </key>
+
+    <key name="trail-end-thickness" type="d">
+      <default>0.0</default>
+      <summary>Trail End Thickness</summary>
+      <description>The thickness of the trail's end.</description>
+    </key>
+
 
     <!-- Miscellaneous -->
 

@@ -168,9 +168,18 @@ var Settings = class Settings {
 
 
     // Trace Settings.
+    this._bindColorButton('trace-color');
     this._bindSlider('trace-min-length');
     this._bindSlider('trace-thickness');
-    this._bindColorButton('trace-color');
+
+
+    // Trail Settings.
+    this._bindColorButton('trail-start-color');
+    this._bindColorButton('trail-end-color');
+    this._bindSlider('trail-length');
+    this._bindSlider('trail-start-thickness');
+    this._bindSlider('trail-end-thickness');
+
 
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
@@ -587,6 +596,27 @@ var Settings = class Settings {
       ctx.fill();
 
       ctx.arc(0.9 * size, 0.7 * size, 0.1 * size, 0, 2 * Math.PI);
+      ctx.fill();
+
+      return false;
+    });
+
+    // Draw a little swirl representing a the trail.
+    tabIcon = this._builder.get_object('trail-tab-icon');
+    tabIcon.add_events(tabEvents);
+    tabIcon.connect('draw', (widget, ctx) => {
+      const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+
+      ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
+
+      ctx.scale(size * 0.9, size * 0.9);
+      ctx.moveTo(0.61250, 0.12699);
+      ctx.relCurveTo(0.15724, -0.0858, 0.46915, 0.1412, 0.329695, 0.4861);
+      ctx.relCurveTo(-0.1394, 0.3449, -0.7060, 0.3799, -0.893, 0.0986);
+      ctx.relCurveTo(-0.1252, -0.18799, 0.0788, -0.3887, 0.2565, -0.18114);
+      ctx.relCurveTo(0.2283, 0.26658, 0.5522, 0.13829, 0.5792, -0.0784);
+      ctx.curveTo(0.9153, 0.2044, 0.7232, 0.1277, 0.6125, 0.1270);
       ctx.fill();
 
       return false;
