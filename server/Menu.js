@@ -78,10 +78,11 @@ var Menu = class Menu {
         let ok;
         [ok, x, y] = parent.transform_stage_point(x, y);
 
-        this._draggedChild.set_easing_duration(0);
+        this._draggedChild.set_easing_duration(100);
+        this._draggedChild.set_easing_mode(Clutter.AnimationMode.LINEAR);
         this._draggedChild.set_translation(x, y, 0);
 
-        // parent.redraw();
+        // parent.redrawTrace();
         // this._background.queue_redraw();
       }
 
@@ -106,37 +107,38 @@ var Menu = class Menu {
     });
 
 
-
     this._selectionWedges.connect('child-pressed-event', (o, index) => {
       const parent = this._menuSelectionChain[0];
 
+      if (this._draggedChild) {
+        // this._structure.actor.redraw();
+      }
+
       if (index >= 0) {
-        parent.actor.setState(MenuItemState.PARENT, index);
-
         const child = this._menuSelectionChain[0].items[index];
-        child.actor.setState(MenuItemState.CHILD_PRESSED, index);
-
+        child.actor.setState(MenuItemState.CHILD_PRESSED);
+        parent.actor.setState(MenuItemState.CENTER, index);
         this._draggedChild = child.actor;
-
-        let [x, y] = global.get_pointer();
-        let ok;
-        [ok, x, y] = parent.actor.transform_stage_point(x, y);
-
-        this._draggedChild.set_translation(x, y, 0);
 
       } else {
         parent.actor.setState(MenuItemState.CENTER_HOVERED, -1);
         this._draggedChild = null;
       }
 
-      this._structure.actor.redraw();
+      // parent.actor.redraw();
     });
 
     this._selectionWedges.connect('child-selected-event', (o, index) => {
       const parent = this._menuSelectionChain[0];
+      parent.actor.setState(MenuItemState.PARENT, index);
 
       const child = this._menuSelectionChain[0].items[index];
+      child.actor.setState(MenuItemState.CENTER_HOVERED);
+
       this._menuSelectionChain.unshift(child);
+
+      this._structure.actor.redraw();
+
 
       const [pointerX, pointerY]   = global.get_pointer();
       const [absoluteX, absoluteY] = this._clampToToMonitor(pointerX, pointerY, 10);
@@ -170,17 +172,17 @@ var Menu = class Menu {
 
       const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
 
-      root.actor.translation_x = root.actor.translation_x + requiredOffsetX;
-      root.actor.translation_y = root.actor.translation_y + requiredOffsetY;
+      root.actor.set_translation(
+          root.actor.translation_x + requiredOffsetX,
+          root.actor.translation_y + requiredOffsetY, 0);
 
       child.actor.set_easing_duration(
           this._settings.get_double('easing-duration') * 1000);
+      child.actor.set_easing_mode(this._settings.get_enum('easing-mode'));
       child.actor.set_translation(idealX, idealY, 0);
-      child.actor.setState(MenuItemState.CENTER_HOVERED);
 
       this._draggedChild = null;
 
-      this._structure.actor.redraw();
 
       if (child.items.length == 0) {
         this._onSelect(this._menuID, child.id);
@@ -194,6 +196,13 @@ var Menu = class Menu {
     this._selectionWedges.connect('parent-hovered-event', () => {
       this._menuSelectionChain[0].actor.setState(MenuItemState.CENTER_HOVERED, -1);
       this._menuSelectionChain[1].actor.setState(MenuItemState.PARENT_HOVERED);
+      this._structure.actor.redraw();
+    });
+
+    this._selectionWedges.connect('parent-pressed-event', () => {
+      const parent       = this._menuSelectionChain[0];
+      this._draggedChild = null;
+      parent.actor.setState(MenuItemState.CENTER_HOVERED, -1);
       this._structure.actor.redraw();
     });
 

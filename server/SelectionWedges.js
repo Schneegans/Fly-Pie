@@ -285,7 +285,6 @@ class SelectionWedges extends Clutter.Actor {
   }
 
   onButtonPressEvent(event) {
-    utils.debug('press');
     if (event.get_button() == 1) {
       if (this._hoveredWedge >= 0) {
         if (this._hoveredWedge == this._parentIndex) {
@@ -302,8 +301,6 @@ class SelectionWedges extends Clutter.Actor {
   }
 
   onButtonReleaseEvent(event) {
-    utils.debug('release');
-
     if (event.get_button() == 1) {
       if (this._hoveredWedge >= 0) {
         if (this._hoveredWedge == this._parentIndex) {

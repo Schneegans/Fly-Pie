@@ -153,17 +153,6 @@ class MenuItem extends Clutter.Actor {
     this._caption.set_line_alignment(Pango.Alignment.CENTER);
     this._caption.set_opacity(0);
     this.add_child(this._caption);
-
-    this.connect('allocation-changed', () => {
-      if (this._state == MenuItemState.CENTER ||
-          this._state == MenuItemState.CENTER_HOVERED ||
-          this._state == MenuItemState.CHILD_PRESSED ||
-          this._state == MenuItemState.CHILD_DRAGGED) {
-
-        const parent = this.get_parent().get_parent();
-        utils.debug('update');
-      }
-    });
   }
 
   // This is called by the Menu to add child MenuItems to this MenuItem.
@@ -445,15 +434,13 @@ class MenuItem extends Clutter.Actor {
     this.set_easing_mode(this._settings.easingMode);
 
     // If our state is some child or grandchild state, set the translation based on the
-    // angle and the specified offset.
-    if (visualState != MenuItemState.CENTER &&
-        visualState != MenuItemState.CENTER_HOVERED &&
-        this._state != MenuItemState.PARENT &&
-        this._state != MenuItemState.PARENT_HOVERED &&
-        this._state != MenuItemState.PARENT_PRESSED &&
-        this._state != MenuItemState.CHILD_DRAGGED &&
-        this._state != MenuItemState.CHILD_PRESSED &&
-        this._state != MenuItemState.PARENT_DRAGGED) {
+    // angle and the specified offset. For all other states, the translation is set from
+    // the Menu.
+    if (this._state == MenuItemState.CHILD ||
+        this._state == MenuItemState.CHILD_HOVERED ||
+        this._state == MenuItemState.GRANDCHILD ||
+        this._state == MenuItemState.GRANDCHILD_HOVERED ||
+        this._state == MenuItemState.INVISIBLE) {
 
       this.set_translation(
           Math.floor(Math.sin(this.angle) * settings.offset),
@@ -580,7 +567,7 @@ class MenuItem extends Clutter.Actor {
     this._iconContainer.set_scale(settings.size / 100, settings.size / 100);
 
 
-    this.redrawTrace();
+    // this.redrawTrace();
 
 
     // Finally call redraw() recursively on all children.
@@ -594,7 +581,8 @@ class MenuItem extends Clutter.Actor {
 
   // While implementing this trace segment visualization I ran into several Clutter
   // issues. Therefore the code below is more complicated than it should be.
-  // * button release not firing when _trace width is set
+  // * button release not firing when _trace width is set (or any other
+  // allocation-changing property as it seems)
   // * trace length not animated to final value
   redrawTrace() {
     // Now update the trace line to the currently active child if we are a PARENT*.
