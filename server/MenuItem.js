@@ -60,30 +60,22 @@ var MenuItemState = {
   // This is used for the currently active (hovered) direct child item of the center.
   CHILD_HOVERED: 4,
 
-  CHILD_PRESSED: 5,
-
   // When the mouse gets pressed above a child, it gets this state. They are drawn in a
   // similar fashion as hovered children but do not automatically update their position.
-  CHILD_DRAGGED: 6,
+  CHILD_DRAGGED: 5,
 
   // This is used for the children of the children of the center.
-  GRANDCHILD: 7,
+  GRANDCHILD: 6,
 
   // This is used for the children of the currently hovered child of the center.
-  GRANDCHILD_HOVERED: 8,
+  GRANDCHILD_HOVERED: 7,
 
   // This is used for the back-link children. In the menu hierarchy they are the parents
   // but they are drawn in a similar fashion as normal children.
-  PARENT: 9,
+  PARENT: 8,
 
   // Same as above, but currently hovered.
-  PARENT_HOVERED: 10,
-
-  // When the mouse gets pressed above a parent, it gets this state. It's drawn in a
-  // similar fashion as hovered children but does not automatically update its position.
-  PARENT_DRAGGED: 11,
-
-  PARENT_PRESSED: 12,
+  PARENT_HOVERED: 9,
 };
 
 // clang-format off
@@ -209,7 +201,6 @@ class MenuItem extends Clutter.Actor {
 
         // All children of hovered children become hovered grandchildren.
         case MenuItemState.CHILD_HOVERED:
-        case MenuItemState.CHILD_PRESSED:
         case MenuItemState.CHILD_DRAGGED:
           child.setState(MenuItemState.GRANDCHILD_HOVERED, -1);
           break;
@@ -223,8 +214,6 @@ class MenuItem extends Clutter.Actor {
 
         // Children of hovered parents are drawn like hovered grandchildren.
         case MenuItemState.PARENT_HOVERED:
-        case MenuItemState.PARENT_PRESSED:
-        case MenuItemState.PARENT_DRAGGED:
           if (index != this._activeChildIndex) {
             child.setState(MenuItemState.GRANDCHILD_HOVERED, -1);
           }
@@ -384,11 +373,8 @@ class MenuItem extends Clutter.Actor {
     if (this._state == MenuItemState.PARENT) {
       visualState = MenuItemState.CHILD;
     } else if (
-        this._state == MenuItemState.CHILD_PRESSED ||
         this._state == MenuItemState.CHILD_DRAGGED ||
-        this._state == MenuItemState.PARENT_HOVERED ||
-        this._state == MenuItemState.PARENT_PRESSED ||
-        this._state == MenuItemState.PARENT_DRAGGED) {
+        this._state == MenuItemState.PARENT_HOVERED) {
       visualState = MenuItemState.CHILD_HOVERED;
     }
 

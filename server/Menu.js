@@ -44,14 +44,9 @@ var Menu = class Menu {
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
 
-    this._background.connect('button-press-event', (actor, event) => {
-      this._selectionWedges.onButtonPressEvent(event);
-      return Clutter.EVENT_PROPAGATE;
-    });
-
     this._background.connect('button-release-event', (actor, event) => {
       this._selectionWedges.onButtonReleaseEvent(event);
-      return Clutter.EVENT_PROPAGATE;
+      return Clutter.EVENT_STOP;
     });
 
     this._background.connect('close-event', () => {
@@ -62,15 +57,8 @@ var Menu = class Menu {
     this._background.connect('motion-event', (actor, event) => {
       this._selectionWedges.onMotionEvent(event);
 
+
       if (this._draggedChild != null) {
-
-        if (this._draggedChild.getState() == MenuItemState.CHILD_PRESSED) {
-          this._draggedChild.setState(MenuItemState.CHILD_DRAGGED, -1);
-        }
-
-        if (this._draggedChild.getState() == MenuItemState.PARENT_PRESSED) {
-          this._draggedChild.setState(MenuItemState.PARENT_DRAGGED, -1);
-        }
 
         const parent = this._draggedChild.get_parent().get_parent();
 
@@ -86,7 +74,7 @@ var Menu = class Menu {
         // this._background.queue_redraw();
       }
 
-      return Clutter.EVENT_PROPAGATE;
+      return Clutter.EVENT_STOP;
     });
 
     this._selectionWedges = new SelectionWedges();
@@ -103,29 +91,16 @@ var Menu = class Menu {
         this._menuSelectionChain[1].actor.setState(MenuItemState.PARENT);
       }
 
-      this._structure.actor.redraw();
-    });
-
-
-    this._selectionWedges.connect('child-pressed-event', (o, index) => {
-      const parent = this._menuSelectionChain[0];
-
-      if (this._draggedChild) {
-        // this._structure.actor.redraw();
-      }
-
-      if (index >= 0) {
-        const child = this._menuSelectionChain[0].items[index];
-        child.actor.setState(MenuItemState.CHILD_PRESSED);
-        parent.actor.setState(MenuItemState.CENTER, index);
-        this._draggedChild = child.actor;
-
+      const [x, y, mods] = global.get_pointer();
+      if (mods & Clutter.ModifierType.BUTTON1_MASK && index >= 0) {
+        const child = this._menuSelectionChain[0].items[index].actor;
+        child.setState(MenuItemState.CHILD_DRAGGED);
+        this._draggedChild = child;
       } else {
-        parent.actor.setState(MenuItemState.CENTER_HOVERED, -1);
         this._draggedChild = null;
       }
 
-      // parent.actor.redraw();
+      this._structure.actor.redraw();
     });
 
     this._selectionWedges.connect('child-selected-event', (o, index) => {
@@ -197,13 +172,7 @@ var Menu = class Menu {
       this._menuSelectionChain[0].actor.setState(MenuItemState.CENTER_HOVERED, -1);
       this._menuSelectionChain[1].actor.setState(MenuItemState.PARENT_HOVERED);
       this._structure.actor.redraw();
-    });
-
-    this._selectionWedges.connect('parent-pressed-event', () => {
-      const parent       = this._menuSelectionChain[0];
       this._draggedChild = null;
-      parent.actor.setState(MenuItemState.CENTER_HOVERED, -1);
-      this._structure.actor.redraw();
     });
 
     this._selectionWedges.connect('parent-selected-event', () => {

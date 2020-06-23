@@ -84,7 +84,7 @@ var Client = class Client {
         utils.debug('Test 3!');
       }
     });
-    // this._lastMenu.items.push(MenuFactory.getAppMenuItems());
+    this._lastMenu.items.push(MenuFactory.getAppMenuItems());
     this._lastMenu.items.push(MenuFactory.getUserDirectoriesItems());
     this._lastMenu.items.push(MenuFactory.getRecentItems());
     this._lastMenu.items.push(MenuFactory.getFavoriteItems());
