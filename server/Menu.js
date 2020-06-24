@@ -80,6 +80,7 @@ var Menu = class Menu {
         this._draggedChild.set_easing_mode(Clutter.AnimationMode.LINEAR);
         this._draggedChild.set_translation(x, y, 0);
 
+        parent.drawTrace(x, y);
         this._background.queue_redraw();
       }
 
@@ -125,7 +126,7 @@ var Menu = class Menu {
 
       const [pointerX, pointerY]   = global.get_pointer();
       const [absoluteX, absoluteY] = this._clampToToMonitor(pointerX, pointerY, 10);
-      this._input.warpPointer(absoluteX, absoluteY);
+      // this._input.warpPointer(absoluteX, absoluteY);
 
       if (child.items.length > 0) {
         const itemAngles = [];
@@ -192,7 +193,7 @@ var Menu = class Menu {
 
       const [pointerX, pointerY]   = global.get_pointer();
       const [absoluteX, absoluteY] = this._clampToToMonitor(pointerX, pointerY, 10);
-      this._input.warpPointer(absoluteX, absoluteY);
+      // this._input.warpPointer(absoluteX, absoluteY);
 
       const itemAngles = [];
       parent.items.forEach(item => {

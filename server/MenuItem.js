@@ -34,7 +34,7 @@ const utils = Me.imports.common.utils;
 //         |                                 also be above the _iconContainer.          //
 //         |                                                                            //
 //         |        .--------------------.   This represents the connection line to the //
-//         '--------| _trace             |   active child. It is lazily allocated when  //
+//         '--------| _traceContainer    |   active child. It is lazily allocated when  //
 //                  '--------------------'   the state changes to PARENT.               //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -552,9 +552,23 @@ class MenuItem extends Clutter.Actor {
     this._iconContainer.set_size(100, 100);
     this._iconContainer.set_scale(settings.size / 100, settings.size / 100);
 
+    // Now we calculate the desired length by computing the distance to the currently
+    // active child.
+    if (this._state == MenuItemState.PARENT ||
+        this._state == MenuItemState.PARENT_HOVERED) {
+      const child = this._childrenContainer.get_children()[this._activeChildIndex];
+      let x       = child.translation_x;
+      let y       = child.translation_y;
 
-    this.redrawTrace();
+      const tx = child.get_transition('translation-x');
+      const ty = child.get_transition('translation-y');
 
+      if (tx) x = tx.interval.final;
+      if (ty) y = ty.interval.final;
+      this.drawTrace(x, y);
+    } else {
+      this.hideTrace();
+    }
 
     // Finally call redraw() recursively on all children.
     if (visualState != MenuItemState.INVISIBLE) {
@@ -570,82 +584,69 @@ class MenuItem extends Clutter.Actor {
   // * button release not firing when _trace width is set (or any other
   // allocation-changing property as it seems)
   // * trace length not animated to final value
-  redrawTrace() {
-    // Now update the trace line to the currently active child if we are a PARENT*.
-    if (this._state == MenuItemState.PARENT ||
-        this._state == MenuItemState.PARENT_HOVERED) {
+  drawTrace(x, y) {
 
-      // We need to create the _trace actor if it's not there yet.
-      if (this._trace == undefined) {
-        this._traceContainer = new Clutter.Actor();
-        this._trace          = new Clutter.Actor({width: 1});
+    // We need to create the _trace actor if it's not there yet.
+    if (this._trace == undefined) {
+      this._traceContainer = new Clutter.Actor();
+      this._trace          = new Clutter.Actor({width: 1});
 
-        const canvas = new Clutter.Canvas();
-        canvas.connect('draw', (canvas, ctx, width, height) => {
-          ctx.setOperator(Cairo.Operator.CLEAR);
-          ctx.paint();
-          ctx.setOperator(Cairo.Operator.OVER);
+      const canvas = new Clutter.Canvas();
+      canvas.connect('draw', (canvas, ctx, width, height) => {
+        ctx.setOperator(Cairo.Operator.CLEAR);
+        ctx.paint();
+        ctx.setOperator(Cairo.Operator.OVER);
 
-          // Simply draw a line in the middle of the canvas from left to right.
-          ctx.setSourceRGBA(
-              this._settings.traceColor.red / 255, this._settings.traceColor.green / 255,
-              this._settings.traceColor.blue / 255,
-              this._settings.traceColor.alpha / 255);
-          ctx.setLineWidth(this._settings.traceThickness);
-          ctx.moveTo(0, height / 2);
-          ctx.lineTo(width, height / 2);
-          ctx.stroke();
+        // Simply draw a line in the middle of the canvas from left to right.
+        ctx.setSourceRGBA(
+            this._settings.traceColor.red / 255, this._settings.traceColor.green / 255,
+            this._settings.traceColor.blue / 255, this._settings.traceColor.alpha / 255);
+        ctx.setLineWidth(this._settings.traceThickness);
+        ctx.moveTo(0, height / 2);
+        ctx.lineTo(width, height / 2);
+        ctx.stroke();
 
-          // Explicitly tell Cairo to free the context memory. Is this really necessary?
-          ctx.$dispose();
-        });
+        // Explicitly tell Cairo to free the context memory. Is this really necessary?
+        ctx.$dispose();
+      });
 
-        this._trace.set_content(canvas);
-        this.insert_child_below(this._traceContainer, null);
-        this._traceContainer.add_child(this._trace);
-      }
+      this._trace.set_content(canvas);
+      this.insert_child_below(this._traceContainer, null);
+      this._traceContainer.add_child(this._trace);
+    }
 
-      // First we update the trace's thickness (if the settings changed) and its rotation.
-      // For this we do not want animations. We add on pixel padding on each side to get
-      // smooth antialiasing.
-      if (this._trace.get_height() != this._settings.traceThickness + 2) {
-        this._trace.set_height(this._settings.traceThickness + 2);
-        this._trace.set_translation(0, -this._trace.get_height() / 2, 0);
-        this._trace.get_content().set_size(1, this._settings.traceThickness + 2);
-      }
+    // First we update the trace's thickness (if the settings changed) and its rotation.
+    // For this we do not want animations. We add on pixel padding on each side to get
+    // smooth antialiasing.
+    if (this._trace.get_height() != this._settings.traceThickness + 2) {
+      this._trace.set_height(this._settings.traceThickness + 2);
+      this._trace.set_translation(0, -this._trace.get_height() / 2, 0);
+      this._trace.get_content().set_size(1, this._settings.traceThickness + 2);
+    }
 
-      // Fade-in the trace it it's currently invisible.
-      this._trace.set_easing_duration(this._settings.easingDuration);
-      this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
-      this._trace.set_opacity(255);
-      this._trace.set_easing_mode(this._settings.easingMode);
+    // Fade-in the trace it it's currently invisible.
+    this._trace.set_easing_duration(this._settings.easingDuration);
+    this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
+    this._trace.set_opacity(255);
+    this._trace.set_easing_mode(this._settings.easingMode);
 
-      // Now we calculate the desired length by computing the distance to the currently
-      // active child.
-      const child = this._childrenContainer.get_children()[this._activeChildIndex];
-      let x       = child.translation_x;
-      let y       = child.translation_y;
+    // Now set the width to the child's distance.
+    this._trace.set_scale(Math.sqrt(x * x + y * y), 1);
 
-      const tx = child.get_transition('translation-x');
-      const ty = child.get_transition('translation-y');
+    // Then update the direction.
+    let targetAngle = Math.atan2(y, x) * 180 / Math.PI;
+    if (targetAngle - this._traceContainer.rotation_angle_z > 180) {
+      targetAngle -= 360;
+    }
+    if (targetAngle - this._traceContainer.rotation_angle_z < -180) {
+      targetAngle += 360;
+    }
+    this._traceContainer.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, targetAngle);
+  }
 
-      if (tx) x = tx.interval.final;
-      if (ty) y = ty.interval.final;
+  hideTrace() {
 
-      // Now set the width to the child's distance.
-      this._trace.set_scale(Math.sqrt(x * x + y * y), 1);
-
-      // Then update the direction.
-      let targetAngle = Math.atan2(y, x) * 180 / Math.PI;
-      if (targetAngle - this._traceContainer.rotation_angle_z > 180) {
-        targetAngle -= 360;
-      }
-      if (targetAngle - this._traceContainer.rotation_angle_z < -180) {
-        targetAngle += 360;
-      }
-      this._traceContainer.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, targetAngle);
-
-    } else if (this._trace != undefined) {
+    if (this._trace != undefined) {
 
       // If we are no PARENT, but have a trace, make it invisible so that we can use it
       // later again.

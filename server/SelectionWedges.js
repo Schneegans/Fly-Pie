@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                         = imports.cairo;
-const {Clutter, Cogl, Gio, GObject} = imports.gi;
+const Cairo                                   = imports.cairo;
+const {Clutter, Cogl, Gio, GObject, Graphene} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
@@ -62,6 +62,8 @@ class SelectionWedges extends Clutter.Actor {
     this._hoveredWedge = -1;
 
     this._parentIndex = -1;
+
+    this._stroke = [];
 
     // This is attached as a child to *this* and is responsible for drawing the
     // wedge-gradient. This is done with a Clutter.ShaderEffect as this is much faster
@@ -314,9 +316,8 @@ class SelectionWedges extends Clutter.Actor {
   // wedge. For a wedge to become active, the pointer position must be farther away from
   // the center than defined by the wedge-inner-radius settings key.
   onMotionEvent(event) {
-    let [x, y] = event.get_coords();
-    let ok;
-    [ok, x, y] = this.transform_stage_point(x, y);
+    const [screenX, screenY] = event.get_coords();
+    const [ok, x, y]         = this.transform_stage_point(screenX, screenY);
 
     const distance             = Math.sqrt(x * x + y * y);
     let hoveredWedge           = -1;
@@ -365,6 +366,57 @@ class SelectionWedges extends Clutter.Actor {
         this.emit('child-hovered-event', this.getHoveredWedge());
       }
     }
+
+
+    if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK) {
+
+      const current = new Graphene.Vec2();
+      current.init(x, y);
+      current.time = event.get_time();
+
+      if (this._stroke.length == 0) {
+        this._stroke.push(current);
+
+      } else {
+        const last = this._stroke[this._stroke.length - 1];
+
+        const direction  = current.subtract(last);
+        const length     = direction.length();
+        const sampleDist = 5;
+        const samples    = Math.floor(length / sampleDist);
+        const step       = direction.scale(sampleDist / length);
+
+        for (let i = 0; i < samples; i++) {
+          const sample = this._stroke[this._stroke.length - 1].add(step);
+          sample.time  = event.get_time();
+          this._stroke.push(sample);
+        }
+      }
+
+      if (this._stroke.length >= 2) {
+        const strokeDir = this._getStrokeDirection();
+        if (strokeDir.length() > 0) {
+          const mouseDir = current.subtract(this._stroke[0]).normalize();
+          const angle    = Math.acos(mouseDir.dot(strokeDir.normalize()));
+
+          // utils.debug(angle);
+
+          if (angle > Math.PI / 30) {
+            this._stroke = [];
+            // if (this._hoveredWedge >= 0) {
+            //   if (this._hoveredWedge == this._parentIndex) {
+            //     this.emit('parent-selected-event');
+            //   } else {
+            //     this.emit('child-selected-event', this.getHoveredWedge());
+            //   }
+            // }
+          }
+        }
+      }
+
+    } else {
+      this._stroke = [];
+    }
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -379,5 +431,24 @@ class SelectionWedges extends Clutter.Actor {
       value += 0.0000001;
     }
     this._wedgeShader.set_uniform_value(name, value);
+  }
+
+  _getStrokeDirection() {
+    let x = 0;
+    let y = 0;
+
+    this._stroke.forEach(sample => {
+      x += sample.get_x() / this._stroke.length;
+      y += sample.get_y() / this._stroke.length;
+    });
+
+    const average = new Graphene.Vec2();
+    average.init(x, y);
+
+    if (this._stroke.length > 0) {
+      return average.subtract(this._stroke[0]);
+    }
+
+    return average;
   }
 });
