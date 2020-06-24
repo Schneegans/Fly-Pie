@@ -76,11 +76,10 @@ var Menu = class Menu {
         let ok;
         [ok, x, y] = parent.transform_stage_point(x, y);
 
-        this._draggedChild.set_easing_duration(100);
-        this._draggedChild.set_easing_mode(Clutter.AnimationMode.LINEAR);
+        this._draggedChild.set_easing_duration(0);
         this._draggedChild.set_translation(x, y, 0);
 
-        parent.drawTrace(x, y);
+        parent.drawTrace(x, y, 0, 0);
         this._background.queue_redraw();
       }
 

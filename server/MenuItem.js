@@ -104,7 +104,8 @@ class MenuItem extends Clutter.Actor {
 
     // The state this MenuItem currently is in. This can be changed with setState(). To
     // reflect the new state, a redraw() will be required.
-    this._state = MenuItemState.INVISIBLE;
+    this._state     = MenuItemState.INVISIBLE;
+    this._lastState = MenuItemState.INVISIBLE;
 
     // This will be set to false upon the first call to redraw(). It is used to initialize
     // the MenuItem's appearance without animations.
@@ -170,7 +171,8 @@ class MenuItem extends Clutter.Actor {
 
     // Store the state and the active child's index as members. They will be used during
     // the next call to redraw().
-    this._state = state;
+    this._lastState = this._state;
+    this._state     = state;
 
     if (activeChildIndex != undefined) {
       this._activeChildIndex = activeChildIndex;
@@ -228,6 +230,10 @@ class MenuItem extends Clutter.Actor {
 
   getState() {
     return this._state;
+  }
+
+  getLastState() {
+    return this._lastState;
   }
 
   // This is called once after construction and then whenever something in the appearance
@@ -565,7 +571,12 @@ class MenuItem extends Clutter.Actor {
 
       if (tx) x = tx.interval.final;
       if (ty) y = ty.interval.final;
-      this.drawTrace(x, y);
+      this.drawTrace(
+          x, y,
+          child.getLastState() == MenuItemState.CHILD_DRAGGED ?
+              this._settings.easingDuration :
+              0,
+          this._settings.easingDuration);
     } else {
       this.hideTrace();
     }
@@ -584,7 +595,7 @@ class MenuItem extends Clutter.Actor {
   // * button release not firing when _trace width is set (or any other
   // allocation-changing property as it seems)
   // * trace length not animated to final value
-  drawTrace(x, y) {
+  drawTrace(x, y, rotationEasingDuration, lengthEasingDuration) {
 
     // We need to create the _trace actor if it's not there yet.
     if (this._trace == undefined) {
@@ -628,6 +639,7 @@ class MenuItem extends Clutter.Actor {
     this._trace.set_easing_duration(this._settings.easingDuration);
     this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
     this._trace.set_opacity(255);
+    this._trace.set_easing_duration(lengthEasingDuration);
     this._trace.set_easing_mode(this._settings.easingMode);
 
     // Now set the width to the child's distance.
@@ -641,6 +653,9 @@ class MenuItem extends Clutter.Actor {
     if (targetAngle - this._traceContainer.rotation_angle_z < -180) {
       targetAngle += 360;
     }
+
+    this._traceContainer.set_easing_mode(this._settings.easingMode);
+    this._traceContainer.set_easing_duration(rotationEasingDuration);
     this._traceContainer.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, targetAngle);
   }
 
