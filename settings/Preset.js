@@ -82,11 +82,6 @@ let presetKeys = [
   'trace-min-length',
   'trace-thickness',
   'trace-color',
-  'trail-start-color',
-  'trail-end-color',
-  'trail-length',
-  'trail-start-thickness',
-  'trail-end-thickness'
 ];
 
 var Preset = class Preset {
@@ -227,10 +222,5 @@ var Preset = class Preset {
     setRandomDouble('trace-min-length', 200, 400);
     setRandomDouble('trace-thickness', 2, 20);
     setRandomColor('trace-color');
-    setRandomColor('trail-start-color');
-    setRandomColor('trail-end-color');
-    setRandomDouble('trail-length', 0.5, 2.0);
-    setRandomDouble('trail-start-thickness', 5, 10);
-    setRandomDouble('trail-end-thickness', 0, 5);
   }
 }
