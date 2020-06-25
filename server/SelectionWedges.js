@@ -381,8 +381,6 @@ class SelectionWedges extends Clutter.Actor {
         const strokeDir    = this._stroke.end.subtract(this._stroke.start);
         const strokeLength = strokeDir.length();
 
-
-
         if (strokeLength > this._settings.gestureMinStrokeLength) {
 
           if (this._stroke.pauseTimeout != null) {

@@ -10,12 +10,14 @@
 
 const Gio = imports.gi.Gio;
 
-const Me            = imports.misc.extensionUtils.getCurrentExtension();
-const utils         = Me.imports.common.utils;
-const Timer         = Me.imports.common.Timer.Timer;
-const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
-const KeyBindings   = Me.imports.client.KeyBindings.KeyBindings;
-const MenuFactory   = Me.imports.client.MenuFactory.MenuFactory;
+const Me               = imports.misc.extensionUtils.getCurrentExtension();
+const utils            = Me.imports.common.utils;
+const Timer            = Me.imports.common.Timer.Timer;
+const InputManipulator = Me.imports.common.InputManipulator.InputManipulator;
+const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
+const KeyBindings      = Me.imports.client.KeyBindings.KeyBindings;
+const MenuFactory      = Me.imports.client.MenuFactory.MenuFactory;
+
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -30,6 +32,8 @@ var Client = class Client {
 
   constructor() {
     this._settings = utils.createSettings();
+    this._input    = new InputManipulator();
+
 
     KeyBindings.bindShortcut(this._settings, 'toggle-shortcut', () => this.toggle());
 
@@ -63,19 +67,19 @@ var Client = class Client {
 
     let menu = {icon: 'firefox', name: 'Main Menu', items: []};
     menu.items.push({
-      name: 'Intriguingly looooooooooooooooooooooong caption',
+      name: 'Undo',
       angle: 20,
       icon: '/home/simon/Pictures/Eigene/avatar128.png',
-      activate: function() {
-        utils.debug('Test 2!');
+      activate: () => {
+        this._input.activateAccelerator('<Ctrl>a');
       }
     });
     menu.items.push({
-      name: 'Emoji 🐵 caption! 😆',
+      name: 'Close',
       angle: 90,
-      icon: '🐹',
-      activate: function() {
-        utils.debug('Test 3!');
+      icon: '🔥',
+      activate: () => {
+        this._input.activateAccelerator('<Alt>F4');
       }
     });
     menu.items.push(MenuFactory.getAppMenuItems());

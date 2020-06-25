@@ -13,13 +13,13 @@ const Cairo               = imports.cairo;
 const {Clutter, Gio, Gdk} = imports.gi;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
-const Background       = Me.imports.server.Background.Background;
+const utils            = Me.imports.common.utils;
 const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
-const InputManipulator = Me.imports.server.InputManipulator.InputManipulator;
+const InputManipulator = Me.imports.common.InputManipulator.InputManipulator;
+const Background       = Me.imports.server.Background.Background;
 const MenuItem         = Me.imports.server.MenuItem.MenuItem;
 const SelectionWedges  = Me.imports.server.SelectionWedges.SelectionWedges;
 const MenuItemState    = Me.imports.server.MenuItem.MenuItemState;
-const utils            = Me.imports.common.utils;
 
 var Menu = class Menu {
 
