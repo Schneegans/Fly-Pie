@@ -99,6 +99,8 @@ var MenuItem = GObject.registerClass({
 class MenuItem extends Clutter.Actor {
   // clang-format on
 
+  // ------------------------------------------------------------ constructor / destructor
+
   _init(params = {}) {
     super._init(params);
 
@@ -147,6 +149,8 @@ class MenuItem extends Clutter.Actor {
     this._caption.set_opacity(0);
     this.add_child(this._caption);
   }
+
+  // -------------------------------------------------------------------- public interface
 
   // This is called by the Menu to add child MenuItems to this MenuItem.
   addMenuItem(menuItem) {
@@ -228,10 +232,12 @@ class MenuItem extends Clutter.Actor {
     });
   }
 
+  // Returns the current MenuItemState.
   getState() {
     return this._state;
   }
 
+  // Returns the MenuItemState thiswas in before the last call to setState().
   getLastState() {
     return this._lastState;
   }
@@ -558,26 +564,38 @@ class MenuItem extends Clutter.Actor {
     this._iconContainer.set_size(100, 100);
     this._iconContainer.set_scale(settings.size / 100, settings.size / 100);
 
-    // Now we calculate the desired length by computing the distance to the currently
-    // active child.
+    // Now we update the trace line to the active child if we are in a parent state.
     if (this._state == MenuItemState.PARENT ||
         this._state == MenuItemState.PARENT_HOVERED) {
+
+      // Get the position of the currently active child.
       const child = this._childrenContainer.get_children()[this._activeChildIndex];
       let x       = child.translation_x;
       let y       = child.translation_y;
 
+      // There might be a transition in progress, so we rather grab the final values of
+      // them.
       const tx = child.get_transition('translation-x');
       const ty = child.get_transition('translation-y');
-
       if (tx) x = tx.interval.final;
       if (ty) y = ty.interval.final;
-      this.drawTrace(
-          x, y,
-          child.getLastState() == MenuItemState.CHILD_DRAGGED ?
-              this._settings.easingDuration :
-              0,
-          this._settings.easingDuration);
+
+      // If the active child was dragged around, the rotation of the trace is already more
+      // or less correct, so we can use a transition. Else the trace actor will be
+      // pointing into a completely different direction, hence we should use no
+      // transition.
+      let rotationEasingDuration = this._settings.easingDuration;
+      if (child.getLastState() != MenuItemState.CHILD_DRAGGED) rotationEasingDuration = 0;
+
+      // The length of the trace should always be transitioned.
+      const lengthEasingDuration = this._settings.easingDuration;
+
+      // Finally update the trace actor.
+      this.drawTrace(x, y, rotationEasingDuration, lengthEasingDuration);
+
     } else {
+
+      // We are no parent (anymore) so we should hide the trace.
       this.hideTrace();
     }
 
@@ -592,9 +610,11 @@ class MenuItem extends Clutter.Actor {
 
   // While implementing this trace segment visualization I ran into several Clutter
   // issues. Therefore the code below is more complicated than it should be.
-  // * button release not firing when _trace width is set (or any other
-  // allocation-changing property as it seems)
-  // * trace length not animated to final value
+  // The most annoying was that button release events are somehow not fired when during
+  // a shortly preceding motion event the width of the _trace was changed (or any other
+  // allocation-changing property as it seems). To circumvent this, I used a container
+  // actor which is used for rotating the actor only. The width of the _trace is then
+  // adjusted by scaling it along the x-axis.
   drawTrace(x, y, rotationEasingDuration, lengthEasingDuration) {
 
     // We need to create the _trace actor if it's not there yet.
@@ -626,9 +646,8 @@ class MenuItem extends Clutter.Actor {
       this._traceContainer.add_child(this._trace);
     }
 
-    // First we update the trace's thickness (if the settings changed) and its rotation.
-    // For this we do not want animations. We add on pixel padding on each side to get
-    // smooth antialiasing.
+    // First we update the trace's thickness (if the settings changed). We add on pixel
+    // padding on each side to get smooth antialiasing.
     if (this._trace.get_height() != this._settings.traceThickness + 2) {
       this._trace.set_height(this._settings.traceThickness + 2);
       this._trace.set_translation(0, -this._trace.get_height() / 2, 0);
@@ -659,12 +678,9 @@ class MenuItem extends Clutter.Actor {
     this._traceContainer.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, targetAngle);
   }
 
+  // This makes the trace (if there is one) invisible so that we can use it later again.
   hideTrace() {
-
     if (this._trace != undefined) {
-
-      // If we are no PARENT, but have a trace, make it invisible so that we can use it
-      // later again.
       this._trace.set_easing_duration(this._settings.easingDuration);
       this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
       this._trace.set_opacity(0);
@@ -672,6 +688,8 @@ class MenuItem extends Clutter.Actor {
       this._trace.set_scale(1, 1);
     }
   }
+
+  // ----------------------------------------------------------------------- private stuff
 
   // This creates a Clutter.Actor with an attached Clutter.Canvas containing an image of
   // this MenuItem's icon.

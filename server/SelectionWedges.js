@@ -17,10 +17,14 @@ const utils = Me.imports.common.utils;
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class is instantiated once by the Menu and is responsible for drawing the       //
 // wedges behind the currently active menu. The wedge beneath the mouse pointer is      //
-// highlighted.                                                                         //
-// Originally I tried to implement this with a huge Clutter.Canvas, but this turned out //
-// to be much to slow. Then I tried to override vfunc_paint(paintContext) of the actor, //
-// but I failed to create a shader program in GJS.                                      //
+// highlighted. Signals such as "child-hovered-event" or "parent-selected-event" are    //
+// fired once the user clicks inside one of the wedges.                                 //
+// This class also tracks the mouse movement and registers stroke direction changes for //
+// the marking mode.                                                                    //
+//                                                                                      //
+// Originally I tried to implement the wedge-drawing with a huge Clutter.Canvas, but    //
+// this turned out to be much to slow. Then I tried to override vfunc_paint() of the    //
+// actor, but I failed to create a shader program in GJS.                               //
 //  * There are some deprecated Cogl.create_*() methods but they return undefined.      //
 //  * The new CoglSnippet API of Cogl 2.0+ is not yet available as it seems.            //
 // I still believe that this approach would be better than the Clutter.ShaderEffect I   //
@@ -39,10 +43,23 @@ const utils = Me.imports.common.utils;
 var SelectionWedges = GObject.registerClass({
   Properties: {},
   Signals: {
+    // This is fired when the mouse pointer enters one of the wedges. The index of the
+    // corresponding child is passed in as parameter. If no wedge is hovered anymore
+    // (e.g. the center element is hovered) -1 will be passed in.
     "child-hovered-event":    { param_types: [GObject.TYPE_INT] },
+
+    // This is fired when the primary mouse button is pressed inside a wedge. It will also
+    // be fired if a gesture was detected (either a corner or a timeout).
     "child-selected-event":   { param_types: [GObject.TYPE_INT] },
+
+    // Same as "child-hovered-event", but for the parent wedge.
     "parent-hovered-event":   {},
+
+    // Same as "child-selected-event", but for the parent wedge.
     "parent-selected-event":  {},
+
+    // This is fired if secondary mouse button is pressed. In future there might be ofter
+    // reasons for this to get fired.
     "cancel-selection-event": {},
   }
 },
@@ -61,13 +78,19 @@ class SelectionWedges extends Clutter.Actor {
     // This is the index of the currently hovered wedge.
     this._hoveredWedge = -1;
 
+    // This is the index of the parent wedge.
     this._parentIndex = -1;
 
-    this._stroke = {start: null, end: null, pauseTimeout: null};
+    // This stores information required for gesture detection.
+    this._stroke = {
+      start: null,         // The point where the mouse stroke began.
+      end: null,           // The current end point of the stroke.
+      pauseTimeout: null,  // A timeout ID which is used for stroke pause detection.
+    };
 
     // This is attached as a child to *this* and is responsible for drawing the
-    // wedge-gradient. This is done with a Clutter.ShaderEffect as this is much faster
-    // than a Clutter.Canvas.
+    // wedge radial gradient. This is done with a Clutter.ShaderEffect as this is much
+    // faster than a Clutter.Canvas.
     this._wedgeActor  = new Clutter.Actor();
     this._wedgeShader = new Clutter.ShaderEffect({
       shader_type: Clutter.ShaderType.FRAGMENT_SHADER,
@@ -218,8 +241,10 @@ class SelectionWedges extends Clutter.Actor {
     this._setFloatUniform('innerRadius', this._settings.wedgeInnerRadius / outerRadius);
   }
 
-  getHoveredWedge() {
-    if (this._parentIndex < 0) {
+  // Returns the currently hovered child's index. Returns -1 if either no wedge or the
+  // parent wedge is currently hovered.
+  getHoveredChild() {
+    if (this._hoveredWedge < 0 || this._parentIndex < 0) {
       return this._hoveredWedge;
     }
 
@@ -227,12 +252,18 @@ class SelectionWedges extends Clutter.Actor {
       return -1;
     }
 
+    // There is a parent wedge - we have to decrease all indices after the parent wedge by
+    // one.
     return (this._hoveredWedge > this._parentIndex) ? this._hoveredWedge - 1 :
                                                       this._hoveredWedge;
   }
 
   // Given the angular positions of all child items, this calculates the separator angles.
-  // It deletes all previous separator actors and creates new ones accordingly.
+  // It deletes all previous separator actors and creates new ones accordingly. The
+  // itemAngles array should be sorted, but the smallest value has not to be at the start.
+  // That means, the smallest value can be somewhere in the list, all following angles
+  // should be monotonically increasing continuing at the start of the list (in a
+  // ring-like fashion).
   setItemAngles(itemAngles, parentAngle) {
 
     this._hoveredWedge = -1;
@@ -241,16 +272,19 @@ class SelectionWedges extends Clutter.Actor {
     this._setFloatUniform('startAngle', 0);
     this._setFloatUniform('endAngle', 0);
 
+    // If a parentAngle is given, we have to insert it into the list. Due to the ring-like
+    // sorting of the itemAngles, this is surprisingly involved.
     if (parentAngle != undefined) {
       for (let i = 0; i <= itemAngles.length; i++) {
         let doInsertion = false;
 
+        // Insert it definitely if we reached the end of the list.
         if (i == itemAngles.length) doInsertion = true;
 
         if (i > 0) {
-
-          if (itemAngles[i - 1] < parentAngle && parentAngle < itemAngles[i])
+          if (itemAngles[i - 1] < parentAngle && parentAngle < itemAngles[i]) {
             doInsertion = true;
+          }
 
           if (itemAngles[i - 1] > itemAngles[i]) {
             if (parentAngle < itemAngles[i]) doInsertion = true;
@@ -258,6 +292,7 @@ class SelectionWedges extends Clutter.Actor {
           }
         }
 
+        // We found the index to insert it.
         if (doInsertion) {
           this._parentIndex = i;
           itemAngles.splice(i, 0, parentAngle);
@@ -266,7 +301,8 @@ class SelectionWedges extends Clutter.Actor {
       }
     }
 
-    // Destroy obsolete actors.
+    // Destroy obsolete actors. We could re-use existing ones, but they seem to be quite
+    // cheap to construct.
     this._separatorAngles = [];
     this._separators.destroy_all_children();
 
@@ -301,6 +337,9 @@ class SelectionWedges extends Clutter.Actor {
     }
   }
 
+  // This is called by the Menu when the user clicks somewhere on the background. It fires
+  // either 'parent-selected-event' or 'child-selected-event' if the corresponding wedge
+  // is hovered or 'cancel-selection-event' if the secondary mouse button is pressed.
   onButtonReleaseEvent(event) {
     if (event.get_button() == 1) {
       this._emitSelection();
@@ -313,6 +352,10 @@ class SelectionWedges extends Clutter.Actor {
   // Given the relative pointer position, this calculates the currently active child
   // wedge. For a wedge to become active, the pointer position must be farther away from
   // the center than defined by the wedge-inner-radius settings key.
+  // It emits the 'parent-hovered-event' and 'child-hovered-event' signals when the
+  // hovered wedge changes.
+  // It also tracks the motion of the mouse while the left mouse button is pressed and
+  // emits selection events when a stroke corner or a pause in the motion is detected.
   onMotionEvent(event) {
     const [screenX, screenY] = event.get_coords();
     const [ok, x, y]         = this.transform_stage_point(screenX, screenY);
@@ -322,7 +365,7 @@ class SelectionWedges extends Clutter.Actor {
     let hoveredWedgeStartAngle = 0;
     let hoveredWedgeEndAngle   = 0;
 
-    // Nothing is hovered if the pointer is inside the inner circle.
+    // There is only something hovered if the pointer is outside the inner circle.
     if (distance > this._settings.wedgeInnerRadius) {
       let angle = Math.acos(x / distance) * 180 / Math.PI;
       if (y < 0) {
@@ -361,56 +404,94 @@ class SelectionWedges extends Clutter.Actor {
       if (hoveredWedge >= 0 && hoveredWedge == this._parentIndex) {
         this.emit('parent-hovered-event');
       } else {
-        this.emit('child-hovered-event', this.getHoveredWedge());
+        this.emit('child-hovered-event', this.getHoveredChild());
       }
     }
 
-    const current = new Graphene.Vec2();
-    current.init(screenX, screenY);
-
+    // Now we try to detect gestures. Consider the diagram below:
+    //
+    //                                  M
+    //                                .
+    //                              .
+    //     S -------------------- E
+    //
+    // The mouse button was pressed at S (_stroke.start) and the moved to E (_stroke.end).
+    // When the next motion event comes in (M) and the left button is still pressed, we
+    // compare the directions of S->E with E->M. If they differ significantly, this is
+    // considered a corner. There are some minimum lengths for both vectors - if they are
+    // not long enough, nothing is done. If E->M is long enough, but there is no corner, E
+    // is set to M and we wait for the next motion event.
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK) {
 
+      // Storethe current mouse position.
+      const mouse = new Graphene.Vec2();
+      mouse.init(screenX, screenY);
+
       if (this._stroke.start == null) {
+
+        // It's the first event of this gesture, so we store the current mouse position as
+        // start and end. There is nothing more to be done.
         this._stroke.start = new Graphene.Vec2();
-        this._stroke.start.init_from_vec2(current);
+        this._stroke.start.init_from_vec2(mouse);
 
         this._stroke.end = new Graphene.Vec2();
-        this._stroke.end.init_from_vec2(current);
+        this._stroke.end.init_from_vec2(mouse);
 
       } else {
+
+        // Calculate the vector S->E in the diagram above.
         const strokeDir    = this._stroke.end.subtract(this._stroke.start);
         const strokeLength = strokeDir.length();
 
         if (strokeLength > this._settings.gestureMinStrokeLength) {
 
-          if (this._stroke.pauseTimeout != null) {
-            GLib.source_remove(this._stroke.pauseTimeout);
+          // The stroke is long enough to become a gesture. We register a timer to detect
+          // pause-events where the pointer was stationary for some time. These events
+          // also lead to selections.
+          if (this._stroke.pauseTimeout == null) {
+            this._stroke.pauseTimeout = GLib.timeout_add(
+                GLib.PRIORITY_DEFAULT, this._settings.gestureSelectionTimeout, () => {
+                  this._emitSelection();
+                  return false;
+                });
           }
 
-          this._stroke.pauseTimeout = GLib.timeout_add(
-              GLib.PRIORITY_DEFAULT, this._settings.gestureSelectionTimeout, () => {
-                this._emitSelection();
-                return false;
-              });
+          // Calculate the vector E->M in the diagram above.
+          const tipDir    = mouse.subtract(this._stroke.end);
+          const tipLength = tipDir.length();
 
+          if (tipLength > this._settings.gestureJitterThreshold) {
 
-          const currentDir    = current.subtract(this._stroke.end);
-          const currentLength = currentDir.length();
+            // If the tip vector is long enough, the pointer was not stationary. Remove
+            // the timer again.
+            if (this._stroke.pauseTimeout != null) {
+              GLib.source_remove(this._stroke.pauseTimeout);
+              this._stroke.pauseTimeout = null;
+            }
 
-          if (currentLength > this._settings.gestureJitterThreshold) {
-            this._stroke.end.init_from_vec2(current);
-            const angle = Math.acos(currentDir.scale(1 / currentLength)
-                                        .dot(strokeDir.scale(1 / strokeLength)));
+            // Update the point M in the diagram above to be the new E for the next motion
+            // event.
+            this._stroke.end.init_from_vec2(mouse);
 
+            // Now compute the angle between S->E and E->M.
+            const angle = Math.acos(
+                tipDir.scale(1 / tipLength).dot(strokeDir.scale(1 / strokeLength)));
+
+            //  Emit the selection events if it exceeds the configured threshold.
             if (angle * 180 / Math.PI > this._settings.gestureMinStrokeAngle) {
               this._emitSelection();
             }
           }
         } else {
-          this._stroke.end.init_from_vec2(current);
+
+          // The vector S->E is not long enough to be a gesture, so we only update the end
+          // point.
+          this._stroke.end.init_from_vec2(mouse);
         }
       }
     } else {
+
+      // The mouse button is not pressed anymore, so we can abort gesture detection.
       this._resetStroke();
     }
   }
@@ -429,6 +510,9 @@ class SelectionWedges extends Clutter.Actor {
     this._wedgeShader.set_uniform_value(name, value);
   }
 
+  // Small helper method which either emits 'parent-selected-event' or
+  // 'child-selected-event' depending on the currently hovered wedge. It also resets the
+  // current gesture detection.
   _emitSelection() {
     this._resetStroke();
 
@@ -436,11 +520,13 @@ class SelectionWedges extends Clutter.Actor {
       if (this._hoveredWedge == this._parentIndex) {
         this.emit('parent-selected-event');
       } else {
-        this.emit('child-selected-event', this.getHoveredWedge());
+        this.emit('child-selected-event', this.getHoveredChild());
       }
     }
   }
 
+  // Resets the current gesture detection. This is done when an item was selected or the
+  // mouse pointer released.
   _resetStroke() {
     if (this._stroke.pauseTimeout != null) {
       GLib.source_remove(this._stroke.pauseTimeout);
@@ -449,16 +535,5 @@ class SelectionWedges extends Clutter.Actor {
 
     this._stroke.start = null;
     this._stroke.end   = null;
-  }
-
-  _spawnDebugParticle(x, y, size, color) {
-    const particle = new Clutter.Actor(
-        {x: x, y: y, width: size, height: size, background_color: color});
-
-    this.get_parent().add_child(particle);
-
-    particle.set_easing_duration(10000);
-    particle.set_opacity(0);
-    particle.connect('transitions-completed', () => particle.destroy());
   }
 });

@@ -59,7 +59,7 @@ var Menu = class Menu {
 
       if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK &&
           this._draggedChild == null) {
-        const index = this._selectionWedges.getHoveredWedge();
+        const index = this._selectionWedges.getHoveredChild();
         if (index >= 0) {
           const child = this._menuSelectionChain[0].items[index].actor;
           child.setState(MenuItemState.CHILD_DRAGGED);

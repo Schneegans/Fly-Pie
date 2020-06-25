@@ -4654,105 +4654,6 @@ will cancel the selection.</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Selection Timeout</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">If your pointer is stationary for this many milliseconds, 
-the current item will be selected.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="adjustment">gesture-selection-timeout</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">0</property>
-                                <property name="digits">0</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-gesture-selection-timeout">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <property name="valign">center</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="top_attach">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">1</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">3</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
                                     <property name="label" translatable="yes">Minimum Stroke Angle</property>
                                   </object>
                                   <packing>
@@ -4778,7 +4679,54 @@ the current item will be selected.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">6</property>
+                                <property name="top_attach">9</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkScale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="adjustment">gesture-min-stroke-angle</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">1</property>
+                                <property name="value_pos">left</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">9</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-gesture-min-stroke-angle">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <property name="valign">center</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="top_attach">9</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">8</property>
+                                <property name="width">3</property>
                               </packing>
                             </child>
                             <child>
@@ -4818,34 +4766,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">5</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="adjustment">gesture-min-stroke-angle</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">1</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">6</property>
+                                <property name="top_attach">7</property>
                               </packing>
                             </child>
                             <child>
@@ -4862,27 +4783,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-gesture-min-stroke-angle">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <property name="valign">center</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="top_attach">6</property>
+                                <property name="top_attach">7</property>
                               </packing>
                             </child>
                             <child>
@@ -4902,7 +4803,18 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
-                                <property name="top_attach">4</property>
+                                <property name="top_attach">7</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">6</property>
+                                <property name="width">3</property>
                               </packing>
                             </child>
                             <child>
@@ -4942,7 +4854,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">2</property>
+                                <property name="top_attach">5</property>
                               </packing>
                             </child>
                             <child>
@@ -4958,7 +4870,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="top_attach">2</property>
+                                <property name="top_attach">5</property>
                               </packing>
                             </child>
                             <child>
@@ -4978,7 +4890,142 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
+                                <property name="top_attach">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">4</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_right">20</property>
+                                <property name="row_spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Selection Timeout</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">If your pointer is stationary for this many milliseconds, 
+the current item will be selected.</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkScale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="adjustment">gesture-selection-timeout</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">0</property>
+                                <property name="digits">0</property>
+                                <property name="value_pos">left</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-gesture-selection-timeout">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <property name="valign">center</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
                                 <property name="top_attach">2</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_top">5</property>
+                                <property name="margin_bottom">10</property>
+                                <property name="label" translatable="yes">Use the settings below to fine-tune the Marking Mode of Swing-Pie. 
+These are advanced settings; the default values should work well in most cases.</property>
+                                <property name="justify">center</property>
+                                <property name="wrap">True</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">1</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="label" translatable="yes">Gesture Settings</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                                <property name="width">3</property>
                               </packing>
                             </child>
                           </object>
@@ -4993,41 +5040,7 @@ This is multiplied by the Global Scale value.</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="label" translatable="yes">Gesture Settings</property>
-                <attributes>
-                  <attribute name="weight" value="bold"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">10</property>
-                <property name="label" translatable="yes">Use the settings below to fine-tune the Marking Mode of Swing-Pie. 
-These are advanced settings; the default values should work well in most cases.</property>
-                <property name="wrap">True</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
               </packing>
             </child>
           </object>
