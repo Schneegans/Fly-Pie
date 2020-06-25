@@ -61,14 +61,8 @@ var Client = class Client {
       return;
     }
 
-    // We already have a pending request.
-    if (this._lastID >= 0) {
-      utils.debug('A menu is already opened.');
-      return;
-    }
-
-    this._lastMenu = {icon: 'firefox', name: 'Main Menu', items: []};
-    this._lastMenu.items.push({
+    let menu = {icon: 'firefox', name: 'Main Menu', items: []};
+    menu.items.push({
       name: 'Intriguingly looooooooooooooooooooooong caption',
       angle: 20,
       icon: '/home/simon/Pictures/Eigene/avatar128.png',
@@ -76,7 +70,7 @@ var Client = class Client {
         utils.debug('Test 2!');
       }
     });
-    this._lastMenu.items.push({
+    menu.items.push({
       name: 'Emoji 🐵 caption! 😆',
       angle: 90,
       icon: '🐹',
@@ -84,20 +78,21 @@ var Client = class Client {
         utils.debug('Test 3!');
       }
     });
-    this._lastMenu.items.push(MenuFactory.getAppMenuItems());
-    this._lastMenu.items.push(MenuFactory.getUserDirectoriesItems());
-    this._lastMenu.items.push(MenuFactory.getRecentItems());
-    this._lastMenu.items.push(MenuFactory.getFavoriteItems());
-    this._lastMenu.items.push(MenuFactory.getFrequentItems());
-    this._lastMenu.items.push(MenuFactory.getRunningAppsItems());
+    menu.items.push(MenuFactory.getAppMenuItems());
+    menu.items.push(MenuFactory.getUserDirectoriesItems());
+    menu.items.push(MenuFactory.getRecentItems());
+    menu.items.push(MenuFactory.getFavoriteItems());
+    menu.items.push(MenuFactory.getFrequentItems());
+    menu.items.push(MenuFactory.getRunningAppsItems());
 
     try {
       // Open the menu on the server side. Once this is done successfully, we store the
       // returned menu ID.
-      this._dbus.ShowMenuRemote(JSON.stringify(this._lastMenu), (id) => {
+      this._dbus.ShowMenuRemote(JSON.stringify(menu), (id) => {
         if (id) {
           if (id >= 0) {
-            this._lastID = id;
+            this._lastID   = id;
+            this._lastMenu = menu;
             utils.debug('Opened menu ' + this._lastID);
           } else {
             Main.notifyError('Failed to open a Swing-Pie menu!');

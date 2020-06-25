@@ -172,6 +172,12 @@ var Settings = class Settings {
     this._bindSlider('trace-min-length');
     this._bindSlider('trace-thickness');
 
+    // Behavior Settings
+    this._bindSlider('gesture-selection-timeout');
+    this._bindSlider('gesture-jitter-threshold');
+    this._bindSlider('gesture-min-stroke-length');
+    this._bindSlider('gesture-min-stroke-angle');
+
 
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');

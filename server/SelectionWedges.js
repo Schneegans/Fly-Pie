@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                                   = imports.cairo;
-const {Clutter, Cogl, Gio, GObject, Graphene} = imports.gi;
+const Cairo                                         = imports.cairo;
+const {Clutter, Cogl, Gio, GObject, Graphene, GLib} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
@@ -63,7 +63,7 @@ class SelectionWedges extends Clutter.Actor {
 
     this._parentIndex = -1;
 
-    this._stroke = [];
+    this._stroke = {start: null, end: null, pauseTimeout: null};
 
     // This is attached as a child to *this* and is responsible for drawing the
     // wedge-gradient. This is done with a Clutter.ShaderEffect as this is much faster
@@ -172,12 +172,16 @@ class SelectionWedges extends Clutter.Actor {
 
     // clang-format off
     this._settings = {
-      wedgeWidth:          settings.get_double('wedge-width')          * globalScale,
-      wedgeInnerRadius:    settings.get_double('wedge-inner-radius')   * globalScale,
-      wedgeColor:          utils.stringToRGBA(settings.get_string('wedge-color')),
-      wedgeColorHover:     utils.stringToRGBA(settings.get_string('wedge-color-hover')),
-      wedgeSeparatorColor: utils.stringToRGBA(settings.get_string('wedge-separator-color')),
-      wedgeSeparatorWidth: settings.get_double('wedge-separator-width') * globalScale,
+      wedgeWidth:              settings.get_double('wedge-width')          * globalScale,
+      wedgeInnerRadius:        settings.get_double('wedge-inner-radius')   * globalScale,
+      wedgeColor:              utils.stringToRGBA(settings.get_string('wedge-color')),
+      wedgeColorHover:         utils.stringToRGBA(settings.get_string('wedge-color-hover')),
+      wedgeSeparatorColor:     utils.stringToRGBA(settings.get_string('wedge-separator-color')),
+      wedgeSeparatorWidth:     settings.get_double('wedge-separator-width') * globalScale,
+      gestureSelectionTimeout: settings.get_double('gesture-selection-timeout'),
+      gestureJitterThreshold:  settings.get_double('gesture-jitter-threshold')  * globalScale,
+      gestureMinStrokeLength:  settings.get_double('gesture-min-stroke-length') * globalScale,
+      gestureMinStrokeAngle:   settings.get_double('gesture-min-stroke-angle'),
     };
     // clang-format on
 
@@ -299,13 +303,7 @@ class SelectionWedges extends Clutter.Actor {
 
   onButtonReleaseEvent(event) {
     if (event.get_button() == 1) {
-      if (this._hoveredWedge >= 0) {
-        if (this._hoveredWedge == this._parentIndex) {
-          this.emit('parent-selected-event');
-        } else {
-          this.emit('child-selected-event', this.getHoveredWedge());
-        }
-      }
+      this._emitSelection();
 
     } else if (event.get_button() == 3) {
       this.emit('cancel-selection-event');
@@ -367,55 +365,55 @@ class SelectionWedges extends Clutter.Actor {
       }
     }
 
+    const current = new Graphene.Vec2();
+    current.init(screenX, screenY);
 
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK) {
 
-      const current = new Graphene.Vec2();
-      current.init(x, y);
-      current.time = event.get_time();
+      if (this._stroke.start == null) {
+        this._stroke.start = new Graphene.Vec2();
+        this._stroke.start.init_from_vec2(current);
 
-      if (this._stroke.length == 0) {
-        this._stroke.push(current);
+        this._stroke.end = new Graphene.Vec2();
+        this._stroke.end.init_from_vec2(current);
 
       } else {
-        const last = this._stroke[this._stroke.length - 1];
+        const strokeDir    = this._stroke.end.subtract(this._stroke.start);
+        const strokeLength = strokeDir.length();
 
-        const direction  = current.subtract(last);
-        const length     = direction.length();
-        const sampleDist = 5;
-        const samples    = Math.floor(length / sampleDist);
-        const step       = direction.scale(sampleDist / length);
 
-        for (let i = 0; i < samples; i++) {
-          const sample = this._stroke[this._stroke.length - 1].add(step);
-          sample.time  = event.get_time();
-          this._stroke.push(sample);
-        }
-      }
 
-      if (this._stroke.length >= 2) {
-        const strokeDir = this._getStrokeDirection();
-        if (strokeDir.length() > 0) {
-          const mouseDir = current.subtract(this._stroke[0]).normalize();
-          const angle    = Math.acos(mouseDir.dot(strokeDir.normalize()));
+        if (strokeLength > this._settings.gestureMinStrokeLength) {
 
-          // utils.debug(angle);
-
-          if (angle > Math.PI / 30) {
-            this._stroke = [];
-            // if (this._hoveredWedge >= 0) {
-            //   if (this._hoveredWedge == this._parentIndex) {
-            //     this.emit('parent-selected-event');
-            //   } else {
-            //     this.emit('child-selected-event', this.getHoveredWedge());
-            //   }
-            // }
+          if (this._stroke.pauseTimeout != null) {
+            GLib.source_remove(this._stroke.pauseTimeout);
           }
+
+          this._stroke.pauseTimeout = GLib.timeout_add(
+              GLib.PRIORITY_DEFAULT, this._settings.gestureSelectionTimeout, () => {
+                this._emitSelection();
+                return false;
+              });
+
+
+          const currentDir    = current.subtract(this._stroke.end);
+          const currentLength = currentDir.length();
+
+          if (currentLength > this._settings.gestureJitterThreshold) {
+            this._stroke.end.init_from_vec2(current);
+            const angle = Math.acos(currentDir.scale(1 / currentLength)
+                                        .dot(strokeDir.scale(1 / strokeLength)));
+
+            if (angle * 180 / Math.PI > this._settings.gestureMinStrokeAngle) {
+              this._emitSelection();
+            }
+          }
+        } else {
+          this._stroke.end.init_from_vec2(current);
         }
       }
-
     } else {
-      this._stroke = [];
+      this._resetStroke();
     }
   }
 
@@ -433,22 +431,36 @@ class SelectionWedges extends Clutter.Actor {
     this._wedgeShader.set_uniform_value(name, value);
   }
 
-  _getStrokeDirection() {
-    let x = 0;
-    let y = 0;
+  _emitSelection() {
+    this._resetStroke();
 
-    this._stroke.forEach(sample => {
-      x += sample.get_x() / this._stroke.length;
-      y += sample.get_y() / this._stroke.length;
-    });
+    if (this._hoveredWedge >= 0) {
+      if (this._hoveredWedge == this._parentIndex) {
+        this.emit('parent-selected-event');
+      } else {
+        this.emit('child-selected-event', this.getHoveredWedge());
+      }
+    }
+  }
 
-    const average = new Graphene.Vec2();
-    average.init(x, y);
-
-    if (this._stroke.length > 0) {
-      return average.subtract(this._stroke[0]);
+  _resetStroke() {
+    if (this._stroke.pauseTimeout != null) {
+      GLib.source_remove(this._stroke.pauseTimeout);
+      this._stroke.pauseTimeout = null;
     }
 
-    return average;
+    this._stroke.start = null;
+    this._stroke.end   = null;
+  }
+
+  _spawnDebugParticle(x, y, size, color) {
+    const particle = new Clutter.Actor(
+        {x: x, y: y, width: size, height: size, background_color: color});
+
+    this.get_parent().add_child(particle);
+
+    particle.set_easing_duration(10000);
+    particle.set_opacity(0);
+    particle.connect('transitions-completed', () => particle.destroy());
   }
 });

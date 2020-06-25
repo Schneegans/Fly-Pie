@@ -114,18 +114,22 @@ var Menu = class Menu {
 
     this._selectionWedges.connect('child-selected-event', (o, index) => {
       const parent = this._menuSelectionChain[0];
+      const child  = this._menuSelectionChain[0].items[index];
+
+      const [pointerX, pointerY, mods] = global.get_pointer();
+      if (mods & Clutter.ModifierType.BUTTON1_MASK && child.items.length == 0) {
+        return;
+      }
+
       parent.actor.setState(MenuItemState.PARENT, index);
-
-      const child = this._menuSelectionChain[0].items[index];
       child.actor.setState(MenuItemState.CENTER_HOVERED);
-
       this._menuSelectionChain.unshift(child);
 
+      const [clampedX, clampedY] = this._clampToToMonitor(pointerX, pointerY, 10);
 
-
-      const [pointerX, pointerY]   = global.get_pointer();
-      const [absoluteX, absoluteY] = this._clampToToMonitor(pointerX, pointerY, 10);
-      // this._input.warpPointer(absoluteX, absoluteY);
+      if (pointerX != clampedX || pointerY != clampedY) {
+        this._input.warpPointer(clampedX, clampedY);
+      }
 
       if (child.items.length > 0) {
         const itemAngles = [];
@@ -135,11 +139,11 @@ var Menu = class Menu {
         this._selectionWedges.setItemAngles(itemAngles, (child.angle + 180) % 360);
 
         this._selectionWedges.set_translation(
-            absoluteX - this._background.x, absoluteY - this._background.y, 0);
+            clampedX - this._background.x, clampedY - this._background.y, 0);
       }
 
       const [ok, relativeX, relativeY] =
-          parent.actor.transform_stage_point(absoluteX, absoluteY);
+          parent.actor.transform_stage_point(clampedX, clampedY);
 
       const currentTraceLength = Math.sqrt(relativeX * relativeX + relativeY * relativeY);
       const idealTraceLength   = Math.max(
@@ -190,9 +194,12 @@ var Menu = class Menu {
 
       this._menuSelectionChain.shift();
 
-      const [pointerX, pointerY]   = global.get_pointer();
-      const [absoluteX, absoluteY] = this._clampToToMonitor(pointerX, pointerY, 10);
-      // this._input.warpPointer(absoluteX, absoluteY);
+      const [pointerX, pointerY] = global.get_pointer();
+      const [clampedX, clampedY] = this._clampToToMonitor(pointerX, pointerY, 10);
+
+      if (pointerX != clampedX || pointerY != clampedY) {
+        this._input.warpPointer(clampedX, clampedY);
+      }
 
       const itemAngles = [];
       parent.items.forEach(item => {
@@ -206,12 +213,12 @@ var Menu = class Menu {
       }
 
       this._selectionWedges.set_translation(
-          absoluteX - this._background.x, absoluteY - this._background.y, 0);
+          clampedX - this._background.x, clampedY - this._background.y, 0);
 
 
       if (this._menuSelectionChain.length > 1) {
         const [ok, relativeX, relativeY] =
-            parent.actor.transform_stage_point(absoluteX, absoluteY);
+            parent.actor.transform_stage_point(clampedX, clampedY);
 
         const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
         root.actor.translation_x = root.actor.translation_x + relativeX;
@@ -219,7 +226,7 @@ var Menu = class Menu {
 
       } else {
         const [ok, relativeX, relativeY] =
-            this._background.transform_stage_point(absoluteX, absoluteY);
+            this._background.transform_stage_point(clampedX, clampedY);
         parent.actor.set_translation(relativeX, relativeY, 0);
       }
 
@@ -328,11 +335,14 @@ var Menu = class Menu {
       this._selectionWedges.set_translation(
           this._background.width / 2, this._background.height / 2, 0);
     } else {
-      let [x, y] = global.get_pointer();
-      [x, y]     = this._clampToToMonitor(x, y, 10);
-      this._structure.actor.set_translation(x, y, 0);
-      this._selectionWedges.set_translation(x, y, 0);
-      this._input.warpPointer(x, y);
+      const [pointerX, pointerY] = global.get_pointer();
+      const [clampedX, clampedY] = this._clampToToMonitor(pointerX, pointerY, 10);
+      this._structure.actor.set_translation(clampedX, clampedY, 0);
+      this._selectionWedges.set_translation(clampedX, clampedY, 0);
+
+      if (pointerX != clampedX || pointerY != clampedY) {
+        this._input.warpPointer(clampedX, clampedY);
+      }
     }
 
     return this._menuID;

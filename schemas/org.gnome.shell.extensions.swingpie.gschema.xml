@@ -52,7 +52,7 @@
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <key name="toggle-shortcut" type="as">
-      <default><![CDATA[['F12']]]></default>
+      <default><![CDATA[['<ctrl>4']]]></default>
       <summary>Menu hotkey</summary>
       <description>This opens the testing menu.</description>
     </key>
@@ -419,6 +419,34 @@
       <summary>Trace Color</summary>
       <description>The color of the menu's trace.</description>
     </key>
+
+    <!-- Behavior Settings -->
+
+    <key name="gesture-selection-timeout" type="d">
+      <default>100</default>
+      <summary>Gesture Selection Timeout</summary>
+      <description>If the pointer is stationary for this many milliseconds, 
+                   the current item will be selected.</description>
+    </key>
+
+    <key name="gesture-jitter-threshold" type="d">
+      <default>10</default>
+      <summary>Gesture Selection Timeout</summary>
+      <description>Smaller movements will not be considered.</description>
+    </key>
+
+    <key name="gesture-min-stroke-length" type="d">
+      <default>150</default>
+      <summary>Gesture Selection Timeout</summary>
+      <description>Shorter gestures will not lead to selections.</description>
+    </key>
+
+    <key name="gesture-min-stroke-angle" type="d">
+      <default>20</default>
+      <summary>Gesture Selection Timeout</summary>
+      <description>Smaller turns will not lead to selections.</description>
+    </key>
+
 
     <!-- Miscellaneous -->
 
