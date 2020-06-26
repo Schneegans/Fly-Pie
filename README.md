@@ -8,7 +8,20 @@
 
 ```bash
 journalctl /usr/bin/gnome-shell -f -o cat | grep swingpie -B 2 -A 2
-gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/swingpie --method org.gnome.Shell.Extensions.swingpie.ShowMenu '{"items":[{"name":"bar","icon":"user"},{"name":"horst","icon":"pixel"}]}'
+
+gdbus introspect  --session --dest org.gnome.Shell \
+  --object-path /org/gnome/shell/extensions/swingpie
+
+gdbus monitor  --session --dest org.gnome.Shell \
+  --object-path /org/gnome/shell/extensions/swingpie
+
+gdbus call --session --dest org.gnome.Shell              \
+  --object-path /org/gnome/shell/extensions/swingpie     \
+  --method org.gnome.Shell.Extensions.swingpie.ShowMenu  \
+  '{"icon": "😀", "items": [                             \
+    {"name": "Rocket",   "icon":"🚀", "id":"a"},         \
+    {"name": "Doughnut", "icon":"🍩", "id":"b"}          \
+  ]}'
 ```
 
 # Contributing to Swing-Pie
