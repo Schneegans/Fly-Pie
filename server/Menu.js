@@ -288,6 +288,14 @@ var Menu = class Menu {
     // empty list for items without children.
     this._createEmptyChildrenLists(structure);
 
+    if (structure.name == undefined) {
+      structure.name = 'root';
+    }
+
+    if (structure.icon == undefined) {
+      structure.icon = 'image-missing';
+    }
+
     // Calculate and verify all item angles.
     structure.angle = 0;
     if (!this._updateItemAngles(structure.items)) {
