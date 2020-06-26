@@ -279,9 +279,10 @@ class SelectionWedges extends Clutter.Actor {
         let doInsertion = false;
 
         // Insert it definitely if we reached the end of the list.
-        if (i == itemAngles.length) doInsertion = true;
+        if (i == itemAngles.length) {
+          doInsertion = true;
 
-        if (i > 0) {
+        } else if (i > 0) {
           if (itemAngles[i - 1] < parentAngle && parentAngle < itemAngles[i]) {
             doInsertion = true;
           }
