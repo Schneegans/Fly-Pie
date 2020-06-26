@@ -445,17 +445,6 @@ class SelectionWedges extends Clutter.Actor {
 
         if (strokeLength > this._settings.gestureMinStrokeLength) {
 
-          // The stroke is long enough to become a gesture. We register a timer to detect
-          // pause-events where the pointer was stationary for some time. These events
-          // also lead to selections.
-          if (this._stroke.pauseTimeout == null) {
-            this._stroke.pauseTimeout = GLib.timeout_add(
-                GLib.PRIORITY_DEFAULT, this._settings.gestureSelectionTimeout, () => {
-                  this._emitSelection();
-                  return false;
-                });
-          }
-
           // Calculate the vector E->M in the diagram above.
           const tipDir    = mouse.subtract(this._stroke.end);
           const tipLength = tipDir.length();
@@ -482,6 +471,18 @@ class SelectionWedges extends Clutter.Actor {
               this._emitSelection();
             }
           }
+
+          // The stroke is long enough to become a gesture. We register a timer to detect
+          // pause-events where the pointer was stationary for some time. These events
+          // also lead to selections.
+          if (this._stroke.pauseTimeout == null) {
+            this._stroke.pauseTimeout = GLib.timeout_add(
+                GLib.PRIORITY_DEFAULT, this._settings.gestureSelectionTimeout, () => {
+                  this._emitSelection();
+                  return false;
+                });
+          }
+
         } else {
 
           // The vector S->E is not long enough to be a gesture, so we only update the end
