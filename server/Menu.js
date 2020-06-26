@@ -33,7 +33,6 @@ var Menu = class Menu {
     this._onSelect     = onSelect;
     this._onCancel     = onCancel;
     this._menuID       = null;
-    this._structure    = {};
     this._editMode     = false;
     this._draggedChild = null;
 
@@ -61,7 +60,7 @@ var Menu = class Menu {
           this._draggedChild == null) {
         const index = this._selectionWedges.getHoveredChild();
         if (index >= 0) {
-          const child = this._menuSelectionChain[0].items[index].actor;
+          const child = this._menuSelectionChain[0].getChildMenuItems()[index];
           child.setState(MenuItemState.CHILD_DRAGGED);
           this._draggedChild = child;
         }
@@ -91,38 +90,39 @@ var Menu = class Menu {
 
     this._selectionWedges.connect('child-hovered-event', (o, index) => {
       if (index == -1) {
-        this._menuSelectionChain[0].actor.setState(MenuItemState.CENTER_HOVERED, -1);
+        this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
       } else {
-        this._menuSelectionChain[0].actor.setState(MenuItemState.CENTER, index);
+        this._menuSelectionChain[0].setState(MenuItemState.CENTER, index);
       }
 
       if (this._menuSelectionChain.length > 1) {
-        this._menuSelectionChain[1].actor.setState(MenuItemState.PARENT);
+        this._menuSelectionChain[1].setState(MenuItemState.PARENT);
       }
 
       const [x, y, mods] = global.get_pointer();
       if (mods & Clutter.ModifierType.BUTTON1_MASK && index >= 0) {
-        const child = this._menuSelectionChain[0].items[index].actor;
+        const child = this._menuSelectionChain[0].getChildMenuItems()[index];
         child.setState(MenuItemState.CHILD_DRAGGED);
         this._draggedChild = child;
       } else {
         this._draggedChild = null;
       }
 
-      this._structure.actor.redraw();
+      this._root.redraw();
     });
 
     this._selectionWedges.connect('child-selected-event', (o, index) => {
       const parent = this._menuSelectionChain[0];
-      const child  = this._menuSelectionChain[0].items[index];
+      const child  = this._menuSelectionChain[0].getChildMenuItems()[index];
 
       const [pointerX, pointerY, mods] = global.get_pointer();
-      if (mods & Clutter.ModifierType.BUTTON1_MASK && child.items.length == 0) {
+      if (mods & Clutter.ModifierType.BUTTON1_MASK &&
+          child.getChildMenuItems().length == 0) {
         return;
       }
 
-      parent.actor.setState(MenuItemState.PARENT, index);
-      child.actor.setState(MenuItemState.CENTER_HOVERED);
+      parent.setState(MenuItemState.PARENT, index);
+      child.setState(MenuItemState.CENTER_HOVERED);
       this._menuSelectionChain.unshift(child);
 
       const [clampedX, clampedY] = this._clampToToMonitor(pointerX, pointerY, 10);
@@ -131,9 +131,9 @@ var Menu = class Menu {
         this._input.warpPointer(clampedX, clampedY);
       }
 
-      if (child.items.length > 0) {
+      if (child.getChildMenuItems().length > 0) {
         const itemAngles = [];
-        child.items.forEach(item => {
+        child.getChildMenuItems().forEach(item => {
           itemAngles.push(item.angle);
         });
         this._selectionWedges.setItemAngles(itemAngles, (child.angle + 180) % 360);
@@ -142,8 +142,7 @@ var Menu = class Menu {
             clampedX - this._background.x, clampedY - this._background.y, 0);
       }
 
-      const [ok, relativeX, relativeY] =
-          parent.actor.transform_stage_point(clampedX, clampedY);
+      const [ok, relativeX, relativeY] = parent.transform_stage_point(clampedX, clampedY);
 
       const currentTraceLength = Math.sqrt(relativeX * relativeX + relativeY * relativeY);
       const idealTraceLength   = Math.max(
@@ -151,28 +150,27 @@ var Menu = class Menu {
               this._settings.get_double('global-scale'),
           currentTraceLength);
 
-      const idealX = Math.floor(Math.sin(child.actor.angle) * idealTraceLength);
-      const idealY = -Math.floor(Math.cos(child.actor.angle) * idealTraceLength);
+      const childAngle = child.angle * Math.PI / 180;
+      const idealX     = Math.floor(Math.sin(childAngle) * idealTraceLength);
+      const idealY     = -Math.floor(Math.cos(childAngle) * idealTraceLength);
 
       const requiredOffsetX = relativeX - idealX;
       const requiredOffsetY = relativeY - idealY;
 
       const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
 
-      root.actor.set_translation(
-          root.actor.translation_x + requiredOffsetX,
-          root.actor.translation_y + requiredOffsetY, 0);
+      root.set_translation(
+          root.translation_x + requiredOffsetX, root.translation_y + requiredOffsetY, 0);
 
-      child.actor.set_easing_duration(
-          this._settings.get_double('easing-duration') * 1000);
-      child.actor.set_easing_mode(this._settings.get_enum('easing-mode'));
-      child.actor.set_translation(idealX, idealY, 0);
+      child.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
+      child.set_easing_mode(this._settings.get_enum('easing-mode'));
+      child.set_translation(idealX, idealY, 0);
 
       this._draggedChild = null;
 
-      this._structure.actor.redraw();
+      this._root.redraw();
 
-      if (child.items.length == 0) {
+      if (child.getChildMenuItems().length == 0) {
         this._onSelect(this._menuID, child.id);
         this._background.set_easing_delay(
             this._settings.get_double('easing-duration') * 1000);
@@ -182,15 +180,15 @@ var Menu = class Menu {
     });
 
     this._selectionWedges.connect('parent-hovered-event', () => {
-      this._menuSelectionChain[0].actor.setState(MenuItemState.CENTER_HOVERED, -1);
-      this._menuSelectionChain[1].actor.setState(MenuItemState.PARENT_HOVERED);
-      this._structure.actor.redraw();
+      this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
+      this._menuSelectionChain[1].setState(MenuItemState.PARENT_HOVERED);
+      this._root.redraw();
       this._draggedChild = null;
     });
 
     this._selectionWedges.connect('parent-selected-event', () => {
       const parent = this._menuSelectionChain[1];
-      parent.actor.setState(MenuItemState.CENTER_HOVERED, -1);
+      parent.setState(MenuItemState.CENTER_HOVERED, -1);
 
       this._menuSelectionChain.shift();
 
@@ -202,7 +200,7 @@ var Menu = class Menu {
       }
 
       const itemAngles = [];
-      parent.items.forEach(item => {
+      parent.getChildMenuItems().forEach(item => {
         itemAngles.push(item.angle);
       });
 
@@ -218,21 +216,21 @@ var Menu = class Menu {
 
       if (this._menuSelectionChain.length > 1) {
         const [ok, relativeX, relativeY] =
-            parent.actor.transform_stage_point(clampedX, clampedY);
+            parent.transform_stage_point(clampedX, clampedY);
 
         const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
-        root.actor.translation_x = root.actor.translation_x + relativeX;
-        root.actor.translation_y = root.actor.translation_y + relativeY;
+        root.translation_x = root.translation_x + relativeX;
+        root.translation_y = root.translation_y + relativeY;
 
       } else {
         const [ok, relativeX, relativeY] =
             this._background.transform_stage_point(clampedX, clampedY);
-        parent.actor.set_translation(relativeX, relativeY, 0);
+        parent.set_translation(relativeX, relativeY, 0);
       }
 
       this._draggedChild = null;
 
-      this._structure.actor.redraw();
+      this._root.redraw();
     });
 
 
@@ -272,26 +270,26 @@ var Menu = class Menu {
     }
 
     // Remove any previous menus.
-    if (this._structure && this._structure.actor) {
-      this._structure.actor.destroy();
+    if (this._root) {
+      this._root.destroy();
     }
 
-    // Store the structure.
-    this._structure = structure;
-    this._editMode  = editMode;
+    // Store the edit mode flag.
+    this._editMode = editMode;
 
     // To avoid frequent checks for the existence of the items list member, we add an
     // empty list for items without children.
-    this._createEmptyChildrenLists(this._structure);
+    this._createEmptyChildrenLists(structure);
 
     // Calculate and verify all item angles.
-    this._structure.angle = 0;
-    if (!this._updateItemAngles(this._structure.items)) {
+    structure.angle = 0;
+    if (!this._updateItemAngles(structure.items)) {
       return DBusInterface.errorCodes.eInvalidAngles;
     }
 
     // Assign an ID to each item.
-    this._updateItemIDs(this._structure.items);
+    structure.id = '/';
+    this._updateItemIDs(structure.items);
 
     // Try to grab the complete input.
     if (!this._background.show(editMode)) {
@@ -304,25 +302,25 @@ var Menu = class Menu {
 
     // Create all visible Clutter.Actors for the items.
     const createMenuItem = (item) => {
-      item.actor = new MenuItem(
-          {caption: item.name, icon: item.icon, angle: item.angle * Math.PI / 180});
+      const menuItem = new MenuItem(
+          {id: item.id, caption: item.name, icon: item.icon, angle: item.angle});
       item.items.forEach(child => {
-        item.actor.addMenuItem(createMenuItem(child, item.actor));
+        menuItem.addMenuItem(createMenuItem(child));
       });
-      return item.actor;
+      return menuItem;
     };
 
-    const rootMenuItem = createMenuItem(this._structure, this._background);
-    this._background.add_child(rootMenuItem);
+    this._root = createMenuItem(structure);
+    this._background.add_child(this._root);
 
-    this._menuSelectionChain.push(this._structure);
+    this._menuSelectionChain.push(this._root);
 
-    this._structure.actor.setState(MenuItemState.CENTER_HOVERED, -1);
-    this._structure.actor.onSettingsChange(this._settings);
-    this._structure.actor.redraw();
+    this._root.setState(MenuItemState.CENTER_HOVERED, -1);
+    this._root.onSettingsChange(this._settings);
+    this._root.redraw();
 
     const itemAngles = [];
-    this._structure.items.forEach(item => {
+    this._root.getChildMenuItems().forEach(item => {
       itemAngles.push(item.angle);
     });
     this._selectionWedges.setItemAngles(itemAngles);
@@ -330,14 +328,14 @@ var Menu = class Menu {
     // Calculate menu position. In edit mode, we center the menu, else we position it at
     // the mouse pointer.
     if (editMode) {
-      this._structure.actor.set_translation(
+      this._root.set_translation(
           this._background.width / 2, this._background.height / 2, 0);
       this._selectionWedges.set_translation(
           this._background.width / 2, this._background.height / 2, 0);
     } else {
       const [pointerX, pointerY] = global.get_pointer();
       const [clampedX, clampedY] = this._clampToToMonitor(pointerX, pointerY, 10);
-      this._structure.actor.set_translation(clampedX, clampedY, 0);
+      this._root.set_translation(clampedX, clampedY, 0);
       this._selectionWedges.set_translation(clampedX, clampedY, 0);
 
       if (pointerX != clampedX || pointerY != clampedY) {
@@ -527,9 +525,9 @@ var Menu = class Menu {
     // is instantly updated in edit mode.
     this._selectionWedges.onSettingsChange(this._settings);
 
-    if (this._structure != undefined && this._structure.actor != undefined) {
-      this._structure.actor.onSettingsChange(this._settings);
-      this._structure.actor.redraw();
+    if (this._root != undefined) {
+      this._root.onSettingsChange(this._settings);
+      this._root.redraw();
     }
   }
 

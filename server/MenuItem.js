@@ -82,16 +82,17 @@ var MenuItemState = {
 var MenuItem = GObject.registerClass({
   Properties: {
     'angle': GObject.ParamSpec.double(
-      'angle', 'angle', 'The angle of the MenuItem.',
-      GObject.ParamFlags.READWRITE, 0, 2 * Math.PI, 0),
+      'angle', 'angle', 'The angle of the MenuItem in degrees.',
+      GObject.ParamFlags.READWRITE, 0, 360, 0),
     'caption': GObject.ParamSpec.string(
-      'caption', 'caption',
-      'The caption to be used by this menu item. ',
+      'caption', 'caption', 'The caption to be used by this menu item. ',
       GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, ''),
     'icon': GObject.ParamSpec.string(
-      'icon', 'icon',
-      'The icon to be used by this menu item. ' +
+      'icon', 'icon', 'The icon to be used by this menu item. ' +
       'Can be an "icon-name", an emoji like "🚀" or a path like "../icon.png".',
+      GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, 'image-missing'),
+    'id': GObject.ParamSpec.string(
+      'id', 'id', 'The ID of the menu item. ',
       GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, 'image-missing')
   },
   Signals: {}
@@ -155,6 +156,11 @@ class MenuItem extends Clutter.Actor {
   // This is called by the Menu to add child MenuItems to this MenuItem.
   addMenuItem(menuItem) {
     this._childrenContainer.add_child(menuItem);
+  }
+
+  // Returns an array of child menu items of this.
+  getChildMenuItems() {
+    return this._childrenContainer.get_children();
   }
 
   // This is called during redraw() of the parent MenuItem. redraw() traverses the menu
@@ -440,9 +446,10 @@ class MenuItem extends Clutter.Actor {
         this._state == MenuItemState.GRANDCHILD_HOVERED ||
         this._state == MenuItemState.INVISIBLE) {
 
+      const angle = this.angle * Math.PI / 180;
       this.set_translation(
-          Math.floor(Math.sin(this.angle) * settings.offset),
-          -Math.floor(Math.cos(this.angle) * settings.offset), 0);
+          Math.floor(Math.sin(angle) * settings.offset),
+          -Math.floor(Math.cos(angle) * settings.offset), 0);
     }
 
     // No we compute the background color for the currently visible icon. This will be
