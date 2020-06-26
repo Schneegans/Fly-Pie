@@ -43,6 +43,13 @@ var Menu = class Menu {
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
 
+    this._background.connect('transitions-completed', () => {
+      if (this._background.opacity == 0 && this._root) {
+        this._root.destroy();
+        this._root = null;
+      }
+    });
+
     this._background.connect('button-release-event', (actor, event) => {
       this._selectionWedges.onButtonReleaseEvent(event);
       return Clutter.EVENT_STOP;
