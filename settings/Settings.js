@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {GLib, Gtk, Gio, Gdk} = imports.gi;
+const {GObject, GLib, Gtk, Gio, Gdk} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
@@ -16,6 +16,56 @@ const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const Preset        = Me.imports.settings.Preset.Preset;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
+
+var MenuTreeColumn = {
+  ICON: 0,
+  NAME: 1,
+  DESCRIPTION: 2,
+  ID: 3,
+  TYPE: 4,
+  DATA: 5,
+  FIXED_ANGLE: 6,
+  FONT_WEIGHT: 7,
+}
+
+let MenuTree = GObject.registerClass({}, class MenuTree extends Gtk.TreeStore {
+  _init() {
+    super._init();
+
+    this.set_column_types([
+      GObject.TYPE_STRING,  // 0: ICON
+      GObject.TYPE_STRING,  // 1: NAME
+      GObject.TYPE_STRING,  // 2: DESCRIPTION
+      GObject.TYPE_STRING,  // 3: ID
+      GObject.TYPE_STRING,  // 4: TYPE
+      GObject.TYPE_STRING,  // 5: DATA
+      GObject.TYPE_DOUBLE,  // 6: FIXED_ANGLE
+      GObject.TYPE_DOUBLE,  // 7: FONT_WEIGHT
+    ]);
+  }
+
+  vfunc_row_draggable(path) {
+    return path.get_depth() > 1;
+  }
+
+  vfunc_row_drop_possible(path) {
+    try {
+      const parentPath = path.copy();
+      if (parentPath.up()) {
+        const [ok, parent] = this.get_iter(parentPath);
+        if (ok) {
+          const type = this.get_value(parent, MenuTreeColumn.TYPE);
+          if (type == 'group' || type == 'menu') {
+            return true;
+          }
+        }
+      }
+    } catch (error) {
+      utils.notification('Failed to load Preset: ' + error);
+    }
+    return false;
+  }
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class loads the user interface defined in settings.ui and connects all elements //
@@ -185,34 +235,160 @@ var Settings = class Settings {
     let menus = [
       {
         id: 'menu01',
-        icon: 'firefox',
+        type: 'menu',
+        icon: 'gedit',
         name: 'Main Menu',
-        type: 'toplevel',
+        description: 'Hotkey: <Ctrl>A',
+        data: '<Ctrl>>',
+        fontWeight: 600,
+        fixedAngle: -1,
+        children: []
       },
       {
         id: 'menu02',
+        type: 'menu',
         icon: 'thunderbird',
         name: 'Main Menu 2',
-        type: 'toplevel',
+        description: 'Hotkey: <Ctrl>A',
+        data: '<Ctrl>>',
+        fontWeight: 600,
+        fixedAngle: -1,
+        children: [
+          {
+            id: 'menu01',
+            type: 'group',
+            icon: 'emblem-default',
+            name: 'Favorites',
+            description: 'Group',
+            data: '<Ctrl>>',
+            fontWeight: 400,
+            fixedAngle: -1,
+          },
+          {
+            id: 'menu01',
+            type: 'application',
+            icon: 'firefox',
+            name: 'Firefox',
+            description: 'Launch Applications',
+            data: '<Ctrl>>',
+            fontWeight: 400,
+            fixedAngle: -1,
+          },
+        ]
       },
       {
         id: 'menu03',
+        type: 'menu',
         icon: 'chrome',
         name: 'Main Menu 3',
-        type: 'toplevel',
+        description: 'Hotkey: <Ctrl>A',
+        data: '<Ctrl>>',
+        fontWeight: 600,
+        fixedAngle: -1,
+        children: [
+          {
+            id: 'menu01',
+            type: 'bookmarks-group',
+            icon: 'nautilus',
+            name: 'Bookmarks',
+            description: 'Group: Bookmarks',
+            data: '<Ctrl>>',
+            fontWeight: 400,
+            fixedAngle: -1,
+          },
+          {
+            id: 'menu01',
+            type: 'url',
+            icon: 'epiphany',
+            name: 'URL',
+            description: 'URL',
+            data: '<Ctrl>>',
+            fontWeight: 400,
+            fixedAngle: -1,
+          },
+        ]
       },
     ];
 
-    this._menuTree = this._builder.get_object('menu-tree');
-    for (let i = 0; i < menus.length; i++) {
-      let menu = menus[i];
-      this._menuTree.set(this._menuTree.append(null), [0, 1, 2, 3], [
-        menu.id,
-        menu.icon,
-        menu.name,
-        menu.type,
-      ]);
+    try {
+      this._menuTree = new MenuTree();
+      this._builder.get_object('menus-treeview').set_model(this._menuTree);
+      for (let i = 0; i < menus.length; i++) {
+        const menu = menus[i];
+        const iter = this._menuTree.append(null);
+        this._menuTree.set(iter, [0, 1, 2, 3, 4, 5, 6, 7], [
+          menu.icon,
+          menu.name,
+          menu.description,
+          menu.id,
+          menu.type,
+          menu.data,
+          menu.fixedAngle,
+          menu.fontWeight,
+        ]);
+        for (let j = 0; j < menu.children.length; j++) {
+          const child = menu.children[j];
+          this._menuTree.set(this._menuTree.append(iter), [0, 1, 2, 3, 4, 5, 6, 7], [
+            child.icon,
+            child.name,
+            child.description,
+            child.id,
+            child.type,
+            child.data,
+            child.fixedAngle,
+            child.fontWeight,
+          ]);
+        }
+      }
+    } catch (error) {
+      utils.notification('Failed to load Preset: ' + error);
     }
+
+    this._builder.get_object('menus-treeview-selection')
+        .connect('changed', (selection) => {
+          try {
+            const [ok, model, iter] = selection.get_selected();
+            if (ok) {
+              const type = model.get_value(iter, MenuTreeColumn.TYPE);
+
+              const revealers = {
+                'item-settings-hotkey-revealer': false,
+                'item-settings-angle-revealer': false,
+                'item-settings-count-revealer': false,
+                'item-settings-url-revealer': false,
+                'item-settings-command-revealer': false,
+                'item-settings-file-revealer': false,
+                'item-settings-application-revealer': false,
+              };
+
+              if (type == 'menu') {
+                revealers['item-settings-hotkey-revealer'] = true;
+              } else {
+                revealers['item-settings-angle-revealer'] = true;
+
+                if (type == 'application') {
+                  revealers['item-settings-application-revealer'] = true;
+                } else if (type == 'url') {
+                  revealers['item-settings-url-revealer'] = true;
+                } else if (type == 'file') {
+                  revealers['item-settings-file-revealer'] = true;
+                } else if (type == 'command') {
+                  revealers['item-settings-command-revealer'] = true;
+                } else if (type != 'group') {
+                  revealers['item-settings-count-revealer'] = true;
+                }
+              }
+
+              for (const revealer in revealers) {
+                this._builder.get_object(revealer).reveal_child = revealers[revealer];
+              }
+            }
+          } catch (error) {
+            utils.notification('Failed to load Preset: ' + error);
+          }
+        });
+
+
 
     this._loadIcons().then(() => {
       this._builder.get_object('icon-load-spinner').active = false;
@@ -262,27 +438,20 @@ var Settings = class Settings {
   // ----------------------------------------------------------------------- private stuff
 
   async _loadIcons() {
-    try {
+    const iconList = this._builder.get_object('icon-list');
+    iconList.set_sort_column_id(-2, Gtk.SortType.ASCENDING);
 
-      const iconList = this._builder.get_object('icon-list');
-      iconList.set_sort_column_id(-2, Gtk.SortType.ASCENDING);
-
-      const iconTheme = Gtk.IconTheme.get_default();
-      const icons     = iconTheme.list_icons(null);
-      const batchSize = 10;
-      for (let i = 0; i < icons.length; i += batchSize) {
-        for (let j = 0; j < batchSize && i + j < icons.length; j++) {
-          iconList.set_value(iconList.append(null), 0, icons[i + j]);
-        }
-        await new Promise(r => GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1, r));
+    const iconTheme = Gtk.IconTheme.get_default();
+    const icons     = iconTheme.list_icons(null);
+    const batchSize = 10;
+    for (let i = 0; i < icons.length; i += batchSize) {
+      for (let j = 0; j < batchSize && i + j < icons.length; j++) {
+        iconList.set_value(iconList.append(null), 0, icons[i + j]);
       }
-
-    } catch (error) {
-      utils.notification('Failed to load Preset: ' + error);
-    } finally {
-      const iconList = this._builder.get_object('icon-list');
-      iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
+      await new Promise(r => GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1, r));
     }
+
+    iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
   }
 
   // This initializes the widgets related to the presets.
