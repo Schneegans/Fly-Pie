@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {Gtk, Gio, Gdk} = imports.gi;
+const {GLib, Gtk, Gio, Gdk} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
@@ -179,6 +179,75 @@ var Settings = class Settings {
     this._bindSlider('gesture-min-stroke-angle');
 
 
+    // Now on to the Menus page.
+
+
+    let menus = [
+      {
+        id: 'menu01',
+        icon: 'firefox',
+        name: 'Main Menu',
+        type: 'toplevel',
+      },
+      {
+        id: 'menu02',
+        icon: 'thunderbird',
+        name: 'Main Menu 2',
+        type: 'toplevel',
+      },
+      {
+        id: 'menu03',
+        icon: 'chrome',
+        name: 'Main Menu 3',
+        type: 'toplevel',
+      },
+    ];
+
+    this._menuTree = this._builder.get_object('menu-tree');
+    for (let i = 0; i < menus.length; i++) {
+      let menu = menus[i];
+      this._menuTree.set(this._menuTree.append(null), [0, 1, 2, 3], [
+        menu.id,
+        menu.icon,
+        menu.name,
+        menu.type,
+      ]);
+    }
+
+    this._loadIcons().then(() => {
+      this._builder.get_object('icon-load-spinner').active = false;
+    });
+
+    const iconListFiltered = this._builder.get_object('icon-list-filtered');
+    const filterEntry      = this._builder.get_object('icon-filter-entry');
+    iconListFiltered.set_visible_func((model, iter) => {
+      const name = model.get_value(iter, 0);
+      if (name == null) {
+        return false;
+      }
+      return name.toLowerCase().includes(filterEntry.text.toLowerCase());
+    });
+
+    // refilter on input
+    filterEntry.connect('notify::text', () => {
+      iconListFiltered.refilter();
+    });
+
+    const iconView = this._builder.get_object('icon-view');
+    iconView.connect('item-activated', (view, path) => {
+      const model      = view.get_model();
+      const [ok, iter] = model.get_iter(path);
+      if (ok) {
+        this._builder.get_object('icon-name').text = model.get_value(iter, 0);
+      }
+    });
+
+    const fileChooser = this._builder.get_object('icon-file-chooser');
+    fileChooser.connect('file-activated', (chooser) => {
+      this._builder.get_object('icon-name').text = chooser.get_filename();
+    });
+
+
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
   }
@@ -192,17 +261,40 @@ var Settings = class Settings {
 
   // ----------------------------------------------------------------------- private stuff
 
+  async _loadIcons() {
+    try {
+
+      const iconList = this._builder.get_object('icon-list');
+      iconList.set_sort_column_id(-2, Gtk.SortType.ASCENDING);
+
+      const iconTheme = Gtk.IconTheme.get_default();
+      const icons     = iconTheme.list_icons(null);
+      const batchSize = 10;
+      for (let i = 0; i < icons.length; i += batchSize) {
+        for (let j = 0; j < batchSize && i + j < icons.length; j++) {
+          iconList.set_value(iconList.append(null), 0, icons[i + j]);
+        }
+        await new Promise(r => GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1, r));
+      }
+
+    } catch (error) {
+      utils.notification('Failed to load Preset: ' + error);
+    } finally {
+      const iconList = this._builder.get_object('icon-list');
+      iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
+    }
+  }
+
   // This initializes the widgets related to the presets.
   _initializePresetButtons() {
 
-    // We use a Gtk.TreeModelSort to sort the list of presets alphabetically. The sort
-    // column and type cannot be set in glade, so we do this here.
-    this._builder.get_object('preset-list-sorted')
-        .set_sort_column_id(1, Gtk.SortType.ASCENDING);
 
     // Store some members will will use frequently.
     this._presetDirectory = Gio.File.new_for_path(Me.path + '/presets');
     this._presetList      = this._builder.get_object('preset-list');
+
+    //  The sort column and type cannot be set in glade, so we do this here.
+    this._presetList.set_sort_column_id(1, Gtk.SortType.ASCENDING);
 
     // Now add all presets to the user interface. We simply assume all *.json files in the
     // preset directory to be presets. No further checks are done for now...
