@@ -8,9 +8,8 @@
 
 'use strict';
 
-const Main                = imports.ui.main;
-const Cairo               = imports.cairo;
-const {Clutter, Gio, Gdk} = imports.gi;
+const Main    = imports.ui.main;
+const Clutter = imports.gi.Clutter;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.common.utils;
@@ -21,21 +20,44 @@ const MenuItem         = Me.imports.server.MenuItem.MenuItem;
 const SelectionWedges  = Me.imports.server.SelectionWedges.SelectionWedges;
 const MenuItemState    = Me.imports.server.MenuItem.MenuItemState;
 
+//////////////////////////////////////////////////////////////////////////////////////////
+// The Menu parses the JSON structure given to the ShowMenu method. It creates          //
+// MenuItems accordingly. It keeps a list of currently selected MenuItems and ,based on //
+// the selection events from the SelectionWedges, it manages the state changes of the   //
+// individual MenuItems in the hierarchy.                                               //
+//////////////////////////////////////////////////////////////////////////////////////////
+
 var Menu = class Menu {
 
   // ------------------------------------------------------------ constructor / destructor
 
+  // The Menu is only instantiated once by the Server. It is re-used for each new incoming
+  // ShowMenu request. The three parameters are callbacks which are fired when the
+  // corresponding event occurs.
   constructor(onHover, onSelect, onCancel) {
 
+    // Create Gio.Settings object for org.gnome.shell.extensions.swingpie.
     this._settings = utils.createSettings();
 
-    this._onHover      = onHover;
-    this._onSelect     = onSelect;
-    this._onCancel     = onCancel;
-    this._menuID       = null;
-    this._editMode     = false;
+    // Store the callbacks.
+    this._onHover  = onHover;
+    this._onSelect = onSelect;
+    this._onCancel = onCancel;
+
+    // This holds the ID of the currently active menu. It's null if no menu is currently
+    // shown.
+    this._menuID = null;
+
+    // True if the currently visible menu is in edit-mode.
+    this._editMode = false;
+
+    // Stores a reference to the MenuItem which is currently dragged around while a
+    // gesture is performed.
     this._draggedChild = null;
 
+    // This is a list of active MenuItems. At the beginning it will contain the root
+    // MenuItem only. Selected children deeper in the hierarchy are prepended to this
+    // list.
     this._menuSelectionChain = [];
 
     this._input = new InputManipulator();
@@ -284,10 +306,6 @@ var Menu = class Menu {
     // Store the edit mode flag.
     this._editMode = editMode;
 
-    // To avoid frequent checks for the existence of the items list member, we add an
-    // empty list for items without children.
-    this._createEmptyChildrenLists(structure);
-
     if (structure.name == undefined) {
       structure.name = 'root';
     }
@@ -319,9 +337,12 @@ var Menu = class Menu {
     const createMenuItem = (item) => {
       const menuItem = new MenuItem(
           {id: item.id, caption: item.name, icon: item.icon, angle: item.angle});
-      item.items.forEach(child => {
-        menuItem.addMenuItem(createMenuItem(child));
-      });
+
+      if (item.items) {
+        item.items.forEach(child => {
+          menuItem.addMenuItem(createMenuItem(child));
+        });
+      }
       return menuItem;
     };
 
@@ -365,25 +386,27 @@ var Menu = class Menu {
 
   // Hides the menu and the background actor.
   _hide() {
-    // The menu is not active.
+
+    // The menu is not active; nothing to be done.
     if (this._menuID == null) {
       return;
     }
 
-    // Fade out the background actor.
+    // Fade out the background actor. Once this transition is completed, the _root item
+    // will be destroyed by the background's "transitions-completed" signal handler.
     this._background.hide();
 
     // Rest menu ID. With this set to null, we can accept new menu requests.
     this._menuID = null;
 
-    this._draggedChild = null;
-
+    // Reset some other members.
+    this._draggedChild       = null;
     this._menuSelectionChain = [];
   }
 
   // This method recursively traverses the menu structure and assigns an ID to each
   // item. If an item already has an ID property, this is not touched. This ID will be
-  // passed to the OnSelect and OnHover handlers.
+  // passed to the OnSelect and OnHover handlers. The default IDs are paths like /0/2/1.
   _updateItemIDs(items, parentID) {
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
@@ -396,17 +419,9 @@ var Menu = class Menu {
       }
 
       // Proceed recursively with the children.
-      this._updateItemIDs(item.items, item.id);
-    }
-  }
-
-  _createEmptyChildrenLists(item) {
-    if (item.items) {
-      item.items.forEach(child => {
-        this._createEmptyChildrenLists(child);
-      });
-    } else {
-      item.items = [];
+      if (item.items) {
+        this._updateItemIDs(item.items, item.id);
+      }
     }
   }
 
@@ -525,21 +540,25 @@ var Menu = class Menu {
 
     // Now that all angles are set, update the child items.
     items.forEach(item => {
-      if (!this._updateItemAngles(item.items, (item.angle + 180) % 360)) {
-        return false;
+      if (item.items) {
+        if (!this._updateItemAngles(item.items, (item.angle + 180) % 360)) {
+          return false;
+        }
       }
     });
 
     return true;
   }
 
-  // This is called every time a settings key changes.
+  // This is called every time a settings key changes. This is simply forwarded to all
+  // items which need redrawing. This could definitely be optimized.
   _onSettingsChange() {
+
+    // Notify the selection wedges on the change.
+    this._selectionWedges.onSettingsChange(this._settings);
 
     // Then call onSettingsChange() for each item of our menu. This ensures that the menu
     // is instantly updated in edit mode.
-    this._selectionWedges.onSettingsChange(this._settings);
-
     if (this._root != undefined) {
       this._root.onSettingsChange(this._settings);
       this._root.redraw();
@@ -570,12 +589,14 @@ var Menu = class Menu {
             this._settings.get_double('grandchild-size-hover') / 2 +
             this._settings.get_double('grandchild-offset-hover'));
 
+    // Calculate theoretically largest extent.
     let maxSize = wedgeRadius;
     maxSize     = Math.max(maxSize, centerRadius);
     maxSize     = Math.max(maxSize, childRadius);
     maxSize     = Math.max(maxSize, grandchildRadius);
     maxSize *= 2 * this._settings.get_double('global-scale');
 
+    // Clamp to monitor bounds.
     const monitor = Main.layoutManager.currentMonitor;
 
     const min  = margin + maxSize / 2;
@@ -585,6 +606,7 @@ var Menu = class Menu {
     const posX = Math.min(Math.max(x, min), maxX);
     const posY = Math.min(Math.max(y, min), maxY);
 
+    // Ensure integer position.
     return [Math.floor(posX), Math.floor(posY)];
   }
 };
