@@ -748,7 +748,7 @@
                     <child>
                       <object class="GtkListBoxRow">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can_focus">False</property>
                         <property name="activatable">False</property>
                         <property name="selectable">False</property>
                         <child>
@@ -875,7 +875,7 @@
                     <child>
                       <object class="GtkListBoxRow">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can_focus">False</property>
                         <property name="activatable">False</property>
                         <property name="selectable">False</property>
                         <child>
@@ -1048,7 +1048,7 @@
                         <property name="width_request">100</property>
                         <property name="height_request">80</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can_focus">False</property>
                         <property name="activatable">False</property>
                         <property name="selectable">False</property>
                         <child>
@@ -1506,6 +1506,8 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">Global Appearance Settings</property>
                     <property name="valign">center</property>
+                    <property name="margin_top">8</property>
+                    <property name="margin_bottom">8</property>
                     <property name="pixel_size">24</property>
                     <property name="icon_name">document-properties-symbolic</property>
                   </object>
@@ -1522,7 +1524,7 @@
                         <property name="width_request">100</property>
                         <property name="height_request">80</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can_focus">False</property>
                         <property name="activatable">False</property>
                         <property name="selectable">False</property>
                         <child>
@@ -2035,6 +2037,8 @@ will cancel the selection.</property>
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">Wedge Appearance</property>
                     <property name="valign">center</property>
+                    <property name="margin_top">8</property>
+                    <property name="margin_bottom">8</property>
                   </object>
                   <packing>
                     <property name="position">1</property>
@@ -2050,7 +2054,7 @@ will cancel the selection.</property>
                         <property name="width_request">100</property>
                         <property name="height_request">80</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can_focus">False</property>
                         <property name="activatable">False</property>
                         <property name="selectable">False</property>
                         <child>
@@ -2921,6 +2925,8 @@ will cancel the selection.</property>
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">Center Appearance</property>
                     <property name="valign">center</property>
+                    <property name="margin_top">8</property>
+                    <property name="margin_bottom">8</property>
                   </object>
                   <packing>
                     <property name="position">2</property>
@@ -2936,7 +2942,7 @@ will cancel the selection.</property>
                         <property name="width_request">100</property>
                         <property name="height_request">80</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can_focus">False</property>
                         <property name="activatable">False</property>
                         <property name="selectable">False</property>
                         <child>
@@ -4001,6 +4007,8 @@ will cancel the selection.</property>
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">Children Appearance</property>
                     <property name="valign">center</property>
+                    <property name="margin_top">8</property>
+                    <property name="margin_bottom">8</property>
                   </object>
                   <packing>
                     <property name="position">3</property>
@@ -4016,7 +4024,7 @@ will cancel the selection.</property>
                         <property name="width_request">100</property>
                         <property name="height_request">80</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can_focus">False</property>
                         <property name="activatable">False</property>
                         <property name="selectable">False</property>
                         <child>
@@ -4568,6 +4576,8 @@ will cancel the selection.</property>
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">Grandchildren Appearance</property>
                     <property name="valign">center</property>
+                    <property name="margin_top">8</property>
+                    <property name="margin_bottom">8</property>
                   </object>
                   <packing>
                     <property name="position">4</property>
@@ -4583,7 +4593,7 @@ will cancel the selection.</property>
                         <property name="width_request">100</property>
                         <property name="height_request">80</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can_focus">False</property>
                         <property name="activatable">False</property>
                         <property name="selectable">False</property>
                         <child>
@@ -4833,6 +4843,8 @@ will cancel the selection.</property>
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">Trace Appearance</property>
                     <property name="valign">center</property>
+                    <property name="margin_top">8</property>
+                    <property name="margin_bottom">8</property>
                   </object>
                   <packing>
                     <property name="position">5</property>
@@ -4870,7 +4882,7 @@ will cancel the selection.</property>
                     <child>
                       <object class="GtkListBoxRow">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can_focus">False</property>
                         <property name="activatable">False</property>
                         <property name="selectable">False</property>
                         <child>
@@ -5526,19 +5538,6 @@ These are advanced settings; the default values should work well in most cases.<
                                 <property name="can_focus">False</property>
                                 <property name="margin_top">8</property>
                                 <child>
-                                  <object class="GtkButton">
-                                    <property name="label" translatable="yes">None</property>
-                                    <property name="width_request">125</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
                                   <object class="GtkLabel">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
@@ -5548,6 +5547,19 @@ These are advanced settings; the default values should work well in most cases.<
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkToggleButton" id="hotkey-button">
+                                    <property name="label" translatable="yes">None</property>
+                                    <property name="width_request">125</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">1</property>
                                     <property name="top_attach">0</property>
                                   </packing>
                                 </child>
@@ -5891,6 +5903,8 @@ These are advanced settings; the default values should work well in most cases.<
                             <property name="can_focus">True</property>
                             <property name="hexpand">True</property>
                             <property name="placeholder_text" translatable="yes">Name</property>
+                            <property name="show_emoji_icon">True</property>
+                            <property name="enable_emoji_completion">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -5911,12 +5925,13 @@ These are advanced settings; the default values should work well in most cases.<
                         <property name="receives_default">True</property>
                         <property name="popover">icon-popover</property>
                         <child>
-                          <object class="GtkImage">
+                          <object class="GtkDrawingArea" id="item-icon-drawingarea">
+                            <property name="width_request">64</property>
+                            <property name="height_request">64</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">end</property>
-                            <property name="pixel_size">64</property>
-                            <property name="icon_name">applications-graphics</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
                           </object>
                         </child>
                       </object>
@@ -6832,7 +6847,7 @@ These are advanced settings; the default values should work well in most cases.<
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
-                    <property name="label" translatable="yes">Add New Child Item</property>
+                    <property name="label" translatable="yes">Add New Item</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>

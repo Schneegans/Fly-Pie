@@ -49,19 +49,15 @@ let MenuTree = GObject.registerClass({}, class MenuTree extends Gtk.TreeStore {
   }
 
   vfunc_row_drop_possible(path) {
-    try {
-      const parentPath = path.copy();
-      if (parentPath.up()) {
-        const [ok, parent] = this.get_iter(parentPath);
-        if (ok) {
-          const type = this.get_value(parent, MenuTreeColumn.TYPE);
-          if (type == 'group' || type == 'menu') {
-            return true;
-          }
+    const parentPath = path.copy();
+    if (parentPath.up()) {
+      const [ok, parent] = this.get_iter(parentPath);
+      if (ok) {
+        const type = this.get_value(parent, MenuTreeColumn.TYPE);
+        if (type == 'group' || type == 'menu') {
+          return true;
         }
       }
-    } catch (error) {
-      utils.notification('Failed to load Preset: ' + error);
     }
     return false;
   }
@@ -344,49 +340,52 @@ var Settings = class Settings {
       utils.notification('Failed to load Preset: ' + error);
     }
 
-    this._builder.get_object('menus-treeview-selection')
-        .connect('changed', (selection) => {
-          try {
-            const [ok, model, iter] = selection.get_selected();
-            if (ok) {
-              const type = model.get_value(iter, MenuTreeColumn.TYPE);
+    this._menuTreeSelection = this._builder.get_object('menus-treeview-selection');
+    this._menuTreeSelection.connect('changed', (selection) => {
+      try {
 
-              const revealers = {
-                'item-settings-hotkey-revealer': false,
-                'item-settings-angle-revealer': false,
-                'item-settings-count-revealer': false,
-                'item-settings-url-revealer': false,
-                'item-settings-command-revealer': false,
-                'item-settings-file-revealer': false,
-                'item-settings-application-revealer': false,
-              };
+        this._itemIcon.queue_draw();
 
-              if (type == 'menu') {
-                revealers['item-settings-hotkey-revealer'] = true;
-              } else {
-                revealers['item-settings-angle-revealer'] = true;
+        const [ok, model, iter] = selection.get_selected();
+        if (ok) {
+          const type = model.get_value(iter, MenuTreeColumn.TYPE);
 
-                if (type == 'application') {
-                  revealers['item-settings-application-revealer'] = true;
-                } else if (type == 'url') {
-                  revealers['item-settings-url-revealer'] = true;
-                } else if (type == 'file') {
-                  revealers['item-settings-file-revealer'] = true;
-                } else if (type == 'command') {
-                  revealers['item-settings-command-revealer'] = true;
-                } else if (type != 'group') {
-                  revealers['item-settings-count-revealer'] = true;
-                }
-              }
+          const revealers = {
+            'item-settings-hotkey-revealer': false,
+            'item-settings-angle-revealer': false,
+            'item-settings-count-revealer': false,
+            'item-settings-url-revealer': false,
+            'item-settings-command-revealer': false,
+            'item-settings-file-revealer': false,
+            'item-settings-application-revealer': false,
+          };
 
-              for (const revealer in revealers) {
-                this._builder.get_object(revealer).reveal_child = revealers[revealer];
-              }
+          if (type == 'menu') {
+            revealers['item-settings-hotkey-revealer'] = true;
+          } else {
+            revealers['item-settings-angle-revealer'] = true;
+
+            if (type == 'application') {
+              revealers['item-settings-application-revealer'] = true;
+            } else if (type == 'url') {
+              revealers['item-settings-url-revealer'] = true;
+            } else if (type == 'file') {
+              revealers['item-settings-file-revealer'] = true;
+            } else if (type == 'command') {
+              revealers['item-settings-command-revealer'] = true;
+            } else if (type != 'group') {
+              revealers['item-settings-count-revealer'] = true;
             }
-          } catch (error) {
-            utils.notification('Failed to load Preset: ' + error);
           }
-        });
+
+          for (const revealer in revealers) {
+            this._builder.get_object(revealer).reveal_child = revealers[revealer];
+          }
+        }
+      } catch (error) {
+        utils.notification('Failed to load Preset: ' + error);
+      }
+    });
 
 
 
@@ -423,9 +422,40 @@ var Settings = class Settings {
       this._builder.get_object('icon-name').text = chooser.get_filename();
     });
 
+    this._builder.get_object('icon-name').connect('notify::text', (widget) => {
+      this._setSelectedMenuItem(MenuTreeColumn.ICON, widget.text);
+      this._itemIcon.queue_draw();
+    });
+
+    this._itemIcon = this._builder.get_object('item-icon-drawingarea');
+    this._itemIcon.connect('draw', (widget, ctx) => {
+      const size = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      const selected = this._getSelectedMenuItem();
+      if (selected[MenuTreeColumn.ICON]) {
+        utils.paintIcon(ctx, selected[MenuTreeColumn.ICON], size, 1);
+      }
+      return false;
+    });
+
+    this._hotkeyButton = this._builder.get_object('hotkey-button');
+    this._hotkeyButton.connect('toggled', (widget) => {
+      if (widget.active) {
+        widget.set_label('Press a hotkey ...');
+        widget.grab_add();
+        // Gtk.grab_add(widget);
+        // FocusGrabber.grab(this.get_window());
+      } else {
+        widget.grab_remove();
+      }
+    });
 
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
+
+    // Because it looks cool, we add a subtitle to the window's title bar.
+    this._widget.connect('realize', () => {
+      this._widget.get_toplevel().get_titlebar().subtitle = 'Do things quickly.';
+    });
   }
 
   // -------------------------------------------------------------------- public interface
@@ -454,9 +484,26 @@ var Settings = class Settings {
     iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
   }
 
+  _getSelectedMenuItem() {
+    let selected            = {};
+    const [ok, model, iter] = this._menuTreeSelection.get_selected();
+    if (ok) {
+      for (const key in MenuTreeColumn) {
+        selected[MenuTreeColumn[key]] = model.get_value(iter, MenuTreeColumn[key]);
+      }
+    }
+    return selected;
+  }
+
+  _setSelectedMenuItem(column, data) {
+    const [ok, model, iter] = this._menuTreeSelection.get_selected();
+    if (ok) {
+      model.set_value(iter, column, data);
+    }
+  }
+
   // This initializes the widgets related to the presets.
   _initializePresetButtons() {
-
 
     // Store some members will will use frequently.
     this._presetDirectory = Gio.File.new_for_path(Me.path + '/presets');

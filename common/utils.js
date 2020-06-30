@@ -90,35 +90,47 @@ function paintIcon(ctx, name, size, opacity) {
   const info  = theme.lookup_by_gicon(
       Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
 
-  // We got something, return it!
+  // We got something, paint it!
   if (info != null) {
     Gdk.cairo_set_source_pixbuf(ctx, info.load_icon(), 0, 0);
     ctx.paintWithAlpha(opacity);
-
-  } else {
-
-    // If no icon was found, write it as plain text.
-    ctx.setSourceRGBA(0, 0, 0, opacity);
-
-    const layout = PangoCairo.create_layout(ctx);
-    layout.set_width(Pango.units_from_double(size));
-
-    const fontDescription = Pango.FontDescription.from_string('Sans');
-    fontDescription.set_absolute_size(Pango.units_from_double(size * 0.9));
-
-    layout.set_font_description(fontDescription);
-    layout.set_text(name, -1);
-    layout.set_alignment(Pango.Alignment.CENTER);
-
-    const extents = layout.get_pixel_extents()[1];
-    ctx.moveTo(0, (size - extents.height) / 2);
-
-    ctx.pushGroup();
-    PangoCairo.update_layout(ctx, layout);
-    PangoCairo.show_layout(ctx, layout);
-    ctx.popGroupToSource();
-    ctx.paintWithAlpha(opacity);
+    return;
   }
+
+  // If no icon was found, write it as plain text.
+  const layout = PangoCairo.create_layout(ctx);
+  layout.set_font_description(Pango.FontDescription.from_string('Sans'));
+  layout.set_alignment(Pango.Alignment.CENTER);
+  layout.set_wrap(Pango.WrapMode.CHAR);
+  layout.set_text(name, -1);
+
+  // We created a one-line layout above. We now estimate a proper width for the layout so
+  // that the text covers more ore less a square shaped region. For this we compute the
+  // required surface area of the one-line layout and compute the size of a equally large
+  // square. As this will underestimate the required width slightly, we add some the
+  // line's height as additional width. This works quite well in most cases.
+  const lineExtents = layout.get_pixel_extents()[1];
+  const squareSize  = Math.sqrt(lineExtents.width * lineExtents.height);
+  layout.set_width(Pango.units_from_double(squareSize + lineExtents.height));
+
+  // Now we retrieve the new extents and make sure that the new layout is centered in our
+  // icon.
+  const extents   = layout.get_pixel_extents()[0];
+  const maxExtent = Math.max(extents.width, extents.height);
+  const scale     = size / maxExtent;
+
+  ctx.setSourceRGBA(0, 0, 0, opacity);
+  ctx.scale(scale, scale);
+  ctx.translate(-extents.x, -extents.y);
+  ctx.translate((maxExtent - extents.width) / 2, (maxExtent - extents.height) / 2);
+
+  // We draw to a group to be able to paint emojis with opacity. Is there any other way of
+  // doing this?
+  ctx.pushGroup();
+  PangoCairo.update_layout(ctx, layout);
+  PangoCairo.show_layout(ctx, layout);
+  ctx.popGroupToSource();
+  ctx.paintWithAlpha(opacity);
 }
 
 
