@@ -5327,53 +5327,10 @@ These are advanced settings; the default values should work well in most cases.<
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="headers_visible">False</property>
-                        <property name="expander_column">menus-treeview-name-column</property>
                         <property name="reorderable">True</property>
+                        <property name="enable_tree_lines">True</property>
                         <child internal-child="selection">
                           <object class="GtkTreeSelection" id="menus-treeview-selection"/>
-                        </child>
-                        <child>
-                          <object class="GtkTreeViewColumn" id="menus-treeview-icon-column">
-                            <property name="sizing">autosize</property>
-                            <property name="title" translatable="yes">Icon</property>
-                            <child>
-                              <object class="GtkCellRendererPixbuf"/>
-                              <attributes>
-                                <attribute name="icon-name">0</attribute>
-                              </attributes>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkTreeViewColumn" id="menus-treeview-name-column">
-                            <property name="sizing">autosize</property>
-                            <property name="title" translatable="yes">Name</property>
-                            <child>
-                              <object class="GtkCellRendererText"/>
-                              <attributes>
-                                <attribute name="text">1</attribute>
-                                <attribute name="weight">7</attribute>
-                              </attributes>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkTreeViewColumn" id="menus-treeview-description-column">
-                            <property name="sizing">autosize</property>
-                            <property name="title" translatable="yes">Description</property>
-                            <property name="expand">True</property>
-                            <property name="alignment">1</property>
-                            <child>
-                              <object class="GtkCellRendererText">
-                                <property name="xalign">1</property>
-                                <property name="scale">0.84999999999999998</property>
-                              </object>
-                              <attributes>
-                                <attribute name="text">2</attribute>
-                                <attribute name="weight">7</attribute>
-                              </attributes>
-                            </child>
-                          </object>
                         </child>
                       </object>
                     </child>

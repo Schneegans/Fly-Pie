@@ -8,6 +8,7 @@
 
 'use strict';
 
+const Cairo                          = imports.cairo;
 const {GObject, GLib, Gtk, Gio, Gdk} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
@@ -19,13 +20,13 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
 var MenuTreeColumn = {
   ICON: 0,
-  NAME: 1,
-  DESCRIPTION: 2,
-  ID: 3,
-  TYPE: 4,
-  DATA: 5,
-  FIXED_ANGLE: 6,
-  FONT_WEIGHT: 7,
+  ICON_NAME: 1,
+  NAME: 2,
+  DESCRIPTION: 3,
+  ID: 4,
+  TYPE: 5,
+  DATA: 6,
+  FIXED_ANGLE: 7,
 }
 
 let MenuTree = GObject.registerClass({}, class MenuTree extends Gtk.TreeStore {
@@ -33,14 +34,14 @@ let MenuTree = GObject.registerClass({}, class MenuTree extends Gtk.TreeStore {
     super._init();
 
     this.set_column_types([
-      GObject.TYPE_STRING,  // 0: ICON
-      GObject.TYPE_STRING,  // 1: NAME
-      GObject.TYPE_STRING,  // 2: DESCRIPTION
-      GObject.TYPE_STRING,  // 3: ID
-      GObject.TYPE_STRING,  // 4: TYPE
-      GObject.TYPE_STRING,  // 5: DATA
-      GObject.TYPE_DOUBLE,  // 6: FIXED_ANGLE
-      GObject.TYPE_DOUBLE,  // 7: FONT_WEIGHT
+      Cairo.Surface.$gtype,  // 0: ICON
+      GObject.TYPE_STRING,   // 1: ICON_NAME
+      GObject.TYPE_STRING,   // 2: NAME
+      GObject.TYPE_STRING,   // 3: DESCRIPTION
+      GObject.TYPE_STRING,   // 4: ID
+      GObject.TYPE_STRING,   // 5: TYPE
+      GObject.TYPE_STRING,   // 6: DATA
+      GObject.TYPE_DOUBLE,   // 7: FIXED_ANGLE
     ]);
   }
 
@@ -233,10 +234,9 @@ var Settings = class Settings {
         id: 'menu01',
         type: 'menu',
         icon: 'gedit',
-        name: 'Main Menu',
-        description: 'Hotkey: <Ctrl>A',
-        data: '<Ctrl>>',
-        fontWeight: 600,
+        name: '<b>Main Menu</b>\n<small>Ctrl+A</small>',
+        description: '',
+        data: 'data',
         fixedAngle: -1,
         children: []
       },
@@ -244,10 +244,9 @@ var Settings = class Settings {
         id: 'menu02',
         type: 'menu',
         icon: 'thunderbird',
-        name: 'Main Menu 2',
-        description: 'Hotkey: <Ctrl>A',
-        data: '<Ctrl>>',
-        fontWeight: 600,
+        name: '<b>Main Menu 2</b>\n<small>Ctrl+B</small>',
+        description: '',
+        data: 'data',
         fixedAngle: -1,
         children: [
           {
@@ -255,9 +254,8 @@ var Settings = class Settings {
             type: 'group',
             icon: 'emblem-default',
             name: 'Favorites',
-            description: 'Group',
-            data: '<Ctrl>>',
-            fontWeight: 400,
+            description: '[group]',
+            data: 'data',
             fixedAngle: -1,
           },
           {
@@ -265,9 +263,8 @@ var Settings = class Settings {
             type: 'application',
             icon: 'firefox',
             name: 'Firefox',
-            description: 'Launch Applications',
-            data: '<Ctrl>>',
-            fontWeight: 400,
+            description: '[application]',
+            data: 'data',
             fixedAngle: -1,
           },
         ]
@@ -276,10 +273,9 @@ var Settings = class Settings {
         id: 'menu03',
         type: 'menu',
         icon: 'chrome',
-        name: 'Main Menu 3',
-        description: 'Hotkey: <Ctrl>A',
-        data: '<Ctrl>>',
-        fontWeight: 600,
+        name: '<b>Main Menu 3</b>\n<small>Ctrl+C</small>',
+        description: '',
+        data: 'data',
         fixedAngle: -1,
         children: [
           {
@@ -287,9 +283,8 @@ var Settings = class Settings {
             type: 'bookmarks-group',
             icon: 'nautilus',
             name: 'Bookmarks',
-            description: 'Group: Bookmarks',
-            data: '<Ctrl>>',
-            fontWeight: 400,
+            description: '[bookmarks]',
+            data: 'data',
             fixedAngle: -1,
           },
           {
@@ -297,9 +292,8 @@ var Settings = class Settings {
             type: 'url',
             icon: 'epiphany',
             name: 'URL',
-            description: 'URL',
-            data: '<Ctrl>>',
-            fontWeight: 400,
+            description: '[http://www.google.de]',
+            data: 'data',
             fixedAngle: -1,
           },
         ]
@@ -307,12 +301,42 @@ var Settings = class Settings {
     ];
 
     try {
-      this._menuTree = new MenuTree();
-      this._builder.get_object('menus-treeview').set_model(this._menuTree);
+      this._menuTree     = new MenuTree();
+      this._menuTreeView = this._builder.get_object('menus-treeview');
+      this._menuTreeView.set_model(this._menuTree);
+
+      const primaryColumn = new Gtk.TreeViewColumn();
+
+      const iconRender = new Gtk.CellRendererPixbuf();
+      primaryColumn.pack_start(iconRender, false);
+
+      const nameRender = new Gtk.CellRendererText();
+      nameRender.xpad  = 5;
+      primaryColumn.pack_start(nameRender, true);
+
+      primaryColumn.add_attribute(iconRender, 'surface', MenuTreeColumn.ICON);
+      primaryColumn.add_attribute(nameRender, 'markup', MenuTreeColumn.NAME);
+
+      this._menuTreeView.append_column(primaryColumn);
+
+
+      const secondaryColumn = new Gtk.TreeViewColumn();
+
+      const descriptionRender     = new Gtk.CellRendererText();
+      descriptionRender.sensitive = false;
+      secondaryColumn.pack_start(descriptionRender, true);
+      secondaryColumn.add_attribute(
+          descriptionRender, 'markup', MenuTreeColumn.DESCRIPTION);
+
+      this._menuTreeView.append_column(secondaryColumn);
+
+
       for (let i = 0; i < menus.length; i++) {
         const menu = menus[i];
         const iter = this._menuTree.append(null);
+
         this._menuTree.set(iter, [0, 1, 2, 3, 4, 5, 6, 7], [
+          utils.createIcon(menu.icon, 24),
           menu.icon,
           menu.name,
           menu.description,
@@ -320,11 +344,11 @@ var Settings = class Settings {
           menu.type,
           menu.data,
           menu.fixedAngle,
-          menu.fontWeight,
         ]);
         for (let j = 0; j < menu.children.length; j++) {
           const child = menu.children[j];
           this._menuTree.set(this._menuTree.append(iter), [0, 1, 2, 3, 4, 5, 6, 7], [
+            utils.createIcon(child.icon, 16),
             child.icon,
             child.name,
             child.description,
@@ -332,7 +356,6 @@ var Settings = class Settings {
             child.type,
             child.data,
             child.fixedAngle,
-            child.fontWeight,
           ]);
         }
       }
@@ -423,7 +446,15 @@ var Settings = class Settings {
     });
 
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
-      this._setSelectedMenuItem(MenuTreeColumn.ICON, widget.text);
+      let iconSize = 24;
+
+      if (this._getSelectedMenuItem().path.get_depth() > 1) {
+        iconSize = 16;
+      }
+
+      this._setSelectedMenuItem(
+          MenuTreeColumn.ICON, utils.createIcon(widget.text, iconSize));
+      this._setSelectedMenuItem(MenuTreeColumn.ICON_NAME, widget.text);
       this._itemIcon.queue_draw();
     });
 
@@ -431,8 +462,8 @@ var Settings = class Settings {
     this._itemIcon.connect('draw', (widget, ctx) => {
       const size = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const selected = this._getSelectedMenuItem();
-      if (selected[MenuTreeColumn.ICON]) {
-        utils.paintIcon(ctx, selected[MenuTreeColumn.ICON], size, 1);
+      if (selected[MenuTreeColumn.ICON_NAME]) {
+        utils.paintIcon(ctx, selected[MenuTreeColumn.ICON_NAME], size, 1);
       }
       return false;
     });
@@ -488,6 +519,7 @@ var Settings = class Settings {
     let selected            = {};
     const [ok, model, iter] = this._menuTreeSelection.get_selected();
     if (ok) {
+      selected.path = model.get_path(iter);
       for (const key in MenuTreeColumn) {
         selected[MenuTreeColumn[key]] = model.get_value(iter, MenuTreeColumn[key]);
       }
