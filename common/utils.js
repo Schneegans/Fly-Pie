@@ -133,6 +133,17 @@ function paintIcon(ctx, name, size, opacity) {
   ctx.paintWithAlpha(opacity);
 }
 
+function createIcon(name, size) {
+  const surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, size, size);
+  const ctx     = new Cairo.Context(surface);
+  paintIcon(ctx, name, size, 1);
+
+  // Explicitly tell Cairo to free the context memory. Is this really necessary?
+  // https://wiki.gnome.org/Projects/GnomeShell/Extensions/TipsOnMemoryManagement#Cairo
+  ctx.$dispose();
+
+  return surface;
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Returns a representative average Clutter.Color for a given Cairo.Surface.            //

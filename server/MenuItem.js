@@ -461,16 +461,10 @@ class MenuItem extends Clutter.Actor {
 
       // This won't change, so we need to compute it only once.
       if (this._averageIconColor == undefined) {
-        const tmp = new Cairo.ImageSurface(Cairo.Format.ARGB32, 24, 24);
-        const ctx = new Cairo.Context(tmp);
-        utils.paintIcon(ctx, this.icon, 24, 1);
 
         // We store the average color as a property of this.
-        this._averageIconColor = utils.getAverageIconColor(tmp, 24);
-
-        // Explicitly tell Cairo to free the context memory. Is this really necessary?
-        // https://wiki.gnome.org/Projects/GnomeShell/Extensions/TipsOnMemoryManagement#Cairo
-        ctx.$dispose();
+        const surface          = utils.createIcon(this.icon, 24);
+        this._averageIconColor = utils.getAverageIconColor(surface, 24);
       }
 
       // Now we modify this color based on luminance and saturation.
