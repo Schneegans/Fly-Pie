@@ -189,7 +189,9 @@ var Settings = class Settings {
 
     // Because it looks cool, we add a subtitle to the window's title bar.
     this._widget.connect('realize', () => {
-      this._widget.get_toplevel().get_titlebar().subtitle = 'Do things quickly.';
+      const stackSwitcher = this._builder.get_object('main-stack-switcher');
+      stackSwitcher.parent.remove(stackSwitcher);
+      this._widget.get_toplevel().get_titlebar().set_custom_title(stackSwitcher);
     });
   }
 
