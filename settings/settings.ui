@@ -728,7 +728,7 @@
         <property name="transition_duration">300</property>
         <property name="transition_type">slide-left-right</property>
         <child>
-          <object class="GtkGrid" id="appearance-page">
+          <object class="GtkGrid" id="settings-page">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="vexpand">True</property>
@@ -1132,7 +1132,7 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Useful on High-DPI Displays.</property>
+                                    <property name="label" translatable="yes">Independent of the preset.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -4851,30 +4851,6 @@ will cancel the selection.</property>
                     <property name="tab_fill">False</property>
                   </packing>
                 </child>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">2</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="name">page0</property>
-            <property name="title" translatable="yes">Appearance</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkGrid" id="behavior-page">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkFrame">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_bottom">16</property>
-                <property name="hexpand">True</property>
-                <property name="label_xalign">0</property>
-                <property name="shadow_type">in</property>
                 <child>
                   <object class="GtkListBox">
                     <property name="visible">True</property>
@@ -4882,14 +4858,14 @@ will cancel the selection.</property>
                     <child>
                       <object class="GtkListBoxRow">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can_focus">True</property>
                         <property name="activatable">False</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="margin_left">10</property>
+                            <property name="margin_left">15</property>
                             <property name="margin_right">10</property>
                             <property name="margin_top">10</property>
                             <property name="margin_bottom">10</property>
@@ -4899,7 +4875,6 @@ will cancel the selection.</property>
                               <object class="GtkGrid">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="margin_right">20</property>
                                 <property name="row_spacing">2</property>
                                 <child>
                                   <object class="GtkLabel">
@@ -4985,7 +4960,6 @@ will cancel the selection.</property>
                               <object class="GtkGrid">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="margin_right">20</property>
                                 <property name="row_spacing">2</property>
                                 <child>
                                   <object class="GtkLabel">
@@ -5073,7 +5047,6 @@ This is multiplied by the Global Scale value.</property>
                               <object class="GtkGrid">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="margin_right">20</property>
                                 <property name="row_spacing">2</property>
                                 <child>
                                   <object class="GtkLabel">
@@ -5160,7 +5133,6 @@ This is multiplied by the Global Scale value.</property>
                               <object class="GtkGrid">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="margin_right">20</property>
                                 <property name="row_spacing">2</property>
                                 <child>
                                   <object class="GtkLabel">
@@ -5248,10 +5220,8 @@ the current item will be selected.</property>
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="margin_top">5</property>
-                                <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes">Use the settings below to fine-tune the Marking Mode of Swing-Pie. 
-These are advanced settings; the default values should work well in most cases.</property>
+                                <property name="margin_bottom">8</property>
+                                <property name="label" translatable="yes">These settings independent of the presets. </property>
                                 <property name="justify">center</property>
                                 <property name="wrap">True</property>
                                 <style>
@@ -5269,7 +5239,7 @@ These are advanced settings; the default values should work well in most cases.<
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Gesture Settings</property>
+                                <property name="label" translatable="yes">Advanced Settings</property>
                                 <attributes>
                                   <attribute name="weight" value="bold"/>
                                 </attributes>
@@ -5285,21 +5255,36 @@ These are advanced settings; the default values should work well in most cases.<
                       </object>
                     </child>
                   </object>
+                  <packing>
+                    <property name="position">6</property>
+                  </packing>
                 </child>
-                <child type="label_item">
-                  <placeholder/>
+                <child type="tab">
+                  <object class="GtkDrawingArea" id="advanced-tab-icon">
+                    <property name="width_request">24</property>
+                    <property name="height_request">24</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="tooltip_text" translatable="yes">Advanced Settings</property>
+                    <property name="valign">center</property>
+                    <property name="margin_top">8</property>
+                    <property name="margin_bottom">8</property>
+                  </object>
+                  <packing>
+                    <property name="position">6</property>
+                    <property name="tab_fill">False</property>
+                  </packing>
                 </child>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
+                <property name="top_attach">2</property>
               </packing>
             </child>
           </object>
           <packing>
-            <property name="name">page3</property>
-            <property name="title" translatable="yes">Behavior</property>
-            <property name="position">1</property>
+            <property name="name">page0</property>
+            <property name="title" translatable="yes">Settings</property>
           </packing>
         </child>
         <child>
@@ -6839,7 +6824,7 @@ links, or *.desktop files to the tree on the left.&lt;/small&gt;</property>
           <packing>
             <property name="name">page1</property>
             <property name="title" translatable="yes">Menu Editor</property>
-            <property name="position">2</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
@@ -6875,23 +6860,36 @@ links, or *.desktop files to the tree on the left.&lt;/small&gt;</property>
               </packing>
             </child>
             <child>
-              <object class="GtkScrolledWindow" id="achievements-scrolledwindow">
+              <object class="GtkFrame">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="margin_left">50</property>
-                <property name="margin_right">50</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">75</property>
+                <property name="margin_right">75</property>
                 <property name="vexpand">True</property>
-                <property name="hscrollbar_policy">never</property>
+                <property name="label_xalign">0</property>
                 <property name="shadow_type">in</property>
                 <child>
-                  <object class="GtkTreeView">
+                  <object class="GtkAlignment">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="model">achievements-list</property>
-                    <child internal-child="selection">
-                      <object class="GtkTreeSelection"/>
+                    <property name="can_focus">False</property>
+                    <property name="vexpand">True</property>
+                    <property name="left_padding">12</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="vexpand">True</property>
+                        <property name="label" translatable="yes">&lt;big&gt;Yes, there will be achievements.&lt;/big&gt;
+
+Stay tuned!</property>
+                        <property name="use_markup">True</property>
+                        <property name="justify">center</property>
+                      </object>
                     </child>
                   </object>
+                </child>
+                <child type="label_item">
+                  <placeholder/>
                 </child>
               </object>
               <packing>
@@ -6903,7 +6901,7 @@ links, or *.desktop files to the tree on the left.&lt;/small&gt;</property>
           <packing>
             <property name="name">page2</property>
             <property name="title" translatable="yes">Achievements</property>
-            <property name="position">3</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>
