@@ -122,6 +122,24 @@ var MenuEditor = class MenuEditor {
             data: 'data',
             fixedAngle: -1,
           },
+          {
+            id: 'menu01',
+            type: 'command',
+            icon: 'terminal',
+            name: 'Grep',
+            description: '[application]',
+            data: 'data',
+            fixedAngle: -1,
+          },
+          {
+            id: 'menu01',
+            type: 'hotkey',
+            icon: 'H',
+            name: 'Hotkey',
+            description: '[application]',
+            data: 'data',
+            fixedAngle: -1,
+          },
         ]
       },
       {
@@ -148,6 +166,15 @@ var MenuEditor = class MenuEditor {
             icon: 'epiphany',
             name: 'URL',
             description: '[http://www.google.de]',
+            data: 'data',
+            fixedAngle: -1,
+          },
+          {
+            id: 'menu01',
+            type: 'file',
+            icon: 'nautilus',
+            name: 'File',
+            description: '[huhu]',
             data: 'data',
             fixedAngle: -1,
           },
@@ -224,41 +251,45 @@ var MenuEditor = class MenuEditor {
 
         this._itemIcon.queue_draw();
 
-        const [ok, model, iter] = selection.get_selected();
-        if (ok) {
-          const type = model.get_value(iter, MenuTreeColumn.TYPE);
+        this._builder.get_object('item-name').text =
+            this._getSelectedMenuItem(MenuTreeColumn.NAME);
 
-          const revealers = {
-            'item-settings-hotkey-revealer': false,
-            'item-settings-angle-revealer': false,
-            'item-settings-count-revealer': false,
-            'item-settings-url-revealer': false,
-            'item-settings-command-revealer': false,
-            'item-settings-file-revealer': false,
-            'item-settings-application-revealer': false,
-          };
+        const revealers = {
+          'item-settings-revealer': true,
+          'item-settings-menu-hotkey-revealer': false,
+          'item-settings-item-hotkey-revealer': false,
+          'item-settings-angle-revealer': false,
+          'item-settings-count-revealer': false,
+          'item-settings-url-revealer': false,
+          'item-settings-command-revealer': false,
+          'item-settings-file-revealer': false,
+          'item-settings-application-revealer': false,
+        };
 
-          if (type == 'menu') {
-            revealers['item-settings-hotkey-revealer'] = true;
-          } else {
-            revealers['item-settings-angle-revealer'] = true;
+        const type = this._getSelectedMenuItem(MenuTreeColumn.TYPE);
 
-            if (type == 'application') {
-              revealers['item-settings-application-revealer'] = true;
-            } else if (type == 'url') {
-              revealers['item-settings-url-revealer'] = true;
-            } else if (type == 'file') {
-              revealers['item-settings-file-revealer'] = true;
-            } else if (type == 'command') {
-              revealers['item-settings-command-revealer'] = true;
-            } else if (type != 'group') {
-              revealers['item-settings-count-revealer'] = true;
-            }
+        if (type == 'menu') {
+          revealers['item-settings-menu-hotkey-revealer'] = true;
+        } else {
+          revealers['item-settings-angle-revealer'] = true;
+
+          if (type == 'application') {
+            revealers['item-settings-application-revealer'] = true;
+          } else if (type == 'hotkey') {
+            revealers['item-settings-item-hotkey-revealer'] = true;
+          } else if (type == 'url') {
+            revealers['item-settings-url-revealer'] = true;
+          } else if (type == 'file') {
+            revealers['item-settings-file-revealer'] = true;
+          } else if (type == 'command') {
+            revealers['item-settings-command-revealer'] = true;
+          } else if (type != 'group') {
+            revealers['item-settings-count-revealer'] = true;
           }
+        }
 
-          for (const revealer in revealers) {
-            this._builder.get_object(revealer).reveal_child = revealers[revealer];
-          }
+        for (const revealer in revealers) {
+          this._builder.get_object(revealer).reveal_child = revealers[revealer];
         }
       } catch (error) {
         utils.notification('Failed to load Preset: ' + error);
@@ -300,10 +331,16 @@ var MenuEditor = class MenuEditor {
       this._builder.get_object('icon-name').text = chooser.get_filename();
     });
 
+    this._builder.get_object('item-name').connect('notify::text', (widget) => {
+      this._setSelectedMenuItem(MenuTreeColumn.NAME, widget.text);
+    });
+
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
       let iconSize = 24;
 
-      if (this._getSelectedMenuItem().path.get_depth() > 1) {
+      const [ok, model, iter] = this._menuTreeSelection.get_selected();
+
+      if (model.get_path(iter).get_depth() > 1) {
         iconSize = 16;
       }
 
@@ -316,10 +353,8 @@ var MenuEditor = class MenuEditor {
     this._itemIcon = this._builder.get_object('item-icon-drawingarea');
     this._itemIcon.connect('draw', (widget, ctx) => {
       const size = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const selected = this._getSelectedMenuItem();
-      if (selected[MenuTreeColumn.ICON_NAME]) {
-        utils.paintIcon(ctx, selected[MenuTreeColumn.ICON_NAME], size, 1);
-      }
+      const icon = this._getSelectedMenuItem(MenuTreeColumn.ICON_NAME);
+      utils.paintIcon(ctx, icon, size, 1);
       return false;
     });
 
@@ -355,16 +390,11 @@ var MenuEditor = class MenuEditor {
     iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
   }
 
-  _getSelectedMenuItem() {
-    let selected            = {};
+  _getSelectedMenuItem(column) {
     const [ok, model, iter] = this._menuTreeSelection.get_selected();
     if (ok) {
-      selected.path = model.get_path(iter);
-      for (const key in MenuTreeColumn) {
-        selected[MenuTreeColumn[key]] = model.get_value(iter, MenuTreeColumn[key]);
-      }
+      return model.get_value(iter, column);
     }
-    return selected;
   }
 
   _setSelectedMenuItem(column, data) {
