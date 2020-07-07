@@ -478,6 +478,19 @@
       </object>
     </child>
   </object>
+  <object class="GtkAdjustment" id="item-angle">
+    <property name="lower">-1</property>
+    <property name="upper">359</property>
+    <property name="value">-1</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="item-count">
+    <property name="lower">4</property>
+    <property name="upper">24</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
   <object class="GtkPopover" id="item-type-popover">
     <property name="can_focus">False</property>
     <child>
@@ -491,12 +504,11 @@
         <property name="row_spacing">5</property>
         <child>
           <object class="GtkScrolledWindow">
-            <property name="height_request">450</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="hscrollbar_policy">never</property>
             <property name="shadow_type">in</property>
-            <property name="max_content_height">300</property>
+            <property name="propagate_natural_width">True</property>
             <property name="propagate_natural_height">True</property>
             <child>
               <object class="GtkViewport">
@@ -508,8 +520,10 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkListBoxRow" id="item-type-menu">
+                        <property name="name">item-type-menu</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Menus can be bound to hotkeys.</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -526,7 +540,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">format-justify-fill-symbolic</property>
                               </object>
                               <packing>
@@ -535,38 +549,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;b&gt;Menu&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Menus can be bound to hotkeys.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Toplevel Menu</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -578,72 +566,23 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkListBoxRow" id="item-type-group">
+                      <object class="GtkListBoxRow">
+                        <property name="name">separator</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="activatable">False</property>
                         <property name="selectable">False</property>
                         <child>
-                          <object class="GtkGrid">
+                          <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="valign">center</property>
+                            <property name="halign">start</property>
                             <property name="margin_left">5</property>
-                            <property name="margin_right">10</property>
-                            <property name="margin_top">2</property>
-                            <property name="margin_bottom">2</property>
-                            <property name="column_spacing">8</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
-                                <property name="icon_name">format-justify-right-symbolic</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Item: &lt;b&gt;Group&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Create submenus with multiple items.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">0</property>
-                              </packing>
-                            </child>
+                            <property name="margin_top">10</property>
+                            <property name="label" translatable="yes">Menu Items</property>
+                            <style>
+                              <class name="dim-label"/>
+                            </style>
                           </object>
                         </child>
                       </object>
@@ -653,6 +592,7 @@
                         <property name="name">item-type-hotkey</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Simulates a key stroke.</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -669,7 +609,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">accessories-character-map</property>
                               </object>
                               <packing>
@@ -678,38 +618,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Item: &lt;b&gt;Press Hotkey&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Simulates a key stroke.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Press Hotkey</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -725,6 +639,7 @@
                         <property name="name">item-type-application</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Opens the specified application.</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -741,7 +656,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">applications-accessories</property>
                               </object>
                               <packing>
@@ -750,38 +665,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Item: &lt;b&gt;Launch Application&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Opens the specified application.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Launch Application</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -797,6 +686,7 @@
                         <property name="name">item-type-file</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Opens a file with the defaul applications.</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -813,7 +703,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">text-x-generic</property>
                               </object>
                               <packing>
@@ -822,38 +712,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Item: &lt;b&gt;Open File&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Opens a file with the defaul applications.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Open File</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -865,10 +729,11 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkListBoxRow" id="item-type-file1">
-                        <property name="name">item-type-file</property>
+                      <object class="GtkListBoxRow" id="item-type-url">
+                        <property name="name">item-type-url</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Opens an URL with the defaul browser.</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -885,7 +750,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">applications-internet</property>
                               </object>
                               <packing>
@@ -894,38 +759,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Item: &lt;b&gt;Open URL&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Opens an URL with the defaul browser.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Open URL</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -941,6 +780,7 @@
                         <property name="name">item-type-command</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Runs any shell command.</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -957,7 +797,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">utilities-terminal</property>
                               </object>
                               <packing>
@@ -966,39 +806,81 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Item: &lt;b&gt;Execute Command&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Runs any shell command.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Execute Command</property>
+                                <property name="use_markup">True</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">0</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="name">separator</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="activatable">False</property>
+                        <property name="selectable">False</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="margin_left">5</property>
+                            <property name="margin_top">10</property>
+                            <property name="label" translatable="yes">Submenus</property>
+                            <style>
+                              <class name="dim-label"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBoxRow" id="item-type-group">
+                        <property name="name">item-type-group</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Create submenus with multiple items.</property>
+                        <property name="selectable">False</property>
+                        <child>
+                          <object class="GtkGrid">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="valign">center</property>
+                            <property name="margin_left">5</property>
+                            <property name="margin_right">10</property>
+                            <property name="margin_top">2</property>
+                            <property name="margin_bottom">2</property>
+                            <property name="column_spacing">8</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="pixel_size">16</property>
+                                <property name="icon_name">format-justify-right-symbolic</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Custom Submenu</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1014,6 +896,7 @@
                         <property name="name">item-type-bookmarks</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Shows your commonly used directories.</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -1030,7 +913,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">folder</property>
                               </object>
                               <packing>
@@ -1039,38 +922,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Group: &lt;b&gt;Bookmarks&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Shows your commonly used directories.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Bookmarks</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1086,6 +943,7 @@
                         <property name="name">item-type-recent-files</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Shows your recently used files.</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -1102,7 +960,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">document-open-recent</property>
                               </object>
                               <packing>
@@ -1111,39 +969,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Group: &lt;b&gt;Recent Files&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Shows your recently used files.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Recent Files</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1159,6 +990,7 @@
                         <property name="name">item-type-favorite-apps</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Shows your pinned applications.</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -1175,7 +1007,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">emblem-favorite</property>
                               </object>
                               <packing>
@@ -1184,38 +1016,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Group: &lt;b&gt;Favorites&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Shows your pinned applications.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Favorites</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1231,6 +1037,7 @@
                         <property name="name">item-type-frequent-apps</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Shows your frequently used applications.</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -1247,7 +1054,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">emblem-default</property>
                               </object>
                               <packing>
@@ -1256,38 +1063,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Group: &lt;b&gt;Frequently Used&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Shows your frequently used applications.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Frequently Used</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1303,6 +1084,7 @@
                         <property name="name">item-type-running-apps</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Shows the currently running applications.</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -1319,7 +1101,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">preferences-system-windows</property>
                               </object>
                               <packing>
@@ -1328,39 +1110,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Group: &lt;b&gt;Running Apps&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Shows the currently running applications.&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Running Apps</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1376,6 +1131,7 @@
                         <property name="name">item-type-main-menu</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip_text" translatable="yes">Shows all installed applications. This is experimental - there are too many items in most menus. You should rather setup your own menus!</property>
                         <property name="selectable">False</property>
                         <child>
                           <object class="GtkGrid">
@@ -1393,7 +1149,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
                                 <property name="valign">start</property>
-                                <property name="pixel_size">24</property>
+                                <property name="pixel_size">16</property>
                                 <property name="icon_name">applications-system</property>
                               </object>
                               <packing>
@@ -1402,41 +1158,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Group: &lt;b&gt;Main Menu&lt;/b&gt;</property>
-                                    <property name="use_markup">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">start</property>
-                                    <property name="label" translatable="yes">&lt;small&gt;Shows all installed applications. This is experimental - there are too many items in most menus. You should rather setup your own menus!&lt;/small&gt;</property>
-                                    <property name="use_markup">True</property>
-                                    <property name="wrap">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Main Menu</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1459,19 +1186,6 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkAdjustment" id="menu-item-fixed-angle">
-    <property name="lower">-1</property>
-    <property name="upper">359</property>
-    <property name="value">-1</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="menu-item-max-count">
-    <property name="lower">4</property>
-    <property name="upper">24</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
   </object>
   <object class="GtkListStore" id="preset-list">
     <columns>
@@ -1886,89 +1600,107 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton" id="random-preset-button">
+                              <object class="GtkButtonBox">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Create a random preset</property>
+                                <property name="can_focus">False</property>
+                                <property name="layout_style">spread</property>
                                 <child>
-                                  <object class="GtkGrid">
+                                  <object class="GtkMenuButton">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="column_spacing">6</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="focus_on_click">False</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="direction">none</property>
+                                    <property name="popover">preset-popover</property>
                                     <child>
-                                      <object class="GtkImage">
+                                      <object class="GtkGrid">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="vexpand">True</property>
-                                        <property name="icon_name">applications-science-symbolic</property>
+                                        <property name="column_spacing">6</property>
+                                        <child>
+                                          <object class="GtkImage">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="halign">end</property>
+                                            <property name="icon_name">pan-down-symbolic</property>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="top_attach">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="vexpand">True</property>
+                                            <property name="label" translatable="yes">Load Presets</property>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">0</property>
+                                            <property name="top_attach">0</property>
+                                          </packing>
+                                        </child>
                                       </object>
-                                      <packing>
-                                        <property name="left_attach">0</property>
-                                        <property name="top_attach">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="vexpand">True</property>
-                                        <property name="label" translatable="yes">Generate Random Preset</property>
-                                      </object>
-                                      <packing>
-                                        <property name="left_attach">1</property>
-                                        <property name="top_attach">0</property>
-                                      </packing>
                                     </child>
                                   </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                    <property name="non_homogeneous">True</property>
+                                  </packing>
                                 </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="top_attach">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkMenuButton">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="focus_on_click">False</property>
-                                <property name="receives_default">True</property>
-                                <property name="direction">none</property>
-                                <property name="popover">preset-popover</property>
                                 <child>
-                                  <object class="GtkGrid">
+                                  <object class="GtkButton" id="random-preset-button">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="column_spacing">6</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="tooltip_text" translatable="yes">Create a random preset</property>
                                     <child>
-                                      <object class="GtkImage">
+                                      <object class="GtkGrid">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="halign">end</property>
-                                        <property name="icon_name">pan-down-symbolic</property>
+                                        <property name="column_spacing">6</property>
+                                        <child>
+                                          <object class="GtkImage">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="vexpand">True</property>
+                                            <property name="icon_name">applications-science-symbolic</property>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">0</property>
+                                            <property name="top_attach">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
+                                            <property name="halign">start</property>
+                                            <property name="vexpand">True</property>
+                                            <property name="label" translatable="yes">Generate Random</property>
+                                          </object>
+                                          <packing>
+                                            <property name="left_attach">1</property>
+                                            <property name="top_attach">0</property>
+                                          </packing>
+                                        </child>
                                       </object>
-                                      <packing>
-                                        <property name="left_attach">1</property>
-                                        <property name="top_attach">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="vexpand">True</property>
-                                        <property name="label" translatable="yes">Presets</property>
-                                      </object>
-                                      <packing>
-                                        <property name="left_attach">0</property>
-                                        <property name="top_attach">0</property>
-                                      </packing>
                                     </child>
                                   </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                    <property name="non_homogeneous">True</property>
+                                  </packing>
                                 </child>
+                                <style>
+                                  <class name="linked"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -6156,7 +5888,7 @@ the current item will be selected.</property>
                       <object class="GtkTreeView" id="menus-treeview">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="headers_visible">False</property>
+                        <property name="headers_clickable">False</property>
                         <property name="reorderable">True</property>
                         <property name="enable_tree_lines">True</property>
                         <child internal-child="selection">
@@ -6467,9 +6199,14 @@ the current item will be selected.</property>
                                                 <property name="width_request">200</property>
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
+                                                <property name="tooltip_markup" translatable="yes">Fixed angles can be used to ensure that an item remains at the same position even if other items are added or removed. This way you can edit a menu even if your muscles already learned the item's direction.
+
+However, there is a &lt;b&gt;restriction&lt;/b&gt; on the fixed angles. Inside a menu the fixed angles must be monotonically increasing, that is each fixed angle must be larger than any previous fixed angle.
+
+&lt;b&gt;Use -1 to disable this feature&lt;/b&gt;.</property>
                                                 <property name="text" translatable="yes">-1</property>
                                                 <property name="input_purpose">alpha</property>
-                                                <property name="adjustment">menu-item-fixed-angle</property>
+                                                <property name="adjustment">item-angle</property>
                                                 <property name="numeric">True</property>
                                                 <property name="value">-1</property>
                                               </object>
@@ -6504,7 +6241,7 @@ the current item will be selected.</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="text" translatable="yes">4</property>
                                                 <property name="input_purpose">alpha</property>
-                                                <property name="adjustment">menu-item-max-count</property>
+                                                <property name="adjustment">item-count</property>
                                                 <property name="numeric">True</property>
                                                 <property name="value">4</property>
                                               </object>

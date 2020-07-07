@@ -17,44 +17,61 @@ const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
-var MenuTreeColumn = {
-  ICON: 0,
-  ICON_NAME: 1,
-  NAME: 2,
-  DESCRIPTION: 3,
-  ID: 4,
-  TYPE: 5,
-  DATA: 6,
-  FIXED_ANGLE: 7,
+// These are the different columns of the MenuTreeStore. It contains basically all data of
+// all configured menus. This could be a static member of the class below, but this seems
+// to be not supported yet.
+// clang-format off
+let ColumnTypes = {
+  DISPLAY_ICON:     Cairo.Surface.$gtype,  // The actual pixbuf of the icon.
+  DISPLAY_NAME:     GObject.TYPE_STRING,   // The name with markup. 
+  DISPLAY_ANGLE:    GObject.TYPE_STRING,   // Empty if angle is -1
+  DETAILS:          GObject.TYPE_STRING,   // The text of the middle column.
+  ICON:             GObject.TYPE_STRING,   // The string representation of the icon.
+  NAME:             GObject.TYPE_STRING,   // The name without any markup.
+  TYPE:             GObject.TYPE_STRING,   // The item type. Like 'menu' or 'url'.
+  DATA:             GObject.TYPE_STRING,   // Used for the command, file, application, ...
+  COUNT:            GObject.TYPE_DOUBLE,   // The max-item-count of some sub-menus.
+  ANGLE:            GObject.TYPE_DOUBLE    // The fixed angle.
 }
+// clang-format on
 
-let MenuTree = GObject.registerClass({}, class MenuTree extends Gtk.TreeStore {
+//////////////////////////////////////////////////////////////////////////////////////////
+// The MenuTreeStore differs from a normal Gtk.TreeStore only in the drag'n'drop        //
+// behavior. It ensures that top-level menus cannot be dragged at all and the all       //
+// other items or sub-menus are only dropped to top-level menus or to sub-menus.        //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.TreeStore {
   _init() {
     super._init();
 
-    this.set_column_types([
-      Cairo.Surface.$gtype,  // 0: ICON
-      GObject.TYPE_STRING,   // 1: ICON_NAME
-      GObject.TYPE_STRING,   // 2: NAME
-      GObject.TYPE_STRING,   // 3: DESCRIPTION
-      GObject.TYPE_STRING,   // 4: ID
-      GObject.TYPE_STRING,   // 5: TYPE
-      GObject.TYPE_STRING,   // 6: DATA
-      GObject.TYPE_DOUBLE,   // 7: FIXED_ANGLE
-    ]);
+    let columnTypes = [];
+    this.columns    = {};
+
+    let lastColumnID = -1;
+    for (const name in ColumnTypes) {
+      columnTypes.push(ColumnTypes[name]);
+      this.columns[name] = ++lastColumnID;
+    }
+
+    this.set_column_types(columnTypes);
   }
 
+  // This makes sure that we cannot drag top-level menus. All other items or sub-menus can
+  // be dragged around.
   vfunc_row_draggable(path) {
     return path.get_depth() > 1;
   }
 
+  // This ensures that items or sub-menus are only dropped on top-level menus or
+  // sub-menus.
   vfunc_row_drop_possible(path) {
     const parentPath = path.copy();
     if (parentPath.up()) {
       const [ok, parent] = this.get_iter(parentPath);
       if (ok) {
-        const type = this.get_value(parent, MenuTreeColumn.TYPE);
-        if (type == 'group' || type == 'menu') {
+        const type = this.get_value(parent, this.columns.TYPE);
+        if (type == 'submenu' || type == 'menu') {
           return true;
         }
       }
@@ -64,6 +81,10 @@ let MenuTree = GObject.registerClass({}, class MenuTree extends Gtk.TreeStore {
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// The MenuEditor class encapsulates code required for the 'Menu Editor' page of the    //
+// settings dialog. It's not instantiated multiple times, nor does it have any public   //
+// interface, hence it could just be copy-pasted to the settings class. But as it's     //
+// quite decoupled as well, it structures the code better when written to its own file. //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var MenuEditor = class MenuEditor {
@@ -77,105 +98,83 @@ var MenuEditor = class MenuEditor {
     // Create the Gio.Settings object.
     this._settings = utils.createSettings();
 
-    // Connect to the server so that we can toggle menus also from the preferences. This
-    // is, for example, used for toggling the Live-Preview.
+    // Connect to the server so that we can toggle menu previews from the menu editor.
     new DBusWrapper(
         Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/swingpie',
         proxy => this._dbus = proxy);
 
-    // Now on to the Menus page.
     let menus = [
       {
-        id: 'menu01',
         type: 'menu',
         icon: 'gedit',
-        name: '<b>Main Menu</b>\n<small>Ctrl+A</small>',
-        description: '',
-        data: 'data',
+        name: 'Main Menu',
+        data: 'Ctrl+A',
         fixedAngle: -1,
         children: []
       },
       {
-        id: 'menu02',
         type: 'menu',
         icon: 'thunderbird',
-        name: '<b>Main Menu 2</b>\n<small>Ctrl+B</small>',
-        description: '',
-        data: 'data',
+        name: 'Main Menu 2',
+        data: 'Ctrl+B',
         fixedAngle: -1,
         children: [
           {
-            id: 'menu01',
-            type: 'group',
+            type: 'submenu',
             icon: 'emblem-default',
             name: 'Favorites',
-            description: '[group]',
-            data: 'data',
-            fixedAngle: -1,
+            data: '',
+            fixedAngle: 90,
           },
           {
-            id: 'menu01',
             type: 'application',
             icon: 'firefox',
             name: 'Firefox',
-            description: '[application]',
-            data: 'data',
+            data: 'Firefox',
             fixedAngle: -1,
           },
           {
-            id: 'menu01',
             type: 'command',
             icon: 'terminal',
             name: 'Grep',
-            description: '[application]',
-            data: 'data',
+            data: 'grep foo',
             fixedAngle: -1,
           },
           {
-            id: 'menu01',
             type: 'hotkey',
             icon: 'H',
             name: 'Hotkey',
-            description: '[application]',
-            data: 'data',
-            fixedAngle: -1,
+            data: 'Ctrl+V',
+            fixedAngle: 270,
           },
         ]
       },
       {
-        id: 'menu03',
         type: 'menu',
         icon: 'chrome',
-        name: '<b>Main Menu 3</b>\n<small>Ctrl+C</small>',
-        description: '',
-        data: 'data',
+        name: 'Main Menu 3',
+        data: 'Ctrl+C',
         fixedAngle: -1,
         children: [
           {
-            id: 'menu01',
             type: 'bookmarks-group',
             icon: 'nautilus',
             name: 'Bookmarks',
-            description: '[bookmarks]',
-            data: 'data',
+            data: '',
             fixedAngle: -1,
           },
           {
-            id: 'menu01',
             type: 'url',
             icon: 'epiphany',
             name: 'URL',
-            description: '[http://www.google.de]',
-            data: 'data',
+            data: 'http://www.google.de',
             fixedAngle: -1,
           },
           {
-            id: 'menu01',
             type: 'file',
             icon: 'nautilus',
             name: 'File',
-            description: '[huhu]',
-            data: 'data',
+            data: 'file://huhu',
             fixedAngle: -1,
           },
         ]
@@ -183,76 +182,69 @@ var MenuEditor = class MenuEditor {
     ];
 
     try {
-      this._menuTree     = new MenuTree();
-      this._menuTreeView = this._builder.get_object('menus-treeview');
-      this._menuTreeView.set_model(this._menuTree);
+      // Create our custom tree store and assign it to the tree view of the builder.
+      this._store = new MenuTreeStore();
+      this._view  = this._builder.get_object('menus-treeview');
+      this._view.set_model(this._store);
 
-      const primaryColumn = new Gtk.TreeViewColumn();
-
+      const menuColumn = new Gtk.TreeViewColumn({title: 'Menu Structure', expand: true});
       const iconRender = new Gtk.CellRendererPixbuf();
-      primaryColumn.pack_start(iconRender, false);
+      const nameRender = new Gtk.CellRendererText({xpad: 5});
+      menuColumn.pack_start(iconRender, false);
+      menuColumn.pack_start(nameRender, true);
+      menuColumn.add_attribute(iconRender, 'surface', this._store.columns.DISPLAY_ICON);
+      menuColumn.add_attribute(nameRender, 'markup', this._store.columns.DISPLAY_NAME);
 
-      const nameRender = new Gtk.CellRendererText();
-      nameRender.xpad  = 5;
-      primaryColumn.pack_start(nameRender, true);
+      const detailsColumn = new Gtk.TreeViewColumn({title: 'Item Details', expand: true});
+      const detailsRender = new Gtk.CellRendererText();
+      detailsRender.sensitive = false;
+      detailsColumn.pack_start(detailsRender, true);
+      detailsColumn.add_attribute(detailsRender, 'markup', this._store.columns.DETAILS);
 
-      primaryColumn.add_attribute(iconRender, 'surface', MenuTreeColumn.ICON);
-      primaryColumn.add_attribute(nameRender, 'markup', MenuTreeColumn.NAME);
+      const angleColumn = new Gtk.TreeViewColumn({title: 'Fixed Angle', expand: true});
+      const angleRender = new Gtk.CellRendererText();
+      angleRender.sensitive = false;
+      angleColumn.pack_start(angleRender, true);
+      angleColumn.add_attribute(angleRender, 'markup', this._store.columns.DISPLAY_ANGLE);
 
-      this._menuTreeView.append_column(primaryColumn);
-
-
-      const secondaryColumn = new Gtk.TreeViewColumn();
-
-      const descriptionRender     = new Gtk.CellRendererText();
-      descriptionRender.sensitive = false;
-      secondaryColumn.pack_start(descriptionRender, true);
-      secondaryColumn.add_attribute(
-          descriptionRender, 'markup', MenuTreeColumn.DESCRIPTION);
-
-      this._menuTreeView.append_column(secondaryColumn);
+      this._view.append_column(menuColumn);
+      this._view.append_column(detailsColumn);
+      this._view.append_column(angleColumn);
 
 
       for (let i = 0; i < menus.length; i++) {
         const menu = menus[i];
-        const iter = this._menuTree.append(null);
+        const iter = this._store.append(null);
 
-        this._menuTree.set(iter, [0, 1, 2, 3, 4, 5, 6, 7], [
-          utils.createIcon(menu.icon, 24),
-          menu.icon,
-          menu.name,
-          menu.description,
-          menu.id,
-          menu.type,
-          menu.data,
-          menu.fixedAngle,
-        ]);
+        this._set(iter, 'ICON', menu.icon);
+        this._set(iter, 'NAME', menu.name);
+        this._set(iter, 'TYPE', menu.type);
+        this._set(iter, 'DATA', menu.data);
+        this._set(iter, 'ANGLE', menu.fixedAngle);
+
+
         for (let j = 0; j < menu.children.length; j++) {
-          const child = menu.children[j];
-          this._menuTree.set(this._menuTree.append(iter), [0, 1, 2, 3, 4, 5, 6, 7], [
-            utils.createIcon(child.icon, 16),
-            child.icon,
-            child.name,
-            child.description,
-            child.id,
-            child.type,
-            child.data,
-            child.fixedAngle,
-          ]);
+          const child     = menu.children[j];
+          const childIter = this._store.append(iter);
+
+          this._set(childIter, 'ICON', child.icon);
+          this._set(childIter, 'NAME', child.name);
+          this._set(childIter, 'TYPE', child.type);
+          this._set(childIter, 'DATA', child.data);
+          this._set(childIter, 'ANGLE', child.fixedAngle);
         }
       }
     } catch (error) {
-      utils.notification('Failed to load Preset: ' + error);
+      utils.notification('Failed to initialize Menu Editor: ' + error);
     }
 
-    this._menuTreeSelection = this._builder.get_object('menus-treeview-selection');
-    this._menuTreeSelection.connect('changed', (selection) => {
+    this._selection = this._builder.get_object('menus-treeview-selection');
+    this._selection.connect('changed', (selection) => {
       try {
 
-        this._itemIcon.queue_draw();
-
-        this._builder.get_object('item-name').text =
-            this._getSelectedMenuItem(MenuTreeColumn.NAME);
+        this._builder.get_object('icon-name').text   = this._getSelected('ICON');
+        this._builder.get_object('item-name').text   = this._getSelected('NAME');
+        this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
 
         const revealers = {
           'item-settings-revealer': true,
@@ -266,7 +258,7 @@ var MenuEditor = class MenuEditor {
           'item-settings-application-revealer': false,
         };
 
-        const type = this._getSelectedMenuItem(MenuTreeColumn.TYPE);
+        const type = this._getSelected('TYPE');
 
         if (type == 'menu') {
           revealers['item-settings-menu-hotkey-revealer'] = true;
@@ -283,7 +275,7 @@ var MenuEditor = class MenuEditor {
             revealers['item-settings-file-revealer'] = true;
           } else if (type == 'command') {
             revealers['item-settings-command-revealer'] = true;
-          } else if (type != 'group') {
+          } else if (type != 'submenu') {
             revealers['item-settings-count-revealer'] = true;
           }
         }
@@ -292,7 +284,7 @@ var MenuEditor = class MenuEditor {
           this._builder.get_object(revealer).reveal_child = revealers[revealer];
         }
       } catch (error) {
-        utils.notification('Failed to load Preset: ' + error);
+        utils.notification('Failed to update menu configuration: ' + error);
       }
     });
 
@@ -332,28 +324,50 @@ var MenuEditor = class MenuEditor {
     });
 
     this._builder.get_object('item-name').connect('notify::text', (widget) => {
-      this._setSelectedMenuItem(MenuTreeColumn.NAME, widget.text);
+      this._setSelected('NAME', widget.text);
+    });
+
+    this._builder.get_object('item-angle').connect('value-changed', (adjustment) => {
+      let minAngle                     = -1
+      let maxAngle                     = 360
+      const [ok1, model, selectedIter] = this._selection.get_selected();
+      if (!ok1) return;
+
+      const [ok2, parentIter] = model.iter_parent(selectedIter);
+      if (!ok2) return;
+
+      const selectedIndices = model.get_path(selectedIter).get_indices();
+      const selectedIndex   = selectedIndices[selectedIndices.length - 1];
+      const nChildren       = model.iter_n_children(parentIter);
+
+      for (let n = 0; n < nChildren; n++) {
+        const angle = this._get(model.iter_nth_child(parentIter, n)[1], 'ANGLE');
+
+        if (n < selectedIndex) {
+          minAngle = angle;
+        }
+
+        if (n > selectedIndex && angle >= 0) {
+          maxAngle = angle;
+          break;
+        }
+      }
+
+      if (adjustment.value == -1 ||
+          (adjustment.value > minAngle && adjustment.value < maxAngle)) {
+        this._setSelected('ANGLE', adjustment.value);
+      }
     });
 
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
-      let iconSize = 24;
-
-      const [ok, model, iter] = this._menuTreeSelection.get_selected();
-
-      if (model.get_path(iter).get_depth() > 1) {
-        iconSize = 16;
-      }
-
-      this._setSelectedMenuItem(
-          MenuTreeColumn.ICON, utils.createIcon(widget.text, iconSize));
-      this._setSelectedMenuItem(MenuTreeColumn.ICON_NAME, widget.text);
+      this._setSelected('ICON', widget.text);
       this._itemIcon.queue_draw();
     });
 
     this._itemIcon = this._builder.get_object('item-icon-drawingarea');
     this._itemIcon.connect('draw', (widget, ctx) => {
       const size = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const icon = this._getSelectedMenuItem(MenuTreeColumn.ICON_NAME);
+      const icon = this._getSelected('ICON');
       utils.paintIcon(ctx, icon, size, 1);
       return false;
     });
@@ -390,17 +404,65 @@ var MenuEditor = class MenuEditor {
     iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
   }
 
-  _getSelectedMenuItem(column) {
-    const [ok, model, iter] = this._menuTreeSelection.get_selected();
+  _isToplevel(iter) {
+    return this._store.get_path(iter).get_depth() <= 1;
+  }
+
+  _isToplevelSelected() {
+    const [ok, model, iter] = this._selection.get_selected();
     if (ok) {
-      return model.get_value(iter, column);
+      return model.get_path(iter).get_depth() <= 1;
+    }
+    return false;
+  }
+
+  _get(iter, columnName) {
+    return this._store.get_value(iter, this._store.columns[columnName]);
+  }
+
+  _set(iter, columnName, data) {
+    this._store.set_value(iter, this._store.columns[columnName], data);
+
+    if (columnName == 'ICON') {
+      let iconSize = this._isToplevel(iter) ? 24 : 16;
+      this._set(iter, 'DISPLAY_ICON', utils.createIcon(data, iconSize));
+    }
+
+    if (columnName == 'ANGLE') {
+      this._set(iter, 'DISPLAY_ANGLE', data >= 0 ? data : '');
+    }
+
+    if (columnName == 'NAME') {
+      if (this._isToplevel(iter)) {
+        const hotkey = this._get(iter, 'DATA');
+        this._set(iter, 'DISPLAY_NAME', '<b>' + data + '</b>\n' + hotkey);
+      } else {
+        this._set(iter, 'DISPLAY_NAME', data);
+      }
+    }
+
+    if (columnName == 'DATA') {
+      if (this._isToplevel(iter)) {
+        const name = this._get(iter, 'NAME');
+        this._set(
+            iter, 'DISPLAY_NAME', '<b>' + name + '</b>\n<small>' + data + '</small>');
+      } else {
+        this._set(iter, 'DETAILS', data);
+      }
     }
   }
 
-  _setSelectedMenuItem(column, data) {
-    const [ok, model, iter] = this._menuTreeSelection.get_selected();
+  _getSelected(columnName) {
+    const [ok, model, iter] = this._selection.get_selected();
     if (ok) {
-      model.set_value(iter, column, data);
+      return this._get(iter, columnName);
+    }
+  }
+
+  _setSelected(columnName, data) {
+    const [ok, model, iter] = this._selection.get_selected();
+    if (ok) {
+      this._set(iter, columnName, data);
     }
   }
 }
