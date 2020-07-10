@@ -116,6 +116,15 @@ var Settings = class Settings {
       this._settings.reset('center-auto-color-opacity-hover');
     });
 
+    // The copy-color-settings button copies various settings, so we bind it manually.
+    this._builder.get_object('copy-center-color').connect('clicked', () => {
+      this._copyToHover('center-color-mode');
+      this._copyToHover('center-fixed-color');
+      this._copyToHover('center-auto-color-saturation');
+      this._copyToHover('center-auto-color-luminance');
+      this._copyToHover('center-auto-color-opacity');
+    });
+
 
     // Child Item Settings.
     this._bindRadioGroup('child-color-mode', ['fixed', 'auto', 'parent']);
@@ -150,6 +159,16 @@ var Settings = class Settings {
       this._settings.reset('child-auto-color-opacity-hover');
     });
 
+    // The copy-color-settings button copies various settings, so we bind it manually.
+    this._builder.get_object('copy-child-color').connect('clicked', () => {
+      this._copyToHover('child-color-mode');
+      this._copyToHover('child-fixed-color');
+      this._copyToHover('child-auto-color-saturation');
+      this._copyToHover('child-auto-color-luminance');
+      this._copyToHover('child-auto-color-opacity');
+      this._copyToHover('child-fixed-color-hover');
+    });
+
 
     // Grandchild Item Settings.
     this._bindRadioGroup('grandchild-color-mode', ['fixed', 'parent']);
@@ -169,6 +188,12 @@ var Settings = class Settings {
       this._settings.reset('grandchild-color-mode-hover');
       this._settings.reset('grandchild-fixed-color');
       this._settings.reset('grandchild-fixed-color-hover');
+    });
+
+    // The copy-color-settings button copies various settings, so we bind it manually.
+    this._builder.get_object('copy-grandchild-color').connect('clicked', () => {
+      this._copyToHover('grandchild-color-mode');
+      this._copyToHover('grandchild-fixed-color');
     });
 
 
@@ -354,6 +379,20 @@ var Settings = class Settings {
     }
   }
 
+  _copyToHover(settingsKey) {
+    this._settings.set_value(
+        settingsKey + '-hover', this._settings.get_value(settingsKey));
+  }
+
+  _bindCopyButton(settingsKey) {
+    const copyButton = this._builder.get_object('copy-' + settingsKey);
+    if (copyButton) {
+      copyButton.connect('clicked', () => {
+        this._copyToHover(settingsKey);
+      });
+    }
+  }
+
   // Connects a Gtk.Range (or anything else which has a 'value' property) to a settings
   // key. It also binds any corresponding reset buttons and '-hover' variants if they
   // exist.
@@ -397,6 +436,7 @@ var Settings = class Settings {
     }
 
     this._bindResetButton(settingsKey);
+    this._bindCopyButton(settingsKey);
   }
 
   // Connects a group of Gtk.RadioButtons to a string property of the settings. Foreach
@@ -439,6 +479,7 @@ var Settings = class Settings {
 
     // And bind the corresponding reset button.
     this._bindResetButton(settingsKey);
+    this._bindCopyButton(settingsKey);
   }
 
   // Colors are stored as strings like 'rgb(1, 0.5, 0)'. As Gio.Settings.bind_with_mapping
@@ -476,6 +517,7 @@ var Settings = class Settings {
 
     // And bind the corresponding reset button.
     this._bindResetButton(settingsKey);
+    this._bindCopyButton(settingsKey);
   }
 
   _bindRevealer(toggleButtonID, revealerID) {
