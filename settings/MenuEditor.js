@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                     = imports.cairo;
-const {GObject, GLib, Gtk, Gio} = imports.gi;
+const Cairo                                 = imports.cairo;
+const {GObject, Gdk, GLib, Gtk, Gio, Pango} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
@@ -46,7 +46,9 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
     super._init();
 
     let columnTypes = [];
-    this.columns    = {};
+
+    // This public property will contain the column id for each ColumnType.
+    this.columns = {};
 
     let lastColumnID = -1;
     for (const name in ColumnTypes) {
@@ -71,12 +73,24 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
       const [ok, parent] = this.get_iter(parentPath);
       if (ok) {
         const type = this.get_value(parent, this.columns.TYPE);
-        if (type == 'submenu' || type == 'menu') {
+        if (type === 'submenu' || type === 'menu') {
           return true;
         }
       }
     }
     return false;
+  }
+
+  // This resets any fixed angle of dragged items. While this isn't really necessary in
+  // all cases, but identifying cases when an invalid fixed-angle configuration is created
+  // is quite complex. This could be improved in the future!
+  vfunc_drag_data_get(path, selection_data) {
+    const [ok, iter] = this.get_iter(path);
+    if (ok) {
+      this.set_value(iter, this.columns.ANGLE, -1);
+      this.set_value(iter, this.columns.DISPLAY_ANGLE, '');
+    }
+    return super.vfunc_drag_data_get(path, selection_data);
   }
 });
 
@@ -173,7 +187,14 @@ var MenuEditor = class MenuEditor {
           {
             type: 'file',
             icon: 'nautilus',
-            name: 'File',
+            name: 'File 1',
+            data: 'file://huhu',
+            fixedAngle: -1,
+          },
+          {
+            type: 'file',
+            icon: 'nautilus',
+            name: 'File 2',
             data: 'file://huhu',
             fixedAngle: -1,
           },
@@ -183,11 +204,35 @@ var MenuEditor = class MenuEditor {
 
     try {
       // Create our custom tree store and assign it to the tree view of the builder.
-      this._store = new MenuTreeStore();
-      this._view  = this._builder.get_object('menus-treeview');
+      this._store     = new MenuTreeStore();
+      this._selection = this._builder.get_object('menus-treeview-selection');
+      this._view      = this._builder.get_object('menus-treeview');
       this._view.set_model(this._store);
 
-      const menuColumn = new Gtk.TreeViewColumn({title: 'Menu Structure', expand: true});
+      this._view.connect('key-release-event', (widget, event) => {
+        if (event.get_keyval()[1] == Gdk.keyval_from_name('Delete')) {
+          this._deleteSelected();
+          return true;
+        }
+        return false;
+      });
+
+      // This is kind of a weird hack (?) to keep a row selected after drag'n'drop. We
+      // simply select every row after it was inserted. This does not work if we directly
+      // attempt to select it, we have to use a short timeout.
+      this._store.connect(
+          'row-inserted',
+          (widget, path, iter) => GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1, () => {
+            this._selection.select_iter(iter);
+            return false;
+          }));
+
+
+      const menuColumn = new Gtk.TreeViewColumn({
+        title: 'Menu Structure',
+        expand: true,
+        sizing: Gtk.TreeViewColumnSizing.AUTOSIZE
+      });
       const iconRender = new Gtk.CellRendererPixbuf();
       const nameRender = new Gtk.CellRendererText({xpad: 5});
       menuColumn.pack_start(iconRender, false);
@@ -195,15 +240,19 @@ var MenuEditor = class MenuEditor {
       menuColumn.add_attribute(iconRender, 'surface', this._store.columns.DISPLAY_ICON);
       menuColumn.add_attribute(nameRender, 'markup', this._store.columns.DISPLAY_NAME);
 
-      const detailsColumn = new Gtk.TreeViewColumn({title: 'Item Details', expand: true});
-      const detailsRender = new Gtk.CellRendererText();
-      detailsRender.sensitive = false;
+      const detailsColumn = new Gtk.TreeViewColumn({
+        title: 'Item Details',
+        expand: true,
+        sizing: Gtk.TreeViewColumnSizing.AUTOSIZE
+      });
+      const detailsRender = new Gtk.CellRendererText(
+          {sensitive: false, ellipsize: Pango.EllipsizeMode.MIDDLE});
       detailsColumn.pack_start(detailsRender, true);
       detailsColumn.add_attribute(detailsRender, 'markup', this._store.columns.DETAILS);
 
-      const angleColumn = new Gtk.TreeViewColumn({title: 'Fixed Angle', expand: true});
-      const angleRender = new Gtk.CellRendererText();
-      angleRender.sensitive = false;
+      const angleColumn = new Gtk.TreeViewColumn(
+          {title: 'Fixed Angle', sizing: Gtk.TreeViewColumnSizing.AUTOSIZE});
+      const angleRender = new Gtk.CellRendererText({sensitive: false, xalign: 0.5});
       angleColumn.pack_start(angleRender, true);
       angleColumn.add_attribute(angleRender, 'markup', this._store.columns.DISPLAY_ANGLE);
 
@@ -238,53 +287,66 @@ var MenuEditor = class MenuEditor {
       utils.notification('Failed to initialize Menu Editor: ' + error);
     }
 
-    this._selection = this._builder.get_object('menus-treeview-selection');
+
     this._selection.connect('changed', (selection) => {
       try {
+        let selectedType      = 'none';
+        let somethingSelected = selection.get_selected()[0];
 
-        this._builder.get_object('icon-name').text   = this._getSelected('ICON');
-        this._builder.get_object('item-name').text   = this._getSelected('NAME');
-        this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
+        if (somethingSelected) {
+          this._builder.get_object('icon-name').text = this._getSelected('ICON');
+          this._builder.get_object('item-name').text = this._getSelected('NAME');
 
-        const revealers = {
-          'item-settings-revealer': true,
-          'item-settings-menu-hotkey-revealer': false,
-          'item-settings-item-hotkey-revealer': false,
-          'item-settings-angle-revealer': false,
-          'item-settings-count-revealer': false,
-          'item-settings-url-revealer': false,
-          'item-settings-command-revealer': false,
-          'item-settings-file-revealer': false,
-          'item-settings-application-revealer': false,
-        };
+          selectedType = this._getSelected('TYPE');
 
-        const type = this._getSelected('TYPE');
+          if (selectedType != 'menu') {
+            this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
+          }
 
-        if (type == 'menu') {
-          revealers['item-settings-menu-hotkey-revealer'] = true;
-        } else {
-          revealers['item-settings-angle-revealer'] = true;
+          if (selectedType == 'url') {
+            this._builder.get_object('item-url').text = this._getSelected('DATA');
 
-          if (type == 'application') {
-            revealers['item-settings-application-revealer'] = true;
-          } else if (type == 'hotkey') {
-            revealers['item-settings-item-hotkey-revealer'] = true;
-          } else if (type == 'url') {
-            revealers['item-settings-url-revealer'] = true;
-          } else if (type == 'file') {
-            revealers['item-settings-file-revealer'] = true;
-          } else if (type == 'command') {
-            revealers['item-settings-command-revealer'] = true;
-          } else if (type != 'submenu') {
-            revealers['item-settings-count-revealer'] = true;
+          } else if (selectedType == 'command') {
+            this._builder.get_object('item-command').text = this._getSelected('DATA');
+
+          } else if (selectedType == 'recent') {
+            this._builder.get_object('item-count').value = this._getSelected('COUNT');
           }
         }
+
+        this._builder.get_object('preview-menu-button').sensitive     = somethingSelected;
+        this._builder.get_object('remove-item-button').sensitive      = somethingSelected;
+        this._builder.get_object('item-type-hotkey').sensitive        = somethingSelected;
+        this._builder.get_object('item-type-application').sensitive   = somethingSelected;
+        this._builder.get_object('item-type-file').sensitive          = somethingSelected;
+        this._builder.get_object('item-type-url').sensitive           = somethingSelected;
+        this._builder.get_object('item-type-command').sensitive       = somethingSelected;
+        this._builder.get_object('item-type-submenu').sensitive       = somethingSelected;
+        this._builder.get_object('item-type-bookmarks').sensitive     = somethingSelected;
+        this._builder.get_object('item-type-recent-files').sensitive  = somethingSelected;
+        this._builder.get_object('item-type-favorite-apps').sensitive = somethingSelected;
+        this._builder.get_object('item-type-frequent-apps').sensitive = somethingSelected;
+        this._builder.get_object('item-type-running-apps').sensitive  = somethingSelected;
+        this._builder.get_object('item-type-main-menu').sensitive     = somethingSelected;
+
+        const revealers = {
+          'item-settings-revealer': selectedType != 'none',
+          'item-settings-menu-hotkey-revealer': selectedType == 'menu',
+          'item-settings-angle-revealer': selectedType != 'menu',
+          'item-settings-item-hotkey-revealer': selectedType == 'hotkey',
+          'item-settings-count-revealer': selectedType == 'recent',
+          'item-settings-url-revealer': selectedType == 'url',
+          'item-settings-command-revealer': selectedType == 'command',
+          'item-settings-file-revealer': selectedType == 'file',
+          'item-settings-application-revealer': selectedType == 'application',
+        };
 
         for (const revealer in revealers) {
           this._builder.get_object(revealer).reveal_child = revealers[revealer];
         }
+
       } catch (error) {
-        utils.notification('Failed to update menu configuration: ' + error);
+        utils.notification('Failed to update menu editor selection: ' + error);
       }
     });
 
@@ -311,6 +373,11 @@ var MenuEditor = class MenuEditor {
 
     const iconView = this._builder.get_object('icon-view');
     iconView.connect('item-activated', (view, path) => {
+      this._builder.get_object('icon-popover').popdown();
+    });
+
+    iconView.connect('selection-changed', (view) => {
+      const path       = view.get_selected_items()[0];
       const model      = view.get_model();
       const [ok, iter] = model.get_iter(path);
       if (ok) {
@@ -318,8 +385,12 @@ var MenuEditor = class MenuEditor {
       }
     });
 
-    const fileChooser = this._builder.get_object('icon-file-chooser');
-    fileChooser.connect('file-activated', (chooser) => {
+    const iconChooser = this._builder.get_object('icon-file-chooser');
+    iconChooser.connect('file-activated', (chooser) => {
+      this._builder.get_object('icon-popover').popdown();
+    });
+
+    iconChooser.connect('selection-changed', (chooser) => {
       this._builder.get_object('icon-name').text = chooser.get_filename();
     });
 
@@ -359,6 +430,10 @@ var MenuEditor = class MenuEditor {
       }
     });
 
+    this._builder.get_object('item-count').connect('value-changed', (adjustment) => {
+      this._setSelected('COUNT', adjustment.value);
+    });
+
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
       this._setSelected('ICON', widget.text);
       this._itemIcon.queue_draw();
@@ -372,7 +447,39 @@ var MenuEditor = class MenuEditor {
       return false;
     });
 
-    this._hotkeyButton = this._builder.get_object('hotkey-button');
+    this._builder.get_object('item-url').connect('notify::text', (widget) => {
+      this._setSelected('DATA', widget.text);
+    });
+
+    this._builder.get_object('item-command').connect('notify::text', (widget) => {
+      this._setSelected('DATA', widget.text);
+    });
+
+    this._builder.get_object('item-file-chooser').connect('file-activated', (widget) => {
+      this._builder.get_object('item-file-popover').popdown();
+    });
+
+    this._builder.get_object('item-file-chooser')
+        .connect('selection-changed', (widget) => {
+          this._setSelected('DATA', widget.get_filename());
+          const info = widget.get_file().query_info('standard::icon', 0, null);
+          this._builder.get_object('icon-name').text = info.get_icon().to_string();
+          this._builder.get_object('item-name').text = widget.get_file().get_basename();
+        });
+
+    this._builder.get_object('application-popover-list')
+        .connect('application-activated', (widget, app) => {
+          this._builder.get_object('item-application-popover').popdown();
+        });
+
+    this._builder.get_object('application-popover-list')
+        .connect('application-selected', (widget, app) => {
+          this._setSelected('DATA', app.get_commandline());
+          this._builder.get_object('icon-name').text = app.get_icon().to_string();
+          this._builder.get_object('item-name').text = app.get_display_name();
+        });
+
+    this._hotkeyButton = this._builder.get_object('menu-hotkey');
     this._hotkeyButton.connect('toggled', (widget) => {
       if (widget.active) {
         widget.set_label('Press a hotkey ...');
@@ -382,6 +489,43 @@ var MenuEditor = class MenuEditor {
       } else {
         widget.grab_remove();
       }
+    });
+
+    this._builder.get_object('remove-item-button').connect('clicked', () => {
+      this._deleteSelected();
+    });
+
+    this._builder.get_object('item-types').connect('row-activated', (widget, row) => {
+      const type = row.get_name().slice(10);
+
+      if (type == 'menu') {
+        const iter = this._store.append(null);
+        this._set(iter, 'ICON', this._getRandomEmoji());
+        this._set(iter, 'NAME', 'Submenu');
+        this._set(iter, 'TYPE', 'menu');
+        this._set(iter, 'Data', 'Not Bound');
+        this._set(iter, 'ANGLE', -1);
+      } else {
+
+        const selectedType          = this._getSelected('TYPE');
+        const [ok, model, selected] = this._selection.get_selected();
+        let iter                    = null;
+
+        if (selectedType == 'menu' || selectedType == 'submenu') {
+          iter = this._store.append(selected);
+        } else {
+          const parent = model.iter_parent(selected)[1];
+          iter         = this._store.insert_after(parent, selected);
+        }
+
+        this._set(iter, 'ICON', this._getRandomEmoji());
+        this._set(iter, 'NAME', 'foo');
+        this._set(iter, 'TYPE', type);
+        this._set(iter, 'Data', '');
+        this._set(iter, 'ANGLE', -1);
+      }
+
+      this._builder.get_object('item-type-popover').popdown();
     });
   }
 
@@ -402,6 +546,34 @@ var MenuEditor = class MenuEditor {
     }
 
     iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
+  }
+
+  _deleteSelected() {
+    if (!this._selection.get_selected()[0]) {
+      return;
+    }
+
+    const dialog = new Gtk.MessageDialog({
+      transient_for: this._builder.get_object('main-notebook').get_toplevel(),
+      modal: true,
+      buttons: Gtk.ButtonsType.OK_CANCEL,
+      message_type: Gtk.MessageType.QUESTION,
+      text: 'Do you really want to delete the selected item?',
+      secondary_text: 'This cannot be undone!'
+    });
+
+    dialog.connect('response', (dialog, id) => {
+      utils.notification(id + ' ' + Gtk.ResponseType.OK);
+      if (id == Gtk.ResponseType.OK) {
+        const [ok, model, iter] = this._selection.get_selected();
+        if (ok) {
+          model.remove(iter);
+        }
+      }
+      dialog.destroy();
+    });
+
+    dialog.show();
   }
 
   _isToplevel(iter) {
@@ -441,6 +613,10 @@ var MenuEditor = class MenuEditor {
       }
     }
 
+    if (columnName == 'COUNT') {
+      this._set(iter, 'DETAILS', 'Max Items: ' + data);
+    }
+
     if (columnName == 'DATA') {
       if (this._isToplevel(iter)) {
         const name = this._get(iter, 'NAME');
@@ -464,5 +640,12 @@ var MenuEditor = class MenuEditor {
     if (ok) {
       this._set(iter, columnName, data);
     }
+  }
+
+  _getRandomEmoji() {
+    let emojis = [
+      ...'💾🐹💞😀🎂🌞🥇💗🌟🐣🔧🌍🐈🍩💕🦔🤣📝🥂💥😁🎉💖😎😛🐸🍕☕🍺🍰🗿'
+    ];
+    return emojis[Math.floor(Math.random() * (emojis.length + 0))];
   }
 }
