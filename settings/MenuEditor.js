@@ -11,9 +11,11 @@
 const Cairo                                 = imports.cairo;
 const {GObject, Gdk, GLib, Gtk, Gio, Pango} = imports.gi;
 
-const Me            = imports.misc.extensionUtils.getCurrentExtension();
-const utils         = Me.imports.common.utils;
-const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
+const Me               = imports.misc.extensionUtils.getCurrentExtension();
+const utils            = Me.imports.common.utils;
+const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
+const ItemTypes        = Me.imports.common.ItemTypes.ItemTypes;
+const ItemSettingsType = Me.imports.common.ItemTypes.ItemSettingsType;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -22,16 +24,15 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 // to be not supported yet.
 // clang-format off
 let ColumnTypes = {
-  DISPLAY_ICON:     Cairo.Surface.$gtype,  // The actual pixbuf of the icon.
-  DISPLAY_NAME:     GObject.TYPE_STRING,   // The name with markup. 
-  DISPLAY_ANGLE:    GObject.TYPE_STRING,   // Empty if angle is -1
-  DETAILS:          GObject.TYPE_STRING,   // The text of the middle column.
-  ICON:             GObject.TYPE_STRING,   // The string representation of the icon.
-  NAME:             GObject.TYPE_STRING,   // The name without any markup.
-  TYPE:             GObject.TYPE_STRING,   // The item type. Like 'menu' or 'url'.
-  DATA:             GObject.TYPE_STRING,   // Used for the command, file, application, ...
-  COUNT:            GObject.TYPE_DOUBLE,   // The max-item-count of some sub-menus.
-  ANGLE:            GObject.TYPE_DOUBLE    // The fixed angle.
+  DISPLAY_ICON:  Cairo.Surface.$gtype,  // The actual pixbuf of the icon.
+  DISPLAY_NAME:  GObject.TYPE_STRING,   // The name with markup. 
+  DISPLAY_ANGLE: GObject.TYPE_STRING,   // Empty if angle is -1
+  DETAILS:       GObject.TYPE_STRING,   // The text of the middle column.
+  ICON:          GObject.TYPE_STRING,   // The string representation of the icon.
+  NAME:          GObject.TYPE_STRING,   // The name without any markup.
+  TYPE:          GObject.TYPE_STRING,   // The item type. Like 'menu' or 'url'.
+  DATA:          GObject.TYPE_STRING,   // Used for the command, file, application, ...
+  ANGLE:         GObject.TYPE_DOUBLE    // The fixed angle.
 }
 // clang-format on
 
@@ -73,7 +74,7 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
       const [ok, parent] = this.get_iter(parentPath);
       if (ok) {
         const type = this.get_value(parent, this.columns.TYPE);
-        if (type === 'submenu' || type === 'menu') {
+        if (type === 'Submenu' || type === 'Menu') {
           return true;
         }
       }
@@ -117,82 +118,114 @@ var MenuEditor = class MenuEditor {
         Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/swingpie',
         proxy => this._dbus = proxy);
 
+
+    for (const type in ItemTypes) {
+
+      const row         = new Gtk.ListBoxRow({selectable: false});
+      const grid        = new Gtk.Grid({
+        column_spacing: 8,
+        margin_top: 4,
+        margin_bottom: 4,
+        margin_start: 4,
+        margin_end: 10
+      });
+      const icon        = new Gtk.Image({icon_name: ItemTypes[type].icon, icon_size: 24});
+      const name        = new Gtk.Label({label: ItemTypes[type].name, xalign: 0});
+      const description = new Gtk.Label({
+        label: '<small>' + ItemTypes[type].description + '</small>',
+        use_markup: true,
+        xalign: 0
+      });
+      description.get_style_context().add_class('dim-label');
+
+      grid.attach(icon, 0, 0, 1, 2);
+      grid.attach(name, 1, 0, 1, 1);
+      grid.attach(description, 1, 1, 1, 1);
+
+      row.add(grid);
+      row.show_all();
+      row.set_name(type);
+
+      const list = this._builder.get_object(ItemTypes[type].settingsList);
+      list.insert(row, -1);
+    }
+
     let menus = [
       {
-        type: 'menu',
+        type: 'Menu',
         icon: 'gedit',
         name: 'Main Menu',
-        data: 'Ctrl+A',
+        data: '',
         fixedAngle: -1,
         children: []
       },
       {
-        type: 'menu',
+        type: 'Menu',
         icon: 'thunderbird',
         name: 'Main Menu 2',
-        data: 'Ctrl+B',
+        data: '',
         fixedAngle: -1,
         children: [
           {
-            type: 'submenu',
+            type: 'Submenu',
             icon: 'emblem-default',
             name: 'Favorites',
             data: '',
             fixedAngle: 90,
           },
           {
-            type: 'application',
+            type: 'Command',
             icon: 'firefox',
             name: 'Firefox',
             data: 'Firefox',
             fixedAngle: -1,
           },
           {
-            type: 'command',
+            type: 'Command',
             icon: 'terminal',
             name: 'Grep',
             data: 'grep foo',
             fixedAngle: -1,
           },
           {
-            type: 'hotkey',
+            type: 'Hotkey',
             icon: 'H',
             name: 'Hotkey',
-            data: 'Ctrl+V',
+            data: '',
             fixedAngle: 270,
           },
         ]
       },
       {
-        type: 'menu',
+        type: 'Menu',
         icon: 'chrome',
         name: 'Main Menu 3',
-        data: 'Ctrl+C',
+        data: '',
         fixedAngle: -1,
         children: [
           {
-            type: 'bookmarks-group',
+            type: 'Bookmarks',
             icon: 'nautilus',
             name: 'Bookmarks',
-            data: '',
+            data: '12',
             fixedAngle: -1,
           },
           {
-            type: 'url',
+            type: 'Url',
             icon: 'epiphany',
             name: 'URL',
             data: 'http://www.google.de',
             fixedAngle: -1,
           },
           {
-            type: 'file',
+            type: 'File',
             icon: 'nautilus',
             name: 'File 1',
             data: 'file://huhu',
             fixedAngle: -1,
           },
           {
-            type: 'file',
+            type: 'File',
             icon: 'nautilus',
             name: 'File 2',
             data: 'file://huhu',
@@ -240,16 +273,6 @@ var MenuEditor = class MenuEditor {
       menuColumn.add_attribute(iconRender, 'surface', this._store.columns.DISPLAY_ICON);
       menuColumn.add_attribute(nameRender, 'markup', this._store.columns.DISPLAY_NAME);
 
-      const detailsColumn = new Gtk.TreeViewColumn({
-        title: 'Item Details',
-        expand: true,
-        sizing: Gtk.TreeViewColumnSizing.AUTOSIZE
-      });
-      const detailsRender = new Gtk.CellRendererText(
-          {sensitive: false, ellipsize: Pango.EllipsizeMode.MIDDLE});
-      detailsColumn.pack_start(detailsRender, true);
-      detailsColumn.add_attribute(detailsRender, 'markup', this._store.columns.DETAILS);
-
       const angleColumn = new Gtk.TreeViewColumn(
           {title: 'Fixed Angle', sizing: Gtk.TreeViewColumnSizing.AUTOSIZE});
       const angleRender = new Gtk.CellRendererText({sensitive: false, xalign: 0.5});
@@ -257,9 +280,7 @@ var MenuEditor = class MenuEditor {
       angleColumn.add_attribute(angleRender, 'markup', this._store.columns.DISPLAY_ANGLE);
 
       this._view.append_column(menuColumn);
-      this._view.append_column(detailsColumn);
       this._view.append_column(angleColumn);
-
 
       for (let i = 0; i < menus.length; i++) {
         const menu = menus[i];
@@ -290,56 +311,69 @@ var MenuEditor = class MenuEditor {
 
     this._selection.connect('changed', (selection) => {
       try {
-        let selectedType      = 'none';
         let somethingSelected = selection.get_selected()[0];
+
+        const revealers = {
+          'item-settings-revealer': false,
+          'item-settings-menu-hotkey-revealer': false,
+          'item-settings-angle-revealer': false,
+          'item-settings-item-hotkey-revealer': false,
+          'item-settings-count-revealer': false,
+          'item-settings-url-revealer': false,
+          'item-settings-command-revealer': false,
+          'item-settings-file-revealer': false
+        };
 
         if (somethingSelected) {
           this._builder.get_object('icon-name').text = this._getSelected('ICON');
           this._builder.get_object('item-name').text = this._getSelected('NAME');
+          revealers['item-settings-revealer']        = true;
 
-          selectedType = this._getSelected('TYPE');
+          const selectedType = this._getSelected('TYPE');
 
-          if (selectedType != 'menu') {
+          if (selectedType == 'Menu') {
+            this._builder.get_object('menu-hotkey')
+                .get_child()
+                .set_accelerator(this._getSelected('DATA'));
+            revealers['item-settings-menu-hotkey-revealer'] = true;
+
+          } else {
             this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
+            revealers['item-settings-angle-revealer']    = true;
           }
 
-          if (selectedType == 'url') {
-            this._builder.get_object('item-url').text = this._getSelected('DATA');
+          if (selectedType != 'Menu' && selectedType != 'Submenu') {
+            const selectedSettingsType = ItemTypes[selectedType].settingsType;
 
-          } else if (selectedType == 'command') {
-            this._builder.get_object('item-command').text = this._getSelected('DATA');
+            if (selectedSettingsType == ItemSettingsType.HOTKEY) {
+              this._builder.get_object('item-hotkey')
+                  .get_child()
+                  .set_accelerator(this._getSelected('DATA'));
+              revealers['item-settings-item-hotkey-revealer'] = true;
 
-          } else if (selectedType == 'recent') {
-            this._builder.get_object('item-count').value = this._getSelected('COUNT');
+            } else if (selectedSettingsType == ItemSettingsType.URL) {
+              this._builder.get_object('item-url').text = this._getSelected('DATA');
+              revealers['item-settings-url-revealer']   = true;
+
+            } else if (selectedSettingsType == ItemSettingsType.FILE) {
+              this._builder.get_object('item-file').text = this._getSelected('DATA');
+              revealers['item-settings-file-revealer']   = true;
+
+            } else if (selectedSettingsType == ItemSettingsType.COMMAND) {
+              this._builder.get_object('item-command').text = this._getSelected('DATA');
+              revealers['item-settings-command-revealer']   = true;
+
+            } else if (selectedSettingsType == ItemSettingsType.COUNT) {
+              this._builder.get_object('item-count').value = this._getSelected('DATA');
+              revealers['item-settings-count-revealer']    = true;
+            }
           }
         }
 
-        this._builder.get_object('preview-menu-button').sensitive     = somethingSelected;
-        this._builder.get_object('remove-item-button').sensitive      = somethingSelected;
-        this._builder.get_object('item-type-hotkey').sensitive        = somethingSelected;
-        this._builder.get_object('item-type-application').sensitive   = somethingSelected;
-        this._builder.get_object('item-type-file').sensitive          = somethingSelected;
-        this._builder.get_object('item-type-url').sensitive           = somethingSelected;
-        this._builder.get_object('item-type-command').sensitive       = somethingSelected;
-        this._builder.get_object('item-type-submenu').sensitive       = somethingSelected;
-        this._builder.get_object('item-type-bookmarks').sensitive     = somethingSelected;
-        this._builder.get_object('item-type-recent-files').sensitive  = somethingSelected;
-        this._builder.get_object('item-type-favorite-apps').sensitive = somethingSelected;
-        this._builder.get_object('item-type-frequent-apps').sensitive = somethingSelected;
-        this._builder.get_object('item-type-running-apps').sensitive  = somethingSelected;
-        this._builder.get_object('item-type-main-menu').sensitive     = somethingSelected;
-
-        const revealers = {
-          'item-settings-revealer': selectedType != 'none',
-          'item-settings-menu-hotkey-revealer': selectedType == 'menu',
-          'item-settings-angle-revealer': selectedType != 'menu',
-          'item-settings-item-hotkey-revealer': selectedType == 'hotkey',
-          'item-settings-count-revealer': selectedType == 'recent',
-          'item-settings-url-revealer': selectedType == 'url',
-          'item-settings-command-revealer': selectedType == 'command',
-          'item-settings-file-revealer': selectedType == 'file',
-          'item-settings-application-revealer': selectedType == 'application',
-        };
+        this._builder.get_object('preview-menu-button').sensitive = somethingSelected;
+        this._builder.get_object('remove-item-button').sensitive  = somethingSelected;
+        this._builder.get_object('action-types-list').sensitive   = somethingSelected;
+        this._builder.get_object('submenu-types-list').sensitive  = somethingSelected;
 
         for (const revealer in revealers) {
           this._builder.get_object(revealer).reveal_child = revealers[revealer];
@@ -372,7 +406,7 @@ var MenuEditor = class MenuEditor {
     });
 
     const iconView = this._builder.get_object('icon-view');
-    iconView.connect('item-activated', (view, path) => {
+    iconView.connect('item-activated', () => {
       this._builder.get_object('icon-popover').popdown();
     });
 
@@ -431,7 +465,7 @@ var MenuEditor = class MenuEditor {
     });
 
     this._builder.get_object('item-count').connect('value-changed', (adjustment) => {
-      this._setSelected('COUNT', adjustment.value);
+      this._setSelected('DATA', adjustment.value);
     });
 
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
@@ -451,82 +485,64 @@ var MenuEditor = class MenuEditor {
       this._setSelected('DATA', widget.text);
     });
 
+    this._builder.get_object('item-file').connect('notify::text', (widget) => {
+      this._setSelected('DATA', widget.text);
+    });
+
     this._builder.get_object('item-command').connect('notify::text', (widget) => {
       this._setSelected('DATA', widget.text);
     });
 
-    this._builder.get_object('item-file-chooser').connect('file-activated', (widget) => {
+    this._builder.get_object('item-file-chooser').connect('file-activated', () => {
       this._builder.get_object('item-file-popover').popdown();
     });
 
     this._builder.get_object('item-file-chooser')
         .connect('selection-changed', (widget) => {
-          this._setSelected('DATA', widget.get_filename());
           const info = widget.get_file().query_info('standard::icon', 0, null);
           this._builder.get_object('icon-name').text = info.get_icon().to_string();
           this._builder.get_object('item-name').text = widget.get_file().get_basename();
+          this._builder.get_object('item-file').text = widget.get_filename();
         });
 
     this._builder.get_object('application-popover-list')
-        .connect('application-activated', (widget, app) => {
+        .connect('application-activated', () => {
           this._builder.get_object('item-application-popover').popdown();
         });
 
     this._builder.get_object('application-popover-list')
         .connect('application-selected', (widget, app) => {
-          this._setSelected('DATA', app.get_commandline());
-          this._builder.get_object('icon-name').text = app.get_icon().to_string();
-          this._builder.get_object('item-name').text = app.get_display_name();
+          this._builder.get_object('icon-name').text    = app.get_icon().to_string();
+          this._builder.get_object('item-name').text    = app.get_display_name();
+          this._builder.get_object('item-command').text = app.get_commandline();
         });
 
-    this._hotkeyButton = this._builder.get_object('menu-hotkey');
-    this._hotkeyButton.connect('toggled', (widget) => {
-      if (widget.active) {
-        widget.set_label('Press a hotkey ...');
-        widget.grab_add();
-        // Gtk.grab_add(widget);
-        // FocusGrabber.grab(this.get_window());
-      } else {
-        widget.grab_remove();
-      }
-    });
+    this._initHotkeyButton('item-hotkey');
+    this._initHotkeyButton('menu-hotkey');
+
+
 
     this._builder.get_object('remove-item-button').connect('clicked', () => {
       this._deleteSelected();
     });
 
-    this._builder.get_object('item-types').connect('row-activated', (widget, row) => {
-      const type = row.get_name().slice(10);
+    this._builder.get_object('menu-types-list')
+        .connect('row-activated', (widget, row) => {
+          this._addNewItem(row.get_name());
+          this._builder.get_object('item-type-popover').popdown();
+        });
 
-      if (type == 'menu') {
-        const iter = this._store.append(null);
-        this._set(iter, 'ICON', this._getRandomEmoji());
-        this._set(iter, 'NAME', 'Submenu');
-        this._set(iter, 'TYPE', 'menu');
-        this._set(iter, 'Data', 'Not Bound');
-        this._set(iter, 'ANGLE', -1);
-      } else {
+    this._builder.get_object('action-types-list')
+        .connect('row-activated', (widget, row) => {
+          this._addNewItem(row.get_name());
+          this._builder.get_object('item-type-popover').popdown();
+        });
 
-        const selectedType          = this._getSelected('TYPE');
-        const [ok, model, selected] = this._selection.get_selected();
-        let iter                    = null;
-
-        if (selectedType == 'menu' || selectedType == 'submenu') {
-          iter = this._store.append(selected);
-        } else {
-          const parent = model.iter_parent(selected)[1];
-          iter         = this._store.insert_after(parent, selected);
-        }
-
-        this._set(iter, 'ICON', this._getRandomEmoji());
-        this._set(iter, 'NAME', 'foo');
-        this._set(iter, 'TYPE', type);
-        this._set(iter, 'Data', '');
-        this._set(iter, 'ANGLE', -1);
-      }
-
-      this._builder.get_object('item-type-popover').popdown();
-    });
+    this._builder.get_object('submenu-types-list')
+        .connect('row-activated', (widget, row) => {
+          this._addNewItem(row.get_name());
+          this._builder.get_object('item-type-popover').popdown();
+        });
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -546,6 +562,96 @@ var MenuEditor = class MenuEditor {
     }
 
     iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
+  }
+
+  _initHotkeyButton(name) {
+    const label = new Gtk.ShortcutLabel({disabled_text: 'Click to select a hotkey...'});
+
+    const button = this._builder.get_object(name);
+    button.add(label);
+    label.show();
+
+    button.connect('toggled', (widget) => {
+      if (widget.active) {
+        widget.grab_add();
+      } else {
+        widget.grab_remove();
+      }
+    });
+
+    button.connect('key-press-event', (widget, event) => {
+      try {
+        if (widget.active) {
+          const keyval = event.get_keyval()[1];
+          const mods   = event.get_state()[1] & Gtk.accelerator_get_default_mod_mask();
+
+          if (keyval == Gdk.keyval_from_name('Escape')) {
+            label.set_accelerator(this._getSelected('DATA'));
+            widget.grab_remove();
+            widget.active = false;
+
+          } else if (keyval == Gdk.keyval_from_name('BackSpace')) {
+            label.set_accelerator('');
+            this._setSelected('DATA', '');
+            widget.grab_remove();
+            widget.active = false;
+
+          } else if (Gtk.accelerator_valid(keyval, mods)) {
+            const accelerator = Gtk.accelerator_name(keyval, mods);
+            this._setSelected('DATA', accelerator);
+            label.set_accelerator(accelerator);
+            widget.grab_remove();
+            widget.active = false;
+          }
+
+          return true;
+        }
+        return false;
+      } catch (error) {
+        utils.notification('Failed to add new item: ' + error);
+      }
+    });
+  }
+
+  _addNewItem(newType) {
+    try {
+      if (newType == 'Menu') {
+        const iter = this._store.append(null);
+        this._set(iter, 'ICON', this._getRandomEmoji());
+        this._set(iter, 'NAME', 'Menu');
+        this._set(iter, 'TYPE', 'Menu');
+        this._set(iter, 'DATA', '');
+        this._set(iter, 'ANGLE', -1);
+
+      } else {
+
+        const selectedType          = this._getSelected('TYPE');
+        const [ok, model, selected] = this._selection.get_selected();
+        let iter                    = null;
+
+        if (selectedType == 'Menu' || selectedType == 'Submenu') {
+          iter = this._store.append(selected);
+
+        } else {
+          const parent = model.iter_parent(selected)[1];
+          iter         = this._store.insert_after(parent, selected);
+        }
+
+        if (newType == 'Submenu') {
+          this._set(iter, 'ICON', this._getRandomEmoji());
+          this._set(iter, 'NAME', 'Submenu');
+        } else {
+          this._set(iter, 'ICON', ItemTypes[newType].icon);
+          this._set(iter, 'NAME', ItemTypes[newType].name);
+        }
+
+        this._set(iter, 'TYPE', newType);
+        this._set(iter, 'DATA', '');
+        this._set(iter, 'ANGLE', -1);
+      }
+    } catch (error) {
+      utils.notification('Failed to add new item: ' + error);
+    }
   }
 
   _deleteSelected() {
@@ -606,22 +712,29 @@ var MenuEditor = class MenuEditor {
 
     if (columnName == 'NAME') {
       if (this._isToplevel(iter)) {
-        const hotkey = this._get(iter, 'DATA');
-        this._set(iter, 'DISPLAY_NAME', '<b>' + data + '</b>\n' + hotkey);
+        let hotkey        = 'Not Bound';
+        const accelerator = this._get(iter, 'DATA');
+        if (accelerator) {
+          const [keyval, mods] = Gtk.accelerator_parse();
+          hotkey               = Gtk.accelerator_get_label(keyval, mods);
+        }
+        this._set(
+            iter, 'DISPLAY_NAME', '<b>' + data + '</b>\n<small>' + hotkey + '</small>');
       } else {
         this._set(iter, 'DISPLAY_NAME', data);
       }
     }
 
-    if (columnName == 'COUNT') {
-      this._set(iter, 'DETAILS', 'Max Items: ' + data);
-    }
-
     if (columnName == 'DATA') {
       if (this._isToplevel(iter)) {
+        let hotkey = 'Not Bound';
+        if (data != '') {
+          const [keyval, mods] = Gtk.accelerator_parse(data);
+          hotkey               = Gtk.accelerator_get_label(keyval, mods);
+        }
         const name = this._get(iter, 'NAME');
         this._set(
-            iter, 'DISPLAY_NAME', '<b>' + name + '</b>\n<small>' + data + '</small>');
+            iter, 'DISPLAY_NAME', '<b>' + name + '</b>\n<small>' + hotkey + '</small>');
       } else {
         this._set(iter, 'DETAILS', data);
       }
