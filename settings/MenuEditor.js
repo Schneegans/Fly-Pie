@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                                 = imports.cairo;
-const {GObject, Gdk, GLib, Gtk, Gio, Pango} = imports.gi;
+const Cairo                          = imports.cairo;
+const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.common.utils;
@@ -332,9 +332,7 @@ var MenuEditor = class MenuEditor {
           const selectedType = this._getSelected('TYPE');
 
           if (selectedType == 'Menu') {
-            this._builder.get_object('menu-hotkey')
-                .get_child()
-                .set_accelerator(this._getSelected('DATA'));
+            this._menuHotkeyLabel.set_accelerator(this._getSelected('DATA'));
             revealers['item-settings-menu-hotkey-revealer'] = true;
 
           } else {
@@ -346,9 +344,7 @@ var MenuEditor = class MenuEditor {
             const selectedSettingsType = ItemTypes[selectedType].settingsType;
 
             if (selectedSettingsType == ItemSettingsType.HOTKEY) {
-              this._builder.get_object('item-hotkey')
-                  .get_child()
-                  .set_accelerator(this._getSelected('DATA'));
+              this._itemHotkeyLabel.set_accelerator(this._getSelected('DATA'));
               revealers['item-settings-item-hotkey-revealer'] = true;
 
             } else if (selectedSettingsType == ItemSettingsType.URL) {
@@ -517,8 +513,8 @@ var MenuEditor = class MenuEditor {
           this._builder.get_object('item-command').text = app.get_commandline();
         });
 
-    this._initHotkeyButton('item-hotkey');
-    this._initHotkeyButton('menu-hotkey');
+    this._itemHotkeyLabel = this._initHotkeySelect('item-hotkey-select', true);
+    this._menuHotkeyLabel = this._initHotkeySelect('menu-hotkey-select', false);
 
 
 
@@ -564,53 +560,67 @@ var MenuEditor = class MenuEditor {
     iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
   }
 
-  _initHotkeyButton(name) {
-    const label = new Gtk.ShortcutLabel({disabled_text: 'Click to select a hotkey...'});
+  _initHotkeySelect(name, doFullGrab) {
 
-    const button = this._builder.get_object(name);
-    button.add(label);
+    const row   = this._builder.get_object(name);
+    const label = new Gtk.ShortcutLabel({disabled_text: 'Not bound.'});
+
+    const grabKeyboard = () => {
+      if (doFullGrab) {
+        const seat = Gdk.Display.get_default().get_default_seat();
+        seat.grab(
+            row.get_window(), Gdk.SeatCapabilities.KEYBOARD, false, null, null, null);
+      }
+      row.grab_add();
+      label.set_accelerator('');
+      label.set_disabled_text('Press the hotkey! (ESC to cancel, BackSpace to unbind)');
+    };
+
+    const cancelGrab = () => {
+      if (doFullGrab) {
+        const seat = Gdk.Display.get_default().get_default_seat();
+        seat.ungrab();
+      }
+      row.grab_remove();
+      row.parent.unselect_all();
+      label.set_disabled_text('Not bound');
+    };
+
+
+    row.get_child().pack_end(label, false, false, 0);
     label.show();
 
-    button.connect('toggled', (widget) => {
-      if (widget.active) {
-        widget.grab_add();
-      } else {
-        widget.grab_remove();
-      }
+    row.parent.connect('row-activated', (row) => {
+      grabKeyboard();
     });
 
-    button.connect('key-press-event', (widget, event) => {
-      try {
-        if (widget.active) {
-          const keyval = event.get_keyval()[1];
-          const mods   = event.get_state()[1] & Gtk.accelerator_get_default_mod_mask();
+    row.connect('key-press-event', (row, event) => {
+      if (row.is_selected()) {
+        const keyval = event.get_keyval()[1];
+        const mods   = event.get_state()[1] & Gtk.accelerator_get_default_mod_mask();
 
-          if (keyval == Gdk.keyval_from_name('Escape')) {
-            label.set_accelerator(this._getSelected('DATA'));
-            widget.grab_remove();
-            widget.active = false;
+        if (keyval == Gdk.keyval_from_name('Escape')) {
+          label.set_accelerator(this._getSelected('DATA'));
+          cancelGrab();
 
-          } else if (keyval == Gdk.keyval_from_name('BackSpace')) {
-            label.set_accelerator('');
-            this._setSelected('DATA', '');
-            widget.grab_remove();
-            widget.active = false;
+        } else if (keyval == Gdk.keyval_from_name('BackSpace')) {
+          label.set_accelerator('');
+          this._setSelected('DATA', '');
+          cancelGrab();
 
-          } else if (Gtk.accelerator_valid(keyval, mods)) {
-            const accelerator = Gtk.accelerator_name(keyval, mods);
-            this._setSelected('DATA', accelerator);
-            label.set_accelerator(accelerator);
-            widget.grab_remove();
-            widget.active = false;
-          }
-
-          return true;
+        } else if (Gtk.accelerator_valid(keyval, mods)) {
+          const accelerator = Gtk.accelerator_name(keyval, mods);
+          this._setSelected('DATA', accelerator);
+          label.set_accelerator(accelerator);
+          cancelGrab();
         }
-        return false;
-      } catch (error) {
-        utils.notification('Failed to add new item: ' + error);
+
+        return true;
       }
+      return false;
     });
+
+    return label;
   }
 
   _addNewItem(newType) {
@@ -712,7 +722,7 @@ var MenuEditor = class MenuEditor {
 
     if (columnName == 'NAME') {
       if (this._isToplevel(iter)) {
-        let hotkey        = 'Not Bound';
+        let hotkey        = 'Not bound.';
         const accelerator = this._get(iter, 'DATA');
         if (accelerator) {
           const [keyval, mods] = Gtk.accelerator_parse();
@@ -727,7 +737,7 @@ var MenuEditor = class MenuEditor {
 
     if (columnName == 'DATA') {
       if (this._isToplevel(iter)) {
-        let hotkey = 'Not Bound';
+        let hotkey = 'Not bound.';
         if (data != '') {
           const [keyval, mods] = Gtk.accelerator_parse(data);
           hotkey               = Gtk.accelerator_get_label(keyval, mods);
