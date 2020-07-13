@@ -44,12 +44,12 @@
 var DBusInterface = {
   description:
       '<node>                                                                            \
-        <interface name="org.gnome.Shell.Extensions.swingpie">                          \
+        <interface name="org.gnome.Shell.Extensions.swingpie">                           \
           <method name="ShowMenu">                                                       \
             <arg name="description" type="s" direction="in"/>                            \
             <arg name="id" type="i" direction="out"/>                                    \
           </method>                                                                      \
-          <method name="EditMenu">                                                       \
+          <method name="PreviewMenu">                                                    \
             <arg name="description" type="s" direction="in"/>                            \
             <arg name="id" type="i" direction="out"/>                                    \
           </method>                                                                      \
@@ -59,13 +59,6 @@ var DBusInterface = {
           </signal>                                                                      \
           <signal name="OnCancel">                                                       \
               <arg type="i" name="id"/>                                                  \
-          </signal>                                                                      \
-          <signal name="OnCancelEdit">                                                   \
-              <arg type="i" name="id"/>                                                  \
-          </signal>                                                                      \
-          <signal name="OnFinishEdit">                                                   \
-              <arg type="i" name="id"/>                                                  \
-              <arg type="s" name="description"/>                                         \
           </signal>                                                                      \
       </interface>                                                                       \
     </node>',

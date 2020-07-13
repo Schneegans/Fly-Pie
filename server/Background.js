@@ -16,8 +16,8 @@ const utils = Me.imports.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This Clutter.Actor represents the background behind the menu. It can be shown in     //
-// normal mode and in edit mode. In normal mode, the background covers the entire       //
-// screen and is pushed as modal, grabbing the complete user input. In edit mode the    //
+// normal mode and in preview mode. In normal mode, the background covers the entire    //
+// screen and is pushed as modal, grabbing the complete user input. In preview mode the //
 // background covers only one half of the monitor. Furthermore, the control buttons are //
 // shown.                                                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ class Background extends Clutter.Actor {
     this.visible = false;
     this.opacity = 0;
 
-    // We transition everything. This is used for the position when in edit mode, the
+    // We transition everything. This is used for the position when in preview mode, the
     // opacity and the color.
     this.set_easing_duration(300);
 
@@ -59,10 +59,10 @@ class Background extends Clutter.Actor {
           Clutter.Color.from_string(this._settings.get_string('background-color'))[1];
     });
 
-    // Switch monitor side when the edit-mode-on-right-side settings key changes.
-    this._settings.connect('changed::edit-mode-on-right-side', () => {
-      if (this._editMode) {
-        this.x = this._settings.get_boolean('edit-mode-on-right-side') ? this.width : 0;
+    // Switch monitor side when the preview-on-right-side settings key changes.
+    this._settings.connect('changed::preview-on-right-side', () => {
+      if (this._previewMode) {
+        this.x = this._settings.get_boolean('preview-on-right-side') ? this.width : 0;
       }
     });
 
@@ -73,7 +73,7 @@ class Background extends Clutter.Actor {
       }
     });
 
-    // Create the control buttons container. This is shown in edit mode only.
+    // Create the control buttons container. This is shown in preview mode only.
     this._controlButtons = new St.Widget({
       style_class: 'switcher-list',
       layout_manager: new Clutter.BoxLayout({spacing: 10})
@@ -84,7 +84,7 @@ class Background extends Clutter.Actor {
     });
 
     this._addControlButton('Flip Side', 'object-flip-horizontal-symbolic', () => {
-      const key = 'edit-mode-on-right-side';
+      const key = 'preview-on-right-side';
       this._settings.set_boolean(key, !this._settings.get_boolean(key));
     });
 
@@ -94,23 +94,23 @@ class Background extends Clutter.Actor {
   // -------------------------------------------------------------------- public interface
 
   // This makes the background visible. In normal mode, the background covers the entire
-  // screen and is pushed as modal, grabbing the complete user input. In edit mode the
+  // screen and is pushed as modal, grabbing the complete user input. In preview mode the
   // background covers only one half of the monitor. Furthermore, the control buttons are
   // shown.
-  show(editMode) {
+  show(previewMode) {
 
-    this._editMode = editMode;
+    this._previewMode = previewMode;
 
-    if (this._editMode) {
+    if (this._previewMode) {
 
-      // Show the control buttons in edit mode.
+      // Show the control buttons in preview mode.
       this._controlButtons.visible = true;
 
       // Set background size to one half of the monitor.
       this.width = Main.layoutManager.currentMonitor.width / 2;
-      this.x     = this._settings.get_boolean('edit-mode-on-right-side') ? this.width : 0;
+      this.x     = this._settings.get_boolean('preview-on-right-side') ? this.width : 0;
 
-      // Do not draw outside our edit-mode screen-side.
+      // Do not draw outside our preview-mode screen-side.
       this.set_clip(0, 0, this.width, this.height);
 
       // Put control buttons at the lower center.
@@ -126,7 +126,7 @@ class Background extends Clutter.Actor {
       this.width                   = Main.layoutManager.currentMonitor.width;
       this.x                       = 0;
 
-      // Remove any previous clips set in edit mode.
+      // Remove any previous clips set in preview mode.
       this.remove_clip();
 
       // Try to grab the complete input.
@@ -149,7 +149,7 @@ class Background extends Clutter.Actor {
   // background.
   hide() {
     // Un-grab the input.
-    if (!this._editMode) {
+    if (!this._previewMode) {
       Main.popModal(this);
     }
 

@@ -22,7 +22,7 @@ const MenuItemState    = Me.imports.server.MenuItem.MenuItemState;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Menu parses the JSON structure given to the ShowMenu method. It creates          //
-// MenuItems accordingly. It keeps a list of currently selected MenuItems and ,based on //
+// MenuItems accordingly. It keeps a list of currently selected MenuItems and, based on //
 // the selection events from the SelectionWedges, it manages the state changes of the   //
 // individual MenuItems in the hierarchy.                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -48,8 +48,8 @@ var Menu = class Menu {
     // shown.
     this._menuID = null;
 
-    // True if the currently visible menu is in edit-mode.
-    this._editMode = false;
+    // True if the currently visible menu is in preview-mode.
+    this._previewMode = false;
 
     // Stores a reference to the MenuItem which is currently dragged around while a
     // gesture is performed.
@@ -286,7 +286,7 @@ var Menu = class Menu {
 
   // This shows the menu, blocking all user input. A subtle animation is used to fade in
   // the menu. Returns an error code if something went wrong.
-  show(menuID, structure, editMode) {
+  show(menuID, structure, previewMode) {
 
     // The menu is already active.
     if (this._menuID) {
@@ -303,8 +303,8 @@ var Menu = class Menu {
       this._root.destroy();
     }
 
-    // Store the edit mode flag.
-    this._editMode = editMode;
+    // Store the preview mode flag.
+    this._previewMode = previewMode;
 
     if (structure.name == undefined) {
       structure.name = 'root';
@@ -325,7 +325,7 @@ var Menu = class Menu {
     this._updateItemIDs(structure.items);
 
     // Try to grab the complete input.
-    if (!this._background.show(editMode)) {
+    if (!this._background.show(previewMode)) {
       // Something went wrong while grabbing the input. Let's abort this.
       return DBusInterface.errorCodes.eUnknownError;
     }
@@ -361,9 +361,9 @@ var Menu = class Menu {
     });
     this._selectionWedges.setItemAngles(itemAngles);
 
-    // Calculate menu position. In edit mode, we center the menu, else we position it at
-    // the mouse pointer.
-    if (editMode) {
+    // Calculate menu position. In preview mode, we center the menu, else we position it
+    // at the mouse pointer.
+    if (previewMode) {
       this._root.set_translation(
           this._background.width / 2, this._background.height / 2, 0);
       this._selectionWedges.set_translation(
@@ -558,7 +558,7 @@ var Menu = class Menu {
     this._selectionWedges.onSettingsChange(this._settings);
 
     // Then call onSettingsChange() for each item of our menu. This ensures that the menu
-    // is instantly updated in edit mode.
+    // is instantly updated in preview mode.
     if (this._root != undefined) {
       this._root.onSettingsChange(this._settings);
       this._root.redraw();

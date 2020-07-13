@@ -115,8 +115,8 @@ class MenuItem extends Clutter.Actor {
     this._firstRedraw = true;
 
     // This is set to true when the icons were deleted due to the user modifying the
-    // appearance settings in edit mode. If it is true, the icons will be re-created with
-    // full opacity as they are obviously already visible. Else there would be heavy
+    // appearance settings in preview mode. If it is true, the icons will be re-created
+    // with full opacity as they are obviously already visible. Else there would be heavy
     // preview-flickering when changing settings.
     this._forceRecreation = false;
 
@@ -521,7 +521,7 @@ class MenuItem extends Clutter.Actor {
       this._iconContainer.add_child(icon);
 
       // When the settings are modified (especially when a menu is shown
-      // in edit mode), the icons are completely reloaded. To make this jitter-free,
+      // in preview mode), the icons are completely reloaded. To make this jitter-free,
       // the _forceRecreation tells us whether we have to load the icon at full opacity.
       icon.set_opacity(this._forceRecreation ? 255 : 0);
       this._forceRecreation = false;

@@ -65,16 +65,16 @@ var Server = class Server {
     return this._openMenu(json, false);
   }
 
-  EditMenu(json) {
+  PreviewMenu(json) {
     return this._openMenu(json, true);
   }
 
   // ----------------------------------------------------------------------- private stuff
 
-  // Open the menu described by 'json', optionally in edit mode. This will return the
+  // Open the menu described by 'json', optionally in preview mode. This will return the
   // menu's ID on success or an error code on failure. See common/DBusInterface.js for a
   // list of error codes.
-  _openMenu(json, editMode) {
+  _openMenu(json, previewMode) {
 
     // First try to parse the menu structure.
     let structure;
@@ -88,7 +88,7 @@ var Server = class Server {
     // Then try to open the menu. This will return the menu's ID on success or an error
     // code on failure.
     try {
-      return this._menu.show(this._nextID++, structure, editMode);
+      return this._menu.show(this._nextID++, structure, previewMode);
     } catch (error) {
       logError(error);
     }

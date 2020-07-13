@@ -450,10 +450,10 @@
 
     <!-- Miscellaneous -->
 
-    <key name="edit-mode-on-right-side" type="b">
+    <key name="preview-on-right-side" type="b">
       <default>true</default>
-      <summary>Edit mode monitor side</summary>
-      <description>If set to true, the edit mode window opens on the right hand side
+      <summary>Preview monitor side</summary>
+      <description>If set to true, the preview window opens on the right hand side
                    of the current montor.</description>
     </key>
 
