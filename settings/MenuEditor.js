@@ -218,15 +218,20 @@ var MenuEditor = class MenuEditor {
         return false;
       });
 
-      // This is kind of a weird hack (?) to keep a row selected after drag'n'drop. We
-      // simply select every row after it was inserted. This does not work if we directly
-      // attempt to select it, we have to use a short timeout.
-      this._store.connect(
-          'row-inserted',
-          (widget, path, iter) => GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1, () => {
-            this._selection.select_iter(iter);
-            return false;
-          }));
+      // When a new row is inserted or an existing row is dragged around, we make sure
+      // that it stays selected. Additionally we save the menu configuration.
+      this._store.connect('row-inserted', (widget, path, iter) => {
+        // This is kind of a weird hack (?) to keep a row selected after drag'n'drop. We
+        // simply select every row after it was inserted. This does not work if we
+        // directly attempt to select it, we have to use a short timeout.
+        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1, () => {
+          this._selection.select_iter(iter);
+
+          // Save the menu configuration.
+          this._saveMenuConfiguration();
+          return false;
+        });
+      });
 
       // The tree view's main column contains an icon and some text. The icon is given in
       // the DISPLAY_ICON column of the menu store; the text is contained in the
@@ -257,115 +262,8 @@ var MenuEditor = class MenuEditor {
       utils.notification('Failed to initialize Menu Editor columns: ' + error);
     }
 
-
-    let menus = [
-      {
-        type: 'Menu',
-        icon: 'gedit',
-        name: 'Main Menu',
-        data: '',
-        fixedAngle: -1,
-        children: []
-      },
-      {
-        type: 'Menu',
-        icon: 'thunderbird',
-        name: 'Main Menu 2',
-        data: '',
-        fixedAngle: -1,
-        children: [
-          {
-            type: 'Submenu',
-            icon: 'emblem-default',
-            name: 'Favorites',
-            data: '',
-            fixedAngle: 90,
-          },
-          {
-            type: 'Command',
-            icon: 'firefox',
-            name: 'Firefox',
-            data: 'Firefox',
-            fixedAngle: -1,
-          },
-          {
-            type: 'Command',
-            icon: 'terminal',
-            name: 'Grep',
-            data: 'grep foo',
-            fixedAngle: -1,
-          },
-          {
-            type: 'Hotkey',
-            icon: 'H',
-            name: 'Hotkey',
-            data: '',
-            fixedAngle: 270,
-          },
-        ]
-      },
-      {
-        type: 'Menu',
-        icon: 'chrome',
-        name: 'Main Menu 3',
-        data: '',
-        fixedAngle: -1,
-        children: [
-          {
-            type: 'Bookmarks',
-            icon: 'nautilus',
-            name: 'Bookmarks',
-            data: '12',
-            fixedAngle: -1,
-          },
-          {
-            type: 'Url',
-            icon: 'epiphany',
-            name: 'URL',
-            data: 'http://www.google.de',
-            fixedAngle: -1,
-          },
-          {
-            type: 'File',
-            icon: 'nautilus',
-            name: 'File 1',
-            data: 'file://huhu',
-            fixedAngle: -1,
-          },
-          {
-            type: 'File',
-            icon: 'nautilus',
-            name: 'File 2',
-            data: 'file://huhu',
-            fixedAngle: -1,
-          },
-        ]
-      },
-    ];
-
-    for (let i = 0; i < menus.length; i++) {
-      const menu = menus[i];
-      const iter = this._store.append(null);
-
-      this._set(iter, 'ICON', menu.icon);
-      this._set(iter, 'NAME', menu.name);
-      this._set(iter, 'TYPE', menu.type);
-      this._set(iter, 'DATA', menu.data);
-      this._set(iter, 'ANGLE', menu.fixedAngle);
-
-
-      for (let j = 0; j < menu.children.length; j++) {
-        const child     = menu.children[j];
-        const childIter = this._store.append(iter);
-
-        this._set(childIter, 'ICON', child.icon);
-        this._set(childIter, 'NAME', child.name);
-        this._set(childIter, 'TYPE', child.type);
-        this._set(childIter, 'DATA', child.data);
-        this._set(childIter, 'ANGLE', child.fixedAngle);
-      }
-    }
-
+    // Now that the tree store is set up, we can load the entire menu configuration.
+    this._loadMenuConfiguration();
 
     // Now we initialize all icon-related UI elements. That is first and foremost the
     // icon-select popover.
@@ -880,55 +778,72 @@ var MenuEditor = class MenuEditor {
 
 
   // Sets the column data of the row identified by iter. The column should be the name
-  // of the column - that is for example "ICON", "ANGLE", or "TYPE". This function will
-  // automatically set the values of "DISPLAY_ICON", "DISPLAY_ANGLE", and "DISPLAY_NAME"
-  // when "ICON", "ANGLE", "NAME", or "DATA" are set.
+  // of the column - that is for example "ICON", "ANGLE", or "TYPE".
+  // This function will automatically set the values of "DISPLAY_ICON", "DISPLAY_ANGLE",
+  // and "DISPLAY_NAME" when "ICON", "ANGLE", "NAME", or "DATA" are set.
+  // Furthermore, it will automatically save a JSON representation of the entire menu
+  // store to the "menu-configuration" Gio.Settings key of this application.
   _set(iter, column, data) {
+    try {
 
-    // First, store the given value.
-    this._store.set_value(iter, this._store.columns[column], data);
-
-    // If the icon, was set, update the "DISPLAY_ICON" as well.
-    if (column == 'ICON') {
-      let iconSize = this._isToplevel(iter) ? 24 : 16;
-      this._set(iter, 'DISPLAY_ICON', utils.createIcon(data, iconSize));
-    }
-
-    // If the angle, was set, update the "DISPLAY_ANGLE" as well.
-    if (column == 'ANGLE') {
-      this._set(iter, 'DISPLAY_ANGLE', data >= 0 ? data : '');
-    }
-
-    // If the name, was set, update the "DISPLAY_NAME" as well. If iter refers to a
-    // top-level menu, the display name contains the hotkey.
-    if (column == 'NAME') {
-      if (this._isToplevel(iter)) {
-        let hotkey        = 'Not bound.';
-        const accelerator = this._get(iter, 'DATA');
-        if (accelerator) {
-          const [keyval, mods] = Gtk.accelerator_parse();
-          hotkey               = Gtk.accelerator_get_label(keyval, mods);
-        }
-        this._set(
-            iter, 'DISPLAY_NAME', '<b>' + data + '</b>\n<small>' + hotkey + '</small>');
-      } else {
-        this._set(iter, 'DISPLAY_NAME', data);
+      // Do not change anything if not changed.
+      if (this._get(iter, column) == data) {
+        return;
       }
+
+      // First, store the given value.
+      this._store.set_value(iter, this._store.columns[column], data);
+
+      // If the icon, was set, update the "DISPLAY_ICON" as well.
+      if (column == 'ICON') {
+        let iconSize = this._isToplevel(iter) ? 24 : 16;
+        this._set(iter, 'DISPLAY_ICON', utils.createIcon(data, iconSize));
+      }
+
+      // If the angle, was set, update the "DISPLAY_ANGLE" as well.
+      if (column == 'ANGLE') {
+        this._set(iter, 'DISPLAY_ANGLE', data >= 0 ? data : '');
+      }
+
+      // If the name, was set, update the "DISPLAY_NAME" as well. If iter refers to a
+      // top-level menu, the display name contains the hotkey.
+      if (column == 'NAME') {
+        if (this._isToplevel(iter)) {
+          let hotkey        = 'Not bound.';
+          const accelerator = this._get(iter, 'DATA');
+          if (accelerator) {
+            const [keyval, mods] = Gtk.accelerator_parse(accelerator);
+            hotkey               = Gtk.accelerator_get_label(keyval, mods);
+          }
+          this._set(
+              iter, 'DISPLAY_NAME', '<b>' + data + '</b>\n<small>' + hotkey + '</small>');
+        } else {
+          this._set(iter, 'DISPLAY_NAME', data);
+        }
+      }
+
+      // If the data column was set on a top-level menu, we need to update the
+      // "DISPLAY_NAME" as well, as the data column contains the hotkey of the menu.
+      if (column == 'DATA') {
+        if (this._isToplevel(iter)) {
+          let hotkey = 'Not bound.';
+          if (data != '') {
+            const [keyval, mods] = Gtk.accelerator_parse(data);
+            hotkey               = Gtk.accelerator_get_label(keyval, mods);
+          }
+          const name = this._get(iter, 'NAME');
+          this._set(
+              iter, 'DISPLAY_NAME', '<b>' + name + '</b>\n<small>' + hotkey + '</small>');
+        }
+      }
+    } catch (error) {
+      utils.notification('Failed to change menu configuration: ' + error);
     }
 
-    // If the data column was set on a top-level menu, we need to update the
-    // "DISPLAY_NAME" as well, as the data column contains the hotkey of the menu.
-    if (column == 'DATA') {
-      if (this._isToplevel(iter)) {
-        let hotkey = 'Not bound.';
-        if (data != '') {
-          const [keyval, mods] = Gtk.accelerator_parse(data);
-          hotkey               = Gtk.accelerator_get_label(keyval, mods);
-        }
-        const name = this._get(iter, 'NAME');
-        this._set(
-            iter, 'DISPLAY_NAME', '<b>' + name + '</b>\n<small>' + hotkey + '</small>');
-      }
+    // If loading has finished, any modifications to the tree store are directly committed
+    // to the "menu-configuration" settings key.
+    if (this._loadedMenuConfiguration) {
+      this._saveMenuConfiguration();
     }
   }
 
@@ -962,5 +877,93 @@ var MenuEditor = class MenuEditor {
 
     // The +0 is a little hack - else emojis.length is not recognized as a number?!
     return emojis[Math.floor(Math.random() * (emojis.length + 0))];
+  }
+
+  // This stores a JSON representation of the entire menu store in the
+  // "menu-configuration" key of the application settings. This is called whenever
+  // something is changed in the menu store.
+  _saveMenuConfiguration() {
+
+    try {
+
+      // This is called recursively.
+      const addItem = (list, iter) => {
+        let item = {
+          name: this._get(iter, 'NAME'),
+          icon: this._get(iter, 'ICON'),
+          type: this._get(iter, 'TYPE'),
+          data: this._get(iter, 'DATA'),
+          angle: this._get(iter, 'ANGLE'),
+          children: []
+        };
+
+        // Recursively add all children.
+        const count = this._store.iter_n_children(iter);
+        for (let i = 0; i < count; ++i) {
+          const childIter = this._store.iter_nth_child(iter, i)[1];
+          addItem(item.children, childIter);
+        }
+
+        list.push(item);
+      };
+
+      // The top level JSON element is an array containing all menus.
+      let menus      = [];
+      let [ok, iter] = this._store.get_iter_first();
+
+      while (ok) {
+        addItem(menus, iter);
+        ok = this._store.iter_next(iter);
+      }
+
+      // Save the configuration as JSON!
+      this._settings.set_string('menu-configuration', JSON.stringify(menus));
+
+    } catch (error) {
+      utils.notification('Failed to save menu configuration: ' + error);
+    }
+  }
+
+
+  // This is called once initially and loads the JSON menu configuration from
+  // "menu-configuration". It populates the menu store with all configured menus.
+  _loadMenuConfiguration() {
+
+    try {
+
+      // This is called recursively.
+      const parseItem = (item, iter) => {
+        this._set(iter, 'ICON', item.icon);
+        this._set(iter, 'NAME', item.name);
+        this._set(iter, 'TYPE', item.type);
+        this._set(iter, 'DATA', item.data);
+        this._set(iter, 'ANGLE', item.angle);
+
+        // Load all children recursively.
+        for (let j = 0; j < item.children.length; j++) {
+          const child     = item.children[j];
+          const childIter = this._store.append(iter);
+
+          parseItem(child, childIter);
+        }
+      };
+
+      // Load the menu configuration in the JSON format.
+      const menus = JSON.parse(this._settings.get_string('menu-configuration'));
+
+      for (let i = 0; i < menus.length; i++) {
+        const menu = menus[i];
+        const iter = this._store.append(null);
+
+        parseItem(menu, iter);
+      }
+
+      // Flag that loading is finished - all next calls to this._set() will update the
+      // "menu-configuration".
+      this._loadedMenuConfiguration = true;
+
+    } catch (error) {
+      utils.notification('Failed to load menu configuration: ' + error);
+    }
   }
 }

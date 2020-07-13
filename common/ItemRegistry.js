@@ -278,7 +278,7 @@ var ItemTypes = {
   // Gnome-Shell.
   FrequentlyUsed: {
     name: 'Frequently Used',
-    icon: 'emblem-default',
+    icon: 'emblem-favorite',
     description: 'Shows your frequently used applications.',
     settingsType: SettingsTypes.COUNT,
     settingsList: 'submenu-types-list',
@@ -304,7 +304,7 @@ var ItemTypes = {
   // Gnome-Shell.
   Favorites: {
     name: 'Favorites',
-    icon: 'emblem-favorite',
+    icon: 'starred',
     description: 'Shows your pinned applications.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
