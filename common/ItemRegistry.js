@@ -13,20 +13,52 @@ const {Gio, GLib, Gtk, GMenu} = imports.gi;
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
 
+// We import Shell and InputManipulator optionally. When this file is included from the
+// client side, these are available and can be used in the activation code of the actions
+// defined below. If this file is included via the pref.js, both of these are not
+// available. But this is not a problem, as the preferences will not call the createItem()
+// methods below; they are merely interested in the different item type's names, icons and
+// descriptions.
 let Shell            = undefined;
 let InputManipulator = undefined;
+
 try {
   Shell            = imports.gi.Shell;
   InputManipulator = new Me.imports.common.InputManipulator.InputManipulator();
 } catch (error) {
+  // Nothing to be done, we're in settings-mode.
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Each item type has one settings type - this determines which widgets are visible     //
+// when an item of this type is selected in the settings dialog. If you create a new    //
+// item type, this list may have to be extended. This will also require some changes to //
+// the MenuEditor.js as this is responsible for showing and hiding the widgets          //
+// accordingly.                                                                         //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 var SettingsTypes = {NONE: 0, HOTKEY: 1, COMMAND: 2, FILE: 3, URL: 4, COUNT: 5};
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// This huge object contains one key for each registered item type. Each item type      //
+// should have six properties:                                                          //
+//   name:         This will be shown in the add-new-item popover. It is also the       //
+//                 default name of newly created items of this type.                    //
+//   icon:         The icon name used in the add-new-item popover. It is also the       //
+//                 default icon of newly created items of this type.                    //
+//   description:  This will be shown as small text in the add-new-item popover.        //
+//                 Keep it short or use line breaks, else the popover will get wide.    //
+//   settingsType: This determines which widgets are visible when an item of this type  //
+//                 is selected in the settings dialog. See documentation above.         //
+//   settingsList: The Glade name of the list in the add-new-item popover where this    //
+//                 item should be listed.                                               //
+//   createItem:   A function which will be called on the client side to instantiate a  //
+//                 menu item of this type.                                              //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var ItemTypes = {
+
+  // The hotkey action simulates the pressing of a hotkey when activated.
   Hotkey: {
     name: 'Press Hotkey',
     icon: 'accessories-character-map',
@@ -43,6 +75,9 @@ var ItemTypes = {
       };
     }
   },
+
+  // The command actions executes a shell command when activated. This can be used to
+  // launch any application installed in the $PATH.
   Command: {
     name: 'Launch Application',
     icon: 'utilities-terminal',
@@ -66,6 +101,9 @@ var ItemTypes = {
       };
     }
   },
+
+  // The Url action opens the define URL in the system's default web browser. Despite its
+  // name it can actually open any URI.
   Url: {
     name: 'Open URL',
     icon: 'applications-internet',
@@ -86,6 +124,9 @@ var ItemTypes = {
       };
     }
   },
+
+  // The file action is very similar to the Url action, but only works for files. But it's
+  // a bit more intuitive as the leading file:// is not required.
   File: {
     name: 'Open File',
     icon: 'text-x-generic',
@@ -107,9 +148,12 @@ var ItemTypes = {
     }
   },
 
-  //////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // Items below this line are submenus, that means they contain usually more than one  //
+  // item. Usually the items are dynamic and may be different from time to time.        //
+  ////////////////////////////////////////////////////////////////////////////////////////
 
+  // The bookmarks submenu contains one entry for the default user directories.
   Bookmarks: {
     name: 'Bookmarks',
     icon: 'folder',

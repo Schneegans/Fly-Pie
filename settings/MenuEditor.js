@@ -39,6 +39,9 @@ let ColumnTypes = {
 // other items or submenus are only dropped to top-level menus or to submenus.          //
 // Furthermore, it ensure that fixed angles of items which are dragged around are       //
 // removed.                                                                             //
+// Additionally, it has a public property "columns", which contain the IDs of all the   //
+// columns above. For example, this can be used like this:                              //
+// this.get_value(iter, this.columns.DISPLAY_NAME);                                     //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.TreeStore {
