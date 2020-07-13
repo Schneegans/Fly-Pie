@@ -5600,7 +5600,7 @@ the current item will be selected.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="tooltip_text" translatable="yes">Removes the selected menu.</property>
+                                <property name="tooltip_text" translatable="yes">Removes the selected item.</property>
                                 <child>
                                   <object class="GtkImage" id="down_image">
                                     <property name="visible">True</property>
@@ -5660,7 +5660,7 @@ the current item will be selected.</property>
                         <child>
                           <object class="GtkListBoxRow">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
+                            <property name="can_focus">False</property>
                             <property name="activatable">False</property>
                             <property name="selectable">False</property>
                             <child>

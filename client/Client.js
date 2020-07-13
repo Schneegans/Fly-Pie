@@ -15,7 +15,7 @@ const utils            = Me.imports.common.utils;
 const Timer            = Me.imports.common.Timer.Timer;
 const InputManipulator = Me.imports.common.InputManipulator.InputManipulator;
 const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
-const ItemTypes        = Me.imports.common.ItemTypes.ItemTypes;
+const ItemRegistry     = Me.imports.common.ItemRegistry;
 const KeyBindings      = Me.imports.client.KeyBindings.KeyBindings;
 
 
@@ -67,21 +67,25 @@ var Client = class Client {
 
     let menu = {icon: 'firefox', name: 'Main Menu', items: []};
 
-    menu.items.push(ItemTypes.Hotkey.createItem(
+    menu.items.push(ItemRegistry.ItemTypes.Hotkey.createItem(
         'Undo', '/home/simon/Pictures/Eigene/avatar128.png', '<Ctrl>Z'));
-    menu.items.push(ItemTypes.Command.createItem('Firefox', 'firefox', 'firefox'));
     menu.items.push(
-        ItemTypes.MainMenu.createItem(ItemTypes.MainMenu.name, ItemTypes.MainMenu.icon));
-    menu.items.push(ItemTypes.Bookmarks.createItem(
-        ItemTypes.Bookmarks.name, ItemTypes.Bookmarks.icon));
-    menu.items.push(ItemTypes.RecentFiles.createItem(
-        ItemTypes.RecentFiles.name, ItemTypes.RecentFiles.icon, 9));
-    menu.items.push(ItemTypes.Favorites.createItem(
-        ItemTypes.Favorites.name, ItemTypes.Favorites.icon));
-    menu.items.push(ItemTypes.FrequentlyUsed.createItem(
-        ItemTypes.FrequentlyUsed.name, ItemTypes.FrequentlyUsed.icon, 9));
-    menu.items.push(ItemTypes.RunningApps.createItem(
-        ItemTypes.RunningApps.name, ItemTypes.RunningApps.icon));
+        ItemRegistry.ItemTypes.Command.createItem('Firefox', 'firefox', 'firefox'));
+    menu.items.push(ItemRegistry.ItemTypes.MainMenu.createItem(
+        ItemRegistry.ItemTypes.MainMenu.name, ItemRegistry.ItemTypes.MainMenu.icon));
+    menu.items.push(ItemRegistry.ItemTypes.Bookmarks.createItem(
+        ItemRegistry.ItemTypes.Bookmarks.name, ItemRegistry.ItemTypes.Bookmarks.icon));
+    menu.items.push(ItemRegistry.ItemTypes.RecentFiles.createItem(
+        ItemRegistry.ItemTypes.RecentFiles.name, ItemRegistry.ItemTypes.RecentFiles.icon,
+        9));
+    menu.items.push(ItemRegistry.ItemTypes.Favorites.createItem(
+        ItemRegistry.ItemTypes.Favorites.name, ItemRegistry.ItemTypes.Favorites.icon));
+    menu.items.push(ItemRegistry.ItemTypes.FrequentlyUsed.createItem(
+        ItemRegistry.ItemTypes.FrequentlyUsed.name,
+        ItemRegistry.ItemTypes.FrequentlyUsed.icon, 9));
+    menu.items.push(ItemRegistry.ItemTypes.RunningApps.createItem(
+        ItemRegistry.ItemTypes.RunningApps.name,
+        ItemRegistry.ItemTypes.RunningApps.icon));
 
     try {
       // Open the menu on the server side. Once this is done successfully, we store the

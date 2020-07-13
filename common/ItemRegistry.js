@@ -21,7 +21,7 @@ try {
 } catch (error) {
 }
 
-var ItemSettingsType = {NONE: 0, HOTKEY: 1, COMMAND: 2, FILE: 3, URL: 4, COUNT: 5};
+var SettingsTypes = {NONE: 0, HOTKEY: 1, COMMAND: 2, FILE: 3, URL: 4, COUNT: 5};
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -31,7 +31,7 @@ var ItemTypes = {
     name: 'Press Hotkey',
     icon: 'accessories-character-map',
     description: 'Simulates a key stroke.',
-    settingsType: ItemSettingsType.HOTKEY,
+    settingsType: SettingsTypes.HOTKEY,
     settingsList: 'action-types-list',
     createItem: (name, icon, hotkey) => {
       return {
@@ -47,7 +47,7 @@ var ItemTypes = {
     name: 'Launch Application',
     icon: 'utilities-terminal',
     description: 'Runs any shell command.',
-    settingsType: ItemSettingsType.COMMAND,
+    settingsType: SettingsTypes.COMMAND,
     settingsList: 'action-types-list',
     createItem: (name, icon, command) => {
       return {
@@ -70,7 +70,7 @@ var ItemTypes = {
     name: 'Open URL',
     icon: 'applications-internet',
     description: 'Opens an URL with the default browser.',
-    settingsType: ItemSettingsType.URL,
+    settingsType: SettingsTypes.URL,
     settingsList: 'action-types-list',
     createItem: (name, icon, url) => {
       return {
@@ -90,7 +90,7 @@ var ItemTypes = {
     name: 'Open File',
     icon: 'text-x-generic',
     description: 'Opens a file with the default applications.',
-    settingsType: ItemSettingsType.FILE,
+    settingsType: SettingsTypes.FILE,
     settingsList: 'action-types-list',
     createItem: (name, icon, file) => {
       return {
@@ -114,7 +114,7 @@ var ItemTypes = {
     name: 'Bookmarks',
     icon: 'folder',
     description: 'Shows your commonly used directories.',
-    settingsType: ItemSettingsType.NONE,
+    settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
     createItem: (name, icon) => {
       const pushFile = (menu, file) => {
@@ -174,7 +174,7 @@ var ItemTypes = {
     name: 'Running Apps',
     icon: 'preferences-system-windows',
     description: 'Shows the currently running applications.',
-    settingsType: ItemSettingsType.NONE,
+    settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
     createItem: (name, icon) => {
       let apps   = Shell.AppSystem.get_default().get_running();
@@ -202,7 +202,7 @@ var ItemTypes = {
     name: 'Recent Files',
     icon: 'document-open-recent',
     description: 'Shows your recently used files.',
-    settingsType: ItemSettingsType.COUNT,
+    settingsType: SettingsTypes.COUNT,
     settingsList: 'submenu-types-list',
     createItem: (name, icon, maxNum) => {
       let recentFiles = Gtk.RecentManager.get_default().get_items().slice(0, maxNum);
@@ -236,7 +236,7 @@ var ItemTypes = {
     name: 'Frequently Used',
     icon: 'emblem-default',
     description: 'Shows your frequently used applications.',
-    settingsType: ItemSettingsType.COUNT,
+    settingsType: SettingsTypes.COUNT,
     settingsList: 'submenu-types-list',
     createItem: (name, icon, maxNum) => {
       let apps   = Shell.AppUsage.get_default().get_most_used().slice(0, maxNum);
@@ -262,7 +262,7 @@ var ItemTypes = {
     name: 'Favorites',
     icon: 'emblem-favorite',
     description: 'Shows your pinned applications.',
-    settingsType: ItemSettingsType.NONE,
+    settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
     createItem: (name, icon) => {
       let appNames = global.settings.get_strv('favorite-apps');
@@ -292,7 +292,7 @@ var ItemTypes = {
         'Usually, this is very cluttered;\n' +
         'you should rather setup your own menus!',
     settingsList: 'submenu-types-list',
-    settingsType: ItemSettingsType.NONE,
+    settingsType: SettingsTypes.NONE,
     createItem: (name, icon) => {
       const pushMenuItems = (menu, dir) => {
         let iter = dir.iter(), nodeType, item;
