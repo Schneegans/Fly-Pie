@@ -32,11 +32,6 @@ var Server = class Server {
 
     // Initialize the menu.
     this._menu = new Menu(
-        // Called when the user hovers over an item in the menu. This calls the
-        // OnHover signal of the DBusInterface.
-        (menuID, item) =>
-            this._dbus.emit_signal('OnHover', GLib.Variant.new('(is)', [menuID, item])),
-
         // Called when the user selects an item in the menu. This calls the OnSelect
         // signal of the DBusInterface.
         (menuID, item) =>

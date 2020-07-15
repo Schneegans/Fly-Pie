@@ -23,8 +23,7 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Client sends ShowMenu-requests requests over the D-Bus to the Server. It listens //
-// to OnSelect, OnHover and OnCancel signals of the Server and executes the according   //
-// actions.                                                                             //
+// to OnSelect and OnCancel signals of the Server and executes the according actions.   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var Client = class Client {
@@ -47,7 +46,6 @@ var Client = class Client {
         (proxy) => {
           this._dbus = proxy;
           this._dbus.connectSignal('OnSelect', (...args) => this._onSelect(...args));
-          this._dbus.connectSignal('OnHover', (...args) => this._onHover(...args));
           this._dbus.connectSignal('OnCancel', (...args) => this._onCancel(...args));
         });
   }
@@ -135,17 +133,6 @@ var Client = class Client {
     menu.activate();
 
     this._lastID = -1;
-  }
-
-  // This gets called when the user hovers over an item, potentially selecting it. This
-  // could be used to preview something, but we do not use it here.
-  _onHover(proxy, sender, [id, path]) {
-    // For some reason it wasn't our menu.
-    if (this._lastID != id) {
-      return;
-    }
-
-    utils.debug('Hovering ' + path);
   }
 
   // This gets called when the user did not select anything in the menu.

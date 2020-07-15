@@ -34,13 +34,12 @@ var Menu = class Menu {
   // The Menu is only instantiated once by the Server. It is re-used for each new incoming
   // ShowMenu request. The three parameters are callbacks which are fired when the
   // corresponding event occurs.
-  constructor(onHover, onSelect, onCancel) {
+  constructor(onSelect, onCancel) {
 
     // Create Gio.Settings object for org.gnome.shell.extensions.swingpie.
     this._settings = utils.createSettings();
 
     // Store the callbacks.
-    this._onHover  = onHover;
     this._onSelect = onSelect;
     this._onCancel = onCancel;
 
@@ -493,7 +492,7 @@ var Menu = class Menu {
 
   // This method recursively traverses the menu structure and assigns an ID to each
   // item. If an item already has an ID property, this is not touched. This ID will be
-  // passed to the OnSelect and OnHover handlers. The default IDs are paths like /0/2/1.
+  // passed to the OnSelect handler. The default IDs are paths like /0/2/1.
   _updateItemIDs(items, parentID) {
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
