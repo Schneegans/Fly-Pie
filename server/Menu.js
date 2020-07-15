@@ -57,34 +57,39 @@ var Menu = class Menu {
 
     // This is a list of active MenuItems. At the beginning it will contain the root
     // MenuItem only. Selected children deeper in the hierarchy are prepended to this
-    // list.
+    // list. This means, the currently active menu node is always _menuSelectionChain[0].
     this._menuSelectionChain = [];
 
+    // This is used to warp the mouse pointer at the edges of the screen if necessary.
     this._input = new InputManipulator();
 
+    // The background covers the entire screen. Usually it's transparent and thus
+    // invisible but once a menu is shown, it will be pushed as modal capturing the
+    // complete user input. The color of the then visible background can be configured via
+    // the settings. Input is handled by the involved classes mostly like this:
+    //   .------------.     .-----------------.     .------.     .-----------.
+    //   | Background | --> | SelectionWedges | --> | Menu | --> | MenuItems |
+    //   '------------'     '-----------------'     '------'     '-----------'
+    // The Background captures all button and motion events which are then forwarded to
+    // the SelectionWedges. The SelectionWedges compute the currently active wedge and
+    // emit signals indicating any change. These change events are then passed from the
+    // Menu to the individual MenuItems.
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
 
-    this._background.connect('transitions-completed', () => {
-      if (this._background.opacity == 0 && this._root) {
-        this._root.destroy();
-        this._root = null;
-      }
-    });
-
+    // Forward button release events to the SelectionWedges.
     this._background.connect('button-release-event', (actor, event) => {
       this._selectionWedges.onButtonReleaseEvent(event);
       return Clutter.EVENT_STOP;
     });
 
-    this._background.connect('close-event', () => {
-      this._onCancel(this._menuID);
-      this._hide();
-    });
-
+    // Forward motion events to the SelectionWedges. If the primary mouse button is
+    // pressed, this will also drag the currently active child around.
     this._background.connect('motion-event', (actor, event) => {
       this._selectionWedges.onMotionEvent(event);
 
+      // If the primary button is pressed but we don not have a dragged child yet, we mark
+      // the currently hovered child as being the dragged child.
       if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK &&
           this._draggedChild == null) {
         const index = this._selectionWedges.getHoveredChild();
@@ -95,39 +100,75 @@ var Menu = class Menu {
         }
       }
 
-
+      // If there is a dragged child, update its position.
       if (this._draggedChild != null) {
 
+        // Transform event coordinates to parent-relative coordinates.
+        let ok, x, y;
+        [x, y]       = event.get_coords();
         const parent = this._draggedChild.get_parent().get_parent();
+        [ok, x, y]   = parent.transform_stage_point(x, y);
 
-        let [x, y] = event.get_coords();
-        let ok;
-        [ok, x, y] = parent.transform_stage_point(x, y);
-
+        // Set the child's position without any transition.
         this._draggedChild.set_easing_duration(0);
         this._draggedChild.set_translation(x, y, 0);
 
+        // Draw the parent's trace to this position.
         parent.drawTrace(x, y, 0, 0);
+
+        // This shouldn't be necessary but it reduces some severe flickering when children
+        // are dragged around slowly. It almost seems as some buffers are not cleared
+        // sufficiently without this...
         this._background.queue_redraw();
       }
 
       return Clutter.EVENT_STOP;
     });
 
+    // Delete the currently active menu once the background was faded-out.
+    this._background.connect('transitions-completed', () => {
+      if (this._background.opacity == 0 && this._root) {
+        this._root.destroy();
+        this._root = null;
+      }
+    });
+
+    // This is fired when the close button of the preview mode is clicked.
+    this._background.connect('close-event', () => {
+      this._onCancel(this._menuID);
+      this._hide();
+    });
+
+    // All interaction with the menu happens through the SelectionWedges. They receive
+    // motion and button events and emit selection signals based on this input. When these
+    // signals are emitted, the state of all MenuItems is changed accordingly. For a full
+    // description of the SelectionWedge have a look at their file. Here is a quick
+    // summary of the signals:
+    // child-hovered-event:    When the mouse pointer enters one of the wedges.
+    // child-selected-event:   When the primary mouse button is pressed inside a wedge.
+    // parent-hovered-event:   Same as child-hovered-event, but for the parent wedge.
+    // parent-selected-event:  Same as child-selected-event, but for the parent wedge.
+    // cancel-selection-event: When the secondary mouse button is pressed.
     this._selectionWedges = new SelectionWedges();
     this._background.add_child(this._selectionWedges);
 
+    // This is fired when the mouse pointer enters one of the wedges.
     this._selectionWedges.connect('child-hovered-event', (o, index) => {
+      // If no child is hovered (index == -1), the center element is hovered.
       if (index == -1) {
         this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
       } else {
         this._menuSelectionChain[0].setState(MenuItemState.CENTER, index);
       }
 
+      // It could be that the parent of the currently active item was hovered before, so
+      // lets set its state back to PARENT.
       if (this._menuSelectionChain.length > 1) {
         this._menuSelectionChain[1].setState(MenuItemState.PARENT);
       }
 
+      // If we're currently dragging a child around, the newly hovered child will
+      // instantaneously become the hovered child.
       const [x, y, mods] = global.get_pointer();
       if (mods & Clutter.ModifierType.BUTTON1_MASK && index >= 0) {
         const child = this._menuSelectionChain[0].getChildMenuItems()[index];
@@ -137,68 +178,101 @@ var Menu = class Menu {
         this._draggedChild = null;
       }
 
+      // This recursively redraws all children based on their newly assigned state.
       this._root.redraw();
     });
 
+    // This is fired when the primary mouse button is pressed inside a wedge. This will
+    // also be emitted when a gesture is detected.
     this._selectionWedges.connect('child-selected-event', (o, index) => {
       const parent = this._menuSelectionChain[0];
       const child  = this._menuSelectionChain[0].getChildMenuItems()[index];
+      const root   = this._menuSelectionChain[this._menuSelectionChain.length - 1];
 
       const [pointerX, pointerY, mods] = global.get_pointer();
+
+      // Ignore any gesture-based selection of leaf nodes. Final selections are only done
+      // when the mouse button is released.
       if (mods & Clutter.ModifierType.BUTTON1_MASK &&
           child.getChildMenuItems().length == 0) {
         return;
       }
 
+      // Once something is selected, it's not dragged anymore. Even if the mouse button is
+      // still pressed (we might come here when a gesture was detected by the
+      // SelectionWedges), we abort any dragging operation.
+      this._draggedChild = null;
+
+      // Update the item states: The previously active item becomes the parent, the
+      // selected child becomes the new hovered center item.
       parent.setState(MenuItemState.PARENT, index);
       child.setState(MenuItemState.CENTER_HOVERED);
+
+      // Prepend the newly active item to our menu selection chain.
       this._menuSelectionChain.unshift(child);
 
+      // The newly active item will be shown at the pointer position. To prevent it from
+      // going offscreen, we clamp the position to the current monitor bounds.
       const [clampedX, clampedY] = this._clampToToMonitor(pointerX, pointerY, 10);
 
+      // Warp the mouse pointer to this position if necessary.
       if (pointerX != clampedX || pointerY != clampedY) {
         this._input.warpPointer(clampedX, clampedY);
       }
 
-      if (child.getChildMenuItems().length > 0) {
-        const itemAngles = [];
-        child.getChildMenuItems().forEach(item => {
-          itemAngles.push(item.angle);
-        });
-        this._selectionWedges.setItemAngles(itemAngles, (child.angle + 180) % 360);
+      // The "trace" of the menu needs to be "idealized". That means, even if the user did
+      // not click exactly in the direction of the item, the line connecting parent and
+      // child has to be drawn with the correct angle. As the newly active item will be
+      // shown directly at the pointer position, we must move the parent so that the trace
+      // has the correct angle. Actually not the parent item has to move but the root of
+      // the entire menu selection chain.
 
-        this._selectionWedges.set_translation(
-            clampedX - this._background.x, clampedY - this._background.y, 0);
-      }
-
+      // This is the clamped click-position relative to the newly active item's parent.
       const [ok, relativeX, relativeY] = parent.transform_stage_point(clampedX, clampedY);
 
+      // Compute the final trace length as max(distance-click-to-parent, min-trace-length)
       const currentTraceLength = Math.sqrt(relativeX * relativeX + relativeY * relativeY);
       const idealTraceLength   = Math.max(
           this._settings.get_double('trace-min-length') *
               this._settings.get_double('global-scale'),
           currentTraceLength);
 
+      // Based on this trace length, we can compute where the newly active item should be
+      // placed relative to its parent.
       const childAngle = child.angle * Math.PI / 180;
       const idealX     = Math.floor(Math.sin(childAngle) * idealTraceLength);
       const idealY     = -Math.floor(Math.cos(childAngle) * idealTraceLength);
 
+      // Based on difference, we can now translate the root item.
       const requiredOffsetX = relativeX - idealX;
       const requiredOffsetY = relativeY - idealY;
-
-      const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
-
       root.set_translation(
           root.translation_x + requiredOffsetX, root.translation_y + requiredOffsetY, 0);
 
+      // The newly active item will be placed at its idealized position. As the root menu
+      // moved, this will be exactly at the pointer position.
       child.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
       child.set_easing_mode(this._settings.get_enum('easing-mode'));
       child.set_translation(idealX, idealY, 0);
 
-      this._draggedChild = null;
+      // Now we update position and the number of wedges of the SelectionWedges
+      // according to the newly active item.
+      if (child.getChildMenuItems().length > 0) {
+        const itemAngles = [];
+        child.getChildMenuItems().forEach(item => {
+          itemAngles.push(item.angle);
+        });
 
+        this._selectionWedges.setItemAngles(itemAngles, (child.angle + 180) % 360);
+        this._selectionWedges.set_translation(
+            clampedX - this._background.x, clampedY - this._background.y, 0);
+      }
+
+      // This recursively redraws all children based on their newly assigned state.
       this._root.redraw();
 
+      // Finally, if a child was selected which has no children, we report a selection and
+      // hide the entire menu.
       if (child.getChildMenuItems().length == 0) {
         this._onSelect(this._menuID, child.id);
         this._background.set_easing_delay(
@@ -208,31 +282,48 @@ var Menu = class Menu {
       }
     });
 
+    // When a parent item is hovered, we draw the currently active item with the state
+    // CENTER_HOVERED to indicate that the parent is not a child.
     this._selectionWedges.connect('parent-hovered-event', () => {
       this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
       this._menuSelectionChain[1].setState(MenuItemState.PARENT_HOVERED);
+
+      // This recursively redraws all children based on their newly assigned state.
       this._root.redraw();
+
+      // Parent items cannot be dragged around. Even if the mouse button is still pressed
+      // (we might come here when a gesture was detected by the SelectionWedges), we abort
+      // any dragging operation.
       this._draggedChild = null;
     });
 
+    // If the parent of the currently active item is selected, it becomes the newly active
+    // item with the state CENTER_HOVERED.
     this._selectionWedges.connect('parent-selected-event', () => {
       const parent = this._menuSelectionChain[1];
       parent.setState(MenuItemState.CENTER_HOVERED, -1);
 
+      // Remove the first element of the menu selection chain.
       this._menuSelectionChain.shift();
 
+      // The parent item will be moved to the pointer position. To prevent it from
+      // going offscreen, we clamp the position to the current monitor bounds.
       const [pointerX, pointerY] = global.get_pointer();
       const [clampedX, clampedY] = this._clampToToMonitor(pointerX, pointerY, 10);
 
+      // Warp the mouse pointer to this position if necessary.
       if (pointerX != clampedX || pointerY != clampedY) {
         this._input.warpPointer(clampedX, clampedY);
       }
 
+      // Now we update position and the number of wedges of the SelectionWedges
+      // according to the newly active item.
       const itemAngles = [];
       parent.getChildMenuItems().forEach(item => {
         itemAngles.push(item.angle);
       });
 
+      // If necessary, add a wedge for the parent's parent.
       if (this._menuSelectionChain.length > 1) {
         this._selectionWedges.setItemAngles(itemAngles, (parent.angle + 180) % 360);
       } else {
@@ -242,41 +333,34 @@ var Menu = class Menu {
       this._selectionWedges.set_translation(
           clampedX - this._background.x, clampedY - this._background.y, 0);
 
+      // We need to move the menu selection chain's root element so that our newly active
+      // item is exactly at the pointer position.
+      const [ok, relativeX, relativeY] = parent.transform_stage_point(clampedX, clampedY);
+      const root         = this._menuSelectionChain[this._menuSelectionChain.length - 1];
+      root.translation_x = root.translation_x + relativeX;
+      root.translation_y = root.translation_y + relativeY;
 
-      if (this._menuSelectionChain.length > 1) {
-        const [ok, relativeX, relativeY] =
-            parent.transform_stage_point(clampedX, clampedY);
-
-        const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
-        root.translation_x = root.translation_x + relativeX;
-        root.translation_y = root.translation_y + relativeY;
-
-      } else {
-        const [ok, relativeX, relativeY] =
-            this._background.transform_stage_point(clampedX, clampedY);
-        parent.set_translation(relativeX, relativeY, 0);
-      }
-
+      // Once the parent is selected, nothing is dragged anymore. Even if the mouse button
+      // is still pressed (we might come here when a gesture was detected by the
+      // SelectionWedges), we abort any dragging operation.
       this._draggedChild = null;
 
+      // This recursively redraws all children based on their newly assigned state.
       this._root.redraw();
     });
 
-
+    // This is usually fired when the right mouse button is pressed.
     this._selectionWedges.connect('cancel-selection-event', () => {
       this._onCancel(this._menuID);
       this._hide();
     });
 
-
-    // For some reason this has to be set explicitly to true before it can be set to
-    // false.
-    global.stage.cursor_visible = true;
-
+    // Whenever settings are changed, we adapt the currently shown menu accordingly.
     this._settings.connect('change-event', this._onSettingsChange.bind(this));
     this._onSettingsChange();
   }
 
+  // This removes our root actor from Gnome-Shell.
   destroy() {
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();
@@ -285,7 +369,8 @@ var Menu = class Menu {
   // -------------------------------------------------------------------- public interface
 
   // This shows the menu, blocking all user input. A subtle animation is used to fade in
-  // the menu. Returns an error code if something went wrong.
+  // the menu. Returns an error code if something went wrong. See DBusInerface.js for all
+  // possible error codes.
   show(menuID, structure, previewMode) {
 
     // The menu is already active.
@@ -306,6 +391,7 @@ var Menu = class Menu {
     // Store the preview mode flag.
     this._previewMode = previewMode;
 
+    // Make sure that a name and an icon is set.
     if (structure.name == undefined) {
       structure.name = 'root';
     }
@@ -355,6 +441,7 @@ var Menu = class Menu {
     this._root.onSettingsChange(this._settings);
     this._root.redraw();
 
+    // Initialize the wedge angles of the SelectionWedges according to the root menu.
     const itemAngles = [];
     this._root.getChildMenuItems().forEach(item => {
       itemAngles.push(item.angle);
