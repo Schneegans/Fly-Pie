@@ -130,8 +130,6 @@ var MenuEditor = class MenuEditor {
     // First, we initialize the add-new-item popover and the related buttons.
     try {
       // Here we add one entry to the add-new-item popover for each registered item type.
-      // The lists in the popover already contain one entry for "Menu" and "Submenu".
-      // These are pre-defined in the Glade-UI file.
       for (const type in ItemRegistry.ItemTypes) {
         const row  = new Gtk.ListBoxRow({selectable: false});
         const grid = new Gtk.Grid({
@@ -229,6 +227,7 @@ var MenuEditor = class MenuEditor {
 
           // Save the menu configuration.
           this._saveMenuConfiguration();
+
           return false;
         });
       });
@@ -491,47 +490,41 @@ var MenuEditor = class MenuEditor {
           this._builder.get_object('icon-name').text = this._getSelected('ICON');
           this._builder.get_object('item-name').text = this._getSelected('NAME');
 
-          const selectedType = this._getSelected('TYPE');
+          const selectedType         = this._getSelected('TYPE');
+          const selectedSettingsType = ItemRegistry.ItemTypes[selectedType].settingsType;
 
           // If the selected item is a top-level menu, the DATA column contains its
           // hotkey.
-          if (selectedType == 'Menu') {
+          if (selectedSettingsType == ItemRegistry.SettingsTypes.MENU) {
             this._menuHotkeyLabel.set_accelerator(this._getSelected('DATA'));
             revealers['item-settings-menu-hotkey-revealer'] = true;
           }
 
           // For all other items, the fixed angle can be set.
-          if (selectedType != 'Menu') {
+          if (selectedSettingsType != ItemRegistry.SettingsTypes.MENU) {
             this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
             revealers['item-settings-angle-revealer']    = true;
           }
 
-          // For all items which are neither a Menu nor a Submenu, the required widgets
-          // are based on the SettingsType defined in the ItemRegistry.
-          if (selectedType != 'Menu' && selectedType != 'Submenu') {
-            const selectedSettingsType =
-                ItemRegistry.ItemTypes[selectedType].settingsType;
+          if (selectedSettingsType == ItemRegistry.SettingsTypes.HOTKEY) {
+            this._itemHotkeyLabel.set_accelerator(this._getSelected('DATA'));
+            revealers['item-settings-item-hotkey-revealer'] = true;
 
-            if (selectedSettingsType == ItemRegistry.SettingsTypes.HOTKEY) {
-              this._itemHotkeyLabel.set_accelerator(this._getSelected('DATA'));
-              revealers['item-settings-item-hotkey-revealer'] = true;
+          } else if (selectedSettingsType == ItemRegistry.SettingsTypes.URL) {
+            this._builder.get_object('item-url').text = this._getSelected('DATA');
+            revealers['item-settings-url-revealer']   = true;
 
-            } else if (selectedSettingsType == ItemRegistry.SettingsTypes.URL) {
-              this._builder.get_object('item-url').text = this._getSelected('DATA');
-              revealers['item-settings-url-revealer']   = true;
+          } else if (selectedSettingsType == ItemRegistry.SettingsTypes.FILE) {
+            this._builder.get_object('item-file').text = this._getSelected('DATA');
+            revealers['item-settings-file-revealer']   = true;
 
-            } else if (selectedSettingsType == ItemRegistry.SettingsTypes.FILE) {
-              this._builder.get_object('item-file').text = this._getSelected('DATA');
-              revealers['item-settings-file-revealer']   = true;
+          } else if (selectedSettingsType == ItemRegistry.SettingsTypes.COMMAND) {
+            this._builder.get_object('item-command').text = this._getSelected('DATA');
+            revealers['item-settings-command-revealer']   = true;
 
-            } else if (selectedSettingsType == ItemRegistry.SettingsTypes.COMMAND) {
-              this._builder.get_object('item-command').text = this._getSelected('DATA');
-              revealers['item-settings-command-revealer']   = true;
-
-            } else if (selectedSettingsType == ItemRegistry.SettingsTypes.COUNT) {
-              this._builder.get_object('item-count').value = this._getSelected('DATA');
-              revealers['item-settings-count-revealer']    = true;
-            }
+          } else if (selectedSettingsType == ItemRegistry.SettingsTypes.COUNT) {
+            this._builder.get_object('item-count').value = this._getSelected('DATA');
+            revealers['item-settings-count-revealer']    = true;
           }
         }
 
@@ -746,6 +739,9 @@ var MenuEditor = class MenuEditor {
         const [ok, model, iter] = this._selection.get_selected();
         if (ok) {
           model.remove(iter);
+
+          // Save the menu configuration.
+          this._saveMenuConfiguration();
         }
       }
       dialog.destroy();

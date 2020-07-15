@@ -378,7 +378,7 @@ var Menu = class Menu {
     }
 
     // Check if there is a root item list.
-    if (!(structure.items && structure.items.length > 0)) {
+    if (!(structure.children && structure.children.length > 0)) {
       return DBusInterface.errorCodes.ePropertyMissing;
     }
 
@@ -401,13 +401,13 @@ var Menu = class Menu {
 
     // Calculate and verify all item angles.
     structure.angle = 0;
-    if (!this._updateItemAngles(structure.items)) {
+    if (!this._updateItemAngles(structure.children)) {
       return DBusInterface.errorCodes.eInvalidAngles;
     }
 
     // Assign an ID to each item.
     structure.id = '/';
-    this._updateItemIDs(structure.items);
+    this._updateItemIDs(structure.children);
 
     // Try to grab the complete input.
     if (!this._background.show(previewMode)) {
@@ -423,8 +423,8 @@ var Menu = class Menu {
       const menuItem = new MenuItem(
           {id: item.id, caption: item.name, icon: item.icon, angle: item.angle});
 
-      if (item.items) {
-        item.items.forEach(child => {
+      if (item.children) {
+        item.children.forEach(child => {
           menuItem.addMenuItem(createMenuItem(child));
         });
       }
@@ -505,8 +505,8 @@ var Menu = class Menu {
       }
 
       // Proceed recursively with the children.
-      if (item.items) {
-        this._updateItemIDs(item.items, item.id);
+      if (item.children) {
+        this._updateItemIDs(item.children, item.id);
       }
     }
   }
@@ -528,7 +528,7 @@ var Menu = class Menu {
     // fixed angles.
     const fixedAngles = [];
     items.forEach((item, index) => {
-      if ('angle' in item) {
+      if ('angle' in item && item.angle >= 0) {
         fixedAngles.push({angle: item.angle, index: index});
       }
     });
@@ -626,8 +626,8 @@ var Menu = class Menu {
 
     // Now that all angles are set, update the child items.
     items.forEach(item => {
-      if (item.items) {
-        if (!this._updateItemAngles(item.items, (item.angle + 180) % 360)) {
+      if (item.children) {
+        if (!this._updateItemAngles(item.children, (item.angle + 180) % 360)) {
           return false;
         }
       }

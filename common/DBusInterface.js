@@ -13,17 +13,17 @@
 // be provided. This is a JSON string like this:                                        //
 //                                                                                      //
 //   {                                                                                  //
-//    'items':[{                                                                        //
+//    'children':[{                                                                     //
 //      'name':'Item Title 1',                                                          //
 //      'icon':'icon-name-or-path',                                                     //
-//      'items':[{                                                                      //
+//      'children':[{                                                                   //
 //          'name':  'Item Title 11',                                                   //
-//          'angle': 90,                                                                //
-//          'icon':  'icon-name-or-path'                                                //
+//          'icon':  'icon-name-or-path',                                               //
+//          'angle': 90                                                                 //
 //        },{                                                                           //
 //          'name':  'Item Title 12',                                                   //
-//          'angle': 270,                                                               //
-//          'icon':  'icon-name-or-path'                                                //
+//          'icon':  'icon-name-or-path',                                               //
+//          'angle': 270                                                                //
 //      }]},{                                                                           //
 //        'name': 'Item Title 2',                                                       //
 //        'icon': 'icon-name-or-path'                                                   //
@@ -63,10 +63,24 @@ var DBusInterface = {
       </interface>                                                                       \
     </node>',
   errorCodes: {
-    eUnknownError: -1,     // An unknown error occurred.
-    eAlreadyActive: -2,    // A menu is already opened; try again later.
-    eInvalidJSON: -3,      // The provided menu description was no valid JSON.
-    ePropertyMissing: -4,  // The provided menu description lacks required properties.
-    eInvalidAngles: -5     // The angles of the items did not follow the rules above.
+    eUnknownError: -1,
+    eAlreadyActive: -2,
+    eInvalidJSON: -3,
+    ePropertyMissing: -4,
+    eInvalidAngles: -5
+  },
+  getErrorDescription: (code) => {
+    switch (code) {
+      case -2:
+        return 'A menu is already opened; try again later.';
+      case -3:
+        return 'The provided menu description was no valid JSON.';
+      case -4:
+        return 'The provided menu description lacks required properties.';
+      case -5:
+        return 'The angles of the children did not follow the rules.';
+      default:
+        return 'An unknown error occurred.';
+    }
   }
 };

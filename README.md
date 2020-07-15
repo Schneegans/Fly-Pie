@@ -19,7 +19,7 @@ gdbus monitor  --session --dest org.gnome.Shell \
 gdbus call --session --dest org.gnome.Shell              \
   --object-path /org/gnome/shell/extensions/swingpie     \
   --method org.gnome.Shell.Extensions.swingpie.ShowMenu  \
-  '{"icon": "😀", "items": [                             \
+  '{"icon": "😀", "children": [                          \
     {"name": "Rocket",   "icon":"🚀", "id":"a"},         \
     {"name": "Doughnut", "icon":"🍩", "id":"b"}          \
   ]}'

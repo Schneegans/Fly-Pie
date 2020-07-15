@@ -676,11 +676,11 @@ var Settings = class Settings {
   // This creates a Demo Menu structure which is shown when the preview button is pressed.
   _createDemoMenu() {
     return {
-      name: 'Demo Menu', icon: 'firefox', items: [
+      name: 'Demo Menu', icon: 'firefox', children: [
         {
           name: 'Smileys',
           icon: 'firefox',
-          items: [
+          children: [
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
@@ -691,7 +691,7 @@ var Settings = class Settings {
         {
           name: 'Animals',
           icon: 'folder',
-          items: [
+          children: [
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
@@ -702,7 +702,7 @@ var Settings = class Settings {
         {
           name: 'Fruits',
           icon: '🥝',
-          items: [
+          children: [
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
@@ -713,7 +713,7 @@ var Settings = class Settings {
         {
           name: 'Sports',
           icon: '⚽',
-          items: [
+          children: [
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
@@ -724,7 +724,7 @@ var Settings = class Settings {
         {
           name: 'Vehicles',
           icon: '🚀',
-          items: [
+          children: [
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
@@ -735,7 +735,7 @@ var Settings = class Settings {
         {
           name: 'Symbols',
           icon: '♍',
-          items: [
+          children: [
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},
             {name: 'Doughnut', icon: '🍩'},

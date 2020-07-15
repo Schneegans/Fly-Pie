@@ -37,7 +37,16 @@ try {
 // accordingly.                                                                         //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var SettingsTypes = {NONE: 0, HOTKEY: 1, COMMAND: 2, FILE: 3, URL: 4, COUNT: 5};
+var SettingsTypes = {
+  NONE: 0,
+  MENU: 1,
+  SUBMENU: 2,
+  HOTKEY: 3,
+  COMMAND: 4,
+  FILE: 5,
+  URL: 6,
+  COUNT: 7,
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This huge object contains one key for each registered item type. Each item type      //
@@ -58,6 +67,18 @@ var SettingsTypes = {NONE: 0, HOTKEY: 1, COMMAND: 2, FILE: 3, URL: 4, COUNT: 5};
 
 var ItemTypes = {
 
+  // The top-level menu cannot be activated. It should always contain some children.
+  Menu: {
+    name: 'Toplevel Menu',
+    icon: 'view-more-symbolic',
+    description: 'Create as many as you want!',
+    settingsType: SettingsTypes.MENU,
+    settingsList: 'menu-types-list',
+    createItem: (name, icon, angle, data) => {
+      return {name: name, icon: icon, children: []};
+    }
+  },
+
   // The hotkey action simulates the pressing of a hotkey when activated.
   Hotkey: {
     name: 'Press Hotkey',
@@ -65,12 +86,13 @@ var ItemTypes = {
     description: 'Simulates a key stroke.',
     settingsType: SettingsTypes.HOTKEY,
     settingsList: 'action-types-list',
-    createItem: (name, icon, hotkey) => {
+    createItem: (name, icon, angle, data) => {
       return {
         name: name,
         icon: icon,
+        angle: angle,
         activate: () => {
-          InputManipulator.activateAccelerator(hotkey);
+          InputManipulator.activateAccelerator(data);
         }
       };
     }
@@ -84,15 +106,16 @@ var ItemTypes = {
     description: 'Runs any shell command.',
     settingsType: SettingsTypes.COMMAND,
     settingsList: 'action-types-list',
-    createItem: (name, icon, command) => {
+    createItem: (name, icon, angle, data) => {
       return {
         name: name,
         icon: icon,
+        angle: angle,
         activate: () => {
           try {
             let ctx    = global.create_app_launch_context(0, -1);
             const item = Gio.AppInfo.create_from_commandline(
-                command, null, Gio.AppInfoCreateFlags.NONE);
+                data, null, Gio.AppInfoCreateFlags.NONE);
             item.launch([], ctx);
           } catch (error) {
             utils.notification('Failed to execute command: ' + error);
@@ -110,13 +133,14 @@ var ItemTypes = {
     description: 'Opens an URL with the default browser.',
     settingsType: SettingsTypes.URL,
     settingsList: 'action-types-list',
-    createItem: (name, icon, url) => {
+    createItem: (name, icon, angle, data) => {
       return {
         name: name,
         icon: icon,
+        angle: angle,
         activate: () => {
           try {
-            Gio.AppInfo.launch_default_for_uri(url, null);
+            Gio.AppInfo.launch_default_for_uri(data, null);
           } catch (error) {
             utils.notification('Failed to open URL: ' + error);
           }
@@ -133,13 +157,14 @@ var ItemTypes = {
     description: 'Opens a file with the default applications.',
     settingsType: SettingsTypes.FILE,
     settingsList: 'action-types-list',
-    createItem: (name, icon, file) => {
+    createItem: (name, icon, angle, data) => {
       return {
         name: name,
         icon: icon,
+        angle: angle,
         activate: () => {
           try {
-            Gio.AppInfo.launch_default_for_uri('file://' + file, null);
+            Gio.AppInfo.launch_default_for_uri('file://' + data, null);
           } catch (error) {
             utils.notification('Failed to open file: ' + error);
           }
@@ -153,6 +178,18 @@ var ItemTypes = {
   // item. Usually the items are dynamic and may be different from time to time.        //
   ////////////////////////////////////////////////////////////////////////////////////////
 
+  // Submenus cannot be activated. They should always contain some children.
+  Submenu: {
+    name: 'Custom Submenu',
+    icon: 'view-more-horizontal-symbolic',
+    description: 'Add structure to your menu!',
+    settingsType: SettingsTypes.SUBMENU,
+    settingsList: 'submenu-types-list',
+    createItem: (name, icon, angle, data) => {
+      return {name: name, icon: icon, angle: angle, children: []};
+    }
+  },
+
   // The bookmarks submenu contains one entry for the default user directories.
   Bookmarks: {
     name: 'Bookmarks',
@@ -160,7 +197,7 @@ var ItemTypes = {
     description: 'Shows your commonly used directories.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
-    createItem: (name, icon) => {
+    createItem: (name, icon, angle, data) => {
       const pushFile = (menu, file) => {
         let name, icon;
         try {
@@ -177,7 +214,7 @@ var ItemTypes = {
           icon = 'missing-image';
         }
 
-        menu.items.push({
+        menu.children.push({
           name: name,
           icon: icon,
           activate: () => {
@@ -192,7 +229,7 @@ var ItemTypes = {
         });
       };
 
-      let result = {name: name, icon: icon, items: []};
+      let result = {name: name, icon: icon, angle: angle, children: []};
 
       pushFile(result, Gio.File.new_for_path(GLib.get_home_dir()));
 
@@ -220,15 +257,15 @@ var ItemTypes = {
     description: 'Shows the currently running applications.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
-    createItem: (name, icon) => {
+    createItem: (name, icon, angle, data) => {
       let apps   = Shell.AppSystem.get_default().get_running();
-      let result = {name: name, icon: icon, items: []};
+      let result = {name: name, icon: icon, angle: angle, children: []};
 
       for (let i = 0; i < apps.length; ++i) {
         let windows = apps[i].get_windows();
         let icon    = apps[i].get_app_info().get_icon().to_string();
         windows.forEach(window => {
-          result.items.push({
+          result.children.push({
             name: window.get_title(),
             icon: icon,
             activate: () => window.activate(0 /*timestamp*/)
@@ -248,17 +285,18 @@ var ItemTypes = {
     description: 'Shows your recently used files.',
     settingsType: SettingsTypes.COUNT,
     settingsList: 'submenu-types-list',
-    createItem: (name, icon, maxNum) => {
-      let recentFiles = Gtk.RecentManager.get_default().get_items().slice(0, maxNum);
-      let result      = {name: name, icon: icon, items: []};
+    createItem: (name, icon, angle, data) => {
+      const maxNum      = parseInt(data);
+      const recentFiles = Gtk.RecentManager.get_default().get_items().slice(0, maxNum);
+      const result      = {name: name, icon: icon, angle: angle, children: []};
 
       recentFiles.forEach(recentFile => {
         if (recentFile.exists()) {
-          result.items.push({
+          result.children.push({
             name: recentFile.get_display_name(),
             icon: recentFile.get_gicon().to_string(),
             activate: () => {
-              let ctx = global.create_app_launch_context(0, -1);
+              const ctx = global.create_app_launch_context(0, -1);
 
               try {
                 Gio.AppInfo.launch_default_for_uri(recentFile.get_uri(), ctx);
@@ -282,13 +320,14 @@ var ItemTypes = {
     description: 'Shows your frequently used applications.',
     settingsType: SettingsTypes.COUNT,
     settingsList: 'submenu-types-list',
-    createItem: (name, icon, maxNum) => {
-      let apps   = Shell.AppUsage.get_default().get_most_used().slice(0, maxNum);
-      let result = {name: name, icon: icon, items: []};
+    createItem: (name, icon, angle, data) => {
+      const maxNum = parseInt(data);
+      const apps   = Shell.AppUsage.get_default().get_most_used().slice(0, maxNum);
+      const result = {name: name, icon: icon, angle: angle, children: []};
 
       apps.forEach(app => {
         if (app) {
-          result.items.push({
+          result.children.push({
             name: app.get_name(),
             icon: app.get_app_info().get_icon().to_string(),
             activate: () => app.open_new_window(-1)
@@ -308,15 +347,15 @@ var ItemTypes = {
     description: 'Shows your pinned applications.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
-    createItem: (name, icon) => {
-      let appNames = global.settings.get_strv('favorite-apps');
-      let result   = {name: name, icon: icon, items: []};
+    createItem: (name, icon, angle, data) => {
+      const appNames = global.settings.get_strv('favorite-apps');
+      const result   = {name: name, icon: icon, angle: angle, children: []};
 
       appNames.forEach(appName => {
         const app = Shell.AppSystem.get_default().lookup_app(appName);
 
         if (app) {
-          result.items.push({
+          result.children.push({
             name: app.get_name(),
             icon: app.get_app_info().get_icon().to_string(),
             activate: () => app.open_new_window(-1)
@@ -337,7 +376,7 @@ var ItemTypes = {
         'you should rather setup your own menus!',
     settingsList: 'submenu-types-list',
     settingsType: SettingsTypes.NONE,
-    createItem: (name, icon) => {
+    createItem: (name, icon, angle, data) => {
       const pushMenuItems = (menu, dir) => {
         let iter = dir.iter(), nodeType, item;
 
@@ -364,7 +403,7 @@ var ItemTypes = {
                   }
                 }
               };
-              menu.items.push(item);
+              menu.children.push(item);
               break;
 
             // Recursively add child items to directories.
@@ -373,11 +412,11 @@ var ItemTypes = {
               item          = {
                 name: directory.get_name(),
                 icon: directory.get_icon().to_string(),
-                items: []
+                children: []
               };
 
               pushMenuItems(item, directory);
-              menu.items.push(item);
+              menu.children.push(item);
               break;
 
             // SEPARATOR, HEADER, ALIAS. skip for now.
@@ -393,7 +432,7 @@ var ItemTypes = {
 
       menu.load_sync();
 
-      let result = {name: name, icon: icon, items: []};
+      let result = {name: name, icon: icon, angle: angle, children: []};
 
       pushMenuItems(result, menu.get_root_directory());
 

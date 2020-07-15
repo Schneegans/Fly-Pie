@@ -57,12 +57,6 @@
       <description>A JSON representation of all configured menus.</description>
     </key>
 
-    <key name="toggle-shortcut" type="as">
-      <default><![CDATA[['<ctrl>4']]]></default>
-      <summary>Menu hotkey</summary>
-      <description>This opens the testing menu.</description>
-    </key>
-
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <!--                          Server settings                                      -->
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
