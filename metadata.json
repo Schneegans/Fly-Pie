@@ -1,7 +1,8 @@
 {
-    "uuid": "swingpie@code.simonschneegans.de",
+    "uuid": "swingpie@schneegans.github.com",
     "description": "Do things quickly",
     "name": "Swing-Pie",
+    "version": "0.1.0",
     "settings-schema": "org.gnome.shell.extensions.swingpie",
     "shell-version": [
         "3.36.2"
