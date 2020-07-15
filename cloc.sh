@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#////////////////////////////////////////////////////////////////////////////////////////#
+# -------------------------------------------------------------------------------------- #
 #    _____       _             _____ _                                                   #
 #   |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-   #
 #   |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.   #
 #   |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.           #
 #                     |___|                                                              #
-#////////////////////////////////////////////////////////////////////////////////////////#
+# -------------------------------------------------------------------------------------- #
 
 # This scripts counts the lines of code and comments in all JavaScript files.
 # The copyright-headers are substracted. It uses the commandline tool "cloc".
