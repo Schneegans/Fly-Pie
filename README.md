@@ -2,6 +2,7 @@
   <img src ="logo.svg" />
 </p>
 
+[![check](https://github.com/Schneegans/Swing-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Swing-Pie/actions)
 [![license](https://img.shields.io/badge/Gnome_Shell-3.36.2-blue.svg)](LICENSE)
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![comments](https://img.shields.io/badge/Comments-29.3%25-green.svg)](cloc.sh)
