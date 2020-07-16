@@ -52,7 +52,12 @@ var Daemon = class Daemon {
     this._shortcuts = new Shortcuts((shortcut) => {
       for (let i = 0; i < this._menus.length; i++) {
         if (shortcut == this._menus[i].data) {
-          this.ShowMenu(this._menus[i].name);
+          const result = this.ShowMenu(this._menus[i].name);
+          if (result < 0) {
+            utils.notification(
+                'Failed to open a Swing-Pie menu: ' +
+                DBusInterface.getErrorDescription(result));
+          }
         }
       }
     });
@@ -105,13 +110,9 @@ var Daemon = class Daemon {
         if (result >= 0) {
           this._currentID = result;
           this._lastMenu  = menu;
-        } else {
-          utils.notification(
-              'Failed to open a Swing-Pie menu: ' +
-              DBusInterface.getErrorDescription(result));
         }
 
-        break;
+        return result;
       }
     }
   }

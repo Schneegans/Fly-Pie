@@ -191,6 +191,27 @@ var MenuEditor = class MenuEditor {
         this._deleteSelected();
       });
 
+      // Open a preview for the selected menu when the preview-button is clicked.
+      this._builder.get_object('preview-menu-button').connect('clicked', () => {
+        let [ok, model, iter] = this._selection.get_selected();
+
+        if (ok) {
+          const menuIndex = model.get_path(iter).get_indices()[0];
+          [ok, iter]      = model.get_iter(Gtk.TreePath.new_from_indices([menuIndex]));
+          const menuName  = this._get(iter, 'NAME');
+          this._dbus.PreviewMenuRemote(menuName, (result) => {
+            result = parseInt(result);
+            if (result >= 0) {
+
+              // success
+            } else {
+              const error = DBusInterface.getErrorDescription(result);
+              utils.notification('Failed to open menu preview: ' + error);
+            }
+          });
+        }
+      });
+
     } catch (error) {
       utils.notification('Failed to initialize Menu Editor\'s Item Types: ' + error);
     }
@@ -399,7 +420,7 @@ var MenuEditor = class MenuEditor {
         for (let n = 0; n < nChildren; n++) {
           const angle = this._get(model.iter_nth_child(parentIter, n)[1], 'ANGLE');
 
-          if (n < selectedIndex) {
+          if (n < selectedIndex && angle >= 0) {
             minAngle = angle;
           }
 
