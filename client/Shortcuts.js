@@ -37,6 +37,10 @@ var Shortcuts = class Shortcuts {
 
   destroy() {
     global.display.disconnect(this._displayConnection);
+
+    for (let shortcut of this.getBound()) {
+      this.unbind(shortcut);
+    }
   }
 
   // -------------------------------------------------------------------- public interface
