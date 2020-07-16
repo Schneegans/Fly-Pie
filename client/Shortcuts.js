@@ -15,16 +15,25 @@ const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// This class can be used to bind functions to global hot keys.                         //
+// This class can be used to bind a function to global hot keys. It's designed in the   //
+// following way: A callback is passed to the constructor of the class. Then, an        //
+// arbitrary number of shortcuts can be bound. If one of the shortcuts is pressed, the  //
+// callback will be executed. The pressed shortcut is passed as parameter.              //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var Shortcuts = class Shortcuts {
 
   // ------------------------------------------------------------ constructor / destructor
 
+  // Whenever one of the registered shortcuts is pressed, the given callback will be
+  // executed. The pressed shortcut is given as parameter.
   constructor(callback) {
+
+    // All registered callbacks are stored in this map.
     this._shortcuts = new Map();
 
+    // Listen for global shortcut activations and execute the given callback if it's one
+    // of ours.
     this._displayConnection =
         global.display.connect('accelerator-activated', (display, action) => {
           for (let it of this._shortcuts) {
@@ -35,6 +44,7 @@ var Shortcuts = class Shortcuts {
         });
   }
 
+  // Unbinds all registered shortcuts.
   destroy() {
     global.display.disconnect(this._displayConnection);
 
@@ -45,6 +55,8 @@ var Shortcuts = class Shortcuts {
 
   // -------------------------------------------------------------------- public interface
 
+  // Binds the given shortcut. When it's pressed, the callback given to this class
+  // instance at construction time will be executed.
   bind(shortcut) {
     const action = global.display.grab_accelerator(shortcut, Meta.KeyBindingFlags.NONE);
 
@@ -58,7 +70,7 @@ var Shortcuts = class Shortcuts {
     }
   }
 
-  // Un-binds any previously bound callback.
+  // Un-binds any previously bound shortcut.
   unbind(shortcut) {
     const it = this._shortcuts.get(shortcut);
 
@@ -69,10 +81,12 @@ var Shortcuts = class Shortcuts {
     }
   }
 
+  // Checks whether the given shortcut is currently bound by this Shortcuts instance.
   isBound(shortcut) {
     return this._shortcuts.has(shortcut);
   }
 
+  // Returns a Set containing all shortcuts currently bound by this Shortcuts instance.
   getBound() {
     return new Set(this._shortcuts.keys());
   }
