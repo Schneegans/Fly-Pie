@@ -9,8 +9,8 @@
 'use strict';
 
 const Me     = imports.misc.extensionUtils.getCurrentExtension();
-const Server = Me.imports.server.Server.Server;
-const Client = Me.imports.client.Client.Client;
+const Server = Me.imports.daemon.Server.Server;
+const Client = Me.imports.daemon.Client.Client;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //

@@ -15,10 +15,10 @@ const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.common.utils;
 const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
 const InputManipulator = Me.imports.common.InputManipulator.InputManipulator;
-const Background       = Me.imports.server.Background.Background;
-const MenuItem         = Me.imports.server.MenuItem.MenuItem;
-const SelectionWedges  = Me.imports.server.SelectionWedges.SelectionWedges;
-const MenuItemState    = Me.imports.server.MenuItem.MenuItemState;
+const Background       = Me.imports.daemon.Background.Background;
+const MenuItem         = Me.imports.daemon.MenuItem.MenuItem;
+const SelectionWedges  = Me.imports.daemon.SelectionWedges.SelectionWedges;
+const MenuItemState    = Me.imports.daemon.MenuItem.MenuItemState;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Menu parses the JSON structure given to the ShowMenu method. It creates          //

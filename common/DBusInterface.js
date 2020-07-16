@@ -47,18 +47,18 @@ var DBusInterface = {
         <interface name="org.gnome.Shell.Extensions.swingpie">                           \
           <method name="ShowMenu">                                                       \
             <arg name="description" type="s" direction="in"/>                            \
-            <arg name="id" type="i" direction="out"/>                                    \
+            <arg name="id"          type="i" direction="out"/>                           \
           </method>                                                                      \
           <method name="PreviewMenu">                                                    \
             <arg name="description" type="s" direction="in"/>                            \
-            <arg name="id" type="i" direction="out"/>                                    \
+            <arg name="id"          type="i" direction="out"/>                           \
           </method>                                                                      \
           <signal name="OnSelect">                                                       \
-              <arg type="i" name="id"/>                                                  \
-              <arg type="s" name="path"/>                                                \
+              <arg name="id"   type="i"/>                                                \
+              <arg name="path" type="s"/>                                                \
           </signal>                                                                      \
           <signal name="OnCancel">                                                       \
-              <arg type="i" name="id"/>                                                  \
+              <arg name="id" type="i"/>                                                  \
           </signal>                                                                      \
       </interface>                                                                       \
     </node>',

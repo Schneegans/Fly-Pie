@@ -12,7 +12,7 @@ const {Gio, GLib} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
-const Menu          = Me.imports.server.Menu.Menu;
+const Menu          = Me.imports.daemon.Menu.Menu;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The server listens on the D-Bus for requests. For details on the interface refer to  //

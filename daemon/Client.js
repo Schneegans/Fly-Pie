@@ -16,7 +16,7 @@ const Timer            = Me.imports.common.Timer.Timer;
 const InputManipulator = Me.imports.common.InputManipulator.InputManipulator;
 const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
 const ItemRegistry     = Me.imports.common.ItemRegistry;
-const Shortcuts        = Me.imports.client.Shortcuts.Shortcuts;
+const Shortcuts        = Me.imports.daemon.Shortcuts.Shortcuts;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -29,8 +29,9 @@ var Client = class Client {
   // ------------------------------------------------------------ constructor / destructor
 
   constructor() {
-    this._settings  = utils.createSettings();
-    this._input     = new InputManipulator();
+    this._settings = utils.createSettings();
+    this._input    = new InputManipulator();
+
     this._shortcuts = new Shortcuts((shortcut) => {
       for (let i = 0; i < this._menus.length; i++) {
         if (shortcut == this._menus[i].data) {
@@ -39,8 +40,7 @@ var Client = class Client {
       }
     });
 
-    this._settings.connect(
-        'changed::menu-configuration', () => this._onConfigurationChanged());
+    this._settings.connect('changed::menu-configuration', () => this._bindShortcuts());
 
     this._lastID = -1;
 
@@ -55,7 +55,7 @@ var Client = class Client {
           this._dbus.connectSignal('OnCancel', (...args) => this._onCancel(...args));
         });
 
-    this._onConfigurationChanged();
+    this._bindShortcuts();
   }
 
   destroy() {
@@ -107,7 +107,7 @@ var Client = class Client {
     return result;
   }
 
-  _onConfigurationChanged() {
+  _bindShortcuts() {
     this._menus = JSON.parse(this._settings.get_string('menu-configuration'));
 
     const newShortcuts = new Set();
@@ -142,8 +142,6 @@ var Client = class Client {
     // entry of the second entry was clicked on.
     const pathElements = path.split('/');
 
-    utils.debug('OnSelect ' + path);
-
     if (pathElements.length < 2) {
       utils.debug('The server reported an impossible selection!');
     }
@@ -167,7 +165,6 @@ var Client = class Client {
       return;
     }
 
-    utils.debug('Canceled ' + id);
     this._lastID = -1;
   }
 };
