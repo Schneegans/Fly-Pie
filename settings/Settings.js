@@ -56,7 +56,8 @@ var Settings = class Settings {
     const previewButton = this._builder.get_object('preview-button');
     previewButton.connect('clicked', () => {
       if (this._dbus) {
-        this._dbus.PreviewMenuRemote(JSON.stringify(this._createDemoMenu()), () => {});
+        this._dbus.PreviewCustomMenuRemote(
+            JSON.stringify(this._createDemoMenu()), () => {});
       }
     });
 

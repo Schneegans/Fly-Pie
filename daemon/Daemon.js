@@ -37,7 +37,7 @@ var Daemon = class Daemon {
     this._menu = new Menu(
         // Called when the user selects an item in the menu. This calls the OnSelect
         // signal of the DBusInterface.
-        (menuID, item) => this._onSelect(menuID, item),
+        (menuID, path) => this._onSelect(menuID, path),
 
         // Called when the user does no select anything in the menu. This calls the
         // OnCancel signal of the DBusInterface.
@@ -145,7 +145,7 @@ var Daemon = class Daemon {
   _onSelect(menuID, path) {
     // For some reason it wasn't our menu.
     if (this._currentID != menuID) {
-      this._dbus.emit_signal('OnSelect', GLib.Variant.new('(is)', [menuID, item]));
+      this._dbus.emit_signal('OnSelect', GLib.Variant.new('(is)', [menuID, path]));
       return;
     }
 

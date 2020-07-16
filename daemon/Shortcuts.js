@@ -18,7 +18,8 @@ const utils = Me.imports.common.utils;
 // This class can be used to bind a function to global hot keys. It's designed in the   //
 // following way: A callback is passed to the constructor of the class. Then, an        //
 // arbitrary number of shortcuts can be bound. If one of the shortcuts is pressed, the  //
-// callback will be executed. The pressed shortcut is passed as parameter.              //
+// callback will be executed. The pressed shortcut is passed as a parameter to the      //
+// callback.                                                                            //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var Shortcuts = class Shortcuts {
