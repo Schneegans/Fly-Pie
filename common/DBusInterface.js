@@ -46,10 +46,18 @@ var DBusInterface = {
       '<node>                                                                            \
         <interface name="org.gnome.Shell.Extensions.swingpie">                           \
           <method name="ShowMenu">                                                       \
+            <arg name="name" type="s" direction="in"/>                                   \
+            <arg name="id"   type="i" direction="out"/>                                  \
+          </method>                                                                      \
+          <method name="PreviewMenu">                                                    \
+            <arg name="name" type="s" direction="in"/>                                   \
+            <arg name="id"   type="i" direction="out"/>                                  \
+          </method>                                                                      \
+          <method name="ShowCustomMenu">                                                 \
             <arg name="description" type="s" direction="in"/>                            \
             <arg name="id"          type="i" direction="out"/>                           \
           </method>                                                                      \
-          <method name="PreviewMenu">                                                    \
+          <method name="PreviewCustomMenu">                                              \
             <arg name="description" type="s" direction="in"/>                            \
             <arg name="id"          type="i" direction="out"/>                           \
           </method>                                                                      \
