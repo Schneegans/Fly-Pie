@@ -10,10 +10,14 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // There are two ways to use Swing-Pie's D-Bus interface.                               //
+//                                                                                      //
 // 1: Use ShowMenu() or PreviewMenu() to open one of the menus configured in the        //
 //    settings dialog of Swing-Pie. As an argument the name of the desired menu must be //
 //    provided. The returned integer may be negative, indicating that an error          //
-//    occurred. See DBusInterface.errorCodes for possible values.                       //
+//    occurred. See DBusInterface.errorCodes for possible values. There will be no      //
+//    emissions of the OnSelect or OnCancel signals for menus opened with  ShowMenu()   //
+//    or PreviewMenu().                                                                 //
+//                                                                                      //
 // 2: Use ShowCustomMenu() or PreviewCustomMenu() to open a completely self-defined     //
 //    menu. As argument a menu description has to be provided. This is a JSON string    //
 //    like this:                                                                        //
@@ -92,7 +96,8 @@ var DBusInterface = {
     eAlreadyActive: -2,
     eInvalidJSON: -3,
     ePropertyMissing: -4,
-    eInvalidAngles: -5
+    eInvalidAngles: -5,
+    eNoSuchMenu: -6,
   },
 
   // This can be used to translate an error code to a human-readable message.
@@ -106,6 +111,8 @@ var DBusInterface = {
         return 'The provided menu description lacks required properties.';
       case -5:
         return 'The angles of the children did not follow the rules.';
+      case -6:
+        return 'No menu with this name exists.';
       default:
         return 'An unknown error occurred.';
     }
