@@ -705,7 +705,7 @@ var MenuEditor = class MenuEditor {
 
       // Initialize other field to their default values.
       this._set(iter, 'TYPE', newType);
-      this._set(iter, 'DATA', '');
+      this._set(iter, 'DATA', ItemRegistry.ItemTypes[newType].defaultData);
       this._set(iter, 'ANGLE', -1);
 
     } catch (error) {

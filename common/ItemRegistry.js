@@ -71,6 +71,7 @@ var ItemTypes = {
   Menu: {
     name: 'Toplevel Menu',
     icon: 'view-more-symbolic',
+    defaultData: '',
     description: 'Create as many as you want!',
     settingsType: SettingsTypes.MENU,
     settingsList: 'menu-types-list',
@@ -83,6 +84,7 @@ var ItemTypes = {
   Hotkey: {
     name: 'Press Hotkey',
     icon: 'accessories-character-map',
+    defaultData: '',
     description: 'Simulates a key stroke.',
     settingsType: SettingsTypes.HOTKEY,
     settingsList: 'action-types-list',
@@ -103,6 +105,7 @@ var ItemTypes = {
   Command: {
     name: 'Launch Application',
     icon: 'utilities-terminal',
+    defaultData: '',
     description: 'Runs any shell command.',
     settingsType: SettingsTypes.COMMAND,
     settingsList: 'action-types-list',
@@ -130,6 +133,7 @@ var ItemTypes = {
   Url: {
     name: 'Open URL',
     icon: 'applications-internet',
+    defaultData: 'https://github.com/Schneegans/Swing-Pie',
     description: 'Opens an URL with the default browser.',
     settingsType: SettingsTypes.URL,
     settingsList: 'action-types-list',
@@ -154,6 +158,7 @@ var ItemTypes = {
   File: {
     name: 'Open File',
     icon: 'text-x-generic',
+    defaultData: '',
     description: 'Opens a file with the default applications.',
     settingsType: SettingsTypes.FILE,
     settingsList: 'action-types-list',
@@ -182,6 +187,7 @@ var ItemTypes = {
   Submenu: {
     name: 'Custom Submenu',
     icon: 'view-more-horizontal-symbolic',
+    defaultData: '',
     description: 'Add structure to your menu!',
     settingsType: SettingsTypes.SUBMENU,
     settingsList: 'submenu-types-list',
@@ -194,6 +200,7 @@ var ItemTypes = {
   Bookmarks: {
     name: 'Bookmarks',
     icon: 'folder',
+    defaultData: '',
     description: 'Shows your commonly used directories.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
@@ -254,6 +261,7 @@ var ItemTypes = {
   RunningApps: {
     name: 'Running Apps',
     icon: 'preferences-system-windows',
+    defaultData: '',
     description: 'Shows the currently running applications.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
@@ -282,6 +290,7 @@ var ItemTypes = {
   RecentFiles: {
     name: 'Recent Files',
     icon: 'document-open-recent',
+    defaultData: '7',
     description: 'Shows your recently used files.',
     settingsType: SettingsTypes.COUNT,
     settingsList: 'submenu-types-list',
@@ -317,6 +326,7 @@ var ItemTypes = {
   FrequentlyUsed: {
     name: 'Frequently Used',
     icon: 'emblem-favorite',
+    defaultData: '7',
     description: 'Shows your frequently used applications.',
     settingsType: SettingsTypes.COUNT,
     settingsList: 'submenu-types-list',
@@ -344,6 +354,7 @@ var ItemTypes = {
   Favorites: {
     name: 'Favorites',
     icon: 'starred',
+    defaultData: '',
     description: 'Shows your pinned applications.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
@@ -371,6 +382,7 @@ var ItemTypes = {
   MainMenu: {
     name: 'Main Menu',
     icon: 'applications-system',
+    defaultData: '',
     description: 'Shows all installed applications.\n' +
         'Usually, this is very cluttered;\n' +
         'you should rather setup your own menus!',
