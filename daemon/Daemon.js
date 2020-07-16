@@ -18,9 +18,10 @@ const ItemRegistry  = Me.imports.common.ItemRegistry;
 const Shortcuts     = Me.imports.daemon.Shortcuts.Shortcuts;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The daemon listens on the D-Bus for requests. For details on the interface refer to  //
-// common/DBusInterface.js. When a valid request is received, an menu is shown          //
-// accordingly.                                                                         //
+// The daemon listens on the D-Bus for show-menu requests and registers a global hotkey //
+// for each configured menu. For details on the D-Bus interface refer to                //
+// common/DBusInterface.js. As soon as a valid request is received or a hotkey is       //
+// pressed, an menu is shown accordingly.                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var Daemon = class Daemon {
@@ -29,11 +30,13 @@ var Daemon = class Daemon {
 
   constructor() {
 
-    // Make the ShowMenu() method available on the D-Bus.
+    // Make the ShowMenu(), PreviewMenu(), ShowCustomMenu(), and the PreviewCustomMenu()
+    // methods available on the D-Bus.
     this._dbus = Gio.DBusExportedObject.wrapJSObject(DBusInterface.description, this);
     this._dbus.export(Gio.DBus.session, '/org/gnome/shell/extensions/swingpie');
 
-    // Initialize the menu.
+    // Initialize the menu. The same menu is used again and again. It is just reconfigured
+    // according to incoming requests.
     this._menu = new Menu(
         // Called when the user selects an item in the menu. This calls the OnSelect
         // signal of the DBusInterface.
@@ -47,7 +50,6 @@ var Daemon = class Daemon {
     this._nextID    = 0;
     this._currentID = -1;
 
-    this._settings = utils.createSettings();
 
     this._shortcuts = new Shortcuts((shortcut) => {
       for (let i = 0; i < this._menus.length; i++) {
@@ -62,6 +64,9 @@ var Daemon = class Daemon {
       }
     });
 
+    // Create a settings object and listen for menu configuration changes. Once the
+    // configuration changes, we bind all the configured shortcuts.
+    this._settings = utils.createSettings();
     this._settings.connect('changed::menu-configuration', () => {
       this._menus = JSON.parse(this._settings.get_string('menu-configuration'));
       this._bindShortcuts()

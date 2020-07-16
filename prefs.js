@@ -11,13 +11,13 @@
 const Me       = imports.misc.extensionUtils.getCurrentExtension();
 const Settings = Me.imports.settings.Settings.Settings;
 
-// ------------------------------------------------------------------------ global methods
-
-// Like 'extension.js' this is used for any one-time setup like translations.
+// Like in 'extension.js' this is used for any one-time setup like translations.
 function init() {}
 
 // This function is called when the preferences window is created to build and return a
-// Gtk widget.
+// Gtk widget. We create a new instance of the settings class each time this method is
+// called. This way we can actually open multiple settings windows and interact with all
+// of the properly.
 function buildPrefsWidget() {
   let settings = new Settings();
   return settings.getWidget();

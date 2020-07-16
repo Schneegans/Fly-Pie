@@ -20,8 +20,8 @@ const utils = Me.imports.common.utils;
 
 // These settings keys are stored in a preset. The load() and save() methods below just
 // iterate over this list and read / write the corresponding settings values from / to a
-// JSON file. For now, this works for settings keys of type double, string, boolean and
-// for enums. If new settings types are added, the save() and load() methods below need to
+// JSON file. For now, this works for setting keys of type double, string, boolean and
+// for enums. If new setting types are added, the save() and load() methods below need to
 // be changed.
 let presetKeys = [
   'easing-duration',
