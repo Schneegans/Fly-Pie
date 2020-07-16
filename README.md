@@ -16,12 +16,16 @@ gdbus introspect  --session --dest org.gnome.Shell \
 gdbus monitor  --session --dest org.gnome.Shell \
   --object-path /org/gnome/shell/extensions/swingpie
 
-gdbus call --session --dest org.gnome.Shell              \
-  --object-path /org/gnome/shell/extensions/swingpie     \
-  --method org.gnome.Shell.Extensions.swingpie.ShowMenu  \
-  '{"icon": "😀", "children": [                          \
-    {"name": "Rocket",   "icon":"🚀", "id":"a"},         \
-    {"name": "Doughnut", "icon":"🍩", "id":"b"}          \
+gdbus call --session --dest org.gnome.Shell                    \
+  --object-path /org/gnome/shell/extensions/swingpie           \
+  --method org.gnome.Shell.Extensions.swingpie.ShowMenu 'My Menu'
+
+gdbus call --session --dest org.gnome.Shell                    \
+  --object-path /org/gnome/shell/extensions/swingpie           \
+  --method org.gnome.Shell.Extensions.swingpie.ShowCustomMenu  \
+  '{"icon": "😀", "children": [                                \
+    {"name": "Rocket",   "icon":"🚀", "id":"a"},               \
+    {"name": "Doughnut", "icon":"🍩", "id":"b"}                \
   ]}'
 ```
 
