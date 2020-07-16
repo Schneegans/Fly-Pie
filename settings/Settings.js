@@ -15,6 +15,7 @@ const utils         = Me.imports.common.utils;
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const Preset        = Me.imports.settings.Preset.Preset;
 const MenuEditor    = Me.imports.settings.MenuEditor.MenuEditor;
+const ExampleMenu   = Me.imports.settings.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -56,8 +57,7 @@ var Settings = class Settings {
     const previewButton = this._builder.get_object('preview-button');
     previewButton.connect('clicked', () => {
       if (this._dbus) {
-        this._dbus.PreviewCustomMenuRemote(
-            JSON.stringify(this._createDemoMenu()), () => {});
+        this._dbus.PreviewCustomMenuRemote(JSON.stringify(ExampleMenu.get()), () => {});
       }
     });
 
@@ -380,11 +380,15 @@ var Settings = class Settings {
     }
   }
 
+  // This small helper method copies the settings value identified by <settingsKey> to the
+  // value identified with <settingsKey>-hover.
   _copyToHover(settingsKey) {
     this._settings.set_value(
         settingsKey + '-hover', this._settings.get_value(settingsKey));
   }
 
+  // This checks whether there is a copy-settings button for the given settings key and if
+  // so, binds the _copyToHover method to it.
   _bindCopyButton(settingsKey) {
     const copyButton = this._builder.get_object('copy-' + settingsKey);
     if (copyButton) {
@@ -672,79 +676,5 @@ var Settings = class Settings {
 
       return false;
     });
-  }
-
-  // This creates a Demo Menu structure which is shown when the preview button is pressed.
-  _createDemoMenu() {
-    return {
-      name: 'Demo Menu', icon: 'firefox', children: [
-        {
-          name: 'Smileys',
-          icon: 'firefox',
-          children: [
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-          ]
-        },
-        {
-          name: 'Animals',
-          icon: 'folder',
-          children: [
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-          ]
-        },
-        {
-          name: 'Fruits',
-          icon: '🥝',
-          children: [
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-          ]
-        },
-        {
-          name: 'Sports',
-          icon: '⚽',
-          children: [
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-          ]
-        },
-        {
-          name: 'Vehicles',
-          icon: '🚀',
-          children: [
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-          ]
-        },
-        {
-          name: 'Symbols',
-          icon: '♍',
-          children: [
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-            {name: 'Doughnut', icon: '🍩'},
-          ]
-        },
-      ]
-    }
   }
 }
