@@ -14,7 +14,7 @@ const Daemon = Me.imports.daemon.Daemon.Daemon;
 //////////////////////////////////////////////////////////////////////////////////////////
 // Once enabled, Swing-Pie creates an instance of the Daemon class. This daemon will    //
 // show a pie menu when it receives a show-menu request on the D-Bus or when one of     //
-// the configured hotkeys are pressed.                                                  //
+// the configured shortcuts are pressed.                                                //
 //                                                                                      //
 // This extension consists of three main source code directories:                       //
 //   daemon/     This contains code which is only required by extension.js.             //

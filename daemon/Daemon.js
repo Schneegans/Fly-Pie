@@ -18,9 +18,9 @@ const ItemRegistry  = Me.imports.common.ItemRegistry;
 const Shortcuts     = Me.imports.daemon.Shortcuts.Shortcuts;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The daemon listens on the D-Bus for show-menu requests and registers a global hotkey //
-// for each configured menu. For details on the D-Bus interface refer to                //
-// common/DBusInterface.js. As soon as a valid request is received or a hotkey is       //
+// The daemon listens on the D-Bus for show-menu requests and registers a global        //
+// shortcut for each configured menu. For details on the D-Bus interface refer to       //
+// common/DBusInterface.js. As soon as a valid request is received or a shortcut is     //
 // pressed, an menu is shown accordingly.                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -49,12 +49,12 @@ var Daemon = class Daemon {
     // This is increased once for every menu request.
     this._currentID = 0;
 
-    // This class manages the global hotkeys. Once one of the registered hotkeys is
+    // This class manages the global shortcuts. Once one of the registered shortcuts is
     // pressed, the corresponding menu is shown via the ShowMenu() method. If an error
     // occurred, a notification is shown.
     this._shortcuts = new Shortcuts((shortcut) => {
       for (let i = 0; i < this._menuConfigs.length; i++) {
-        if (shortcut == this._menuConfigs[i].data) {
+        if (shortcut == this._menuConfigs[i].shortcut) {
           const result = this.ShowMenu(this._menuConfigs[i].name);
           if (result < 0) {
             utils.notification(
@@ -114,15 +114,21 @@ var Daemon = class Daemon {
       if (name == this._menuConfigs[i].name) {
 
         // Transform the configuration into a menu structure.
-        const config = this._transformConfig(this._menuConfigs[i]);
+        const structure = ItemRegistry.ItemTypes['Menu'].createItem(
+            this._menuConfigs[i].name, this._menuConfigs[i].icon);
+
+        for (let j = 0; j < this._menuConfigs[i].children.length; j++) {
+          structure.children.push(
+              this._transformConfig(this._menuConfigs[i].children[j]));
+        }
 
         // Open the menu with the custom-menu method.
         const result =
-            this._openCustomMenu(config, previewMode, this._menuConfigs[i].angle);
+            this._openCustomMenu(structure, previewMode, this._menuConfigs[i].id);
 
-        // If that was successful, store the config.
+        // If that was successful, store the structure.
         if (result >= 0) {
-          this._currentMenuConfig = config;
+          this._currentMenuStructure = structure;
         }
 
         return result;
@@ -168,14 +174,14 @@ var Daemon = class Daemon {
 
     // This is set if we opened one of the menus configured with Swing-Pie's menu editor.
     // Else it was a custom menu opened via the D-Bus.
-    if (this._currentMenuConfig != null) {
+    if (this._currentMenuStructure != null) {
 
       // The path is a string like /2/2/4 indicating that the fourth entry in the second
       // entry of the second entry was clicked on.
       const pathElements = path.split('/');
 
       // Now follow the path in our menu structure.
-      let item = this._currentMenuConfig;
+      let item = this._currentMenuStructure;
       for (let i = 1; i < pathElements.length; ++i) {
         item = item.children[pathElements[i]];
       }
@@ -184,7 +190,7 @@ var Daemon = class Daemon {
       item.activate();
 
       // The menu is now hidden.
-      this._currentMenuConfig = null;
+      this._currentMenuStructure = null;
     }
 
     // Emit the OnSelect signal of our D-Bus interface.
@@ -196,10 +202,10 @@ var Daemon = class Daemon {
 
     // This is set if we opened one of the menus configured with Swing-Pie's menu editor.
     // Else it was a custom menu opened via the D-Bus.
-    if (this._currentMenuConfig != null) {
+    if (this._currentMenuStructure != null) {
 
       // The menu is now hidden.
-      this._currentMenuConfig = null;
+      this._currentMenuStructure = null;
     }
 
     // mit the OnCancel signal of our D-Bus interface.
@@ -217,32 +223,33 @@ var Daemon = class Daemon {
         config.name, config.icon, config.angle, config.data);
 
     // Load all children recursively.
-    for (let i = 0; i < config.children.length; i++) {
-      result.children.push(this._transformConfig(config.children[i]));
+    if (config.children) {
+      for (let i = 0; i < config.children.length; i++) {
+        result.children.push(this._transformConfig(config.children[i]));
+      }
     }
 
     return result;
   }
 
-  // Whenever the menu configuration changes, we check for any new hotkeys which need to
+  // Whenever the menu configuration changes, we check for any new shortcuts which need to
   // be bound.
   _onMenuConfigsChanged() {
 
     // Store the new menu configuration.
     this._menuConfigs = JSON.parse(this._settings.get_string('menu-configuration'));
 
-    // First we create a set of all required hotkeys.
+    // First we create a set of all required shortcuts.
     const newShortcuts = new Set();
     for (let i = 0; i < this._menuConfigs.length; i++) {
-      if (this._menuConfigs[i].data != '') {
-        // The hotkey is stored in the menus data property.
-        newShortcuts.add(this._menuConfigs[i].data);
+      if (this._menuConfigs[i].shortcut) {
+        newShortcuts.add(this._menuConfigs[i].shortcut);
       }
     }
 
-    // Then we iterate over all currently bound hotkeys and unbind the ones which are not
-    // required anymore and remove the one which are already bound from the set of
-    // required hotkeys.
+    // Then we iterate over all currently bound shortcuts and unbind the ones which are
+    // not required anymore and remove the one which are already bound from the set of
+    // required shortcuts.
     for (let existingShortcut of this._shortcuts.getBound()) {
       if (newShortcuts.has(existingShortcut)) {
         newShortcuts.delete(existingShortcut);
@@ -251,14 +258,14 @@ var Daemon = class Daemon {
       }
     }
 
-    // Finally, we bind any remaining hotkeys from our set.
+    // Finally, we bind any remaining shortcuts from our set.
     for (let requiredShortcut of newShortcuts) {
       this._shortcuts.bind(requiredShortcut);
     }
 
     // There is currently a menu created with Swing-Pie's menu editor open, so we
     // potentially have to update the displayed menu (we might be in preview mode).
-    if (this._currentMenuConfig != null) {
+    if (this._currentMenuStructure != null) {
     }
   }
 
@@ -271,7 +278,7 @@ var Daemon = class Daemon {
       isInUse = false;
 
       for (let i = 0; i < this._menuConfigs.length; i++) {
-        if (this._menuConfigs[i].angle == nextID) {
+        if (this._menuConfigs[i].id == nextID) {
           isInUse = true;
         }
       }

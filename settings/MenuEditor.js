@@ -29,7 +29,7 @@ let ColumnTypes = {
   NAME:          GObject.TYPE_STRING,   // The name without any markup.
   TYPE:          GObject.TYPE_STRING,   // The item type. Like 'Menu' or 'Bookmarks'.
   DATA:          GObject.TYPE_STRING,   // Used for the command, file, application, ...
-  ANGLE_OR_ID:   GObject.TYPE_INT   // The fixed angle for items and the menu ID for
+  ANGLE_OR_ID:   GObject.TYPE_INT       // The fixed angle for items and the menu ID for
                                         // top-level menus.
 }
 // clang-format on
@@ -469,10 +469,10 @@ var MenuEditor = class MenuEditor {
             this._builder.get_object('item-command').text = app.get_commandline();
           });
 
-      // Initialize the two hotkey-select elements. See the documentation of
-      // _initHotkeySelect for details.
-      this._itemHotkeyLabel = this._initHotkeySelect('item-hotkey-select', true);
-      this._menuHotkeyLabel = this._initHotkeySelect('menu-hotkey-select', false);
+      // Initialize the two shortcut-select elements. See the documentation of
+      // _initShortcutSelect for details.
+      this._itemShortcutLabel = this._initShortcutSelect('item-shortcut-select', true);
+      this._menuShortcutLabel = this._initShortcutSelect('menu-shortcut-select', false);
 
     } catch (error) {
       utils.notification('Failed to initialize Menu Editor\'s item settings: ' + error);
@@ -496,9 +496,9 @@ var MenuEditor = class MenuEditor {
         // and selectively set them to be shown.
         const revealers = {
           'item-settings-revealer': somethingSelected,
-          'item-settings-menu-hotkey-revealer': false,
+          'item-settings-menu-shortcut-revealer': false,
           'item-settings-angle-revealer': false,
-          'item-settings-item-hotkey-revealer': false,
+          'item-settings-item-shortcut-revealer': false,
           'item-settings-count-revealer': false,
           'item-settings-url-revealer': false,
           'item-settings-command-revealer': false,
@@ -516,10 +516,10 @@ var MenuEditor = class MenuEditor {
           const selectedSettingsType = ItemRegistry.ItemTypes[selectedType].settingsType;
 
           // If the selected item is a top-level menu, the DATA column contains its
-          // hotkey.
+          // shortcut.
           if (selectedSettingsType == ItemRegistry.SettingsTypes.MENU) {
-            this._menuHotkeyLabel.set_accelerator(this._getSelected('DATA'));
-            revealers['item-settings-menu-hotkey-revealer'] = true;
+            this._menuShortcutLabel.set_accelerator(this._getSelected('DATA'));
+            revealers['item-settings-menu-shortcut-revealer'] = true;
           }
 
           // For all other items, the fixed angle can be set.
@@ -529,9 +529,9 @@ var MenuEditor = class MenuEditor {
             revealers['item-settings-angle-revealer'] = true;
           }
 
-          if (selectedSettingsType == ItemRegistry.SettingsTypes.HOTKEY) {
-            this._itemHotkeyLabel.set_accelerator(this._getSelected('DATA'));
-            revealers['item-settings-item-hotkey-revealer'] = true;
+          if (selectedSettingsType == ItemRegistry.SettingsTypes.SHORTCUT) {
+            this._itemShortcutLabel.set_accelerator(this._getSelected('DATA'));
+            revealers['item-settings-item-shortcut-revealer'] = true;
 
           } else if (selectedSettingsType == ItemRegistry.SettingsTypes.URL) {
             this._builder.get_object('item-url').text = this._getSelected('DATA');
@@ -595,21 +595,21 @@ var MenuEditor = class MenuEditor {
   }
 
 
-  // This creates / initializes a Gtk.ListBoxRow which can be used to select a hotkey. A
-  // Gtk.ShortcutLabel is used to visualize the hotkey - this element is not yet available
-  // in Glade, therefore it's created here in code. This makes everything a bit
+  // This creates / initializes a Gtk.ListBoxRow which can be used to select a shortcut. A
+  // Gtk.ShortcutLabel is used to visualize the shortcut - this element is not yet
+  // available in Glade, therefore it's created here in code. This makes everything a bit
   // hard-wired, which could be improved in the future.
   // The functionality is added to a Gtk.ListBoxRow identified via rowName. This row is
   // expected to have single Gtk.Box as child; the Gtk.ShortcutLabel will be packed to the
   // end of this Gtk.Box.
-  // The doFullGrab parameters enables selection of hotkeys which are already bound to
+  // The doFullGrab parameters enables selection of shortcuts which are already bound to
   // something else. For example, imagine you have configured opening a terminal via
   // Ctrl+Alt+T in your system settings. Now if doFullGrab == false, selecting Ctrl+Alt+T
   // will not work; it will open the terminal instead. However, if doFullGrab == true, you
   // will be able to select Ctrl+Alt+T. This is very important - we do not want to bind
-  // menus to hotkeys which are bound to something else - but we want menu items to
-  // simulate hotkey presses which are actually bound to something else!
-  _initHotkeySelect(rowName, doFullGrab) {
+  // menus to shortcuts which are bound to something else - but we want menu items to
+  // simulate shortcut presses which are actually bound to something else!
+  _initShortcutSelect(rowName, doFullGrab) {
 
     const row   = this._builder.get_object(rowName);
     const label = new Gtk.ShortcutLabel({disabled_text: 'Not bound.'});
@@ -628,7 +628,7 @@ var MenuEditor = class MenuEditor {
       }
       row.grab_add();
       label.set_accelerator('');
-      label.set_disabled_text('Press the hotkey! (ESC to cancel, BackSpace to unbind)');
+      label.set_disabled_text('Press the shortcut! (ESC to cancel, BackSpace to unbind)');
     };
 
     // This function cancels any previous grab. The label's disabled-text is reset to "Not
@@ -655,7 +655,7 @@ var MenuEditor = class MenuEditor {
         const mods   = event.get_state()[1] & Gtk.accelerator_get_default_mod_mask();
 
         if (keyval == Gdk.KEY_Escape) {
-          // Escape cancels the hotkey selection.
+          // Escape cancels the shortcut selection.
           label.set_accelerator(this._getSelected('DATA'));
           cancelGrab();
 
@@ -829,34 +829,36 @@ var MenuEditor = class MenuEditor {
       }
 
       // If the name, was set, update the "DISPLAY_NAME" as well. If iter refers to a
-      // top-level menu, the display name contains the hotkey.
+      // top-level menu, the display name contains the shortcut.
       if (column == 'NAME') {
         if (this._isToplevel(iter)) {
-          let hotkey        = 'Not bound.';
+          let shortcut      = 'Not bound.';
           const accelerator = this._get(iter, 'DATA');
           if (accelerator) {
             const [keyval, mods] = Gtk.accelerator_parse(accelerator);
-            hotkey               = Gtk.accelerator_get_label(keyval, mods);
+            shortcut             = Gtk.accelerator_get_label(keyval, mods);
           }
           this._set(
-              iter, 'DISPLAY_NAME', '<b>' + data + '</b>\n<small>' + hotkey + '</small>');
+              iter, 'DISPLAY_NAME',
+              '<b>' + data + '</b>\n<small>' + shortcut + '</small>');
         } else {
           this._set(iter, 'DISPLAY_NAME', data);
         }
       }
 
       // If the data column was set on a top-level menu, we need to update the
-      // "DISPLAY_NAME" as well, as the data column contains the hotkey of the menu.
+      // "DISPLAY_NAME" as well, as the data column contains the shortcut of the menu.
       if (column == 'DATA') {
         if (this._isToplevel(iter)) {
-          let hotkey = 'Not bound.';
+          let shortcut = 'Not bound.';
           if (data != '') {
             const [keyval, mods] = Gtk.accelerator_parse(data);
-            hotkey               = Gtk.accelerator_get_label(keyval, mods);
+            shortcut             = Gtk.accelerator_get_label(keyval, mods);
           }
           const name = this._get(iter, 'NAME');
           this._set(
-              iter, 'DISPLAY_NAME', '<b>' + name + '</b>\n<small>' + hotkey + '</small>');
+              iter, 'DISPLAY_NAME',
+              '<b>' + name + '</b>\n<small>' + shortcut + '</small>');
         }
       }
     } catch (error) {
@@ -933,24 +935,28 @@ var MenuEditor = class MenuEditor {
     try {
 
       // This is called recursively.
-      const addItem = (list, iter) => {
-        let item = {
-          name: this._get(iter, 'NAME'),
-          icon: this._get(iter, 'ICON'),
-          type: this._get(iter, 'TYPE'),
-          data: this._get(iter, 'DATA'),
-          angle: this._get(iter, 'ANGLE_OR_ID'),
-          children: []
-        };
-
+      const addChildren = (parent, parentIter) => {
         // Recursively add all children.
-        const count = this._store.iter_n_children(iter);
-        for (let i = 0; i < count; ++i) {
-          const childIter = this._store.iter_nth_child(iter, i)[1];
-          addItem(item.children, childIter);
+        const count = this._store.iter_n_children(parentIter);
+
+        if (count > 0) {
+          parent.children = [];
         }
 
-        list.push(item);
+        for (let i = 0; i < count; ++i) {
+          const iter = this._store.iter_nth_child(parentIter, i)[1];
+          let item   = {
+            name: this._get(iter, 'NAME'),
+            icon: this._get(iter, 'ICON'),
+            type: this._get(iter, 'TYPE'),
+            data: this._get(iter, 'DATA'),
+            angle: this._get(iter, 'ANGLE_OR_ID')
+          };
+
+          parent.children.push(item);
+
+          addChildren(item, iter);
+        }
       };
 
       // The top level JSON element is an array containing all menus.
@@ -958,7 +964,18 @@ var MenuEditor = class MenuEditor {
       let [ok, iter] = this._store.get_iter_first();
 
       while (ok) {
-        addItem(menus, iter);
+        let menu = {
+          name: this._get(iter, 'NAME'),
+          icon: this._get(iter, 'ICON'),
+          type: this._get(iter, 'TYPE'),
+          shortcut: this._get(iter, 'DATA'),
+          id: this._get(iter, 'ANGLE_OR_ID'),
+          children: []
+        };
+
+        menus.push(menu);
+        addChildren(menu, iter);
+
         ok = this._store.iter_next(iter);
       }
 
@@ -971,26 +988,28 @@ var MenuEditor = class MenuEditor {
   }
 
 
-  // This is called once initially and loads the JSON menu configuration from
-  // "menu-configuration". It populates the menu store with all configured menus.
+  // This is called once initially and loads the JSON menu configuration from the settings
+  // key "menu-configuration". It populates the menu store with all configured menus.
   _loadMenuConfiguration() {
 
     try {
 
       // This is called recursively.
-      const parseItem = (item, iter) => {
-        this._set(iter, 'ICON', item.icon);
-        this._set(iter, 'NAME', item.name);
-        this._set(iter, 'TYPE', item.type);
-        this._set(iter, 'DATA', item.data);
-        this._set(iter, 'ANGLE_OR_ID', item.angle);
-
+      const parseChildren = (parent, parentIter) => {
         // Load all children recursively.
-        for (let j = 0; j < item.children.length; j++) {
-          const child     = item.children[j];
-          const childIter = this._store.append(iter);
+        if (parent.children) {
+          for (let j = 0; j < parent.children.length; j++) {
+            const child = parent.children[j];
+            const iter  = this._store.append(parentIter);
 
-          parseItem(child, childIter);
+            this._set(iter, 'ICON', child.icon);
+            this._set(iter, 'NAME', child.name);
+            this._set(iter, 'TYPE', child.type);
+            this._set(iter, 'DATA', child.data);
+            this._set(iter, 'ANGLE_OR_ID', child.angle);
+
+            parseChildren(child, iter);
+          }
         }
       };
 
@@ -1001,7 +1020,13 @@ var MenuEditor = class MenuEditor {
         const menu = menus[i];
         const iter = this._store.append(null);
 
-        parseItem(menu, iter);
+        this._set(iter, 'ICON', menu.icon);
+        this._set(iter, 'NAME', menu.name);
+        this._set(iter, 'TYPE', menu.type);
+        this._set(iter, 'DATA', menu.shortcut);
+        this._set(iter, 'ANGLE_OR_ID', menu.id);
+
+        parseChildren(menu, iter);
       }
 
       // Flag that loading is finished - all next calls to this._set() will update the

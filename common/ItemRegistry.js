@@ -41,7 +41,7 @@ var SettingsTypes = {
   NONE: 0,
   MENU: 1,
   SUBMENU: 2,
-  HOTKEY: 3,
+  SHORTCUT: 3,
   COMMAND: 4,
   FILE: 5,
   URL: 6,
@@ -75,18 +75,18 @@ var ItemTypes = {
     description: 'Create as many as you want!',
     settingsType: SettingsTypes.MENU,
     settingsList: 'menu-types-list',
-    createItem: (name, icon, angle, data) => {
+    createItem: (name, icon) => {
       return {name: name, icon: icon, children: []};
     }
   },
 
   // The hotkey action simulates the pressing of a hotkey when activated.
-  Hotkey: {
-    name: 'Press Hotkey',
+  Shortcut: {
+    name: 'Activate Shortcut',
     icon: 'accessories-character-map',
     defaultData: '',
     description: 'Simulates a key stroke.',
-    settingsType: SettingsTypes.HOTKEY,
+    settingsType: SettingsTypes.SHORTCUT,
     settingsList: 'action-types-list',
     createItem: (name, icon, angle, data) => {
       return {

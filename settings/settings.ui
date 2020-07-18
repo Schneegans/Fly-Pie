@@ -5552,7 +5552,7 @@ the current item will be selected.</property>
                                     <property name="can_focus">False</property>
                                     <property name="hexpand">True</property>
                                     <child>
-                                      <object class="GtkRevealer" id="item-settings-item-hotkey-revealer">
+                                      <object class="GtkRevealer" id="item-settings-item-shortcut-revealer">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="margin_left">5</property>
@@ -5565,7 +5565,7 @@ the current item will be selected.</property>
                                             <property name="can_focus">False</property>
                                             <property name="margin_top">5</property>
                                             <child>
-                                              <object class="GtkListBoxRow" id="item-hotkey-select">
+                                              <object class="GtkListBoxRow" id="item-shortcut-select">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <child>
@@ -5589,7 +5589,7 @@ the current item will be selected.</property>
                                                             <property name="can_focus">False</property>
                                                             <property name="halign">start</property>
                                                             <property name="hexpand">True</property>
-                                                            <property name="label" translatable="yes">Hotkey</property>
+                                                            <property name="label" translatable="yes">Shortcut</property>
                                                           </object>
                                                           <packing>
                                                             <property name="left_attach">0</property>
@@ -5602,7 +5602,7 @@ the current item will be selected.</property>
                                                             <property name="can_focus">False</property>
                                                             <property name="halign">start</property>
                                                             <property name="hexpand">True</property>
-                                                            <property name="label" translatable="yes">This hotkey will be simulated.</property>
+                                                            <property name="label" translatable="yes">This shortcut will be simulated.</property>
                                                             <style>
                                                             <class name="dim-label"/>
                                                             </style>
@@ -6132,7 +6132,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkRevealer" id="item-settings-menu-hotkey-revealer">
+                                      <object class="GtkRevealer" id="item-settings-menu-shortcut-revealer">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="margin_left">5</property>
@@ -6146,7 +6146,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                             <property name="can_focus">False</property>
                                             <property name="margin_top">5</property>
                                             <child>
-                                              <object class="GtkListBoxRow" id="menu-hotkey-select">
+                                              <object class="GtkListBoxRow" id="menu-shortcut-select">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <child>
@@ -6170,7 +6170,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                                             <property name="can_focus">False</property>
                                                             <property name="halign">start</property>
                                                             <property name="hexpand">True</property>
-                                                            <property name="label" translatable="yes">Hotkey</property>
+                                                            <property name="label" translatable="yes">Shortcut</property>
                                                           </object>
                                                           <packing>
                                                             <property name="left_attach">0</property>
