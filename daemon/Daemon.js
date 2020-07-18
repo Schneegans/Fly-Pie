@@ -82,21 +82,29 @@ var Daemon = class Daemon {
 
   // -------------------------------------------------------------- public D-Bus-Interface
 
-  // These are directly called via the DBus. See common/DBusInterface.js for a description
-  // of Swing-Pie's DBusInterface.
+  // This opens a menu configured with Swing-Pie's menu editor and can be directly called
+  // over the D-Bus. See common/DBusInterface.js for a description of Swing-Pie's
+  // DBusInterface.
   ShowMenu(name) {
     return this._openMenu(name, false);
   }
 
+  // This opens a menu configured with Swing-Pie's menu editor in preview mode and can be
+  // directly called over the D-Bus. See common/DBusInterface.js for a description of
+  // Swing-Pie's DBusInterface.
   PreviewMenu(name) {
     return this._openMenu(name, true);
   }
 
+  // This opens a custom menu and can be directly called over the D-Bus.
+  // See common/DBusInterface.js for a description of Swing-Pie's DBusInterface.
   ShowCustomMenu(json) {
     this._currentID = this._getNextID(this._currentID);
     return this._openCustomMenu(json, false, this._currentID);
   }
 
+  // This opens a custom menu in preview mode and can be directly called over the D-Bus.
+  // See common/DBusInterface.js for a description of Swing-Pie's DBusInterface.
   PreviewCustomMenu(json) {
     this._currentID = this._getNextID(this._currentID);
     return this._openCustomMenu(json, true, this._currentID);
@@ -108,9 +116,10 @@ var Daemon = class Daemon {
   // menu's name must be given as parameter. It will return a positive number on success
   // and a negative on failure. See common/DBusInterface.js for a list of error codes.
   _openMenu(name, previewMode) {
+
+    // Search for the meu with the given name.
     for (let i = 0; i < this._menuConfigs.length; i++) {
 
-      // Search for the correct menu.
       if (name == this._menuConfigs[i].name) {
 
         // Transform the configuration into a menu structure.
@@ -122,7 +131,8 @@ var Daemon = class Daemon {
               this._transformConfig(this._menuConfigs[i].children[j]));
         }
 
-        // Open the menu with the custom-menu method.
+        // Once we transformed the menu configuration to a menu structure, we can open the
+        // menu with the custom-menu method.
         const result =
             this._openCustomMenu(structure, previewMode, this._menuConfigs[i].id);
 
@@ -131,6 +141,7 @@ var Daemon = class Daemon {
           this._currentMenuStructure = structure;
         }
 
+        // Return the menu's ID.
         return result;
       }
     }
@@ -269,6 +280,9 @@ var Daemon = class Daemon {
     }
   }
 
+  // This returns a new ID for a custom show-menu request. The last ID is increased by, if
+  // the result collides with an ID of a menu configured with Swing-Pie's menu editor, it
+  // is increased once more.
   _getNextID(lastID) {
     let nextID  = lastID;
     let isInUse = false;
@@ -277,6 +291,7 @@ var Daemon = class Daemon {
       ++nextID;
       isInUse = false;
 
+      // Check whether this ID is in use.
       for (let i = 0; i < this._menuConfigs.length; i++) {
         if (this._menuConfigs[i].id == nextID) {
           isInUse = true;
