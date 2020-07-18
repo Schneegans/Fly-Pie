@@ -29,7 +29,7 @@ let ColumnTypes = {
   NAME:          GObject.TYPE_STRING,   // The name without any markup.
   TYPE:          GObject.TYPE_STRING,   // The item type. Like 'Menu' or 'Bookmarks'.
   DATA:          GObject.TYPE_STRING,   // Used for the command, file, application, ...
-  ANGLE_OR_ID:   GObject.TYPE_DOUBLE    // The fixed angle for items and the menu ID for
+  ANGLE_OR_ID:   GObject.TYPE_INT   // The fixed angle for items and the menu ID for
                                         // top-level menus.
 }
 // clang-format on
