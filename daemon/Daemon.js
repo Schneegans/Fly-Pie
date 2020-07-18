@@ -47,7 +47,7 @@ var Daemon = class Daemon {
         (menuID) => this._onCancel(menuID));
 
     // This is increased once for every menu request.
-    this._nextID = 0;
+    this._currentID = 0;
 
     // This class manages the global hotkeys. Once one of the registered hotkeys is
     // pressed, the corresponding menu is shown via the ShowMenu() method. If an error
@@ -93,11 +93,13 @@ var Daemon = class Daemon {
   }
 
   ShowCustomMenu(json) {
-    return this._openCustomMenu(json, false);
+    this._currentID = this._getNextID(this._currentID);
+    return this._openCustomMenu(json, false, this._currentID);
   }
 
   PreviewCustomMenu(json) {
-    return this._openCustomMenu(json, true);
+    this._currentID = this._getNextID(this._currentID);
+    return this._openCustomMenu(json, true, this._currentID);
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -115,7 +117,8 @@ var Daemon = class Daemon {
         const config = this._transformConfig(this._menuConfigs[i]);
 
         // Open the menu with the custom-menu method.
-        const result = this._openCustomMenu(config, previewMode);
+        const result =
+            this._openCustomMenu(config, previewMode, this._menuConfigs[i].angle);
 
         // If that was successful, store the config.
         if (result >= 0) {
@@ -134,7 +137,7 @@ var Daemon = class Daemon {
   // be a JSON string or an object containing the menu structure. This method will return
   // the menu's ID on success or an error code on failure. See common/DBusInterface.js for
   // a list of error codes.
-  _openCustomMenu(config, previewMode) {
+  _openCustomMenu(config, previewMode, menuID) {
 
     let structure = config;
 
@@ -151,7 +154,7 @@ var Daemon = class Daemon {
     // Then try to open the menu. This will return the menu's ID on success or an error
     // code on failure.
     try {
-      return this._menu.show(this._nextID++, structure, previewMode);
+      return this._menu.show(menuID, structure, previewMode);
     } catch (error) {
       logError(error);
     }
@@ -182,12 +185,10 @@ var Daemon = class Daemon {
 
       // The menu is now hidden.
       this._currentMenuConfig = null;
-
-    } else {
-
-      // It's been a custom menu, so emit the OnSelect signal of our D-Bus interface.
-      this._dbus.emit_signal('OnSelect', GLib.Variant.new('(is)', [menuID, path]));
     }
+
+    // Emit the OnSelect signal of our D-Bus interface.
+    this._dbus.emit_signal('OnSelect', GLib.Variant.new('(is)', [menuID, path]));
   }
 
   // This gets called when the user did not select anything in the menu.
@@ -199,12 +200,10 @@ var Daemon = class Daemon {
 
       // The menu is now hidden.
       this._currentMenuConfig = null;
-
-    } else {
-
-      // It's been a custom menu, so emit the OnCancel signal of our D-Bus interface.
-      this._dbus.emit_signal('OnCancel', GLib.Variant.new('(i)', [menuID]));
     }
+
+    // mit the OnCancel signal of our D-Bus interface.
+    this._dbus.emit_signal('OnCancel', GLib.Variant.new('(i)', [menuID]));
   }
 
   // This uses the createItem() methods of the ItemRegistry to transform a menu
@@ -256,5 +255,29 @@ var Daemon = class Daemon {
     for (let requiredShortcut of newShortcuts) {
       this._shortcuts.bind(requiredShortcut);
     }
+
+    // There is currently a menu created with Swing-Pie's menu editor open, so we
+    // potentially have to update the displayed menu (we might be in preview mode).
+    if (this._currentMenuConfig != null) {
+    }
+  }
+
+  _getNextID(lastID) {
+    let nextID  = lastID;
+    let isInUse = false;
+
+    do {
+      ++nextID;
+      isInUse = false;
+
+      for (let i = 0; i < this._menuConfigs.length; i++) {
+        if (this._menuConfigs[i].angle == nextID) {
+          isInUse = true;
+        }
+      }
+
+    } while (isInUse);
+
+    return nextID;
   }
 };

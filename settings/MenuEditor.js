@@ -29,7 +29,8 @@ let ColumnTypes = {
   NAME:          GObject.TYPE_STRING,   // The name without any markup.
   TYPE:          GObject.TYPE_STRING,   // The item type. Like 'Menu' or 'Bookmarks'.
   DATA:          GObject.TYPE_STRING,   // Used for the command, file, application, ...
-  ANGLE:         GObject.TYPE_DOUBLE    // The fixed angle.
+  ANGLE_OR_ID:   GObject.TYPE_DOUBLE    // The fixed angle for items and the menu ID for
+                                        // top-level menus.
 }
 // clang-format on
 
@@ -93,7 +94,7 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
   vfunc_drag_data_get(path, selection_data) {
     const [ok, iter] = this.get_iter(path);
     if (ok) {
-      this.set_value(iter, this.columns.ANGLE, -1);
+      this.set_value(iter, this.columns.ANGLE_OR_ID, -1);
       this.set_value(iter, this.columns.DISPLAY_ANGLE, '');
     }
     return super.vfunc_drag_data_get(path, selection_data);
@@ -396,7 +397,7 @@ var MenuEditor = class MenuEditor {
         this._setSelected('DATA', adjustment.value);
       });
 
-      // Store the item's fixed angle in the tree store's ANGLE column when the
+      // Store the item's fixed angle in the tree store's ANGLE_OR_ID column when the
       // corresponding input field is changed. This is a bit more involved, as we check
       // for monotonically increasing angles among all sibling items. We iterate through
       // all children of the selected item's parent (that means all siblings of the
@@ -418,7 +419,7 @@ var MenuEditor = class MenuEditor {
         const nChildren       = model.iter_n_children(parentIter);
 
         for (let n = 0; n < nChildren; n++) {
-          const angle = this._get(model.iter_nth_child(parentIter, n)[1], 'ANGLE');
+          const angle = this._get(model.iter_nth_child(parentIter, n)[1], 'ANGLE_OR_ID');
 
           if (n < selectedIndex && angle >= 0) {
             minAngle = angle;
@@ -433,7 +434,7 @@ var MenuEditor = class MenuEditor {
         // Set the value of the tree store only if the constraints are fulfilled.
         if (adjustment.value == -1 ||
             (adjustment.value > minAngle && adjustment.value < maxAngle)) {
-          this._setSelected('ANGLE', adjustment.value);
+          this._setSelected('ANGLE_OR_ID', adjustment.value);
         }
       });
 
@@ -523,8 +524,9 @@ var MenuEditor = class MenuEditor {
 
           // For all other items, the fixed angle can be set.
           if (selectedSettingsType != ItemRegistry.SettingsTypes.MENU) {
-            this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
-            revealers['item-settings-angle-revealer']    = true;
+            this._builder.get_object('item-angle').value =
+                this._getSelected('ANGLE_OR_ID');
+            revealers['item-settings-angle-revealer'] = true;
           }
 
           if (selectedSettingsType == ItemRegistry.SettingsTypes.HOTKEY) {
@@ -695,7 +697,7 @@ var MenuEditor = class MenuEditor {
         this._set(iter, 'NAME', 'New Menu');
         this._set(iter, 'TYPE', 'Menu');
         this._set(iter, 'DATA', '');
-        this._set(iter, 'ANGLE', -1);
+        this._set(iter, 'ANGLE_OR_ID', this._getNewID());
         return;
       }
 
@@ -727,7 +729,7 @@ var MenuEditor = class MenuEditor {
       // Initialize other field to their default values.
       this._set(iter, 'TYPE', newType);
       this._set(iter, 'DATA', ItemRegistry.ItemTypes[newType].defaultData);
-      this._set(iter, 'ANGLE', -1);
+      this._set(iter, 'ANGLE_OR_ID', -1);
 
     } catch (error) {
       utils.notification('Failed to add new item: ' + error);
@@ -788,16 +790,16 @@ var MenuEditor = class MenuEditor {
   }
 
   // Returns the column data of the row identified by iter. The column should be the name
-  // of the column - that is for example "DISPLAY_NAME", "ANGLE", or "TYPE".
+  // of the column - that is for example "DISPLAY_NAME", "ANGLE_OR_ID", or "TYPE".
   _get(iter, column) {
     return this._store.get_value(iter, this._store.columns[column]);
   }
 
 
   // Sets the column data of the row identified by iter. The column should be the name
-  // of the column - that is for example "ICON", "ANGLE", or "TYPE".
+  // of the column - that is for example "ICON", "ANGLE_OR_ID", or "TYPE".
   // This function will automatically set the values of "DISPLAY_ICON", "DISPLAY_ANGLE",
-  // and "DISPLAY_NAME" when "ICON", "ANGLE", "NAME", or "DATA" are set.
+  // and "DISPLAY_NAME" when "ICON", "ANGLE_OR_ID", "NAME", or "DATA" are set.
   // Furthermore, it will automatically save a JSON representation of the entire menu
   // store to the "menu-configuration" Gio.Settings key of this application.
   _set(iter, column, data) {
@@ -817,9 +819,13 @@ var MenuEditor = class MenuEditor {
         this._set(iter, 'DISPLAY_ICON', utils.createIcon(data, iconSize));
       }
 
-      // If the angle, was set, update the "DISPLAY_ANGLE" as well.
-      if (column == 'ANGLE') {
-        this._set(iter, 'DISPLAY_ANGLE', data >= 0 ? data : '');
+      // If the angle, was set, update the "DISPLAY_ANGLE" as well. For top-level menus,
+      // this field contains the menu ID, so we update the DISPLAY_ANGLE only for
+      // non-top-level menus.
+      if (column == 'ANGLE_OR_ID') {
+        if (!this._isToplevel(iter)) {
+          this._set(iter, 'DISPLAY_ANGLE', data >= 0 ? data : '');
+        }
       }
 
       // If the name, was set, update the "DISPLAY_NAME" as well. If iter refers to a
@@ -896,6 +902,29 @@ var MenuEditor = class MenuEditor {
     return emojis[Math.floor(Math.random() * (emojis.length + 0))];
   }
 
+  // This returns an integer > 0 which is not used as menu ID currently.
+  _getNewID() {
+    let newID   = -1;
+    let isInUse = false;
+
+    do {
+      ++newID;
+      isInUse = false;
+
+      let [ok, iter] = this._store.get_iter_first();
+
+      while (ok && !isInUse) {
+        if (this._get(iter, 'ANGLE_OR_ID') == newID) {
+          isInUse = true;
+        }
+        ok = this._store.iter_next(iter);
+      }
+
+    } while (isInUse);
+
+    return newID;
+  }
+
   // This stores a JSON representation of the entire menu store in the
   // "menu-configuration" key of the application settings. This is called whenever
   // something is changed in the menu store.
@@ -910,7 +939,7 @@ var MenuEditor = class MenuEditor {
           icon: this._get(iter, 'ICON'),
           type: this._get(iter, 'TYPE'),
           data: this._get(iter, 'DATA'),
-          angle: this._get(iter, 'ANGLE'),
+          angle: this._get(iter, 'ANGLE_OR_ID'),
           children: []
         };
 
@@ -954,7 +983,7 @@ var MenuEditor = class MenuEditor {
         this._set(iter, 'NAME', item.name);
         this._set(iter, 'TYPE', item.type);
         this._set(iter, 'DATA', item.data);
-        this._set(iter, 'ANGLE', item.angle);
+        this._set(iter, 'ANGLE_OR_ID', item.angle);
 
         // Load all children recursively.
         for (let j = 0; j < item.children.length; j++) {

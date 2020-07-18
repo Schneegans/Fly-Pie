@@ -14,9 +14,7 @@
 // 1: Use ShowMenu() or PreviewMenu() to open one of the menus configured in the        //
 //    settings dialog of Swing-Pie. As an argument the name of the desired menu must be //
 //    provided. The returned integer may be negative, indicating that an error          //
-//    occurred. See DBusInterface.errorCodes for possible values. There will be no      //
-//    emissions of the OnSelect or OnCancel signals for menus opened with  ShowMenu()   //
-//    or PreviewMenu().                                                                 //
+//    occurred. See DBusInterface.errorCodes for possible values.                       //
 //                                                                                      //
 // 2: Use ShowCustomMenu() or PreviewCustomMenu() to open a completely self-defined     //
 //    menu. As argument a menu description has to be provided. This is a JSON string    //
