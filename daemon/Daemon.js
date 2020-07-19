@@ -277,6 +277,27 @@ var Daemon = class Daemon {
     // There is currently a menu created with Swing-Pie's menu editor open, so we
     // potentially have to update the displayed menu (we might be in preview mode).
     if (this._currentMenuStructure != null) {
+      for (let i = 0; i < this._menuConfigs.length; i++) {
+        if (this._menuConfigs[i].id == this._menu.getID()) {
+          // Transform the configuration into a menu structure.
+          const structure = ItemRegistry.ItemTypes['Menu'].createItem(
+              this._menuConfigs[i].name, this._menuConfigs[i].icon);
+
+          for (let j = 0; j < this._menuConfigs[i].children.length; j++) {
+            structure.children.push(
+                this._transformConfig(this._menuConfigs[i].children[j]));
+          }
+
+          // Once we transformed the menu configuration to a menu structure, we can update
+          // the menu with the new structure.
+          const result = this._menu.update(structure);
+
+          // If that was successful, store the structure.
+          if (result >= 0) {
+            this._currentMenuStructure = structure;
+          }
+        }
+      }
     }
   }
 

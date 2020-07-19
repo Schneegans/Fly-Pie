@@ -367,6 +367,12 @@ var Menu = class Menu {
 
   // -------------------------------------------------------------------- public interface
 
+  // Returns the ID of the currently visible menu. Will be null if no menu is currently
+  // shown.
+  getID() {
+    return this._menuID;
+  }
+
   // This shows the menu, blocking all user input. A subtle animation is used to fade in
   // the menu. Returns an error code if something went wrong. See DBusInerface.js for all
   // possible error codes.
@@ -390,24 +396,12 @@ var Menu = class Menu {
     // Store the preview mode flag.
     this._previewMode = previewMode;
 
-    // Make sure that a name and an icon is set.
-    if (structure.name == undefined) {
-      structure.name = 'root';
+    // Ascertain several properties of the menu structure. This assigns IDs and angles to
+    // each and every item.
+    const result = this._normalizeMenuStructure(structure);
+    if (result < 0) {
+      return result;
     }
-
-    if (structure.icon == undefined) {
-      structure.icon = 'image-missing';
-    }
-
-    // Calculate and verify all item angles.
-    structure.angle = 0;
-    if (!this._updateItemAngles(structure.children)) {
-      return DBusInterface.errorCodes.eInvalidAngles;
-    }
-
-    // Assign an ID to each item.
-    structure.id = '/';
-    this._updateItemIDs(structure.children);
 
     // Try to grab the complete input.
     if (!this._background.show(previewMode)) {
@@ -468,6 +462,23 @@ var Menu = class Menu {
     return this._menuID;
   }
 
+  // This is called when the menu configuration is changed while the menu is open. We
+  // should adapt the open menu accordingly. This is primarily meant for the preview mode
+  // of Swing-Pie's menu editor.
+  update(structure) {
+    const result = this._normalizeMenuStructure(structure);
+    if (result < 0) {
+      return result;
+    }
+
+    // Usually, at most one property of an item will be changed (name, icon, angle or
+    // children). If more than one changed, it's quite likely that an item was added,
+    // removed or moved. But actually we don't know, so this guess will not be correct in
+    // all cases.
+
+    return 0;
+  }
+
   // ----------------------------------------------------------------------- private stuff
 
   // Hides the menu and the background actor.
@@ -488,6 +499,32 @@ var Menu = class Menu {
     // Reset some other members.
     this._draggedChild       = null;
     this._menuSelectionChain = [];
+  }
+
+  // This assigns IDs and angles to each and every item. It also ensures that the root
+  // item has a name and an icon set.
+  _normalizeMenuStructure(structure) {
+
+    // Make sure that a name and an icon is set.
+    if (structure.name == undefined) {
+      structure.name = 'root';
+    }
+
+    if (structure.icon == undefined) {
+      structure.icon = 'image-missing';
+    }
+
+    // Calculate and verify all item angles.
+    structure.angle = 0;
+    if (!this._updateItemAngles(structure.children)) {
+      return DBusInterface.errorCodes.eInvalidAngles;
+    }
+
+    // Assign an ID to each item.
+    structure.id = '/';
+    this._updateItemIDs(structure.children);
+
+    return 0;
   }
 
   // This method recursively traverses the menu structure and assigns an ID to each
