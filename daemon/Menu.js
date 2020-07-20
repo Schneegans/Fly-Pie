@@ -358,11 +358,6 @@ var Menu = class Menu {
       return DBusInterface.errorCodes.eAlreadyActive;
     }
 
-    // Check if there is a root item list.
-    if (!(structure.children && structure.children.length > 0)) {
-      return DBusInterface.errorCodes.ePropertyMissing;
-    }
-
     // Remove any previous menus.
     if (this._root) {
       this._root.destroy();

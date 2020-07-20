@@ -266,6 +266,7 @@ class SelectionWedges extends Clutter.Actor {
   // ring-like fashion).
   setItemAngles(itemAngles, parentAngle) {
 
+    this._itemAngles   = itemAngles;
     this._hoveredWedge = -1;
     this._parentIndex  = -1;
 
@@ -377,9 +378,11 @@ class SelectionWedges extends Clutter.Actor {
       angle = (angle + 90) % 360;
 
       // If there is only one full 360°-wedge, it is hovered.
-      hoveredWedge           = 0;
-      hoveredWedgeStartAngle = 0;
-      hoveredWedgeEndAngle   = 360;
+      if (this._itemAngles.length == 1) {
+        hoveredWedge           = 0;
+        hoveredWedgeStartAngle = 0;
+        hoveredWedgeEndAngle   = 360;
+      }
 
       // Now search the wedge the pointer resides in currently.
       for (let i = 0; i < this._separatorAngles.length; i++) {
