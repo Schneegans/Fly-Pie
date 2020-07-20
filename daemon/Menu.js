@@ -186,7 +186,6 @@ var Menu = class Menu {
     this._selectionWedges.connect('child-selected-event', (o, index) => {
       const parent = this._menuSelectionChain[0];
       const child  = this._menuSelectionChain[0].getChildMenuItems()[index];
-      const root   = this._menuSelectionChain[this._menuSelectionChain.length - 1];
 
       const [pointerX, pointerY, mods] = global.get_pointer();
 
@@ -219,40 +218,17 @@ var Menu = class Menu {
         this._input.warpPointer(clampedX, clampedY);
       }
 
+      // Move the child to the target position.
+      const [ok, relativeX, relativeY] = parent.transform_stage_point(clampedX, clampedY);
+      child.set_translation(relativeX, relativeY, 0);
+
       // The "trace" of the menu needs to be "idealized". That means, even if the user did
       // not click exactly in the direction of the item, the line connecting parent and
       // child has to be drawn with the correct angle. As the newly active item will be
       // shown directly at the pointer position, we must move the parent so that the trace
       // has the correct angle. Actually not the parent item has to move but the root of
       // the entire menu selection chain.
-
-      // This is the clamped click-position relative to the newly active item's parent.
-      const [ok, relativeX, relativeY] = parent.transform_stage_point(clampedX, clampedY);
-
-      // Compute the final trace length as max(distance-click-to-parent, min-trace-length)
-      const currentTraceLength = Math.sqrt(relativeX * relativeX + relativeY * relativeY);
-      const idealTraceLength   = Math.max(
-          this._settings.get_double('trace-min-length') *
-              this._settings.get_double('global-scale'),
-          currentTraceLength);
-
-      // Based on this trace length, we can compute where the newly active item should be
-      // placed relative to its parent.
-      const childAngle = child.angle * Math.PI / 180;
-      const idealX     = Math.floor(Math.sin(childAngle) * idealTraceLength);
-      const idealY     = -Math.floor(Math.cos(childAngle) * idealTraceLength);
-
-      // Based on difference, we can now translate the root item.
-      const requiredOffsetX = relativeX - idealX;
-      const requiredOffsetY = relativeY - idealY;
-      root.set_translation(
-          root.translation_x + requiredOffsetX, root.translation_y + requiredOffsetY, 0);
-
-      // The newly active item will be placed at its idealized position. As the root menu
-      // moved, this will be exactly at the pointer position.
-      child.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
-      child.set_easing_mode(this._settings.get_enum('easing-mode'));
-      child.set_translation(idealX, idealY, 0);
+      this._idealizeTace(clampedX, clampedY);
 
       // Now we update position and the number of wedges of the SelectionWedges
       // according to the newly active item.
@@ -315,6 +291,14 @@ var Menu = class Menu {
         this._input.warpPointer(clampedX, clampedY);
       }
 
+      // The "trace" of the menu needs to be "idealized". That means, even if the user did
+      // not click exactly in the direction of the item, the line connecting parent and
+      // child has to be drawn with the correct angle. As the newly active item will be
+      // shown directly at the pointer position, we must move the parent so that the trace
+      // has the correct angle. Actually not the parent item has to move but the root of
+      // the entire menu selection chain.
+      this._idealizeTace(clampedX, clampedY);
+
       // Now we update position and the number of wedges of the SelectionWedges
       // according to the newly active item.
       const itemAngles = [];
@@ -331,13 +315,6 @@ var Menu = class Menu {
 
       this._selectionWedges.set_translation(
           clampedX - this._background.x, clampedY - this._background.y, 0);
-
-      // We need to move the menu selection chain's root element so that our newly active
-      // item is exactly at the pointer position.
-      const [ok, relativeX, relativeY] = parent.transform_stage_point(clampedX, clampedY);
-      const root         = this._menuSelectionChain[this._menuSelectionChain.length - 1];
-      root.translation_x = root.translation_x + relativeX;
-      root.translation_y = root.translation_y + relativeY;
 
       // Once the parent is selected, nothing is dragged anymore. Even if the mouse button
       // is still pressed (we might come here when a gesture was detected by the
@@ -465,29 +442,33 @@ var Menu = class Menu {
   // This is called when the menu configuration is changed while the menu is open. We
   // should adapt the open menu accordingly. This is primarily meant for the preview mode
   // of Swing-Pie's menu editor.
+  // Usually, at most one property of an item will be changed (name or icon). If both
+  // changed, it's quite likely that an item was added, removed or moved. But actually
+  // we don't know, so this guess will not be correct in all cases.
   update(structure) {
+
+    // First make sure that all properties of the given menu structure are set correctly.
     const result = this._normalizeMenuStructure(structure);
     if (result < 0) {
       return result;
     }
 
-    // Usually, at most one property of an item will be changed (name or icon). If more
-    // than one changed, it's quite likely that an item was added, removed or moved. But
-    // actually we don't know, so this guess will not be correct in all cases.
+    // This is called recursively for all items of the new menu structure. The second
+    // parameter is the corresponding MenuItem of the currently open menu. If no
+    // corresponding item exists, this will be a newly created MenuItem.
+    const updateMenuItem = (newItem, oldItem) => {
+      oldItem.id    = newItem.id;
+      oldItem.name  = newItem.name;
+      oldItem.icon  = newItem.icon;
+      oldItem.angle = newItem.angle;
 
-    const updateMenuItem = (structure, item) => {
-      item.id    = structure.id;
-      item.name  = structure.name;
-      item.icon  = structure.icon;
-      item.angle = structure.angle;
+      const oldChildren = new Set(oldItem.getChildMenuItems());
 
-      const oldChildren = new Set(item.getChildMenuItems());
-
-      if (structure.children) {
+      if (newItem.children) {
 
         // First, we iterate through all new children an try to find for each an old child
         // with the same name and icon. If one exists, this is used for the new child.
-        structure.children.forEach(newChild => {
+        newItem.children.forEach(newChild => {
           for (let oldChild of oldChildren) {
             if (oldChild.name == newChild.name && oldChild.icon == newChild.icon) {
               newChild.oldChild = oldChild;
@@ -500,7 +481,7 @@ var Menu = class Menu {
         // Then, for each new child which does not have a corresponding old child
         // assigned, we try to find one for which at least the name or the icon is the
         // same.
-        structure.children.forEach(newChild => {
+        newItem.children.forEach(newChild => {
           if (newChild.oldChild == undefined) {
             for (let oldChild of oldChildren) {
               if (oldChild.name == newChild.name || oldChild.icon == newChild.icon) {
@@ -514,7 +495,7 @@ var Menu = class Menu {
 
         // And new MenuItems are created for those new children which do not have a
         // corresponding old MenuItem. For all others, all settings are updated.
-        structure.children.forEach(newChild => {
+        newItem.children.forEach(newChild => {
           if (newChild.oldChild == undefined) {
             newChild.oldChild = new MenuItem({
               id: newChild.id,
@@ -522,7 +503,7 @@ var Menu = class Menu {
               icon: newChild.icon,
               angle: newChild.angle
             });
-            item.addMenuItem(newChild.oldChild);
+            oldItem.addMenuItem(newChild.oldChild);
             newChild.oldChild.onSettingsChange(this._settings);
 
           } else {
@@ -534,14 +515,14 @@ var Menu = class Menu {
         });
 
         // Then we have to reorder the new children according to their new order.
-        for (let i = 0; i < structure.children.length; i++) {
-          item.setChildMenuItemIndex(structure.children[i].oldChild, i);
+        for (let i = 0; i < newItem.children.length; i++) {
+          oldItem.setChildMenuItemIndex(newItem.children[i].oldChild, i);
         }
       }
 
       // Then, all remaining old MenuItems are deleted.
       for (let oldChild of oldChildren) {
-        item.removeMenuItem(oldChild);
+        oldItem.removeMenuItem(oldChild);
 
         if (this._menuSelectionChain.includes(oldChild)) {
           let removedElement;
@@ -552,9 +533,9 @@ var Menu = class Menu {
       }
 
       // Continue recursively
-      if (structure.children) {
-        for (let i = 0; i < structure.children.length; i++) {
-          updateMenuItem(structure.children[i], structure.children[i].oldChild);
+      if (newItem.children) {
+        for (let i = 0; i < newItem.children.length; i++) {
+          updateMenuItem(newItem.children[i], newItem.children[i].oldChild);
         }
       }
     };
@@ -575,8 +556,15 @@ var Menu = class Menu {
       }
       this._menuSelectionChain[i].setState(MenuItemState.PARENT, activeChildIndex);
     }
+
+    // Recursively redraw everything.
     this._root.redraw();
 
+    // Re-idealize the trace. This can lead to pretty intense changes, but that's the way
+    // it's supposed to be.
+    let [x, y] = this._menuSelectionChain[0].get_transformed_position();
+    this._idealizeTace(
+        x - this._background.translation_x, y - this._background.translation_y);
 
     // Set the wedge angles of the SelectionWedges according to the new item structure.
     const itemAngles = [];
@@ -846,5 +834,77 @@ var Menu = class Menu {
 
     // Ensure integer position.
     return [Math.floor(posX), Math.floor(posY)];
+  }
+
+  // The "trace" of the menu needs to be "idealized". That means, even if the user did
+  // not click exactly in the direction of the item, the line connecting parent and child
+  // has to be drawn with the correct angle. As the newly active item will be shown
+  // directly at the pointer position, we must move the parent so that the trace has the
+  // correct angle. Actually not the parent item has to move but the root of the entire
+  // menu selection chain.
+  // The root item will be moved so that the currently active item is moved to the
+  // absolute position given by tipX and tipY.
+  _idealizeTace(tipX, tipY) {
+
+    // This will contain the vector from the menu selection chain's root element to it's
+    // tip (the currently selected item). This will be used to move the root element so
+    // that the tip of the chain is at the tip position.
+    let accumulatedX = 0;
+    let accumulatedY = 0;
+
+    // Traverse the chain back-to-front (that is from root-to-tip). We start one element
+    // after the root, as the root has not to be positioned relative to any other element.
+    for (let i = this._menuSelectionChain.length - 2; i >= 0; i--) {
+      const item = this._menuSelectionChain[i];
+
+      // The item's position relative to its parent.
+      let x = item.translation_x;
+      let y = item.translation_y;
+
+      // There might be a transition in progress, so we rather grab their final values.
+      const tx = item.get_transition('translation-x');
+      const ty = item.get_transition('translation-y');
+      if (tx) x = tx.interval.final;
+      if (ty) y = ty.interval.final;
+
+      // The distance from the parent is considered to be the current length of the trace
+      // segment.
+      const currentTraceLength = Math.sqrt(x * x + y * y);
+
+      // There is a setting for a minimum trace length.
+      const idealTraceLength = Math.max(
+          this._settings.get_double('trace-min-length') *
+              this._settings.get_double('global-scale'),
+          currentTraceLength);
+
+      // Based on this trace length, we can compute where the item should be placed
+      // relative to its parent.
+      const itemAngle = item.angle * Math.PI / 180;
+      const idealX    = Math.floor(Math.sin(itemAngle) * idealTraceLength);
+      const idealY    = -Math.floor(Math.cos(itemAngle) * idealTraceLength);
+
+      // Place the item at its idealized position.
+      item.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
+      item.set_easing_mode(this._settings.get_enum('easing-mode'));
+      item.set_translation(idealX, idealY, 0);
+
+      // Accumulate the full trace.
+      accumulatedX += idealX;
+      accumulatedY += idealY;
+    }
+
+    // Transform the desired tip coordinates to root-item space.
+    const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
+    const [ok, relativeTipX, relativeTipY] = root.transform_stage_point(tipX, tipY);
+
+    // The root element needs to move by the distance between the accumulated ideal
+    // position and the desired tip position.
+    const requiredOffsetX = relativeTipX - accumulatedX;
+    const requiredOffsetY = relativeTipY - accumulatedY;
+
+    // Finally move the root item so that the tip of the selection chain is beneath the
+    // mouse pointer.
+    root.set_translation(
+        root.translation_x + requiredOffsetX, root.translation_y + requiredOffsetY, 0);
   }
 };
