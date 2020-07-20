@@ -557,14 +557,13 @@ var Menu = class Menu {
       this._menuSelectionChain[i].setState(MenuItemState.PARENT, activeChildIndex);
     }
 
-    // Recursively redraw everything.
-    this._root.redraw();
-
     // Re-idealize the trace. This can lead to pretty intense changes, but that's the way
     // it's supposed to be.
     let [x, y] = this._menuSelectionChain[0].get_transformed_position();
-    this._idealizeTace(
-        x - this._background.translation_x, y - this._background.translation_y);
+    this._idealizeTace(x, y);
+
+    // Recursively redraw everything.
+    this._root.redraw();
 
     // Set the wedge angles of the SelectionWedges according to the new item structure.
     const itemAngles = [];
@@ -572,12 +571,15 @@ var Menu = class Menu {
       itemAngles.push(item.angle);
     });
 
-    if (this._menuSelectionChain.length > 0) {
+    if (this._menuSelectionChain.length > 1) {
       this._selectionWedges.setItemAngles(
           itemAngles, (this._menuSelectionChain[0].angle + 180) % 360);
     } else {
       this._selectionWedges.setItemAngles(itemAngles);
     }
+
+    this._selectionWedges.set_translation(
+        x - this._background.x, y - this._background.y, 0);
 
     return 0;
   }
