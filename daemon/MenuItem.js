@@ -19,8 +19,8 @@ const utils = Me.imports.common.utils;
 // Based on a given MenuItemState, it is drawn differently. It is composed of several   //
 // sub-actors, as shown in the diagram below:                                           //
 //                                                                                      //
-//   .----------.   .--------------------.   The caption displays the name of the       //
-//   | MenuItem |---| _caption           |   currently hovered child item. It is re-    //
+//   .----------.   .--------------------.   The name displays the name of the       //
+//   | MenuItem |---| _name           |   currently hovered child item. It is re-    //
 //   '----------'   '--------------------'   drawn whenever the hovered item changes.   //
 //         |                                                                            //
 //         |        .--------------------.   This contains up to six actors, one for    //
@@ -84,16 +84,13 @@ var MenuItem = GObject.registerClass({
     'angle': GObject.ParamSpec.double(
       'angle', 'angle', 'The angle of the MenuItem in degrees.',
       GObject.ParamFlags.READWRITE, 0, 360, 0),
-    'caption': GObject.ParamSpec.string(
-      'caption', 'caption', 'The caption to be used by this menu item. ',
-      GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, ''),
     'icon': GObject.ParamSpec.string(
       'icon', 'icon', 'The icon to be used by this menu item. ' +
       'Can be an "icon-name", an emoji like "🚀" or a path like "../icon.png".',
-      GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, 'image-missing'),
+      GObject.ParamFlags.READWRITE, 'image-missing'),
     'id': GObject.ParamSpec.string(
       'id', 'id', 'The ID of the menu item. ',
-      GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY, 'image-missing')
+      GObject.ParamFlags.READWRITE, 'image-missing')
   },
   Signals: {}
 },
@@ -118,7 +115,7 @@ class MenuItem extends Clutter.Actor {
     // appearance settings in preview mode. If it is true, the icons will be re-created
     // with full opacity as they are obviously already visible. Else there would be heavy
     // preview-flickering when changing settings.
-    this._forceRecreation = false;
+    this._forcedRecreation = false;
 
     // This is recursively updated using setParentColor(). It is used for the background
     // coloring when the color mode is set to 'parent'.
@@ -140,15 +137,31 @@ class MenuItem extends Clutter.Actor {
     this.add_child(this._iconContainer);
 
     // This will contain an actor for each child displaying the name of the respective
-    // child. Once a child is hovered the opacity of the corresponding caption will be set
+    // child. Once a child is hovered the opacity of the corresponding name will be set
     // to 255, all others will be set to zero.
-    this._caption = Clutter.Text.new();
-    this._caption.set_line_wrap(true);
-    this._caption.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-    this._caption.set_ellipsize(Pango.EllipsizeMode.END);
-    this._caption.set_line_alignment(Pango.Alignment.CENTER);
-    this._caption.set_opacity(0);
-    this.add_child(this._caption);
+    this._name = Clutter.Text.new();
+    this._name.set_line_wrap(true);
+    this._name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+    this._name.set_ellipsize(Pango.EllipsizeMode.END);
+    this._name.set_line_alignment(Pango.Alignment.CENTER);
+    this._name.set_opacity(0);
+    this.add_child(this._name);
+  }
+
+  get icon() {
+    if (this._icon === undefined) {
+      this._icon = null;
+    }
+
+    return this._icon;
+  }
+
+  set icon(value) {
+    if (this.icon !== value) {
+      this._icon = value;
+      this.notify('icon');
+      this._forceIconRecreation();
+    }
   }
 
   // -------------------------------------------------------------------- public interface
@@ -158,9 +171,19 @@ class MenuItem extends Clutter.Actor {
     this._childrenContainer.add_child(menuItem);
   }
 
+  // This is called by the Menu to remove child MenuItems from this MenuItem.
+  removeMenuItem(menuItem) {
+    this._childrenContainer.remove_child(menuItem);
+  }
+
   // Returns an array of child menu items of this.
   getChildMenuItems() {
     return this._childrenContainer.get_children();
+  }
+
+  // Sets menuItem to be the index'th child of this..
+  setChildMenuItemIndex(menuItem, index) {
+    return this._childrenContainer.set_child_at_index(menuItem, index);
   }
 
   // This is called during redraw() of the parent MenuItem. redraw() traverses the menu
@@ -257,14 +280,7 @@ class MenuItem extends Clutter.Actor {
     // change. As many settings affect the icon size or background color, we simply do
     // this in any case. This could be optimized by limiting this to the cases where
     // settings keys were changed which actually affect the icons.
-    this._iconContainer.destroy_all_children();
-    delete this._iconContainer[MenuItemState.CENTER];
-    delete this._iconContainer[MenuItemState.CENTER_HOVERED];
-    delete this._iconContainer[MenuItemState.CHILD];
-    delete this._iconContainer[MenuItemState.CHILD_HOVERED];
-    delete this._iconContainer[MenuItemState.GRANDCHILD];
-    delete this._iconContainer[MenuItemState.GRANDCHILD_HOVERED];
-    this._forceRecreation = true;
+    this._forceIconRecreation();
 
     // Then parse all settings required during the next call to redraw().
     const globalScale = settings.get_double('global-scale');
@@ -353,10 +369,10 @@ class MenuItem extends Clutter.Actor {
     // clang-format on
 
     // Most of the settings will come into effect during the call to redraw(). However,
-    // some caption settings we can apply here as they won't be affected by state changes.
-    const captionWidth = this._settings.state.get(MenuItemState.CENTER).size * 0.8;
-    this._caption.set_size(captionWidth, captionWidth);
-    this._caption.set_color(this._settings.textColor);
+    // some name settings we can apply here as they won't be affected by state changes.
+    const nameWidth = this._settings.state.get(MenuItemState.CENTER).size * 0.8;
+    this._name.set_size(nameWidth, nameWidth);
+    this._name.set_color(this._settings.textColor);
 
     // Multiply the size of the font by globalScale.
     const fontDescription = Pango.FontDescription.from_string(this._settings.font);
@@ -365,7 +381,7 @@ class MenuItem extends Clutter.Actor {
       fontSize = Pango.units_from_double(fontSize);
     }
     fontDescription.set_size(fontSize * globalScale);
-    this._caption.set_font_description(fontDescription);
+    this._name.set_font_description(fontDescription);
 
     // We also re-draw the trace line to the currently active child if there is any.
     if (this._trace != undefined) {
@@ -412,20 +428,20 @@ class MenuItem extends Clutter.Actor {
       }
     }
 
-    // If our state is MenuItemState.CENTER, redraw the caption text. Else hide the
-    // caption by setting its opacity to zero.
+    // If our state is MenuItemState.CENTER, redraw the name text. Else hide the
+    // name by setting its opacity to zero.
     if (visualState == MenuItemState.CENTER && this._activeChildIndex >= 0) {
       const child = this._childrenContainer.get_children()[this._activeChildIndex];
-      this._caption.set_text(child.caption);
-      this._caption.set_easing_duration(0);
-      const captionHeight = this._caption.get_layout().get_pixel_extents()[1].height;
-      this._caption.set_translation(
-          Math.floor(-this._caption.width / 2), Math.floor(-captionHeight / 2), 0);
-      this._caption.set_easing_duration(this._settings.easingDuration);
+      this._name.set_text(child.name);
+      this._name.set_easing_duration(0);
+      const nameHeight = this._name.get_layout().get_pixel_extents()[1].height;
+      this._name.set_translation(
+          Math.floor(-this._name.width / 2), Math.floor(-nameHeight / 2), 0);
+      this._name.set_easing_duration(this._settings.easingDuration);
 
-      this._caption.opacity = 255;
+      this._name.opacity = 255;
     } else {
-      this._caption.opacity = 0;
+      this._name.opacity = 0;
     }
 
     // This easing duration and mode are used for size and position transitions further
@@ -522,9 +538,9 @@ class MenuItem extends Clutter.Actor {
 
       // When the settings are modified (especially when a menu is shown
       // in preview mode), the icons are completely reloaded. To make this jitter-free,
-      // the _forceRecreation tells us whether we have to load the icon at full opacity.
-      icon.set_opacity(this._forceRecreation ? 255 : 0);
-      this._forceRecreation = false;
+      // the _forcedRecreation tells us whether we have to load the icon at full opacity.
+      icon.set_opacity(this._forcedRecreation ? 255 : 0);
+      this._forcedRecreation = false;
     }
 
     // Now we update the opacity of the individual icons. Only one icon - the one for the
@@ -735,5 +751,24 @@ class MenuItem extends Clutter.Actor {
     actor.set_y_expand(true);
 
     return actor;
+  }
+
+  // This deletes all icon actors, triggering their recreation during the next call to
+  // redraw(). This is used when settings are changed and when the icon property of this
+  // is changed.
+  _forceIconRecreation() {
+    if (this._iconContainer) {
+      this._iconContainer.destroy_all_children();
+      delete this._iconContainer[MenuItemState.CENTER];
+      delete this._iconContainer[MenuItemState.CENTER_HOVERED];
+      delete this._iconContainer[MenuItemState.CHILD];
+      delete this._iconContainer[MenuItemState.CHILD_HOVERED];
+      delete this._iconContainer[MenuItemState.GRANDCHILD];
+      delete this._iconContainer[MenuItemState.GRANDCHILD_HOVERED];
+      delete this._averageIconColor;
+
+      // Recreate existing icons with full opacity.
+      this._forcedRecreation = true;
+    }
   }
 });
