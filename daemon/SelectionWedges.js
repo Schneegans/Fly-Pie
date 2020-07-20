@@ -376,6 +376,11 @@ class SelectionWedges extends Clutter.Actor {
       // Turn 0° up.
       angle = (angle + 90) % 360;
 
+      // If there is only one full 360°-wedge, it is hovered.
+      hoveredWedge           = 0;
+      hoveredWedgeStartAngle = 0;
+      hoveredWedgeEndAngle   = 360;
+
       // Now search the wedge the pointer resides in currently.
       for (let i = 0; i < this._separatorAngles.length; i++) {
         const startAngle = this._separatorAngles[i];

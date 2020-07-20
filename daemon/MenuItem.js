@@ -90,6 +90,10 @@ var MenuItem = GObject.registerClass({
       GObject.ParamFlags.READWRITE, 'image-missing'),
     'id': GObject.ParamSpec.string(
       'id', 'id', 'The ID of the menu item. ',
+      GObject.ParamFlags.READWRITE, 'image-missing'),
+    'activatable': GObject.ParamSpec.boolean(
+      'activatable', 'activatable', 'This is usually true for real leaf nodes of the ' + 
+      'menu hierarchy. ',
       GObject.ParamFlags.READWRITE, 'image-missing')
   },
   Signals: {}

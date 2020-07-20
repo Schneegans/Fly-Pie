@@ -232,23 +232,21 @@ var Menu = class Menu {
 
       // Now we update position and the number of wedges of the SelectionWedges
       // according to the newly active item.
-      if (child.getChildMenuItems().length > 0) {
-        const itemAngles = [];
-        child.getChildMenuItems().forEach(item => {
-          itemAngles.push(item.angle);
-        });
+      const itemAngles = [];
+      child.getChildMenuItems().forEach(item => {
+        itemAngles.push(item.angle);
+      });
 
-        this._selectionWedges.setItemAngles(itemAngles, (child.angle + 180) % 360);
-        this._selectionWedges.set_translation(
-            clampedX - this._background.x, clampedY - this._background.y, 0);
-      }
+      this._selectionWedges.setItemAngles(itemAngles, (child.angle + 180) % 360);
+      this._selectionWedges.set_translation(
+          clampedX - this._background.x, clampedY - this._background.y, 0);
 
       // This recursively redraws all children based on their newly assigned state.
       this._root.redraw();
 
-      // Finally, if a child was selected which has no children, we report a selection and
+      // Finally, if a child was selected which is activatable, we report a selection and
       // hide the entire menu.
-      if (child.getChildMenuItems().length == 0) {
+      if (child.activatable) {
         this._onSelect(this._menuID, child.id);
         this._background.set_easing_delay(
             this._settings.get_double('easing-duration') * 1000);
@@ -391,8 +389,13 @@ var Menu = class Menu {
 
     // Create all visible Clutter.Actors for the items.
     const createMenuItem = (item) => {
-      const menuItem = new MenuItem(
-          {id: item.id, name: item.name, icon: item.icon, angle: item.angle});
+      const menuItem = new MenuItem({
+        id: item.id,
+        name: item.name,
+        icon: item.icon,
+        angle: item.angle,
+        activatable: item.children == undefined
+      });
 
       if (item.children) {
         item.children.forEach(child => {
@@ -457,10 +460,11 @@ var Menu = class Menu {
     // parameter is the corresponding MenuItem of the currently open menu. If no
     // corresponding item exists, this will be a newly created MenuItem.
     const updateMenuItem = (newItem, oldItem) => {
-      oldItem.id    = newItem.id;
-      oldItem.name  = newItem.name;
-      oldItem.icon  = newItem.icon;
-      oldItem.angle = newItem.angle;
+      oldItem.id          = newItem.id;
+      oldItem.name        = newItem.name;
+      oldItem.icon        = newItem.icon;
+      oldItem.angle       = newItem.angle;
+      oldItem.activatable = newItem.children == undefined;
 
       const oldChildren = new Set(oldItem.getChildMenuItems());
 
@@ -501,16 +505,18 @@ var Menu = class Menu {
               id: newChild.id,
               name: newChild.name,
               icon: newChild.icon,
-              angle: newChild.angle
+              angle: newChild.angle,
+              activatable: newChild.children == undefined
             });
             oldItem.addMenuItem(newChild.oldChild);
             newChild.oldChild.onSettingsChange(this._settings);
 
           } else {
-            newChild.oldChild.id    = newChild.id;
-            newChild.oldChild.name  = newChild.name;
-            newChild.oldChild.icon  = newChild.icon;
-            newChild.oldChild.angle = newChild.angle;
+            newChild.oldChild.id          = newChild.id;
+            newChild.oldChild.name        = newChild.name;
+            newChild.oldChild.icon        = newChild.icon;
+            newChild.oldChild.angle       = newChild.angle;
+            newChild.oldChild.activatable = newChild.children == undefined;
           }
         });
 
@@ -619,15 +625,18 @@ var Menu = class Menu {
       structure.icon = 'image-missing';
     }
 
-    // Calculate and verify all item angles.
-    structure.angle = 0;
-    if (!this._updateItemAngles(structure.children)) {
-      return DBusInterface.errorCodes.eInvalidAngles;
-    }
+    structure.angle       = 0;
+    structure.id          = '/';
+    structure.activatable = false;
 
-    // Assign an ID to each item.
-    structure.id = '/';
-    this._updateItemIDs(structure.children);
+    // Calculate and verify all item angles and assign an ID to each item.
+    if (structure.children) {
+      if (!this._updateItemAngles(structure.children)) {
+        return DBusInterface.errorCodes.eInvalidAngles;
+      }
+
+      this._updateItemIDs(structure.children);
+    }
 
     return 0;
   }
