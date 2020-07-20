@@ -415,7 +415,7 @@ var Menu = class Menu {
     // Create all visible Clutter.Actors for the items.
     const createMenuItem = (item) => {
       const menuItem = new MenuItem(
-          {id: item.id, caption: item.name, icon: item.icon, angle: item.angle});
+          {id: item.id, name: item.name, icon: item.icon, angle: item.angle});
 
       if (item.children) {
         item.children.forEach(child => {
@@ -471,10 +471,125 @@ var Menu = class Menu {
       return result;
     }
 
-    // Usually, at most one property of an item will be changed (name, icon, angle or
-    // children). If more than one changed, it's quite likely that an item was added,
-    // removed or moved. But actually we don't know, so this guess will not be correct in
-    // all cases.
+    // Usually, at most one property of an item will be changed (name or icon). If more
+    // than one changed, it's quite likely that an item was added, removed or moved. But
+    // actually we don't know, so this guess will not be correct in all cases.
+
+    const updateMenuItem = (structure, item) => {
+      item.id    = structure.id;
+      item.name  = structure.name;
+      item.icon  = structure.icon;
+      item.angle = structure.angle;
+
+      const oldChildren = new Set(item.getChildMenuItems());
+
+      if (structure.children) {
+
+        // First, we iterate through all new children an try to find for each an old child
+        // with the same name and icon. If one exists, this is used for the new child.
+        structure.children.forEach(newChild => {
+          for (let oldChild of oldChildren) {
+            if (oldChild.name == newChild.name && oldChild.icon == newChild.icon) {
+              newChild.oldChild = oldChild;
+              oldChildren.delete(oldChild);
+              break;
+            }
+          }
+        });
+
+        // Then, for each new child which does not have a corresponding old child
+        // assigned, we try to find one for which at least the name or the icon is the
+        // same.
+        structure.children.forEach(newChild => {
+          if (newChild.oldChild == undefined) {
+            for (let oldChild of oldChildren) {
+              if (oldChild.name == newChild.name || oldChild.icon == newChild.icon) {
+                newChild.oldChild = oldChild;
+                oldChildren.delete(oldChild);
+                break;
+              }
+            }
+          }
+        });
+
+        // And new MenuItems are created for those new children which do not have a
+        // corresponding old MenuItem. For all others, all settings are updated.
+        structure.children.forEach(newChild => {
+          if (newChild.oldChild == undefined) {
+            newChild.oldChild = new MenuItem({
+              id: newChild.id,
+              name: newChild.name,
+              icon: newChild.icon,
+              angle: newChild.angle
+            });
+            item.addMenuItem(newChild.oldChild);
+            newChild.oldChild.onSettingsChange(this._settings);
+
+          } else {
+            newChild.oldChild.id    = newChild.id;
+            newChild.oldChild.name  = newChild.name;
+            newChild.oldChild.icon  = newChild.icon;
+            newChild.oldChild.angle = newChild.angle;
+          }
+        });
+
+        // Then we have to reorder the new children according to their new order.
+        for (let i = 0; i < structure.children.length; i++) {
+          item.setChildMenuItemIndex(structure.children[i].oldChild, i);
+        }
+      }
+
+      // Then, all remaining old MenuItems are deleted.
+      for (let oldChild of oldChildren) {
+        item.removeMenuItem(oldChild);
+
+        if (this._menuSelectionChain.includes(oldChild)) {
+          let removedElement;
+          do {
+            removedElement = this._menuSelectionChain.shift();
+          } while (removedElement != oldChild);
+        }
+      }
+
+      // Continue recursively
+      if (structure.children) {
+        for (let i = 0; i < structure.children.length; i++) {
+          updateMenuItem(structure.children[i], structure.children[i].oldChild);
+        }
+      }
+    };
+
+    // This recursively updates all children based on the settings in structure.
+    updateMenuItem(structure, this._root);
+
+    // This recursively redraws all children based on their newly assigned state.
+    this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
+    for (let i = 1; i < this._menuSelectionChain.length; i++) {
+      let activeChildIndex = 0;
+      const siblings       = this._menuSelectionChain[i].getChildMenuItems();
+      for (let j = 0; j < siblings.length; j++) {
+        if (this._menuSelectionChain[i - 1] == siblings[j]) {
+          activeChildIndex = j;
+          break;
+        }
+      }
+      this._menuSelectionChain[i].setState(MenuItemState.PARENT, activeChildIndex);
+    }
+    this._root.redraw();
+
+
+    // Set the wedge angles of the SelectionWedges according to the new item structure.
+    const itemAngles = [];
+    this._menuSelectionChain[0].getChildMenuItems().forEach(item => {
+      itemAngles.push(item.angle);
+    });
+
+    if (this._menuSelectionChain.length > 0) {
+      this._selectionWedges.setItemAngles(
+          itemAngles, (this._menuSelectionChain[0].angle + 180) % 360);
+    } else {
+      this._selectionWedges.setItemAngles(itemAngles);
+    }
 
     return 0;
   }
