@@ -11,11 +11,12 @@
 const {Gio, GLib} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
-const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const Menu          = Me.imports.daemon.Menu.Menu;
+const Shortcuts     = Me.imports.daemon.Shortcuts.Shortcuts;
+const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const utils         = Me.imports.common.utils;
 const ItemRegistry  = Me.imports.common.ItemRegistry;
-const Shortcuts     = Me.imports.daemon.Shortcuts.Shortcuts;
+const DefaultMenu   = Me.imports.settings.DefaultMenu.DefaultMenu;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
@@ -68,6 +69,26 @@ var Daemon = class Daemon {
     // Create a settings object and listen for menu configuration changes. Once the
     // configuration changes, we bind all the configured shortcuts.
     this._settings = utils.createSettings();
+
+    // Store the new menu configuration.
+    let json                = this._settings.get_string('menu-configuration');
+    let createDefaultConfig = false;
+
+    try {
+      const config = JSON.parse(json);
+      if (!Array.isArray(config) || config.length == 0) {
+        createDefaultConfig = true;
+      }
+    } catch {
+      createDefaultConfig = true;
+    }
+
+    // Add default menu if non is configured.
+    if (createDefaultConfig) {
+      this._settings.set_string(
+          'menu-configuration', JSON.stringify([DefaultMenu.get()]));
+    }
+
     this._settings.connect(
         'changed::menu-configuration', () => this._onMenuConfigsChanged());
     this._onMenuConfigsChanged();
