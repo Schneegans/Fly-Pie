@@ -55,8 +55,10 @@ var SettingsTypes = {
 //                 default name of newly created items of this type.                    //
 //   icon:         The icon name used in the add-new-item popover. It is also the       //
 //                 default icon of newly created items of this type.                    //
-//   description:  This will be shown as small text in the add-new-item popover.        //
+//   subtitle:     This will be shown as small text in the add-new-item popover.        //
 //                 Keep it short or use line breaks, else the popover will get wide.    //
+//   description:  This will be shown in the right hand side settings when an item of   //
+//                 this type is selected.                                               //
 //   settingsType: This determines which widgets are visible when an item of this type  //
 //                 is selected in the settings dialog. See documentation above.         //
 //   settingsList: The Glade name of the list in the add-new-item popover where this    //
@@ -72,7 +74,9 @@ var ItemTypes = {
     name: 'Toplevel Menu',
     icon: 'view-more-symbolic',
     defaultData: '',
-    description: 'Create as many as you want!',
+    subtitle: 'Create as many as you want!',
+    description:
+        'A <b>Toplevel Menu</b> can contain any number of menu items and submenus. However, for precise item selection, a maximum number of twelve items is recommended.\nThe menu can be opened using the shortcut defined above. It is also possible to open a menu with a terminal command. You can read more on <a href="https://github.com/Schneegans/Swing-Pie">Github</a>.',
     settingsType: SettingsTypes.MENU,
     settingsList: 'menu-types-list',
     createItem: (name, icon) => {
@@ -85,7 +89,9 @@ var ItemTypes = {
     name: 'Activate Shortcut',
     icon: 'accessories-character-map',
     defaultData: '',
-    description: 'Simulates a key stroke.',
+    subtitle: 'Simulates a key stroke.',
+    description:
+        'The <b>Activate Shortcut</b> action simulates a key stroke when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations',
     settingsType: SettingsTypes.SHORTCUT,
     settingsList: 'action-types-list',
     createItem: (name, icon, angle, data) => {
@@ -106,7 +112,9 @@ var ItemTypes = {
     name: 'Launch Application',
     icon: 'utilities-terminal',
     defaultData: '',
-    description: 'Runs any shell command.',
+    subtitle: 'Runs any shell command.',
+    description:
+        'The <b>Launch Application</b> action executes any given command. This is primarily used to open applications but may have plenty of other use cases as well.',
     settingsType: SettingsTypes.COMMAND,
     settingsList: 'action-types-list',
     createItem: (name, icon, angle, data) => {
@@ -130,11 +138,13 @@ var ItemTypes = {
 
   // The Url action opens the define URL in the system's default web browser. Despite its
   // name it can actually open any URI.
-  Url: {
-    name: 'Open URL',
+  Uri: {
+    name: 'Open URI',
     icon: 'applications-internet',
     defaultData: 'https://github.com/Schneegans/Swing-Pie',
-    description: 'Opens an URL with the default browser.',
+    subtitle: 'Opens an URI with the default applications.',
+    description:
+        'When the <b>Open URI</b> action is activated, the above URI is opened with the default application. For http URLs, this will be your web browser. However, it is also possible to open other URIs such as "mailto:foo@bar.org".',
     settingsType: SettingsTypes.URL,
     settingsList: 'action-types-list',
     createItem: (name, icon, angle, data) => {
@@ -159,7 +169,9 @@ var ItemTypes = {
     name: 'Open File',
     icon: 'text-x-generic',
     defaultData: '',
-    description: 'Opens a file with the default applications.',
+    subtitle: 'Opens a file with the default applications.',
+    description:
+        'The <b>Open File</b> action will open the above specified file with your system\'s default application.',
     settingsType: SettingsTypes.FILE,
     settingsList: 'action-types-list',
     createItem: (name, icon, angle, data) => {
@@ -188,7 +200,9 @@ var ItemTypes = {
     name: 'Custom Submenu',
     icon: 'view-more-horizontal-symbolic',
     defaultData: '',
-    description: 'Add structure to your menu!',
+    subtitle: 'Add structure to your menu!',
+    description:
+        'The <b>Custom Submenu</b> can be used to group actions together. As deep hierarchies can be selected quite efficiently, feel free to create submenus in submenus!',
     settingsType: SettingsTypes.SUBMENU,
     settingsList: 'submenu-types-list',
     createItem: (name, icon, angle, data) => {
@@ -201,7 +215,9 @@ var ItemTypes = {
     name: 'Bookmarks',
     icon: 'folder',
     defaultData: '',
-    description: 'Shows your commonly used directories.',
+    subtitle: 'Shows your commonly used directories.',
+    description:
+        'The <b>Bookmarks</b> submenu shows an item for the main directories in your home directory.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
     createItem: (name, icon, angle, data) => {
@@ -262,7 +278,9 @@ var ItemTypes = {
     name: 'Running Apps',
     icon: 'preferences-system-windows',
     defaultData: '',
-    description: 'Shows the currently running applications.',
+    subtitle: 'Shows the currently running applications.',
+    description:
+        'The <b>Running Apps</b> submenu shows all currently running applications. This is similar to the Alt+Tab window selection. As the entries change position frequently, this is actually not very effective.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
     createItem: (name, icon, angle, data) => {
@@ -291,7 +309,9 @@ var ItemTypes = {
     name: 'Recent Files',
     icon: 'document-open-recent',
     defaultData: '7',
-    description: 'Shows your recently used files.',
+    subtitle: 'Shows your recently used files.',
+    description:
+        'The <b>Recent Files</b> submenu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number.',
     settingsType: SettingsTypes.COUNT,
     settingsList: 'submenu-types-list',
     createItem: (name, icon, angle, data) => {
@@ -327,7 +347,9 @@ var ItemTypes = {
     name: 'Frequently Used',
     icon: 'emblem-favorite',
     defaultData: '7',
-    description: 'Shows your frequently used applications.',
+    subtitle: 'Shows your frequently used applications.',
+    description:
+        'The <b>Frequently Used</b> submenu shows a list of frequently used applications. You should limit the maximum number of shown applications to a reasonable number.',
     settingsType: SettingsTypes.COUNT,
     settingsList: 'submenu-types-list',
     createItem: (name, icon, angle, data) => {
@@ -355,7 +377,9 @@ var ItemTypes = {
     name: 'Favorites',
     icon: 'starred',
     defaultData: '',
-    description: 'Shows your pinned applications.',
+    subtitle: 'Shows your pinned applications.',
+    description:
+        'The <b>Favorites</b> submenu the applications you have pinned to Gnome-Shell\'s Dash.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
     createItem: (name, icon, angle, data) => {
@@ -383,9 +407,9 @@ var ItemTypes = {
     name: 'Main Menu',
     icon: 'applications-system',
     defaultData: '',
-    description: 'Shows all installed applications.\n' +
-        'Usually, this is very cluttered;\n' +
-        'you should rather setup your own menus!',
+    subtitle: 'Shows all installed applications.',
+    description:
+        'The <b>Main Menu</b> shows all installed applications. Usually, this is very cluttered as many sections contain too many items to be used efficiently. You should rather setup your own menus!',
     settingsList: 'submenu-types-list',
     settingsType: SettingsTypes.NONE,
     createItem: (name, icon, angle, data) => {

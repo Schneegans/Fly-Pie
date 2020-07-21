@@ -1107,7 +1107,7 @@
                                             <property name="can_focus">False</property>
                                             <property name="halign">start</property>
                                             <property name="vexpand">True</property>
-                                            <property name="label" translatable="yes">Generate Random</property>
+                                            <property name="label" translatable="yes">Generate Random Preset</property>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -5720,6 +5720,95 @@ the current item will be selected.</property>
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkRevealer" id="item-settings-angle-revealer">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="transition_type">slide-up</property>
+                        <property name="transition_duration">200</property>
+                        <child>
+                          <object class="GtkBox" id="box5">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_top">20</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="spacing">10</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="label" translatable="yes">Fixed Angle</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">end</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="label" translatable="yes">See tooltip for details.</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSpinButton" id="spinbutton2">
+                                <property name="width_request">200</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="tooltip_markup" translatable="yes">Fixed angles can be used to ensure that an item remains at the same position even if other items are added or removed. This way you can edit a menu even if your muscles already learned the item's direction.
+
+However, there is a &lt;b&gt;restriction&lt;/b&gt; on the fixed angles. Inside a menu the fixed angles must be monotonically increasing, that is each fixed angle must be larger than any previous fixed angle.
+
+In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&gt; if an item is dragged to another position in the menu.
+
+&lt;b&gt;Use -1 to disable this feature&lt;/b&gt;.</property>
+                                <property name="text" translatable="yes">-1</property>
+                                <property name="input_purpose">alpha</property>
+                                <property name="adjustment">item-angle</property>
+                                <property name="numeric">True</property>
+                                <property name="value">-1</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkRevealer" id="item-settings-command-revealer">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -5831,7 +5920,7 @@ the current item will be selected.</property>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
                     <child>
@@ -5946,11 +6035,11 @@ the current item will be selected.</property>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">4</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkRevealer" id="item-settings-url-revealer">
+                      <object class="GtkRevealer" id="item-settings-uri-revealer">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="transition_type">slide-up</property>
@@ -5973,7 +6062,7 @@ the current item will be selected.</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">URL</property>
+                                    <property name="label" translatable="yes">URI</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -5987,7 +6076,7 @@ the current item will be selected.</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">end</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">It will be opened with your browser.</property>
+                                    <property name="label" translatable="yes">It will be opened with the default app.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -6006,11 +6095,11 @@ the current item will be selected.</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="item-url">
+                              <object class="GtkEntry" id="item-uri">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="hexpand">True</property>
-                                <property name="placeholder_text" translatable="yes">URL</property>
+                                <property name="placeholder_text" translatable="yes">URI</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -6024,7 +6113,7 @@ the current item will be selected.</property>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                       </packing>
                     </child>
                     <child>
@@ -6093,95 +6182,6 @@ the current item will be selected.</property>
                                 <property name="adjustment">item-count</property>
                                 <property name="numeric">True</property>
                                 <property name="value">4</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">6</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkRevealer" id="item-settings-angle-revealer">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="transition_type">slide-up</property>
-                        <property name="transition_duration">200</property>
-                        <child>
-                          <object class="GtkBox" id="box5">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="margin_top">20</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">5</property>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">10</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Fixed Angle</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">See tooltip for details.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSpinButton" id="spinbutton2">
-                                <property name="width_request">200</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="tooltip_markup" translatable="yes">Fixed angles can be used to ensure that an item remains at the same position even if other items are added or removed. This way you can edit a menu even if your muscles already learned the item's direction.
-
-However, there is a &lt;b&gt;restriction&lt;/b&gt; on the fixed angles. Inside a menu the fixed angles must be monotonically increasing, that is each fixed angle must be larger than any previous fixed angle.
-
-In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&gt; if an item is dragged to another position in the menu.
-
-&lt;b&gt;Use -1 to disable this feature&lt;/b&gt;.</property>
-                                <property name="text" translatable="yes">-1</property>
-                                <property name="input_purpose">alpha</property>
-                                <property name="adjustment">item-angle</property>
-                                <property name="numeric">True</property>
-                                <property name="value">-1</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -6266,7 +6266,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="can_focus">False</property>
                                     <child>
                                       <object class="GtkListBoxRow" id="item-shortcut-select">
-                                        <property name="height_request">65</property>
+                                        <property name="height_request">50</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
@@ -6376,7 +6376,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="can_focus">False</property>
                                     <child>
                                       <object class="GtkListBoxRow" id="menu-shortcut-select">
-                                        <property name="height_request">65</property>
+                                        <property name="height_request">50</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
@@ -6418,17 +6418,34 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkLabel" id="item-description">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_top">20</property>
+                        <property name="label" translatable="yes">label</property>
+                        <property name="use_markup">True</property>
+                        <property name="wrap">True</property>
+                        <property name="max_width_chars">0</property>
+                        <property name="xalign">0</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">10</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkRevealer" id="info-label-revealer">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="valign">end</property>
                         <property name="transition_type">crossfade</property>
                         <child>
                           <object class="GtkLabel" id="info-label">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">center</property>
-                            <property name="valign">end</property>
                             <property name="label" translatable="yes">label</property>
                             <property name="use_markup">True</property>
                             <property name="justify">center</property>
@@ -6444,7 +6461,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                       <packing>
                         <property name="expand">True</property>
                         <property name="fill">True</property>
-                        <property name="position">10</property>
+                        <property name="position">11</property>
                       </packing>
                     </child>
                   </object>

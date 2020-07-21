@@ -143,16 +143,16 @@ var MenuEditor = class MenuEditor {
         const icon =
             new Gtk.Image({icon_name: ItemRegistry.ItemTypes[type].icon, icon_size: 24});
         const name = new Gtk.Label({label: ItemRegistry.ItemTypes[type].name, xalign: 0});
-        const description = new Gtk.Label({
-          label: '<small>' + ItemRegistry.ItemTypes[type].description + '</small>',
+        const subtitle = new Gtk.Label({
+          label: '<small>' + ItemRegistry.ItemTypes[type].subtitle + '</small>',
           use_markup: true,
           xalign: 0
         });
-        description.get_style_context().add_class('dim-label');
+        subtitle.get_style_context().add_class('dim-label');
 
         grid.attach(icon, 0, 0, 1, 2);
         grid.attach(name, 1, 0, 1, 1);
-        grid.attach(description, 1, 1, 1, 1);
+        grid.attach(subtitle, 1, 1, 1, 1);
 
         row.add(grid);
         row.show_all();
@@ -373,9 +373,9 @@ var MenuEditor = class MenuEditor {
         this._setSelected('NAME', widget.text);
       });
 
-      // Store the item's URL in the tree store's DATA column when the text of the
+      // Store the item's URI in the tree store's DATA column when the text of the
       // corresponding input field is changed.
-      this._builder.get_object('item-url').connect('notify::text', (widget) => {
+      this._builder.get_object('item-uri').connect('notify::text', (widget) => {
         this._setSelected('DATA', widget.text);
       });
 
@@ -500,20 +500,22 @@ var MenuEditor = class MenuEditor {
           'item-settings-angle-revealer': false,
           'item-settings-item-shortcut-revealer': false,
           'item-settings-count-revealer': false,
-          'item-settings-url-revealer': false,
+          'item-settings-uri-revealer': false,
           'item-settings-command-revealer': false,
           'item-settings-file-revealer': false
         };
 
         if (somethingSelected) {
 
-          // The item's name and the item's icon name have to be updated in any case if
+          const selectedType         = this._getSelected('TYPE');
+          const selectedSettingsType = ItemRegistry.ItemTypes[selectedType].settingsType;
+
+          // The item's name, icon and description have to be updated in any case if
           // something is selected.
           this._builder.get_object('icon-name').text = this._getSelected('ICON');
           this._builder.get_object('item-name').text = this._getSelected('NAME');
-
-          const selectedType         = this._getSelected('TYPE');
-          const selectedSettingsType = ItemRegistry.ItemTypes[selectedType].settingsType;
+          this._builder.get_object('item-description').label =
+              ItemRegistry.ItemTypes[selectedType].description;
 
           // If the selected item is a top-level menu, the DATA column contains its
           // shortcut.
@@ -534,8 +536,8 @@ var MenuEditor = class MenuEditor {
             revealers['item-settings-item-shortcut-revealer'] = true;
 
           } else if (selectedSettingsType == ItemRegistry.SettingsTypes.URL) {
-            this._builder.get_object('item-url').text = this._getSelected('DATA');
-            revealers['item-settings-url-revealer']   = true;
+            this._builder.get_object('item-uri').text = this._getSelected('DATA');
+            revealers['item-settings-uri-revealer']   = true;
 
           } else if (selectedSettingsType == ItemRegistry.SettingsTypes.FILE) {
             this._builder.get_object('item-file').text = this._getSelected('DATA');
@@ -695,8 +697,9 @@ var MenuEditor = class MenuEditor {
     const tips = [
       'You should try to have no more than twelve items in your menus.',
       'You will find it more easy to learn item positions if you have an even number of entries. Four, six and eight are good numbers.',
-      'Suggestions can be posted on <a href="https://github.com/Schneegans/Swing-Pie/issues">Github</a>',
-      'Bugs can be reported on <a href="https://github.com/Schneegans/Swing-Pie/issues">Github</a>',
+      'The source code of Swing-Pie is available on <a href="https://github.com/Schneegans/Swing-Pie">Github</a>.',
+      'Suggestions can be posted on <a href="https://github.com/Schneegans/Swing-Pie/issues">Github</a>.',
+      'Bugs can be reported on <a href="https://github.com/Schneegans/Swing-Pie/issues">Github</a>.',
       'Deep hierarchies are pretty efficient. Put submenus into submenus in submenus!'
     ];
 
