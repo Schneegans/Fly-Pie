@@ -7,6 +7,10 @@
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![comments](https://img.shields.io/badge/Comments-29.3%25-green.svg)](cloc.sh)
 
+
+
+# Some Notes
+
 ```bash
 journalctl /usr/bin/gnome-shell -f -o cat | grep swingpie -B 2 -A 2
 
@@ -28,6 +32,16 @@ gdbus call --session --dest org.gnome.Shell                    \
     {"name": "Doughnut", "icon":"🍩", "id":"b"}                \
   ]}'
 ```
+
+# What others say about Swing-Pie
+
+> Priceless!
+>
+> &mdash; *The Great Gatspie*
+
+> Simply marvelous!
+>
+> &mdash; *Lord Pieron*
 
 # Contributing to Swing-Pie
 
