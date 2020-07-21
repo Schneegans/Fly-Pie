@@ -20,28 +20,6 @@ var ExampleMenu = class ExampleMenu {
           icon: '😀',
           children: [
             {
-              name: 'Hands',
-              icon: '👋',
-              children: [
-                {name: 'Raised Hand', icon: '✋'},
-                {name: 'Thumbs Up', icon: '👍'},
-                {name: 'Thumbs Down', icon: '👎'},
-                {name: 'Clapping Hands', icon: '👏'},
-                {name: 'Horns', icon: '🤘'},
-              ]
-            },
-            {
-              name: 'Cloths',
-              icon: '👕',
-              children: [
-                {name: 'Necktie', icon: '👔'},
-                {name: 'Dress', icon: '👗'},
-                {name: 'Bikini', icon: '👙'},
-                {name: 'Cap', icon: '🧢'},
-                {name: 'Socks', icon: '🧦'},
-              ]
-            },
-            {
               name: 'Happy Faces',
               icon: '😁',
               children: [
@@ -78,19 +56,8 @@ var ExampleMenu = class ExampleMenu {
         },
         {
           name: 'Animals & Nature',
-          icon: '🌸',
+          icon: '🌾',
           children: [
-            {
-              name: 'Trees',
-              icon: '🍁🌲',
-              children: [
-                {name: 'Seedling', icon: '🌱'},
-                {name: 'Evergreen Tree', icon: '🌲'},
-                {name: 'Deciduous Tree', icon: '🌳'},
-                {name: 'Palm Tree', icon: '🌴'},
-                {name: 'Cactus', icon: '🌵'},
-              ]
-            },
             {
               name: 'Flowers',
               icon: '🥀',
@@ -100,17 +67,6 @@ var ExampleMenu = class ExampleMenu {
                 {name: 'Sunflower', icon: '🌻'},
                 {name: 'Blossom', icon: '🌼'},
                 {name: 'Bouquet', icon: '💐'},
-              ]
-            },
-            {
-              name: 'Fish',
-              icon: '🐬',
-              children: [
-                {name: 'Whale', icon: '🐋'},
-                {name: 'Shark', icon: '🦈'},
-                {name: 'Tropical Fish', icon: '🐠'},
-                {name: 'Blowfish', icon: '🐡'},
-                {name: 'Octopus', icon: '🐙'},
               ]
             },
             {
@@ -139,11 +95,11 @@ var ExampleMenu = class ExampleMenu {
         },
         {
           name: 'Food & Drink',
-          icon: '🌭',
+          icon: '🍔',
           children: [
             {
               name: 'Fruit',
-              icon: '🍏',
+              icon: '🥝',
               children: [
                 {name: 'Apple', icon: '🍏'},
                 {name: 'Watermelon', icon: '🍉'},
@@ -154,7 +110,7 @@ var ExampleMenu = class ExampleMenu {
             },
             {
               name: 'Drink',
-              icon: '☕',
+              icon: '🍷',
               children: [
                 {name: 'Teacup', icon: '🍵'},
                 {name: 'Coffee', icon: '☕'},
@@ -165,7 +121,7 @@ var ExampleMenu = class ExampleMenu {
             },
             {
               name: 'Sweets',
-              icon: '🍬',
+              icon: '🍭',
               children: [
                 {name: 'Shortcake', icon: '🍰'},
                 {name: 'Candy', icon: '🍬'},
@@ -174,59 +130,26 @@ var ExampleMenu = class ExampleMenu {
                 {name: 'Chocolate', icon: '🍫'},
               ]
             },
-            {
-              name: 'Vegetables',
-              icon: '🍅',
-              children: [
-                {name: 'Tomato', icon: '🍅'},
-                {name: 'Aubergine', icon: '🍆'},
-                {name: 'Maize', icon: '🌽'},
-                {name: 'Avocado', icon: '🥑'},
-                {name: 'Cucumber', icon: '🥒'},
-              ]
-            },
-            {
-              name: 'Fast Food',
-              icon: '🍔',
-              children: [
-                {name: 'Popcorn', icon: '🍿'},
-                {name: 'French Fries', icon: '🍟'},
-                {name: 'Burrito', icon: '🌯'},
-                {name: 'Hamburger', icon: '🍔'},
-                {name: 'Hot Dog', icon: '🌭'},
-              ]
-            },
           ]
         },
         {
           name: 'Activities',
-          icon: '⚽',
+          icon: '🏆',
           children: [
             {
-              name: 'Balls',
-              icon: '👍',
+              name: 'Games',
+              icon: '🎲',
               children: [
-                {name: 'Basketball', icon: '🏀'},
-                {name: 'Football', icon: '🏈'},
-                {name: 'Baseball', icon: '⚾'},
-                {name: 'Soccer Ball', icon: '⚽'},
-                {name: 'Volleyball', icon: '🏐'},
-              ]
-            },
-            {
-              name: 'Trophies',
-              icon: '🏆',
-              children: [
-                {name: 'Golden Trophy', icon: '🏆'},
-                {name: 'Sports Medal', icon: '🏅'},
-                {name: 'First Place', icon: '🥇'},
-                {name: 'Second Place', icon: '🥈'},
-                {name: 'Third Place', icon: '🥉'},
+                {name: 'Billards', icon: '🎱'},
+                {name: 'Mahjong', icon: '🀄'},
+                {name: 'Bowling', icon: '🎳'},
+                {name: 'Darts', icon: '🎯'},
+                {name: 'Video Game', icon: '🎮'},
               ]
             },
             {
               name: 'Sports',
-              icon: '🎾',
+              icon: '⚽',
               children: [
                 {name: 'Cricket', icon: '🏏'},
                 {name: 'Ice Hockey', icon: '🏒'},
@@ -240,32 +163,21 @@ var ExampleMenu = class ExampleMenu {
               icon: '🗼',
               children: [
                 {name: 'Mount Fuji', icon: '🗻'},
-                {name: 'Tokyo Tower', icon: '🗼'},
+                {name: 'Mount Etna', icon: '🌋'},
                 {name: 'Statue of Liberty', icon: '🗽'},
                 {name: 'Japan', icon: '🗾'},
                 {name: 'Moyai', icon: '🗿'},
-              ]
-            },
-            {
-              name: 'Games',
-              icon: '🎮',
-              children: [
-                {name: 'Billards', icon: '🎱'},
-                {name: 'Dice', icon: '🎲'},
-                {name: 'Bowling', icon: '🎳'},
-                {name: 'Darts', icon: '🎯'},
-                {name: 'Video Game', icon: '🎮'},
               ]
             },
           ]
         },
         {
           name: 'Objects',
-          icon: '🏠🚗',
+          icon: '🚜',
           children: [
             {
               name: 'Cars',
-              icon: '🚗',
+              icon: '🚔',
               children: [
                 {name: 'Bus', icon: '🚌'},
                 {name: 'Fire Engine', icon: '🚒'},
@@ -286,28 +198,6 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
-              name: 'Books',
-              icon: '📔',
-              children: [
-                {name: 'Ledger', icon: '📒'},
-                {name: 'Notebook', icon: '📓'},
-                {name: 'Green Book', icon: '📗'},
-                {name: 'Blue Book', icon: '📘'},
-                {name: 'Orange Book', icon: '📙'},
-              ]
-            },
-            {
-              name: 'Devices',
-              icon: '📱',
-              children: [
-                {name: 'Fax Machine', icon: '📠'},
-                {name: 'Camera', icon: '📷'},
-                {name: 'Television', icon: '📺'},
-                {name: 'Radio', icon: '📻'},
-                {name: 'Video Camera', icon: '📹'},
-              ]
-            },
-            {
               name: 'Instruments',
               icon: '🎻',
               children: [
@@ -325,28 +215,6 @@ var ExampleMenu = class ExampleMenu {
           icon: '♍',
           children: [
             {
-              name: 'Clocks',
-              icon: '🕘',
-              children: [
-                {name: 'Two O\'Clock', icon: '🕑'},
-                {name: 'Four O\'Clock', icon: '🕓'},
-                {name: 'Six O\'Clock', icon: '🕕'},
-                {name: 'Eight O\'Clock', icon: '🕗'},
-                {name: 'Ten O\'Clock', icon: '🕥'},
-              ]
-            },
-            {
-              name: 'Moon States',
-              icon: '🌖',
-              children: [
-                {name: 'New Moon', icon: '🌑'},
-                {name: 'First Quarter', icon: '🌓'},
-                {name: 'Full Moon', icon: '🌕'},
-                {name: 'Last Quarter', icon: '🌗'},
-                {name: 'Happy Moon', icon: '🌝'},
-              ]
-            },
-            {
               name: 'Star Signs',
               icon: '♈',
               children: [
@@ -361,11 +229,11 @@ var ExampleMenu = class ExampleMenu {
               name: 'Arrows',
               icon: '🔁',
               children: [
+                {name: 'Up', icon: '⏫'},
                 {name: 'Right', icon: '⏩'},
+                {name: 'Twisted', icon: '🔀'},
                 {name: 'Down', icon: '⏬'},
                 {name: 'Left', icon: '⏪'},
-                {name: 'Up', icon: '⏫'},
-                {name: 'Twisted', icon: '🔀'},
               ]
             },
             {
