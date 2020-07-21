@@ -560,6 +560,9 @@ var MenuEditor = class MenuEditor {
         utils.notification('Failed to update menu editor selection: ' + error);
       }
     });
+
+    // Initialize the tip-display label.
+    this._initInfoLabel();
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -628,7 +631,7 @@ var MenuEditor = class MenuEditor {
       }
       row.grab_add();
       label.set_accelerator('');
-      label.set_disabled_text('Press the shortcut! (ESC to cancel, BackSpace to unbind)');
+      label.set_disabled_text('Press the shortcut!\nESC to cancel, BackSpace to unbind');
     };
 
     // This function cancels any previous grab. The label's disabled-text is reset to "Not
@@ -681,6 +684,36 @@ var MenuEditor = class MenuEditor {
     // Return the label - this wouldn't be necessary if we could create the
     // Gtk.ShortcutLabel directly in Glade.
     return label;
+  }
+
+  // There is a small label in the menu editor which shows random tips at regular
+  // intervals.
+  _initInfoLabel() {
+    const revealer = this._builder.get_object('info-label-revealer');
+    const label    = this._builder.get_object('info-label');
+
+    const tips = [
+      'You should try to have no more than twelve items in your menus.',
+      'You will find it more easy to learn item positions if you have an even number of entries. Four, six and eight are good numbers.',
+      'Suggestions can be posted on <a href="https://github.com/Schneegans/Swing-Pie/issues">Github</a>',
+      'Bugs can be reported on <a href="https://github.com/Schneegans/Swing-Pie/issues">Github</a>',
+      'Deep hierarchies are pretty efficient. Put submenus into submenus in submenus!'
+    ];
+
+    // Every eight seconds we hide the current tip...
+    GLib.timeout_add(GLib.PRIORITY_DEFAULT, 8000, () => {
+      revealer.reveal_child = false;
+
+      // ...  and show a new tip some milliseconds later.
+      GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
+        label.label           = tips[Math.floor(Math.random() * tips.length)];
+        revealer.reveal_child = true;
+        return false;
+      });
+
+      // Don't show new tips when the window got closed.
+      return label.get_toplevel().visible;
+    });
   }
 
   // This adds a new menu item to the currently selected menu. If a top-level menu or a
