@@ -295,9 +295,16 @@ var Daemon = class Daemon {
           // If that was successful, store the structure.
           if (result >= 0) {
             this._currentMenuStructure = structure;
+            return;
           }
+
+          break;
         }
       }
+
+      // Something went wrong in updating the preview. Let's hide it.
+      this._onCancel(this._menu.getID());
+      this._menu.hide();
     }
   }
 

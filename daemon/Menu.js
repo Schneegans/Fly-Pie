@@ -135,7 +135,7 @@ var Menu = class Menu {
     // This is fired when the close button of the preview mode is clicked.
     this._background.connect('close-event', () => {
       this._onCancel(this._menuID);
-      this._hide();
+      this.hide();
     });
 
     // All interaction with the menu happens through the SelectionWedges. They receive
@@ -250,7 +250,7 @@ var Menu = class Menu {
         this._onSelect(this._menuID, child.id);
         this._background.set_easing_delay(
             this._settings.get_double('easing-duration') * 1000);
-        this._hide();
+        this.hide();
         this._background.set_easing_delay(0);
       }
     });
@@ -326,7 +326,7 @@ var Menu = class Menu {
     // This is usually fired when the right mouse button is pressed.
     this._selectionWedges.connect('cancel-selection-event', () => {
       this._onCancel(this._menuID);
-      this._hide();
+      this.hide();
     });
 
     // Whenever settings are changed, we adapt the currently shown menu accordingly.
@@ -435,6 +435,26 @@ var Menu = class Menu {
     }
 
     return this._menuID;
+  }
+
+  // Hides the menu and the background actor.
+  hide() {
+
+    // The menu is not active; nothing to be done.
+    if (this._menuID == null) {
+      return;
+    }
+
+    // Fade out the background actor. Once this transition is completed, the _root item
+    // will be destroyed by the background's "transitions-completed" signal handler.
+    this._background.hide();
+
+    // Rest menu ID. With this set to null, we can accept new menu requests.
+    this._menuID = null;
+
+    // Reset some other members.
+    this._draggedChild       = null;
+    this._menuSelectionChain = [];
   }
 
   // This is called when the menu configuration is changed while the menu is open. We
@@ -586,26 +606,6 @@ var Menu = class Menu {
   }
 
   // ----------------------------------------------------------------------- private stuff
-
-  // Hides the menu and the background actor.
-  _hide() {
-
-    // The menu is not active; nothing to be done.
-    if (this._menuID == null) {
-      return;
-    }
-
-    // Fade out the background actor. Once this transition is completed, the _root item
-    // will be destroyed by the background's "transitions-completed" signal handler.
-    this._background.hide();
-
-    // Rest menu ID. With this set to null, we can accept new menu requests.
-    this._menuID = null;
-
-    // Reset some other members.
-    this._draggedChild       = null;
-    this._menuSelectionChain = [];
-  }
 
   // This assigns IDs and angles to each and every item. It also ensures that the root
   // item has a name and an icon set.
