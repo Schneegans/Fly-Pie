@@ -8,6 +8,8 @@
 
 'use strict';
 
+const Gio = imports.gi.Gio;
+
 // This creates a default menu configuration which is used when the user has no menus
 // configured.
 
@@ -33,6 +35,13 @@ var DefaultMenu = class DefaultMenu {
       children: []
     };
     root.children.push(apps);
+
+    apps.children.push(this._getAppForMimeType('text/plain'));
+    apps.children.push(this._getAppForMimeType('audio/ogg'));
+    apps.children.push(this._getAppForMimeType('video/ogg'));
+    apps.children.push(this._getAppForMimeType('image/jpg'));
+    apps.children.push(this._getAppForUri('http'));
+    apps.children.push(this._getAppForUri('mailto'));
 
     apps.children.push({
       name: 'Swing-Pie Settings',
@@ -166,5 +175,28 @@ var DefaultMenu = class DefaultMenu {
     });
 
     return root;
+  }
+
+
+  static _getAppForMimeType(mimeType) {
+    const info = Gio.AppInfo.get_default_for_type(mimeType, false);
+    return {
+      name: info.get_display_name(),
+      icon: info.get_icon().to_string(),
+      type: 'Command',
+      data: info.get_commandline(),
+      angle: -1
+    };
+  }
+
+  static _getAppForUri(uri) {
+    const info = Gio.AppInfo.get_default_for_uri_scheme(uri);
+    return {
+      name: info.get_display_name(),
+      icon: info.get_icon().to_string(),
+      type: 'Command',
+      data: info.get_commandline(),
+      angle: -1
+    };
   }
 }
