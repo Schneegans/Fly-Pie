@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Main    = imports.ui.main;
-const Clutter = imports.gi.Clutter;
+const Main           = imports.ui.main;
+const {Clutter, Gdk} = imports.gi;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.common.utils;
@@ -75,6 +75,15 @@ var Menu = class Menu {
     // Menu to the individual MenuItems.
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
+
+    // Hide the menu when the escape key is pressed.
+    this._background.connect('key-press-event', (actor, event) => {
+      if (event.get_key_symbol() == Clutter.KEY_Escape && this._menuID != null) {
+        this._onCancel(this._menuID);
+        this.hide();
+      }
+      return Clutter.EVENT_STOP;
+    });
 
     // Forward button release events to the SelectionWedges.
     this._background.connect('button-release-event', (actor, event) => {
