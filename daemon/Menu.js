@@ -713,15 +713,15 @@ var Menu = class Menu {
 
     // If no item has a fixed angle, we assign one to the first item. If there is no
     // parent item, this is on the top (0°). Else, the angular space will be evenly
-    // distributed to all child items and the first item will be the one with the smallest
-    // absolute angle (being closest to the top).
+    // distributed to all child items and the first item will be the one closest to the
+    // top.
     if (fixedAngles.length == 0) {
       let firstAngle = 0;
       if (parentAngle != undefined) {
         const wedgeSize  = 360 / (items.length + 1);
         let minAngleDiff = 360;
         for (let i = 0; i < items.length; i++) {
-          const angle     = parentAngle + (i + 1) * wedgeSize;
+          const angle     = (parentAngle + (i + 1) * wedgeSize) % 360;
           const angleDiff = Math.min(angle, 360 - angle);
 
           if (angleDiff < minAngleDiff) {
