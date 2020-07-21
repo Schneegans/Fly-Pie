@@ -929,62 +929,75 @@ var MenuEditor = class MenuEditor {
 
   // This stores a JSON representation of the entire menu store in the
   // "menu-configuration" key of the application settings. This is called whenever
-  // something is changed in the menu store.
+  // something is changed in the menu store. It does not update the settings
+  // instantaneously, it rather waits a few milliseconds for any additional changes.
   _saveMenuConfiguration() {
 
-    try {
+    // The configuration changed again. Cancel any pending save tasks...
+    if (this._saveSettingsTimeout != null) {
+      GLib.source_remove(this._saveSettingsTimeout);
+      this._saveSettingsTimeout = null;
+    }
 
-      // This is called recursively.
-      const addChildren = (parent, parentIter) => {
-        // Recursively add all children.
-        const count = this._store.iter_n_children(parentIter);
+    // ... and launch a new one.
+    this._saveSettingsTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
+      this._saveSettingsTimeout = null;
+      try {
 
-        if (count > 0) {
-          parent.children = [];
-        }
+        // This is called recursively.
+        const addChildren = (parent, parentIter) => {
+          // Recursively add all children.
+          const count = this._store.iter_n_children(parentIter);
 
-        for (let i = 0; i < count; ++i) {
-          const iter = this._store.iter_nth_child(parentIter, i)[1];
-          let item   = {
+          if (count > 0) {
+            parent.children = [];
+          }
+
+          for (let i = 0; i < count; ++i) {
+            const iter = this._store.iter_nth_child(parentIter, i)[1];
+            let item   = {
+              name: this._get(iter, 'NAME'),
+              icon: this._get(iter, 'ICON'),
+              type: this._get(iter, 'TYPE'),
+              data: this._get(iter, 'DATA'),
+              angle: this._get(iter, 'ANGLE_OR_ID')
+            };
+
+            parent.children.push(item);
+
+            addChildren(item, iter);
+          }
+        };
+
+        // The top level JSON element is an array containing all menus.
+        let menus      = [];
+        let [ok, iter] = this._store.get_iter_first();
+
+        while (ok) {
+          let menu = {
             name: this._get(iter, 'NAME'),
             icon: this._get(iter, 'ICON'),
             type: this._get(iter, 'TYPE'),
-            data: this._get(iter, 'DATA'),
-            angle: this._get(iter, 'ANGLE_OR_ID')
+            shortcut: this._get(iter, 'DATA'),
+            id: this._get(iter, 'ANGLE_OR_ID'),
+            children: []
           };
 
-          parent.children.push(item);
+          menus.push(menu);
+          addChildren(menu, iter);
 
-          addChildren(item, iter);
+          ok = this._store.iter_next(iter);
         }
-      };
 
-      // The top level JSON element is an array containing all menus.
-      let menus      = [];
-      let [ok, iter] = this._store.get_iter_first();
+        // Save the configuration as JSON!
+        this._settings.set_string('menu-configuration', JSON.stringify(menus));
 
-      while (ok) {
-        let menu = {
-          name: this._get(iter, 'NAME'),
-          icon: this._get(iter, 'ICON'),
-          type: this._get(iter, 'TYPE'),
-          shortcut: this._get(iter, 'DATA'),
-          id: this._get(iter, 'ANGLE_OR_ID'),
-          children: []
-        };
-
-        menus.push(menu);
-        addChildren(menu, iter);
-
-        ok = this._store.iter_next(iter);
+      } catch (error) {
+        utils.notification('Failed to save menu configuration: ' + error);
       }
 
-      // Save the configuration as JSON!
-      this._settings.set_string('menu-configuration', JSON.stringify(menus));
-
-    } catch (error) {
-      utils.notification('Failed to save menu configuration: ' + error);
-    }
+      return false;
+    });
   }
 
 
