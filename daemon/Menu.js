@@ -679,6 +679,18 @@ var Menu = class Menu {
       }
     });
 
+    // Make sure that the parent link does not collide with a fixed item. For now, we
+    // just move the fixed angle a tiny bit. This is somewhat error-prone as it may
+    // collide with another fixed angle now. Maybe this could be solved in a better way?
+    // Maybe some global minimum angular spacing of items?
+    if (parentAngle != undefined) {
+      for (let i = 0; i < fixedAngles.length; i++) {
+        if (Math.abs(fixedAngles[i].angle - parentAngle) < 0.0001) {
+          fixedAngles[i].angle += 0.1;
+        }
+      }
+    }
+
     // Make sure that the fixed angles increase monotonically and are between 0° and 360°.
     for (let i = 0; i < fixedAngles.length; i++) {
       if (i > 0 && fixedAngles[i].angle <= fixedAngles[i - 1].angle) {
@@ -690,20 +702,10 @@ var Menu = class Menu {
       }
     }
 
-    // Make sure that the parent link does not collide with a fixed item. For now, we
-    // consider a difference of less than 1° a collision.
-    if (parentAngle != undefined) {
-      for (let i = 0; i < fixedAngles.length; i++) {
-        if (Math.abs(fixedAngles[i].angle - parentAngle) < 1.0) {
-          return false;
-        }
-      }
-    }
-
     // If no item has a fixed angle, we assign one to the first item. If there is no
-    // parent item, this is on the top. Else, the angular space will be evenly distributed
-    // to all child items and the first item will be the one with the smallest absolute
-    // angle.
+    // parent item, this is on the top (0°). Else, the angular space will be evenly
+    // distributed to all child items and the first item will be the one with the smallest
+    // absolute angle (being closest to the top).
     if (fixedAngles.length == 0) {
       let firstAngle = 0;
       if (parentAngle != undefined) {
