@@ -108,8 +108,7 @@ class MenuItem extends Clutter.Actor {
 
     // The state this MenuItem currently is in. This can be changed with setState(). To
     // reflect the new state, a redraw() will be required.
-    this._state     = MenuItemState.INVISIBLE;
-    this._lastState = MenuItemState.INVISIBLE;
+    this._state = MenuItemState.INVISIBLE;
 
     // This will be set to false upon the first call to redraw(). It is used to initialize
     // the MenuItem's appearance without animations.
@@ -208,8 +207,7 @@ class MenuItem extends Clutter.Actor {
 
     // Store the state and the active child's index as members. They will be used during
     // the next call to redraw().
-    this._lastState = this._state;
-    this._state     = state;
+    this._state = state;
 
     if (activeChildIndex != undefined) {
       this._activeChildIndex = activeChildIndex;
@@ -268,11 +266,6 @@ class MenuItem extends Clutter.Actor {
   // Returns the current MenuItemState.
   getState() {
     return this._state;
-  }
-
-  // Returns the MenuItemState thiswas in before the last call to setState().
-  getLastState() {
-    return this._lastState;
   }
 
   // This is called once after construction and then whenever something in the appearance
@@ -601,12 +594,15 @@ class MenuItem extends Clutter.Actor {
       if (tx) x = tx.interval.final;
       if (ty) y = ty.interval.final;
 
-      // If the active child was dragged around, the rotation of the trace is already more
-      // or less correct, so we can use a transition. Else the trace actor will be
-      // pointing into a completely different direction, hence we should use no
-      // transition.
+      // In most cases we can use a transition to rotate the trace. However, when the
+      // active child is currently being dragged around or the trace is currently
+      // invisible, we should use no transition.
       let rotationEasingDuration = this._settings.easingDuration;
-      if (child.getLastState() != MenuItemState.CHILD_DRAGGED) rotationEasingDuration = 0;
+      if (child.getState() == MenuItemState.CHILD_DRAGGED || this._trace == undefined ||
+          this._trace.opacity == 0) {
+
+        rotationEasingDuration = 0;
+      }
 
       // The length of the trace should always be transitioned.
       const lengthEasingDuration = this._settings.easingDuration;
