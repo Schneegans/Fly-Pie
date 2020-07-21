@@ -876,9 +876,10 @@ var MenuEditor = class MenuEditor {
           }
           this._set(
               iter, 'DISPLAY_NAME',
-              '<b>' + data + '</b>\n<small>' + shortcut + '</small>');
+              '<b>' + GLib.markup_escape_text(data, -1) + '</b>\n<small>' + shortcut +
+                  '</small>');
         } else {
-          this._set(iter, 'DISPLAY_NAME', data);
+          this._set(iter, 'DISPLAY_NAME', GLib.markup_escape_text(data, -1));
         }
       }
 
