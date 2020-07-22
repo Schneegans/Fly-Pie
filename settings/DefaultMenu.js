@@ -10,193 +10,217 @@
 
 const Gio = imports.gi.Gio;
 
-// This creates a default menu configuration which is used when the user has no menus
-// configured.
+//////////////////////////////////////////////////////////////////////////////////////////
+// This creates a default menu configuration which is used when the user has no menus   //
+// configured.                                                                          //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 var DefaultMenu = class DefaultMenu {
 
+  // -------------------------------------------------------------------- public interface
+
+  // Most parts of the menu are hard-coded. Some applications however are chosen based on
+  // the user's defaults.
   static get() {
-    let root = {
+
+    const textEditor  = this._getForMimeType('text/plain');
+    const audioPlayer = this._getForMimeType('audio/ogg');
+    const videoPlayer = this._getForMimeType('video/ogg');
+    const imageViewer = this._getForMimeType('image/jpg');
+    const browser     = this._getForUri('http');
+    const mailClient  = this._getForUri('mailto');
+
+    return {
       name: 'Example Menu',
-      type: 'Menu',
       icon: '🌟️',
+      type: 'Menu',
+      shortcut: '<Primary>4',
       id: 0,
-      shortcut: '<Primary>space',
-      children: []
-    };
-
-
-    let apps = {
-      name: 'Default Apps',
-      icon: 'emblem-favorite',
-      type: 'Submenu',
-      data: '',
-      angle: -1,
-      children: []
-    };
-    root.children.push(apps);
-
-    apps.children.push(this._getAppForMimeType('text/plain'));
-    apps.children.push(this._getAppForMimeType('audio/ogg'));
-    apps.children.push(this._getAppForMimeType('video/ogg'));
-    apps.children.push(this._getAppForMimeType('image/jpg'));
-    apps.children.push(this._getAppForUri('http'));
-    apps.children.push(this._getAppForUri('mailto'));
-
-    apps.children.push({
-      name: 'Swing-Pie Settings',
-      icon: 'gnome-settings',
-      type: 'Command',
-      data: 'gnome-extensions prefs swingpie@schneegans.github.com',
-      angle: -1
-    });
-
-    root.children.push({
-      name: 'Gnome-Shell',
-      icon: 'gnome-foot',
-      type: 'Submenu',
-      data: '',
-      angle: -1,
       children: [
         {
-          name: 'Up',
-          icon: '🔼️',
-          type: 'Shortcut',
-          data: '<Primary><Alt>Up',
-          angle: 0
+          name: 'Sound',
+          icon: 'multimedia-audio-player',
+          type: 'Submenu',
+          children: [
+            {
+              name: 'Play / Pause',
+              icon: '⏯️',
+              type: 'Shortcut',
+              data: 'AudioPlay',
+            },
+            {
+              name: 'Mute',
+              icon: '🔈️',
+              type: 'Shortcut',
+              data: 'AudioMute',
+            },
+            {
+              name: 'Next Title',
+              icon: '⏩️',
+              type: 'Shortcut',
+              data: 'AudioNext',
+              angle: 90
+            },
+            {
+              name: 'Previous Title',
+              icon: '⏪️',
+              type: 'Shortcut',
+              data: 'AudioPrev',
+              angle: 270
+            }
+          ]
         },
         {
-          name: 'Overview',
-          icon: '💠️',
-          type: 'Shortcut',
-          data: '<Super>s',
-          angle: -1
+          name: 'Window Management',
+          icon: 'preferences-system-windows',
+          type: 'Submenu',
+          children: [
+            {
+              name: 'Maximize Window',
+              icon: 'view-fullscreen',
+              type: 'Shortcut',
+              data: '<Alt>F10',
+            },
+            {
+              name: 'Open Windows',
+              icon: 'preferences-system-windows',
+              type: 'RunningApps',
+            },
+            {
+              name: 'Gnome-Shell',
+              icon: 'gnome-foot',
+              type: 'Submenu',
+              children: [
+                {
+                  name: 'Up',
+                  icon: '🔼️',
+                  type: 'Shortcut',
+                  data: '<Primary><Alt>Up',
+                  angle: 0
+                },
+                {
+                  name: 'Overview',
+                  icon: '💠️',
+                  type: 'Shortcut',
+                  data: '<Super>s',
+                },
+                {
+                  name: 'Show Apps',
+                  icon: 'view-grid',
+                  type: 'Shortcut',
+                  data: '<Super>a',
+                },
+                {
+                  name: 'Down',
+                  icon: '🔽️',
+                  type: 'Shortcut',
+                  data: '<Primary><Alt>Down',
+                  angle: 180
+                }
+              ]
+            },
+            {
+              name: 'Minimize Window',
+              icon: 'go-bottom',
+              type: 'Shortcut',
+              data: '<Super>h',
+            },
+            {
+              name: 'Close Window',
+              icon: 'window-close',
+              type: 'Shortcut',
+              data: '<Alt>F4',
+            }
+          ]
         },
         {
-          name: 'Down',
-          icon: '🔽️',
-          type: 'Shortcut',
-          data: '<Primary><Alt>Down',
-          angle: 180
+          name: 'Bookmarks',
+          icon: 'folder',
+          type: 'Bookmarks',
         },
         {
-          name: 'Show Apps',
-          icon: 'view-grid',
-          type: 'Shortcut',
-          data: '<Super>a',
-          angle: -1
+          name: 'Default Apps',
+          icon: 'emblem-favorite',
+          type: 'Submenu',
+          children: [
+            {
+              name: 'Internet',
+              icon: 'applications-internet',
+              type: 'Submenu',
+              children: [
+                browser,
+                mailClient,
+              ]
+            },
+            {
+              name: 'Multimedia',
+              icon: 'applications-multimedia',
+              type: 'Submenu',
+              children: [
+                audioPlayer,
+                videoPlayer,
+                imageViewer,
+              ]
+            },
+            {
+              name: 'Utilities',
+              icon: 'applications-accessories',
+              type: 'Submenu',
+              children: [
+                textEditor, {
+                  name: 'Swing-Pie Settings',
+                  icon: 'gnome-settings',
+                  type: 'Command',
+                  data: 'gnome-extensions prefs swingpie@schneegans.github.com',
+                },
+                {
+                  name: 'Terminal',
+                  icon: 'org.gnome.Terminal',
+                  type: 'Command',
+                  data: 'gnome-terminal',
+                },
+                {
+                  name: 'Files',
+                  icon: 'org.gnome.Nautilus',
+                  type: 'Command',
+                  data: 'nautilus --new-window %U',
+                },
+                {
+                  name: 'GNOME System Monitor',
+                  icon: 'org.gnome.SystemMonitor',
+                  type: 'Command',
+                  data: 'gnome-system-monitor',
+                }
+              ]
+            }
+          ]
         }
       ]
-    });
-
-    root.children.push({
-      name: 'Shortcuts',
-      icon: 'gnome-foot',
-      type: 'Submenu',
-      data: '',
-      angle: -1,
-      children: [
-        {
-          name: 'Undo',
-          icon: '🔼️',
-          type: 'Shortcut',
-          data: '<Primary>z',
-          angle: -1,
-        },
-      ]
-    });
-
-    root.children.push({
-      name: 'Open Windows',
-      icon: 'preferences-system-windows',
-      type: 'RunningApps',
-      data: '',
-      angle: -1
-    });
-
-    root.children.push({
-      name: 'Bookmarks',
-      icon: 'folder',
-      type: 'Bookmarks',
-      data: '',
-      angle: -1,
-    });
-
-    root.children.push({
-      name: 'Sound',
-      icon: 'multimedia-audio-player',
-      type: 'Submenu',
-      data: '',
-      angle: -1,
-      children: [
-        {
-          name: 'Increase Volume',
-          icon: '🔊️',
-          type: 'Shortcut',
-          data: 'AudioRaiseVolume',
-          angle: 0
-        },
-        {
-          name: 'Mute',
-          icon: '🔈️',
-          type: 'Shortcut',
-          data: 'AudioMute',
-          angle: -1,
-        },
-        {
-          name: 'Next Title',
-          icon: '⏩️',
-          type: 'Shortcut',
-          data: 'AudioNext',
-          angle: 90
-        },
-        {
-          name: 'Descrease Volume',
-          icon: '🔉️',
-          type: 'Shortcut',
-          data: 'AudioLowerVolume',
-          angle: 180
-        },
-        {
-          name: 'Play / Pause',
-          icon: '⏯️',
-          type: 'Shortcut',
-          data: 'AudioPlay',
-          angle: -1
-        },
-        {
-          name: 'Previous Title',
-          icon: '⏪️',
-          type: 'Shortcut',
-          data: 'AudioPrev',
-          angle: 270
-        }
-      ]
-    });
-
-    return root;
+    };
   }
 
+  // ----------------------------------------------------------------------- private stuff
 
-  static _getAppForMimeType(mimeType) {
-    const info = Gio.AppInfo.get_default_for_type(mimeType, false);
+  // Returns an action configuration for an application which is default for the given
+  // mime type. For example, "text/plain" will result in an action for Gedit on many
+  // systems.
+  static _getForMimeType(mimeType) {
+    return this._getForAppInfo(Gio.AppInfo.get_default_for_type(mimeType, false));
+  }
+
+  // Returns an action configuration for an application which is default for the given uri
+  // scheme. For example, "http" will result in an action for Firefox on many systems.
+  static _getForUri(uri) {
+    return this._getForAppInfo(Gio.AppInfo.get_default_for_uri_scheme(uri));
+  }
+
+  // Returns an action configuration for the given Gio.AppInfo.
+  static _getForAppInfo(info) {
     return {
       name: info.get_display_name(),
       icon: info.get_icon().to_string(),
       type: 'Command',
-      data: info.get_commandline(),
-      angle: -1
-    };
-  }
-
-  static _getAppForUri(uri) {
-    const info = Gio.AppInfo.get_default_for_uri_scheme(uri);
-    return {
-      name: info.get_display_name(),
-      icon: info.get_icon().to_string(),
-      type: 'Command',
-      data: info.get_commandline(),
-      angle: -1
+      data: info.get_commandline()
     };
   }
 }
