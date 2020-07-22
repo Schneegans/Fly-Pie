@@ -10,8 +10,9 @@
 
 const {Gio, GLib, Gtk, GMenu} = imports.gi;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.common.utils;
+const ByteArray = imports.byteArray;
+const Me        = imports.misc.extensionUtils.getCurrentExtension();
+const utils     = Me.imports.common.utils;
 
 // We import Shell and InputManipulator optionally. When this file is included from the
 // client side, these are available and can be used in the activation code of the actions
@@ -217,55 +218,85 @@ var ItemTypes = {
     defaultData: '',
     subtitle: 'Shows your commonly used directories.',
     description:
-        'The <b>Bookmarks</b> submenu shows an item for the main directories in your home directory.',
+        'The <b>Bookmarks</b> submenu shows an item for the trash, your desktop and each bookmarked directory.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
     createItem: (name, icon, angle, data) => {
-      const pushFile = (menu, file) => {
-        let name, icon;
-        try {
-          const info = file.query_info('standard::display-name', 0, null);
-          name       = info.get_display_name();
-        } catch (e) {
-          name = file.get_basename();
-        }
+      // Adds an action for the given (file://) uri to the children list of the given menu
+      // item. The name parameter is optional and will be used if given. Else the name of
+      // the file defined by the uri is used.
+      const pushForUri = (menu, uri, name) => {
+        // First check wether the file actually exists.
+        const file = Gio.File.new_for_uri(uri);
+        if (file.query_exists(null)) {
 
-        try {
-          const info = file.query_info('standard::icon', 0, null);
-          icon       = info.get_icon().to_string();
-        } catch (e) {
-          icon = 'missing-image';
-        }
-
-        menu.children.push({
-          name: name,
-          icon: icon,
-          activate: () => {
-            let ctx = global.create_app_launch_context(0, -1);
-
+          // If no name is given, query the display name.
+          if (name == undefined) {
             try {
-              Gio.AppInfo.launch_default_for_uri(file.get_uri(), ctx);
-            } catch (error) {
-              utils.notification('Failed to open "%s": %s'.format(this.name, error));
+              const info = file.query_info('standard::display-name', 0, null);
+              name       = info.get_display_name();
+            } catch (e) {
+              name = file.get_basename();
             }
           }
-        });
+
+          // Try tgo retrieve an icon for the file.
+          let icon = 'missing-image';
+          try {
+            const info = file.query_info('standard::icon', 0, null);
+            icon       = info.get_icon().to_string();
+          } catch (e) {
+          }
+
+          // Push the new item.
+          menu.children.push({
+            name: name,
+            icon: icon,
+            activate: () => {
+              // Open the file with the default application.
+              try {
+                let ctx = global.create_app_launch_context(0, -1);
+                Gio.AppInfo.launch_default_for_uri(uri, ctx);
+              } catch (error) {
+                utils.notification('Failed to open "%s": %s'.format(this.name, error));
+              }
+            }
+          });
+        }
       };
 
-      let result = {name: name, icon: icon, angle: angle, children: []};
+      // Create the submenu for all the bookmarks.
+      const result = {name: name, icon: icon, angle: angle, children: []};
 
-      pushFile(result, Gio.File.new_for_path(GLib.get_home_dir()));
+      // Add the trash entry.
+      pushForUri(result, 'trash://');
 
-      const DEFAULT_DIRECTORIES = [
-        GLib.UserDirectory.DIRECTORY_DESKTOP, GLib.UserDirectory.DIRECTORY_DOCUMENTS,
-        GLib.UserDirectory.DIRECTORY_DOWNLOAD, GLib.UserDirectory.DIRECTORY_MUSIC,
-        GLib.UserDirectory.DIRECTORY_PICTURES, GLib.UserDirectory.DIRECTORY_TEMPLATES,
-        GLib.UserDirectory.DIRECTORY_PUBLIC_SHARE, GLib.UserDirectory.DIRECTORY_VIDEOS
-      ];
+      // Add the desktop entry.
+      pushForUri(
+          result,
+          'file://' + GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP));
 
-      for (let i = 0; i < DEFAULT_DIRECTORIES.length; ++i) {
-        let path = GLib.get_user_special_dir(DEFAULT_DIRECTORIES[i]);
-        pushFile(result, Gio.File.new_for_path(path));
+      // Read the gtk bookmarks file and add an entry for each line.
+      const bookmarksFile = GLib.get_home_dir() + '/.config/gtk-3.0/bookmarks';
+      try {
+        const [ok, bookmarks] = GLib.file_get_contents(bookmarksFile);
+
+        if (ok) {
+          // Split the content at line breaks.
+          ByteArray.toString(bookmarks).split(/\r?\n/).forEach(uri => {
+            // Some lines contain an alias for the bookmark. This alias starts at the
+            // first space of the line.
+            const firstSpace = uri.indexOf(' ');
+
+            if (firstSpace >= 0) {
+              pushForUri(result, uri.slice(0, firstSpace), uri.slice(firstSpace + 1));
+            } else {
+              pushForUri(result, uri);
+            }
+          });
+        }
+      } catch (error) {
+        utils.debug(error);
       }
 
       return result;
