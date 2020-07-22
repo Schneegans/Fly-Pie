@@ -287,7 +287,6 @@
   </object>
   <object class="GtkPopover" id="icon-popover">
     <property name="width_request">650</property>
-    <property name="height_request">400</property>
     <property name="can_focus">False</property>
     <child>
       <object class="GtkGrid">
@@ -5509,7 +5508,7 @@ the current item will be selected.</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="vexpand">True</property>
-                <property name="transition_type">slide-left</property>
+                <property name="transition_type">slide-right</property>
                 <property name="transition_duration">200</property>
                 <child>
                   <object class="GtkBox">
@@ -5551,7 +5550,6 @@ the current item will be selected.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="hexpand">True</property>
                                 <property name="label" translatable="yes">Name</property>
                               </object>
                               <packing>
@@ -5565,7 +5563,6 @@ the current item will be selected.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">end</property>
-                                <property name="hexpand">True</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -5585,7 +5582,6 @@ the current item will be selected.</property>
                         </child>
                         <child>
                           <object class="GtkEntry" id="item-name">
-                            <property name="height_request">36</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="secondary_icon_name">face-smile-symbolic</property>
@@ -5625,7 +5621,6 @@ the current item will be selected.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="hexpand">True</property>
                                 <property name="label" translatable="yes">Icon</property>
                               </object>
                               <packing>
@@ -5639,7 +5634,6 @@ the current item will be selected.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">end</property>
-                                <property name="hexpand">True</property>
                                 <property name="label" translatable="yes">Can be an icon name, text, emoji or a file.</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -5689,7 +5683,6 @@ the current item will be selected.</property>
                               <object class="GtkEntry" id="icon-name">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
                                 <property name="secondary_icon_name">face-smile-symbolic</property>
                                 <property name="secondary_icon_tooltip_text" translatable="yes">Insert Emoji</property>
                                 <property name="secondary_icon_tooltip_markup" translatable="yes">Insert Emoji</property>
@@ -5697,7 +5690,7 @@ the current item will be selected.</property>
                                 <property name="show_emoji_icon">True</property>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
+                                <property name="expand">True</property>
                                 <property name="fill">True</property>
                                 <property name="position">1</property>
                               </packing>
@@ -5742,7 +5735,6 @@ the current item will be selected.</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Fixed Angle</property>
                                   </object>
                                   <packing>
@@ -5756,7 +5748,6 @@ the current item will be selected.</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">end</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">See tooltip for details.</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -5777,7 +5768,6 @@ the current item will be selected.</property>
                             </child>
                             <child>
                               <object class="GtkSpinButton" id="spinbutton2">
-                                <property name="width_request">200</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="tooltip_markup" translatable="yes">Fixed angles can be used to ensure that an item remains at the same position even if other items are added or removed. This way you can edit a menu even if your muscles already learned the item's direction.
@@ -5831,7 +5821,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Command</property>
                                   </object>
                                   <packing>
@@ -5845,7 +5834,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">end</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Use the button to list installed apps!</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -5895,11 +5883,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                   <object class="GtkEntry" id="item-command">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="hexpand">True</property>
                                     <property name="placeholder_text" translatable="yes">Command</property>
                                   </object>
                                   <packing>
-                                    <property name="expand">False</property>
+                                    <property name="expand">True</property>
                                     <property name="fill">True</property>
                                     <property name="position">1</property>
                                   </packing>
@@ -5946,7 +5933,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">File</property>
                                   </object>
                                   <packing>
@@ -5960,7 +5946,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">end</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">It will be opened with the default app.</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -6010,11 +5995,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                   <object class="GtkEntry" id="item-file">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
-                                    <property name="hexpand">True</property>
                                     <property name="placeholder_text" translatable="yes">File</property>
                                   </object>
                                   <packing>
-                                    <property name="expand">False</property>
+                                    <property name="expand">True</property>
                                     <property name="fill">True</property>
                                     <property name="position">1</property>
                                   </packing>
@@ -6061,7 +6045,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">URI</property>
                                   </object>
                                   <packing>
@@ -6075,7 +6058,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">end</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">It will be opened with the default app.</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -6098,7 +6080,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <object class="GtkEntry" id="item-uri">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
                                 <property name="placeholder_text" translatable="yes">URI</property>
                               </object>
                               <packing>
@@ -6139,7 +6120,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Max Item Count</property>
                                   </object>
                                   <packing>
@@ -6153,7 +6133,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">end</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Limits the number of children.</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -6174,7 +6153,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                             </child>
                             <child>
                               <object class="GtkSpinButton" id="spinbutton1">
-                                <property name="width_request">200</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="text" translatable="yes">4</property>
@@ -6221,7 +6199,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Shortcut</property>
                                   </object>
                                   <packing>
@@ -6235,7 +6212,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">end</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">This shortcut will be simulated.</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -6331,7 +6307,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Shortcut</property>
                                   </object>
                                   <packing>
@@ -6345,7 +6320,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">end</property>
-                                    <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">This will open the menu.</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -6469,8 +6443,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="pack_type">end</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
