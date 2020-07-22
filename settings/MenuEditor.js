@@ -700,7 +700,8 @@ var MenuEditor = class MenuEditor {
       'The source code of Swing-Pie is available on <a href="https://github.com/Schneegans/Swing-Pie">Github</a>.',
       'Suggestions can be posted on <a href="https://github.com/Schneegans/Swing-Pie/issues">Github</a>.',
       'Bugs can be reported on <a href="https://github.com/Schneegans/Swing-Pie/issues">Github</a>.',
-      'Deep hierarchies are pretty efficient. Put submenus into submenus in submenus!'
+      'Deep hierarchies are pretty efficient. Put submenus into submenus in submenus!',
+      'If you delete all Pies, log out and log in again, the default configuration will be restored.'
     ];
 
     // Every eight seconds we hide the current tip...
