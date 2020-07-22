@@ -1052,11 +1052,17 @@ var MenuEditor = class MenuEditor {
             const child = parent.children[j];
             const iter  = this._store.append(parentIter);
 
-            this._set(iter, 'ICON', child.icon);
-            this._set(iter, 'NAME', child.name);
-            this._set(iter, 'TYPE', child.type);
-            this._set(iter, 'DATA', child.data);
-            this._set(iter, 'ANGLE_OR_ID', child.angle);
+            const icon  = child.icon != undefined ? child.icon : '';
+            const name  = child.name != undefined ? child.name : '';
+            const type  = child.type != undefined ? child.type : '';
+            const data  = child.data != undefined ? child.data : '';
+            const angle = child.angle != undefined ? child.angle : -1;
+
+            this._set(iter, 'ICON', icon);
+            this._set(iter, 'NAME', name);
+            this._set(iter, 'TYPE', type);
+            this._set(iter, 'DATA', data);
+            this._set(iter, 'ANGLE_OR_ID', angle);
 
             parseChildren(child, iter);
           }

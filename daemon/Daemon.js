@@ -251,8 +251,13 @@ var Daemon = class Daemon {
   // item for "Bookmarks", the menu structure actually contains all of the bookmarks as
   // individual items.
   _transformConfig(config) {
-    const result = ItemRegistry.ItemTypes[config.type].createItem(
-        config.name, config.icon, config.angle, config.data);
+    const icon  = config.icon != undefined ? config.icon : '';
+    const name  = config.name != undefined ? config.name : '';
+    const type  = config.type != undefined ? config.type : '';
+    const data  = config.data != undefined ? config.data : '';
+    const angle = config.angle != undefined ? config.angle : -1;
+
+    const result = ItemRegistry.ItemTypes[type].createItem(name, icon, angle, data);
 
     // Load all children recursively.
     if (config.children) {
