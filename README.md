@@ -61,9 +61,7 @@ For now, here are some hints to ease your path to become a master Pielot:
 
 ### Bake Your First Pie Menu!
 
-<p style="width:200px; float:right">
-  <img src ="resources/menu-editor.png" />
-</p>
+<img align="right" width="250px" src ="resources/menu-editor.png" />
 
 While the default menu may give you the opportunity to play around with Fly-Pie, you will have to define your own menus!
 
