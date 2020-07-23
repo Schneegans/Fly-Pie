@@ -105,25 +105,19 @@ var DefaultMenu = class DefaultMenu {
                   data: '<Super>s',
                 },
                 {
-                  name: 'Show Apps',
-                  icon: 'view-grid',
-                  type: 'Shortcut',
-                  data: '<Super>a',
-                },
-                {
                   name: 'Down',
                   icon: '🔽️',
                   type: 'Shortcut',
                   data: '<Primary><Alt>Down',
                   angle: 180
+                },
+                {
+                  name: 'Show Apps',
+                  icon: 'view-grid',
+                  type: 'Shortcut',
+                  data: '<Super>a',
                 }
               ]
-            },
-            {
-              name: 'Minimize Window',
-              icon: 'go-bottom',
-              type: 'Shortcut',
-              data: '<Super>h',
             },
             {
               name: 'Close Window',
