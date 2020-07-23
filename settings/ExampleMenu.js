@@ -88,7 +88,7 @@ var ExampleMenu = class ExampleMenu {
                 {name: 'Snake', icon: '🐍'},
                 {name: 'Turtle', icon: '🐢'},
                 {name: 'T-Rex', icon: '🦖'},
-                {name: 'Apathosaurus', icon: '🦕'},
+                {name: 'Apatosaurus', icon: '🦕'},
               ]
             },
           ]
