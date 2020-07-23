@@ -1,5 +1,5 @@
 <p align="center"> 
-  <img src ="logo.gif" />
+  <img src ="resources/logo.gif" />
 </p>
 
 [![check](https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Fly-Pie/actions)
