@@ -8,7 +8,7 @@
 [![comments](https://img.shields.io/badge/Comments-32.0%25-green.svg)](cloc.sh)
 
 **Fly-Pie** is an attractive marking menu for Gnome-Shell.
-It features a continuous learning curve which lets you gradually ascend from a crappie menu rookie to a glorious master <sub><sup>(wait for it)</sub></sup> *Pielot*.
+It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.
 (You got it? Like pilot, but with a :cake:).
 
 # Getting Started
