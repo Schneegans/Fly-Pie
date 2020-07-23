@@ -58,6 +58,7 @@ For now, here are some hints to ease your path to become a master Pielot:
 * You can **click anywhere in an item's wedge**. It does not matter whether you click directly on an item or at the edge of your screen as long as you are in the same wedge.
 * To enter **Marking Mode**, click and drag an item. As soon as you pause dragging or make a turn, the item will be selected. **This way you can select items with gestures!**
 * Try remembering the path to an item. Open the menu and **draw the path with your mouse**. You can start with individual segments of the path, put you can also try to draw the entire path!
+* You may find it more successful if you explicitly try to compose your gesture of straight parts. **Do not draw curvy paths but rather expressive zig-zag-lines!**
 
 ### Bake Your First Pie Menu!
 
@@ -70,11 +71,11 @@ The configuration dialog of Fly-Pie has three pages. On the first page you can d
 With the play-button you can always open a **live-preview** of your menu.
 Just play around with the options, most of it should be more or less self-explanatory.
 
-### Fly-Pie's D-Bus Interface
+## Fly-Pie's D-Bus Interface
 
 Fly-Pie has a D-Bus interface which allows not only to open configured menus via the commandline, but also to open completely custom-made menus defined with a JSON string.
 
-#### Opening Menu Configured with the Menu Editor
+### Opening Menu Configured with the Menu Editor
 
 Use the following command to open a menu you configured with the Menu Editor.
 The only parameter given to the `ShowMenu` method is the name of the menu.
@@ -86,7 +87,7 @@ gdbus call --session --dest org.gnome.Shell                            \
   --method org.gnome.Shell.Extensions.flypie.ShowMenu 'My Menu'
 ```
 
-#### Opening Custom Menus via JSON
+### Opening Custom Menus via JSON
 
 You can pass a JSON menu description to the `ShowCustomMenu` to show a custom menu. Here is an example showing a simple menu with two child elements:
 
