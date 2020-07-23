@@ -1,9 +1,9 @@
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<!--  _____       _             _____ _                                                -->
-<!-- |   __|_ _ _|_|___ ___ ___|  _  |_|___  This software may be modified and distri- -->
-<!-- |__   | | | | |   | . |___|   __| | -_| buted under the terms of the MIT license. -->
-<!-- |_____|_____|_|_|_|_  |   |__|  |_|___| See the LICENSE file for details.         -->
-<!--                   |___|                                                           -->
+<!--       ___            _     ___                                                    -->
+<!--       |   |   \/    | ) |  |            This software may be modified and distri- -->
+<!--   O-  |-  |   |  -  |   |  |-  -O       buted under the terms of the MIT license. -->
+<!--       |   |_  |     |   |  |_           See the LICENSE file for details.         -->
+<!--                                                                                   -->
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -13,23 +13,23 @@
   <!--                                enums                                            -->
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-  <enum id='org.gnome.shell.extensions.swingpie.CenterColorMode'>
+  <enum id='org.gnome.shell.extensions.flypie.CenterColorMode'>
     <value value='0' nick='fixed'/>
     <value value='1' nick='auto'/>
   </enum>
 
-  <enum id='org.gnome.shell.extensions.swingpie.ChildColorMode'>
+  <enum id='org.gnome.shell.extensions.flypie.ChildColorMode'>
     <value value='0' nick='fixed'/>
     <value value='1' nick='auto'/>
     <value value='2' nick='parent'/>
   </enum>
 
-  <enum id='org.gnome.shell.extensions.swingpie.GrandchildColorMode'>
+  <enum id='org.gnome.shell.extensions.flypie.GrandchildColorMode'>
     <value value='0' nick='fixed'/>
     <value value='1' nick='parent'/>
   </enum>
 
-  <enum id='org.gnome.shell.extensions.swingpie.EasingMode'>
+  <enum id='org.gnome.shell.extensions.flypie.EasingMode'>
     <value value='1'  nick='linear' />
     <value value='36' nick='ease' />
     <value value='37' nick='ease-in' />
@@ -44,8 +44,8 @@
   </enum>
 
 
-  <schema path="/org/gnome/shell/extensions/swingpie/" 
-             id="org.gnome.shell.extensions.swingpie">
+  <schema path="/org/gnome/shell/extensions/flypie/" 
+             id="org.gnome.shell.extensions.flypie">
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <!--                        Client settings                                        -->
@@ -75,7 +75,7 @@
       <description>The base easing duration in seconds.</description>
     </key>
 
-    <key name="easing-mode" enum="org.gnome.shell.extensions.swingpie.EasingMode">
+    <key name="easing-mode" enum="org.gnome.shell.extensions.flypie.EasingMode">
       <default>"ease"</default>
       <summary>Easing Mode</summary>
       <description>The easing mode used for position and scale transitions.</description>
@@ -141,13 +141,13 @@
 
     <!-- Center Item Settings -->
 
-    <key name="center-color-mode" enum="org.gnome.shell.extensions.swingpie.CenterColorMode">
+    <key name="center-color-mode" enum="org.gnome.shell.extensions.flypie.CenterColorMode">
       <default>"fixed"</default>
       <summary>Center Color Mode</summary>
       <description>If set to auto, the menu's center element will be colored
                    according to its icon. Else the 'center-color' will be used.</description>
     </key>
-    <key name="center-color-mode-hover" enum="org.gnome.shell.extensions.swingpie.CenterColorMode">
+    <key name="center-color-mode-hover" enum="org.gnome.shell.extensions.flypie.CenterColorMode">
       <default>"fixed"</default>
       <summary>Center Color Mode Hover</summary>
       <description>If set to auto, the menu's center element will be colored
@@ -234,14 +234,14 @@
 
     <!-- Child Item Settings -->
 
-    <key name="child-color-mode" enum="org.gnome.shell.extensions.swingpie.ChildColorMode">
+    <key name="child-color-mode" enum="org.gnome.shell.extensions.flypie.ChildColorMode">
       <default>"fixed"</default>
       <summary>Child Color Mode</summary>
       <description>If set to auto, the menu's child elements will be colored
                    according to their icons. Else the 'child-color' will be
                    used.</description>
     </key>
-    <key name="child-color-mode-hover" enum="org.gnome.shell.extensions.swingpie.ChildColorMode">
+    <key name="child-color-mode-hover" enum="org.gnome.shell.extensions.flypie.ChildColorMode">
       <default>"fixed"</default>
       <summary>Child Color Mode Hover</summary>
       <description>If set to auto, the menu's child elements will be colored
@@ -346,14 +346,14 @@
 
     <!-- Grandchild Item Settings -->
 
-    <key name="grandchild-color-mode" enum="org.gnome.shell.extensions.swingpie.GrandchildColorMode">
+    <key name="grandchild-color-mode" enum="org.gnome.shell.extensions.flypie.GrandchildColorMode">
       <default>"fixed"</default>
       <summary>Grandchild Color Mode</summary>
       <description>If set to parent, the menu's grandchild elements will be colored
                    according to their parent's icons. Else the 'grandchild-color'
                    will be used.</description>
     </key>
-    <key name="grandchild-color-mode-hover" enum="org.gnome.shell.extensions.swingpie.GrandchildColorMode">
+    <key name="grandchild-color-mode-hover" enum="org.gnome.shell.extensions.flypie.GrandchildColorMode">
       <default>"fixed"</default>
       <summary>Grandchild Color Mode Hover</summary>
       <description>If set to parent, the menu's grandchild elements will be colored

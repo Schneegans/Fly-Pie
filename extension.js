@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//   _____       _             _____ _                                                  //
-//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
-//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
-//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
-//                    |___|                                                             //
+//        ___            _     ___                                                      //
+//        |   |   \/    | ) |  |           This software may be modified and distri-    //
+//    O-  |-  |   |  -  |   |  |-  -O      buted under the terms of the MIT license.    //
+//        |   |_  |     |   |  |_          See the LICENSE file for details.            //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -12,7 +12,7 @@ const Me     = imports.misc.extensionUtils.getCurrentExtension();
 const Daemon = Me.imports.daemon.Daemon.Daemon;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Once enabled, Swing-Pie creates an instance of the Daemon class. This daemon will    //
+// Once enabled, Fly-Pie creates an instance of the Daemon class. This daemon will      //
 // show a pie menu when it receives a show-menu request on the D-Bus or when one of     //
 // the configured shortcuts are pressed.                                                //
 //                                                                                      //
@@ -25,7 +25,7 @@ const Daemon = Me.imports.daemon.Daemon.Daemon;
 let daemon;
 
 // This function is called once when the extension is loaded, not enabled. Nothing to be
-// done here for Swing-Pie.
+// done here for Fly-Pie.
 function init() {}
 
 // This function could be called after the extension is enabled, which could be done from

@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//   _____       _             _____ _                                                  //
-//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
-//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
-//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
-//                    |___|                                                             //
+//        ___            _     ___                                                      //
+//        |   |   \/    | ) |  |           This software may be modified and distri-    //
+//    O-  |-  |   |  -  |   |  |-  -O      buted under the terms of the MIT license.    //
+//        |   |_  |     |   |  |_          See the LICENSE file for details.            //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -34,7 +34,7 @@ var Daemon = class Daemon {
     // Make the ShowMenu(), PreviewMenu(), ShowCustomMenu(), and the PreviewCustomMenu()
     // methods available on the D-Bus.
     this._dbus = Gio.DBusExportedObject.wrapJSObject(DBusInterface.description, this);
-    this._dbus.export(Gio.DBus.session, '/org/gnome/shell/extensions/swingpie');
+    this._dbus.export(Gio.DBus.session, '/org/gnome/shell/extensions/flypie');
 
     // Initialize the menu. The same menu is used again and again. It is just reconfigured
     // according to incoming requests.
@@ -59,7 +59,7 @@ var Daemon = class Daemon {
           const result = this.ShowMenu(this._menuConfigs[i].name);
           if (result < 0) {
             utils.notification(
-                'Failed to open a Swing-Pie menu: ' +
+                'Failed to open a Fly-Pie menu: ' +
                 DBusInterface.getErrorDescription(result));
           }
         }
@@ -104,29 +104,29 @@ var Daemon = class Daemon {
 
   // -------------------------------------------------------------- public D-Bus-Interface
 
-  // This opens a menu configured with Swing-Pie's menu editor and can be directly called
-  // over the D-Bus. See common/DBusInterface.js for a description of Swing-Pie's
+  // This opens a menu configured with Fly-Pie's menu editor and can be directly called
+  // over the D-Bus. See common/DBusInterface.js for a description of Fly-Pie's
   // DBusInterface.
   ShowMenu(name) {
     return this._openMenu(name, false);
   }
 
-  // This opens a menu configured with Swing-Pie's menu editor in preview mode and can be
+  // This opens a menu configured with Fly-Pie's menu editor in preview mode and can be
   // directly called over the D-Bus. See common/DBusInterface.js for a description of
-  // Swing-Pie's DBusInterface.
+  // Fly-Pie's DBusInterface.
   PreviewMenu(name) {
     return this._openMenu(name, true);
   }
 
   // This opens a custom menu and can be directly called over the D-Bus.
-  // See common/DBusInterface.js for a description of Swing-Pie's DBusInterface.
+  // See common/DBusInterface.js for a description of Fly-Pie's DBusInterface.
   ShowCustomMenu(json) {
     this._currentID = this._getNextID(this._currentID);
     return this._openCustomMenu(json, false, this._currentID);
   }
 
   // This opens a custom menu in preview mode and can be directly called over the D-Bus.
-  // See common/DBusInterface.js for a description of Swing-Pie's DBusInterface.
+  // See common/DBusInterface.js for a description of Fly-Pie's DBusInterface.
   PreviewCustomMenu(json) {
     this._currentID = this._getNextID(this._currentID);
     return this._openCustomMenu(json, true, this._currentID);
@@ -134,7 +134,7 @@ var Daemon = class Daemon {
 
   // ----------------------------------------------------------------------- private stuff
 
-  // Opens a menu configured with Swing-Pie's menu editor, optionally in preview mode. The
+  // Opens a menu configured with Fly-Pie's menu editor, optionally in preview mode. The
   // menu's name must be given as parameter. It will return a positive number on success
   // and a negative on failure. See common/DBusInterface.js for a list of error codes.
   _openMenu(name, previewMode) {
@@ -205,7 +205,7 @@ var Daemon = class Daemon {
   // This gets called once the user made a selection in the menu.
   _onSelect(menuID, path) {
 
-    // This is set if we opened one of the menus configured with Swing-Pie's menu editor.
+    // This is set if we opened one of the menus configured with Fly-Pie's menu editor.
     // Else it was a custom menu opened via the D-Bus.
     if (this._currentMenuStructure != null) {
 
@@ -233,7 +233,7 @@ var Daemon = class Daemon {
   // This gets called when the user did not select anything in the menu.
   _onCancel(menuID) {
 
-    // This is set if we opened one of the menus configured with Swing-Pie's menu editor.
+    // This is set if we opened one of the menus configured with Fly-Pie's menu editor.
     // Else it was a custom menu opened via the D-Bus.
     if (this._currentMenuStructure != null) {
 
@@ -246,7 +246,7 @@ var Daemon = class Daemon {
   }
 
   // This uses the createItem() methods of the ItemRegistry to transform a menu
-  // configuration (as created by Swing-Pie's menu editor) to a menu structure (as
+  // configuration (as created by Fly-Pie's menu editor) to a menu structure (as
   // required by the menu class). The main difference is that the menu structure may
   // contain significantly more items - while the menu configuration only contains one
   // item for "Bookmarks", the menu structure actually contains all of the bookmarks as
@@ -301,7 +301,7 @@ var Daemon = class Daemon {
       this._shortcuts.bind(requiredShortcut);
     }
 
-    // There is currently a menu created with Swing-Pie's menu editor open, so we
+    // There is currently a menu created with Fly-Pie's menu editor open, so we
     // potentially have to update the displayed menu (we might be in preview mode).
     if (this._currentMenuStructure != null) {
       for (let i = 0; i < this._menuConfigs.length; i++) {
@@ -336,7 +336,7 @@ var Daemon = class Daemon {
   }
 
   // This returns a new ID for a custom show-menu request. The last ID is increased by, if
-  // the result collides with an ID of a menu configured with Swing-Pie's menu editor, it
+  // the result collides with an ID of a menu configured with Fly-Pie's menu editor, it
   // is increased once more.
   _getNextID(lastID) {
     let nextID  = lastID;

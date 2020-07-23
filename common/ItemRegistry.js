@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//   _____       _             _____ _                                                  //
-//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
-//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
-//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
-//                    |___|                                                             //
+//        ___            _     ___                                                      //
+//        |   |   \/    | ) |  |           This software may be modified and distri-    //
+//    O-  |-  |   |  -  |   |  |-  -O      buted under the terms of the MIT license.    //
+//        |   |_  |     |   |  |_          See the LICENSE file for details.            //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -77,7 +77,7 @@ var ItemTypes = {
     defaultData: '',
     subtitle: 'Create as many as you want!',
     description:
-        'A <b>Toplevel Menu</b> can contain any number of menu items and submenus. However, for precise item selection, a maximum number of twelve items is recommended.\nThe menu can be opened using the shortcut defined above. It is also possible to open a menu with a terminal command. You can read more on <a href="https://github.com/Schneegans/Swing-Pie">Github</a>.',
+        'A <b>Toplevel Menu</b> can contain any number of menu items and submenus. However, for precise item selection, a maximum number of twelve items is recommended.\nThe menu can be opened using the shortcut defined above. It is also possible to open a menu with a terminal command. You can read more on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.',
     settingsType: SettingsTypes.MENU,
     settingsList: 'menu-types-list',
     createItem: (name, icon) => {
@@ -142,7 +142,7 @@ var ItemTypes = {
   Uri: {
     name: 'Open URI',
     icon: 'applications-internet',
-    defaultData: 'https://github.com/Schneegans/Swing-Pie',
+    defaultData: 'https://github.com/Schneegans/Fly-Pie',
     subtitle: 'Opens an URI with the default applications.',
     description:
         'When the <b>Open URI</b> action is activated, the above URI is opened with the default application. For http URLs, this will be your web browser. However, it is also possible to open other URIs such as "mailto:foo@bar.org".',

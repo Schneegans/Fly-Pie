@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//   _____       _             _____ _                                                  //
-//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
-//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
-//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
-//                    |___|                                                             //
+//        ___            _     ___                                                      //
+//        |   |   \/    | ) |  |           This software may be modified and distri-    //
+//    O-  |-  |   |  -  |   |  |-  -O      buted under the terms of the MIT license.    //
+//        |   |_  |     |   |  |_          See the LICENSE file for details.            //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -14,8 +14,8 @@ const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Presets of Swing-Pie are stored in the JSON format. These files contain values for a //
-// subset of Swing-Pie's settings. The subset is defined in the presetKeys list below.  //
+// Presets of Fly-Pie are stored in the JSON format. These files contain values for a   //
+// subset of Fly-Pie's settings. The subset is defined in the presetKeys list below.    //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 // These settings keys are stored in a preset. The load() and save() methods below just
@@ -88,7 +88,7 @@ var Preset = class Preset {
 
   // ---------------------------------------------------------------------- static methods
 
-  // Initializes all presetKeys of 'org.gnome.shell.extensions.swingpie' to the values set
+  // Initializes all presetKeys of 'org.gnome.shell.extensions.flypie' to the values set
   // in the given JSON Gio.File. This may throw an error if something goes wrong.
   static load(file) {
 
@@ -115,7 +115,7 @@ var Preset = class Preset {
     }
   }
 
-  // Retrieves all presetKeys from 'org.gnome.shell.extensions.swingpie' and stores them
+  // Retrieves all presetKeys from 'org.gnome.shell.extensions.flypie' and stores them
   // in the given Gio.File in the JSON format. This may throw an error if something goes
   // wrong.
   static save(file) {

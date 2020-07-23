@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve Swing-Pie
+about: Create a report to help us improve Fly-Pie
 title: ''
 labels: bug
 assignees: ''
@@ -20,6 +20,6 @@ A clear and concise description of what you expected to happen.
 
 ## System
 _Please complete the following information:_
- - Swing-Pie version [e.g. v1.1.0]
+ - Fly-Pie version [e.g. v1.1.0]
  - Gnome-Shell version: [e.g. 3.36.2]
 

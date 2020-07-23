@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for Swing-Pie
+about: Suggest an idea for Fly-Pie
 title: ''
 labels: enhancement
 assignees: ''

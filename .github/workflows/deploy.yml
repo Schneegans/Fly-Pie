@@ -16,15 +16,15 @@ jobs:
       run: git submodule update --init
     - name: Create Release
       run: |
-        mkdir swingpie@schneegans.github.com
-        mv client common presets schemas server settings swingpie@schneegans.github.com
-        mv *.js README.md LICENSE swingpie@schneegans.github.com
-        zip -r swingpie@schneegans.github.com.zip swingpie@schneegans.github.com
+        mkdir flypie@schneegans.github.com
+        mv client common presets schemas server settings flypie@schneegans.github.com
+        mv *.js README.md LICENSE flypie@schneegans.github.com
+        zip -r flypie@schneegans.github.com.zip flypie@schneegans.github.com
     - name: Upload Release
       uses: svenstaro/upload-release-action@v1-release
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: swingpie@schneegans.github.com.zip
-        asset_name: swingpie@schneegans.github.com.zip
+        file: flypie@schneegans.github.com.zip
+        asset_name: flypie@schneegans.github.com.zip
         tag: ${{ github.ref }}
         overwrite: true

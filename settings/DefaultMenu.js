@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//   _____       _             _____ _                                                  //
-//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
-//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
-//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
-//                    |___|                                                             //
+//        ___            _     ___                                                      //
+//        |   |   \/    | ) |  |           This software may be modified and distri-    //
+//    O-  |-  |   |  -  |   |  |-  -O      buted under the terms of the MIT license.    //
+//        |   |_  |     |   |  |_          See the LICENSE file for details.            //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -162,10 +162,10 @@ var DefaultMenu = class DefaultMenu {
               type: 'Submenu',
               children: [
                 textEditor, {
-                  name: 'Swing-Pie Settings',
+                  name: 'Fly-Pie Settings',
                   icon: 'gnome-settings',
                   type: 'Command',
-                  data: 'gnome-extensions prefs swingpie@schneegans.github.com',
+                  data: 'gnome-extensions prefs flypie@schneegans.github.com',
                 },
                 {
                   name: 'Terminal',

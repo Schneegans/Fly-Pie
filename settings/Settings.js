@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//   _____       _             _____ _                                                  //
-//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
-//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
-//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
-//                    |___|                                                             //
+//        ___            _     ___                                                      //
+//        |   |   \/    | ) |  |           This software may be modified and distri-    //
+//    O-  |-  |   |  -  |   |  |-  -O      buted under the terms of the MIT license.    //
+//        |   |_  |     |   |  |_          See the LICENSE file for details.            //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -22,7 +22,7 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class loads the user interface defined in settings.ui and connects all elements //
 // to the corresponding settings items of the Gio.Settings at                           //
-// org.gnome.shell.extensions.swingpie. All these connections work both ways - when a   //
+// org.gnome.shell.extensions.flypie. All these connections work both ways - when a     //
 // slider is moved in the user interface the corresponding settings key will be         //
 // updated and when a settings key is modified, the corresponding slider is moved.      //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ var Settings = class Settings {
     // Connect to the server so that we can toggle menus also from the preferences. This
     // is, for example, used for toggling the Live-Preview.
     new DBusWrapper(
-        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/swingpie',
+        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/flypie',
         proxy => this._dbus = proxy);
 
     // Show the Demo Menu when the Preview Button is pressed.

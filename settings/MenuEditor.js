@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//   _____       _             _____ _                                                  //
-//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
-//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
-//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
-//                    |___|                                                             //
+//        ___            _     ___                                                      //
+//        |   |   \/    | ) |  |           This software may be modified and distri-    //
+//    O-  |-  |   |  -  |   |  |-  -O      buted under the terms of the MIT license.    //
+//        |   |_  |     |   |  |_          See the LICENSE file for details.            //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -125,7 +125,7 @@ var MenuEditor = class MenuEditor {
 
     // Connect to the server so that we can toggle menu previews from the menu editor.
     new DBusWrapper(
-        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/swingpie',
+        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/flypie',
         proxy => this._dbus = proxy);
 
     // First, we initialize the add-new-item popover and the related buttons.
@@ -697,9 +697,9 @@ var MenuEditor = class MenuEditor {
     const tips = [
       'You should try to have no more than twelve items in your menus.',
       'You will find it more easy to learn item positions if you have an even number of entries. Four, six and eight are good numbers.',
-      'The source code of Swing-Pie is available on <a href="https://github.com/Schneegans/Swing-Pie">Github</a>.',
-      'Suggestions can be posted on <a href="https://github.com/Schneegans/Swing-Pie/issues">Github</a>.',
-      'Bugs can be reported on <a href="https://github.com/Schneegans/Swing-Pie/issues">Github</a>.',
+      'The source code of Fly-Pie is available on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.',
+      'Suggestions can be posted on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.',
+      'Bugs can be reported on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.',
       'Deep hierarchies are pretty efficient. Put submenus into submenus in submenus!',
       'If you delete all Pies, log out and log in again, the default configuration will be restored.'
     ];

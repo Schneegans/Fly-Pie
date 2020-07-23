@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//   _____       _             _____ _                                                  //
-//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
-//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
-//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
-//                    |___|                                                             //
+//        ___            _     ___                                                      //
+//        |   |   \/    | ) |  |           This software may be modified and distri-    //
+//    O-  |-  |   |  -  |   |  |-  -O      buted under the terms of the MIT license.    //
+//        |   |_  |     |   |  |_          See the LICENSE file for details.            //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -19,7 +19,7 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 // the standard log() functionality by prepending the extensions name and the location  //
 // where the message was logged. As the extensions name is part of the location, you    //
 // can more effectively watch the log output of Gnome-Shell:                            //
-// journalctl /usr/bin/gnome-shell -f -o cat | grep swingpie -B 2 -A 2                  //
+// journalctl /usr/bin/gnome-shell -f -o cat | grep flypie -B 2 -A 2                    //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function debug(message) {
@@ -28,7 +28,7 @@ function debug(message) {
   // Remove debug() function call from stack.
   stack.shift();
 
-  // Find the index of the extension directory (e.g. swingpie@code.simonschneegans.de) in
+  // Find the index of the extension directory (e.g. flypie@schneegans.github.com) in
   // the stack entry. We do not want to print the entire absolute file path.
   const extensionRoot = stack[0].indexOf(Me.metadata.uuid);
 
@@ -43,13 +43,13 @@ function debug(message) {
 
 function notification(message) {
   GLib.spawn_async(
-      null, ['/usr/bin/notify-send', '-u', 'low', 'Swing-Pie', message], null,
+      null, ['/usr/bin/notify-send', '-u', 'low', 'Fly-Pie', message], null,
       GLib.SpawnFlags.DO_NOT_REAP_CHILD, null);
 }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Creates a new Gio.Settings object for org.gnome.shell.extensions.swingpie and       //
+// Creates a new Gio.Settings object for org.gnome.shell.extensions.flypie and          //
 // returns it.                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -59,7 +59,7 @@ function createSettings() {
       false);
 
   return new Gio.Settings(
-      {settings_schema: schema.lookup('org.gnome.shell.extensions.swingpie', true)});
+      {settings_schema: schema.lookup('org.gnome.shell.extensions.flypie', true)});
 }
 
 

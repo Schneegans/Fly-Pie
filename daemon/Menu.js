@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//   _____       _             _____ _                                                  //
-//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
-//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
-//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
-//                    |___|                                                             //
+//        ___            _     ___                                                      //
+//        |   |   \/    | ) |  |           This software may be modified and distri-    //
+//    O-  |-  |   |  -  |   |  |-  -O      buted under the terms of the MIT license.    //
+//        |   |_  |     |   |  |_          See the LICENSE file for details.            //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
@@ -36,7 +36,7 @@ var Menu = class Menu {
   // corresponding event occurs.
   constructor(onSelect, onCancel) {
 
-    // Create Gio.Settings object for org.gnome.shell.extensions.swingpie.
+    // Create Gio.Settings object for org.gnome.shell.extensions.flypie.
     this._settings = utils.createSettings();
 
     // Store the callbacks.
@@ -470,7 +470,7 @@ var Menu = class Menu {
 
   // This is called when the menu configuration is changed while the menu is open. We
   // should adapt the open menu accordingly. This is primarily meant for the preview mode
-  // of Swing-Pie's menu editor.
+  // of Fly-Pie's menu editor.
   // Usually, at most one property of an item will be changed (name or icon). If both
   // changed, it's quite likely that an item was added, removed or moved. But actually
   // we don't know, so this guess will not be correct in all cases.

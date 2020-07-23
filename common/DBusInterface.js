@@ -1,18 +1,18 @@
 //////////////////////////////////////////////////////////////////////////////////////////
-//   _____       _             _____ _                                                  //
-//  |   __|_ _ _|_|___ ___ ___|  _  |_|___   This software may be modified and distri-  //
-//  |__   | | | | |   | . |___|   __| | -_|  buted under the terms of the MIT license.  //
-//  |_____|_____|_|_|_|_  |   |__|  |_|___|  See the LICENSE file for details.          //
-//                    |___|                                                             //
+//        ___            _     ___                                                      //
+//        |   |   \/    | ) |  |           This software may be modified and distri-    //
+//    O-  |-  |   |  -  |   |  |-  -O      buted under the terms of the MIT license.    //
+//        |   |_  |     |   |  |_          See the LICENSE file for details.            //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 'use strict';
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// There are two ways to use Swing-Pie's D-Bus interface.                               //
+// There are two ways to use Fly-Pie's D-Bus interface.                                 //
 //                                                                                      //
 // 1: Use ShowMenu() or PreviewMenu() to open one of the menus configured in the        //
-//    settings dialog of Swing-Pie. As an argument the name of the desired menu must be //
+//    settings dialog of Fly-Pie. As an argument the name of the desired menu must be   //
 //    provided. The returned integer may be negative, indicating that an error          //
 //    occurred. See DBusInterface.errorCodes for possible values.                       //
 //                                                                                      //
@@ -59,7 +59,7 @@
 var DBusInterface = {
   description:
       '<node>                                                                            \
-        <interface name="org.gnome.Shell.Extensions.swingpie">                           \
+        <interface name="org.gnome.Shell.Extensions.flypie">                             \
           <method name="ShowMenu">                                                       \
             <arg name="name" type="s" direction="in"/>                                   \
             <arg name="id"   type="i" direction="out"/>                                  \

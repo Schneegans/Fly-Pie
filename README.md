@@ -2,7 +2,7 @@
   <img src ="logo.gif" />
 </p>
 
-[![check](https://github.com/Schneegans/Swing-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Swing-Pie/actions)
+[![check](https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Fly-Pie/actions)
 [![license](https://img.shields.io/badge/Gnome_Shell-3.36.2-blue.svg)](LICENSE)
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![comments](https://img.shields.io/badge/Comments-29.3%25-green.svg)](cloc.sh)
@@ -12,48 +12,38 @@
 # Some Notes
 
 ```bash
-journalctl /usr/bin/gnome-shell -f -o cat | grep swingpie -B 2 -A 2
+journalctl /usr/bin/gnome-shell -f -o cat | grep flypie -B 2 -A 2
 
 gdbus introspect  --session --dest org.gnome.Shell \
-  --object-path /org/gnome/shell/extensions/swingpie
+  --object-path /org/gnome/shell/extensions/flypie
 
 gdbus monitor  --session --dest org.gnome.Shell \
-  --object-path /org/gnome/shell/extensions/swingpie
+  --object-path /org/gnome/shell/extensions/flypie
 
 gdbus call --session --dest org.gnome.Shell                    \
-  --object-path /org/gnome/shell/extensions/swingpie           \
-  --method org.gnome.Shell.Extensions.swingpie.ShowMenu 'My Menu'
+  --object-path /org/gnome/shell/extensions/flypie             \
+  --method org.gnome.Shell.Extensions.flypie.ShowMenu 'My Menu'
 
 gdbus call --session --dest org.gnome.Shell                    \
-  --object-path /org/gnome/shell/extensions/swingpie           \
-  --method org.gnome.Shell.Extensions.swingpie.ShowCustomMenu  \
+  --object-path /org/gnome/shell/extensions/flypie             \
+  --method org.gnome.Shell.Extensions.flypie.ShowCustomMenu    \
   '{"icon": "😀", "children": [                                \
     {"name": "Rocket",   "icon":"🚀", "id":"a"},               \
     {"name": "Doughnut", "icon":"🍩", "id":"b"}                \
   ]}'
 ```
 
-# What others say about Swing-Pie
-
-> Priceless!
->
-> &mdash; *The Great Gatspie*
-
-> Simply marvelous!
->
-> &mdash; *Lord Pieron*
-
-# Contributing to Swing-Pie
+# Contributing to Fly-Pie
 
 Whenever you encounter a :beetle: **bug** or have :tada: **feature request**, 
-report this via [Github issues](https://github.com/schneegans/swingpie/issues).
+report this via [Github issues](https://github.com/schneegans/fly-pie/issues).
 
-We are happy to receive contributions to Swing-Pie in the form of **pull requests** via Github.
+We are happy to receive contributions to Fly-Pie in the form of **pull requests** via Github.
 Feel free to fork the repository, implement your changes and create a merge request to the `develop` branch.
 
 ## Branching Guidelines
 
-The development of Swing-Pie follows a simplified version of **git-flow**: The `master` branch always contains stable code.
+The development of Fly-Pie follows a simplified version of **git-flow**: The `master` branch always contains stable code.
 New features and bug fixes are implemented in `feature/*` branches and are merged to `develop` once they are finished.
 When a new milestone is reached, the content of `develop` will be merged to `master` and a tag is created.
 
