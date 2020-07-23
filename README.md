@@ -14,7 +14,7 @@ It features a continuous learning curve which lets you gradually ascend from a c
 # Getting Started
 
 Fly-Pie is designed for people who have **one hand at the mouse** most of the time.
-It is not designed to be used with a keyboard only; there are other applications which work better in this case (for example [kupfer](https://github.com/kupferlauncher/kupfer)).
+It is **not** designed to be used with a keyboard only; there are other applications which work better in this case (for example [kupfer](https://github.com/kupferlauncher/kupfer)).
 Fly-Pie will also play nicely with **touch input**. 
 While it might work already, a future version of Fly-Pie will be dedicated to add proper touch support.
 
@@ -24,9 +24,10 @@ You can either install a stable release or grab the latest version directly with
 
 ### Installing a Stable Release
 
-Just [download the latest release](https://github.com/Schneegans/Fly-Pie/releases) and extract the containing directory to `~/.local/share/gnome-shell/extensions`.
+Just [download the latest release](https://github.com/Schneegans/Fly-Pie/releases) and extract the contained directory to `~/.local/share/gnome-shell/extensions`.
 Then restart Gnome-Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
-The you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* application or with this command:
+Or logout / login if you are on Wayland.
+Then you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* application or with this command:
 
 ```bash
 gnome-extensions enable flypie@schneegans.github.com
@@ -41,7 +42,8 @@ mv Fly-Pie flypie@schneegans.github.com
 ```
 
 Then restart Gnome-Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
-The you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* application or with this command:
+Or logout / login if you are on Wayland.
+Then you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* application or with this command:
 
 ```bash
 gnome-extensions enable flypie@schneegans.github.com
@@ -65,14 +67,14 @@ For now, here are some hints to ease your path to become a master Pielot:
 
 While the default menu may give you the opportunity to play around with Fly-Pie, you will have to define your own menus!
 
-The configuration dialog of Fly-Pie has three pages. On the first page you can define its **appearance**, on the second you can **define your own menus**.
+The configuration dialog of Fly-Pie has three pages. On the first page you can define its **appearance**, on the second you can **define your own menus**. The last one... well, we will come to this later!
+
 With the play-button you can always open a **live-preview** of your menu.
-You should absolutely **avoid putting more than twelve items** into a submenu.
-Four, six, maybe eight are good numbers.
+Just play around with the options, most of it should be more or less self-explanatory.
 
 ### Fly-Pie's D-Bus Interface
 
-Fly-Pie has a D-Bud interface which allows not only to open configured menus via the commandline, but also to open completly custom menus defined with a JSON string.
+Fly-Pie has a D-Bus interface which allows not only to open configured menus via the commandline, but also to open completely custom-made menus defined with a JSON string.
 
 #### Opening Menu Configured with the Menu Editor
 
