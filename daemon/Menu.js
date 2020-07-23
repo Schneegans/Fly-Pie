@@ -339,7 +339,8 @@ var Menu = class Menu {
     });
 
     // Whenever settings are changed, we adapt the currently shown menu accordingly.
-    this._settings.connect('change-event', this._onSettingsChange.bind(this));
+    this._settingsConnection =
+        this._settings.connect('change-event', this._onSettingsChange.bind(this));
     this._onSettingsChange();
   }
 
@@ -347,6 +348,7 @@ var Menu = class Menu {
   destroy() {
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();
+    this._settings.disconnect(this._settingsConnection);
   }
 
   // -------------------------------------------------------------------- public interface

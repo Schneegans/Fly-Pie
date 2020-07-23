@@ -89,7 +89,7 @@ var Daemon = class Daemon {
           'menu-configuration', JSON.stringify([DefaultMenu.get()]));
     }
 
-    this._settings.connect(
+    this._settingsConnection = this._settings.connect(
         'changed::menu-configuration', () => this._onMenuConfigsChanged());
     this._onMenuConfigsChanged();
   }
@@ -99,6 +99,7 @@ var Daemon = class Daemon {
     this._menu.destroy();
     this._dbus.unexport();
     this._shortcuts.destroy();
+    this._settings.disconnect(this._settingsConnection);
   }
 
   // -------------------------------------------------------------- public D-Bus-Interface
