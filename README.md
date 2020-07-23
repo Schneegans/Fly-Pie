@@ -7,54 +7,127 @@
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![comments](https://img.shields.io/badge/Comments-32.0%25-green.svg)](cloc.sh)
 
-Fly-Pie is an attractive marking menu for Gnome-Shell. 
+**Fly-Pie** is an attractive marking menu for Gnome-Shell.
+It features a continuous learning curve which lets you gradually ascend from a crappie menu rookie to a glorious master <sub><sup>(wait for it)</sub></sup> *Pielot*.
+(You got it? Like pilot, but with a :cake:).
 
 # Getting Started
 
+Fly-Pie is designed for people who have **one hand at the mouse** most of the time.
+It is not designed to be used with a keyboard only; there are other applications which work better in this case (for example [kupfer](https://github.com/kupferlauncher/kupfer)).
+Fly-Pie will also play nicely with **touch input**. 
+While it might work already, a future version of Fly-Pie will be dedicated to add proper touch support.
+
 ## Installation
+
+You can either install a stable release or grab the latest version directly with `git`.
 
 ### Installing a Stable Release
 
-### Installing the Latest Version from GIT
+Just [download the latest release](https://github.com/Schneegans/Fly-Pie/releases) and extract the containing directory to `~/.local/share/gnome-shell/extensions`.
+Then restart Gnome-Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+The you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* application or with this command:
+
+```bash
+gnome-extensions enable flypie@schneegans.github.com
+```
+
+### Installing the Latest Version with `git`
+
+```bash
+cd ~/.local/share/gnome-shell/extensions
+git clone https://github.com/Schneegans/Fly-Pie.git
+mv Fly-Pie flypie@schneegans.github.com
+```
+
+Then restart Gnome-Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+The you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* application or with this command:
+
+```bash
+gnome-extensions enable flypie@schneegans.github.com
+```
 
 ## First Steps with Fly-Pie
 
+If you installed and enabled Fly-Pie for the very first time, you can bring up the default menu with <kbd>Ctrl</kbd> + <kbd>Space</kbd>.
+
+In a future version of Fly-Pie, there will be interactive tutorials demonstrating effective usage patterns.
+For now, here are some hints to ease your path to become a master Pielot:
+* You can **click anywhere in an item's wedge**. It does not matter whether you click directly on an item or at the edge of your screen as long as you are in the same wedge.
+* To enter **Marking Mode**, click and drag an item. As soon as you pause dragging or make a turn, the item will be selected. **This way you can select items with gestures!**
+* Try remembering the path to an item. Open the menu and **draw the path with your mouse**. You can start with individual segments of the path, put you can also try to draw the entire path!
+
 ### Bake Your First Pie Menu!
 
-<p align="right"> 
+<p style="width:200px; float:right">
   <img src ="resources/menu-editor.png" />
 </p>
 
+While the default menu may give you the opportunity to play around with Fly-Pie, you will have to define your own menus!
+
+The configuration dialog of Fly-Pie has three pages. On the first page you can define its **appearance**, on the second you can **define your own menus**.
+With the play-button you can always open a **live-preview** of your menu.
+You should absolutely **avoid putting more than twelve items** into a submenu.
+Four, six, maybe eight are good numbers.
+
 ### Fly-Pie's D-Bus Interface
 
+Fly-Pie has a D-Bud interface which allows not only to open configured menus via the commandline, but also to open completly custom menus defined with a JSON string.
+
+#### Opening Menu Configured with the Menu Editor
+
+Use the following command to open a menu you configured with the Menu Editor.
+The only parameter given to the `ShowMenu` method is the name of the menu.
+There is also a similar method called `PreviewMenu` which will open the given menu in preview mode.
+
 ```bash
-gdbus call --session --dest org.gnome.Shell                    \
-  --object-path /org/gnome/shell/extensions/flypie             \
+gdbus call --session --dest org.gnome.Shell                            \
+  --object-path /org/gnome/shell/extensions/flypie                     \
   --method org.gnome.Shell.Extensions.flypie.ShowMenu 'My Menu'
 ```
 
+#### Opening Custom Menus via JSON
 
+You can pass a JSON menu description to the `ShowCustomMenu` to show a custom menu. Here is an example showing a simple menu with two child elements:
+
+```bash
+gdbus call --session --dest org.gnome.Shell                            \
+  --object-path /org/gnome/shell/extensions/flypie                     \
+  --method org.gnome.Shell.Extensions.flypie.ShowCustomMenu            \
+  '{"icon": "😀", "children": [                                        \
+    {"name": "Rocket",   "icon":"🚀", "id":"a"},                       \
+    {"name": "Doughnut", "icon":"🍩", "id":"b", "children": [          \
+      {"name": "Cat",         "icon":"🐈"},                            \
+      {"name": "Apatosaurus", "icon":"🦕"}                             \
+    ]}                                                                 \
+  ]}'
+```
+
+This JSON structure is quite simple. Each item may have the following properties:
+
+* **`"name"`:** This will be shown in the center when the item is hovered.
+* **`"icon"`:** Either an absolute path, an icon name (like `"firefox"`) or text. This is why we can use emoji for the icons!
+* **`"id"` (optional):** Once an item is selected, this ID will be reported as part of the selection path. If omitted, the ID is the index of the child.
+* **`"angle"` (optional, 0 - 359):** This forces the item to be placed in a specific direction. However, there is a restriction on the fixed angles. Inside a menu level, the fixed angles must be monotonically increasing, that is each fixed angle must be larger than any previous fixed angle.
+* **`"children"` (optional):** An array of child items.
+
+The method will return an integer.
+This will be either negative (Fly-Pie failed to parse the provided description, see [DBusInterface.js](common/DBusInterface.js) for a list of error codes) or a positive ID which will be passed to the signals of the interface.
+
+There are two signals; `OnCancel` will be fired when the user aborts the selection in a menu, `OnSelect` is activated when the user makes a selection.
+Both signals send the ID which has been reported by the corresponding `ShowCustomMenu` call, in addition, `OnSelect` sends the path to the selected item.
+
+You can use the following command to monitor the emitted signals:
 
 ```bash
 gdbus monitor  --session --dest org.gnome.Shell \
   --object-path /org/gnome/shell/extensions/flypie
 ```
 
-
-
-```bash
-gdbus call --session --dest org.gnome.Shell                    \
-  --object-path /org/gnome/shell/extensions/flypie             \
-  --method org.gnome.Shell.Extensions.flypie.ShowCustomMenu    \
-  '{"icon": "😀", "children": [                                \
-    {"name": "Rocket",   "icon":"🚀", "id":"a"},               \
-    {"name": "Doughnut", "icon":"🍩", "id":"b"}                \
-  ]}'
-```
-
+To see all available methods and signals you can introspect the interface:
 
 ```bash
-gdbus introspect  --session --dest org.gnome.Shell \
+gdbus introspect  --session --dest org.gnome.Shell                    \
   --object-path /org/gnome/shell/extensions/flypie
 ```
 
