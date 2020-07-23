@@ -1,5 +1,5 @@
 <p align="center"> 
-  <img src ="logo.svg" />
+  <img src ="logo.gif" />
 </p>
 
 [![check](https://github.com/Schneegans/Swing-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Swing-Pie/actions)
