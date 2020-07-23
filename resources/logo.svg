@@ -16,7 +16,7 @@
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    sodipodi:docname="logo.svg"
-   inkscape:export-filename="/home/simon/Desktop/logo/frame4.png"
+   inkscape:export-filename="/home/simon/Desktop/logo/frame5.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
@@ -42,9 +42,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="124.81741"
-     inkscape:cy="-54.852991"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="243.97325"
+     inkscape:cy="42.034693"
      inkscape:document-units="mm"
      inkscape:current-layer="g945"
      showgrid="true"
@@ -56,12 +56,13 @@
      inkscape:window-maximized="1"
      inkscape:snap-global="false"
      inkscape:snap-object-midpoints="true"
-     showguides="false">
+     showguides="true"
+     inkscape:guide-bbox="true">
     <inkscape:grid
        type="xygrid"
        id="grid957"
-       spacingx="211.66667"
-       spacingy="79.375" />
+       spacingx="105.83333"
+       spacingy="39.6875" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -98,7 +99,7 @@
            style="stroke-width:0.18613353px" /></text>
       <g
          id="g4712"
-         transform="matrix(1.4287616,0,0,1.4287616,22.244701,-95.878529)">
+         transform="matrix(1.3115444,0,0,1.3115444,20.387364,-74.867494)">
         <text
            id="text844"
            y="206.77574"
@@ -133,10 +134,32 @@
              y="227.66148"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Birmingham;-inkscape-font-specification:Birmingham;fill:#808080;fill-opacity:1;stroke-width:0.08487891px"
              id="tspan854">- The Great Gatspie</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32.45591354px;line-height:125%;font-family:Sarai;-inkscape-font-specification:Sarai;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.12994349;stroke:none;stroke-width:0.81139785px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="-83.691765"
+           y="207.09586"
+           id="text1651"><tspan
+             sodipodi:role="line"
+             x="-83.691765"
+             y="207.09586"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.75325203px;font-family:Birmingham;-inkscape-font-specification:Birmingham;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.81139785px"
+             id="tspan1649">“</tspan></text>
+        <text
+           id="text1662"
+           y="219.65262"
+           x="6.6379361"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.45198631px;line-height:125%;font-family:Sarai;-inkscape-font-specification:Sarai;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.12994349;stroke:none;stroke-width:0.56129962px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             id="tspan1660"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.05522585px;font-family:Birmingham;-inkscape-font-specification:Birmingham;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.56129962px"
+             y="219.65262"
+             x="6.6379361"
+             sodipodi:role="line">”</tspan></text>
       </g>
       <g
          id="g4727"
-         transform="matrix(1.6097082,0,0,1.6097082,26.194225,-248.47062)">
+         transform="matrix(1.6097082,0,0,1.6097082,29.933731,-250.51162)">
         <text
            xml:space="preserve"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.41627455px;line-height:125%;font-family:Sarai;-inkscape-font-specification:Sarai;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.16040686px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -147,7 +170,7 @@
              sodipodi:role="line"
              x="-37.465439"
              y="314.24774"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.89720297px;line-height:0px;font-family:Ruthie;-inkscape-font-specification:Ruthie;text-align:center;text-anchor:middle;stroke-width:0.16040686px">There is a pleasure in things that </tspan><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.89720297px;line-height:0px;font-family:Ruthie;-inkscape-font-specification:Ruthie;text-align:center;text-anchor:middle;stroke-width:0.16040686px">“There is a pleasure in things that </tspan><tspan
              id="tspan880"
              sodipodi:role="line"
              x="-38.043362"
@@ -157,7 +180,7 @@
              sodipodi:role="line"
              x="-38.043362"
              y="330.28842"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.58211851px;line-height:0px;font-family:Ruthie;-inkscape-font-specification:Ruthie;text-align:center;text-anchor:middle;stroke-width:0.16040686px">Fly-Pie is such a thing.</tspan></text>
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.58211851px;line-height:0px;font-family:Ruthie;-inkscape-font-specification:Ruthie;text-align:center;text-anchor:middle;stroke-width:0.16040686px">Fly-Pie is such a thing.”</tspan></text>
         <text
            id="text887"
            y="337.49237"
@@ -172,7 +195,19 @@
       </g>
       <g
          id="g4719"
-         transform="matrix(1.3203598,0,0,1.3203598,24.508062,-34.160432)">
+         transform="matrix(1.1956729,0,0,1.1956729,124.8254,-29.116309)">
+        <text
+           id="text1614"
+           y="-243.01855"
+           x="85.339485"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.18756866px;line-height:125%;font-family:Sarai;-inkscape-font-specification:Sarai;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.05084749;stroke:none;stroke-width:0.92968923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"
+           transform="scale(-1)"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:41.24669266px;font-family:Achilles;-inkscape-font-specification:Achilles;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:0.05084749;stroke-width:0.92968923px"
+             y="-243.01855"
+             x="85.339485"
+             sodipodi:role="line"
+             id="tspan1612">&quot;</tspan></text>
         <text
            xml:space="preserve"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.9226017px;line-height:125%;font-family:Sarai;-inkscape-font-specification:Sarai;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.12306504px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -199,11 +234,22 @@
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Achilles;-inkscape-font-specification:Achilles;fill:#808080;fill-opacity:1;stroke-width:0.11629335px"
              y="283.45868"
              x="-51.356129"
-             sodipodi:role="line">- piethagoras</tspan></text>
+             sodipodi:role="line">- Piethagoras</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.18756866px;line-height:125%;font-family:Sarai;-inkscape-font-specification:Sarai;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:0.05084749;stroke:none;stroke-width:0.92968923px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="11.450677"
+           y="297.71143"
+           id="text1624"><tspan
+             id="tspan1622"
+             sodipodi:role="line"
+             x="11.450677"
+             y="297.71143"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:41.24669266px;font-family:Achilles;-inkscape-font-specification:Achilles;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:0.05084749;stroke-width:0.92968923px">&quot;</tspan></text>
       </g>
       <g
          id="g4742"
-         transform="translate(-125.60771,1.5906635)">
+         transform="translate(-123.3648,-58.168476)">
         <path
            d="m 268.89831,208.72798 q -0.24901,-0.0466 -0.4388,-0.24155 -0.15855,-0.18979 -0.11845,-0.40803 0.0569,-0.3115 2.07059,-0.23222 2.05035,0.0536 3.42071,0.30497 0.24902,0.0466 0.43881,0.24109 0.18932,0.19585 0.14969,0.41362 -0.0569,0.3115 -2.07628,0.26347 -2.01351,-0.0793 -3.44617,-0.34181 z"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:125%;font-family:'Amatic SC';-inkscape-font-specification:'Amatic SC';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.79159081px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -358,7 +404,7 @@
            sodipodi:nodetypes="ccscscscc" />
       </g>
       <g
-         transform="translate(-124.81,59.026155)"
+         transform="translate(-123.17677,1.6229228)"
          id="g4810"
          style="opacity:0.17099998;filter:url(#filter5004)">
         <path
@@ -435,6 +481,42 @@
              x="235.94934"
              y="220.62682"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Amatic SC';-inkscape-font-specification:'Amatic SC';text-align:center;text-anchor:middle;stroke-width:0.87573773px">Fly-Pie</tspan></text>
+      </g>
+      <g
+         transform="matrix(1.3203598,0,0,1.3203598,160.03636,-151.76402)"
+         id="g1602">
+        <text
+           id="text1596"
+           y="267.26291"
+           x="-35.688698"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.9226017px;line-height:125%;font-family:Sarai;-inkscape-font-specification:Sarai;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.12306504px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.45991707px;font-family:'Latin Modern Mono Caps';-inkscape-font-specification:'Latin Modern Mono Caps';text-align:center;text-anchor:middle;stroke-width:0.12306504px"
+             y="267.26291"
+             x="-35.688698"
+             sodipodi:role="line"
+             id="tspan1592">&quot;I tell you a secret:</tspan><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.45991707px;font-family:'Latin Modern Mono Caps';-inkscape-font-specification:'Latin Modern Mono Caps';text-align:center;text-anchor:middle;stroke-width:0.12306504px"
+             y="273.64478"
+             x="-35.688698"
+             sodipodi:role="line"
+             id="tspan1604">I once used Fly-Pie to</tspan><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.45991707px;font-family:'Latin Modern Mono Caps';-inkscape-font-specification:'Latin Modern Mono Caps';text-align:center;text-anchor:middle;stroke-width:0.12306504px"
+             y="280.02661"
+             x="-35.688698"
+             sodipodi:role="line"
+             id="tspan1594">control an Airbus A380.&quot;</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.65173435px;line-height:125%;font-family:Sarai;-inkscape-font-specification:Sarai;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.11629335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="-61.606285"
+           y="288.09064"
+           id="text1600"><tspan
+             sodipodi:role="line"
+             x="-61.606285"
+             y="288.09064"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Latin Modern Mono Caps';-inkscape-font-specification:'Latin Modern Mono Caps';fill:#808080;fill-opacity:1;stroke-width:0.11629335px"
+             id="tspan1598">- an anonymous Pielot</tspan></text>
       </g>
     </g>
   </g>
