@@ -94,7 +94,7 @@
     </key>
 
     <key name="font" type="s">
-      <default>"Open Sans Semi-Bold 11"</default>
+      <default>"Open Sans 11"</default>
       <summary>Center Font</summary>
       <description>The font used in the menu.</description>
     </key>
