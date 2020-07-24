@@ -70,31 +70,31 @@
     </key>
 
     <key name="easing-duration" type="d">
-      <default>0.2</default>
+      <default>0.25</default>
       <summary>Easing Duration</summary>
       <description>The base easing duration in seconds.</description>
     </key>
 
     <key name="easing-mode" enum="org.gnome.shell.extensions.flypie.EasingMode">
-      <default>"ease"</default>
+      <default>"ease-out"</default>
       <summary>Easing Mode</summary>
       <description>The easing mode used for position and scale transitions.</description>
     </key>
 
     <key name="background-color" type="s">
-      <default>"rgba(0, 0, 0, 0.2)"</default>
+      <default>"rgba(0, 0, 0, 0.26)"</default>
       <summary>Background Color</summary>
       <description>The color of the menu backdrop.</description>
     </key>
 
     <key name="text-color" type="s">
-      <default>"rgb(0, 0, 0)"</default>
+      <default>"rgb(37, 37, 37)"</default>
       <summary>Text Color</summary>
       <description>The color of the menu text.</description>
     </key>
 
     <key name="font" type="s">
-      <default>"Sans 12"</default>
+      <default>"Open Sans Semi-Bold 11"</default>
       <summary>Center Font</summary>
       <description>The font used in the menu.</description>
     </key>
@@ -103,31 +103,31 @@
     <!-- Wedge Settings -->
 
     <key name="wedge-width" type="d">
-      <default>500</default>
+      <default>300</default>
       <summary>Wedge Width</summary>
       <description>The width of the wedges in pixels.</description>
     </key>
 
     <key name="wedge-inner-radius" type="d">
-      <default>50</default>
+      <default>58</default>
       <summary>Wedge Inner Radius</summary>
       <description>The inner radius of the wedges in pixels.</description>
     </key>
 
     <key name="wedge-color" type="s">
-      <default>"rgba(0, 0, 0, 0.4)"</default>
+      <default>"rgba(0, 0, 0, 0.2)"</default>
       <summary>Wedge Color</summary>
       <description>The color of the menu's inactive wedges.</description>
     </key>
 
     <key name="wedge-color-hover" type="s">
-      <default>"rgba(100, 100, 100, 0.2)"</default>
+      <default>"rgba(47, 47, 47, 0.2)"</default>
       <summary>Wedge Color Hover</summary>
       <description>The color of the menu's active wedges.</description>
     </key>
 
     <key name="wedge-separator-color" type="s">
-      <default>"rgba(100, 100, 100, 0.5)"</default>
+      <default>"rgba(255, 255, 255, 0.13)"</default>
       <summary>Wedge Separator Color</summary>
       <description>The color of the separators between the menu's wedges.</description>
     </key>
@@ -142,47 +142,47 @@
     <!-- Center Item Settings -->
 
     <key name="center-color-mode" enum="org.gnome.shell.extensions.flypie.CenterColorMode">
-      <default>"fixed"</default>
+      <default>"auto"</default>
       <summary>Center Color Mode</summary>
       <description>If set to auto, the menu's center element will be colored
                    according to its icon. Else the 'center-color' will be used.</description>
     </key>
     <key name="center-color-mode-hover" enum="org.gnome.shell.extensions.flypie.CenterColorMode">
-      <default>"fixed"</default>
+      <default>"auto"</default>
       <summary>Center Color Mode Hover</summary>
       <description>If set to auto, the menu's center element will be colored
                    according to its icon. Else the 'center-color' will be used.</description>
     </key>
 
     <key name="center-fixed-color" type="s">
-      <default>"rgb(200, 200, 200)"</default>
+      <default>"rgb(215, 215, 215)"</default>
       <summary>Center Color</summary>
       <description>The color of the menu's center element.</description>
     </key>
     <key name="center-fixed-color-hover" type="s">
-      <default>"rgb(200, 200, 200)"</default>
+      <default>"rgb(215, 215, 215)"</default>
       <summary>Center Color Hover</summary>
       <description>The color of the menu's center element when a child is hovered.</description>
     </key>
 
     <key name="center-auto-color-saturation" type="d">
-      <default>0.5</default>
+      <default>0.75</default>
       <summary>Center Auto Color Saturation</summary>
       <description>The saturation of automatically generated item colors.</description>
     </key>
     <key name="center-auto-color-saturation-hover" type="d">
-      <default>0.5</default>
+      <default>0.75</default>
       <summary>Center Auto Color Saturation Hover</summary>
       <description>The saturation of automatically generated item colors when a child is hovered.</description>
     </key>
 
     <key name="center-auto-color-luminance" type="d">
-      <default>0.5</default>
+      <default>0.8</default>
       <summary>Center Auto Color Luminance</summary>
       <description>The luminance of automatically generated item colors.</description>
     </key>
     <key name="center-auto-color-luminance-hover" type="d">
-      <default>0.5</default>
+      <default>0.8</default>
       <summary>Center Auto Color Luminance Hover</summary>
       <description>The luminance of automatically generated item colors when a child is hovered.</description>
     </key>
@@ -199,29 +199,29 @@
     </key>
 
     <key name="center-size" type="d">
-      <default>100</default>
+      <default>110</default>
       <summary>Center Size</summary>
       <description>The size of the center element in pixels.</description>
     </key>
     <key name="center-size-hover" type="d">
-      <default>100</default>
+      <default>90</default>
       <summary>Center Size Hover</summary>
       <description>The size of the center element in pixels when a child is hovered.</description>
     </key>
 
     <key name="center-icon-scale" type="d">
-      <default>0.7</default>
+      <default>0.8</default>
       <summary>Center Icon Scale</summary>
       <description>A scale factor for the center icon.</description>
     </key>
     <key name="center-icon-scale-hover" type="d">
-      <default>0.7</default>
+      <default>0.8</default>
       <summary>Center Icon Scale Hover</summary>
       <description>A scale factor for the center icon when a child is hovered.</description>
     </key>
 
     <key name="center-icon-opacity" type="d">
-      <default>1.0</default>
+      <default>0.17</default>
       <summary>Center Icon Opacity</summary>
       <description>The opacity of center icons.</description>
     </key>
@@ -235,14 +235,14 @@
     <!-- Child Item Settings -->
 
     <key name="child-color-mode" enum="org.gnome.shell.extensions.flypie.ChildColorMode">
-      <default>"fixed"</default>
+      <default>"auto"</default>
       <summary>Child Color Mode</summary>
       <description>If set to auto, the menu's child elements will be colored
                    according to their icons. Else the 'child-color' will be
                    used.</description>
     </key>
     <key name="child-color-mode-hover" enum="org.gnome.shell.extensions.flypie.ChildColorMode">
-      <default>"fixed"</default>
+      <default>"auto"</default>
       <summary>Child Color Mode Hover</summary>
       <description>If set to auto, the menu's child elements will be colored
                    according to their icons. Else the 'child-color' will be
@@ -250,34 +250,34 @@
     </key>
 
     <key name="child-fixed-color" type="s">
-      <default>"rgb(200, 200, 200)"</default>
+      <default>"rgb(255, 255, 255)"</default>
       <summary>Child Color</summary>
       <description>The color of the menu's child element.</description>
     </key>
     <key name="child-fixed-color-hover" type="s">
-      <default>"rgb(200, 200, 200)"</default>
+      <default>"rgb(255, 255, 255)"</default>
       <summary>Child Color Hover</summary>
       <description>The color of the menu's child element when hovered.</description>
     </key>
 
     <key name="child-auto-color-saturation" type="d">
-      <default>0.5</default>
+      <default>0.9</default>
       <summary>Child Auto Color Saturation</summary>
       <description>The saturation of automatically generated item colors.</description>
     </key>
     <key name="child-auto-color-saturation-hover" type="d">
-      <default>0.5</default>
+      <default>1.0</default>
       <summary>Child Auto Color Saturation Hover</summary>
       <description>The saturation of automatically generated item colors when hovered.</description>
     </key>
 
     <key name="child-auto-color-luminance" type="d">
-      <default>0.5</default>
+      <default>0.7</default>
       <summary>Child Auto Color Luminance</summary>
       <description>The luminance of automatically generated item colors.</description>
     </key>
     <key name="child-auto-color-luminance-hover" type="d">
-      <default>0.5</default>
+      <default>0.9</default>
       <summary>Child Auto Color Luminance Hover</summary>
       <description>The luminance of automatically generated item colors when hovered.</description>
     </key>
@@ -299,29 +299,29 @@
       <description>The size of the children elements in pixels.</description>
     </key>
     <key name="child-size-hover" type="d">
-      <default>50</default>
+      <default>64</default>
       <summary>Child Size Hover</summary>
       <description>The size of the children elements in pixels when hovered.</description>
     </key>
 
     <key name="child-offset" type="d">
-      <default>100</default>
+      <default>106</default>
       <summary>Child Offset</summary>
       <description>The offset of the children elements in pixels.</description>
     </key>
     <key name="child-offset-hover" type="d">
-      <default>100</default>
+      <default>113</default>
       <summary>Child Offset Hover</summary>
       <description>The offset of the children elements in pixels when hovered.</description>
     </key>
 
     <key name="child-icon-scale" type="d">
-      <default>0.7</default>
+      <default>0.8</default>
       <summary>Child Icon Scale</summary>
       <description>A scale factor for child icons.</description>
     </key>
     <key name="child-icon-scale-hover" type="d">
-      <default>0.9</default>
+      <default>0.8</default>
       <summary>Child Icon Scale Hover</summary>
       <description>A scale factor for child icons when hovered.</description>
     </key>
@@ -347,14 +347,14 @@
     <!-- Grandchild Item Settings -->
 
     <key name="grandchild-color-mode" enum="org.gnome.shell.extensions.flypie.GrandchildColorMode">
-      <default>"fixed"</default>
+      <default>"parent"</default>
       <summary>Grandchild Color Mode</summary>
       <description>If set to parent, the menu's grandchild elements will be colored
                    according to their parent's icons. Else the 'grandchild-color'
                    will be used.</description>
     </key>
     <key name="grandchild-color-mode-hover" enum="org.gnome.shell.extensions.flypie.GrandchildColorMode">
-      <default>"fixed"</default>
+      <default>"parent"</default>
       <summary>Grandchild Color Mode Hover</summary>
       <description>If set to parent, the menu's grandchild elements will be colored
                    according to their parent's icons. Else the 'grandchild-color'
@@ -373,23 +373,23 @@
     </key>
 
     <key name="grandchild-size" type="d">
-      <default>10</default>
+      <default>12</default>
       <summary>grandChild Size</summary>
       <description>The size of the grandchildren elements in pixels.</description>
     </key>
     <key name="grandchild-size-hover" type="d">
-      <default>10</default>
+      <default>15</default>
       <summary>grandChild Size Hover</summary>
       <description>The size of the grandchildren elements in pixels when hovered.</description>
     </key>
 
     <key name="grandchild-offset" type="d">
-      <default>25</default>
+      <default>22</default>
       <summary>Grandchild Offset</summary>
       <description>The offset of the grandchildren elements in pixels.</description>
     </key>
     <key name="grandchild-offset-hover" type="d">
-      <default>25</default>
+      <default>32</default>
       <summary>Grandchild Offset Hover</summary>
       <description>The offset of the grandchildren elements in pixels when hovered.</description>
     </key>
@@ -415,7 +415,7 @@
     </key>
 
     <key name="trace-color" type="s">
-      <default>"rgba(200, 200, 200, 0.8)"</default>
+      <default>"rgb(200, 200, 200)"</default>
       <summary>Trace Color</summary>
       <description>The color of the menu's trace.</description>
     </key>

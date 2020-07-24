@@ -34,7 +34,7 @@ var DefaultMenu = class DefaultMenu {
       name: 'Example Menu',
       icon: '🌟️',
       type: 'Menu',
-      shortcut: '<Primary>4',
+      shortcut: '<Primary>Space',
       id: 0,
       children: [
         {
