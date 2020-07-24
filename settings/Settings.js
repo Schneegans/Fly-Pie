@@ -260,18 +260,19 @@ var Settings = class Settings {
     }
 
     // Load a preset whenever the selection changes.
-    this._builder.get_object('preset-selection').connect('changed', (selection) => {
-      try {
-        const [ok, model, iter] = selection.get_selected();
-        if (ok) {
-          const path = model.get_value(iter, 1);
-          Preset.load(Gio.File.new_for_path(path));
-        }
+    this._builder.get_object('preset-treeview')
+        .connect('row-activated', (treeview, path) => {
+          try {
+            const [ok, iter] = treeview.get_model().get_iter(path);
+            if (ok) {
+              const path = treeview.get_model().get_value(iter, 1);
+              Preset.load(Gio.File.new_for_path(path));
+            }
 
-      } catch (error) {
-        utils.notification('Failed to load Preset: ' + error);
-      }
-    });
+          } catch (error) {
+            utils.notification('Failed to load Preset: ' + error);
+          }
+        });
 
     // Open a save-dialog when the save button is pressed.
     this._builder.get_object('save-preset-button').connect('clicked', (button) => {
