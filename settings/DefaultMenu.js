@@ -138,6 +138,12 @@ var DefaultMenu = class DefaultMenu {
           type: 'Submenu',
           children: [
             {
+              name: 'Fly-Pie Settings',
+              icon: 'gnome-settings',
+              type: 'Command',
+              data: 'gnome-extensions prefs flypie@schneegans.github.com',
+            },
+            {
               name: 'Internet',
               icon: 'applications-internet',
               type: 'Submenu',
@@ -162,12 +168,6 @@ var DefaultMenu = class DefaultMenu {
               type: 'Submenu',
               children: [
                 textEditor, {
-                  name: 'Fly-Pie Settings',
-                  icon: 'gnome-settings',
-                  type: 'Command',
-                  data: 'gnome-extensions prefs flypie@schneegans.github.com',
-                },
-                {
                   name: 'Terminal',
                   icon: 'org.gnome.Terminal',
                   type: 'Command',
