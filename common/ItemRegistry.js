@@ -271,6 +271,9 @@ var ItemTypes = {
       // Add the trash entry.
       pushForUri(result, 'trash://');
 
+      // Add the home entry.
+      pushForUri(result, 'file://' + GLib.get_home_dir());
+
       // Add the desktop entry.
       pushForUri(
           result,
