@@ -5,7 +5,7 @@
 [![check](https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Fly-Pie/actions)
 [![license](https://img.shields.io/badge/Gnome_Shell-3.36.2-blue.svg)](LICENSE)
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
-[![comments](https://img.shields.io/badge/Comments-32.0%25-green.svg)](cloc.sh)
+[![comments](https://img.shields.io/badge/Comments-32.2%25-green.svg)](cloc.sh)
 
 **Fly-Pie** is an attractive marking menu for Gnome-Shell.
 It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.
