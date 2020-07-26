@@ -70,25 +70,27 @@ var Daemon = class Daemon {
     // configuration changes, we bind all the configured shortcuts.
     this._settings = utils.createSettings();
 
-    // Store the new menu configuration.
-    let json                = this._settings.get_string('menu-configuration');
-    let createDefaultConfig = false;
+    // Here we test whether any menus are configured. If not, the default configuration is
+    // loaded.
+    let json = this._settings.get_string('menu-configuration');
 
+    // Try to parse the configuration.
     try {
       const config = JSON.parse(json);
-      if (!Array.isArray(config) || config.length == 0) {
-        createDefaultConfig = true;
-      }
-    } catch {
-      createDefaultConfig = true;
-    }
 
-    // Add default menu if non is configured.
-    if (createDefaultConfig) {
+      // If it's not an array something is wrong - the next call to
+      // _onMenuConfigsChanged() will show an error. We load the default menu only if the
+      // parsed element is an empty array.
+      if (Array.isArray(config) || config.length == 0) {
       this._settings.set_string(
           'menu-configuration', JSON.stringify([DefaultMenu.get()]));
     }
+    } catch (error) {
+      // If parsing fails, we do nothing here - an error will be shown by the next call to
+      // _onMenuConfigsChanged().
+    }
 
+    // Reload the menu configuration when the settings key changes.
     this._settingsConnection = this._settings.connect(
         'changed::menu-configuration', () => this._onMenuConfigsChanged());
     this._onMenuConfigsChanged();
@@ -274,8 +276,20 @@ var Daemon = class Daemon {
   // be bound.
   _onMenuConfigsChanged() {
 
-    // Store the new menu configuration.
+    // Try to load the new menu configuration.
+    try {
     this._menuConfigs = JSON.parse(this._settings.get_string('menu-configuration'));
+    } catch (error) {
+      utils.notification('Failed to load Fly-Pie menu configuration: ' + error);
+      this._menuConfigs = [];
+    }
+
+    // Root element must be an array of menus.
+    if (!Array.isArray(this._menuConfigs)) {
+      utils.notification(
+          'Failed to load Fly-Pie menu configuration: Root element must be an array!');
+      this._menuConfigs = [];
+    }
 
     // First we create a set of all required shortcuts.
     const newShortcuts = new Set();
