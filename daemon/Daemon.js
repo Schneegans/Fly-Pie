@@ -82,7 +82,7 @@ var Daemon = class Daemon {
       // If it's not an array something is wrong - the next call to
       // _onMenuConfigsChanged() will show an error. We load the default menu only if the
       // parsed element is an empty array.
-      if (Array.isArray(config) || config.length == 0) {
+      if (Array.isArray(config) && config.length == 0) {
         this._settings.set_string(
             'menu-configuration', JSON.stringify([DefaultMenu.get()]));
       }
