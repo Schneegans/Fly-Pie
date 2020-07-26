@@ -457,6 +457,13 @@
                    of the current montor.</description>
     </key>
 
+    <key name="show-screencast-mouse" type="b">
+      <default>false</default>
+      <summary>Show screencast mouse</summary>
+      <description>If set to true, a big mouse pointer will be shown which can be
+                   used for screencasts.</description>
+    </key>
+
   </schema>
 </schemalist>
 

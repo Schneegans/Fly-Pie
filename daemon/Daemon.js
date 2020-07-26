@@ -10,13 +10,14 @@
 
 const {Gio, GLib} = imports.gi;
 
-const Me            = imports.misc.extensionUtils.getCurrentExtension();
-const Menu          = Me.imports.daemon.Menu.Menu;
-const Shortcuts     = Me.imports.daemon.Shortcuts.Shortcuts;
-const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
-const utils         = Me.imports.common.utils;
-const ItemRegistry  = Me.imports.common.ItemRegistry;
-const DefaultMenu   = Me.imports.settings.DefaultMenu.DefaultMenu;
+const Me             = imports.misc.extensionUtils.getCurrentExtension();
+const Menu           = Me.imports.daemon.Menu.Menu;
+const Shortcuts      = Me.imports.daemon.Shortcuts.Shortcuts;
+const DBusInterface  = Me.imports.common.DBusInterface.DBusInterface;
+const utils          = Me.imports.common.utils;
+const ItemRegistry   = Me.imports.common.ItemRegistry;
+const DefaultMenu    = Me.imports.settings.DefaultMenu.DefaultMenu;
+const MouseHighlight = Me.imports.daemon.MouseHighlight.MouseHighlight;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
@@ -82,9 +83,9 @@ var Daemon = class Daemon {
       // _onMenuConfigsChanged() will show an error. We load the default menu only if the
       // parsed element is an empty array.
       if (Array.isArray(config) || config.length == 0) {
-      this._settings.set_string(
-          'menu-configuration', JSON.stringify([DefaultMenu.get()]));
-    }
+        this._settings.set_string(
+            'menu-configuration', JSON.stringify([DefaultMenu.get()]));
+      }
     } catch (error) {
       // If parsing fails, we do nothing here - an error will be shown by the next call to
       // _onMenuConfigsChanged().
@@ -94,6 +95,11 @@ var Daemon = class Daemon {
     this._settingsConnection = this._settings.connect(
         'changed::menu-configuration', () => this._onMenuConfigsChanged());
     this._onMenuConfigsChanged();
+
+    // Show or hide screencast mouse if the corresponding settings key is toggled.
+    this._settings.connect(
+        'changed::show-screencast-mouse', () => this._onScreencastMouseChanged());
+    this._onScreencastMouseChanged();
   }
 
   // Cleans up stuff which is not cleaned up automatically.
@@ -102,6 +108,12 @@ var Daemon = class Daemon {
     this._dbus.unexport();
     this._shortcuts.destroy();
     this._settings.disconnect(this._settingsConnection);
+
+    // Hide the screencast mouse pointer (if any).
+    if (this._screencastMouse) {
+      this._screencastMouse.destroy();
+      global.stage.remove_child(this._screencastMouse);
+    }
   }
 
   // -------------------------------------------------------------- public D-Bus-Interface
@@ -278,7 +290,7 @@ var Daemon = class Daemon {
 
     // Try to load the new menu configuration.
     try {
-    this._menuConfigs = JSON.parse(this._settings.get_string('menu-configuration'));
+      this._menuConfigs = JSON.parse(this._settings.get_string('menu-configuration'));
     } catch (error) {
       utils.notification('Failed to load Fly-Pie menu configuration: ' + error);
       this._menuConfigs = [];
@@ -370,5 +382,24 @@ var Daemon = class Daemon {
     } while (isInUse);
 
     return nextID;
+  }
+
+  // This enables / disables the additional mouse pointer for screencasts. It is simply
+  // created as a child of the global.stage.
+  _onScreencastMouseChanged() {
+    const value = this._settings.get_boolean('show-screencast-mouse');
+
+    if (value && this._screencastMouse == undefined) {
+
+      // For now, we use a hard-coded size of 50. This can be made configurable in the
+      // future if anybody needs it.
+      this._screencastMouse = new MouseHighlight(50);
+      global.stage.add_child(this._screencastMouse);
+
+    } else if (!value && this._screencastMouse != undefined) {
+      this._screencastMouse.destroy();
+      global.stage.remove_child(this._screencastMouse);
+      delete this._screencastMouse;
+    }
   }
 };
