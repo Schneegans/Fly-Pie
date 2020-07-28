@@ -54,6 +54,10 @@
 // ShowMenu() and ShowCustomMenu() both show the menu in fullscreen, PreviewMenu() and  //
 // PreviewCustomMenu() will only cover half the screen in order to allow for            //
 // interaction with settings dialog.                                                    //
+// If any of the methods is called while a menu is open, the an OnCancel() will be      //
+// emitted for the currently active menu and the new menu will be shown. In fact, the   //
+// currently visible menu will be reused as much as possible, so you can actually       //
+// update an open menu this way.                                                        //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var DBusInterface = {
@@ -91,22 +95,19 @@ var DBusInterface = {
   // listed below.
   errorCodes: {
     eUnknownError: -1,
-    eAlreadyActive: -2,
-    eInvalidJSON: -3,
-    eInvalidAngles: -4,
-    eNoSuchMenu: -5,
+    eInvalidJSON: -2,
+    eInvalidAngles: -3,
+    eNoSuchMenu: -4,
   },
 
   // This can be used to translate an error code to a human-readable message.
   getErrorDescription: (code) => {
     switch (code) {
       case -2:
-        return 'A menu is already opened; try again later.';
-      case -3:
         return 'The provided menu description was no valid JSON.';
-      case -4:
+      case -3:
         return 'The angles of the children did not follow the rules.';
-      case -5:
+      case -4:
         return 'No menu with this name exists.';
       default:
         return 'An unknown error occurred.';

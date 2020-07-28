@@ -49,6 +49,9 @@ class Background extends Clutter.Actor {
 
     this._settings = utils.createSettings();
 
+    // Will be true as long as we have the input grabbed.
+    this._isModal = false;
+
     // Set the background color according to the settings.
     this.backgroundColor =
         Clutter.Color.from_string(this._settings.get_string('background-color'))[1];
@@ -129,10 +132,19 @@ class Background extends Clutter.Actor {
       // Remove any previous clips set in preview mode.
       this.remove_clip();
 
-      // Try to grab the complete input.
-      if (!Main.pushModal(this)) {
-        // Something went wrong while grabbing the input. Let's abort this.
-        return false;
+      // Actually this show() method can be called multiple times to toggle preview mode.
+      // We only attempt to grab the input if we do not have it grabbed already.
+      if (!this._isModal) {
+
+        // Try to grab the complete input. If this fails that's not too bad as we're
+        // full-screen.
+        if (Main.pushModal(this)) {
+          this._isModal = true;
+        } else {
+          // Something went wrong while grabbing the input. For now, we continue but log
+          // an corresponding message.
+          utils.debug('Failed to grab input. Continuing anyways...');
+        }
       }
     }
 
@@ -149,8 +161,9 @@ class Background extends Clutter.Actor {
   // background.
   hide() {
     // Un-grab the input.
-    if (!this._previewMode) {
+    if (this._isModal) {
       Main.popModal(this);
+      this._isModal = false;
     }
 
     // Do not receive input events anymore.

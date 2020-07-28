@@ -47,9 +47,6 @@ var Menu = class Menu {
     // shown.
     this._menuID = null;
 
-    // True if the currently visible menu is in preview-mode.
-    this._previewMode = false;
-
     // Stores a reference to the MenuItem which is currently dragged around while a
     // gesture is performed.
     this._draggedChild = null;
@@ -359,23 +356,33 @@ var Menu = class Menu {
     return this._menuID;
   }
 
-  // This shows the menu, blocking all user input. A subtle animation is used to fade in
-  // the menu. Returns an error code if something went wrong. See DBusInerface.js for all
-  // possible error codes.
+  // This shows the menu, or updates the menu if it is already visible. Returns an error
+  // code if something went wrong. See DBusInerface.js for all possible error codes.
   show(menuID, structure, previewMode) {
 
-    // The menu is already active.
-    if (this._menuID) {
-      return DBusInterface.errorCodes.eAlreadyActive;
+    // The menu is already active. Try to update the existing menu according to the new
+    // structure and if that is successful, emit an onCancel signal for the current menu.
+    if (this._menuID != null) {
+      const result = this.update(structure);
+
+      if (result < 0) {
+        return result;
+      }
+
+      // Emit a cancel event for the currently active menu and store the new ID.
+      this._onCancel(this._menuID);
+      this._menuID = menuID;
+
+      // Update the preview-mode state of the background.
+      this._background.show(previewMode);
+
+      return this._menuID;
     }
 
     // Remove any previous menus.
     if (this._root) {
       this._root.destroy();
     }
-
-    // Store the preview mode flag.
-    this._previewMode = previewMode;
 
     // Ascertain several properties of the menu structure. This assigns IDs and angles to
     // each and every item.
@@ -384,11 +391,8 @@ var Menu = class Menu {
       return result;
     }
 
-    // Try to grab the complete input.
-    if (!this._background.show(previewMode)) {
-      // Something went wrong while grabbing the input. Let's abort this.
-      return DBusInterface.errorCodes.eUnknownError;
-    }
+    // Show the background actor.
+    this._background.show(previewMode);
 
     // Everything seems alright, start opening the menu!
     this._menuID = menuID;
@@ -474,6 +478,7 @@ var Menu = class Menu {
   // Usually, at most one property of an item will be changed (name or icon). If both
   // changed, it's quite likely that an item was added, removed or moved. But actually
   // we don't know, so this guess will not be correct in all cases.
+  // It will return 0 on success and an error code < 0 on failure.
   update(structure) {
 
     // First make sure that all properties of the given menu structure are set correctly.

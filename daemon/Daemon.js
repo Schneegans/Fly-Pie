@@ -49,7 +49,7 @@ var Daemon = class Daemon {
         (menuID) => this._onCancel(menuID));
 
     // This is increased once for every menu request.
-    this._currentID = 0;
+    this._lastID = 0;
 
     // This class manages the global shortcuts. Once one of the registered shortcuts is
     // pressed, the corresponding menu is shown via the ShowMenu() method. If an error
@@ -135,15 +135,15 @@ var Daemon = class Daemon {
   // This opens a custom menu and can be directly called over the D-Bus.
   // See common/DBusInterface.js for a description of Fly-Pie's DBusInterface.
   ShowCustomMenu(json) {
-    this._currentID = this._getNextID(this._currentID);
-    return this._openCustomMenu(json, false, this._currentID);
+    this._lastID = this._getNextID(this._lastID);
+    return this._openCustomMenu(json, false, this._lastID);
   }
 
   // This opens a custom menu in preview mode and can be directly called over the D-Bus.
   // See common/DBusInterface.js for a description of Fly-Pie's DBusInterface.
   PreviewCustomMenu(json) {
-    this._currentID = this._getNextID(this._currentID);
-    return this._openCustomMenu(json, true, this._currentID);
+    this._lastID = this._getNextID(this._lastID);
+    return this._openCustomMenu(json, true, this._lastID);
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -199,7 +199,7 @@ var Daemon = class Daemon {
       try {
         structure = JSON.parse(config);
       } catch (error) {
-        logError(error);
+        utils.debug(error);
         return DBusInterface.errorCodes.eInvalidJSON;
       }
     }
@@ -209,7 +209,7 @@ var Daemon = class Daemon {
     try {
       return this._menu.show(menuID, structure, previewMode);
     } catch (error) {
-      logError(error);
+      utils.debug(error);
     }
 
     // Something weird happened.
