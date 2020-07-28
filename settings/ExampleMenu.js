@@ -14,7 +14,7 @@ var ExampleMenu = class ExampleMenu {
 
   static get() {
     return {
-      name: 'Example Menu', icon: 'firefox', children: [
+      name: 'Example Menu', icon: '😷', children: [
         {
           name: 'Smileys & People',
           icon: '😀',
