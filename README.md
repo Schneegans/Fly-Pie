@@ -18,6 +18,37 @@ It is **not** designed to be used with a keyboard only; there are other applicat
 Fly-Pie will also play nicely with **touch input**. 
 While it might work already, a future version of Fly-Pie will be dedicated to add proper touch support.
 
+## Features
+
+Here is a list of Fly-Pie's major features. It provides both, a high-level overview of the current capabilities and a rough idea of planned features. You can also watch the video above to see Fly-Pie in action.
+
+- [X] Create as many menus as you want
+- [X] Bind menus to shortcuts
+- [X] Create as deep menu hierarchies as you want
+- [X] Two selection modes which can be used together
+  - [X] **Point-and-Click:** Select items by clicking anywhere in the corresponding wedge
+  - [X] **Marking-Mode:** Select items by drawing gestures
+- [X] **Live Preview:** See your configuration changes instantaneously
+- [X] Available Actions
+  - [X] **Launch Application:** Executes any given shell command
+  - [X] **Activate Shortcut:** Simulates a key stroke
+  - [X] **Open URI:** Opens an URI with the default applications
+  - [X] **Open File:** Opens a file with the default applications
+- [X] Predefined Submenus
+  - [X] **Bookmarks:** Shows your commonly used directories
+  - [X] **Running Apps:** Shows the currently running applications
+  - [X] **Recent Files:** Shows your recently used files
+  - [X] **Frequently Used:** Shows your frequently used applications
+  - [X] **Favorites:** Shows your pinned applications
+  - [X] **Main Menu:** Shows all installed applications
+- [X] D-Bus Interface
+  - [X] Open pre-configured menus via the D-Bus
+  - [X] Open custom menus via the D-Bus
+- [ ] Proper touch-support
+- [ ] Cool Presets
+- [ ] Tutorials
+- [ ] Achievements
+
 ## Installation
 
 You can either install a stable release or grab the latest version directly with `git`.
