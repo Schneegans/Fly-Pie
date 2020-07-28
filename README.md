@@ -44,8 +44,12 @@ Here is a list of Fly-Pie's major features. It provides both, a high-level overv
 - [X] D-Bus Interface
   - [X] Open pre-configured menus via the D-Bus
   - [X] Open custom menus via the D-Bus
+- [ ] Translations
+  - [X] English
+  - [ ] German
+  - [ ] ...
 - [ ] Proper touch-support
-- [ ] Cool Presets
+- [ ] Cool appearance presets
 - [ ] Tutorials
 - [ ] Achievements
 
