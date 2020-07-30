@@ -8,7 +8,7 @@
 [![comments](https://img.shields.io/badge/Lines_of_Code-4.1k-lightgrey.svg)](cloc.sh)
 [![comments](https://img.shields.io/badge/Comments-32.6%25-green.svg)](cloc.sh)
 
-**Fly-Pie** is an attractive marking menu for Gnome-Shell.
+**Fly-Pie** is an attractive marking menu for Gnome Shell.
 It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.
 (You got it? Like pilot, but with a :cake:).
 
@@ -25,7 +25,7 @@ Click the player image on the right to watch a trailer on YouTube!
 
 ## Features
 
-_:construction: **Under Construction:** Fly-Pie is still under heavy development! For now, it has been only tested on **Ubuntu 20.04** and **Gnome-Shell 3.36.2**. Whenever you encounter a :beetle: bug or have :tada: feature request, 
+_:construction: **Under Construction:** Fly-Pie is still under heavy development! For now, it has been only tested on **Ubuntu 20.04** and **Gnome Shell 3.36.2**. Whenever you encounter a :beetle: bug or have :tada: feature request, 
 report this via [Github issues](https://github.com/schneegans/fly-pie/issues)._
 
 The list below provides both, a high-level overview of Fly-Pie's current capabilities as well as a rough idea of planned features. 
@@ -69,7 +69,7 @@ You can either install a stable release or grab the latest version directly with
 ### Installing a Stable Release
 
 Just [download the latest release](https://github.com/Schneegans/Fly-Pie/releases) and extract the contained directory to `~/.local/share/gnome-shell/extensions`.
-Then restart Gnome-Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
 Or logout / login if you are on Wayland.
 Then you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* application or with this command:
 
@@ -85,7 +85,7 @@ git clone https://github.com/Schneegans/Fly-Pie.git
 mv Fly-Pie flypie@schneegans.github.com
 ```
 
-Then restart Gnome-Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
 Or logout / login if you are on Wayland.
 Then you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* application or with this command:
 
@@ -184,7 +184,7 @@ report this via [Github issues](https://github.com/schneegans/fly-pie/issues).
 We are happy to receive contributions to Fly-Pie in the form of **pull requests** via Github.
 Feel free to fork the repository, implement your changes and create a merge request to the `develop` branch.
 
-Developing a Gnome-Shell extension is not easy, as debugging possibilities are quite limited. One thing you should always do is to monitor Gnome-Shells output for error or debug messages produced by Fly-Pie. This can be done like this:
+Developing a Gnome Shell extension is not easy, as debugging possibilities are quite limited. One thing you should always do is to monitor Gnome Shells output for error or debug messages produced by Fly-Pie. This can be done like this:
 
 ```bash
 journalctl /usr/bin/gnome-shell -f -o cat | grep flypie -B 2 -A 2

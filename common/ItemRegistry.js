@@ -376,7 +376,7 @@ var ItemTypes = {
   },
 
   // Returns an item with entries for each "frequently used application", as reported by
-  // Gnome-Shell.
+  // Gnome Shell.
   FrequentlyUsed: {
     name: 'Frequently Used',
     icon: 'emblem-favorite',
@@ -406,14 +406,14 @@ var ItemTypes = {
   },
 
   // Returns an item with entries for each "favorite application", as reported by
-  // Gnome-Shell.
+  // Gnome Shell.
   Favorites: {
     name: 'Favorites',
     icon: 'starred',
     defaultData: '',
     subtitle: 'Shows your pinned applications.',
     description:
-        'The <b>Favorites</b> submenu the applications you have pinned to Gnome-Shell\'s Dash.',
+        'The <b>Favorites</b> submenu the applications you have pinned to Gnome Shell\'s Dash.',
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
     createItem: (name, icon, angle, data) => {

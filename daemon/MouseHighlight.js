@@ -20,7 +20,7 @@ const utils = Me.imports.common.utils;
 // video of Fly-Pie, you may encounter two issues:                                      //
 //  - People watching your video will not see when you pressed the buttons of your      //
 //    mouse. This is however quite important to understand the behavior of Fly-Pie.     //
-//  - When using the built-in screen-recorder of Gnome-Shell, a hard-coded frame-rate   //
+//  - When using the built-in screen-recorder of Gnome Shell, a hard-coded frame-rate   //
 //    of 10 FPS is used to capture the mouse. Even if the rest of the video consists    //
 //    of smooth 60 FPS footage, the video will look very sloppy as the mouse moves      //
 //    sluggishly around.                                                                //

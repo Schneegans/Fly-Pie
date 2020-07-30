@@ -87,7 +87,7 @@ var DefaultMenu = class DefaultMenu {
               type: 'RunningApps',
             },
             {
-              name: 'Gnome-Shell',
+              name: 'Gnome Shell',
               icon: 'gnome-foot',
               type: 'Submenu',
               children: [

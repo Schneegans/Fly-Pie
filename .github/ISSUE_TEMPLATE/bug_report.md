@@ -15,7 +15,7 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
-You may also check the output of Gnome-Shell for any error messages related to Fly-Pie. This can be done with the following terminal command:
+You may also check the output of Gnome Shell for any error messages related to Fly-Pie. This can be done with the following terminal command:
 
 ```bash
 journalctl /usr/bin/gnome-shell | grep flypie -B 2 -A 2
@@ -26,5 +26,5 @@ A clear and concise description of what you expected to happen.
 
 ## System
 _Please complete the following information:_
- - Fly-Pie version [e.g. v1.1.0]
- - Gnome-Shell version: [e.g. 3.36.2]
+ - Fly-Pie version [e.g. v1.1.0, or commit SHA]
+ - Gnome Shell version: [e.g. 3.36.2]
