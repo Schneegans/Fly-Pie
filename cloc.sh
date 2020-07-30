@@ -48,4 +48,6 @@ else
       'BEGIN {printf "Lines of source code: %6.1fk\n", a/1000}'
   awk -v a=$COMMENT_LINES \
       'BEGIN {printf "Lines of comments:    %6.1fk\n", a/1000}'
+  awk -v a=$COMMENT_LINES -v b=$LINES_OF_CODE \
+      'BEGIN {printf "Comment Percentage:   %6.1f%\n", 100*a/b}'
 fi
