@@ -477,7 +477,8 @@ class MenuItem extends Clutter.Actor {
 
         // We store the average color as a property of this.
         const surface          = utils.createIcon(this.icon, 24);
-        this._averageIconColor = utils.getAverageIconColor(surface, 24);
+        const [r, g, b]        = utils.getAverageIconColor(surface, 24);
+        this._averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
       }
 
       // Now we modify this color based on luminance and saturation.

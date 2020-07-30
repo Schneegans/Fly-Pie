@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                                             = imports.cairo;
-const {Gdk, Gtk, Gio, Pango, PangoCairo, Clutter, GLib} = imports.gi;
+const Cairo                                    = imports.cairo;
+const {Gdk, Gtk, Gio, Pango, PangoCairo, GLib} = imports.gi;
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 
@@ -146,8 +146,8 @@ function createIcon(name, size) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Returns a representative average Clutter.Color for a given Cairo.Surface.            //
-// This is based on code from the original Gnome-Pie.                                   //
+// Returns an [r, g, b], with each element [0...255] representing an average color for  //
+// a given Cairo.Surface. This is based on code from Gnome-Pie.                         //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function getAverageIconColor(iconSurface, iconSize) {
@@ -177,12 +177,8 @@ function getAverageIconColor(iconSurface, iconSize) {
     total += relevance;
   }
 
-  // Create a Clutter.Color based on the calculated values.
-  return new Clutter.Color({
-    red: rTotal / total * 255,
-    green: gTotal / total * 255,
-    blue: bTotal / total * 255
-  });
+  // Create an array based on the calculated values.
+  return [rTotal / total * 255, gTotal / total * 255, bTotal / total * 255];
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
