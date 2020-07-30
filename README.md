@@ -40,6 +40,7 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
 - [X] Available Actions
   - [X] **Launch Application:** Executes any given shell command
   - [X] **Activate Shortcut:** Simulates a key stroke
+  - [X] **Insert Text:** Pastes some given text to wherever the cursor currently is
   - [X] **Open URI:** Opens an URI with the default applications
   - [X] **Open File:** Opens a file with the default applications
 - [X] Predefined Submenus
