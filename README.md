@@ -51,6 +51,7 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
 - [X] D-Bus Interface
   - [X] Open pre-configured menus via the D-Bus
   - [X] Open custom menus via the D-Bus
+- [ ] Make it available on extensions.gnome.org
 - [ ] Translations
   - [X] English
   - [ ] German
@@ -192,23 +193,33 @@ journalctl /usr/bin/gnome-shell -f -o cat | grep flypie -B 2 -A 2
 
 The development of Fly-Pie follows a simplified version of **git-flow**: The `master` branch always contains stable code.
 New features and bug fixes are implemented in `feature/*` branches and are merged to `develop` once they are finished.
-When a new milestone is reached, the content of `develop` will be merged to `master` and a tag is created.
+When a new milestone is reached, the content of `develop` will be merged to `master` and a tag is created. In rare and critical cases, hotfixes for the latest release will be created in the `master` branch and merged back to `develop`.
 
 ## Git Commit Messages
 
 Commits should start with a Capital letter and should be written in present tense (e.g. __:tada: Add cool new feature__ instead of __:tada: Added cool new feature__).
-It's a great idea to start the commit message with an applicable emoji. This does not only look great but also makes you rethink what to add to a commit.
+You should also start your commit message with **one** applicable emoji. This does not only look great but also makes you rethink what to add to a commit. Make many but small commits!
 
 Emoji | Description
 ------|------------
-:tada: `:tada:` | Added a cool new feature
-:wrench: `:wrench:` | Refactored / improved a small piece of code
-:hammer: `:hammer:` | Refactored / improved large parts of the code
-:sparkles: `:sparkles:` | Applied clang-format
-:art: `:art:` | Improved / added assets like themes
-:rocket: `:rocket:` | Improved performance
-:memo: `:memo:` | Wrote documentation
-:beetle: `:beetle:` | Fixed a bug
-:twisted_rightwards_arrows: `:twisted_rightwards_arrows:` | Merged a branch
-:fire: `:fire:` | Removed something
-:truck: `:truck:` | Moved / renamed something
+:tada: `:tada:` | When you added a cool new feature.
+:wrench: `:wrench:` | When you refactored / improved a small piece of code.
+:hammer: `:hammer:` | When you refactored / improved large parts of the code.
+:sparkles: `:sparkles:` | When you applied clang-format.
+:art: `:art:` | When you improved / added assets like themes.
+:rocket: `:rocket:` | When you improved performance.
+:memo: `:memo:` | When you wrote documentation.
+:beetle: `:beetle:` | When you fixed a bug.
+:twisted_rightwards_arrows: `:twisted_rightwards_arrows:` | When you merged a branch.
+:fire: `:fire:` | When you removed something.
+:truck: `:truck:` | When you moved / renamed something.
+
+## Version Numbers
+
+Releases in the 0.x.x series will most likely have a lot of breaking API changes, as the software becomes more and more mature.
+However, starting from version 1.0.0, version numbers of Fly-Pie will be assigned according to the [Semantic Versioning](https://semver.org/) scheme.
+This means, given a version number MAJOR.MINOR.PATCH, we will increment the:
+
+1. MAJOR version when we make incompatible API changes (that relates mainly to the D-Bus API, the presets file format and the Gio.Settings configuration),
+2. MINOR version when we add functionality in a backwards compatible manner, and
+3. PATCH version when we make backwards compatible bug fixes.
