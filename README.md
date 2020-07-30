@@ -104,16 +104,23 @@ For now, here are some hints to ease your path to become a master Pielot:
 * Try remembering the path to an item. Open the menu and **draw the path with your mouse**. You can start with individual segments of the path, put you can also try to draw the entire path!
 * You may find it more successful if you explicitly try to compose your gesture of straight parts. **Do not draw curvy paths but rather expressive zig-zag-lines!**
 
+
 ### Bake Your First Pie Menu!
 
 <img align="right" width="250px" src ="resources/menu-editor.png" />
 
-While the default menu may give you the opportunity to play around with Fly-Pie, you will have to define your own menus!
+The default menu may give you the opportunity to play around with Fly-Pie, but you should definitely define your own menus!
 
 The configuration dialog of Fly-Pie has three pages. On the first page you can define its **appearance**, on the second you can **define your own menus**. The last one... well, we will come to this later!
 
 With the play-button you can always open a **live-preview** of your menu.
 Just play around with the options, most of it should be more or less self-explanatory.
+
+### Tweak the Appearance Settings!
+
+While there are not many presets included for now - this will happen in a future version - you can already create your own! There are quite some possibilities...
+
+<img src ="resources/presets.png" />
 
 ## Fly-Pie's D-Bus Interface
 
