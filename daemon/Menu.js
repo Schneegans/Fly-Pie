@@ -253,11 +253,11 @@ var Menu = class Menu {
       // Finally, if a child was selected which is activatable, we report a selection and
       // hide the entire menu.
       if (child.activatable) {
-        this._onSelect(this._menuID, child.id);
         this._background.set_easing_delay(
             this._settings.get_double('easing-duration') * 1000);
         this.hide();
         this._background.set_easing_delay(0);
+        this._onSelect(this._menuID, child.id);
       }
     });
 
