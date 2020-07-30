@@ -24,7 +24,10 @@ Click the player image on the right to watch a trailer on YouTube!
 
 ## Features
 
-Here is a list of Fly-Pie's major features. It provides both, a high-level overview of the current capabilities and a rough idea of planned features. You can also watch the video above to see Fly-Pie in action.
+_:construction: **Under Construction:** Fly-Pie is still under heavy development! For now, it has been only tested on **Ubuntu 20.04** and **Gnome-Shell 3.36.2**. Whenever you encounter a :beetle: bug or have :tada: feature request, 
+report this via [Github issues](https://github.com/schneegans/fly-pie/issues)._
+
+The list below provides both, a high-level overview of Fly-Pie's current capabilities as well as a rough idea of planned features. 
 
 - [X] Create as many menus as you want
 - [X] Bind menus to shortcuts
