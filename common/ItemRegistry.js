@@ -125,7 +125,7 @@ var ItemTypes = {
         angle: angle,
         activate: () => {
           try {
-            let ctx    = global.create_app_launch_context(0, -1);
+            const ctx  = global.create_app_launch_context(0, -1);
             const item = Gio.AppInfo.create_from_commandline(
                 data, null, Gio.AppInfoCreateFlags.NONE);
             item.launch([], ctx);
@@ -241,7 +241,7 @@ var ItemTypes = {
           }
 
           // Try tgo retrieve an icon for the file.
-          let icon = 'missing-image';
+          let icon = 'image-missing';
           try {
             const info = file.query_info('standard::icon', 0, null);
             icon       = info.get_icon().to_string();
@@ -255,7 +255,7 @@ var ItemTypes = {
             activate: () => {
               // Open the file with the default application.
               try {
-                let ctx = global.create_app_launch_context(0, -1);
+                const ctx = global.create_app_launch_context(0, -1);
                 Gio.AppInfo.launch_default_for_uri(uri, ctx);
               } catch (error) {
                 utils.notification('Failed to open "%s": %s'.format(this.name, error));
@@ -318,12 +318,16 @@ var ItemTypes = {
     settingsType: SettingsTypes.NONE,
     settingsList: 'submenu-types-list',
     createItem: (name, icon, angle, data) => {
-      let apps   = Shell.AppSystem.get_default().get_running();
-      let result = {name: name, icon: icon, angle: angle, children: []};
+      const apps   = Shell.AppSystem.get_default().get_running();
+      const result = {name: name, icon: icon, angle: angle, children: []};
 
       for (let i = 0; i < apps.length; ++i) {
-        let windows = apps[i].get_windows();
-        let icon    = apps[i].get_app_info().get_icon().to_string();
+        let icon = 'image-missing';
+        try {
+          icon = apps[i].get_app_info().get_icon().to_string();
+        } catch (e) {
+        }
+        const windows = apps[i].get_windows();
         windows.forEach(window => {
           result.children.push({
             name: window.get_title(),
@@ -455,8 +459,8 @@ var ItemTypes = {
 
             // Add an item for each application.
             case GMenu.TreeItemType.ENTRY:
-              let app  = iter.get_entry().get_app_info();
-              let icon = 'missing-image';
+              const app  = iter.get_entry().get_app_info();
+              const icon = 'image-missing';
               if (app.get_icon()) {
                 icon = app.get_icon().to_string();
               }
@@ -464,7 +468,7 @@ var ItemTypes = {
                 name: app.get_name(),
                 icon: icon,
                 activate: () => {
-                  let ctx = global.create_app_launch_context(0, -1);
+                  const ctx = global.create_app_launch_context(0, -1);
 
                   try {
                     app.launch([], ctx);
@@ -478,8 +482,8 @@ var ItemTypes = {
 
             // Recursively add child items to directories.
             case GMenu.TreeItemType.DIRECTORY:
-              let directory = iter.get_directory();
-              item          = {
+              const directory = iter.get_directory();
+              item            = {
                 name: directory.get_name(),
                 icon: directory.get_icon().to_string(),
                 children: []
@@ -497,12 +501,12 @@ var ItemTypes = {
       };
 
 
-      let menu = new GMenu.Tree(
+      const menu = new GMenu.Tree(
           {menu_basename: 'applications.menu', flags: GMenu.TreeFlags.NONE});
 
       menu.load_sync();
 
-      let result = {name: name, icon: icon, angle: angle, children: []};
+      const result = {name: name, icon: icon, angle: angle, children: []};
 
       pushMenuItems(result, menu.get_root_directory());
 
