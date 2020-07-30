@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                                         = imports.cairo;
-const {Clutter, Cogl, Gio, GObject, Graphene, GLib} = imports.gi;
+const Cairo                               = imports.cairo;
+const {Clutter, Cogl, Gio, GObject, GLib} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
@@ -432,31 +432,36 @@ class SelectionWedges extends Clutter.Actor {
     // is set to M and we wait for the next motion event.
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK) {
 
-      // Storethe current mouse position.
-      const mouse = new Graphene.Vec2();
-      mouse.init(screenX, screenY);
+      // Store the current mouse position.
+      const mouse = {x: screenX, y: screenY};
 
       if (this._stroke.start == null) {
 
         // It's the first event of this gesture, so we store the current mouse position as
         // start and end. There is nothing more to be done.
-        this._stroke.start = new Graphene.Vec2();
-        this._stroke.start.init_from_vec2(mouse);
-
-        this._stroke.end = new Graphene.Vec2();
-        this._stroke.end.init_from_vec2(mouse);
+        this._stroke.start = {x: mouse.x, y: mouse.y};
+        this._stroke.end   = {x: mouse.x, y: mouse.y};
 
       } else {
 
         // Calculate the vector S->E in the diagram above.
-        const strokeDir    = this._stroke.end.subtract(this._stroke.start);
-        const strokeLength = strokeDir.length();
+        const strokeDir = {
+          x: this._stroke.end.x - this._stroke.start.x,
+          y: this._stroke.end.y - this._stroke.start.y
+        };
+
+        const strokeLength =
+            Math.sqrt(strokeDir.x * strokeDir.x + strokeDir.y * strokeDir.y);
 
         if (strokeLength > this._settings.gestureMinStrokeLength) {
 
           // Calculate the vector E->M in the diagram above.
-          const tipDir    = mouse.subtract(this._stroke.end);
-          const tipLength = tipDir.length();
+          const tipDir = {
+            x: mouse.x - this._stroke.end.x,
+            y: mouse.y - this._stroke.end.y
+          };
+
+          const tipLength = Math.sqrt(tipDir.x * tipDir.x + tipDir.y * tipDir.y);
 
           if (tipLength > this._settings.gestureJitterThreshold) {
 
@@ -469,11 +474,12 @@ class SelectionWedges extends Clutter.Actor {
 
             // Update the point M in the diagram above to be the new E for the next motion
             // event.
-            this._stroke.end.init_from_vec2(mouse);
+            this._stroke.end = {x: mouse.x, y: mouse.y};
 
             // Now compute the angle between S->E and E->M.
             const angle = Math.acos(
-                tipDir.scale(1 / tipLength).dot(strokeDir.scale(1 / strokeLength)));
+                tipDir.x / tipLength * strokeDir.x / strokeLength +
+                tipDir.y / tipLength * strokeDir.y / strokeLength);
 
             //  Emit the selection events if it exceeds the configured threshold.
             if (angle * 180 / Math.PI > this._settings.gestureMinStrokeAngle) {
@@ -496,7 +502,7 @@ class SelectionWedges extends Clutter.Actor {
 
           // The vector S->E is not long enough to be a gesture, so we only update the end
           // point.
-          this._stroke.end.init_from_vec2(mouse);
+          this._stroke.end = {x: mouse.x, y: mouse.y};
         }
       }
     } else {
