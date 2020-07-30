@@ -71,9 +71,13 @@ var Daemon = class Daemon {
     // configuration changes, we bind all the configured shortcuts.
     this._settings = utils.createSettings();
 
-    // Here we test whether any menus are configured. If not, the default configuration is
-    // loaded.
+    // Here we test whether any menus are configured. If the key is completely empty, this
+    // is considered to be the same as "[]". If no menus are configured, the default
+    // configuration is loaded.
     let json = this._settings.get_string('menu-configuration');
+    if (json == '') {
+      json = '[]';
+    }
 
     // Try to parse the configuration.
     try {
