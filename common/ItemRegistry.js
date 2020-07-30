@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {Gio, GLib, Gtk, GMenu} = imports.gi;
+const {Gio, GLib, Gdk, Gtk, GMenu} = imports.gi;
 
 const ByteArray = imports.byteArray;
 const Me        = imports.misc.extensionUtils.getCurrentExtension();
@@ -47,6 +47,7 @@ var SettingsTypes = {
   FILE: 5,
   URL: 6,
   COUNT: 7,
+  TEXT: 8,
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -102,6 +103,30 @@ var ItemTypes = {
         angle: angle,
         activate: () => {
           InputManipulator.activateAccelerator(data);
+        }
+      };
+    }
+  },
+
+  // The hotkey action simulates the pressing of a hotkey when activated.
+  InsertText: {
+    name: 'Insert Text',
+    icon: 'input-keyboard',
+    defaultData: '',
+    subtitle: 'Types some text.',
+    description:
+        'The <b>Insert Text</b> action copies the given text to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things.',
+    settingsType: SettingsTypes.TEXT,
+    settingsList: 'action-types-list',
+    createItem: (name, icon, angle, data) => {
+      return {
+        name: name,
+        icon: icon,
+        angle: angle,
+        activate: () => {
+          const clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default());
+          clipboard.set_text(data, -1);
+          InputManipulator.activateAccelerator('<Primary>v');
         }
       };
     }

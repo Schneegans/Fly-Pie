@@ -397,6 +397,12 @@ var MenuEditor = class MenuEditor {
         this._setSelected('DATA', adjustment.value);
       });
 
+      // Store the item's text in the tree store's DATA column when the text of the
+      // corresponding input field is changed.
+      this._builder.get_object('item-text').connect('notify::text', (widget) => {
+        this._setSelected('DATA', widget.text);
+      });
+
       // Store the item's fixed angle in the tree store's ANGLE_OR_ID column when the
       // corresponding input field is changed. This is a bit more involved, as we check
       // for monotonically increasing angles among all sibling items. We iterate through
@@ -502,7 +508,8 @@ var MenuEditor = class MenuEditor {
           'item-settings-count-revealer': false,
           'item-settings-uri-revealer': false,
           'item-settings-command-revealer': false,
-          'item-settings-file-revealer': false
+          'item-settings-file-revealer': false,
+          'item-settings-text-revealer': false
         };
 
         if (somethingSelected) {
@@ -550,6 +557,10 @@ var MenuEditor = class MenuEditor {
           } else if (selectedSettingsType == ItemRegistry.SettingsTypes.COUNT) {
             this._builder.get_object('item-count').value = this._getSelected('DATA');
             revealers['item-settings-count-revealer']    = true;
+
+          } else if (selectedSettingsType == ItemRegistry.SettingsTypes.TEXT) {
+            this._builder.get_object('item-text').text = this._getSelected('DATA');
+            revealers['item-settings-text-revealer']   = true;
           }
         }
 
