@@ -318,7 +318,7 @@ var Settings = class Settings {
         saver.connect('response', (dialog, response_id) => {
           if (response_id === Gtk.ResponseType.OK) {
             try {
-              const path = dialog.get_filename();
+              let path = dialog.get_filename();
 
               // Make sure we have a *.json extension.
               if (!path.endsWith('.json')) {
