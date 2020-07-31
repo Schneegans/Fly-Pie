@@ -81,7 +81,7 @@ var DefaultMenu = class DefaultMenu {
             },
             {
               name: 'Gnome Shell',
-              icon: 'gnome-foot',
+              icon: 'workspace-switcher',
               type: 'Submenu',
               children: [
                 {
