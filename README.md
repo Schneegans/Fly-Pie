@@ -45,6 +45,7 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
   - [X] **Open File:** Opens a file with the default applications
 - [X] Predefined Submenus
   - [X] **Bookmarks:** Shows your commonly used directories
+  - [X] **Devices:** Shows connected devices
   - [X] **Running Apps:** Shows the currently running applications
   - [X] **Recent Files:** Shows your recently used files
   - [X] **Frequently Used:** Shows your frequently used applications
