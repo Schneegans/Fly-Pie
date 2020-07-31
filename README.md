@@ -3,7 +3,7 @@
 </p>
 
 [![check](https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Fly-Pie/actions)
-[![license](https://img.shields.io/badge/Gnome_Shell-3.36.2-blue.svg)](LICENSE)
+[![license](https://img.shields.io/badge/Gnome_Shell-3.36-blue.svg)](LICENSE)
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![comments](https://img.shields.io/badge/Lines_of_Code-4.1k-lightgrey.svg)](cloc.sh)
 [![comments](https://img.shields.io/badge/Comments-32.6%25-green.svg)](cloc.sh)
@@ -25,7 +25,7 @@ Click the player image on the right to watch a trailer on YouTube!
 
 ## Features
 
-_:construction: **Under Construction:** Fly-Pie is still under heavy development! For now, it has been only tested on **Ubuntu 20.04** and **Gnome Shell 3.36.2**. Whenever you encounter a :beetle: bug or have :tada: feature request, 
+_:construction: **Under Construction:** Fly-Pie is still under heavy development! For now, it has been only tested on **Ubuntu 20.04** and **Gnome Shell 3.36**. Whenever you encounter a :beetle: bug or have :tada: feature request, 
 report this via [Github issues](https://github.com/schneegans/fly-pie/issues)._
 
 The list below provides both, a high-level overview of Fly-Pie's current capabilities as well as a rough idea of planned features. 
@@ -96,7 +96,11 @@ gnome-extensions enable flypie@schneegans.github.com
 
 ## First Steps with Fly-Pie
 
-If you installed and enabled Fly-Pie for the very first time, you can bring up the default menu with <kbd>Ctrl</kbd> + <kbd>Space</kbd>.
+If you installed and enabled Fly-Pie for the very first time, you can bring up the default menu with <kbd>Ctrl</kbd> + <kbd>Space</kbd>. If nothing happens, you can execute the following command and look for any errors.
+
+```bash
+journalctl /usr/bin/gnome-shell -f -o cat | grep flypie -B 2 -A 2
+```
 
 In a future version of Fly-Pie, there will be interactive tutorials demonstrating effective usage patterns.
 For now, here are some hints to ease your path to become a master Pielot:
