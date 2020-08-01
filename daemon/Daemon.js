@@ -164,7 +164,8 @@ var Daemon = class Daemon {
 
         // Transform the configuration into a menu structure.
         const structure = ItemRegistry.ItemTypes['Menu'].createItem(
-            this._menuConfigs[i].name, this._menuConfigs[i].icon);
+            this._menuConfigs[i].name, this._menuConfigs[i].icon,
+            this._menuConfigs[i].centered);
 
         for (let j = 0; j < this._menuConfigs[i].children.length; j++) {
           structure.children.push(
@@ -338,7 +339,8 @@ var Daemon = class Daemon {
         if (this._menuConfigs[i].id == this._menu.getID()) {
           // Transform the configuration into a menu structure.
           const structure = ItemRegistry.ItemTypes['Menu'].createItem(
-              this._menuConfigs[i].name, this._menuConfigs[i].icon);
+              this._menuConfigs[i].name, this._menuConfigs[i].icon,
+              this._menuConfigs[i].centered);
 
           for (let j = 0; j < this._menuConfigs[i].children.length; j++) {
             structure.children.push(

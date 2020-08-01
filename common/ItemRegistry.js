@@ -81,8 +81,8 @@ var ItemTypes = {
         'A <b>Toplevel Menu</b> can contain any number of menu items and submenus. However, for precise item selection, a maximum number of twelve items is recommended.\nThe menu can be opened using the shortcut defined above. It is also possible to open a menu with a terminal command. You can read more on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.',
     settingsType: SettingsTypes.MENU,
     settingsList: 'menu-types-list',
-    createItem: (name, icon) => {
-      return {name: name, icon: icon, children: []};
+    createItem: (name, icon, centered) => {
+      return {name: name, icon: icon, centered: centered, children: []};
     }
   },
 

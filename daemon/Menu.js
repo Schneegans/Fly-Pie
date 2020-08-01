@@ -431,13 +431,17 @@ var Menu = class Menu {
     });
     this._selectionWedges.setItemAngles(itemAngles);
 
-    // Calculate menu position. In preview mode, we center the menu, else we position it
-    // at the mouse pointer.
-    if (previewMode) {
-      this._root.set_translation(
-          this._background.width / 2, this._background.height / 2, 0);
-      this._selectionWedges.set_translation(
-          this._background.width / 2, this._background.height / 2, 0);
+    // Calculate menu position. We open the menu in the middle of the screen if necessary.
+    // Else we position it at the mouse pointer.
+    if (previewMode || structure.centered) {
+      const posX = this._background.width / 2;
+      const posY = this._background.height / 2;
+      this._root.set_translation(posX, posY, 0);
+      this._selectionWedges.set_translation(posX, posY, 0);
+
+      if (!previewMode) {
+        this._input.warpPointer(posX, posY);
+      }
     } else {
       const [pointerX, pointerY] = global.get_pointer();
       const [clampedX, clampedY] = this._clampToToMonitor(pointerX, pointerY, 10);

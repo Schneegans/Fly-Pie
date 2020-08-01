@@ -29,6 +29,7 @@ let ColumnTypes = {
   NAME:          GObject.TYPE_STRING,   // The name without any markup.
   TYPE:          GObject.TYPE_STRING,   // The item type. Like 'Menu' or 'Bookmarks'.
   DATA:          GObject.TYPE_STRING,   // Used for the command, file, application, ...
+  CENTERED:      GObject.TYPE_BOOLEAN,  // Wether a menu should be opened centered.
   ANGLE_OR_ID:   GObject.TYPE_INT       // The fixed angle for items and the menu ID for
                                         // top-level menus.
 }
@@ -403,6 +404,12 @@ var MenuEditor = class MenuEditor {
         this._setSelected('DATA', widget.text);
       });
 
+      // For top-level menus, store whether they should be opened in the center of the
+      // screen.
+      this._builder.get_object('menu-centered').connect('notify::active', (widget) => {
+        this._setSelected('CENTERED', widget.active);
+      });
+
       // Store the item's fixed angle in the tree store's ANGLE_OR_ID column when the
       // corresponding input field is changed. This is a bit more involved, as we check
       // for monotonically increasing angles among all sibling items. We iterate through
@@ -502,7 +509,7 @@ var MenuEditor = class MenuEditor {
         // and selectively set them to be shown.
         const revealers = {
           'item-settings-revealer': somethingSelected,
-          'item-settings-menu-shortcut-revealer': false,
+          'item-settings-menu-revealer': false,
           'item-settings-angle-revealer': false,
           'item-settings-item-shortcut-revealer': false,
           'item-settings-count-revealer': false,
@@ -528,7 +535,9 @@ var MenuEditor = class MenuEditor {
           // shortcut.
           if (selectedSettingsType == ItemRegistry.SettingsTypes.MENU) {
             this._menuShortcutLabel.set_accelerator(this._getSelected('DATA'));
-            revealers['item-settings-menu-shortcut-revealer'] = true;
+            this._builder.get_object('menu-centered').active =
+                this._getSelected('CENTERED');
+            revealers['item-settings-menu-revealer'] = true;
           }
 
           // For all other items, the fixed angle can be set.
@@ -1029,6 +1038,7 @@ var MenuEditor = class MenuEditor {
             type: this._get(iter, 'TYPE'),
             shortcut: this._get(iter, 'DATA'),
             id: this._get(iter, 'ANGLE_OR_ID'),
+            centered: this._get(iter, 'CENTERED'),
             children: []
           };
 
@@ -1093,6 +1103,7 @@ var MenuEditor = class MenuEditor {
         this._set(iter, 'TYPE', menu.type);
         this._set(iter, 'DATA', menu.shortcut);
         this._set(iter, 'ANGLE_OR_ID', menu.id);
+        this._set(iter, 'CENTERED', menu.centered);
 
         parseChildren(menu, iter);
       }

@@ -168,6 +168,7 @@ This JSON structure is quite simple. Each item may have the following properties
 * **`"id"` (optional):** Once an item is selected, this ID will be reported as part of the selection path. If omitted, the ID is the index of the child.
 * **`"angle"` (optional, 0 - 359):** This forces the item to be placed in a specific direction. However, there is a restriction on the fixed angles. Inside a menu level, the fixed angles must be monotonically increasing, that is each fixed angle must be larger than any previous fixed angle.
 * **`"children"` (optional):** An array of child items.
+* **`"centered"` (only for root items, optional):** When set to `true`, the menu will be shown in the middle of the screen, else it will be shown at the mouse pointer.
 
 The method will return an integer.
 This will be either negative (Fly-Pie failed to parse the provided description, see [DBusInterface.js](common/DBusInterface.js) for a list of error codes) or a positive ID which will be passed to the signals of the interface.
