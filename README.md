@@ -128,11 +128,19 @@ While there are not many presets included for now - this will happen in a future
 
 <img src ="resources/presets.png" />
 
+### Alternative Ways to Open Menus
+
+There are two possibilities to open menus. Either via the configured shortcut or with a terminal command as described below. This second approach can be used in combination with other tools. Interesting companions are:
+* [CustomCorner](https://extensions.gnome.org/extension/1037/customcorner/): Open menus by moving your mouse to one corner of your screen!
+* [Easystroke](https://github.com/thjaeger/easystroke/wiki): X11 only, use mouse gestures to open menus!
+* [xbindkeys](http://www.nongnu.org/xbindkeys/xbindkeys.html): X11 only, bind menus to your additional mouse buttons!
+
+
 ## Fly-Pie's D-Bus Interface
 
 Fly-Pie has a D-Bus interface which allows not only to open configured menus via the commandline, but also to open completely custom-made menus defined with a JSON string.
 
-### Opening Menu Configured with the Menu Editor
+### Opening Menus Configured with the Menu Editor
 
 Use the following command to open a menu you configured with the Menu Editor.
 The only parameter given to the `ShowMenu` method is the name of the menu.
