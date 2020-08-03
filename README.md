@@ -8,7 +8,7 @@
 [![comments](https://img.shields.io/badge/Lines_of_Code-4.1k-lightgrey.svg)](cloc.sh)
 [![comments](https://img.shields.io/badge/Comments-32.6%25-green.svg)](cloc.sh)
 
-**Fly-Pie** is an attractive marking menu for Gnome Shell.
+**Fly-Pie** is an attractive marking menu for Gnome Shell which can be used to launch applications, simulate hotkeys, open URLs and much more.
 It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.
 (You got it? Like pilot, but with a :cake:).
 
@@ -66,7 +66,7 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
 
 ## Installation
 
-You can either install a stable release or grab the latest version directly with `git`.
+You can either install a stable release or download the latest version directly with `git`.
 
 ### Installing a Stable Release
 
@@ -104,7 +104,7 @@ journalctl /usr/bin/gnome-shell -f -o cat | grep flypie -B 2 -A 2
 ```
 
 In a future version of Fly-Pie, there will be interactive tutorials demonstrating effective usage patterns.
-For now, here are some hints to ease your path to become a master Pielot:
+For now, here are some hints to ease your path to become a master pielot:
 * You can **click anywhere in an item's wedge**. It does not matter whether you click directly on an item or at the edge of your screen as long as you are in the same wedge.
 * To enter **Marking Mode**, click and drag an item. As soon as you pause dragging or make a turn, the item will be selected. **This way you can select items with gestures!**
 * Try remembering the path to an item. Open the menu and **draw the path with your mouse**. You can start with individual segments of the path, put you can also try to draw the entire path!
@@ -142,14 +142,12 @@ Fly-Pie has a D-Bus interface which allows not only to open configured menus via
 
 ### Opening Menus Configured with the Menu Editor
 
-Use the following command to open a menu you configured with the Menu Editor.
+Use the following command to open a menu you configured with the Fly-Pie's Menu Editor.
 The only parameter given to the `ShowMenu` method is the name of the menu.
 There is also a similar method called `PreviewMenu` which will open the given menu in preview mode.
 
 ```bash
-gdbus call --session --dest org.gnome.Shell                            \
-  --object-path /org/gnome/shell/extensions/flypie                     \
-  --method org.gnome.Shell.Extensions.flypie.ShowMenu 'My Menu'
+gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie --method org.gnome.Shell.Extensions.flypie.ShowMenu 'My Menu'
 ```
 
 ### Opening Custom Menus via JSON
@@ -184,18 +182,21 @@ This will be either negative (Fly-Pie failed to parse the provided description, 
 There are two signals; `OnCancel` will be fired when the user aborts the selection in a menu, `OnSelect` is activated when the user makes a selection.
 Both signals send the ID which has been reported by the corresponding `ShowCustomMenu` call, in addition, `OnSelect` sends the path to the selected item.
 
+The path will be a string in the form of `"/1/0"`.
+This example would mean that the first child of the second child of the root menu was selected (indices are zero-based).
+If you assigned IDs to some of your items, their part of the path will be replaced by the ID.
+In the example above, selecting `Apatosaurus` will yield `"/b/1"`.
+
 You can use the following command to monitor the emitted signals:
 
 ```bash
-gdbus monitor  --session --dest org.gnome.Shell \
-  --object-path /org/gnome/shell/extensions/flypie
+gdbus monitor  --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie
 ```
 
 To see all available methods and signals you can introspect the interface:
 
 ```bash
-gdbus introspect  --session --dest org.gnome.Shell                    \
-  --object-path /org/gnome/shell/extensions/flypie
+gdbus introspect  --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie
 ```
 
 # Contributing to Fly-Pie
