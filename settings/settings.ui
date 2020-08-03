@@ -882,7 +882,7 @@
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">You may also open one of your own menus from the Menus tab.</property>
+                                    <property name="label" translatable="yes">You may also open one of your own menus from the Menu Editor.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -1333,24 +1333,6 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes">Global Appearance Settings</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkSeparator">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -1604,6 +1586,53 @@
                                 <property name="top_attach">6</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">center</property>
+                                    <property name="label" translatable="yes">Global Appearance Settings</property>
+                                    <attributes>
+                                      <attribute name="weight" value="bold"/>
+                                    </attributes>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_bottom">8</property>
+                                    <property name="label" translatable="yes">These settings affect all menu items.</property>
+                                    <property name="justify">center</property>
+                                    <property name="wrap">True</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -1653,24 +1682,6 @@
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">1</property>
-                                <property name="width">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes">Wedge Appearance</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
                                 <property name="width">4</property>
                               </packing>
                             </child>
@@ -2123,6 +2134,53 @@ will cancel the selection.</property>
                               </packing>
                             </child>
                             <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">center</property>
+                                    <property name="label" translatable="yes">Wedge Appearance</property>
+                                    <attributes>
+                                      <attribute name="weight" value="bold"/>
+                                    </attributes>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_bottom">8</property>
+                                    <property name="label" translatable="yes">Clicking inside a wedge will activate the corresponding item.</property>
+                                    <property name="justify">center</property>
+                                    <property name="wrap">True</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                                <property name="width">4</property>
+                              </packing>
+                            </child>
+                            <child>
                               <placeholder/>
                             </child>
                             <child>
@@ -2173,22 +2231,6 @@ will cancel the selection.</property>
                             <property name="margin_bottom">10</property>
                             <property name="row_spacing">10</property>
                             <property name="column_spacing">10</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes">Center Appearance</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                                <property name="width">5</property>
-                              </packing>
-                            </child>
                             <child>
                               <object class="GtkGrid">
                                 <property name="visible">True</property>
@@ -2725,24 +2767,6 @@ will cancel the selection.</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="margin_bottom">8</property>
-                                <property name="label" translatable="yes">The settings on the left are used if a child item is hovered, else the right side is used.</property>
-                                <property name="justify">center</property>
-                                <style>
-                                  <class name="dim-label"/>
-                                </style>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">1</property>
-                                <property name="width">5</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkSeparator">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -2981,6 +3005,69 @@ will cancel the selection.</property>
                                 <property name="top_attach">9</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="label" translatable="yes">Child Hovered</property>
+                                <property name="justify">center</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="label" translatable="yes">Center Appearance</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">0</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="label" translatable="yes">Center Hovered</property>
+                                <property name="justify">center</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -3060,22 +3147,6 @@ will cancel the selection.</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes">Children Appearance</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                                <property name="width">5</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkSeparator">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -3083,24 +3154,6 @@ will cancel the selection.</property>
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">2</property>
-                                <property name="width">5</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="margin_bottom">8</property>
-                                <property name="label" translatable="yes">The settings on the left are used for normal children, the right side is used for hovered children.</property>
-                                <property name="justify">center</property>
-                                <style>
-                                  <class name="dim-label"/>
-                                </style>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">1</property>
                                 <property name="width">5</property>
                               </packing>
                             </child>
@@ -4033,6 +4086,69 @@ will cancel the selection.</property>
                                 <property name="top_attach">11</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="label" translatable="yes">Normal</property>
+                                <property name="justify">center</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="label" translatable="yes">Hovered</property>
+                                <property name="justify">center</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="label" translatable="yes">Children Appearance</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">0</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -4078,22 +4194,6 @@ will cancel the selection.</property>
                             <property name="margin_bottom">10</property>
                             <property name="row_spacing">10</property>
                             <property name="column_spacing">10</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes">Grandchildren Appearance</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                                <property name="width">5</property>
-                              </packing>
-                            </child>
                             <child>
                               <object class="GtkSeparator">
                                 <property name="visible">True</property>
@@ -4477,18 +4577,15 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="margin_bottom">8</property>
-                                <property name="label" translatable="yes">The settings on the left are used for normal grandchildren,
-the right side is used for grandchildren whose parent is hovered.</property>
+                                <property name="label" translatable="yes">Normal</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
                               </object>
                               <packing>
-                                <property name="left_attach">0</property>
+                                <property name="left_attach">1</property>
                                 <property name="top_attach">1</property>
-                                <property name="width">5</property>
                               </packing>
                             </child>
                             <child>
@@ -4609,6 +4706,53 @@ the right side is used for grandchildren whose parent is hovered.</property>
                                 <property name="top_attach">3</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="label" translatable="yes">Parent Hovered</property>
+                                <property name="justify">center</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="label" translatable="yes">Grandchildren Appearance</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">0</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -4662,24 +4806,6 @@ the right side is used for grandchildren whose parent is hovered.</property>
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">1</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes">Trace Appearance</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
                                 <property name="width">3</property>
                               </packing>
                             </child>
@@ -4874,6 +5000,53 @@ the right side is used for grandchildren whose parent is hovered.</property>
                                 <property name="top_attach">2</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">center</property>
+                                    <property name="label" translatable="yes">Trace Appearance</property>
+                                    <attributes>
+                                      <attribute name="weight" value="bold"/>
+                                    </attributes>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_bottom">8</property>
+                                    <property name="label" translatable="yes">The trace is the connecting line between selected menu items.</property>
+                                    <property name="justify">center</property>
+                                    <property name="wrap">True</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -4954,7 +5127,7 @@ the right side is used for grandchildren whose parent is hovered.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">8</property>
                               </packing>
                             </child>
                             <child>
@@ -4970,7 +5143,7 @@ the right side is used for grandchildren whose parent is hovered.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">8</property>
                               </packing>
                             </child>
                             <child>
@@ -4990,7 +5163,7 @@ the right side is used for grandchildren whose parent is hovered.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">8</property>
                               </packing>
                             </child>
                             <child>
@@ -5000,7 +5173,7 @@ the right side is used for grandchildren whose parent is hovered.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">8</property>
+                                <property name="top_attach">7</property>
                                 <property name="width">3</property>
                               </packing>
                             </child>
@@ -5040,7 +5213,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">7</property>
+                                <property name="top_attach">6</property>
                               </packing>
                             </child>
                             <child>
@@ -5057,7 +5230,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="top_attach">7</property>
+                                <property name="top_attach">6</property>
                               </packing>
                             </child>
                             <child>
@@ -5077,7 +5250,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
-                                <property name="top_attach">7</property>
+                                <property name="top_attach">6</property>
                               </packing>
                             </child>
                             <child>
@@ -5087,7 +5260,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">6</property>
+                                <property name="top_attach">5</property>
                                 <property name="width">3</property>
                               </packing>
                             </child>
@@ -5127,7 +5300,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">5</property>
+                                <property name="top_attach">4</property>
                               </packing>
                             </child>
                             <child>
@@ -5143,7 +5316,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="top_attach">5</property>
+                                <property name="top_attach">4</property>
                               </packing>
                             </child>
                             <child>
@@ -5163,7 +5336,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
-                                <property name="top_attach">5</property>
+                                <property name="top_attach">4</property>
                               </packing>
                             </child>
                             <child>
@@ -5173,7 +5346,7 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">4</property>
+                                <property name="top_attach">3</property>
                                 <property name="width">3</property>
                               </packing>
                             </child>
@@ -5213,7 +5386,7 @@ the current item will be selected.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">3</property>
+                                <property name="top_attach">2</property>
                               </packing>
                             </child>
                             <child>
@@ -5230,7 +5403,7 @@ the current item will be selected.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="top_attach">3</property>
+                                <property name="top_attach">2</property>
                               </packing>
                             </child>
                             <child>
@@ -5250,31 +5423,13 @@ the current item will be selected.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
-                                <property name="top_attach">3</property>
+                                <property name="top_attach">2</property>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkSeparator">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">2</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_bottom">8</property>
-                                <property name="label" translatable="yes">These settings are independent of the presets. </property>
-                                <property name="justify">center</property>
-                                <property name="wrap">True</property>
-                                <style>
-                                  <class name="dim-label"/>
-                                </style>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -5283,29 +5438,13 @@ the current item will be selected.</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes">Advanced Settings</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkSeparator">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">10</property>
+                                <property name="top_attach">9</property>
                                 <property name="width">3</property>
                               </packing>
                             </child>
@@ -5345,7 +5484,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">11</property>
+                                <property name="top_attach">10</property>
                               </packing>
                             </child>
                             <child>
@@ -5365,7 +5504,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
-                                <property name="top_attach">11</property>
+                                <property name="top_attach">10</property>
                               </packing>
                             </child>
                             <child>
@@ -5377,7 +5516,54 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="top_attach">11</property>
+                                <property name="top_attach">10</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">center</property>
+                                    <property name="label" translatable="yes">Advanced Settings</property>
+                                    <attributes>
+                                      <attribute name="weight" value="bold"/>
+                                    </attributes>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_bottom">8</property>
+                                    <property name="label" translatable="yes">These settings are independent of the presets. </property>
+                                    <property name="justify">center</property>
+                                    <property name="wrap">True</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                                <property name="width">3</property>
                               </packing>
                             </child>
                           </object>
