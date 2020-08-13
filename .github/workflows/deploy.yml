@@ -17,7 +17,7 @@ jobs:
     - name: Create Release
       run: |
         mkdir flypie@schneegans.github.com
-        mv client common presets schemas server settings flypie@schneegans.github.com
+        mv common daemon presets resources schemas settings flypie@schneegans.github.com
         mv *.js README.md LICENSE flypie@schneegans.github.com
         zip -r flypie@schneegans.github.com.zip flypie@schneegans.github.com
     - name: Upload Release
