@@ -3,12 +3,16 @@ name: Badges
 on: [push]
 
 jobs:
-  gist-sync:
-    name: gist-sync
+  update_badges:
+    name: Update Badges
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: Download cloc
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y cloc
       - name: Create Badges
         run: |
           LOC="$(./cloc.sh --loc)"
