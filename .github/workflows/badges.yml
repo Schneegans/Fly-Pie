@@ -17,19 +17,12 @@ jobs:
         run: |
           LOC="$(./cloc.sh --loc)"
           PERCENTAGE="$(./cloc.sh --percentage)"
-          wget -O loc.svg "https://img.shields.io/badge/Lines_of_Code-$LOC-lightgrey.svg"
-          wget -O comments.svg "https://img.shields.io/badge/Comments-$PERCENTAGE%25-green.svg"
-      - uses: popsiclestick/gist-sync-action@v1.0.0
-        with:
-          auth: ${{ secrets.UPLOAD_BADGES }}
-          gist_url: https://gist.github.com/Schneegans/8f6459c2417de7534f64d98360dde865
-          gist_title: Fly-Pie Badges 
-          gist_description: Example Gist Description
-          github_file: loc.svg
-      - uses: popsiclestick/gist-sync-action@v1.0.0
-        with:
-          auth: ${{ secrets.UPLOAD_BADGES }}
-          gist_url: https://gist.github.com/Schneegans/8f6459c2417de7534f64d98360dde865
-          gist_title: Fly-Pie Badges 
-          gist_description: Example Gist Description
-          github_file: comments.svg
+
+          LOC_BADGE="$(wget -qO- https://img.shields.io/badge/Lines_of_Code-$LOC-lightgrey.svg | sed 's/\"/\\"/g')"
+          PERCENTAGE_BADGE="$(wget -qO- https://img.shields.io/badge/Comments-$PERCENTAGE%25-green.svg | sed 's/\"/\\"/g')"
+
+          curl -s -X PATCH \
+               -H "Content-Type: application/json" \
+               -H "Authorization: token ${{ secrets.UPLOAD_BADGES }}" \
+               -d '{"files": {"loc.svg": {"content": "'"$LOC_BADGE"'"}, "comments.svg": {"content": "'"$PERCENTAGE_BADGE"'"}}}' \
+               https://api.github.com/gists/8f6459c2417de7534f64d98360dde865
