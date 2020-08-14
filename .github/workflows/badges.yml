@@ -16,7 +16,6 @@ jobs:
           wget -O loc.svg "https://img.shields.io/badge/Lines_of_Code-$LOC-lightgrey.svg"
           wget -O comments.svg "https://img.shields.io/badge/Comments-$PERCENTAGE%25-green.svg"
       - uses: popsiclestick/gist-sync-action@v1.0.0
-        id: sync
         with:
           auth: ${{ secrets.UPLOAD_BADGES }}
           gist_url: https://gist.github.com/Schneegans/8f6459c2417de7534f64d98360dde865
@@ -24,7 +23,6 @@ jobs:
           gist_description: Example Gist Description
           github_file: loc.svg
       - uses: popsiclestick/gist-sync-action@v1.0.0
-        id: sync
         with:
           auth: ${{ secrets.UPLOAD_BADGES }}
           gist_url: https://gist.github.com/Schneegans/8f6459c2417de7534f64d98360dde865
