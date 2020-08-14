@@ -15,14 +15,14 @@ jobs:
           sudo apt-get install -y cloc
       - name: Create Badges
         run: |
-          LOC="$(./cloc.sh --loc)"
-          PERCENTAGE="$(./cloc.sh --percentage)"
+          CODE_LINES="$(   ./cloc.sh --loc)"
+          COMMENT_LINES="$(./cloc.sh --percentage)"
 
-          LOC_BADGE="$(wget -qO- https://img.shields.io/badge/Lines_of_Code-$LOC-lightgrey.svg | sed 's/\"/\\"/g')"
-          PERCENTAGE_BADGE="$(wget -qO- https://img.shields.io/badge/Comments-$PERCENTAGE%25-green.svg | sed 's/\"/\\"/g')"
+          CODE_LINES_BADGE="$(   wget -qO- https://img.shields.io/badge/Lines_of_Code-$CODE_LINES-lightgrey.svg | sed 's/\"/\\"/g')"
+          COMMENT_LINES_BADGE="$(wget -qO- https://img.shields.io/badge/Comments-$COMMENT_LINES%25-green.svg    | sed 's/\"/\\"/g')"
 
           curl -s -X PATCH \
                -H "Content-Type: application/json" \
                -H "Authorization: token ${{ secrets.UPLOAD_BADGES }}" \
-               -d '{"files": {"loc.svg": {"content": "'"$LOC_BADGE"'"}, "comments.svg": {"content": "'"$PERCENTAGE_BADGE"'"}}}' \
+               -d '{"files": {"loc.svg": {"content": "'"$CODE_LINES_BADGE"'"}, "comments.svg": {"content": "'"$COMMENT_LINES_BADGE"'"}}}' \
                https://api.github.com/gists/8f6459c2417de7534f64d98360dde865
