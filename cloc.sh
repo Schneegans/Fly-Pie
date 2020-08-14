@@ -11,7 +11,8 @@
 # This scripts counts the lines of code and comments in all JavaScript files.
 # The copyright-headers are substracted. It uses the commandline tool "cloc".
 # All dumb comments like those /////////// or those // ------------ are also substracted.
-# You can pass the --percentage-only flag to show only the percentage of code comments.
+# You can either pass --loc, --comments or  --percentage to show the respective values
+# only.
 
 # Get the location of this script.
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
@@ -38,16 +39,34 @@ LINES_OF_CODE=${TOKENS[4]}
 DUMB_COMMENTS="$(grep -r -E '//////|// -----' "${SCRIPT_DIR}" | wc -l)"
 COMMENT_LINES=$(($COMMENT_LINES - 5 * $NUMBER_OF_FILES - $DUMB_COMMENTS))
 
-# Print results.
-if [[ $* == *--percentage-only* ]]
-then
-  awk -v a=$COMMENT_LINES -v b=$LINES_OF_CODE \
-      'BEGIN {printf "%3.1f\n", 100*a/b}'
-else
+# Print all results if no arguments are given.
+if [[ $# -eq 0 ]] ; then
   awk -v a=$LINES_OF_CODE \
       'BEGIN {printf "Lines of source code: %6.1fk\n", a/1000}'
   awk -v a=$COMMENT_LINES \
       'BEGIN {printf "Lines of comments:    %6.1fk\n", a/1000}'
   awk -v a=$COMMENT_LINES -v b=$LINES_OF_CODE \
       'BEGIN {printf "Comment Percentage:   %6.1f%\n", 100*a/b}'
+  exit 0
+fi
+
+# Show lines of code.
+if [[ $* == *--loc* ]]
+then
+  awk -v a=$LINES_OF_CODE \
+      'BEGIN {printf "%.1fk\n", a/1000}'
+fi
+
+# Show lines of comments.
+if [[ $* == *--comments* ]]
+then
+  awk -v a=$COMMENT_LINES \
+      'BEGIN {printf "%.1fk\n", a/1000}'
+fi
+
+# Show precentage of comments.
+if [[ $* == *--percentage* ]]
+then
+  awk -v a=$COMMENT_LINES -v b=$LINES_OF_CODE \
+      'BEGIN {printf "%.1f\n", 100*a/b}'
 fi
