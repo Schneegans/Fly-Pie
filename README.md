@@ -5,8 +5,8 @@
 [![check](https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Fly-Pie/actions)
 [![shell](https://img.shields.io/badge/Gnome_Shell-3.36-blue.svg)](metadata.json)
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
-[![loc](https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/loc.svg)](cloc.sh)
-[![comments](https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.svg)](cloc.sh)
+[![loc](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/loc.json)](cloc.sh)
+[![comments](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json)](cloc.sh)
 
 **Fly-Pie** is an attractive marking menu for Gnome Shell which can be used to launch applications, simulate hotkeys, open URLs and much more.
 It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.

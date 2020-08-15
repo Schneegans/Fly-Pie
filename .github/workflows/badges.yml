@@ -1,28 +1,38 @@
 name: Badges
 
-on: [push]
+on:
+  push:
+    branches:
+      - develop
 
 jobs:
-  update_badges:
+  update-badges:
     name: Update Badges
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Download cloc
+        run: sudo apt-get update -y && sudo apt-get install -y cloc
+      - name: Get the Numbers
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y cloc
-      - name: Create Badges
-        run: |
-          CODE_LINES="$(   ./cloc.sh --loc)"
-          COMMENT_LINES="$(./cloc.sh --percentage)"
-
-          CODE_LINES_BADGE="$(   wget -qO- https://img.shields.io/badge/Lines_of_Code-$CODE_LINES-lightgrey.svg | sed 's/\"/\\"/g')"
-          COMMENT_LINES_BADGE="$(wget -qO- https://img.shields.io/badge/Comments-$COMMENT_LINES%25-green.svg    | sed 's/\"/\\"/g')"
-
-          curl -s -X PATCH \
-               -H "Content-Type: application/json" \
-               -H "Authorization: token ${{ secrets.UPLOAD_BADGES }}" \
-               -d '{"files": {"loc.svg": {"content": "'"$CODE_LINES_BADGE"'"}, "comments.svg": {"content": "'"$COMMENT_LINES_BADGE"'"}}}' \
-               https://api.github.com/gists/8f6459c2417de7534f64d98360dde865
+          echo "::set-env name=CODE_LINES::$(   ./cloc.sh --loc)"
+          echo "::set-env name=COMMENT_LINES::$(./cloc.sh --percentage)%"
+      - name: Create Lines-of-Code-Badge
+        uses: schneegans/dynamic-badges-action@master
+        with:
+          auth: ${{ secrets.UPLOAD_BADGES }}
+          gist-id: 8f6459c2417de7534f64d98360dde865
+          badge-name: loc.json
+          label: Lines of Code
+          message: ${{ env.CODE_LINES }}
+          color: lightgrey
+      - name: Create Comments-Badge
+        uses: schneegans/dynamic-badges-action@master
+        with:
+          auth: ${{ secrets.UPLOAD_BADGES }}
+          gist-id: 8f6459c2417de7534f64d98360dde865
+          badge-name: comments.json
+          label: Comments
+          message: ${{ env.COMMENT_LINES }}
+          color: green
