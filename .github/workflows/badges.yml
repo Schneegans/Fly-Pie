@@ -18,11 +18,22 @@ jobs:
           CODE_LINES="$(   ./cloc.sh --loc)"
           COMMENT_LINES="$(./cloc.sh --percentage)"
 
-          CODE_LINES_BADGE="$(   wget -qO- https://img.shields.io/badge/Lines_of_Code-$CODE_LINES-lightgrey.svg | sed 's/\"/\\"/g')"
-          COMMENT_LINES_BADGE="$(wget -qO- https://img.shields.io/badge/Comments-$COMMENT_LINES%25-green.svg    | sed 's/\"/\\"/g')"
+          CODE_LINES_BADGE="{                  \n
+            'schemaVersion': 1,                \n
+            'label':        'Lines of Code',   \n
+            'message':      '$CODE_LINES',     \n
+            'color':        'lightgrey'        \n
+          }"
+
+          COMMENT_LINES_BADGE="{               \n
+            'schemaVersion': 1,                \n
+            'label':        'Comments',        \n
+            'message':      '$COMMENT_LINES%', \n
+            'color':        'green'            \n
+          }"
 
           curl -s -X PATCH \
                -H "Content-Type: application/json" \
                -H "Authorization: token ${{ secrets.UPLOAD_BADGES }}" \
-               -d '{"files": {"loc.svg": {"content": "'"$CODE_LINES_BADGE"'"}, "comments.svg": {"content": "'"$COMMENT_LINES_BADGE"'"}}}' \
+               -d '{"files": {"loc.json": {"content": "'"$CODE_LINES_BADGE"'"}, "comments.json": {"content": "'"$COMMENT_LINES_BADGE"'"}}}' \
                https://api.github.com/gists/8f6459c2417de7534f64d98360dde865
