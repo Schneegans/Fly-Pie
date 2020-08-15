@@ -24,6 +24,8 @@ jobs:
           label: Lines of Code
           message: ${{ env.CODE_LINES }}
           color: lightgrey
+          named-logo: Bit
+          logo-color: aa88ff
       - name: Create Comments Badge
         uses: schneegans/dynamic-badges-action@master
         with:
@@ -33,3 +35,4 @@ jobs:
           label: Comments
           message: ${{ env.COMMENT_LINES }}
           color: green
+          style: social
