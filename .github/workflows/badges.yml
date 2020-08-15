@@ -17,12 +17,21 @@ jobs:
         run: |
           CODE_LINES="$(   ./cloc.sh --loc)"
           COMMENT_LINES="$(./cloc.sh --percentage)"
-      - name: Create Badges
+      - name: Create Lines of Code Badge
         uses: schneegans/dynamic-badges-action@master
         with:
           auth: ${{ secrets.UPLOAD_BADGES }}
           gist-id: 8f6459c2417de7534f64d98360dde865
-          badge-name: test.json
-          label: Hello
-          message: World
+          badge-name: loc.json
+          label: Lines of Code
+          message: $CODE_LINES
+          color: lightgrey
+      - name: Create Comments Badge
+        uses: schneegans/dynamic-badges-action@master
+        with:
+          auth: ${{ secrets.UPLOAD_BADGES }}
+          gist-id: 8f6459c2417de7534f64d98360dde865
+          badge-name: comments.json
+          label: Comments
+          message: $COMMENT_LINES%
           color: green
