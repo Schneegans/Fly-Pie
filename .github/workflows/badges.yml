@@ -1,6 +1,9 @@
 name: Badges
 
-on: [push]
+on:
+  push:
+    branches:
+      - develop
 
 jobs:
   update-badges:
@@ -11,11 +14,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Download cloc
         run: sudo apt-get update -y && sudo apt-get install -y cloc
-      - name: Get Numbers
+      - name: Get the Numbers
         run: |
           echo "::set-env name=CODE_LINES::$(   ./cloc.sh --loc)"
           echo "::set-env name=COMMENT_LINES::$(./cloc.sh --percentage)%"
-      - name: Create Lines of Code Badge
+      - name: Create Lines-of-Code-Badge
         uses: schneegans/dynamic-badges-action@master
         with:
           auth: ${{ secrets.UPLOAD_BADGES }}
@@ -24,9 +27,7 @@ jobs:
           label: Lines of Code
           message: ${{ env.CODE_LINES }}
           color: lightgrey
-          named-logo: Bit
-          logo-color: aa88ff
-      - name: Create Comments Badge
+      - name: Create Comments-Badge
         uses: schneegans/dynamic-badges-action@master
         with:
           auth: ${{ secrets.UPLOAD_BADGES }}
@@ -35,4 +36,3 @@ jobs:
           label: Comments
           message: ${{ env.COMMENT_LINES }}
           color: green
-          style: social
