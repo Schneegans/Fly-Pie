@@ -6,6 +6,9 @@ jobs:
   update-badges:
     name: Update Badges
     runs-on: ubuntu-latest
+    env:
+      CODE_LINES: "0"
+      COMMENT_LINES: "0"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
