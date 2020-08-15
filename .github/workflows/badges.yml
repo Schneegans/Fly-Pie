@@ -22,8 +22,8 @@ jobs:
         uses: schneegans/dynamic-badges-action@master
         with:
           auth: ${{ secrets.UPLOAD_BADGES }}
-          gist-id: 8f6459c2417de7534f64d98360dde865
-          badge-name: loc.json
+          gistID: 8f6459c2417de7534f64d98360dde865
+          filename: loc.json
           label: Lines of Code
           message: ${{ env.CODE_LINES }}
           color: lightgrey
@@ -31,8 +31,8 @@ jobs:
         uses: schneegans/dynamic-badges-action@master
         with:
           auth: ${{ secrets.UPLOAD_BADGES }}
-          gist-id: 8f6459c2417de7534f64d98360dde865
-          badge-name: comments.json
+          gistID: 8f6459c2417de7534f64d98360dde865
+          filename: comments.json
           label: Comments
           message: ${{ env.COMMENT_LINES }}
           color: green
