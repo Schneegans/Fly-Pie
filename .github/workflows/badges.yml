@@ -18,18 +18,18 @@ jobs:
           CODE_LINES="$(   ./cloc.sh --loc)"
           COMMENT_LINES="$(./cloc.sh --percentage)"
 
-          CODE_LINES_BADGE="{                  \n
-            'schemaVersion': 1,                \n
-            'label':        'Lines of Code',   \n
-            'message':      '$CODE_LINES',     \n
-            'color':        'lightgrey'        \n
+          CODE_LINES_BADGE="{
+            'schemaVersion': 1,
+            'label':        'Lines of Code',
+            'message':      '$CODE_LINES',
+            'color':        'lightgrey'
           }"
 
-          COMMENT_LINES_BADGE="{               \n
-            'schemaVersion': 1,                \n
-            'label':        'Comments',        \n
-            'message':      '$COMMENT_LINES%', \n
-            'color':        'green'            \n
+          COMMENT_LINES_BADGE="{
+            'schemaVersion': 1,
+            'label':        'Comments',
+            'message':      '$COMMENT_LINES%',
+            'color':        'green'
           }"
 
           curl -s -X PATCH \
