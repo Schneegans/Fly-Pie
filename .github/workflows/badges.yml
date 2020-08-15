@@ -14,7 +14,7 @@ jobs:
       - name: Get Numbers
         run: |
           echo "::set-env name=CODE_LINES::$(   ./cloc.sh --loc)"
-          echo "::set-env name=COMMENT_LINES::$(./cloc.sh --percentage)"
+          echo "::set-env name=COMMENT_LINES::$(./cloc.sh --percentage)%"
       - name: Create Lines of Code Badge
         uses: schneegans/dynamic-badges-action@master
         with:
