@@ -24,7 +24,7 @@ jobs:
           gist-id: 8f6459c2417de7534f64d98360dde865
           badge-name: loc.json
           label: Lines of Code
-          message: $CODE_LINES
+          message: ${{ env.CODE_LINES }}
           color: lightgrey
       - name: Create Comments Badge
         uses: schneegans/dynamic-badges-action@master
@@ -33,5 +33,5 @@ jobs:
           gist-id: 8f6459c2417de7534f64d98360dde865
           badge-name: comments.json
           label: Comments
-          message: $COMMENT_LINES%
+          message: ${{ env.COMMENT_LINES }}
           color: green
