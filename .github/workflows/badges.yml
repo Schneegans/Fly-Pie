@@ -24,12 +24,13 @@ jobs:
           curl -s -X PATCH                                            \
                -H "Content-Type: application/json"                    \
                -H "Authorization: token ${{ secrets.UPLOAD_BADGES }}" \
-               -d '{"files": {                                        \
-                 "loc.json": {                                        \
-                   "content": "'"$CODE_LINES_BADGE"'"                 \
-                 },                                                   \
-                 "comments.json": {                                   \
-                   "content": "'"$COMMENT_LINES_BADGE"'"}             \
-                 }                                                    \
-               }'                                                     \
+               -d '{
+                 "files": {
+                  "loc.json": {
+                    "content": "'"$CODE_LINES_BADGE"'"
+                  },
+                  "comments.json": {
+                    "content": "'"$COMMENT_LINES_BADGE"'"}
+                  }
+                }'                                                   \
                https://api.github.com/gists/8f6459c2417de7534f64d98360dde865
