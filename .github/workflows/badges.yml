@@ -25,3 +25,4 @@ jobs:
           badge-name: test.json
           label: Hello
           message: World
+          color: green
