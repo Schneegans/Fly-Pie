@@ -18,7 +18,7 @@ jobs:
           CODE_LINES="$(   ./cloc.sh --loc)"
           COMMENT_LINES="$(./cloc.sh --percentage)"
       - name: Create Badges
-        uses: schneegans/dynamic-badges@master
+        uses: schneegans/dynamic-badges-action@master
         with:
           auth: ${{ secrets.UPLOAD_BADGES }}
           gist-id: 8f6459c2417de7534f64d98360dde865
