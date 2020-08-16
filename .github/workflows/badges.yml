@@ -19,7 +19,7 @@ jobs:
           echo "::set-env name=CODE_LINES::$(   ./cloc.sh --loc)"
           echo "::set-env name=COMMENT_LINES::$(./cloc.sh --percentage)%"
       - name: Create Lines-of-Code-Badge
-        uses: schneegans/dynamic-badges-action@master
+        uses: schneegans/dynamic-badges-action@v1.0.0
         with:
           auth: ${{ secrets.UPLOAD_BADGES }}
           gistID: 8f6459c2417de7534f64d98360dde865
@@ -28,7 +28,7 @@ jobs:
           message: ${{ env.CODE_LINES }}
           color: lightgrey
       - name: Create Comments-Badge
-        uses: schneegans/dynamic-badges-action@master
+        uses: schneegans/dynamic-badges-action@v1.0.0
         with:
           auth: ${{ secrets.UPLOAD_BADGES }}
           gistID: 8f6459c2417de7534f64d98360dde865
