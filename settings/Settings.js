@@ -15,6 +15,7 @@ const utils         = Me.imports.common.utils;
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const Preset        = Me.imports.settings.Preset.Preset;
 const MenuEditor    = Me.imports.settings.MenuEditor.MenuEditor;
+const Tutorial      = Me.imports.settings.Tutorial.Tutorial;
 const ExampleMenu   = Me.imports.settings.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
@@ -43,6 +44,10 @@ var Settings = class Settings {
     // Initialize the Menu Editor page. To structure the source code, this has been put
     // into a separate class.
     this._menuEditor = new MenuEditor(this._builder);
+
+    // Initialize the Tutorial page. To structure the source code, this has been put
+    // into a separate class.
+    this._tutorial = new Tutorial(this._builder);
 
     // Initialize all buttons of the preset area.
     this._initializePresetButtons();
