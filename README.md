@@ -7,6 +7,7 @@
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![loc](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/loc.json)](cloc.sh)
 [![comments](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json)](cloc.sh)
+[![download](https://img.shields.io/badge/Download-extensions.gnome.org-e67f4d.svg)](https://extensions.gnome.org/extension/3433/fly-pie)
 
 **Fly-Pie** is an attractive marking menu for Gnome Shell which can be used to launch applications, simulate hotkeys, open URLs and much more.
 It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.
@@ -54,7 +55,7 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
 - [X] D-Bus Interface:
   - [X] Open pre-configured menus via the D-Bus.
   - [X] Open custom menus via the D-Bus.
-- [X] Make it available on [extensions.gnome.org](https://extensions.gnome.org/extension/3433/fly-pie/).
+- [X] Make it available on [extensions.gnome.org](https://extensions.gnome.org/extension/3433/fly-pie).
 - [ ] Translations:
   - [X] English
   - [ ] German
@@ -70,7 +71,7 @@ You can either install Fly-Pie from extensions.gnome.org, download a stable rele
 
 ### Installing from extensions.gnome.org
 
-This is the most easy way to install Fly-Pie. Just head over to [extensions.gnome.org](https://extensions.gnome.org/extension/3433/fly-pie/) and flip the switch! If you want to use a more up-to-date version of Fly-Pie, you can try one of the methods listed below.
+This is the most easy way to install Fly-Pie. Just head over to [extensions.gnome.org](https://extensions.gnome.org/extension/3433/fly-pie) and flip the switch! If you want to use a more up-to-date version of Fly-Pie, you can try one of the methods listed below.
 
 ### Downloading a Stable Release
 
