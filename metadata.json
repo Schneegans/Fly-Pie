@@ -5,7 +5,7 @@
     "version": "0.1.0",
     "settings-schema": "org.gnome.shell.extensions.flypie",
     "shell-version": [
-        "3.36.2"
+        "3.36"
     ],
     "url": "https://github.com/Schneegans/Fly-Pie"
 }
