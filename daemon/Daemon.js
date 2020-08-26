@@ -109,7 +109,10 @@ var Daemon = class Daemon {
   // Cleans up stuff which is not cleaned up automatically.
   destroy() {
     this._menu.destroy();
+
+    this._dbus.flush();
     this._dbus.unexport();
+
     this._shortcuts.destroy();
     this._settings.disconnect(this._settingsConnection);
 
