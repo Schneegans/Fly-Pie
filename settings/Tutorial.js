@@ -8,11 +8,12 @@
 
 'use strict';
 
-const {Gio} = imports.gi;
+const {Gio, GdkPixbuf} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
+const ExampleMenu   = Me.imports.settings.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -64,6 +65,22 @@ var Tutorial = class Tutorial {
         let previous = Math.max(0, active - 1);
         this._builder.get_object('tutorial-page-button-' + previous).set_active(true);
       });
+
+      const gifs = 3;
+      for (let i = 1; i <= gifs; i++) {
+        this._builder.get_object('tutorial-animation-' + i)
+            .set_from_animation(GdkPixbuf.PixbufAnimation.new_from_file(
+                Me.path + '/resources/tutorial' + i + '.gif'));
+      }
+
+      const buttons = 5;
+      for (let i = 1; i <= buttons; i++) {
+        this._builder.get_object('tutorial-button-' + i).connect('clicked', () => {
+          if (this._dbus) {
+            this._dbus.ShowCustomMenuRemote(JSON.stringify(ExampleMenu.get()), () => {});
+          }
+        });
+      }
 
     } catch (error) {
       utils.notification('Failed to setup tutorial page: ' + error);
