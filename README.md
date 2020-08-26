@@ -190,13 +190,13 @@ In the example above, selecting `Apatosaurus` will yield `"/b/1"`.
 You can use the following command to monitor the emitted signals:
 
 ```bash
-gdbus monitor  --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie
+gdbus monitor --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie
 ```
 
 To see all available methods and signals you can introspect the interface:
 
 ```bash
-gdbus introspect  --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie
+gdbus introspect --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie
 ```
 
 # Contributing to Fly-Pie
