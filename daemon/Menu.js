@@ -255,9 +255,16 @@ var Menu = class Menu {
       if (child.activatable) {
         this._background.set_easing_delay(
             this._settings.get_double('easing-duration') * 1000);
+
+        // hide() will reset our menu ID. However, we need to pass it to the onSelect
+        // callback so we create a copy here. hide() has to be called before _onSelect(),
+        // else any resulting action (like simulated key presses) may be blocked by our
+        // input grab.
+        const menuID = this._menuID;
         this.hide();
         this._background.set_easing_delay(0);
-        this._onSelect(this._menuID, child.id);
+
+        this._onSelect(menuID, child.id);
       }
     });
 
