@@ -457,6 +457,12 @@
                    of the current montor.</description>
     </key>
 
+    <key name="active-stack-child" type="s">
+      <default>""</default>
+      <summary>Active Stack Child</summary>
+      <description>Name of the currently active main stack child.</description>
+    </key>
+
     <key name="show-screencast-mouse" type="b">
       <default>false</default>
       <summary>Show screencast mouse</summary>

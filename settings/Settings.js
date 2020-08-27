@@ -219,11 +219,17 @@ var Settings = class Settings {
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
 
-    // Because it looks cool, we add a subtitle to the window's title bar.
+    // Because it looks cool, we add the stack switcher to the window's title bar.
     this._widget.connect('realize', () => {
       const stackSwitcher = this._builder.get_object('main-stack-switcher');
       stackSwitcher.parent.remove(stackSwitcher);
       this._widget.get_toplevel().get_titlebar().set_custom_title(stackSwitcher);
+    });
+
+    const stack              = this._builder.get_object('main-stack');
+    stack.visible_child_name = this._settings.get_string('active-stack-child');
+    stack.connect('notify::visible-child-name', (stack) => {
+      this._settings.set_string('active-stack-child', stack.visible_child_name);
     });
   }
 

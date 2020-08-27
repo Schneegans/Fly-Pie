@@ -826,7 +826,7 @@
         <property name="transition_duration">300</property>
         <property name="transition_type">slide-left-right</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkBox" id="tutorial-page">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
@@ -2152,7 +2152,7 @@ deep hierarchies</property>
             </child>
           </object>
           <packing>
-            <property name="name">page1</property>
+            <property name="name">tutorial-page</property>
             <property name="title" translatable="yes">Tutorial</property>
           </packing>
         </child>
@@ -6930,7 +6930,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
             </child>
           </object>
           <packing>
-            <property name="name">page0</property>
+            <property name="name">settings-page</property>
             <property name="title" translatable="yes">Settings</property>
             <property name="position">1</property>
           </packing>
@@ -8168,6 +8168,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
             </child>
           </object>
           <packing>
+            <property name="name">menu-editor-page</property>
             <property name="title" translatable="yes">Menu Editor</property>
             <property name="position">2</property>
           </packing>
@@ -8244,7 +8245,7 @@ Stay tuned!</property>
             </child>
           </object>
           <packing>
-            <property name="name">page2</property>
+            <property name="name">achievements-page</property>
             <property name="title" translatable="yes">Achievements</property>
             <property name="position">3</property>
           </packing>
