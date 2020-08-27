@@ -116,13 +116,11 @@ var MenuEditor = class MenuEditor {
 
   // ------------------------------------------------------------ constructor / destructor
 
-  constructor(builder) {
+  constructor(builder, settings) {
 
-    // Keep a reference to the builder.
-    this._builder = builder;
-
-    // Create the Gio.Settings object.
-    this._settings = utils.createSettings();
+    // Keep a reference to the builder and the settings.
+    this._builder  = builder;
+    this._settings = settings;
 
     // Connect to the server so that we can toggle menu previews from the menu editor.
     new DBusWrapper(

@@ -43,11 +43,11 @@ var Settings = class Settings {
 
     // Initialize the Menu Editor page. To structure the source code, this has been put
     // into a separate class.
-    this._menuEditor = new MenuEditor(this._builder);
+    this._menuEditor = new MenuEditor(this._builder, this._settings);
 
     // Initialize the Tutorial page. To structure the source code, this has been put
     // into a separate class.
-    this._tutorial = new Tutorial(this._builder);
+    this._tutorial = new Tutorial(this._builder, this._settings);
 
     // Initialize all buttons of the preset area.
     this._initializePresetButtons();

@@ -24,12 +24,13 @@ var Tutorial = class Tutorial {
 
   // ------------------------------------------------------------ constructor / destructor
 
-  constructor(builder) {
+  constructor(builder, settings) {
     try {
 
 
-      // Keep a reference to the builder.
-      this._builder = builder;
+      // Keep a reference to the builder and the settings.
+      this._builder  = builder;
+      this._settings = settings;
 
       // Connect to the server so that we can toggle menu previews from the menu editor.
       new DBusWrapper(
