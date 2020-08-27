@@ -1873,10 +1873,11 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="halign">start</property>
+                        <property name="halign">center</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
-                        <property name="label" translatable="yes">Final Remarks</property>
+                        <property name="label" translatable="yes">🎉️ Congratulations! 🎉️ </property>
+                        <property name="justify">center</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                           <attribute name="scale" value="2"/>
@@ -1892,23 +1893,23 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="halign">start</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
-                        <property name="label" translatable="yes">Item number
-deep hierarchies</property>
+                        <property name="label" translatable="yes">Congratulations! If you managed to unlock most of the medals, you will be using Fly-Pie like a master Pielot!
+
+Now you can use the other pages of this settings dialog to configure Fly-Pie to your heart's desire. There are many options! Create as many menus as you want with as deep hierarchies as you want. But try to limit the amount of items per submenu to &lt;b&gt;at most twelve items&lt;/b&gt;. Everything above this number will drastically reduce your efficiency.
+
+If you like Fly-Pie, I would be happy if you left a positive review on &lt;a href="https://extensions.gnome.org/extension/3433/fly-pie/"&gt;extensions.gnome.org&lt;/a&gt;! Whenever you encounter a 🐞️ bug or have feature request, feel free to report this on &lt;a href="https://github.com/Schneegans/Fly-Pie/issues"&gt;Github&lt;/a&gt;.</property>
                         <property name="use_markup">True</property>
                         <property name="wrap">True</property>
+                        <property name="max_width_chars">1</property>
                         <property name="xalign">0</property>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
+                        <property name="expand">True</property>
                         <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
-                    </child>
-                    <child>
-                      <placeholder/>
                     </child>
                   </object>
                   <packing>
