@@ -464,6 +464,18 @@
                    used for screencasts.</description>
     </key>
 
+    <key name="best-tutorial-time" type="d">
+      <default>9999</default>
+      <summary>Best Tutorial Time</summary>
+      <description>The best time achieved in the tutorial in milliseconds.</description>
+    </key>
+
+    <key name="last-tutorial-time" type="d">
+      <default>9999</default>
+      <summary>Last Tutorial Time</summary>
+      <description>The last achieved time in the tutorial in milliseconds.</description>
+    </key>
+
   </schema>
 </schemalist>
 

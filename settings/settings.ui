@@ -1385,7 +1385,7 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                               <object class="GtkLabel" id="bronze-label-1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Unlocked at less than 5000 ms</property>
+                                <property name="label" translatable="yes">Unlocked at less than 3000 ms</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -1718,7 +1718,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                           <object class="GtkLabel" id="gold-label-2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Unlocked at less than 200 ms</property>
+                            <property name="label" translatable="yes">Unlocked at less than 500 ms</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1763,7 +1763,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkLabel" id="silver-label-2">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Unlocked at less than 500 ms</property>
+                                <property name="label" translatable="yes">Unlocked at less than 750 ms</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
