@@ -226,6 +226,10 @@ var Settings = class Settings {
       this._widget.get_toplevel().get_titlebar().set_custom_title(stackSwitcher);
     });
 
+    // Save the currently active settings page. This way, the tutorial will be shown when
+    // the settings dialog is shown for the first time. Then, when the user modified
+    // something on another page, this will be shown when the settings dialog is shown
+    // again.
     const stack              = this._builder.get_object('main-stack');
     stack.visible_child_name = this._settings.get_string('active-stack-child');
     stack.connect('notify::visible-child-name', (stack) => {
