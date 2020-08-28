@@ -15,6 +15,7 @@ const utils         = Me.imports.common.utils;
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const Preset        = Me.imports.settings.Preset.Preset;
 const MenuEditor    = Me.imports.settings.MenuEditor.MenuEditor;
+const Tutorial      = Me.imports.settings.Tutorial.Tutorial;
 const ExampleMenu   = Me.imports.settings.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
@@ -42,7 +43,11 @@ var Settings = class Settings {
 
     // Initialize the Menu Editor page. To structure the source code, this has been put
     // into a separate class.
-    this._menuEditor = new MenuEditor(this._builder);
+    this._menuEditor = new MenuEditor(this._builder, this._settings);
+
+    // Initialize the Tutorial page. To structure the source code, this has been put
+    // into a separate class.
+    this._tutorial = new Tutorial(this._builder, this._settings);
 
     // Initialize all buttons of the preset area.
     this._initializePresetButtons();
@@ -214,11 +219,21 @@ var Settings = class Settings {
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
 
-    // Because it looks cool, we add a subtitle to the window's title bar.
+    // Because it looks cool, we add the stack switcher to the window's title bar.
     this._widget.connect('realize', () => {
       const stackSwitcher = this._builder.get_object('main-stack-switcher');
       stackSwitcher.parent.remove(stackSwitcher);
       this._widget.get_toplevel().get_titlebar().set_custom_title(stackSwitcher);
+    });
+
+    // Save the currently active settings page. This way, the tutorial will be shown when
+    // the settings dialog is shown for the first time. Then, when the user modified
+    // something on another page, this will be shown when the settings dialog is shown
+    // again.
+    const stack              = this._builder.get_object('main-stack');
+    stack.visible_child_name = this._settings.get_string('active-stack-child');
+    stack.connect('notify::visible-child-name', (stack) => {
+      this._settings.set_string('active-stack-child', stack.visible_child_name);
     });
   }
 

@@ -62,7 +62,6 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
   - [ ] ...
 - [ ] Proper touch-support.
 - [ ] Cool appearance presets.
-- [ ] Interactive tutorials.
 - [ ] Achievements!
 
 ## Installation
@@ -108,8 +107,8 @@ If you installed and enabled Fly-Pie for the very first time, you can bring up t
 journalctl /usr/bin/gnome-shell -f -o cat | grep flypie -B 2 -A 2
 ```
 
-In a future version of Fly-Pie, there will be interactive tutorials demonstrating effective usage patterns.
-For now, here are some hints to ease your path to become a master pielot:
+When you open the settings dialog of Fly-Pie, you will be greeted with an interactive tutorial demonstrating effective usage patterns.
+Here is a summary of the major hints to ease your path to become a master pielot:
 * You can **click anywhere in an item's wedge**. It does not matter whether you click directly on an item or at the edge of your screen as long as you are in the same wedge.
 * To enter **Marking Mode**, click and drag an item. As soon as you pause dragging or make a turn, the item will be selected. **This way you can select items with gestures!**
 * Try remembering the path to an item. Open the menu and **draw the path with your mouse**. You can start with individual segments of the path, put you can also try to draw the entire path!
@@ -195,13 +194,13 @@ In the example above, selecting `Apatosaurus` will yield `"/b/1"`.
 You can use the following command to monitor the emitted signals:
 
 ```bash
-gdbus monitor  --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie
+gdbus monitor --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie
 ```
 
 To see all available methods and signals you can introspect the interface:
 
 ```bash
-gdbus introspect  --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie
+gdbus introspect --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie
 ```
 
 # Contributing to Fly-Pie

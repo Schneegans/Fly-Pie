@@ -21,45 +21,6 @@ var ExampleMenu = class ExampleMenu {
     return {
       name: 'Example Menu', icon: '😷', children: [
         {
-          name: 'Smileys & People',
-          icon: '😀',
-          children: [
-            {
-              name: 'Happy Faces',
-              icon: '😁',
-              children: [
-                {name: 'Smiley', icon: '😃'},
-                {name: 'Winking Face', icon: '😉'},
-                {name: 'Face With Smiling Eyes', icon: '😊'},
-                {name: 'Face With Sweat', icon: '😅'},
-                {name: 'ROFL', icon: '🤣'},
-              ]
-            },
-            {
-              name: 'Angry Faces',
-              icon: '😕',
-              children: [
-                {name: 'Vomiting Face', icon: '🤮'},
-                {name: 'Skeptical Face', icon: '🤨'},
-                {name: 'Pouting Face', icon: '😡'},
-                {name: 'Angry Face', icon: '😠'},
-                {name: 'Very Angry Face', icon: '🤬'},
-              ]
-            },
-            {
-              name: 'Surprised Faces',
-              icon: '😯',
-              children: [
-                {name: 'Flushed Face', icon: '😳'},
-                {name: 'Anguished Face', icon: '😧'},
-                {name: 'Astonished Face', icon: '😲'},
-                {name: 'Screaming Face', icon: '😱'},
-                {name: 'Pouff', icon: '🤯'},
-              ]
-            },
-          ]
-        },
-        {
           name: 'Animals & Nature',
           icon: '🌾',
           children: [
@@ -211,6 +172,45 @@ var ExampleMenu = class ExampleMenu {
                 {name: 'Trumpet', icon: '🎺'},
                 {name: 'Microphone', icon: '🎤'},
                 {name: 'Drum', icon: '🥁'},
+              ]
+            },
+          ]
+        },
+        {
+          name: 'Smileys & People',
+          icon: '😀',
+          children: [
+            {
+              name: 'Happy Faces',
+              icon: '😁',
+              children: [
+                {name: 'Smiley', icon: '😃'},
+                {name: 'Winking Face', icon: '😉'},
+                {name: 'Face With Smiling Eyes', icon: '😊'},
+                {name: 'Face With Sweat', icon: '😅'},
+                {name: 'ROFL', icon: '🤣'},
+              ]
+            },
+            {
+              name: 'Angry Faces',
+              icon: '😕',
+              children: [
+                {name: 'Vomiting Face', icon: '🤮'},
+                {name: 'Skeptical Face', icon: '🤨'},
+                {name: 'Pouting Face', icon: '😡'},
+                {name: 'Angry Face', icon: '😠'},
+                {name: 'Very Angry Face', icon: '🤬'},
+              ]
+            },
+            {
+              name: 'Surprised Faces',
+              icon: '😯',
+              children: [
+                {name: 'Flushed Face', icon: '😳'},
+                {name: 'Anguished Face', icon: '😧'},
+                {name: 'Astonished Face', icon: '😲'},
+                {name: 'Screaming Face', icon: '😱'},
+                {name: 'Pouff', icon: '🤯'},
               ]
             },
           ]

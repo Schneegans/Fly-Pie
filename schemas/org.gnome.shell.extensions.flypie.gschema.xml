@@ -457,11 +457,29 @@
                    of the current montor.</description>
     </key>
 
+    <key name="active-stack-child" type="s">
+      <default>""</default>
+      <summary>Active Stack Child</summary>
+      <description>Name of the currently active main stack child.</description>
+    </key>
+
     <key name="show-screencast-mouse" type="b">
       <default>false</default>
       <summary>Show screencast mouse</summary>
       <description>If set to true, a big mouse pointer will be shown which can be
                    used for screencasts.</description>
+    </key>
+
+    <key name="best-tutorial-time" type="d">
+      <default>9999</default>
+      <summary>Best Tutorial Time</summary>
+      <description>The best time achieved in the tutorial in milliseconds.</description>
+    </key>
+
+    <key name="last-tutorial-time" type="d">
+      <default>9999</default>
+      <summary>Last Tutorial Time</summary>
+      <description>The last achieved time in the tutorial in milliseconds.</description>
     </key>
 
   </schema>
