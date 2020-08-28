@@ -67,17 +67,18 @@ var Tutorial = class Tutorial {
       let nextButton      = this._builder.get_object('tutorial-next-page-button');
 
       for (let i = 0; i < tutorialPages; i++) {
-        this._builder.get_object('tutorial-page-button-' + i)
-            .connect('toggled', button => {
-              if (button.active) {
-                stack.set_visible_child_name('tutorial-page-' + i);
+        const radioButton = this._builder.get_object('tutorial-page-button-' + i);
+        radioButton.connect('toggled', button => {
+          if (button.active) {
+            // When toggled to active, make the corresponding tutorial page visible.
+            stack.set_visible_child_name('tutorial-page-' + i);
 
-                // Make the "Next" and "Previous" buttons unresponsive on the first and
-                // last page of the tutorial.
-                prevButton.sensitive = i != 0;
-                nextButton.sensitive = i != tutorialPages - 1;
-              }
-            });
+            // Make the "Next" and "Previous" buttons unresponsive on the first and
+            // last page of the tutorial.
+            prevButton.sensitive = i != 0;
+            nextButton.sensitive = i != tutorialPages - 1;
+          }
+        });
       }
 
       // Activate next tutorial page when the "Next" button is clicked.
@@ -96,27 +97,22 @@ var Tutorial = class Tutorial {
 
       // Initialize the three GIF animations of the tutorial. This cannot be done from
       // Glade for now.
-      const gifs = 3;
-      for (let i = 1; i <= gifs; i++) {
+      for (let i = 1; i <= 3; i++) {
         this._builder.get_object('tutorial-animation-' + i)
             .set_from_animation(GdkPixbuf.PixbufAnimation.new_from_file(
                 Me.path + '/resources/tutorial' + i + '.gif'));
       }
 
       // Make the five Show-Menu buttons of the tutorial pages actually show a menu.
-      const buttons = 5;
-      for (let i = 1; i <= buttons; i++) {
+      for (let i = 1; i <= 5; i++) {
         this._builder.get_object('tutorial-button-' + i).connect('clicked', () => {
-          if (this._dbus) {
-            this._dbus.ShowCustomMenuRemote(JSON.stringify(ExampleMenu.get()), (id) => {
-              // When the menu is shown successfully, reset the timer and store the menu
-              // ID.
-              if (id >= 0) {
-                this._timer.reset();
-                this._lastID = id;
-              }
-            });
-          }
+          this._dbus.ShowCustomMenuRemote(JSON.stringify(ExampleMenu.get()), (id) => {
+            // When the menu is shown successfully, reset the timer and store the menu ID.
+            if (id >= 0) {
+              this._timer.reset();
+              this._lastID = id;
+            }
+          });
         });
       }
 
@@ -131,6 +127,9 @@ var Tutorial = class Tutorial {
       // Update medals and time labels when the selection time changes.
       this._settings.connect('changed::best-tutorial-time', () => this._updateState());
       this._settings.connect('changed::last-tutorial-time', () => this._updateState());
+
+      // Update medals and time labels according to the stored last and best selection
+      // times when the settings dialog is opened.
       this._updateState();
 
     } catch (error) {
@@ -154,6 +153,8 @@ var Tutorial = class Tutorial {
     this._builder.get_object('best-selection-time-1').label = text;
     this._builder.get_object('best-selection-time-2').label = text;
 
+    // These numbers are hard-coded here. If changed, the corresponding labels in the
+    // settings.ui file must be changed as well!
     this._builder.get_object('gold-medal-1').opacity   = bestTime < 1000 ? 1.0 : 0.1;
     this._builder.get_object('gold-medal-2').opacity   = bestTime < 500 ? 1.0 : 0.1;
     this._builder.get_object('silver-medal-1').opacity = bestTime < 2000 ? 1.0 : 0.1;
