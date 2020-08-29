@@ -1129,9 +1129,9 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">For this practice session, open the menu by clicking the big button. Then select "Short Cake" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the gold medal?
+                            <property name="label" translatable="yes">For this practice session, open the menu by clicking the big button. Then select "Shortcake" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the gold medal?
 
-Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn about Fly-Pie's marking mode!
+Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn about Fly-Pie's Marking Mode!
 </property>
                             <property name="use_markup">True</property>
                             <property name="wrap">True</property>
@@ -1578,7 +1578,7 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">Again, you should select "Short Cake" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. However, as you now learned about the Marking Mode, the time required to get the gold medal is much faster!
+                            <property name="label" translatable="yes">Again, you should select "Shortcake" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. However, as you now learned about the Marking Mode, the time required to get the gold medal is much shorter!
 
 Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn some final tips and tricks!
 </property>
