@@ -60,7 +60,8 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
   - [X] English
   - [ ] German
   - [ ] ...
-- [ ] Proper touch-support.
+- [ ] Proper touch support.
+- [ ] Proper multi-monitor support.
 - [ ] Cool appearance presets.
 - [ ] Achievements!
 
