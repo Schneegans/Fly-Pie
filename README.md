@@ -242,13 +242,3 @@ Emoji | Description
 :twisted_rightwards_arrows: `:twisted_rightwards_arrows:` | When you merged a branch.
 :fire: `:fire:` | When you removed something.
 :truck: `:truck:` | When you moved / renamed something.
-
-## Version Numbers
-
-Releases in the 0.x.x series will most likely have a lot of breaking API changes, as the software becomes more and more mature.
-However, starting from version 1.0.0, version numbers of Fly-Pie will be assigned according to the [Semantic Versioning](https://semver.org/) scheme.
-This means, given a version number MAJOR.MINOR.PATCH, we will increment the:
-
-1. MAJOR version when we make incompatible API changes (that relates mainly to the D-Bus API, the presets file format and the Gio.Settings configuration),
-2. MINOR version when we add functionality in a backwards compatible manner, and
-3. PATCH version when we make backwards compatible bug fixes.

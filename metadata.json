@@ -2,10 +2,10 @@
     "uuid": "flypie@schneegans.github.com",
     "description": "Do things on-the-fly.",
     "name": "Fly-Pie",
-    "version": "1.1.0",
     "settings-schema": "org.gnome.shell.extensions.flypie",
     "shell-version": [
         "3.36"
     ],
-    "url": "https://github.com/Schneegans/Fly-Pie"
+    "url": "https://github.com/Schneegans/Fly-Pie",
+    "version": 3
 }
