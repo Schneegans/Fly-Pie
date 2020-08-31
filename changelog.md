@@ -1,6 +1,6 @@
 # Changelog of Fly-Pie
 
-## [v1.1.0](https://github.com/schneegans/fly-pie/releases/tag/v1.1.0)
+## [Fly-Pie 2](https://github.com/schneegans/fly-pie/releases/tag/v2)
 
 **Release Date:** 2020-08-29
 
@@ -17,7 +17,7 @@
 * The D-Bus signals `OnCancel` and `OnSelect` now return the correct menu ID.
 * `flush()`is now called on the D-Bus object before unexporting as suggested by andyholmes on https://extensions.gnome.org/review/18370.
 
-## [v1.0.0](https://github.com/schneegans/fly-pie/releases/tag/v1.0.0)
+## [Fly-Pie 1](https://github.com/schneegans/fly-pie/releases/tag/v1)
 
 **Release Date:** 2020-08-13
 
