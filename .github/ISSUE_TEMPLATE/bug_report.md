@@ -26,5 +26,6 @@ A clear and concise description of what you expected to happen.
 
 ## System
 _Please complete the following information:_
- - Fly-Pie version [e.g. v1.1.0, or commit SHA]
+ - Linux distribution [e.g. Ubuntu 20.04]
+ - Fly-Pie version [e.g. Fly-Pie 3, or commit SHA]
  - Gnome Shell version: [e.g. 3.36.2]
