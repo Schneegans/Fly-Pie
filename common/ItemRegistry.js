@@ -520,8 +520,8 @@ var ItemTypes = {
 
             // Add an item for each application.
             case GMenu.TreeItemType.ENTRY:
-              const app  = iter.get_entry().get_app_info();
-              const icon = 'image-missing';
+              const app = iter.get_entry().get_app_info();
+              let icon  = 'image-missing';
               if (app.get_icon()) {
                 icon = app.get_icon().to_string();
               }
