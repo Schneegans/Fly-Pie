@@ -2,6 +2,71 @@
 <!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkPopover" id="about-popover">
+    <property name="width_request">400</property>
+    <property name="can_focus">False</property>
+    <property name="position">bottom</property>
+    <child>
+      <object class="GtkGrid">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_left">15</property>
+        <property name="margin_right">15</property>
+        <property name="margin_top">15</property>
+        <property name="margin_bottom">15</property>
+        <property name="row_spacing">5</property>
+        <child>
+          <object class="GtkLabel" id="app-name">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="label" translatable="yes">Fly-Pie</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="2"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="margin_bottom">20</property>
+            <property name="label" translatable="yes">Do things on-the-fly.</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="label" translatable="yes">Published under the MIT License.
+Visit &lt;a href="https://github.com/Schneegans/Fly-Pie"&gt;Fly-Pie's Homepage&lt;/a&gt; for details.
+
+Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free to report this on &lt;a href="https://github.com/Schneegans/Fly-Pie/issues"&gt;Github&lt;/a&gt;.</property>
+            <property name="use_markup">True</property>
+            <property name="justify">center</property>
+            <property name="wrap">True</property>
+            <property name="max_width_chars">1</property>
+          </object>
+          <packing>
+            <property name="left_attach">0</property>
+            <property name="top_attach">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkListStore" id="achievements-list"/>
   <object class="GtkAdjustment" id="center-auto-color-luminance">
     <property name="upper">1</property>
@@ -800,16 +865,51 @@
     <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
     <child>
-      <object class="GtkStackSwitcher" id="main-stack-switcher">
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="halign">center</property>
-        <property name="stack">main-stack</property>
+        <child>
+          <object class="GtkMenuButton" id="about-button">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="focus_on_click">False</property>
+            <property name="receives_default">True</property>
+            <property name="halign">start</property>
+            <property name="popover">about-popover</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="icon_name">dialog-information-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child type="center">
+          <object class="GtkStackSwitcher" id="main-stack-switcher">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="stack">main-stack</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="padding">8</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
       </object>
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="padding">8</property>
         <property name="position">0</property>
       </packing>
     </child>

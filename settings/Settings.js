@@ -49,6 +49,9 @@ var Settings = class Settings {
     // into a separate class.
     this._tutorial = new Tutorial(this._builder, this._settings);
 
+    // Show current version number in about-popover.
+    this._builder.get_object('app-name').label = 'Fly-Pie ' + Me.metadata.version;
+
     // Initialize all buttons of the preset area.
     this._initializePresetButtons();
 
@@ -219,11 +222,18 @@ var Settings = class Settings {
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
 
-    // Because it looks cool, we add the stack switcher to the window's title bar.
+    // Because it looks cool, we add the stack switcher and the about button to the
+    // window's title bar.
     this._widget.connect('realize', () => {
       const stackSwitcher = this._builder.get_object('main-stack-switcher');
+      const aboutButton   = this._builder.get_object('about-button');
+
+      stackSwitcher.parent.remove(aboutButton);
       stackSwitcher.parent.remove(stackSwitcher);
-      this._widget.get_toplevel().get_titlebar().set_custom_title(stackSwitcher);
+
+      const titlebar = this._widget.get_toplevel().get_titlebar();
+      titlebar.set_custom_title(stackSwitcher);
+      titlebar.pack_start(aboutButton);
     });
 
     // Save the currently active settings page. This way, the tutorial will be shown when
