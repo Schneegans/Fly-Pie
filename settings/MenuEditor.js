@@ -812,7 +812,6 @@ var MenuEditor = class MenuEditor {
 
     // Delete the item on a positive response.
     dialog.connect('response', (dialog, id) => {
-      utils.notification(id + ' ' + Gtk.ResponseType.OK);
       if (id == Gtk.ResponseType.OK) {
         const [ok, model, iter] = this._selection.get_selected();
         if (ok) {
