@@ -59,7 +59,7 @@ var Daemon = class Daemon {
         if (shortcut == this._menuConfigs[i].shortcut) {
           const result = this.ShowMenu(this._menuConfigs[i].name);
           if (result < 0) {
-            utils.notification(
+            utils.debug(
                 'Failed to open a Fly-Pie menu: ' +
                 DBusInterface.getErrorDescription(result));
           }
@@ -300,13 +300,13 @@ var Daemon = class Daemon {
     try {
       this._menuConfigs = JSON.parse(this._settings.get_string('menu-configuration'));
     } catch (error) {
-      utils.notification('Failed to load Fly-Pie menu configuration: ' + error);
+      utils.debug('Failed to load Fly-Pie menu configuration: ' + error);
       this._menuConfigs = [];
     }
 
     // Root element must be an array of menus.
     if (!Array.isArray(this._menuConfigs)) {
-      utils.notification(
+      utils.debug(
           'Failed to load Fly-Pie menu configuration: Root element must be an array!');
       this._menuConfigs = [];
     }

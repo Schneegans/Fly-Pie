@@ -19,7 +19,7 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 // the standard log() functionality by prepending the extensions name and the location  //
 // where the message was logged. As the extensions name is part of the location, you    //
 // can more effectively watch the log output of Gnome Shell:                            //
-// journalctl /usr/bin/gnome-shell -f -o cat | grep flypie -B 2 -A 2                    //
+// journalctl -f -o cat | grep flypie -B 2 -A 2                                         //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function debug(message) {
@@ -33,18 +33,6 @@ function debug(message) {
   const extensionRoot = stack[0].indexOf(Me.metadata.uuid);
 
   log('[' + stack[0].slice(extensionRoot) + '] ' + message);
-}
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// Especially the code in prefs.js is hard to debug, as the information is nowhere to   //
-// be found. This method can be used to get at least some idea what is going on...      //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-function notification(message) {
-  GLib.spawn_async(
-      null, ['/usr/bin/notify-send', '-u', 'low', 'Fly-Pie', message], null,
-      GLib.SpawnFlags.DO_NOT_REAP_CHILD, null);
 }
 
 

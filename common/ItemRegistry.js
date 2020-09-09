@@ -168,7 +168,7 @@ var getItemTypes = () => {
                     data, null, Gio.AppInfoCreateFlags.NONE);
                 item.launch([], ctx);
               } catch (error) {
-                utils.notification('Failed to execute command: ' + error);
+                utils.debug('Failed to execute command: ' + error);
               }
             }
           };
@@ -195,7 +195,7 @@ var getItemTypes = () => {
               try {
                 Gio.AppInfo.launch_default_for_uri(data, null);
               } catch (error) {
-                utils.notification('Failed to open URL: ' + error);
+                utils.debug('Failed to open URL: ' + error);
               }
             }
           };
@@ -222,7 +222,7 @@ var getItemTypes = () => {
               try {
                 Gio.AppInfo.launch_default_for_uri('file://' + data, null);
               } catch (error) {
-                utils.notification('Failed to open file: ' + error);
+                utils.debug('Failed to open file: ' + error);
               }
             }
           };
@@ -275,8 +275,7 @@ var getItemTypes = () => {
                   const ctx = global.create_app_launch_context(0, -1);
                   Gio.AppInfo.launch_default_for_uri(mount.get_root().get_uri(), ctx);
                 } catch (error) {
-                  utils.notification(
-                      'Failed to open "%s": %s'.format(mount.get_name(), error));
+                  utils.debug('Failed to open "%s": %s'.format(mount.get_name(), error));
                 }
               }
             });
@@ -333,8 +332,7 @@ var getItemTypes = () => {
                     const ctx = global.create_app_launch_context(0, -1);
                     Gio.AppInfo.launch_default_for_uri(uri, ctx);
                   } catch (error) {
-                    utils.notification(
-                        'Failed to open "%s": %s'.format(this.name, error));
+                    utils.debug('Failed to open "%s": %s'.format(this.name, error));
                   }
                 }
               });
@@ -446,7 +444,7 @@ var getItemTypes = () => {
                   try {
                     Gio.AppInfo.launch_default_for_uri(recentFile.get_uri(), ctx);
                   } catch (error) {
-                    utils.notification('Failed to open URI: ' + error);
+                    utils.debug('Failed to open URI: ' + error);
                   }
                 }
               });
@@ -554,7 +552,7 @@ var getItemTypes = () => {
                       try {
                         app.launch([], ctx);
                       } catch (error) {
-                        utils.notification('Failed to launch app: ' + error);
+                        utils.debug('Failed to launch app: ' + error);
                       }
                     }
                   };
