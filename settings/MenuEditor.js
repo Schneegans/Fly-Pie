@@ -228,6 +228,29 @@ var MenuEditor = class MenuEditor {
       const view      = this._builder.get_object('menus-treeview');
       view.set_model(this._store);
 
+      view.drag_dest_set(
+          Gtk.DestDefaults.ALL,
+          [
+            Gtk.TargetEntry.new('text/plain', 0, 0),
+            Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_WIDGET, 0)
+          ],
+          Gdk.DragAction.COPY | Gdk.DragAction.MOVE | Gdk.DragAction.LINK);
+
+      view.connect('drag-data-received', (context, x, y, data, info, time) => {
+        let text = data.get_text();
+        utils.notification(text);
+
+        // if (text != null && GLib.Uri.parse_scheme(text) != null) {
+        // }
+
+        // foreach(var uri in selection_data.get_uris()) {
+        //   pie.add_action(ActionRegistry.new_for_uri(uri), position);
+        //   this.renderer.add_group(pie.action_groups[position], position);
+
+        //   if (this.renderer.slices.size == 1) this.on_first_slice_added();
+        // }
+      });
+
       // Delete the selected item when the Delete key is pressed.
       view.connect('key-release-event', (widget, event) => {
         if (event.get_keyval()[1] == Gdk.KEY_Delete) {
