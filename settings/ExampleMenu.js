@@ -19,7 +19,7 @@ var ExampleMenu = class ExampleMenu {
 
   static get() {
     return {
-      name: 'Example Menu', icon: '😷', children: [
+      name: 'Example Menu', icon: '😷', centered: false, children: [
         {
           name: 'Animals & Nature',
           icon: '🌾',

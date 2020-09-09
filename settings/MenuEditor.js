@@ -272,7 +272,11 @@ var MenuEditor = class MenuEditor {
 
 
     // Now that the tree store is set up, we can load the entire menu configuration.
-    this._loadMenuConfiguration();
+    try {
+      this._loadMenuConfiguration();
+    } catch (error) {
+      utils.debug('Failed to load menu configuration: ' + error);
+    }
 
     // Now we initialize all icon-related UI elements. That is first and foremost the
     // icon-select popover.
