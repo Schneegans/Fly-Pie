@@ -51,7 +51,7 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
   - [X] **Recent Files:** Shows your recently used files.
   - [X] **Frequently Used:** Shows your frequently used applications.
   - [X] **Favorites:** Shows your pinned applications.
-  - [X] **Main Menu:** Shows all installed applications.
+  - [X] **Main Menu:** Shows all installed applications (This requires GMenu typelib to be installed. `sudo apt-get install gir1.2-gmenu-3.0` on Ubuntu).
 - [X] D-Bus Interface:
   - [X] Open pre-configured menus via the D-Bus.
   - [X] Open custom menus via the D-Bus.
