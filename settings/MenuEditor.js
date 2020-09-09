@@ -130,7 +130,7 @@ var MenuEditor = class MenuEditor {
     // First, we initialize the add-new-item popover and the related buttons.
     try {
       // Here we add one entry to the add-new-item popover for each registered item type.
-      for (const type in ItemRegistry.ItemTypes) {
+      for (const type in ItemRegistry.getItemTypes()) {
         const row  = new Gtk.ListBoxRow({selectable: false});
         const grid = new Gtk.Grid({
           column_spacing: 8,
@@ -139,11 +139,12 @@ var MenuEditor = class MenuEditor {
           margin_start: 4,
           margin_end: 10
         });
-        const icon =
-            new Gtk.Image({icon_name: ItemRegistry.ItemTypes[type].icon, icon_size: 24});
-        const name = new Gtk.Label({label: ItemRegistry.ItemTypes[type].name, xalign: 0});
+        const icon = new Gtk.Image(
+            {icon_name: ItemRegistry.getItemTypes()[type].icon, icon_size: 24});
+        const name =
+            new Gtk.Label({label: ItemRegistry.getItemTypes()[type].name, xalign: 0});
         const subtitle = new Gtk.Label({
-          label: '<small>' + ItemRegistry.ItemTypes[type].subtitle + '</small>',
+          label: '<small>' + ItemRegistry.getItemTypes()[type].subtitle + '</small>',
           use_markup: true,
           xalign: 0
         });
@@ -161,7 +162,8 @@ var MenuEditor = class MenuEditor {
         row.set_name(type);
 
         // Add the new row to the list defined in the ItemRegistry.
-        const list = this._builder.get_object(ItemRegistry.ItemTypes[type].settingsList);
+        const list =
+            this._builder.get_object(ItemRegistry.getItemTypes()[type].settingsList);
         list.insert(row, -1);
       }
 
@@ -519,15 +521,16 @@ var MenuEditor = class MenuEditor {
 
         if (somethingSelected) {
 
-          const selectedType         = this._getSelected('TYPE');
-          const selectedSettingsType = ItemRegistry.ItemTypes[selectedType].settingsType;
+          const selectedType = this._getSelected('TYPE');
+          const selectedSettingsType =
+              ItemRegistry.getItemTypes()[selectedType].settingsType;
 
           // The item's name, icon and description have to be updated in any case if
           // something is selected.
           this._builder.get_object('icon-name').text = this._getSelected('ICON');
           this._builder.get_object('item-name').text = this._getSelected('NAME');
           this._builder.get_object('item-description').label =
-              ItemRegistry.ItemTypes[selectedType].description;
+              ItemRegistry.getItemTypes()[selectedType].description;
 
           // If the selected item is a top-level menu, the DATA column contains its
           // shortcut.
@@ -777,13 +780,13 @@ var MenuEditor = class MenuEditor {
         this._set(iter, 'ICON', this._getRandomEmoji());
         this._set(iter, 'NAME', 'New Submenu');
       } else {
-        this._set(iter, 'ICON', ItemRegistry.ItemTypes[newType].icon);
-        this._set(iter, 'NAME', ItemRegistry.ItemTypes[newType].name);
+        this._set(iter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
+        this._set(iter, 'NAME', ItemRegistry.getItemTypes()[newType].name);
       }
 
       // Initialize other field to their default values.
       this._set(iter, 'TYPE', newType);
-      this._set(iter, 'DATA', ItemRegistry.ItemTypes[newType].defaultData);
+      this._set(iter, 'DATA', ItemRegistry.getItemTypes()[newType].defaultData);
       this._set(iter, 'ANGLE_OR_ID', -1);
 
     } catch (error) {

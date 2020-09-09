@@ -166,7 +166,7 @@ var Daemon = class Daemon {
       if (name == this._menuConfigs[i].name) {
 
         // Transform the configuration into a menu structure.
-        const structure = ItemRegistry.ItemTypes['Menu'].createItem(
+        const structure = ItemRegistry.getItemTypes()['Menu'].createItem(
             this._menuConfigs[i].name, this._menuConfigs[i].icon,
             this._menuConfigs[i].centered);
 
@@ -280,7 +280,7 @@ var Daemon = class Daemon {
     const data  = config.data != undefined ? config.data : '';
     const angle = config.angle != undefined ? config.angle : -1;
 
-    const result = ItemRegistry.ItemTypes[type].createItem(name, icon, angle, data);
+    const result = ItemRegistry.getItemTypes()[type].createItem(name, icon, angle, data);
 
     // Load all children recursively.
     if (config.children) {
@@ -341,7 +341,7 @@ var Daemon = class Daemon {
       for (let i = 0; i < this._menuConfigs.length; i++) {
         if (this._menuConfigs[i].id == this._menu.getID()) {
           // Transform the configuration into a menu structure.
-          const structure = ItemRegistry.ItemTypes['Menu'].createItem(
+          const structure = ItemRegistry.getItemTypes()['Menu'].createItem(
               this._menuConfigs[i].name, this._menuConfigs[i].icon,
               this._menuConfigs[i].centered);
 
