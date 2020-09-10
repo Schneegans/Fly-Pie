@@ -228,9 +228,9 @@ var MenuEditor = class MenuEditor {
         ],
         Gdk.DragAction.COPY | Gdk.DragAction.MOVE | Gdk.DragAction.LINK);
 
-    view.connect('drag-data-received', (context, x, y, data, info, time) => {
+    view.connect('drag-data-received', (widget, context, x, y, data, info, time) => {
       let text = data.get_text();
-      utils.notification(text);
+      utils.debug(text);
 
       // if (text != null && GLib.Uri.parse_scheme(text) != null) {
       // }
