@@ -59,7 +59,15 @@ var Shortcuts = class Shortcuts {
   // Binds the given shortcut. When it's pressed, the callback given to this class
   // instance at construction time will be executed.
   bind(shortcut) {
-    const action = global.display.grab_accelerator(shortcut, Meta.KeyBindingFlags.NONE);
+
+    let action;
+    const shellMinorVersion = parseInt(Config.PACKAGE_VERSION.split('.')[1]);
+
+    if (shellMinorVersion <= 34) {
+      action = global.display.grab_accelerator(shortcut);
+    } else {
+      action = global.display.grab_accelerator(shortcut, Meta.KeyBindingFlags.NONE);
+    }
 
     if (action == Meta.KeyBindingAction.NONE) {
       utils.debug('Unable to grab shortcut ' + shortcut + '!');
