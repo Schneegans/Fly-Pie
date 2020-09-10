@@ -498,6 +498,12 @@ var MenuEditor = class MenuEditor {
       if (somethingSelected) {
 
         const selectedType = this._getSelected('TYPE');
+
+        // If rows are not yet fully added, it may happen that the type is not yet set.
+        if (selectedType == null) {
+          return;
+        }
+
         const selectedSettingsType =
             ItemRegistry.getItemTypes()[selectedType].settingsType;
 
@@ -697,20 +703,24 @@ var MenuEditor = class MenuEditor {
     ];
 
     // Every eight seconds we hide the current tip...
-    GLib.timeout_add(GLib.PRIORITY_DEFAULT, 8000, () => {
+    this._infoLabelTimeoutB = null;
+    this._infoLabelTimeoutA = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 8000, () => {
       revealer.reveal_child = false;
 
       // ...  and show a new tip some milliseconds later.
-      GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
-        if (label.get_toplevel().visible) {
-          label.label           = tips[Math.floor(Math.random() * tips.length)];
-          revealer.reveal_child = true;
-        }
+      this._infoLabelTimeoutB = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
+        label.label           = tips[Math.floor(Math.random() * tips.length)];
+        revealer.reveal_child = true;
         return false;
       });
 
       // Don't show new tips when the window got closed.
       return label.get_toplevel().visible;
+    });
+
+    label.connect('destroy', () => {
+      GLib.source_remove(this._infoLabelTimeoutA);
+      GLib.source_remove(this._infoLabelTimeoutB);
     });
   }
 
@@ -829,8 +839,12 @@ var MenuEditor = class MenuEditor {
   // store to the "menu-configuration" Gio.Settings key of this application.
   _set(iter, column, data) {
 
-    // Do not change anything if not changed.
-    if (this._get(iter, column) == data) {
+    const isDataColumn =
+        column != 'DISPLAY_ICON' && column != 'DISPLAY_ANGLE' && column != 'DISPLAY_NAME';
+
+    // Do not change anything if not changed. We only check this for the actual data
+    // columns.
+    if (isDataColumn && this._get(iter, column) == data) {
       return;
     }
 
@@ -888,7 +902,7 @@ var MenuEditor = class MenuEditor {
 
     // If loading has finished, any modifications to the tree store are directly committed
     // to the "menu-configuration" settings key.
-    if (this._loadedMenuConfiguration) {
+    if (isDataColumn && this._loadedMenuConfiguration) {
       this._saveMenuConfiguration();
     }
   }
