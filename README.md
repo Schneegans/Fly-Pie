@@ -206,7 +206,7 @@ gdbus introspect --session --dest org.gnome.Shell --object-path /org/gnome/shell
 
 # Contributing to Fly-Pie
 
-Whenever you encounter a :beetle: **bug** or have :tada: **feature request**, 
+Whenever you encounter a :beetle: **bug** or have a :tada: **feature request**, 
 report this via [Github issues](https://github.com/schneegans/fly-pie/issues).
 
 We are happy to receive contributions to Fly-Pie in the form of **pull requests** via Github.
