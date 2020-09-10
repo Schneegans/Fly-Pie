@@ -11,8 +11,9 @@
 const Main          = imports.ui.main;
 const {Shell, Meta} = imports.gi;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.common.utils;
+const Config = imports.misc.config;
+const Me     = imports.misc.extensionUtils.getCurrentExtension();
+const utils  = Me.imports.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class can be used to bind a function to global hot keys. It's designed in the   //
