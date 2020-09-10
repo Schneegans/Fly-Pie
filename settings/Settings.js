@@ -296,88 +296,84 @@ var Settings = class Settings {
             }
 
           } catch (error) {
-            utils.notification('Failed to load Preset: ' + error);
+            utils.debug('Failed to load Preset: ' + error);
           }
         });
 
     // Open a save-dialog when the save button is pressed.
     this._builder.get_object('save-preset-button').connect('clicked', (button) => {
-      try {
-        const saver = new Gtk.FileChooserDialog({
-          title: 'Save Preset',
-          action: Gtk.FileChooserAction.SAVE,
-          do_overwrite_confirmation: true,
-          transient_for: button.get_toplevel(),
-          modal: true
-        });
+      const saver = new Gtk.FileChooserDialog({
+        title: 'Save Preset',
+        action: Gtk.FileChooserAction.SAVE,
+        do_overwrite_confirmation: true,
+        transient_for: button.get_toplevel(),
+        modal: true
+      });
 
-        // Show only *.json files per default.
-        const jsonFilter = new Gtk.FileFilter();
-        jsonFilter.set_name('JSON Files');
-        jsonFilter.add_mime_type('application/json');
-        saver.add_filter(jsonFilter);
+      // Show only *.json files per default.
+      const jsonFilter = new Gtk.FileFilter();
+      jsonFilter.set_name('JSON Files');
+      jsonFilter.add_mime_type('application/json');
+      saver.add_filter(jsonFilter);
 
-        // But allow showing all files if required.
-        const allFilter = new Gtk.FileFilter();
-        allFilter.add_pattern('*');
-        allFilter.set_name('All Files');
-        saver.add_filter(allFilter);
+      // But allow showing all files if required.
+      const allFilter = new Gtk.FileFilter();
+      allFilter.add_pattern('*');
+      allFilter.set_name('All Files');
+      saver.add_filter(allFilter);
 
-        // Add our action buttons.
-        saver.add_button('Cancel', Gtk.ResponseType.CANCEL);
-        saver.add_button('Save', Gtk.ResponseType.OK);
+      // Add our action buttons.
+      saver.add_button('Cancel', Gtk.ResponseType.CANCEL);
+      saver.add_button('Save', Gtk.ResponseType.OK);
 
-        // Show the preset directory per default.
-        saver.set_current_folder_uri(this._presetDirectory.get_uri());
+      // Show the preset directory per default.
+      saver.set_current_folder_uri(this._presetDirectory.get_uri());
 
-        // Also make updating presets easier by pre-filling the file input field with the
-        // currently selected preset.
-        const presetSelection   = this._builder.get_object('preset-selection');
-        const [ok, model, iter] = presetSelection.get_selected();
-        if (ok) {
-          const name = model.get_value(iter, 0);
-          saver.set_current_name(name + '.json');
+      // Also make updating presets easier by pre-filling the file input field with the
+      // currently selected preset.
+      const presetSelection   = this._builder.get_object('preset-selection');
+      const [ok, model, iter] = presetSelection.get_selected();
+      if (ok) {
+        const name = model.get_value(iter, 0);
+        saver.set_current_name(name + '.json');
+      }
+
+      // Save preset file when the OK button is clicked.
+      saver.connect('response', (dialog, response_id) => {
+        if (response_id === Gtk.ResponseType.OK) {
+          try {
+            let path = dialog.get_filename();
+
+            // Make sure we have a *.json extension.
+            if (!path.endsWith('.json')) {
+              path += '.json';
+            }
+
+            // Now save the preset!
+            const file    = Gio.File.new_for_path(path);
+            const exists  = file.query_exists(null);
+            const success = Preset.save(file);
+
+            // If this was successful, we add the new preset to the list.
+            if (success && !exists) {
+              const fileInfo =
+                  file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
+              const suffixPos  = fileInfo.get_display_name().indexOf('.json');
+              const row        = this._presetList.append();
+              const presetName = fileInfo.get_display_name().slice(0, suffixPos);
+              this._presetList.set_value(row, 0, presetName);
+              this._presetList.set_value(row, 1, file.get_path());
+            }
+
+          } catch (error) {
+            utils.debug('Failed to save preset: ' + error);
+          }
         }
 
-        // Save preset file when the OK button is clicked.
-        saver.connect('response', (dialog, response_id) => {
-          if (response_id === Gtk.ResponseType.OK) {
-            try {
-              let path = dialog.get_filename();
+        dialog.destroy();
+      });
 
-              // Make sure we have a *.json extension.
-              if (!path.endsWith('.json')) {
-                path += '.json';
-              }
-
-              // Now save the preset!
-              const file    = Gio.File.new_for_path(path);
-              const exists  = file.query_exists(null);
-              const success = Preset.save(file);
-
-              // If this was successful, we add the new preset to the list.
-              if (success && !exists) {
-                const fileInfo =
-                    file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
-                const suffixPos  = fileInfo.get_display_name().indexOf('.json');
-                const row        = this._presetList.append();
-                const presetName = fileInfo.get_display_name().slice(0, suffixPos);
-                this._presetList.set_value(row, 0, presetName);
-                this._presetList.set_value(row, 1, file.get_path());
-              }
-
-            } catch (error) {
-              utils.notification('Failed to save preset: ' + error);
-            }
-          }
-
-          dialog.destroy();
-        });
-
-        saver.show();
-      } catch (error) {
-        utils.notification('Failed to save preset: ' + error);
-      }
+      saver.show();
     });
 
     // Open the preset directory with the default file manager.

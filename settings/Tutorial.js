@@ -30,111 +30,106 @@ var Tutorial = class Tutorial {
   // ------------------------------------------------------------ constructor / destructor
 
   constructor(builder, settings) {
-    try {
 
-      // Keep a reference to the builder and the settings.
-      this._builder  = builder;
-      this._settings = settings;
+    // Keep a reference to the builder and the settings.
+    this._builder  = builder;
+    this._settings = settings;
 
-      // This is used for measuring selection times for unlocking the medals.
-      this._timer = new Timer();
+    // This is used for measuring selection times for unlocking the medals.
+    this._timer = new Timer();
 
-      // Connect to the server so that we can toggle the demo menu from the tutorial.
-      new DBusWrapper(
-          Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/flypie',
-          proxy => {
-            this._dbus = proxy;
-            this._dbus.connectSignal('OnSelect', (proxy, sender, [id, path]) => {
-              // When the target item was selected, we store the last and best selection
-              // time in the settings.
-              if (id == this._lastID && path == '/1/2/0') {
-                const time     = this._timer.getElapsed();
-                const bestTime = this._settings.get_double('best-tutorial-time');
+    // Connect to the server so that we can toggle the demo menu from the tutorial.
+    new DBusWrapper(
+        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/flypie',
+        proxy => {
+          this._dbus = proxy;
+          this._dbus.connectSignal('OnSelect', (proxy, sender, [id, path]) => {
+            // When the target item was selected, we store the last and best selection
+            // time in the settings.
+            if (id == this._lastID && path == '/1/2/0') {
+              const time     = this._timer.getElapsed();
+              const bestTime = this._settings.get_double('best-tutorial-time');
 
-                this._settings.set_double('last-tutorial-time', time);
+              this._settings.set_double('last-tutorial-time', time);
 
-                if (time < bestTime) {
-                  this._settings.set_double('best-tutorial-time', time);
-                }
+              if (time < bestTime) {
+                this._settings.set_double('best-tutorial-time', time);
               }
-            });
-          });
-
-      // Connect the radio buttons buttons indicating the tutorial progress.
-      const tutorialPages = 6;
-      let stack           = this._builder.get_object('tutorial-stack');
-      let prevButton      = this._builder.get_object('tutorial-previous-page-button');
-      let nextButton      = this._builder.get_object('tutorial-next-page-button');
-
-      for (let i = 0; i < tutorialPages; i++) {
-        const radioButton = this._builder.get_object('tutorial-page-button-' + i);
-        radioButton.connect('toggled', button => {
-          if (button.active) {
-            // When toggled to active, make the corresponding tutorial page visible.
-            stack.set_visible_child_name('tutorial-page-' + i);
-
-            // Make the "Next" and "Previous" buttons unresponsive on the first and
-            // last page of the tutorial.
-            prevButton.sensitive = i != 0;
-            nextButton.sensitive = i != tutorialPages - 1;
-          }
-        });
-      }
-
-      // Activate next tutorial page when the "Next" button is clicked.
-      nextButton.connect('clicked', button => {
-        let active = parseInt(stack.get_visible_child_name().slice(-1));
-        let next   = Math.min(tutorialPages - 1, active + 1);
-        this._builder.get_object('tutorial-page-button-' + next).set_active(true);
-      });
-
-      // Activate previous tutorial page when the "Previous" button is clicked.
-      prevButton.connect('clicked', button => {
-        let active   = parseInt(stack.get_visible_child_name().slice(-1));
-        let previous = Math.max(0, active - 1);
-        this._builder.get_object('tutorial-page-button-' + previous).set_active(true);
-      });
-
-      // Initialize the three GIF animations of the tutorial. This cannot be done from
-      // Glade for now.
-      for (let i = 1; i <= 3; i++) {
-        this._builder.get_object('tutorial-animation-' + i)
-            .set_from_animation(GdkPixbuf.PixbufAnimation.new_from_file(
-                Me.path + '/resources/tutorial' + i + '.gif'));
-      }
-
-      // Make the five Show-Menu buttons of the tutorial pages actually show a menu.
-      for (let i = 1; i <= 5; i++) {
-        this._builder.get_object('tutorial-button-' + i).connect('clicked', () => {
-          this._dbus.ShowCustomMenuRemote(JSON.stringify(ExampleMenu.get()), (id) => {
-            // When the menu is shown successfully, reset the timer and store the menu ID.
-            if (id >= 0) {
-              this._timer.reset();
-              this._lastID = id;
             }
           });
         });
-      }
 
-      // Connect the two rest buttons.
-      for (let i = 1; i <= 2; i++) {
-        this._builder.get_object('tutorial-reset-button-' + i).connect('clicked', () => {
-          this._settings.reset('best-tutorial-time');
-          this._settings.reset('last-tutorial-time');
-        });
-      }
+    // Connect the radio buttons buttons indicating the tutorial progress.
+    const tutorialPages = 6;
+    let stack           = this._builder.get_object('tutorial-stack');
+    let prevButton      = this._builder.get_object('tutorial-previous-page-button');
+    let nextButton      = this._builder.get_object('tutorial-next-page-button');
 
-      // Update medals and time labels when the selection time changes.
-      this._settings.connect('changed::best-tutorial-time', () => this._updateState());
-      this._settings.connect('changed::last-tutorial-time', () => this._updateState());
+    for (let i = 0; i < tutorialPages; i++) {
+      const radioButton = this._builder.get_object('tutorial-page-button-' + i);
+      radioButton.connect('toggled', button => {
+        if (button.active) {
+          // When toggled to active, make the corresponding tutorial page visible.
+          stack.set_visible_child_name('tutorial-page-' + i);
 
-      // Update medals and time labels according to the stored last and best selection
-      // times when the settings dialog is opened.
-      this._updateState();
-
-    } catch (error) {
-      utils.notification('Failed to setup tutorial page: ' + error);
+          // Make the "Next" and "Previous" buttons unresponsive on the first and
+          // last page of the tutorial.
+          prevButton.sensitive = i != 0;
+          nextButton.sensitive = i != tutorialPages - 1;
+        }
+      });
     }
+
+    // Activate next tutorial page when the "Next" button is clicked.
+    nextButton.connect('clicked', button => {
+      let active = parseInt(stack.get_visible_child_name().slice(-1));
+      let next   = Math.min(tutorialPages - 1, active + 1);
+      this._builder.get_object('tutorial-page-button-' + next).set_active(true);
+    });
+
+    // Activate previous tutorial page when the "Previous" button is clicked.
+    prevButton.connect('clicked', button => {
+      let active   = parseInt(stack.get_visible_child_name().slice(-1));
+      let previous = Math.max(0, active - 1);
+      this._builder.get_object('tutorial-page-button-' + previous).set_active(true);
+    });
+
+    // Initialize the three GIF animations of the tutorial. This cannot be done from
+    // Glade for now.
+    for (let i = 1; i <= 3; i++) {
+      this._builder.get_object('tutorial-animation-' + i)
+          .set_from_animation(GdkPixbuf.PixbufAnimation.new_from_file(
+              Me.path + '/resources/tutorial' + i + '.gif'));
+    }
+
+    // Make the five Show-Menu buttons of the tutorial pages actually show a menu.
+    for (let i = 1; i <= 5; i++) {
+      this._builder.get_object('tutorial-button-' + i).connect('clicked', () => {
+        this._dbus.ShowCustomMenuRemote(JSON.stringify(ExampleMenu.get()), (id) => {
+          // When the menu is shown successfully, reset the timer and store the menu ID.
+          if (id >= 0) {
+            this._timer.reset();
+            this._lastID = id;
+          }
+        });
+      });
+    }
+
+    // Connect the two rest buttons.
+    for (let i = 1; i <= 2; i++) {
+      this._builder.get_object('tutorial-reset-button-' + i).connect('clicked', () => {
+        this._settings.reset('best-tutorial-time');
+        this._settings.reset('last-tutorial-time');
+      });
+    }
+
+    // Update medals and time labels when the selection time changes.
+    this._settings.connect('changed::best-tutorial-time', () => this._updateState());
+    this._settings.connect('changed::last-tutorial-time', () => this._updateState());
+
+    // Update medals and time labels according to the stored last and best selection
+    // times when the settings dialog is opened.
+    this._updateState();
   }
 
   // ----------------------------------------------------------------------- private stuff
