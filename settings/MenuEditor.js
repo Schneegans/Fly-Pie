@@ -702,8 +702,10 @@ var MenuEditor = class MenuEditor {
 
       // ...  and show a new tip some milliseconds later.
       GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
-        label.label           = tips[Math.floor(Math.random() * tips.length)];
-        revealer.reveal_child = true;
+        if (label.get_toplevel().visible) {
+          label.label           = tips[Math.floor(Math.random() * tips.length)];
+          revealer.reveal_child = true;
+        }
         return false;
       });
 
