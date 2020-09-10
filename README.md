@@ -51,7 +51,7 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
   - [X] **Recent Files:** Shows your recently used files.
   - [X] **Frequently Used:** Shows your frequently used applications.
   - [X] **Favorites:** Shows your pinned applications.
-  - [X] **Main Menu:** Shows all installed applications.
+  - [X] **Main Menu:** Shows all installed applications (This requires GMenu typelib to be installed. `sudo apt-get install gir1.2-gmenu-3.0` on Ubuntu).
 - [X] D-Bus Interface:
   - [X] Open pre-configured menus via the D-Bus.
   - [X] Open custom menus via the D-Bus.
@@ -105,7 +105,7 @@ gnome-extensions enable flypie@schneegans.github.com
 If you installed and enabled Fly-Pie for the very first time, you can bring up the default menu with <kbd>Ctrl</kbd> + <kbd>Space</kbd>. If nothing happens, you can execute the following command and look for any errors.
 
 ```bash
-journalctl /usr/bin/gnome-shell -f -o cat | grep flypie -B 2 -A 2
+journalctl -f -o cat | grep flypie -B 2 -A 2
 ```
 
 When you open the settings dialog of Fly-Pie, you will be greeted with an interactive tutorial demonstrating effective usage patterns.
@@ -206,7 +206,7 @@ gdbus introspect --session --dest org.gnome.Shell --object-path /org/gnome/shell
 
 # Contributing to Fly-Pie
 
-Whenever you encounter a :beetle: **bug** or have :tada: **feature request**, 
+Whenever you encounter a :beetle: **bug** or have a :tada: **feature request**, 
 report this via [Github issues](https://github.com/schneegans/fly-pie/issues).
 
 We are happy to receive contributions to Fly-Pie in the form of **pull requests** via Github.
@@ -215,7 +215,7 @@ Feel free to fork the repository, implement your changes and create a merge requ
 Developing a Gnome Shell extension is not easy, as debugging possibilities are quite limited. One thing you should always do is to monitor Gnome Shells output for error or debug messages produced by Fly-Pie. This can be done like this:
 
 ```bash
-journalctl /usr/bin/gnome-shell -f -o cat | grep flypie -B 2 -A 2
+journalctl -f -o cat | grep flypie -B 2 -A 2
 ```
 
 ## Branching Guidelines

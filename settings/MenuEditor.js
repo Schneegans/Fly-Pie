@@ -107,9 +107,6 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
 // settings dialog. It's not instantiated multiple times, nor does it have any public   //
 // interface, hence it could just be copy-pasted to the settings class. But as it's     //
 // quite decoupled as well, it structures the code better when written to its own file. //
-// I use quite many try / catch blocks which show a notification if an error occurs.    //
-// This helps debugging significantly as the errors are otherwise not easy to find      //
-// (journalctl /usr/bin/gnome-shell does not contain them).                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var MenuEditor = class MenuEditor {
@@ -128,456 +125,433 @@ var MenuEditor = class MenuEditor {
         proxy => this._dbus = proxy);
 
     // First, we initialize the add-new-item popover and the related buttons.
-    try {
-      // Here we add one entry to the add-new-item popover for each registered item type.
-      for (const type in ItemRegistry.ItemTypes) {
-        const row  = new Gtk.ListBoxRow({selectable: false});
-        const grid = new Gtk.Grid({
-          column_spacing: 8,
-          margin_top: 4,
-          margin_bottom: 4,
-          margin_start: 4,
-          margin_end: 10
-        });
-        const icon =
-            new Gtk.Image({icon_name: ItemRegistry.ItemTypes[type].icon, icon_size: 24});
-        const name = new Gtk.Label({label: ItemRegistry.ItemTypes[type].name, xalign: 0});
-        const subtitle = new Gtk.Label({
-          label: '<small>' + ItemRegistry.ItemTypes[type].subtitle + '</small>',
-          use_markup: true,
-          xalign: 0
-        });
-        subtitle.get_style_context().add_class('dim-label');
-
-        grid.attach(icon, 0, 0, 1, 2);
-        grid.attach(name, 1, 0, 1, 1);
-        grid.attach(subtitle, 1, 1, 1, 1);
-
-        row.add(grid);
-        row.show_all();
-
-        // The name is important - this is later used to identify the type of the
-        // item which is to be created.
-        row.set_name(type);
-
-        // Add the new row to the list defined in the ItemRegistry.
-        const list = this._builder.get_object(ItemRegistry.ItemTypes[type].settingsList);
-        list.insert(row, -1);
-      }
-
-      // Add a new item when one entry of the menu-types list it activated.
-      this._builder.get_object('menu-types-list')
-          .connect('row-activated', (widget, row) => {
-            this._addNewItem(row.get_name());
-            this._builder.get_object('item-type-popover').popdown();
-          });
-
-      // Add a new item when one entry of the action-types list it activated.
-      this._builder.get_object('action-types-list')
-          .connect('row-activated', (widget, row) => {
-            this._addNewItem(row.get_name());
-            this._builder.get_object('item-type-popover').popdown();
-          });
-
-      // Add a new item when one entry of the submenu-types list it activated.
-      this._builder.get_object('submenu-types-list')
-          .connect('row-activated', (widget, row) => {
-            this._addNewItem(row.get_name());
-            this._builder.get_object('item-type-popover').popdown();
-          });
-
-      // Delete the selected item when the item-delete button is clicked.
-      this._builder.get_object('remove-item-button').connect('clicked', () => {
-        this._deleteSelected();
+    // Here we add one entry to the add-new-item popover for each registered item type.
+    for (const type in ItemRegistry.getItemTypes()) {
+      const row  = new Gtk.ListBoxRow({selectable: false});
+      const grid = new Gtk.Grid({
+        column_spacing: 8,
+        margin_top: 4,
+        margin_bottom: 4,
+        margin_start: 4,
+        margin_end: 10
       });
-
-      // Open a preview for the selected menu when the preview-button is clicked.
-      this._builder.get_object('preview-menu-button').connect('clicked', () => {
-        let [ok, model, iter] = this._selection.get_selected();
-
-        if (ok) {
-          const menuIndex = model.get_path(iter).get_indices()[0];
-          [ok, iter]      = model.get_iter(Gtk.TreePath.new_from_indices([menuIndex]));
-          const menuName  = this._get(iter, 'NAME');
-          this._dbus.PreviewMenuRemote(menuName, (result) => {
-            result = parseInt(result);
-            if (result >= 0) {
-
-              // success
-            } else {
-              const error = DBusInterface.getErrorDescription(result);
-              utils.notification('Failed to open menu preview: ' + error);
-            }
-          });
-        }
+      const icon = new Gtk.Image(
+          {icon_name: ItemRegistry.getItemTypes()[type].icon, icon_size: 24});
+      const name =
+          new Gtk.Label({label: ItemRegistry.getItemTypes()[type].name, xalign: 0});
+      const subtitle = new Gtk.Label({
+        label: '<small>' + ItemRegistry.getItemTypes()[type].subtitle + '</small>',
+        use_markup: true,
+        xalign: 0
       });
+      subtitle.get_style_context().add_class('dim-label');
 
-    } catch (error) {
-      utils.notification('Failed to initialize Menu Editor\'s Item Types: ' + error);
+      grid.attach(icon, 0, 0, 1, 2);
+      grid.attach(name, 1, 0, 1, 1);
+      grid.attach(subtitle, 1, 1, 1, 1);
+
+      row.add(grid);
+      row.show_all();
+
+      // The name is important - this is later used to identify the type of the
+      // item which is to be created.
+      row.set_name(type);
+
+      // Add the new row to the list defined in the ItemRegistry.
+      const list =
+          this._builder.get_object(ItemRegistry.getItemTypes()[type].settingsList);
+      list.insert(row, -1);
     }
+
+    // Add a new item when one entry of the menu-types list it activated.
+    this._builder.get_object('menu-types-list')
+        .connect('row-activated', (widget, row) => {
+          this._addNewItem(row.get_name());
+          this._builder.get_object('item-type-popover').popdown();
+        });
+
+    // Add a new item when one entry of the action-types list it activated.
+    this._builder.get_object('action-types-list')
+        .connect('row-activated', (widget, row) => {
+          this._addNewItem(row.get_name());
+          this._builder.get_object('item-type-popover').popdown();
+        });
+
+    // Add a new item when one entry of the submenu-types list it activated.
+    this._builder.get_object('submenu-types-list')
+        .connect('row-activated', (widget, row) => {
+          this._addNewItem(row.get_name());
+          this._builder.get_object('item-type-popover').popdown();
+        });
+
+    // Delete the selected item when the item-delete button is clicked.
+    this._builder.get_object('remove-item-button').connect('clicked', () => {
+      this._deleteSelected();
+    });
+
+    // Open a preview for the selected menu when the preview-button is clicked.
+    this._builder.get_object('preview-menu-button').connect('clicked', () => {
+      let [ok, model, iter] = this._selection.get_selected();
+
+      if (ok) {
+        const menuIndex = model.get_path(iter).get_indices()[0];
+        [ok, iter]      = model.get_iter(Gtk.TreePath.new_from_indices([menuIndex]));
+        const menuName  = this._get(iter, 'NAME');
+        this._dbus.PreviewMenuRemote(menuName, (result) => {
+          result = parseInt(result);
+          if (result < 0) {
+            const error = DBusInterface.getErrorDescription(result);
+            utils.debug('Failed to open menu preview: ' + error);
+          }
+        });
+      }
+    });
 
 
     // Now create the menu tree store and tree view. The tree store contains several
     // columns which basically contain all the information required to create all menus.
     // The tree view has two columns, the first shows an icon and the item's name; the
     // second shows the item's fixed angle.
-    try {
-      // Create our custom tree store and assign it to the tree view of the builder.
-      this._store     = new MenuTreeStore();
-      this._selection = this._builder.get_object('menus-treeview-selection');
-      const view      = this._builder.get_object('menus-treeview');
-      view.set_model(this._store);
 
-      // Delete the selected item when the Delete key is pressed.
-      view.connect('key-release-event', (widget, event) => {
-        if (event.get_keyval()[1] == Gdk.KEY_Delete) {
-          this._deleteSelected();
-          return true;
-        }
+    // First we create our custom tree store and assign it to the tree view of the
+    // builder.
+    this._store     = new MenuTreeStore();
+    this._selection = this._builder.get_object('menus-treeview-selection');
+    const view      = this._builder.get_object('menus-treeview');
+    view.set_model(this._store);
+
+    // Delete the selected item when the Delete key is pressed.
+    view.connect('key-release-event', (widget, event) => {
+      if (event.get_keyval()[1] == Gdk.KEY_Delete) {
+        this._deleteSelected();
+        return true;
+      }
+      return false;
+    });
+
+    // When a new row is inserted or an existing row is dragged around, we make sure
+    // that it stays selected. Additionally we save the menu configuration.
+    this._store.connect('row-inserted', (widget, path, iter) => {
+      // This is kind of a weird hack (?) to keep a row selected after drag'n'drop. We
+      // simply select every row after it was inserted. This does not work if we
+      // directly attempt to select it, we have to use a short timeout.
+      GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1, () => {
+        this._selection.select_iter(iter);
+
+        // Save the menu configuration.
+        this._saveMenuConfiguration();
+
         return false;
       });
+    });
 
-      // When a new row is inserted or an existing row is dragged around, we make sure
-      // that it stays selected. Additionally we save the menu configuration.
-      this._store.connect('row-inserted', (widget, path, iter) => {
-        // This is kind of a weird hack (?) to keep a row selected after drag'n'drop. We
-        // simply select every row after it was inserted. This does not work if we
-        // directly attempt to select it, we have to use a short timeout.
-        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1, () => {
-          this._selection.select_iter(iter);
+    // The tree view's main column contains an icon and some text. The icon is given in
+    // the DISPLAY_ICON column of the menu store; the text is contained in the
+    // DISPLAY_NAME column.
+    const menuColumn = new Gtk.TreeViewColumn({
+      title: 'Menu Structure',
+      expand: true,
+      sizing: Gtk.TreeViewColumnSizing.AUTOSIZE
+    });
+    const iconRender = new Gtk.CellRendererPixbuf();
+    const nameRender = new Gtk.CellRendererText({xpad: 5});
+    menuColumn.pack_start(iconRender, false);
+    menuColumn.pack_start(nameRender, true);
+    menuColumn.add_attribute(iconRender, 'surface', this._store.columns.DISPLAY_ICON);
+    menuColumn.add_attribute(nameRender, 'markup', this._store.columns.DISPLAY_NAME);
+    view.append_column(menuColumn);
 
-          // Save the menu configuration.
-          this._saveMenuConfiguration();
+    // The secondary tree view column shows the item's fixed angle, if any. The
+    // displayed fixed angle is contained in the menu store's DISPLAY_ANGLE column.
+    const angleColumn = new Gtk.TreeViewColumn(
+        {title: 'Fixed Angle', sizing: Gtk.TreeViewColumnSizing.AUTOSIZE});
+    const angleRender = new Gtk.CellRendererText({sensitive: false, xalign: 0.5});
+    angleColumn.pack_start(angleRender, true);
+    angleColumn.add_attribute(angleRender, 'markup', this._store.columns.DISPLAY_ANGLE);
+    view.append_column(angleColumn);
 
-          return false;
-        });
-      });
-
-      // The tree view's main column contains an icon and some text. The icon is given in
-      // the DISPLAY_ICON column of the menu store; the text is contained in the
-      // DISPLAY_NAME column.
-      const menuColumn = new Gtk.TreeViewColumn({
-        title: 'Menu Structure',
-        expand: true,
-        sizing: Gtk.TreeViewColumnSizing.AUTOSIZE
-      });
-      const iconRender = new Gtk.CellRendererPixbuf();
-      const nameRender = new Gtk.CellRendererText({xpad: 5});
-      menuColumn.pack_start(iconRender, false);
-      menuColumn.pack_start(nameRender, true);
-      menuColumn.add_attribute(iconRender, 'surface', this._store.columns.DISPLAY_ICON);
-      menuColumn.add_attribute(nameRender, 'markup', this._store.columns.DISPLAY_NAME);
-      view.append_column(menuColumn);
-
-      // The secondary tree view column shows the item's fixed angle, if any. The
-      // displayed fixed angle is contained in the menu store's DISPLAY_ANGLE column.
-      const angleColumn = new Gtk.TreeViewColumn(
-          {title: 'Fixed Angle', sizing: Gtk.TreeViewColumnSizing.AUTOSIZE});
-      const angleRender = new Gtk.CellRendererText({sensitive: false, xalign: 0.5});
-      angleColumn.pack_start(angleRender, true);
-      angleColumn.add_attribute(angleRender, 'markup', this._store.columns.DISPLAY_ANGLE);
-      view.append_column(angleColumn);
-
-    } catch (error) {
-      utils.notification('Failed to initialize Menu Editor columns: ' + error);
-    }
 
     // Now that the tree store is set up, we can load the entire menu configuration.
-    this._loadMenuConfiguration();
+    try {
+      this._loadMenuConfiguration();
+    } catch (error) {
+      utils.debug('Failed to load menu configuration: ' + error);
+    }
 
     // Now we initialize all icon-related UI elements. That is first and foremost the
     // icon-select popover.
-    try {
+    // Icons are loaded asynchronously. Once this is finished, the little spinner in the
+    // top right of the popover is hidden.
+    this._loadIcons().then(() => {
+      this._builder.get_object('icon-load-spinner').active = false;
+    });
 
-      // Icons are loaded asynchronously. Once this is finished, the little spinner in the
-      // top right of the popover is hidden.
-      this._loadIcons().then(() => {
-        this._builder.get_object('icon-load-spinner').active = false;
-      });
-
-      // Filter the icon view based on the content of the search field.
-      const iconListFiltered = this._builder.get_object('icon-list-filtered');
-      const filterEntry      = this._builder.get_object('icon-filter-entry');
-      iconListFiltered.set_visible_func((model, iter) => {
-        const name = model.get_value(iter, 0);
-        if (name == null) {
-          return false;
-        }
-        return name.toLowerCase().includes(filterEntry.text.toLowerCase());
-      });
-
-      // Refilter the icon list whenever the user types something in the search field.
-      filterEntry.connect('notify::text', () => {
-        iconListFiltered.refilter();
-      });
-
-      // Hide the popover when an icon is activated.
-      const iconView = this._builder.get_object('icon-view');
-      iconView.connect('item-activated', () => {
-        this._builder.get_object('icon-popover').popdown();
-      });
-
-      // Set the text of the icon name input field when an icon is selected.
-      iconView.connect('selection-changed', (view) => {
-        const path       = view.get_selected_items()[0];
-        const model      = view.get_model();
-        const [ok, iter] = model.get_iter(path);
-        if (ok) {
-          this._builder.get_object('icon-name').text = model.get_value(iter, 0);
-        }
-      });
-
-      // Hide the popover when a file of the select-a-custom-icon dialog is activated.
-      const iconChooser = this._builder.get_object('icon-file-chooser');
-      iconChooser.connect('file-activated', (chooser) => {
-        this._builder.get_object('icon-popover').popdown();
-      });
-
-      // Set the text of the icon name input field when a file of the select-a-custom-icon
-      // dialog is selected.
-      iconChooser.connect('selection-changed', (chooser) => {
-        this._builder.get_object('icon-name').text = chooser.get_filename();
-      });
-
-      // Draw an icon to the drawing area whenever it's invalidated. This happens usually
-      // when the text of the icon name input field changes.
-      this._builder.get_object('item-icon-drawingarea').connect('draw', (widget, ctx) => {
-        const size =
-            Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-        const icon = this._getSelected('ICON');
-        utils.paintIcon(ctx, icon, size, 1);
+    // Filter the icon view based on the content of the search field.
+    const iconListFiltered = this._builder.get_object('icon-list-filtered');
+    const filterEntry      = this._builder.get_object('icon-filter-entry');
+    iconListFiltered.set_visible_func((model, iter) => {
+      const name = model.get_value(iter, 0);
+      if (name == null) {
         return false;
-      });
+      }
+      return name.toLowerCase().includes(filterEntry.text.toLowerCase());
+    });
 
-      // Redraw the icon when the icon name input field is changed. Also, store the new
-      // icon name in the tree store. This will lead to a re-draw of the icon in the tree
-      // view as well.
-      this._builder.get_object('icon-name').connect('notify::text', (widget) => {
-        this._setSelected('ICON', widget.text);
-        this._builder.get_object('item-icon-drawingarea').queue_draw();
-      });
+    // Refilter the icon list whenever the user types something in the search field.
+    filterEntry.connect('notify::text', () => {
+      iconListFiltered.refilter();
+    });
 
-    } catch (error) {
-      utils.notification('Failed to initialize Menu Editor\'s icon popover: ' + error);
-    }
+    // Hide the popover when an icon is activated.
+    const iconView = this._builder.get_object('icon-view');
+    iconView.connect('item-activated', () => {
+      this._builder.get_object('icon-popover').popdown();
+    });
+
+    // Set the text of the icon name input field when an icon is selected.
+    iconView.connect('selection-changed', (view) => {
+      const path       = view.get_selected_items()[0];
+      const model      = view.get_model();
+      const [ok, iter] = model.get_iter(path);
+      if (ok) {
+        this._builder.get_object('icon-name').text = model.get_value(iter, 0);
+      }
+    });
+
+    // Hide the popover when a file of the select-a-custom-icon dialog is activated.
+    const iconChooser = this._builder.get_object('icon-file-chooser');
+    iconChooser.connect('file-activated', (chooser) => {
+      this._builder.get_object('icon-popover').popdown();
+    });
+
+    // Set the text of the icon name input field when a file of the select-a-custom-icon
+    // dialog is selected.
+    iconChooser.connect('selection-changed', (chooser) => {
+      this._builder.get_object('icon-name').text = chooser.get_filename();
+    });
+
+    // Draw an icon to the drawing area whenever it's invalidated. This happens usually
+    // when the text of the icon name input field changes.
+    this._builder.get_object('item-icon-drawingarea').connect('draw', (widget, ctx) => {
+      const size = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      const icon = this._getSelected('ICON');
+      utils.paintIcon(ctx, icon, size, 1);
+      return false;
+    });
+
+    // Redraw the icon when the icon name input field is changed. Also, store the new
+    // icon name in the tree store. This will lead to a re-draw of the icon in the tree
+    // view as well.
+    this._builder.get_object('icon-name').connect('notify::text', (widget) => {
+      this._setSelected('ICON', widget.text);
+      this._builder.get_object('item-icon-drawingarea').queue_draw();
+    });
 
 
     // Now we initialize all other widgets of the item settings. That is, for example, the
     // name, the url, command, or file input fields.
-    try {
+    // Store the item's name in the tree store when the text of the input field is
+    // changed.
+    this._builder.get_object('item-name').connect('notify::text', (widget) => {
+      this._setSelected('NAME', widget.text);
+    });
 
-      // Store the item's name in the tree store when the text of the input field is
-      // changed.
-      this._builder.get_object('item-name').connect('notify::text', (widget) => {
-        this._setSelected('NAME', widget.text);
-      });
+    // Store the item's URI in the tree store's DATA column when the text of the
+    // corresponding input field is changed.
+    this._builder.get_object('item-uri').connect('notify::text', (widget) => {
+      this._setSelected('DATA', widget.text);
+    });
 
-      // Store the item's URI in the tree store's DATA column when the text of the
-      // corresponding input field is changed.
-      this._builder.get_object('item-uri').connect('notify::text', (widget) => {
-        this._setSelected('DATA', widget.text);
-      });
+    // Store the item's file path in the tree store's DATA column when the text of the
+    // corresponding input field is changed.
+    this._builder.get_object('item-file').connect('notify::text', (widget) => {
+      this._setSelected('DATA', widget.text);
+    });
 
-      // Store the item's file path in the tree store's DATA column when the text of the
-      // corresponding input field is changed.
-      this._builder.get_object('item-file').connect('notify::text', (widget) => {
-        this._setSelected('DATA', widget.text);
-      });
+    // Store the item's command in the tree store's DATA column when the text of the
+    // corresponding input field is changed.
+    this._builder.get_object('item-command').connect('notify::text', (widget) => {
+      this._setSelected('DATA', widget.text);
+    });
 
-      // Store the item's command in the tree store's DATA column when the text of the
-      // corresponding input field is changed.
-      this._builder.get_object('item-command').connect('notify::text', (widget) => {
-        this._setSelected('DATA', widget.text);
-      });
+    // Store the item's maximum item count in the tree store's DATA column when the
+    // corresponding input field is changed.
+    this._builder.get_object('item-count').connect('value-changed', (adjustment) => {
+      this._setSelected('DATA', adjustment.value);
+    });
 
-      // Store the item's maximum item count in the tree store's DATA column when the
-      // corresponding input field is changed.
-      this._builder.get_object('item-count').connect('value-changed', (adjustment) => {
-        this._setSelected('DATA', adjustment.value);
-      });
+    // Store the item's text in the tree store's DATA column when the text of the
+    // corresponding input field is changed.
+    this._builder.get_object('item-text').connect('notify::text', (widget) => {
+      this._setSelected('DATA', widget.text);
+    });
 
-      // Store the item's text in the tree store's DATA column when the text of the
-      // corresponding input field is changed.
-      this._builder.get_object('item-text').connect('notify::text', (widget) => {
-        this._setSelected('DATA', widget.text);
-      });
+    // For top-level menus, store whether they should be opened in the center of the
+    // screen.
+    this._builder.get_object('menu-centered').connect('notify::active', (widget) => {
+      this._setSelected('CENTERED', widget.active);
+    });
 
-      // For top-level menus, store whether they should be opened in the center of the
-      // screen.
-      this._builder.get_object('menu-centered').connect('notify::active', (widget) => {
-        this._setSelected('CENTERED', widget.active);
-      });
+    // Store the item's fixed angle in the tree store's ANGLE_OR_ID column when the
+    // corresponding input field is changed. This is a bit more involved, as we check
+    // for monotonically increasing angles among all sibling items. We iterate through
+    // all children of the selected item's parent (that means all siblings of the
+    // selected item). The minAngle is set to the largest fixed angle amongst all
+    // siblings preceding the selected item; maxAngle is set to the smallest fixed angle
+    // amongst siblings after the selected item.
+    this._builder.get_object('item-angle').connect('value-changed', (adjustment) => {
+      let minAngle = -1
+      let maxAngle = 360
 
-      // Store the item's fixed angle in the tree store's ANGLE_OR_ID column when the
-      // corresponding input field is changed. This is a bit more involved, as we check
-      // for monotonically increasing angles among all sibling items. We iterate through
-      // all children of the selected item's parent (that means all siblings of the
-      // selected item). The minAngle is set to the largest fixed angle amongst all
-      // siblings preceding the selected item; maxAngle is set to the smallest fixed angle
-      // amongst siblings after the selected item.
-      this._builder.get_object('item-angle').connect('value-changed', (adjustment) => {
-        let minAngle = -1
-        let maxAngle = 360
+      const [ok1, model, selectedIter] = this._selection.get_selected();
+      if (!ok1) return;
 
-        const [ok1, model, selectedIter] = this._selection.get_selected();
-        if (!ok1) return;
+      const [ok2, parentIter] = model.iter_parent(selectedIter);
+      if (!ok2) return;
 
-        const [ok2, parentIter] = model.iter_parent(selectedIter);
-        if (!ok2) return;
+      const selectedIndices = model.get_path(selectedIter).get_indices();
+      const selectedIndex   = selectedIndices[selectedIndices.length - 1];
+      const nChildren       = model.iter_n_children(parentIter);
 
-        const selectedIndices = model.get_path(selectedIter).get_indices();
-        const selectedIndex   = selectedIndices[selectedIndices.length - 1];
-        const nChildren       = model.iter_n_children(parentIter);
+      for (let n = 0; n < nChildren; n++) {
+        const angle = this._get(model.iter_nth_child(parentIter, n)[1], 'ANGLE_OR_ID');
 
-        for (let n = 0; n < nChildren; n++) {
-          const angle = this._get(model.iter_nth_child(parentIter, n)[1], 'ANGLE_OR_ID');
-
-          if (n < selectedIndex && angle >= 0) {
-            minAngle = angle;
-          }
-
-          if (n > selectedIndex && angle >= 0) {
-            maxAngle = angle;
-            break;
-          }
+        if (n < selectedIndex && angle >= 0) {
+          minAngle = angle;
         }
 
-        // Set the value of the tree store only if the constraints are fulfilled.
-        if (adjustment.value == -1 ||
-            (adjustment.value > minAngle && adjustment.value < maxAngle)) {
-          this._setSelected('ANGLE_OR_ID', adjustment.value);
+        if (n > selectedIndex && angle >= 0) {
+          maxAngle = angle;
+          break;
         }
-      });
+      }
+
+      // Set the value of the tree store only if the constraints are fulfilled.
+      if (adjustment.value == -1 ||
+          (adjustment.value > minAngle && adjustment.value < maxAngle)) {
+        this._setSelected('ANGLE_OR_ID', adjustment.value);
+      }
+    });
 
 
-      // Initialize the file-select-popover. When a file is activated, the popover is
-      // hidden, when a file is selected, the item's name, icon and file input fields are
-      // updated accordingly.
-      this._builder.get_object('item-file-chooser').connect('file-activated', () => {
-        this._builder.get_object('item-file-popover').popdown();
-      });
+    // Initialize the file-select-popover. When a file is activated, the popover is
+    // hidden, when a file is selected, the item's name, icon and file input fields are
+    // updated accordingly.
+    this._builder.get_object('item-file-chooser').connect('file-activated', () => {
+      this._builder.get_object('item-file-popover').popdown();
+    });
 
-      this._builder.get_object('item-file-chooser')
-          .connect('selection-changed', (widget) => {
-            const info = widget.get_file().query_info('standard::icon', 0, null);
-            this._builder.get_object('icon-name').text = info.get_icon().to_string();
-            this._builder.get_object('item-name').text = widget.get_file().get_basename();
-            this._builder.get_object('item-file').text = widget.get_filename();
-          });
+    this._builder.get_object('item-file-chooser')
+        .connect('selection-changed', (widget) => {
+          const info = widget.get_file().query_info('standard::icon', 0, null);
+          this._builder.get_object('icon-name').text = info.get_icon().to_string();
+          this._builder.get_object('item-name').text = widget.get_file().get_basename();
+          this._builder.get_object('item-file').text = widget.get_filename();
+        });
 
-      // Initialize the application-select-popover. When an application is activated, the
-      // popover is hidden, when an application is selected, the item's name, icon and
-      // command input fields are updated accordingly.
-      this._builder.get_object('application-popover-list')
-          .connect('application-activated', () => {
-            this._builder.get_object('item-application-popover').popdown();
-          });
+    // Initialize the application-select-popover. When an application is activated, the
+    // popover is hidden, when an application is selected, the item's name, icon and
+    // command input fields are updated accordingly.
+    this._builder.get_object('application-popover-list')
+        .connect('application-activated', () => {
+          this._builder.get_object('item-application-popover').popdown();
+        });
 
-      this._builder.get_object('application-popover-list')
-          .connect('application-selected', (widget, app) => {
-            this._builder.get_object('icon-name').text    = app.get_icon().to_string();
-            this._builder.get_object('item-name').text    = app.get_display_name();
-            this._builder.get_object('item-command').text = app.get_commandline();
-          });
+    this._builder.get_object('application-popover-list')
+        .connect('application-selected', (widget, app) => {
+          this._builder.get_object('icon-name').text    = app.get_icon().to_string();
+          this._builder.get_object('item-name').text    = app.get_display_name();
+          this._builder.get_object('item-command').text = app.get_commandline();
+        });
 
-      // Initialize the two shortcut-select elements. See the documentation of
-      // _initShortcutSelect for details.
-      this._itemShortcutLabel = this._initShortcutSelect('item-shortcut-select', true);
-      this._menuShortcutLabel = this._initShortcutSelect('menu-shortcut-select', false);
-
-    } catch (error) {
-      utils.notification('Failed to initialize Menu Editor\'s item settings: ' + error);
-    }
+    // Initialize the two shortcut-select elements. See the documentation of
+    // _initShortcutSelect for details.
+    this._itemShortcutLabel = this._initShortcutSelect('item-shortcut-select', true);
+    this._menuShortcutLabel = this._initShortcutSelect('menu-shortcut-select', false);
 
 
     // When the currently selected menu item changes, the content of the settings widgets
     // must be updated accordingly.
     this._selection.connect('changed', (selection) => {
-      try {
+      // Some widgets are disabled if nothing is selected.
+      let somethingSelected = selection.get_selected()[0];
+      this._builder.get_object('preview-menu-button').sensitive = somethingSelected;
+      this._builder.get_object('remove-item-button').sensitive  = somethingSelected;
+      this._builder.get_object('action-types-list').sensitive   = somethingSelected;
+      this._builder.get_object('submenu-types-list').sensitive  = somethingSelected;
 
-        // Some widgets are disabled if nothing is selected.
-        let somethingSelected = selection.get_selected()[0];
-        this._builder.get_object('preview-menu-button').sensitive = somethingSelected;
-        this._builder.get_object('remove-item-button').sensitive  = somethingSelected;
-        this._builder.get_object('action-types-list').sensitive   = somethingSelected;
-        this._builder.get_object('submenu-types-list').sensitive  = somethingSelected;
+      // There are multiple Gtk.Revealers involved. Based on the selected item's type
+      // their content is either shown or hidden. First we assume that all are hidden
+      // and selectively set them to be shown.
+      const revealers = {
+        'item-settings-revealer': somethingSelected,
+        'item-settings-menu-revealer': false,
+        'item-settings-angle-revealer': false,
+        'item-settings-item-shortcut-revealer': false,
+        'item-settings-count-revealer': false,
+        'item-settings-uri-revealer': false,
+        'item-settings-command-revealer': false,
+        'item-settings-file-revealer': false,
+        'item-settings-text-revealer': false
+      };
 
-        // There are multiple Gtk.Revealers involved. Based on the selected item's type
-        // their content is either shown or hidden. First we assume that all are hidden
-        // and selectively set them to be shown.
-        const revealers = {
-          'item-settings-revealer': somethingSelected,
-          'item-settings-menu-revealer': false,
-          'item-settings-angle-revealer': false,
-          'item-settings-item-shortcut-revealer': false,
-          'item-settings-count-revealer': false,
-          'item-settings-uri-revealer': false,
-          'item-settings-command-revealer': false,
-          'item-settings-file-revealer': false,
-          'item-settings-text-revealer': false
-        };
+      if (somethingSelected) {
 
-        if (somethingSelected) {
+        const selectedType = this._getSelected('TYPE');
+        const selectedSettingsType =
+            ItemRegistry.getItemTypes()[selectedType].settingsType;
 
-          const selectedType         = this._getSelected('TYPE');
-          const selectedSettingsType = ItemRegistry.ItemTypes[selectedType].settingsType;
+        // The item's name, icon and description have to be updated in any case if
+        // something is selected.
+        this._builder.get_object('icon-name').text = this._getSelected('ICON');
+        this._builder.get_object('item-name').text = this._getSelected('NAME');
+        this._builder.get_object('item-description').label =
+            ItemRegistry.getItemTypes()[selectedType].description;
 
-          // The item's name, icon and description have to be updated in any case if
-          // something is selected.
-          this._builder.get_object('icon-name').text = this._getSelected('ICON');
-          this._builder.get_object('item-name').text = this._getSelected('NAME');
-          this._builder.get_object('item-description').label =
-              ItemRegistry.ItemTypes[selectedType].description;
-
-          // If the selected item is a top-level menu, the DATA column contains its
-          // shortcut.
-          if (selectedSettingsType == ItemRegistry.SettingsTypes.MENU) {
-            this._menuShortcutLabel.set_accelerator(this._getSelected('DATA'));
-            this._builder.get_object('menu-centered').active =
-                this._getSelected('CENTERED');
-            revealers['item-settings-menu-revealer'] = true;
-          }
-
-          // For all other items, the fixed angle can be set.
-          if (selectedSettingsType != ItemRegistry.SettingsTypes.MENU) {
-            this._builder.get_object('item-angle').value =
-                this._getSelected('ANGLE_OR_ID');
-            revealers['item-settings-angle-revealer'] = true;
-          }
-
-          if (selectedSettingsType == ItemRegistry.SettingsTypes.SHORTCUT) {
-            this._itemShortcutLabel.set_accelerator(this._getSelected('DATA'));
-            revealers['item-settings-item-shortcut-revealer'] = true;
-
-          } else if (selectedSettingsType == ItemRegistry.SettingsTypes.URL) {
-            this._builder.get_object('item-uri').text = this._getSelected('DATA');
-            revealers['item-settings-uri-revealer']   = true;
-
-          } else if (selectedSettingsType == ItemRegistry.SettingsTypes.FILE) {
-            this._builder.get_object('item-file').text = this._getSelected('DATA');
-            revealers['item-settings-file-revealer']   = true;
-
-          } else if (selectedSettingsType == ItemRegistry.SettingsTypes.COMMAND) {
-            this._builder.get_object('item-command').text = this._getSelected('DATA');
-            revealers['item-settings-command-revealer']   = true;
-
-          } else if (selectedSettingsType == ItemRegistry.SettingsTypes.COUNT) {
-            this._builder.get_object('item-count').value = this._getSelected('DATA');
-            revealers['item-settings-count-revealer']    = true;
-
-          } else if (selectedSettingsType == ItemRegistry.SettingsTypes.TEXT) {
-            this._builder.get_object('item-text').text = this._getSelected('DATA');
-            revealers['item-settings-text-revealer']   = true;
-          }
+        // If the selected item is a top-level menu, the DATA column contains its
+        // shortcut.
+        if (selectedSettingsType == ItemRegistry.SettingsTypes.MENU) {
+          this._menuShortcutLabel.set_accelerator(this._getSelected('DATA'));
+          this._builder.get_object('menu-centered').active =
+              this._getSelected('CENTERED');
+          revealers['item-settings-menu-revealer'] = true;
         }
 
-        // Finally update the state of all revealers.
-        for (const revealer in revealers) {
-          this._builder.get_object(revealer).reveal_child = revealers[revealer];
+        // For all other items, the fixed angle can be set.
+        if (selectedSettingsType != ItemRegistry.SettingsTypes.MENU) {
+          this._builder.get_object('item-angle').value = this._getSelected('ANGLE_OR_ID');
+          revealers['item-settings-angle-revealer']    = true;
         }
 
-      } catch (error) {
-        utils.notification('Failed to update menu editor selection: ' + error);
+        if (selectedSettingsType == ItemRegistry.SettingsTypes.SHORTCUT) {
+          this._itemShortcutLabel.set_accelerator(this._getSelected('DATA'));
+          revealers['item-settings-item-shortcut-revealer'] = true;
+
+        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.URL) {
+          this._builder.get_object('item-uri').text = this._getSelected('DATA');
+          revealers['item-settings-uri-revealer']   = true;
+
+        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.FILE) {
+          this._builder.get_object('item-file').text = this._getSelected('DATA');
+          revealers['item-settings-file-revealer']   = true;
+
+        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.COMMAND) {
+          this._builder.get_object('item-command').text = this._getSelected('DATA');
+          revealers['item-settings-command-revealer']   = true;
+
+        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.COUNT) {
+          this._builder.get_object('item-count').value = this._getSelected('DATA');
+          revealers['item-settings-count-revealer']    = true;
+
+        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.TEXT) {
+          this._builder.get_object('item-text').text = this._getSelected('DATA');
+          revealers['item-settings-text-revealer']   = true;
+        }
+      }
+
+      // Finally update the state of all revealers.
+      for (const revealer in revealers) {
+        this._builder.get_object(revealer).reveal_child = revealers[revealer];
       }
     });
 
@@ -605,7 +579,7 @@ var MenuEditor = class MenuEditor {
     const batchSize = 10;
     for (let i = 0; i < icons.length; i += batchSize) {
       for (let j = 0; j < batchSize && i + j < icons.length; j++) {
-        iconList.set_value(iconList.append(null), 0, icons[i + j]);
+        iconList.set_value(iconList.append(), 0, icons[i + j]);
       }
 
       // This is effectively a 'yield'. We wait asynchronously for the timeout (1ms) to
@@ -742,53 +716,48 @@ var MenuEditor = class MenuEditor {
   // submenu is selected, it's inserted as a new last child, if another item is selected,
   // it will be inserted as a sibling following the currently selected item.
   _addNewItem(newType) {
-    try {
 
-      // New top-level menus are always append to the end of the tree store. The icon of
-      // the new menu is a randomly chosen emoji.
-      if (newType == 'Menu') {
-        const iter = this._store.append(null);
-        this._set(iter, 'ICON', this._getRandomEmoji());
-        this._set(iter, 'NAME', 'New Menu');
-        this._set(iter, 'TYPE', 'Menu');
-        this._set(iter, 'DATA', '');
-        this._set(iter, 'ANGLE_OR_ID', this._getNewID());
-        return;
-      }
-
-      // Depending on the selected type, the new item is inserted a different places. If a
-      // submenu is selected, it's inserted as a new last child, if another item is
-      // selected, it will be inserted as a sibling following the currently selected item.
-      const selectedType          = this._getSelected('TYPE');
-      const [ok, model, selected] = this._selection.get_selected();
-      let iter                    = null;
-
-      if (selectedType == 'Menu' || selectedType == 'Submenu') {
-        iter = this._store.append(selected);
-
-      } else {
-        const parent = model.iter_parent(selected)[1];
-        iter         = this._store.insert_after(parent, selected);
-      }
-
-      // New Submenus will also get a random emoji icon. All other items will get a name
-      // and icon according to the item registry.
-      if (newType == 'Submenu') {
-        this._set(iter, 'ICON', this._getRandomEmoji());
-        this._set(iter, 'NAME', 'New Submenu');
-      } else {
-        this._set(iter, 'ICON', ItemRegistry.ItemTypes[newType].icon);
-        this._set(iter, 'NAME', ItemRegistry.ItemTypes[newType].name);
-      }
-
-      // Initialize other field to their default values.
-      this._set(iter, 'TYPE', newType);
-      this._set(iter, 'DATA', ItemRegistry.ItemTypes[newType].defaultData);
-      this._set(iter, 'ANGLE_OR_ID', -1);
-
-    } catch (error) {
-      utils.notification('Failed to add new item: ' + error);
+    // New top-level menus are always append to the end of the tree store. The icon of
+    // the new menu is a randomly chosen emoji.
+    if (newType == 'Menu') {
+      const iter = this._store.append(null);
+      this._set(iter, 'ICON', this._getRandomEmoji());
+      this._set(iter, 'NAME', 'New Menu');
+      this._set(iter, 'TYPE', 'Menu');
+      this._set(iter, 'DATA', '');
+      this._set(iter, 'ANGLE_OR_ID', this._getNewID());
+      return;
     }
+
+    // Depending on the selected type, the new item is inserted a different places. If a
+    // submenu is selected, it's inserted as a new last child, if another item is
+    // selected, it will be inserted as a sibling following the currently selected item.
+    const selectedType          = this._getSelected('TYPE');
+    const [ok, model, selected] = this._selection.get_selected();
+    let iter                    = null;
+
+    if (selectedType == 'Menu' || selectedType == 'Submenu') {
+      iter = this._store.append(selected);
+
+    } else {
+      const parent = model.iter_parent(selected)[1];
+      iter         = this._store.insert_after(parent, selected);
+    }
+
+    // New Submenus will also get a random emoji icon. All other items will get a name
+    // and icon according to the item registry.
+    if (newType == 'Submenu') {
+      this._set(iter, 'ICON', this._getRandomEmoji());
+      this._set(iter, 'NAME', 'New Submenu');
+    } else {
+      this._set(iter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
+      this._set(iter, 'NAME', ItemRegistry.getItemTypes()[newType].name);
+    }
+
+    // Initialize other field to their default values.
+    this._set(iter, 'TYPE', newType);
+    this._set(iter, 'DATA', ItemRegistry.getItemTypes()[newType].defaultData);
+    this._set(iter, 'ANGLE_OR_ID', -1);
   }
 
 
@@ -857,67 +826,62 @@ var MenuEditor = class MenuEditor {
   // Furthermore, it will automatically save a JSON representation of the entire menu
   // store to the "menu-configuration" Gio.Settings key of this application.
   _set(iter, column, data) {
-    try {
 
-      // Do not change anything if not changed.
-      if (this._get(iter, column) == data) {
-        return;
+    // Do not change anything if not changed.
+    if (this._get(iter, column) == data) {
+      return;
+    }
+
+    // First, store the given value.
+    this._store.set_value(iter, this._store.columns[column], data);
+
+    // If the icon, was set, update the "DISPLAY_ICON" as well.
+    if (column == 'ICON') {
+      let iconSize = this._isToplevel(iter) ? 24 : 16;
+      this._set(iter, 'DISPLAY_ICON', utils.createIcon(data, iconSize));
+    }
+
+    // If the angle, was set, update the "DISPLAY_ANGLE" as well. For top-level menus,
+    // this field contains the menu ID, so we update the DISPLAY_ANGLE only for
+    // non-top-level menus.
+    if (column == 'ANGLE_OR_ID') {
+      if (!this._isToplevel(iter)) {
+        this._set(iter, 'DISPLAY_ANGLE', data >= 0 ? data : '');
       }
+    }
 
-      // First, store the given value.
-      this._store.set_value(iter, this._store.columns[column], data);
-
-      // If the icon, was set, update the "DISPLAY_ICON" as well.
-      if (column == 'ICON') {
-        let iconSize = this._isToplevel(iter) ? 24 : 16;
-        this._set(iter, 'DISPLAY_ICON', utils.createIcon(data, iconSize));
-      }
-
-      // If the angle, was set, update the "DISPLAY_ANGLE" as well. For top-level menus,
-      // this field contains the menu ID, so we update the DISPLAY_ANGLE only for
-      // non-top-level menus.
-      if (column == 'ANGLE_OR_ID') {
-        if (!this._isToplevel(iter)) {
-          this._set(iter, 'DISPLAY_ANGLE', data >= 0 ? data : '');
+    // If the name, was set, update the "DISPLAY_NAME" as well. If iter refers to a
+    // top-level menu, the display name contains the shortcut.
+    if (column == 'NAME') {
+      if (this._isToplevel(iter)) {
+        let shortcut      = 'Not bound.';
+        const accelerator = this._get(iter, 'DATA');
+        if (accelerator) {
+          const [keyval, mods] = Gtk.accelerator_parse(accelerator);
+          shortcut             = Gtk.accelerator_get_label(keyval, mods);
         }
+        this._set(
+            iter, 'DISPLAY_NAME',
+            '<b>' + GLib.markup_escape_text(data, -1) + '</b>\n<small>' + shortcut +
+                '</small>');
+      } else {
+        this._set(iter, 'DISPLAY_NAME', GLib.markup_escape_text(data, -1));
       }
+    }
 
-      // If the name, was set, update the "DISPLAY_NAME" as well. If iter refers to a
-      // top-level menu, the display name contains the shortcut.
-      if (column == 'NAME') {
-        if (this._isToplevel(iter)) {
-          let shortcut      = 'Not bound.';
-          const accelerator = this._get(iter, 'DATA');
-          if (accelerator) {
-            const [keyval, mods] = Gtk.accelerator_parse(accelerator);
-            shortcut             = Gtk.accelerator_get_label(keyval, mods);
-          }
-          this._set(
-              iter, 'DISPLAY_NAME',
-              '<b>' + GLib.markup_escape_text(data, -1) + '</b>\n<small>' + shortcut +
-                  '</small>');
-        } else {
-          this._set(iter, 'DISPLAY_NAME', GLib.markup_escape_text(data, -1));
+    // If the data column was set on a top-level menu, we need to update the
+    // "DISPLAY_NAME" as well, as the data column contains the shortcut of the menu.
+    if (column == 'DATA') {
+      if (this._isToplevel(iter)) {
+        let shortcut = 'Not bound.';
+        if (data != '') {
+          const [keyval, mods] = Gtk.accelerator_parse(data);
+          shortcut             = Gtk.accelerator_get_label(keyval, mods);
         }
+        const name = this._get(iter, 'NAME');
+        this._set(
+            iter, 'DISPLAY_NAME', '<b>' + name + '</b>\n<small>' + shortcut + '</small>');
       }
-
-      // If the data column was set on a top-level menu, we need to update the
-      // "DISPLAY_NAME" as well, as the data column contains the shortcut of the menu.
-      if (column == 'DATA') {
-        if (this._isToplevel(iter)) {
-          let shortcut = 'Not bound.';
-          if (data != '') {
-            const [keyval, mods] = Gtk.accelerator_parse(data);
-            shortcut             = Gtk.accelerator_get_label(keyval, mods);
-          }
-          const name = this._get(iter, 'NAME');
-          this._set(
-              iter, 'DISPLAY_NAME',
-              '<b>' + name + '</b>\n<small>' + shortcut + '</small>');
-        }
-      }
-    } catch (error) {
-      utils.notification('Failed to change menu configuration: ' + error);
     }
 
     // If loading has finished, any modifications to the tree store are directly committed
@@ -997,60 +961,55 @@ var MenuEditor = class MenuEditor {
     // ... and launch a new one.
     this._saveSettingsTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
       this._saveSettingsTimeout = null;
-      try {
 
-        // This is called recursively.
-        const addChildren = (parent, parentIter) => {
-          // Recursively add all children.
-          const count = this._store.iter_n_children(parentIter);
+      // This is called recursively.
+      const addChildren = (parent, parentIter) => {
+        // Recursively add all children.
+        const count = this._store.iter_n_children(parentIter);
 
-          if (count > 0) {
-            parent.children = [];
-          }
+        if (count > 0) {
+          parent.children = [];
+        }
 
-          for (let i = 0; i < count; ++i) {
-            const iter = this._store.iter_nth_child(parentIter, i)[1];
-            let item   = {
-              name: this._get(iter, 'NAME'),
-              icon: this._get(iter, 'ICON'),
-              type: this._get(iter, 'TYPE'),
-              data: this._get(iter, 'DATA'),
-              angle: this._get(iter, 'ANGLE_OR_ID')
-            };
-
-            parent.children.push(item);
-
-            addChildren(item, iter);
-          }
-        };
-
-        // The top level JSON element is an array containing all menus.
-        let menus      = [];
-        let [ok, iter] = this._store.get_iter_first();
-
-        while (ok) {
-          let menu = {
+        for (let i = 0; i < count; ++i) {
+          const iter = this._store.iter_nth_child(parentIter, i)[1];
+          let item   = {
             name: this._get(iter, 'NAME'),
             icon: this._get(iter, 'ICON'),
             type: this._get(iter, 'TYPE'),
-            shortcut: this._get(iter, 'DATA'),
-            id: this._get(iter, 'ANGLE_OR_ID'),
-            centered: this._get(iter, 'CENTERED'),
-            children: []
+            data: this._get(iter, 'DATA'),
+            angle: this._get(iter, 'ANGLE_OR_ID')
           };
 
-          menus.push(menu);
-          addChildren(menu, iter);
+          parent.children.push(item);
 
-          ok = this._store.iter_next(iter);
+          addChildren(item, iter);
         }
+      };
 
-        // Save the configuration as JSON!
-        this._settings.set_string('menu-configuration', JSON.stringify(menus));
+      // The top level JSON element is an array containing all menus.
+      let menus      = [];
+      let [ok, iter] = this._store.get_iter_first();
 
-      } catch (error) {
-        utils.notification('Failed to save menu configuration: ' + error);
+      while (ok) {
+        let menu = {
+          name: this._get(iter, 'NAME'),
+          icon: this._get(iter, 'ICON'),
+          type: this._get(iter, 'TYPE'),
+          shortcut: this._get(iter, 'DATA'),
+          id: this._get(iter, 'ANGLE_OR_ID'),
+          centered: this._get(iter, 'CENTERED'),
+          children: []
+        };
+
+        menus.push(menu);
+        addChildren(menu, iter);
+
+        ok = this._store.iter_next(iter);
       }
+
+      // Save the configuration as JSON!
+      this._settings.set_string('menu-configuration', JSON.stringify(menus));
 
       return false;
     });
@@ -1061,56 +1020,50 @@ var MenuEditor = class MenuEditor {
   // key "menu-configuration". It populates the menu store with all configured menus.
   _loadMenuConfiguration() {
 
-    try {
+    // This is called recursively.
+    const parseChildren = (parent, parentIter) => {
+      // Load all children recursively.
+      if (parent.children) {
+        for (let j = 0; j < parent.children.length; j++) {
+          const child = parent.children[j];
+          const iter  = this._store.append(parentIter);
 
-      // This is called recursively.
-      const parseChildren = (parent, parentIter) => {
-        // Load all children recursively.
-        if (parent.children) {
-          for (let j = 0; j < parent.children.length; j++) {
-            const child = parent.children[j];
-            const iter  = this._store.append(parentIter);
+          const icon  = child.icon != undefined ? child.icon : '';
+          const name  = child.name != undefined ? child.name : '';
+          const type  = child.type != undefined ? child.type : '';
+          const data  = child.data != undefined ? child.data : '';
+          const angle = child.angle != undefined ? child.angle : -1;
 
-            const icon  = child.icon != undefined ? child.icon : '';
-            const name  = child.name != undefined ? child.name : '';
-            const type  = child.type != undefined ? child.type : '';
-            const data  = child.data != undefined ? child.data : '';
-            const angle = child.angle != undefined ? child.angle : -1;
+          this._set(iter, 'ICON', icon);
+          this._set(iter, 'NAME', name);
+          this._set(iter, 'TYPE', type);
+          this._set(iter, 'DATA', data);
+          this._set(iter, 'ANGLE_OR_ID', angle);
 
-            this._set(iter, 'ICON', icon);
-            this._set(iter, 'NAME', name);
-            this._set(iter, 'TYPE', type);
-            this._set(iter, 'DATA', data);
-            this._set(iter, 'ANGLE_OR_ID', angle);
-
-            parseChildren(child, iter);
-          }
+          parseChildren(child, iter);
         }
-      };
-
-      // Load the menu configuration in the JSON format.
-      const menus = JSON.parse(this._settings.get_string('menu-configuration'));
-
-      for (let i = 0; i < menus.length; i++) {
-        const menu = menus[i];
-        const iter = this._store.append(null);
-
-        this._set(iter, 'ICON', menu.icon);
-        this._set(iter, 'NAME', menu.name);
-        this._set(iter, 'TYPE', menu.type);
-        this._set(iter, 'DATA', menu.shortcut);
-        this._set(iter, 'ANGLE_OR_ID', menu.id);
-        this._set(iter, 'CENTERED', menu.centered);
-
-        parseChildren(menu, iter);
       }
+    };
 
-      // Flag that loading is finished - all next calls to this._set() will update the
-      // "menu-configuration".
-      this._loadedMenuConfiguration = true;
+    // Load the menu configuration in the JSON format.
+    const menus = JSON.parse(this._settings.get_string('menu-configuration'));
 
-    } catch (error) {
-      utils.notification('Failed to load menu configuration: ' + error);
+    for (let i = 0; i < menus.length; i++) {
+      const menu = menus[i];
+      const iter = this._store.append(null);
+
+      this._set(iter, 'ICON', menu.icon);
+      this._set(iter, 'NAME', menu.name);
+      this._set(iter, 'TYPE', menu.type);
+      this._set(iter, 'DATA', menu.shortcut);
+      this._set(iter, 'ANGLE_OR_ID', menu.id);
+      this._set(iter, 'CENTERED', menu.centered);
+
+      parseChildren(menu, iter);
     }
+
+    // Flag that loading is finished - all next calls to this._set() will update the
+    // "menu-configuration".
+    this._loadedMenuConfiguration = true;
   }
 }

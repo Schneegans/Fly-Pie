@@ -28,6 +28,7 @@ var DefaultMenu = class DefaultMenu {
       icon: '🌟️',
       type: 'Menu',
       shortcut: '<Primary>space',
+      centered: false,
       id: 0,
       children: [
         {
