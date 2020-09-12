@@ -112,6 +112,7 @@ class Background extends Clutter.Actor {
 
       // Set background size to one half of the monitor.
       this.width = Main.layoutManager.currentMonitor.width / 2;
+      this.height = Main.layoutManager.currentMonitor.height;
       // Set x accounting monitor x as a starting point
       this.x     = this._settings.get_boolean('preview-on-right-side') ? this.width + Main.layoutManager.currentMonitor.x : Main.layoutManager.currentMonitor.x;
       this.y     = Main.layoutManager.currentMonitor.y; // Needed for vertical monitor alignment
@@ -128,6 +129,7 @@ class Background extends Clutter.Actor {
       // grabbing the complete user input.
       this._controlButtons.visible = false;
       this.width                   = Main.layoutManager.currentMonitor.width;
+      this.height                  = Main.layoutManager.currentMonitor.height;
       this.x                       = Main.layoutManager.currentMonitor.x; // Needed for horizontal monitor alignment
       this.y                       = Main.layoutManager.currentMonitor.y; // Needed for vertical monitor alignment
 
