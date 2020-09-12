@@ -65,7 +65,8 @@ class Background extends Clutter.Actor {
     // Switch monitor side when the preview-on-right-side settings key changes.
     this._settings.connect('changed::preview-on-right-side', () => {
       if (this._previewMode) {
-        this.x = this._settings.get_boolean('preview-on-right-side') ? this.width : 0;
+        // Set x accounting monitor x as a starting point
+        this.x = this._settings.get_boolean('preview-on-right-side') ? this.width + Main.layoutManager.currentMonitor.x : Main.layoutManager.currentMonitor.x;
       }
     });
 
@@ -111,14 +112,14 @@ class Background extends Clutter.Actor {
 
       // Set background size to one half of the monitor.
       this.width = Main.layoutManager.currentMonitor.width / 2;
-      this.x     = this._settings.get_boolean('preview-on-right-side') ? this.width : 0;
-
+      // Set x accounting monitor x as a starting point
+      this.x     = this._settings.get_boolean('preview-on-right-side') ? this.width + Main.layoutManager.currentMonitor.x : Main.layoutManager.currentMonitor.x;
+      this.y     = Main.layoutManager.currentMonitor.y; // Needed for vertical monitor alignment
       // Do not draw outside our preview-mode screen-side.
       this.set_clip(0, 0, this.width, this.height);
 
       // Put control buttons at the lower center.
-      this._controlButtons.x =
-          Main.layoutManager.currentMonitor.width / 4 - this._controlButtons.width / 2;
+      this._controlButtons.x = Main.layoutManager.currentMonitor.width / 4 - this._controlButtons.width / 2;
       this._controlButtons.y = Main.layoutManager.currentMonitor.height - 150;
 
     } else {
@@ -127,7 +128,8 @@ class Background extends Clutter.Actor {
       // grabbing the complete user input.
       this._controlButtons.visible = false;
       this.width                   = Main.layoutManager.currentMonitor.width;
-      this.x                       = 0;
+      this.x                       = Main.layoutManager.currentMonitor.x; // Needed for horizontal monitor alignment
+      this.y                       = Main.layoutManager.currentMonitor.y; // Needed for vertical monitor alignment
 
       // Remove any previous clips set in preview mode.
       this.remove_clip();
