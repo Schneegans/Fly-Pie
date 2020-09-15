@@ -216,17 +216,22 @@ var Menu = class Menu {
       this._menuSelectionChain.unshift(child);
 
       // The newly active item will be shown at the pointer position. To prevent it from
-      // going offscreen, we clamp the position to the current monitor bounds (we do it removing background boundaries from mouse pointer).
-      const [clampedX, clampedY] = this._clampToToMonitor(pointerX - this._background.x, pointerY - this._background.y, 10);
+      // going offscreen, we clamp the position to the current monitor bounds (we do it
+      // removing background boundaries from mouse pointer).
+      const [clampedX, clampedY] = this._clampToToMonitor(
+          pointerX - this._background.x, pointerY - this._background.y, 10);
 
-      // Warp the mouse pointer to this position if necessary accounting background position as well.
+      // Warp the mouse pointer to this position if necessary accounting background
+      // position as well.
       if (pointerX != clampedX || pointerY != clampedY) {
-        this._input.warpPointer(clampedX + this._background.x, clampedY + this._background.y);
+        this._input.warpPointer(
+            clampedX + this._background.x, clampedY + this._background.y);
       }
 
       // Move the child to the target position accounting background position as well.
       const [ok, relativeX, relativeY] = parent.transform_stage_point(clampedX, clampedY);
-      child.set_translation(relativeX + this._background.x, relativeY + this._background.y, 0);
+      child.set_translation(
+          relativeX + this._background.x, relativeY + this._background.y, 0);
 
       // The "trace" of the menu needs to be "idealized". That means, even if the user did
       // not click exactly in the direction of the item, the line connecting parent and
@@ -244,8 +249,7 @@ var Menu = class Menu {
       });
 
       this._selectionWedges.setItemAngles(itemAngles, (child.angle + 180) % 360);
-      this._selectionWedges.set_translation(
-          clampedX, clampedY, 0);
+      this._selectionWedges.set_translation(clampedX, clampedY, 0);
 
       // This recursively redraws all children based on their newly assigned state.
       this._root.redraw();
@@ -293,13 +297,17 @@ var Menu = class Menu {
       this._menuSelectionChain.shift();
 
       // The parent item will be moved to the pointer position. To prevent it from
-      // going offscreen, we clamp the position to the current monitor bounds (we do it removing background boundaries from mouse pointer).
+      // going offscreen, we clamp the position to the current monitor bounds (we do it
+      // removing background boundaries from mouse pointer).
       const [pointerX, pointerY] = global.get_pointer();
-      const [clampedX, clampedY] = this._clampToToMonitor(pointerX - this._background.x, pointerY - this._background.y, 10);
+      const [clampedX, clampedY] = this._clampToToMonitor(
+          pointerX - this._background.x, pointerY - this._background.y, 10);
 
-      // Warp the mouse pointer to this position if necessary accounting background position as well.
+      // Warp the mouse pointer to this position if necessary accounting background
+      // position as well.
       if (pointerX != clampedX || pointerY != clampedY) {
-        this._input.warpPointer(clampedX + this._background.x, clampedY + this._background.y);
+        this._input.warpPointer(
+            clampedX + this._background.x, clampedY + this._background.y);
       }
 
       // The "trace" of the menu needs to be "idealized". That means, even if the user did
@@ -324,8 +332,7 @@ var Menu = class Menu {
         this._selectionWedges.setItemAngles(itemAngles);
       }
 
-      this._selectionWedges.set_translation(
-          clampedX, clampedY, 0);
+      this._selectionWedges.set_translation(clampedX, clampedY, 0);
 
       // Once the parent is selected, nothing is dragged anymore. Even if the mouse button
       // is still pressed (we might come here when a gesture was detected by the
@@ -438,8 +445,9 @@ var Menu = class Menu {
     });
     this._selectionWedges.setItemAngles(itemAngles);
 
-    // Calculate menu position. We open the menu in the middle of the screen if necessary accounting background position as well.
-    // Else we position it at the mouse pointer accounting background position as well.
+    // Calculate menu position. We open the menu in the middle of the screen if necessary
+    // accounting background position as well. Else we position it at the mouse pointer
+    // accounting background position as well.
     if (previewMode || structure.centered) {
       const posX = this._background.width / 2;
       const posY = this._background.height / 2;
@@ -451,12 +459,14 @@ var Menu = class Menu {
       }
     } else {
       const [pointerX, pointerY] = global.get_pointer();
-      const [clampedX, clampedY] = this._clampToToMonitor(pointerX - this._background.x, pointerY - this._background.y, 10);
+      const [clampedX, clampedY] = this._clampToToMonitor(
+          pointerX - this._background.x, pointerY - this._background.y, 10);
       this._root.set_translation(clampedX, clampedY, 0);
       this._selectionWedges.set_translation(clampedX, clampedY, 0);
 
       if (pointerX != clampedX || pointerY != clampedY) {
-        this._input.warpPointer(clampedX + this._background.x, clampedY + this._background.y);
+        this._input.warpPointer(
+            clampedX + this._background.x, clampedY + this._background.y);
       }
     }
 
