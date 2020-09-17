@@ -271,8 +271,13 @@ var Settings = class Settings {
     const presets = this._presetDirectory.enumerate_children(
         'standard::*', Gio.FileQueryInfoFlags.NONE, null);
 
-    let presetInfo;
-    while (presetInfo = presets.next_file(null)) {
+    while (true) {
+      const presetInfo = presets.next_file(null);
+
+      if (presetInfo == null) {
+        break;
+      }
+
       if (presetInfo.get_file_type() == Gio.FileType.REGULAR) {
         const suffixPos = presetInfo.get_display_name().indexOf('.json');
         if (suffixPos > 0) {

@@ -11,8 +11,9 @@
 const Main          = imports.ui.main;
 const {Shell, Meta} = imports.gi;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.common.utils;
+const Config = imports.misc.config;
+const Me     = imports.misc.extensionUtils.getCurrentExtension();
+const utils  = Me.imports.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class can be used to bind a function to global hot keys. It's designed in the   //
@@ -59,7 +60,15 @@ var Shortcuts = class Shortcuts {
   // Binds the given shortcut. When it's pressed, the callback given to this class
   // instance at construction time will be executed.
   bind(shortcut) {
-    const action = global.display.grab_accelerator(shortcut, Meta.KeyBindingFlags.NONE);
+
+    let action;
+    const shellMinorVersion = parseInt(Config.PACKAGE_VERSION.split('.')[1]);
+
+    if (shellMinorVersion <= 34) {
+      action = global.display.grab_accelerator(shortcut);
+    } else {
+      action = global.display.grab_accelerator(shortcut, Meta.KeyBindingFlags.NONE);
+    }
 
     if (action == Meta.KeyBindingAction.NONE) {
       utils.debug('Unable to grab shortcut ' + shortcut + '!');
