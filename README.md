@@ -102,10 +102,10 @@ gnome-extensions enable flypie@schneegans.github.com
 
 ## First Steps with Fly-Pie
 
-If you installed and enabled Fly-Pie for the very first time, you can bring up the default menu with <kbd>Ctrl</kbd> + <kbd>Space</kbd>. If nothing happens, you can execute the following command and look for any errors.
+If you installed and enabled Fly-Pie for the very first time, you can bring up the default menu with <kbd>Ctrl</kbd> + <kbd>Space</kbd>. If nothing happens, you can execute the following command in a terminal, try again to open the menu and look for any errors.
 
 ```bash
-journalctl -f -o cat | grep flypie -B 2 -A 2
+journalctl -f -o cat
 ```
 
 When you open the settings dialog of Fly-Pie, you will be greeted with an interactive tutorial demonstrating effective usage patterns.

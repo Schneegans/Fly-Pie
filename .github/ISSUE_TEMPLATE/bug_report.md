@@ -18,7 +18,7 @@ Steps to reproduce the behavior:
 You may also check the output of Gnome Shell for any error messages related to Fly-Pie. This can be done with the following terminal command:
 
 ```bash
-journalctl -f -o cat | grep flypie -B 2 -A 2
+journalctl -f -o cat
 ```
 
 ## Expected Behavior
