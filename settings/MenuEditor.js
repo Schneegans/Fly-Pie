@@ -423,8 +423,8 @@ var MenuEditor = class MenuEditor {
     // siblings preceding the selected item; maxAngle is set to the smallest fixed angle
     // amongst siblings after the selected item.
     this._builder.get_object('item-angle').connect('value-changed', (adjustment) => {
-      let minAngle = -1
-      let maxAngle = 360
+      let minAngle = -1;
+      let maxAngle = 360;
 
       const [ok1, model, selectedIter] = this._selection.get_selected();
       if (!ok1) return;
