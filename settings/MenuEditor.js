@@ -37,10 +37,8 @@ let ColumnTypes = {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The MenuTreeStore differs from a normal Gtk.TreeStore only in the drag'n'drop        //
-// behavior. It ensures that top-level menus cannot be dragged at all and the all       //
+// behavior. It ensures that top-level menus cannot be dragged at all and that all      //
 // other items or submenus are only dropped to top-level menus or to submenus.          //
-// Furthermore, it ensure that fixed angles of items which are dragged around are       //
-// removed.                                                                             //
 // Additionally, it has a public property "columns", which contain the IDs of all the   //
 // columns above. For example, this can be used like this:                              //
 // this.get_value(iter, this.columns.DISPLAY_NAME);                                     //
@@ -75,9 +73,17 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
 
   // This ensures that items or submenus are only dropped on top-level menus or
   // submenus.
-  vfunc_row_drop_possible(path) {
-    const parentPath = path.copy();
-    if (parentPath.up()) {
+  vfunc_row_drop_possible(destPath, data) {
+
+    // Do not attempt to drop into ourselves.
+    const [ok, model, srcPath] = Gtk.tree_get_row_drag_data(data);
+    if (ok && srcPath.is_ancestor(destPath)) {
+      return false;
+    }
+
+    // Allow drop only if parent is a top-level menu or a submenu.
+    const parentPath = destPath.copy();
+    if (parentPath.up() && parentPath.get_depth() > 0) {
       const [ok, parent] = this.get_iter(parentPath);
       if (ok) {
         const type = this.get_value(parent, this.columns.TYPE);
@@ -86,19 +92,8 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
         }
       }
     }
-    return false;
-  }
 
-  // This resets any fixed angle of dragged items. While this isn't really necessary in
-  // all cases, but identifying cases when an invalid fixed-angle configuration is created
-  // is quite complex. This could be improved in the future!
-  vfunc_drag_data_get(path, selection_data) {
-    const [ok, iter] = this.get_iter(path);
-    if (ok) {
-      this.set_value(iter, this.columns.ANGLE_OR_ID, -1);
-      this.set_value(iter, this.columns.DISPLAY_ANGLE, '');
-    }
-    return super.vfunc_drag_data_get(path, selection_data);
+    return false;
   }
 });
 
@@ -220,54 +215,6 @@ var MenuEditor = class MenuEditor {
     const view      = this._builder.get_object('menus-treeview');
     view.set_model(this._store);
 
-    view.drag_dest_set(
-        Gtk.DestDefaults.ALL,
-        [
-          Gtk.TargetEntry.new('text/plain', 0, 0),
-          Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_WIDGET, 0)
-        ],
-        Gdk.DragAction.COPY | Gdk.DragAction.MOVE | Gdk.DragAction.LINK);
-
-    view.connect('drag-data-received', (widget, context, x, y, data, info, time) => {
-      let text = data.get_text();
-      utils.debug(text);
-
-      // if (text != null && GLib.Uri.parse_scheme(text) != null) {
-      // }
-
-      // foreach(var uri in selection_data.get_uris()) {
-      //   pie.add_action(ActionRegistry.new_for_uri(uri), position);
-      //   this.renderer.add_group(pie.action_groups[position], position);
-
-      //   if (this.renderer.slices.size == 1) this.on_first_slice_added();
-      // }
-    });
-
-    // Delete the selected item when the Delete key is pressed.
-    view.connect('key-release-event', (widget, event) => {
-      if (event.get_keyval()[1] == Gdk.KEY_Delete) {
-        this._deleteSelected();
-        return true;
-      }
-      return false;
-    });
-
-    // When a new row is inserted or an existing row is dragged around, we make sure
-    // that it stays selected. Additionally we save the menu configuration.
-    this._store.connect('row-inserted', (widget, path, iter) => {
-      // This is kind of a weird hack (?) to keep a row selected after drag'n'drop. We
-      // simply select every row after it was inserted. This does not work if we
-      // directly attempt to select it, we have to use a short timeout.
-      GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1, () => {
-        this._selection.select_iter(iter);
-
-        // Save the menu configuration.
-        this._saveMenuConfiguration();
-
-        return false;
-      });
-    });
-
     // The tree view's main column contains an icon and some text. The icon is given in
     // the DISPLAY_ICON column of the menu store; the text is contained in the
     // DISPLAY_NAME column.
@@ -293,6 +240,283 @@ var MenuEditor = class MenuEditor {
     angleColumn.add_attribute(angleRender, 'markup', this._store.columns.DISPLAY_ANGLE);
     view.append_column(angleColumn);
 
+    // Then we set up drag'n'drop. The tree view is a source of internal drag'n'drop
+    // operations. This is because we can reorder the menu items. We use the special
+    // 'GTK_TREE_MODEL_ROW' target. This makes sure that most of the row-reordering
+    // functionality works out-of-the-box.
+    view.enable_model_drag_source(
+        Gdk.ModifierType.BUTTON1_MASK,
+        [Gtk.TargetEntry.new('GTK_TREE_MODEL_ROW', Gtk.TargetFlags.SAME_WIDGET, 0)],
+        Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
+
+    // However it is a destination for both, internal and external drag'n'drop operations.
+    // Internal operations occur when the user reorders the rows, external operations
+    // occur when something is dragged to the tree view in order to create new items. This
+    // can be a file, an URL or some other things.
+    view.enable_model_drag_dest(
+        [
+          Gtk.TargetEntry.new('GTK_TREE_MODEL_ROW', Gtk.TargetFlags.SAME_WIDGET, 0),
+          Gtk.TargetEntry.new('text/uri-list', 0, 1),
+          Gtk.TargetEntry.new('text/plain', 0, 2)
+        ],
+        Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
+
+    // This is called when a drag'n'drop operation is received.
+    view.connect('drag-data-received', (widget, context, x, y, data, info, time) => {
+      // This lambda creates a new item for the given text. If the text is an URI to a
+      // file, a file action is created. If it's a *.desktop file, a "Launch Application"
+      // action is created, an URI action is created for all other URIs. If text is not an
+      // URI, an "Insert Text" action is created.
+      const addItem = (text) => {
+        // Items should only be dropped into top-level menus or into
+        // submenus. Depending on the hovered position and item type, there are three
+        // different possible positions:
+
+        // 1) Drop into the hovered item as first child.
+        // 2) Insert before the hovered item at the same level.
+        // 3) Insert after the hovered item at the same level.
+
+        // Toplevel items:
+        //   BEFORE || AFTER:                  top-level drops are not allowed
+        //   INTO_OR_BEFORE || INTO_OR_AFTER:  1)
+
+        // Submenu items:
+        //   INTO_OR_BEFORE || INTO_OR_AFTER:  1)
+        //   BEFORE:                           2)
+        //   AFTER:                            3)
+
+        // Other items:
+        //   BEFORE || INTO_OR_BEFORE:         2)
+        //   INTO_OR_AFTER || AFTER:           3)
+
+        const [ok, path, pos] = widget.get_dest_row_at_pos(x, y);
+        let newIter;
+
+        if (ok && path.get_depth() > 0) {
+
+          const destIter = this._store.get_iter(path)[1];
+
+          // For top-level menus, the new item is appended as a child.
+          if (path.get_depth() == 1) {
+            newIter = this._store.append(destIter);
+          }
+
+          // For all other items, the new item's position depends on the drop position and
+          // on the item type at the drop destination.
+          else {
+
+            path.up();
+            const parentIter = this._store.get_iter(path)[1];
+            const type       = this._store.get_value(destIter, this._store.columns.TYPE);
+
+            if (type === 'Submenu') {
+
+              if (pos == Gtk.TreeViewDropPosition.INTO_OR_BEFORE ||
+                  pos == Gtk.TreeViewDropPosition.INTO_OR_AFTER) {
+                // 1) above.
+                newIter = this._store.append(destIter);
+              } else if (pos == Gtk.TreeViewDropPosition.BEFORE) {
+                // 2) above.
+                newIter = this._store.insert_before(parentIter, destIter);
+              } else {
+                // 3) above.
+                newIter = this._store.insert_after(parentIter, destIter);
+              }
+
+            } else {
+
+              if (pos == Gtk.TreeViewDropPosition.BEFORE ||
+                  pos == Gtk.TreeViewDropPosition.INTO_OR_BEFORE) {
+                // 2) above.
+                newIter = this._store.insert_before(parentIter, destIter);
+              } else {
+                // 3) above.
+                newIter = this._store.insert_after(parentIter, destIter);
+              }
+            }
+          }
+
+          // For all newly created items, the fixed angle is set to -1.
+          this._set(newIter, 'ANGLE_OR_ID', -1);
+
+          const uriScheme = GLib.uri_parse_scheme(text);
+          let success     = false;
+
+          if (uriScheme != null) {
+            // First we check whether the dragged data contains an URI. If it points to
+            // a *.desktop file, we create a "Launch Application" item the corresponding
+            // application.
+            if (uriScheme == 'file') {
+              const file = Gio.File.new_for_uri(text);
+
+              if (file.query_exists(null)) {
+
+                if (text.endsWith('.desktop')) {
+
+                  const info    = Gio.DesktopAppInfo.new_from_filename(file.get_path());
+                  const newType = 'Command';
+
+                  let icon = ItemRegistry.getItemTypes()[newType].icon;
+                  if (info.get_icon()) {
+                    icon = info.get_icon().to_string();
+                  }
+
+                  if (info != null) {
+                    this._set(newIter, 'ICON', icon);
+                    this._set(newIter, 'NAME', info.get_display_name());
+                    this._set(newIter, 'TYPE', newType);
+                    this._set(newIter, 'DATA', info.get_commandline());
+                    success = true;
+                  }
+                }
+
+                // If it's an URI to any other local file, we create an "Open File" item.
+                if (!success) {
+                  const newType = 'File';
+                  const info    = file.query_info('standard::icon', 0, null);
+
+                  if (info != null) {
+                    this._set(newIter, 'ICON', info.get_icon().to_string());
+                    this._set(newIter, 'NAME', file.get_basename());
+                    this._set(newIter, 'TYPE', newType);
+                    this._set(newIter, 'DATA', text.substring(7));  // Skip the file://
+
+                    success = true;
+                  }
+                }
+              }
+            }
+
+            if (!success) {
+
+              // For any other URI we create an "Open URI" item.
+              const newType = 'Uri';
+              const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
+
+              this._set(newIter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
+              this._set(newIter, 'NAME', name);
+              this._set(newIter, 'TYPE', newType);
+              this._set(newIter, 'DATA', text);
+              success = true;
+            }
+          }
+
+          // If it's not an URI, we create a "Insert Text" action.
+          else {
+            const newType = 'InsertText';
+            const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
+
+            this._set(newIter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
+            this._set(newIter, 'NAME', 'Insert: ' + name);
+            this._set(newIter, 'TYPE', newType);
+            this._set(newIter, 'DATA', text);
+          }
+        }
+      };
+
+      // The info paramter is a hint to what the dropped data contains. Refer the call to
+      // enable_model_drag_dest() above - there the info numbers are given as last
+      // parameter to the constructor of the TargetEntries.
+      // info == 0: 'GTK_TREE_MODEL_ROW'
+      // info == 1: 'text/uri-list'
+      // info == 2: 'text/plain'
+
+      // We do not handle the case info == 0, as this is done by the base class. Due to
+      // the special "GTK_TREE_MODEL_ROW" target, row reordering works out-of-the-box.
+
+      // We only handle info == 1 and info == 2. These are the cases when the user drags
+      // something from outside to the tree view (external drag'n'drop). We try our best
+      // to create a menu item for the dragged data.
+      if (info == 1) {
+        const uris = data.get_uris();
+
+        if (uris != null) {
+          uris.forEach(uri => addItem(uri));
+        }
+
+        // We accepted the drag if uris != null. Independent of the selected drag'n'drop
+        // action, the drag source shouldn't remove any source data.
+        Gtk.drag_finish(context, uris != null, false, time);
+      }
+
+      if (info == 2) {
+        const text = data.get_text();
+
+        if (text != null) {
+          addItem(text);
+        }
+
+        // We accepted the drag if text != null. Independent of the selected drag'n'drop
+        // action, the drag source shouldn't remove any source data.
+        Gtk.drag_finish(context, text != null, false, time);
+      }
+    });
+
+    // Delete the selected item when the Delete key is pressed.
+    view.connect('key-release-event', (widget, event) => {
+      if (event.get_keyval()[1] == Gdk.KEY_Delete) {
+        this._deleteSelected();
+        return true;
+      }
+      return false;
+    });
+
+    // When a new row is inserted or an existing row is dragged around, we make sure
+    // that it stays selected and additionally we save the menu configuration.
+    // This is a bit hacky, as sometimes many rows are inserted (for example, when the
+    // user drag a submenu to somewhere else). To handle this case, we create two
+    // timeouts.
+
+    // The first timeout is used to select a newly added row and ignore all additional
+    // row-insertions in the next 10 milliseconds.
+    this._selectNewRowTimeout = -1;
+
+    // The second timeout is used to wait after a row-insertion for additional
+    // row-insertions. If non occurs within 10 milliseconds, we save the menu
+    // configuration.
+    this._saveMenuTimeout = -1;
+
+    this._store.connect('row-inserted', (widget, path, iter) => {
+      // We do this only once the saved configuration is fully loaded.
+      if (this._loadedMenuConfiguration) {
+
+        // Only select a row if another hasn't bee selected in the last 10 milliseconds.
+        if (this._selectNewRowTimeout == -1) {
+
+          this._selectNewRowTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
+            // Expand the parent so that we can actually select the new row.
+            let parent = widget.get_path(iter);
+            parent.up();
+            view.expand_to_path(parent);
+            this._selection.select_iter(iter);
+
+            // This resets any fixed angle of dragged items. While this isn't really
+            // necessary in all cases, but identifying cases when an invalid fixed-angle
+            // configuration is created is quite complex. This could be improved in the
+            // future!
+            this._set(iter, 'ANGLE_OR_ID', -1);
+
+            // Reset the timeout.
+            this._selectNewRowTimeout = -1;
+            return false;
+          });
+        }
+
+        // Cancel any pending saves.
+        if (this._saveMenuTimeout >= 0) {
+          GLib.source_remove(this._saveMenuTimeout);
+        }
+
+        // Save the menu configuration.
+        this._saveMenuTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
+          this._saveMenuConfiguration();
+
+          // Reset the timeout.
+          this._saveMenuTimeout = -1;
+          return false;
+        });
+      }
+    });
 
     // Now that the tree store is set up, we can load the entire menu configuration.
     try {
