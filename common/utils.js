@@ -125,6 +125,13 @@ function paintIcon(ctx, name, size, opacity) {
   ctx.paintWithAlpha(opacity);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+// This creates a new square-shaped Cairo.ImageSurface of the given size and draws an   //
+// icon to it. The name can either be an icon name from the current icon theme or a     //
+// path to an image file. If neither is found, the given name is written to the image - //
+// This is very useful for emojis like 😆 or 🌟!                                         //
+//////////////////////////////////////////////////////////////////////////////////////////
+
 function createIcon(name, size) {
   const surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, size, size);
   const ctx     = new Cairo.Context(surface);
