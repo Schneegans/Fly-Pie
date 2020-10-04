@@ -74,15 +74,19 @@ function paintIcon(ctx, name, size, opacity) {
 
   // First try to find the icon in the theme. This will also load images from disc if the
   // icon name is actually a file path.
-  const theme = Gtk.IconTheme.get_default();
-  const info  = theme.lookup_by_gicon(
-      Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
+  try {
+    const theme = Gtk.IconTheme.get_default();
+    const info  = theme.lookup_by_gicon(
+        Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
 
-  // We got something, paint it!
-  if (info != null) {
-    Gdk.cairo_set_source_pixbuf(ctx, info.load_icon(), 0, 0);
-    ctx.paintWithAlpha(opacity);
-    return;
+    // We got something, paint it!
+    if (info != null) {
+      Gdk.cairo_set_source_pixbuf(ctx, info.load_icon(), 0, 0);
+      ctx.paintWithAlpha(opacity);
+      return;
+    }
+  } catch (error) {
+    debug('Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');
   }
 
   // If no icon was found, write it as plain text.
