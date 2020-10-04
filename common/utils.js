@@ -91,7 +91,7 @@ function paintIcon(ctx, name, size, opacity) {
 
   // If no icon was found, write it as plain text.
   const layout = PangoCairo.create_layout(ctx);
-  layout.set_font_description(Pango.FontDescription.from_string('Sans'));
+  layout.set_font_description(Pango.FontDescription.from_string('Sans 12'));
   layout.set_alignment(Pango.Alignment.CENTER);
   layout.set_wrap(Pango.WrapMode.CHAR);
   layout.set_text(name, -1);
@@ -99,17 +99,18 @@ function paintIcon(ctx, name, size, opacity) {
   // We created a one-line layout above. We now estimate a proper width for the layout so
   // that the text covers more ore less a square shaped region. For this we compute the
   // required surface area of the one-line layout and compute the size of a equally large
-  // square. As this will underestimate the required width slightly, we add some the
-  // line's height as additional width. This works quite well in most cases.
+  // square. As this will underestimate the required width slightly, we add the line's
+  // height as additional width. This works quite well in most cases.
   const lineExtents = layout.get_pixel_extents()[1];
-  const squareSize  = Math.sqrt(lineExtents.width * lineExtents.height);
+  const squareSize  = Math.sqrt(Math.max(1, lineExtents.width * lineExtents.height));
   layout.set_width(Pango.units_from_double(squareSize + lineExtents.height));
 
   // Now we retrieve the new extents and make sure that the new layout is centered in our
-  // icon.
-  const extents   = layout.get_pixel_extents()[0];
+  // icon. We limit the overall scale to 100, as really huge font sizes sometime seem to
+  // break pango.
+  const extents   = layout.get_pixel_extents()[1];
   const maxExtent = Math.max(extents.width, extents.height);
-  const scale     = size / maxExtent;
+  const scale     = Math.min(100, size / maxExtent);
 
   ctx.setSourceRGBA(0, 0, 0, opacity);
   ctx.scale(scale, scale);
