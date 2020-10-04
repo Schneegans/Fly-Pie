@@ -722,7 +722,10 @@ var MenuEditor = class MenuEditor {
       'Suggestions can be posted on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.',
       'Bugs can be reported on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.',
       'Deep hierarchies are pretty efficient. Put submenus into submenus in submenus!',
-      'If you delete all Pies, log out and log in again, the default configuration will be restored.'
+      'If you delete all Pies, log out and log in again, the default configuration will be restored.',
+      'You can reorder the menu items on the left via drag and drop.',
+      'You can drop directories, files, links and desktop files to the menu hierarchy on the left.',
+      'You can copy menu items by holding the Control key while dragging them to another location.'
     ];
 
     // Every eight seconds we hide the current tip...
