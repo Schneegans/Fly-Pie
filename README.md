@@ -55,13 +55,12 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
 - [X] D-Bus Interface:
   - [X] Open pre-configured menus via the D-Bus.
   - [X] Open custom menus via the D-Bus.
-- [X] Make it available on [extensions.gnome.org](https://extensions.gnome.org/extension/3433/fly-pie).
+- [X] Available on [extensions.gnome.org](https://extensions.gnome.org/extension/3433/fly-pie).
 - [ ] Translations:
   - [X] English
   - [ ] German
   - [ ] ...
 - [ ] Proper touch support.
-- [ ] Proper multi-monitor support.
 - [ ] Cool appearance presets.
 - [ ] Achievements!
 
