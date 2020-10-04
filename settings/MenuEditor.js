@@ -487,14 +487,19 @@ var MenuEditor = class MenuEditor {
             // Expand the parent so that we can actually select the new row.
             let parent = widget.get_path(iter);
             parent.up();
-            view.expand_to_path(parent);
-            this._selection.select_iter(iter);
 
-            // This resets any fixed angle of dragged items. While this isn't really
-            // necessary in all cases, but identifying cases when an invalid fixed-angle
-            // configuration is created is quite complex. This could be improved in the
-            // future!
-            this._set(iter, 'ANGLE_OR_ID', -1);
+            // Expand nested items and reset their fixed angles.
+            if (parent.get_depth() > 0) {
+              view.expand_to_path(parent);
+
+              // This resets any fixed angle of dragged items. While this isn't really
+              // necessary in all cases, but identifying cases when an invalid fixed-angle
+              // configuration is created is quite complex. This could be improved in the
+              // future!
+              this._set(iter, 'ANGLE_OR_ID', -1);
+            }
+
+            this._selection.select_iter(iter);
 
             // Reset the timeout.
             this._selectNewRowTimeout = -1;
