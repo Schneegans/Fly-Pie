@@ -131,7 +131,7 @@ var MenuEditor = class MenuEditor {
         margin_end: 10
       });
       const icon = new Gtk.Image(
-          {icon_name: ItemRegistry.getItemTypes()[type].icon, icon_size: 24});
+          {icon_name: ItemRegistry.getItemTypes()[type].icon, pixel_size: 32});
       const name =
           new Gtk.Label({label: ItemRegistry.getItemTypes()[type].name, xalign: 0});
       const subtitle = new Gtk.Label({
