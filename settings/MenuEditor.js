@@ -587,7 +587,9 @@ var MenuEditor = class MenuEditor {
     this._builder.get_object('item-icon-drawingarea').connect('draw', (widget, ctx) => {
       const size = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const icon = this._getSelected('ICON');
-      utils.paintIcon(ctx, icon, size, 1);
+      if (icon && icon.length > 0) {
+        utils.paintIcon(ctx, icon, size, 1);
+      }
       return false;
     });
 
