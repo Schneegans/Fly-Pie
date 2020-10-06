@@ -33,7 +33,7 @@ var DefaultMenu = class DefaultMenu {
       children: [
         {
           name: 'Sound',
-          icon: 'multimedia-audio-player',
+          icon: 'audio-speakers',
           type: 'Submenu',
           children: [
             {
@@ -107,7 +107,7 @@ var DefaultMenu = class DefaultMenu {
                 },
                 {
                   name: 'Show Apps',
-                  icon: 'view-grid',
+                  icon: 'view-app-grid-symbolic',
                   type: 'Shortcut',
                   data: '<Super>a',
                 }
