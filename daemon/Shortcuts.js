@@ -64,7 +64,7 @@ var Shortcuts = class Shortcuts {
     let action;
     const shellMinorVersion = parseInt(Config.PACKAGE_VERSION.split('.')[1]);
 
-    if (shellMinorVersion <= 34) {
+    if (shellMinorVersion < 34) {
       action = global.display.grab_accelerator(shortcut);
     } else {
       action = global.display.grab_accelerator(shortcut, Meta.KeyBindingFlags.NONE);
