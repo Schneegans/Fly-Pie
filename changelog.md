@@ -1,5 +1,30 @@
 # Changelog of Fly-Pie
 
+## [Fly-Pie 3](https://github.com/schneegans/fly-pie/releases/tag/v3)
+
+**Release Date:** -
+
+#### New Features
+
+* It is now possible to drag'n'drop things to the menu editor in order to create corresponding menu items. You can try dragging *.desktop files, other files, URLs or arbitrary text to the menu editor.
+* You can now copy menu items by dragging them somewhere else in the menu editor while holding down the <kbd>Ctrl</kbd> key.
+* Fly-Pie now works on systems with multiple monitors attached (thank you @gaamdalurt).
+* A simple About-Popover has been added. It primarily shows the version of Fly-Pie so that a user can tell which version is installed.
+
+#### Other Enhancements
+
+* Several aspects of Fly-Pie have been updated so that it should run on older Linux distributions (such as Ubuntu 18.04 or Fedora 31) without major issues.
+* `GMenu` is now an optional dependency. On systems where this is not available, the Main-Menu Submenu will not be available.
+* Some icons of the default menu and the settings dialog have been changed to be compatible with more icon themes.
+* Fly-Pie now prints log messages also from the settings dialog. You can view them with `journalctl -f -o cat` - this makes debugging much easier!
+
+#### Bug Fixes
+
+* A bug has been fixed which made the Main-Menu Submenu unusable.
+* A bug has been fixed which caused an erroneous rendering of the settings dialog.
+* Fly-Pie does not use `notify-send` anymore. This fixes several crashes on systems where this is not available.
+* Several non-fatal programming errors of the settings dialog have been fixed.
+
 ## [Fly-Pie 2](https://github.com/schneegans/fly-pie/releases/tag/v2)
 
 **Release Date:** 2020-08-29
