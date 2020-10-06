@@ -102,7 +102,7 @@ var getItemTypes = () => {
       // The hotkey action simulates the pressing of a hotkey when activated.
       Shortcut: {
         name: 'Activate Shortcut',
-        icon: 'accessories-character-map',
+        icon: 'preferences-desktop-keyboard-shortcuts',
         defaultData: '',
         subtitle: 'Simulates a key stroke.',
         description:

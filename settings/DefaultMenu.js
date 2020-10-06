@@ -82,7 +82,7 @@ var DefaultMenu = class DefaultMenu {
             },
             {
               name: 'Gnome Shell',
-              icon: 'workspace-switcher',
+              icon: 'preferences-desktop-remote-desktop',
               type: 'Submenu',
               children: [
                 {
@@ -133,7 +133,7 @@ var DefaultMenu = class DefaultMenu {
           children: [
             {
               name: 'Fly-Pie Settings',
-              icon: 'gnome-settings',
+              icon: 'preferences-system',
               type: 'Command',
               data: 'gnome-extensions prefs flypie@schneegans.github.com',
             },
