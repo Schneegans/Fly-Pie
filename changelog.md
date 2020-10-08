@@ -13,7 +13,11 @@
 
 #### Other Enhancements
 
-* Several aspects of Fly-Pie have been updated so that it should run on older Linux distributions (such as Ubuntu 18.04 or Fedora 31) without major issues.
+* Several aspects of Fly-Pie have been updated so that it should run on various Linux distributions and versions without major issues. These have been tested so far:
+  * Ubuntu 18.04, 20.04 and 20.10.
+  * Fedora 31 and 32.
+  * Pop!_OS 20.04.
+* The default menu has been slightly changed. The "Fly-Pie Settings" item is now a root menu item and the "Default Applications" submenu has been replaced with the "Favorites" submenu.
 * `GMenu` is now an optional dependency. On systems where this is not available, the Main-Menu Submenu will not be available.
 * Some icons of the default menu and the settings dialog have been changed to be compatible with more icon themes.
 * Fly-Pie now prints log messages also from the settings dialog. You can view them with `journalctl -f -o cat` - this makes debugging much easier!
