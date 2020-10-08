@@ -199,10 +199,19 @@ class Background extends Clutter.Actor {
 
     const label = new St.Label({text: labelText});
 
+    // Starting from Clutter 1.12, there is a Clutter.Orientation enum for switching the
+    // direction of the Clutter.BoxLayout.
+    const boxLayoutParams = {spacing: 5};
+    if (Clutter.Orientation) {
+      boxLayoutParams.orientation = Clutter.Orientation.VERTICAL;
+    } else {
+      boxLayoutParams.vertical = true;
+    }
+
     const box = new St.Widget({
       style_class: 'overview-icon',
       width: 100,
-      layout_manager: new Clutter.BoxLayout({vertical: true, spacing: 5})
+      layout_manager: new Clutter.BoxLayout(boxLayoutParams)
     });
     box.add_actor(icon);
     box.add_actor(label);

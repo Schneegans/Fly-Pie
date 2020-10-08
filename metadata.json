@@ -6,7 +6,8 @@
     "shell-version": [
         "3.34",
         "3.35",
-        "3.36"
+        "3.36",
+        "3.38"
     ],
     "url": "https://github.com/Schneegans/Fly-Pie",
     "version": 3
