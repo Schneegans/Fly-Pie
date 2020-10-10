@@ -2,7 +2,7 @@
 
 ## [Fly-Pie 3](https://github.com/schneegans/fly-pie/releases/tag/v3)
 
-**Release Date:** -
+**Release Date:** 2020-10-10
 
 #### New Features
 
