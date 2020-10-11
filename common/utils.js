@@ -19,7 +19,7 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 // the standard log() functionality by prepending the extension's name and the location //
 // where the message was logged. As the extensions name is part of the location, you    //
 // can more effectively watch the log output of Gnome Shell:                            //
-// journalctl -f -o cat | grep flypie -B 2 -A 2                                         //
+// journalctl -f -o cat | grep -E 'flypie|'                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function debug(message) {

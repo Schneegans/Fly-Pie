@@ -101,10 +101,10 @@ gnome-extensions enable flypie@schneegans.github.com
 
 ## First Steps with Fly-Pie
 
-If you installed and enabled Fly-Pie for the very first time, you can bring up the default menu with <kbd>Ctrl</kbd> + <kbd>Space</kbd>. If nothing happens, you can execute the following command in a terminal, try again to open the menu and look for any errors.
+If you installed and enabled Fly-Pie for the very first time, you can bring up the default menu with <kbd>Ctrl</kbd> + <kbd>Space</kbd>. If nothing happens, you can execute the following command in a terminal, try again to open the menu and look for any errors. This may print many unrelated messages, but using `grep` like this highlights all occurrences of `flypie` which makes spotting Fly-Pie-related messages much easier.
 
 ```bash
-journalctl -f -o cat
+journalctl -f -o cat | grep -E 'flypie|'
 ```
 
 When you open the settings dialog of Fly-Pie, you will be greeted with an interactive tutorial demonstrating effective usage patterns.
@@ -211,10 +211,10 @@ report this via [Github issues](https://github.com/schneegans/fly-pie/issues).
 We are happy to receive contributions to Fly-Pie in the form of **pull requests** via Github.
 Feel free to fork the repository, implement your changes and create a merge request to the `develop` branch.
 
-Developing a Gnome Shell extension is not easy, as debugging possibilities are quite limited. One thing you should always do is to monitor Gnome Shells output for error or debug messages produced by Fly-Pie. This can be done like this:
+Developing a Gnome Shell extension is not easy, as debugging possibilities are quite limited. One thing you should always do is to monitor Gnome Shells output for error or debug messages produced by Fly-Pie. This can be done with the command below. This may print many unrelated messages, but using `grep` like this highlights all occurrences of `flypie` which makes spotting Fly-Pie-related messages much easier.
 
 ```bash
-journalctl -f -o cat | grep flypie -B 2 -A 2
+journalctl -f -o cat | grep -E 'flypie|'
 ```
 
 ## Branching Guidelines
