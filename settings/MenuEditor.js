@@ -202,6 +202,127 @@ var MenuEditor = class MenuEditor {
       }
     });
 
+    // Open a save-dialog when the export-config button is pressed.
+    this._builder.get_object('export-menu-config-button').connect('clicked', (button) => {
+      const dialog = new Gtk.FileChooserDialog({
+        title: 'Export Menu Configuration',
+        action: Gtk.FileChooserAction.SAVE,
+        do_overwrite_confirmation: true,
+        transient_for: button.get_toplevel(),
+        modal: true
+      });
+
+      // Show only *.json files per default.
+      const jsonFilter = new Gtk.FileFilter();
+      jsonFilter.set_name('JSON Files');
+      jsonFilter.add_mime_type('application/json');
+      dialog.add_filter(jsonFilter);
+
+      // But allow showing all files if required.
+      const allFilter = new Gtk.FileFilter();
+      allFilter.add_pattern('*');
+      allFilter.set_name('All Files');
+      dialog.add_filter(allFilter);
+
+      // Add our action buttons.
+      dialog.add_button('Cancel', Gtk.ResponseType.CANCEL);
+      dialog.add_button('Export', Gtk.ResponseType.OK);
+
+      // Export menu config when the OK button is clicked.
+      dialog.connect('response', (dialog, response_id) => {
+        if (response_id === Gtk.ResponseType.OK) {
+          try {
+            let path = dialog.get_filename();
+
+            // Make sure we have a *.json extension.
+            if (!path.endsWith('.json')) {
+              path += '.json';
+            }
+
+            // Now save the configuration!
+            const config = JSON.parse(this._settings.get_string('menu-configuration'));
+            const file   = Gio.File.new_for_path(path);
+            file.replace_contents(
+                JSON.stringify(config, null, 2), null, false,
+                Gio.FileCreateFlags.REPLACE_DESTINATION, null);
+
+          } catch (error) {
+            const errorMessage = new Gtk.MessageDialog({
+              transient_for: button.get_toplevel(),
+              buttons: Gtk.ButtonsType.CLOSE,
+              message_type: Gtk.MessageType.ERROR,
+              text: 'Failed to export the menu configuration!',
+              secondary_text: '' + error
+            });
+            errorMessage.run();
+            errorMessage.destroy();
+          }
+        }
+
+        dialog.destroy();
+      });
+
+      dialog.show();
+    });
+
+    // Open a load-dialog when the import-config button is pressed.
+    this._builder.get_object('import-menu-config-button').connect('clicked', (button) => {
+      const dialog = new Gtk.FileChooserDialog({
+        title: 'Import Menu Configuration',
+        action: Gtk.FileChooserAction.OPEN,
+        transient_for: button.get_toplevel(),
+        modal: true
+      });
+
+      // Show only *.json files per default.
+      const jsonFilter = new Gtk.FileFilter();
+      jsonFilter.set_name('JSON Files');
+      jsonFilter.add_mime_type('application/json');
+      dialog.add_filter(jsonFilter);
+
+      // But allow showing all files if required.
+      const allFilter = new Gtk.FileFilter();
+      allFilter.add_pattern('*');
+      allFilter.set_name('All Files');
+      dialog.add_filter(allFilter);
+
+      // Add our action buttons.
+      dialog.add_button('Cancel', Gtk.ResponseType.CANCEL);
+      dialog.add_button('Import', Gtk.ResponseType.OK);
+
+      // Import menu config when the OK button is clicked.
+      dialog.connect('response', (dialog, response_id) => {
+        if (response_id === Gtk.ResponseType.OK) {
+          try {
+            const file                = Gio.File.new_for_path(dialog.get_filename());
+            const [success, contents] = file.load_contents(null);
+
+            // Load the configuration! We do a parse / stringify to catch any JSON errors
+            // here.
+            if (success) {
+              const config = JSON.parse(contents);
+              this._settings.set_string('menu-configuration', JSON.stringify(config));
+              this._loadMenuConfiguration();
+            }
+
+          } catch (error) {
+            const errorMessage = new Gtk.MessageDialog({
+              transient_for: button.get_toplevel(),
+              buttons: Gtk.ButtonsType.CLOSE,
+              message_type: Gtk.MessageType.ERROR,
+              text: 'Failed to import menu configuration!',
+              secondary_text: '' + error
+            });
+            errorMessage.run();
+            errorMessage.destroy();
+          }
+        }
+
+        dialog.destroy();
+      });
+
+      dialog.show();
+    });
 
     // Now create the menu tree store and tree view. The tree store contains several
     // columns which basically contain all the information required to create all menus.
@@ -1292,6 +1413,12 @@ var MenuEditor = class MenuEditor {
   // This is called once initially and loads the JSON menu configuration from the settings
   // key "menu-configuration". It populates the menu store with all configured menus.
   _loadMenuConfiguration() {
+
+    // This prevents callbacks on the row-inserted signal during initialization.
+    this._loadedMenuConfiguration = false;
+
+    // Remove any previously loaded configuration.
+    this._store.clear();
 
     // This is called recursively.
     const parseChildren = (parent, parentIter) => {

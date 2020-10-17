@@ -307,7 +307,7 @@ var Settings = class Settings {
 
     // Open a save-dialog when the save button is pressed.
     this._builder.get_object('save-preset-button').connect('clicked', (button) => {
-      const saver = new Gtk.FileChooserDialog({
+      const dialog = new Gtk.FileChooserDialog({
         title: 'Save Preset',
         action: Gtk.FileChooserAction.SAVE,
         do_overwrite_confirmation: true,
@@ -319,20 +319,20 @@ var Settings = class Settings {
       const jsonFilter = new Gtk.FileFilter();
       jsonFilter.set_name('JSON Files');
       jsonFilter.add_mime_type('application/json');
-      saver.add_filter(jsonFilter);
+      dialog.add_filter(jsonFilter);
 
       // But allow showing all files if required.
       const allFilter = new Gtk.FileFilter();
       allFilter.add_pattern('*');
       allFilter.set_name('All Files');
-      saver.add_filter(allFilter);
+      dialog.add_filter(allFilter);
 
       // Add our action buttons.
-      saver.add_button('Cancel', Gtk.ResponseType.CANCEL);
-      saver.add_button('Save', Gtk.ResponseType.OK);
+      dialog.add_button('Cancel', Gtk.ResponseType.CANCEL);
+      dialog.add_button('Save', Gtk.ResponseType.OK);
 
       // Show the preset directory per default.
-      saver.set_current_folder_uri(this._presetDirectory.get_uri());
+      dialog.set_current_folder_uri(this._presetDirectory.get_uri());
 
       // Also make updating presets easier by pre-filling the file input field with the
       // currently selected preset.
@@ -340,11 +340,11 @@ var Settings = class Settings {
       const [ok, model, iter] = presetSelection.get_selected();
       if (ok) {
         const name = model.get_value(iter, 0);
-        saver.set_current_name(name + '.json');
+        dialog.set_current_name(name + '.json');
       }
 
       // Save preset file when the OK button is clicked.
-      saver.connect('response', (dialog, response_id) => {
+      dialog.connect('response', (dialog, response_id) => {
         if (response_id === Gtk.ResponseType.OK) {
           try {
             let path = dialog.get_filename();
@@ -378,7 +378,7 @@ var Settings = class Settings {
         dialog.destroy();
       });
 
-      saver.show();
+      dialog.show();
     });
 
     // Open the preset directory with the default file manager.
