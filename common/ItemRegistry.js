@@ -22,10 +22,12 @@ const utils     = Me.imports.common.utils;
 // descriptions.
 let Shell            = undefined;
 let InputManipulator = undefined;
+let SystemActions    = undefined;
 
 try {
   Shell            = imports.gi.Shell;
   InputManipulator = new Me.imports.common.InputManipulator.InputManipulator();
+  SystemActions    = new imports.misc.systemActions.getDefault();
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
@@ -39,6 +41,7 @@ try {
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Each item type has one settings type - this determines which widgets are visible     //
@@ -493,7 +496,7 @@ var getItemTypes = () => {
         defaultData: '',
         subtitle: 'Shows your pinned applications.',
         description:
-            'The <b>Favorites</b> submenu the applications you have pinned to Gnome Shell\'s Dash.',
+            'The <b>Favorites</b> submenu shows the applications you have pinned to Gnome Shell\'s Dash.',
         settingsType: SettingsTypes.NONE,
         settingsList: 'submenu-types-list',
         createItem: (name, icon, angle, data) => {
@@ -511,6 +514,85 @@ var getItemTypes = () => {
               });
             }
           });
+
+          return result;
+        }
+      },
+
+      // The System submenu shows an items for screen-lock, shutdown, settings, etc. The
+      // code is roughly based on GNOME Shell's tray menu code:
+      // https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/master/js/ui/status/system.js
+      System: {
+        name: 'System',
+        icon: 'system-log-out',
+        defaultData: '',
+        subtitle: 'Allows screen lock shutdown and other things.',
+        description:
+            'The <b>System</b> submenu shows an items for screen-lock, shutdown, settings, etc.',
+        settingsType: SettingsTypes.NONE,
+        settingsList: 'submenu-types-list',
+        createItem: (name, icon, angle, data) => {
+          const result = {name: name, icon: icon, angle: angle, children: []};
+
+          // Make sure all can_* booleans we check below are up-to-date.
+          SystemActions.forceUpdate();
+
+          // Add item for the gnome control center.
+          let app =
+              Shell.AppSystem.get_default().lookup_app('gnome-control-center.desktop');
+
+          if (app) {
+            result.children.push({
+              name: app.get_name(),
+              icon: app.get_app_info().get_icon().to_string(),
+              activate: () => app.activate()
+            });
+          }
+
+          // Add screen-lock item.
+          if (SystemActions.can_lock_screen) {
+            result.children.push({
+              name: 'Lock',
+              icon: 'system-lock-screen',
+              activate: () => SystemActions.activateLockScreen()
+            });
+          }
+
+          // Add suspend-item.
+          if (SystemActions.can_suspend) {
+            result.children.push({
+              name: 'Suspend',
+              icon: 'system-suspend',
+              activate: () => SystemActions.activateSuspend()
+            });
+          }
+
+          // Add switch user item.
+          if (SystemActions.can_switch_user) {
+            result.children.push({
+              name: 'Switch User...',
+              icon: 'system-users',
+              activate: () => SystemActions.activateSwitchUser()
+            });
+          }
+
+          // Add log-out item.
+          if (SystemActions.can_logout) {
+            result.children.push({
+              name: 'Log Out',
+              icon: 'system-log-out',
+              activate: () => SystemActions.activateLogout()
+            });
+          }
+
+          // Add power-off item.
+          if (SystemActions.can_power_off) {
+            result.children.push({
+              name: 'Power Off...',
+              icon: 'system-shutdown',
+              activate: () => SystemActions.activatePowerOff()
+            });
+          }
 
           return result;
         }
