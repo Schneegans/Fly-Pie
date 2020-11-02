@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {Gtk, Gio, Gdk} = imports.gi;
+const {GLib, Gtk, Gio, Gdk} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
@@ -36,6 +36,9 @@ var Settings = class Settings {
 
     // Create the Gio.Settings object.
     this._settings = utils.createSettings();
+
+    // This we need to check whether ui animations are enabled.
+    this._shellSettings = Gio.Settings.new('org.gnome.desktop.interface');
 
     // Load the user interface file.
     this._builder = new Gtk.Builder();
@@ -219,6 +222,23 @@ var Settings = class Settings {
     this._bindSwitch('show-screencast-mouse');
 
 
+    // We show an info bar if GNOME Shell's animations are disabled. To make this info
+    // more apparent, we wait some seconds before showing it.
+    this._showAnimationInfoTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
+      // Link the visibility of the info bar with the animations setting.
+      this._shellSettings.bind(
+          'enable-animations', this._builder.get_object('animation-infobar'), 'revealed',
+          Gio.SettingsBindFlags.INVERT_BOOLEAN);
+
+      // Enable animations when the button in the info bar is pressed.
+      this._builder.get_object('enable-animations-button').connect('clicked', () => {
+        this._shellSettings.set_boolean('enable-animations', true);
+      });
+
+      this._showAnimationInfoTimeout = 0;
+      return false;
+    });
+
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
 
@@ -244,6 +264,14 @@ var Settings = class Settings {
     stack.visible_child_name = this._settings.get_string('active-stack-child');
     stack.connect('notify::visible-child-name', (stack) => {
       this._settings.set_string('active-stack-child', stack.visible_child_name);
+    });
+
+    // As we do not have something like a destructor, we just listen for the destroy
+    // signal of our main widget.
+    this._widget.connect('destroy', () => {
+      if (this._showAnimationInfoTimeout > 0) {
+        GLib.source_remove(this._showAnimationInfoTimeout);
+      }
     });
   }
 
