@@ -9,6 +9,7 @@
 'use strict';
 
 const Cairo                          = imports.cairo;
+const Gettext                        = imports.gettext;
 const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
@@ -17,6 +18,8 @@ const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const ItemRegistry  = Me.imports.common.ItemRegistry;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
+
+const _ = Gettext.gettext;
 
 // These are the different columns of the MenuTreeStore. It contains basically all data of
 // all configured menus.
@@ -1068,16 +1071,16 @@ var MenuEditor = class MenuEditor {
     const label    = this._builder.get_object('info-label');
 
     const tips = [
-      'You should try to have no more than twelve items in your menus.',
-      'You will find it more easy to learn item positions if you have an even number of entries. Four, six and eight are good numbers.',
-      'The source code of Fly-Pie is available on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.',
-      'Suggestions can be posted on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.',
-      'Bugs can be reported on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.',
-      'Deep hierarchies are pretty efficient. Put submenus into submenus in submenus!',
-      'If you delete all Pies, log out and log in again, the default configuration will be restored.',
-      'You can reorder the menu items on the left via drag and drop.',
-      'You can drop directories, files, links and desktop files to the menu hierarchy on the left.',
-      'You can copy menu items by holding the Control key while dragging them to another location.'
+      _('You should try to have no more than twelve items in your menus.'),
+      _('You will find it more easy to learn item positions if you have an even number of entries. Four, six and eight are good numbers.'),
+      _('The source code of Fly-Pie is available on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.'),
+      _('Suggestions can be posted on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.'),
+      _('Bugs can be reported on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.'),
+      _('Deep hierarchies are pretty efficient. Put submenus into submenus in submenus!'),
+      _('If you delete all Pies, log out and log in again, the default configuration will be restored.'),
+      _('You can reorder the menu items on the left via drag and drop.'),
+      _('You can drop directories, files, links and desktop files to the menu hierarchy on the left.'),
+      _('You can copy menu items by holding the Control key while dragging them to another location.')
     ];
 
     // Every eight seconds we hide the current tip...

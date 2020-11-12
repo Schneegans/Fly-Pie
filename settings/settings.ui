@@ -21,7 +21,7 @@
             <property name="can_focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="label" translatable="yes">Fly-Pie</property>
+            <property name="label">Fly-Pie</property>
             <attributes>
               <attribute name="weight" value="bold"/>
               <attribute name="scale" value="2"/>
@@ -38,7 +38,7 @@
             <property name="can_focus">False</property>
             <property name="halign">center</property>
             <property name="margin_bottom">20</property>
-            <property name="label" translatable="yes">Do things on-the-fly.</property>
+            <property name="label">Do things on-the-fly.</property>
           </object>
           <packing>
             <property name="left_attach">0</property>
@@ -230,48 +230,48 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes">Linear</col>
-        <col id="1" translatable="yes">linear</col>
+        <col id="0">Linear</col>
+        <col id="1">linear</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Ease</col>
-        <col id="1" translatable="yes">ease</col>
+        <col id="0">Ease</col>
+        <col id="1">ease</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Ease-In</col>
-        <col id="1" translatable="yes">ease-in</col>
+        <col id="0">Ease-In</col>
+        <col id="1">ease-in</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Ease-Out</col>
-        <col id="1" translatable="yes">ease-out</col>
+        <col id="0">Ease-Out</col>
+        <col id="1">ease-out</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Ease-In-Out</col>
-        <col id="1" translatable="yes">ease-in-out</col>
+        <col id="0">Ease-In-Out</col>
+        <col id="1">ease-in-out</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Ease-In-Quad</col>
-        <col id="1" translatable="yes">ease-in-quad</col>
+        <col id="0">Ease-In-Quad</col>
+        <col id="1">ease-in-quad</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Ease-Out-Quad</col>
-        <col id="1" translatable="yes">ease-out-quad</col>
+        <col id="0">Ease-Out-Quad</col>
+        <col id="1">ease-out-quad</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Ease-In-Out-Quad</col>
-        <col id="1" translatable="yes">ease-in-out-quad</col>
+        <col id="0">Ease-In-Out-Quad</col>
+        <col id="1">ease-in-out-quad</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Ease-In-Back</col>
-        <col id="1" translatable="yes">ease-in-back</col>
+        <col id="0">Ease-In-Back</col>
+        <col id="1">ease-in-back</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Ease-Out-Back</col>
-        <col id="1" translatable="yes">ease-out-back</col>
+        <col id="0">Ease-Out-Back</col>
+        <col id="1">ease-out-back</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Ease-In-Out-Back</col>
-        <col id="1" translatable="yes">ease-in-out-back</col>
+        <col id="0">Ease-In-Out-Back</col>
+        <col id="1">ease-in-out-back</col>
       </row>
     </data>
   </object>
@@ -448,7 +448,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
               <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Icon Theme</property>
+                <property name="label" translatable="yes" comments="Tab title of the icon-select-popover.">Icon Theme</property>
               </object>
               <packing>
                 <property name="tab_fill">False</property>
@@ -475,7 +475,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
               <object class="GtkLabel" id="label2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Custom Icon</property>
+                <property name="label" translatable="yes" comments="Tab title of the icon-select-popover.">Custom Icon</property>
               </object>
               <packing>
                 <property name="position">1</property>
@@ -618,7 +618,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
                                 <property name="margin_top">10</property>
-                                <property name="label" translatable="yes">Actions</property>
+                                <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">Actions</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -651,7 +651,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
                                 <property name="margin_top">10</property>
-                                <property name="label" translatable="yes">Submenus</property>
+                                <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">Submenus</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -878,7 +878,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="enable-animations-button">
-                <property name="label" translatable="yes">Enable Animations </property>
+                <property name="label" translatable="yes" comments="Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.">Enable Animations</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -1375,7 +1375,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                       <object class="GtkLabel">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Clear</property>
+                                        <property name="label" translatable="yes" comments="The text of the tutorial-reset-button.">Clear</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1420,7 +1420,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                           <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">🥇️</property>
+                            <property name="label">🥇️</property>
                             <attributes>
                               <attribute name="scale" value="8"/>
                             </attributes>
@@ -1465,7 +1465,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">🥈️</property>
+                                <property name="label">🥈️</property>
                                 <attributes>
                                   <attribute name="scale" value="5"/>
                                 </attributes>
@@ -1536,7 +1536,7 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">🥉️</property>
+                                <property name="label">🥉️</property>
                                 <attributes>
                                   <attribute name="scale" value="5"/>
                                 </attributes>
@@ -1824,7 +1824,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                                       <object class="GtkLabel">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Clear</property>
+                                        <property name="label" translatable="yes" comments="The text of the tutorial-reset-button.">Clear</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1869,7 +1869,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                           <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">🥇️</property>
+                            <property name="label">🥇️</property>
                             <attributes>
                               <attribute name="scale" value="8"/>
                             </attributes>
@@ -1914,7 +1914,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">🥈️</property>
+                                <property name="label">🥈️</property>
                                 <attributes>
                                   <attribute name="scale" value="5"/>
                                 </attributes>
@@ -1985,7 +1985,7 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">🥉️</property>
+                                <property name="label">🥉️</property>
                                 <attributes>
                                   <attribute name="scale" value="5"/>
                                 </attributes>
@@ -2130,7 +2130,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">center</property>
-                            <property name="label" translatable="yes">Previous</property>
+                            <property name="label" translatable="yes" comments="Button for tutorial navigation.">Previous</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -2294,7 +2294,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">center</property>
-                            <property name="label" translatable="yes">Next</property>
+                            <property name="label" translatable="yes" comments="Button for tutorial navigation.">Next</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -7520,7 +7520,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="secondary_icon_name">face-smile-symbolic</property>
                                 <property name="secondary_icon_tooltip_text" translatable="yes">Insert Emoji</property>
                                 <property name="secondary_icon_tooltip_markup" translatable="yes">Insert Emoji</property>
-                                <property name="placeholder_text" translatable="yes">Icon Name</property>
+                                <property name="placeholder_text" translatable="yes">Icon</property>
                                 <property name="show_emoji_icon">True</property>
                               </object>
                               <packing>
@@ -7612,7 +7612,7 @@ However, there is a &lt;b&gt;restriction&lt;/b&gt; on the fixed angles. Inside a
 In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&gt; if an item is dragged to another position in the menu.
 
 &lt;b&gt;Use -1 to disable this feature&lt;/b&gt;.</property>
-                                <property name="text" translatable="yes">-1</property>
+                                <property name="text">-1</property>
                                 <property name="input_purpose">alpha</property>
                                 <property name="adjustment">item-angle</property>
                                 <property name="numeric">True</property>
@@ -8070,7 +8070,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <object class="GtkSpinButton" id="spinbutton1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="text" translatable="yes">4</property>
+                                <property name="text">4</property>
                                 <property name="input_purpose">alpha</property>
                                 <property name="adjustment">item-count</property>
                                 <property name="numeric">True</property>
@@ -8350,7 +8350,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="margin_top">20</property>
-                        <property name="label" translatable="yes">label</property>
+                        <property name="label">label</property>
                         <property name="use_markup">True</property>
                         <property name="wrap">True</property>
                         <property name="max_width_chars">0</property>
@@ -8374,7 +8374,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                           <object class="GtkLabel" id="info-label">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">label</property>
+                            <property name="label">label</property>
                             <property name="use_markup">True</property>
                             <property name="justify">center</property>
                             <property name="wrap">True</property>
@@ -8460,7 +8460,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="vexpand">True</property>
-                        <property name="label" translatable="yes">&lt;big&gt;Yes, there will be achievements.&lt;/big&gt;
+                        <property name="label">&lt;big&gt;Yes, there will be achievements.&lt;/big&gt;
 
 Stay tuned!</property>
                         <property name="use_markup">True</property>

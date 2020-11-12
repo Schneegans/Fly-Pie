@@ -8,8 +8,9 @@
 
 'use strict';
 
-const Me     = imports.misc.extensionUtils.getCurrentExtension();
-const Daemon = Me.imports.daemon.Daemon.Daemon;
+const Gettext = imports.gettext;
+const Me      = imports.misc.extensionUtils.getCurrentExtension();
+const Daemon  = Me.imports.daemon.Daemon.Daemon;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Once enabled, Fly-Pie creates an instance of the Daemon class. This daemon will      //
@@ -26,7 +27,11 @@ let daemon;
 
 // This function is called once when the extension is loaded, not enabled. Nothing to be
 // done here for Fly-Pie.
-function init() {}
+function init() {
+  Gettext.textdomain('flypie@schneegans.github.com');
+  Gettext.bindtextdomain(
+      'flypie@schneegans.github.com', Me.dir.get_child('locale').get_path());
+}
 
 // This function could be called after the extension is enabled, which could be done from
 // GNOME Tweaks, when you log in or when the screen is unlocked. We create an instance of
