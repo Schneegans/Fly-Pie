@@ -10,6 +10,9 @@
 
 const {GLib, Gtk, Gio, Gdk} = imports.gi;
 
+const Gettext = imports.gettext;
+const _       = Gettext.gettext;
+
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
@@ -336,7 +339,7 @@ var Settings = class Settings {
     // Open a save-dialog when the save button is pressed.
     this._builder.get_object('save-preset-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
-        title: 'Save Preset',
+        title: _('Save Preset'),
         action: Gtk.FileChooserAction.SAVE,
         do_overwrite_confirmation: true,
         transient_for: button.get_toplevel(),
@@ -345,19 +348,19 @@ var Settings = class Settings {
 
       // Show only *.json files per default.
       const jsonFilter = new Gtk.FileFilter();
-      jsonFilter.set_name('JSON Files');
+      jsonFilter.set_name(_('JSON Files'));
       jsonFilter.add_mime_type('application/json');
       dialog.add_filter(jsonFilter);
 
       // But allow showing all files if required.
       const allFilter = new Gtk.FileFilter();
       allFilter.add_pattern('*');
-      allFilter.set_name('All Files');
+      allFilter.set_name(_('All Files'));
       dialog.add_filter(allFilter);
 
       // Add our action buttons.
-      dialog.add_button('Cancel', Gtk.ResponseType.CANCEL);
-      dialog.add_button('Save', Gtk.ResponseType.OK);
+      dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+      dialog.add_button(_('Save'), Gtk.ResponseType.OK);
 
       // Show the preset directory per default.
       dialog.set_current_folder_uri(this._presetDirectory.get_uri());

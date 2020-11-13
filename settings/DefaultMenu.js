@@ -10,6 +10,9 @@
 
 const Gio = imports.gi.Gio;
 
+const Gettext = imports.gettext;
+const _       = Gettext.gettext;
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // This creates a default menu configuration which is used when the user has no menus   //
 // configured.                                                                          //
@@ -22,7 +25,7 @@ var DefaultMenu = class DefaultMenu {
   static get() {
 
     const menu = {
-      name: 'Example Menu',
+      name: _('Example Menu'),
       icon: '🌟️',
       type: 'Menu',
       shortcut: '<Primary>space',
@@ -30,31 +33,31 @@ var DefaultMenu = class DefaultMenu {
       id: 0,
       children: [
         {
-          name: 'Sound',
+          name: _('Sound'),
           icon: 'audio-speakers',
           type: 'Submenu',
           children: [
             {
-              name: 'Play / Pause',
+              name: _('Play / Pause'),
               icon: '⏯️',
               type: 'Shortcut',
               data: 'AudioPlay',
             },
             {
-              name: 'Mute',
+              name: _('Mute'),
               icon: '🔈️',
               type: 'Shortcut',
               data: 'AudioMute',
             },
             {
-              name: 'Next Title',
+              name: _('Next Title'),
               icon: '⏩️',
               type: 'Shortcut',
               data: 'AudioNext',
               angle: 90
             },
             {
-              name: 'Previous Title',
+              name: _('Previous Title'),
               icon: '⏪️',
               type: 'Shortcut',
               data: 'AudioPrev',
@@ -63,48 +66,48 @@ var DefaultMenu = class DefaultMenu {
           ]
         },
         {
-          name: 'Window Management',
+          name: _('Window Management'),
           icon: 'preferences-system-windows',
           type: 'Submenu',
           children: [
             {
-              name: 'Maximize Window',
+              name: _('Maximize Window'),
               icon: 'view-fullscreen',
               type: 'Shortcut',
               data: '<Alt>F10',
             },
             {
-              name: 'Open Windows',
+              name: _('Open Windows'),
               icon: 'preferences-system-windows',
               type: 'RunningApps',
             },
             {
-              name: 'Gnome Shell',
+              name: _('Gnome Shell'),
               icon: 'preferences-desktop-remote-desktop',
               type: 'Submenu',
               children: [
                 {
-                  name: 'Up',
+                  name: _('Up'),
                   icon: '🔼️',
                   type: 'Shortcut',
                   data: '<Primary><Alt>Up',
                   angle: 0
                 },
                 {
-                  name: 'Overview',
+                  name: _('Overview'),
                   icon: '💠️',
                   type: 'Shortcut',
                   data: '<Super>s',
                 },
                 {
-                  name: 'Down',
+                  name: _('Down'),
                   icon: '🔽️',
                   type: 'Shortcut',
                   data: '<Primary><Alt>Down',
                   angle: 180
                 },
                 {
-                  name: 'Show Apps',
+                  name: _('Show Apps'),
                   icon: 'view-app-grid-symbolic',
                   type: 'Shortcut',
                   data: '<Super>a',
@@ -112,7 +115,7 @@ var DefaultMenu = class DefaultMenu {
               ]
             },
             {
-              name: 'Close Window',
+              name: _('Close Window'),
               icon: 'window-close',
               type: 'Shortcut',
               data: '<Alt>F4',
@@ -120,17 +123,17 @@ var DefaultMenu = class DefaultMenu {
           ]
         },
         {
-          name: 'Bookmarks',
+          name: _('Bookmarks'),
           icon: 'folder',
           type: 'Bookmarks',
         },
         {
-          name: 'Fly-Pie Settings',
+          name: _('Fly-Pie Settings'),
           icon: 'preferences-system',
           type: 'Command',
           data: 'gnome-extensions prefs flypie@schneegans.github.com',
         },
-        {name: 'Favorites', icon: 'emblem-favorite', type: 'Favorites'}
+        {name: _('Favorites'), icon: 'emblem-favorite', type: 'Favorites'}
       ]
     };
 

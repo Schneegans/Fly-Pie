@@ -9,7 +9,6 @@
 'use strict';
 
 const Cairo                          = imports.cairo;
-const Gettext                        = imports.gettext;
 const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
@@ -19,7 +18,8 @@ const ItemRegistry  = Me.imports.common.ItemRegistry;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const _       = Gettext.gettext;
 
 // These are the different columns of the MenuTreeStore. It contains basically all data of
 // all configured menus.
@@ -208,7 +208,7 @@ var MenuEditor = class MenuEditor {
     // Open a save-dialog when the export-config button is pressed.
     this._builder.get_object('export-menu-config-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
-        title: 'Export Menu Configuration',
+        title: _('Export Menu Configuration'),
         action: Gtk.FileChooserAction.SAVE,
         do_overwrite_confirmation: true,
         transient_for: button.get_toplevel(),
@@ -217,19 +217,19 @@ var MenuEditor = class MenuEditor {
 
       // Show only *.json files per default.
       const jsonFilter = new Gtk.FileFilter();
-      jsonFilter.set_name('JSON Files');
+      jsonFilter.set_name(_('JSON Files'));
       jsonFilter.add_mime_type('application/json');
       dialog.add_filter(jsonFilter);
 
       // But allow showing all files if required.
       const allFilter = new Gtk.FileFilter();
       allFilter.add_pattern('*');
-      allFilter.set_name('All Files');
+      allFilter.set_name(_('All Files'));
       dialog.add_filter(allFilter);
 
       // Add our action buttons.
-      dialog.add_button('Cancel', Gtk.ResponseType.CANCEL);
-      dialog.add_button('Export', Gtk.ResponseType.OK);
+      dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+      dialog.add_button(_('Export'), Gtk.ResponseType.OK);
 
       // Export menu config when the OK button is clicked.
       dialog.connect('response', (dialog, response_id) => {
@@ -254,7 +254,7 @@ var MenuEditor = class MenuEditor {
               transient_for: button.get_toplevel(),
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
-              text: 'Failed to export the menu configuration!',
+              text: _('Failed to export the menu configuration!'),
               secondary_text: '' + error
             });
             errorMessage.run();
@@ -271,7 +271,7 @@ var MenuEditor = class MenuEditor {
     // Open a load-dialog when the import-config button is pressed.
     this._builder.get_object('import-menu-config-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
-        title: 'Import Menu Configuration',
+        title: _('Import Menu Configuration'),
         action: Gtk.FileChooserAction.OPEN,
         transient_for: button.get_toplevel(),
         modal: true
@@ -279,19 +279,19 @@ var MenuEditor = class MenuEditor {
 
       // Show only *.json files per default.
       const jsonFilter = new Gtk.FileFilter();
-      jsonFilter.set_name('JSON Files');
+      jsonFilter.set_name(_('JSON Files'));
       jsonFilter.add_mime_type('application/json');
       dialog.add_filter(jsonFilter);
 
       // But allow showing all files if required.
       const allFilter = new Gtk.FileFilter();
       allFilter.add_pattern('*');
-      allFilter.set_name('All Files');
+      allFilter.set_name(_('All Files'));
       dialog.add_filter(allFilter);
 
       // Add our action buttons.
-      dialog.add_button('Cancel', Gtk.ResponseType.CANCEL);
-      dialog.add_button('Import', Gtk.ResponseType.OK);
+      dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+      dialog.add_button(_('Import'), Gtk.ResponseType.OK);
 
       // Import menu config when the OK button is clicked.
       dialog.connect('response', (dialog, response_id) => {
@@ -313,7 +313,7 @@ var MenuEditor = class MenuEditor {
               transient_for: button.get_toplevel(),
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
-              text: 'Failed to import menu configuration!',
+              text: _('Failed to import menu configuration!'),
               secondary_text: '' + error
             });
             errorMessage.run();

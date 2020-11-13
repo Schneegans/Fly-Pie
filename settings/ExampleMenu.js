@@ -8,6 +8,9 @@
 
 'use strict';
 
+const Gettext = imports.gettext;
+const _       = Gettext.gettext;
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // This creates a Demo Menu structure which is shown when the preview button is         //
 // pressed. The menu is quite symmetrical, the root menu has 6 items, each of them has  /
@@ -19,237 +22,237 @@ var ExampleMenu = class ExampleMenu {
 
   static get() {
     return {
-      name: 'Example Menu', icon: '😷', children: [
+      name: _('Example Menu'), icon: '😷', children: [
         {
-          name: 'Animals & Nature',
+          name: _('Animals & Nature'),
           icon: '🌾',
           children: [
             {
-              name: 'Flowers',
+              name: _('Flowers'),
               icon: '🥀',
               children: [
-                {name: 'Tulip', icon: '🌷'},
-                {name: 'Rose', icon: '🌹'},
-                {name: 'Sunflower', icon: '🌻'},
-                {name: 'Blossom', icon: '🌼'},
-                {name: 'Bouquet', icon: '💐'},
+                {name: _('Tulip'), icon: '🌷'},
+                {name: _('Rose'), icon: '🌹'},
+                {name: _('Sunflower'), icon: '🌻'},
+                {name: _('Blossom'), icon: '🌼'},
+                {name: _('Bouquet'), icon: '💐'},
               ]
             },
             {
-              name: 'Mammals',
+              name: _('Mammals'),
               icon: '🐎',
               children: [
-                {name: 'Cat', icon: '🐈'},
-                {name: 'Ox', icon: '🐂'},
-                {name: 'Dog', icon: '🐕'},
-                {name: 'Pig', icon: '🐖'},
-                {name: 'Monkey', icon: '🐒'},
+                {name: _('Cat'), icon: '🐈'},
+                {name: _('Ox'), icon: '🐂'},
+                {name: _('Dog'), icon: '🐕'},
+                {name: _('Pig'), icon: '🐖'},
+                {name: _('Monkey'), icon: '🐒'},
               ]
             },
             {
-              name: 'Reptiles',
+              name: _('Reptiles'),
               icon: '🦎',
               children: [
-                {name: 'Crocodile', icon: '🐊'},
-                {name: 'Snake', icon: '🐍'},
-                {name: 'Turtle', icon: '🐢'},
-                {name: 'T-Rex', icon: '🦖'},
-                {name: 'Apatosaurus', icon: '🦕'},
+                {name: _('Crocodile'), icon: '🐊'},
+                {name: _('Snake'), icon: '🐍'},
+                {name: _('Turtle'), icon: '🐢'},
+                {name: _('T-Rex'), icon: '🦖'},
+                {name: _('Apatosaurus'), icon: '🦕'},
               ]
             },
           ]
         },
         {
-          name: 'Food & Drink',
+          name: _('Food & Drink'),
           icon: '🍔',
           children: [
             {
-              name: 'Fruit',
+              name: _('Fruit'),
               icon: '🥝',
               children: [
-                {name: 'Apple', icon: '🍏'},
-                {name: 'Watermelon', icon: '🍉'},
-                {name: 'Lemon', icon: '🍋'},
-                {name: 'Banana', icon: '🍌'},
-                {name: 'Strawberry', icon: '🍓'},
+                {name: _('Apple'), icon: '🍏'},
+                {name: _('Watermelon'), icon: '🍉'},
+                {name: _('Lemon'), icon: '🍋'},
+                {name: _('Banana'), icon: '🍌'},
+                {name: _('Strawberry'), icon: '🍓'},
               ]
             },
             {
-              name: 'Drink',
+              name: _('Drink'),
               icon: '🍷',
               children: [
-                {name: 'Teacup', icon: '🍵'},
-                {name: 'Coffee', icon: '☕'},
-                {name: 'Beer', icon: '🍺'},
-                {name: 'Whiskey', icon: '🥃'},
-                {name: 'Cocktail', icon: '🍹'},
+                {name: _('Teacup'), icon: '🍵'},
+                {name: _('Coffee'), icon: '☕'},
+                {name: _('Beer'), icon: '🍺'},
+                {name: _('Whiskey'), icon: '🥃'},
+                {name: _('Cocktail'), icon: '🍹'},
               ]
             },
             {
-              name: 'Sweets',
+              name: _('Sweets'),
               icon: '🍭',
               children: [
-                {name: 'Shortcake', icon: '🍰'},
-                {name: 'Candy', icon: '🍬'},
-                {name: 'Doughnut', icon: '🍩'},
-                {name: 'Cookie', icon: '🍪'},
-                {name: 'Chocolate', icon: '🍫'},
+                {name: _('Shortcake'), icon: '🍰'},
+                {name: _('Candy'), icon: '🍬'},
+                {name: _('Doughnut'), icon: '🍩'},
+                {name: _('Cookie'), icon: '🍪'},
+                {name: _('Chocolate'), icon: '🍫'},
               ]
             },
           ]
         },
         {
-          name: 'Activities',
+          name: _('Activities'),
           icon: '🏆',
           children: [
             {
-              name: 'Games',
+              name: _('Games'),
               icon: '🎲',
               children: [
-                {name: 'Billards', icon: '🎱'},
-                {name: 'Mahjong', icon: '🀄'},
-                {name: 'Bowling', icon: '🎳'},
-                {name: 'Darts', icon: '🎯'},
-                {name: 'Video Game', icon: '🎮'},
+                {name: _('Billards'), icon: '🎱'},
+                {name: _('Mahjong'), icon: '🀄'},
+                {name: _('Bowling'), icon: '🎳'},
+                {name: _('Darts'), icon: '🎯'},
+                {name: _('Video Game'), icon: '🎮'},
               ]
             },
             {
-              name: 'Sports',
+              name: _('Sports'),
               icon: '⚽',
               children: [
-                {name: 'Cricket', icon: '🏏'},
-                {name: 'Ice Hockey', icon: '🏒'},
-                {name: 'Tennis', icon: '🎾'},
-                {name: 'Fishing', icon: '🎣'},
-                {name: 'Skiing', icon: '🎿'},
+                {name: _('Cricket'), icon: '🏏'},
+                {name: _('Ice Hockey'), icon: '🏒'},
+                {name: _('Tennis'), icon: '🎾'},
+                {name: _('Fishing'), icon: '🎣'},
+                {name: _('Skiing'), icon: '🎿'},
               ]
             },
             {
-              name: 'Places',
+              name: _('Places'),
               icon: '🗼',
               children: [
-                {name: 'Mount Fuji', icon: '🗻'},
-                {name: 'Mount Etna', icon: '🌋'},
-                {name: 'Statue of Liberty', icon: '🗽'},
-                {name: 'Japan', icon: '🗾'},
-                {name: 'Moyai', icon: '🗿'},
+                {name: _('Mount Fuji'), icon: '🗻'},
+                {name: _('Mount Etna'), icon: '🌋'},
+                {name: _('Statue of Liberty'), icon: '🗽'},
+                {name: _('Japan'), icon: '🗾'},
+                {name: _('Moyai'), icon: '🗿'},
               ]
             },
           ]
         },
         {
-          name: 'Objects',
+          name: _('Objects'),
           icon: '🚜',
           children: [
             {
-              name: 'Cars',
+              name: _('Cars'),
               icon: '🚔',
               children: [
-                {name: 'Bus', icon: '🚌'},
-                {name: 'Fire Engine', icon: '🚒'},
-                {name: 'Automobile', icon: '🚗'},
-                {name: 'Tractor', icon: '🚜'},
-                {name: 'Truck', icon: '🚚'},
+                {name: _('Bus'), icon: '🚌'},
+                {name: _('Fire Engine'), icon: '🚒'},
+                {name: _('Automobile'), icon: '🚗'},
+                {name: _('Tractor'), icon: '🚜'},
+                {name: _('Truck'), icon: '🚚'},
               ]
             },
             {
-              name: 'Buildings',
+              name: _('Buildings'),
               icon: '🏢',
               children: [
-                {name: 'Post Office', icon: '🏤'},
-                {name: 'School', icon: '🏫'},
-                {name: 'Hospital', icon: '🏥'},
-                {name: 'Bank', icon: '🏦'},
-                {name: 'Love Hotel', icon: '🏩'},
+                {name: _('Post Office'), icon: '🏤'},
+                {name: _('School'), icon: '🏫'},
+                {name: _('Hospital'), icon: '🏥'},
+                {name: _('Bank'), icon: '🏦'},
+                {name: _('Love Hotel'), icon: '🏩'},
               ]
             },
             {
-              name: 'Instruments',
+              name: _('Instruments'),
               icon: '🎻',
               children: [
-                {name: 'Saxophone', icon: '🎷'},
-                {name: 'Guitar', icon: '🎸'},
-                {name: 'Trumpet', icon: '🎺'},
-                {name: 'Microphone', icon: '🎤'},
-                {name: 'Drum', icon: '🥁'},
+                {name: _('Saxophone'), icon: '🎷'},
+                {name: _('Guitar'), icon: '🎸'},
+                {name: _('Trumpet'), icon: '🎺'},
+                {name: _('Microphone'), icon: '🎤'},
+                {name: _('Drum'), icon: '🥁'},
               ]
             },
           ]
         },
         {
-          name: 'Smileys & People',
+          name: _('Smileys & People'),
           icon: '😀',
           children: [
             {
-              name: 'Happy Faces',
+              name: _('Happy Faces'),
               icon: '😁',
               children: [
-                {name: 'Smiley', icon: '😃'},
-                {name: 'Winking Face', icon: '😉'},
-                {name: 'Face With Smiling Eyes', icon: '😊'},
-                {name: 'Face With Sweat', icon: '😅'},
-                {name: 'ROFL', icon: '🤣'},
+                {name: _('Smiley'), icon: '😃'},
+                {name: _('Winking Face'), icon: '😉'},
+                {name: _('Face With Smiling Eyes'), icon: '😊'},
+                {name: _('Face With Sweat'), icon: '😅'},
+                {name: _('ROFL'), icon: '🤣'},
               ]
             },
             {
-              name: 'Angry Faces',
+              name: _('Angry Faces'),
               icon: '😕',
               children: [
-                {name: 'Vomiting Face', icon: '🤮'},
-                {name: 'Skeptical Face', icon: '🤨'},
-                {name: 'Pouting Face', icon: '😡'},
-                {name: 'Angry Face', icon: '😠'},
-                {name: 'Very Angry Face', icon: '🤬'},
+                {name: _('Vomiting Face'), icon: '🤮'},
+                {name: _('Skeptical Face'), icon: '🤨'},
+                {name: _('Pouting Face'), icon: '😡'},
+                {name: _('Angry Face'), icon: '😠'},
+                {name: _('Very Angry Face'), icon: '🤬'},
               ]
             },
             {
-              name: 'Surprised Faces',
+              name: _('Surprised Faces'),
               icon: '😯',
               children: [
-                {name: 'Flushed Face', icon: '😳'},
-                {name: 'Anguished Face', icon: '😧'},
-                {name: 'Astonished Face', icon: '😲'},
-                {name: 'Screaming Face', icon: '😱'},
-                {name: 'Pouff', icon: '🤯'},
+                {name: _('Flushed Face'), icon: '😳'},
+                {name: _('Anguished Face'), icon: '😧'},
+                {name: _('Astonished Face'), icon: '😲'},
+                {name: _('Screaming Face'), icon: '😱'},
+                {name: _('Pouff'), icon: '🤯'},
               ]
             },
           ]
         },
         {
-          name: 'Symbols',
+          name: _('Symbols'),
           icon: '♍',
           children: [
             {
-              name: 'Star Signs',
+              name: _('Star Signs'),
               icon: '♈',
               children: [
-                {name: 'Taurus', icon: '♉'},
-                {name: 'Cancer', icon: '♋'},
-                {name: 'Virgo', icon: '♍'},
-                {name: 'Scorpius', icon: '♏'},
-                {name: 'Capricorn', icon: '♑'},
+                {name: _('Taurus'), icon: '♉'},
+                {name: _('Cancer'), icon: '♋'},
+                {name: _('Virgo'), icon: '♍'},
+                {name: _('Scorpius'), icon: '♏'},
+                {name: _('Capricorn'), icon: '♑'},
               ]
             },
             {
-              name: 'Arrows',
+              name: _('Arrows'),
               icon: '🔁',
               children: [
-                {name: 'Up', icon: '⏫'},
-                {name: 'Right', icon: '⏩'},
-                {name: 'Twisted', icon: '🔀'},
-                {name: 'Down', icon: '⏬'},
-                {name: 'Left', icon: '⏪'},
+                {name: _('Up'), icon: '⏫'},
+                {name: _('Right'), icon: '⏩'},
+                {name: _('Twisted'), icon: '🔀'},
+                {name: _('Down'), icon: '⏬'},
+                {name: _('Left'), icon: '⏪'},
               ]
             },
             {
-              name: 'Info Signs',
+              name: _('Info Signs'),
               icon: '🚻',
               children: [
-                {name: 'Litter Bin', icon: '🚮'},
-                {name: 'Potable Watter', icon: '🚰'},
-                {name: 'Mens', icon: '🚹'},
-                {name: 'Womens', icon: '🚺'},
-                {name: 'Baby', icon: '🚼'},
+                {name: _('Litter Bin'), icon: '🚮'},
+                {name: _('Potable Water'), icon: '🚰'},
+                {name: _('Mens'), icon: '🚹'},
+                {name: _('Womens'), icon: '🚺'},
+                {name: _('Baby'), icon: '🚼'},
               ]
             },
           ]
