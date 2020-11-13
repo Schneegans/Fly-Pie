@@ -3,7 +3,7 @@
 </p>
 
 [![check](https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Fly-Pie/actions)
-[![shell](https://img.shields.io/badge/Gnome_Shell-3.36-blue.svg)](metadata.json)
+[![shell](https://img.shields.io/badge/Gnome_Shell-3.38-blue.svg)](metadata.json)
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![loc](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/loc.json)](cloc.sh)
 [![comments](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json)](cloc.sh)
@@ -26,7 +26,7 @@ Click the player image on the right to watch a trailer on YouTube!
 
 ## Features
 
-_:construction: **Under Construction:** Fly-Pie is still under heavy development! For now, it has been only tested on **Ubuntu 20.04** and **Gnome Shell 3.36**. Whenever you encounter a :beetle: bug or have :tada: feature request, 
+_:construction: **Under Construction:** Fly-Pie is still under heavy development! Whenever you encounter a :beetle: bug or have :tada: feature request, 
 report this via [Github issues](https://github.com/schneegans/fly-pie/issues)._
 
 The list below provides both, a high-level overview of Fly-Pie's current capabilities as well as a rough idea of planned features. 
@@ -56,9 +56,9 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
   - [X] Open pre-configured menus via the D-Bus.
   - [X] Open custom menus via the D-Bus.
 - [X] Available on [extensions.gnome.org](https://extensions.gnome.org/extension/3433/fly-pie).
-- [ ] Translations:
+- [X] Translation Support:
   - [X] English
-  - [ ] German
+  - [X] German
   - [ ] ...
 - [ ] Proper touch support.
 - [ ] Cool appearance presets.
@@ -66,13 +66,13 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
 
 ## Installation
 
-You can either install Fly-Pie from extensions.gnome.org, download a stable release from GitHub or clone the latest version directly with `git`.
+You can either install Fly-Pie from extensions.gnome.org (a), download a stable release from GitHub (b) or clone the latest version directly with `git` (c).
 
-### Installing from extensions.gnome.org
+### a) Installing from extensions.gnome.org
 
 This is the most easy way to install Fly-Pie. Just head over to [extensions.gnome.org](https://extensions.gnome.org/extension/3433/fly-pie) and flip the switch! If you want to use a more up-to-date version of Fly-Pie, you can try one of the methods listed below.
 
-### Downloading a Stable Release
+### b) Downloading a Stable Release
 
 Just [download the latest release](https://github.com/Schneegans/Fly-Pie/releases) and extract the contained directory to `~/.local/share/gnome-shell/extensions`.
 Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
@@ -83,12 +83,18 @@ Then you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* 
 gnome-extensions enable flypie@schneegans.github.com
 ```
 
-### Cloning the Latest Version with `git`
+### c) Cloning the Latest Version with `git`
 
 ```bash
 cd ~/.local/share/gnome-shell/extensions
 git clone https://github.com/Schneegans/Fly-Pie.git
 mv Fly-Pie flypie@schneegans.github.com
+```
+
+You will have to compile the translations if you want to use Fly-Pie in your own language:
+
+```bash
+flypie@schneegans.github.com/compile-locales.sh
 ```
 
 Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
@@ -241,3 +247,28 @@ Emoji | Description
 :twisted_rightwards_arrows: `:twisted_rightwards_arrows:` | When you merged a branch.
 :fire: `:fire:` | When you removed something.
 :truck: `:truck:` | When you moved / renamed something.
+
+## Translating Fly-Pie
+
+A great way to contribute to Fly-Pie is creating a translation to another language!
+We suggest using a tool like [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
+
+Translations of Fly-Pie are stored in the `po/` directory.
+Just edit an existing translation or create a new one by opening the template [`po/flypie.pot`](po/flypie.pot) with either of this tools.
+
+The template file is part of the source tree and is updated regularly with this command:
+
+```bash
+xgettext --from-code=UTF-8 --output=po/flypie.pot settings/settings.ui */*.js 
+```
+
+Once you are happy with your translation, save a `*.po` file in the `/po` directory and run the following command to compile the strings:
+
+```bash
+./compile-locales.sh
+```
+
+Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+Or logout / login if you are on Wayland.
+
+You can add your new `*.po` file with a commit like `:tada: Add new translation for <country code>` and submit a pull request!
