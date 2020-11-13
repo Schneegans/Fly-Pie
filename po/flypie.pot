@@ -1,0 +1,1342 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-13 05:15+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: settings/settings.ui:53
+msgid ""
+"Published under the MIT License.\n"
+"Visit <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie's Homepage</"
+"a> for details.\n"
+"\n"
+"Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free to "
+"report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
+"\">Github</a>."
+msgstr ""
+
+#. Tab title of the icon-select-popover.
+#: settings/settings.ui:451
+msgid "Icon Theme"
+msgstr ""
+
+#. Tab title of the icon-select-popover.
+#: settings/settings.ui:478
+msgid "Custom Icon"
+msgstr ""
+
+#. Heading in the add-new-item-popover of the menu editor.
+#: settings/settings.ui:621
+msgid "Actions"
+msgstr ""
+
+#. Heading in the add-new-item-popover of the menu editor.
+#: settings/settings.ui:654
+msgid "Submenus"
+msgstr ""
+
+#: settings/settings.ui:751
+msgid "Save current settings"
+msgstr ""
+
+#: settings/settings.ui:777
+msgid "Save as new Preset"
+msgstr ""
+
+#: settings/settings.ui:799
+msgid "Open preset directory"
+msgstr ""
+
+#. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
+#: settings/settings.ui:881
+msgid "Enable Animations"
+msgstr ""
+
+#: settings/settings.ui:908
+msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
+msgstr ""
+
+#: settings/settings.ui:1020
+msgid "Welcome to Fly-Pie!"
+msgstr ""
+
+#: settings/settings.ui:1051
+msgid ""
+"You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
+"much more. This interactive tutorial will teach you how to use Fly-Pie most "
+"efficiently. Click the big button below to open a test menu!"
+msgstr ""
+
+#: settings/settings.ui:1083 settings/settings.ui:1210
+#: settings/settings.ui:1513 settings/settings.ui:1660
+#: settings/settings.ui:1962
+msgid ""
+"<big><b>Open the\n"
+"menu!</b></big>"
+msgstr ""
+
+#: settings/settings.ui:1104
+msgid ""
+"• Use your <b>left mouse button to select items</b>.\n"
+"• Use your <b>right mouse button to close the menu</b>.\n"
+"• The test menu is just a playground, selecting items has no real effect.\n"
+"\n"
+"Once you feel comfortable, click <b>next</b> to learn more details!"
+msgstr ""
+
+#: settings/settings.ui:1147
+msgid "You can click anywhere!"
+msgstr ""
+
+#: settings/settings.ui:1178
+msgid ""
+"It does not matter whether you click directly on an item or at the edge of "
+"your screen as long as your mouse pointer remains in the item's wedge."
+msgstr ""
+
+#: settings/settings.ui:1232
+msgid ""
+"<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
+"\n"
+"Also, you do not have to wait for the animation to finish as the submenu "
+"wedges will appear instantaneously around the position where you clicked.\n"
+"\n"
+"Click <b>next</b> for a practice session!"
+msgstr ""
+
+#: settings/settings.ui:1276
+msgid "Practice Session I"
+msgstr ""
+
+#: settings/settings.ui:1298
+msgid ""
+"For this practice session, open the menu by clicking the big button. Then "
+"select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
+"gold medal?\n"
+"\n"
+"Once you are pleased with your result, click <b>next</b> to learn about Fly-"
+"Pie's Marking Mode!\n"
+msgstr ""
+
+#: settings/settings.ui:1318 settings/settings.ui:1767
+msgid "<big>Last selection time: <b>- ms</b></big>"
+msgstr ""
+
+#: settings/settings.ui:1336 settings/settings.ui:1785
+msgid "<big>Best selection time: <b>- ms</b></big>"
+msgstr ""
+
+#. The text of the tutorial-reset-button.
+#: settings/settings.ui:1378 settings/settings.ui:1827
+msgid "Clear"
+msgstr ""
+
+#: settings/settings.ui:1438 settings/settings.ui:2003
+msgid "Unlocked at less than 1000 ms"
+msgstr ""
+
+#: settings/settings.ui:1483
+msgid "Unlocked at less than 2000 ms"
+msgstr ""
+
+#: settings/settings.ui:1554
+msgid "Unlocked at less than 3000 ms"
+msgstr ""
+
+#: settings/settings.ui:1597
+msgid "The Marking Mode of Fly-Pie"
+msgstr ""
+
+#: settings/settings.ui:1628
+msgid ""
+"The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
+"gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
+"pause dragging or make a turn, the item will be selected."
+msgstr ""
+
+#: settings/settings.ui:1681
+msgid ""
+"Try remembering the path to an item. Open the menu and <b>draw the path with "
+"your mouse</b>. You can start with individual segments of the path, put you "
+"can also try to draw the entire path!\n"
+"\n"
+"You may find it more successful if you explicitly try to compose your "
+"gesture of straight parts. <b>Do not draw curvy paths but rather expressive "
+"zig-zag-lines!</b>\n"
+"\n"
+"Click <b>next</b> for an additional practice session!"
+msgstr ""
+
+#: settings/settings.ui:1725
+msgid "Practice Session II"
+msgstr ""
+
+#: settings/settings.ui:1747
+msgid ""
+"Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
+"However, as you now learned about the Marking Mode, the time required to get "
+"the gold medal is much shorter!\n"
+"\n"
+"Once you are pleased with your result, click <b>next</b> to learn some final "
+"tips and tricks!\n"
+msgstr ""
+
+#: settings/settings.ui:1887
+msgid "Unlocked at less than 500 ms"
+msgstr ""
+
+#: settings/settings.ui:1932
+msgid "Unlocked at less than 750 ms"
+msgstr ""
+
+#: settings/settings.ui:2045
+msgid "🎉️ Congratulations! 🎉️ "
+msgstr ""
+
+#: settings/settings.ui:2064
+msgid ""
+"Congratulations! If you managed to unlock most of the medals, you will be "
+"using Fly-Pie like a master Pielot!\n"
+"\n"
+"Now you can use the other pages of this settings dialog to configure Fly-Pie "
+"to your heart's desire. There are many options! Create as many menus as you "
+"want with as deep hierarchies as you want. But try to limit the amount of "
+"items per submenu to <b>at most twelve items</b>. Everything above this "
+"number will drastically reduce your efficiency.\n"
+"\n"
+"If you like Fly-Pie, I would be happy if you left a positive review on <a "
+"href=\"https://extensions.gnome.org/extension/3433/fly-pie/\">extensions."
+"gnome.org</a>! Whenever you encounter a 🐞️ bug or have feature request, feel "
+"free to report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
+"\">Github</a>."
+msgstr ""
+
+#. Button for tutorial navigation.
+#: settings/settings.ui:2133
+msgid "Previous"
+msgstr ""
+
+#. Button for tutorial navigation.
+#: settings/settings.ui:2297
+msgid "Next"
+msgstr ""
+
+#: settings/settings.ui:2323
+msgid "Tutorial"
+msgstr ""
+
+#: settings/settings.ui:2370
+msgid "Open Test Menu"
+msgstr ""
+
+#: settings/settings.ui:2383
+msgid "You may also open one of your own menus from the Menu Editor."
+msgstr ""
+
+#: settings/settings.ui:2404
+msgid "Open Live Preview Menu"
+msgstr ""
+
+#: settings/settings.ui:2429
+msgid "Live Preview"
+msgstr ""
+
+#: settings/settings.ui:2498
+msgid "Choose a Preset"
+msgstr ""
+
+#: settings/settings.ui:2511
+msgid "This will override most settings below!"
+msgstr ""
+
+#: settings/settings.ui:2562
+msgid "Load Presets"
+msgstr ""
+
+#: settings/settings.ui:2583
+msgid "Create a random preset"
+msgstr ""
+
+#: settings/settings.ui:2607
+msgid "Generate Random Preset"
+msgstr ""
+
+#: settings/settings.ui:2714
+msgid "Easing Duration"
+msgstr ""
+
+#: settings/settings.ui:2732
+msgid "Global Scale"
+msgstr ""
+
+#: settings/settings.ui:2744
+msgid "Independent of the preset."
+msgstr ""
+
+#: settings/settings.ui:2798 settings/settings.ui:2818
+#: settings/settings.ui:2955 settings/settings.ui:2975
+#: settings/settings.ui:2994 settings/settings.ui:3013
+#: settings/settings.ui:3302 settings/settings.ui:3322
+#: settings/settings.ui:3430 settings/settings.ui:3450
+#: settings/settings.ui:3602 settings/settings.ui:4432
+#: settings/settings.ui:4451 settings/settings.ui:4471
+#: settings/settings.ui:4491 settings/settings.ui:5293
+#: settings/settings.ui:5493 settings/settings.ui:5512
+#: settings/settings.ui:5532 settings/settings.ui:5552
+#: settings/settings.ui:5572 settings/settings.ui:6005
+#: settings/settings.ui:6153 settings/settings.ui:6173
+#: settings/settings.ui:6193 settings/settings.ui:6447
+#: settings/settings.ui:6467 settings/settings.ui:6487
+#: settings/settings.ui:6652 settings/settings.ui:6739
+#: settings/settings.ui:6825 settings/settings.ui:6912
+#: settings/settings.ui:6993
+msgid "Reset to default value"
+msgstr ""
+
+#: settings/settings.ui:2871
+msgid "Font"
+msgstr ""
+
+#: settings/settings.ui:2883
+msgid "Text Color"
+msgstr ""
+
+#: settings/settings.ui:2897 settings/settings.ui:4341
+#: settings/settings.ui:5382 settings/settings.ui:5734
+msgid "Background Color"
+msgstr ""
+
+#: settings/settings.ui:2926
+msgid "Pick Text Color"
+msgstr ""
+
+#: settings/settings.ui:2942
+msgid "Pick Background Color"
+msgstr ""
+
+#: settings/settings.ui:3059
+msgid "Easing Mode"
+msgstr ""
+
+#: settings/settings.ui:3071
+msgid "Used for position and scale updates."
+msgstr ""
+
+#: settings/settings.ui:3098 settings/settings.ui:3144
+msgid "Global Appearance Settings"
+msgstr ""
+
+#: settings/settings.ui:3114
+msgid "These settings affect all menu items."
+msgstr ""
+
+#: settings/settings.ui:3199 settings/settings.ui:3806
+#: settings/settings.ui:5074 settings/settings.ui:5912
+msgid "Size"
+msgstr ""
+
+#: settings/settings.ui:3211
+msgid ""
+"Clicking inside the inner radius\n"
+"will cancel the selection."
+msgstr ""
+
+#: settings/settings.ui:3235
+msgid "Wedge Separators"
+msgstr ""
+
+#: settings/settings.ui:3251
+msgid "Color"
+msgstr ""
+
+#: settings/settings.ui:3270 settings/settings.ui:3396
+msgid "Width"
+msgstr ""
+
+#: settings/settings.ui:3344
+msgid "Pick Wedge Separator Color"
+msgstr ""
+
+#: settings/settings.ui:3369
+msgid "Wedge Color"
+msgstr ""
+
+#: settings/settings.ui:3473
+msgid "Inner Radius"
+msgstr ""
+
+#: settings/settings.ui:3517 settings/settings.ui:5592
+#: settings/settings.ui:6078
+msgid "Normal"
+msgstr ""
+
+#: settings/settings.ui:3536 settings/settings.ui:5608
+msgid "Hovered"
+msgstr ""
+
+#: settings/settings.ui:3559
+msgid "Pick Wedge Color"
+msgstr ""
+
+#: settings/settings.ui:3574
+msgid "Pick Hovered Wedge Color"
+msgstr ""
+
+#: settings/settings.ui:3645 settings/settings.ui:3702
+msgid "Wedge Appearance"
+msgstr ""
+
+#: settings/settings.ui:3661
+msgid "Clicking inside a wedge will activate the corresponding item."
+msgstr ""
+
+#: settings/settings.ui:3744 settings/settings.ui:5105
+msgid "Icon Scale"
+msgstr ""
+
+#: settings/settings.ui:3756 settings/settings.ui:5117
+msgid "Relative to the item's size."
+msgstr ""
+
+#: settings/settings.ui:3857 settings/settings.ui:4124
+msgid "Pick Center Item Color"
+msgstr ""
+
+#: settings/settings.ui:3883 settings/settings.ui:3943
+#: settings/settings.ui:4150 settings/settings.ui:4210
+#: settings/settings.ui:4757 settings/settings.ui:4829
+#: settings/settings.ui:4962 settings/settings.ui:5046
+msgid "Saturation"
+msgstr ""
+
+#: settings/settings.ui:3903 settings/settings.ui:3955
+#: settings/settings.ui:4170 settings/settings.ui:4222
+#: settings/settings.ui:4777 settings/settings.ui:4817
+#: settings/settings.ui:4982 settings/settings.ui:5034
+msgid "Luminance"
+msgstr ""
+
+#: settings/settings.ui:3923 settings/settings.ui:3967
+#: settings/settings.ui:4190 settings/settings.ui:4234
+#: settings/settings.ui:4797 settings/settings.ui:4841
+#: settings/settings.ui:5002 settings/settings.ui:5022
+msgid "Opacity"
+msgstr ""
+
+#: settings/settings.ui:3992 settings/settings.ui:4077
+#: settings/settings.ui:4669 settings/settings.ui:4874
+#: settings/settings.ui:5765 settings/settings.ui:5842
+msgid "Fixed"
+msgstr ""
+
+#: settings/settings.ui:4007 settings/settings.ui:4092
+#: settings/settings.ui:4684 settings/settings.ui:4889
+msgid "Auto"
+msgstr ""
+
+#: settings/settings.ui:4328 settings/settings.ui:5335
+msgid "Icon Opacity"
+msgstr ""
+
+#: settings/settings.ui:4353 settings/settings.ui:4372
+#: settings/settings.ui:4392 settings/settings.ui:4412
+#: settings/settings.ui:5394 settings/settings.ui:5413
+#: settings/settings.ui:5433 settings/settings.ui:5453
+#: settings/settings.ui:5473 settings/settings.ui:6094
+#: settings/settings.ui:6113 settings/settings.ui:6133
+msgid "Copy left value to right side"
+msgstr ""
+
+#: settings/settings.ui:4511
+msgid "Child Hovered"
+msgstr ""
+
+#: settings/settings.ui:4527 settings/settings.ui:4584
+msgid "Center Appearance"
+msgstr ""
+
+#: settings/settings.ui:4543
+msgid "Center Hovered"
+msgstr ""
+
+#: settings/settings.ui:4699 settings/settings.ui:4904
+#: settings/settings.ui:5780 settings/settings.ui:5857
+msgid "Parent"
+msgstr ""
+
+#: settings/settings.ui:4732 settings/settings.ui:4937
+msgid "Pick Child Item Color"
+msgstr ""
+
+#: settings/settings.ui:5087 settings/settings.ui:5925
+msgid "Offset"
+msgstr ""
+
+#: settings/settings.ui:5247 settings/settings.ui:6044
+msgid "Draw Above"
+msgstr ""
+
+#: settings/settings.ui:5259
+msgid "Render children above the center item."
+msgstr ""
+
+#: settings/settings.ui:5624 settings/settings.ui:5665
+msgid "Children Appearance"
+msgstr ""
+
+#: settings/settings.ui:5813 settings/settings.ui:5890
+msgid "Pick Grandchild Item Color"
+msgstr ""
+
+#: settings/settings.ui:6056
+msgid "Render grandchildren above children items."
+msgstr ""
+
+#: settings/settings.ui:6212
+msgid "Parent Hovered"
+msgstr ""
+
+#: settings/settings.ui:6228 settings/settings.ui:6269
+msgid "Grandchildren Appearance"
+msgstr ""
+
+#: settings/settings.ui:6337
+msgid "Trace Thickness"
+msgstr ""
+
+#: settings/settings.ui:6355
+msgid "Minimum Trace Segment Length"
+msgstr ""
+
+#: settings/settings.ui:6367
+msgid "This will only affect new selections in the Live Preview."
+msgstr ""
+
+#: settings/settings.ui:6388
+msgid "Trace Color"
+msgstr ""
+
+#: settings/settings.ui:6434
+msgid "Pick Trace Color"
+msgstr ""
+
+#: settings/settings.ui:6512 settings/settings.ui:6563
+msgid "Trace Appearance"
+msgstr ""
+
+#: settings/settings.ui:6528
+msgid "The trace is the connecting line between selected menu items."
+msgstr ""
+
+#: settings/settings.ui:6603
+msgid "Minimum Stroke Angle"
+msgstr ""
+
+#: settings/settings.ui:6615
+msgid "Smaller turns will not lead to selections."
+msgstr ""
+
+#: settings/settings.ui:6688
+msgid "Minimum Stroke Length"
+msgstr ""
+
+#: settings/settings.ui:6700
+msgid ""
+"Shorter gestures will not lead to selections.\n"
+"This is multiplied by the Global Scale value."
+msgstr ""
+
+#: settings/settings.ui:6775
+msgid "Jitter Threshold"
+msgstr ""
+
+#: settings/settings.ui:6787
+msgid ""
+"Smaller movements will not be considered.\n"
+"This is multiplied by the Global Scale value."
+msgstr ""
+
+#: settings/settings.ui:6861
+msgid "Selection Timeout"
+msgstr ""
+
+#: settings/settings.ui:6873
+msgid ""
+"If your pointer is stationary for this many milliseconds, \n"
+"the current item will be selected."
+msgstr ""
+
+#: settings/settings.ui:6959
+msgid "Show Screencast Mouse"
+msgstr ""
+
+#: settings/settings.ui:6971
+msgid ""
+"Shows a big additional mouse pointer visualizing mouse clicks.\n"
+"This can be used if you want to capture a video of Fly-Pie."
+msgstr ""
+
+#: settings/settings.ui:7031 settings/settings.ui:7082
+msgid "Advanced Settings"
+msgstr ""
+
+#: settings/settings.ui:7047
+msgid "These settings are independent of the presets. "
+msgstr ""
+
+#: settings/settings.ui:7101
+msgid "Settings"
+msgstr ""
+
+#: settings/settings.ui:7159
+msgid "Opens a preview for the selected menu."
+msgstr ""
+
+#: settings/settings.ui:7207
+msgid "Import a menu configuration."
+msgstr ""
+
+#: settings/settings.ui:7228
+msgid "Export the current menu configuration."
+msgstr ""
+
+#: settings/settings.ui:7299
+msgid "Removes the selected item."
+msgstr ""
+
+#: settings/settings.ui:7387 settings/settings.ui:7424
+msgid "Name"
+msgstr ""
+
+#: settings/settings.ui:7422 settings/settings.ui:7423
+#: settings/settings.ui:7521 settings/settings.ui:7522
+msgid "Insert Emoji"
+msgstr ""
+
+#: settings/settings.ui:7457 settings/settings.ui:7523
+msgid "Icon"
+msgstr ""
+
+#: settings/settings.ui:7470
+msgid "Can be an icon name, text, emoji or a file."
+msgstr ""
+
+#: settings/settings.ui:7572
+msgid "Fixed Angle"
+msgstr ""
+
+#: settings/settings.ui:7585
+msgid "See tooltip for details."
+msgstr ""
+
+#: settings/settings.ui:7608
+msgid ""
+"Fixed angles can be used to ensure that an item remains at the same position "
+"even if other items are added or removed. This way you can edit a menu even "
+"if your muscles already learned the item's direction.\n"
+"\n"
+"However, there is a <b>restriction</b> on the fixed angles. Inside a menu "
+"the fixed angles must be monotonically increasing, that is each fixed angle "
+"must be larger than any previous fixed angle.\n"
+"\n"
+"In order to prevent weird behavior, <b>fixed angles will be removed</b> if "
+"an item is dragged to another position in the menu.\n"
+"\n"
+"<b>Use -1 to disable this feature</b>."
+msgstr ""
+
+#: settings/settings.ui:7659 settings/settings.ui:7722
+msgid "Command"
+msgstr ""
+
+#: settings/settings.ui:7672
+msgid "Use the button to list installed apps!"
+msgstr ""
+
+#: settings/settings.ui:7772 settings/settings.ui:7835
+msgid "File"
+msgstr ""
+
+#: settings/settings.ui:7785 settings/settings.ui:7898
+msgid "It will be opened with the default app."
+msgstr ""
+
+#: settings/settings.ui:7885 settings/settings.ui:7921
+msgid "URI"
+msgstr ""
+
+#: settings/settings.ui:7961 settings/settings.ui:7997
+msgid "Text"
+msgstr ""
+
+#: settings/settings.ui:7974
+msgid "This text will be inserted."
+msgstr ""
+
+#: settings/settings.ui:8037
+msgid "Max Item Count"
+msgstr ""
+
+#: settings/settings.ui:8050
+msgid "Limits the number of children."
+msgstr ""
+
+#: settings/settings.ui:8117 settings/settings.ui:8226
+msgid "Shortcut"
+msgstr ""
+
+#: settings/settings.ui:8130
+msgid "This shortcut will be simulated."
+msgstr ""
+
+#: settings/settings.ui:8239
+msgid "This will open the menu."
+msgstr ""
+
+#: settings/settings.ui:8313
+msgid "Open in Screen Center"
+msgstr ""
+
+#: settings/settings.ui:8407
+msgid "Menu Editor"
+msgstr ""
+
+#: settings/settings.ui:8484
+msgid "Achievements"
+msgstr ""
+
+#: settings/DefaultMenu.js:28 settings/ExampleMenu.js:25
+msgid "Example Menu"
+msgstr ""
+
+#: settings/DefaultMenu.js:36
+msgid "Sound"
+msgstr ""
+
+#: settings/DefaultMenu.js:41
+msgid "Play / Pause"
+msgstr ""
+
+#: settings/DefaultMenu.js:47
+msgid "Mute"
+msgstr ""
+
+#: settings/DefaultMenu.js:53
+msgid "Next Title"
+msgstr ""
+
+#: settings/DefaultMenu.js:60
+msgid "Previous Title"
+msgstr ""
+
+#: settings/DefaultMenu.js:69
+msgid "Window Management"
+msgstr ""
+
+#: settings/DefaultMenu.js:74
+msgid "Maximize Window"
+msgstr ""
+
+#: settings/DefaultMenu.js:80
+msgid "Open Windows"
+msgstr ""
+
+#: settings/DefaultMenu.js:85
+msgid "Gnome Shell"
+msgstr ""
+
+#: settings/DefaultMenu.js:90 settings/ExampleMenu.js:240
+msgid "Up"
+msgstr ""
+
+#: settings/DefaultMenu.js:97
+msgid "Overview"
+msgstr ""
+
+#: settings/DefaultMenu.js:103 settings/ExampleMenu.js:243
+msgid "Down"
+msgstr ""
+
+#: settings/DefaultMenu.js:110
+msgid "Show Apps"
+msgstr ""
+
+#: settings/DefaultMenu.js:118
+msgid "Close Window"
+msgstr ""
+
+#: settings/DefaultMenu.js:126
+msgid "Bookmarks"
+msgstr ""
+
+#: settings/DefaultMenu.js:131
+msgid "Fly-Pie Settings"
+msgstr ""
+
+#: settings/DefaultMenu.js:136
+msgid "Favorites"
+msgstr ""
+
+#: settings/ExampleMenu.js:27
+msgid "Animals & Nature"
+msgstr ""
+
+#: settings/ExampleMenu.js:31
+msgid "Flowers"
+msgstr ""
+
+#: settings/ExampleMenu.js:34
+msgid "Tulip"
+msgstr ""
+
+#: settings/ExampleMenu.js:35
+msgid "Rose"
+msgstr ""
+
+#: settings/ExampleMenu.js:36
+msgid "Sunflower"
+msgstr ""
+
+#: settings/ExampleMenu.js:37
+msgid "Blossom"
+msgstr ""
+
+#: settings/ExampleMenu.js:38
+msgid "Bouquet"
+msgstr ""
+
+#: settings/ExampleMenu.js:42
+msgid "Mammals"
+msgstr ""
+
+#: settings/ExampleMenu.js:45
+msgid "Cat"
+msgstr ""
+
+#: settings/ExampleMenu.js:46
+msgid "Ox"
+msgstr ""
+
+#: settings/ExampleMenu.js:47
+msgid "Dog"
+msgstr ""
+
+#: settings/ExampleMenu.js:48
+msgid "Pig"
+msgstr ""
+
+#: settings/ExampleMenu.js:49
+msgid "Monkey"
+msgstr ""
+
+#: settings/ExampleMenu.js:53
+msgid "Reptiles"
+msgstr ""
+
+#: settings/ExampleMenu.js:56
+msgid "Crocodile"
+msgstr ""
+
+#: settings/ExampleMenu.js:57
+msgid "Snake"
+msgstr ""
+
+#: settings/ExampleMenu.js:58
+msgid "Turtle"
+msgstr ""
+
+#: settings/ExampleMenu.js:59
+msgid "T-Rex"
+msgstr ""
+
+#: settings/ExampleMenu.js:60
+msgid "Apatosaurus"
+msgstr ""
+
+#: settings/ExampleMenu.js:66
+msgid "Food & Drink"
+msgstr ""
+
+#: settings/ExampleMenu.js:70
+msgid "Fruit"
+msgstr ""
+
+#: settings/ExampleMenu.js:73
+msgid "Apple"
+msgstr ""
+
+#: settings/ExampleMenu.js:74
+msgid "Watermelon"
+msgstr ""
+
+#: settings/ExampleMenu.js:75
+msgid "Lemon"
+msgstr ""
+
+#: settings/ExampleMenu.js:76
+msgid "Banana"
+msgstr ""
+
+#: settings/ExampleMenu.js:77
+msgid "Strawberry"
+msgstr ""
+
+#: settings/ExampleMenu.js:81
+msgid "Drink"
+msgstr ""
+
+#: settings/ExampleMenu.js:84
+msgid "Teacup"
+msgstr ""
+
+#: settings/ExampleMenu.js:85
+msgid "Coffee"
+msgstr ""
+
+#: settings/ExampleMenu.js:86
+msgid "Beer"
+msgstr ""
+
+#: settings/ExampleMenu.js:87
+msgid "Whiskey"
+msgstr ""
+
+#: settings/ExampleMenu.js:88
+msgid "Cocktail"
+msgstr ""
+
+#: settings/ExampleMenu.js:92
+msgid "Sweets"
+msgstr ""
+
+#: settings/ExampleMenu.js:95
+msgid "Shortcake"
+msgstr ""
+
+#: settings/ExampleMenu.js:96
+msgid "Candy"
+msgstr ""
+
+#: settings/ExampleMenu.js:97
+msgid "Doughnut"
+msgstr ""
+
+#: settings/ExampleMenu.js:98
+msgid "Cookie"
+msgstr ""
+
+#: settings/ExampleMenu.js:99
+msgid "Chocolate"
+msgstr ""
+
+#: settings/ExampleMenu.js:105
+msgid "Activities"
+msgstr ""
+
+#: settings/ExampleMenu.js:109
+msgid "Games"
+msgstr ""
+
+#: settings/ExampleMenu.js:112
+msgid "Billards"
+msgstr ""
+
+#: settings/ExampleMenu.js:113
+msgid "Mahjong"
+msgstr ""
+
+#: settings/ExampleMenu.js:114
+msgid "Bowling"
+msgstr ""
+
+#: settings/ExampleMenu.js:115
+msgid "Darts"
+msgstr ""
+
+#: settings/ExampleMenu.js:116
+msgid "Video Game"
+msgstr ""
+
+#: settings/ExampleMenu.js:120
+msgid "Sports"
+msgstr ""
+
+#: settings/ExampleMenu.js:123
+msgid "Cricket"
+msgstr ""
+
+#: settings/ExampleMenu.js:124
+msgid "Ice Hockey"
+msgstr ""
+
+#: settings/ExampleMenu.js:125
+msgid "Tennis"
+msgstr ""
+
+#: settings/ExampleMenu.js:126
+msgid "Fishing"
+msgstr ""
+
+#: settings/ExampleMenu.js:127
+msgid "Skiing"
+msgstr ""
+
+#: settings/ExampleMenu.js:131
+msgid "Places"
+msgstr ""
+
+#: settings/ExampleMenu.js:134
+msgid "Mount Fuji"
+msgstr ""
+
+#: settings/ExampleMenu.js:135
+msgid "Mount Etna"
+msgstr ""
+
+#: settings/ExampleMenu.js:136
+msgid "Statue of Liberty"
+msgstr ""
+
+#: settings/ExampleMenu.js:137
+msgid "Japan"
+msgstr ""
+
+#: settings/ExampleMenu.js:138
+msgid "Moyai"
+msgstr ""
+
+#: settings/ExampleMenu.js:144
+msgid "Objects"
+msgstr ""
+
+#: settings/ExampleMenu.js:148
+msgid "Cars"
+msgstr ""
+
+#: settings/ExampleMenu.js:151
+msgid "Bus"
+msgstr ""
+
+#: settings/ExampleMenu.js:152
+msgid "Fire Engine"
+msgstr ""
+
+#: settings/ExampleMenu.js:153
+msgid "Automobile"
+msgstr ""
+
+#: settings/ExampleMenu.js:154
+msgid "Tractor"
+msgstr ""
+
+#: settings/ExampleMenu.js:155
+msgid "Truck"
+msgstr ""
+
+#: settings/ExampleMenu.js:159
+msgid "Buildings"
+msgstr ""
+
+#: settings/ExampleMenu.js:162
+msgid "Post Office"
+msgstr ""
+
+#: settings/ExampleMenu.js:163
+msgid "School"
+msgstr ""
+
+#: settings/ExampleMenu.js:164
+msgid "Hospital"
+msgstr ""
+
+#: settings/ExampleMenu.js:165
+msgid "Bank"
+msgstr ""
+
+#: settings/ExampleMenu.js:166
+msgid "Love Hotel"
+msgstr ""
+
+#: settings/ExampleMenu.js:170
+msgid "Instruments"
+msgstr ""
+
+#: settings/ExampleMenu.js:173
+msgid "Saxophone"
+msgstr ""
+
+#: settings/ExampleMenu.js:174
+msgid "Guitar"
+msgstr ""
+
+#: settings/ExampleMenu.js:175
+msgid "Trumpet"
+msgstr ""
+
+#: settings/ExampleMenu.js:176
+msgid "Microphone"
+msgstr ""
+
+#: settings/ExampleMenu.js:177
+msgid "Drum"
+msgstr ""
+
+#: settings/ExampleMenu.js:183
+msgid "Smileys & People"
+msgstr ""
+
+#: settings/ExampleMenu.js:187
+msgid "Happy Faces"
+msgstr ""
+
+#: settings/ExampleMenu.js:190
+msgid "Smiley"
+msgstr ""
+
+#: settings/ExampleMenu.js:191
+msgid "Winking Face"
+msgstr ""
+
+#: settings/ExampleMenu.js:192
+msgid "Face With Smiling Eyes"
+msgstr ""
+
+#: settings/ExampleMenu.js:193
+msgid "Face With Sweat"
+msgstr ""
+
+#: settings/ExampleMenu.js:194
+msgid "ROFL"
+msgstr ""
+
+#: settings/ExampleMenu.js:198
+msgid "Angry Faces"
+msgstr ""
+
+#: settings/ExampleMenu.js:201
+msgid "Vomiting Face"
+msgstr ""
+
+#: settings/ExampleMenu.js:202
+msgid "Skeptical Face"
+msgstr ""
+
+#: settings/ExampleMenu.js:203
+msgid "Pouting Face"
+msgstr ""
+
+#: settings/ExampleMenu.js:204
+msgid "Angry Face"
+msgstr ""
+
+#: settings/ExampleMenu.js:205
+msgid "Very Angry Face"
+msgstr ""
+
+#: settings/ExampleMenu.js:209
+msgid "Surprised Faces"
+msgstr ""
+
+#: settings/ExampleMenu.js:212
+msgid "Flushed Face"
+msgstr ""
+
+#: settings/ExampleMenu.js:213
+msgid "Anguished Face"
+msgstr ""
+
+#: settings/ExampleMenu.js:214
+msgid "Astonished Face"
+msgstr ""
+
+#: settings/ExampleMenu.js:215
+msgid "Screaming Face"
+msgstr ""
+
+#: settings/ExampleMenu.js:216
+msgid "Pouff"
+msgstr ""
+
+#: settings/ExampleMenu.js:222
+msgid "Symbols"
+msgstr ""
+
+#: settings/ExampleMenu.js:226
+msgid "Star Signs"
+msgstr ""
+
+#: settings/ExampleMenu.js:229
+msgid "Taurus"
+msgstr ""
+
+#: settings/ExampleMenu.js:230
+msgid "Cancer"
+msgstr ""
+
+#: settings/ExampleMenu.js:231
+msgid "Virgo"
+msgstr ""
+
+#: settings/ExampleMenu.js:232
+msgid "Scorpius"
+msgstr ""
+
+#: settings/ExampleMenu.js:233
+msgid "Capricorn"
+msgstr ""
+
+#: settings/ExampleMenu.js:237
+msgid "Arrows"
+msgstr ""
+
+#: settings/ExampleMenu.js:241
+msgid "Right"
+msgstr ""
+
+#: settings/ExampleMenu.js:242
+msgid "Twisted"
+msgstr ""
+
+#: settings/ExampleMenu.js:244
+msgid "Left"
+msgstr ""
+
+#: settings/ExampleMenu.js:248
+msgid "Info Signs"
+msgstr ""
+
+#: settings/ExampleMenu.js:251
+msgid "Litter Bin"
+msgstr ""
+
+#: settings/ExampleMenu.js:252
+msgid "Potable Water"
+msgstr ""
+
+#: settings/ExampleMenu.js:253
+msgid "Mens"
+msgstr ""
+
+#: settings/ExampleMenu.js:254
+msgid "Womens"
+msgstr ""
+
+#: settings/ExampleMenu.js:255
+msgid "Baby"
+msgstr ""
+
+#: settings/MenuEditor.js:211
+msgid "Export Menu Configuration"
+msgstr ""
+
+#: settings/MenuEditor.js:220 settings/MenuEditor.js:282
+#: settings/Settings.js:351
+msgid "JSON Files"
+msgstr ""
+
+#: settings/MenuEditor.js:227 settings/MenuEditor.js:289
+#: settings/Settings.js:358
+msgid "All Files"
+msgstr ""
+
+#: settings/MenuEditor.js:231 settings/MenuEditor.js:293
+#: settings/Settings.js:362
+msgid "Cancel"
+msgstr ""
+
+#: settings/MenuEditor.js:232
+msgid "Export"
+msgstr ""
+
+#: settings/MenuEditor.js:257
+msgid "Failed to export the menu configuration!"
+msgstr ""
+
+#: settings/MenuEditor.js:274
+msgid "Import Menu Configuration"
+msgstr ""
+
+#: settings/MenuEditor.js:294
+msgid "Import"
+msgstr ""
+
+#: settings/MenuEditor.js:316
+msgid "Failed to import menu configuration!"
+msgstr ""
+
+#: settings/MenuEditor.js:1074
+msgid "You should try to have no more than twelve items in your menus."
+msgstr ""
+
+#: settings/MenuEditor.js:1075
+msgid ""
+"You will find it more easy to learn item positions if you have an even "
+"number of entries. Four, six and eight are good numbers."
+msgstr ""
+
+#: settings/MenuEditor.js:1076
+msgid ""
+"The source code of Fly-Pie is available on <a href=\"https://github.com/"
+"Schneegans/Fly-Pie\">Github</a>."
+msgstr ""
+
+#: settings/MenuEditor.js:1077
+msgid ""
+"Suggestions can be posted on <a href=\"https://github.com/Schneegans/Fly-Pie/"
+"issues\">Github</a>."
+msgstr ""
+
+#: settings/MenuEditor.js:1078
+msgid ""
+"Bugs can be reported on <a href=\"https://github.com/Schneegans/Fly-Pie/"
+"issues\">Github</a>."
+msgstr ""
+
+#: settings/MenuEditor.js:1079
+msgid ""
+"Deep hierarchies are pretty efficient. Put submenus into submenus in "
+"submenus!"
+msgstr ""
+
+#: settings/MenuEditor.js:1080
+msgid ""
+"If you delete all Pies, log out and log in again, the default configuration "
+"will be restored."
+msgstr ""
+
+#: settings/MenuEditor.js:1081
+msgid "You can reorder the menu items on the left via drag and drop."
+msgstr ""
+
+#: settings/MenuEditor.js:1082
+msgid ""
+"You can drop directories, files, links and desktop files to the menu "
+"hierarchy on the left."
+msgstr ""
+
+#: settings/MenuEditor.js:1083
+msgid ""
+"You can copy menu items by holding the Control key while dragging them to "
+"another location."
+msgstr ""
+
+#: settings/Settings.js:342
+msgid "Save Preset"
+msgstr ""
+
+#: settings/Settings.js:363
+msgid "Save"
+msgstr ""
