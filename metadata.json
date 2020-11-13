@@ -2,6 +2,7 @@
     "uuid": "flypie@schneegans.github.com",
     "description": "A marking menu which can be used to launch applications, simulate hotkeys, open URLs and much more.",
     "name": "Fly-Pie",
+    "gettext-domain": "flypie",
     "settings-schema": "org.gnome.shell.extensions.flypie",
     "shell-version": [
         "3.34",

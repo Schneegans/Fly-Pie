@@ -8,11 +8,14 @@
 
 'use strict';
 
-const Me       = imports.misc.extensionUtils.getCurrentExtension();
-const Settings = Me.imports.settings.Settings.Settings;
+const ExtensionUtils = imports.misc.extensionUtils;
+const Me             = imports.misc.extensionUtils.getCurrentExtension();
+const Settings       = Me.imports.settings.Settings.Settings;
 
 // Like in 'extension.js' this is used for any one-time setup like translations.
-function init() {}
+function init() {
+  ExtensionUtils.initTranslations();
+}
 
 // This function is called when the preferences window is created to build and return a
 // Gtk widget. We create a new instance of the settings class each time this method is
