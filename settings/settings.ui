@@ -1315,7 +1315,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
-                            <property name="label" translatable="yes">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="label">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
@@ -1333,7 +1333,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="label" translatable="yes">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
+                                <property name="label">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                                 <property name="use_markup">True</property>
                               </object>
                               <packing>
@@ -1764,7 +1764,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
-                            <property name="label" translatable="yes">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="label">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
@@ -1782,7 +1782,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="label" translatable="yes">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
+                                <property name="label">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                                 <property name="use_markup">True</property>
                               </object>
                               <packing>
@@ -2042,7 +2042,7 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                         <property name="halign">center</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
-                        <property name="label" translatable="yes">🎉️ Congratulations! 🎉️ </property>
+                        <property name="label" translatable="yes">🎉️ Congratulations! 🎉️</property>
                         <property name="justify">center</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
@@ -2367,7 +2367,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Open Test Menu</property>
+                                    <property name="label" translatable="yes">Open Preview Menu</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
@@ -2559,7 +2559,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <property name="can_focus">False</property>
                                             <property name="halign">start</property>
                                             <property name="vexpand">True</property>
-                                            <property name="label" translatable="yes">Load Presets</property>
+                                            <property name="label" translatable="yes">Load a Preset</property>
                                           </object>
                                           <packing>
                                             <property name="left_attach">0</property>
@@ -2580,7 +2580,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <property name="tooltip_text" translatable="yes">Create a random preset</property>
+                                    <property name="tooltip_text" translatable="yes">Initializes the settings below to random values</property>
                                     <child>
                                       <object class="GtkGrid">
                                         <property name="visible">True</property>
@@ -3046,45 +3046,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Easing Mode</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Used for position and scale updates.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">6</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -3129,6 +3090,18 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">0</property>
                                 <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Easing Mode</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">6</property>
                               </packing>
                             </child>
                           </object>
@@ -3196,6 +3169,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
+                                    <property name="margin_right">20</property>
                                     <property name="label" translatable="yes">Size</property>
                                   </object>
                                   <packing>
@@ -3208,6 +3182,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
+                                    <property name="margin_right">20</property>
                                     <property name="label" translatable="yes">Clicking inside the inner radius
 will cancel the selection.</property>
                                     <style>
@@ -3514,7 +3489,7 @@ will cancel the selection.</property>
                                     <property name="valign">center</property>
                                     <property name="margin_right">5</property>
                                     <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Normal</property>
+                                    <property name="label" translatable="yes">Inactive</property>
                                     <property name="justify">right</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -3729,46 +3704,6 @@ will cancel the selection.</property>
                             <property name="margin_bottom">10</property>
                             <property name="row_spacing">10</property>
                             <property name="column_spacing">10</property>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Icon Scale</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Relative to the item's size.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">7</property>
-                              </packing>
-                            </child>
                             <child>
                               <object class="GtkScale">
                                 <property name="visible">True</property>
@@ -4325,6 +4260,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
+                                <property name="margin_right">20</property>
                                 <property name="label" translatable="yes">Icon Opacity</property>
                               </object>
                               <packing>
@@ -4508,7 +4444,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Child Hovered</property>
+                                <property name="label" translatable="yes">With Hovered Child</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -4540,7 +4476,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Center Hovered</property>
+                                <property name="label" translatable="yes">Without Hovered Child</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -4549,6 +4485,19 @@ will cancel the selection.</property>
                               <packing>
                                 <property name="left_attach">3</property>
                                 <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Icon Scale</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">7</property>
                               </packing>
                             </child>
                             <child>
@@ -5092,45 +5041,6 @@ will cancel the selection.</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Icon Scale</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Relative to the item's size.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">9</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkScale">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -5332,6 +5242,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
+                                <property name="margin_right">20</property>
                                 <property name="label" translatable="yes">Icon Opacity</property>
                               </object>
                               <packing>
@@ -5589,7 +5500,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Normal</property>
+                                <property name="label" translatable="yes">Standard State</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -5605,7 +5516,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Hovered</property>
+                                <property name="label" translatable="yes">Hovered State</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -5630,6 +5541,19 @@ will cancel the selection.</property>
                                 <property name="left_attach">1</property>
                                 <property name="top_attach">0</property>
                                 <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Icon Scale</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">9</property>
                               </packing>
                             </child>
                             <child>
@@ -6075,7 +5999,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Normal</property>
+                                <property name="label" translatable="yes">Standard State</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -6209,7 +6133,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Parent Hovered</property>
+                                <property name="label" translatable="yes">With Hovered Parent</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -6334,7 +6258,8 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="label" translatable="yes">Trace Thickness</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Thickness</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -6342,50 +6267,12 @@ will cancel the selection.</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_right">20</property>
-                                <property name="row_spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Minimum Trace Segment Length</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">This will only affect new selections in the Live Preview.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="label" translatable="yes">Trace Color</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Color</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -6543,6 +6430,19 @@ will cancel the selection.</property>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">0</property>
                                 <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Minimum Segment Length</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">4</property>
                               </packing>
                             </child>
                           </object>
@@ -7044,7 +6944,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="margin_bottom">8</property>
-                                    <property name="label" translatable="yes">These settings are independent of the presets. </property>
+                                    <property name="label" translatable="yes">These settings are independent of the presets.</property>
                                     <property name="justify">center</property>
                                     <property name="wrap">True</property>
                                     <style>
@@ -7204,7 +7104,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="tooltip_text" translatable="yes">Import a menu configuration.</property>
+                                <property name="tooltip_text" translatable="yes">Imports a menu configuration.</property>
                                 <child>
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
@@ -7225,7 +7125,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
-                                <property name="tooltip_text" translatable="yes">Export the current menu configuration.</property>
+                                <property name="tooltip_text" translatable="yes">Exports the current menu configuration.</property>
                                 <child>
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
