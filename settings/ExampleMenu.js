@@ -8,8 +8,7 @@
 
 'use strict';
 
-const Gettext = imports.gettext;
-const _       = Gettext.gettext;
+const _ = imports.gettext.domain('flypie').gettext;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This creates a Demo Menu structure which is shown when the preview button is         //
@@ -81,7 +80,7 @@ var ExampleMenu = class ExampleMenu {
               name: _('Drink'),
               icon: '🍷',
               children: [
-                {name: _('Teacup'), icon: '🍵'},
+                {name: _('Tea'), icon: '🍵'},
                 {name: _('Coffee'), icon: '☕'},
                 {name: _('Beer'), icon: '🍺'},
                 {name: _('Whiskey'), icon: '🥃'},
@@ -180,7 +179,7 @@ var ExampleMenu = class ExampleMenu {
           ]
         },
         {
-          name: _('Smileys & People'),
+          name: _('Smileys'),
           icon: '😀',
           children: [
             {
