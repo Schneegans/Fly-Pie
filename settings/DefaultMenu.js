@@ -10,8 +10,7 @@
 
 const Gio = imports.gi.Gio;
 
-const Gettext = imports.gettext;
-const _       = Gettext.gettext;
+const _ = imports.gettext.domain('flypie').gettext;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This creates a default menu configuration which is used when the user has no menus   //
@@ -77,11 +76,6 @@ var DefaultMenu = class DefaultMenu {
               data: '<Alt>F10',
             },
             {
-              name: _('Open Windows'),
-              icon: 'preferences-system-windows',
-              type: 'RunningApps',
-            },
-            {
               name: _('Gnome Shell'),
               icon: 'preferences-desktop-remote-desktop',
               type: 'Submenu',
@@ -115,6 +109,11 @@ var DefaultMenu = class DefaultMenu {
               ]
             },
             {
+              name: _('Open Windows'),
+              icon: 'preferences-system-windows',
+              type: 'RunningApps',
+            },
+            {
               name: _('Close Window'),
               icon: 'window-close',
               type: 'Shortcut',
@@ -133,7 +132,8 @@ var DefaultMenu = class DefaultMenu {
           type: 'Command',
           data: 'gnome-extensions prefs flypie@schneegans.github.com',
         },
-        {name: _('Favorites'), icon: 'emblem-favorite', type: 'Favorites'}
+        {name: _('Favorites'), icon: 'emblem-favorite', type: 'Favorites'},
+        {name: _('System'), icon: 'system-log-out', type: 'System'}
       ]
     };
 
