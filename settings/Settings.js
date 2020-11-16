@@ -10,8 +10,7 @@
 
 const {GLib, Gtk, Gio, Gdk} = imports.gi;
 
-const Gettext = imports.gettext;
-const _       = Gettext.gettext;
+const _ = imports.gettext.domain('flypie').gettext;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
