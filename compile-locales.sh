@@ -13,6 +13,11 @@
 
 # Get the location of this script.
 FLYPIE="$( cd "$( dirname "$0" )" && pwd )"
+# Check if all necessary commands are available
+if ! which msgfmt; then
+  echo "ERROR: Could not find msgfmt. On Ubuntu based systems, check if the gettext package is installed!"
+  exit 1
+fi
 
 for FILE in `ls $FLYPIE/po/*.po`
 do
