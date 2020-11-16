@@ -12,7 +12,7 @@ const ExtensionUtils = imports.misc.extensionUtils;
 const Me             = imports.misc.extensionUtils.getCurrentExtension();
 const Settings       = Me.imports.settings.Settings.Settings;
 
-// Like in 'extension.js' this is used for any one-time setup like translations.
+// Like in 'extension.js' this is used for setting up the translations.
 function init() {
   ExtensionUtils.initTranslations();
 }

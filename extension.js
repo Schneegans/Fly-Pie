@@ -25,8 +25,8 @@ const Daemon         = Me.imports.daemon.Daemon.Daemon;
 
 let daemon;
 
-// This function is called once when the extension is loaded, not enabled. Nothing to be
-// done here for Fly-Pie.
+// This function is called once when the extension is loaded, not enabled. For Fly-Pie,
+// we only need to initialize gettext.
 function init() {
   ExtensionUtils.initTranslations();
 }
