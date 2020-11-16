@@ -1,22 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# German translation for the Fly-Pie GNOME Shell Extension.
+# Copyright (C) 2020 Simon Schneegans
+# This file is distributed under the same license as the Fly-Pie package.
+# Philipp Kiemle <philipp.kiemle@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-15 20:51+0100\n"
-"PO-Revision-Date: 2020-11-15 20:54+0100\n"
-"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
+"PO-Revision-Date: 2020-11-16 14:54+0100\n"
+"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: \n"
-"Language: de\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 3.38.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: settings/settings.ui:53
 msgid ""
@@ -32,7 +32,7 @@ msgstr ""
 "Besuchen Sie die <a href=\"https://github.com/Schneegans/Fly-Pie\">Homepage "
 "von Fly-Pie</a> für weitere Informationen.\n"
 "\n"
-"Immer wenn Sie einen Fehler 🐞️ entdecken oder sich eine neue Funktion 🎉️ "
+"Immer wenn Sie einen Bug 🐞️ entdecken oder sich eine neue Funktion 🎉️ "
 "wünschen, können Sie ein Ticket auf <a href=\"https://github.com/Schneegans/"
 "Fly-Pie/issues\">Github</a> eröffnen."
 
@@ -89,10 +89,10 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
-"Sie können Fly-Pie unter anderem verwenden um Anwendungen zu starten, "
-"Tastenkombinationen zu simulieren oder URLs zu öffnen. Diese Einführung "
-"zeigt Ihnen, wie man Fly-Pie möglichst effizient verwendet. Mit der großen "
-"Schaltfläche können Sie ein Beispielmenü öffnen!"
+"Sie können Fly-Pie verwenden, um Anwendungen zu starten, Tastenkombinationen "
+"zu simulieren, URLs zu öffnen und vieles mehr. Diese Einführung zeigt Ihnen, "
+"wie Sie Fly-Pie möglichst effizient verwenden. Mit der großen Schaltfläche "
+"können Sie ein Beispielmenü öffnen!"
 
 #: settings/settings.ui:1083 settings/settings.ui:1210
 #: settings/settings.ui:1513 settings/settings.ui:1660
@@ -145,7 +145,7 @@ msgstr ""
 "<b>Einträge werden gewählt, indem man in das zugehörige Kreissegment klickt</"
 "b>.\n"
 "\n"
-"Übrigens müssen Sie nicht warten bis die Animation fertig ist, da die "
+"Übrigens müssen Sie nicht warten, bis die Animation fertig ist, da die "
 "Kreissegmente eines geöffneten Untermenüs sofort an der Maus erscheinen.\n"
 "\n"
 "Klicken Sie auf <b>Weiter</b> für eine praktische Übung!"
@@ -213,13 +213,13 @@ msgid ""
 "\n"
 "Click <b>next</b> for an additional practice session!"
 msgstr ""
-"Versuchen Sie sich den Pfad zu einem Eintrag einzuprägen. Öffnen Sie das "
+"Versuchen Sie, sich den Pfad zu einem Eintrag einzuprägen. Öffnen Sie das "
 "Menü und <b>zeichnen Sie den Pfad mit der Maus</b>. Beginnen Sie mit "
 "einzelne Abschnitten des Pfades. Später können Sie den gesamten Pfad mit "
 "einer Geste zeichnen!\n"
 "\n"
-"Es ist hilfreich, bewusst kantige Zick-Zack-Linien zu zeichnen und <b>keine "
-"unsicheren kurvigen Pfade!</b>\n"
+"Sie erzielen ein besseres Ergebnis mit kantigen Zick-Zack-Linien statt "
+"<b>unsicheren, kurvigen Pfaden!</b>\n"
 "\n"
 "Klicken Sie auf <b>Weiter</b> für noch eine Praxisübung!"
 
@@ -283,7 +283,7 @@ msgstr ""
 "\n"
 "Wenn Ihnen Fly-Pie gefällt, können Sie gerne eine positive Bewertung auf <a "
 "href=\"https://extensions.gnome.org/extension/3433/fly-pie/\">extensions."
-"gnome.org</a> schreiben! Immer wenn Sie einen 🐞️ Fehler entdecken oder eine "
+"gnome.org</a> schreiben! Immer wenn Sie einen 🐞️ Bug entdecken oder eine "
 "Funktion vermissen, können Sie ein entsprechendes Ticket auf <a href="
 "\"https://github.com/Schneegans/Fly-Pie/issues\">Github</a> eröffnen."
 
@@ -335,7 +335,7 @@ msgstr "Initialisiert die Einstellungen weiter unten mit zufälligen Werten"
 
 #: settings/settings.ui:2607
 msgid "Generate Random Preset"
-msgstr "Zufällige Einstellungen"
+msgstr "Zufällige Voreinstellung erzeugen"
 
 #: settings/settings.ui:2714
 msgid "Easing Duration"
@@ -367,7 +367,7 @@ msgstr "Unabhängig von der gewählten Voreinstellung."
 #: settings/settings.ui:6725 settings/settings.ui:6812
 #: settings/settings.ui:6893
 msgid "Reset to default value"
-msgstr "Zurücksetzen"
+msgstr "Auf Standardwert zurücksetzen"
 
 #: settings/settings.ui:2871
 msgid "Font"
@@ -486,7 +486,7 @@ msgstr "Helligkeit"
 #: settings/settings.ui:4746 settings/settings.ui:4790
 #: settings/settings.ui:4951 settings/settings.ui:4971
 msgid "Opacity"
-msgstr "Opazität"
+msgstr "Deckkraft"
 
 #: settings/settings.ui:3927 settings/settings.ui:4012
 #: settings/settings.ui:4618 settings/settings.ui:4823
@@ -501,7 +501,7 @@ msgstr "Auto"
 
 #: settings/settings.ui:4264 settings/settings.ui:5246
 msgid "Icon Opacity"
-msgstr "Symbolopazität"
+msgstr "Symboldeckkraft"
 
 #: settings/settings.ui:4289 settings/settings.ui:4308
 #: settings/settings.ui:4328 settings/settings.ui:4348
@@ -607,7 +607,7 @@ msgstr "Geringere Richtungsänderungen führen nicht zu Selektionen."
 
 #: settings/settings.ui:6588
 msgid "Minimum Stroke Length"
-msgstr "Minimal Gestenlänge"
+msgstr "Minimale Gestenlänge"
 
 #: settings/settings.ui:6600
 msgid ""
@@ -659,7 +659,7 @@ msgstr "Erweiterte Einstellungen"
 
 #: settings/settings.ui:6947
 msgid "These settings are independent of the presets."
-msgstr "Unabhängig von der gewählten Voreinstellung."
+msgstr "Diese Einstellungen sind unabhängig von der gewählten Voreinstellung."
 
 #: settings/settings.ui:7001
 msgid "Settings"
@@ -671,7 +671,7 @@ msgstr "Zeigt eine Vorschau für das gewählte Menü."
 
 #: settings/settings.ui:7107
 msgid "Imports a menu configuration."
-msgstr "Importiert eine zuvor exportierte Menükonfiguration."
+msgstr "Importiert eine Menükonfiguration."
 
 #: settings/settings.ui:7128
 msgid "Exports the current menu configuration."
@@ -704,7 +704,7 @@ msgstr "Fester Winkel"
 
 #: settings/settings.ui:7485
 msgid "See tooltip for details."
-msgstr "Weiter Details im Tooltip."
+msgstr "Weitere Details im Tooltip."
 
 #: settings/settings.ui:7508
 msgid ""
@@ -721,7 +721,7 @@ msgid ""
 "\n"
 "<b>Use -1 to disable this feature</b>."
 msgstr ""
-"Feste Winkel können verwendet werden um sicherzustellen, dass Menüeinträge "
+"Feste Winkel können verwendet werden, um sicherzustellen, dass Menüeinträge "
 "ihre Position nicht ändern, wenn andere Einträge hinzugefügt oder gelöscht "
 "werden. Dadurch können Sie ein Menü editieren, auch wenn bestimmte Einträge "
 "schon in Ihr \"Muskelgedächtnis\" übergegangen sind.\n"
@@ -731,9 +731,9 @@ msgstr ""
 "als seine Vorgänger sein.\n"
 "\n"
 "Um solche Probleme zu vermeiden, <b>wird der feste Winkel eines Eintrags "
-"zurückgesetzt</b> wenn es an eine andere Stelle im Menü verschoben wird.\n"
+"zurückgesetzt</b>, wenn es an eine andere Stelle im Menü verschoben wird.\n"
 "\n"
-"<b>Setzen Sie den festen Winkel auf -1 um ihn nicht zu verwenden</b>."
+"<b>Setzen Sie den festen Winkel auf -1, um ihn nicht zu verwenden</b>."
 
 #: settings/settings.ui:7559 settings/settings.ui:7622
 msgid "Command"
@@ -741,7 +741,7 @@ msgstr "Kommando"
 
 #: settings/settings.ui:7572
 msgid "Use the button to list installed apps!"
-msgstr "Die Schaltfläche zeigt installiert Apps!"
+msgstr "Die Schaltfläche zeigt installierte Apps!"
 
 #: settings/settings.ui:7672 settings/settings.ui:7735
 msgid "File"
@@ -834,8 +834,8 @@ msgid ""
 "playback or to undo / redo operations."
 msgstr ""
 "<b>Tastaturkürzel aktivieren</b> simuliert eine Tastenkombination. Das kann "
-"zum Beispiel verwendet werden um virtuelle Desktops zu wechseln, "
-"Multimediawiedergabe zu steuern oder Aktionen rückgängig zu machen."
+"zum Beispiel verwendet werden, um virtuelle Desktops zu wechseln, "
+"Multimediawiedergabe zu steuern, oder Aktionen rückgängig zu machen."
 
 #: common/ItemRegistry.js:131
 msgid "Insert Text"
@@ -922,7 +922,7 @@ msgid ""
 "hierarchies can be selected quite efficiently, feel free to create submenus "
 "in submenus!"
 msgstr ""
-"<b>Benutzerdefinierte Untermenüs</b> können verwendet werden um Aktionen zu "
+"<b>Benutzerdefinierte Untermenüs</b> können verwendet werden, um Aktionen zu "
 "gruppieren. Da tiefe Hierarchien effizient ausgewählt werden können, sind "
 "Untermenüs in Untermenüs durchaus sinnvoll!"
 
@@ -939,7 +939,7 @@ msgid ""
 "The <b>Devices</b> submenu shows an item for each mounted volume, like USB-"
 "Sticks."
 msgstr ""
-"Das <b>Geräte</b>-Untermenü zeigt angeschlossene Geräte wie USB-Sticks."
+"Das <b>Geräte</b>-Untermenü zeigt angeschlossene Geräte, wie USB-Sticks."
 
 #: common/ItemRegistry.js:295 settings/DefaultMenu.js:125
 msgid "Bookmarks"
@@ -1044,7 +1044,7 @@ msgstr ""
 
 #: common/ItemRegistry.js:557
 msgid "Lock"
-msgstr "Bildschirm Sperren"
+msgstr "Bildschirm sperren"
 
 #: common/ItemRegistry.js:566
 msgid "Suspend"
@@ -1438,7 +1438,7 @@ msgstr "Instrumente"
 
 #: settings/ExampleMenu.js:172
 msgid "Saxophone"
-msgstr "Saxophone"
+msgstr "Saxophon"
 
 #: settings/ExampleMenu.js:173
 msgid "Guitar"
@@ -1478,7 +1478,7 @@ msgstr "Lachende Augen"
 
 #: settings/ExampleMenu.js:192
 msgid "Face With Sweat"
-msgstr "Schweiß"
+msgstr "Schwitzend"
 
 #: settings/ExampleMenu.js:193
 msgid "ROFL"
@@ -1510,7 +1510,7 @@ msgstr "Sehr wütend"
 
 #: settings/ExampleMenu.js:208
 msgid "Surprised Faces"
-msgstr "Überraschte Smileys"
+msgstr "Überrascht"
 
 #: settings/ExampleMenu.js:211
 msgid "Flushed Face"
@@ -1562,7 +1562,7 @@ msgstr "Steinbock"
 
 #: settings/ExampleMenu.js:236
 msgid "Arrows"
-msgstr "Pfeile"
+msgstr "Schütze"
 
 #: settings/ExampleMenu.js:240
 msgid "Right"
@@ -1722,7 +1722,7 @@ msgstr "Möchten Sie das gewählte Element wirklich löschen?"
 
 #: settings/MenuEditor.js:1171
 msgid "This cannot be undone!"
-msgstr "Es kann nicht rückgängig gemacht werden!"
+msgstr "Das kann nicht rückgängig gemacht werden!"
 
 #: settings/Settings.js:341
 msgid "Save Preset"
