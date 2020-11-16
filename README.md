@@ -240,6 +240,7 @@ Emoji | Description
 :wrench: `:wrench:` | When you refactored / improved a small piece of code.
 :hammer: `:hammer:` | When you refactored / improved large parts of the code.
 :sparkles: `:sparkles:` | When you applied clang-format.
+:globe_with_meridians: `:globe_with_meridians:` | When you worked on translations.
 :art: `:art:` | When you improved / added assets like themes.
 :rocket: `:rocket:` | When you improved performance.
 :memo: `:memo:` | When you wrote documentation.
@@ -255,12 +256,6 @@ We suggest using a tool like [Poedit](https://poedit.net/) or the [GNOME Transla
 
 Translations of Fly-Pie are stored in the `po/` directory.
 Just edit an existing translation or create a new one by opening the template [`po/flypie.pot`](po/flypie.pot) with either of this tools.
-
-The template file is part of the source tree and is updated regularly with this command:
-
-```bash
-xgettext --from-code=UTF-8 --output=po/flypie.pot settings/settings.ui */*.js 
-```
 
 Once you are happy with your translation, save a `*.po` file in the `/po` directory and run the following command to compile the strings:
 
