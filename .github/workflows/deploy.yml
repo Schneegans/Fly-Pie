@@ -12,12 +12,11 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-    - name: Checkout Submodules
-      run: git submodule update --init
     - name: Create Release
       run: |
+        ./compile-locales.sh
         mkdir flypie@schneegans.github.com
-        mv common daemon presets resources schemas settings flypie@schneegans.github.com
+        mv common daemon presets resources schemas settings locale flypie@schneegans.github.com
         mv *.js metadata.json README.md LICENSE flypie@schneegans.github.com
         zip -r flypie@schneegans.github.com.zip flypie@schneegans.github.com
     - name: Upload Release
