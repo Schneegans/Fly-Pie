@@ -257,7 +257,7 @@ We suggest using a tool like [Poedit](https://poedit.net/) or the [GNOME Transla
 Translations of Fly-Pie are stored in the `po/` directory.
 Just edit an existing translation or create a new one by opening the template [`po/flypie.pot`](po/flypie.pot) with either of this tools.
 
-Once you are happy with your translation, save a `*.po` file in the `/po` directory and run the following command to compile the strings:
+Once you are happy with your translation, save a `<country code>.po` file in the `/po` directory and run the following command to compile the strings:
 
 ```bash
 ./compile-locales.sh
@@ -266,4 +266,4 @@ Once you are happy with your translation, save a `*.po` file in the `/po` direct
 Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
 Or logout / login if you are on Wayland.
 
-You can add your new `*.po` file with a commit like `:tada: Add new translation for <country code>` and submit a pull request!
+You can add your new `*.po` file with a commit like `:globe_with_meridians: Add new translation for <country code>` and submit a pull request!
