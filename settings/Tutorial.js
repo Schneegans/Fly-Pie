@@ -10,6 +10,8 @@
 
 const {Gio, GdkPixbuf} = imports.gi;
 
+const _ = imports.gettext.domain('flypie').gettext;
+
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
@@ -140,11 +142,11 @@ var Tutorial = class Tutorial {
     const bestTime = this._settings.get_double('best-tutorial-time');
     const lastTime = this._settings.get_double('last-tutorial-time');
 
-    let text = '<big>Last selection time: <b>%d ms</b></big>'.format(lastTime);
+    let text = _('<big>Last selection time: <b>%d ms</b></big>').format(lastTime);
     this._builder.get_object('last-selection-time-1').label = text;
     this._builder.get_object('last-selection-time-2').label = text;
 
-    text = '<big>Best selection time: <b>%d ms</b></big>'.format(bestTime);
+    text = _('<big>Best selection time: <b>%d ms</b></big>').format(bestTime);
     this._builder.get_object('best-selection-time-1').label = text;
     this._builder.get_object('best-selection-time-2').label = text;
 

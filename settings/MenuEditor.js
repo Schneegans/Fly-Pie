@@ -18,8 +18,7 @@ const ItemRegistry  = Me.imports.common.ItemRegistry;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
-const Gettext = imports.gettext;
-const _       = Gettext.gettext;
+const _ = imports.gettext.domain('flypie').gettext;
 
 // These are the different columns of the MenuTreeStore. It contains basically all data of
 // all configured menus.
@@ -343,7 +342,7 @@ var MenuEditor = class MenuEditor {
     // the DISPLAY_ICON column of the menu store; the text is contained in the
     // DISPLAY_NAME column.
     const menuColumn = new Gtk.TreeViewColumn({
-      title: 'Menu Structure',
+      title: _('Menu Structure'),
       expand: true,
       sizing: Gtk.TreeViewColumnSizing.AUTOSIZE
     });
@@ -358,7 +357,7 @@ var MenuEditor = class MenuEditor {
     // The secondary tree view column shows the item's fixed angle, if any. The
     // displayed fixed angle is contained in the menu store's DISPLAY_ANGLE column.
     const angleColumn = new Gtk.TreeViewColumn(
-        {title: 'Fixed Angle', sizing: Gtk.TreeViewColumnSizing.AUTOSIZE});
+        {title: _('Fixed Angle'), sizing: Gtk.TreeViewColumnSizing.AUTOSIZE});
     const angleRender = new Gtk.CellRendererText({sensitive: false, xalign: 0.5});
     angleColumn.pack_start(angleRender, true);
     angleColumn.add_attribute(angleRender, 'markup', this._store.columns.DISPLAY_ANGLE);
@@ -1077,7 +1076,7 @@ var MenuEditor = class MenuEditor {
       _('Suggestions can be posted on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.'),
       _('Bugs can be reported on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.'),
       _('Deep hierarchies are pretty efficient. Put submenus into submenus in submenus!'),
-      _('If you delete all Pies, log out and log in again, the default configuration will be restored.'),
+      _('If you delete all menus, log out and log in again, the default configuration will be restored.'),
       _('You can reorder the menu items on the left via drag and drop.'),
       _('You can drop directories, files, links and desktop files to the menu hierarchy on the left.'),
       _('You can copy menu items by holding the Control key while dragging them to another location.')
@@ -1168,8 +1167,8 @@ var MenuEditor = class MenuEditor {
       modal: true,
       buttons: Gtk.ButtonsType.OK_CANCEL,
       message_type: Gtk.MessageType.QUESTION,
-      text: 'Do you really want to delete the selected item?',
-      secondary_text: 'This cannot be undone!'
+      text: _('Do you really want to delete the selected item?'),
+      secondary_text: _('This cannot be undone!')
     });
 
     // Delete the item on a positive response.

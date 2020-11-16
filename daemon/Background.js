@@ -14,6 +14,8 @@ const {Clutter, Gio, GObject, St} = imports.gi;
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
 
+const _ = imports.gettext.domain('flypie').gettext;
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // This Clutter.Actor represents the background behind the menu. It can be shown in     //
 // normal mode and in preview mode. In normal mode, the background covers the entire    //
@@ -85,11 +87,11 @@ class Background extends Clutter.Actor {
       layout_manager: new Clutter.BoxLayout({spacing: 10})
     });
 
-    this._addControlButton('Close', 'window-close-symbolic', () => {
+    this._addControlButton(_('Close'), 'window-close-symbolic', () => {
       this.emit('close-event');
     });
 
-    this._addControlButton('Flip Side', 'object-flip-horizontal-symbolic', () => {
+    this._addControlButton(_('Flip Side'), 'object-flip-horizontal-symbolic', () => {
       const key = 'preview-on-right-side';
       this._settings.set_boolean(key, !this._settings.get_boolean(key));
     });

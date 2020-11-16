@@ -14,6 +14,8 @@ const ByteArray = imports.byteArray;
 const Me        = imports.misc.extensionUtils.getCurrentExtension();
 const utils     = Me.imports.common.utils;
 
+const _ = imports.gettext.domain('flypie').gettext;
+
 // We import Shell and InputManipulator optionally. When this file is included from the
 // client side, these are available and can be used in the activation code of the actions
 // defined below. If this file is included via the pref.js, both of these are not
@@ -89,12 +91,12 @@ var getItemTypes = () => {
     _itemTypes = {
       // The top-level menu cannot be activated. It should always contain some children.
       Menu: {
-        name: 'Toplevel Menu',
+        name: _('Toplevel Menu'),
         icon: 'view-more-symbolic',
         defaultData: '',
-        subtitle: 'Create as many as you want!',
-        description:
-            'A <b>Toplevel Menu</b> can contain any number of menu items and submenus. However, for precise item selection, a maximum number of twelve items is recommended.\nThe menu can be opened using the shortcut defined above. It is also possible to open a menu with a terminal command. You can read more on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.',
+        subtitle: _('Create as many as you want!'),
+        description: _(
+            'A <b>Toplevel Menu</b> can contain any number of menu items and submenus. However, for precise item selection, a maximum number of twelve items is recommended.\nThe menu can be opened using the shortcut defined above. It is also possible to open a menu with a terminal command. You can read more on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.'),
         settingsType: SettingsTypes.MENU,
         settingsList: 'menu-types-list',
         createItem: (name, icon, centered) => {
@@ -104,12 +106,12 @@ var getItemTypes = () => {
 
       // The hotkey action simulates the pressing of a hotkey when activated.
       Shortcut: {
-        name: 'Activate Shortcut',
+        name: _('Activate Shortcut'),
         icon: 'preferences-desktop-keyboard-shortcuts',
         defaultData: '',
-        subtitle: 'Simulates a key stroke.',
-        description:
-            'The <b>Activate Shortcut</b> action simulates a key stroke when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations',
+        subtitle: _('Simulates a key stroke.'),
+        description: _(
+            'The <b>Activate Shortcut</b> action simulates a key stroke when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations.'),
         settingsType: SettingsTypes.SHORTCUT,
         settingsList: 'action-types-list',
         createItem: (name, icon, angle, data) => {
@@ -126,12 +128,12 @@ var getItemTypes = () => {
 
       // The hotkey action simulates the pressing of a hotkey when activated.
       InsertText: {
-        name: 'Insert Text',
+        name: _('Insert Text'),
         icon: 'input-keyboard',
         defaultData: '',
-        subtitle: 'Types some text.',
-        description:
-            'The <b>Insert Text</b> action copies the given text to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things.',
+        subtitle: _('Types some text.'),
+        description: _(
+            'The <b>Insert Text</b> action copies the given text to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things.'),
         settingsType: SettingsTypes.TEXT,
         settingsList: 'action-types-list',
         createItem: (name, icon, angle, data) => {
@@ -151,12 +153,12 @@ var getItemTypes = () => {
       // The command actions executes a shell command when activated. This can be used to
       // launch any application installed in the $PATH.
       Command: {
-        name: 'Launch Application',
+        name: _('Launch Application'),
         icon: 'utilities-terminal',
         defaultData: '',
-        subtitle: 'Runs any shell command.',
-        description:
-            'The <b>Launch Application</b> action executes any given command. This is primarily used to open applications but may have plenty of other use cases as well.',
+        subtitle: _('Runs any shell command.'),
+        description: _(
+            'The <b>Launch Application</b> action executes any given command. This is primarily used to open applications but may have plenty of other use cases as well.'),
         settingsType: SettingsTypes.COMMAND,
         settingsList: 'action-types-list',
         createItem: (name, icon, angle, data) => {
@@ -181,12 +183,12 @@ var getItemTypes = () => {
       // The Url action opens the define URL in the system's default web browser. Despite
       // its name it can actually open any URI.
       Uri: {
-        name: 'Open URI',
+        name: _('Open URI'),
         icon: 'applications-internet',
         defaultData: 'https://github.com/Schneegans/Fly-Pie',
-        subtitle: 'Opens an URI with the default applications.',
-        description:
-            'When the <b>Open URI</b> action is activated, the above URI is opened with the default application. For http URLs, this will be your web browser. However, it is also possible to open other URIs such as "mailto:foo@bar.org".',
+        subtitle: _('Opens an URI with the default applications.'),
+        description: _(
+            'When the <b>Open URI</b> action is activated, the above URI is opened with the default application. For http URLs, this will be your web browser. However, it is also possible to open other URIs such as "mailto:foo@bar.org".'),
         settingsType: SettingsTypes.URL,
         settingsList: 'action-types-list',
         createItem: (name, icon, angle, data) => {
@@ -208,12 +210,12 @@ var getItemTypes = () => {
       // The file action is very similar to the Url action, but only works for files. But
       // it's a bit more intuitive as the leading file:// is not required.
       File: {
-        name: 'Open File',
+        name: _('Open File'),
         icon: 'text-x-generic',
         defaultData: '',
-        subtitle: 'Opens a file with the default applications.',
-        description:
-            'The <b>Open File</b> action will open the above specified file with your system\'s default application.',
+        subtitle: _('Opens a file with the default applications.'),
+        description: _(
+            'The <b>Open File</b> action will open the above specified file with your system\'s default application.'),
         settingsType: SettingsTypes.FILE,
         settingsList: 'action-types-list',
         createItem: (name, icon, angle, data) => {
@@ -240,12 +242,12 @@ var getItemTypes = () => {
 
       // Submenus cannot be activated. They should always contain some children.
       Submenu: {
-        name: 'Custom Submenu',
+        name: _('Custom Submenu'),
         icon: 'view-more-horizontal-symbolic',
         defaultData: '',
-        subtitle: 'Add structure to your menu!',
-        description:
-            'The <b>Custom Submenu</b> can be used to group actions together. As deep hierarchies can be selected quite efficiently, feel free to create submenus in submenus!',
+        subtitle: _('Add structure to your menu!'),
+        description: _(
+            'The <b>Custom Submenu</b> can be used to group actions together. As deep hierarchies can be selected quite efficiently, feel free to create submenus in submenus!'),
         settingsType: SettingsTypes.SUBMENU,
         settingsList: 'submenu-types-list',
         createItem: (name, icon, angle, data) => {
@@ -256,12 +258,12 @@ var getItemTypes = () => {
       // The devices submenu contains an item for each mounted volume as reported by the
       // Gio.VolumeMonitor.
       Devices: {
-        name: 'Devices',
+        name: _('Devices'),
         icon: 'drive-harddisk',
         defaultData: '',
-        subtitle: 'Shows connected devices.',
-        description:
-            'The <b>Devices</b> submenu shows an item for each mounted volume, like USB-Sticks.',
+        subtitle: _('Shows connected devices.'),
+        description: _(
+            'The <b>Devices</b> submenu shows an item for each mounted volume, like USB-Sticks.'),
         settingsType: SettingsTypes.NONE,
         settingsList: 'submenu-types-list',
         createItem: (name, icon, angle, data) => {
@@ -290,12 +292,12 @@ var getItemTypes = () => {
 
       // The bookmarks submenu contains one entry for the default user directories.
       Bookmarks: {
-        name: 'Bookmarks',
+        name: _('Bookmarks'),
         icon: 'folder',
         defaultData: '',
-        subtitle: 'Shows your commonly used directories.',
-        description:
-            'The <b>Bookmarks</b> submenu shows an item for the trash, your desktop and each bookmarked directory.',
+        subtitle: _('Shows your commonly used directories.'),
+        description: _(
+            'The <b>Bookmarks</b> submenu shows an item for the trash, your desktop and each bookmarked directory.'),
         settingsType: SettingsTypes.NONE,
         settingsList: 'submenu-types-list',
         createItem: (name, icon, angle, data) => {
@@ -387,12 +389,12 @@ var getItemTypes = () => {
       // Returns an item with entries for all running applications. Clicking these will
       // bring the corresponding app to the foreground. Like Alt-Tab.
       RunningApps: {
-        name: 'Running Apps',
+        name: _('Running Apps'),
         icon: 'preferences-system-windows',
         defaultData: '',
-        subtitle: 'Shows the currently running applications.',
-        description:
-            'The <b>Running Apps</b> submenu shows all currently running applications. This is similar to the Alt+Tab window selection. As the entries change position frequently, this is actually not very effective.',
+        subtitle: _('Shows the currently running applications.'),
+        description: _(
+            'The <b>Running Apps</b> submenu shows all currently running applications. This is similar to the Alt+Tab window selection. As the entries change position frequently, this is actually not very effective.'),
         settingsType: SettingsTypes.NONE,
         settingsList: 'submenu-types-list',
         createItem: (name, icon, angle, data) => {
@@ -422,12 +424,12 @@ var getItemTypes = () => {
       // Returns an item with entries for each recently used file, as reported by
       // Gtk.RecentManager.
       RecentFiles: {
-        name: 'Recent Files',
+        name: _('Recent Files'),
         icon: 'document-open-recent',
         defaultData: '7',
-        subtitle: 'Shows your recently used files.',
-        description:
-            'The <b>Recent Files</b> submenu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number.',
+        subtitle: _('Shows your recently used files.'),
+        description: _(
+            'The <b>Recent Files</b> submenu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number.'),
         settingsType: SettingsTypes.COUNT,
         settingsList: 'submenu-types-list',
         createItem: (name, icon, angle, data) => {
@@ -461,12 +463,12 @@ var getItemTypes = () => {
       // Returns an item with entries for each "frequently used application", as reported
       // by GNOME Shell.
       FrequentlyUsed: {
-        name: 'Frequently Used',
+        name: _('Frequently Used'),
         icon: 'emblem-favorite',
         defaultData: '7',
-        subtitle: 'Shows your frequently used applications.',
-        description:
-            'The <b>Frequently Used</b> submenu shows a list of frequently used applications. You should limit the maximum number of shown applications to a reasonable number.',
+        subtitle: _('Shows your frequently used applications.'),
+        description: _(
+            'The <b>Frequently Used</b> submenu shows a list of frequently used applications. You should limit the maximum number of shown applications to a reasonable number.'),
         settingsType: SettingsTypes.COUNT,
         settingsList: 'submenu-types-list',
         createItem: (name, icon, angle, data) => {
@@ -491,12 +493,12 @@ var getItemTypes = () => {
       // Returns an item with entries for each "favorite application", as reported by
       // GNOME Shell.
       Favorites: {
-        name: 'Favorites',
+        name: _('Favorites'),
         icon: 'starred',
         defaultData: '',
-        subtitle: 'Shows your pinned applications.',
-        description:
-            'The <b>Favorites</b> submenu shows the applications you have pinned to Gnome Shell\'s Dash.',
+        subtitle: _('Shows your pinned applications.'),
+        description: _(
+            'The <b>Favorites</b> submenu shows the applications you have pinned to Gnome Shell\'s Dash.'),
         settingsType: SettingsTypes.NONE,
         settingsList: 'submenu-types-list',
         createItem: (name, icon, angle, data) => {
@@ -523,12 +525,12 @@ var getItemTypes = () => {
       // code is roughly based on GNOME Shell's tray menu code:
       // https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/master/js/ui/status/system.js
       System: {
-        name: 'System',
+        name: _('System'),
         icon: 'system-log-out',
         defaultData: '',
-        subtitle: 'Allows screen lock shutdown and other things.',
-        description:
-            'The <b>System</b> submenu shows an items for screen-lock, shutdown, settings, etc.',
+        subtitle: _('Allows screen lock shutdown and other things.'),
+        description: _(
+            'The <b>System</b> submenu shows an items for screen-lock, shutdown, settings, etc.'),
         settingsType: SettingsTypes.NONE,
         settingsList: 'submenu-types-list',
         createItem: (name, icon, angle, data) => {
@@ -552,7 +554,7 @@ var getItemTypes = () => {
           // Add screen-lock item.
           if (SystemActions.can_lock_screen) {
             result.children.push({
-              name: 'Lock',
+              name: _('Lock'),
               icon: 'system-lock-screen',
               activate: () => SystemActions.activateLockScreen()
             });
@@ -561,7 +563,7 @@ var getItemTypes = () => {
           // Add suspend-item.
           if (SystemActions.can_suspend) {
             result.children.push({
-              name: 'Suspend',
+              name: _('Suspend'),
               icon: 'system-suspend',
               activate: () => SystemActions.activateSuspend()
             });
@@ -570,7 +572,7 @@ var getItemTypes = () => {
           // Add switch user item.
           if (SystemActions.can_switch_user) {
             result.children.push({
-              name: 'Switch User...',
+              name: _('Switch User...'),
               icon: 'system-users',
               activate: () => SystemActions.activateSwitchUser()
             });
@@ -579,7 +581,7 @@ var getItemTypes = () => {
           // Add log-out item.
           if (SystemActions.can_logout) {
             result.children.push({
-              name: 'Log Out',
+              name: _('Log Out'),
               icon: 'system-log-out',
               activate: () => SystemActions.activateLogout()
             });
@@ -588,7 +590,7 @@ var getItemTypes = () => {
           // Add power-off item.
           if (SystemActions.can_power_off) {
             result.children.push({
-              name: 'Power Off...',
+              name: _('Power Off...'),
               icon: 'system-shutdown',
               activate: () => SystemActions.activatePowerOff()
             });
@@ -603,12 +605,12 @@ var getItemTypes = () => {
     // only available if the GMenu typelib is installed on the system.
     if (GMenu) {
       _itemTypes.MainMenu = {
-        name: 'Main Menu',
+        name: _('Main Menu'),
         icon: 'applications-system',
         defaultData: '',
-        subtitle: 'Shows all installed applications.',
-        description:
-            'The <b>Main Menu</b> shows all installed applications. Usually, this is very cluttered as many sections contain too many items to be used efficiently. You should rather setup your own menus!',
+        subtitle: _('Shows all installed applications.'),
+        description: _(
+            'The <b>Main Menu</b> shows all installed applications. Usually, this is very cluttered as many sections contain too many items to be used efficiently. You should rather setup your own menus!'),
         settingsList: 'submenu-types-list',
         settingsType: SettingsTypes.NONE,
         createItem: (name, icon, angle, data) => {
