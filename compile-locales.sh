@@ -8,6 +8,9 @@
 #                                                                                        #
 # -------------------------------------------------------------------------------------- #
 
+# This script creates a compiled *.mo translation file for each *.po file in the 'po'
+# directory. It is necessary to run this script whenever a translation has been changed.
+
 # Get the location of this script.
 FLYPIE="$( cd "$( dirname "$0" )" && pwd )"
 
