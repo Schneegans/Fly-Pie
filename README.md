@@ -263,6 +263,12 @@ Once you are happy with your translation, save a `<country code>.po` file in the
 ./compile-locales.sh
 ```
 
+In order for this to work, you'll need to install the `gettext` package. In Ubuntu 20.04 and 20.10, it can be installed by running the following command:
+
+```bash
+sudo apt install gettext
+```
+
 Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
 Or logout / login if you are on Wayland.
 
