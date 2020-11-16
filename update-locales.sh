@@ -12,6 +12,15 @@
 # the po/flypie.pot file accordingly. The new strings are than merged with all existing
 # translations.
 
+# Check if all necessary commands are available.
+if ! which xgettext; then
+  echo "ERROR: Could not find xgettext. On Ubuntu based systems, check if the gettext package is installed!"
+  exit 1
+elif ! which msgmerge; then
+  echo "ERROR: Could not find msgmerge. On Ubuntu based systems, check if the gettext package is installed!"
+  exit 1
+fi
+
 # Get to the location of this script.
 FLYPIE="$( cd "$( dirname "$0" )" && pwd )"
 cd $FLYPIE
