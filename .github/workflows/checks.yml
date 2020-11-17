@@ -62,16 +62,16 @@ jobs:
   shellcheck:
     runs-on: ubuntu-18.04
     steps:
-      - name: Run schellcheck
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - name: Run shellcheck
         run: |
           find $GITHUB_WORKSPACE -type f -and \( -name "*.sh" \) | xargs shellcheck
 
   script_functionality:
     runs-on: ubuntu-18.04
     steps:
+    - uses: actions/checkout@v2
     - name: Check error conditions # Currently, gettext is not installed. Both if statements should be false.
-      uses: actions/checkout@v2
       run: |
         if $GITHUB_WORKSPACE/compile-locales.sh; then
           if $GITHUB_WORKSPACE/update-locales.sh; then
