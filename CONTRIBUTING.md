@@ -8,6 +8,8 @@ The development of Fly-Pie follows a simplified version of **git-flow**: The `ma
 New features and bug fixes are implemented in `feature/*` branches and are merged to `develop` once they are finished.
 When a new milestone is reached, the content of `develop` will be merged to `master` and a tag is created. In rare and critical cases, hotfixes for the latest release will be created in the `master` branch and merged back to `develop`.
 
+Still unclear? [This video](https://www.youtube.com/watch?v=1SXpE08hvGs) provides a good explanation.
+
 ## Git Commit Messages
 
 Commits should start with a Capital letter and should be written in present tense (e.g. __:tada: Add cool new feature__ instead of __:tada: Added cool new feature__).
