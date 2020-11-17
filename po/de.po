@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-15 20:51+0100\n"
-"PO-Revision-Date: 2020-11-16 14:54+0100\n"
+"PO-Revision-Date: 2020-11-17 11:31+0100\n"
 "Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
-"Language-Team: \n"
-"Language: de_DE\n"
+"Language-Team:  <>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -335,7 +335,7 @@ msgstr "Initialisiert die Einstellungen weiter unten mit zufälligen Werten"
 
 #: settings/settings.ui:2607
 msgid "Generate Random Preset"
-msgstr "Zufällige Voreinstellung erzeugen"
+msgstr "Zufällig erzeugen"
 
 #: settings/settings.ui:2714
 msgid "Easing Duration"
@@ -659,7 +659,7 @@ msgstr "Erweiterte Einstellungen"
 
 #: settings/settings.ui:6947
 msgid "These settings are independent of the presets."
-msgstr "Diese Einstellungen sind unabhängig von der gewählten Voreinstellung."
+msgstr "Das wird nicht von den Voreinstellungen beeinflusst."
 
 #: settings/settings.ui:7001
 msgid "Settings"
@@ -1510,7 +1510,7 @@ msgstr "Sehr wütend"
 
 #: settings/ExampleMenu.js:208
 msgid "Surprised Faces"
-msgstr "Überrascht"
+msgstr "Überraschte Smileys"
 
 #: settings/ExampleMenu.js:211
 msgid "Flushed Face"
@@ -1562,7 +1562,7 @@ msgstr "Steinbock"
 
 #: settings/ExampleMenu.js:236
 msgid "Arrows"
-msgstr "Schütze"
+msgstr "Pfeile"
 
 #: settings/ExampleMenu.js:240
 msgid "Right"
