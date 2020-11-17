@@ -58,3 +58,10 @@ jobs:
           else
             awk -v a=$CURRENT -v b=$BASE 'BEGIN {printf "Percentage increased! (%3.4f%)\n", (a-b)}'
           fi
+
+  shellcheck:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        find $GITHUB_WORKSPACE -type f -and \( -name "*.sh" -or -name "desktopify" \) | xargs shellcheck
