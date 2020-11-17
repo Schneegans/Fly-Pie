@@ -231,7 +231,7 @@ A great way to contribute to Fly-Pie is creating a translation to another langua
 We suggest using a tool like [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
 
 Translations of Fly-Pie are stored in the `po/` directory.
-Just edit an existing translation or create a new one by opening the template [`po/flypie.pot`](po/flypie.pot) with either of this tools.
+Just edit an existing translation or create a new one by opening the template [`po/flypie.pot`](po/flypie.pot) with either of these tools.
 
 Once you are happy with your translation, save a `<country code>.po` file in the `/po` directory and run the following command to compile the strings:
 
