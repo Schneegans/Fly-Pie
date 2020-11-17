@@ -64,4 +64,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: |
-        find $GITHUB_WORKSPACE -type f -and \( -name "*.sh" -or -name "desktopify" \) | xargs shellcheck
+        find $GITHUB_WORKSPACE -type f -and \( -name "*.sh" \) | xargs shellcheck
