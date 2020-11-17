@@ -21,7 +21,7 @@ jobs:
         ./compile-locales.sh
         mkdir flypie@schneegans.github.com
         mv common daemon presets resources schemas settings locale flypie@schneegans.github.com
-        mv *.js metadata.json README.md LICENSE flypie@schneegans.github.com
+        mv *.js metadata.json *.md LICENSE flypie@schneegans.github.com
         zip -r flypie@schneegans.github.com.zip flypie@schneegans.github.com
     - name: Upload Release
       uses: svenstaro/upload-release-action@v1-release
