@@ -21,7 +21,7 @@ fi
 # Get the location of this script.
 FLYPIE="$( cd "$( dirname "$0" )" && pwd )"
 
-for FILE in `ls $FLYPIE/po/*.po`
+for FILE in `ls "$FLYPIE"/po/*.po`
 do
   # Extract the language code from the filename.
   LANGUAGE="${FILE##*/}"
@@ -29,8 +29,8 @@ do
 
   # Compile the corresponding *.mo file.
   echo "Creating localization for '$LANGUAGE'..."
-  mkdir -p $FLYPIE/locale/$LANGUAGE/LC_MESSAGES
-  msgfmt $FILE -o $FLYPIE/locale/$LANGUAGE/LC_MESSAGES/flypie.mo
+  mkdir -p "$FLYPIE"/locale/"$LANGUAGE"/LC_MESSAGES
+  msgfmt "$FILE" -o "$FLYPIE"/locale/"$LANGUAGE"/LC_MESSAGES/flypie.mo
 done
 
 echo "All done!"
