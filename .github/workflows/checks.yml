@@ -62,27 +62,27 @@ jobs:
   shellcheck:
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v2
-    - run: |
-        find $GITHUB_WORKSPACE -type f -and \( -name "*.sh" \) | xargs shellcheck
+      - name: Run schellcheck
+        uses: actions/checkout@v2
+        run: |
+          find $GITHUB_WORKSPACE -type f -and \( -name "*.sh" \) | xargs shellcheck
 
   script_functionality:
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v2
     - name: Check error conditions # Currently, gettext is not installed. Both if statements should be false.
-    - run: |
+      uses: actions/checkout@v2
+      run: |
         if $GITHUB_WORKSPACE/compile-locales.sh; then
           if $GITHUB_WORKSPACE/update-locales.sh; then
             exit 1
           fi
         fi
     - name: Check correct workflow # Now, gettext will be installed and both IVERTED if statements should be false.
-    - run: |
+      run: |
         sudo apt-get update --qq && sudo apt-get install gettext -qq -y
         if ! $GITHUB_WORKSPACE/compile-locales.sh; then
           if ! $GITHUB_WORKSPACE/update-locales.sh; then
             exit 1
           fi
         fi
-        
