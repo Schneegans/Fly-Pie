@@ -12,7 +12,7 @@
 # directory. It is necessary to run this script whenever a translation has been changed.
 
 # Check if all necessary commands are available.
-elif ! command -v msgfmt &> /dev/null
+if ! command -v msgfmt &> /dev/null
 then
   echo "ERROR: Could not find msgfmt. On Ubuntu based systems, check if the gettext package is installed!"
   exit 1
