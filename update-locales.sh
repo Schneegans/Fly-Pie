@@ -25,7 +25,7 @@ fi
 
 # Get to the location of this script.
 FLYPIE="$( cd "$( dirname "$0" )" && pwd )"
-cd $FLYPIE
+cd "$FLYPIE"
 
 # First update the template file with the strings from the source tree.
 xgettext --from-code=UTF-8 --output=po/flypie.pot settings/settings.ui */*.js 
@@ -34,7 +34,7 @@ xgettext --from-code=UTF-8 --output=po/flypie.pot settings/settings.ui */*.js
 for FILE in $(ls po/*.po)
 do
   echo -n "Updating '$FILE' "
-  msgmerge -U $FILE po/flypie.pot
+  msgmerge -U "$FILE" po/flypie.pot
 done
 
 echo "All done!"
