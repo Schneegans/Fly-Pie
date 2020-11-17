@@ -31,7 +31,7 @@ cd $FLYPIE
 xgettext --from-code=UTF-8 --output=po/flypie.pot settings/settings.ui */*.js 
 
 # Then update all *.po files.
-for FILE in `ls po/*.po`
+for FILE in $(ls po/*.po)
 do
   echo -n "Updating '$FILE' "
   msgmerge -U $FILE po/flypie.pot
