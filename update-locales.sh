@@ -31,8 +31,10 @@ cd "$FLYPIE" || { echo "ERROR: Could not cd to the script's location!"; exit 1; 
 xgettext --from-code=UTF-8 --output=po/flypie.pot settings/settings.ui ./*/*.js 
 
 # Then update all *.po files.
-for FILE in $(ls po/*.po)
+for FILE in po/*.po
 do
+  # handle the case of no .po files, see SC2045
+  [[ -e "$FILE" ]] || { echo "ERROR: No .po files found, exiting."; exit 1; }
   echo -n "Updating '$FILE' "
   msgmerge -U "$FILE" po/flypie.pot
 done
