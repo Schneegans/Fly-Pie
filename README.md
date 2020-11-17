@@ -237,8 +237,8 @@ You should also start your commit message with **one** applicable emoji. This do
 Emoji | Description
 ------|------------
 :tada: `:tada:` | When you added a cool new feature.
-:wrench: `:wrench:` | When you refactored / improved a small piece of code.
-:hammer: `:hammer:` | When you refactored / improved large parts of the code.
+:wrench: `:wrench:` | When you added a piece of code.
+:recycle: `:recycle:` | When you refactored a part of the code.
 :sparkles: `:sparkles:` | When you applied clang-format.
 :globe_with_meridians: `:globe_with_meridians:` | When you worked on translations.
 :art: `:art:` | When you improved / added assets like themes.
