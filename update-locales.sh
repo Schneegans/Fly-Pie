@@ -13,10 +13,12 @@
 # translations.
 
 # Check if all necessary commands are available.
-if ! which xgettext; then
+if ! command -v xgettext &> /dev/null
+then
   echo "ERROR: Could not find xgettext. On Ubuntu based systems, check if the gettext package is installed!"
   exit 1
-elif ! which msgmerge; then
+elif ! command -v msgmerge &> /dev/null
+then
   echo "ERROR: Could not find msgmerge. On Ubuntu based systems, check if the gettext package is installed!"
   exit 1
 fi

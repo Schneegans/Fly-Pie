@@ -11,14 +11,15 @@
 # This script creates a compiled *.mo translation file for each *.po file in the 'po'
 # directory. It is necessary to run this script whenever a translation has been changed.
 
-# Get the location of this script.
-FLYPIE="$( cd "$( dirname "$0" )" && pwd )"
-
 # Check if all necessary commands are available.
-if ! which msgfmt; then
+elif ! command -v msgfmt &> /dev/null
+then
   echo "ERROR: Could not find msgfmt. On Ubuntu based systems, check if the gettext package is installed!"
   exit 1
 fi
+
+# Get the location of this script.
+FLYPIE="$( cd "$( dirname "$0" )" && pwd )"
 
 for FILE in `ls $FLYPIE/po/*.po`
 do
