@@ -51,21 +51,21 @@ if [[ $# -eq 0 ]] ; then
 fi
 
 # Show lines of code.
-if [[ $* == *--loc* ]]
+if [[ "$0" == *--loc* ]]
 then
   awk -v a="$LINES_OF_CODE" \
       'BEGIN {printf "%.1fk\n", a/1000}'
 fi
 
 # Show lines of comments.
-if [[ $* == *--comments* ]]
+if [[ "$0" == *--comments* ]]
 then
   awk -v a=$COMMENT_LINES \
       'BEGIN {printf "%.1fk\n", a/1000}'
 fi
 
 # Show precentage of comments.
-if [[ $* == *--percentage* ]]
+if [[ "$0" == *--percentage* ]]
 then
   awk -v a=$COMMENT_LINES -v b="$LINES_OF_CODE" \
       'BEGIN {printf "%.1f\n", 100*a/b}'
