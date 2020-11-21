@@ -88,3 +88,13 @@ jobs:
             exit 1
           fi
         fi
+
+  build:
+    name: Check if Fly-Pie builds correctly
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build Fly-Pie
+      run: |
+        $GITHUB_WORKSPACE/create-release.sh
+        
