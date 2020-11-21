@@ -10,8 +10,11 @@
 
 # This script creates a new release of the Fly-Pie GNOME extension.
 
+# Go to the location of this script.
+cd "$( cd "$( dirname "$0" )" && pwd )" || { echo "ERROR: Could not find the location of 'create-release.sh'."; exit 1; }
+
 ./compile-locales.sh
-mkdir flypie@schneegans.github.com
-mv common daemon presets resources schemas settings locale flypie@schneegans.github.com
-mv -- *.js metadata.json *.md LICENSE flypie@schneegans.github.com
-zip -r flypie@schneegans.github.com.zip flypie@schneegans.github.com
+
+# Zip everything together
+zip -r flypie@schneegans.github.com.zip common daemon presets resources schemas settings locale && \
+zip -r flypie@schneegans.github.com.zip -- *.js metadata.json *.md LICENSE
