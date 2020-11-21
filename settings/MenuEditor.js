@@ -739,6 +739,12 @@ var MenuEditor = class MenuEditor {
       this._setSelected('DATA', widget.text);
     });
 
+    // Store the item's ID in the tree store's DATA column when the text of the
+    // corresponding input field is changed.
+    this._builder.get_object('item-id').connect('notify::text', (widget) => {
+      this._setSelected('DATA', widget.text);
+    });
+
     // Store the item's file path in the tree store's DATA column when the text of the
     // corresponding input field is changed.
     this._builder.get_object('item-file').connect('notify::text', (widget) => {
@@ -869,7 +875,8 @@ var MenuEditor = class MenuEditor {
         'item-settings-uri-revealer': false,
         'item-settings-command-revealer': false,
         'item-settings-file-revealer': false,
-        'item-settings-text-revealer': false
+        'item-settings-text-revealer': false,
+        'item-settings-id-revealer': false
       };
 
       if (somethingSelected) {
@@ -913,6 +920,10 @@ var MenuEditor = class MenuEditor {
         } else if (selectedSettingsType == ItemRegistry.SettingsTypes.URL) {
           this._builder.get_object('item-uri').text = this._getSelected('DATA');
           revealers['item-settings-uri-revealer']   = true;
+
+        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.ID) {
+          this._builder.get_object('item-id').text = this._getSelected('DATA');
+          revealers['item-settings-id-revealer']   = true;
 
         } else if (selectedSettingsType == ItemRegistry.SettingsTypes.FILE) {
           this._builder.get_object('item-file').text = this._getSelected('DATA');

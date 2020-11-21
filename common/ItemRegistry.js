@@ -63,6 +63,7 @@ var SettingsTypes = {
   URL: 6,
   COUNT: 7,
   TEXT: 8,
+  ID: 9,
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -231,6 +232,24 @@ var getItemTypes = () => {
               }
             }
           };
+        }
+      },
+
+
+      // The D-Bus signal action does nothing. It is actually something like a dummy
+      // action. But sometimes you will just require the emission of the OnSelect D-Bus
+      // signal.
+      DBusSignal: {
+        name: _('D-Bus Signal'),
+        icon: 'application-x-addon',
+        defaultData: '',
+        subtitle: _('Emits a D-Bus signal.'),
+        description: _(
+            'The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="https://github.com/Schneegans/Fly-Pie#fly-pies-d-bus-interface">can listen on the D-Bus for its activation</a>. This can be very useful in custom menus opened via the command line.'),
+        settingsType: SettingsTypes.ID,
+        settingsList: 'action-types-list',
+        createItem: (name, icon, angle, data) => {
+          return {name: name, icon: icon, angle: angle, id: data, activate: () => {}};
         }
       },
 
