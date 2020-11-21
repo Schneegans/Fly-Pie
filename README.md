@@ -59,6 +59,7 @@ The list below provides both, a high-level overview of Fly-Pie's current capabil
 - [X] Translation Support:
   - [X] English
   - [X] German
+  - [X] Italian
   - [ ] ...
 - [ ] Proper touch support.
 - [ ] Cool appearance presets.
