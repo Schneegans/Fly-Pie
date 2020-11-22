@@ -76,6 +76,7 @@ This is the most easy way to install Fly-Pie. Just head over to [extensions.gnom
 ### b) Downloading a Stable Release
 
 Just [download the latest release](https://github.com/Schneegans/Fly-Pie/releases) and extract the contained directory to `~/.local/share/gnome-shell/extensions`.
+
 Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
 Or logout / login if you are on Wayland.
 Then you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* application or with this command:
@@ -83,6 +84,16 @@ Then you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* 
 ```bash
 gnome-extensions enable flypie@schneegans.github.com
 ```
+
+With Fly-Pie 4 (currently in development), you will be able to install the extension with a simpler command.
+
+<!-- These are the instructions for version 4.
+Extract the `zip` archive. Open the folder in a terminal window and execute this command:
+
+```bash
+./create-release -i
+```
+-->
 
 ### c) Cloning the Latest Version with `git`
 
