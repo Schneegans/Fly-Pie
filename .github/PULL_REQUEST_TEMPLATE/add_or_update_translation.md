@@ -34,6 +34,7 @@ is ok with it - but I'm sure they will be! xD)
 - [ ] I complied to the Contributing Guidelines. <!--see CONTRIBUTING.md-->
 - [ ] I tested the translation and checked that nothing looks out-of-place.
       Especially the strings which are marked with **Keep this short** may break the layout of the user interface if the translation is too long.
+      <!--When using Poedit or Gtranslator, keep an eye on the comments on the right hand side of the UI!-->
 - [ ] I made the following changes to my `<LANGUAGE_CODE>.po` file: <!--You'll find most of them in the first code block, around lines 1-20-ish.-->
   - [ ] Fill in the `<LANGUAGE>`.
   - [ ] In case you are the first translator, fill in your info and the year. If not, just tick this box anyway.
@@ -43,7 +44,8 @@ is ok with it - but I'm sure they will be! xD)
         <!--Format: Firstname Lastname <my@email.address>.
         Alternatively, use your GitHub handle.-->
   - [ ] Update `Language-Team`. If your name is already on there, just tick this box anyway.
-        <!--Please place your full name or GitHub handle at the end of the comma-seperated list.-->
+        <!--Please place your full name or GitHub handle at the end of the comma-seperated list.
+        This will be used to notify you when a translation needs to be updated (for opt-out, see below).-->
   - [ ] Set `Language` to the language code (`de_DE`, `en_GB`) or just the country code (`de`, `en`).
         <!--If there are special words that are written differently in two countries with the same
         language (e. g. "color" and "colour" in English), the first variant is obligatory.-->
