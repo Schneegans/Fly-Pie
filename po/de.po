@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-15 20:51+0100\n"
+"POT-Creation-Date: 2020-11-23 07:55+0100\n"
 "PO-Revision-Date: 2020-11-17 11:31+0100\n"
 "Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team:  <>\n"
@@ -1124,7 +1124,7 @@ msgstr "Fenster maximieren"
 msgid "Gnome Shell"
 msgstr "GNOME Shell"
 
-#: settings/DefaultMenu.js:84 settings/ExampleMenu.js:239
+#: settings/DefaultMenu.js:84 settings/ExampleMenu.js:241
 msgid "Up"
 msgstr "Hoch"
 
@@ -1132,7 +1132,7 @@ msgstr "Hoch"
 msgid "Overview"
 msgstr "Übersicht"
 
-#: settings/DefaultMenu.js:97 settings/ExampleMenu.js:242
+#: settings/DefaultMenu.js:97 settings/ExampleMenu.js:244
 msgid "Down"
 msgstr "Runter"
 
@@ -1284,319 +1284,321 @@ msgstr "Cocktail"
 msgid "Sweets"
 msgstr "Süßigkeiten"
 
-#: settings/ExampleMenu.js:94
+#. Translators: This is the item which should be selected in the tutorial.
+#. Make sure the translation matches the name given in the tutorial!
+#: settings/ExampleMenu.js:96
 msgid "Shortcake"
 msgstr "Törtchen"
 
-#: settings/ExampleMenu.js:95
+#: settings/ExampleMenu.js:97
 msgid "Candy"
 msgstr "Bonbon"
 
-#: settings/ExampleMenu.js:96
+#: settings/ExampleMenu.js:98
 msgid "Doughnut"
 msgstr "Doughnut"
 
-#: settings/ExampleMenu.js:97
+#: settings/ExampleMenu.js:99
 msgid "Cookie"
 msgstr "Keks"
 
-#: settings/ExampleMenu.js:98
+#: settings/ExampleMenu.js:100
 msgid "Chocolate"
 msgstr "Schokolade"
 
-#: settings/ExampleMenu.js:104
+#: settings/ExampleMenu.js:106
 msgid "Activities"
 msgstr "Aktivitäten"
 
-#: settings/ExampleMenu.js:108
+#: settings/ExampleMenu.js:110
 msgid "Games"
 msgstr "Spiele"
 
-#: settings/ExampleMenu.js:111
+#: settings/ExampleMenu.js:113
 msgid "Billards"
 msgstr "Billard"
 
-#: settings/ExampleMenu.js:112
+#: settings/ExampleMenu.js:114
 msgid "Mahjong"
 msgstr "Mahjong"
 
-#: settings/ExampleMenu.js:113
+#: settings/ExampleMenu.js:115
 msgid "Bowling"
 msgstr "Bowling"
 
-#: settings/ExampleMenu.js:114
+#: settings/ExampleMenu.js:116
 msgid "Darts"
 msgstr "Dart"
 
-#: settings/ExampleMenu.js:115
+#: settings/ExampleMenu.js:117
 msgid "Video Game"
 msgstr "Computerspiel"
 
-#: settings/ExampleMenu.js:119
+#: settings/ExampleMenu.js:121
 msgid "Sports"
 msgstr "Sport"
 
-#: settings/ExampleMenu.js:122
+#: settings/ExampleMenu.js:124
 msgid "Cricket"
 msgstr "Cricket"
 
-#: settings/ExampleMenu.js:123
+#: settings/ExampleMenu.js:125
 msgid "Ice Hockey"
 msgstr "Icehockey"
 
-#: settings/ExampleMenu.js:124
+#: settings/ExampleMenu.js:126
 msgid "Tennis"
 msgstr "Tennis"
 
-#: settings/ExampleMenu.js:125
+#: settings/ExampleMenu.js:127
 msgid "Fishing"
 msgstr "Angeln"
 
-#: settings/ExampleMenu.js:126
+#: settings/ExampleMenu.js:128
 msgid "Skiing"
 msgstr "Skifahren"
 
-#: settings/ExampleMenu.js:130
+#: settings/ExampleMenu.js:132
 msgid "Places"
 msgstr "Orte"
 
-#: settings/ExampleMenu.js:133
+#: settings/ExampleMenu.js:135
 msgid "Mount Fuji"
 msgstr "Fuji"
 
-#: settings/ExampleMenu.js:134
+#: settings/ExampleMenu.js:136
 msgid "Mount Etna"
 msgstr "Ätna"
 
-#: settings/ExampleMenu.js:135
+#: settings/ExampleMenu.js:137
 msgid "Statue of Liberty"
 msgstr "Freiheitsstatue"
 
-#: settings/ExampleMenu.js:136
+#: settings/ExampleMenu.js:138
 msgid "Japan"
 msgstr "Japan"
 
-#: settings/ExampleMenu.js:137
+#: settings/ExampleMenu.js:139
 msgid "Moyai"
 msgstr "Moyai"
 
-#: settings/ExampleMenu.js:143
+#: settings/ExampleMenu.js:145
 msgid "Objects"
 msgstr "Gegenstände"
 
-#: settings/ExampleMenu.js:147
+#: settings/ExampleMenu.js:149
 msgid "Cars"
 msgstr "Autos"
 
-#: settings/ExampleMenu.js:150
+#: settings/ExampleMenu.js:152
 msgid "Bus"
 msgstr "Bus"
 
-#: settings/ExampleMenu.js:151
+#: settings/ExampleMenu.js:153
 msgid "Fire Engine"
 msgstr "Feuerwehr"
 
-#: settings/ExampleMenu.js:152
+#: settings/ExampleMenu.js:154
 msgid "Automobile"
 msgstr "PKW"
 
-#: settings/ExampleMenu.js:153
+#: settings/ExampleMenu.js:155
 msgid "Tractor"
 msgstr "Traktor"
 
-#: settings/ExampleMenu.js:154
+#: settings/ExampleMenu.js:156
 msgid "Truck"
 msgstr "LKW"
 
-#: settings/ExampleMenu.js:158
+#: settings/ExampleMenu.js:160
 msgid "Buildings"
 msgstr "Gebäude"
 
-#: settings/ExampleMenu.js:161
+#: settings/ExampleMenu.js:163
 msgid "Post Office"
 msgstr "Post"
 
-#: settings/ExampleMenu.js:162
+#: settings/ExampleMenu.js:164
 msgid "School"
 msgstr "Schule"
 
-#: settings/ExampleMenu.js:163
+#: settings/ExampleMenu.js:165
 msgid "Hospital"
 msgstr "Krankenhaus"
 
-#: settings/ExampleMenu.js:164
+#: settings/ExampleMenu.js:166
 msgid "Bank"
 msgstr "Bank"
 
-#: settings/ExampleMenu.js:165
+#: settings/ExampleMenu.js:167
 msgid "Love Hotel"
 msgstr "Liebeshotel"
 
-#: settings/ExampleMenu.js:169
+#: settings/ExampleMenu.js:171
 msgid "Instruments"
 msgstr "Instrumente"
 
-#: settings/ExampleMenu.js:172
+#: settings/ExampleMenu.js:174
 msgid "Saxophone"
 msgstr "Saxophon"
 
-#: settings/ExampleMenu.js:173
+#: settings/ExampleMenu.js:175
 msgid "Guitar"
 msgstr "Gitarre"
 
-#: settings/ExampleMenu.js:174
+#: settings/ExampleMenu.js:176
 msgid "Trumpet"
 msgstr "Trompete"
 
-#: settings/ExampleMenu.js:175
+#: settings/ExampleMenu.js:177
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: settings/ExampleMenu.js:176
+#: settings/ExampleMenu.js:178
 msgid "Drum"
 msgstr "Trommel"
 
-#: settings/ExampleMenu.js:182
+#: settings/ExampleMenu.js:184
 msgid "Smileys"
 msgstr "Smileys"
 
-#: settings/ExampleMenu.js:186
+#: settings/ExampleMenu.js:188
 msgid "Happy Faces"
 msgstr "Fröhliche Smileys"
 
-#: settings/ExampleMenu.js:189
+#: settings/ExampleMenu.js:191
 msgid "Smiley"
 msgstr "Smiley"
 
-#: settings/ExampleMenu.js:190
+#: settings/ExampleMenu.js:192
 msgid "Winking Face"
 msgstr "Zwinkernd"
 
-#: settings/ExampleMenu.js:191
+#: settings/ExampleMenu.js:193
 msgid "Face With Smiling Eyes"
 msgstr "Lachende Augen"
 
-#: settings/ExampleMenu.js:192
+#: settings/ExampleMenu.js:194
 msgid "Face With Sweat"
 msgstr "Schwitzend"
 
-#: settings/ExampleMenu.js:193
+#: settings/ExampleMenu.js:195
 msgid "ROFL"
 msgstr "ROFL"
 
-#: settings/ExampleMenu.js:197
+#: settings/ExampleMenu.js:199
 msgid "Angry Faces"
 msgstr "Wütende Smileys"
 
-#: settings/ExampleMenu.js:200
+#: settings/ExampleMenu.js:202
 msgid "Vomiting Face"
 msgstr "Kotzend"
 
-#: settings/ExampleMenu.js:201
+#: settings/ExampleMenu.js:203
 msgid "Skeptical Face"
 msgstr "Skeptisch"
 
-#: settings/ExampleMenu.js:202
+#: settings/ExampleMenu.js:204
 msgid "Pouting Face"
 msgstr "Schmollend"
 
-#: settings/ExampleMenu.js:203
+#: settings/ExampleMenu.js:205
 msgid "Angry Face"
 msgstr "Wütend"
 
-#: settings/ExampleMenu.js:204
+#: settings/ExampleMenu.js:206
 msgid "Very Angry Face"
 msgstr "Sehr wütend"
 
-#: settings/ExampleMenu.js:208
+#: settings/ExampleMenu.js:210
 msgid "Surprised Faces"
 msgstr "Überraschte Smileys"
 
-#: settings/ExampleMenu.js:211
+#: settings/ExampleMenu.js:213
 msgid "Flushed Face"
 msgstr "Errötend"
 
-#: settings/ExampleMenu.js:212
+#: settings/ExampleMenu.js:214
 msgid "Anguished Face"
 msgstr "Schmerzgeplagt"
 
-#: settings/ExampleMenu.js:213
+#: settings/ExampleMenu.js:215
 msgid "Astonished Face"
 msgstr "Verblüfft"
 
-#: settings/ExampleMenu.js:214
+#: settings/ExampleMenu.js:216
 msgid "Screaming Face"
 msgstr "Schreiend"
 
-#: settings/ExampleMenu.js:215
+#: settings/ExampleMenu.js:217
 msgid "Pouff"
 msgstr "Puff"
 
-#: settings/ExampleMenu.js:221
+#: settings/ExampleMenu.js:223
 msgid "Symbols"
 msgstr "Symbole"
 
-#: settings/ExampleMenu.js:225
+#: settings/ExampleMenu.js:227
 msgid "Star Signs"
 msgstr "Sternzeichen"
 
-#: settings/ExampleMenu.js:228
+#: settings/ExampleMenu.js:230
 msgid "Taurus"
 msgstr "Stier"
 
-#: settings/ExampleMenu.js:229
+#: settings/ExampleMenu.js:231
 msgid "Cancer"
 msgstr "Krebs"
 
-#: settings/ExampleMenu.js:230
+#: settings/ExampleMenu.js:232
 msgid "Virgo"
 msgstr "Jungfrau"
 
-#: settings/ExampleMenu.js:231
+#: settings/ExampleMenu.js:233
 msgid "Scorpius"
 msgstr "Skorpion"
 
-#: settings/ExampleMenu.js:232
+#: settings/ExampleMenu.js:234
 msgid "Capricorn"
 msgstr "Steinbock"
 
-#: settings/ExampleMenu.js:236
+#: settings/ExampleMenu.js:238
 msgid "Arrows"
 msgstr "Pfeile"
 
-#: settings/ExampleMenu.js:240
+#: settings/ExampleMenu.js:242
 msgid "Right"
 msgstr "Rechts"
 
-#: settings/ExampleMenu.js:241
+#: settings/ExampleMenu.js:243
 msgid "Twisted"
 msgstr "Verschlungen"
 
-#: settings/ExampleMenu.js:243
+#: settings/ExampleMenu.js:245
 msgid "Left"
 msgstr "Links"
 
-#: settings/ExampleMenu.js:247
+#: settings/ExampleMenu.js:249
 msgid "Info Signs"
 msgstr "Infozeichen"
 
-#: settings/ExampleMenu.js:250
+#: settings/ExampleMenu.js:252
 msgid "Litter Bin"
 msgstr "Mülleimer"
 
-#: settings/ExampleMenu.js:251
+#: settings/ExampleMenu.js:253
 msgid "Potable Water"
 msgstr "Trinkwasser"
 
-#: settings/ExampleMenu.js:252
+#: settings/ExampleMenu.js:254
 msgid "Mens"
 msgstr "Herren"
 
-#: settings/ExampleMenu.js:253
+#: settings/ExampleMenu.js:255
 msgid "Womens"
 msgstr "Damen"
 
-#: settings/ExampleMenu.js:254
+#: settings/ExampleMenu.js:256
 msgid "Baby"
 msgstr "Baby"
 
