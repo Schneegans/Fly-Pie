@@ -88,10 +88,17 @@ gnome-extensions enable flypie@schneegans.github.com
 With Fly-Pie 4 (currently in development), you will be able to install the extension with a simpler command.
 
 <!-- These are the instructions for version 4.
-Extract the `zip` archive. Open the folder in a terminal window and execute this command:
+Execute this command to download the latest stable release:
 
 ```bash
-./create-release -i
+wget https://github.com/Schneegans/Fly-Pie/releases/latest/download/flypie@schneegans.github.com.zip
+```
+
+Install it by executing the following command. If you have Fly-Pie already installed and want to upgrade to
+the latest version, append the `--force` flag in order to overwrite existing installs of Fly-Pie.
+
+```bash
+gnome-extensions install flypie@schneegans.github.com.zip
 ```
 -->
 
