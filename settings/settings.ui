@@ -1080,7 +1080,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                 <property name="can_focus">False</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes">&lt;big&gt;&lt;b&gt;Open the
+                                <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the
 menu!&lt;/b&gt;&lt;/big&gt;</property>
                                 <property name="use_markup">True</property>
                                 <property name="justify">center</property>
@@ -1207,7 +1207,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                                 <property name="can_focus">False</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes">&lt;big&gt;&lt;b&gt;Open the
+                                <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the
 menu!&lt;/b&gt;&lt;/big&gt;</property>
                                 <property name="use_markup">True</property>
                                 <property name="justify">center</property>
@@ -1510,7 +1510,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                 <property name="can_focus">False</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes">&lt;big&gt;&lt;b&gt;Open the
+                                <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the
 menu!&lt;/b&gt;&lt;/big&gt;</property>
                                 <property name="use_markup">True</property>
                                 <property name="justify">center</property>
@@ -1657,7 +1657,7 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                                 <property name="can_focus">False</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes">&lt;big&gt;&lt;b&gt;Open the
+                                <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the
 menu!&lt;/b&gt;&lt;/big&gt;</property>
                                 <property name="use_markup">True</property>
                                 <property name="justify">center</property>
@@ -1959,7 +1959,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                                 <property name="can_focus">False</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes">&lt;big&gt;&lt;b&gt;Open the
+                                <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the
 menu!&lt;/b&gt;&lt;/big&gt;</property>
                                 <property name="use_markup">True</property>
                                 <property name="justify">center</property>
@@ -2320,7 +2320,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
           </object>
           <packing>
             <property name="name">tutorial-page</property>
-            <property name="title" translatable="yes">Tutorial</property>
+            <property name="title" translatable="yes" comments="Caption of one of the main pages.">Tutorial</property>
           </packing>
         </child>
         <child>
@@ -2604,7 +2604,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <property name="can_focus">False</property>
                                             <property name="halign">start</property>
                                             <property name="vexpand">True</property>
-                                            <property name="label" translatable="yes">Generate Random Preset</property>
+                                            <property name="label" translatable="yes" comments="Please keep this short!">Generate Random Preset</property>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -2741,7 +2741,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Independent of the preset.</property>
+                                    <property name="label" translatable="yes" comments="Please keep this short!">Independent of the preset.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -3183,7 +3183,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="margin_right">20</property>
-                                    <property name="label" translatable="yes">Clicking inside the inner radius
+                                    <property name="label" translatable="yes" comments="Keep the individual lines short! You can use up to three lines if you want.">Clicking inside the inner radius
 will cancel the selection.</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -3924,7 +3924,7 @@ will cancel the selection.</property>
                                     <property name="layout_style">expand</property>
                                     <child>
                                       <object class="GtkRadioButton" id="center-color-mode-fixed">
-                                        <property name="label" translatable="yes">Fixed</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.">Fixed</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -3939,7 +3939,7 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="center-color-mode-auto">
-                                        <property name="label" translatable="yes">Auto</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.">Auto</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -4645,7 +4645,7 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="child-color-mode-parent">
-                                        <property name="label" translatable="yes">Parent</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.">Parent</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -6998,7 +6998,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
           </object>
           <packing>
             <property name="name">settings-page</property>
-            <property name="title" translatable="yes">Settings</property>
+            <property name="title" translatable="yes" comments="Caption of one of the main pages.">Settings</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -8304,7 +8304,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
           </object>
           <packing>
             <property name="name">menu-editor-page</property>
-            <property name="title" translatable="yes">Menu Editor</property>
+            <property name="title" translatable="yes" comments="Caption of one of the main pages.">Menu Editor</property>
             <property name="position">2</property>
           </packing>
         </child>
@@ -8381,7 +8381,7 @@ Stay tuned!</property>
           </object>
           <packing>
             <property name="name">achievements-page</property>
-            <property name="title" translatable="yes">Achievements</property>
+            <property name="title" translatable="yes" comments="Caption of one of the main pages.">Achievements</property>
             <property name="position">3</property>
           </packing>
         </child>

@@ -94,6 +94,7 @@ msgstr ""
 "wie Sie Fly-Pie möglichst effizient verwenden. Mit der großen Schaltfläche "
 "können Sie ein Beispielmenü öffnen!"
 
+#. The text of the big tutorial button. Using two lines looks quite good.
 #: settings/settings.ui:1083 settings/settings.ui:1210
 #: settings/settings.ui:1513 settings/settings.ui:1660
 #: settings/settings.ui:1962
@@ -297,6 +298,7 @@ msgstr "Zurück"
 msgid "Next"
 msgstr "Weiter"
 
+#. Caption of one of the main pages.
 #: settings/settings.ui:2323
 msgid "Tutorial"
 msgstr "Einführung"
@@ -333,6 +335,7 @@ msgstr "Voreinstellung laden"
 msgid "Initializes the settings below to random values"
 msgstr "Initialisiert die Einstellungen weiter unten mit zufälligen Werten"
 
+#. Please keep this short!
 #: settings/settings.ui:2607
 msgid "Generate Random Preset"
 msgstr "Zufällig erzeugen"
@@ -345,6 +348,7 @@ msgstr "Animationsdauer"
 msgid "Global Scale"
 msgstr "Globale Skalierung"
 
+#. Please keep this short!
 #: settings/settings.ui:2744
 msgid "Independent of the preset."
 msgstr "Unabhängig von der gewählten Voreinstellung."
@@ -407,6 +411,7 @@ msgstr "Animationsart"
 msgid "Size"
 msgstr "Größe"
 
+#. Keep the individual lines short! You can use up to three lines if you want.
 #: settings/settings.ui:3186
 msgid ""
 "Clicking inside the inner radius\n"
@@ -488,12 +493,14 @@ msgstr "Helligkeit"
 msgid "Opacity"
 msgstr "Deckkraft"
 
+#. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
 #: settings/settings.ui:3927 settings/settings.ui:4012
 #: settings/settings.ui:4618 settings/settings.ui:4823
 #: settings/settings.ui:5689 settings/settings.ui:5766
 msgid "Fixed"
 msgstr "Fest"
 
+#. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
 #: settings/settings.ui:3942 settings/settings.ui:4027
 #: settings/settings.ui:4633 settings/settings.ui:4838
 msgid "Auto"
@@ -528,6 +535,7 @@ msgstr "Ohne aktives Kind"
 msgid "Icon Scale"
 msgstr "Symbolgröße"
 
+#. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
 #: settings/settings.ui:4648 settings/settings.ui:4853
 #: settings/settings.ui:5704 settings/settings.ui:5781
 msgid "Parent"
@@ -661,6 +669,7 @@ msgstr "Erweiterte Einstellungen"
 msgid "These settings are independent of the presets."
 msgstr "Das wird nicht von den Voreinstellungen beeinflusst."
 
+#. Caption of one of the main pages.
 #: settings/settings.ui:7001
 msgid "Settings"
 msgstr "Einstellungen"
@@ -787,10 +796,12 @@ msgstr "Dadurch wird das Menü geöffnet."
 msgid "Open in Screen Center"
 msgstr "In der Bildschirmmitte öffnen"
 
+#. Caption of one of the main pages.
 #: settings/settings.ui:8307
 msgid "Menu Editor"
 msgstr "Menü-Editor"
 
+#. Caption of one of the main pages.
 #: settings/settings.ui:8384
 msgid "Achievements"
 msgstr "Erfolge"
@@ -799,11 +810,12 @@ msgstr "Erfolge"
 msgid "Toplevel Menu"
 msgstr "Hauptmenü"
 
-#: common/ItemRegistry.js:97
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:98
 msgid "Create as many as you want!"
 msgstr "Sie können so viele anlegen, wie sie wünschen!"
 
-#: common/ItemRegistry.js:99
+#: common/ItemRegistry.js:100
 msgid ""
 "A <b>Toplevel Menu</b> can contain any number of menu items and submenus. "
 "However, for precise item selection, a maximum number of twelve items is "
@@ -819,15 +831,16 @@ msgstr ""
 "möglich, das Menü mit einem Kommandozeilenbefehl zu öffnen. Erfahren Sie "
 "mehr auf <a href=\"https://github.com/Schneegans/Fly-Pie\">Github</a>."
 
-#: common/ItemRegistry.js:109
+#: common/ItemRegistry.js:110
 msgid "Activate Shortcut"
 msgstr "Tastaturkürzel aktivieren"
 
-#: common/ItemRegistry.js:112
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:114
 msgid "Simulates a key stroke."
 msgstr "Simuliert eine Tastenkombination."
 
-#: common/ItemRegistry.js:114
+#: common/ItemRegistry.js:116
 msgid ""
 "The <b>Activate Shortcut</b> action simulates a key stroke when activated. "
 "For example, this can be used to switch virtual desktops, control multimedia "
@@ -837,15 +850,16 @@ msgstr ""
 "zum Beispiel verwendet werden, um virtuelle Desktops zu wechseln, "
 "Multimediawiedergabe zu steuern, oder Aktionen rückgängig zu machen."
 
-#: common/ItemRegistry.js:131
+#: common/ItemRegistry.js:133
 msgid "Insert Text"
 msgstr "Text einfügen"
 
-#: common/ItemRegistry.js:134
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:137
 msgid "Types some text."
 msgstr "Tippt automatisch einen Text."
 
-#: common/ItemRegistry.js:136
+#: common/ItemRegistry.js:139
 msgid ""
 "The <b>Insert Text</b> action copies the given text to the clipboard and "
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
@@ -855,15 +869,16 @@ msgstr ""
 "simuliert dann Ctrl+V. Das kann nützlich sein, wenn Sie häufig denselben "
 "Text eintippen."
 
-#: common/ItemRegistry.js:156
+#: common/ItemRegistry.js:159
 msgid "Launch Application"
 msgstr "Anwendung starten"
 
-#: common/ItemRegistry.js:159
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:163
 msgid "Runs any shell command."
 msgstr "Führt einen beliebigen Kommandozeilenbefehl aus."
 
-#: common/ItemRegistry.js:161
+#: common/ItemRegistry.js:165
 msgid ""
 "The <b>Launch Application</b> action executes any given command. This is "
 "primarily used to open applications but may have plenty of other use cases "
@@ -873,15 +888,16 @@ msgstr ""
 "ist hauptsächlich zum Starten von Anwendungen gedacht, kann aber auch in "
 "vielen anderen Szenarios verwendet werden."
 
-#: common/ItemRegistry.js:186
+#: common/ItemRegistry.js:190
 msgid "Open URI"
 msgstr "URI öffnen"
 
-#: common/ItemRegistry.js:189
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:194
 msgid "Opens an URI with the default applications."
 msgstr "Öffnet eine URI mit der Standardanwendung."
 
-#: common/ItemRegistry.js:191
+#: common/ItemRegistry.js:196
 msgid ""
 "When the <b>Open URI</b> action is activated, the above URI is opened with "
 "the default application. For http URLs, this will be your web browser. "
@@ -892,15 +908,16 @@ msgstr ""
 "Standardanwendung. Für http URLs ist das Ihr Web Browser, allerdings können "
 "auch URIs wie \"mailto:foo@bar.org\" angegeben werden."
 
-#: common/ItemRegistry.js:213
+#: common/ItemRegistry.js:218
 msgid "Open File"
 msgstr "Datei öffnen"
 
-#: common/ItemRegistry.js:216
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:222
 msgid "Opens a file with the default applications."
 msgstr "Öffnet eine Datei mit der Standardanwendung."
 
-#: common/ItemRegistry.js:218
+#: common/ItemRegistry.js:224
 msgid ""
 "The <b>Open File</b> action will open the above specified file with your "
 "system's default application."
@@ -908,15 +925,16 @@ msgstr ""
 "Die <b>Datei öffnen</b> Aktion öffnet die gegebene Datei mit der "
 "dazugehörigen Standardanwendung."
 
-#: common/ItemRegistry.js:245
+#: common/ItemRegistry.js:251
 msgid "Custom Submenu"
 msgstr "Benutzerdefiniertes Untermenü"
 
-#: common/ItemRegistry.js:248
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:255
 msgid "Add structure to your menu!"
 msgstr "Strukturieren Sie Ihr Menü!"
 
-#: common/ItemRegistry.js:250
+#: common/ItemRegistry.js:257
 msgid ""
 "The <b>Custom Submenu</b> can be used to group actions together. As deep "
 "hierarchies can be selected quite efficiently, feel free to create submenus "
@@ -926,30 +944,32 @@ msgstr ""
 "gruppieren. Da tiefe Hierarchien effizient ausgewählt werden können, sind "
 "Untermenüs in Untermenüs durchaus sinnvoll!"
 
-#: common/ItemRegistry.js:261
+#: common/ItemRegistry.js:268
 msgid "Devices"
 msgstr "Geräte"
 
-#: common/ItemRegistry.js:264
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:272
 msgid "Shows connected devices."
 msgstr "Zeigt angeschlossene Geräte."
 
-#: common/ItemRegistry.js:266
+#: common/ItemRegistry.js:274
 msgid ""
 "The <b>Devices</b> submenu shows an item for each mounted volume, like USB-"
 "Sticks."
 msgstr ""
 "Das <b>Geräte</b>-Untermenü zeigt angeschlossene Geräte, wie USB-Sticks."
 
-#: common/ItemRegistry.js:295 settings/DefaultMenu.js:125
+#: common/ItemRegistry.js:303 settings/DefaultMenu.js:125
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#: common/ItemRegistry.js:298
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:307
 msgid "Shows your commonly used directories."
 msgstr "Zeigt häufig verwendete Verzeichnisse."
 
-#: common/ItemRegistry.js:300
+#: common/ItemRegistry.js:309
 msgid ""
 "The <b>Bookmarks</b> submenu shows an item for the trash, your desktop and "
 "each bookmarked directory."
@@ -957,15 +977,16 @@ msgstr ""
 "Das <b>Lesezeichen</b>-Untermenü zeigt Einträge für den Papierkorb, den "
 "Desktop und andere gespeicherte Verzeichnisse."
 
-#: common/ItemRegistry.js:392
+#: common/ItemRegistry.js:401
 msgid "Running Apps"
 msgstr "Laufende Anwendungen"
 
-#: common/ItemRegistry.js:395
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:405
 msgid "Shows the currently running applications."
 msgstr "Zeigt aktuell laufenden Programme."
 
-#: common/ItemRegistry.js:397
+#: common/ItemRegistry.js:407
 msgid ""
 "The <b>Running Apps</b> submenu shows all currently running applications. "
 "This is similar to the Alt+Tab window selection. As the entries change "
@@ -975,15 +996,16 @@ msgstr ""
 "Programme. Das ist ähnlich zur Alt-Tab-Fensterauswahl. Da die Einträge aber "
 "häufig ihre Position wechseln, ist dieses Untermenü nur bedingt effzient."
 
-#: common/ItemRegistry.js:427
+#: common/ItemRegistry.js:437
 msgid "Recent Files"
 msgstr "Zuletzt verwendete Dateien"
 
-#: common/ItemRegistry.js:430
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:441
 msgid "Shows your recently used files."
 msgstr "Zeigt kürzlich geöffnete Dateien."
 
-#: common/ItemRegistry.js:432
+#: common/ItemRegistry.js:443
 msgid ""
 "The <b>Recent Files</b> submenu shows a list of recently used files. You "
 "should limit the maximum number of shown files to a reasonable number."
@@ -992,15 +1014,16 @@ msgstr ""
 "kürzlich verwendeten Dateien. Sie sollten die maximal angezeigte Anzahl auf "
 "etwa zwölf beschränken."
 
-#: common/ItemRegistry.js:466
+#: common/ItemRegistry.js:477
 msgid "Frequently Used"
 msgstr "Häufig verwendete Anwendungen"
 
-#: common/ItemRegistry.js:469
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:481
 msgid "Shows your frequently used applications."
 msgstr "Zeigt oft verwendete Programme."
 
-#: common/ItemRegistry.js:471
+#: common/ItemRegistry.js:483
 msgid ""
 "The <b>Frequently Used</b> submenu shows a list of frequently used "
 "applications. You should limit the maximum number of shown applications to a "
@@ -1010,15 +1033,16 @@ msgstr ""
 "verwendeter Programme.  Sie sollten die maximal angezeigte Anzahl auf etwa "
 "zwölf beschränken."
 
-#: common/ItemRegistry.js:496 settings/DefaultMenu.js:135
+#: common/ItemRegistry.js:508 settings/DefaultMenu.js:135
 msgid "Favorites"
 msgstr "Favoriten"
 
-#: common/ItemRegistry.js:499
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:512
 msgid "Shows your pinned applications."
 msgstr "Zeigt angeheftete Anwendungen."
 
-#: common/ItemRegistry.js:501
+#: common/ItemRegistry.js:514
 msgid ""
 "The <b>Favorites</b> submenu shows the applications you have pinned to Gnome "
 "Shell's Dash."
@@ -1026,15 +1050,16 @@ msgstr ""
 "Das <b>Favoriten</b>-Untermenü zeigt die Anwendungen, die Sie an die Dash "
 "von GNOME Shell angeheftet haben."
 
-#: common/ItemRegistry.js:528 settings/DefaultMenu.js:136
+#: common/ItemRegistry.js:541 settings/DefaultMenu.js:136
 msgid "System"
 msgstr "System"
 
-#: common/ItemRegistry.js:531
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:545
 msgid "Allows screen lock shutdown and other things."
 msgstr "Rechner ausschalten, neu starten und ähnliches."
 
-#: common/ItemRegistry.js:533
+#: common/ItemRegistry.js:547
 msgid ""
 "The <b>System</b> submenu shows an items for screen-lock, shutdown, "
 "settings, etc."
@@ -1042,35 +1067,36 @@ msgstr ""
 "Das <b>System</b>-Untermenü zeigt Einträge für Bildschirmsperren, "
 "Herunterfahren, Einstellungen, etc."
 
-#: common/ItemRegistry.js:557
+#: common/ItemRegistry.js:571
 msgid "Lock"
 msgstr "Bildschirm sperren"
 
-#: common/ItemRegistry.js:566
+#: common/ItemRegistry.js:580
 msgid "Suspend"
 msgstr "Ruhezustand"
 
-#: common/ItemRegistry.js:575
+#: common/ItemRegistry.js:589
 msgid "Switch User..."
 msgstr "Nutzer wechseln..."
 
-#: common/ItemRegistry.js:584
+#: common/ItemRegistry.js:598
 msgid "Log Out"
 msgstr "Abmelden"
 
-#: common/ItemRegistry.js:593
+#: common/ItemRegistry.js:607
 msgid "Power Off..."
 msgstr "Ausschalten..."
 
-#: common/ItemRegistry.js:608
+#: common/ItemRegistry.js:622
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
-#: common/ItemRegistry.js:611
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:626
 msgid "Shows all installed applications."
 msgstr "Zeigt alle installierten Anwendungen."
 
-#: common/ItemRegistry.js:613
+#: common/ItemRegistry.js:628
 msgid ""
 "The <b>Main Menu</b> shows all installed applications. Usually, this is very "
 "cluttered as many sections contain too many items to be used efficiently. "

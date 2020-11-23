@@ -94,6 +94,7 @@ var getItemTypes = () => {
         name: _('Toplevel Menu'),
         icon: 'view-more-symbolic',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Create as many as you want!'),
         description: _(
             'A <b>Toplevel Menu</b> can contain any number of menu items and submenus. However, for precise item selection, a maximum number of twelve items is recommended.\nThe menu can be opened using the shortcut defined above. It is also possible to open a menu with a terminal command. You can read more on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.'),
@@ -109,6 +110,7 @@ var getItemTypes = () => {
         name: _('Activate Shortcut'),
         icon: 'preferences-desktop-keyboard-shortcuts',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Simulates a key stroke.'),
         description: _(
             'The <b>Activate Shortcut</b> action simulates a key stroke when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations.'),
@@ -131,6 +133,7 @@ var getItemTypes = () => {
         name: _('Insert Text'),
         icon: 'input-keyboard',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Types some text.'),
         description: _(
             'The <b>Insert Text</b> action copies the given text to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things.'),
@@ -156,6 +159,7 @@ var getItemTypes = () => {
         name: _('Launch Application'),
         icon: 'utilities-terminal',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Runs any shell command.'),
         description: _(
             'The <b>Launch Application</b> action executes any given command. This is primarily used to open applications but may have plenty of other use cases as well.'),
@@ -186,6 +190,7 @@ var getItemTypes = () => {
         name: _('Open URI'),
         icon: 'applications-internet',
         defaultData: 'https://github.com/Schneegans/Fly-Pie',
+        // Translators: Please keep this short.
         subtitle: _('Opens an URI with the default applications.'),
         description: _(
             'When the <b>Open URI</b> action is activated, the above URI is opened with the default application. For http URLs, this will be your web browser. However, it is also possible to open other URIs such as "mailto:foo@bar.org".'),
@@ -213,6 +218,7 @@ var getItemTypes = () => {
         name: _('Open File'),
         icon: 'text-x-generic',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Opens a file with the default applications.'),
         description: _(
             'The <b>Open File</b> action will open the above specified file with your system\'s default application.'),
@@ -245,6 +251,7 @@ var getItemTypes = () => {
         name: _('Custom Submenu'),
         icon: 'view-more-horizontal-symbolic',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Add structure to your menu!'),
         description: _(
             'The <b>Custom Submenu</b> can be used to group actions together. As deep hierarchies can be selected quite efficiently, feel free to create submenus in submenus!'),
@@ -261,6 +268,7 @@ var getItemTypes = () => {
         name: _('Devices'),
         icon: 'drive-harddisk',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Shows connected devices.'),
         description: _(
             'The <b>Devices</b> submenu shows an item for each mounted volume, like USB-Sticks.'),
@@ -295,6 +303,7 @@ var getItemTypes = () => {
         name: _('Bookmarks'),
         icon: 'folder',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Shows your commonly used directories.'),
         description: _(
             'The <b>Bookmarks</b> submenu shows an item for the trash, your desktop and each bookmarked directory.'),
@@ -392,6 +401,7 @@ var getItemTypes = () => {
         name: _('Running Apps'),
         icon: 'preferences-system-windows',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Shows the currently running applications.'),
         description: _(
             'The <b>Running Apps</b> submenu shows all currently running applications. This is similar to the Alt+Tab window selection. As the entries change position frequently, this is actually not very effective.'),
@@ -427,6 +437,7 @@ var getItemTypes = () => {
         name: _('Recent Files'),
         icon: 'document-open-recent',
         defaultData: '7',
+        // Translators: Please keep this short.
         subtitle: _('Shows your recently used files.'),
         description: _(
             'The <b>Recent Files</b> submenu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number.'),
@@ -466,6 +477,7 @@ var getItemTypes = () => {
         name: _('Frequently Used'),
         icon: 'emblem-favorite',
         defaultData: '7',
+        // Translators: Please keep this short.
         subtitle: _('Shows your frequently used applications.'),
         description: _(
             'The <b>Frequently Used</b> submenu shows a list of frequently used applications. You should limit the maximum number of shown applications to a reasonable number.'),
@@ -496,6 +508,7 @@ var getItemTypes = () => {
         name: _('Favorites'),
         icon: 'starred',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Shows your pinned applications.'),
         description: _(
             'The <b>Favorites</b> submenu shows the applications you have pinned to Gnome Shell\'s Dash.'),
@@ -528,6 +541,7 @@ var getItemTypes = () => {
         name: _('System'),
         icon: 'system-log-out',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Allows screen lock shutdown and other things.'),
         description: _(
             'The <b>System</b> submenu shows an items for screen-lock, shutdown, settings, etc.'),
@@ -608,6 +622,7 @@ var getItemTypes = () => {
         name: _('Main Menu'),
         icon: 'applications-system',
         defaultData: '',
+        // Translators: Please keep this short.
         subtitle: _('Shows all installed applications.'),
         description: _(
             'The <b>Main Menu</b> shows all installed applications. Usually, this is very cluttered as many sections contain too many items to be used efficiently. You should rather setup your own menus!'),
