@@ -8,7 +8,7 @@ assignees: ''
 
 <!--
 Thank you for contributing a translation to Fly-Pie!
-This template will help you to to provide a high quality contributon to the project.
+This template will help you to provide a high quality contribution to the project.
 Please replace words in pointy <brackets> with suitable replacements.
 
 ---
@@ -32,7 +32,9 @@ is ok with it - but I'm sure they will be! xD)
 
 - [ ] I followed the "Translating FlyPie" section of the README.
 - [ ] I complied to the Contributing Guidelines. <!--see CONTRIBUTING.md-->
-- [ ] I made the following changes to my `<LANGUAGE>.po` file: <!--You'll find most of them in the first code block, around lines 1-20-ish.-->
+- [ ] I tested the translation and checked that nothing looks out-of-place.
+      Especially the strings which are marked with **Keep this short** may break the layout of the user interface if the translation is too long.
+- [ ] I made the following changes to my `<LANGUAGE_CODE>.po` file: <!--You'll find most of them in the first code block, around lines 1-20-ish.-->
   - [ ] Fill in the `<LANGUAGE>`.
   - [ ] In case you are the first translator, fill in your info and the year. If not, just tick this box anyway.
   - [ ] Set `PO_Revision-Date` to an appropriate point in time.
@@ -52,7 +54,10 @@ is ok with it - but I'm sure they will be! xD)
 
 <!--
 This is the place for any additional stuff concerning your Pull Request.
-Please put it below this comment. If there isn't anything else to say, please delete the heading.
+For example, you could drop a note here if you do not want to get notified
+when your translation needs an update in the future.
+If there isn't anything else to say, please delete the heading.
+
 Thanks again for your contribution!
 Your Fly-Pie Team
 -->

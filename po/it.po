@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it_IT\n"
+"Language: it\n"
 
 #: settings/settings.ui:53
 msgid ""
