@@ -1,7 +1,7 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# <LANGUAGE> translation for the Fly-Pie GNOME Shell Extension.
+# Copyright (C) 2020 Simon Schneegans
+# This file is distributed under the same license as the Fly-Pie package.
+# Initial translation: <FIRST AUTHOR> <EMAIL@ADDRESS>, <YEAR>.
 #
 #, fuzzy
 msgid ""
@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-15 20:51+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language-Team: <NAMES OF CONTRIBUTORS>\n"
+"Language: <LANGUAGE_CODE>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -80,6 +80,7 @@ msgid ""
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
 
+#. The text of the big tutorial button. Using two lines looks quite good.
 #: settings/settings.ui:1083 settings/settings.ui:1210
 #: settings/settings.ui:1513 settings/settings.ui:1660
 #: settings/settings.ui:1962
@@ -226,6 +227,7 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
+#. Caption of one of the main pages.
 #: settings/settings.ui:2323
 msgid "Tutorial"
 msgstr ""
@@ -262,6 +264,7 @@ msgstr ""
 msgid "Initializes the settings below to random values"
 msgstr ""
 
+#. Please keep this short!
 #: settings/settings.ui:2607
 msgid "Generate Random Preset"
 msgstr ""
@@ -274,6 +277,7 @@ msgstr ""
 msgid "Global Scale"
 msgstr ""
 
+#. Please keep this short!
 #: settings/settings.ui:2744
 msgid "Independent of the preset."
 msgstr ""
@@ -336,6 +340,7 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
+#. Keep the individual lines short! You can use up to three lines if you want.
 #: settings/settings.ui:3186
 msgid ""
 "Clicking inside the inner radius\n"
@@ -415,12 +420,14 @@ msgstr ""
 msgid "Opacity"
 msgstr ""
 
+#. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
 #: settings/settings.ui:3927 settings/settings.ui:4012
 #: settings/settings.ui:4618 settings/settings.ui:4823
 #: settings/settings.ui:5689 settings/settings.ui:5766
 msgid "Fixed"
 msgstr ""
 
+#. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
 #: settings/settings.ui:3942 settings/settings.ui:4027
 #: settings/settings.ui:4633 settings/settings.ui:4838
 msgid "Auto"
@@ -455,6 +462,7 @@ msgstr ""
 msgid "Icon Scale"
 msgstr ""
 
+#. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
 #: settings/settings.ui:4648 settings/settings.ui:4853
 #: settings/settings.ui:5704 settings/settings.ui:5781
 msgid "Parent"
@@ -580,6 +588,7 @@ msgstr ""
 msgid "These settings are independent of the presets."
 msgstr ""
 
+#. Caption of one of the main pages.
 #: settings/settings.ui:7001
 msgid "Settings"
 msgstr ""
@@ -693,10 +702,12 @@ msgstr ""
 msgid "Open in Screen Center"
 msgstr ""
 
+#. Caption of one of the main pages.
 #: settings/settings.ui:8307
 msgid "Menu Editor"
 msgstr ""
 
+#. Caption of one of the main pages.
 #: settings/settings.ui:8384
 msgid "Achievements"
 msgstr ""
@@ -705,11 +716,12 @@ msgstr ""
 msgid "Toplevel Menu"
 msgstr ""
 
-#: common/ItemRegistry.js:97
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:98
 msgid "Create as many as you want!"
 msgstr ""
 
-#: common/ItemRegistry.js:99
+#: common/ItemRegistry.js:100
 msgid ""
 "A <b>Toplevel Menu</b> can contain any number of menu items and submenus. "
 "However, for precise item selection, a maximum number of twelve items is "
@@ -719,60 +731,64 @@ msgid ""
 "\"https://github.com/Schneegans/Fly-Pie\">Github</a>."
 msgstr ""
 
-#: common/ItemRegistry.js:109
+#: common/ItemRegistry.js:110
 msgid "Activate Shortcut"
 msgstr ""
 
-#: common/ItemRegistry.js:112
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:114
 msgid "Simulates a key stroke."
 msgstr ""
 
-#: common/ItemRegistry.js:114
+#: common/ItemRegistry.js:116
 msgid ""
 "The <b>Activate Shortcut</b> action simulates a key stroke when activated. "
 "For example, this can be used to switch virtual desktops, control multimedia "
 "playback or to undo / redo operations."
 msgstr ""
 
-#: common/ItemRegistry.js:131
+#: common/ItemRegistry.js:133
 msgid "Insert Text"
 msgstr ""
 
-#: common/ItemRegistry.js:134
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:137
 msgid "Types some text."
 msgstr ""
 
-#: common/ItemRegistry.js:136
+#: common/ItemRegistry.js:139
 msgid ""
 "The <b>Insert Text</b> action copies the given text to the clipboard and "
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
 "write the same things."
 msgstr ""
 
-#: common/ItemRegistry.js:156
+#: common/ItemRegistry.js:159
 msgid "Launch Application"
 msgstr ""
 
-#: common/ItemRegistry.js:159
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:163
 msgid "Runs any shell command."
 msgstr ""
 
-#: common/ItemRegistry.js:161
+#: common/ItemRegistry.js:165
 msgid ""
 "The <b>Launch Application</b> action executes any given command. This is "
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
 msgstr ""
 
-#: common/ItemRegistry.js:186
+#: common/ItemRegistry.js:190
 msgid "Open URI"
 msgstr ""
 
-#: common/ItemRegistry.js:189
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:194
 msgid "Opens an URI with the default applications."
 msgstr ""
 
-#: common/ItemRegistry.js:191
+#: common/ItemRegistry.js:196
 msgid ""
 "When the <b>Open URI</b> action is activated, the above URI is opened with "
 "the default application. For http URLs, this will be your web browser. "
@@ -780,164 +796,174 @@ msgid ""
 "\"."
 msgstr ""
 
-#: common/ItemRegistry.js:213
+#: common/ItemRegistry.js:218
 msgid "Open File"
 msgstr ""
 
-#: common/ItemRegistry.js:216
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:222
 msgid "Opens a file with the default applications."
 msgstr ""
 
-#: common/ItemRegistry.js:218
+#: common/ItemRegistry.js:224
 msgid ""
 "The <b>Open File</b> action will open the above specified file with your "
 "system's default application."
 msgstr ""
 
-#: common/ItemRegistry.js:245
+#: common/ItemRegistry.js:251
 msgid "Custom Submenu"
 msgstr ""
 
-#: common/ItemRegistry.js:248
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:255
 msgid "Add structure to your menu!"
 msgstr ""
 
-#: common/ItemRegistry.js:250
+#: common/ItemRegistry.js:257
 msgid ""
 "The <b>Custom Submenu</b> can be used to group actions together. As deep "
 "hierarchies can be selected quite efficiently, feel free to create submenus "
 "in submenus!"
 msgstr ""
 
-#: common/ItemRegistry.js:261
+#: common/ItemRegistry.js:268
 msgid "Devices"
 msgstr ""
 
-#: common/ItemRegistry.js:264
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:272
 msgid "Shows connected devices."
 msgstr ""
 
-#: common/ItemRegistry.js:266
+#: common/ItemRegistry.js:274
 msgid ""
 "The <b>Devices</b> submenu shows an item for each mounted volume, like USB-"
 "Sticks."
 msgstr ""
 
-#: common/ItemRegistry.js:295 settings/DefaultMenu.js:125
+#: common/ItemRegistry.js:303 settings/DefaultMenu.js:125
 msgid "Bookmarks"
 msgstr ""
 
-#: common/ItemRegistry.js:298
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:307
 msgid "Shows your commonly used directories."
 msgstr ""
 
-#: common/ItemRegistry.js:300
+#: common/ItemRegistry.js:309
 msgid ""
 "The <b>Bookmarks</b> submenu shows an item for the trash, your desktop and "
 "each bookmarked directory."
 msgstr ""
 
-#: common/ItemRegistry.js:392
+#: common/ItemRegistry.js:401
 msgid "Running Apps"
 msgstr ""
 
-#: common/ItemRegistry.js:395
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:405
 msgid "Shows the currently running applications."
 msgstr ""
 
-#: common/ItemRegistry.js:397
+#: common/ItemRegistry.js:407
 msgid ""
 "The <b>Running Apps</b> submenu shows all currently running applications. "
 "This is similar to the Alt+Tab window selection. As the entries change "
 "position frequently, this is actually not very effective."
 msgstr ""
 
-#: common/ItemRegistry.js:427
+#: common/ItemRegistry.js:437
 msgid "Recent Files"
 msgstr ""
 
-#: common/ItemRegistry.js:430
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:441
 msgid "Shows your recently used files."
 msgstr ""
 
-#: common/ItemRegistry.js:432
+#: common/ItemRegistry.js:443
 msgid ""
 "The <b>Recent Files</b> submenu shows a list of recently used files. You "
 "should limit the maximum number of shown files to a reasonable number."
 msgstr ""
 
-#: common/ItemRegistry.js:466
+#: common/ItemRegistry.js:477
 msgid "Frequently Used"
 msgstr ""
 
-#: common/ItemRegistry.js:469
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:481
 msgid "Shows your frequently used applications."
 msgstr ""
 
-#: common/ItemRegistry.js:471
+#: common/ItemRegistry.js:483
 msgid ""
 "The <b>Frequently Used</b> submenu shows a list of frequently used "
 "applications. You should limit the maximum number of shown applications to a "
 "reasonable number."
 msgstr ""
 
-#: common/ItemRegistry.js:496 settings/DefaultMenu.js:135
+#: common/ItemRegistry.js:508 settings/DefaultMenu.js:135
 msgid "Favorites"
 msgstr ""
 
-#: common/ItemRegistry.js:499
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:512
 msgid "Shows your pinned applications."
 msgstr ""
 
-#: common/ItemRegistry.js:501
+#: common/ItemRegistry.js:514
 msgid ""
 "The <b>Favorites</b> submenu shows the applications you have pinned to Gnome "
 "Shell's Dash."
 msgstr ""
 
-#: common/ItemRegistry.js:528 settings/DefaultMenu.js:136
+#: common/ItemRegistry.js:541 settings/DefaultMenu.js:136
 msgid "System"
 msgstr ""
 
-#: common/ItemRegistry.js:531
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:545
 msgid "Allows screen lock shutdown and other things."
 msgstr ""
 
-#: common/ItemRegistry.js:533
+#: common/ItemRegistry.js:547
 msgid ""
 "The <b>System</b> submenu shows an items for screen-lock, shutdown, "
 "settings, etc."
 msgstr ""
 
-#: common/ItemRegistry.js:557
+#: common/ItemRegistry.js:571
 msgid "Lock"
 msgstr ""
 
-#: common/ItemRegistry.js:566
+#: common/ItemRegistry.js:580
 msgid "Suspend"
 msgstr ""
 
-#: common/ItemRegistry.js:575
+#: common/ItemRegistry.js:589
 msgid "Switch User..."
 msgstr ""
 
-#: common/ItemRegistry.js:584
+#: common/ItemRegistry.js:598
 msgid "Log Out"
 msgstr ""
 
-#: common/ItemRegistry.js:593
+#: common/ItemRegistry.js:607
 msgid "Power Off..."
 msgstr ""
 
-#: common/ItemRegistry.js:608
+#: common/ItemRegistry.js:622
 msgid "Main Menu"
 msgstr ""
 
-#: common/ItemRegistry.js:611
+#. Translators: Please keep this short.
+#: common/ItemRegistry.js:626
 msgid "Shows all installed applications."
 msgstr ""
 
-#: common/ItemRegistry.js:613
+#: common/ItemRegistry.js:628
 msgid ""
 "The <b>Main Menu</b> shows all installed applications. Usually, this is very "
 "cluttered as many sections contain too many items to be used efficiently. "
@@ -988,7 +1014,7 @@ msgstr ""
 msgid "Gnome Shell"
 msgstr ""
 
-#: settings/DefaultMenu.js:84 settings/ExampleMenu.js:239
+#: settings/DefaultMenu.js:84 settings/ExampleMenu.js:241
 msgid "Up"
 msgstr ""
 
@@ -996,7 +1022,7 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: settings/DefaultMenu.js:97 settings/ExampleMenu.js:242
+#: settings/DefaultMenu.js:97 settings/ExampleMenu.js:244
 msgid "Down"
 msgstr ""
 
@@ -1148,319 +1174,321 @@ msgstr ""
 msgid "Sweets"
 msgstr ""
 
-#: settings/ExampleMenu.js:94
+#. Translators: This is the item which should be selected in the tutorial.
+#. Make sure the translation matches the name given in the tutorial!
+#: settings/ExampleMenu.js:96
 msgid "Shortcake"
 msgstr ""
 
-#: settings/ExampleMenu.js:95
+#: settings/ExampleMenu.js:97
 msgid "Candy"
 msgstr ""
 
-#: settings/ExampleMenu.js:96
+#: settings/ExampleMenu.js:98
 msgid "Doughnut"
 msgstr ""
 
-#: settings/ExampleMenu.js:97
+#: settings/ExampleMenu.js:99
 msgid "Cookie"
 msgstr ""
 
-#: settings/ExampleMenu.js:98
+#: settings/ExampleMenu.js:100
 msgid "Chocolate"
 msgstr ""
 
-#: settings/ExampleMenu.js:104
+#: settings/ExampleMenu.js:106
 msgid "Activities"
 msgstr ""
 
-#: settings/ExampleMenu.js:108
+#: settings/ExampleMenu.js:110
 msgid "Games"
 msgstr ""
 
-#: settings/ExampleMenu.js:111
+#: settings/ExampleMenu.js:113
 msgid "Billards"
 msgstr ""
 
-#: settings/ExampleMenu.js:112
+#: settings/ExampleMenu.js:114
 msgid "Mahjong"
 msgstr ""
 
-#: settings/ExampleMenu.js:113
+#: settings/ExampleMenu.js:115
 msgid "Bowling"
 msgstr ""
 
-#: settings/ExampleMenu.js:114
+#: settings/ExampleMenu.js:116
 msgid "Darts"
 msgstr ""
 
-#: settings/ExampleMenu.js:115
+#: settings/ExampleMenu.js:117
 msgid "Video Game"
 msgstr ""
 
-#: settings/ExampleMenu.js:119
+#: settings/ExampleMenu.js:121
 msgid "Sports"
 msgstr ""
 
-#: settings/ExampleMenu.js:122
+#: settings/ExampleMenu.js:124
 msgid "Cricket"
 msgstr ""
 
-#: settings/ExampleMenu.js:123
+#: settings/ExampleMenu.js:125
 msgid "Ice Hockey"
 msgstr ""
 
-#: settings/ExampleMenu.js:124
+#: settings/ExampleMenu.js:126
 msgid "Tennis"
 msgstr ""
 
-#: settings/ExampleMenu.js:125
+#: settings/ExampleMenu.js:127
 msgid "Fishing"
 msgstr ""
 
-#: settings/ExampleMenu.js:126
+#: settings/ExampleMenu.js:128
 msgid "Skiing"
 msgstr ""
 
-#: settings/ExampleMenu.js:130
+#: settings/ExampleMenu.js:132
 msgid "Places"
 msgstr ""
 
-#: settings/ExampleMenu.js:133
+#: settings/ExampleMenu.js:135
 msgid "Mount Fuji"
 msgstr ""
 
-#: settings/ExampleMenu.js:134
+#: settings/ExampleMenu.js:136
 msgid "Mount Etna"
 msgstr ""
 
-#: settings/ExampleMenu.js:135
+#: settings/ExampleMenu.js:137
 msgid "Statue of Liberty"
 msgstr ""
 
-#: settings/ExampleMenu.js:136
+#: settings/ExampleMenu.js:138
 msgid "Japan"
 msgstr ""
 
-#: settings/ExampleMenu.js:137
+#: settings/ExampleMenu.js:139
 msgid "Moyai"
 msgstr ""
 
-#: settings/ExampleMenu.js:143
+#: settings/ExampleMenu.js:145
 msgid "Objects"
 msgstr ""
 
-#: settings/ExampleMenu.js:147
+#: settings/ExampleMenu.js:149
 msgid "Cars"
 msgstr ""
 
-#: settings/ExampleMenu.js:150
+#: settings/ExampleMenu.js:152
 msgid "Bus"
 msgstr ""
 
-#: settings/ExampleMenu.js:151
+#: settings/ExampleMenu.js:153
 msgid "Fire Engine"
 msgstr ""
 
-#: settings/ExampleMenu.js:152
+#: settings/ExampleMenu.js:154
 msgid "Automobile"
 msgstr ""
 
-#: settings/ExampleMenu.js:153
+#: settings/ExampleMenu.js:155
 msgid "Tractor"
 msgstr ""
 
-#: settings/ExampleMenu.js:154
+#: settings/ExampleMenu.js:156
 msgid "Truck"
 msgstr ""
 
-#: settings/ExampleMenu.js:158
+#: settings/ExampleMenu.js:160
 msgid "Buildings"
 msgstr ""
 
-#: settings/ExampleMenu.js:161
+#: settings/ExampleMenu.js:163
 msgid "Post Office"
 msgstr ""
 
-#: settings/ExampleMenu.js:162
+#: settings/ExampleMenu.js:164
 msgid "School"
 msgstr ""
 
-#: settings/ExampleMenu.js:163
+#: settings/ExampleMenu.js:165
 msgid "Hospital"
 msgstr ""
 
-#: settings/ExampleMenu.js:164
+#: settings/ExampleMenu.js:166
 msgid "Bank"
 msgstr ""
 
-#: settings/ExampleMenu.js:165
+#: settings/ExampleMenu.js:167
 msgid "Love Hotel"
 msgstr ""
 
-#: settings/ExampleMenu.js:169
+#: settings/ExampleMenu.js:171
 msgid "Instruments"
 msgstr ""
 
-#: settings/ExampleMenu.js:172
+#: settings/ExampleMenu.js:174
 msgid "Saxophone"
 msgstr ""
 
-#: settings/ExampleMenu.js:173
+#: settings/ExampleMenu.js:175
 msgid "Guitar"
 msgstr ""
 
-#: settings/ExampleMenu.js:174
+#: settings/ExampleMenu.js:176
 msgid "Trumpet"
 msgstr ""
 
-#: settings/ExampleMenu.js:175
+#: settings/ExampleMenu.js:177
 msgid "Microphone"
 msgstr ""
 
-#: settings/ExampleMenu.js:176
+#: settings/ExampleMenu.js:178
 msgid "Drum"
 msgstr ""
 
-#: settings/ExampleMenu.js:182
+#: settings/ExampleMenu.js:184
 msgid "Smileys"
 msgstr ""
 
-#: settings/ExampleMenu.js:186
+#: settings/ExampleMenu.js:188
 msgid "Happy Faces"
 msgstr ""
 
-#: settings/ExampleMenu.js:189
+#: settings/ExampleMenu.js:191
 msgid "Smiley"
 msgstr ""
 
-#: settings/ExampleMenu.js:190
+#: settings/ExampleMenu.js:192
 msgid "Winking Face"
 msgstr ""
 
-#: settings/ExampleMenu.js:191
+#: settings/ExampleMenu.js:193
 msgid "Face With Smiling Eyes"
 msgstr ""
 
-#: settings/ExampleMenu.js:192
+#: settings/ExampleMenu.js:194
 msgid "Face With Sweat"
 msgstr ""
 
-#: settings/ExampleMenu.js:193
+#: settings/ExampleMenu.js:195
 msgid "ROFL"
 msgstr ""
 
-#: settings/ExampleMenu.js:197
+#: settings/ExampleMenu.js:199
 msgid "Angry Faces"
 msgstr ""
 
-#: settings/ExampleMenu.js:200
+#: settings/ExampleMenu.js:202
 msgid "Vomiting Face"
 msgstr ""
 
-#: settings/ExampleMenu.js:201
+#: settings/ExampleMenu.js:203
 msgid "Skeptical Face"
 msgstr ""
 
-#: settings/ExampleMenu.js:202
+#: settings/ExampleMenu.js:204
 msgid "Pouting Face"
 msgstr ""
 
-#: settings/ExampleMenu.js:203
+#: settings/ExampleMenu.js:205
 msgid "Angry Face"
 msgstr ""
 
-#: settings/ExampleMenu.js:204
+#: settings/ExampleMenu.js:206
 msgid "Very Angry Face"
 msgstr ""
 
-#: settings/ExampleMenu.js:208
+#: settings/ExampleMenu.js:210
 msgid "Surprised Faces"
 msgstr ""
 
-#: settings/ExampleMenu.js:211
+#: settings/ExampleMenu.js:213
 msgid "Flushed Face"
 msgstr ""
 
-#: settings/ExampleMenu.js:212
+#: settings/ExampleMenu.js:214
 msgid "Anguished Face"
 msgstr ""
 
-#: settings/ExampleMenu.js:213
+#: settings/ExampleMenu.js:215
 msgid "Astonished Face"
 msgstr ""
 
-#: settings/ExampleMenu.js:214
+#: settings/ExampleMenu.js:216
 msgid "Screaming Face"
 msgstr ""
 
-#: settings/ExampleMenu.js:215
+#: settings/ExampleMenu.js:217
 msgid "Pouff"
 msgstr ""
 
-#: settings/ExampleMenu.js:221
+#: settings/ExampleMenu.js:223
 msgid "Symbols"
 msgstr ""
 
-#: settings/ExampleMenu.js:225
+#: settings/ExampleMenu.js:227
 msgid "Star Signs"
 msgstr ""
 
-#: settings/ExampleMenu.js:228
+#: settings/ExampleMenu.js:230
 msgid "Taurus"
 msgstr ""
 
-#: settings/ExampleMenu.js:229
+#: settings/ExampleMenu.js:231
 msgid "Cancer"
 msgstr ""
 
-#: settings/ExampleMenu.js:230
+#: settings/ExampleMenu.js:232
 msgid "Virgo"
 msgstr ""
 
-#: settings/ExampleMenu.js:231
+#: settings/ExampleMenu.js:233
 msgid "Scorpius"
 msgstr ""
 
-#: settings/ExampleMenu.js:232
+#: settings/ExampleMenu.js:234
 msgid "Capricorn"
 msgstr ""
 
-#: settings/ExampleMenu.js:236
+#: settings/ExampleMenu.js:238
 msgid "Arrows"
 msgstr ""
 
-#: settings/ExampleMenu.js:240
+#: settings/ExampleMenu.js:242
 msgid "Right"
 msgstr ""
 
-#: settings/ExampleMenu.js:241
+#: settings/ExampleMenu.js:243
 msgid "Twisted"
 msgstr ""
 
-#: settings/ExampleMenu.js:243
+#: settings/ExampleMenu.js:245
 msgid "Left"
 msgstr ""
 
-#: settings/ExampleMenu.js:247
+#: settings/ExampleMenu.js:249
 msgid "Info Signs"
 msgstr ""
 
-#: settings/ExampleMenu.js:250
+#: settings/ExampleMenu.js:252
 msgid "Litter Bin"
 msgstr ""
 
-#: settings/ExampleMenu.js:251
+#: settings/ExampleMenu.js:253
 msgid "Potable Water"
 msgstr ""
 
-#: settings/ExampleMenu.js:252
+#: settings/ExampleMenu.js:254
 msgid "Mens"
 msgstr ""
 
-#: settings/ExampleMenu.js:253
+#: settings/ExampleMenu.js:255
 msgid "Womens"
 msgstr ""
 
-#: settings/ExampleMenu.js:254
+#: settings/ExampleMenu.js:256
 msgid "Baby"
 msgstr ""
 

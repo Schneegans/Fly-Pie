@@ -91,6 +91,8 @@ var ExampleMenu = class ExampleMenu {
               name: _('Sweets'),
               icon: '🍭',
               children: [
+                // Translators: This is the item which should be selected in the tutorial.
+                // Make sure the translation matches the name given in the tutorial!
                 {name: _('Shortcake'), icon: '🍰'},
                 {name: _('Candy'), icon: '🍬'},
                 {name: _('Doughnut'), icon: '🍩'},
