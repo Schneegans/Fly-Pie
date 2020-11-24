@@ -672,7 +672,7 @@ var Menu = class Menu {
         return DBusInterface.errorCodes.eInvalidAngles;
       }
 
-      this._updateItemIDs(structure.children);
+      this._updateItemIDs(structure.children, '');
     }
 
     return 0;
@@ -685,11 +685,9 @@ var Menu = class Menu {
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
       if (!item.id) {
-        if (parentID) {
-          item.id = parentID + '/' + i;
-        } else {
-          item.id = '/' + i;
-        }
+        item.id = parentID + '/' + i;
+      } else {
+        item.id = parentID + '/' + item.id;
       }
 
       // Proceed recursively with the children.
