@@ -724,11 +724,16 @@ var getItemTypes = () => {
 // individual items.
 let _transformConfig =
     (config) => {
-      const icon  = config.icon != undefined ? config.icon : '';
-      const name  = config.name != undefined ? config.name : '';
-      const type  = config.type != undefined ? config.type : '';
+      const name  = config.name != undefined ? config.name : _('Unnamed Item');
+      const icon  = config.icon != undefined ? config.icon : 'image-missing';
       const data  = config.data != undefined ? config.data : '';
       const angle = config.angle != undefined ? config.angle : -1;
+
+      let type = config.type;
+
+      if (type == undefined) {
+        type = config.children != undefined ? 'Submenu' : 'DBusSignal';
+      }
 
       const result = getItemTypes()[type].createItem(name, icon, angle, data);
 
@@ -744,8 +749,11 @@ let _transformConfig =
 
 var transformConfig = (config) => {
   // Transform the configuration into a menu structure.
-  const structure =
-      getItemTypes()['Menu'].createItem(config.name, config.icon, config.centered);
+  const name     = config.name != undefined ? config.name : _('Unnamed Menu');
+  const icon     = config.icon != undefined ? config.icon : 'image-missing';
+  const centered = config.centered != undefined ? config.centered : false;
+
+  const structure = getItemTypes()['Menu'].createItem(name, icon, centered);
 
   for (let j = 0; j < config.children.length; j++) {
     structure.children.push(_transformConfig(config.children[j]));
