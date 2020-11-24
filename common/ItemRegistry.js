@@ -715,3 +715,41 @@ var getItemTypes = () => {
 
   return _itemTypes;
 };
+
+// This uses the createItem() methods of the ItemRegistry to transform a menu
+// configuration (as created by Fly-Pie's menu editor) to a menu structure (as
+// required by the menu class). The main difference is that the menu structure may
+// contain significantly more items - while the menu configuration only contains one
+// item for "Bookmarks", the menu structure actually contains all of the bookmarks as
+// individual items.
+let _transformConfig =
+    (config) => {
+      const icon  = config.icon != undefined ? config.icon : '';
+      const name  = config.name != undefined ? config.name : '';
+      const type  = config.type != undefined ? config.type : '';
+      const data  = config.data != undefined ? config.data : '';
+      const angle = config.angle != undefined ? config.angle : -1;
+
+      const result = getItemTypes()[type].createItem(name, icon, angle, data);
+
+      // Load all children recursively.
+      if (config.children) {
+        for (let i = 0; i < config.children.length; i++) {
+          result.children.push(_transformConfig(config.children[i]));
+        }
+      }
+
+      return result;
+    }
+
+var transformConfig = (config) => {
+  // Transform the configuration into a menu structure.
+  const structure =
+      getItemTypes()['Menu'].createItem(config.name, config.icon, config.centered);
+
+  for (let j = 0; j < config.children.length; j++) {
+    structure.children.push(_transformConfig(config.children[j]));
+  }
+
+  return structure;
+};

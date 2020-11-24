@@ -256,7 +256,7 @@ var Menu = class Menu {
 
       // Finally, if a child was selected which is activatable, we report a selection and
       // hide the entire menu.
-      if (child.activatable) {
+      if (child.getActivationCallback() != null) {
         this._background.set_easing_delay(
             this._settings.get_double('easing-duration') * 1000);
 
@@ -268,6 +268,10 @@ var Menu = class Menu {
         this.hide();
         this._background.set_easing_delay(0);
 
+        // Then call the activation callback!
+        child.getActivationCallback()();
+
+        // Finally report the selection over the D-Bus.
         this._onSelect(menuID, child.id);
       }
     });
@@ -418,14 +422,16 @@ var Menu = class Menu {
         name: item.name,
         icon: item.icon,
         angle: item.angle,
-        activatable: item.children == undefined
       });
 
       if (item.children) {
         item.children.forEach(child => {
           menuItem.addMenuItem(createMenuItem(child));
         });
+      } else if (item.activate) {
+        menuItem.setActivationCallback(item.activate);
       }
+
       return menuItem;
     };
 
@@ -511,24 +517,24 @@ var Menu = class Menu {
     // This is called recursively for all items of the new menu structure. The second
     // parameter is the corresponding MenuItem of the currently open menu. If no
     // corresponding item exists, this will be a newly created MenuItem.
-    const updateMenuItem = (newItem, oldItem) => {
-      oldItem.id          = newItem.id;
-      oldItem.name        = newItem.name;
-      oldItem.icon        = newItem.icon;
-      oldItem.angle       = newItem.angle;
-      oldItem.activatable = newItem.children == undefined;
+    const updateMenuItem = (newConfig, item) => {
+      item.id    = newConfig.id;
+      item.name  = newConfig.name;
+      item.icon  = newConfig.icon;
+      item.angle = newConfig.angle;
+      item.setActivationCallback(newConfig.activate || null);
 
-      const oldChildren = new Set(oldItem.getChildMenuItems());
+      const children = new Set(item.getChildMenuItems());
 
-      if (newItem.children) {
+      if (newConfig.children) {
 
         // First, we iterate through all new children an try to find for each an old child
         // with the same name and icon. If one exists, this is used for the new child.
-        newItem.children.forEach(newChild => {
-          for (let oldChild of oldChildren) {
-            if (oldChild.name == newChild.name && oldChild.icon == newChild.icon) {
-              newChild.oldChild = oldChild;
-              oldChildren.delete(oldChild);
+        newConfig.children.forEach(newChild => {
+          for (let child of children) {
+            if (child.name == newChild.name && child.icon == newChild.icon) {
+              newChild.matchingChild = child;
+              children.delete(child);
               break;
             }
           }
@@ -537,12 +543,12 @@ var Menu = class Menu {
         // Then, for each new child which does not have a corresponding old child
         // assigned, we try to find one for which at least the name or the icon is the
         // same.
-        newItem.children.forEach(newChild => {
-          if (newChild.oldChild == undefined) {
-            for (let oldChild of oldChildren) {
-              if (oldChild.name == newChild.name || oldChild.icon == newChild.icon) {
-                newChild.oldChild = oldChild;
-                oldChildren.delete(oldChild);
+        newConfig.children.forEach(newChild => {
+          if (newChild.matchingChild == undefined) {
+            for (let child of children) {
+              if (child.name == newChild.name || child.icon == newChild.icon) {
+                newChild.matchingChild = child;
+                children.delete(child);
                 break;
               }
             }
@@ -551,49 +557,49 @@ var Menu = class Menu {
 
         // And new MenuItems are created for those new children which do not have a
         // corresponding old MenuItem. For all others, all settings are updated.
-        newItem.children.forEach(newChild => {
-          if (newChild.oldChild == undefined) {
-            newChild.oldChild = new MenuItem({
+        newConfig.children.forEach(newChild => {
+          if (newChild.matchingChild == undefined) {
+            newChild.matchingChild = new MenuItem({
               id: newChild.id,
               name: newChild.name,
               icon: newChild.icon,
               angle: newChild.angle,
-              activatable: newChild.children == undefined
             });
-            oldItem.addMenuItem(newChild.oldChild);
-            newChild.oldChild.onSettingsChange(this._settings);
+            newChild.matchingChild.setActivationCallback(newConfig.activate || null);
+            item.addMenuItem(newChild.matchingChild);
+            newChild.matchingChild.onSettingsChange(this._settings);
 
           } else {
-            newChild.oldChild.id          = newChild.id;
-            newChild.oldChild.name        = newChild.name;
-            newChild.oldChild.icon        = newChild.icon;
-            newChild.oldChild.angle       = newChild.angle;
-            newChild.oldChild.activatable = newChild.children == undefined;
+            newChild.matchingChild.id    = newChild.id;
+            newChild.matchingChild.name  = newChild.name;
+            newChild.matchingChild.icon  = newChild.icon;
+            newChild.matchingChild.angle = newChild.angle;
+            newChild.matchingChild.setActivationCallback(newConfig.activate || null);
           }
         });
 
         // Then we have to reorder the new children according to their new order.
-        for (let i = 0; i < newItem.children.length; i++) {
-          oldItem.setChildMenuItemIndex(newItem.children[i].oldChild, i);
+        for (let i = 0; i < newConfig.children.length; i++) {
+          item.setChildMenuItemIndex(newConfig.children[i].matchingChild, i);
         }
       }
 
       // Then, all remaining old MenuItems are deleted.
-      for (let oldChild of oldChildren) {
-        oldItem.removeMenuItem(oldChild);
+      for (let child of children) {
+        item.removeMenuItem(child);
 
-        if (this._menuSelectionChain.includes(oldChild)) {
+        if (this._menuSelectionChain.includes(child)) {
           let removedElement;
           do {
             removedElement = this._menuSelectionChain.shift();
-          } while (removedElement != oldChild);
+          } while (removedElement != child);
         }
       }
 
       // Continue recursively
-      if (newItem.children) {
-        for (let i = 0; i < newItem.children.length; i++) {
-          updateMenuItem(newItem.children[i], newItem.children[i].oldChild);
+      if (newConfig.children) {
+        for (let i = 0; i < newConfig.children.length; i++) {
+          updateMenuItem(newConfig.children[i], newConfig.children[i].matchingChild);
         }
       }
     };
@@ -657,9 +663,8 @@ var Menu = class Menu {
       structure.icon = 'image-missing';
     }
 
-    structure.angle       = 0;
-    structure.id          = '/';
-    structure.activatable = false;
+    structure.angle = 0;
+    structure.id    = '/';
 
     // Calculate and verify all item angles and assign an ID to each item.
     if (structure.children) {
