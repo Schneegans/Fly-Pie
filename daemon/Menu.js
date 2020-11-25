@@ -686,8 +686,6 @@ var Menu = class Menu {
       const item = items[i];
       if (!item.id) {
         item.id = parentID + '/' + i;
-      } else {
-        item.id = parentID + '/' + item.id;
       }
 
       // Proceed recursively with the children.
