@@ -48,7 +48,7 @@
 //    interface. There are two signals; OnCancel will be fired when the user aborts the //
 //    selection in a menu, OnSelect is activated when the user makes a selection. Both  //
 //    signals send the ID which has been reported by the corresponding ShowMenu call,   //
-//    in addition OnSelect sends the path to the selected item. Like this: '/0/1'.      //
+//    in addition OnSelect sends the itemID of the selected item. Like this: '/0/1'.    //
 //    There are some further examples on how to use this interface in the README.md.    //
 //                                                                                      //
 // ShowMenu() and ShowCustomMenu() both show the menu in fullscreen, PreviewMenu() and  //
@@ -65,27 +65,27 @@ var DBusInterface = {
       '<node>                                                                            \
         <interface name="org.gnome.Shell.Extensions.flypie">                             \
           <method name="ShowMenu">                                                       \
-            <arg name="name" type="s" direction="in"/>                                   \
-            <arg name="id"   type="i" direction="out"/>                                  \
+            <arg name="name"   type="s" direction="in"/>                                 \
+            <arg name="menuID" type="i" direction="out"/>                                \
           </method>                                                                      \
           <method name="PreviewMenu">                                                    \
-            <arg name="name" type="s" direction="in"/>                                   \
-            <arg name="id"   type="i" direction="out"/>                                  \
+            <arg name="name"   type="s" direction="in"/>                                 \
+            <arg name="menuID" type="i" direction="out"/>                                \
           </method>                                                                      \
           <method name="ShowCustomMenu">                                                 \
             <arg name="description" type="s" direction="in"/>                            \
-            <arg name="id"          type="i" direction="out"/>                           \
+            <arg name="menuID"      type="i" direction="out"/>                           \
           </method>                                                                      \
           <method name="PreviewCustomMenu">                                              \
             <arg name="description" type="s" direction="in"/>                            \
-            <arg name="id"          type="i" direction="out"/>                           \
+            <arg name="menuID"      type="i" direction="out"/>                           \
           </method>                                                                      \
           <signal name="OnSelect">                                                       \
-              <arg name="id"   type="i"/>                                                \
-              <arg name="path" type="s"/>                                                \
+              <arg name="menuID" type="i"/>                                              \
+              <arg name="itemID" type="s"/>                                              \
           </signal>                                                                      \
           <signal name="OnCancel">                                                       \
-              <arg name="id" type="i"/>                                                  \
+              <arg name="menuID" type="i"/>                                              \
           </signal>                                                                      \
       </interface>                                                                       \
     </node>',

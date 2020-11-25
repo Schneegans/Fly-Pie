@@ -42,7 +42,7 @@ var Daemon = class Daemon {
     this._menu = new Menu(
         // Called when the user selects an item in the menu. This calls the OnSelect
         // signal of the DBusInterface.
-        (menuID, path) => this._onSelect(menuID, path),
+        (menuID, itemID) => this._onSelect(menuID, itemID),
 
         // Called when the user does no select anything in the menu. This calls the
         // OnCancel signal of the DBusInterface.
@@ -127,14 +127,16 @@ var Daemon = class Daemon {
 
   // This opens a menu configured with Fly-Pie's menu editor and can be directly called
   // over the D-Bus. See common/DBusInterface.js for a description of Fly-Pie's
-  // DBusInterface.
+  // DBusInterface. If there are more than one menu with the same name, the first will be
+  // opened.
   ShowMenu(name) {
     return this._openMenu(name, false);
   }
 
   // This opens a menu configured with Fly-Pie's menu editor in preview mode and can be
   // directly called over the D-Bus. See common/DBusInterface.js for a description of
-  // Fly-Pie's DBusInterface.
+  // Fly-Pie's DBusInterface. If there are more than one menu with the same name, the
+  // first will be opened.
   PreviewMenu(name) {
     return this._openMenu(name, true);
   }
@@ -165,8 +167,8 @@ var Daemon = class Daemon {
 
       if (name == this._menuConfigs[i].name) {
 
-        // Once we transformed the menu configuration to a menu structure, we can open the
-        // menu with the custom-menu method.
+        // Once we found the desired menu, we can open the menu with the custom-menu
+        // method.
         return this._openCustomMenu(
             this._menuConfigs[i], previewMode, this._menuConfigs[i].id);
       }
@@ -177,12 +179,12 @@ var Daemon = class Daemon {
   }
 
   // Open the menu described by 'config', optionally in preview mode. 'config' can either
-  // be a JSON string or an object containing the menu structure. This method will return
-  // the menu's ID on success or an error code on failure. See common/DBusInterface.js for
-  // a list of error codes.
+  // be a JSON string or an object containing the menu configuration. This method will
+  // return the menu's ID on success or an error code on failure. See
+  // common/DBusInterface.js for a list of error codes.
   _openCustomMenu(config, previewMode, menuID) {
 
-    // First try to parse the menu structure if it's given as a json string.
+    // First try to parse the menu configuration if it's given as a json string.
     if (typeof config === 'string') {
       try {
         config = JSON.parse(config);
@@ -192,10 +194,13 @@ var Daemon = class Daemon {
       }
     }
 
-    // Then try to open the menu. This will return the menu's ID on success or an error
-    // code on failure.
     try {
+      // First try to transform the menu configuration to a menu structure. See
+      // ItemRegistry.js for details.
       const structure = ItemRegistry.transformConfig(config);
+
+      // Then try to open the menu. This will return the menu's ID on success or an error
+      // code on failure.
       return this._menu.show(menuID, structure, previewMode);
     } catch (error) {
       utils.debug(error);
@@ -207,8 +212,8 @@ var Daemon = class Daemon {
 
   // This gets called once the user made a selection in the menu. It emit the OnSelect
   // signal of our D-Bus interface.
-  _onSelect(menuID, path) {
-    this._dbus.emit_signal('OnSelect', GLib.Variant.new('(is)', [menuID, path]));
+  _onSelect(menuID, itemID) {
+    this._dbus.emit_signal('OnSelect', GLib.Variant.new('(is)', [menuID, itemID]));
   }
 
   // This gets called when the user did not select anything in the menu. It emits the
