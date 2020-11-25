@@ -190,7 +190,7 @@ var getItemTypes = () => {
       Uri: {
         name: _('Open URI'),
         icon: 'applications-internet',
-        defaultData: 'https://github.com/Schneegans/Fly-Pie',
+        defaultData: '',
         // Translators: Please keep this short.
         subtitle: _('Opens an URI with the default applications.'),
         description: _(
@@ -731,8 +731,10 @@ let _transformConfig =
 
       let type = config.type;
 
-      if (type == undefined) {
-        type = config.children != undefined ? 'Submenu' : 'DBusSignal';
+      if (config.children != undefined) {
+        type = 'Submenu';
+      } else if (type == undefined) {
+        type = 'DBusSignal';
       }
 
       const result = getItemTypes()[type].createItem(name, icon, angle, data);
