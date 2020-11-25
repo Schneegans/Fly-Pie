@@ -48,8 +48,9 @@
 //    interface. There are two signals; OnCancel will be fired when the user aborts the //
 //    selection in a menu, OnSelect is activated when the user makes a selection. Both  //
 //    signals send the ID which has been reported by the corresponding ShowMenu call,   //
-//    in addition OnSelect sends the itemID of the selected item. Like this: '/0/1'.    //
-//    There are some further examples on how to use this interface in the README.md.    //
+//    in addition OnSelect sends the itemID of the selected item. Usually, this will be //
+//    a path like this: '/0/1'. There are some further examples on how to use this      //
+//    interface in the README.md.                                                       //
 //                                                                                      //
 // ShowMenu() and ShowCustomMenu() both show the menu in fullscreen, PreviewMenu() and  //
 // PreviewCustomMenu() will only cover half the screen in order to allow for            //
