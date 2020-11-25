@@ -726,7 +726,6 @@ let _transformConfig =
     (config) => {
       const name  = config.name != undefined ? config.name : _('Unnamed Item');
       const icon  = config.icon != undefined ? config.icon : 'image-missing';
-      const data  = config.data != undefined ? config.data : '';
       const angle = config.angle != undefined ? config.angle : -1;
 
       let type = config.type;
@@ -735,6 +734,11 @@ let _transformConfig =
         type = 'Submenu';
       } else if (type == undefined) {
         type = 'DBusSignal';
+      }
+
+      const data = config.data;
+      if (data == undefined) {
+        data = getItemTypes()[type].defaultData;
       }
 
       const result = getItemTypes()[type].createItem(name, icon, angle, data);
