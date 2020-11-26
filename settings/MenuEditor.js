@@ -15,6 +15,7 @@ const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
 const ItemRegistry  = Me.imports.common.ItemRegistry;
+const ItemDataType  = Me.imports.common.ItemDataType.ItemDataType;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -900,7 +901,7 @@ var MenuEditor = class MenuEditor {
 
         // If the selected item is a top-level menu, the DATA column contains its
         // shortcut.
-        if (selectedSettingsType == ItemRegistry.SettingsTypes.MENU) {
+        if (selectedSettingsType == ItemDataType.MENU) {
           this._menuShortcutLabel.set_accelerator(this._getSelected('DATA'));
           this._builder.get_object('menu-centered').active =
               this._getSelected('CENTERED');
@@ -908,36 +909,36 @@ var MenuEditor = class MenuEditor {
         }
 
         // For all other items, the fixed angle can be set.
-        if (selectedSettingsType != ItemRegistry.SettingsTypes.MENU) {
+        if (selectedSettingsType != ItemDataType.MENU) {
           this._builder.get_object('item-angle').value = this._getSelected('ANGLE_OR_ID');
           revealers['item-settings-angle-revealer']    = true;
         }
 
-        if (selectedSettingsType == ItemRegistry.SettingsTypes.SHORTCUT) {
+        if (selectedSettingsType == ItemDataType.SHORTCUT) {
           this._itemShortcutLabel.set_accelerator(this._getSelected('DATA'));
           revealers['item-settings-item-shortcut-revealer'] = true;
 
-        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.URL) {
+        } else if (selectedSettingsType == ItemDataType.URL) {
           this._builder.get_object('item-uri').text = this._getSelected('DATA');
           revealers['item-settings-uri-revealer']   = true;
 
-        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.ID) {
+        } else if (selectedSettingsType == ItemDataType.ID) {
           this._builder.get_object('item-id').text = this._getSelected('DATA');
           revealers['item-settings-id-revealer']   = true;
 
-        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.FILE) {
+        } else if (selectedSettingsType == ItemDataType.FILE) {
           this._builder.get_object('item-file').text = this._getSelected('DATA');
           revealers['item-settings-file-revealer']   = true;
 
-        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.COMMAND) {
+        } else if (selectedSettingsType == ItemDataType.COMMAND) {
           this._builder.get_object('item-command').text = this._getSelected('DATA');
           revealers['item-settings-command-revealer']   = true;
 
-        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.COUNT) {
+        } else if (selectedSettingsType == ItemDataType.COUNT) {
           this._builder.get_object('item-count').value = this._getSelected('DATA');
           revealers['item-settings-count-revealer']    = true;
 
-        } else if (selectedSettingsType == ItemRegistry.SettingsTypes.TEXT) {
+        } else if (selectedSettingsType == ItemDataType.TEXT) {
           this._builder.get_object('item-text').text = this._getSelected('DATA');
           revealers['item-settings-text-revealer']   = true;
         }
