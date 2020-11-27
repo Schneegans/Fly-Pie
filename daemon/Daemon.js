@@ -15,7 +15,7 @@ const Menu           = Me.imports.daemon.Menu.Menu;
 const Shortcuts      = Me.imports.daemon.Shortcuts.Shortcuts;
 const DBusInterface  = Me.imports.common.DBusInterface.DBusInterface;
 const utils          = Me.imports.common.utils;
-const ItemRegistry   = Me.imports.common.ItemRegistry;
+const ItemRegistry   = Me.imports.common.ItemRegistry.ItemRegistry;
 const DefaultMenu    = Me.imports.settings.DefaultMenu.DefaultMenu;
 const MouseHighlight = Me.imports.daemon.MouseHighlight.MouseHighlight;
 

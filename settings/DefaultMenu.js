@@ -19,7 +19,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 
 var DefaultMenu = class DefaultMenu {
 
-  // -------------------------------------------------------------------- public interface
+  // ---------------------------------------------------------------------- static methods
 
   static get() {
 

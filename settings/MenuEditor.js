@@ -14,7 +14,7 @@ const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
-const ItemRegistry  = Me.imports.common.ItemRegistry;
+const ItemRegistry  = Me.imports.common.ItemRegistry.ItemRegistry;
 const Enums         = Me.imports.common.Enums;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
@@ -79,16 +79,16 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
       return false;
     }
 
+    // Allow menu drop at top-level.
     const [ok2, srcIter] = this.get_iter(srcPath);
     const type           = this.get_value(srcIter, this.columns.TYPE);
     const itemClass      = ItemRegistry.getItemTypes()[type].itemClass;
 
-    // Allow menu drop at top-level.
     if (destPath.get_depth() == 1 && itemClass == Enums.ItemClass.MENU) {
       return true;
     }
 
-    // Allow drop in custom Menus.
+    // Allow drop in custom menus in all cases.
     const parentPath = destPath.copy();
     if (parentPath.up()) {
       const [ok, parent] = this.get_iter(parentPath);
@@ -107,7 +107,8 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
 // The MenuEditor class encapsulates code required for the 'Menu Editor' page of the    //
 // settings dialog. It's not instantiated multiple times, nor does it have any public   //
 // interface, hence it could just be copy-pasted to the settings class. But as it's     //
-// quite decoupled as well, it structures the code better when written to its own file. //
+// quite decoupled (and huge) as well, it structures the code better when written to    //
+// its own file.                                                                        //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var MenuEditor = class MenuEditor {
@@ -158,7 +159,7 @@ var MenuEditor = class MenuEditor {
       // item which is to be created.
       row.set_name(type);
 
-      // Add the new row to the list defined in the ItemRegistry.
+      // Add the new row either to the menus list or to the actions list.
       if (ItemRegistry.getItemTypes()[type].itemClass == Enums.ItemClass.ACTION) {
         this._builder.get_object('action-types-list').insert(row, -1);
       } else {
@@ -185,7 +186,7 @@ var MenuEditor = class MenuEditor {
       this._deleteSelected();
     });
 
-    // Open a preview for the selected menu when the preview-button is clicked.
+    // Open a live-preview for the selected menu when the preview-button is clicked.
     this._builder.get_object('preview-menu-button').connect('clicked', () => {
       let [ok, model, iter] = this._selection.get_selected();
 
@@ -385,33 +386,33 @@ var MenuEditor = class MenuEditor {
 
     // This is called when a drag'n'drop operation is received.
     view.connect('drag-data-received', (widget, context, x, y, data, info, time) => {
-      // This lambda creates a new item for the given text. If the text is an URI to a
-      // file, a file action is created. If it's a *.desktop file, a "Launch Application"
-      // action is created, an URI action is created for all other URIs. If text is not an
-      // URI, an "Insert Text" action is created.
+      // This lambda creates a new menu item for the given text. If the text is an URI to
+      // a file, a file action is created. If it's a *.desktop file, a "Launch
+      // Application" action is created, an URI action is created for all other URIs. If
+      // text is not an URI, an "Insert Text" action is created.
       const addItem = (text) => {
         // Items should only be dropped into custom menus. Depending on the hovered
         // position and item type, there are three different possible positions:
+        // 1) Drop into the hovered menu as first child.
+        // 2) Insert before the hovered menu at the same level.
+        // 3) Insert after the hovered menu at the same level.
 
-        // 1) Drop into the hovered item as first child.
-        // 2) Insert before the hovered item at the same level.
-        // 3) Insert after the hovered item at the same level.
-
+        // First try to get the currently hovered item.
         const [ok, path, pos] = widget.get_dest_row_at_pos(x, y);
 
         if (!ok) {
           return false;
         }
 
+        // Get the type of the currently hovered menu item.
         const destIter = this._store.get_iter(path)[1];
-
-        // For all items, the new item's position depends on the drop position and on the
-        // item type at the drop destination.
-        const type = this._store.get_value(destIter, this._store.columns.TYPE);
-
+        const type     = this._store.get_value(destIter, this._store.columns.TYPE);
 
         let newIter;
 
+        // If it's a custom menu, we drop into it if it's a top-level menu or if we should
+        // drop into anyways. Else we drop before or after as indicated by the
+        // TreeViewDropPosition.
         if (type === 'Menu') {
 
           if (pos == Gtk.TreeViewDropPosition.INTO_OR_BEFORE ||
@@ -427,9 +428,12 @@ var MenuEditor = class MenuEditor {
             newIter = this._store.insert_after(null, destIter);
           }
 
-        } else {
+        }
+        // If it's not a custom menu, we cannot drop into. So we have to drop before or
+        // after. This is impossible at top-level.
+        else {
 
-          // Things cannot be dropped at top-level
+          // Things cannot be dropped at top-level, so this is a impossible drop.
           if (this._isToplevel(destIter)) {
             return false;
           }
@@ -609,8 +613,8 @@ var MenuEditor = class MenuEditor {
               view.expand_to_path(parent);
             }
 
-            // Remove the ID property of items moved from top-level to a sub-menu and
-            // assign new IDs to items which moved from sub-menu level to top-level.
+            // Remove the ID property of items moved from top-level to a submenu and
+            // assign new IDs to items which moved from submenu level to top-level.
             if (this._store.get_path(iter).get_depth() == 1) {
               if (this._get(iter, 'ID') < 0) {
                 this._set(iter, 'ID', this._getNewID());
@@ -627,6 +631,8 @@ var MenuEditor = class MenuEditor {
             this._set(iter, 'ANGLE', -1);
             this._selection.select_iter(iter);
 
+            // We refresh the name of dropped rows as they are rendered differently for
+            // top-level items and sub-level items.
             this._set(iter, 'NAME', this._get(iter, 'NAME'));
 
             // Reset the timeout.
@@ -872,7 +878,7 @@ var MenuEditor = class MenuEditor {
       // top-level element is selected, this must be a custom menu.
       let actionsSensitive = somethingSelected;
       if (this._isToplevelSelected()) {
-        actionsSensitive = this._getSelectedType() == 'Menu';
+        actionsSensitive = this._getSelected('TYPE') == 'Menu';
       }
       this._builder.get_object('action-types-list').sensitive = actionsSensitive;
 
@@ -1159,7 +1165,7 @@ var MenuEditor = class MenuEditor {
       this._set(iter, 'NAME', ItemRegistry.getItemTypes()[newType].name);
     }
 
-    // Assign a new ID for toplevel items.
+    // Assign a new ID for top-level items.
     if (this._isToplevelSelected()) {
       this._set(iter, 'ID', this._getNewID());
     } else {
@@ -1310,17 +1316,6 @@ var MenuEditor = class MenuEditor {
     if (ok) {
       return this._get(iter, column);
     }
-  }
-
-  // Returns the item type of the selected row.
-  _getSelectedType() {
-    return this._getSelected('TYPE');
-  }
-
-  // Returns the item class of the selected row. That is Either Enums.ItemClass.MENU or
-  // Enums.ItemClass.ACTION.
-  _getSelectedClass() {
-    return ItemRegistry.getItemTypes()[this._getSelectedType()].itemClass;
   }
 
   // This is the same as this._set(), however it automatically chooses the currently
