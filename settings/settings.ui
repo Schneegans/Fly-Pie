@@ -593,6 +593,28 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                       <object class="GtkListBox" id="menu-types-list">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkListBoxRow">
+                            <property name="name">separator</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="margin_right">10</property>
+                            <property name="activatable">False</property>
+                            <property name="selectable">False</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_top">10</property>
+                                <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">Menus</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -631,39 +653,6 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkListBox" id="submenu-types-list">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkListBoxRow">
-                            <property name="name">separator</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="margin_right">10</property>
-                            <property name="activatable">False</property>
-                            <property name="selectable">False</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_top">10</property>
-                                <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">Submenus</property>
-                                <style>
-                                  <class name="dim-label"/>
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>

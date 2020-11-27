@@ -10,8 +10,8 @@
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const ItemDataType = Me.imports.common.ItemDataType.ItemDataType;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const Enums = Me.imports.common.Enums;
 
 // We import Shell optionally. When this file is included from the daemon side, it is
 // available and can be used in the activation code of the action defined below. If this
@@ -27,28 +27,27 @@ try {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Returns an item with entries for each "favorite application", as reported by GNOME   //
-// Shell.                                                                               //
+// Returns an item with entries for each "frequently used application", as reported by  //
+// GNOME Shell.                                                                         //
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var submenu = {
-  name: _('Favorites'),
-  icon: 'starred',
-  defaultData: '',
+var menu = {
+  name: _('Frequently Used'),
+  icon: 'emblem-favorite',
+  defaultData: '7',
   // Translators: Please keep this short.
-  subtitle: _('Shows your pinned applications.'),
+  subtitle: _('Shows your frequently used applications.'),
   description: _(
-      'The <b>Favorites</b> submenu shows the applications you have pinned to Gnome Shell\'s Dash.'),
-  settingsType: ItemDataType.NONE,
-  settingsList: 'submenu-types-list',
-  createItem: () => {
-    const appNames = global.settings.get_strv('favorite-apps');
-    const result   = {children: []};
+      'The <b>Frequently Used</b> menu shows a list of frequently used applications. You should limit the maximum number of shown applications to a reasonable number.'),
+  itemClass: Enums.ItemClass.MENU,
+  dataType: Enums.ItemDataType.COUNT,
+  createItem: (data) => {
+    const maxNum = parseInt(data);
+    const apps   = Shell.AppUsage.get_default().get_most_used().slice(0, maxNum);
+    const result = {children: []};
 
-    appNames.forEach(appName => {
-      const app = Shell.AppSystem.get_default().lookup_app(appName);
-
+    apps.forEach(app => {
       if (app) {
         result.children.push({
           name: app.get_name(),

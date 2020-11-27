@@ -13,25 +13,25 @@ const ByteArray   = imports.byteArray;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.common.utils;
-const ItemDataType = Me.imports.common.ItemDataType.ItemDataType;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.common.utils;
+const Enums = Me.imports.common.Enums;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The bookmarks submenu contains one entry for the default user directories.           //
+// The bookmarks menu contains one entry for the default user directories.              //
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var submenu = {
+var menu = {
   name: _('Bookmarks'),
   icon: 'folder',
   defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Shows your commonly used directories.'),
   description: _(
-      'The <b>Bookmarks</b> submenu shows an item for the trash, your desktop and each bookmarked directory.'),
-  settingsType: ItemDataType.NONE,
-  settingsList: 'submenu-types-list',
+      'The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each bookmarked directory.'),
+  itemClass: Enums.ItemClass.MENU,
+  dataType: Enums.ItemDataType.NONE,
   createItem: () => {
     // Adds an action for the given (file://) uri to the children list of
     // the given menu item. The name parameter is optional and will be used

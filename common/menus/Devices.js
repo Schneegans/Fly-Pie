@@ -12,26 +12,26 @@ const Gio = imports.gi.Gio;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.common.utils;
-const ItemDataType = Me.imports.common.ItemDataType.ItemDataType;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.common.utils;
+const Enums = Me.imports.common.Enums;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The devices submenu contains an item for each mounted volume as reported by the      //
+// The devices menu contains an item for each mounted volume as reported by the         //
 // Gio.VolumeMonitor.                                                                   //
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var submenu = {
+var menu = {
   name: _('Devices'),
   icon: 'drive-harddisk',
   defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Shows connected devices.'),
   description: _(
-      'The <b>Devices</b> submenu shows an item for each mounted volume, like USB-Sticks.'),
-  settingsType: ItemDataType.NONE,
-  settingsList: 'submenu-types-list',
+      'The <b>Devices</b> menu shows an item for each mounted volume, like USB-Sticks.'),
+  itemClass: Enums.ItemClass.MENU,
+  dataType: Enums.ItemDataType.NONE,
   createItem: () => {
     const result  = {children: []};
     const monitor = Gio.VolumeMonitor.get();

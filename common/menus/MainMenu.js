@@ -12,9 +12,9 @@ const GMenu = imports.gi.GMenu;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.common.utils;
-const ItemDataType = Me.imports.common.ItemDataType.ItemDataType;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.common.utils;
+const Enums = Me.imports.common.Enums;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -22,7 +22,7 @@ const ItemDataType = Me.imports.common.ItemDataType.ItemDataType;
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var submenu = {
+var menu = {
   name: _('Main Menu'),
   icon: 'applications-system',
   defaultData: '',
@@ -30,8 +30,8 @@ var submenu = {
   subtitle: _('Shows all installed applications.'),
   description: _(
       'The <b>Main Menu</b> shows all installed applications. Usually, this is very cluttered as many sections contain too many items to be used efficiently. You should rather setup your own menus!'),
-  settingsList: 'submenu-types-list',
-  settingsType: ItemDataType.NONE,
+  itemClass: Enums.ItemClass.MENU,
+  dataType: Enums.ItemDataType.NONE,
   createItem: () => {
     const pushMenuItems = (menu, dir) => {
       let iter = dir.iter(), nodeType, item;

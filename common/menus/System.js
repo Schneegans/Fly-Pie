@@ -10,8 +10,8 @@
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const ItemDataType = Me.imports.common.ItemDataType.ItemDataType;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const Enums = Me.imports.common.Enums;
 
 // We import Shell and SystemActions optionally. When this file is included from the
 // daemon side, they are available and can be used in the activation code of the action
@@ -29,22 +29,22 @@ try {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The System submenu shows an items for screen-lock, shutdown, settings, etc. The code //
+// The System menu shows an items for screen-lock, shutdown, settings, etc. The code    //
 // is roughly based on GNOME Shell's tray menu code:                                    //
 // https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/master/js/ui/status/system.js.     //
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var submenu = {
+var menu = {
   name: _('System'),
   icon: 'system-log-out',
   defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Allows screen lock shutdown and other things.'),
   description: _(
-      'The <b>System</b> submenu shows an items for screen-lock, shutdown, settings, etc.'),
-  settingsType: ItemDataType.NONE,
-  settingsList: 'submenu-types-list',
+      'The <b>System</b> menu shows an items for screen-lock, shutdown, settings, etc.'),
+  itemClass: Enums.ItemClass.MENU,
+  dataType: Enums.ItemDataType.NONE,
   createItem: () => {
     const result = {children: []};
 

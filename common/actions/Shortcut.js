@@ -10,8 +10,8 @@
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const ItemDataType = Me.imports.common.ItemDataType.ItemDataType;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const Enums = Me.imports.common.Enums;
 
 // We import the InputManipulator optionally. When this file is included from the daemon
 // side, it is available and can be used in the activation code of the action defined
@@ -39,8 +39,8 @@ var action = {
   subtitle: _('Simulates a key stroke.'),
   description: _(
       'The <b>Activate Shortcut</b> action simulates a key stroke when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations.'),
-  settingsType: ItemDataType.SHORTCUT,
-  settingsList: 'action-types-list',
+  itemClass: Enums.ItemClass.ACTION,
+  dataType: Enums.ItemDataType.SHORTCUT,
   createItem: (data) => {
     return {activate: () => InputManipulator.activateAccelerator(data)};
   }

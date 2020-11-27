@@ -189,21 +189,26 @@ var Daemon = class Daemon {
       try {
         config = JSON.parse(config);
       } catch (error) {
-        utils.debug(error);
+        utils.debug('Failed to parse menu configuration: ' + error);
         return DBusInterface.errorCodes.eInvalidJSON;
       }
     }
 
+    let structure;
     try {
       // First try to transform the menu configuration to a menu structure. See
       // ItemRegistry.js for details.
-      const structure = ItemRegistry.transformConfig(config);
+      structure = ItemRegistry.transformConfig(config);
+    } catch (error) {
+      utils.debug('Failed to transform menu configuration: ' + error);
+    }
 
+    try {
       // Then try to open the menu. This will return the menu's ID on success or an error
       // code on failure.
       return this._menu.show(menuID, structure, previewMode);
     } catch (error) {
-      utils.debug(error);
+      utils.debug('Failed to show menu: ' + error);
     }
 
     // Something weird happened.

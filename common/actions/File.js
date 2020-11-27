@@ -12,9 +12,9 @@ const Gio = imports.gi.Gio;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.common.utils;
-const ItemDataType = Me.imports.common.ItemDataType.ItemDataType;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.common.utils;
+const Enums = Me.imports.common.Enums;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The file action is very similar to the Url action, but only works for files.         //
@@ -30,8 +30,8 @@ var action = {
   subtitle: _('Opens a file with the default applications.'),
   description: _(
       'The <b>Open File</b> action will open the above specified file with your system\'s default application.'),
-  settingsType: ItemDataType.FILE,
-  settingsList: 'action-types-list',
+  itemClass: Enums.ItemClass.ACTION,
+  dataType: Enums.ItemDataType.FILE,
   createItem: (data) => {
     return {
       activate: () => {

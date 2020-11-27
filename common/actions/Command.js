@@ -12,9 +12,9 @@ const Gio = imports.gi.Gio;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.common.utils;
-const ItemDataType = Me.imports.common.ItemDataType.ItemDataType;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.common.utils;
+const Enums = Me.imports.common.Enums;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The command actions executes a shell command when activated. This can be used to     //
@@ -30,8 +30,8 @@ var action = {
   subtitle: _('Runs any shell command.'),
   description: _(
       'The <b>Launch Application</b> action executes any given command. This is primarily used to open applications but may have plenty of other use cases as well.'),
-  settingsType: ItemDataType.COMMAND,
-  settingsList: 'action-types-list',
+  itemClass: Enums.ItemClass.ACTION,
+  dataType: Enums.ItemDataType.COMMAND,
   createItem: (data) => {
     return {
       activate: () => {

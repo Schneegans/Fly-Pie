@@ -12,9 +12,9 @@ const {Gio, Gtk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.common.utils;
-const ItemDataType = Me.imports.common.ItemDataType.ItemDataType;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.common.utils;
+const Enums = Me.imports.common.Enums;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Returns an item with entries for each recently used file, as reported by             //
@@ -22,16 +22,16 @@ const ItemDataType = Me.imports.common.ItemDataType.ItemDataType;
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var submenu = {
+var menu = {
   name: _('Recent Files'),
   icon: 'document-open-recent',
   defaultData: '7',
   // Translators: Please keep this short.
   subtitle: _('Shows your recently used files.'),
   description: _(
-      'The <b>Recent Files</b> submenu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number.'),
-  settingsType: ItemDataType.COUNT,
-  settingsList: 'submenu-types-list',
+      'The <b>Recent Files</b> menu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number.'),
+  itemClass: Enums.ItemClass.MENU,
+  dataType: Enums.ItemDataType.COUNT,
   createItem: (data) => {
     const maxNum      = parseInt(data);
     const recentFiles = Gtk.RecentManager.get_default().get_items().slice(0, maxNum);
