@@ -68,38 +68,22 @@ var ItemRegistry = class ItemRegistry {
 
     if (_itemTypes == null) {
       _itemTypes = {
-        // A menu cannot be activated. It should always contain some children.
-        CustomMenu: {
-          name: _('Custom Menu'),
-          icon: 'view-more-symbolic',
-          defaultData: '',
-          // Translators: Please keep this short.
-          subtitle: _('This can contain actions and other menus.'),
-          description: _(
-              'A <b>Custom Menu</b> can contain any number of actions and submenus. However, for precise item selection, a maximum number of twelve items is recommended.\nTop-level menus can be opened using a shortcut. It is also possible to open a menu with a terminal command. You can read more on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.'),
-          itemClass: Enums.ItemClass.MENU,
-          dataType: Enums.ItemDataType.NONE,
-          createItem: (centered) => {
-            return {centered: centered, children: []};
-          }
-        },
+        Shortcut: actions.Shortcut.action,
+        InsertText: actions.InsertText.action,
+        Command: actions.Command.action,
+        Uri: actions.Uri.action,
+        File: actions.File.action,
+        DBusSignal: actions.DBusSignal.action,
 
+        CustomMenu: menus.CustomMenu.menu,
+        Devices: menus.Devices.menu,
+        Bookmarks: menus.Bookmarks.menu,
+        System: menus.System.menu,
+        Favorites: menus.Favorites.menu,
+        FrequentlyUsed: menus.FrequentlyUsed.menu,
+        RecentFiles: menus.RecentFiles.menu,
+        RunningApps: menus.RunningApps.menu,
       };
-
-      _itemTypes.Shortcut   = actions.Shortcut.action;
-      _itemTypes.InsertText = actions.InsertText.action;
-      _itemTypes.Command    = actions.Command.action;
-      _itemTypes.Uri        = actions.Uri.action;
-      _itemTypes.File       = actions.File.action;
-      _itemTypes.DBusSignal = actions.DBusSignal.action;
-
-      _itemTypes.Devices        = menus.Devices.menu;
-      _itemTypes.Bookmarks      = menus.Bookmarks.menu;
-      _itemTypes.System         = menus.System.menu;
-      _itemTypes.Favorites      = menus.Favorites.menu;
-      _itemTypes.FrequentlyUsed = menus.FrequentlyUsed.menu;
-      _itemTypes.RecentFiles    = menus.RecentFiles.menu;
-      _itemTypes.RunningApps    = menus.RunningApps.menu;
 
       // This is only possible if the GMenu typelib is installed on the system.
       if (GMenu) {
