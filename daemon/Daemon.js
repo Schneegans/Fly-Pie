@@ -189,23 +189,32 @@ var Daemon = class Daemon {
       try {
         config = JSON.parse(config);
       } catch (error) {
-        utils.debug('Failed to parse menu configuration: ' + error);
+        utils.debug('Failed to parse menu configuration JSON: ' + error);
         return DBusInterface.errorCodes.eInvalidJSON;
       }
     }
 
+    // Then normalize the menu configuration (e.g. add all default data).
+    try {
+      ItemRegistry.normalizeConfig(config);
+    } catch (error) {
+      utils.debug('Failed to parse menu configuration: ' + error);
+      return DBusInterface.errorCodes.eInvalidMenuConfiguration;
+    }
+
+    // Then try to transform the menu configuration to a menu structure. See
+    // ItemRegistry.js for details.
     let structure;
     try {
-      // First try to transform the menu configuration to a menu structure. See
-      // ItemRegistry.js for details.
       structure = ItemRegistry.transformConfig(config);
     } catch (error) {
       utils.debug('Failed to transform menu configuration: ' + error);
+      return DBusInterface.errorCodes.eInvalidMenuConfiguration;
     }
 
+    // Then try to open the menu. This will return the menu's ID on success or an error
+    // code on failure.
     try {
-      // Then try to open the menu. This will return the menu's ID on success or an error
-      // code on failure.
       return this._menu.show(menuID, structure, previewMode);
     } catch (error) {
       utils.debug('Failed to show menu: ' + error);
@@ -276,6 +285,7 @@ var Daemon = class Daemon {
       for (let i = 0; i < this._menuConfigs.length; i++) {
         if (this._menuConfigs[i].id == this._menu.getID()) {
           // Transform the configuration into a menu structure.
+          ItemRegistry.normalizeConfig(this._menuConfigs[i]);
           const structure = ItemRegistry.transformConfig(this._menuConfigs[i]);
 
           // Once we transformed the menu configuration to a menu structure, we can update

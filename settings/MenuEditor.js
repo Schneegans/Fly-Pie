@@ -1449,22 +1449,11 @@ var MenuEditor = class MenuEditor {
           const child = parent.children[j];
           const iter  = this._store.append(parentIter);
 
-          let type    = child.type != undefined ? child.type : '';
-          const icon  = child.icon != undefined ? child.icon : '';
-          const name  = child.name != undefined ? child.name : '';
-          const data  = child.data != undefined ? child.data : '';
-          const angle = child.angle != undefined ? child.angle : -1;
-
-          // For backwards compatibility with Fly-Pie 3 and earlier.
-          if (type === 'Submenu' || type === 'Menu') {
-            type = 'CustomMenu';
-          }
-
-          this._set(iter, 'ICON', icon);
-          this._set(iter, 'NAME', name);
-          this._set(iter, 'TYPE', type);
-          this._set(iter, 'DATA', data);
-          this._set(iter, 'ANGLE', angle);
+          this._set(iter, 'ICON', child.icon);
+          this._set(iter, 'NAME', child.name);
+          this._set(iter, 'TYPE', child.type);
+          this._set(iter, 'DATA', child.data);
+          this._set(iter, 'ANGLE', child.angle);
           this._set(iter, 'SHORTCUT', '');
 
           parseChildren(child, iter);
@@ -1479,19 +1468,14 @@ var MenuEditor = class MenuEditor {
       const config = configs[i];
       const iter   = this._store.append(null);
 
-      let type = config.type != undefined ? config.type : '';
+      ItemRegistry.normalizeConfig(config);
 
-      // For backwards compatibility with Fly-Pie 3 and earlier.
-      if (type === 'Submenu' || type === 'Menu') {
-        type = 'CustomMenu';
-      }
-
-      this._set(iter, 'ICON', config.icon != undefined ? config.icon : 'image-missing');
-      this._set(iter, 'NAME', config.name != undefined ? config.name : _('Unnamed Item'));
-      this._set(iter, 'TYPE', type);
-      this._set(iter, 'SHORTCUT', config.shortcut != undefined ? config.shortcut : '');
+      this._set(iter, 'ICON', config.icon);
+      this._set(iter, 'NAME', config.name);
+      this._set(iter, 'TYPE', config.type);
+      this._set(iter, 'SHORTCUT', config.shortcut);
+      this._set(iter, 'CENTERED', config.centered);
       this._set(iter, 'ID', config.id != undefined ? config.id : this._getNewID());
-      this._set(iter, 'CENTERED', config.centered != undefined ? config.centered : false);
 
       parseChildren(config, iter);
     }

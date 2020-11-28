@@ -97,8 +97,9 @@ var DBusInterface = {
   errorCodes: {
     eUnknownError: -1,
     eInvalidJSON: -2,
-    eInvalidAngles: -3,
-    eNoSuchMenu: -4,
+    eInvalidMenuConfiguration: -3,
+    eInvalidAngles: -4,
+    eNoSuchMenu: -5,
   },
 
   // This can be used to translate an error code to a human-readable message.
@@ -107,8 +108,10 @@ var DBusInterface = {
       case -2:
         return 'The provided menu description was no valid JSON.';
       case -3:
-        return 'The angles of the children did not follow the rules.';
+        return 'The menu configuration was invalid.';
       case -4:
+        return 'The angles of the children did not follow the rules.';
+      case -5:
         return 'No menu with this name exists.';
       default:
         return 'An unknown error occurred.';

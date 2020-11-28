@@ -50,6 +50,10 @@ var ItemRegistry = class ItemRegistry {
 
   // ---------------------------------------------------------------------- static methods
 
+  static normalizeConfig(config) {
+    return this._normalizeConfig(config, true);
+  }
+
   // This uses the createItem() methods of the ItemRegistry to transform a menu
   // configuration (as created by Fly-Pie's menu editor) to a menu structure (as
   // required by the menu class). The main difference is that the menu structure may
@@ -107,52 +111,81 @@ var ItemRegistry = class ItemRegistry {
   }
 
   // ----------------------------------------------------------------------- private stuff
-
-  static _transformConfig(config, isToplevel) {
-    // First we try to get the item type.
-    let type = config.type;
-
-    // For backwards compatibility with Fly-Pie 3 and earlier.
-    if (type == 'Submenu' || type == 'Menu') {
-      type = 'CustomMenu';
-    }
-
-    // If no type is given but there are children, we assume a Menu.
-    if (type == undefined && config.children != undefined) {
-      type = 'CustomMenu';
-    }
+  static _normalizeConfig(config, isToplevel) {
 
     // If no type is given and no children, we assume a DBusSignal.
-    if (type == undefined && config.children == undefined) {
-      type = 'DBusSignal';
+    if (config.type == undefined && config.children == undefined) {
+      config.type = 'DBusSignal';
+    }
+
+    // If no type is given but there are children, we assume a Custom Menu.
+    if (config.type == undefined && config.children != undefined) {
+      config.type = 'CustomMenu';
+    }
+
+    // For backwards compatibility with Fly-Pie 3 and earlier.
+    if (config.type == 'Submenu' || config.type == 'Menu') {
+      config.type = 'CustomMenu';
     }
 
     // It's an error if the type is not Menu but there are children.
-    if (type != 'CustomMenu' && config.children != undefined) {
+    if (config.type != 'CustomMenu' && config.children != undefined) {
       throw 'Only items of type \'CustomMenu\' may contain child items!';
     }
 
     // It's an error if a top-level element is not of the menu class.
-    if (isToplevel && this.getItemTypes()[type].itemClass != Enums.ItemClass.MENU) {
+    if (isToplevel &&
+        this.getItemTypes()[config.type].itemClass != Enums.ItemClass.MENU) {
       throw 'Top-level items must be menu types!';
     }
 
-    // Now we get the data field.
-    let data = config.data;
-    if (data == undefined) {
-      data = this.getItemTypes()[type].defaultData;
+    // Assign default data if required.
+    if (config.data == undefined) {
+      config.data = this.getItemTypes()[config.type].defaultData;
     }
 
-    const result = this.getItemTypes()[type].createItem(data);
-    result.name  = config.name != undefined ? config.name : _('Unnamed Item');
-    result.icon  = config.icon != undefined ? config.icon : 'image-missing';
+    // Assign default values.
+    if (config.name == undefined) {
+      if (isToplevel) {
+        config.name = _('Unnamed Menu');
+      } else {
+        config.name = _('Unnamed Item');
+      }
+    }
+
+    if (config.icon == undefined) {
+      config.icon = 'image-missing';
+    }
+
+    // The 'shortcut' and the 'centered' property is only available on top-level items,
+    // the 'angle' property on all other items.
+    if (isToplevel) {
+      config.centered = config.centered != undefined ? config.centered : false;
+      config.shortcut = config.shortcut != undefined ? config.shortcut : '';
+    } else {
+      config.angle = config.angle != undefined ? config.angle : -1;
+    }
+
+    // Check all children recursively.
+    if (config.children) {
+      for (let i = 0; i < config.children.length; i++) {
+        this._normalizeConfig(config.children[i], false);
+      }
+    }
+  }
+
+  static _transformConfig(config, isToplevel) {
+
+    const result = this.getItemTypes()[config.type].createItem(config.data);
+    result.name  = config.name;
+    result.icon  = config.icon;
 
     // The 'centered' property is only available on top-level items, the 'angle' property
     // on all other items.
     if (isToplevel) {
-      result.centered = config.centered != undefined ? config.centered : false;
+      result.centered = config.centered;
     } else {
-      result.angle = config.angle != undefined ? config.angle : -1;
+      result.angle = config.angle;
     }
 
     // Load all children recursively.
