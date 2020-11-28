@@ -26,22 +26,28 @@ try {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// This huge object contains one key for each registered item type. Each item type      //
-// should have six properties:                                                          //
+// The getItemTypes() of the ItemRegistry can be used to access all available action    //
+// and menu types. Each item type should have eight properties:                         //
 //   name:         This will be shown in the add-new-item popover. It is also the       //
-//                 default name of newly created items of this type.                    //
+//                 default name of newly created items of this type. This should be     //
+//                 translatable.                                                        //
 //   icon:         The icon name used in the add-new-item popover. It is also the       //
 //                 default icon of newly created items of this type.                    //
 //   subtitle:     This will be shown as small text in the add-new-item popover.        //
 //                 Keep it short or use line breaks, else the popover will get wide.    //
+//                 This should be translatable.                                         //
 //   description:  This will be shown in the right hand side settings when an item of   //
-//                 this type is selected.                                               //
-//   settingsType: This determines which widgets are visible when an item of this type  //
-//                 is selected in the settings dialog. See documentation above.         //
-//   settingsList: The Glade name of the list in the add-new-item popover where this    //
-//                 item should be listed.                                               //
-//   createItem:   A function which will be called on the client side to instantiate a  //
-//                 menu item of this type.                                              //
+//                 this type is selected. This should be translatable.                  //
+//   itemClass:    This should be either Enums.ItemClass.ACTION or Enums.ItemClass.MENU //
+//                 The former is used for single items with an active() method, the     //
+//                 latter for menus which are composed of multiple actions.             //
+//   dataType:     This determines which widgets are visible when an item of this type  //
+//                 is selected in the settings dialog. Possible values are listed in    //
+//                 Enums.ItemDataType.                                                  //
+//   defaultData:  This will be the default value for the data parameter for newly      //
+//                 created items.                                                       //
+//   createItem:   A function which will be called whenever a menu is opened containing //
+//                 an item of this kind.                                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let _itemTypes = null;
@@ -50,24 +56,32 @@ var ItemRegistry = class ItemRegistry {
 
   // ---------------------------------------------------------------------- static methods
 
+  // This takes a menu configuration (as created by Fly-Pie's menu editor) and checks that
+  // most constraints are fulfilled (e.g. required data fields are set, no top-level
+  // actions, etc.) and fills the objects with default data if no data is given.
   static normalizeConfig(config) {
     return this._normalizeConfig(config, true);
   }
 
-  // This uses the createItem() methods of the ItemRegistry to transform a menu
-  // configuration (as created by Fly-Pie's menu editor) to a menu structure (as
+  // This uses the createItem() methods of the registered actions and menus to transform a
+  // menu configuration (as created by Fly-Pie's menu editor) to a menu structure (as
   // required by the menu class). The main difference is that the menu structure may
   // contain significantly more items - while the menu configuration only contains one
   // item for "Bookmarks", the menu structure actually contains all of the bookmarks as
   // individual items.
+  // This method assumes a "normalized" config, so you should call the normalizeConfig()
+  // above before this one.
   static transformConfig(config) {
     return this._transformConfig(config, true);
   }
 
+  // Returns an object with all available item types (actions and menus).
   static getItemTypes() {
 
     if (_itemTypes == null) {
       _itemTypes = {
+
+        // Action types.
         Shortcut: actions.Shortcut.action,
         InsertText: actions.InsertText.action,
         Command: actions.Command.action,
@@ -75,6 +89,7 @@ var ItemRegistry = class ItemRegistry {
         File: actions.File.action,
         DBusSignal: actions.DBusSignal.action,
 
+        // Menu types.
         CustomMenu: menus.CustomMenu.menu,
         Devices: menus.Devices.menu,
         Bookmarks: menus.Bookmarks.menu,
@@ -95,6 +110,8 @@ var ItemRegistry = class ItemRegistry {
   }
 
   // ----------------------------------------------------------------------- private stuff
+
+  // See documentation of normalizeConfig() above.
   static _normalizeConfig(config, isToplevel) {
 
     // If no type is given and no children, we assume a DBusSignal.
@@ -128,17 +145,14 @@ var ItemRegistry = class ItemRegistry {
       config.data = this.getItemTypes()[config.type].defaultData;
     }
 
-    // Assign default values.
+    // Assign default name.
     if (config.name == undefined) {
-      if (isToplevel) {
-        config.name = _('Unnamed Menu');
-      } else {
-        config.name = _('Unnamed Item');
-      }
+      config.name = this.getItemTypes()[config.type].name;
     }
 
+    // Assign default icon.
     if (config.icon == undefined) {
-      config.icon = 'image-missing';
+      config.icon = this.getItemTypes()[config.type].icon;
     }
 
     // The 'shortcut' and the 'centered' property is only available on top-level items,
@@ -158,8 +172,10 @@ var ItemRegistry = class ItemRegistry {
     }
   }
 
+  // See documentation of transformConfig() above.
   static _transformConfig(config, isToplevel) {
 
+    // Create the item and then set all the standard-properties later.
     const result = this.getItemTypes()[config.type].createItem(config.data);
     result.name  = config.name;
     result.icon  = config.icon;
