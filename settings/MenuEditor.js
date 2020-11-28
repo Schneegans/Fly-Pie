@@ -30,7 +30,7 @@ let ColumnTypes = {
   DISPLAY_ANGLE: GObject.TYPE_STRING,   // Empty if angle is -1
   ICON:          GObject.TYPE_STRING,   // The string representation of the icon.
   NAME:          GObject.TYPE_STRING,   // The name without any markup.
-  TYPE:          GObject.TYPE_STRING,   // The item type. Like 'Menu' or 'Bookmarks'.
+  TYPE:          GObject.TYPE_STRING,   // The item type. Like 'Shortcut' or 'Bookmarks'.
   DATA:          GObject.TYPE_STRING,   // Used for the command, file, application, ...
   SHORTCUT:      GObject.TYPE_STRING,   // Hotkey to open top-level menus.
   CENTERED:      GObject.TYPE_BOOLEAN,  // Wether a menu should be opened centered.
@@ -93,7 +93,7 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
     if (parentPath.up()) {
       const [ok, parent] = this.get_iter(parentPath);
       if (ok) {
-        if (this.get_value(parent, this.columns.TYPE) === 'Menu') {
+        if (this.get_value(parent, this.columns.TYPE) === 'CustomMenu') {
           return true;
         }
       }
@@ -413,7 +413,7 @@ var MenuEditor = class MenuEditor {
         // If it's a custom menu, we drop into it if it's a top-level menu or if we should
         // drop into anyways. Else we drop before or after as indicated by the
         // TreeViewDropPosition.
-        if (type === 'Menu') {
+        if (type === 'CustomMenu') {
 
           if (pos == Gtk.TreeViewDropPosition.INTO_OR_BEFORE ||
               pos == Gtk.TreeViewDropPosition.INTO_OR_AFTER ||
@@ -878,7 +878,7 @@ var MenuEditor = class MenuEditor {
       // top-level element is selected, this must be a custom menu.
       let actionsSensitive = somethingSelected;
       if (this._isToplevelSelected()) {
-        actionsSensitive = this._getSelected('TYPE') == 'Menu';
+        actionsSensitive = this._getSelected('TYPE') == 'CustomMenu';
       }
       this._builder.get_object('action-types-list').sensitive = actionsSensitive;
 
@@ -1157,7 +1157,7 @@ var MenuEditor = class MenuEditor {
 
     // New Menus will get a random emoji icon. All other items will get a name
     // and icon according to the item registry.
-    if (newType == 'Menu') {
+    if (newType == 'CustomMenu') {
       this._set(iter, 'ICON', this._getRandomEmoji());
       this._set(iter, 'NAME', _('New Menu'));
     } else {
@@ -1456,7 +1456,9 @@ var MenuEditor = class MenuEditor {
           const angle = child.angle != undefined ? child.angle : -1;
 
           // For backwards compatibility with Fly-Pie 3 and earlier.
-          type = type == 'Submenu' ? 'Menu' : type;
+          if (type === 'Submenu' || type === 'Menu') {
+            type = 'CustomMenu';
+          }
 
           this._set(iter, 'ICON', icon);
           this._set(iter, 'NAME', name);
@@ -1477,8 +1479,12 @@ var MenuEditor = class MenuEditor {
       const config = configs[i];
       const iter   = this._store.append(null);
 
+      let type = config.type != undefined ? config.type : '';
+
       // For backwards compatibility with Fly-Pie 3 and earlier.
-      const type = config.type == 'Submenu' ? 'Menu' : config.type;
+      if (type === 'Submenu' || type === 'Menu') {
+        type = 'CustomMenu';
+      }
 
       this._set(iter, 'ICON', config.icon != undefined ? config.icon : 'image-missing');
       this._set(iter, 'NAME', config.name != undefined ? config.name : _('Unnamed Item'));

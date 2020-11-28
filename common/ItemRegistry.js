@@ -65,7 +65,7 @@ var ItemRegistry = class ItemRegistry {
     if (_itemTypes == null) {
       _itemTypes = {
         // A menu cannot be activated. It should always contain some children.
-        Menu: {
+        CustomMenu: {
           name: _('Custom Menu'),
           icon: 'view-more-symbolic',
           defaultData: '',
@@ -113,13 +113,13 @@ var ItemRegistry = class ItemRegistry {
     let type = config.type;
 
     // For backwards compatibility with Fly-Pie 3 and earlier.
-    if (type == 'Submenu') {
-      type = 'Menu';
+    if (type == 'Submenu' || type == 'Menu') {
+      type = 'CustomMenu';
     }
 
     // If no type is given but there are children, we assume a Menu.
     if (type == undefined && config.children != undefined) {
-      type = 'Menu';
+      type = 'CustomMenu';
     }
 
     // If no type is given and no children, we assume a DBusSignal.
@@ -128,8 +128,8 @@ var ItemRegistry = class ItemRegistry {
     }
 
     // It's an error if the type is not Menu but there are children.
-    if (type != 'Menu' && config.children != undefined) {
-      throw 'Only items of type \'Menu\' may contain child items!';
+    if (type != 'CustomMenu' && config.children != undefined) {
+      throw 'Only items of type \'CustomMenu\' may contain child items!';
     }
 
     // It's an error if a top-level element is not of the menu class.
