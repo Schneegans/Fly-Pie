@@ -25,13 +25,13 @@ const Enums = Me.imports.common.Enums;
 var menu = {
   name: _('Devices'),
   icon: 'drive-harddisk',
-  defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Shows connected devices.'),
   description: _(
       'The <b>Devices</b> menu shows an item for each mounted volume, like USB-Sticks.'),
   itemClass: Enums.ItemClass.MENU,
   dataType: Enums.ItemDataType.NONE,
+  defaultData: '',
   createItem: () => {
     const result  = {children: []};
     const monitor = Gio.VolumeMonitor.get();

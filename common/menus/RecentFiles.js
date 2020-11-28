@@ -25,13 +25,13 @@ const Enums = Me.imports.common.Enums;
 var menu = {
   name: _('Recent Files'),
   icon: 'document-open-recent',
-  defaultData: '7',
   // Translators: Please keep this short.
   subtitle: _('Shows your recently used files.'),
   description: _(
       'The <b>Recent Files</b> menu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number.'),
   itemClass: Enums.ItemClass.MENU,
   dataType: Enums.ItemDataType.COUNT,
+  defaultData: '7',
   createItem: (data) => {
     const maxNum      = parseInt(data);
     const recentFiles = Gtk.RecentManager.get_default().get_items().slice(0, maxNum);

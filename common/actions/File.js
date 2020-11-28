@@ -25,13 +25,13 @@ const Enums = Me.imports.common.Enums;
 var action = {
   name: _('Open File'),
   icon: 'text-x-generic',
-  defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Opens a file with the default applications.'),
   description: _(
       'The <b>Open File</b> action will open the above specified file with your system\'s default application.'),
   itemClass: Enums.ItemClass.ACTION,
   dataType: Enums.ItemDataType.FILE,
+  defaultData: '',
   createItem: (data) => {
     return {
       activate: () => {

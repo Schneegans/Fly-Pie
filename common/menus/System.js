@@ -38,13 +38,13 @@ try {
 var menu = {
   name: _('System'),
   icon: 'system-log-out',
-  defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Allows screen lock shutdown and other things.'),
   description: _(
       'The <b>System</b> menu shows an items for screen-lock, shutdown, settings, etc.'),
   itemClass: Enums.ItemClass.MENU,
   dataType: Enums.ItemDataType.NONE,
+  defaultData: '',
   createItem: () => {
     const result = {children: []};
 

@@ -25,13 +25,13 @@ const Enums = Me.imports.common.Enums;
 var action = {
   name: _('Launch Application'),
   icon: 'utilities-terminal',
-  defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Runs any shell command.'),
   description: _(
       'The <b>Launch Application</b> action executes any given command. This is primarily used to open applications but may have plenty of other use cases as well.'),
   itemClass: Enums.ItemClass.ACTION,
   dataType: Enums.ItemDataType.COMMAND,
+  defaultData: '',
   createItem: (data) => {
     return {
       activate: () => {

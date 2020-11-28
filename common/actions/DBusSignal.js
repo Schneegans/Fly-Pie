@@ -22,12 +22,12 @@ const Enums = Me.imports.common.Enums;
 var action = {
   name: _('D-Bus Signal'),
   icon: 'application-x-addon',
-  defaultData: '',
   subtitle: _('Emits a D-Bus signal.'),
   description: _(
       'The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="https://github.com/Schneegans/Fly-Pie#fly-pies-d-bus-interface">can listen on the D-Bus for its activation</a>. This can be very useful in custom menus opened via the command line.'),
   itemClass: Enums.ItemClass.ACTION,
   dataType: Enums.ItemDataType.ID,
+  defaultData: '',
   createItem: (data) => {
     return {id: data, activate: () => {}};
   }

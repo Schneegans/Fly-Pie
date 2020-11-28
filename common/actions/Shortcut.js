@@ -34,13 +34,13 @@ try {
 var action = {
   name: _('Activate Shortcut'),
   icon: 'preferences-desktop-keyboard-shortcuts',
-  defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Simulates a key stroke.'),
   description: _(
       'The <b>Activate Shortcut</b> action simulates a key stroke when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations.'),
   itemClass: Enums.ItemClass.ACTION,
   dataType: Enums.ItemDataType.SHORTCUT,
+  defaultData: '',
   createItem: (data) => {
     return {activate: () => InputManipulator.activateAccelerator(data)};
   }

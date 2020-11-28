@@ -21,13 +21,13 @@ const Enums = Me.imports.common.Enums;
 var menu = {
   name: _('Custom Menu'),
   icon: 'view-more-symbolic',
-  defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('This can contain actions and other menus.'),
   description: _(
       'A <b>Custom Menu</b> can contain any number of actions and submenus. However, for precise item selection, a maximum number of twelve items is recommended.\nTop-level menus can be opened using a shortcut. It is also possible to open a menu with a terminal command. You can read more on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.'),
   itemClass: Enums.ItemClass.MENU,
   dataType: Enums.ItemDataType.NONE,
+  defaultData: '',
   createItem: (centered) => {
     return {centered: centered, children: []};
   }

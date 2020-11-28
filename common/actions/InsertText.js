@@ -36,13 +36,13 @@ try {
 var action = {
   name: _('Insert Text'),
   icon: 'input-keyboard',
-  defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Types some text.'),
   description: _(
       'The <b>Insert Text</b> action copies the given text to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things.'),
   itemClass: Enums.ItemClass.ACTION,
   dataType: Enums.ItemDataType.TEXT,
+  defaultData: '',
   createItem: (data) => {
     return {
       activate: () => {

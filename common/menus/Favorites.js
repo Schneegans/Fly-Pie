@@ -35,13 +35,13 @@ try {
 var menu = {
   name: _('Favorites'),
   icon: 'starred',
-  defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Shows your pinned applications.'),
   description: _(
       'The <b>Favorites</b> menu shows the applications you have pinned to Gnome Shell\'s Dash.'),
   itemClass: Enums.ItemClass.MENU,
   dataType: Enums.ItemDataType.NONE,
+  defaultData: '',
   createItem: () => {
     const appNames = global.settings.get_strv('favorite-apps');
     const result   = {children: []};

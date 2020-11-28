@@ -35,13 +35,13 @@ try {
 var menu = {
   name: _('Running Apps'),
   icon: 'preferences-system-windows',
-  defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Shows the currently running applications.'),
   description: _(
       'The <b>Running Apps</b> menu shows all currently running applications. This is similar to the Alt+Tab window selection. As the entries change position frequently, this is actually not very effective.'),
   itemClass: Enums.ItemClass.MENU,
   dataType: Enums.ItemDataType.NONE,
+  defaultData: '',
   createItem: () => {
     const apps   = Shell.AppSystem.get_default().get_running();
     const result = {children: []};

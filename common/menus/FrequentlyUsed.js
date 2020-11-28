@@ -35,13 +35,13 @@ try {
 var menu = {
   name: _('Frequently Used'),
   icon: 'emblem-favorite',
-  defaultData: '7',
   // Translators: Please keep this short.
   subtitle: _('Shows your frequently used applications.'),
   description: _(
       'The <b>Frequently Used</b> menu shows a list of frequently used applications. You should limit the maximum number of shown applications to a reasonable number.'),
   itemClass: Enums.ItemClass.MENU,
   dataType: Enums.ItemDataType.COUNT,
+  defaultData: '7',
   createItem: (data) => {
     const maxNum = parseInt(data);
     const apps   = Shell.AppUsage.get_default().get_most_used().slice(0, maxNum);

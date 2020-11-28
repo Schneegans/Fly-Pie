@@ -24,13 +24,13 @@ const Enums = Me.imports.common.Enums;
 var action = {
   name: _('Open URI'),
   icon: 'applications-internet',
-  defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Opens an URI with the default applications.'),
   description: _(
       'When the <b>Open URI</b> action is activated, the above URI is opened with the default application. For http URLs, this will be your web browser. However, it is also possible to open other URIs such as "mailto:foo@bar.org".'),
   itemClass: Enums.ItemClass.ACTION,
   dataType: Enums.ItemDataType.URL,
+  defaultData: '',
   createItem: (data) => {
     return {
       activate: () => {

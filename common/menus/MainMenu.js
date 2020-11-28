@@ -25,13 +25,13 @@ const Enums = Me.imports.common.Enums;
 var menu = {
   name: _('Main Menu'),
   icon: 'applications-system',
-  defaultData: '',
   // Translators: Please keep this short.
   subtitle: _('Shows all installed applications.'),
   description: _(
       'The <b>Main Menu</b> shows all installed applications. Usually, this is very cluttered as many sections contain too many items to be used efficiently. You should rather setup your own menus!'),
   itemClass: Enums.ItemClass.MENU,
   dataType: Enums.ItemDataType.NONE,
+  defaultData: '',
   createItem: () => {
     const pushMenuItems = (menu, dir) => {
       let iter = dir.iter(), nodeType, item;
