@@ -1049,7 +1049,7 @@ var MenuEditor = class MenuEditor {
       }
       row.grab_remove();
       row.parent.unselect_all();
-      label.set_disabled_text('Not bound');
+      label.set_disabled_text(_('Not bound'));
     };
 
     // When the row is activated, the input is grabbed.
@@ -1289,7 +1289,7 @@ var MenuEditor = class MenuEditor {
     // "DISPLAY_NAME" as well, as the shortcut is displayed in the cellrenderer.
     if (column == 'SHORTCUT') {
       if (this._isToplevel(iter)) {
-        let shortcut = 'Not bound.';
+        let shortcut = _('Not bound.');
         if (data != '') {
           const [keyval, mods] = Gtk.accelerator_parse(data);
           shortcut             = Gtk.accelerator_get_label(keyval, mods);
