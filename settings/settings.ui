@@ -609,7 +609,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                 <property name="margin_left">6</property>
                                 <property name="margin_top">10</property>
                                 <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">&lt;b&gt;Menus&lt;/b&gt;
-They can be submenus or top-level menus.</property>
+Can be submenus or top-level menus.</property>
                                 <property name="use_markup">True</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -645,7 +645,7 @@ They can be submenus or top-level menus.</property>
                                 <property name="margin_left">6</property>
                                 <property name="margin_top">10</property>
                                 <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">&lt;b&gt;Actions&lt;/b&gt;
-They can be added to custom menus.</property>
+Can be added to custom menus.</property>
                                 <property name="use_markup">True</property>
                                 <style>
                                   <class name="dim-label"/>
