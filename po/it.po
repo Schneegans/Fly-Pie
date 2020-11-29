@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-29 14:27+0100\n"
-"PO-Revision-Date: 2020-11-20 16:52+0100\n"
-"Last-Translator: Albano Battistella <albano_battistella@hotmail.com>\n"
+"POT-Creation-Date: 2020-11-29 19:14+0100\n"
+"PO-Revision-Date: 2020-11-29 19:16+0100\n"
+"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: settings/settings.ui:53
@@ -24,9 +24,8 @@ msgid ""
 "Visit <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie's Homepage</"
 "a> for details.\n"
 "\n"
-"Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free to "
-"report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
-"\">Github</a>."
+"Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free to report "
+"this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues\">Github</a>."
 msgstr ""
 "Visita <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie's Homepage</"
 "a> per dettagli.\n"
@@ -96,9 +95,8 @@ msgstr ""
 "pulsante grande in basso per aprire un menu di prova!"
 
 #. The text of the big tutorial button. Using two lines looks quite good.
-#: settings/settings.ui:1078 settings/settings.ui:1205
-#: settings/settings.ui:1508 settings/settings.ui:1655
-#: settings/settings.ui:1957
+#: settings/settings.ui:1078 settings/settings.ui:1205 settings/settings.ui:1508
+#: settings/settings.ui:1655 settings/settings.ui:1957
 msgid ""
 "<big><b>Open the\n"
 "menu!</b></big>"
@@ -116,8 +114,8 @@ msgid ""
 msgstr ""
 "• Usa il <b> pulsante sinistro del mouse per selezionare gli elementi </b>.\n"
 "• Usa il <b>tasto destro del mouse per chiudere il menu</b>.\n"
-"• Il menu di prova è solo un parco giochi, la selezione degli elementi non "
-"ha alcun effetto reale.\n"
+"• Il menu di prova è solo un parco giochi, la selezione degli elementi non ha "
+"alcun effetto reale.\n"
 "\n"
 "Quando ti senti a tuo agio, fai clic su <b>avanti</b> per ulteriori dettagli!"
 
@@ -130,9 +128,8 @@ msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
 msgstr ""
-"Non importa se fai clic direttamente su un elemento o sul bordo dello "
-"schermo fintanto che il puntatore del mouse rimane nella sezione "
-"dell'elemento."
+"Non importa se fai clic direttamente su un elemento o sul bordo dello schermo "
+"fintanto che il puntatore del mouse rimane nella sezione dell'elemento."
 
 #: settings/settings.ui:1227
 msgid ""
@@ -159,18 +156,18 @@ msgstr "Sessione Pratica I"
 #: settings/settings.ui:1293
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
-"select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
-"gold medal?\n"
+"select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the gold "
+"medal?\n"
 "\n"
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!\n"
 msgstr ""
 "Per questa sessione pratica, apri il menu facendo clic sul pulsante grande. "
-"Quindi seleziona \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) il più rapidamente possibile. "
-"Vuoi ottenere la medaglia d'oro?\n"
+"Quindi seleziona \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) il più rapidamente possibile. Vuoi "
+"ottenere la medaglia d'oro?\n"
 "\n"
-"Quando sei soddisfatto del risultato, fai clic su <b>Avanti</b> per "
-"conoscere la modalità di marcatura di Fly-Pie!\n"
+"Quando sei soddisfatto del risultato, fai clic su <b>Avanti</b> per conoscere "
+"la modalità di marcatura di Fly-Pie!\n"
 
 #. The text of the tutorial-reset-button.
 #: settings/settings.ui:1373 settings/settings.ui:1822
@@ -210,9 +207,9 @@ msgid ""
 "your mouse</b>. You can start with individual segments of the path, put you "
 "can also try to draw the entire path!\n"
 "\n"
-"You may find it more successful if you explicitly try to compose your "
-"gesture of straight parts. <b>Do not draw curvy paths but rather expressive "
-"zig-zag-lines!</b>\n"
+"You may find it more successful if you explicitly try to compose your gesture "
+"of straight parts. <b>Do not draw curvy paths but rather expressive zig-zag-"
+"lines!</b>\n"
 "\n"
 "Click <b>next</b> for an additional practice session!"
 msgstr ""
@@ -220,8 +217,8 @@ msgstr ""
 "percorso con il mouse</b>. Puoi iniziare con singoli segmenti del percorso, "
 "puoi anche provare a disegnare l'intero percorso!\n"
 "\n"
-"Potresti trovare più successo se provi esplicitamente a comporre il tuo "
-"gesto di parti dritte. <b>Non disegnare percorsi sinuosi ma piuttosto linee "
+"Potresti trovare più successo se provi esplicitamente a comporre il tuo gesto "
+"di parti dritte. <b>Non disegnare percorsi sinuosi ma piuttosto linee "
 "espressive a zig-zag!</b>\n"
 "\n"
 "Fai clic su <b>avanti</b> per un'ulteriore sessione di pratica!"
@@ -275,8 +272,8 @@ msgid ""
 "free to report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
-"Congratulazioni! Se sei riuscito a sbloccare la maggior parte delle "
-"medaglie, utilizzerai Fly-Pie come un maestro Pielot!\n"
+"Congratulazioni! Se sei riuscito a sbloccare la maggior parte delle medaglie, "
+"utilizzerai Fly-Pie come un maestro Pielot!\n"
 "\n"
 "Ora puoi usare le altre pagine di questa finestra di dialogo delle "
 "impostazioni per configurare Fly-Pie secondo i desideri del tuo cuore. Ci "
@@ -356,23 +353,17 @@ msgstr "Scala Globale"
 msgid "Independent of the preset."
 msgstr "Indipendentemente dal predefinito selezionato."
 
-#: settings/settings.ui:2793 settings/settings.ui:2813
-#: settings/settings.ui:2950 settings/settings.ui:2970
-#: settings/settings.ui:2989 settings/settings.ui:3008
-#: settings/settings.ui:3272 settings/settings.ui:3292
-#: settings/settings.ui:3400 settings/settings.ui:3420
-#: settings/settings.ui:3572 settings/settings.ui:4363
-#: settings/settings.ui:4382 settings/settings.ui:4402
-#: settings/settings.ui:4422 settings/settings.ui:5198
-#: settings/settings.ui:5399 settings/settings.ui:5418
-#: settings/settings.ui:5438 settings/settings.ui:5458
-#: settings/settings.ui:5478 settings/settings.ui:5924
-#: settings/settings.ui:6072 settings/settings.ui:6092
-#: settings/settings.ui:6112 settings/settings.ui:6329
-#: settings/settings.ui:6349 settings/settings.ui:6369
-#: settings/settings.ui:6547 settings/settings.ui:6634
-#: settings/settings.ui:6720 settings/settings.ui:6807
-#: settings/settings.ui:6888
+#: settings/settings.ui:2793 settings/settings.ui:2813 settings/settings.ui:2950
+#: settings/settings.ui:2970 settings/settings.ui:2989 settings/settings.ui:3008
+#: settings/settings.ui:3272 settings/settings.ui:3292 settings/settings.ui:3400
+#: settings/settings.ui:3420 settings/settings.ui:3572 settings/settings.ui:4363
+#: settings/settings.ui:4382 settings/settings.ui:4402 settings/settings.ui:4422
+#: settings/settings.ui:5198 settings/settings.ui:5399 settings/settings.ui:5418
+#: settings/settings.ui:5438 settings/settings.ui:5458 settings/settings.ui:5478
+#: settings/settings.ui:5924 settings/settings.ui:6072 settings/settings.ui:6092
+#: settings/settings.ui:6112 settings/settings.ui:6329 settings/settings.ui:6349
+#: settings/settings.ui:6369 settings/settings.ui:6547 settings/settings.ui:6634
+#: settings/settings.ui:6720 settings/settings.ui:6807 settings/settings.ui:6888
 msgid "Reset to default value"
 msgstr "Ripristina il valore predefinito"
 
@@ -384,8 +375,8 @@ msgstr "Font"
 msgid "Text Color"
 msgstr "Colore Testo"
 
-#: settings/settings.ui:2892 settings/settings.ui:4272
-#: settings/settings.ui:5288 settings/settings.ui:5653
+#: settings/settings.ui:2892 settings/settings.ui:4272 settings/settings.ui:5288
+#: settings/settings.ui:5653
 msgid "Background Color"
 msgstr "Colore Sfondo"
 
@@ -409,8 +400,8 @@ msgstr "Queste impostazioni influiscono su tutte le voci di menu."
 msgid "Easing Mode"
 msgstr "Tipo di Animazione"
 
-#: settings/settings.ui:3168 settings/settings.ui:3736
-#: settings/settings.ui:5018 settings/settings.ui:5831
+#: settings/settings.ui:3168 settings/settings.ui:3736 settings/settings.ui:5018
+#: settings/settings.ui:5831
 msgid "Size"
 msgstr "Dimensione"
 
@@ -476,37 +467,33 @@ msgstr ""
 msgid "Pick Center Item Color"
 msgstr "Seleziona Colore Elemento Centrale"
 
-#: settings/settings.ui:3813 settings/settings.ui:3873
-#: settings/settings.ui:4080 settings/settings.ui:4140
-#: settings/settings.ui:4701 settings/settings.ui:4773
+#: settings/settings.ui:3813 settings/settings.ui:3873 settings/settings.ui:4080
+#: settings/settings.ui:4140 settings/settings.ui:4701 settings/settings.ui:4773
 #: settings/settings.ui:4906 settings/settings.ui:4990
 msgid "Saturation"
 msgstr "Saturazione"
 
-#: settings/settings.ui:3833 settings/settings.ui:3885
-#: settings/settings.ui:4100 settings/settings.ui:4152
-#: settings/settings.ui:4721 settings/settings.ui:4761
+#: settings/settings.ui:3833 settings/settings.ui:3885 settings/settings.ui:4100
+#: settings/settings.ui:4152 settings/settings.ui:4721 settings/settings.ui:4761
 #: settings/settings.ui:4926 settings/settings.ui:4978
 msgid "Luminance"
 msgstr "Illuminazione"
 
-#: settings/settings.ui:3853 settings/settings.ui:3897
-#: settings/settings.ui:4120 settings/settings.ui:4164
-#: settings/settings.ui:4741 settings/settings.ui:4785
+#: settings/settings.ui:3853 settings/settings.ui:3897 settings/settings.ui:4120
+#: settings/settings.ui:4164 settings/settings.ui:4741 settings/settings.ui:4785
 #: settings/settings.ui:4946 settings/settings.ui:4966
 msgid "Opacity"
 msgstr "Opacità"
 
 #. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
-#: settings/settings.ui:3922 settings/settings.ui:4007
-#: settings/settings.ui:4613 settings/settings.ui:4818
-#: settings/settings.ui:5684 settings/settings.ui:5761
+#: settings/settings.ui:3922 settings/settings.ui:4007 settings/settings.ui:4613
+#: settings/settings.ui:4818 settings/settings.ui:5684 settings/settings.ui:5761
 msgid "Fixed"
 msgstr "Fisso"
 
 #. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
-#: settings/settings.ui:3937 settings/settings.ui:4022
-#: settings/settings.ui:4628 settings/settings.ui:4833
+#: settings/settings.ui:3937 settings/settings.ui:4022 settings/settings.ui:4628
+#: settings/settings.ui:4833
 msgid "Auto"
 msgstr "Automatico"
 
@@ -514,12 +501,10 @@ msgstr "Automatico"
 msgid "Icon Opacity"
 msgstr "Opacità Icona"
 
-#: settings/settings.ui:4284 settings/settings.ui:4303
-#: settings/settings.ui:4323 settings/settings.ui:4343
-#: settings/settings.ui:5300 settings/settings.ui:5319
-#: settings/settings.ui:5339 settings/settings.ui:5359
-#: settings/settings.ui:5379 settings/settings.ui:6013
-#: settings/settings.ui:6032 settings/settings.ui:6052
+#: settings/settings.ui:4284 settings/settings.ui:4303 settings/settings.ui:4323
+#: settings/settings.ui:4343 settings/settings.ui:5300 settings/settings.ui:5319
+#: settings/settings.ui:5339 settings/settings.ui:5359 settings/settings.ui:5379
+#: settings/settings.ui:6013 settings/settings.ui:6032 settings/settings.ui:6052
 msgid "Copy left value to right side"
 msgstr "Copia il valore sinistro sul lato destro"
 
@@ -540,8 +525,8 @@ msgid "Icon Scale"
 msgstr "Scala Icona"
 
 #. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
-#: settings/settings.ui:4643 settings/settings.ui:4848
-#: settings/settings.ui:5699 settings/settings.ui:5776
+#: settings/settings.ui:4643 settings/settings.ui:4848 settings/settings.ui:5699
+#: settings/settings.ui:5776
 msgid "Parent"
 msgstr "Genitore"
 
@@ -699,8 +684,8 @@ msgstr "Rimuove l'elemento selezionato."
 msgid "Name"
 msgstr "Nome"
 
-#: settings/settings.ui:7317 settings/settings.ui:7318
-#: settings/settings.ui:7416 settings/settings.ui:7417
+#: settings/settings.ui:7317 settings/settings.ui:7318 settings/settings.ui:7416
+#: settings/settings.ui:7417
 msgid "Insert Emoji"
 msgstr "Inserisci Emoji"
 
@@ -726,26 +711,26 @@ msgid ""
 "even if other items are added or removed. This way you can edit a menu even "
 "if your muscles already learned the item's direction.\n"
 "\n"
-"However, there is a <b>restriction</b> on the fixed angles. Inside a menu "
-"the fixed angles must be monotonically increasing, that is each fixed angle "
-"must be larger than any previous fixed angle.\n"
+"However, there is a <b>restriction</b> on the fixed angles. Inside a menu the "
+"fixed angles must be monotonically increasing, that is each fixed angle must "
+"be larger than any previous fixed angle.\n"
 "\n"
-"In order to prevent weird behavior, <b>fixed angles will be removed</b> if "
-"an item is dragged to another position in the menu.\n"
+"In order to prevent weird behavior, <b>fixed angles will be removed</b> if an "
+"item is dragged to another position in the menu.\n"
 "\n"
 "<b>Use -1 to disable this feature</b>."
 msgstr ""
 "È possibile utilizzare angoli fissi per garantire che un elemento rimanga "
-"nella stessa posizione anche se vengono aggiunti o rimossi altri elementi. "
-"In questo modo puoi modificare un menu anche se i tuoi muscoli hanno già "
+"nella stessa posizione anche se vengono aggiunti o rimossi altri elementi. In "
+"questo modo puoi modificare un menu anche se i tuoi muscoli hanno già "
 "imparato la direzione dell'elemento.\n"
 "\n"
-"Tuttavia, esiste una <b>restrizione</b> sugli angoli fissi. All'interno di "
-"un menu gli angoli fissi devono essere monotonicamente crescenti, ovvero "
-"ogni angolo fisso deve essere maggiore di ogni angolo fisso precedente.\n"
+"Tuttavia, esiste una <b>restrizione</b> sugli angoli fissi. All'interno di un "
+"menu gli angoli fissi devono essere monotonicamente crescenti, ovvero ogni "
+"angolo fisso deve essere maggiore di ogni angolo fisso precedente.\n"
 "\n"
-"Per evitare comportamenti strani, <b>gli angoli fissi verranno rimossi</b> "
-"se un elemento viene trascinato in un'altra posizione nel menu.\n"
+"Per evitare comportamenti strani, <b>gli angoli fissi verranno rimossi</b> se "
+"un elemento viene trascinato in un'altra posizione nel menu.\n"
 "\n"
 "<b>Utilizza -1 per disabilitare questa funzione</b>."
 
@@ -1396,29 +1381,30 @@ msgstr "Impossibile importare la configurazione del menu!"
 msgid "Menu Structure"
 msgstr "Struttura del Menu"
 
-#: settings/MenuEditor.js:1023 settings/MenuEditor.js:1273
+#: settings/MenuEditor.js:1011 settings/MenuEditor.js:1040
+#: settings/MenuEditor.js:1261 settings/MenuEditor.js:1280
 msgid "Not bound."
 msgstr ""
 
-#: settings/MenuEditor.js:1040
+#: settings/MenuEditor.js:1028
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
 
-#: settings/MenuEditor.js:1102
+#: settings/MenuEditor.js:1090
 msgid "You should try to have no more than twelve items in your menus."
 msgstr "Dovresti provare a non avere più di dodici voci nei tuoi menu."
 
-#: settings/MenuEditor.js:1103
+#: settings/MenuEditor.js:1091
 msgid ""
-"You will find it more easy to learn item positions if you have an even "
-"number of entries. Four, six and eight are good numbers."
+"You will find it more easy to learn item positions if you have an even number "
+"of entries. Four, six and eight are good numbers."
 msgstr ""
-"Troverai più facile imparare le posizioni degli oggetti se hai un numero "
-"pari di voci. Quattro, sei e otto sono buoni numeri."
+"Troverai più facile imparare le posizioni degli oggetti se hai un numero pari "
+"di voci. Quattro, sei e otto sono buoni numeri."
 
-#: settings/MenuEditor.js:1104
+#: settings/MenuEditor.js:1092
 msgid ""
 "The source code of Fly-Pie is available on <a href=\"https://github.com/"
 "Schneegans/Fly-Pie\">Github</a>."
@@ -1426,7 +1412,7 @@ msgstr ""
 "Il codice sorgente di Fly-Pie è disponibile su a href=\"https://github.com/"
 "Schneegans/Fly-Pie\">Github</a>."
 
-#: settings/MenuEditor.js:1105
+#: settings/MenuEditor.js:1093
 msgid ""
 "Suggestions can be posted on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
@@ -1434,22 +1420,22 @@ msgstr ""
 "I suggerimenti possono essere pubblicati su <a href=\"https://github.com/"
 "Schneegans/Fly-Pie/issues\">Github</a>."
 
-#: settings/MenuEditor.js:1106
+#: settings/MenuEditor.js:1094
 msgid ""
-"Bugs can be reported on <a href=\"https://github.com/Schneegans/Fly-Pie/"
-"issues\">Github</a>."
+"Bugs can be reported on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
+"\">Github</a>."
 msgstr ""
 "È possibile segnalare bug su <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
 
-#: settings/MenuEditor.js:1107
+#: settings/MenuEditor.js:1095
 #, fuzzy
 msgid "Deep hierarchies are pretty efficient. Put menus into menus in menus!"
 msgstr ""
 "Le gerarchie profonde sono piuttosto efficienti. Metti sottomenu dentro "
 "sottomenu in sottomenu!"
 
-#: settings/MenuEditor.js:1108
+#: settings/MenuEditor.js:1096
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
@@ -1457,12 +1443,12 @@ msgstr ""
 "Se elimini tutti i menu, esci e accedi di nuovo, verrà ripristinata la "
 "configurazione predefinita."
 
-#: settings/MenuEditor.js:1109
+#: settings/MenuEditor.js:1097
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr ""
 "È possibile riordinare le voci di menu a sinistra tramite trascinamento."
 
-#: settings/MenuEditor.js:1110
+#: settings/MenuEditor.js:1098
 msgid ""
 "You can drop directories, files, links and desktop files to the menu "
 "hierarchy on the left."
@@ -1470,7 +1456,7 @@ msgstr ""
 "È possibile trascinare directory, file, collegamenti e file desktop nella "
 "gerarchia dei menu a sinistra."
 
-#: settings/MenuEditor.js:1111
+#: settings/MenuEditor.js:1099
 msgid ""
 "You can copy menu items by holding the Control key while dragging them to "
 "another location."
@@ -1478,11 +1464,11 @@ msgstr ""
 "Puoi copiare le voci di menu tenendo premuto il tasto Control mentre le "
 "trascini in un'altra posizione."
 
-#: settings/MenuEditor.js:1196
+#: settings/MenuEditor.js:1184
 msgid "Do you really want to delete the selected item?"
 msgstr "Vuoi davvero eliminare l'elemento selezionato?"
 
-#: settings/MenuEditor.js:1197
+#: settings/MenuEditor.js:1185
 msgid "This cannot be undone!"
 msgstr "Questo non può essere annullato!"
 
@@ -1516,8 +1502,8 @@ msgstr "Esegue qualsiasi comando di shell."
 #: common/actions/Command.js:31
 msgid ""
 "The <b>Launch Application</b> action executes any given command. This is "
-"primarily used to open applications but may have plenty of other use cases "
-"as well."
+"primarily used to open applications but may have plenty of other use cases as "
+"well."
 msgstr ""
 "L'azione<b>Avvia applicazione</b> esegue qualsiasi comando dato. Viene "
 "utilizzato principalmente per aprire le applicazioni, ma può avere anche "
@@ -1534,9 +1520,9 @@ msgstr ""
 #: common/actions/DBusSignal.js:27
 msgid ""
 "The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
-"\"https://github.com/Schneegans/Fly-Pie#fly-pies-d-bus-interface\">can "
-"listen on the D-Bus for its activation</a>. This can be very useful in "
-"custom menus opened via the command line."
+"\"https://github.com/Schneegans/Fly-Pie#fly-pies-d-bus-interface\">can listen "
+"on the D-Bus for its activation</a>. This can be very useful in custom menus "
+"opened via the command line."
 msgstr ""
 
 #: common/actions/File.js:26
@@ -1553,8 +1539,8 @@ msgid ""
 "The <b>Open File</b> action will open the above specified file with your "
 "system's default application."
 msgstr ""
-"L'azione <b>Apri file</b> aprirà il file sopra specificato con "
-"l'applicazione predefinita del tuo sistema."
+"L'azione <b>Apri file</b> aprirà il file sopra specificato con l'applicazione "
+"predefinita del tuo sistema."
 
 #: common/actions/InsertText.js:37
 msgid "Insert Text"
@@ -1567,9 +1553,9 @@ msgstr "Digita del testo."
 
 #: common/actions/InsertText.js:42
 msgid ""
-"The <b>Insert Text</b> action copies the given text to the clipboard and "
-"then simulates a Ctrl+V. This can be useful if you realize that you often "
-"write the same things."
+"The <b>Insert Text</b> action copies the given text to the clipboard and then "
+"simulates a Ctrl+V. This can be useful if you realize that you often write "
+"the same things."
 msgstr ""
 "L'azione <b>Inserisci testo</b> copia il testo specificato negli appunti e "
 "quindi simula Ctrl + V. Questo può essere utile se ti rendi conto che scrivi "
@@ -1592,8 +1578,8 @@ msgid ""
 msgstr ""
 "L'azione <b>Attiva collegamento</b> simula la pressione di un tasto quando "
 "attivata. Ad esempio, questo può essere utilizzato per cambiare desktop "
-"virtuale, controllare la riproduzione multimediale o per annullare / "
-"ripetere le operazioni."
+"virtuale, controllare la riproduzione multimediale o per annullare / ripetere "
+"le operazioni."
 
 #: common/actions/Uri.js:25
 msgid "Open URI"
@@ -1612,8 +1598,8 @@ msgid ""
 "\"."
 msgstr ""
 "Quando l'azione <b>Apri URI</b> è attivata, l'URI sopra viene aperto con "
-"l'applicazione predefinita. Per gli URL http, questo sarà il tuo browser "
-"web. Tuttavia, è anche possibile aprire altri URI come \"mailto:foo@bar.org\""
+"l'applicazione predefinita. Per gli URL http, questo sarà il tuo browser web. "
+"Tuttavia, è anche possibile aprire altri URI come \"mailto:foo@bar.org\""
 
 #. Translators: Please keep this short.
 #: common/menus/Bookmarks.js:29
@@ -1642,20 +1628,19 @@ msgstr ""
 #: common/menus/CustomMenu.js:27
 #, fuzzy
 msgid ""
-"A <b>Custom Menu</b> can contain any number of actions and submenus. "
-"However, for precise item selection, a maximum number of twelve items is "
-"recommended.\n"
-"Top-level menus can be opened using a shortcut. It is also possible to open "
-"a menu with a terminal command. You can read more on <a href=\"https://"
-"github.com/Schneegans/Fly-Pie\">Github</a>."
+"A <b>Custom Menu</b> can contain any number of actions and submenus. However, "
+"for precise item selection, a maximum number of twelve items is recommended.\n"
+"Top-level menus can be opened using a shortcut. It is also possible to open a "
+"menu with a terminal command. You can read more on <a href=\"https://github."
+"com/Schneegans/Fly-Pie\">Github</a>."
 msgstr ""
 "Un <b>menu di primo livello</b> può contenere un numero qualsiasi di voci di "
 "menu e sottomenu. Tuttavia, per una selezione precisa degli elementi, si "
 "consiglia un numero massimo di dodici.\n"
-"Il menu può essere aperto utilizzando il collegamento definito sopra. È "
-"anche possibile aprire un menu con un comando da terminale. Puoi leggere "
-"ulteriori informazioni su <a href=\"https://github.com/Schneegans/Fly-Pie\"> "
-"Github </a>."
+"Il menu può essere aperto utilizzando il collegamento definito sopra. È anche "
+"possibile aprire un menu con un comando da terminale. Puoi leggere ulteriori "
+"informazioni su <a href=\"https://github.com/Schneegans/Fly-Pie\"> Github </"
+"a>."
 
 #: common/menus/Devices.js:26
 msgid "Devices"
@@ -1701,9 +1686,9 @@ msgstr "Mostra le applicazioni utilizzate di frequente."
 #: common/menus/FrequentlyUsed.js:41
 #, fuzzy
 msgid ""
-"The <b>Frequently Used</b> menu shows a list of frequently used "
-"applications. You should limit the maximum number of shown applications to a "
-"reasonable number."
+"The <b>Frequently Used</b> menu shows a list of frequently used applications. "
+"You should limit the maximum number of shown applications to a reasonable "
+"number."
 msgstr ""
 "Il sottomenu <b>Utilizzate di Frequente</b> mostra un elenco di applicazioni "
 "utilizzate di frequente. È necessario limitare il numero massimo di "
@@ -1721,13 +1706,13 @@ msgstr "Mostra tutte le applicazioni installate."
 #: common/menus/MainMenu.js:31
 msgid ""
 "The <b>Main Menu</b> shows all installed applications. Usually, this is very "
-"cluttered as many sections contain too many items to be used efficiently. "
-"You should rather setup your own menus!"
+"cluttered as many sections contain too many items to be used efficiently. You "
+"should rather setup your own menus!"
 msgstr ""
-"Il <b>Menu principale</b> mostra tutte le applicazioni installate. Di "
-"solito, questo è molto disordinato poiché molte sezioni contengono troppi "
-"elementi per essere utilizzati in modo efficiente. Dovresti piuttosto "
-"impostare i tuoi menu!"
+"Il <b>Menu principale</b> mostra tutte le applicazioni installate. Di solito, "
+"questo è molto disordinato poiché molte sezioni contengono troppi elementi "
+"per essere utilizzati in modo efficiente. Dovresti piuttosto impostare i tuoi "
+"menu!"
 
 #: common/menus/RecentFiles.js:26
 msgid "Recent Files"
@@ -1801,32 +1786,3 @@ msgstr "Disconnetti"
 #: common/menus/System.js:104
 msgid "Power Off..."
 msgstr "Spegni..."
-
-#, fuzzy
-#~ msgid "New Menu"
-#~ msgstr "Menu Esempio"
-
-#~ msgid "Actions"
-#~ msgstr "Azioni"
-
-#~ msgid "Submenus"
-#~ msgstr "Sottomenu"
-
-#~ msgid "Toplevel Menu"
-#~ msgstr "Menu Principale"
-
-#~ msgid "Create as many as you want!"
-#~ msgstr "Crea quanti ne vuoi!"
-
-#~ msgid "Add structure to your menu!"
-#~ msgstr "Aggiungi struttura al tuo menu!"
-
-#~ msgid ""
-#~ "The <b>Custom Submenu</b> can be used to group actions together. As deep "
-#~ "hierarchies can be selected quite efficiently, feel free to create "
-#~ "submenus in submenus!"
-#~ msgstr ""
-#~ "Il <b>sottomenu personalizzato</b> può essere utilizzato per raggruppare "
-#~ "le azioni. Poiché le gerarchie profonde possono essere selezionate in "
-#~ "modo abbastanza efficiente, sentiti libero di creare sottomenu in "
-#~ "sottomenu!"

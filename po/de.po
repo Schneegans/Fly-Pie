@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-29 14:27+0100\n"
-"PO-Revision-Date: 2020-11-29 15:01+0100\n"
+"POT-Creation-Date: 2020-11-29 19:14+0100\n"
+"PO-Revision-Date: 2020-11-29 19:15+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Simon Schneegans <code@simonschneegans.de>, Philipp Kiemle "
 "<philipp.kiemle@gmail.com>\n"
@@ -1400,11 +1400,12 @@ msgstr "Importieren der Menükonfiguration ist fehlgeschlagen!"
 msgid "Menu Structure"
 msgstr "Menüstruktur"
 
-#: settings/MenuEditor.js:1023 settings/MenuEditor.js:1273
+#: settings/MenuEditor.js:1011 settings/MenuEditor.js:1040
+#: settings/MenuEditor.js:1261 settings/MenuEditor.js:1280
 msgid "Not bound."
 msgstr "Deaktiviert."
 
-#: settings/MenuEditor.js:1040
+#: settings/MenuEditor.js:1028
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
@@ -1412,12 +1413,12 @@ msgstr ""
 "Drücken Sie eine Tastenkombination!\n"
 "ESC um abzubrechen, Rücktaste zum Deaktivieren"
 
-#: settings/MenuEditor.js:1102
+#: settings/MenuEditor.js:1090
 msgid "You should try to have no more than twelve items in your menus."
 msgstr ""
 "Sie sollten versuchen, nicht mehr als zwölf Einträge in einem Menü zu haben."
 
-#: settings/MenuEditor.js:1103
+#: settings/MenuEditor.js:1091
 msgid ""
 "You will find it more easy to learn item positions if you have an even "
 "number of entries. Four, six and eight are good numbers."
@@ -1425,7 +1426,7 @@ msgstr ""
 "Sie werden merken, dass es einfacher ist, sich Positionen in Menüs mit einer "
 "geraden Anzahl an Elementen zu merken. Vier, sechs und acht sind gute Zahlen."
 
-#: settings/MenuEditor.js:1104
+#: settings/MenuEditor.js:1092
 msgid ""
 "The source code of Fly-Pie is available on <a href=\"https://github.com/"
 "Schneegans/Fly-Pie\">Github</a>."
@@ -1433,7 +1434,7 @@ msgstr ""
 "Der Quellcode von Fly-Pie ist auf <a href=\"https://github.com/Schneegans/"
 "Fly-Pie\">Github</a> verfübar."
 
-#: settings/MenuEditor.js:1105
+#: settings/MenuEditor.js:1093
 msgid ""
 "Suggestions can be posted on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
@@ -1441,7 +1442,7 @@ msgstr ""
 "Verbesserungsvorschläge können auf <a href=\"https://github.com/Schneegans/"
 "Fly-Pie/issues\">Github</a> diskutiert werden."
 
-#: settings/MenuEditor.js:1106
+#: settings/MenuEditor.js:1094
 msgid ""
 "Bugs can be reported on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
@@ -1449,13 +1450,13 @@ msgstr ""
 "Fehler können auf <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a> gemeldet werden."
 
-#: settings/MenuEditor.js:1107
+#: settings/MenuEditor.js:1095
 msgid "Deep hierarchies are pretty efficient. Put menus into menus in menus!"
 msgstr ""
 "Tiefe Hierarchien sind ziemlich effizient! Packen Sie Menüs in Menüs in "
 "Menüs!"
 
-#: settings/MenuEditor.js:1108
+#: settings/MenuEditor.js:1096
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
@@ -1463,11 +1464,11 @@ msgstr ""
 "Wenn Sie alle Menüs löschen, sich aus- und wieder einloggen, wird die "
 "Beispielkonfiguration wiederhergestellt."
 
-#: settings/MenuEditor.js:1109
+#: settings/MenuEditor.js:1097
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr "Menüeinträge können in der Liste mit der Maus verschoben werden."
 
-#: settings/MenuEditor.js:1110
+#: settings/MenuEditor.js:1098
 msgid ""
 "You can drop directories, files, links and desktop files to the menu "
 "hierarchy on the left."
@@ -1475,7 +1476,7 @@ msgstr ""
 "Sie können Verzeichnisse, Dateien, Links oder Anwendungsstarter in die Liste "
 "auf der linken Seite ziehen."
 
-#: settings/MenuEditor.js:1111
+#: settings/MenuEditor.js:1099
 msgid ""
 "You can copy menu items by holding the Control key while dragging them to "
 "another location."
@@ -1483,11 +1484,11 @@ msgstr ""
 "Sie können Menüeinträge kopieren indem Sie die Strg-Taste während des "
 "Verschiebens gedrückt halten."
 
-#: settings/MenuEditor.js:1196
+#: settings/MenuEditor.js:1184
 msgid "Do you really want to delete the selected item?"
 msgstr "Möchten Sie das gewählte Element wirklich löschen?"
 
-#: settings/MenuEditor.js:1197
+#: settings/MenuEditor.js:1185
 msgid "This cannot be undone!"
 msgstr "Das kann nicht rückgängig gemacht werden!"
 
@@ -1797,31 +1798,3 @@ msgstr "Abmelden"
 #: common/menus/System.js:104
 msgid "Power Off..."
 msgstr "Ausschalten..."
-
-#, fuzzy
-#~ msgid "New Menu"
-#~ msgstr "Beispiel-Menü"
-
-#~ msgid "Actions"
-#~ msgstr "Aktionen"
-
-#~ msgid "Submenus"
-#~ msgstr "Untermenüs"
-
-#~ msgid "Toplevel Menu"
-#~ msgstr "Hauptmenü"
-
-#~ msgid "Create as many as you want!"
-#~ msgstr "Sie können so viele anlegen, wie sie wünschen!"
-
-#~ msgid "Add structure to your menu!"
-#~ msgstr "Strukturieren Sie Ihr Menü!"
-
-#~ msgid ""
-#~ "The <b>Custom Submenu</b> can be used to group actions together. As deep "
-#~ "hierarchies can be selected quite efficiently, feel free to create "
-#~ "submenus in submenus!"
-#~ msgstr ""
-#~ "<b>Benutzerdefinierte Untermenüs</b> können verwendet werden, um Aktionen "
-#~ "zu gruppieren. Da tiefe Hierarchien effizient ausgewählt werden können, "
-#~ "sind Untermenüs in Untermenüs durchaus sinnvoll!"

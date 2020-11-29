@@ -1,18 +1,18 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# <LANGUAGE> translation for the Fly-Pie GNOME Shell Extension.
+# Copyright (C) 2020 Simon Schneegans
+# This file is distributed under the same license as the Fly-Pie package.
+# Initial translation: <FIRST AUTHOR> <EMAIL@ADDRESS>, <YEAR>.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-29 14:27+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2020-11-29 19:14+0100\n"
+"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language-Team: <NAMES OF CONTRIBUTORS>\n"
+"Language: <LANGUAGE_CODE>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1301,75 +1301,76 @@ msgstr ""
 msgid "Menu Structure"
 msgstr ""
 
-#: settings/MenuEditor.js:1023 settings/MenuEditor.js:1273
+#: settings/MenuEditor.js:1011 settings/MenuEditor.js:1040
+#: settings/MenuEditor.js:1261 settings/MenuEditor.js:1280
 msgid "Not bound."
 msgstr ""
 
-#: settings/MenuEditor.js:1040
+#: settings/MenuEditor.js:1028
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
 
-#: settings/MenuEditor.js:1102
+#: settings/MenuEditor.js:1090
 msgid "You should try to have no more than twelve items in your menus."
 msgstr ""
 
-#: settings/MenuEditor.js:1103
+#: settings/MenuEditor.js:1091
 msgid ""
 "You will find it more easy to learn item positions if you have an even "
 "number of entries. Four, six and eight are good numbers."
 msgstr ""
 
-#: settings/MenuEditor.js:1104
+#: settings/MenuEditor.js:1092
 msgid ""
 "The source code of Fly-Pie is available on <a href=\"https://github.com/"
 "Schneegans/Fly-Pie\">Github</a>."
 msgstr ""
 
-#: settings/MenuEditor.js:1105
+#: settings/MenuEditor.js:1093
 msgid ""
 "Suggestions can be posted on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
 msgstr ""
 
-#: settings/MenuEditor.js:1106
+#: settings/MenuEditor.js:1094
 msgid ""
 "Bugs can be reported on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
 msgstr ""
 
-#: settings/MenuEditor.js:1107
+#: settings/MenuEditor.js:1095
 msgid "Deep hierarchies are pretty efficient. Put menus into menus in menus!"
 msgstr ""
 
-#: settings/MenuEditor.js:1108
+#: settings/MenuEditor.js:1096
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
 msgstr ""
 
-#: settings/MenuEditor.js:1109
+#: settings/MenuEditor.js:1097
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr ""
 
-#: settings/MenuEditor.js:1110
+#: settings/MenuEditor.js:1098
 msgid ""
 "You can drop directories, files, links and desktop files to the menu "
 "hierarchy on the left."
 msgstr ""
 
-#: settings/MenuEditor.js:1111
+#: settings/MenuEditor.js:1099
 msgid ""
 "You can copy menu items by holding the Control key while dragging them to "
 "another location."
 msgstr ""
 
-#: settings/MenuEditor.js:1196
+#: settings/MenuEditor.js:1184
 msgid "Do you really want to delete the selected item?"
 msgstr ""
 
-#: settings/MenuEditor.js:1197
+#: settings/MenuEditor.js:1185
 msgid "This cannot be undone!"
 msgstr ""
 
