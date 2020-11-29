@@ -1159,10 +1159,8 @@ var MenuEditor = class MenuEditor {
     // and icon according to the item registry.
     if (newType == 'CustomMenu') {
       this._set(iter, 'ICON', this._getRandomEmoji());
-      this._set(iter, 'NAME', _('New Menu'));
     } else {
       this._set(iter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
-      this._set(iter, 'NAME', ItemRegistry.getItemTypes()[newType].name);
     }
 
     // Assign a new ID for top-level items.
@@ -1174,6 +1172,7 @@ var MenuEditor = class MenuEditor {
 
     // Initialize other field to their default values.
     this._set(iter, 'TYPE', newType);
+    this._set(iter, 'NAME', ItemRegistry.getItemTypes()[newType].name);
     this._set(iter, 'DATA', ItemRegistry.getItemTypes()[newType].defaultData);
     this._set(iter, 'ANGLE', -1);
     this._set(iter, 'SHORTCUT', '');
