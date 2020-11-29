@@ -22,8 +22,8 @@ const MouseHighlight = Me.imports.daemon.MouseHighlight.MouseHighlight;
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
 // shortcut for each configured menu. For details on the D-Bus interface refer to       //
-// common/DBusInterface.js. As soon as a valid request is received or a shortcut is     //
-// pressed, an menu is shown or updated accordingly.                                    //
+// the README.md. As soon as a valid request is received or a shortcut is pressed, an   //
+// menu is shown or updated accordingly.                                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var Daemon = class Daemon {
@@ -126,30 +126,29 @@ var Daemon = class Daemon {
   // -------------------------------------------------------------- public D-Bus-Interface
 
   // This opens a menu configured with Fly-Pie's menu editor and can be directly called
-  // over the D-Bus. See common/DBusInterface.js for a description of Fly-Pie's
-  // DBusInterface. If there are more than one menu with the same name, the first will be
-  // opened.
+  // over the D-Bus. See the README.md for a description of Fly-Pie's DBusInterface. If
+  // there are more than one menu with the same name, the first will be opened.
   ShowMenu(name) {
     return this._openMenu(name, false);
   }
 
   // This opens a menu configured with Fly-Pie's menu editor in preview mode and can be
-  // directly called over the D-Bus. See common/DBusInterface.js for a description of
-  // Fly-Pie's DBusInterface. If there are more than one menu with the same name, the
-  // first will be opened.
+  // directly called over the D-Bus. See the README.md for a description of Fly-Pie's
+  // DBusInterface. If there are more than one menu with the same name, the first will be
+  // opened.
   PreviewMenu(name) {
     return this._openMenu(name, true);
   }
 
   // This opens a custom menu and can be directly called over the D-Bus.
-  // See common/DBusInterface.js for a description of Fly-Pie's DBusInterface.
+  // See the README.md for a description of Fly-Pie's DBusInterface.
   ShowCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
     return this._openCustomMenu(json, false, this._lastMenuID);
   }
 
   // This opens a custom menu in preview mode and can be directly called over the D-Bus.
-  // See common/DBusInterface.js for a description of Fly-Pie's DBusInterface.
+  // See the README.md for a description of Fly-Pie's DBusInterface.
   PreviewCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
     return this._openCustomMenu(json, true, this._lastMenuID);

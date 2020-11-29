@@ -9,56 +9,9 @@
 'use strict';
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// There are two ways to use Fly-Pie's D-Bus interface.                                 //
-//                                                                                      //
-// 1: Use ShowMenu() or PreviewMenu() to open one of the menus configured in the        //
-//    settings dialog of Fly-Pie. As an argument the name of the desired menu must be   //
-//    provided. The returned integer may be negative, indicating that an error          //
-//    occurred. See DBusInterface.errorCodes for possible values.                       //
-//                                                                                      //
-// 2: Use ShowCustomMenu() or PreviewCustomMenu() to open a completely self-defined     //
-//    menu. As argument a menu description has to be provided. This is a JSON string    //
-//    like this:                                                                        //
-//                                                                                      //
-//     {                                                                                //
-//      'name':'Menu Name',                                                             //
-//      'icon':'icon-name-or-path',                                                     //
-//      'children':[{                                                                   //
-//        'name':'Item Title 1',                                                        //
-//        'icon':'icon-name-or-path',                                                   //
-//        'children':[{                                                                 //
-//            'name':  'Item Title 11',                                                 //
-//            'icon':  'icon-name-or-path',                                             //
-//            'angle': 90                                                               //
-//          },{                                                                         //
-//            'name':  'Item Title 12',                                                 //
-//            'icon':  'icon-name-or-path',                                             //
-//            'angle': 270                                                              //
-//        }]},{                                                                         //
-//          'name': 'Item Title 2',                                                     //
-//          'icon': 'icon-name-or-path'                                                 //
-//        },{                                                                           //
-//          'name': 'Item Title 3',                                                     //
-//          'icon': 'icon-name-or-path'                                                 //
-//        }]                                                                            //
-//      }                                                                               //
-//                                                                                      //
-//    The returned integer is either negative (the server failed to parse the provided  //
-//    description) or a positive ID which will be passed to the signals of the          //
-//    interface. There are two signals; OnCancel will be fired when the user aborts the //
-//    selection in a menu, OnSelect is activated when the user makes a selection. Both  //
-//    signals send the ID which has been reported by the corresponding ShowMenu call,   //
-//    in addition OnSelect sends the itemID of the selected item. Usually, this will be //
-//    a path like this: '/0/1'. There are some further examples on how to use this      //
-//    interface in the README.md.                                                       //
-//                                                                                      //
-// ShowMenu() and ShowCustomMenu() both show the menu in fullscreen, PreviewMenu() and  //
-// PreviewCustomMenu() will only cover half the screen in order to allow for            //
-// interaction with settings dialog.                                                    //
-// If any of the methods is called while a menu is open, the an OnCancel() will be      //
-// emitted for the currently active menu and the new menu will be shown. In fact, the   //
-// currently visible menu will be reused as much as possible, so you can actually       //
-// update an open menu this way.                                                        //
+// Fly-Pie has a D-Bus interface which allows not only to open configured menus via the //
+// command line, but also to open completely custom-made menus defined with a JSON      //
+// string. For a complete description see README.md.                                    //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var DBusInterface = {
