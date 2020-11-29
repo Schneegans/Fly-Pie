@@ -1037,7 +1037,7 @@ var MenuEditor = class MenuEditor {
       }
       row.grab_remove();
       row.parent.unselect_all();
-      label.set_disabled_text(_('Not bound'));
+      label.set_disabled_text(_('Not bound.'));
     };
 
     // When the row is activated, the input is grabbed.
