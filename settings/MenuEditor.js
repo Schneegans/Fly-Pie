@@ -592,14 +592,9 @@ var MenuEditor = class MenuEditor {
     // row-insertions in the next 10 milliseconds.
     this._selectNewRowTimeout = -1;
 
-    // The second timeout is used to wait after a row-insertion for additional
-    // row-insertions. If non occurs within 10 milliseconds, we save the menu
-    // configuration.
-    this._saveMenuTimeout = -1;
-
     this._store.connect('row-inserted', (widget, path, iter) => {
       // We do this only once the saved configuration is fully loaded.
-      if (this._loadedMenuConfiguration) {
+      if (this._menuSavingAllowed) {
 
         // Only select a row if another hasn't bee selected in the last 10 milliseconds.
         if (this._selectNewRowTimeout == -1) {
@@ -640,20 +635,6 @@ var MenuEditor = class MenuEditor {
             return false;
           });
         }
-
-        // Cancel any pending saves.
-        if (this._saveMenuTimeout >= 0) {
-          GLib.source_remove(this._saveMenuTimeout);
-        }
-
-        // Save the menu configuration.
-        this._saveMenuTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
-          this._saveMenuConfiguration();
-
-          // Reset the timeout.
-          this._saveMenuTimeout = -1;
-          return false;
-        });
       }
     });
 
@@ -909,6 +890,11 @@ var MenuEditor = class MenuEditor {
           return;
         }
 
+        // Setting the content of the widgets below will actually trigger menu treestore
+        // modifications which in turn would lead to saving the menu configuration. As
+        // this is not necessary, we disable saving temporarily.
+        this._menuSavingAllowed = false;
+
         const selectedDataType = ItemRegistry.getItemTypes()[selectedType].dataType;
 
         // The item's name, icon and description have to be updated in any case if
@@ -958,6 +944,8 @@ var MenuEditor = class MenuEditor {
           this._builder.get_object('item-text').text = this._getSelected('DATA');
           revealers['item-settings-text-revealer']   = true;
         }
+
+        this._menuSavingAllowed = true;
       }
 
       // Finally update the state of all revealers.
@@ -1302,7 +1290,7 @@ var MenuEditor = class MenuEditor {
 
     // If loading has finished, any modifications to the tree store are directly committed
     // to the "menu-configuration" settings key.
-    if (isDataColumn && this._loadedMenuConfiguration) {
+    if (isDataColumn && this._menuSavingAllowed) {
       this._saveMenuConfiguration();
     }
   }
@@ -1411,6 +1399,7 @@ var MenuEditor = class MenuEditor {
           name: this._get(iter, 'NAME'),
           icon: this._get(iter, 'ICON'),
           type: this._get(iter, 'TYPE'),
+          data: this._get(iter, 'DATA'),
           shortcut: this._get(iter, 'SHORTCUT'),
           id: this._get(iter, 'ID'),
           centered: this._get(iter, 'CENTERED'),
@@ -1435,7 +1424,7 @@ var MenuEditor = class MenuEditor {
   _loadMenuConfiguration() {
 
     // This prevents callbacks on the row-inserted signal during initialization.
-    this._loadedMenuConfiguration = false;
+    this._menuSavingAllowed = false;
 
     // Remove any previously loaded configuration.
     this._store.clear();
@@ -1472,6 +1461,7 @@ var MenuEditor = class MenuEditor {
       this._set(iter, 'ICON', config.icon);
       this._set(iter, 'NAME', config.name);
       this._set(iter, 'TYPE', config.type);
+      this._set(iter, 'DATA', config.data);
       this._set(iter, 'SHORTCUT', config.shortcut);
       this._set(iter, 'CENTERED', config.centered);
       this._set(iter, 'ID', config.id != undefined ? config.id : this._getNewID());
@@ -1481,6 +1471,6 @@ var MenuEditor = class MenuEditor {
 
     // Flag that loading is finished - all next calls to this._set() will update the
     // "menu-configuration".
-    this._loadedMenuConfiguration = true;
+    this._menuSavingAllowed = true;
   }
 }
