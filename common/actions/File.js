@@ -26,9 +26,9 @@ var action = {
   name: _('Open File'),
   icon: 'text-x-generic',
   // Translators: Please keep this short.
-  subtitle: _('Opens a file with the default applications.'),
+  subtitle: _('Opens a file with the default application.'),
   description: _(
-      'The <b>Open File</b> action will open the above specified file with your system\'s default application.'),
+      'The <b>Open File</b> action will open the file specified above with your system\'s default application.'),
   itemClass: Enums.ItemClass.ACTION,
   dataType: Enums.ItemDataType.FILE,
   defaultData: '',

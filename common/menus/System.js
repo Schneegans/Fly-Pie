@@ -39,7 +39,7 @@ var menu = {
   name: _('System'),
   icon: 'system-log-out',
   // Translators: Please keep this short.
-  subtitle: _('Allows screen lock shutdown and other things.'),
+  subtitle: _('Allows screen lock, shutdown and other things.'),
   description: _(
       'The <b>System</b> menu shows an items for screen-lock, shutdown, settings, etc.'),
   itemClass: Enums.ItemClass.MENU,

@@ -28,7 +28,7 @@ var menu = {
   // Translators: Please keep this short.
   subtitle: _('Shows connected devices.'),
   description: _(
-      'The <b>Devices</b> menu shows an item for each mounted volume, like USB-Sticks.'),
+      'The <b>Devices</b> menu shows an item for each mounted volume, like USB sticks.'),
   itemClass: Enums.ItemClass.MENU,
   dataType: Enums.ItemDataType.NONE,
   defaultData: '',

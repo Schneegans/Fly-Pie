@@ -36,7 +36,7 @@ var menu = {
   name: _('Favorites'),
   icon: 'starred',
   // Translators: Please keep this short.
-  subtitle: _('Shows your pinned applications.'),
+  subtitle: _('Shows pinned applications.'),
   description: _(
       'The <b>Favorites</b> menu shows the applications you have pinned to Gnome Shell\'s Dash.'),
   itemClass: Enums.ItemClass.MENU,

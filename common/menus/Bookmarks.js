@@ -26,7 +26,7 @@ var menu = {
   name: _('Bookmarks'),
   icon: 'folder',
   // Translators: Please keep this short.
-  subtitle: _('Shows your commonly used directories.'),
+  subtitle: _('Shows your frequently used directories.'),
   description: _(
       'The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each bookmarked directory.'),
   itemClass: Enums.ItemClass.MENU,

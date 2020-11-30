@@ -35,9 +35,9 @@ var action = {
   name: _('Activate Shortcut'),
   icon: 'preferences-desktop-keyboard-shortcuts',
   // Translators: Please keep this short.
-  subtitle: _('Simulates a key stroke.'),
+  subtitle: _('Simulates a key combination.'),
   description: _(
-      'The <b>Activate Shortcut</b> action simulates a key stroke when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations.'),
+      'The <b>Activate Shortcut</b> action simulates a key combination when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations.'),
   itemClass: Enums.ItemClass.ACTION,
   dataType: Enums.ItemDataType.SHORTCUT,
   defaultData: '',
