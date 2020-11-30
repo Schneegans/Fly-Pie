@@ -11,6 +11,9 @@
 # This script creates a compiled *.mo translation file for each *.po file in the 'po'
 # directory. It is necessary to run this script whenever a translation has been changed.
 
+# Exit the script when one command fails.
+set -e
+
 # Check if all necessary commands are available.
 if ! command -v msgfmt &> /dev/null
 then
