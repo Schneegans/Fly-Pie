@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-29 19:14+0100\n"
-"PO-Revision-Date: 2020-11-29 19:15+0100\n"
+"POT-Creation-Date: 2020-11-30 09:20+0100\n"
+"PO-Revision-Date: 2020-11-30 09:24+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: Simon Schneegans <code@simonschneegans.de>, Philipp Kiemle <philipp.kiemle@gmail.com>\n"
+"Language-Team: Simon Schneegans <code@simonschneegans.de>, Philipp Kiemle "
+"<philipp.kiemle@gmail.com>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -786,7 +787,7 @@ msgstr "ID"
 
 #: settings/settings.ui:7945
 msgid "This will be passed to the D-Bus signal."
-msgstr "Diese ID wird dem D-Bus Signal übergeben."
+msgstr "Das wird dem D-Bus Signal übergeben."
 
 #: settings/settings.ui:8008
 msgid "Max Item Count"
@@ -1399,12 +1400,13 @@ msgstr "Importieren der Menükonfiguration ist fehlgeschlagen!"
 msgid "Menu Structure"
 msgstr "Menüstruktur"
 
-#: settings/MenuEditor.js:1011 settings/MenuEditor.js:1040
-#: settings/MenuEditor.js:1261 settings/MenuEditor.js:1280
+#. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
+#: settings/MenuEditor.js:1013 settings/MenuEditor.js:1042
+#: settings/MenuEditor.js:1263 settings/MenuEditor.js:1282
 msgid "Not bound."
 msgstr "Deaktiviert."
 
-#: settings/MenuEditor.js:1028
+#: settings/MenuEditor.js:1030
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
@@ -1412,12 +1414,12 @@ msgstr ""
 "Drücken Sie eine Tastenkombination!\n"
 "ESC um abzubrechen, Rücktaste zum Deaktivieren"
 
-#: settings/MenuEditor.js:1090
+#: settings/MenuEditor.js:1092
 msgid "You should try to have no more than twelve items in your menus."
 msgstr ""
 "Sie sollten versuchen, nicht mehr als zwölf Einträge in einem Menü zu haben."
 
-#: settings/MenuEditor.js:1091
+#: settings/MenuEditor.js:1093
 msgid ""
 "You will find it more easy to learn item positions if you have an even "
 "number of entries. Four, six and eight are good numbers."
@@ -1425,7 +1427,7 @@ msgstr ""
 "Sie werden merken, dass es einfacher ist, sich Positionen in Menüs mit einer "
 "geraden Anzahl an Elementen zu merken. Vier, sechs und acht sind gute Zahlen."
 
-#: settings/MenuEditor.js:1092
+#: settings/MenuEditor.js:1094
 msgid ""
 "The source code of Fly-Pie is available on <a href=\"https://github.com/"
 "Schneegans/Fly-Pie\">Github</a>."
@@ -1433,7 +1435,7 @@ msgstr ""
 "Der Quellcode von Fly-Pie ist auf <a href=\"https://github.com/Schneegans/"
 "Fly-Pie\">Github</a> verfübar."
 
-#: settings/MenuEditor.js:1093
+#: settings/MenuEditor.js:1095
 msgid ""
 "Suggestions can be posted on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
@@ -1441,7 +1443,7 @@ msgstr ""
 "Verbesserungsvorschläge können auf <a href=\"https://github.com/Schneegans/"
 "Fly-Pie/issues\">Github</a> diskutiert werden."
 
-#: settings/MenuEditor.js:1094
+#: settings/MenuEditor.js:1096
 msgid ""
 "Bugs can be reported on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
@@ -1449,13 +1451,13 @@ msgstr ""
 "Fehler können auf <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a> gemeldet werden."
 
-#: settings/MenuEditor.js:1095
+#: settings/MenuEditor.js:1097
 msgid "Deep hierarchies are pretty efficient. Put menus into menus in menus!"
 msgstr ""
 "Tiefe Hierarchien sind ziemlich effizient! Packen Sie Menüs in Menüs in "
 "Menüs!"
 
-#: settings/MenuEditor.js:1096
+#: settings/MenuEditor.js:1098
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
@@ -1463,11 +1465,11 @@ msgstr ""
 "Wenn Sie alle Menüs löschen, sich aus- und wieder einloggen, wird die "
 "Beispielkonfiguration wiederhergestellt."
 
-#: settings/MenuEditor.js:1097
+#: settings/MenuEditor.js:1099
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr "Menüeinträge können in der Liste mit der Maus verschoben werden."
 
-#: settings/MenuEditor.js:1098
+#: settings/MenuEditor.js:1100
 msgid ""
 "You can drop directories, files, links and desktop files to the menu "
 "hierarchy on the left."
@@ -1475,7 +1477,7 @@ msgstr ""
 "Sie können Verzeichnisse, Dateien, Links oder Anwendungsstarter in die Liste "
 "auf der linken Seite ziehen."
 
-#: settings/MenuEditor.js:1099
+#: settings/MenuEditor.js:1101
 msgid ""
 "You can copy menu items by holding the Control key while dragging them to "
 "another location."
@@ -1483,11 +1485,11 @@ msgstr ""
 "Sie können Menüeinträge kopieren indem Sie die Strg-Taste während des "
 "Verschiebens gedrückt halten."
 
-#: settings/MenuEditor.js:1184
+#: settings/MenuEditor.js:1186
 msgid "Do you really want to delete the selected item?"
 msgstr "Möchten Sie das gewählte Element wirklich löschen?"
 
-#: settings/MenuEditor.js:1185
+#: settings/MenuEditor.js:1187
 msgid "This cannot be undone!"
 msgstr "Das kann nicht rückgängig gemacht werden!"
 
@@ -1554,12 +1556,12 @@ msgstr "Datei öffnen"
 
 #. Translators: Please keep this short.
 #: common/actions/File.js:29
-msgid "Opens a file with the default applications."
+msgid "Opens a file with the default application."
 msgstr "Öffnet eine Datei mit der Standardanwendung."
 
 #: common/actions/File.js:31
 msgid ""
-"The <b>Open File</b> action will open the above specified file with your "
+"The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
 "Die <b>Datei-öffnen</b> -Aktion öffnet die gegebene Datei mit der "
@@ -1571,7 +1573,7 @@ msgstr "Text einfügen"
 
 #. Translators: Please keep this short.
 #: common/actions/InsertText.js:40
-msgid "Types some text."
+msgid "Types some text automatically."
 msgstr "Tippt automatisch einen Text."
 
 #: common/actions/InsertText.js:42
@@ -1590,14 +1592,14 @@ msgstr "Tastaturkürzel aktivieren"
 
 #. Translators: Please keep this short.
 #: common/actions/Shortcut.js:38
-msgid "Simulates a key stroke."
+msgid "Simulates a key combination."
 msgstr "Simuliert eine Tastenkombination."
 
 #: common/actions/Shortcut.js:40
 msgid ""
-"The <b>Activate Shortcut</b> action simulates a key stroke when activated. "
-"For example, this can be used to switch virtual desktops, control multimedia "
-"playback or to undo / redo operations."
+"The <b>Activate Shortcut</b> action simulates a key combination when "
+"activated. For example, this can be used to switch virtual desktops, control "
+"multimedia playback or to undo / redo operations."
 msgstr ""
 "Die <b>Tastaturkürzel-aktivieren</b>-Aktion simuliert eine "
 "Tastenkombination. Das kann zum Beispiel verwendet werden, um virtuelle "
@@ -1610,7 +1612,7 @@ msgstr "URI öffnen"
 
 #. Translators: Please keep this short.
 #: common/actions/Uri.js:28
-msgid "Opens an URI with the default applications."
+msgid "Opens an URI with the default application."
 msgstr "Öffnet eine URI mit der Standardanwendung."
 
 #: common/actions/Uri.js:30
@@ -1626,7 +1628,7 @@ msgstr ""
 
 #. Translators: Please keep this short.
 #: common/menus/Bookmarks.js:29
-msgid "Shows your commonly used directories."
+msgid "Shows your frequently used directories."
 msgstr "Zeigt häufig verwendete Verzeichnisse."
 
 #: common/menus/Bookmarks.js:31
@@ -1651,16 +1653,17 @@ msgid ""
 "A <b>Custom Menu</b> can contain any number of actions and submenus. "
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended.\n"
-"Top-level menus can be opened using a shortcut. It is also possible to open "
-"a menu with a terminal command. You can read more on <a href=\"https://"
-"github.com/Schneegans/Fly-Pie\">Github</a>."
+"When used as top-level menu, it can be opened with a key combination. It is "
+"also possible to open a menu with a terminal command. You can read more on "
+"<a href=\"https://github.com/Schneegans/Fly-Pie\">Github</a>."
 msgstr ""
 "Ein <b>Benutzerdefiniertes Menü</b> kann beliebig viele Aktionen und "
-"Untermenüs enthalten. Für eine präzise Auswahl ist allerdings eine "
-"Anzahl von maximal zwölf Einträgen pro Ebene empfehlenswert.\n"
-"Das Menü kann mit obigem Tastaturkürzel geöffnet werden. Es ist auch "
-"möglich, das Menü mit einem Kommandozeilenbefehl zu öffnen. Erfahren Sie "
-"mehr auf <a href=\"https://github.com/Schneegans/Fly-Pie\">Github</a>."
+"Untermenüs enthalten. Für eine präzise Auswahl ist allerdings eine Anzahl "
+"von maximal zwölf Einträgen pro Ebene empfehlenswert.\n"
+"Wenn es als Hauptmenü verwendet wird, kann es mit einer Tastenkombination "
+"geöffnet werden. Es ist auch möglich, das Menü mit einem "
+"Kommandozeilenbefehl zu öffnen. Erfahren Sie mehr auf <a href=\"https://"
+"github.com/Schneegans/Fly-Pie\">Github</a>."
 
 #: common/menus/Devices.js:26
 msgid "Devices"
@@ -1673,13 +1676,13 @@ msgstr "Zeigt angeschlossene Geräte."
 
 #: common/menus/Devices.js:31
 msgid ""
-"The <b>Devices</b> menu shows an item for each mounted volume, like USB-"
-"Sticks."
+"The <b>Devices</b> menu shows an item for each mounted volume, like USB "
+"sticks."
 msgstr "Das <b>Geräte</b>-Menü zeigt angeschlossene Geräte, wie USB-Sticks."
 
 #. Translators: Please keep this short.
 #: common/menus/Favorites.js:39
-msgid "Shows your pinned applications."
+msgid "Shows pinned applications."
 msgstr "Zeigt angeheftete Anwendungen."
 
 #: common/menus/Favorites.js:41
@@ -1692,7 +1695,7 @@ msgstr ""
 
 #: common/menus/FrequentlyUsed.js:36
 msgid "Frequently Used"
-msgstr "Häufig verwendete Anwendungen"
+msgstr "Häufig verwendet"
 
 #. Translators: Please keep this short.
 #: common/menus/FrequentlyUsed.js:39
@@ -1702,12 +1705,12 @@ msgstr "Zeigt oft verwendete Programme."
 #: common/menus/FrequentlyUsed.js:41
 msgid ""
 "The <b>Frequently Used</b> menu shows a list of frequently used "
-"applications. You should limit the maximum number of shown applications to a "
-"reasonable number."
+"applications. For efficient selections, you should limit the maximum number "
+"of shown applications to about twelve."
 msgstr ""
-"Das <b>Häufig-verwendete-Anwendungen</b>-Menü zeigt eine Liste oft "
-"verwendeter Programme.  Sie sollten die maximal angezeigte Anzahl auf etwa "
-"zwölf beschränken."
+"Das <b>Häufig-verwendet</b>-Menü zeigt eine Liste oft verwendeter Programme. "
+"Für eine effiziente Nutzung sollten Sie die maximal angezeigte Anzahl auf "
+"etwa zwölf beschränken."
 
 #: common/menus/MainMenu.js:26
 msgid "Main Menu"
@@ -1739,12 +1742,13 @@ msgstr "Zeigt kürzlich geöffnete Dateien."
 
 #: common/menus/RecentFiles.js:31
 msgid ""
-"The <b>Recent Files</b> menu shows a list of recently used files. You should "
-"limit the maximum number of shown files to a reasonable number."
+"The <b>Recent Files</b> menu shows a list of recently used files. For "
+"efficient selections, you should limit the maximum number of shown files to "
+"about twelve."
 msgstr ""
-"Das <b>Zuletzt-verwendete-Dateien</b>-Menü zeigt eine Liste aller kürzlich "
-"verwendeten Dateien. Sie sollten die maximal angezeigte Anzahl auf etwa "
-"zwölf beschränken."
+"Das <b>Zuletzt-verwendete-Dateien</b>-Menü zeigt eine Liste kürzlich "
+"verwendeten Dateien. Für eine effiziente Nutzung sollten die maximal "
+"angezeigte Anzahl auf etwa zwölf beschränken."
 
 #: common/menus/RunningApps.js:36
 msgid "Running Apps"
@@ -1761,13 +1765,13 @@ msgid ""
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
-"Das <b>Laufende-Anwendungen</b>-Menü zeigt alle aktuell laufenden "
-"Programme. Das ist ähnlich zur Alt-Tab-Fensterauswahl. Da die Einträge aber "
-"häufig ihre Position wechseln, ist dieses Untermenü nur bedingt effzient."
+"Das <b>Laufende-Anwendungen</b>-Menü zeigt alle aktuell laufenden Programme. "
+"Das ist ähnlich zur Alt-Tab-Fensterauswahl. Da die Einträge aber häufig ihre "
+"Position wechseln, ist dieses Untermenü nur bedingt effzient."
 
 #. Translators: Please keep this short.
 #: common/menus/System.js:42
-msgid "Allows screen lock shutdown and other things."
+msgid "Allows screen lock, shutdown and other things."
 msgstr "Rechner ausschalten, neu starten und ähnliches."
 
 #: common/menus/System.js:44

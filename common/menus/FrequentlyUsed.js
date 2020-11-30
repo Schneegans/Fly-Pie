@@ -38,7 +38,7 @@ var menu = {
   // Translators: Please keep this short.
   subtitle: _('Shows your frequently used applications.'),
   description: _(
-      'The <b>Frequently Used</b> menu shows a list of frequently used applications. You should limit the maximum number of shown applications to a reasonable number.'),
+      'The <b>Frequently Used</b> menu shows a list of frequently used applications. For efficient selections, you should limit the maximum number of shown applications to about twelve.'),
   itemClass: Enums.ItemClass.MENU,
   dataType: Enums.ItemDataType.COUNT,
   defaultData: '7',

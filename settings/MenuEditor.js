@@ -1007,7 +1007,9 @@ var MenuEditor = class MenuEditor {
   // simulate shortcut presses which are actually bound to something else!
   _initShortcutSelect(rowName, doFullGrab, dataColumn) {
 
-    const row   = this._builder.get_object(rowName);
+    const row = this._builder.get_object(rowName);
+
+    // Translators: This is shown on the shortcut-buttons when no shortcut is selected.
     const label = new Gtk.ShortcutLabel({disabled_text: _('Not bound.')});
     row.get_child().pack_end(label, false, false, 0);
     label.show();

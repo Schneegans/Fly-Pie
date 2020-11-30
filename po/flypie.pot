@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-29 19:14+0100\n"
+"POT-Creation-Date: 2020-11-30 9:14+0100\n"
 "PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: <NAMES OF CONTRIBUTORS>\n"
@@ -1301,76 +1301,77 @@ msgstr ""
 msgid "Menu Structure"
 msgstr ""
 
-#: settings/MenuEditor.js:1011 settings/MenuEditor.js:1040
-#: settings/MenuEditor.js:1261 settings/MenuEditor.js:1280
+#. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
+#: settings/MenuEditor.js:1013 settings/MenuEditor.js:1042
+#: settings/MenuEditor.js:1263 settings/MenuEditor.js:1282
 msgid "Not bound."
 msgstr ""
 
-#: settings/MenuEditor.js:1028
+#: settings/MenuEditor.js:1030
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
 
-#: settings/MenuEditor.js:1090
+#: settings/MenuEditor.js:1092
 msgid "You should try to have no more than twelve items in your menus."
 msgstr ""
 
-#: settings/MenuEditor.js:1091
+#: settings/MenuEditor.js:1093
 msgid ""
 "You will find it more easy to learn item positions if you have an even "
 "number of entries. Four, six and eight are good numbers."
 msgstr ""
 
-#: settings/MenuEditor.js:1092
+#: settings/MenuEditor.js:1094
 msgid ""
 "The source code of Fly-Pie is available on <a href=\"https://github.com/"
 "Schneegans/Fly-Pie\">Github</a>."
 msgstr ""
 
-#: settings/MenuEditor.js:1093
+#: settings/MenuEditor.js:1095
 msgid ""
 "Suggestions can be posted on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
 msgstr ""
 
-#: settings/MenuEditor.js:1094
+#: settings/MenuEditor.js:1096
 msgid ""
 "Bugs can be reported on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
 msgstr ""
 
-#: settings/MenuEditor.js:1095
+#: settings/MenuEditor.js:1097
 msgid "Deep hierarchies are pretty efficient. Put menus into menus in menus!"
 msgstr ""
 
-#: settings/MenuEditor.js:1096
+#: settings/MenuEditor.js:1098
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
 msgstr ""
 
-#: settings/MenuEditor.js:1097
+#: settings/MenuEditor.js:1099
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr ""
 
-#: settings/MenuEditor.js:1098
+#: settings/MenuEditor.js:1100
 msgid ""
 "You can drop directories, files, links and desktop files to the menu "
 "hierarchy on the left."
 msgstr ""
 
-#: settings/MenuEditor.js:1099
+#: settings/MenuEditor.js:1101
 msgid ""
 "You can copy menu items by holding the Control key while dragging them to "
 "another location."
 msgstr ""
 
-#: settings/MenuEditor.js:1184
+#: settings/MenuEditor.js:1186
 msgid "Do you really want to delete the selected item?"
 msgstr ""
 
-#: settings/MenuEditor.js:1185
+#: settings/MenuEditor.js:1187
 msgid "This cannot be undone!"
 msgstr ""
 
@@ -1430,12 +1431,12 @@ msgstr ""
 
 #. Translators: Please keep this short.
 #: common/actions/File.js:29
-msgid "Opens a file with the default applications."
+msgid "Opens a file with the default application."
 msgstr ""
 
 #: common/actions/File.js:31
 msgid ""
-"The <b>Open File</b> action will open the above specified file with your "
+"The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
 
@@ -1445,7 +1446,7 @@ msgstr ""
 
 #. Translators: Please keep this short.
 #: common/actions/InsertText.js:40
-msgid "Types some text."
+msgid "Types some text automatically."
 msgstr ""
 
 #: common/actions/InsertText.js:42
@@ -1461,14 +1462,14 @@ msgstr ""
 
 #. Translators: Please keep this short.
 #: common/actions/Shortcut.js:38
-msgid "Simulates a key stroke."
+msgid "Simulates a key combination."
 msgstr ""
 
 #: common/actions/Shortcut.js:40
 msgid ""
-"The <b>Activate Shortcut</b> action simulates a key stroke when activated. "
-"For example, this can be used to switch virtual desktops, control multimedia "
-"playback or to undo / redo operations."
+"The <b>Activate Shortcut</b> action simulates a key combination when "
+"activated. For example, this can be used to switch virtual desktops, control "
+"multimedia playback or to undo / redo operations."
 msgstr ""
 
 #: common/actions/Uri.js:25
@@ -1477,7 +1478,7 @@ msgstr ""
 
 #. Translators: Please keep this short.
 #: common/actions/Uri.js:28
-msgid "Opens an URI with the default applications."
+msgid "Opens an URI with the default application."
 msgstr ""
 
 #: common/actions/Uri.js:30
@@ -1490,7 +1491,7 @@ msgstr ""
 
 #. Translators: Please keep this short.
 #: common/menus/Bookmarks.js:29
-msgid "Shows your commonly used directories."
+msgid "Shows your frequently used directories."
 msgstr ""
 
 #: common/menus/Bookmarks.js:31
@@ -1513,9 +1514,9 @@ msgid ""
 "A <b>Custom Menu</b> can contain any number of actions and submenus. "
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended.\n"
-"Top-level menus can be opened using a shortcut. It is also possible to open "
-"a menu with a terminal command. You can read more on <a href=\"https://"
-"github.com/Schneegans/Fly-Pie\">Github</a>."
+"When used as top-level menu, it can be opened with a key combination. It is "
+"also possible to open a menu with a terminal command. You can read more on "
+"<a href=\"https://github.com/Schneegans/Fly-Pie\">Github</a>."
 msgstr ""
 
 #: common/menus/Devices.js:26
@@ -1529,13 +1530,13 @@ msgstr ""
 
 #: common/menus/Devices.js:31
 msgid ""
-"The <b>Devices</b> menu shows an item for each mounted volume, like USB-"
-"Sticks."
+"The <b>Devices</b> menu shows an item for each mounted volume, like USB "
+"sticks."
 msgstr ""
 
 #. Translators: Please keep this short.
 #: common/menus/Favorites.js:39
-msgid "Shows your pinned applications."
+msgid "Shows pinned applications."
 msgstr ""
 
 #: common/menus/Favorites.js:41
@@ -1556,8 +1557,8 @@ msgstr ""
 #: common/menus/FrequentlyUsed.js:41
 msgid ""
 "The <b>Frequently Used</b> menu shows a list of frequently used "
-"applications. You should limit the maximum number of shown applications to a "
-"reasonable number."
+"applications. For efficient selections, you should limit the maximum number "
+"of shown applications to about twelve."
 msgstr ""
 
 #: common/menus/MainMenu.js:26
@@ -1587,8 +1588,9 @@ msgstr ""
 
 #: common/menus/RecentFiles.js:31
 msgid ""
-"The <b>Recent Files</b> menu shows a list of recently used files. You should "
-"limit the maximum number of shown files to a reasonable number."
+"The <b>Recent Files</b> menu shows a list of recently used files. For "
+"efficient selections, you should limit the maximum number of shown files to "
+"about twelve."
 msgstr ""
 
 #: common/menus/RunningApps.js:36
@@ -1609,7 +1611,7 @@ msgstr ""
 
 #. Translators: Please keep this short.
 #: common/menus/System.js:42
-msgid "Allows screen lock shutdown and other things."
+msgid "Allows screen lock, shutdown and other things."
 msgstr ""
 
 #: common/menus/System.js:44

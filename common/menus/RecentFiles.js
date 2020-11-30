@@ -28,7 +28,7 @@ var menu = {
   // Translators: Please keep this short.
   subtitle: _('Shows your recently used files.'),
   description: _(
-      'The <b>Recent Files</b> menu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number.'),
+      'The <b>Recent Files</b> menu shows a list of recently used files. For efficient selections, you should limit the maximum number of shown files to about twelve.'),
   itemClass: Enums.ItemClass.MENU,
   dataType: Enums.ItemDataType.COUNT,
   defaultData: '7',
