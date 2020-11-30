@@ -251,7 +251,7 @@ The table below lists all possible item types. Some of the types require that th
 | **`"DBusSignal"`** | `""` | This action does nothing on its own. But you can listen on the D-Bus for its activation. This can be very useful in custom menus opened via the command line. The string given in `data` will be passed as `itemID` to the `OnSelect` signal. Below this table you will find an example! |
 | **`"File"`** | `""` | This action will open a file given with an absolute path in `data` with your system\'s default application. |
 | **`"InsertText"`** | `""` | This action copies the text given in `data` to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things. |
-| **`"Shortcut"`** | `""` | This action simulates a key stroke when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations. `data` should be something like `"<Primary>space"`. |
+| **`"Shortcut"`** | `""` | This action simulates a key combination when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations. `data` should be something like `"<Primary>space"`. |
 | **`"Uri"`** | `""` | When this action is activated, the URI given in `data` is opened with the default application. For http URLs, this will be your web browser. However, it is also possible to open other URIs such as `"mailto:foo@bar.org"`. |
 | **Menus** | | |
 | **`"CustomMenu"`** | _not used_ | Use the `"children"` property to add as many actions or submenus as you want! |
