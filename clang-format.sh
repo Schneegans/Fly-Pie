@@ -8,6 +8,9 @@
 #                                                                                        #
 # -------------------------------------------------------------------------------------- #
 
+# Exit the script when one command fails.
+set -e
+
 # Get the location of this script.
 SRC_DIR="$( cd "$( dirname "$0" )" && pwd )"
 
