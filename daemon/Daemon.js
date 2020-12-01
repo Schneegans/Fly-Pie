@@ -15,15 +15,15 @@ const Menu           = Me.imports.daemon.Menu.Menu;
 const Shortcuts      = Me.imports.daemon.Shortcuts.Shortcuts;
 const DBusInterface  = Me.imports.common.DBusInterface.DBusInterface;
 const utils          = Me.imports.common.utils;
-const ItemRegistry   = Me.imports.common.ItemRegistry;
+const ItemRegistry   = Me.imports.common.ItemRegistry.ItemRegistry;
 const DefaultMenu    = Me.imports.settings.DefaultMenu.DefaultMenu;
 const MouseHighlight = Me.imports.daemon.MouseHighlight.MouseHighlight;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
 // shortcut for each configured menu. For details on the D-Bus interface refer to       //
-// common/DBusInterface.js. As soon as a valid request is received or a shortcut is     //
-// pressed, an menu is shown accordingly.                                               //
+// the README.md. As soon as a valid request is received or a shortcut is pressed, an   //
+// menu is shown or updated accordingly.                                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var Daemon = class Daemon {
@@ -37,19 +37,19 @@ var Daemon = class Daemon {
     this._dbus = Gio.DBusExportedObject.wrapJSObject(DBusInterface.description, this);
     this._dbus.export(Gio.DBus.session, '/org/gnome/shell/extensions/flypie');
 
-    // Initialize the menu. The same menu is used again and again. It is just reconfigured
-    // according to incoming requests.
+    // Initialize the menu. For performance reasons the same menu is used again and again.
+    // It is just reconfigured according to incoming requests.
     this._menu = new Menu(
         // Called when the user selects an item in the menu. This calls the OnSelect
         // signal of the DBusInterface.
-        (menuID, path) => this._onSelect(menuID, path),
+        (menuID, itemID) => this._onSelect(menuID, itemID),
 
         // Called when the user does no select anything in the menu. This calls the
         // OnCancel signal of the DBusInterface.
         (menuID) => this._onCancel(menuID));
 
     // This is increased once for every menu request.
-    this._lastID = 0;
+    this._lastMenuID = 0;
 
     // This class manages the global shortcuts. Once one of the registered shortcuts is
     // pressed, the corresponding menu is shown via the ShowMenu() method. If an error
@@ -126,31 +126,32 @@ var Daemon = class Daemon {
   // -------------------------------------------------------------- public D-Bus-Interface
 
   // This opens a menu configured with Fly-Pie's menu editor and can be directly called
-  // over the D-Bus. See common/DBusInterface.js for a description of Fly-Pie's
-  // DBusInterface.
+  // over the D-Bus. See the README.md for a description of Fly-Pie's DBusInterface. If
+  // there are more than one menu with the same name, the first will be opened.
   ShowMenu(name) {
     return this._openMenu(name, false);
   }
 
   // This opens a menu configured with Fly-Pie's menu editor in preview mode and can be
-  // directly called over the D-Bus. See common/DBusInterface.js for a description of
-  // Fly-Pie's DBusInterface.
+  // directly called over the D-Bus. See the README.md for a description of Fly-Pie's
+  // DBusInterface. If there are more than one menu with the same name, the first will be
+  // opened.
   PreviewMenu(name) {
     return this._openMenu(name, true);
   }
 
   // This opens a custom menu and can be directly called over the D-Bus.
-  // See common/DBusInterface.js for a description of Fly-Pie's DBusInterface.
+  // See the README.md for a description of Fly-Pie's DBusInterface.
   ShowCustomMenu(json) {
-    this._lastID = this._getNextID(this._lastID);
-    return this._openCustomMenu(json, false, this._lastID);
+    this._lastMenuID = this._getNextMenuID(this._lastMenuID);
+    return this._openCustomMenu(json, false, this._lastMenuID);
   }
 
   // This opens a custom menu in preview mode and can be directly called over the D-Bus.
-  // See common/DBusInterface.js for a description of Fly-Pie's DBusInterface.
+  // See the README.md for a description of Fly-Pie's DBusInterface.
   PreviewCustomMenu(json) {
-    this._lastID = this._getNextID(this._lastID);
-    return this._openCustomMenu(json, true, this._lastID);
+    this._lastMenuID = this._getNextMenuID(this._lastMenuID);
+    return this._openCustomMenu(json, true, this._lastMenuID);
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -165,28 +166,10 @@ var Daemon = class Daemon {
 
       if (name == this._menuConfigs[i].name) {
 
-        // Transform the configuration into a menu structure.
-        const structure = ItemRegistry.getItemTypes()['Menu'].createItem(
-            this._menuConfigs[i].name, this._menuConfigs[i].icon,
-            this._menuConfigs[i].centered);
-
-        for (let j = 0; j < this._menuConfigs[i].children.length; j++) {
-          structure.children.push(
-              this._transformConfig(this._menuConfigs[i].children[j]));
-        }
-
-        // Once we transformed the menu configuration to a menu structure, we can open the
-        // menu with the custom-menu method.
-        const result =
-            this._openCustomMenu(structure, previewMode, this._menuConfigs[i].id);
-
-        // If that was successful, store the structure.
-        if (result >= 0) {
-          this._currentMenuStructure = structure;
-        }
-
-        // Return the menu's ID.
-        return result;
+        // Once we found the desired menu, we can open the menu with the custom-menu
+        // method.
+        return this._openCustomMenu(
+            this._menuConfigs[i], previewMode, this._menuConfigs[i].id);
       }
     }
 
@@ -195,21 +178,37 @@ var Daemon = class Daemon {
   }
 
   // Open the menu described by 'config', optionally in preview mode. 'config' can either
-  // be a JSON string or an object containing the menu structure. This method will return
-  // the menu's ID on success or an error code on failure. See common/DBusInterface.js for
-  // a list of error codes.
+  // be a JSON string or an object containing the menu configuration. This method will
+  // return the menu's ID on success or an error code on failure. See
+  // common/DBusInterface.js for a list of error codes.
   _openCustomMenu(config, previewMode, menuID) {
 
-    let structure = config;
-
-    // First try to parse the menu structure if it's given as a json string.
+    // First try to parse the menu configuration if it's given as a json string.
     if (typeof config === 'string') {
       try {
-        structure = JSON.parse(config);
+        config = JSON.parse(config);
       } catch (error) {
-        utils.debug(error);
+        utils.debug('Failed to parse menu configuration JSON: ' + error);
         return DBusInterface.errorCodes.eInvalidJSON;
       }
+    }
+
+    // Then normalize the menu configuration (e.g. add all default data).
+    try {
+      ItemRegistry.normalizeConfig(config);
+    } catch (error) {
+      utils.debug('Failed to parse menu configuration: ' + error);
+      return DBusInterface.errorCodes.eInvalidMenuConfiguration;
+    }
+
+    // Then try to transform the menu configuration to a menu structure. See
+    // ItemRegistry.js for details.
+    let structure;
+    try {
+      structure = ItemRegistry.transformConfig(config);
+    } catch (error) {
+      utils.debug('Failed to transform menu configuration: ' + error);
+      return DBusInterface.errorCodes.eInvalidMenuConfiguration;
     }
 
     // Then try to open the menu. This will return the menu's ID on success or an error
@@ -217,79 +216,23 @@ var Daemon = class Daemon {
     try {
       return this._menu.show(menuID, structure, previewMode);
     } catch (error) {
-      utils.debug(error);
+      utils.debug('Failed to show menu: ' + error);
     }
 
     // Something weird happened.
     return DBusInterface.errorCodes.eUnknownError;
   }
 
-  // This gets called once the user made a selection in the menu.
-  _onSelect(menuID, path) {
-
-    // This is set if we opened one of the menus configured with Fly-Pie's menu editor.
-    // Else it was a custom menu opened via the D-Bus.
-    if (this._currentMenuStructure != null) {
-
-      // The path is a string like /2/2/4 indicating that the fourth entry in the second
-      // entry of the second entry was clicked on.
-      const pathElements = path.split('/');
-
-      // Now follow the path in our menu structure.
-      let item = this._currentMenuStructure;
-      for (let i = 1; i < pathElements.length; ++i) {
-        item = item.children[pathElements[i]];
-      }
-
-      // And finally activate the item!
-      item.activate();
-
-      // The menu is now hidden.
-      this._currentMenuStructure = null;
-    }
-
-    // Emit the OnSelect signal of our D-Bus interface.
-    this._dbus.emit_signal('OnSelect', GLib.Variant.new('(is)', [menuID, path]));
+  // This gets called once the user made a selection in the menu. It emit the OnSelect
+  // signal of our D-Bus interface.
+  _onSelect(menuID, itemID) {
+    this._dbus.emit_signal('OnSelect', GLib.Variant.new('(is)', [menuID, itemID]));
   }
 
-  // This gets called when the user did not select anything in the menu.
+  // This gets called when the user did not select anything in the menu. It emits the
+  // OnCancel signal of our D-Bus interface.
   _onCancel(menuID) {
-
-    // This is set if we opened one of the menus configured with Fly-Pie's menu editor.
-    // Else it was a custom menu opened via the D-Bus.
-    if (this._currentMenuStructure != null) {
-
-      // The menu is now hidden.
-      this._currentMenuStructure = null;
-    }
-
-    // mit the OnCancel signal of our D-Bus interface.
     this._dbus.emit_signal('OnCancel', GLib.Variant.new('(i)', [menuID]));
-  }
-
-  // This uses the createItem() methods of the ItemRegistry to transform a menu
-  // configuration (as created by Fly-Pie's menu editor) to a menu structure (as
-  // required by the menu class). The main difference is that the menu structure may
-  // contain significantly more items - while the menu configuration only contains one
-  // item for "Bookmarks", the menu structure actually contains all of the bookmarks as
-  // individual items.
-  _transformConfig(config) {
-    const icon  = config.icon != undefined ? config.icon : '';
-    const name  = config.name != undefined ? config.name : '';
-    const type  = config.type != undefined ? config.type : '';
-    const data  = config.data != undefined ? config.data : '';
-    const angle = config.angle != undefined ? config.angle : -1;
-
-    const result = ItemRegistry.getItemTypes()[type].createItem(name, icon, angle, data);
-
-    // Load all children recursively.
-    if (config.children) {
-      for (let i = 0; i < config.children.length; i++) {
-        result.children.push(this._transformConfig(config.children[i]));
-      }
-    }
-
-    return result;
   }
 
   // Whenever the menu configuration changes, we check for any new shortcuts which need to
@@ -335,28 +278,21 @@ var Daemon = class Daemon {
       this._shortcuts.bind(requiredShortcut);
     }
 
-    // There is currently a menu created with Fly-Pie's menu editor open, so we
-    // potentially have to update the displayed menu (we might be in preview mode).
-    if (this._currentMenuStructure != null) {
+    // There is currently a menu open, so we potentially have to update the displayed
+    // menu.
+    if (this._menu.getID() != null) {
       for (let i = 0; i < this._menuConfigs.length; i++) {
         if (this._menuConfigs[i].id == this._menu.getID()) {
           // Transform the configuration into a menu structure.
-          const structure = ItemRegistry.getItemTypes()['Menu'].createItem(
-              this._menuConfigs[i].name, this._menuConfigs[i].icon,
-              this._menuConfigs[i].centered);
-
-          for (let j = 0; j < this._menuConfigs[i].children.length; j++) {
-            structure.children.push(
-                this._transformConfig(this._menuConfigs[i].children[j]));
-          }
+          ItemRegistry.normalizeConfig(this._menuConfigs[i]);
+          const structure = ItemRegistry.transformConfig(this._menuConfigs[i]);
 
           // Once we transformed the menu configuration to a menu structure, we can update
           // the menu with the new structure.
           const result = this._menu.update(structure);
 
-          // If that was successful, store the structure.
+          // If that was successful, we are done.
           if (result >= 0) {
-            this._currentMenuStructure = structure;
             return;
           }
 
@@ -373,7 +309,7 @@ var Daemon = class Daemon {
   // This returns a new ID for a custom show-menu request. The last ID is increased by, if
   // the result collides with an ID of a menu configured with Fly-Pie's menu editor, it
   // is increased once more.
-  _getNextID(lastID) {
+  _getNextMenuID(lastID) {
     let nextID  = lastID;
     let isInUse = false;
 

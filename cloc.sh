@@ -9,7 +9,7 @@
 # -------------------------------------------------------------------------------------- #
 
 # This scripts counts the lines of code and comments in all JavaScript files.
-# The copyright-headers are substracted. It uses the commandline tool "cloc".
+# The copyright-headers are substracted. It uses the command line tool "cloc".
 # All dumb comments like those /////////// or those // ------------ are also substracted.
 # You can either pass --loc, --comments or  --percentage to show the respective values
 # only.

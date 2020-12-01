@@ -33,7 +33,7 @@ cd "$FLYPIE" || { echo "ERROR: Could not cd to the script's location!"; exit 1; 
 # First update the template file with the strings from the source tree. All preceeding
 # comments starting with 'Translators' will be extracted as well.
 xgettext --from-code=UTF-8 --add-comments=Translators \
-         --output=po/flypie.pot settings/settings.ui ./*/*.js 
+         --output=po/flypie.pot settings/settings.ui ./*/*.js ./*/*/*.js 
 
 # Then update all *.po files.
 for FILE in po/*.po
