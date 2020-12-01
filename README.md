@@ -366,5 +366,7 @@ Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kb
 Or logout / login if you are on Wayland.
 
 You can add your new `*.po` file with a commit like `:globe_with_meridians: Add new translation for <country code>` and submit a pull request!
+**To get started, have a look at the [Pull Request Template](.github/PULL_REQUEST_TEMPLATE/add_or_update_translation.md)**.
+When you create your pull request, you can simply append a `&template=add_or_update_translation.md` to the URL of your pull request to auto-populate the body of your pull request with the template.
 
-Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for the contribution guidelines.
+Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for the some further contribution guidelines.

@@ -1,11 +1,3 @@
----
-name: Add or update a translation
-about: Make Fly-Pie international! 🌐
-title: '<Add/Update> <LANGUAGE> translation'
-labels: translation
-assignees: ''
----
-
 <!--
 Thank you for contributing a translation to Fly-Pie!
 This template will help you to provide a high quality contribution to the project.
