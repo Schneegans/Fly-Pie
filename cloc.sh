@@ -14,6 +14,9 @@
 # You can either pass --loc, --comments or  --percentage to show the respective values
 # only.
 
+# Exit the script when one command fails.
+set -e
+
 # Get the location of this script.
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
 

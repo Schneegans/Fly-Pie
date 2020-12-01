@@ -12,6 +12,9 @@
 # the po/flypie.pot file accordingly. The new strings are than merged with all existing
 # translations.
 
+# Exit the script when one command fails.
+set -e
+
 # Check if all necessary commands are available.
 if ! command -v xgettext &> /dev/null
 then

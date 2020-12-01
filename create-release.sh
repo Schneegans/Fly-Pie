@@ -11,6 +11,9 @@
 # This script creates a new release of the Fly-Pie GNOME extension.
 # When the '-i' option is set, it installs it to the system.
 
+# Exit the script when one command fails.
+set -e
+
 # Go to the location of this script.
 cd "$( cd "$( dirname "$0" )" && pwd )" || { echo "ERROR: Could not find the location of 'create-release.sh'."; exit 1; }
 
