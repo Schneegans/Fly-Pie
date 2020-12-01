@@ -1,15 +1,46 @@
 # Changelog of Fly-Pie
 
+## [Fly-Pie 4](https://github.com/schneegans/fly-pie/releases/tag/v4)
+
+**Release Date:** TBD
+
+#### New Features
+* Fly-Pie has now **localization support**. That means, you can now [translate it to your own language](https://github.com/Schneegans/Fly-Pie#translating-fly-pie)! Pull requests are very welcome (there is also a new **pull request template for translations**!), also for updating the existing translations. Fly-Pie 4 comes with translations for the following languages:
+  * English
+  * German
+  * Italian
+* It is now possible to **export or import the menu configuration**.
+* A new predefined **System Menu** is now available which shows items for screen-lock, shutdown, settings, etc.
+* There is **no differentiation between top-level and submenus anymore**; the items `Top-Level Menu` and `Submenu` are now merged to a `Custom Menu`. This has multiple implications:
+  * You can **drag entire menus into other menus** in the menu editor. Or you can make a former submenu to a top-level menu by drag'n'drop.
+  * All **predefined menus (`Bookmarks`, `Devices`, etc.) can now be top-level menus** on their own.
+  * It's now possible to **reorder menus** in the menu editor.
+* The **D-Bus interface of Fly-Pie now supports all action of menu types**. You can open any menu you can configure in the menu editor also via the D-Bus interface. The README.md has been extended to contain a full description of the menu configuration format.
+* A **warning is now shown in the settings dialog if GNOME Shell's animations are disabled** (in this case Fly-Pie does not really work). There is a button which can be used to enable the animations.
+
+#### Other Enhancements
+* Several new **continuous integration checks** have been added.
+  * [ShellCheck](https://www.shellcheck.net/) is run against all scripts.
+  * Some error conditions in the scripts are tested.
+  * It's tested whether the translations compile successfully.
+  * It's tested whether the release zip can be created successfully.
+* A lot of the code has been refactored, especially the `ItemRegistry` has been split up so that all action and menu types have their own files now.
+
+#### Acknowledgements
+* Many thanks to [daPhipz](https://github.com/daPhipz) for your great contributions!
+* Many thanks to [albanobattistella](https://github.com/albanobattistella) for the Italian translation!
+
+
 ## [Fly-Pie 3](https://github.com/schneegans/fly-pie/releases/tag/v3)
 
 **Release Date:** 2020-10-10
 
 #### New Features
 
-* It is now possible to drag'n'drop things to the menu editor in order to create corresponding menu items. You can try dragging *.desktop files, other files, URLs or arbitrary text to the menu editor.
-* You can now copy menu items by dragging them somewhere else in the menu editor while holding down the <kbd>Ctrl</kbd> key.
-* Fly-Pie now works on systems with multiple monitors attached (thank you @gaamdalurt).
-* A simple About-Popover has been added. It primarily shows the version of Fly-Pie so that a user can tell which version is installed.
+* It is now possible to **drag'n'drop things to the menu editor** in order to create corresponding menu items. You can try dragging *.desktop files, other files, URLs or arbitrary text to the menu editor.
+* You can now **copy menu items** by dragging them somewhere else in the menu editor while holding down the <kbd>Ctrl</kbd> key.
+* Fly-Pie now works on systems with **multiple monitors** attached (thank you @gaamdalurt).
+* A simple **About-Popover** has been added. It primarily shows the version of Fly-Pie so that a user can tell which version is installed.
 
 #### Other Enhancements
 
