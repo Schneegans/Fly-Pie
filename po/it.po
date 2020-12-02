@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-30 09:20+0100\n"
-"PO-Revision-Date: 2020-12-02 19:16+0100\n"
+"PO-Revision-Date: 2020-12-02 17:16+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language: it\n"
@@ -1111,7 +1111,7 @@ msgstr "Pesca"
 
 #: settings/ExampleMenu.js:130
 msgid "Skiing"
-msgstr "Sci"
+msgstr "Sciare"
 
 #: settings/ExampleMenu.js:134
 msgid "Places"
