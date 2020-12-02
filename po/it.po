@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-30 09:20+0100\n"
-"PO-Revision-Date: 2020-11-29 19:16+0100\n"
+"PO-Revision-Date: 2020-12-02 19:16+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language: it\n"
@@ -51,6 +51,8 @@ msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
 msgstr ""
+"<b>Menu</b>\n"
+"Possono essere sottomenu o menu di primo livello."
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: settings/settings.ui:647
@@ -58,6 +60,8 @@ msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
+"<b>Azioni</b>\n"
+"Può essere aggiunto a menu personalizzati."
 
 #: settings/settings.ui:746
 msgid "Save current settings"
@@ -779,11 +783,11 @@ msgstr "Questo testo verrà inserito."
 
 #: settings/settings.ui:7932 settings/settings.ui:7968
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: settings/settings.ui:7945
 msgid "This will be passed to the D-Bus signal."
-msgstr ""
+msgstr "Questo verrà passato al segnale D-Bus."
 
 #: settings/settings.ui:8008
 msgid "Max Item Count"
@@ -1400,13 +1404,15 @@ msgstr "Struttura del Menu"
 #: settings/MenuEditor.js:1013 settings/MenuEditor.js:1042
 #: settings/MenuEditor.js:1263 settings/MenuEditor.js:1282
 msgid "Not bound."
-msgstr ""
+msgstr "Non vincolato."
 
 #: settings/MenuEditor.js:1030
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
+"Premi la scorciatoia!\n"
+"ESC per annullare, BackSpace per svincolare"
 
 #: settings/MenuEditor.js:1092
 msgid "You should try to have no more than twelve items in your menus."
@@ -1527,11 +1533,11 @@ msgstr ""
 
 #: common/actions/DBusSignal.js:23
 msgid "D-Bus Signal"
-msgstr ""
+msgstr "Segnale D-Bus"
 
 #: common/actions/DBusSignal.js:25
 msgid "Emits a D-Bus signal."
-msgstr ""
+msgstr "Emette un segnale D-Bus."
 
 #: common/actions/DBusSignal.js:27
 msgid ""
@@ -1540,6 +1546,10 @@ msgid ""
 "listen on the D-Bus for its activation</a>. This can be very useful in "
 "custom menus opened via the command line."
 msgstr ""
+"L'azione <b>Segnale D-Bus</b> non fa nulla da sola. Ma tu <a href ="
+"\"https://github.com/Schneegans/Fly-Pie#fly-pies-d-bus-interface\">puoi "
+"ascoltare sul D-Bus la sua attivazione</a>. Questo può essere molto utile in "
+"menu personalizzati aperti tramite la riga di comando."
 
 #: common/actions/File.js:26
 msgid "Open File"
@@ -1646,7 +1656,7 @@ msgstr "Sottomenu Personalizzato"
 #. Translators: Please keep this short.
 #: common/menus/CustomMenu.js:25
 msgid "This can contain actions and other menus."
-msgstr ""
+msgstr "Può contenere azioni e altri menu."
 
 #: common/menus/CustomMenu.js:27
 #, fuzzy
