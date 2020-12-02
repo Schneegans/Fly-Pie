@@ -9,10 +9,13 @@
 # -------------------------------------------------------------------------------------- #
 
 # This scripts counts the lines of code and comments in all JavaScript files.
-# The copyright-headers are substracted. It uses the commandline tool "cloc".
+# The copyright-headers are substracted. It uses the command line tool "cloc".
 # All dumb comments like those /////////// or those // ------------ are also substracted.
 # You can either pass --loc, --comments or  --percentage to show the respective values
 # only.
+
+# Exit the script when one command fails.
+set -e
 
 # Get the location of this script.
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
@@ -37,36 +40,36 @@ LINES_OF_CODE=${TOKENS[4]}
 # substracted. As cloc does not count inline comments, the overall estimate should be
 # rather conservative.
 DUMB_COMMENTS="$(grep -r -E '//////|// -----' "${SCRIPT_DIR}" | wc -l)"
-COMMENT_LINES=$(($COMMENT_LINES - 5 * $NUMBER_OF_FILES - $DUMB_COMMENTS))
+COMMENT_LINES=$((COMMENT_LINES - 5 * NUMBER_OF_FILES - DUMB_COMMENTS))
 
 # Print all results if no arguments are given.
 if [[ $# -eq 0 ]] ; then
-  awk -v a=$LINES_OF_CODE \
+  awk -v a="$LINES_OF_CODE" \
       'BEGIN {printf "Lines of source code: %6.1fk\n", a/1000}'
   awk -v a=$COMMENT_LINES \
       'BEGIN {printf "Lines of comments:    %6.1fk\n", a/1000}'
-  awk -v a=$COMMENT_LINES -v b=$LINES_OF_CODE \
+  awk -v a=$COMMENT_LINES -v b="$LINES_OF_CODE" \
       'BEGIN {printf "Comment Percentage:   %6.1f%\n", 100*a/b}'
   exit 0
 fi
 
 # Show lines of code.
-if [[ $* == *--loc* ]]
+if [[ "$*" == *--loc* ]]
 then
-  awk -v a=$LINES_OF_CODE \
+  awk -v a="$LINES_OF_CODE" \
       'BEGIN {printf "%.1fk\n", a/1000}'
 fi
 
 # Show lines of comments.
-if [[ $* == *--comments* ]]
+if [[ "$*" == *--comments* ]]
 then
   awk -v a=$COMMENT_LINES \
       'BEGIN {printf "%.1fk\n", a/1000}'
 fi
 
 # Show precentage of comments.
-if [[ $* == *--percentage* ]]
+if [[ "$*" == *--percentage* ]]
 then
-  awk -v a=$COMMENT_LINES -v b=$LINES_OF_CODE \
+  awk -v a=$COMMENT_LINES -v b="$LINES_OF_CODE" \
       'BEGIN {printf "%.1f\n", 100*a/b}'
 fi

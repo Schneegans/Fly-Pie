@@ -1,18 +1,17 @@
-# German translation for the Fly-Pie GNOME Shell Extension.
-# Copyright (C) 2020 Simon Schneegans
+# Italian translation for the Fly-Pie GNOME Shell Extension.
+# Copyright (C) 2020 Simon Schneegans.
 # This file is distributed under the same license as the Fly-Pie package.
-# Initial translation: Simon Schneegans <code@simonschneegans.de>, 2020.
+# Initial translation: Albano Battistella <albano_battistella@hotmail.com>, 2020.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Fly-Pie\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-30 09:20+0100\n"
-"PO-Revision-Date: 2020-11-30 09:24+0100\n"
+"PO-Revision-Date: 2020-11-29 19:16+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: Simon Schneegans <code@simonschneegans.de>, Philipp Kiemle "
-"<philipp.kiemle@gmail.com>\n"
-"Language: de\n"
+"Language-Team: Albano Battistella <albano_battistella@hotmail.com>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,23 +28,22 @@ msgid ""
 "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
-"Veröffentlicht unter der MIT Lizenz.\n"
-"Besuchen Sie die <a href=\"https://github.com/Schneegans/Fly-Pie\">Homepage "
-"von Fly-Pie</a> für weitere Informationen.\n"
+"Visita <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie's Homepage</"
+"a> per dettagli.\n"
 "\n"
-"Immer wenn Sie einen Bug 🐞️ entdecken oder sich eine neue Funktion 🎉️ "
-"wünschen, können Sie ein Ticket auf <a href=\"https://github.com/Schneegans/"
-"Fly-Pie/issues\">Github</a> eröffnen."
+"Ogni volta che incontri un 🐞️ bug o hai 🎉️ richiesta di funzionalità, sentiti "
+"libero di segnalarlo <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
+"\">Github</a>."
 
 #. Tab title of the icon-select-popover.
 #: settings/settings.ui:451
 msgid "Icon Theme"
-msgstr "Symbolthema"
+msgstr "Tema icona"
 
 #. Tab title of the icon-select-popover.
 #: settings/settings.ui:478
 msgid "Custom Icon"
-msgstr "Benutzerdefiniertes Symbol"
+msgstr "Icona Personalizzata"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: settings/settings.ui:611
@@ -53,8 +51,6 @@ msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
 msgstr ""
-"<b>Menüs</b>\n"
-"Können Haupt- oder Untermenüs sein."
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: settings/settings.ui:647
@@ -62,35 +58,31 @@ msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
-"<b>Aktionen</b>\n"
-"Können zu benutzerdefinierten Menüs hinzugefügt werden."
 
 #: settings/settings.ui:746
 msgid "Save current settings"
-msgstr "Aktuelle Einstellungen speichern"
+msgstr "Salva impostazioni correnti"
 
 #: settings/settings.ui:772
 msgid "Save as new Preset"
-msgstr "Als neue Voreinstellung speichern"
+msgstr "Salva come nuovo Predefinito"
 
 #: settings/settings.ui:794
 msgid "Open preset directory"
-msgstr "Voreinstellungsverzeichnis öffnen"
+msgstr "Apri directory predefinita"
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: settings/settings.ui:876
 msgid "Enable Animations"
-msgstr "Animationen aktivieren"
+msgstr "Abilita Animazioni"
 
 #: settings/settings.ui:903
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
-msgstr ""
-"Damit Fly-Pie funktioniert, müssen die Animationen von GNOME Shell aktiviert "
-"sein."
+msgstr "Fly-Pie richiede che le animazioni di GNOME Shell siano abilitate."
 
 #: settings/settings.ui:1015
 msgid "Welcome to Fly-Pie!"
-msgstr "Willkommen bei Fly-Pie!"
+msgstr "Benvenuto in Fly-Pie!"
 
 #: settings/settings.ui:1046
 msgid ""
@@ -98,10 +90,10 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
-"Sie können Fly-Pie verwenden, um Anwendungen zu starten, Tastenkombinationen "
-"zu simulieren, URLs zu öffnen und vieles mehr. Diese Einführung zeigt Ihnen, "
-"wie Sie Fly-Pie möglichst effizient verwenden. Mit der großen Schaltfläche "
-"können Sie ein Beispielmenü öffnen!"
+"Puoi utilizzare Fly-Pie per avviare applicazioni, simulare tasti di scelta "
+"rapida, aprire URL e molto altro ancora. Questo tutorial interattivo ti "
+"insegnerà come utilizzare Fly-Pie in modo più efficiente. Fare clic sul "
+"pulsante grande in basso per aprire un menu di prova!"
 
 #. The text of the big tutorial button. Using two lines looks quite good.
 #: settings/settings.ui:1078 settings/settings.ui:1205
@@ -111,8 +103,8 @@ msgid ""
 "<big><b>Open the\n"
 "menu!</b></big>"
 msgstr ""
-"<big><b>Das Menü\n"
-"öffnen!</b></big>"
+"<big><b>Apri il\n"
+"menu!</b></big>"
 
 #: settings/settings.ui:1099
 msgid ""
@@ -122,26 +114,25 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
-"• Mit der <b>linken Maustaste wählen Sie Einträge aus</b>.\n"
-"• Mit der <b>rechten Maustaste schließen Sie das Menü</b>.\n"
-"• Spielen Sie ruhig mit dem Beispielmenü, die Einträge haben keine echte "
-"Funktion.\n"
+"• Usa il <b> pulsante sinistro del mouse per selezionare gli elementi </b>.\n"
+"• Usa il <b>tasto destro del mouse per chiudere il menu</b>.\n"
+"• Il menu di prova è solo un parco giochi, la selezione degli elementi non "
+"ha alcun effetto reale.\n"
 "\n"
-"Wenn Sie ein Gefühl für das Menü entwickelt haben, klicken Sie auf "
-"<b>Weiter</b> um mehr zu erfahren!"
+"Quando ti senti a tuo agio, fai clic su <b>avanti</b> per ulteriori dettagli!"
 
 #: settings/settings.ui:1142
 msgid "You can click anywhere!"
-msgstr "Sie können überallhin klicken!"
+msgstr "Puoi fare clic ovunque!"
 
 #: settings/settings.ui:1173
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
 msgstr ""
-"Es spielt keine Rolle, ob Sie direkt auf einen Menüeintrag oder am Rand das "
-"Bildschirms klicken, solange Sie mit der Maus im Segment des gewünschten "
-"Eintrags bleiben."
+"Non importa se fai clic direttamente su un elemento o sul bordo dello "
+"schermo fintanto che il puntatore del mouse rimane nella sezione "
+"dell'elemento."
 
 #: settings/settings.ui:1227
 msgid ""
@@ -152,17 +143,18 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
-"<b>Einträge werden gewählt, indem man in das zugehörige Kreissegment klickt</"
-"b>.\n"
+"<b> Gli elementi vengono selezionati facendo clic in un punto qualsiasi dei "
+"rispettivi cunei</b>.\n"
 "\n"
-"Übrigens müssen Sie nicht warten, bis die Animation fertig ist, da die "
-"Kreissegmente eines geöffneten Untermenüs sofort an der Maus erscheinen.\n"
+"Inoltre, non è necessario attendere che l'animazione finisca poiché le "
+"sezioni del sottomenu appariranno istantaneamente intorno alla posizione in "
+"cui si è fatto clic.\n"
 "\n"
-"Klicken Sie auf <b>Weiter</b> für eine praktische Übung!"
+"Fai clic su <b>avanti</b> per una sessione di pratica!"
 
 #: settings/settings.ui:1271
 msgid "Practice Session I"
-msgstr "Praxisübung I"
+msgstr "Sessione Pratica I"
 
 #: settings/settings.ui:1293
 msgid ""
@@ -173,32 +165,33 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!\n"
 msgstr ""
-"Öffnen Sie das Beispielmenü und wählen Sie \"Törtchen\" (🍔 🠚 🍭 🠚 🍰) so "
-"schnell wie möglich. Können Sie die Goldmedaille freischalten?\n"
+"Per questa sessione pratica, apri il menu facendo clic sul pulsante grande. "
+"Quindi seleziona \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) il più rapidamente possibile. "
+"Vuoi ottenere la medaglia d'oro?\n"
 "\n"
-"Wenn Sie mit Ihrem Ergebnis zufrieden sind, klicken Sie auf <b>Weiter</b> um "
-"etwas über den \"Marking Mode\" von Fly-Pie zu erfahren!\n"
+"Quando sei soddisfatto del risultato, fai clic su <b>Avanti</b> per "
+"conoscere la modalità di marcatura di Fly-Pie!\n"
 
 #. The text of the tutorial-reset-button.
 #: settings/settings.ui:1373 settings/settings.ui:1822
 msgid "Clear"
-msgstr "Zurücksetzen"
+msgstr "Ripristina"
 
 #: settings/settings.ui:1433 settings/settings.ui:1998
 msgid "Unlocked at less than 1000 ms"
-msgstr "Freigeschaltet bei weniger als 1000 ms"
+msgstr "Sbloccato a meno di 1000 ms"
 
 #: settings/settings.ui:1478
 msgid "Unlocked at less than 2000 ms"
-msgstr "Freigeschaltet bei weniger als 2000 ms"
+msgstr "Sbloccato a meno di 2000 ms"
 
 #: settings/settings.ui:1549
 msgid "Unlocked at less than 3000 ms"
-msgstr "Freigeschaltet bei weniger als 3000 ms"
+msgstr "Sbloccato a meno di 3000 ms"
 
 #: settings/settings.ui:1592
 msgid "The Marking Mode of Fly-Pie"
-msgstr "Der \"Marking Mode\" von Fly-Pie"
+msgstr "La Modalità di Marcatura di Fly-Pie"
 
 #: settings/settings.ui:1623
 msgid ""
@@ -206,10 +199,10 @@ msgid ""
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
-"Der <b>\"Marking Mode\"</b> von Fly-Pie erlaubt Ihnen die <b>Auswahl durch "
-"Gesten</b>! Um den \"Marking Mode\" zu verwenden, klicken und ziehen Sie ein "
-"Menüelement. Sobald Sie die Bewegung pausieren oder eine Kurve beschreiben, "
-"wird das gewählte Element ausgewählt."
+"La <b>modalità di marcatura</b> di Fly-Pie ti consente di selezionare gli "
+"elementi <b>disegnando gesti</b>! Per accedere alla modalità di marcatura, "
+"fare clic e trascinare un elemento. Non appena metti in pausa il "
+"trascinamento o effettui una svolta, l'elemento verrà selezionato."
 
 #: settings/settings.ui:1676
 msgid ""
@@ -223,19 +216,19 @@ msgid ""
 "\n"
 "Click <b>next</b> for an additional practice session!"
 msgstr ""
-"Versuchen Sie, sich den Pfad zu einem Eintrag einzuprägen. Öffnen Sie das "
-"Menü und <b>zeichnen Sie den Pfad mit der Maus</b>. Beginnen Sie mit "
-"einzelne Abschnitten des Pfades. Später können Sie den gesamten Pfad mit "
-"einer Geste zeichnen!\n"
+"Prova a ricordare il percorso di un elemento. Apri il menu e <b>disegna il "
+"percorso con il mouse</b>. Puoi iniziare con singoli segmenti del percorso, "
+"puoi anche provare a disegnare l'intero percorso!\n"
 "\n"
-"Sie erzielen ein besseres Ergebnis mit kantigen Zick-Zack-Linien statt "
-"<b>unsicheren, kurvigen Pfaden!</b>\n"
+"Potresti trovare più successo se provi esplicitamente a comporre il tuo "
+"gesto di parti dritte. <b>Non disegnare percorsi sinuosi ma piuttosto linee "
+"espressive a zig-zag!</b>\n"
 "\n"
-"Klicken Sie auf <b>Weiter</b> für noch eine Praxisübung!"
+"Fai clic su <b>avanti</b> per un'ulteriore sessione di pratica!"
 
 #: settings/settings.ui:1720
 msgid "Practice Session II"
-msgstr "Praxisübung II"
+msgstr "Sessione Pratica II"
 
 #: settings/settings.ui:1742
 msgid ""
@@ -246,24 +239,24 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn some final "
 "tips and tricks!\n"
 msgstr ""
-"Wählen Sie wieder so schnell wie möglich \"Törtchen\" (🍔 🠚 🍭 🠚 🍰) aus. Da "
-"Sie aber nun den \"Marking Mode\" kennen, ist die Zeit, die für die "
-"Goldmedaille erreicht werden muss, deutlich kürzer!\n"
+"Di nuovo, dovresti selezionare \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) il più rapidamente "
+"possibile. Tuttavia, come ora hai appreso della modalità Marcatura, il tempo "
+"necessario per ottenere la medaglia d'oro è molto più breve!\n"
 "\n"
-"Wenn Sie mit Ihrem Ergebnis zufrieden sind, klicken Sie auf <b>Weiter</b> um "
-"einige abschließende Tipps und Tricks zu erfahren!\n"
+"Quando sei soddisfatto del risultato, fai clic su <b> avanti </b> per "
+"apprendere alcuni suggerimenti e trucchi finali!\n"
 
 #: settings/settings.ui:1882
 msgid "Unlocked at less than 500 ms"
-msgstr "Freigeschaltet bei weniger als 500 ms"
+msgstr "Sbloccato a meno di 500 ms"
 
 #: settings/settings.ui:1927
 msgid "Unlocked at less than 750 ms"
-msgstr "Freigeschaltet bei weniger als 750 ms"
+msgstr "Sbloccato a meno di 750 ms"
 
 #: settings/settings.ui:2040
 msgid "🎉️ Congratulations! 🎉️"
-msgstr "🎉️ Herzlichen Glückwunsch! 🎉️"
+msgstr "🎉️ Congratulazioni! 🎉️"
 
 #: settings/settings.ui:2059
 msgid ""
@@ -282,85 +275,86 @@ msgid ""
 "free to report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
-"Herzlichen Glückwunsch! Wenn Sie die meisten Medaillen freigeschaltet haben, "
-"sind Sie schon ein richtiger Fly-Pie-Profi!\n"
+"Congratulazioni! Se sei riuscito a sbloccare la maggior parte delle "
+"medaglie, utilizzerai Fly-Pie come un maestro Pielot!\n"
 "\n"
-"Jetzt sollten Sie einen Blick auf die anderen Seiten dieses "
-"Einstellungsdialogs werfen. Es gibt viele Konfigurationsmöglichkeiten! Sie "
-"können beliebig viele und beliebig tiefe Menüs erstellen. Es ist allerdings "
-"ratsam, in einer Menüebene <b>nicht mehr als zwölf Einträge</b> zu haben. "
-"Mehr Elemente werden Ihre Effizienz drastisch reduzieren.\n"
+"Ora puoi usare le altre pagine di questa finestra di dialogo delle "
+"impostazioni per configurare Fly-Pie secondo i desideri del tuo cuore. Ci "
+"sono molte opzioni! Crea tutti i menu che desideri con le gerarchie profonde "
+"che desideri. Ma prova a limitare la quantità di elementi per sottomenu ad "
+"<b>al massimo dodici elementi</b>. Tutto ciò al di sopra di questo numero "
+"ridurrà drasticamente la tua efficienza.\n"
 "\n"
-"Wenn Ihnen Fly-Pie gefällt, können Sie gerne eine positive Bewertung auf <a "
+"Se ti piace Fly-Pie, sarei felice se lasciassi una recensione positiva su <a "
 "href=\"https://extensions.gnome.org/extension/3433/fly-pie/\">extensions."
-"gnome.org</a> schreiben! Immer wenn Sie einen 🐞️ Bug entdecken oder eine "
-"Funktion vermissen, können Sie ein entsprechendes Ticket auf <a href="
-"\"https://github.com/Schneegans/Fly-Pie/issues\">Github</a> eröffnen."
+"gnome.org</a>! Ogni volta che incontri un bug 🐞️ o hai una richiesta di "
+"funzionalità, sentiti libero di segnalarlo su <a href=\"https://github.com/"
+"Schneegans/Fly-Pie/issues\">Github</a>."
 
 #. Button for tutorial navigation.
 #: settings/settings.ui:2128
 msgid "Previous"
-msgstr "Zurück"
+msgstr "Precedente"
 
 #. Button for tutorial navigation.
 #: settings/settings.ui:2292
 msgid "Next"
-msgstr "Weiter"
+msgstr "Successivo"
 
 #. Caption of one of the main pages.
 #: settings/settings.ui:2318
 msgid "Tutorial"
-msgstr "Einführung"
+msgstr "Tutorial"
 
 #: settings/settings.ui:2365
 msgid "Open Preview Menu"
-msgstr "Vorschau-Menü anzeigen"
+msgstr "Apri il Menu di Anteprima"
 
 #: settings/settings.ui:2378
 msgid "You may also open one of your own menus from the Menu Editor."
-msgstr "Sie können auch ein eigenes Menü über den Menü-Editor öffnen."
+msgstr "Puoi anche aprire uno dei tuoi menu dall'Editor dei Menu."
 
 #: settings/settings.ui:2399
 msgid "Open Live Preview Menu"
-msgstr "Live-Vorschau der aktuellen Einstellungen anzeigen"
+msgstr "Mostra Anteprima Menu"
 
 #: settings/settings.ui:2424
 msgid "Live Preview"
-msgstr "Live-Vorschau öffnen"
+msgstr "Anteprima dal Vivo"
 
 #: settings/settings.ui:2493
 msgid "Choose a Preset"
-msgstr "Voreinstellung wählen"
+msgstr "Scegli un Predefinito"
 
 #: settings/settings.ui:2506
 msgid "This will override most settings below!"
-msgstr "Das überschreibt die meisten der Einstellungen unten!"
+msgstr "Ciò sovrascrive la maggior parte delle impostazioni di seguito!"
 
 #: settings/settings.ui:2557
 msgid "Load a Preset"
-msgstr "Voreinstellung laden"
+msgstr "Carica un Predefinito"
 
 #: settings/settings.ui:2578
 msgid "Initializes the settings below to random values"
-msgstr "Initialisiert die Einstellungen weiter unten mit zufälligen Werten"
+msgstr "Inizializza le impostazioni di seguito per valori casuali"
 
 #. Please keep this short!
 #: settings/settings.ui:2602
 msgid "Generate Random Preset"
-msgstr "Zufällig erzeugen"
+msgstr "Genera un Predefinito Casuale"
 
 #: settings/settings.ui:2709
 msgid "Easing Duration"
-msgstr "Animationsdauer"
+msgstr "Durata Facilitata"
 
 #: settings/settings.ui:2727
 msgid "Global Scale"
-msgstr "Globale Skalierung"
+msgstr "Scala Globale"
 
 #. Please keep this short!
 #: settings/settings.ui:2739
 msgid "Independent of the preset."
-msgstr "Unabhängig von der gewählten Voreinstellung."
+msgstr "Indipendentemente dal predefinito selezionato."
 
 #: settings/settings.ui:2793 settings/settings.ui:2813
 #: settings/settings.ui:2950 settings/settings.ui:2970
@@ -380,45 +374,45 @@ msgstr "Unabhängig von der gewählten Voreinstellung."
 #: settings/settings.ui:6720 settings/settings.ui:6807
 #: settings/settings.ui:6888
 msgid "Reset to default value"
-msgstr "Auf Standardwert zurücksetzen"
+msgstr "Ripristina il valore predefinito"
 
 #: settings/settings.ui:2866
 msgid "Font"
-msgstr "Schriftart"
+msgstr "Font"
 
 #: settings/settings.ui:2878
 msgid "Text Color"
-msgstr "Schriftfarbe"
+msgstr "Colore Testo"
 
 #: settings/settings.ui:2892 settings/settings.ui:4272
 #: settings/settings.ui:5288 settings/settings.ui:5653
 msgid "Background Color"
-msgstr "Hintergrundfarbe"
+msgstr "Colore Sfondo"
 
 #: settings/settings.ui:2921
 msgid "Pick Text Color"
-msgstr "Schriftfarbe wählen"
+msgstr "Scegli il Colore del Testo"
 
 #: settings/settings.ui:2937
 msgid "Pick Background Color"
-msgstr "Hintergrundfarbe wählen"
+msgstr "Scegli il Colore di Sfondo"
 
 #: settings/settings.ui:3054 settings/settings.ui:3112
 msgid "Global Appearance Settings"
-msgstr "Grundlegendes Erscheinungsbild"
+msgstr "Impostazioni Aspetto Globale"
 
 #: settings/settings.ui:3070
 msgid "These settings affect all menu items."
-msgstr "Diese Einstellungen beeinflussen alle Menüelemente."
+msgstr "Queste impostazioni influiscono su tutte le voci di menu."
 
 #: settings/settings.ui:3095
 msgid "Easing Mode"
-msgstr "Animationsart"
+msgstr "Tipo di Animazione"
 
 #: settings/settings.ui:3168 settings/settings.ui:3736
 #: settings/settings.ui:5018 settings/settings.ui:5831
 msgid "Size"
-msgstr "Größe"
+msgstr "Dimensione"
 
 #. Keep the individual lines short! You can use up to three lines if you want.
 #: settings/settings.ui:3181
@@ -426,98 +420,99 @@ msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr ""
-"Mausklicks innerhalb des inneren\n"
-"Radius schließen das Menü."
+"Fare clic all'interno del raggio interno\n"
+"annullerà la selezione."
 
 #: settings/settings.ui:3205
 msgid "Wedge Separators"
-msgstr "Trennlinien"
+msgstr "Linee di Divisione"
 
 #: settings/settings.ui:3221 settings/settings.ui:6270
 msgid "Color"
-msgstr "Farbe"
+msgstr "Colore"
 
 #: settings/settings.ui:3240 settings/settings.ui:3366
 msgid "Width"
-msgstr "Breite"
+msgstr "Larghezza"
 
 #: settings/settings.ui:3314
 msgid "Pick Wedge Separator Color"
-msgstr "Trennlinienfarbe wählen"
+msgstr "Scegli Colore del Separatore a Cuneo"
 
 #: settings/settings.ui:3339
 msgid "Wedge Color"
-msgstr "Farbe der Kreissegmente"
+msgstr "Colore Cuneo"
 
 #: settings/settings.ui:3443
 msgid "Inner Radius"
-msgstr "Innerer Radius"
+msgstr "Raggio Interno"
 
 #: settings/settings.ui:3487
 msgid "Inactive"
-msgstr "Inaktiv"
+msgstr "Non attivo"
 
 #: settings/settings.ui:3506
 msgid "Hovered"
-msgstr "Aktiv"
+msgstr "Attivo"
 
 #: settings/settings.ui:3529
 msgid "Pick Wedge Color"
-msgstr "Segmentfarbe wählen"
+msgstr "Scegli Colore del Cuneo"
 
 #: settings/settings.ui:3544
 msgid "Pick Hovered Wedge Color"
-msgstr "Farbe aktiver Segmente wählen"
+msgstr "Seleziona Colore Segmenti Attivi"
 
 #: settings/settings.ui:3615 settings/settings.ui:3672
 msgid "Wedge Appearance"
-msgstr "Erscheinungsbild der Kreissegmente"
+msgstr "Aspetto del Cuneo"
 
 #: settings/settings.ui:3631
 msgid "Clicking inside a wedge will activate the corresponding item."
-msgstr "Mausklicks in einem Segment aktivieren das dazugehörige Menüelement."
+msgstr ""
+"Facendo clic all'interno di un cuneo si attiverà l'elemento corrispondente."
 
 #: settings/settings.ui:3787 settings/settings.ui:4054
 msgid "Pick Center Item Color"
-msgstr "Farbe des zentralen Elements wählen"
+msgstr "Seleziona Colore Elemento Centrale"
 
 #: settings/settings.ui:3813 settings/settings.ui:3873
 #: settings/settings.ui:4080 settings/settings.ui:4140
 #: settings/settings.ui:4701 settings/settings.ui:4773
 #: settings/settings.ui:4906 settings/settings.ui:4990
 msgid "Saturation"
-msgstr "Sättigung"
+msgstr "Saturazione"
 
 #: settings/settings.ui:3833 settings/settings.ui:3885
 #: settings/settings.ui:4100 settings/settings.ui:4152
 #: settings/settings.ui:4721 settings/settings.ui:4761
 #: settings/settings.ui:4926 settings/settings.ui:4978
 msgid "Luminance"
-msgstr "Helligkeit"
+msgstr "Illuminazione"
 
 #: settings/settings.ui:3853 settings/settings.ui:3897
 #: settings/settings.ui:4120 settings/settings.ui:4164
 #: settings/settings.ui:4741 settings/settings.ui:4785
 #: settings/settings.ui:4946 settings/settings.ui:4966
 msgid "Opacity"
-msgstr "Deckkraft"
+msgstr "Opacità"
 
 #. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
 #: settings/settings.ui:3922 settings/settings.ui:4007
 #: settings/settings.ui:4613 settings/settings.ui:4818
 #: settings/settings.ui:5684 settings/settings.ui:5761
 msgid "Fixed"
-msgstr "Fest"
+msgstr "Fisso"
 
 #. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
 #: settings/settings.ui:3937 settings/settings.ui:4022
 #: settings/settings.ui:4628 settings/settings.ui:4833
 msgid "Auto"
-msgstr "Auto"
+msgstr "Automatico"
 
 #: settings/settings.ui:4259 settings/settings.ui:5241
 msgid "Icon Opacity"
-msgstr "Symboldeckkraft"
+msgstr "Opacità Icona"
 
 #: settings/settings.ui:4284 settings/settings.ui:4303
 #: settings/settings.ui:4323 settings/settings.ui:4343
@@ -526,203 +521,204 @@ msgstr "Symboldeckkraft"
 #: settings/settings.ui:5379 settings/settings.ui:6013
 #: settings/settings.ui:6032 settings/settings.ui:6052
 msgid "Copy left value to right side"
-msgstr "Kopiere linken Wert nach rechts"
+msgstr "Copia il valore sinistro sul lato destro"
 
 #: settings/settings.ui:4442
 msgid "With Hovered Child"
-msgstr "Mit aktivem Kind"
+msgstr "Con Figlio Attivo"
 
 #: settings/settings.ui:4458 settings/settings.ui:4528
 msgid "Center Appearance"
-msgstr "Erscheinungsbild des zentralen Elements"
+msgstr "Aspetto Centrale"
 
 #: settings/settings.ui:4474
 msgid "Without Hovered Child"
-msgstr "Ohne aktives Kind"
+msgstr "Senza Figlio Attivo"
 
 #: settings/settings.ui:4491 settings/settings.ui:5547
 msgid "Icon Scale"
-msgstr "Symbolgröße"
+msgstr "Scala Icona"
 
 #. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
 #: settings/settings.ui:4643 settings/settings.ui:4848
 #: settings/settings.ui:5699 settings/settings.ui:5776
 msgid "Parent"
-msgstr "Geerbt"
+msgstr "Genitore"
 
 #: settings/settings.ui:4676 settings/settings.ui:4881
 msgid "Pick Child Item Color"
-msgstr "Farbe der Kindelemente wählen"
+msgstr "Scegli Colore Elemento Figlio"
 
 #: settings/settings.ui:5031 settings/settings.ui:5844
 msgid "Offset"
-msgstr "Abstand"
+msgstr "Distanza"
 
 #: settings/settings.ui:5152 settings/settings.ui:5963
 msgid "Draw Above"
-msgstr "Oberhalb zeichnen"
+msgstr "Disegna Sopra"
 
 #: settings/settings.ui:5164
 msgid "Render children above the center item."
-msgstr "Kindelemente überlagern zentrales Element."
+msgstr "Esegui il rendering dei figli sopra l'elemento centrale."
 
 #: settings/settings.ui:5498 settings/settings.ui:5997
 msgid "Standard State"
-msgstr "Standardzustand"
+msgstr "Standard"
 
 #: settings/settings.ui:5514
 msgid "Hovered State"
-msgstr "Aktiver Zustand"
+msgstr "Attivo"
 
 #: settings/settings.ui:5530 settings/settings.ui:5584
 msgid "Children Appearance"
-msgstr "Erscheinungsbild der Kindelemente"
+msgstr "Aspetto Elementi Figli"
 
 #: settings/settings.ui:5732 settings/settings.ui:5809
 msgid "Pick Grandchild Item Color"
-msgstr "Farbe der Enkelelemente wählen"
+msgstr "Scegli Colore Elementi dei Nipoti"
 
 #: settings/settings.ui:5975
 msgid "Render grandchildren above children items."
-msgstr "Enkelelemente oberhalb von Kindelementen zeichnen."
+msgstr "Disegna i nipoti sopra gli elementi figli."
 
 #: settings/settings.ui:6131
 msgid "With Hovered Parent"
-msgstr "Mit aktivem Elternelement"
+msgstr "Con Elemento Genitore Attivo"
 
 #: settings/settings.ui:6147 settings/settings.ui:6188
 msgid "Grandchildren Appearance"
-msgstr "Erscheinungsbild der Enkelelemente"
+msgstr "Aspetto Elementi dei Nipoti"
 
 #: settings/settings.ui:6257
 msgid "Thickness"
-msgstr "Breite"
+msgstr "Spessore"
 
 #: settings/settings.ui:6316
 msgid "Pick Trace Color"
-msgstr "Farbe der Verbindungslinien wählen"
+msgstr "Scegli Colore Traccia"
 
 #: settings/settings.ui:6394 settings/settings.ui:6458
 msgid "Trace Appearance"
-msgstr "Erscheinungsbild der Verbindungslinien"
+msgstr "Aspetto della Traccia"
 
 #: settings/settings.ui:6410
 msgid "The trace is the connecting line between selected menu items."
-msgstr "Verbindungslinien werden zwischen gewählten Menüeinträgen gezeichnet."
+msgstr "La traccia è la linea di collegamento tra le voci di menu selezionate."
 
 #: settings/settings.ui:6436
 msgid "Minimum Segment Length"
-msgstr "Minimallänge der Verbindungslinien"
+msgstr "Lunghezza Minima del Segmento"
 
 #: settings/settings.ui:6498
 msgid "Minimum Stroke Angle"
-msgstr "Minimaler Gestenwinkel"
+msgstr "Angolo Gesto Minimo"
 
 #: settings/settings.ui:6510
 msgid "Smaller turns will not lead to selections."
-msgstr "Geringere Richtungsänderungen führen nicht zu Selektionen."
+msgstr "Le svolte più piccole non porteranno a selezioni."
 
 #: settings/settings.ui:6583
 msgid "Minimum Stroke Length"
-msgstr "Minimale Gestenlänge"
+msgstr "Lunghezza Minima Gesto"
 
 #: settings/settings.ui:6595
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
-"Kürzere Gesten führen nicht zu Selektionen.\n"
-"Diese Länge wird mit der globalen Skalierung multipliziert."
+"Gesti più brevi non porteranno a selezioni.\n"
+"Questo viene moltiplicato per il valore della Scala Globale."
 
 #: settings/settings.ui:6670
 msgid "Jitter Threshold"
-msgstr "Zitter-Grenzwert"
+msgstr "Soglia di jitter"
 
 #: settings/settings.ui:6682
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
-"Kleinere Bewegungen werde bei der Gestenerkennung ignoriert.\n"
-"Dieser Wert wird mit der globalen Skalierung multipliziert."
+"Non saranno presi in considerazione i movimenti più piccoli.\n"
+"Questo viene moltiplicato per il valore della Scala Globale."
 
 #: settings/settings.ui:6756
 msgid "Selection Timeout"
-msgstr "Selektions-Timeout"
+msgstr "Timeout di Selezione"
 
 #: settings/settings.ui:6768
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
 msgstr ""
-"Wenn Sie in Ihrer Geste mindestens so viele Millisekunden\n"
-"zögern, wird das aktive Element ausgewählt."
+"Se il puntatore è fermo per questo molti millisecondi, \n"
+"l'elemento corrente verrà selezionato."
 
 #: settings/settings.ui:6854
 msgid "Show Screencast Mouse"
-msgstr "Screencast-Maus anzeigen"
+msgstr "Mostra Screencast del Mouse"
 
 #: settings/settings.ui:6866
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
 msgstr ""
-"Zeigt einen großen, zusätzlichen Mauszeiger an. Sie können\n"
-"ihn verwenden, wenn Sie Videos von Fly-Pie zu erstellen."
+"Mostra un grande puntatore del mouse aggiuntivo che visualizza i clic del "
+"mouse.\n"
+"Questo può essere usato se vuoi catturare un video di Fly-Pie."
 
 #: settings/settings.ui:6926 settings/settings.ui:6977
 msgid "Advanced Settings"
-msgstr "Erweiterte Einstellungen"
+msgstr "Impostazioni Avanzate"
 
 #: settings/settings.ui:6942
 msgid "These settings are independent of the presets."
-msgstr "Das wird nicht von den Voreinstellungen beeinflusst."
+msgstr "Questo non è influenzato dai predefiniti."
 
 #. Caption of one of the main pages.
 #: settings/settings.ui:6996
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr "Impostazioni"
 
 #: settings/settings.ui:7054
 msgid "Opens a preview for the selected menu."
-msgstr "Zeigt eine Vorschau für das gewählte Menü."
+msgstr "Apre un'anteprima per il menu selezionato."
 
 #: settings/settings.ui:7102
 msgid "Imports a menu configuration."
-msgstr "Importiert eine Menükonfiguration."
+msgstr "Importa una configurazione del menu."
 
 #: settings/settings.ui:7123
 msgid "Exports the current menu configuration."
-msgstr "Exportiert die aktuelle Menükonfiguration."
+msgstr "Esporta la configurazione del menu corrente."
 
 #: settings/settings.ui:7194
 msgid "Removes the selected item."
-msgstr "Löscht das aktive Menüelement."
+msgstr "Rimuove l'elemento selezionato."
 
 #: settings/settings.ui:7282 settings/settings.ui:7319
 msgid "Name"
-msgstr "Name"
+msgstr "Nome"
 
 #: settings/settings.ui:7317 settings/settings.ui:7318
 #: settings/settings.ui:7416 settings/settings.ui:7417
 msgid "Insert Emoji"
-msgstr "Emoji einfügen"
+msgstr "Inserisci Emoji"
 
 #: settings/settings.ui:7352 settings/settings.ui:7418
 msgid "Icon"
-msgstr "Symbol"
+msgstr "Icona"
 
 #: settings/settings.ui:7365
 msgid "Can be an icon name, text, emoji or a file."
-msgstr "Symbolname, Text, Emoji oder Datei."
+msgstr "Può essere il nome di un'icona, testo, emoji o un file."
 
 #: settings/settings.ui:7467 settings/MenuEditor.js:360
 msgid "Fixed Angle"
-msgstr "Fester Winkel"
+msgstr "Angolo Fisso"
 
 #: settings/settings.ui:7480
 msgid "See tooltip for details."
-msgstr "Weitere Details im Tooltip."
+msgstr "Vedere dettagli nella descrizione del comando."
 
 #: settings/settings.ui:7503
 msgid ""
@@ -739,35 +735,35 @@ msgid ""
 "\n"
 "<b>Use -1 to disable this feature</b>."
 msgstr ""
-"Feste Winkel können verwendet werden, um sicherzustellen, dass Menüeinträge "
-"ihre Position nicht ändern, wenn andere Einträge hinzugefügt oder gelöscht "
-"werden. Dadurch können Sie ein Menü editieren, auch wenn bestimmte Einträge "
-"schon in Ihr \"Muskelgedächtnis\" übergegangen sind.\n"
+"È possibile utilizzare angoli fissi per garantire che un elemento rimanga "
+"nella stessa posizione anche se vengono aggiunti o rimossi altri elementi. "
+"In questo modo puoi modificare un menu anche se i tuoi muscoli hanno già "
+"imparato la direzione dell'elemento.\n"
 "\n"
-"Allerdings gibt es eine <b>Einschränkung</b>: Innerhalb eines Menüs müssen "
-"die festen Winkel monoton steigen - das heißt jeder feste Winkel muss größer "
-"als seine Vorgänger sein.\n"
+"Tuttavia, esiste una <b>restrizione</b> sugli angoli fissi. All'interno di "
+"un menu gli angoli fissi devono essere monotonicamente crescenti, ovvero "
+"ogni angolo fisso deve essere maggiore di ogni angolo fisso precedente.\n"
 "\n"
-"Um solche Probleme zu vermeiden, <b>wird der feste Winkel eines Eintrags "
-"zurückgesetzt</b>, wenn es an eine andere Stelle im Menü verschoben wird.\n"
+"Per evitare comportamenti strani, <b>gli angoli fissi verranno rimossi</b> "
+"se un elemento viene trascinato in un'altra posizione nel menu.\n"
 "\n"
-"<b>Setzen Sie den festen Winkel auf -1, um ihn nicht zu verwenden</b>."
+"<b>Utilizza -1 per disabilitare questa funzione</b>."
 
 #: settings/settings.ui:7554 settings/settings.ui:7617
 msgid "Command"
-msgstr "Kommando"
+msgstr "Comando"
 
 #: settings/settings.ui:7567
 msgid "Use the button to list installed apps!"
-msgstr "Die Schaltfläche zeigt installierte Apps!"
+msgstr "Usa il pulsante per elencare le app installate!"
 
 #: settings/settings.ui:7667 settings/settings.ui:7730
 msgid "File"
-msgstr "Datei"
+msgstr "File"
 
 #: settings/settings.ui:7680 settings/settings.ui:7793
 msgid "It will be opened with the default app."
-msgstr "Geöffnet mit der Standardanwendung."
+msgstr "Verrà aperto con l'app predefinita."
 
 #: settings/settings.ui:7780 settings/settings.ui:7816
 msgid "URI"
@@ -775,205 +771,205 @@ msgstr "URI"
 
 #: settings/settings.ui:7856 settings/settings.ui:7892
 msgid "Text"
-msgstr "Text"
+msgstr "Testo"
 
 #: settings/settings.ui:7869
 msgid "This text will be inserted."
-msgstr "Dieser Textwird eingefügt."
+msgstr "Questo testo verrà inserito."
 
 #: settings/settings.ui:7932 settings/settings.ui:7968
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #: settings/settings.ui:7945
 msgid "This will be passed to the D-Bus signal."
-msgstr "Das wird dem D-Bus Signal übergeben."
+msgstr ""
 
 #: settings/settings.ui:8008
 msgid "Max Item Count"
-msgstr "Max. Elementanzahl"
+msgstr "Numero massimo Elementi"
 
 #: settings/settings.ui:8021
 msgid "Limits the number of children."
-msgstr "Limitiert die Anzahl an Kindelementen."
+msgstr "Limita il numero di figli."
 
 #: settings/settings.ui:8088 settings/settings.ui:8197
 msgid "Shortcut"
-msgstr "Tastaturkürzel"
+msgstr "Collegamento"
 
 #: settings/settings.ui:8101
 msgid "This shortcut will be simulated."
-msgstr "Dieses Tastaturkürzel wird simuliert."
+msgstr "Questo collegamento verrà simulato."
 
 #: settings/settings.ui:8210
 msgid "This will open the menu."
-msgstr "Dadurch wird das Menü geöffnet."
+msgstr "Questo aprirà il menu."
 
 #: settings/settings.ui:8284
 msgid "Open in Screen Center"
-msgstr "In der Bildschirmmitte öffnen"
+msgstr "Apri al Centro dello Schermo"
 
 #. Caption of one of the main pages.
 #: settings/settings.ui:8378
 msgid "Menu Editor"
-msgstr "Menü-Editor"
+msgstr "Menu Editore"
 
 #. Caption of one of the main pages.
 #: settings/settings.ui:8455
 msgid "Achievements"
-msgstr "Erfolge"
+msgstr "Premi"
 
 #: daemon/Background.js:90
 msgid "Close"
-msgstr "Schließen"
+msgstr "Chiudi"
 
 #: daemon/Background.js:94
 msgid "Flip Side"
-msgstr "Seite wechseln"
+msgstr "Cambia Lato"
 
 #: settings/DefaultMenu.js:27 settings/ExampleMenu.js:26
 msgid "Example Menu"
-msgstr "Beispiel-Menü"
+msgstr "Menu Esempio"
 
 #: settings/DefaultMenu.js:34
 msgid "Sound"
-msgstr "Audio"
+msgstr "Suono"
 
 #: settings/DefaultMenu.js:38
 msgid "Play / Pause"
-msgstr "Play / Pause"
+msgstr "Avvia / Pausa"
 
 #: settings/DefaultMenu.js:44
 msgid "Mute"
-msgstr "Stummschalten"
+msgstr "Muto"
 
 #: settings/DefaultMenu.js:50
 msgid "Next Title"
-msgstr "Nächster Titel"
+msgstr "Titolo Successivo"
 
 #: settings/DefaultMenu.js:57
 msgid "Previous Title"
-msgstr "Vorheriger Titel"
+msgstr "Titolo Precedente"
 
 #: settings/DefaultMenu.js:66
 msgid "Window Management"
-msgstr "Fensterverwaltung"
+msgstr "Gestione Finestre"
 
 #: settings/DefaultMenu.js:70
 msgid "Maximize Window"
-msgstr "Fenster maximieren"
+msgstr "Ingrandisci Finestra"
 
 #: settings/DefaultMenu.js:76
 msgid "Gnome Shell"
-msgstr "GNOME Shell"
+msgstr "Gnome Shell"
 
 #: settings/DefaultMenu.js:80 settings/ExampleMenu.js:243
 msgid "Up"
-msgstr "Hoch"
+msgstr "Su"
 
 #: settings/DefaultMenu.js:87
 msgid "Overview"
-msgstr "Übersicht"
+msgstr "Panoramica"
 
 #: settings/DefaultMenu.js:93 settings/ExampleMenu.js:246
 msgid "Down"
-msgstr "Runter"
+msgstr "Giù"
 
 #: settings/DefaultMenu.js:100
 msgid "Show Apps"
-msgstr "Programme anzeigen"
+msgstr "Mostra App"
 
 #: settings/DefaultMenu.js:108
 msgid "Open Windows"
-msgstr "Geöffnete Fenster"
+msgstr "Apri Finestra"
 
 #: settings/DefaultMenu.js:113
 msgid "Close Window"
-msgstr "Fenster schließen"
+msgstr "Chiudi Finestra"
 
 #: settings/DefaultMenu.js:121 common/menus/Bookmarks.js:26
 msgid "Bookmarks"
-msgstr "Lesezeichen"
+msgstr "Segnalibri"
 
 #: settings/DefaultMenu.js:126
 msgid "Fly-Pie Settings"
-msgstr "Fly-Pie-Einstellungen"
+msgstr "Impostazioni di Fly-Pie"
 
 #: settings/DefaultMenu.js:131 common/menus/Favorites.js:36
 msgid "Favorites"
-msgstr "Favoriten"
+msgstr "Preferiti"
 
 #: settings/DefaultMenu.js:132 common/menus/System.js:39
 msgid "System"
-msgstr "System"
+msgstr "Sistema"
 
 #: settings/ExampleMenu.js:28
 msgid "Animals & Nature"
-msgstr "Tiere & Natur"
+msgstr "Animali & Natura"
 
 #: settings/ExampleMenu.js:32
 msgid "Flowers"
-msgstr "Blumen"
+msgstr "Fiori"
 
 #: settings/ExampleMenu.js:35
 msgid "Tulip"
-msgstr "Tulpe"
+msgstr "Tulipano"
 
 #: settings/ExampleMenu.js:36
 msgid "Rose"
-msgstr "Rose"
+msgstr "Rosa"
 
 #: settings/ExampleMenu.js:37
 msgid "Sunflower"
-msgstr "Sonnenblume"
+msgstr "Girasole"
 
 #: settings/ExampleMenu.js:38
 msgid "Blossom"
-msgstr "Blüte"
+msgstr "Fioritura"
 
 #: settings/ExampleMenu.js:39
 msgid "Bouquet"
-msgstr "Blumenstrauß"
+msgstr "Mazzo di fiori"
 
 #: settings/ExampleMenu.js:43
 msgid "Mammals"
-msgstr "Säugetiere"
+msgstr "Mammiferi"
 
 #: settings/ExampleMenu.js:46
 msgid "Cat"
-msgstr "Katze"
+msgstr "Gatto"
 
 #: settings/ExampleMenu.js:47
 msgid "Ox"
-msgstr "Ochse"
+msgstr "Bue"
 
 #: settings/ExampleMenu.js:48
 msgid "Dog"
-msgstr "Hund"
+msgstr "Cane"
 
 #: settings/ExampleMenu.js:49
 msgid "Pig"
-msgstr "Schwein"
+msgstr "Maiale"
 
 #: settings/ExampleMenu.js:50
 msgid "Monkey"
-msgstr "Affe"
+msgstr "Scimmia"
 
 #: settings/ExampleMenu.js:54
 msgid "Reptiles"
-msgstr "Reptilien"
+msgstr "Rettili"
 
 #: settings/ExampleMenu.js:57
 msgid "Crocodile"
-msgstr "Krokodil"
+msgstr "Coccodrillo"
 
 #: settings/ExampleMenu.js:58
 msgid "Snake"
-msgstr "Schlange"
+msgstr "Serpente"
 
 #: settings/ExampleMenu.js:59
 msgid "Turtle"
-msgstr "Schildkröte"
+msgstr "Tartaruga"
 
 #: settings/ExampleMenu.js:60
 msgid "T-Rex"
@@ -985,47 +981,47 @@ msgstr "Apatosaurus"
 
 #: settings/ExampleMenu.js:67
 msgid "Food & Drink"
-msgstr "Essen & Getränke"
+msgstr "Cibo & Bevande"
 
 #: settings/ExampleMenu.js:71
 msgid "Fruit"
-msgstr "Früchte"
+msgstr "Frutta"
 
 #: settings/ExampleMenu.js:74
 msgid "Apple"
-msgstr "Apfel"
+msgstr "Mela"
 
 #: settings/ExampleMenu.js:75
 msgid "Watermelon"
-msgstr "Wassermelone"
+msgstr "Anguria"
 
 #: settings/ExampleMenu.js:76
 msgid "Lemon"
-msgstr "Zitrone"
+msgstr "Limone"
 
 #: settings/ExampleMenu.js:77
 msgid "Banana"
-msgstr "Banane"
+msgstr "Banana"
 
 #: settings/ExampleMenu.js:78
 msgid "Strawberry"
-msgstr "Erdbeere"
+msgstr "fragola"
 
 #: settings/ExampleMenu.js:82
 msgid "Drink"
-msgstr "Getränke"
+msgstr "Bevanda"
 
 #: settings/ExampleMenu.js:85
 msgid "Tea"
-msgstr "Tee"
+msgstr "Tè"
 
 #: settings/ExampleMenu.js:86
 msgid "Coffee"
-msgstr "Kaffee"
+msgstr "Caffè"
 
 #: settings/ExampleMenu.js:87
 msgid "Beer"
-msgstr "Bier"
+msgstr "Birra"
 
 #: settings/ExampleMenu.js:88
 msgid "Whiskey"
@@ -1037,41 +1033,41 @@ msgstr "Cocktail"
 
 #: settings/ExampleMenu.js:93
 msgid "Sweets"
-msgstr "Süßigkeiten"
+msgstr "Dolci"
 
 #. Translators: This is the item which should be selected in the tutorial.
 #. Make sure the translation matches the name given in the tutorial!
 #: settings/ExampleMenu.js:98
 msgid "Shortcake"
-msgstr "Törtchen"
+msgstr "Tortine"
 
 #: settings/ExampleMenu.js:99
 msgid "Candy"
-msgstr "Bonbon"
+msgstr "Caramella"
 
 #: settings/ExampleMenu.js:100
 msgid "Doughnut"
-msgstr "Doughnut"
+msgstr "Ciambella"
 
 #: settings/ExampleMenu.js:101
 msgid "Cookie"
-msgstr "Keks"
+msgstr "Biscotto"
 
 #: settings/ExampleMenu.js:102
 msgid "Chocolate"
-msgstr "Schokolade"
+msgstr "Cioccolato"
 
 #: settings/ExampleMenu.js:108
 msgid "Activities"
-msgstr "Aktivitäten"
+msgstr "Attività"
 
 #: settings/ExampleMenu.js:112
 msgid "Games"
-msgstr "Spiele"
+msgstr "Giochi"
 
 #: settings/ExampleMenu.js:115
 msgid "Billards"
-msgstr "Billard"
+msgstr "Biliardo"
 
 #: settings/ExampleMenu.js:116
 msgid "Mahjong"
@@ -1083,11 +1079,11 @@ msgstr "Bowling"
 
 #: settings/ExampleMenu.js:118
 msgid "Darts"
-msgstr "Dart"
+msgstr "Freccette"
 
 #: settings/ExampleMenu.js:119
 msgid "Video Game"
-msgstr "Computerspiel"
+msgstr "Video Gioco"
 
 #: settings/ExampleMenu.js:123
 msgid "Sports"
@@ -1099,7 +1095,7 @@ msgstr "Cricket"
 
 #: settings/ExampleMenu.js:127
 msgid "Ice Hockey"
-msgstr "Icehockey"
+msgstr "Hockey su Ghiaccio"
 
 #: settings/ExampleMenu.js:128
 msgid "Tennis"
@@ -1107,31 +1103,31 @@ msgstr "Tennis"
 
 #: settings/ExampleMenu.js:129
 msgid "Fishing"
-msgstr "Angeln"
+msgstr "Pesca"
 
 #: settings/ExampleMenu.js:130
 msgid "Skiing"
-msgstr "Skifahren"
+msgstr "Sci"
 
 #: settings/ExampleMenu.js:134
 msgid "Places"
-msgstr "Orte"
+msgstr "Luoghi"
 
 #: settings/ExampleMenu.js:137
 msgid "Mount Fuji"
-msgstr "Fuji"
+msgstr "Monte Fuji"
 
 #: settings/ExampleMenu.js:138
 msgid "Mount Etna"
-msgstr "Ätna"
+msgstr "Monte Etna"
 
 #: settings/ExampleMenu.js:139
 msgid "Statue of Liberty"
-msgstr "Freiheitsstatue"
+msgstr "Statua della Libertà"
 
 #: settings/ExampleMenu.js:140
 msgid "Japan"
-msgstr "Japan"
+msgstr "Giappone"
 
 #: settings/ExampleMenu.js:141
 msgid "Moyai"
@@ -1139,11 +1135,11 @@ msgstr "Moyai"
 
 #: settings/ExampleMenu.js:147
 msgid "Objects"
-msgstr "Gegenstände"
+msgstr "Oggetti"
 
 #: settings/ExampleMenu.js:151
 msgid "Cars"
-msgstr "Autos"
+msgstr "Macchine"
 
 #: settings/ExampleMenu.js:154
 msgid "Bus"
@@ -1151,67 +1147,67 @@ msgstr "Bus"
 
 #: settings/ExampleMenu.js:155
 msgid "Fire Engine"
-msgstr "Feuerwehr"
+msgstr "Autopompa Antincendio"
 
 #: settings/ExampleMenu.js:156
 msgid "Automobile"
-msgstr "PKW"
+msgstr "Automobile"
 
 #: settings/ExampleMenu.js:157
 msgid "Tractor"
-msgstr "Traktor"
+msgstr "Trattore"
 
 #: settings/ExampleMenu.js:158
 msgid "Truck"
-msgstr "LKW"
+msgstr "Camion"
 
 #: settings/ExampleMenu.js:162
 msgid "Buildings"
-msgstr "Gebäude"
+msgstr "Edifici"
 
 #: settings/ExampleMenu.js:165
 msgid "Post Office"
-msgstr "Post"
+msgstr "Ufficio Postale"
 
 #: settings/ExampleMenu.js:166
 msgid "School"
-msgstr "Schule"
+msgstr "Scuola"
 
 #: settings/ExampleMenu.js:167
 msgid "Hospital"
-msgstr "Krankenhaus"
+msgstr "Ospedale"
 
 #: settings/ExampleMenu.js:168
 msgid "Bank"
-msgstr "Bank"
+msgstr "Banca"
 
 #: settings/ExampleMenu.js:169
 msgid "Love Hotel"
-msgstr "Liebeshotel"
+msgstr "Love Hotel"
 
 #: settings/ExampleMenu.js:173
 msgid "Instruments"
-msgstr "Instrumente"
+msgstr "Strumenti"
 
 #: settings/ExampleMenu.js:176
 msgid "Saxophone"
-msgstr "Saxophon"
+msgstr "Sassofono"
 
 #: settings/ExampleMenu.js:177
 msgid "Guitar"
-msgstr "Gitarre"
+msgstr "Chitarra"
 
 #: settings/ExampleMenu.js:178
 msgid "Trumpet"
-msgstr "Trompete"
+msgstr "Tromba"
 
 #: settings/ExampleMenu.js:179
 msgid "Microphone"
-msgstr "Mikrofon"
+msgstr "Microfono"
 
 #: settings/ExampleMenu.js:180
 msgid "Drum"
-msgstr "Trommel"
+msgstr "Tamburo"
 
 #: settings/ExampleMenu.js:186
 msgid "Smileys"
@@ -1219,7 +1215,7 @@ msgstr "Smileys"
 
 #: settings/ExampleMenu.js:190
 msgid "Happy Faces"
-msgstr "Fröhliche Smileys"
+msgstr "Facce Felici"
 
 #: settings/ExampleMenu.js:193
 msgid "Smiley"
@@ -1227,15 +1223,15 @@ msgstr "Smiley"
 
 #: settings/ExampleMenu.js:194
 msgid "Winking Face"
-msgstr "Zwinkernd"
+msgstr "Faccia Ammiccante"
 
 #: settings/ExampleMenu.js:195
 msgid "Face With Smiling Eyes"
-msgstr "Lachende Augen"
+msgstr "Faccia Con Occhi Sorridenti"
 
 #: settings/ExampleMenu.js:196
 msgid "Face With Sweat"
-msgstr "Schwitzend"
+msgstr "Faccia Con Il Sudore"
 
 #: settings/ExampleMenu.js:197
 msgid "ROFL"
@@ -1243,282 +1239,281 @@ msgstr "ROFL"
 
 #: settings/ExampleMenu.js:201
 msgid "Angry Faces"
-msgstr "Wütende Smileys"
+msgstr "Facce Arrabbiate"
 
 #: settings/ExampleMenu.js:204
 msgid "Vomiting Face"
-msgstr "Kotzend"
+msgstr "Faccia che Vomita"
 
 #: settings/ExampleMenu.js:205
 msgid "Skeptical Face"
-msgstr "Skeptisch"
+msgstr "Faccia Scettica"
 
 #: settings/ExampleMenu.js:206
 msgid "Pouting Face"
-msgstr "Schmollend"
+msgstr "Faccia Imbronciata"
 
 #: settings/ExampleMenu.js:207
 msgid "Angry Face"
-msgstr "Wütend"
+msgstr "Faccia Arrabbiata"
 
 #: settings/ExampleMenu.js:208
 msgid "Very Angry Face"
-msgstr "Sehr wütend"
+msgstr "Faccia Molto Arrabbiata"
 
 #: settings/ExampleMenu.js:212
 msgid "Surprised Faces"
-msgstr "Überraschte Smileys"
+msgstr "Facce Sorprese"
 
 #: settings/ExampleMenu.js:215
 msgid "Flushed Face"
-msgstr "Errötend"
+msgstr "Faccia arrossata"
 
 #: settings/ExampleMenu.js:216
 msgid "Anguished Face"
-msgstr "Schmerzgeplagt"
+msgstr "Faccia Angosciata"
 
 #: settings/ExampleMenu.js:217
 msgid "Astonished Face"
-msgstr "Verblüfft"
+msgstr "Faccia Stupita"
 
 #: settings/ExampleMenu.js:218
 msgid "Screaming Face"
-msgstr "Schreiend"
+msgstr "Faccia Urlante"
 
 #: settings/ExampleMenu.js:219
 msgid "Pouff"
-msgstr "Puff"
+msgstr "Sbuffo"
 
 #: settings/ExampleMenu.js:225
 msgid "Symbols"
-msgstr "Symbole"
+msgstr "Simboli"
 
 #: settings/ExampleMenu.js:229
 msgid "Star Signs"
-msgstr "Sternzeichen"
+msgstr "Segni Zodiacali"
 
 #: settings/ExampleMenu.js:232
 msgid "Taurus"
-msgstr "Stier"
+msgstr "Toro"
 
 #: settings/ExampleMenu.js:233
 msgid "Cancer"
-msgstr "Krebs"
+msgstr "Cancro"
 
 #: settings/ExampleMenu.js:234
 msgid "Virgo"
-msgstr "Jungfrau"
+msgstr "Vergine"
 
 #: settings/ExampleMenu.js:235
 msgid "Scorpius"
-msgstr "Skorpion"
+msgstr "Scorpione"
 
 #: settings/ExampleMenu.js:236
 msgid "Capricorn"
-msgstr "Steinbock"
+msgstr "Capricorno"
 
 #: settings/ExampleMenu.js:240
 msgid "Arrows"
-msgstr "Pfeile"
+msgstr "Frecce"
 
 #: settings/ExampleMenu.js:244
 msgid "Right"
-msgstr "Rechts"
+msgstr "Destra"
 
 #: settings/ExampleMenu.js:245
 msgid "Twisted"
-msgstr "Verschlungen"
+msgstr "Contorto"
 
 #: settings/ExampleMenu.js:247
 msgid "Left"
-msgstr "Links"
+msgstr "Sinistra"
 
 #: settings/ExampleMenu.js:251
 msgid "Info Signs"
-msgstr "Infozeichen"
+msgstr "Segni Informativi"
 
 #: settings/ExampleMenu.js:254
 msgid "Litter Bin"
-msgstr "Mülleimer"
+msgstr "Cestino"
 
 #: settings/ExampleMenu.js:255
 msgid "Potable Water"
-msgstr "Trinkwasser"
+msgstr "Acqua Potabile"
 
 #: settings/ExampleMenu.js:256
 msgid "Mens"
-msgstr "Herren"
+msgstr "Uomini"
 
 #: settings/ExampleMenu.js:257
 msgid "Womens"
-msgstr "Damen"
+msgstr "Donne"
 
 #: settings/ExampleMenu.js:258
 msgid "Baby"
-msgstr "Baby"
+msgstr "Bambino"
 
 #: settings/MenuEditor.js:210
 msgid "Export Menu Configuration"
-msgstr "Menükonfiguration exportieren"
+msgstr "Esporta Configurazione del Menu"
 
 #: settings/MenuEditor.js:219 settings/MenuEditor.js:281
 #: settings/Settings.js:350
 msgid "JSON Files"
-msgstr "JSON-Dateien"
+msgstr "File JSON"
 
 #: settings/MenuEditor.js:226 settings/MenuEditor.js:288
 #: settings/Settings.js:357
 msgid "All Files"
-msgstr "Alle Dateien"
+msgstr "Tutti i File"
 
 #: settings/MenuEditor.js:230 settings/MenuEditor.js:292
 #: settings/Settings.js:361
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Cancella"
 
 #: settings/MenuEditor.js:231
 msgid "Export"
-msgstr "Exportieren"
+msgstr "Esporta"
 
 #: settings/MenuEditor.js:256
 msgid "Failed to export the menu configuration!"
-msgstr "Exportieren der Menükonfiguration ist fehlgeschlagen!"
+msgstr "Impossibile esportare la configurazione del menu!"
 
 #: settings/MenuEditor.js:273
 msgid "Import Menu Configuration"
-msgstr "Menükonfiguration importieren"
+msgstr "Importa Configurazione  del Menu"
 
 #: settings/MenuEditor.js:293
 msgid "Import"
-msgstr "Importieren"
+msgstr "Importa"
 
 #: settings/MenuEditor.js:315
 msgid "Failed to import menu configuration!"
-msgstr "Importieren der Menükonfiguration ist fehlgeschlagen!"
+msgstr "Impossibile importare la configurazione del menu!"
 
 #: settings/MenuEditor.js:345
 msgid "Menu Structure"
-msgstr "Menüstruktur"
+msgstr "Struttura del Menu"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: settings/MenuEditor.js:1013 settings/MenuEditor.js:1042
 #: settings/MenuEditor.js:1263 settings/MenuEditor.js:1282
 msgid "Not bound."
-msgstr "Deaktiviert."
+msgstr ""
 
 #: settings/MenuEditor.js:1030
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
-"Drücken Sie eine Tastenkombination!\n"
-"ESC um abzubrechen, Rücktaste zum Deaktivieren"
 
 #: settings/MenuEditor.js:1092
 msgid "You should try to have no more than twelve items in your menus."
-msgstr ""
-"Sie sollten versuchen, nicht mehr als zwölf Einträge in einem Menü zu haben."
+msgstr "Dovresti provare a non avere più di dodici voci nei tuoi menu."
 
 #: settings/MenuEditor.js:1093
 msgid ""
 "You will find it more easy to learn item positions if you have an even "
 "number of entries. Four, six and eight are good numbers."
 msgstr ""
-"Sie werden merken, dass es einfacher ist, sich Positionen in Menüs mit einer "
-"geraden Anzahl an Elementen zu merken. Vier, sechs und acht sind gute Zahlen."
+"Troverai più facile imparare le posizioni degli oggetti se hai un numero "
+"pari di voci. Quattro, sei e otto sono buoni numeri."
 
 #: settings/MenuEditor.js:1094
 msgid ""
 "The source code of Fly-Pie is available on <a href=\"https://github.com/"
 "Schneegans/Fly-Pie\">Github</a>."
 msgstr ""
-"Der Quellcode von Fly-Pie ist auf <a href=\"https://github.com/Schneegans/"
-"Fly-Pie\">Github</a> verfübar."
+"Il codice sorgente di Fly-Pie è disponibile su a href=\"https://github.com/"
+"Schneegans/Fly-Pie\">Github</a>."
 
 #: settings/MenuEditor.js:1095
 msgid ""
 "Suggestions can be posted on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
 msgstr ""
-"Verbesserungsvorschläge können auf <a href=\"https://github.com/Schneegans/"
-"Fly-Pie/issues\">Github</a> diskutiert werden."
+"I suggerimenti possono essere pubblicati su <a href=\"https://github.com/"
+"Schneegans/Fly-Pie/issues\">Github</a>."
 
 #: settings/MenuEditor.js:1096
 msgid ""
 "Bugs can be reported on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
 msgstr ""
-"Fehler können auf <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
-"\">Github</a> gemeldet werden."
+"È possibile segnalare bug su <a href=\"https://github.com/Schneegans/Fly-Pie/"
+"issues\">Github</a>."
 
 #: settings/MenuEditor.js:1097
+#, fuzzy
 msgid "Deep hierarchies are pretty efficient. Put menus into menus in menus!"
 msgstr ""
-"Tiefe Hierarchien sind ziemlich effizient! Packen Sie Menüs in Menüs in "
-"Menüs!"
+"Le gerarchie profonde sono piuttosto efficienti. Metti sottomenu dentro "
+"sottomenu in sottomenu!"
 
 #: settings/MenuEditor.js:1098
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
 msgstr ""
-"Wenn Sie alle Menüs löschen, sich aus- und wieder einloggen, wird die "
-"Beispielkonfiguration wiederhergestellt."
+"Se elimini tutti i menu, esci e accedi di nuovo, verrà ripristinata la "
+"configurazione predefinita."
 
 #: settings/MenuEditor.js:1099
 msgid "You can reorder the menu items on the left via drag and drop."
-msgstr "Menüeinträge können in der Liste mit der Maus verschoben werden."
+msgstr ""
+"È possibile riordinare le voci di menu a sinistra tramite trascinamento."
 
 #: settings/MenuEditor.js:1100
 msgid ""
 "You can drop directories, files, links and desktop files to the menu "
 "hierarchy on the left."
 msgstr ""
-"Sie können Verzeichnisse, Dateien, Links oder Anwendungsstarter in die Liste "
-"auf der linken Seite ziehen."
+"È possibile trascinare directory, file, collegamenti e file desktop nella "
+"gerarchia dei menu a sinistra."
 
 #: settings/MenuEditor.js:1101
 msgid ""
 "You can copy menu items by holding the Control key while dragging them to "
 "another location."
 msgstr ""
-"Sie können Menüeinträge kopieren indem Sie die Strg-Taste während des "
-"Verschiebens gedrückt halten."
+"Puoi copiare le voci di menu tenendo premuto il tasto Control mentre le "
+"trascini in un'altra posizione."
 
 #: settings/MenuEditor.js:1186
 msgid "Do you really want to delete the selected item?"
-msgstr "Möchten Sie das gewählte Element wirklich löschen?"
+msgstr "Vuoi davvero eliminare l'elemento selezionato?"
 
 #: settings/MenuEditor.js:1187
 msgid "This cannot be undone!"
-msgstr "Das kann nicht rückgängig gemacht werden!"
+msgstr "Questo non può essere annullato!"
 
 #: settings/Settings.js:341
 msgid "Save Preset"
-msgstr "Voreinstellung speichern"
+msgstr "Salva Predefinito"
 
 #: settings/Settings.js:362
 msgid "Save"
-msgstr "Speichern"
+msgstr "Salva"
 
 #: settings/Tutorial.js:145
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
-msgstr "<big>Letzte Auswahlzeit: <b>%d ms</b></big>"
+msgstr "<big>Ora dell'ultima selezione:<b>%d ms</b></big>"
 
 #: settings/Tutorial.js:149
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
-msgstr "<big>Beste Auswahlzeit: <b>%d ms</b></big>"
+msgstr "<big>Miglior tempo di selezione: <b>%d ms</b></big>"
 
 #: common/actions/Command.js:26
 msgid "Launch Application"
-msgstr "Anwendung starten"
+msgstr "Avvia Applicazione"
 
 #. Translators: Please keep this short.
 #: common/actions/Command.js:29
 msgid "Runs any shell command."
-msgstr "Führt einen beliebigen Kommandozeilenbefehl aus."
+msgstr "Esegue qualsiasi comando di shell."
 
 #: common/actions/Command.js:31
 msgid ""
@@ -1526,17 +1521,17 @@ msgid ""
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
 msgstr ""
-"Die <b>Anwendung-starten</b>-Aktion führt den gegebenen Kommandozeilenbefehl "
-"aus. Das ist hauptsächlich zum Starten von Anwendungen gedacht, kann aber "
-"auch in vielen anderen Szenarios verwendet werden."
+"L'azione<b>Avvia applicazione</b> esegue qualsiasi comando dato. Viene "
+"utilizzato principalmente per aprire le applicazioni, ma può avere anche "
+"molti altri casi d'uso."
 
 #: common/actions/DBusSignal.js:23
 msgid "D-Bus Signal"
-msgstr "D-Bus Signal"
+msgstr ""
 
 #: common/actions/DBusSignal.js:25
 msgid "Emits a D-Bus signal."
-msgstr "Löst ein D-Bus Signal aus."
+msgstr ""
 
 #: common/actions/DBusSignal.js:27
 msgid ""
@@ -1545,36 +1540,35 @@ msgid ""
 "listen on the D-Bus for its activation</a>. This can be very useful in "
 "custom menus opened via the command line."
 msgstr ""
-"Die <b>D-Bus-Signal</b>-Aktion macht erst einmal nichts. Allerdings können "
-"Sie <a href=\"https://github.com/Schneegans/Fly-Pie#fly-pies-d-bus-interface"
-"\">von ihrer Auswahl über den D-Bus erfahren</a>. Das kann sehr nützlich in "
-"Verbindung mit Menüs sein, die Sie über die Kommandozeile geöffnet haben."
 
 #: common/actions/File.js:26
 msgid "Open File"
-msgstr "Datei öffnen"
+msgstr "Apri File"
 
 #. Translators: Please keep this short.
 #: common/actions/File.js:29
+#, fuzzy
 msgid "Opens a file with the default application."
-msgstr "Öffnet eine Datei mit der Standardanwendung."
+msgstr "Apre un file con le applicazioni predefinite."
 
 #: common/actions/File.js:31
+#, fuzzy
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
-"Die <b>Datei-öffnen</b> -Aktion öffnet die gegebene Datei mit der "
-"dazugehörigen Standardanwendung."
+"L'azione <b>Apri file</b> aprirà il file sopra specificato con "
+"l'applicazione predefinita del tuo sistema."
 
 #: common/actions/InsertText.js:37
 msgid "Insert Text"
-msgstr "Text einfügen"
+msgstr "Inserisci Testo"
 
 #. Translators: Please keep this short.
 #: common/actions/InsertText.js:40
+#, fuzzy
 msgid "Types some text automatically."
-msgstr "Tippt automatisch einen Text."
+msgstr "Digita del testo."
 
 #: common/actions/InsertText.js:42
 msgid ""
@@ -1582,38 +1576,41 @@ msgid ""
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
 "write the same things."
 msgstr ""
-"Die <b>Text-einfügen</b>-Aktion kopiert einen gegebenen Text in die "
-"Zwischenablage und simuliert dann Ctrl+V. Das kann nützlich sein, wenn Sie "
-"häufig denselben Text eintippen."
+"L'azione <b>Inserisci testo</b> copia il testo specificato negli appunti e "
+"quindi simula Ctrl + V. Questo può essere utile se ti rendi conto che scrivi "
+"spesso le stesse cose."
 
 #: common/actions/Shortcut.js:35
 msgid "Activate Shortcut"
-msgstr "Tastaturkürzel aktivieren"
+msgstr "Attiva Collegamento"
 
 #. Translators: Please keep this short.
 #: common/actions/Shortcut.js:38
+#, fuzzy
 msgid "Simulates a key combination."
-msgstr "Simuliert eine Tastenkombination."
+msgstr "Simula una scorciatoia da tastiera."
 
 #: common/actions/Shortcut.js:40
+#, fuzzy
 msgid ""
 "The <b>Activate Shortcut</b> action simulates a key combination when "
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
-"Die <b>Tastaturkürzel-aktivieren</b>-Aktion simuliert eine "
-"Tastenkombination. Das kann zum Beispiel verwendet werden, um virtuelle "
-"Desktops zu wechseln, Multimediawiedergabe zu steuern, oder Aktionen "
-"rückgängig zu machen."
+"L'azione <b>Attiva collegamento</b> simula la pressione di un tasto quando "
+"attivata. Ad esempio, questo può essere utilizzato per cambiare desktop "
+"virtuale, controllare la riproduzione multimediale o per annullare / "
+"ripetere le operazioni."
 
 #: common/actions/Uri.js:25
 msgid "Open URI"
-msgstr "URI öffnen"
+msgstr "Apri URI"
 
 #. Translators: Please keep this short.
 #: common/actions/Uri.js:28
+#, fuzzy
 msgid "Opens an URI with the default application."
-msgstr "Öffnet eine URI mit der Standardanwendung."
+msgstr "Apre un URI con le applicazioni predefinite."
 
 #: common/actions/Uri.js:30
 msgid ""
@@ -1622,33 +1619,37 @@ msgid ""
 "However, it is also possible to open other URIs such as \"mailto:foo@bar.org"
 "\"."
 msgstr ""
-"Die <b>URI-öffnen</b>-Aktion öffnet die gegebene URI mit der dazugehörigen "
-"Standardanwendung. Für http URLs ist das Ihr Web Browser, allerdings können "
-"auch URIs wie \"mailto:foo@bar.org\" angegeben werden."
+"Quando l'azione <b>Apri URI</b> è attivata, l'URI sopra viene aperto con "
+"l'applicazione predefinita. Per gli URL http, questo sarà il tuo browser "
+"web. Tuttavia, è anche possibile aprire altri URI come \"mailto:foo@bar.org\""
 
 #. Translators: Please keep this short.
 #: common/menus/Bookmarks.js:29
+#, fuzzy
 msgid "Shows your frequently used directories."
-msgstr "Zeigt häufig verwendete Verzeichnisse."
+msgstr "Mostra le directory di uso comune."
 
 #: common/menus/Bookmarks.js:31
+#, fuzzy
 msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
 msgstr ""
-"Das <b>Lesezeichen</b>-Menü zeigt Einträge für den Papierkorb, den Desktop "
-"und andere gespeicherte Verzeichnisse."
+"Il sottomenu <b>Segnalibri</b> mostra un elemento per il cestino, il desktop "
+"e ciascuna directory contrassegnata."
 
 #: common/menus/CustomMenu.js:22
+#, fuzzy
 msgid "Custom Menu"
-msgstr "Benutzerdefiniertes Menü"
+msgstr "Sottomenu Personalizzato"
 
 #. Translators: Please keep this short.
 #: common/menus/CustomMenu.js:25
 msgid "This can contain actions and other menus."
-msgstr "Kann Aktionen und andere Menüs enthalten."
+msgstr ""
 
 #: common/menus/CustomMenu.js:27
+#, fuzzy
 msgid ""
 "A <b>Custom Menu</b> can contain any number of actions and submenus. "
 "However, for precise item selection, a maximum number of twelve items is "
@@ -1657,69 +1658,75 @@ msgid ""
 "also possible to open a menu with a terminal command. You can read more on "
 "<a href=\"https://github.com/Schneegans/Fly-Pie\">Github</a>."
 msgstr ""
-"Ein <b>Benutzerdefiniertes Menü</b> kann beliebig viele Aktionen und "
-"Untermenüs enthalten. Für eine präzise Auswahl ist allerdings eine Anzahl "
-"von maximal zwölf Einträgen pro Ebene empfehlenswert.\n"
-"Wenn es als Hauptmenü verwendet wird, kann es mit einer Tastenkombination "
-"geöffnet werden. Es ist auch möglich, das Menü mit einem "
-"Kommandozeilenbefehl zu öffnen. Erfahren Sie mehr auf <a href=\"https://"
-"github.com/Schneegans/Fly-Pie\">Github</a>."
+"Un <b>menu di primo livello</b> può contenere un numero qualsiasi di voci di "
+"menu e sottomenu. Tuttavia, per una selezione precisa degli elementi, si "
+"consiglia un numero massimo di dodici.\n"
+"Il menu può essere aperto utilizzando il collegamento definito sopra. È "
+"anche possibile aprire un menu con un comando da terminale. Puoi leggere "
+"ulteriori informazioni su <a href=\"https://github.com/Schneegans/Fly-Pie\"> "
+"Github </a>."
 
 #: common/menus/Devices.js:26
 msgid "Devices"
-msgstr "Geräte"
+msgstr "Dispositivi"
 
 #. Translators: Please keep this short.
 #: common/menus/Devices.js:29
 msgid "Shows connected devices."
-msgstr "Zeigt angeschlossene Geräte."
+msgstr "Mostra i dispositivi collegati."
 
 #: common/menus/Devices.js:31
+#, fuzzy
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
-msgstr "Das <b>Geräte</b>-Menü zeigt angeschlossene Geräte, wie USB-Sticks."
+msgstr ""
+"Il sottomenu <b>Dispositivi</b> mostra un elemento per ogni volume montato, "
+"come le chiavette USB."
 
 #. Translators: Please keep this short.
 #: common/menus/Favorites.js:39
+#, fuzzy
 msgid "Shows pinned applications."
-msgstr "Zeigt angeheftete Anwendungen."
+msgstr "Mostra le applicazioni appuntate."
 
 #: common/menus/Favorites.js:41
+#, fuzzy
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to Gnome "
 "Shell's Dash."
 msgstr ""
-"Das <b>Favoriten</b>-Menü zeigt die Anwendungen, die Sie an die Dash von "
-"GNOME Shell angeheftet haben."
+"Il sottomenu <b>Preferiti</b> mostra le applicazioni che hai aggiunto alla "
+"Dash di Gnome Shell."
 
 #: common/menus/FrequentlyUsed.js:36
 msgid "Frequently Used"
-msgstr "Häufig verwendet"
+msgstr "Usato Frequentemente"
 
 #. Translators: Please keep this short.
 #: common/menus/FrequentlyUsed.js:39
 msgid "Shows your frequently used applications."
-msgstr "Zeigt oft verwendete Programme."
+msgstr "Mostra le applicazioni utilizzate di frequente."
 
 #: common/menus/FrequentlyUsed.js:41
+#, fuzzy
 msgid ""
 "The <b>Frequently Used</b> menu shows a list of frequently used "
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
 msgstr ""
-"Das <b>Häufig-verwendet</b>-Menü zeigt eine Liste oft verwendeter Programme. "
-"Für eine effiziente Nutzung sollten Sie die maximal angezeigte Anzahl auf "
-"etwa zwölf beschränken."
+"Il sottomenu <b>Utilizzate di Frequente</b> mostra un elenco di applicazioni "
+"utilizzate di frequente. È necessario limitare il numero massimo di "
+"applicazioni visualizzate a un numero ragionevole."
 
 #: common/menus/MainMenu.js:26
 msgid "Main Menu"
-msgstr "Hauptmenü"
+msgstr "Menu Principale"
 
 #. Translators: Please keep this short.
 #: common/menus/MainMenu.js:29
 msgid "Shows all installed applications."
-msgstr "Zeigt alle installierten Anwendungen."
+msgstr "Mostra tutte le applicazioni installate."
 
 #: common/menus/MainMenu.js:31
 msgid ""
@@ -1727,77 +1734,82 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather setup your own menus!"
 msgstr ""
-"Das <b>Hauptmenü</b> zeigt alle installierten Anwendungen. Das ist meistens "
-"sehr unübersichtlich und nicht effizient verwendbar. Sie sollten lieber "
-"benutzerdefinierte Menüs erstellen!"
+"Il <b>Menu principale</b> mostra tutte le applicazioni installate. Di "
+"solito, questo è molto disordinato poiché molte sezioni contengono troppi "
+"elementi per essere utilizzati in modo efficiente. Dovresti piuttosto "
+"impostare i tuoi menu!"
 
 #: common/menus/RecentFiles.js:26
 msgid "Recent Files"
-msgstr "Zuletzt verwendete Dateien"
+msgstr "File Recenti"
 
 #. Translators: Please keep this short.
 #: common/menus/RecentFiles.js:29
 msgid "Shows your recently used files."
-msgstr "Zeigt kürzlich geöffnete Dateien."
+msgstr "Mostra i file utilizzati di recente."
 
 #: common/menus/RecentFiles.js:31
+#, fuzzy
 msgid ""
 "The <b>Recent Files</b> menu shows a list of recently used files. For "
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
 msgstr ""
-"Das <b>Zuletzt-verwendete-Dateien</b>-Menü zeigt eine Liste kürzlich "
-"verwendeten Dateien. Für eine effiziente Nutzung sollten die maximal "
-"angezeigte Anzahl auf etwa zwölf beschränken."
+"Il sottomenu <b>File recenti</b> mostra un elenco di file utilizzati di "
+"recente. È necessario limitare il numero massimo di file visualizzati a un "
+"numero ragionevole."
 
 #: common/menus/RunningApps.js:36
 msgid "Running Apps"
-msgstr "Laufende Anwendungen"
+msgstr "App in Esecuzione"
 
 #. Translators: Please keep this short.
 #: common/menus/RunningApps.js:39
 msgid "Shows the currently running applications."
-msgstr "Zeigt aktuell laufenden Programme."
+msgstr "Mostra le applicazioni attualmente in esecuzione."
 
 #: common/menus/RunningApps.js:41
+#, fuzzy
 msgid ""
 "The <b>Running Apps</b> menu shows all currently running applications. This "
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
-"Das <b>Laufende-Anwendungen</b>-Menü zeigt alle aktuell laufenden Programme. "
-"Das ist ähnlich zur Alt-Tab-Fensterauswahl. Da die Einträge aber häufig ihre "
-"Position wechseln, ist dieses Untermenü nur bedingt effzient."
+"Il sottomenu <b>App in esecuzione</b> mostra tutte le applicazioni "
+"attualmente in esecuzione. È simile alla selezione della finestra Alt+Tab. "
+"Poiché le voci cambiano spesso posizione, in realtà non è molto efficace."
 
 #. Translators: Please keep this short.
 #: common/menus/System.js:42
+#, fuzzy
 msgid "Allows screen lock, shutdown and other things."
-msgstr "Rechner ausschalten, neu starten und ähnliches."
+msgstr "Consente l'arresto del blocco dello schermo e altre cose."
 
 #: common/menus/System.js:44
+#, fuzzy
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
 msgstr ""
-"Das <b>System</b>-Menü zeigt Einträge für Bildschirmsperren, Herunterfahren, "
-"Einstellungen, etc."
+"Il sottomenu <b>Sistema</b> mostra gli elementi per il blocco dello schermo, "
+"lo spegnimento, le impostazioni, ecc."
 
 #: common/menus/System.js:68
 msgid "Lock"
-msgstr "Bildschirm sperren"
+msgstr "Blocca"
 
 #: common/menus/System.js:77
 msgid "Suspend"
-msgstr "Ruhezustand"
+msgstr "Sospendi"
 
 #: common/menus/System.js:86
 msgid "Switch User..."
-msgstr "Nutzer wechseln..."
+msgstr "Cambia utente..."
 
 #: common/menus/System.js:95
 msgid "Log Out"
-msgstr "Abmelden"
+msgstr "Disconnetti"
 
 #: common/menus/System.js:104
 msgid "Power Off..."
-msgstr "Ausschalten..."
+msgstr "Spegni..."

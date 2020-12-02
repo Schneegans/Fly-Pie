@@ -8,11 +8,14 @@
 #                                                                                        #
 # -------------------------------------------------------------------------------------- #
 
+# Exit the script when one command fails.
+set -e
+
 # Get the location of this script.
 SRC_DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 # Execute clang format for all *.cpp, *.hpp and *.inl files.
-find $SRC_DIR -type f -name '*.js' -exec sh -c '
+find "$SRC_DIR" -type f -name '*.js' -exec sh -c '
   for file do
     echo "Formatting $file..."
     clang-format -i "$file"

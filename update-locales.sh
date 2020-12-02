@@ -12,6 +12,9 @@
 # the po/flypie.pot file accordingly. The new strings are than merged with all existing
 # translations.
 
+# Exit the script when one command fails.
+set -e
+
 # Check if all necessary commands are available.
 if ! command -v xgettext &> /dev/null
 then
@@ -25,16 +28,20 @@ fi
 
 # Get to the location of this script.
 FLYPIE="$( cd "$( dirname "$0" )" && pwd )"
-cd $FLYPIE
+cd "$FLYPIE" || { echo "ERROR: Could not cd to the script's location!"; exit 1; } # See SC2164
 
-# First update the template file with the strings from the source tree.
-xgettext --from-code=UTF-8 --output=po/flypie.pot settings/settings.ui */*.js 
+# First update the template file with the strings from the source tree. All preceeding
+# comments starting with 'Translators' will be extracted as well.
+xgettext --from-code=UTF-8 --add-comments=Translators \
+         --output=po/flypie.pot settings/settings.ui ./*/*.js ./*/*/*.js 
 
 # Then update all *.po files.
-for FILE in `ls po/*.po`
+for FILE in po/*.po
 do
+  # handle the case of no .po files, see SC2045
+  [[ -e "$FILE" ]] || { echo "ERROR: No .po files found, exiting."; exit 1; }
   echo -n "Updating '$FILE' "
-  msgmerge -U $FILE po/flypie.pot
+  msgmerge -U "$FILE" po/flypie.pot
 done
 
 echo "All done!"

@@ -12,12 +12,14 @@ const _ = imports.gettext.domain('flypie').gettext;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This creates a Demo Menu structure which is shown when the preview button is         //
-// pressed. The menu is quite symmetrical, the root menu has 6 items, each of them has  /
+// pressed. The menu is quite symmetrical, the root menu has 6 items, each of them has  //
 // three children. These children again have five children. This makes a total of 90    //
 // leaf items.                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var ExampleMenu = class ExampleMenu {
+
+  // ---------------------------------------------------------------------- static methods
 
   static get() {
     return {
@@ -91,6 +93,8 @@ var ExampleMenu = class ExampleMenu {
               name: _('Sweets'),
               icon: '🍭',
               children: [
+                // Translators: This is the item which should be selected in the tutorial.
+                // Make sure the translation matches the name given in the tutorial!
                 {name: _('Shortcake'), icon: '🍰'},
                 {name: _('Candy'), icon: '🍬'},
                 {name: _('Doughnut'), icon: '🍩'},

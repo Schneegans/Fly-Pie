@@ -90,10 +90,6 @@ var MenuItem = GObject.registerClass({
       GObject.ParamFlags.READWRITE, 'image-missing'),
     'id': GObject.ParamSpec.string(
       'id', 'id', 'The ID of the menu item. ',
-      GObject.ParamFlags.READWRITE, 'image-missing'),
-    'activatable': GObject.ParamSpec.boolean(
-      'activatable', 'activatable', 'This is usually true for real leaf nodes of the ' + 
-      'menu hierarchy. ',
       GObject.ParamFlags.READWRITE, 'image-missing')
   },
   Signals: {}
@@ -123,6 +119,10 @@ class MenuItem extends Clutter.Actor {
     // This is recursively updated using setParentColor(). It is used for the background
     // coloring when the color mode is set to 'parent'.
     this._parentColor = new Clutter.Color({red: 255, green: 255, blue: 255});
+
+    // This callback will be executed when the item is selected. Only items without any
+    // children but with an activation callback can be activated.
+    this._activationCallback = null;
 
     // Create Children Container. This eventually will contain one MenuItem for each child
     // item of this menu.
@@ -187,6 +187,18 @@ class MenuItem extends Clutter.Actor {
   // Sets menuItem to be the index'th child of this..
   setChildMenuItemIndex(menuItem, index) {
     return this._childrenContainer.set_child_at_index(menuItem, index);
+  }
+
+  // This callback will be executed when the item is selected. Only items without any
+  // children but with an activation callback can be activated. Can be set to null to
+  // disable the activate-ability.
+  setActivationCallback(func) {
+    this._activationCallback = func;
+  }
+
+  // Returns the activation callback set above.
+  getActivationCallback() {
+    return this._activationCallback;
   }
 
   // This is called during redraw() of the parent MenuItem. redraw() traverses the menu

@@ -58,3 +58,44 @@ jobs:
           else
             awk -v a=$CURRENT -v b=$BASE 'BEGIN {printf "Percentage increased! (%3.4f%)\n", (a-b)}'
           fi
+
+  shellcheck:
+    name: Run ShellCheck
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run ShellCheck
+        run: |
+          find $GITHUB_WORKSPACE -type f -and \( -name "*.sh" \) | xargs shellcheck
+
+  script_functionality:
+    name: Check Script Functionality
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check error conditions # Currently, gettext is not installed. Both if statements should be false.
+      run: |
+        if $GITHUB_WORKSPACE/compile-locales.sh; then
+          if $GITHUB_WORKSPACE/update-locales.sh; then
+            exit 1
+          fi
+        fi
+    - name: Check correct workflow # Now, gettext will be installed and both INVERTED if statements should be false.
+      run: |
+        sudo apt-get update -qq && sudo apt-get install gettext -qq -y
+        if ! $GITHUB_WORKSPACE/compile-locales.sh; then
+          if ! $GITHUB_WORKSPACE/update-locales.sh; then
+            exit 1
+          fi
+        fi
+
+  build:
+    name: Check if Fly-Pie builds correctly
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build Fly-Pie
+      run: |
+        sudo apt-get update -qq && sudo apt-get install gettext -qq -y
+        $GITHUB_WORKSPACE/create-release.sh
+        

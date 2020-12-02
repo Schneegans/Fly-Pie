@@ -19,14 +19,13 @@ const _ = imports.gettext.domain('flypie').gettext;
 
 var DefaultMenu = class DefaultMenu {
 
-  // -------------------------------------------------------------------- public interface
+  // ---------------------------------------------------------------------- static methods
 
   static get() {
 
     const menu = {
       name: _('Example Menu'),
       icon: '🌟️',
-      type: 'Menu',
       shortcut: '<Primary>space',
       centered: false,
       id: 0,
@@ -34,7 +33,6 @@ var DefaultMenu = class DefaultMenu {
         {
           name: _('Sound'),
           icon: 'audio-speakers',
-          type: 'Submenu',
           children: [
             {
               name: _('Play / Pause'),
@@ -67,7 +65,6 @@ var DefaultMenu = class DefaultMenu {
         {
           name: _('Window Management'),
           icon: 'preferences-system-windows',
-          type: 'Submenu',
           children: [
             {
               name: _('Maximize Window'),
@@ -78,7 +75,6 @@ var DefaultMenu = class DefaultMenu {
             {
               name: _('Gnome Shell'),
               icon: 'preferences-desktop-remote-desktop',
-              type: 'Submenu',
               children: [
                 {
                   name: _('Up'),

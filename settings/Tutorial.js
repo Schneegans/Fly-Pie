@@ -45,10 +45,10 @@ var Tutorial = class Tutorial {
         Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/flypie',
         proxy => {
           this._dbus = proxy;
-          this._dbus.connectSignal('OnSelect', (proxy, sender, [id, path]) => {
+          this._dbus.connectSignal('OnSelect', (proxy, sender, [menuID, itemID]) => {
             // When the target item was selected, we store the last and best selection
             // time in the settings.
-            if (id == this._lastID && path == '/1/2/0') {
+            if (menuID == this._lastID && itemID == '/1/2/0') {
               const time     = this._timer.getElapsed();
               const bestTime = this._settings.get_double('best-tutorial-time');
 
