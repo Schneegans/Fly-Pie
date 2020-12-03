@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-30 09:20+0100\n"
-"PO-Revision-Date: 2020-12-02 17:16+0100\n"
+"PO-Revision-Date: 2020-12-03 15:16+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language: it\n"
@@ -1557,12 +1557,10 @@ msgstr "Apri File"
 
 #. Translators: Please keep this short.
 #: common/actions/File.js:29
-#, fuzzy
 msgid "Opens a file with the default application."
-msgstr "Apre un file con le applicazioni predefinite."
+msgstr "Apre un file con l'applicazione predefinita."
 
 #: common/actions/File.js:31
-#, fuzzy
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
@@ -1576,9 +1574,8 @@ msgstr "Inserisci Testo"
 
 #. Translators: Please keep this short.
 #: common/actions/InsertText.js:40
-#, fuzzy
 msgid "Types some text automatically."
-msgstr "Digita del testo."
+msgstr "Digita automaticamente del testo."
 
 #: common/actions/InsertText.js:42
 msgid ""
@@ -1596,21 +1593,19 @@ msgstr "Attiva Collegamento"
 
 #. Translators: Please keep this short.
 #: common/actions/Shortcut.js:38
-#, fuzzy
 msgid "Simulates a key combination."
-msgstr "Simula una scorciatoia da tastiera."
+msgstr "Simula una combinazione di tasti."
 
 #: common/actions/Shortcut.js:40
-#, fuzzy
 msgid ""
 "The <b>Activate Shortcut</b> action simulates a key combination when "
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
-"L'azione <b>Attiva collegamento</b> simula la pressione di un tasto quando "
+"L'azione <b>Attiva collegamento</b> simula una combinazione di tasti quando "
 "attivata. Ad esempio, questo può essere utilizzato per cambiare desktop "
-"virtuale, controllare la riproduzione multimediale o per annullare / "
-"ripetere le operazioni."
+"virtuali, controllare la riproduzione multimediale o per annullare / "
+"ripetere operazioni."
 
 #: common/actions/Uri.js:25
 msgid "Open URI"
@@ -1618,9 +1613,8 @@ msgstr "Apri URI"
 
 #. Translators: Please keep this short.
 #: common/actions/Uri.js:28
-#, fuzzy
 msgid "Opens an URI with the default application."
-msgstr "Apre un URI con le applicazioni predefinite."
+msgstr "Apre un URI con l'applicazione predefinita."
 
 #: common/actions/Uri.js:30
 msgid ""
@@ -1635,23 +1629,20 @@ msgstr ""
 
 #. Translators: Please keep this short.
 #: common/menus/Bookmarks.js:29
-#, fuzzy
 msgid "Shows your frequently used directories."
-msgstr "Mostra le directory di uso comune."
+msgstr "Mostra le directory utilizzate di frequente."
 
 #: common/menus/Bookmarks.js:31
-#, fuzzy
 msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
 msgstr ""
-"Il sottomenu <b>Segnalibri</b> mostra un elemento per il cestino, il desktop "
+"Il menu <b>Segnalibri</b> mostra un elemento per il cestino, il desktop "
 "e ciascuna directory contrassegnata."
 
 #: common/menus/CustomMenu.js:22
-#, fuzzy
 msgid "Custom Menu"
-msgstr "Sottomenu Personalizzato"
+msgstr "Menu Personalizzato"
 
 #. Translators: Please keep this short.
 #: common/menus/CustomMenu.js:25
@@ -1659,7 +1650,6 @@ msgid "This can contain actions and other menus."
 msgstr "Può contenere azioni e altri menu."
 
 #: common/menus/CustomMenu.js:27
-#, fuzzy
 msgid ""
 "A <b>Custom Menu</b> can contain any number of actions and submenus. "
 "However, for precise item selection, a maximum number of twelve items is "
@@ -1668,13 +1658,12 @@ msgid ""
 "also possible to open a menu with a terminal command. You can read more on "
 "<a href=\"https://github.com/Schneegans/Fly-Pie\">Github</a>."
 msgstr ""
-"Un <b>menu di primo livello</b> può contenere un numero qualsiasi di voci di "
-"menu e sottomenu. Tuttavia, per una selezione precisa degli elementi, si "
-"consiglia un numero massimo di dodici.\n"
-"Il menu può essere aperto utilizzando il collegamento definito sopra. È "
-"anche possibile aprire un menu con un comando da terminale. Puoi leggere "
-"ulteriori informazioni su <a href=\"https://github.com/Schneegans/Fly-Pie\"> "
-"Github </a>."
+"Un<b>Menu Personalizzato</b> può contenere un numero qualsiasi di azioni e sottomenu. "
+"Tuttavia, per una selezione precisa degli elementi è raccomandanto un numero massimo di dodici  "
+"elementi.\n"
+"Quando viene utilizzato come menu di primo livello, può essere aperto con una combinazione di tasti. È "
+"anche possibile aprire un menu con un comando da terminale. Ulteriori informazioni su "
+"<a href=\"https://github.com/Schneegans/Fly-Pie\">Github</a>."
 
 #: common/menus/Devices.js:26
 msgid "Devices"
@@ -1686,27 +1675,24 @@ msgid "Shows connected devices."
 msgstr "Mostra i dispositivi collegati."
 
 #: common/menus/Devices.js:31
-#, fuzzy
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
 msgstr ""
-"Il sottomenu <b>Dispositivi</b> mostra un elemento per ogni volume montato, "
+"Il menu <b>Dispositivi</b> mostra un elemento per ogni volume montato, "
 "come le chiavette USB."
 
 #. Translators: Please keep this short.
 #: common/menus/Favorites.js:39
-#, fuzzy
 msgid "Shows pinned applications."
 msgstr "Mostra le applicazioni appuntate."
 
 #: common/menus/Favorites.js:41
-#, fuzzy
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to Gnome "
 "Shell's Dash."
 msgstr ""
-"Il sottomenu <b>Preferiti</b> mostra le applicazioni che hai aggiunto alla "
+"Il menu <b>Preferiti</b> mostra le applicazioni che hai appuntato alla "
 "Dash di Gnome Shell."
 
 #: common/menus/FrequentlyUsed.js:36
@@ -1719,15 +1705,14 @@ msgid "Shows your frequently used applications."
 msgstr "Mostra le applicazioni utilizzate di frequente."
 
 #: common/menus/FrequentlyUsed.js:41
-#, fuzzy
 msgid ""
 "The <b>Frequently Used</b> menu shows a list of frequently used "
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
 msgstr ""
-"Il sottomenu <b>Utilizzate di Frequente</b> mostra un elenco di applicazioni "
-"utilizzate di frequente. È necessario limitare il numero massimo di "
-"applicazioni visualizzate a un numero ragionevole."
+"Il menu <b>Utilizzate di Frequente</b> mostra un elenco di applicazioni "
+"utilizzate di frequente. Per selezioni efficienti, dovresti limitare il numero massimo "
+"di applicazioni mostrate a circa dodici."
 
 #: common/menus/MainMenu.js:26
 msgid "Main Menu"
@@ -1759,15 +1744,14 @@ msgid "Shows your recently used files."
 msgstr "Mostra i file utilizzati di recente."
 
 #: common/menus/RecentFiles.js:31
-#, fuzzy
 msgid ""
 "The <b>Recent Files</b> menu shows a list of recently used files. For "
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
 msgstr ""
-"Il sottomenu <b>File recenti</b> mostra un elenco di file utilizzati di "
-"recente. È necessario limitare il numero massimo di file visualizzati a un "
-"numero ragionevole."
+"Il menu <b>File recenti</b> mostra un elenco di file utilizzati di recente. Per "
+"selezioni efficienti, dovresti limitare il numero massimo di file visualizzati a "
+"circa dodici."
 
 #: common/menus/RunningApps.js:36
 msgid "Running Apps"
@@ -1779,30 +1763,27 @@ msgid "Shows the currently running applications."
 msgstr "Mostra le applicazioni attualmente in esecuzione."
 
 #: common/menus/RunningApps.js:41
-#, fuzzy
 msgid ""
 "The <b>Running Apps</b> menu shows all currently running applications. This "
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
-"Il sottomenu <b>App in esecuzione</b> mostra tutte le applicazioni "
-"attualmente in esecuzione. È simile alla selezione della finestra Alt+Tab. "
-"Poiché le voci cambiano spesso posizione, in realtà non è molto efficace."
+"Il menu <b>App in esecuzione</b> mostra tutte le applicazioni attualmente in esecuzione. Questo " 
+"è simile alla selezione della finestra Alt+Tab. Poiché le voci cambiano spesso posizione "
+"frequentemente, in realtà non è molto efficace."
 
 #. Translators: Please keep this short.
 #: common/menus/System.js:42
-#, fuzzy
 msgid "Allows screen lock, shutdown and other things."
-msgstr "Consente l'arresto del blocco dello schermo e altre cose."
+msgstr "Consente il blocco dello schermo, lo spegnimento e altre cose."
 
 #: common/menus/System.js:44
-#, fuzzy
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
 msgstr ""
-"Il sottomenu <b>Sistema</b> mostra gli elementi per il blocco dello schermo, "
-"lo spegnimento, le impostazioni, ecc."
+"Il menu <b>Sistema</b> mostra gli elementi per il blocco dello schermo, lo spegnimento,"
+"le impostazioni, ecc."
 
 #: common/menus/System.js:68
 msgid "Lock"
