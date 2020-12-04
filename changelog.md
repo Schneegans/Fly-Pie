@@ -2,7 +2,7 @@
 
 ## [Fly-Pie 4](https://github.com/schneegans/fly-pie/releases/tag/v4)
 
-**Release Date:** TBD
+**Release Date:** 2020-12-04
 
 #### New Features
 * Fly-Pie has now **localization support**. That means, you can now [translate it to your own language](https://github.com/Schneegans/Fly-Pie#translating-fly-pie)! Pull requests are very welcome (there is also a new **pull request template for translations**!), also for updating the existing translations. Fly-Pie 4 comes with translations for the following languages:
