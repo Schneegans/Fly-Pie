@@ -1004,7 +1004,7 @@ Can be added to custom menus.</property>
                     <property name="can_focus">False</property>
                     <property name="halign">center</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">20</property>
+                    <property name="spacing">10</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
@@ -1012,6 +1012,7 @@ Can be added to custom menus.</property>
                         <property name="halign">start</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
+                        <property name="margin_bottom">10</property>
                         <property name="label" translatable="yes">Welcome to Fly-Pie!</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
@@ -1059,67 +1060,53 @@ Can be added to custom menus.</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="spacing">20</property>
-                        <child>
-                          <object class="GtkButton" id="tutorial-button-1">
-                            <property name="width_request">100</property>
-                            <property name="height_request">100</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the
-menu!&lt;/b&gt;&lt;/big&gt;</property>
-                                <property name="use_markup">True</property>
-                                <property name="justify">center</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="circular"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="valign">start</property>
-                            <property name="label" translatable="yes">• Use your &lt;b&gt;left mouse button to select items&lt;/b&gt;.
+                        <property name="valign">start</property>
+                        <property name="label" translatable="yes">• Use your &lt;b&gt;left mouse button to select items&lt;/b&gt;.
 • Use your &lt;b&gt;right mouse button to close the menu&lt;/b&gt;.
 • The test menu is just a playground, selecting items has no real effect.
 
 Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!</property>
-                            <property name="use_markup">True</property>
-                            <property name="wrap">True</property>
-                            <property name="max_width_chars">1</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
+                        <property name="use_markup">True</property>
+                        <property name="wrap">True</property>
+                        <property name="max_width_chars">1</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="tutorial-button-1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="valign">center</property>
+                        <property name="margin_top">10</property>
+                        <property name="margin_bottom">10</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_top">10</property>
+                            <property name="margin_bottom">10</property>
+                            <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
+                            <property name="justify">center</property>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="circular"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
                   </object>
@@ -1134,7 +1121,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                     <property name="can_focus">False</property>
                     <property name="halign">center</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">20</property>
+                    <property name="spacing">10</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
@@ -1142,6 +1129,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                         <property name="halign">start</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
+                        <property name="margin_bottom">10</property>
                         <property name="label" translatable="yes">You can click anywhere!</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
@@ -1189,68 +1177,54 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="spacing">20</property>
-                        <child>
-                          <object class="GtkButton" id="tutorial-button-2">
-                            <property name="width_request">100</property>
-                            <property name="height_request">100</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the
-menu!&lt;/b&gt;&lt;/big&gt;</property>
-                                <property name="use_markup">True</property>
-                                <property name="justify">center</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="circular"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="valign">start</property>
-                            <property name="hexpand">True</property>
-                            <property name="label" translatable="yes">&lt;b&gt;Items are selected by clicking anywhere in their respective wedges&lt;/b&gt;.
+                        <property name="valign">start</property>
+                        <property name="hexpand">True</property>
+                        <property name="label" translatable="yes">&lt;b&gt;Items are selected by clicking anywhere in their respective wedges&lt;/b&gt;.
 
 Also, you do not have to wait for the animation to finish as the submenu wedges will appear instantaneously around the position where you clicked.
 
 Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
-                            <property name="use_markup">True</property>
-                            <property name="wrap">True</property>
-                            <property name="max_width_chars">1</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
+                        <property name="use_markup">True</property>
+                        <property name="wrap">True</property>
+                        <property name="max_width_chars">1</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="tutorial-button-2">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="valign">center</property>
+                        <property name="margin_top">10</property>
+                        <property name="margin_bottom">10</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_top">10</property>
+                            <property name="margin_bottom">10</property>
+                            <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
+                            <property name="justify">center</property>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="circular"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
                   </object>
@@ -1266,7 +1240,7 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                     <property name="can_focus">False</property>
                     <property name="halign">center</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">20</property>
+                    <property name="spacing">10</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
@@ -1274,6 +1248,7 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                         <property name="halign">start</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
+                        <property name="margin_bottom">10</property>
                         <property name="label" translatable="yes">Practice Session I</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
@@ -1287,122 +1262,17 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="valign">start</property>
-                            <property name="label" translatable="yes">For this practice session, open the menu by clicking the big button. Then select "Shortcake" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the gold medal?
+                        <property name="valign">start</property>
+                        <property name="label" translatable="yes">For this practice session, open the menu by clicking the big button. Then select "Shortcake" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the gold medal?
 
-Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn about Fly-Pie's Marking Mode!
-</property>
-                            <property name="use_markup">True</property>
-                            <property name="wrap">True</property>
-                            <property name="max_width_chars">1</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="last-selection-time-1">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="halign">start</property>
-                            <property name="label">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
-                            <property name="use_markup">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <child>
-                              <object class="GtkLabel" id="best-selection-time-1">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
-                                <property name="use_markup">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="tutorial-reset-button-1">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
-                                <property name="always_show_image">True</property>
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_left">5</property>
-                                    <property name="margin_right">5</property>
-                                    <property name="margin_top">2</property>
-                                    <property name="margin_bottom">2</property>
-                                    <property name="spacing">5</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="icon_name">edit-clear-all-symbolic</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes" comments="The text of the tutorial-reset-button.">Clear</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="circular"/>
-                                </style>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
+Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn about Fly-Pie's Marking Mode!</property>
+                        <property name="use_markup">True</property>
+                        <property name="wrap">True</property>
+                        <property name="max_width_chars">1</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1411,36 +1281,88 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="gold-medal-1">
+                      <object class="GtkGrid">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="opacity">0.10000000000000001</property>
-                        <property name="margin_top">20</property>
-                        <property name="orientation">vertical</property>
                         <child>
-                          <object class="GtkImage" id="level-image11">
+                          <object class="GtkLabel" id="last-selection-time-1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="pixbuf">../resources/badges/tutorial/gold.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
+                            <property name="halign">start</property>
+                            <property name="hexpand">True</property>
+                            <property name="label">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">0</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="gold-label-1">
+                          <object class="GtkLabel" id="best-selection-time-1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Unlocked at less than 1000 ms</property>
+                            <property name="halign">start</property>
+                            <property name="hexpand">True</property>
+                            <property name="label">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="tutorial-reset-button-1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="always_show_image">True</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_left">8</property>
+                                <property name="margin_right">8</property>
+                                <property name="margin_top">2</property>
+                                <property name="margin_bottom">2</property>
+                                <property name="spacing">5</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes" comments="The text of the tutorial-reset-button.">Clear</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="circular"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">0</property>
+                            <property name="height">2</property>
                           </packing>
                         </child>
                       </object>
@@ -1451,85 +1373,46 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkButton" id="tutorial-button-3">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="valign">center</property>
+                        <property name="margin_top">10</property>
+                        <property name="margin_bottom">10</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_top">10</property>
+                            <property name="margin_bottom">10</property>
+                            <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
+                            <property name="justify">center</property>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="circular"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">20</property>
-                        <child>
-                          <object class="GtkBox" id="silver-medal-1">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="opacity">0.10000000000000001</property>
-                            <property name="orientation">vertical</property>
-                            <child>
-                              <object class="GtkImage" id="level-image13">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="pixbuf">../resources/badges/tutorial/silver.png</property>
-                                <property name="pixel_size">200</property>
-                                <property name="icon_size">6</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="silver-label-1">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Unlocked at less than 2000 ms</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="tutorial-button-3">
-                            <property name="width_request">100</property>
-                            <property name="height_request">100</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the
-menu!&lt;/b&gt;&lt;/big&gt;</property>
-                                <property name="use_markup">True</property>
-                                <property name="justify">center</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="circular"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
+                        <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkBox" id="bronze-medal-1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="opacity">0.10000000000000001</property>
+                            <property name="halign">end</property>
                             <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkImage" id="level-image12">
@@ -1541,7 +1424,7 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">True</property>
+                                <property name="fill">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -1553,22 +1436,101 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">True</property>
+                                <property name="fill">False</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
                           </object>
                           <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="silver-medal-1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="opacity">0.10000000000000001</property>
+                            <property name="halign">start</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkImage" id="level-image13">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="pixbuf">../resources/badges/tutorial/silver.png</property>
+                                <property name="pixel_size">200</property>
+                                <property name="icon_size">6</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="silver-label-1">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Unlocked at less than 2000 ms</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="gold-medal-1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="opacity">0.10000000000000001</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkImage" id="level-image11">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="pixbuf">../resources/badges/tutorial/gold.png</property>
+                            <property name="pixel_size">200</property>
+                            <property name="icon_size">6</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="gold-label-1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Unlocked at less than 1000 ms</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
                   </object>
@@ -1584,7 +1546,7 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                     <property name="can_focus">False</property>
                     <property name="halign">center</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">20</property>
+                    <property name="spacing">10</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
@@ -1592,6 +1554,7 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                         <property name="halign">start</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
+                        <property name="margin_bottom">10</property>
                         <property name="label" translatable="yes">The Marking Mode of Fly-Pie</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
@@ -1639,67 +1602,53 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="spacing">20</property>
-                        <child>
-                          <object class="GtkButton" id="tutorial-button-4">
-                            <property name="width_request">100</property>
-                            <property name="height_request">100</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the
-menu!&lt;/b&gt;&lt;/big&gt;</property>
-                                <property name="use_markup">True</property>
-                                <property name="justify">center</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="circular"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="valign">start</property>
-                            <property name="label" translatable="yes">Try remembering the path to an item. Open the menu and &lt;b&gt;draw the path with your mouse&lt;/b&gt;. You can start with individual segments of the path, put you can also try to draw the entire path!
+                        <property name="valign">start</property>
+                        <property name="label" translatable="yes">Try remembering the path to an item. Open the menu and &lt;b&gt;draw the path with your mouse&lt;/b&gt;. You can start with individual segments of the path, put you can also try to draw the entire path!
 
 You may find it more successful if you explicitly try to compose your gesture of straight parts. &lt;b&gt;Do not draw curvy paths but rather expressive zig-zag-lines!&lt;/b&gt;
 
 Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
-                            <property name="use_markup">True</property>
-                            <property name="wrap">True</property>
-                            <property name="max_width_chars">1</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
+                        <property name="use_markup">True</property>
+                        <property name="wrap">True</property>
+                        <property name="max_width_chars">1</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="tutorial-button-4">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="valign">center</property>
+                        <property name="margin_top">10</property>
+                        <property name="margin_bottom">10</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_top">10</property>
+                            <property name="margin_bottom">10</property>
+                            <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
+                            <property name="justify">center</property>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="circular"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
                   </object>
@@ -1715,7 +1664,7 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                     <property name="can_focus">False</property>
                     <property name="halign">center</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">20</property>
+                    <property name="spacing">10</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
@@ -1723,6 +1672,7 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                         <property name="halign">start</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
+                        <property name="margin_bottom">10</property>
                         <property name="label" translatable="yes">Practice Session II</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
@@ -1736,28 +1686,40 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="orientation">vertical</property>
+                        <property name="valign">start</property>
+                        <property name="label" translatable="yes">Again, you should select "Shortcake" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. However, as you now learned about the Marking Mode, the time required to get the gold medal is much shorter!
+
+Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn some final tips and tricks!</property>
+                        <property name="use_markup">True</property>
+                        <property name="wrap">True</property>
+                        <property name="max_width_chars">1</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkGrid">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkLabel" id="best-selection-time-2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="valign">start</property>
-                            <property name="label" translatable="yes">Again, you should select "Shortcake" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. However, as you now learned about the Marking Mode, the time required to get the gold medal is much shorter!
-
-Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn some final tips and tricks!
-</property>
+                            <property name="halign">start</property>
+                            <property name="hexpand">True</property>
+                            <property name="label">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
-                            <property name="wrap">True</property>
-                            <property name="max_width_chars">1</property>
-                            <property name="xalign">0</property>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">1</property>
                           </packing>
                         </child>
                         <child>
@@ -1765,131 +1727,66 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
+                            <property name="hexpand">True</property>
                             <property name="label">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">0</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkButton" id="tutorial-reset-button-2">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="always_show_image">True</property>
                             <child>
-                              <object class="GtkLabel" id="best-selection-time-2">
+                              <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="label">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
-                                <property name="use_markup">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="tutorial-reset-button-2">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
-                                <property name="always_show_image">True</property>
+                                <property name="margin_left">8</property>
+                                <property name="margin_right">8</property>
+                                <property name="margin_top">2</property>
+                                <property name="margin_bottom">2</property>
+                                <property name="spacing">5</property>
                                 <child>
-                                  <object class="GtkBox">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="margin_left">5</property>
-                                    <property name="margin_right">5</property>
-                                    <property name="margin_top">2</property>
-                                    <property name="margin_bottom">2</property>
-                                    <property name="spacing">5</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="icon_name">edit-clear-all-symbolic</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes" comments="The text of the tutorial-reset-button.">Clear</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
                                   </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
                                 </child>
-                                <style>
-                                  <class name="circular"/>
-                                </style>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes" comments="The text of the tutorial-reset-button.">Clear</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
                               </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">1</property>
-                              </packing>
                             </child>
+                            <style>
+                              <class name="circular"/>
+                            </style>
                           </object>
                           <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox" id="gold-medal-2">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="opacity">0.10196078431372549</property>
-                        <property name="margin_top">20</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkImage" id="level-image16">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="pixbuf">../resources/badges/tutorial/gold.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="gold-label-2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Unlocked at less than 500 ms</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">0</property>
+                            <property name="height">2</property>
                           </packing>
                         </child>
                       </object>
@@ -1900,80 +1797,39 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkButton" id="tutorial-button-5">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="valign">center</property>
+                        <property name="margin_top">10</property>
+                        <property name="margin_bottom">10</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_top">10</property>
+                            <property name="margin_bottom">10</property>
+                            <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
+                            <property name="justify">center</property>
+                          </object>
+                        </child>
+                        <style>
+                          <class name="circular"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">20</property>
-                        <child>
-                          <object class="GtkBox" id="silver-medal-2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="opacity">0.10196078431372549</property>
-                            <property name="orientation">vertical</property>
-                            <child>
-                              <object class="GtkImage" id="level-image15">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="pixbuf">../resources/badges/tutorial/silver.png</property>
-                                <property name="pixel_size">200</property>
-                                <property name="icon_size">6</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="silver-label-2">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Unlocked at less than 750 ms</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="tutorial-button-5">
-                            <property name="width_request">100</property>
-                            <property name="height_request">100</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the
-menu!&lt;/b&gt;&lt;/big&gt;</property>
-                                <property name="use_markup">True</property>
-                                <property name="justify">center</property>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="circular"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
                         <child>
                           <object class="GtkBox" id="bronze-medal-2">
                             <property name="visible">True</property>
@@ -1990,7 +1846,7 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">True</property>
+                                <property name="fill">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -2002,7 +1858,7 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">True</property>
+                                <property name="fill">False</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -2010,14 +1866,92 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                           <packing>
                             <property name="expand">True</property>
                             <property name="fill">True</property>
-                            <property name="position">2</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="silver-medal-2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="opacity">0.10196078431372549</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkImage" id="level-image15">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="pixbuf">../resources/badges/tutorial/silver.png</property>
+                                <property name="pixel_size">200</property>
+                                <property name="icon_size">6</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="silver-label-2">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Unlocked at less than 750 ms</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="gold-medal-2">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="opacity">0.10196078431372549</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkImage" id="level-image16">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="pixbuf">../resources/badges/tutorial/gold.png</property>
+                            <property name="pixel_size">200</property>
+                            <property name="icon_size">6</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="gold-label-2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Unlocked at less than 500 ms</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
                   </object>
@@ -2034,13 +1968,29 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                     <property name="halign">center</property>
                     <property name="orientation">vertical</property>
                     <child>
+                      <object class="GtkImage" id="level-image1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_top">10</property>
+                        <property name="pixbuf">../resources/badges/tutorial/gold.png</property>
+                        <property name="pixel_size">200</property>
+                        <property name="icon_size">6</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
-                        <property name="label" translatable="yes">🎉️ Congratulations! 🎉️</property>
+                        <property name="margin_bottom">10</property>
+                        <property name="label" translatable="yes">Congratulations!</property>
                         <property name="justify">center</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
@@ -2050,7 +2000,7 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">0</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
@@ -2072,7 +2022,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                       <packing>
                         <property name="expand">True</property>
                         <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
