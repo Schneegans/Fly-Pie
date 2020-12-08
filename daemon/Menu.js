@@ -15,6 +15,8 @@ const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.common.utils;
 const DBusInterface    = Me.imports.common.DBusInterface.DBusInterface;
 const InputManipulator = Me.imports.common.InputManipulator.InputManipulator;
+const Statistics       = Me.imports.common.Statistics.Statistics;
+const Timer            = Me.imports.common.Timer.Timer;
 const Background       = Me.imports.daemon.Background.Background;
 const MenuItem         = Me.imports.daemon.MenuItem.MenuItem;
 const SelectionWedges  = Me.imports.daemon.SelectionWedges.SelectionWedges;
@@ -38,6 +40,9 @@ var Menu = class Menu {
 
     // Create Gio.Settings object for org.gnome.shell.extensions.flypie.
     this._settings = utils.createSettings();
+
+    // This is primarily for the statistics.
+    this._timer = new Timer();
 
     // Store the callbacks.
     this._onSelect = onSelect;
@@ -84,7 +89,11 @@ var Menu = class Menu {
 
     // Forward button release events to the SelectionWedges.
     this._background.connect('button-release-event', (actor, event) => {
+      // This will potentially fire the OnSelect signal.
       this._selectionWedges.onButtonReleaseEvent(event);
+      // This is for the statistics only: As the mouse button was released, this is not
+      // going to be a gesture-only selection.
+      this._gestureOnlySelection = false;
       return Clutter.EVENT_STOP;
     });
 
@@ -107,6 +116,13 @@ var Menu = class Menu {
 
       // If there is a dragged child, update its position.
       if (this._draggedChild != null) {
+
+        // This is for the statistics only: If this is the first gesture during the
+        // current selection, we set this member to true. It will be set to false as soon
+        // as the mouse button is released again.
+        if (this._gestureOnlySelection == null) {
+          this._gestureOnlySelection = true;
+        }
 
         // Transform event coordinates to parent-relative coordinates.
         let ok, x, y;
@@ -257,6 +273,13 @@ var Menu = class Menu {
       // Finally, if a child was selected which is activatable, we report a selection and
       // hide the entire menu.
       if (child.getActivationCallback() != null) {
+
+        // Record this selection in the statistics. Parameters are selection depth, time
+        // and whether a continuous gesture was used for the selection.
+        Statistics.addSelection(
+            this._menuSelectionChain.length - 1, this._timer.getElapsed(),
+            this._gestureOnlySelection);
+
         this._background.set_easing_delay(
             this._settings.get_double('easing-duration') * 1000);
 
@@ -414,6 +437,11 @@ var Menu = class Menu {
 
     // Everything seems alright, start opening the menu!
     this._menuID = menuID;
+
+    // This is only for the statistics. This will be set to true at the first drag motion
+    // and to false as soon as the mouse button is released without selecting something.
+    this._gestureOnlySelection = null;
+    this._timer.reset();
 
     // Create all visible Clutter.Actors for the items.
     const createMenuItem = (item) => {

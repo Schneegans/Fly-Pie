@@ -15,6 +15,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.common.utils;
 const DBusInterface = Me.imports.common.DBusInterface.DBusInterface;
+const Statistics    = Me.imports.common.Statistics.Statistics;
 const Preset        = Me.imports.settings.Preset.Preset;
 const MenuEditor    = Me.imports.settings.MenuEditor.MenuEditor;
 const Tutorial      = Me.imports.settings.Tutorial.Tutorial;
@@ -273,8 +274,14 @@ var Settings = class Settings {
     this._widget.connect('destroy', () => {
       if (this._showAnimationInfoTimeout > 0) {
         GLib.source_remove(this._showAnimationInfoTimeout);
+
+        // Delete the static settings object of the statistics.
+        Statistics.cleanUp();
       }
     });
+
+    // Record this construction for the statistics.
+    Statistics.addSettingsOpened();
   }
 
   // -------------------------------------------------------------------- public interface
@@ -622,7 +629,7 @@ var Settings = class Settings {
       return false;
     });
 
-    // Draw on circle representing the center item.
+    // Draw one circle representing the center item.
     tabIcon = this._builder.get_object('center-tab-icon');
     tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {

@@ -16,6 +16,7 @@ const Shortcuts      = Me.imports.daemon.Shortcuts.Shortcuts;
 const DBusInterface  = Me.imports.common.DBusInterface.DBusInterface;
 const utils          = Me.imports.common.utils;
 const ItemRegistry   = Me.imports.common.ItemRegistry.ItemRegistry;
+const Statistics     = Me.imports.common.Statistics.Statistics;
 const DefaultMenu    = Me.imports.settings.DefaultMenu.DefaultMenu;
 const MouseHighlight = Me.imports.daemon.MouseHighlight.MouseHighlight;
 
@@ -121,6 +122,9 @@ var Daemon = class Daemon {
       this._screencastMouse.destroy();
       global.stage.remove_child(this._screencastMouse);
     }
+
+    // Delete the static settings object of the statistics.
+    Statistics.cleanUp();
   }
 
   // -------------------------------------------------------------- public D-Bus-Interface
@@ -144,6 +148,7 @@ var Daemon = class Daemon {
   // See the README.md for a description of Fly-Pie's DBusInterface.
   ShowCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
+    Statistics.addCustomDBusMenu();
     return this._openCustomMenu(json, false, this._lastMenuID);
   }
 
@@ -151,6 +156,7 @@ var Daemon = class Daemon {
   // See the README.md for a description of Fly-Pie's DBusInterface.
   PreviewCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
+    Statistics.addCustomDBusMenu();
     return this._openCustomMenu(json, true, this._lastMenuID);
   }
 
@@ -232,6 +238,7 @@ var Daemon = class Daemon {
   // This gets called when the user did not select anything in the menu. It emits the
   // OnCancel signal of our D-Bus interface.
   _onCancel(menuID) {
+    Statistics.addAbortion();
     this._dbus.emit_signal('OnCancel', GLib.Variant.new('(i)', [menuID]));
   }
 

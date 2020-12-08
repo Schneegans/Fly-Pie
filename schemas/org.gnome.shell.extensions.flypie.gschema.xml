@@ -482,6 +482,39 @@
       <description>The last achieved time in the tutorial in milliseconds.</description>
     </key>
 
+
+    <!-- Statistics -->
+
+    <key name="stats-point-and-click-selections" type="aau">
+      <default>[[], [], [], [], [], []]</default>
+      <summary>Point-and-Click Selection Times</summary>
+      <description>The selecion time histogram of point-and-click selections for each level.</description>
+    </key>
+
+    <key name="stats-gesture-selections" type="aau">
+      <default>[[], [], [], [], [], []]</default>
+      <summary>Gesture Selection Times</summary>
+      <description>The selecion time histogram of gesture selections for each level.</description>
+    </key>
+
+    <key name="stats-abortions" type="u">
+      <default>0</default>
+      <summary>Abortion Count</summary>
+      <description>The number of canceled selections.</description>
+    </key>
+
+    <key name="stats-dbus-menus" type="u">
+      <default>0</default>
+      <summary>Custom D-Bus Menus</summary>
+      <description>The number of custom menus opened over the D-Bus.</description>
+    </key>
+
+    <key name="stats-settings-opened" type="u">
+      <default>0</default>
+      <summary>Settings Dialog Openings</summary>
+      <description>The number of times the settings dialog has been opnened.</description>
+    </key>
+
   </schema>
 </schemalist>
 
