@@ -19,6 +19,7 @@ const Statistics    = Me.imports.common.Statistics.Statistics;
 const Preset        = Me.imports.settings.Preset.Preset;
 const MenuEditor    = Me.imports.settings.MenuEditor.MenuEditor;
 const Tutorial      = Me.imports.settings.Tutorial.Tutorial;
+const Achievements  = Me.imports.settings.Achievements.Achievements;
 const ExampleMenu   = Me.imports.settings.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
@@ -54,6 +55,10 @@ var Settings = class Settings {
     // Initialize the Tutorial page. To structure the source code, this has been put
     // into a separate class.
     this._tutorial = new Tutorial(this._builder, this._settings);
+
+    // Initialize the Achievements page. To structure the source code, this has been put
+    // into a separate class.
+    this._achievements = new Achievements(this._builder, this._settings);
 
     // Show current version number in about-popover.
     this._builder.get_object('app-name').label = 'Fly-Pie ' + Me.metadata.version;
