@@ -1031,6 +1031,9 @@ Can be added to custom menus.</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="stock">gtk-missing-image</property>
+                        <style>
+                          <class name="drop-shadow"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1158,6 +1161,9 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="stock">gtk-missing-image</property>
+                        <style>
+                          <class name="drop-shadow"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1605,6 +1611,9 @@ menu!&lt;/b&gt;&lt;/big&gt;</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="stock">gtk-missing-image</property>
+                        <style>
+                          <class name="drop-shadow"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>

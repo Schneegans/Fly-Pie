@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {Gio, GdkPixbuf} = imports.gi;
+const {Gio, Gtk, GdkPixbuf} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -97,11 +97,16 @@ var Tutorial = class Tutorial {
     });
 
     // Initialize the three GIF animations of the tutorial. This cannot be done from
-    // Glade for now.
+    // Glade for now. We also add a custom style provider to create the drop shadow effect
+    // of the images.
+    const styleProvider = Gtk.CssProvider.new();
+    styleProvider.load_from_path(Me.path + '/resources/flypie.css');
     for (let i = 1; i <= 3; i++) {
-      this._builder.get_object('tutorial-animation-' + i)
-          .set_from_animation(GdkPixbuf.PixbufAnimation.new_from_file(
-              Me.path + '/resources/tutorial' + i + '.gif'));
+      const image = this._builder.get_object('tutorial-animation-' + i);
+      image.set_from_animation(GdkPixbuf.PixbufAnimation.new_from_file(
+          Me.path + '/resources/tutorial' + i + '.gif'));
+      image.get_style_context().add_provider(
+          styleProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
     }
 
     // Make the five Show-Menu buttons of the tutorial pages actually show a menu.
