@@ -33,88 +33,80 @@ var Achievements = class Achievements {
     this._builder  = builder;
     this._settings = settings;
 
+    const gestureKey = 'stats-gesture-selections';
+    const clickKey   = 'stats-click-selections';
+
+    this._clickHistograms   = this._getHistograms(clickKey);
+    this._gestureHistograms = this._getHistograms(gestureKey);
+
     this._connectStatsLabel('stats-abortions');
     this._connectStatsLabel('stats-dbus-menus');
     this._connectStatsLabel('stats-settings-opened');
 
-    this._settings.connect(
-        'changed::stats-point-and-click-selections',
-        () => this._updatePointAndClickCharts());
+    this._settings.connect('changed::stats-click-selections', () => {
+      this._clickHistograms = this._getHistograms(clickKey);
+      this._updateCharts();
+    });
 
-    this._settings.connect(
-        'changed::stats-gesture-selections', () => this._updateGestureCharts());
+    this._settings.connect('changed::stats-gesture-selections', () => {
+      this._gestureHistograms = this._getHistograms(gestureKey);
+      this._updateCharts();
+    });
 
-    this._setupPointAndClickCharts();
-    this._setupGestureCharts();
+
+    this._setupPieChart(this._builder.get_object('click-pie-chart'), false);
+    this._setupPieChart(this._builder.get_object('gesture-pie-chart'), true);
+
+    for (let i = 1; i <= 4; i++) {
+      this._setupHistogram(this._builder.get_object('click-histogram-' + i), false, i);
+      this._setupHistogram(this._builder.get_object('gesture-histogram-' + i), true, i);
+    }
   }
 
   // ----------------------------------------------------------------------- private stuff
 
+  _getHistograms(key) {
+    const histograms = this._settings.get_value(key).deep_unpack();
 
-  _setupPointAndClickCharts() {
-    this._setupPieChart(
-        this._builder.get_object('point-and-click-pie-chart'),
-        'stats-point-and-click-selections');
+    histograms.sum = 0;
+    histograms.max = 0;
 
-    for (let i = 1; i <= 4; i++) {
-      this._setupHistogram(
-          this._builder.get_object('point-and-click-histogram-' + i),
-          'stats-point-and-click-selections', i);
+    for (let i = 0; i < histograms.length; i++) {
+      let sum = 0;
+      let max = 0;
+      histograms[i].forEach(v => {
+        sum += v;
+        max = Math.max(max, v)
+      });
+      histograms[i].sum = sum;
+      histograms[i].max = max;
+      histograms.sum += sum;
+      histograms.max = Math.max(histograms.max, max);
     }
+
+    return histograms;
   }
 
-
-  _updatePointAndClickCharts() {
-    this._builder.get_object('point-and-click-pie-chart').queue_draw();
-
-    for (let i = 1; i <= 4; i++) {
-      this._builder.get_object('point-and-click-histogram-' + i).queue_draw();
-    }
-  }
-
-
-
-  _setupGestureCharts() {
-    this._setupPieChart(
-        this._builder.get_object('gesture-pie-chart'), 'stats-gesture-selections');
-
-    for (let i = 1; i <= 4; i++) {
-      this._setupHistogram(
-          this._builder.get_object('gesture-histogram-' + i), 'stats-gesture-selections',
-          i);
-    }
-  }
-
-  _updateGestureCharts() {
+  _updateCharts() {
     this._builder.get_object('gesture-pie-chart').queue_draw();
+    this._builder.get_object('click-pie-chart').queue_draw();
 
     for (let i = 1; i <= 4; i++) {
+      this._builder.get_object('click-histogram-' + i).queue_draw();
       this._builder.get_object('gesture-histogram-' + i).queue_draw();
     }
   }
 
-  _setupPieChart(drawingArea, dataKey) {
+  _setupPieChart(drawingArea, gestureMode) {
 
     drawingArea.connect('draw', (widget, ctx) => {
-      const histograms = this._settings.get_value(dataKey).deep_unpack();
-
-      const depthSums = [];
-      let totalSum    = 0;
-
-      for (let i = 0; i < histograms.length; i++) {
-        let sum = 0;
-        histograms[i].forEach(v => sum += v);
-        depthSums.push(sum);
-        totalSum += sum;
-      }
+      const histograms = gestureMode ? this._gestureHistograms : this._clickHistograms;
 
       const width  = widget.get_allocated_width();
       const height = widget.get_allocated_height();
       const radius = Math.min(width, height) / 2;
 
-      ctx.setOperator(Cairo.Operator.CLEAR);
-      ctx.paint();
-      ctx.setOperator(Cairo.Operator.OVER);
+      Gtk.render_background(widget.get_style_context(), ctx, 0, 0, width, height);
 
       const fgColor = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
       const fxColor = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
@@ -126,7 +118,7 @@ var Achievements = class Achievements {
       const layout = PangoCairo.create_layout(ctx);
       layout.set_font_description(font);
       layout.set_alignment(Pango.Alignment.CENTER);
-      layout.set_text(this._formatNumber(totalSum), -1);
+      layout.set_text(this._formatNumber(histograms.sum), -1);
       layout.set_width(Pango.units_from_double(width));
 
       const extents = layout.get_pixel_extents()[1];
@@ -146,36 +138,58 @@ var Achievements = class Achievements {
     });
   }
 
-  _setupHistogram(drawingArea, dataKey, depth) {
+  _setupHistogram(drawingArea, gestureMode, depth) {
 
     // Draw six lines representing the wedge separators.
     drawingArea.connect('draw', (widget, ctx) => {
-      const histograms = this._settings.get_value(dataKey).deep_unpack();
-
-      let sum = 0;
-      histograms[depth - 1].forEach(v => sum += v);
+      const globalMax  = Math.max(this._gestureHistograms.max, this._clickHistograms.max);
+      const histograms = gestureMode ? this._gestureHistograms : this._clickHistograms;
+      const histogram  = histograms[depth - 1];
 
       const fgColor = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
       const fxColor = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
       const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
       font.set_absolute_size(Pango.units_from_double(24));
 
-      ctx.setOperator(Cairo.Operator.CLEAR);
-      ctx.paint();
-      ctx.setOperator(Cairo.Operator.OVER);
 
-      ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, fgColor.alpha);
-      // ctx.arc(size * 0.25, size * 0.25, size * 0.1, 0, 2 * Math.PI);
-      // ctx.fill();
+      const width  = widget.get_allocated_width();
+      const height = widget.get_allocated_height();
+      Gtk.render_background(widget.get_style_context(), ctx, 0, 0, width, height);
 
-      const layout = PangoCairo.create_layout(ctx);
-      layout.set_font_description(font);
-      layout.set_alignment(Pango.Alignment.LEFT);
-      layout.set_text(this._formatNumber(sum), -1);
-      layout.set_width(Pango.units_from_double(widget.get_allocated_width()));
-      layout.set_height(Pango.units_from_double(widget.get_allocated_height()));
 
-      PangoCairo.show_layout(ctx, layout);
+      // const layout = PangoCairo.create_layout(ctx);
+      // layout.set_font_description(font);
+      // layout.set_alignment(Pango.Alignment.LEFT);
+      // layout.set_text(this._formatNumber(sum), -1);
+      // layout.set_width(Pango.units_from_double(widget.get_allocated_width()));
+      // layout.set_height(Pango.units_from_double(widget.get_allocated_height()));
+
+      // ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, fgColor.alpha);
+      // PangoCairo.show_layout(ctx, layout);
+
+      const bottomPadding = 20;
+      const leftPadding   = 30;
+
+      ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.5);
+      ctx.moveTo(leftPadding, height - bottomPadding);
+      ctx.lineTo(width, height - bottomPadding);
+      ctx.setLineWidth(1);
+      ctx.stroke();
+
+
+
+      if (globalMax > 0) {
+        ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, fxColor.alpha);
+        const barWidth = (width - leftPadding) / histogram.length;
+        for (let i = 0; i < histogram.length; i++) {
+          const barHeight = (histogram[i] / globalMax) * (height - bottomPadding);
+          ctx.moveTo((i + 0.5) * barWidth + leftPadding, height - bottomPadding);
+          ctx.lineTo(
+              (i + 0.5) * barWidth + leftPadding, height - bottomPadding - barHeight);
+        }
+        ctx.setLineWidth(barWidth - 2);
+        ctx.stroke();
+      }
 
       return false;
     });

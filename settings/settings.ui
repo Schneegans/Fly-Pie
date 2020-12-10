@@ -8338,38 +8338,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkImage" id="level-image17">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="pixbuf">../resources/badges/tutorial/gold.png</property>
-                <property name="pixel_size">200</property>
-                <property name="icon_size">6</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkProgressBar" id="level-progressbar">
-                <property name="width_request">500</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="margin_top">10</property>
-                <property name="margin_bottom">20</property>
-                <property name="fraction">0.75</property>
-                <property name="text" translatable="yes">750 / 5000 XP</property>
-                <property name="show_text">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkStack" id="achievements-stack">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -8385,78 +8353,122 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         <property name="can_focus">False</property>
                         <property name="shadow_type">none</property>
                         <child>
-                          <object class="GtkFlowBox">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">center</property>
-                            <property name="valign">start</property>
-                            <property name="min_children_per_line">4</property>
-                            <property name="max_children_per_line">10</property>
-                            <property name="selection_mode">none</property>
+                            <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkFlowBoxChild">
-                                <property name="width_request">100</property>
-                                <property name="height_request">80</property>
+                              <object class="GtkImage" id="level-image17">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="pixbuf">../resources/badges/tutorial/gold.png</property>
+                                <property name="pixel_size">200</property>
+                                <property name="icon_size">6</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkProgressBar" id="level-progressbar">
+                                <property name="width_request">500</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="margin_top">10</property>
+                                <property name="margin_bottom">20</property>
+                                <property name="fraction">0.75</property>
+                                <property name="text" translatable="yes">750 / 5000 XP</property>
+                                <property name="show_text">True</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkFlowBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="valign">start</property>
+                                <property name="min_children_per_line">4</property>
+                                <property name="max_children_per_line">10</property>
+                                <property name="selection_mode">none</property>
                                 <child>
-                                  <object class="GtkOverlay">
+                                  <object class="GtkFlowBoxChild">
+                                    <property name="width_request">100</property>
+                                    <property name="height_request">80</property>
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
+                                    <property name="can_focus">True</property>
                                     <child>
-                                      <object class="GtkImage" id="level-image9">
+                                      <object class="GtkOverlay">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="pixbuf">../resources/badges/tutorial/silver.png</property>
-                                        <property name="pixel_size">120</property>
-                                      </object>
-                                      <packing>
-                                        <property name="index">-1</property>
-                                      </packing>
-                                    </child>
-                                    <child type="overlay">
-                                      <object class="GtkBox">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="valign">center</property>
-                                        <property name="orientation">vertical</property>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkImage" id="level-image9">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="opacity">0</property>
-                                            <property name="valign">center</property>
-                                            <property name="label" translatable="yes">Make 500 selection of items at level 5.</property>
-                                            <property name="justify">center</property>
-                                            <property name="wrap">True</property>
-                                            <property name="max_width_chars">0</property>
+                                            <property name="pixbuf">../resources/badges/tutorial/silver.png</property>
+                                            <property name="pixel_size">120</property>
                                           </object>
                                           <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
+                                            <property name="index">-1</property>
                                           </packing>
                                         </child>
-                                        <child>
-                                          <object class="GtkLabel">
+                                        <child type="overlay">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
-                                            <property name="opacity">0</property>
                                             <property name="valign">center</property>
-                                            <property name="label" translatable="yes">&lt;small&gt;500 XP&lt;/small&gt;</property>
-                                            <property name="use_markup">True</property>
+                                            <property name="orientation">vertical</property>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <property name="opacity">0</property>
+                                                <property name="valign">center</property>
+                                                <property name="label" translatable="yes">Make 500 selection of items at level 5.</property>
+                                                <property name="justify">center</property>
+                                                <property name="wrap">True</property>
+                                                <property name="max_width_chars">0</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">True</property>
+                                                <property name="position">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="visible">True</property>
+                                                <property name="can_focus">False</property>
+                                                <property name="opacity">0</property>
+                                                <property name="valign">center</property>
+                                                <property name="label" translatable="yes">&lt;small&gt;500 XP&lt;/small&gt;</property>
+                                                <property name="use_markup">True</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">True</property>
+                                                <property name="position">1</property>
+                                              </packing>
+                                            </child>
                                           </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
                                         </child>
                                       </object>
                                     </child>
                                   </object>
                                 </child>
                               </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">2</property>
+                              </packing>
                             </child>
                           </object>
                         </child>
@@ -8487,10 +8499,12 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                             <property name="margin_left">16</property>
                             <property name="margin_right">16</property>
                             <property name="margin_bottom">16</property>
+                            <property name="row_spacing">8</property>
+                            <property name="column_spacing">8</property>
                             <property name="column_homogeneous">True</property>
                             <child>
-                              <object class="GtkDrawingArea" id="point-and-click-pie-chart">
-                                <property name="height_request">200</property>
+                              <object class="GtkDrawingArea" id="click-pie-chart">
+                                <property name="height_request">150</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -8501,7 +8515,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                             </child>
                             <child>
                               <object class="GtkDrawingArea" id="gesture-pie-chart">
-                                <property name="height_request">200</property>
+                                <property name="height_request">150</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -8511,8 +8525,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkDrawingArea" id="point-and-click-histogram-1">
-                                <property name="height_request">100</property>
+                              <object class="GtkDrawingArea" id="click-histogram-1">
+                                <property name="height_request">75</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -8523,7 +8537,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                             </child>
                             <child>
                               <object class="GtkDrawingArea" id="gesture-histogram-1">
-                                <property name="height_request">100</property>
+                                <property name="height_request">75</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -8533,8 +8547,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkDrawingArea" id="point-and-click-histogram-2">
-                                <property name="height_request">100</property>
+                              <object class="GtkDrawingArea" id="click-histogram-2">
+                                <property name="height_request">75</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -8544,8 +8558,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkDrawingArea" id="point-and-click-histogram-3">
-                                <property name="height_request">100</property>
+                              <object class="GtkDrawingArea" id="click-histogram-3">
+                                <property name="height_request">75</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -8555,8 +8569,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkDrawingArea" id="point-and-click-histogram-4">
-                                <property name="height_request">100</property>
+                              <object class="GtkDrawingArea" id="click-histogram-4">
+                                <property name="height_request">75</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -8567,7 +8581,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                             </child>
                             <child>
                               <object class="GtkDrawingArea" id="gesture-histogram-2">
-                                <property name="height_request">100</property>
+                                <property name="height_request">75</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -8578,7 +8592,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                             </child>
                             <child>
                               <object class="GtkDrawingArea" id="gesture-histogram-3">
-                                <property name="height_request">100</property>
+                                <property name="height_request">75</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -8589,7 +8603,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                             </child>
                             <child>
                               <object class="GtkDrawingArea" id="gesture-histogram-4">
-                                <property name="height_request">100</property>
+                                <property name="height_request">75</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                               </object>
@@ -8738,7 +8752,13 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="halign">center</property>
+                                <property name="margin_top">4</property>
+                                <property name="margin_bottom">8</property>
                                 <property name="label" translatable="yes">Point-and-Click Selections</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -8749,7 +8769,14 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Gesture Selections	</property>
+                                <property name="halign">center</property>
+                                <property name="margin_top">4</property>
+                                <property name="margin_bottom">8</property>
+                                <property name="label" translatable="yes">Gesture Selections</property>
+                                <property name="justify">center</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -8771,21 +8798,35 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkStackSwitcher">
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="margin_top">10</property>
-                <property name="stack">achievements-stack</property>
+                <child>
+                  <placeholder/>
+                </child>
+                <child type="center">
+                  <object class="GtkStackSwitcher">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">center</property>
+                    <property name="margin_top">10</property>
+                    <property name="stack">achievements-stack</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">3</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>

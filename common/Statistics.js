@@ -34,8 +34,8 @@ var Statistics = class Statistics {
     // We add the selection to one of the histograms with selection counts per selection
     // time. There is one of these histograms for the first four selection depths for
     // either point-and-click selections or for gesture selections.
-    const key = gestureOnlySelection ? 'stats-gesture-selections' :
-                                       'stats-point-and-click-selections';
+    const key =
+        gestureOnlySelection ? 'stats-gesture-selections' : 'stats-click-selections';
 
     // Retrieve all histograms from the settings and make sure that we have four of them.
     // Any selection deeper than five will be recorded in the fourth bin.
