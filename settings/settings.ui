@@ -8505,14 +8505,14 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                             <property name="margin_left">16</property>
                             <property name="margin_right">16</property>
                             <property name="margin_bottom">16</property>
-                            <property name="row_spacing">8</property>
                             <property name="column_spacing">8</property>
                             <property name="column_homogeneous">True</property>
                             <child>
-                              <object class="GtkDrawingArea" id="click-pie-chart">
-                                <property name="height_request">150</property>
+                              <object class="GtkDrawingArea" id="clicks-pie-chart">
+                                <property name="height_request">170</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="margin_top">8</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -8520,10 +8520,11 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkDrawingArea" id="gesture-pie-chart">
-                                <property name="height_request">150</property>
+                              <object class="GtkDrawingArea" id="gestures-pie-chart">
+                                <property name="height_request">170</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="margin_top">8</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -8531,10 +8532,35 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkDrawingArea" id="click-histogram-1">
-                                <property name="height_request">75</property>
+                              <object class="GtkDrawingArea" id="clicks-histogram-1">
+                                <property name="height_request">85</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkDrawingArea" id="gestures-histogram-1">
+                                <property name="height_request">85</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkDrawingArea" id="clicks-histogram-2">
+                                <property name="height_request">85</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -8542,10 +8568,35 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkDrawingArea" id="gesture-histogram-1">
-                                <property name="height_request">75</property>
+                              <object class="GtkDrawingArea" id="clicks-histogram-3">
+                                <property name="height_request">85</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkDrawingArea" id="clicks-histogram-4">
+                                <property name="height_request">85</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkDrawingArea" id="gestures-histogram-2">
+                                <property name="height_request">85</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -8553,43 +8604,11 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkDrawingArea" id="click-histogram-2">
-                                <property name="height_request">75</property>
+                              <object class="GtkDrawingArea" id="gestures-histogram-3">
+                                <property name="height_request">85</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="click-histogram-3">
-                                <property name="height_request">75</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="click-histogram-4">
-                                <property name="height_request">75</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">5</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="gesture-histogram-2">
-                                <property name="height_request">75</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
+                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -8597,25 +8616,15 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkDrawingArea" id="gesture-histogram-3">
-                                <property name="height_request">75</property>
+                              <object class="GtkDrawingArea" id="gestures-histogram-4">
+                                <property name="height_request">85</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
                                 <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="gesture-histogram-4">
-                                <property name="height_request">75</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">5</property>
                               </packing>
                             </child>
                             <child>
@@ -8624,6 +8633,47 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                 <property name="can_focus">False</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">5</property>
+                                <property name="width">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="hexpand">True</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="margin_top">8</property>
+                                    <property name="margin_bottom">8</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="label" translatable="yes">Canceled selections</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="stats-abortions">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">end</property>
+                                    <property name="label">-</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -8641,10 +8691,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="margin_top">4</property>
-                                    <property name="margin_bottom">4</property>
+                                    <property name="margin_top">8</property>
+                                    <property name="margin_bottom">8</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Canceled selections</property>
+                                    <property name="label" translatable="yes">Menus opened over the D-Bus</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -8653,7 +8703,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkLabel" id="stats-abortions">
+                                  <object class="GtkLabel" id="stats-dbus-menus">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">end</property>
@@ -8682,49 +8732,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="margin_top">4</property>
-                                    <property name="margin_bottom">4</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Menus opened over the D-Bus</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="stats-dbus-menus">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label">-</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">8</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="margin_top">4</property>
-                                    <property name="margin_bottom">4</property>
+                                    <property name="margin_top">8</property>
+                                    <property name="margin_bottom">8</property>
                                     <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Number of times this settings dialog was opened</property>
                                   </object>
@@ -8750,43 +8759,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">8</property>
                                 <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="margin_top">4</property>
-                                <property name="margin_bottom">8</property>
-                                <property name="label" translatable="yes">Point-and-Click Selections</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="margin_top">4</property>
-                                <property name="margin_bottom">8</property>
-                                <property name="label" translatable="yes">Gesture Selections</property>
-                                <property name="justify">center</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">1</property>
                               </packing>
                             </child>
                           </object>

@@ -36,80 +36,100 @@ var Achievements = class Achievements {
     const gestureKey = 'stats-gesture-selections';
     const clickKey   = 'stats-click-selections';
 
-    this._clickHistograms   = this._getHistograms(clickKey);
-    this._gestureHistograms = this._getHistograms(gestureKey);
-
     this._connectStatsLabel('stats-abortions');
     this._connectStatsLabel('stats-dbus-menus');
     this._connectStatsLabel('stats-settings-opened');
 
     this._settings.connect('changed::stats-click-selections', () => {
-      this._clickHistograms = this._getHistograms(clickKey);
-      this._updateCharts();
+      this._charts['clicks'].data = this._settings.get_value(clickKey).deep_unpack();
+      this._updateChartData(this._charts['clicks']);
+      this._redrawCharts();
     });
 
     this._settings.connect('changed::stats-gesture-selections', () => {
-      this._gestureHistograms = this._getHistograms(gestureKey);
-      this._updateCharts();
+      this._charts['gestures'].data = this._settings.get_value(gestureKey).deep_unpack();
+      this._updateChartData(this._charts['gestures']);
+      this._redrawCharts();
     });
 
 
-    this._setupPieChart(this._builder.get_object('click-pie-chart'), false);
-    this._setupPieChart(this._builder.get_object('gesture-pie-chart'), true);
+    this._charts = {
+      clicks: {
+        pieChart: this._setupPieChart('clicks'),
+        histograms: [
+          this._setupHistogram('clicks', 1), this._setupHistogram('clicks', 2),
+          this._setupHistogram('clicks', 3), this._setupHistogram('clicks', 4)
+        ],
+        data: this._settings.get_value(clickKey).deep_unpack(),
+        sum: {total: 0, perLevel: []},
+        max: {total: 0, perLevel: []}
+      },
+      gestures: {
+        pieChart: this._setupPieChart('gestures'),
+        histograms: [
+          this._setupHistogram('gestures', 1), this._setupHistogram('gestures', 2),
+          this._setupHistogram('gestures', 3), this._setupHistogram('gestures', 4)
+        ],
+        data: this._settings.get_value(gestureKey).deep_unpack(),
+        sum: {total: 0, perLevel: []},
+        max: {total: 0, perLevel: []}
+      }
+    };
 
-    for (let i = 1; i <= 4; i++) {
-      this._setupHistogram(this._builder.get_object('click-histogram-' + i), false, i);
-      this._setupHistogram(this._builder.get_object('gesture-histogram-' + i), true, i);
-    }
+    this._updateChartData(this._charts['clicks']);
+    this._updateChartData(this._charts['gestures']);
+    this._redrawCharts();
   }
 
   // ----------------------------------------------------------------------- private stuff
 
-  _getHistograms(key) {
-    const histograms = this._settings.get_value(key).deep_unpack();
+  _updateChartData(charts) {
+    charts.sum = {total: 0, perLevel: []};
+    charts.max = {total: 0, perLevel: []};
 
-    histograms.sum = 0;
-    histograms.max = 0;
-
-    for (let i = 0; i < histograms.length; i++) {
+    for (let i = 0; i < charts.data.length; i++) {
       let sum = 0;
       let max = 0;
-      histograms[i].forEach(v => {
+
+      charts.data[i].forEach(v => {
         sum += v;
         max = Math.max(max, v)
       });
-      histograms[i].sum = sum;
-      histograms[i].max = max;
-      histograms.sum += sum;
-      histograms.max = Math.max(histograms.max, max);
-    }
 
-    return histograms;
-  }
-
-  _updateCharts() {
-    this._builder.get_object('gesture-pie-chart').queue_draw();
-    this._builder.get_object('click-pie-chart').queue_draw();
-
-    for (let i = 1; i <= 4; i++) {
-      this._builder.get_object('click-histogram-' + i).queue_draw();
-      this._builder.get_object('gesture-histogram-' + i).queue_draw();
+      charts.sum.perLevel.push(sum);
+      charts.max.perLevel.push(max);
+      charts.sum.total += sum;
+      charts.max.total = Math.max(charts.max.total, max);
     }
   }
 
-  _setupPieChart(drawingArea, gestureMode) {
+  _redrawCharts() {
+    for (const type in this._charts) {
+      this._charts[type].pieChart.queue_draw();
+      this._charts[type].histograms.forEach((h) => h.queue_draw());
+    }
+  }
+
+  _setupPieChart(type) {
+
+    const drawingArea = this._builder.get_object(type + '-pie-chart');
 
     drawingArea.connect('draw', (widget, ctx) => {
-      const histograms = gestureMode ? this._gestureHistograms : this._clickHistograms;
+      const histograms = this._charts[type];
 
       const width  = widget.get_allocated_width();
       const height = widget.get_allocated_height();
-      const radius = Math.min(width, height) / 2;
+
+      const maxSum =
+          Math.max(this._charts['gestures'].sum.total, this._charts['clicks'].sum.total);
+      const maxRadius = Math.min(width, height) / 2;
+      const minRadius = 0.5 * maxRadius;
+      const radius =
+          (histograms.sum.total / maxSum) * (maxRadius - minRadius) + minRadius;
 
       Gtk.render_background(widget.get_style_context(), ctx, 0, 0, width, height);
 
       const fgColor = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
-      const fxColor = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
       const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
       font.set_absolute_size(Pango.units_from_double(24));
 
@@ -118,7 +138,7 @@ var Achievements = class Achievements {
       const layout = PangoCairo.create_layout(ctx);
       layout.set_font_description(font);
       layout.set_alignment(Pango.Alignment.CENTER);
-      layout.set_text(this._formatNumber(histograms.sum), -1);
+      layout.set_text(this._formatNumber(histograms.sum.total), -1);
       layout.set_width(Pango.units_from_double(width));
 
       const extents = layout.get_pixel_extents()[1];
@@ -127,29 +147,63 @@ var Achievements = class Achievements {
 
       PangoCairo.show_layout(ctx, layout);
 
+      ctx.translate(width * 0.5, height * 0.5);
+      const fxColor  = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
+      let startAngle = -0.5 * Math.PI;
 
-      ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, fxColor.alpha);
-      ctx.moveTo(width * 0.5, height * 0.5 - radius * 0.8);
-      ctx.arc(width * 0.5, height * 0.5, radius * 0.8, -0.5 * Math.PI, 1.5 * Math.PI);
-      ctx.setLineWidth(5);
-      ctx.stroke();
+      for (let i = 0; i < histograms.data.length; i++) {
+        const endAngle = startAngle +
+            (histograms.sum.perLevel[i] / histograms.sum.total) * 2.0 * Math.PI;
+        ctx.moveTo(
+            Math.cos(startAngle) * radius * 0.9, Math.sin(startAngle) * radius * 0.9);
+
+        const alpha = 1.0 - i / histograms.data.length;
+        ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, alpha);
+        ctx.arc(0, 0, radius * 0.9, startAngle, endAngle);
+        ctx.setLineWidth(8);
+        ctx.stroke();
+
+        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, fgColor.alpha);
+        ctx.moveTo(Math.cos(startAngle) * radius, Math.sin(startAngle) * radius);
+        ctx.lineTo(
+            Math.cos(startAngle) * radius * 0.8, Math.sin(startAngle) * radius * 0.8);
+        ctx.setLineWidth(1);
+        ctx.stroke();
+
+        startAngle = endAngle;
+      }
 
       return false;
     });
+
+    return drawingArea;
   }
 
-  _setupHistogram(drawingArea, gestureMode, depth) {
+  _setupHistogram(type, depth) {
+
+    const drawingArea = this._builder.get_object(type + '-histogram-' + depth);
+
+    drawingArea.connect('enter-notify-event', (widget) => {
+      widget._hovered = true;
+      widget.queue_draw();
+    });
+
+    drawingArea.connect('leave-notify-event', (widget) => {
+      widget._hovered = false;
+      widget.queue_draw();
+    });
 
     // Draw six lines representing the wedge separators.
     drawingArea.connect('draw', (widget, ctx) => {
-      const globalMax  = Math.max(this._gestureHistograms.max, this._clickHistograms.max);
-      const histograms = gestureMode ? this._gestureHistograms : this._clickHistograms;
-      const histogram  = histograms[depth - 1];
+      const globalMax =
+          Math.max(this._charts['gestures'].max.total, this._charts['clicks'].max.total);
+      const histograms = this._charts[type];
+      const histogram  = histograms.data[depth - 1];
 
       const fgColor = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
       const fxColor = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
       const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
-      font.set_absolute_size(Pango.units_from_double(24));
+      font.set_absolute_size(Pango.units_from_double(9));
 
 
       const width  = widget.get_allocated_width();
@@ -157,32 +211,64 @@ var Achievements = class Achievements {
       Gtk.render_background(widget.get_style_context(), ctx, 0, 0, width, height);
 
 
-      // const layout = PangoCairo.create_layout(ctx);
-      // layout.set_font_description(font);
-      // layout.set_alignment(Pango.Alignment.LEFT);
-      // layout.set_text(this._formatNumber(sum), -1);
-      // layout.set_width(Pango.units_from_double(widget.get_allocated_width()));
-      // layout.set_height(Pango.units_from_double(widget.get_allocated_height()));
 
-      // ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, fgColor.alpha);
-      // PangoCairo.show_layout(ctx, layout);
-
+      const topPadding    = 10;
       const bottomPadding = 20;
-      const leftPadding   = 30;
+      const leftPadding   = 15;
+      const rightPadding  = 15;
 
-      ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.5);
+      if (widget._hovered) {
+        ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, 0.8);
+      } else {
+        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.4);
+      }
+
       ctx.moveTo(leftPadding, height - bottomPadding);
-      ctx.lineTo(width, height - bottomPadding);
+      ctx.lineTo(width - rightPadding, height - bottomPadding);
       ctx.setLineWidth(1);
       ctx.stroke();
+
+      if (widget._hovered) {
+        ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, 0.2);
+      } else {
+        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.1);
+      }
+
+      const maxSeconds = 5;
+      for (let i = 0; i <= maxSeconds; i++) {
+        const gap = (width - leftPadding - rightPadding - 2) / maxSeconds;
+        ctx.moveTo(leftPadding + i * gap + 1, topPadding);
+        ctx.lineTo(leftPadding + i * gap + 1, height - bottomPadding + 3);
+      }
+
+      ctx.setLineWidth(0.5);
+      ctx.stroke();
+
+      if (widget._hovered) {
+        ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, 0.8);
+      } else {
+        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.4);
+      }
+
+      for (let i = 0; i <= maxSeconds; i++) {
+        const gap = (width - leftPadding - rightPadding - 2) / maxSeconds;
+        ctx.moveTo(leftPadding + i * gap - 5, height - bottomPadding + 1);
+
+        const layout = PangoCairo.create_layout(ctx);
+        layout.set_font_description(font);
+        layout.set_alignment(Pango.Alignment.CENTER);
+        layout.set_text(i + 's', -1);
+        PangoCairo.show_layout(ctx, layout);
+      }
 
 
 
       if (globalMax > 0) {
         ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, fxColor.alpha);
-        const barWidth = (width - leftPadding) / histogram.length;
+        const barWidth = (width - leftPadding - rightPadding) / histogram.length;
         for (let i = 0; i < histogram.length; i++) {
-          const barHeight = (histogram[i] / globalMax) * (height - bottomPadding);
+          const barHeight =
+              (histogram[i] / globalMax) * (height - bottomPadding - topPadding);
           ctx.moveTo((i + 0.5) * barWidth + leftPadding, height - bottomPadding);
           ctx.lineTo(
               (i + 0.5) * barWidth + leftPadding, height - bottomPadding - barHeight);
@@ -193,6 +279,8 @@ var Achievements = class Achievements {
 
       return false;
     });
+
+    return drawingArea;
   }
 
   _connectStatsLabel(key) {
