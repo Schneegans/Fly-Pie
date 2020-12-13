@@ -279,10 +279,13 @@ var Settings = class Settings {
     this._widget.connect('destroy', () => {
       if (this._showAnimationInfoTimeout > 0) {
         GLib.source_remove(this._showAnimationInfoTimeout);
-
-        // Delete the static settings object of the statistics.
-        Statistics.cleanUp();
       }
+
+      // Delete the static settings object of the statistics.
+      Statistics.cleanUp();
+
+      // Disconnect some settings handlers of the achievements class.
+      this._achievements.destroy();
     });
 
     // Record this construction for the statistics.
