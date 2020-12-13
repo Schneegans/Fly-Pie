@@ -3622,6 +3622,7 @@ will cancel the selection.</property>
                     <property name="height_request">24</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip_text" translatable="yes">Wedge Appearance</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
@@ -4478,6 +4479,7 @@ will cancel the selection.</property>
                     <property name="height_request">24</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip_text" translatable="yes">Center Appearance</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
@@ -5534,6 +5536,7 @@ will cancel the selection.</property>
                     <property name="height_request">24</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip_text" translatable="yes">Children Appearance</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
@@ -6138,6 +6141,7 @@ will cancel the selection.</property>
                     <property name="height_request">24</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip_text" translatable="yes">Grandchildren Appearance</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
@@ -6408,6 +6412,7 @@ will cancel the selection.</property>
                     <property name="height_request">24</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip_text" translatable="yes">Trace Appearance</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
@@ -6927,6 +6932,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                     <property name="height_request">24</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                     <property name="tooltip_text" translatable="yes">Advanced Settings</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>

@@ -607,13 +607,8 @@ var Settings = class Settings {
   // This draws the custom icons of the appearance settings tabs.
   _createAppearanceTabIcons() {
 
-    // We have to add these events to the Gtk.DrawingAreas to make them actually
-    // clickable. Else it would not be possible to select the tabs.
-    const tabEvents = Gdk.EventMask.BUTTON_PRESS_MASK | Gdk.EventMask.BUTTON_RELEASE_MASK;
-
     // Draw six lines representing the wedge separators.
     let tabIcon = this._builder.get_object('wedges-tab-icon');
-    tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
@@ -636,7 +631,6 @@ var Settings = class Settings {
 
     // Draw one circle representing the center item.
     tabIcon = this._builder.get_object('center-tab-icon');
-    tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
@@ -651,7 +645,6 @@ var Settings = class Settings {
 
     // Draw six circles representing child items.
     tabIcon = this._builder.get_object('children-tab-icon');
-    tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
@@ -671,7 +664,6 @@ var Settings = class Settings {
     // Draw six groups of five grandchildren each. The grandchild at the back-navigation
     // position is skipped.
     tabIcon = this._builder.get_object('grandchildren-tab-icon');
-    tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
@@ -700,7 +692,6 @@ var Settings = class Settings {
 
     // Draw a line and some circles representing a trace.
     tabIcon = this._builder.get_object('trace-tab-icon');
-    tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
@@ -728,7 +719,6 @@ var Settings = class Settings {
 
     // Draw three dots indicating the advanced settings.
     tabIcon = this._builder.get_object('advanced-tab-icon');
-    tabIcon.add_events(tabEvents);
     tabIcon.connect('draw', (widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
