@@ -486,15 +486,15 @@
     <!-- Statistics -->
 
     <key name="stats-click-selections" type="aau">
-      <default>[[], [], [], [], [], []]</default>
+      <default>[[], [], [], []]</default>
       <summary>Point-and-Click Selection Times</summary>
-      <description>The selecion time histogram of point-and-click selections for each level.</description>
+      <description>The selecion time histogram of point-and-click selections for differnt depths.</description>
     </key>
 
     <key name="stats-gesture-selections" type="aau">
-      <default>[[], [], [], [], [], []]</default>
+      <default>[[], [], [], []]</default>
       <summary>Gesture Selection Times</summary>
-      <description>The selecion time histogram of gesture selections for each level.</description>
+      <description>The selecion time histogram of gesture selections for differnt depths.</description>
     </key>
 
     <key name="stats-abortions" type="u">
