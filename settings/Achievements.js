@@ -33,60 +33,75 @@ var Achievements = class Achievements {
     this._builder  = builder;
     this._settings = settings;
 
+    // We keep several connections to the Gio.Settings object. Once the settings dialog is
+    // closed, we use this array to disconnect all of them.
     this._settingsConnections = [];
 
-    const gestureKey = 'stats-gesture-selections';
-    const clickKey   = 'stats-click-selections';
+    // ----------------------------------------------- Initialize the achievements
+    // sub-page
 
+
+    // ------------------------------------------------ Initialize the statistics sub-page
+
+    // Show some statistics at the bottom of the statistics page.
     this._connectStatsLabel('stats-abortions');
     this._connectStatsLabel('stats-dbus-menus');
     this._connectStatsLabel('stats-settings-opened');
 
-    this._settingsConnections.push(
-        this._settings.connect('changed::stats-click-selections', () => {
-          this._charts['clicks'].data = this._settings.get_value(clickKey).deep_unpack();
-          this._updateChartData(this._charts['clicks']);
-          this._redrawCharts();
-        }));
+    // These are the settings schema keys storing the selection statistics. They contain
+    // an array of selection time histograms, one for each selection depth (depth 1, 2, 3,
+    // and 4 - all selections deeper than 4 are recorded in the last histogram).
+    const gestureKey = 'stats-gesture-selections';
+    const clickKey   = 'stats-click-selections';
 
-    this._settingsConnections.push(
-        this._settings.connect('changed::stats-gesture-selections', () => {
-          this._charts['gestures'].data =
-              this._settings.get_value(gestureKey).deep_unpack();
-          this._updateChartData(this._charts['gestures']);
-          this._redrawCharts();
-        }));
-
+    // This object contains information required to draw the charts of the statistics
+    // page.
     this._charts = {
       clicks: {
-        name: _('Click Selections'),
-        hoveredName: _('Level-%i Click Selections'),
-        pieWidget: this._setupPieChart('clicks'),
-        histogramWidgets: [
+        name: _('Click Selections'),                  // Shown when nothing is hovered
+        hoveredName: _('Level-%i Click Selections'),  // Shown when a histogram is hovered
+        pieWidget: this._setupPieChart('clicks'),     // A Gtk.DrawingArea
+        histogramWidgets: [                           // Four Gtk.DrawingAreas
           this._setupHistogram('clicks', 1), this._setupHistogram('clicks', 2),
           this._setupHistogram('clicks', 3), this._setupHistogram('clicks', 4)
         ],
-        data: this._settings.get_value(clickKey).deep_unpack(),
-        sum: {total: 0, perLevel: []},
-        max: {total: 0, perLevel: []}
+        data: null,          // This will contain the selection data from the Gio.Settings
+        sum: {total: 0, perLevel: []},  // These numbers are updated in _updateChartData()
+        max: {total: 0, perLevel: []}   // These numbers are updated in _updateChartData()
       },
       gestures: {
-        name: _('Gesture Selections'),
-        hoveredName: _('Level-%i Gesture Selections'),
-        pieWidget: this._setupPieChart('gestures'),
-        histogramWidgets: [
+        name: _('Gesture Selections'),                // Shown when nothing is hovered
+        hoveredName: _('Level-%i Gesture Selections'),// Shown when a histogram is hovered
+        pieWidget: this._setupPieChart('gestures'),   // A Gtk.DrawingArea
+        histogramWidgets: [                           // Four Gtk.DrawingAreas
           this._setupHistogram('gestures', 1), this._setupHistogram('gestures', 2),
           this._setupHistogram('gestures', 3), this._setupHistogram('gestures', 4)
         ],
-        data: this._settings.get_value(gestureKey).deep_unpack(),
-        sum: {total: 0, perLevel: []},
-        max: {total: 0, perLevel: []}
+        data: null,          // This will contain the selection data from the Gio.Settings
+        sum: {total: 0, perLevel: []},  // These numbers are updated in _updateChartData()
+        max: {total: 0, perLevel: []}   // These numbers are updated in _updateChartData()
       }
     };
 
-    this._updateChartData(this._charts['clicks']);
-    this._updateChartData(this._charts['gestures']);
-    this._redrawCharts();
+    // If the click-selections statistics key changes (that means that the user selected
+    // something by point-and-click), redraw the corresponding charts.
+    this._settingsConnections.push(
+        this._settings.connect('changed::stats-click-selections', () => {
+          this._updateChartData(this._charts['clicks'], clickKey);
+          this._redrawCharts();
+        }));
+
+    // If the gesture-selections statistics key changes (that means that the user selected
+    // something with a gesture), redraw the corresponding charts.
+    this._settingsConnections.push(
+        this._settings.connect('changed::stats-gesture-selections', () => {
+          this._updateChartData(this._charts['gestures'], gestureKey);
+          this._redrawCharts();
+        }));
+
+    // Initially get the data for the charts.
+    this._updateChartData(this._charts['clicks'], clickKey);
+    this._updateChartData(this._charts['gestures'], gestureKey);
   }
 
   // This should be called when the settings dialog is closed. It disconnects handlers
@@ -99,26 +114,39 @@ var Achievements = class Achievements {
 
   // ----------------------------------------------------------------------- private stuff
 
-  _updateChartData(charts) {
+  // Retrieves the selection data from the Gio.Settings and computes some maxima and sums.
+  // These values are then used when drawing the pie charts and the histograms. The data
+  // is written to the corresponding properties of the given charts object. See the
+  // constructor of this class for an explanation on how this object looks like.
+  _updateChartData(charts, settingsKey) {
+
+    // Retrieve the nested array of histograms.
+    charts.data = this._settings.get_value(settingsKey).deep_unpack();
+
+    // Reset the properties we will be writing to.
     charts.sum = {total: 0, perLevel: []};
     charts.max = {total: 0, perLevel: []};
 
+    // Iterate through all depth histograms.
     for (let i = 0; i < charts.data.length; i++) {
       let sum = 0;
       let max = 0;
 
+      // Compute the sum and maximum value for the current histogram.
       charts.data[i].forEach(v => {
         sum += v;
         max = Math.max(max, v)
       });
 
-      charts.sum.perLevel.push(sum);
-      charts.max.perLevel.push(max);
+      // Store the result, once for the entire dataset, once for the current level.
       charts.sum.total += sum;
       charts.max.total = Math.max(charts.max.total, max);
+      charts.sum.perLevel.push(sum);
+      charts.max.perLevel.push(max);
     }
   }
 
+  // Calls queue_draw() on all Gtk.DrawingAreas of the statistics page.
   _redrawCharts() {
     for (const type in this._charts) {
       this._charts[type].pieWidget.queue_draw();
