@@ -22,9 +22,10 @@ cd "$( cd "$( dirname "$0" )" && pwd )" || { echo "ERROR: Could not find the loc
 
 ./compile-locales.sh
 
-# Zip everything together
+# Delete any old zip and pack everything together
+rm --force flypie@schneegans.github.com.zip
 zip -r flypie@schneegans.github.com.zip -- common daemon presets resources \
-    schemas settings locale *.js metadata.json *.md LICENSE
+    schemas settings locale *.js metadata.json LICENSE
 
 
 while getopts is FLAG; do
