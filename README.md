@@ -1,5 +1,5 @@
 <p align="center"> 
-  <img src ="resources/logo.gif" />
+  <img src ="docs/pics/logo.gif" />
 </p>
 
 [![check](https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Fly-Pie/actions)
@@ -15,7 +15,7 @@ It features a continuous learning curve which lets you gradually lift-off from a
 
 # About Fly-Pie
 
-<a href="https://youtu.be/U22VxoT-tNU"><img align="right" width="300px" src ="resources/player.png" /></a>
+<a href="https://youtu.be/U22VxoT-tNU"><img align="right" width="300px" src ="docs/pics/player.png" /></a>
 
 Fly-Pie is designed for people who have **one hand at the mouse** most of the time.
 It is **not** designed to be used with a keyboard only; there are other applications which work better in this case (for example [kupfer](https://github.com/kupferlauncher/kupfer)).
@@ -139,7 +139,7 @@ Here is a summary of the major hints to ease your path to become a master pielot
 
 ## Bake Your First Pie Menu!
 
-<img align="right" width="250px" src ="resources/menu-editor.png" />
+<img align="right" width="250px" src ="docs/pics/menu-editor.png" />
 
 The default menu may give you the opportunity to play around with Fly-Pie, but you should definitely define your own menus!
 
@@ -152,7 +152,7 @@ Just play around with the options, most of it should be more or less self-explan
 
 While there are not many presets included for now - this will happen in a future version - you can already create your own! There are quite some possibilities...
 
-<img src ="resources/presets.png" />
+<img src ="docs/pics/presets.png" />
 
 ## Alternative Ways to Open Menus
 
@@ -329,7 +329,7 @@ report this via [Github issues](https://github.com/schneegans/fly-pie/issues).
 We are happy to receive contributions to Fly-Pie in the form of **pull requests** via Github.
 Feel free to fork the repository, implement your changes and create a merge request to the `develop` branch.
 
-For detailed contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
+For detailed contribution guidelines, see [CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
 Developing a Gnome Shell extension is not easy, as debugging possibilities are quite limited. One thing you should always do is to monitor Gnome Shells output for error or debug messages produced by Fly-Pie. This can be done with the command below. This may print many unrelated messages, but using `grep` like this highlights all occurrences of `flypie` which makes spotting Fly-Pie-related messages much easier.
 
@@ -364,4 +364,4 @@ You can add your new `*.po` file with a commit like `:globe_with_meridians: Add 
 **To get started, have a look at the [Pull Request Template](.github/PULL_REQUEST_TEMPLATE/add_or_update_translation.md)**.
 When you create your pull request, you can simply append a `&template=add_or_update_translation.md` to the URL of your pull request to auto-populate the body of your pull request with the template.
 
-Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for the some further contribution guidelines.
+Please refer to [CONTRIBUTING.md](docs/CONTRIBUTING.md) for the some further contribution guidelines.
