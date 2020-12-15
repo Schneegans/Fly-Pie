@@ -22,7 +22,7 @@ cd "$( cd "$( dirname "$0" )" && pwd )" || { echo "ERROR: Could not find the loc
 # Delete any old zip and pack everything together
 rm --force flypie@schneegans.github.com.zip
 zip -r flypie@schneegans.github.com.zip -- common daemon presets resources \
-    schemas settings locale *.js metadata.json changelog.md LICENSE
+    schemas settings locale *.js metadata.json LICENSE
 
 # Check whether the extension should be installed
 while getopts i FLAG; do
