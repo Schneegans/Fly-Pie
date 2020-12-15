@@ -40,8 +40,10 @@ while getopts is FLAG; do
         s)  # We need to throw an error because of the zip size
             SIZE_ERROR="true";;
 
-		*)	echo "Invalid flag! Use '-i' to install the extension to your system. To just build it, run the script without any flag."
-        exit 1;;
+		*)	echo "ERROR: Invalid flag!"
+            echo "Use '-i' to install the extension to your system. To just build it, run the script without any flag."
+            echo "Use '-s' to throw an error when the zip size is too big to be uploaded to the Extensions website."
+            exit 1;;
 	esac
 done
 
