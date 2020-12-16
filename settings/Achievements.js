@@ -37,8 +37,7 @@ var Achievements = class Achievements {
     // closed, we use this array to disconnect all of them.
     this._settingsConnections = [];
 
-    // ----------------------------------------------- Initialize the achievements
-    // sub-page
+    // ---------------------------------------------- Initialize the achievements sub-page
 
 
     // ------------------------------------------------ Initialize the statistics sub-page
@@ -154,30 +153,35 @@ var Achievements = class Achievements {
     }
   }
 
+  // Sets up the drawing routine for one of the two pie charts shown at the top of
+  // statistics page. This method returns a reference to the Gtk.DrawingArea of the pie
+  // chart.
   _setupPieChart(type) {
 
+    // Get the Gtk.DrawingArea.
     const drawingArea = this._builder.get_object(type + '-pie-chart');
 
     drawingArea.connect('draw', (widget, ctx) => {
+      // Get the data for the pie chart.
       const charts = this._charts[type];
 
+      // Get the size of the drawing area and allocate some space below the pie chart for
+      // the caption.
       const bottomPadding = 20;
+      const width         = widget.get_allocated_width();
+      const height        = widget.get_allocated_height() - bottomPadding;
 
-      const width  = widget.get_allocated_width();
-      const height = widget.get_allocated_height() - bottomPadding;
-
-      const maxSum =
-          Math.max(this._charts['gestures'].sum.total, this._charts['clicks'].sum.total);
-      const maxRadius = Math.min(width, height) / 2;
-      const minRadius = 0.5 * maxRadius;
-      const radius    = (charts.sum.total / maxSum) * (maxRadius - minRadius) + minRadius;
-
+      // First we render the background of the widget.
       Gtk.render_background(widget.get_style_context(), ctx, 0, 0, width, height);
 
+      // Get some values we will use more often. fgColor will be used for text and thin
+      // lines, fxColor will be used for the actual rings of the pie charts.
       const fgColor = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const fxColor = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
+
+      // Draw the caption below the pie chart.
       const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
       font.set_weight(Pango.Weight.BOLD);
-
       const layout = PangoCairo.create_layout(ctx);
       layout.set_font_description(font);
       layout.set_alignment(Pango.Alignment.CENTER);
@@ -186,18 +190,26 @@ var Achievements = class Achievements {
       ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, fgColor.alpha);
       ctx.moveTo(0, height + 2);
 
-      let text   = charts.name;
-      let number = charts.sum.total;
-
+      let text = charts.name;
       for (let i = 0; i < charts.histogramWidgets.length; i++) {
         if (charts.histogramWidgets[i]._hovered) {
-          text   = charts.hoveredName.replace('%i', i + 1);
-          number = charts.sum.perLevel[i];
+          // Get the name of the hovered histogram (if any).
+          text = charts.hoveredName.replace('%i', i + 1);
         }
       }
 
       layout.set_text(text, -1);
       PangoCairo.show_layout(ctx, layout);
+
+
+      // Now draw the number inside the pie chart.
+      let number = charts.sum.total;
+      for (let i = 0; i < charts.histogramWidgets.length; i++) {
+        if (charts.histogramWidgets[i]._hovered) {
+          // Get the sum of the hovered histogram (if any).
+          number = charts.sum.perLevel[i];
+        }
+      }
 
       layout.set_text(this._formatNumber(number), -1);
       font.set_absolute_size(Pango.units_from_double(24));
@@ -209,38 +221,54 @@ var Achievements = class Achievements {
 
       PangoCairo.show_layout(ctx, layout);
 
+      // Finally draw the individual arcs of the pie chart. We only need to do this if
+      // there are any selections.
+      if (charts.sum.total > 0) {
 
+        // Compute the radius for the pie chart. The radius is based on the number of
+        // selections recorded for this pie chart relative to the total number of
+        // selections. The maximum radius is bounded by the available space in the widget;
+        // the minimum radius is half of the maximum value.
+        const gestureSelections = this._charts.gestures.sum.total;
+        const clickSelections   = this._charts.clicks.sum.total;
+        const maxSelections     = Math.max(gestureSelections, clickSelections);
 
-      ctx.translate(width * 0.5, height * 0.5);
-      const fxColor  = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
-      let startAngle = -0.5 * Math.PI;
+        const maxRadius = Math.min(width, height) / 2;
+        const minRadius = 0.5 * maxRadius;
+        const r =
+            (charts.sum.total / maxSelections) * (maxRadius - minRadius) + minRadius;
 
-      for (let i = 0; i < charts.data.length; i++) {
-        const endAngle =
-            startAngle + (charts.sum.perLevel[i] / charts.sum.total) * 2.0 * Math.PI;
-        ctx.moveTo(
-            Math.cos(startAngle) * radius * 0.9, Math.sin(startAngle) * radius * 0.9);
+        ctx.translate(width * 0.5, height * 0.5);
+        let startAngle = -0.5 * Math.PI;
 
-        let lineWidth = 8;
+        for (let i = 0; i < charts.data.length; i++) {
+          const endAngle =
+              startAngle + (charts.sum.perLevel[i] / charts.sum.total) * 2.0 * Math.PI;
+          ctx.moveTo(Math.cos(startAngle) * r * 0.9, Math.sin(startAngle) * r * 0.9);
 
-        if (charts.histogramWidgets[i]._hovered) {
-          lineWidth = 12;
+          // Increase the line width of the hovered arc.
+          let lineWidth = 8;
+          if (charts.histogramWidgets[i]._hovered) {
+            lineWidth = 12;
+            ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.7);
+          } else {
+            const alpha = 1.0 - i / charts.data.length;
+            ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, alpha);
+          }
+
+          ctx.arc(0, 0, r * 0.9, startAngle, endAngle);
+          ctx.setLineWidth(lineWidth);
+          ctx.stroke();
+
+          // Draw a thin line separating the arcs.
+          ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, fgColor.alpha);
+          ctx.moveTo(Math.cos(startAngle) * r, Math.sin(startAngle) * r);
+          ctx.lineTo(Math.cos(startAngle) * r * 0.8, Math.sin(startAngle) * r * 0.8);
+          ctx.setLineWidth(1);
+          ctx.stroke();
+
+          startAngle = endAngle;
         }
-
-        const alpha = 1.0 - i / charts.data.length;
-        ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, alpha);
-        ctx.arc(0, 0, radius * 0.9, startAngle, endAngle);
-        ctx.setLineWidth(lineWidth);
-        ctx.stroke();
-
-        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, fgColor.alpha);
-        ctx.moveTo(Math.cos(startAngle) * radius, Math.sin(startAngle) * radius);
-        ctx.lineTo(
-            Math.cos(startAngle) * radius * 0.8, Math.sin(startAngle) * radius * 0.8);
-        ctx.setLineWidth(1);
-        ctx.stroke();
-
-        startAngle = endAngle;
       }
 
       return false;
@@ -249,10 +277,16 @@ var Achievements = class Achievements {
     return drawingArea;
   }
 
+  // Sets up the drawing routine for one of the eight histograms shown in statistics page.
+  // This method returns a reference to the Gtk.DrawingArea of the histogram.
   _setupHistogram(type, depth) {
-
+    // Get the Gtk.DrawingArea.
     const drawingArea = this._builder.get_object(type + '-histogram-' + depth);
 
+    // Whenever the mouse pointer enters one of the histogram charts, we set a _hovered
+    // property to true. When the mouse pointer leaves the histogram, it's set to false
+    // again. This property is then used during drawing of the histograms and the
+    // corresponding pie charts.
     drawingArea.connect('enter-notify-event', (widget) => {
       widget._hovered = true;
       this._redrawCharts();
@@ -264,45 +298,36 @@ var Achievements = class Achievements {
     });
 
     drawingArea.connect('draw', (widget, ctx) => {
-      const globalMax =
-          Math.max(this._charts['gestures'].max.total, this._charts['clicks'].max.total);
+      // Get the data for the pie chart.
       const charts    = this._charts[type];
       const histogram = charts.data[depth - 1];
 
+      // Get some values we will use more often. fgColor will be used for text and thin
+      // lines, fxColor will be used for the actual bars of the histogram.
       const fgColor = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
       const fxColor = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
-      const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
-      font.set_absolute_size(Pango.units_from_double(9));
 
 
-      const width  = widget.get_allocated_width();
-      const height = widget.get_allocated_height();
-      Gtk.render_background(widget.get_style_context(), ctx, 0, 0, width, height);
-
-
-
+      // Get the size of the drawing area. The histogram chart will use some padding
+      // around to add some spacing to neighboring charts.
+      const width         = widget.get_allocated_width();
+      const height        = widget.get_allocated_height();
       const topPadding    = 10;
       const bottomPadding = 20;
       const leftPadding   = 15;
       const rightPadding  = 15;
 
-      if (widget._hovered) {
-        ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, 0.8);
-      } else {
-        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.4);
-      }
+      // First we render the background of the widget.
+      Gtk.render_background(widget.get_style_context(), ctx, 0, 0, width, height);
 
+      // Then draw the bottom axis.
+      ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.4);
       ctx.moveTo(leftPadding, height - bottomPadding);
       ctx.lineTo(width - rightPadding, height - bottomPadding);
       ctx.setLineWidth(1);
       ctx.stroke();
 
-      if (widget._hovered) {
-        ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, 0.2);
-      } else {
-        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.1);
-      }
-
+      // Then the thin vertical lines.
       const maxSeconds = 5;
       for (let i = 0; i <= maxSeconds; i++) {
         const gap = (width - leftPadding - rightPadding - 2) / maxSeconds;
@@ -310,14 +335,19 @@ var Achievements = class Achievements {
         ctx.lineTo(leftPadding + i * gap + 1, height - bottomPadding + 3);
       }
 
+      ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.2);
       ctx.setLineWidth(0.5);
       ctx.stroke();
 
+      // Then draw the tiny labels for the bottom axis.
       if (widget._hovered) {
-        ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, 0.8);
+        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.5);
       } else {
-        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.4);
+        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.3);
       }
+
+      const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
+      font.set_absolute_size(Pango.units_from_double(9));
 
       for (let i = 0; i <= maxSeconds; i++) {
         const gap = (width - leftPadding - rightPadding - 2) / maxSeconds;
@@ -330,14 +360,25 @@ var Achievements = class Achievements {
         PangoCairo.show_layout(ctx, layout);
       }
 
+      // Finally draw the actual histogram lines. We first get the bin with the most
+      // selection over all histograms. This is used to scale all histograms equally.
+      const gestureSelections = this._charts.gestures.max.total;
+      const clickSelections   = this._charts.clicks.max.total;
+      const maxSelections     = Math.max(gestureSelections, clickSelections);
 
+      // Only attempt to draw anything if there are selections at all.
+      if (maxSelections > 0) {
 
-      if (globalMax > 0) {
-        ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, fxColor.alpha);
+        if (widget._hovered) {
+          ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.7);
+        } else {
+          ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, fxColor.alpha);
+        }
+
         const barWidth = (width - leftPadding - rightPadding) / histogram.length;
         for (let i = 0; i < histogram.length; i++) {
           const barHeight =
-              (histogram[i] / globalMax) * (height - bottomPadding - topPadding);
+              (histogram[i] / maxSelections) * (height - bottomPadding - topPadding);
           ctx.moveTo((i + 0.5) * barWidth + leftPadding, height - bottomPadding);
           ctx.lineTo(
               (i + 0.5) * barWidth + leftPadding, height - bottomPadding - barHeight);
