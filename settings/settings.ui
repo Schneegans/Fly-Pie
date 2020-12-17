@@ -8367,7 +8367,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <object class="GtkImage" id="level-image17">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">../resources/badges/tutorial/gold.png</property>
+                                <property name="pixbuf">../resources/badges/levels/level10.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -8396,7 +8396,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkFlowBox">
+                              <object class="GtkFlowBox" id="achievement-box">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
@@ -8404,71 +8404,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                 <property name="min_children_per_line">4</property>
                                 <property name="max_children_per_line">10</property>
                                 <property name="selection_mode">none</property>
-                                <child>
-                                  <object class="GtkFlowBoxChild">
-                                    <property name="width_request">100</property>
-                                    <property name="height_request">80</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <child>
-                                      <object class="GtkOverlay">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <child>
-                                          <object class="GtkImage" id="level-image9">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="pixbuf">../resources/badges/tutorial/silver.png</property>
-                                            <property name="pixel_size">120</property>
-                                          </object>
-                                          <packing>
-                                            <property name="index">-1</property>
-                                          </packing>
-                                        </child>
-                                        <child type="overlay">
-                                          <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="valign">center</property>
-                                            <property name="orientation">vertical</property>
-                                            <child>
-                                              <object class="GtkLabel">
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">False</property>
-                                                <property name="opacity">0</property>
-                                                <property name="valign">center</property>
-                                                <property name="label" translatable="yes">Make 500 selection of items at level 5.</property>
-                                                <property name="justify">center</property>
-                                                <property name="wrap">True</property>
-                                                <property name="max_width_chars">0</property>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkLabel">
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">False</property>
-                                                <property name="opacity">0</property>
-                                                <property name="valign">center</property>
-                                                <property name="label" translatable="yes">&lt;small&gt;500 XP&lt;/small&gt;</property>
-                                                <property name="use_markup">True</property>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">1</property>
-                                              </packing>
-                                            </child>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
