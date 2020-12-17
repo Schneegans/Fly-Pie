@@ -100,11 +100,11 @@ var Tutorial = class Tutorial {
     // Glade for now. We also add a custom style provider to create the drop shadow effect
     // of the images.
     const styleProvider = Gtk.CssProvider.new();
-    styleProvider.load_from_path(Me.path + '/resources/flypie.css');
+    styleProvider.load_from_path(Me.path + '/assets/flypie.css');
     for (let i = 1; i <= 3; i++) {
       const image = this._builder.get_object('tutorial-animation-' + i);
       image.set_from_animation(GdkPixbuf.PixbufAnimation.new_from_file(
-          Me.path + '/resources/tutorial' + i + '.gif'));
+          Me.path + '/assets/tutorial' + i + '.gif'));
       image.get_style_context().add_provider(
           styleProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
     }

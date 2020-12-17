@@ -440,11 +440,11 @@ var Achievements = class Achievements {
     image.add_events(Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK);
     image.connect('draw', (widget, ctx) => {
       const background = GdkPixbuf.Pixbuf.new_from_file(
-          Me.path + '/resources/badges/achievements/' + tier + '.svg');
+          Me.path + '/assets/badges/achievements/' + tier + '.svg');
       const middleground = GdkPixbuf.Pixbuf.new_from_file(
-          Me.path + '/resources/badges/achievements/' + icon + '.svg');
+          Me.path + '/assets/badges/achievements/' + icon + '.svg');
       const foreground = GdkPixbuf.Pixbuf.new_from_file(
-          Me.path + '/resources/badges/achievements/' + tier + '.png');
+          Me.path + '/assets/badges/achievements/' + tier + '.png');
 
       Gdk.cairo_set_source_pixbuf(ctx, background, 0, 0);
       ctx.paint();
