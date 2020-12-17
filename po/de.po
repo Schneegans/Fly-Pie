@@ -1,7 +1,8 @@
 # German translation for the Fly-Pie GNOME Shell Extension.
 # Copyright (C) 2020 Simon Schneegans
 # This file is distributed under the same license as the Fly-Pie package.
-# Initial translation: Simon Schneegans <code@simonschneegans.de>, 2020.
+# Simon Schneegans <code@simonschneegans.de>, 2020.
+# Philipp Kiemle <philipp.kiemle@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
@@ -10,8 +11,7 @@ msgstr ""
 "POT-Creation-Date: 2020-12-16 20:36+0100\n"
 "PO-Revision-Date: 2020-11-30 09:24+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: Simon Schneegans <code@simonschneegans.de>, Philipp Kiemle "
-"<philipp.kiemle@gmail.com>\n"
+"Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
