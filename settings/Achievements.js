@@ -57,10 +57,10 @@ var Achievements = class Achievements {
     // page.
     this._charts = {
       clicks: {
-        name: _('Click Selections'),                  // Shown when nothing is hovered
-        hoveredName: _('Level-%i Click Selections'),  // Shown when a histogram is hovered
-        pieWidget: this._setupPieChart('clicks'),     // A Gtk.DrawingArea
-        histogramWidgets: [                           // Four Gtk.DrawingAreas
+        name: _('Click Selections'),                      // Shown when nothing is hovered
+        hoveredName: _('Click Selections at Depth %i'),   // when a histogram is hovered
+        pieWidget: this._setupPieChart('clicks'),         // A Gtk.DrawingArea
+        histogramWidgets: [                               // Four Gtk.DrawingAreas
           this._setupHistogram('clicks', 1), this._setupHistogram('clicks', 2),
           this._setupHistogram('clicks', 3), this._setupHistogram('clicks', 4)
         ],
@@ -69,10 +69,10 @@ var Achievements = class Achievements {
         max: {total: 0, perLevel: []}   // These numbers are updated in _updateChartData()
       },
       gestures: {
-        name: _('Gesture Selections'),                // Shown when nothing is hovered
-        hoveredName: _('Level-%i Gesture Selections'),// Shown when a histogram is hovered
-        pieWidget: this._setupPieChart('gestures'),   // A Gtk.DrawingArea
-        histogramWidgets: [                           // Four Gtk.DrawingAreas
+        name: _('Gesture Selections'),                    // Shown when nothing is hovered
+        hoveredName: _('Gesture Selections at Depth %i'), // when a histogram is hovered
+        pieWidget: this._setupPieChart('gestures'),       // A Gtk.DrawingArea
+        histogramWidgets: [                               // Four Gtk.DrawingAreas
           this._setupHistogram('gestures', 1), this._setupHistogram('gestures', 2),
           this._setupHistogram('gestures', 3), this._setupHistogram('gestures', 4)
         ],
