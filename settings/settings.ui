@@ -1006,40 +1006,18 @@ Can be added to custom menus.</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">10</property>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkDrawingArea" id="fly-pie-logo">
+                        <property name="width_request">500</property>
+                        <property name="height_request">200</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="halign">start</property>
-                        <property name="valign">start</property>
-                        <property name="margin_top">20</property>
-                        <property name="margin_bottom">10</property>
-                        <property name="label" translatable="yes">Welcome to Fly-Pie!</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="2"/>
-                        </attributes>
+                        <property name="margin_top">30</property>
+                        <property name="margin_bottom">15</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkImage" id="tutorial-animation-1">
-                        <property name="width_request">500</property>
-                        <property name="height_request">200</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="stock">gtk-missing-image</property>
-                        <style>
-                          <class name="drop-shadow"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
@@ -1056,7 +1034,7 @@ Can be added to custom menus.</property>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">2</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
@@ -1077,7 +1055,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">3</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                     <child>
@@ -1106,7 +1084,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">4</property>
+                        <property name="position">3</property>
                       </packing>
                     </child>
                   </object>
@@ -1143,7 +1121,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="tutorial-animation-2">
+                      <object class="GtkImage" id="tutorial-animation-1">
                         <property name="width_request">500</property>
                         <property name="height_request">250</property>
                         <property name="visible">True</property>
@@ -1568,7 +1546,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkImage" id="tutorial-animation-3">
+                      <object class="GtkImage" id="tutorial-animation-2">
                         <property name="width_request">500</property>
                         <property name="height_request">250</property>
                         <property name="visible">True</property>
