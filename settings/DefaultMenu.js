@@ -73,7 +73,7 @@ var DefaultMenu = class DefaultMenu {
               data: '<Alt>F10',
             },
             {
-              name: _('Gnome Shell'),
+              name: _('GNOME Shell'),
               icon: 'preferences-desktop-remote-desktop',
               children: [
                 {
