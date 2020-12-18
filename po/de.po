@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-16 20:36+0100\n"
-"PO-Revision-Date: 2020-11-30 09:24+0100\n"
-"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
+"PO-Revision-Date: 2020-12-17 12:11+0100\n"
+"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: settings/settings.ui:53
@@ -123,11 +123,8 @@ msgstr ""
 #: settings/settings.ui:1097 settings/settings.ui:1215
 #: settings/settings.ui:1389 settings/settings.ui:1639
 #: settings/settings.ui:1813
-#, fuzzy
 msgid "<big><b>Open the example menu!</b></big>"
-msgstr ""
-"<big><b>Das Menü\n"
-"öffnen!</b></big>"
+msgstr "<big><b>Das Beispielmenü öffnen!</b></big>"
 
 #: settings/settings.ui:1133
 msgid "You can click anywhere!"
@@ -164,7 +161,6 @@ msgid "Practice Session I"
 msgstr "Praxisübung I"
 
 #: settings/settings.ui:1269
-#, fuzzy
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
 "select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
@@ -173,11 +169,11 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!"
 msgstr ""
-"Öffnen Sie das Beispielmenü und wählen Sie \"Törtchen\" (🍔 🠚 🍭 🠚 🍰) so "
-"schnell wie möglich. Können Sie die Goldmedaille freischalten?\n"
+"Öffnen Sie für diese Übung das Beispielmenü und wählen Sie \"Törtchen\" (🍔 🠚 "
+"🍭 🠚 🍰) so schnell wie möglich. Können Sie die Goldmedaille freischalten?\n"
 "\n"
 "Wenn Sie mit Ihrem Ergebnis zufrieden sind, klicken Sie auf <b>Weiter</b> um "
-"etwas über den \"Marking Mode\" von Fly-Pie zu erfahren!\n"
+"etwas über den \"Marking Mode\" von Fly-Pie zu erfahren!"
 
 #. The text of the tutorial-reset-button.
 #: settings/settings.ui:1348 settings/settings.ui:1772
@@ -238,7 +234,6 @@ msgid "Practice Session II"
 msgstr "Praxisübung II"
 
 #: settings/settings.ui:1693
-#, fuzzy
 msgid ""
 "Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
 "However, as you now learned about the Marking Mode, the time required to get "
@@ -252,7 +247,7 @@ msgstr ""
 "Goldmedaille erreicht werden muss, deutlich kürzer!\n"
 "\n"
 "Wenn Sie mit Ihrem Ergebnis zufrieden sind, klicken Sie auf <b>Weiter</b> um "
-"einige abschließende Tipps und Tricks zu erfahren!\n"
+"einige abschließende Tipps und Tricks zu erfahren!"
 
 #: settings/settings.ui:1896
 msgid "Unlocked at less than 750 ms"
@@ -263,9 +258,8 @@ msgid "Unlocked at less than 500 ms"
 msgstr "Freigeschaltet bei weniger als 500 ms"
 
 #: settings/settings.ui:1993
-#, fuzzy
 msgid "Congratulations!"
-msgstr "🎉️ Herzlichen Glückwunsch! 🎉️"
+msgstr "Herzlichen Glückwunsch!"
 
 #: settings/settings.ui:2012
 msgid ""
@@ -822,15 +816,15 @@ msgstr "Menü-Editor"
 
 #: settings/settings.ui:8389
 msgid "750 / 5000 XP"
-msgstr ""
+msgstr "750 / 5000 XP"
 
 #: settings/settings.ui:8440
 msgid "Make 500 selection of items at level 5."
-msgstr ""
+msgstr "Wählen Sie 500 mal Elemente in der 5. Ebene aus."
 
 #: settings/settings.ui:8457
 msgid "<small>500 XP</small>"
-msgstr ""
+msgstr "<small>500 XP</small>"
 
 #. Caption of one of the main pages.
 #: settings/settings.ui:8486 settings/settings.ui:8815
@@ -838,21 +832,20 @@ msgid "Achievements"
 msgstr "Erfolge"
 
 #: settings/settings.ui:8656
-#, fuzzy
 msgid "Canceled selections"
-msgstr "Erweiterte Einstellungen"
+msgstr "Abgebrochene Auswahl"
 
 #: settings/settings.ui:8697
 msgid "Menus opened over the D-Bus"
-msgstr ""
+msgstr "Über den D-Bus geöffnete Menüs"
 
 #: settings/settings.ui:8738
 msgid "Number of times this settings dialog was opened"
-msgstr ""
+msgstr "Wie oft dieser Einstellungen-Dialog geöffnet wurde"
 
 #: settings/settings.ui:8773
 msgid "Statistics"
-msgstr ""
+msgstr "Statistik"
 
 #: daemon/Background.js:90
 msgid "Close"
@@ -864,19 +857,19 @@ msgstr "Seite wechseln"
 
 #: settings/Achievements.js:60
 msgid "Click Selections"
-msgstr ""
+msgstr "Klick-Auswahl"
 
 #: settings/Achievements.js:61
 msgid "Level-%i Click Selections"
-msgstr ""
+msgstr "Ebene %i Klick-Auswahl"
 
 #: settings/Achievements.js:72
 msgid "Gesture Selections"
-msgstr ""
+msgstr "Gesten-Auswahl"
 
 #: settings/Achievements.js:73
 msgid "Level-%i Gesture Selections"
-msgstr ""
+msgstr "Ebebne %i Gesten-Auswahl"
 
 #: settings/DefaultMenu.js:27 settings/ExampleMenu.js:26
 msgid "Example Menu"
