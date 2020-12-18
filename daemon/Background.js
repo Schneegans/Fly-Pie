@@ -91,6 +91,8 @@ class Background extends Clutter.Actor {
       this.emit('close-event');
     });
 
+    // Translators: This means 'Change the side of the screen where the Preview menu is
+    // opened'.
     this._addControlButton(_('Flip Side'), 'object-flip-horizontal-symbolic', () => {
       const key = 'preview-on-right-side';
       this._settings.set_boolean(key, !this._settings.get_boolean(key));

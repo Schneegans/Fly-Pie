@@ -65,6 +65,7 @@ var menu = {
     // Add screen-lock item.
     if (SystemActions.can_lock_screen) {
       result.children.push({
+        // Translators: As in 'Lock the screen.'
         name: _('Lock'),
         icon: 'system-lock-screen',
         activate: () => SystemActions.activateLockScreen()

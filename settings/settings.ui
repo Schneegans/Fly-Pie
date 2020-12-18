@@ -230,47 +230,47 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
     </columns>
     <data>
       <row>
-        <col id="0">Linear</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Linear</col>
         <col id="1">linear</col>
       </row>
       <row>
-        <col id="0">Ease</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease</col>
         <col id="1">ease</col>
       </row>
       <row>
-        <col id="0">Ease-In</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In</col>
         <col id="1">ease-in</col>
       </row>
       <row>
-        <col id="0">Ease-Out</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-Out</col>
         <col id="1">ease-out</col>
       </row>
       <row>
-        <col id="0">Ease-In-Out</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Out</col>
         <col id="1">ease-in-out</col>
       </row>
       <row>
-        <col id="0">Ease-In-Quad</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Quad</col>
         <col id="1">ease-in-quad</col>
       </row>
       <row>
-        <col id="0">Ease-Out-Quad</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-Out-Quad</col>
         <col id="1">ease-out-quad</col>
       </row>
       <row>
-        <col id="0">Ease-In-Out-Quad</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Out-Quad</col>
         <col id="1">ease-in-out-quad</col>
       </row>
       <row>
-        <col id="0">Ease-In-Back</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Back</col>
         <col id="1">ease-in-back</col>
       </row>
       <row>
-        <col id="0">Ease-Out-Back</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-Out-Back</col>
         <col id="1">ease-out-back</col>
       </row>
       <row>
-        <col id="0">Ease-In-Out-Back</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Out-Back</col>
         <col id="1">ease-in-out-back</col>
       </row>
     </data>
@@ -791,7 +791,7 @@ Can be added to custom menus.</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Open preset directory</property>
+                <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Open preset directory</property>
                 <property name="always_show_image">True</property>
                 <child>
                   <object class="GtkImage">
@@ -1013,7 +1013,7 @@ Can be added to custom menus.</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">10</property>
-                        <property name="label" translatable="yes">Welcome to Fly-Pie!</property>
+                        <property name="label" translatable="yes" comments="This is a heading.">Welcome to Fly-Pie!</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                           <attribute name="scale" value="2"/>
@@ -1094,7 +1094,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                             <property name="can_focus">False</property>
                             <property name="margin_top">10</property>
                             <property name="margin_bottom">10</property>
-                            <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                             <property name="justify">center</property>
                           </object>
@@ -1130,7 +1130,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">10</property>
-                        <property name="label" translatable="yes">You can click anywhere!</property>
+                        <property name="label" translatable="yes" comments="This is a heading.">You can click anywhere!</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                           <attribute name="scale" value="2"/>
@@ -1212,7 +1212,7 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                             <property name="can_focus">False</property>
                             <property name="margin_top">10</property>
                             <property name="margin_bottom">10</property>
-                            <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                             <property name="justify">center</property>
                           </object>
@@ -1249,7 +1249,7 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">10</property>
-                        <property name="label" translatable="yes">Practice Session I</property>
+                        <property name="label" translatable="yes" comments="This is a heading.">Practice Session I</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                           <attribute name="scale" value="2"/>
@@ -1290,7 +1290,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
-                            <property name="label">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="label" translatable="yes" comments="ms = milliseconds">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
@@ -1304,7 +1304,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
-                            <property name="label">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="label" translatable="yes" comments="ms = milliseconds">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
@@ -1386,7 +1386,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                             <property name="can_focus">False</property>
                             <property name="margin_top">10</property>
                             <property name="margin_bottom">10</property>
-                            <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                             <property name="justify">center</property>
                           </object>
@@ -1432,7 +1432,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               <object class="GtkLabel" id="bronze-label-1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Unlocked at less than 3000 ms</property>
+                                <property name="label" translatable="yes" comments="ms = milliseconds">Unlocked at less than 3000 ms</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -1472,7 +1472,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               <object class="GtkLabel" id="silver-label-1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Unlocked at less than 2000 ms</property>
+                                <property name="label" translatable="yes" comments="ms = milliseconds">Unlocked at less than 2000 ms</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -1518,7 +1518,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                           <object class="GtkLabel" id="gold-label-1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Unlocked at less than 1000 ms</property>
+                            <property name="label" translatable="yes" comments="ms = milliseconds">Unlocked at less than 1000 ms</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1555,7 +1555,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">10</property>
-                        <property name="label" translatable="yes">The Marking Mode of Fly-Pie</property>
+                        <property name="label" translatable="yes" comments="This is a heading.">The Marking Mode of Fly-Pie</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                           <attribute name="scale" value="2"/>
@@ -1636,7 +1636,7 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                             <property name="can_focus">False</property>
                             <property name="margin_top">10</property>
                             <property name="margin_bottom">10</property>
-                            <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                             <property name="justify">center</property>
                           </object>
@@ -1673,7 +1673,7 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">10</property>
-                        <property name="label" translatable="yes">Practice Session II</property>
+                        <property name="label" translatable="yes" comments="This is a heading.">Practice Session II</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                           <attribute name="scale" value="2"/>
@@ -1810,7 +1810,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                             <property name="can_focus">False</property>
                             <property name="margin_top">10</property>
                             <property name="margin_bottom">10</property>
-                            <property name="label" translatable="yes" comments="The text of the big tutorial button. Using two lines looks quite good.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                             <property name="justify">center</property>
                           </object>
@@ -1854,7 +1854,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkLabel" id="bronze-label-2">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Unlocked at less than 1000 ms</property>
+                                <property name="label" translatable="yes" comments="ms = milliseconds">Unlocked at less than 1000 ms</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -1893,7 +1893,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkLabel" id="silver-label-2">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Unlocked at less than 750 ms</property>
+                                <property name="label" translatable="yes" comments="ms = milliseconds">Unlocked at less than 750 ms</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -1939,7 +1939,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                           <object class="GtkLabel" id="gold-label-2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Unlocked at less than 500 ms</property>
+                            <property name="label" translatable="yes" comments="ms = milliseconds">Unlocked at less than 500 ms</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1990,7 +1990,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">10</property>
-                        <property name="label" translatable="yes">Congratulations!</property>
+                        <property name="label" translatable="yes" comments="The user finished the tutorial. Yay!">Congratulations!</property>
                         <property name="justify">center</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
@@ -2009,7 +2009,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                         <property name="can_focus">False</property>
                         <property name="valign">start</property>
                         <property name="margin_top">20</property>
-                        <property name="label" translatable="yes">Congratulations! If you managed to unlock most of the medals, you will be using Fly-Pie like a master Pielot!
+                        <property name="label" translatable="yes" comments="Use a similarly bad pun for &quot;Pielot&quot; that works in your language, if you want. Who doesn't love puns? xD">Congratulations! If you managed to unlock most of the medals, you will be using Fly-Pie like a master Pielot!
 
 Now you can use the other pages of this settings dialog to configure Fly-Pie to your heart's desire. There are many options! Create as many menus as you want with as deep hierarchies as you want. But try to limit the amount of items per submenu to &lt;b&gt;at most twelve items&lt;/b&gt;. Everything above this number will drastically reduce your efficiency.
 
@@ -2078,7 +2078,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">center</property>
-                            <property name="label" translatable="yes" comments="Button for tutorial navigation.">Previous</property>
+                            <property name="label" translatable="yes" comments="Button for tutorial navigation. Goes back one page.">Previous</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -2242,7 +2242,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">center</property>
-                            <property name="label" translatable="yes" comments="Button for tutorial navigation.">Next</property>
+                            <property name="label" translatable="yes" comments="Button for tutorial navigation. Goes to the next page.">Next</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -2268,7 +2268,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
           </object>
           <packing>
             <property name="name">tutorial-page</property>
-            <property name="title" translatable="yes" comments="Caption of one of the main pages.">Tutorial</property>
+            <property name="title" translatable="yes" comments="Caption of the tutorial page in the window's titlebar.">Tutorial</property>
           </packing>
         </child>
         <child>
@@ -2374,7 +2374,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                         <property name="can_focus">False</property>
                                         <property name="halign">start</property>
                                         <property name="vexpand">True</property>
-                                        <property name="label" translatable="yes">Live Preview</property>
+                                        <property name="label" translatable="yes" comments="Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say &quot;Open Live Preview&quot; or similar.">Live Preview</property>
                                       </object>
                                       <packing>
                                         <property name="left_attach">1</property>
@@ -3142,7 +3142,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="margin_right">20</property>
-                                    <property name="label" translatable="yes" comments="Keep the individual lines short! You can use up to three lines if you want.">Clicking inside the inner radius
+                                    <property name="label" translatable="yes" comments="Keep the individual lines short (around 30 characters max)!&#10;You can use up to three lines if you want.">Clicking inside the inner radius
 will cancel the selection.</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -3448,7 +3448,7 @@ will cancel the selection.</property>
                                     <property name="valign">center</property>
                                     <property name="margin_right">5</property>
                                     <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Inactive</property>
+                                    <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Inactive</property>
                                     <property name="justify">right</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -3467,7 +3467,7 @@ will cancel the selection.</property>
                                     <property name="valign">center</property>
                                     <property name="margin_right">5</property>
                                     <property name="vexpand">True</property>
-                                    <property name="label" translatable="yes">Hovered</property>
+                                    <property name="label" translatable="yes" comments="When the mouse pointer is over the item">Hovered</property>
                                     <property name="justify">right</property>
                                     <style>
                                       <class name="dim-label"/>
@@ -3505,7 +3505,7 @@ will cancel the selection.</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">True</property>
                                         <property name="use_alpha">True</property>
-                                        <property name="title" translatable="yes">Pick Hovered Wedge Color</property>
+                                        <property name="title" translatable="yes" comments="Hovered: When the mouse pointer is over the item">Pick Hovered Wedge Color</property>
                                         <property name="show_editor">True</property>
                                       </object>
                                       <packing>
@@ -3895,7 +3895,7 @@ will cancel the selection.</property>
                                     <property name="layout_style">expand</property>
                                     <child>
                                       <object class="GtkRadioButton" id="center-color-mode-fixed">
-                                        <property name="label" translatable="yes" comments="Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.">Fixed</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Fixed = not changing dynamically">Fixed</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -3910,7 +3910,7 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="center-color-mode-auto">
-                                        <property name="label" translatable="yes" comments="Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.">Auto</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Auto = changing dynamically">Auto</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -3980,7 +3980,7 @@ will cancel the selection.</property>
                                     <property name="layout_style">expand</property>
                                     <child>
                                       <object class="GtkRadioButton" id="center-color-mode-hover-fixed">
-                                        <property name="label" translatable="yes">Fixed</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Fixed = not changing dynamically">Fixed</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -3995,7 +3995,7 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="center-color-mode-hover-auto">
-                                        <property name="label" translatable="yes">Auto</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Auto = changing dynamically">Auto</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -4402,7 +4402,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">With Hovered Child</property>
+                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">With Hovered Child</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -4434,7 +4434,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Without Hovered Child</property>
+                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">Without Hovered Child</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -4669,7 +4669,7 @@ will cancel the selection.</property>
                                     <property name="layout_style">expand</property>
                                     <child>
                                       <object class="GtkRadioButton" id="child-color-mode-fixed">
-                                        <property name="label" translatable="yes">Fixed</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Fixed = not changing dynamically">Fixed</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -4684,7 +4684,7 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="child-color-mode-auto">
-                                        <property name="label" translatable="yes">Auto</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Auto = changing dynamically">Auto</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -4699,7 +4699,7 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="child-color-mode-parent">
-                                        <property name="label" translatable="yes" comments="Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.">Parent</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Parent = use the parent's setting">Parent</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -4874,7 +4874,7 @@ will cancel the selection.</property>
                                     <property name="layout_style">expand</property>
                                     <child>
                                       <object class="GtkRadioButton" id="child-color-mode-hover-fixed">
-                                        <property name="label" translatable="yes">Fixed</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Fixed = not changing dynamically">Fixed</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -4889,7 +4889,7 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="child-color-mode-hover-auto">
-                                        <property name="label" translatable="yes">Auto</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Auto = changing dynamically">Auto</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -4904,7 +4904,7 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="child-color-mode-hover-parent">
-                                        <property name="label" translatable="yes">Parent</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Parent = use the parent's setting">Parent</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -5208,7 +5208,7 @@ will cancel the selection.</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Draw Above</property>
+                                    <property name="label" translatable="yes" comments="Draw above (grand)children items.&#10;There's an explanation string below in the application.">Draw Above</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
@@ -5554,7 +5554,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Standard State</property>
+                                <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Standard State</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -5570,7 +5570,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Hovered State</property>
+                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">Hovered State</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -5834,7 +5834,7 @@ will cancel the selection.</property>
                                     <property name="layout_style">expand</property>
                                     <child>
                                       <object class="GtkRadioButton" id="grandchild-color-mode-fixed">
-                                        <property name="label" translatable="yes">Fixed</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Fixed = not changing dynamically">Fixed</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -5849,7 +5849,7 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="grandchild-color-mode-parent">
-                                        <property name="label" translatable="yes">Parent</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Parent = use the parent's setting">Parent</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -5911,7 +5911,7 @@ will cancel the selection.</property>
                                     <property name="layout_style">expand</property>
                                     <child>
                                       <object class="GtkRadioButton" id="grandchild-color-mode-hover-fixed">
-                                        <property name="label" translatable="yes">Fixed</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Fixed = not changing dynamically">Fixed</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -5926,7 +5926,7 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="grandchild-color-mode-hover-parent">
-                                        <property name="label" translatable="yes">Parent</property>
+                                        <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.&#10;This is a label of the coloring type radio button group.&#10;Parent = use the parent's setting">Parent</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
@@ -6113,7 +6113,7 @@ will cancel the selection.</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Draw Above</property>
+                                    <property name="label" translatable="yes" comments="Draw above (grand)children items.&#10;There's an explanation string below in the application.">Draw Above</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
@@ -6147,7 +6147,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">Standard State</property>
+                                <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Standard State</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -6281,7 +6281,7 @@ will cancel the selection.</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="label" translatable="yes">With Hovered Parent</property>
+                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">With Hovered Parent</property>
                                 <property name="justify">center</property>
                                 <style>
                                   <class name="dim-label"/>
@@ -7264,7 +7264,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
           </object>
           <packing>
             <property name="name">settings-page</property>
-            <property name="title" translatable="yes" comments="Caption of one of the main pages.">Settings</property>
+            <property name="title" translatable="yes" comments="Caption of the settings page in the window's titlebar.">Settings</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -8646,7 +8646,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
           </object>
           <packing>
             <property name="name">menu-editor-page</property>
-            <property name="title" translatable="yes" comments="Caption of one of the main pages.">Menu Editor</property>
+            <property name="title" translatable="yes" comments="Caption of the menu editor page in the window's titlebar.">Menu Editor</property>
             <property name="position">2</property>
           </packing>
         </child>
@@ -8698,7 +8698,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">20</property>
                                 <property name="fraction">0.75</property>
-                                <property name="text" translatable="yes">750 / 5000 XP</property>
+                                <property name="text" translatable="yes" comments="XP: Experience points">750 / 5000 XP</property>
                                 <property name="show_text">True</property>
                               </object>
                               <packing>
@@ -8766,7 +8766,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                                 <property name="can_focus">False</property>
                                                 <property name="opacity">0</property>
                                                 <property name="valign">center</property>
-                                                <property name="label" translatable="yes">&lt;small&gt;500 XP&lt;/small&gt;</property>
+                                                <property name="label" translatable="yes" comments="XP: Experience points">&lt;small&gt;500 XP&lt;/small&gt;</property>
                                                 <property name="use_markup">True</property>
                                               </object>
                                               <packing>
@@ -9124,7 +9124,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
           </object>
           <packing>
             <property name="name">achievements-page</property>
-            <property name="title" translatable="yes" comments="Caption of one of the main pages.">Achievements</property>
+            <property name="title" translatable="yes" comments="Caption of the achievements page in the window's titlebar.">Achievements</property>
             <property name="position">3</property>
           </packing>
         </child>
