@@ -2509,7 +2509,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                             <property name="can_focus">False</property>
                                             <property name="halign">start</property>
                                             <property name="vexpand">True</property>
-                                            <property name="label" translatable="yes">Load a Preset</property>
+                                            <property name="label" translatable="yes">Load / Save a Preset</property>
                                           </object>
                                           <packing>
                                             <property name="left_attach">0</property>
