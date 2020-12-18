@@ -750,6 +750,7 @@ Can be added to custom menus.</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="valign">center</property>
+                    <property name="column_spacing">6</property>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
