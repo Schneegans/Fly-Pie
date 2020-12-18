@@ -78,6 +78,11 @@ var MenuItemState = {
   PARENT_HOVERED: 9,
 };
 
+// This stores the elements of Fly-Pie's Gio.Settings which are relevant for drawing menu
+// items. This improves performance as we do not always have to retrieve the values over
+// the D-Bus.
+let MenuItemSettings = {};
+
 // clang-format off
 var MenuItem = GObject.registerClass({
   Properties: {
@@ -280,22 +285,16 @@ class MenuItem extends Clutter.Actor {
     return this._state;
   }
 
-  // This is called once after construction and then whenever something in the appearance
-  // settings has changed. This calls itself recursively on the entire menu tree below
-  // this MenuItem.
+  // This first updates the MenuItemSettings global variable and then calls
+  // this._onSettingsChange which will proceed recursively.
   onSettingsChange(settings) {
-
-    // First we reset the icon members to force their re-creation during the next state
-    // change. As many settings affect the icon size or background color, we simply do
-    // this in any case. This could be optimized by limiting this to the cases where
-    // settings keys were changed which actually affect the icons.
-    this._forceIconRecreation();
 
     // Then parse all settings required during the next call to redraw().
     const globalScale = settings.get_double('global-scale');
 
     // clang-format off
-    this._settings = {
+    MenuItemSettings = {
+      globalScale:             globalScale,
       easingDuration:          settings.get_double('easing-duration') * 1000,
       easingMode:              settings.get_enum('easing-mode'),
       textColor:               Clutter.Color.from_string(settings.get_string('text-color'))[1],
@@ -319,6 +318,7 @@ class MenuItem extends Clutter.Actor {
           autoColorSaturation: settings.get_double('center-auto-color-saturation'),
           autoColorLuminance:  settings.get_double('center-auto-color-luminance'),
           autoColorOpacity:    settings.get_double('center-auto-color-opacity') * 255,
+          backgroundImage:     settings.get_string('center-background-image'),
           drawChildrenAbove:   settings.get_boolean('child-draw-above'),
         }],
         [MenuItemState.CENTER_HOVERED, {
@@ -331,6 +331,7 @@ class MenuItem extends Clutter.Actor {
           autoColorSaturation: settings.get_double('center-auto-color-saturation-hover'),
           autoColorLuminance:  settings.get_double('center-auto-color-luminance-hover'),
           autoColorOpacity:    settings.get_double('center-auto-color-opacity-hover') * 255,
+          backgroundImage:     settings.get_string('center-background-image'),
           drawChildrenAbove:   settings.get_boolean('child-draw-above'),
         }],
         [MenuItemState.CHILD, {
@@ -343,6 +344,7 @@ class MenuItem extends Clutter.Actor {
           autoColorSaturation: settings.get_double('child-auto-color-saturation'),
           autoColorLuminance:  settings.get_double('child-auto-color-luminance'),
           autoColorOpacity:    settings.get_double('child-auto-color-opacity')  * 255,
+          backgroundImage:     settings.get_string('child-background-image'),
           drawChildrenAbove:   settings.get_boolean('grandchild-draw-above'),
         }],
         [MenuItemState.CHILD_HOVERED, {
@@ -355,6 +357,7 @@ class MenuItem extends Clutter.Actor {
           autoColorSaturation: settings.get_double('child-auto-color-saturation-hover'),
           autoColorLuminance:  settings.get_double('child-auto-color-luminance-hover'),
           autoColorOpacity:    settings.get_double('child-auto-color-opacity-hover') * 255,
+          backgroundImage:     settings.get_string('child-background-image'),
           drawChildrenAbove:   settings.get_boolean('grandchild-draw-above'),
         }],
         [MenuItemState.GRANDCHILD, {
@@ -363,6 +366,7 @@ class MenuItem extends Clutter.Actor {
           size:                settings.get_double('grandchild-size')    * globalScale,
           offset:              settings.get_double('grandchild-offset')  * globalScale,
           iconOpacity:         0,
+          backgroundImage:     settings.get_string('grandchild-background-image'),
           drawAbove:           settings.get_boolean('grandchild-draw-above'),
         }],
         [MenuItemState.GRANDCHILD_HOVERED, {
@@ -371,35 +375,14 @@ class MenuItem extends Clutter.Actor {
           size:                settings.get_double('grandchild-size-hover')   * globalScale,
           offset:              settings.get_double('grandchild-offset-hover') * globalScale,
           iconOpacity:         0,
+          backgroundImage:     settings.get_string('grandchild-background-image'),
           drawAbove:           settings.get_boolean('grandchild-draw-above'),
         }]
       ]),
     };
     // clang-format on
 
-    // Most of the settings will come into effect during the call to redraw(). However,
-    // some name settings we can apply here as they won't be affected by state changes.
-    const nameWidth = this._settings.state.get(MenuItemState.CENTER).size * 0.8;
-    this._name.set_size(nameWidth, nameWidth);
-    this._name.set_color(this._settings.textColor);
-
-    // Multiply the size of the font by globalScale.
-    const fontDescription = Pango.FontDescription.from_string(this._settings.font);
-    const fontSize        = fontDescription.get_size();
-    if (fontDescription.get_size_is_absolute()) {
-      fontSize = Pango.units_from_double(fontSize);
-    }
-    fontDescription.set_size(fontSize * globalScale);
-    this._name.set_font_description(fontDescription);
-
-    // We also re-draw the trace line to the currently active child if there is any.
-    if (this._trace != undefined) {
-      this._trace.get_content().invalidate();
-    }
-
-    // Finally, call this recursively for all children.
-    this._childrenContainer.get_children().forEach(
-        child => child.onSettingsChange(settings));
+    this._onSettingsChange();
   }
 
   // This updates all parameters (such as position, opacity or colors) of the individual
@@ -425,7 +408,7 @@ class MenuItem extends Clutter.Actor {
     this.visible = visualState != MenuItemState.INVISIBLE;
 
     // The _settings member contains a Map of settings for each MenuItemState.
-    const settings = this._settings.state.get(visualState);
+    const settings = MenuItemSettings.state.get(visualState);
 
     // Depending on the corresponding settings key, raise or lower the child MenuItems
     // of this above or below the background.
@@ -446,7 +429,7 @@ class MenuItem extends Clutter.Actor {
       const nameHeight = this._name.get_layout().get_pixel_extents()[1].height;
       this._name.set_translation(
           Math.floor(-this._name.width / 2), Math.floor(-nameHeight / 2), 0);
-      this._name.set_easing_duration(this._settings.easingDuration);
+      this._name.set_easing_duration(MenuItemSettings.easingDuration);
 
       this._name.opacity = 255;
     } else {
@@ -456,11 +439,11 @@ class MenuItem extends Clutter.Actor {
     // This easing duration and mode are used for size and position transitions further
     // below. We set the easing duration to zero for the initial call to redraw() in
     // order to avoid animations when the menu shows up.
-    let easingDuration = this._firstRedraw ? 0 : this._settings.easingDuration;
+    let easingDuration = this._firstRedraw ? 0 : MenuItemSettings.easingDuration;
     this._firstRedraw  = false;
 
     this.set_easing_duration(easingDuration);
-    this.set_easing_mode(this._settings.easingMode);
+    this.set_easing_mode(MenuItemSettings.easingMode);
 
     // If our state is some child or grandchild state, set the translation based on the
     // angle and the specified offset. For all other states, the translation is set from
@@ -584,7 +567,7 @@ class MenuItem extends Clutter.Actor {
     // Now update the size of the icon container. As there is a layout manager in action,
     // all icons will update their size accordingly.
     this._iconContainer.set_easing_duration(easingDuration);
-    this._iconContainer.set_easing_mode(this._settings.easingMode);
+    this._iconContainer.set_easing_mode(MenuItemSettings.easingMode);
 
     const size2 = Math.floor(settings.size / 2);
     this._iconContainer.set_translation(-size2, -size2, 0);
@@ -610,7 +593,7 @@ class MenuItem extends Clutter.Actor {
       // In most cases we can use a transition to rotate the trace. However, when the
       // active child is currently being dragged around or the trace is currently
       // invisible, we should use no transition.
-      let rotationEasingDuration = this._settings.easingDuration;
+      let rotationEasingDuration = MenuItemSettings.easingDuration;
       if (child.getState() == MenuItemState.CHILD_DRAGGED || this._trace == undefined ||
           this._trace.opacity == 0) {
 
@@ -618,7 +601,7 @@ class MenuItem extends Clutter.Actor {
       }
 
       // The length of the trace should always be transitioned.
-      const lengthEasingDuration = this._settings.easingDuration;
+      const lengthEasingDuration = MenuItemSettings.easingDuration;
 
       // Finally update the trace actor.
       this.drawTrace(x, y, rotationEasingDuration, lengthEasingDuration);
@@ -660,9 +643,11 @@ class MenuItem extends Clutter.Actor {
 
         // Simply draw a line in the middle of the canvas from left to right.
         ctx.setSourceRGBA(
-            this._settings.traceColor.red / 255, this._settings.traceColor.green / 255,
-            this._settings.traceColor.blue / 255, this._settings.traceColor.alpha / 255);
-        ctx.setLineWidth(this._settings.traceThickness);
+            MenuItemSettings.traceColor.red / 255,
+            MenuItemSettings.traceColor.green / 255,
+            MenuItemSettings.traceColor.blue / 255,
+            MenuItemSettings.traceColor.alpha / 255);
+        ctx.setLineWidth(MenuItemSettings.traceThickness);
         ctx.moveTo(0, height / 2);
         ctx.lineTo(width, height / 2);
         ctx.stroke();
@@ -678,18 +663,18 @@ class MenuItem extends Clutter.Actor {
 
     // First we update the trace's thickness (if the settings changed). We add on pixel
     // padding on each side to get smooth antialiasing.
-    if (this._trace.get_height() != this._settings.traceThickness + 2) {
-      this._trace.set_height(this._settings.traceThickness + 2);
+    if (this._trace.get_height() != MenuItemSettings.traceThickness + 2) {
+      this._trace.set_height(MenuItemSettings.traceThickness + 2);
       this._trace.set_translation(0, -this._trace.get_height() / 2, 0);
-      this._trace.get_content().set_size(1, this._settings.traceThickness + 2);
+      this._trace.get_content().set_size(1, MenuItemSettings.traceThickness + 2);
     }
 
     // Fade-in the trace it it's currently invisible.
-    this._trace.set_easing_duration(this._settings.easingDuration);
+    this._trace.set_easing_duration(MenuItemSettings.easingDuration);
     this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
     this._trace.set_opacity(255);
     this._trace.set_easing_duration(lengthEasingDuration);
-    this._trace.set_easing_mode(this._settings.easingMode);
+    this._trace.set_easing_mode(MenuItemSettings.easingMode);
 
     // Now set the width to the child's distance.
     this._trace.set_scale(Math.sqrt(x * x + y * y), 1);
@@ -703,7 +688,7 @@ class MenuItem extends Clutter.Actor {
       targetAngle += 360;
     }
 
-    this._traceContainer.set_easing_mode(this._settings.easingMode);
+    this._traceContainer.set_easing_mode(MenuItemSettings.easingMode);
     this._traceContainer.set_easing_duration(rotationEasingDuration);
     this._traceContainer.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, targetAngle);
   }
@@ -711,15 +696,50 @@ class MenuItem extends Clutter.Actor {
   // This makes the trace (if there is one) invisible so that we can use it later again.
   hideTrace() {
     if (this._trace != undefined) {
-      this._trace.set_easing_duration(this._settings.easingDuration);
+      this._trace.set_easing_duration(MenuItemSettings.easingDuration);
       this._trace.set_easing_mode(Clutter.AnimationMode.LINEAR);
       this._trace.set_opacity(0);
-      this._trace.set_easing_mode(this._settings.easingMode);
+      this._trace.set_easing_mode(MenuItemSettings.easingMode);
       this._trace.set_scale(1, 1);
     }
   }
 
   // ----------------------------------------------------------------------- private stuff
+
+  // This is called once after construction and then whenever something in the appearance
+  // settings has changed. This calls itself recursively on the entire menu tree below
+  // this MenuItem.
+  _onSettingsChange() {
+
+    // First we reset the icon members to force their re-creation during the next state
+    // change. As many settings affect the icon size or background color, we simply do
+    // this in any case. This could be optimized by limiting this to the cases where
+    // settings keys were changed which actually affect the icons.
+    this._forceIconRecreation();
+
+    // Most of the settings will come into effect during the call to redraw(). However,
+    // some name settings we can apply here as they won't be affected by state changes.
+    const nameWidth = MenuItemSettings.state.get(MenuItemState.CENTER).size * 0.8;
+    this._name.set_size(nameWidth, nameWidth);
+    this._name.set_color(MenuItemSettings.textColor);
+
+    // Multiply the size of the font by globalScale.
+    const fontDescription = Pango.FontDescription.from_string(MenuItemSettings.font);
+    const fontSize        = fontDescription.get_size();
+    if (fontDescription.get_size_is_absolute()) {
+      fontSize = Pango.units_from_double(fontSize);
+    }
+    fontDescription.set_size(fontSize * MenuItemSettings.globalScale);
+    this._name.set_font_description(fontDescription);
+
+    // We also re-draw the trace line to the currently active child if there is any.
+    if (this._trace != undefined) {
+      this._trace.get_content().invalidate();
+    }
+
+    // Finally, call this recursively for all children.
+    this._childrenContainer.get_children().forEach(child => child._onSettingsChange());
+  }
 
   // This creates a Clutter.Actor with an attached Clutter.Canvas containing an image of
   // this MenuItem's icon.
