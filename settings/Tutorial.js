@@ -147,10 +147,12 @@ var Tutorial = class Tutorial {
     const bestTime = this._settings.get_double('best-tutorial-time');
     const lastTime = this._settings.get_double('last-tutorial-time');
 
+    // Translators: Do not translate '%d'. ms = milliseconds
     let text = _('<big>Last selection time: <b>%d ms</b></big>').format(lastTime);
     this._builder.get_object('last-selection-time-1').label = text;
     this._builder.get_object('last-selection-time-2').label = text;
 
+    // Translators: Do not translate '%d'. ms = milliseconds
     text = _('<big>Best selection time: <b>%d ms</b></big>').format(bestTime);
     this._builder.get_object('best-selection-time-1').label = text;
     this._builder.get_object('best-selection-time-2').label = text;

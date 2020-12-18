@@ -25,6 +25,7 @@ var ExampleMenu = class ExampleMenu {
     return {
       name: _('Example Menu'), icon: '😷', children: [
         {
+          // Translators: An emoji category.
           name: _('Animals & Nature'),
           icon: '🌾',
           children: [
@@ -40,6 +41,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Mammals'),
               icon: '🐎',
               children: [
@@ -51,6 +53,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Reptiles'),
               icon: '🦎',
               children: [
@@ -64,10 +67,12 @@ var ExampleMenu = class ExampleMenu {
           ]
         },
         {
+          // Translators: An emoji category.
           name: _('Food & Drink'),
           icon: '🍔',
           children: [
             {
+              // Translators: An emoji category.
               name: _('Fruit'),
               icon: '🥝',
               children: [
@@ -79,6 +84,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Drink'),
               icon: '🍷',
               children: [
@@ -90,6 +96,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Sweets'),
               icon: '🍭',
               children: [
@@ -105,10 +112,12 @@ var ExampleMenu = class ExampleMenu {
           ]
         },
         {
+          // Translators: An emoji category.
           name: _('Activities'),
           icon: '🏆',
           children: [
             {
+              // Translators: An emoji category.
               name: _('Games'),
               icon: '🎲',
               children: [
@@ -120,6 +129,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Sports'),
               icon: '⚽',
               children: [
@@ -131,6 +141,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Places'),
               icon: '🗼',
               children: [
@@ -144,10 +155,12 @@ var ExampleMenu = class ExampleMenu {
           ]
         },
         {
+          // Translators: An emoji category.
           name: _('Objects'),
           icon: '🚜',
           children: [
             {
+              // Translators: An emoji category.
               name: _('Cars'),
               icon: '🚔',
               children: [
@@ -159,6 +172,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Buildings'),
               icon: '🏢',
               children: [
@@ -170,6 +184,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Instruments'),
               icon: '🎻',
               children: [
@@ -183,10 +198,12 @@ var ExampleMenu = class ExampleMenu {
           ]
         },
         {
+          // Translators: An emoji category.
           name: _('Smileys'),
           icon: '😀',
           children: [
             {
+              // Translators: An emoji category.
               name: _('Happy Faces'),
               icon: '😁',
               children: [
@@ -198,6 +215,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Angry Faces'),
               icon: '😕',
               children: [
@@ -209,6 +227,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Surprised Faces'),
               icon: '😯',
               children: [
@@ -222,10 +241,12 @@ var ExampleMenu = class ExampleMenu {
           ]
         },
         {
+          // Translators: An emoji category.
           name: _('Symbols'),
           icon: '♍',
           children: [
             {
+              // Translators: An emoji category.
               name: _('Star Signs'),
               icon: '♈',
               children: [
@@ -237,6 +258,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Arrows'),
               icon: '🔁',
               children: [
@@ -248,6 +270,7 @@ var ExampleMenu = class ExampleMenu {
               ]
             },
             {
+              // Translators: An emoji category.
               name: _('Info Signs'),
               icon: '🚻',
               children: [
