@@ -230,47 +230,47 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
     </columns>
     <data>
       <row>
-        <col id="0">Linear</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Linear</col>
         <col id="1">linear</col>
       </row>
       <row>
-        <col id="0">Ease</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease</col>
         <col id="1">ease</col>
       </row>
       <row>
-        <col id="0">Ease-In</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In</col>
         <col id="1">ease-in</col>
       </row>
       <row>
-        <col id="0">Ease-Out</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-Out</col>
         <col id="1">ease-out</col>
       </row>
       <row>
-        <col id="0">Ease-In-Out</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Out</col>
         <col id="1">ease-in-out</col>
       </row>
       <row>
-        <col id="0">Ease-In-Quad</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Quad</col>
         <col id="1">ease-in-quad</col>
       </row>
       <row>
-        <col id="0">Ease-Out-Quad</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-Out-Quad</col>
         <col id="1">ease-out-quad</col>
       </row>
       <row>
-        <col id="0">Ease-In-Out-Quad</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Out-Quad</col>
         <col id="1">ease-in-out-quad</col>
       </row>
       <row>
-        <col id="0">Ease-In-Back</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Back</col>
         <col id="1">ease-in-back</col>
       </row>
       <row>
-        <col id="0">Ease-Out-Back</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-Out-Back</col>
         <col id="1">ease-out-back</col>
       </row>
       <row>
-        <col id="0">Ease-In-Out-Back</col>
+        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Out-Back</col>
         <col id="1">ease-in-out-back</col>
       </row>
     </data>
@@ -1290,7 +1290,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
-                            <property name="label">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="label" translatable="yes" comments="ms = milliseconds">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
@@ -1304,7 +1304,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="hexpand">True</property>
-                            <property name="label">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="label" translatable="yes" comments="ms = milliseconds">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
