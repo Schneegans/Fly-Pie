@@ -2679,7 +2679,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Global Scale</property>
+                                    <property name="label" translatable="yes">Global Scaling</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
