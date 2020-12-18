@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-16 20:36+0100\n"
+"POT-Creation-Date: 2020-12-18 11:55+0100\n"
 "PO-Revision-Date: 2020-12-03 15:16+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Albano Battistella <albano_battistella@hotmail.com>\n"
@@ -67,28 +67,28 @@ msgstr ""
 msgid "Save current settings"
 msgstr "Salva impostazioni correnti"
 
-#: settings/settings.ui:772
+#: settings/settings.ui:773
 msgid "Save as new Preset"
 msgstr "Salva come nuovo Predefinito"
 
-#: settings/settings.ui:794
+#: settings/settings.ui:795
 msgid "Open preset directory"
 msgstr "Apri directory predefinita"
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
-#: settings/settings.ui:876
+#: settings/settings.ui:877
 msgid "Enable Animations"
 msgstr "Abilita Animazioni"
 
-#: settings/settings.ui:903
+#: settings/settings.ui:904
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
 msgstr "Fly-Pie richiede che le animazioni di GNOME Shell siano abilitate."
 
-#: settings/settings.ui:1016
+#: settings/settings.ui:1017
 msgid "Welcome to Fly-Pie!"
 msgstr "Benvenuto in Fly-Pie!"
 
-#: settings/settings.ui:1050
+#: settings/settings.ui:1051
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
@@ -99,7 +99,7 @@ msgstr ""
 "insegnerà come utilizzare Fly-Pie in modo più efficiente. Fare clic sul "
 "pulsante grande in basso per aprire un menu di prova!"
 
-#: settings/settings.ui:1067
+#: settings/settings.ui:1068
 msgid ""
 "• Use your <b>left mouse button to select items</b>.\n"
 "• Use your <b>right mouse button to close the menu</b>.\n"
@@ -115,20 +115,20 @@ msgstr ""
 "Quando ti senti a tuo agio, fai clic su <b>avanti</b> per ulteriori dettagli!"
 
 #. The text of the big tutorial button. Using two lines looks quite good.
-#: settings/settings.ui:1097 settings/settings.ui:1215
-#: settings/settings.ui:1389 settings/settings.ui:1639
-#: settings/settings.ui:1813
+#: settings/settings.ui:1098 settings/settings.ui:1216
+#: settings/settings.ui:1390 settings/settings.ui:1640
+#: settings/settings.ui:1814
 #, fuzzy
 msgid "<big><b>Open the example menu!</b></big>"
 msgstr ""
 "<big><b>Apri il\n"
 "menu!</b></big>"
 
-#: settings/settings.ui:1133
+#: settings/settings.ui:1134
 msgid "You can click anywhere!"
 msgstr "Puoi fare clic ovunque!"
 
-#: settings/settings.ui:1167
+#: settings/settings.ui:1168
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
@@ -137,7 +137,7 @@ msgstr ""
 "schermo fintanto che il puntatore del mouse rimane nella sezione "
 "dell'elemento."
 
-#: settings/settings.ui:1185
+#: settings/settings.ui:1186
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -155,11 +155,11 @@ msgstr ""
 "\n"
 "Fai clic su <b>avanti</b> per una sessione di pratica!"
 
-#: settings/settings.ui:1252
+#: settings/settings.ui:1253
 msgid "Practice Session I"
 msgstr "Sessione Pratica I"
 
-#: settings/settings.ui:1269
+#: settings/settings.ui:1270
 #, fuzzy
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
@@ -177,27 +177,27 @@ msgstr ""
 "conoscere la modalità di marcatura di Fly-Pie!\n"
 
 #. The text of the tutorial-reset-button.
-#: settings/settings.ui:1348 settings/settings.ui:1772
+#: settings/settings.ui:1349 settings/settings.ui:1773
 msgid "Clear"
 msgstr "Ripristina"
 
-#: settings/settings.ui:1435
+#: settings/settings.ui:1436
 msgid "Unlocked at less than 3000 ms"
 msgstr "Sbloccato a meno di 3000 ms"
 
-#: settings/settings.ui:1475
+#: settings/settings.ui:1476
 msgid "Unlocked at less than 2000 ms"
 msgstr "Sbloccato a meno di 2000 ms"
 
-#: settings/settings.ui:1521 settings/settings.ui:1857
+#: settings/settings.ui:1522 settings/settings.ui:1858
 msgid "Unlocked at less than 1000 ms"
 msgstr "Sbloccato a meno di 1000 ms"
 
-#: settings/settings.ui:1558
+#: settings/settings.ui:1559
 msgid "The Marking Mode of Fly-Pie"
 msgstr "La Modalità di Marcatura di Fly-Pie"
 
-#: settings/settings.ui:1592
+#: settings/settings.ui:1593
 msgid ""
 "The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
@@ -208,7 +208,7 @@ msgstr ""
 "fare clic e trascinare un elemento. Non appena metti in pausa il "
 "trascinamento o effettui una svolta, l'elemento verrà selezionato."
 
-#: settings/settings.ui:1609
+#: settings/settings.ui:1610
 msgid ""
 "Try remembering the path to an item. Open the menu and <b>draw the path with "
 "your mouse</b>. You can start with individual segments of the path, put you "
@@ -230,11 +230,11 @@ msgstr ""
 "\n"
 "Fai clic su <b>avanti</b> per un'ulteriore sessione di pratica!"
 
-#: settings/settings.ui:1676
+#: settings/settings.ui:1677
 msgid "Practice Session II"
 msgstr "Sessione Pratica II"
 
-#: settings/settings.ui:1693
+#: settings/settings.ui:1694
 #, fuzzy
 msgid ""
 "Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
@@ -251,20 +251,20 @@ msgstr ""
 "Quando sei soddisfatto del risultato, fai clic su <b> avanti </b> per "
 "apprendere alcuni suggerimenti e trucchi finali!\n"
 
-#: settings/settings.ui:1896
+#: settings/settings.ui:1897
 msgid "Unlocked at less than 750 ms"
 msgstr "Sbloccato a meno di 750 ms"
 
-#: settings/settings.ui:1942
+#: settings/settings.ui:1943
 msgid "Unlocked at less than 500 ms"
 msgstr "Sbloccato a meno di 500 ms"
 
-#: settings/settings.ui:1993
+#: settings/settings.ui:1994
 #, fuzzy
 msgid "Congratulations!"
 msgstr "🎉️ Congratulazioni! 🎉️"
 
-#: settings/settings.ui:2012
+#: settings/settings.ui:2013
 msgid ""
 "Congratulations! If you managed to unlock most of the medals, you will be "
 "using Fly-Pie like a master Pielot!\n"
@@ -298,130 +298,134 @@ msgstr ""
 "Schneegans/Fly-Pie/issues\">Github</a>."
 
 #. Button for tutorial navigation.
-#: settings/settings.ui:2081
+#: settings/settings.ui:2082
 msgid "Previous"
 msgstr "Precedente"
 
 #. Button for tutorial navigation.
-#: settings/settings.ui:2245
+#: settings/settings.ui:2246
 msgid "Next"
 msgstr "Successivo"
 
 #. Caption of one of the main pages.
-#: settings/settings.ui:2271
+#: settings/settings.ui:2272
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#: settings/settings.ui:2318
-msgid "Open Preview Menu"
-msgstr "Apri il Menu di Anteprima"
-
-#: settings/settings.ui:2331
-msgid "You may also open one of your own menus from the Menu Editor."
-msgstr "Puoi anche aprire uno dei tuoi menu dall'Editor dei Menu."
-
-#: settings/settings.ui:2352
+#: settings/settings.ui:2319 settings/settings.ui:2354
 msgid "Open Live Preview Menu"
 msgstr "Mostra Anteprima Menu"
 
-#: settings/settings.ui:2377
+#. Do not make lines longer than 80 letters!
+#: settings/settings.ui:2332
+msgid ""
+"This menu stays open, you can tweak the settings and see the results "
+"immediately!\n"
+"You may also open one of your own menus from the Menu Editor, of course."
+msgstr ""
+
+#: settings/settings.ui:2379
 msgid "Live Preview"
 msgstr "Anteprima dal Vivo"
 
-#: settings/settings.ui:2446
+#: settings/settings.ui:2448
 msgid "Choose a Preset"
 msgstr "Scegli un Predefinito"
 
-#: settings/settings.ui:2459
+#: settings/settings.ui:2461
 msgid "This will override most settings below!"
 msgstr "Ciò sovrascrive la maggior parte delle impostazioni di seguito!"
 
-#: settings/settings.ui:2510
-msgid "Load a Preset"
+#: settings/settings.ui:2512
+#, fuzzy
+msgid "Load / Save a Preset"
 msgstr "Carica un Predefinito"
 
-#: settings/settings.ui:2531
+#: settings/settings.ui:2533
 msgid "Initializes the settings below to random values"
 msgstr "Inizializza le impostazioni di seguito per valori casuali"
 
 #. Please keep this short!
-#: settings/settings.ui:2555
+#: settings/settings.ui:2557
 msgid "Generate Random Preset"
 msgstr "Genera un Predefinito Casuale"
 
-#: settings/settings.ui:2662
-msgid "Easing Duration"
+#: settings/settings.ui:2664
+#, fuzzy
+msgid "Animation Duration"
 msgstr "Durata Facilitata"
 
-#: settings/settings.ui:2680
-msgid "Global Scale"
+#: settings/settings.ui:2682
+#, fuzzy
+msgid "Global Scaling"
 msgstr "Scala Globale"
 
 #. Please keep this short!
-#: settings/settings.ui:2692
+#: settings/settings.ui:2694
 msgid "Independent of the preset."
 msgstr "Indipendentemente dal predefinito selezionato."
 
-#: settings/settings.ui:2746 settings/settings.ui:2766
-#: settings/settings.ui:2903 settings/settings.ui:2923
-#: settings/settings.ui:2942 settings/settings.ui:2961
-#: settings/settings.ui:3225 settings/settings.ui:3245
-#: settings/settings.ui:3353 settings/settings.ui:3373
-#: settings/settings.ui:3525 settings/settings.ui:4317
-#: settings/settings.ui:4336 settings/settings.ui:4356
-#: settings/settings.ui:4376 settings/settings.ui:5153
-#: settings/settings.ui:5354 settings/settings.ui:5373
-#: settings/settings.ui:5393 settings/settings.ui:5413
-#: settings/settings.ui:5433 settings/settings.ui:5880
-#: settings/settings.ui:6028 settings/settings.ui:6048
-#: settings/settings.ui:6068 settings/settings.ui:6286
-#: settings/settings.ui:6306 settings/settings.ui:6326
-#: settings/settings.ui:6505 settings/settings.ui:6592
-#: settings/settings.ui:6678 settings/settings.ui:6765
-#: settings/settings.ui:6846
+#: settings/settings.ui:2748 settings/settings.ui:2768
+#: settings/settings.ui:2905 settings/settings.ui:2925
+#: settings/settings.ui:2944 settings/settings.ui:2963
+#: settings/settings.ui:3227 settings/settings.ui:3247
+#: settings/settings.ui:3355 settings/settings.ui:3375
+#: settings/settings.ui:3527 settings/settings.ui:4319
+#: settings/settings.ui:4338 settings/settings.ui:4358
+#: settings/settings.ui:4378 settings/settings.ui:5155
+#: settings/settings.ui:5356 settings/settings.ui:5375
+#: settings/settings.ui:5395 settings/settings.ui:5415
+#: settings/settings.ui:5435 settings/settings.ui:5882
+#: settings/settings.ui:6030 settings/settings.ui:6050
+#: settings/settings.ui:6070 settings/settings.ui:6288
+#: settings/settings.ui:6308 settings/settings.ui:6328
+#: settings/settings.ui:6507 settings/settings.ui:6594
+#: settings/settings.ui:6680 settings/settings.ui:6767
+#: settings/settings.ui:6848
 msgid "Reset to default value"
 msgstr "Ripristina il valore predefinito"
 
-#: settings/settings.ui:2819
+#: settings/settings.ui:2821
 msgid "Font"
 msgstr "Font"
 
-#: settings/settings.ui:2831
+#: settings/settings.ui:2833
 msgid "Text Color"
 msgstr "Colore Testo"
 
-#: settings/settings.ui:2845 settings/settings.ui:4226
-#: settings/settings.ui:5243 settings/settings.ui:5609
+#: settings/settings.ui:2847 settings/settings.ui:4228
+#: settings/settings.ui:5245 settings/settings.ui:5611
 msgid "Background Color"
 msgstr "Colore Sfondo"
 
-#: settings/settings.ui:2874
+#: settings/settings.ui:2876
 msgid "Pick Text Color"
 msgstr "Scegli il Colore del Testo"
 
-#: settings/settings.ui:2890
+#: settings/settings.ui:2892
 msgid "Pick Background Color"
 msgstr "Scegli il Colore di Sfondo"
 
-#: settings/settings.ui:3007 settings/settings.ui:3065
+#: settings/settings.ui:3009 settings/settings.ui:3067
 msgid "Global Appearance Settings"
 msgstr "Impostazioni Aspetto Globale"
 
-#: settings/settings.ui:3023
+#: settings/settings.ui:3025
 msgid "These settings affect all menu items."
 msgstr "Queste impostazioni influiscono su tutte le voci di menu."
 
-#: settings/settings.ui:3048
-msgid "Easing Mode"
+#: settings/settings.ui:3050
+#, fuzzy
+msgid "Animation Mode"
 msgstr "Tipo di Animazione"
 
-#: settings/settings.ui:3121 settings/settings.ui:3690
-#: settings/settings.ui:4973 settings/settings.ui:5787
+#: settings/settings.ui:3123 settings/settings.ui:3692
+#: settings/settings.ui:4975 settings/settings.ui:5789
 msgid "Size"
 msgstr "Dimensione"
 
 #. Keep the individual lines short! You can use up to three lines if you want.
-#: settings/settings.ui:3134
+#: settings/settings.ui:3136
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
@@ -429,205 +433,205 @@ msgstr ""
 "Fare clic all'interno del raggio interno\n"
 "annullerà la selezione."
 
-#: settings/settings.ui:3158
+#: settings/settings.ui:3160
 msgid "Wedge Separators"
 msgstr "Linee di Divisione"
 
-#: settings/settings.ui:3174 settings/settings.ui:6227
+#: settings/settings.ui:3176 settings/settings.ui:6229
 msgid "Color"
 msgstr "Colore"
 
-#: settings/settings.ui:3193 settings/settings.ui:3319
+#: settings/settings.ui:3195 settings/settings.ui:3321
 msgid "Width"
 msgstr "Larghezza"
 
-#: settings/settings.ui:3267
+#: settings/settings.ui:3269
 msgid "Pick Wedge Separator Color"
 msgstr "Scegli Colore del Separatore a Cuneo"
 
-#: settings/settings.ui:3292
+#: settings/settings.ui:3294
 msgid "Wedge Color"
 msgstr "Colore Cuneo"
 
-#: settings/settings.ui:3396
+#: settings/settings.ui:3398
 msgid "Inner Radius"
 msgstr "Raggio Interno"
 
-#: settings/settings.ui:3440
+#: settings/settings.ui:3442
 msgid "Inactive"
 msgstr "Non attivo"
 
-#: settings/settings.ui:3459
+#: settings/settings.ui:3461
 msgid "Hovered"
 msgstr "Attivo"
 
-#: settings/settings.ui:3482
+#: settings/settings.ui:3484
 msgid "Pick Wedge Color"
 msgstr "Scegli Colore del Cuneo"
 
-#: settings/settings.ui:3497
+#: settings/settings.ui:3499
 msgid "Pick Hovered Wedge Color"
 msgstr "Seleziona Colore Segmenti Attivi"
 
-#: settings/settings.ui:3568 settings/settings.ui:3626
+#: settings/settings.ui:3570 settings/settings.ui:3628
 msgid "Wedge Appearance"
 msgstr "Aspetto del Cuneo"
 
-#: settings/settings.ui:3584
+#: settings/settings.ui:3586
 msgid "Clicking inside a wedge will activate the corresponding item."
 msgstr ""
 "Facendo clic all'interno di un cuneo si attiverà l'elemento corrispondente."
 
-#: settings/settings.ui:3741 settings/settings.ui:4008
+#: settings/settings.ui:3743 settings/settings.ui:4010
 msgid "Pick Center Item Color"
 msgstr "Seleziona Colore Elemento Centrale"
 
-#: settings/settings.ui:3767 settings/settings.ui:3827
-#: settings/settings.ui:4034 settings/settings.ui:4094
-#: settings/settings.ui:4656 settings/settings.ui:4728
-#: settings/settings.ui:4861 settings/settings.ui:4945
+#: settings/settings.ui:3769 settings/settings.ui:3829
+#: settings/settings.ui:4036 settings/settings.ui:4096
+#: settings/settings.ui:4658 settings/settings.ui:4730
+#: settings/settings.ui:4863 settings/settings.ui:4947
 msgid "Saturation"
 msgstr "Saturazione"
 
-#: settings/settings.ui:3787 settings/settings.ui:3839
-#: settings/settings.ui:4054 settings/settings.ui:4106
-#: settings/settings.ui:4676 settings/settings.ui:4716
-#: settings/settings.ui:4881 settings/settings.ui:4933
+#: settings/settings.ui:3789 settings/settings.ui:3841
+#: settings/settings.ui:4056 settings/settings.ui:4108
+#: settings/settings.ui:4678 settings/settings.ui:4718
+#: settings/settings.ui:4883 settings/settings.ui:4935
 msgid "Luminance"
 msgstr "Illuminazione"
 
-#: settings/settings.ui:3807 settings/settings.ui:3851
-#: settings/settings.ui:4074 settings/settings.ui:4118
-#: settings/settings.ui:4696 settings/settings.ui:4740
-#: settings/settings.ui:4901 settings/settings.ui:4921
+#: settings/settings.ui:3809 settings/settings.ui:3853
+#: settings/settings.ui:4076 settings/settings.ui:4120
+#: settings/settings.ui:4698 settings/settings.ui:4742
+#: settings/settings.ui:4903 settings/settings.ui:4923
 msgid "Opacity"
 msgstr "Opacità"
 
 #. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
-#: settings/settings.ui:3876 settings/settings.ui:3961
-#: settings/settings.ui:4568 settings/settings.ui:4773
-#: settings/settings.ui:5640 settings/settings.ui:5717
+#: settings/settings.ui:3878 settings/settings.ui:3963
+#: settings/settings.ui:4570 settings/settings.ui:4775
+#: settings/settings.ui:5642 settings/settings.ui:5719
 msgid "Fixed"
 msgstr "Fisso"
 
 #. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
-#: settings/settings.ui:3891 settings/settings.ui:3976
-#: settings/settings.ui:4583 settings/settings.ui:4788
+#: settings/settings.ui:3893 settings/settings.ui:3978
+#: settings/settings.ui:4585 settings/settings.ui:4790
 msgid "Auto"
 msgstr "Automatico"
 
-#: settings/settings.ui:4213 settings/settings.ui:5196
+#: settings/settings.ui:4215 settings/settings.ui:5198
 msgid "Icon Opacity"
 msgstr "Opacità Icona"
 
-#: settings/settings.ui:4238 settings/settings.ui:4257
-#: settings/settings.ui:4277 settings/settings.ui:4297
-#: settings/settings.ui:5255 settings/settings.ui:5274
-#: settings/settings.ui:5294 settings/settings.ui:5314
-#: settings/settings.ui:5334 settings/settings.ui:5969
-#: settings/settings.ui:5988 settings/settings.ui:6008
+#: settings/settings.ui:4240 settings/settings.ui:4259
+#: settings/settings.ui:4279 settings/settings.ui:4299
+#: settings/settings.ui:5257 settings/settings.ui:5276
+#: settings/settings.ui:5296 settings/settings.ui:5316
+#: settings/settings.ui:5336 settings/settings.ui:5971
+#: settings/settings.ui:5990 settings/settings.ui:6010
 msgid "Copy left value to right side"
 msgstr "Copia il valore sinistro sul lato destro"
 
-#: settings/settings.ui:4396
+#: settings/settings.ui:4398
 msgid "With Hovered Child"
 msgstr "Con Figlio Attivo"
 
-#: settings/settings.ui:4412 settings/settings.ui:4483
+#: settings/settings.ui:4414 settings/settings.ui:4485
 msgid "Center Appearance"
 msgstr "Aspetto Centrale"
 
-#: settings/settings.ui:4428
+#: settings/settings.ui:4430
 msgid "Without Hovered Child"
 msgstr "Senza Figlio Attivo"
 
-#: settings/settings.ui:4445 settings/settings.ui:5502
+#: settings/settings.ui:4447 settings/settings.ui:5504
 msgid "Icon Scale"
 msgstr "Scala Icona"
 
 #. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
-#: settings/settings.ui:4598 settings/settings.ui:4803
-#: settings/settings.ui:5655 settings/settings.ui:5732
+#: settings/settings.ui:4600 settings/settings.ui:4805
+#: settings/settings.ui:5657 settings/settings.ui:5734
 msgid "Parent"
 msgstr "Genitore"
 
-#: settings/settings.ui:4631 settings/settings.ui:4836
+#: settings/settings.ui:4633 settings/settings.ui:4838
 msgid "Pick Child Item Color"
 msgstr "Scegli Colore Elemento Figlio"
 
-#: settings/settings.ui:4986 settings/settings.ui:5800
+#: settings/settings.ui:4988 settings/settings.ui:5802
 msgid "Offset"
 msgstr "Distanza"
 
-#: settings/settings.ui:5107 settings/settings.ui:5919
+#: settings/settings.ui:5109 settings/settings.ui:5921
 msgid "Draw Above"
 msgstr "Disegna Sopra"
 
-#: settings/settings.ui:5119
+#: settings/settings.ui:5121
 msgid "Render children above the center item."
 msgstr "Esegui il rendering dei figli sopra l'elemento centrale."
 
-#: settings/settings.ui:5453 settings/settings.ui:5953
+#: settings/settings.ui:5455 settings/settings.ui:5955
 msgid "Standard State"
 msgstr "Standard"
 
-#: settings/settings.ui:5469
+#: settings/settings.ui:5471
 msgid "Hovered State"
 msgstr "Attivo"
 
-#: settings/settings.ui:5485 settings/settings.ui:5540
+#: settings/settings.ui:5487 settings/settings.ui:5542
 msgid "Children Appearance"
 msgstr "Aspetto Elementi Figli"
 
-#: settings/settings.ui:5688 settings/settings.ui:5765
+#: settings/settings.ui:5690 settings/settings.ui:5767
 msgid "Pick Grandchild Item Color"
 msgstr "Scegli Colore Elementi dei Nipoti"
 
-#: settings/settings.ui:5931
+#: settings/settings.ui:5933
 msgid "Render grandchildren above children items."
 msgstr "Disegna i nipoti sopra gli elementi figli."
 
-#: settings/settings.ui:6087
+#: settings/settings.ui:6089
 msgid "With Hovered Parent"
 msgstr "Con Elemento Genitore Attivo"
 
-#: settings/settings.ui:6103 settings/settings.ui:6145
+#: settings/settings.ui:6105 settings/settings.ui:6147
 msgid "Grandchildren Appearance"
 msgstr "Aspetto Elementi dei Nipoti"
 
-#: settings/settings.ui:6214
+#: settings/settings.ui:6216
 msgid "Thickness"
 msgstr "Spessore"
 
-#: settings/settings.ui:6273
+#: settings/settings.ui:6275
 msgid "Pick Trace Color"
 msgstr "Scegli Colore Traccia"
 
-#: settings/settings.ui:6351 settings/settings.ui:6416
+#: settings/settings.ui:6353 settings/settings.ui:6418
 msgid "Trace Appearance"
 msgstr "Aspetto della Traccia"
 
-#: settings/settings.ui:6367
+#: settings/settings.ui:6369
 msgid "The trace is the connecting line between selected menu items."
 msgstr "La traccia è la linea di collegamento tra le voci di menu selezionate."
 
-#: settings/settings.ui:6393
+#: settings/settings.ui:6395
 msgid "Minimum Segment Length"
 msgstr "Lunghezza Minima del Segmento"
 
-#: settings/settings.ui:6456
+#: settings/settings.ui:6458
 msgid "Minimum Stroke Angle"
 msgstr "Angolo Gesto Minimo"
 
-#: settings/settings.ui:6468
+#: settings/settings.ui:6470
 msgid "Smaller turns will not lead to selections."
 msgstr "Le svolte più piccole non porteranno a selezioni."
 
-#: settings/settings.ui:6541
+#: settings/settings.ui:6543
 msgid "Minimum Stroke Length"
 msgstr "Lunghezza Minima Gesto"
 
-#: settings/settings.ui:6553
+#: settings/settings.ui:6555
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
@@ -635,11 +639,11 @@ msgstr ""
 "Gesti più brevi non porteranno a selezioni.\n"
 "Questo viene moltiplicato per il valore della Scala Globale."
 
-#: settings/settings.ui:6628
+#: settings/settings.ui:6630
 msgid "Jitter Threshold"
 msgstr "Soglia di jitter"
 
-#: settings/settings.ui:6640
+#: settings/settings.ui:6642
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
@@ -647,11 +651,11 @@ msgstr ""
 "Non saranno presi in considerazione i movimenti più piccoli.\n"
 "Questo viene moltiplicato per il valore della Scala Globale."
 
-#: settings/settings.ui:6714
+#: settings/settings.ui:6716
 msgid "Selection Timeout"
 msgstr "Timeout di Selezione"
 
-#: settings/settings.ui:6726
+#: settings/settings.ui:6728
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
@@ -659,11 +663,11 @@ msgstr ""
 "Se il puntatore è fermo per questo molti millisecondi, \n"
 "l'elemento corrente verrà selezionato."
 
-#: settings/settings.ui:6812
+#: settings/settings.ui:6814
 msgid "Show Screencast Mouse"
 msgstr "Mostra Screencast del Mouse"
 
-#: settings/settings.ui:6824
+#: settings/settings.ui:6826
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
@@ -672,61 +676,61 @@ msgstr ""
 "mouse.\n"
 "Questo può essere usato se vuoi catturare un video di Fly-Pie."
 
-#: settings/settings.ui:6884 settings/settings.ui:6936
+#: settings/settings.ui:6886 settings/settings.ui:6938
 msgid "Advanced Settings"
 msgstr "Impostazioni Avanzate"
 
-#: settings/settings.ui:6900
+#: settings/settings.ui:6902
 msgid "These settings are independent of the presets."
 msgstr "Questo non è influenzato dai predefiniti."
 
 #. Caption of one of the main pages.
-#: settings/settings.ui:6955
+#: settings/settings.ui:6957
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: settings/settings.ui:7013
+#: settings/settings.ui:7015
 msgid "Opens a preview for the selected menu."
 msgstr "Apre un'anteprima per il menu selezionato."
 
-#: settings/settings.ui:7061
+#: settings/settings.ui:7063
 msgid "Imports a menu configuration."
 msgstr "Importa una configurazione del menu."
 
-#: settings/settings.ui:7082
+#: settings/settings.ui:7084
 msgid "Exports the current menu configuration."
 msgstr "Esporta la configurazione del menu corrente."
 
-#: settings/settings.ui:7153
+#: settings/settings.ui:7155
 msgid "Removes the selected item."
 msgstr "Rimuove l'elemento selezionato."
 
-#: settings/settings.ui:7241 settings/settings.ui:7278
+#: settings/settings.ui:7243 settings/settings.ui:7280
 msgid "Name"
 msgstr "Nome"
 
-#: settings/settings.ui:7276 settings/settings.ui:7277
-#: settings/settings.ui:7375 settings/settings.ui:7376
+#: settings/settings.ui:7278 settings/settings.ui:7279
+#: settings/settings.ui:7377 settings/settings.ui:7378
 msgid "Insert Emoji"
 msgstr "Inserisci Emoji"
 
-#: settings/settings.ui:7311 settings/settings.ui:7377
+#: settings/settings.ui:7313 settings/settings.ui:7379
 msgid "Icon"
 msgstr "Icona"
 
-#: settings/settings.ui:7324
+#: settings/settings.ui:7326
 msgid "Can be an icon name, text, emoji or a file."
 msgstr "Può essere il nome di un'icona, testo, emoji o un file."
 
-#: settings/settings.ui:7426 settings/MenuEditor.js:360
+#: settings/settings.ui:7428 settings/MenuEditor.js:360
 msgid "Fixed Angle"
 msgstr "Angolo Fisso"
 
-#: settings/settings.ui:7439
+#: settings/settings.ui:7441
 msgid "See tooltip for details."
 msgstr "Vedere dettagli nella descrizione del comando."
 
-#: settings/settings.ui:7462
+#: settings/settings.ui:7464
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -755,102 +759,102 @@ msgstr ""
 "\n"
 "<b>Utilizza -1 per disabilitare questa funzione</b>."
 
-#: settings/settings.ui:7513 settings/settings.ui:7576
+#: settings/settings.ui:7515 settings/settings.ui:7578
 msgid "Command"
 msgstr "Comando"
 
-#: settings/settings.ui:7526
+#: settings/settings.ui:7528
 msgid "Use the button to list installed apps!"
 msgstr "Usa il pulsante per elencare le app installate!"
 
-#: settings/settings.ui:7626 settings/settings.ui:7689
+#: settings/settings.ui:7628 settings/settings.ui:7691
 msgid "File"
 msgstr "File"
 
-#: settings/settings.ui:7639 settings/settings.ui:7752
+#: settings/settings.ui:7641 settings/settings.ui:7754
 msgid "It will be opened with the default app."
 msgstr "Verrà aperto con l'app predefinita."
 
-#: settings/settings.ui:7739 settings/settings.ui:7775
+#: settings/settings.ui:7741 settings/settings.ui:7777
 msgid "URI"
 msgstr "URI"
 
-#: settings/settings.ui:7815 settings/settings.ui:7851
+#: settings/settings.ui:7817 settings/settings.ui:7853
 msgid "Text"
 msgstr "Testo"
 
-#: settings/settings.ui:7828
+#: settings/settings.ui:7830
 msgid "This text will be inserted."
 msgstr "Questo testo verrà inserito."
 
-#: settings/settings.ui:7891 settings/settings.ui:7927
+#: settings/settings.ui:7893 settings/settings.ui:7929
 msgid "ID"
 msgstr "ID"
 
-#: settings/settings.ui:7904
+#: settings/settings.ui:7906
 msgid "This will be passed to the D-Bus signal."
 msgstr "Questo verrà passato al segnale D-Bus."
 
-#: settings/settings.ui:7967
+#: settings/settings.ui:7969
 msgid "Max Item Count"
 msgstr "Numero massimo Elementi"
 
-#: settings/settings.ui:7980
+#: settings/settings.ui:7982
 msgid "Limits the number of children."
 msgstr "Limita il numero di figli."
 
-#: settings/settings.ui:8047 settings/settings.ui:8156
+#: settings/settings.ui:8049 settings/settings.ui:8158
 msgid "Shortcut"
 msgstr "Collegamento"
 
-#: settings/settings.ui:8060
+#: settings/settings.ui:8062
 msgid "This shortcut will be simulated."
 msgstr "Questo collegamento verrà simulato."
 
-#: settings/settings.ui:8169
+#: settings/settings.ui:8171
 msgid "This will open the menu."
 msgstr "Questo aprirà il menu."
 
-#: settings/settings.ui:8243
+#: settings/settings.ui:8245
 msgid "Open in Screen Center"
 msgstr "Apri al Centro dello Schermo"
 
 #. Caption of one of the main pages.
-#: settings/settings.ui:8337
+#: settings/settings.ui:8339
 msgid "Menu Editor"
 msgstr "Menu Editore"
 
-#: settings/settings.ui:8389
+#: settings/settings.ui:8391
 msgid "750 / 5000 XP"
 msgstr ""
 
-#: settings/settings.ui:8440
+#: settings/settings.ui:8442
 msgid "Make 500 selection of items at level 5."
 msgstr ""
 
-#: settings/settings.ui:8457
+#: settings/settings.ui:8459
 msgid "<small>500 XP</small>"
 msgstr ""
 
 #. Caption of one of the main pages.
-#: settings/settings.ui:8486 settings/settings.ui:8815
+#: settings/settings.ui:8488 settings/settings.ui:8817
 msgid "Achievements"
 msgstr "Premi"
 
-#: settings/settings.ui:8656
+#: settings/settings.ui:8658
 #, fuzzy
 msgid "Canceled selections"
 msgstr "Impostazioni Avanzate"
 
-#: settings/settings.ui:8697
+#: settings/settings.ui:8699
 msgid "Menus opened over the D-Bus"
 msgstr ""
 
-#: settings/settings.ui:8738
+#: settings/settings.ui:8740
 msgid "Number of times this settings dialog was opened"
 msgstr ""
 
-#: settings/settings.ui:8773
+#: settings/settings.ui:8775
 msgid "Statistics"
 msgstr ""
 
@@ -911,7 +915,8 @@ msgid "Maximize Window"
 msgstr "Ingrandisci Finestra"
 
 #: settings/DefaultMenu.js:76
-msgid "Gnome Shell"
+#, fuzzy
+msgid "GNOME Shell"
 msgstr "Gnome Shell"
 
 #: settings/DefaultMenu.js:80 settings/ExampleMenu.js:243
@@ -1853,3 +1858,9 @@ msgstr "Disconnetti"
 #: common/menus/System.js:104
 msgid "Power Off..."
 msgstr "Spegni..."
+
+#~ msgid "Open Preview Menu"
+#~ msgstr "Apri il Menu di Anteprima"
+
+#~ msgid "You may also open one of your own menus from the Menu Editor."
+#~ msgstr "Puoi anche aprire uno dei tuoi menu dall'Editor dei Menu."
