@@ -231,6 +231,12 @@
       <description>The opacity of center icons when hovered.</description>
     </key>
 
+    <key name="center-background-image" type="s">
+      <default>""</default>
+      <summary>Background Image File Path</summary>
+      <description>Relative or absolute path to the background image.</description>
+    </key>
+
 
     <!-- Child Item Settings -->
 
@@ -337,6 +343,12 @@
       <description>The opacity of child icons when hovered.</description>
     </key>
 
+    <key name="child-background-image" type="s">
+      <default>""</default>
+      <summary>Background Image File Path</summary>
+      <description>Relative or absolute path to the background image.</description>
+    </key>
+
     <key name="child-draw-above" type="b">
       <default>false</default>
       <summary>Child Draw Above</summary>
@@ -392,6 +404,12 @@
       <default>32</default>
       <summary>Grandchild Offset Hover</summary>
       <description>The offset of the grandchildren elements in pixels when hovered.</description>
+    </key>
+
+    <key name="grandchild-background-image" type="s">
+      <default>""</default>
+      <summary>Background Image File Path</summary>
+      <description>Relative or absolute path to the background image.</description>
     </key>
 
     <key name="grandchild-draw-above" type="b">

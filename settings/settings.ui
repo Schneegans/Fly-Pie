@@ -3052,6 +3052,17 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                 <property name="top_attach">6</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">13</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -3598,6 +3609,17 @@ will cancel the selection.</property>
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">0</property>
+                                <property name="width">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">10</property>
                                 <property name="width">4</property>
                               </packing>
                             </child>
@@ -4218,19 +4240,6 @@ will cancel the selection.</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="label" translatable="yes">Background Color</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
                               <object class="GtkButton" id="copy-center-color">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -4447,6 +4456,101 @@ will cancel the selection.</property>
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">7</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Background Color</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">12</property>
+                                <property name="width">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkFileChooserButton" id="center-background-image">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="filter">image-file-filter</property>
+                                <property name="title" translatable="yes"/>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">11</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-center-background-image">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="top_attach">11</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_right">20</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Background Image</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="label" translatable="yes">This will be tinted by the Background Color above.</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">11</property>
+                                <property name="width">3</property>
                               </packing>
                             </child>
                             <child>
@@ -5129,7 +5233,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">13</property>
+                                <property name="top_attach">15</property>
                                 <property name="width">3</property>
                               </packing>
                             </child>
@@ -5142,7 +5246,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">3</property>
-                                <property name="top_attach">13</property>
+                                <property name="top_attach">15</property>
                               </packing>
                             </child>
                             <child>
@@ -5162,7 +5266,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">4</property>
-                                <property name="top_attach">13</property>
+                                <property name="top_attach">15</property>
                               </packing>
                             </child>
                             <child>
@@ -5504,6 +5608,99 @@ will cancel the selection.</property>
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">9</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">14</property>
+                                <property name="width">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">16</property>
+                                <property name="width">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_right">20</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Background Image</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="label" translatable="yes">This will be tinted by the Background Color above.</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">13</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-child-background-image">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="top_attach">13</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkFileChooserButton" id="child-background-image">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="filter">image-file-filter</property>
+                                <property name="title" translatable="yes"/>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">13</property>
                               </packing>
                             </child>
                             <child>
@@ -5889,7 +6086,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">4</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">11</property>
                               </packing>
                             </child>
                             <child>
@@ -5901,7 +6098,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">3</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">11</property>
                               </packing>
                             </child>
                             <child>
@@ -5941,7 +6138,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">11</property>
                                 <property name="width">3</property>
                               </packing>
                             </child>
@@ -6109,6 +6306,99 @@ will cancel the selection.</property>
                                 <property name="left_attach">1</property>
                                 <property name="top_attach">0</property>
                                 <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">10</property>
+                                <property name="width">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">12</property>
+                                <property name="width">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_right">20</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Background Image</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="hexpand">True</property>
+                                    <property name="label" translatable="yes">This will be tinted by the Background Color above.</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">9</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-grandchild-background-image">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">4</property>
+                                <property name="top_attach">9</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkFileChooserButton" id="grandchild-background-image">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="filter">image-file-filter</property>
+                                <property name="title" translatable="yes"/>
+                              </object>
+                              <packing>
+                                <property name="left_attach">3</property>
+                                <property name="top_attach">9</property>
                               </packing>
                             </child>
                             <child>
@@ -6395,6 +6685,17 @@ will cancel the selection.</property>
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">7</property>
+                                <property name="width">3</property>
                               </packing>
                             </child>
                           </object>
@@ -6914,6 +7215,17 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">0</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">11</property>
                                 <property name="width">3</property>
                               </packing>
                             </child>

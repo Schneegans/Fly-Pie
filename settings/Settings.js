@@ -113,6 +113,7 @@ var Settings = class Settings {
     this._bindSlider('center-size');
     this._bindSlider('center-icon-scale');
     this._bindSlider('center-icon-opacity');
+    this._bindFileChooserButton('center-background-image');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
     this._bindRevealer('center-color-mode-fixed', 'center-fixed-color-revealer');
@@ -156,6 +157,7 @@ var Settings = class Settings {
     this._bindSlider('child-offset');
     this._bindSlider('child-icon-scale');
     this._bindSlider('child-icon-opacity');
+    this._bindFileChooserButton('child-background-image');
     this._bindSwitch('child-draw-above');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
@@ -195,6 +197,7 @@ var Settings = class Settings {
     this._bindColorButton('grandchild-fixed-color');
     this._bindSlider('grandchild-size');
     this._bindSlider('grandchild-offset');
+    this._bindFileChooserButton('grandchild-background-image');
     this._bindSwitch('grandchild-draw-above');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
@@ -560,6 +563,73 @@ var Settings = class Settings {
     this._bindCopyButton(settingsKey);
   }
 
+  // Binds the file path of a Gtk.FileChooserButton to a string setting. Since this path
+  // is not a property of the FileChooserButton, we cannot simply connect it. Furthermore,
+  // this behaves special for files which are part of Fly-Pie: All paths outside of
+  // Fly-Pie's root directory are stored as absolute paths; paths which are descendants of
+  // Me.path are stored as relative paths. The button state is also updated when the
+  // corresponding setting changes. It also binds any corresponding reset buttons and
+  // '-hover' variants if they exist.
+  _bindFileChooserButton(settingsKey) {
+
+    // Called once for settingsKey and once for settingsKey + '-hover'.
+    const impl = (key) => {
+      // Check if there is such a button.
+      const button = this._builder.get_object(key);
+      if (button != null && this._settings.settings_schema.has_key(key)) {
+
+        // Store the file path when the user selects a file.
+        button.connect('file-set', (widget) => {
+          const file         = widget.get_file();
+          const absolutePath = file.get_path();
+          const relativePath = Gio.File.new_for_path(Me.path).get_relative_path(file);
+
+          // Store the relative path if the file is a descendant of Me.path.
+          if (relativePath != null) {
+            this._settings.set_string(key, relativePath);
+          } else {
+            this._settings.set_string(key, absolutePath);
+          }
+        });
+
+        // This will be called whenever the settingsKey changes.
+        const settingSignalHandler = () => {
+          // If the settings key is empty (default state), reset the button.
+          const path = this._settings.get_string(key);
+          if (path == '') {
+            button.unselect_all();
+          } else {
+
+            let file = Gio.File.new_for_path(path);
+
+            // It may be a relative file?
+            if (!file.query_exists(null)) {
+              file = Gio.File.new_for_path(Me.path + '/' + path);
+            }
+
+            // Set only if it exists.
+            if (file.query_exists(null)) {
+              button.set_file(file);
+            } else {
+              button.unselect_all();
+            }
+          }
+        };
+
+        // Connect the handler!
+        this._settings.connect('changed::' + key, settingSignalHandler);
+        settingSignalHandler();
+      }
+    };
+
+    impl(settingsKey);
+    impl(settingsKey + '-hover');
+
+    // And bind the corresponding copy and reset buttons (if any).
+    this._bindResetButton(settingsKey);
+    this._bindCopyButton(settingsKey);
+  }
+
   // Colors are stored as strings like 'rgb(1, 0.5, 0)'. As Gio.Settings.bind_with_mapping
   // is not available yet, so we need to do the color conversion manually.
   _bindColorButton(settingsKey) {
@@ -593,11 +663,13 @@ var Settings = class Settings {
       impl(settingsKey + '-hover');
     }
 
-    // And bind the corresponding reset button.
+    // And bind the corresponding copy and reset buttons (if any).
     this._bindResetButton(settingsKey);
     this._bindCopyButton(settingsKey);
   }
 
+  // This makes sure that the revealer identified with revealerID is expanded whenever the
+  // toggle button identified with toggleButtonID is active.
   _bindRevealer(toggleButtonID, revealerID) {
     this._builder.get_object(toggleButtonID).connect('toggled', (button) => {
       this._builder.get_object(revealerID).reveal_child = button.active;
