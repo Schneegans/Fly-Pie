@@ -1,7 +1,7 @@
 # Italian translation for the Fly-Pie GNOME Shell Extension.
 # Copyright (C) 2020 Simon Schneegans.
 # This file is distributed under the same license as the Fly-Pie package.
-# Initial translation: Albano Battistella <albano_battistella@hotmail.com>, 2020.
+# Albano Battistella <albano_battistella@hotmail.com>, 2020.
 #
 msgid ""
 msgstr ""

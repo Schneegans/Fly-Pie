@@ -42,6 +42,16 @@ do
   [[ -e "$FILE" ]] || { echo "ERROR: No .po files found, exiting."; exit 1; }
   echo -n "Updating '$FILE' "
   msgmerge -U "$FILE" po/flypie.pot
+
+  # Check if the translation got fuzzy.
+  if grep --silent "#, fuzzy" "$FILE"; then
+    FUZZY+=("$FILE")
+  fi
 done
+
+# Display a warning if any translation needs an update.
+if [[ -v FUZZY ]]; then
+  echo "WARNING: Some translations have unclear strings and need an update: ${FUZZY[*]}"
+fi
 
 echo "All done!"
