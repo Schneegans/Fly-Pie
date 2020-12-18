@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-16 20:36+0100\n"
+"POT-Creation-Date: 2020-12-18 12:15+0100\n"
 "PO-Revision-Date: 2020-12-03 15:16+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Albano Battistella <albano_battistella@hotmail.com>\n"
@@ -34,6 +34,61 @@ msgstr ""
 "Ogni volta che incontri un 🐞️ bug o hai 🎉️ richiesta di funzionalità, sentiti "
 "libero di segnalarlo <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
+
+#. A kind of animation.
+#: settings/settings.ui:233
+msgid "Linear"
+msgstr ""
+
+#. A kind of animation.
+#: settings/settings.ui:237
+msgid "Ease"
+msgstr ""
+
+#. A kind of animation.
+#: settings/settings.ui:241
+msgid "Ease-In"
+msgstr ""
+
+#. A kind of animation.
+#: settings/settings.ui:245
+msgid "Ease-Out"
+msgstr ""
+
+#. A kind of animation.
+#: settings/settings.ui:249
+msgid "Ease-In-Out"
+msgstr ""
+
+#. A kind of animation.
+#: settings/settings.ui:253
+msgid "Ease-In-Quad"
+msgstr ""
+
+#. A kind of animation.
+#: settings/settings.ui:257
+msgid "Ease-Out-Quad"
+msgstr ""
+
+#. A kind of animation.
+#: settings/settings.ui:261
+msgid "Ease-In-Out-Quad"
+msgstr ""
+
+#. A kind of animation.
+#: settings/settings.ui:265
+msgid "Ease-In-Back"
+msgstr ""
+
+#. A kind of animation.
+#: settings/settings.ui:269
+msgid "Ease-Out-Back"
+msgstr ""
+
+#. A kind of animation.
+#: settings/settings.ui:273
+msgid "Ease-In-Out-Back"
+msgstr ""
 
 #. Tab title of the icon-select-popover.
 #: settings/settings.ui:451
@@ -71,6 +126,7 @@ msgstr "Salva impostazioni correnti"
 msgid "Save as new Preset"
 msgstr "Salva come nuovo Predefinito"
 
+#. Where presets are stored by default
 #: settings/settings.ui:794
 msgid "Open preset directory"
 msgstr "Apri directory predefinita"
@@ -84,6 +140,7 @@ msgstr "Abilita Animazioni"
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
 msgstr "Fly-Pie richiede che le animazioni di GNOME Shell siano abilitate."
 
+#. This is a heading.
 #: settings/settings.ui:1016
 msgid "Welcome to Fly-Pie!"
 msgstr "Benvenuto in Fly-Pie!"
@@ -114,7 +171,7 @@ msgstr ""
 "\n"
 "Quando ti senti a tuo agio, fai clic su <b>avanti</b> per ulteriori dettagli!"
 
-#. The text of the big tutorial button. Using two lines looks quite good.
+#. The text of the big tutorial button.
 #: settings/settings.ui:1097 settings/settings.ui:1215
 #: settings/settings.ui:1389 settings/settings.ui:1639
 #: settings/settings.ui:1813
@@ -124,6 +181,7 @@ msgstr ""
 "<big><b>Apri il\n"
 "menu!</b></big>"
 
+#. This is a heading.
 #: settings/settings.ui:1133
 msgid "You can click anywhere!"
 msgstr "Puoi fare clic ovunque!"
@@ -155,6 +213,7 @@ msgstr ""
 "\n"
 "Fai clic su <b>avanti</b> per una sessione di pratica!"
 
+#. This is a heading.
 #: settings/settings.ui:1252
 msgid "Practice Session I"
 msgstr "Sessione Pratica I"
@@ -176,23 +235,39 @@ msgstr ""
 "Quando sei soddisfatto del risultato, fai clic su <b>Avanti</b> per "
 "conoscere la modalità di marcatura di Fly-Pie!\n"
 
+#. ms = milliseconds
+#: settings/settings.ui:1293
+#, fuzzy
+msgid "<big>Last selection time: <b>- ms</b></big>"
+msgstr "<big>Ora dell'ultima selezione:<b>%d ms</b></big>"
+
+#. ms = milliseconds
+#: settings/settings.ui:1307
+#, fuzzy
+msgid "<big>Best selection time: <b>- ms</b></big>"
+msgstr "<big>Miglior tempo di selezione: <b>%d ms</b></big>"
+
 #. The text of the tutorial-reset-button.
 #: settings/settings.ui:1348 settings/settings.ui:1772
 msgid "Clear"
 msgstr "Ripristina"
 
+#. ms = milliseconds
 #: settings/settings.ui:1435
 msgid "Unlocked at less than 3000 ms"
 msgstr "Sbloccato a meno di 3000 ms"
 
+#. ms = milliseconds
 #: settings/settings.ui:1475
 msgid "Unlocked at less than 2000 ms"
 msgstr "Sbloccato a meno di 2000 ms"
 
+#. ms = milliseconds
 #: settings/settings.ui:1521 settings/settings.ui:1857
 msgid "Unlocked at less than 1000 ms"
 msgstr "Sbloccato a meno di 1000 ms"
 
+#. This is a heading.
 #: settings/settings.ui:1558
 msgid "The Marking Mode of Fly-Pie"
 msgstr "La Modalità di Marcatura di Fly-Pie"
@@ -230,6 +305,7 @@ msgstr ""
 "\n"
 "Fai clic su <b>avanti</b> per un'ulteriore sessione di pratica!"
 
+#. This is a heading.
 #: settings/settings.ui:1676
 msgid "Practice Session II"
 msgstr "Sessione Pratica II"
@@ -251,19 +327,23 @@ msgstr ""
 "Quando sei soddisfatto del risultato, fai clic su <b> avanti </b> per "
 "apprendere alcuni suggerimenti e trucchi finali!\n"
 
+#. ms = milliseconds
 #: settings/settings.ui:1896
 msgid "Unlocked at less than 750 ms"
 msgstr "Sbloccato a meno di 750 ms"
 
+#. ms = milliseconds
 #: settings/settings.ui:1942
 msgid "Unlocked at less than 500 ms"
 msgstr "Sbloccato a meno di 500 ms"
 
+#. The user finished the tutorial. Yay!
 #: settings/settings.ui:1993
 #, fuzzy
 msgid "Congratulations!"
 msgstr "🎉️ Congratulazioni! 🎉️"
 
+#. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: settings/settings.ui:2012
 msgid ""
 "Congratulations! If you managed to unlock most of the medals, you will be "
@@ -297,17 +377,17 @@ msgstr ""
 "funzionalità, sentiti libero di segnalarlo su <a href=\"https://github.com/"
 "Schneegans/Fly-Pie/issues\">Github</a>."
 
-#. Button for tutorial navigation.
+#. Button for tutorial navigation. Goes back one page.
 #: settings/settings.ui:2081
 msgid "Previous"
 msgstr "Precedente"
 
-#. Button for tutorial navigation.
+#. Button for tutorial navigation. Goes to the next page.
 #: settings/settings.ui:2245
 msgid "Next"
 msgstr "Successivo"
 
-#. Caption of one of the main pages.
+#. Caption of the tutorial page in the window's titlebar.
 #: settings/settings.ui:2271
 msgid "Tutorial"
 msgstr "Tutorial"
@@ -324,6 +404,7 @@ msgstr "Puoi anche aprire uno dei tuoi menu dall'Editor dei Menu."
 msgid "Open Live Preview Menu"
 msgstr "Mostra Anteprima Menu"
 
+#. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: settings/settings.ui:2377
 msgid "Live Preview"
 msgstr "Anteprima dal Vivo"
@@ -420,7 +501,8 @@ msgstr "Tipo di Animazione"
 msgid "Size"
 msgstr "Dimensione"
 
-#. Keep the individual lines short! You can use up to three lines if you want.
+#. Keep the individual lines short (around 30 characters max)!
+#. You can use up to three lines if you want.
 #: settings/settings.ui:3134
 msgid ""
 "Clicking inside the inner radius\n"
@@ -453,10 +535,12 @@ msgstr "Colore Cuneo"
 msgid "Inner Radius"
 msgstr "Raggio Interno"
 
+#. When the mouse pointer is NOT over the item
 #: settings/settings.ui:3440
 msgid "Inactive"
 msgstr "Non attivo"
 
+#. When the mouse pointer is over the item
 #: settings/settings.ui:3459
 msgid "Hovered"
 msgstr "Attivo"
@@ -465,6 +549,7 @@ msgstr "Attivo"
 msgid "Pick Wedge Color"
 msgstr "Scegli Colore del Cuneo"
 
+#. Hovered: When the mouse pointer is over the item
 #: settings/settings.ui:3497
 msgid "Pick Hovered Wedge Color"
 msgstr "Seleziona Colore Segmenti Attivi"
@@ -503,14 +588,18 @@ msgstr "Illuminazione"
 msgid "Opacity"
 msgstr "Opacità"
 
-#. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
+#. Keep this very short! Try to use not more than six or seven letters.
+#. This is a label of the coloring type radio button group.
+#. Fixed = not changing dynamically
 #: settings/settings.ui:3876 settings/settings.ui:3961
 #: settings/settings.ui:4568 settings/settings.ui:4773
 #: settings/settings.ui:5640 settings/settings.ui:5717
 msgid "Fixed"
 msgstr "Fisso"
 
-#. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
+#. Keep this very short! Try to use not more than six or seven letters.
+#. This is a label of the coloring type radio button group.
+#. Auto = changing dynamically
 #: settings/settings.ui:3891 settings/settings.ui:3976
 #: settings/settings.ui:4583 settings/settings.ui:4788
 msgid "Auto"
@@ -529,6 +618,7 @@ msgstr "Opacità Icona"
 msgid "Copy left value to right side"
 msgstr "Copia il valore sinistro sul lato destro"
 
+#. Hovered: When the mouse pointer is over the item
 #: settings/settings.ui:4396
 msgid "With Hovered Child"
 msgstr "Con Figlio Attivo"
@@ -537,6 +627,7 @@ msgstr "Con Figlio Attivo"
 msgid "Center Appearance"
 msgstr "Aspetto Centrale"
 
+#. Hovered: When the mouse pointer is over the item
 #: settings/settings.ui:4428
 msgid "Without Hovered Child"
 msgstr "Senza Figlio Attivo"
@@ -545,7 +636,9 @@ msgstr "Senza Figlio Attivo"
 msgid "Icon Scale"
 msgstr "Scala Icona"
 
-#. Keep this very short! This is a label of the coloring type radio button group. Try to use not more than six or seven letters.
+#. Keep this very short! Try to use not more than six or seven letters.
+#. This is a label of the coloring type radio button group.
+#. Parent = use the parent's setting
 #: settings/settings.ui:4598 settings/settings.ui:4803
 #: settings/settings.ui:5655 settings/settings.ui:5732
 msgid "Parent"
@@ -559,6 +652,8 @@ msgstr "Scegli Colore Elemento Figlio"
 msgid "Offset"
 msgstr "Distanza"
 
+#. Draw above (grand)children items.
+#. There's an explanation string below in the application.
 #: settings/settings.ui:5107 settings/settings.ui:5919
 msgid "Draw Above"
 msgstr "Disegna Sopra"
@@ -567,10 +662,12 @@ msgstr "Disegna Sopra"
 msgid "Render children above the center item."
 msgstr "Esegui il rendering dei figli sopra l'elemento centrale."
 
+#. When the mouse pointer is NOT over the item
 #: settings/settings.ui:5453 settings/settings.ui:5953
 msgid "Standard State"
 msgstr "Standard"
 
+#. Hovered: When the mouse pointer is over the item
 #: settings/settings.ui:5469
 msgid "Hovered State"
 msgstr "Attivo"
@@ -587,6 +684,7 @@ msgstr "Scegli Colore Elementi dei Nipoti"
 msgid "Render grandchildren above children items."
 msgstr "Disegna i nipoti sopra gli elementi figli."
 
+#. Hovered: When the mouse pointer is over the item
 #: settings/settings.ui:6087
 msgid "With Hovered Parent"
 msgstr "Con Elemento Genitore Attivo"
@@ -680,7 +778,7 @@ msgstr "Impostazioni Avanzate"
 msgid "These settings are independent of the presets."
 msgstr "Questo non è influenzato dai predefiniti."
 
-#. Caption of one of the main pages.
+#. Caption of the settings page in the window's titlebar.
 #: settings/settings.ui:6955
 msgid "Settings"
 msgstr "Impostazioni"
@@ -815,11 +913,12 @@ msgstr "Questo aprirà il menu."
 msgid "Open in Screen Center"
 msgstr "Apri al Centro dello Schermo"
 
-#. Caption of one of the main pages.
+#. Caption of the menu editor page in the window's titlebar.
 #: settings/settings.ui:8337
 msgid "Menu Editor"
 msgstr "Menu Editore"
 
+#. XP: Experience points
 #: settings/settings.ui:8389
 msgid "750 / 5000 XP"
 msgstr ""
@@ -828,11 +927,12 @@ msgstr ""
 msgid "Make 500 selection of items at level 5."
 msgstr ""
 
+#. XP: Experience points
 #: settings/settings.ui:8457
 msgid "<small>500 XP</small>"
 msgstr ""
 
-#. Caption of one of the main pages.
+#. Caption of the achievements page in the window's titlebar.
 #: settings/settings.ui:8486 settings/settings.ui:8815
 msgid "Achievements"
 msgstr "Premi"
@@ -858,23 +958,28 @@ msgstr ""
 msgid "Close"
 msgstr "Chiudi"
 
-#: daemon/Background.js:94
+#. Translators: This means 'Change the side of the screen where the Preview menu is opened'.
+#: daemon/Background.js:95
 msgid "Flip Side"
 msgstr "Cambia Lato"
 
-#: settings/Achievements.js:60
+#. Translators: This is a label how often a click selection was made.
+#: settings/Achievements.js:61
 msgid "Click Selections"
 msgstr ""
 
-#: settings/Achievements.js:61
+#. Translators: Do not translate '%i' - it will be replaced by a number.
+#: settings/Achievements.js:63
 msgid "Level-%i Click Selections"
 msgstr ""
 
-#: settings/Achievements.js:72
+#. Translators: This is a label how often a gesture selection was made.
+#: settings/Achievements.js:75
 msgid "Gesture Selections"
 msgstr ""
 
-#: settings/Achievements.js:73
+#. Translators: Do not translate '%i' - it will be replaced by a number.
+#: settings/Achievements.js:77
 msgid "Level-%i Gesture Selections"
 msgstr ""
 
@@ -914,7 +1019,7 @@ msgstr "Ingrandisci Finestra"
 msgid "Gnome Shell"
 msgstr "Gnome Shell"
 
-#: settings/DefaultMenu.js:80 settings/ExampleMenu.js:243
+#: settings/DefaultMenu.js:80 settings/ExampleMenu.js:265
 msgid "Up"
 msgstr "Su"
 
@@ -922,7 +1027,7 @@ msgstr "Su"
 msgid "Overview"
 msgstr "Panoramica"
 
-#: settings/DefaultMenu.js:93 settings/ExampleMenu.js:246
+#: settings/DefaultMenu.js:93 settings/ExampleMenu.js:268
 msgid "Down"
 msgstr "Giù"
 
@@ -954,453 +1059,476 @@ msgstr "Preferiti"
 msgid "System"
 msgstr "Sistema"
 
-#: settings/ExampleMenu.js:28
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:29
 msgid "Animals & Nature"
 msgstr "Animali & Natura"
 
-#: settings/ExampleMenu.js:32
+#: settings/ExampleMenu.js:33
 msgid "Flowers"
 msgstr "Fiori"
 
-#: settings/ExampleMenu.js:35
+#: settings/ExampleMenu.js:36
 msgid "Tulip"
 msgstr "Tulipano"
 
-#: settings/ExampleMenu.js:36
+#: settings/ExampleMenu.js:37
 msgid "Rose"
 msgstr "Rosa"
 
-#: settings/ExampleMenu.js:37
+#: settings/ExampleMenu.js:38
 msgid "Sunflower"
 msgstr "Girasole"
 
-#: settings/ExampleMenu.js:38
+#: settings/ExampleMenu.js:39
 msgid "Blossom"
 msgstr "Fioritura"
 
-#: settings/ExampleMenu.js:39
+#: settings/ExampleMenu.js:40
 msgid "Bouquet"
 msgstr "Mazzo di fiori"
 
-#: settings/ExampleMenu.js:43
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:45
 msgid "Mammals"
 msgstr "Mammiferi"
 
-#: settings/ExampleMenu.js:46
+#: settings/ExampleMenu.js:48
 msgid "Cat"
 msgstr "Gatto"
 
-#: settings/ExampleMenu.js:47
+#: settings/ExampleMenu.js:49
 msgid "Ox"
 msgstr "Bue"
 
-#: settings/ExampleMenu.js:48
+#: settings/ExampleMenu.js:50
 msgid "Dog"
 msgstr "Cane"
 
-#: settings/ExampleMenu.js:49
+#: settings/ExampleMenu.js:51
 msgid "Pig"
 msgstr "Maiale"
 
-#: settings/ExampleMenu.js:50
+#: settings/ExampleMenu.js:52
 msgid "Monkey"
 msgstr "Scimmia"
 
-#: settings/ExampleMenu.js:54
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:57
 msgid "Reptiles"
 msgstr "Rettili"
 
-#: settings/ExampleMenu.js:57
+#: settings/ExampleMenu.js:60
 msgid "Crocodile"
 msgstr "Coccodrillo"
 
-#: settings/ExampleMenu.js:58
+#: settings/ExampleMenu.js:61
 msgid "Snake"
 msgstr "Serpente"
 
-#: settings/ExampleMenu.js:59
+#: settings/ExampleMenu.js:62
 msgid "Turtle"
 msgstr "Tartaruga"
 
-#: settings/ExampleMenu.js:60
+#: settings/ExampleMenu.js:63
 msgid "T-Rex"
 msgstr "T-Rex"
 
-#: settings/ExampleMenu.js:61
+#: settings/ExampleMenu.js:64
 msgid "Apatosaurus"
 msgstr "Apatosaurus"
 
-#: settings/ExampleMenu.js:67
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:71
 msgid "Food & Drink"
 msgstr "Cibo & Bevande"
 
-#: settings/ExampleMenu.js:71
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:76
 msgid "Fruit"
 msgstr "Frutta"
 
-#: settings/ExampleMenu.js:74
+#: settings/ExampleMenu.js:79
 msgid "Apple"
 msgstr "Mela"
 
-#: settings/ExampleMenu.js:75
+#: settings/ExampleMenu.js:80
 msgid "Watermelon"
 msgstr "Anguria"
 
-#: settings/ExampleMenu.js:76
+#: settings/ExampleMenu.js:81
 msgid "Lemon"
 msgstr "Limone"
 
-#: settings/ExampleMenu.js:77
+#: settings/ExampleMenu.js:82
 msgid "Banana"
 msgstr "Banana"
 
-#: settings/ExampleMenu.js:78
+#: settings/ExampleMenu.js:83
 msgid "Strawberry"
 msgstr "fragola"
 
-#: settings/ExampleMenu.js:82
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:88
 msgid "Drink"
 msgstr "Bevanda"
 
-#: settings/ExampleMenu.js:85
+#: settings/ExampleMenu.js:91
 msgid "Tea"
 msgstr "Tè"
 
-#: settings/ExampleMenu.js:86
+#: settings/ExampleMenu.js:92
 msgid "Coffee"
 msgstr "Caffè"
 
-#: settings/ExampleMenu.js:87
+#: settings/ExampleMenu.js:93
 msgid "Beer"
 msgstr "Birra"
 
-#: settings/ExampleMenu.js:88
+#: settings/ExampleMenu.js:94
 msgid "Whiskey"
 msgstr "Whiskey"
 
-#: settings/ExampleMenu.js:89
+#: settings/ExampleMenu.js:95
 msgid "Cocktail"
 msgstr "Cocktail"
 
-#: settings/ExampleMenu.js:93
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:100
 msgid "Sweets"
 msgstr "Dolci"
 
 #. Translators: This is the item which should be selected in the tutorial.
 #. Make sure the translation matches the name given in the tutorial!
-#: settings/ExampleMenu.js:98
+#: settings/ExampleMenu.js:105
 msgid "Shortcake"
 msgstr "Tortine"
 
-#: settings/ExampleMenu.js:99
+#: settings/ExampleMenu.js:106
 msgid "Candy"
 msgstr "Caramella"
 
-#: settings/ExampleMenu.js:100
+#: settings/ExampleMenu.js:107
 msgid "Doughnut"
 msgstr "Ciambella"
 
-#: settings/ExampleMenu.js:101
+#: settings/ExampleMenu.js:108
 msgid "Cookie"
 msgstr "Biscotto"
 
-#: settings/ExampleMenu.js:102
+#: settings/ExampleMenu.js:109
 msgid "Chocolate"
 msgstr "Cioccolato"
 
-#: settings/ExampleMenu.js:108
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:116
 msgid "Activities"
 msgstr "Attività"
 
-#: settings/ExampleMenu.js:112
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:121
 msgid "Games"
 msgstr "Giochi"
 
-#: settings/ExampleMenu.js:115
+#: settings/ExampleMenu.js:124
 msgid "Billards"
 msgstr "Biliardo"
 
-#: settings/ExampleMenu.js:116
+#: settings/ExampleMenu.js:125
 msgid "Mahjong"
 msgstr "Mahjong"
 
-#: settings/ExampleMenu.js:117
+#: settings/ExampleMenu.js:126
 msgid "Bowling"
 msgstr "Bowling"
 
-#: settings/ExampleMenu.js:118
+#: settings/ExampleMenu.js:127
 msgid "Darts"
 msgstr "Freccette"
 
-#: settings/ExampleMenu.js:119
+#: settings/ExampleMenu.js:128
 msgid "Video Game"
 msgstr "Video Gioco"
 
-#: settings/ExampleMenu.js:123
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:133
 msgid "Sports"
 msgstr "Sport"
 
-#: settings/ExampleMenu.js:126
+#: settings/ExampleMenu.js:136
 msgid "Cricket"
 msgstr "Cricket"
 
-#: settings/ExampleMenu.js:127
+#: settings/ExampleMenu.js:137
 msgid "Ice Hockey"
 msgstr "Hockey su Ghiaccio"
 
-#: settings/ExampleMenu.js:128
+#: settings/ExampleMenu.js:138
 msgid "Tennis"
 msgstr "Tennis"
 
-#: settings/ExampleMenu.js:129
+#: settings/ExampleMenu.js:139
 msgid "Fishing"
 msgstr "Pesca"
 
-#: settings/ExampleMenu.js:130
+#: settings/ExampleMenu.js:140
 msgid "Skiing"
 msgstr "Sciare"
 
-#: settings/ExampleMenu.js:134
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:145
 msgid "Places"
 msgstr "Luoghi"
 
-#: settings/ExampleMenu.js:137
+#: settings/ExampleMenu.js:148
 msgid "Mount Fuji"
 msgstr "Monte Fuji"
 
-#: settings/ExampleMenu.js:138
+#: settings/ExampleMenu.js:149
 msgid "Mount Etna"
 msgstr "Monte Etna"
 
-#: settings/ExampleMenu.js:139
+#: settings/ExampleMenu.js:150
 msgid "Statue of Liberty"
 msgstr "Statua della Libertà"
 
-#: settings/ExampleMenu.js:140
+#: settings/ExampleMenu.js:151
 msgid "Japan"
 msgstr "Giappone"
 
-#: settings/ExampleMenu.js:141
+#: settings/ExampleMenu.js:152
 msgid "Moyai"
 msgstr "Moyai"
 
-#: settings/ExampleMenu.js:147
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:159
 msgid "Objects"
 msgstr "Oggetti"
 
-#: settings/ExampleMenu.js:151
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:164
 msgid "Cars"
 msgstr "Macchine"
 
-#: settings/ExampleMenu.js:154
+#: settings/ExampleMenu.js:167
 msgid "Bus"
 msgstr "Bus"
 
-#: settings/ExampleMenu.js:155
+#: settings/ExampleMenu.js:168
 msgid "Fire Engine"
 msgstr "Autopompa Antincendio"
 
-#: settings/ExampleMenu.js:156
+#: settings/ExampleMenu.js:169
 msgid "Automobile"
 msgstr "Automobile"
 
-#: settings/ExampleMenu.js:157
+#: settings/ExampleMenu.js:170
 msgid "Tractor"
 msgstr "Trattore"
 
-#: settings/ExampleMenu.js:158
+#: settings/ExampleMenu.js:171
 msgid "Truck"
 msgstr "Camion"
 
-#: settings/ExampleMenu.js:162
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:176
 msgid "Buildings"
 msgstr "Edifici"
 
-#: settings/ExampleMenu.js:165
+#: settings/ExampleMenu.js:179
 msgid "Post Office"
 msgstr "Ufficio Postale"
 
-#: settings/ExampleMenu.js:166
+#: settings/ExampleMenu.js:180
 msgid "School"
 msgstr "Scuola"
 
-#: settings/ExampleMenu.js:167
+#: settings/ExampleMenu.js:181
 msgid "Hospital"
 msgstr "Ospedale"
 
-#: settings/ExampleMenu.js:168
+#: settings/ExampleMenu.js:182
 msgid "Bank"
 msgstr "Banca"
 
-#: settings/ExampleMenu.js:169
+#: settings/ExampleMenu.js:183
 msgid "Love Hotel"
 msgstr "Love Hotel"
 
-#: settings/ExampleMenu.js:173
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:188
 msgid "Instruments"
 msgstr "Strumenti"
 
-#: settings/ExampleMenu.js:176
+#: settings/ExampleMenu.js:191
 msgid "Saxophone"
 msgstr "Sassofono"
 
-#: settings/ExampleMenu.js:177
+#: settings/ExampleMenu.js:192
 msgid "Guitar"
 msgstr "Chitarra"
 
-#: settings/ExampleMenu.js:178
+#: settings/ExampleMenu.js:193
 msgid "Trumpet"
 msgstr "Tromba"
 
-#: settings/ExampleMenu.js:179
+#: settings/ExampleMenu.js:194
 msgid "Microphone"
 msgstr "Microfono"
 
-#: settings/ExampleMenu.js:180
+#: settings/ExampleMenu.js:195
 msgid "Drum"
 msgstr "Tamburo"
 
-#: settings/ExampleMenu.js:186
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:202
 msgid "Smileys"
 msgstr "Smileys"
 
-#: settings/ExampleMenu.js:190
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:207
 msgid "Happy Faces"
 msgstr "Facce Felici"
 
-#: settings/ExampleMenu.js:193
+#: settings/ExampleMenu.js:210
 msgid "Smiley"
 msgstr "Smiley"
 
-#: settings/ExampleMenu.js:194
+#: settings/ExampleMenu.js:211
 msgid "Winking Face"
 msgstr "Faccia Ammiccante"
 
-#: settings/ExampleMenu.js:195
+#: settings/ExampleMenu.js:212
 msgid "Face With Smiling Eyes"
 msgstr "Faccia Con Occhi Sorridenti"
 
-#: settings/ExampleMenu.js:196
+#: settings/ExampleMenu.js:213
 msgid "Face With Sweat"
 msgstr "Faccia Con Il Sudore"
 
-#: settings/ExampleMenu.js:197
+#: settings/ExampleMenu.js:214
 msgid "ROFL"
 msgstr "ROFL"
 
-#: settings/ExampleMenu.js:201
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:219
 msgid "Angry Faces"
 msgstr "Facce Arrabbiate"
 
-#: settings/ExampleMenu.js:204
+#: settings/ExampleMenu.js:222
 msgid "Vomiting Face"
 msgstr "Faccia che Vomita"
 
-#: settings/ExampleMenu.js:205
+#: settings/ExampleMenu.js:223
 msgid "Skeptical Face"
 msgstr "Faccia Scettica"
 
-#: settings/ExampleMenu.js:206
+#: settings/ExampleMenu.js:224
 msgid "Pouting Face"
 msgstr "Faccia Imbronciata"
 
-#: settings/ExampleMenu.js:207
+#: settings/ExampleMenu.js:225
 msgid "Angry Face"
 msgstr "Faccia Arrabbiata"
 
-#: settings/ExampleMenu.js:208
+#: settings/ExampleMenu.js:226
 msgid "Very Angry Face"
 msgstr "Faccia Molto Arrabbiata"
 
-#: settings/ExampleMenu.js:212
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:231
 msgid "Surprised Faces"
 msgstr "Facce Sorprese"
 
-#: settings/ExampleMenu.js:215
+#: settings/ExampleMenu.js:234
 msgid "Flushed Face"
 msgstr "Faccia arrossata"
 
-#: settings/ExampleMenu.js:216
+#: settings/ExampleMenu.js:235
 msgid "Anguished Face"
 msgstr "Faccia Angosciata"
 
-#: settings/ExampleMenu.js:217
+#: settings/ExampleMenu.js:236
 msgid "Astonished Face"
 msgstr "Faccia Stupita"
 
-#: settings/ExampleMenu.js:218
+#: settings/ExampleMenu.js:237
 msgid "Screaming Face"
 msgstr "Faccia Urlante"
 
-#: settings/ExampleMenu.js:219
+#: settings/ExampleMenu.js:238
 msgid "Pouff"
 msgstr "Sbuffo"
 
-#: settings/ExampleMenu.js:225
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:245
 msgid "Symbols"
 msgstr "Simboli"
 
-#: settings/ExampleMenu.js:229
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:250
 msgid "Star Signs"
 msgstr "Segni Zodiacali"
 
-#: settings/ExampleMenu.js:232
+#: settings/ExampleMenu.js:253
 msgid "Taurus"
 msgstr "Toro"
 
-#: settings/ExampleMenu.js:233
+#: settings/ExampleMenu.js:254
 msgid "Cancer"
 msgstr "Cancro"
 
-#: settings/ExampleMenu.js:234
+#: settings/ExampleMenu.js:255
 msgid "Virgo"
 msgstr "Vergine"
 
-#: settings/ExampleMenu.js:235
+#: settings/ExampleMenu.js:256
 msgid "Scorpius"
 msgstr "Scorpione"
 
-#: settings/ExampleMenu.js:236
+#: settings/ExampleMenu.js:257
 msgid "Capricorn"
 msgstr "Capricorno"
 
-#: settings/ExampleMenu.js:240
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:262
 msgid "Arrows"
 msgstr "Frecce"
 
-#: settings/ExampleMenu.js:244
+#: settings/ExampleMenu.js:266
 msgid "Right"
 msgstr "Destra"
 
-#: settings/ExampleMenu.js:245
+#: settings/ExampleMenu.js:267
 msgid "Twisted"
 msgstr "Contorto"
 
-#: settings/ExampleMenu.js:247
+#: settings/ExampleMenu.js:269
 msgid "Left"
 msgstr "Sinistra"
 
-#: settings/ExampleMenu.js:251
+#. Translators: An emoji category.
+#: settings/ExampleMenu.js:274
 msgid "Info Signs"
 msgstr "Segni Informativi"
 
-#: settings/ExampleMenu.js:254
+#: settings/ExampleMenu.js:277
 msgid "Litter Bin"
 msgstr "Cestino"
 
-#: settings/ExampleMenu.js:255
+#: settings/ExampleMenu.js:278
 msgid "Potable Water"
 msgstr "Acqua Potabile"
 
-#: settings/ExampleMenu.js:256
+#: settings/ExampleMenu.js:279
 msgid "Mens"
 msgstr "Uomini"
 
-#: settings/ExampleMenu.js:257
+#: settings/ExampleMenu.js:280
 msgid "Womens"
 msgstr "Donne"
 
-#: settings/ExampleMenu.js:258
+#: settings/ExampleMenu.js:281
 msgid "Baby"
 msgstr "Bambino"
 
@@ -1549,12 +1677,14 @@ msgstr "Salva Predefinito"
 msgid "Save"
 msgstr "Salva"
 
-#: settings/Tutorial.js:150
+#. Translators: Do not translate '%d'. ms = milliseconds
+#: settings/Tutorial.js:151
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
 msgstr "<big>Ora dell'ultima selezione:<b>%d ms</b></big>"
 
-#: settings/Tutorial.js:154
+#. Translators: Do not translate '%d'. ms = milliseconds
+#: settings/Tutorial.js:156
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
 msgstr "<big>Miglior tempo di selezione: <b>%d ms</b></big>"
@@ -1834,22 +1964,23 @@ msgstr ""
 "Il menu <b>Sistema</b> mostra gli elementi per il blocco dello schermo, lo "
 "spegnimento,le impostazioni, ecc."
 
-#: common/menus/System.js:68
+#. Translators: As in 'Lock the screen.'
+#: common/menus/System.js:69
 msgid "Lock"
 msgstr "Blocca"
 
-#: common/menus/System.js:77
+#: common/menus/System.js:78
 msgid "Suspend"
 msgstr "Sospendi"
 
-#: common/menus/System.js:86
+#: common/menus/System.js:87
 msgid "Switch User..."
 msgstr "Cambia utente..."
 
-#: common/menus/System.js:95
+#: common/menus/System.js:96
 msgid "Log Out"
 msgstr "Disconnetti"
 
-#: common/menus/System.js:104
+#: common/menus/System.js:105
 msgid "Power Off..."
 msgstr "Spegni..."
