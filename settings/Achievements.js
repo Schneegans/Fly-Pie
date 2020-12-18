@@ -57,7 +57,9 @@ var Achievements = class Achievements {
     // page.
     this._charts = {
       clicks: {
+        // Translators: This is a label how often a click selection was made.
         name: _('Click Selections'),                  // Shown when nothing is hovered
+        // Translators: Do not translate '%i' - it will be replaced by a number.
         hoveredName: _('Level-%i Click Selections'),  // Shown when a histogram is hovered
         pieWidget: this._setupPieChart('clicks'),     // A Gtk.DrawingArea
         histogramWidgets: [                           // Four Gtk.DrawingAreas
@@ -69,7 +71,9 @@ var Achievements = class Achievements {
         max: {total: 0, perLevel: []}   // These numbers are updated in _updateChartData()
       },
       gestures: {
+        // Translators: This is a label how often a gesture selection was made.
         name: _('Gesture Selections'),                // Shown when nothing is hovered
+        // Translators: Do not translate '%i' - it will be replaced by a number.
         hoveredName: _('Level-%i Gesture Selections'),// Shown when a histogram is hovered
         pieWidget: this._setupPieChart('gestures'),   // A Gtk.DrawingArea
         histogramWidgets: [                           // Four Gtk.DrawingAreas
