@@ -2329,7 +2329,8 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">You may also open one of your own menus from the Menu Editor.</property>
+                                    <property name="label" translatable="yes" comments="Do not make lines longer than 80 letters!">This menu stays open, you can tweak the settings and see the results immediately!
+You may also open one of your own menus from the Menu Editor, of course.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
