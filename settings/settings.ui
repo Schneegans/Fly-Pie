@@ -2316,7 +2316,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Open Preview Menu</property>
+                                    <property name="label" translatable="yes">Open Live Preview Menu</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
