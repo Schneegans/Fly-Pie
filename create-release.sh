@@ -10,7 +10,7 @@
 
 # This script creates a new release of the Fly-Pie GNOME extension.
 # When the '-i' option is set, it installs it to the system.
-# When the '-s' option is set, the script throws an error (instead of an error when the
+# When the '-s' option is set, the script throws an error (instead of just a warning) when the
 #   zip file is too big. This is necessary when uploading it to the GNOME Extensions website.
 #   We think that the limit is 4096 KB, but we found no official documentation on this so far.
 
