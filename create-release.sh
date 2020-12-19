@@ -35,8 +35,7 @@ while getopts is FLAG; do
             # shellcheck disable=2015
             gnome-extensions install flypie@schneegans.github.com.zip --force && \
             echo "Successfully installed the application! Now restart the Shell ('Alt'+'F2', then 'r')." || \
-            { echo "ERROR: Could not install the extension."; exit 1; }
-            rm flypie@schneegans.github.com.zip;;
+            { echo "ERROR: Could not install the extension."; exit 1; };;
 
         s)  # We need to throw an error because of the zip size
             SIZE_ERROR="true";;
