@@ -750,6 +750,7 @@ Can be added to custom menus.</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="valign">center</property>
+                    <property name="column_spacing">6</property>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
@@ -2315,7 +2316,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Open Preview Menu</property>
+                                    <property name="label" translatable="yes">Open Live Preview Menu</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
@@ -2328,7 +2329,8 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">You may also open one of your own menus from the Menu Editor.</property>
+                                    <property name="label" translatable="yes" comments="Do not make lines longer than 80 letters!">This menu stays open, you can tweak the settings and see the results immediately!
+You may also open one of your own menus from the Menu Editor, of course.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -2507,7 +2509,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <property name="can_focus">False</property>
                                             <property name="halign">start</property>
                                             <property name="vexpand">True</property>
-                                            <property name="label" translatable="yes">Load a Preset</property>
+                                            <property name="label" translatable="yes">Load / Save a Preset</property>
                                           </object>
                                           <packing>
                                             <property name="left_attach">0</property>
@@ -2659,7 +2661,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
                                 <property name="vexpand">True</property>
-                                <property name="label" translatable="yes">Easing Duration</property>
+                                <property name="label" translatable="yes">Animation Duration</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -2677,7 +2679,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Global Scale</property>
+                                    <property name="label" translatable="yes">Global Scaling</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
@@ -3045,7 +3047,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="label" translatable="yes">Easing Mode</property>
+                                <property name="label" translatable="yes">Animation Mode</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
