@@ -10,7 +10,7 @@
 
 # This script creates a new release of the Fly-Pie GNOME extension.
 # When the '-i' option is set, it installs it to the system.
-# When the '-s' option is set, the script throws an error (instead of an error when the
+# When the '-s' option is set, the script throws an error (instead of just a warning) when the
 #   zip file is too big. This is necessary when uploading it to the GNOME Extensions website.
 #   We think that the limit is 4096 KB, but we found no official documentation on this so far.
 
@@ -35,8 +35,7 @@ while getopts is FLAG; do
             # shellcheck disable=2015
             gnome-extensions install flypie@schneegans.github.com.zip --force && \
             echo "Successfully installed the application! Now restart the Shell ('Alt'+'F2', then 'r')." || \
-            { echo "ERROR: Could not install the extension."; exit 1; }
-            rm flypie@schneegans.github.com.zip;;
+            { echo "ERROR: Could not install the extension."; exit 1; };;
 
         s)  # We need to throw an error because of the zip size
             SIZE_ERROR="true";;

@@ -10,7 +10,7 @@
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me             = imports.misc.extensionUtils.getCurrentExtension();
-const Settings       = Me.imports.settings.Settings.Settings;
+const Settings       = Me.imports.src.settings.Settings.Settings;
 
 // Like in 'extension.js' this is used for setting up the translations.
 function init() {
