@@ -23,6 +23,7 @@ Emoji | Description
 :sparkles: `:sparkles:` | When you applied clang-format.
 :globe_with_meridians: `:globe_with_meridians:` | When you worked on translations.
 :art: `:art:` | When you improved / added assets like themes.
+:lipstick: `:lipstick:` | When you worked on the UI of the preferences dialog.
 :rocket: `:rocket:` | When you improved performance.
 :memo: `:memo:` | When you wrote documentation.
 :beetle: `:beetle:` | When you fixed a bug.
