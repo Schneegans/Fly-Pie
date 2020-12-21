@@ -110,14 +110,14 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
   </object>
   <object class="GtkAdjustment" id="center-icon-scale">
     <property name="lower">0.10000000000000001</property>
-    <property name="upper">1</property>
+    <property name="upper">1.5</property>
     <property name="value">0.69999999999999996</property>
     <property name="step_increment">0.01</property>
     <property name="page_increment">0.10000000000000001</property>
   </object>
   <object class="GtkAdjustment" id="center-icon-scale-hover">
     <property name="lower">0.10000000000000001</property>
-    <property name="upper">1</property>
+    <property name="upper">1.5</property>
     <property name="step_increment">0.01</property>
     <property name="page_increment">0.10000000000000001</property>
   </object>
@@ -178,14 +178,14 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
   </object>
   <object class="GtkAdjustment" id="child-icon-scale">
     <property name="lower">0.10000000000000001</property>
-    <property name="upper">1</property>
+    <property name="upper">1.5</property>
     <property name="value">0.90000000000000002</property>
     <property name="step_increment">0.01</property>
     <property name="page_increment">0.10000000000000001</property>
   </object>
   <object class="GtkAdjustment" id="child-icon-scale-hover">
     <property name="lower">0.10000000000000001</property>
-    <property name="upper">1</property>
+    <property name="upper">1.5</property>
     <property name="step_increment">0.01</property>
     <property name="page_increment">0.10000000000000001</property>
   </object>
