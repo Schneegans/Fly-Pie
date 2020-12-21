@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                     = imports.cairo;
-const {Clutter, GObject, Pango} = imports.gi;
+const Cairo                                          = imports.cairo;
+const {Gio, Gdk, Clutter, GObject, Pango, GdkPixbuf} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.common.utils;
@@ -19,9 +19,9 @@ const utils = Me.imports.common.utils;
 // Based on a given MenuItemState, it is drawn differently. It is composed of several   //
 // sub-actors, as shown in the diagram below:                                           //
 //                                                                                      //
-//   .----------.   .--------------------.   The name displays the name of the       //
-//   | MenuItem |---| _name           |   currently hovered child item. It is re-    //
-//   '----------'   '--------------------'   drawn whenever the hovered item changes.   //
+//   .----------.   .--------------------.   This displays the name of the currently    //
+//   | MenuItem |---| _name              |   hovered child item. It is re-drawn         //
+//   '----------'   '--------------------'   whenever the hovered item changes.         //
 //         |                                                                            //
 //         |        .--------------------.   This contains up to six actors, one for    //
 //         |--------| _iconContainer     |   each of the CENTER, CHILD or GRANDCHILD    //
@@ -292,6 +292,27 @@ class MenuItem extends Clutter.Actor {
     // Then parse all settings required during the next call to redraw().
     const globalScale = settings.get_double('global-scale');
 
+    // We load the background images once for all menu items.
+    const loadBackgroundImage = (file, size) => {
+      // Do nothing if the background image property is not set.
+      if (file == '') {
+        return null;
+      }
+
+      // If the file does not exist, it may be a relative path.
+      if (!Gio.File.new_for_path(file).query_exists(null)) {
+        file = Me.path + '/' + file;
+      }
+
+      // if this does not exist as well, we cannot load the image.
+      if (!Gio.File.new_for_path(file).query_exists(null)) {
+        return null;
+      }
+
+      // Finally load the pixbuf!
+      return GdkPixbuf.Pixbuf.new_from_file_at_scale(file, size, size, false);
+    };
+
     // clang-format off
     MenuItemSettings = {
       globalScale:             globalScale,
@@ -311,27 +332,29 @@ class MenuItem extends Clutter.Actor {
         [MenuItemState.CENTER, {
           colorMode:           settings.get_string('center-color-mode'),
           fixedColor:          Clutter.Color.from_string(settings.get_string('center-fixed-color'))[1],
-          size:                settings.get_double('center-size')  * globalScale,
+          size:                settings.get_double('center-size') * globalScale,
           offset:              0,
           iconScale:           settings.get_double('center-icon-scale'),
           iconOpacity:         settings.get_double('center-icon-opacity'),
           autoColorSaturation: settings.get_double('center-auto-color-saturation'),
           autoColorLuminance:  settings.get_double('center-auto-color-luminance'),
           autoColorOpacity:    settings.get_double('center-auto-color-opacity') * 255,
-          backgroundImage:     settings.get_string('center-background-image'),
+          backgroundImage:     loadBackgroundImage(settings.get_string('center-background-image'),
+                                                   settings.get_double('center-size') * globalScale),
           drawChildrenAbove:   settings.get_boolean('child-draw-above'),
         }],
         [MenuItemState.CENTER_HOVERED, {
           colorMode:           settings.get_string('center-color-mode-hover'),
           fixedColor:          Clutter.Color.from_string(settings.get_string('center-fixed-color-hover'))[1],
-          size:                settings.get_double('center-size-hover')  * globalScale,
+          size:                settings.get_double('center-size-hover') * globalScale,
           offset:              0,
           iconScale:           settings.get_double('center-icon-scale-hover'),
           iconOpacity:         settings.get_double('center-icon-opacity-hover'),
           autoColorSaturation: settings.get_double('center-auto-color-saturation-hover'),
           autoColorLuminance:  settings.get_double('center-auto-color-luminance-hover'),
           autoColorOpacity:    settings.get_double('center-auto-color-opacity-hover') * 255,
-          backgroundImage:     settings.get_string('center-background-image'),
+          backgroundImage:     loadBackgroundImage(settings.get_string('center-background-image'),
+                                                   settings.get_double('center-size-hover') * globalScale),
           drawChildrenAbove:   settings.get_boolean('child-draw-above'),
         }],
         [MenuItemState.CHILD, {
@@ -344,7 +367,8 @@ class MenuItem extends Clutter.Actor {
           autoColorSaturation: settings.get_double('child-auto-color-saturation'),
           autoColorLuminance:  settings.get_double('child-auto-color-luminance'),
           autoColorOpacity:    settings.get_double('child-auto-color-opacity')  * 255,
-          backgroundImage:     settings.get_string('child-background-image'),
+          backgroundImage:     loadBackgroundImage(settings.get_string('child-background-image'),
+                                                   settings.get_double('child-size') * globalScale),
           drawChildrenAbove:   settings.get_boolean('grandchild-draw-above'),
         }],
         [MenuItemState.CHILD_HOVERED, {
@@ -357,7 +381,8 @@ class MenuItem extends Clutter.Actor {
           autoColorSaturation: settings.get_double('child-auto-color-saturation-hover'),
           autoColorLuminance:  settings.get_double('child-auto-color-luminance-hover'),
           autoColorOpacity:    settings.get_double('child-auto-color-opacity-hover') * 255,
-          backgroundImage:     settings.get_string('child-background-image'),
+          backgroundImage:     loadBackgroundImage(settings.get_string('child-background-image'),
+                                                   settings.get_double('child-size-hover') * globalScale),
           drawChildrenAbove:   settings.get_boolean('grandchild-draw-above'),
         }],
         [MenuItemState.GRANDCHILD, {
@@ -366,7 +391,8 @@ class MenuItem extends Clutter.Actor {
           size:                settings.get_double('grandchild-size')    * globalScale,
           offset:              settings.get_double('grandchild-offset')  * globalScale,
           iconOpacity:         0,
-          backgroundImage:     settings.get_string('grandchild-background-image'),
+          backgroundImage:     loadBackgroundImage(settings.get_string('grandchild-background-image'),
+                                                   settings.get_double('grandchild-size') * globalScale),
           drawAbove:           settings.get_boolean('grandchild-draw-above'),
         }],
         [MenuItemState.GRANDCHILD_HOVERED, {
@@ -375,7 +401,8 @@ class MenuItem extends Clutter.Actor {
           size:                settings.get_double('grandchild-size-hover')   * globalScale,
           offset:              settings.get_double('grandchild-offset-hover') * globalScale,
           iconOpacity:         0,
-          backgroundImage:     settings.get_string('grandchild-background-image'),
+          backgroundImage:     loadBackgroundImage(settings.get_string('grandchild-background-image'),
+                                                   settings.get_double('grandchild-size-hover') * globalScale),
           drawAbove:           settings.get_boolean('grandchild-draw-above'),
         }]
       ]),
@@ -518,12 +545,12 @@ class MenuItem extends Clutter.Actor {
           visualState == MenuItemState.CHILD ||
           visualState == MenuItemState.CHILD_HOVERED) {
         icon = this._createIcon(
-            backgroundColor, settings.size, this.icon, settings.iconScale,
-            settings.iconOpacity);
+            backgroundColor, settings.backgroundImage, settings.size, this.icon,
+            settings.iconScale, settings.iconOpacity);
       } else {
         // Grandchildren have only a circle as icon. Therefore no icon name is passed to
         // this method.
-        icon = this._createIcon(backgroundColor, settings.size);
+        icon = this._createIcon(backgroundColor, settings.backgroundImage, settings.size);
       }
 
       this._iconContainer[visualState] = icon;
@@ -743,23 +770,61 @@ class MenuItem extends Clutter.Actor {
 
   // This creates a Clutter.Actor with an attached Clutter.Canvas containing an image of
   // this MenuItem's icon.
-  _createIcon(backgroundColor, backgroundSize, iconName, iconScale, iconOpacity) {
+  _createIcon(
+      backgroundColor, backgroundImage, backgroundSize, iconName, iconScale,
+      iconOpacity) {
+
     const canvas = new Clutter.Canvas({height: backgroundSize, width: backgroundSize});
     canvas.connect('draw', (c, ctx, width, height) => {
       // Clear any previous content.
       ctx.setOperator(Cairo.Operator.CLEAR);
       ctx.paint();
-
-      // Paint the background!
       ctx.setOperator(Cairo.Operator.OVER);
+
       ctx.save();
-      ctx.scale(width, height);
-      ctx.translate(0.5, 0.5);
-      ctx.arc(0, 0, 0.5, 0, 2.0 * Math.PI);
-      ctx.setSourceRGBA(
-          backgroundColor.red / 255, backgroundColor.green / 255,
-          backgroundColor.blue / 255, backgroundColor.alpha / 255);
-      ctx.fill();
+
+
+      // If a background image is given, we use it. Else we will draw a simple colored
+      // circle.
+      if (backgroundImage != null) {
+
+        // TODO: As Cairo.Operator.MULTIPLY uses normal OVER-alpha-blending, the code
+        // below does not really multiply the backgroundImage with the given color. Black
+        // semi-transparent areas will actually become tinted grays! This could be solved
+        // if the alpha channel would be multiplied as well, but this is difficult to
+        // implement as Cairo uses premultiplied alpha. Doing this manually with a
+        // for-loop through al pixels is too slow in gjs...
+        // If anybody knows how to do a simple result.rgba = first.rgba * second.rgba in
+        // Cairo, please let me know :)
+
+        // We first draw the image in normal colors with Cairo.Operator.OVER.
+        Gdk.cairo_set_source_pixbuf(ctx, backgroundImage, 0, 0);
+        ctx.paint();
+
+        // This is the backgroundImage above as a Cairo.Surface. This is used as a mask
+        // further below.
+        const pattern = ctx.getSource();
+
+        // Then we use Cairo.Operator.MULTIPLY to colorize the image. We use ctx.mask()
+        // in order to maintain the alpha channel of the original image.
+        ctx.setSourceRGBA(
+            backgroundColor.red / 255, backgroundColor.green / 255,
+            backgroundColor.blue / 255, backgroundColor.alpha / 255);
+        ctx.setOperator(Cairo.Operator.MULTIPLY);
+        ctx.mask(pattern);
+
+      } else {
+
+        // Draw a circle!
+        ctx.scale(backgroundSize, backgroundSize);
+        ctx.translate(0.5, 0.5);
+        ctx.arc(0, 0, 0.5, 0, 2.0 * Math.PI);
+        ctx.setSourceRGBA(
+            backgroundColor.red / 255, backgroundColor.green / 255,
+            backgroundColor.blue / 255, backgroundColor.alpha / 255);
+        ctx.fill();
+      }
+
       ctx.restore();
 
       // Paint the icon!

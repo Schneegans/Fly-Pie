@@ -4210,7 +4210,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">3</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">11</property>
                               </packing>
                             </child>
                             <child>
@@ -4227,7 +4227,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">11</property>
                               </packing>
                             </child>
                             <child>
@@ -4240,7 +4240,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">11</property>
                               </packing>
                             </child>
                             <child>
@@ -4319,7 +4319,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">11</property>
                               </packing>
                             </child>
                             <child>
@@ -4398,7 +4398,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">4</property>
-                                <property name="top_attach">9</property>
+                                <property name="top_attach">11</property>
                               </packing>
                             </child>
                             <child>
@@ -4495,7 +4495,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">3</property>
-                                <property name="top_attach">11</property>
+                                <property name="top_attach">13</property>
                               </packing>
                             </child>
                             <child>
@@ -4514,7 +4514,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">4</property>
-                                <property name="top_attach">11</property>
+                                <property name="top_attach">13</property>
                               </packing>
                             </child>
                             <child>
@@ -4553,9 +4553,35 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">11</property>
+                                <property name="top_attach">13</property>
                                 <property name="width">3</property>
                               </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">14</property>
+                                <property name="width">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
                             </child>
                             <child>
                               <placeholder/>
@@ -5237,7 +5263,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">15</property>
+                                <property name="top_attach">17</property>
                                 <property name="width">3</property>
                               </packing>
                             </child>
@@ -5250,7 +5276,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">3</property>
-                                <property name="top_attach">15</property>
+                                <property name="top_attach">17</property>
                               </packing>
                             </child>
                             <child>
@@ -5270,7 +5296,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">4</property>
-                                <property name="top_attach">15</property>
+                                <property name="top_attach">17</property>
                               </packing>
                             </child>
                             <child>
@@ -5305,7 +5331,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">11</property>
+                                <property name="top_attach">13</property>
                               </packing>
                             </child>
                             <child>
@@ -5322,7 +5348,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
-                                <property name="top_attach">11</property>
+                                <property name="top_attach">13</property>
                               </packing>
                             </child>
                             <child>
@@ -5339,7 +5365,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">3</property>
-                                <property name="top_attach">11</property>
+                                <property name="top_attach">13</property>
                               </packing>
                             </child>
                             <child>
@@ -5451,7 +5477,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
-                                <property name="top_attach">11</property>
+                                <property name="top_attach">13</property>
                               </packing>
                             </child>
                             <child>
@@ -5550,7 +5576,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">4</property>
-                                <property name="top_attach">11</property>
+                                <property name="top_attach">13</property>
                               </packing>
                             </child>
                             <child>
@@ -5672,7 +5698,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
-                                <property name="top_attach">13</property>
+                                <property name="top_attach">15</property>
                                 <property name="width">3</property>
                               </packing>
                             </child>
@@ -5692,7 +5718,7 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">4</property>
-                                <property name="top_attach">13</property>
+                                <property name="top_attach">15</property>
                               </packing>
                             </child>
                             <child>
@@ -5704,8 +5730,44 @@ will cancel the selection.</property>
                               </object>
                               <packing>
                                 <property name="left_attach">3</property>
-                                <property name="top_attach">13</property>
+                                <property name="top_attach">15</property>
                               </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">18</property>
+                                <property name="width">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Icon Crop Radius</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">11</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
                             </child>
                             <child>
                               <placeholder/>
