@@ -112,6 +112,7 @@ var Settings = class Settings {
     this._bindSlider('center-auto-color-opacity');
     this._bindSlider('center-size');
     this._bindSlider('center-icon-scale');
+    this._bindSlider('center-icon-crop');
     this._bindSlider('center-icon-opacity');
     this._bindFileChooserButton('center-background-image');
 
@@ -156,6 +157,7 @@ var Settings = class Settings {
     this._bindSlider('child-size');
     this._bindSlider('child-offset');
     this._bindSlider('child-icon-scale');
+    this._bindSlider('child-icon-crop');
     this._bindSlider('child-icon-opacity');
     this._bindFileChooserButton('child-background-image');
     this._bindSwitch('child-draw-above');

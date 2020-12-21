@@ -220,6 +220,17 @@
       <description>A scale factor for the center icon when a child is hovered.</description>
     </key>
 
+    <key name="center-icon-crop" type="d">
+      <default>1.0</default>
+      <summary>Center Icon Crop</summary>
+      <description>A crop factor for the center icon.</description>
+    </key>
+    <key name="center-icon-crop-hover" type="d">
+      <default>1.0</default>
+      <summary>Center Icon Crop Hover</summary>
+      <description>A crop factor for the center icon when a child is hovered.</description>
+    </key>
+
     <key name="center-icon-opacity" type="d">
       <default>0.17</default>
       <summary>Center Icon Opacity</summary>
@@ -330,6 +341,17 @@
       <default>0.8</default>
       <summary>Child Icon Scale Hover</summary>
       <description>A scale factor for child icons when hovered.</description>
+    </key>
+
+    <key name="child-icon-crop" type="d">
+      <default>1.0</default>
+      <summary>Child Icon Crop</summary>
+      <description>A crop factor for the child icon.</description>
+    </key>
+    <key name="child-icon-crop-hover" type="d">
+      <default>1.0</default>
+      <summary>Child Icon Crop Hover</summary>
+      <description>A crop factor for the child icon when a child is hovered.</description>
     </key>
 
     <key name="child-icon-opacity" type="d">

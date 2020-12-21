@@ -335,6 +335,7 @@ class MenuItem extends Clutter.Actor {
           size:                settings.get_double('center-size') * globalScale,
           offset:              0,
           iconScale:           settings.get_double('center-icon-scale'),
+          iconCrop:            settings.get_double('center-icon-crop'),
           iconOpacity:         settings.get_double('center-icon-opacity'),
           autoColorSaturation: settings.get_double('center-auto-color-saturation'),
           autoColorLuminance:  settings.get_double('center-auto-color-luminance'),
@@ -349,6 +350,7 @@ class MenuItem extends Clutter.Actor {
           size:                settings.get_double('center-size-hover') * globalScale,
           offset:              0,
           iconScale:           settings.get_double('center-icon-scale-hover'),
+          iconCrop:            settings.get_double('center-icon-crop-hover'),
           iconOpacity:         settings.get_double('center-icon-opacity-hover'),
           autoColorSaturation: settings.get_double('center-auto-color-saturation-hover'),
           autoColorLuminance:  settings.get_double('center-auto-color-luminance-hover'),
@@ -363,6 +365,7 @@ class MenuItem extends Clutter.Actor {
           size:                settings.get_double('child-size')     * globalScale,
           offset:              settings.get_double('child-offset')   * globalScale,
           iconScale:           settings.get_double('child-icon-scale'),
+          iconCrop:            settings.get_double('child-icon-crop'),
           iconOpacity:         settings.get_double('child-icon-opacity'),
           autoColorSaturation: settings.get_double('child-auto-color-saturation'),
           autoColorLuminance:  settings.get_double('child-auto-color-luminance'),
@@ -377,6 +380,7 @@ class MenuItem extends Clutter.Actor {
           size:                settings.get_double('child-size-hover')    * globalScale,
           offset:              settings.get_double('child-offset-hover')  * globalScale,
           iconScale:           settings.get_double('child-icon-scale-hover'),
+          iconCrop:            settings.get_double('child-icon-crop-hover'),
           iconOpacity:         settings.get_double('child-icon-opacity-hover'),
           autoColorSaturation: settings.get_double('child-auto-color-saturation-hover'),
           autoColorLuminance:  settings.get_double('child-auto-color-luminance-hover'),
@@ -546,7 +550,7 @@ class MenuItem extends Clutter.Actor {
           visualState == MenuItemState.CHILD_HOVERED) {
         icon = this._createIcon(
             backgroundColor, settings.backgroundImage, settings.size, this.icon,
-            settings.iconScale, settings.iconOpacity);
+            settings.iconScale, settings.iconCrop, settings.iconOpacity);
       } else {
         // Grandchildren have only a circle as icon. Therefore no icon name is passed to
         // this method.
@@ -771,7 +775,7 @@ class MenuItem extends Clutter.Actor {
   // This creates a Clutter.Actor with an attached Clutter.Canvas containing an image of
   // this MenuItem's icon.
   _createIcon(
-      backgroundColor, backgroundImage, backgroundSize, iconName, iconScale,
+      backgroundColor, backgroundImage, backgroundSize, iconName, iconScale, iconCrop,
       iconOpacity) {
 
     const canvas = new Clutter.Canvas({height: backgroundSize, width: backgroundSize});
@@ -830,6 +834,13 @@ class MenuItem extends Clutter.Actor {
       // Paint the icon!
       if (iconName != undefined) {
         const iconSize = backgroundSize * iconScale;
+
+        // Clip the icon according to the given clip radius. Sqrt(2) is to ensure that the
+        // entire icon is visible if iconCrop == 1 is given.
+        const clipRadius = iconSize * iconCrop * Math.sqrt(2) / 2;
+        ctx.arc(backgroundSize / 2, backgroundSize / 2, clipRadius, 0, 2.0 * Math.PI);
+        ctx.clip();
+
         ctx.translate((backgroundSize - iconSize) / 2, (backgroundSize - iconSize) / 2);
         utils.paintIcon(ctx, iconName, iconSize, iconOpacity);
       }
