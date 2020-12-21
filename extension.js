@@ -10,7 +10,7 @@
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me             = imports.misc.extensionUtils.getCurrentExtension();
-const Daemon         = Me.imports.daemon.Daemon.Daemon;
+const Daemon         = Me.imports.src.daemon.Daemon.Daemon;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Once enabled, Fly-Pie creates an instance of the Daemon class. This daemon will      //
