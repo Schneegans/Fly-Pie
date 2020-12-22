@@ -25,8 +25,8 @@ scripts/compile-locales.sh
 
 # Delete any old zip and pack everything together
 rm --force flypie@schneegans.github.com.zip
-zip -r flypie@schneegans.github.com.zip -- common daemon presets resources \
-    schemas settings locale *.js metadata.json LICENSE
+zip -r flypie@schneegans.github.com.zip -- src presets resources \
+    settings locale *.js metadata.json LICENSE
 
 
 while getopts is FLAG; do
