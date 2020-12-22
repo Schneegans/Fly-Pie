@@ -347,13 +347,13 @@ Either edit an existing translation or create a new one by opening the template 
 When editing an existing translation, please make sure that you work from the latest template by executing this command:
 
 ```bash
-update-po.sh <LANG-CODE>  # <LANG-CODE>` is the language code for the translation (`de` for German, `it` for Italian etc.)
+scripts/update-po.sh <LANG-CODE>  # <LANG-CODE>` is the language code for the translation (`de` for German, `it` for Italian etc.)
 ```
 
 Once you are happy to test your translation, save it as `<LANG-CODE>.po` file in the `/po` directory and install the extension with your updated translations:
 
 ```bash
-./create-release.sh -i
+scripts/create-release.sh -i
 ```
 
 Then, restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
