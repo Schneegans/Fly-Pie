@@ -36,4 +36,12 @@ xgettext --from-code=UTF-8 \
          --output=po/flypie.pot \
          resources/settings.ui ./*/*/*.js ./*/*/*/*.js 
 
+# Replace some lines of the header with our own.
+sed -i '1s/.*/# <LANGUAGE> translation for the Fly-Pie GNOME Shell Extension./' po/flypie.pot
+sed -i "2s/.*/# Copyright (C) $(date +%Y) Simon Schneegans/" po/flypie.pot
+sed -i "4s/.*/# <FIRSTNAME LASTNAME <EMAIL@ADDRESS>, $(date +%Y)./" po/flypie.pot
+sed -i '12s/.*/"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\\n"/' po/flypie.pot
+sed -i '14s/.*/"Language-Team: \\n"/' po/flypie.pot
+sed -i '15s/.*/"Language: <LANGUAGE_CODE>\\n"/' po/flypie.pot
+
 echo "All done!"
