@@ -9,8 +9,8 @@
 # -------------------------------------------------------------------------------------- #
 
 # This script takes 'po/flypie.pot' and compiles the latest '.po' file from it.
-# Usage: update-po.sh <LANG-CODE>, where <LANG-CODE> is the language code of the file
-# you want to update. Pass 'all' to update all '.po' files.
+# Usage: update-po.sh -l <LANG-CODE>, where <LANG-CODE> is the language code of the file
+# you want to update. Pass '-a' to update all '.po' files.
 
 if ! command -v msgmerge &> /dev/null
 then
