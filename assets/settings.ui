@@ -1425,7 +1425,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               <object class="GtkImage" id="level-image12">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">../assets/badges/tutorial/copper.png</property>
+                                <property name="pixbuf">badges/tutorial/copper.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -1465,7 +1465,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               <object class="GtkImage" id="level-image13">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">../assets/badges/tutorial/silver.png</property>
+                                <property name="pixbuf">badges/tutorial/silver.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -1511,7 +1511,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                           <object class="GtkImage" id="level-image11">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="pixbuf">../assets/badges/tutorial/gold.png</property>
+                            <property name="pixbuf">badges/tutorial/gold.png</property>
                             <property name="pixel_size">200</property>
                             <property name="icon_size">6</property>
                           </object>
@@ -1847,7 +1847,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkImage" id="level-image14">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">../assets/badges/tutorial/copper.png</property>
+                                <property name="pixbuf">badges/tutorial/copper.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -1886,7 +1886,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkImage" id="level-image15">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">../assets/badges/tutorial/silver.png</property>
+                                <property name="pixbuf">badges/tutorial/silver.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -1932,7 +1932,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                           <object class="GtkImage" id="level-image16">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="pixbuf">../assets/badges/tutorial/gold.png</property>
+                            <property name="pixbuf">badges/tutorial/gold.png</property>
                             <property name="pixel_size">200</property>
                             <property name="icon_size">6</property>
                           </object>
@@ -1979,7 +1979,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="margin_top">10</property>
-                        <property name="pixbuf">../assets/badges/tutorial/gold.png</property>
+                        <property name="pixbuf">badges/tutorial/gold.png</property>
                         <property name="pixel_size">200</property>
                         <property name="icon_size">6</property>
                       </object>
@@ -8885,7 +8885,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <object class="GtkImage" id="level-image17">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">../assets/badges/levels/level10.png</property>
+                                <property name="pixbuf">badges/levels/level10.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -8896,16 +8896,48 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkProgressBar" id="level-progressbar">
-                                <property name="width_request">500</property>
+                              <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">center</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">20</property>
-                                <property name="fraction">0.75</property>
-                                <property name="text" translatable="yes" comments="XP: Experience points">750 / 5000 XP</property>
-                                <property name="show_text">True</property>
+                                <property name="spacing">10</property>
+                                <property name="homogeneous">True</property>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                                <child type="center">
+                                  <object class="GtkProgressBar" id="level-progressbar">
+                                    <property name="width_request">500</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="margin_top">10</property>
+                                    <property name="margin_bottom">20</property>
+                                    <property name="fraction">0.75</property>
+                                    <property name="text">750 / 5000 XP</property>
+                                    <property name="show_text">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="achievements-chest">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label">💰</property>
+                                    <attributes>
+                                      <attribute name="scale" value="2"/>
+                                    </attributes>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">end</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
