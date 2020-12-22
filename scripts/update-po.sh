@@ -18,10 +18,9 @@ then
   exit 1
 fi
 
-# Get to the location of this script.
-FLYPIE="$( cd "$( dirname "$0" )" && pwd )"
-cd "$FLYPIE" || \
-  { echo "ERROR: Could not cd to the script's location!"; exit 1; }
+# Go to the repo root.
+cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
+  { echo "ERROR: Could not find the repo root."; exit 1; }
 
 while getopts l:a FLAG; do
   case $FLAG in

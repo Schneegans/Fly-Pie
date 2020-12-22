@@ -17,10 +17,11 @@
 # Exit the script when one command fails.
 set -e
 
-# Go to the location of this script.
-cd "$( cd "$( dirname "$0" )" && pwd )" || { echo "ERROR: Could not find the location of 'create-release.sh'."; exit 1; }
+# Go to the repo root.
+cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
+  { echo "ERROR: Could not find the repo root."; exit 1; }
 
-./compile-locales.sh
+scripts/compile-locales.sh
 
 # Delete any old zip and pack everything together
 rm --force flypie@schneegans.github.com.zip

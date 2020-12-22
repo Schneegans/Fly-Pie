@@ -17,12 +17,13 @@
 # Exit the script when one command fails.
 set -e
 
-# Get the location of this script.
-SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
+# Go to the repo root.
+cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
+  { echo "ERROR: Could not find the repo root."; exit 1; }
 
 # Run cloc - this counts code lines, blank lines and comment lines for the specified
 # languages. We are only interested in the summary, therefore the tail -1
-SUMMARY="$(cloc "${SCRIPT_DIR}" --include-lang="JavaScript" --md | tail -1)"
+SUMMARY="$(cloc . --include-lang="JavaScript" --md | tail -1)"
 
 # The $SUMMARY is one line of a markdown table and looks like this:
 # SUM:|101|3123|2238|10783

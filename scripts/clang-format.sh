@@ -11,11 +11,12 @@
 # Exit the script when one command fails.
 set -e
 
-# Get the location of this script.
-SRC_DIR="$( cd "$( dirname "$0" )" && pwd )"
+# Go to the repo root.
+cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
+  { echo "ERROR: Could not find the repo root."; exit 1; }
 
 # Execute clang format for all *.cpp, *.hpp and *.inl files.
-find "$SRC_DIR" -type f -name '*.js' -exec sh -c '
+find . -type f -name '*.js' -exec sh -c '
   for file do
     echo "Formatting $file..."
     clang-format -i "$file"
