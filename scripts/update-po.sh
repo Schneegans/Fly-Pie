@@ -18,6 +18,23 @@ usage() {
   echo "Use '-a' to update all '.po' files."
 }
 
+# Create a new translation from 'flypie.pot'. Do not update the template because
+# of potential merge conflicts. This is done in a seperate step.
+promptNewTranslation() {
+  echo -n "The translation '$1' does not exist. Do you want to create it? [Y/n] "
+  read -r reply
+
+  # Default to 'Yes' when no answer given
+  if [ -z "$reply" ] || [ "$reply" = "Y" ] ||  [ "$reply" = "y" ]; then
+    msginit --input=po/flypie.pot --locale="$1" --output-file="po/$1.po"
+    # Replace lines to match our template
+    sed -i "2s/.*/# Copyright (C) $(date +%Y) Simon Schneegans/" po/"$1".po
+    sed -i "4s/.*/# <FIRSTNAME LASTNAME <EMAIL@ADDRESS>, $(date +%Y)./" po/"$1".po
+    sed -i '13s/.*/"Language-Team: \\n"/' po/"$1".po
+    sed -i '15s/.*/"Language: <LANGUAGE_CODE>\\n"/' po/"$1".po
+  fi
+}
+
 
 if ! command -v msgmerge &> /dev/null
 then
@@ -45,8 +62,8 @@ while getopts l:a FLAG; do
           fi
           exit
         else
-          echo "ERROR: The translation '$OPTARG' does not exist. Feel free to create one!"
-          exit 1
+          promptNewTranslation "$OPTARG"
+          exit
         fi;;
 
     a)  # Update all '.po' files.
@@ -72,7 +89,6 @@ while getopts l:a FLAG; do
     *)  # Handle invalid flags.
         echo "ERROR: Invalid flag!"
         usage
-        echo "Use '-a' to update all '.po' files."
         exit 1;;
   esac
 done
@@ -80,5 +96,4 @@ done
 # In case no flag was specified
 echo "ERROR: You need to specify a flag!"
 usage
-echo "Use '-a' to update all '.po' files."
 exit 1
