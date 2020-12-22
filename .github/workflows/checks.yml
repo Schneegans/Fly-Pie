@@ -20,7 +20,7 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y clang-format
       - name: Run Clang-Format
-        run: ./clang-format.sh
+        run: scripts/clang-format.sh
       - name: Compare Results
         run: |
           DIFF=$(git diff)
@@ -47,8 +47,8 @@ jobs:
           sudo apt-get install -y cloc
       - name: Run Cloc
         run: |
-          BASE="$(base/cloc.sh --percentage-only)"
-          CURRENT="$(current/cloc.sh --percentage-only)"
+          BASE="$(base/scripts/cloc.sh --percentage-only)"
+          CURRENT="$(current/scripts/cloc.sh --percentage-only)"
           echo "Percentage of Comments in Base Repository: $BASE"
           echo "Percentage of Comments after Merge: $CURRENT"
           if (( $(echo "$BASE > $CURRENT" |bc -l) ))
@@ -75,17 +75,21 @@ jobs:
     - uses: actions/checkout@v2
     - name: Check error conditions # Currently, gettext is not installed. Both if statements should be false.
       run: |
-        if $GITHUB_WORKSPACE/compile-locales.sh; then
-          if $GITHUB_WORKSPACE/update-locales.sh; then
-            exit 1
+        if $GITHUB_WORKSPACE/scripts/compile-locales.sh; then
+          if $GITHUB_WORKSPACE/scripts/update-po.sh; then
+            if $GITHUB_WORKSPACE/scripts/update-pot.sh; then
+              exit 1
+            fi
           fi
         fi
     - name: Check correct workflow # Now, gettext will be installed and both INVERTED if statements should be false.
       run: |
         sudo apt-get update -qq && sudo apt-get install gettext -qq -y
-        if ! $GITHUB_WORKSPACE/compile-locales.sh; then
-          if ! $GITHUB_WORKSPACE/update-locales.sh; then
-            exit 1
+        if ! $GITHUB_WORKSPACE/scripts/compile-locales.sh; then
+          if ! $GITHUB_WORKSPACE/scripts/update-po.sh; then
+            if ! $GITHUB_WORKSPACE/scripts/update-pot.sh; then
+              exit 1
+            fi
           fi
         fi
 
@@ -97,4 +101,4 @@ jobs:
     - name: Build Fly-Pie
       run: |
         sudo apt-get update -qq && sudo apt-get install gettext -qq -y
-        $GITHUB_WORKSPACE/create-release.sh -s
+        $GITHUB_WORKSPACE/scripts/create-release.sh -s

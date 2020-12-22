@@ -18,7 +18,7 @@ jobs:
         sudo apt-get install gettext
     - name: Create Release
       run: |
-        ./create-release.sh
+        scripts/create-release.sh
     - name: Upload Release
       uses: svenstaro/upload-release-action@v1-release
       with:

@@ -16,8 +16,8 @@ jobs:
         run: sudo apt-get update -y && sudo apt-get install -y cloc
       - name: Get the Numbers
         run: |
-          echo "CODE_LINES=$(./cloc.sh --loc)" >> $GITHUB_ENV
-          echo "COMMENT_LINES=$(./cloc.sh --percentage)%" >> $GITHUB_ENV
+          echo "CODE_LINES=$(scripts/cloc.sh --loc)" >> $GITHUB_ENV
+          echo "COMMENT_LINES=$(scripts/cloc.sh --percentage)%" >> $GITHUB_ENV
       - name: Create Lines-of-Code-Badge
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:
