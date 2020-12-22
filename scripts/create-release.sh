@@ -17,6 +17,13 @@
 # Exit the script when one command fails.
 set -e
 
+# Print usage info
+usage() {
+    echo "Use '-i' to install the extension to your system. To just build it, run the script without any flag."
+    echo "Use '-s' to throw an error when the zip size is too big to be uploaded to the Extensions website."
+}
+
+
 # Go to the repo root.
 cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
   { echo "ERROR: Could not find the repo root."; exit 1; }
@@ -47,8 +54,7 @@ while getopts is FLAG; do
             SIZE_ERROR="true";;
 
 		*)	echo "ERROR: Invalid flag!"
-            echo "Use '-i' to install the extension to your system. To just build it, run the script without any flag."
-            echo "Use '-s' to throw an error when the zip size is too big to be uploaded to the Extensions website."
+            usage
             exit 1;;
 	esac
 done

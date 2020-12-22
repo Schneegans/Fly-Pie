@@ -12,6 +12,13 @@
 # Usage: update-po.sh -l <LANG-CODE>, where <LANG-CODE> is the language code of the file
 # you want to update. Pass '-a' to update all '.po' files.
 
+# Print usage info
+usage() {
+  echo "Use '-l <LANG-CODE>' to update a specific '.po' file."
+  echo "Use '-a' to update all '.po' files."
+}
+
+
 if ! command -v msgmerge &> /dev/null
 then
   echo "ERROR: Could not find msgmerge. On Ubuntu based systems, check if the gettext package is installed!"
@@ -64,7 +71,7 @@ while getopts l:a FLAG; do
 
     *)  # Handle invalid flags.
         echo "ERROR: Invalid flag!"
-        echo "Use '-l <LANG-CODE>' to update a specific '.po' file."
+        usage
         echo "Use '-a' to update all '.po' files."
         exit 1;;
   esac
@@ -72,6 +79,6 @@ done
 
 # In case no flag was specified
 echo "ERROR: You need to specify a flag!"
-echo "Use '-l <LANG-CODE>' to update a specific '.po' file."
+usage
 echo "Use '-a' to update all '.po' files."
 exit 1
