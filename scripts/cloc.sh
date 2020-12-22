@@ -40,7 +40,7 @@ LINES_OF_CODE=${TOKENS[4]}
 # lines. All dumb comments like those /////////// or those // ------------ are also
 # substracted. As cloc does not count inline comments, the overall estimate should be
 # rather conservative.
-DUMB_COMMENTS="$(grep -r -E '//////|// -----' "${SCRIPT_DIR}" | wc -l)"
+DUMB_COMMENTS="$(grep -r -E '//////|// -----' . | wc -l)"
 COMMENT_LINES=$((COMMENT_LINES - 5 * NUMBER_OF_FILES - DUMB_COMMENTS))
 
 # Print all results if no arguments are given.
