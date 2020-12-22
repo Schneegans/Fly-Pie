@@ -28,7 +28,12 @@ cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
 
 # Update the template file with the strings from the source tree. All preceeding
 # comments starting with 'Translators' will be extracted as well.
-xgettext --from-code=UTF-8 --add-comments=Translators \
-         --output=po/flypie.pot resources/settings.ui ./*/*/*.js ./*/*/*/*.js 
+xgettext --from-code=UTF-8 \
+         --add-comments=Translators \
+         --copyright-holder="Simon Schneegans" \
+         --package-name="Fly-Pie" \
+         --package-version="5" \
+         --output=po/flypie.pot \
+         resources/settings.ui ./*/*/*.js ./*/*/*/*.js 
 
 echo "All done!"
