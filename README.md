@@ -343,25 +343,34 @@ A great way to contribute to Fly-Pie is creating a translation to another langua
 We suggest using a tool like [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
 
 Translations of Fly-Pie are stored in the `po/` directory.
-Just edit an existing translation or create a new one by opening the template [`po/flypie.pot`](po/flypie.pot) with either of these tools.
-
-Once you are happy with your translation, save a `<country code>.po` file in the `/po` directory and run the following command to compile the strings:
+Either edit an existing translation or create a new one by opening the template [`po/flypie.pot`](po/flypie.pot) with either of these tools.
+When editing an existing translation, please make sure that you work from the latest template by executing this command:
 
 ```bash
-./compile-locales.sh
+update-po.sh <LANG-CODE>  # <LANG-CODE>` is the language code for the translation (`de` for German, `it` for Italian etc.)
 ```
 
-In order for this to work, you'll need to install the `gettext` package. In Ubuntu 20.04 and 20.10, it can be installed by running the following command:
+Once you are happy to test your translation, save it as `<LANG-CODE>.po` file in the `/po` directory and install the extension with your updated translations:
+
+```bash
+./create-release.sh -i
+```
+
+Then, restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+Or logout / login if you are on Wayland.
+
+You may need to install the `gettext` package in order to compile the translations. In Ubuntu, it can be installed by running the following command:
 
 ```bash
 sudo apt install gettext
 ```
 
-Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
-Or logout / login if you are on Wayland.
+Test if all strings you translated are looking good.
+Then, you can add your new `*.po` file with a commit like `:globe_with_meridians: Add new translation for <country code>`
+and submit a pull request to the `translation` branch!
 
-You can add your new `*.po` file with a commit like `:globe_with_meridians: Add new translation for <country code>` and submit a pull request!
 **To get started, have a look at the [Pull Request Template](.github/PULL_REQUEST_TEMPLATE/add_or_update_translation.md)**.
-When you create your pull request, you can simply append a `&template=add_or_update_translation.md` to the URL of your pull request to auto-populate the body of your pull request with the template.
+It provides a guideline on what to do in order to get your Pull Request accepted.
+When creating your pull request, you can simply append a `&template=add_or_update_translation.md` to the URL to auto-populate the body of your pull request with the template.
 
 Please refer to [CONTRIBUTING.md](docs/CONTRIBUTING.md) for the some further contribution guidelines.
