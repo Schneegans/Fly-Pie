@@ -10,7 +10,7 @@
 
 # This script scans the source code of Fly-Pie for any translatable strings and updates
 # the po/flypie.pot file accordingly. To merge the new strings into a translation,
-# run update-po.sh <LANG-CODE>.
+# run update-po.sh -l <LANG-CODE>.
 
 # Exit the script when one command fails.
 set -e
