@@ -32,11 +32,16 @@ zip -r flypie@schneegans.github.com.zip -- src presets resources \
 while getopts is FLAG; do
 	case $FLAG in
 		
-		i)  # Install the extension
-            # shellcheck disable=2015
-            gnome-extensions install flypie@schneegans.github.com.zip --force && \
-            echo "Successfully installed the application! Now restart the Shell ('Alt'+'F2', then 'r')." || \
-            { echo "ERROR: Could not install the extension."; exit 1; };;
+		i)  # Install the extension, but only if this would not overwrite the git repository.
+            if ! [[ $(pwd) == *".local/share/gnome-shell/extensions/flypie@schneegans.github.com" ]]; then
+                # shellcheck disable=2015
+                gnome-extensions install flypie@schneegans.github.com.zip --force && \
+                echo "Successfully installed the application! Now restart the Shell ('Alt'+'F2', then 'r')." || \
+                { echo "ERROR: Could not install the extension."; exit 1; }
+            else
+                echo "Skipping install step, the repo is already located in the extensions directory."
+                echo "Restart the Shell to get the updated version ('Alt'+'F2', then 'r')."
+            fi;;
 
         s)  # We need to throw an error because of the zip size
             SIZE_ERROR="true";;
