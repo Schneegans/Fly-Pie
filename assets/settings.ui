@@ -4546,7 +4546,7 @@ will cancel the selection.</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">This will be tinted by the Background Color above.</property>
+                                    <property name="label" translatable="yes" comments="This: The background image">This will be tinted by the Background Color above.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -5763,7 +5763,7 @@ will cancel the selection.</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">This will be tinted by the Background Color above.</property>
+                                    <property name="label" translatable="yes" comments="This: The background image">This will be tinted by the Background Color above.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -6559,7 +6559,7 @@ will cancel the selection.</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">This will be tinted by the Background Color above.</property>
+                                    <property name="label" translatable="yes" comments="This: The background image">This will be tinted by the Background Color above.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
