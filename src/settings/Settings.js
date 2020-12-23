@@ -418,6 +418,9 @@ var Settings = class Settings {
               const presetName = fileInfo.get_display_name().slice(0, suffixPos);
               this._presetList.set_value(row, 0, presetName);
               this._presetList.set_value(row, 1, file.get_path());
+
+              // Store this in our statistics.
+              Statistics.addPresetSaved();
             }
 
           } catch (error) {
