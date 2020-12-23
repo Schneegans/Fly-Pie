@@ -20,6 +20,18 @@ const _ = imports.gettext.domain('flypie').gettext;
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 
+// var Achievements = {
+//   INVISIBLE: 0,
+// };
+
+// const _achievementData = new Map([[
+//   MenuItemState.INVISIBLE, {
+//     colorMode: '',
+//     size: 0,
+//     offset: 0,
+//     iconOpacity: 0,
+//   }
+// ]]);
 
 
 var Achievements = class Achievements {
@@ -37,11 +49,13 @@ var Achievements = class Achievements {
 
     // If the click-selections statistics key changes (that means that the user selected
     // something by point-and-click), check for newly unlocked achievements.
-    this._settingsConnections.push(
-        this._settings.connect('changed::stats-click-selections', () => {
-          this._notify(
-              'Level up!', 'You just reached level 10!',
-              Gio.icon_new_for_string(Me.path + '/assets/badges/levels/level10.png'));
+    this._settingsConnections.push(this._settings.connect(
+        'changed::stats-click-selections',
+        () => {
+            // this._notify(
+            //     'Level up!', 'You just reached level 10!',
+            //     Gio.icon_new_for_string(Me.path +
+            //     '/assets/badges/levels/level10.png'));
         }));
 
     // If the gesture-selections statistics key changes (that means that the user selected
@@ -57,6 +71,8 @@ var Achievements = class Achievements {
       this._settings.disconnect(connection);
     });
   }
+
+  // ----------------------------------------------------------------------- private stuff
 
   // Shows a GNOME Shell notification with the given label, description and icon. The size
   // of the icon seems to depend on the currently used theme and cannot be set from here.
