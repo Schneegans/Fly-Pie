@@ -83,6 +83,16 @@ var Statistics = class Statistics {
     this._addOneTo('stats-presets-saved');
   }
 
+  // Should be called whenever a preset is saved.
+  static addMenuImport() {
+    this._addOneTo('stats-menus-imported');
+  }
+
+  // Should be called whenever a preset is saved.
+  static addMenuExport() {
+    this._addOneTo('stats-menus-exported');
+  }
+
   // This should be called when the Fly-Pie extension is disabled. It deletes the
   // Gio.Settings object.
   static cleanUp() {

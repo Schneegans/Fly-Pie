@@ -59,6 +59,8 @@ var Achievements = class Achievements {
     this._connectStatsLabel('stats-dbus-menus');
     this._connectStatsLabel('stats-settings-opened');
     this._connectStatsLabel('stats-presets-saved');
+    this._connectStatsLabel('stats-menus-imported');
+    this._connectStatsLabel('stats-menus-exported');
 
     // These are the settings schema keys storing the selection statistics. They contain
     // an array of selection time histograms, one for each selection depth (depth 1, 2, 3,
