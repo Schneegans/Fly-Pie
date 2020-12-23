@@ -340,7 +340,6 @@ journalctl -f -o cat | grep -E 'flypie|'
 ## Translating Fly-Pie
 
 A great way to contribute to Fly-Pie is creating a translation to another language!
-We suggest using a tool like [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
 
 * Start by generating the latest translation file with the following command:
 
@@ -353,7 +352,7 @@ We suggest using a tool like [Poedit](https://poedit.net/) or the [GNOME Transla
 Otherwise, it pulls the latest strings and merges them into the existing translation file.
 Translations of Fly-Pie are stored in the `po/` directory.
 
-* Open the file and start translating!
+* Open the file and start translating! We suggest using a tool like [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
 
 * Once you are happy to test your translation, save it as `<LANG-CODE>.po` file
 in the `/po` directory and install the extension with your updated translations:
