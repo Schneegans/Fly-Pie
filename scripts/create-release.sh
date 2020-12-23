@@ -17,32 +17,44 @@
 # Exit the script when one command fails.
 set -e
 
-# Go to the location of this script.
-cd "$( cd "$( dirname "$0" )" && pwd )" || { echo "ERROR: Could not find the location of 'create-release.sh'."; exit 1; }
+# Print usage info
+usage() {
+    echo "Use '-i' to install the extension to your system. To just build it, run the script without any flag."
+    echo "Use '-s' to throw an error when the zip size is too big to be uploaded to the Extensions website."
+}
 
-./compile-locales.sh
+
+# Go to the repo root.
+cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
+  { echo "ERROR: Could not find the repo root."; exit 1; }
+
+scripts/compile-locales.sh
 
 # Delete any old zip and pack everything together
 rm --force flypie@schneegans.github.com.zip
-zip -r flypie@schneegans.github.com.zip -- common daemon presets resources \
-    schemas settings locale *.js metadata.json LICENSE
+zip -r flypie@schneegans.github.com.zip -- src presets resources \
+    schemas locale *.js metadata.json LICENSE
 
 
 while getopts is FLAG; do
 	case $FLAG in
 		
-		i)  # Install the extension
-            # shellcheck disable=2015
-            gnome-extensions install flypie@schneegans.github.com.zip --force && \
-            echo "Successfully installed the application! Now restart the Shell ('Alt'+'F2', then 'r')." || \
-            { echo "ERROR: Could not install the extension."; exit 1; };;
+		i)  # Install the extension, but only if this would not overwrite the git repository.
+            if ! [[ $(pwd) == *".local/share/gnome-shell/extensions/flypie@schneegans.github.com" ]]; then
+                # shellcheck disable=2015
+                gnome-extensions install flypie@schneegans.github.com.zip --force && \
+                echo "Successfully installed the application! Now restart the Shell ('Alt'+'F2', then 'r')." || \
+                { echo "ERROR: Could not install the extension."; exit 1; }
+            else
+                echo "Skipping install step, the repo is already located in the extensions directory."
+                echo "Restart the Shell to get the updated version ('Alt'+'F2', then 'r')."
+            fi;;
 
         s)  # We need to throw an error because of the zip size
             SIZE_ERROR="true";;
 
 		*)	echo "ERROR: Invalid flag!"
-            echo "Use '-i' to install the extension to your system. To just build it, run the script without any flag."
-            echo "Use '-s' to throw an error when the zip size is too big to be uploaded to the Extensions website."
+            usage
             exit 1;;
 	esac
 done

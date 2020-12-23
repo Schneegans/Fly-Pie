@@ -21,10 +21,11 @@ then
   exit 1
 fi
 
-# Get the location of this script.
-FLYPIE="$( cd "$( dirname "$0" )" && pwd )"
+# Go to the repo root.
+cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
+  { echo "ERROR: Could not find the repo root."; exit 1; }
 
-for FILE in "$FLYPIE"/po/*.po
+for FILE in po/*.po
 do
   # handle the case of no .po files, see SC2045
   [[ -e "$FILE" ]] || { echo "ERROR: No .po files found, exiting."; exit 1; }
@@ -34,8 +35,8 @@ do
 
   # Compile the corresponding *.mo file.
   echo "Creating localization for '$LANGUAGE'..."
-  mkdir -p "$FLYPIE"/locale/"$LANGUAGE"/LC_MESSAGES
-  msgfmt "$FILE" -o "$FLYPIE"/locale/"$LANGUAGE"/LC_MESSAGES/flypie.mo
+  mkdir -p locale/"$LANGUAGE"/LC_MESSAGES
+  msgfmt "$FILE" -o locale/"$LANGUAGE"/LC_MESSAGES/flypie.mo
 done
 
 echo "All done!"

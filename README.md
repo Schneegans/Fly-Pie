@@ -110,7 +110,7 @@ mv Fly-Pie flypie@schneegans.github.com
 You will have to compile the translations if you want to use Fly-Pie in your own language:
 
 ```bash
-flypie@schneegans.github.com/compile-locales.sh
+flypie@schneegans.github.com/scripts/compile-locales.sh
 ```
 
 Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
@@ -340,28 +340,44 @@ journalctl -f -o cat | grep -E 'flypie|'
 ## Translating Fly-Pie
 
 A great way to contribute to Fly-Pie is creating a translation to another language!
-We suggest using a tool like [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
 
+* Start by generating the latest translation file with the following command:
+
+  ```bash
+  scripts/update-po.sh -l <LANG-CODE> # <LANG-CODE>` is the language code for the
+                                      # translation (`de` for German, `it` for Italian etc.)
+  ```
+
+* In case you are the first translator to a language, this script should create a `.po` file for you.
+Otherwise, it pulls the latest strings and merges them into the existing translation file.
 Translations of Fly-Pie are stored in the `po/` directory.
-Just edit an existing translation or create a new one by opening the template [`po/flypie.pot`](po/flypie.pot) with either of these tools.
 
-Once you are happy with your translation, save a `<country code>.po` file in the `/po` directory and run the following command to compile the strings:
+* Open the file and start translating! We suggest using a tool like [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
 
-```bash
-./compile-locales.sh
-```
+* Once you are happy to test your translation, save it as `<LANG-CODE>.po` file
+in the `/po` directory and install the extension with your updated translations:
 
-In order for this to work, you'll need to install the `gettext` package. In Ubuntu 20.04 and 20.10, it can be installed by running the following command:
+  ```bash
+  scripts/create-release.sh -i
+  ```
+
+* Then, restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+Or logout / login if you are on Wayland.
+
+* Test if all strings you translated are looking good.
+Then, you can add your new `*.po` file with a commit like `:globe_with_meridians: <Add/Update> <Language> translation`
+and submit a pull request to the `develop` branch!
+
+**To get started, have a look at the [Pull Request Template](.github/PULL_REQUEST_TEMPLATE/add_or_update_translation.md)**.
+It provides a guideline on what to do in order to get your Pull Request accepted.
+When creating your pull request, you can simply append a `&template=add_or_update_translation.md` to the URL to auto-populate the body of your pull request with the template.
+
+Please refer to [CONTRIBUTING.md](docs/CONTRIBUTING.md) for the some further contribution guidelines.
+
+**Note:**
+You may need to install the `gettext` package in order to compile the translations.
+In Ubuntu, it can be installed by running the following command:
 
 ```bash
 sudo apt install gettext
 ```
-
-Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
-Or logout / login if you are on Wayland.
-
-You can add your new `*.po` file with a commit like `:globe_with_meridians: Add new translation for <country code>` and submit a pull request!
-**To get started, have a look at the [Pull Request Template](.github/PULL_REQUEST_TEMPLATE/add_or_update_translation.md)**.
-When you create your pull request, you can simply append a `&template=add_or_update_translation.md` to the URL of your pull request to auto-populate the body of your pull request with the template.
-
-Please refer to [CONTRIBUTING.md](docs/CONTRIBUTING.md) for the some further contribution guidelines.
