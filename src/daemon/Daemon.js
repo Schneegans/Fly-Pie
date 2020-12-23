@@ -19,6 +19,7 @@ const ItemRegistry   = Me.imports.src.common.ItemRegistry.ItemRegistry;
 const Statistics     = Me.imports.src.common.Statistics.Statistics;
 const DefaultMenu    = Me.imports.src.settings.DefaultMenu.DefaultMenu;
 const MouseHighlight = Me.imports.src.daemon.MouseHighlight.MouseHighlight;
+const Achievements   = Me.imports.src.daemon.Achievements.Achievements;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
@@ -72,6 +73,8 @@ var Daemon = class Daemon {
     // configuration changes, we bind all the configured shortcuts.
     this._settings = utils.createSettings();
 
+    this._achievements = new Achievements(this._settings);
+
     // Here we test whether any menus are configured. If the key is completely empty, this
     // is considered to be the same as "[]". If no menus are configured, the default
     // configuration is loaded.
@@ -116,6 +119,8 @@ var Daemon = class Daemon {
 
     this._shortcuts.destroy();
     this._settings.disconnect(this._settingsConnection);
+
+    this._achievements.destroy();
 
     // Hide the screencast mouse pointer (if any).
     if (this._screencastMouse) {

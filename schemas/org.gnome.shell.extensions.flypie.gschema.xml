@@ -522,6 +522,12 @@
       <description>The last achieved time in the tutorial in milliseconds.</description>
     </key>
 
+    <key name="unlocked-achievements" type="au">
+      <default>[]</default>
+      <summary>Unlocked Achievements</summary>
+      <description>A list of all unlocked achievements.</description>
+    </key>
+
 
     <!-- Statistics -->
 
@@ -553,6 +559,30 @@
       <default>0</default>
       <summary>Settings Dialog Openings</summary>
       <description>The number of times the settings dialog has been opnened.</description>
+    </key>
+
+    <key name="stats-presets-saved" type="u">
+      <default>0</default>
+      <summary>Preset Saves</summary>
+      <description>The number of times a preset has been saved.</description>
+    </key>
+
+    <key name="stats-menus-imported" type="u">
+      <default>0</default>
+      <summary>Menu Imports</summary>
+      <description>The number of times a menu configuration has been imported.</description>
+    </key>
+
+    <key name="stats-menus-exported" type="u">
+      <default>0</default>
+      <summary>Menu Exports</summary>
+      <description>The number of times a menu configuration has been exported.</description>
+    </key>
+
+    <key name="stats-random-presets" type="u">
+      <default>0</default>
+      <summary>Random Presets</summary>
+      <description>The number of times a random preset has been generated.</description>
     </key>
 
   </schema>

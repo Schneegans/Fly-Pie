@@ -14,6 +14,7 @@ const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.src.common.utils;
 const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
+const Statistics    = Me.imports.src.common.Statistics.Statistics;
 const ItemRegistry  = Me.imports.src.common.ItemRegistry.ItemRegistry;
 const Enums         = Me.imports.src.common.Enums;
 
@@ -248,6 +249,9 @@ var MenuEditor = class MenuEditor {
                 JSON.stringify(config, null, 2), null, false,
                 Gio.FileCreateFlags.REPLACE_DESTINATION, null);
 
+            // Store this in our statistics.
+            Statistics.addMenuExport();
+
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
               transient_for: button.get_toplevel(),
@@ -305,6 +309,9 @@ var MenuEditor = class MenuEditor {
               const config = JSON.parse(contents);
               this._settings.set_string('menu-configuration', JSON.stringify(config));
               this._loadMenuConfiguration();
+
+              // Store this in our statistics.
+              Statistics.addMenuImport();
             }
 
           } catch (error) {

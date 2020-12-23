@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                    = imports.cairo;
-const {Gtk, Pango, PangoCairo} = imports.gi;
+const Cairo                                    = imports.cairo;
+const {Gtk, Gdk, Pango, PangoCairo, GdkPixbuf} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -39,6 +39,18 @@ var Achievements = class Achievements {
 
     // ---------------------------------------------- Initialize the achievements sub-page
 
+    this._addAchievement(
+        'Master Pielot', 'Select 100 items in less than 10 ms.', 100, 'copper', 'a');
+    this._addAchievement(
+        'Master Pielot', 'Select 300 items in less than 20 ms.', 500, 'bronze', 'b');
+    this._addAchievement(
+        'Master Pielot', 'Select 300 items in less than 20 ms.', 500, 'silver', 'c');
+    this._addAchievement(
+        'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'gold', 'd');
+    this._addAchievement(
+        'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'platinum', 'e');
+    this._addAchievement(
+        'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'special', 'd');
 
     // ------------------------------------------------ Initialize the statistics sub-page
 
@@ -46,6 +58,10 @@ var Achievements = class Achievements {
     this._connectStatsLabel('stats-abortions');
     this._connectStatsLabel('stats-dbus-menus');
     this._connectStatsLabel('stats-settings-opened');
+    this._connectStatsLabel('stats-presets-saved');
+    this._connectStatsLabel('stats-menus-imported');
+    this._connectStatsLabel('stats-menus-exported');
+    this._connectStatsLabel('stats-random-presets');
 
     // These are the settings schema keys storing the selection statistics. They contain
     // an array of selection time histograms, one for each selection depth (depth 1, 2, 3,
@@ -58,11 +74,11 @@ var Achievements = class Achievements {
     this._charts = {
       clicks: {
         // Translators: This is a label how often a click selection was made.
-        name: _('Click Selections'),                  // Shown when nothing is hovered
+        name: _('Click Selections'),                     // Shown when nothing is hovered
         // Translators: Do not translate '%i' - it will be replaced by a number.
-        hoveredName: _('Level-%i Click Selections'),  // Shown when a histogram is hovered
-        pieWidget: this._setupPieChart('clicks'),     // A Gtk.DrawingArea
-        histogramWidgets: [                           // Four Gtk.DrawingAreas
+        hoveredName: _('Click Selections at Depth %i'),  // When a histogram is hovered
+        pieWidget: this._setupPieChart('clicks'),        // A Gtk.DrawingArea
+        histogramWidgets: [                              // Four Gtk.DrawingAreas
           this._setupHistogram('clicks', 1), this._setupHistogram('clicks', 2),
           this._setupHistogram('clicks', 3), this._setupHistogram('clicks', 4)
         ],
@@ -72,11 +88,11 @@ var Achievements = class Achievements {
       },
       gestures: {
         // Translators: This is a label how often a gesture selection was made.
-        name: _('Gesture Selections'),                // Shown when nothing is hovered
+        name: _('Gesture Selections'),                    // Shown when nothing is hovered
         // Translators: Do not translate '%i' - it will be replaced by a number.
-        hoveredName: _('Level-%i Gesture Selections'),// Shown when a histogram is hovered
-        pieWidget: this._setupPieChart('gestures'),   // A Gtk.DrawingArea
-        histogramWidgets: [                           // Four Gtk.DrawingAreas
+        hoveredName: _('Gesture Selections at Depth %i'), // When a histogram is hovered
+        pieWidget: this._setupPieChart('gestures'),       // A Gtk.DrawingArea
+        histogramWidgets: [                               // Four Gtk.DrawingAreas
           this._setupHistogram('gestures', 1), this._setupHistogram('gestures', 2),
           this._setupHistogram('gestures', 3), this._setupHistogram('gestures', 4)
         ],
@@ -414,5 +430,73 @@ var Achievements = class Achievements {
   // Tiny helper method which appends a 'k' to the given number if it's greater than 999.
   _formatNumber(number) {
     return number >= 1000 ? (number / 1000).toFixed(1) + 'k' : number.toString();
+  }
+
+  // Adds an achievement to the Gtk.FlowBox. This contains a composited image and a label
+  // on-top.
+  _addAchievement(name, text, experience, tier, icon) {
+    const box       = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, opacity: 0});
+    const textLabel = new Gtk.Label(
+        {label: text, justify: Gtk.Justification.CENTER, wrap: true, max_width_chars: 0});
+    const xpLabel = new Gtk.Label({label: experience + ' XP', opacity: 0.5});
+
+    box.pack_start(textLabel, false, true, 0);
+    box.pack_start(xpLabel, false, true, 0);
+
+    const image = new Gtk.DrawingArea();
+    image.set_size_request(128, 128);
+    image.add_events(Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK);
+    image.connect('draw', (widget, ctx) => {
+      const background = GdkPixbuf.Pixbuf.new_from_file(
+          Me.path + '/assets/badges/achievements/' + tier + '.svg');
+      const middleground = GdkPixbuf.Pixbuf.new_from_file(
+          Me.path + '/assets/badges/achievements/' + icon + '.svg');
+      const foreground = GdkPixbuf.Pixbuf.new_from_file(
+          Me.path + '/assets/badges/achievements/' + tier + '.png');
+
+      Gdk.cairo_set_source_pixbuf(ctx, background, 0, 0);
+      ctx.paint();
+
+      Gdk.cairo_set_source_pixbuf(ctx, middleground, 0, 0);
+      ctx.paint();
+
+      Gdk.cairo_set_source_pixbuf(ctx, foreground, 0, 0);
+      ctx.paint();
+
+
+      ctx.setSourceRGBA(0, 0, 0, 0.5);
+      const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
+      font.set_absolute_size(Pango.units_from_double(11));
+      const layout = PangoCairo.create_layout(ctx);
+      layout.set_font_description(font);
+      layout.set_alignment(Pango.Alignment.CENTER);
+      layout.set_width(Pango.units_from_double(128));
+      layout.set_text(name, -1);
+      ctx.moveTo(0, 85);
+      PangoCairo.show_layout(ctx, layout);
+
+      return false;
+    });
+
+    image.connect('enter-notify-event', (widget) => {
+      box.opacity   = 1;
+      image.opacity = 0.2;
+    });
+
+    image.connect('leave-notify-event', (widget) => {
+      box.opacity   = 0;
+      image.opacity = 1;
+    });
+
+    const grid = new Gtk.Grid();
+    grid.attach(image, 0, 0, 1, 2);
+    grid.attach(box, 0, 1, 1, 1);
+
+    const flowBoxChild = new Gtk.FlowBoxChild();
+    flowBoxChild.add(grid);
+
+    this._builder.get_object('achievement-box').insert(flowBoxChild, -1);
+
+    flowBoxChild.show_all();
   }
 }

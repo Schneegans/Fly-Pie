@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {Gio, Gtk, GdkPixbuf} = imports.gi;
+const {Gio, Gdk, Gtk, GdkPixbuf} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -96,15 +96,29 @@ var Tutorial = class Tutorial {
       this._builder.get_object('tutorial-page-button-' + previous).set_active(true);
     });
 
-    // Initialize the three GIF animations of the tutorial. This cannot be done from
-    // Glade for now. We also add a custom style provider to create the drop shadow effect
-    // of the images.
+    // Draw the Fly-Pie logo with the current theme's foreground color.
+    this._builder.get_object('fly-pie-logo').connect('draw', (widget, ctx) => {
+      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const logo  = GdkPixbuf.Pixbuf.new_from_file(Me.path + '/assets/logo.svg');
+
+      ctx.pushGroup();
+      Gdk.cairo_set_source_pixbuf(ctx, logo, 0, 0);
+      ctx.paint();
+      const mask = ctx.popGroup();
+
+      ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
+      ctx.mask(mask);
+    });
+
+    // Initialize the two GIF animations of the tutorial. This cannot be done from Glade
+    // for now. We also add a custom style provider to create the drop shadow effect for
+    // the images.
     const styleProvider = Gtk.CssProvider.new();
-    styleProvider.load_from_path(Me.path + '/resources/flypie.css');
-    for (let i = 1; i <= 3; i++) {
+    styleProvider.load_from_path(Me.path + '/assets/flypie.css');
+    for (let i = 1; i <= 2; i++) {
       const image = this._builder.get_object('tutorial-animation-' + i);
       image.set_from_animation(GdkPixbuf.PixbufAnimation.new_from_file(
-          Me.path + '/resources/tutorial' + i + '.gif'));
+          Me.path + '/assets/tutorial' + i + '.gif'));
       image.get_style_context().add_provider(
           styleProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
     }

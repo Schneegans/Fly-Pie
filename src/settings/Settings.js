@@ -46,7 +46,7 @@ var Settings = class Settings {
 
     // Load the user interface file.
     this._builder = new Gtk.Builder();
-    this._builder.add_from_file(Me.path + '/resources/settings.ui');
+    this._builder.add_from_file(Me.path + '/assets/settings.ui');
 
     // Initialize the Menu Editor page. To structure the source code, this has been put
     // into a separate class.
@@ -418,6 +418,9 @@ var Settings = class Settings {
               const presetName = fileInfo.get_display_name().slice(0, suffixPos);
               this._presetList.set_value(row, 0, presetName);
               this._presetList.set_value(row, 1, file.get_path());
+
+              // Store this in our statistics.
+              Statistics.addPresetSaved();
             }
 
           } catch (error) {
@@ -439,6 +442,9 @@ var Settings = class Settings {
     // Create a random preset when the corresponding button is pressed.
     this._builder.get_object('random-preset-button').connect('clicked', () => {
       Preset.random();
+
+      // Store this in our statistics.
+      Statistics.addRandomPreset();
     });
   }
 
