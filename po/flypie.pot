@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-23 21:18+0100\n"
+"POT-Creation-Date: 2020-12-23 21:25+0100\n"
 "PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -542,6 +542,7 @@ msgstr ""
 msgid "Background Image"
 msgstr ""
 
+#. This: The background image
 #: assets/settings.ui:4549 assets/settings.ui:5766 assets/settings.ui:6562
 msgid "This will be tinted by the Background Color above."
 msgstr ""
