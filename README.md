@@ -29,7 +29,7 @@ Click the player image on the right to watch a trailer on YouTube!
 _:construction: **Under Construction:** Fly-Pie is still under heavy development! Whenever you encounter a :beetle: bug or have :tada: feature request, 
 report this via [Github issues](https://github.com/schneegans/fly-pie/issues)._
 
-The list below provides both, a high-level overview of Fly-Pie's current capabilities as well as a rough idea of planned features. 
+The list below provides both, a high-level overview of Fly-Pie's current capabilities as well as a rough idea of planned features. Check out the [changelog](docs/changelog.md) as well!
 
 - [X] Create as many menus as you want.
 - [X] Bind menus to shortcuts.
