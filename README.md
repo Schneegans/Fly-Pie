@@ -110,7 +110,7 @@ mv Fly-Pie flypie@schneegans.github.com
 You will have to compile the translations if you want to use Fly-Pie in your own language:
 
 ```bash
-flypie@schneegans.github.com/compile-locales.sh
+flypie@schneegans.github.com/scripts/compile-locales.sh
 ```
 
 Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
