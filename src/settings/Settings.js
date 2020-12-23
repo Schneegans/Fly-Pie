@@ -442,6 +442,9 @@ var Settings = class Settings {
     // Create a random preset when the corresponding button is pressed.
     this._builder.get_object('random-preset-button').connect('clicked', () => {
       Preset.random();
+
+      // Store this in our statistics.
+      Statistics.addRandomPreset();
     });
   }
 

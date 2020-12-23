@@ -61,6 +61,7 @@ var Achievements = class Achievements {
     this._connectStatsLabel('stats-presets-saved');
     this._connectStatsLabel('stats-menus-imported');
     this._connectStatsLabel('stats-menus-exported');
+    this._connectStatsLabel('stats-random-presets');
 
     // These are the settings schema keys storing the selection statistics. They contain
     // an array of selection time histograms, one for each selection depth (depth 1, 2, 3,

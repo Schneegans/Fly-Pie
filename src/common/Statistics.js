@@ -83,14 +83,19 @@ var Statistics = class Statistics {
     this._addOneTo('stats-presets-saved');
   }
 
-  // Should be called whenever a preset is saved.
+  // Should be called whenever a menu configuration is imported.
   static addMenuImport() {
     this._addOneTo('stats-menus-imported');
   }
 
-  // Should be called whenever a preset is saved.
+  // Should be called whenever a menu configuration is exported.
   static addMenuExport() {
     this._addOneTo('stats-menus-exported');
+  }
+
+  // Should be called whenever a random preset is generated.
+  static addRandomPreset() {
+    this._addOneTo('stats-random-presets');
   }
 
   // This should be called when the Fly-Pie extension is disabled. It deletes the

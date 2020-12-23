@@ -579,6 +579,12 @@
       <description>The number of times a menu configuration has been exported.</description>
     </key>
 
+    <key name="stats-random-presets" type="u">
+      <default>0</default>
+      <summary>Random Presets</summary>
+      <description>The number of times a random preset has been generated.</description>
+    </key>
+
   </schema>
 </schemalist>
 
