@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-23 21:25+0100\n"
+"POT-Creation-Date: 2020-12-24 09:44+0100\n"
 "PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -816,30 +816,37 @@ msgstr ""
 msgid "Achievements"
 msgstr ""
 
+#. This is a statistics label, shows how many times the user did the action described here.
 #: assets/settings.ui:9141
 msgid "Canceled selections"
 msgstr ""
 
+#. This is a statistics label, shows how many times the user did the action described here.
 #: assets/settings.ui:9182
 msgid "Menus opened over the D-Bus"
 msgstr ""
 
+#. This is a statistics label, shows how many times the user did the action described here.
 #: assets/settings.ui:9223
 msgid "Number of times this settings dialog was opened"
 msgstr ""
 
+#. This is a statistics label, shows how many times the user did the action described here.
 #: assets/settings.ui:9264
 msgid "Saved presets"
 msgstr ""
 
+#. This is a statistics label, shows how many times the user did the action described here.
 #: assets/settings.ui:9305
 msgid "Imported menu configurations"
 msgstr ""
 
+#. This is a statistics label, shows how many times the user did the action described here.
 #: assets/settings.ui:9346
 msgid "Exported menu configurations"
 msgstr ""
 
+#. This is a statistics label, shows how many times the user did the action described here.
 #: assets/settings.ui:9387
 msgid "Generated random presets"
 msgstr ""
