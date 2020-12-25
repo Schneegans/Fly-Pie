@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-18 12:15+0100\n"
-"PO-Revision-Date: 2020-12-03 15:16+0100\n"
+"PO-Revision-Date: 2020-12-025 15:16+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language: it\n"
@@ -219,7 +219,6 @@ msgid "Practice Session I"
 msgstr "Sessione Pratica I"
 
 #: settings/settings.ui:1269
-#, fuzzy
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
 "select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
@@ -237,15 +236,13 @@ msgstr ""
 
 #. ms = milliseconds
 #: settings/settings.ui:1293
-#, fuzzy
 msgid "<big>Last selection time: <b>- ms</b></big>"
-msgstr "<big>Ora dell'ultima selezione:<b>%d ms</b></big>"
+msgstr "<big>Ora dell'ultima selezione:<b>- ms</b></big>"
 
 #. ms = milliseconds
 #: settings/settings.ui:1307
-#, fuzzy
 msgid "<big>Best selection time: <b>- ms</b></big>"
-msgstr "<big>Miglior tempo di selezione: <b>%d ms</b></big>"
+msgstr "<big>Miglior tempo di selezione: <b>- ms</b></big>"
 
 #. The text of the tutorial-reset-button.
 #: settings/settings.ui:1348 settings/settings.ui:1772
@@ -311,7 +308,6 @@ msgid "Practice Session II"
 msgstr "Sessione Pratica II"
 
 #: settings/settings.ui:1693
-#, fuzzy
 msgid ""
 "Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
 "However, as you now learned about the Marking Mode, the time required to get "
@@ -324,7 +320,7 @@ msgstr ""
 "possibile. Tuttavia, come ora hai appreso della modalità Marcatura, il tempo "
 "necessario per ottenere la medaglia d'oro è molto più breve!\n"
 "\n"
-"Quando sei soddisfatto del risultato, fai clic su <b> avanti </b> per "
+"Quando sei soddisfatto del risultato, fai clic su <b>avanti</b> per "
 "apprendere alcuni suggerimenti e trucchi finali!\n"
 
 #. ms = milliseconds
@@ -339,9 +335,8 @@ msgstr "Sbloccato a meno di 500 ms"
 
 #. The user finished the tutorial. Yay!
 #: settings/settings.ui:1993
-#, fuzzy
 msgid "Congratulations!"
-msgstr "🎉️ Congratulazioni! 🎉️"
+msgstr "Congratulazioni!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: settings/settings.ui:2012
@@ -579,7 +574,7 @@ msgstr "Saturazione"
 #: settings/settings.ui:4676 settings/settings.ui:4716
 #: settings/settings.ui:4881 settings/settings.ui:4933
 msgid "Luminance"
-msgstr "Illuminazione"
+msgstr "Luminanza"
 
 #: settings/settings.ui:3807 settings/settings.ui:3851
 #: settings/settings.ui:4074 settings/settings.ui:4118
@@ -921,16 +916,16 @@ msgstr "Menu Editore"
 #. XP: Experience points
 #: settings/settings.ui:8389
 msgid "750 / 5000 XP"
-msgstr ""
+msgstr "750 / 5000 XP"
 
 #: settings/settings.ui:8440
 msgid "Make 500 selection of items at level 5."
-msgstr ""
+msgstr "Effettua 500 selezioni di oggetti al livello 5."
 
 #. XP: Experience points
 #: settings/settings.ui:8457
 msgid "<small>500 XP</small>"
-msgstr ""
+msgstr "<small>500 XP</small>"
 
 #. Caption of the achievements page in the window's titlebar.
 #: settings/settings.ui:8486 settings/settings.ui:8815
@@ -938,21 +933,20 @@ msgid "Achievements"
 msgstr "Premi"
 
 #: settings/settings.ui:8656
-#, fuzzy
 msgid "Canceled selections"
-msgstr "Impostazioni Avanzate"
+msgstr "Selezioni annullate"
 
 #: settings/settings.ui:8697
 msgid "Menus opened over the D-Bus"
-msgstr ""
+msgstr "Menu aperti sul D-Bus"
 
 #: settings/settings.ui:8738
 msgid "Number of times this settings dialog was opened"
-msgstr ""
+msgstr "Numero di volte in cui è stata aperta questa finestra di dialogo delle impostazioni"
 
 #: settings/settings.ui:8773
 msgid "Statistics"
-msgstr ""
+msgstr "Statistiche"
 
 #: daemon/Background.js:90
 msgid "Close"
@@ -966,22 +960,22 @@ msgstr "Cambia Lato"
 #. Translators: This is a label how often a click selection was made.
 #: settings/Achievements.js:61
 msgid "Click Selections"
-msgstr ""
+msgstr "Fare clic su Selezioni"
 
 #. Translators: Do not translate '%i' - it will be replaced by a number.
 #: settings/Achievements.js:63
 msgid "Level-%i Click Selections"
-msgstr ""
+msgstr "Livello-%i Fare clic su Selezioni"
 
 #. Translators: This is a label how often a gesture selection was made.
 #: settings/Achievements.js:75
 msgid "Gesture Selections"
-msgstr ""
+msgstr "Selezioni Gestuali"
 
 #. Translators: Do not translate '%i' - it will be replaced by a number.
 #: settings/Achievements.js:77
 msgid "Level-%i Gesture Selections"
-msgstr ""
+msgstr "Livello-%i Selezioni gestuali"
 
 #: settings/DefaultMenu.js:27 settings/ExampleMenu.js:26
 msgid "Example Menu"
@@ -1626,11 +1620,8 @@ msgstr ""
 "issues\">Github</a>."
 
 #: settings/MenuEditor.js:1097
-#, fuzzy
 msgid "Deep hierarchies are pretty efficient. Put menus into menus in menus!"
-msgstr ""
-"Le gerarchie profonde sono piuttosto efficienti. Metti sottomenu dentro "
-"sottomenu in sottomenu!"
+msgstr "Le gerarchie profonde sono piuttosto efficienti. Metti i menu nei menu nei menu!"
 
 #: settings/MenuEditor.js:1098
 msgid ""
