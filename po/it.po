@@ -229,7 +229,7 @@ msgstr ""
 "Vuoi ottenere la medaglia d'oro?\n"
 "\n"
 "Quando sei soddisfatto del risultato, fai clic su <b>Avanti</b> per "
-"conoscere la modalità di marcatura di Fly-Pie!\n"
+"conoscere la modalità di marcatura di Fly-Pie!"
 
 #. ms = milliseconds
 #: settings/settings.ui:1293
@@ -318,7 +318,7 @@ msgstr ""
 "necessario per ottenere la medaglia d'oro è molto più breve!\n"
 "\n"
 "Quando sei soddisfatto del risultato, fai clic su <b>avanti</b> per "
-"apprendere alcuni suggerimenti e trucchi finali!\n"
+"apprendere alcuni suggerimenti e trucchi finali!"
 
 #. ms = milliseconds
 #: settings/settings.ui:1896
