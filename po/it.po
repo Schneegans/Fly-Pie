@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-18 12:15+0100\n"
-"PO-Revision-Date: 2020-12-03 15:16+0100\n"
+"PO-Revision-Date: 2020-12-26 15:16+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language: it\n"
@@ -38,7 +38,7 @@ msgstr ""
 #. A kind of animation.
 #: settings/settings.ui:233
 msgid "Linear"
-msgstr ""
+msgstr "Lineare"
 
 #. A kind of animation.
 #: settings/settings.ui:237
@@ -175,11 +175,8 @@ msgstr ""
 #: settings/settings.ui:1097 settings/settings.ui:1215
 #: settings/settings.ui:1389 settings/settings.ui:1639
 #: settings/settings.ui:1813
-#, fuzzy
 msgid "<big><b>Open the example menu!</b></big>"
-msgstr ""
-"<big><b>Apri il\n"
-"menu!</b></big>"
+msgstr "<big><b>Apri il menu di esempio!</b></big>"
 
 #. This is a heading.
 #: settings/settings.ui:1133
@@ -204,7 +201,7 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
-"<b> Gli elementi vengono selezionati facendo clic in un punto qualsiasi dei "
+"<b>Gli elementi vengono selezionati facendo clic in un punto qualsiasi dei "
 "rispettivi cunei</b>.\n"
 "\n"
 "Inoltre, non è necessario attendere che l'animazione finisca poiché le "
@@ -219,7 +216,6 @@ msgid "Practice Session I"
 msgstr "Sessione Pratica I"
 
 #: settings/settings.ui:1269
-#, fuzzy
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
 "select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
@@ -233,19 +229,17 @@ msgstr ""
 "Vuoi ottenere la medaglia d'oro?\n"
 "\n"
 "Quando sei soddisfatto del risultato, fai clic su <b>Avanti</b> per "
-"conoscere la modalità di marcatura di Fly-Pie!\n"
+"conoscere la modalità di marcatura di Fly-Pie!"
 
 #. ms = milliseconds
 #: settings/settings.ui:1293
-#, fuzzy
 msgid "<big>Last selection time: <b>- ms</b></big>"
-msgstr "<big>Ora dell'ultima selezione:<b>%d ms</b></big>"
+msgstr "<big>Tempo dell'ultima selezione:<b>- ms</b></big>"
 
 #. ms = milliseconds
 #: settings/settings.ui:1307
-#, fuzzy
 msgid "<big>Best selection time: <b>- ms</b></big>"
-msgstr "<big>Miglior tempo di selezione: <b>%d ms</b></big>"
+msgstr "<big>Miglior tempo di selezione: <b>- ms</b></big>"
 
 #. The text of the tutorial-reset-button.
 #: settings/settings.ui:1348 settings/settings.ui:1772
@@ -311,7 +305,6 @@ msgid "Practice Session II"
 msgstr "Sessione Pratica II"
 
 #: settings/settings.ui:1693
-#, fuzzy
 msgid ""
 "Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
 "However, as you now learned about the Marking Mode, the time required to get "
@@ -324,24 +317,23 @@ msgstr ""
 "possibile. Tuttavia, come ora hai appreso della modalità Marcatura, il tempo "
 "necessario per ottenere la medaglia d'oro è molto più breve!\n"
 "\n"
-"Quando sei soddisfatto del risultato, fai clic su <b> avanti </b> per "
-"apprendere alcuni suggerimenti e trucchi finali!\n"
+"Quando sei soddisfatto del risultato, fai clic su <b>avanti</b> per "
+"apprendere alcuni suggerimenti e trucchi finali!"
 
 #. ms = milliseconds
 #: settings/settings.ui:1896
 msgid "Unlocked at less than 750 ms"
-msgstr "Sbloccato a meno di 750 ms"
+msgstr "Sbloccato in meno di 750 ms"
 
 #. ms = milliseconds
 #: settings/settings.ui:1942
 msgid "Unlocked at less than 500 ms"
-msgstr "Sbloccato a meno di 500 ms"
+msgstr "Sbloccato in meno di 500 ms"
 
 #. The user finished the tutorial. Yay!
 #: settings/settings.ui:1993
-#, fuzzy
 msgid "Congratulations!"
-msgstr "🎉️ Congratulazioni! 🎉️"
+msgstr "Congratulazioni!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: settings/settings.ui:2012
@@ -579,7 +571,7 @@ msgstr "Saturazione"
 #: settings/settings.ui:4676 settings/settings.ui:4716
 #: settings/settings.ui:4881 settings/settings.ui:4933
 msgid "Luminance"
-msgstr "Illuminazione"
+msgstr "Luminanza"
 
 #: settings/settings.ui:3807 settings/settings.ui:3851
 #: settings/settings.ui:4074 settings/settings.ui:4118
@@ -665,12 +657,12 @@ msgstr "Esegui il rendering dei figli sopra l'elemento centrale."
 #. When the mouse pointer is NOT over the item
 #: settings/settings.ui:5453 settings/settings.ui:5953
 msgid "Standard State"
-msgstr "Standard"
+msgstr "Stato Standard"
 
 #. Hovered: When the mouse pointer is over the item
 #: settings/settings.ui:5469
 msgid "Hovered State"
-msgstr "Attivo"
+msgstr "Stato Attivo"
 
 #: settings/settings.ui:5485 settings/settings.ui:5540
 msgid "Children Appearance"
@@ -921,16 +913,16 @@ msgstr "Menu Editore"
 #. XP: Experience points
 #: settings/settings.ui:8389
 msgid "750 / 5000 XP"
-msgstr ""
+msgstr "750 / 5000 XP"
 
 #: settings/settings.ui:8440
 msgid "Make 500 selection of items at level 5."
-msgstr ""
+msgstr "Effettua 500 selezioni di oggetti al livello 5."
 
 #. XP: Experience points
 #: settings/settings.ui:8457
 msgid "<small>500 XP</small>"
-msgstr ""
+msgstr "<small>500 XP</small>"
 
 #. Caption of the achievements page in the window's titlebar.
 #: settings/settings.ui:8486 settings/settings.ui:8815
@@ -938,21 +930,20 @@ msgid "Achievements"
 msgstr "Premi"
 
 #: settings/settings.ui:8656
-#, fuzzy
 msgid "Canceled selections"
-msgstr "Impostazioni Avanzate"
+msgstr "Selezioni annullate"
 
 #: settings/settings.ui:8697
 msgid "Menus opened over the D-Bus"
-msgstr ""
+msgstr "Menu aperti sul D-Bus"
 
 #: settings/settings.ui:8738
 msgid "Number of times this settings dialog was opened"
-msgstr ""
+msgstr "Numero di volte in cui è stata aperta questa finestra di dialogo delle impostazioni"
 
 #: settings/settings.ui:8773
 msgid "Statistics"
-msgstr ""
+msgstr "Statistiche"
 
 #: daemon/Background.js:90
 msgid "Close"
@@ -966,22 +957,22 @@ msgstr "Cambia Lato"
 #. Translators: This is a label how often a click selection was made.
 #: settings/Achievements.js:61
 msgid "Click Selections"
-msgstr ""
+msgstr "Fare clic su Selezioni"
 
 #. Translators: Do not translate '%i' - it will be replaced by a number.
 #: settings/Achievements.js:63
 msgid "Level-%i Click Selections"
-msgstr ""
+msgstr "Livello-%i Fare clic su Selezioni"
 
 #. Translators: This is a label how often a gesture selection was made.
 #: settings/Achievements.js:75
 msgid "Gesture Selections"
-msgstr ""
+msgstr "Selezioni Gestuali"
 
 #. Translators: Do not translate '%i' - it will be replaced by a number.
 #: settings/Achievements.js:77
 msgid "Level-%i Gesture Selections"
-msgstr ""
+msgstr "Livello-%i Selezioni gestuali"
 
 #: settings/DefaultMenu.js:27 settings/ExampleMenu.js:26
 msgid "Example Menu"
@@ -1626,11 +1617,8 @@ msgstr ""
 "issues\">Github</a>."
 
 #: settings/MenuEditor.js:1097
-#, fuzzy
 msgid "Deep hierarchies are pretty efficient. Put menus into menus in menus!"
-msgstr ""
-"Le gerarchie profonde sono piuttosto efficienti. Metti sottomenu dentro "
-"sottomenu in sottomenu!"
+msgstr "Le gerarchie profonde sono piuttosto efficienti. Metti i menu nei menu nei menu!"
 
 #: settings/MenuEditor.js:1098
 msgid ""
@@ -1781,8 +1769,7 @@ msgid ""
 msgstr ""
 "L'azione <b>Attiva collegamento</b> simula una combinazione di tasti quando "
 "attivata. Ad esempio, questo può essere utilizzato per cambiare desktop "
-"virtuali, controllare la riproduzione multimediale o per annullare / "
-"ripetere operazioni."
+"virtuali, controllare la riproduzione multimediale o per annullare / ripetere operazioni."
 
 #: common/actions/Uri.js:25
 msgid "Open URI"
@@ -1837,11 +1824,10 @@ msgid ""
 msgstr ""
 "Un<b>Menu Personalizzato</b> può contenere un numero qualsiasi di azioni e "
 "sottomenu. Tuttavia, per una selezione precisa degli elementi è "
-"raccomandanto un numero massimo di dodici  elementi.\n"
+"raccomandanto un numero massimo di dodici elementi.\n"
 "Quando viene utilizzato come menu di primo livello, può essere aperto con "
 "una combinazione di tasti. È anche possibile aprire un menu con un comando "
-"da terminale. Ulteriori informazioni su <a href=\"https://github.com/"
-"Schneegans/Fly-Pie\">Github</a>."
+"da terminale. Ulteriori informazioni su <a href=\"https://github.com/Schneegans/Fly-Pie\">Github</a>."
 
 #: common/menus/Devices.js:26
 msgid "Devices"
@@ -1928,8 +1914,8 @@ msgid ""
 "about twelve."
 msgstr ""
 "Il menu <b>File recenti</b> mostra un elenco di file utilizzati di recente. "
-"Per selezioni efficienti, dovresti limitare il numero massimo di file "
-"visualizzati a circa dodici."
+"Per selezioni efficienti, dovresti limitare il numero massimo di file visualizzati "
+"a circa dodici."
 
 #: common/menus/RunningApps.js:36
 msgid "Running Apps"
@@ -1948,8 +1934,7 @@ msgid ""
 msgstr ""
 "Il menu <b>App in esecuzione</b> mostra tutte le applicazioni attualmente in "
 "esecuzione. Questo è simile alla selezione della finestra Alt+Tab. Poiché le "
-"voci cambiano spesso posizione frequentemente, in realtà non è molto "
-"efficace."
+"voci cambiano spesso posizione frequentemente, in realtà non è molto efficace."
 
 #. Translators: Please keep this short.
 #: common/menus/System.js:42
