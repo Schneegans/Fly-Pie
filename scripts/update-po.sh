@@ -53,7 +53,7 @@ while getopts l:a FLAG; do
         # Check if a valid language code was passed.
         if test -f po/"$OPTARG".po; then
           echo -n "Updating '$OPTARG.po' "
-          msgmerge -U po/"$OPTARG".po po/flypie.pot
+          msgmerge --previous -U po/"$OPTARG".po po/flypie.pot
 
           # Check if the translation got fuzzy. This happens when an already translated string
           # got changed in the source code. Does not detect untranslated strings!
@@ -71,7 +71,7 @@ while getopts l:a FLAG; do
           # handle the case of no .po files, see SC2045
           [[ -e "$FILE" ]] || { echo "ERROR: No .po files found, exiting."; exit 1; }
           echo -n "Updating '$FILE' "
-          msgmerge -U "$FILE" po/flypie.pot
+          msgmerge --previous -U "$FILE" po/flypie.pot
 
           # Check if the translation got fuzzy. This happens when an already translated string
           # got changed in the source code. Does not detect untranslated strings!

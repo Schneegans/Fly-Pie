@@ -9138,7 +9138,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="margin_top">8</property>
                                     <property name="margin_bottom">8</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Canceled selections</property>
+                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Canceled selections</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -9179,7 +9179,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="margin_top">8</property>
                                     <property name="margin_bottom">8</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Menus opened over the D-Bus</property>
+                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Menus opened over the D-Bus</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -9220,7 +9220,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="margin_top">8</property>
                                     <property name="margin_bottom">8</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Number of times this settings dialog was opened</property>
+                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Number of times this settings dialog was opened</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -9261,7 +9261,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="margin_top">8</property>
                                     <property name="margin_bottom">8</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Saved presets</property>
+                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Saved presets</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -9302,7 +9302,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="margin_top">8</property>
                                     <property name="margin_bottom">8</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Imported menu configurations</property>
+                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Imported menu configurations</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -9343,7 +9343,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="margin_top">8</property>
                                     <property name="margin_bottom">8</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Exported menu configurations</property>
+                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Exported menu configurations</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -9384,7 +9384,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="margin_top">8</property>
                                     <property name="margin_bottom">8</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Generated random presets</property>
+                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Generated random presets</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
