@@ -454,6 +454,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                         <property name="column_spacing">0</property>
                         <property name="tooltip_column">0</property>
                         <property name="item_padding">3</property>
+                        <property name="activate_on_single_click">True</property>
                         <child>
                           <object class="GtkCellRendererPixbuf">
                             <property name="stock_size">5</property>
