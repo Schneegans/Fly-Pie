@@ -831,11 +831,11 @@ var MenuEditor = class MenuEditor {
           this._builder.get_object('item-file').text = widget.get_filename();
         });
 
-    // Initialize the application-select-popover. When an application is activated, the
-    // popover is hidden, when an application is selected, the item's name, icon and
-    // command input fields are updated accordingly.
+    // Initialize the application-select-popover. On mouse-up the popover is hidden,
+    // whenever an application is selected, the item's name, icon and command input fields
+    // are updated accordingly.
     this._builder.get_object('application-popover-list')
-        .connect('application-activated', () => {
+        .connect('button-release-event', () => {
           this._builder.get_object('item-application-popover').popdown();
         });
 
