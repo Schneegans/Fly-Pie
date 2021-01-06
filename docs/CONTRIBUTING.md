@@ -2,6 +2,21 @@
 
 Thank you for contributing your idea to Fly-Pie! Here are some guidelines to help you comply with the workflow used in this project.
 
+Whenever you encounter a :beetle: **bug** or have a :tada: **feature request**, 
+report this via [Github issues](https://github.com/schneegans/fly-pie/issues).
+
+We are happy to receive contributions to Fly-Pie in the form of **pull requests** via Github.
+Feel free to fork the repository, implement your changes and create a merge request to the `develop` branch.
+
+## Debugging
+
+Developing a Gnome Shell extension is not easy, as debugging possibilities are quite limited. One thing you should always do is to monitor Gnome Shells output for error or debug messages produced by Fly-Pie. This can be done with the command below. This may print many unrelated messages, but using `grep` like this highlights all occurrences of `flypie` which makes spotting Fly-Pie-related messages much easier.
+
+```bash
+journalctl -f -o cat | grep -E 'flypie|'
+```
+
+
 ## Branching Guidelines
 
 The development of Fly-Pie follows a simplified version of **git-flow**:
@@ -35,3 +50,12 @@ Emoji | Description
 :twisted_rightwards_arrows: `:twisted_rightwards_arrows:` | When you merged a branch.
 :fire: `:fire:` | When you removed something.
 :truck: `:truck:` | When you moved / renamed something.
+
+<p align="center"><img src ="pics/hr.svg" /></p>
+<p align="center">
+  <a href="dbus-interface.md">&#11013; The D-Bus interface</a>
+  <img src="pics/nav-space.svg"/>
+  <a href="../README.md">&#127968; Index</a>
+  <img src="pics/nav-space.svg"/>
+  <a href="translating.md">Translating Fly-Pie &#10145;</a>
+</p>
