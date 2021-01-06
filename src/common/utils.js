@@ -64,13 +64,14 @@ function logProperties(object) {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// This draws a square-shaped icon to the given Cairo.Context of the given size.        //
-// The name can either be an icon name from the current icon theme or a path to         //
-// an image file. If neither is found, the given name is written to the image - This is //
-// very useful for emojis like 😆 or 🌟!                                                 //
+// This draws a square-shaped icon to the given Cairo.Context of the given size. The    //
+// name can either be an icon name from the current icon theme or a path to an image    //
+// file. If neither is found, the given name is written to the image. The given font    //
+// (like 'Sans') and textColor (an object with properties 'red', 'green' and 'blue' in  //
+// the range 0..1) are used in this case. This is very useful for emojis like 😆 or 🌟!   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function paintIcon(ctx, name, size, opacity) {
+function paintIcon(ctx, name, size, opacity, font, textColor) {
 
   // First try to find the icon in the theme. This will also load images from disc if the
   // icon name is actually a file path.
@@ -91,7 +92,7 @@ function paintIcon(ctx, name, size, opacity) {
 
   // If no icon was found, write it as plain text.
   const layout = PangoCairo.create_layout(ctx);
-  layout.set_font_description(Pango.FontDescription.from_string('Sans 12'));
+  layout.set_font_description(Pango.FontDescription.from_string(font));
   layout.set_alignment(Pango.Alignment.CENTER);
   layout.set_wrap(Pango.WrapMode.CHAR);
   layout.set_text(name, -1);
@@ -112,7 +113,7 @@ function paintIcon(ctx, name, size, opacity) {
   const maxExtent = Math.max(extents.width, extents.height);
   const scale     = Math.min(100, size / maxExtent);
 
-  ctx.setSourceRGBA(0, 0, 0, opacity);
+  ctx.setSourceRGBA(textColor.red, textColor.green, textColor.blue, opacity);
   ctx.scale(scale, scale);
   ctx.translate(-extents.x, -extents.y);
   ctx.translate((maxExtent - extents.width) / 2, (maxExtent - extents.height) / 2);
@@ -129,14 +130,16 @@ function paintIcon(ctx, name, size, opacity) {
 //////////////////////////////////////////////////////////////////////////////////////////
 // This creates a new square-shaped Cairo.ImageSurface of the given size and draws an   //
 // icon to it. The name can either be an icon name from the current icon theme or a     //
-// path to an image file. If neither is found, the given name is written to the image - //
-// This is very useful for emojis like 😆 or 🌟!                                         //
+// path to an image file. If neither is found, the given name is written to the image.  //
+// The given font (like 'Sans') and textColor (an object with properties 'red', 'green' //
+// and 'blue' in the range 0..1) are used in this case. This is very useful for emojis  //
+// like 😆 or 🌟!                                                                         //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function createIcon(name, size) {
+function createIcon(name, size, font, textColor) {
   const surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, size, size);
   const ctx     = new Cairo.Context(surface);
-  paintIcon(ctx, name, size, 1);
+  paintIcon(ctx, name, size, 1, font, textColor);
 
   // Explicitly tell Cairo to free the context memory. Is this really necessary?
   // https://wiki.gnome.org/Projects/GnomeShell/Extensions/TipsOnMemoryManagement#Cairo

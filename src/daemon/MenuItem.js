@@ -502,7 +502,11 @@ class MenuItem extends Clutter.Actor {
       if (this._averageIconColor == undefined) {
 
         // We store the average color as a property of this.
-        const surface          = utils.createIcon(this.icon, 24);
+        const surface          = utils.createIcon(this.icon, 24, MenuItemSettings.font, {
+          red: MenuItemSettings.textColor.red / 255,
+          green: MenuItemSettings.textColor.green / 255,
+          blue: MenuItemSettings.textColor.blue / 255
+        });
         const [r, g, b]        = utils.getAverageIconColor(surface, 24);
         this._averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
       }
@@ -842,7 +846,11 @@ class MenuItem extends Clutter.Actor {
         ctx.clip();
 
         ctx.translate((backgroundSize - iconSize) / 2, (backgroundSize - iconSize) / 2);
-        utils.paintIcon(ctx, iconName, iconSize, iconOpacity);
+        utils.paintIcon(ctx, iconName, iconSize, iconOpacity, MenuItemSettings.font, {
+          red: MenuItemSettings.textColor.red / 255,
+          green: MenuItemSettings.textColor.green / 255,
+          blue: MenuItemSettings.textColor.blue / 255
+        });
       }
 
       // Explicitly tell Cairo to free the context memory. Is this really necessary?
