@@ -10,8 +10,8 @@
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const Enums = Me.imports.src.common.Enums;
+const Me           = imports.misc.extensionUtils.getCurrentExtension();
+const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 // We import Shell optionally. When this file is included from the daemon side, it is
 // available and can be used in the activation code of the action defined below. If this
@@ -39,8 +39,8 @@ var menu = {
   subtitle: _('Shows the currently running applications.'),
   description: _(
       'The <b>Running Apps</b> menu shows all currently running applications. This is similar to the Alt+Tab window selection. As the entries change position frequently, this is actually not very effective.'),
-  itemClass: Enums.ItemClass.MENU,
-  dataType: Enums.ItemDataType.NONE,
+  itemClass: ItemRegistry.ItemClass.MENU,
+  dataType: ItemRegistry.ItemDataType.NONE,
   defaultData: '',
   createItem: () => {
     const apps   = Shell.AppSystem.get_default().get_running();

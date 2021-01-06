@@ -10,8 +10,8 @@
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const Enums = Me.imports.src.common.Enums;
+const Me           = imports.misc.extensionUtils.getCurrentExtension();
+const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The D-Bus signal action does nothing. It is actually something like a dummy action.  //
@@ -25,8 +25,8 @@ var action = {
   subtitle: _('Emits a D-Bus signal.'),
   description: _(
       'The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="https://github.com/Schneegans/Fly-Pie#fly-pies-d-bus-interface">can listen on the D-Bus for its activation</a>. This can be very useful in custom menus opened via the command line.'),
-  itemClass: Enums.ItemClass.ACTION,
-  dataType: Enums.ItemDataType.ID,
+  itemClass: ItemRegistry.ItemClass.ACTION,
+  dataType: ItemRegistry.ItemDataType.ID,
   defaultData: '',
   createItem: (data) => {
     return {id: data, activate: () => {}};

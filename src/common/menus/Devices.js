@@ -12,9 +12,9 @@ const Gio = imports.gi.Gio;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
-const Enums = Me.imports.src.common.Enums;
+const Me           = imports.misc.extensionUtils.getCurrentExtension();
+const utils        = Me.imports.src.common.utils;
+const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The devices menu contains an item for each mounted volume as reported by the         //
@@ -29,8 +29,8 @@ var menu = {
   subtitle: _('Shows connected devices.'),
   description: _(
       'The <b>Devices</b> menu shows an item for each mounted volume, like USB sticks.'),
-  itemClass: Enums.ItemClass.MENU,
-  dataType: Enums.ItemDataType.NONE,
+  itemClass: ItemRegistry.ItemClass.MENU,
+  dataType: ItemRegistry.ItemDataType.NONE,
   defaultData: '',
   createItem: () => {
     const result  = {children: []};

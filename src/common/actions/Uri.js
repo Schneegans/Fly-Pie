@@ -12,9 +12,9 @@ const Gio = imports.gi.Gio;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
-const Enums = Me.imports.src.common.Enums;
+const Me           = imports.misc.extensionUtils.getCurrentExtension();
+const utils        = Me.imports.src.common.utils;
+const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Uri action opens the defined URI with the system's default application.          //
@@ -28,8 +28,8 @@ var action = {
   subtitle: _('Opens an URI with the default application.'),
   description: _(
       'When the <b>Open URI</b> action is activated, the above URI is opened with the default application. For http URLs, this will be your web browser. However, it is also possible to open other URIs such as "mailto:foo@bar.org".'),
-  itemClass: Enums.ItemClass.ACTION,
-  dataType: Enums.ItemDataType.URL,
+  itemClass: ItemRegistry.ItemClass.ACTION,
+  dataType: ItemRegistry.ItemDataType.URL,
   defaultData: '',
   createItem: (data) => {
     return {

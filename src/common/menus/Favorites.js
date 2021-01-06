@@ -10,8 +10,8 @@
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const Enums = Me.imports.src.common.Enums;
+const Me           = imports.misc.extensionUtils.getCurrentExtension();
+const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 // We import Shell optionally. When this file is included from the daemon side, it is
 // available and can be used in the activation code of the action defined below. If this
@@ -39,8 +39,8 @@ var menu = {
   subtitle: _('Shows pinned applications.'),
   description: _(
       'The <b>Favorites</b> menu shows the applications you have pinned to Gnome Shell\'s Dash.'),
-  itemClass: Enums.ItemClass.MENU,
-  dataType: Enums.ItemDataType.NONE,
+  itemClass: ItemRegistry.ItemClass.MENU,
+  dataType: ItemRegistry.ItemDataType.NONE,
   defaultData: '',
   createItem: () => {
     const appNames = global.settings.get_strv('favorite-apps');

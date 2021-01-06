@@ -10,8 +10,8 @@
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const Enums = Me.imports.src.common.Enums;
+const Me           = imports.misc.extensionUtils.getCurrentExtension();
+const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 // We import Shell optionally. When this file is included from the daemon side, it is
 // available and can be used in the activation code of the action defined below. If this
@@ -39,8 +39,8 @@ var menu = {
   subtitle: _('Shows your frequently used applications.'),
   description: _(
       'The <b>Frequently Used</b> menu shows a list of frequently used applications. For efficient selections, you should limit the maximum number of shown applications to about twelve.'),
-  itemClass: Enums.ItemClass.MENU,
-  dataType: Enums.ItemDataType.COUNT,
+  itemClass: ItemRegistry.ItemClass.MENU,
+  dataType: ItemRegistry.ItemDataType.COUNT,
   defaultData: '7',
   createItem: (data) => {
     const maxNum = parseInt(data);

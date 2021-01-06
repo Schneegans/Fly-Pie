@@ -10,8 +10,8 @@
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const Enums = Me.imports.src.common.Enums;
+const Me           = imports.misc.extensionUtils.getCurrentExtension();
+const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 // We import Shell and SystemActions optionally. When this file is included from the
 // daemon side, they are available and can be used in the activation code of the action
@@ -42,8 +42,8 @@ var menu = {
   subtitle: _('Allows screen lock, shutdown and other things.'),
   description: _(
       'The <b>System</b> menu shows an items for screen-lock, shutdown, settings, etc.'),
-  itemClass: Enums.ItemClass.MENU,
-  dataType: Enums.ItemDataType.NONE,
+  itemClass: ItemRegistry.ItemClass.MENU,
+  dataType: ItemRegistry.ItemDataType.NONE,
   defaultData: '',
   createItem: () => {
     const result = {children: []};

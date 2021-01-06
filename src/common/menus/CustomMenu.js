@@ -10,8 +10,8 @@
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const Enums = Me.imports.src.common.Enums;
+const Me           = imports.misc.extensionUtils.getCurrentExtension();
+const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // A menu cannot be activated. It should always contain some children.                  //
@@ -25,8 +25,8 @@ var menu = {
   subtitle: _('This can contain actions and other menus.'),
   description: _(
       'A <b>Custom Menu</b> can contain any number of actions and submenus. However, for precise item selection, a maximum number of twelve items is recommended.\nWhen used as top-level menu, it can be opened with a key combination. It is also possible to open a menu with a terminal command. You can read more on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.'),
-  itemClass: Enums.ItemClass.MENU,
-  dataType: Enums.ItemDataType.NONE,
+  itemClass: ItemRegistry.ItemClass.MENU,
+  dataType: ItemRegistry.ItemDataType.NONE,
   defaultData: '',
   createItem: (centered) => {
     return {centered: centered, children: []};

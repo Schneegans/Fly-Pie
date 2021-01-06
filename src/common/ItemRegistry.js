@@ -11,7 +11,6 @@
 const Me      = imports.misc.extensionUtils.getCurrentExtension();
 const actions = Me.imports.src.common.actions;
 const menus   = Me.imports.src.common.menus;
-const Enums   = Me.imports.src.common.Enums;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -26,6 +25,35 @@ try {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// Menus of Fly-Pie are composed of individual menu items. A menu item can either be an //
+// Action - such an item performs something once activated - or a Menu. Menus do not    //
+// perform anything but may contain a list of child items.                              //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+var ItemClass = {MENU: 0, ACTION: 1};
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Each menu item type has a data type - this determines which widgets are visible      //
+// when an item of this type is selected in the settings dialog. If you create a new    //
+// item type, this list may have to be extended. This will also require some changes to //
+// the MenuEditor.js as this is responsible for showing and hiding the widgets          //
+// accordingly.                                                                         //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+var ItemDataType = {
+  NONE: 0,
+  MENU: 1,
+  SUBMENU: 2,
+  SHORTCUT: 3,
+  COMMAND: 4,
+  FILE: 5,
+  URL: 6,
+  COUNT: 7,
+  TEXT: 8,
+  ID: 9,
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////
 // The getItemTypes() of the ItemRegistry can be used to access all available action    //
 // and menu types. Each item type should have eight properties:                         //
 //   name:         This will be shown in the add-new-item popover. It is also the       //
@@ -38,12 +66,12 @@ try {
 //                 This should be translatable.                                         //
 //   description:  This will be shown in the right hand side settings when an item of   //
 //                 this type is selected. This should be translatable.                  //
-//   itemClass:    This should be either Enums.ItemClass.ACTION or Enums.ItemClass.MENU //
+//   itemClass:    This should be either ItemClass.ACTION or ItemClass.MENU.            //
 //                 The former is used for single items with an active() method, the     //
 //                 latter for menus which are composed of multiple actions.             //
 //   dataType:     This determines which widgets are visible when an item of this type  //
 //                 is selected in the settings dialog. Possible values are listed in    //
-//                 Enums.ItemDataType.                                                  //
+//                 ItemDataType.                                                        //
 //   defaultData:  This will be the default value for the data parameter for newly      //
 //                 created items.                                                       //
 //   createItem:   A function which will be called whenever a menu is opened containing //
@@ -135,8 +163,7 @@ var ItemRegistry = class ItemRegistry {
     }
 
     // It's an error if a top-level element is not of the menu class.
-    if (isToplevel &&
-        this.getItemTypes()[config.type].itemClass != Enums.ItemClass.MENU) {
+    if (isToplevel && this.getItemTypes()[config.type].itemClass != ItemClass.MENU) {
       throw 'Top-level items must be menu types!';
     }
 

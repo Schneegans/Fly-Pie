@@ -12,9 +12,9 @@ const {Gio, Gtk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
-const Enums = Me.imports.src.common.Enums;
+const Me           = imports.misc.extensionUtils.getCurrentExtension();
+const utils        = Me.imports.src.common.utils;
+const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Returns an item with entries for each recently used file, as reported by             //
@@ -29,8 +29,8 @@ var menu = {
   subtitle: _('Shows your recently used files.'),
   description: _(
       'The <b>Recent Files</b> menu shows a list of recently used files. For efficient selections, you should limit the maximum number of shown files to about twelve.'),
-  itemClass: Enums.ItemClass.MENU,
-  dataType: Enums.ItemDataType.COUNT,
+  itemClass: ItemRegistry.ItemClass.MENU,
+  dataType: ItemRegistry.ItemDataType.COUNT,
   defaultData: '7',
   createItem: (data) => {
     const maxNum      = parseInt(data);

@@ -16,7 +16,8 @@ const utils         = Me.imports.src.common.utils;
 const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
 const Statistics    = Me.imports.src.common.Statistics.Statistics;
 const ItemRegistry  = Me.imports.src.common.ItemRegistry.ItemRegistry;
-const Enums         = Me.imports.src.common.Enums;
+const ItemClass     = Me.imports.src.common.ItemRegistry.ItemClass;
+const ItemDataType  = Me.imports.src.common.ItemRegistry.ItemDataType;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -85,7 +86,7 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
     const type           = this.get_value(srcIter, this.columns.TYPE);
     const itemClass      = ItemRegistry.getItemTypes()[type].itemClass;
 
-    if (destPath.get_depth() == 1 && itemClass == Enums.ItemClass.MENU) {
+    if (destPath.get_depth() == 1 && itemClass == ItemClass.MENU) {
       return true;
     }
 
@@ -161,7 +162,7 @@ var MenuEditor = class MenuEditor {
       row.set_name(type);
 
       // Add the new row either to the menus list or to the actions list.
-      if (ItemRegistry.getItemTypes()[type].itemClass == Enums.ItemClass.ACTION) {
+      if (ItemRegistry.getItemTypes()[type].itemClass == ItemClass.ACTION) {
         this._builder.get_object('action-types-list').insert(row, -1);
       } else {
         this._builder.get_object('menu-types-list').insert(row, -1);
@@ -928,31 +929,31 @@ var MenuEditor = class MenuEditor {
           this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
         }
 
-        if (selectedDataType == Enums.ItemDataType.SHORTCUT) {
+        if (selectedDataType == ItemDataType.SHORTCUT) {
           this._itemShortcutLabel.set_accelerator(this._getSelected('DATA'));
           revealers['item-settings-item-shortcut-revealer'] = true;
 
-        } else if (selectedDataType == Enums.ItemDataType.URL) {
+        } else if (selectedDataType == ItemDataType.URL) {
           this._builder.get_object('item-uri').text = this._getSelected('DATA');
           revealers['item-settings-uri-revealer']   = true;
 
-        } else if (selectedDataType == Enums.ItemDataType.ID) {
+        } else if (selectedDataType == ItemDataType.ID) {
           this._builder.get_object('item-id').text = this._getSelected('DATA');
           revealers['item-settings-id-revealer']   = true;
 
-        } else if (selectedDataType == Enums.ItemDataType.FILE) {
+        } else if (selectedDataType == ItemDataType.FILE) {
           this._builder.get_object('item-file').text = this._getSelected('DATA');
           revealers['item-settings-file-revealer']   = true;
 
-        } else if (selectedDataType == Enums.ItemDataType.COMMAND) {
+        } else if (selectedDataType == ItemDataType.COMMAND) {
           this._builder.get_object('item-command').text = this._getSelected('DATA');
           revealers['item-settings-command-revealer']   = true;
 
-        } else if (selectedDataType == Enums.ItemDataType.COUNT) {
+        } else if (selectedDataType == ItemDataType.COUNT) {
           this._builder.get_object('item-count').value = this._getSelected('DATA');
           revealers['item-settings-count-revealer']    = true;
 
-        } else if (selectedDataType == Enums.ItemDataType.TEXT) {
+        } else if (selectedDataType == ItemDataType.TEXT) {
           this._builder.get_object('item-text').text = this._getSelected('DATA');
           revealers['item-settings-text-revealer']   = true;
         }
@@ -1154,7 +1155,7 @@ var MenuEditor = class MenuEditor {
 
     if (ok) {
       if (this._isToplevelSelected() &&
-          ItemRegistry.getItemTypes()[newType].itemClass == Enums.ItemClass.ACTION) {
+          ItemRegistry.getItemTypes()[newType].itemClass == ItemClass.ACTION) {
         iter = this._store.append(selected);
       } else {
         iter = this._store.insert_after(null, selected);

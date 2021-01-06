@@ -12,8 +12,8 @@ const {Gdk, Gtk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const Enums = Me.imports.src.common.Enums;
+const Me           = imports.misc.extensionUtils.getCurrentExtension();
+const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 // We import the InputManipulator optionally. When this file is included from the daemon
 // side, it is available and can be used in the activation code of the action defined
@@ -40,8 +40,8 @@ var action = {
   subtitle: _('Types some text automatically.'),
   description: _(
       'The <b>Insert Text</b> action copies the given text to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things.'),
-  itemClass: Enums.ItemClass.ACTION,
-  dataType: Enums.ItemDataType.TEXT,
+  itemClass: ItemRegistry.ItemClass.ACTION,
+  dataType: ItemRegistry.ItemDataType.TEXT,
   defaultData: '',
   createItem: (data) => {
     return {
