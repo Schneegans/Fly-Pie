@@ -98,7 +98,7 @@ The table below lists all possible item types. Some of the types require that th
 ### Return Value
 
 The `ShowMenu` methods will return an integer.
-This will be either negative (Fly-Pie failed to parse the provided description, see [DBusInterface.js](common/DBusInterface.js) for a list of error codes) or a positive menu ID which will be passed to the signals of the interface.
+This will be either negative (Fly-Pie failed to parse the provided description, see [DBusInterface.js](../src/common/DBusInterface.js) for a list of error codes) or a positive menu ID which will be passed to the signals of the interface.
 
 If an error occurred, there is a good chance that Fly-Pie logged an error message. To see them use this command in another terminal:
 
