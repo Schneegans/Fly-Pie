@@ -17,10 +17,10 @@ const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
 const InputManipulator = Me.imports.src.common.InputManipulator.InputManipulator;
 const Statistics       = Me.imports.src.common.Statistics.Statistics;
 const Timer            = Me.imports.src.common.Timer.Timer;
-const Background       = Me.imports.src.daemon.Background.Background;
-const MenuItem         = Me.imports.src.daemon.MenuItem.MenuItem;
-const SelectionWedges  = Me.imports.src.daemon.SelectionWedges.SelectionWedges;
-const MenuItemState    = Me.imports.src.daemon.MenuItem.MenuItemState;
+const Background       = Me.imports.src.extension.Background.Background;
+const MenuItem         = Me.imports.src.extension.MenuItem.MenuItem;
+const SelectionWedges  = Me.imports.src.extension.SelectionWedges.SelectionWedges;
+const MenuItemState    = Me.imports.src.extension.MenuItem.MenuItemState;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Menu parses the JSON structure given to the ShowMenu method. It creates          //

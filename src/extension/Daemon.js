@@ -11,15 +11,15 @@
 const {Gio, GLib} = imports.gi;
 
 const Me             = imports.misc.extensionUtils.getCurrentExtension();
-const Menu           = Me.imports.src.daemon.Menu.Menu;
-const Shortcuts      = Me.imports.src.daemon.Shortcuts.Shortcuts;
+const Menu           = Me.imports.src.extension.Menu.Menu;
+const Shortcuts      = Me.imports.src.extension.Shortcuts.Shortcuts;
 const DBusInterface  = Me.imports.src.common.DBusInterface.DBusInterface;
 const utils          = Me.imports.src.common.utils;
 const ItemRegistry   = Me.imports.src.common.ItemRegistry.ItemRegistry;
 const Statistics     = Me.imports.src.common.Statistics.Statistics;
 const DefaultMenu    = Me.imports.src.settings.DefaultMenu.DefaultMenu;
-const MouseHighlight = Me.imports.src.daemon.MouseHighlight.MouseHighlight;
-const Achievements   = Me.imports.src.daemon.Achievements.Achievements;
+const MouseHighlight = Me.imports.src.extension.MouseHighlight.MouseHighlight;
+const Achievements   = Me.imports.src.extension.Achievements.Achievements;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
