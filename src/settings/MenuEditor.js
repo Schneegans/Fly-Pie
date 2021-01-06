@@ -1089,6 +1089,15 @@ var MenuEditor = class MenuEditor {
       return false;
     });
 
+    // Clicking with the mouse cancels the shortcut selection.
+    row.connect('button-press-event', () => {
+      if (row.has_grab()) {
+        label.set_accelerator(this._getSelected(dataColumn));
+        cancelGrab();
+      }
+      return true;
+    });
+
     // Return the label - this wouldn't be necessary if we could create the
     // Gtk.ShortcutLabel directly in Glade.
     return label;
