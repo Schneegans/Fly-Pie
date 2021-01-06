@@ -90,9 +90,17 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
     debug('Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');
   }
 
-  // If no icon was found, write it as plain text.
+  // If no icon was found, write it as plain text. We use a hard-coded font size of 12
+  // here. This doesn't really matter as the text of the icon is scaled so that it covers
+  // the entire icon anyways. So in theory any number should result in the same icon.
+  // However, for some reason there are slight offsets in the text position with different
+  // font sizes. With a font size of 12, emojis are centered quite well. With 11, they are
+  // slightly shifted towards the right, for example.
+  const fontDescription = Pango.FontDescription.from_string(font);
+  fontDescription.set_size(Pango.units_from_double(12));
+
   const layout = PangoCairo.create_layout(ctx);
-  layout.set_font_description(Pango.FontDescription.from_string(font));
+  layout.set_font_description(fontDescription);
   layout.set_alignment(Pango.Alignment.CENTER);
   layout.set_wrap(Pango.WrapMode.CHAR);
   layout.set_text(name, -1);
