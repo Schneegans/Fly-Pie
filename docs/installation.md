@@ -1,10 +1,13 @@
 # Installation
 
-You can either install Fly-Pie from extensions.gnome.org (a), download a stable release from GitHub (b) or clone the latest version directly with `git` (c).
+You can either install Fly-Pie from extensions.gnome.org (a), download a stable release
+from GitHub (b) or clone the latest version directly with `git` (c).
 
 ## a) Installing from extensions.gnome.org
 
-This is the most easy way to install Fly-Pie. Just head over to [extensions.gnome.org](https://extensions.gnome.org/extension/3433/fly-pie) and flip the switch! If you want to use a more up-to-date version of Fly-Pie, you can try one of the methods listed below.
+This is the most easy way to install Fly-Pie. Just head over to
+[extensions.gnome.org](https://extensions.gnome.org/extension/3433/fly-pie) and flip the switch!
+If you want to use a more up-to-date version of Fly-Pie, you can try one of the methods listed below.
 
 ## b) Downloading a Stable Release
 
@@ -28,7 +31,6 @@ Then you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* 
 ```bash
 gnome-extensions enable flypie@schneegans.github.com
 ```
-
 
 ## c) Cloning the Latest Version with `git`
 

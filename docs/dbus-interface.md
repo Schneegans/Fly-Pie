@@ -1,6 +1,7 @@
 # Fly-Pie's D-Bus Interface
 
-Fly-Pie has a D-Bus interface which allows not only to open configured menus via the command line, but also to open completely custom-made menus defined with a JSON string.
+Fly-Pie has a D-Bus interface which allows not only to open configured menus via the command line,
+but also to open completely custom-made menus defined with a JSON string.
 
 To see all available methods and signals you can introspect the interface:
 
@@ -30,7 +31,8 @@ gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/exten
 
 You can pass a JSON menu configuration to the `ShowCustomMenu` to show a custom menu.
 Here is an example showing a menu with two elements.
-Selecting them will change your workspace up or down (by simulating a <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Up</kbd> or a <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Down</kbd> respectively).
+Selecting them will change your workspace up or down (by simulating a <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Up</kbd>
+or a <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Down</kbd> respectively).
 Further below you will find a complete description of this JSON menu configuration format.
 
 ```bash
@@ -56,9 +58,11 @@ gdbus call --session --dest org.gnome.Shell                 \
   }'
 ```
 
-### The Menu Configuration Format 
+### The Menu Configuration Format
 
-**:information_source: _Pro-Tip:_** _You can export your menu configuration from the menu editor of Fly-Pie's settings dialog. The exported JSON file contains an array of menu configurations which follow the specification below. This way you can use the menu editor to design a menu which you want to open dynamically over the D-Bus!_
+**:information_source: _Pro-Tip:_** _You can export your menu configuration from the menu editor of Fly-Pie's settings dialog.
+The exported JSON file contains an array of menu configurations which follow the specification below.
+This way you can use the menu editor to design a menu which you want to open dynamically over the D-Bus!_
 
 Each item in the menu hierarchy can have the following properties.
 All of them are optional, the default values are noted in the description,
@@ -98,7 +102,8 @@ The table below lists all possible item types. Some of the types require that th
 ### Return Value
 
 The `ShowMenu` methods will return an integer.
-This will be either negative (Fly-Pie failed to parse the provided description, see [DBusInterface.js](../src/common/DBusInterface.js) for a list of error codes) or a positive menu ID which will be passed to the signals of the interface.
+This will be either negative (Fly-Pie failed to parse the provided description, see [DBusInterface.js](../src/common/DBusInterface.js)
+for a list of error codes) or a positive menu ID which will be passed to the signals of the interface.
 
 If an error occurred, there is a good chance that Fly-Pie logged an error message. To see them use this command in another terminal:
 
@@ -108,17 +113,22 @@ journalctl -f -o cat | grep -E 'flypie|'
 
 ### The `"DBusSignal"` Action
 
-If you want to make menu items perform actions which are not available in Fly-Pie, you can use the `"DBusSignal"` item type and wait for their selection on the D-Bus.
+If you want to make menu items perform actions which are not available in Fly-Pie,
+you can use the `"DBusSignal"` item type and wait for their selection on the D-Bus.
 
-There are two signals; `OnCancel` will be fired when the user aborts the selection in a menu, `OnSelect` is activated when the user makes a selection.
-Both signals send the _menu ID_ which has been reported by the corresponding `ShowMenu` call, in addition, `OnSelect` sends the _item ID_ of the selected item.
+There are two signals; `OnCancel` will be fired when the user aborts the selection in a menu,
+`OnSelect` is activated when the user makes a selection.
+Both signals send the _menu ID_ which has been reported by the corresponding `ShowMenu` call,
+in addition, `OnSelect` sends the _item ID_ of the selected item.
 
 The _item ID_ will usually be a path in the form of `"/1/0"`.
 This example would mean that the first child of the second child of the root menu was selected (indices are zero-based).
 In the simple menu example below, selecting `Apatosaurus` will yield `"/1/0"`.
-If you assigned a `data` property to some of your `"type": "DBusSignal"` items, this will be returned instead of the path (like the `cat!!` in the example below).
+If you assigned a `data` property to some of your `"type": "DBusSignal"` items,
+this will be returned instead of the path (like the `cat!!` in the example below).
 
-**:information_source: _Hint:_** _Note that no `"type"` is given in the example because `"CustomMenu"` is the default value if an item contains children and `"DBusSignal"` is the default value for leaf items._
+**:information_source: _Hint:_** _Note that no `"type"` is given in the example because
+`"CustomMenu"` is the default value if an item contains children and `"DBusSignal"` is the default value for leaf items._
 
 ```bash
 gdbus call --session --dest org.gnome.Shell                 \

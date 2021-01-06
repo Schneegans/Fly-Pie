@@ -13,7 +13,8 @@ A great way to contribute to Fly-Pie is creating a translation to another langua
 Otherwise, it pulls the latest strings and merges them into the existing translation file.
 Translations of Fly-Pie are stored in the `po/` directory.
 
-* Open the file and start translating! We suggest using a tool like [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
+* Open the file and start translating! We suggest using a tool like
+[Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
 
 * Once you are happy to test your translation, save it as `<LANG-CODE>.po` file
 in the `/po` directory and install the extension with your updated translations:
@@ -31,7 +32,8 @@ and submit a pull request to the `develop` branch!
 
 **To get started, have a look at the [Pull Request Template](.github/PULL_REQUEST_TEMPLATE/add_or_update_translation.md)**.
 It provides a guideline on what to do in order to get your Pull Request accepted.
-When creating your pull request, you can simply append a `&template=add_or_update_translation.md` to the URL to auto-populate the body of your pull request with the template.
+When creating your pull request, you can simply append a `&template=add_or_update_translation.md`
+to the URL to auto-populate the body of your pull request with the template.
 
 Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for the some further contribution guidelines.
 
