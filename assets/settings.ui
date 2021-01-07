@@ -2,6 +2,7 @@
 <!-- Generated with glade 3.22.2 -->
 <interface domain="flypie">
   <requires lib="gtk+" version="3.20"/>
+  <!-- interface-css-provider-path flypie.css -->
   <object class="GtkPopover" id="about-popover">
     <property name="width_request">400</property>
     <property name="can_focus">False</property>
@@ -976,6 +977,9 @@ Can be added to custom menus.</property>
                 <property name="icon_name">dialog-information-symbolic</property>
               </object>
             </child>
+            <style>
+              <class name="pill-button"/>
+            </style>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -1108,7 +1112,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                           </object>
                         </child>
                         <style>
-                          <class name="circular"/>
+                          <class name="pill-button"/>
                         </style>
                       </object>
                       <packing>
@@ -1226,7 +1230,7 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                           </object>
                         </child>
                         <style>
-                          <class name="circular"/>
+                          <class name="pill-button"/>
                         </style>
                       </object>
                       <packing>
@@ -1326,7 +1330,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="halign">center</property>
-                            <property name="valign">center</property>
+                            <property name="relief">none</property>
                             <property name="always_show_image">True</property>
                             <child>
                               <object class="GtkBox">
@@ -1364,7 +1368,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               </object>
                             </child>
                             <style>
-                              <class name="circular"/>
+                              <class name="pill-button"/>
                             </style>
                           </object>
                           <packing>
@@ -1400,7 +1404,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                           </object>
                         </child>
                         <style>
-                          <class name="circular"/>
+                          <class name="pill-button"/>
                         </style>
                       </object>
                       <packing>
@@ -1650,7 +1654,7 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                           </object>
                         </child>
                         <style>
-                          <class name="circular"/>
+                          <class name="pill-button"/>
                         </style>
                       </object>
                       <packing>
@@ -1750,7 +1754,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="halign">center</property>
-                            <property name="valign">center</property>
+                            <property name="relief">none</property>
                             <property name="always_show_image">True</property>
                             <child>
                               <object class="GtkBox">
@@ -1788,7 +1792,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               </object>
                             </child>
                             <style>
-                              <class name="circular"/>
+                              <class name="pill-button"/>
                             </style>
                           </object>
                           <packing>
@@ -1824,7 +1828,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                           </object>
                         </child>
                         <style>
-                          <class name="circular"/>
+                          <class name="pill-button"/>
                         </style>
                       </object>
                       <packing>
@@ -2058,6 +2062,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                     <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="relief">none</property>
                     <child>
                       <object class="GtkGrid">
                         <property name="visible">True</property>
@@ -2222,6 +2227,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="halign">end</property>
+                    <property name="relief">none</property>
                     <child>
                       <object class="GtkGrid">
                         <property name="visible">True</property>

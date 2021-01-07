@@ -1,5 +1,9 @@
-/* This is used for the tutorial gifs. */
-
+/* This is used in the tutorial. */
 .drop-shadow {
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+}
+
+.pill-button {
+    border-radius: 9999px;
+    -gtk-outline-radius: 9999px;
 }
