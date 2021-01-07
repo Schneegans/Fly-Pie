@@ -111,16 +111,11 @@ var Tutorial = class Tutorial {
     });
 
     // Initialize the two GIF animations of the tutorial. This cannot be done from Glade
-    // for now. We also add a custom style provider to create the drop shadow effect for
-    // the images.
-    const styleProvider = Gtk.CssProvider.new();
-    styleProvider.load_from_path(Me.path + '/assets/flypie.css');
+    // for now.
     for (let i = 1; i <= 2; i++) {
       const image = this._builder.get_object('tutorial-animation-' + i);
       image.set_from_animation(GdkPixbuf.PixbufAnimation.new_from_file(
           Me.path + '/assets/tutorial' + i + '.gif'));
-      image.get_style_context().add_provider(
-          styleProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
     }
 
     // Make the five Show-Menu buttons of the tutorial pages actually show a menu.

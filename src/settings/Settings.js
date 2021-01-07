@@ -48,6 +48,12 @@ var Settings = class Settings {
     this._builder = new Gtk.Builder();
     this._builder.add_from_file(Me.path + '/assets/settings.ui');
 
+    // Load the CSS file for the settings dialog.
+    const styleProvider = Gtk.CssProvider.new();
+    styleProvider.load_from_path(Me.path + '/assets/flypie.css');
+    Gtk.StyleContext.add_provider_for_screen(
+        Gdk.Screen.get_default(), styleProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
     // Initialize the Menu Editor page. To structure the source code, this has been put
     // into a separate class.
     this._menuEditor = new MenuEditor(this._builder, this._settings);
