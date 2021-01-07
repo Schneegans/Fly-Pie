@@ -84,5 +84,5 @@ Check out the [changelog](docs/changelog.md) as well!
 
 ## Contributing to Fly-Pie
 
-* [Contributing Guidelines](docs/CONTRIBUTING.md)
+* [Contributing Guidelines](docs/contributing.md)
 * [Translating Fly-Pie](docs/translating.md)
