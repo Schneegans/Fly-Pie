@@ -57,9 +57,9 @@ Emoji | Description
 
 <p align="center"><img src ="pics/hr.svg" /></p>
 <p align="center">
-  <a href="dbus-interface.md">&#11013; The D-Bus interface</a>
+  <a href="dbus-interface.md"><img src ="pics/left-arrow.png" style="height: 1em;"/> The D-Bus interface</a>
   <img src="pics/nav-space.svg"/>
-  <a href="../README.md">&#127968; Index</a>
+  <a href="../README.md"><img src ="pics/home.png" style="height: 1em;"/> Index</a>
   <img src="pics/nav-space.svg"/>
-  <a href="translating.md">Translating Fly-Pie &#10145;</a>
+  <a href="translating.md">Translating Fly-Pie <img src ="pics/right-arrow.png" style="height: 1em;"/></a>
 </p>

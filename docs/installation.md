@@ -60,9 +60,9 @@ gnome-extensions enable flypie@schneegans.github.com
 
 <p align="center"><img src ="pics/hr.svg" /></p>
 <p align="center">
-  <a href="changelog.md">&#11013; Changelog</a>
+  <a href="changelog.md"><img src ="pics/left-arrow.png" style="height: 1em;"/> Changelog</a>
   <img src="pics/nav-space.svg"/>
-  <a href="../README.md">&#127968; Index</a>
+  <a href="../README.md"><img src ="pics/home.png" style="height: 1em;"/> Index</a>
   <img src="pics/nav-space.svg"/>
-  <a href="first-steps.md">First Steps &#10145;</a>
+  <a href="first-steps.md">First Steps <img src ="pics/right-arrow.png" style="height: 1em;"/></a>
 </p>
