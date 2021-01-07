@@ -1,6 +1,24 @@
+<p align="center">
+  <img src ="pics/banner-01.jpg" />
+</p>
+
 # Contributing to Fly-Pie
 
 Thank you for contributing your idea to Fly-Pie! Here are some guidelines to help you comply with the workflow used in this project.
+
+Whenever you encounter a :beetle: **bug** or have a :tada: **feature request**,
+report this via [Github issues](https://github.com/schneegans/fly-pie/issues).
+
+We are happy to receive contributions to Fly-Pie in the form of **pull requests** via Github.
+Feel free to fork the repository, implement your changes and create a merge request to the `develop` branch.
+
+## Debugging
+
+Developing a Gnome Shell extension is not easy, as debugging possibilities are quite limited. One thing you should always do is to monitor Gnome Shells output for error or debug messages produced by Fly-Pie. This can be done with the command below. This may print many unrelated messages, but using `grep` like this highlights all occurrences of `flypie` which makes spotting Fly-Pie-related messages much easier.
+
+```bash
+journalctl -f -o cat | grep -E 'flypie|'
+```
 
 ## Branching Guidelines
 
@@ -17,7 +35,8 @@ Still unclear? [This video](https://www.youtube.com/watch?v=1SXpE08hvGs) provide
 ## Git Commit Messages
 
 Commits should start with a Capital letter and should be written in present tense (e.g. __:tada: Add cool new feature__ instead of __:tada: Added cool new feature__).
-You should also start your commit message with **one** applicable emoji. This does not only look great but also makes you rethink what to add to a commit. Make many but small commits!
+You should also start your commit message with **one** applicable emoji.
+This does not only look great but also makes you rethink what to add to a commit. Make many but small commits!
 
 Emoji | Description
 ------|------------
@@ -35,3 +54,12 @@ Emoji | Description
 :twisted_rightwards_arrows: `:twisted_rightwards_arrows:` | When you merged a branch.
 :fire: `:fire:` | When you removed something.
 :truck: `:truck:` | When you moved / renamed something.
+
+<p align="center"><img src ="pics/hr.svg" /></p>
+<p align="center">
+  <a href="dbus-interface.md"><img src ="pics/left-arrow.png" style="height: 1em;"/> The D-Bus interface</a>
+  <img src="pics/nav-space.svg"/>
+  <a href="../README.md"><img src ="pics/home.png" style="height: 1em;"/> Index</a>
+  <img src="pics/nav-space.svg"/>
+  <a href="translating.md">Translating Fly-Pie <img src ="pics/right-arrow.png" style="height: 1em;"/></a>
+</p>

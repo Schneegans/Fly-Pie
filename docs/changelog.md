@@ -1,3 +1,7 @@
+<p align="center">
+  <img src ="pics/banner-01.jpg" />
+</p>
+
 # Changelog of Fly-Pie
 
 ## [Fly-Pie 4](https://github.com/schneegans/fly-pie/releases/tag/v4)
@@ -5,7 +9,7 @@
 **Release Date:** 2020-12-04
 
 #### New Features
-* Fly-Pie has now **localization support**. That means, you can now [translate it to your own language](https://github.com/Schneegans/Fly-Pie#translating-fly-pie)! Pull requests are very welcome (there is also a new **pull request template for translations**!), also for updating the existing translations. Fly-Pie 4 comes with translations for the following languages:
+* Fly-Pie has now **localization support**. That means, you can now [translate it to your own language](translating.md)! Pull requests are very welcome (there is also a new **pull request template for translations**!), also for updating the existing translations. Fly-Pie 4 comes with translations for the following languages:
   * English
   * German
   * Italian
@@ -82,3 +86,10 @@
 **Release Date:** 2020-08-13
 
 * Initial publication under the MIT license on Github.
+
+<p align="center"><img src ="pics/hr.svg" /></p>
+<p align="center">
+  <a href="../README.md"><img src ="pics/home.png" style="height: 1em;"/> Index</a>
+  <img src="pics/nav-space.svg"/>
+  <a href="installation.md">Installation <img src ="pics/right-arrow.png" style="height: 1em;"/></a>
+</p>
