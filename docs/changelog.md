@@ -85,8 +85,6 @@
 
 <p align="center"><img src ="pics/hr.svg" /></p>
 <p align="center">
-  <a href="features.md">&#11013; Features</a>
-  <img src="pics/nav-space.svg"/>
   <a href="../README.md">&#127968; Index</a>
   <img src="pics/nav-space.svg"/>
   <a href="installation.md">Installation &#10145;</a>
