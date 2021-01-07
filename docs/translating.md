@@ -51,7 +51,7 @@ sudo apt install gettext
 
 <p align="center"><img src ="pics/hr.svg" /></p>
 <p align="center">
-  <a href="CONTRIBUTING.md"><img src ="pics/left-arrow.png" style="height: 1em;"/> Contributing Guidelines</a>
+  <a href="contributing.md"><img src ="pics/left-arrow.png" style="height: 1em;"/> Contributing Guidelines</a>
   <img src="pics/nav-space.svg"/>
   <a href="../README.md"><img src ="pics/home.png" style="height: 1em;"/> Index</a>
 </p>
