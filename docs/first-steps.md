@@ -19,7 +19,7 @@ Here is a summary of the major hints to ease your path to become a master pielot
 
 ## Bake Your First Pie Menu!
 
-<img align="right" width="250px" src ="docs/pics/menu-editor.png" />
+<img align="right" width="250px" src ="pics/menu-editor.png" />
 
 The default menu may give you the opportunity to play around with Fly-Pie, but you should definitely define your own menus!
 
@@ -34,7 +34,7 @@ Just play around with the options, most of it should be more or less self-explan
 While there are not many presets included for now - this will happen in a future version - you can already create your own!
 There are quite some possibilities...
 
-<img src ="docs/pics/presets.png" />
+<img src ="pics/presets.png" />
 
 ## Alternative Ways to Open Menus
 
