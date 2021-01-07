@@ -1,3 +1,7 @@
+<p align="center">
+  <img src ="pics/banner-01.jpg" />
+</p>
+
 # Translating Fly-Pie
 
 A great way to contribute to Fly-Pie is creating a translation to another language!

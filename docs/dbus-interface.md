@@ -1,3 +1,7 @@
+<p align="center">
+  <img src ="pics/banner-01.jpg" />
+</p>
+
 # Fly-Pie's D-Bus Interface
 
 Fly-Pie has a D-Bus interface which allows not only to open configured menus via the command line,

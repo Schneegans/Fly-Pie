@@ -1,3 +1,7 @@
+<p align="center">
+  <img src ="pics/banner-01.jpg" />
+</p>
+
 # First Steps with Fly-Pie
 
 If you installed and enabled Fly-Pie for the very first time, you can bring up the default menu with <kbd>Ctrl</kbd> + <kbd>Space</kbd>.

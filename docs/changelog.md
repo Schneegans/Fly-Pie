@@ -1,3 +1,7 @@
+<p align="center">
+  <img src ="pics/banner-01.jpg" />
+</p>
+
 # Changelog of Fly-Pie
 
 ## [Fly-Pie 4](https://github.com/schneegans/fly-pie/releases/tag/v4)

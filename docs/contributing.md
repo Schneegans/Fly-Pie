@@ -1,3 +1,7 @@
+<p align="center">
+  <img src ="pics/banner-01.jpg" />
+</p>
+
 # Contributing to Fly-Pie
 
 Thank you for contributing your idea to Fly-Pie! Here are some guidelines to help you comply with the workflow used in this project.

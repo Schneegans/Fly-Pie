@@ -1,3 +1,7 @@
+<p align="center">
+  <img src ="pics/banner-01.jpg" />
+</p>
+
 # Installation
 
 You can either install Fly-Pie from extensions.gnome.org (a), download a stable release
