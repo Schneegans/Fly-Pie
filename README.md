@@ -15,7 +15,7 @@ It features a continuous learning curve which lets you gradually lift-off from a
 
 ## About Fly-Pie
 
-<a href="https://youtu.be/U22VxoT-tNU"><img align="right" width="300px" src ="pics/player.png" /></a>
+<a href="https://youtu.be/U22VxoT-tNU"><img align="right" width="300px" src ="docs/pics/player.png" /></a>
 
 Fly-Pie is designed for people who have **one hand at the mouse** most of the time.
 It is **not** designed to be used with a keyboard only; there are other
