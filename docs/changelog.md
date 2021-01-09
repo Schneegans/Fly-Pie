@@ -88,8 +88,11 @@
 * Initial publication under the MIT license on Github.
 
 <p align="center"><img src ="pics/hr.svg" /></p>
+
 <p align="center">
-  <a href="../README.md#getting-started"><img src ="pics/home.png" style="height: 1em;"/> Index</a>
+  <a href="translating.md"><img src ="pics/left-arrow.png"/> Translating Fly-Pie</a>
   <img src="pics/nav-space.svg"/>
-  <a href="installation.md">Installation <img src ="pics/right-arrow.png" style="height: 1em;"/></a>
+  <a href="../README.md#getting-started"><img src ="pics/home.png"/> Index</a>
+  <img src="pics/nav-space.svg"/>
+  <a href="release-management.md">Release Management <img src ="pics/right-arrow.png"/></a>
 </p>

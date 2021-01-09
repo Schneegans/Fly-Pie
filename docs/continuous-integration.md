@@ -29,12 +29,16 @@ This runs the [`create_release.sh`](../scripts/create_release.sh) script wheneve
 This uses the [Dynamic Badges Action](https://github.com/Schneegans/dynamic-badges-action) to update the Comment-Percentage-Badge and Lines-of-Code-Badge of the `README.md` automatically whenever a commit is pushed.
 
 
-
-
-
-
-
 <p align="center"><img src ="pics/hr.svg"/></p>
 
-
-
+<p align="center">
+  <img src="pics/nav-space.svg"/>
+  <a href="release-management.md"><img src ="pics/left-arrow.png"/> Release Management</a>
+  <img src="pics/nav-space.svg"/>
+  <a href="../README.md#getting-started"><img src ="pics/home.png"/> Index</a>
+  <img src="pics/nav-space.svg"/>
+  <img src="pics/nav-space.svg"/>
+  <img src="pics/nav-space.svg"/>
+  <img src="pics/nav-space.svg"/>
+  <img src="pics/nav-space.svg"/>
+</p>

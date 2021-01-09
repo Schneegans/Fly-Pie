@@ -58,5 +58,7 @@ If you want to learn more, use the links below for much more information!
 ## Additional Information
 
 * [Changelog](docs/changelog.md)
+* [Release Management](docs/release-management.md)
+* [Continuous Integration](docs/continuous-integration.md)
 
 <p align="center"><img src ="docs/pics/hr.svg" /></p>

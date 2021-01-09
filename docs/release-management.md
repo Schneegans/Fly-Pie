@@ -75,4 +75,11 @@ Also, last-minute bug fixes should be implemented now.
 
 <p align="center"><img src ="pics/hr.svg"/></p>
 
-
+<p align="center">
+  <img src="pics/nav-space.svg"/>
+  <a href="changelog.md"><img src ="pics/left-arrow.png"/> Changelog</a>
+  <img src="pics/nav-space.svg"/>
+  <a href="../README.md#getting-started"><img src ="pics/home.png"/> Index</a>
+  <img src="pics/nav-space.svg"/>
+  <a href="continuous-integration.md">Continuous Integration <img src ="pics/right-arrow.png"/></a>
+</p>

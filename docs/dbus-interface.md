@@ -171,10 +171,12 @@ gdbus monitor --session --dest org.gnome.Shell \
 ```
 
 <p align="center"><img src ="pics/hr.svg" /></p>
+
 <p align="center">
-  <a href="first-steps.md"><img src ="pics/left-arrow.png" style="height: 1em;"/> First Steps</a>
   <img src="pics/nav-space.svg"/>
-  <a href="../README.md#getting-started"><img src ="pics/home.png" style="height: 1em;"/> Index</a>
+  <a href="first-steps.md"><img src ="pics/left-arrow.png"/> First Steps</a>
   <img src="pics/nav-space.svg"/>
-  <a href="contributing.md">Contributing Guidelines <img src ="pics/right-arrow.png" style="height: 1em;"/></a>
+  <a href="../README.md#getting-started"><img src ="pics/home.png"/> Index</a>
+  <img src="pics/nav-space.svg"/>
+  <a href="contributing.md">Contributing Guidelines <img src ="pics/right-arrow.png"/></a>
 </p>

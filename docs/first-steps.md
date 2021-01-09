@@ -54,10 +54,12 @@ Interesting companions are:
 * [xbindkeys](http://www.nongnu.org/xbindkeys/xbindkeys.html): X11 only, bind menus to your additional mouse buttons!
 
 <p align="center"><img src ="pics/hr.svg" /></p>
+
 <p align="center">
-  <a href="installation.md"><img src ="pics/left-arrow.png" style="height: 1em;"/> Installation</a>
   <img src="pics/nav-space.svg"/>
-  <a href="../README.md#getting-started"><img src ="pics/home.png" style="height: 1em;"/> Index</a>
+  <a href="installation.md"><img src ="pics/left-arrow.png"/> Installation</a>
   <img src="pics/nav-space.svg"/>
-  <a href="dbus-interface.md">The D-Bus interface <img src ="pics/right-arrow.png" style="height: 1em;"/></a>
+  <a href="../README.md#getting-started"><img src ="pics/home.png"/> Index</a>
+  <img src="pics/nav-space.svg"/>
+  <a href="dbus-interface.md">The D-Bus interface <img src ="pics/right-arrow.png"/></a>
 </p>
