@@ -22,6 +22,8 @@ journalctl -f -o cat | grep -E 'flypie|'
 
 ## Branching Guidelines
 
+<a href="https://www.youtube.com/watch?v=1SXpE08hvGs"><img align="right" width="350px" src ="pics/player2.jpg" /></a>
+
 The development of Fly-Pie follows a simplified version of **git-flow**:
 
 * The `master` branch always contains stable code.
@@ -30,7 +32,7 @@ New features and bug fixes are implemented in `feature/*` branches and are merge
 * Once the translation work and last minute bugfixing is done, `release/vX` is merged into `master` and a tag is created to mark the release. The last step of the release process is to merge `master` back into `develop` in order to update the translations and bugfixes in the active development branch.
 * In rare and critical cases, hotfixes for the latest release will be created in the `master` branch and merged back to `develop`.
 
-Still unclear? [This video](https://www.youtube.com/watch?v=1SXpE08hvGs) provides a good explanation.
+Still unclear? Click the player image above for a good explanation on YouTube!
 
 ## Git Commit Messages
 
