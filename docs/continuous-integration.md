@@ -23,7 +23,8 @@ This executes several checks whenever a commit is pushed or a pull request is op
   Most importantly, this checks whether the resulting archive is not too large to be uploaded to extensions.gnome.org.
 
 ## [`deploy.yml`](../.github/workflows/deploy.yml) 
-This runs the [`create_release.sh`](../scripts/create_release.sh) script whenever a tag is pushed. The resulting `flypie@schneegans.github.com.zip` is uploaded to an automatically created release.
+This runs the [`create_release.sh`](../scripts/create-release.sh) script whenever a tag is pushed.
+The resulting `flypie@schneegans.github.com.zip` is uploaded to an automatically created release.
 
 ## [`badges.yml`](../.github/workflows/badges.yml) 
 This uses the [Dynamic Badges Action](https://github.com/Schneegans/dynamic-badges-action) to update the Comment-Percentage-Badge and Lines-of-Code-Badge of the `README.md` automatically whenever a commit is pushed.
