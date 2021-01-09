@@ -52,10 +52,9 @@ sudo apt install gettext
 <p align="center"><img src ="pics/hr.svg" /></p>
 
 <p align="center">
-  <a href="contributing.md"><img src ="pics/left-arrow.png"/> Contributing Guidelines</a>
+  <a href="software-architecture.md"><img src ="pics/left-arrow.png"/> Software Architecture</a>
   <img src="pics/nav-space.svg"/>
   <a href="../README.md#getting-started"><img src ="pics/home.png"/> Index</a>
   <img src="pics/nav-space.svg"/>
-  <a href="changelog.md">Changelog <img src ="pics/right-arrow.png"/></a>
-  <img src="pics/nav-space.svg"/>
+  <a href="creating-actions.md">Creating New Action Types <img src ="pics/right-arrow.png"/></a>
 </p>

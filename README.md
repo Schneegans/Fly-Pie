@@ -53,7 +53,10 @@ If you want to learn more, use the links below for much more information!
 ## Contributing to Fly-Pie
 
 * [Contributing Guidelines](docs/contributing.md)
+* [Software Architecture](docs/software-architecture.md)
 * [Translating Fly-Pie](docs/translating.md)
+* [Creating New Action Types](docs/creating-actions.md)
+* [Creating New Menu Types](docs/creating-menus.md)
 
 ## Additional Information
 

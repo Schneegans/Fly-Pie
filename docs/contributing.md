@@ -64,5 +64,5 @@ Emoji | Description
   <img src="pics/nav-space.svg"/>
   <a href="../README.md#getting-started"><img src ="pics/home.png"/> Index</a>
   <img src="pics/nav-space.svg"/>
-  <a href="translating.md">Translating Fly-Pie <img src ="pics/right-arrow.png"/></a>
+  <a href="software-architecture.md">Software Architecture <img src ="pics/right-arrow.png"/></a>
 </p>

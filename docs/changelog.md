@@ -90,7 +90,7 @@
 <p align="center"><img src ="pics/hr.svg" /></p>
 
 <p align="center">
-  <a href="translating.md"><img src ="pics/left-arrow.png"/> Translating Fly-Pie</a>
+  <a href="creating-menus.md"><img src ="pics/left-arrow.png"/> Creating New Menu Types</a>
   <img src="pics/nav-space.svg"/>
   <a href="../README.md#getting-started"><img src ="pics/home.png"/> Index</a>
   <img src="pics/nav-space.svg"/>
