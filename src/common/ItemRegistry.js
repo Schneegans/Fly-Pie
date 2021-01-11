@@ -202,6 +202,11 @@ var ItemRegistry = class ItemRegistry {
   // See documentation of transformConfig() above.
   static _transformConfig(config, isToplevel) {
 
+    // Throw an error if an unknown item type is detected.
+    if (this.getItemTypes()[config.type] == undefined) {
+      throw 'Invalid item type \'' + config.type + '\'';
+    }
+
     // Create the item and then set all the standard-properties later.
     const result = this.getItemTypes()[config.type].createItem(config.data);
     result.name  = config.name;
@@ -218,7 +223,13 @@ var ItemRegistry = class ItemRegistry {
     // Load all children recursively.
     if (config.children) {
       for (let i = 0; i < config.children.length; i++) {
-        result.children.push(this._transformConfig(config.children[i], false));
+        try {
+          result.children.push(this._transformConfig(config.children[i], false));
+        } catch (error) {
+          utils.debug(
+              'Failed to transform menu item \'' + config.children[i].name +
+              '\': ' + error + '!');
+        }
       }
     }
 
