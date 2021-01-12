@@ -13,11 +13,11 @@ const _ = imports.gettext.domain('flypie').gettext;
 const Me           = imports.misc.extensionUtils.getCurrentExtension();
 const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
-// We import Shell optionally. When this file is included from the daemon side, it is
-// available and can be used in the activation code of the action defined below. If this
-// file is included via the pref.js, it will not be available. But this is not a problem,
-// as the preferences will not call the createItem() methods below; they are merely
-// interested in the action's name, icon and description.
+// We have to import the Shell module optionally. This is because this file is included
+// from both sides: From prefs.js and from extension.js. When included from prefs.js, the
+// Shell module is not available. This is not a problem, as the preferences will not call
+// the createItem() methods below; they are merely interested in the menu's name, icon
+// and description.
 let Shell = undefined;
 
 try {
@@ -33,15 +33,27 @@ try {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var menu = {
+
+  // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
+  // activate() method which is called when the user selects the item, Menus can have
+  // child Actions or Menus.
+  class: ItemRegistry.ItemClass.MENU,
+
+  // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Favorites'),
+
+  // This is also used in the add-new-item-popover.
   icon: 'starred',
+
   // Translators: Please keep this short.
+  // This is the (short) description shown in the add-new-item-popover.
   subtitle: _('Shows pinned applications.'),
+
+  // This is the (long) description shown when an item of this type is selected.
   description: _(
       'The <b>Favorites</b> menu shows the applications you have pinned to Gnome Shell\'s Dash.'),
-  itemClass: ItemRegistry.ItemClass.MENU,
-  dataType: ItemRegistry.ItemDataType.NONE,
-  defaultData: '',
+
+  // This will be called whenever a menu is opened containing an item of this kind.
   createItem: () => {
     const appNames = global.settings.get_strv('favorite-apps');
     const result   = {children: []};

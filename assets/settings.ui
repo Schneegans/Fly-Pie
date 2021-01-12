@@ -555,8 +555,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
     </child>
   </object>
   <object class="GtkAdjustment" id="item-count">
-    <property name="lower">4</property>
-    <property name="upper">24</property>
+    <property name="upper">100</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -7946,6 +7945,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                 <property name="transition_duration">200</property>
                 <child>
                   <object class="GtkBox">
+                    <property name="width_request">300</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="margin_left">10</property>
@@ -8234,7 +8234,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkRevealer" id="item-settings-command-revealer">
+                      <object class="GtkRevealer" id="item-settings-data-caption-revealer">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="transition_type">slide-up</property>
@@ -8244,43 +8244,14 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_top">20</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">5</property>
+                            <property name="margin_bottom">5</property>
+                            <property name="spacing">10</property>
                             <child>
-                              <object class="GtkBox">
+                              <object class="GtkLabel" id="item-settings-data-name">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="spacing">10</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Command</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label" translatable="yes">Use the button to list installed apps!</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="pack_type">end</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">label</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -8289,51 +8260,19 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="box2">
+                              <object class="GtkLabel" id="item-settings-data-description">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkMenuButton" id="menubutton1">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="focus_on_click">False</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="direction">none</property>
-                                    <property name="popover">item-application-popover</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">center</property>
-                                        <property name="stock">gtk-find</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkEntry" id="item-command">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="placeholder_text" translatable="yes">Command</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">label</property>
                                 <style>
-                                  <class name="linked"/>
+                                  <class name="dim-label"/>
                                 </style>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
+                                <property name="pack_type">end</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
@@ -8347,52 +8286,30 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkRevealer" id="item-settings-file-revealer">
+                      <object class="GtkRevealer" id="item-settings-command-revealer">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="transition_type">slide-up</property>
                         <property name="transition_duration">200</property>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkBox" id="box2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="margin_top">20</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">5</property>
                             <child>
-                              <object class="GtkBox">
+                              <object class="GtkMenuButton" id="menubutton1">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">10</property>
+                                <property name="can_focus">True</property>
+                                <property name="focus_on_click">False</property>
+                                <property name="receives_default">True</property>
+                                <property name="direction">none</property>
+                                <property name="popover">item-application-popover</property>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">File</property>
+                                    <property name="halign">center</property>
+                                    <property name="stock">gtk-find</property>
                                   </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label" translatable="yes">It will be opened with the default app.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="pack_type">end</property>
-                                    <property name="position">1</property>
-                                  </packing>
                                 </child>
                               </object>
                               <packing>
@@ -8402,54 +8319,19 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkBox" id="box1">
+                              <object class="GtkEntry" id="item-command">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkMenuButton" id="menubutton2">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="focus_on_click">False</property>
-                                    <property name="receives_default">True</property>
-                                    <property name="direction">none</property>
-                                    <property name="popover">item-file-popover</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">center</property>
-                                        <property name="stock">gtk-find</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkEntry" id="item-file">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="placeholder_text" translatable="yes">File</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                                <style>
-                                  <class name="linked"/>
-                                </style>
+                                <property name="can_focus">True</property>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
+                                <property name="expand">True</property>
                                 <property name="fill">True</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
+                            <style>
+                              <class name="linked"/>
+                            </style>
                           </object>
                         </child>
                       </object>
@@ -8460,52 +8342,30 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkRevealer" id="item-settings-uri-revealer">
+                      <object class="GtkRevealer" id="item-settings-file-revealer">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="transition_type">slide-up</property>
                         <property name="transition_duration">200</property>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkBox" id="box1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="margin_top">20</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">5</property>
                             <child>
-                              <object class="GtkBox">
+                              <object class="GtkMenuButton" id="menubutton2">
                                 <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">10</property>
+                                <property name="can_focus">True</property>
+                                <property name="focus_on_click">False</property>
+                                <property name="receives_default">True</property>
+                                <property name="direction">none</property>
+                                <property name="popover">item-file-popover</property>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">URI</property>
+                                    <property name="halign">center</property>
+                                    <property name="stock">gtk-find</property>
                                   </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label" translatable="yes">It will be opened with the default app.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="pack_type">end</property>
-                                    <property name="position">1</property>
-                                  </packing>
                                 </child>
                               </object>
                               <packing>
@@ -8515,17 +8375,19 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="item-uri">
+                              <object class="GtkEntry" id="item-file">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="placeholder_text" translatable="yes">URI</property>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
+                                <property name="expand">True</property>
                                 <property name="fill">True</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
+                            <style>
+                              <class name="linked"/>
+                            </style>
                           </object>
                         </child>
                       </object>
@@ -8542,66 +8404,9 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         <property name="transition_type">slide-up</property>
                         <property name="transition_duration">200</property>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkEntry" id="item-text">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="margin_top">20</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">5</property>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">10</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Text</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label" translatable="yes">This text will be inserted.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="pack_type">end</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkEntry" id="item-text">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="placeholder_text" translatable="yes">Text</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
+                            <property name="can_focus">True</property>
                           </object>
                         </child>
                       </object>
@@ -8612,72 +8417,20 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkRevealer" id="item-settings-id-revealer">
+                      <object class="GtkRevealer" id="item-settings-count-revealer">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="transition_type">slide-up</property>
                         <property name="transition_duration">200</property>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkSpinButton" id="spinbutton1">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="margin_top">20</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">5</property>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">10</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">ID</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label" translatable="yes">This will be passed to the D-Bus signal.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="pack_type">end</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkEntry" id="item-id">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="placeholder_text" translatable="yes">ID</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
+                            <property name="can_focus">True</property>
+                            <property name="text">4</property>
+                            <property name="input_purpose">alpha</property>
+                            <property name="adjustment">item-count</property>
+                            <property name="numeric">True</property>
+                            <property name="value">4</property>
                           </object>
                         </child>
                       </object>
@@ -8688,75 +8441,47 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkRevealer" id="item-settings-count-revealer">
+                      <object class="GtkRevealer" id="item-settings-item-shortcut-revealer">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="transition_type">slide-up</property>
                         <property name="transition_duration">200</property>
                         <child>
-                          <object class="GtkBox" id="box6">
+                          <object class="GtkFrame">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="margin_top">20</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">5</property>
+                            <property name="label_xalign">0</property>
+                            <property name="shadow_type">in</property>
                             <child>
-                              <object class="GtkBox">
+                              <object class="GtkListBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="spacing">10</property>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkListBoxRow" id="item-shortcut-select">
+                                    <property name="height_request">50</property>
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Max Item Count</property>
+                                    <property name="can_focus">True</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="halign">center</property>
+                                        <property name="valign">center</property>
+                                        <property name="margin_top">5</property>
+                                        <property name="margin_bottom">5</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <child>
+                                          <placeholder/>
+                                        </child>
+                                      </object>
+                                    </child>
                                   </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label" translatable="yes">Limits the number of children.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="pack_type">end</property>
-                                    <property name="position">1</property>
-                                  </packing>
                                 </child>
                               </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
                             </child>
-                            <child>
-                              <object class="GtkSpinButton" id="spinbutton1">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="text">4</property>
-                                <property name="input_purpose">alpha</property>
-                                <property name="adjustment">item-count</property>
-                                <property name="numeric">True</property>
-                                <property name="value">4</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
+                            <child type="label_item">
+                              <placeholder/>
                             </child>
                           </object>
                         </child>
@@ -8765,114 +8490,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         <property name="expand">False</property>
                         <property name="fill">True</property>
                         <property name="position">9</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkRevealer" id="item-settings-item-shortcut-revealer">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="transition_type">slide-up</property>
-                        <property name="transition_duration">200</property>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="margin_top">20</property>
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">5</property>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">10</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Shortcut</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label" translatable="yes">This shortcut will be simulated.</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="pack_type">end</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkFrame">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label_xalign">0</property>
-                                <property name="shadow_type">in</property>
-                                <child>
-                                  <object class="GtkListBox">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <child>
-                                      <object class="GtkListBoxRow" id="item-shortcut-select">
-                                        <property name="height_request">50</property>
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">True</property>
-                                        <child>
-                                          <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="halign">center</property>
-                                            <property name="valign">center</property>
-                                            <property name="margin_top">5</property>
-                                            <property name="margin_bottom">5</property>
-                                            <property name="orientation">vertical</property>
-                                            <property name="spacing">5</property>
-                                            <child>
-                                              <placeholder/>
-                                            </child>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <child type="label_item">
-                                  <placeholder/>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">10</property>
                       </packing>
                     </child>
                     <child>
@@ -9018,7 +8635,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">11</property>
+                        <property name="position">10</property>
                       </packing>
                     </child>
                     <child>
@@ -9038,7 +8655,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">12</property>
+                        <property name="position">11</property>
                       </packing>
                     </child>
                     <child>
@@ -9065,7 +8682,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                       <packing>
                         <property name="expand">True</property>
                         <property name="fill">True</property>
-                        <property name="position">13</property>
+                        <property name="position">12</property>
                       </packing>
                     </child>
                   </object>

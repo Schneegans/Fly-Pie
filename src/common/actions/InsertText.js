@@ -34,16 +34,49 @@ try {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var action = {
+
+  // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
+  // activate() method which is called when the user selects the item, Menus can have
+  // child Actions or Menus.
+  class: ItemRegistry.ItemClass.ACTION,
+
+  // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Insert Text'),
+
+  // This is also used in the add-new-item-popover.
   icon: 'input-keyboard',
+
   // Translators: Please keep this short.
+  // This is the (short) description shown in the add-new-item-popover.
   subtitle: _('Types some text automatically.'),
+
+  // This is the (long) description shown when an item of this type is selected.
   description: _(
       'The <b>Insert Text</b> action copies the given text to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things.'),
-  itemClass: ItemRegistry.ItemClass.ACTION,
-  dataType: ItemRegistry.ItemDataType.TEXT,
-  defaultData: '',
+
+  // Items of this type have an additional data property which can be set by the user. The
+  // data value chosen by the user is passed to the createItem() method further below.
+  data: {
+
+    // The data type determines which widget is visible when an item of this type is
+    // selected in the settings dialog.
+    type: ItemRegistry.ItemDataType.TEXT,
+
+    // This is shown on the left above the data widget in the settings dialog.
+    name: _('Text'),
+
+    // Translators: Please keep this short.
+    // This is shown on the right above the data widget in the settings dialog.
+    description: _('This text will be inserted.'),
+
+    // This is be used as data for newly created items.
+    default: '',
+  },
+
+  // This will be called whenever a menu is opened containing an item of this kind.
+  // The data value chosen by the user will be passed to this function.
   createItem: (data) => {
+    // The activate() function will be called when the user selects this action.
     return {
       activate: () => {
         const clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default());
