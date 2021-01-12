@@ -192,7 +192,7 @@ class Background extends Clutter.Actor {
   // ----------------------------------------------------------------------- private stuff
 
   // This adds one button to the row of control buttons. We use a combination of app
-  // switcher and dash button class names hoping that this looks good with most Gnome
+  // switcher and dash button class names hoping that this looks good with most GNOME
   // Shell themes.
   _addControlButton(labelText, iconName, callback) {
     const icon = new St.Icon({

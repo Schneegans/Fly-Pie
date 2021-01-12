@@ -8,7 +8,7 @@ There are two fundamental item types in Fly-Pie: _Actions_ and _Menus_.
 Actions have an `activate()` method which is called when the user selects them; Menus can have child Actions or child Menus. 
 
 If you want to create a new Action type for Fly-Pie, this guide is made for you!
-As an example, we will create an Action which shows a notification with a user-defined notification whenever it is selected.
+As an example, we will create an Action which shows a notification with a user-defined message whenever it is selected.
 
 First, create a file `src/common/actions/ExampleAction.js` with the following content.
 You should read the code, most of it is explained with inline comments!

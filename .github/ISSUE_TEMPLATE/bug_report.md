@@ -21,7 +21,7 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
-You may also check the output of Gnome Shell for any error messages related to Fly-Pie.
+You may also check the output of GNOME Shell for any error messages related to Fly-Pie.
 This can be done with the following terminal command:
 
 journalctl -f -o cat | grep -E 'flypie|'
@@ -34,4 +34,4 @@ A clear and concise description of what you expected to happen.
 _Please complete the following information:_
  - Linux distribution [e.g. Ubuntu 20.04]
  - Fly-Pie version [e.g. Fly-Pie 3, or commit SHA]
- - Gnome Shell version: [e.g. 3.36.2]
+ - GNOME Shell version: [e.g. 3.36.2]

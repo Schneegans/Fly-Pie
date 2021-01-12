@@ -28,7 +28,7 @@ the latest version, append the `--force` flag in order to overwrite existing ins
 gnome-extensions install flypie@schneegans.github.com.zip
 ```
 
-Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+Then restart GNOME Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
 Or logout / login if you are on Wayland.
 Then you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* application or with this command:
 
@@ -50,7 +50,7 @@ You will have to compile the translations if you want to use Fly-Pie in your own
 flypie@schneegans.github.com/scripts/compile-locales.sh
 ```
 
-Then restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+Then restart GNOME Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
 Or logout / login if you are on Wayland.
 Then you can enable the extension with the *Gnome Tweak Tool*, the *Extensions* application or with this command:
 

@@ -27,7 +27,7 @@ in the `/po` directory and install the extension with your updated translations:
   scripts/create-release.sh -i
   ```
 
-* Then, restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+* Then, restart GNOME Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
 Or logout / login if you are on Wayland.
 
 * Test if all strings you translated are looking good.
