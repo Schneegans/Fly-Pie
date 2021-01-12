@@ -23,15 +23,27 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var menu = {
+
+  // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
+  // activate() method which is called when the user selects the item, Menus can have
+  // child Actions or Menus.
+  class: ItemRegistry.ItemClass.MENU,
+
+  // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Bookmarks'),
+
+  // This is also used in the add-new-item-popover.
   icon: 'folder',
+
   // Translators: Please keep this short.
+  // This is the (short) description shown in the add-new-item-popover.
   subtitle: _('Shows your frequently used directories.'),
+
+  // This is the (long) description shown when an item of this type is selected.
   description: _(
       'The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each bookmarked directory.'),
-  itemClass: ItemRegistry.ItemClass.MENU,
-  dataType: ItemRegistry.ItemDataType.NONE,
-  defaultData: '',
+
+  // This will be called whenever a menu is opened containing an item of this kind.
   createItem: () => {
     // Adds an action for the given (file://) uri to the children list of
     // the given menu item. The name parameter is optional and will be used

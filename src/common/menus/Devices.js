@@ -23,15 +23,27 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var menu = {
+
+  // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
+  // activate() method which is called when the user selects the item, Menus can have
+  // child Actions or Menus.
+  class: ItemRegistry.ItemClass.MENU,
+
+  // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Devices'),
+
+  // This is also used in the add-new-item-popover.
   icon: 'drive-harddisk',
+
   // Translators: Please keep this short.
+  // This is the (short) description shown in the add-new-item-popover.
   subtitle: _('Shows connected devices.'),
+
+  // This is the (long) description shown when an item of this type is selected.
   description: _(
       'The <b>Devices</b> menu shows an item for each mounted volume, like USB sticks.'),
-  itemClass: ItemRegistry.ItemClass.MENU,
-  dataType: ItemRegistry.ItemDataType.NONE,
-  defaultData: '',
+
+  // This will be called whenever a menu is opened containing an item of this kind.
   createItem: () => {
     const result  = {children: []};
     const monitor = Gio.VolumeMonitor.get();

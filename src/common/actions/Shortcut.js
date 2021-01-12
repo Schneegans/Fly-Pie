@@ -13,11 +13,11 @@ const _ = imports.gettext.domain('flypie').gettext;
 const Me           = imports.misc.extensionUtils.getCurrentExtension();
 const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
-// We import the InputManipulator optionally. When this file is included from the daemon
-// side, it is available and can be used in the activation code of the action defined
-// below. If this file is included via the pref.js, it will not be available. But this is
-// not a problem, as the preferences will not call the createItem() methods below; they
-// are merely interested in the action's name, icon and description.
+// We have to import the InputManipulator optionally. This is because this file is
+// included from both sides: From prefs.js and from extension.js. When included from
+// prefs.js, the InputManipulator is not available. This is not a problem, as the
+// preferences will not call the createItem() methods below; they are merely interested in
+// the menu's name, icon and description.
 let InputManipulator = undefined;
 
 try {
@@ -32,16 +32,49 @@ try {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var action = {
+
+  // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
+  // activate() method which is called when the user selects the item, Menus can have
+  // child Actions or Menus.
+  class: ItemRegistry.ItemClass.ACTION,
+
+  // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Activate Shortcut'),
+
+  // This is also used in the add-new-item-popover.
   icon: 'preferences-desktop-keyboard-shortcuts',
+
   // Translators: Please keep this short.
+  // This is the (short) description shown in the add-new-item-popover.
   subtitle: _('Simulates a key combination.'),
+
+  // This is the (long) description shown when an item of this type is selected.
   description: _(
       'The <b>Activate Shortcut</b> action simulates a key combination when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations.'),
-  itemClass: ItemRegistry.ItemClass.ACTION,
-  dataType: ItemRegistry.ItemDataType.SHORTCUT,
-  defaultData: '',
+
+  // Items of this type have an additional data property which can be set by the user. The
+  // data value chosen by the user is passed to the createItem() method further below.
+  data: {
+
+    // The data type determines which widget is visible when an item of this type is
+    // selected in the settings dialog.
+    type: ItemRegistry.ItemDataType.SHORTCUT,
+
+    // This is shown on the left above the data widget in the settings dialog.
+    name: _('Shortcut'),
+
+    // Translators: Please keep this short.
+    // This is shown on the right above the data widget in the settings dialog.
+    description: _('This shortcut will be simulated.'),
+
+    // This is be used as data for newly created items.
+    default: '',
+  },
+
+  // This will be called whenever a menu is opened containing an item of this kind.
+  // The data value chosen by the user will be passed to this function.
   createItem: (data) => {
+    // The activate() function will be called when the user selects this action.
     return {activate: () => InputManipulator.activateAccelerator(data)};
   }
 };

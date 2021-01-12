@@ -84,7 +84,7 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
     // Allow menu drop at top-level.
     const [ok2, srcIter] = this.get_iter(srcPath);
     const type           = this.get_value(srcIter, this.columns.TYPE);
-    const itemClass      = ItemRegistry.getItemTypes()[type].itemClass;
+    const itemClass      = ItemRegistry.getItemTypes()[type].class;
 
     if (destPath.get_depth() == 1 && itemClass == ItemClass.MENU) {
       return true;
@@ -162,7 +162,7 @@ var MenuEditor = class MenuEditor {
       row.set_name(type);
 
       // Add the new row either to the menus list or to the actions list.
-      if (ItemRegistry.getItemTypes()[type].itemClass == ItemClass.ACTION) {
+      if (ItemRegistry.getItemTypes()[type].class == ItemClass.ACTION) {
         this._builder.get_object('action-types-list').insert(row, -1);
       } else {
         this._builder.get_object('menu-types-list').insert(row, -1);
@@ -732,22 +732,11 @@ var MenuEditor = class MenuEditor {
 
     // Now we initialize all other widgets of the item settings. That is, for example, the
     // name, the url, command, or file input fields.
+
     // Store the item's name in the tree store when the text of the input field is
     // changed.
     this._builder.get_object('item-name').connect('notify::text', (widget) => {
       this._setSelected('NAME', widget.text);
-    });
-
-    // Store the item's URI in the tree store's DATA column when the text of the
-    // corresponding input field is changed.
-    this._builder.get_object('item-uri').connect('notify::text', (widget) => {
-      this._setSelected('DATA', widget.text);
-    });
-
-    // Store the item's ID in the tree store's DATA column when the text of the
-    // corresponding input field is changed.
-    this._builder.get_object('item-id').connect('notify::text', (widget) => {
-      this._setSelected('DATA', widget.text);
     });
 
     // Store the item's file path in the tree store's DATA column when the text of the
@@ -885,13 +874,12 @@ var MenuEditor = class MenuEditor {
         'item-settings-revealer': somethingSelected,
         'item-settings-menu-revealer': this._isToplevelSelected(),
         'item-settings-angle-revealer': !this._isToplevelSelected(),
+        'item-settings-data-caption-revealer': false,
         'item-settings-item-shortcut-revealer': false,
         'item-settings-count-revealer': false,
-        'item-settings-uri-revealer': false,
         'item-settings-command-revealer': false,
         'item-settings-file-revealer': false,
-        'item-settings-text-revealer': false,
-        'item-settings-id-revealer': false
+        'item-settings-text-revealer': false
       };
 
       if (somethingSelected) {
@@ -907,8 +895,6 @@ var MenuEditor = class MenuEditor {
         // modifications which in turn would lead to saving the menu configuration. As
         // this is not necessary, we disable saving temporarily.
         this._menuSavingAllowed = false;
-
-        const selectedDataType = ItemRegistry.getItemTypes()[selectedType].dataType;
 
         // The item's name, icon and description have to be updated in any case if
         // something is selected.
@@ -929,35 +915,45 @@ var MenuEditor = class MenuEditor {
           this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
         }
 
-        if (selectedDataType == ItemDataType.SHORTCUT) {
-          this._itemShortcutLabel.set_accelerator(this._getSelected('DATA'));
-          revealers['item-settings-item-shortcut-revealer'] = true;
+        // Now we check whether the selected item has a data property.
+        const data = ItemRegistry.getItemTypes()[selectedType].data;
+        if (data) {
 
-        } else if (selectedDataType == ItemDataType.URL) {
-          this._builder.get_object('item-uri').text = this._getSelected('DATA');
-          revealers['item-settings-uri-revealer']   = true;
+          // If it has a data property, we can show the revealer for the name and the
+          // description of the associated data.
+          revealers['item-settings-data-caption-revealer'] = true;
 
-        } else if (selectedDataType == ItemDataType.ID) {
-          this._builder.get_object('item-id').text = this._getSelected('DATA');
-          revealers['item-settings-id-revealer']   = true;
+          // Then we set the content of the name and description labels.
+          this._builder.get_object('item-settings-data-name').label = data.name;
+          this._builder.get_object('item-settings-data-description').label =
+              data.description;
 
-        } else if (selectedDataType == ItemDataType.FILE) {
-          this._builder.get_object('item-file').text = this._getSelected('DATA');
-          revealers['item-settings-file-revealer']   = true;
+          // Finally we update one of the data widgets based on the data type of the
+          // selected item.
+          if (data.type == ItemDataType.SHORTCUT) {
+            this._itemShortcutLabel.set_accelerator(this._getSelected('DATA'));
+            revealers['item-settings-item-shortcut-revealer'] = true;
 
-        } else if (selectedDataType == ItemDataType.COMMAND) {
-          this._builder.get_object('item-command').text = this._getSelected('DATA');
-          revealers['item-settings-command-revealer']   = true;
+          } else if (data.type == ItemDataType.FILE) {
+            this._builder.get_object('item-file').text = this._getSelected('DATA');
+            revealers['item-settings-file-revealer']   = true;
 
-        } else if (selectedDataType == ItemDataType.COUNT) {
-          this._builder.get_object('item-count').value = this._getSelected('DATA');
-          revealers['item-settings-count-revealer']    = true;
+          } else if (data.type == ItemDataType.COMMAND) {
+            this._builder.get_object('item-command').text = this._getSelected('DATA');
+            revealers['item-settings-command-revealer']   = true;
 
-        } else if (selectedDataType == ItemDataType.TEXT) {
-          this._builder.get_object('item-text').text = this._getSelected('DATA');
-          revealers['item-settings-text-revealer']   = true;
+          } else if (data.type == ItemDataType.COUNT) {
+            this._builder.get_object('item-count').value = this._getSelected('DATA');
+            revealers['item-settings-count-revealer']    = true;
+
+          } else if (data.type == ItemDataType.TEXT) {
+            this._builder.get_object('item-text').text = this._getSelected('DATA');
+            revealers['item-settings-text-revealer']   = true;
+          }
         }
 
+        // All modifications are done, all future modifications will come from the user
+        // and should result in saving the configuration again.
         this._menuSavingAllowed = true;
       }
 
@@ -1155,7 +1151,7 @@ var MenuEditor = class MenuEditor {
 
     if (ok) {
       if (this._isToplevelSelected() &&
-          ItemRegistry.getItemTypes()[newType].itemClass == ItemClass.ACTION) {
+          ItemRegistry.getItemTypes()[newType].class == ItemClass.ACTION) {
         iter = this._store.append(selected);
       } else {
         iter = this._store.insert_after(null, selected);
@@ -1185,9 +1181,12 @@ var MenuEditor = class MenuEditor {
     // Initialize other field to their default values.
     this._set(iter, 'TYPE', newType);
     this._set(iter, 'NAME', ItemRegistry.getItemTypes()[newType].name);
-    this._set(iter, 'DATA', ItemRegistry.getItemTypes()[newType].defaultData);
     this._set(iter, 'ANGLE', -1);
     this._set(iter, 'SHORTCUT', '');
+
+    if (ItemRegistry.getItemTypes()[newType].data != undefined) {
+      this._set(iter, 'DATA', ItemRegistry.getItemTypes()[newType].data.default);
+    }
   }
 
 

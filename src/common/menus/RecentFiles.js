@@ -23,37 +23,74 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var menu = {
+
+  // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
+  // activate() method which is called when the user selects the item, Menus can have
+  // child Actions or Menus.
+  class: ItemRegistry.ItemClass.MENU,
+
+  // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Recent Files'),
+
+  // This is also used in the add-new-item-popover.
   icon: 'document-open-recent',
+
   // Translators: Please keep this short.
+  // This is the (short) description shown in the add-new-item-popover.
   subtitle: _('Shows your recently used files.'),
+
+  // This is the (long) description shown when an item of this type is selected.
   description: _(
       'The <b>Recent Files</b> menu shows a list of recently used files. For efficient selections, you should limit the maximum number of shown files to about twelve.'),
-  itemClass: ItemRegistry.ItemClass.MENU,
-  dataType: ItemRegistry.ItemDataType.COUNT,
-  defaultData: '7',
+
+  // Items of this type have an additional data property which can be set by the user. The
+  // data value chosen by the user is passed to the createItem() method further below.
+  data: {
+
+    // The data type determines which widget is visible when an item of this type is
+    // selected in the settings dialog.
+    type: ItemRegistry.ItemDataType.COUNT,
+
+    // This is shown on the left above the data widget in the settings dialog.
+    name: _('Max Item Count'),
+
+    // Translators: Please keep this short.
+    // This is shown on the right above the data widget in the settings dialog.
+    description: _('Limits the number of children.'),
+
+    // This is be used as data for newly created items.
+    default: '7'
+  },
+
+  // This will be called whenever a menu is opened containing an item of this kind.
+  // The data value chosen by the user will be passed to this function.
   createItem: (data) => {
     const maxNum      = parseInt(data);
-    const recentFiles = Gtk.RecentManager.get_default().get_items().slice(0, maxNum);
+    const recentFiles = Gtk.RecentManager.get_default().get_items();
+    const num         = recentFiles.length;
     const result      = {children: []};
 
-    recentFiles.forEach(recentFile => {
-      if (recentFile.exists()) {
+    for (let i = 0; i < num; i++) {
+      if (result.children.length >= maxNum) {
+        break;
+      }
+
+      if (recentFiles[i].exists()) {
         result.children.push({
-          name: recentFile.get_display_name(),
-          icon: recentFile.get_gicon().to_string(),
+          name: recentFiles[i].get_display_name(),
+          icon: recentFiles[i].get_gicon().to_string(),
           activate: () => {
             const ctx = global.create_app_launch_context(0, -1);
 
             try {
-              Gio.AppInfo.launch_default_for_uri(recentFile.get_uri(), ctx);
+              Gio.AppInfo.launch_default_for_uri(recentFiles[i].get_uri(), ctx);
             } catch (error) {
               utils.debug('Failed to open URI: ' + error);
             }
           }
         });
       }
-    });
+    }
 
     return result;
   }

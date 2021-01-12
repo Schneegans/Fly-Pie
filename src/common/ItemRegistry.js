@@ -42,19 +42,19 @@ var ItemClass = {MENU: 0, ACTION: 1};
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var ItemDataType = {
-  NONE: 0,      // No additional widgets are shown in addition to name, icon, and angle.
+  TEXT: 0,      // A Gtk.Entry for arbitrary text.
   SHORTCUT: 1,  // A shortcut-selector is shown.
-  COMMAND: 2,   // A Gtk.Entry with the title 'Command'.
-  FILE: 3,      // A file chooser.
-  URL: 4,       // A Gtk.Entry with the title 'URL'.
-  COUNT: 5,     // A Gtk.SpinButton with the title 'Max Item Count'.
-  TEXT: 6,      // A Gtk.Entry with the title 'Text'.
-  ID: 7,        // A Gtk.Entry with the title 'ID'.
+  COMMAND: 2,   // A Gtk.Entry with an additional button for searching installed apps.
+  FILE: 3,      // A Gtk.Entry with an additional file chooser button.
+  COUNT: 4      // A Gtk.SpinButton for selecting numbers.
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The getItemTypes() of the ItemRegistry can be used to access all available action    //
 // and menu types. Each item type should have eight properties:                         //
+//   class:        This should be either ItemClass.ACTION or ItemClass.MENU.            //
+//                 The former is used for single items with an activate() method, the   //
+//                 latter for menus which are composed of multiple actions or menus.    //
 //   name:         This will be shown in the add-new-item popover. It is also the       //
 //                 default name of newly created items of this type. This should be     //
 //                 translatable.                                                        //
@@ -65,16 +65,23 @@ var ItemDataType = {
 //                 This should be translatable.                                         //
 //   description:  This will be shown in the right hand side settings when an item of   //
 //                 this type is selected. This should be translatable.                  //
-//   itemClass:    This should be either ItemClass.ACTION or ItemClass.MENU.            //
-//                 The former is used for single items with an activate() method, the   //
-//                 latter for menus which are composed of multiple actions or menus.    //
-//   dataType:     This determines which widgets are visible when an item of this type  //
-//                 is selected in the settings dialog. Possible values are listed in    //
-//                 ItemDataType.                                                        //
-//   defaultData:  This will be the default value for the data parameter for newly      //
-//                 created items.                                                       //
+//   data:         An optional object which defines some additional data which can be   //
+//                 chosen by the user. The additional data is always stored as a        //
+//                 string. If you actually need to store a number (e.g. for             //
+//                 ItemDataType.COUNT, you will have to use parseInt(data) in the       //
+//                 createItem() method.                                                 //
+//                   type:        This determines which widget is shown to select the   //
+//                                data in the settings dialog. Possible values are      //
+//                                listed in ItemDataType above.                         //
+//                   name:        This will be shown on the left above the data widget  //
+//                                in the settings dialog.                               //
+//                   description: This will be shown on the right above the data widget //
+//                                in the settings dialog.                               //
+//                   default:     This string value will be used as data for newly      //
+//                                created items.                                        //
 //   createItem:   A function which will be called whenever a menu is opened containing //
-//                 an item of this kind.                                                //
+//                 an item of this kind. The data value chosen by the user will be      //
+//                 passed to this function.                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let _itemTypes = null;
@@ -162,13 +169,13 @@ var ItemRegistry = class ItemRegistry {
     }
 
     // It's an error if a top-level element is not of the menu class.
-    if (isToplevel && this.getItemTypes()[config.type].itemClass != ItemClass.MENU) {
+    if (isToplevel && this.getItemTypes()[config.type].class != ItemClass.MENU) {
       throw 'Top-level items must be menu types!';
     }
 
     // Assign default data if required.
-    if (config.data == undefined) {
-      config.data = this.getItemTypes()[config.type].defaultData;
+    if (config.data == undefined && this.getItemTypes()[config.type].data != undefined) {
+      config.data = this.getItemTypes()[config.type].data.default;
     }
 
     // Assign default name.
