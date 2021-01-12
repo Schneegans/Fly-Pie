@@ -5,8 +5,8 @@
 [![check](https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Fly-Pie/actions)
 [![shell](https://img.shields.io/badge/Gnome_Shell-3.38-blue.svg)](metadata.json)
 [![license](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
-[![loc](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/loc.json)](cloc.sh)
-[![comments](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json)](cloc.sh)
+[![loc](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/loc.json)](scripts/cloc.sh)
+[![comments](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json)](scripts/cloc.sh)
 [![download](https://img.shields.io/badge/Download-extensions.gnome.org-e67f4d.svg)](https://extensions.gnome.org/extension/3433/fly-pie)
 
 **Fly-Pie** is an attractive marking menu for Gnome Shell which can be used to launch applications, simulate hotkeys, open URLs and much more.
@@ -18,7 +18,7 @@ It features a continuous learning curve which lets you gradually lift-off from a
 Fly-Pie lets you open _marking-menus_ of arbitrary depth via keyboard shortcuts.
 When using Fly-Pie, there are two selection modes which can be used together. You do not have to decide which one to use; you can seamlessly transition between the two:
 
-**Point-and-Click:** Select items by click on their wedge.<br>
+**Point-and-Click:** Select items by clicking on their wedge.<br>
 **Marking-Mode:** Select items by drawing gestures.
 
 The menus and their appearance can be configured with a **Live Preview** which updates instantaneously.

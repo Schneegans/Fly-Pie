@@ -45,7 +45,7 @@ Just play around with the options, most of it should be more or less self-explan
 ## Alternative Ways to Open Menus
 
 There are two possibilities to open menus.
-Either via the configured shortcut or with a terminal command as described below.
+Either via the configured shortcut or with a terminal command as [described on the next page](dbus-interface.md).
 This second approach can be used in combination with other tools.
 Interesting companions are:
 

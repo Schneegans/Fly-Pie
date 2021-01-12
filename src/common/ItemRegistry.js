@@ -8,10 +8,6 @@
 
 'use strict';
 
-const Me      = imports.misc.extensionUtils.getCurrentExtension();
-const actions = Me.imports.src.common.actions;
-const menus   = Me.imports.src.common.menus;
-
 const _ = imports.gettext.domain('flypie').gettext;
 
 // GMenu is not necessarily installed on all systems. So we include it optionally here. If
@@ -23,6 +19,11 @@ try {
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
+
+const Me      = imports.misc.extensionUtils.getCurrentExtension();
+const actions = Me.imports.src.common.actions;
+const menus   = Me.imports.src.common.menus;
+const utils   = Me.imports.src.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Menus of Fly-Pie are composed of individual menu items. A menu item can either be an //
@@ -41,16 +42,14 @@ var ItemClass = {MENU: 0, ACTION: 1};
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var ItemDataType = {
-  NONE: 0,
-  MENU: 1,
-  SUBMENU: 2,
-  SHORTCUT: 3,
-  COMMAND: 4,
-  FILE: 5,
-  URL: 6,
-  COUNT: 7,
-  TEXT: 8,
-  ID: 9,
+  NONE: 0,      // No additional widgets are shown in addition to name, icon, and angle.
+  SHORTCUT: 1,  // A shortcut-selector is shown.
+  COMMAND: 2,   // A Gtk.Entry with the title 'Command'.
+  FILE: 3,      // A file chooser.
+  URL: 4,       // A Gtk.Entry with the title 'URL'.
+  COUNT: 5,     // A Gtk.SpinButton with the title 'Max Item Count'.
+  TEXT: 6,      // A Gtk.Entry with the title 'Text'.
+  ID: 7,        // A Gtk.Entry with the title 'ID'.
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -67,8 +66,8 @@ var ItemDataType = {
 //   description:  This will be shown in the right hand side settings when an item of   //
 //                 this type is selected. This should be translatable.                  //
 //   itemClass:    This should be either ItemClass.ACTION or ItemClass.MENU.            //
-//                 The former is used for single items with an active() method, the     //
-//                 latter for menus which are composed of multiple actions.             //
+//                 The former is used for single items with an activate() method, the   //
+//                 latter for menus which are composed of multiple actions or menus.    //
 //   dataType:     This determines which widgets are visible when an item of this type  //
 //                 is selected in the settings dialog. Possible values are listed in    //
 //                 ItemDataType.                                                        //
@@ -202,6 +201,11 @@ var ItemRegistry = class ItemRegistry {
   // See documentation of transformConfig() above.
   static _transformConfig(config, isToplevel) {
 
+    // Throw an error if an unknown item type is detected.
+    if (this.getItemTypes()[config.type] == undefined) {
+      throw 'Invalid item type \'' + config.type + '\'';
+    }
+
     // Create the item and then set all the standard-properties later.
     const result = this.getItemTypes()[config.type].createItem(config.data);
     result.name  = config.name;
@@ -218,7 +222,13 @@ var ItemRegistry = class ItemRegistry {
     // Load all children recursively.
     if (config.children) {
       for (let i = 0; i < config.children.length; i++) {
-        result.children.push(this._transformConfig(config.children[i], false));
+        try {
+          result.children.push(this._transformConfig(config.children[i], false));
+        } catch (error) {
+          utils.debug(
+              'Failed to transform menu item \'' + config.children[i].name +
+              '\': ' + error + '!');
+        }
       }
     }
 
