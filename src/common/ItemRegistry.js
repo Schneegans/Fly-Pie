@@ -94,7 +94,7 @@ var ItemRegistry = class ItemRegistry {
   // most constraints are fulfilled (e.g. required data fields are set, no top-level
   // actions, etc.) and fills the objects with default data if no data is given.
   static normalizeConfig(config) {
-    return this._normalizeConfig(config, true);
+    this._normalizeConfig(config, true);
   }
 
   // This uses the createItem() methods of the registered actions and menus to transform a
@@ -189,9 +189,13 @@ var ItemRegistry = class ItemRegistry {
       throw 'Top-level items must be menu types!';
     }
 
-    // Assign default data if required.
-    if (config.data == undefined && this.getItemTypes()[config.type].data != undefined) {
-      config.data = this.getItemTypes()[config.type].data.default;
+    // Assign default data.
+    if (config.data == undefined) {
+      if (this.getItemTypes()[config.type].data != undefined) {
+        config.data = this.getItemTypes()[config.type].data.default;
+      } else {
+        config.data = '';
+      }
     }
 
     // Assign default name.
