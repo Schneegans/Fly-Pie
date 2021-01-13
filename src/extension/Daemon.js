@@ -11,14 +11,14 @@
 const {Gio, GLib} = imports.gi;
 
 const Me             = imports.misc.extensionUtils.getCurrentExtension();
-const Menu           = Me.imports.src.extension.Menu.Menu;
-const Shortcuts      = Me.imports.src.extension.Shortcuts.Shortcuts;
-const DBusInterface  = Me.imports.src.common.DBusInterface.DBusInterface;
 const utils          = Me.imports.src.common.utils;
-const ItemRegistry   = Me.imports.src.common.ItemRegistry.ItemRegistry;
 const Statistics     = Me.imports.src.common.Statistics.Statistics;
-const DefaultMenu    = Me.imports.src.settings.DefaultMenu.DefaultMenu;
+const ItemRegistry   = Me.imports.src.common.ItemRegistry.ItemRegistry;
+const DBusInterface  = Me.imports.src.common.DBusInterface.DBusInterface;
+const Shortcuts      = Me.imports.src.extension.Shortcuts.Shortcuts;
 const MouseHighlight = Me.imports.src.extension.MouseHighlight.MouseHighlight;
+const Menu           = Me.imports.src.extension.Menu.Menu;
+const DefaultMenu    = Me.imports.src.extension.DefaultMenu.DefaultMenu;
 const Achievements   = Me.imports.src.extension.Achievements.Achievements;
 
 //////////////////////////////////////////////////////////////////////////////////////////

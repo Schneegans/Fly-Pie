@@ -94,7 +94,7 @@ var ItemRegistry = class ItemRegistry {
   // most constraints are fulfilled (e.g. required data fields are set, no top-level
   // actions, etc.) and fills the objects with default data if no data is given.
   static normalizeConfig(config) {
-    return this._normalizeConfig(config, true);
+    this._normalizeConfig(config, true);
   }
 
   // This uses the createItem() methods of the registered actions and menus to transform a
@@ -163,6 +163,22 @@ var ItemRegistry = class ItemRegistry {
       config.type = 'CustomMenu';
     }
 
+    // If we have an unknown item type, we assume 'CustomMenu' if we have children and
+    // 'DBusSignal' otherwise.
+    if (this.getItemTypes()[config.type] == undefined) {
+      if (config.children == undefined) {
+        utils.debug(
+            'Warning: Unknown item type \'' + config.type +
+            '\'! Using \'DBusSignal\' instead.');
+        config.type = 'DBusSignal';
+      } else {
+        utils.debug(
+            'Warning: Unknown item type \'' + config.type +
+            '\'! Using \'CustomMenu\' instead as this item has children.');
+        config.type = 'CustomMenu';
+      }
+    }
+
     // It's an error if the type is not Menu but there are children.
     if (config.type != 'CustomMenu' && config.children != undefined) {
       throw 'Only items of type \'CustomMenu\' may contain child items!';
@@ -173,9 +189,13 @@ var ItemRegistry = class ItemRegistry {
       throw 'Top-level items must be menu types!';
     }
 
-    // Assign default data if required.
-    if (config.data == undefined && this.getItemTypes()[config.type].data != undefined) {
-      config.data = this.getItemTypes()[config.type].data.default;
+    // Assign default data.
+    if (config.data == undefined) {
+      if (this.getItemTypes()[config.type].data != undefined) {
+        config.data = this.getItemTypes()[config.type].data.default;
+      } else {
+        config.data = '';
+      }
     }
 
     // Assign default name.
@@ -208,11 +228,6 @@ var ItemRegistry = class ItemRegistry {
   // See documentation of transformConfig() above.
   static _transformConfig(config, isToplevel) {
 
-    // Throw an error if an unknown item type is detected.
-    if (this.getItemTypes()[config.type] == undefined) {
-      throw 'Invalid item type \'' + config.type + '\'';
-    }
-
     // Create the item and then set all the standard-properties later.
     const result = this.getItemTypes()[config.type].createItem(config.data);
     result.name  = config.name;
@@ -229,13 +244,7 @@ var ItemRegistry = class ItemRegistry {
     // Load all children recursively.
     if (config.children) {
       for (let i = 0; i < config.children.length; i++) {
-        try {
-          result.children.push(this._transformConfig(config.children[i], false));
-        } catch (error) {
-          utils.debug(
-              'Failed to transform menu item \'' + config.children[i].name +
-              '\': ' + error + '!');
-        }
+        result.children.push(this._transformConfig(config.children[i], false));
       }
     }
 
