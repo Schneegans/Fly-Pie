@@ -16,11 +16,11 @@ const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.src.common.utils;
 const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
 const Statistics    = Me.imports.src.common.Statistics.Statistics;
-const Preset        = Me.imports.src.settings.Preset.Preset;
-const MenuEditor    = Me.imports.src.settings.MenuEditor.MenuEditor;
-const Tutorial      = Me.imports.src.settings.Tutorial.Tutorial;
-const Achievements  = Me.imports.src.settings.Achievements.Achievements;
-const ExampleMenu   = Me.imports.src.settings.ExampleMenu.ExampleMenu;
+const Preset        = Me.imports.src.prefs.Preset.Preset;
+const MenuEditor    = Me.imports.src.prefs.MenuEditor.MenuEditor;
+const Tutorial      = Me.imports.src.prefs.Tutorial.Tutorial;
+const Achievements  = Me.imports.src.prefs.Achievements.Achievements;
+const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 

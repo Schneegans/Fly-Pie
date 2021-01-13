@@ -16,7 +16,7 @@ const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.src.common.utils;
 const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
 const Timer         = Me.imports.src.common.Timer.Timer;
-const ExampleMenu   = Me.imports.src.settings.ExampleMenu.ExampleMenu;
+const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 

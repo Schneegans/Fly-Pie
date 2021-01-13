@@ -17,7 +17,7 @@ const DBusInterface  = Me.imports.src.common.DBusInterface.DBusInterface;
 const utils          = Me.imports.src.common.utils;
 const ItemRegistry   = Me.imports.src.common.ItemRegistry.ItemRegistry;
 const Statistics     = Me.imports.src.common.Statistics.Statistics;
-const DefaultMenu    = Me.imports.src.settings.DefaultMenu.DefaultMenu;
+const DefaultMenu    = Me.imports.src.prefs.DefaultMenu.DefaultMenu;
 const MouseHighlight = Me.imports.src.extension.MouseHighlight.MouseHighlight;
 const Achievements   = Me.imports.src.extension.Achievements.Achievements;
 
