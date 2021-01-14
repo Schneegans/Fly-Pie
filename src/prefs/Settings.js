@@ -12,15 +12,15 @@ const {GLib, Gtk, Gio, Gdk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me            = imports.misc.extensionUtils.getCurrentExtension();
-const utils         = Me.imports.src.common.utils;
-const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
-const Statistics    = Me.imports.src.common.Statistics.Statistics;
-const Preset        = Me.imports.src.prefs.Preset.Preset;
-const MenuEditor    = Me.imports.src.prefs.MenuEditor.MenuEditor;
-const Tutorial      = Me.imports.src.prefs.Tutorial.Tutorial;
-const Achievements  = Me.imports.src.prefs.Achievements.Achievements;
-const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
+const Me               = imports.misc.extensionUtils.getCurrentExtension();
+const utils            = Me.imports.src.common.utils;
+const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
+const Statistics       = Me.imports.src.common.Statistics.Statistics;
+const Preset           = Me.imports.src.prefs.Preset.Preset;
+const MenuEditorPage   = Me.imports.src.prefs.MenuEditorPage.MenuEditorPage;
+const TutorialPage     = Me.imports.src.prefs.TutorialPage.TutorialPage;
+const AchievementsPage = Me.imports.src.prefs.AchievementsPage.AchievementsPage;
+const ExampleMenu      = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -56,15 +56,15 @@ var Settings = class Settings {
 
     // Initialize the Menu Editor page. To structure the source code, this has been put
     // into a separate class.
-    this._menuEditor = new MenuEditor(this._builder, this._settings);
+    this._menuEditorPage = new MenuEditorPage(this._builder, this._settings);
 
     // Initialize the Tutorial page. To structure the source code, this has been put
     // into a separate class.
-    this._tutorial = new Tutorial(this._builder, this._settings);
+    this._tutorialPage = new TutorialPage(this._builder, this._settings);
 
     // Initialize the Achievements page. To structure the source code, this has been put
     // into a separate class.
-    this._achievements = new Achievements(this._builder, this._settings);
+    this._achievementsPage = new AchievementsPage(this._builder, this._settings);
 
     // Show current version number in about-popover.
     this._builder.get_object('app-name').label = 'Fly-Pie ' + Me.metadata.version;

@@ -21,13 +21,13 @@ const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The Tutorial class encapsulates code required for the 'Tutorial' page of the         //
+// The TutorialPage class encapsulates code required for the 'Tutorial' page of the     //
 // settings dialog. It's not instantiated multiple times, nor does it have any public   //
 // interface, hence it could just be copy-pasted to the settings class. But as it's     //
 // quite decoupled as well, it structures the code better when written to its own file. //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var Tutorial = class Tutorial {
+var TutorialPage = class TutorialPage {
 
   // ------------------------------------------------------------ constructor / destructor
 
