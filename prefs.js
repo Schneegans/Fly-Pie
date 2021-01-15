@@ -8,9 +8,9 @@
 
 'use strict';
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me             = imports.misc.extensionUtils.getCurrentExtension();
-const Settings       = Me.imports.src.prefs.Settings.Settings;
+const ExtensionUtils    = imports.misc.extensionUtils;
+const Me                = imports.misc.extensionUtils.getCurrentExtension();
+const PreferencesDialog = Me.imports.src.prefs.PreferencesDialog.PreferencesDialog;
 
 // Like in 'extension.js' this is used for setting up the translations.
 function init() {
@@ -18,10 +18,10 @@ function init() {
 }
 
 // This function is called when the preferences window is created to build and return a
-// Gtk widget. We create a new instance of the settings class each time this method is
-// called. This way we can actually open multiple settings windows and interact with all
-// of the properly.
+// Gtk widget. We create a new instance of the PreferencesDialog class each time this
+// method is called. This way we can actually open multiple settings windows and interact
+// with all of them properly.
 function buildPrefsWidget() {
-  let settings = new Settings();
-  return settings.getWidget();
+  let dialog = new PreferencesDialog();
+  return dialog.getWidget();
 }

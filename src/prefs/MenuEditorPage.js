@@ -106,14 +106,14 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The MenuEditor class encapsulates code required for the 'Menu Editor' page of the    //
-// settings dialog. It's not instantiated multiple times, nor does it have any public   //
-// interface, hence it could just be copy-pasted to the settings class. But as it's     //
-// quite decoupled (and huge) as well, it structures the code better when written to    //
-// its own file.                                                                        //
+// The MenuEditorPage class encapsulates code required for the 'Menu Editor' page of    //
+// the settings dialog. It's not instantiated multiple times, nor does it have any      //
+// public interface, hence it could just be copy-pasted to the settings class. But as   //
+// it's quite decoupled (and huge) as well, it structures the code better when written  //
+// to its own file.                                                                     //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var MenuEditor = class MenuEditor {
+var MenuEditorPage = class MenuEditorPage {
 
   // ------------------------------------------------------------ constructor / destructor
 

@@ -17,13 +17,14 @@ const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The Achievements class encapsulates code required for the 'Achievements' page of the //
-// settings dialog. It's not instantiated multiple times, nor does it have any public   //
-// interface, hence it could just be copy-pasted to the settings class. But as it's     //
-// quite decoupled as well, it structures the code better when written to its own file. //
+// The AchievementsPage class encapsulates code required for the 'Achievements' page of //
+// the settings dialog. It's not instantiated multiple times, nor does it have any      //
+// public interface, hence it could just be copy-pasted to the settings class. But as   //
+// it's quite decoupled as well, it structures the code better when written to its own  //
+// file.                                                                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var Achievements = class Achievements {
+var AchievementsPage = class AchievementsPage {
 
   // ------------------------------------------------------------ constructor / destructor
 
