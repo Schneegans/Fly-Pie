@@ -8,66 +8,36 @@
 
 'use strict';
 
-const {GLib, Gtk, Gio, Gdk} = imports.gi;
+const {Gtk, Gio, Gdk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me               = imports.misc.extensionUtils.getCurrentExtension();
-const utils            = Me.imports.src.common.utils;
-const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
-const Statistics       = Me.imports.src.common.Statistics.Statistics;
-const Preset           = Me.imports.src.prefs.Preset.Preset;
-const MenuEditorPage   = Me.imports.src.prefs.MenuEditorPage.MenuEditorPage;
-const TutorialPage     = Me.imports.src.prefs.TutorialPage.TutorialPage;
-const AchievementsPage = Me.imports.src.prefs.AchievementsPage.AchievementsPage;
-const ExampleMenu      = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
+const Me            = imports.misc.extensionUtils.getCurrentExtension();
+const utils         = Me.imports.src.common.utils;
+const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
+const Statistics    = Me.imports.src.common.Statistics.Statistics;
+const Preset        = Me.imports.src.prefs.Preset.Preset;
+const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// This class loads the user interface defined in settings.ui and connects all elements //
-// to the corresponding settings items of the Gio.Settings at                           //
-// org.gnome.shell.extensions.flypie. All these connections work both ways - when a     //
-// slider is moved in the user interface the corresponding settings key will be         //
-// updated and when a settings key is modified, the corresponding slider is moved.      //
+// The SettingsPage class encapsulates code required for the 'Menu Editor' page of      //
+// the settings dialog. It's not instantiated multiple times, nor does it have any      //
+// public interface, hence it could just be copy-pasted to the settings class. But as   //
+// it's quite decoupled (and huge) as well, it structures the code better when written  //
+// to its own file.                                                                     //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var Settings = class Settings {
+var SettingsPage = class SettingsPage {
 
   // ------------------------------------------------------------ constructor / destructor
 
-  constructor() {
+  constructor(builder, settings) {
 
-    // Create the Gio.Settings object.
-    this._settings = utils.createSettings();
-
-    // This we need to check whether ui animations are enabled.
-    this._shellSettings = Gio.Settings.new('org.gnome.desktop.interface');
-
-    // Load the user interface file.
-    this._builder = new Gtk.Builder();
-    this._builder.add_from_file(Me.path + '/assets/settings.ui');
-
-    // Load the CSS file for the settings dialog.
-    const styleProvider = Gtk.CssProvider.new();
-    styleProvider.load_from_path(Me.path + '/assets/flypie.css');
-    Gtk.StyleContext.add_provider_for_screen(
-        Gdk.Screen.get_default(), styleProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-    // Initialize the Menu Editor page. To structure the source code, this has been put
-    // into a separate class.
-    this._menuEditorPage = new MenuEditorPage(this._builder, this._settings);
-
-    // Initialize the Tutorial page. To structure the source code, this has been put
-    // into a separate class.
-    this._tutorialPage = new TutorialPage(this._builder, this._settings);
-
-    // Initialize the Achievements page. To structure the source code, this has been put
-    // into a separate class.
-    this._achievementsPage = new AchievementsPage(this._builder, this._settings);
-
-    // Show current version number in about-popover.
-    this._builder.get_object('app-name').label = 'Fly-Pie ' + Me.metadata.version;
+    // Keep a reference to the builder and the settings.
+    this._builder  = builder;
+    this._settings = settings;
 
     // Initialize all buttons of the preset area.
     this._initializePresetButtons();
@@ -239,75 +209,6 @@ var Settings = class Settings {
     this._bindSlider('gesture-min-stroke-length');
     this._bindSlider('gesture-min-stroke-angle');
     this._bindSwitch('show-screencast-mouse');
-
-
-    // We show an info bar if GNOME Shell's animations are disabled. To make this info
-    // more apparent, we wait some seconds before showing it.
-    this._showAnimationInfoTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
-      // Link the visibility of the info bar with the animations setting.
-      this._shellSettings.bind(
-          'enable-animations', this._builder.get_object('animation-infobar'), 'revealed',
-          Gio.SettingsBindFlags.INVERT_BOOLEAN);
-
-      // Enable animations when the button in the info bar is pressed.
-      this._builder.get_object('enable-animations-button').connect('clicked', () => {
-        this._shellSettings.set_boolean('enable-animations', true);
-      });
-
-      this._showAnimationInfoTimeout = 0;
-      return false;
-    });
-
-    // This is our top-level widget which we will return later.
-    this._widget = this._builder.get_object('main-notebook');
-
-    // Because it looks cool, we add the stack switcher and the about button to the
-    // window's title bar.
-    this._widget.connect('realize', () => {
-      const stackSwitcher = this._builder.get_object('main-stack-switcher');
-      const aboutButton   = this._builder.get_object('about-button');
-
-      stackSwitcher.parent.remove(aboutButton);
-      stackSwitcher.parent.remove(stackSwitcher);
-
-      const titlebar = this._widget.get_toplevel().get_titlebar();
-      titlebar.set_custom_title(stackSwitcher);
-      titlebar.pack_start(aboutButton);
-    });
-
-    // Save the currently active settings page. This way, the tutorial will be shown when
-    // the settings dialog is shown for the first time. Then, when the user modified
-    // something on another page, this will be shown when the settings dialog is shown
-    // again.
-    const stack              = this._builder.get_object('main-stack');
-    stack.visible_child_name = this._settings.get_string('active-stack-child');
-    stack.connect('notify::visible-child-name', (stack) => {
-      this._settings.set_string('active-stack-child', stack.visible_child_name);
-    });
-
-    // As we do not have something like a destructor, we just listen for the destroy
-    // signal of our main widget.
-    this._widget.connect('destroy', () => {
-      if (this._showAnimationInfoTimeout > 0) {
-        GLib.source_remove(this._showAnimationInfoTimeout);
-      }
-
-      // Delete the static settings object of the statistics.
-      Statistics.cleanUp();
-
-      // Disconnect some settings handlers of the achievements class.
-      this._achievements.destroy();
-    });
-
-    // Record this construction for the statistics.
-    Statistics.addSettingsOpened();
-  }
-
-  // -------------------------------------------------------------------- public interface
-
-  // Returns the widget used for the settings of this extension.
-  getWidget() {
-    return this._widget;
   }
 
   // ----------------------------------------------------------------------- private stuff
