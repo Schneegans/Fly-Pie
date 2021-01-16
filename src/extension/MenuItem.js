@@ -754,8 +754,13 @@ class MenuItem extends Clutter.Actor {
 
     // Most of the settings will come into effect during the call to redraw(). However,
     // some name settings we can apply here as they won't be affected by state changes.
-    const nameWidth = MenuItemSettings.state.get(MenuItemState.CENTER).size * 0.8;
-    this._name.set_size(nameWidth, nameWidth);
+
+    // The name width is set so that the text always stays inside the (cropped) icon of
+    // the center item. The sqrt(2) is because the an iconCrop of 1 means that the entire
+    // square icon is visible.
+    const state    = MenuItemSettings.state.get(MenuItemState.CENTER);
+    const nameSize = state.size * state.iconScale * state.iconCrop * Math.sqrt(2);
+    this._name.set_size(nameSize, nameSize);
     this._name.set_color(MenuItemSettings.textColor);
 
     // Multiply the size of the font by globalScale.
