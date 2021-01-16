@@ -31,7 +31,7 @@ Last but not least, Fly-Pie features a **D-Bus Interface** which can be used to 
 ## :heart: Will you love Fly-Pie?
 
 <p align="center">
-  <img src ="docs/pics/banner-01.jpg" />
+  <img src ="docs/pics/banner-05.jpg" />
 </p>
 
 Fly-Pie is designed for you **if you have one hand at the mouse** most of the time.
