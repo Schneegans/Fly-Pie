@@ -1,5 +1,5 @@
 <p align="center">
-  <img src ="pics/banner-01.jpg" />
+  <img src ="pics/banner-02.jpg" />
 </p>
 
 # Contributing to Fly-Pie
@@ -14,7 +14,7 @@ Feel free to fork the repository, implement your changes and create a merge requ
 
 ## Debugging
 
-Developing a Gnome Shell extension is not easy, as debugging possibilities are quite limited. One thing you should always do is to monitor Gnome Shells output for error or debug messages produced by Fly-Pie. This can be done with the command below. This may print many unrelated messages, but using `grep` like this highlights all occurrences of `flypie` which makes spotting Fly-Pie-related messages much easier.
+Developing a GNOME Shell extension is not easy, as debugging possibilities are quite limited. One thing you should always do is to monitor GNOME Shells output for error or debug messages produced by Fly-Pie. This can be done with the command below. This may print many unrelated messages, but using `grep` like this highlights all occurrences of `flypie` which makes spotting Fly-Pie-related messages much easier.
 
 ```bash
 journalctl -f -o cat | grep -E 'flypie|'
@@ -64,5 +64,5 @@ Emoji | Description
   <img src="pics/nav-space.svg"/>
   <a href="../README.md#getting-started"><img src ="pics/home.png"/> Index</a>
   <img src="pics/nav-space.svg"/>
-  <a href="translating.md">Translating Fly-Pie <img src ="pics/right-arrow.png"/></a>
+  <a href="software-architecture.md">Software Architecture <img src ="pics/right-arrow.png"/></a>
 </p>

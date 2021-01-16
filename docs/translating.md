@@ -27,7 +27,7 @@ in the `/po` directory and install the extension with your updated translations:
   scripts/create-release.sh -i
   ```
 
-* Then, restart Gnome Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+* Then, restart GNOME Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
 Or logout / login if you are on Wayland.
 
 * Test if all strings you translated are looking good.
@@ -52,10 +52,9 @@ sudo apt install gettext
 <p align="center"><img src ="pics/hr.svg" /></p>
 
 <p align="center">
-  <a href="contributing.md"><img src ="pics/left-arrow.png"/> Contributing Guidelines</a>
+  <a href="software-architecture.md"><img src ="pics/left-arrow.png"/> Software Architecture</a>
   <img src="pics/nav-space.svg"/>
   <a href="../README.md#getting-started"><img src ="pics/home.png"/> Index</a>
   <img src="pics/nav-space.svg"/>
-  <a href="changelog.md">Changelog <img src ="pics/right-arrow.png"/></a>
-  <img src="pics/nav-space.svg"/>
+  <a href="creating-actions.md">Creating New Action Types <img src ="pics/right-arrow.png"/></a>
 </p>

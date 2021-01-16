@@ -1007,8 +1007,8 @@ msgid "Maximize Window"
 msgstr "Ingrandisci Finestra"
 
 #: settings/DefaultMenu.js:76
-msgid "Gnome Shell"
-msgstr "Gnome Shell"
+msgid "GNOME Shell"
+msgstr "GNOME Shell"
 
 #: settings/DefaultMenu.js:80 settings/ExampleMenu.js:265
 msgid "Up"
@@ -1853,11 +1853,11 @@ msgstr "Mostra le applicazioni appuntate."
 
 #: common/menus/Favorites.js:41
 msgid ""
-"The <b>Favorites</b> menu shows the applications you have pinned to Gnome "
+"The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
 msgstr ""
 "Il menu <b>Preferiti</b> mostra le applicazioni che hai appuntato alla Dash "
-"di Gnome Shell."
+"di GNOME Shell."
 
 #: common/menus/FrequentlyUsed.js:36
 msgid "Frequently Used"

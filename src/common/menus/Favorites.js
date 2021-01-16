@@ -51,7 +51,7 @@ var menu = {
 
   // This is the (long) description shown when an item of this type is selected.
   description: _(
-      'The <b>Favorites</b> menu shows the applications you have pinned to Gnome Shell\'s Dash.'),
+      'The <b>Favorites</b> menu shows the applications you have pinned to GNOME Shell\'s Dash.'),
 
   // This will be called whenever a menu is opened containing an item of this kind.
   createItem: () => {

@@ -382,7 +382,7 @@ var Menu = class Menu {
     this._onSettingsChange();
   }
 
-  // This removes our root actor from Gnome Shell.
+  // This removes our root actor from GNOME Shell.
   destroy() {
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();

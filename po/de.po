@@ -1869,7 +1869,7 @@ msgstr "Zeigt angeheftete Anwendungen."
 
 #: src/common/menus/Favorites.js:41
 msgid ""
-"The <b>Favorites</b> menu shows the applications you have pinned to Gnome "
+"The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
 msgstr ""
 "Das <b>Favoriten</b>-Menü zeigt die Anwendungen, die Sie an die Dash von "

@@ -1725,7 +1725,7 @@ msgstr ""
 
 #: src/common/menus/Favorites.js:41
 msgid ""
-"The <b>Favorites</b> menu shows the applications you have pinned to Gnome "
+"The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
 msgstr ""
 

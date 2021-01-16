@@ -1,5 +1,5 @@
 <p align="center"> 
-  <img src ="pics/banner-01.jpg" />
+  <img src ="pics/banner-03.jpg" />
 </p>
 
 # Continuous Integration

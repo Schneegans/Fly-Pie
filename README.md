@@ -9,7 +9,7 @@
 [![comments](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json)](scripts/cloc.sh)
 [![download](https://img.shields.io/badge/Download-extensions.gnome.org-e67f4d.svg)](https://extensions.gnome.org/extension/3433/fly-pie)
 
-**Fly-Pie** is an attractive marking menu for Gnome Shell which can be used to launch applications, simulate hotkeys, open URLs and much more.
+**Fly-Pie** is an attractive marking menu for GNOME Shell which can be used to launch applications, simulate hotkeys, open URLs and much more.
 It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.
 (You got it? Like pilot, but with a :cake:).
 
@@ -53,7 +53,10 @@ If you want to learn more, use the links below for much more information!
 ## Contributing to Fly-Pie
 
 * [Contributing Guidelines](docs/contributing.md)
+* [Software Architecture](docs/software-architecture.md)
 * [Translating Fly-Pie](docs/translating.md)
+* [Creating New Action Types](docs/creating-actions.md)
+* [Creating New Menu Types](docs/creating-menus.md)
 
 ## Additional Information
 

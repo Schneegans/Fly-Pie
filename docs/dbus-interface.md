@@ -96,7 +96,7 @@ The table below lists all possible item types. Some of the types require that th
 | **`"CustomMenu"`** | _not used_ | Use the `"children"` property to add as many actions or submenus as you want! |
 | **`"Bookmarks"`** | _not used_ | This menu shows an item for the trash, your desktop and each bookmarked directory. |
 | **`"Devices"`** | _not used_ | This menu shows an item for each mounted volume, like USB-Sticks. |
-| **`"Favorites"`** | _not used_ | This menu shows the applications you have pinned to Gnome Shell's Dash. |
+| **`"Favorites"`** | _not used_ | This menu shows the applications you have pinned to GNOME Shell's Dash. |
 | **`"FrequentlyUsed"`** | `"7"` | This menu shows a list of frequently used applications. You should limit the maximum number of shown applications to a reasonable number given in `data`. |
 | **`"MainMenu"`** | _not used_ | This menu shows all installed applications. Usually, this is very cluttered as many sections contain too many items to be used efficiently. You should rather setup your own menus! This menu is only available if the typelib for GMenu is installed on the system. Usually the package is called something like `gir1.2-gmenu-3.0`. |
 | **`"RecentFiles"`** | `"7"` | This menu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number given in `data`. |

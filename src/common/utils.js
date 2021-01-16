@@ -15,10 +15,10 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// This method can be used to write a message to Gnome Shell's log. This is enhances    //
+// This method can be used to write a message to GNOME Shell's log. This is enhances    //
 // the standard log() functionality by prepending the extension's name and the location //
 // where the message was logged. As the extensions name is part of the location, you    //
-// can more effectively watch the log output of Gnome Shell:                            //
+// can more effectively watch the log output of GNOME Shell:                            //
 // journalctl -f -o cat | grep -E 'flypie|'                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
