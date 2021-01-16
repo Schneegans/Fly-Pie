@@ -1,5 +1,5 @@
 <p align="center">
-  <img src ="pics/banner-01.jpg" />
+  <img src ="pics/banner-02.jpg" />
 </p>
 
 # Creating New Menu Types for Fly-Pie
