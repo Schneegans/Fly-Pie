@@ -247,6 +247,11 @@
       <summary>Background Image File Path</summary>
       <description>Relative or absolute path to the background image.</description>
     </key>
+    <key name="center-background-image-hover" type="s">
+      <default>""</default>
+      <summary>Background Image File Path Hover</summary>
+      <description>Relative or absolute path to the background image when hovered.</description>
+    </key>
 
 
     <!-- Child Item Settings -->
@@ -370,6 +375,11 @@
       <summary>Background Image File Path</summary>
       <description>Relative or absolute path to the background image.</description>
     </key>
+    <key name="child-background-image-hover" type="s">
+      <default>""</default>
+      <summary>Background Image File Path Hover</summary>
+      <description>Relative or absolute path to the background image when hovered.</description>
+    </key>
 
     <key name="child-draw-above" type="b">
       <default>false</default>
@@ -432,6 +442,11 @@
       <default>""</default>
       <summary>Background Image File Path</summary>
       <description>Relative or absolute path to the background image.</description>
+    </key>
+    <key name="grandchild-background-image-hover" type="s">
+      <default>""</default>
+      <summary>Background Image File Path Hover</summary>
+      <description>Relative or absolute path to the background image when hovered.</description>
     </key>
 
     <key name="grandchild-draw-above" type="b">
