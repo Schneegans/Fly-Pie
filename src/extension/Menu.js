@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Main           = imports.ui.main;
-const {Clutter, Gdk} = imports.gi;
+const Main                = imports.ui.main;
+const {Clutter, Gdk, Gtk} = imports.gi;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.src.common.utils;
@@ -87,6 +87,16 @@ var Menu = class Menu {
       return Clutter.EVENT_STOP;
     });
 
+    // When a button is released while an item is dragged around, this can lead to a
+    // selection in "Turbo Mode".
+    this._background.connect('key-release-event', (actor, event) => {
+      if (this._draggedChild != null) {
+        // This will potentially fire the OnSelect signal.
+        this._selectionWedges.onKeyReleaseEvent();
+      }
+      return Clutter.EVENT_STOP;
+    });
+
     // Forward button release events to the SelectionWedges.
     this._background.connect('button-release-event', (actor, event) => {
       // This will potentially fire the OnSelect signal.
@@ -102,10 +112,13 @@ var Menu = class Menu {
     this._background.connect('motion-event', (actor, event) => {
       this._selectionWedges.onMotionEvent(event);
 
-      // If the primary button is pressed but we don not have a dragged child yet, we mark
-      // the currently hovered child as being the dragged child.
-      if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK &&
-          this._draggedChild == null) {
+      // If the primary button is pressed or a modifier is held down (for the
+      // "Turbo-Mode"), but we do not have a dragged child yet, we mark the currently
+      // hovered child as being the dragged child.
+      const leftButtonPressed = event.get_state() & Clutter.ModifierType.BUTTON1_MASK;
+      const shortcutPressed = event.get_state() & Gtk.accelerator_get_default_mod_mask();
+
+      if ((leftButtonPressed || shortcutPressed) && this._draggedChild == null) {
         const index = this._selectionWedges.getHoveredChild();
         if (index >= 0) {
           const child = this._menuSelectionChain[0].getChildMenuItems()[index];
@@ -190,8 +203,10 @@ var Menu = class Menu {
 
       // If we're currently dragging a child around, the newly hovered child will
       // instantaneously become the hovered child.
-      const [x, y, mods] = global.get_pointer();
-      if (mods & Clutter.ModifierType.BUTTON1_MASK && index >= 0) {
+      const [x, y, mods]      = global.get_pointer();
+      const leftButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
+      const shortcutPressed   = mods & Gtk.accelerator_get_default_mod_mask();
+      if ((leftButtonPressed || shortcutPressed) && index >= 0) {
         const child = this._menuSelectionChain[0].getChildMenuItems()[index];
         child.setState(MenuItemState.CHILD_DRAGGED);
         this._draggedChild = child;
@@ -212,8 +227,10 @@ var Menu = class Menu {
       const [pointerX, pointerY, mods] = global.get_pointer();
 
       // Ignore any gesture-based selection of leaf nodes. Final selections are only done
-      // when the mouse button is released.
-      if (mods & Clutter.ModifierType.BUTTON1_MASK &&
+      // when the mouse button or a modifier button is released.
+      const leftButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
+      const shortcutPressed   = mods & Gtk.accelerator_get_default_mod_mask();
+      if ((leftButtonPressed || shortcutPressed) &&
           child.getChildMenuItems().length == 0) {
         return;
       }

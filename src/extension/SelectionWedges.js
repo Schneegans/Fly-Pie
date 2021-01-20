@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                               = imports.cairo;
-const {Clutter, Cogl, Gio, GObject, GLib} = imports.gi;
+const Cairo                                    = imports.cairo;
+const {Clutter, Cogl, Gio, GObject, GLib, Gtk} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
@@ -351,6 +351,14 @@ class SelectionWedges extends Clutter.Actor {
     }
   }
 
+  // This is called by the Menu when the user releases a button. It fires either
+  // 'parent-selected-event' or 'child-selected-event' if the corresponding wedge is
+  // hovered. This is required for the "Turbo Mode" in which items are selected when a
+  // modifier key is released.
+  onKeyReleaseEvent() {
+    this._emitSelection();
+  }
+
   // Given the relative pointer position, this calculates the currently active child
   // wedge. For a wedge to become active, the pointer position must be farther away from
   // the center than defined by the wedge-inner-radius settings key.
@@ -417,7 +425,8 @@ class SelectionWedges extends Clutter.Actor {
       }
     }
 
-    // Now we try to detect gestures. Consider the diagram below:
+    // Now we try to detect gestures. This is done only if either the left mouse button is
+    // pressed or a modifier key is held down. Consider the diagram below:
     //
     //                                  M
     //                                .
@@ -430,7 +439,9 @@ class SelectionWedges extends Clutter.Actor {
     // considered a corner. There are some minimum lengths for both vectors - if they are
     // not long enough, nothing is done. If E->M is long enough, but there is no corner, E
     // is set to M and we wait for the next motion event.
-    if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK) {
+    const leftButtonPressed = event.get_state() & Clutter.ModifierType.BUTTON1_MASK;
+    const shortcutPressed   = event.get_state() & Gtk.accelerator_get_default_mod_mask();
+    if (leftButtonPressed || shortcutPressed) {
 
       // Store the current mouse position.
       const mouse = {x: screenX, y: screenY};
