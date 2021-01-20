@@ -12,6 +12,7 @@ Here are some hints to ease your path to become a master pielot:
 * To enter **Marking Mode**, click and drag an item. As soon as you pause dragging or make a turn, the item will be selected. **This way you can select items with gestures!**
 * Try remembering the path to an item. Open the menu and **draw the path with your mouse**. You can start with individual segments of the path, put you can also try to draw the entire path!
 * You may find it more successful if you explicitly try to compose your gesture of straight parts. **Do not draw curvy paths but rather expressive zig-zag-lines!**
+* You can also "draw" gestures as long as a modifier key, such as <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, or <kbd>Alt</kbd> is held down **without having to press your mouse button**! This is especially useful when you opened the menu with a shortcut involving such a modifier key. You can just keep it pressed and move the pointer with the mouse or your touch-pad!
 
 _:information_source: **Tip:** If no menu shows up, you can execute the following command in a terminal, try again to open the menu and look for any errors.
 This may print many unrelated messages, but using `grep` like this highlights all occurrences of `flypie`

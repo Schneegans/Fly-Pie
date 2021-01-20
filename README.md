@@ -13,13 +13,14 @@
 It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.
 (You got it? Like pilot, but with a :cake:).
 
-<a href="https://youtu.be/U22VxoT-tNU"><img align="right" width="240px" src ="docs/pics/player.jpg" /></a>
+<a href="https://youtu.be/U22VxoT-tNU"><img align="right" width="350px" src ="docs/pics/player.jpg" /></a>
 
 Fly-Pie lets you open _marking-menus_ of arbitrary depth via keyboard shortcuts.
-When using Fly-Pie, there are two selection modes which can be used together. You do not have to decide which one to use; you can seamlessly transition between the two:
+When using Fly-Pie, there are three selection modes which can be used together. You do not have to decide which one to use; you can seamlessly transition between them:
 
-**Point-and-Click:** Select items by clicking on their wedge.<br>
-**Marking-Mode:** Select items by drawing gestures.
+* **Point-and-Click:** Select items by clicking on them or anywhere in the corresponding wedges.
+* **Marking-Mode:** Select items by drawing gestures. To do this, click anywhere and drag your mouse while the left button is pressed over an item. As soon as you pause the movement or make a turn, the item will be selected.
+* **Turbo-Mode:** You can also "draw" gestures as long as a modifier key, such as <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, or <kbd>Alt</kbd> is held down **without having to press your mouse button**! This is especially useful when you opened the menu with a shortcut involving such a modifier key. You can just keep it pressed and move the pointer with the mouse or your touch-pad!
 
 The menus and their appearance can be configured with a **Live Preview** which updates instantaneously.
 You can compose your menus from various Action Types such as **Run Command**, **Activate Shortcut**, **Insert Text**, or **Open File**.
