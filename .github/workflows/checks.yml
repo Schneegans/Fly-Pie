@@ -111,7 +111,7 @@ jobs:
     - name: Test Fly-Pie
       run: |
         sudo apt-get install gnome-session xvfb -qq
-        sudo useradd foo -U -d /home/foo -m -s /bin/bash
+        sudo adduser --disabled-password --gecos "" foo
         su foo
         mkdir virtual-screen
         xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" dbus-run-session -- gnome-shell --wayland &
