@@ -11,14 +11,14 @@ on:
 jobs:
   clang_format:
     name: Check Clang-Format
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Download Clang-Format
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y clang-format
+          sudo apt-get update -qq
+          sudo apt-get install clang-format -qq
       - name: Run Clang-Format
         run: scripts/clang-format.sh
       - name: Compare Results
@@ -28,7 +28,7 @@ jobs:
 
   comment_percentage:
     name: Check Comment Percentage
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
       - name: Checkout Current Repository
@@ -43,8 +43,8 @@ jobs:
           ref: ${{ github.base_ref }}
       - name: Download Cloc
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y cloc
+          sudo apt-get update -qq
+          sudo apt-get install cloc -qq
       - name: Run Cloc
         run: |
           BASE="$(base/scripts/cloc.sh --percentage-only)"
@@ -61,7 +61,7 @@ jobs:
 
   shellcheck:
     name: Run ShellCheck
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run ShellCheck
@@ -70,7 +70,7 @@ jobs:
 
   script_functionality:
     name: Check Script Functionality
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Check error conditions # Currently, gettext is not installed. Both if statements should be false.
@@ -84,7 +84,8 @@ jobs:
         fi
     - name: Check correct workflow # Now, gettext will be installed and both INVERTED if statements should be false.
       run: |
-        sudo apt-get update -qq && sudo apt-get install gettext -qq -y
+        sudo apt-get update -qq
+        sudo apt-get install gettext -qq
         if ! $GITHUB_WORKSPACE/scripts/compile-locales.sh; then
           if ! $GITHUB_WORKSPACE/scripts/update-po.sh; then
             if ! $GITHUB_WORKSPACE/scripts/update-pot.sh; then
@@ -95,20 +96,21 @@ jobs:
 
   build:
     name: Check if Fly-Pie builds correctly
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: Build Fly-Pie
       run: |
-        sudo apt-get update -qq && sudo apt-get install gettext -qq -y
+        sudo apt-get update -qq
+        sudo apt-get install gettext -qq
         $GITHUB_WORKSPACE/scripts/create-release.sh -s
     - name: Install Fly-Pie
       run: |
-        sudo apt-get install gnome-shell
+        sudo apt-get install gnome-shell -qq
         $GITHUB_WORKSPACE/scripts/create-release.sh -i
     - name: Test Fly-Pie
       run: |
-        sudo apt-get install gnome-shell xvfb -qq -y
+        sudo apt-get install gnome-shell xvfb -qq
         MUTTER_DEBUG_DUMMY_MODE_SPECS=1024x768 xvfb-run --server-args="-ac -screen 0 1024x768x24" dbus-run-session -- gnome-shell --nested --wayland &
         sleep 10
         killall gnome-shell
