@@ -114,7 +114,8 @@ jobs:
         sudo loginctl enable-linger runner
         export XDG_RUNTIME_DIR=/run/user/$UID
         sleep 1
-        loginctl list-sessions
+        sudo systemctl --user reload systemd-logind
+        sudo loginctl list-sessions
         mkdir virtual-screen
         xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" dbus-run-session -- gnome-shell --wayland &
         sleep 10
