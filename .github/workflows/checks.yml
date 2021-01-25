@@ -111,6 +111,6 @@ jobs:
     - name: Test Fly-Pie
       run: |
         sudo apt-get install gnome-shell xvfb -qq
-        MUTTER_DEBUG_DUMMY_MODE_SPECS=1024x768 xvfb-run --server-args="-ac -screen 0 1024x768x24" dbus-run-session -- gnome-shell --nested --wayland &
+        MUTTER_DEBUG_DUMMY_MODE_SPECS=1024x768 xvfb-run --server-args="-ac -screen 0 1024x768x24" gnome-shell &
         sleep 10
         killall gnome-shell
