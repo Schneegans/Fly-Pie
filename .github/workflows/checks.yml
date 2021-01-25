@@ -110,11 +110,9 @@ jobs:
         $GITHUB_WORKSPACE/scripts/create-release.sh -i
     - name: Test Fly-Pie
       run: |
-        sudo apt-get install gnome-shell xvfb -qq
+        sudo apt-get install gnome-session xvfb -qq
         mkdir virtual-screen
-        export XDG_SESSION_TYPE=X11
-        export XDG_RUNTIME_DIR=/run/user/$(id -u)
-        xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" gnome-shell &
+        xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" dbus-run-session -- gnome-shell &
         sleep 10
         convert xwd:virtual-screen/Xvfb_screen0 capture.jpg
         killall gnome-shell
