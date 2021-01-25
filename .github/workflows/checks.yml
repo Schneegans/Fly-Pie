@@ -110,10 +110,10 @@ jobs:
         $GITHUB_WORKSPACE/scripts/create-release.sh -i
     - name: Test Fly-Pie
       run: |
-        sudo apt-get install gnome-session xvfb -qq
-        #sudo loginctl enable-linger runner
-        #sleep 1
+        sudo apt-get install gnome-session libpam-systemd xvfb -qq
+        sudo loginctl enable-linger runner
         export XDG_RUNTIME_DIR=/run/user/$UID
+        sleep 1
         loginctl list-sessions
         mkdir virtual-screen
         xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" dbus-run-session -- gnome-shell --wayland &
