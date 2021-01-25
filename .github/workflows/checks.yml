@@ -112,7 +112,7 @@ jobs:
       run: |
         sudo apt-get install gnome-shell xvfb -qq
         mkdir virtual-screen
-        xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" gnome-shell --wayland &
+        xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" gnome-shell --replace --wayland &
         sleep 10
         convert xwd:virtual-screen/Xvfb_screen0 capture.jpg
         killall gnome-shell
