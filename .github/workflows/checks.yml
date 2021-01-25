@@ -110,11 +110,10 @@ jobs:
         $GITHUB_WORKSPACE/scripts/create-release.sh -i
     - name: Test Fly-Pie
       run: |
-        sudo su
-        apt-get install gnome-session xvfb -qq
-        adduser --disabled-password --gecos "" foo
-        echo "foo ALL=(ALL) NOPASSWD: ALL" > "/etc/sudoers.d/foo"
-        su foo
+        sudo apt-get install gnome-session xvfb -qq
+        sudo adduser --disabled-password --gecos "" foo
+        echo 'foo ALL=(ALL) NOPASSWD: ALL' | sudo tee -a /etc/sudoers.d/foo
+        sudo su foo
         mkdir virtual-screen
         xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" dbus-run-session -- gnome-shell --wayland &
         sleep 10
