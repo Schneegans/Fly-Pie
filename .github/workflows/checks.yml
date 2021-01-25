@@ -111,6 +111,8 @@ jobs:
     - name: Test Fly-Pie
       run: |
         sudo apt-get install gnome-shell xvfb -qq
-        MUTTER_DEBUG_DUMMY_MODE_SPECS=1024x768 xvfb-run --server-args="-ac -screen 0 1024x768x24" gnome-shell &
+        mkdir virtual-screen
+        xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" gnome-shell &
         sleep 10
+        convert xwd:virtual-screen/Xvfb_screen0 capture.jpg
         killall gnome-shell
