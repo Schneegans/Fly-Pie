@@ -111,10 +111,9 @@ jobs:
     - name: Test Fly-Pie
       run: |
         sudo apt-get install gnome-shell xvfb -qq
-        dbus-daemon --config-file=/usr/share/dbus-1/system.conf --print-address
-        sleep 3
         mkdir virtual-screen
-        xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" gnome-shell --wayland &
+        export XDG_SESSION_TYPE=X11
+        xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" gnome-shell &
         sleep 10
         convert xwd:virtual-screen/Xvfb_screen0 capture.jpg
         killall gnome-shell
