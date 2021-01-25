@@ -102,3 +102,11 @@ jobs:
       run: |
         sudo apt-get update -qq && sudo apt-get install gettext -qq -y
         $GITHUB_WORKSPACE/scripts/create-release.sh -s
+    - name: Install Fly-Pie
+      run: $GITHUB_WORKSPACE/scripts/create-release.sh -i
+    - name: Test Fly-Pie
+      run: |
+        sudo apt-get install gnome-shell xvfb
+        MUTTER_DEBUG_DUMMY_MODE_SPECS=1024x768 xvfb-run --server-args="-ac -screen 0 1024x768x24" dbus-run-session -- gnome-shell --nested --wayland &
+        sleep 10
+        killall gnome-shell
