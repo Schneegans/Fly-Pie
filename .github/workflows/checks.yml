@@ -111,9 +111,9 @@ jobs:
     - name: Test Fly-Pie
       run: |
         sudo apt-get install gnome-session xvfb -qq
-        sudo adduser --disabled-password --gecos "" foo
-        echo 'foo ALL=(ALL) NOPASSWD: ALL' | sudo tee -a /etc/sudoers.d/foo
-        sudo su foo
+        loginctl enable-linger runner
+        sleep 1
+        export XDG_RUNTIME_DIR=/run/user/$UID
         mkdir virtual-screen
         xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" dbus-run-session -- gnome-shell --wayland &
         sleep 10
