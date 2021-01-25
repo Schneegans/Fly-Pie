@@ -114,9 +114,8 @@ jobs:
         sudo loginctl enable-linger runner
         export XDG_RUNTIME_DIR=/run/user/$UID
         sleep 1
-        gdbus call --system --dest org.freedesktop.login1 --object-path /org/freedesktop/login1 --method org.freedesktop.login1.Manager.ListSessions
         mkdir virtual-screen
-        xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" dbus-run-session -- gnome-shell --wayland &
+        xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" dbus-run-session -- gnome-shell --wayland --display-server &
         sleep 10
         convert xwd:virtual-screen/Xvfb_screen0 capture.jpg
         killall gnome-shell
