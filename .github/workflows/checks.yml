@@ -117,7 +117,7 @@ jobs:
         convert xwd:virtual-screen/Xvfb_screen0 capture.jpg
         killall gnome-shell
     - name: Upload Screenshot
-        uses: actions/upload-artifact@v1
-        with:
-          name: screenshot
-          path: capture.jpg
+      uses: actions/upload-artifact@v2
+      with:
+        name: screenshot
+        path: capture.jpg
