@@ -104,14 +104,11 @@ jobs:
         sudo apt-get update -qq
         sudo apt-get install gettext -qq
         $GITHUB_WORKSPACE/scripts/create-release.sh -s
-    - name: Install Fly-Pie
-      run: |
-        sudo apt-get install gnome-shell -qq
-        $GITHUB_WORKSPACE/scripts/create-release.sh -i
     - name: Test Fly-Pie
       run: |
         podman pull ghcr.io/schneegans/gnome-shell:1.0.0
         podman run --rm -itd ghcr.io/schneegans/gnome-shell:1.0.0
+        sleep 15
         podman cp $(podman ps -q -l):/opt/Xvfb_screen0 . && convert xwd:Xvfb_screen0 capture.jpg && eog capture.jpg
         killall gnome-shell
     - name: Upload Screenshot
