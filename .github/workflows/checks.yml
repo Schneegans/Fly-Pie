@@ -110,14 +110,9 @@ jobs:
         $GITHUB_WORKSPACE/scripts/create-release.sh -i
     - name: Test Fly-Pie
       run: |
-        sudo apt-get install gnome-session libpam-systemd xvfb -qq
-        sudo loginctl enable-linger runner
-        export XDG_RUNTIME_DIR=/run/user/$UID
-        sleep 1
-        mkdir virtual-screen
-        xvfb-run --server-args="-ac -screen 0 1024x768x24 -fbdir virtual-screen" gnome-shell --wayland --display-server &
-        sleep 10
-        convert xwd:virtual-screen/Xvfb_screen0 capture.jpg
+        podman pull ghcr.io/schneegans/gnome-shell:1.0.0
+        podman run --rm -itd ghcr.io/schneegans/gnome-shell:1.0.0
+        podman cp $(podman ps -q -l):/opt/Xvfb_screen0 . && convert xwd:Xvfb_screen0 capture.jpg && eog capture.jpg
         killall gnome-shell
     - name: Upload Screenshot
       uses: actions/upload-artifact@v2
