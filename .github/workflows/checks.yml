@@ -107,11 +107,10 @@ jobs:
     - name: Test Fly-Pie
       run: |
         sudo apt-get install imagemagick -qq
-        podman pull ghcr.io/schneegans/gnome-shell:1.0.0
         POD=$(sudo podman run --rm -itd ghcr.io/schneegans/gnome-shell:1.0.0)
         sleep 15
-        podman cp $POD:/opt/Xvfb_screen0 . && convert xwd:Xvfb_screen0 capture.jpg
-        podman stop $POD
+        sudo podman cp $POD:/opt/Xvfb_screen0 . && convert xwd:Xvfb_screen0 capture.jpg
+        sudo podman stop $POD
     - name: Upload Screenshot
       uses: actions/upload-artifact@v2
       with:
