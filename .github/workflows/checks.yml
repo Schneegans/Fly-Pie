@@ -108,10 +108,10 @@ jobs:
       run: |
         sudo apt-get install imagemagick -qq
         podman pull ghcr.io/schneegans/gnome-shell:1.0.0
-        podman run --rm -itd ghcr.io/schneegans/gnome-shell:1.0.0
+        POD=$(podman run --rm -itd ghcr.io/schneegans/gnome-shell:1.0.0)
         sleep 15
-        podman cp $(podman ps -q -l):/opt/Xvfb_screen0 . && convert xwd:Xvfb_screen0 capture.jpg
-        podman stop $(podman ps -q -l)
+        podman cp $POD:/opt/Xvfb_screen0 . && convert xwd:Xvfb_screen0 capture.jpg
+        podman stop $POD
     - name: Upload Screenshot
       uses: actions/upload-artifact@v2
       with:
