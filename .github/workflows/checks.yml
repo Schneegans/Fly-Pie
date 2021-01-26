@@ -108,7 +108,7 @@ jobs:
       run: |
         sudo apt-get install imagemagick -qq
         podman pull ghcr.io/schneegans/gnome-shell:1.0.0
-        sudo podman run --rm -it ghcr.io/schneegans/gnome-shell:1.0.0
+        podman run --privileged --rm -it ghcr.io/schneegans/gnome-shell:1.0.0
         #echo "POD: $POD"
         #podman ps
         #sleep 15
