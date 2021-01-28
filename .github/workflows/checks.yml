@@ -111,7 +111,7 @@ jobs:
         sleep 4
         #sudo podman cp flypie@schneegans.github.com.zip $POD:/home/gnomeshell/
         MNT=$(sudo podman mount $POD)
-        cp flypie@schneegans.github.com.zip $MNT/home/gnomeshell/
+        sudo cp flypie@schneegans.github.com.zip $MNT/home/gnomeshell/
         sudo podman umount $POD
         sudo podman exec --env DISPLAY=:99 --user gnomeshell $POD /home/gnomeshell/enable-extension.sh flypie@schneegans.github.com
         sleep 2
