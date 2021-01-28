@@ -115,6 +115,8 @@ jobs:
         sleep 2
         sudo podman exec --env DISPLAY=:99 --user gnomeshell $POD xdotool key ctrl+space
         sleep 1
+        sudo podman exec --env DISPLAY=:99 --user gnomeshell $POD xdotool key ctrl+space
+        sleep 1
         sudo cp $MNT/home/gnomeshell/Xvfb_screen0 . && convert xwd:Xvfb_screen0 capture.jpg
         sudo podman umount $POD
         sudo podman stop $POD
