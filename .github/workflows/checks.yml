@@ -109,8 +109,8 @@ jobs:
         sudo apt-get install imagemagick -qq
         sudo podman run --rm -td ghcr.io/schneegans/gnome-shell:latest
         sleep 4
-        podman cp flypie@schneegans.github.com.zip $(sudo podman ps -q -n 1):/home/gnomeshell/
-        podman exec --env DISPLAY=:99 --user gnomeshell $(sudo podman ps -q -n 1) /home/gnomeshell/enable-extension.sh flypie@schneegans.github.com
+        podman cp flypie\@schneegans.github.com.zip $(sudo podman ps -q -n 1):/home/gnomeshell/
+        podman exec --env DISPLAY=:99 --user gnomeshell $(sudo podman ps -q -n 1) /home/gnomeshell/enable-extension.sh flypie\@schneegans.github.com
         sleep 2
         podman exec --env DISPLAY=:99 --user gnomeshell $(sudo podman ps -q -n 1) xdotool key ctrl+space
         sleep 1
