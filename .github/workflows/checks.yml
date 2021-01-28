@@ -107,17 +107,16 @@ jobs:
     - name: Test Fly-Pie
       run: |
         sudo apt-get install imagemagick -qq
-        sudo podman run --rm -td ghcr.io/schneegans/gnome-shell:latest
+        podman --version
+        podman run --rm -td ghcr.io/schneegans/gnome-shell:latest
         sleep 4
-        ls
-        echo "foo: $(sudo podman ps -q -n 1)"
-        podman cp flypie@schneegans.github.com.zip $(sudo podman ps -q -n 1):/home/gnomeshell/
-        podman exec --env DISPLAY=:99 --user gnomeshell $(sudo podman ps -q -n 1) /home/gnomeshell/enable-extension.sh flypie@schneegans.github.com
+        podman cp flypie@schneegans.github.com.zip $(podman ps -q -n 1):/home/gnomeshell/
+        podman exec --env DISPLAY=:99 --user gnomeshell $(podman ps -q -n 1) /home/gnomeshell/enable-extension.sh flypie@schneegans.github.com
         sleep 2
-        podman exec --env DISPLAY=:99 --user gnomeshell $(sudo podman ps -q -n 1) xdotool key ctrl+space
+        podman exec --env DISPLAY=:99 --user gnomeshell $(podman ps -q -n 1) xdotool key ctrl+space
         sleep 1
-        sudo podman cp $(sudo podman ps -q -n 1):/opt/Xvfb_screen0 . && convert xwd:Xvfb_screen0 capture.jpg
-        sudo podman stop $(sudo podman ps -q -n 1)
+        podman cp $(podman ps -q -n 1):/opt/Xvfb_screen0 . && convert xwd:Xvfb_screen0 capture.jpg
+        podman stop $(podman ps -q -n 1)
     - name: Upload Screenshot
       uses: actions/upload-artifact@v2
       with:
