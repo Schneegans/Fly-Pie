@@ -107,7 +107,7 @@ jobs:
     - name: Test Fly-Pie
       run: |
         sudo apt-get install imagemagick -qq
-        POD=$(sudo podman run --rm -ti ghcr.io/schneegans/gnome-shell:latest)
+        POD=$(sudo podman run --rm -td ghcr.io/schneegans/gnome-shell:latest)
         sleep 4
         #sudo podman cp flypie@schneegans.github.com.zip $POD:/home/gnomeshell/
         MNT=$(sudo podman mount $POD)
