@@ -106,14 +106,15 @@ jobs:
         $GITHUB_WORKSPACE/scripts/create-release.sh -s
     - name: Test Fly-Pie
       run: |
-        sudo apt-get install imagemagick -qq
-        echo "0"
-        sudo dbus-daemon --session &
-        echo "1"
-        sleep 1
-        echo "2"
-        systemd-run --user --scope podman run --rm -td ghcr.io/schneegans/gnome-shell:latest
-        echo "3"
+        podman info
+        #sudo apt-get install imagemagick -qq
+        #echo "0"
+        #sudo dbus-daemon --session &
+        #echo "1"
+        #sleep 1
+        #echo "2"
+        #systemd-run --user --scope podman run --rm -td ghcr.io/schneegans/gnome-shell:latest
+        #echo "3"
         #POD=$(sudo podman run --rm -td ghcr.io/schneegans/gnome-shell:latest)
         #sleep 4
         #MNT=$(sudo podman mount $POD)
