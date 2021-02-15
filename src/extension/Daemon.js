@@ -129,7 +129,7 @@ var Daemon = class Daemon {
     }
 
     // Delete the static settings object of the statistics.
-    Statistics.cleanUp();
+    Statistics.destroyInstance();
   }
 
   // -------------------------------------------------------------- public D-Bus-Interface
@@ -153,7 +153,7 @@ var Daemon = class Daemon {
   // See the README.md for a description of Fly-Pie's DBusInterface.
   ShowCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
-    Statistics.addCustomDBusMenu();
+    Statistics.getInstance().addCustomDBusMenu();
     return this._openCustomMenu(json, false, this._lastMenuID);
   }
 
@@ -161,7 +161,7 @@ var Daemon = class Daemon {
   // See the README.md for a description of Fly-Pie's DBusInterface.
   PreviewCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
-    Statistics.addCustomDBusMenu();
+    Statistics.getInstance().addCustomDBusMenu();
     return this._openCustomMenu(json, true, this._lastMenuID);
   }
 
@@ -243,7 +243,7 @@ var Daemon = class Daemon {
   // This gets called when the user did not select anything in the menu. It emits the
   // OnCancel signal of our D-Bus interface.
   _onCancel(menuID) {
-    Statistics.addAbortion();
+    Statistics.getInstance().addAbortion();
     this._dbus.emit_signal('OnCancel', GLib.Variant.new('(i)', [menuID]));
   }
 

@@ -20,16 +20,64 @@ const utils = Me.imports.src.common.utils;
 // Gio.Settings.                                                                        //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-// This global variable will store the Gio.Settings we're working with.
-let _settings = null;
+// This class is supposed to be used as singleton in order to prevent frequent
+// constructions and deconstructions of the contained Gio.Settings object. This global
+// variable stores the singleton instance.
+let _instance = null;
 
 var Statistics = class Statistics {
 
   // ---------------------------------------------------------------------- static methods
 
+  // Create the singleton instance lazily.
+  static getInstance() {
+    if (_instance == null) {
+      _instance = new Statistics();
+    }
+
+    return _instance;
+  }
+
+  // This should be called when the Fly-Pie extension is disabled or the preferences
+  // dialog is closed. It deletes the Gio.Settings object.
+  static destroyInstance() {
+    if (_instance != null) {
+      _instance.destroy();
+      _instance = null;
+    }
+  }
+  // ------------------------------------------------------------ constructor / destructor
+
+  // This should not be called directly. Use the static singleton interface above!
+  constructor() {
+
+    // Create the settings object in "delayed" mode. Delayed mode was chosen because the
+    // apply() can take up to 100~ms on some systems I have tested. This results in a
+    // noticeable stutter in Fly-Pie's animations. Applying the seconds with one second
+    // delay makes it much more unlikely that an animation is currently in progress.
+    this._settings = utils.createSettings();
+    this._settings.delay();
+
+    this._saveTimeout = -1;
+  }
+
+
+  // This should not be called directly. Use the static singleton interface above!
+  destroy() {
+
+    // Save the settings if required.
+    if (this._saveTimeout >= 0) {
+      GLib.source_remove(this._saveTimeout);
+      this._settings.apply();
+    }
+
+    this._settings = null;
+  }
+
+  // -------------------------------------------------------------------- public interface
+
   // This should be called whenever a successful selection is made.
-  static addSelection(depth, time, gestureOnlySelection) {
-    this._initSettings();
+  addSelection(depth, time, gestureOnlySelection) {
 
     // We add the selection to one of the histograms with selection counts per selection
     // time. There is one of these histograms for the first four selection depths for
@@ -39,12 +87,12 @@ var Statistics = class Statistics {
 
     // Retrieve all histograms from the settings and make sure that we have four of them.
     // Any selection deeper than five will be recorded in the fourth bin.
-    const histograms = _settings.get_value(key).deep_unpack();
+    const histograms = this._settings.get_value(key).deep_unpack();
     this._resizeArray(histograms, 4, []);
 
     // We limit our histogram to selections which took five seconds. The bin size is set
     // to 200 milliseconds.
-    const upperBound = 5000;
+    const upperBound = 10000;
     const binSize    = 200;
     const bins       = upperBound / binSize;
 
@@ -60,69 +108,74 @@ var Statistics = class Statistics {
     ++histogram[bin];
 
     // Finally update the updated histograms.
-    _settings.set_value(key, new GLib.Variant('aau', histograms));
+    const data = new GLib.Variant('aau', histograms);
+    this._settings.set_value(key, data);
+    this._save();
   }
 
   // Should be called whenever a selection is canceled.
-  static addAbortion() {
+  addAbortion() {
     this._addOneTo('stats-abortions');
   }
 
   // Should be called whenever a custom menu is opened via the D-Bus interface.
-  static addCustomDBusMenu() {
+  addCustomDBusMenu() {
     this._addOneTo('stats-dbus-menus');
   }
 
   // Should be called whenever the settings dialog is opened.
-  static addSettingsOpened() {
+  addSettingsOpened() {
     this._addOneTo('stats-settings-opened');
   }
 
   // Should be called whenever a preset is saved.
-  static addPresetSaved() {
+  addPresetSaved() {
     this._addOneTo('stats-presets-saved');
   }
 
   // Should be called whenever a menu configuration is imported.
-  static addMenuImport() {
+  addMenuImport() {
     this._addOneTo('stats-menus-imported');
   }
 
   // Should be called whenever a menu configuration is exported.
-  static addMenuExport() {
+  addMenuExport() {
     this._addOneTo('stats-menus-exported');
   }
 
   // Should be called whenever a random preset is generated.
-  static addRandomPreset() {
+  addRandomPreset() {
     this._addOneTo('stats-random-presets');
-  }
-
-  // This should be called when the Fly-Pie extension is disabled. It deletes the
-  // Gio.Settings object.
-  static cleanUp() {
-    _settings = null;
   }
 
   // ----------------------------------------------------------------------- private stuff
 
-  // Create the Gio.Settings object lazily.
-  static _initSettings() {
-    if (_settings == null) {
-      _settings = utils.createSettings();
+  // Our Gio.Settings object is in "delayed" mode so we have to manually call apply()
+  // whenever a property is changed. Delayed mode was chosen because the apply() can take
+  // up to 100~ms on some systems I have tested. This results in a noticeable stutter in
+  // Fly-Pie's animations. Applying the seconds with one second delay makes it much more
+  // unlikely that an animation is currently in progress.
+  _save() {
+    if (this._saveTimeout >= 0) {
+      GLib.source_remove(this._saveTimeout);
     }
+
+    this._saveTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+      this._settings.apply();
+      this._saveTimeout = -1;
+    });
   }
 
   // Increases the value of the given settings key by one.
-  static _addOneTo(key) {
-    this._initSettings();
-    _settings.set_uint(key, _settings.get_uint(key) + 1);
+  _addOneTo(key) {
+    this._settings.set_uint(key, this._settings.get_uint(key) + 1);
+    this._save();
   }
 
   // Helper method to resize the given JavaScript array to the given size. If the input
   // array is larger, it will be truncated, if it's smaller, it will be back-padded with
   // copies of defaultValue.
-  static _resizeArray(array, size, defaultValue) {
+  _resizeArray(array, size, defaultValue) {
 
     // Make sure we have actually an array.
     if (!Array.isArray(array)) {

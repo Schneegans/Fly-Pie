@@ -251,7 +251,7 @@ var MenuEditorPage = class MenuEditorPage {
                 Gio.FileCreateFlags.REPLACE_DESTINATION, null);
 
             // Store this in our statistics.
-            Statistics.addMenuExport();
+            Statistics.getInstance().addMenuExport();
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
@@ -312,7 +312,7 @@ var MenuEditorPage = class MenuEditorPage {
               this._loadMenuConfiguration();
 
               // Store this in our statistics.
-              Statistics.addMenuImport();
+              Statistics.getInstance().addMenuImport();
             }
 
           } catch (error) {

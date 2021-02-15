@@ -327,7 +327,7 @@ var SettingsPage = class SettingsPage {
               this._presetList.set_value(row, 1, file.get_path());
 
               // Store this in our statistics.
-              Statistics.addPresetSaved();
+              Statistics.getInstance().addPresetSaved();
             }
 
           } catch (error) {
@@ -351,7 +351,7 @@ var SettingsPage = class SettingsPage {
       Preset.random();
 
       // Store this in our statistics.
-      Statistics.addRandomPreset();
+      Statistics.getInstance().addRandomPreset();
     });
   }
 

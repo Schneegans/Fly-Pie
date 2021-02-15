@@ -115,14 +115,14 @@ var PreferencesDialog = class PreferencesDialog {
       }
 
       // Delete the static settings object of the statistics.
-      Statistics.cleanUp();
+      Statistics.destroyInstance();
 
       // Disconnect some settings handlers of the achievements class.
       this._achievementsPage.destroy();
     });
 
     // Record this construction for the statistics.
-    Statistics.addSettingsOpened();
+    Statistics.getInstance().addSettingsOpened();
   }
 
   // -------------------------------------------------------------------- public interface
