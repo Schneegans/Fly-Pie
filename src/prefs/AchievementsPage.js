@@ -215,7 +215,7 @@ var AchievementsPage = class AchievementsPage {
       for (let i = 0; i < charts.histogramWidgets.length; i++) {
         if (charts.histogramWidgets[i]._hovered) {
           // Get the name of the hovered histogram (if any).
-          text = charts.hoveredName.replace('%i', i + 1);
+          text = charts.hoveredName.replace('%i', i == 3 ? '4+' : i + 1);
         }
       }
 
@@ -349,7 +349,7 @@ var AchievementsPage = class AchievementsPage {
       ctx.stroke();
 
       // Then the thin vertical lines.
-      const maxSeconds = 5;
+      const maxSeconds = 10;
       for (let i = 0; i <= maxSeconds; i++) {
         const gap = (width - leftPadding - rightPadding - 2) / maxSeconds;
         ctx.moveTo(leftPadding + i * gap + 1, topPadding);
@@ -377,7 +377,7 @@ var AchievementsPage = class AchievementsPage {
         const layout = PangoCairo.create_layout(ctx);
         layout.set_font_description(font);
         layout.set_alignment(Pango.Alignment.CENTER);
-        layout.set_text(i + 's', -1);
+        layout.set_text(i == maxSeconds ? i + '+' : i + 's', -1);
         PangoCairo.show_layout(ctx, layout);
       }
 

@@ -90,10 +90,10 @@ var Statistics = class Statistics {
     const histograms = this._settings.get_value(key).deep_unpack();
     this._resizeArray(histograms, 4, []);
 
-    // We limit our histogram to selections which took five seconds. The bin size is set
+    // We limit our histogram to selections which took ten seconds. The bin size is set
     // to 200 milliseconds.
     const upperBound = 10000;
-    const binSize    = 200;
+    const binSize    = 250;
     const bins       = upperBound / binSize;
 
     // Then initialize each histogram to the correct bin size.
