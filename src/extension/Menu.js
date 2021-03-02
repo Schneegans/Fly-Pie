@@ -36,7 +36,7 @@ var Menu = class Menu {
   // The Menu is only instantiated once by the Server. It is re-used for each new incoming
   // ShowMenu request. The three parameters are callbacks which are fired when the
   // corresponding event occurs.
-  constructor(onHover, onSelect, onCancel) {
+  constructor(emitHoverSignal, emitSelectSignal, emitCancelSignal) {
 
     // Create Gio.Settings object for org.gnome.shell.extensions.flypie.
     this._settings = utils.createSettings();
@@ -45,9 +45,9 @@ var Menu = class Menu {
     this._timer = new Timer();
 
     // Store the callbacks.
-    this._onHover  = onHover;
-    this._onSelect = onSelect;
-    this._onCancel = onCancel;
+    this._emitHoverSignal  = emitHoverSignal;
+    this._emitSelectSignal = emitSelectSignal;
+    this._emitCancelSignal = emitCancelSignal;
 
     // This holds the ID of the currently active menu. It's null if no menu is currently
     // shown.
@@ -82,7 +82,7 @@ var Menu = class Menu {
     // Hide the menu when the escape key is pressed.
     this._background.connect('key-press-event', (actor, event) => {
       if (event.get_key_symbol() == Clutter.KEY_Escape && this._menuID != null) {
-        this._onCancel(this._menuID);
+        this._emitCancelSignal(this._menuID);
         this.hide();
       }
       return Clutter.EVENT_STOP;
@@ -170,7 +170,7 @@ var Menu = class Menu {
 
     // This is fired when the close button of the preview mode is clicked.
     this._background.connect('close-event', () => {
-      this._onCancel(this._menuID);
+      this._emitCancelSignal(this._menuID);
       this.hide();
     });
 
@@ -215,11 +215,20 @@ var Menu = class Menu {
         this._draggedChild = null;
       }
 
-      // Report the hover event on the D-Bus if an activatable child is hovered.
+      // Report the hover event on the D-Bus if an action is hovered.
       if (index >= 0) {
         const child = this._menuSelectionChain[0].getChildMenuItems()[index];
+
+        // If the item has a selection callback, it is an action.
         if (child.getSelectionCallback() != null) {
-          this._onHover(this._menuID, child.id);
+
+          // If the action has a hover callback, call it!
+          if (child.getHoverCallback() != null) {
+            child.getHoverCallback()();
+          }
+
+          // Then emit the D-Bus hover signal!
+          this._emitHoverSignal(this._menuID, child.id);
         }
       }
 
@@ -310,9 +319,9 @@ var Menu = class Menu {
             this._settings.get_double('easing-duration') * 1000);
 
         // hide() will reset our menu ID. However, we need to pass it to the onSelect
-        // callback so we create a copy here. hide() has to be called before _onSelect(),
-        // else any resulting action (like simulated key presses) may be blocked by our
-        // input grab.
+        // callback so we create a copy here. hide() has to be called before
+        // _emitSelectSignal(), else any resulting action (like simulated key presses) may
+        // be blocked by our input grab.
         const menuID = this._menuID;
         this.hide();
         this._background.set_easing_delay(0);
@@ -321,7 +330,7 @@ var Menu = class Menu {
         child.getSelectionCallback()();
 
         // Finally report the selection over the D-Bus.
-        this._onSelect(menuID, child.id);
+        this._emitSelectSignal(menuID, child.id);
       }
     });
 
@@ -398,7 +407,7 @@ var Menu = class Menu {
 
     // This is usually fired when the right mouse button is pressed.
     this._selectionWedges.connect('cancel-selection-event', () => {
-      this._onCancel(this._menuID);
+      this._emitCancelSignal(this._menuID);
       this.hide();
     });
 
@@ -437,7 +446,7 @@ var Menu = class Menu {
       }
 
       // Emit a cancel event for the currently active menu and store the new ID.
-      this._onCancel(this._menuID);
+      this._emitCancelSignal(this._menuID);
       this._menuID = menuID;
 
       // Update the preview-mode state of the background.
@@ -479,11 +488,22 @@ var Menu = class Menu {
       });
 
       if (item.children) {
+        // Recursively continue for all children.
         item.children.forEach(child => {
           menuItem.addMenuItem(createMenuItem(child));
         });
-      } else if (item.onSelect) {
-        menuItem.setSelectionCallback(item.onSelect);
+
+      } else {
+
+        // If there are no children, there may be an activation and a hover callback. We
+        // forward them to the item so that they can be called if required.
+        if (item.onSelect) {
+          menuItem.setSelectionCallback(item.onSelect);
+        }
+
+        if (item.onHover) {
+          menuItem.setHoverCallback(item.onHover);
+        }
       }
 
       return menuItem;

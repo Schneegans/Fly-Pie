@@ -129,6 +129,10 @@ class MenuItem extends Clutter.Actor {
     // children but with such a callback can be activated.
     this._selectionCallback = null;
 
+    // This callback will be executed when the item is hovered. This will only be called
+    // for actions, that is items without any children.
+    this._hoverCallback = null;
+
     // Create Children Container. This eventually will contain one MenuItem for each child
     // item of this menu.
     this._childrenContainer = new Clutter.Actor();
@@ -204,6 +208,17 @@ class MenuItem extends Clutter.Actor {
   // Returns the selection callback set above.
   getSelectionCallback() {
     return this._selectionCallback;
+  }
+
+  // This callback will be executed when the item is hovered. This will only be called
+  // for actions, that is items without any children.
+  setHoverCallback(func) {
+    this._hoverCallback = func;
+  }
+
+  // Returns the hover callback set above.
+  getHoverCallback() {
+    return this._hoverCallback;
   }
 
   // This is called during redraw() of the parent MenuItem. redraw() traverses the menu
