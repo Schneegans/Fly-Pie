@@ -34,7 +34,7 @@ try {
 var action = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
-  // activate() method which is called when the user selects the item, Menus can have
+  // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
   class: ItemRegistry.ItemClass.ACTION,
 
@@ -74,7 +74,7 @@ var action = {
   // This will be called whenever a menu is opened containing an item of this kind.
   // The data value chosen by the user will be passed to this function.
   createItem: (data) => {
-    // The activate() function will be called when the user selects this action.
-    return {activate: () => InputManipulator.activateAccelerator(data)};
+    // The onSelect() function will be called when the user selects this action.
+    return {onSelect: () => InputManipulator.activateAccelerator(data)};
   }
 };

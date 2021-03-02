@@ -38,7 +38,7 @@ try {
 var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
-  // activate() method which is called when the user selects the item, Menus can have
+  // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
   class: ItemRegistry.ItemClass.MENU,
 
@@ -70,7 +70,7 @@ var menu = {
       result.children.push({
         name: app.get_name(),
         icon: app.get_app_info().get_icon().to_string(),
-        activate: () => app.activate()
+        onSelect: () => app.activate()
       });
     }
 
@@ -80,7 +80,7 @@ var menu = {
         // Translators: As in 'Lock the screen.'
         name: _('Lock'),
         icon: 'system-lock-screen',
-        activate: () => SystemActions.activateLockScreen()
+        onSelect: () => SystemActions.activateLockScreen()
       });
     }
 
@@ -89,7 +89,7 @@ var menu = {
       result.children.push({
         name: _('Suspend'),
         icon: 'system-suspend',
-        activate: () => SystemActions.activateSuspend()
+        onSelect: () => SystemActions.activateSuspend()
       });
     }
 
@@ -98,7 +98,7 @@ var menu = {
       result.children.push({
         name: _('Switch User...'),
         icon: 'system-users',
-        activate: () => SystemActions.activateSwitchUser()
+        onSelect: () => SystemActions.activateSwitchUser()
       });
     }
 
@@ -107,7 +107,7 @@ var menu = {
       result.children.push({
         name: _('Log Out'),
         icon: 'system-log-out',
-        activate: () => SystemActions.activateLogout()
+        onSelect: () => SystemActions.activateLogout()
       });
     }
 
@@ -116,7 +116,7 @@ var menu = {
       result.children.push({
         name: _('Power Off...'),
         icon: 'system-shutdown',
-        activate: () => SystemActions.activatePowerOff()
+        onSelect: () => SystemActions.activatePowerOff()
       });
     }
 

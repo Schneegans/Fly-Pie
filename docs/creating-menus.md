@@ -5,7 +5,7 @@
 # Creating New Menu Types for Fly-Pie
 
 There are two fundamental item types in Fly-Pie: _Actions_ and _Menus_.
-Actions have an `activate()` method which is called when the user selects them; Menus can have child Actions or child Menus. 
+Actions have an `onSelect()` method which is called when the user selects them; Menus can have child Actions or child Menus. 
 
 If you want to create a new Menu type for Fly-Pie, this guide is made for you!
 As an example, we will create a Menu which contains three actions, each of which shows a desktop notification when selected.
@@ -54,7 +54,7 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
-  // activate() method which is called when the user selects the item, Menus can have
+  // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus. In this example we create a Menu!
   class: ItemRegistry.ItemClass.MENU,
 
@@ -82,28 +82,28 @@ var menu = {
     utils.debug('ExampleMenu Created!');
 
     // This method should return an object containing a 'children' array. Each array
-    // element has to have a 'name' and an 'icon'. The activate() function will be
+    // element has to have a 'name' and an 'icon'. The onSelect() function will be
     // called when the user selects the corresponding item.
     return {
       children: [
         {
           name: _('First Item'),
           icon: '♈',
-          activate: () => {
+          onSelect: () => {
             Main.notify(_('♈ Selected!'), _('This is the first item!'));
           }
         },
         {
           name: _('Second Item'),
           icon: '♎',
-          activate: () => {
+          onSelect: () => {
             Main.notify(_('♎ Selected!'), _('This is the second item!'));
           }
         },
         {
           name: _('Third Item'),
           icon: '♐',
-          activate: () => {
+          onSelect: () => {
             Main.notify(_('♐ Selected!'), _('This is the third item!'));
           }
         }

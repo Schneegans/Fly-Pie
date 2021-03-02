@@ -35,7 +35,7 @@ try {
 var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
-  // activate() method which is called when the user selects the item, Menus can have
+  // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
   class: ItemRegistry.ItemClass.MENU,
 
@@ -84,7 +84,7 @@ var menu = {
         result.children.push({
           name: app.get_name(),
           icon: app.get_app_info().get_icon().to_string(),
-          activate: () => app.open_new_window(-1)
+          onSelect: () => app.open_new_window(-1)
         });
       }
     });

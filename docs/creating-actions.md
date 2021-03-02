@@ -5,7 +5,7 @@
 # Creating New Action Types for Fly-Pie
 
 There are two fundamental item types in Fly-Pie: _Actions_ and _Menus_.
-Actions have an `activate()` method which is called when the user selects them; Menus can have child Actions or child Menus. 
+Actions have an `onSelect()` method which is called when the user selects them; Menus can have child Actions or child Menus. 
 
 If you want to create a new Action type for Fly-Pie, this guide is made for you!
 As an example, we will create an Action which shows a notification with a user-defined message whenever it is selected.
@@ -54,7 +54,7 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 var action = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
-  // activate() method which is called when the user selects the item, Menus can have
+  // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus. In this example we create an Action!
   class: ItemRegistry.ItemClass.ACTION,
 
@@ -97,9 +97,9 @@ var action = {
     // This will be printed to the log when a menu is opened containing such an action.
     utils.debug('ExampleAction Created!');
 
-    // The activate() function will be called when the user selects this action.
+    // The onSelect() function will be called when the user selects this action.
     return {
-      activate: () => {
+      onSelect: () => {
         Main.notify(_('ExampleAction Selected!'), data);
       }
     };

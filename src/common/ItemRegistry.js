@@ -53,7 +53,7 @@ var ItemDataType = {
 // The getItemTypes() of the ItemRegistry can be used to access all available action    //
 // and menu types. Each item type should have eight properties:                         //
 //   class:        This should be either ItemClass.ACTION or ItemClass.MENU.            //
-//                 The former is used for single items with an activate() method, the   //
+//                 The former is used for single items with an onSelect() method, the   //
 //                 latter for menus which are composed of multiple actions or menus.    //
 //   name:         This will be shown in the add-new-item popover. It is also the       //
 //                 default name of newly created items of this type. This should be     //

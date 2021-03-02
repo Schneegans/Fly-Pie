@@ -25,7 +25,7 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
-  // activate() method which is called when the user selects the item, Menus can have
+  // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
   class: ItemRegistry.ItemClass.MENU,
 
@@ -79,7 +79,7 @@ var menu = {
         result.children.push({
           name: recentFiles[i].get_display_name(),
           icon: recentFiles[i].get_gicon().to_string(),
-          activate: () => {
+          onSelect: () => {
             const ctx = global.create_app_launch_context(0, -1);
 
             try {

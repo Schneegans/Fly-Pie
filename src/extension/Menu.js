@@ -218,7 +218,7 @@ var Menu = class Menu {
       // Report the hover event on the D-Bus if an activatable child is hovered.
       if (index >= 0) {
         const child = this._menuSelectionChain[0].getChildMenuItems()[index];
-        if (child.getActivationCallback() != null) {
+        if (child.getSelectionCallback() != null) {
           this._onHover(this._menuID, child.id);
         }
       }
@@ -298,7 +298,7 @@ var Menu = class Menu {
 
       // Finally, if a child was selected which is activatable, we report a selection and
       // hide the entire menu.
-      if (child.getActivationCallback() != null) {
+      if (child.getSelectionCallback() != null) {
 
         // Record this selection in the statistics. Parameters are selection depth, time
         // and whether a continuous gesture was used for the selection.
@@ -318,7 +318,7 @@ var Menu = class Menu {
         this._background.set_easing_delay(0);
 
         // Then call the activation callback!
-        child.getActivationCallback()();
+        child.getSelectionCallback()();
 
         // Finally report the selection over the D-Bus.
         this._onSelect(menuID, child.id);
@@ -482,8 +482,8 @@ var Menu = class Menu {
         item.children.forEach(child => {
           menuItem.addMenuItem(createMenuItem(child));
         });
-      } else if (item.activate) {
-        menuItem.setActivationCallback(item.activate);
+      } else if (item.onSelect) {
+        menuItem.setSelectionCallback(item.onSelect);
       }
 
       return menuItem;

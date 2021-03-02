@@ -126,8 +126,8 @@ class MenuItem extends Clutter.Actor {
     this._parentColor = new Clutter.Color({red: 255, green: 255, blue: 255});
 
     // This callback will be executed when the item is selected. Only items without any
-    // children but with an activation callback can be activated.
-    this._activationCallback = null;
+    // children but with such a callback can be activated.
+    this._selectionCallback = null;
 
     // Create Children Container. This eventually will contain one MenuItem for each child
     // item of this menu.
@@ -195,15 +195,15 @@ class MenuItem extends Clutter.Actor {
   }
 
   // This callback will be executed when the item is selected. Only items without any
-  // children but with an activation callback can be activated. Can be set to null to
+  // children but with an selection callback can be activated. Can be set to null to
   // disable the activate-ability.
-  setActivationCallback(func) {
-    this._activationCallback = func;
+  setSelectionCallback(func) {
+    this._selectionCallback = func;
   }
 
-  // Returns the activation callback set above.
-  getActivationCallback() {
-    return this._activationCallback;
+  // Returns the selection callback set above.
+  getSelectionCallback() {
+    return this._selectionCallback;
   }
 
   // This is called during redraw() of the parent MenuItem. redraw() traverses the menu
