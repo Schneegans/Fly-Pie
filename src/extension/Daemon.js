@@ -42,6 +42,11 @@ var Daemon = class Daemon {
     // Initialize the menu. For performance reasons the same menu is used again and again.
     // It is just reconfigured according to incoming requests.
     this._menu = new Menu(
+        // This gets called whenever the user hovers over a leaf item in point-and-click
+        // mode or starts dragging a leaf item in marking mode. It emits the OnSelect
+        // signal of our D-Bus interface.
+        (menuID, itemID) => this._onHover(menuID, itemID),
+
         // Called when the user selects an item in the menu. This calls the OnSelect
         // signal of the DBusInterface.
         (menuID, itemID) => this._onSelect(menuID, itemID),
@@ -232,6 +237,13 @@ var Daemon = class Daemon {
 
     // Something weird happened.
     return DBusInterface.errorCodes.eUnknownError;
+  }
+
+  // This gets called whenever the user hovers over a leaf item in point-and-click mode or
+  // starts dragging a leaf item in marking mode. It emits the OnSelect signal of our
+  // D-Bus interface.
+  _onHover(menuID, itemID) {
+    this._dbus.emit_signal('OnHover', GLib.Variant.new('(is)', [menuID, itemID]));
   }
 
   // This gets called once the user made a selection in the menu. It emit the OnSelect

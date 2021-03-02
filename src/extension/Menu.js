@@ -36,7 +36,7 @@ var Menu = class Menu {
   // The Menu is only instantiated once by the Server. It is re-used for each new incoming
   // ShowMenu request. The three parameters are callbacks which are fired when the
   // corresponding event occurs.
-  constructor(onSelect, onCancel) {
+  constructor(onHover, onSelect, onCancel) {
 
     // Create Gio.Settings object for org.gnome.shell.extensions.flypie.
     this._settings = utils.createSettings();
@@ -45,6 +45,7 @@ var Menu = class Menu {
     this._timer = new Timer();
 
     // Store the callbacks.
+    this._onHover  = onHover;
     this._onSelect = onSelect;
     this._onCancel = onCancel;
 
@@ -212,6 +213,14 @@ var Menu = class Menu {
         this._draggedChild = child;
       } else {
         this._draggedChild = null;
+      }
+
+      // Report the hover event on the D-Bus if an activatable child is hovered.
+      if (index >= 0) {
+        const child = this._menuSelectionChain[0].getChildMenuItems()[index];
+        if (child.getActivationCallback() != null) {
+          this._onHover(this._menuID, child.id);
+        }
       }
 
       // This recursively redraws all children based on their newly assigned state.
