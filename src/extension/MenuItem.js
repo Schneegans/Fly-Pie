@@ -131,12 +131,16 @@ class MenuItem extends Clutter.Actor {
 
     // This callback will be executed when the item is hovered. This will only be called
     // for actions, that is items without any children.
-    this._hoverCallback = null;
+    this._hoverCallback   = null;
+    this._unhoverCallback = null;
 
     // Create Children Container. This eventually will contain one MenuItem for each child
     // item of this menu.
     this._childrenContainer = new Clutter.Actor();
     this.add_child(this._childrenContainer);
+
+    // This will contain the currently hovered / dragged child item.
+    this._activeChildIndex = -1;
 
     // Create the Icon Container. This eventually will contain one actor for each visible
     // MenuItemState, except for the PARENT* states, as they are drawn like CHILDREN*. We
@@ -193,9 +197,14 @@ class MenuItem extends Clutter.Actor {
     return this._childrenContainer.get_children();
   }
 
-  // Sets menuItem to be the index'th child of this..
+  // Sets menuItem to be the index'th child of this.
   setChildMenuItemIndex(menuItem, index) {
     return this._childrenContainer.set_child_at_index(menuItem, index);
+  }
+
+  // This contains the currently hovered / dragged child item.
+  getActiveChildIndex() {
+    return this._activeChildIndex;
   }
 
   // This callback will be executed when the item is selected. Only items without any
@@ -211,7 +220,7 @@ class MenuItem extends Clutter.Actor {
   }
 
   // This callback will be executed when the item is hovered. This will only be called
-  // for actions, that is items without any children.
+  // for actions, that is for items without any children.
   setHoverCallback(func) {
     this._hoverCallback = func;
   }
@@ -219,6 +228,17 @@ class MenuItem extends Clutter.Actor {
   // Returns the hover callback set above.
   getHoverCallback() {
     return this._hoverCallback;
+  }
+
+  // This callback will be executed when the item stops being hovered. This will only be
+  // called for actions, that is for items without any children.
+  setUnhoverCallback(func) {
+    this._unhoverCallback = func;
+  }
+
+  // Returns the hover callback set above.
+  getUnhoverCallback() {
+    return this._unhoverCallback;
   }
 
   // This is called during redraw() of the parent MenuItem. redraw() traverses the menu

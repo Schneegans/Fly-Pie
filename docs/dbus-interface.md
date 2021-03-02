@@ -87,7 +87,7 @@ The table below lists all possible item types. Some of the types require that th
 | Actions | Default `data`  | Description |
 |------------|-----------------------|-------------|
 | **`"Command"`** | `""` | This action executes a command given in `data`. This is primarily used to open applications but may have plenty of other use cases as well. |
-| **`"DBusSignal"`** | `""` | This action does nothing on its own. But you can listen on the D-Bus for its activation. This can be very useful in custom menus opened via the command line. The string given in `data` will be passed as `itemID` to the `OnHover` and `OnSelect` signals. Below this table you will find an example! |
+| **`"DBusSignal"`** | `""` | This action does nothing on its own. But you can listen on the D-Bus for its activation. This can be very useful in custom menus opened via the command line. The string given in `data` will be passed as `itemID` to the `OnHover`, `OnUnhover` and `OnSelect` signals. Below this table you will find an example! |
 | **`"File"`** | `""` | This action will open a file given with an absolute path in `data` with your system\'s default application. |
 | **`"InsertText"`** | `""` | This action copies the text given in `data` to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things. |
 | **`"Shortcut"`** | `""` | This action simulates a key combination when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations. `data` should be something like `"<Primary>space"`. |
@@ -120,11 +120,11 @@ journalctl -f -o cat | grep -E 'flypie|'
 If you want to make menu items perform actions which are not available in Fly-Pie,
 you can use the `"DBusSignal"` item type and wait for their selection on the D-Bus.
 
-There are three signals; `OnCancel` will be fired when the user aborts the selection in a menu,
+There are four signals; `OnCancel` will be fired when the user aborts the selection in a menu,
 `OnSelect` is activated when the user makes a selection
-and `OnHover` is called whenever an action is hovered in point-and-click mode or dragged around in marking mode.
+and `OnHover` and `OnUnhover` are called whenever an action begins or stops being hovered in point-and-click mode or dragged around in marking mode.
 All signals send the _menu ID_ which has been reported by the corresponding `ShowMenu` call,
-in addition, `OnSelect` and `OnHover` send the _item ID_ of the selected item.
+in addition, `OnSelect`, `OnHover`, and `OnUnhover` send the _item ID_ of the selected item.
 
 The _item ID_ will usually be a path in the form of `"/1/0"`.
 This example would mean that the first child of the second child of the root menu was selected (indices are zero-based).

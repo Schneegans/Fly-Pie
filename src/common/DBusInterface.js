@@ -38,6 +38,10 @@ var DBusInterface = {
               <arg name="menuID" type="i"/>                                              \
               <arg name="itemID" type="s"/>                                              \
           </signal>                                                                      \
+          <signal name="OnUnhover">                                                      \
+              <arg name="menuID" type="i"/>                                              \
+              <arg name="itemID" type="s"/>                                              \
+          </signal>                                                                      \
           <signal name="OnSelect">                                                       \
               <arg name="menuID" type="i"/>                                              \
               <arg name="itemID" type="s"/>                                              \

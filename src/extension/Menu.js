@@ -36,7 +36,7 @@ var Menu = class Menu {
   // The Menu is only instantiated once by the Server. It is re-used for each new incoming
   // ShowMenu request. The three parameters are callbacks which are fired when the
   // corresponding event occurs.
-  constructor(emitHoverSignal, emitSelectSignal, emitCancelSignal) {
+  constructor(emitHoverSignal, emitUnhoverSignal, emitSelectSignal, emitCancelSignal) {
 
     // Create Gio.Settings object for org.gnome.shell.extensions.flypie.
     this._settings = utils.createSettings();
@@ -45,9 +45,10 @@ var Menu = class Menu {
     this._timer = new Timer();
 
     // Store the callbacks.
-    this._emitHoverSignal  = emitHoverSignal;
-    this._emitSelectSignal = emitSelectSignal;
-    this._emitCancelSignal = emitCancelSignal;
+    this._emitHoverSignal   = emitHoverSignal;
+    this._emitUnhoverSignal = emitUnhoverSignal;
+    this._emitSelectSignal  = emitSelectSignal;
+    this._emitCancelSignal  = emitCancelSignal;
 
     // This holds the ID of the currently active menu. It's null if no menu is currently
     // shown.
@@ -188,12 +189,15 @@ var Menu = class Menu {
     this._background.add_child(this._selectionWedges);
 
     // This is fired when the mouse pointer enters one of the wedges.
-    this._selectionWedges.connect('child-hovered-event', (o, index) => {
-      // If no child is hovered (index == -1), the center element is hovered.
-      if (index == -1) {
+    this._selectionWedges.connect('child-hovered-event', (o, hoveredIndex) => {
+      // If there is a currently hovered child, we will call the unhover signal later.
+      const unhoveredIndex = this._menuSelectionChain[0].getActiveChildIndex();
+
+      // If no child is hovered (hoveredIndex == -1), the center element is hovered.
+      if (hoveredIndex == -1) {
         this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
       } else {
-        this._menuSelectionChain[0].setState(MenuItemState.CENTER, index);
+        this._menuSelectionChain[0].setState(MenuItemState.CENTER, hoveredIndex);
       }
 
       // It could be that the parent of the currently active item was hovered before, so
@@ -207,17 +211,34 @@ var Menu = class Menu {
       const [x, y, mods]      = global.get_pointer();
       const leftButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
       const shortcutPressed   = mods & Gtk.accelerator_get_default_mod_mask();
-      if ((leftButtonPressed || shortcutPressed) && index >= 0) {
-        const child = this._menuSelectionChain[0].getChildMenuItems()[index];
+      if ((leftButtonPressed || shortcutPressed) && hoveredIndex >= 0) {
+        const child = this._menuSelectionChain[0].getChildMenuItems()[hoveredIndex];
         child.setState(MenuItemState.CHILD_DRAGGED);
         this._draggedChild = child;
       } else {
         this._draggedChild = null;
       }
 
+      // Report the unhover event on the D-Bus if an action was hovered before.
+      if (unhoveredIndex >= 0) {
+        const child = this._menuSelectionChain[0].getChildMenuItems()[unhoveredIndex];
+
+        // If the item has a selection callback, it is an action.
+        if (child.getSelectionCallback() != null) {
+
+          // If the action has a hover callback, call it!
+          if (child.getUnhoverCallback() != null) {
+            child.getUnhoverCallback()();
+          }
+
+          // Then emit the D-Bus unhover signal!
+          this._emitUnhoverSignal(this._menuID, child.id);
+        }
+      }
+
       // Report the hover event on the D-Bus if an action is hovered.
-      if (index >= 0) {
-        const child = this._menuSelectionChain[0].getChildMenuItems()[index];
+      if (hoveredIndex >= 0) {
+        const child = this._menuSelectionChain[0].getChildMenuItems()[hoveredIndex];
 
         // If the item has a selection callback, it is an action.
         if (child.getSelectionCallback() != null) {
@@ -337,6 +358,26 @@ var Menu = class Menu {
     // When a parent item is hovered, we draw the currently active item with the state
     // CENTER_HOVERED to indicate that the parent is not a child.
     this._selectionWedges.connect('parent-hovered-event', () => {
+      // If there is a currently hovered child, we may have to call the unhover signal.
+      const unhoveredIndex = this._menuSelectionChain[0].getActiveChildIndex();
+
+      // Report the unhover event on the D-Bus if an action was hovered before.
+      if (unhoveredIndex >= 0) {
+        const child = this._menuSelectionChain[0].getChildMenuItems()[unhoveredIndex];
+
+        // If the item has a selection callback, it is an action.
+        if (child.getSelectionCallback() != null) {
+
+          // If the action has a hover callback, call it!
+          if (child.getUnhoverCallback() != null) {
+            child.getUnhoverCallback()();
+          }
+
+          // Then emit the D-Bus unhover signal!
+          this._emitUnhoverSignal(this._menuID, child.id);
+        }
+      }
+
       this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
       this._menuSelectionChain[1].setState(MenuItemState.PARENT_HOVERED);
 
@@ -495,14 +536,18 @@ var Menu = class Menu {
 
       } else {
 
-        // If there are no children, there may be an activation and a hover callback. We
-        // forward them to the item so that they can be called if required.
+        // If there are no children, there may be a selection, a hover, or an unhover
+        // callback. We forward them to the item so that they can be called if required.
         if (item.onSelect) {
           menuItem.setSelectionCallback(item.onSelect);
         }
 
         if (item.onHover) {
           menuItem.setHoverCallback(item.onHover);
+        }
+
+        if (item.onUnhover) {
+          menuItem.setUnhoverCallback(item.onUnhover);
         }
       }
 

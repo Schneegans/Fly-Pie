@@ -15,8 +15,9 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The D-Bus signal action does nothing. It is actually something like a dummy action.  //
-// But sometimes you will just require the emission of the OnHover and OnSelect D-Bus   //
-// signals. See common/ItemRegistry.js for a description of the action's format.        //
+// But sometimes you will just require the emission of the OnHover, OnUnhover and       //
+// OnSelect D-Bus signals.                                                              //
+// See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var action = {
