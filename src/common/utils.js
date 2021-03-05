@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                                    = imports.cairo;
-const {Gdk, Gtk, Gio, Pango, PangoCairo, GLib} = imports.gi;
+const Cairo                                             = imports.cairo;
+const {Gdk, Gtk, Gio, Pango, PangoCairo, GLib, Clutter} = imports.gi;
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 
@@ -211,4 +211,17 @@ function stringToRGBA(string) {
 function roundToMultiple(number, base) {
   return ((number % base) > base / 2) ? number + base - number % base :
                                         number - number % base;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Returns true if the primary button is pressed or a modifier is held down (for the    //
+// "Turbo-Mode"),                                                                       //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+function isGestureModifier(mods) {
+  const leftButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
+  const shortcutPressed =
+      mods & (Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK);
+
+  return leftButtonPressed || shortcutPressed;
 }

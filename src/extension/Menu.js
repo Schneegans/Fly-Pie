@@ -117,10 +117,7 @@ var Menu = class Menu {
       // If the primary button is pressed or a modifier is held down (for the
       // "Turbo-Mode"), but we do not have a dragged child yet, we mark the currently
       // hovered child as being the dragged child.
-      const leftButtonPressed = event.get_state() & Clutter.ModifierType.BUTTON1_MASK;
-      const shortcutPressed = event.get_state() & Gtk.accelerator_get_default_mod_mask();
-
-      if ((leftButtonPressed || shortcutPressed) && this._draggedChild == null) {
+      if ((utils.isGestureModifier(event.get_state())) && this._draggedChild == null) {
         const index = this._selectionWedges.getHoveredChild();
         if (index >= 0) {
           const child = this._menuSelectionChain[0].getChildMenuItems()[index];
@@ -208,10 +205,8 @@ var Menu = class Menu {
 
       // If we're currently dragging a child around, the newly hovered child will
       // instantaneously become the hovered child.
-      const [x, y, mods]      = global.get_pointer();
-      const leftButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
-      const shortcutPressed   = mods & Gtk.accelerator_get_default_mod_mask();
-      if ((leftButtonPressed || shortcutPressed) && hoveredIndex >= 0) {
+      const [x, y, mods] = global.get_pointer();
+      if (utils.isGestureModifier(mods) && hoveredIndex >= 0) {
         const child = this._menuSelectionChain[0].getChildMenuItems()[hoveredIndex];
         child.setState(MenuItemState.CHILD_DRAGGED);
         this._draggedChild = child;
@@ -267,10 +262,7 @@ var Menu = class Menu {
 
       // Ignore any gesture-based selection of leaf nodes. Final selections are only done
       // when the mouse button or a modifier button is released.
-      const leftButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
-      const shortcutPressed   = mods & Gtk.accelerator_get_default_mod_mask();
-      if ((leftButtonPressed || shortcutPressed) &&
-          child.getChildMenuItems().length == 0) {
+      if (utils.isGestureModifier(mods) && child.getChildMenuItems().length == 0) {
         return;
       }
 
