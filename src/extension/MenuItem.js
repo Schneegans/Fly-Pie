@@ -329,23 +329,12 @@ class MenuItem extends Clutter.Actor {
 
     // We load the background images once for all menu items.
     const loadBackgroundImage = (file, size) => {
-      // Do nothing if the background image property is not set.
-      if (file == '') {
-        return null;
+      // Only attempt to load an image if the background image property is set and exists.
+      if (file != '' && Gio.File.new_for_path(file).query_exists(null)) {
+        return GdkPixbuf.Pixbuf.new_from_file_at_scale(file, size, size, false);
       }
 
-      // If the file does not exist, it may be a relative path.
-      if (!Gio.File.new_for_path(file).query_exists(null)) {
-        file = Me.path + '/' + file;
-      }
-
-      // if this does not exist as well, we cannot load the image.
-      if (!Gio.File.new_for_path(file).query_exists(null)) {
-        return null;
-      }
-
-      // Finally load the pixbuf!
-      return GdkPixbuf.Pixbuf.new_from_file_at_scale(file, size, size, false);
+      return null;
     };
 
     // clang-format off

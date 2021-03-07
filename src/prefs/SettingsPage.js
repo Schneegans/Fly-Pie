@@ -546,18 +546,9 @@ var SettingsPage = class SettingsPage {
       const button = this._builder.get_object(key);
       if (button != null && this._settings.settings_schema.has_key(key)) {
 
-        // Store the file path when the user selects a file.
+        // Store the absolute file path when the user selects a file.
         button.connect('file-set', (widget) => {
-          const file         = widget.get_file();
-          const absolutePath = file.get_path();
-          const relativePath = Gio.File.new_for_path(Me.path).get_relative_path(file);
-
-          // Store the relative path if the file is a descendant of Me.path.
-          if (relativePath != null) {
-            this._settings.set_string(key, relativePath);
-          } else {
-            this._settings.set_string(key, absolutePath);
-          }
+          this._settings.set_string(key, widget.get_file().get_path());
         });
 
         // This will be called whenever the settingsKey changes.
@@ -569,11 +560,6 @@ var SettingsPage = class SettingsPage {
           } else {
 
             let file = Gio.File.new_for_path(path);
-
-            // It may be a relative file?
-            if (!file.query_exists(null)) {
-              file = Gio.File.new_for_path(Me.path + '/' + path);
-            }
 
             // Set only if it exists.
             if (file.query_exists(null)) {
