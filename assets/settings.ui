@@ -769,11 +769,11 @@ Can be added to custom menus.</property>
             <property name="can_focus">False</property>
             <property name="layout_style">spread</property>
             <child>
-              <object class="GtkButton" id="save-preset-button">
+              <object class="GtkButton" id="random-preset-button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Save current settings</property>
+                <property name="tooltip_text" translatable="yes">Initializes the settings below to random values</property>
                 <property name="always_show_image">True</property>
                 <child>
                   <object class="GtkGrid">
@@ -786,7 +786,7 @@ Can be added to custom menus.</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="valign">center</property>
-                        <property name="icon_name">list-add-symbolic</property>
+                        <property name="icon_name">applications-science-symbolic</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -800,7 +800,7 @@ Can be added to custom menus.</property>
                         <property name="halign">start</property>
                         <property name="valign">center</property>
                         <property name="margin_left">5</property>
-                        <property name="label" translatable="yes">Save as new Preset</property>
+                        <property name="label" translatable="yes">Generate Random Preset</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -814,28 +814,6 @@ Can be added to custom menus.</property>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
                 <property name="position">1</property>
-                <property name="non_homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="open-preset-directory-button">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Open preset directory</property>
-                <property name="always_show_image">True</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">folder-open-symbolic</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">2</property>
                 <property name="non_homogeneous">True</property>
               </packing>
             </child>
@@ -2466,7 +2444,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Choose a Preset</property>
+                                    <property name="label" translatable="yes">Load &amp; Save Settings</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
@@ -2479,7 +2457,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
                                     <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">This will override most settings below!</property>
+                                    <property name="label" translatable="yes">You can choose a built-in preset or save your current settings.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -2530,7 +2508,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                             <property name="can_focus">False</property>
                                             <property name="halign">start</property>
                                             <property name="vexpand">True</property>
-                                            <property name="label" translatable="yes">Load / Save a Preset</property>
+                                            <property name="label" translatable="yes">Built-in Presets</property>
                                           </object>
                                           <packing>
                                             <property name="left_attach">0</property>
@@ -2547,48 +2525,45 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkButton" id="random-preset-button">
+                                  <object class="GtkButton" id="load-preset-button">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <property name="tooltip_text" translatable="yes">Initializes the settings below to random values</property>
+                                    <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Load settings fom a file</property>
+                                    <property name="always_show_image">True</property>
                                     <child>
-                                      <object class="GtkGrid">
+                                      <object class="GtkImage">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="column_spacing">6</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="vexpand">True</property>
-                                            <property name="icon_name">applications-science-symbolic</property>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">0</property>
-                                            <property name="top_attach">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="halign">start</property>
-                                            <property name="vexpand">True</property>
-                                            <property name="label" translatable="yes" comments="Please keep this short!">Generate Random Preset</property>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">1</property>
-                                            <property name="top_attach">0</property>
-                                          </packing>
-                                        </child>
+                                        <property name="icon_name">document-open-symbolic</property>
                                       </object>
                                     </child>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
-                                    <property name="fill">True</property>
+                                    <property name="fill">False</property>
                                     <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="save-preset-button">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Save the current settings to a file</property>
+                                    <property name="always_show_image">True</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="icon_name">document-save-symbolic</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">2</property>
                                   </packing>
                                 </child>
                                 <style>
