@@ -120,6 +120,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">end</property>
+                            <property name="valign">start</property>
                             <property name="margin_top">8</property>
                             <property name="label" translatable="yes">Created by</property>
                           </object>
@@ -134,7 +135,9 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                             <property name="can_focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">end</property>
-                            <property name="label" translatable="yes">&lt;a href="https://github.com/Schneegans"&gt;@schneegans&lt;/a&gt;</property>
+                            <property name="margin_top">8</property>
+                            <property name="label">&lt;a href="https://github.com/Schneegans"&gt;@schneegans&lt;/a&gt;
+&lt;a href="https://github.com/daPhipz"&gt;@daPhipz&lt;/a&gt;</property>
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
@@ -145,10 +148,27 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                         <child>
                           <object class="GtkLabel">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">end</property>
+                            <property name="valign">start</property>
+                            <property name="margin_top">8</property>
+                            <property name="label" translatable="yes">Translated by</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="halign">start</property>
                             <property name="valign">end</property>
-                            <property name="label" translatable="yes">&lt;a href="https://github.com/daPhipz"&gt;@daPhipz&lt;/a&gt;</property>
+                            <property name="margin_top">8</property>
+                            <property name="label">&lt;a href="https://github.com/Schneegans"&gt;@schneegans&lt;/a&gt; (DE)
+&lt;a href="https://github.com/daPhipz"&gt;@daPhipz&lt;/a&gt; (DE)
+&lt;a href="https://github.com/albanobattistella"&gt;@albanobattistella&lt;/a&gt; (IT)</property>
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
@@ -161,53 +181,13 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">end</property>
-                            <property name="margin_top">8</property>
-                            <property name="label" translatable="yes">Translated by</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="halign">start</property>
-                            <property name="valign">end</property>
-                            <property name="label" translatable="yes">&lt;a href="https://github.com/Schneegans"&gt;@schneegans&lt;/a&gt; (DE)</property>
-                            <property name="use_markup">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="halign">start</property>
-                            <property name="valign">end</property>
-                            <property name="label" translatable="yes">&lt;a href="https://github.com/daPhipz"&gt;@daPhipz&lt;/a&gt; (DE)</property>
-                            <property name="use_markup">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="halign">end</property>
+                            <property name="valign">start</property>
                             <property name="margin_top">8</property>
                             <property name="label" translatable="yes">Artwork by</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
-                            <property name="top_attach">5</property>
+                            <property name="top_attach">2</property>
                           </packing>
                         </child>
                         <child>
@@ -216,36 +196,14 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                             <property name="can_focus">True</property>
                             <property name="halign">start</property>
                             <property name="valign">end</property>
-                            <property name="label" translatable="yes">&lt;a href="https://github.com/Schneegans"&gt;@schneegans&lt;/a&gt;</property>
+                            <property name="margin_top">8</property>
+                            <property name="label">&lt;a href="https://github.com/Schneegans"&gt;@schneegans&lt;/a&gt;</property>
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
-                            <property name="top_attach">5</property>
+                            <property name="top_attach">2</property>
                           </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="halign">start</property>
-                            <property name="valign">end</property>
-                            <property name="label" translatable="yes">&lt;a href="https://github.com/albanobattistella"&gt;@albanobattistella&lt;/a&gt; (IT)</property>
-                            <property name="use_markup">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">4</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
                         </child>
                       </object>
                     </child>
@@ -323,6 +281,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="opacity">0.5</property>
+                                <property name="halign">start</property>
                                 <property name="valign">end</property>
                                 <property name="label">- none -</property>
                                 <attributes>
@@ -339,6 +298,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="opacity">0.50196078431372548</property>
+                                <property name="halign">start</property>
                                 <property name="valign">end</property>
                                 <property name="label">- none -</property>
                                 <attributes>
@@ -354,12 +314,10 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="opacity">0.50196078431372548</property>
+                                <property name="halign">start</property>
                                 <property name="valign">end</property>
-                                <property name="label">- none -</property>
-                                <attributes>
-                                  <attribute name="style" value="italic"/>
-                                </attributes>
+                                <property name="label">&lt;a href="https://github.com/ykhurshid"&gt;@ykhurshid&lt;/a&gt;</property>
+                                <property name="use_markup">True</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
