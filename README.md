@@ -29,7 +29,7 @@ There are also several predefined Menu Types, such as **Bookmarks**, **Running A
 Last but not least, Fly-Pie features a **D-Bus Interface** which can be used to open your configured menus. It can also be used to open arbitrary menus defined with a JSON description. The item which was selected will be reported via a D-Bus signal.
 
 
-## :heart: Will you love Fly-Pie?
+# :heart: Will you love Fly-Pie?
 
 <p align="center">
   <img src ="docs/pics/banner-05.jpg" />
@@ -41,9 +41,6 @@ applications which work better in this case (for example [kupfer](https://github
 Fly-Pie also works nicely with **touch input**.
 
 If you want to learn more, use the links below for much more information!
-
-
-
 
 ## Getting Started
 
@@ -64,5 +61,25 @@ If you want to learn more, use the links below for much more information!
 * [Changelog](docs/changelog.md)
 * [Release Management](docs/release-management.md)
 * [Continuous Integration](docs/continuous-integration.md)
+
+# :revolving_hearts: These people _do_ love Fly-Pie
+
+Do you want to show that you love Fly-Pie too? You may <a href="https://github.com/sponsors/Schneegans">become a sponsor for as little as 1$ / month</a>!
+While contributing new features or translating Fly-Pie is the most awesome way to contribute, providing financial support will help me stay motivated to invest my spare time to keep the project alive in the future.
+
+## :1st_place_medal: Gold Sponsors
+<p align="center">
+  <a href="https://github.com/sponsors/Schneegans">Be the first!</a>
+</p>
+
+## :2nd_place_medal: Silver Sponsors</strong>
+<p align="center">
+  <a href="https://github.com/sponsors/Schneegans">Be the first!</a>
+</p>
+
+## :3rd_place_medal: Copper Sponsors</strong>
+<p align="center">
+  <a href="https://github.com/ykhurshid">@ykhurshid</a>
+</p>
 
 <p align="center"><img src ="docs/pics/hr.svg" /></p>
