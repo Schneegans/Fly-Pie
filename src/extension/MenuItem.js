@@ -331,7 +331,11 @@ class MenuItem extends Clutter.Actor {
     const loadBackgroundImage = (file, size) => {
       // Only attempt to load an image if the background image property is set and exists.
       if (file != '' && Gio.File.new_for_path(file).query_exists(null)) {
-        return GdkPixbuf.Pixbuf.new_from_file_at_scale(file, size, size, false);
+        try {
+          return GdkPixbuf.Pixbuf.new_from_file_at_scale(file, size, size, false);
+        } catch (error) {
+          utils.debug('Failed to load background image: ' + error);
+        }
       }
 
       return null;
