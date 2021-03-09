@@ -83,6 +83,10 @@ var Daemon = class Daemon {
     // configuration changes, we bind all the configured shortcuts.
     this._settings = utils.createSettings();
 
+    // We keep several connections to the Gio.Settings object. Once the extension is
+    // unloaded, we use this array to disconnect all of them.
+    this._settingsConnections = [];
+
     this._achievements = new Achievements(this._settings);
 
     // Here we test whether any menus are configured. If the key is completely empty, this
@@ -110,13 +114,13 @@ var Daemon = class Daemon {
     }
 
     // Reload the menu configuration when the settings key changes.
-    this._settingsConnection = this._settings.connect(
-        'changed::menu-configuration', () => this._onMenuConfigsChanged());
+    this._settingsConnections.push(this._settings.connect(
+        'changed::menu-configuration', () => this._onMenuConfigsChanged()));
     this._onMenuConfigsChanged();
 
     // Show or hide screencast mouse if the corresponding settings key is toggled.
-    this._settings.connect(
-        'changed::show-screencast-mouse', () => this._onScreencastMouseChanged());
+    this._settingsConnections.push(this._settings.connect(
+        'changed::show-screencast-mouse', () => this._onScreencastMouseChanged()));
     this._onScreencastMouseChanged();
   }
 
@@ -128,7 +132,10 @@ var Daemon = class Daemon {
     this._dbus.unexport();
 
     this._shortcuts.destroy();
-    this._settings.disconnect(this._settingsConnection);
+
+    this._settingsConnections.forEach(connection => {
+      this._settings.disconnect(connection);
+    });
 
     this._achievements.destroy();
 

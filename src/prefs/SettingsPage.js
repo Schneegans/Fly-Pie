@@ -39,6 +39,10 @@ var SettingsPage = class SettingsPage {
     this._builder  = builder;
     this._settings = settings;
 
+    // We keep several connections to the Gio.Settings object. Once the settings dialog is
+    // closed, we use this array to disconnect all of them.
+    this._settingsConnections = [];
+
     // Initialize all buttons of the preset area.
     this._initializePresetButtons();
 
@@ -210,6 +214,13 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('gesture-min-stroke-angle');
     this._bindSwitch('hover-mode');
     this._bindSwitch('show-screencast-mouse');
+  }
+
+  // Disconnects all settings connections.
+  destroy() {
+    this._settingsConnections.forEach(connection => {
+      this._settings.disconnect(connection);
+    });
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -513,7 +524,8 @@ var SettingsPage = class SettingsPage {
         button.active = true;
       };
 
-      this._settings.connect('changed::' + settingsKey, settingSignalHandler);
+      this._settingsConnections.push(
+          this._settings.connect('changed::' + settingsKey, settingSignalHandler));
 
       // Initialize the button with the state in the settings.
       settingSignalHandler();
@@ -572,7 +584,8 @@ var SettingsPage = class SettingsPage {
         };
 
         // Connect the handler!
-        this._settings.connect('changed::' + key, settingSignalHandler);
+        this._settingsConnections.push(
+            this._settings.connect('changed::' + key, settingSignalHandler));
         settingSignalHandler();
       }
     };
@@ -604,7 +617,8 @@ var SettingsPage = class SettingsPage {
         colorChooser.rgba = rgba;
       };
 
-      this._settings.connect('changed::' + settingsKey, settingSignalHandler);
+      this._settingsConnections.push(
+          this._settings.connect('changed::' + settingsKey, settingSignalHandler));
 
       // Initialize the button with the state in the settings.
       settingSignalHandler();

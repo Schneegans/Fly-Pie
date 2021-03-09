@@ -117,7 +117,9 @@ var PreferencesDialog = class PreferencesDialog {
       // Delete the static settings object of the statistics.
       Statistics.cleanUp();
 
-      // Disconnect some settings handlers of the achievements class.
+      // Disconnect some settings handlers of the individual pages.
+      this._tutorialPage.destroy();
+      this._settingsPage.destroy();
       this._achievementsPage.destroy();
     });
 
