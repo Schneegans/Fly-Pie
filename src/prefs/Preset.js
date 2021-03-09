@@ -115,7 +115,7 @@ var Preset = class Preset {
             // There's a special case for the image keys. They are allowed to be relative
             // paths to the preset file to make sharing of presets easier. But we should
             // convert them to absolute paths here.
-            if (key.includes('image') && !GLib.path_is_absolute(value)) {
+            if (key.includes('image') && value != '' && !GLib.path_is_absolute(value)) {
               const path = file.get_parent().resolve_relative_path(value);
               if (path != null) {
                 value = path.get_path();
