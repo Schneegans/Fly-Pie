@@ -262,8 +262,10 @@ var Menu = class Menu {
       const [pointerX, pointerY, mods] = global.get_pointer();
 
       // Ignore any gesture-based selection of leaf nodes. Final selections are only done
-      // when the mouse button or a modifier button is released.
-      if (this._selectionWedges.isGestureModifier(mods) &&
+      // when the mouse button or a modifier button is released. An exception is the
+      // experimental hover mode in which we also allow selections by gestures.
+      const hoverMode = this._settings.get_boolean('hover-mode');
+      if (!hoverMode && this._selectionWedges.isGestureModifier(mods) &&
           child.getChildMenuItems().length == 0) {
         return;
       }

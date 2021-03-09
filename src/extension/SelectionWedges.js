@@ -205,6 +205,7 @@ class SelectionWedges extends Clutter.Actor {
       gestureJitterThreshold:  settings.get_double('gesture-jitter-threshold')  * globalScale,
       gestureMinStrokeLength:  settings.get_double('gesture-min-stroke-length') * globalScale,
       gestureMinStrokeAngle:   settings.get_double('gesture-min-stroke-angle'),
+      hoverMode:               settings.get_boolean('hover-mode'),
     };
     // clang-format on
 
@@ -523,11 +524,12 @@ class SelectionWedges extends Clutter.Actor {
   // Returns true if the primary button is pressed or a modifier is held down (for the
   // "Turbo-Mode"),
   isGestureModifier(mods) {
+    const hoverMode         = this._settings.hoverMode;
     const leftButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
     const shortcutPressed =
         mods & (Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK);
 
-    return leftButtonPressed || shortcutPressed;
+    return hoverMode || leftButtonPressed || shortcutPressed;
   }
 
   // ----------------------------------------------------------------------- private stuff
