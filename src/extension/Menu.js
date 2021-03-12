@@ -637,7 +637,9 @@ var Menu = class Menu {
       item.name  = newConfig.name;
       item.icon  = newConfig.icon;
       item.angle = newConfig.angle;
-      item.setActivationCallback(newConfig.activate || null);
+      item.setSelectionCallback(newConfig.onSelect || null);
+      item.setHoverCallback(newConfig.onHover || null);
+      item.setUnhoverCallback(newConfig.onUnhover || null);
 
       const children = new Set(item.getChildMenuItems());
 
@@ -680,7 +682,9 @@ var Menu = class Menu {
               icon: newChild.icon,
               angle: newChild.angle,
             });
-            newChild.matchingChild.setActivationCallback(newConfig.activate || null);
+            newChild.matchingChild.setSelectionCallback(newConfig.onSelect || null);
+            newChild.matchingChild.setHoverCallback(newConfig.onHover || null);
+            newChild.matchingChild.setUnhoverCallback(newConfig.onUnhover || null);
             item.addMenuItem(newChild.matchingChild);
             newChild.matchingChild.onSettingsChange(this._settings);
 
@@ -689,7 +693,9 @@ var Menu = class Menu {
             newChild.matchingChild.name  = newChild.name;
             newChild.matchingChild.icon  = newChild.icon;
             newChild.matchingChild.angle = newChild.angle;
-            newChild.matchingChild.setActivationCallback(newConfig.activate || null);
+            newChild.matchingChild.setSelectionCallback(newConfig.onSelect || null);
+            newChild.matchingChild.setHoverCallback(newConfig.onHover || null);
+            newChild.matchingChild.setUnhoverCallback(newConfig.onUnhover || null);
           }
         });
 
