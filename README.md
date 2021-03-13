@@ -74,7 +74,7 @@ While contributing new features or translating Fly-Pie is the most awesome way t
 
 ## :2nd_place_medal: Silver Sponsors</strong>
 <p align="center">
-  <a href="https://github.com/sponsors/Schneegans">Be the first!</a>
+  GEPLlinux
 </p>
 
 ## :3rd_place_medal: Copper Sponsors</strong>

@@ -297,12 +297,11 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="opacity">0.50196078431372548</property>
                                 <property name="halign">start</property>
                                 <property name="valign">end</property>
-                                <property name="label">- none -</property>
+                                <property name="label">GEPLlinux</property>
                                 <attributes>
-                                  <attribute name="style" value="italic"/>
+                                  <attribute name="style" value="normal"/>
                                 </attributes>
                               </object>
                               <packing>
