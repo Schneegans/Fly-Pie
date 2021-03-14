@@ -12,9 +12,10 @@ const Gio = imports.gi.Gio;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.src.common.utils;
-const ItemRegistry = Me.imports.src.common.ItemRegistry;
+const Me                  = imports.misc.extensionUtils.getCurrentExtension();
+const utils               = Me.imports.src.common.utils;
+const ItemRegistry        = Me.imports.src.common.ItemRegistry;
+const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Uri action opens the defined URI with the system's default application.          //
@@ -42,33 +43,51 @@ var action = {
   description: _(
       'When the <b>Open URI</b> action is activated, the above URI is opened with the default application. For http URLs, this will be your web browser. However, it is also possible to open other URIs such as "mailto:foo@bar.org".'),
 
-  // Items of this type have an additional data property which can be set by the user. The
-  // data value chosen by the user is passed to the createItem() method further below.
-  data: {
+  // Items of this type have an additional text configuration parameter which is the URI
+  // which is to be opened.
+  config: {
+    // This is used as data for newly created items of this type.
+    defaultData: {uri: ''},
 
-    // The data type determines which widget is visible when an item of this type is
-    // selected in the settings dialog.
-    type: ItemRegistry.ItemDataType.TEXT,
+    // This is called whenever an item of this type is selected in the menu editor. It
+    // returns a Gtk.Widget which will be shown in the sidebar of the menu editor. The
+    // currently configured data object will be passed as first parameter and *should* be
+    // an object containing a single "uri" property. To stay backwards compatible with
+    // Fly-Pie 4, we have to also handle the case where the URI is given as a simple
+    // string value. The second parameter is a callback which is fired whenever the user
+    // changes something in the widgets.
+    getWidget(data, updateCallback) {
+      let uri = '';
+      if (typeof data === 'string') {
+        uri = data;
+      } else if (data.uri != undefined) {
+        uri = data.uri;
+      }
 
-    // This is shown on the left above the data widget in the settings dialog.
-    name: _('URI'),
-
-    // Translators: Please keep this short.
-    // This is shown on the right above the data widget in the settings dialog.
-    description: _('It will be opened with the default app.'),
-
-    // This is be used as data for newly created items.
-    default: '',
+      return ConfigWidgetFactory.createTextWidget(
+          _('URI'), _('It will be opened with the default app.'), uri, (uri) => {
+            updateCallback({uri: uri});
+          });
+    }
   },
 
   // This will be called whenever a menu is opened containing an item of this kind.
-  // The data value chosen by the user will be passed to this function.
+  // The data parameter *should* be an object containing a single "uri" property. To
+  // stay backwards compatible with Fly-Pie 4, we have to also handle the case where
+  // the URI is given as a simple string value.
   createItem: (data) => {
+    let uri = '';
+    if (typeof data === 'string') {
+      uri = data;
+    } else if (data.uri != undefined) {
+      uri = data.uri;
+    }
+
     // The onSelect() function will be called when the user selects this action.
     return {
       onSelect: () => {
         try {
-          Gio.AppInfo.launch_default_for_uri(data, null);
+          Gio.AppInfo.launch_default_for_uri(uri, null);
         } catch (error) {
           utils.debug('Failed to open URL: ' + error);
         }

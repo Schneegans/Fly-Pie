@@ -10,7 +10,8 @@ Actions have an `onSelect()` method which is called when the user selects them; 
 If you want to create a new Menu type for Fly-Pie, this guide is made for you!
 As an example, we will create a Menu which contains three actions, each of which shows a desktop notification when selected.
 
-First, create a file `src/common/menus/ExampleMenu.js` with the following content.
+Before you start, you should read the [Software Architecture Page](software-architecture.md) to get an overview of the components of Fly-Pie.
+Then create a file `src/common/menus/ExampleMenu.js` with the following content.
 You should read the code, most of it is explained with inline comments!
 
 ```javascript
@@ -72,9 +73,9 @@ var menu = {
   // This is the (long) description shown when an item of this type is selected.
   description: _('Bar bar bar bar.'),
 
-  // Menus can also have a data field. See the documentation on how-to create custom
-  // actions for details. This example menu does not use a data field.
-  // data: { ... }
+  // Menus can also have a config field like actions. See the documentation on how-to
+  // create custom actions for details. This example menu does not use a config field.
+  // config: { ... }
 
   // This will be called whenever a menu is opened containing an item of this kind.
   createItem: () => {
@@ -117,7 +118,7 @@ Once this file is in place, you just need to add the new Action to the `src/comm
 To do this, add the following line to the other, similar-looking lines in `getItemTypes()`.
 
 ```javascript
-ExampleMenu: actions.ExampleMenu.menu,
+ExampleMenu: menus.ExampleMenu.menu,
 ```
 
 Finally you can restart GNOME Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd> (or logout / login on Wayland).
