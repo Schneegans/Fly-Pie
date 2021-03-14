@@ -54,7 +54,7 @@ var menu = {
       // The data paramter *should* be an object containing a single "maxNum" property. To
       // stay backwards compatible with Fly-Pie 4, we have to also handle the case where
       // the maxNum is given as a simple string value.
-      let maxNum = 12;
+      let maxNum = 7;
       if (typeof data === 'string') {
         maxNum = parseInt(data);
       } else if (data.maxNum != undefined) {
@@ -74,7 +74,7 @@ var menu = {
   // stay backwards compatible with Fly-Pie 4, we have to also handle the case where
   // the maxNum is given as a simple string value.
   createItem: (data) => {
-    let maxNum = 12;
+    let maxNum = 7;
     if (typeof data === 'string') {
       maxNum = parseInt(data);
     } else if (data.maxNum != undefined) {
