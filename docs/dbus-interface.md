@@ -50,13 +50,17 @@ gdbus call --session --dest org.gnome.Shell                 \
         "name": "Up",                                       \
         "icon": "🔼️",                                       \
         "type": "Shortcut",                                 \
-        "data": "<Primary><Alt>Up"                          \
+        "data": {                                           \
+          "shortcut": "<Primary><Alt>Up"                    \
+        }                                                   \
       },                                                    \
       {                                                     \
         "name": "Down",                                     \
         "icon": "🔽️",                                       \
         "type": "Shortcut",                                 \
-        "data": "<Primary><Alt>Down"                        \
+        "data": {                                           \
+          "shortcut": "<Primary><Alt>Down"                  \
+        }                                                   \
       }                                                     \
     ]                                                       \
   }'
@@ -86,20 +90,20 @@ The table below lists all possible item types. Some of the types require that th
 
 | Actions | Default `data`  | Description |
 |------------|-----------------------|-------------|
-| **`"Command"`** | `""` | This action executes a command given in `data`. This is primarily used to open applications but may have plenty of other use cases as well. |
-| **`"DBusSignal"`** | `""` | This action does nothing on its own. But you can listen on the D-Bus for its activation. This can be very useful in custom menus opened via the command line. The string given in `data` will be passed as `itemID` to the `OnHover`, `OnUnhover` and `OnSelect` signals. Below this table you will find an example! |
-| **`"File"`** | `""` | This action will open a file given with an absolute path in `data` with your system\'s default application. |
-| **`"InsertText"`** | `""` | This action copies the text given in `data` to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things. |
-| **`"Shortcut"`** | `""` | This action simulates a key combination when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations. `data` should be something like `"<Primary>space"`. |
-| **`"Uri"`** | `""` | When this action is activated, the URI given in `data` is opened with the default application. For http URLs, this will be your web browser. However, it is also possible to open other URIs such as `"mailto:foo@bar.org"`. |
+| **`"Command"`** | `{"command":""}` | This action executes a command given in `data`. This is primarily used to open applications but may have plenty of other use cases as well. |
+| **`"DBusSignal"`** | `{"id":""}` | This action does nothing on its own. But you can listen on the D-Bus for its activation. This can be very useful in custom menus opened via the command line. The ID string given in `data` will be passed as `itemID` to the `OnHover`, `OnUnhover` and `OnSelect` signals. Below this table you will find an example! |
+| **`"File"`** | `{"file":""}` | This action will open a file given with an absolute path in `data` with your system\'s default application. |
+| **`"InsertText"`** | `{"text":""}` | This action copies the text given in `data` to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things. |
+| **`"Shortcut"`** | `{"shortcut":""}` | This action simulates a key combination when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations. `data` should be something like `{"shortcut":"<Primary>space"}`. |
+| **`"Uri"`** | `{"uri":""}` | When this action is activated, the URI given in `data` is opened with the default application. For http URLs, this will be your web browser. However, it is also possible to open other URIs such as `{"uri":"mailto:foo@bar.org"}`. |
 | **Menus** | | |
 | **`"CustomMenu"`** | _not used_ | Use the `"children"` property to add as many actions or submenus as you want! |
 | **`"Bookmarks"`** | _not used_ | This menu shows an item for the trash, your desktop and each bookmarked directory. |
 | **`"Devices"`** | _not used_ | This menu shows an item for each mounted volume, like USB-Sticks. |
 | **`"Favorites"`** | _not used_ | This menu shows the applications you have pinned to GNOME Shell's Dash. |
-| **`"FrequentlyUsed"`** | `"7"` | This menu shows a list of frequently used applications. You should limit the maximum number of shown applications to a reasonable number given in `data`. |
+| **`"FrequentlyUsed"`** | `{"maxNum":7}` | This menu shows a list of frequently used applications. You should limit the maximum number of shown applications to a reasonable number given in `data`. |
 | **`"MainMenu"`** | _not used_ | This menu shows all installed applications. Usually, this is very cluttered as many sections contain too many items to be used efficiently. You should rather setup your own menus! This menu is only available if the typelib for GMenu is installed on the system. Usually the package is called something like `gir1.2-gmenu-3.0`. |
-| **`"RecentFiles"`** | `"7"` | This menu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number given in `data`. |
+| **`"RecentFiles"`** | `{"maxNum":7}` | This menu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number given in `data`. |
 | **`"RunningApps"`** | _not used_ | This menu shows all currently running applications. This is similar to the Alt+Tab window selection. As the entries change position frequently, this is actually not very effective. |
 | **`"System"`** | _not used_ | This menu shows an items for screen-lock, shutdown, settings, etc. |
 
@@ -157,7 +161,7 @@ gdbus call --session --dest org.gnome.Shell                 \
           {                                                 \
             "name": "Cat",                                  \
             "icon":"🐈",                                    \
-            "data": "cat!!"                                 \
+            "data": {"id": "cat!!"}                         \
           }                                                 \
         ]                                                   \
       }                                                     \
