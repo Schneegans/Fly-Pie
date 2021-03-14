@@ -49,10 +49,14 @@ var action = {
     // This is used as data for newly created items of this type.
     defaultData: {uri: ''},
 
+    // This is called whenever an item of this type is selected in the menu editor. It
+    // returns a Gtk.Widget which will be shown in the sidebar of the menu editor. The
+    // currently configured data object will be passed as first parameter and *should* be
+    // an object containing a single "uri" property. To stay backwards compatible with
+    // Fly-Pie 4, we have to also handle the case where the URI is given as a simple
+    // string value. The second parameter is a callback which is fired whenever the user
+    // changes something in the widgets.
     getWidget(data, updateCallback) {
-      // The data paramter *should* be an object containing a single "uri" property. To
-      // stay backwards compatible with Fly-Pie 4, we have to also handle the case where
-      // the URI is given as a simple string value.
       let uri = '';
       if (typeof data === 'string') {
         uri = data;
@@ -68,7 +72,7 @@ var action = {
   },
 
   // This will be called whenever a menu is opened containing an item of this kind.
-  // The data paramter *should* be an object containing a single "uri" property. To
+  // The data parameter *should* be an object containing a single "uri" property. To
   // stay backwards compatible with Fly-Pie 4, we have to also handle the case where
   // the URI is given as a simple string value.
   createItem: (data) => {
