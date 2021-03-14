@@ -11,13 +11,13 @@
 const Cairo                          = imports.cairo;
 const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
 
-const Me            = imports.misc.extensionUtils.getCurrentExtension();
-const utils         = Me.imports.src.common.utils;
-const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
-const Statistics    = Me.imports.src.common.Statistics.Statistics;
-const ItemRegistry  = Me.imports.src.common.ItemRegistry.ItemRegistry;
-const ItemClass     = Me.imports.src.common.ItemRegistry.ItemClass;
-const ItemDataType  = Me.imports.src.common.ItemRegistry.ItemDataType;
+const Me                  = imports.misc.extensionUtils.getCurrentExtension();
+const utils               = Me.imports.src.common.utils;
+const DBusInterface       = Me.imports.src.common.DBusInterface.DBusInterface;
+const Statistics          = Me.imports.src.common.Statistics.Statistics;
+const ItemRegistry        = Me.imports.src.common.ItemRegistry.ItemRegistry;
+const ItemClass           = Me.imports.src.common.ItemRegistry.ItemClass;
+const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -33,7 +33,7 @@ let ColumnTypes = {
   ICON:          GObject.TYPE_STRING,   // The string representation of the icon.
   NAME:          GObject.TYPE_STRING,   // The name without any markup.
   TYPE:          GObject.TYPE_STRING,   // The item type. Like 'Shortcut' or 'Bookmarks'.
-  DATA:          GObject.TYPE_STRING,   // Used for the command, file, application, ...
+  DATA:          GObject.TYPE_STRING,   // JSON string containing item-specific data.
   SHORTCUT:      GObject.TYPE_STRING,   // Hotkey to open top-level menus.
   CENTERED:      GObject.TYPE_BOOLEAN,  // Wether a menu should be opened centered.
   ANGLE:         GObject.TYPE_INT,      // The fixed angle for items.
@@ -485,10 +485,12 @@ var MenuEditorPage = class MenuEditorPage {
                     }
 
                     if (info != null) {
+                      const data = JSON.stringify({command: info.get_commandline()});
+                      this._set(newIter, 'DATA', data);
                       this._set(newIter, 'ICON', icon);
                       this._set(newIter, 'NAME', info.get_display_name());
                       this._set(newIter, 'TYPE', newType);
-                      this._set(newIter, 'DATA', info.get_commandline());
+
                       success = true;
                     }
                   }
@@ -500,10 +502,12 @@ var MenuEditorPage = class MenuEditorPage {
                     const info    = file.query_info('standard::icon', 0, null);
 
                     if (info != null) {
+                      // Skip the file://
+                      const data = JSON.stringify({file: text.substring(7)});
+                      this._set(newIter, 'DATA', data);
                       this._set(newIter, 'ICON', info.get_icon().to_string());
                       this._set(newIter, 'NAME', file.get_basename());
                       this._set(newIter, 'TYPE', newType);
-                      this._set(newIter, 'DATA', text.substring(7));  // Skip the file://
 
                       success = true;
                     }
@@ -517,10 +521,10 @@ var MenuEditorPage = class MenuEditorPage {
                 const newType = 'Uri';
                 const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
 
+                this._set(newIter, 'DATA', JSON.stringify({uri: text}));
                 this._set(newIter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
                 this._set(newIter, 'NAME', name);
                 this._set(newIter, 'TYPE', newType);
-                this._set(newIter, 'DATA', text);
                 success = true;
               }
             }
@@ -530,10 +534,10 @@ var MenuEditorPage = class MenuEditorPage {
               const newType = 'InsertText';
               const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
 
+              this._set(newIter, 'DATA', JSON.stringify({text: text}));
               this._set(newIter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
               this._set(newIter, 'NAME', 'Insert: ' + name);
               this._set(newIter, 'TYPE', newType);
-              this._set(newIter, 'DATA', text);
             }
 
             return true;
@@ -729,38 +733,10 @@ var MenuEditorPage = class MenuEditorPage {
       this._builder.get_object('item-icon-drawingarea').queue_draw();
     });
 
-
-    // Now we initialize all other widgets of the item settings. That is, for example, the
-    // name, the url, command, or file input fields.
-
-    // Store the item's name in the tree store when the text of the input field is
+    // Store the item's name in the tree store when the text of the name input field is
     // changed.
     this._builder.get_object('item-name').connect('notify::text', (widget) => {
       this._setSelected('NAME', widget.text);
-    });
-
-    // Store the item's file path in the tree store's DATA column when the text of the
-    // corresponding input field is changed.
-    this._builder.get_object('item-file').connect('notify::text', (widget) => {
-      this._setSelected('DATA', widget.text);
-    });
-
-    // Store the item's command in the tree store's DATA column when the text of the
-    // corresponding input field is changed.
-    this._builder.get_object('item-command').connect('notify::text', (widget) => {
-      this._setSelected('DATA', widget.text);
-    });
-
-    // Store the item's maximum item count in the tree store's DATA column when the
-    // corresponding input field is changed.
-    this._builder.get_object('item-count').connect('value-changed', (adjustment) => {
-      this._setSelected('DATA', adjustment.value);
-    });
-
-    // Store the item's text in the tree store's DATA column when the text of the
-    // corresponding input field is changed.
-    this._builder.get_object('item-text').connect('notify::text', (widget) => {
-      this._setSelected('DATA', widget.text);
     });
 
     // For top-level menus, store whether they should be opened in the center of the
@@ -810,44 +786,16 @@ var MenuEditorPage = class MenuEditorPage {
       }
     });
 
-
-    // Initialize the file-select-popover. When a file is activated, the popover is
-    // hidden, when a file is selected, the item's name, icon and file input fields are
-    // updated accordingly.
-    this._builder.get_object('item-file-chooser').connect('file-activated', () => {
-      this._builder.get_object('item-file-popover').popdown();
-    });
-
-    this._builder.get_object('item-file-chooser')
-        .connect('selection-changed', (widget) => {
-          const info = widget.get_file().query_info('standard::icon', 0, null);
-          this._builder.get_object('icon-name').text = info.get_icon().to_string();
-          this._builder.get_object('item-name').text = widget.get_file().get_basename();
-          this._builder.get_object('item-file').text = widget.get_filename();
-        });
-
-    // Initialize the application-select-popover. On mouse-up the popover is hidden,
-    // whenever an application is selected, the item's name, icon and command input fields
-    // are updated accordingly.
-    this._builder.get_object('application-popover-list')
-        .connect('button-release-event', () => {
-          this._builder.get_object('item-application-popover').popdown();
-        });
-
-    this._builder.get_object('application-popover-list')
-        .connect('application-selected', (widget, app) => {
-          this._builder.get_object('icon-name').text    = app.get_icon().to_string();
-          this._builder.get_object('item-name').text    = app.get_display_name();
-          this._builder.get_object('item-command').text = app.get_commandline();
-        });
-
-    // Initialize the two shortcut-select elements. See the documentation of
-    // _initShortcutSelect for details.
-    this._itemShortcutLabel =
-        this._initShortcutSelect('item-shortcut-select', true, 'DATA');
-    this._menuShortcutLabel =
-        this._initShortcutSelect('menu-shortcut-select', false, 'SHORTCUT');
-
+    // Initialize the menu shortcut-select element. See the documentation of
+    // createShortcutLabel for details.
+    {
+      const [box, label] = ConfigWidgetFactory.createShortcutLabel(false, (shortcut) => {
+        this._setSelected('SHORTCUT', shortcut);
+      });
+      this._builder.get_object('menu-shortcut-box').pack_start(box, false, false, 0);
+      this._menuShortcutLabel = label;
+      box.show_all();
+    }
 
     // When the currently selected menu item changes, the content of the settings widgets
     // must be updated accordingly.
@@ -866,21 +814,14 @@ var MenuEditorPage = class MenuEditorPage {
       this._builder.get_object('action-types-list').sensitive = actionsSensitive;
 
       // There are multiple Gtk.Revealers involved. Based on the selected item's type
-      // their content is either shown or hidden. First we assume that all are hidden
-      // and selectively set them to be shown. All settings are invisible if nothing is
+      // their content is either shown or hidden. All settings are invisible if nothing is
       // selected, the menu settings (shortcut, centered) are visible if a top-level
       // element is selected, for all other items the fixed angle can be set.
-      const revealers = {
-        'item-settings-revealer': somethingSelected,
-        'item-settings-menu-revealer': this._isToplevelSelected(),
-        'item-settings-angle-revealer': !this._isToplevelSelected(),
-        'item-settings-data-caption-revealer': false,
-        'item-settings-item-shortcut-revealer': false,
-        'item-settings-count-revealer': false,
-        'item-settings-command-revealer': false,
-        'item-settings-file-revealer': false,
-        'item-settings-text-revealer': false
-      };
+      this._builder.get_object('item-settings-revealer').reveal_child = somethingSelected;
+      this._builder.get_object('item-settings-menu-revealer').reveal_child =
+          this._isToplevelSelected();
+      this._builder.get_object('item-settings-angle-revealer').reveal_child =
+          !this._isToplevelSelected();
 
       if (somethingSelected) {
 
@@ -915,51 +856,57 @@ var MenuEditorPage = class MenuEditorPage {
           this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
         }
 
-        // Now we check whether the selected item has a data property.
-        const data = ItemRegistry.getItemTypes()[selectedType].data;
-        if (data) {
+        // Now we check whether the selected item has a config property.
+        const config = ItemRegistry.getItemTypes()[selectedType].config;
 
-          // If it has a data property, we can show the revealer for the name and the
-          // description of the associated data.
-          revealers['item-settings-data-caption-revealer'] = true;
+        // If it has a config property, we can show the revealer for the config widget.
+        const revealer        = this._builder.get_object('item-settings-config-revealer');
+        revealer.reveal_child = config != null;
 
-          // Then we set the content of the name and description labels.
-          this._builder.get_object('item-settings-data-name').label = data.name;
-          this._builder.get_object('item-settings-data-description').label =
-              data.description;
+        // In this case, we also ask the config object to create a new configuration
+        // widget for the selected type.
+        if (config) {
 
-          // Finally we update one of the data widgets based on the data type of the
-          // selected item.
-          if (data.type == ItemDataType.SHORTCUT) {
-            this._itemShortcutLabel.set_accelerator(this._getSelected('DATA'));
-            revealers['item-settings-item-shortcut-revealer'] = true;
+          // First we remove any previous configuration widget.
+          revealer.foreach((oldChild) => {revealer.remove(oldChild)});
 
-          } else if (data.type == ItemDataType.FILE) {
-            this._builder.get_object('item-file').text = this._getSelected('DATA');
-            revealers['item-settings-file-revealer']   = true;
-
-          } else if (data.type == ItemDataType.COMMAND) {
-            this._builder.get_object('item-command').text = this._getSelected('DATA');
-            revealers['item-settings-command-revealer']   = true;
-
-          } else if (data.type == ItemDataType.COUNT) {
-            this._builder.get_object('item-count').value = this._getSelected('DATA');
-            revealers['item-settings-count-revealer']    = true;
-
-          } else if (data.type == ItemDataType.TEXT) {
-            this._builder.get_object('item-text').text = this._getSelected('DATA');
-            revealers['item-settings-text-revealer']   = true;
+          // To populate the new configuration widget with data, we retrieve the data from
+          // the tree store's data column. This **should** be a JSON string, but if
+          // someone tries to load a config from Fly-Pie 4 or older, this may not be the
+          // case. So we print a warning in this case.
+          let data = this._getSelected('DATA');
+          try {
+            data = JSON.parse(data);
+          } catch (error) {
+            utils.debug(
+                'Warning: Invalid configuration data is stored for the selected item: ' +
+                error);
           }
+
+          // Then we create and add the new configuration widget. The callback will be
+          // fired when the user changes the data. "data" will contain an object which is
+          // to be stored as JSON string, optionally the name and icon of the currently
+          // selected item can be changed as well (e.g. when an application is selected,
+          // we want to change the item's name and icon accordingly).
+          const newChild = config.getWidget(data, (data, name, icon) => {
+            this._setSelected('DATA', JSON.stringify(data));
+
+            if (name) {
+              this._builder.get_object('item-name').text = name;
+            }
+
+            if (icon) {
+              this._builder.get_object('icon-name').text = icon;
+            }
+          });
+
+          revealer.add(newChild);
+          newChild.show_all();
         }
 
         // All modifications are done, all future modifications will come from the user
         // and should result in saving the configuration again.
         this._menuSavingAllowed = true;
-      }
-
-      // Finally update the state of all revealers.
-      for (const revealer in revealers) {
-        this._builder.get_object(revealer).reveal_child = revealers[revealer];
       }
     });
 
@@ -997,107 +944,6 @@ var MenuEditorPage = class MenuEditorPage {
 
     // Enable sorting again!
     iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
-  }
-
-
-  // This creates / initializes a Gtk.ListBoxRow which can be used to select a shortcut. A
-  // Gtk.ShortcutLabel is used to visualize the shortcut - this element is not yet
-  // available in Glade, therefore it's created here in code. This makes everything a bit
-  // hard-wired, which could be improved in the future.
-  // The functionality is added to a Gtk.ListBoxRow identified via rowName. This row is
-  // expected to have single Gtk.Box as child; the Gtk.ShortcutLabel will be packed to the
-  // end of this Gtk.Box.
-  // The doFullGrab parameters enables selection of shortcuts which are already bound to
-  // something else. For example, imagine you have configured opening a terminal via
-  // Ctrl+Alt+T in your system settings. Now if doFullGrab == false, selecting Ctrl+Alt+T
-  // will not work; it will open the terminal instead. However, if doFullGrab == true, you
-  // will be able to select Ctrl+Alt+T. This is very important - we do not want to bind
-  // menus to shortcuts which are bound to something else - but we want menu items to
-  // simulate shortcut presses which are actually bound to something else!
-  _initShortcutSelect(rowName, doFullGrab, dataColumn) {
-
-    const row = this._builder.get_object(rowName);
-
-    // Translators: This is shown on the shortcut-buttons when no shortcut is selected.
-    const label = new Gtk.ShortcutLabel({disabled_text: _('Not bound.')});
-    row.get_child().pack_end(label, false, false, 0);
-    label.show();
-
-    // This function grabs the keyboard input. If doFullGrab == true, the complete
-    // keyboard input of the default Seat will be grabbed. Else only a Gtk grab is
-    // performed. The text of the Gtk.ShortcutLabel is changed to indicate that the widget
-    // is waiting for input.
-    const grabKeyboard = () => {
-      if (doFullGrab) {
-        const seat = Gdk.Display.get_default().get_default_seat();
-        seat.grab(
-            row.get_window(), Gdk.SeatCapabilities.KEYBOARD, false, null, null, null);
-      }
-      row.grab_add();
-      label.set_accelerator('');
-      label.set_disabled_text(
-          _('Press the shortcut!\nESC to cancel, BackSpace to unbind'));
-    };
-
-    // This function cancels any previous grab. The label's disabled-text is reset to "Not
-    // bound".
-    const cancelGrab = () => {
-      if (doFullGrab) {
-        const seat = Gdk.Display.get_default().get_default_seat();
-        seat.ungrab();
-      }
-      row.grab_remove();
-      row.parent.unselect_all();
-      label.set_disabled_text(_('Not bound.'));
-    };
-
-    // When the row is activated, the input is grabbed.
-    row.parent.connect('row-activated', (row) => {
-      grabKeyboard();
-    });
-
-    // Key input events are received once the input is grabbed.
-    row.connect('key-press-event', (row, event) => {
-      if (row.is_selected()) {
-        const keyval = event.get_keyval()[1];
-        const mods   = event.get_state()[1] & Gtk.accelerator_get_default_mod_mask();
-
-        if (keyval == Gdk.KEY_Escape) {
-          // Escape cancels the shortcut selection.
-          label.set_accelerator(this._getSelected(dataColumn));
-          cancelGrab();
-
-        } else if (keyval == Gdk.KEY_BackSpace) {
-          // BackSpace removes any bindings.
-          label.set_accelerator('');
-          this._setSelected(dataColumn, '');
-          cancelGrab();
-
-        } else if (Gtk.accelerator_valid(keyval, mods)) {
-          // Else, if a valid accelerator was pressed, we store it.
-          const accelerator = Gtk.accelerator_name(keyval, mods);
-          this._setSelected(dataColumn, accelerator);
-          label.set_accelerator(accelerator);
-          cancelGrab();
-        }
-
-        return true;
-      }
-      return false;
-    });
-
-    // Clicking with the mouse cancels the shortcut selection.
-    row.connect('button-press-event', () => {
-      if (row.has_grab()) {
-        label.set_accelerator(this._getSelected(dataColumn));
-        cancelGrab();
-      }
-      return true;
-    });
-
-    // Return the label - this wouldn't be necessary if we could create the
-    // Gtk.ShortcutLabel directly in Glade.
-    return label;
   }
 
   // There is a small label in the menu editor which shows random tips at regular
@@ -1185,8 +1031,10 @@ var MenuEditorPage = class MenuEditorPage {
     this._set(iter, 'ANGLE', -1);
     this._set(iter, 'SHORTCUT', '');
 
-    if (ItemRegistry.getItemTypes()[newType].data != undefined) {
-      this._set(iter, 'DATA', ItemRegistry.getItemTypes()[newType].data.default);
+    if (ItemRegistry.getItemTypes()[newType].config != undefined) {
+      this._set(
+          iter, 'DATA',
+          JSON.stringify(ItemRegistry.getItemTypes()[newType].config.defaultData));
     }
   }
 
@@ -1406,7 +1254,7 @@ var MenuEditorPage = class MenuEditorPage {
             name: this._get(iter, 'NAME'),
             icon: this._get(iter, 'ICON'),
             type: this._get(iter, 'TYPE'),
-            data: this._get(iter, 'DATA'),
+            data: JSON.parse(this._get(iter, 'DATA')),
             angle: this._get(iter, 'ANGLE')
           };
 
@@ -1425,7 +1273,7 @@ var MenuEditorPage = class MenuEditorPage {
           name: this._get(iter, 'NAME'),
           icon: this._get(iter, 'ICON'),
           type: this._get(iter, 'TYPE'),
-          data: this._get(iter, 'DATA'),
+          data: JSON.parse(this._get(iter, 'DATA')),
           shortcut: this._get(iter, 'SHORTCUT'),
           id: this._get(iter, 'ID'),
           centered: this._get(iter, 'CENTERED'),
@@ -1466,7 +1314,7 @@ var MenuEditorPage = class MenuEditorPage {
           this._set(iter, 'ICON', child.icon);
           this._set(iter, 'NAME', child.name);
           this._set(iter, 'TYPE', child.type);
-          this._set(iter, 'DATA', child.data);
+          this._set(iter, 'DATA', JSON.stringify(child.data));
           this._set(iter, 'ANGLE', child.angle);
           this._set(iter, 'SHORTCUT', '');
 
@@ -1487,7 +1335,7 @@ var MenuEditorPage = class MenuEditorPage {
       this._set(iter, 'ICON', config.icon);
       this._set(iter, 'NAME', config.name);
       this._set(iter, 'TYPE', config.type);
-      this._set(iter, 'DATA', config.data);
+      this._set(iter, 'DATA', JSON.stringify(config.data));
       this._set(iter, 'SHORTCUT', config.shortcut);
       this._set(iter, 'CENTERED', config.centered);
       this._set(iter, 'ID', config.id != undefined ? config.id : this._getNewID());

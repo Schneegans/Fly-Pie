@@ -12,9 +12,10 @@ const Gio = imports.gi.Gio;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.src.common.utils;
-const ItemRegistry = Me.imports.src.common.ItemRegistry;
+const Me                  = imports.misc.extensionUtils.getCurrentExtension();
+const utils               = Me.imports.src.common.utils;
+const ItemRegistry        = Me.imports.src.common.ItemRegistry;
+const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The file action is very similar to the Url action, but only works for files.         //
@@ -43,33 +44,48 @@ var action = {
   description: _(
       'The <b>Open File</b> action will open the file specified above with your system\'s default application.'),
 
-  // Items of this type have an additional data property which can be set by the user. The
-  // data value chosen by the user is passed to the createItem() method further below.
-  data: {
+  // Items of this type have an additional text configuration parameter which represents
+  // the command to execute.
+  config: {
+    // This is used as data for newly created items of this type.
+    defaultData: {file: ''},
 
-    // The data type determines which widget is visible when an item of this type is
-    // selected in the settings dialog.
-    type: ItemRegistry.ItemDataType.FILE,
+    getWidget(data, updateCallback) {
+      // The data paramter *should* be an object containing a single "file" property.
+      // To stay backwards compatible with Fly-Pie 4, we have to also handle the case
+      // where the file is given as a simple string value.
+      let file = '';
+      if (typeof data === 'string') {
+        file = data;
+      } else if (data.file != undefined) {
+        file = data.file;
+      }
 
-    // This is shown on the left above the data widget in the settings dialog.
-    name: _('File'),
-
-    // Translators: Please keep this short.
-    // This is shown on the right above the data widget in the settings dialog.
-    description: _('It will be opened with the default app.'),
-
-    // This is be used as data for newly created items.
-    default: ''
+      return ConfigWidgetFactory.createFileWidget(
+          _('File'), _('It will be opened with the default app.'), file,
+          (file, name, icon) => {
+            updateCallback({file: file}, name, icon);
+          });
+    }
   },
 
   // This will be called whenever a menu is opened containing an item of this kind.
-  // The data value chosen by the user will be passed to this function.
+  // The data paramter *should* be an object containing a single "file" property.
+  // To stay backwards compatible with Fly-Pie 4, we have to also handle the case
+  // where the file is given as a simple string value.
   createItem: (data) => {
+    let file = '';
+    if (typeof data === 'string') {
+      file = data;
+    } else if (data.file != undefined) {
+      file = data.file;
+    }
+
     // The onSelect() function will be called when the user selects this action.
     return {
       onSelect: () => {
         try {
-          Gio.AppInfo.launch_default_for_uri('file://' + data, null);
+          Gio.AppInfo.launch_default_for_uri('file://' + file, null);
         } catch (error) {
           utils.debug('Failed to open file: ' + error);
         }

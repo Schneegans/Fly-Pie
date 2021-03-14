@@ -10,8 +10,9 @@
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const ItemRegistry = Me.imports.src.common.ItemRegistry;
+const Me                  = imports.misc.extensionUtils.getCurrentExtension();
+const ItemRegistry        = Me.imports.src.common.ItemRegistry;
+const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 // We have to import the InputManipulator optionally. This is because this file is
 // included from both sides: From prefs.js and from extension.js. When included from
@@ -52,29 +53,43 @@ var action = {
   description: _(
       'The <b>Activate Shortcut</b> action simulates a key combination when activated. For example, this can be used to switch virtual desktops, control multimedia playback or to undo / redo operations.'),
 
-  // Items of this type have an additional data property which can be set by the user. The
-  // data value chosen by the user is passed to the createItem() method further below.
-  data: {
+  // Items of this type have an additional text configuration parameter which represents
+  // the command to execute.
+  config: {
+    // This is used as data for newly created items of this type.
+    defaultData: {shortcut: ''},
 
-    // The data type determines which widget is visible when an item of this type is
-    // selected in the settings dialog.
-    type: ItemRegistry.ItemDataType.SHORTCUT,
+    getWidget(data, updateCallback) {
+      // The data paramter *should* be an object containing a single "shortcut" property.
+      // To stay backwards compatible with Fly-Pie 4, we have to also handle the case
+      // where the shortcut is given as a simple string value.
+      let shortcut = '';
+      if (typeof data === 'string') {
+        shortcut = data;
+      } else if (data.shortcut != undefined) {
+        shortcut = data.shortcut;
+      }
 
-    // This is shown on the left above the data widget in the settings dialog.
-    name: _('Shortcut'),
-
-    // Translators: Please keep this short.
-    // This is shown on the right above the data widget in the settings dialog.
-    description: _('This shortcut will be simulated.'),
-
-    // This is be used as data for newly created items.
-    default: '',
+      return ConfigWidgetFactory.createShortcutWidget(
+          _('Shortcut'), _('This shortcut will be simulated.'), shortcut, (shortcut) => {
+            updateCallback({shortcut: shortcut});
+          });
+    }
   },
 
   // This will be called whenever a menu is opened containing an item of this kind.
-  // The data value chosen by the user will be passed to this function.
+  // The data paramter *should* be an object containing a single "shortcut" property.
+  // To stay backwards compatible with Fly-Pie 4, we have to also handle the case
+  // where the shortcut is given as a simple string value.
   createItem: (data) => {
+    let shortcut = '';
+    if (typeof data === 'string') {
+      shortcut = data;
+    } else if (data.shortcut != undefined) {
+      shortcut = data.shortcut;
+    }
+
     // The onSelect() function will be called when the user selects this action.
-    return {onSelect: () => InputManipulator.activateAccelerator(data)};
+    return {onSelect: () => InputManipulator.activateAccelerator(shortcut)};
   }
 };

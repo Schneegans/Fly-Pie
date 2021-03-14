@@ -12,8 +12,9 @@ const {Gdk, Gtk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const ItemRegistry = Me.imports.src.common.ItemRegistry;
+const Me                  = imports.misc.extensionUtils.getCurrentExtension();
+const ItemRegistry        = Me.imports.src.common.ItemRegistry;
+const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 // We import the InputManipulator optionally. When this file is included from the daemon
 // side, it is available and can be used in the activation code of the action defined
@@ -54,33 +55,47 @@ var action = {
   description: _(
       'The <b>Insert Text</b> action copies the given text to the clipboard and then simulates a Ctrl+V. This can be useful if you realize that you often write the same things.'),
 
-  // Items of this type have an additional data property which can be set by the user. The
-  // data value chosen by the user is passed to the createItem() method further below.
-  data: {
+  // Items of this type have an additional text configuration parameter which is the text
+  // which is to be inserted.
+  config: {
+    // This is used as data for newly created items of this type.
+    defaultData: {text: ''},
 
-    // The data type determines which widget is visible when an item of this type is
-    // selected in the settings dialog.
-    type: ItemRegistry.ItemDataType.TEXT,
+    getWidget(data, updateCallback) {
+      // The data paramter *should* be an object containing a single "text" property. To
+      // stay backwards compatible with Fly-Pie 4, we have to also handle the case where
+      // the text is given as a simple string value.
+      let text = '';
+      if (typeof data === 'string') {
+        text = data;
+      } else if (data.text != undefined) {
+        text = data.text;
+      }
 
-    // This is shown on the left above the data widget in the settings dialog.
-    name: _('Text'),
-
-    // Translators: Please keep this short.
-    // This is shown on the right above the data widget in the settings dialog.
-    description: _('This text will be inserted.'),
-
-    // This is be used as data for newly created items.
-    default: '',
+      return ConfigWidgetFactory.createTextWidget(
+          _('Text'), _('This text will be inserted.'), text, (text) => {
+            updateCallback({text: text});
+          });
+    }
   },
 
   // This will be called whenever a menu is opened containing an item of this kind.
-  // The data value chosen by the user will be passed to this function.
+  // The data paramter *should* be an object containing a single "text" property. To
+  // stay backwards compatible with Fly-Pie 4, we have to also handle the case where
+  // the text is given as a simple string value.
   createItem: (data) => {
+    let text = '';
+    if (typeof data === 'string') {
+      text = data;
+    } else if (data.text != undefined) {
+      text = data.text;
+    }
+
     // The onSelect() function will be called when the user selects this action.
     return {
       onSelect: () => {
         const clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default());
-        clipboard.set_text(data, -1);
+        clipboard.set_text(text, -1);
         InputManipulator.activateAccelerator('<Primary>v');
       }
     };
