@@ -11,7 +11,7 @@ on:
 jobs:
   clang_format:
     name: Check Clang-Format
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
 
   comment_percentage:
     name: Check Comment Percentage
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
       - name: Checkout Current Repository
@@ -61,7 +61,7 @@ jobs:
 
   shellcheck:
     name: Run ShellCheck
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run ShellCheck
@@ -70,7 +70,7 @@ jobs:
 
   script_functionality:
     name: Check Script Functionality
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Check error conditions # Currently, gettext is not installed. Both if statements should be false.
@@ -95,7 +95,7 @@ jobs:
 
   build:
     name: Check if Fly-Pie builds correctly
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Build Fly-Pie
