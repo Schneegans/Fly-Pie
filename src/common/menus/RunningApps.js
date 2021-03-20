@@ -8,10 +8,14 @@
 
 'use strict';
 
+const {Gtk} = imports.gi;
+
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const ItemRegistry = Me.imports.src.common.ItemRegistry;
+const Me                  = imports.misc.extensionUtils.getCurrentExtension();
+const utils               = Me.imports.src.common.utils;
+const ItemRegistry        = Me.imports.src.common.ItemRegistry;
+const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 // We have to import the Shell module optionally. This is because this file is included
 // from both sides: From prefs.js and from extension.js. When included from prefs.js, the
@@ -53,8 +57,82 @@ var menu = {
   description: _(
       'The <b>Running Apps</b> menu shows all currently running applications. This is similar to the Alt+Tab window selection. As the entries change position frequently, this is actually not very effective.'),
 
+  // Items of this type have several additional configuration parameter.
+  config: {
+    // This is used as data for newly created items of this type.
+    defaultData: {
+      currentWorkspaceOnly: true,
+      groupWindows: true,
+      highlightWindows: true,
+      nameRegex: ''
+    },
+
+    // This is called whenever an item of this type is selected in the menu editor. It
+    // returns a Gtk.Widget which will be shown in the sidebar of the menu editor. The
+    // currently configured data object will be passed as first parameter. The second
+    // parameter is a callback which is fired whenever the user changes something in the
+    // widgets.
+    getWidget(data, updateCallback) {
+      // Use default data for undefined properties.
+      data = {...this.defaultData, ...data};
+
+      const vBox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 5});
+
+      let toggles   = [];
+      let nameRegex = data.nameRegex;
+
+      const updateData = () => {
+        updateCallback({
+          currentWorkspaceOnly: toggles[0].active,
+          groupWindows: toggles[1].active,
+          highlightWindows: toggles[2].active,
+          nameRegex: nameRegex
+        });
+      };
+
+      const tooltip = _(
+          'You can use this to filter the displayed windows. Regular expressions are supported: Use a simple string like "Fire" to show only windows whose titles contain "Fire" (e.g. Firefox). Use "Fire|Water" to match either "Fire" or "Water". A negation would be "^(?!.*Fire)" to match anything but "Fire". Remember to use the live preview to instantly see the results!');
+
+      const regexEntry = ConfigWidgetFactory.createTextWidget(
+          _('Window Filter'), _('See Tooltip for details.'), tooltip, data.nameRegex,
+          (text) => {
+            nameRegex = text;
+            updateData();
+          });
+      vBox.pack_start(regexEntry, false, false, 0);
+
+      const createToggle = (i, name, value) => {
+        const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL, spacing: 5});
+        hBox.pack_start(
+            new Gtk.Label({label: name, halign: Gtk.Align.START}), true, true, 0);
+
+        const toggle = new Gtk.Switch({active: value, halign: Gtk.Align.END});
+        hBox.pack_start(toggle, false, false, 0);
+
+        toggle.connect('notify::active', () => {
+          updateData();
+        });
+
+        vBox.pack_start(hBox, false, false, 0);
+
+        return toggle;
+      };
+
+      toggles[0] =
+          createToggle(0, _('Current Workspace Only'), data.currentWorkspaceOnly);
+      toggles[1] = createToggle(1, _('Group by Application'), data.groupWindows);
+      toggles[2] = createToggle(2, _('Highlight Hovered Window'), data.highlightWindows);
+
+
+      return vBox;
+    }
+  },
+
   // This will be called whenever a menu is opened containing an item of this kind.
-  createItem: () => {
+  createItem: (data) => {
+    // Use default data for undefined properties.
+    data = {...menu.config.defaultData, ...data};
+
     const apps   = Shell.AppSystem.get_default().get_running();
     const result = {children: []};
 
@@ -66,11 +144,29 @@ var menu = {
       }
       const windows = apps[i].get_windows();
       windows.forEach(window => {
-        result.children.push({
-          name: window.get_title(),
-          icon: icon,
-          onSelect: () => window.activate(0 /*timestamp*/)
-        });
+        // Filter windows which are not on the current workspace.
+        if (!data.currentWorkspaceOnly ||
+            window.get_workspace() == global.workspace_manager.get_active_workspace()) {
+
+          // Filter windows which do not match the regex.
+          const regex = new RegExp(data.nameRegex);
+          if (regex.test(window.title)) {
+            result.children.push({
+              name: window.get_title(),
+              icon: icon,
+              onSelect: () => {
+                window.get_workspace().activate(global.get_current_time());
+                window.activate(global.get_current_time());
+              },
+              onHover: () => {
+                utils.debug('hihi');
+              },
+              onUnhover: () => {
+                utils.debug('hoho');
+              }
+            });
+          }
+        }
       });
     }
 

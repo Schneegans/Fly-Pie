@@ -30,10 +30,10 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
   // 'description' are shown above and 'text' is the initial value. 'callback(text)' will
   // be fired whenever the text is edited. The function returns a Gtk.Box containing all
   // the required widgets.
-  static createTextWidget(name, description, text, callback) {
+  static createTextWidget(name, description, tooltip, text, callback) {
     const box = this.createConfigWidgetCaption(name, description);
 
-    const entry = new Gtk.Entry({text: text});
+    const entry = new Gtk.Entry({text: text, tooltip_markup: tooltip});
     box.pack_start(entry, false, false, 0);
 
     entry.connect('notify::text', (widget) => {
