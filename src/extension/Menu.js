@@ -83,7 +83,7 @@ var Menu = class Menu {
     // Hide the menu when the escape key is pressed.
     this._background.connect('key-press-event', (actor, event) => {
       if (event.get_key_symbol() == Clutter.KEY_Escape && this._menuID != null) {
-        this._emitCancelSignal(this._menuID);
+        this.cancel();
         this.hide();
       }
       return Clutter.EVENT_STOP;
@@ -169,7 +169,7 @@ var Menu = class Menu {
 
     // This is fired when the close button of the preview mode is clicked.
     this._background.connect('close-event', () => {
-      this._emitCancelSignal(this._menuID);
+      this.cancel();
       this.hide();
     });
 
@@ -343,6 +343,15 @@ var Menu = class Menu {
         this.hide();
         this._background.set_easing_delay(0);
 
+        // If the action has an unhover callback, we call it before. This is to ensure
+        // that there are always pairs of hover / unhover events.
+        if (child.getUnhoverCallback() != null) {
+          child.getUnhoverCallback()();
+        }
+
+        // Then emit the D-Bus unhover signal!
+        this._emitUnhoverSignal(this._menuID, child.id);
+
         // Then call the activation callback!
         child.getSelectionCallback()();
 
@@ -444,7 +453,7 @@ var Menu = class Menu {
 
     // This is usually fired when the right mouse button is pressed.
     this._selectionWedges.connect('cancel-selection-event', () => {
-      this._emitCancelSignal(this._menuID);
+      this.cancel();
       this.hide();
     });
 
@@ -612,6 +621,29 @@ var Menu = class Menu {
     // Reset some other members.
     this._draggedChild       = null;
     this._menuSelectionChain = [];
+  }
+
+  // Emits the DBus-Cancel signal and potentially an unhover signal for the currently
+  // hovered item (if any).
+  cancel() {
+    const index = this._selectionWedges.getHoveredChild();
+    if (index >= 0) {
+      const child = this._menuSelectionChain[0].getChildMenuItems()[index];
+
+      // If the item has a selection callback, it is an action.
+      if (child.getSelectionCallback() != null) {
+        // If the action has an unhover callback, we call it before. This is to ensure
+        // that there are always pairs of hover / unhover events.
+        if (child.getUnhoverCallback() != null) {
+          child.getUnhoverCallback()();
+        }
+
+        // Then emit the D-Bus unhover signal!
+        this._emitUnhoverSignal(this._menuID, child.id);
+      }
+    }
+
+    this._emitCancelSignal(this._menuID);
   }
 
   // This is called when the menu configuration is changed while the menu is open. We
