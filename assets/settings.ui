@@ -8610,22 +8610,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkRevealer" id="item-settings-config-revealer">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="transition_type">slide-up</property>
-                        <property name="transition_duration">200</property>
-                        <child>
-                          <placeholder/>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">4</property>
-                      </packing>
-                    </child>
-                    <child>
                       <object class="GtkRevealer" id="item-settings-menu-revealer">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -8735,6 +8719,22 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </packing>
                             </child>
                           </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkRevealer" id="item-settings-config-revealer">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="transition_type">slide-up</property>
+                        <property name="transition_duration">200</property>
+                        <child>
+                          <placeholder/>
                         </child>
                       </object>
                       <packing>
