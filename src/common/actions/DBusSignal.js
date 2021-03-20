@@ -64,7 +64,7 @@ var action = {
       }
 
       return ConfigWidgetFactory.createTextWidget(
-          _('ID'), _('This will be passed to the D-Bus signal.'), id, (id) => {
+          _('ID'), _('This will be passed to the D-Bus signal.'), null, id, (id) => {
             updateCallback({id: id});
           });
     }

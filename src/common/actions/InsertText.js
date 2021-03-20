@@ -77,7 +77,7 @@ var action = {
       }
 
       return ConfigWidgetFactory.createTextWidget(
-          _('Text'), _('This text will be inserted.'), text, (text) => {
+          _('Text'), _('This text will be inserted.'), null, text, (text) => {
             updateCallback({text: text});
           });
     }

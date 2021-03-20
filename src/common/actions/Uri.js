@@ -65,7 +65,7 @@ var action = {
       }
 
       return ConfigWidgetFactory.createTextWidget(
-          _('URI'), _('It will be opened with the default app.'), uri, (uri) => {
+          _('URI'), _('It will be opened with the default app.'), null, uri, (uri) => {
             updateCallback({uri: uri});
           });
     }

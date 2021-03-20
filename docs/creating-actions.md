@@ -102,6 +102,7 @@ var action = {
       return ConfigWidgetFactory.createTextWidget(
         _('Message'),                         // Shown on the left above the text entry.
         _('Shown when this is activated.'),   // Shown on the right above the text entry.
+        null,                                 // An optional tooltip text.
         message,                              // The initial value of the entry.
         (message) => {                        // Called whenever the text is modified.
           updateCallback({message: message}); // We call the updateCallback with a new
