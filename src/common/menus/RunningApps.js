@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {Gtk} = imports.gi;
+const {Gtk, GLib} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -17,15 +17,17 @@ const utils               = Me.imports.src.common.utils;
 const ItemRegistry        = Me.imports.src.common.ItemRegistry;
 const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
-// We have to import the Shell module optionally. This is because this file is included
-// from both sides: From prefs.js and from extension.js. When included from prefs.js, the
-// Shell module is not available. This is not a problem, as the preferences will not call
-// the createItem() methods below; they are merely interested in the menu's name, icon
-// and description.
-let Shell = undefined;
+// We have to import the Shell and Clutter modules optionally. This is because this file
+// is included from both sides: From prefs.js and from extension.js. When included from
+// prefs.js, the modules are not available. This is not a problem, as the preferences will
+// not call the createItem() methods below; they are merely interested in the menu's name,
+// icon and description.
+let Shell   = undefined;
+let Clutter = undefined;
 
 try {
-  Shell = imports.gi.Shell;
+  Shell   = imports.gi.Shell;
+  Clutter = imports.gi.Clutter;
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
@@ -133,8 +135,18 @@ var menu = {
     // Use default data for undefined properties.
     data = {...menu.config.defaultData, ...data};
 
-    const apps   = Shell.AppSystem.get_default().get_running();
+    const apps = Shell.AppSystem.get_default().get_running();
+    apps.sort((a, b) => a.get_name().localeCompare(b.get_name()));
+
     const result = {children: []};
+
+    const _setWindowOpacity = (actor, opacity) => {
+      actor.get_first_child().save_easing_state();
+      actor.get_first_child().set_easing_duration(200);
+      actor.get_first_child().set_easing_mode(Clutter.AnimationMode.LINEAR);
+      actor.get_first_child().opacity = opacity;
+      actor.get_first_child().restore_easing_state();
+    };
 
     for (let i = 0; i < apps.length; ++i) {
       let icon = 'image-missing';
@@ -142,7 +154,18 @@ var menu = {
         icon = apps[i].get_app_info().get_icon().to_string();
       } catch (e) {
       }
+
       const windows = apps[i].get_windows();
+      windows.sort((a, b) => a.get_title().localeCompare(b.get_title()));
+
+      let parentMenu       = result;
+      let restorePeekIndex = 0;
+
+      if (data.groupWindows && windows.length > 1) {
+        parentMenu = {name: apps[i].get_name(), icon: icon, children: []};
+        result.children.push(parentMenu);
+      }
+
       windows.forEach(window => {
         // Filter windows which are not on the current workspace.
         if (!data.currentWorkspaceOnly ||
@@ -151,18 +174,65 @@ var menu = {
           // Filter windows which do not match the regex.
           const regex = new RegExp(data.nameRegex);
           if (regex.test(window.title)) {
-            result.children.push({
+            parentMenu.children.push({
               name: window.get_title(),
               icon: icon,
               onSelect: () => {
-                window.get_workspace().activate(global.get_current_time());
-                window.activate(global.get_current_time());
+                window.get_workspace().activate_with_focus(
+                    window, global.display.get_current_time_roundtrip());
               },
               onHover: () => {
-                utils.debug('hihi');
+                if (data.highlightWindows) {
+
+                  const doPeek = () => {
+                    const actor  = window.get_compositor_private();
+                    const parent = actor.get_parent();
+
+                    if (window.minimized) {
+                      actor.show();
+                    }
+
+                    restorePeekIndex = parent.get_children().indexOf(actor);
+                    parent.set_child_above_sibling(actor, null);
+
+                    window.get_workspace().list_windows().forEach(otherWindow => {
+                      if (window != otherWindow) {
+                        _setWindowOpacity(otherWindow.get_compositor_private(), 20);
+                      }
+                    });
+                  };
+
+                  if (window.get_workspace() !=
+                      global.workspace_manager.get_active_workspace()) {
+
+                    // GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
+                    //   return false;
+                    // });
+                    doPeek();
+
+                    window.get_workspace().activate(
+                        global.display.get_current_time_roundtrip());
+                  }
+                  doPeek();
+                }
               },
               onUnhover: () => {
-                utils.debug('hoho');
+                if (data.highlightWindows) {
+                  const actor  = window.get_compositor_private();
+                  const parent = actor.get_parent();
+
+                  if (window.minimized) {
+                    actor.hide();
+                  }
+
+                  parent.set_child_at_index(actor, restorePeekIndex);
+
+                  window.get_workspace().list_windows().forEach(otherWindow => {
+                    if (window != otherWindow) {
+                      _setWindowOpacity(otherWindow.get_compositor_private(), 255);
+                    }
+                  });
+                }
               }
             });
           }
