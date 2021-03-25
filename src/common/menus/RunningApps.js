@@ -67,7 +67,7 @@ var menu = {
   config: {
     // This is used as data for newly created items of this type.
     defaultData: {
-      activeqWorkspaceOnly: false,
+      activeWorkspaceOnly: false,
       appGrouping: true,
       hoverPeeking: true,
       nameRegex: ''
@@ -89,7 +89,7 @@ var menu = {
 
       const updateData = () => {
         updateCallback({
-          activeqWorkspaceOnly: toggles[0].active,
+          activeWorkspaceOnly: toggles[0].active,
           appGrouping: toggles[1].active,
           hoverPeeking: toggles[2].active,
           nameRegex: nameRegex
@@ -124,7 +124,7 @@ var menu = {
         return toggle;
       };
 
-      toggles[0] = createToggle(0, _('Active Workspace Only'), data.activeqWorkspaceOnly);
+      toggles[0] = createToggle(0, _('Active Workspace Only'), data.activeWorkspaceOnly);
       toggles[1] = createToggle(1, _('Group by Application'), data.appGrouping);
       toggles[2] = createToggle(2, _('Peek on Hover'), data.hoverPeeking);
 
@@ -149,8 +149,18 @@ var menu = {
       } catch (e) {
       }
 
-      const windows = apps[i].get_windows();
-      windows.sort((a, b) => a.get_title().localeCompare(b.get_title()));
+      let windows = apps[i].get_windows();
+
+      // Filter windows which do not match the regex.
+      windows = windows.filter(w => (new RegExp(data.nameRegex)).test(w.title));
+
+      // Filter windows which are not on the current workspace.
+      if (data.activeWorkspaceOnly) {
+        windows = windows.filter(
+            w => w.get_workspace() == global.workspace_manager.get_active_workspace());
+      }
+
+      windows.sort((a, b) => a.title.localeCompare(b.title));
 
       let parentMenu = result;
 
@@ -160,31 +170,22 @@ var menu = {
       }
 
       windows.forEach(window => {
-        // Filter windows which are not on the current workspace.
-        if (!data.activeqWorkspaceOnly ||
-            window.get_workspace() == global.workspace_manager.get_active_workspace()) {
-
-          // Filter windows which do not match the regex.
-          const regex = new RegExp(data.nameRegex);
-          if (regex.test(window.title)) {
-            parentMenu.children.push({
-              name: window.get_title(),
-              icon: icon,
-              onSelect: () => {
-                if (!data.hoverPeeking) {
-                  window.get_workspace().activate_with_focus(
-                      window, global.display.get_current_time_roundtrip());
-                }
-              },
-              onHover: () => {
-                if (data.hoverPeeking) {
-                  window.get_workspace().activate_with_focus(
-                      window, global.display.get_current_time_roundtrip());
-                }
-              }
-            });
+        parentMenu.children.push({
+          name: window.get_title(),
+          icon: icon,
+          onSelect: () => {
+            if (!data.hoverPeeking) {
+              window.get_workspace().activate_with_focus(
+                  window, global.display.get_current_time_roundtrip());
+            }
+          },
+          onHover: () => {
+            if (data.hoverPeeking) {
+              window.get_workspace().activate_with_focus(
+                  window, global.display.get_current_time_roundtrip());
+            }
           }
-        }
+        });
       });
     }
 
