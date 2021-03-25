@@ -17,17 +17,21 @@ const utils               = Me.imports.src.common.utils;
 const ItemRegistry        = Me.imports.src.common.ItemRegistry;
 const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
-// We have to import the Shell and Clutter modules optionally. This is because this file
-// is included from both sides: From prefs.js and from extension.js. When included from
-// prefs.js, the modules are not available. This is not a problem, as the preferences will
-// not call the createItem() methods below; they are merely interested in the menu's name,
-// icon and description.
-let Shell   = undefined;
+// We have to import the Clutter, Main, Shell, and St modules optionally. This is because
+// this file is included from both sides: From prefs.js and from extension.js. When
+// included from prefs.js, the modules are not available. This is not a problem, as the
+// preferences will not call the createItem() methods below; they are merely interested in
+// the menu's name, icon and description.
 let Clutter = undefined;
+let Main    = undefined;
+let Shell   = undefined;
+let St      = undefined;
 
 try {
-  Shell   = imports.gi.Shell;
   Clutter = imports.gi.Clutter;
+  Main    = imports.ui.main;
+  Shell   = imports.gi.Shell;
+  St      = imports.gi.Shell;
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
@@ -63,9 +67,9 @@ var menu = {
   config: {
     // This is used as data for newly created items of this type.
     defaultData: {
-      currentWorkspaceOnly: true,
-      groupWindows: true,
-      highlightWindows: true,
+      activeqWorkspaceOnly: false,
+      appGrouping: true,
+      hoverPeeking: true,
       nameRegex: ''
     },
 
@@ -85,9 +89,9 @@ var menu = {
 
       const updateData = () => {
         updateCallback({
-          currentWorkspaceOnly: toggles[0].active,
-          groupWindows: toggles[1].active,
-          highlightWindows: toggles[2].active,
+          activeqWorkspaceOnly: toggles[0].active,
+          appGrouping: toggles[1].active,
+          hoverPeeking: toggles[2].active,
           nameRegex: nameRegex
         });
       };
@@ -120,11 +124,9 @@ var menu = {
         return toggle;
       };
 
-      toggles[0] =
-          createToggle(0, _('Current Workspace Only'), data.currentWorkspaceOnly);
-      toggles[1] = createToggle(1, _('Group by Application'), data.groupWindows);
-      toggles[2] = createToggle(2, _('Highlight Hovered Window'), data.highlightWindows);
-
+      toggles[0] = createToggle(0, _('Active Workspace Only'), data.activeqWorkspaceOnly);
+      toggles[1] = createToggle(1, _('Group by Application'), data.appGrouping);
+      toggles[2] = createToggle(2, _('Peek on Hover'), data.hoverPeeking);
 
       return vBox;
     }
@@ -140,14 +142,6 @@ var menu = {
 
     const result = {children: []};
 
-    const _setWindowOpacity = (actor, opacity) => {
-      actor.get_first_child().save_easing_state();
-      actor.get_first_child().set_easing_duration(200);
-      actor.get_first_child().set_easing_mode(Clutter.AnimationMode.LINEAR);
-      actor.get_first_child().opacity = opacity;
-      actor.get_first_child().restore_easing_state();
-    };
-
     for (let i = 0; i < apps.length; ++i) {
       let icon = 'image-missing';
       try {
@@ -158,17 +152,16 @@ var menu = {
       const windows = apps[i].get_windows();
       windows.sort((a, b) => a.get_title().localeCompare(b.get_title()));
 
-      let parentMenu       = result;
-      let restorePeekIndex = 0;
+      let parentMenu = result;
 
-      if (data.groupWindows && windows.length > 1) {
+      if (data.appGrouping && windows.length > 1) {
         parentMenu = {name: apps[i].get_name(), icon: icon, children: []};
         result.children.push(parentMenu);
       }
 
       windows.forEach(window => {
         // Filter windows which are not on the current workspace.
-        if (!data.currentWorkspaceOnly ||
+        if (!data.activeqWorkspaceOnly ||
             window.get_workspace() == global.workspace_manager.get_active_workspace()) {
 
           // Filter windows which do not match the regex.
@@ -178,60 +171,15 @@ var menu = {
               name: window.get_title(),
               icon: icon,
               onSelect: () => {
-                window.get_workspace().activate_with_focus(
-                    window, global.display.get_current_time_roundtrip());
-              },
-              onHover: () => {
-                if (data.highlightWindows) {
-
-                  const doPeek = () => {
-                    const actor  = window.get_compositor_private();
-                    const parent = actor.get_parent();
-
-                    if (window.minimized) {
-                      actor.show();
-                    }
-
-                    restorePeekIndex = parent.get_children().indexOf(actor);
-                    parent.set_child_above_sibling(actor, null);
-
-                    window.get_workspace().list_windows().forEach(otherWindow => {
-                      if (window != otherWindow) {
-                        _setWindowOpacity(otherWindow.get_compositor_private(), 20);
-                      }
-                    });
-                  };
-
-                  if (window.get_workspace() !=
-                      global.workspace_manager.get_active_workspace()) {
-
-                    // GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
-                    //   return false;
-                    // });
-                    doPeek();
-
-                    window.get_workspace().activate(
-                        global.display.get_current_time_roundtrip());
-                  }
-                  doPeek();
+                if (!data.hoverPeeking) {
+                  window.get_workspace().activate_with_focus(
+                      window, global.display.get_current_time_roundtrip());
                 }
               },
-              onUnhover: () => {
-                if (data.highlightWindows) {
-                  const actor  = window.get_compositor_private();
-                  const parent = actor.get_parent();
-
-                  if (window.minimized) {
-                    actor.hide();
-                  }
-
-                  parent.set_child_at_index(actor, restorePeekIndex);
-
-                  window.get_workspace().list_windows().forEach(otherWindow => {
-                    if (window != otherWindow) {
-                      _setWindowOpacity(otherWindow.get_compositor_private(), 255);
-                    }
-                  });
+              onHover: () => {
+                if (data.hoverPeeking) {
+                  window.get_workspace().activate_with_focus(
+                      window, global.display.get_current_time_roundtrip());
                 }
               }
             });
