@@ -17,21 +17,15 @@ const utils               = Me.imports.src.common.utils;
 const ItemRegistry        = Me.imports.src.common.ItemRegistry;
 const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
-// We have to import the Clutter, Main, Shell, and St modules optionally. This is because
-// this file is included from both sides: From prefs.js and from extension.js. When
-// included from prefs.js, the modules are not available. This is not a problem, as the
-// preferences will not call the createItem() methods below; they are merely interested in
-// the menu's name, icon and description.
-let Clutter = undefined;
-let Main    = undefined;
-let Shell   = undefined;
-let St      = undefined;
+// We have to import the Shell module optionally. This is because this file is included
+// from both sides: From prefs.js and from extension.js. When included from prefs.js, this
+// module is not available. This is not a problem, as the preferences will not call the
+// createItem() methods below; they are merely interested in the menu's name, icon and
+// description.
+let Shell = undefined;
 
 try {
-  Clutter = imports.gi.Clutter;
-  Main    = imports.ui.main;
-  Shell   = imports.gi.Shell;
-  St      = imports.gi.Shell;
+  Shell = imports.gi.Shell;
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
@@ -76,8 +70,8 @@ var menu = {
     // This is called whenever an item of this type is selected in the menu editor. It
     // returns a Gtk.Widget which will be shown in the sidebar of the menu editor. The
     // currently configured data object will be passed as first parameter. The second
-    // parameter is a callback which is fired whenever the user changes something in the
-    // widgets.
+    // parameter is a callback which must be fired whenever the user changes something in
+    // the widgets.
     getWidget(data, updateCallback) {
       // Use default data for undefined properties.
       data = {...this.defaultData, ...data};
@@ -87,7 +81,9 @@ var menu = {
       let toggles   = [];
       let nameRegex = data.nameRegex;
 
-      const updateData = () => {
+      // This is called whenever one of the toggles is switched or when the user enters
+      // something in the name filter entry.
+      const _updateData = () => {
         updateCallback({
           activeWorkspaceOnly: toggles[0].active,
           appGrouping: toggles[1].active,
@@ -96,18 +92,19 @@ var menu = {
         });
       };
 
+      // First create the name filter entry.
       const tooltip = _(
           'You can use this to filter the displayed windows. Regular expressions are supported: Use a simple string like "Fire" to show only windows whose titles contain "Fire" (e.g. Firefox). Use "Fire|Water" to match either "Fire" or "Water". A negation would be "^(?!.*Fire)" to match anything but "Fire". Remember to use the live preview to instantly see the results!');
-
       const regexEntry = ConfigWidgetFactory.createTextWidget(
           _('Window Filter'), _('See Tooltip for details.'), tooltip, data.nameRegex,
-          (text) => {
+          text => {
             nameRegex = text;
-            updateData();
+            _updateData();
           });
       vBox.pack_start(regexEntry, false, false, 0);
 
-      const createToggle = (i, name, value) => {
+      // Then create the three switches.
+      const _createToggle = (i, name, value) => {
         const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL, spacing: 5});
         hBox.pack_start(
             new Gtk.Label({label: name, halign: Gtk.Align.START}), true, true, 0);
@@ -116,7 +113,7 @@ var menu = {
         hBox.pack_start(toggle, false, false, 0);
 
         toggle.connect('notify::active', () => {
-          updateData();
+          _updateData();
         });
 
         vBox.pack_start(hBox, false, false, 0);
@@ -124,9 +121,9 @@ var menu = {
         return toggle;
       };
 
-      toggles[0] = createToggle(0, _('Active Workspace Only'), data.activeWorkspaceOnly);
-      toggles[1] = createToggle(1, _('Group by Application'), data.appGrouping);
-      toggles[2] = createToggle(2, _('Peek on Hover'), data.hoverPeeking);
+      toggles[0] = _createToggle(0, _('Active Workspace Only'), data.activeWorkspaceOnly);
+      toggles[1] = _createToggle(1, _('Group by Application'), data.appGrouping);
+      toggles[2] = _createToggle(2, _('Peek on Hover'), data.hoverPeeking);
 
       return vBox;
     }
@@ -137,19 +134,17 @@ var menu = {
     // Use default data for undefined properties.
     data = {...menu.config.defaultData, ...data};
 
+    // Retrieve a list of all running apps and sort it alphabetically to make the window
+    // positions more deterministic.
     const apps = Shell.AppSystem.get_default().get_running();
     apps.sort((a, b) => a.get_name().localeCompare(b.get_name()));
 
+    // This will be our menu.
     const result = {children: []};
 
-    for (let i = 0; i < apps.length; ++i) {
-      let icon = 'image-missing';
-      try {
-        icon = apps[i].get_app_info().get_icon().to_string();
-      } catch (e) {
-      }
-
-      let windows = apps[i].get_windows();
+    // Now iterate through all windows of all apps.
+    apps.forEach(app => {
+      let windows = app.get_windows();
 
       // Filter windows which do not match the regex.
       windows = windows.filter(w => (new RegExp(data.nameRegex)).test(w.title));
@@ -160,25 +155,42 @@ var menu = {
             w => w.get_workspace() == global.workspace_manager.get_active_workspace());
       }
 
+      // Sort the remaining windows alphabetically.
       windows.sort((a, b) => a.title.localeCompare(b.title));
 
-      let parentMenu = result;
+      // Get the icon for our items.
+      let icon = 'image-missing';
+      try {
+        icon = app.get_app_info().get_icon().to_string();
+      } catch (e) {
+      }
 
+      // We will add the window items directly to the result menu. Only if there are more
+      // than one window for the current app and grouping is enabled, we will create a
+      // submenu.
+      let parentMenu = result;
       if (data.appGrouping && windows.length > 1) {
-        parentMenu = {name: apps[i].get_name(), icon: icon, children: []};
+        parentMenu = {name: app.get_name(), icon: icon, children: []};
         result.children.push(parentMenu);
       }
 
+      // Now add the actual items!
       windows.forEach(window => {
         parentMenu.children.push({
           name: window.get_title(),
           icon: icon,
+
+          // If selected, we switch to the corresponding window. If window peeking is
+          // enabled, this is not required as the hover event was fired already.
           onSelect: () => {
             if (!data.hoverPeeking) {
               window.get_workspace().activate_with_focus(
                   window, global.display.get_current_time_roundtrip());
             }
           },
+
+          // If hovered, we switch to the corresponding window if window peeking is
+          // enabled.
           onHover: () => {
             if (data.hoverPeeking) {
               window.get_workspace().activate_with_focus(
@@ -187,7 +199,7 @@ var menu = {
           }
         });
       });
-    }
+    });
 
     return result;
   }
