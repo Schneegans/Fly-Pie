@@ -29,6 +29,10 @@ var Statistics = class Statistics {
 
   // This should be called whenever a successful selection is made.
   static addSelection(depth, time, gestureOnlySelection) {
+
+    // This is disabled for now.
+    return;
+
     this._initSettings();
 
     // We add the selection to one of the histograms with selection counts per selection
@@ -115,6 +119,10 @@ var Statistics = class Statistics {
 
   // Increases the value of the given settings key by one.
   static _addOneTo(key) {
+
+    // This is disabled for now.
+    return;
+
     this._initSettings();
     _settings.set_uint(key, _settings.get_uint(key) + 1);
   }
