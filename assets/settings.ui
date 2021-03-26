@@ -64,7 +64,8 @@
                     <property name="can_focus">False</property>
                     <property name="halign">center</property>
                     <property name="margin_bottom">20</property>
-                    <property name="label">Do things on-the-fly.</property>
+                    <property name="label" translatable="yes">Read the &lt;a href="https://github.com/Schneegans/Fly-Pie/blob/develop/docs/changelog.md"&gt;Changelog&lt;/a&gt;.</property>
+                    <property name="use_markup">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
