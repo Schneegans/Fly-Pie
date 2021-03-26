@@ -33,6 +33,7 @@
 * The documentation has been improved significantly. There are now many topics covered, especially guides on how to contribute to the project.
 * It is now easier to create new translations (thank you, [daPhipz](https://github.com/daPhipz)!).
 * Added several continuous integration checks (thank you once more, [daPhipz](https://github.com/daPhipz)!).
+* The layout of the settings dialog has been improved in several places.
 * It's now possible to **become a sponsor of Fly-Pie**! For as little as 1$ you can make sure that I stay motivated to work on this project!
 * Sponsors and contributors have been added to the about-popover.
 
