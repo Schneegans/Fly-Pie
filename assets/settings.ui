@@ -339,8 +339,10 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">💕️ Do you want to show that you love Fly-Pie? &lt;a href="https://github.com/sponsors/Schneegans"&gt;Become a sponsor for as little as 1$ / month!&lt;/a&gt;</property>
+                    <property name="label" translatable="yes">💕️ Do you want to show that you love Fly-Pie?
+&lt;a href="https://github.com/sponsors/Schneegans"&gt;You may already become a sponsor for as little as 1$ / month!&lt;/a&gt;</property>
                     <property name="use_markup">True</property>
+                    <property name="justify">center</property>
                     <property name="wrap">True</property>
                     <property name="max_width_chars">0</property>
                   </object>
