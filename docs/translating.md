@@ -39,7 +39,7 @@ It provides a guideline on what to do in order to get your Pull Request accepted
 When creating your pull request, you can simply append a `&template=add_or_update_translation.md`
 to the URL to auto-populate the body of your pull request with the template.
 
-Please refer to [contributing.md](contributing.md) for the some further contribution guidelines.
+Please refer to [contributing.md](contributing.md) for further contribution guidelines.
 
 **Note:**
 You may need to install the `gettext` package in order to compile the translations.
