@@ -2,14 +2,14 @@
 # Copyright (C) 2020 Simon Schneegans
 # This file is distributed under the same license as the Fly-Pie package.
 # Simon Schneegans <code@simonschneegans.de>, 2020.
-# Philipp Kiemle <philipp.kiemle@gmail.com>, 2020.
+# Philipp Kiemle <philipp.kiemle@gmail.com>, 2020-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-26 20:29+0100\n"
-"PO-Revision-Date: 2020-12-24 01:18+0100\n"
+"PO-Revision-Date: 2021-03-27 08:45+0100\n"
 "Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -20,16 +20,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: assets/settings.ui:67
-#, fuzzy
-#| msgid ""
-#| "Bugs can be reported on <a href=\"https://github.com/Schneegans/Fly-Pie/"
-#| "issues\">Github</a>."
 msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
-"Fehler können auf <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
-"\">Github</a> gemeldet werden."
+"Lesen Sie das <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/"
+"docs/changelog.md\">Änderungsprotokoll</a>."
 
 #: assets/settings.ui:82
 msgid ""
@@ -51,45 +47,48 @@ msgstr ""
 
 #: assets/settings.ui:100
 msgid "About"
-msgstr ""
+msgstr "Info"
 
 #: assets/settings.ui:126
 msgid "Created by"
-msgstr ""
+msgstr "Erstellt von"
 
 #: assets/settings.ui:156
 msgid "Translated by"
-msgstr ""
+msgstr "Übersetzung von"
 
 #: assets/settings.ui:187
 msgid "Artwork by"
-msgstr ""
+msgstr "Grafik von"
 
 #: assets/settings.ui:216
 msgid "Credits"
-msgstr ""
+msgstr "Mitwirkende"
 
 #: assets/settings.ui:247
 msgid "🥇️ Gold Sponsors"
-msgstr ""
+msgstr "🥇️ Gold-Unterstützer"
 
 #: assets/settings.ui:260
 msgid "🥈️ Silver Sponsors"
-msgstr ""
+msgstr "🥈️ Silber-Unterstützer"
 
 #: assets/settings.ui:273
 msgid "🥉️ Copper Sponsors"
-msgstr ""
+msgstr "🥉️ Kupfer-Unterstützer"
 
 #: assets/settings.ui:342 src/prefs/MenuEditorPage.js:966
 msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
+"💕️ Möchten Sie zeigen, wie sehr Ihnen Fly-Pie gefällt? <a href=\"https://"
+"github.com/sponsors/Schneegans\">Werden Sie ein Unterstützer - für nur $1 / "
+"Monat!</a>"
 
 #: assets/settings.ui:356
 msgid "Sponsors"
-msgstr ""
+msgstr "Unterstützer"
 
 #. A kind of animation.
 #: assets/settings.ui:561
@@ -183,15 +182,13 @@ msgid "Generate Random Preset"
 msgstr "Zufällig erzeugen"
 
 #: assets/settings.ui:1083
-#, fuzzy
-#| msgid "Standard State"
 msgid "Standard"
-msgstr "Standardzustand"
+msgstr "Standard"
 
 #. Refers to reward presets
 #: assets/settings.ui:1103
 msgid "Rewards"
-msgstr ""
+msgstr "Belohnungen"
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: assets/settings.ui:1169
@@ -451,6 +448,9 @@ msgid ""
 "immediately!\n"
 "You may also open one of your own menus from the Menu Editor, of course."
 msgstr ""
+"Dieses Menü bleibt offen, so können Sie die Einstellungen verändern und das "
+"Ergebnis direkt sehen!\n"
+"Sie können natürlich auch eines Ihrer eigenen Menüs öffnen."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: assets/settings.ui:2658
@@ -458,32 +458,28 @@ msgid "Live Preview"
 msgstr "Live-Vorschau öffnen"
 
 #: assets/settings.ui:2731
-#, fuzzy
-#| msgid "Load / Save a Preset"
 msgid "Load & Save Settings"
-msgstr "Voreinstellung laden / speichern"
+msgstr "Einstellungen laden & speichern"
 
 #: assets/settings.ui:2744
 msgid "You can choose a built-in preset or save your current settings."
 msgstr ""
+"Sie künnen eine mitgelieferte Vorlage auswählen oder Ihre aktuellen "
+"Einstellungen speichern."
 
 #: assets/settings.ui:2795
-#, fuzzy
-#| msgid "Save Preset"
 msgid "Presets"
-msgstr "Voreinstellung speichern"
+msgstr "Voreinstellungen"
 
 #. Where presets are stored by default
 #: assets/settings.ui:2816
 msgid "Load settings fom a file"
-msgstr ""
+msgstr "Einstellungen aus einer Datei laden"
 
 #. Where presets are stored by default
 #: assets/settings.ui:2837
-#, fuzzy
-#| msgid "Save current settings"
 msgid "Save the current settings to a file"
-msgstr "Aktuelle Einstellungen speichern"
+msgstr "Aktuelle Einstellungen in einer Datei speichern"
 
 #: assets/settings.ui:2944
 msgid "Animation Duration"
@@ -813,13 +809,15 @@ msgstr ""
 
 #: assets/settings.ui:7827
 msgid "Experimental Hover Mode"
-msgstr ""
+msgstr "Experimenteller Überfahren-Modus"
 
 #: assets/settings.ui:7839
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
 msgstr ""
+"Wenn aktiviert, müssen Sie während der Auswahl keine Maustaste\n"
+"oder Modifikator-Taste gedrückt halten."
 
 #: assets/settings.ui:7867 assets/settings.ui:8052
 msgid "Advanced Settings"
@@ -1709,26 +1707,27 @@ msgstr "Speichern"
 #: src/prefs/SettingsPage.js:325
 msgid "You should not store the preset in the extension directory!"
 msgstr ""
+"Sie sollten die Voreinstellung nicht im Erweiterungsverzeichnis speichern!"
 
 #: src/prefs/SettingsPage.js:327
 msgid ""
 "Here it will be deleted whenever Fly-Pie is updated. It has been saved "
 "anyways, but please consider to store it in a safer place!"
 msgstr ""
+"Bei einem Update von Fly-Pie wird sie hier gelöscht. Sie wurde zwar "
+"gespeichert, aber bitte ziehen Sie einen sicheren Ort in Betracht!"
 
 #: src/prefs/SettingsPage.js:366
-#, fuzzy
-#| msgid "Save Preset"
 msgid "Load Preset"
-msgstr "Voreinstellung speichern"
+msgstr "Voreinstellung laden"
 
 #: src/prefs/SettingsPage.js:386
 msgid "Load"
-msgstr ""
+msgstr "Laden"
 
 #: src/prefs/SettingsPage.js:400
 msgid "Failed to load preset!"
-msgstr ""
+msgstr "Laden der Voreinstellung fehlgeschlagen!"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:173
@@ -1781,12 +1780,6 @@ msgid "Emits a D-Bus signal."
 msgstr "Löst ein D-Bus Signal aus."
 
 #: src/common/actions/DBusSignal.js:43
-#, fuzzy
-#| msgid ""
-#| "The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
-#| "\"https://github.com/Schneegans/Fly-Pie#fly-pies-d-bus-interface\">can "
-#| "listen on the D-Bus for its activation</a>. This can be very useful in "
-#| "custom menus opened via the command line."
 msgid ""
 "The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
 "\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-interface.md"
@@ -1794,9 +1787,10 @@ msgid ""
 "in custom menus opened via the command line."
 msgstr ""
 "Die <b>D-Bus-Signal</b>-Aktion macht erst einmal nichts. Allerdings können "
-"Sie <a href=\"https://github.com/Schneegans/Fly-Pie#fly-pies-d-bus-interface"
-"\">von ihrer Auswahl über den D-Bus erfahren</a>. Das kann sehr nützlich in "
-"Verbindung mit Menüs sein, die Sie über die Kommandozeile geöffnet haben."
+"Sie <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-"
+"interface.md\">von ihrer Auswahl über den D-Bus erfahren</a>. Das kann sehr "
+"nützlich in Verbindung mit Menüs sein, die Sie über die Kommandozeile "
+"geöffnet haben."
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
@@ -2077,30 +2071,33 @@ msgid ""
 "\"Fire\" or \"Water\". A negation would be \"^(?!.*Fire)\" to match anything "
 "but \"Fire\". Remember to use the live preview to instantly see the results!"
 msgstr ""
+"Sie können das verwenden, um die angezeigten Fenster zu filtern. Reguläre "
+"Ausdrücke werden unterstützt: Nutzen Sie eine einfache Zeichenkette wie "
+"\"Fire\", um nur Fenster anzuzeigen, deren Titel \"Fire\" enthalten (z.B. "
+"Firefox). Nutzen Sie \"Fire|Water\", um entweder \"Fire\" oder \"Water\" zu "
+"suchen. Eine Negation erzielen Sie mit \"^(?!.*Fire)\". Das beinhaltet alles "
+"außer \"Fire\". Nutzen Sie die Live-Vorschau, um die Ergebnisse in Echtzeit "
+"zu sehen!"
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
-msgstr ""
+msgstr "Fenster-Filter"
 
 #: src/common/menus/RunningApps.js:99
-#, fuzzy
-#| msgid "See tooltip for details."
 msgid "See Tooltip for details."
-msgstr "Weitere Details im Tooltip."
+msgstr "Weitere Details in der Minihilfe."
 
 #: src/common/menus/RunningApps.js:124
 msgid "Active Workspace Only"
-msgstr ""
+msgstr "Nur aktive Arbeitsfläche"
 
 #: src/common/menus/RunningApps.js:125
-#, fuzzy
-#| msgid "Launch Application"
 msgid "Group by Application"
-msgstr "Anwendung starten"
+msgstr "Nach Anwendung gruppieren"
 
 #: src/common/menus/RunningApps.js:126
 msgid "Peek on Hover"
-msgstr ""
+msgstr "Vorschau beim Überfahren"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
