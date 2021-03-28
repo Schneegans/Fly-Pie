@@ -42,8 +42,9 @@ var PreferencesDialog = class PreferencesDialog {
     // Load the CSS file for the settings dialog.
     const styleProvider = Gtk.CssProvider.new();
     styleProvider.load_from_path(Me.path + '/assets/flypie.css');
-    Gtk.StyleContext.add_provider_for_screen(
-        Gdk.Screen.get_default(), styleProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    Gtk.StyleContext.add_provider_for_display(
+        Gdk.Display.get_default(), styleProvider,
+        Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
     // To structure the source code, the code for the individual dialog pages has been put
     // into separate classes.
@@ -51,14 +52,14 @@ var PreferencesDialog = class PreferencesDialog {
     // Initialize the Tutorial page.
     this._tutorialPage = new TutorialPage(this._builder, this._settings);
 
-    // Initialize the Settings page.
-    this._settingsPage = new SettingsPage(this._builder, this._settings);
+    // // Initialize the Settings page.
+    // this._settingsPage = new SettingsPage(this._builder, this._settings);
 
-    // Initialize the Menu Editor page.
-    this._menuEditorPage = new MenuEditorPage(this._builder, this._settings);
+    // // Initialize the Menu Editor page.
+    // this._menuEditorPage = new MenuEditorPage(this._builder, this._settings);
 
-    // Initialize the Achievements page.
-    this._achievementsPage = new AchievementsPage(this._builder, this._settings);
+    // // Initialize the Achievements page.
+    // this._achievementsPage = new AchievementsPage(this._builder, this._settings);
 
     // Show current version number in about-popover.
     this._builder.get_object('app-name').label = 'Fly-Pie ' + Me.metadata.version;
@@ -92,8 +93,8 @@ var PreferencesDialog = class PreferencesDialog {
       stackSwitcher.parent.remove(aboutButton);
       stackSwitcher.parent.remove(stackSwitcher);
 
-      const titlebar = this._widget.get_toplevel().get_titlebar();
-      titlebar.set_custom_title(stackSwitcher);
+      const titlebar = this._widget.get_root().get_titlebar();
+      titlebar.set_title_widget(stackSwitcher);
       titlebar.pack_start(aboutButton);
     });
 

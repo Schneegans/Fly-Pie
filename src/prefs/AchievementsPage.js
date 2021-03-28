@@ -183,7 +183,7 @@ var AchievementsPage = class AchievementsPage {
     // Get the Gtk.DrawingArea.
     const drawingArea = this._builder.get_object(type + '-pie-chart');
 
-    drawingArea.connect('draw', (widget, ctx) => {
+    drawingArea.set_draw_func((widget, ctx) => {
       // Get the data for the pie chart.
       const charts = this._charts[type];
 
@@ -319,7 +319,7 @@ var AchievementsPage = class AchievementsPage {
       this._redrawCharts();
     });
 
-    drawingArea.connect('draw', (widget, ctx) => {
+    drawingArea.set_draw_func((widget, ctx) => {
       // Get the data for the pie chart.
       const charts    = this._charts[type];
       const histogram = charts.data[depth - 1];
@@ -448,7 +448,7 @@ var AchievementsPage = class AchievementsPage {
     const image = new Gtk.DrawingArea();
     image.set_size_request(128, 128);
     image.add_events(Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK);
-    image.connect('draw', (widget, ctx) => {
+    image.set_draw_func((widget, ctx) => {
       const background = GdkPixbuf.Pixbuf.new_from_file(
           Me.path + '/assets/badges/achievements/' + tier + '.svg');
       const middleground = GdkPixbuf.Pixbuf.new_from_file(

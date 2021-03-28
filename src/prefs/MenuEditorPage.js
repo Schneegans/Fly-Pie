@@ -714,7 +714,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     // Draw an icon to the drawing area whenever it's invalidated. This happens usually
     // when the text of the icon name input field changes.
-    this._builder.get_object('item-icon-drawingarea').connect('draw', (widget, ctx) => {
+    this._builder.get_object('item-icon-drawingarea').set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const icon  = this._getSelected('ICON');
       const font  = this._settings.get_string('font');

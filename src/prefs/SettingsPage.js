@@ -653,7 +653,7 @@ var SettingsPage = class SettingsPage {
 
     // Draw six lines representing the wedge separators.
     let tabIcon = this._builder.get_object('wedges-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
@@ -675,7 +675,7 @@ var SettingsPage = class SettingsPage {
 
     // Draw one circle representing the center item.
     tabIcon = this._builder.get_object('center-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
@@ -689,7 +689,7 @@ var SettingsPage = class SettingsPage {
 
     // Draw six circles representing child items.
     tabIcon = this._builder.get_object('children-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
@@ -708,7 +708,7 @@ var SettingsPage = class SettingsPage {
     // Draw six groups of five grandchildren each. The grandchild at the back-navigation
     // position is skipped.
     tabIcon = this._builder.get_object('grandchildren-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
@@ -736,7 +736,7 @@ var SettingsPage = class SettingsPage {
 
     // Draw a line and some circles representing a trace.
     tabIcon = this._builder.get_object('trace-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
@@ -763,7 +763,7 @@ var SettingsPage = class SettingsPage {
 
     // Draw three dots indicating the advanced settings.
     tabIcon = this._builder.get_object('advanced-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
 
