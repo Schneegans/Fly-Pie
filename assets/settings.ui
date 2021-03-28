@@ -649,7 +649,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                             <property name="item_padding">3</property>
                             <property name="activate_on_single_click">1</property>
                             <child>
-                              <object class="GtkCellRendererPixbuf"></object>
+                              <object class="GtkCellRendererPixbuf" />
                               <attributes>
                                 <attribute name="icon-name">0</attribute>
                               </attributes>
@@ -959,7 +959,7 @@ Can be added to custom menus.</property>
         <property name="revealed">0</property>
         <child>
           <object class="GtkBox">
-            <property name="can_focus">False</property>
+            <property name="can_focus">0</property>
             <property name="spacing">6</property>
             <child>
               <object class="GtkButton" id="enable-animations-button">
@@ -2546,8 +2546,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
                                             <property name="margin-end">20</property>
-                                            <property name="label" translatable="yes" comments="Keep the individual lines short (around 30 characters max)!
-You can use up to three lines if you want.">Clicking inside the inner radius
+                                            <property name="label" translatable="yes" comments="Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.">Clicking inside the inner radius
 will cancel the selection.</property>
                                             <style>
                                               <class name="dim-label" />
@@ -2857,8 +2856,7 @@ will cancel the selection.</property>
                                         </child>
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
+                                            <property name="can_focus">0</property>
                                             <child>
                                               <object class="GtkColorButton" id="wedge-color">
                                                 <property name="receives_default">1</property>
@@ -3183,23 +3181,18 @@ will cancel the selection.</property>
                                         </child>
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="hexpand">True</property>
-                                            <property name="homogeneous">True</property>
+                                            <property name="can_focus">0</property>
+                                            <property name="hexpand">1</property>
+                                            <property name="homogeneous">1</property>
                                             <child>
                                               <object class="GtkToggleButton" id="center-color-mode-fixed">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Fixed = not changing dynamically">Fixed</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="center-color-mode-auto">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Auto = changing dynamically">Auto</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically">Auto</property>
                                                 <property name="group">center-color-mode-fixed</property>
                                               </object>
                                             </child>
@@ -3250,22 +3243,17 @@ Auto = changing dynamically">Auto</property>
                                       <object class="GtkGrid">
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="hexpand">True</property>
+                                            <property name="can_focus">0</property>
+                                            <property name="hexpand">1</property>
                                             <child>
                                               <object class="GtkToggleButton" id="center-color-mode-hover-fixed">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Fixed = not changing dynamically">Fixed</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="center-color-mode-hover-auto">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Auto = changing dynamically">Auto</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically">Auto</property>
                                                 <property name="group">center-color-mode-hover-fixed</property>
                                               </object>
                                             </child>
@@ -3955,29 +3943,22 @@ Auto = changing dynamically">Auto</property>
                                       <object class="GtkGrid">
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
+                                            <property name="can_focus">0</property>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-fixed">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Fixed = not changing dynamically">Fixed</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-auto">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Auto = changing dynamically">Auto</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically">Auto</property>
                                                 <property name="group">child-color-mode-fixed</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-parent">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Parent = use the parent&apos;s setting">Parent</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent&apos;s setting">Parent</property>
                                                 <property name="group">child-color-mode-fixed</property>
                                               </object>
                                             </child>
@@ -4112,29 +4093,22 @@ Parent = use the parent&apos;s setting">Parent</property>
                                       <object class="GtkGrid">
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
+                                            <property name="can_focus">0</property>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-hover-fixed">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Fixed = not changing dynamically">Fixed</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-hover-auto">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Auto = changing dynamically">Auto</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically">Auto</property>
                                                 <property name="group">child-color-mode-hover-fixed</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-hover-parent">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Parent = use the parent&apos;s setting">Parent</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent&apos;s setting">Parent</property>
                                                 <property name="group">child-color-mode-hover-fixed</property>
                                               </object>
                                             </child>
@@ -4391,8 +4365,7 @@ Parent = use the parent&apos;s setting">Parent</property>
                                         <child>
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
-                                            <property name="label" translatable="yes" comments="Draw above (grand)children items.
-There&apos;s an explanation string below in the application.">Draw Above</property>
+                                            <property name="label" translatable="yes" comments="Draw above (grand)children items. There&apos;s an explanation string below in the application.">Draw Above</property>
                                             <layout>
                                               <property name="column">0</property>
                                               <property name="row">0</property>
@@ -5059,23 +5032,18 @@ There&apos;s an explanation string below in the application.">Draw Above</proper
                                       <object class="GtkGrid">
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="hexpand">True</property>
-                                            <property name="homogeneous">True</property>
+                                            <property name="can_focus">0</property>
+                                            <property name="hexpand">1</property>
+                                            <property name="homogeneous">1</property>
                                             <child>
                                               <object class="GtkToggleButton" id="grandchild-color-mode-fixed">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Fixed = not changing dynamically">Fixed</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="grandchild-color-mode-parent">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Parent = use the parent&apos;s setting">Parent</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent&apos;s setting">Parent</property>
                                                 <property name="group">grandchild-color-mode-fixed</property>
                                               </object>
                                             </child>
@@ -5114,23 +5082,18 @@ Parent = use the parent&apos;s setting">Parent</property>
                                       <object class="GtkGrid">
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="hexpand">True</property>
-                                            <property name="homogeneous">True</property>
+                                            <property name="can_focus">0</property>
+                                            <property name="hexpand">1</property>
+                                            <property name="homogeneous">1</property>
                                             <child>
                                               <object class="GtkToggleButton" id="grandchild-color-mode-hover-fixed">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Fixed = not changing dynamically">Fixed</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="grandchild-color-mode-hover-parent">
-                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters.
-This is a label of the coloring type radio button group.
-Parent = use the parent&apos;s setting">Parent</property>
+                                                <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent&apos;s setting">Parent</property>
                                                 <property name="group">grandchild-color-mode-hover-fixed</property>
                                               </object>
                                             </child>
@@ -5289,8 +5252,7 @@ Parent = use the parent&apos;s setting">Parent</property>
                                         <child>
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
-                                            <property name="label" translatable="yes" comments="Draw above (grand)children items.
-There&apos;s an explanation string below in the application.">Draw Above</property>
+                                            <property name="label" translatable="yes" comments="Draw above (grand)children items. There&apos;s an explanation string below in the application.">Draw Above</property>
                                             <layout>
                                               <property name="column">0</property>
                                               <property name="row">0</property>
