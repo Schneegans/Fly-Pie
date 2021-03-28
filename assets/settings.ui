@@ -281,69 +281,69 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
   <object class="GtkAdjustment" id="center-auto-color-luminance">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-auto-color-luminance-hover">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-auto-color-opacity">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-auto-color-opacity-hover">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-auto-color-saturation">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-auto-color-saturation-hover">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-icon-crop">
-    <property name="lower">0.10000000000000001</property>
+    <property name="lower">0.1</property>
     <property name="upper">1</property>
     <property name="value">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-icon-crop-hover">
-    <property name="lower">0.10000000000000001</property>
+    <property name="lower">0.1</property>
     <property name="upper">1</property>
     <property name="value">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-icon-opacity">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-icon-opacity-hover">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-icon-scale">
-    <property name="lower">0.10000000000000001</property>
+    <property name="lower">0.1</property>
     <property name="upper">1.5</property>
     <property name="value">0.69999999999999996</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-icon-scale-hover">
-    <property name="lower">0.10000000000000001</property>
+    <property name="lower">0.1</property>
     <property name="upper">1.5</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="center-size">
     <property name="lower">20</property>
@@ -362,70 +362,70 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
     <property name="upper">1</property>
     <property name="value">0.5</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-auto-color-luminance-hover">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-auto-color-opacity">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-auto-color-opacity-hover">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-auto-color-saturation">
     <property name="upper">1</property>
     <property name="value">0.5</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-auto-color-saturation-hover">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-icon-crop">
-    <property name="lower">0.10000000000000001</property>
+    <property name="lower">0.1</property>
     <property name="upper">1</property>
     <property name="value">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-icon-crop-hover">
-    <property name="lower">0.10000000000000001</property>
+    <property name="lower">0.1</property>
     <property name="upper">1</property>
     <property name="value">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-icon-opacity">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-icon-opacity-hover">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-icon-scale">
-    <property name="lower">0.10000000000000001</property>
+    <property name="lower">0.1</property>
     <property name="upper">1.5</property>
     <property name="value">0.90000000000000002</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-icon-scale-hover">
-    <property name="lower">0.10000000000000001</property>
+    <property name="lower">0.1</property>
     <property name="upper">1.5</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkAdjustment" id="child-offset">
     <property name="lower">10</property>
@@ -457,7 +457,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
     <property name="upper">1</property>
     <property name="value">0.29999999999999999</property>
     <property name="step_increment">0.01</property>
-    <property name="page_increment">0.10000000000000001</property>
+    <property name="page_increment">0.1</property>
   </object>
   <object class="GtkListStore" id="easing-mode-list">
     <columns>
@@ -543,7 +543,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
     <property name="lower">0.5</property>
     <property name="upper">4</property>
     <property name="value">1</property>
-    <property name="step_increment">0.10000000000000001</property>
+    <property name="step_increment">0.1</property>
     <property name="page_increment">0.5</property>
   </object>
   <object class="GtkAdjustment" id="grandchild-offset">
@@ -859,7 +859,6 @@ Can be added to custom menus.</property>
                     <child>
                       <object class="GtkButton" id="random-preset-button">
                         <property name="valign">center</property>
-                        <property name="receives_default">1</property>
                         <property name="tooltip_text" translatable="yes">Initializes the settings below to random values</property>
                         <child>
                           <object class="GtkGrid">
@@ -926,7 +925,7 @@ Can be added to custom menus.</property>
   <object class="GtkAdjustment" id="trace-thickness">
     <property name="lower">1</property>
     <property name="upper">50</property>
-    <property name="step_increment">0.10000000000000001</property>
+    <property name="step_increment">0.1</property>
     <property name="page_increment">1</property>
   </object>
   <object class="GtkAdjustment" id="wedge-inner-radius">
@@ -964,7 +963,6 @@ Can be added to custom menus.</property>
             <child>
               <object class="GtkButton" id="enable-animations-button">
                 <property name="label" translatable="yes" comments="Text of the button of the InfoBar which is shown when GNOME Shell&apos;s animations are disabled.">Enable Animations</property>
-                <property name="receives_default">1</property>
               </object>
             </child>
           </object>
@@ -992,7 +990,6 @@ Can be added to custom menus.</property>
         <child>
           <object class="GtkMenuButton" id="about-button">
             <property name="focus_on_click">0</property>
-            <property name="receives_default">1</property>
             <property name="halign">center</property>
             <property name="popover">about-popover</property>
             <child>
@@ -1079,7 +1076,6 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                             </child>
                             <child>
                               <object class="GtkButton" id="tutorial-button-1">
-                                <property name="receives_default">1</property>
                                 <property name="valign">center</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
@@ -1159,7 +1155,6 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                             </child>
                             <child>
                               <object class="GtkButton" id="tutorial-button-2">
-                                <property name="receives_default">1</property>
                                 <property name="valign">center</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
@@ -1243,8 +1238,8 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                 </child>
                                 <child>
                                   <object class="GtkButton" id="tutorial-reset-button-1">
-                                    <property name="receives_default">1</property>
                                     <property name="halign">center</property>
+                                    <property name="has_frame">0</property>
                                     <child>
                                       <object class="GtkBox">
                                         <property name="margin-start">8</property>
@@ -1278,7 +1273,6 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                             </child>
                             <child>
                               <object class="GtkButton" id="tutorial-button-3">
-                                <property name="receives_default">1</property>
                                 <property name="valign">center</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
@@ -1302,7 +1296,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                 <property name="homogeneous">1</property>
                                 <child>
                                   <object class="GtkBox" id="bronze-medal-1">
-                                    <property name="opacity">0.10000000000000001</property>
+                                    <property name="opacity">0.1</property>
                                     <property name="halign">center</property>
                                     <property name="orientation">vertical</property>
                                     <child>
@@ -1322,7 +1316,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                 </child>
                                 <child>
                                   <object class="GtkBox" id="silver-medal-1">
-                                    <property name="opacity">0.10000000000000001</property>
+                                    <property name="opacity">0.1</property>
                                     <property name="halign">center</property>
                                     <property name="orientation">vertical</property>
                                     <child>
@@ -1344,7 +1338,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                             </child>
                             <child>
                               <object class="GtkBox" id="gold-medal-1">
-                                <property name="opacity">0.10000000000000001</property>
+                                <property name="opacity">0.1</property>
                                 <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkImage" id="level-image11">
@@ -1422,7 +1416,6 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                             </child>
                             <child>
                               <object class="GtkButton" id="tutorial-button-4">
-                                <property name="receives_default">1</property>
                                 <property name="valign">center</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
@@ -1506,7 +1499,6 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                                 </child>
                                 <child>
                                   <object class="GtkButton" id="tutorial-reset-button-2">
-                                    <property name="receives_default">1</property>
                                     <property name="halign">center</property>
                                     <property name="has_frame">0</property>
                                     <child>
@@ -1542,7 +1534,6 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                             </child>
                             <child>
                               <object class="GtkButton" id="tutorial-button-5">
-                                <property name="receives_default">1</property>
                                 <property name="valign">center</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
@@ -1687,7 +1678,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                     <child>
                       <object class="GtkButton" id="tutorial-previous-page-button">
                         <property name="sensitive">0</property>
-                        <property name="receives_default">1</property>
                         <property name="has_frame">0</property>
                         <child>
                           <object class="GtkGrid">
@@ -1778,7 +1768,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                     </child>
                     <child>
                       <object class="GtkButton" id="tutorial-next-page-button">
-                        <property name="receives_default">1</property>
                         <property name="halign">end</property>
                         <property name="has_frame">0</property>
                         <child>
@@ -1882,7 +1871,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                 </child>
                                 <child>
                                   <object class="GtkButton" id="preview-button">
-                                    <property name="receives_default">1</property>
                                     <property name="tooltip_text" translatable="yes">Open Live Preview Menu</property>
                                     <property name="margin_top">6</property>
                                     <property name="margin_bottom">6</property>
@@ -1996,7 +1984,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     <child>
                                       <object class="GtkMenuButton">
                                         <property name="focus_on_click">0</property>
-                                        <property name="receives_default">1</property>
                                         <property name="direction">none</property>
                                         <property name="popover">preset-popover</property>
                                         <child>
@@ -2030,7 +2017,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     <child>
                                       <object class="GtkButton" id="load-preset-button">
                                         <property name="halign">center</property>
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Load settings fom a file</property>
                                         <child>
                                           <object class="GtkImage">
@@ -2042,7 +2028,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     <child>
                                       <object class="GtkButton" id="save-preset-button">
                                         <property name="halign">center</property>
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Save the current settings to a file</property>
                                         <child>
                                           <object class="GtkImage">
@@ -2201,7 +2186,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-easing-duration">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -2221,7 +2205,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-global-scale">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -2300,7 +2283,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     </child>
                                     <child>
                                       <object class="GtkFontButton" id="font">
-                                        <property name="receives_default">1</property>
                                         <property name="valign">center</property>
                                         <property name="font">Sans 12</property>
                                         <property name="preview_text"></property>
@@ -2313,7 +2295,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     </child>
                                     <child>
                                       <object class="GtkColorButton" id="text-color">
-                                        <property name="receives_default">1</property>
                                         <property name="title" translatable="yes">Pick Text Color</property>
                                         <property name="show_editor">1</property>
                                         <layout>
@@ -2324,7 +2305,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     </child>
                                     <child>
                                       <object class="GtkColorButton" id="background-color">
-                                        <property name="receives_default">1</property>
                                         <property name="valign">center</property>
                                         <property name="hexpand">1</property>
                                         <property name="title" translatable="yes">Pick Background Color</property>
@@ -2337,7 +2317,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-font">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -2357,7 +2336,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-text-color">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -2376,7 +2354,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-background-color">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -2395,7 +2372,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-easing-mode">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -2627,7 +2603,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-wedge-separator-width">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -2647,7 +2622,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-wedge-separator-color">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -2667,7 +2641,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkColorButton" id="wedge-separator-color">
-                                        <property name="receives_default">1</property>
                                         <property name="valign">center</property>
                                         <property name="title" translatable="yes">Pick Wedge Separator Color</property>
                                         <property name="show_editor">1</property>
@@ -2743,7 +2716,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-wedge-width">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -2763,7 +2735,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-wedge-inner-radius">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -2859,7 +2830,6 @@ will cancel the selection.</property>
                                             <property name="can_focus">0</property>
                                             <child>
                                               <object class="GtkColorButton" id="wedge-color">
-                                                <property name="receives_default">1</property>
                                                 <property name="hexpand">1</property>
                                                 <property name="title" translatable="yes">Pick Wedge Color</property>
                                                 <property name="show_editor">1</property>
@@ -2867,7 +2837,6 @@ will cancel the selection.</property>
                                             </child>
                                             <child>
                                               <object class="GtkColorButton" id="wedge-color-hover">
-                                                <property name="receives_default">1</property>
                                                 <property name="title" translatable="yes" comments="Hovered: When the mouse pointer is over the item">Pick Hovered Wedge Color</property>
                                                 <property name="show_editor">1</property>
                                               </object>
@@ -2888,7 +2857,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-wedge-color">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -3070,7 +3038,6 @@ will cancel the selection.</property>
                                             <property name="reveal_child">1</property>
                                             <property name="child">
                                               <object class="GtkColorButton" id="center-fixed-color">
-                                                <property name="receives_default">1</property>
                                                 <property name="margin_top">5</property>
                                                 <property name="title" translatable="yes">Pick Center Item Color</property>
                                                 <property name="show_editor">1</property>
@@ -3269,7 +3236,6 @@ will cancel the selection.</property>
                                             <property name="reveal_child">1</property>
                                             <property name="child">
                                               <object class="GtkColorButton" id="center-fixed-color-hover">
-                                                <property name="receives_default">1</property>
                                                 <property name="margin_top">5</property>
                                                 <property name="title" translatable="yes">Pick Center Item Color</property>
                                                 <property name="show_editor">1</property>
@@ -3456,7 +3422,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-center-color">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -3475,7 +3440,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-center-size">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -3495,7 +3459,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-center-icon-scale">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -3515,7 +3478,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-center-icon-opacity">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -3535,7 +3497,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-center-color">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -3554,7 +3515,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-center-size">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -3574,7 +3534,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-center-icon-scale">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -3594,7 +3553,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-center-icon-opacity">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -3700,7 +3658,6 @@ will cancel the selection.</property>
                                     </child> -->
                                     <child>
                                       <object class="GtkButton" id="reset-center-background-image">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -3771,7 +3728,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-center-icon-crop">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -3791,7 +3747,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-center-icon-crop">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -3835,7 +3790,6 @@ will cancel the selection.</property>
                                     </child> -->
                                     <child>
                                       <object class="GtkButton" id="copy-center-background-image">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -3974,7 +3928,6 @@ will cancel the selection.</property>
                                             <property name="reveal_child">1</property>
                                             <property name="child">
                                               <object class="GtkColorButton" id="child-fixed-color">
-                                                <property name="receives_default">1</property>
                                                 <property name="margin_top">5</property>
                                                 <property name="hexpand">1</property>
                                                 <property name="title" translatable="yes">Pick Child Item Color</property>
@@ -4124,7 +4077,6 @@ will cancel the selection.</property>
                                             <property name="reveal_child">1</property>
                                             <property name="child">
                                               <object class="GtkColorButton" id="child-fixed-color-hover">
-                                                <property name="receives_default">1</property>
                                                 <property name="margin_top">5</property>
                                                 <property name="hexpand">1</property>
                                                 <property name="title" translatable="yes">Pick Child Item Color</property>
@@ -4404,7 +4356,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-child-draw-above">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -4496,7 +4447,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-child-color">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -4515,7 +4465,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-child-size">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -4535,7 +4484,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-child-offset">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -4555,7 +4503,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-child-icon-scale">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -4575,7 +4522,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-child-icon-opacity">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -4595,7 +4541,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-child-color">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -4614,7 +4559,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-child-size">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -4634,7 +4578,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-child-offset">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -4654,7 +4597,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-child-icon-scale">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -4674,7 +4616,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-child-icon-opacity">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -4765,7 +4706,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-child-background-image">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -4817,7 +4757,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-child-icon-crop">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -4837,7 +4776,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-child-icon-crop">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -4913,7 +4851,6 @@ will cancel the selection.</property>
                                     </child> -->
                                     <child>
                                       <object class="GtkButton" id="copy-child-background-image">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -5059,7 +4996,6 @@ will cancel the selection.</property>
                                             <property name="reveal_child">1</property>
                                             <property name="child">
                                               <object class="GtkColorButton" id="grandchild-fixed-color">
-                                                <property name="receives_default">1</property>
                                                 <property name="margin_top">5</property>
                                                 <property name="hexpand">1</property>
                                                 <property name="title" translatable="yes">Pick Grandchild Item Color</property>
@@ -5109,7 +5045,6 @@ will cancel the selection.</property>
                                             <property name="reveal_child">1</property>
                                             <property name="child">
                                               <object class="GtkColorButton" id="grandchild-fixed-color-hover">
-                                                <property name="receives_default">1</property>
                                                 <property name="margin_top">5</property>
                                                 <property name="hexpand">1</property>
                                                 <property name="title" translatable="yes">Pick Grandchild Item Color</property>
@@ -5216,7 +5151,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-grandchild-draw-above">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -5295,7 +5229,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-grandchild-color">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -5314,7 +5247,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-grandchild-size">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -5334,7 +5266,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-grandchild-offset">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -5354,7 +5285,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-grandchild-offset">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -5374,7 +5304,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-grandchild-size">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -5394,7 +5323,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-grandchild-color">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -5459,7 +5387,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-grandchild-background-image">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -5501,7 +5428,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="copy-grandchild-background-image">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -5664,7 +5590,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkColorButton" id="trace-color">
-                                        <property name="receives_default">1</property>
                                         <property name="title" translatable="yes">Pick Trace Color</property>
                                         <property name="show_editor">1</property>
                                         <layout>
@@ -5675,7 +5600,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-trace-thickness">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -5695,7 +5619,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-trace-min-length">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -5715,7 +5638,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-trace-color">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="has_frame">0</property>
                                         <child>
@@ -5867,7 +5789,6 @@ will cancel the selection.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-gesture-min-stroke-angle">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -5945,7 +5866,6 @@ This is multiplied by the Global Scale value.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-gesture-min-stroke-length">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -6022,7 +5942,6 @@ This is multiplied by the Global Scale value.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-gesture-jitter-threshold">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -6100,7 +6019,6 @@ the current item will be selected.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-gesture-selection-timeout">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -6263,7 +6181,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-show-screencast-mouse">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -6283,7 +6200,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="reset-hover-mode">
-                                        <property name="receives_default">1</property>
                                         <property name="tooltip_text" translatable="yes">Reset to default value</property>
                                         <property name="valign">center</property>
                                         <property name="has_frame">0</property>
@@ -6372,7 +6288,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                         <child>
                           <object class="GtkMenuButton">
                             <property name="focus_on_click">0</property>
-                            <property name="receives_default">1</property>
                             <property name="direction">none</property>
                             <property name="popover">item-type-popover</property>
                             <child>
@@ -6527,7 +6442,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <child>
                                   <object class="GtkMenuButton" id="icon-nameicon-name">
                                     <property name="focus_on_click">0</property>
-                                    <property name="receives_default">1</property>
                                     <property name="direction">none</property>
                                     <property name="popover">icon-popover</property>
                                     <child>
