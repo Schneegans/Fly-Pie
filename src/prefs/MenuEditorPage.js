@@ -962,8 +962,7 @@ var MenuEditorPage = class MenuEditorPage {
       _('If you delete all menus, log out and log in again, the default configuration will be restored.'),
       _('You can reorder the menu items on the left via drag and drop.'),
       _('You can drop directories, files, links and desktop files to the menu hierarchy on the left.'),
-      _('You can copy menu items by holding the Control key while dragging them to another location.'),
-      _('💕️ Do you want to show that you love Fly-Pie? <a href="https://github.com/sponsors/Schneegans">Become a sponsor for as little as 1$ / month!</a>')
+      _('You can copy menu items by holding the Control key while dragging them to another location.')
     ];
 
     // Every eight seconds we hide the current tip...

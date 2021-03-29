@@ -77,7 +77,7 @@ While contributing new features or translating Fly-Pie is the most awesome way t
   GEPLlinux
 </p>
 
-## :3rd_place_medal: Copper Sponsors</strong>
+## :3rd_place_medal: Bronze Sponsors</strong>
 <p align="center">
   <a href="https://github.com/ykhurshid">@ykhurshid</a>
 </p>

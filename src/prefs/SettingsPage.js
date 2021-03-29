@@ -324,6 +324,8 @@ var SettingsPage = class SettingsPage {
                 message_type: Gtk.MessageType.WARNING,
                 text: _('You should not store the preset in the extension directory!'),
                 secondary_text: _(
+                    // Translators: "It" refers to the preset if stored in the extension's
+                    // directory.
                     'Here it will be deleted whenever Fly-Pie is updated. It has been ' +
                     'saved anyways, but please consider to store it in a safer place!')
               });
