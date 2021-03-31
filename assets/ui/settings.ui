@@ -206,7 +206,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                   <object class="GtkLabel">
                                     <property name="halign">end</property>
                                     <property name="margin_top">8</property>
-                                    <property name="label" translatable="yes">🥉️ Copper Sponsors</property>
+                                    <property name="label" translatable="yes">🥉️ Bronze Sponsors</property>
                                     <layout>
                                       <property name="column">0</property>
                                       <property name="row">2</property>
@@ -335,7 +335,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
   <object class="GtkAdjustment" id="center-icon-scale">
     <property name="lower">0.1</property>
     <property name="upper">1.5</property>
-    <property name="value">0.69999999999999996</property>
+    <property name="value">0.7</property>
     <property name="step_increment">0.01</property>
     <property name="page_increment">0.1</property>
   </object>
@@ -417,7 +417,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
   <object class="GtkAdjustment" id="child-icon-scale">
     <property name="lower">0.1</property>
     <property name="upper">1.5</property>
-    <property name="value">0.90000000000000002</property>
+    <property name="value">0.9</property>
     <property name="step_increment">0.01</property>
     <property name="page_increment">0.1</property>
   </object>
@@ -455,7 +455,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
   </object>
   <object class="GtkAdjustment" id="easing-duration">
     <property name="upper">1</property>
-    <property name="value">0.29999999999999999</property>
+    <property name="value">0.3</property>
     <property name="step_increment">0.01</property>
     <property name="page_increment">0.1</property>
   </object>
@@ -898,15 +898,7 @@ Can be added to custom menus.</property>
                 <property name="name">page1</property>
                 <property name="title" translatable="yes" comments="Refers to reward presets">Rewards</property>
                 <property name="child">
-                  <object class="GtkScrolledWindow">
-                    <property name="child">
-                      <object class="GtkViewport">
-                        <child>
-                          <placeholder />
-                        </child>
-                      </object>
-                    </property>
-                  </object>
+                  <object class="GtkScrolledWindow"></object>
                 </property>
               </object>
             </child>
@@ -979,9 +971,6 @@ Can be added to custom menus.</property>
             </child>
           </object>
         </child>
-        <child>
-          <placeholder />
-        </child>
       </object>
     </child>
     <child>
@@ -1021,6 +1010,14 @@ Can be added to custom menus.</property>
         <property name="vexpand">1</property>
         <property name="transition_duration">300</property>
         <property name="transition_type">slide-left-right</property>
+
+
+        <!-- ################################################################################### -->
+        <!--                                                                                     -->
+        <!-- Tutorial page -->
+        <!--                                                                                     -->
+        <!-- ################################################################################### -->
+
         <child>
           <object class="GtkStackPage">
             <property name="name">tutorial-page</property>
@@ -1033,6 +1030,9 @@ Can be added to custom menus.</property>
                     <property name="vexpand">1</property>
                     <property name="transition_duration">300</property>
                     <property name="transition_type">slide-left-right</property>
+
+                    <!-- Tutorial Page 0 -->
+
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">tutorial-page-0</property>
@@ -1097,6 +1097,9 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                         </property>
                       </object>
                     </child>
+
+                    <!-- Tutorial Page 1 -->
+
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">tutorial-page-1</property>
@@ -1120,7 +1123,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                               </object>
                             </child>
                             <child>
-                              <object class="GtkImage" id="tutorial-animation-1">
+                              <object class="GtkVideo" id="tutorial-animation-1">
                                 <property name="width_request">500</property>
                                 <property name="height_request">250</property>
                                 <style>
@@ -1176,6 +1179,9 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                         </property>
                       </object>
                     </child>
+
+                    <!-- Tutorial Page 2 -->
+
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">tutorial-page-2</property>
@@ -1302,7 +1308,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                     <child>
                                       <object class="GtkImage" id="level-image12">
                                         <property name="valign">center</property>
-                                        <property name="file">badges/tutorial/copper.png</property>
+                                        <property name="resource">/img/tutorial/bronze.png</property>
                                         <property name="pixel_size">128</property>
                                       </object>
                                     </child>
@@ -1322,7 +1328,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                     <child>
                                       <object class="GtkImage" id="level-image13">
                                         <property name="valign">center</property>
-                                        <property name="file">badges/tutorial/silver.png</property>
+                                        <property name="resource">/img/tutorial/silver.png</property>
                                         <property name="pixel_size">128</property>
                                       </object>
                                     </child>
@@ -1343,7 +1349,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                 <child>
                                   <object class="GtkImage" id="level-image11">
                                     <property name="valign">center</property>
-                                    <property name="file">badges/tutorial/gold.png</property>
+                                    <property name="resource">/img/tutorial/gold.png</property>
                                     <property name="pixel_size">128</property>
                                   </object>
                                 </child>
@@ -1359,6 +1365,9 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                         </property>
                       </object>
                     </child>
+
+                    <!-- Tutorial Page 3 -->
+
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">tutorial-page-3</property>
@@ -1382,7 +1391,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               </object>
                             </child>
                             <child>
-                              <object class="GtkImage" id="tutorial-animation-2">
+                              <object class="GtkVideo" id="tutorial-animation-2">
                                 <property name="width_request">500</property>
                                 <property name="height_request">250</property>
                                 <style>
@@ -1437,6 +1446,9 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                         </property>
                       </object>
                     </child>
+
+                    <!-- Tutorial Page 4 -->
+
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">tutorial-page-4</property>
@@ -1557,12 +1569,12 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                                 <child>
                                   <object class="GtkBox" id="bronze-medal-2">
                                     <property name="hexpand">1</property>
-                                    <property name="opacity">0.10196078431372549</property>
+                                    <property name="opacity">0.1</property>
                                     <property name="orientation">vertical</property>
                                     <child>
                                       <object class="GtkImage" id="level-image14">
                                         <property name="valign">center</property>
-                                        <property name="file">badges/tutorial/copper.png</property>
+                                        <property name="resource">/img/tutorial/bronze.png</property>
                                         <property name="pixel_size">128</property>
                                       </object>
                                     </child>
@@ -1577,12 +1589,12 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                                 <child>
                                   <object class="GtkBox" id="silver-medal-2">
                                     <property name="hexpand">1</property>
-                                    <property name="opacity">0.10196078431372549</property>
+                                    <property name="opacity">0.1</property>
                                     <property name="orientation">vertical</property>
                                     <child>
                                       <object class="GtkImage" id="level-image15">
                                         <property name="valign">center</property>
-                                        <property name="file">badges/tutorial/silver.png</property>
+                                        <property name="resource">/img/tutorial/silver.png</property>
                                         <property name="pixel_size">128</property>
                                       </object>
                                     </child>
@@ -1598,12 +1610,12 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                             </child>
                             <child>
                               <object class="GtkBox" id="gold-medal-2">
-                                <property name="opacity">0.10196078431372549</property>
+                                <property name="opacity">0.1</property>
                                 <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkImage" id="level-image16">
                                     <property name="valign">center</property>
-                                    <property name="file">badges/tutorial/gold.png</property>
+                                    <property name="resource">/img/tutorial/gold.png</property>
                                     <property name="pixel_size">128</property>
                                   </object>
                                 </child>
@@ -1619,6 +1631,9 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                         </property>
                       </object>
                     </child>
+
+                    <!-- Tutorial Page 5 -->
+
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">tutorial-page-5</property>
@@ -1631,7 +1646,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkImage" id="level-image1">
                                 <property name="valign">center</property>
                                 <property name="margin_top">10</property>
-                                <property name="file">badges/tutorial/gold.png</property>
+                                <property name="resource">/img/tutorial/gold.png</property>
                                 <property name="pixel_size">128</property>
                               </object>
                             </child>
@@ -1671,6 +1686,9 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                     </child>
                   </object>
                 </child>
+
+                <!-- Tutorial navigation buttons -->
+
                 <child>
                   <object class="GtkBox">
                     <property name="width_request">500</property>
@@ -1722,36 +1740,21 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                         <child>
                           <object class="GtkCheckButton" id="tutorial-page-button-0">
                             <property name="active">1</property>
-                            <child>
-                              <placeholder />
-                            </child>
                           </object>
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="tutorial-page-button-1">
-                            <property name="active">1</property>
                             <property name="group">tutorial-page-button-0</property>
-                            <child>
-                              <placeholder />
-                            </child>
                           </object>
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="tutorial-page-button-2">
-                            <property name="active">1</property>
                             <property name="group">tutorial-page-button-0</property>
-                            <child>
-                              <placeholder />
-                            </child>
                           </object>
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="tutorial-page-button-3">
-                            <property name="active">1</property>
                             <property name="group">tutorial-page-button-0</property>
-                            <child>
-                              <placeholder />
-                            </child>
                           </object>
                         </child>
                         <child>
@@ -1809,6 +1812,14 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
             </property>
           </object>
         </child>
+
+
+        <!-- ################################################################################### -->
+        <!--                                                                                     -->
+        <!-- Settings page -->
+        <!--                                                                                     -->
+        <!-- ################################################################################### -->
+
         <child>
           <object class="GtkStackPage">
             <property name="name">settings-page</property>
@@ -1918,9 +1929,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                         </child>
                       </object>
                     </property>
-                    <child type="label_item">
-                      <placeholder />
-                    </child>
                     <layout>
                       <property name="column">0</property>
                       <property name="row">0</property>
@@ -2051,9 +2059,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                         </child>
                       </object>
                     </property>
-                    <child type="label_item">
-                      <placeholder />
-                    </child>
                     <layout>
                       <property name="column">0</property>
                       <property name="row">1</property>
@@ -2929,12 +2934,6 @@ will cancel the selection.</property>
                                         </layout>
                                       </object>
                                     </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
                                   </object>
                                 </property>
                               </object>
@@ -3806,21 +3805,6 @@ will cancel the selection.</property>
                                           <property name="row">5</property>
                                         </layout>
                                       </object>
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
                                     </child>
                                   </object>
                                 </property>
@@ -4868,21 +4852,6 @@ will cancel the selection.</property>
                                         </layout>
                                       </object>
                                     </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
                                   </object>
                                 </property>
                               </object>
@@ -5458,21 +5427,6 @@ will cancel the selection.</property>
                                         </layout>
                                       </object>
                                     </child> -->
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
                                   </object>
                                 </property>
                               </object>
@@ -6255,6 +6209,13 @@ This can be used if you want to capture a video of Fly-Pie.</property>
             </property>
           </object>
         </child>
+
+        <!-- ################################################################################### -->
+        <!--                                                                                     -->
+        <!-- Menu editor page -->
+        <!--                                                                                     -->
+        <!-- ################################################################################### -->
+
         <child>
           <object class="GtkStackPage">
             <property name="name">menu-editor-page</property>
@@ -6550,9 +6511,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                         </child>
                                       </object>
                                     </child>
-                                    <child>
-                                      <placeholder />
-                                    </child>
                                   </object>
                                 </child>
                                 <child>
@@ -6579,9 +6537,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                           <object class="GtkRevealer" id="item-settings-config-revealer">
                             <property name="transition_type">slide-up</property>
                             <property name="transition_duration">200</property>
-                            <child>
-                              <placeholder />
-                            </child>
                           </object>
                         </child>
                         <child>
@@ -6624,6 +6579,14 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
             </property>
           </object>
         </child>
+
+
+        <!-- ################################################################################### -->
+        <!--                                                                                     -->
+        <!-- Achievements page -->
+        <!--                                                                                     -->
+        <!-- ################################################################################### -->
+
         <child>
           <object class="GtkStackPage">
             <property name="name">achievements-page</property>
@@ -6649,7 +6612,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="orientation">vertical</property>
                                     <child>
                                       <object class="GtkImage">
-                                        <property name="file">../../assets/badges/levels/level1.png</property>
+                                        <property name="resource">/img/levels/level1.png</property>
                                         <property name="pixel_size">256</property>
                                       </object>
                                     </child>
@@ -6990,9 +6953,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                 <child>
                   <object class="GtkBox">
                     <property name="visible">0</property>
-                    <child>
-                      <placeholder />
-                    </child>
                     <child type="center">
                       <object class="GtkStackSwitcher">
                         <property name="halign">center</property>

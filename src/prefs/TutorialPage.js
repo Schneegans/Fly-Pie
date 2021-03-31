@@ -103,7 +103,7 @@ var TutorialPage = class TutorialPage {
     // Draw the Fly-Pie logo with the current theme's foreground color.
     this._builder.get_object('fly-pie-logo').set_draw_func((widget, ctx) => {
       const color = widget.get_style_context().get_color();
-      const logo  = GdkPixbuf.Pixbuf.new_from_file(Me.path + '/assets/logo.svg');
+      const logo  = GdkPixbuf.Pixbuf.new_from_resource('/img/logo.svg');
 
       ctx.pushGroup();
       Gdk.cairo_set_source_pixbuf(ctx, logo, 0, 0);
@@ -114,11 +114,11 @@ var TutorialPage = class TutorialPage {
       ctx.mask(mask);
     });
 
-    // Initialize the two GIF animations of the tutorial. This cannot be done from Glade
-    // for now.
+    // Initialize the two videos of the tutorial. This cannot be done from UI file
+    // for now as the GtkVideo does not seem to have a resource property.
     for (let i = 1; i <= 2; i++) {
-      const image = this._builder.get_object('tutorial-animation-' + i);
-      image.set_from_file(Me.path + '/assets/tutorial' + i + '.gif');
+      const video = this._builder.get_object('tutorial-animation-' + i);
+      video.set_resource('/video/video' + i + '.webm');
     }
 
     // Make the five Show-Menu buttons of the tutorial pages actually show a menu.

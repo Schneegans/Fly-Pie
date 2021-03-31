@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource>
+    <file>css/flypie.css</file>
+    <file>img/achievements/a.svg</file>
+    <file>img/achievements/b.svg</file>
+    <file>img/achievements/bronze.png</file>
+    <file>img/achievements/bronze.svg</file>
+    <file>img/achievements/c.svg</file>
+    <file>img/achievements/copper.png</file>
+    <file>img/achievements/copper.svg</file>
+    <file>img/achievements/d.svg</file>
+    <file>img/achievements/e.svg</file>
+    <file>img/achievements/gold.png</file>
+    <file>img/achievements/gold.svg</file>
+    <file>img/achievements/platinum.png</file>
+    <file>img/achievements/platinum.svg</file>
+    <file>img/achievements/silver.png</file>
+    <file>img/achievements/silver.svg</file>
+    <file>img/achievements/special.png</file>
+    <file>img/achievements/special.svg</file>
+    <file>img/levels/level1.png</file>
+    <file>img/levels/level10.png</file>
+    <file>img/levels/level2.png</file>
+    <file>img/levels/level3.png</file>
+    <file>img/levels/level4.png</file>
+    <file>img/levels/level5.png</file>
+    <file>img/levels/level6.png</file>
+    <file>img/levels/level7.png</file>
+    <file>img/levels/level8.png</file>
+    <file>img/levels/level9.png</file>
+    <file>img/logo.svg</file>
+    <file>img/tutorial/bronze.png</file>
+    <file>img/tutorial/gold.png</file>
+    <file>img/tutorial/silver.png</file>
+    <file>ui/settings.ui</file>
+    <file>video/video1.webm</file>
+    <file>video/video2.webm</file>
+  </gresource>
+</gresources>
