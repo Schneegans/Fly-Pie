@@ -36,7 +36,7 @@ var PreferencesDialog = class PreferencesDialog {
     this._shellSettings = Gio.Settings.new('org.gnome.desktop.interface');
 
     // Load all of Fly-Pie's resources.
-    Gio.resources_register(Gio.Resource.load(Me.path + '/assets/flypie.gresource'));
+    Gio.resources_register(Gio.Resource.load(Me.path + '/resources/flypie.gresource'));
 
     // Load the user interface file.
     this._builder = new Gtk.Builder();

@@ -449,12 +449,12 @@ var AchievementsPage = class AchievementsPage {
     image.set_size_request(128, 128);
     image.add_events(Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK);
     image.set_draw_func((widget, ctx) => {
-      const background = GdkPixbuf.Pixbuf.new_from_file(
-          Me.path + '/assets/badges/achievements/' + tier + '.svg');
-      const middleground = GdkPixbuf.Pixbuf.new_from_file(
-          Me.path + '/assets/badges/achievements/' + icon + '.svg');
-      const foreground = GdkPixbuf.Pixbuf.new_from_file(
-          Me.path + '/assets/badges/achievements/' + tier + '.png');
+      const background = GdkPixbuf.Pixbuf.new_from_resource(
+          Me.path + '/img/achievements/' + tier + '.svg');
+      const middleground = GdkPixbuf.Pixbuf.new_from_resource(
+          Me.path + '/img/achievements/' + icon + '.svg');
+      const foreground = GdkPixbuf.Pixbuf.new_from_resource(
+          Me.path + '/img/achievements/' + tier + '.png');
 
       Gdk.cairo_set_source_pixbuf(ctx, background, 0, 0);
       ctx.paint();

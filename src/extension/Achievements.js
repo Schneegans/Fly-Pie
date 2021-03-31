@@ -54,8 +54,8 @@ var Achievements = class Achievements {
     //     () => {
     //         // this._notify(
     //         //     'Level up!', 'You just reached level 10!',
-    //         //     Gio.icon_new_for_string(Me.path +
-    //         //     '/assets/badges/levels/level10.png'));
+    //         //     Gio.icon_new_for_resource(
+    //         //     '/img/levels/level10.png'));
     //     }));
 
     // If the gesture-selections statistics key changes (that means that the user selected
