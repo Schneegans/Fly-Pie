@@ -71,6 +71,11 @@ var AchievementsPage = class AchievementsPage {
     const gestureKey = 'stats-gesture-selections';
     const clickKey   = 'stats-click-selections';
 
+    // this._font = this._builder.get_object('stats-abortions')
+    //                  .get_layout()
+    //                  .get_font_description()
+    //                  .copy();
+
     // This object contains information required to draw the charts of the statistics
     // page.
     this._charts = {
@@ -196,20 +201,17 @@ var AchievementsPage = class AchievementsPage {
       // First we render the background of the widget.
       Gtk.render_background(widget.get_style_context(), ctx, 0, 0, width, height);
 
-      // Get some values we will use more often. fgColor will be used for text and thin
-      // lines, fxColor will be used for the actual rings of the pie charts.
-      const fgColor = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
-      const fxColor = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
+      // Get the paint color.
+      const color = widget.get_style_context().get_color();
 
       // Draw the caption below the pie chart.
-      const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
-      font.set_weight(Pango.Weight.BOLD);
+      // this._font.set_weight(Pango.Weight.BOLD);
       const layout = PangoCairo.create_layout(ctx);
-      layout.set_font_description(font);
+      // layout.set_font_description(this._font);
       layout.set_alignment(Pango.Alignment.CENTER);
       layout.set_width(Pango.units_from_double(width));
 
-      ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, fgColor.alpha);
+      ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
       ctx.moveTo(0, height + 2);
 
       let text = charts.name;
@@ -234,9 +236,9 @@ var AchievementsPage = class AchievementsPage {
       }
 
       layout.set_text(this._formatNumber(number), -1);
-      font.set_absolute_size(Pango.units_from_double(24));
-      font.set_weight(Pango.Weight.NORMAL);
-      layout.set_font_description(font);
+      // this._font.set_absolute_size(Pango.units_from_double(24));
+      // this._font.set_weight(Pango.Weight.NORMAL);
+      // layout.set_font_description(this._font);
 
       const extents = layout.get_pixel_extents()[1];
       ctx.moveTo(0, (height - extents.height) / 2);
@@ -272,10 +274,10 @@ var AchievementsPage = class AchievementsPage {
           let lineWidth = 8;
           if (charts.histogramWidgets[i]._hovered) {
             lineWidth = 12;
-            ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.7);
+            ctx.setSourceRGBA(color.red, color.green, color.blue, 0.7);
           } else {
             const alpha = 1.0 - i / charts.data.length;
-            ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, alpha);
+            ctx.setSourceRGBA(color.red, color.green, color.blue, alpha);
           }
 
           ctx.arc(0, 0, r * 0.9, startAngle, endAngle);
@@ -283,7 +285,7 @@ var AchievementsPage = class AchievementsPage {
           ctx.stroke();
 
           // Draw a thin line separating the arcs.
-          ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, fgColor.alpha);
+          ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
           ctx.moveTo(Math.cos(startAngle) * r, Math.sin(startAngle) * r);
           ctx.lineTo(Math.cos(startAngle) * r * 0.8, Math.sin(startAngle) * r * 0.8);
           ctx.setLineWidth(1);
@@ -309,26 +311,26 @@ var AchievementsPage = class AchievementsPage {
     // property to true. When the mouse pointer leaves the histogram, it's set to false
     // again. This property is then used during drawing of the histograms and the
     // corresponding pie charts.
-    drawingArea.connect('enter-notify-event', (widget) => {
-      widget._hovered = true;
+    const controller = Gtk.EventControllerMotion.new();
+    controller.connect('enter', () => {
+      drawingArea._hovered = true;
       this._redrawCharts();
     });
 
-    drawingArea.connect('leave-notify-event', (widget) => {
-      widget._hovered = false;
+    controller.connect('leave', () => {
+      drawingArea._hovered = false;
       this._redrawCharts();
     });
+
+    drawingArea.add_controller(controller);
 
     drawingArea.set_draw_func((widget, ctx) => {
       // Get the data for the pie chart.
       const charts    = this._charts[type];
       const histogram = charts.data[depth - 1];
 
-      // Get some values we will use more often. fgColor will be used for text and thin
-      // lines, fxColor will be used for the actual bars of the histogram.
-      const fgColor = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
-      const fxColor = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
-
+      // Get the paint color.
+      const color = widget.get_style_context().get_color();
 
       // Get the size of the drawing area. The histogram chart will use some padding
       // around to add some spacing to neighboring charts.
@@ -343,7 +345,7 @@ var AchievementsPage = class AchievementsPage {
       Gtk.render_background(widget.get_style_context(), ctx, 0, 0, width, height);
 
       // Then draw the bottom axis.
-      ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.4);
+      ctx.setSourceRGBA(color.red, color.green, color.blue, 0.4);
       ctx.moveTo(leftPadding, height - bottomPadding);
       ctx.lineTo(width - rightPadding, height - bottomPadding);
       ctx.setLineWidth(1);
@@ -357,26 +359,25 @@ var AchievementsPage = class AchievementsPage {
         ctx.lineTo(leftPadding + i * gap + 1, height - bottomPadding + 3);
       }
 
-      ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.2);
+      ctx.setSourceRGBA(color.red, color.green, color.blue, 0.2);
       ctx.setLineWidth(0.5);
       ctx.stroke();
 
       // Then draw the tiny labels for the bottom axis.
       if (widget._hovered) {
-        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.5);
+        ctx.setSourceRGBA(color.red, color.green, color.blue, 0.5);
       } else {
-        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.3);
+        ctx.setSourceRGBA(color.red, color.green, color.blue, 0.3);
       }
 
-      const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
-      font.set_absolute_size(Pango.units_from_double(9));
+      // this._font.set_absolute_size(Pango.units_from_double(9));
 
       for (let i = 0; i <= maxSeconds; i++) {
         const gap = (width - leftPadding - rightPadding - 2) / maxSeconds;
         ctx.moveTo(leftPadding + i * gap - 5, height - bottomPadding + 1);
 
         const layout = PangoCairo.create_layout(ctx);
-        layout.set_font_description(font);
+        // layout.set_font_description(this._font);
         layout.set_alignment(Pango.Alignment.CENTER);
         layout.set_text(i + 's', -1);
         PangoCairo.show_layout(ctx, layout);
@@ -392,9 +393,9 @@ var AchievementsPage = class AchievementsPage {
       if (maxSelections > 0) {
 
         if (widget._hovered) {
-          ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.7);
+          ctx.setSourceRGBA(color.red, color.green, color.blue, 0.7);
         } else {
-          ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, fxColor.alpha);
+          ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
         }
 
         const barWidth = (width - leftPadding - rightPadding) / histogram.length;
@@ -467,10 +468,9 @@ var AchievementsPage = class AchievementsPage {
 
 
       ctx.setSourceRGBA(0, 0, 0, 0.5);
-      const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
       font.set_absolute_size(Pango.units_from_double(11));
       const layout = PangoCairo.create_layout(ctx);
-      layout.set_font_description(font);
+      // layout.set_font_description(this._font);
       layout.set_alignment(Pango.Alignment.CENTER);
       layout.set_width(Pango.units_from_double(128));
       layout.set_text(name, -1);

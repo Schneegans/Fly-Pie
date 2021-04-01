@@ -811,7 +811,6 @@ Can be added to custom menus.</property>
         <property name="spacing">5</property>
         <child>
           <object class="GtkStackSwitcher">
-            <property name="visible">0</property>
             <property name="stack">stack1</property>
           </object>
         </child>
@@ -3644,7 +3643,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="center-background-image">
-                                        <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
@@ -3776,7 +3774,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="center-background-image-hover">
-                                        <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
@@ -4708,7 +4705,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="child-background-image">
-                                        <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
@@ -4822,7 +4818,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="child-background-image-hover">
-                                        <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
@@ -5374,7 +5369,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="grandchild-background-image">
-                                        <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
@@ -5416,7 +5410,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="grandchild-background-image-hover">
-                                        <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
@@ -6952,10 +6945,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                 </child>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">0</property>
-                    <child type="center">
+                    <child>
                       <object class="GtkStackSwitcher">
                         <property name="halign">center</property>
+                        <property name="hexpand">1</property>
                         <property name="margin_top">10</property>
                         <property name="stack">achievements-stack</property>
                       </object>

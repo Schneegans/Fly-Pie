@@ -31,40 +31,42 @@ var Statistics = class Statistics {
   static addSelection(depth, time, gestureOnlySelection) {
 
     // This is disabled for now.
-    return;
+    // this._initSettings();
 
-    this._initSettings();
+    // // We add the selection to one of the histograms with selection counts per
+    // selection
+    // // time. There is one of these histograms for the first four selection depths for
+    // // either point-and-click selections or for gesture selections.
+    // const key =
+    //     gestureOnlySelection ? 'stats-gesture-selections' : 'stats-click-selections';
 
-    // We add the selection to one of the histograms with selection counts per selection
-    // time. There is one of these histograms for the first four selection depths for
-    // either point-and-click selections or for gesture selections.
-    const key =
-        gestureOnlySelection ? 'stats-gesture-selections' : 'stats-click-selections';
+    // // Retrieve all histograms from the settings and make sure that we have four of
+    // them.
+    // // Any selection deeper than five will be recorded in the fourth bin.
+    // const histograms = _settings.get_value(key).deep_unpack();
+    // this._resizeArray(histograms, 4, []);
 
-    // Retrieve all histograms from the settings and make sure that we have four of them.
-    // Any selection deeper than five will be recorded in the fourth bin.
-    const histograms = _settings.get_value(key).deep_unpack();
-    this._resizeArray(histograms, 4, []);
+    // // We limit our histogram to selections which took five seconds. The bin size is
+    // set
+    // // to 200 milliseconds.
+    // const upperBound = 5000;
+    // const binSize    = 200;
+    // const bins       = upperBound / binSize;
 
-    // We limit our histogram to selections which took five seconds. The bin size is set
-    // to 200 milliseconds.
-    const upperBound = 5000;
-    const binSize    = 200;
-    const bins       = upperBound / binSize;
+    // // Then initialize each histogram to the correct bin size.
+    // for (let i = 0; i < histograms.length; i++) {
+    //   this._resizeArray(histograms[i], bins, 0);
+    // }
 
-    // Then initialize each histogram to the correct bin size.
-    for (let i = 0; i < histograms.length; i++) {
-      this._resizeArray(histograms[i], bins, 0);
-    }
+    // // Now select the histogram for the current depth and increase the bin for the
+    // given
+    // // selection time.
+    // const histogram = histograms[depth - 1];
+    // const bin       = Math.floor(Math.min(Math.max(0, time / binSize), bins - 1));
+    // ++histogram[bin];
 
-    // Now select the histogram for the current depth and increase the bin for the given
-    // selection time.
-    const histogram = histograms[depth - 1];
-    const bin       = Math.floor(Math.min(Math.max(0, time / binSize), bins - 1));
-    ++histogram[bin];
-
-    // Finally update the updated histograms.
-    _settings.set_value(key, new GLib.Variant('aau', histograms));
+    // // Finally update the updated histograms.
+    // _settings.set_value(key, new GLib.Variant('aau', histograms));
   }
 
   // Should be called whenever a selection is canceled.
@@ -121,10 +123,8 @@ var Statistics = class Statistics {
   static _addOneTo(key) {
 
     // This is disabled for now.
-    return;
-
-    this._initSettings();
-    _settings.set_uint(key, _settings.get_uint(key) + 1);
+    // this._initSettings();
+    // _settings.set_uint(key, _settings.get_uint(key) + 1);
   }
 
   // Helper method to resize the given JavaScript array to the given size. If the input

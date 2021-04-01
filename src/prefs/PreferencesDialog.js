@@ -62,7 +62,7 @@ var PreferencesDialog = class PreferencesDialog {
     // this._menuEditorPage = new MenuEditorPage(this._builder, this._settings);
 
     // // Initialize the Achievements page.
-    // this._achievementsPage = new AchievementsPage(this._builder, this._settings);
+    this._achievementsPage = new AchievementsPage(this._builder, this._settings);
 
     // Show current version number in about-popover.
     this._builder.get_object('app-name').label = 'Fly-Pie ' + Me.metadata.version;
