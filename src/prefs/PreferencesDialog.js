@@ -58,10 +58,10 @@ var PreferencesDialog = class PreferencesDialog {
     // Initialize the Settings page.
     this._settingsPage = new SettingsPage(this._builder, this._settings);
 
-    // // Initialize the Menu Editor page.
-    // this._menuEditorPage = new MenuEditorPage(this._builder, this._settings);
+    // Initialize the Menu Editor page.
+    this._menuEditorPage = new MenuEditorPage(this._builder, this._settings);
 
-    // // Initialize the Achievements page.
+    // Initialize the Achievements page.
     this._achievementsPage = new AchievementsPage(this._builder, this._settings);
 
     // Show current version number in about-popover.

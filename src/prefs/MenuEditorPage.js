@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                          = imports.cairo;
-const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
+const Cairo                                     = imports.cairo;
+const {GObject, Gdk, GLib, Gtk, Gio, GdkPixbuf} = imports.gi;
 
 const Me                  = imports.misc.extensionUtils.getCurrentExtension();
 const utils               = Me.imports.src.common.utils;
@@ -27,7 +27,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 // all configured menus.
 // clang-format off
 let ColumnTypes = {
-  DISPLAY_ICON:  Cairo.Surface.$gtype,  // The actual Cairo.Surface of the icon.
+  DISPLAY_ICON:  GdkPixbuf.Pixbuf.$gtype,  // The actual Pixbuf of the icon.
   DISPLAY_NAME:  GObject.TYPE_STRING,   // The item / menu name as shown (with markup).
   DISPLAY_ANGLE: GObject.TYPE_STRING,   // Empty if angle is -1
   ICON:          GObject.TYPE_STRING,   // The string representation of the icon.
@@ -154,8 +154,7 @@ var MenuEditorPage = class MenuEditorPage {
       grid.attach(name, 1, 0, 1, 1);
       grid.attach(subtitle, 1, 1, 1, 1);
 
-      row.add(grid);
-      row.show_all();
+      row.set_child(grid);
 
       // The name is important - this is later used to identify the type of the
       // item which is to be created.
@@ -212,7 +211,7 @@ var MenuEditorPage = class MenuEditorPage {
         title: _('Export Menu Configuration'),
         action: Gtk.FileChooserAction.SAVE,
         do_overwrite_confirmation: true,
-        transient_for: button.get_toplevel(),
+        transient_for: button.get_root(),
         modal: true
       });
 
@@ -255,7 +254,7 @@ var MenuEditorPage = class MenuEditorPage {
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
-              transient_for: button.get_toplevel(),
+              transient_for: button.get_root(),
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
               text: _('Failed to export the menu configuration!'),
@@ -277,7 +276,7 @@ var MenuEditorPage = class MenuEditorPage {
       const dialog = new Gtk.FileChooserDialog({
         title: _('Import Menu Configuration'),
         action: Gtk.FileChooserAction.OPEN,
-        transient_for: button.get_toplevel(),
+        transient_for: button.get_root(),
         modal: true
       });
 
@@ -317,7 +316,7 @@ var MenuEditorPage = class MenuEditorPage {
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
-              transient_for: button.get_toplevel(),
+              transient_for: button.get_root(),
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
               text: _('Failed to import menu configuration!'),
@@ -358,7 +357,7 @@ var MenuEditorPage = class MenuEditorPage {
     const nameRender = new Gtk.CellRendererText({xpad: 5});
     menuColumn.pack_start(iconRender, false);
     menuColumn.pack_start(nameRender, true);
-    menuColumn.add_attribute(iconRender, 'surface', this._store.columns.DISPLAY_ICON);
+    menuColumn.add_attribute(iconRender, 'pixbuf', this._store.columns.DISPLAY_ICON);
     menuColumn.add_attribute(nameRender, 'markup', this._store.columns.DISPLAY_NAME);
     this._view.append_column(menuColumn);
 
@@ -375,9 +374,10 @@ var MenuEditorPage = class MenuEditorPage {
     // operations. This is because we can reorder the menu items. We use the special
     // 'GTK_TREE_MODEL_ROW' target. This makes sure that most of the row-reordering
     // functionality works out-of-the-box.
+    const internalFormats = Gdk.ContentFormats.new(['GTK_TREE_MODEL_ROW']);
+    const externalFormats = Gdk.ContentFormats.new(['text/uri-list', 'text/plain']);
     this._view.enable_model_drag_source(
-        Gdk.ModifierType.BUTTON1_MASK,
-        [Gtk.TargetEntry.new('GTK_TREE_MODEL_ROW', Gtk.TargetFlags.SAME_WIDGET, 0)],
+        Gdk.ModifierType.BUTTON1_MASK, internalFormats,
         Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
 
     // However it is a destination for both, internal and external drag'n'drop operations.
@@ -385,217 +385,230 @@ var MenuEditorPage = class MenuEditorPage {
     // occur when something is dragged to the tree view in order to create new items. This
     // can be a file, an URL or some other things.
     this._view.enable_model_drag_dest(
-        [
-          Gtk.TargetEntry.new('GTK_TREE_MODEL_ROW', Gtk.TargetFlags.SAME_WIDGET, 0),
-          Gtk.TargetEntry.new('text/uri-list', 0, 1),
-          Gtk.TargetEntry.new('text/plain', 0, 2)
-        ],
+        internalFormats.union(externalFormats),
         Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
 
     // This is called when a drag'n'drop operation is received.
-    this._view.connect(
-        'drag-data-received', (widget, context, x, y, data, info, time) => {
-          // This lambda creates a new menu item for the given text. If the text is an URI
-          // to a file, a file action is created. If it's a *.desktop file, a "Launch
-          // Application" action is created, an URI action is created for all other URIs.
-          // If text is not an URI, an "Insert Text" action is created.
-          const addItem = (text) => {
-            // Items should only be dropped into custom menus. Depending on the hovered
-            // position and item type, there are three different possible positions:
-            // 1) Drop into the hovered menu as first child.
-            // 2) Insert before the hovered menu at the same level.
-            // 3) Insert after the hovered menu at the same level.
+    // this._view.connect(
+    //     'drag-data-received', (widget, context, x, y, data, info, time) => {
+    //       // This lambda creates a new menu item for the given text. If the text is an
+    //       URI
+    //       // to a file, a file action is created. If it's a *.desktop file, a "Launch
+    //       // Application" action is created, an URI action is created for all other
+    //       URIs.
+    //       // If text is not an URI, an "Insert Text" action is created.
+    //       const addItem = (text) => {
+    //         // Items should only be dropped into custom menus. Depending on the hovered
+    //         // position and item type, there are three different possible positions:
+    //         // 1) Drop into the hovered menu as first child.
+    //         // 2) Insert before the hovered menu at the same level.
+    //         // 3) Insert after the hovered menu at the same level.
 
-            // First try to get the currently hovered item.
-            const [ok, path, pos] = widget.get_dest_row_at_pos(x, y);
+    //         // First try to get the currently hovered item.
+    //         const [ok, path, pos] = widget.get_dest_row_at_pos(x, y);
 
-            if (!ok) {
-              return false;
-            }
+    //         if (!ok) {
+    //           return false;
+    //         }
 
-            // Get the type of the currently hovered menu item.
-            const destIter = this._store.get_iter(path)[1];
-            const type     = this._store.get_value(destIter, this._store.columns.TYPE);
+    //         // Get the type of the currently hovered menu item.
+    //         const destIter = this._store.get_iter(path)[1];
+    //         const type     = this._store.get_value(destIter, this._store.columns.TYPE);
 
-            let newIter;
+    //         let newIter;
 
-            // If it's a custom menu, we drop into it if it's a top-level menu or if we
-            // should drop into anyways. Else we drop before or after as indicated by the
-            // TreeViewDropPosition.
-            if (type === 'CustomMenu') {
+    //         // If it's a custom menu, we drop into it if it's a top-level menu or if we
+    //         // should drop into anyways. Else we drop before or after as indicated by
+    //         the
+    //         // TreeViewDropPosition.
+    //         if (type === 'CustomMenu') {
 
-              if (pos == Gtk.TreeViewDropPosition.INTO_OR_BEFORE ||
-                  pos == Gtk.TreeViewDropPosition.INTO_OR_AFTER ||
-                  this._isToplevel(destIter)) {
-                // 1) above.
-                newIter = this._store.append(destIter);
-              } else if (pos == Gtk.TreeViewDropPosition.BEFORE) {
-                // 2) above.
-                newIter = this._store.insert_before(null, destIter);
-              } else {
-                // 3) above.
-                newIter = this._store.insert_after(null, destIter);
-              }
+    //           if (pos == Gtk.TreeViewDropPosition.INTO_OR_BEFORE ||
+    //               pos == Gtk.TreeViewDropPosition.INTO_OR_AFTER ||
+    //               this._isToplevel(destIter)) {
+    //             // 1) above.
+    //             newIter = this._store.append(destIter);
+    //           } else if (pos == Gtk.TreeViewDropPosition.BEFORE) {
+    //             // 2) above.
+    //             newIter = this._store.insert_before(null, destIter);
+    //           } else {
+    //             // 3) above.
+    //             newIter = this._store.insert_after(null, destIter);
+    //           }
 
-            }
-            // If it's not a custom menu, we cannot drop into. So we have to drop before
-            // or after. This is impossible at top-level.
-            else {
+    //         }
+    //         // If it's not a custom menu, we cannot drop into. So we have to drop
+    //         before
+    //         // or after. This is impossible at top-level.
+    //         else {
 
-              // Things cannot be dropped at top-level, so this is a impossible drop.
-              if (this._isToplevel(destIter)) {
-                return false;
-              }
+    //           // Things cannot be dropped at top-level, so this is a impossible drop.
+    //           if (this._isToplevel(destIter)) {
+    //             return false;
+    //           }
 
-              if (pos == Gtk.TreeViewDropPosition.BEFORE ||
-                  pos == Gtk.TreeViewDropPosition.INTO_OR_BEFORE) {
-                // 2) above.
-                newIter = this._store.insert_before(null, destIter);
-              } else {
-                // 3) above.
-                newIter = this._store.insert_after(null, destIter);
-              }
-            }
+    //           if (pos == Gtk.TreeViewDropPosition.BEFORE ||
+    //               pos == Gtk.TreeViewDropPosition.INTO_OR_BEFORE) {
+    //             // 2) above.
+    //             newIter = this._store.insert_before(null, destIter);
+    //           } else {
+    //             // 3) above.
+    //             newIter = this._store.insert_after(null, destIter);
+    //           }
+    //         }
 
-            // Set default values for newly created items.
-            this._set(newIter, 'ANGLE', -1);
-            this._set(newIter, 'ID', -1);
-            this._set(newIter, 'SHORTCUT', '');
+    //         // Set default values for newly created items.
+    //         this._set(newIter, 'ANGLE', -1);
+    //         this._set(newIter, 'ID', -1);
+    //         this._set(newIter, 'SHORTCUT', '');
 
-            const uriScheme = GLib.uri_parse_scheme(text);
-            let success     = false;
+    //         const uriScheme = GLib.uri_parse_scheme(text);
+    //         let success     = false;
 
-            if (uriScheme != null) {
-              // First we check whether the dragged data contains an URI. If it points to
-              // a *.desktop file, we create a "Launch Application" item the corresponding
-              // application.
-              if (uriScheme == 'file') {
-                const file = Gio.File.new_for_uri(text);
+    //         if (uriScheme != null) {
+    //           // First we check whether the dragged data contains an URI. If it points
+    //           to
+    //           // a *.desktop file, we create a "Launch Application" item the
+    //           corresponding
+    //           // application.
+    //           if (uriScheme == 'file') {
+    //             const file = Gio.File.new_for_uri(text);
 
-                if (file.query_exists(null)) {
+    //             if (file.query_exists(null)) {
 
-                  if (text.endsWith('.desktop')) {
+    //               if (text.endsWith('.desktop')) {
 
-                    const info    = Gio.DesktopAppInfo.new_from_filename(file.get_path());
-                    const newType = 'Command';
+    //                 const info    =
+    //                 Gio.DesktopAppInfo.new_from_filename(file.get_path()); const
+    //                 newType = 'Command';
 
-                    let icon = ItemRegistry.getItemTypes()[newType].icon;
-                    if (info.get_icon()) {
-                      icon = info.get_icon().to_string();
-                    }
+    //                 let icon = ItemRegistry.getItemTypes()[newType].icon;
+    //                 if (info.get_icon()) {
+    //                   icon = info.get_icon().to_string();
+    //                 }
 
-                    if (info != null) {
-                      const data = JSON.stringify({command: info.get_commandline()});
-                      this._set(newIter, 'DATA', data);
-                      this._set(newIter, 'ICON', icon);
-                      this._set(newIter, 'NAME', info.get_display_name());
-                      this._set(newIter, 'TYPE', newType);
+    //                 if (info != null) {
+    //                   const data = JSON.stringify({command: info.get_commandline()});
+    //                   this._set(newIter, 'DATA', data);
+    //                   this._set(newIter, 'ICON', icon);
+    //                   this._set(newIter, 'NAME', info.get_display_name());
+    //                   this._set(newIter, 'TYPE', newType);
 
-                      success = true;
-                    }
-                  }
+    //                   success = true;
+    //                 }
+    //               }
 
-                  // If it's an URI to any other local file, we create an "Open File"
-                  // item.
-                  if (!success) {
-                    const newType = 'File';
-                    const info    = file.query_info('standard::icon', 0, null);
+    //               // If it's an URI to any other local file, we create an "Open File"
+    //               // item.
+    //               if (!success) {
+    //                 const newType = 'File';
+    //                 const info    = file.query_info('standard::icon', 0, null);
 
-                    if (info != null) {
-                      // Skip the file://
-                      const data = JSON.stringify({file: text.substring(7)});
-                      this._set(newIter, 'DATA', data);
-                      this._set(newIter, 'ICON', info.get_icon().to_string());
-                      this._set(newIter, 'NAME', file.get_basename());
-                      this._set(newIter, 'TYPE', newType);
+    //                 if (info != null) {
+    //                   // Skip the file://
+    //                   const data = JSON.stringify({file: text.substring(7)});
+    //                   this._set(newIter, 'DATA', data);
+    //                   this._set(newIter, 'ICON', info.get_icon().to_string());
+    //                   this._set(newIter, 'NAME', file.get_basename());
+    //                   this._set(newIter, 'TYPE', newType);
 
-                      success = true;
-                    }
-                  }
-                }
-              }
+    //                   success = true;
+    //                 }
+    //               }
+    //             }
+    //           }
 
-              if (!success) {
+    //           if (!success) {
 
-                // For any other URI we create an "Open URI" item.
-                const newType = 'Uri';
-                const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
+    //             // For any other URI we create an "Open URI" item.
+    //             const newType = 'Uri';
+    //             const name    = text.length < 20 ? text : text.substring(0, 20) +
+    //             '...';
 
-                this._set(newIter, 'DATA', JSON.stringify({uri: text}));
-                this._set(newIter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
-                this._set(newIter, 'NAME', name);
-                this._set(newIter, 'TYPE', newType);
-                success = true;
-              }
-            }
+    //             this._set(newIter, 'DATA', JSON.stringify({uri: text}));
+    //             this._set(newIter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
+    //             this._set(newIter, 'NAME', name);
+    //             this._set(newIter, 'TYPE', newType);
+    //             success = true;
+    //           }
+    //         }
 
-            // If it's not an URI, we create a "Insert Text" action.
-            else {
-              const newType = 'InsertText';
-              const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
+    //         // If it's not an URI, we create a "Insert Text" action.
+    //         else {
+    //           const newType = 'InsertText';
+    //           const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
 
-              this._set(newIter, 'DATA', JSON.stringify({text: text}));
-              this._set(newIter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
-              this._set(newIter, 'NAME', 'Insert: ' + name);
-              this._set(newIter, 'TYPE', newType);
-            }
+    //           this._set(newIter, 'DATA', JSON.stringify({text: text}));
+    //           this._set(newIter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
+    //           this._set(newIter, 'NAME', 'Insert: ' + name);
+    //           this._set(newIter, 'TYPE', newType);
+    //         }
 
-            return true;
-          };
+    //         return true;
+    //       };
 
-          // The info paramter is a hint to what the dropped data contains. Refer the call
-          // to enable_model_drag_dest() above - there the info numbers are given as last
-          // parameter to the constructor of the TargetEntries.
-          // info == 0: 'GTK_TREE_MODEL_ROW'
-          // info == 1: 'text/uri-list'
-          // info == 2: 'text/plain'
+    //       // The info paramter is a hint to what the dropped data contains. Refer the
+    //       call
+    //       // to enable_model_drag_dest() above - there the info numbers are given as
+    //       last
+    //       // parameter to the constructor of the TargetEntries.
+    //       // info == 0: 'GTK_TREE_MODEL_ROW'
+    //       // info == 1: 'text/uri-list'
+    //       // info == 2: 'text/plain'
 
-          // We do not handle the case info == 0, as this is done by the base class. Due
-          // to the special "GTK_TREE_MODEL_ROW" target, row reordering works
-          // out-of-the-box.
+    //       // We do not handle the case info == 0, as this is done by the base class.
+    //       Due
+    //       // to the special "GTK_TREE_MODEL_ROW" target, row reordering works
+    //       // out-of-the-box.
 
-          // We only handle info == 1 and info == 2. These are the cases when the user
-          // drags something from outside to the tree view (external drag'n'drop). We try
-          // our best to create a menu item for the dragged data.
-          let success = true;
+    //       // We only handle info == 1 and info == 2. These are the cases when the user
+    //       // drags something from outside to the tree view (external drag'n'drop). We
+    //       try
+    //       // our best to create a menu item for the dragged data.
+    //       let success = true;
 
-          if (info == 1) {
-            const uris = data.get_uris();
+    //       if (info == 1) {
+    //         const uris = data.get_uris();
 
-            if (uris == null) {
-              success = false;
-            } else {
-              uris.forEach(uri => {success &= addItem(uri)});
-            }
+    //         if (uris == null) {
+    //           success = false;
+    //         } else {
+    //           uris.forEach(uri => {success &= addItem(uri)});
+    //         }
 
-            // Independent of the selected drag'n'drop action, the drag source shouldn't
-            // remove any source data.
-            Gtk.drag_finish(context, success, false, time);
+    //         // Independent of the selected drag'n'drop action, the drag source
+    //         shouldn't
+    //         // remove any source data.
+    //         Gtk.drag_finish(context, success, false, time);
 
-          } else if (info == 2) {
+    //       } else if (info == 2) {
 
-            const text = data.get_text();
+    //         const text = data.get_text();
 
-            if (text == null) {
-              success = false;
-            } else {
-              success &= addItem(text);
-            }
+    //         if (text == null) {
+    //           success = false;
+    //         } else {
+    //           success &= addItem(text);
+    //         }
 
-            //  Independent of the selected drag'n'drop action, the drag source shouldn't
-            //  remove any source data.
-            Gtk.drag_finish(context, success, false, time);
-          }
-        });
+    //         //  Independent of the selected drag'n'drop action, the drag source
+    //         shouldn't
+    //         //  remove any source data.
+    //         Gtk.drag_finish(context, success, false, time);
+    //       }
+    //     });
 
     // Delete the selected item when the Delete key is pressed.
-    this._view.connect('key-release-event', (widget, event) => {
-      if (event.get_keyval()[1] == Gdk.KEY_Delete) {
+    const controller = Gtk.EventControllerKey.new();
+    controller.connect('key-released', (controller, keyval, keycode, state) => {
+      if (keyval == Gdk.KEY_Delete) {
         this._deleteSelected();
         return true;
       }
       return false;
     });
+
+    this._view.add_controller(controller);
 
     // When a new row is inserted or an existing row is dragged around, we make sure
     // that it stays selected and additionally we save the menu configuration.
@@ -701,16 +714,16 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     // Hide the popover when a file of the select-a-custom-icon dialog is activated.
-    const iconChooser = this._builder.get_object('icon-file-chooser');
-    iconChooser.connect('file-activated', (chooser) => {
-      this._builder.get_object('icon-popover').popdown();
-    });
+    // const iconChooser = this._builder.get_object('icon-file-chooser');
+    // iconChooser.connect('file-activated', (chooser) => {
+    //   this._builder.get_object('icon-popover').popdown();
+    // });
 
     // Set the text of the icon name input field when a file of the select-a-custom-icon
     // dialog is selected.
-    iconChooser.connect('selection-changed', (chooser) => {
-      this._builder.get_object('icon-name').text = chooser.get_filename();
-    });
+    // iconChooser.connect('selection-changed', (chooser) => {
+    //   this._builder.get_object('icon-name').text = chooser.get_filename();
+    // });
 
     // Draw an icon to the drawing area whenever it's invalidated. This happens usually
     // when the text of the icon name input field changes.
@@ -718,7 +731,7 @@ var MenuEditorPage = class MenuEditorPage {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const icon  = this._getSelected('ICON');
       const font  = this._settings.get_string('font');
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
       if (icon && icon.length > 0) {
         utils.paintIcon(ctx, icon, size, 1, font, color);
       }
@@ -792,9 +805,8 @@ var MenuEditorPage = class MenuEditorPage {
       const [box, label] = ConfigWidgetFactory.createShortcutLabel(false, (shortcut) => {
         this._setSelected('SHORTCUT', shortcut);
       });
-      this._builder.get_object('menu-shortcut-box').pack_start(box, false, false, 0);
+      this._builder.get_object('menu-shortcut-box').append(box);
       this._menuShortcutLabel = label;
-      box.show_all();
     }
 
     // When the currently selected menu item changes, the content of the settings widgets
@@ -867,9 +879,6 @@ var MenuEditorPage = class MenuEditorPage {
         // widget for the selected type.
         if (config) {
 
-          // First we remove any previous configuration widget.
-          revealer.foreach((oldChild) => {revealer.remove(oldChild)});
-
           // To populate the new configuration widget with data, we retrieve the data from
           // the tree store's data column. This **should** be a JSON string, but if
           // someone tries to load a config from Fly-Pie 4 or older, this may not be the
@@ -900,8 +909,7 @@ var MenuEditorPage = class MenuEditorPage {
             }
           });
 
-          revealer.add(newChild);
-          newChild.show_all();
+          revealer.set_child(newChild);
         }
 
         // All modifications are done, all future modifications will come from the user
@@ -979,7 +987,7 @@ var MenuEditorPage = class MenuEditorPage {
       });
 
       // Don't show new tips when the window got closed.
-      return label.get_toplevel().visible;
+      return label.get_root().visible;
     });
 
     label.connect('destroy', () => {
@@ -1049,7 +1057,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     // Create the question dialog.
     const dialog = new Gtk.MessageDialog({
-      transient_for: this._builder.get_object('main-notebook').get_toplevel(),
+      transient_for: this._builder.get_object('main-notebook').get_root(),
       modal: true,
       buttons: Gtk.ButtonsType.OK_CANCEL,
       message_type: Gtk.MessageType.QUESTION,
@@ -1115,8 +1123,11 @@ var MenuEditorPage = class MenuEditorPage {
     if (column == 'ICON') {
       let iconSize = this._isToplevel(iter) ? 24 : 16;
       const font   = this._settings.get_string('font');
-      const color  = this._view.get_style_context().get_color(Gtk.StateFlags.NORMAL);
-      this._set(iter, 'DISPLAY_ICON', utils.createIcon(data, iconSize, font, color));
+      const color  = this._view.get_style_context().get_color();
+      this._set(
+          iter, 'DISPLAY_ICON',
+          Gdk.pixbuf_get_from_surface(
+              utils.createIcon(data, iconSize, font, color), 0, 0, iconSize, iconSize));
     }
 
     // If the angle, was set, update the "DISPLAY_ANGLE" as well. For top-level menus,
@@ -1135,8 +1146,8 @@ var MenuEditorPage = class MenuEditorPage {
         let shortcut      = _('Not bound.');
         const accelerator = this._get(iter, 'SHORTCUT');
         if (accelerator) {
-          const [keyval, mods] = Gtk.accelerator_parse(accelerator);
-          shortcut             = Gtk.accelerator_get_label(keyval, mods);
+          const [ok, keyval, mods] = Gtk.accelerator_parse(accelerator);
+          shortcut                 = Gtk.accelerator_get_label(keyval, mods);
         }
         this._set(
             iter, 'DISPLAY_NAME',
@@ -1153,8 +1164,8 @@ var MenuEditorPage = class MenuEditorPage {
       if (this._isToplevel(iter)) {
         let shortcut = _('Not bound.');
         if (data != '') {
-          const [keyval, mods] = Gtk.accelerator_parse(data);
-          shortcut             = Gtk.accelerator_get_label(keyval, mods);
+          const [ok, keyval, mods] = Gtk.accelerator_parse(data);
+          shortcut                 = Gtk.accelerator_get_label(keyval, mods);
         }
         const name = this._get(iter, 'NAME');
         this._set(
