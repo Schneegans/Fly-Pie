@@ -242,8 +242,7 @@ var SettingsPage = class SettingsPage {
       const dialog = new Gtk.FileChooserDialog({
         title: _('Save Preset'),
         action: Gtk.FileChooserAction.SAVE,
-        do_overwrite_confirmation: true,
-        transient_for: button.get_toplevel(),
+        transient_for: button.get_root(),
         modal: true
       });
 
@@ -267,7 +266,7 @@ var SettingsPage = class SettingsPage {
       dialog.connect('response', (dialog, response_id) => {
         if (response_id === Gtk.ResponseType.OK) {
           try {
-            let path = dialog.get_filename();
+            let path = dialog.get_file().get_path();
 
             // Make sure we have a *.json extension.
             if (!path.endsWith('.json')) {
@@ -328,7 +327,7 @@ var SettingsPage = class SettingsPage {
       const dialog = new Gtk.FileChooserDialog({
         title: _('Load Preset'),
         action: Gtk.FileChooserAction.OPEN,
-        transient_for: button.get_toplevel(),
+        transient_for: button.get_root(),
         modal: true
       });
 
@@ -352,12 +351,11 @@ var SettingsPage = class SettingsPage {
       dialog.connect('response', (dialog, response_id) => {
         if (response_id === Gtk.ResponseType.OK) {
           try {
-            const file = Gio.File.new_for_path(dialog.get_filename());
-            Preset.load(file);
+            Preset.load(dialog.get_file());
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
-              transient_for: button.get_toplevel(),
+              transient_for: button.get_root(),
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
               text: _('Failed to load preset!'),

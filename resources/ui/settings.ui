@@ -4,8 +4,8 @@
   <object class="GtkPopover" id="about-popover">
     <property name="child">
       <object class="GtkBox">
-        <property name="margin-start">5</property>
-        <property name="margin-end">5</property>
+        <property name="margin_start">5</property>
+        <property name="margin_end">5</property>
         <property name="margin_top">5</property>
         <property name="margin_bottom">5</property>
         <property name="orientation">vertical</property>
@@ -595,8 +595,8 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
           <object class="GtkSpinner" id="icon-load-spinner">
             <property name="halign">end</property>
             <property name="valign">start</property>
-            <property name="margin-start">5</property>
-            <property name="margin-end">5</property>
+            <property name="margin_start">5</property>
+            <property name="margin_end">5</property>
             <property name="margin_top">5</property>
             <property name="margin_bottom">5</property>
             <property name="spinning">1</property>
@@ -615,8 +615,8 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
               <object class="GtkNotebookPage">
                 <property name="child">
                   <object class="GtkGrid">
-                    <property name="margin-start">5</property>
-                    <property name="margin-end">5</property>
+                    <property name="margin_start">5</property>
+                    <property name="margin_end">5</property>
                     <property name="margin_top">5</property>
                     <property name="margin_bottom">5</property>
                     <property name="row_spacing">4</property>
@@ -636,8 +636,8 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                         <property name="vexpand">1</property>
                         <property name="child">
                           <object class="GtkIconView" id="icon-view">
-                            <property name="margin-start">4</property>
-                            <property name="margin-end">4</property>
+                            <property name="margin_start">4</property>
+                            <property name="margin_end">4</property>
                             <property name="margin-top">4</property>
                             <property name="margin-bottom">4</property>
                             <property name="item_orientation">horizontal</property>
@@ -676,8 +676,8 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                 <property name="position">1</property>
                 <property name="child">
                   <object class="GtkFileChooserWidget" id="icon-file-chooser">
-                    <property name="margin-start">5</property>
-                    <property name="margin-end">5</property>
+                    <property name="margin_start">5</property>
+                    <property name="margin_end">5</property>
                     <property name="margin_top">5</property>
                     <property name="margin_bottom">5</property>
                     <property name="filter">image-file-filter</property>
@@ -714,8 +714,8 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
   <object class="GtkPopover" id="item-type-popover">
     <property name="child">
       <object class="GtkGrid">
-        <property name="margin-start">5</property>
-        <property name="margin-end">5</property>
+        <property name="margin_start">5</property>
+        <property name="margin_end">5</property>
         <property name="margin_top">5</property>
         <property name="margin_bottom">5</property>
         <property name="row_spacing">5</property>
@@ -735,13 +735,13 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                         <child>
                           <object class="GtkListBoxRow">
                             <property name="name">separator</property>
-                            <property name="margin-end">10</property>
+                            <property name="margin_end">10</property>
                             <property name="activatable">0</property>
                             <property name="selectable">0</property>
                             <property name="child">
                               <object class="GtkLabel">
                                 <property name="halign">start</property>
-                                <property name="margin-start">6</property>
+                                <property name="margin_start">6</property>
                                 <property name="margin_top">10</property>
                                 <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">&lt;b&gt;Menus&lt;/b&gt;
 Can be submenus or top-level menus.</property>
@@ -761,13 +761,13 @@ Can be submenus or top-level menus.</property>
                         <child>
                           <object class="GtkListBoxRow">
                             <property name="name">separator</property>
-                            <property name="margin-end">10</property>
+                            <property name="margin_end">10</property>
                             <property name="activatable">0</property>
                             <property name="selectable">0</property>
                             <property name="child">
                               <object class="GtkLabel">
                                 <property name="halign">start</property>
-                                <property name="margin-start">6</property>
+                                <property name="margin_start">6</property>
                                 <property name="margin_top">10</property>
                                 <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">&lt;b&gt;Actions&lt;/b&gt;
 Can be added to custom menus.</property>
@@ -803,8 +803,8 @@ Can be added to custom menus.</property>
   <object class="GtkPopover" id="preset-popover">
     <property name="child">
       <object class="GtkBox">
-        <property name="margin-start">5</property>
-        <property name="margin-end">5</property>
+        <property name="margin_start">5</property>
+        <property name="margin_end">5</property>
         <property name="margin_top">5</property>
         <property name="margin_bottom">5</property>
         <property name="orientation">vertical</property>
@@ -949,7 +949,6 @@ Can be added to custom menus.</property>
         <property name="revealed">0</property>
         <child>
           <object class="GtkBox">
-            <property name="can_focus">0</property>
             <property name="spacing">6</property>
             <child>
               <object class="GtkButton" id="enable-animations-button">
@@ -977,18 +976,10 @@ Can be added to custom menus.</property>
         <property name="halign">center</property>
         <child>
           <object class="GtkMenuButton" id="about-button">
-            <property name="focus_on_click">0</property>
             <property name="halign">center</property>
             <property name="popover">about-popover</property>
-            <child>
-              <object class="GtkImage">
-                <property name="halign">center</property>
-                <property name="icon_name">dialog-information-symbolic</property>
-              </object>
-            </child>
-            <style>
-              <class name="pill-button" />
-            </style>
+            <property name="icon_name">dialog-information-symbolic</property>
+            <property name="has_frame">0</property>
           </object>
         </child>
         <child type="center">
@@ -1002,8 +993,8 @@ Can be added to custom menus.</property>
     <child>
       <object class="GtkStack" id="main-stack">
         <property name="width_request">600</property>
-        <property name="margin-start">10</property>
-        <property name="margin-end">10</property>
+        <property name="margin_start">10</property>
+        <property name="margin_end">10</property>
         <property name="margin_top">10</property>
         <property name="margin_bottom">10</property>
         <property name="vexpand">1</property>
@@ -1247,8 +1238,8 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                     <property name="has_frame">0</property>
                                     <child>
                                       <object class="GtkBox">
-                                        <property name="margin-start">8</property>
-                                        <property name="margin-end">8</property>
+                                        <property name="margin_start">8</property>
+                                        <property name="margin_end">8</property>
                                         <property name="margin_top">2</property>
                                         <property name="margin_bottom">2</property>
                                         <property name="spacing">5</property>
@@ -1514,8 +1505,8 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                                     <property name="has_frame">0</property>
                                     <child>
                                       <object class="GtkBox">
-                                        <property name="margin-start">8</property>
-                                        <property name="margin-end">8</property>
+                                        <property name="margin_start">8</property>
+                                        <property name="margin_end">8</property>
                                         <property name="margin_top">2</property>
                                         <property name="margin_bottom">2</property>
                                         <property name="spacing">5</property>
@@ -1699,8 +1690,8 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                         <child>
                           <object class="GtkGrid">
                             <property name="valign">center</property>
-                            <property name="margin-start">10</property>
-                            <property name="margin-end">10</property>
+                            <property name="margin_start">10</property>
+                            <property name="margin_end">10</property>
                             <property name="margin_top">10</property>
                             <property name="margin_bottom">10</property>
                             <property name="column_spacing">6</property>
@@ -1733,8 +1724,8 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                       <object class="GtkBox">
                         <property name="hexpand">1</property>
                         <property name="halign">center</property>
-                        <property name="margin-start">50</property>
-                        <property name="margin-end">50</property>
+                        <property name="margin_start">50</property>
+                        <property name="margin_end">50</property>
                         <property name="spacing">6</property>
                         <child>
                           <object class="GtkCheckButton" id="tutorial-page-button-0">
@@ -1775,8 +1766,8 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                         <child>
                           <object class="GtkGrid">
                             <property name="valign">center</property>
-                            <property name="margin-start">10</property>
-                            <property name="margin-end">10</property>
+                            <property name="margin_start">10</property>
+                            <property name="margin_end">10</property>
                             <property name="margin_top">10</property>
                             <property name="margin_bottom">10</property>
                             <property name="column_spacing">6</property>
@@ -1841,8 +1832,8 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             <property name="selectable">0</property>
                             <property name="child">
                               <object class="GtkGrid">
-                                <property name="margin-start">10</property>
-                                <property name="margin-end">10</property>
+                                <property name="margin_start">10</property>
+                                <property name="margin_end">10</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
                                 <property name="row_spacing">4</property>
@@ -1889,8 +1880,8 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     <property name="margin_bottom">6</property>
                                     <child>
                                       <object class="GtkGrid">
-                                        <property name="margin-start">8</property>
-                                        <property name="margin-end">8</property>
+                                        <property name="margin_start">8</property>
+                                        <property name="margin_end">8</property>
                                         <property name="column_spacing">6</property>
                                         <child>
                                           <object class="GtkImage">
@@ -1951,8 +1942,8 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                             <property name="selectable">0</property>
                             <property name="child">
                               <object class="GtkGrid">
-                                <property name="margin-start">10</property>
-                                <property name="margin-end">10</property>
+                                <property name="margin_start">10</property>
+                                <property name="margin_end">10</property>
                                 <property name="margin_top">10</property>
                                 <property name="margin_bottom">10</property>
                                 <property name="row_spacing">10</property>
@@ -1996,40 +1987,15 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                   <object class="GtkBox">
                                     <child>
                                       <object class="GtkMenuButton">
-                                        <property name="focus_on_click">0</property>
-                                        <property name="direction">none</property>
                                         <property name="popover">preset-popover</property>
-                                        <child>
-                                          <object class="GtkGrid">
-                                            <property name="column_spacing">6</property>
-                                            <child>
-                                              <object class="GtkImage">
-                                                <property name="halign">end</property>
-                                                <property name="icon_name">pan-down-symbolic</property>
-                                                <layout>
-                                                  <property name="column">1</property>
-                                                  <property name="row">0</property>
-                                                </layout>
-                                              </object>
-                                            </child>
-                                            <child>
-                                              <object class="GtkLabel">
-                                                <property name="halign">start</property>
-                                                <property name="vexpand">1</property>
-                                                <property name="label" translatable="yes">Presets</property>
-                                                <layout>
-                                                  <property name="column">0</property>
-                                                  <property name="row">0</property>
-                                                </layout>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
+                                        <property name="has_frame">0</property>
+                                        <property name="icon_name">pan-down-symbolic</property>
+                                        <property name="label" translatable="yes">Presets</property>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="load-preset-button">
-                                        <property name="halign">center</property>
+                                        <property name="has_frame">0</property>
                                         <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Load settings fom a file</property>
                                         <child>
                                           <object class="GtkImage">
@@ -2040,7 +2006,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="save-preset-button">
-                                        <property name="halign">center</property>
+                                        <property name="has_frame">0</property>
                                         <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Save the current settings to a file</property>
                                         <child>
                                           <object class="GtkImage">
@@ -2049,9 +2015,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                         </child>
                                       </object>
                                     </child>
-                                    <style>
-                                      <class name="linked" />
-                                    </style>
                                     <layout>
                                       <property name="column">1</property>
                                       <property name="row">0</property>
@@ -2090,8 +2053,8 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                 <property name="selectable">0</property>
                                 <property name="child">
                                   <object class="GtkGrid">
-                                    <property name="margin-start">15</property>
-                                    <property name="margin-end">10</property>
+                                    <property name="margin_start">15</property>
+                                    <property name="margin_end">10</property>
                                     <property name="margin_top">10</property>
                                     <property name="margin_bottom">10</property>
                                     <property name="row_spacing">10</property>
@@ -2138,7 +2101,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     </child>
                                     <child>
                                       <object class="GtkGrid">
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="row_spacing">2</property>
                                         <child>
                                           <object class="GtkLabel">
@@ -2250,7 +2213,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="vexpand">1</property>
                                         <property name="label" translatable="yes">Background Color</property>
                                         <layout>
@@ -2393,8 +2356,8 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                 <property name="selectable">0</property>
                                 <property name="child">
                                   <object class="GtkGrid">
-                                    <property name="margin-start">15</property>
-                                    <property name="margin-end">10</property>
+                                    <property name="margin_start">15</property>
+                                    <property name="margin_end">10</property>
                                     <property name="margin_top">10</property>
                                     <property name="margin_bottom">10</property>
                                     <property name="row_spacing">10</property>
@@ -2412,12 +2375,12 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                       <object class="GtkGrid">
                                         <property name="halign">start</property>
                                         <property name="valign">center</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="row_spacing">2</property>
                                         <child>
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
-                                            <property name="margin-end">20</property>
+                                            <property name="margin_end">20</property>
                                             <property name="label" translatable="yes">Size</property>
                                             <layout>
                                               <property name="column">0</property>
@@ -2428,7 +2391,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                         <child>
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
-                                            <property name="margin-end">20</property>
+                                            <property name="margin_end">20</property>
                                             <property name="label" translatable="yes" comments="Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.">Clicking inside the inner radius
 will cancel the selection.</property>
                                             <style>
@@ -2450,7 +2413,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Wedge Separators</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -2463,7 +2426,7 @@ will cancel the selection.</property>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
                                         <property name="valign">center</property>
-                                        <property name="margin-end">5</property>
+                                        <property name="margin_end">5</property>
                                         <property name="vexpand">1</property>
                                         <property name="label" translatable="yes">Color</property>
                                         <property name="justify">right</property>
@@ -2480,7 +2443,7 @@ will cancel the selection.</property>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
                                         <property name="valign">center</property>
-                                        <property name="margin-end">5</property>
+                                        <property name="margin_end">5</property>
                                         <property name="vexpand">1</property>
                                         <property name="label" translatable="yes">Width</property>
                                         <property name="justify">right</property>
@@ -2531,7 +2494,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Wedge Color</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -2553,7 +2516,7 @@ will cancel the selection.</property>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
                                         <property name="valign">center</property>
-                                        <property name="margin-end">5</property>
+                                        <property name="margin_end">5</property>
                                         <property name="vexpand">1</property>
                                         <property name="label" translatable="yes">Width</property>
                                         <property name="justify">right</property>
@@ -2569,7 +2532,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkScale">
                                         <property name="draw-value">1</property>
-                                        <property name="margin-end">5</property>
+                                        <property name="margin_end">5</property>
                                         <property name="hexpand">1</property>
                                         <property name="adjustment">wedge-width</property>
                                         <property name="restrict_to_fill_level">0</property>
@@ -2587,7 +2550,7 @@ will cancel the selection.</property>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
                                         <property name="valign">center</property>
-                                        <property name="margin-end">5</property>
+                                        <property name="margin_end">5</property>
                                         <property name="vexpand">1</property>
                                         <property name="label" translatable="yes">Inner Radius</property>
                                         <property name="justify">right</property>
@@ -2603,7 +2566,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkScale">
                                         <property name="draw-value">1</property>
-                                        <property name="margin-end">5</property>
+                                        <property name="margin_end">5</property>
                                         <property name="hexpand">1</property>
                                         <property name="adjustment">wedge-inner-radius</property>
                                         <property name="restrict_to_fill_level">0</property>
@@ -2626,7 +2589,7 @@ will cancel the selection.</property>
                                           <object class="GtkLabel">
                                             <property name="halign">center</property>
                                             <property name="valign">center</property>
-                                            <property name="margin-end">5</property>
+                                            <property name="margin_end">5</property>
                                             <property name="vexpand">1</property>
                                             <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Inactive</property>
                                             <property name="justify">right</property>
@@ -2643,7 +2606,7 @@ will cancel the selection.</property>
                                           <object class="GtkLabel">
                                             <property name="halign">center</property>
                                             <property name="valign">center</property>
-                                            <property name="margin-end">5</property>
+                                            <property name="margin_end">5</property>
                                             <property name="vexpand">1</property>
                                             <property name="label" translatable="yes" comments="When the mouse pointer is over the item">Hovered</property>
                                             <property name="justify">right</property>
@@ -2658,7 +2621,7 @@ will cancel the selection.</property>
                                         </child>
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="can_focus">0</property>
+                                            <property name="homogeneous">1</property>
                                             <child>
                                               <object class="GtkColorButton" id="wedge-color">
                                                 <property name="hexpand">1</property>
@@ -2672,6 +2635,9 @@ will cancel the selection.</property>
                                                 <property name="show_editor">1</property>
                                               </object>
                                             </child>
+                                            <style>
+                                              <class name="linked" />
+                                            </style>
                                             <layout>
                                               <property name="column">0</property>
                                               <property name="row">1</property>
@@ -2758,8 +2724,8 @@ will cancel the selection.</property>
                                 <property name="selectable">0</property>
                                 <property name="child">
                                   <object class="GtkGrid">
-                                    <property name="margin-start">15</property>
-                                    <property name="margin-end">10</property>
+                                    <property name="margin_start">15</property>
+                                    <property name="margin_end">10</property>
                                     <property name="margin_top">10</property>
                                     <property name="margin_bottom">10</property>
                                     <property name="row_spacing">10</property>
@@ -2792,7 +2758,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Size</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -2854,7 +2820,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Saturation</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">center-auto-color-saturation</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -2871,7 +2837,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Luminance</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">center-auto-color-luminance</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -2888,7 +2854,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Opacity</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">center-auto-color-opacity</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -2942,21 +2908,23 @@ will cancel the selection.</property>
                                         </child>
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="can_focus">0</property>
-                                            <property name="hexpand">1</property>
-                                            <property name="homogeneous">1</property>
                                             <child>
                                               <object class="GtkToggleButton" id="center-color-mode-fixed">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="center-color-mode-auto">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically">Auto</property>
                                                 <property name="group">center-color-mode-fixed</property>
                                               </object>
                                             </child>
+                                            <style>
+                                              <class name="linked" />
+                                            </style>
                                             <layout>
                                               <property name="column">0</property>
                                               <property name="row">0</property>
@@ -3004,20 +2972,23 @@ will cancel the selection.</property>
                                       <object class="GtkGrid">
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="can_focus">0</property>
-                                            <property name="hexpand">1</property>
                                             <child>
                                               <object class="GtkToggleButton" id="center-color-mode-hover-fixed">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="center-color-mode-hover-auto">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically">Auto</property>
                                                 <property name="group">center-color-mode-hover-fixed</property>
                                               </object>
                                             </child>
+                                            <style>
+                                              <class name="linked" />
+                                            </style>
                                             <layout>
                                               <property name="column">0</property>
                                               <property name="row">0</property>
@@ -3052,7 +3023,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Saturation</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">center-auto-color-saturation-hover</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -3069,7 +3040,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Luminance</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">center-auto-color-luminance-hover</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -3086,7 +3057,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Opacity</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">center-auto-color-opacity-hover</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -3206,7 +3177,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Icon Opacity</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -3334,7 +3305,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Icon Scale</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -3345,7 +3316,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Background Color</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -3364,7 +3335,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="center-background-image">
-                                        <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
                                         <property name="width_chars">0</property>
@@ -3386,7 +3356,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Icon Crop</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -3448,7 +3418,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Background Image</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -3458,7 +3428,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="center-background-image-hover">
-                                        <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
                                         <property name="width_chars">0</property>
@@ -3519,8 +3488,8 @@ will cancel the selection.</property>
                                 <property name="selectable">0</property>
                                 <property name="child">
                                   <object class="GtkGrid">
-                                    <property name="margin-start">15</property>
-                                    <property name="margin-end">10</property>
+                                    <property name="margin_start">15</property>
+                                    <property name="margin_end">10</property>
                                     <property name="margin_top">10</property>
                                     <property name="margin_bottom">10</property>
                                     <property name="row_spacing">10</property>
@@ -3565,25 +3534,30 @@ will cancel the selection.</property>
                                       <object class="GtkGrid">
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="can_focus">0</property>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-fixed">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-auto">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically">Auto</property>
                                                 <property name="group">child-color-mode-fixed</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-parent">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent&apos;s setting">Parent</property>
                                                 <property name="group">child-color-mode-fixed</property>
                                               </object>
                                             </child>
+                                            <style>
+                                              <class name="linked" />
+                                            </style>
                                             <layout>
                                               <property name="column">0</property>
                                               <property name="row">0</property>
@@ -3618,7 +3592,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Saturation</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">child-auto-color-saturation</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -3635,7 +3609,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Luminance</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">child-auto-color-luminance</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -3652,7 +3626,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Opacity</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">child-auto-color-opacity</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -3714,25 +3688,30 @@ will cancel the selection.</property>
                                       <object class="GtkGrid">
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="can_focus">0</property>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-hover-fixed">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-hover-auto">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically">Auto</property>
                                                 <property name="group">child-color-mode-hover-fixed</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="child-color-mode-hover-parent">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent&apos;s setting">Parent</property>
                                                 <property name="group">child-color-mode-hover-fixed</property>
                                               </object>
                                             </child>
+                                            <style>
+                                              <class name="linked" />
+                                            </style>
                                             <layout>
                                               <property name="column">0</property>
                                               <property name="row">0</property>
@@ -3767,7 +3746,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Saturation</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">child-auto-color-saturation-hover</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -3784,7 +3763,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Luminance</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">child-auto-color-luminance-hover</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -3801,7 +3780,7 @@ will cancel the selection.</property>
                                                 <child>
                                                   <object class="GtkScale">
                                                     <property name="tooltip_text" translatable="yes">Opacity</property>
-                                                    <property name="margin-start">5</property>
+                                                    <property name="margin_start">5</property>
                                                     <property name="hexpand">1</property>
                                                     <property name="adjustment">child-auto-color-opacity-hover</property>
                                                     <property name="restrict_to_fill_level">0</property>
@@ -3862,7 +3841,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Size</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -3873,7 +3852,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Offset</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -3980,7 +3959,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkGrid">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="row_spacing">2</property>
                                         <child>
                                           <object class="GtkLabel">
@@ -4043,7 +4022,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Icon Opacity</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -4086,7 +4065,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Background Color</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -4233,7 +4212,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Icon Scale</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -4261,7 +4240,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="child-background-image">
-                                        <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
                                         <property name="width_chars">0</property>
@@ -4283,7 +4261,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Icon Crop</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -4345,7 +4323,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Background Image</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -4355,7 +4333,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="child-background-image-hover">
-                                        <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
                                         <property name="width_chars">0</property>
@@ -4416,8 +4393,8 @@ will cancel the selection.</property>
                                 <property name="selectable">0</property>
                                 <property name="child">
                                   <object class="GtkGrid">
-                                    <property name="margin-start">15</property>
-                                    <property name="margin-end">10</property>
+                                    <property name="margin_start">15</property>
+                                    <property name="margin_end">10</property>
                                     <property name="margin_top">10</property>
                                     <property name="margin_bottom">10</property>
                                     <property name="row_spacing">10</property>
@@ -4452,7 +4429,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Background Color</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -4473,21 +4450,23 @@ will cancel the selection.</property>
                                       <object class="GtkGrid">
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="can_focus">0</property>
-                                            <property name="hexpand">1</property>
-                                            <property name="homogeneous">1</property>
                                             <child>
                                               <object class="GtkToggleButton" id="grandchild-color-mode-fixed">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="grandchild-color-mode-parent">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent&apos;s setting">Parent</property>
                                                 <property name="group">grandchild-color-mode-fixed</property>
                                               </object>
                                             </child>
+                                            <style>
+                                              <class name="linked" />
+                                            </style>
                                             <layout>
                                               <property name="column">0</property>
                                               <property name="row">0</property>
@@ -4522,21 +4501,23 @@ will cancel the selection.</property>
                                       <object class="GtkGrid">
                                         <child>
                                           <object class="GtkBox">
-                                            <property name="can_focus">0</property>
-                                            <property name="hexpand">1</property>
-                                            <property name="homogeneous">1</property>
                                             <child>
                                               <object class="GtkToggleButton" id="grandchild-color-mode-hover-fixed">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically">Fixed</property>
                                                 <property name="active">1</property>
                                               </object>
                                             </child>
                                             <child>
                                               <object class="GtkToggleButton" id="grandchild-color-mode-hover-parent">
+                                                <property name="hexpand">1</property>
                                                 <property name="label" translatable="yes" comments="Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent&apos;s setting">Parent</property>
                                                 <property name="group">grandchild-color-mode-hover-fixed</property>
                                               </object>
                                             </child>
+                                            <style>
+                                              <class name="linked" />
+                                            </style>
                                             <layout>
                                               <property name="column">0</property>
                                               <property name="row">0</property>
@@ -4570,7 +4551,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Size</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -4581,7 +4562,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Offset</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -4666,7 +4647,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkGrid">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="row_spacing">2</property>
                                         <child>
                                           <object class="GtkLabel">
@@ -4816,7 +4797,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="grandchild-background-image">
-                                        <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
                                         <property name="width_chars">0</property>
@@ -4857,7 +4837,6 @@ will cancel the selection.</property>
                                     </child>
                                     <!-- <child>
                                       <object class="GtkFileChooserButton" id="grandchild-background-image-hover">
-                                        <property name="can_focus">False</property>
                                         <property name="filter">image-file-filter</property>
                                         <property name="title" translatable="yes"></property>
                                         <property name="width_chars">0</property>
@@ -4899,8 +4878,8 @@ will cancel the selection.</property>
                                 <property name="selectable">0</property>
                                 <property name="child">
                                   <object class="GtkGrid">
-                                    <property name="margin-start">15</property>
-                                    <property name="margin-end">10</property>
+                                    <property name="margin_start">15</property>
+                                    <property name="margin_end">10</property>
                                     <property name="margin_top">10</property>
                                     <property name="margin_bottom">10</property>
                                     <property name="row_spacing">10</property>
@@ -4935,7 +4914,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Thickness</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -4946,7 +4925,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Color</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -5029,7 +5008,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="margin-end">20</property>
+                                        <property name="margin_end">20</property>
                                         <property name="label" translatable="yes">Minimum Segment Length</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -5078,8 +5057,8 @@ will cancel the selection.</property>
                                 <property name="selectable">0</property>
                                 <property name="child">
                                   <object class="GtkGrid">
-                                    <property name="margin-start">15</property>
-                                    <property name="margin-end">10</property>
+                                    <property name="margin_start">15</property>
+                                    <property name="margin_end">10</property>
                                     <property name="margin_top">10</property>
                                     <property name="margin_bottom">10</property>
                                     <property name="row_spacing">8</property>
@@ -5524,8 +5503,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                       <object class="GtkBox" id="menu-toolbar">
                         <child>
                           <object class="GtkMenuButton">
-                            <property name="focus_on_click">0</property>
-                            <property name="direction">none</property>
                             <property name="popover">item-type-popover</property>
                             <child>
                               <object class="GtkImage" id="down_image1">
@@ -5602,7 +5579,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                     <property name="child">
                       <object class="GtkBox">
                         <property name="width_request">300</property>
-                        <property name="margin-start">10</property>
+                        <property name="margin_start">10</property>
                         <property name="vexpand">1</property>
                         <property name="orientation">vertical</property>
                         <child>
@@ -5678,8 +5655,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                               <object class="GtkBox" id="box7">
                                 <child>
                                   <object class="GtkMenuButton" id="icon-nameicon-name">
-                                    <property name="focus_on_click">0</property>
-                                    <property name="direction">none</property>
                                     <property name="popover">icon-popover</property>
                                     <child>
                                       <object class="GtkImage">
@@ -5933,8 +5908,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <object class="GtkViewport">
                                 <property name="child">
                                   <object class="GtkGrid">
-                                    <property name="margin-start">16</property>
-                                    <property name="margin-end">16</property>
+                                    <property name="margin_start">16</property>
+                                    <property name="margin_end">16</property>
                                     <property name="margin_bottom">16</property>
                                     <property name="column_spacing">8</property>
                                     <property name="column_homogeneous">1</property>
