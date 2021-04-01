@@ -979,7 +979,6 @@ Can be added to custom menus.</property>
             <property name="halign">center</property>
             <property name="popover">about-popover</property>
             <property name="icon_name">dialog-information-symbolic</property>
-            <property name="has_frame">0</property>
           </object>
         </child>
         <child type="center">
