@@ -65,7 +65,7 @@ var SettingsPage = class SettingsPage {
 
     // Now connect the user interface elements to the settings items. All user interface
     // elements have the same ID as the corresponding settings key. Sometimes there is
-    // also a <key>-hover variant and a reset-<key> button. All three are connected with
+    // also a <key>-hover variant and a copy-<key> button. All three are connected with
     // the _bind* calls.
 
     // General Settings.
@@ -104,20 +104,6 @@ var SettingsPage = class SettingsPage {
     this._bindRevealer(
         'center-color-mode-hover-auto', 'center-auto-color-hover-revealer');
 
-    // The color reset button resets various settings, so we bind it manually.
-    this._builder.get_object('reset-center-color').connect('clicked', () => {
-      this._settings.reset('center-color-mode');
-      this._settings.reset('center-color-mode-hover');
-      this._settings.reset('center-fixed-color');
-      this._settings.reset('center-fixed-color-hover');
-      this._settings.reset('center-auto-color-saturation');
-      this._settings.reset('center-auto-color-saturation-hover');
-      this._settings.reset('center-auto-color-luminance');
-      this._settings.reset('center-auto-color-luminance-hover');
-      this._settings.reset('center-auto-color-opacity');
-      this._settings.reset('center-auto-color-opacity-hover');
-    });
-
     // The copy-color-settings button copies various settings, so we bind it manually.
     this._builder.get_object('copy-center-color').connect('clicked', () => {
       this._copyToHover('center-color-mode');
@@ -149,20 +135,6 @@ var SettingsPage = class SettingsPage {
         'child-color-mode-hover-fixed', 'child-fixed-color-hover-revealer');
     this._bindRevealer('child-color-mode-hover-auto', 'child-auto-color-hover-revealer');
 
-    // The color reset button resets various settings, so we bind it manually.
-    this._builder.get_object('reset-child-color').connect('clicked', () => {
-      this._settings.reset('child-color-mode');
-      this._settings.reset('child-color-mode-hover');
-      this._settings.reset('child-fixed-color');
-      this._settings.reset('child-fixed-color-hover');
-      this._settings.reset('child-auto-color-saturation');
-      this._settings.reset('child-auto-color-saturation-hover');
-      this._settings.reset('child-auto-color-luminance');
-      this._settings.reset('child-auto-color-luminance-hover');
-      this._settings.reset('child-auto-color-opacity');
-      this._settings.reset('child-auto-color-opacity-hover');
-    });
-
     // The copy-color-settings button copies various settings, so we bind it manually.
     this._builder.get_object('copy-child-color').connect('clicked', () => {
       this._copyToHover('child-color-mode');
@@ -185,14 +157,6 @@ var SettingsPage = class SettingsPage {
     this._bindRevealer('grandchild-color-mode-fixed', 'grandchild-fixed-color-revealer');
     this._bindRevealer(
         'grandchild-color-mode-hover-fixed', 'grandchild-fixed-color-hover-revealer');
-
-    // The color reset button resets various settings, so we bind it manually.
-    this._builder.get_object('reset-grandchild-color').connect('clicked', () => {
-      this._settings.reset('grandchild-color-mode');
-      this._settings.reset('grandchild-color-mode-hover');
-      this._settings.reset('grandchild-fixed-color');
-      this._settings.reset('grandchild-fixed-color-hover');
-    });
 
     // The copy-color-settings button copies various settings, so we bind it manually.
     this._builder.get_object('copy-grandchild-color').connect('clicked', () => {
@@ -419,22 +383,6 @@ var SettingsPage = class SettingsPage {
     });
   }
 
-  // This is used by all the methods below. It checks whether there is a button called
-  // 'reset-*whatever*' in the user interface. If so, it binds a click-handler to that
-  // button resetting the corresponding settings key. It will also reset any setting
-  // called 'settingsKey-hover' if one such exists.
-  _bindResetButton(settingsKey) {
-    const resetButton = this._builder.get_object('reset-' + settingsKey);
-    if (resetButton) {
-      resetButton.connect('clicked', () => {
-        this._settings.reset(settingsKey);
-        if (this._settings.settings_schema.has_key(settingsKey + '-hover')) {
-          this._settings.reset(settingsKey + '-hover');
-        }
-      });
-    }
-  }
-
   // This small helper method copies the settings value identified by <settingsKey> to the
   // value identified with <settingsKey>-hover.
   _copyToHover(settingsKey) {
@@ -454,35 +402,35 @@ var SettingsPage = class SettingsPage {
   }
 
   // Connects a Gtk.Range (or anything else which has a 'value' property) to a settings
-  // key. It also binds any corresponding reset buttons and '-hover' variants if they
+  // key. It also binds any corresponding copy buttons and '-hover' variants if they
   // exist.
   _bindSlider(settingsKey) {
     this._bind(settingsKey, 'value');
   }
 
   // Connects a Gtk.Switch (or anything else which has an 'active' property) to a settings
-  // key. It also binds any corresponding reset buttons and '-hover' variants if they
+  // key. It also binds any corresponding copy buttons and '-hover' variants if they
   // exist.
   _bindSwitch(settingsKey) {
     this._bind(settingsKey, 'active');
   }
 
   // Connects a Gtk.FontButton (or anything else which has a 'font-name' property) to a
-  // settings key. It also binds any corresponding reset buttons and '-hover' variants if
+  // settings key. It also binds any corresponding copy buttons and '-hover' variants if
   // they exist.
   _bindFontButton(settingsKey) {
     this._bind(settingsKey, 'font-name');
   }
 
   // Connects a Gtk.ComboBox (or anything else which has an 'active-id' property) to a
-  // settings key. It also binds any corresponding reset buttons and '-hover' variants if
+  // settings key. It also binds any corresponding copy buttons and '-hover' variants if
   // they exist.
   _bindCombobox(settingsKey) {
     this._bind(settingsKey, 'active-id');
   }
 
   // Connects any widget's property to a settings key. The widget must have the same ID as
-  // the settings key. It also binds any corresponding reset buttons and '-hover' variants
+  // the settings key. It also binds any corresponding copy buttons and '-hover' variants
   // if they exist.
   _bind(settingsKey, property) {
     this._settings.bind(
@@ -495,7 +443,6 @@ var SettingsPage = class SettingsPage {
           property, Gio.SettingsBindFlags.DEFAULT);
     }
 
-    this._bindResetButton(settingsKey);
     this._bindCopyButton(settingsKey);
   }
 
@@ -538,8 +485,7 @@ var SettingsPage = class SettingsPage {
       impl(settingsKey + '-hover', possibleValues);
     }
 
-    // And bind the corresponding reset button.
-    this._bindResetButton(settingsKey);
+    // And bind the corresponding copy button.
     this._bindCopyButton(settingsKey);
   }
 
@@ -548,7 +494,7 @@ var SettingsPage = class SettingsPage {
   // this behaves special for files which are part of Fly-Pie: All paths outside of
   // Fly-Pie's root directory are stored as absolute paths; paths which are descendants of
   // Me.path are stored as relative paths. The button state is also updated when the
-  // corresponding setting changes. It also binds any corresponding reset buttons and
+  // corresponding setting changes. It also binds any corresponding copy buttons and
   // '-hover' variants if they exist.
   _bindFileChooserButton(settingsKey) {
 
@@ -592,8 +538,7 @@ var SettingsPage = class SettingsPage {
     impl(settingsKey);
     impl(settingsKey + '-hover');
 
-    // And bind the corresponding copy and reset buttons (if any).
-    this._bindResetButton(settingsKey);
+    // And bind the corresponding copy button (if any).
     this._bindCopyButton(settingsKey);
   }
 
@@ -631,8 +576,7 @@ var SettingsPage = class SettingsPage {
       impl(settingsKey + '-hover');
     }
 
-    // And bind the corresponding copy and reset buttons (if any).
-    this._bindResetButton(settingsKey);
+    // And bind the corresponding copy button (if any).
     this._bindCopyButton(settingsKey);
   }
 

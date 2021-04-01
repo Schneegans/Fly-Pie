@@ -1827,6 +1827,9 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
               <object class="GtkGrid" id="settings-page">
                 <property name="vexpand">1</property>
                 <property name="row_spacing">4</property>
+
+                <!-- Preview Button Row -->
+
                 <child>
                   <object class="GtkFrame">
                     <property name="hexpand">1</property>
@@ -1934,6 +1937,9 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                     </layout>
                   </object>
                 </child>
+
+                <!-- Preset Settings Row -->
+
                 <child>
                   <object class="GtkFrame">
                     <property name="hexpand">1</property>
@@ -2064,10 +2070,16 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                     </layout>
                   </object>
                 </child>
+
+                <!-- Main Settings Notebook -->
+
                 <child>
                   <object class="GtkNotebook">
                     <property name="vexpand">1</property>
                     <property name="tab_pos">left</property>
+
+                    <!-- Global Appearance Settings -->
+
                     <child>
                       <object class="GtkNotebookPage">
                         <property name="child">
@@ -2089,7 +2101,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">1</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2098,7 +2110,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">3</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2107,7 +2119,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">5</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2189,49 +2201,11 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-easing-duration">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">4</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-global-scale">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">2</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkSeparator">
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">9</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2240,7 +2214,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">11</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2249,7 +2223,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">7</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2320,80 +2294,6 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-font">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">12</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-text-color">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">10</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-background-color">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">8</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-easing-mode">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">6</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkComboBox" id="easing-mode">
                                         <property name="valign">center</property>
                                         <property name="model">easing-mode-list</property>
@@ -2438,7 +2338,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">0</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2457,7 +2357,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">13</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2479,6 +2379,9 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                         </property>
                       </object>
                     </child>
+
+                    <!-- Wedge Appearance -->
+
                     <child>
                       <object class="GtkNotebookPage">
                         <property name="position">1</property>
@@ -2501,7 +2404,7 @@ You may also open one of your own menus from the Menu Editor, of course.</proper
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">1</property>
-                                          <property name="column-span">4</property>
+                                          <property name="column-span">3</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2606,44 +2509,6 @@ will cancel the selection.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-wedge-separator-width">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">3</property>
-                                          <property name="row">9</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-wedge-separator-color">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">3</property>
-                                          <property name="row">8</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkColorButton" id="wedge-separator-color">
                                         <property name="valign">center</property>
                                         <property name="title" translatable="yes">Pick Wedge Separator Color</property>
@@ -2659,7 +2524,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">7</property>
-                                          <property name="column-span">4</property>
+                                          <property name="column-span">3</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2680,7 +2545,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">4</property>
-                                          <property name="column-span">4</property>
+                                          <property name="column-span">3</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2715,44 +2580,6 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">2</property>
                                           <property name="row">3</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-wedge-width">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">3</property>
-                                          <property name="row">3</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-wedge-inner-radius">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">3</property>
-                                          <property name="row">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2860,40 +2687,6 @@ will cancel the selection.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-wedge-color">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">3</property>
-                                          <property name="row">6</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="halign">center</property>
-                                        <property name="valign">center</property>
-                                        <property name="vexpand">1</property>
-                                        <property name="justify">right</property>
-                                        <style>
-                                          <class name="dim-label" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">3</property>
-                                          <property name="row">5</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkBox">
                                         <property name="orientation">vertical</property>
                                         <property name="spacing">2</property>
@@ -2920,7 +2713,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">0</property>
-                                          <property name="column-span">4</property>
+                                          <property name="column-span">3</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2929,7 +2722,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">10</property>
-                                          <property name="column-span">4</property>
+                                          <property name="column-span">3</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -2951,6 +2744,9 @@ will cancel the selection.</property>
                         </property>
                       </object>
                     </child>
+
+                    <!-- Center Appearance -->
+
                     <child>
                       <object class="GtkNotebookPage">
                         <property name="position">2</property>
@@ -2989,7 +2785,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">6</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -3024,7 +2820,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">4</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -3353,7 +3149,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">8</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -3362,7 +3158,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">2</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -3371,7 +3167,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">10</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -3494,81 +3290,6 @@ will cancel the selection.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-center-color">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">3</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-center-size">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">7</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-center-icon-scale">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">9</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-center-icon-opacity">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">13</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkLabel">
                                         <property name="halign">center</property>
                                         <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">With Hovered Child</property>
@@ -3637,7 +3358,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">12</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -3654,29 +3375,11 @@ will cancel the selection.</property>
                                       </object>
                                     </child> -->
                                     <child>
-                                      <object class="GtkButton" id="reset-center-background-image">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">5</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkSeparator">
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">14</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -3743,25 +3446,6 @@ will cancel the selection.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-center-icon-crop">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">11</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
                                         <property name="margin-end">20</property>
@@ -3821,6 +3505,9 @@ will cancel the selection.</property>
                         </property>
                       </object>
                     </child>
+
+                    <!-- Children Appearance -->
+
                     <child>
                       <object class="GtkNotebookPage">
                         <property name="position">3</property>
@@ -3843,7 +3530,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">8</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -3852,7 +3539,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">6</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -3861,7 +3548,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">4</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -3870,7 +3557,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">2</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -4336,30 +4023,11 @@ will cancel the selection.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-child-draw-above">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">17</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkSeparator">
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">12</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -4368,7 +4036,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">10</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -4521,100 +4189,6 @@ will cancel the selection.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-child-color">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">3</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-child-size">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">7</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-child-offset">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">9</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-child-icon-scale">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">11</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-child-icon-opacity">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">15</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkLabel">
                                         <property name="halign">center</property>
                                         <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Standard State</property>
@@ -4672,7 +4246,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">14</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -4681,25 +4255,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">16</property>
-                                          <property name="column-span">5</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-child-background-image">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -4720,7 +4276,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">18</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -4750,25 +4306,6 @@ will cancel the selection.</property>
                                         </style>
                                         <layout>
                                           <property name="column">2</property>
-                                          <property name="row">13</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-child-icon-crop">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
                                           <property name="row">13</property>
                                         </layout>
                                       </object>
@@ -4865,6 +4402,9 @@ will cancel the selection.</property>
                         </property>
                       </object>
                     </child>
+
+                    <!-- Grandchildren Appearance -->
+
                     <child>
                       <object class="GtkNotebookPage">
                         <property name="position">4</property>
@@ -4887,7 +4427,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">8</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -4896,7 +4436,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">6</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -4905,7 +4445,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">4</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -4925,7 +4465,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">2</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5114,25 +4654,6 @@ will cancel the selection.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-grandchild-draw-above">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">11</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkSwitch" id="grandchild-draw-above">
                                         <property name="halign">end</property>
                                         <property name="valign">center</property>
@@ -5248,62 +4769,6 @@ will cancel the selection.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-grandchild-offset">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">9</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-grandchild-size">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">7</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-grandchild-color">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">3</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkLabel">
                                         <property name="halign">center</property>
                                         <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">With Hovered Parent</property>
@@ -5336,7 +4801,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">10</property>
-                                          <property name="column-span">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5345,25 +4810,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">12</property>
-                                          <property name="column-span">5</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-grandchild-background-image">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">4</property>
-                                          <property name="row">5</property>
+                                          <property name="column-span">4</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5438,6 +4885,9 @@ will cancel the selection.</property>
                         </property>
                       </object>
                     </child>
+
+                    <!-- Trace Appearance -->
+
                     <child>
                       <object class="GtkNotebookPage">
                         <property name="position">5</property>
@@ -5460,7 +4910,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">1</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5469,7 +4919,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">3</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5478,7 +4928,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">5</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5546,62 +4996,6 @@ will cancel the selection.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-trace-thickness">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">6</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-trace-min-length">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">4</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-trace-color">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">2</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkBox">
                                         <property name="orientation">vertical</property>
                                         <property name="spacing">2</property>
@@ -5628,7 +5022,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">0</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5648,7 +5042,7 @@ will cancel the selection.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">7</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5670,6 +5064,9 @@ will cancel the selection.</property>
                         </property>
                       </object>
                     </child>
+
+                    <!-- Advanced Settings -->
+
                     <child>
                       <object class="GtkNotebookPage">
                         <property name="position">6</property>
@@ -5735,30 +5132,11 @@ will cancel the selection.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-gesture-min-stroke-angle">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">8</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkSeparator">
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">7</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5812,30 +5190,11 @@ This is multiplied by the Global Scale value.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-gesture-min-stroke-length">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">6</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkSeparator">
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">5</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5888,30 +5247,11 @@ This is multiplied by the Global Scale value.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-gesture-jitter-threshold">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">4</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkSeparator">
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">3</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5965,30 +5305,11 @@ the current item will be selected.</property>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButton" id="reset-gesture-selection-timeout">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">2</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
                                       <object class="GtkSeparator">
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">1</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -5997,7 +5318,7 @@ the current item will be selected.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">9</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -6061,7 +5382,7 @@ or hold down a modifier key during selections.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">0</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -6070,7 +5391,7 @@ or hold down a modifier key during selections.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">11</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -6112,7 +5433,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">13</property>
-                                          <property name="column-span">3</property>
+                                          <property name="column-span">2</property>
                                         </layout>
                                       </object>
                                     </child>
@@ -6123,44 +5444,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                         <layout>
                                           <property name="column">1</property>
                                           <property name="row">12</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-show-screencast-mouse">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">12</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="reset-hover-mode">
-                                        <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                        <property name="valign">center</property>
-                                        <property name="has_frame">0</property>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="icon_name">edit-clear-all-symbolic</property>
-                                          </object>
-                                        </child>
-                                        <style>
-                                          <class name="pill-button" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">2</property>
-                                          <property name="row">10</property>
                                         </layout>
                                       </object>
                                     </child>
