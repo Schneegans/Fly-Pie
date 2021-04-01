@@ -154,12 +154,12 @@ var SettingsPage = class SettingsPage {
       this._settings.reset('child-color-mode');
       this._settings.reset('child-color-mode-hover');
       this._settings.reset('child-fixed-color');
-      this._settings.reset('child-auto-color-saturation');
-      this._settings.reset('child-auto-color-luminance');
-      this._settings.reset('child-auto-color-opacity');
       this._settings.reset('child-fixed-color-hover');
+      this._settings.reset('child-auto-color-saturation');
       this._settings.reset('child-auto-color-saturation-hover');
+      this._settings.reset('child-auto-color-luminance');
       this._settings.reset('child-auto-color-luminance-hover');
+      this._settings.reset('child-auto-color-opacity');
       this._settings.reset('child-auto-color-opacity-hover');
     });
 
@@ -170,7 +170,6 @@ var SettingsPage = class SettingsPage {
       this._copyToHover('child-auto-color-saturation');
       this._copyToHover('child-auto-color-luminance');
       this._copyToHover('child-auto-color-opacity');
-      this._copyToHover('child-fixed-color-hover');
     });
 
 
@@ -655,7 +654,7 @@ var SettingsPage = class SettingsPage {
     let tabIcon = this._builder.get_object('wedges-tab-icon');
     tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.translate(size / 2, size / 2);
       ctx.rotate(2 * Math.PI / 12);
@@ -677,7 +676,7 @@ var SettingsPage = class SettingsPage {
     tabIcon = this._builder.get_object('center-tab-icon');
     tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
@@ -691,7 +690,7 @@ var SettingsPage = class SettingsPage {
     tabIcon = this._builder.get_object('children-tab-icon');
     tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
@@ -710,7 +709,7 @@ var SettingsPage = class SettingsPage {
     tabIcon = this._builder.get_object('grandchildren-tab-icon');
     tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
@@ -738,7 +737,7 @@ var SettingsPage = class SettingsPage {
     tabIcon = this._builder.get_object('trace-tab-icon');
     tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
 
@@ -765,7 +764,7 @@ var SettingsPage = class SettingsPage {
     tabIcon = this._builder.get_object('advanced-tab-icon');
     tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
 

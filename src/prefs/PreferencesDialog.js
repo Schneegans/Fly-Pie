@@ -55,8 +55,8 @@ var PreferencesDialog = class PreferencesDialog {
     // Initialize the Tutorial page.
     this._tutorialPage = new TutorialPage(this._builder, this._settings);
 
-    // // Initialize the Settings page.
-    // this._settingsPage = new SettingsPage(this._builder, this._settings);
+    // Initialize the Settings page.
+    this._settingsPage = new SettingsPage(this._builder, this._settings);
 
     // // Initialize the Menu Editor page.
     // this._menuEditorPage = new MenuEditorPage(this._builder, this._settings);
