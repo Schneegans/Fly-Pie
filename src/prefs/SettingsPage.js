@@ -170,7 +170,6 @@ var SettingsPage = class SettingsPage {
       this._copyToHover('child-auto-color-saturation');
       this._copyToHover('child-auto-color-luminance');
       this._copyToHover('child-auto-color-opacity');
-      this._copyToHover('child-fixed-color-hover');
     });
 
 
