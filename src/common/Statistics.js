@@ -31,8 +31,7 @@ var Statistics = class Statistics {
   static addSelection(depth, time, gestureOnlySelection) {
 
     // This is disabled for now.
-    return;
-
+    /*
     this._initSettings();
 
     // We add the selection to one of the histograms with selection counts per selection
@@ -65,6 +64,7 @@ var Statistics = class Statistics {
 
     // Finally update the updated histograms.
     _settings.set_value(key, new GLib.Variant('aau', histograms));
+    */
   }
 
   // Should be called whenever a selection is canceled.
@@ -121,10 +121,8 @@ var Statistics = class Statistics {
   static _addOneTo(key) {
 
     // This is disabled for now.
-    return;
-
-    this._initSettings();
-    _settings.set_uint(key, _settings.get_uint(key) + 1);
+    // this._initSettings();
+    // _settings.set_uint(key, _settings.get_uint(key) + 1);
   }
 
   // Helper method to resize the given JavaScript array to the given size. If the input
