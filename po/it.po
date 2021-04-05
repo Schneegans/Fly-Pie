@@ -1,14 +1,14 @@
 # Italian translation for the Fly-Pie GNOME Shell Extension.
 # Copyright (C) 2020 Simon Schneegans.
 # This file is distributed under the same license as the Fly-Pie package.
-# Albano Battistella <albano_battistella@hotmail.com>, 2020.
+# Albano Battistella <albano_battistella@hotmail.com>, 2020,2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-12-18 12:15+0100\n"
-"PO-Revision-Date: 2020-12-26 15:16+0100\n"
+"PO-Revision-Date: 2021-04-05 15:16+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Albano Battistella <albano_battistella@hotmail.com>\n"
 "Language: it\n"
@@ -1913,7 +1913,7 @@ msgid ""
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
 msgstr ""
-"Il menu <b>File recenti</b> mostra un elenco di file utilizzati di recente. "
+"Il menu <b>File Recenti</b> mostra un elenco di file utilizzati di recente. "
 "Per selezioni efficienti, dovresti limitare il numero massimo di file visualizzati "
 "a circa dodici."
 
@@ -1969,3 +1969,27 @@ msgstr "Disconnetti"
 #: common/menus/System.js:105
 msgid "Power Off..."
 msgstr "Spegni..."
+
+#~ msgid "Welcome to Fly-Pie!"
+#~ msgstr "Benvenuto in  Fly-Pie!"
+
+#~ msgid "Open Preview Menu"
+#~ msgstr "Apri menu Anteprima"
+
+#~ msgid "You may also open one of your own menus from the Menu Editor."
+#~ msgstr "Puoi anche aprire uno dei tuoi menu dall'editor dei menu."
+
+#~ msgid "750 / 5000 XP"
+#~ msgstr "750 / 5000 XP"
+
+#~ msgid "Make 500 selection of items at level 5."
+#~ msgstr "Effettua 500 selezioni di oggetti al livello 5."
+
+#~ msgid "<small>500 XP</small>"
+#~ msgstr "<small>500 XP</small>"
+
+#~ msgid "Level-%i Click Selections"
+#~ msgstr "Livello-%i Fare clic su Selezioni"
+
+#~ msgid "Level-%i Gesture Selections"
+#~ msgstr "Livello-%i Selezione Gesture"
