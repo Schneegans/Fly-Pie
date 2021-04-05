@@ -79,6 +79,7 @@ While contributing new features or translating Fly-Pie is the most awesome way t
 
 ## :3rd_place_medal: Bronze Sponsors</strong>
 <p align="center">
+  <a href="https://github.com/denis-roy">@denis-roy</a><br>
   <a href="https://github.com/ykhurshid">@ykhurshid</a>
 </p>
 

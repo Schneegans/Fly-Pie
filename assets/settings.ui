@@ -269,6 +269,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">end</property>
+                                <property name="valign">start</property>
                                 <property name="margin_top">8</property>
                                 <property name="label" translatable="yes">🥉️ Bronze Sponsors</property>
                               </object>
@@ -283,7 +284,8 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                 <property name="can_focus">False</property>
                                 <property name="opacity">0.5</property>
                                 <property name="halign">start</property>
-                                <property name="valign">end</property>
+                                <property name="valign">start</property>
+                                <property name="margin_top">8</property>
                                 <property name="label">- none -</property>
                                 <attributes>
                                   <attribute name="style" value="italic"/>
@@ -299,7 +301,8 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="valign">end</property>
+                                <property name="valign">start</property>
+                                <property name="margin_top">8</property>
                                 <property name="label">GEPLlinux</property>
                                 <attributes>
                                   <attribute name="style" value="normal"/>
@@ -315,8 +318,11 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
-                                <property name="valign">end</property>
-                                <property name="label">&lt;a href="https://github.com/ykhurshid"&gt;@ykhurshid&lt;/a&gt;</property>
+                                <property name="valign">start</property>
+                                <property name="margin_top">8</property>
+                                <property name="label">&lt;a href="https://github.com/denis-roy"&gt;@denis-roy&lt;/a&gt;
+&lt;a href="https://github.com/ykhurshid"&gt;@ykhurshid&lt;/a&gt;
+</property>
                                 <property name="use_markup">True</property>
                               </object>
                               <packing>
