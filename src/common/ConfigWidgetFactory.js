@@ -104,7 +104,11 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         vexpand: true,
         height_request: 500
       });
-      fileChooser.set_file(Gio.File.new_for_path(entry.text));
+
+      const currentFile = Gio.File.new_for_path(entry.text);
+      if (currentFile.query_exists(null)) {
+        fileChooser.set_file(currentFile);
+      }
 
       dialog.get_content_area().append(fileChooser);
 

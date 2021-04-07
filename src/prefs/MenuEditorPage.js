@@ -676,9 +676,9 @@ var MenuEditorPage = class MenuEditorPage {
     // icon-select popover.
     // Icons are loaded asynchronously. Once this is finished, the little spinner in the
     // top right of the popover is hidden.
-    this._loadIcons().then(() => {
-      this._builder.get_object('icon-load-spinner').active = false;
-    });
+    // this._loadIcons().then(() => {
+    //   this._builder.get_object('icon-load-spinner').active = false;
+    // });
 
     // Filter the icon view based on the content of the search field.
     const iconListFiltered = this._builder.get_object('icon-list-filtered');
@@ -698,9 +698,11 @@ var MenuEditorPage = class MenuEditorPage {
 
     // Hide the popover when an icon is activated.
     const iconView = this._builder.get_object('icon-view');
-    iconView.connect('item-activated', () => {
-      this._builder.get_object('icon-popover').popdown();
-    });
+    iconView.connect(
+        'item-activated',
+        () => {
+            // TODO
+        });
 
     // Set the text of the icon name input field when an icon is selected.
     iconView.connect('selection-changed', (view) => {
@@ -712,17 +714,18 @@ var MenuEditorPage = class MenuEditorPage {
       }
     });
 
-    // Hide the popover when a file of the select-a-custom-icon dialog is activated.
-    // const iconChooser = this._builder.get_object('icon-file-chooser');
-    // iconChooser.connect('file-activated', (chooser) => {
-    //   this._builder.get_object('icon-popover').popdown();
-    // });
+    const iconSelectDialog = this._builder.get_object('icon-select-dialog');
+    iconSelectDialog.connect('response', (dialog, id) => {
+      if (id == Gtk.ResponseType.OK) {
+      }
+      iconSelectDialog.hide();
+    });
 
-    // Set the text of the icon name input field when a file of the select-a-custom-icon
-    // dialog is selected.
-    // iconChooser.connect('selection-changed', (chooser) => {
-    //   this._builder.get_object('icon-name').text = chooser.get_filename();
-    // });
+    this._builder.get_object('icon-select-button').connect('clicked', () => {
+      iconSelectDialog.set_transient_for(
+          this._builder.get_object('main-notebook').get_root());
+      iconSelectDialog.show();
+    });
 
     // Draw an icon to the drawing area whenever it's invalidated. This happens usually
     // when the text of the icon name input field changes.
