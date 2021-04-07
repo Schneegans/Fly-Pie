@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {Gtk, Gdk} = imports.gi;
+const {Gio, Gtk, Gdk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -77,44 +77,53 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     entryBox.get_style_context().add_class('linked');
     box.append(entryBox);
 
-    const button = new Gtk.MenuButton();
-    button.image = Gtk.Image.new_from_icon_name('gtk-find');
+    const button = Gtk.Button.new_from_icon_name('view-more-symbolic');
 
-    const popover = new Gtk.Popover();
-    button.set_popover(popover);
-
-    const fileChooser = new Gtk.FileChooserWidget(
-        {action: Gtk.FileChooserAction.OPEN, height_request: 375, width_request: 600});
-
-    popover.set_child(fileChooser);
-
-    fileChooser.show();
-
-    entryBox.append(button);
-
-    const entry = new Gtk.Entry({text: file});
+    const entry = new Gtk.Entry({text: file, hexpand: true});
     entryBox.append(entry);
-
-    // Initialize the file-select-popover. When a file is activated, the popover is
-    // hidden, when a file is selected, the item's name, icon and file input fields are
-    // updated accordingly.
-    // fileChooser.connect('file-activated', () => {
-    //   popover.popdown();
-    // });
-
-    fileChooser.connect('selection-changed', (widget) => {
-      if (widget.get_file()) {
-        const info = widget.get_file().query_info('standard::icon', 0, null);
-        callback(
-            widget.get_filename(), widget.get_file().get_basename(),
-            info.get_icon().to_string());
-        entry.text = widget.get_filename();
-      }
-    });
+    entryBox.append(button);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
     });
+
+    button.connect('clicked', () => {
+      const dialog = new Gtk.Dialog({
+        use_header_bar: true,
+        modal: true,
+        transient_for: button.get_root(),
+        title: ''
+      });
+      dialog.add_button(_('Select File'), Gtk.ResponseType.OK);
+      dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+      dialog.set_default_response(Gtk.ResponseType.OK);
+
+      const fileChooser = new Gtk.FileChooserWidget({
+        action: Gtk.FileChooserAction.OPEN,
+        hexpand: true,
+        vexpand: true,
+        height_request: 500
+      });
+      fileChooser.set_file(Gio.File.new_for_path(entry.text));
+
+      dialog.get_content_area().append(fileChooser);
+
+      dialog.connect('response', (dialog, id) => {
+        if (id == Gtk.ResponseType.OK) {
+          const file = fileChooser.get_file();
+          if (file) {
+            const info = file.query_info('standard::icon', 0, null);
+            callback(file.get_path(), file.get_basename(), info.get_icon().to_string());
+            entry.text = file.get_path();
+          }
+        }
+        dialog.destroy();
+      });
+
+      dialog.show();
+    });
+
+
 
     return box;
   }
@@ -131,39 +140,54 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     entryBox.get_style_context().add_class('linked');
     box.append(entryBox);
 
-    const button = new Gtk.MenuButton();
-    button.image = Gtk.Image.new_from_icon_name('gtk-find');
+    const button = Gtk.Button.new_from_icon_name('view-more-symbolic');
 
-    const popover = new Gtk.Popover();
-    button.set_popover(popover);
-
-    const appChooser = new Gtk.AppChooserWidget({show_all: true});
-    popover.set_child(appChooser);
-
-    appChooser.show();
-
-    entryBox.append(button);
-
-    const entry = new Gtk.Entry({text: command});
+    const entry = new Gtk.Entry({text: command, hexpand: true});
     entryBox.append(entry);
-
-    // Initialize the application-select-popover. On mouse-up the popover is hidden,
-    // whenever an application is selected, the item's name, icon and command input fields
-    // are updated accordingly.
-    const controller = Gtk.GestureClick.new();
-    controller.connect('released', () => {
-      popover.popdown();
-    });
-    appChooser.add_controller(controller);
-
-    appChooser.connect('application-selected', (widget, app) => {
-      callback(app.get_commandline(), app.get_display_name(), app.get_icon().to_string());
-      entry.text = app.get_commandline();
-    });
+    entryBox.append(button);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
     });
+
+    button.connect('clicked', () => {
+      const dialog = new Gtk.Dialog({
+        use_header_bar: true,
+        modal: true,
+        transient_for: button.get_root(),
+        title: ''
+      });
+      dialog.add_button(_('Select Application'), Gtk.ResponseType.OK);
+      dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+      dialog.set_default_response(Gtk.ResponseType.OK);
+
+      const appChooser =
+          new Gtk.AppChooserWidget({show_all: true, hexpand: true, vexpand: true});
+
+      dialog.get_content_area().append(appChooser);
+
+      const selectApp = (app) => {
+        callback(
+            app.get_commandline(), app.get_display_name(), app.get_icon().to_string());
+        entry.text = app.get_commandline();
+      };
+
+      dialog.connect('response', (dialog, id) => {
+        if (id == Gtk.ResponseType.OK) {
+          selectApp(appChooser.get_app_info());
+        }
+        dialog.destroy();
+      });
+
+      appChooser.connect('application-activated', (widget, app) => {
+        selectApp(app);
+        dialog.destroy();
+      });
+
+      dialog.show();
+    });
+
+
 
     return box;
   }
@@ -189,12 +213,13 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
   static createConfigWidgetCaption(name, description) {
     const vBox =
         new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 5, margin_top: 20});
-    const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
+    const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL, spacing: 10});
 
     vBox.append(hBox);
 
     // This is shown on the left above the data widget.
-    const nameLabel = new Gtk.Label({label: name});
+    const nameLabel =
+        new Gtk.Label({label: name, hexpand: true, halign: Gtk.Align.START});
 
     // This is shown on the right above the data widget.
     const descriptionLabel = new Gtk.Label({label: description});

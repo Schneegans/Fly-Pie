@@ -106,7 +106,7 @@ var menu = {
       // Then create the three switches.
       const _createToggle = (i, name, value) => {
         const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL, spacing: 5});
-        hBox.append(new Gtk.Label({label: name, halign: Gtk.Align.START}));
+        hBox.append(new Gtk.Label({label: name, halign: Gtk.Align.START, hexpand: true}));
 
         const toggle = new Gtk.Switch({active: value, halign: Gtk.Align.END});
         hBox.append(toggle);

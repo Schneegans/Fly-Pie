@@ -1,8 +1,17 @@
 /* This is used in the tutorial. */
-.drop-shadow {
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+.tutorial-video {
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
 }
 
 .pill-button {
     border-radius: 9999px;
+}
+
+.small-popover>contents {
+    padding: 0;
+}
+
+.fly-pie-window {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }

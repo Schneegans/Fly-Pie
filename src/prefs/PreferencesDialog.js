@@ -88,7 +88,7 @@ var PreferencesDialog = class PreferencesDialog {
     this._widget = this._builder.get_object('main-notebook');
 
     // Because it looks cool, we add the stack switcher and the about button to the
-    // window's title bar.
+    // window's title bar. We also make the bottom corners rounded.
     this._widget.connect('realize', () => {
       const stackSwitcher = this._builder.get_object('main-stack-switcher');
       const aboutButton   = this._builder.get_object('about-button');
@@ -99,6 +99,9 @@ var PreferencesDialog = class PreferencesDialog {
       const titlebar = this._widget.get_root().get_titlebar();
       titlebar.set_title_widget(stackSwitcher);
       titlebar.pack_start(aboutButton);
+
+      // This class makes the bottom corners round.
+      this._widget.get_root().get_style_context().add_class('fly-pie-window');
     });
 
     // Save the currently active settings page. This way, the tutorial will be shown when

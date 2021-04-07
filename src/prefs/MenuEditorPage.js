@@ -210,7 +210,6 @@ var MenuEditorPage = class MenuEditorPage {
       const dialog = new Gtk.FileChooserDialog({
         title: _('Export Menu Configuration'),
         action: Gtk.FileChooserAction.SAVE,
-        do_overwrite_confirmation: true,
         transient_for: button.get_root(),
         modal: true
       });
