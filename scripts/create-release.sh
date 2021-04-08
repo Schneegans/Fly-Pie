@@ -23,19 +23,22 @@ usage() {
     echo "Use '-s' to throw an error when the zip size is too big to be uploaded to the Extensions website."
 }
 
-
 # Go to the repo root.
 cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
   { echo "ERROR: Could not find the repo root."; exit 1; }
 
-scripts/compile-locales.sh
-
+echo "Compiling resources..."
 cd resources && glib-compile-resources --generate flypie.gresource.xml && cd ..
+
+echo "Compiling schemas..."
+glib-compile-schemas schemas
+
+echo "Compiling locales..."
+scripts/compile-locales.sh
 
 # Delete any old zip and pack everything together
 rm --force flypie@schneegans.github.com.zip
-zip -r flypie@schneegans.github.com.zip -- src presets resource/flypie.gresource schemas locale *.js metadata.json LICENSE
-
+zip -r flypie@schneegans.github.com.zip -- src presets resources/flypie.gresource schemas/gschemas.compiled locale *.js metadata.json LICENSE
 
 while getopts is FLAG; do
 	case $FLAG in
