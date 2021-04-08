@@ -5,3 +5,4 @@
 *.blend2
 *.blend3
 /resources/flypie.gresource
+/schemas/gschemas.compiled
