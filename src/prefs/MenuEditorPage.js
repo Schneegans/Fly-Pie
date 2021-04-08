@@ -673,50 +673,11 @@ var MenuEditorPage = class MenuEditorPage {
     }
 
     // Now we initialize all icon-related UI elements. That is first and foremost the
-    // icon-select popover.
-    // Icons are loaded asynchronously. Once this is finished, the little spinner in the
-    // top right of the popover is hidden.
-    // this._loadIcons().then(() => {
-    //   this._builder.get_object('icon-load-spinner').active = false;
-    // });
-
-    // Filter the icon view based on the content of the search field.
-    const iconListFiltered = this._builder.get_object('icon-list-filtered');
-    const filterEntry      = this._builder.get_object('icon-filter-entry');
-    iconListFiltered.set_visible_func((model, iter) => {
-      const name = model.get_value(iter, 0);
-      if (name == null) {
-        return false;
-      }
-      return name.toLowerCase().includes(filterEntry.text.toLowerCase());
-    });
-
-    // Refilter the icon list whenever the user types something in the search field.
-    filterEntry.connect('notify::text', () => {
-      iconListFiltered.refilter();
-    });
-
-    // Hide the popover when an icon is activated.
-    const iconView = this._builder.get_object('icon-view');
-    iconView.connect(
-        'item-activated',
-        () => {
-            // TODO
-        });
-
-    // Set the text of the icon name input field when an icon is selected.
-    iconView.connect('selection-changed', (view) => {
-      const path       = view.get_selected_items()[0];
-      const model      = view.get_model();
-      const [ok, iter] = model.get_iter(path);
-      if (ok) {
-        this._builder.get_object('icon-name').text = model.get_value(iter, 0);
-      }
-    });
-
+    // icon-select dialog.
     const iconSelectDialog = this._builder.get_object('icon-select-dialog');
     iconSelectDialog.connect('response', (dialog, id) => {
       if (id == Gtk.ResponseType.OK) {
+        this._builder.get_object('icon-name').text = dialog.get_icon();
       }
       iconSelectDialog.hide();
     });
@@ -724,6 +685,7 @@ var MenuEditorPage = class MenuEditorPage {
     this._builder.get_object('icon-select-button').connect('clicked', () => {
       iconSelectDialog.set_transient_for(
           this._builder.get_object('main-notebook').get_root());
+      iconSelectDialog.set_icon(this._builder.get_object('icon-name').text);
       iconSelectDialog.show();
     });
 
@@ -925,36 +887,6 @@ var MenuEditorPage = class MenuEditorPage {
   }
 
   // ----------------------------------------------------------------------- private stuff
-
-  // This loads all icons of the current icon theme to the icon list of the
-  // icon-select-popover. As this takes some time, it is done asynchronously. We do not
-  // check for icon theme changes for now - this could be improved in the future!
-  async _loadIcons() {
-    const iconList = this._builder.get_object('icon-list');
-
-    // Disable sorting for now. Else this is horribly slow...
-    iconList.set_sort_column_id(-2, Gtk.SortType.ASCENDING);
-
-    const iconTheme = Gtk.IconTheme.get_default();
-    const icons     = iconTheme.list_icons(null);
-
-    // We add icons in batches. This number is somewhat arbitrary - if reduced to 1, the
-    // icon loading takes quite long, if increased further the user interface gets a bit
-    // laggy during icon loading. Ten seems to be a good compromise...
-    const batchSize = 10;
-    for (let i = 0; i < icons.length; i += batchSize) {
-      for (let j = 0; j < batchSize && i + j < icons.length; j++) {
-        iconList.set_value(iconList.append(), 0, icons[i + j]);
-      }
-
-      // This is effectively a 'yield'. We wait asynchronously for the timeout (1ms) to
-      // resolve, letting other events to be processed in the meantime.
-      await new Promise(r => GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1, r));
-    }
-
-    // Enable sorting again!
-    iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
-  }
 
   // There is a small label in the menu editor which shows random tips at regular
   // intervals.

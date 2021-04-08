@@ -116,10 +116,10 @@ var TutorialPage = class TutorialPage {
 
     // Initialize the two videos of the tutorial. This cannot be done from UI file
     // for now as the GtkVideo does not seem to have a resource property.
-    for (let i = 1; i <= 2; i++) {
-      const video = this._builder.get_object('tutorial-animation-' + i);
-      video.set_resource('/video/video' + i + '.webm');
-    }
+    // for (let i = 1; i <= 2; i++) {
+    //   const video = this._builder.get_object('tutorial-animation-' + i);
+    //   video.set_resource('/video/video' + i + '.webm');
+    // }
 
     // Make the five Show-Menu buttons of the tutorial pages actually show a menu.
     for (let i = 1; i <= 5; i++) {

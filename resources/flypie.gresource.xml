@@ -33,8 +33,8 @@
     <file>img/tutorial/bronze.png</file>
     <file>img/tutorial/gold.png</file>
     <file>img/tutorial/silver.png</file>
+    <file>ui/iconSelectDialog.ui</file>
+    <file>ui/imageChooserButton.ui</file>
     <file>ui/settings.ui</file>
-    <file>video/video1.webm</file>
-    <file>video/video2.webm</file>
   </gresource>
 </gresources>

@@ -94,7 +94,7 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('center-icon-scale');
     this._bindSlider('center-icon-crop');
     this._bindSlider('center-icon-opacity');
-    this._bindFileChooserButton('center-background-image');
+    this._bindImageChooserButton('center-background-image');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
     this._bindRevealer('center-color-mode-fixed', 'center-fixed-color-revealer');
@@ -125,7 +125,7 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('child-icon-scale');
     this._bindSlider('child-icon-crop');
     this._bindSlider('child-icon-opacity');
-    this._bindFileChooserButton('child-background-image');
+    this._bindImageChooserButton('child-background-image');
     this._bindSwitch('child-draw-above');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
@@ -150,7 +150,7 @@ var SettingsPage = class SettingsPage {
     this._bindColorButton('grandchild-fixed-color');
     this._bindSlider('grandchild-size');
     this._bindSlider('grandchild-offset');
-    this._bindFileChooserButton('grandchild-background-image');
+    this._bindImageChooserButton('grandchild-background-image');
     this._bindSwitch('grandchild-draw-above');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
@@ -413,11 +413,11 @@ var SettingsPage = class SettingsPage {
     this._bind(settingsKey, 'active');
   }
 
-  // Connects a Gtk.FontButton (or anything else which has a 'font-name' property) to a
+  // Connects a Gtk.FontButton (or anything else which has a 'font' property) to a
   // settings key. It also binds any corresponding copy buttons and '-hover' variants if
   // they exist.
   _bindFontButton(settingsKey) {
-    this._bind(settingsKey, 'font-name');
+    this._bind(settingsKey, 'font');
   }
 
   // Connects a Gtk.ComboBox (or anything else which has an 'active-id' property) to a
@@ -494,7 +494,7 @@ var SettingsPage = class SettingsPage {
   // Me.path are stored as relative paths. The button state is also updated when the
   // corresponding setting changes. It also binds any corresponding copy buttons and
   // '-hover' variants if they exist.
-  _bindFileChooserButton(settingsKey) {
+  _bindImageChooserButton(settingsKey) {
 
     // Called once for settingsKey and once for settingsKey + '-hover'.
     const impl = (key) => {
@@ -504,7 +504,8 @@ var SettingsPage = class SettingsPage {
 
         // Store the absolute file path when the user selects a file.
         button.connect('file-set', (widget) => {
-          this._settings.set_string(key, widget.get_file().get_path());
+          const file = widget.get_file();
+          this._settings.set_string(key, file != null ? file.get_path() : '');
         });
 
         // This will be called whenever the settingsKey changes.
@@ -512,17 +513,10 @@ var SettingsPage = class SettingsPage {
           // If the settings key is empty (default state), reset the button.
           const path = this._settings.get_string(key);
           if (path == '') {
-            button.unselect_all();
+            button.set_file(null);
           } else {
-
             let file = Gio.File.new_for_path(path);
-
-            // Set only if it exists.
-            if (file.query_exists(null)) {
-              button.set_file(file);
-            } else {
-              button.unselect_all();
-            }
+            button.set_file(file);
           }
         };
 
