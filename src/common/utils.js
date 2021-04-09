@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                                               = imports.cairo;
-const {Gdk, Gtk, Gio, Pango, PangoCairo, GLib, GdkPixbuf} = imports.gi;
+const Cairo                                         = imports.cairo;
+const {Gdk, Gtk, Gio, Pango, PangoCairo, GdkPixbuf} = imports.gi;
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 
@@ -76,18 +76,34 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
   // First try to find the icon in the theme. This will also load images from disc if the
   // icon name is actually a file path.
   try {
-    const theme     = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-    const paintable = theme.lookup_by_gicon(
-        Gio.Icon.new_for_string(name), size, 1, Gtk.TextDirection.NONE,
-        Gtk.IconLookupFlags.FORCE_SIZE);
 
-    // We got something, paint it!
-    if (paintable.get_file() != null && paintable.get_file().get_path() != null) {
-      const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
-          paintable.get_file().get_path(), size, size);
-      Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0);
-      ctx.paintWithAlpha(opacity);
-      return;
+    if (imports.gi.versions.Gtk === '3.0') {
+      const theme = Gtk.IconTheme.get_default();
+      const info  = theme.lookup_by_gicon(
+          Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
+
+      // We got something, paint it!
+      if (info != null) {
+        Gdk.cairo_set_source_pixbuf(ctx, info.load_icon(), 0, 0);
+        ctx.paintWithAlpha(opacity);
+        return;
+      }
+
+    } else {
+
+      const theme     = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
+      const paintable = theme.lookup_by_gicon(
+          Gio.Icon.new_for_string(name), size, 1, Gtk.TextDirection.NONE,
+          Gtk.IconLookupFlags.FORCE_SIZE);
+
+      // We got something, paint it!
+      if (paintable.get_file() != null && paintable.get_file().get_path() != null) {
+        const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
+            paintable.get_file().get_path(), size, size);
+        Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0);
+        ctx.paintWithAlpha(opacity);
+        return;
+      }
     }
   } catch (error) {
     debug('Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');

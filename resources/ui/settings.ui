@@ -397,10 +397,9 @@
                         <property name="halign">center</property>
                         <property name="valign">center</property>
                         <property name="label">Fly-Pie</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"></attribute>
-                          <attribute name="scale" value="2"></attribute>
-                        </attributes>
+                        <style>
+                          <class name="large-title" />
+                        </style>
                       </object>
                     </child>
                     <child>
@@ -653,7 +652,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
   <!--                                                                                           -->
   <!-- ######################################################################################### -->
 
-  <object class="IconSelectDialog" id="icon-select-dialog">
+  <object class="FlyPieIconSelectDialog" id="icon-select-dialog">
     <property name="use-header-bar">1</property>
   </object>
 
@@ -768,7 +767,8 @@ Can be added to custom menus.</property>
         </child>
         <child>
           <object class="GtkStack" id="stack1">
-            <property name="transition_type">crossfade</property>
+            <property name="transition_duration">300</property>
+            <property name="transition_type">slide-left-right</property>
             <child>
               <object class="GtkStackPage">
                 <property name="name">page0</property>
@@ -809,31 +809,20 @@ Can be added to custom menus.</property>
                     </child>
                     <child>
                       <object class="GtkButton" id="random-preset-button">
-                        <property name="valign">center</property>
-                        <property name="tooltip_text" translatable="yes">Initializes the settings below to random values</property>
+                        <property name="halign">fill</property>
+                        <property name="tooltip_text" translatable="yes">Initializes most settings to random values.</property>
                         <child>
-                          <object class="GtkGrid">
-                            <property name="valign">center</property>
-                            <property name="column_spacing">6</property>
+                          <object class="GtkBox">
+                            <property name="halign">center</property>
+                            <property name="spacing">6</property>
                             <child>
                               <object class="GtkImage">
-                                <property name="valign">center</property>
                                 <property name="icon_name">applications-science-symbolic</property>
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">0</property>
-                                </layout>
                               </object>
                             </child>
                             <child>
                               <object class="GtkLabel">
-                                <property name="halign">start</property>
-                                <property name="valign">center</property>
-                                <property name="label" translatable="yes">Generate Random Preset</property>
-                                <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">0</property>
-                                </layout>
+                                <property name="label" translatable="yes">Generate a Random Preset</property>
                               </object>
                             </child>
                           </object>
@@ -961,13 +950,13 @@ Can be added to custom menus.</property>
                         <property name="name">tutorial-page-0</property>
                         <property name="child">
                           <object class="GtkBox">
-                            <property name="width_request">500</property>
+                            <property name="width_request">480</property>
                             <property name="halign">center</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">10</property>
                             <child>
                               <object class="GtkDrawingArea" id="fly-pie-logo">
-                                <property name="width_request">500</property>
+                                <property name="width_request">480</property>
                                 <property name="height_request">200</property>
                                 <property name="margin_top">30</property>
                                 <property name="margin_bottom">15</property>
@@ -1028,7 +1017,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                         <property name="name">tutorial-page-1</property>
                         <property name="child">
                           <object class="GtkBox">
-                            <property name="width_request">500</property>
+                            <property name="width_request">480</property>
                             <property name="halign">center</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">10</property>
@@ -1039,16 +1028,15 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                                 <property name="margin_top">20</property>
                                 <property name="margin_bottom">10</property>
                                 <property name="label" translatable="yes" comments="This is a heading.">You can click anywhere!</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"></attribute>
-                                  <attribute name="scale" value="2"></attribute>
-                                </attributes>
+                                <style>
+                                  <class name="large-title" />
+                                </style>
                               </object>
                             </child>
                             <child>
                               <object class="GtkVideo" id="tutorial-animation-1">
-                                <property name="width_request">500</property>
-                                <property name="height_request">250</property>
+                                <property name="width_request">480</property>
+                                <property name="height_request">300</property>
                                 <style>
                                   <class name="tutorial-video" />
                                 </style>
@@ -1110,7 +1098,7 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                         <property name="name">tutorial-page-2</property>
                         <property name="child">
                           <object class="GtkBox">
-                            <property name="width_request">500</property>
+                            <property name="width_request">480</property>
                             <property name="halign">center</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">10</property>
@@ -1121,10 +1109,9 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                                 <property name="margin_top">20</property>
                                 <property name="margin_bottom">10</property>
                                 <property name="label" translatable="yes" comments="This is a heading.">Practice Session I</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"></attribute>
-                                  <attribute name="scale" value="2"></attribute>
-                                </attributes>
+                                <style>
+                                  <class name="large-title" />
+                                </style>
                               </object>
                             </child>
                             <child>
@@ -1296,7 +1283,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                         <property name="name">tutorial-page-3</property>
                         <property name="child">
                           <object class="GtkBox">
-                            <property name="width_request">500</property>
+                            <property name="width_request">480</property>
                             <property name="halign">center</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">10</property>
@@ -1307,16 +1294,15 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                 <property name="margin_top">20</property>
                                 <property name="margin_bottom">10</property>
                                 <property name="label" translatable="yes" comments="This is a heading.">The Marking Mode of Fly-Pie</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"></attribute>
-                                  <attribute name="scale" value="2"></attribute>
-                                </attributes>
+                                <style>
+                                  <class name="large-title" />
+                                </style>
                               </object>
                             </child>
                             <child>
                               <object class="GtkVideo" id="tutorial-animation-2">
-                                <property name="width_request">500</property>
-                                <property name="height_request">250</property>
+                                <property name="width_request">480</property>
+                                <property name="height_request">300</property>
                                 <style>
                                   <class name="tutorial-video" />
                                 </style>
@@ -1377,7 +1363,7 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                         <property name="name">tutorial-page-4</property>
                         <property name="child">
                           <object class="GtkBox">
-                            <property name="width_request">500</property>
+                            <property name="width_request">480</property>
                             <property name="halign">center</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">10</property>
@@ -1388,10 +1374,9 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                                 <property name="margin_top">20</property>
                                 <property name="margin_bottom">10</property>
                                 <property name="label" translatable="yes" comments="This is a heading.">Practice Session II</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"></attribute>
-                                  <attribute name="scale" value="2"></attribute>
-                                </attributes>
+                                <style>
+                                  <class name="large-title" />
+                                </style>
                               </object>
                             </child>
                             <child>
@@ -1562,7 +1547,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                         <property name="name">tutorial-page-5</property>
                         <property name="child">
                           <object class="GtkBox">
-                            <property name="width_request">500</property>
+                            <property name="width_request">480</property>
                             <property name="halign">center</property>
                             <property name="orientation">vertical</property>
                             <child>
@@ -1581,10 +1566,9 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                                 <property name="margin_bottom">10</property>
                                 <property name="label" translatable="yes" comments="The user finished the tutorial. Yay!">Congratulations!</property>
                                 <property name="justify">center</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"></attribute>
-                                  <attribute name="scale" value="2"></attribute>
-                                </attributes>
+                                <style>
+                                  <class name="large-title" />
+                                </style>
                               </object>
                             </child>
                             <child>
@@ -1614,7 +1598,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
 
                 <child>
                   <object class="GtkBox">
-                    <property name="width_request">500</property>
+                    <property name="width_request">480</property>
                     <property name="halign">center</property>
                     <child>
                       <object class="GtkButton" id="tutorial-previous-page-button">
@@ -1764,37 +1748,39 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                     <child>
                       <object class="GtkNotebookPage">
                         <property name="child">
-
                           <object class="GtkGrid">
-                            <property name="margin_start">15</property>
-                            <property name="margin_end">10</property>
-                            <property name="margin_top">10</property>
-                            <property name="margin_bottom">10</property>
+                            <property name="margin_start">40</property>
+                            <property name="margin_end">40</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">30</property>
                             <property name="row_spacing">10</property>
-                            <property name="column_spacing">10</property>
+                            <property name="column_spacing">5</property>
                             <child>
-                              <object class="GtkSeparator">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Global Appearance Settings</property>
+                                    <style>
+                                      <class name="large-title" />
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_bottom">30</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">These settings affect all menu items.</property>
+                                    <style>
+                                      <class name="dim-label" />
+                                    </style>
+                                  </object>
+                                </child>
                                 <layout>
                                   <property name="column">0</property>
-                                  <property name="row">1</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">3</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">5</property>
+                                  <property name="row">0</property>
                                   <property name="column-span">2</property>
                                 </layout>
                               </object>
@@ -1872,33 +1858,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                 <layout>
                                   <property name="column">1</property>
                                   <property name="row">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">9</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">11</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">7</property>
-                                  <property name="column-span">2</property>
                                 </layout>
                               </object>
                             </child>
@@ -1986,37 +1945,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkBox">
-                                <property name="orientation">vertical</property>
-                                <property name="spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="halign">center</property>
-                                    <property name="label" translatable="yes">Global Appearance Settings</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"></attribute>
-                                    </attributes>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="margin_bottom">8</property>
-                                    <property name="label" translatable="yes">These settings affect all menu items.</property>
-                                    <property name="justify">center</property>
-                                    <property name="wrap">1</property>
-                                    <style>
-                                      <class name="dim-label" />
-                                    </style>
-                                  </object>
-                                </child>
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">0</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
                               <object class="GtkLabel">
                                 <property name="halign">start</property>
                                 <property name="label" translatable="yes">Animation Mode</property>
@@ -2026,18 +1954,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                 </layout>
                               </object>
                             </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">13</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
                           </object>
-
-
                         </property>
                         <property name="tab">
                           <object class="GtkImage">
@@ -2060,12 +1977,68 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
 
                         <property name="child">
                           <object class="GtkGrid">
-                            <property name="margin_start">15</property>
-                            <property name="margin_end">10</property>
-                            <property name="margin_top">10</property>
-                            <property name="margin_bottom">10</property>
+                            <property name="margin_start">40</property>
+                            <property name="margin_end">40</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">30</property>
                             <property name="row_spacing">10</property>
-                            <property name="column_spacing">10</property>
+                            <property name="column_spacing">5</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Center Appearance</property>
+                                    <style>
+                                      <class name="large-title" />
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_bottom">30</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">The center element shows the currently hovered child's name.</property>
+                                    <style>
+                                      <class name="dim-label" />
+                                    </style>
+                                  </object>
+                                </child>
+                                <layout>
+                                  <property name="column">0</property>
+                                  <property name="row">0</property>
+                                  <property name="column-span">4</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">With Hovered Child</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
+                                <layout>
+                                  <property name="column">1</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">Without Hovered Child</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
+                                <layout>
+                                  <property name="column">3</property>
+                                  <property name="row">1</property>
+                                </layout>
+                              </object>
+                            </child>
                             <child>
                               <object class="GtkScale">
                                 <property name="draw-value">1</property>
@@ -2079,15 +2052,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                 <layout>
                                   <property name="column">1</property>
                                   <property name="row">9</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">6</property>
-                                  <property name="column-span">4</property>
                                 </layout>
                               </object>
                             </child>
@@ -2114,15 +2078,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                 <layout>
                                   <property name="column">1</property>
                                   <property name="row">7</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">4</property>
-                                  <property name="column-span">4</property>
                                 </layout>
                               </object>
                             </child>
@@ -2452,33 +2407,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">8</property>
-                                  <property name="column-span">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">2</property>
-                                  <property name="column-span">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">10</property>
-                                  <property name="column-span">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
                               <object class="GtkScale">
                                 <property name="draw-value">1</property>
                                 <property name="hexpand">1</property>
@@ -2522,17 +2450,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-center-color">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-center-color">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">3</property>
@@ -2540,18 +2458,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-center-size">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-center-size">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">7</property>
@@ -2559,18 +2466,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-center-icon-scale">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-center-icon-scale">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">9</property>
@@ -2578,63 +2474,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-center-icon-opacity">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-center-icon-opacity">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">13</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">With Hovered Child</property>
-                                <property name="justify">center</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                                <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes">Center Appearance</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"></attribute>
-                                </attributes>
-                                <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">0</property>
-                                  <property name="column-span">3</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">Without Hovered Child</property>
-                                <property name="justify">center</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                                <layout>
-                                  <property name="column">3</property>
-                                  <property name="row">1</property>
                                 </layout>
                               </object>
                             </child>
@@ -2661,28 +2504,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">12</property>
-                                  <property name="column-span">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="ImageChooserButton" id="center-background-image">
+                              <object class="FlyPieImageChooserButton" id="center-background-image">
                                 <layout>
                                   <property name="column">1</property>
                                   <property name="row">5</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">14</property>
-                                  <property name="column-span">4</property>
                                 </layout>
                               </object>
                             </child>
@@ -2730,18 +2555,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-center-icon-crop">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-center-icon-crop">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">11</property>
@@ -2760,7 +2574,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="ImageChooserButton" id="center-background-image-hover">
+                              <object class="FlyPieImageChooserButton" id="center-background-image-hover">
                                 <layout>
                                   <property name="column">3</property>
                                   <property name="row">5</property>
@@ -2768,18 +2582,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-center-background-image">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-center-background-image">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">5</property>
@@ -2791,8 +2594,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
 
                         <property name="tab">
                           <object class="GtkDrawingArea" id="center-tab-icon">
-                            <property name="width_request">24</property>
-                            <property name="height_request">24</property>
+                            <property name="margin_start">4</property>
+                            <property name="margin_end">4</property>
+                            <property name="width_request">28</property>
+                            <property name="height_request">28</property>
                             <property name="tooltip_text" translatable="yes">Center Appearance</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
@@ -2810,45 +2615,65 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
 
                         <property name="child">
                           <object class="GtkGrid">
-                            <property name="margin_start">15</property>
-                            <property name="margin_end">10</property>
-                            <property name="margin_top">10</property>
-                            <property name="margin_bottom">10</property>
+                            <property name="margin_start">40</property>
+                            <property name="margin_end">40</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">30</property>
                             <property name="row_spacing">10</property>
-                            <property name="column_spacing">10</property>
+                            <property name="column_spacing">5</property>
                             <child>
-                              <object class="GtkSeparator">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Children Appearance</property>
+                                    <style>
+                                      <class name="large-title" />
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_bottom">30</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Child items are styled differently when their wedge is hovered.</property>
+                                    <style>
+                                      <class name="dim-label" />
+                                    </style>
+                                  </object>
+                                </child>
                                 <layout>
                                   <property name="column">0</property>
-                                  <property name="row">8</property>
+                                  <property name="row">0</property>
                                   <property name="column-span">4</property>
                                 </layout>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
+                              <object class="GtkLabel">
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Standard State</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
                                 <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">6</property>
-                                  <property name="column-span">4</property>
+                                  <property name="column">1</property>
+                                  <property name="row">1</property>
                                 </layout>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
+                              <object class="GtkLabel">
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">Hovered State</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
                                 <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">4</property>
-                                  <property name="column-span">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">2</property>
-                                  <property name="column-span">4</property>
+                                  <property name="column">3</property>
+                                  <property name="row">1</property>
                                 </layout>
                               </object>
                             </child>
@@ -3324,24 +3149,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">12</property>
-                                  <property name="column-span">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">10</property>
-                                  <property name="column-span">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
                               <object class="GtkLabel">
                                 <property name="halign">start</property>
                                 <property name="margin_end">20</property>
@@ -3396,17 +3203,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-child-color">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-child-color">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">3</property>
@@ -3414,18 +3211,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-child-size">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-child-size">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">7</property>
@@ -3433,18 +3219,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-child-offset">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-child-offset">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">9</property>
@@ -3452,18 +3227,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-child-icon-scale">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-child-icon-scale">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">11</property>
@@ -3471,63 +3235,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-child-icon-opacity">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-child-icon-opacity">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">15</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Standard State</property>
-                                <property name="justify">center</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                                <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">Hovered State</property>
-                                <property name="justify">center</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                                <layout>
-                                  <property name="column">3</property>
-                                  <property name="row">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes">Children Appearance</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"></attribute>
-                                </attributes>
-                                <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">0</property>
-                                  <property name="column-span">3</property>
                                 </layout>
                               </object>
                             </child>
@@ -3543,37 +3254,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">14</property>
-                                  <property name="column-span">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">16</property>
-                                  <property name="column-span">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="ImageChooserButton" id="child-background-image">
+                              <object class="FlyPieImageChooserButton" id="child-background-image">
                                 <layout>
                                   <property name="column">1</property>
                                   <property name="row">5</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">18</property>
-                                  <property name="column-span">4</property>
                                 </layout>
                               </object>
                             </child>
@@ -3589,18 +3273,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-child-icon-crop">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-child-icon-crop">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">13</property>
@@ -3651,7 +3324,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="ImageChooserButton" id="child-background-image-hover">
+                              <object class="FlyPieImageChooserButton" id="child-background-image-hover">
                                 <layout>
                                   <property name="column">3</property>
                                   <property name="row">5</property>
@@ -3659,18 +3332,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-child-background-image">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-child-background-image">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">5</property>
@@ -3682,8 +3344,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
 
                         <property name="tab">
                           <object class="GtkDrawingArea" id="children-tab-icon">
-                            <property name="width_request">24</property>
-                            <property name="height_request">24</property>
+                            <property name="margin_start">4</property>
+                            <property name="margin_end">4</property>
+                            <property name="width_request">28</property>
+                            <property name="height_request">28</property>
                             <property name="tooltip_text" translatable="yes">Children Appearance</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
@@ -3701,36 +3365,65 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
 
                         <property name="child">
                           <object class="GtkGrid">
-                            <property name="margin_start">15</property>
-                            <property name="margin_end">10</property>
-                            <property name="margin_top">10</property>
-                            <property name="margin_bottom">10</property>
+                            <property name="margin_start">40</property>
+                            <property name="margin_end">40</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">30</property>
                             <property name="row_spacing">10</property>
-                            <property name="column_spacing">10</property>
+                            <property name="column_spacing">5</property>
                             <child>
-                              <object class="GtkSeparator">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Grandchildren Appearance</property>
+                                    <style>
+                                      <class name="large-title" />
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_bottom">30</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Grandchild items are styled differently when their parent item's wedge is hovered.</property>
+                                    <style>
+                                      <class name="dim-label" />
+                                    </style>
+                                  </object>
+                                </child>
                                 <layout>
                                   <property name="column">0</property>
-                                  <property name="row">8</property>
+                                  <property name="row">0</property>
                                   <property name="column-span">4</property>
                                 </layout>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
+                              <object class="GtkLabel">
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Standard State</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
                                 <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">6</property>
-                                  <property name="column-span">4</property>
+                                  <property name="column">1</property>
+                                  <property name="row">1</property>
                                 </layout>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
+                              <object class="GtkLabel">
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">With Hovered Parent</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
                                 <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">4</property>
-                                  <property name="column-span">4</property>
+                                  <property name="column">3</property>
+                                  <property name="row">1</property>
                                 </layout>
                               </object>
                             </child>
@@ -3742,15 +3435,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                 <layout>
                                   <property name="column">0</property>
                                   <property name="row">3</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">2</property>
-                                  <property name="column-span">4</property>
                                 </layout>
                               </object>
                             </child>
@@ -3988,31 +3672,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkLabel">
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Standard State</property>
-                                <property name="justify">center</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                                <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="copy-grandchild-color">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-grandchild-color">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">3</property>
@@ -4020,18 +3680,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-grandchild-size">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-grandchild-size">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">7</property>
@@ -4039,18 +3688,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-grandchild-offset">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-grandchild-offset">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">9</property>
@@ -4058,53 +3696,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkLabel">
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes" comments="Hovered: When the mouse pointer is over the item">With Hovered Parent</property>
-                                <property name="justify">center</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                                <layout>
-                                  <property name="column">3</property>
-                                  <property name="row">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">center</property>
-                                <property name="label" translatable="yes">Grandchildren Appearance</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"></attribute>
-                                </attributes>
-                                <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">0</property>
-                                  <property name="column-span">3</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">10</property>
-                                  <property name="column-span">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">12</property>
-                                  <property name="column-span">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="ImageChooserButton" id="grandchild-background-image">
+                              <object class="FlyPieImageChooserButton" id="grandchild-background-image">
                                 <layout>
                                   <property name="column">1</property>
                                   <property name="row">5</property>
@@ -4122,18 +3714,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="copy-grandchild-background-image">
-                                <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-                                <property name="valign">center</property>
-                                <property name="has_frame">0</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button" />
-                                </style>
+                              <object class="FlyPieCopyValueButton" id="copy-grandchild-background-image">
                                 <layout>
                                   <property name="column">2</property>
                                   <property name="row">5</property>
@@ -4141,7 +3722,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                             <child>
-                              <object class="ImageChooserButton" id="grandchild-background-image-hover">
+                              <object class="FlyPieImageChooserButton" id="grandchild-background-image-hover">
                                 <layout>
                                   <property name="column">3</property>
                                   <property name="row">5</property>
@@ -4153,8 +3734,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
 
                         <property name="tab">
                           <object class="GtkDrawingArea" id="grandchildren-tab-icon">
-                            <property name="width_request">24</property>
-                            <property name="height_request">24</property>
+                            <property name="margin_start">4</property>
+                            <property name="margin_end">4</property>
+                            <property name="width_request">28</property>
+                            <property name="height_request">28</property>
                             <property name="tooltip_text" translatable="yes">Grandchildren Appearance</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
@@ -4173,18 +3756,39 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
 
                         <property name="child">
                           <object class="GtkGrid">
-                            <property name="margin_start">15</property>
-                            <property name="margin_end">10</property>
-                            <property name="margin_top">10</property>
-                            <property name="margin_bottom">10</property>
+                            <property name="margin_start">40</property>
+                            <property name="margin_end">40</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">30</property>
                             <property name="row_spacing">10</property>
-                            <property name="column_spacing">10</property>
+                            <property name="column_spacing">5</property>
                             <child>
-                              <object class="GtkSeparator">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Wedge Appearance</property>
+                                    <style>
+                                      <class name="large-title" />
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_bottom">30</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Clicking inside a wedge will activate the corresponding item.</property>
+                                    <style>
+                                      <class name="dim-label" />
+                                    </style>
+                                  </object>
+                                </child>
                                 <layout>
                                   <property name="column">0</property>
-                                  <property name="row">1</property>
-                                  <property name="column-span">3</property>
+                                  <property name="row">0</property>
+                                  <property name="column-span">2</property>
                                 </layout>
                               </object>
                             </child>
@@ -4198,7 +3802,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                   <object class="GtkLabel">
                                     <property name="halign">start</property>
                                     <property name="margin_end">20</property>
-                                    <property name="label" translatable="yes">Size</property>
+                                    <property name="label" translatable="yes">Inner Radius</property>
                                     <layout>
                                       <property name="column">0</property>
                                       <property name="row">0</property>
@@ -4223,7 +3827,6 @@ will cancel the selection.</property>
                                 <layout>
                                   <property name="column">0</property>
                                   <property name="row">2</property>
-                                  <property name="row-span">2</property>
                                 </layout>
                               </object>
                             </child>
@@ -4231,11 +3834,10 @@ will cancel the selection.</property>
                               <object class="GtkLabel">
                                 <property name="halign">start</property>
                                 <property name="margin_end">20</property>
-                                <property name="label" translatable="yes">Wedge Separators</property>
+                                <property name="label" translatable="yes">Wedge Separator Color</property>
                                 <layout>
                                   <property name="column">0</property>
                                   <property name="row">8</property>
-                                  <property name="row-span">2</property>
                                 </layout>
                               </object>
                             </child>
@@ -4244,29 +3846,10 @@ will cancel the selection.</property>
                                 <property name="halign">start</property>
                                 <property name="valign">center</property>
                                 <property name="margin_end">5</property>
-                                <property name="label" translatable="yes">Color</property>
+                                <property name="label" translatable="yes">Wedge Separator Thickness</property>
                                 <property name="justify">right</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
                                 <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">8</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">start</property>
-                                <property name="valign">center</property>
-                                <property name="margin_end">5</property>
-                                <property name="label" translatable="yes">Width</property>
-                                <property name="justify">right</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                                <layout>
-                                  <property name="column">1</property>
+                                  <property name="column">0</property>
                                   <property name="row">9</property>
                                 </layout>
                               </object>
@@ -4281,7 +3864,7 @@ will cancel the selection.</property>
                                 <property name="round_digits">1</property>
                                 <property name="value_pos">left</property>
                                 <layout>
-                                  <property name="column">2</property>
+                                  <property name="column">1</property>
                                   <property name="row">9</property>
                                 </layout>
                               </object>
@@ -4292,17 +3875,8 @@ will cancel the selection.</property>
                                 <property name="title" translatable="yes">Pick Wedge Separator Color</property>
                                 <property name="show_editor">1</property>
                                 <layout>
-                                  <property name="column">2</property>
+                                  <property name="column">1</property>
                                   <property name="row">8</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">7</property>
-                                  <property name="column-span">3</property>
                                 </layout>
                               </object>
                             </child>
@@ -4314,16 +3888,6 @@ will cancel the selection.</property>
                                 <layout>
                                   <property name="column">0</property>
                                   <property name="row">5</property>
-                                  <property name="row-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">4</property>
-                                  <property name="column-span">3</property>
                                 </layout>
                               </object>
                             </child>
@@ -4332,13 +3896,10 @@ will cancel the selection.</property>
                                 <property name="halign">start</property>
                                 <property name="valign">center</property>
                                 <property name="margin_end">5</property>
-                                <property name="label" translatable="yes">Width</property>
+                                <property name="label" translatable="yes">Wedge Size</property>
                                 <property name="justify">right</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
                                 <layout>
-                                  <property name="column">1</property>
+                                  <property name="column">0</property>
                                   <property name="row">3</property>
                                 </layout>
                               </object>
@@ -4355,24 +3916,8 @@ will cancel the selection.</property>
                                 <property name="digits">0</property>
                                 <property name="value_pos">left</property>
                                 <layout>
-                                  <property name="column">2</property>
-                                  <property name="row">3</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="halign">start</property>
-                                <property name="valign">center</property>
-                                <property name="margin_end">5</property>
-                                <property name="label" translatable="yes">Inner Radius</property>
-                                <property name="justify">right</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                                <layout>
                                   <property name="column">1</property>
-                                  <property name="row">2</property>
+                                  <property name="row">3</property>
                                 </layout>
                               </object>
                             </child>
@@ -4388,7 +3933,7 @@ will cancel the selection.</property>
                                 <property name="digits">0</property>
                                 <property name="value_pos">left</property>
                                 <layout>
-                                  <property name="column">2</property>
+                                  <property name="column">1</property>
                                   <property name="row">2</property>
                                 </layout>
                               </object>
@@ -4400,11 +3945,8 @@ will cancel the selection.</property>
                                 <property name="column_homogeneous">1</property>
                                 <child>
                                   <object class="GtkLabel">
-                                    <property name="halign">center</property>
-                                    <property name="valign">center</property>
-                                    <property name="margin_end">5</property>
+                                    <property name="halign">start</property>
                                     <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Inactive</property>
-                                    <property name="justify">right</property>
                                     <style>
                                       <class name="dim-label" />
                                     </style>
@@ -4416,11 +3958,8 @@ will cancel the selection.</property>
                                 </child>
                                 <child>
                                   <object class="GtkLabel">
-                                    <property name="halign">center</property>
-                                    <property name="valign">center</property>
-                                    <property name="margin_end">5</property>
+                                    <property name="halign">start</property>
                                     <property name="label" translatable="yes" comments="When the mouse pointer is over the item">Hovered</property>
-                                    <property name="justify">right</property>
                                     <style>
                                       <class name="dim-label" />
                                     </style>
@@ -4452,54 +3991,13 @@ will cancel the selection.</property>
                                     <layout>
                                       <property name="column">0</property>
                                       <property name="row">1</property>
-                                      <property name="column-span">2</property>
+                                      <property name="column_span">2</property>
                                     </layout>
                                   </object>
                                 </child>
                                 <layout>
-                                  <property name="column">2</property>
+                                  <property name="column">1</property>
                                   <property name="row">5</property>
-                                  <property name="row-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="orientation">vertical</property>
-                                <property name="spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="halign">center</property>
-                                    <property name="label" translatable="yes">Wedge Appearance</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"></attribute>
-                                    </attributes>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="margin_bottom">8</property>
-                                    <property name="label" translatable="yes">Clicking inside a wedge will activate the corresponding item.</property>
-                                    <property name="justify">center</property>
-                                    <property name="wrap">1</property>
-                                    <style>
-                                      <class name="dim-label" />
-                                    </style>
-                                  </object>
-                                </child>
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">0</property>
-                                  <property name="column-span">3</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">10</property>
-                                  <property name="column-span">3</property>
                                 </layout>
                               </object>
                             </child>
@@ -4509,8 +4007,10 @@ will cancel the selection.</property>
 
                         <property name="tab">
                           <object class="GtkDrawingArea" id="wedges-tab-icon">
-                            <property name="width_request">24</property>
-                            <property name="height_request">24</property>
+                            <property name="margin_start">4</property>
+                            <property name="margin_end">4</property>
+                            <property name="width_request">28</property>
+                            <property name="height_request">28</property>
                             <property name="tooltip_text" translatable="yes">Wedge Appearance</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
@@ -4528,35 +4028,38 @@ will cancel the selection.</property>
 
                         <property name="child">
                           <object class="GtkGrid">
-                            <property name="margin_start">15</property>
-                            <property name="margin_end">10</property>
-                            <property name="margin_top">10</property>
-                            <property name="margin_bottom">10</property>
+                            <property name="margin_start">40</property>
+                            <property name="margin_end">40</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">30</property>
                             <property name="row_spacing">10</property>
-                            <property name="column_spacing">10</property>
+                            <property name="column_spacing">5</property>
                             <child>
-                              <object class="GtkSeparator">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Trace Appearance</property>
+                                    <style>
+                                      <class name="large-title" />
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_bottom">30</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">The trace is the connecting line between selected menu items.</property>
+                                    <style>
+                                      <class name="dim-label" />
+                                    </style>
+                                  </object>
+                                </child>
                                 <layout>
                                   <property name="column">0</property>
-                                  <property name="row">1</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">3</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">5</property>
+                                  <property name="row">0</property>
                                   <property name="column-span">2</property>
                                 </layout>
                               </object>
@@ -4625,37 +4128,6 @@ will cancel the selection.</property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkBox">
-                                <property name="orientation">vertical</property>
-                                <property name="spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="halign">center</property>
-                                    <property name="label" translatable="yes">Trace Appearance</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"></attribute>
-                                    </attributes>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="margin_bottom">8</property>
-                                    <property name="label" translatable="yes">The trace is the connecting line between selected menu items.</property>
-                                    <property name="justify">center</property>
-                                    <property name="wrap">1</property>
-                                    <style>
-                                      <class name="dim-label" />
-                                    </style>
-                                  </object>
-                                </child>
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">0</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
                               <object class="GtkLabel">
                                 <property name="halign">start</property>
                                 <property name="margin_end">20</property>
@@ -4666,22 +4138,15 @@ will cancel the selection.</property>
                                 </layout>
                               </object>
                             </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">7</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
                           </object>
                         </property>
 
                         <property name="tab">
                           <object class="GtkDrawingArea" id="trace-tab-icon">
-                            <property name="width_request">24</property>
-                            <property name="height_request">24</property>
+                            <property name="margin_start">4</property>
+                            <property name="margin_end">4</property>
+                            <property name="width_request">28</property>
+                            <property name="height_request">28</property>
                             <property name="tooltip_text" translatable="yes">Trace Appearance</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
@@ -4699,12 +4164,42 @@ will cancel the selection.</property>
 
                         <property name="child">
                           <object class="GtkGrid">
-                            <property name="margin_start">15</property>
-                            <property name="margin_end">10</property>
-                            <property name="margin_top">10</property>
-                            <property name="margin_bottom">10</property>
-                            <property name="row_spacing">8</property>
-                            <property name="column_spacing">10</property>
+                            <property name="margin_start">40</property>
+                            <property name="margin_end">40</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">30</property>
+                            <property name="row_spacing">10</property>
+                            <property name="column_spacing">5</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Advanced Settings</property>
+                                    <style>
+                                      <class name="large-title" />
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_bottom">30</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">These settings are independent of the presets.</property>
+                                    <style>
+                                      <class name="dim-label" />
+                                    </style>
+                                  </object>
+                                </child>
+                                <layout>
+                                  <property name="column">0</property>
+                                  <property name="row">0</property>
+                                  <property name="column-span">2</property>
+                                </layout>
+                              </object>
+                            </child>
                             <child>
                               <object class="GtkGrid">
                                 <property name="row_spacing">2</property>
@@ -4749,15 +4244,6 @@ will cancel the selection.</property>
                                 <layout>
                                   <property name="column">1</property>
                                   <property name="row">8</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">7</property>
-                                  <property name="column-span">2</property>
                                 </layout>
                               </object>
                             </child>
@@ -4811,15 +4297,6 @@ This is multiplied by the Global Scale value.</property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">5</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
                               <object class="GtkGrid">
                                 <property name="row_spacing">2</property>
                                 <child>
@@ -4864,15 +4341,6 @@ This is multiplied by the Global Scale value.</property>
                                 <layout>
                                   <property name="column">1</property>
                                   <property name="row">4</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">3</property>
-                                  <property name="column-span">2</property>
                                 </layout>
                               </object>
                             </child>
@@ -4926,24 +4394,6 @@ the current item will be selected.</property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">1</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">9</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
                               <object class="GtkGrid">
                                 <property name="row_spacing">2</property>
                                 <child>
@@ -4973,46 +4423,6 @@ or hold down a modifier key during selections.</property>
                                 <layout>
                                   <property name="column">0</property>
                                   <property name="row">10</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="orientation">vertical</property>
-                                <property name="spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="halign">center</property>
-                                    <property name="label" translatable="yes">Advanced Settings</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"></attribute>
-                                    </attributes>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="margin_bottom">8</property>
-                                    <property name="label" translatable="yes">These settings are independent of the presets.</property>
-                                    <property name="justify">center</property>
-                                    <property name="wrap">1</property>
-                                    <style>
-                                      <class name="dim-label" />
-                                    </style>
-                                  </object>
-                                </child>
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">0</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">11</property>
-                                  <property name="column-span">2</property>
                                 </layout>
                               </object>
                             </child>
@@ -5050,15 +4460,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkSeparator">
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">13</property>
-                                  <property name="column-span">2</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
                               <object class="GtkSwitch" id="show-screencast-mouse">
                                 <property name="halign">end</property>
                                 <property name="valign">center</property>
@@ -5083,8 +4484,10 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                         <property name="tab">
                           <object class="GtkDrawingArea" id="advanced-tab-icon">
-                            <property name="width_request">24</property>
-                            <property name="height_request">24</property>
+                            <property name="margin_start">4</property>
+                            <property name="margin_end">4</property>
+                            <property name="width_request">28</property>
+                            <property name="height_request">28</property>
                             <property name="tooltip_text" translatable="yes">Advanced Settings</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
@@ -5097,49 +4500,43 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                   </object>
                 </child>
 
-                <child>
-                  <object class="GtkSeparator"></object>
-                </child>
-
                 <!-- Live Preview Toolbar -->
 
                 <child>
-                  <object class="GtkBox">
-                    <style>
-                      <class name="toolbar" />
-                    </style>
+                  <object class="GtkActionBar">
 
                     <child>
                       <object class="GtkMenuButton">
+                        <property name="margin_end">8</property>
                         <property name="popover">preset-popover</property>
-                        <property name="icon_name">pan-down-symbolic</property>
-                        <property name="label" translatable="yes">Presets</property>
+                        <property name="label" translatable="yes">Load a Preset</property>
                       </object>
                     </child>
 
                     <child>
-                      <object class="GtkButton" id="load-preset-button">
-                        <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Load settings fom a file</property>
-                        <property name="child">
-                          <object class="GtkImage">
+                      <object class="GtkBox">
+                        <style>
+                          <class name="linked" />
+                        </style>
+
+                        <child>
+                          <object class="GtkButton" id="load-preset-button">
+                            <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Import settings</property>
                             <property name="icon_name">document-open-symbolic</property>
                           </object>
-                        </property>
-                      </object>
-                    </child>
+                        </child>
 
-                    <child>
-                      <object class="GtkButton" id="save-preset-button">
-                        <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Save the current settings to a file</property>
-                        <property name="child">
-                          <object class="GtkImage">
+                        <child>
+                          <object class="GtkButton" id="save-preset-button">
+                            <property name="tooltip_text" translatable="yes" comments="Where presets are stored by default">Export settings</property>
                             <property name="icon_name">document-save-symbolic</property>
                           </object>
-                        </property>
+                        </child>
+
                       </object>
                     </child>
 
-                    <child>
+                    <child type="end">
                       <object class="GtkButton" id="preview-button">
                         <property name="tooltip_text" translatable="yes">Open Live Preview Menu</property>
                         <property name="child">
@@ -5211,75 +4608,81 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                         </property>
                       </object>
                     </child>
+
                     <child>
-                      <object class="GtkSeparator"></object>
-                    </child>
-                    <child>
-                      <object class="GtkBox" id="menu-toolbar">
+                      <object class="GtkActionBar">
                         <child>
-                          <object class="GtkMenuButton">
-                            <property name="popover">item-type-popover</property>
+                          <object class="GtkBox">
+                            <property name="margin_end">8</property>
+                            <style>
+                              <class name="linked" />
+                            </style>
                             <child>
-                              <object class="GtkImage" id="down_image1">
+                              <object class="GtkMenuButton">
+                                <property name="popover">item-type-popover</property>
                                 <property name="icon_name">list-add-symbolic</property>
                               </object>
                             </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="remove-item-button">
-                            <property name="sensitive">0</property>
-                            <property name="tooltip_text" translatable="yes">Removes the selected item.</property>
                             <child>
-                              <object class="GtkImage" id="down_image">
-                                <property name="icon_name">list-remove-symbolic</property>
+                              <object class="GtkButton" id="remove-item-button">
+                                <property name="sensitive">0</property>
+                                <property name="tooltip_text" translatable="yes">Removes the selected item.</property>
+                                <child>
+                                  <object class="GtkImage" id="down_image">
+                                    <property name="icon_name">list-remove-symbolic</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkButton" id="import-menu-config-button">
-                            <property name="tooltip_text" translatable="yes">Imports a menu configuration.</property>
+                          <object class="GtkBox">
+                            <property name="margin_end">8</property>
+                            <style>
+                              <class name="linked" />
+                            </style>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkButton" id="import-menu-config-button">
+                                <property name="tooltip_text" translatable="yes">Import menu configuration</property>
                                 <property name="icon_name">document-open-symbolic</property>
                               </object>
                             </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="export-menu-config-button">
-                            <property name="tooltip_text" translatable="yes">Exports the current menu configuration.</property>
                             <child>
-                              <object class="GtkImage">
+                              <object class="GtkButton" id="export-menu-config-button">
+                                <property name="tooltip_text" translatable="yes">Export menu configuration</property>
                                 <property name="icon_name">document-save-symbolic</property>
                               </object>
                             </child>
                           </object>
                         </child>
-                        <child>
-                          <object class="GtkSeparator" id="sep1">
-                            <property name="orientation">vertical</property>
-                          </object>
-                        </child>
-                        <child>
+                        <child type="end">
                           <object class="GtkButton" id="preview-menu-button">
-                            <property name="sensitive">0</property>
-                            <property name="tooltip_text" translatable="yes">Opens a preview for the selected menu.</property>
-                            <child>
-                              <object class="GtkImage" id="help_image">
-                                <property name="icon_name">media-playback-start-symbolic</property>
+                            <property name="tooltip_text" translatable="yes">Open Live Preview Menu</property>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="margin_start">8</property>
+                                <property name="margin_end">8</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon_name">media-playback-start-symbolic</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes" comments="Text of a button that opens a preview menu to test setting changes on-the-fly. There&apos;s a &apos;Play&apos; button next to the text, so no need to say &quot;Open Live Preview&quot; or similar.">Live Preview</property>
+                                  </object>
+                                </child>
                               </object>
-                            </child>
+                            </property>
                             <style>
                               <class name="pill-button" />
                               <class name="suggested-action" />
                             </style>
                           </object>
                         </child>
-                        <style>
-                          <class name="toolbar" />
-                        </style>
                       </object>
                     </child>
                   </object>
@@ -5582,7 +4985,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     </child>
                                     <child>
                                       <object class="GtkProgressBar" id="level-progressbar">
-                                        <property name="width_request">500</property>
+                                        <property name="width_request">480</property>
                                         <property name="halign">center</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">20</property>
@@ -5614,7 +5017,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         <property name="title" translatable="yes">Statistics</property>
                         <property name="child">
                           <object class="GtkScrolledWindow">
-                            <property name="width_request">500</property>
+                            <property name="width_request">480</property>
                             <property name="halign">center</property>
                             <property name="propagate_natural_width">1</property>
                             <property name="child">

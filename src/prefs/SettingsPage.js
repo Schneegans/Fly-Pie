@@ -94,7 +94,7 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('center-icon-scale');
     this._bindSlider('center-icon-crop');
     this._bindSlider('center-icon-opacity');
-    this._bindImageChooserButton('center-background-image');
+    this._bindFlyPieImageChooserButton('center-background-image');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
     this._bindRevealer('center-color-mode-fixed', 'center-fixed-color-revealer');
@@ -125,7 +125,7 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('child-icon-scale');
     this._bindSlider('child-icon-crop');
     this._bindSlider('child-icon-opacity');
-    this._bindImageChooserButton('child-background-image');
+    this._bindFlyPieImageChooserButton('child-background-image');
     this._bindSwitch('child-draw-above');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
@@ -150,7 +150,7 @@ var SettingsPage = class SettingsPage {
     this._bindColorButton('grandchild-fixed-color');
     this._bindSlider('grandchild-size');
     this._bindSlider('grandchild-offset');
-    this._bindImageChooserButton('grandchild-background-image');
+    this._bindFlyPieImageChooserButton('grandchild-background-image');
     this._bindSwitch('grandchild-draw-above');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
@@ -494,7 +494,7 @@ var SettingsPage = class SettingsPage {
   // Me.path are stored as relative paths. The button state is also updated when the
   // corresponding setting changes. It also binds any corresponding copy buttons and
   // '-hover' variants if they exist.
-  _bindImageChooserButton(settingsKey) {
+  _bindFlyPieImageChooserButton(settingsKey) {
 
     // Called once for settingsKey and once for settingsKey + '-hover'.
     const impl = (key) => {

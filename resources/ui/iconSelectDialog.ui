@@ -2,7 +2,7 @@
 <interface domain="flypie">
   <requires lib="gtk" version="4.0" />
 
-  <template class="IconSelectDialog" parent="GtkDialog">
+  <template class="FlyPieIconSelectDialog" parent="GtkDialog">
     <property name="modal">1</property>
     <property name="title"></property>
     <action-widgets>
