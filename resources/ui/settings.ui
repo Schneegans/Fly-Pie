@@ -5322,6 +5322,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkBox">
                     <child>
                       <object class="GtkStackSwitcher">
+                        <property name="visible">0</property>
                         <property name="halign">center</property>
                         <property name="hexpand">1</property>
                         <property name="margin_top">10</property>
