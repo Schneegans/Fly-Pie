@@ -762,6 +762,7 @@ Can be added to custom menus.</property>
         <property name="spacing">5</property>
         <child>
           <object class="GtkStackSwitcher">
+            <property name="visible">0</property>
             <property name="stack">stack1</property>
           </object>
         </child>
@@ -951,6 +952,7 @@ Can be added to custom menus.</property>
                         <property name="child">
                           <object class="GtkBox">
                             <property name="width_request">480</property>
+                            <property name="height_request">650</property>
                             <property name="halign">center</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">10</property>
@@ -1323,9 +1325,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                 <property name="valign">start</property>
                                 <property name="label" translatable="yes">Try remembering the path to an item. Open the menu and &lt;b&gt;draw the path with your mouse&lt;/b&gt;. You can start with individual segments of the path, put you can also try to draw the entire path!
 
-You may find it more successful if you explicitly try to compose your gesture of straight parts. &lt;b&gt;Do not draw curvy paths but rather expressive zig-zag-lines!&lt;/b&gt;
-
-Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
+You may find it more successful if you explicitly try to compose your gesture of straight parts. &lt;b&gt;Do not draw curvy paths but rather expressive zig-zag-lines!&lt;/b&gt;</property>
                                 <property name="use_markup">1</property>
                                 <property name="wrap">1</property>
                                 <property name="max_width_chars">1</property>
@@ -1573,7 +1573,6 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                             </child>
                             <child>
                               <object class="GtkLabel">
-                                <property name="vexpand">1</property>
                                 <property name="valign">start</property>
                                 <property name="margin_top">20</property>
                                 <property name="label" translatable="yes" comments="Use a similarly bad pun for &quot;Pielot&quot; that works in your language, if you want. Who doesn&apos;t love puns? xD">Congratulations! If you managed to unlock most of the medals, you will be using Fly-Pie like a master Pielot!
@@ -1597,10 +1596,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                 <!-- Tutorial navigation buttons -->
 
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkCenterBox">
                     <property name="width_request">480</property>
                     <property name="halign">center</property>
-                    <child>
+                    <child type="start">
                       <object class="GtkButton" id="tutorial-previous-page-button">
                         <property name="sensitive">0</property>
                         <property name="has_frame">0</property>
@@ -1637,7 +1636,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                         </child>
                       </object>
                     </child>
-                    <child>
+                    <child type="center">
                       <object class="GtkBox">
                         <property name="hexpand">1</property>
                         <property name="halign">center</property>
@@ -1676,7 +1675,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                         </child>
                       </object>
                     </child>
-                    <child>
+                    <child type="end">
                       <object class="GtkButton" id="tutorial-next-page-button">
                         <property name="halign">end</property>
                         <property name="has_frame">0</property>
