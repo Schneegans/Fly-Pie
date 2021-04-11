@@ -373,19 +373,22 @@ var MenuEditorPage = class MenuEditorPage {
     // operations. This is because we can reorder the menu items. We use the special
     // 'GTK_TREE_MODEL_ROW' target. This makes sure that most of the row-reordering
     // functionality works out-of-the-box.
-    const internalFormats = Gdk.ContentFormats.new(['GTK_TREE_MODEL_ROW']);
-    const externalFormats = Gdk.ContentFormats.new(['text/uri-list', 'text/plain']);
-    this._view.enable_model_drag_source(
-        Gdk.ModifierType.BUTTON1_MASK, internalFormats,
-        Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
+    // const internalFormats = Gdk.ContentFormats.new_for_gtype(GObject.type_from_name("GtkTreeRowData"));
+    // const externalFormats = Gdk.ContentFormats.new(['text/uri-list', 'text/plain']);
+    // this._view.enable_model_drag_source(
+    //     Gdk.ModifierType.BUTTON1_MASK, internalFormats,
+    //     Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
+
+    this._view.set_reorderable(true);
 
     // However it is a destination for both, internal and external drag'n'drop operations.
     // Internal operations occur when the user reorders the rows, external operations
     // occur when something is dragged to the tree view in order to create new items. This
     // can be a file, an URL or some other things.
-    this._view.enable_model_drag_dest(
-        internalFormats.union(externalFormats),
-        Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
+    // this._view.enable_model_drag_dest(
+    //     internalFormats,
+    //     // internalFormats.union(externalFormats),
+    //     Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
 
     // This is called when a drag'n'drop operation is received.
     // this._view.connect(
