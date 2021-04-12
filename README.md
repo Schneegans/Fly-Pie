@@ -65,19 +65,19 @@ If you want to learn more, use the links below for much more information!
 # :revolving_hearts: These people _do_ love Fly-Pie
 
 Do you want to show that you love Fly-Pie too? You may <a href="https://github.com/sponsors/Schneegans">become a sponsor for as little as 1$ / month</a>!
-While contributing new features or translating Fly-Pie is the most awesome way to contribute, providing financial support will help me stay motivated to invest my spare time to keep the project alive in the future.
+While coding new features or translating Fly-Pie is the most awesome way to contribute, providing financial support will help me stay motivated to invest my spare time to keep the project alive in the future.
 
 ## :1st_place_medal: Gold Sponsors
 <p align="center">
   <a href="https://github.com/sponsors/Schneegans">Be the first!</a>
 </p>
 
-## :2nd_place_medal: Silver Sponsors</strong>
+## :2nd_place_medal: Silver Sponsors
 <p align="center">
   GEPLlinux
 </p>
 
-## :3rd_place_medal: Bronze Sponsors</strong>
+## :3rd_place_medal: Bronze Sponsors
 <p align="center">
   <a href="https://github.com/denis-roy">@denis-roy</a><br>
   <a href="https://github.com/ykhurshid">@ykhurshid</a>
