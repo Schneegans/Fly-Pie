@@ -6,7 +6,7 @@
 
 ## [Fly-Pie 5](https://github.com/schneegans/fly-pie/releases/tag/v5)
 
-**Release Date:** TBD
+**Release Date:** 2021-04-12
 
 #### New Features
 * A new interaction mode has been added which is specifically useful on **touch-pads**: **Turbo Mode**! You can now also "draw" gestures as long as a modifier key, such as <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, or <kbd>Alt</kbd> is held down **without having to press your mouse button**! This is especially useful when you opened the menu with a shortcut involving such a modifier key. You can just keep it pressed and move the pointer with the mouse or your touch-pad!
@@ -15,12 +15,7 @@
   - Select **background images** for your items!
   - **Crop item icons** to fit them in a circle!
 * A set of **new presets** has been added which resemble the style of some well-known GTK themes:
-  - Adwaita
-  - Adwaita Dark
-  - Arc
-  - Arc Dark
-  - Orchis
-  - Yaru
+  - Adwaita, Adwaita Dark, Arc, Arc Dark, Orchis & Yaru
 * `OnHover` and `OnUnhover` **signals** have been added to the D-Bus interface.
 * Actions and Menus can now define their own configuration widgets. Therefore **items can now have an arbitrary number of settings**. This leads to some changes of the D-Bus interface but it should be backwards compatible.
 * The "**Running Applications**" menu uses this new feature by adding several options:
