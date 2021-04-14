@@ -107,6 +107,7 @@ jobs:
     - name: Test Fly-Pie
       run: |
         sudo apt-get install imagemagick -qq
+        echo $UID
         podman run --rm -t ghcr.io/schneegans/gnome-shell-3.38:latest
         sleep 4
         podman cp flypie@schneegans.github.com.zip $POD:/home/gnomeshell/
