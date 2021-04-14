@@ -10,8 +10,9 @@
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const ItemRegistry = Me.imports.src.common.ItemRegistry;
+const Me                  = imports.misc.extensionUtils.getCurrentExtension();
+const ItemRegistry        = Me.imports.src.common.ItemRegistry;
+const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 // We have to import the Shell module optionally. This is because this file is included
 // from both sides: From prefs.js and from extension.js. When included from prefs.js, the
@@ -35,7 +36,7 @@ try {
 var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
-  // activate() method which is called when the user selects the item, Menus can have
+  // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
   class: ItemRegistry.ItemClass.MENU,
 
@@ -53,29 +54,47 @@ var menu = {
   description: _(
       'The <b>Frequently Used</b> menu shows a list of frequently used applications. For efficient selections, you should limit the maximum number of shown applications to about twelve.'),
 
-  // Items of this type have an additional data property which can be set by the user. The
-  // data value chosen by the user is passed to the createItem() method further below.
-  data: {
+  // Items of this type have an additional count configuration parameter which is the
+  // maximum number of items to display.
+  config: {
+    // This is used as data for newly created items of this type.
+    defaultData: {maxNum: 7},
 
-    // The data type determines which widget is visible when an item of this type is
-    // selected in the settings dialog.
-    type: ItemRegistry.ItemDataType.COUNT,
+    // This is called whenever an item of this type is selected in the menu editor. It
+    // returns a Gtk.Widget which will be shown in the sidebar of the menu editor. The
+    // currently configured data object will be passed as first parameter and *should* be
+    // an object containing a single "maxNum" property. To stay backwards compatible with
+    // Fly-Pie 4, we have to also handle the case where the number is given as a simple
+    // string value. The second parameter is a callback which is fired whenever the user
+    // changes something in the widgets.
+    getWidget(data, updateCallback) {
+      let maxNum = 7;
+      if (typeof data === 'string') {
+        maxNum = parseInt(data);
+      } else if (data.maxNum != undefined) {
+        maxNum = data.maxNum;
+      }
 
-    // This is shown on the left above the data widget in the settings dialog.
-    name: _('Max Item Count'),
-
-    // Translators: Please keep this short.
-    // This is shown on the right above the data widget in the settings dialog.
-    description: _('Limits the number of children.'),
-
-    // This is be used as data for newly created items.
-    default: '7'
+      return ConfigWidgetFactory.createCountWidget(
+          _('Max Item Count'), _('Limits the number of children.'), 1, 20, 1, maxNum,
+          (value) => {
+            updateCallback({maxNum: value});
+          });
+    }
   },
 
   // This will be called whenever a menu is opened containing an item of this kind.
-  // The data value chosen by the user will be passed to this function.
+  // The data parameter *should* be an object containing a single "maxNum" property. To
+  // stay backwards compatible with Fly-Pie 4, we have to also handle the case where
+  // the maxNum is given as a simple string value.
   createItem: (data) => {
-    const maxNum = parseInt(data);
+    let maxNum = 7;
+    if (typeof data === 'string') {
+      maxNum = parseInt(data);
+    } else if (data.maxNum != undefined) {
+      maxNum = data.maxNum;
+    }
+
     const apps   = Shell.AppUsage.get_default().get_most_used().slice(0, maxNum);
     const result = {children: []};
 
@@ -84,7 +103,7 @@ var menu = {
         result.children.push({
           name: app.get_name(),
           icon: app.get_app_info().get_icon().to_string(),
-          activate: () => app.open_new_window(-1)
+          onSelect: () => app.open_new_window(-1)
         });
       }
     });

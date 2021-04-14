@@ -34,26 +34,10 @@ const utils   = Me.imports.src.common.utils;
 var ItemClass = {MENU: 0, ACTION: 1};
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Each menu item type has a data type - this determines which widgets are visible      //
-// when an item of this type is selected in the settings dialog. If you create a new    //
-// item type, this list may have to be extended. This will also require some changes to //
-// the MenuEditor.js as this is responsible for showing and hiding the widgets          //
-// accordingly.                                                                         //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-var ItemDataType = {
-  TEXT: 0,      // A Gtk.Entry for arbitrary text.
-  SHORTCUT: 1,  // A shortcut-selector is shown.
-  COMMAND: 2,   // A Gtk.Entry with an additional button for searching installed apps.
-  FILE: 3,      // A Gtk.Entry with an additional file chooser button.
-  COUNT: 4      // A Gtk.SpinButton for selecting numbers.
-};
-
-//////////////////////////////////////////////////////////////////////////////////////////
 // The getItemTypes() of the ItemRegistry can be used to access all available action    //
 // and menu types. Each item type should have eight properties:                         //
 //   class:        This should be either ItemClass.ACTION or ItemClass.MENU.            //
-//                 The former is used for single items with an activate() method, the   //
+//                 The former is used for single items with an onSelect() method, the   //
 //                 latter for menus which are composed of multiple actions or menus.    //
 //   name:         This will be shown in the add-new-item popover. It is also the       //
 //                 default name of newly created items of this type. This should be     //
@@ -65,23 +49,24 @@ var ItemDataType = {
 //                 This should be translatable.                                         //
 //   description:  This will be shown in the right hand side settings when an item of   //
 //                 this type is selected. This should be translatable.                  //
-//   data:         An optional object which defines some additional data which can be   //
-//                 chosen by the user. The additional data is always stored as a        //
-//                 string. If you actually need to store a number (e.g. for             //
-//                 ItemDataType.COUNT, you will have to use parseInt(data) in the       //
-//                 createItem() method.                                                 //
-//                   type:        This determines which widget is shown to select the   //
-//                                data in the settings dialog. Possible values are      //
-//                                listed in ItemDataType above.                         //
-//                   name:        This will be shown on the left above the data widget  //
-//                                in the settings dialog.                               //
-//                   description: This will be shown on the right above the data widget //
-//                                in the settings dialog.                               //
-//                   default:     This string value will be used as data for newly      //
-//                                created items.                                        //
+//   config:       An optional object which defines additional data which can be        //
+//                 configured by the user. The object must have to properties:          //
+//                    defaultData: A object defining the default data which will be     //
+//                                 stored for newly created items of this type. When a  //
+//                                 new item is selected, the getWidget() method below   //
+//                                 will be executed and the defaultData object will be  //
+//                                 passed as first parameter.                           //
+//                    getWidget:   A function which returns a Gtk.Widget which will be  //
+//                                 shown in the menu editor when an item of this type   //
+//                                 is selected. The function receives two arguments:    //
+//                                 First an object containing the currently configured  //
+//                                 item data, second a callback which should be fired   //
+//                                 whenever the user changes the state of the widget.   //
+//                                 The new data should be passed as object to the       //
+//                                 callback.                                            //
 //   createItem:   A function which will be called whenever a menu is opened containing //
 //                 an item of this kind. The data value chosen by the user will be      //
-//                 passed to this function.                                             //
+//                 passed to this function as object.                                   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let _itemTypes = null;
@@ -191,10 +176,10 @@ var ItemRegistry = class ItemRegistry {
 
     // Assign default data.
     if (config.data == undefined) {
-      if (this.getItemTypes()[config.type].data != undefined) {
-        config.data = this.getItemTypes()[config.type].data.default;
+      if (this.getItemTypes()[config.type].config != undefined) {
+        config.data = this.getItemTypes()[config.type].config.defaultData;
       } else {
-        config.data = '';
+        config.data = {};
       }
     }
 

@@ -126,13 +126,21 @@ class MenuItem extends Clutter.Actor {
     this._parentColor = new Clutter.Color({red: 255, green: 255, blue: 255});
 
     // This callback will be executed when the item is selected. Only items without any
-    // children but with an activation callback can be activated.
-    this._activationCallback = null;
+    // children but with such a callback can be activated.
+    this._selectionCallback = null;
+
+    // This callback will be executed when the item is hovered. This will only be called
+    // for actions, that is items without any children.
+    this._hoverCallback   = null;
+    this._unhoverCallback = null;
 
     // Create Children Container. This eventually will contain one MenuItem for each child
     // item of this menu.
     this._childrenContainer = new Clutter.Actor();
     this.add_child(this._childrenContainer);
+
+    // This will contain the currently hovered / dragged child item.
+    this._activeChildIndex = -1;
 
     // Create the Icon Container. This eventually will contain one actor for each visible
     // MenuItemState, except for the PARENT* states, as they are drawn like CHILDREN*. We
@@ -189,21 +197,48 @@ class MenuItem extends Clutter.Actor {
     return this._childrenContainer.get_children();
   }
 
-  // Sets menuItem to be the index'th child of this..
+  // Sets menuItem to be the index'th child of this.
   setChildMenuItemIndex(menuItem, index) {
     return this._childrenContainer.set_child_at_index(menuItem, index);
   }
 
-  // This callback will be executed when the item is selected. Only items without any
-  // children but with an activation callback can be activated. Can be set to null to
-  // disable the activate-ability.
-  setActivationCallback(func) {
-    this._activationCallback = func;
+  // This contains the currently hovered / dragged child item.
+  getActiveChildIndex() {
+    return this._activeChildIndex;
   }
 
-  // Returns the activation callback set above.
-  getActivationCallback() {
-    return this._activationCallback;
+  // This callback will be executed when the item is selected. Only items without any
+  // children but with an selection callback can be activated. Can be set to null to
+  // disable the activate-ability.
+  setSelectionCallback(func) {
+    this._selectionCallback = func;
+  }
+
+  // Returns the selection callback set above.
+  getSelectionCallback() {
+    return this._selectionCallback;
+  }
+
+  // This callback will be executed when the item is hovered. This will only be called
+  // for actions, that is for items without any children.
+  setHoverCallback(func) {
+    this._hoverCallback = func;
+  }
+
+  // Returns the hover callback set above.
+  getHoverCallback() {
+    return this._hoverCallback;
+  }
+
+  // This callback will be executed when the item stops being hovered. This will only be
+  // called for actions, that is for items without any children.
+  setUnhoverCallback(func) {
+    this._unhoverCallback = func;
+  }
+
+  // Returns the hover callback set above.
+  getUnhoverCallback() {
+    return this._unhoverCallback;
   }
 
   // This is called during redraw() of the parent MenuItem. redraw() traverses the menu
@@ -294,23 +329,16 @@ class MenuItem extends Clutter.Actor {
 
     // We load the background images once for all menu items.
     const loadBackgroundImage = (file, size) => {
-      // Do nothing if the background image property is not set.
-      if (file == '') {
-        return null;
+      // Only attempt to load an image if the background image property is set and exists.
+      if (file != '' && Gio.File.new_for_path(file).query_exists(null)) {
+        try {
+          return GdkPixbuf.Pixbuf.new_from_file_at_scale(file, size, size, false);
+        } catch (error) {
+          utils.debug('Failed to load background image: ' + error);
+        }
       }
 
-      // If the file does not exist, it may be a relative path.
-      if (!Gio.File.new_for_path(file).query_exists(null)) {
-        file = Me.path + '/' + file;
-      }
-
-      // if this does not exist as well, we cannot load the image.
-      if (!Gio.File.new_for_path(file).query_exists(null)) {
-        return null;
-      }
-
-      // Finally load the pixbuf!
-      return GdkPixbuf.Pixbuf.new_from_file_at_scale(file, size, size, false);
+      return null;
     };
 
     // clang-format off

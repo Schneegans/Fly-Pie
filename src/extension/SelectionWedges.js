@@ -205,6 +205,7 @@ class SelectionWedges extends Clutter.Actor {
       gestureJitterThreshold:  settings.get_double('gesture-jitter-threshold')  * globalScale,
       gestureMinStrokeLength:  settings.get_double('gesture-min-stroke-length') * globalScale,
       gestureMinStrokeAngle:   settings.get_double('gesture-min-stroke-angle'),
+      hoverMode:               settings.get_boolean('hover-mode'),
     };
     // clang-format on
 
@@ -439,10 +440,7 @@ class SelectionWedges extends Clutter.Actor {
     // considered a corner. There are some minimum lengths for both vectors - if they are
     // not long enough, nothing is done. If E->M is long enough, but there is no corner, E
     // is set to M and we wait for the next motion event.
-    const leftButtonPressed = event.get_state() & Clutter.ModifierType.BUTTON1_MASK;
-    const shortcutPressed   = event.get_state() & Gtk.accelerator_get_default_mod_mask();
-    if (leftButtonPressed || shortcutPressed) {
-
+    if (this.isGestureModifier(event.get_state())) {
       // Store the current mouse position.
       const mouse = {x: screenX, y: screenY};
 
@@ -517,10 +515,21 @@ class SelectionWedges extends Clutter.Actor {
         }
       }
     } else {
-
       // The mouse button is not pressed anymore, so we can abort gesture detection.
       this._resetStroke();
     }
+  }
+
+
+  // Returns true if the primary button is pressed or a modifier is held down (for the
+  // "Turbo-Mode"),
+  isGestureModifier(mods) {
+    const hoverMode         = this._settings.hoverMode;
+    const leftButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
+    const shortcutPressed =
+        mods & (Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK);
+
+    return hoverMode || leftButtonPressed || shortcutPressed;
   }
 
   // ----------------------------------------------------------------------- private stuff

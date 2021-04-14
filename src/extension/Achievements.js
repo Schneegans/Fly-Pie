@@ -49,19 +49,19 @@ var Achievements = class Achievements {
 
     // If the click-selections statistics key changes (that means that the user selected
     // something by point-and-click), check for newly unlocked achievements.
-    this._settingsConnections.push(this._settings.connect(
-        'changed::stats-click-selections',
-        () => {
-            // this._notify(
-            //     'Level up!', 'You just reached level 10!',
-            //     Gio.icon_new_for_string(Me.path +
-            //     '/assets/badges/levels/level10.png'));
-        }));
+    // this._settingsConnections.push(this._settings.connect(
+    //     'changed::stats-click-selections',
+    //     () => {
+    //         // this._notify(
+    //         //     'Level up!', 'You just reached level 10!',
+    //         //     Gio.icon_new_for_string(Me.path +
+    //         //     '/assets/badges/levels/level10.png'));
+    //     }));
 
     // If the gesture-selections statistics key changes (that means that the user selected
     // something with a gesture), check for newly unlocked achievements.
-    this._settingsConnections.push(
-        this._settings.connect('changed::stats-gesture-selections', () => {}));
+    // this._settingsConnections.push(
+    //     this._settings.connect('changed::stats-gesture-selections', () => {}));
   }
 
   // This should be called when the extension is unloaded. It disconnects handlers

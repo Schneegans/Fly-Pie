@@ -40,18 +40,19 @@ var AchievementsPage = class AchievementsPage {
 
     // ---------------------------------------------- Initialize the achievements sub-page
 
-    this._addAchievement(
-        'Master Pielot', 'Select 100 items in less than 10 ms.', 100, 'copper', 'a');
-    this._addAchievement(
-        'Master Pielot', 'Select 300 items in less than 20 ms.', 500, 'bronze', 'b');
-    this._addAchievement(
-        'Master Pielot', 'Select 300 items in less than 20 ms.', 500, 'silver', 'c');
-    this._addAchievement(
-        'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'gold', 'd');
-    this._addAchievement(
-        'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'platinum', 'e');
-    this._addAchievement(
-        'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'special', 'd');
+    // this._addAchievement(
+    //     'Master Pielot', 'Select 100 items in less than 10 ms.', 100, 'copper', 'a');
+    // this._addAchievement(
+    //     'Master Pielot', 'Select 300 items in less than 20 ms.', 500, 'bronze', 'b');
+    // this._addAchievement(
+    //     'Master Pielot', 'Select 300 items in less than 20 ms.', 500, 'silver', 'c');
+    // this._addAchievement(
+    //     'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'gold', 'd');
+    // this._addAchievement(
+    //     'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'platinum',
+    //     'e');
+    // this._addAchievement(
+    //     'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'special', 'd');
 
     // ------------------------------------------------ Initialize the statistics sub-page
 

@@ -12,9 +12,10 @@ const Gio = imports.gi.Gio;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.src.common.utils;
-const ItemRegistry = Me.imports.src.common.ItemRegistry;
+const Me                  = imports.misc.extensionUtils.getCurrentExtension();
+const utils               = Me.imports.src.common.utils;
+const ItemRegistry        = Me.imports.src.common.ItemRegistry;
+const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The command actions executes a shell command when activated. This can be used to     //
@@ -25,7 +26,7 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 var action = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
-  // activate() method which is called when the user selects the item, Menus can have
+  // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
   class: ItemRegistry.ItemClass.ACTION,
 
@@ -43,35 +44,54 @@ var action = {
   description: _(
       'The <b>Launch Application</b> action executes any given command. This is primarily used to open applications but may have plenty of other use cases as well.'),
 
-  // Items of this type have an additional data property which can be set by the user. The
-  // data value chosen by the user is passed to the createItem() method further below.
-  data: {
+  // Items of this type have an additional text configuration parameter which represents
+  // the command to execute.
+  config: {
+    // This is used as data for newly created items of this type.
+    defaultData: {command: ''},
 
-    // The data type determines which widget is visible when an item of this type is
-    // selected in the settings dialog.
-    type: ItemRegistry.ItemDataType.COMMAND,
+    // This is called whenever an item of this type is selected in the menu editor. It
+    // returns a Gtk.Widget which will be shown in the sidebar of the menu editor. The
+    // currently configured data object will be passed as first parameter and *should* be
+    // an object containing a single "command" property. To stay backwards compatible with
+    // Fly-Pie 4, we have to also handle the case where the command is given as a simple
+    // string value. The second parameter is a callback which is fired whenever the user
+    // changes something in the widgets.
+    getWidget(data, updateCallback) {
+      let command = '';
+      if (typeof data === 'string') {
+        command = data;
+      } else if (data.command != undefined) {
+        command = data.command;
+      }
 
-    // This is shown on the left above the data widget in the settings dialog.
-    name: _('Command'),
-
-    // Translators: Please keep this short.
-    // This is shown on the right above the data widget in the settings dialog.
-    description: _('Use the button to list installed apps!'),
-
-    // This is be used as data for newly created items.
-    default: '',
+      return ConfigWidgetFactory.createCommandWidget(
+          _('Command'), _('Use the button to list installed apps!'), command,
+          (command, name, icon) => {
+            updateCallback({command: command}, name, icon);
+          });
+    }
   },
 
   // This will be called whenever a menu is opened containing an item of this kind.
-  // The data value chosen by the user will be passed to this function.
+  // The data parameter *should* be an object containing a single "command" property.
+  // To stay backwards compatible with Fly-Pie 4, we have to also handle the case
+  // where the command is given as a simple string value.
   createItem: (data) => {
-    // The activate() function will be called when the user selects this action.
+    let command = '';
+    if (typeof data === 'string') {
+      command = data;
+    } else if (data.command != undefined) {
+      command = data.command;
+    }
+
+    // The onSelect() function will be called when the user selects this action.
     return {
-      activate: () => {
+      onSelect: () => {
         try {
           const ctx  = global.create_app_launch_context(0, -1);
           const item = Gio.AppInfo.create_from_commandline(
-              data, null, Gio.AppInfoCreateFlags.NONE);
+              command, null, Gio.AppInfoCreateFlags.NONE);
           item.launch([], ctx);
         } catch (error) {
           utils.debug('Failed to execute command: ' + error);

@@ -5,12 +5,13 @@
 # Creating New Menu Types for Fly-Pie
 
 There are two fundamental item types in Fly-Pie: _Actions_ and _Menus_.
-Actions have an `activate()` method which is called when the user selects them; Menus can have child Actions or child Menus. 
+Actions have an `onSelect()` method which is called when the user selects them; Menus can have child Actions or child Menus. 
 
 If you want to create a new Menu type for Fly-Pie, this guide is made for you!
 As an example, we will create a Menu which contains three actions, each of which shows a desktop notification when selected.
 
-First, create a file `src/common/menus/ExampleMenu.js` with the following content.
+Before you start, you should read the [Software Architecture Page](software-architecture.md) to get an overview of the components of Fly-Pie.
+Then create a file `src/common/menus/ExampleMenu.js` with the following content.
 You should read the code, most of it is explained with inline comments!
 
 ```javascript
@@ -54,7 +55,7 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
-  // activate() method which is called when the user selects the item, Menus can have
+  // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus. In this example we create a Menu!
   class: ItemRegistry.ItemClass.MENU,
 
@@ -72,9 +73,9 @@ var menu = {
   // This is the (long) description shown when an item of this type is selected.
   description: _('Bar bar bar bar.'),
 
-  // Menus can also have a data field. See the documentation on how-to create custom
-  // actions for details. This example menu does not use a data field.
-  // data: { ... }
+  // Menus can also have a config field like actions. See the documentation on how-to
+  // create custom actions for details. This example menu does not use a config field.
+  // config: { ... }
 
   // This will be called whenever a menu is opened containing an item of this kind.
   createItem: () => {
@@ -82,28 +83,28 @@ var menu = {
     utils.debug('ExampleMenu Created!');
 
     // This method should return an object containing a 'children' array. Each array
-    // element has to have a 'name' and an 'icon'. The activate() function will be
+    // element has to have a 'name' and an 'icon'. The onSelect() function will be
     // called when the user selects the corresponding item.
     return {
       children: [
         {
           name: _('First Item'),
           icon: '♈',
-          activate: () => {
+          onSelect: () => {
             Main.notify(_('♈ Selected!'), _('This is the first item!'));
           }
         },
         {
           name: _('Second Item'),
           icon: '♎',
-          activate: () => {
+          onSelect: () => {
             Main.notify(_('♎ Selected!'), _('This is the second item!'));
           }
         },
         {
           name: _('Third Item'),
           icon: '♐',
-          activate: () => {
+          onSelect: () => {
             Main.notify(_('♐ Selected!'), _('This is the third item!'));
           }
         }
@@ -117,7 +118,7 @@ Once this file is in place, you just need to add the new Action to the `src/comm
 To do this, add the following line to the other, similar-looking lines in `getItemTypes()`.
 
 ```javascript
-ExampleMenu: actions.ExampleMenu.menu,
+ExampleMenu: menus.ExampleMenu.menu,
 ```
 
 Finally you can restart GNOME Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd> (or logout / login on Wayland).
