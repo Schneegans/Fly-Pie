@@ -124,5 +124,5 @@ jobs:
     - name: Upload Screenshot
       uses: actions/upload-artifact@v2
       with:
-        name: screenshot
+        name: screenshot-${{ matrix.version }}
         path: capture.jpg
