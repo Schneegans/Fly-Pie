@@ -38,16 +38,18 @@ gnome-extensions enable flypie@schneegans.github.com
 
 ## c) Cloning the Latest Version with `git`
 
+You should **not** clone Fly-Pie directly to the `~/.local/share/gnome-shell/extensions` directory as this may get overridden occasionally!
+Execute the clone command below where you want to have the source code of Fly-Pie.
+
 ```bash
-cd ~/.local/share/gnome-shell/extensions
 git clone https://github.com/Schneegans/Fly-Pie.git
-mv Fly-Pie flypie@schneegans.github.com
 ```
 
-You will have to compile the translations if you want to use Fly-Pie in your own language:
+Now you will have to install the extension.
+The script below compiles the locales and schemas, creates a zip file of the extension and finally installs it with the `gnome-extensions` tool.
 
 ```bash
-flypie@schneegans.github.com/scripts/compile-locales.sh
+Fly-Pie/scripts/create-release.sh -i
 ```
 
 Then restart GNOME Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
