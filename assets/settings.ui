@@ -47,10 +47,9 @@
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="label">Fly-Pie</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                      <attribute name="scale" value="2"/>
-                    </attributes>
+                    <style>
+                      <class name="large-title"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -1409,10 +1408,9 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">10</property>
                         <property name="label" translatable="yes" comments="This is a heading.">You can click anywhere!</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="2"/>
-                        </attributes>
+                        <style>
+                          <class name="large-title"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1528,10 +1526,9 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">10</property>
                         <property name="label" translatable="yes" comments="This is a heading.">Practice Session I</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="2"/>
-                        </attributes>
+                        <style>
+                          <class name="large-title"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1834,10 +1831,9 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">10</property>
                         <property name="label" translatable="yes" comments="This is a heading.">The Marking Mode of Fly-Pie</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="2"/>
-                        </attributes>
+                        <style>
+                          <class name="large-title"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1952,10 +1948,9 @@ Click &lt;b&gt;next&lt;/b&gt; for an additional practice session!</property>
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">10</property>
                         <property name="label" translatable="yes" comments="This is a heading.">Practice Session II</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="2"/>
-                        </attributes>
+                        <style>
+                          <class name="large-title"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -2270,10 +2265,9 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                         <property name="margin_bottom">10</property>
                         <property name="label" translatable="yes" comments="The user finished the tutorial. Yay!">Congratulations!</property>
                         <property name="justify">center</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="2"/>
-                        </attributes>
+                        <style>
+                          <class name="large-title"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
