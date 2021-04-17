@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {Gtk, Gio, Gdk} = imports.gi;
+const {Gtk, Gio, Gdk, GLib} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -38,6 +38,10 @@ var SettingsPage = class SettingsPage {
     // Keep a reference to the builder and the settings.
     this._builder  = builder;
     this._settings = settings;
+
+    // We keep several connections to the Gio.Settings object. Once the settings dialog is
+    // closed, we use this array to disconnect all of them.
+    this._settingsConnections = [];
 
     // Initialize all buttons of the preset area.
     this._initializePresetButtons();
@@ -166,7 +170,6 @@ var SettingsPage = class SettingsPage {
       this._copyToHover('child-auto-color-saturation');
       this._copyToHover('child-auto-color-luminance');
       this._copyToHover('child-auto-color-opacity');
-      this._copyToHover('child-fixed-color-hover');
     });
 
 
@@ -208,7 +211,15 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('gesture-jitter-threshold');
     this._bindSlider('gesture-min-stroke-length');
     this._bindSlider('gesture-min-stroke-angle');
+    this._bindSwitch('hover-mode');
     this._bindSwitch('show-screencast-mouse');
+  }
+
+  // Disconnects all settings connections.
+  destroy() {
+    this._settingsConnections.forEach(connection => {
+      this._settings.disconnect(connection);
+    });
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -288,18 +299,6 @@ var SettingsPage = class SettingsPage {
       dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
       dialog.add_button(_('Save'), Gtk.ResponseType.OK);
 
-      // Show the preset directory per default.
-      dialog.set_current_folder_uri(this._presetDirectory.get_uri());
-
-      // Also make updating presets easier by pre-filling the file input field with the
-      // currently selected preset.
-      const presetSelection   = this._builder.get_object('preset-selection');
-      const [ok, model, iter] = presetSelection.get_selected();
-      if (ok) {
-        const name = model.get_value(iter, 0);
-        dialog.set_current_name(name + '.json');
-      }
-
       // Save preset file when the OK button is clicked.
       dialog.connect('response', (dialog, response_id) => {
         if (response_id === Gtk.ResponseType.OK) {
@@ -311,8 +310,30 @@ var SettingsPage = class SettingsPage {
               path += '.json';
             }
 
+            const file         = Gio.File.new_for_path(path);
+            const relativePath = Gio.File.new_for_path(Me.path).get_relative_path(file);
+
+            // Show warning when attempting to save in Fly-Pie's directory as this will
+            // get deleted when the extension is updated.
+            if (relativePath != null) {
+              const warningDialog = new Gtk.MessageDialog({
+                transient_for: dialog,
+                modal: true,
+                buttons: Gtk.ButtonsType.OK,
+                message_type: Gtk.MessageType.WARNING,
+                text: _('You should not store the preset in the extension directory!'),
+                secondary_text: _(
+                    // Translators: "It" refers to the preset if stored in the extension's
+                    // directory.
+                    'Here it will be deleted whenever Fly-Pie is updated. It has been ' +
+                    'saved anyways, but please consider to store it in a safer place!')
+              });
+
+              warningDialog.run();
+              warningDialog.destroy();
+            }
+
             // Now save the preset!
-            const file    = Gio.File.new_for_path(path);
             const exists  = file.query_exists(null);
             const success = Preset.save(file);
 
@@ -341,9 +362,54 @@ var SettingsPage = class SettingsPage {
       dialog.show();
     });
 
-    // Open the preset directory with the default file manager.
-    this._builder.get_object('open-preset-directory-button').connect('clicked', () => {
-      Gio.AppInfo.launch_default_for_uri(this._presetDirectory.get_uri(), null);
+    this._builder.get_object('load-preset-button').connect('clicked', (button) => {
+      const dialog = new Gtk.FileChooserDialog({
+        title: _('Load Preset'),
+        action: Gtk.FileChooserAction.OPEN,
+        transient_for: button.get_toplevel(),
+        modal: true
+      });
+
+      // Show only *.json files per default.
+      const jsonFilter = new Gtk.FileFilter();
+      jsonFilter.set_name(_('JSON Files'));
+      jsonFilter.add_mime_type('application/json');
+      dialog.add_filter(jsonFilter);
+
+      // But allow showing all files if required.
+      const allFilter = new Gtk.FileFilter();
+      allFilter.add_pattern('*');
+      allFilter.set_name(_('All Files'));
+      dialog.add_filter(allFilter);
+
+      // Add our action buttons.
+      dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+      dialog.add_button(_('Load'), Gtk.ResponseType.OK);
+
+      // Import settings when the OK button is clicked.
+      dialog.connect('response', (dialog, response_id) => {
+        if (response_id === Gtk.ResponseType.OK) {
+          try {
+            const file = Gio.File.new_for_path(dialog.get_filename());
+            Preset.load(file);
+
+          } catch (error) {
+            const errorMessage = new Gtk.MessageDialog({
+              transient_for: button.get_toplevel(),
+              buttons: Gtk.ButtonsType.CLOSE,
+              message_type: Gtk.MessageType.ERROR,
+              text: _('Failed to load preset!'),
+              secondary_text: '' + error
+            });
+            errorMessage.run();
+            errorMessage.destroy();
+          }
+        }
+
+        dialog.destroy();
+      });
+
+      dialog.show();
     });
 
     // Create a random preset when the corresponding button is pressed.
@@ -459,7 +525,8 @@ var SettingsPage = class SettingsPage {
         button.active = true;
       };
 
-      this._settings.connect('changed::' + settingsKey, settingSignalHandler);
+      this._settingsConnections.push(
+          this._settings.connect('changed::' + settingsKey, settingSignalHandler));
 
       // Initialize the button with the state in the settings.
       settingSignalHandler();
@@ -493,18 +560,9 @@ var SettingsPage = class SettingsPage {
       const button = this._builder.get_object(key);
       if (button != null && this._settings.settings_schema.has_key(key)) {
 
-        // Store the file path when the user selects a file.
+        // Store the absolute file path when the user selects a file.
         button.connect('file-set', (widget) => {
-          const file         = widget.get_file();
-          const absolutePath = file.get_path();
-          const relativePath = Gio.File.new_for_path(Me.path).get_relative_path(file);
-
-          // Store the relative path if the file is a descendant of Me.path.
-          if (relativePath != null) {
-            this._settings.set_string(key, relativePath);
-          } else {
-            this._settings.set_string(key, absolutePath);
-          }
+          this._settings.set_string(key, widget.get_file().get_path());
         });
 
         // This will be called whenever the settingsKey changes.
@@ -517,11 +575,6 @@ var SettingsPage = class SettingsPage {
 
             let file = Gio.File.new_for_path(path);
 
-            // It may be a relative file?
-            if (!file.query_exists(null)) {
-              file = Gio.File.new_for_path(Me.path + '/' + path);
-            }
-
             // Set only if it exists.
             if (file.query_exists(null)) {
               button.set_file(file);
@@ -532,7 +585,8 @@ var SettingsPage = class SettingsPage {
         };
 
         // Connect the handler!
-        this._settings.connect('changed::' + key, settingSignalHandler);
+        this._settingsConnections.push(
+            this._settings.connect('changed::' + key, settingSignalHandler));
         settingSignalHandler();
       }
     };
@@ -564,7 +618,8 @@ var SettingsPage = class SettingsPage {
         colorChooser.rgba = rgba;
       };
 
-      this._settings.connect('changed::' + settingsKey, settingSignalHandler);
+      this._settingsConnections.push(
+          this._settings.connect('changed::' + settingsKey, settingSignalHandler));
 
       // Initialize the button with the state in the settings.
       settingSignalHandler();

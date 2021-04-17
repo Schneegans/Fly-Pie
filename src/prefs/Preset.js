@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {Gio, Gdk} = imports.gi;
+const {Gio, Gdk, GLib} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
@@ -110,8 +110,18 @@ var Preset = class Preset {
 
       presetKeys.forEach(key => {
         if (key in preset) {
-          const value = preset[key];
+          let value = preset[key];
           if (typeof value === 'string') {
+            // There's a special case for the image keys. They are allowed to be relative
+            // paths to the preset file to make sharing of presets easier. But we should
+            // convert them to absolute paths here.
+            if (key.includes('image') && value != '' && !GLib.path_is_absolute(value)) {
+              const path = file.get_parent().resolve_relative_path(value);
+              if (path != null) {
+                value = path.get_path();
+              }
+            }
+
             settings.set_string(key, value);
           } else if (typeof value === 'number') {
             settings.set_double(key, value);
@@ -135,7 +145,20 @@ var Preset = class Preset {
     presetKeys.forEach(key => {
       const type = settings.settings_schema.get_key(key).get_value_type().dup_string();
       if (type === 's') {
+
         preset[key] = settings.get_string(key);
+
+        // There's a special case for the image keys. They are allowed to be relative
+        // paths to the preset file to make sharing of presets easier. So we should
+        // convert the absolute path to a relative one here.
+        if (key.includes('image')) {
+          const path         = Gio.File.new_for_path(preset[key]);
+          const relativePath = file.get_parent().get_relative_path(path);
+          if (relativePath != null) {
+            preset[key] = relativePath;
+          }
+        }
+
       } else if (type === 'd') {
         preset[key] = settings.get_double(key);
       } else if (type === 'b') {

@@ -37,6 +37,10 @@ var TutorialPage = class TutorialPage {
     this._builder  = builder;
     this._settings = settings;
 
+    // We keep several connections to the Gio.Settings object. Once the settings dialog is
+    // closed, we use this array to disconnect all of them.
+    this._settingsConnections = [];
+
     // This is used for measuring selection times for unlocking the medals.
     this._timer = new Timer();
 
@@ -140,12 +144,21 @@ var TutorialPage = class TutorialPage {
     }
 
     // Update medals and time labels when the selection time changes.
-    this._settings.connect('changed::best-tutorial-time', () => this._updateState());
-    this._settings.connect('changed::last-tutorial-time', () => this._updateState());
+    this._settingsConnections.push(
+        this._settings.connect('changed::best-tutorial-time', () => this._updateState()));
+    this._settingsConnections.push(
+        this._settings.connect('changed::last-tutorial-time', () => this._updateState()));
 
     // Update medals and time labels according to the stored last and best selection
     // times when the settings dialog is opened.
     this._updateState();
+  }
+
+  // Disconnects all settings connections.
+  destroy() {
+    this._settingsConnections.forEach(connection => {
+      this._settings.disconnect(connection);
+    });
   }
 
   // ----------------------------------------------------------------------- private stuff

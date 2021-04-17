@@ -49,7 +49,10 @@ class Background extends Clutter.Actor {
     // opacity and the color.
     this.set_easing_duration(300);
 
-    this._settings = utils.createSettings();
+    // We keep several connections to the Gio.Settings object. Once the settings dialog is
+    // closed, we use this array to disconnect all of them.
+    this._settings            = utils.createSettings();
+    this._settingsConnections = [];
 
     // Will be true as long as we have the input grabbed.
     this._isModal = false;
@@ -59,20 +62,22 @@ class Background extends Clutter.Actor {
         Clutter.Color.from_string(this._settings.get_string('background-color'))[1];
 
     // And update it in case of changes.
-    this._settings.connect('changed::background-color', () => {
-      this.backgroundColor =
-          Clutter.Color.from_string(this._settings.get_string('background-color'))[1];
-    });
+    this._settingsConnections.push(
+        this._settings.connect('changed::background-color', () => {
+          this.backgroundColor =
+              Clutter.Color.from_string(this._settings.get_string('background-color'))[1];
+        }));
 
     // Switch monitor side when the preview-on-right-side settings key changes.
-    this._settings.connect('changed::preview-on-right-side', () => {
-      if (this._previewMode) {
-        // Set x accounting monitor x as a starting point
-        this.x = this._settings.get_boolean('preview-on-right-side') ?
-            this.width + Main.layoutManager.currentMonitor.x :
-            Main.layoutManager.currentMonitor.x;
-      }
-    });
+    this._settingsConnections.push(
+        this._settings.connect('changed::preview-on-right-side', () => {
+          if (this._previewMode) {
+            // Set x accounting monitor x as a starting point
+            this.x = this._settings.get_boolean('preview-on-right-side') ?
+                this.width + Main.layoutManager.currentMonitor.x :
+                Main.layoutManager.currentMonitor.x;
+          }
+        }));
 
     // Hide completely once the opacity has been faded to zero.
     this.connect('transitions-completed', () => {
@@ -99,6 +104,13 @@ class Background extends Clutter.Actor {
     });
 
     this.add_child(this._controlButtons);
+  }
+
+  // Disconnects all settings connections.
+  destroy() {
+    this._settingsConnections.forEach(connection => {
+      this._settings.disconnect(connection);
+    });
   }
 
   // -------------------------------------------------------------------- public interface

@@ -36,7 +36,7 @@ var Menu = class Menu {
   // The Menu is only instantiated once by the Server. It is re-used for each new incoming
   // ShowMenu request. The three parameters are callbacks which are fired when the
   // corresponding event occurs.
-  constructor(onSelect, onCancel) {
+  constructor(emitHoverSignal, emitUnhoverSignal, emitSelectSignal, emitCancelSignal) {
 
     // Create Gio.Settings object for org.gnome.shell.extensions.flypie.
     this._settings = utils.createSettings();
@@ -45,8 +45,10 @@ var Menu = class Menu {
     this._timer = new Timer();
 
     // Store the callbacks.
-    this._onSelect = onSelect;
-    this._onCancel = onCancel;
+    this._emitHoverSignal   = emitHoverSignal;
+    this._emitUnhoverSignal = emitUnhoverSignal;
+    this._emitSelectSignal  = emitSelectSignal;
+    this._emitCancelSignal  = emitCancelSignal;
 
     // This holds the ID of the currently active menu. It's null if no menu is currently
     // shown.
@@ -81,7 +83,7 @@ var Menu = class Menu {
     // Hide the menu when the escape key is pressed.
     this._background.connect('key-press-event', (actor, event) => {
       if (event.get_key_symbol() == Clutter.KEY_Escape && this._menuID != null) {
-        this._onCancel(this._menuID);
+        this.cancel();
         this.hide();
       }
       return Clutter.EVENT_STOP;
@@ -115,10 +117,8 @@ var Menu = class Menu {
       // If the primary button is pressed or a modifier is held down (for the
       // "Turbo-Mode"), but we do not have a dragged child yet, we mark the currently
       // hovered child as being the dragged child.
-      const leftButtonPressed = event.get_state() & Clutter.ModifierType.BUTTON1_MASK;
-      const shortcutPressed = event.get_state() & Gtk.accelerator_get_default_mod_mask();
-
-      if ((leftButtonPressed || shortcutPressed) && this._draggedChild == null) {
+      if ((this._selectionWedges.isGestureModifier(event.get_state())) &&
+          this._draggedChild == null) {
         const index = this._selectionWedges.getHoveredChild();
         if (index >= 0) {
           const child = this._menuSelectionChain[0].getChildMenuItems()[index];
@@ -169,7 +169,7 @@ var Menu = class Menu {
 
     // This is fired when the close button of the preview mode is clicked.
     this._background.connect('close-event', () => {
-      this._onCancel(this._menuID);
+      this.cancel();
       this.hide();
     });
 
@@ -187,12 +187,15 @@ var Menu = class Menu {
     this._background.add_child(this._selectionWedges);
 
     // This is fired when the mouse pointer enters one of the wedges.
-    this._selectionWedges.connect('child-hovered-event', (o, index) => {
-      // If no child is hovered (index == -1), the center element is hovered.
-      if (index == -1) {
+    this._selectionWedges.connect('child-hovered-event', (o, hoveredIndex) => {
+      // If there is a currently hovered child, we will call the unhover signal later.
+      const unhoveredIndex = this._menuSelectionChain[0].getActiveChildIndex();
+
+      // If no child is hovered (hoveredIndex == -1), the center element is hovered.
+      if (hoveredIndex == -1) {
         this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
       } else {
-        this._menuSelectionChain[0].setState(MenuItemState.CENTER, index);
+        this._menuSelectionChain[0].setState(MenuItemState.CENTER, hoveredIndex);
       }
 
       // It could be that the parent of the currently active item was hovered before, so
@@ -203,15 +206,47 @@ var Menu = class Menu {
 
       // If we're currently dragging a child around, the newly hovered child will
       // instantaneously become the hovered child.
-      const [x, y, mods]      = global.get_pointer();
-      const leftButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
-      const shortcutPressed   = mods & Gtk.accelerator_get_default_mod_mask();
-      if ((leftButtonPressed || shortcutPressed) && index >= 0) {
-        const child = this._menuSelectionChain[0].getChildMenuItems()[index];
+      const [x, y, mods] = global.get_pointer();
+      if (this._selectionWedges.isGestureModifier(mods) && hoveredIndex >= 0) {
+        const child = this._menuSelectionChain[0].getChildMenuItems()[hoveredIndex];
         child.setState(MenuItemState.CHILD_DRAGGED);
         this._draggedChild = child;
       } else {
         this._draggedChild = null;
+      }
+
+      // Report the unhover event on the D-Bus if an action was hovered before.
+      if (unhoveredIndex >= 0) {
+        const child = this._menuSelectionChain[0].getChildMenuItems()[unhoveredIndex];
+
+        // If the item has a selection callback, it is an action.
+        if (child.getSelectionCallback() != null) {
+
+          // If the action has a hover callback, call it!
+          if (child.getUnhoverCallback() != null) {
+            child.getUnhoverCallback()();
+          }
+
+          // Then emit the D-Bus unhover signal!
+          this._emitUnhoverSignal(this._menuID, child.id);
+        }
+      }
+
+      // Report the hover event on the D-Bus if an action is hovered.
+      if (hoveredIndex >= 0) {
+        const child = this._menuSelectionChain[0].getChildMenuItems()[hoveredIndex];
+
+        // If the item has a selection callback, it is an action.
+        if (child.getSelectionCallback() != null) {
+
+          // If the action has a hover callback, call it!
+          if (child.getHoverCallback() != null) {
+            child.getHoverCallback()();
+          }
+
+          // Then emit the D-Bus hover signal!
+          this._emitHoverSignal(this._menuID, child.id);
+        }
       }
 
       // This recursively redraws all children based on their newly assigned state.
@@ -227,10 +262,10 @@ var Menu = class Menu {
       const [pointerX, pointerY, mods] = global.get_pointer();
 
       // Ignore any gesture-based selection of leaf nodes. Final selections are only done
-      // when the mouse button or a modifier button is released.
-      const leftButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
-      const shortcutPressed   = mods & Gtk.accelerator_get_default_mod_mask();
-      if ((leftButtonPressed || shortcutPressed) &&
+      // when the mouse button or a modifier button is released. An exception is the
+      // experimental hover mode in which we also allow selections by gestures.
+      const hoverMode = this._settings.get_boolean('hover-mode');
+      if (!hoverMode && this._selectionWedges.isGestureModifier(mods) &&
           child.getChildMenuItems().length == 0) {
         return;
       }
@@ -289,7 +324,7 @@ var Menu = class Menu {
 
       // Finally, if a child was selected which is activatable, we report a selection and
       // hide the entire menu.
-      if (child.getActivationCallback() != null) {
+      if (child.getSelectionCallback() != null) {
 
         // Record this selection in the statistics. Parameters are selection depth, time
         // and whether a continuous gesture was used for the selection.
@@ -301,24 +336,53 @@ var Menu = class Menu {
             this._settings.get_double('easing-duration') * 1000);
 
         // hide() will reset our menu ID. However, we need to pass it to the onSelect
-        // callback so we create a copy here. hide() has to be called before _onSelect(),
-        // else any resulting action (like simulated key presses) may be blocked by our
-        // input grab.
+        // callback so we create a copy here. hide() has to be called before
+        // _emitSelectSignal(), else any resulting action (like simulated key presses) may
+        // be blocked by our input grab.
         const menuID = this._menuID;
         this.hide();
         this._background.set_easing_delay(0);
 
+        // If the action has an unhover callback, we call it before. This is to ensure
+        // that there are always pairs of hover / unhover events.
+        if (child.getUnhoverCallback() != null) {
+          child.getUnhoverCallback()();
+        }
+
+        // Then emit the D-Bus unhover signal!
+        this._emitUnhoverSignal(this._menuID, child.id);
+
         // Then call the activation callback!
-        child.getActivationCallback()();
+        child.getSelectionCallback()();
 
         // Finally report the selection over the D-Bus.
-        this._onSelect(menuID, child.id);
+        this._emitSelectSignal(menuID, child.id);
       }
     });
 
     // When a parent item is hovered, we draw the currently active item with the state
     // CENTER_HOVERED to indicate that the parent is not a child.
     this._selectionWedges.connect('parent-hovered-event', () => {
+      // If there is a currently hovered child, we may have to call the unhover signal.
+      const unhoveredIndex = this._menuSelectionChain[0].getActiveChildIndex();
+
+      // Report the unhover event on the D-Bus if an action was hovered before.
+      if (unhoveredIndex >= 0) {
+        const child = this._menuSelectionChain[0].getChildMenuItems()[unhoveredIndex];
+
+        // If the item has a selection callback, it is an action.
+        if (child.getSelectionCallback() != null) {
+
+          // If the action has a hover callback, call it!
+          if (child.getUnhoverCallback() != null) {
+            child.getUnhoverCallback()();
+          }
+
+          // Then emit the D-Bus unhover signal!
+          this._emitUnhoverSignal(this._menuID, child.id);
+        }
+      }
+
       this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
       this._menuSelectionChain[1].setState(MenuItemState.PARENT_HOVERED);
 
@@ -389,7 +453,7 @@ var Menu = class Menu {
 
     // This is usually fired when the right mouse button is pressed.
     this._selectionWedges.connect('cancel-selection-event', () => {
-      this._onCancel(this._menuID);
+      this.cancel();
       this.hide();
     });
 
@@ -428,7 +492,7 @@ var Menu = class Menu {
       }
 
       // Emit a cancel event for the currently active menu and store the new ID.
-      this._onCancel(this._menuID);
+      this._emitCancelSignal(this._menuID);
       this._menuID = menuID;
 
       // Update the preview-mode state of the background.
@@ -470,11 +534,26 @@ var Menu = class Menu {
       });
 
       if (item.children) {
+        // Recursively continue for all children.
         item.children.forEach(child => {
           menuItem.addMenuItem(createMenuItem(child));
         });
-      } else if (item.activate) {
-        menuItem.setActivationCallback(item.activate);
+
+      } else {
+
+        // If there are no children, there may be a selection, a hover, or an unhover
+        // callback. We forward them to the item so that they can be called if required.
+        if (item.onSelect) {
+          menuItem.setSelectionCallback(item.onSelect);
+        }
+
+        if (item.onHover) {
+          menuItem.setHoverCallback(item.onHover);
+        }
+
+        if (item.onUnhover) {
+          menuItem.setUnhoverCallback(item.onUnhover);
+        }
       }
 
       return menuItem;
@@ -544,6 +623,29 @@ var Menu = class Menu {
     this._menuSelectionChain = [];
   }
 
+  // Emits the DBus-Cancel signal and potentially an unhover signal for the currently
+  // hovered item (if any).
+  cancel() {
+    const index = this._selectionWedges.getHoveredChild();
+    if (index >= 0) {
+      const child = this._menuSelectionChain[0].getChildMenuItems()[index];
+
+      // If the item has a selection callback, it is an action.
+      if (child.getSelectionCallback() != null) {
+        // If the action has an unhover callback, we call it before. This is to ensure
+        // that there are always pairs of hover / unhover events.
+        if (child.getUnhoverCallback() != null) {
+          child.getUnhoverCallback()();
+        }
+
+        // Then emit the D-Bus unhover signal!
+        this._emitUnhoverSignal(this._menuID, child.id);
+      }
+    }
+
+    this._emitCancelSignal(this._menuID);
+  }
+
   // This is called when the menu configuration is changed while the menu is open. We
   // should adapt the open menu accordingly. This is primarily meant for the preview mode
   // of Fly-Pie's menu editor.
@@ -567,7 +669,9 @@ var Menu = class Menu {
       item.name  = newConfig.name;
       item.icon  = newConfig.icon;
       item.angle = newConfig.angle;
-      item.setActivationCallback(newConfig.activate || null);
+      item.setSelectionCallback(newConfig.onSelect || null);
+      item.setHoverCallback(newConfig.onHover || null);
+      item.setUnhoverCallback(newConfig.onUnhover || null);
 
       const children = new Set(item.getChildMenuItems());
 
@@ -610,7 +714,9 @@ var Menu = class Menu {
               icon: newChild.icon,
               angle: newChild.angle,
             });
-            newChild.matchingChild.setActivationCallback(newConfig.activate || null);
+            newChild.matchingChild.setSelectionCallback(newConfig.onSelect || null);
+            newChild.matchingChild.setHoverCallback(newConfig.onHover || null);
+            newChild.matchingChild.setUnhoverCallback(newConfig.onUnhover || null);
             item.addMenuItem(newChild.matchingChild);
             newChild.matchingChild.onSettingsChange(this._settings);
 
@@ -619,7 +725,9 @@ var Menu = class Menu {
             newChild.matchingChild.name  = newChild.name;
             newChild.matchingChild.icon  = newChild.icon;
             newChild.matchingChild.angle = newChild.angle;
-            newChild.matchingChild.setActivationCallback(newConfig.activate || null);
+            newChild.matchingChild.setSelectionCallback(newConfig.onSelect || null);
+            newChild.matchingChild.setHoverCallback(newConfig.onHover || null);
+            newChild.matchingChild.setUnhoverCallback(newConfig.onUnhover || null);
           }
         });
 

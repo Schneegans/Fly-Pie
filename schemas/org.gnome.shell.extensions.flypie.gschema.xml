@@ -502,6 +502,18 @@
       <description>Smaller turns will not lead to selections.</description>
     </key>
 
+    <key name="show-screencast-mouse" type="b">
+      <default>false</default>
+      <summary>Show screencast mouse</summary>
+      <description>If set to true, a big mouse pointer will be shown which can be
+                   used for screencasts.</description>
+    </key>
+
+    <key name="hover-mode" type="b">
+      <default>false</default>
+      <summary>Hover Mode</summary>
+      <description>If set to true, no clicking is required for selections.</description>
+    </key>
 
     <!-- Miscellaneous -->
 
@@ -516,13 +528,6 @@
       <default>""</default>
       <summary>Active Stack Child</summary>
       <description>Name of the currently active main stack child.</description>
-    </key>
-
-    <key name="show-screencast-mouse" type="b">
-      <default>false</default>
-      <summary>Show screencast mouse</summary>
-      <description>If set to true, a big mouse pointer will be shown which can be
-                   used for screencasts.</description>
     </key>
 
     <key name="best-tutorial-time" type="d">

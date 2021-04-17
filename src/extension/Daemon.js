@@ -42,6 +42,16 @@ var Daemon = class Daemon {
     // Initialize the menu. For performance reasons the same menu is used again and again.
     // It is just reconfigured according to incoming requests.
     this._menu = new Menu(
+        // This gets called whenever the user starts hovering an action in point-and-click
+        // mode or starts dragging an action in marking mode. It emits the OnHover signal
+        // of our D-Bus interface.
+        (menuID, itemID) => this._onHover(menuID, itemID),
+
+        // This gets called whenever the user stops hovering an action in point-and-click
+        // mode or stops dragging an action in marking mode. It emits the OnUnhover signal
+        // of our D-Bus interface.
+        (menuID, itemID) => this._onUnhover(menuID, itemID),
+
         // Called when the user selects an item in the menu. This calls the OnSelect
         // signal of the DBusInterface.
         (menuID, itemID) => this._onSelect(menuID, itemID),
@@ -73,6 +83,10 @@ var Daemon = class Daemon {
     // configuration changes, we bind all the configured shortcuts.
     this._settings = utils.createSettings();
 
+    // We keep several connections to the Gio.Settings object. Once the extension is
+    // unloaded, we use this array to disconnect all of them.
+    this._settingsConnections = [];
+
     this._achievements = new Achievements(this._settings);
 
     // Here we test whether any menus are configured. If the key is completely empty, this
@@ -100,13 +114,13 @@ var Daemon = class Daemon {
     }
 
     // Reload the menu configuration when the settings key changes.
-    this._settingsConnection = this._settings.connect(
-        'changed::menu-configuration', () => this._onMenuConfigsChanged());
+    this._settingsConnections.push(this._settings.connect(
+        'changed::menu-configuration', () => this._onMenuConfigsChanged()));
     this._onMenuConfigsChanged();
 
     // Show or hide screencast mouse if the corresponding settings key is toggled.
-    this._settings.connect(
-        'changed::show-screencast-mouse', () => this._onScreencastMouseChanged());
+    this._settingsConnections.push(this._settings.connect(
+        'changed::show-screencast-mouse', () => this._onScreencastMouseChanged()));
     this._onScreencastMouseChanged();
   }
 
@@ -118,7 +132,10 @@ var Daemon = class Daemon {
     this._dbus.unexport();
 
     this._shortcuts.destroy();
-    this._settings.disconnect(this._settingsConnection);
+
+    this._settingsConnections.forEach(connection => {
+      this._settings.disconnect(connection);
+    });
 
     this._achievements.destroy();
 
@@ -232,6 +249,20 @@ var Daemon = class Daemon {
 
     // Something weird happened.
     return DBusInterface.errorCodes.eUnknownError;
+  }
+
+  // This gets called whenever the user starts hovering an action in point-and-click
+  // mode or starts dragging an action in marking mode. It emits the OnHover signal of
+  // our D-Bus interface.
+  _onHover(menuID, itemID) {
+    this._dbus.emit_signal('OnHover', GLib.Variant.new('(is)', [menuID, itemID]));
+  }
+
+  // This gets called whenever the user stops hovering an action in point-and-click
+  // mode or stops dragging an action in marking mode. It emits the OnUnhover signal of
+  // our D-Bus interface.
+  _onUnhover(menuID, itemID) {
+    this._dbus.emit_signal('OnUnhover', GLib.Variant.new('(is)', [menuID, itemID]));
   }
 
   // This gets called once the user made a selection in the menu. It emit the OnSelect
