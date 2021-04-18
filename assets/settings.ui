@@ -8828,7 +8828,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="margin_right">12</property>
+                                    <property name="margin_right">8</property>
                                     <property name="pixbuf">badges/achievements/platinum.png</property>
                                   </object>
                                   <packing>
@@ -8928,7 +8928,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="spacing">12</property>
+                                <property name="spacing">8</property>
                                 <child>
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
@@ -9041,7 +9041,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="spacing">12</property>
+                                <property name="spacing">8</property>
                                 <child>
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
@@ -9154,7 +9154,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="spacing">12</property>
+                                <property name="spacing">8</property>
                                 <child>
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
@@ -9267,7 +9267,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="spacing">12</property>
+                                <property name="spacing">8</property>
                                 <child>
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
@@ -9416,13 +9416,13 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="margin_right">12</property>
+                                    <property name="margin_right">8</property>
                                     <property name="pixbuf">badges/achievements/platinum.png</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
                                     <property name="top_attach">0</property>
-                                    <property name="height">3</property>
+                                    <property name="height">2</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -9430,6 +9430,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
+                                    <property name="valign">end</property>
                                     <property name="label" translatable="yes">Fast Select0r!</property>
                                     <style>
                                       <class name="title-4"/>
@@ -9438,7 +9439,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                   <packing>
                                     <property name="left_attach">1</property>
                                     <property name="top_attach">0</property>
-                                    <property name="width">2</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -9446,6 +9446,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
+                                    <property name="valign">start</property>
                                     <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Select at least three level five items in less than 600 ms.</property>
                                   </object>
@@ -9460,7 +9461,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">end</property>
-                                    <property name="valign">center</property>
+                                    <property name="valign">start</property>
                                     <property name="label" translatable="yes">120 XP</property>
                                     <property name="xalign">1</property>
                                     <style>
@@ -9474,10 +9475,23 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                   </packing>
                                 </child>
                                 <child>
-                                  <placeholder/>
-                                </child>
-                                <child>
-                                  <placeholder/>
+                                  <object class="GtkLabel">
+                                    <property name="width_request">80</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">end</property>
+                                    <property name="valign">end</property>
+                                    <property name="label" translatable="yes">04.05.2021</property>
+                                    <property name="xalign">1</property>
+                                    <style>
+                                      <class name="caption"/>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">2</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
                                 </child>
                               </object>
                               <packing>
@@ -9494,13 +9508,13 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="margin_right">12</property>
+                                    <property name="margin_right">8</property>
                                     <property name="pixbuf">badges/achievements/special.png</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">0</property>
                                     <property name="top_attach">0</property>
-                                    <property name="height">3</property>
+                                    <property name="height">2</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -9508,6 +9522,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
+                                    <property name="valign">end</property>
                                     <property name="label" translatable="yes">Fast Select0r!</property>
                                     <style>
                                       <class name="title-4"/>
@@ -9516,7 +9531,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                   <packing>
                                     <property name="left_attach">1</property>
                                     <property name="top_attach">0</property>
-                                    <property name="width">2</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -9524,6 +9538,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
+                                    <property name="valign">start</property>
                                     <property name="hexpand">True</property>
                                     <property name="label" translatable="yes">Select at least three level five items in less than 600 ms.</property>
                                   </object>
@@ -9538,7 +9553,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">end</property>
-                                    <property name="valign">center</property>
+                                    <property name="valign">start</property>
                                     <property name="label" translatable="yes">120 XP</property>
                                     <property name="xalign">1</property>
                                     <style>
@@ -9552,10 +9567,23 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                   </packing>
                                 </child>
                                 <child>
-                                  <placeholder/>
-                                </child>
-                                <child>
-                                  <placeholder/>
+                                  <object class="GtkLabel">
+                                    <property name="width_request">80</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">end</property>
+                                    <property name="valign">end</property>
+                                    <property name="label" translatable="yes">21.04.2016</property>
+                                    <property name="xalign">1</property>
+                                    <style>
+                                      <class name="caption"/>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">2</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
                                 </child>
                               </object>
                               <packing>
@@ -9599,10 +9627,94 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child type="center">
-                  <object class="GtkStackSwitcher">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="stack">achievements-stack</property>
+                    <property name="homogeneous">True</property>
+                    <child>
+                      <object class="GtkRadioButton" id="achievements-in-progress-button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">False</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">10</property>
+                            <property name="margin_right">10</property>
+                            <property name="label" translatable="yes">In Progress</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkRadioButton" id="achievements-completed-button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">False</property>
+                        <property name="group">achievements-in-progress-button</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_left">10</property>
+                                <property name="margin_right">10</property>
+                                <property name="label" translatable="yes">Completed</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkRevealer" id="achievement-counter-revealer">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="transition_type">slide-left</property>
+                                <property name="reveal_child">True</property>
+                                <child>
+                                  <object class="GtkLabel" id="achievement-counter">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes">8</property>
+                                    <style>
+                                      <class name="counter-label"/>
+                                    </style>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <style>
+                      <class name="linked"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="position">0</property>

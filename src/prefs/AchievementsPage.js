@@ -38,7 +38,24 @@ var AchievementsPage = class AchievementsPage {
     // closed, we use this array to disconnect all of them.
     this._settingsConnections = [];
 
-    // ---------------------------------------------- Initialize the achievements sub-page
+    // Make the RadioButtons at the bottom behave like a StackSwitcher.
+    const stack = this._builder.get_object('achievements-stack');
+    this._builder.get_object('achievements-in-progress-button')
+        .connect('toggled', button => {
+          if (button.active) {
+            stack.set_visible_child_name('page0');
+          }
+        });
+
+    this._builder.get_object('achievements-completed-button')
+        .connect('toggled', button => {
+          if (button.active) {
+            stack.set_visible_child_name('page1');
+
+            // Hide the new-achievements counter when the second page is revealed.
+            this._builder.get_object('achievement-counter-revealer').reveal_child = false;
+          }
+        });
 
     // this._addAchievement(
     //     'Master Pielot', 'Select 100 items in less than 10 ms.', 100, 'copper', 'a');
@@ -96,29 +113,7 @@ var AchievementsPage = class AchievementsPage {
       Gdk.cairo_set_source_pixbuf(ctx, foreground, 0, 0);
       ctx.paint();
 
-
-      ctx.setSourceRGBA(0, 0, 0, 0.5);
-      const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
-      font.set_absolute_size(Pango.units_from_double(11));
-      const layout = PangoCairo.create_layout(ctx);
-      layout.set_font_description(font);
-      layout.set_alignment(Pango.Alignment.CENTER);
-      layout.set_width(Pango.units_from_double(128));
-      layout.set_text(name, -1);
-      ctx.moveTo(0, 85);
-      PangoCairo.show_layout(ctx, layout);
-
       return false;
-    });
-
-    image.connect('enter-notify-event', (widget) => {
-      box.opacity   = 1;
-      image.opacity = 0.2;
-    });
-
-    image.connect('leave-notify-event', (widget) => {
-      box.opacity   = 0;
-      image.opacity = 1;
     });
 
     const grid = new Gtk.Grid();

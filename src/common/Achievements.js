@@ -8,16 +8,27 @@
 
 'use strict';
 
-const GLib = imports.gi.GLib;
+const {GLib, Gio} = imports.gi;
+
+// We have to import the Main module optionally. This is because this file is included
+// from both sides: From prefs.js and from extension.js. When included from prefs.js, the
+// Main module is not available. This is not a problem, as the preferences will not call
+// the notify() method below.
+let Main = undefined;
+
+try {
+  Main = imports.ui.main;
+} catch (error) {
+  // Nothing to be done, we're in settings-mode.
+}
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The static statistics class is used to record some statistics of Fly-Pie. These      //
-// statistics can be seen in Fly-Pie's settings dialog and are used as a basis for the  //
-// achievements. The statistics are stored in the stats-* keys of Fly-Pie's             //
-// Gio.Settings.                                                                        //
+// The static achievements class is used to record some statistics of Fly-Pie. The      //
+// achievements can be seen in Fly-Pie's settings dialog. The statistics are stored in  //
+// the stats-* keys of Fly-Pie's Gio.Settings.                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 // This class is supposed to be used as singleton in order to prevent frequent
@@ -25,14 +36,14 @@ const utils = Me.imports.src.common.utils;
 // variable stores the singleton instance.
 let _instance = null;
 
-var Statistics = class Statistics {
+var Achievements = class Achievements {
 
   // ---------------------------------------------------------------------- static methods
 
   // Create the singleton instance lazily.
   static getInstance() {
     if (_instance == null) {
-      _instance = new Statistics();
+      _instance = new Achievements();
     }
 
     return _instance;
@@ -56,9 +67,23 @@ var Statistics = class Statistics {
     // noticeable stutter in Fly-Pie's animations. Applying the seconds with one second
     // delay makes it much more unlikely that an animation is currently in progress.
     this._settings = utils.createSettings();
-    this._settings.delay();
+
+    // We keep several connections to the Gio.Settings object. Once the settings dialog is
+    // closed, we use this array to disconnect all of them.
+    this._settingsConnections = [];
+
+    // If the click-selections statistics key changes (that means that the user selected
+    // something by point-and-click), check for newly unlocked achievements.
+    this._settingsConnections.push(
+        this._settings.connect('changed::stats-abortions', () => {
+          this._notify(
+              'Level up!', 'You just reached level 10!',
+              Gio.icon_new_for_string(Me.path + '/assets/badges/levels/level10.png'));
+        }));
 
     this._saveTimeout = -1;
+
+    this._settings.delay();
   }
 
 
@@ -71,47 +96,17 @@ var Statistics = class Statistics {
       this._settings.apply();
     }
 
+    this._settingsConnections.forEach(connection => {
+      this._settings.disconnect(connection);
+    });
+
     this._settings = null;
   }
 
   // -------------------------------------------------------------------- public interface
 
   // This should be called whenever a successful selection is made.
-  addSelection(depth, time, gestureOnlySelection) {
-
-    // We add the selection to one of the histograms with selection counts per selection
-    // time. There is one of these histograms for the first four selection depths for
-    // either point-and-click selections or for gesture selections.
-    const key =
-        gestureOnlySelection ? 'stats-gesture-selections' : 'stats-click-selections';
-
-    // Retrieve all histograms from the settings and make sure that we have four of them.
-    // Any selection deeper than five will be recorded in the fourth bin.
-    const histograms = this._settings.get_value(key).deep_unpack();
-    this._resizeArray(histograms, 4, []);
-
-    // We limit our histogram to selections which took ten seconds. The bin size is set
-    // to 200 milliseconds.
-    const upperBound = 10000;
-    const binSize    = 250;
-    const bins       = upperBound / binSize;
-
-    // Then initialize each histogram to the correct bin size.
-    for (let i = 0; i < histograms.length; i++) {
-      this._resizeArray(histograms[i], bins, 0);
-    }
-
-    // Now select the histogram for the current depth and increase the bin for the given
-    // selection time.
-    const histogram = histograms[depth - 1];
-    const bin       = Math.floor(Math.min(Math.max(0, time / binSize), bins - 1));
-    ++histogram[bin];
-
-    // Finally update the updated histograms.
-    const data = new GLib.Variant('aau', histograms);
-    this._settings.set_value(key, data);
-    this._save();
-  }
+  addSelection(depth, time, gestureOnlySelection) {}
 
   // Should be called whenever a selection is canceled.
   addAbortion() {
@@ -153,7 +148,7 @@ var Statistics = class Statistics {
   // Our Gio.Settings object is in "delayed" mode so we have to manually call apply()
   // whenever a property is changed. Delayed mode was chosen because the apply() can take
   // up to 100~ms on some systems I have tested. This results in a noticeable stutter in
-  // Fly-Pie's animations. Applying the seconds with one second delay makes it much more
+  // Fly-Pie's animations. Applying the settings with one second delay makes it much more
   // unlikely that an animation is currently in progress.
   _save() {
     if (this._saveTimeout >= 0) {
@@ -172,24 +167,32 @@ var Statistics = class Statistics {
     this._save();
   }
 
-  // Helper method to resize the given JavaScript array to the given size. If the input
-  // array is larger, it will be truncated, if it's smaller, it will be back-padded with
-  // copies of defaultValue.
-  _resizeArray(array, size, defaultValue) {
+  // Shows a GNOME Shell notification with the given label, description and icon. The size
+  // of the icon seems to depend on the currently used theme and cannot be set from here.
+  // The notification will also contain a hard-coded button which opens the achievements
+  // page of the settings dialog. This cannot be used from the preferences dialog.
+  _notify(label, details, gicon) {
+    const source = new Main.MessageTray.Source('Fly-Pie', '');
+    Main.messageTray.add(source);
 
-    // Make sure we have actually an array.
-    if (!Array.isArray(array)) {
-      array = [];
-    }
+    const n = new Main.MessageTray.Notification(source, label, details, {gicon: gicon});
 
-    // Extent if needed.
-    while (array.length < size) {
-      // Create a copy of defaultValue if it's not a primitive type.
-      typeof (defaultValue) === 'object' ? array.push(Object.create(defaultValue)) :
-                                           array.push(defaultValue);
-    }
+    // Translators: This is shown on the action button of the notification bubble which is
+    // shown once an achievement is unlocked.
+    n.addAction(_('Show Achievements'), () => {
+      // Make sure the achievements page is shown.
+      this._settings.set_string('active-stack-child', 'achievements-page');
 
-    // Truncate if needed.
-    array.length = size;
+      if (this._saveTimeout >= 0) {
+        GLib.source_remove(this._saveTimeout);
+      }
+
+      this._settings.apply();
+
+      // Show the settings dialog.
+      Main.extensionManager.openExtensionPrefs(Me.uuid, '');
+    });
+
+    source.showNotification(n);
   }
 }

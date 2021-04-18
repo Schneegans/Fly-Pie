@@ -12,14 +12,13 @@ const {Gio, GLib} = imports.gi;
 
 const Me             = imports.misc.extensionUtils.getCurrentExtension();
 const utils          = Me.imports.src.common.utils;
-const Statistics     = Me.imports.src.common.Statistics.Statistics;
+const Achievements   = Me.imports.src.common.Achievements.Achievements;
 const ItemRegistry   = Me.imports.src.common.ItemRegistry.ItemRegistry;
 const DBusInterface  = Me.imports.src.common.DBusInterface.DBusInterface;
 const Shortcuts      = Me.imports.src.extension.Shortcuts.Shortcuts;
 const MouseHighlight = Me.imports.src.extension.MouseHighlight.MouseHighlight;
 const Menu           = Me.imports.src.extension.Menu.Menu;
 const DefaultMenu    = Me.imports.src.extension.DefaultMenu.DefaultMenu;
-const Achievements   = Me.imports.src.extension.Achievements.Achievements;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
@@ -87,8 +86,6 @@ var Daemon = class Daemon {
     // unloaded, we use this array to disconnect all of them.
     this._settingsConnections = [];
 
-    this._achievements = new Achievements(this._settings);
-
     // Here we test whether any menus are configured. If the key is completely empty, this
     // is considered to be the same as "[]". If no menus are configured, the default
     // configuration is loaded.
@@ -137,16 +134,14 @@ var Daemon = class Daemon {
       this._settings.disconnect(connection);
     });
 
-    this._achievements.destroy();
-
     // Hide the screencast mouse pointer (if any).
     if (this._screencastMouse) {
       this._screencastMouse.destroy();
       global.stage.remove_child(this._screencastMouse);
     }
 
-    // Delete the static settings object of the statistics.
-    Statistics.destroyInstance();
+    // Delete the static settings object of the achievements.
+    Achievements.destroyInstance();
   }
 
   // -------------------------------------------------------------- public D-Bus-Interface
@@ -170,7 +165,7 @@ var Daemon = class Daemon {
   // See the README.md for a description of Fly-Pie's DBusInterface.
   ShowCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
-    Statistics.getInstance().addCustomDBusMenu();
+    Achievements.getInstance().addCustomDBusMenu();
     return this._openCustomMenu(json, false, this._lastMenuID);
   }
 
@@ -178,7 +173,7 @@ var Daemon = class Daemon {
   // See the README.md for a description of Fly-Pie's DBusInterface.
   PreviewCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
-    Statistics.getInstance().addCustomDBusMenu();
+    Achievements.getInstance().addCustomDBusMenu();
     return this._openCustomMenu(json, true, this._lastMenuID);
   }
 
@@ -274,7 +269,7 @@ var Daemon = class Daemon {
   // This gets called when the user did not select anything in the menu. It emits the
   // OnCancel signal of our D-Bus interface.
   _onCancel(menuID) {
-    Statistics.getInstance().addAbortion();
+    Achievements.getInstance().addAbortion();
     this._dbus.emit_signal('OnCancel', GLib.Variant.new('(i)', [menuID]));
   }
 

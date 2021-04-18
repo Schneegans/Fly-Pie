@@ -7,3 +7,12 @@
     border-radius: 9999px;
     -gtk-outline-radius: 9999px;
 }
+
+.counter-label {
+    text-shadow: none;
+    color: @theme_selected_fg_color;
+    background-color: @theme_selected_bg_color;
+    font-size: smaller;
+    border-radius: 5px;
+    padding: 0px 8px;
+}

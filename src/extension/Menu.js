@@ -15,7 +15,7 @@ const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.src.common.utils;
 const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
 const InputManipulator = Me.imports.src.common.InputManipulator.InputManipulator;
-const Statistics       = Me.imports.src.common.Statistics.Statistics;
+const Achievements     = Me.imports.src.common.Achievements.Achievements;
 const Timer            = Me.imports.src.common.Timer.Timer;
 const Background       = Me.imports.src.extension.Background.Background;
 const MenuItem         = Me.imports.src.extension.MenuItem.MenuItem;
@@ -328,7 +328,7 @@ var Menu = class Menu {
 
         // Record this selection in the statistics. Parameters are selection depth, time
         // and whether a continuous gesture was used for the selection.
-        Statistics.getInstance().addSelection(
+        Achievements.getInstance().addSelection(
             this._menuSelectionChain.length - 1, this._timer.getElapsed(),
             this._gestureOnlySelection);
 

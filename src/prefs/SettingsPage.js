@@ -15,7 +15,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.src.common.utils;
 const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
-const Statistics    = Me.imports.src.common.Statistics.Statistics;
+const Achievements  = Me.imports.src.common.Achievements.Achievements;
 const Preset        = Me.imports.src.prefs.Preset.Preset;
 const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 
@@ -348,7 +348,7 @@ var SettingsPage = class SettingsPage {
               this._presetList.set_value(row, 1, file.get_path());
 
               // Store this in our statistics.
-              Statistics.getInstance().addPresetSaved();
+              Achievements.getInstance().addPresetSaved();
             }
 
           } catch (error) {
@@ -417,7 +417,7 @@ var SettingsPage = class SettingsPage {
       Preset.random();
 
       // Store this in our statistics.
-      Statistics.getInstance().addRandomPreset();
+      Achievements.getInstance().addRandomPreset();
     });
   }
 
