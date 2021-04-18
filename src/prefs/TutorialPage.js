@@ -135,14 +135,6 @@ var TutorialPage = class TutorialPage {
       });
     }
 
-    // Connect the two rest buttons.
-    for (let i = 1; i <= 2; i++) {
-      this._builder.get_object('tutorial-reset-button-' + i).connect('clicked', () => {
-        this._settings.reset('best-tutorial-time');
-        this._settings.reset('last-tutorial-time');
-      });
-    }
-
     // Update medals and time labels when the selection time changes.
     this._settingsConnections.push(
         this._settings.connect('changed::best-tutorial-time', () => this._updateState()));
