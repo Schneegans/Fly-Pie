@@ -8618,8 +8618,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
               <object class="GtkStack" id="level-stack">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="transition_duration">1000</property>
-                <property name="transition_type">slide-down</property>
+                <property name="transition_duration">250</property>
+                <property name="transition_type">slide-left-right</property>
                 <child>
                   <object class="GtkImage" id="level-image1">
                     <property name="visible">True</property>
@@ -8629,7 +8629,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
-                    <property name="name">page0</property>
+                    <property name="name">level1</property>
                     <property name="title" translatable="yes">page0</property>
                   </packing>
                 </child>
@@ -8642,7 +8642,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
-                    <property name="name">page1</property>
+                    <property name="name">level2</property>
                     <property name="title" translatable="yes">page1</property>
                     <property name="position">1</property>
                   </packing>
@@ -8656,7 +8656,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
-                    <property name="name">page2</property>
+                    <property name="name">level3</property>
                     <property name="title" translatable="yes">page2</property>
                     <property name="position">2</property>
                   </packing>
@@ -8670,7 +8670,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
-                    <property name="name">page3</property>
+                    <property name="name">level4</property>
                     <property name="title" translatable="yes">page3</property>
                     <property name="position">3</property>
                   </packing>
@@ -8684,7 +8684,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
-                    <property name="name">page4</property>
+                    <property name="name">level5</property>
                     <property name="title" translatable="yes">page4</property>
                     <property name="position">4</property>
                   </packing>
@@ -8698,7 +8698,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
-                    <property name="name">page5</property>
+                    <property name="name">level6</property>
                     <property name="title" translatable="yes">page5</property>
                     <property name="position">5</property>
                   </packing>
@@ -8712,7 +8712,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
-                    <property name="name">page6</property>
+                    <property name="name">level7</property>
                     <property name="title" translatable="yes">page6</property>
                     <property name="position">6</property>
                   </packing>
@@ -8726,7 +8726,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
-                    <property name="name">page7</property>
+                    <property name="name">level8</property>
                     <property name="title" translatable="yes">page7</property>
                     <property name="position">7</property>
                   </packing>
@@ -8740,7 +8740,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
-                    <property name="name">page8</property>
+                    <property name="name">level9</property>
                     <property name="title" translatable="yes">page8</property>
                     <property name="position">8</property>
                   </packing>
@@ -8754,7 +8754,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
-                    <property name="name">page9</property>
+                    <property name="name">level10</property>
                     <property name="title" translatable="yes">page9</property>
                     <property name="position">9</property>
                   </packing>
@@ -8767,11 +8767,11 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
               </packing>
             </child>
             <child>
-              <object class="GtkLabel">
+              <object class="GtkLabel" id="experience-label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="margin_bottom">3</property>
-                <property name="label" translatable="yes">350 / 200 XP</property>
+                <property name="label">- / - XP</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -8780,7 +8780,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
               </packing>
             </child>
             <child>
-              <object class="GtkLevelBar">
+              <object class="GtkLevelBar" id="experience-bar">
                 <property name="width_request">600</property>
                 <property name="height_request">15</property>
                 <property name="visible">True</property>
@@ -8811,571 +8811,16 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         <property name="can_focus">False</property>
                         <property name="shadow_type">none</property>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkBox" id="active-achievements-box">
                             <property name="width_request">600</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">center</property>
+                            <property name="valign">start</property>
                             <property name="margin_top">30</property>
                             <property name="margin_bottom">20</property>
                             <property name="orientation">vertical</property>
-                            <property name="spacing">10</property>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_right">8</property>
-                                    <property name="pixbuf">badges/achievements/platinum.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                    <property name="height">3</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Fast Select0r!</property>
-                                    <style>
-                                      <class name="title-4"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">0</property>
-                                    <property name="width">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Select at least three level five items in less than 600 ms.</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLevelBar">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="valign">center</property>
-                                    <property name="value">320</property>
-                                    <property name="max_value">620</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="width_request">80</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="valign">center</property>
-                                    <property name="label" translatable="yes">320 / 600</property>
-                                    <property name="xalign">1</property>
-                                    <style>
-                                      <class name="caption"/>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">2</property>
-                                    <property name="top_attach">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="width_request">80</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="valign">center</property>
-                                    <property name="label" translatable="yes">120 XP</property>
-                                    <property name="xalign">1</property>
-                                    <style>
-                                      <class name="caption"/>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">2</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">8</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">badges/achievements/silver.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Setter.</property>
-                                        <style>
-                                          <class name="title-4"/>
-                                        </style>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Open the settings dialog 20 times.</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkBox">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="width_request">80</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="halign">end</property>
-                                            <property name="valign">center</property>
-                                            <property name="label" translatable="yes">5 / 20</property>
-                                            <property name="xalign">1</property>
-                                            <style>
-                                              <class name="caption"/>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="pack_type">end</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLevelBar">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="valign">center</property>
-                                            <property name="value">5</property>
-                                            <property name="max_value">20</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="pack_type">end</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="pack_type">end</property>
-                                        <property name="position">2</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">8</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">badges/achievements/gold.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Setter.</property>
-                                        <style>
-                                          <class name="title-4"/>
-                                        </style>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Open the settings dialog 20 times.</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkBox">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="width_request">80</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="halign">end</property>
-                                            <property name="valign">center</property>
-                                            <property name="label" translatable="yes">10 / 100</property>
-                                            <property name="xalign">1</property>
-                                            <style>
-                                              <class name="caption"/>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="pack_type">end</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLevelBar">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="valign">center</property>
-                                            <property name="value">10</property>
-                                            <property name="max_value">100</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="pack_type">end</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="pack_type">end</property>
-                                        <property name="position">2</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">8</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">badges/achievements/copper.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Fast Select0r!</property>
-                                        <style>
-                                          <class name="title-4"/>
-                                        </style>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Select at least three level five items in less than 600 ms.</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkBox">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="width_request">80</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="halign">end</property>
-                                            <property name="valign">center</property>
-                                            <property name="label" translatable="yes">320 / 600</property>
-                                            <property name="xalign">1</property>
-                                            <style>
-                                              <class name="caption"/>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="pack_type">end</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLevelBar">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="valign">center</property>
-                                            <property name="value">320</property>
-                                            <property name="max_value">620</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="pack_type">end</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="pack_type">end</property>
-                                        <property name="position">2</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="spacing">8</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="pixbuf">badges/achievements/bronze.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Setter.</property>
-                                        <style>
-                                          <class name="title-4"/>
-                                        </style>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Open the settings dialog 20 times.</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkBox">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="width_request">80</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="halign">end</property>
-                                            <property name="valign">center</property>
-                                            <property name="label" translatable="yes">5 / 20</property>
-                                            <property name="xalign">1</property>
-                                            <style>
-                                              <class name="caption"/>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="pack_type">end</property>
-                                            <property name="position">0</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLevelBar">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
-                                            <property name="valign">center</property>
-                                            <property name="value">5</property>
-                                            <property name="max_value">20</property>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="pack_type">end</property>
-                                            <property name="position">1</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="pack_type">end</property>
-                                        <property name="position">2</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">4</property>
-                              </packing>
-                            </child>
+                            <property name="spacing">8</property>
                             <child>
                               <placeholder/>
                             </child>
@@ -9399,208 +8844,15 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         <property name="can_focus">False</property>
                         <property name="shadow_type">none</property>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkBox" id="completed-achievements-box">
                             <property name="width_request">600</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="halign">center</property>
+                            <property name="valign">start</property>
                             <property name="margin_top">30</property>
                             <property name="margin_bottom">20</property>
                             <property name="orientation">vertical</property>
-                            <property name="spacing">10</property>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_right">8</property>
-                                    <property name="pixbuf">badges/achievements/platinum.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                    <property name="height">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">end</property>
-                                    <property name="label" translatable="yes">Fast Select0r!</property>
-                                    <style>
-                                      <class name="title-4"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">start</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Select at least three level five items in less than 600 ms.</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="width_request">80</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="valign">start</property>
-                                    <property name="label" translatable="yes">120 XP</property>
-                                    <property name="xalign">1</property>
-                                    <style>
-                                      <class name="caption"/>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">2</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="width_request">80</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="valign">end</property>
-                                    <property name="label" translatable="yes">04.05.2021</property>
-                                    <property name="xalign">1</property>
-                                    <style>
-                                      <class name="caption"/>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">2</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_right">8</property>
-                                    <property name="pixbuf">badges/achievements/special.png</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">0</property>
-                                    <property name="top_attach">0</property>
-                                    <property name="height">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">end</property>
-                                    <property name="label" translatable="yes">Fast Select0r!</property>
-                                    <style>
-                                      <class name="title-4"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="valign">start</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Select at least three level five items in less than 600 ms.</property>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">1</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="width_request">80</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="valign">start</property>
-                                    <property name="label" translatable="yes">120 XP</property>
-                                    <property name="xalign">1</property>
-                                    <style>
-                                      <class name="caption"/>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">2</property>
-                                    <property name="top_attach">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="width_request">80</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="valign">end</property>
-                                    <property name="label" translatable="yes">21.04.2016</property>
-                                    <property name="xalign">1</property>
-                                    <style>
-                                      <class name="caption"/>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left_attach">2</property>
-                                    <property name="top_attach">0</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <placeholder/>
-                            </child>
-                            <child>
-                              <placeholder/>
-                            </child>
-                            <child>
-                              <placeholder/>
-                            </child>
                             <child>
                               <placeholder/>
                             </child>

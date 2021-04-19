@@ -10,15 +10,18 @@
 
 const {Gio, GLib} = imports.gi;
 
-const Me             = imports.misc.extensionUtils.getCurrentExtension();
-const utils          = Me.imports.src.common.utils;
-const Achievements   = Me.imports.src.common.Achievements.Achievements;
-const ItemRegistry   = Me.imports.src.common.ItemRegistry.ItemRegistry;
-const DBusInterface  = Me.imports.src.common.DBusInterface.DBusInterface;
-const Shortcuts      = Me.imports.src.extension.Shortcuts.Shortcuts;
-const MouseHighlight = Me.imports.src.extension.MouseHighlight.MouseHighlight;
-const Menu           = Me.imports.src.extension.Menu.Menu;
-const DefaultMenu    = Me.imports.src.extension.DefaultMenu.DefaultMenu;
+const Main = imports.ui.main;
+
+const Me                 = imports.misc.extensionUtils.getCurrentExtension();
+const utils              = Me.imports.src.common.utils;
+const Statistics         = Me.imports.src.common.Achievements.Statistics;
+const AchievementTracker = Me.imports.src.common.Achievements.AchievementTracker;
+const ItemRegistry       = Me.imports.src.common.ItemRegistry.ItemRegistry;
+const DBusInterface      = Me.imports.src.common.DBusInterface.DBusInterface;
+const Shortcuts          = Me.imports.src.extension.Shortcuts.Shortcuts;
+const MouseHighlight     = Me.imports.src.extension.MouseHighlight.MouseHighlight;
+const Menu               = Me.imports.src.extension.Menu.Menu;
+const DefaultMenu        = Me.imports.src.extension.DefaultMenu.DefaultMenu;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
@@ -119,6 +122,29 @@ var Daemon = class Daemon {
     this._settingsConnections.push(this._settings.connect(
         'changed::show-screencast-mouse', () => this._onScreencastMouseChanged()));
     this._onScreencastMouseChanged();
+
+    // Show notifications whenever a level-up occurred.
+    this._achievementTracker = new AchievementTracker(this._settings);
+    this._achievementTracker.connect('level-up', (o, level) => {
+      this._notify(
+          // TRANSLATORS: These messages are shown in desktop notifications.
+          _('Level up!'),
+          // TRANSLATORS: These messages are shown in desktop notifications.
+          _('You just reached level %i!').replace('%i', level),
+          Gio.icon_new_for_string(Me.path + `/assets/badges/levels/level${level}.png`));
+    });
+
+    // Show notifications whenever achievements are unlocked.
+    this._achievementTracker.connect('achievement-completed', (o, id) => {
+      const achievement = o.getAchievements()[id];
+      this._notify(
+          // TRANSLATORS: These messages are shown in desktop notifications.
+          _('Achievement completed!'),
+          // TRANSLATORS: These messages are shown in desktop notifications.
+          _('You just finished the achievement "%s"!').replace('%s', achievement.name),
+          Gio.icon_new_for_string(
+              Me.path + `/assets/badges/achievements/${achievement.bgImage}`));
+    });
   }
 
   // Cleans up stuff which is not cleaned up automatically.
@@ -141,7 +167,7 @@ var Daemon = class Daemon {
     }
 
     // Delete the static settings object of the achievements.
-    Achievements.destroyInstance();
+    Statistics.destroyInstance();
   }
 
   // -------------------------------------------------------------- public D-Bus-Interface
@@ -165,7 +191,7 @@ var Daemon = class Daemon {
   // See the README.md for a description of Fly-Pie's DBusInterface.
   ShowCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
-    Achievements.getInstance().addCustomDBusMenu();
+    Statistics.getInstance().addCustomDBusMenu();
     return this._openCustomMenu(json, false, this._lastMenuID);
   }
 
@@ -173,7 +199,7 @@ var Daemon = class Daemon {
   // See the README.md for a description of Fly-Pie's DBusInterface.
   PreviewCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
-    Achievements.getInstance().addCustomDBusMenu();
+    Statistics.getInstance().addCustomDBusMenu();
     return this._openCustomMenu(json, true, this._lastMenuID);
   }
 
@@ -269,7 +295,7 @@ var Daemon = class Daemon {
   // This gets called when the user did not select anything in the menu. It emits the
   // OnCancel signal of our D-Bus interface.
   _onCancel(menuID) {
-    Achievements.getInstance().addAbortion();
+    Statistics.getInstance().addAbortion();
     this._dbus.emit_signal('OnCancel', GLib.Variant.new('(i)', [menuID]));
   }
 
@@ -384,5 +410,34 @@ var Daemon = class Daemon {
       global.stage.remove_child(this._screencastMouse);
       delete this._screencastMouse;
     }
+  }
+
+  // Shows a GNOME Shell notification with the given label, description and icon. The size
+  // of the icon seems to depend on the currently used theme and cannot be set from here.
+  // The notification will also contain a hard-coded button which opens the achievements
+  // page of the settings dialog. This cannot be used from the preferences dialog.
+  _notify(label, details, gicon) {
+    const source = new Main.MessageTray.Source('Fly-Pie', '');
+    Main.messageTray.add(source);
+
+    const n = new Main.MessageTray.Notification(source, label, details, {gicon: gicon});
+
+    // Translators: This is shown on the action button of the notification bubble which is
+    // shown once an achievement is unlocked.
+    n.addAction(_('Show Achievements'), () => {
+      // Make sure the achievements page is shown.
+      this._settings.set_string('active-stack-child', 'achievements-page');
+
+      if (this._saveTimeout >= 0) {
+        GLib.source_remove(this._saveTimeout);
+      }
+
+      this._settings.apply();
+
+      // Show the settings dialog.
+      Main.extensionManager.openExtensionPrefs(Me.uuid, '');
+    });
+
+    source.showNotification(n);
   }
 };

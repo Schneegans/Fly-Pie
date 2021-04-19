@@ -14,7 +14,7 @@ const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
 const Me                  = imports.misc.extensionUtils.getCurrentExtension();
 const utils               = Me.imports.src.common.utils;
 const DBusInterface       = Me.imports.src.common.DBusInterface.DBusInterface;
-const Achievements        = Me.imports.src.common.Achievements.Achievements;
+const Statistics          = Me.imports.src.common.Achievements.Statistics;
 const ItemRegistry        = Me.imports.src.common.ItemRegistry.ItemRegistry;
 const ItemClass           = Me.imports.src.common.ItemRegistry.ItemClass;
 const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
@@ -251,7 +251,7 @@ var MenuEditorPage = class MenuEditorPage {
                 Gio.FileCreateFlags.REPLACE_DESTINATION, null);
 
             // Store this in our statistics.
-            Achievements.getInstance().addMenuExport();
+            Statistics.getInstance().addMenuExport();
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
@@ -312,7 +312,7 @@ var MenuEditorPage = class MenuEditorPage {
               this._loadMenuConfiguration();
 
               // Store this in our statistics.
-              Achievements.getInstance().addMenuImport();
+              Statistics.getInstance().addMenuImport();
             }
 
           } catch (error) {

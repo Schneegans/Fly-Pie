@@ -8,27 +8,17 @@
 
 'use strict';
 
-const {GLib, Gio} = imports.gi;
+const {GLib, Gio, GObject} = imports.gi;
 
-// We have to import the Main module optionally. This is because this file is included
-// from both sides: From prefs.js and from extension.js. When included from prefs.js, the
-// Main module is not available. This is not a problem, as the preferences will not call
-// the notify() method below.
-let Main = undefined;
-
-try {
-  Main = imports.ui.main;
-} catch (error) {
-  // Nothing to be done, we're in settings-mode.
-}
+const _ = imports.gettext.domain('flypie').gettext;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The static achievements class is used to record some statistics of Fly-Pie. The      //
-// achievements can be seen in Fly-Pie's settings dialog. The statistics are stored in  //
-// the stats-* keys of Fly-Pie's Gio.Settings.                                          //
+// The static Statistics class is used to record some statistics of Fly-Pie which are   //
+// the basis for the achievements. The achievements can be seen in Fly-Pie's settings   //
+// dialog. The statistics are stored in the stats-* keys of Fly-Pie's Gio.Settings.     //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 // This class is supposed to be used as singleton in order to prevent frequent
@@ -36,14 +26,14 @@ const utils = Me.imports.src.common.utils;
 // variable stores the singleton instance.
 let _instance = null;
 
-var Achievements = class Achievements {
+var Statistics = class Statistics {
 
   // ---------------------------------------------------------------------- static methods
 
   // Create the singleton instance lazily.
   static getInstance() {
     if (_instance == null) {
-      _instance = new Achievements();
+      _instance = new Statistics();
     }
 
     return _instance;
@@ -67,23 +57,12 @@ var Achievements = class Achievements {
     // noticeable stutter in Fly-Pie's animations. Applying the seconds with one second
     // delay makes it much more unlikely that an animation is currently in progress.
     this._settings = utils.createSettings();
-
-    // We keep several connections to the Gio.Settings object. Once the settings dialog is
-    // closed, we use this array to disconnect all of them.
-    this._settingsConnections = [];
-
-    // If the click-selections statistics key changes (that means that the user selected
-    // something by point-and-click), check for newly unlocked achievements.
-    this._settingsConnections.push(
-        this._settings.connect('changed::stats-abortions', () => {
-          this._notify(
-              'Level up!', 'You just reached level 10!',
-              Gio.icon_new_for_string(Me.path + '/assets/badges/levels/level10.png'));
-        }));
-
-    this._saveTimeout = -1;
-
     this._settings.delay();
+
+    // As the settings object is in delay-mode, we have to call its apply() method after
+    // we did some modification. We use a timeout in order to wait a little for any
+    // additional modifications.
+    this._saveTimeout = -1;
   }
 
 
@@ -95,10 +74,6 @@ var Achievements = class Achievements {
       GLib.source_remove(this._saveTimeout);
       this._settings.apply();
     }
-
-    this._settingsConnections.forEach(connection => {
-      this._settings.disconnect(connection);
-    });
 
     this._settings = null;
   }
@@ -166,33 +141,227 @@ var Achievements = class Achievements {
     this._settings.set_uint(key, this._settings.get_uint(key) + 1);
     this._save();
   }
+}
 
-  // Shows a GNOME Shell notification with the given label, description and icon. The size
-  // of the icon seems to depend on the currently used theme and cannot be set from here.
-  // The notification will also contain a hard-coded button which opens the achievements
-  // page of the settings dialog. This cannot be used from the preferences dialog.
-  _notify(label, details, gicon) {
-    const source = new Main.MessageTray.Source('Fly-Pie', '');
-    Main.messageTray.add(source);
 
-    const n = new Main.MessageTray.Notification(source, label, details, {gicon: gicon});
 
-    // Translators: This is shown on the action button of the notification bubble which is
-    // shown once an achievement is unlocked.
-    n.addAction(_('Show Achievements'), () => {
-      // Make sure the achievements page is shown.
-      this._settings.set_string('active-stack-child', 'achievements-page');
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 
-      if (this._saveTimeout >= 0) {
-        GLib.source_remove(this._saveTimeout);
+
+var AchievementState = {LOCKED: 0, ACTIVE: 1, COMPLETED: 2};
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// clang-format off
+var AchievementTracker = GObject.registerClass(
+
+    {
+      Properties: {},
+      Signals: {
+        // This is called whenever the users levels up. The paramter provides the new
+        // level.
+        'level-up': {param_types: [GObject.TYPE_INT]},
+
+        // This is usually called whenever an achievement is completed. The first
+        // parameter contains the current experience points; the second contains the total
+        // experience points required to level up.
+        'experience-changed': {param_types: [GObject.TYPE_INT, GObject.TYPE_INT]},
+
+        // This is called whenever the progress of an active achievement changes. The
+        // passed ID is the index of the achievement in the getAchievements() list of
+        // this.
+        'achievement-progress-changed': {param_types: [GObject.TYPE_INT]},
+
+        // This is called whenever an achievement is completed. The passed ID is the index
+        // of the completed achievement in the getAchievements() list of this.
+        'achievement-completed': {param_types: [GObject.TYPE_INT]},
+
+        // This is called whenever a new achievement becomes available. The passed ID is
+        // the index of the completed achievement in the getAchievements() list of this.
+        'achievement-unlocked': {param_types: [GObject.TYPE_INT]},
+      }
+    },
+
+    class AchievementTracker extends GObject.Object {
+      // clang-format on
+      // -------------------------------------------------------- constructor / destructor
+
+      _init(settings) {
+        super._init();
+
+        // Keep a reference to the settings.
+        this._settings = settings;
+
+        // We keep several connections to the Gio.Settings object. Once the settings
+        // dialog is closed, we use this array to disconnect all of them.
+        this._settingsConnections = [];
+
+        this._totalXP = 0;
+
+        this._levelXPs = [100, 250, 500, 1000, 2500, 5000, 10000, 25000, 50000, Infinity];
+
+        this._achievements = [
+          {
+            name: _('Cancellor I'),
+            description: _('Cancel the selection %i times.').replace('%i', 10),
+            bgImage: 'copper.png',
+            fgImage: 'a.svg',
+            statsKey: 'stats-abortions',
+            xp: 10,
+            range: [0, 10]
+          },
+          {
+            name: _('Cancellor II'),
+            description: _('Cancel the selection %i times.').replace('%i', 50),
+            bgImage: 'bronze.png',
+            fgImage: 'b.svg',
+            statsKey: 'stats-abortions',
+            xp: 25,
+            range: [10, 50]
+          },
+          {
+            name: _('Cancellor III'),
+            description: _('Cancel the selection %i times.').replace('%i', 250),
+            bgImage: 'silver.png',
+            fgImage: 'c.svg',
+            statsKey: 'stats-abortions',
+            xp: 50,
+            range: [50, 250]
+          },
+          {
+            name: _('Cancellor IV'),
+            description: _('Cancel the selection %i times.').replace('%i', 1000),
+            bgImage: 'gold.png',
+            fgImage: 'd.svg',
+            statsKey: 'stats-abortions',
+            xp: 100,
+            range: [250, 1000]
+          },
+          {
+            name: _('Cancellor V'),
+            description: _('Cancel the selection %i times.').replace('%i', 5000),
+            bgImage: 'platinum.png',
+            fgImage: 'e.svg',
+            statsKey: 'stats-abortions',
+            xp: 250,
+            range: [1000, 5000]
+          }
+        ];
+
+        for (let i = 0; i < this._achievements.length; i++) {
+          const achievement = this._achievements[i];
+
+          const update = () => {
+            const val = this._settings.get_uint(achievement.statsKey);
+
+            var newState = AchievementState.ACTIVE;
+
+            if (val < achievement.range[0]) {
+              newState = AchievementState.LOCKED;
+            } else if (val >= achievement.range[1]) {
+              newState = AchievementState.COMPLETED;
+            }
+
+            if (newState != achievement.state) {
+              const emitSignals = achievement.state != undefined;
+              achievement.state = newState;
+              if (emitSignals) {
+                if (newState == AchievementState.ACTIVE) {
+                  this.emit('achievement-unlocked', i);
+                } else if (newState == AchievementState.COMPLETED) {
+                  this.emit('achievement-completed', i);
+                }
+              }
+            }
+
+
+            const newProgress =
+                Math.min(Math.max(val, achievement.range[0]), achievement.range[1]);
+
+            if (newProgress != achievement.progress) {
+              const emitSignals = achievement.progress != undefined;
+
+              achievement.progress = newProgress;
+
+              if (emitSignals) {
+                this.emit('achievement-progress-changed', i);
+              }
+            }
+
+            this._updateExperience();
+          };
+
+          this._settingsConnections.push(
+              this._settings.connect('changed::' + achievement.statsKey, update));
+
+          update();
+        }
       }
 
-      this._settings.apply();
+      // This should be called when the settings dialog is closed. It disconnects handlers
+      // registered with the Gio.Settings objects.
+      destroy() {
+        this._settingsConnections.forEach(connection => {
+          this._settings.disconnect(connection);
+        });
+      }
 
-      // Show the settings dialog.
-      Main.extensionManager.openExtensionPrefs(Me.uuid, '');
+      getAchievements() {
+        return this._achievements;
+      }
+
+      getCurrentLevel() {
+        return this._currentLevel;
+      }
+
+      getLevelXP() {
+        let levelXP = this._totalXP;
+        for (let i = 0; i < this._currentLevel - 1; i++) {
+          levelXP -= this._levelXPs[i];
+        }
+
+        return levelXP;
+      }
+
+      getLevelMaxXP() {
+        return this._levelXPs[this._currentLevel - 1];
+      }
+
+      _updateExperience() {
+        let totalXP         = 0;
+        let emitXPChange    = false;
+        let emitLevelChange = false;
+
+        this._achievements.forEach(achievement => {
+          if (achievement.state == AchievementState.COMPLETED) {
+            totalXP += achievement.xp;
+          }
+        });
+
+        if (totalXP != this._totalXP) {
+          this._totalXP = totalXP;
+          emitXPChange  = true;
+        }
+
+        let level = 1;
+        while (this._totalXP >= this._levelXPs[level - 1] &&
+               level < this._levelXPs.length) {
+          ++level;
+        }
+
+        if (level != this._currentLevel) {
+          this._currentLevel = level;
+          emitLevelChange    = true;
+        }
+
+        if (emitXPChange) {
+          this.emit('experience-changed', this.getLevelXP(), this.getLevelMaxXP());
+        }
+
+        if (emitLevelChange) {
+          this.emit('level-up', this._currentLevel);
+        }
+      }
     });
-
-    source.showNotification(n);
-  }
-}

@@ -12,7 +12,7 @@ const {GLib, Gtk, Gio, Gdk} = imports.gi;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.src.common.utils;
-const Achievements     = Me.imports.src.common.Achievements.Achievements;
+const Statistics       = Me.imports.src.common.Achievements.Statistics;
 const TutorialPage     = Me.imports.src.prefs.TutorialPage.TutorialPage;
 const SettingsPage     = Me.imports.src.prefs.SettingsPage.SettingsPage;
 const MenuEditorPage   = Me.imports.src.prefs.MenuEditorPage.MenuEditorPage;
@@ -115,7 +115,7 @@ var PreferencesDialog = class PreferencesDialog {
       }
 
       // Delete the static settings object of the statistics.
-      Achievements.destroyInstance();
+      Statistics.destroyInstance();
 
       // Disconnect some settings handlers of the individual pages.
       this._tutorialPage.destroy();
@@ -124,7 +124,7 @@ var PreferencesDialog = class PreferencesDialog {
     });
 
     // Record this construction for the statistics.
-    Achievements.getInstance().addSettingsOpened();
+    Statistics.getInstance().addSettingsOpened();
   }
 
   // -------------------------------------------------------------------- public interface
