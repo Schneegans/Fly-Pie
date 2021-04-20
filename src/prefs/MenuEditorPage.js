@@ -540,6 +540,8 @@ var MenuEditorPage = class MenuEditorPage {
               this._set(newIter, 'TYPE', newType);
             }
 
+            Statistics.getInstance().addItemCreated();
+
             return true;
           };
 
@@ -1035,6 +1037,8 @@ var MenuEditorPage = class MenuEditorPage {
           iter, 'DATA',
           JSON.stringify(ItemRegistry.getItemTypes()[newType].config.defaultData));
     }
+
+    Statistics.getInstance().addItemCreated();
   }
 
 
@@ -1065,6 +1069,10 @@ var MenuEditorPage = class MenuEditorPage {
 
           // Save the menu configuration.
           this._saveMenuConfiguration();
+
+          if (!model.get_iter_first()[0]) {
+            Statistics.getInstance().addDeletedAllMenus();
+          }
         }
       }
       dialog.destroy();

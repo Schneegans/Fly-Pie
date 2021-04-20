@@ -81,7 +81,43 @@ var Statistics = class Statistics {
   // -------------------------------------------------------------------- public interface
 
   // This should be called whenever a successful selection is made.
-  addSelection(depth, time, gestureOnlySelection) {}
+  addSelection(depth, time, gestureOnlySelection) {
+    this._addOneTo('stats-selections');
+
+    if (depth <= 4) {
+      if (gestureOnlySelection) {
+        this._addOneTo(`stats-gesture-selections-depth${depth}`);
+      } else {
+        this._addOneTo(`stats-click-selections-depth${depth}`);
+      }
+    }
+
+    if (depth == 1) {
+      if (time <= 150) this._addOneTo('stats-selections-150ms-depth1');
+      if (time <= 250) this._addOneTo('stats-selections-250ms-depth1');
+      if (time <= 500) this._addOneTo('stats-selections-500ms-depth1');
+      if (time <= 750) this._addOneTo('stats-selections-750ms-depth1');
+      if (time <= 1000) this._addOneTo('stats-selections-1000ms-depth1');
+    } else if (depth == 2) {
+      if (time <= 250) this._addOneTo('stats-selections-250ms-depth2');
+      if (time <= 500) this._addOneTo('stats-selections-500ms-depth2');
+      if (time <= 750) this._addOneTo('stats-selections-750ms-depth2');
+      if (time <= 1000) this._addOneTo('stats-selections-1000ms-depth2');
+      if (time <= 2000) this._addOneTo('stats-selections-2000ms-depth2');
+    } else if (depth == 3) {
+      if (time <= 500) this._addOneTo('stats-selections-500ms-depth3');
+      if (time <= 750) this._addOneTo('stats-selections-750ms-depth3');
+      if (time <= 1000) this._addOneTo('stats-selections-1000ms-depth3');
+      if (time <= 2000) this._addOneTo('stats-selections-2000ms-depth3');
+      if (time <= 3000) this._addOneTo('stats-selections-3000ms-depth3');
+    } else if (depth == 4) {
+      if (time <= 750) this._addOneTo('stats-selections-750ms-depth4');
+      if (time <= 1000) this._addOneTo('stats-selections-1000ms-depth4');
+      if (time <= 2000) this._addOneTo('stats-selections-2000ms-depth4');
+      if (time <= 3000) this._addOneTo('stats-selections-3000ms-depth4');
+      if (time <= 4000) this._addOneTo('stats-selections-4000ms-depth4');
+    }
+  }
 
   // Should be called whenever a selection is canceled.
   addAbortion() {
@@ -116,6 +152,21 @@ var Statistics = class Statistics {
   // Should be called whenever a random preset is generated.
   addRandomPreset() {
     this._addOneTo('stats-random-presets');
+  }
+
+  // Should be called when all menus have been deleted.
+  addDeletedAllMenus() {
+    this._addOneTo('stats-deleted-all-menus');
+  }
+
+  // Should be called whenever the tutorial menu is opened.
+  addTutorialMenuOpened() {
+    this._addOneTo('stats-tutorial-menus');
+  }
+
+  // Should be called whenever an item is added in the menu editor.
+  addItemCreated() {
+    this._addOneTo('stats-added-items');
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -206,95 +257,68 @@ var AchievementTracker = GObject.registerClass(
 
         this._totalXP = 0;
 
-        this._levelXPs = [100, 250, 500, 1000, 2500, 5000, 10000, 25000, 50000, Infinity];
+        this._levelXPs = [75, 100, 150, 250, 400, 800, 1200, 2000, 5000, Infinity];
 
-        this._achievements = new Map([
-          [
-            'cancellor1', {
-              name: _('Cancellor I'),
-              description: _('Cancel the selection %i times.').replace('%i', 10),
-              bgImage: 'copper.png',
-              fgImage: 'a.svg',
-              statsKey: 'stats-abortions',
-              xp: 10,
-              range: [0, 10]
-            }
-          ],
-          [
-            'cancellor2', {
-              name: _('Cancellor II'),
-              description: _('Cancel the selection %i times.').replace('%i', 50),
-              bgImage: 'bronze.png',
-              fgImage: 'b.svg',
-              statsKey: 'stats-abortions',
-              xp: 25,
-              range: [10, 50]
-            }
-          ],
-          [
-            'cancellor3', {
-              name: _('Cancellor III'),
-              description: _('Cancel the selection %i times.').replace('%i', 250),
-              bgImage: 'silver.png',
-              fgImage: 'c.svg',
-              statsKey: 'stats-abortions',
-              xp: 50,
-              range: [50, 250]
-            }
-          ],
-          [
-            'cancellor4', {
-              name: _('Cancellor IV'),
-              description: _('Cancel the selection %i times.').replace('%i', 1000),
-              bgImage: 'gold.png',
-              fgImage: 'd.svg',
-              statsKey: 'stats-abortions',
-              xp: 100,
-              range: [250, 1000]
-            }
-          ],
-          [
-            'cancellor5', {
-              name: _('Cancellor V'),
-              description: _('Cancel the selection %i times.').replace('%i', 5000),
-              bgImage: 'platinum.png',
-              fgImage: 'e.svg',
-              statsKey: 'stats-abortions',
-              xp: 250,
-              range: [1000, 5000]
-            }
-          ]
-        ]);
+        this._achievements = this._createAchievements();
 
         this._achievements.forEach((achievement, id) => {
-          const update = (initialUpdate) => {
-            const val = this._settings.get_uint(achievement.statsKey);
+          const update = (initialUpdate, achievement, id) => {
+            let val = this._settings.get_uint(achievement.statsKey);
 
-            var newState = AchievementState.ACTIVE;
+            if (achievement.statsKey == 'stats-best-tutorial-time') {
+              if (val <= 500) {
+                val = 6;
+              } else if (val <= 750) {
+                val = 5;
+              } else if (val <= 1000) {
+                val = 4;
+              } else if (val <= 2000) {
+                val = 2;
+              } else if (val <= 3000) {
+                val = 1;
+              } else {
+                val = 0;
+              }
+            } else if (achievement.statsKey == 'stats-dbus-menus') {
+              val -= this._settings.get_uint('stats-tutorial-menus');
+            }
 
-            if (val < achievement.range[0]) {
-              newState = AchievementState.LOCKED;
-            } else if (val >= achievement.range[1]) {
+            let newState = AchievementState.ACTIVE;
+
+            if (val >= achievement.range[1]) {
               newState = AchievementState.COMPLETED;
+            } else if (val < achievement.range[0] || achievement.hidden) {
+              newState = AchievementState.LOCKED;
             }
 
             if (newState != achievement.state) {
               const emitSignals = achievement.state != undefined;
               achievement.state = newState;
 
-              const dates = this._settings.get_value('achievement-dates').deep_unpack();
+              const key   = 'stats-achievement-dates';
+              const dates = this._settings.get_value(key).deep_unpack();
               if (newState == AchievementState.COMPLETED) {
                 if (!dates.hasOwnProperty(id)) {
                   dates[id] = Date.now();
-                  this._settings.set_value(
-                      'achievement-dates', new GLib.Variant('a{sx}', dates));
+                  this._settings.set_value(key, new GLib.Variant('a{sx}', dates));
+                }
+
+                if (achievement.reveals && this._achievements.has(achievement.reveals)) {
+                  const revealedAchievement = this._achievements.get(achievement.reveals);
+                  revealedAchievement.hidden = false;
+                  update(initialUpdate, revealedAchievement, achievement.reveals);
                 }
 
               } else {
                 if (dates.hasOwnProperty(id)) {
                   delete dates[id];
-                  this._settings.set_value(
-                      'achievement-dates', new GLib.Variant('a{sx}', dates));
+                  this._settings.set_value(key, new GLib.Variant('a{sx}', dates));
+                }
+
+                if (achievement.reveals && this._achievements.has(achievement.reveals)) {
+                  const revealedAchievement = this._achievements.get(achievement.reveals);
+                  revealedAchievement.hidden = true;
+                  update(initialUpdate, revealedAchievement, achievement.reveals);
                 }
               }
 
@@ -329,9 +353,9 @@ var AchievementTracker = GObject.registerClass(
           };
 
           this._settingsConnections.push(this._settings.connect(
-              'changed::' + achievement.statsKey, () => update(false)));
+              'changed::' + achievement.statsKey, () => update(false, achievement, id)));
 
-          update(true);
+          update(true, achievement, id);
         });
       }
 
@@ -380,9 +404,10 @@ var AchievementTracker = GObject.registerClass(
           emitXPChange  = true;
         }
 
-        let level = 1;
-        while (this._totalXP >= this._levelXPs[level - 1] &&
-               level < this._levelXPs.length) {
+        let level   = 1;
+        let levelXP = this._levelXPs[0];
+        while (this._totalXP >= levelXP && level < this._levelXPs.length) {
+          levelXP += this._levelXPs[level];
           ++level;
         }
 
@@ -398,5 +423,270 @@ var AchievementTracker = GObject.registerClass(
         if (emitLevelChange) {
           this.emit('level-up', this._currentLevel);
         }
+      }
+
+      _createAchievements() {
+
+        const tiers = [_('I'), _('II'), _('III'), _('IV'), _('V')];
+        const bgImages =
+            ['copper.png', 'bronze.png', 'silver.png', 'gold.png', 'platinum.png'];
+        const baseXP     = [10, 25, 50, 100, 250];
+        const baseRanges = [0, 50, 150, 500, 1500, 5000];
+
+        const achievements = new Map();
+
+
+        for (let i = 0; i < 5; i++) {
+          achievements.set('cancellor' + i, {
+            name: _('Cancellor %s').replace('%s', tiers[i]),
+            description:
+                _('Abort a selection %i times.').replace('%i', baseRanges[i + 1]),
+            bgImage: bgImages[i],
+            fgImage: 'depth1.svg',
+            statsKey: 'stats-abortions',
+            xp: baseXP[i],
+            range: [baseRanges[i], baseRanges[i + 1]],
+            hidden: false
+          });
+        }
+
+
+        for (let i = 0; i < 5; i++) {
+          achievements.set('master' + i, {
+            name: _('Master Pielot %s').replace('%s', tiers[i]),
+            description: _('Select %i items.').replace('%i', baseRanges[i + 1] * 10),
+            bgImage: bgImages[i],
+            fgImage: 'depth1.svg',
+            statsKey: 'stats-selections',
+            xp: baseXP[i],
+            range: [baseRanges[i] * 10, baseRanges[i + 1] * 10],
+            hidden: false
+          });
+        }
+
+        for (let depth = 1; depth <= 4; depth++) {
+
+          let names = [
+            _('Swing-Pie Selector %s / 1'), _('Swing-Pie Selector %s / 2'),
+            _('Swing-Pie Selector %s / 3'), _('Swing-Pie Selector %s / 4')
+          ];
+
+          for (let i = 0; i < 5; i++) {
+            achievements.set(`depth${depth}-gesture-selector${i}`, {
+              name: names[depth - 1].replace('%s', tiers[i]),
+              description: _('Select %i items at depth %j in marking mode.')
+                               .replace('%i', baseRanges[i + 1])
+                               .replace('%j', depth),
+              bgImage: bgImages[i],
+              fgImage: 'depth1.svg',
+              statsKey: `stats-gesture-selections-depth${depth}`,
+              xp: baseXP[i],
+              range: [baseRanges[i], baseRanges[i + 1]],
+              hidden: false
+            });
+          }
+
+          names = [
+            _('Bumpie Selector %s / 1'), _('Bumpie Selector %s / 2'),
+            _('Bumpie Selector %s / 3'), _('Bumpie Selector %s / 4')
+          ];
+
+          for (let i = 0; i < 5; i++) {
+            achievements.set(`depth${depth}-click-selector${i}`, {
+              name: names[depth - 1].replace('%s', tiers[i]),
+              description: _('Select %i items at depth %j with mouse clicks.')
+                               .replace('%i', baseRanges[i + 1])
+                               .replace('%j', depth),
+              bgImage: bgImages[i],
+              fgImage: 'depth1.svg',
+              statsKey: `stats-click-selections-depth${depth}`,
+              xp: baseXP[i],
+              range: [baseRanges[i], baseRanges[i + 1]],
+              hidden: false
+            });
+          }
+        }
+
+        {
+          const timeLimits = [
+            [1000, 750, 500, 250, 150],
+            [2000, 1000, 750, 500, 250],
+            [3000, 2000, 1000, 750, 500],
+            [4000, 3000, 2000, 1000, 750],
+          ];
+
+          const names = [
+            _('Snappie Selector %s / 1'), _('Snappie Selector %s / 2'),
+            _('Snappie Selector %s / 3'), _('Snappie Selector %s / 4')
+          ];
+
+          const counts = [25, 50, 100, 250, 500];
+
+          for (let depth = 1; depth <= 4; depth++) {
+            for (let i = 0; i < 5; i++) {
+
+              achievements.set(`depth${depth}-selector${i}`, {
+                name: names[depth - 1].replace('%s', tiers[i]),
+                description:
+                    _('Select %i items at depth %j in less than %t milliseconds.')
+                        .replace('%i', counts[i])
+                        .replace('%t', timeLimits[depth - 1][i])
+                        .replace('%j', depth),
+                bgImage: bgImages[i],
+                fgImage: `depth${depth}.svg`,
+                statsKey: `stats-selections-${timeLimits[depth - 1][i]}ms-depth${depth}`,
+                xp: baseXP[i],
+                range: [0, counts[i]],
+                hidden: i > 0,
+                reveals: i < 5 ? `depth${depth}-selector${i + 1}` : null
+              });
+            }
+          }
+        }
+
+
+        for (let i = 0; i < 5; i++) {
+          achievements.set('journey' + i, {
+            name: _('The Journey is the Reward %s').replace('%s', tiers[i]),
+            description: _('Open the settings dialog %i times.')
+                             .replace('%i', baseRanges[i + 1] / 2),
+            bgImage: bgImages[i],
+            fgImage: 'depth1.svg',
+            statsKey: 'stats-settings-opened',
+            xp: baseXP[i],
+            range: [baseRanges[i] / 2, baseRanges[i + 1] / 2],
+            hidden: false
+          });
+        }
+
+        for (let i = 0; i < 5; i++) {
+          achievements.set('nerd' + i, {
+            name: _('Nerd Alert %s').replace('%s', tiers[i]),
+            description: _('Open %i menus with the D-Bus interface.')
+                             .replace('%i', baseRanges[i + 1]),
+            bgImage: bgImages[i],
+            fgImage: 'depth1.svg',
+            statsKey: 'stats-dbus-menus',
+            xp: baseXP[i],
+            range: [baseRanges[i], baseRanges[i + 1]],
+            hidden: false
+          });
+        }
+
+
+        for (let i = 0; i < 5; i++) {
+          achievements.set('entropie' + i, {
+            name: _('Entropie %s').replace('%s', tiers[i]),
+            description:
+                _('Generate %i random presets.').replace('%i', baseRanges[i + 1]),
+            bgImage: bgImages[i],
+            fgImage: 'depth1.svg',
+            statsKey: 'stats-random-presets',
+            xp: baseXP[i],
+            range: [baseRanges[i], baseRanges[i + 1]],
+            hidden: false
+          });
+        }
+
+
+        for (let i = 0; i < 5; i++) {
+          achievements.set('customizer' + i, {
+            name: _('Eye Candy %s').replace('%s', tiers[i]),
+            description: baseRanges[i + 1] / 10 == 1 ?
+                _('Save a custom preset.') :
+                _('Save %i custom presets.').replace('%i', baseRanges[i + 1] / 10),
+            bgImage: bgImages[i],
+            fgImage: 'depth1.svg',
+            statsKey: 'stats-presets-saved',
+            xp: baseXP[i],
+            range: [baseRanges[i] / 10, baseRanges[i + 1] / 10],
+            hidden: false
+          });
+        }
+
+
+        for (let i = 0; i < 5; i++) {
+          achievements.set('importer' + i, {
+            name: _('Importer %s').replace('%s', tiers[i]),
+            description: baseRanges[i + 1] / 10 == 1 ?
+                _('Import a menu configuration.') :
+                _('Import %i menu configurations.').replace('%i', baseRanges[i + 1] / 10),
+            bgImage: bgImages[i],
+            fgImage: 'depth1.svg',
+            statsKey: 'stats-menus-imported',
+            xp: baseXP[i],
+            range: [baseRanges[i] / 10, baseRanges[i + 1] / 10],
+            hidden: false
+          });
+        }
+
+
+        for (let i = 0; i < 5; i++) {
+          achievements.set('exporter' + i, {
+            name: _('Exporter %s').replace('%s', tiers[i]),
+            description: baseRanges[i + 1] / 10 == 1 ?
+                _('Export a menu configuration.') :
+                _('Export %i menu configurations.').replace('%i', baseRanges[i + 1] / 10),
+            bgImage: bgImages[i],
+            fgImage: 'depth1.svg',
+            statsKey: 'stats-menus-exported',
+            xp: baseXP[i],
+            range: [baseRanges[i] / 10, baseRanges[i + 1] / 10],
+            hidden: false
+          });
+        }
+
+
+        for (let i = 0; i < 5; i++) {
+          achievements.set('bigmenus' + i, {
+            name: _('There should be no more than twelve items...? %s')
+                      .replace('%s', tiers[i]),
+            description: _('Create %i items in the menu editor.')
+                             .replace('%i', baseRanges[i + 1] / 5),
+            bgImage: bgImages[i],
+            fgImage: 'depth1.svg',
+            statsKey: 'stats-added-items',
+            xp: baseXP[i],
+            range: [baseRanges[i] / 5, baseRanges[i + 1] / 5],
+            hidden: false
+          });
+        }
+
+        achievements.set('rookie', {
+          name: _('Grumpie Rookie'),
+          description: _('Open the tutorial menu %i times.').replace('%i', 50),
+          bgImage: 'special.png',
+          fgImage: 'depth1.svg',
+          statsKey: 'stats-tutorial-menus',
+          xp: 25,
+          range: [0, 50],
+          hidden: false
+        });
+
+        achievements.set('bachelor', {
+          name: _('Bachelor Pielot'),
+          description: _('Get all medals of the tutorial.'),
+          bgImage: 'special.png',
+          fgImage: 'depth1.svg',
+          statsKey: 'stats-best-tutorial-time',
+          xp: 50,
+          range: [0, 6],
+          hidden: false
+        });
+
+        achievements.set('goodpie', {
+          name: _('Say Good-Pie!'),
+          description: _('Delete all of your menus.'),
+          bgImage: 'special.png',
+          fgImage: 'depth1.svg',
+          statsKey: 'stats-deleted-all-menus',
+          xp: 100,
+          range: [0, 1],
+          hidden: true
+        });
+
+
+
+        return achievements;
       }
     });

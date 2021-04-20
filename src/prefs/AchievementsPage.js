@@ -60,6 +60,9 @@ var AchievementsPage = class AchievementsPage {
     this._achievementTracker.getAchievements().forEach(
         (achievement, id) => this._add(achievement, id));
 
+    this._reorderActiveAchievements();
+    this._reorderCompletedAchievements();
+
     // Make the RadioButtons at the bottom behave like a StackSwitcher.
     const stack = this._builder.get_object('achievements-stack');
     this._builder.get_object('achievements-in-progress-button')
@@ -74,12 +77,38 @@ var AchievementsPage = class AchievementsPage {
             stack.set_visible_child_name('page1');
 
             // Hide the new-achievements counter when the second page is revealed.
-            this._settings.set_uint('unread-achievements', 0);
+            this._settings.set_uint('stats-unread-achievements', 0);
           }
         });
 
+    this._builder.get_object('achievements-reset-button').connect('clicked', button => {
+      // Create the question dialog.
+      const dialog = new Gtk.MessageDialog({
+        transient_for: button.get_toplevel(),
+        modal: true,
+        buttons: Gtk.ButtonsType.OK_CANCEL,
+        message_type: Gtk.MessageType.QUESTION,
+        text: _('Do you really want to reset all statistics?'),
+        secondary_text: _('All achievements will be lost!')
+      });
+
+      // Reset all stats-* keys on a positive response.
+      dialog.connect('response', (dialog, id) => {
+        if (id == Gtk.ResponseType.OK) {
+          this._settings.settings_schema.list_keys().forEach(key => {
+            if (key.startsWith('stats-')) {
+              this._settings.reset(key);
+            }
+          })
+        }
+        dialog.destroy();
+      });
+
+      dialog.show();
+    });
+
     this._settingsConnections.push(this._settings.connect(
-        'changed::unread-achievements', () => this._updateCounter()));
+        'changed::stats-unread-achievements', () => this._updateCounter()));
 
     this._updateLevel();
     this._updateExperience();
@@ -114,10 +143,13 @@ var AchievementsPage = class AchievementsPage {
   _updateProgress(id, cur, max) {
     this._activeAchievements[id].progressBar.set_value(cur);
     this._activeAchievements[id].progressLabel.set_label(cur + ' / ' + max);
+    this._activeAchievements[id].progress = cur / max;
+
+    this._reorderActiveAchievements();
   }
 
   _updateCounter() {
-    const count  = this._settings.get_uint('unread-achievements');
+    const count  = this._settings.get_uint('stats-unread-achievements');
     const reveal = count != 0;
     this._builder.get_object('achievement-counter-revealer').reveal_child = reveal;
 
@@ -129,6 +161,8 @@ var AchievementsPage = class AchievementsPage {
   _achievementUnlocked(id) {
     this._activeAchievements[id].revealer.reveal_child    = true;
     this._completedAchievements[id].revealer.reveal_child = false;
+
+    this._reorderActiveAchievements();
   }
 
   _achievementLocked(id) {
@@ -139,6 +173,32 @@ var AchievementsPage = class AchievementsPage {
   _achievementCompleted(id) {
     this._activeAchievements[id].revealer.reveal_child    = false;
     this._completedAchievements[id].revealer.reveal_child = true;
+
+    const newDate                                   = new Date();
+    this._completedAchievements[id].date            = newDate;
+    this._completedAchievements[id].dateLabel.label = newDate.toLocaleString();
+
+    this._reorderCompletedAchievements();
+  }
+
+  _reorderActiveAchievements() {
+    const container = this._builder.get_object('active-achievements-box');
+    const widgets   = Object.values(this._activeAchievements);
+    widgets.sort((a, b) => b.progress - a.progress || a.name.localeCompare(b.name));
+
+    for (let i = 0; i < widgets.length; i++) {
+      container.reorder_child(widgets[i].revealer, i);
+    }
+  }
+
+  _reorderCompletedAchievements() {
+    const container = this._builder.get_object('completed-achievements-box');
+    const widgets   = Object.values(this._completedAchievements);
+    widgets.sort((a, b) => b.date - a.date || a.name.localeCompare(b.name));
+
+    for (let i = 0; i < widgets.length; i++) {
+      container.reorder_child(widgets[i].revealer, i);
+    }
   }
 
   // Adds an achievement to the Gtk.FlowBox. This contains a composited image and a label
@@ -166,7 +226,7 @@ var AchievementsPage = class AchievementsPage {
   _createAchievementWidget(achievement, id, completed) {
     const result = {};
 
-    const grid = new Gtk.Grid();
+    const grid = new Gtk.Grid({margin_bottom: completed ? 0 : 8});
 
     const icon = new Gtk.DrawingArea({margin_right: 8});
     icon.set_size_request(64, 64);
@@ -187,7 +247,8 @@ var AchievementsPage = class AchievementsPage {
 
     grid.attach(icon, 0, 0, 1, 3);
 
-    const name = new Gtk.Label({
+    result.name     = achievement.name;
+    const nameLabel = new Gtk.Label({
       label: achievement.name,
       wrap: true,
       xalign: 0,
@@ -195,8 +256,8 @@ var AchievementsPage = class AchievementsPage {
       hexpand: true,
       valign: Gtk.Align.END
     });
-    name.get_style_context().add_class('title-4');
-    grid.attach(name, 1, 0, 1, 1);
+    nameLabel.get_style_context().add_class('title-4');
+    grid.attach(nameLabel, 1, 0, 1, 1);
 
     const description = new Gtk.Label({
       label: achievement.description,
@@ -218,24 +279,26 @@ var AchievementsPage = class AchievementsPage {
 
     if (completed) {
 
-      let date    = new Date();
-      const dates = this._settings.get_value('achievement-dates').deep_unpack();
-      if (dates.hasOwnProperty(id)) {
-        date = new Date(dates[id]);
+      result.date = new Date();
+      let label   = '';
+
+      if (achievement.state == AchievementState.COMPLETED) {
+        const dates = this._settings.get_value('stats-achievement-dates').deep_unpack();
+        if (dates.hasOwnProperty(id)) {
+          result.date = new Date(dates[id]);
+        }
+        label = result.date.toLocaleString();
       }
 
-      result.dateLabel = new Gtk.Label({
-        label: date.toLocaleString(),
-        xalign: 1,
-        width_request: 90,
-        valign: Gtk.Align.END
-      });
+      result.dateLabel = new Gtk.Label(
+          {label: label, xalign: 1, width_request: 90, valign: Gtk.Align.END});
       result.dateLabel.get_style_context().add_class('dim-label');
       result.dateLabel.get_style_context().add_class('caption');
       grid.attach(result.dateLabel, 2, 0, 1, 1);
 
     } else {
 
+      result.progress      = achievement.progress / achievement.range[1];
       result.progressLabel = new Gtk.Label({
         label: achievement.progress + ' / ' + achievement.range[1],
         xalign: 1,
@@ -251,6 +314,10 @@ var AchievementsPage = class AchievementsPage {
         value: achievement.progress,
         valign: Gtk.Align.CENTER
       });
+      result.progressBar.remove_offset_value('low');
+      result.progressBar.remove_offset_value('high');
+      result.progressBar.remove_offset_value('full');
+      result.progressBar.remove_offset_value('empty');
       grid.attach(result.progressBar, 1, 2, 1, 1);
     }
 

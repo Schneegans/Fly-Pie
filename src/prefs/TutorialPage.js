@@ -16,6 +16,7 @@ const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.src.common.utils;
 const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
 const Timer         = Me.imports.src.common.Timer.Timer;
+const Statistics    = Me.imports.src.common.Achievements.Statistics;
 const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
@@ -54,12 +55,12 @@ var TutorialPage = class TutorialPage {
             // time in the settings.
             if (menuID == this._lastID && itemID == '/1/2/0') {
               const time     = this._timer.getElapsed();
-              const bestTime = this._settings.get_double('best-tutorial-time');
+              const bestTime = this._settings.get_uint('stats-best-tutorial-time');
 
-              this._settings.set_double('last-tutorial-time', time);
+              this._settings.set_uint('stats-last-tutorial-time', time);
 
               if (time < bestTime) {
-                this._settings.set_double('best-tutorial-time', time);
+                this._settings.set_uint('stats-best-tutorial-time', time);
               }
             }
           });
@@ -130,16 +131,17 @@ var TutorialPage = class TutorialPage {
           if (id >= 0) {
             this._timer.reset();
             this._lastID = id;
+            Statistics.getInstance().addTutorialMenuOpened();
           }
         });
       });
     }
 
     // Update medals and time labels when the selection time changes.
-    this._settingsConnections.push(
-        this._settings.connect('changed::best-tutorial-time', () => this._updateState()));
-    this._settingsConnections.push(
-        this._settings.connect('changed::last-tutorial-time', () => this._updateState()));
+    this._settingsConnections.push(this._settings.connect(
+        'changed::stats-best-tutorial-time', () => this._updateState()));
+    this._settingsConnections.push(this._settings.connect(
+        'changed::stats-last-tutorial-time', () => this._updateState()));
 
     // Update medals and time labels according to the stored last and best selection
     // times when the settings dialog is opened.
@@ -158,8 +160,8 @@ var TutorialPage = class TutorialPage {
   // This shows the last and best selection times in the user interface and "unlocks" the
   // medals if the best selection time was fast enough.
   _updateState() {
-    const bestTime = this._settings.get_double('best-tutorial-time');
-    const lastTime = this._settings.get_double('last-tutorial-time');
+    const bestTime = this._settings.get_uint('stats-best-tutorial-time');
+    const lastTime = this._settings.get_uint('stats-last-tutorial-time');
 
     // Translators: Do not translate '%d'. ms = milliseconds
     let text = _('<big>Last selection time: <b>%d ms</b></big>').format(lastTime);

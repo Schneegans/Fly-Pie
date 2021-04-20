@@ -128,9 +128,9 @@ var Daemon = class Daemon {
     this._achievementTracker.connect('level-up', (o, level) => {
       this._notify(
           // TRANSLATORS: These messages are shown in desktop notifications.
-          _('Level up!'),
+          _('Fly-Pie Level Up!'),
           // TRANSLATORS: These messages are shown in desktop notifications.
-          _('You just reached level %i!').replace('%i', level),
+          _('You reached level %i!').replace('%i', level),
           Gio.icon_new_for_string(Me.path + `/assets/badges/levels/level${level}.png`));
     });
 
@@ -139,13 +139,13 @@ var Daemon = class Daemon {
       const achievement = o.getAchievements().get(id);
       this._notify(
           // TRANSLATORS: These messages are shown in desktop notifications.
-          _('Achievement completed!'),
+          _('Fly-Pie Achievement Completed!'),
           // TRANSLATORS: These messages are shown in desktop notifications.
-          _('You just finished the achievement "%s"!').replace('%s', achievement.name),
+          _('You finished the achievement "%s"!').replace('%s', achievement.name),
           Gio.icon_new_for_string(
               Me.path + `/assets/badges/achievements/${achievement.bgImage}`));
 
-      const key = 'unread-achievements';
+      const key = 'stats-unread-achievements';
       this._settings.set_uint(key, this._settings.get_uint(key) + 1);
     });
   }
@@ -162,6 +162,8 @@ var Daemon = class Daemon {
     this._settingsConnections.forEach(connection => {
       this._settings.disconnect(connection);
     });
+
+    this._achievementTracker.destroy();
 
     // Hide the screencast mouse pointer (if any).
     if (this._screencastMouse) {
