@@ -36,6 +36,10 @@ var AchievementsPage = class AchievementsPage {
     this._builder  = builder;
     this._settings = settings;
 
+    // We keep several connections to the Gio.Settings object. Once the settings
+    // dialog is closed, we use this array to disconnect all of them.
+    this._settingsConnections = [];
+
     this._activeAchievements    = {};
     this._completedAchievements = {};
 
@@ -70,18 +74,26 @@ var AchievementsPage = class AchievementsPage {
             stack.set_visible_child_name('page1');
 
             // Hide the new-achievements counter when the second page is revealed.
-            this._builder.get_object('achievement-counter-revealer').reveal_child = false;
+            this._settings.set_uint('unread-achievements', 0);
           }
         });
 
+    this._settingsConnections.push(this._settings.connect(
+        'changed::unread-achievements', () => this._updateCounter()));
+
     this._updateLevel();
     this._updateExperience();
+    this._updateCounter();
   }
 
   // This should be called when the settings dialog is closed. It disconnects handlers
   // registered with the Gio.Settings object.
   destroy() {
     this._achievementTracker.destroy();
+
+    this._settingsConnections.forEach(connection => {
+      this._settings.disconnect(connection);
+    });
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -104,6 +116,16 @@ var AchievementsPage = class AchievementsPage {
     this._activeAchievements[id].progressLabel.set_label(cur + ' / ' + max);
   }
 
+  _updateCounter() {
+    const count  = this._settings.get_uint('unread-achievements');
+    const reveal = count != 0;
+    this._builder.get_object('achievement-counter-revealer').reveal_child = reveal;
+
+    if (reveal) {
+      this._builder.get_object('achievement-counter').label = count.toString();
+    }
+  }
+
   _achievementUnlocked(id) {
     this._activeAchievements[id].revealer.reveal_child    = true;
     this._completedAchievements[id].revealer.reveal_child = false;
@@ -123,13 +145,13 @@ var AchievementsPage = class AchievementsPage {
   // on-top.
   _add(achievement, id) {
 
-    const active                 = this._createAchievementWidget(achievement, false);
+    const active                 = this._createAchievementWidget(achievement, id, false);
     this._activeAchievements[id] = active;
     if (achievement.state == AchievementState.ACTIVE) {
       active.revealer.reveal_child = true;
     }
 
-    const completed                 = this._createAchievementWidget(achievement, true);
+    const completed = this._createAchievementWidget(achievement, id, true);
     this._completedAchievements[id] = completed;
     if (achievement.state == AchievementState.COMPLETED) {
       completed.revealer.reveal_child = true;
@@ -141,7 +163,7 @@ var AchievementsPage = class AchievementsPage {
         .pack_start(completed.revealer, true, true, 0);
   }
 
-  _createAchievementWidget(achievement, completed) {
+  _createAchievementWidget(achievement, id, completed) {
     const result = {};
 
     const grid = new Gtk.Grid();
@@ -185,19 +207,32 @@ var AchievementsPage = class AchievementsPage {
     });
     grid.attach(description, 1, 1, 1, 1);
 
-    const xp =
-        new Gtk.Label({label: achievement.xp + ' XP', xalign: 1, valign: Gtk.Align.END});
+    const xp = new Gtk.Label({
+      label: achievement.xp + ' XP',
+      xalign: 1,
+      valign: completed ? Gtk.Align.START : Gtk.Align.END
+    });
     xp.get_style_context().add_class('dim-label');
     xp.get_style_context().add_class('caption');
-    grid.attach(xp, 2, completed ? 0 : 1, 1, 1);
+    grid.attach(xp, 2, 1, 1, 1);
 
     if (completed) {
 
-      result.dateLabel = new Gtk.Label(
-          {label: '01.01.2021', xalign: 1, width_request: 90, valign: Gtk.Align.START});
+      let date    = new Date();
+      const dates = this._settings.get_value('achievement-dates').deep_unpack();
+      if (dates.hasOwnProperty(id)) {
+        date = new Date(dates[id]);
+      }
+
+      result.dateLabel = new Gtk.Label({
+        label: date.toLocaleString(),
+        xalign: 1,
+        width_request: 90,
+        valign: Gtk.Align.END
+      });
       result.dateLabel.get_style_context().add_class('dim-label');
       result.dateLabel.get_style_context().add_class('caption');
-      grid.attach(result.dateLabel, 2, 1, 1, 1);
+      grid.attach(result.dateLabel, 2, 0, 1, 1);
 
     } else {
 

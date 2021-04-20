@@ -8942,7 +8942,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                   <object class="GtkLabel" id="achievement-counter">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes">8</property>
+                                    <property name="label">0</property>
                                     <style>
                                       <class name="counter-label"/>
                                     </style>

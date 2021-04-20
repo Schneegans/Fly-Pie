@@ -144,6 +144,9 @@ var Daemon = class Daemon {
           _('You just finished the achievement "%s"!').replace('%s', achievement.name),
           Gio.icon_new_for_string(
               Me.path + `/assets/badges/achievements/${achievement.bgImage}`));
+
+      const key = 'unread-achievements';
+      this._settings.set_uint(key, this._settings.get_uint(key) + 1);
     });
   }
 

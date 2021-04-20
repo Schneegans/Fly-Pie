@@ -267,7 +267,7 @@ var AchievementTracker = GObject.registerClass(
         ]);
 
         this._achievements.forEach((achievement, id) => {
-          const update = () => {
+          const update = (initialUpdate) => {
             const val = this._settings.get_uint(achievement.statsKey);
 
             var newState = AchievementState.ACTIVE;
@@ -282,15 +282,23 @@ var AchievementTracker = GObject.registerClass(
               const emitSignals = achievement.state != undefined;
               achievement.state = newState;
 
+              const dates = this._settings.get_value('achievement-dates').deep_unpack();
               if (newState == AchievementState.COMPLETED) {
-                const dates = this._settings.get_value('achievement-dates').deep_unpack();
                 if (!dates.hasOwnProperty(id)) {
-                  dates[id] = Date.now().getTime();
-                  this._settings.set_value('achievement-dates', dates);
+                  dates[id] = Date.now();
+                  this._settings.set_value(
+                      'achievement-dates', new GLib.Variant('a{sx}', dates));
+                }
+
+              } else {
+                if (dates.hasOwnProperty(id)) {
+                  delete dates[id];
+                  this._settings.set_value(
+                      'achievement-dates', new GLib.Variant('a{sx}', dates));
                 }
               }
 
-              if (emitSignals) {
+              if (emitSignals && !initialUpdate) {
                 if (newState == AchievementState.ACTIVE) {
                   this.emit('achievement-unlocked', id);
                 } else if (newState == AchievementState.COMPLETED) {
@@ -310,7 +318,7 @@ var AchievementTracker = GObject.registerClass(
 
               achievement.progress = newProgress;
 
-              if (emitSignals) {
+              if (emitSignals && !initialUpdate) {
                 this.emit(
                     'achievement-progress-changed', id, newProgress,
                     achievement.range[1]);
@@ -320,10 +328,10 @@ var AchievementTracker = GObject.registerClass(
             this._updateExperience();
           };
 
-          this._settingsConnections.push(
-              this._settings.connect('changed::' + achievement.statsKey, update));
+          this._settingsConnections.push(this._settings.connect(
+              'changed::' + achievement.statsKey, () => update(false)));
 
-          update();
+          update(true);
         });
       }
 

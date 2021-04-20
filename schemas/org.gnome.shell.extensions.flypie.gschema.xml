@@ -542,14 +542,19 @@
       <description>The last achieved time in the tutorial in milliseconds.</description>
     </key>
 
-    <key name="achievement-dates" type="{su}">
-      <default>{}</default>
+    <!-- Achievements -->
+
+    <key name="achievement-dates" type="a{sx}">
+      <default>@a{sx} {}</default>
       <summary>Achievement Dates</summary>
       <description>A list of all unlocked achievement IDs with the corresponding timestamps.</description>
     </key>
 
-
-    <!-- Statistics -->
+    <key name="unread-achievements" type="u">
+      <default>0</default>
+      <summary>Unread Achievements</summary>
+      <description>The number of new achievements.</description>
+    </key>
 
     <key name="stats-abortions" type="u">
       <default>0</default>
