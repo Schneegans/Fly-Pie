@@ -136,7 +136,7 @@ var Daemon = class Daemon {
 
     // Show notifications whenever achievements are unlocked.
     this._achievementTracker.connect('achievement-completed', (o, id) => {
-      const achievement = o.getAchievements()[id];
+      const achievement = o.getAchievements().get(id);
       this._notify(
           // TRANSLATORS: These messages are shown in desktop notifications.
           _('Achievement completed!'),

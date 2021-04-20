@@ -16,6 +16,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 const Me                 = imports.misc.extensionUtils.getCurrentExtension();
 const utils              = Me.imports.src.common.utils;
 const AchievementTracker = Me.imports.src.common.Achievements.AchievementTracker;
+const AchievementState   = Me.imports.src.common.Achievements.AchievementState;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The AchievementsPage class encapsulates code required for the 'Achievements' page of //
@@ -35,13 +36,25 @@ var AchievementsPage = class AchievementsPage {
     this._builder  = builder;
     this._settings = settings;
 
+    this._activeAchievements    = {};
+    this._completedAchievements = {};
+
     this._achievementTracker = new AchievementTracker(this._settings);
     this._achievementTracker.connect('level-up', () => this._updateLevel());
     this._achievementTracker.connect(
         'experience-changed', () => this._updateExperience());
+    this._achievementTracker.connect(
+        'achievement-progress-changed',
+        (o, id, cur, max) => this._updateProgress(id, cur, max));
+    this._achievementTracker.connect(
+        'achievement-unlocked', (o, id) => this._achievementUnlocked(id));
+    this._achievementTracker.connect(
+        'achievement-locked', (o, id) => this._achievementLocked(id));
+    this._achievementTracker.connect(
+        'achievement-completed', (o, id) => this._achievementCompleted(id));
 
     this._achievementTracker.getAchievements().forEach(
-        achievement => this._add(achievement));
+        (achievement, id) => this._add(achievement, id));
 
     // Make the RadioButtons at the bottom behave like a StackSwitcher.
     const stack = this._builder.get_object('achievements-stack');
@@ -86,19 +99,51 @@ var AchievementsPage = class AchievementsPage {
     this._builder.get_object('experience-bar').set_value(cur);
   }
 
+  _updateProgress(id, cur, max) {
+    this._activeAchievements[id].progressBar.set_value(cur);
+    this._activeAchievements[id].progressLabel.set_label(cur + ' / ' + max);
+  }
+
+  _achievementUnlocked(id) {
+    this._activeAchievements[id].revealer.reveal_child    = true;
+    this._completedAchievements[id].revealer.reveal_child = false;
+  }
+
+  _achievementLocked(id) {
+    this._activeAchievements[id].revealer.reveal_child    = false;
+    this._completedAchievements[id].revealer.reveal_child = false;
+  }
+
+  _achievementCompleted(id) {
+    this._activeAchievements[id].revealer.reveal_child    = false;
+    this._completedAchievements[id].revealer.reveal_child = true;
+  }
+
   // Adds an achievement to the Gtk.FlowBox. This contains a composited image and a label
   // on-top.
-  _add(achievement) {
+  _add(achievement, id) {
 
-    const active    = this._createAchievementWidget(achievement, false);
-    const completed = this._createAchievementWidget(achievement, true);
+    const active                 = this._createAchievementWidget(achievement, false);
+    this._activeAchievements[id] = active;
+    if (achievement.state == AchievementState.ACTIVE) {
+      active.revealer.reveal_child = true;
+    }
 
-    this._builder.get_object('active-achievements-box').pack_start(active, true, true, 0);
+    const completed                 = this._createAchievementWidget(achievement, true);
+    this._completedAchievements[id] = completed;
+    if (achievement.state == AchievementState.COMPLETED) {
+      completed.revealer.reveal_child = true;
+    }
+
+    this._builder.get_object('active-achievements-box')
+        .pack_start(active.revealer, true, true, 0);
     this._builder.get_object('completed-achievements-box')
-        .pack_start(completed, true, true, 0);
+        .pack_start(completed.revealer, true, true, 0);
   }
 
   _createAchievementWidget(achievement, completed) {
+    const result = {};
+
     const grid = new Gtk.Grid();
 
     const icon = new Gtk.DrawingArea({margin_right: 8});
@@ -148,34 +193,36 @@ var AchievementsPage = class AchievementsPage {
 
     if (completed) {
 
-      const dateLabel = new Gtk.Label(
+      result.dateLabel = new Gtk.Label(
           {label: '01.01.2021', xalign: 1, width_request: 90, valign: Gtk.Align.START});
-      dateLabel.get_style_context().add_class('dim-label');
-      dateLabel.get_style_context().add_class('caption');
-      grid.attach(dateLabel, 2, 1, 1, 1);
+      result.dateLabel.get_style_context().add_class('dim-label');
+      result.dateLabel.get_style_context().add_class('caption');
+      grid.attach(result.dateLabel, 2, 1, 1, 1);
 
     } else {
 
-      const progressLabel = new Gtk.Label({
+      result.progressLabel = new Gtk.Label({
         label: achievement.progress + ' / ' + achievement.range[1],
         xalign: 1,
         width_request: 90
       });
-      progressLabel.get_style_context().add_class('dim-label');
-      progressLabel.get_style_context().add_class('caption');
-      grid.attach(progressLabel, 2, 2, 1, 1);
+      result.progressLabel.get_style_context().add_class('dim-label');
+      result.progressLabel.get_style_context().add_class('caption');
+      grid.attach(result.progressLabel, 2, 2, 1, 1);
 
-      const progressBar = new Gtk.LevelBar({
+      result.progressBar = new Gtk.LevelBar({
         min_value: 0,
         max_value: achievement.range[1],
         value: achievement.progress,
         valign: Gtk.Align.CENTER
       });
-      grid.attach(progressBar, 1, 2, 1, 1);
+      grid.attach(result.progressBar, 1, 2, 1, 1);
     }
 
-    grid.show_all();
+    result.revealer = new Gtk.Revealer();
+    result.revealer.add(grid);
+    result.revealer.show_all();
 
-    return grid;
+    return result;
   }
 }

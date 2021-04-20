@@ -542,9 +542,9 @@
       <description>The last achieved time in the tutorial in milliseconds.</description>
     </key>
 
-    <key name="unlocked-achievements" type="{uu}">
+    <key name="achievement-dates" type="{su}">
       <default>{}</default>
-      <summary>Unlocked Achievements</summary>
+      <summary>Achievement Dates</summary>
       <description>A list of all unlocked achievement IDs with the corresponding timestamps.</description>
     </key>
 

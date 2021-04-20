@@ -170,17 +170,23 @@ var AchievementTracker = GObject.registerClass(
         'experience-changed': {param_types: [GObject.TYPE_INT, GObject.TYPE_INT]},
 
         // This is called whenever the progress of an active achievement changes. The
-        // passed ID is the index of the achievement in the getAchievements() list of
+        // passed string is the key of the achievement in the getAchievements() map of
+        // this; the second and third paramter are the new progress and maximum progress.
+        'achievement-progress-changed': {param_types: [GObject.TYPE_STRING, GObject.TYPE_INT, GObject.TYPE_INT]},
+
+        // This is called whenever an achievement is completed. The passed string is the
+        // key of the completed achievement in the getAchievements() map of this.
+        'achievement-completed': {param_types: [GObject.TYPE_STRING]},
+
+        // This is called whenever a new achievement becomes available. The passed string
+        // is the key of the completed achievement in the getAchievements() map of this.
+        'achievement-unlocked': {param_types: [GObject.TYPE_STRING]},
+
+        // This is called whenever an active achievement becomes unavailable. This is
+        // quite unlikely but may happen when the user resets the statistics. The passed
+        // string is the key of the completed achievement in the getAchievements() map of
         // this.
-        'achievement-progress-changed': {param_types: [GObject.TYPE_INT]},
-
-        // This is called whenever an achievement is completed. The passed ID is the index
-        // of the completed achievement in the getAchievements() list of this.
-        'achievement-completed': {param_types: [GObject.TYPE_INT]},
-
-        // This is called whenever a new achievement becomes available. The passed ID is
-        // the index of the completed achievement in the getAchievements() list of this.
-        'achievement-unlocked': {param_types: [GObject.TYPE_INT]},
+        'achievement-locked': {param_types: [GObject.TYPE_STRING]},
       }
     },
 
@@ -202,57 +208,65 @@ var AchievementTracker = GObject.registerClass(
 
         this._levelXPs = [100, 250, 500, 1000, 2500, 5000, 10000, 25000, 50000, Infinity];
 
-        this._achievements = [
-          {
-            name: _('Cancellor I'),
-            description: _('Cancel the selection %i times.').replace('%i', 10),
-            bgImage: 'copper.png',
-            fgImage: 'a.svg',
-            statsKey: 'stats-abortions',
-            xp: 10,
-            range: [0, 10]
-          },
-          {
-            name: _('Cancellor II'),
-            description: _('Cancel the selection %i times.').replace('%i', 50),
-            bgImage: 'bronze.png',
-            fgImage: 'b.svg',
-            statsKey: 'stats-abortions',
-            xp: 25,
-            range: [10, 50]
-          },
-          {
-            name: _('Cancellor III'),
-            description: _('Cancel the selection %i times.').replace('%i', 250),
-            bgImage: 'silver.png',
-            fgImage: 'c.svg',
-            statsKey: 'stats-abortions',
-            xp: 50,
-            range: [50, 250]
-          },
-          {
-            name: _('Cancellor IV'),
-            description: _('Cancel the selection %i times.').replace('%i', 1000),
-            bgImage: 'gold.png',
-            fgImage: 'd.svg',
-            statsKey: 'stats-abortions',
-            xp: 100,
-            range: [250, 1000]
-          },
-          {
-            name: _('Cancellor V'),
-            description: _('Cancel the selection %i times.').replace('%i', 5000),
-            bgImage: 'platinum.png',
-            fgImage: 'e.svg',
-            statsKey: 'stats-abortions',
-            xp: 250,
-            range: [1000, 5000]
-          }
-        ];
+        this._achievements = new Map([
+          [
+            'cancellor1', {
+              name: _('Cancellor I'),
+              description: _('Cancel the selection %i times.').replace('%i', 10),
+              bgImage: 'copper.png',
+              fgImage: 'a.svg',
+              statsKey: 'stats-abortions',
+              xp: 10,
+              range: [0, 10]
+            }
+          ],
+          [
+            'cancellor2', {
+              name: _('Cancellor II'),
+              description: _('Cancel the selection %i times.').replace('%i', 50),
+              bgImage: 'bronze.png',
+              fgImage: 'b.svg',
+              statsKey: 'stats-abortions',
+              xp: 25,
+              range: [10, 50]
+            }
+          ],
+          [
+            'cancellor3', {
+              name: _('Cancellor III'),
+              description: _('Cancel the selection %i times.').replace('%i', 250),
+              bgImage: 'silver.png',
+              fgImage: 'c.svg',
+              statsKey: 'stats-abortions',
+              xp: 50,
+              range: [50, 250]
+            }
+          ],
+          [
+            'cancellor4', {
+              name: _('Cancellor IV'),
+              description: _('Cancel the selection %i times.').replace('%i', 1000),
+              bgImage: 'gold.png',
+              fgImage: 'd.svg',
+              statsKey: 'stats-abortions',
+              xp: 100,
+              range: [250, 1000]
+            }
+          ],
+          [
+            'cancellor5', {
+              name: _('Cancellor V'),
+              description: _('Cancel the selection %i times.').replace('%i', 5000),
+              bgImage: 'platinum.png',
+              fgImage: 'e.svg',
+              statsKey: 'stats-abortions',
+              xp: 250,
+              range: [1000, 5000]
+            }
+          ]
+        ]);
 
-        for (let i = 0; i < this._achievements.length; i++) {
-          const achievement = this._achievements[i];
-
+        this._achievements.forEach((achievement, id) => {
           const update = () => {
             const val = this._settings.get_uint(achievement.statsKey);
 
@@ -267,11 +281,22 @@ var AchievementTracker = GObject.registerClass(
             if (newState != achievement.state) {
               const emitSignals = achievement.state != undefined;
               achievement.state = newState;
+
+              if (newState == AchievementState.COMPLETED) {
+                const dates = this._settings.get_value('achievement-dates').deep_unpack();
+                if (!dates.hasOwnProperty(id)) {
+                  dates[id] = Date.now().getTime();
+                  this._settings.set_value('achievement-dates', dates);
+                }
+              }
+
               if (emitSignals) {
                 if (newState == AchievementState.ACTIVE) {
-                  this.emit('achievement-unlocked', i);
+                  this.emit('achievement-unlocked', id);
                 } else if (newState == AchievementState.COMPLETED) {
-                  this.emit('achievement-completed', i);
+                  this.emit('achievement-completed', id);
+                } else {
+                  this.emit('achievement-locked', id);
                 }
               }
             }
@@ -286,7 +311,9 @@ var AchievementTracker = GObject.registerClass(
               achievement.progress = newProgress;
 
               if (emitSignals) {
-                this.emit('achievement-progress-changed', i);
+                this.emit(
+                    'achievement-progress-changed', id, newProgress,
+                    achievement.range[1]);
               }
             }
 
@@ -297,7 +324,7 @@ var AchievementTracker = GObject.registerClass(
               this._settings.connect('changed::' + achievement.statsKey, update));
 
           update();
-        }
+        });
       }
 
       // This should be called when the settings dialog is closed. It disconnects handlers
