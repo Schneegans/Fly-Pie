@@ -257,7 +257,7 @@ var AchievementTracker = GObject.registerClass(
 
         this._totalXP = 0;
 
-        this._levelXPs = [75, 100, 150, 250, 400, 800, 1200, 2000, 5000, Infinity];
+        this._levelXPs = [500, 750, 1000, 1500, 2000, 3500, 5000, 7500, 10000, Infinity];
 
         this._achievements = this._createAchievements();
 
@@ -430,8 +430,8 @@ var AchievementTracker = GObject.registerClass(
         const tiers = [_('I'), _('II'), _('III'), _('IV'), _('V')];
         const bgImages =
             ['copper.png', 'bronze.png', 'silver.png', 'gold.png', 'platinum.png'];
-        const baseXP     = [10, 25, 50, 100, 250];
-        const baseRanges = [0, 50, 150, 500, 1500, 5000];
+        const baseXP     = [100, 250, 500, 750, 1000];
+        const baseRanges = [0, 10, 30, 100, 300, 1000];
 
         const achievements = new Map();
 
@@ -440,12 +440,12 @@ var AchievementTracker = GObject.registerClass(
           achievements.set('cancellor' + i, {
             name: _('Cancellor %s').replace('%s', tiers[i]),
             description:
-                _('Abort a selection %i times.').replace('%i', baseRanges[i + 1]),
+                _('Abort a selection %i times.').replace('%i', baseRanges[i + 1] * 2),
             bgImage: bgImages[i],
             fgImage: 'depth1.svg',
             statsKey: 'stats-abortions',
             xp: baseXP[i],
-            range: [baseRanges[i], baseRanges[i + 1]],
+            range: [baseRanges[i] * 2, baseRanges[i + 1] * 2],
             hidden: false
           });
         }
@@ -454,12 +454,12 @@ var AchievementTracker = GObject.registerClass(
         for (let i = 0; i < 5; i++) {
           achievements.set('master' + i, {
             name: _('Master Pielot %s').replace('%s', tiers[i]),
-            description: _('Select %i items.').replace('%i', baseRanges[i + 1] * 10),
+            description: _('Select %i items.').replace('%i', baseRanges[i + 1] * 5),
             bgImage: bgImages[i],
             fgImage: 'depth1.svg',
             statsKey: 'stats-selections',
-            xp: baseXP[i],
-            range: [baseRanges[i] * 10, baseRanges[i + 1] * 10],
+            xp: baseXP[i] * 2,
+            range: [baseRanges[i] * 5, baseRanges[i + 1] * 5],
             hidden: false
           });
         }
@@ -475,13 +475,13 @@ var AchievementTracker = GObject.registerClass(
             achievements.set(`depth${depth}-gesture-selector${i}`, {
               name: names[depth - 1].replace('%s', tiers[i]),
               description: _('Select %i items at depth %j in marking mode.')
-                               .replace('%i', baseRanges[i + 1])
+                               .replace('%i', baseRanges[i + 1] * 2)
                                .replace('%j', depth),
               bgImage: bgImages[i],
               fgImage: 'depth1.svg',
               statsKey: `stats-gesture-selections-depth${depth}`,
               xp: baseXP[i],
-              range: [baseRanges[i], baseRanges[i + 1]],
+              range: [baseRanges[i] * 2, baseRanges[i + 1] * 2],
               hidden: false
             });
           }
@@ -495,13 +495,13 @@ var AchievementTracker = GObject.registerClass(
             achievements.set(`depth${depth}-click-selector${i}`, {
               name: names[depth - 1].replace('%s', tiers[i]),
               description: _('Select %i items at depth %j with mouse clicks.')
-                               .replace('%i', baseRanges[i + 1])
+                               .replace('%i', baseRanges[i + 1] * 2)
                                .replace('%j', depth),
               bgImage: bgImages[i],
               fgImage: 'depth1.svg',
               statsKey: `stats-click-selections-depth${depth}`,
               xp: baseXP[i],
-              range: [baseRanges[i], baseRanges[i + 1]],
+              range: [baseRanges[i] * 2, baseRanges[i + 1] * 2],
               hidden: false
             });
           }
@@ -520,7 +520,7 @@ var AchievementTracker = GObject.registerClass(
             _('Snappie Selector %s / 3'), _('Snappie Selector %s / 4')
           ];
 
-          const counts = [25, 50, 100, 250, 500];
+          const counts = [50, 100, 150, 200, 250];
 
           for (let depth = 1; depth <= 4; depth++) {
             for (let i = 0; i < 5; i++) {
@@ -547,7 +547,7 @@ var AchievementTracker = GObject.registerClass(
 
         for (let i = 0; i < 5; i++) {
           achievements.set('journey' + i, {
-            name: _('The Journey is the Reward %s').replace('%s', tiers[i]),
+            name: _('The Journey Is The Reward %s').replace('%s', tiers[i]),
             description: _('Open the settings dialog %i times.')
                              .replace('%i', baseRanges[i + 1] / 2),
             bgImage: bgImages[i],
@@ -578,12 +578,12 @@ var AchievementTracker = GObject.registerClass(
           achievements.set('entropie' + i, {
             name: _('Entropie %s').replace('%s', tiers[i]),
             description:
-                _('Generate %i random presets.').replace('%i', baseRanges[i + 1]),
+                _('Generate %i random presets.').replace('%i', baseRanges[i + 1] / 2),
             bgImage: bgImages[i],
             fgImage: 'depth1.svg',
             statsKey: 'stats-random-presets',
             xp: baseXP[i],
-            range: [baseRanges[i], baseRanges[i + 1]],
+            range: [baseRanges[i] / 2, baseRanges[i + 1] / 2],
             hidden: false
           });
         }
@@ -639,15 +639,15 @@ var AchievementTracker = GObject.registerClass(
 
         for (let i = 0; i < 5; i++) {
           achievements.set('bigmenus' + i, {
-            name: _('There should be no more than twelve items...? %s')
+            name: _('There Should Be No More Than Twelve Items...? %s')
                       .replace('%s', tiers[i]),
             description: _('Create %i items in the menu editor.')
-                             .replace('%i', baseRanges[i + 1] / 5),
+                             .replace('%i', baseRanges[i + 1] / 2),
             bgImage: bgImages[i],
             fgImage: 'depth1.svg',
             statsKey: 'stats-added-items',
             xp: baseXP[i],
-            range: [baseRanges[i] / 5, baseRanges[i + 1] / 5],
+            range: [baseRanges[i] / 2, baseRanges[i + 1] / 2],
             hidden: false
           });
         }
@@ -658,7 +658,7 @@ var AchievementTracker = GObject.registerClass(
           bgImage: 'special.png',
           fgImage: 'depth1.svg',
           statsKey: 'stats-tutorial-menus',
-          xp: 25,
+          xp: 100,
           range: [0, 50],
           hidden: false
         });
@@ -669,7 +669,7 @@ var AchievementTracker = GObject.registerClass(
           bgImage: 'special.png',
           fgImage: 'depth1.svg',
           statsKey: 'stats-best-tutorial-time',
-          xp: 50,
+          xp: 250,
           range: [0, 6],
           hidden: false
         });
@@ -680,12 +680,10 @@ var AchievementTracker = GObject.registerClass(
           bgImage: 'special.png',
           fgImage: 'depth1.svg',
           statsKey: 'stats-deleted-all-menus',
-          xp: 100,
+          xp: 500,
           range: [0, 1],
           hidden: true
         });
-
-
 
         return achievements;
       }
