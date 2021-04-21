@@ -433,12 +433,6 @@ var Daemon = class Daemon {
       // Make sure the achievements page is shown.
       this._settings.set_string('active-stack-child', 'achievements-page');
 
-      if (this._saveTimeout >= 0) {
-        GLib.source_remove(this._saveTimeout);
-      }
-
-      this._settings.apply();
-
       // Show the settings dialog.
       Main.extensionManager.openExtensionPrefs(Me.uuid, '');
     });
