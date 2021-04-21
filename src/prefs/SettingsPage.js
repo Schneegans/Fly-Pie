@@ -334,22 +334,10 @@ var SettingsPage = class SettingsPage {
             }
 
             // Now save the preset!
-            const exists  = file.query_exists(null);
-            const success = Preset.save(file);
+            Preset.save(file);
 
-            // If this was successful, we add the new preset to the list.
-            if (success && !exists) {
-              const fileInfo =
-                  file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
-              const suffixPos  = fileInfo.get_display_name().indexOf('.json');
-              const row        = this._presetList.append();
-              const presetName = fileInfo.get_display_name().slice(0, suffixPos);
-              this._presetList.set_value(row, 0, presetName);
-              this._presetList.set_value(row, 1, file.get_path());
-
-              // Store this in our statistics.
-              Statistics.getInstance().addPresetSaved();
-            }
+            // Store this in our statistics.
+            Statistics.getInstance().addPresetExport();
 
           } catch (error) {
             utils.debug('Failed to save preset: ' + error);
