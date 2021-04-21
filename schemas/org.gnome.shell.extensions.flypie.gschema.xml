@@ -765,10 +765,16 @@
       <description>The number of times the settings dialog has been opnened.</description>
     </key>
 
-    <key name="stats-presets-saved" type="u">
+    <key name="stats-presets-imported" type="u">
       <default>0</default>
-      <summary>Preset Saves</summary>
-      <description>The number of times a preset has been saved.</description>
+      <summary>Preset Imports</summary>
+      <description>The number of times a preset has been imported.</description>
+    </key>
+
+    <key name="stats-presets-exported" type="u">
+      <default>0</default>
+      <summary>Preset Exports</summary>
+      <description>The number of times a preset has been exported.</description>
     </key>
 
     <key name="stats-menus-imported" type="u">
