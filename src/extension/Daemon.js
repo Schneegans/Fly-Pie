@@ -12,16 +12,16 @@ const {Gio, GLib} = imports.gi;
 
 const Main = imports.ui.main;
 
-const Me                 = imports.misc.extensionUtils.getCurrentExtension();
-const utils              = Me.imports.src.common.utils;
-const Statistics         = Me.imports.src.common.Achievements.Statistics;
-const AchievementTracker = Me.imports.src.common.Achievements.AchievementTracker;
-const ItemRegistry       = Me.imports.src.common.ItemRegistry.ItemRegistry;
-const DBusInterface      = Me.imports.src.common.DBusInterface.DBusInterface;
-const Shortcuts          = Me.imports.src.extension.Shortcuts.Shortcuts;
-const MouseHighlight     = Me.imports.src.extension.MouseHighlight.MouseHighlight;
-const Menu               = Me.imports.src.extension.Menu.Menu;
-const DefaultMenu        = Me.imports.src.extension.DefaultMenu.DefaultMenu;
+const Me             = imports.misc.extensionUtils.getCurrentExtension();
+const utils          = Me.imports.src.common.utils;
+const Statistics     = Me.imports.src.common.Statistics.Statistics;
+const Achievements   = Me.imports.src.common.Achievements.Achievements;
+const ItemRegistry   = Me.imports.src.common.ItemRegistry.ItemRegistry;
+const DBusInterface  = Me.imports.src.common.DBusInterface.DBusInterface;
+const Shortcuts      = Me.imports.src.extension.Shortcuts.Shortcuts;
+const MouseHighlight = Me.imports.src.extension.MouseHighlight.MouseHighlight;
+const Menu           = Me.imports.src.extension.Menu.Menu;
+const DefaultMenu    = Me.imports.src.extension.DefaultMenu.DefaultMenu;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
@@ -123,28 +123,32 @@ var Daemon = class Daemon {
         'changed::show-screencast-mouse', () => this._onScreencastMouseChanged()));
     this._onScreencastMouseChanged();
 
-    // Show notifications whenever a level-up occurred.
-    this._achievementTracker = new AchievementTracker(this._settings);
-    this._achievementTracker.connect('level-up', (o, level) => {
+    // Show notifications whenever a level-up occurred. In fact, this will be shown also
+    // when a level-down happened, but this should only happen rarely...
+    this._achievements = new Achievements(this._settings);
+    this._achievements.connect('level-changed', (o, level) => {
       this._notify(
-          // TRANSLATORS: These messages are shown in desktop notifications.
+          // Translators: This is shown in a desktop notifications.
           _('Fly-Pie Level Up!'),
-          // TRANSLATORS: These messages are shown in desktop notifications.
+          // Translators: This is shown in a desktop notifications.
           _('You reached level %i!').replace('%i', level),
           Gio.icon_new_for_string(Me.path + `/assets/badges/levels/level${level}.png`));
     });
 
     // Show notifications whenever achievements are unlocked.
-    this._achievementTracker.connect('achievement-completed', (o, id) => {
+    this._achievements.connect('completed', (o, id) => {
       const achievement = o.getAchievements().get(id);
       this._notify(
-          // TRANSLATORS: These messages are shown in desktop notifications.
+          // Translators: This is shown in a desktop notifications.
           _('Fly-Pie Achievement Completed!'),
-          // TRANSLATORS: These messages are shown in desktop notifications.
+          // Translators: This is shown in a desktop notifications.
           _('You finished the achievement "%s"!').replace('%s', achievement.name),
           Gio.icon_new_for_string(
               Me.path + `/assets/badges/achievements/${achievement.bgImage}`));
 
+      // Whenever an achievement is unlocked, this counter is increased by one. It is used
+      // to show a small badge in the achievements dialog containing the number of newly
+      // achieved achievements.
       const key = 'stats-unread-achievements';
       this._settings.set_uint(key, this._settings.get_uint(key) + 1);
     });
@@ -163,7 +167,7 @@ var Daemon = class Daemon {
       this._settings.disconnect(connection);
     });
 
-    this._achievementTracker.destroy();
+    this._achievements.destroy();
 
     // Hide the screencast mouse pointer (if any).
     if (this._screencastMouse) {
@@ -171,7 +175,7 @@ var Daemon = class Daemon {
       global.stage.remove_child(this._screencastMouse);
     }
 
-    // Delete the static settings object of the achievements.
+    // Delete the statistics singleton.
     Statistics.destroyInstance();
   }
 
@@ -420,7 +424,7 @@ var Daemon = class Daemon {
   // Shows a GNOME Shell notification with the given label, description and icon. The size
   // of the icon seems to depend on the currently used theme and cannot be set from here.
   // The notification will also contain a hard-coded button which opens the achievements
-  // page of the settings dialog. This cannot be used from the preferences dialog.
+  // page of the settings dialog.
   _notify(label, details, gicon) {
     const source = new Main.MessageTray.Source('Fly-Pie', '');
     Main.messageTray.add(source);

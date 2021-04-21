@@ -24,9 +24,9 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 //////////////////////////////////////////////////////////////////////////////////////////
 // The SettingsPage class encapsulates code required for the 'Menu Editor' page of      //
 // the settings dialog. It's not instantiated multiple times, nor does it have any      //
-// public interface, hence it could just be copy-pasted to the settings class. But as   //
-// it's quite decoupled (and huge) as well, it structures the code better when written  //
-// to its own file.                                                                     //
+// public interface, hence it could just be copy-pasted to the PreferencesDialog class. //
+// But as it's quite decoupled (and huge) as well, it structures the code better when   //
+// written to its own file.                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var SettingsPage = class SettingsPage {
@@ -380,6 +380,9 @@ var SettingsPage = class SettingsPage {
           try {
             const file = Gio.File.new_for_path(dialog.get_filename());
             Preset.load(file);
+
+            // Store this in our statistics.
+            Statistics.getInstance().addPresetImport();
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
