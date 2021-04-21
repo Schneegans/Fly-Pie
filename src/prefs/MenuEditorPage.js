@@ -14,7 +14,7 @@ const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
 const Me                  = imports.misc.extensionUtils.getCurrentExtension();
 const utils               = Me.imports.src.common.utils;
 const DBusInterface       = Me.imports.src.common.DBusInterface.DBusInterface;
-const Statistics          = Me.imports.src.common.Achievements.Statistics;
+const Statistics          = Me.imports.src.common.Statistics.Statistics;
 const ItemRegistry        = Me.imports.src.common.ItemRegistry.ItemRegistry;
 const ItemClass           = Me.imports.src.common.ItemRegistry.ItemClass;
 const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
@@ -108,9 +108,9 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
 //////////////////////////////////////////////////////////////////////////////////////////
 // The MenuEditorPage class encapsulates code required for the 'Menu Editor' page of    //
 // the settings dialog. It's not instantiated multiple times, nor does it have any      //
-// public interface, hence it could just be copy-pasted to the settings class. But as   //
-// it's quite decoupled (and huge) as well, it structures the code better when written  //
-// to its own file.                                                                     //
+// public interface, hence it could just be copy-pasted to the PreferencesDialog class. //
+// But as it's quite decoupled (and huge) as well, it structures the code better when   //
+// written to its own file.                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var MenuEditorPage = class MenuEditorPage {
@@ -540,6 +540,7 @@ var MenuEditorPage = class MenuEditorPage {
               this._set(newIter, 'TYPE', newType);
             }
 
+            // Store this in our statistics.
             Statistics.getInstance().addItemCreated();
 
             return true;
@@ -1038,6 +1039,7 @@ var MenuEditorPage = class MenuEditorPage {
           JSON.stringify(ItemRegistry.getItemTypes()[newType].config.defaultData));
     }
 
+    // Store this in our statistics.
     Statistics.getInstance().addItemCreated();
   }
 
@@ -1070,6 +1072,7 @@ var MenuEditorPage = class MenuEditorPage {
           // Save the menu configuration.
           this._saveMenuConfiguration();
 
+          // If this was the last menu item, store this in our statistics.
           if (!model.get_iter_first()[0]) {
             Statistics.getInstance().addDeletedAllMenus();
           }

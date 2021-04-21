@@ -12,7 +12,7 @@ const {GLib, Gtk, Gio, Gdk} = imports.gi;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.src.common.utils;
-const Statistics       = Me.imports.src.common.Achievements.Statistics;
+const Statistics       = Me.imports.src.common.Statistics.Statistics;
 const TutorialPage     = Me.imports.src.prefs.TutorialPage.TutorialPage;
 const SettingsPage     = Me.imports.src.prefs.SettingsPage.SettingsPage;
 const MenuEditorPage   = Me.imports.src.prefs.MenuEditorPage.MenuEditorPage;

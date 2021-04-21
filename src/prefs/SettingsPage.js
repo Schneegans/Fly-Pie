@@ -15,7 +15,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.src.common.utils;
 const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
-const Statistics    = Me.imports.src.common.Achievements.Statistics;
+const Statistics    = Me.imports.src.common.Statistics.Statistics;
 const Preset        = Me.imports.src.prefs.Preset.Preset;
 const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 

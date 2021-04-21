@@ -16,7 +16,7 @@ const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.src.common.utils;
 const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
 const Timer         = Me.imports.src.common.Timer.Timer;
-const Statistics    = Me.imports.src.common.Achievements.Statistics;
+const Statistics    = Me.imports.src.common.Statistics.Statistics;
 const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
@@ -24,8 +24,9 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 //////////////////////////////////////////////////////////////////////////////////////////
 // The TutorialPage class encapsulates code required for the 'Tutorial' page of the     //
 // settings dialog. It's not instantiated multiple times, nor does it have any public   //
-// interface, hence it could just be copy-pasted to the settings class. But as it's     //
-// quite decoupled as well, it structures the code better when written to its own file. //
+// interface, hence it could just be copy-pasted to the PreferencesDialog class. But as //
+// it's quite decoupled as well, it structures the code better when written to its own  //
+// file.                                                                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var TutorialPage = class TutorialPage {
