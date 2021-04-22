@@ -360,20 +360,42 @@ var Achievements = GObject.registerClass(
       // is defined at the top of this file.
       _createAchievements() {
 
-        const attributes =
-            // Translators: Most achievements have five tiers. In these cases, you can use
-            // a %i and / or a %s in the achievement's name. In english, %i will be
-            // replaced by the corresponding roman tier number (I, II, III, ...) and %s
-            // will be replaced by one of the attributes ('Novice', 'Master', ...). Both
-            // of these can be translated as well, so you may get quite creative here :)
-            [_('Novice'), _('Capable'), _('Skilled'), _('Expert'), _('Master')];
+        const attributes = [
+          // Translators: Most achievements have five tiers. In these cases, you can use
+          // a %i and / or a %s in the achievement's name. In english, %i will be
+          // replaced by the corresponding roman tier number (I, II, III, ...) and %s
+          // will be replaced by one of the attributes ('Novice', 'Master', ...). Both
+          // of these can be translated as well, so you may get quite creative here :).
+          // 'Novice' is the tier I attribute. This will be inserted for each %s in the
+          // achievement titles.
+          _('Novice'),
+          // Translators: This is the tier 2 attribute.
+          _('Capable'),
+          // Translators: This is the tier 3 attribute.
+          _('Skilled'),
+          // Translators: This is the tier 4 attribute.
+          _('Expert'),
+          // Translators: This is the tier 5 attribute.
+          _('Master')
+        ];
 
-        // Translators: Most achievements have five tiers. In these cases, you can use a
-        // %i and / or a %s in the achievement's name. In english, %i will be replaced by
-        // the corresponding roman tier number (I, II, III, ...) and %s will be replaced
-        // by one of the attributes ('Novice', 'Master', ...). Both of these can be
-        // translated as well, so you may get quite creative here :)
-        const numbers = [_('I'), _('II'), _('III'), _('IV'), _('V')];
+        const numbers = [
+          // Translators: Most achievements have five tiers. In these cases, you can use a
+          // %i and / or a %s in the achievement's name. In english, %i will be replaced
+          // by the corresponding roman tier number (I, II, III, ...) and %s will be
+          // replaced by one of the attributes ('Novice', 'Master', ...). Both of these
+          // can be translated as well, so you may get quite creative here :). This 'I' is
+          // the roman number 1 which is replaces any %i in achievement names.
+          _('I'),
+          // Translators: This is the tier 2 number.
+          _('II'),
+          // Translators: This is the tier 3 number.
+          _('III'),
+          // Translators: This is the tier 4 number.
+          _('IV'),
+          // Translators: This is the tier 5 number.
+          _('V')
+        ];
 
         // These are the icon background images used by the five tiers.
         const bgImages =
@@ -645,6 +667,7 @@ var Achievements = GObject.registerClass(
 
         achievements.set('rookie', {
           // Translators: The name of the 'Open the tutorial menu %x times.' achievement.
+          // This does not support %s and %i.
           name: _('Grumpie Rookie'),
           description: _('Open the tutorial menu %x times.').replace('%x', 50),
           bgImage: 'special3.png',
@@ -657,6 +680,7 @@ var Achievements = GObject.registerClass(
 
         achievements.set('bachelor', {
           // Translators: The name of the 'Get all medals of the tutorial.' achievement.
+          // This does not support %s and %i.
           name: _('Bachelor Pielot'),
           description: _('Get all medals of the tutorial.'),
           bgImage: 'special1.png',
@@ -669,6 +693,7 @@ var Achievements = GObject.registerClass(
 
         achievements.set('goodpie', {
           // Translators: The name of the hidden 'Delete all of your menus.' achievement.
+          // This does not support %s and %i.
           name: _('Say Good-Pie!'),
           description: _('Delete all of your menus.'),
           bgImage: 'special2.png',
@@ -681,8 +706,9 @@ var Achievements = GObject.registerClass(
 
         achievements.set('sponsors', {
           // Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
+          // This does not support %s and %i.
           // achievement.
-          name: _('Philanthropie'),
+          name: _('That\'s Philanthropie!'),
           description: _('Consider becoming a sponsor of Fly-Pie.'),
           bgImage: 'special3.png',
           fgImage: 'heart.svg',

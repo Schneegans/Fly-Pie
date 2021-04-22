@@ -7710,7 +7710,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Show a notification whenever you complete an achievment.</property>
+                                    <property name="label" translatable="yes">Show a notification whenever you complete an achievement.</property>
                                     <style>
                                       <class name="dim-label"/>
                                     </style>
@@ -8717,7 +8717,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">level1</property>
-                    <property name="title" translatable="yes">page0</property>
                   </packing>
                 </child>
                 <child>
@@ -8730,7 +8729,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">level2</property>
-                    <property name="title" translatable="yes">page1</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -8744,7 +8742,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">level3</property>
-                    <property name="title" translatable="yes">page2</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
@@ -8758,7 +8755,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">level4</property>
-                    <property name="title" translatable="yes">page3</property>
                     <property name="position">3</property>
                   </packing>
                 </child>
@@ -8772,7 +8768,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">level5</property>
-                    <property name="title" translatable="yes">page4</property>
                     <property name="position">4</property>
                   </packing>
                 </child>
@@ -8786,7 +8781,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">level6</property>
-                    <property name="title" translatable="yes">page5</property>
                     <property name="position">5</property>
                   </packing>
                 </child>
@@ -8800,7 +8794,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">level7</property>
-                    <property name="title" translatable="yes">page6</property>
                     <property name="position">6</property>
                   </packing>
                 </child>
@@ -8814,7 +8807,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">level8</property>
-                    <property name="title" translatable="yes">page7</property>
                     <property name="position">7</property>
                   </packing>
                 </child>
@@ -8828,7 +8820,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">level9</property>
-                    <property name="title" translatable="yes">page8</property>
                     <property name="position">8</property>
                   </packing>
                 </child>
@@ -8842,7 +8833,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">level10</property>
-                    <property name="title" translatable="yes">page9</property>
                     <property name="position">9</property>
                   </packing>
                 </child>
@@ -8917,7 +8907,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">page0</property>
-                    <property name="title" translatable="yes">In Progress</property>
                   </packing>
                 </child>
                 <child>
@@ -8949,7 +8938,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">page1</property>
-                    <property name="title" translatable="yes">Completed</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -8982,7 +8970,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                             <property name="can_focus">False</property>
                             <property name="margin_left">10</property>
                             <property name="margin_right">10</property>
-                            <property name="label" translatable="yes">In Progress</property>
+                            <property name="label" translatable="yes" comments="One of the buttons on the bottom of the achievements page.">In Progress</property>
                           </object>
                         </child>
                       </object>
@@ -9010,7 +8998,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                 <property name="can_focus">False</property>
                                 <property name="margin_left">10</property>
                                 <property name="margin_right">10</property>
-                                <property name="label" translatable="yes">Completed</property>
+                                <property name="label" translatable="yes" comments="One of the buttons on the bottom of the achievements page.">Completed</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
