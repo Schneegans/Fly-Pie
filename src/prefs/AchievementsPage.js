@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {Gtk, Gdk, GdkPixbuf} = imports.gi;
+const Gtk = imports.gi.Gtk;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -303,17 +303,7 @@ var AchievementsPage = class AchievementsPage {
     const icon = new Gtk.DrawingArea({margin_right: 8});
     icon.set_size_request(64, 64);
     icon.connect('draw', (w, ctx) => {
-      const background = GdkPixbuf.Pixbuf.new_from_file(
-          Me.path + '/assets/badges/achievements/' + achievement.bgImage);
-      const foreground = GdkPixbuf.Pixbuf.new_from_file(
-          Me.path + '/assets/badges/achievements/' + achievement.fgImage);
-
-      Gdk.cairo_set_source_pixbuf(ctx, background, 0, 0);
-      ctx.paint();
-
-      Gdk.cairo_set_source_pixbuf(ctx, foreground, 0, 0);
-      ctx.paint();
-
+      Achievements.Achievements.paintAchievementIcon(ctx, achievement);
       return false;
     });
 

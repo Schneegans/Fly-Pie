@@ -87,9 +87,9 @@ var Statistics = class Statistics {
     // This contains the total number of all successful selection.
     this._addOneTo('stats-selections');
 
-    // For selections at depth 1..4, we store the number of gesture / point-and-click
+    // For selections at depth 1, 2 & 3, we store the number of gesture / point-and-click
     // selections separately.
-    if (depth <= 4) {
+    if (depth <= 3) {
       if (gestureOnlySelection) {
         this._addOneTo(`stats-gesture-selections-depth${depth}`);
       } else {
@@ -116,12 +116,6 @@ var Statistics = class Statistics {
       if (time <= 1000) this._addOneTo('stats-selections-1000ms-depth3');
       if (time <= 2000) this._addOneTo('stats-selections-2000ms-depth3');
       if (time <= 3000) this._addOneTo('stats-selections-3000ms-depth3');
-    } else if (depth == 4) {
-      if (time <= 750) this._addOneTo('stats-selections-750ms-depth4');
-      if (time <= 1000) this._addOneTo('stats-selections-1000ms-depth4');
-      if (time <= 2000) this._addOneTo('stats-selections-2000ms-depth4');
-      if (time <= 3000) this._addOneTo('stats-selections-3000ms-depth4');
-      if (time <= 4000) this._addOneTo('stats-selections-4000ms-depth4');
     }
   }
 
@@ -178,6 +172,11 @@ var Statistics = class Statistics {
   // Should be called whenever an item is added in the menu editor.
   addItemCreated() {
     this._addOneTo('stats-added-items');
+  }
+
+  // Should be called whenever the sponsors list is shown.
+  addSponsorsViewed() {
+    this._addOneTo('stats-sponsors-viewed');
   }
 
   // ----------------------------------------------------------------------- private stuff

@@ -254,8 +254,8 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="valign">start</property>
                                 <property name="halign">end</property>
+                                <property name="valign">start</property>
                                 <property name="margin_top">8</property>
                                 <property name="label" translatable="yes">🥈️ Silver Sponsors</property>
                               </object>
@@ -361,7 +361,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                 </child>
               </object>
               <packing>
-                <property name="name">page1</property>
+                <property name="name">sponsors-page</property>
                 <property name="title" translatable="yes">Sponsors</property>
                 <property name="position">2</property>
               </packing>
@@ -7686,6 +7686,91 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                               <packing>
                                 <property name="left_attach">1</property>
                                 <property name="top_attach">10</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="row_spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Achievement Notifications</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Show a notification whenever you complete an achievment.</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">15</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">14</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-achievement-notifications">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <property name="valign">center</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                                <style>
+                                  <class name="pill-button"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="top_attach">15</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="achievement-notifications">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">15</property>
                               </packing>
                             </child>
                           </object>

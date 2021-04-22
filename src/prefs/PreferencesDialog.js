@@ -63,6 +63,14 @@ var PreferencesDialog = class PreferencesDialog {
     // Show current version number in about-popover.
     this._builder.get_object('app-name').label = 'Fly-Pie ' + Me.metadata.version;
 
+    // There is a hidden achievement for viewing the sponsors page...
+    this._builder.get_object('about-stack').connect('notify::visible-child-name', (o) => {
+      utils.debug(o.visible_child_name);
+      if (o.visible_child_name == 'sponsors-page') {
+        Statistics.getInstance().addSponsorsViewed();
+      }
+    });
+
     // We show an info bar if GNOME Shell's animations are disabled. To make this info
     // more apparent, we wait some seconds before showing it.
     this._showAnimationInfoTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {

@@ -515,6 +515,12 @@
       <description>If set to true, no clicking is required for selections.</description>
     </key>
 
+    <key name="achievement-notifications" type="b">
+      <default>true</default>
+      <summary>Achievement Notifications</summary>
+      <description>If set to true, notifications for completed achievements will be shown.</description>
+    </key>
+
     <!-- Miscellaneous -->
 
     <key name="preview-on-right-side" type="b">
@@ -586,12 +592,6 @@
       <description>The total number of gesture selections at depth 3.</description>
     </key>
 
-    <key name="stats-gesture-selections-depth4" type="u">
-      <default>0</default>
-      <summary>Gesture Selection Count Depth 4</summary>
-      <description>The total number of gesture selections at depth 4.</description>
-    </key>
-
     <key name="stats-click-selections-depth1" type="u">
       <default>0</default>
       <summary>Click Selection Count Depth 1</summary>
@@ -609,13 +609,6 @@
       <summary>Click Selection Count Depth 3</summary>
       <description>The total number of click selections at depth 3.</description>
     </key>
-
-    <key name="stats-click-selections-depth4" type="u">
-      <default>0</default>
-      <summary>Click Selection Count Depth 4</summary>
-      <description>The total number of click selections at depth 4.</description>
-    </key>
-
 
 
     <key name="stats-selections-1000ms-depth1" type="u">
@@ -715,38 +708,6 @@
 
 
 
-    <key name="stats-selections-4000ms-depth4" type="u">
-      <default>0</default>
-      <summary>Selection Count 4000ms Depth 4</summary>
-      <description>The number of selections at depth 4 faster than 4000ms.</description>
-    </key>
-
-    <key name="stats-selections-3000ms-depth4" type="u">
-      <default>0</default>
-      <summary>Selection Count 3000ms Depth 4</summary>
-      <description>The number of selections at depth 4 faster than 3000ms.</description>
-    </key>
-
-    <key name="stats-selections-2000ms-depth4" type="u">
-      <default>0</default>
-      <summary>Selection Count 2000ms Depth 4</summary>
-      <description>The number of selections at depth 4 faster than 2000ms.</description>
-    </key>
-
-    <key name="stats-selections-1000ms-depth4" type="u">
-      <default>0</default>
-      <summary>Selection Count 1000ms Depth 4</summary>
-      <description>The number of selections at depth 4 faster than 1000ms.</description>
-    </key>
-
-    <key name="stats-selections-750ms-depth4" type="u">
-      <default>0</default>
-      <summary>Selection Count 750ms Depth 4</summary>
-      <description>The number of selections at depth 4 faster than 750ms.</description>
-    </key>
-
-
-
     <key name="stats-abortions" type="u">
       <default>0</default>
       <summary>Abortion Count</summary>
@@ -805,6 +766,12 @@
       <default>0</default>
       <summary>Deleted All Menus</summary>
       <description>The number of times all menus have been deleted.</description>
+    </key>
+
+    <key name="stats-sponsors-viewed" type="u">
+      <default>0</default>
+      <summary>Sponsors Viewed</summary>
+      <description>The number of times the sponsors menu has been shown.</description>
     </key>
 
   </schema>

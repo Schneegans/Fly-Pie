@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {GLib, GObject} = imports.gi;
+const {GLib, GObject, GdkPixbuf, Gdk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -290,6 +290,25 @@ var Achievements = GObject.registerClass(
         return LEVEL_XP[this._currentLevel - 1];
       }
 
+      // Paints an icon for the given achievement to a Cairo.Context.
+      static paintAchievementIcon(ctx, achievement) {
+        const background = GdkPixbuf.Pixbuf.new_from_file(
+            Me.path + '/assets/badges/achievements/' + achievement.bgImage);
+        const foreground = GdkPixbuf.Pixbuf.new_from_file(
+            Me.path + '/assets/badges/achievements/' + achievement.fgImage);
+        const gloss = GdkPixbuf.Pixbuf.new_from_file(
+            Me.path + '/assets/badges/achievements/gloss.png');
+
+        Gdk.cairo_set_source_pixbuf(ctx, background, 0, 0);
+        ctx.paint();
+
+        Gdk.cairo_set_source_pixbuf(ctx, foreground, 0, 0);
+        ctx.paint();
+
+        Gdk.cairo_set_source_pixbuf(ctx, gloss, 0, 0);
+        ctx.paint();
+      }
+
       // ------------------------------------------------------------------- private stuff
 
       // This computes the current level and total experience by iterating through all
@@ -373,7 +392,7 @@ var Achievements = GObject.registerClass(
             description:
                 _('Abort a selection %x times.').replace('%x', BASE_RANGES[i + 1] * 2),
             bgImage: bgImages[i],
-            fgImage: 'depth1.svg',
+            fgImage: 'cancel.svg',
             statsKey: 'stats-abortions',
             xp: BASE_XP[i],
             range: [BASE_RANGES[i] * 2, BASE_RANGES[i + 1] * 2],
@@ -387,7 +406,7 @@ var Achievements = GObject.registerClass(
             name: formatName(_('%s Pielot'), i),
             description: _('Select %x items.').replace('%x', BASE_RANGES[i + 1] * 5),
             bgImage: bgImages[i],
-            fgImage: 'depth1.svg',
+            fgImage: `award${i}.svg`,
             statsKey: 'stats-selections',
             xp: BASE_XP[i] * 2,
             range: [BASE_RANGES[i] * 5, BASE_RANGES[i + 1] * 5],
@@ -395,7 +414,7 @@ var Achievements = GObject.registerClass(
           });
         }
 
-        for (let depth = 1; depth <= 4; depth++) {
+        for (let depth = 1; depth <= 3; depth++) {
           const names = [
             // Translators: The name of the 'Select %x items at depth 1 in marking mode.'
             // achievement.
@@ -405,10 +424,7 @@ var Achievements = GObject.registerClass(
             _('%s Submenu Gesture-Selector'),
             // Translators: The name of the 'Select %x items at depth 3 in marking mode.'
             // achievement.
-            _('%s Subsubmenu Gesture-Selector'),
-            // Translators: The name of the 'Select %x items at depth 4 in marking mode.'
-            // achievement.
-            _('%s Subsubsubmenu Gesture-Selector')
+            _('%s Subsubmenu Gesture-Selector')
           ];
 
           for (let i = 0; i < 5; i++) {
@@ -418,7 +434,7 @@ var Achievements = GObject.registerClass(
                                .replace('%x', BASE_RANGES[i + 1] * 2)
                                .replace('%d', depth),
               bgImage: bgImages[i],
-              fgImage: 'depth1.svg',
+              fgImage: `gesture${depth}.svg`,
               statsKey: `stats-gesture-selections-depth${depth}`,
               xp: BASE_XP[i],
               range: [BASE_RANGES[i] * 2, BASE_RANGES[i + 1] * 2],
@@ -427,7 +443,7 @@ var Achievements = GObject.registerClass(
           }
         }
 
-        for (let depth = 1; depth <= 4; depth++) {
+        for (let depth = 1; depth <= 3; depth++) {
           const names = [
             // Translators: The name of the 'Select %x items at depth 1 with mouse
             // clicks.' achievement.
@@ -437,10 +453,7 @@ var Achievements = GObject.registerClass(
             _('%s Submenu Click-Selector'),
             // Translators: The name of the 'Select %x items at depth 3 with mouse
             // clicks.' achievement.
-            _('%s Subsubmenu Click-Selector'),
-            // Translators: The name of the 'Select %x items at depth 4 with mouse
-            // clicks.' achievement.
-            _('%s Subsubsubmenu Click-Selector')
+            _('%s Subsubmenu Click-Selector')
           ];
 
           for (let i = 0; i < 5; i++) {
@@ -450,7 +463,7 @@ var Achievements = GObject.registerClass(
                                .replace('%x', BASE_RANGES[i + 1] * 2)
                                .replace('%d', depth),
               bgImage: bgImages[i],
-              fgImage: 'depth1.svg',
+              fgImage: `click${depth}.svg`,
               statsKey: `stats-click-selections-depth${depth}`,
               xp: BASE_XP[i],
               range: [BASE_RANGES[i] * 2, BASE_RANGES[i + 1] * 2],
@@ -461,10 +474,8 @@ var Achievements = GObject.registerClass(
 
         {
           const timeLimits = [
-            [1000, 750, 500, 250, 150],
-            [2000, 1000, 750, 500, 250],
-            [3000, 2000, 1000, 750, 500],
-            [4000, 3000, 2000, 1000, 750],
+            [1000, 750, 500, 250, 150], [2000, 1000, 750, 500, 250],
+            [3000, 2000, 1000, 750, 500]
           ];
 
           const names = [
@@ -476,15 +487,12 @@ var Achievements = GObject.registerClass(
             _('%s Submenu Selector'),
             // Translators: The name of the 'Select %x items at depth 3 in less than %t
             // milliseconds.' achievement.
-            _('%s Subsubmenu Selector'),
-            // Translators: The name of the 'Select %x items at depth 4 in less than %t
-            // milliseconds.' achievement.
-            _('%s Subsubsubmenu Selector')
+            _('%s Subsubmenu Selector')
           ];
 
           const counts = [50, 100, 150, 200, 250];
 
-          for (let depth = 1; depth <= 4; depth++) {
+          for (let depth = 1; depth <= 3; depth++) {
             for (let i = 0; i < 5; i++) {
 
               achievements.set(`depth${depth}-selector${i}`, {
@@ -495,7 +503,7 @@ var Achievements = GObject.registerClass(
                         .replace('%t', timeLimits[depth - 1][i])
                         .replace('%d', depth),
                 bgImage: bgImages[i],
-                fgImage: `depth${depth}.svg`,
+                fgImage: `timer.svg`,
                 statsKey: `stats-selections-${timeLimits[depth - 1][i]}ms-depth${depth}`,
                 xp: BASE_XP[i],
                 range: [0, counts[i]],
@@ -514,7 +522,7 @@ var Achievements = GObject.registerClass(
             description: _('Open the settings dialog %x times.')
                              .replace('%x', BASE_RANGES[i + 1] / 2),
             bgImage: bgImages[i],
-            fgImage: 'depth1.svg',
+            fgImage: 'gear.svg',
             statsKey: 'stats-settings-opened',
             xp: BASE_XP[i],
             range: [BASE_RANGES[i] / 2, BASE_RANGES[i + 1] / 2],
@@ -530,7 +538,7 @@ var Achievements = GObject.registerClass(
             description: _('Open %x menus with the D-Bus interface.')
                              .replace('%x', BASE_RANGES[i + 1]),
             bgImage: bgImages[i],
-            fgImage: 'depth1.svg',
+            fgImage: 'nerd.svg',
             statsKey: 'stats-dbus-menus',
             xp: BASE_XP[i],
             range: [BASE_RANGES[i], BASE_RANGES[i + 1]],
@@ -545,7 +553,7 @@ var Achievements = GObject.registerClass(
             description:
                 _('Generate %x random presets.').replace('%x', BASE_RANGES[i + 1] / 2),
             bgImage: bgImages[i],
-            fgImage: 'depth1.svg',
+            fgImage: 'chaos.svg',
             statsKey: 'stats-random-presets',
             xp: BASE_XP[i] / 2,
             range: [BASE_RANGES[i] / 2, BASE_RANGES[i + 1] / 2],
@@ -561,7 +569,7 @@ var Achievements = GObject.registerClass(
                 _('Export a custom preset.') :
                 _('Export %x custom presets.').replace('%x', BASE_RANGES[i + 1] / 10),
             bgImage: bgImages[i],
-            fgImage: 'depth1.svg',
+            fgImage: 'export.svg',
             statsKey: 'stats-presets-exported',
             xp: BASE_XP[i] / 2,
             range: [BASE_RANGES[i] / 10, BASE_RANGES[i + 1] / 10],
@@ -577,7 +585,7 @@ var Achievements = GObject.registerClass(
                 _('Import a custom preset.') :
                 _('Import %x custom presets.').replace('%x', BASE_RANGES[i + 1] / 10),
             bgImage: bgImages[i],
-            fgImage: 'depth1.svg',
+            fgImage: 'import.svg',
             statsKey: 'stats-presets-imported',
             xp: BASE_XP[i] / 2,
             range: [BASE_RANGES[i] / 10, BASE_RANGES[i + 1] / 10],
@@ -594,7 +602,7 @@ var Achievements = GObject.registerClass(
                 _('Import %x menu configurations.')
                     .replace('%x', BASE_RANGES[i + 1] / 10),
             bgImage: bgImages[i],
-            fgImage: 'depth1.svg',
+            fgImage: 'export.svg',
             statsKey: 'stats-menus-imported',
             xp: BASE_XP[i] / 2,
             range: [BASE_RANGES[i] / 10, BASE_RANGES[i + 1] / 10],
@@ -611,7 +619,7 @@ var Achievements = GObject.registerClass(
                 _('Export %x menu configurations.')
                     .replace('%x', BASE_RANGES[i + 1] / 10),
             bgImage: bgImages[i],
-            fgImage: 'depth1.svg',
+            fgImage: 'import.svg',
             statsKey: 'stats-menus-exported',
             xp: BASE_XP[i] / 2,
             range: [BASE_RANGES[i] / 10, BASE_RANGES[i + 1] / 10],
@@ -627,7 +635,7 @@ var Achievements = GObject.registerClass(
             description: _('Create %x items in the menu editor.')
                              .replace('%x', BASE_RANGES[i + 1] / 2),
             bgImage: bgImages[i],
-            fgImage: 'depth1.svg',
+            fgImage: 'dots.svg',
             statsKey: 'stats-added-items',
             xp: BASE_XP[i],
             range: [BASE_RANGES[i] / 2, BASE_RANGES[i + 1] / 2],
@@ -639,8 +647,8 @@ var Achievements = GObject.registerClass(
           // Translators: The name of the 'Open the tutorial menu %x times.' achievement.
           name: _('Grumpie Rookie'),
           description: _('Open the tutorial menu %x times.').replace('%x', 50),
-          bgImage: 'special.png',
-          fgImage: 'depth1.svg',
+          bgImage: 'special3.png',
+          fgImage: 'grumpie.svg',
           statsKey: 'stats-tutorial-menus',
           xp: BASE_XP[0],
           range: [0, 50],
@@ -651,8 +659,8 @@ var Achievements = GObject.registerClass(
           // Translators: The name of the 'Get all medals of the tutorial.' achievement.
           name: _('Bachelor Pielot'),
           description: _('Get all medals of the tutorial.'),
-          bgImage: 'special.png',
-          fgImage: 'depth1.svg',
+          bgImage: 'special1.png',
+          fgImage: 'scholar.svg',
           statsKey: 'stats-best-tutorial-time',
           xp: BASE_XP[1],
           range: [0, 6],
@@ -663,10 +671,23 @@ var Achievements = GObject.registerClass(
           // Translators: The name of the hidden 'Delete all of your menus.' achievement.
           name: _('Say Good-Pie!'),
           description: _('Delete all of your menus.'),
-          bgImage: 'special.png',
-          fgImage: 'depth1.svg',
+          bgImage: 'special2.png',
+          fgImage: 'fire.svg',
           statsKey: 'stats-deleted-all-menus',
           xp: BASE_XP[2],
+          range: [0, 1],
+          hidden: true
+        });
+
+        achievements.set('sponsors', {
+          // Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
+          // achievement.
+          name: _('Philanthropie'),
+          description: _('Consider becoming a sponsor of Fly-Pie.'),
+          bgImage: 'special3.png',
+          fgImage: 'heart.svg',
+          statsKey: 'stats-sponsors-viewed',
+          xp: BASE_XP[1],
           range: [0, 1],
           hidden: true
         });

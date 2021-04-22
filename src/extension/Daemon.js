@@ -8,7 +8,8 @@
 
 'use strict';
 
-const {Gio, GLib} = imports.gi;
+const Cairo            = imports.cairo;
+const {Gio, GLib, Gdk} = imports.gi;
 
 const Main = imports.ui.main;
 
@@ -138,13 +139,22 @@ var Daemon = class Daemon {
     // Show notifications whenever achievements are unlocked.
     this._achievements.connect('completed', (o, id) => {
       const achievement = o.getAchievements().get(id);
+
+      // Create an icon for the achievement notification.
+      const surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, 64, 64);
+      const ctx     = new Cairo.Context(surface);
+      Achievements.paintAchievementIcon(ctx, achievement);
+      const icon = Gdk.pixbuf_get_from_surface(surface, 0, 0, 64, 64);
+
+      // Explicitly tell Cairo to free the context memory.
+      // https://wiki.gnome.org/Projects/GnomeShell/Extensions/TipsOnMemoryManagement#Cairo
+      ctx.$dispose();
+
       this._notify(
           // Translators: This is shown in a desktop notifications.
           _('Fly-Pie Achievement Completed!'),
           // Translators: This is shown in a desktop notifications.
-          _('You finished the achievement "%s"!').replace('%s', achievement.name),
-          Gio.icon_new_for_string(
-              Me.path + `/assets/badges/achievements/${achievement.bgImage}`));
+          _('You finished the achievement "%s"!').replace('%s', achievement.name), icon);
 
       // Whenever an achievement is unlocked, this counter is increased by one. It is used
       // to show a small badge in the achievements dialog containing the number of newly
@@ -426,21 +436,24 @@ var Daemon = class Daemon {
   // The notification will also contain a hard-coded button which opens the achievements
   // page of the settings dialog.
   _notify(label, details, gicon) {
-    const source = new Main.MessageTray.Source('Fly-Pie', '');
-    Main.messageTray.add(source);
 
-    const n = new Main.MessageTray.Notification(source, label, details, {gicon: gicon});
+    if (this._settings.get_boolean('achievement-notifications')) {
+      const source = new Main.MessageTray.Source('Fly-Pie', '');
+      Main.messageTray.add(source);
 
-    // Translators: This is shown on the action button of the notification bubble which is
-    // shown once an achievement is unlocked.
-    n.addAction(_('Show Achievements'), () => {
-      // Make sure the achievements page is shown.
-      this._settings.set_string('active-stack-child', 'achievements-page');
+      const n = new Main.MessageTray.Notification(source, label, details, {gicon: gicon});
 
-      // Show the settings dialog.
-      Main.extensionManager.openExtensionPrefs(Me.uuid, '');
-    });
+      // Translators: This is shown on the action button of the notification bubble which
+      // is shown once an achievement is unlocked.
+      n.addAction(_('Show Achievements'), () => {
+        // Make sure the achievements page is shown.
+        this._settings.set_string('active-stack-child', 'achievements-page');
 
-    source.showNotification(n);
+        // Show the settings dialog.
+        Main.extensionManager.openExtensionPrefs(Me.uuid, '');
+      });
+
+      source.showNotification(n);
+    }
   }
 };
