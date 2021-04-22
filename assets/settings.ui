@@ -254,8 +254,8 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                               <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="valign">start</property>
                                 <property name="halign">end</property>
+                                <property name="valign">start</property>
                                 <property name="margin_top">8</property>
                                 <property name="label" translatable="yes">🥈️ Silver Sponsors</property>
                               </object>
@@ -361,7 +361,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                 </child>
               </object>
               <packing>
-                <property name="name">page1</property>
+                <property name="name">sponsors-page</property>
                 <property name="title" translatable="yes">Sponsors</property>
                 <property name="position">2</property>
               </packing>
@@ -1558,9 +1558,10 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkGrid">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkLabel" id="last-selection-time-1">
                             <property name="visible">True</property>
@@ -1571,8 +1572,9 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">0</property>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
@@ -1585,61 +1587,9 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="tutorial-reset-button-1">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="halign">center</property>
-                            <property name="relief">none</property>
-                            <property name="always_show_image">True</property>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_left">8</property>
-                                <property name="margin_right">8</property>
-                                <property name="margin_top">2</property>
-                                <property name="margin_bottom">2</property>
-                                <property name="spacing">5</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes" comments="The text of the tutorial-reset-button.">Clear</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="pill-button"/>
-                            </style>
-                          </object>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">0</property>
-                            <property name="height">2</property>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
@@ -1675,7 +1625,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
                     <child>
@@ -1768,7 +1718,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">4</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
                     <child>
@@ -1807,7 +1757,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                       </packing>
                     </child>
                   </object>
@@ -1980,23 +1930,10 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkGrid">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkLabel" id="best-selection-time-2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="halign">start</property>
-                            <property name="hexpand">True</property>
-                            <property name="label">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
-                            <property name="use_markup">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">1</property>
-                          </packing>
-                        </child>
+                        <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkLabel" id="last-selection-time-2">
                             <property name="visible">True</property>
@@ -2007,61 +1944,24 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
-                            <property name="left_attach">0</property>
-                            <property name="top_attach">0</property>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="tutorial-reset-button-2">
+                          <object class="GtkLabel" id="best-selection-time-2">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="halign">center</property>
-                            <property name="relief">none</property>
-                            <property name="always_show_image">True</property>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_left">8</property>
-                                <property name="margin_right">8</property>
-                                <property name="margin_top">2</property>
-                                <property name="margin_bottom">2</property>
-                                <property name="spacing">5</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label" translatable="yes" comments="The text of the tutorial-reset-button.">Clear</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
-                            <style>
-                              <class name="pill-button"/>
-                            </style>
+                            <property name="can_focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="hexpand">True</property>
+                            <property name="label">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
+                            <property name="use_markup">True</property>
                           </object>
                           <packing>
-                            <property name="left_attach">1</property>
-                            <property name="top_attach">0</property>
-                            <property name="height">2</property>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                       </object>
@@ -2243,7 +2143,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                     <property name="halign">center</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkImage" id="level-image1">
+                      <object class="GtkImage" id="level-image">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="margin_top">10</property>
@@ -7788,6 +7688,91 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="top_attach">10</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkGrid">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="row_spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Achievement Notifications</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Show a notification whenever you complete an achievement.</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">0</property>
+                                    <property name="top_attach">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">15</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">14</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-achievement-notifications">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <property name="valign">center</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                                <style>
+                                  <class name="pill-button"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="top_attach">15</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="achievement-notifications">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">15</property>
+                              </packing>
+                            </child>
                           </object>
                         </child>
                       </object>
@@ -8717,6 +8702,177 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
+              <object class="GtkStack" id="level-stack">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="transition_duration">250</property>
+                <property name="transition_type">slide-left-right</property>
+                <child>
+                  <object class="GtkImage" id="level-image1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">badges/levels/level1.png</property>
+                    <property name="pixel_size">200</property>
+                    <property name="icon_size">6</property>
+                  </object>
+                  <packing>
+                    <property name="name">level1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="level-image2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">badges/levels/level2.png</property>
+                    <property name="pixel_size">200</property>
+                    <property name="icon_size">6</property>
+                  </object>
+                  <packing>
+                    <property name="name">level2</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="level-image3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">badges/levels/level3.png</property>
+                    <property name="pixel_size">200</property>
+                    <property name="icon_size">6</property>
+                  </object>
+                  <packing>
+                    <property name="name">level3</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="level-image4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">badges/levels/level4.png</property>
+                    <property name="pixel_size">200</property>
+                    <property name="icon_size">6</property>
+                  </object>
+                  <packing>
+                    <property name="name">level4</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="level-image5">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">badges/levels/level5.png</property>
+                    <property name="pixel_size">200</property>
+                    <property name="icon_size">6</property>
+                  </object>
+                  <packing>
+                    <property name="name">level5</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="level-image6">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">badges/levels/level6.png</property>
+                    <property name="pixel_size">200</property>
+                    <property name="icon_size">6</property>
+                  </object>
+                  <packing>
+                    <property name="name">level6</property>
+                    <property name="position">5</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="level-image7">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">badges/levels/level7.png</property>
+                    <property name="pixel_size">200</property>
+                    <property name="icon_size">6</property>
+                  </object>
+                  <packing>
+                    <property name="name">level7</property>
+                    <property name="position">6</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="level-image8">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">badges/levels/level8.png</property>
+                    <property name="pixel_size">200</property>
+                    <property name="icon_size">6</property>
+                  </object>
+                  <packing>
+                    <property name="name">level8</property>
+                    <property name="position">7</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="level-image9">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">badges/levels/level9.png</property>
+                    <property name="pixel_size">200</property>
+                    <property name="icon_size">6</property>
+                  </object>
+                  <packing>
+                    <property name="name">level9</property>
+                    <property name="position">8</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="level-image10">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">badges/levels/level10.png</property>
+                    <property name="pixel_size">200</property>
+                    <property name="icon_size">6</property>
+                  </object>
+                  <packing>
+                    <property name="name">level10</property>
+                    <property name="position">9</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="experience-label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_bottom">3</property>
+                <property name="label">- / - XP</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLevelBar" id="experience-bar">
+                <property name="width_request">600</property>
+                <property name="height_request">15</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="value">3</property>
+                <property name="max_value">10</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkStack" id="achievements-stack">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -8732,58 +8888,17 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         <property name="can_focus">False</property>
                         <property name="shadow_type">none</property>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkBox" id="active-achievements-box">
+                            <property name="width_request">600</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="margin_bottom">10</property>
+                            <property name="halign">center</property>
+                            <property name="valign">start</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">20</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkImage" id="level-image17">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="pixbuf">badges/levels/level1.png</property>
-                                <property name="pixel_size">200</property>
-                                <property name="icon_size">6</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkProgressBar" id="level-progressbar">
-                                <property name="width_request">500</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">20</property>
-                                <property name="fraction">0.75</property>
-                                <property name="text">- under construction -</property>
-                                <property name="show_text">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkFlowBox" id="achievement-box">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">center</property>
-                                <property name="valign">start</property>
-                                <property name="min_children_per_line">4</property>
-                                <property name="max_children_per_line">10</property>
-                                <property name="selection_mode">none</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">2</property>
-                              </packing>
+                              <placeholder/>
                             </child>
                           </object>
                         </child>
@@ -8792,449 +8907,29 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">page0</property>
-                    <property name="title" translatable="yes">Achievements</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkScrolledWindow">
-                    <property name="width_request">500</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="halign">center</property>
-                    <property name="propagate_natural_width">True</property>
                     <child>
                       <object class="GtkViewport">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="shadow_type">none</property>
                         <child>
-                          <object class="GtkGrid">
+                          <object class="GtkBox" id="completed-achievements-box">
+                            <property name="width_request">600</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="margin_left">16</property>
-                            <property name="margin_right">16</property>
-                            <property name="margin_bottom">16</property>
-                            <property name="column_spacing">8</property>
-                            <property name="column_homogeneous">True</property>
+                            <property name="halign">center</property>
+                            <property name="valign">start</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">20</property>
+                            <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkDrawingArea" id="clicks-pie-chart">
-                                <property name="height_request">170</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_top">8</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="gestures-pie-chart">
-                                <property name="height_request">170</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_top">8</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="clicks-histogram-1">
-                                <property name="height_request">85</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="gestures-histogram-1">
-                                <property name="height_request">85</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">1</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="clicks-histogram-2">
-                                <property name="height_request">85</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="clicks-histogram-3">
-                                <property name="height_request">85</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="clicks-histogram-4">
-                                <property name="height_request">85</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="gestures-histogram-2">
-                                <property name="height_request">85</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="gestures-histogram-3">
-                                <property name="height_request">85</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkDrawingArea" id="gestures-histogram-4">
-                                <property name="height_request">85</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="events">GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK | GDK_STRUCTURE_MASK</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">10</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">5</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="margin_top">8</property>
-                                    <property name="margin_bottom">8</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Canceled selections</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="stats-abortions">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label">-</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">6</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="margin_top">8</property>
-                                    <property name="margin_bottom">8</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Menus opened over the D-Bus</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="stats-dbus-menus">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label">-</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">7</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="margin_top">8</property>
-                                    <property name="margin_bottom">8</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Number of times this settings dialog was opened</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="stats-settings-opened">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label">-</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">8</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="margin_top">8</property>
-                                    <property name="margin_bottom">8</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Saved presets</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="stats-presets-saved">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label">-</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">9</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="margin_top">8</property>
-                                    <property name="margin_bottom">8</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Imported menu configurations</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="stats-menus-imported">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label">-</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">10</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="margin_top">8</property>
-                                    <property name="margin_bottom">8</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Exported menu configurations</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="stats-menus-exported">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label">-</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">11</property>
-                                <property name="width">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="hexpand">True</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="margin_top">8</property>
-                                    <property name="margin_bottom">8</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes" comments="This is a statistics label, shows how many times the user did the action described here.">Generated random presets</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="stats-random-presets">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">end</property>
-                                    <property name="label">-</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">12</property>
-                                <property name="width">2</property>
-                              </packing>
+                              <placeholder/>
                             </child>
                           </object>
                         </child>
@@ -9243,7 +8938,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   </object>
                   <packing>
                     <property name="name">page1</property>
-                    <property name="title" translatable="yes">Statistics</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -9251,34 +8945,136 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="position">3</property>
               </packing>
             </child>
             <child>
-              <object class="GtkBox">
+              <object class="GtkActionBar">
+                <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <child>
-                  <placeholder/>
-                </child>
                 <child type="center">
-                  <object class="GtkStackSwitcher">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="halign">center</property>
-                    <property name="margin_bottom">10</property>
-                    <property name="stack">achievements-stack</property>
+                    <property name="homogeneous">True</property>
+                    <child>
+                      <object class="GtkRadioButton" id="achievements-in-progress-button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">False</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">10</property>
+                            <property name="margin_right">10</property>
+                            <property name="label" translatable="yes" comments="One of the buttons on the bottom of the achievements page.">In Progress</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkRadioButton" id="achievements-completed-button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">False</property>
+                        <property name="group">achievements-in-progress-button</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="margin_left">10</property>
+                                <property name="margin_right">10</property>
+                                <property name="label" translatable="yes" comments="One of the buttons on the bottom of the achievements page.">Completed</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkRevealer" id="achievement-counter-revealer">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="transition_type">slide-left</property>
+                                <property name="reveal_child">True</property>
+                                <child>
+                                  <object class="GtkLabel" id="achievement-counter">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label">0</property>
+                                    <style>
+                                      <class name="counter-label"/>
+                                    </style>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <style>
+                      <class name="linked"/>
+                    </style>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">3</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="achievements-reset-button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="tooltip_text" translatable="yes">Reset all achievements.</property>
+                    <child>
+                      <object class="GtkImage" id="help_image1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="icon_name">edit-clear-all-symbolic</property>
+                        <property name="icon_size">1</property>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="pill-button"/>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="pack_type">end</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">4</property>
               </packing>
             </child>
           </object>

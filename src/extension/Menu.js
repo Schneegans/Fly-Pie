@@ -328,7 +328,7 @@ var Menu = class Menu {
 
         // Record this selection in the statistics. Parameters are selection depth, time
         // and whether a continuous gesture was used for the selection.
-        Statistics.addSelection(
+        Statistics.getInstance().addSelection(
             this._menuSelectionChain.length - 1, this._timer.getElapsed(),
             this._gestureOnlySelection);
 

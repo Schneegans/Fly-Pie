@@ -8,20 +8,20 @@
 
 'use strict';
 
-const Cairo                                    = imports.cairo;
-const {Gtk, Gdk, Pango, PangoCairo, GdkPixbuf} = imports.gi;
+const Gtk = imports.gi.Gtk;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+const Me           = imports.misc.extensionUtils.getCurrentExtension();
+const utils        = Me.imports.src.common.utils;
+const Achievements = Me.imports.src.common.Achievements;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The AchievementsPage class encapsulates code required for the 'Achievements' page of //
 // the settings dialog. It's not instantiated multiple times, nor does it have any      //
-// public interface, hence it could just be copy-pasted to the settings class. But as   //
-// it's quite decoupled as well, it structures the code better when written to its own  //
-// file.                                                                                //
+// public interface, hence it could just be copy-pasted to the PreferencesDialog class. //
+// But as it's quite decoupled as well, it structures the code better when written to   //
+// its own file.                                                                        //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var AchievementsPage = class AchievementsPage {
@@ -34,100 +34,116 @@ var AchievementsPage = class AchievementsPage {
     this._builder  = builder;
     this._settings = settings;
 
-    // We keep several connections to the Gio.Settings object. Once the settings dialog is
-    // closed, we use this array to disconnect all of them.
+    // We keep several connections to the Gio.Settings object. Once the settings
+    // dialog is closed, we use this array to disconnect all of them.
     this._settingsConnections = [];
 
-    // ---------------------------------------------- Initialize the achievements sub-page
+    // Create an instance of the achievements class. This will track the progress of each
+    // individual achievement and notify us of any important changes. If something
+    // happens, the signals below are emitted.
+    this._achievements = new Achievements.Achievements(this._settings);
+    this._achievements.connect('level-changed', () => this._updateLevel());
+    this._achievements.connect('experience-changed', () => this._updateExperience());
+    this._achievements.connect(
+        'progress-changed', (o, id, cur, max) => this._updateProgress(id, cur, max));
+    this._achievements.connect('unlocked', (o, id) => this._achievementUnlocked(id));
+    this._achievements.connect('locked', (o, id) => this._achievementLocked(id));
+    this._achievements.connect('completed', (o, id) => this._achievementCompleted(id));
 
-    // this._addAchievement(
-    //     'Master Pielot', 'Select 100 items in less than 10 ms.', 100, 'copper', 'a');
-    // this._addAchievement(
-    //     'Master Pielot', 'Select 300 items in less than 20 ms.', 500, 'bronze', 'b');
-    // this._addAchievement(
-    //     'Master Pielot', 'Select 300 items in less than 20 ms.', 500, 'silver', 'c');
-    // this._addAchievement(
-    //     'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'gold', 'd');
-    // this._addAchievement(
-    //     'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'platinum',
-    //     'e');
-    // this._addAchievement(
-    //     'Master Pielot', 'Select 500 items in less than 50 ms.', 1500, 'special', 'd');
+    // Now we add all achievements to the user interface. There are two lists, one for the
+    // active achievements and one for the completed achievements. Both lists contain
+    // widgets for all achievements at all times, but only the relevant widgets are shown.
+    // All others are hidden via Gtk.Revealers.
 
-    // ------------------------------------------------ Initialize the statistics sub-page
-
-    // Show some statistics at the bottom of the statistics page.
-    this._connectStatsLabel('stats-abortions');
-    this._connectStatsLabel('stats-dbus-menus');
-    this._connectStatsLabel('stats-settings-opened');
-    this._connectStatsLabel('stats-presets-saved');
-    this._connectStatsLabel('stats-menus-imported');
-    this._connectStatsLabel('stats-menus-exported');
-    this._connectStatsLabel('stats-random-presets');
-
-    // These are the settings schema keys storing the selection statistics. They contain
-    // an array of selection time histograms, one for each selection depth (depth 1, 2, 3,
-    // and 4 - all selections deeper than 4 are recorded in the last histogram).
-    const gestureKey = 'stats-gesture-selections';
-    const clickKey   = 'stats-click-selections';
-
-    // This object contains information required to draw the charts of the statistics
-    // page.
-    this._charts = {
-      clicks: {
-        // Translators: This is a label how often a click selection was made.
-        name: _('Click Selections'),                     // Shown when nothing is hovered
-        // Translators: Do not translate '%i' - it will be replaced by a number.
-        hoveredName: _('Click Selections at Depth %i'),  // When a histogram is hovered
-        pieWidget: this._setupPieChart('clicks'),        // A Gtk.DrawingArea
-        histogramWidgets: [                              // Four Gtk.DrawingAreas
-          this._setupHistogram('clicks', 1), this._setupHistogram('clicks', 2),
-          this._setupHistogram('clicks', 3), this._setupHistogram('clicks', 4)
-        ],
-        data: null,          // This will contain the selection data from the Gio.Settings
-        sum: {total: 0, perLevel: []},  // These numbers are updated in _updateChartData()
-        max: {total: 0, perLevel: []}   // These numbers are updated in _updateChartData()
-      },
-      gestures: {
-        // Translators: This is a label how often a gesture selection was made.
-        name: _('Gesture Selections'),                    // Shown when nothing is hovered
-        // Translators: Do not translate '%i' - it will be replaced by a number.
-        hoveredName: _('Gesture Selections at Depth %i'), // When a histogram is hovered
-        pieWidget: this._setupPieChart('gestures'),       // A Gtk.DrawingArea
-        histogramWidgets: [                               // Four Gtk.DrawingAreas
-          this._setupHistogram('gestures', 1), this._setupHistogram('gestures', 2),
-          this._setupHistogram('gestures', 3), this._setupHistogram('gestures', 4)
-        ],
-        data: null,          // This will contain the selection data from the Gio.Settings
-        sum: {total: 0, perLevel: []},  // These numbers are updated in _updateChartData()
-        max: {total: 0, perLevel: []}   // These numbers are updated in _updateChartData()
-      }
+    // The objects below map achievement IDs to some widget pointers, such as the
+    // corresponding Gtk.Revealer or the Gtk.LevelBar. The structure of each element is
+    // outlined below.
+    this._activeAchievements = {
+        // <Achievement ID>: {
+        //   name:          "<Achievement Name>",        // This is used for sorting.
+        //   progress:      <number>,                    // This is used for sorting.
+        //   progressLabel: Gtk.Label,
+        //   progressBar:   Gtk.LevelBar,
+        //   revealer:      Gtk.Revealer
+        // }
+    };
+    this._completedAchievements = {
+        // <Achievement ID>: {
+        //   name:      "<Achievement Name>",            // This is used for sorting.
+        //   date:      <JavaScript Date Object>,        // This is used for sorting.
+        //   dateLabel: Gtk.Label,
+        //   revealer:  Gtk.Revealer
+        // }
     };
 
-    // If the click-selections statistics key changes (that means that the user selected
-    // something by point-and-click), redraw the corresponding charts.
-    this._settingsConnections.push(
-        this._settings.connect('changed::stats-click-selections', () => {
-          this._updateChartData(this._charts['clicks'], clickKey);
-          this._redrawCharts();
-        }));
+    // Create all achievement widgets filling the objects above.
+    this._achievements.getAchievements().forEach(
+        (achievement, id) => this._add(achievement, id));
 
-    // If the gesture-selections statistics key changes (that means that the user selected
-    // something with a gesture), redraw the corresponding charts.
-    this._settingsConnections.push(
-        this._settings.connect('changed::stats-gesture-selections', () => {
-          this._updateChartData(this._charts['gestures'], gestureKey);
-          this._redrawCharts();
-        }));
+    // Sort achievement widgets according to name, progress and date.
+    this._reorderActiveAchievements();
+    this._reorderCompletedAchievements();
 
-    // Initially get the data for the charts.
-    this._updateChartData(this._charts['clicks'], clickKey);
-    this._updateChartData(this._charts['gestures'], gestureKey);
+    // Make the RadioButtons at the bottom behave like a StackSwitcher.
+    const stack = this._builder.get_object('achievements-stack');
+    this._builder.get_object('achievements-in-progress-button')
+        .connect('toggled', button => {
+          if (button.active) {
+            stack.set_visible_child_name('page0');
+          }
+        });
+    this._builder.get_object('achievements-completed-button')
+        .connect('toggled', button => {
+          if (button.active) {
+            stack.set_visible_child_name('page1');
+
+            // Hide the new-achievements counter when the second page is revealed.
+            this._settings.set_uint('stats-unread-achievements', 0);
+          }
+        });
+
+    // Update the new-achievements counter.
+    this._settingsConnections.push(this._settings.connect(
+        'changed::stats-unread-achievements', () => this._updateCounter()));
+
+    // Reset all statistics when the red button is pressed.
+    this._builder.get_object('achievements-reset-button').connect('clicked', button => {
+      // Create the question dialog.
+      const dialog = new Gtk.MessageDialog({
+        transient_for: button.get_toplevel(),
+        modal: true,
+        buttons: Gtk.ButtonsType.OK_CANCEL,
+        message_type: Gtk.MessageType.QUESTION,
+        text: _('Do you really want to reset all statistics?'),
+        secondary_text: _('All achievements will be lost!')
+      });
+
+      // Reset all stats-* keys on a positive response.
+      dialog.connect('response', (dialog, id) => {
+        if (id == Gtk.ResponseType.OK) {
+          this._settings.settings_schema.list_keys().forEach(key => {
+            if (key.startsWith('stats-')) {
+              this._settings.reset(key);
+            }
+          })
+        }
+        dialog.destroy();
+      });
+
+      dialog.show();
+    });
+
+    // Initialize the user interface with the current setting values.
+    this._updateLevel();
+    this._updateExperience();
+    this._updateCounter();
   }
 
   // This should be called when the settings dialog is closed. It disconnects handlers
   // registered with the Gio.Settings object.
   destroy() {
+    this._achievements.destroy();
+
     this._settingsConnections.forEach(connection => {
       this._settings.disconnect(connection);
     });
@@ -135,370 +151,247 @@ var AchievementsPage = class AchievementsPage {
 
   // ----------------------------------------------------------------------- private stuff
 
-  // Retrieves the selection data from the Gio.Settings and computes some maxima and sums.
-  // These values are then used when drawing the pie charts and the histograms. The data
-  // is written to the corresponding properties of the given charts object. See the
-  // constructor of this class for an explanation on how this object looks like.
-  _updateChartData(charts, settingsKey) {
+  // This updates the big level badge according to the current level as reported by the
+  // Achievements class.
+  _updateLevel() {
+    const level = this._achievements.getCurrentLevel();
+    this._builder.get_object('level-stack').set_visible_child_name('level' + level);
+  }
 
-    // Retrieve the nested array of histograms.
-    charts.data = this._settings.get_value(settingsKey).deep_unpack();
+  // This updates the level progress bar and the experience label according to the data
+  // from the Achievements class.
+  _updateExperience() {
+    const cur = this._achievements.getLevelXP()
+    const max = this._achievements.getLevelMaxXP();
+    this._builder.get_object('experience-label').set_label(cur + ' / ' + max + ' XP');
+    this._builder.get_object('experience-bar').set_max_value(max);
+    this._builder.get_object('experience-bar').set_value(cur);
+  }
 
-    // Reset the properties we will be writing to.
-    charts.sum = {total: 0, perLevel: []};
-    charts.max = {total: 0, perLevel: []};
+  // This updates the progress bar and progress label of the achievement with the given ID
+  // to the given values. It will also reorder the active achievements list accordingly.
+  _updateProgress(id, cur, max) {
+    this._activeAchievements[id].progressBar.set_value(cur);
+    this._activeAchievements[id].progressLabel.set_label(cur + ' / ' + max);
+    this._activeAchievements[id].progress = cur / max;
 
-    // Iterate through all depth histograms.
-    for (let i = 0; i < charts.data.length; i++) {
-      let sum = 0;
-      let max = 0;
+    this._reorderActiveAchievements();
+  }
 
-      // Compute the sum and maximum value for the current histogram.
-      charts.data[i].forEach(v => {
-        sum += v;
-        max = Math.max(max, v)
+  // This updates the small new-achievements counter at the bottom. It will be hidden if
+  // the number of new achievements is zero.
+  _updateCounter() {
+    const count  = this._settings.get_uint('stats-unread-achievements');
+    const reveal = count != 0;
+    this._builder.get_object('achievement-counter-revealer').reveal_child = reveal;
+
+    if (reveal) {
+      this._builder.get_object('achievement-counter').label = count.toString();
+    }
+  }
+
+  // This will hide the achievement with the given ID in the completed-list and reveal it
+  // in the active-list. It will also reorder the list of active achievements according to
+  // their progress.
+  _achievementUnlocked(id) {
+    this._activeAchievements[id].revealer.reveal_child    = true;
+    this._completedAchievements[id].revealer.reveal_child = false;
+
+    this._reorderActiveAchievements();
+  }
+
+  // This will reveal the achievement with the given ID in the completed-list and hide it
+  // in the active-list. It will also reorder the completed-list to make the newly
+  // completed achievement the first in the list.
+  _achievementCompleted(id) {
+    this._activeAchievements[id].revealer.reveal_child    = false;
+    this._completedAchievements[id].revealer.reveal_child = true;
+
+    // The date is actually stored in the 'stats-achievement-dates' settings key but as
+    // this is updated asynchronously it will not yet be available on our end. So we
+    // assume that it was just unlocked and use the current date. Once the preferences
+    // dialog is opened next time, the date from 'stats-achievement-dates' will be used.
+    const newDate                                   = new Date();
+    this._completedAchievements[id].date            = newDate;
+    this._completedAchievements[id].dateLabel.label = newDate.toLocaleString();
+
+    this._reorderCompletedAchievements();
+  }
+
+  // This will hide the achievement with the given ID in both lists.
+  _achievementLocked(id) {
+    this._activeAchievements[id].revealer.reveal_child    = false;
+    this._completedAchievements[id].revealer.reveal_child = false;
+  }
+
+  // This sorts the active achievements according to their progress. If two achievements
+  // have the same progress, they will be sorted by name.
+  _reorderActiveAchievements() {
+    const container = this._builder.get_object('active-achievements-box');
+    const widgets   = Object.values(this._activeAchievements);
+    widgets.sort((a, b) => b.progress - a.progress || a.name.localeCompare(b.name));
+
+    for (let i = 0; i < widgets.length; i++) {
+      container.reorder_child(widgets[i].revealer, i);
+    }
+  }
+
+  // This sorts the completed achievements according to their completion date. If two
+  // achievements have the same date, they will be sorted by name.
+  _reorderCompletedAchievements() {
+    const container = this._builder.get_object('completed-achievements-box');
+    const widgets   = Object.values(this._completedAchievements);
+    widgets.sort((a, b) => b.date - a.date || a.name.localeCompare(b.name));
+
+    for (let i = 0; i < widgets.length; i++) {
+      container.reorder_child(widgets[i].revealer, i);
+    }
+  }
+
+  // This adds an achievement as given by Achievements.getAchievements() to both lists,
+  // the active and completed achievements. If the achievement is currently active or
+  // completed, it will also be shown, else it's hidden.
+  _add(achievement, id) {
+
+    // Create the entry for the active-achievements list.
+    const active                 = this._createAchievementWidget(achievement, id, false);
+    this._activeAchievements[id] = active;
+    if (achievement.state == Achievements.State.ACTIVE) {
+      active.revealer.reveal_child = true;
+    }
+
+    // Create the entry for the completed-achievements list.
+    const completed = this._createAchievementWidget(achievement, id, true);
+    this._completedAchievements[id] = completed;
+    if (achievement.state == Achievements.State.COMPLETED) {
+      completed.revealer.reveal_child = true;
+    }
+
+    // Add them to the UI.
+    this._builder.get_object('active-achievements-box')
+        .pack_start(active.revealer, true, true, 0);
+    this._builder.get_object('completed-achievements-box')
+        .pack_start(completed.revealer, true, true, 0);
+  }
+
+  // This method creates a set of widgets contained in a Gtk.Revealer to represent an
+  // achievement in the preferences dialog. If completed == false, a progress bar will be
+  // included, else the completion date is shown. The returned object contains several
+  // pointers to the included widgets, you may have a look at the documentation of
+  // this._activeAchievements and this._completedAchievements in the constructor above.
+  _createAchievementWidget(achievement, id, completed) {
+
+    // This we will return later. Depending on completed == true, it will contain
+    // different properties.
+    const result = {};
+
+    // The grid below is the main container. Depending on completed == true, it will have
+    // a slightly different layout. If completed == false, it looks like the upper image,
+    // if completed == true, it looks like the lower image:
+    //    ___________________________________
+    //   |      |_Name___________|__________|
+    //   | Icon |_Description____|_______XP_|
+    //   |______|_Progress_Bar___|_Progress_|
+    //
+    //    ___________________________________
+    //   | Icon |_Name___________|_____Date_|
+    //   |______|_Description____|_______XP_|
+    //
+    const grid = new Gtk.Grid({margin_bottom: completed ? 0 : 8});
+
+    // Add the icon.
+    const icon = new Gtk.DrawingArea({margin_right: 8});
+    icon.set_size_request(64, 64);
+    icon.connect('draw', (w, ctx) => {
+      Achievements.Achievements.paintAchievementIcon(ctx, achievement);
+      return false;
+    });
+
+    grid.attach(icon, 0, 0, 1, 3);
+
+    // Add the name label.
+    result.name     = achievement.name;
+    const nameLabel = new Gtk.Label({
+      label: achievement.name,
+      wrap: true,
+      xalign: 0,
+      max_width_chars: 0,
+      hexpand: true,
+      valign: Gtk.Align.END
+    });
+    nameLabel.get_style_context().add_class('title-4');
+    grid.attach(nameLabel, 1, 0, 1, 1);
+
+    // Add the description label.
+    const description = new Gtk.Label({
+      label: achievement.description,
+      wrap: true,
+      xalign: 0,
+      max_width_chars: 0,
+      valign: Gtk.Align.START
+    });
+    grid.attach(description, 1, 1, 1, 1);
+
+    // Add the XP label.
+    const xp = new Gtk.Label({
+      label: achievement.xp + ' XP',
+      xalign: 1,
+      valign: completed ? Gtk.Align.START : Gtk.Align.END
+    });
+    xp.get_style_context().add_class('dim-label');
+    xp.get_style_context().add_class('caption');
+    grid.attach(xp, 2, 1, 1, 1);
+
+    // Add the date label if completed, else the progress bar.
+    if (completed) {
+
+      result.date = new Date();
+      let label   = '';
+
+      if (achievement.state == Achievements.State.COMPLETED) {
+        const dates = this._settings.get_value('stats-achievement-dates').deep_unpack();
+        if (dates.hasOwnProperty(id)) {
+          result.date = new Date(dates[id]);
+        }
+        label = result.date.toLocaleString();
+      }
+
+      result.dateLabel = new Gtk.Label(
+          {label: label, xalign: 1, width_request: 90, valign: Gtk.Align.END});
+      result.dateLabel.get_style_context().add_class('dim-label');
+      result.dateLabel.get_style_context().add_class('caption');
+      grid.attach(result.dateLabel, 2, 0, 1, 1);
+
+    } else {
+
+      result.progress      = achievement.progress / achievement.range[1];
+      result.progressLabel = new Gtk.Label({
+        label: achievement.progress + ' / ' + achievement.range[1],
+        xalign: 1,
+        width_request: 90
       });
+      result.progressLabel.get_style_context().add_class('dim-label');
+      result.progressLabel.get_style_context().add_class('caption');
+      grid.attach(result.progressLabel, 2, 2, 1, 1);
 
-      // Store the result, once for the entire dataset, once for the current level.
-      charts.sum.total += sum;
-      charts.max.total = Math.max(charts.max.total, max);
-      charts.sum.perLevel.push(sum);
-      charts.max.perLevel.push(max);
+      result.progressBar = new Gtk.LevelBar({
+        min_value: 0,
+        max_value: achievement.range[1],
+        value: achievement.progress,
+        valign: Gtk.Align.CENTER
+      });
+      result.progressBar.remove_offset_value('low');
+      result.progressBar.remove_offset_value('high');
+      result.progressBar.remove_offset_value('full');
+      result.progressBar.remove_offset_value('empty');
+      grid.attach(result.progressBar, 1, 2, 1, 1);
     }
-  }
 
-  // Calls queue_draw() on all Gtk.DrawingAreas of the statistics page.
-  _redrawCharts() {
-    for (const type in this._charts) {
-      this._charts[type].pieWidget.queue_draw();
-      this._charts[type].histogramWidgets.forEach((h) => h.queue_draw());
-    }
-  }
+    // Finally wrap the thing in a Gtk.Revealer.
+    result.revealer = new Gtk.Revealer();
+    result.revealer.add(grid);
+    result.revealer.show_all();
 
-  // Sets up the drawing routine for one of the two pie charts shown at the top of
-  // statistics page. This method returns a reference to the Gtk.DrawingArea of the pie
-  // chart.
-  _setupPieChart(type) {
-
-    // Get the Gtk.DrawingArea.
-    const drawingArea = this._builder.get_object(type + '-pie-chart');
-
-    drawingArea.connect('draw', (widget, ctx) => {
-      // Get the data for the pie chart.
-      const charts = this._charts[type];
-
-      // Get the size of the drawing area and allocate some space below the pie chart for
-      // the caption.
-      const bottomPadding = 20;
-      const width         = widget.get_allocated_width();
-      const height        = widget.get_allocated_height() - bottomPadding;
-
-      // First we render the background of the widget.
-      Gtk.render_background(widget.get_style_context(), ctx, 0, 0, width, height);
-
-      // Get some values we will use more often. fgColor will be used for text and thin
-      // lines, fxColor will be used for the actual rings of the pie charts.
-      const fgColor = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
-      const fxColor = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
-
-      // Draw the caption below the pie chart.
-      const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
-      font.set_weight(Pango.Weight.BOLD);
-      const layout = PangoCairo.create_layout(ctx);
-      layout.set_font_description(font);
-      layout.set_alignment(Pango.Alignment.CENTER);
-      layout.set_width(Pango.units_from_double(width));
-
-      ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, fgColor.alpha);
-      ctx.moveTo(0, height + 2);
-
-      let text = charts.name;
-      for (let i = 0; i < charts.histogramWidgets.length; i++) {
-        if (charts.histogramWidgets[i]._hovered) {
-          // Get the name of the hovered histogram (if any).
-          text = charts.hoveredName.replace('%i', i + 1);
-        }
-      }
-
-      layout.set_text(text, -1);
-      PangoCairo.show_layout(ctx, layout);
-
-
-      // Now draw the number inside the pie chart.
-      let number = charts.sum.total;
-      for (let i = 0; i < charts.histogramWidgets.length; i++) {
-        if (charts.histogramWidgets[i]._hovered) {
-          // Get the sum of the hovered histogram (if any).
-          number = charts.sum.perLevel[i];
-        }
-      }
-
-      layout.set_text(this._formatNumber(number), -1);
-      font.set_absolute_size(Pango.units_from_double(24));
-      font.set_weight(Pango.Weight.NORMAL);
-      layout.set_font_description(font);
-
-      const extents = layout.get_pixel_extents()[1];
-      ctx.moveTo(0, (height - extents.height) / 2);
-
-      PangoCairo.show_layout(ctx, layout);
-
-      // Finally draw the individual arcs of the pie chart. We only need to do this if
-      // there are any selections.
-      if (charts.sum.total > 0) {
-
-        // Compute the radius for the pie chart. The radius is based on the number of
-        // selections recorded for this pie chart relative to the total number of
-        // selections. The maximum radius is bounded by the available space in the widget;
-        // the minimum radius is half of the maximum value.
-        const gestureSelections = this._charts.gestures.sum.total;
-        const clickSelections   = this._charts.clicks.sum.total;
-        const maxSelections     = Math.max(gestureSelections, clickSelections);
-
-        const maxRadius = Math.min(width, height) / 2;
-        const minRadius = 0.5 * maxRadius;
-        const r =
-            (charts.sum.total / maxSelections) * (maxRadius - minRadius) + minRadius;
-
-        ctx.translate(width * 0.5, height * 0.5);
-        let startAngle = -0.5 * Math.PI;
-
-        for (let i = 0; i < charts.data.length; i++) {
-          const endAngle =
-              startAngle + (charts.sum.perLevel[i] / charts.sum.total) * 2.0 * Math.PI;
-          ctx.moveTo(Math.cos(startAngle) * r * 0.9, Math.sin(startAngle) * r * 0.9);
-
-          // Increase the line width of the hovered arc.
-          let lineWidth = 8;
-          if (charts.histogramWidgets[i]._hovered) {
-            lineWidth = 12;
-            ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.7);
-          } else {
-            const alpha = 1.0 - i / charts.data.length;
-            ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, alpha);
-          }
-
-          ctx.arc(0, 0, r * 0.9, startAngle, endAngle);
-          ctx.setLineWidth(lineWidth);
-          ctx.stroke();
-
-          // Draw a thin line separating the arcs.
-          ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, fgColor.alpha);
-          ctx.moveTo(Math.cos(startAngle) * r, Math.sin(startAngle) * r);
-          ctx.lineTo(Math.cos(startAngle) * r * 0.8, Math.sin(startAngle) * r * 0.8);
-          ctx.setLineWidth(1);
-          ctx.stroke();
-
-          startAngle = endAngle;
-        }
-      }
-
-      return false;
-    });
-
-    return drawingArea;
-  }
-
-  // Sets up the drawing routine for one of the eight histograms shown in statistics page.
-  // This method returns a reference to the Gtk.DrawingArea of the histogram.
-  _setupHistogram(type, depth) {
-    // Get the Gtk.DrawingArea.
-    const drawingArea = this._builder.get_object(type + '-histogram-' + depth);
-
-    // Whenever the mouse pointer enters one of the histogram charts, we set a _hovered
-    // property to true. When the mouse pointer leaves the histogram, it's set to false
-    // again. This property is then used during drawing of the histograms and the
-    // corresponding pie charts.
-    drawingArea.connect('enter-notify-event', (widget) => {
-      widget._hovered = true;
-      this._redrawCharts();
-    });
-
-    drawingArea.connect('leave-notify-event', (widget) => {
-      widget._hovered = false;
-      this._redrawCharts();
-    });
-
-    drawingArea.connect('draw', (widget, ctx) => {
-      // Get the data for the pie chart.
-      const charts    = this._charts[type];
-      const histogram = charts.data[depth - 1];
-
-      // Get some values we will use more often. fgColor will be used for text and thin
-      // lines, fxColor will be used for the actual bars of the histogram.
-      const fgColor = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
-      const fxColor = widget.get_style_context().get_color(Gtk.StateFlags.LINK);
-
-
-      // Get the size of the drawing area. The histogram chart will use some padding
-      // around to add some spacing to neighboring charts.
-      const width         = widget.get_allocated_width();
-      const height        = widget.get_allocated_height();
-      const topPadding    = 10;
-      const bottomPadding = 20;
-      const leftPadding   = 15;
-      const rightPadding  = 15;
-
-      // First we render the background of the widget.
-      Gtk.render_background(widget.get_style_context(), ctx, 0, 0, width, height);
-
-      // Then draw the bottom axis.
-      ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.4);
-      ctx.moveTo(leftPadding, height - bottomPadding);
-      ctx.lineTo(width - rightPadding, height - bottomPadding);
-      ctx.setLineWidth(1);
-      ctx.stroke();
-
-      // Then the thin vertical lines.
-      const maxSeconds = 5;
-      for (let i = 0; i <= maxSeconds; i++) {
-        const gap = (width - leftPadding - rightPadding - 2) / maxSeconds;
-        ctx.moveTo(leftPadding + i * gap + 1, topPadding);
-        ctx.lineTo(leftPadding + i * gap + 1, height - bottomPadding + 3);
-      }
-
-      ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.2);
-      ctx.setLineWidth(0.5);
-      ctx.stroke();
-
-      // Then draw the tiny labels for the bottom axis.
-      if (widget._hovered) {
-        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.5);
-      } else {
-        ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.3);
-      }
-
-      const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
-      font.set_absolute_size(Pango.units_from_double(9));
-
-      for (let i = 0; i <= maxSeconds; i++) {
-        const gap = (width - leftPadding - rightPadding - 2) / maxSeconds;
-        ctx.moveTo(leftPadding + i * gap - 5, height - bottomPadding + 1);
-
-        const layout = PangoCairo.create_layout(ctx);
-        layout.set_font_description(font);
-        layout.set_alignment(Pango.Alignment.CENTER);
-        layout.set_text(i + 's', -1);
-        PangoCairo.show_layout(ctx, layout);
-      }
-
-      // Finally draw the actual histogram lines. We first get the bin with the most
-      // selection over all histograms. This is used to scale all histograms equally.
-      const gestureSelections = this._charts.gestures.max.total;
-      const clickSelections   = this._charts.clicks.max.total;
-      const maxSelections     = Math.max(gestureSelections, clickSelections);
-
-      // Only attempt to draw anything if there are selections at all.
-      if (maxSelections > 0) {
-
-        if (widget._hovered) {
-          ctx.setSourceRGBA(fgColor.red, fgColor.green, fgColor.blue, 0.7);
-        } else {
-          ctx.setSourceRGBA(fxColor.red, fxColor.green, fxColor.blue, fxColor.alpha);
-        }
-
-        const barWidth = (width - leftPadding - rightPadding) / histogram.length;
-        for (let i = 0; i < histogram.length; i++) {
-          const barHeight =
-              (histogram[i] / maxSelections) * (height - bottomPadding - topPadding);
-          ctx.moveTo((i + 0.5) * barWidth + leftPadding, height - bottomPadding);
-          ctx.lineTo(
-              (i + 0.5) * barWidth + leftPadding, height - bottomPadding - barHeight);
-        }
-        ctx.setLineWidth(barWidth - 2);
-        ctx.stroke();
-      }
-
-      return false;
-    });
-
-    return drawingArea;
-  }
-
-  // Shows the current value stored in Fly-Pie's settings under the given key with a
-  // label. The label must use the same key as ID in the glade file. Whenever the settings
-  // value changes, the label's text is updated automatically.
-  _connectStatsLabel(key) {
-    this._builder.get_object(key).label =
-        this._formatNumber(this._settings.get_uint(key).toString());
-
-    // Update on change.
-    this._settingsConnections.push(this._settings.connect('changed::' + key, () => {
-      this._builder.get_object(key).label =
-          this._formatNumber(this._settings.get_uint(key).toString());
-    }));
-  }
-
-  // Tiny helper method which appends a 'k' to the given number if it's greater than 999.
-  _formatNumber(number) {
-    return number >= 1000 ? (number / 1000).toFixed(1) + 'k' : number.toString();
-  }
-
-  // Adds an achievement to the Gtk.FlowBox. This contains a composited image and a label
-  // on-top.
-  _addAchievement(name, text, experience, tier, icon) {
-    const box       = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, opacity: 0});
-    const textLabel = new Gtk.Label(
-        {label: text, justify: Gtk.Justification.CENTER, wrap: true, max_width_chars: 0});
-    const xpLabel = new Gtk.Label({label: experience + ' XP', opacity: 0.5});
-
-    box.pack_start(textLabel, false, true, 0);
-    box.pack_start(xpLabel, false, true, 0);
-
-    const image = new Gtk.DrawingArea();
-    image.set_size_request(128, 128);
-    image.add_events(Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK);
-    image.connect('draw', (widget, ctx) => {
-      const background = GdkPixbuf.Pixbuf.new_from_file(
-          Me.path + '/assets/badges/achievements/' + tier + '.svg');
-      const middleground = GdkPixbuf.Pixbuf.new_from_file(
-          Me.path + '/assets/badges/achievements/' + icon + '.svg');
-      const foreground = GdkPixbuf.Pixbuf.new_from_file(
-          Me.path + '/assets/badges/achievements/' + tier + '.png');
-
-      Gdk.cairo_set_source_pixbuf(ctx, background, 0, 0);
-      ctx.paint();
-
-      Gdk.cairo_set_source_pixbuf(ctx, middleground, 0, 0);
-      ctx.paint();
-
-      Gdk.cairo_set_source_pixbuf(ctx, foreground, 0, 0);
-      ctx.paint();
-
-
-      ctx.setSourceRGBA(0, 0, 0, 0.5);
-      const font = widget.get_style_context().get_property('font', Gtk.StateFlags.NORMAL);
-      font.set_absolute_size(Pango.units_from_double(11));
-      const layout = PangoCairo.create_layout(ctx);
-      layout.set_font_description(font);
-      layout.set_alignment(Pango.Alignment.CENTER);
-      layout.set_width(Pango.units_from_double(128));
-      layout.set_text(name, -1);
-      ctx.moveTo(0, 85);
-      PangoCairo.show_layout(ctx, layout);
-
-      return false;
-    });
-
-    image.connect('enter-notify-event', (widget) => {
-      box.opacity   = 1;
-      image.opacity = 0.2;
-    });
-
-    image.connect('leave-notify-event', (widget) => {
-      box.opacity   = 0;
-      image.opacity = 1;
-    });
-
-    const grid = new Gtk.Grid();
-    grid.attach(image, 0, 0, 1, 2);
-    grid.attach(box, 0, 1, 1, 1);
-
-    const flowBoxChild = new Gtk.FlowBoxChild();
-    flowBoxChild.add(grid);
-
-    this._builder.get_object('achievement-box').insert(flowBoxChild, -1);
-
-    flowBoxChild.show_all();
+    return result;
   }
 }
