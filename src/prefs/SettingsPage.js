@@ -24,9 +24,9 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 //////////////////////////////////////////////////////////////////////////////////////////
 // The SettingsPage class encapsulates code required for the 'Menu Editor' page of      //
 // the settings dialog. It's not instantiated multiple times, nor does it have any      //
-// public interface, hence it could just be copy-pasted to the settings class. But as   //
-// it's quite decoupled (and huge) as well, it structures the code better when written  //
-// to its own file.                                                                     //
+// public interface, hence it could just be copy-pasted to the PreferencesDialog class. //
+// But as it's quite decoupled (and huge) as well, it structures the code better when   //
+// written to its own file.                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var SettingsPage = class SettingsPage {
@@ -177,6 +177,7 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('gesture-min-stroke-angle');
     this._bindSwitch('hover-mode');
     this._bindSwitch('show-screencast-mouse');
+    this._bindSwitch('achievement-notifications');
   }
 
   // Disconnects all settings connections.
@@ -286,6 +287,8 @@ var SettingsPage = class SettingsPage {
                 message_type: Gtk.MessageType.WARNING,
                 text: _('You should not store the preset in the extension directory!'),
                 secondary_text: _(
+                    // Translators: "It" refers to the preset if stored in the extension's
+                    // directory.
                     'Here it will be deleted whenever Fly-Pie is updated. It has been ' +
                     'saved anyways, but please consider to store it in a safer place!')
               });
@@ -295,22 +298,10 @@ var SettingsPage = class SettingsPage {
             }
 
             // Now save the preset!
-            const exists  = file.query_exists(null);
-            const success = Preset.save(file);
+            Preset.save(file);
 
-            // If this was successful, we add the new preset to the list.
-            if (success && !exists) {
-              const fileInfo =
-                  file.query_info('standard::*', Gio.FileQueryInfoFlags.NONE, null);
-              const suffixPos  = fileInfo.get_display_name().indexOf('.json');
-              const row        = this._presetList.append();
-              const presetName = fileInfo.get_display_name().slice(0, suffixPos);
-              this._presetList.set_value(row, 0, presetName);
-              this._presetList.set_value(row, 1, file.get_path());
-
-              // Store this in our statistics.
-              Statistics.addPresetSaved();
-            }
+            // Store this in our statistics.
+            Statistics.getInstance().addPresetExport();
 
           } catch (error) {
             utils.debug('Failed to save preset: ' + error);
@@ -353,6 +344,9 @@ var SettingsPage = class SettingsPage {
           try {
             Preset.load(dialog.get_file());
 
+            // Store this in our statistics.
+            Statistics.getInstance().addPresetImport();
+
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
               transient_for: button.get_root(),
@@ -377,7 +371,7 @@ var SettingsPage = class SettingsPage {
       Preset.random();
 
       // Store this in our statistics.
-      Statistics.addRandomPreset();
+      Statistics.getInstance().addRandomPreset();
     });
   }
 

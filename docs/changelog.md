@@ -6,7 +6,7 @@
 
 ## [Fly-Pie 5](https://github.com/schneegans/fly-pie/releases/tag/v5)
 
-**Release Date:** TBD
+**Release Date:** 2021-04-12
 
 #### New Features
 * A new interaction mode has been added which is specifically useful on **touch-pads**: **Turbo Mode**! You can now also "draw" gestures as long as a modifier key, such as <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, or <kbd>Alt</kbd> is held down **without having to press your mouse button**! This is especially useful when you opened the menu with a shortcut involving such a modifier key. You can just keep it pressed and move the pointer with the mouse or your touch-pad!
@@ -15,12 +15,7 @@
   - Select **background images** for your items!
   - **Crop item icons** to fit them in a circle!
 * A set of **new presets** has been added which resemble the style of some well-known GTK themes:
-  - Adwaita
-  - Adwaita Dark
-  - Arc
-  - Arc Dark
-  - Orchis
-  - Yaru
+  - Adwaita, Adwaita Dark, Arc, Arc Dark, Orchis & Yaru
 * `OnHover` and `OnUnhover` **signals** have been added to the D-Bus interface.
 * Actions and Menus can now define their own configuration widgets. Therefore **items can now have an arbitrary number of settings**. This leads to some changes of the D-Bus interface but it should be backwards compatible.
 * The "**Running Applications**" menu uses this new feature by adding several options:
@@ -31,8 +26,10 @@
 
 #### Other Enhancements
 * The documentation has been improved significantly. There are now many topics covered, especially guides on how to contribute to the project.
-* Improved translation workflow (thank you, [daPhipz](https://github.com/daPhipz)!)
-* Added several continuous integration checks (thank you once more, [daPhipz](https://github.com/daPhipz)!)
+* It is now easier to create new translations (thank you, [daPhipz](https://github.com/daPhipz)!).
+* Added several continuous integration checks (thank you once more, [daPhipz](https://github.com/daPhipz)!).
+* The layout of the settings dialog has been improved in several places.
+* It's now possible to **become a sponsor of Fly-Pie**! For as little as 1$ you can make sure that I stay motivated to work on this project!
 * Sponsors and contributors have been added to the about-popover.
 
 #### Bug Fixes

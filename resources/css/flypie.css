@@ -15,3 +15,12 @@
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+
+.counter-label {
+    text-shadow: none;
+    color: @theme_selected_fg_color;
+    background-color: @theme_selected_bg_color;
+    font-size: smaller;
+    border-radius: 5px;
+    padding: 0px 8px;
+}

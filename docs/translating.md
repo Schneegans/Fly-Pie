@@ -4,7 +4,7 @@
 
 # Translating Fly-Pie
 
-A great way to contribute to Fly-Pie is creating a translation to another language!
+A great way to contribute to Fly-Pie is creating a translation to another language! First you should [fork the Fly-Pie repository](https://github.com/schneegans/fly-pie/fork) and clone the latest `develop` branch. You can then install the extension by executing `scripts/create-release.sh -i`.
 
 * Start by generating the latest translation file with the following command:
 
@@ -39,7 +39,7 @@ It provides a guideline on what to do in order to get your Pull Request accepted
 When creating your pull request, you can simply append a `&template=add_or_update_translation.md`
 to the URL to auto-populate the body of your pull request with the template.
 
-Please refer to [contributing.md](contributing.md) for the some further contribution guidelines.
+Please refer to [contributing.md](contributing.md) for further contribution guidelines.
 
 **Note:**
 You may need to install the `gettext` package in order to compile the translations.

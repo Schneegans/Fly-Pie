@@ -17,7 +17,7 @@
 # Exit the script when one command fails.
 set -e
 
-# Print usage info
+# Print usage info.
 usage() {
     echo "Use '-i' to install the extension to your system. To just build it, run the script without any flag."
     echo "Use '-s' to throw an error when the zip size is too big to be uploaded to the Extensions website."
