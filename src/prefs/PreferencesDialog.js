@@ -38,7 +38,8 @@ var PreferencesDialog = class PreferencesDialog {
     this._shellSettings = Gio.Settings.new('org.gnome.desktop.interface');
 
     // Load all of Fly-Pie's resources.
-    Gio.resources_register(Gio.Resource.load(Me.path + '/resources/flypie.gresource'));
+    this._resources = Gio.Resource.load(Me.path + '/resources/flypie.gresource');
+    Gio.resources_register(this._resources);
 
     this._registerCustomWidgets();
 
@@ -140,6 +141,9 @@ var PreferencesDialog = class PreferencesDialog {
       this._tutorialPage.destroy();
       this._settingsPage.destroy();
       this._achievementsPage.destroy();
+
+      // Unregister our resources.
+      Gio.resources_unregister(this._resources);
     });
 
     // Record this construction for the statistics.

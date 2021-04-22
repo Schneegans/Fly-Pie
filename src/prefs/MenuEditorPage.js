@@ -391,6 +391,7 @@ var MenuEditorPage = class MenuEditorPage {
     //     Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
 
     // This is called when a drag'n'drop operation is received.
+    /*
     this._view.connect(
         'drag-data-received', (widget, context, x, y, data, info, time) => {
           // This lambda creates a new menu item for the given text. If the text is an URI
@@ -588,6 +589,7 @@ var MenuEditorPage = class MenuEditorPage {
             Gtk.drag_finish(context, success, false, time);
           }
         });
+        */
 
     // Delete the selected item when the Delete key is pressed.
     const controller = Gtk.EventControllerKey.new();

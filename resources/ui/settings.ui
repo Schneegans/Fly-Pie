@@ -601,9 +601,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                     <property name="margin_top">8</property>
                                     <property name="label">GEPLlinux
 &lt;a href="https://github.com/SimHacker"&gt;@SimHacker&lt;/a&gt;</property>
-                                    <attributes>
-                                      <attribute name="style" value="normal"></attribute>
-                                    </attributes>
+                                    <property name="use_markup">1</property>
                                     <layout>
                                       <property name="column">1</property>
                                       <property name="row">1</property>
@@ -4933,7 +4931,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
           <object class="GtkStackPage">
             <property name="name">achievements-page</property>
             <property name="title" translatable="yes" comments="Caption of the achievements page in the window&apos;s titlebar.">Achievements</property>
-            <property name="position">3</property>
             <property name="child">
               <object class="GtkBox" id="achievements-page">
                 <property name="can_focus">0</property>
@@ -4948,10 +4945,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         <property name="name">level1</property>
                         <property name="child">
                           <object class="GtkImage" id="level-image1">
-                            <property name="can_focus">0</property>
-                            <property name="file">badges/levels/level1.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
+                            <property name="resource">/img/levels/level1.png</property>
+                            <property name="pixel_size">256</property>
                           </object>
                         </property>
                       </object>
@@ -4959,13 +4954,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">level2</property>
-                        <property name="position">1</property>
                         <property name="child">
                           <object class="GtkImage" id="level-image2">
-                            <property name="can_focus">0</property>
-                            <property name="file">badges/levels/level2.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
+                            <property name="resource">/img/levels/level2.png</property>
+                            <property name="pixel_size">256</property>
                           </object>
                         </property>
                       </object>
@@ -4973,13 +4965,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">level3</property>
-                        <property name="position">2</property>
                         <property name="child">
                           <object class="GtkImage" id="level-image3">
-                            <property name="can_focus">0</property>
-                            <property name="file">badges/levels/level3.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
+                            <property name="resource">/img/levels/level3.png</property>
+                            <property name="pixel_size">256</property>
                           </object>
                         </property>
                       </object>
@@ -4987,13 +4976,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">level4</property>
-                        <property name="position">3</property>
                         <property name="child">
                           <object class="GtkImage" id="level-image4">
-                            <property name="can_focus">0</property>
-                            <property name="file">badges/levels/level4.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
+                            <property name="resource">/img/levels/level4.png</property>
+                            <property name="pixel_size">256</property>
                           </object>
                         </property>
                       </object>
@@ -5001,13 +4987,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">level5</property>
-                        <property name="position">4</property>
                         <property name="child">
                           <object class="GtkImage" id="level-image5">
-                            <property name="can_focus">0</property>
-                            <property name="file">badges/levels/level5.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
+                            <property name="resource">/img/levels/level5.png</property>
+                            <property name="pixel_size">256</property>
                           </object>
                         </property>
                       </object>
@@ -5015,13 +4998,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">level6</property>
-                        <property name="position">5</property>
                         <property name="child">
                           <object class="GtkImage" id="level-image6">
-                            <property name="can_focus">0</property>
-                            <property name="file">badges/levels/level6.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
+                            <property name="resource">/img/levels/level6.png</property>
+                            <property name="pixel_size">256</property>
                           </object>
                         </property>
                       </object>
@@ -5029,13 +5009,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">level7</property>
-                        <property name="position">6</property>
                         <property name="child">
                           <object class="GtkImage" id="level-image7">
-                            <property name="can_focus">0</property>
-                            <property name="file">badges/levels/level7.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
+                            <property name="resource">/img/levels/level7.png</property>
+                            <property name="pixel_size">256</property>
                           </object>
                         </property>
                       </object>
@@ -5043,13 +5020,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">level8</property>
-                        <property name="position">7</property>
                         <property name="child">
                           <object class="GtkImage" id="level-image8">
-                            <property name="can_focus">0</property>
-                            <property name="file">badges/levels/level8.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
+                            <property name="resource">/img/levels/level8.png</property>
+                            <property name="pixel_size">256</property>
                           </object>
                         </property>
                       </object>
@@ -5057,13 +5031,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">level9</property>
-                        <property name="position">8</property>
                         <property name="child">
                           <object class="GtkImage" id="level-image9">
-                            <property name="can_focus">0</property>
-                            <property name="file">badges/levels/level9.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
+                            <property name="resource">/img/levels/level9.png</property>
+                            <property name="pixel_size">256</property>
                           </object>
                         </property>
                       </object>
@@ -5071,13 +5042,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">level10</property>
-                        <property name="position">9</property>
                         <property name="child">
                           <object class="GtkImage" id="level-image10">
-                            <property name="can_focus">0</property>
-                            <property name="file">badges/levels/level10.png</property>
-                            <property name="pixel_size">200</property>
-                            <property name="icon_size">6</property>
+                            <property name="resource">/img/levels/level10.png</property>
+                            <property name="pixel_size">256</property>
                           </object>
                         </property>
                       </object>
@@ -5086,7 +5054,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                 </child>
                 <child>
                   <object class="GtkLabel" id="experience-label">
-                    <property name="can_focus">0</property>
                     <property name="margin_bottom">3</property>
                     <property name="label">- / - XP</property>
                   </object>
@@ -5095,7 +5062,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkLevelBar" id="experience-bar">
                     <property name="width_request">600</property>
                     <property name="height_request">15</property>
-                    <property name="can_focus">0</property>
                     <property name="halign">center</property>
                     <property name="value">3</property>
                     <property name="max_value">10</property>
@@ -5104,7 +5070,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                 <child>
                   <object class="GtkStack" id="achievements-stack">
                     <property name="vexpand">1</property>
-                    <property name="can_focus">0</property>
                     <property name="transition_duration">300</property>
                     <property name="transition_type">slide-left-right</property>
                     <child>
@@ -5114,12 +5079,9 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                           <object class="GtkScrolledWindow">
                             <property name="child">
                               <object class="GtkViewport">
-                                <property name="can_focus">0</property>
-                                <property name="shadow_type">none</property>
                                 <property name="child">
                                   <object class="GtkBox" id="active-achievements-box">
                                     <property name="width_request">600</property>
-                                    <property name="can_focus">0</property>
                                     <property name="halign">center</property>
                                     <property name="valign">start</property>
                                     <property name="margin_top">30</property>
@@ -5139,17 +5101,13 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                     <child>
                       <object class="GtkStackPage">
                         <property name="name">page1</property>
-                        <property name="position">1</property>
                         <property name="child">
                           <object class="GtkScrolledWindow">
                             <property name="child">
                               <object class="GtkViewport">
-                                <property name="can_focus">0</property>
-                                <property name="shadow_type">none</property>
                                 <property name="child">
                                   <object class="GtkBox" id="completed-achievements-box">
                                     <property name="width_request">600</property>
-                                    <property name="can_focus">0</property>
                                     <property name="halign">center</property>
                                     <property name="valign">start</property>
                                     <property name="margin_top">30</property>
@@ -5170,17 +5128,14 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                 </child>
                 <child>
                   <object class="GtkActionBar">
-                    <property name="can_focus">0</property>
                     <child type="center">
                       <object class="GtkBox">
-                        <property name="can_focus">0</property>
                         <property name="homogeneous">1</property>
                         <child>
                           <object class="GtkToggleButton" id="achievements-in-progress-button">
                             <property name="active">1</property>
                             <child>
                               <object class="GtkLabel">
-                                <property name="can_focus">0</property>
                                 <property name="margin-start">10</property>
                                 <property name="margin-end">10</property>
                                 <property name="label" translatable="yes" comments="One of the buttons on the bottom of the achievements page.">In Progress</property>
@@ -5190,14 +5145,11 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         </child>
                         <child>
                           <object class="GtkToggleButton" id="achievements-completed-button">
-                            <property name="active">1</property>
                             <property name="group">achievements-in-progress-button</property>
                             <child>
                               <object class="GtkBox">
-                                <property name="can_focus">0</property>
                                 <child>
                                   <object class="GtkLabel">
-                                    <property name="can_focus">0</property>
                                     <property name="margin-start">10</property>
                                     <property name="margin-end">10</property>
                                     <property name="label" translatable="yes" comments="One of the buttons on the bottom of the achievements page.">Completed</property>
@@ -5205,12 +5157,10 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                 </child>
                                 <child>
                                   <object class="GtkRevealer" id="achievement-counter-revealer">
-                                    <property name="can_focus">0</property>
                                     <property name="transition_type">slide-left</property>
                                     <property name="reveal_child">1</property>
                                     <property name="child">
                                       <object class="GtkLabel" id="achievement-counter">
-                                        <property name="can_focus">0</property>
                                         <property name="label">0</property>
                                         <style>
                                           <class name="counter-label"/>
@@ -5228,12 +5178,11 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         </style>
                       </object>
                     </child>
-                    <child>
+                    <child type="end">
                       <object class="GtkButton" id="achievements-reset-button">
                         <property name="tooltip_text" translatable="yes">Reset all achievements.</property>
                         <child>
                           <object class="GtkImage" id="help_image1">
-                            <property name="can_focus">0</property>
                             <property name="icon_name">edit-clear-all-symbolic</property>
                             <property name="icon_size">1</property>
                           </object>
@@ -5243,9 +5192,6 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                           <class name="destructive-action"/>
                         </style>
                       </object>
-                      <packing>
-                        <property name="pack_type">end</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
