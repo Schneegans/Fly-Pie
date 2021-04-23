@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-22 20:16+0200\n"
-"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-04-23 15:00+0000\n"
+"Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
+"Language-Team: Sinhala <https://hosted.weblate.org/projects/fly-pie/core/si/>"
+"\n"
 "Language: si\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: assets/settings.ui:66
 msgid ""
@@ -35,7 +38,7 @@ msgstr ""
 
 #: assets/settings.ui:99
 msgid "About"
-msgstr ""
+msgstr "පිළිබඳව"
 
 #: assets/settings.ui:125
 msgid "Created by"
@@ -74,7 +77,7 @@ msgstr ""
 
 #: assets/settings.ui:365
 msgid "Sponsors"
-msgstr ""
+msgstr "අනුග්‍රාහකයින්"
 
 #. A kind of animation.
 #: assets/settings.ui:570
@@ -1364,28 +1367,28 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:71
 msgid "Food & Drink"
-msgstr ""
+msgstr "ආහාර සහ පාන"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:76
 msgid "Fruit"
-msgstr ""
+msgstr "පලතුරු"
 
 #: src/prefs/ExampleMenu.js:79
 msgid "Apple"
-msgstr ""
+msgstr "ඇපල්"
 
 #: src/prefs/ExampleMenu.js:80
 msgid "Watermelon"
-msgstr ""
+msgstr "පැණි කොමඩු"
 
 #: src/prefs/ExampleMenu.js:81
 msgid "Lemon"
-msgstr ""
+msgstr "දෙහි"
 
 #: src/prefs/ExampleMenu.js:82
 msgid "Banana"
-msgstr ""
+msgstr "කෙසෙල්"
 
 #: src/prefs/ExampleMenu.js:83
 msgid "Strawberry"
@@ -1556,19 +1559,19 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:176
 msgid "Buildings"
-msgstr ""
+msgstr "ගොඩනැගිලි"
 
 #: src/prefs/ExampleMenu.js:179
 msgid "Post Office"
-msgstr ""
+msgstr "තැපැල් කාර්යාලය"
 
 #: src/prefs/ExampleMenu.js:180
 msgid "School"
-msgstr ""
+msgstr "පාසැල"
 
 #: src/prefs/ExampleMenu.js:181
 msgid "Hospital"
-msgstr ""
+msgstr "රෝහල"
 
 #: src/prefs/ExampleMenu.js:182
 msgid "Bank"
@@ -1866,7 +1869,7 @@ msgstr ""
 
 #: src/prefs/SettingsPage.js:301
 msgid "Save"
-msgstr ""
+msgstr "සුරකින්න"
 
 #: src/prefs/SettingsPage.js:325
 msgid "You should not store the preset in the extension directory!"
@@ -2081,13 +2084,13 @@ msgstr ""
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
-msgstr ""
+msgstr "උපාංග"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:40
 msgid "Shows connected devices."
-msgstr ""
+msgstr "සම්බන්ධිත උපාංග පෙන්වයි."
 
 #: src/common/menus/Devices.js:44
 msgid ""
