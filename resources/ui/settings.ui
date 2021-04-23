@@ -865,25 +865,14 @@ Can be added to custom menus.</property>
         <property name="message_type">warning</property>
         <property name="revealed">0</property>
         <child>
-          <object class="GtkBox">
-            <property name="spacing">6</property>
-            <child>
-              <object class="GtkButton" id="enable-animations-button">
-                <property name="label" translatable="yes" comments="Text of the button of the InfoBar which is shown when GNOME Shell&apos;s animations are disabled.">Enable Animations</property>
-              </object>
-            </child>
+          <object class="GtkLabel">
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">Fly-Pie requires that GNOME Shell&apos;s animations are enabled.</property>
           </object>
         </child>
-        <child>
-          <object class="GtkBox">
-            <property name="visible">0</property>
-            <property name="spacing">16</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="halign">start</property>
-                <property name="label" translatable="yes">Fly-Pie requires that GNOME Shell&apos;s animations are enabled.</property>
-              </object>
-            </child>
+        <child type="action">
+          <object class="GtkButton" id="enable-animations-button">
+            <property name="label" translatable="yes" comments="Text of the button of the InfoBar which is shown when GNOME Shell&apos;s animations are disabled.">Enable Animations</property>
           </object>
         </child>
       </object>
