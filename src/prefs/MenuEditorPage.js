@@ -373,8 +373,9 @@ var MenuEditorPage = class MenuEditorPage {
     // operations. This is because we can reorder the menu items. We use the special
     // 'GTK_TREE_MODEL_ROW' target. This makes sure that most of the row-reordering
     // functionality works out-of-the-box.
-    // const internalFormats = Gdk.ContentFormats.new_for_gtype(GObject.type_from_name("GtkTreeRowData"));
-    // const externalFormats = Gdk.ContentFormats.new(['text/uri-list', 'text/plain']);
+    // const internalFormats =
+    // Gdk.ContentFormats.new_for_gtype(GObject.type_from_name("GtkTreeRowData")); const
+    // externalFormats = Gdk.ContentFormats.new(['text/uri-list', 'text/plain']);
     // this._view.enable_model_drag_source(
     //     Gdk.ModifierType.BUTTON1_MASK, internalFormats,
     //     Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
