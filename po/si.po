@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-22 20:16+0200\n"
-"PO-Revision-Date: 2021-04-23 15:00+0000\n"
+"PO-Revision-Date: 2021-04-23 15:14+0000\n"
 "Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
 "Language-Team: Sinhala <https://hosted.weblate.org/projects/fly-pie/core/si/>"
 "\n"
@@ -1207,15 +1207,15 @@ msgstr ""
 
 #: src/extension/DefaultMenu.js:34
 msgid "Sound"
-msgstr ""
+msgstr "ශබ්දය"
 
 #: src/extension/DefaultMenu.js:38
 msgid "Play / Pause"
-msgstr ""
+msgstr "ධාවනය / විරාමය"
 
 #: src/extension/DefaultMenu.js:44
 msgid "Mute"
-msgstr ""
+msgstr "නිශ්ශබ්ද"
 
 #: src/extension/DefaultMenu.js:50
 msgid "Next Title"
@@ -1251,7 +1251,7 @@ msgstr ""
 
 #: src/extension/DefaultMenu.js:100
 msgid "Show Apps"
-msgstr ""
+msgstr "යෙදුම් පෙන්වන්න"
 
 #: src/extension/DefaultMenu.js:108
 msgid "Open Windows"
