@@ -361,39 +361,38 @@ var Achievements = GObject.registerClass(
       _createAchievements() {
 
         const attributes = [
-          // Translators: Most achievements have five tiers. In these cases, you can use
-          // a %i and / or a %s in the achievement's name. In english, %i will be
-          // replaced by the corresponding roman tier number (I, II, III, ...) and %s
-          // will be replaced by one of the attributes ('Novice', 'Master', ...). Both
-          // of these can be translated as well, so you may get quite creative here :).
-          // 'Novice' is the tier I attribute. This will be inserted for each %s in the
-          // achievement titles.
+          // Translators: This is the tier 1 attribute which will be inserted for each %s
+          // in the achievement titles.
           _('Novice'),
-          // Translators: This is the tier 2 attribute.
+          // Translators: This is the tier 2 attribute which will be inserted for each %s
+          // in the achievement titles.
           _('Capable'),
-          // Translators: This is the tier 3 attribute.
+          // Translators: This is the tier 3 attribute which will be inserted for each %s
+          // in the achievement titles.
           _('Skilled'),
-          // Translators: This is the tier 4 attribute.
+          // Translators: This is the tier 4 attribute which will be inserted for each %s
+          // in the achievement titles.
           _('Expert'),
-          // Translators: This is the tier 5 attribute.
+          // Translators: This is the tier 5 attribute which will be inserted for each %s
+          // in the achievement titles.
           _('Master')
         ];
 
         const numbers = [
-          // Translators: Most achievements have five tiers. In these cases, you can use a
-          // %i and / or a %s in the achievement's name. In english, %i will be replaced
-          // by the corresponding roman tier number (I, II, III, ...) and %s will be
-          // replaced by one of the attributes ('Novice', 'Master', ...). Both of these
-          // can be translated as well, so you may get quite creative here :). This 'I' is
-          // the roman number 1 which is replaces any %i in achievement names.
+          // Translators: This is the tier 2 number which will be inserted for each %i in
+          // the achievement titles.
           _('I'),
-          // Translators: This is the tier 2 number.
+          // Translators: This is the tier 2 number which will be inserted for each %i in
+          // the achievement titles.
           _('II'),
-          // Translators: This is the tier 3 number.
+          // Translators: This is the tier 3 number which will be inserted for each %i in
+          // the achievement titles.
           _('III'),
-          // Translators: This is the tier 4 number.
+          // Translators: This is the tier 4 number which will be inserted for each %i in
+          // the achievement titles.
           _('IV'),
-          // Translators: This is the tier 5 number.
+          // Translators: This is the tier 5 number which will be inserted for each %i in
+          // the achievement titles.
           _('V')
         ];
 
