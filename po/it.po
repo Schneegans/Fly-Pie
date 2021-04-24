@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-24 14:05+0200\n"
 "PO-Revision-Date: 2021-04-25 23:52+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/>"
 "\n"
 "Language: it\n"
@@ -46,19 +46,19 @@ msgstr ""
 
 #: assets/settings.ui:99
 msgid "About"
-msgstr ""
+msgstr "Informazioni"
 
 #: assets/settings.ui:125
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #: assets/settings.ui:155
 msgid "Translated by"
-msgstr ""
+msgstr "Tradotto da"
 
 #: assets/settings.ui:186
 msgid "Artwork by"
-msgstr ""
+msgstr "Opera di"
 
 #: assets/settings.ui:215
 msgid "Credits"
@@ -66,15 +66,15 @@ msgstr "Crediti"
 
 #: assets/settings.ui:246
 msgid "🥇️ Gold Sponsors"
-msgstr ""
+msgstr "🥇️ Sponsor d'oro"
 
 #: assets/settings.ui:260
 msgid "🥈️ Silver Sponsors"
-msgstr ""
+msgstr "🥈️ Sponsor d'argento"
 
 #: assets/settings.ui:274
 msgid "🥉️ Bronze Sponsors"
-msgstr ""
+msgstr "🥉️ Sponsor di bronzo"
 
 #: assets/settings.ui:349
 msgid ""
@@ -82,10 +82,13 @@ msgid ""
 "<a href=\"https://github.com/sponsors/Schneegans\">You may already become a "
 "sponsor for as little as 1$ / month!</a>"
 msgstr ""
+"💕️ Vuoi dimostrare che ami Fly-Pie?\n"
+"<a href=\"https://github.com/sponsors/Schneegans\">Potresti già diventare "
+"uno sponsor per un minimo di 1$ / mese!</a>"
 
 #: assets/settings.ui:365
 msgid "Sponsors"
-msgstr ""
+msgstr "Sponsor"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:570
@@ -782,6 +785,8 @@ msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
 msgstr ""
+"Con questo abilitato, non è più necessario premere un pulsante del mouse\n"
+"o tenere premuto un tasto di modifica durante le selezioni."
 
 #: assets/settings.ui:7465 assets/settings.ui:7736
 msgid "Advanced Settings"
@@ -823,7 +828,7 @@ msgstr "Salva Predefinito"
 #. Where presets are stored by default
 #: assets/settings.ui:7820
 msgid "Load settings fom a file"
-msgstr ""
+msgstr "Carica le impostazioni da un file"
 
 #. Where presets are stored by default
 #: assets/settings.ui:7841
@@ -936,12 +941,12 @@ msgstr "Menu Editore"
 #. One of the buttons on the bottom of the achievements page.
 #: assets/settings.ui:8917
 msgid "In Progress"
-msgstr ""
+msgstr "In corso"
 
 #. One of the buttons on the bottom of the achievements page.
 #: assets/settings.ui:8945
 msgid "Completed"
-msgstr ""
+msgstr "Completato"
 
 #: assets/settings.ui:8998
 #, fuzzy
@@ -972,19 +977,19 @@ msgstr ""
 #. in the achievement titles.
 #: src/common/Achievements.js:372
 msgid "Skilled"
-msgstr ""
+msgstr "Abile"
 
 #. Translators: This is the tier 4 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:375
 msgid "Expert"
-msgstr ""
+msgstr "Esperto"
 
 #. Translators: This is the tier 5 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:378
 msgid "Master"
-msgstr ""
+msgstr "Maestro"
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
@@ -998,25 +1003,25 @@ msgstr "ID"
 #. the achievement titles.
 #: src/common/Achievements.js:387
 msgid "II"
-msgstr ""
+msgstr "II"
 
 #. Translators: This is the tier 3 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:390
 msgid "III"
-msgstr ""
+msgstr "III"
 
 #. Translators: This is the tier 4 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:393
 msgid "IV"
-msgstr ""
+msgstr "IV"
 
 #. Translators: This is the tier 5 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:396
 msgid "V"
-msgstr ""
+msgstr "V"
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
 #: src/common/Achievements.js:412
@@ -1028,7 +1033,7 @@ msgstr "Cancella"
 #: src/common/Achievements.js:414
 #, javascript-format
 msgid "Abort a selection %x times."
-msgstr ""
+msgstr "Annulla una selezione %x volte."
 
 #. Translators: The name of the 'Select %x items.' achievement.
 #: src/common/Achievements.js:427
@@ -1039,7 +1044,7 @@ msgstr ""
 #: src/common/Achievements.js:428
 #, javascript-format
 msgid "Select %x items."
-msgstr ""
+msgstr "Seleziona %x elementi."
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
@@ -1062,7 +1067,7 @@ msgstr "Selezioni Gestuali"
 #: src/common/Achievements.js:448
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
-msgstr ""
+msgstr "%s Sottomenu Selettore-Gesture"
 
 #: src/common/Achievements.js:454
 #, javascript-format
