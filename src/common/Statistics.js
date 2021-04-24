@@ -14,135 +14,195 @@ const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// The static statistics class is used to record some statistics of Fly-Pie. These      //
-// statistics can be seen in Fly-Pie's settings dialog and are used as a basis for the  //
-// achievements. The statistics are stored in the stats-* keys of Fly-Pie's             //
-// Gio.Settings.                                                                        //
+// The Statistics singleton is used to record some statistics of Fly-Pie which are      //
+// the basis for the achievements. The achievements can be seen in Fly-Pie's settings   //
+// dialog and are tracked by the Achievements class. The statistics are stored in the   //
+// stats-* keys of Fly-Pie's Gio.Settings.                                              //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-// This global variable will store the Gio.Settings we're working with.
-let _settings = null;
+// This class is supposed to be used as singleton in order to prevent frequent
+// constructions and deconstructions of the contained Gio.Settings object. This global
+// variable stores the singleton instance.
+let _instance = null;
 
 var Statistics = class Statistics {
 
   // ---------------------------------------------------------------------- static methods
 
-  // This should be called whenever a successful selection is made.
-  static addSelection(depth, time, gestureOnlySelection) {
-
-    // This is disabled for now.
-    /*
-    this._initSettings();
-
-    // We add the selection to one of the histograms with selection counts per selection
-    // time. There is one of these histograms for the first four selection depths for
-    // either point-and-click selections or for gesture selections.
-    const key =
-        gestureOnlySelection ? 'stats-gesture-selections' : 'stats-click-selections';
-
-    // Retrieve all histograms from the settings and make sure that we have four of them.
-    // Any selection deeper than five will be recorded in the fourth bin.
-    const histograms = _settings.get_value(key).deep_unpack();
-    this._resizeArray(histograms, 4, []);
-
-    // We limit our histogram to selections which took five seconds. The bin size is set
-    // to 200 milliseconds.
-    const upperBound = 5000;
-    const binSize    = 200;
-    const bins       = upperBound / binSize;
-
-    // Then initialize each histogram to the correct bin size.
-    for (let i = 0; i < histograms.length; i++) {
-      this._resizeArray(histograms[i], bins, 0);
+  // Create the singleton instance lazily.
+  static getInstance() {
+    if (_instance == null) {
+      _instance = new Statistics();
     }
 
-    // Now select the histogram for the current depth and increase the bin for the given
-    // selection time.
-    const histogram = histograms[depth - 1];
-    const bin       = Math.floor(Math.min(Math.max(0, time / binSize), bins - 1));
-    ++histogram[bin];
+    return _instance;
+  }
 
-    // Finally update the updated histograms.
-    _settings.set_value(key, new GLib.Variant('aau', histograms));
-    */
+  // This should be called when the Fly-Pie extension is disabled or the preferences
+  // dialog is closed. It deletes the Gio.Settings object.
+  static destroyInstance() {
+    if (_instance != null) {
+      _instance.destroy();
+      _instance = null;
+    }
+  }
+
+  // ------------------------------------------------------------ constructor / destructor
+
+  // This should not be called directly. Use the static singleton interface above!
+  constructor() {
+
+    // Create the settings object in "delayed" mode. Delayed mode was chosen because the
+    // apply() can take up to 100~ms on some systems I have tested. This results in a
+    // noticeable stutter in Fly-Pie's animations. Applying the settings with half a
+    // second delay makes it much more unlikely that an animation is currently in
+    // progress.
+    this._settings = utils.createSettings();
+    this._settings.delay();
+
+    // As the settings object is in delay-mode, we have to call its apply() method after
+    // we did some modification. We use a timeout in order to wait a little for any
+    // additional modifications.
+    this._saveTimeout = -1;
+  }
+
+
+  // This should not be called directly. Use the static singleton interface above!
+  destroy() {
+
+    // Save the settings if required.
+    if (this._saveTimeout >= 0) {
+      GLib.source_remove(this._saveTimeout);
+      this._settings.apply();
+    }
+
+    this._settings = null;
+  }
+
+  // -------------------------------------------------------------------- public interface
+
+  // This should be called whenever a successful selection is made.
+  addSelection(depth, time, gestureOnlySelection) {
+
+    // This contains the total number of all successful selection.
+    this._addOneTo('stats-selections');
+
+    // For selections at depth 1, 2 & 3, we store the number of gesture / point-and-click
+    // selections separately.
+    if (depth <= 3) {
+      if (gestureOnlySelection) {
+        this._addOneTo(`stats-gesture-selections-depth${depth}`);
+      } else {
+        this._addOneTo(`stats-click-selections-depth${depth}`);
+      }
+    }
+
+    // All the statistics below are only increased if the selection was fast enough.
+    if (depth == 1) {
+      if (time <= 150) this._addOneTo('stats-selections-150ms-depth1');
+      if (time <= 250) this._addOneTo('stats-selections-250ms-depth1');
+      if (time <= 500) this._addOneTo('stats-selections-500ms-depth1');
+      if (time <= 750) this._addOneTo('stats-selections-750ms-depth1');
+      if (time <= 1000) this._addOneTo('stats-selections-1000ms-depth1');
+    } else if (depth == 2) {
+      if (time <= 250) this._addOneTo('stats-selections-250ms-depth2');
+      if (time <= 500) this._addOneTo('stats-selections-500ms-depth2');
+      if (time <= 750) this._addOneTo('stats-selections-750ms-depth2');
+      if (time <= 1000) this._addOneTo('stats-selections-1000ms-depth2');
+      if (time <= 2000) this._addOneTo('stats-selections-2000ms-depth2');
+    } else if (depth == 3) {
+      if (time <= 500) this._addOneTo('stats-selections-500ms-depth3');
+      if (time <= 750) this._addOneTo('stats-selections-750ms-depth3');
+      if (time <= 1000) this._addOneTo('stats-selections-1000ms-depth3');
+      if (time <= 2000) this._addOneTo('stats-selections-2000ms-depth3');
+      if (time <= 3000) this._addOneTo('stats-selections-3000ms-depth3');
+    }
   }
 
   // Should be called whenever a selection is canceled.
-  static addAbortion() {
+  addAbortion() {
     this._addOneTo('stats-abortions');
   }
 
   // Should be called whenever a custom menu is opened via the D-Bus interface.
-  static addCustomDBusMenu() {
+  addCustomDBusMenu() {
     this._addOneTo('stats-dbus-menus');
   }
 
   // Should be called whenever the settings dialog is opened.
-  static addSettingsOpened() {
+  addSettingsOpened() {
     this._addOneTo('stats-settings-opened');
   }
 
-  // Should be called whenever a preset is saved.
-  static addPresetSaved() {
-    this._addOneTo('stats-presets-saved');
-  }
-
   // Should be called whenever a menu configuration is imported.
-  static addMenuImport() {
+  addMenuImport() {
     this._addOneTo('stats-menus-imported');
   }
 
   // Should be called whenever a menu configuration is exported.
-  static addMenuExport() {
+  addMenuExport() {
     this._addOneTo('stats-menus-exported');
   }
 
+  // Should be called whenever a preset is imported.
+  addPresetImport() {
+    this._addOneTo('stats-presets-imported');
+  }
+
+  // Should be called whenever a preset is exported.
+  addPresetExport() {
+    this._addOneTo('stats-presets-exported');
+  }
+
   // Should be called whenever a random preset is generated.
-  static addRandomPreset() {
+  addRandomPreset() {
     this._addOneTo('stats-random-presets');
   }
 
-  // This should be called when the Fly-Pie extension is disabled. It deletes the
-  // Gio.Settings object.
-  static cleanUp() {
-    _settings = null;
+  // Should be called when all menus have been deleted.
+  addDeletedAllMenus() {
+    this._addOneTo('stats-deleted-all-menus');
+  }
+
+  // Should be called whenever the tutorial menu is opened.
+  addTutorialMenuOpened() {
+    this._addOneTo('stats-tutorial-menus');
+  }
+
+  // Should be called whenever an item is added in the menu editor.
+  addItemCreated() {
+    this._addOneTo('stats-added-items');
+  }
+
+  // Should be called whenever the sponsors list is shown.
+  addSponsorsViewed() {
+    this._addOneTo('stats-sponsors-viewed');
   }
 
   // ----------------------------------------------------------------------- private stuff
 
-  // Create the Gio.Settings object lazily.
-  static _initSettings() {
-    if (_settings == null) {
-      _settings = utils.createSettings();
+  // Our Gio.Settings object is in "delayed" mode so we have to manually call apply()
+  // whenever a property is changed. Delayed mode was chosen because the apply() can take
+  // up to 100~ms on some systems I have tested. This results in a noticeable stutter in
+  // Fly-Pie's animations. Applying the settings with half a second delay makes it much
+  // more unlikely that an animation is currently in progress.
+  _save() {
+
+    // Cancel any previous _save() calls.
+    if (this._saveTimeout >= 0) {
+      GLib.source_remove(this._saveTimeout);
     }
+
+    // Queue up a new apply().
+    this._saveTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
+      this._settings.apply();
+      this._saveTimeout = -1;
+    });
   }
 
   // Increases the value of the given settings key by one.
-  static _addOneTo(key) {
-
-    // This is disabled for now.
-    // this._initSettings();
-    // _settings.set_uint(key, _settings.get_uint(key) + 1);
-  }
-
-  // Helper method to resize the given JavaScript array to the given size. If the input
-  // array is larger, it will be truncated, if it's smaller, it will be back-padded with
-  // copies of defaultValue.
-  static _resizeArray(array, size, defaultValue) {
-
-    // Make sure we have actually an array.
-    if (!Array.isArray(array)) {
-      array = [];
-    }
-
-    // Extent if needed.
-    while (array.length < size) {
-      // Create a copy of defaultValue if it's not a primitive type.
-      typeof (defaultValue) === 'object' ? array.push(Object.create(defaultValue)) :
-                                           array.push(defaultValue);
-    }
-
-    // Truncate if needed.
-    array.length = size;
+  _addOneTo(key) {
+    this._settings.set_uint(key, this._settings.get_uint(key) + 1);
+    this._save();
   }
 }

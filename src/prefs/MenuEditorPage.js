@@ -108,9 +108,9 @@ let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.Tr
 //////////////////////////////////////////////////////////////////////////////////////////
 // The MenuEditorPage class encapsulates code required for the 'Menu Editor' page of    //
 // the settings dialog. It's not instantiated multiple times, nor does it have any      //
-// public interface, hence it could just be copy-pasted to the settings class. But as   //
-// it's quite decoupled (and huge) as well, it structures the code better when written  //
-// to its own file.                                                                     //
+// public interface, hence it could just be copy-pasted to the PreferencesDialog class. //
+// But as it's quite decoupled (and huge) as well, it structures the code better when   //
+// written to its own file.                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var MenuEditorPage = class MenuEditorPage {
@@ -251,7 +251,7 @@ var MenuEditorPage = class MenuEditorPage {
                 Gio.FileCreateFlags.REPLACE_DESTINATION, null);
 
             // Store this in our statistics.
-            Statistics.addMenuExport();
+            Statistics.getInstance().addMenuExport();
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
@@ -312,7 +312,7 @@ var MenuEditorPage = class MenuEditorPage {
               this._loadMenuConfiguration();
 
               // Store this in our statistics.
-              Statistics.addMenuImport();
+              Statistics.getInstance().addMenuImport();
             }
 
           } catch (error) {
@@ -539,6 +539,9 @@ var MenuEditorPage = class MenuEditorPage {
               this._set(newIter, 'NAME', 'Insert: ' + name);
               this._set(newIter, 'TYPE', newType);
             }
+
+            // Store this in our statistics.
+            Statistics.getInstance().addItemCreated();
 
             return true;
           };
@@ -1035,6 +1038,9 @@ var MenuEditorPage = class MenuEditorPage {
           iter, 'DATA',
           JSON.stringify(ItemRegistry.getItemTypes()[newType].config.defaultData));
     }
+
+    // Store this in our statistics.
+    Statistics.getInstance().addItemCreated();
   }
 
 
@@ -1065,6 +1071,11 @@ var MenuEditorPage = class MenuEditorPage {
 
           // Save the menu configuration.
           this._saveMenuConfiguration();
+
+          // If this was the last menu item, store this in our statistics.
+          if (!model.get_iter_first()[0]) {
+            Statistics.getInstance().addDeletedAllMenus();
+          }
         }
       }
       dialog.destroy();

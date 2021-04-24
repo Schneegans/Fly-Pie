@@ -96,7 +96,7 @@ var menu = {
     // Add switch user item.
     if (SystemActions.can_switch_user) {
       result.children.push({
-        name: _('Switch User...'),
+        name: _('Switch User…'),
         icon: 'system-users',
         onSelect: () => SystemActions.activateSwitchUser()
       });
@@ -114,7 +114,7 @@ var menu = {
     // Add power-off item.
     if (SystemActions.can_power_off) {
       result.children.push({
-        name: _('Power Off...'),
+        name: _('Power Off…'),
         icon: 'system-shutdown',
         onSelect: () => SystemActions.activatePowerOff()
       });

@@ -8,18 +8,21 @@
 
 'use strict';
 
-const {Gio, GLib} = imports.gi;
+const Cairo            = imports.cairo;
+const {Gio, GLib, Gdk} = imports.gi;
+
+const Main = imports.ui.main;
 
 const Me             = imports.misc.extensionUtils.getCurrentExtension();
 const utils          = Me.imports.src.common.utils;
 const Statistics     = Me.imports.src.common.Statistics.Statistics;
+const Achievements   = Me.imports.src.common.Achievements.Achievements;
 const ItemRegistry   = Me.imports.src.common.ItemRegistry.ItemRegistry;
 const DBusInterface  = Me.imports.src.common.DBusInterface.DBusInterface;
 const Shortcuts      = Me.imports.src.extension.Shortcuts.Shortcuts;
 const MouseHighlight = Me.imports.src.extension.MouseHighlight.MouseHighlight;
 const Menu           = Me.imports.src.extension.Menu.Menu;
 const DefaultMenu    = Me.imports.src.extension.DefaultMenu.DefaultMenu;
-const Achievements   = Me.imports.src.extension.Achievements.Achievements;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
@@ -87,8 +90,6 @@ var Daemon = class Daemon {
     // unloaded, we use this array to disconnect all of them.
     this._settingsConnections = [];
 
-    this._achievements = new Achievements(this._settings);
-
     // Here we test whether any menus are configured. If the key is completely empty, this
     // is considered to be the same as "[]". If no menus are configured, the default
     // configuration is loaded.
@@ -122,6 +123,45 @@ var Daemon = class Daemon {
     this._settingsConnections.push(this._settings.connect(
         'changed::show-screencast-mouse', () => this._onScreencastMouseChanged()));
     this._onScreencastMouseChanged();
+
+    // Show notifications whenever a level-up occurred. In fact, this will be shown also
+    // when a level-down happened, but this should only happen rarely...
+    this._achievements = new Achievements(this._settings);
+    this._achievements.connect('level-changed', (o, level) => {
+      this._notify(
+          // Translators: This is shown in a desktop notifications.
+          _('Fly-Pie Level Up!'),
+          // Translators: This is shown in a desktop notifications.
+          _('You reached level %i!').replace('%i', level),
+          Gio.icon_new_for_string(Me.path + `/assets/badges/levels/level${level}.png`));
+    });
+
+    // Show notifications whenever achievements are unlocked.
+    this._achievements.connect('completed', (o, id) => {
+      const achievement = o.getAchievements().get(id);
+
+      // Create an icon for the achievement notification.
+      const surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, 64, 64);
+      const ctx     = new Cairo.Context(surface);
+      Achievements.paintAchievementIcon(ctx, achievement);
+      const icon = Gdk.pixbuf_get_from_surface(surface, 0, 0, 64, 64);
+
+      // Explicitly tell Cairo to free the context memory.
+      // https://wiki.gnome.org/Projects/GnomeShell/Extensions/TipsOnMemoryManagement#Cairo
+      ctx.$dispose();
+
+      this._notify(
+          // Translators: This is shown in a desktop notifications.
+          _('Fly-Pie Achievement Completed!'),
+          // Translators: This is shown in a desktop notifications.
+          _('You finished the achievement "%s"!').replace('%s', achievement.name), icon);
+
+      // Whenever an achievement is unlocked, this counter is increased by one. It is used
+      // to show a small badge in the achievements dialog containing the number of newly
+      // achieved achievements.
+      const key = 'stats-unread-achievements';
+      this._settings.set_uint(key, this._settings.get_uint(key) + 1);
+    });
   }
 
   // Cleans up stuff which is not cleaned up automatically.
@@ -145,8 +185,8 @@ var Daemon = class Daemon {
       global.stage.remove_child(this._screencastMouse);
     }
 
-    // Delete the static settings object of the statistics.
-    Statistics.cleanUp();
+    // Delete the statistics singleton.
+    Statistics.destroyInstance();
   }
 
   // -------------------------------------------------------------- public D-Bus-Interface
@@ -170,7 +210,7 @@ var Daemon = class Daemon {
   // See the README.md for a description of Fly-Pie's DBusInterface.
   ShowCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
-    Statistics.addCustomDBusMenu();
+    Statistics.getInstance().addCustomDBusMenu();
     return this._openCustomMenu(json, false, this._lastMenuID);
   }
 
@@ -178,7 +218,7 @@ var Daemon = class Daemon {
   // See the README.md for a description of Fly-Pie's DBusInterface.
   PreviewCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
-    Statistics.addCustomDBusMenu();
+    Statistics.getInstance().addCustomDBusMenu();
     return this._openCustomMenu(json, true, this._lastMenuID);
   }
 
@@ -274,7 +314,7 @@ var Daemon = class Daemon {
   // This gets called when the user did not select anything in the menu. It emits the
   // OnCancel signal of our D-Bus interface.
   _onCancel(menuID) {
-    Statistics.addAbortion();
+    Statistics.getInstance().addAbortion();
     this._dbus.emit_signal('OnCancel', GLib.Variant.new('(i)', [menuID]));
   }
 
@@ -388,6 +428,32 @@ var Daemon = class Daemon {
       this._screencastMouse.destroy();
       global.stage.remove_child(this._screencastMouse);
       delete this._screencastMouse;
+    }
+  }
+
+  // Shows a GNOME Shell notification with the given label, description and icon. The size
+  // of the icon seems to depend on the currently used theme and cannot be set from here.
+  // The notification will also contain a hard-coded button which opens the achievements
+  // page of the settings dialog.
+  _notify(label, details, gicon) {
+
+    if (this._settings.get_boolean('achievement-notifications')) {
+      const source = new Main.MessageTray.Source('Fly-Pie', '');
+      Main.messageTray.add(source);
+
+      const n = new Main.MessageTray.Notification(source, label, details, {gicon: gicon});
+
+      // Translators: This is shown on the action button of the notification bubble which
+      // is shown once an achievement is unlocked.
+      n.addAction(_('Show Achievements'), () => {
+        // Make sure the achievements page is shown.
+        this._settings.set_string('active-stack-child', 'achievements-page');
+
+        // Show the settings dialog.
+        Main.extensionManager.openExtensionPrefs(Me.uuid, '');
+      });
+
+      source.showNotification(n);
     }
   }
 };

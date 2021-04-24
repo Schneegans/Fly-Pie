@@ -32,7 +32,7 @@ xgettext --from-code=UTF-8 \
          --add-comments=Translators \
          --copyright-holder="Simon Schneegans" \
          --package-name="Fly-Pie" \
-         --package-version="5" \
+         --package-version="6" \
          --output=po/flypie.pot \
          assets/settings.ui ./*/*/*.js ./*/*/*/*.js 
 

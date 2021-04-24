@@ -515,6 +515,12 @@
       <description>If set to true, no clicking is required for selections.</description>
     </key>
 
+    <key name="achievement-notifications" type="b">
+      <default>true</default>
+      <summary>Achievement Notifications</summary>
+      <description>If set to true, notifications for completed achievements will be shown.</description>
+    </key>
+
     <!-- Miscellaneous -->
 
     <key name="preview-on-right-side" type="b">
@@ -530,38 +536,177 @@
       <description>Name of the currently active main stack child.</description>
     </key>
 
-    <key name="best-tutorial-time" type="d">
+    <!-- Achievements -->
+
+    <key name="stats-achievement-dates" type="a{sx}">
+      <default>@a{sx} {}</default>
+      <summary>Achievement Dates</summary>
+      <description>A list of all unlocked achievement IDs with the corresponding timestamps.</description>
+    </key>
+
+    <key name="stats-unread-achievements" type="u">
+      <default>0</default>
+      <summary>Unread Achievements</summary>
+      <description>The number of new achievements.</description>
+    </key>
+
+    <key name="stats-best-tutorial-time" type="u">
       <default>9999</default>
       <summary>Best Tutorial Time</summary>
       <description>The best time achieved in the tutorial in milliseconds.</description>
     </key>
 
-    <key name="last-tutorial-time" type="d">
+    <key name="stats-last-tutorial-time" type="u">
       <default>9999</default>
       <summary>Last Tutorial Time</summary>
       <description>The last achieved time in the tutorial in milliseconds.</description>
     </key>
 
-    <key name="unlocked-achievements" type="au">
-      <default>[]</default>
-      <summary>Unlocked Achievements</summary>
-      <description>A list of all unlocked achievements.</description>
+    <key name="stats-tutorial-menus" type="u">
+      <default>0</default>
+      <summary>Tutorial Menu Count</summary>
+      <description>The total number of times the tutorial menu was opened.</description>
+    </key>
+
+    <key name="stats-selections" type="u">
+      <default>0</default>
+      <summary>Selection Count</summary>
+      <description>The total number of selections.</description>
+    </key>
+
+    <key name="stats-gesture-selections-depth1" type="u">
+      <default>0</default>
+      <summary>Gesture Selection Count Depth 1</summary>
+      <description>The total number of gesture selections at depth 1.</description>
+    </key>
+
+    <key name="stats-gesture-selections-depth2" type="u">
+      <default>0</default>
+      <summary>Gesture Selection Count Depth 2</summary>
+      <description>The total number of gesture selections at depth 2.</description>
+    </key>
+
+    <key name="stats-gesture-selections-depth3" type="u">
+      <default>0</default>
+      <summary>Gesture Selection Count Depth 3</summary>
+      <description>The total number of gesture selections at depth 3.</description>
+    </key>
+
+    <key name="stats-click-selections-depth1" type="u">
+      <default>0</default>
+      <summary>Click Selection Count Depth 1</summary>
+      <description>The total number of click selections at depth 1.</description>
+    </key>
+
+    <key name="stats-click-selections-depth2" type="u">
+      <default>0</default>
+      <summary>Click Selection Count Depth 2</summary>
+      <description>The total number of click selections at depth 2.</description>
+    </key>
+
+    <key name="stats-click-selections-depth3" type="u">
+      <default>0</default>
+      <summary>Click Selection Count Depth 3</summary>
+      <description>The total number of click selections at depth 3.</description>
     </key>
 
 
-    <!-- Statistics -->
-
-    <key name="stats-click-selections" type="aau">
-      <default>[[], [], [], []]</default>
-      <summary>Point-and-Click Selection Times</summary>
-      <description>The selecion time histogram of point-and-click selections for differnt depths.</description>
+    <key name="stats-selections-1000ms-depth1" type="u">
+      <default>0</default>
+      <summary>Selection Count 1000ms Depth 1</summary>
+      <description>The number of selections at depth 1 faster than 1000ms.</description>
     </key>
 
-    <key name="stats-gesture-selections" type="aau">
-      <default>[[], [], [], []]</default>
-      <summary>Gesture Selection Times</summary>
-      <description>The selecion time histogram of gesture selections for differnt depths.</description>
+    <key name="stats-selections-750ms-depth1" type="u">
+      <default>0</default>
+      <summary>Selection Count 750ms Depth 1</summary>
+      <description>The number of selections at depth 1 faster than 750ms.</description>
     </key>
+
+    <key name="stats-selections-500ms-depth1" type="u">
+      <default>0</default>
+      <summary>Selection Count 500ms Depth 1</summary>
+      <description>The number of selections at depth 1 faster than 500ms.</description>
+    </key>
+
+    <key name="stats-selections-250ms-depth1" type="u">
+      <default>0</default>
+      <summary>Selection Count 250ms Depth 1</summary>
+      <description>The number of selections at depth 1 faster than 250ms.</description>
+    </key>
+
+    <key name="stats-selections-150ms-depth1" type="u">
+      <default>0</default>
+      <summary>Selection Count 150ms Depth 1</summary>
+      <description>The number of selections at depth 1 faster than 150ms.</description>
+    </key>
+
+
+
+
+    <key name="stats-selections-2000ms-depth2" type="u">
+      <default>0</default>
+      <summary>Selection Count 2000ms Depth 2</summary>
+      <description>The number of selections at depth 2 faster than 2000ms.</description>
+    </key>
+
+    <key name="stats-selections-1000ms-depth2" type="u">
+      <default>0</default>
+      <summary>Selection Count 1000ms Depth 2</summary>
+      <description>The number of selections at depth 2 faster than 1000ms.</description>
+    </key>
+
+    <key name="stats-selections-750ms-depth2" type="u">
+      <default>0</default>
+      <summary>Selection Count 750ms Depth 2</summary>
+      <description>The number of selections at depth 2 faster than 750ms.</description>
+    </key>
+
+    <key name="stats-selections-500ms-depth2" type="u">
+      <default>0</default>
+      <summary>Selection Count 500ms Depth 2</summary>
+      <description>The number of selections at depth 2 faster than 500ms.</description>
+    </key>
+
+    <key name="stats-selections-250ms-depth2" type="u">
+      <default>0</default>
+      <summary>Selection Count 250ms Depth 2</summary>
+      <description>The number of selections at depth 2 faster than 250ms.</description>
+    </key>
+
+
+
+    <key name="stats-selections-3000ms-depth3" type="u">
+      <default>0</default>
+      <summary>Selection Count 3000ms Depth 3</summary>
+      <description>The number of selections at depth 3 faster than 3000ms.</description>
+    </key>
+
+    <key name="stats-selections-2000ms-depth3" type="u">
+      <default>0</default>
+      <summary>Selection Count 2000ms Depth 3</summary>
+      <description>The number of selections at depth 3 faster than 2000ms.</description>
+    </key>
+
+    <key name="stats-selections-1000ms-depth3" type="u">
+      <default>0</default>
+      <summary>Selection Count 1000ms Depth 3</summary>
+      <description>The number of selections at depth 3 faster than 1000ms.</description>
+    </key>
+
+    <key name="stats-selections-750ms-depth3" type="u">
+      <default>0</default>
+      <summary>Selection Count 750ms Depth 3</summary>
+      <description>The number of selections at depth 3 faster than 750ms.</description>
+    </key>
+
+    <key name="stats-selections-500ms-depth3" type="u">
+      <default>0</default>
+      <summary>Selection Count 500ms Depth 3</summary>
+      <description>The number of selections at depth 3 faster than 500ms.</description>
+    </key>
+
+
 
     <key name="stats-abortions" type="u">
       <default>0</default>
@@ -581,10 +726,16 @@
       <description>The number of times the settings dialog has been opnened.</description>
     </key>
 
-    <key name="stats-presets-saved" type="u">
+    <key name="stats-presets-imported" type="u">
       <default>0</default>
-      <summary>Preset Saves</summary>
-      <description>The number of times a preset has been saved.</description>
+      <summary>Preset Imports</summary>
+      <description>The number of times a preset has been imported.</description>
+    </key>
+
+    <key name="stats-presets-exported" type="u">
+      <default>0</default>
+      <summary>Preset Exports</summary>
+      <description>The number of times a preset has been exported.</description>
     </key>
 
     <key name="stats-menus-imported" type="u">
@@ -603,6 +754,24 @@
       <default>0</default>
       <summary>Random Presets</summary>
       <description>The number of times a random preset has been generated.</description>
+    </key>
+
+    <key name="stats-added-items" type="u">
+      <default>0</default>
+      <summary>Added Items</summary>
+      <description>The number items added to menus.</description>
+    </key>
+
+    <key name="stats-deleted-all-menus" type="u">
+      <default>0</default>
+      <summary>Deleted All Menus</summary>
+      <description>The number of times all menus have been deleted.</description>
+    </key>
+
+    <key name="stats-sponsors-viewed" type="u">
+      <default>0</default>
+      <summary>Sponsors Viewed</summary>
+      <description>The number of times the sponsors menu has been shown.</description>
     </key>
 
   </schema>
