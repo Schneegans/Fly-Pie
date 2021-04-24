@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-24 13:51+0200\n"
-"PO-Revision-Date: 2021-04-24 11:52+0000\n"
+"PO-Revision-Date: 2021-04-24 11:53+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
 "core/nb_NO/>\n"
@@ -329,7 +329,7 @@ msgstr "Opplåst på mindre enn 500 ms"
 #. The user finished the tutorial. Yay!
 #: assets/settings.ui:2112
 msgid "Congratulations!"
-msgstr "Gratulerer."
+msgstr "Gratulerer!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: assets/settings.ui:2130
