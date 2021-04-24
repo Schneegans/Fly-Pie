@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Fly-Pie 5\n"
+"Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 20:16+0200\n"
+"POT-Creation-Date: 2021-04-24 13:39+0200\n"
 "PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -77,57 +77,57 @@ msgstr ""
 msgid "Sponsors"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:570
 msgid "Linear"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:574
 msgid "Ease"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:578
 msgid "Ease-In"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:582
 msgid "Ease-Out"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:586
 msgid "Ease-In-Out"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:590
 msgid "Ease-In-Quad"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:594
 msgid "Ease-Out-Quad"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:598
 msgid "Ease-In-Out-Quad"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:602
 msgid "Ease-In-Back"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:606
 msgid "Ease-Out-Back"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:610
 msgid "Ease-In-Out-Back"
 msgstr ""
@@ -156,40 +156,31 @@ msgid ""
 "Can be added to custom menus."
 msgstr ""
 
-#: assets/settings.ui:1047
+#: assets/settings.ui:1025
 msgid "Initializes the settings below to random values"
 msgstr ""
 
-#: assets/settings.ui:1073
+#: assets/settings.ui:1051
 msgid "Generate Random Preset"
 msgstr ""
 
-#: assets/settings.ui:1092
-msgid "Standard"
-msgstr ""
-
-#. Refers to reward presets
-#: assets/settings.ui:1112
-msgid "Rewards"
-msgstr ""
-
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
-#: assets/settings.ui:1178
+#: assets/settings.ui:1122
 msgid "Enable Animations"
 msgstr ""
 
-#: assets/settings.ui:1205
+#: assets/settings.ui:1149
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
 msgstr ""
 
-#: assets/settings.ui:1329
+#: assets/settings.ui:1273
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
 
-#: assets/settings.ui:1346
+#: assets/settings.ui:1290
 msgid ""
 "• Use your <b>left mouse button to select items</b>.\n"
 "• Use your <b>right mouse button to close the menu</b>.\n"
@@ -199,23 +190,23 @@ msgid ""
 msgstr ""
 
 #. The text of the big tutorial button.
-#: assets/settings.ui:1376 assets/settings.ui:1493 assets/settings.ui:1616
-#: assets/settings.ui:1865 assets/settings.ui:1988
+#: assets/settings.ui:1320 assets/settings.ui:1437 assets/settings.ui:1560
+#: assets/settings.ui:1809 assets/settings.ui:1932
 msgid "<big><b>Open the example menu!</b></big>"
 msgstr ""
 
 #. This is a heading.
-#: assets/settings.ui:1412
+#: assets/settings.ui:1356
 msgid "You can click anywhere!"
 msgstr ""
 
-#: assets/settings.ui:1445
+#: assets/settings.ui:1389
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
 msgstr ""
 
-#: assets/settings.ui:1463
+#: assets/settings.ui:1407
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -226,11 +217,11 @@ msgid ""
 msgstr ""
 
 #. This is a heading.
-#: assets/settings.ui:1530
+#: assets/settings.ui:1474
 msgid "Practice Session I"
 msgstr ""
 
-#: assets/settings.ui:1546
+#: assets/settings.ui:1490
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
 "select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
@@ -241,43 +232,43 @@ msgid ""
 msgstr ""
 
 #. ms = milliseconds
-#: assets/settings.ui:1571
+#: assets/settings.ui:1515
 msgid "<big>Last selection time: <b>- ms</b></big>"
 msgstr ""
 
 #. ms = milliseconds
-#: assets/settings.ui:1586
+#: assets/settings.ui:1530
 msgid "<big>Best selection time: <b>- ms</b></big>"
 msgstr ""
 
 #. ms = milliseconds
-#: assets/settings.ui:1662
+#: assets/settings.ui:1606
 msgid "Unlocked at less than 3000 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: assets/settings.ui:1702
+#: assets/settings.ui:1646
 msgid "Unlocked at less than 2000 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: assets/settings.ui:1748 assets/settings.ui:2032
+#: assets/settings.ui:1692 assets/settings.ui:1976
 msgid "Unlocked at less than 1000 ms"
 msgstr ""
 
 #. This is a heading.
-#: assets/settings.ui:1785
+#: assets/settings.ui:1729
 msgid "The Marking Mode of Fly-Pie"
 msgstr ""
 
-#: assets/settings.ui:1818
+#: assets/settings.ui:1762
 msgid ""
 "The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
 
-#: assets/settings.ui:1835
+#: assets/settings.ui:1779
 msgid ""
 "Try remembering the path to an item. Open the menu and <b>draw the path with "
 "your mouse</b>. You can start with individual segments of the path, put you "
@@ -291,11 +282,11 @@ msgid ""
 msgstr ""
 
 #. This is a heading.
-#: assets/settings.ui:1902
+#: assets/settings.ui:1846
 msgid "Practice Session II"
 msgstr ""
 
-#: assets/settings.ui:1918
+#: assets/settings.ui:1862
 msgid ""
 "Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
 "However, as you now learned about the Marking Mode, the time required to get "
@@ -306,22 +297,22 @@ msgid ""
 msgstr ""
 
 #. ms = milliseconds
-#: assets/settings.ui:2071
+#: assets/settings.ui:2015
 msgid "Unlocked at less than 750 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: assets/settings.ui:2117
+#: assets/settings.ui:2061
 msgid "Unlocked at less than 500 ms"
 msgstr ""
 
 #. The user finished the tutorial. Yay!
-#: assets/settings.ui:2168
+#: assets/settings.ui:2112
 msgid "Congratulations!"
 msgstr ""
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
-#: assets/settings.ui:2186
+#: assets/settings.ui:2130
 msgid ""
 "Congratulations! If you managed to unlock most of the medals, you will be "
 "using Fly-Pie like a master Pielot!\n"
@@ -340,460 +331,460 @@ msgid ""
 msgstr ""
 
 #. Button for tutorial navigation. Goes back one page.
-#: assets/settings.ui:2257
+#: assets/settings.ui:2201
 msgid "Previous"
 msgstr ""
 
 #. Button for tutorial navigation. Goes to the next page.
-#: assets/settings.ui:2422
+#: assets/settings.ui:2366
 msgid "Next"
 msgstr ""
 
 #. Caption of the tutorial page in the window's titlebar.
-#: assets/settings.ui:2448
+#: assets/settings.ui:2392
 msgid "Tutorial"
 msgstr ""
 
-#: assets/settings.ui:2525
+#: assets/settings.ui:2469
 msgid "Animation Duration"
 msgstr ""
 
-#: assets/settings.ui:2543
+#: assets/settings.ui:2487
 msgid "Global Scaling"
 msgstr ""
 
 #. Please keep this short!
-#: assets/settings.ui:2555
+#: assets/settings.ui:2499
 msgid "Independent of the preset."
 msgstr ""
 
-#: assets/settings.ui:2609 assets/settings.ui:2633 assets/settings.ui:2774
-#: assets/settings.ui:2798 assets/settings.ui:2821 assets/settings.ui:2844
-#: assets/settings.ui:3659 assets/settings.ui:3682 assets/settings.ui:3706
-#: assets/settings.ui:3730 assets/settings.ui:3836 assets/settings.ui:3941
-#: assets/settings.ui:4750 assets/settings.ui:4975 assets/settings.ui:4998
-#: assets/settings.ui:5022 assets/settings.ui:5046 assets/settings.ui:5070
-#: assets/settings.ui:5161 assets/settings.ui:5245 assets/settings.ui:5748
-#: assets/settings.ui:5912 assets/settings.ui:5936 assets/settings.ui:5960
-#: assets/settings.ui:6021 assets/settings.ui:6323 assets/settings.ui:6347
-#: assets/settings.ui:6371 assets/settings.ui:6636 assets/settings.ui:6660
-#: assets/settings.ui:6772 assets/settings.ui:6796 assets/settings.ui:6952
-#: assets/settings.ui:7158 assets/settings.ui:7249 assets/settings.ui:7339
-#: assets/settings.ui:7430 assets/settings.ui:7636 assets/settings.ui:7660
-#: assets/settings.ui:7745
+#: assets/settings.ui:2553 assets/settings.ui:2577 assets/settings.ui:2718
+#: assets/settings.ui:2742 assets/settings.ui:2765 assets/settings.ui:2788
+#: assets/settings.ui:3603 assets/settings.ui:3626 assets/settings.ui:3650
+#: assets/settings.ui:3674 assets/settings.ui:3780 assets/settings.ui:3885
+#: assets/settings.ui:4694 assets/settings.ui:4919 assets/settings.ui:4942
+#: assets/settings.ui:4966 assets/settings.ui:4990 assets/settings.ui:5014
+#: assets/settings.ui:5105 assets/settings.ui:5189 assets/settings.ui:5692
+#: assets/settings.ui:5856 assets/settings.ui:5880 assets/settings.ui:5904
+#: assets/settings.ui:5965 assets/settings.ui:6267 assets/settings.ui:6291
+#: assets/settings.ui:6315 assets/settings.ui:6580 assets/settings.ui:6604
+#: assets/settings.ui:6716 assets/settings.ui:6740 assets/settings.ui:6896
+#: assets/settings.ui:7102 assets/settings.ui:7193 assets/settings.ui:7283
+#: assets/settings.ui:7374 assets/settings.ui:7580 assets/settings.ui:7604
+#: assets/settings.ui:7689
 msgid "Reset to default value"
 msgstr ""
 
-#: assets/settings.ui:2690
+#: assets/settings.ui:2634
 msgid "Font"
 msgstr ""
 
-#: assets/settings.ui:2702
+#: assets/settings.ui:2646
 msgid "Text Color"
 msgstr ""
 
-#: assets/settings.ui:2716 assets/settings.ui:3800 assets/settings.ui:4844
-#: assets/settings.ui:5488
+#: assets/settings.ui:2660 assets/settings.ui:3744 assets/settings.ui:4788
+#: assets/settings.ui:5432
 msgid "Background Color"
 msgstr ""
 
-#: assets/settings.ui:2745
+#: assets/settings.ui:2689
 msgid "Pick Text Color"
 msgstr ""
 
-#: assets/settings.ui:2761
+#: assets/settings.ui:2705
 msgid "Pick Background Color"
 msgstr ""
 
-#: assets/settings.ui:2894 assets/settings.ui:2964
+#: assets/settings.ui:2838 assets/settings.ui:2908
 msgid "Global Appearance Settings"
 msgstr ""
 
-#: assets/settings.ui:2911
+#: assets/settings.ui:2855
 msgid "These settings affect all menu items."
 msgstr ""
 
-#: assets/settings.ui:2936
+#: assets/settings.ui:2880
 msgid "Animation Mode"
 msgstr ""
 
-#: assets/settings.ui:3029 assets/settings.ui:4570 assets/settings.ui:5655
-#: assets/settings.ui:6532
+#: assets/settings.ui:2973 assets/settings.ui:4514 assets/settings.ui:5599
+#: assets/settings.ui:6476
 msgid "Size"
 msgstr ""
 
-#: assets/settings.ui:3080 assets/settings.ui:3347
+#: assets/settings.ui:3024 assets/settings.ui:3291
 msgid "Pick Center Item Color"
 msgstr ""
 
-#: assets/settings.ui:3106 assets/settings.ui:3166 assets/settings.ui:3373
-#: assets/settings.ui:3433 assets/settings.ui:4253 assets/settings.ui:4325
-#: assets/settings.ui:4458 assets/settings.ui:4542
+#: assets/settings.ui:3050 assets/settings.ui:3110 assets/settings.ui:3317
+#: assets/settings.ui:3377 assets/settings.ui:4197 assets/settings.ui:4269
+#: assets/settings.ui:4402 assets/settings.ui:4486
 msgid "Saturation"
 msgstr ""
 
-#: assets/settings.ui:3126 assets/settings.ui:3178 assets/settings.ui:3393
-#: assets/settings.ui:3445 assets/settings.ui:4273 assets/settings.ui:4313
-#: assets/settings.ui:4478 assets/settings.ui:4530
+#: assets/settings.ui:3070 assets/settings.ui:3122 assets/settings.ui:3337
+#: assets/settings.ui:3389 assets/settings.ui:4217 assets/settings.ui:4257
+#: assets/settings.ui:4422 assets/settings.ui:4474
 msgid "Luminance"
 msgstr ""
 
-#: assets/settings.ui:3146 assets/settings.ui:3190 assets/settings.ui:3413
-#: assets/settings.ui:3457 assets/settings.ui:4293 assets/settings.ui:4337
-#: assets/settings.ui:4498 assets/settings.ui:4518
+#: assets/settings.ui:3090 assets/settings.ui:3134 assets/settings.ui:3357
+#: assets/settings.ui:3401 assets/settings.ui:4237 assets/settings.ui:4281
+#: assets/settings.ui:4442 assets/settings.ui:4462
 msgid "Opacity"
 msgstr ""
 
 #. Keep this very short! Try to use not more than six or seven letters.
 #. This is a label of the coloring type radio button group.
 #. Fixed = not changing dynamically
-#: assets/settings.ui:3215 assets/settings.ui:3300 assets/settings.ui:4165
-#: assets/settings.ui:4370 assets/settings.ui:5508 assets/settings.ui:5585
+#: assets/settings.ui:3159 assets/settings.ui:3244 assets/settings.ui:4109
+#: assets/settings.ui:4314 assets/settings.ui:5452 assets/settings.ui:5529
 msgid "Fixed"
 msgstr ""
 
 #. Keep this very short! Try to use not more than six or seven letters.
 #. This is a label of the coloring type radio button group.
 #. Auto = changing dynamically
-#: assets/settings.ui:3230 assets/settings.ui:3315 assets/settings.ui:4180
-#: assets/settings.ui:4385
+#: assets/settings.ui:3174 assets/settings.ui:3259 assets/settings.ui:4124
+#: assets/settings.ui:4329
 msgid "Auto"
 msgstr ""
 
-#: assets/settings.ui:3552 assets/settings.ui:4797
+#: assets/settings.ui:3496 assets/settings.ui:4741
 msgid "Icon Opacity"
 msgstr ""
 
-#: assets/settings.ui:3564 assets/settings.ui:3587 assets/settings.ui:3611
-#: assets/settings.ui:3635 assets/settings.ui:3917 assets/settings.ui:3991
-#: assets/settings.ui:4856 assets/settings.ui:4879 assets/settings.ui:4903
-#: assets/settings.ui:4927 assets/settings.ui:4951 assets/settings.ui:5221
-#: assets/settings.ui:5329 assets/settings.ui:5841 assets/settings.ui:5864
-#: assets/settings.ui:5888 assets/settings.ui:6069
+#: assets/settings.ui:3508 assets/settings.ui:3531 assets/settings.ui:3555
+#: assets/settings.ui:3579 assets/settings.ui:3861 assets/settings.ui:3935
+#: assets/settings.ui:4800 assets/settings.ui:4823 assets/settings.ui:4847
+#: assets/settings.ui:4871 assets/settings.ui:4895 assets/settings.ui:5165
+#: assets/settings.ui:5273 assets/settings.ui:5785 assets/settings.ui:5808
+#: assets/settings.ui:5832 assets/settings.ui:6013
 msgid "Copy left value to right side"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: assets/settings.ui:3754
+#: assets/settings.ui:3698
 msgid "With Hovered Child"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: assets/settings.ui:3770
+#: assets/settings.ui:3714
 msgid "Without Hovered Child"
 msgstr ""
 
-#: assets/settings.ui:3787 assets/settings.ui:5127
+#: assets/settings.ui:3731 assets/settings.ui:5071
 msgid "Icon Scale"
 msgstr ""
 
-#: assets/settings.ui:3871 assets/settings.ui:5209
+#: assets/settings.ui:3815 assets/settings.ui:5153
 msgid "Icon Crop"
 msgstr ""
 
-#: assets/settings.ui:3966 assets/settings.ui:5304 assets/settings.ui:6057
+#: assets/settings.ui:3910 assets/settings.ui:5248 assets/settings.ui:6001
 msgid "Background Image"
 msgstr ""
 
-#: assets/settings.ui:4020 assets/settings.ui:4080
+#: assets/settings.ui:3964 assets/settings.ui:4024
 msgid "Center Appearance"
 msgstr ""
 
-#: assets/settings.ui:4037
+#: assets/settings.ui:3981
 msgid "The center element shows the currently hovered child's name."
 msgstr ""
 
 #. Keep this very short! Try to use not more than six or seven letters.
 #. This is a label of the coloring type radio button group.
 #. Parent = use the parent's setting
-#: assets/settings.ui:4195 assets/settings.ui:4400 assets/settings.ui:5523
-#: assets/settings.ui:5600
+#: assets/settings.ui:4139 assets/settings.ui:4344 assets/settings.ui:5467
+#: assets/settings.ui:5544
 msgid "Parent"
 msgstr ""
 
-#: assets/settings.ui:4228 assets/settings.ui:4433
+#: assets/settings.ui:4172 assets/settings.ui:4377
 msgid "Pick Child Item Color"
 msgstr ""
 
-#: assets/settings.ui:4583 assets/settings.ui:5668
+#: assets/settings.ui:4527 assets/settings.ui:5612
 msgid "Offset"
 msgstr ""
 
 #. Draw above (grand)children items.
 #. There's an explanation string below in the application.
-#: assets/settings.ui:4704 assets/settings.ui:5791
+#: assets/settings.ui:4648 assets/settings.ui:5735
 msgid "Draw Above"
 msgstr ""
 
-#: assets/settings.ui:4716
+#: assets/settings.ui:4660
 msgid "Render children above the center item."
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: assets/settings.ui:5094 assets/settings.ui:5825
+#: assets/settings.ui:5038 assets/settings.ui:5769
 msgid "Standard State"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: assets/settings.ui:5110
+#: assets/settings.ui:5054
 msgid "Hovered State"
 msgstr ""
 
-#: assets/settings.ui:5358 assets/settings.ui:5419
+#: assets/settings.ui:5302 assets/settings.ui:5363
 msgid "Children Appearance"
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: assets/settings.ui:5375
+#: assets/settings.ui:5319
 msgid "Child items are styled differently when their wedge is hovered."
 msgstr ""
 
-#: assets/settings.ui:5556 assets/settings.ui:5633
+#: assets/settings.ui:5500 assets/settings.ui:5577
 msgid "Pick Grandchild Item Color"
 msgstr ""
 
-#: assets/settings.ui:5803
+#: assets/settings.ui:5747
 msgid "Render grandchildren above children items."
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: assets/settings.ui:5983
+#: assets/settings.ui:5927
 msgid "With Hovered Parent"
 msgstr ""
 
-#: assets/settings.ui:6122 assets/settings.ui:6182
+#: assets/settings.ui:6066 assets/settings.ui:6126
 msgid "Grandchildren Appearance"
 msgstr ""
 
-#: assets/settings.ui:6139
+#: assets/settings.ui:6083
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
 msgstr ""
 
-#: assets/settings.ui:6251
+#: assets/settings.ui:6195
 msgid "Thickness"
 msgstr ""
 
-#: assets/settings.ui:6264 assets/settings.ui:6585
+#: assets/settings.ui:6208 assets/settings.ui:6529
 msgid "Color"
 msgstr ""
 
-#: assets/settings.ui:6310
+#: assets/settings.ui:6254
 msgid "Pick Trace Color"
 msgstr ""
 
-#: assets/settings.ui:6400 assets/settings.ui:7069
+#: assets/settings.ui:6344 assets/settings.ui:7013
 msgid "Trace Appearance"
 msgstr ""
 
-#: assets/settings.ui:6417
+#: assets/settings.ui:6361
 msgid "The trace is the connecting line between selected menu items."
 msgstr ""
 
-#: assets/settings.ui:6443
+#: assets/settings.ui:6387
 msgid "Minimum Segment Length"
 msgstr ""
 
-#: assets/settings.ui:6477 assets/settings.ui:6999
+#: assets/settings.ui:6421 assets/settings.ui:6943
 msgid "Wedge Appearance"
 msgstr ""
 
 #. Keep the individual lines short (around 30 characters max)!
 #. You can use up to three lines if you want.
-#: assets/settings.ui:6545
+#: assets/settings.ui:6489
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr ""
 
-#: assets/settings.ui:6569
+#: assets/settings.ui:6513
 msgid "Wedge Separators"
 msgstr ""
 
-#: assets/settings.ui:6604 assets/settings.ui:6738
+#: assets/settings.ui:6548 assets/settings.ui:6682
 msgid "Width"
 msgstr ""
 
-#: assets/settings.ui:6686
+#: assets/settings.ui:6630
 msgid "Pick Wedge Separator Color"
 msgstr ""
 
-#: assets/settings.ui:6711
+#: assets/settings.ui:6655
 msgid "Wedge Color"
 msgstr ""
 
-#: assets/settings.ui:6823
+#: assets/settings.ui:6767
 msgid "Inner Radius"
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: assets/settings.ui:6867
+#: assets/settings.ui:6811
 msgid "Inactive"
 msgstr ""
 
 #. When the mouse pointer is over the item
-#: assets/settings.ui:6886
+#: assets/settings.ui:6830
 msgid "Hovered"
 msgstr ""
 
-#: assets/settings.ui:6909
+#: assets/settings.ui:6853
 msgid "Pick Wedge Color"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: assets/settings.ui:6924
+#: assets/settings.ui:6868
 msgid "Pick Hovered Wedge Color"
 msgstr ""
 
-#: assets/settings.ui:7016
+#: assets/settings.ui:6960
 msgid "Clicking inside a wedge will activate the corresponding item."
 msgstr ""
 
-#: assets/settings.ui:7109
+#: assets/settings.ui:7053
 msgid "Minimum Stroke Angle"
 msgstr ""
 
-#: assets/settings.ui:7121
+#: assets/settings.ui:7065
 msgid "Smaller turns will not lead to selections."
 msgstr ""
 
-#: assets/settings.ui:7198
+#: assets/settings.ui:7142
 msgid "Minimum Stroke Length"
 msgstr ""
 
-#: assets/settings.ui:7210
+#: assets/settings.ui:7154
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: assets/settings.ui:7289
+#: assets/settings.ui:7233
 msgid "Jitter Threshold"
 msgstr ""
 
-#: assets/settings.ui:7301
+#: assets/settings.ui:7245
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: assets/settings.ui:7379
+#: assets/settings.ui:7323
 msgid "Selection Timeout"
 msgstr ""
 
-#: assets/settings.ui:7391
+#: assets/settings.ui:7335
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
 msgstr ""
 
-#: assets/settings.ui:7481
+#: assets/settings.ui:7425
 msgid "Experimental Hover Mode"
 msgstr ""
 
-#: assets/settings.ui:7493
+#: assets/settings.ui:7437
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
 msgstr ""
 
-#: assets/settings.ui:7521 assets/settings.ui:7792
+#: assets/settings.ui:7465 assets/settings.ui:7736
 msgid "Advanced Settings"
 msgstr ""
 
-#: assets/settings.ui:7538
+#: assets/settings.ui:7482
 msgid "These settings are independent of the presets."
 msgstr ""
 
-#: assets/settings.ui:7579
+#: assets/settings.ui:7523
 msgid "Show Screencast Mouse"
 msgstr ""
 
-#: assets/settings.ui:7591
+#: assets/settings.ui:7535
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
 msgstr ""
 
-#: assets/settings.ui:7701
+#: assets/settings.ui:7645
 msgid "Achievement Notifications"
 msgstr ""
 
-#: assets/settings.ui:7713
+#: assets/settings.ui:7657
 msgid "Show a notification whenever you complete an achievement."
 msgstr ""
 
-#: assets/settings.ui:7851
+#: assets/settings.ui:7795
 msgid "Presets"
 msgstr ""
 
 #. Where presets are stored by default
-#: assets/settings.ui:7876
+#: assets/settings.ui:7820
 msgid "Load settings fom a file"
 msgstr ""
 
 #. Where presets are stored by default
-#: assets/settings.ui:7897
+#: assets/settings.ui:7841
 msgid "Save the current settings to a file"
 msgstr ""
 
-#: assets/settings.ui:7928
+#: assets/settings.ui:7872
 msgid "Open Live Preview Menu"
 msgstr ""
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: assets/settings.ui:7954
+#: assets/settings.ui:7898
 msgid "Live Preview"
 msgstr ""
 
 #. Caption of the settings page in the window's titlebar.
-#: assets/settings.ui:7990
+#: assets/settings.ui:7934
 msgid "Settings"
 msgstr ""
 
-#: assets/settings.ui:8066
+#: assets/settings.ui:8010
 msgid "Removes the selected item."
 msgstr ""
 
-#: assets/settings.ui:8099
+#: assets/settings.ui:8043
 msgid "Imports a menu configuration."
 msgstr ""
 
-#: assets/settings.ui:8120
+#: assets/settings.ui:8064
 msgid "Exports the current menu configuration."
 msgstr ""
 
-#: assets/settings.ui:8154
+#: assets/settings.ui:8098
 msgid "Opens a preview for the selected menu."
 msgstr ""
 
-#: assets/settings.ui:8254 assets/settings.ui:8291
+#: assets/settings.ui:8198 assets/settings.ui:8235
 msgid "Name"
 msgstr ""
 
-#: assets/settings.ui:8289 assets/settings.ui:8290 assets/settings.ui:8387
-#: assets/settings.ui:8388
+#: assets/settings.ui:8233 assets/settings.ui:8234 assets/settings.ui:8331
+#: assets/settings.ui:8332
 msgid "Insert Emoji"
 msgstr ""
 
-#: assets/settings.ui:8324 assets/settings.ui:8389
+#: assets/settings.ui:8268 assets/settings.ui:8333
 msgid "Icon"
 msgstr ""
 
-#: assets/settings.ui:8337
+#: assets/settings.ui:8281
 msgid "Can be an icon name, text, emoji or a file."
 msgstr ""
 
-#: assets/settings.ui:8438 src/prefs/MenuEditorPage.js:368
+#: assets/settings.ui:8382 src/prefs/MenuEditorPage.js:368
 msgid "Fixed Angle"
 msgstr ""
 
-#: assets/settings.ui:8451
+#: assets/settings.ui:8395
 msgid "See tooltip for details."
 msgstr ""
 
-#: assets/settings.ui:8474
+#: assets/settings.ui:8418
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -809,39 +800,39 @@ msgid ""
 "<b>Use -1 to disable this feature</b>."
 msgstr ""
 
-#: assets/settings.ui:8532 src/common/actions/Shortcut.js:78
+#: assets/settings.ui:8476 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
 msgstr ""
 
-#: assets/settings.ui:8545
+#: assets/settings.ui:8489
 msgid "This will open the menu."
 msgstr ""
 
-#: assets/settings.ui:8585
+#: assets/settings.ui:8529
 msgid "Open in Screen Center"
 msgstr ""
 
 #. Caption of the menu editor page in the window's titlebar.
-#: assets/settings.ui:8695
+#: assets/settings.ui:8639
 msgid "Menu Editor"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: assets/settings.ui:8973
+#: assets/settings.ui:8917
 msgid "In Progress"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: assets/settings.ui:9001
+#: assets/settings.ui:8945
 msgid "Completed"
 msgstr ""
 
-#: assets/settings.ui:9054
+#: assets/settings.ui:8998
 msgid "Reset all achievements."
 msgstr ""
 
 #. Caption of the achievements page in the window's titlebar.
-#: assets/settings.ui:9083
+#: assets/settings.ui:9027
 msgid "Achievements"
 msgstr ""
 
