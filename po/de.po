@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-24 13:39+0200\n"
-"PO-Revision-Date: 2021-03-29 13:19+0200\n"
-"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2021-04-24 11:52+0000\n"
+"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: assets/settings.ui:66
 msgid ""
@@ -99,52 +100,52 @@ msgstr "Linear"
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:574
 msgid "Ease"
-msgstr ""
+msgstr "Ease"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:578
 msgid "Ease-In"
-msgstr ""
+msgstr "Ease-In"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:582
 msgid "Ease-Out"
-msgstr ""
+msgstr "Ease-Out"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:586
 msgid "Ease-In-Out"
-msgstr ""
+msgstr "Ease-In-Out"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:590
 msgid "Ease-In-Quad"
-msgstr ""
+msgstr "Ease-In-Quad"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:594
 msgid "Ease-Out-Quad"
-msgstr ""
+msgstr "Ease-Out-Quad"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:598
 msgid "Ease-In-Out-Quad"
-msgstr ""
+msgstr "Ease-In-Out-Quad"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:602
 msgid "Ease-In-Back"
-msgstr ""
+msgstr "Ease-In-Back"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:606
 msgid "Ease-Out-Back"
-msgstr ""
+msgstr "Ease-Out-Back"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:610
 msgid "Ease-In-Out-Back"
-msgstr ""
+msgstr "Ease-In-Out-Back"
 
 #. Tab title of the icon-select-popover.
 #: assets/settings.ui:789
@@ -799,10 +800,8 @@ msgstr ""
 "ihn verwenden, wenn Sie Videos von Fly-Pie zu erstellen."
 
 #: assets/settings.ui:7645
-#, fuzzy
-#| msgid "Achievements"
 msgid "Achievement Notifications"
-msgstr "Erfolge"
+msgstr "Erfolgsbenachrichtigungen"
 
 #: assets/settings.ui:7657
 msgid "Show a notification whenever you complete an achievement."
@@ -934,10 +933,8 @@ msgid "Completed"
 msgstr ""
 
 #: assets/settings.ui:8998
-#, fuzzy
-#| msgid "Achievements"
 msgid "Reset all achievements."
-msgstr "Erfolge"
+msgstr "Alle Erfolge zurücksetzen."
 
 #. Caption of the achievements page in the window's titlebar.
 #: assets/settings.ui:9027
