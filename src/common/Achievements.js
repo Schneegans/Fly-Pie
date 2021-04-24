@@ -653,7 +653,7 @@ var Achievements = GObject.registerClass(
           achievements.set('bigmenus' + i, {
             // Translators: The name of the 'Create %x items in the menu editor.'
             // achievement.
-            name: formatName(_('There Should Be No More Than Twelve Items...? %i'), i),
+            name: formatName(_('There Should Be No More Than Twelve Items…? %i'), i),
             description: _('Create %x items in the menu editor.')
                              .replace('%x', BASE_RANGES[i + 1] / 2),
             bgImage: bgImages[i],
