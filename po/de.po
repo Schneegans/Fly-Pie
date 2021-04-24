@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 13:39+0200\n"
+"POT-Creation-Date: 2021-04-24 13:51+0200\n"
 "PO-Revision-Date: 2021-04-24 11:52+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
-"\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
+">\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1211,7 +1211,7 @@ msgstr "Exportierte Menükonfigurationen"
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
 #: src/common/Achievements.js:656
-msgid "There Should Be No More Than Twelve Items...? %i"
+msgid "There Should Be No More Than Twelve Items…? %i"
 msgstr ""
 
 #: src/common/Achievements.js:657
@@ -2422,16 +2422,22 @@ msgid "Suspend"
 msgstr "Ruhezustand"
 
 #: src/common/menus/System.js:99
-msgid "Switch User..."
-msgstr "Nutzer wechseln..."
+msgid "Switch User…"
+msgstr ""
 
 #: src/common/menus/System.js:108
 msgid "Log Out"
 msgstr "Abmelden"
 
 #: src/common/menus/System.js:117
-msgid "Power Off..."
-msgstr "Ausschalten..."
+msgid "Power Off…"
+msgstr ""
+
+#~ msgid "Switch User..."
+#~ msgstr "Nutzer wechseln..."
+
+#~ msgid "Power Off..."
+#~ msgstr "Ausschalten..."
 
 #~ msgid "Standard"
 #~ msgstr "Standard"

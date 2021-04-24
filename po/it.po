@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 13:39+0200\n"
+"POT-Creation-Date: 2021-04-24 13:51+0200\n"
 "PO-Revision-Date: 2020-12-26 15:16+0100\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Albano Battistella <albano_battistella@hotmail.com>\n"
@@ -1227,7 +1227,7 @@ msgstr "Importa una configurazione del menu."
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
 #: src/common/Achievements.js:656
-msgid "There Should Be No More Than Twelve Items...? %i"
+msgid "There Should Be No More Than Twelve Items…? %i"
 msgstr ""
 
 #: src/common/Achievements.js:657
@@ -2445,16 +2445,22 @@ msgid "Suspend"
 msgstr "Sospendi"
 
 #: src/common/menus/System.js:99
-msgid "Switch User..."
-msgstr "Cambia utente..."
+msgid "Switch User…"
+msgstr ""
 
 #: src/common/menus/System.js:108
 msgid "Log Out"
 msgstr "Disconnetti"
 
 #: src/common/menus/System.js:117
-msgid "Power Off..."
-msgstr "Spegni..."
+msgid "Power Off…"
+msgstr ""
+
+#~ msgid "Switch User..."
+#~ msgstr "Cambia utente..."
+
+#~ msgid "Power Off..."
+#~ msgstr "Spegni..."
 
 #, fuzzy
 #~| msgid "Standard State"

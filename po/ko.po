@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 13:39+0200\n"
+"POT-Creation-Date: 2021-04-24 13:51+0200\n"
 "PO-Revision-Date: 2021-04-24 11:21+0000\n"
 "Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/"
@@ -1093,7 +1093,7 @@ msgstr ""
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
 #: src/common/Achievements.js:656
-msgid "There Should Be No More Than Twelve Items...? %i"
+msgid "There Should Be No More Than Twelve Items…? %i"
 msgstr ""
 
 #: src/common/Achievements.js:657
@@ -2228,7 +2228,7 @@ msgid "Suspend"
 msgstr ""
 
 #: src/common/menus/System.js:99
-msgid "Switch User..."
+msgid "Switch User…"
 msgstr ""
 
 #: src/common/menus/System.js:108
@@ -2236,5 +2236,5 @@ msgid "Log Out"
 msgstr ""
 
 #: src/common/menus/System.js:117
-msgid "Power Off..."
+msgid "Power Off…"
 msgstr ""
