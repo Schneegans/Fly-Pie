@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-24 14:05+0200\n"
-"PO-Revision-Date: 2021-04-24 11:53+0000\n"
+"PO-Revision-Date: 2021-04-26 10:36+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
 "core/nb_NO/>\n"
@@ -1191,7 +1191,7 @@ msgstr ""
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:135
 msgid "You reached level %i!"
-msgstr "Du har nådd nivå %i."
+msgstr "Du har nådd nivå %i!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:155
@@ -1804,9 +1804,8 @@ msgid "Import"
 msgstr "Importer"
 
 #: src/prefs/MenuEditorPage.js:323
-#, fuzzy
 msgid "Failed to import menu configuration!"
-msgstr "Klarte ikke å importere menyoppsett."
+msgstr "Klarte ikke å importere menyoppsett!"
 
 #: src/prefs/MenuEditorPage.js:353
 msgid "Menu Structure"
@@ -1903,9 +1902,8 @@ msgid "Load"
 msgstr "Last inn"
 
 #: src/prefs/SettingsPage.js:393
-#, fuzzy
 msgid "Failed to load preset!"
-msgstr "Klarte ikke å laste inn forhåndsinnstilling."
+msgstr "Klarte ikke å laste inn forhåndsinnstilling!"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:168
