@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 13:51+0200\n"
+"POT-Creation-Date: 2021-04-24 14:05+0200\n"
 "PO-Revision-Date: 2021-04-23 15:14+0000\n"
 "Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
 "Language-Team: Sinhala <https://hosted.weblate.org/projects/fly-pie/core/si/"
@@ -838,308 +838,307 @@ msgstr ""
 msgid "Achievements"
 msgstr ""
 
-#. Translators: Most achievements have five tiers. In these cases, you can use
-#. a %i and / or a %s in the achievement's name. In english, %i will be
-#. replaced by the corresponding roman tier number (I, II, III, ...) and %s
-#. will be replaced by one of the attributes ('Novice', 'Master', ...). Both
-#. of these can be translated as well, so you may get quite creative here :).
-#. 'Novice' is the tier I attribute. This will be inserted for each %s in the
-#. achievement titles.
-#: src/common/Achievements.js:371
+#. Translators: This is the tier 1 attribute which will be inserted for each %s
+#. in the achievement titles.
+#: src/common/Achievements.js:366
 msgid "Novice"
 msgstr ""
 
-#. Translators: This is the tier 2 attribute.
-#: src/common/Achievements.js:373
+#. Translators: This is the tier 2 attribute which will be inserted for each %s
+#. in the achievement titles.
+#: src/common/Achievements.js:369
 msgid "Capable"
 msgstr ""
 
-#. Translators: This is the tier 3 attribute.
-#: src/common/Achievements.js:375
+#. Translators: This is the tier 3 attribute which will be inserted for each %s
+#. in the achievement titles.
+#: src/common/Achievements.js:372
 msgid "Skilled"
 msgstr ""
 
-#. Translators: This is the tier 4 attribute.
-#: src/common/Achievements.js:377
+#. Translators: This is the tier 4 attribute which will be inserted for each %s
+#. in the achievement titles.
+#: src/common/Achievements.js:375
 msgid "Expert"
 msgstr ""
 
-#. Translators: This is the tier 5 attribute.
-#: src/common/Achievements.js:379
+#. Translators: This is the tier 5 attribute which will be inserted for each %s
+#. in the achievement titles.
+#: src/common/Achievements.js:378
 msgid "Master"
 msgstr ""
 
-#. Translators: Most achievements have five tiers. In these cases, you can use a
-#. %i and / or a %s in the achievement's name. In english, %i will be replaced
-#. by the corresponding roman tier number (I, II, III, ...) and %s will be
-#. replaced by one of the attributes ('Novice', 'Master', ...). Both of these
-#. can be translated as well, so you may get quite creative here :). This 'I' is
-#. the roman number 1 which is replaces any %i in achievement names.
-#: src/common/Achievements.js:389
+#. Translators: This is the tier 2 number which will be inserted for each %i in
+#. the achievement titles.
+#: src/common/Achievements.js:384
 msgid "I"
 msgstr ""
 
-#. Translators: This is the tier 2 number.
-#: src/common/Achievements.js:391
+#. Translators: This is the tier 2 number which will be inserted for each %i in
+#. the achievement titles.
+#: src/common/Achievements.js:387
 msgid "II"
 msgstr ""
 
-#. Translators: This is the tier 3 number.
-#: src/common/Achievements.js:393
+#. Translators: This is the tier 3 number which will be inserted for each %i in
+#. the achievement titles.
+#: src/common/Achievements.js:390
 msgid "III"
 msgstr ""
 
-#. Translators: This is the tier 4 number.
-#: src/common/Achievements.js:395
+#. Translators: This is the tier 4 number which will be inserted for each %i in
+#. the achievement titles.
+#: src/common/Achievements.js:393
 msgid "IV"
 msgstr ""
 
-#. Translators: This is the tier 5 number.
-#: src/common/Achievements.js:397
+#. Translators: This is the tier 5 number which will be inserted for each %i in
+#. the achievement titles.
+#: src/common/Achievements.js:396
 msgid "V"
 msgstr ""
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
-#: src/common/Achievements.js:413
+#: src/common/Achievements.js:412
 #, javascript-format
 msgid "%s Cancellor"
 msgstr ""
 
-#: src/common/Achievements.js:415
+#: src/common/Achievements.js:414
 #, javascript-format
 msgid "Abort a selection %x times."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items.' achievement.
-#: src/common/Achievements.js:428
+#: src/common/Achievements.js:427
 #, javascript-format
 msgid "%s Pielot"
 msgstr ""
 
-#: src/common/Achievements.js:429
+#: src/common/Achievements.js:428
 #, javascript-format
 msgid "Select %x items."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:443
+#: src/common/Achievements.js:442
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:446
+#: src/common/Achievements.js:445
 #, javascript-format
 msgid "%s Submenu Gesture-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:449
+#: src/common/Achievements.js:448
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
 msgstr ""
 
-#: src/common/Achievements.js:455
+#: src/common/Achievements.js:454
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:472
+#: src/common/Achievements.js:471
 #, javascript-format
 msgid "%s Toplevel Click-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:475
+#: src/common/Achievements.js:474
 #, javascript-format
 msgid "%s Submenu Click-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:478
+#: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
 msgstr ""
 
-#: src/common/Achievements.js:484
+#: src/common/Achievements.js:483
 #, javascript-format
 msgid "Select %x items at depth %d with mouse clicks."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 1 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:506
+#: src/common/Achievements.js:505
 #, javascript-format
 msgid "%s Toplevel Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 2 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:509
+#: src/common/Achievements.js:508
 #, javascript-format
 msgid "%s Submenu Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 3 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:512
+#: src/common/Achievements.js:511
 #, javascript-format
 msgid "%s Subsubmenu Selector"
 msgstr ""
 
-#: src/common/Achievements.js:523
+#: src/common/Achievements.js:522
 msgid "Select %x items at depth %d in less than %t milliseconds."
 msgstr ""
 
 #. Translators: The name of the 'Open the settings dialog %x times.'
 #. achievement.
-#: src/common/Achievements.js:543
+#: src/common/Achievements.js:542
 msgid "The Journey Is The Reward %i"
 msgstr ""
 
-#: src/common/Achievements.js:544
+#: src/common/Achievements.js:543
 #, javascript-format
 msgid "Open the settings dialog %x times."
 msgstr ""
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
-#: src/common/Achievements.js:559
+#: src/common/Achievements.js:558
 msgid "Nerd Alert %i"
 msgstr ""
 
-#: src/common/Achievements.js:560
+#: src/common/Achievements.js:559
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
 msgstr ""
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
-#: src/common/Achievements.js:574
+#: src/common/Achievements.js:573
 msgid "Entropie %i"
 msgstr ""
 
-#: src/common/Achievements.js:576
+#: src/common/Achievements.js:575
 #, javascript-format
 msgid "Generate %x random presets."
 msgstr ""
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
-#: src/common/Achievements.js:589
+#: src/common/Achievements.js:588
 #, javascript-format
 msgid "%s Preset Exporter"
 msgstr ""
 
-#: src/common/Achievements.js:591
+#: src/common/Achievements.js:590
 msgid "Export a custom preset."
 msgstr ""
 
-#: src/common/Achievements.js:592
+#: src/common/Achievements.js:591
 #, javascript-format
 msgid "Export %x custom presets."
 msgstr ""
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
-#: src/common/Achievements.js:605
+#: src/common/Achievements.js:604
 #, javascript-format
 msgid "%s Preset Importer"
 msgstr ""
 
-#: src/common/Achievements.js:607
+#: src/common/Achievements.js:606
 msgid "Import a custom preset."
 msgstr ""
 
-#: src/common/Achievements.js:608
+#: src/common/Achievements.js:607
 #, javascript-format
 msgid "Import %x custom presets."
 msgstr ""
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
-#: src/common/Achievements.js:621
+#: src/common/Achievements.js:620
 #, javascript-format
 msgid "%s Menu Importer"
 msgstr ""
 
-#: src/common/Achievements.js:623
+#: src/common/Achievements.js:622
 msgid "Import a menu configuration."
 msgstr ""
 
-#: src/common/Achievements.js:624
+#: src/common/Achievements.js:623
 #, javascript-format
 msgid "Import %x menu configurations."
 msgstr ""
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
-#: src/common/Achievements.js:638
+#: src/common/Achievements.js:637
 #, javascript-format
 msgid "%s Menu Exporter"
 msgstr ""
 
-#: src/common/Achievements.js:640
+#: src/common/Achievements.js:639
 msgid "Export a menu configuration."
 msgstr ""
 
-#: src/common/Achievements.js:641
+#: src/common/Achievements.js:640
 #, javascript-format
 msgid "Export %x menu configurations."
 msgstr ""
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
-#: src/common/Achievements.js:656
+#: src/common/Achievements.js:655
 msgid "There Should Be No More Than Twelve Items…? %i"
 msgstr ""
 
-#: src/common/Achievements.js:657
+#: src/common/Achievements.js:656
 #, javascript-format
 msgid "Create %x items in the menu editor."
 msgstr ""
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:671
+#: src/common/Achievements.js:670
 msgid "Grumpie Rookie"
 msgstr ""
 
-#: src/common/Achievements.js:672
+#: src/common/Achievements.js:671
 #, javascript-format
 msgid "Open the tutorial menu %x times."
 msgstr ""
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:684
+#: src/common/Achievements.js:683
 msgid "Bachelor Pielot"
 msgstr ""
 
-#: src/common/Achievements.js:685
+#: src/common/Achievements.js:684
 msgid "Get all medals of the tutorial."
 msgstr ""
 
 #. Translators: The name of the hidden 'Delete all of your menus.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:697
+#: src/common/Achievements.js:696
 msgid "Say Good-Pie!"
 msgstr ""
 
-#: src/common/Achievements.js:698
+#: src/common/Achievements.js:697
 msgid "Delete all of your menus."
 msgstr ""
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
 #. achievement.
-#: src/common/Achievements.js:711
+#: src/common/Achievements.js:710
 msgid "That's Philanthropie!"
 msgstr ""
 
-#: src/common/Achievements.js:712
+#: src/common/Achievements.js:711
 msgid "Consider becoming a sponsor of Fly-Pie."
 msgstr ""
 
