@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-24 14:05+0200\n"
 "PO-Revision-Date: 2021-04-26 10:36+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
 "\n"
 "Language: de\n"
@@ -573,6 +573,7 @@ msgstr "Erscheinungsbild des zentralen Elements"
 #: assets/settings.ui:3981
 msgid "The center element shows the currently hovered child's name."
 msgstr ""
+"Das zentrale Element zeigt den Namen des aktuell überfahrenen Kindelements."
 
 #. Keep this very short! Try to use not more than six or seven letters.
 #. This is a label of the coloring type radio button group.
@@ -617,7 +618,7 @@ msgstr "Erscheinungsbild der Kindelemente"
 #. When the mouse pointer is NOT over the item
 #: assets/settings.ui:5319
 msgid "Child items are styled differently when their wedge is hovered."
-msgstr ""
+msgstr "Kindelemente werden anders dargestellt, wenn ihr Rand überfahren wird."
 
 #: assets/settings.ui:5500 assets/settings.ui:5577
 msgid "Pick Grandchild Item Color"
@@ -640,7 +641,7 @@ msgstr "Erscheinungsbild der Enkelelemente"
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
-msgstr ""
+msgstr "Enkelemente werden anders dargestellt, wenn ihr Rand überfahren wird."
 
 #: assets/settings.ui:6195
 msgid "Thickness"
@@ -805,7 +806,7 @@ msgstr "Erfolgsbenachrichtigungen"
 
 #: assets/settings.ui:7657
 msgid "Show a notification whenever you complete an achievement."
-msgstr ""
+msgstr "Beim Abschließen einer Errungenschaft eine Benachrichtigung anzeigen."
 
 #: assets/settings.ui:7795
 msgid "Presets"
@@ -924,13 +925,14 @@ msgstr "Menü-Editor"
 
 #. One of the buttons on the bottom of the achievements page.
 #: assets/settings.ui:8917
+#, fuzzy
 msgid "In Progress"
-msgstr ""
+msgstr "In Bearbeitung"
 
 #. One of the buttons on the bottom of the achievements page.
 #: assets/settings.ui:8945
 msgid "Completed"
-msgstr ""
+msgstr "Abgeschlossen"
 
 #: assets/settings.ui:8998
 msgid "Reset all achievements."
@@ -944,10 +946,8 @@ msgstr "Erfolge"
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:366
-#, fuzzy
-#| msgid "Devices"
 msgid "Novice"
-msgstr "Geräte"
+msgstr "Novize"
 
 #. Translators: This is the tier 2 attribute which will be inserted for each %s
 #. in the achievement titles.
@@ -976,34 +976,32 @@ msgstr "Meister"
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:384
-#, fuzzy
-#| msgid "ID"
 msgid "I"
-msgstr "ID"
+msgstr "I"
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:387
 msgid "II"
-msgstr ""
+msgstr "II"
 
 #. Translators: This is the tier 3 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:390
 msgid "III"
-msgstr ""
+msgstr "III"
 
 #. Translators: This is the tier 4 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:393
 msgid "IV"
-msgstr ""
+msgstr "IV"
 
 #. Translators: This is the tier 5 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:396
 msgid "V"
-msgstr ""
+msgstr "V"
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
 #: src/common/Achievements.js:412
@@ -1149,12 +1147,12 @@ msgstr ""
 
 #: src/common/Achievements.js:590
 msgid "Export a custom preset."
-msgstr ""
+msgstr "Eine benutzerdefinierte Voreinstellung exportieren."
 
 #: src/common/Achievements.js:591
 #, javascript-format
 msgid "Export %x custom presets."
-msgstr ""
+msgstr "%x benutzerdefinierte Voreinstellungen exportieren."
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
 #: src/common/Achievements.js:604
