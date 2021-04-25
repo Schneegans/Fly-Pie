@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-24 14:05+0200\n"
-"PO-Revision-Date: 2021-04-24 11:52+0000\n"
-"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
-">\n"
+"PO-Revision-Date: 2021-04-26 10:36+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +48,7 @@ msgstr ""
 
 #: assets/settings.ui:99
 msgid "About"
-msgstr "Info"
+msgstr "Über"
 
 #: assets/settings.ui:125
 msgid "Created by"
@@ -86,7 +86,7 @@ msgid ""
 msgstr ""
 "💕️ Möchten Sie zeigen, wie sehr Ihnen Fly-Pie gefällt?\n"
 "<a href=\"https://github.com/sponsors/Schneegans\">Werden Sie ein "
-"Unterstützer - für nur $1 / Monat!</a>"
+"Unterstützer für nur 1 $/ Monat!</a>"
 
 #: assets/settings.ui:365
 msgid "Sponsors"
@@ -272,11 +272,11 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!"
 msgstr ""
-"Öffnen Sie für diese Übung das Beispielmenü und wählen Sie \"Törtchen\" (🍔 🠚 "
-"🍭 🠚 🍰) so schnell wie möglich. Können Sie die Goldmedaille freischalten?\n"
+"Öffnen Sie für diese Übung das Beispielmenü und wählen Sie „Törtchen“ (🍔 🠚 🍭 "
+"🠚 🍰) so schnell wie möglich. Können Sie die Goldmedaille freischalten?\n"
 "\n"
 "Wenn Sie mit Ihrem Ergebnis zufrieden sind, klicken Sie auf <b>Weiter</b> um "
-"etwas über den \"Marking Mode\" von Fly-Pie zu erfahren!"
+"etwas über den Markierungsmodus von Fly-Pie zu erfahren!"
 
 #. ms = milliseconds
 #: assets/settings.ui:1515
@@ -306,7 +306,7 @@ msgstr "Freigeschaltet bei weniger als 1000 ms"
 #. This is a heading.
 #: assets/settings.ui:1729
 msgid "The Marking Mode of Fly-Pie"
-msgstr "Der \"Marking Mode\" von Fly-Pie"
+msgstr "Der Markierungsmodus von Fly-Pie"
 
 #: assets/settings.ui:1762
 msgid ""
@@ -314,8 +314,8 @@ msgid ""
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
-"Der <b>\"Marking Mode\"</b> von Fly-Pie erlaubt Ihnen die <b>Auswahl durch "
-"Gesten</b>! Um den \"Marking Mode\" zu verwenden, klicken und ziehen Sie ein "
+"Der <b>Markierungsmodus</b> von Fly-Pie erlaubt Ihnen die <b>Auswahl durch "
+"Gesten</b>! Um den Markierungsmodus zu verwenden, klicken und ziehen Sie ein "
 "Menüelement. Sobald Sie die Bewegung pausieren oder eine Kurve beschreiben, "
 "wird das gewählte Element ausgewählt."
 
@@ -355,9 +355,9 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn some final "
 "tips and tricks!"
 msgstr ""
-"Wählen Sie wieder so schnell wie möglich \"Törtchen\" (🍔 🠚 🍭 🠚 🍰) aus. Da "
-"Sie aber nun den \"Marking Mode\" kennen, ist die Zeit, die für die "
-"Goldmedaille erreicht werden muss, deutlich kürzer!\n"
+"Wählen Sie wieder so schnell wie möglich „Törtchen“ (🍔 🠚 🍭 🠚 🍰) aus. Da Sie "
+"aber nun den Markierungsmodus kennen, ist die Zeit, die für die Goldmedaille "
+"erreicht werden muss, deutlich kürzer!\n"
 "\n"
 "Wenn Sie mit Ihrem Ergebnis zufrieden sind, klicken Sie auf <b>Weiter</b> um "
 "einige abschließende Tipps und Tricks zu erfahren!"
@@ -953,25 +953,25 @@ msgstr "Geräte"
 #. in the achievement titles.
 #: src/common/Achievements.js:369
 msgid "Capable"
-msgstr ""
+msgstr "Fähig"
 
 #. Translators: This is the tier 3 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:372
 msgid "Skilled"
-msgstr ""
+msgstr "Kompetent"
 
 #. Translators: This is the tier 4 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:375
 msgid "Expert"
-msgstr ""
+msgstr "Experte"
 
 #. Translators: This is the tier 5 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:378
 msgid "Master"
-msgstr ""
+msgstr "Meister"
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
@@ -1054,7 +1054,7 @@ msgstr ""
 #: src/common/Achievements.js:454
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
-msgstr ""
+msgstr "Wählen Sie %x Elemente in Tiefe %d im Markierungsmodus."
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
@@ -2195,7 +2195,7 @@ msgid ""
 "\"."
 msgstr ""
 "Die <b>URI-öffnen</b>-Aktion öffnet die gegebene URI mit der dazugehörigen "
-"Standardanwendung. Für http URLs ist das Ihr Web Browser, allerdings können "
+"Standardanwendung. Für http URLs ist das Ihr Webbrowser, allerdings können "
 "auch URIs wie \"mailto:foo@bar.org\" angegeben werden."
 
 #: src/common/actions/Uri.js:68
