@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-24 14:05+0200\n"
-"PO-Revision-Date: 2021-04-25 23:52+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"PO-Revision-Date: 2021-04-26 10:36+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/>"
 "\n"
 "Language: it\n"
@@ -84,7 +84,7 @@ msgid ""
 msgstr ""
 "💕️ Vuoi dimostrare che ami Fly-Pie?\n"
 "<a href=\"https://github.com/sponsors/Schneegans\">Potresti già diventare "
-"uno sponsor per un minimo di 1$ / mese!</a>"
+"uno sponsor per un minimo di 1 $ / mese!</a>"
 
 #: assets/settings.ui:365
 msgid "Sponsors"
@@ -153,7 +153,7 @@ msgstr "Tema icona"
 #. Tab title of the icon-select-popover.
 #: assets/settings.ui:816
 msgid "Custom Icon"
-msgstr "Icona Personalizzata"
+msgstr "Icona personalizzata"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: assets/settings.ui:892
@@ -179,12 +179,12 @@ msgstr "Inizializza le impostazioni di seguito per valori casuali"
 
 #: assets/settings.ui:1051
 msgid "Generate Random Preset"
-msgstr "Genera un Predefinito Casuale"
+msgstr "Genera un predefinito casuale"
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: assets/settings.ui:1122
 msgid "Enable Animations"
-msgstr "Abilita Animazioni"
+msgstr "Abilita animazioni"
 
 #: assets/settings.ui:1149
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
@@ -303,7 +303,7 @@ msgstr "Sbloccato a meno di 1000 ms"
 #. This is a heading.
 #: assets/settings.ui:1729
 msgid "The Marking Mode of Fly-Pie"
-msgstr "La Modalità di Marcatura di Fly-Pie"
+msgstr "La modalità di marcatura di Fly-Pie"
 
 #: assets/settings.ui:1762
 msgid ""
@@ -476,21 +476,19 @@ msgstr "Scegli il Colore del Testo"
 
 #: assets/settings.ui:2705
 msgid "Pick Background Color"
-msgstr "Scegli il Colore di Sfondo"
+msgstr "Scegli il colore di sfondo"
 
 #: assets/settings.ui:2838 assets/settings.ui:2908
 msgid "Global Appearance Settings"
-msgstr "Impostazioni Aspetto Globale"
+msgstr "Impostazioni di aspetto globale"
 
 #: assets/settings.ui:2855
 msgid "These settings affect all menu items."
 msgstr "Queste impostazioni influiscono su tutte le voci di menu."
 
 #: assets/settings.ui:2880
-#, fuzzy
-#| msgid "Easing Mode"
 msgid "Animation Mode"
-msgstr "Tipo di Animazione"
+msgstr "Modalità di animazione"
 
 #: assets/settings.ui:2973 assets/settings.ui:4514 assets/settings.ui:5599
 #: assets/settings.ui:6476
@@ -499,7 +497,7 @@ msgstr "Dimensione"
 
 #: assets/settings.ui:3024 assets/settings.ui:3291
 msgid "Pick Center Item Color"
-msgstr "Seleziona Colore Elemento Centrale"
+msgstr "Seleziona colore elemento centrale"
 
 #: assets/settings.ui:3050 assets/settings.ui:3110 assets/settings.ui:3317
 #: assets/settings.ui:3377 assets/settings.ui:4197 assets/settings.ui:4269
@@ -537,7 +535,7 @@ msgstr "Automatico"
 
 #: assets/settings.ui:3496 assets/settings.ui:4741
 msgid "Icon Opacity"
-msgstr "Opacità Icona"
+msgstr "Opacità dell'icona"
 
 #: assets/settings.ui:3508 assets/settings.ui:3531 assets/settings.ui:3555
 #: assets/settings.ui:3579 assets/settings.ui:3861 assets/settings.ui:3935
@@ -551,36 +549,32 @@ msgstr "Copia il valore sinistro sul lato destro"
 #. Hovered: When the mouse pointer is over the item
 #: assets/settings.ui:3698
 msgid "With Hovered Child"
-msgstr "Con Figlio Attivo"
+msgstr "Con figlio attivo"
 
 #. Hovered: When the mouse pointer is over the item
 #: assets/settings.ui:3714
 msgid "Without Hovered Child"
-msgstr "Senza Figlio Attivo"
+msgstr "Senza figlio attivo"
 
 #: assets/settings.ui:3731 assets/settings.ui:5071
 msgid "Icon Scale"
-msgstr "Scala Icona"
+msgstr "Scala icona"
 
 #: assets/settings.ui:3815 assets/settings.ui:5153
-#, fuzzy
-#| msgid "Icon"
 msgid "Icon Crop"
-msgstr "Icona"
+msgstr "Ritaglia icona"
 
 #: assets/settings.ui:3910 assets/settings.ui:5248 assets/settings.ui:6001
-#, fuzzy
-#| msgid "Background Color"
 msgid "Background Image"
-msgstr "Colore Sfondo"
+msgstr "Immagine di sfondo"
 
 #: assets/settings.ui:3964 assets/settings.ui:4024
 msgid "Center Appearance"
-msgstr "Aspetto Centrale"
+msgstr "Aspetto centrale"
 
 #: assets/settings.ui:3981
 msgid "The center element shows the currently hovered child's name."
-msgstr ""
+msgstr "L'elemento centrale mostra il nome del figlio attualmente attivo."
 
 #. Keep this very short! Try to use not more than six or seven letters.
 #. This is a label of the coloring type radio button group.
@@ -592,7 +586,7 @@ msgstr "Genitore"
 
 #: assets/settings.ui:4172 assets/settings.ui:4377
 msgid "Pick Child Item Color"
-msgstr "Scegli Colore Elemento Figlio"
+msgstr "Scegli colore elemento figlio"
 
 #: assets/settings.ui:4527 assets/settings.ui:5612
 msgid "Offset"
@@ -602,7 +596,7 @@ msgstr "Distanza"
 #. There's an explanation string below in the application.
 #: assets/settings.ui:4648 assets/settings.ui:5735
 msgid "Draw Above"
-msgstr "Disegna Sopra"
+msgstr "Disegna sopra"
 
 #: assets/settings.ui:4660
 msgid "Render children above the center item."
@@ -611,16 +605,16 @@ msgstr "Esegui il rendering dei figli sopra l'elemento centrale."
 #. When the mouse pointer is NOT over the item
 #: assets/settings.ui:5038 assets/settings.ui:5769
 msgid "Standard State"
-msgstr "Stato Standard"
+msgstr "Stato standard"
 
 #. Hovered: When the mouse pointer is over the item
 #: assets/settings.ui:5054
 msgid "Hovered State"
-msgstr "Stato Attivo"
+msgstr "Stato attivo"
 
 #: assets/settings.ui:5302 assets/settings.ui:5363
 msgid "Children Appearance"
-msgstr "Aspetto Elementi Figli"
+msgstr "Aspetto elementi figli"
 
 #. When the mouse pointer is NOT over the item
 #: assets/settings.ui:5319
@@ -629,7 +623,7 @@ msgstr ""
 
 #: assets/settings.ui:5500 assets/settings.ui:5577
 msgid "Pick Grandchild Item Color"
-msgstr "Scegli Colore Elementi dei Nipoti"
+msgstr "Scegli colore elementi dei nipoti"
 
 #: assets/settings.ui:5747
 msgid "Render grandchildren above children items."
@@ -638,11 +632,11 @@ msgstr "Disegna i nipoti sopra gli elementi figli."
 #. Hovered: When the mouse pointer is over the item
 #: assets/settings.ui:5927
 msgid "With Hovered Parent"
-msgstr "Con Elemento Genitore Attivo"
+msgstr "Con elemento genitore attivo"
 
 #: assets/settings.ui:6066 assets/settings.ui:6126
 msgid "Grandchildren Appearance"
-msgstr "Aspetto Elementi dei Nipoti"
+msgstr "Aspetto elementi dei nipoti"
 
 #: assets/settings.ui:6083
 msgid ""
@@ -660,11 +654,11 @@ msgstr "Colore"
 
 #: assets/settings.ui:6254
 msgid "Pick Trace Color"
-msgstr "Scegli Colore Traccia"
+msgstr "Scegli colore traccia"
 
 #: assets/settings.ui:6344 assets/settings.ui:7013
 msgid "Trace Appearance"
-msgstr "Aspetto della Traccia"
+msgstr "Aspetto della traccia"
 
 #: assets/settings.ui:6361
 msgid "The trace is the connecting line between selected menu items."
@@ -672,11 +666,11 @@ msgstr "La traccia è la linea di collegamento tra le voci di menu selezionate."
 
 #: assets/settings.ui:6387
 msgid "Minimum Segment Length"
-msgstr "Lunghezza Minima del Segmento"
+msgstr "Lunghezza minima del segmento"
 
 #: assets/settings.ui:6421 assets/settings.ui:6943
 msgid "Wedge Appearance"
-msgstr "Aspetto del Cuneo"
+msgstr "Aspetto del cuneo"
 
 #. Keep the individual lines short (around 30 characters max)!
 #. You can use up to three lines if you want.
@@ -690,7 +684,7 @@ msgstr ""
 
 #: assets/settings.ui:6513
 msgid "Wedge Separators"
-msgstr "Linee di Divisione"
+msgstr "Linee di divisione"
 
 #: assets/settings.ui:6548 assets/settings.ui:6682
 msgid "Width"
@@ -698,15 +692,15 @@ msgstr "Larghezza"
 
 #: assets/settings.ui:6630
 msgid "Pick Wedge Separator Color"
-msgstr "Scegli Colore del Separatore a Cuneo"
+msgstr "Scegli colore del separatore a cuneo"
 
 #: assets/settings.ui:6655
 msgid "Wedge Color"
-msgstr "Colore Cuneo"
+msgstr "Colore cuneo"
 
 #: assets/settings.ui:6767
 msgid "Inner Radius"
-msgstr "Raggio Interno"
+msgstr "Raggio interno"
 
 #. When the mouse pointer is NOT over the item
 #: assets/settings.ui:6811
@@ -720,12 +714,12 @@ msgstr "Attivo"
 
 #: assets/settings.ui:6853
 msgid "Pick Wedge Color"
-msgstr "Scegli Colore del Cuneo"
+msgstr "Scegli colore del cuneo"
 
 #. Hovered: When the mouse pointer is over the item
 #: assets/settings.ui:6868
 msgid "Pick Hovered Wedge Color"
-msgstr "Seleziona Colore Segmenti Attivi"
+msgstr "Seleziona colore segmenti attivi"
 
 #: assets/settings.ui:6960
 msgid "Clicking inside a wedge will activate the corresponding item."
@@ -734,7 +728,7 @@ msgstr ""
 
 #: assets/settings.ui:7053
 msgid "Minimum Stroke Angle"
-msgstr "Angolo Gesto Minimo"
+msgstr "Angolo gesto minimo"
 
 #: assets/settings.ui:7065
 msgid "Smaller turns will not lead to selections."
@@ -742,7 +736,7 @@ msgstr "Le svolte più piccole non porteranno a selezioni."
 
 #: assets/settings.ui:7142
 msgid "Minimum Stroke Length"
-msgstr "Lunghezza Minima Gesto"
+msgstr "Lunghezza minima gesto"
 
 #: assets/settings.ui:7154
 msgid ""
@@ -766,7 +760,7 @@ msgstr ""
 
 #: assets/settings.ui:7323
 msgid "Selection Timeout"
-msgstr "Timeout di Selezione"
+msgstr "Timeout di selezione"
 
 #: assets/settings.ui:7335
 msgid ""
