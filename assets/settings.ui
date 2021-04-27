@@ -2217,7 +2217,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                 </child>
                 <child type="center">
                   <object class="GtkBox">
-                    <property name="width_request">450</property>
+                    <property name="width_request">500</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">center</property>
@@ -2233,6 +2233,8 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="valign">center</property>
+                            <property name="margin_left">10</property>
+                            <property name="margin_right">10</property>
                             <property name="column_spacing">6</property>
                             <child>
                               <object class="GtkImage">
@@ -2381,6 +2383,8 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             <property name="can_focus">False</property>
                             <property name="halign">end</property>
                             <property name="valign">center</property>
+                            <property name="margin_left">10</property>
+                            <property name="margin_right">10</property>
                             <property name="column_spacing">6</property>
                             <child>
                               <object class="GtkImage">
