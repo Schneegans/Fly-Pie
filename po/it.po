@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-28 13:15+0200\n"
-"PO-Revision-Date: 2021-04-26 10:36+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
-">\n"
+"PO-Revision-Date: 2021-04-28 11:30+0000\n"
+"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -98,52 +98,52 @@ msgstr "Lineare"
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:574
 msgid "Ease"
-msgstr ""
+msgstr "Ease"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:578
 msgid "Ease-In"
-msgstr ""
+msgstr "Ease-In"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:582
 msgid "Ease-Out"
-msgstr ""
+msgstr "Ease-Out"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:586
 msgid "Ease-In-Out"
-msgstr ""
+msgstr "Ease-In-Out"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:590
 msgid "Ease-In-Quad"
-msgstr ""
+msgstr "Ease-In-Quad"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:594
 msgid "Ease-Out-Quad"
-msgstr ""
+msgstr "Ease-Out-Quad"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:598
 msgid "Ease-In-Out-Quad"
-msgstr ""
+msgstr "Ease-In-Out-Quad"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:602
 msgid "Ease-In-Back"
-msgstr ""
+msgstr "Ease-In-Back"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:606
 msgid "Ease-Out-Back"
-msgstr ""
+msgstr "Ease-Out-Back"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:610
 msgid "Ease-In-Out-Back"
-msgstr ""
+msgstr "Ease-In-Out-Back"
 
 #. Tab title of the icon-select-popover.
 #: assets/settings.ui:789
@@ -430,8 +430,6 @@ msgid "Animation Duration"
 msgstr "Durata Facilitata"
 
 #: assets/settings.ui:2539
-#, fuzzy
-#| msgid "Global Scale"
 msgid "Global Scaling"
 msgstr "Scala Globale"
 
@@ -988,10 +986,8 @@ msgstr "Maestro"
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:385
-#, fuzzy
-#| msgid "ID"
 msgid "I"
-msgstr "ID"
+msgstr ""
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
@@ -1019,10 +1015,9 @@ msgstr "V"
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
 #: src/common/Achievements.js:413
-#, fuzzy, javascript-format
-#| msgid "Cancel"
+#, javascript-format
 msgid "%s Cancellor"
-msgstr "Cancella"
+msgstr ""
 
 #: src/common/Achievements.js:415
 #, javascript-format
