@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-28 13:29+0200\n"
-"PO-Revision-Date: 2021-04-26 10:36+0000\n"
+"PO-Revision-Date: 2021-04-28 12:28+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
 "core/nb_NO/>\n"
@@ -1213,7 +1213,7 @@ msgstr "Fly-Pie-oppnåelse innvilget."
 #: src/extension/Daemon.js:157
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
-msgstr "Du har fullført oppnåelsen «%s»."
+msgstr "Du har fullført oppnåelsen «%s»!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
