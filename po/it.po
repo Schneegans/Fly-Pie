@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-28 13:29+0200\n"
-"PO-Revision-Date: 2021-04-28 11:30+0000\n"
+"PO-Revision-Date: 2021-04-28 12:28+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
-">\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -941,10 +941,8 @@ msgid "Completed"
 msgstr "Completato"
 
 #: assets/settings.ui:9050
-#, fuzzy
-#| msgid "Achievements"
 msgid "Reset all achievements."
-msgstr "Premi"
+msgstr ""
 
 #. Caption of the achievements page in the window's titlebar.
 #: assets/settings.ui:9079
@@ -1038,18 +1036,16 @@ msgstr "Seleziona %x elementi."
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:443
-#, fuzzy, javascript-format
-#| msgid "Level-%i Gesture Selections"
+#, javascript-format
 msgid "%s Toplevel Gesture-Selector"
-msgstr "Livello-%i Selezioni gestuali"
+msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:446
-#, fuzzy, javascript-format
-#| msgid "Gesture Selections"
+#, javascript-format
 msgid "%s Submenu Gesture-Selector"
-msgstr "Selezioni Gestuali"
+msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
@@ -1066,10 +1062,9 @@ msgstr ""
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:472
-#, fuzzy, javascript-format
-#| msgid "Level-%i Click Selections"
+#, javascript-format
 msgid "%s Toplevel Click-Selector"
-msgstr "Livello-%i Fare clic su Selezioni"
+msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
@@ -1143,10 +1138,9 @@ msgid "Entropie %i"
 msgstr ""
 
 #: src/common/Achievements.js:576
-#, fuzzy, javascript-format
-#| msgid "Generate Random Preset"
+#, javascript-format
 msgid "Generate %x random presets."
-msgstr "Genera un Predefinito Casuale"
+msgstr ""
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
 #: src/common/Achievements.js:589
@@ -1191,10 +1185,9 @@ msgid "Import a menu configuration."
 msgstr "Importa una configurazione del menu."
 
 #: src/common/Achievements.js:624
-#, fuzzy, javascript-format
-#| msgid "Imports a menu configuration."
+#, javascript-format
 msgid "Import %x menu configurations."
-msgstr "Importa una configurazione del menu."
+msgstr ""
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
 #: src/common/Achievements.js:638
@@ -1209,10 +1202,9 @@ msgid "Export a menu configuration."
 msgstr "Importa una configurazione del menu."
 
 #: src/common/Achievements.js:641
-#, fuzzy, javascript-format
-#| msgid "Imports a menu configuration."
+#, javascript-format
 msgid "Export %x menu configurations."
-msgstr "Importa una configurazione del menu."
+msgstr ""
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
@@ -1919,7 +1911,7 @@ msgstr "Impossibile esportare la configurazione del menu!"
 
 #: src/prefs/MenuEditorPage.js:280
 msgid "Import Menu Configuration"
-msgstr "Importa Configurazione  del Menu"
+msgstr "Importa Configurazione del Menu"
 
 #: src/prefs/MenuEditorPage.js:300
 msgid "Import"
@@ -1950,7 +1942,7 @@ msgid ""
 "The source code of Fly-Pie is available on <a href=\"https://github.com/"
 "Schneegans/Fly-Pie\">Github</a>."
 msgstr ""
-"Il codice sorgente di Fly-Pie è disponibile su a href=\"https://github.com/"
+"Il codice sorgente di Fly-Pie è disponibile su <a href=\"https://github.com/"
 "Schneegans/Fly-Pie\">Github</a>."
 
 #: src/prefs/MenuEditorPage.js:964
@@ -2097,22 +2089,16 @@ msgid "Emits a D-Bus signal."
 msgstr "Emette un segnale D-Bus."
 
 #: src/common/actions/DBusSignal.js:43
-#, fuzzy
-#| msgid ""
-#| "The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
-#| "\"https://github.com/Schneegans/Fly-Pie#fly-pies-d-bus-interface\">can "
-#| "listen on the D-Bus for its activation</a>. This can be very useful in "
-#| "custom menus opened via the command line."
 msgid ""
 "The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
 "\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-interface.md"
 "\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
-"L'azione <b>Segnale D-Bus</b> non fa nulla da sola. Ma tu <a href =\"https://"
-"github.com/Schneegans/Fly-Pie#fly-pies-d-bus-interface\">puoi ascoltare sul "
-"D-Bus la sua attivazione</a>. Questo può essere molto utile in menu "
-"personalizzati aperti tramite la riga di comando."
+"L'azione <b>Segnale D-Bus</b> non fa nulla da sola. Ma tu <a href=\"https"
+"://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-interface.md\">puoi "
+"ascoltare sul D-Bus la sua attivazione</a>. Questo può essere molto utile in "
+"menu personalizzati aperti tramite la riga di comando."
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
@@ -2221,6 +2207,7 @@ msgstr ""
 "Quando l'azione <b>Apri URI</b> è attivata, l'URI sopra viene aperto con "
 "l'applicazione predefinita. Per gli URL http, questo sarà il tuo browser "
 "web. Tuttavia, è anche possibile aprire altri URI come \"mailto:foo@bar.org\""
+"."
 
 #: src/common/actions/Uri.js:68
 msgid "URI"
