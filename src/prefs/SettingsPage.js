@@ -293,8 +293,8 @@ var SettingsPage = class SettingsPage {
                     'saved anyways, but please consider to store it in a safer place!')
               });
 
-              warningDialog.run();
-              warningDialog.destroy();
+              warningDialog.connect('response', d => d.destroy());
+              warningDialog.show();
             }
 
             // Now save the preset!
@@ -350,13 +350,14 @@ var SettingsPage = class SettingsPage {
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
               transient_for: button.get_root(),
+              modal: true,
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
               text: _('Failed to load preset!'),
               secondary_text: '' + error
             });
-            errorMessage.run();
-            errorMessage.destroy();
+            errorMessage.connect('response', d => d.destroy());
+            errorMessage.show();
           }
         }
 

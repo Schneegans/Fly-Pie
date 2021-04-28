@@ -234,7 +234,7 @@ var MenuEditorPage = class MenuEditorPage {
       dialog.connect('response', (dialog, response_id) => {
         if (response_id === Gtk.ResponseType.OK) {
           try {
-            let path = dialog.get_filename();
+            let path = dialog.get_file().get_path();
 
             // Make sure we have a *.json extension.
             if (!path.endsWith('.json')) {
@@ -254,13 +254,14 @@ var MenuEditorPage = class MenuEditorPage {
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
               transient_for: button.get_root(),
+              modal: true,
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
               text: _('Failed to export the menu configuration!'),
               secondary_text: '' + error
             });
-            errorMessage.run();
-            errorMessage.destroy();
+            errorMessage.connect('response', d => d.destroy());
+            errorMessage.show();
           }
         }
 
@@ -299,7 +300,7 @@ var MenuEditorPage = class MenuEditorPage {
       dialog.connect('response', (dialog, response_id) => {
         if (response_id === Gtk.ResponseType.OK) {
           try {
-            const file                = Gio.File.new_for_path(dialog.get_filename());
+            const file                = dialog.get_file();
             const [success, contents] = file.load_contents(null);
 
             // Load the configuration! We do a parse / stringify to catch any JSON errors
@@ -316,13 +317,14 @@ var MenuEditorPage = class MenuEditorPage {
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
               transient_for: button.get_root(),
+              modal: true,
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
               text: _('Failed to import menu configuration!'),
               secondary_text: '' + error
             });
-            errorMessage.run();
-            errorMessage.destroy();
+            errorMessage.connect('response', d => d.destroy());
+            errorMessage.show();
           }
         }
 
