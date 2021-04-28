@@ -201,6 +201,8 @@ var MenuEditorPage = class MenuEditorPage {
           if (result < 0) {
             const error = DBusInterface.getErrorDescription(result);
             utils.debug('Failed to open menu preview: ' + error);
+          } else {
+            Statistics.getInstance().addPreviewMenuOpened();
           }
         });
       }
@@ -1150,8 +1152,8 @@ var MenuEditorPage = class MenuEditorPage {
         }
         this._set(
             iter, 'DISPLAY_NAME',
-            '<b>' + GLib.markup_escape_text(data, -1) + '</b>\n<small>' + shortcut +
-                '</small>');
+            '<b>' + GLib.markup_escape_text(data, -1) + '</b>\n<small>' +
+                GLib.markup_escape_text(shortcut, -1) + '</small>');
       } else {
         this._set(iter, 'DISPLAY_NAME', GLib.markup_escape_text(data, -1));
       }
@@ -1168,7 +1170,9 @@ var MenuEditorPage = class MenuEditorPage {
         }
         const name = this._get(iter, 'NAME');
         this._set(
-            iter, 'DISPLAY_NAME', '<b>' + name + '</b>\n<small>' + shortcut + '</small>');
+            iter, 'DISPLAY_NAME',
+            '<b>' + GLib.markup_escape_text(name, -1) + '</b>\n<small>' +
+                GLib.markup_escape_text(shortcut, -1) + '</small>');
       }
     }
 

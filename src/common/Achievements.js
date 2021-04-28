@@ -149,10 +149,11 @@ var Achievements = GObject.registerClass(
               }
             }
             // Also the DBus-Menus-Achievement needs special treatment as we do not want
-            // to include the tutorial menu openings (which are also triggered over the
-            // D-Bus).
+            // to include the tutorial and preview menu openings (which are also triggered
+            // over the D-Bus).
             else if (achievement.statsKey == 'stats-dbus-menus') {
               val -= this._settings.get_uint('stats-tutorial-menus');
+              val -= this._settings.get_uint('stats-preview-menus');
             }
 
             // First compute the state based on the value range of the achievement.
@@ -658,6 +659,21 @@ var Achievements = GObject.registerClass(
             bgImage: bgImages[i],
             fgImage: 'dots.svg',
             statsKey: 'stats-added-items',
+            xp: BASE_XP[i],
+            range: [BASE_RANGES[i] / 2, BASE_RANGES[i + 1] / 2],
+            hidden: false
+          });
+        }
+
+        for (let i = 0; i < 5; i++) {
+          achievements.set('previewmenus' + i, {
+            // Translators: The name of the 'Open a preview menu %x times.' achievement.
+            name: formatName(_('%s Menu Designer'), i),
+            description:
+                _('Open a preview menu %x times.').replace('%x', BASE_RANGES[i + 1] / 2),
+            bgImage: bgImages[i],
+            fgImage: 'eye.svg',
+            statsKey: 'stats-preview-menus',
             xp: BASE_XP[i],
             range: [BASE_RANGES[i] / 2, BASE_RANGES[i + 1] / 2],
             hidden: false

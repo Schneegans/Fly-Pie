@@ -56,7 +56,16 @@ var SettingsPage = class SettingsPage {
     const previewButton = this._builder.get_object('preview-button');
     previewButton.connect('clicked', () => {
       if (this._dbus) {
-        this._dbus.PreviewCustomMenuRemote(JSON.stringify(ExampleMenu.get()), () => {});
+        this._dbus.PreviewCustomMenuRemote(
+            JSON.stringify(ExampleMenu.get()), (result) => {
+              result = parseInt(result);
+              if (result < 0) {
+                const error = DBusInterface.getErrorDescription(result);
+                utils.debug('Failed to open menu preview: ' + error);
+              } else {
+                Statistics.getInstance().addPreviewMenuOpened();
+              }
+            });
       }
     });
 
