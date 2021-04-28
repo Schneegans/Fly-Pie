@@ -1601,7 +1601,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               <object class="GtkImage" id="level-image12">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">badges/tutorial/copper.png</property>
+                                <property name="resource">/img/tutorial/bronze.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -1647,7 +1647,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               <object class="GtkImage" id="level-image13">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">badges/tutorial/silver.png</property>
+                                <property name="resource">/img/tutorial/silver.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -1692,7 +1692,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               <object class="GtkImage" id="level-image11">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">badges/tutorial/gold.png</property>
+                                <property name="resource">/img/tutorial/gold.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -1992,7 +1992,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkImage" id="level-image14">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">badges/tutorial/copper.png</property>
+                                <property name="resource">/img/tutorial/bronze.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -2037,7 +2037,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkImage" id="level-image15">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">badges/tutorial/silver.png</property>
+                                <property name="resource">/img/tutorial/silver.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -2082,7 +2082,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkImage" id="level-image16">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="pixbuf">badges/tutorial/gold.png</property>
+                                <property name="resource">/img/tutorial/gold.png</property>
                                 <property name="pixel_size">200</property>
                                 <property name="icon_size">6</property>
                               </object>
@@ -2143,7 +2143,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                       <object class="GtkImage" id="level-image">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">badges/tutorial/gold.png</property>
+                        <property name="resource">/img/tutorial/gold.png</property>
                         <property name="pixel_size">200</property>
                         <property name="icon_size">6</property>
                       </object>
@@ -8707,7 +8707,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">badges/levels/level1.png</property>
+                    <property name="resource">/img/levels/level1.png</property>
                     <property name="pixel_size">200</property>
                     <property name="icon_size">6</property>
                   </object>
@@ -8719,7 +8719,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">badges/levels/level2.png</property>
+                    <property name="resource">/img/levels/level2.png</property>
                     <property name="pixel_size">200</property>
                     <property name="icon_size">6</property>
                   </object>
@@ -8732,7 +8732,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">badges/levels/level3.png</property>
+                    <property name="resource">/img/levels/level3.png</property>
                     <property name="pixel_size">200</property>
                     <property name="icon_size">6</property>
                   </object>
@@ -8745,7 +8745,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">badges/levels/level4.png</property>
+                    <property name="resource">/img/levels/level4.png</property>
                     <property name="pixel_size">200</property>
                     <property name="icon_size">6</property>
                   </object>
@@ -8758,7 +8758,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">badges/levels/level5.png</property>
+                    <property name="resource">/img/levels/level5.png</property>
                     <property name="pixel_size">200</property>
                     <property name="icon_size">6</property>
                   </object>
@@ -8771,7 +8771,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image6">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">badges/levels/level6.png</property>
+                    <property name="resource">/img/levels/level6.png</property>
                     <property name="pixel_size">200</property>
                     <property name="icon_size">6</property>
                   </object>
@@ -8784,7 +8784,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image7">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">badges/levels/level7.png</property>
+                    <property name="resource">/img/levels/level7.png</property>
                     <property name="pixel_size">200</property>
                     <property name="icon_size">6</property>
                   </object>
@@ -8797,7 +8797,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image8">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">badges/levels/level8.png</property>
+                    <property name="resource">/img/levels/level8.png</property>
                     <property name="pixel_size">200</property>
                     <property name="icon_size">6</property>
                   </object>
@@ -8810,7 +8810,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image9">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">badges/levels/level9.png</property>
+                    <property name="resource">/img/levels/level9.png</property>
                     <property name="pixel_size">200</property>
                     <property name="icon_size">6</property>
                   </object>
@@ -8823,7 +8823,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image10">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="pixbuf">badges/levels/level10.png</property>
+                    <property name="resource">/img/levels/level10.png</property>
                     <property name="pixel_size">200</property>
                     <property name="icon_size">6</property>
                   </object>

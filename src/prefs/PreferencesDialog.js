@@ -35,13 +35,17 @@ var PreferencesDialog = class PreferencesDialog {
     // This we need to check whether ui animations are enabled.
     this._shellSettings = Gio.Settings.new('org.gnome.desktop.interface');
 
+    // Load all of Fly-Pie's resources.
+    this._resources = Gio.Resource.load(Me.path + '/resources/flypie.gresource');
+    Gio.resources_register(this._resources);
+
     // Load the user interface file.
     this._builder = new Gtk.Builder();
-    this._builder.add_from_file(Me.path + '/resources/settings.ui');
+    this._builder.add_from_resource('/ui/settings.ui');
 
     // Load the CSS file for the settings dialog.
     const styleProvider = Gtk.CssProvider.new();
-    styleProvider.load_from_path(Me.path + '/resources/flypie.css');
+    styleProvider.load_from_resource('/css/flypie.css');
     Gtk.StyleContext.add_provider_for_screen(
         Gdk.Screen.get_default(), styleProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
@@ -129,6 +133,9 @@ var PreferencesDialog = class PreferencesDialog {
       this._tutorialPage.destroy();
       this._settingsPage.destroy();
       this._achievementsPage.destroy();
+
+      // Unregister our resources.
+      Gio.resources_unregister(this._resources);
     });
 
     // Record this construction for the statistics.

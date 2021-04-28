@@ -37,6 +37,10 @@ var Daemon = class Daemon {
 
   constructor() {
 
+    // Load all of Fly-Pie's resources.
+    this._resources = Gio.Resource.load(Me.path + '/resources/flypie.gresource');
+    Gio.resources_register(this._resources);
+
     // Make the ShowMenu(), PreviewMenu(), ShowCustomMenu(), and the PreviewCustomMenu()
     // methods available on the D-Bus.
     this._dbus = Gio.DBusExportedObject.wrapJSObject(DBusInterface.description, this);
@@ -133,8 +137,7 @@ var Daemon = class Daemon {
           _('Fly-Pie Level Up!'),
           // Translators: This is shown in a desktop notifications.
           _('You reached level %i!').replace('%i', level),
-          Gio.icon_new_for_string(
-              Me.path + `/resources/badges/levels/level${level}.png`));
+          GdkPixbuf.Pixbuf.new_from_resource(`/img/levels/level${level}.png`));
     });
 
     // Show notifications whenever achievements are unlocked.
@@ -188,6 +191,9 @@ var Daemon = class Daemon {
 
     // Delete the statistics singleton.
     Statistics.destroyInstance();
+
+    // Unregister our resources.
+    Gio.resources_unregister(this._resources);
   }
 
   // -------------------------------------------------------------- public D-Bus-Interface
