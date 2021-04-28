@@ -568,6 +568,12 @@
       <description>The total number of times the tutorial menu was opened.</description>
     </key>
 
+    <key name="stats-preview-menus" type="u">
+      <default>0</default>
+      <summary>Preview Menu Count</summary>
+      <description>The total number of times a preview menu was opened.</description>
+    </key>
+
     <key name="stats-selections" type="u">
       <default>0</default>
       <summary>Selection Count</summary>

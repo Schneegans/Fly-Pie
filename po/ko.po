@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the Fly-Pie package.
 # <FIRSTNAME LASTNAME <EMAIL@ADDRESS>, 2021.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Fly-Pie 6\n"
+"Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-28 13:29+0200\n"
-"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: <LANGUAGE_CODE>\n"
+"PO-Revision-Date: 2021-04-24 11:21+0000\n"
+"Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/"
+">\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: assets/settings.ui:66
 msgid ""
@@ -36,7 +38,7 @@ msgstr ""
 
 #: assets/settings.ui:99
 msgid "About"
-msgstr ""
+msgstr "약"
 
 #: assets/settings.ui:125
 msgid "Created by"
@@ -309,7 +311,7 @@ msgstr ""
 #. The user finished the tutorial. Yay!
 #: assets/settings.ui:2164
 msgid "Congratulations!"
-msgstr ""
+msgstr "축하합니다!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: assets/settings.ui:2182
@@ -761,7 +763,7 @@ msgstr ""
 
 #: assets/settings.ui:8250 assets/settings.ui:8287
 msgid "Name"
-msgstr ""
+msgstr "이름"
 
 #: assets/settings.ui:8285 assets/settings.ui:8286 assets/settings.ui:8383
 #: assets/settings.ui:8384
@@ -1165,7 +1167,7 @@ msgstr ""
 
 #: src/extension/Background.js:95
 msgid "Close"
-msgstr ""
+msgstr "닫기"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
@@ -1320,7 +1322,7 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:48
 msgid "Cat"
-msgstr ""
+msgstr "고양이"
 
 #: src/prefs/ExampleMenu.js:49
 msgid "Ox"
@@ -1328,15 +1330,15 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:50
 msgid "Dog"
-msgstr ""
+msgstr "개"
 
 #: src/prefs/ExampleMenu.js:51
 msgid "Pig"
-msgstr ""
+msgstr "돼지"
 
 #: src/prefs/ExampleMenu.js:52
 msgid "Monkey"
-msgstr ""
+msgstr "원숭이"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:57
@@ -1371,23 +1373,23 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:76
 msgid "Fruit"
-msgstr ""
+msgstr "과일"
 
 #: src/prefs/ExampleMenu.js:79
 msgid "Apple"
-msgstr ""
+msgstr "사과"
 
 #: src/prefs/ExampleMenu.js:80
 msgid "Watermelon"
-msgstr ""
+msgstr "수박"
 
 #: src/prefs/ExampleMenu.js:81
 msgid "Lemon"
-msgstr ""
+msgstr "레몬"
 
 #: src/prefs/ExampleMenu.js:82
 msgid "Banana"
-msgstr ""
+msgstr "바나나"
 
 #: src/prefs/ExampleMenu.js:83
 msgid "Strawberry"

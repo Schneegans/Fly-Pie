@@ -169,6 +169,11 @@ var Statistics = class Statistics {
     this._addOneTo('stats-tutorial-menus');
   }
 
+  // Should be called whenever a preview menu is opened.
+  addPreviewMenuOpened() {
+    this._addOneTo('stats-preview-menus');
+  }
+
   // Should be called whenever an item is added in the menu editor.
   addItemCreated() {
     this._addOneTo('stats-added-items');

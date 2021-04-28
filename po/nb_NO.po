@@ -3,27 +3,32 @@
 # This file is distributed under the same license as the Fly-Pie package.
 # <FIRSTNAME LASTNAME <EMAIL@ADDRESS>, 2021.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Fly-Pie 6\n"
+"Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-28 13:29+0200\n"
-"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: <LANGUAGE_CODE>\n"
+"PO-Revision-Date: 2021-04-28 12:28+0000\n"
+"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
+"core/nb_NO/>\n"
+"Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: assets/settings.ui:66
 msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
+"Les <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
+"changelog.md\">endringsloggen</a>."
 
 #: assets/settings.ui:81
+#, fuzzy
 msgid ""
 "Published under the MIT License.\n"
 "Visit <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie's Homepage</"
@@ -33,38 +38,45 @@ msgid ""
 "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
+"MIT-lisensiert.\n"
+"Besøk <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie sin "
+"hjemmeside</a> for flere detaljer.\n"
+"\n"
+"Hvis du finner en 🐞️ feil eller har en 🎉️ funksjonsforespørsel, kan du ta "
+"kontakt på <a href=\"https://github.com/Schneegans/Fly-Pie/issues\">GitHub</"
+"a>."
 
 #: assets/settings.ui:99
 msgid "About"
-msgstr ""
+msgstr "Om"
 
 #: assets/settings.ui:125
 msgid "Created by"
-msgstr ""
+msgstr "Laget av"
 
 #: assets/settings.ui:155
 msgid "Translated by"
-msgstr ""
+msgstr "Oversatt av"
 
 #: assets/settings.ui:186
 msgid "Artwork by"
-msgstr ""
+msgstr "Grafikk av"
 
 #: assets/settings.ui:215
 msgid "Credits"
-msgstr ""
+msgstr "Bidragsytere"
 
 #: assets/settings.ui:246
 msgid "🥇️ Gold Sponsors"
-msgstr ""
+msgstr "🥇️ Gullsponsorer"
 
 #: assets/settings.ui:260
 msgid "🥈️ Silver Sponsors"
-msgstr ""
+msgstr "🥈️ Sølvsponsorer"
 
 #: assets/settings.ui:274
 msgid "🥉️ Bronze Sponsors"
-msgstr ""
+msgstr "🥉️ Bronsesponsorer"
 
 #: assets/settings.ui:349
 msgid ""
@@ -72,10 +84,13 @@ msgid ""
 "<a href=\"https://github.com/sponsors/Schneegans\">You may already become a "
 "sponsor for as little as 1$ / month!</a>"
 msgstr ""
+"💕️ Vil du vise at du setter pris på Fly-Pie?\n"
+"<a href=\"https://github.com/sponsors/Schneegans\">Du kan allerede bli en "
+"sponsor, for den enkle sum av 1$/måned.</a>"
 
 #: assets/settings.ui:365
 msgid "Sponsors"
-msgstr ""
+msgstr "Sponsorer"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:570
@@ -135,12 +150,12 @@ msgstr ""
 #. Tab title of the icon-select-popover.
 #: assets/settings.ui:789
 msgid "Icon Theme"
-msgstr ""
+msgstr "Ikondrakt"
 
 #. Tab title of the icon-select-popover.
 #: assets/settings.ui:816
 msgid "Custom Icon"
-msgstr ""
+msgstr "Egendefinert ikon"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: assets/settings.ui:892
@@ -148,6 +163,8 @@ msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
 msgstr ""
+"<b>Menyer</b>\n"
+"Kan være undermenyer eller toppnivåmenyer."
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: assets/settings.ui:929
@@ -155,6 +172,8 @@ msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
+"<b>Handlinger</b>\n"
+"Kan legges til egendefinerte menyer."
 
 #: assets/settings.ui:1025
 msgid "Initializes the settings below to random values"
@@ -166,8 +185,9 @@ msgstr ""
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: assets/settings.ui:1122
+#, fuzzy
 msgid "Enable Animations"
-msgstr ""
+msgstr "Skru på animasjoner"
 
 #: assets/settings.ui:1149
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
@@ -198,7 +218,7 @@ msgstr ""
 #. This is a heading.
 #: assets/settings.ui:1366
 msgid "You can click anywhere!"
-msgstr ""
+msgstr "Du kan klikke hvor som helst!"
 
 #: assets/settings.ui:1399
 msgid ""
@@ -219,7 +239,7 @@ msgstr ""
 #. This is a heading.
 #: assets/settings.ui:1486
 msgid "Practice Session I"
-msgstr ""
+msgstr "Øvingsøkt I"
 
 #: assets/settings.ui:1502
 msgid ""
@@ -239,22 +259,22 @@ msgstr ""
 #. ms = milliseconds
 #: assets/settings.ui:1540
 msgid "<big>Best selection time: <b>- ms</b></big>"
-msgstr ""
+msgstr "<big>Beste utvalgstid: <b>- ms</b></big>"
 
 #. ms = milliseconds
 #: assets/settings.ui:1618
 msgid "Unlocked at less than 3000 ms"
-msgstr ""
+msgstr "Opplåst på mindre enn 3000 ms"
 
 #. ms = milliseconds
 #: assets/settings.ui:1664
 msgid "Unlocked at less than 2000 ms"
-msgstr ""
+msgstr "Opplåst på mindre enn 2000 ms"
 
 #. ms = milliseconds
 #: assets/settings.ui:1709 assets/settings.ui:2009
 msgid "Unlocked at less than 1000 ms"
-msgstr ""
+msgstr "Opplåst på mindre enn 1000 ms"
 
 #. This is a heading.
 #: assets/settings.ui:1761
@@ -284,7 +304,7 @@ msgstr ""
 #. This is a heading.
 #: assets/settings.ui:1880
 msgid "Practice Session II"
-msgstr ""
+msgstr "Øvingsøkt II"
 
 #: assets/settings.ui:1896
 msgid ""
@@ -299,17 +319,17 @@ msgstr ""
 #. ms = milliseconds
 #: assets/settings.ui:2054
 msgid "Unlocked at less than 750 ms"
-msgstr ""
+msgstr "Opplåst på mindre enn 750 ms"
 
 #. ms = milliseconds
 #: assets/settings.ui:2099
 msgid "Unlocked at less than 500 ms"
-msgstr ""
+msgstr "Opplåst på mindre enn 500 ms"
 
 #. The user finished the tutorial. Yay!
 #: assets/settings.ui:2164
 msgid "Congratulations!"
-msgstr ""
+msgstr "Gratulerer!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: assets/settings.ui:2182
@@ -333,21 +353,21 @@ msgstr ""
 #. Button for tutorial navigation. Goes back one page.
 #: assets/settings.ui:2257
 msgid "Previous"
-msgstr ""
+msgstr "Forrige"
 
 #. Button for tutorial navigation. Goes to the next page.
 #: assets/settings.ui:2407
 msgid "Next"
-msgstr ""
+msgstr "Neste"
 
 #. Caption of the tutorial page in the window's titlebar.
 #: assets/settings.ui:2444
 msgid "Tutorial"
-msgstr ""
+msgstr "Veiledning"
 
 #: assets/settings.ui:2521
 msgid "Animation Duration"
-msgstr ""
+msgstr "Animasjonsvarighet"
 
 #: assets/settings.ui:2539
 msgid "Global Scaling"
@@ -373,28 +393,28 @@ msgstr ""
 #: assets/settings.ui:7426 assets/settings.ui:7632 assets/settings.ui:7656
 #: assets/settings.ui:7741
 msgid "Reset to default value"
-msgstr ""
+msgstr "Tilbakestill til forvalgt verdi"
 
 #: assets/settings.ui:2686
 msgid "Font"
-msgstr ""
+msgstr "Skrift"
 
 #: assets/settings.ui:2698
 msgid "Text Color"
-msgstr ""
+msgstr "Tekstfarge"
 
 #: assets/settings.ui:2712 assets/settings.ui:3796 assets/settings.ui:4840
 #: assets/settings.ui:5484
 msgid "Background Color"
-msgstr ""
+msgstr "Bakgrunnsfarge"
 
 #: assets/settings.ui:2741
 msgid "Pick Text Color"
-msgstr ""
+msgstr "Velg tekstfarge"
 
 #: assets/settings.ui:2757
 msgid "Pick Background Color"
-msgstr ""
+msgstr "Velg bakgrunnsfarge"
 
 #: assets/settings.ui:2890 assets/settings.ui:2960
 msgid "Global Appearance Settings"
@@ -402,16 +422,16 @@ msgstr ""
 
 #: assets/settings.ui:2907
 msgid "These settings affect all menu items."
-msgstr ""
+msgstr "Disse innstillingene har innvirkning på alle menyelementer."
 
 #: assets/settings.ui:2932
 msgid "Animation Mode"
-msgstr ""
+msgstr "Animasjonsmodus"
 
 #: assets/settings.ui:3025 assets/settings.ui:4566 assets/settings.ui:5651
 #: assets/settings.ui:6528
 msgid "Size"
-msgstr ""
+msgstr "Størrelse"
 
 #: assets/settings.ui:3076 assets/settings.ui:3343
 msgid "Pick Center Item Color"
@@ -421,7 +441,7 @@ msgstr ""
 #: assets/settings.ui:3429 assets/settings.ui:4249 assets/settings.ui:4321
 #: assets/settings.ui:4454 assets/settings.ui:4538
 msgid "Saturation"
-msgstr ""
+msgstr "Metning"
 
 #: assets/settings.ui:3122 assets/settings.ui:3174 assets/settings.ui:3389
 #: assets/settings.ui:3441 assets/settings.ui:4269 assets/settings.ui:4309
@@ -433,7 +453,7 @@ msgstr ""
 #: assets/settings.ui:3453 assets/settings.ui:4289 assets/settings.ui:4333
 #: assets/settings.ui:4494 assets/settings.ui:4514
 msgid "Opacity"
-msgstr ""
+msgstr "Dekkevne"
 
 #. Keep this very short! Try to use not more than six or seven letters.
 #. This is a label of the coloring type radio button group.
@@ -453,7 +473,7 @@ msgstr ""
 
 #: assets/settings.ui:3548 assets/settings.ui:4793
 msgid "Icon Opacity"
-msgstr ""
+msgstr "Ikon-dekkevne"
 
 #: assets/settings.ui:3560 assets/settings.ui:3583 assets/settings.ui:3607
 #: assets/settings.ui:3631 assets/settings.ui:3913 assets/settings.ui:3987
@@ -462,7 +482,7 @@ msgstr ""
 #: assets/settings.ui:5325 assets/settings.ui:5837 assets/settings.ui:5860
 #: assets/settings.ui:5884 assets/settings.ui:6065
 msgid "Copy left value to right side"
-msgstr ""
+msgstr "Kopier venstre verdi til høyre side"
 
 #. Hovered: When the mouse pointer is over the item
 #: assets/settings.ui:3750
@@ -475,16 +495,17 @@ msgid "Without Hovered Child"
 msgstr ""
 
 #: assets/settings.ui:3783 assets/settings.ui:5123
+#, fuzzy
 msgid "Icon Scale"
-msgstr ""
+msgstr "Ikonstørrelse"
 
 #: assets/settings.ui:3867 assets/settings.ui:5205
 msgid "Icon Crop"
-msgstr ""
+msgstr "Ikonbeskjæring"
 
 #: assets/settings.ui:3962 assets/settings.ui:5300 assets/settings.ui:6053
 msgid "Background Image"
-msgstr ""
+msgstr "Bakgrunnsbilde"
 
 #: assets/settings.ui:4016 assets/settings.ui:4076
 msgid "Center Appearance"
@@ -604,7 +625,7 @@ msgstr ""
 
 #: assets/settings.ui:6600 assets/settings.ui:6734
 msgid "Width"
-msgstr ""
+msgstr "Bredde"
 
 #: assets/settings.ui:6682
 msgid "Pick Wedge Separator Color"
@@ -616,12 +637,12 @@ msgstr ""
 
 #: assets/settings.ui:6819
 msgid "Inner Radius"
-msgstr ""
+msgstr "Indre radius"
 
 #. When the mouse pointer is NOT over the item
 #: assets/settings.ui:6863
 msgid "Inactive"
-msgstr ""
+msgstr "Inaktiv"
 
 #. When the mouse pointer is over the item
 #: assets/settings.ui:6882
@@ -671,7 +692,7 @@ msgstr ""
 
 #: assets/settings.ui:7375
 msgid "Selection Timeout"
-msgstr ""
+msgstr "Utvalgstidsavbrudd"
 
 #: assets/settings.ui:7387
 msgid ""
@@ -691,7 +712,7 @@ msgstr ""
 
 #: assets/settings.ui:7517 assets/settings.ui:7788
 msgid "Advanced Settings"
-msgstr ""
+msgstr "Avanserte innstillinger"
 
 #: assets/settings.ui:7534
 msgid "These settings are independent of the presets."
@@ -741,19 +762,19 @@ msgstr ""
 #. Caption of the settings page in the window's titlebar.
 #: assets/settings.ui:7986
 msgid "Settings"
-msgstr ""
+msgstr "Innstillinger"
 
 #: assets/settings.ui:8062
 msgid "Removes the selected item."
-msgstr ""
+msgstr "Fjerner valgt element."
 
 #: assets/settings.ui:8095
 msgid "Imports a menu configuration."
-msgstr ""
+msgstr "Importerer et menyoppsett."
 
 #: assets/settings.ui:8116
 msgid "Exports the current menu configuration."
-msgstr ""
+msgstr "Eksporterer nåværende menyoppsett."
 
 #: assets/settings.ui:8150
 msgid "Opens a preview for the selected menu."
@@ -761,7 +782,7 @@ msgstr ""
 
 #: assets/settings.ui:8250 assets/settings.ui:8287
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #: assets/settings.ui:8285 assets/settings.ui:8286 assets/settings.ui:8383
 #: assets/settings.ui:8384
@@ -770,7 +791,7 @@ msgstr ""
 
 #: assets/settings.ui:8320 assets/settings.ui:8385
 msgid "Icon"
-msgstr ""
+msgstr "Ikon"
 
 #: assets/settings.ui:8333
 msgid "Can be an icon name, text, emoji or a file."
@@ -802,11 +823,11 @@ msgstr ""
 
 #: assets/settings.ui:8528 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
-msgstr ""
+msgstr "Snarvei"
 
 #: assets/settings.ui:8541
 msgid "This will open the menu."
-msgstr ""
+msgstr "Dette åpner menyen."
 
 #: assets/settings.ui:8581
 msgid "Open in Screen Center"
@@ -815,86 +836,86 @@ msgstr ""
 #. Caption of the menu editor page in the window's titlebar.
 #: assets/settings.ui:8691
 msgid "Menu Editor"
-msgstr ""
+msgstr "Menyredigerer"
 
 #. One of the buttons on the bottom of the achievements page.
 #: assets/settings.ui:8969
 msgid "In Progress"
-msgstr ""
+msgstr "Underveis"
 
 #. One of the buttons on the bottom of the achievements page.
 #: assets/settings.ui:8997
 msgid "Completed"
-msgstr ""
+msgstr "Fullført"
 
 #: assets/settings.ui:9050
 msgid "Reset all achievements."
-msgstr ""
+msgstr "Tilbakestill alle oppnåelser."
 
 #. Caption of the achievements page in the window's titlebar.
 #: assets/settings.ui:9079
 msgid "Achievements"
-msgstr ""
+msgstr "Oppnåelser"
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:367
 msgid "Novice"
-msgstr ""
+msgstr "Nybegynner"
 
 #. Translators: This is the tier 2 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:370
 msgid "Capable"
-msgstr ""
+msgstr "Kapabel"
 
 #. Translators: This is the tier 3 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:373
 msgid "Skilled"
-msgstr ""
+msgstr "Dreven"
 
 #. Translators: This is the tier 4 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:376
 msgid "Expert"
-msgstr ""
+msgstr "Ekspert"
 
 #. Translators: This is the tier 5 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:379
 msgid "Master"
-msgstr ""
+msgstr "Mester"
 
 #. Translators: This is the tier 1 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:385
 msgid "I"
-msgstr ""
+msgstr "I"
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:388
 msgid "II"
-msgstr ""
+msgstr "II"
 
 #. Translators: This is the tier 3 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:391
 msgid "III"
-msgstr ""
+msgstr "III"
 
 #. Translators: This is the tier 4 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:394
 msgid "IV"
-msgstr ""
+msgstr "IV"
 
 #. Translators: This is the tier 5 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:397
 msgid "V"
-msgstr ""
+msgstr "V"
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
 #: src/common/Achievements.js:413
@@ -916,7 +937,7 @@ msgstr ""
 #: src/common/Achievements.js:429
 #, javascript-format
 msgid "Select %x items."
-msgstr ""
+msgstr "Velg %x elementer."
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
@@ -1010,7 +1031,7 @@ msgstr ""
 #. achievement.
 #: src/common/Achievements.js:559
 msgid "Nerd Alert %i"
-msgstr ""
+msgstr "Nerdeadvarsel %i"
 
 #: src/common/Achievements.js:560
 #, javascript-format
@@ -1070,7 +1091,7 @@ msgstr ""
 #: src/common/Achievements.js:624
 #, javascript-format
 msgid "Import %x menu configurations."
-msgstr ""
+msgstr "Importer %x menyoppsett."
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
 #: src/common/Achievements.js:638
@@ -1080,12 +1101,12 @@ msgstr ""
 
 #: src/common/Achievements.js:640
 msgid "Export a menu configuration."
-msgstr ""
+msgstr "Eksporterer et menyoppsett."
 
 #: src/common/Achievements.js:641
 #, javascript-format
 msgid "Export %x menu configurations."
-msgstr ""
+msgstr "Eksporter %x menyoppsett."
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
@@ -1138,7 +1159,7 @@ msgstr ""
 
 #: src/common/Achievements.js:713
 msgid "Delete all of your menus."
-msgstr ""
+msgstr "Slett alle dine menyer."
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
@@ -1165,7 +1186,7 @@ msgstr ""
 
 #: src/extension/Background.js:95
 msgid "Close"
-msgstr ""
+msgstr "Lukk"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
@@ -1181,60 +1202,60 @@ msgstr ""
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:135
 msgid "You reached level %i!"
-msgstr ""
+msgstr "Du har nådd nivå %i!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:155
 msgid "Fly-Pie Achievement Completed!"
-msgstr ""
+msgstr "Fly-Pie-oppnåelse innvilget."
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:157
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
-msgstr ""
+msgstr "Du har fullført oppnåelsen «%s»!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
 #: src/extension/Daemon.js:448
 msgid "Show Achievements"
-msgstr ""
+msgstr "Vis oppnåelser"
 
 #: src/extension/DefaultMenu.js:27 src/prefs/ExampleMenu.js:26
 msgid "Example Menu"
-msgstr ""
+msgstr "Eksempelmeny"
 
 #: src/extension/DefaultMenu.js:34
 msgid "Sound"
-msgstr ""
+msgstr "Lyd"
 
 #: src/extension/DefaultMenu.js:38
 msgid "Play / Pause"
-msgstr ""
+msgstr "Spill av/pause"
 
 #: src/extension/DefaultMenu.js:44
 msgid "Mute"
-msgstr ""
+msgstr "Forstum"
 
 #: src/extension/DefaultMenu.js:50
 msgid "Next Title"
-msgstr ""
+msgstr "Neste tittel"
 
 #: src/extension/DefaultMenu.js:57
 msgid "Previous Title"
-msgstr ""
+msgstr "Forrige tittel"
 
 #: src/extension/DefaultMenu.js:66
 msgid "Window Management"
-msgstr ""
+msgstr "Vindusbehandling"
 
 #: src/extension/DefaultMenu.js:70
 msgid "Maximize Window"
-msgstr ""
+msgstr "Maksimer vindu"
 
 #: src/extension/DefaultMenu.js:76
 msgid "GNOME Shell"
-msgstr ""
+msgstr "GNOME-skall"
 
 #: src/extension/DefaultMenu.js:80 src/prefs/ExampleMenu.js:265
 msgid "Up"
@@ -1242,7 +1263,7 @@ msgstr ""
 
 #: src/extension/DefaultMenu.js:87
 msgid "Overview"
-msgstr ""
+msgstr "Oversikt"
 
 #: src/extension/DefaultMenu.js:93 src/prefs/ExampleMenu.js:268
 msgid "Down"
@@ -1250,7 +1271,7 @@ msgstr ""
 
 #: src/extension/DefaultMenu.js:100
 msgid "Show Apps"
-msgstr ""
+msgstr "Vis programmer"
 
 #: src/extension/DefaultMenu.js:108
 msgid "Open Windows"
@@ -1262,36 +1283,37 @@ msgstr ""
 
 #: src/extension/DefaultMenu.js:121 src/common/menus/Bookmarks.js:33
 msgid "Bookmarks"
-msgstr ""
+msgstr "Bokmerker"
 
 #: src/extension/DefaultMenu.js:126
 msgid "Fly-Pie Settings"
-msgstr ""
+msgstr "Fly-Pie-innstillinger"
 
 #: src/extension/DefaultMenu.js:131 src/common/menus/Favorites.js:43
 msgid "Favorites"
-msgstr ""
+msgstr "Favoritter"
 
 #: src/extension/DefaultMenu.js:132 src/common/menus/System.js:46
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: src/prefs/AchievementsPage.js:117
+#, fuzzy
 msgid "Do you really want to reset all statistics?"
-msgstr ""
+msgstr "Tilbakestill all statistikk?"
 
 #: src/prefs/AchievementsPage.js:118
 msgid "All achievements will be lost!"
-msgstr ""
+msgstr "Alle oppnåelser vil gå tapt!"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:29
 msgid "Animals & Nature"
-msgstr ""
+msgstr "Dyr og natur"
 
 #: src/prefs/ExampleMenu.js:33
 msgid "Flowers"
-msgstr ""
+msgstr "Blomster"
 
 #: src/prefs/ExampleMenu.js:36
 msgid "Tulip"
@@ -1299,11 +1321,11 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:37
 msgid "Rose"
-msgstr ""
+msgstr "Rose"
 
 #: src/prefs/ExampleMenu.js:38
 msgid "Sunflower"
-msgstr ""
+msgstr "Solsikke"
 
 #: src/prefs/ExampleMenu.js:39
 msgid "Blossom"
@@ -1316,23 +1338,23 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:45
 msgid "Mammals"
-msgstr ""
+msgstr "Pattedyr"
 
 #: src/prefs/ExampleMenu.js:48
 msgid "Cat"
-msgstr ""
+msgstr "Katt"
 
 #: src/prefs/ExampleMenu.js:49
 msgid "Ox"
-msgstr ""
+msgstr "Okse"
 
 #: src/prefs/ExampleMenu.js:50
 msgid "Dog"
-msgstr ""
+msgstr "Hund"
 
 #: src/prefs/ExampleMenu.js:51
 msgid "Pig"
-msgstr ""
+msgstr "Gris"
 
 #: src/prefs/ExampleMenu.js:52
 msgid "Monkey"
@@ -1341,15 +1363,15 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:57
 msgid "Reptiles"
-msgstr ""
+msgstr "Reptiler"
 
 #: src/prefs/ExampleMenu.js:60
 msgid "Crocodile"
-msgstr ""
+msgstr "Krokodille"
 
 #: src/prefs/ExampleMenu.js:61
 msgid "Snake"
-msgstr ""
+msgstr "Slange"
 
 #: src/prefs/ExampleMenu.js:62
 msgid "Turtle"
@@ -1366,53 +1388,53 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:71
 msgid "Food & Drink"
-msgstr ""
+msgstr "Mat og drikke"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:76
 msgid "Fruit"
-msgstr ""
+msgstr "Frukt"
 
 #: src/prefs/ExampleMenu.js:79
 msgid "Apple"
-msgstr ""
+msgstr "Eple"
 
 #: src/prefs/ExampleMenu.js:80
 msgid "Watermelon"
-msgstr ""
+msgstr "Vannmelon"
 
 #: src/prefs/ExampleMenu.js:81
 msgid "Lemon"
-msgstr ""
+msgstr "Sitron"
 
 #: src/prefs/ExampleMenu.js:82
 msgid "Banana"
-msgstr ""
+msgstr "Banan"
 
 #: src/prefs/ExampleMenu.js:83
 msgid "Strawberry"
-msgstr ""
+msgstr "Jordbær"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:88
 msgid "Drink"
-msgstr ""
+msgstr "Drikke"
 
 #: src/prefs/ExampleMenu.js:91
 msgid "Tea"
-msgstr ""
+msgstr "Te"
 
 #: src/prefs/ExampleMenu.js:92
 msgid "Coffee"
-msgstr ""
+msgstr "Kaffe"
 
 #: src/prefs/ExampleMenu.js:93
 msgid "Beer"
-msgstr ""
+msgstr "Øl"
 
 #: src/prefs/ExampleMenu.js:94
 msgid "Whiskey"
-msgstr ""
+msgstr "Whiskey"
 
 #: src/prefs/ExampleMenu.js:95
 msgid "Cocktail"
@@ -1421,7 +1443,7 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:100
 msgid "Sweets"
-msgstr ""
+msgstr "Søtsaker"
 
 #. Translators: This is the item which should be selected in the tutorial.
 #. Make sure the translation matches the name given in the tutorial!
@@ -1431,7 +1453,7 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:106
 msgid "Candy"
-msgstr ""
+msgstr "Godteri"
 
 #: src/prefs/ExampleMenu.js:107
 msgid "Doughnut"
@@ -1448,16 +1470,16 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:116
 msgid "Activities"
-msgstr ""
+msgstr "Aktiviteter"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:121
 msgid "Games"
-msgstr ""
+msgstr "Spill"
 
 #: src/prefs/ExampleMenu.js:124
 msgid "Billards"
-msgstr ""
+msgstr "Biljard"
 
 #: src/prefs/ExampleMenu.js:125
 msgid "Mahjong"
@@ -1465,7 +1487,7 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:126
 msgid "Bowling"
-msgstr ""
+msgstr "Bowling"
 
 #: src/prefs/ExampleMenu.js:127
 msgid "Darts"
@@ -1473,37 +1495,37 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:128
 msgid "Video Game"
-msgstr ""
+msgstr "Videospill"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:133
 msgid "Sports"
-msgstr ""
+msgstr "Sport"
 
 #: src/prefs/ExampleMenu.js:136
 msgid "Cricket"
-msgstr ""
+msgstr "Cricket"
 
 #: src/prefs/ExampleMenu.js:137
 msgid "Ice Hockey"
-msgstr ""
+msgstr "Ishockey"
 
 #: src/prefs/ExampleMenu.js:138
 msgid "Tennis"
-msgstr ""
+msgstr "Tennis"
 
 #: src/prefs/ExampleMenu.js:139
 msgid "Fishing"
-msgstr ""
+msgstr "Fisking"
 
 #: src/prefs/ExampleMenu.js:140
 msgid "Skiing"
-msgstr ""
+msgstr "Ski"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:145
 msgid "Places"
-msgstr ""
+msgstr "Steder"
 
 #: src/prefs/ExampleMenu.js:148
 msgid "Mount Fuji"
@@ -1515,11 +1537,11 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:150
 msgid "Statue of Liberty"
-msgstr ""
+msgstr "Frihetsgudinnen"
 
 #: src/prefs/ExampleMenu.js:151
 msgid "Japan"
-msgstr ""
+msgstr "Japan"
 
 #: src/prefs/ExampleMenu.js:152
 msgid "Moyai"
@@ -1528,53 +1550,53 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:159
 msgid "Objects"
-msgstr ""
+msgstr "Objekter"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:164
 msgid "Cars"
-msgstr ""
+msgstr "Biler"
 
 #: src/prefs/ExampleMenu.js:167
 msgid "Bus"
-msgstr ""
+msgstr "Buss"
 
 #: src/prefs/ExampleMenu.js:168
 msgid "Fire Engine"
-msgstr ""
+msgstr "Brannbil"
 
 #: src/prefs/ExampleMenu.js:169
 msgid "Automobile"
-msgstr ""
+msgstr "Personbil"
 
 #: src/prefs/ExampleMenu.js:170
 msgid "Tractor"
-msgstr ""
+msgstr "Traktor"
 
 #: src/prefs/ExampleMenu.js:171
 msgid "Truck"
-msgstr ""
+msgstr "Lastebil"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:176
 msgid "Buildings"
-msgstr ""
+msgstr "Bygninger"
 
 #: src/prefs/ExampleMenu.js:179
 msgid "Post Office"
-msgstr ""
+msgstr "Postkontor"
 
 #: src/prefs/ExampleMenu.js:180
 msgid "School"
-msgstr ""
+msgstr "Skole"
 
 #: src/prefs/ExampleMenu.js:181
 msgid "Hospital"
-msgstr ""
+msgstr "Sykehus"
 
 #: src/prefs/ExampleMenu.js:182
 msgid "Bank"
-msgstr ""
+msgstr "Bank"
 
 #: src/prefs/ExampleMenu.js:183
 msgid "Love Hotel"
@@ -1583,41 +1605,41 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:188
 msgid "Instruments"
-msgstr ""
+msgstr "Instrumenter"
 
 #: src/prefs/ExampleMenu.js:191
 msgid "Saxophone"
-msgstr ""
+msgstr "Saksofon"
 
 #: src/prefs/ExampleMenu.js:192
 msgid "Guitar"
-msgstr ""
+msgstr "Gitar"
 
 #: src/prefs/ExampleMenu.js:193
 msgid "Trumpet"
-msgstr ""
+msgstr "Trompet"
 
 #: src/prefs/ExampleMenu.js:194
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofon"
 
 #: src/prefs/ExampleMenu.js:195
 msgid "Drum"
-msgstr ""
+msgstr "Tromme"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:202
 msgid "Smileys"
-msgstr ""
+msgstr "Smilefjes"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:207
 msgid "Happy Faces"
-msgstr ""
+msgstr "Glade ansikter"
 
 #: src/prefs/ExampleMenu.js:210
 msgid "Smiley"
-msgstr ""
+msgstr "Smilefjes"
 
 #: src/prefs/ExampleMenu.js:211
 msgid "Winking Face"
@@ -1642,15 +1664,15 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:222
 msgid "Vomiting Face"
-msgstr ""
+msgstr "Spyfjes"
 
 #: src/prefs/ExampleMenu.js:223
 msgid "Skeptical Face"
-msgstr ""
+msgstr "Skeptisk ansikt"
 
 #: src/prefs/ExampleMenu.js:224
 msgid "Pouting Face"
-msgstr ""
+msgstr "Trutmunn"
 
 #: src/prefs/ExampleMenu.js:225
 msgid "Angry Face"
@@ -1688,12 +1710,12 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:245
 msgid "Symbols"
-msgstr ""
+msgstr "Symboler"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:250
 msgid "Star Signs"
-msgstr ""
+msgstr "Stjernetegn"
 
 #: src/prefs/ExampleMenu.js:253
 msgid "Taurus"
@@ -1759,26 +1781,26 @@ msgstr ""
 
 #: src/prefs/MenuEditorPage.js:214
 msgid "Export Menu Configuration"
-msgstr ""
+msgstr "Eksporter menyoppsett"
 
 #: src/prefs/MenuEditorPage.js:223 src/prefs/MenuEditorPage.js:288
 #: src/prefs/SettingsPage.js:298 src/prefs/SettingsPage.js:373
 msgid "JSON Files"
-msgstr ""
+msgstr "JSON-filer"
 
 #: src/prefs/MenuEditorPage.js:230 src/prefs/MenuEditorPage.js:295
 #: src/prefs/SettingsPage.js:305 src/prefs/SettingsPage.js:380
 msgid "All Files"
-msgstr ""
+msgstr "Alle filer"
 
 #: src/prefs/MenuEditorPage.js:234 src/prefs/MenuEditorPage.js:299
 #: src/prefs/SettingsPage.js:309 src/prefs/SettingsPage.js:384
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: src/prefs/MenuEditorPage.js:235
 msgid "Export"
-msgstr ""
+msgstr "Eksporter"
 
 #: src/prefs/MenuEditorPage.js:263
 msgid "Failed to export the menu configuration!"
@@ -1790,15 +1812,15 @@ msgstr ""
 
 #: src/prefs/MenuEditorPage.js:300
 msgid "Import"
-msgstr ""
+msgstr "Importer"
 
 #: src/prefs/MenuEditorPage.js:325
 msgid "Failed to import menu configuration!"
-msgstr ""
+msgstr "Klarte ikke å importere menyoppsett!"
 
 #: src/prefs/MenuEditorPage.js:355
 msgid "Menu Structure"
-msgstr ""
+msgstr "Menystruktur"
 
 #: src/prefs/MenuEditorPage.js:961
 msgid "You should try to have no more than twelve items in your menus."
@@ -1864,11 +1886,11 @@ msgstr ""
 
 #: src/prefs/SettingsPage.js:289
 msgid "Save Preset"
-msgstr ""
+msgstr "Lagre forhåndsinnstilling"
 
 #: src/prefs/SettingsPage.js:310
 msgid "Save"
-msgstr ""
+msgstr "Lagre"
 
 #: src/prefs/SettingsPage.js:334
 msgid "You should not store the preset in the extension directory!"
@@ -1884,15 +1906,15 @@ msgstr ""
 
 #: src/prefs/SettingsPage.js:365
 msgid "Load Preset"
-msgstr ""
+msgstr "Last inn forhåndsinnstilling"
 
 #: src/prefs/SettingsPage.js:385
 msgid "Load"
-msgstr ""
+msgstr "Last inn"
 
 #: src/prefs/SettingsPage.js:402
 msgid "Failed to load preset!"
-msgstr ""
+msgstr "Klarte ikke å laste inn forhåndsinnstilling!"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:168
@@ -1908,7 +1930,7 @@ msgstr ""
 
 #: src/common/actions/Command.js:34
 msgid "Launch Application"
-msgstr ""
+msgstr "Start program"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -1925,7 +1947,7 @@ msgstr ""
 
 #: src/common/actions/Command.js:69
 msgid "Command"
-msgstr ""
+msgstr "Kommando"
 
 #: src/common/actions/Command.js:69
 msgid "Use the button to list installed apps!"
@@ -1951,7 +1973,7 @@ msgstr ""
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: src/common/actions/DBusSignal.js:67
 msgid "This will be passed to the D-Bus signal."
@@ -1965,7 +1987,7 @@ msgstr ""
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:41
 msgid "Opens a file with the default application."
-msgstr ""
+msgstr "Åpner en fil med forvalgt program."
 
 #: src/common/actions/File.js:45
 msgid ""
@@ -1975,7 +1997,7 @@ msgstr ""
 
 #: src/common/actions/File.js:69
 msgid "File"
-msgstr ""
+msgstr "Fil"
 
 #: src/common/actions/File.js:69 src/common/actions/Uri.js:68
 msgid "It will be opened with the default app."
@@ -2000,7 +2022,7 @@ msgstr ""
 
 #: src/common/actions/InsertText.js:80
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #: src/common/actions/InsertText.js:80
 msgid "This text will be inserted."
@@ -2063,13 +2085,14 @@ msgstr ""
 
 #: src/common/menus/CustomMenu.js:29
 msgid "Custom Menu"
-msgstr ""
+msgstr "Egendefinert meny"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:36
+#, fuzzy
 msgid "This can contain actions and other menus."
-msgstr ""
+msgstr "Kan inneholde handlinger og andre menyer."
 
 #: src/common/menus/CustomMenu.js:40
 msgid ""
@@ -2083,13 +2106,13 @@ msgstr ""
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
-msgstr ""
+msgstr "Enheter"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:40
 msgid "Shows connected devices."
-msgstr ""
+msgstr "Vis tilkoblede enheter."
 
 #: src/common/menus/Devices.js:44
 msgid ""
@@ -2136,13 +2159,13 @@ msgstr ""
 
 #: src/common/menus/MainMenu.js:33
 msgid "Main Menu"
-msgstr ""
+msgstr "Hovedmeny"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/MainMenu.js:40
 msgid "Shows all installed applications."
-msgstr ""
+msgstr "Viser alle installerte programmer."
 
 #: src/common/menus/MainMenu.js:44
 msgid ""
@@ -2153,13 +2176,14 @@ msgstr ""
 
 #: src/common/menus/RecentFiles.js:34
 msgid "Recent Files"
-msgstr ""
+msgstr "Nylige filer"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RecentFiles.js:41
+#, fuzzy
 msgid "Shows your recently used files."
-msgstr ""
+msgstr "Viser dine sist brukte filer."
 
 #: src/common/menus/RecentFiles.js:45
 msgid ""
@@ -2170,13 +2194,14 @@ msgstr ""
 
 #: src/common/menus/RunningApps.js:47
 msgid "Running Apps"
-msgstr ""
+msgstr "Kjørende programmer"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:54
+#, fuzzy
 msgid "Shows the currently running applications."
-msgstr ""
+msgstr "Viser alle åpne programmer."
 
 #: src/common/menus/RunningApps.js:58
 msgid ""
@@ -2196,7 +2221,7 @@ msgstr ""
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
-msgstr ""
+msgstr "Vindusfilter"
 
 #: src/common/menus/RunningApps.js:99
 msgid "See Tooltip for details."
@@ -2241,8 +2266,12 @@ msgstr ""
 
 #: src/common/menus/System.js:108
 msgid "Log Out"
-msgstr ""
+msgstr "Logg ut"
 
 #: src/common/menus/System.js:117
 msgid "Power Off…"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Power Off..."
+#~ msgstr "Slå av …"

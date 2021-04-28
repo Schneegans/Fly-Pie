@@ -149,10 +149,11 @@ var Achievements = GObject.registerClass(
               }
             }
             // Also the DBus-Menus-Achievement needs special treatment as we do not want
-            // to include the tutorial menu openings (which are also triggered over the
-            // D-Bus).
+            // to include the tutorial and preview menu openings (which are also triggered
+            // over the D-Bus).
             else if (achievement.statsKey == 'stats-dbus-menus') {
               val -= this._settings.get_uint('stats-tutorial-menus');
+              val -= this._settings.get_uint('stats-preview-menus');
             }
 
             // First compute the state based on the value range of the achievement.
@@ -360,39 +361,38 @@ var Achievements = GObject.registerClass(
       _createAchievements() {
 
         const attributes = [
-          // Translators: Most achievements have five tiers. In these cases, you can use
-          // a %i and / or a %s in the achievement's name. In english, %i will be
-          // replaced by the corresponding roman tier number (I, II, III, ...) and %s
-          // will be replaced by one of the attributes ('Novice', 'Master', ...). Both
-          // of these can be translated as well, so you may get quite creative here :).
-          // 'Novice' is the tier I attribute. This will be inserted for each %s in the
-          // achievement titles.
+          // Translators: This is the tier 1 attribute which will be inserted for each %s
+          // in the achievement titles.
           _('Novice'),
-          // Translators: This is the tier 2 attribute.
+          // Translators: This is the tier 2 attribute which will be inserted for each %s
+          // in the achievement titles.
           _('Capable'),
-          // Translators: This is the tier 3 attribute.
+          // Translators: This is the tier 3 attribute which will be inserted for each %s
+          // in the achievement titles.
           _('Skilled'),
-          // Translators: This is the tier 4 attribute.
+          // Translators: This is the tier 4 attribute which will be inserted for each %s
+          // in the achievement titles.
           _('Expert'),
-          // Translators: This is the tier 5 attribute.
+          // Translators: This is the tier 5 attribute which will be inserted for each %s
+          // in the achievement titles.
           _('Master')
         ];
 
         const numbers = [
-          // Translators: Most achievements have five tiers. In these cases, you can use a
-          // %i and / or a %s in the achievement's name. In english, %i will be replaced
-          // by the corresponding roman tier number (I, II, III, ...) and %s will be
-          // replaced by one of the attributes ('Novice', 'Master', ...). Both of these
-          // can be translated as well, so you may get quite creative here :). This 'I' is
-          // the roman number 1 which is replaces any %i in achievement names.
+          // Translators: This is the tier 1 number which will be inserted for each %i in
+          // the achievement titles.
           _('I'),
-          // Translators: This is the tier 2 number.
+          // Translators: This is the tier 2 number which will be inserted for each %i in
+          // the achievement titles.
           _('II'),
-          // Translators: This is the tier 3 number.
+          // Translators: This is the tier 3 number which will be inserted for each %i in
+          // the achievement titles.
           _('III'),
-          // Translators: This is the tier 4 number.
+          // Translators: This is the tier 4 number which will be inserted for each %i in
+          // the achievement titles.
           _('IV'),
-          // Translators: This is the tier 5 number.
+          // Translators: This is the tier 5 number which will be inserted for each %i in
+          // the achievement titles.
           _('V')
         ];
 
@@ -652,12 +652,27 @@ var Achievements = GObject.registerClass(
           achievements.set('bigmenus' + i, {
             // Translators: The name of the 'Create %x items in the menu editor.'
             // achievement.
-            name: formatName(_('There Should Be No More Than Twelve Items...? %i'), i),
+            name: formatName(_('There Should Be No More Than Twelve Items…? %i'), i),
             description: _('Create %x items in the menu editor.')
                              .replace('%x', BASE_RANGES[i + 1] / 2),
             bgImage: bgImages[i],
             fgImage: 'dots.svg',
             statsKey: 'stats-added-items',
+            xp: BASE_XP[i],
+            range: [BASE_RANGES[i] / 2, BASE_RANGES[i + 1] / 2],
+            hidden: false
+          });
+        }
+
+        for (let i = 0; i < 5; i++) {
+          achievements.set('previewmenus' + i, {
+            // Translators: The name of the 'Open a preview menu %x times.' achievement.
+            name: formatName(_('%s Menu Designer'), i),
+            description:
+                _('Open a preview menu %x times.').replace('%x', BASE_RANGES[i + 1] / 2),
+            bgImage: bgImages[i],
+            fgImage: 'eye.svg',
+            statsKey: 'stats-preview-menus',
             xp: BASE_XP[i],
             range: [BASE_RANGES[i] / 2, BASE_RANGES[i + 1] / 2],
             hidden: false

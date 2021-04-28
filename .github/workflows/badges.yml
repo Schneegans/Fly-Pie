@@ -24,7 +24,7 @@ jobs:
           auth: ${{ secrets.UPLOAD_BADGES }}
           gistID: 8f6459c2417de7534f64d98360dde865
           filename: loc.json
-          label: Lines of Code
+          label: lines of code
           message: ${{ env.CODE_LINES }}
           color: lightgrey
       - name: Create Comments-Badge
@@ -33,6 +33,6 @@ jobs:
           auth: ${{ secrets.UPLOAD_BADGES }}
           gistID: 8f6459c2417de7534f64d98360dde865
           filename: comments.json
-          label: Comments
+          label: comments
           message: ${{ env.COMMENT_LINES }}
           color: green

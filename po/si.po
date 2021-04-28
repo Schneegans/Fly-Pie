@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the Fly-Pie package.
 # <FIRSTNAME LASTNAME <EMAIL@ADDRESS>, 2021.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Fly-Pie 6\n"
+"Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-28 13:29+0200\n"
-"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: <LANGUAGE_CODE>\n"
+"PO-Revision-Date: 2021-04-23 15:14+0000\n"
+"Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
+"Language-Team: Sinhala <https://hosted.weblate.org/projects/fly-pie/core/si/"
+">\n"
+"Language: si\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: assets/settings.ui:66
 msgid ""
@@ -36,7 +38,7 @@ msgstr ""
 
 #: assets/settings.ui:99
 msgid "About"
-msgstr ""
+msgstr "පිළිබඳව"
 
 #: assets/settings.ui:125
 msgid "Created by"
@@ -75,7 +77,7 @@ msgstr ""
 
 #: assets/settings.ui:365
 msgid "Sponsors"
-msgstr ""
+msgstr "අනුග්‍රාහකයින්"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: assets/settings.ui:570
@@ -1206,15 +1208,15 @@ msgstr ""
 
 #: src/extension/DefaultMenu.js:34
 msgid "Sound"
-msgstr ""
+msgstr "ශබ්දය"
 
 #: src/extension/DefaultMenu.js:38
 msgid "Play / Pause"
-msgstr ""
+msgstr "ධාවනය / විරාමය"
 
 #: src/extension/DefaultMenu.js:44
 msgid "Mute"
-msgstr ""
+msgstr "නිශ්ශබ්ද"
 
 #: src/extension/DefaultMenu.js:50
 msgid "Next Title"
@@ -1250,7 +1252,7 @@ msgstr ""
 
 #: src/extension/DefaultMenu.js:100
 msgid "Show Apps"
-msgstr ""
+msgstr "යෙදුම් පෙන්වන්න"
 
 #: src/extension/DefaultMenu.js:108
 msgid "Open Windows"
@@ -1366,28 +1368,28 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:71
 msgid "Food & Drink"
-msgstr ""
+msgstr "ආහාර සහ පාන"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:76
 msgid "Fruit"
-msgstr ""
+msgstr "පලතුරු"
 
 #: src/prefs/ExampleMenu.js:79
 msgid "Apple"
-msgstr ""
+msgstr "ඇපල්"
 
 #: src/prefs/ExampleMenu.js:80
 msgid "Watermelon"
-msgstr ""
+msgstr "පැණි කොමඩු"
 
 #: src/prefs/ExampleMenu.js:81
 msgid "Lemon"
-msgstr ""
+msgstr "දෙහි"
 
 #: src/prefs/ExampleMenu.js:82
 msgid "Banana"
-msgstr ""
+msgstr "කෙසෙල්"
 
 #: src/prefs/ExampleMenu.js:83
 msgid "Strawberry"
@@ -1558,19 +1560,19 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:176
 msgid "Buildings"
-msgstr ""
+msgstr "ගොඩනැගිලි"
 
 #: src/prefs/ExampleMenu.js:179
 msgid "Post Office"
-msgstr ""
+msgstr "තැපැල් කාර්යාලය"
 
 #: src/prefs/ExampleMenu.js:180
 msgid "School"
-msgstr ""
+msgstr "පාසැල"
 
 #: src/prefs/ExampleMenu.js:181
 msgid "Hospital"
-msgstr ""
+msgstr "රෝහල"
 
 #: src/prefs/ExampleMenu.js:182
 msgid "Bank"
@@ -1868,7 +1870,7 @@ msgstr ""
 
 #: src/prefs/SettingsPage.js:310
 msgid "Save"
-msgstr ""
+msgstr "සුරකින්න"
 
 #: src/prefs/SettingsPage.js:334
 msgid "You should not store the preset in the extension directory!"
@@ -2083,13 +2085,13 @@ msgstr ""
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
-msgstr ""
+msgstr "උපාංග"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:40
 msgid "Shows connected devices."
-msgstr ""
+msgstr "සම්බන්ධිත උපාංග පෙන්වයි."
 
 #: src/common/menus/Devices.js:44
 msgid ""
