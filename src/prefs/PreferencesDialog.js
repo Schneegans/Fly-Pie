@@ -37,11 +37,11 @@ var PreferencesDialog = class PreferencesDialog {
 
     // Load the user interface file.
     this._builder = new Gtk.Builder();
-    this._builder.add_from_file(Me.path + '/assets/settings.ui');
+    this._builder.add_from_file(Me.path + '/resources/settings.ui');
 
     // Load the CSS file for the settings dialog.
     const styleProvider = Gtk.CssProvider.new();
-    styleProvider.load_from_path(Me.path + '/assets/flypie.css');
+    styleProvider.load_from_path(Me.path + '/resources/flypie.css');
     Gtk.StyleContext.add_provider_for_screen(
         Gdk.Screen.get_default(), styleProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 

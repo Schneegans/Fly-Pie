@@ -133,7 +133,8 @@ var Daemon = class Daemon {
           _('Fly-Pie Level Up!'),
           // Translators: This is shown in a desktop notifications.
           _('You reached level %i!').replace('%i', level),
-          Gio.icon_new_for_string(Me.path + `/assets/badges/levels/level${level}.png`));
+          Gio.icon_new_for_string(
+              Me.path + `/resources/badges/levels/level${level}.png`));
     });
 
     // Show notifications whenever achievements are unlocked.

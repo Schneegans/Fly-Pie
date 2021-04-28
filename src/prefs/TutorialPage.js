@@ -105,7 +105,7 @@ var TutorialPage = class TutorialPage {
     // Draw the Fly-Pie logo with the current theme's foreground color.
     this._builder.get_object('fly-pie-logo').connect('draw', (widget, ctx) => {
       const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
-      const logo  = GdkPixbuf.Pixbuf.new_from_file(Me.path + '/assets/logo.svg');
+      const logo  = GdkPixbuf.Pixbuf.new_from_file(Me.path + '/resources/logo.svg');
 
       ctx.pushGroup();
       Gdk.cairo_set_source_pixbuf(ctx, logo, 0, 0);
@@ -121,7 +121,7 @@ var TutorialPage = class TutorialPage {
     for (let i = 1; i <= 2; i++) {
       const image = this._builder.get_object('tutorial-animation-' + i);
       image.set_from_animation(GdkPixbuf.PixbufAnimation.new_from_file(
-          Me.path + '/assets/tutorial' + i + '.gif'));
+          Me.path + '/resources/tutorial' + i + '.gif'));
     }
 
     // Make the five Show-Menu buttons of the tutorial pages actually show a menu.

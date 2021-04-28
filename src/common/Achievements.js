@@ -294,11 +294,11 @@ var Achievements = GObject.registerClass(
       // Paints an icon for the given achievement to a Cairo.Context.
       static paintAchievementIcon(ctx, achievement) {
         const background = GdkPixbuf.Pixbuf.new_from_file(
-            Me.path + '/assets/badges/achievements/' + achievement.bgImage);
+            Me.path + '/resources/badges/achievements/' + achievement.bgImage);
         const foreground = GdkPixbuf.Pixbuf.new_from_file(
-            Me.path + '/assets/badges/achievements/' + achievement.fgImage);
+            Me.path + '/resources/badges/achievements/' + achievement.fgImage);
         const gloss = GdkPixbuf.Pixbuf.new_from_file(
-            Me.path + '/assets/badges/achievements/gloss.png');
+            Me.path + '/resources/badges/achievements/gloss.png');
 
         Gdk.cairo_set_source_pixbuf(ctx, background, 0, 0);
         ctx.paint();
