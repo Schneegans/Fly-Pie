@@ -380,7 +380,7 @@ var Achievements = GObject.registerClass(
         ];
 
         const numbers = [
-          // Translators: This is the tier 2 number which will be inserted for each %i in
+          // Translators: This is the tier 1 number which will be inserted for each %i in
           // the achievement titles.
           _('I'),
           // Translators: This is the tier 2 number which will be inserted for each %i in
