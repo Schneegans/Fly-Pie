@@ -201,6 +201,8 @@ var MenuEditorPage = class MenuEditorPage {
           if (result < 0) {
             const error = DBusInterface.getErrorDescription(result);
             utils.debug('Failed to open menu preview: ' + error);
+          } else {
+            Statistics.getInstance().addPreviewMenuOpened();
           }
         });
       }
@@ -956,16 +958,49 @@ var MenuEditorPage = class MenuEditorPage {
     const label    = this._builder.get_object('info-label');
 
     const tips = [
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
       _('You should try to have no more than twelve items in your menus.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
       _('You will find it more easy to learn item positions if you have an even number of entries. Four, six and eight are good numbers.'),
-      _('The source code of Fly-Pie is available on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.'),
-      _('Suggestions can be posted on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.'),
-      _('Bugs can be reported on <a href="https://github.com/Schneegans/Fly-Pie/issues">Github</a>.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('The source code of Fly-Pie is available on <a href="%s">Github</a>.')
+          .replace('%s', 'https://github.com/Schneegans/Fly-Pie'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('Suggestions can be posted on <a href="%s">Github</a>.')
+          .replace('%s', 'https://github.com/Schneegans/Fly-Pie/issues'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('Bugs can be reported on <a href="%s">Github</a>.')
+          .replace('%s', 'https://github.com/Schneegans/Fly-Pie/issues'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
       _('Deep hierarchies are pretty efficient. Put menus into menus in menus!'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
       _('If you delete all menus, log out and log in again, the default configuration will be restored.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
       _('You can reorder the menu items on the left via drag and drop.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
       _('You can drop directories, files, links and desktop files to the menu hierarchy on the left.'),
-      _('You can copy menu items by holding the Control key while dragging them to another location.')
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('You can copy menu items by holding the Control key while dragging them to another location.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('It\'s easy to <a href="%s">translate Fly-Pie to another language</a>!')
+          .replace(
+              '%s',
+              'https://github.com/Schneegans/Fly-Pie/blob/develop/docs/translating.md'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('💕️ Do you want to show that you love Fly-Pie? <a href="%s">Become a sponsor!</a>')
+          .replace('%s', 'https://github.com/sponsors/Schneegans')
     ];
 
     // Every eight seconds we hide the current tip...
@@ -1150,8 +1185,8 @@ var MenuEditorPage = class MenuEditorPage {
         }
         this._set(
             iter, 'DISPLAY_NAME',
-            '<b>' + GLib.markup_escape_text(data, -1) + '</b>\n<small>' + shortcut +
-                '</small>');
+            '<b>' + GLib.markup_escape_text(data, -1) + '</b>\n<small>' +
+                GLib.markup_escape_text(shortcut, -1) + '</small>');
       } else {
         this._set(iter, 'DISPLAY_NAME', GLib.markup_escape_text(data, -1));
       }
@@ -1168,7 +1203,9 @@ var MenuEditorPage = class MenuEditorPage {
         }
         const name = this._get(iter, 'NAME');
         this._set(
-            iter, 'DISPLAY_NAME', '<b>' + name + '</b>\n<small>' + shortcut + '</small>');
+            iter, 'DISPLAY_NAME',
+            '<b>' + GLib.markup_escape_text(name, -1) + '</b>\n<small>' +
+                GLib.markup_escape_text(shortcut, -1) + '</small>');
       }
     }
 

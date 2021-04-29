@@ -27,16 +27,18 @@ usage() {
 cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
   { echo "ERROR: Could not find the repo root."; exit 1; }
 
-# Compile locales.
-scripts/compile-locales.sh
+echo "Compiling resources..."
+cd resources && glib-compile-resources --generate flypie.gresource.xml && cd ..
 
-# Compile schemas.
+echo "Compiling schemas..."
 glib-compile-schemas schemas
+
+echo "Compiling locales..."
+scripts/compile-locales.sh
 
 # Delete any old zip and pack everything together
 rm --force flypie@schneegans.github.com.zip
-zip -r flypie@schneegans.github.com.zip -- src presets assets schemas locale *.js metadata.json LICENSE
-
+zip -r flypie@schneegans.github.com.zip -- src presets resources/flypie.gresource schemas/gschemas.compiled locale *.js metadata.json LICENSE
 
 while getopts is FLAG; do
 	case $FLAG in

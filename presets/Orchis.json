@@ -27,7 +27,7 @@
   "center-icon-opacity": 0,
   "center-icon-opacity-hover": 1,
   "center-icon-crop": 0.49,
-  "center-icon-crop-hover": 0.63,
+  "center-icon-crop-hover": 0.8,
   "center-background-image": "assets/orchis.svg",
   "center-background-image-hover": "assets/orchis.svg",
   "child-color-mode": "fixed",
