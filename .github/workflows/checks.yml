@@ -95,7 +95,7 @@ jobs:
         fi
 
   build:
-    name: Check if Fly-Pie builds correctly
+    name: Run Tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -108,9 +108,7 @@ jobs:
         sudo apt install gettext imagemagick -qq
     - name: Test Fly-Pie
       run: |
-        sudo apt install imagemagick -qq
-        $GITHUB_WORKSPACE/scripts/create-release.sh -s
-        $GITHUB_WORKSPACE/scripts/run-tests.sh ${{ matrix.version }}
+        sudo $GITHUB_WORKSPACE/scripts/run-tests.sh ${{ matrix.version }}
     - name: Upload Screenshot
       uses: actions/upload-artifact@v2
       with:
