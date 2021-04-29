@@ -8138,39 +8138,55 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="edit-box1">
+                      <object class="GtkButton" id="preview-menu-button">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="tooltip_text" translatable="yes">Open Live Preview Menu</property>
+                        <property name="always_show_image">True</property>
                         <child>
-                          <object class="GtkButton" id="preview-menu-button">
+                          <object class="GtkGrid">
                             <property name="visible">True</property>
-                            <property name="sensitive">False</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="tooltip_text" translatable="yes">Opens a preview for the selected menu.</property>
+                            <property name="can_focus">False</property>
+                            <property name="valign">center</property>
+                            <property name="margin_left">8</property>
+                            <property name="margin_right">8</property>
+                            <property name="column_spacing">6</property>
                             <child>
-                              <object class="GtkImage" id="help_image">
+                              <object class="GtkImage">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="icon_name">media-playback-start-symbolic</property>
-                                <property name="icon_size">1</property>
                               </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                              </packing>
                             </child>
-                            <style>
-                              <class name="pill-button"/>
-                              <class name="suggested-action"/>
-                            </style>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes" comments="Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say &quot;Open Live Preview&quot; or similar.">Live Preview</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">0</property>
+                              </packing>
+                            </child>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
                         </child>
+                        <style>
+                          <class name="pill-button"/>
+                          <class name="suggested-action"/>
+                        </style>
                       </object>
                       <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
                         <property name="pack_type">end</property>
-                        <property name="position">0</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                   </object>
