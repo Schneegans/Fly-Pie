@@ -99,7 +99,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [3.36, 3.38]
+        version: ["3.36", "3.38"]
     steps:
     - uses: actions/checkout@v2
     - name: Download Dependencies
@@ -110,7 +110,7 @@ jobs:
       run: |
         sudo apt install imagemagick -qq
         $GITHUB_WORKSPACE/scripts/create-release.sh -s
-        $GITHUB_WORKSPACE/scripts/run-tests.sh {{ matrix.version }}
+        $GITHUB_WORKSPACE/scripts/run-tests.sh ${{ matrix.version }}
     - name: Upload Screenshot
       uses: actions/upload-artifact@v2
       with:
