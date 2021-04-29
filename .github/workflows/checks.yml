@@ -102,27 +102,17 @@ jobs:
         version: [3.36, 3.38]
     steps:
     - uses: actions/checkout@v2
-    - name: Build Fly-Pie
+    - name: Download Dependencies
       run: |
         sudo apt update -qq
-        sudo apt install gettext -qq
-        $GITHUB_WORKSPACE/scripts/create-release.sh -s
+        sudo apt install gettext imagemagick -qq
     - name: Test Fly-Pie
       run: |
         sudo apt install imagemagick -qq
-        POD=$(sudo podman run --rm -td ghcr.io/schneegans/gnome-shell-${{ matrix.version }}:latest)
-        sleep 10
-        sudo podman cp flypie@schneegans.github.com.zip $POD:/home/gnomeshell/
-        sudo podman exec --env DISPLAY=:99 --user gnomeshell $POD /home/gnomeshell/enable-extension.sh flypie@schneegans.github.com
-        sleep 2
-        sudo podman exec --env DISPLAY=:99 --user gnomeshell $POD xdotool key ctrl+space
-        sleep 1
-        sudo podman exec --env DISPLAY=:99 --user gnomeshell $POD xdotool key ctrl+space
-        sleep 1
-        sudo podman cp $POD:/home/gnomeshell/Xvfb_screen0 . && convert xwd:Xvfb_screen0 capture.jpg
-        sudo podman stop $POD
+        $GITHUB_WORKSPACE/scripts/create-release.sh -s
+        $GITHUB_WORKSPACE/scripts/run-tests.sh {{ matrix.version }}
     - name: Upload Screenshot
       uses: actions/upload-artifact@v2
       with:
-        name: screenshot-${{ matrix.version }}
+        name: capture-${{ matrix.version }}
         path: capture.jpg
