@@ -47,9 +47,9 @@ podman exec --user gnomeshell "$POD_ID" /home/gnomeshell/set-env.sh /home/gnomes
 sleep 1
 ERRORS=$(podman exec "$POD_ID" journalctl | grep flypie | grep ERROR)
 
-if [ ! -z "$ERRORS" ]; then
+if [ -n "$ERRORS" ]; then
   echo " Failed!"
-  echo $ERRORS
+  echo "$ERRORS"
   exit 1
 else
  echo " Done."
@@ -61,9 +61,9 @@ podman exec --user gnomeshell "$POD_ID" /home/gnomeshell/set-env.sh gnome-extens
 sleep 2
 ERRORS=$(podman exec "$POD_ID" journalctl | grep "Failed to open preferences")
 
-if [ ! -z "$ERRORS" ]; then
+if [ -n "$ERRORS" ]; then
   echo " Failed!"
-  echo $ERRORS
+  echo "$ERRORS"
   exit 1
 else
  echo " Done."
