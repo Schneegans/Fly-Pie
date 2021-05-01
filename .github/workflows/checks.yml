@@ -97,6 +97,11 @@ jobs:
   build:
     name: Run Tests
     runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'pull_request' ||
+      ( contains(github.ref, 'master') && !contains(github.event.head_commit.message, '[no-ci]') ) ||
+      ( contains(github.ref, 'develop') && !contains(github.event.head_commit.message, '[no-ci]') ) ||
+      contains(github.event.head_commit.message, '[run-ci]')
     strategy:
       matrix:
         version: ["3.36", "3.38"]
@@ -105,12 +110,7 @@ jobs:
     - name: Download Dependencies
       run: |
         sudo apt update -qq
-        sudo apt install gettext imagemagick -qq
+        sudo apt install gettext -qq
     - name: Test Fly-Pie
       run: |
         sudo $GITHUB_WORKSPACE/scripts/run-tests.sh ${{ matrix.version }}
-    - name: Upload Screenshot
-      uses: actions/upload-artifact@v2
-      with:
-        name: capture-${{ matrix.version }}
-        path: capture.jpg
