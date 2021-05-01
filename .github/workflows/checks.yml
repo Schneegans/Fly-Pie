@@ -17,8 +17,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Download Clang-Format
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y clang-format
+          sudo apt update -qq
+          sudo apt install clang-format -qq
       - name: Run Clang-Format
         run: scripts/clang-format.sh
       - name: Compare Results
@@ -43,8 +43,8 @@ jobs:
           ref: ${{ github.base_ref }}
       - name: Download Cloc
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y cloc
+          sudo apt update -qq
+          sudo apt install cloc -qq
       - name: Run Cloc
         run: |
           BASE="$(base/scripts/cloc.sh --percentage-only)"
@@ -84,7 +84,8 @@ jobs:
         fi
     - name: Check correct workflow # Now, gettext will be installed and both INVERTED if statements should be false.
       run: |
-        sudo apt-get update -qq && sudo apt-get install gettext -qq -y
+        sudo apt update -qq
+        sudo apt install gettext -qq
         if ! $GITHUB_WORKSPACE/scripts/compile-locales.sh; then
           if ! $GITHUB_WORKSPACE/scripts/update-po.sh; then
             if ! $GITHUB_WORKSPACE/scripts/update-pot.sh; then
@@ -94,11 +95,22 @@ jobs:
         fi
 
   build:
-    name: Check if Fly-Pie builds correctly
+    name: Run Tests
     runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'pull_request' ||
+      ( contains(github.ref, 'master') && !contains(github.event.head_commit.message, '[no-ci]') ) ||
+      ( contains(github.ref, 'develop') && !contains(github.event.head_commit.message, '[no-ci]') ) ||
+      contains(github.event.head_commit.message, '[run-ci]')
+    strategy:
+      matrix:
+        version: ["3.36", "3.38"]
     steps:
     - uses: actions/checkout@v2
-    - name: Build Fly-Pie
+    - name: Download Dependencies
       run: |
-        sudo apt-get update -qq && sudo apt-get install gettext -qq -y
-        $GITHUB_WORKSPACE/scripts/create-release.sh -s
+        sudo apt update -qq
+        sudo apt install gettext -qq
+    - name: Test Fly-Pie
+      run: |
+        sudo $GITHUB_WORKSPACE/scripts/run-tests.sh ${{ matrix.version }}
