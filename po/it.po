@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-29 12:35+0200\n"
-"PO-Revision-Date: 2021-04-28 12:28+0000\n"
-"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
-">\n"
+"PO-Revision-Date: 2021-05-01 19:12+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -425,10 +425,8 @@ msgid "Tutorial"
 msgstr "Tutorial"
 
 #: resources/ui/settings.ui:2521
-#, fuzzy
-#| msgid "Easing Duration"
 msgid "Animation Duration"
-msgstr "Durata Facilitata"
+msgstr "Durata Animazione"
 
 #: resources/ui/settings.ui:2539
 msgid "Global Scaling"
@@ -631,8 +629,10 @@ msgstr "Aspetto elementi figli"
 
 #. When the mouse pointer is NOT over the item
 #: resources/ui/settings.ui:5371
+#, fuzzy
 msgid "Child items are styled differently when their wedge is hovered."
 msgstr ""
+"Gli elementi figlio hanno uno stile diverso quando il loro cuneo è in bilico."
 
 #: resources/ui/settings.ui:5552 resources/ui/settings.ui:5629
 msgid "Pick Grandchild Item Color"
@@ -652,10 +652,13 @@ msgid "Grandchildren Appearance"
 msgstr "Aspetto elementi dei nipoti"
 
 #: resources/ui/settings.ui:6135
+#, fuzzy
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
 msgstr ""
+"Gli oggetti nipote hanno uno stile diverso quando si passa con il mouse sul "
+"cuneo dell'elemento genitore."
 
 #: resources/ui/settings.ui:6247
 msgid "Thickness"
@@ -784,8 +787,9 @@ msgstr ""
 "l'elemento corrente verrà selezionato."
 
 #: resources/ui/settings.ui:7477
+#, fuzzy
 msgid "Experimental Hover Mode"
-msgstr ""
+msgstr "Modalità hover sperimentale"
 
 #: resources/ui/settings.ui:7489
 msgid ""
@@ -817,20 +821,16 @@ msgstr ""
 "Questo può essere usato se vuoi catturare un video di Fly-Pie."
 
 #: resources/ui/settings.ui:7697
-#, fuzzy
-#| msgid "Achievements"
 msgid "Achievement Notifications"
-msgstr "Premi"
+msgstr "Notifiche sui Risultati"
 
 #: resources/ui/settings.ui:7709
 msgid "Show a notification whenever you complete an achievement."
-msgstr ""
+msgstr "Mostra una notifica ogni volta che completi un obiettivo."
 
 #: resources/ui/settings.ui:7847
-#, fuzzy
-#| msgid "Save Preset"
 msgid "Presets"
-msgstr "Salva Predefinito"
+msgstr "Preset"
 
 #. Where presets are stored by default
 #: resources/ui/settings.ui:7872
@@ -839,10 +839,8 @@ msgstr "Carica le impostazioni da un file"
 
 #. Where presets are stored by default
 #: resources/ui/settings.ui:7893
-#, fuzzy
-#| msgid "Save current settings"
 msgid "Save the current settings to a file"
-msgstr "Salva impostazioni correnti"
+msgstr "Salva le impostazioni correnti in un file"
 
 #: resources/ui/settings.ui:7924 resources/ui/settings.ui:8145
 msgid "Open Live Preview Menu"
@@ -953,7 +951,7 @@ msgstr "Completato"
 
 #: resources/ui/settings.ui:9066
 msgid "Reset all achievements."
-msgstr ""
+msgstr "Ripristina tutti gli obiettivi."
 
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/settings.ui:9095
@@ -963,16 +961,14 @@ msgstr "Premi"
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:366
-#, fuzzy
-#| msgid "Devices"
 msgid "Novice"
-msgstr "Dispositivi"
+msgstr "Apprendista"
 
 #. Translators: This is the tier 2 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:369
 msgid "Capable"
-msgstr ""
+msgstr "Capace"
 
 #. Translators: This is the tier 3 attribute which will be inserted for each %s
 #. in the achievement titles.
@@ -996,7 +992,7 @@ msgstr "Maestro"
 #. the achievement titles.
 #: src/common/Achievements.js:384
 msgid "I"
-msgstr ""
+msgstr "I"
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
@@ -1024,9 +1020,9 @@ msgstr "V"
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
 #: src/common/Achievements.js:412
-#, javascript-format
+#, fuzzy, javascript-format
 msgid "%s Cancellor"
-msgstr ""
+msgstr "%s Cancellor"
 
 #: src/common/Achievements.js:414
 #, javascript-format
@@ -1037,7 +1033,7 @@ msgstr "Annulla una selezione %x volte."
 #: src/common/Achievements.js:427
 #, javascript-format
 msgid "%s Pielot"
-msgstr ""
+msgstr "%s Pielot"
 
 #: src/common/Achievements.js:428
 #, javascript-format
@@ -1049,14 +1045,14 @@ msgstr "Seleziona %x elementi."
 #: src/common/Achievements.js:442
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
-msgstr ""
+msgstr "%s Selettore di Gesti di Primo Livello"
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:445
 #, javascript-format
 msgid "%s Submenu Gesture-Selector"
-msgstr ""
+msgstr "%s Selettore delle Gesture del Sottomenu"
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
@@ -1068,218 +1064,214 @@ msgstr "%s Sottomenu Selettore-Gesture"
 #: src/common/Achievements.js:454
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
-msgstr ""
+msgstr "Seleziona %x elementi alla profondità %d in modalità di marcatura."
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:471
 #, javascript-format
 msgid "%s Toplevel Click-Selector"
-msgstr ""
+msgstr "%s Selettore di Clic di Primo Livello"
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:474
 #, javascript-format
 msgid "%s Submenu Click-Selector"
-msgstr ""
+msgstr "%s Selettore Clic del Sottomenu"
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
-msgstr ""
+msgstr "%s Selettore Clic del Sottomenu"
 
 #: src/common/Achievements.js:483
 #, javascript-format
 msgid "Select %x items at depth %d with mouse clicks."
-msgstr ""
+msgstr "Seleziona %x elementi alla profondità %d con i clic del mouse."
 
 #. Translators: The name of the 'Select %x items at depth 1 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:505
 #, javascript-format
 msgid "%s Toplevel Selector"
-msgstr ""
+msgstr "%s Selettore di Primo livello"
 
 #. Translators: The name of the 'Select %x items at depth 2 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:508
 #, javascript-format
 msgid "%s Submenu Selector"
-msgstr ""
+msgstr "%s Selettore Sottomenu"
 
 #. Translators: The name of the 'Select %x items at depth 3 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:511
 #, javascript-format
 msgid "%s Subsubmenu Selector"
-msgstr ""
+msgstr "%s Selettore sotto sottomenu"
 
 #: src/common/Achievements.js:522
 msgid "Select %x items at depth %d in less than %t milliseconds."
-msgstr ""
+msgstr "Seleziona %x elementi alla profondità %d in meno di %t millisecondi."
 
 #. Translators: The name of the 'Open the settings dialog %x times.'
 #. achievement.
 #: src/common/Achievements.js:542
 msgid "The Journey Is The Reward %i"
-msgstr ""
+msgstr "Il Viaggio è la Ricompensa %i"
 
 #: src/common/Achievements.js:543
 #, javascript-format
 msgid "Open the settings dialog %x times."
-msgstr ""
+msgstr "Apri la finestra di dialogo delle impostazioni %x volte."
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
 #: src/common/Achievements.js:558
 msgid "Nerd Alert %i"
-msgstr ""
+msgstr "Avviso Nerd %i"
 
 #: src/common/Achievements.js:559
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
-msgstr ""
+msgstr "Apri i menu %x con l'interfaccia D-Bus."
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
 #: src/common/Achievements.js:573
 msgid "Entropie %i"
-msgstr ""
+msgstr "Entropia %i"
 
 #: src/common/Achievements.js:575
 #, javascript-format
 msgid "Generate %x random presets."
-msgstr ""
+msgstr "Genera %x preset casuali."
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
 #: src/common/Achievements.js:588
 #, javascript-format
 msgid "%s Preset Exporter"
-msgstr ""
+msgstr "%s Esportatore Preset"
 
 #: src/common/Achievements.js:590
 msgid "Export a custom preset."
-msgstr ""
+msgstr "Esportare un preset personalizzato."
 
 #: src/common/Achievements.js:591
 #, javascript-format
 msgid "Export %x custom presets."
-msgstr ""
+msgstr "Esporta %x preset personalizzati."
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
 #: src/common/Achievements.js:604
 #, javascript-format
 msgid "%s Preset Importer"
-msgstr ""
+msgstr "%s Importatore Preset"
 
 #: src/common/Achievements.js:606
 msgid "Import a custom preset."
-msgstr ""
+msgstr "Importa un preset personalizzato."
 
 #: src/common/Achievements.js:607
 #, javascript-format
 msgid "Import %x custom presets."
-msgstr ""
+msgstr "Importa %x preset personalizzati."
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
 #: src/common/Achievements.js:620
 #, javascript-format
 msgid "%s Menu Importer"
-msgstr ""
+msgstr "%s Importatore di Menu"
 
 #: src/common/Achievements.js:622
-#, fuzzy
-#| msgid "Imports a menu configuration."
 msgid "Import a menu configuration."
 msgstr "Importa una configurazione del menu."
 
 #: src/common/Achievements.js:623
 #, javascript-format
 msgid "Import %x menu configurations."
-msgstr ""
+msgstr "Importa %x configurazioni del menu."
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
 #: src/common/Achievements.js:637
 #, javascript-format
 msgid "%s Menu Exporter"
-msgstr ""
+msgstr "%s Esportatore di Menu"
 
 #: src/common/Achievements.js:639
-#, fuzzy
-#| msgid "Imports a menu configuration."
 msgid "Export a menu configuration."
-msgstr "Importa una configurazione del menu."
+msgstr "Esporta una configurazione del menu."
 
 #: src/common/Achievements.js:640
 #, javascript-format
 msgid "Export %x menu configurations."
-msgstr ""
+msgstr "Esporta %x configurazioni del menu."
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
 #: src/common/Achievements.js:655
 msgid "There Should Be No More Than Twelve Items…? %i"
-msgstr ""
+msgstr "Non dovrebbero esserci più di dodici elementi ...? %i"
 
 #: src/common/Achievements.js:656
 #, javascript-format
 msgid "Create %x items in the menu editor."
-msgstr ""
+msgstr "Crea %x elementi nell'editor del menu."
 
 #. Translators: The name of the 'Open a preview menu %x times.' achievement.
 #: src/common/Achievements.js:670
 #, javascript-format
 msgid "%s Menu Designer"
-msgstr ""
+msgstr "%s Designer del Menu"
 
 #: src/common/Achievements.js:672
 #, javascript-format
 msgid "Open a preview menu %x times."
-msgstr ""
+msgstr "Apri un menu di anteprima %x volte."
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:685
 msgid "Grumpie Rookie"
-msgstr ""
+msgstr "Grumpie Rookie"
 
 #: src/common/Achievements.js:686
 #, javascript-format
 msgid "Open the tutorial menu %x times."
-msgstr ""
+msgstr "Apri il menu del tutorial %x volte."
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:698
 msgid "Bachelor Pielot"
-msgstr ""
+msgstr "Bachelor Pielot"
 
 #: src/common/Achievements.js:699
 msgid "Get all medals of the tutorial."
-msgstr ""
+msgstr "Ottieni tutte le medaglie del tutorial."
 
 #. Translators: The name of the hidden 'Delete all of your menus.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:711
 msgid "Say Good-Pie!"
-msgstr ""
+msgstr "Dì Good-Pie!"
 
 #: src/common/Achievements.js:712
 msgid "Delete all of your menus."
-msgstr ""
+msgstr "Elimina tutti i tuoi menu."
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
 #. achievement.
 #: src/common/Achievements.js:725
 msgid "That's Philanthropie!"
-msgstr ""
+msgstr "Questa è Filantropia!"
 
 #: src/common/Achievements.js:726
 msgid "Consider becoming a sponsor of Fly-Pie."
-msgstr ""
+msgstr "Considera l'idea di diventare uno sponsor di Fly-Pie."
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:234 src/common/ConfigWidgetFactory.js:272
@@ -1308,31 +1300,29 @@ msgstr "Cambia Lato"
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:137
 msgid "Fly-Pie Level Up!"
-msgstr ""
+msgstr "Fly-Pie Salito di Livello!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:139
 msgid "You reached level %i!"
-msgstr ""
+msgstr "Hai raggiunto il livello %i!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:159
 msgid "Fly-Pie Achievement Completed!"
-msgstr ""
+msgstr "Obiettivo Fly-Pie completato!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:161
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
-msgstr ""
+msgstr "Hai completato l'obiettivo \"%s\"!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
 #: src/extension/Daemon.js:455
-#, fuzzy
-#| msgid "Achievements"
 msgid "Show Achievements"
-msgstr "Premi"
+msgstr "Mostra Risultati"
 
 #: src/extension/DefaultMenu.js:27 src/prefs/ExampleMenu.js:26
 msgid "Example Menu"
@@ -1411,14 +1401,12 @@ msgid "System"
 msgstr "Sistema"
 
 #: src/prefs/AchievementsPage.js:117
-#, fuzzy
-#| msgid "Do you really want to delete the selected item?"
 msgid "Do you really want to reset all statistics?"
-msgstr "Vuoi davvero eliminare l'elemento selezionato?"
+msgstr "Vuoi davvero reimpostare tutte le statistiche?"
 
 #: src/prefs/AchievementsPage.js:118
 msgid "All achievements will be lost!"
-msgstr ""
+msgstr "Tutti i risultati andranno persi!"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:29
@@ -1958,20 +1946,21 @@ msgstr ""
 #, javascript-format
 msgid "The source code of Fly-Pie is available on <a href=\"%s\">Github</a>."
 msgstr ""
+"Il codice sorgente di Fly-Pie è disponibile su <a href=\"%s\">Github</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:973
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">Github</a>."
-msgstr ""
+msgstr "I suggerimenti possono essere pubblicati su <a href=\"%s\">Github</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:977
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">Github</a>."
-msgstr ""
+msgstr "È possibile segnalare bug su <a href=\"%s\">Github</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -2023,7 +2012,7 @@ msgstr ""
 #: src/prefs/MenuEditorPage.js:996
 #, javascript-format
 msgid "It's easy to <a href=\"%s\">translate Fly-Pie to another language</a>!"
-msgstr ""
+msgstr "È facile <a href=\"%s\">tradurre Fly-Pie in un altra lingua</a>!"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -2033,6 +2022,7 @@ msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"%s\">Become a sponsor!"
 "</a>"
 msgstr ""
+"💕️ Vuoi dimostrare che ami Fly-Pie? <a href=\"%s\">Diventa uno sponsor!</a>"
 
 #: src/prefs/MenuEditorPage.js:1096
 msgid "Do you really want to delete the selected item?"
@@ -2052,7 +2042,7 @@ msgstr "Salva"
 
 #: src/prefs/SettingsPage.js:334
 msgid "You should not store the preset in the extension directory!"
-msgstr ""
+msgstr "Non memorizzare il preset nella directory dell'estensione!"
 
 #. Translators: "It" refers to the preset if stored in the extension's
 #. directory.
@@ -2061,20 +2051,20 @@ msgid ""
 "Here it will be deleted whenever Fly-Pie is updated. It has been saved "
 "anyways, but please consider to store it in a safer place!"
 msgstr ""
+"Qui verrà cancellato ogni volta che Fly-Pie viene aggiornato. È stato "
+"comunque salvato, ma ti preghiamo di conservarlo in un luogo più sicuro!"
 
 #: src/prefs/SettingsPage.js:365
-#, fuzzy
-#| msgid "Load a Preset"
 msgid "Load Preset"
-msgstr "Carica un Predefinito"
+msgstr "Carica un Preset"
 
 #: src/prefs/SettingsPage.js:385
 msgid "Load"
-msgstr ""
+msgstr "Carica"
 
 #: src/prefs/SettingsPage.js:402
 msgid "Failed to load preset!"
-msgstr ""
+msgstr "Impossibile caricare il preset!"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:168
@@ -2422,30 +2412,34 @@ msgid ""
 "\"Fire\" or \"Water\". A negation would be \"^(?!.*Fire)\" to match anything "
 "but \"Fire\". Remember to use the live preview to instantly see the results!"
 msgstr ""
+"Puoi usarlo per filtrare le finestre visualizzate. Sono supportate le "
+"espressioni regolari: utilizza una stringa semplice come \"Fire\" per "
+"mostrare solo le finestre i cui titoli contengono \"Fire\" (ad esempio "
+"Firefox). Usa \"Fuoco|Acqua\" per abbinare \"Fuoco\" o \"Acqua\". Una "
+"negazione sarebbe \"^(?!.*Fire)\" per trovare qualsiasi cosa tranne \"Fire\""
+". Ricorda di utilizzare l'anteprima dal vivo per vedere immediatamente i "
+"risultati!"
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
-msgstr ""
+msgstr "Filtro Finestra"
 
 #: src/common/menus/RunningApps.js:99
-#, fuzzy
-#| msgid "See tooltip for details."
 msgid "See Tooltip for details."
-msgstr "Vedere dettagli nella descrizione del comando."
+msgstr "Vedere la descrizione del comando per i dettagli."
 
 #: src/common/menus/RunningApps.js:124
 msgid "Active Workspace Only"
-msgstr ""
+msgstr "Solo Area di Lavoro Attiva"
 
 #: src/common/menus/RunningApps.js:125
-#, fuzzy
-#| msgid "Launch Application"
 msgid "Group by Application"
-msgstr "Avvia Applicazione"
+msgstr "Gruppo di Applicazioni"
 
 #: src/common/menus/RunningApps.js:126
+#, fuzzy
 msgid "Peek on Hover"
-msgstr ""
+msgstr "Sbircia al passaggio del mouse"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -2472,7 +2466,7 @@ msgstr "Sospendi"
 
 #: src/common/menus/System.js:99
 msgid "Switch User…"
-msgstr ""
+msgstr "Cambia Utente…"
 
 #: src/common/menus/System.js:108
 msgid "Log Out"
@@ -2480,7 +2474,7 @@ msgstr "Disconnetti"
 
 #: src/common/menus/System.js:117
 msgid "Power Off…"
-msgstr ""
+msgstr "Spegni…"
 
 #~ msgid "Opens a preview for the selected menu."
 #~ msgstr "Apre un'anteprima per il menu selezionato."
