@@ -304,6 +304,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                                 <property name="valign">start</property>
                                 <property name="margin_top">8</property>
                                 <property name="label">GEPLlinux
+&lt;a href="https://www.llorachdevs.com/Home"&gt;Garsiv&lt;/a&gt;
 &lt;a href="https://github.com/SimHacker"&gt;@SimHacker&lt;/a&gt;</property>
                                 <property name="use_markup">True</property>
                                 <attributes>

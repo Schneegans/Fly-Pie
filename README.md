@@ -75,6 +75,7 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
 ## :2nd_place_medal: Silver Sponsors
 <p align="center">
   GEPLlinux<br>
+  <a href="https://www.llorachdevs.com/Home">Garsiv</a><br>
   <a href="https://github.com/SimHacker">@SimHacker</a><br>
 </p>
 
