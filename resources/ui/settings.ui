@@ -112,6 +112,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                       <object class="GtkGrid">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="margin_bottom">8</property>
                         <property name="halign">center</property>
                         <property name="row_spacing">5</property>
                         <property name="column_spacing">8</property>
@@ -166,9 +167,12 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                             <property name="halign">start</property>
                             <property name="valign">end</property>
                             <property name="margin_top">8</property>
-                            <property name="label">&lt;a href="https://github.com/Schneegans"&gt;@schneegans&lt;/a&gt; (DE)
+                            <property name="label">&lt;a href="https://github.com/albanobattistella"&gt;@albanobattistella&lt;/a&gt; (IT)
+Allan Nordhøy (NO)
 &lt;a href="https://github.com/daPhipz"&gt;@daPhipz&lt;/a&gt; (DE)
-&lt;a href="https://github.com/albanobattistella"&gt;@albanobattistella&lt;/a&gt; (IT)</property>
+HelaBasa (KO, SI)
+J. Lavoie (IT)
+&lt;a href="https://github.com/Schneegans"&gt;@schneegans&lt;/a&gt; (DE)</property>
                             <property name="use_markup">True</property>
                           </object>
                           <packing>
