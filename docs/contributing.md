@@ -52,7 +52,7 @@ Emoji | Description
 :rocket: `:rocket:` | When you improved performance.
 :memo: `:memo:` | When you wrote documentation.
 :beetle: `:beetle:` | When you fixed a bug.
-:revolving_hearts: `:revolving_hearts:` | When a new sponsor is added.
+:revolving_hearts: `:revolving_hearts:` | When a new sponsor is added or credits are updated.
 :heavy_check_mark: `:heavy_check_mark:` | When you worked on checks or adjusted the code to be compliant with them.
 :twisted_rightwards_arrows: `:twisted_rightwards_arrows:` | When you merged a branch.
 :fire: `:fire:` | When you removed something.
