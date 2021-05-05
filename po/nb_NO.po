@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-05 07:18+0200\n"
-"PO-Revision-Date: 2021-04-28 12:28+0000\n"
-"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
+"PO-Revision-Date: 2021-05-06 17:32+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
 "core/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -95,42 +95,44 @@ msgstr "Sponsorer"
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:575
 msgid "Linear"
-msgstr ""
+msgstr "Lineær"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:579
+#, fuzzy
 msgid "Ease"
-msgstr ""
+msgstr "Toning"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:583
 msgid "Ease-In"
-msgstr ""
+msgstr "Inntoning"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:587
 msgid "Ease-Out"
-msgstr ""
+msgstr "Uttoning"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:591
 msgid "Ease-In-Out"
-msgstr ""
+msgstr "Inn- og uttoning"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:595
+#, fuzzy
 msgid "Ease-In-Quad"
-msgstr ""
+msgstr "Inntoningskvadruppel"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:599
 msgid "Ease-Out-Quad"
-msgstr ""
+msgstr "Uttoningskvadruppel"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:603
 msgid "Ease-In-Out-Quad"
-msgstr ""
+msgstr "Inn- og uttoningskvadruppel"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:607
@@ -181,7 +183,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:1056
 msgid "Generate Random Preset"
-msgstr ""
+msgstr "Generer tilfeldig forhåndsinnstilling"
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: resources/ui/settings.ui:1127
@@ -190,8 +192,9 @@ msgid "Enable Animations"
 msgstr "Skru på animasjoner"
 
 #: resources/ui/settings.ui:1154
+#, fuzzy
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
-msgstr ""
+msgstr "Fly-Pie krever at animasjoner er påslått i GNOME Shell."
 
 #: resources/ui/settings.ui:1280
 msgid ""
@@ -201,6 +204,7 @@ msgid ""
 msgstr ""
 
 #: resources/ui/settings.ui:1300
+#, fuzzy
 msgid ""
 "• Use your <b>left mouse button to select items</b>.\n"
 "• Use your <b>right mouse button to close the menu</b>.\n"
@@ -208,13 +212,19 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"• Bruk din <b>venstre museknapp for å velge elementer</b>.\n"
+"• Bruk din <b>høyre museknapp for å lukke menyen</b>.\n"
+"• Testmenyen er kun der for testing, å velge elementer i den har ingen "
+"effekt..\n"
+"\n"
+"Når du er klar, kan du trykke på <b>Neste</b> for å ta rede på detaljene."
 
 #. The text of the big tutorial button.
 #: resources/ui/settings.ui:1333 resources/ui/settings.ui:1452
 #: resources/ui/settings.ui:1578 resources/ui/settings.ui:1846
 #: resources/ui/settings.ui:1970
 msgid "<big><b>Open the example menu!</b></big>"
-msgstr ""
+msgstr "<big><b>Åpne eksempelmenyen.</b></big>"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1371
@@ -222,12 +232,16 @@ msgid "You can click anywhere!"
 msgstr "Du kan klikke hvor som helst!"
 
 #: resources/ui/settings.ui:1404
+#, fuzzy
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
 msgstr ""
+"Det spiller ingen rolle om du klikker direkte på et element eller på kanten "
+"av skjermen, så lenge pekeren forblir i elementets kile."
 
 #: resources/ui/settings.ui:1422
+#, fuzzy
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -236,6 +250,13 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
+"<b>Elementer velges ved å klikke hvor som helst i deres tilhørende kiler</b>."
+"\n"
+"\n"
+"Du trenger ikke å vente på at animasjonen fullføres, siden undermenykiler "
+"vises umiddelbart rundt posisjonen du har klikket.\n"
+"\n"
+"Klikk <b>Neste</b> for en øvelsesøkt."
 
 #. This is a heading.
 #: resources/ui/settings.ui:1491
@@ -280,7 +301,7 @@ msgstr "Opplåst på mindre enn 1000 ms"
 #. This is a heading.
 #: resources/ui/settings.ui:1766
 msgid "The Marking Mode of Fly-Pie"
-msgstr ""
+msgstr "Markeringsmodus for Fly-Pie"
 
 #: resources/ui/settings.ui:1799
 msgid ""
@@ -288,6 +309,10 @@ msgid ""
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
+"<b>Markeringsmodus</b> for Fly-Pie lar deg velge elementer ved å <b>tegne "
+"håndvendinger</b>. For å komme inn i markeringsmodus kan du klikke og dra et "
+"element. Så snart du tar en pause eller lager en sving vil elementet bli "
+"valgt."
 
 #: resources/ui/settings.ui:1816
 msgid ""
@@ -544,7 +569,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:4584 resources/ui/settings.ui:5669
 msgid "Offset"
-msgstr ""
+msgstr "Forskyvning"
 
 #. Draw above (grand)children items.
 #. There's an explanation string below in the application.
@@ -559,7 +584,7 @@ msgstr ""
 #. When the mouse pointer is NOT over the item
 #: resources/ui/settings.ui:5095 resources/ui/settings.ui:5826
 msgid "Standard State"
-msgstr ""
+msgstr "Forvalgt tilstand"
 
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/settings.ui:5111
@@ -604,7 +629,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:6265 resources/ui/settings.ui:6586
 msgid "Color"
-msgstr ""
+msgstr "Farge"
 
 #: resources/ui/settings.ui:6311
 msgid "Pick Trace Color"
@@ -623,8 +648,9 @@ msgid "Minimum Segment Length"
 msgstr ""
 
 #: resources/ui/settings.ui:6478 resources/ui/settings.ui:7000
+#, fuzzy
 msgid "Wedge Appearance"
-msgstr ""
+msgstr "Kile-utseende"
 
 #. Keep the individual lines short (around 30 characters max)!
 #. You can use up to three lines if you want.
@@ -633,6 +659,8 @@ msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr ""
+"Å klikke i indre radius\n"
+"avbryter utvalget."
 
 #: resources/ui/settings.ui:6570
 msgid "Wedge Separators"
@@ -665,8 +693,9 @@ msgid "Hovered"
 msgstr ""
 
 #: resources/ui/settings.ui:6910
+#, fuzzy
 msgid "Pick Wedge Color"
-msgstr ""
+msgstr "Velg kilefarge"
 
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/settings.ui:6925
@@ -682,8 +711,9 @@ msgid "Minimum Stroke Angle"
 msgstr ""
 
 #: resources/ui/settings.ui:7122
+#, fuzzy
 msgid "Smaller turns will not lead to selections."
-msgstr ""
+msgstr "Mindre svinger vil ikke lede til utvelging."
 
 #: resources/ui/settings.ui:7199
 msgid "Minimum Stroke Length"
@@ -753,17 +783,17 @@ msgstr ""
 
 #: resources/ui/settings.ui:7852
 msgid "Presets"
-msgstr ""
+msgstr "Forhåndsinnstillinger"
 
 #. Where presets are stored by default
 #: resources/ui/settings.ui:7877
 msgid "Load settings fom a file"
-msgstr ""
+msgstr "Last inn innstillinger fra en fil"
 
 #. Where presets are stored by default
 #: resources/ui/settings.ui:7898
 msgid "Save the current settings to a file"
-msgstr ""
+msgstr "Lagre nåværende innstillinger i en fil"
 
 #: resources/ui/settings.ui:7929 resources/ui/settings.ui:8150
 msgid "Open Live Preview Menu"
@@ -798,7 +828,7 @@ msgstr "Navn"
 #: resources/ui/settings.ui:8306 resources/ui/settings.ui:8307
 #: resources/ui/settings.ui:8404 resources/ui/settings.ui:8405
 msgid "Insert Emoji"
-msgstr ""
+msgstr "Sett inn Emoji"
 
 #: resources/ui/settings.ui:8341 resources/ui/settings.ui:8406
 msgid "Icon"
@@ -806,15 +836,15 @@ msgstr "Ikon"
 
 #: resources/ui/settings.ui:8354
 msgid "Can be an icon name, text, emoji or a file."
-msgstr ""
+msgstr "Kan være et ikonnavn, tekst, emoji, eller en fil."
 
 #: resources/ui/settings.ui:8455 src/prefs/MenuEditorPage.js:370
 msgid "Fixed Angle"
-msgstr ""
+msgstr "Fast vinkel"
 
 #: resources/ui/settings.ui:8468
 msgid "See tooltip for details."
-msgstr ""
+msgstr "Se verktøytips for detaljer."
 
 #: resources/ui/settings.ui:8491
 msgid ""
@@ -1097,7 +1127,7 @@ msgstr ""
 
 #: src/common/Achievements.js:622
 msgid "Import a menu configuration."
-msgstr ""
+msgstr "Importer et menyoppsett."
 
 #: src/common/Achievements.js:623
 #, javascript-format
@@ -1132,14 +1162,14 @@ msgstr ""
 
 #. Translators: The name of the 'Open a preview menu %x times.' achievement.
 #: src/common/Achievements.js:670
-#, javascript-format
+#, fuzzy, javascript-format
 msgid "%s Menu Designer"
-msgstr ""
+msgstr "%s Menydesigner"
 
 #: src/common/Achievements.js:672
 #, javascript-format
 msgid "Open a preview menu %x times."
-msgstr ""
+msgstr "Åpne forhåndsvisningsmenyen %x ganger."
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
@@ -1150,7 +1180,7 @@ msgstr ""
 #: src/common/Achievements.js:686
 #, javascript-format
 msgid "Open the tutorial menu %x times."
-msgstr ""
+msgstr "Åpne veivisningsmenyen %x ganger."
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
@@ -1369,7 +1399,7 @@ msgstr "Gris"
 
 #: src/prefs/ExampleMenu.js:52
 msgid "Monkey"
-msgstr ""
+msgstr "Ape"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:57
@@ -1386,11 +1416,12 @@ msgstr "Slange"
 
 #: src/prefs/ExampleMenu.js:62
 msgid "Turtle"
-msgstr ""
+msgstr "Skilpadde"
 
 #: src/prefs/ExampleMenu.js:63
+#, fuzzy
 msgid "T-Rex"
-msgstr ""
+msgstr "T-Rex"
 
 #: src/prefs/ExampleMenu.js:64
 msgid "Apatosaurus"
@@ -1476,7 +1507,7 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:109
 msgid "Chocolate"
-msgstr ""
+msgstr "Sjokolade"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:116
@@ -1611,7 +1642,7 @@ msgstr "Bank"
 
 #: src/prefs/ExampleMenu.js:183
 msgid "Love Hotel"
-msgstr ""
+msgstr "Kjærlighetshotell"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:188
@@ -1691,12 +1722,12 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:226
 msgid "Very Angry Face"
-msgstr ""
+msgstr "Veldig sint ansikt"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:231
 msgid "Surprised Faces"
-msgstr ""
+msgstr "Overraskede ansikt"
 
 #: src/prefs/ExampleMenu.js:234
 msgid "Flushed Face"
@@ -1886,7 +1917,7 @@ msgstr ""
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:987
 msgid "You can reorder the menu items on the left via drag and drop."
-msgstr ""
+msgstr "Du kan omorganisere menyelementene til venstre via dra-og-slipp."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1921,12 +1952,14 @@ msgid ""
 msgstr ""
 
 #: src/prefs/MenuEditorPage.js:1096
+#, fuzzy
 msgid "Do you really want to delete the selected item?"
-msgstr ""
+msgstr "Slett valgt element?"
 
 #: src/prefs/MenuEditorPage.js:1097
+#, fuzzy
 msgid "This cannot be undone!"
-msgstr ""
+msgstr "Dette kan ikke angres."
 
 #: src/prefs/SettingsPage.js:289
 msgid "Save Preset"
@@ -1994,18 +2027,20 @@ msgid "Command"
 msgstr "Kommando"
 
 #: src/common/actions/Command.js:69
+#, fuzzy
 msgid "Use the button to list installed apps!"
-msgstr ""
+msgstr "Bruk knappen til å liste opp installerte programmer."
 
 #: src/common/actions/DBusSignal.js:32
+#, fuzzy
 msgid "D-Bus Signal"
-msgstr ""
+msgstr "D-Bus-signal"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/DBusSignal.js:39
 msgid "Emits a D-Bus signal."
-msgstr ""
+msgstr "Sender et D-Bus-signal."
 
 #: src/common/actions/DBusSignal.js:43
 msgid ""
@@ -2025,7 +2060,7 @@ msgstr ""
 
 #: src/common/actions/File.js:34
 msgid "Open File"
-msgstr ""
+msgstr "Åpne fil"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -2049,7 +2084,7 @@ msgstr ""
 
 #: src/common/actions/InsertText.js:45
 msgid "Insert Text"
-msgstr ""
+msgstr "Sett inn tekst"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -2074,7 +2109,7 @@ msgstr ""
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
-msgstr ""
+msgstr "Aktiver snarvei"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -2178,13 +2213,13 @@ msgstr ""
 
 #: src/common/menus/FrequentlyUsed.js:44
 msgid "Frequently Used"
-msgstr ""
+msgstr "Ofte brukt"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/FrequentlyUsed.js:51
 msgid "Shows your frequently used applications."
-msgstr ""
+msgstr "Viser dine ofte brukte programmer."
 
 #: src/common/menus/FrequentlyUsed.js:55
 msgid ""
@@ -2268,16 +2303,17 @@ msgid "Window Filter"
 msgstr "Vindusfilter"
 
 #: src/common/menus/RunningApps.js:99
+#, fuzzy
 msgid "See Tooltip for details."
-msgstr ""
+msgstr "Se verktøytips for detaljer."
 
 #: src/common/menus/RunningApps.js:124
 msgid "Active Workspace Only"
-msgstr ""
+msgstr "Kun på aktivt arbeidsområde"
 
 #: src/common/menus/RunningApps.js:125
 msgid "Group by Application"
-msgstr ""
+msgstr "Grupper programvist"
 
 #: src/common/menus/RunningApps.js:126
 msgid "Peek on Hover"
@@ -2286,35 +2322,42 @@ msgstr ""
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/System.js:53
+#, fuzzy
 msgid "Allows screen lock, shutdown and other things."
-msgstr ""
+msgstr "Tillater skjermlåsing, avstengning, og andre ting."
 
 #: src/common/menus/System.js:57
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
 msgstr ""
+"<b>System</b>-menyen viser et element for skjermlåsing, avstengning, "
+"innstillinger, osv."
 
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:81
+#, fuzzy
 msgid "Lock"
-msgstr ""
+msgstr "Lås …"
 
 #: src/common/menus/System.js:90
+#, fuzzy
 msgid "Suspend"
-msgstr ""
+msgstr "Hvilemodus …"
 
 #: src/common/menus/System.js:99
+#, fuzzy
 msgid "Switch User…"
-msgstr ""
+msgstr "Bytt bruker …"
 
 #: src/common/menus/System.js:108
 msgid "Log Out"
 msgstr "Logg ut"
 
 #: src/common/menus/System.js:117
+#, fuzzy
 msgid "Power Off…"
-msgstr ""
+msgstr "Slå av …"
 
 #, fuzzy
 #~ msgid "Power Off..."
