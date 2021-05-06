@@ -260,7 +260,7 @@ var MenuEditorPage = class MenuEditorPage {
               transient_for: button.get_toplevel(),
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
-              text: _('Failed to export the menu configuration!'),
+              text: _('Could not export the menu configuration.'),
               secondary_text: '' + error
             });
             errorMessage.run();
@@ -322,7 +322,7 @@ var MenuEditorPage = class MenuEditorPage {
               transient_for: button.get_toplevel(),
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
-              text: _('Failed to import menu configuration!'),
+              text: _('Could not import the menu configuration.'),
               secondary_text: '' + error
             });
             errorMessage.run();
@@ -469,8 +469,8 @@ var MenuEditorPage = class MenuEditorPage {
 
             if (uriScheme != null) {
               // First we check whether the dragged data contains an URI. If it points to
-              // a *.desktop file, we create a "Launch Application" item the corresponding
-              // application.
+              // a *.desktop file, we create a "Launch Application" item for the
+              // corresponding application.
               if (uriScheme == 'file') {
                 const file = Gio.File.new_for_uri(text);
 
@@ -531,7 +531,7 @@ var MenuEditorPage = class MenuEditorPage {
               }
             }
 
-            // If it's not an URI, we create a "Insert Text" action.
+            // If it's not an URI, we create an "Insert Text" action.
             else {
               const newType = 'InsertText';
               const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
@@ -573,7 +573,7 @@ var MenuEditorPage = class MenuEditorPage {
               uris.forEach(uri => {success &= addItem(uri)});
             }
 
-            // Independent of the selected drag'n'drop action, the drag source shouldn't
+            // Independent of the selected drag and drop action, the drag source shouldn't
             // remove any source data.
             Gtk.drag_finish(context, success, false, time);
 
@@ -587,8 +587,8 @@ var MenuEditorPage = class MenuEditorPage {
               success &= addItem(text);
             }
 
-            //  Independent of the selected drag'n'drop action, the drag source shouldn't
-            //  remove any source data.
+            //  Independent of the selected drag and drop action, the drag source
+            //  shouldn't remove any source data.
             Gtk.drag_finish(context, success, false, time);
           }
         });
@@ -935,7 +935,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     // We add icons in batches. This number is somewhat arbitrary - if reduced to 1, the
     // icon loading takes quite long, if increased further the user interface gets a bit
-    // laggy during icon loading. Ten seems to be a good compromise...
+    // laggy during icon loading. Ten seems to be a good compromise…
     const batchSize = 10;
     for (let i = 0; i < icons.length; i += batchSize) {
       for (let j = 0; j < batchSize && i + j < icons.length; j++) {
@@ -963,22 +963,22 @@ var MenuEditorPage = class MenuEditorPage {
       _('You should try to have no more than twelve items in your menus.'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
-      _('You will find it more easy to learn item positions if you have an even number of entries. Four, six and eight are good numbers.'),
+      _('An even number of entries will make it easier to learn item positions. Four, six and eight are good numbers.'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
-      _('The source code of Fly-Pie is available on <a href="%s">Github</a>.')
+      _('Fly-Pie is libre software available on <a href="%s">GitHub</a>.')
           .replace('%s', 'https://github.com/Schneegans/Fly-Pie'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
-      _('Suggestions can be posted on <a href="%s">Github</a>.')
+      _('Suggestions can be posted on <a href="%s">GitHub</a>.')
           .replace('%s', 'https://github.com/Schneegans/Fly-Pie/issues'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
-      _('Bugs can be reported on <a href="%s">Github</a>.')
+      _('Bugs can be reported on <a href="%s">GitHub</a>.')
           .replace('%s', 'https://github.com/Schneegans/Fly-Pie/issues'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
-      _('Deep hierarchies are pretty efficient. Put menus into menus in menus!'),
+      _('Deep hierarchies are fairly inefficient. Avoid putting menus into menus in menus.'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
       _('If you delete all menus, log out and log in again, the default configuration will be restored.'),
@@ -987,19 +987,19 @@ var MenuEditorPage = class MenuEditorPage {
       _('You can reorder the menu items on the left via drag and drop.'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
-      _('You can drop directories, files, links and desktop files to the menu hierarchy on the left.'),
+      _('You can drop directories, files, links and desktop files into the menu hierarchy on the left.'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
-      _('You can copy menu items by holding the Control key while dragging them to another location.'),
+      _('You can copy menu items by holding the Ctrl key while dragging them to another location.'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
-      _('It\'s easy to <a href="%s">translate Fly-Pie to another language</a>!')
+      _('<a href="%s">Translate Fly-Pie on Hosted Weblate</a>.')
           .replace(
               '%s',
               'https://github.com/Schneegans/Fly-Pie/blob/develop/docs/translating.md'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
-      _('💕️ Do you want to show that you love Fly-Pie? <a href="%s">Become a sponsor!</a>')
+      _('💕️ Do you want to show your love for Fly-Pie? <a href="%s">Become a sponsor.</a>')
           .replace('%s', 'https://github.com/sponsors/Schneegans')
     ];
 
@@ -1093,7 +1093,7 @@ var MenuEditorPage = class MenuEditorPage {
       modal: true,
       buttons: Gtk.ButtonsType.OK_CANCEL,
       message_type: Gtk.MessageType.QUESTION,
-      text: _('Do you really want to delete the selected item?'),
+      text: _('Delete the selected item?'),
       secondary_text: _('This cannot be undone!')
     });
 
