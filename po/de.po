@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-05 07:18+0200\n"
-"PO-Revision-Date: 2021-05-06 18:56+0000\n"
+"PO-Revision-Date: 2021-05-06 19:15+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
 "\n"
@@ -68,15 +68,15 @@ msgstr "Mitwirkende"
 
 #: resources/ui/settings.ui:250
 msgid "🥇️ Gold Sponsors"
-msgstr "🥇️ Gold-Unterstützer"
+msgstr "🥇️ Gold-Sponsoren"
 
 #: resources/ui/settings.ui:264
 msgid "🥈️ Silver Sponsors"
-msgstr "🥈️ Silber-Unterstützer"
+msgstr "🥈️ Silber-Sponsoren"
 
 #: resources/ui/settings.ui:278
 msgid "🥉️ Bronze Sponsors"
-msgstr "🥉️ Bronze-Unterstützer"
+msgstr "🥉️ Bronze-Sponsoren"
 
 #: resources/ui/settings.ui:354
 msgid ""
@@ -85,12 +85,12 @@ msgid ""
 "sponsor for as little as 1$ / month!</a>"
 msgstr ""
 "💕️ Möchten Sie zeigen, wie sehr Ihnen Fly-Pie gefällt?\n"
-"<a href=\"https://github.com/sponsors/Schneegans\">Werden Sie ein "
-"Unterstützer für nur 1 $/ Monat!</a>"
+"<a href=\"https://github.com/sponsors/Schneegans\">Werden Sie ein Sponsor "
+"für nur 1 $/ Monat!</a>"
 
 #: resources/ui/settings.ui:370
 msgid "Sponsors"
-msgstr "Unterstützer"
+msgstr "Sponsoren"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:575
@@ -1040,7 +1040,7 @@ msgstr "Wählen Sie %x Elemente aus."
 #: src/common/Achievements.js:442
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
-msgstr "%sGesten-Zeichner auf höchster Ebene"
+msgstr "%sGestenzeichner auf höchster Ebene"
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
