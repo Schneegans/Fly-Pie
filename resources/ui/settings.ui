@@ -112,8 +112,8 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                       <object class="GtkGrid">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="margin_bottom">8</property>
                         <property name="halign">center</property>
+                        <property name="margin_bottom">8</property>
                         <property name="row_spacing">5</property>
                         <property name="column_spacing">8</property>
                         <child>
@@ -1606,8 +1606,8 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               <object class="GtkImage" id="level-image12">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="resource">/img/tutorial/bronze.png</property>
                                 <property name="pixel_size">200</property>
+                                <property name="resource">/img/tutorial/bronze.png</property>
                                 <property name="icon_size">6</property>
                               </object>
                               <packing>
@@ -1652,8 +1652,8 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               <object class="GtkImage" id="level-image13">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="resource">/img/tutorial/silver.png</property>
                                 <property name="pixel_size">200</property>
+                                <property name="resource">/img/tutorial/silver.png</property>
                                 <property name="icon_size">6</property>
                               </object>
                               <packing>
@@ -1697,8 +1697,8 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                               <object class="GtkImage" id="level-image11">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="resource">/img/tutorial/gold.png</property>
                                 <property name="pixel_size">200</property>
+                                <property name="resource">/img/tutorial/gold.png</property>
                                 <property name="icon_size">6</property>
                               </object>
                               <packing>
@@ -1997,8 +1997,8 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkImage" id="level-image14">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="resource">/img/tutorial/bronze.png</property>
                                 <property name="pixel_size">200</property>
+                                <property name="resource">/img/tutorial/bronze.png</property>
                                 <property name="icon_size">6</property>
                               </object>
                               <packing>
@@ -2042,8 +2042,8 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkImage" id="level-image15">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="resource">/img/tutorial/silver.png</property>
                                 <property name="pixel_size">200</property>
+                                <property name="resource">/img/tutorial/silver.png</property>
                                 <property name="icon_size">6</property>
                               </object>
                               <packing>
@@ -2087,8 +2087,8 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                               <object class="GtkImage" id="level-image16">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="resource">/img/tutorial/gold.png</property>
                                 <property name="pixel_size">200</property>
+                                <property name="resource">/img/tutorial/gold.png</property>
                                 <property name="icon_size">6</property>
                               </object>
                               <packing>
@@ -2148,8 +2148,8 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                       <object class="GtkImage" id="level-image">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="resource">/img/tutorial/gold.png</property>
                         <property name="pixel_size">200</property>
+                        <property name="resource">/img/tutorial/gold.png</property>
                         <property name="icon_size">6</property>
                       </object>
                       <packing>
@@ -6218,301 +6218,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">1</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">3</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">5</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="label" translatable="yes">Thickness</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">6</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="label" translatable="yes">Color</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="adjustment">trace-thickness</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">1</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">6</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkScale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="adjustment">trace-min-length</property>
-                                <property name="restrict_to_fill_level">False</property>
-                                <property name="fill_level">0</property>
-                                <property name="round_digits">0</property>
-                                <property name="digits">0</property>
-                                <property name="value_pos">left</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkColorButton" id="trace-color">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="use_alpha">True</property>
-                                <property name="title" translatable="yes">Pick Trace Color</property>
-                                <property name="show_editor">True</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">1</property>
-                                <property name="top_attach">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-trace-thickness">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <property name="valign">center</property>
-                                <property name="relief">none</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button"/>
-                                </style>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="top_attach">6</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-trace-min-length">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <property name="valign">center</property>
-                                <property name="relief">none</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button"/>
-                                </style>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="reset-trace-color">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
-                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
-                                <property name="relief">none</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="icon_name">edit-clear-all-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="pill-button"/>
-                                </style>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="top_attach">2</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="orientation">vertical</property>
-                                <property name="spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Trace Appearance</property>
-                                    <style>
-                                      <class name="large-title"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="margin_bottom">8</property>
-                                    <property name="label" translatable="yes">The trace is the connecting line between selected menu items.</property>
-                                    <property name="justify">center</property>
-                                    <property name="wrap">True</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">0</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_right">20</property>
-                                <property name="label" translatable="yes">Minimum Segment Length</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">4</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">7</property>
-                                <property name="width">3</property>
-                              </packing>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="position">4</property>
-                  </packing>
-                </child>
-                <child type="tab">
-                  <object class="GtkDrawingArea" id="wedges-tab-icon">
-                    <property name="width_request">24</property>
-                    <property name="height_request">24</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="tooltip_text" translatable="yes">Wedge Appearance</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="vexpand">True</property>
-                  </object>
-                  <packing>
-                    <property name="position">4</property>
-                    <property name="tab_fill">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkListBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkListBoxRow">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="activatable">False</property>
-                        <property name="selectable">False</property>
-                        <child>
-                          <object class="GtkGrid">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="margin_left">30</property>
-                            <property name="margin_right">10</property>
-                            <property name="margin_top">30</property>
-                            <property name="margin_bottom">30</property>
-                            <property name="row_spacing">10</property>
-                            <property name="column_spacing">10</property>
-                            <child>
-                              <object class="GtkSeparator">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">0</property>
-                                <property name="top_attach">1</property>
                                 <property name="width">4</property>
                               </packing>
                             </child>
@@ -7050,6 +6755,301 @@ will cancel the selection.</property>
                             </child>
                             <child>
                               <placeholder/>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
+                <child type="tab">
+                  <object class="GtkDrawingArea" id="wedges-tab-icon">
+                    <property name="width_request">24</property>
+                    <property name="height_request">24</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                    <property name="tooltip_text" translatable="yes">Wedge Appearance</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="vexpand">True</property>
+                  </object>
+                  <packing>
+                    <property name="position">4</property>
+                    <property name="tab_fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkListBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkListBoxRow">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="activatable">False</property>
+                        <property name="selectable">False</property>
+                        <child>
+                          <object class="GtkGrid">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">30</property>
+                            <property name="margin_right">10</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">30</property>
+                            <property name="row_spacing">10</property>
+                            <property name="column_spacing">10</property>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">1</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">3</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">5</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Thickness</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">6</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Color</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkScale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="adjustment">trace-thickness</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">1</property>
+                                <property name="value_pos">left</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">6</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkScale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="adjustment">trace-min-length</property>
+                                <property name="restrict_to_fill_level">False</property>
+                                <property name="fill_level">0</property>
+                                <property name="round_digits">0</property>
+                                <property name="digits">0</property>
+                                <property name="value_pos">left</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkColorButton" id="trace-color">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="use_alpha">True</property>
+                                <property name="title" translatable="yes">Pick Trace Color</property>
+                                <property name="show_editor">True</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-trace-thickness">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <property name="valign">center</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                                <style>
+                                  <class name="pill-button"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="top_attach">6</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-trace-min-length">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <property name="valign">center</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                                <style>
+                                  <class name="pill-button"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="top_attach">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="reset-trace-color">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
+                                <property name="tooltip_text" translatable="yes">Reset to default value</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="icon_name">edit-clear-all-symbolic</property>
+                                  </object>
+                                </child>
+                                <style>
+                                  <class name="pill-button"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">2</property>
+                                <property name="top_attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Trace Appearance</property>
+                                    <style>
+                                      <class name="large-title"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="halign">start</property>
+                                    <property name="margin_bottom">8</property>
+                                    <property name="label" translatable="yes">The trace is the connecting line between selected menu items.</property>
+                                    <property name="justify">center</property>
+                                    <property name="wrap">True</property>
+                                    <style>
+                                      <class name="dim-label"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                                <property name="width">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="halign">start</property>
+                                <property name="margin_right">20</property>
+                                <property name="label" translatable="yes">Minimum Segment Length</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">4</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">7</property>
+                                <property name="width">3</property>
+                              </packing>
                             </child>
                           </object>
                         </child>
@@ -8188,8 +8188,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                         </style>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
                         <property name="pack_type">end</property>
                         <property name="position">2</property>
                       </packing>
@@ -8728,8 +8726,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="resource">/img/levels/level1.png</property>
                     <property name="pixel_size">200</property>
+                    <property name="resource">/img/levels/level1.png</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
@@ -8740,8 +8738,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="resource">/img/levels/level2.png</property>
                     <property name="pixel_size">200</property>
+                    <property name="resource">/img/levels/level2.png</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
@@ -8753,8 +8751,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="resource">/img/levels/level3.png</property>
                     <property name="pixel_size">200</property>
+                    <property name="resource">/img/levels/level3.png</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
@@ -8766,8 +8764,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="resource">/img/levels/level4.png</property>
                     <property name="pixel_size">200</property>
+                    <property name="resource">/img/levels/level4.png</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
@@ -8779,8 +8777,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="resource">/img/levels/level5.png</property>
                     <property name="pixel_size">200</property>
+                    <property name="resource">/img/levels/level5.png</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
@@ -8792,8 +8790,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image6">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="resource">/img/levels/level6.png</property>
                     <property name="pixel_size">200</property>
+                    <property name="resource">/img/levels/level6.png</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
@@ -8805,8 +8803,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image7">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="resource">/img/levels/level7.png</property>
                     <property name="pixel_size">200</property>
+                    <property name="resource">/img/levels/level7.png</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
@@ -8818,8 +8816,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image8">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="resource">/img/levels/level8.png</property>
                     <property name="pixel_size">200</property>
+                    <property name="resource">/img/levels/level8.png</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
@@ -8831,8 +8829,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image9">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="resource">/img/levels/level9.png</property>
                     <property name="pixel_size">200</property>
+                    <property name="resource">/img/levels/level9.png</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
@@ -8844,8 +8842,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                   <object class="GtkImage" id="level-image10">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="resource">/img/levels/level10.png</property>
                     <property name="pixel_size">200</property>
+                    <property name="resource">/img/levels/level10.png</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
