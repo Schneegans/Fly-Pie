@@ -978,7 +978,7 @@ var MenuEditorPage = class MenuEditorPage {
           .replace('%s', 'https://github.com/Schneegans/Fly-Pie/issues'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
-      _('Deep hierarchies are fairly inefficient. Avoid putting menus into menus in menus.'),
+      _('Keep menu hierarchies efficient by putting the right amount of menus into new ones.'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
       _('If you delete all menus, log out and log in again, the default configuration will be restored.'),
