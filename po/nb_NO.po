@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-05 07:18+0200\n"
-"PO-Revision-Date: 2021-05-06 17:32+0000\n"
+"PO-Revision-Date: 2021-05-08 05:39+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
 "core/nb_NO/>\n"
@@ -178,8 +178,9 @@ msgstr ""
 "Kan legges til egendefinerte menyer."
 
 #: resources/ui/settings.ui:1030
+#, fuzzy
 msgid "Initializes the settings below to random values"
-msgstr ""
+msgstr "Bruker tilfeldige verdier for innstillingene nedenfor"
 
 #: resources/ui/settings.ui:1056
 msgid "Generate Random Preset"
@@ -197,11 +198,16 @@ msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
 msgstr "Fly-Pie krever at animasjoner er påslått i GNOME Shell."
 
 #: resources/ui/settings.ui:1280
+#, fuzzy
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
+"Du kan bruke Fly-Pie til å kjøre programmer, simulere tastatursnarveier, "
+"åpne nettadresser og mye mer. Denne interaktive veiledningen lærer deg "
+"hvordan du bruker det mest effektivt. Du kan åpne en testmeny med den store "
+"knappen nedenfor."
 
 #: resources/ui/settings.ui:1300
 #, fuzzy
@@ -264,6 +270,7 @@ msgid "Practice Session I"
 msgstr "Øvingsøkt I"
 
 #: resources/ui/settings.ui:1507
+#, fuzzy
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
 "select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
@@ -272,11 +279,16 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!"
 msgstr ""
+"I denne øvelsesøkten skal du åpne menyen ved å klikke på den store knappen. "
+"Velg kakestykket (🍔 🠚 🍭 🠚 🍰) så raskt som mulig. Klarer du gullmedaljen?\n"
+"\n"
+"Når du er fornøyd med resultatet klikker du <b>Neste</b> for å lære om Fly-"
+"Pie sitt markeringsmodus."
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1531
 msgid "<big>Last selection time: <b>- ms</b></big>"
-msgstr ""
+msgstr "<big>Siste utvalgstid: <b>- ms</b></big>"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1545
@@ -333,6 +345,7 @@ msgid "Practice Session II"
 msgstr "Øvingsøkt II"
 
 #: resources/ui/settings.ui:1901
+#, fuzzy
 msgid ""
 "Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
 "However, as you now learned about the Marking Mode, the time required to get "
@@ -341,6 +354,11 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn some final "
 "tips and tricks!"
 msgstr ""
+"Igjen skal du velge kakestykket (🍔 🠚 🍭 🠚 🍰) så raskt som mulig. Gullmedaljen "
+"er likeledes veldig tidsbegrenset.\n"
+"\n"
+"Når du er fornøyd klikker du <b>Neste</b> for å lære noen tips og triks til "
+"slutt."
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:2059
@@ -401,8 +419,9 @@ msgstr ""
 
 #. Please keep this short!
 #: resources/ui/settings.ui:2556
+#, fuzzy
 msgid "Independent of the preset."
-msgstr ""
+msgstr "Uavhengig av forhåndsinnstillingen."
 
 #: resources/ui/settings.ui:2610 resources/ui/settings.ui:2634
 #: resources/ui/settings.ui:2775 resources/ui/settings.ui:2799
@@ -466,8 +485,9 @@ msgid "Size"
 msgstr "Størrelse"
 
 #: resources/ui/settings.ui:3081 resources/ui/settings.ui:3348
+#, fuzzy
 msgid "Pick Center Item Color"
-msgstr ""
+msgstr "Velg senterelementsfarge"
 
 #: resources/ui/settings.ui:3107 resources/ui/settings.ui:3167
 #: resources/ui/settings.ui:3374 resources/ui/settings.ui:3434
@@ -481,7 +501,7 @@ msgstr "Metning"
 #: resources/ui/settings.ui:4274 resources/ui/settings.ui:4314
 #: resources/ui/settings.ui:4479 resources/ui/settings.ui:4531
 msgid "Luminance"
-msgstr ""
+msgstr "Luminans"
 
 #: resources/ui/settings.ui:3147 resources/ui/settings.ui:3191
 #: resources/ui/settings.ui:3414 resources/ui/settings.ui:3458
@@ -497,7 +517,7 @@ msgstr "Dekkevne"
 #: resources/ui/settings.ui:4166 resources/ui/settings.ui:4371
 #: resources/ui/settings.ui:5509 resources/ui/settings.ui:5586
 msgid "Fixed"
-msgstr ""
+msgstr "Fast"
 
 #. Keep this very short! Try to use not more than six or seven letters.
 #. This is a label of the coloring type radio button group.
@@ -505,7 +525,7 @@ msgstr ""
 #: resources/ui/settings.ui:3231 resources/ui/settings.ui:3316
 #: resources/ui/settings.ui:4181 resources/ui/settings.ui:4386
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: resources/ui/settings.ui:3553 resources/ui/settings.ui:4798
 msgid "Icon Opacity"
@@ -645,7 +665,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:6444
 msgid "Minimum Segment Length"
-msgstr ""
+msgstr "Minimumslengde for segmenter"
 
 #: resources/ui/settings.ui:6478 resources/ui/settings.ui:7000
 #, fuzzy
@@ -664,7 +684,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:6570
 msgid "Wedge Separators"
-msgstr ""
+msgstr "Kileinndelere"
 
 #: resources/ui/settings.ui:6605 resources/ui/settings.ui:6739
 msgid "Width"
@@ -672,11 +692,11 @@ msgstr "Bredde"
 
 #: resources/ui/settings.ui:6687
 msgid "Pick Wedge Separator Color"
-msgstr ""
+msgstr "Velg en kileinndelingsfarge"
 
 #: resources/ui/settings.ui:6712
 msgid "Wedge Color"
-msgstr ""
+msgstr "Kilefarge"
 
 #: resources/ui/settings.ui:6824
 msgid "Inner Radius"
@@ -708,7 +728,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:7110
 msgid "Minimum Stroke Angle"
-msgstr ""
+msgstr "Minimumsvinkel for strøk"
 
 #: resources/ui/settings.ui:7122
 #, fuzzy
@@ -717,7 +737,7 @@ msgstr "Mindre svinger vil ikke lede til utvelging."
 
 #: resources/ui/settings.ui:7199
 msgid "Minimum Stroke Length"
-msgstr ""
+msgstr "Minimumslengde for strøk"
 
 #: resources/ui/settings.ui:7211
 msgid ""
@@ -726,8 +746,9 @@ msgid ""
 msgstr ""
 
 #: resources/ui/settings.ui:7290
+#, fuzzy
 msgid "Jitter Threshold"
-msgstr ""
+msgstr "Jitter-terskel"
 
 #: resources/ui/settings.ui:7302
 msgid ""
@@ -802,7 +823,7 @@ msgstr ""
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: resources/ui/settings.ui:7955 resources/ui/settings.ui:8176
 msgid "Live Preview"
-msgstr ""
+msgstr "Sanntidsforhåndsvisning"
 
 #. Caption of the settings page in the window's titlebar.
 #: resources/ui/settings.ui:7991
@@ -872,7 +893,7 @@ msgstr "Dette åpner menyen."
 
 #: resources/ui/settings.ui:8602
 msgid "Open in Screen Center"
-msgstr ""
+msgstr "Åpne i skjermsenter"
 
 #. Caption of the menu editor page in the window's titlebar.
 #: resources/ui/settings.ui:8712
@@ -962,12 +983,12 @@ msgstr "V"
 #: src/common/Achievements.js:412
 #, javascript-format
 msgid "%s Cancellor"
-msgstr ""
+msgstr "%s avbryter"
 
 #: src/common/Achievements.js:414
-#, javascript-format
+#, fuzzy, javascript-format
 msgid "Abort a selection %x times."
-msgstr ""
+msgstr "Forkast et utvalg %x ganger."
 
 #. Translators: The name of the 'Select %x items.' achievement.
 #: src/common/Achievements.js:427
@@ -985,7 +1006,7 @@ msgstr "Velg %x elementer."
 #: src/common/Achievements.js:442
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
-msgstr ""
+msgstr "%s toppnivåhåndvendingsvelger"
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
@@ -999,12 +1020,12 @@ msgstr ""
 #: src/common/Achievements.js:448
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
-msgstr ""
+msgstr "%s undermenyhåndvendingsvelger"
 
 #: src/common/Achievements.js:454
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
-msgstr ""
+msgstr "Velg %x elementer i %d dybde i markeringsmodus."
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
@@ -1018,55 +1039,55 @@ msgstr ""
 #: src/common/Achievements.js:474
 #, javascript-format
 msgid "%s Submenu Click-Selector"
-msgstr ""
+msgstr "%s undermenyklikkvelger"
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
-msgstr ""
+msgstr "%s under-undermenyklikkvelger"
 
 #: src/common/Achievements.js:483
 #, javascript-format
 msgid "Select %x items at depth %d with mouse clicks."
-msgstr ""
+msgstr "Velg %x elementer i %d dybde med museklikk."
 
 #. Translators: The name of the 'Select %x items at depth 1 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:505
 #, javascript-format
 msgid "%s Toplevel Selector"
-msgstr ""
+msgstr "%s toppnivåvelger"
 
 #. Translators: The name of the 'Select %x items at depth 2 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:508
 #, javascript-format
 msgid "%s Submenu Selector"
-msgstr ""
+msgstr "%s undermenyvelger"
 
 #. Translators: The name of the 'Select %x items at depth 3 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:511
 #, javascript-format
 msgid "%s Subsubmenu Selector"
-msgstr ""
+msgstr "%s under-undermenyvelger"
 
 #: src/common/Achievements.js:522
 msgid "Select %x items at depth %d in less than %t milliseconds."
-msgstr ""
+msgstr "Velg %x elementer i %d dybde på mindre enn %t millisekunder."
 
 #. Translators: The name of the 'Open the settings dialog %x times.'
 #. achievement.
 #: src/common/Achievements.js:542
 msgid "The Journey Is The Reward %i"
-msgstr ""
+msgstr "Veien er målets belønning %i"
 
 #: src/common/Achievements.js:543
-#, javascript-format
+#, fuzzy, javascript-format
 msgid "Open the settings dialog %x times."
-msgstr ""
+msgstr "Åpne innstillingsdialogen %x ganger."
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
@@ -1077,7 +1098,7 @@ msgstr "Nerdeadvarsel %i"
 #: src/common/Achievements.js:559
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
-msgstr ""
+msgstr "Åpne %x menyer med D-Bus-grensesnittet."
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
 #: src/common/Achievements.js:573
@@ -1087,43 +1108,43 @@ msgstr ""
 #: src/common/Achievements.js:575
 #, javascript-format
 msgid "Generate %x random presets."
-msgstr ""
+msgstr "Generer %x tilfeldige forhåndsinnstillinger."
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
 #: src/common/Achievements.js:588
 #, javascript-format
 msgid "%s Preset Exporter"
-msgstr ""
+msgstr "%s forhåndsinnstillingseksportør"
 
 #: src/common/Achievements.js:590
 msgid "Export a custom preset."
-msgstr ""
+msgstr "Eksporter en egentilpasset forhåndsinnstilling."
 
 #: src/common/Achievements.js:591
 #, javascript-format
 msgid "Export %x custom presets."
-msgstr ""
+msgstr "Eksporter %x egendefinerte forhåndsinnstillinger."
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
 #: src/common/Achievements.js:604
 #, javascript-format
 msgid "%s Preset Importer"
-msgstr ""
+msgstr "%s forhåndsimportør"
 
 #: src/common/Achievements.js:606
 msgid "Import a custom preset."
-msgstr ""
+msgstr "Importer en egentilpasset forhåndsinnstilling."
 
 #: src/common/Achievements.js:607
 #, javascript-format
 msgid "Import %x custom presets."
-msgstr ""
+msgstr "Importer %x egendefinerte forhåndsinnstillinger."
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
 #: src/common/Achievements.js:620
 #, javascript-format
 msgid "%s Menu Importer"
-msgstr ""
+msgstr "%s menyimportør"
 
 #: src/common/Achievements.js:622
 msgid "Import a menu configuration."
@@ -1138,7 +1159,7 @@ msgstr "Importer %x menyoppsett."
 #: src/common/Achievements.js:637
 #, javascript-format
 msgid "%s Menu Exporter"
-msgstr ""
+msgstr "%s menyeksportør"
 
 #: src/common/Achievements.js:639
 msgid "Export a menu configuration."
@@ -1152,13 +1173,14 @@ msgstr "Eksporter %x menyoppsett."
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
 #: src/common/Achievements.js:655
+#, fuzzy
 msgid "There Should Be No More Than Twelve Items…? %i"
-msgstr ""
+msgstr "Det skal ikke være mer enn tolv elementer…? %i"
 
 #: src/common/Achievements.js:656
 #, javascript-format
 msgid "Create %x items in the menu editor."
-msgstr ""
+msgstr "Opprett %x elementer i menyredigereren."
 
 #. Translators: The name of the 'Open a preview menu %x times.' achievement.
 #: src/common/Achievements.js:670
@@ -1211,7 +1233,7 @@ msgstr ""
 
 #: src/common/Achievements.js:726
 msgid "Consider becoming a sponsor of Fly-Pie."
-msgstr ""
+msgstr "Overvei å kronerulle Fly-Pie."
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:234 src/common/ConfigWidgetFactory.js:272
@@ -1299,28 +1321,32 @@ msgid "GNOME Shell"
 msgstr "GNOME-skall"
 
 #: src/extension/DefaultMenu.js:80 src/prefs/ExampleMenu.js:265
+#, fuzzy
 msgid "Up"
-msgstr ""
+msgstr "Oppover"
 
 #: src/extension/DefaultMenu.js:87
 msgid "Overview"
 msgstr "Oversikt"
 
 #: src/extension/DefaultMenu.js:93 src/prefs/ExampleMenu.js:268
+#, fuzzy
 msgid "Down"
-msgstr ""
+msgstr "Nedover"
 
 #: src/extension/DefaultMenu.js:100
 msgid "Show Apps"
 msgstr "Vis programmer"
 
 #: src/extension/DefaultMenu.js:108
+#, fuzzy
 msgid "Open Windows"
-msgstr ""
+msgstr "Åpne vinduer"
 
 #: src/extension/DefaultMenu.js:113
+#, fuzzy
 msgid "Close Window"
-msgstr ""
+msgstr "Lukk vindu"
 
 #: src/extension/DefaultMenu.js:121 src/common/menus/Bookmarks.js:33
 msgid "Bookmarks"
@@ -1358,7 +1384,7 @@ msgstr "Blomster"
 
 #: src/prefs/ExampleMenu.js:36
 msgid "Tulip"
-msgstr ""
+msgstr "Tulipan"
 
 #: src/prefs/ExampleMenu.js:37
 msgid "Rose"
@@ -1374,7 +1400,7 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:40
 msgid "Bouquet"
-msgstr ""
+msgstr "Bukett"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:45
@@ -1425,7 +1451,7 @@ msgstr "T-Rex"
 
 #: src/prefs/ExampleMenu.js:64
 msgid "Apatosaurus"
-msgstr ""
+msgstr "Apatosaurus"
 
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:71
@@ -1503,7 +1529,7 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:108
 msgid "Cookie"
-msgstr ""
+msgstr "Kjeks"
 
 #: src/prefs/ExampleMenu.js:109
 msgid "Chocolate"
@@ -1689,11 +1715,11 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:212
 msgid "Face With Smiling Eyes"
-msgstr ""
+msgstr "Fjes med smilende øyne"
 
 #: src/prefs/ExampleMenu.js:213
 msgid "Face With Sweat"
-msgstr ""
+msgstr "Svett fjes"
 
 #: src/prefs/ExampleMenu.js:214
 msgid "ROFL"
@@ -1782,7 +1808,7 @@ msgstr ""
 #. Translators: An emoji category.
 #: src/prefs/ExampleMenu.js:262
 msgid "Arrows"
-msgstr ""
+msgstr "Piler"
 
 #: src/prefs/ExampleMenu.js:266
 msgid "Right"
@@ -1807,7 +1833,7 @@ msgstr ""
 
 #: src/prefs/ExampleMenu.js:278
 msgid "Potable Water"
-msgstr ""
+msgstr "Drikkevann"
 
 #: src/prefs/ExampleMenu.js:279
 msgid "Mens"
@@ -1881,23 +1907,23 @@ msgstr ""
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:969
-#, javascript-format
+#, fuzzy, javascript-format
 msgid "The source code of Fly-Pie is available on <a href=\"%s\">Github</a>."
-msgstr ""
+msgstr "Kildekoden for Fly-Pie er tilgjengelig på <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:973
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">Github</a>."
-msgstr ""
+msgstr "Forslag kan sendes inn på <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:977
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">Github</a>."
-msgstr ""
+msgstr "Feil kan innrapporteres på <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1940,16 +1966,16 @@ msgstr ""
 #: src/prefs/MenuEditorPage.js:996
 #, javascript-format
 msgid "It's easy to <a href=\"%s\">translate Fly-Pie to another language</a>!"
-msgstr ""
+msgstr "Du kan <a href=\"%s\">bistå oversettelsen av Fly-Pie</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:1002
-#, javascript-format
+#, fuzzy, javascript-format
 msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"%s\">Become a sponsor!"
 "</a>"
-msgstr ""
+msgstr "💕️ Send en slant for å <a href=\"%s\">bidra økonomisk</a>."
 
 #: src/prefs/MenuEditorPage.js:1096
 #, fuzzy
@@ -1995,15 +2021,15 @@ msgstr "Klarte ikke å laste inn forhåndsinnstilling!"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:168
-#, javascript-format
+#, fuzzy, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big>Siste utvalgstid: <b>%dms</b></big>"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:173
-#, javascript-format
+#, fuzzy, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big>Beste utvalgstid: <b>%dms</b></big>"
 
 #: src/common/actions/Command.js:34
 msgid "Launch Application"
@@ -2013,7 +2039,7 @@ msgstr "Start program"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Command.js:41
 msgid "Runs any shell command."
-msgstr ""
+msgstr "Kjører hvilken som helst skallkommando."
 
 #: src/common/actions/Command.js:45
 msgid ""
@@ -2105,7 +2131,7 @@ msgstr "Tekst"
 
 #: src/common/actions/InsertText.js:80
 msgid "This text will be inserted."
-msgstr ""
+msgstr "Dette er teksten som vil settes inn."
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -2115,7 +2141,7 @@ msgstr "Aktiver snarvei"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:50
 msgid "Simulates a key combination."
-msgstr ""
+msgstr "Simulerer en tastaturkombinasjon."
 
 #: src/common/actions/Shortcut.js:54
 msgid ""
@@ -2130,13 +2156,13 @@ msgstr ""
 
 #: src/common/actions/Uri.js:33
 msgid "Open URI"
-msgstr ""
+msgstr "Åpne URI"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Uri.js:40
 msgid "Opens an URI with the default application."
-msgstr ""
+msgstr "Åpner en URI med forvalgt program."
 
 #: src/common/actions/Uri.js:44
 msgid ""
@@ -2148,13 +2174,14 @@ msgstr ""
 
 #: src/common/actions/Uri.js:68
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Bookmarks.js:40
+#, fuzzy
 msgid "Shows your frequently used directories."
-msgstr ""
+msgstr "Viser dine ofte brukte mapper."
 
 #: src/common/menus/Bookmarks.js:44
 msgid ""
@@ -2203,7 +2230,7 @@ msgstr ""
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:50
 msgid "Shows pinned applications."
-msgstr ""
+msgstr "Viser festede programmer."
 
 #: src/common/menus/Favorites.js:54
 msgid ""
