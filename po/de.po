@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-08 12:29+0200\n"
-"PO-Revision-Date: 2021-05-06 19:15+0000\n"
+"PO-Revision-Date: 2021-05-08 10:35+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
-">\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1901,7 +1901,7 @@ msgstr "Exportieren"
 
 #: src/prefs/MenuEditorPage.js:263
 msgid "Could not export the menu configuration."
-msgstr ""
+msgstr "Die Menükonfiguration konnte nicht exportiert werden."
 
 #: src/prefs/MenuEditorPage.js:280
 msgid "Import Menu Configuration"
@@ -1913,7 +1913,7 @@ msgstr "Importieren"
 
 #: src/prefs/MenuEditorPage.js:325
 msgid "Could not import the menu configuration."
-msgstr ""
+msgstr "Die Menükonfiguration konnte nicht importiert werden."
 
 #: src/prefs/MenuEditorPage.js:355
 msgid "Menu Structure"
@@ -1933,6 +1933,8 @@ msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
 msgstr ""
+"Eine gerade Anzahl von Einträgen erleichtert das Erlernen der Positionen. "
+"Vier, sechs und acht sind gute Zahlen."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1940,6 +1942,7 @@ msgstr ""
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr ""
+"Fly-Pie ist freie Software, die auf <a href=\"%s\">GitHub</a> verfügbar ist."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1947,13 +1950,15 @@ msgstr ""
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
 msgstr ""
+"Verbesserungsvorschläge können auf <a href=\"%s\"> GitHub </a> gemacht "
+"werden."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:977
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "Fehler können auf <a href=\"%s\">GitHub</a> gemeldet werden."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1962,6 +1967,8 @@ msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
 msgstr ""
+"Halten Sie Menühierarchien effizient, indem Sie alles, was über 8 Elemente "
+"hinausgeht, in eine neue Menüebene verschieben."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1986,6 +1993,8 @@ msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
 msgstr ""
+"Sie können Verzeichnisse, Dateien, Links oder Anwendungsstarter in die Liste "
+"auf der linken Seite ziehen."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1994,13 +2003,15 @@ msgid ""
 "You can copy menu items by holding the Ctrl key while dragging them to "
 "another location."
 msgstr ""
+"Sie können Menüeinträge kopieren indem Sie die Strg-Taste während des "
+"Verschiebens gedrückt halten."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:996
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
-msgstr ""
+msgstr "<a href=\"%s\">Übersetzen Sie Fly-Pie auf Hosted Weblate</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -2010,10 +2021,12 @@ msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
 "</a>"
 msgstr ""
+"💕️ Wollen Sie zeigen, dass Ihnen Fly-Pie gefällt? <a href=\"%s\">Werden Sie "
+"Sponsor.</a>"
 
 #: src/prefs/MenuEditorPage.js:1096
 msgid "Delete the selected item?"
-msgstr ""
+msgstr "Ausgewähltes Element löschen?"
 
 #: src/prefs/MenuEditorPage.js:1097
 msgid "This cannot be undone!"
