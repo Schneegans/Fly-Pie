@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 07:18+0200\n"
+"POT-Creation-Date: 2021-05-08 12:29+0200\n"
 "PO-Revision-Date: 2021-04-23 15:14+0000\n"
 "Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
 "Language-Team: Sinhala <https://hosted.weblate.org/projects/fly-pie/core/si/"
@@ -373,11 +373,11 @@ msgstr ""
 #: resources/ui/settings.ui:5162 resources/ui/settings.ui:5246
 #: resources/ui/settings.ui:5749 resources/ui/settings.ui:5913
 #: resources/ui/settings.ui:5937 resources/ui/settings.ui:5961
-#: resources/ui/settings.ui:6022 resources/ui/settings.ui:6324
-#: resources/ui/settings.ui:6348 resources/ui/settings.ui:6372
-#: resources/ui/settings.ui:6637 resources/ui/settings.ui:6661
-#: resources/ui/settings.ui:6773 resources/ui/settings.ui:6797
-#: resources/ui/settings.ui:6953 resources/ui/settings.ui:7159
+#: resources/ui/settings.ui:6022 resources/ui/settings.ui:6342
+#: resources/ui/settings.ui:6366 resources/ui/settings.ui:6478
+#: resources/ui/settings.ui:6502 resources/ui/settings.ui:6658
+#: resources/ui/settings.ui:6916 resources/ui/settings.ui:6940
+#: resources/ui/settings.ui:6964 resources/ui/settings.ui:7159
 #: resources/ui/settings.ui:7250 resources/ui/settings.ui:7340
 #: resources/ui/settings.ui:7431 resources/ui/settings.ui:7637
 #: resources/ui/settings.ui:7661 resources/ui/settings.ui:7746
@@ -418,7 +418,7 @@ msgid "Animation Mode"
 msgstr ""
 
 #: resources/ui/settings.ui:3030 resources/ui/settings.ui:4571
-#: resources/ui/settings.ui:5656 resources/ui/settings.ui:6533
+#: resources/ui/settings.ui:5656 resources/ui/settings.ui:6238
 msgid "Size"
 msgstr ""
 
@@ -579,83 +579,83 @@ msgid ""
 "hovered."
 msgstr ""
 
-#: resources/ui/settings.ui:6252
-msgid "Thickness"
-msgstr ""
-
-#: resources/ui/settings.ui:6265 resources/ui/settings.ui:6586
-msgid "Color"
-msgstr ""
-
-#: resources/ui/settings.ui:6311
-msgid "Pick Trace Color"
-msgstr ""
-
-#: resources/ui/settings.ui:6401 resources/ui/settings.ui:7070
-msgid "Trace Appearance"
-msgstr ""
-
-#: resources/ui/settings.ui:6418
-msgid "The trace is the connecting line between selected menu items."
-msgstr ""
-
-#: resources/ui/settings.ui:6444
-msgid "Minimum Segment Length"
-msgstr ""
-
-#: resources/ui/settings.ui:6478 resources/ui/settings.ui:7000
-msgid "Wedge Appearance"
-msgstr ""
-
 #. Keep the individual lines short (around 30 characters max)!
 #. You can use up to three lines if you want.
-#: resources/ui/settings.ui:6546
+#: resources/ui/settings.ui:6251
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr ""
 
-#: resources/ui/settings.ui:6570
+#: resources/ui/settings.ui:6275
 msgid "Wedge Separators"
 msgstr ""
 
-#: resources/ui/settings.ui:6605 resources/ui/settings.ui:6739
+#: resources/ui/settings.ui:6291 resources/ui/settings.ui:6857
+msgid "Color"
+msgstr ""
+
+#: resources/ui/settings.ui:6310 resources/ui/settings.ui:6444
 msgid "Width"
 msgstr ""
 
-#: resources/ui/settings.ui:6687
+#: resources/ui/settings.ui:6392
 msgid "Pick Wedge Separator Color"
 msgstr ""
 
-#: resources/ui/settings.ui:6712
+#: resources/ui/settings.ui:6417
 msgid "Wedge Color"
 msgstr ""
 
-#: resources/ui/settings.ui:6824
+#: resources/ui/settings.ui:6529
 msgid "Inner Radius"
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/settings.ui:6868
+#: resources/ui/settings.ui:6573
 msgid "Inactive"
 msgstr ""
 
 #. When the mouse pointer is over the item
-#: resources/ui/settings.ui:6887
+#: resources/ui/settings.ui:6592
 msgid "Hovered"
 msgstr ""
 
-#: resources/ui/settings.ui:6910
+#: resources/ui/settings.ui:6615
 msgid "Pick Wedge Color"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:6925
+#: resources/ui/settings.ui:6630
 msgid "Pick Hovered Wedge Color"
 msgstr ""
 
-#: resources/ui/settings.ui:7017
+#: resources/ui/settings.ui:6705 resources/ui/settings.ui:6775
+msgid "Wedge Appearance"
+msgstr ""
+
+#: resources/ui/settings.ui:6722
 msgid "Clicking inside a wedge will activate the corresponding item."
+msgstr ""
+
+#: resources/ui/settings.ui:6844
+msgid "Thickness"
+msgstr ""
+
+#: resources/ui/settings.ui:6903
+msgid "Pick Trace Color"
+msgstr ""
+
+#: resources/ui/settings.ui:6993 resources/ui/settings.ui:7070
+msgid "Trace Appearance"
+msgstr ""
+
+#: resources/ui/settings.ui:7010
+msgid "The trace is the connecting line between selected menu items."
+msgstr ""
+
+#: resources/ui/settings.ui:7036
+msgid "Minimum Segment Length"
 msgstr ""
 
 #: resources/ui/settings.ui:7110
@@ -772,32 +772,32 @@ msgstr ""
 msgid "Exports the current menu configuration."
 msgstr ""
 
-#: resources/ui/settings.ui:8271 resources/ui/settings.ui:8308
+#: resources/ui/settings.ui:8269 resources/ui/settings.ui:8306
 msgid "Name"
 msgstr ""
 
-#: resources/ui/settings.ui:8306 resources/ui/settings.ui:8307
-#: resources/ui/settings.ui:8404 resources/ui/settings.ui:8405
+#: resources/ui/settings.ui:8304 resources/ui/settings.ui:8305
+#: resources/ui/settings.ui:8402 resources/ui/settings.ui:8403
 msgid "Insert Emoji"
 msgstr ""
 
-#: resources/ui/settings.ui:8341 resources/ui/settings.ui:8406
+#: resources/ui/settings.ui:8339 resources/ui/settings.ui:8404
 msgid "Icon"
 msgstr ""
 
-#: resources/ui/settings.ui:8354
+#: resources/ui/settings.ui:8352
 msgid "Can be an icon name, text, emoji or a file."
 msgstr ""
 
-#: resources/ui/settings.ui:8455 src/prefs/MenuEditorPage.js:370
+#: resources/ui/settings.ui:8453 src/prefs/MenuEditorPage.js:370
 msgid "Fixed Angle"
 msgstr ""
 
-#: resources/ui/settings.ui:8468
+#: resources/ui/settings.ui:8466
 msgid "See tooltip for details."
 msgstr ""
 
-#: resources/ui/settings.ui:8491
+#: resources/ui/settings.ui:8489
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -813,39 +813,39 @@ msgid ""
 "<b>Use -1 to disable this feature</b>."
 msgstr ""
 
-#: resources/ui/settings.ui:8549 src/common/actions/Shortcut.js:78
+#: resources/ui/settings.ui:8547 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
 msgstr ""
 
-#: resources/ui/settings.ui:8562
+#: resources/ui/settings.ui:8560
 msgid "This will open the menu."
 msgstr ""
 
-#: resources/ui/settings.ui:8602
+#: resources/ui/settings.ui:8600
 msgid "Open in Screen Center"
 msgstr ""
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/settings.ui:8712
+#: resources/ui/settings.ui:8710
 msgid "Menu Editor"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:8990
+#: resources/ui/settings.ui:8988
 msgid "In Progress"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:9018
+#: resources/ui/settings.ui:9016
 msgid "Completed"
 msgstr ""
 
-#: resources/ui/settings.ui:9071
+#: resources/ui/settings.ui:9069
 msgid "Reset all achievements."
 msgstr ""
 
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/settings.ui:9100
+#: resources/ui/settings.ui:9098
 msgid "Achievements"
 msgstr ""
 
@@ -1794,7 +1794,7 @@ msgid "Export"
 msgstr ""
 
 #: src/prefs/MenuEditorPage.js:263
-msgid "Failed to export the menu configuration!"
+msgid "Could not export the menu configuration."
 msgstr ""
 
 #: src/prefs/MenuEditorPage.js:280
@@ -1806,7 +1806,7 @@ msgid "Import"
 msgstr ""
 
 #: src/prefs/MenuEditorPage.js:325
-msgid "Failed to import menu configuration!"
+msgid "Could not import the menu configuration."
 msgstr ""
 
 #: src/prefs/MenuEditorPage.js:355
@@ -1823,35 +1823,37 @@ msgstr ""
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:966
 msgid ""
-"You will find it more easy to learn item positions if you have an even "
-"number of entries. Four, six and eight are good numbers."
+"An even number of entries will make it easier to learn item positions. Four, "
+"six and eight are good numbers."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:969
 #, javascript-format
-msgid "The source code of Fly-Pie is available on <a href=\"%s\">Github</a>."
+msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:973
 #, javascript-format
-msgid "Suggestions can be posted on <a href=\"%s\">Github</a>."
+msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:977
 #, javascript-format
-msgid "Bugs can be reported on <a href=\"%s\">Github</a>."
+msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:981
-msgid "Deep hierarchies are pretty efficient. Put menus into menus in menus!"
+msgid ""
+"Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
+"new menu level."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
@@ -1872,7 +1874,7 @@ msgstr ""
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:990
 msgid ""
-"You can drop directories, files, links and desktop files to the menu "
+"You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
 msgstr ""
 
@@ -1880,7 +1882,7 @@ msgstr ""
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:993
 msgid ""
-"You can copy menu items by holding the Control key while dragging them to "
+"You can copy menu items by holding the Ctrl key while dragging them to "
 "another location."
 msgstr ""
 
@@ -1888,7 +1890,7 @@ msgstr ""
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:996
 #, javascript-format
-msgid "It's easy to <a href=\"%s\">translate Fly-Pie to another language</a>!"
+msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
@@ -1896,12 +1898,12 @@ msgstr ""
 #: src/prefs/MenuEditorPage.js:1002
 #, javascript-format
 msgid ""
-"💕️ Do you want to show that you love Fly-Pie? <a href=\"%s\">Become a sponsor!"
+"💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
 "</a>"
 msgstr ""
 
 #: src/prefs/MenuEditorPage.js:1096
-msgid "Do you really want to delete the selected item?"
+msgid "Delete the selected item?"
 msgstr ""
 
 #: src/prefs/MenuEditorPage.js:1097
