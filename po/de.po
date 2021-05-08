@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 07:18+0200\n"
+"POT-Creation-Date: 2021-05-08 12:29+0200\n"
 "PO-Revision-Date: 2021-05-06 19:15+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
-"\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
+">\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -451,11 +451,11 @@ msgstr "Unabhängig von der gewählten Voreinstellung."
 #: resources/ui/settings.ui:5162 resources/ui/settings.ui:5246
 #: resources/ui/settings.ui:5749 resources/ui/settings.ui:5913
 #: resources/ui/settings.ui:5937 resources/ui/settings.ui:5961
-#: resources/ui/settings.ui:6022 resources/ui/settings.ui:6324
-#: resources/ui/settings.ui:6348 resources/ui/settings.ui:6372
-#: resources/ui/settings.ui:6637 resources/ui/settings.ui:6661
-#: resources/ui/settings.ui:6773 resources/ui/settings.ui:6797
-#: resources/ui/settings.ui:6953 resources/ui/settings.ui:7159
+#: resources/ui/settings.ui:6022 resources/ui/settings.ui:6342
+#: resources/ui/settings.ui:6366 resources/ui/settings.ui:6478
+#: resources/ui/settings.ui:6502 resources/ui/settings.ui:6658
+#: resources/ui/settings.ui:6916 resources/ui/settings.ui:6940
+#: resources/ui/settings.ui:6964 resources/ui/settings.ui:7159
 #: resources/ui/settings.ui:7250 resources/ui/settings.ui:7340
 #: resources/ui/settings.ui:7431 resources/ui/settings.ui:7637
 #: resources/ui/settings.ui:7661 resources/ui/settings.ui:7746
@@ -496,7 +496,7 @@ msgid "Animation Mode"
 msgstr "Animationsart"
 
 #: resources/ui/settings.ui:3030 resources/ui/settings.ui:4571
-#: resources/ui/settings.ui:5656 resources/ui/settings.ui:6533
+#: resources/ui/settings.ui:5656 resources/ui/settings.ui:6238
 msgid "Size"
 msgstr "Größe"
 
@@ -658,37 +658,9 @@ msgid ""
 "hovered."
 msgstr "Enkelemente werden anders dargestellt, wenn ihr Rand überfahren wird."
 
-#: resources/ui/settings.ui:6252
-msgid "Thickness"
-msgstr "Breite"
-
-#: resources/ui/settings.ui:6265 resources/ui/settings.ui:6586
-msgid "Color"
-msgstr "Farbe"
-
-#: resources/ui/settings.ui:6311
-msgid "Pick Trace Color"
-msgstr "Farbe der Verbindungslinien wählen"
-
-#: resources/ui/settings.ui:6401 resources/ui/settings.ui:7070
-msgid "Trace Appearance"
-msgstr "Erscheinungsbild der Verbindungslinien"
-
-#: resources/ui/settings.ui:6418
-msgid "The trace is the connecting line between selected menu items."
-msgstr "Verbindungslinien werden zwischen gewählten Menüeinträgen gezeichnet."
-
-#: resources/ui/settings.ui:6444
-msgid "Minimum Segment Length"
-msgstr "Minimallänge der Verbindungslinien"
-
-#: resources/ui/settings.ui:6478 resources/ui/settings.ui:7000
-msgid "Wedge Appearance"
-msgstr "Erscheinungsbild der Kreissegmente"
-
 #. Keep the individual lines short (around 30 characters max)!
 #. You can use up to three lines if you want.
-#: resources/ui/settings.ui:6546
+#: resources/ui/settings.ui:6251
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
@@ -696,48 +668,76 @@ msgstr ""
 "Mausklicks innerhalb des inneren\n"
 "Radius schließen das Menü."
 
-#: resources/ui/settings.ui:6570
+#: resources/ui/settings.ui:6275
 msgid "Wedge Separators"
 msgstr "Trennlinien"
 
-#: resources/ui/settings.ui:6605 resources/ui/settings.ui:6739
+#: resources/ui/settings.ui:6291 resources/ui/settings.ui:6857
+msgid "Color"
+msgstr "Farbe"
+
+#: resources/ui/settings.ui:6310 resources/ui/settings.ui:6444
 msgid "Width"
 msgstr "Breite"
 
-#: resources/ui/settings.ui:6687
+#: resources/ui/settings.ui:6392
 msgid "Pick Wedge Separator Color"
 msgstr "Trennlinienfarbe wählen"
 
-#: resources/ui/settings.ui:6712
+#: resources/ui/settings.ui:6417
 msgid "Wedge Color"
 msgstr "Farbe der Kreissegmente"
 
-#: resources/ui/settings.ui:6824
+#: resources/ui/settings.ui:6529
 msgid "Inner Radius"
 msgstr "Innerer Radius"
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/settings.ui:6868
+#: resources/ui/settings.ui:6573
 msgid "Inactive"
 msgstr "Inaktiv"
 
 #. When the mouse pointer is over the item
-#: resources/ui/settings.ui:6887
+#: resources/ui/settings.ui:6592
 msgid "Hovered"
 msgstr "Aktiv"
 
-#: resources/ui/settings.ui:6910
+#: resources/ui/settings.ui:6615
 msgid "Pick Wedge Color"
 msgstr "Segmentfarbe wählen"
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:6925
+#: resources/ui/settings.ui:6630
 msgid "Pick Hovered Wedge Color"
 msgstr "Farbe aktiver Segmente wählen"
 
-#: resources/ui/settings.ui:7017
+#: resources/ui/settings.ui:6705 resources/ui/settings.ui:6775
+msgid "Wedge Appearance"
+msgstr "Erscheinungsbild der Kreissegmente"
+
+#: resources/ui/settings.ui:6722
 msgid "Clicking inside a wedge will activate the corresponding item."
 msgstr "Mausklicks in einem Segment aktivieren das dazugehörige Menüelement."
+
+#: resources/ui/settings.ui:6844
+msgid "Thickness"
+msgstr "Breite"
+
+#: resources/ui/settings.ui:6903
+msgid "Pick Trace Color"
+msgstr "Farbe der Verbindungslinien wählen"
+
+#: resources/ui/settings.ui:6993 resources/ui/settings.ui:7070
+msgid "Trace Appearance"
+msgstr "Erscheinungsbild der Verbindungslinien"
+
+#: resources/ui/settings.ui:7010
+msgid "The trace is the connecting line between selected menu items."
+msgstr "Verbindungslinien werden zwischen gewählten Menüeinträgen gezeichnet."
+
+#: resources/ui/settings.ui:7036
+msgid "Minimum Segment Length"
+msgstr "Minimallänge der Verbindungslinien"
 
 #: resources/ui/settings.ui:7110
 msgid "Minimum Stroke Angle"
@@ -863,32 +863,32 @@ msgstr "Importiert eine Menükonfiguration."
 msgid "Exports the current menu configuration."
 msgstr "Exportiert die aktuelle Menükonfiguration."
 
-#: resources/ui/settings.ui:8271 resources/ui/settings.ui:8308
+#: resources/ui/settings.ui:8269 resources/ui/settings.ui:8306
 msgid "Name"
 msgstr "Name"
 
-#: resources/ui/settings.ui:8306 resources/ui/settings.ui:8307
-#: resources/ui/settings.ui:8404 resources/ui/settings.ui:8405
+#: resources/ui/settings.ui:8304 resources/ui/settings.ui:8305
+#: resources/ui/settings.ui:8402 resources/ui/settings.ui:8403
 msgid "Insert Emoji"
 msgstr "Emoji einfügen"
 
-#: resources/ui/settings.ui:8341 resources/ui/settings.ui:8406
+#: resources/ui/settings.ui:8339 resources/ui/settings.ui:8404
 msgid "Icon"
 msgstr "Symbol"
 
-#: resources/ui/settings.ui:8354
+#: resources/ui/settings.ui:8352
 msgid "Can be an icon name, text, emoji or a file."
 msgstr "Symbolname, Text, Emoji oder Datei."
 
-#: resources/ui/settings.ui:8455 src/prefs/MenuEditorPage.js:370
+#: resources/ui/settings.ui:8453 src/prefs/MenuEditorPage.js:370
 msgid "Fixed Angle"
 msgstr "Fester Winkel"
 
-#: resources/ui/settings.ui:8468
+#: resources/ui/settings.ui:8466
 msgid "See tooltip for details."
 msgstr "Weitere Details im Tooltip."
 
-#: resources/ui/settings.ui:8491
+#: resources/ui/settings.ui:8489
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -917,39 +917,39 @@ msgstr ""
 "\n"
 "<b>Setzen Sie den festen Winkel auf -1, um ihn nicht zu verwenden</b>."
 
-#: resources/ui/settings.ui:8549 src/common/actions/Shortcut.js:78
+#: resources/ui/settings.ui:8547 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
 msgstr "Tastaturkürzel"
 
-#: resources/ui/settings.ui:8562
+#: resources/ui/settings.ui:8560
 msgid "This will open the menu."
 msgstr "Dadurch wird das Menü geöffnet."
 
-#: resources/ui/settings.ui:8602
+#: resources/ui/settings.ui:8600
 msgid "Open in Screen Center"
 msgstr "In der Bildschirmmitte öffnen"
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/settings.ui:8712
+#: resources/ui/settings.ui:8710
 msgid "Menu Editor"
 msgstr "Menü-Editor"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:8990
+#: resources/ui/settings.ui:8988
 msgid "In Progress"
 msgstr "In Arbeit"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:9018
+#: resources/ui/settings.ui:9016
 msgid "Completed"
 msgstr "Abgeschlossen"
 
-#: resources/ui/settings.ui:9071
+#: resources/ui/settings.ui:9069
 msgid "Reset all achievements."
 msgstr "Alle Erfolge zurücksetzen."
 
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/settings.ui:9100
+#: resources/ui/settings.ui:9098
 msgid "Achievements"
 msgstr "Erfolge"
 
@@ -1900,8 +1900,8 @@ msgid "Export"
 msgstr "Exportieren"
 
 #: src/prefs/MenuEditorPage.js:263
-msgid "Failed to export the menu configuration!"
-msgstr "Exportieren der Menükonfiguration ist fehlgeschlagen!"
+msgid "Could not export the menu configuration."
+msgstr ""
 
 #: src/prefs/MenuEditorPage.js:280
 msgid "Import Menu Configuration"
@@ -1912,8 +1912,8 @@ msgid "Import"
 msgstr "Importieren"
 
 #: src/prefs/MenuEditorPage.js:325
-msgid "Failed to import menu configuration!"
-msgstr "Importieren der Menükonfiguration ist fehlgeschlagen!"
+msgid "Could not import the menu configuration."
+msgstr ""
 
 #: src/prefs/MenuEditorPage.js:355
 msgid "Menu Structure"
@@ -1930,42 +1930,38 @@ msgstr ""
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:966
 msgid ""
-"You will find it more easy to learn item positions if you have an even "
-"number of entries. Four, six and eight are good numbers."
+"An even number of entries will make it easier to learn item positions. Four, "
+"six and eight are good numbers."
 msgstr ""
-"Sie werden merken, dass es einfacher ist, sich Positionen in Menüs mit einer "
-"geraden Anzahl an Elementen zu merken. Vier, sechs und acht sind gute Zahlen."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:969
 #, javascript-format
-msgid "The source code of Fly-Pie is available on <a href=\"%s\">Github</a>."
+msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr ""
-"Der Quellcode von Fly-Pie ist auf <a href=\"%s\"> GitHub </a> verfügbar."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:973
 #, javascript-format
-msgid "Suggestions can be posted on <a href=\"%s\">Github</a>."
+msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
 msgstr ""
-"Verbesserungsvorschläge können auf <a href=\"%s\">GitHub</a> gemacht werden."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:977
 #, javascript-format
-msgid "Bugs can be reported on <a href=\"%s\">Github</a>."
-msgstr "Fehler können auf <a href=\"%s\"> GitHub </a> gemeldet werden."
+msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
+msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:981
-msgid "Deep hierarchies are pretty efficient. Put menus into menus in menus!"
+msgid ""
+"Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
+"new menu level."
 msgstr ""
-"Tiefe Hierarchien sind ziemlich effizient! Packen Sie Menüs in Menüs in "
-"Menüs!"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1987,45 +1983,37 @@ msgstr "Menüeinträge können in der Liste mit der Maus verschoben werden."
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:990
 msgid ""
-"You can drop directories, files, links and desktop files to the menu "
+"You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
 msgstr ""
-"Sie können Verzeichnisse, Dateien, Links oder Anwendungsstarter in die Liste "
-"auf der linken Seite ziehen."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:993
 msgid ""
-"You can copy menu items by holding the Control key while dragging them to "
+"You can copy menu items by holding the Ctrl key while dragging them to "
 "another location."
 msgstr ""
-"Sie können Menüeinträge kopieren indem Sie die Strg-Taste während des "
-"Verschiebens gedrückt halten."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:996
 #, javascript-format
-msgid "It's easy to <a href=\"%s\">translate Fly-Pie to another language</a>!"
+msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
 msgstr ""
-"Es ist einfach, <a href=\"%s\">Fly-Pie in eine andere Sprache zu "
-"übersetzen</a>!"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:1002
 #, javascript-format
 msgid ""
-"💕️ Do you want to show that you love Fly-Pie? <a href=\"%s\">Become a sponsor!"
+"💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
 "</a>"
 msgstr ""
-"💕️ Möchten Sie zeigen, dass Sie Fly-Pie lieben? <a href=\"%s\"> Werden Sie "
-"Sponsor! </a>"
 
 #: src/prefs/MenuEditorPage.js:1096
-msgid "Do you really want to delete the selected item?"
-msgstr "Möchten Sie das gewählte Element wirklich löschen?"
+msgid "Delete the selected item?"
+msgstr ""
 
 #: src/prefs/MenuEditorPage.js:1097
 msgid "This cannot be undone!"
@@ -2470,6 +2458,69 @@ msgstr "Abmelden"
 #: src/common/menus/System.js:117
 msgid "Power Off…"
 msgstr "Ausschalten…"
+
+#~ msgid "Failed to export the menu configuration!"
+#~ msgstr "Exportieren der Menükonfiguration ist fehlgeschlagen!"
+
+#~ msgid "Failed to import menu configuration!"
+#~ msgstr "Importieren der Menükonfiguration ist fehlgeschlagen!"
+
+#~ msgid ""
+#~ "You will find it more easy to learn item positions if you have an even "
+#~ "number of entries. Four, six and eight are good numbers."
+#~ msgstr ""
+#~ "Sie werden merken, dass es einfacher ist, sich Positionen in Menüs mit "
+#~ "einer geraden Anzahl an Elementen zu merken. Vier, sechs und acht sind "
+#~ "gute Zahlen."
+
+#~ msgid ""
+#~ "The source code of Fly-Pie is available on <a href=\"%s\">Github</a>."
+#~ msgstr ""
+#~ "Der Quellcode von Fly-Pie ist auf <a href=\"%s\"> GitHub </a> verfügbar."
+
+#~ msgid "Suggestions can be posted on <a href=\"%s\">Github</a>."
+#~ msgstr ""
+#~ "Verbesserungsvorschläge können auf <a href=\"%s\">GitHub</a> gemacht "
+#~ "werden."
+
+#~ msgid "Bugs can be reported on <a href=\"%s\">Github</a>."
+#~ msgstr "Fehler können auf <a href=\"%s\"> GitHub </a> gemeldet werden."
+
+#~ msgid ""
+#~ "Deep hierarchies are pretty efficient. Put menus into menus in menus!"
+#~ msgstr ""
+#~ "Tiefe Hierarchien sind ziemlich effizient! Packen Sie Menüs in Menüs in "
+#~ "Menüs!"
+
+#~ msgid ""
+#~ "You can drop directories, files, links and desktop files to the menu "
+#~ "hierarchy on the left."
+#~ msgstr ""
+#~ "Sie können Verzeichnisse, Dateien, Links oder Anwendungsstarter in die "
+#~ "Liste auf der linken Seite ziehen."
+
+#~ msgid ""
+#~ "You can copy menu items by holding the Control key while dragging them to "
+#~ "another location."
+#~ msgstr ""
+#~ "Sie können Menüeinträge kopieren indem Sie die Strg-Taste während des "
+#~ "Verschiebens gedrückt halten."
+
+#~ msgid ""
+#~ "It's easy to <a href=\"%s\">translate Fly-Pie to another language</a>!"
+#~ msgstr ""
+#~ "Es ist einfach, <a href=\"%s\">Fly-Pie in eine andere Sprache zu "
+#~ "übersetzen</a>!"
+
+#~ msgid ""
+#~ "💕️ Do you want to show that you love Fly-Pie? <a href=\"%s\">Become a "
+#~ "sponsor!</a>"
+#~ msgstr ""
+#~ "💕️ Möchten Sie zeigen, dass Sie Fly-Pie lieben? <a href=\"%s\"> Werden Sie "
+#~ "Sponsor! </a>"
+
+#~ msgid "Do you really want to delete the selected item?"
+#~ msgstr "Möchten Sie das gewählte Element wirklich löschen?"
 
 #~ msgid "Opens a preview for the selected menu."
 #~ msgstr "Zeigt eine Vorschau für das gewählte Menü."
