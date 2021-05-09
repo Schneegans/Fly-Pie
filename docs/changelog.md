@@ -4,6 +4,33 @@
 
 # Changelog of Fly-Pie
 
+## [Fly-Pie 6](https://github.com/schneegans/fly-pie/releases/tag/v6)
+
+**Release Date:** 2021-05-09
+
+#### New Features
+
+* Finally, **achievements** have been implemented! This is something I had in mind since the beginning but no time to work on until now.
+  * For now, 102 Achievements + 2 hidden achievements are available.
+  * Each will give you some experience points which in turn will make you level up at certain points.
+  * Once you reached level 10 you can truly call yourself **Master Pielot**!
+  * Maybe some balancing will be required in the future, a feature like this is hard to test :smile:
+  * Feel free to contribute ideas for new achievements!
+* New preset: **Numix**! This uses the color palette of the well-known Numix theme.
+
+#### Other Enhancements
+
+* Fly-Pie can now be translated via [Weblate](https://hosted.weblate.org/engage/fly-pie/). Every contribution is very appreciated!
+* New Continuous Integration (CI) checks have been added which actually test whether Fly-Pie can be installed on various GNOME Shell versions.
+* The layout of the settings page of the preferences dialog has been improved.
+* The layout of the tutorial page of the preferences dialog has been improved.
+* Fly-Pie now uses GResources for asset loading. This should increase performance of the preferences dialog.
+
+#### Bug Fixes
+* Saved user presets are no longer added to the list of built-in presets.
+
+
+
 ## [Fly-Pie 5](https://github.com/schneegans/fly-pie/releases/tag/v5)
 
 **Release Date:** 2021-04-12

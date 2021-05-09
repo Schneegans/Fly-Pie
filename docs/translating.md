@@ -2,10 +2,9 @@
 
 # Translating Fly-Pie
 
-A great way to contribute to Fly-Pie is creating a translation to another language! There are two ways, you can either use the [Weblate](https://hosted.weblate.org/engage/fly-pie/) online translation tool or standard offline tools such as [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
-
-
 <img align="right" width="350px" src ="pics/achievements.jpg" />
+
+A great way to contribute to Fly-Pie is creating a translation to another language! There are two ways, you can either use the [Weblate](https://hosted.weblate.org/engage/fly-pie/) online translation tool or standard offline tools such as [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
 
 ### General Remarks
 

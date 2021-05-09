@@ -9,24 +9,26 @@
 [![comments](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json)](scripts/cloc.sh)
 [![download](https://img.shields.io/badge/download-extensions.gnome.org-e67f4d.svg)](https://extensions.gnome.org/extension/3433/fly-pie)
 
-**Fly-Pie** is an attractive marking menu for GNOME Shell which can be used to launch applications, simulate hotkeys, open URLs and much more.
-It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.
-(You got it? Like pilot, but with a :cake:).
+**Fly-Pie** is an extension for GNOME Shell which lets you open _marking menus_ via keyboard shortcuts.
 
 <a href="https://youtu.be/U22VxoT-tNU"><img align="right" width="350px" src ="docs/pics/player.jpg" /></a>
 
-Fly-Pie lets you open _marking-menus_ of arbitrary depth via keyboard shortcuts.
-When using Fly-Pie, there are three selection modes which can be used together. You do not have to decide which one to use; you can seamlessly transition between them:
+You can use it to launch applications, simulate hotkeys, open URLs and much more.
+It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.
+(You got it? Like pilot, but with a :cake:).
+
+Once you opened a marking menu, you can seamlessly transition between three alternative selection modes:
 
 * **Point-and-Click:** Select items by clicking on them or anywhere in the corresponding wedges.
-* **Marking-Mode:** Select items by drawing gestures. To do this, click anywhere and drag your mouse while the left button is pressed over an item. As soon as you pause the movement or make a turn, the item will be selected.
-* **Turbo-Mode:** You can also "draw" gestures as long as a modifier key, such as <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, or <kbd>Alt</kbd> is held down **without having to press your mouse button**! This is especially useful when you opened the menu with a shortcut involving such a modifier key. You can just keep it pressed and move the pointer with the mouse or your touch-pad!
+* **Marking-Mode:** Select items by drawing gestures. To do this, click anywhere and drag your mouse. Pausing or making a turn selects the currently dragged item.
+* **Turbo-Mode:** You can also "draw" gestures while holding <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, or <kbd>Alt</kbd> _without having to press your mouse button_! This is especially useful when you opened the menu with a shortcut involving such a modifier.
 
-The menus and their appearance can be configured with a **Live Preview** which updates instantaneously.
-You can compose your menus from various Action Types such as **Run Command**, **Activate Shortcut**, **Insert Text**, or **Open File**.
+The menus and their appearance can be set up with a **Live Preview**.
+They can be composed from various Action Types such as **Run Command**, **Activate Shortcut**, **Insert Text**, or **Open File**.
 There are also several predefined Menu Types, such as **Bookmarks**, **Running Apps**, **Frequently Used Applications**, or **Pinned Applications**.
 
-Last but not least, Fly-Pie features a **D-Bus Interface** which can be used to open your configured menus. It can also be used to open arbitrary menus defined with a JSON description. The item which was selected will be reported via a D-Bus signal.
+Fly-Pie also features a **D-Bus Interface** which can be used to open your configured menus or arbitrary menus defined with a JSON description.
+The selected item will be reported via a D-Bus signal.
 
 
 # :heart: Will you love Fly-Pie?
@@ -75,6 +77,7 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
 ## :2nd_place_medal: Silver Sponsors
 <p align="center">
   GEPLlinux<br>
+  <a href="https://www.llorachdevs.com/Home">Garsiv</a><br>
   <a href="https://github.com/SimHacker">@SimHacker</a><br>
 </p>
 
