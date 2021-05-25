@@ -36,7 +36,7 @@ do
   # Compile the corresponding *.mo file.
   echo "Creating localization for '$LANGUAGE'..."
   mkdir -p locale/"$LANGUAGE"/LC_MESSAGES
-  msgfmt "$FILE" -o locale/"$LANGUAGE"/LC_MESSAGES/flypie.mo
+  msgfmt --check --verbose "$FILE" -o locale/"$LANGUAGE"/LC_MESSAGES/flypie.mo
 done
 
 echo "All locales compiled!"

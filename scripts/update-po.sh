@@ -55,11 +55,9 @@ while getopts l:a FLAG; do
           echo -n "Updating '$OPTARG.po' "
           msgmerge --previous -U po/"$OPTARG".po po/flypie.pot
 
-          # Check if the translation got fuzzy. This happens when an already translated string
-          # got changed in the source code. Does not detect untranslated strings!
-          if grep --silent "#, fuzzy" po/"$OPTARG".po; then
-            echo "WARNING: The translation has unclear strings and needs an update."
-          fi
+          # Check the state of the translation progress.
+          # We don't want to actually create a .mo file, so we direct it to /dev/null.
+          msgfmt --check --verbose --output-file=/dev/null po/"$OPTARG".po
           exit
         else
           promptNewTranslation "$OPTARG"
@@ -73,17 +71,10 @@ while getopts l:a FLAG; do
           echo -n "Updating '$FILE' "
           msgmerge --previous -U "$FILE" po/flypie.pot
 
-          # Check if the translation got fuzzy. This happens when an already translated string
-          # got changed in the source code. Does not detect untranslated strings!
-          if grep --silent "#, fuzzy" "$FILE"; then
-            FUZZY+=("$FILE")
-          fi
+          # Check the state of the translation progress.
+          # We don't want to actually create a .mo file, so we direct it to /dev/null.
+          msgfmt --check --verbose --output-file=/dev/null po/"$OPTARG".po
         done
-
-        # Display a warning if any translation needs an update.
-        if [[ -v FUZZY ]]; then
-          echo "WARNING: Some translations have unclear strings and need an update: ${FUZZY[*]}"
-        fi
         exit;;
 
     *)  # Handle invalid flags.
