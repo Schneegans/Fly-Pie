@@ -15,6 +15,8 @@
 # Exit the script when one command fails.
 set -e
 
+echo "Generating 'flypie.pot'..."
+
 # Check if all necessary commands are available.
 if ! command -v xgettext &> /dev/null
 then
@@ -44,4 +46,4 @@ sed -i '12s/.*/"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\\n"/' po/flypie.
 sed -i '14s/.*/"Language-Team: \\n"/' po/flypie.pot
 sed -i '15s/.*/"Language: <LANGUAGE_CODE>\\n"/' po/flypie.pot
 
-echo "All done!"
+echo "'flypie.pot' generated!"

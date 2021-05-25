@@ -21,7 +21,7 @@ usage() {
 # Create a new translation from 'flypie.pot'. Do not update the template because
 # of potential merge conflicts. This is done in a seperate step.
 promptNewTranslation() {
-  echo -n "The translation '$1' does not exist. Do you want to create it? [Y/n] "
+  echo -n "The translation for '$1' does not exist. Do you want to create it? [Y/n] "
   read -r reply
 
   # Default to 'Yes' when no answer given
@@ -49,7 +49,7 @@ cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
 while getopts l:a FLAG; do
   case $FLAG in
 
-    l)  # Update one specific '.po' file.
+    l)  # Update/Create one specific '.po' file.
         # Check if a valid language code was passed.
         if test -f po/"$OPTARG".po; then
           echo -n "Updating '$OPTARG.po' "
