@@ -9,7 +9,7 @@
 # -------------------------------------------------------------------------------------- #
 
 # This script creates a compiled *.mo translation file for each *.po file in the 'po'
-# directory. It is necessary to run this script whenever a translation has been changed.
+# directory. This script doesn't need to be executed manually, it gets called by create-release.sh.
 
 # Exit the script when one command fails.
 set -e
@@ -27,7 +27,7 @@ cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
 
 for FILE in po/*.po
 do
-  # handle the case of no .po files, see SC2045
+  # Handle the case of no .po files, see SC2045
   [[ -e "$FILE" ]] || { echo "ERROR: No .po files found, exiting."; exit 1; }
   # Extract the language code from the filename.
   LANGUAGE="${FILE##*/}"
@@ -36,7 +36,7 @@ do
   # Compile the corresponding *.mo file.
   echo "Creating localization for '$LANGUAGE'..."
   mkdir -p locale/"$LANGUAGE"/LC_MESSAGES
-  msgfmt "$FILE" -o locale/"$LANGUAGE"/LC_MESSAGES/flypie.mo
+  msgfmt --check --verbose "$FILE" -o locale/"$LANGUAGE"/LC_MESSAGES/flypie.mo
 done
 
-echo "All done!"
+echo "All locales compiled!"

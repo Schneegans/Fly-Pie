@@ -47,7 +47,7 @@ while getopts is FLAG; do
             if ! [[ $(pwd) == *".local/share/gnome-shell/extensions/flypie@schneegans.github.com" ]]; then
                 # shellcheck disable=2015
                 gnome-extensions install flypie@schneegans.github.com.zip --force && \
-                echo "Successfully installed the application! Now restart the Shell ('Alt'+'F2', then 'r')." || \
+                echo "Extension installed successfully! Now restart the Shell ('Alt'+'F2', then 'r')." || \
                 { echo "ERROR: Could not install the extension."; exit 1; }
             else
                 echo "Skipping install step, the repo is already located in the extensions directory."
