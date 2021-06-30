@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-08 12:29+0200\n"
-"PO-Revision-Date: 2021-05-01 19:12+0000\n"
+"PO-Revision-Date: 2021-05-31 10:33+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
-">\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,12 +37,13 @@ msgid ""
 "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
-"Visita la <a href=\"https://github.com/Schneegans/Fly-Pie\">pagina di Fly-"
+"Pubblicato con licenza MIT.\n"
+"Visita <a href=\"https://github.com/Schneegans/Fly-Pie\">Homepage di Fly-"
 "Pie</a> per dettagli.\n"
 "\n"
-"Ogni volta che incontri un errore o hai 🎉️ richiesta di funzionalità, sentiti "
-"libero di segnalarlo <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
-"\">Github</a>."
+"Ogni volta che incontri un 🐞️ bug o hai 🎉️ richieste di nuove funzionalità, "
+"non esitare a segnalarlo su <a href=\"https://github.com/Schneegans/Fly-Pie/"
+"issues\">Github</a>."
 
 #: resources/ui/settings.ui:99
 msgid "About"
@@ -1906,7 +1907,7 @@ msgstr "Esporta"
 
 #: src/prefs/MenuEditorPage.js:263
 msgid "Could not export the menu configuration."
-msgstr ""
+msgstr "Impossibile esportare la configurazione del menu."
 
 #: src/prefs/MenuEditorPage.js:280
 msgid "Import Menu Configuration"
@@ -1918,7 +1919,7 @@ msgstr "Importa"
 
 #: src/prefs/MenuEditorPage.js:325
 msgid "Could not import the menu configuration."
-msgstr ""
+msgstr "Impossibile importare la configurazione del menu."
 
 #: src/prefs/MenuEditorPage.js:355
 msgid "Menu Structure"
@@ -1937,6 +1938,8 @@ msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
 msgstr ""
+"Un numero pari di voci faciliterà l'apprendimento delle posizioni degli "
+"oggetti. Quattro, sei e otto sono buoni numeri."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1944,20 +1947,21 @@ msgstr ""
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr ""
+"Fly-Pie è un software gratuito disponibile su <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:973
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "I suggerimenti possono essere pubblicati su <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:977
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "I bug possono essere segnalati su <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1966,6 +1970,8 @@ msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
 msgstr ""
+"Mantieni efficienti le gerarchie dei menu inserendo qualsiasi cosa oltre gli "
+"8 elementi in un nuovo livello di menu."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1991,6 +1997,8 @@ msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
 msgstr ""
+"È possibile trascinare directory, file, collegamenti e file desktop nella "
+"gerarchia dei menu a sinistra."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1999,13 +2007,15 @@ msgid ""
 "You can copy menu items by holding the Ctrl key while dragging them to "
 "another location."
 msgstr ""
+"Puoi copiare le voci di menu tenendo premuto il tasto Ctrl mentre le "
+"trascini in un'altra posizione."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:996
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
-msgstr ""
+msgstr "<a href=\"%s\">Traduci Fly-Pie su Hosted Weblate</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -2015,10 +2025,12 @@ msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
 "</a>"
 msgstr ""
+"💕️ Vuoi mostrare il tuo amore per Fly-Pie? <a href=\"%s\">Diventa uno "
+"sponsor.</a>"
 
 #: src/prefs/MenuEditorPage.js:1096
 msgid "Delete the selected item?"
-msgstr ""
+msgstr "Eliminare l'elemento selezionato?"
 
 #: src/prefs/MenuEditorPage.js:1097
 msgid "This cannot be undone!"
