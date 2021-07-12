@@ -22,6 +22,6 @@ function init() {
 // method is called. This way we can actually open multiple settings windows and interact
 // with all of them properly.
 function buildPrefsWidget() {
-  let dialog = new PreferencesDialog();
+  var dialog = new PreferencesDialog();
   return dialog.getWidget();
 }

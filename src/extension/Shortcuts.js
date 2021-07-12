@@ -61,14 +61,7 @@ var Shortcuts = class Shortcuts {
   // instance at construction time will be executed.
   bind(shortcut) {
 
-    let action;
-    const shellMinorVersion = parseInt(Config.PACKAGE_VERSION.split('.')[1]);
-
-    if (shellMinorVersion < 34) {
-      action = global.display.grab_accelerator(shortcut);
-    } else {
-      action = global.display.grab_accelerator(shortcut, Meta.KeyBindingFlags.NONE);
-    }
+    const action = global.display.grab_accelerator(shortcut, Meta.KeyBindingFlags.NONE);
 
     if (action == Meta.KeyBindingAction.NONE) {
       utils.debug('Unable to grab shortcut ' + shortcut + '!');

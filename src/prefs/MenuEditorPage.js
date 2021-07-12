@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                          = imports.cairo;
-const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
+const Cairo                                     = imports.cairo;
+const {GObject, Gdk, GLib, Gtk, Gio, GdkPixbuf} = imports.gi;
 
 const Me                  = imports.misc.extensionUtils.getCurrentExtension();
 const utils               = Me.imports.src.common.utils;
@@ -27,7 +27,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 // all configured menus.
 // clang-format off
 let ColumnTypes = {
-  DISPLAY_ICON:  Cairo.Surface.$gtype,  // The actual Cairo.Surface of the icon.
+  DISPLAY_ICON:  GdkPixbuf.Pixbuf.$gtype,  // The actual Pixbuf of the icon.
   DISPLAY_NAME:  GObject.TYPE_STRING,   // The item / menu name as shown (with markup).
   DISPLAY_ANGLE: GObject.TYPE_STRING,   // Empty if angle is -1
   ICON:          GObject.TYPE_STRING,   // The string representation of the icon.
@@ -154,8 +154,7 @@ var MenuEditorPage = class MenuEditorPage {
       grid.attach(name, 1, 0, 1, 1);
       grid.attach(subtitle, 1, 1, 1, 1);
 
-      row.add(grid);
-      row.show_all();
+      row.set_child(grid);
 
       // The name is important - this is later used to identify the type of the
       // item which is to be created.
@@ -213,8 +212,7 @@ var MenuEditorPage = class MenuEditorPage {
       const dialog = new Gtk.FileChooserDialog({
         title: _('Export Menu Configuration'),
         action: Gtk.FileChooserAction.SAVE,
-        do_overwrite_confirmation: true,
-        transient_for: button.get_toplevel(),
+        transient_for: button.get_root(),
         modal: true
       });
 
@@ -238,7 +236,7 @@ var MenuEditorPage = class MenuEditorPage {
       dialog.connect('response', (dialog, response_id) => {
         if (response_id === Gtk.ResponseType.OK) {
           try {
-            let path = dialog.get_filename();
+            let path = dialog.get_file().get_path();
 
             // Make sure we have a *.json extension.
             if (!path.endsWith('.json')) {
@@ -257,14 +255,15 @@ var MenuEditorPage = class MenuEditorPage {
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
-              transient_for: button.get_toplevel(),
+              transient_for: button.get_root(),
+              modal: true,
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
               text: _('Could not export the menu configuration.'),
               secondary_text: '' + error
             });
-            errorMessage.run();
-            errorMessage.destroy();
+            errorMessage.connect('response', d => d.destroy());
+            errorMessage.show();
           }
         }
 
@@ -279,7 +278,7 @@ var MenuEditorPage = class MenuEditorPage {
       const dialog = new Gtk.FileChooserDialog({
         title: _('Import Menu Configuration'),
         action: Gtk.FileChooserAction.OPEN,
-        transient_for: button.get_toplevel(),
+        transient_for: button.get_root(),
         modal: true
       });
 
@@ -303,7 +302,7 @@ var MenuEditorPage = class MenuEditorPage {
       dialog.connect('response', (dialog, response_id) => {
         if (response_id === Gtk.ResponseType.OK) {
           try {
-            const file                = Gio.File.new_for_path(dialog.get_filename());
+            const file                = dialog.get_file();
             const [success, contents] = file.load_contents(null);
 
             // Load the configuration! We do a parse / stringify to catch any JSON errors
@@ -319,14 +318,15 @@ var MenuEditorPage = class MenuEditorPage {
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
-              transient_for: button.get_toplevel(),
+              transient_for: button.get_root(),
+              modal: true,
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
               text: _('Could not import the menu configuration.'),
               secondary_text: '' + error
             });
-            errorMessage.run();
-            errorMessage.destroy();
+            errorMessage.connect('response', d => d.destroy());
+            errorMessage.show();
           }
         }
 
@@ -360,7 +360,7 @@ var MenuEditorPage = class MenuEditorPage {
     const nameRender = new Gtk.CellRendererText({xpad: 5});
     menuColumn.pack_start(iconRender, false);
     menuColumn.pack_start(nameRender, true);
-    menuColumn.add_attribute(iconRender, 'surface', this._store.columns.DISPLAY_ICON);
+    menuColumn.add_attribute(iconRender, 'pixbuf', this._store.columns.DISPLAY_ICON);
     menuColumn.add_attribute(nameRender, 'markup', this._store.columns.DISPLAY_NAME);
     this._view.append_column(menuColumn);
 
@@ -377,24 +377,26 @@ var MenuEditorPage = class MenuEditorPage {
     // operations. This is because we can reorder the menu items. We use the special
     // 'GTK_TREE_MODEL_ROW' target. This makes sure that most of the row-reordering
     // functionality works out-of-the-box.
-    this._view.enable_model_drag_source(
-        Gdk.ModifierType.BUTTON1_MASK,
-        [Gtk.TargetEntry.new('GTK_TREE_MODEL_ROW', Gtk.TargetFlags.SAME_WIDGET, 0)],
-        Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
+    // const internalFormats =
+    // Gdk.ContentFormats.new_for_gtype(GObject.type_from_name("GtkTreeRowData")); const
+    // externalFormats = Gdk.ContentFormats.new(['text/uri-list', 'text/plain']);
+    // this._view.enable_model_drag_source(
+    //     Gdk.ModifierType.BUTTON1_MASK, internalFormats,
+    //     Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
+
+    this._view.set_reorderable(true);
 
     // However it is a destination for both, internal and external drag'n'drop operations.
     // Internal operations occur when the user reorders the rows, external operations
     // occur when something is dragged to the tree view in order to create new items. This
     // can be a file, an URL or some other things.
-    this._view.enable_model_drag_dest(
-        [
-          Gtk.TargetEntry.new('GTK_TREE_MODEL_ROW', Gtk.TargetFlags.SAME_WIDGET, 0),
-          Gtk.TargetEntry.new('text/uri-list', 0, 1),
-          Gtk.TargetEntry.new('text/plain', 0, 2)
-        ],
-        Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
+    // this._view.enable_model_drag_dest(
+    //     internalFormats,
+    //     // internalFormats.union(externalFormats),
+    //     Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
 
     // This is called when a drag'n'drop operation is received.
+    /*
     this._view.connect(
         'drag-data-received', (widget, context, x, y, data, info, time) => {
           // This lambda creates a new menu item for the given text. If the text is an URI
@@ -592,15 +594,19 @@ var MenuEditorPage = class MenuEditorPage {
             Gtk.drag_finish(context, success, false, time);
           }
         });
+        */
 
     // Delete the selected item when the Delete key is pressed.
-    this._view.connect('key-release-event', (widget, event) => {
-      if (event.get_keyval()[1] == Gdk.KEY_Delete) {
+    const controller = Gtk.EventControllerKey.new();
+    controller.connect('key-released', (controller, keyval, keycode, state) => {
+      if (keyval == Gdk.KEY_Delete) {
         this._deleteSelected();
         return true;
       }
       return false;
     });
+
+    this._view.add_controller(controller);
 
     // When a new row is inserted or an existing row is dragged around, we make sure
     // that it stays selected and additionally we save the menu configuration.
@@ -666,64 +672,29 @@ var MenuEditorPage = class MenuEditorPage {
     }
 
     // Now we initialize all icon-related UI elements. That is first and foremost the
-    // icon-select popover.
-    // Icons are loaded asynchronously. Once this is finished, the little spinner in the
-    // top right of the popover is hidden.
-    this._loadIcons().then(() => {
-      this._builder.get_object('icon-load-spinner').active = false;
-    });
-
-    // Filter the icon view based on the content of the search field.
-    const iconListFiltered = this._builder.get_object('icon-list-filtered');
-    const filterEntry      = this._builder.get_object('icon-filter-entry');
-    iconListFiltered.set_visible_func((model, iter) => {
-      const name = model.get_value(iter, 0);
-      if (name == null) {
-        return false;
+    // icon-select dialog.
+    const iconSelectDialog = this._builder.get_object('icon-select-dialog');
+    iconSelectDialog.connect('response', (dialog, id) => {
+      if (id == Gtk.ResponseType.OK) {
+        this._builder.get_object('icon-name').text = dialog.get_icon();
       }
-      return name.toLowerCase().includes(filterEntry.text.toLowerCase());
+      iconSelectDialog.hide();
     });
 
-    // Refilter the icon list whenever the user types something in the search field.
-    filterEntry.connect('notify::text', () => {
-      iconListFiltered.refilter();
-    });
-
-    // Hide the popover when an icon is activated.
-    const iconView = this._builder.get_object('icon-view');
-    iconView.connect('item-activated', () => {
-      this._builder.get_object('icon-popover').popdown();
-    });
-
-    // Set the text of the icon name input field when an icon is selected.
-    iconView.connect('selection-changed', (view) => {
-      const path       = view.get_selected_items()[0];
-      const model      = view.get_model();
-      const [ok, iter] = model.get_iter(path);
-      if (ok) {
-        this._builder.get_object('icon-name').text = model.get_value(iter, 0);
-      }
-    });
-
-    // Hide the popover when a file of the select-a-custom-icon dialog is activated.
-    const iconChooser = this._builder.get_object('icon-file-chooser');
-    iconChooser.connect('file-activated', (chooser) => {
-      this._builder.get_object('icon-popover').popdown();
-    });
-
-    // Set the text of the icon name input field when a file of the select-a-custom-icon
-    // dialog is selected.
-    iconChooser.connect('selection-changed', (chooser) => {
-      this._builder.get_object('icon-name').text = chooser.get_filename();
+    this._builder.get_object('icon-select-button').connect('clicked', () => {
+      iconSelectDialog.set_transient_for(
+          this._builder.get_object('main-notebook').get_root());
+      iconSelectDialog.set_icon(this._builder.get_object('icon-name').text);
+      iconSelectDialog.show();
     });
 
     // Draw an icon to the drawing area whenever it's invalidated. This happens usually
     // when the text of the icon name input field changes.
-    this._builder.get_object('item-icon-drawingarea').connect('draw', (widget, ctx) => {
+    this._builder.get_object('item-icon-drawingarea').set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const icon  = this._getSelected('ICON');
       const font  = this._settings.get_string('font');
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
       if (icon && icon.length > 0) {
         utils.paintIcon(ctx, icon, size, 1, font, color);
       }
@@ -797,9 +768,8 @@ var MenuEditorPage = class MenuEditorPage {
       const [box, label] = ConfigWidgetFactory.createShortcutLabel(false, (shortcut) => {
         this._setSelected('SHORTCUT', shortcut);
       });
-      this._builder.get_object('menu-shortcut-box').pack_start(box, false, false, 0);
+      this._builder.get_object('menu-shortcut-box').append(box);
       this._menuShortcutLabel = label;
-      box.show_all();
     }
 
     // When the currently selected menu item changes, the content of the settings widgets
@@ -872,9 +842,6 @@ var MenuEditorPage = class MenuEditorPage {
         // widget for the selected type.
         if (config) {
 
-          // First we remove any previous configuration widget.
-          revealer.foreach((oldChild) => {revealer.remove(oldChild)});
-
           // To populate the new configuration widget with data, we retrieve the data from
           // the tree store's data column. This **should** be a JSON string, but if
           // someone tries to load a config from Fly-Pie 4 or older, this may not be the
@@ -905,8 +872,7 @@ var MenuEditorPage = class MenuEditorPage {
             }
           });
 
-          revealer.add(newChild);
-          newChild.show_all();
+          revealer.set_child(newChild);
         }
 
         // All modifications are done, all future modifications will come from the user
@@ -920,36 +886,6 @@ var MenuEditorPage = class MenuEditorPage {
   }
 
   // ----------------------------------------------------------------------- private stuff
-
-  // This loads all icons of the current icon theme to the icon list of the
-  // icon-select-popover. As this takes some time, it is done asynchronously. We do not
-  // check for icon theme changes for now - this could be improved in the future!
-  async _loadIcons() {
-    const iconList = this._builder.get_object('icon-list');
-
-    // Disable sorting for now. Else this is horribly slow...
-    iconList.set_sort_column_id(-2, Gtk.SortType.ASCENDING);
-
-    const iconTheme = Gtk.IconTheme.get_default();
-    const icons     = iconTheme.list_icons(null);
-
-    // We add icons in batches. This number is somewhat arbitrary - if reduced to 1, the
-    // icon loading takes quite long, if increased further the user interface gets a bit
-    // laggy during icon loading. Ten seems to be a good compromise…
-    const batchSize = 10;
-    for (let i = 0; i < icons.length; i += batchSize) {
-      for (let j = 0; j < batchSize && i + j < icons.length; j++) {
-        iconList.set_value(iconList.append(), 0, icons[i + j]);
-      }
-
-      // This is effectively a 'yield'. We wait asynchronously for the timeout (1ms) to
-      // resolve, letting other events to be processed in the meantime.
-      await new Promise(r => GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1, r));
-    }
-
-    // Enable sorting again!
-    iconList.set_sort_column_id(0, Gtk.SortType.ASCENDING);
-  }
 
   // There is a small label in the menu editor which shows random tips at regular
   // intervals.
@@ -1016,7 +952,7 @@ var MenuEditorPage = class MenuEditorPage {
       });
 
       // Don't show new tips when the window got closed.
-      return label.get_toplevel().visible;
+      return label.get_root().visible;
     });
 
     label.connect('destroy', () => {
@@ -1089,7 +1025,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     // Create the question dialog.
     const dialog = new Gtk.MessageDialog({
-      transient_for: this._builder.get_object('main-notebook').get_toplevel(),
+      transient_for: this._builder.get_object('main-notebook').get_root(),
       modal: true,
       buttons: Gtk.ButtonsType.OK_CANCEL,
       message_type: Gtk.MessageType.QUESTION,
@@ -1160,8 +1096,11 @@ var MenuEditorPage = class MenuEditorPage {
     if (column == 'ICON') {
       let iconSize = this._isToplevel(iter) ? 24 : 16;
       const font   = this._settings.get_string('font');
-      const color  = this._view.get_style_context().get_color(Gtk.StateFlags.NORMAL);
-      this._set(iter, 'DISPLAY_ICON', utils.createIcon(data, iconSize, font, color));
+      const color  = this._view.get_style_context().get_color();
+      this._set(
+          iter, 'DISPLAY_ICON',
+          Gdk.pixbuf_get_from_surface(
+              utils.createIcon(data, iconSize, font, color), 0, 0, iconSize, iconSize));
     }
 
     // If the angle, was set, update the "DISPLAY_ANGLE" as well. For top-level menus,
@@ -1180,8 +1119,8 @@ var MenuEditorPage = class MenuEditorPage {
         let shortcut      = _('Not bound.');
         const accelerator = this._get(iter, 'SHORTCUT');
         if (accelerator) {
-          const [keyval, mods] = Gtk.accelerator_parse(accelerator);
-          shortcut             = Gtk.accelerator_get_label(keyval, mods);
+          const [ok, keyval, mods] = Gtk.accelerator_parse(accelerator);
+          shortcut                 = Gtk.accelerator_get_label(keyval, mods);
         }
         this._set(
             iter, 'DISPLAY_NAME',
@@ -1198,8 +1137,8 @@ var MenuEditorPage = class MenuEditorPage {
       if (this._isToplevel(iter)) {
         let shortcut = _('Not bound.');
         if (data != '') {
-          const [keyval, mods] = Gtk.accelerator_parse(data);
-          shortcut             = Gtk.accelerator_get_label(keyval, mods);
+          const [ok, keyval, mods] = Gtk.accelerator_parse(data);
+          shortcut                 = Gtk.accelerator_get_label(keyval, mods);
         }
         const name = this._get(iter, 'NAME');
         this._set(

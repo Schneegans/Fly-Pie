@@ -104,7 +104,7 @@ jobs:
       contains(github.event.head_commit.message, '[run-ci]')
     strategy:
       matrix:
-        version: ["3.36", "3.38"]
+        version: ["40.0"]
     steps:
     - uses: actions/checkout@v2
     - name: Download Dependencies
