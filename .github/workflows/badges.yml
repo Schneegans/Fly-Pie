@@ -24,15 +24,17 @@ jobs:
           auth: ${{ secrets.UPLOAD_BADGES }}
           gistID: 8f6459c2417de7534f64d98360dde865
           filename: loc.json
-          label: lines of code
+          label: Lines of Code
           message: ${{ env.CODE_LINES }}
           color: lightgrey
+          labelColor: 303030
       - name: Create Comments-Badge
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:
           auth: ${{ secrets.UPLOAD_BADGES }}
           gistID: 8f6459c2417de7534f64d98360dde865
           filename: comments.json
-          label: comments
+          label: Comments
           message: ${{ env.COMMENT_LINES }}
           color: green
+          labelColor: 303030

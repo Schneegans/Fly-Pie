@@ -8,7 +8,7 @@
   <br />
   <a href="https://github.com/Schneegans/Fly-Pie/actions"><img src="https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop" /></a>
   <a href="https://hosted.weblate.org/engage/fly-pie/"><img src="https://img.shields.io/weblate/progress/fly-pie?label=Translated&logo=weblate&logoColor=lightgray&labelColor=303030" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-purple.svg" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-purple.svg?labelColor=303030" /></a>
   <a href="scripts/cloc.sh"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/loc.json" /></a>
   <a href="scripts/cloc.sh"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json" /></a>
 </p>
