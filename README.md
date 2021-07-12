@@ -2,12 +2,16 @@
   <img src ="docs/pics/logo.gif" />
 </p>
 
-[![check](https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop)](https://github.com/Schneegans/Fly-Pie/actions)
-[![Translation status](https://hosted.weblate.org/widgets/fly-pie/-/svg-badge.svg)](https://hosted.weblate.org/engage/fly-pie/)
-[![license](https://img.shields.io/badge/license-MIT-purple.svg)](LICENSE)
-[![loc](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/loc.json)](scripts/cloc.sh)
-[![comments](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json)](scripts/cloc.sh)
-[![download](https://img.shields.io/badge/download-extensions.gnome.org-e67f4d.svg)](https://extensions.gnome.org/extension/3433/fly-pie)
+<p align="center">
+  <a href="https://extensions.gnome.org/extension/3433/fly-pie"><img src="https://img.shields.io/badge/Download-extensions.gnome.org-e67f4d.svg?logo=gnome&logoColor=lightgrey&labelColor=303030" /></a>
+  <a href="https://open.vscode.dev/schneegans/fly-pie"><img src="https://open.vscode.dev/badges/open-in-vscode.svg" /></a>
+  <br />
+  <a href="https://github.com/Schneegans/Fly-Pie/actions"><img src="https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop" /></a>
+  <a href="https://hosted.weblate.org/engage/fly-pie/"><img src="https://img.shields.io/weblate/progress/fly-pie?label=Translated&logo=weblate&logoColor=lightgray&labelColor=303030" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-purple.svg" /></a>
+  <a href="scripts/cloc.sh"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/loc.json" /></a>
+  <a href="scripts/cloc.sh"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json" /></a>
+</p>
 
 **Fly-Pie** is an extension for GNOME Shell which lets you open _marking menus_ via keyboard shortcuts.
 
