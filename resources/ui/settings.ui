@@ -4547,28 +4547,20 @@ This can be used if you want to capture a video of Fly-Pie.</property>
             <property name="title" translatable="yes" comments="Caption of the menu editor page in the window&apos;s titlebar.">Menu Editor</property>
             <property name="child">
               <object class="GtkBox" id="menu-editor-page">
-                <property name="hexpand">1</property>
                 <property name="margin_end">10</property>
+                <property name="hexpand">1</property>
                 <property name="vexpand">1</property>
 
                 <child>
                   <object class="GtkBox">
-                    <property name="hexpand">1</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkScrolledWindow">
                         <property name="vexpand">1</property>
-                        <property name="width_request">400</property>
+                        <property name="width_request">250</property>
                         <property name="hscrollbar_policy">never</property>
-                        <property name="child">
-                          <object class="GtkTreeView" id="menus-treeview">
-                            <property name="enable_search">0</property>
-                            <property name="enable_tree_lines">1</property>
-                            <child internal-child="selection">
-                              <object class="GtkTreeSelection" id="menus-treeview-selection" />
-                            </child>
-                          </object>
-                        </property>
+                        <!-- <property name="child">
+                        </property> -->
                       </object>
                     </child>
 
@@ -4576,7 +4568,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                       <object class="GtkActionBar">
                         <child>
                           <object class="GtkBox">
-                            <property name="margin_end">8</property>
                             <style>
                               <class name="linked" />
                             </style>
@@ -4599,9 +4590,8 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                             </child>
                           </object>
                         </child>
-                        <child>
+                        <child type="end">
                           <object class="GtkBox">
-                            <property name="margin_end">8</property>
                             <style>
                               <class name="linked" />
                             </style>
@@ -4619,9 +4609,9 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                             </child>
                           </object>
                         </child>
-                        <child type="end">
+                        <!-- <child type="end">
                           <object class="GtkButton" id="preview-menu-button">
-                            <property name="tooltip_text" translatable="yes">Open Live Preview Menu</property>
+                            <property name="tooltip_text" translatable="yes">Opens the currently selected menu as if the corresponding shortcut was pressed.</property>
                             <property name="child">
                               <object class="GtkBox">
                                 <property name="margin_start">8</property>
@@ -4635,7 +4625,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <child>
                                   <object class="GtkLabel">
                                     <property name="halign">start</property>
-                                    <property name="label" translatable="yes" comments="Text of a button that opens a preview menu to test setting changes on-the-fly. There&apos;s a &apos;Play&apos; button next to the text, so no need to say &quot;Open Live Preview&quot; or similar.">Live Preview</property>
+                                    <property name="label" translatable="yes" comments="Text of a button that opens the menu from the menu editor.">Open Menu</property>
                                   </object>
                                 </child>
                               </object>
@@ -4645,7 +4635,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                               <class name="suggested-action" />
                             </style>
                           </object>
-                        </child>
+                        </child> -->
                       </object>
                     </child>
                   </object>
@@ -4656,60 +4646,102 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                 </child>
 
                 <child>
-                  <object class="GtkRevealer" id="item-settings-revealer">
-                    <property name="halign">center</property>
+                  <object class="GtkBox">
+                    <property name="hexpand">1</property>
                     <property name="vexpand">1</property>
-                    <property name="hexpand">0</property>
-                    <property name="transition_type">slide-right</property>
-                    <property name="transition_duration">200</property>
-                    <property name="child">
+                    <property name="orientation">vertical</property>
+                    <!-- <child>
+                      <object class="GtkDrawingArea" id="item-icon-drawingarea">
+                        <property name="width_request">128</property>
+                        <property name="height_request">128</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="margin_top">10</property>
+                        <property name="margin_bottom">10</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkBox">
-                        <property name="width_request">300</property>
-                        <property name="margin_start">10</property>
-                        <property name="vexpand">1</property>
                         <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkDrawingArea" id="item-icon-drawingarea">
-                            <property name="width_request">128</property>
-                            <property name="height_request">128</property>
-                            <property name="halign">center</property>
-                            <property name="valign">center</property>
-                            <property name="margin_top">10</property>
-                            <property name="margin_bottom">10</property>
-                          </object>
-                        </child>
+                        <property name="spacing">5</property>
                         <child>
                           <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">5</property>
+                            <property name="spacing">10</property>
                             <child>
-                              <object class="GtkBox">
-                                <property name="spacing">10</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes">Name</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="halign">end</property>
-                                    <style>
-                                      <class name="dim-label" />
-                                    </style>
-                                  </object>
-                                </child>
+                              <object class="GtkLabel">
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">Name</property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="item-name">
+                              <object class="GtkLabel">
+                                <property name="halign">end</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkEntry" id="item-name">
+                            <property name="show_emoji_icon">1</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="margin_top">20</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">5</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="spacing">10</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="halign">start</property>
+                                <property name="hexpand">1</property>
+                                <property name="label" translatable="yes">Icon</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="halign">end</property>
+                                <property name="label" translatable="yes">Can be an icon name, text, emoji or a file.</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="box7">
+                            <child>
+                              <object class="GtkEntry" id="icon-name">
+                                <property name="hexpand">1</property>
                                 <property name="show_emoji_icon">1</property>
                               </object>
                             </child>
+                            <child>
+                              <object class="GtkButton" id="icon-select-button">
+                                <property name="icon_name">view-more-symbolic</property>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="linked" />
+                            </style>
                           </object>
                         </child>
-                        <child>
-                          <object class="GtkBox">
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkRevealer" id="item-settings-angle-revealer">
+                        <property name="transition_type">slide-up</property>
+                        <property name="transition_duration">200</property>
+                        <property name="child">
+                          <object class="GtkBox" id="box5">
                             <property name="margin_top">20</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">5</property>
@@ -4720,13 +4752,13 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                   <object class="GtkLabel">
                                     <property name="halign">start</property>
                                     <property name="hexpand">1</property>
-                                    <property name="label" translatable="yes">Icon</property>
+                                    <property name="label" translatable="yes">Fixed Angle</property>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkLabel">
                                     <property name="halign">end</property>
-                                    <property name="label" translatable="yes">Can be an icon name, text, emoji or a file.</property>
+                                    <property name="label" translatable="yes">See tooltip for details.</property>
                                     <style>
                                       <class name="dim-label" />
                                     </style>
@@ -4735,32 +4767,36 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkBox" id="box7">
-                                <child>
-                                  <object class="GtkEntry" id="icon-name">
-                                    <property name="hexpand">1</property>
-                                    <property name="show_emoji_icon">1</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkButton" id="icon-select-button">
-                                    <property name="icon_name">view-more-symbolic</property>
-                                  </object>
-                                </child>
-                                <style>
-                                  <class name="linked" />
-                                </style>
+                              <object class="GtkSpinButton" id="spinbutton2">
+                                <property name="tooltip_markup" translatable="yes">Fixed angles can be used to ensure that an item remains at the same position even if other items are added or removed. This way you can edit a menu even if your muscles already learned the item&apos;s direction.
+
+However, there is a &lt;b&gt;restriction&lt;/b&gt; on the fixed angles. Inside a menu the fixed angles must be monotonically increasing, that is each fixed angle must be larger than any previous fixed angle.
+
+In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&gt; if an item is dragged to another position in the menu.
+
+&lt;b&gt;Use -1 to disable this feature&lt;/b&gt;.</property>
+                                <property name="text">-1</property>
+                                <property name="adjustment">item-angle</property>
+                                <property name="numeric">1</property>
+                                <property name="value">-1</property>
                               </object>
                             </child>
                           </object>
-                        </child>
-                        <child>
-                          <object class="GtkRevealer" id="item-settings-angle-revealer">
-                            <property name="transition_type">slide-up</property>
-                            <property name="transition_duration">200</property>
-                            <property name="child">
-                              <object class="GtkBox" id="box5">
-                                <property name="margin_top">20</property>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkRevealer" id="item-settings-menu-revealer">
+                        <property name="transition_type">slide-up</property>
+                        <property name="transition_duration">200</property>
+                        <property name="reveal_child">1</property>
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="margin_top">20</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkBox" id="menu-shortcut-box">
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">5</property>
                                 <child>
@@ -4770,13 +4806,13 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
                                         <property name="hexpand">1</property>
-                                        <property name="label" translatable="yes">Fixed Angle</property>
+                                        <property name="label" translatable="yes">Shortcut</property>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">end</property>
-                                        <property name="label" translatable="yes">See tooltip for details.</property>
+                                        <property name="label" translatable="yes">This will open the menu.</property>
                                         <style>
                                           <class name="dim-label" />
                                         </style>
@@ -4784,92 +4820,57 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </child>
                                   </object>
                                 </child>
-                                <child>
-                                  <object class="GtkSpinButton" id="spinbutton2">
-                                    <property name="tooltip_markup" translatable="yes">Fixed angles can be used to ensure that an item remains at the same position even if other items are added or removed. This way you can edit a menu even if your muscles already learned the item&apos;s direction.
-
-However, there is a &lt;b&gt;restriction&lt;/b&gt; on the fixed angles. Inside a menu the fixed angles must be monotonically increasing, that is each fixed angle must be larger than any previous fixed angle.
-
-In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&gt; if an item is dragged to another position in the menu.
-
-&lt;b&gt;Use -1 to disable this feature&lt;/b&gt;.</property>
-                                    <property name="text">-1</property>
-                                    <property name="adjustment">item-angle</property>
-                                    <property name="numeric">1</property>
-                                    <property name="value">-1</property>
-                                  </object>
-                                </child>
                               </object>
-                            </property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkRevealer" id="item-settings-menu-revealer">
-                            <property name="transition_type">slide-up</property>
-                            <property name="transition_duration">200</property>
-                            <property name="reveal_child">1</property>
-                            <property name="child">
+                            </child>
+                            <child>
                               <object class="GtkBox">
-                                <property name="margin_top">20</property>
-                                <property name="orientation">vertical</property>
-                                <property name="spacing">5</property>
+                                <property name="margin_top">10</property>
+                                <property name="spacing">10</property>
                                 <child>
-                                  <object class="GtkBox" id="menu-shortcut-box">
-                                    <property name="orientation">vertical</property>
-                                    <property name="spacing">5</property>
-                                    <child>
-                                      <object class="GtkBox">
-                                        <property name="spacing">10</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="halign">start</property>
-                                            <property name="hexpand">1</property>
-                                            <property name="label" translatable="yes">Shortcut</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="halign">end</property>
-                                            <property name="label" translatable="yes">This will open the menu.</property>
-                                            <style>
-                                              <class name="dim-label" />
-                                            </style>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
+                                  <object class="GtkLabel">
+                                    <property name="hexpand">1</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Open in Screen Center</property>
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkBox">
-                                    <property name="margin_top">10</property>
-                                    <property name="spacing">10</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="hexpand">1</property>
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Open in Screen Center</property>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkSwitch" id="menu-centered" />
-                                    </child>
-                                  </object>
+                                  <object class="GtkSwitch" id="menu-centered" />
                                 </child>
                               </object>
-                            </property>
+                            </child>
                           </object>
-                        </child>
-                        <child>
-                          <object class="GtkRevealer" id="item-settings-config-revealer">
-                            <property name="transition_type">slide-up</property>
-                            <property name="transition_duration">200</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="item-description">
-                            <property name="margin_top">20</property>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkRevealer" id="item-settings-config-revealer">
+                        <property name="transition_type">slide-up</property>
+                        <property name="transition_duration">200</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="item-description">
+                        <property name="margin_top">20</property>
+                        <property name="label">label</property>
+                        <property name="use_markup">1</property>
+                        <property name="wrap">1</property>
+                        <property name="max_width_chars">0</property>
+                        <property name="xalign">0</property>
+                        <style>
+                          <class name="dim-label" />
+                        </style>
+                      </object>
+                    </child> -->
+                    <child>
+                      <object class="GtkRevealer" id="info-label-revealer">
+                        <property name="vexpand">1</property>
+                        <property name="transition_type">crossfade</property>
+                        <property name="child">
+                          <object class="GtkLabel" id="info-label">
+                            <property name="margin_top">10</property>
+                            <property name="margin_bottom">10</property>
                             <property name="label">label</property>
+                            <property name="valign">end</property>
                             <property name="use_markup">1</property>
                             <property name="wrap">1</property>
                             <property name="max_width_chars">0</property>
@@ -4878,33 +4879,11 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               <class name="dim-label" />
                             </style>
                           </object>
-                        </child>
-                        <child>
-                          <object class="GtkRevealer" id="info-label-revealer">
-                            <property name="vexpand">1</property>
-                            <property name="transition_type">crossfade</property>
-                            <property name="child">
-                              <object class="GtkLabel" id="info-label">
-                                <property name="margin_top">10</property>
-                                <property name="margin_bottom">10</property>
-                                <property name="label">label</property>
-                                <property name="valign">end</property>
-                                <property name="use_markup">1</property>
-                                <property name="wrap">1</property>
-                                <property name="max_width_chars">0</property>
-                                <property name="xalign">0</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                              </object>
-                            </property>
-                          </object>
-                        </child>
+                        </property>
                       </object>
-                    </property>
+                    </child>
                   </object>
                 </child>
-
               </object>
             </property>
           </object>
@@ -5077,7 +5056,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="margin_bottom">20</property>
                                     <property name="orientation">vertical</property>
                                     <child>
-                                      <placeholder/>
+                                      <placeholder />
                                     </child>
                                   </object>
                                 </property>
@@ -5103,7 +5082,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="margin_bottom">20</property>
                                     <property name="orientation">vertical</property>
                                     <child>
-                                      <placeholder/>
+                                      <placeholder />
                                     </child>
                                   </object>
                                 </property>
@@ -5152,7 +5131,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                       <object class="GtkLabel" id="achievement-counter">
                                         <property name="label">0</property>
                                         <style>
-                                          <class name="counter-label"/>
+                                          <class name="counter-label" />
                                         </style>
                                       </object>
                                     </property>
@@ -5163,7 +5142,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                           </object>
                         </child>
                         <style>
-                          <class name="linked"/>
+                          <class name="linked" />
                         </style>
                       </object>
                     </child>
@@ -5177,8 +5156,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                           </object>
                         </child>
                         <style>
-                          <class name="pill-button"/>
-                          <class name="destructive-action"/>
+                          <class name="pill-button" />
+                          <class name="destructive-action" />
                         </style>
                       </object>
                     </child>
