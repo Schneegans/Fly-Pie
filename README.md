@@ -15,24 +15,16 @@
 
 **Fly-Pie** is an extension for GNOME Shell which lets you open _marking menus_ via keyboard shortcuts.
 
-<a href="https://youtu.be/U22VxoT-tNU"><img align="right" width="350px" src ="docs/pics/player.jpg" /></a>
-
 You can use it to launch applications, simulate hotkeys, open URLs and much more.
 It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.
 (You got it? Like pilot, but with a :cake:).
-
 Once you opened a marking menu, you can seamlessly transition between three alternative selection modes:
+
+<a href="https://youtu.be/U22VxoT-tNU"><img align="right" width="350px" src ="docs/pics/player.jpg" /></a>
 
 * **Point-and-Click:** Select items by clicking on them or anywhere in the corresponding wedges.
 * **Marking-Mode:** Select items by drawing gestures. To do this, click anywhere and drag your mouse. Pausing or making a turn selects the currently dragged item.
 * **Turbo-Mode:** You can also "draw" gestures while holding <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, or <kbd>Alt</kbd> _without having to press your mouse button_! This is especially useful when you opened the menu with a shortcut involving such a modifier.
-
-The menus and their appearance can be set up with a **Live Preview**.
-They can be composed from various Action Types such as **Run Command**, **Activate Shortcut**, **Insert Text**, or **Open File**.
-There are also several predefined Menu Types, such as **Bookmarks**, **Running Apps**, **Frequently Used Applications**, or **Pinned Applications**.
-
-Fly-Pie also features a **D-Bus Interface** which can be used to open your configured menus or arbitrary menus defined with a JSON description.
-The selected item will be reported via a D-Bus signal.
 
 
 # :heart: Will you love Fly-Pie?
