@@ -8,19 +8,24 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-08 12:29+0200\n"
-"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-08-06 09:34+0000\n"
+"Last-Translator: Thiago Carmona Monteiro <Guarakami1807@protonmail.ch>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
+"fly-pie/core/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.8-dev\n"
 
 #: resources/ui/settings.ui:66
 msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
+"Leia o <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
+"changelog.md\">Changelog</a>."
 
 #: resources/ui/settings.ui:81
 msgid ""
@@ -32,38 +37,45 @@ msgid ""
 "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
+"Publicado sob a licença MIT.\n"
+"Visite <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie's Homepage</"
+"a> para mais detalhes.\n"
+"\n"
+"Sempre que você encontrar um bug 🐞 ou tiver uma solicitação de recurso🎉️ , "
+"sinta-se a vontade para reportar em <a href=\"https://github.com/Schneegans/"
+"Fly-Pie/issues\">Github</a>."
 
 #: resources/ui/settings.ui:99
 msgid "About"
-msgstr ""
+msgstr "Sobre"
 
 #: resources/ui/settings.ui:126
 msgid "Created by"
-msgstr ""
+msgstr "Criado por "
 
 #: resources/ui/settings.ui:156
 msgid "Translated by"
-msgstr ""
+msgstr "Traduzido por "
 
 #: resources/ui/settings.ui:190
 msgid "Artwork by"
-msgstr ""
+msgstr "Artwork por "
 
 #: resources/ui/settings.ui:219
 msgid "Credits"
-msgstr ""
+msgstr "Créditos"
 
 #: resources/ui/settings.ui:250
 msgid "🥇️ Gold Sponsors"
-msgstr ""
+msgstr "🥇Patrocinadores de Ouro"
 
 #: resources/ui/settings.ui:264
 msgid "🥈️ Silver Sponsors"
-msgstr ""
+msgstr "🥈Patrocinadores de Prata"
 
 #: resources/ui/settings.ui:278
 msgid "🥉️ Bronze Sponsors"
-msgstr ""
+msgstr "🥉Patrocinadores de Bronze"
 
 #: resources/ui/settings.ui:354
 msgid ""
@@ -71,75 +83,78 @@ msgid ""
 "<a href=\"https://github.com/sponsors/Schneegans\">You may already become a "
 "sponsor for as little as 1$ / month!</a>"
 msgstr ""
+"💕️ Quer mostrar que você ama o Fly-Pie?\n"
+"<a href=\"https://github.com/sponsors/Schneegans\">Você já pode se tornar um "
+"patrocinador por apenas 1$ por mês!</a>"
 
 #: resources/ui/settings.ui:370
 msgid "Sponsors"
-msgstr ""
+msgstr "Patrocinadores"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:575
 msgid "Linear"
-msgstr ""
+msgstr "Linear"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:579
 msgid "Ease"
-msgstr ""
+msgstr "Ease"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:583
 msgid "Ease-In"
-msgstr ""
+msgstr "Ease-In"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:587
 msgid "Ease-Out"
-msgstr ""
+msgstr "Ease-Out"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:591
 msgid "Ease-In-Out"
-msgstr ""
+msgstr "Ease-In-Out"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:595
 msgid "Ease-In-Quad"
-msgstr ""
+msgstr "Ease-In-Quad"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:599
 msgid "Ease-Out-Quad"
-msgstr ""
+msgstr "Ease-Out-Quad"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:603
 msgid "Ease-In-Out-Quad"
-msgstr ""
+msgstr "Ease-In-Out-Quad"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:607
 msgid "Ease-In-Back"
-msgstr ""
+msgstr "Ease-In-Back"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:611
 msgid "Ease-Out-Back"
-msgstr ""
+msgstr "Ease-Out-Back"
 
 #. A kind of animation. It may be fine to use the English term here.
 #: resources/ui/settings.ui:615
 msgid "Ease-In-Out-Back"
-msgstr ""
+msgstr "Ease-In-Out-Back"
 
 #. Tab title of the icon-select-popover.
 #: resources/ui/settings.ui:794
 msgid "Icon Theme"
-msgstr ""
+msgstr "Tema do Ícone"
 
 #. Tab title of the icon-select-popover.
 #: resources/ui/settings.ui:821
 msgid "Custom Icon"
-msgstr ""
+msgstr "Ícone Personalizado"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:897
@@ -147,6 +162,8 @@ msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
 msgstr ""
+"<b>Menus</b>\n"
+"Podem ser submenus ou menus de nível superior."
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:934
@@ -154,23 +171,25 @@ msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
+"<b>Ações</b>\n"
+"Você pode adicionar menus personalizados."
 
 #: resources/ui/settings.ui:1030
 msgid "Initializes the settings below to random values"
-msgstr ""
+msgstr "Inicializa as configurações abaixo com valores aleatórios"
 
 #: resources/ui/settings.ui:1056
 msgid "Generate Random Preset"
-msgstr ""
+msgstr "Gerar Predefinição Aleatória"
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: resources/ui/settings.ui:1127
 msgid "Enable Animations"
-msgstr ""
+msgstr "Ativar Animações"
 
 #: resources/ui/settings.ui:1154
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
-msgstr ""
+msgstr "Fly-Pie precisa que as animações da GNOME Shell estejam ativadas."
 
 #: resources/ui/settings.ui:1280
 msgid ""
@@ -178,6 +197,10 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
+"Você pode usar o Fly-Pie para iniciar aplicativos, simular teclas de atalho, "
+"abrir URLs e muito mais. Este tutorial interativo vai lhe ensinar a como "
+"usar o Fly-Pie de forma mais eficiente. Clique no botão grande abaixo para "
+"abrir um menu de teste!"
 
 #: resources/ui/settings.ui:1300
 msgid ""
@@ -187,24 +210,33 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"• Use seu <b>botão esquerdo do mouse para selecionar itens</b>.\n"
+"• Use seu <b>botão direito do mouse para fechar o menu</b>.\n"
+"• O menu de teste é apenas um playground, itens selecionados não tem efeitos "
+"reais.\n"
+"\n"
+"Quando se sentir confortável, clique em <b>next</b> para aprender mais "
+"detalhes!"
 
 #. The text of the big tutorial button.
 #: resources/ui/settings.ui:1333 resources/ui/settings.ui:1452
 #: resources/ui/settings.ui:1578 resources/ui/settings.ui:1846
 #: resources/ui/settings.ui:1970
 msgid "<big><b>Open the example menu!</b></big>"
-msgstr ""
+msgstr "<big><b>Abra o menu de exemplo!</b></big>"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1371
 msgid "You can click anywhere!"
-msgstr ""
+msgstr "Você pode clicar em qualquer lugar!"
 
 #: resources/ui/settings.ui:1404
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
 msgstr ""
+"Não importa se você clicar diretamente em um item ou na borda da tela, desde "
+"que o cursor do mouse permaneça na fatia do item."
 
 #: resources/ui/settings.ui:1422
 msgid ""
@@ -215,11 +247,19 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
+"<b>Os itens são selecionados clicando em qualquer lugar em suas respectivas "
+"fatias</b>.\n"
+"\n"
+"Além disso, você não precisa esperar que a animação termine, pois as fatias "
+"do submenu aparecerão instantaneamente ao redor da posição onde você clicou."
+"\n"
+"\n"
+"Clique <b>next</b> para uma sessão de prática!"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1491
 msgid "Practice Session I"
-msgstr ""
+msgstr "Sessão de Prática I"
 
 #: resources/ui/settings.ui:1507
 msgid ""
@@ -230,36 +270,42 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!"
 msgstr ""
+"Para esta sessão de prática, abra o menu clicando no botão grande. Então "
+"selecione \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) o mais rápido possível. Você consegue "
+"ganhar uma medalha de ouro?\n"
+"\n"
+"Assim que estiver satisfeito com seu resultado, clique <b>nexg</b> para "
+"saber sobre o Modo Marcação do Fly-Pie!"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1531
 msgid "<big>Last selection time: <b>- ms</b></big>"
-msgstr ""
+msgstr "<big>Último tempo de seleção: <b>- ms</b></big>"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1545
 msgid "<big>Best selection time: <b>- ms</b></big>"
-msgstr ""
+msgstr "<big>Melhor tempo de seleção: <b>- ms</b></big>"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1623
 msgid "Unlocked at less than 3000 ms"
-msgstr ""
+msgstr "Desbloqueado ao fazer em menos de 3000ms"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1669
 msgid "Unlocked at less than 2000 ms"
-msgstr ""
+msgstr "Desbloqueado ao fazer em menos de 2000 ms"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1714 resources/ui/settings.ui:2014
 msgid "Unlocked at less than 1000 ms"
-msgstr ""
+msgstr "Desbloqueado ao fazer em menos de 1000 ms"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1766
 msgid "The Marking Mode of Fly-Pie"
-msgstr ""
+msgstr "O Modo Marcação do Fly-Pie"
 
 #: resources/ui/settings.ui:1799
 msgid ""
@@ -267,6 +313,9 @@ msgid ""
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
+"O <b>Modo Marcação</b> do Fly-Pie permite que você selecione itens "
+"<b>desenhando gestos</b>! Para entrar no Modo Marcação, clique e arraste um "
+"item. Assim que você arrastar ou virar, o item será selecionado."
 
 #: resources/ui/settings.ui:1816
 msgid ""
@@ -284,7 +333,7 @@ msgstr ""
 #. This is a heading.
 #: resources/ui/settings.ui:1885
 msgid "Practice Session II"
-msgstr ""
+msgstr "Sessão de Prática II"
 
 #: resources/ui/settings.ui:1901
 msgid ""
@@ -299,17 +348,17 @@ msgstr ""
 #. ms = milliseconds
 #: resources/ui/settings.ui:2059
 msgid "Unlocked at less than 750 ms"
-msgstr ""
+msgstr "Desbloqueado ao fazer em menos de 750 ms"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:2104
 msgid "Unlocked at less than 500 ms"
-msgstr ""
+msgstr "Desbloqueado ao fazer em menos de 500 ms"
 
 #. The user finished the tutorial. Yay!
 #: resources/ui/settings.ui:2169
 msgid "Congratulations!"
-msgstr ""
+msgstr "Parabéns!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: resources/ui/settings.ui:2187
@@ -333,30 +382,30 @@ msgstr ""
 #. Button for tutorial navigation. Goes back one page.
 #: resources/ui/settings.ui:2262
 msgid "Previous"
-msgstr ""
+msgstr "Página Anterior"
 
 #. Button for tutorial navigation. Goes to the next page.
 #: resources/ui/settings.ui:2412
 msgid "Next"
-msgstr ""
+msgstr "Próxima Página"
 
 #. Caption of the tutorial page in the window's titlebar.
 #: resources/ui/settings.ui:2449
 msgid "Tutorial"
-msgstr ""
+msgstr "Tutorial"
 
 #: resources/ui/settings.ui:2526
 msgid "Animation Duration"
-msgstr ""
+msgstr "Duração da Animação"
 
 #: resources/ui/settings.ui:2544
 msgid "Global Scaling"
-msgstr ""
+msgstr "Escala Global"
 
 #. Please keep this short!
 #: resources/ui/settings.ui:2556
 msgid "Independent of the preset."
-msgstr ""
+msgstr "Independente da predefinição."
 
 #: resources/ui/settings.ui:2610 resources/ui/settings.ui:2634
 #: resources/ui/settings.ui:2775 resources/ui/settings.ui:2799
@@ -379,70 +428,70 @@ msgstr ""
 #: resources/ui/settings.ui:7431 resources/ui/settings.ui:7637
 #: resources/ui/settings.ui:7661 resources/ui/settings.ui:7746
 msgid "Reset to default value"
-msgstr ""
+msgstr "Redefinir para o valor padrão"
 
 #: resources/ui/settings.ui:2691
 msgid "Font"
-msgstr ""
+msgstr "Fonte"
 
 #: resources/ui/settings.ui:2703
 msgid "Text Color"
-msgstr ""
+msgstr "Cor do Texto"
 
 #: resources/ui/settings.ui:2717 resources/ui/settings.ui:3801
 #: resources/ui/settings.ui:4845 resources/ui/settings.ui:5489
 msgid "Background Color"
-msgstr ""
+msgstr "Cor de Fundo"
 
 #: resources/ui/settings.ui:2746
 msgid "Pick Text Color"
-msgstr ""
+msgstr "Escolha a Cor do Texto"
 
 #: resources/ui/settings.ui:2762
 msgid "Pick Background Color"
-msgstr ""
+msgstr "Escolha a Cor de Fundo"
 
 #: resources/ui/settings.ui:2895 resources/ui/settings.ui:2965
 msgid "Global Appearance Settings"
-msgstr ""
+msgstr "Configuração de Aparência Global"
 
 #: resources/ui/settings.ui:2912
 msgid "These settings affect all menu items."
-msgstr ""
+msgstr "Estas configurações afetam todos os itens do menu."
 
 #: resources/ui/settings.ui:2937
 msgid "Animation Mode"
-msgstr ""
+msgstr "Modo de Animação"
 
 #: resources/ui/settings.ui:3030 resources/ui/settings.ui:4571
 #: resources/ui/settings.ui:5656 resources/ui/settings.ui:6238
 msgid "Size"
-msgstr ""
+msgstr "Tamanho"
 
 #: resources/ui/settings.ui:3081 resources/ui/settings.ui:3348
 msgid "Pick Center Item Color"
-msgstr ""
+msgstr "Escolha a Cor do Item Central"
 
 #: resources/ui/settings.ui:3107 resources/ui/settings.ui:3167
 #: resources/ui/settings.ui:3374 resources/ui/settings.ui:3434
 #: resources/ui/settings.ui:4254 resources/ui/settings.ui:4326
 #: resources/ui/settings.ui:4459 resources/ui/settings.ui:4543
 msgid "Saturation"
-msgstr ""
+msgstr "Saturação"
 
 #: resources/ui/settings.ui:3127 resources/ui/settings.ui:3179
 #: resources/ui/settings.ui:3394 resources/ui/settings.ui:3446
 #: resources/ui/settings.ui:4274 resources/ui/settings.ui:4314
 #: resources/ui/settings.ui:4479 resources/ui/settings.ui:4531
 msgid "Luminance"
-msgstr ""
+msgstr "Luminância"
 
 #: resources/ui/settings.ui:3147 resources/ui/settings.ui:3191
 #: resources/ui/settings.ui:3414 resources/ui/settings.ui:3458
 #: resources/ui/settings.ui:4294 resources/ui/settings.ui:4338
 #: resources/ui/settings.ui:4499 resources/ui/settings.ui:4519
 msgid "Opacity"
-msgstr ""
+msgstr "Opacidade"
 
 #. Keep this very short! Try to use not more than six or seven letters.
 #. This is a label of the coloring type radio button group.
@@ -451,7 +500,7 @@ msgstr ""
 #: resources/ui/settings.ui:4166 resources/ui/settings.ui:4371
 #: resources/ui/settings.ui:5509 resources/ui/settings.ui:5586
 msgid "Fixed"
-msgstr ""
+msgstr "Fixado"
 
 #. Keep this very short! Try to use not more than six or seven letters.
 #. This is a label of the coloring type radio button group.
@@ -459,11 +508,11 @@ msgstr ""
 #: resources/ui/settings.ui:3231 resources/ui/settings.ui:3316
 #: resources/ui/settings.ui:4181 resources/ui/settings.ui:4386
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: resources/ui/settings.ui:3553 resources/ui/settings.ui:4798
 msgid "Icon Opacity"
-msgstr ""
+msgstr "Opacidade do Ícone"
 
 #: resources/ui/settings.ui:3565 resources/ui/settings.ui:3588
 #: resources/ui/settings.ui:3612 resources/ui/settings.ui:3636
@@ -475,7 +524,7 @@ msgstr ""
 #: resources/ui/settings.ui:5865 resources/ui/settings.ui:5889
 #: resources/ui/settings.ui:6070
 msgid "Copy left value to right side"
-msgstr ""
+msgstr "Copiar o valor esquerdo para o lado direito"
 
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/settings.ui:3755
@@ -489,7 +538,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:3788 resources/ui/settings.ui:5128
 msgid "Icon Scale"
-msgstr ""
+msgstr "Escala do Ícone"
 
 #: resources/ui/settings.ui:3872 resources/ui/settings.ui:5210
 msgid "Icon Crop"
@@ -498,11 +547,11 @@ msgstr ""
 #: resources/ui/settings.ui:3967 resources/ui/settings.ui:5305
 #: resources/ui/settings.ui:6058
 msgid "Background Image"
-msgstr ""
+msgstr "Imagem de Fundo"
 
 #: resources/ui/settings.ui:4021 resources/ui/settings.ui:4081
 msgid "Center Appearance"
-msgstr ""
+msgstr "Aparência do Centro"
 
 #: resources/ui/settings.ui:4038
 msgid "The center element shows the currently hovered child's name."
@@ -537,7 +586,7 @@ msgstr ""
 #. When the mouse pointer is NOT over the item
 #: resources/ui/settings.ui:5095 resources/ui/settings.ui:5826
 msgid "Standard State"
-msgstr ""
+msgstr "Estado Padrão"
 
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/settings.ui:5111
@@ -546,7 +595,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:5359 resources/ui/settings.ui:5420
 msgid "Children Appearance"
-msgstr ""
+msgstr "Aparência das Crianças"
 
 #. When the mouse pointer is NOT over the item
 #: resources/ui/settings.ui:5376
