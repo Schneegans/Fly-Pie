@@ -4556,19 +4556,9 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                     <property name="hexpand">1</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkScrolledWindow">
+                      <object class="GtkFixed">
                         <property name="vexpand">1</property>
-                        <property name="width_request">400</property>
-                        <property name="hscrollbar_policy">never</property>
-                        <property name="child">
-                          <object class="GtkTreeView" id="menus-treeview">
-                            <property name="enable_search">0</property>
-                            <property name="enable_tree_lines">1</property>
-                            <child internal-child="selection">
-                              <object class="GtkTreeSelection" id="menus-treeview-selection" />
-                            </child>
-                          </object>
-                        </property>
+
                       </object>
                     </child>
 
@@ -5077,7 +5067,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="margin_bottom">20</property>
                                     <property name="orientation">vertical</property>
                                     <child>
-                                      <placeholder/>
+                                      <placeholder />
                                     </child>
                                   </object>
                                 </property>
@@ -5103,7 +5093,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                     <property name="margin_bottom">20</property>
                                     <property name="orientation">vertical</property>
                                     <child>
-                                      <placeholder/>
+                                      <placeholder />
                                     </child>
                                   </object>
                                 </property>
@@ -5152,7 +5142,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                                       <object class="GtkLabel" id="achievement-counter">
                                         <property name="label">0</property>
                                         <style>
-                                          <class name="counter-label"/>
+                                          <class name="counter-label" />
                                         </style>
                                       </object>
                                     </property>
@@ -5163,7 +5153,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                           </object>
                         </child>
                         <style>
-                          <class name="linked"/>
+                          <class name="linked" />
                         </style>
                       </object>
                     </child>
@@ -5177,8 +5167,8 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                           </object>
                         </child>
                         <style>
-                          <class name="pill-button"/>
-                          <class name="destructive-action"/>
+                          <class name="pill-button" />
+                          <class name="destructive-action" />
                         </style>
                       </object>
                     </child>

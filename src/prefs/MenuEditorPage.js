@@ -23,88 +23,6 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-// These are the different columns of the MenuTreeStore. It contains basically all data of
-// all configured menus.
-// clang-format off
-let ColumnTypes = {
-  DISPLAY_ICON:  GdkPixbuf.Pixbuf.$gtype,  // The actual Pixbuf of the icon.
-  DISPLAY_NAME:  GObject.TYPE_STRING,   // The item / menu name as shown (with markup).
-  DISPLAY_ANGLE: GObject.TYPE_STRING,   // Empty if angle is -1
-  ICON:          GObject.TYPE_STRING,   // The string representation of the icon.
-  NAME:          GObject.TYPE_STRING,   // The name without any markup.
-  TYPE:          GObject.TYPE_STRING,   // The item type. Like 'Shortcut' or 'Bookmarks'.
-  DATA:          GObject.TYPE_STRING,   // JSON string containing item-specific data.
-  SHORTCUT:      GObject.TYPE_STRING,   // Hotkey to open top-level menus.
-  CENTERED:      GObject.TYPE_BOOLEAN,  // Wether a menu should be opened centered.
-  ANGLE:         GObject.TYPE_INT,      // The fixed angle for items.
-  ID:            GObject.TYPE_INT       // The menu ID for top-level menus.
-}
-// clang-format on
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// The MenuTreeStore differs from a normal Gtk.TreeStore only in the drag'n'drop        //
-// behavior. It ensures that actions are only dropped into custom menus and menus only  //
-// at top-level or into custom menus.                                                   //
-// Additionally, it has a public property "columns", which contain the IDs of all the   //
-// columns above. For example, this can be used like this:                              //
-// this.get_value(iter, this.columns.DISPLAY_NAME);                                     //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-let MenuTreeStore = GObject.registerClass({}, class MenuTreeStore extends Gtk.TreeStore {
-  _init() {
-    super._init();
-
-    // This array is used further down to initialize the column types of this.
-    let columnTypes = [];
-
-    // This public property will contain the column IDs for each ColumnType. For example,
-    // this can be used like this: this.get_value(iter, this.columns.DISPLAY_NAME);
-    this.columns = {};
-
-    let lastColumnID = -1;
-    for (const name in ColumnTypes) {
-      columnTypes.push(ColumnTypes[name]);
-      this.columns[name] = ++lastColumnID;
-    }
-
-    // Initialize the column types.
-    this.set_column_types(columnTypes);
-  }
-
-  // This ensures that actions are only dropped into custom menus and menus are only
-  // dropped at top-level or into custom menus.
-  vfunc_row_drop_possible(destPath, data) {
-
-    // Do not attempt to drop into ourselves.
-    const [ok, model, srcPath] = Gtk.tree_get_row_drag_data(data);
-    if (!ok || srcPath.is_ancestor(destPath)) {
-      return false;
-    }
-
-    // Allow menu drop at top-level.
-    const [ok2, srcIter] = this.get_iter(srcPath);
-    const type           = this.get_value(srcIter, this.columns.TYPE);
-    const itemClass      = ItemRegistry.getItemTypes()[type].class;
-
-    if (destPath.get_depth() == 1 && itemClass == ItemClass.MENU) {
-      return true;
-    }
-
-    // Allow drop in custom menus in all cases.
-    const parentPath = destPath.copy();
-    if (parentPath.up()) {
-      const [ok, parent] = this.get_iter(parentPath);
-      if (ok) {
-        if (this.get_value(parent, this.columns.TYPE) === 'CustomMenu') {
-          return true;
-        }
-      }
-    }
-
-    return false;
-  }
-});
-
 //////////////////////////////////////////////////////////////////////////////////////////
 // The MenuEditorPage class encapsulates code required for the 'Menu Editor' page of    //
 // the settings dialog. It's not instantiated multiple times, nor does it have any      //
@@ -182,10 +100,6 @@ var MenuEditorPage = class MenuEditorPage {
           this._builder.get_object('item-type-popover').popdown();
         });
 
-    // Delete the selected item when the item-delete button is clicked.
-    this._builder.get_object('remove-item-button').connect('clicked', () => {
-      this._deleteSelected();
-    });
 
     // Open a live-preview for the selected menu when the preview-button is clicked.
     this._builder.get_object('preview-menu-button').connect('clicked', () => {
@@ -336,333 +250,6 @@ var MenuEditorPage = class MenuEditorPage {
       dialog.show();
     });
 
-    // Now create the menu tree store and tree view. The tree store contains several
-    // columns which basically contain all the information required to create all menus.
-    // The tree view has two columns, the first shows an icon and the item's name; the
-    // second shows the item's fixed angle.
-
-    // First we create our custom tree store and assign it to the tree view of the
-    // builder.
-    this._store     = new MenuTreeStore();
-    this._selection = this._builder.get_object('menus-treeview-selection');
-    this._view      = this._builder.get_object('menus-treeview');
-    this._view.set_model(this._store);
-
-    // The tree view's main column contains an icon and some text. The icon is given in
-    // the DISPLAY_ICON column of the menu store; the text is contained in the
-    // DISPLAY_NAME column.
-    const menuColumn = new Gtk.TreeViewColumn({
-      title: _('Menu Structure'),
-      expand: true,
-      sizing: Gtk.TreeViewColumnSizing.AUTOSIZE
-    });
-    const iconRender = new Gtk.CellRendererPixbuf();
-    const nameRender = new Gtk.CellRendererText({xpad: 5});
-    menuColumn.pack_start(iconRender, false);
-    menuColumn.pack_start(nameRender, true);
-    menuColumn.add_attribute(iconRender, 'pixbuf', this._store.columns.DISPLAY_ICON);
-    menuColumn.add_attribute(nameRender, 'markup', this._store.columns.DISPLAY_NAME);
-    this._view.append_column(menuColumn);
-
-    // The secondary tree view column shows the item's fixed angle, if any. The
-    // displayed fixed angle is contained in the menu store's DISPLAY_ANGLE column.
-    const angleColumn = new Gtk.TreeViewColumn(
-        {title: _('Fixed Angle'), sizing: Gtk.TreeViewColumnSizing.AUTOSIZE});
-    const angleRender = new Gtk.CellRendererText({sensitive: false, xalign: 0.5});
-    angleColumn.pack_start(angleRender, true);
-    angleColumn.add_attribute(angleRender, 'markup', this._store.columns.DISPLAY_ANGLE);
-    this._view.append_column(angleColumn);
-
-    // Then we set up drag'n'drop. The tree view is a source of internal drag'n'drop
-    // operations. This is because we can reorder the menu items. We use the special
-    // 'GTK_TREE_MODEL_ROW' target. This makes sure that most of the row-reordering
-    // functionality works out-of-the-box.
-    // const internalFormats =
-    // Gdk.ContentFormats.new_for_gtype(GObject.type_from_name("GtkTreeRowData")); const
-    // externalFormats = Gdk.ContentFormats.new(['text/uri-list', 'text/plain']);
-    // this._view.enable_model_drag_source(
-    //     Gdk.ModifierType.BUTTON1_MASK, internalFormats,
-    //     Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
-
-    this._view.set_reorderable(true);
-
-    // However it is a destination for both, internal and external drag'n'drop operations.
-    // Internal operations occur when the user reorders the rows, external operations
-    // occur when something is dragged to the tree view in order to create new items. This
-    // can be a file, an URL or some other things.
-    // this._view.enable_model_drag_dest(
-    //     internalFormats,
-    //     // internalFormats.union(externalFormats),
-    //     Gdk.DragAction.COPY | Gdk.DragAction.MOVE);
-
-    // This is called when a drag'n'drop operation is received.
-    /*
-    this._view.connect(
-        'drag-data-received', (widget, context, x, y, data, info, time) => {
-          // This lambda creates a new menu item for the given text. If the text is an URI
-          // to a file, a file action is created. If it's a *.desktop file, a "Launch
-          // Application" action is created, an URI action is created for all other URIs.
-          // If text is not an URI, an "Insert Text" action is created.
-          const addItem = (text) => {
-            // Items should only be dropped into custom menus. Depending on the hovered
-            // position and item type, there are three different possible positions:
-            // 1) Drop into the hovered menu as first child.
-            // 2) Insert before the hovered menu at the same level.
-            // 3) Insert after the hovered menu at the same level.
-
-            // First try to get the currently hovered item.
-            const [ok, path, pos] = widget.get_dest_row_at_pos(x, y);
-
-            if (!ok) {
-              return false;
-            }
-
-            // Get the type of the currently hovered menu item.
-            const destIter = this._store.get_iter(path)[1];
-            const type     = this._store.get_value(destIter, this._store.columns.TYPE);
-
-            let newIter;
-
-            // If it's a custom menu, we drop into it if it's a top-level menu or if we
-            // should drop into anyways. Else we drop before or after as indicated by the
-            // TreeViewDropPosition.
-            if (type === 'CustomMenu') {
-
-              if (pos == Gtk.TreeViewDropPosition.INTO_OR_BEFORE ||
-                  pos == Gtk.TreeViewDropPosition.INTO_OR_AFTER ||
-                  this._isToplevel(destIter)) {
-                // 1) above.
-                newIter = this._store.append(destIter);
-              } else if (pos == Gtk.TreeViewDropPosition.BEFORE) {
-                // 2) above.
-                newIter = this._store.insert_before(null, destIter);
-              } else {
-                // 3) above.
-                newIter = this._store.insert_after(null, destIter);
-              }
-
-            }
-            // If it's not a custom menu, we cannot drop into. So we have to drop before
-            // or after. This is impossible at top-level.
-            else {
-
-              // Things cannot be dropped at top-level, so this is a impossible drop.
-              if (this._isToplevel(destIter)) {
-                return false;
-              }
-
-              if (pos == Gtk.TreeViewDropPosition.BEFORE ||
-                  pos == Gtk.TreeViewDropPosition.INTO_OR_BEFORE) {
-                // 2) above.
-                newIter = this._store.insert_before(null, destIter);
-              } else {
-                // 3) above.
-                newIter = this._store.insert_after(null, destIter);
-              }
-            }
-
-            // Set default values for newly created items.
-            this._set(newIter, 'ANGLE', -1);
-            this._set(newIter, 'ID', -1);
-            this._set(newIter, 'SHORTCUT', '');
-
-            const uriScheme = GLib.uri_parse_scheme(text);
-            let success     = false;
-
-            if (uriScheme != null) {
-              // First we check whether the dragged data contains an URI. If it points to
-              // a *.desktop file, we create a "Launch Application" item for the
-              // corresponding application.
-              if (uriScheme == 'file') {
-                const file = Gio.File.new_for_uri(text);
-
-                if (file.query_exists(null)) {
-
-                  if (text.endsWith('.desktop')) {
-
-                    const info    = Gio.DesktopAppInfo.new_from_filename(file.get_path());
-                    const newType = 'Command';
-
-                    let icon = ItemRegistry.getItemTypes()[newType].icon;
-                    if (info.get_icon()) {
-                      icon = info.get_icon().to_string();
-                    }
-
-                    if (info != null) {
-                      const data = JSON.stringify({command: info.get_commandline()});
-                      this._set(newIter, 'DATA', data);
-                      this._set(newIter, 'ICON', icon);
-                      this._set(newIter, 'NAME', info.get_display_name());
-                      this._set(newIter, 'TYPE', newType);
-
-                      success = true;
-                    }
-                  }
-
-                  // If it's an URI to any other local file, we create an "Open File"
-                  // item.
-                  if (!success) {
-                    const newType = 'File';
-                    const info    = file.query_info('standard::icon', 0, null);
-
-                    if (info != null) {
-                      // Skip the file://
-                      const data = JSON.stringify({file: text.substring(7)});
-                      this._set(newIter, 'DATA', data);
-                      this._set(newIter, 'ICON', info.get_icon().to_string());
-                      this._set(newIter, 'NAME', file.get_basename());
-                      this._set(newIter, 'TYPE', newType);
-
-                      success = true;
-                    }
-                  }
-                }
-              }
-
-              if (!success) {
-
-                // For any other URI we create an "Open URI" item.
-                const newType = 'Uri';
-                const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
-
-                this._set(newIter, 'DATA', JSON.stringify({uri: text}));
-                this._set(newIter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
-                this._set(newIter, 'NAME', name);
-                this._set(newIter, 'TYPE', newType);
-                success = true;
-              }
-            }
-
-            // If it's not an URI, we create an "Insert Text" action.
-            else {
-              const newType = 'InsertText';
-              const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
-
-              this._set(newIter, 'DATA', JSON.stringify({text: text}));
-              this._set(newIter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
-              this._set(newIter, 'NAME', 'Insert: ' + name);
-              this._set(newIter, 'TYPE', newType);
-            }
-
-            // Store this in our statistics.
-            Statistics.getInstance().addItemCreated();
-
-            return true;
-          };
-
-          // The info paramter is a hint to what the dropped data contains. Refer the call
-          // to enable_model_drag_dest() above - there the info numbers are given as last
-          // parameter to the constructor of the TargetEntries.
-          // info == 0: 'GTK_TREE_MODEL_ROW'
-          // info == 1: 'text/uri-list'
-          // info == 2: 'text/plain'
-
-          // We do not handle the case info == 0, as this is done by the base class. Due
-          // to the special "GTK_TREE_MODEL_ROW" target, row reordering works
-          // out-of-the-box.
-
-          // We only handle info == 1 and info == 2. These are the cases when the user
-          // drags something from outside to the tree view (external drag'n'drop). We try
-          // our best to create a menu item for the dragged data.
-          let success = true;
-
-          if (info == 1) {
-            const uris = data.get_uris();
-
-            if (uris == null) {
-              success = false;
-            } else {
-              uris.forEach(uri => {success &= addItem(uri)});
-            }
-
-            // Independent of the selected drag and drop action, the drag source shouldn't
-            // remove any source data.
-            Gtk.drag_finish(context, success, false, time);
-
-          } else if (info == 2) {
-
-            const text = data.get_text();
-
-            if (text == null) {
-              success = false;
-            } else {
-              success &= addItem(text);
-            }
-
-            //  Independent of the selected drag and drop action, the drag source
-            //  shouldn't remove any source data.
-            Gtk.drag_finish(context, success, false, time);
-          }
-        });
-        */
-
-    // Delete the selected item when the Delete key is pressed.
-    const controller = Gtk.EventControllerKey.new();
-    controller.connect('key-released', (controller, keyval, keycode, state) => {
-      if (keyval == Gdk.KEY_Delete) {
-        this._deleteSelected();
-        return true;
-      }
-      return false;
-    });
-
-    this._view.add_controller(controller);
-
-    // When a new row is inserted or an existing row is dragged around, we make sure
-    // that it stays selected and additionally we save the menu configuration.
-    // This is a bit hacky, as sometimes many rows are inserted (for example, when the
-    // user drag a menu to somewhere else). To handle this case, we create two
-    // timeouts.
-
-    // The first timeout is used to select a newly added row and ignore all additional
-    // row-insertions in the next 10 milliseconds.
-    this._selectNewRowTimeout = -1;
-
-    this._store.connect('row-inserted', (widget, path, iter) => {
-      // We do this only once the saved configuration is fully loaded.
-      if (this._menuSavingAllowed) {
-
-        // Only select a row if another hasn't bee selected in the last 10 milliseconds.
-        if (this._selectNewRowTimeout == -1) {
-
-          this._selectNewRowTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
-            // Expand the parent so that we can actually select the new row.
-            let parent = widget.get_path(iter);
-
-            // Expand nested items.
-            if (parent.up()) {
-              this._view.expand_to_path(parent);
-            }
-
-            // Remove the ID property of items moved from top-level to a submenu and
-            // assign new IDs to items which moved from submenu level to top-level.
-            if (this._store.get_path(iter).get_depth() == 1) {
-              if (this._get(iter, 'ID') < 0) {
-                this._set(iter, 'ID', this._getNewID());
-              }
-
-            } else {
-              this._set(iter, 'ID', -1);
-            }
-
-            // This resets any fixed angle of dragged items. While this isn't really
-            // necessary in all cases, but identifying cases when an invalid fixed-angle
-            // configuration is created is quite complex. This could be improved in the
-            // future!
-            this._set(iter, 'ANGLE', -1);
-            this._selection.select_iter(iter);
-
-            // We refresh the name of dropped rows as they are rendered differently for
-            // top-level items and sub-level items.
-            this._set(iter, 'NAME', this._get(iter, 'NAME'));
-
-            // Reset the timeout.
-            this._selectNewRowTimeout = -1;
-            return false;
-          });
-        }
-      }
-    });
 
     // Now that the tree store is set up, we can load the entire menu configuration.
     try {
@@ -705,21 +292,27 @@ var MenuEditorPage = class MenuEditorPage {
     // icon name in the tree store. This will lead to a re-draw of the icon in the tree
     // view as well.
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
-      this._setSelected('ICON', widget.text);
+      // this._setSelected('ICON', widget.text);
       this._builder.get_object('item-icon-drawingarea').queue_draw();
     });
 
     // Store the item's name in the tree store when the text of the name input field is
     // changed.
-    this._builder.get_object('item-name').connect('notify::text', (widget) => {
-      this._setSelected('NAME', widget.text);
-    });
+    this._builder.get_object('item-name')
+        .connect(
+            'notify::text',
+            (widget) => {
+                // this._setSelected('NAME', widget.text);
+            });
 
     // For top-level menus, store whether they should be opened in the center of the
     // screen.
-    this._builder.get_object('menu-centered').connect('notify::active', (widget) => {
-      this._setSelected('CENTERED', widget.active);
-    });
+    this._builder.get_object('menu-centered')
+        .connect(
+            'notify::active',
+            (widget) => {
+                // this._setSelected('CENTERED', widget.active);
+            });
 
     // Store the item's fixed angle in the tree store's ANGLE column when the
     // corresponding input field is changed. This is a bit more involved, as we check
@@ -728,39 +321,39 @@ var MenuEditorPage = class MenuEditorPage {
     // selected item). The minAngle is set to the largest fixed angle amongst all
     // siblings preceding the selected item; maxAngle is set to the smallest fixed angle
     // amongst siblings after the selected item.
-    this._builder.get_object('item-angle').connect('value-changed', (adjustment) => {
-      let minAngle = -1;
-      let maxAngle = 360;
+    // this._builder.get_object('item-angle').connect('value-changed', (adjustment) => {
+    //   let minAngle = -1;
+    //   let maxAngle = 360;
 
-      const [ok1, model, selectedIter] = this._selection.get_selected();
-      if (!ok1) return;
+    //   const [ok1, model, selectedIter] = this._selection.get_selected();
+    //   if (!ok1) return;
 
-      const [ok2, parentIter] = model.iter_parent(selectedIter);
-      if (!ok2) return;
+    //   const [ok2, parentIter] = model.iter_parent(selectedIter);
+    //   if (!ok2) return;
 
-      const selectedIndices = model.get_path(selectedIter).get_indices();
-      const selectedIndex   = selectedIndices[selectedIndices.length - 1];
-      const nChildren       = model.iter_n_children(parentIter);
+    //   const selectedIndices = model.get_path(selectedIter).get_indices();
+    //   const selectedIndex   = selectedIndices[selectedIndices.length - 1];
+    //   const nChildren       = model.iter_n_children(parentIter);
 
-      for (let n = 0; n < nChildren; n++) {
-        const angle = this._get(model.iter_nth_child(parentIter, n)[1], 'ANGLE');
+    //   for (let n = 0; n < nChildren; n++) {
+    //     const angle = this._get(model.iter_nth_child(parentIter, n)[1], 'ANGLE');
 
-        if (n < selectedIndex && angle >= 0) {
-          minAngle = angle;
-        }
+    //     if (n < selectedIndex && angle >= 0) {
+    //       minAngle = angle;
+    //     }
 
-        if (n > selectedIndex && angle >= 0) {
-          maxAngle = angle;
-          break;
-        }
-      }
+    //     if (n > selectedIndex && angle >= 0) {
+    //       maxAngle = angle;
+    //       break;
+    //     }
+    //   }
 
-      // Set the value of the tree store only if the constraints are fulfilled.
-      if (adjustment.value == -1 ||
-          (adjustment.value > minAngle && adjustment.value < maxAngle)) {
-        this._setSelected('ANGLE', adjustment.value);
-      }
-    });
+    //   // Set the value of the tree store only if the constraints are fulfilled.
+    //   if (adjustment.value == -1 ||
+    //       (adjustment.value > minAngle && adjustment.value < maxAngle)) {
+    //     this._setSelected('ANGLE', adjustment.value);
+    //   }
+    // });
 
     // Initialize the menu shortcut-select element. See the documentation of
     // createShortcutLabel for details.
@@ -772,114 +365,123 @@ var MenuEditorPage = class MenuEditorPage {
       this._menuShortcutLabel = label;
     }
 
-    // When the currently selected menu item changes, the content of the settings widgets
-    // must be updated accordingly.
-    this._selection.connect('changed', (selection) => {
-      // Some widgets are disabled if nothing is selected.
-      let somethingSelected = selection.get_selected()[0];
-      this._builder.get_object('preview-menu-button').sensitive = somethingSelected;
-      this._builder.get_object('remove-item-button').sensitive  = somethingSelected;
+    // // When the currently selected menu item changes, the content of the settings
+    // widgets
+    // // must be updated accordingly.
+    // this._selection.connect('changed', (selection) => {
+    //   // Some widgets are disabled if nothing is selected.
+    //   let somethingSelected = selection.get_selected()[0];
+    //   this._builder.get_object('preview-menu-button').sensitive = somethingSelected;
+    //   this._builder.get_object('remove-item-button').sensitive  = somethingSelected;
 
-      // The action types list is only available if something is selected and if a
-      // top-level element is selected, this must be a custom menu.
-      let actionsSensitive = somethingSelected;
-      if (this._isToplevelSelected()) {
-        actionsSensitive = this._getSelected('TYPE') == 'CustomMenu';
-      }
-      this._builder.get_object('action-types-list').sensitive = actionsSensitive;
+    //   // The action types list is only available if something is selected and if a
+    //   // top-level element is selected, this must be a custom menu.
+    //   let actionsSensitive = somethingSelected;
+    //   if (this._isToplevelSelected()) {
+    //     actionsSensitive = this._getSelected('TYPE') == 'CustomMenu';
+    //   }
+    //   this._builder.get_object('action-types-list').sensitive = actionsSensitive;
 
-      // There are multiple Gtk.Revealers involved. Based on the selected item's type
-      // their content is either shown or hidden. All settings are invisible if nothing is
-      // selected, the menu settings (shortcut, centered) are visible if a top-level
-      // element is selected, for all other items the fixed angle can be set.
-      this._builder.get_object('item-settings-revealer').reveal_child = somethingSelected;
-      this._builder.get_object('item-settings-menu-revealer').reveal_child =
-          this._isToplevelSelected();
-      this._builder.get_object('item-settings-angle-revealer').reveal_child =
-          !this._isToplevelSelected();
+    //   // There are multiple Gtk.Revealers involved. Based on the selected item's type
+    //   // their content is either shown or hidden. All settings are invisible if nothing
+    //   is
+    //   // selected, the menu settings (shortcut, centered) are visible if a top-level
+    //   // element is selected, for all other items the fixed angle can be set.
+    //   this._builder.get_object('item-settings-revealer').reveal_child =
+    //   somethingSelected;
+    //   this._builder.get_object('item-settings-menu-revealer').reveal_child =
+    //       this._isToplevelSelected();
+    //   this._builder.get_object('item-settings-angle-revealer').reveal_child =
+    //       !this._isToplevelSelected();
 
-      if (somethingSelected) {
+    //   if (somethingSelected) {
 
-        const selectedType = this._getSelected('TYPE');
+    //     const selectedType = this._getSelected('TYPE');
 
-        // If rows are not yet fully added, it may happen that the type is not yet set.
-        if (selectedType == null) {
-          return;
-        }
+    //     // If rows are not yet fully added, it may happen that the type is not yet set.
+    //     if (selectedType == null) {
+    //       return;
+    //     }
 
-        // Setting the content of the widgets below will actually trigger menu treestore
-        // modifications which in turn would lead to saving the menu configuration. As
-        // this is not necessary, we disable saving temporarily.
-        this._menuSavingAllowed = false;
+    //     // Setting the content of the widgets below will actually trigger menu
+    //     treestore
+    //     // modifications which in turn would lead to saving the menu configuration. As
+    //     // this is not necessary, we disable saving temporarily.
+    //     this._menuSavingAllowed = false;
 
-        // The item's name, icon and description have to be updated in any case if
-        // something is selected.
-        this._builder.get_object('icon-name').text = this._getSelected('ICON');
-        this._builder.get_object('item-name').text = this._getSelected('NAME');
-        this._builder.get_object('item-description').label =
-            ItemRegistry.getItemTypes()[selectedType].description;
+    //     // The item's name, icon and description have to be updated in any case if
+    //     // something is selected.
+    //     this._builder.get_object('icon-name').text = this._getSelected('ICON');
+    //     this._builder.get_object('item-name').text = this._getSelected('NAME');
+    //     this._builder.get_object('item-description').label =
+    //         ItemRegistry.getItemTypes()[selectedType].description;
 
-        // If the selected item is a top-level menu, the SHORTCUT column contains its
-        // shortcut.
-        if (this._isToplevelSelected()) {
-          this._menuShortcutLabel.set_accelerator(this._getSelected('SHORTCUT'));
-          this._builder.get_object('menu-centered').active =
-              this._getSelected('CENTERED');
-        }
-        // For all other items, the fixed angle can be set.
-        else {
-          this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
-        }
+    //     // If the selected item is a top-level menu, the SHORTCUT column contains its
+    //     // shortcut.
+    //     if (this._isToplevelSelected()) {
+    //       this._menuShortcutLabel.set_accelerator(this._getSelected('SHORTCUT'));
+    //       this._builder.get_object('menu-centered').active =
+    //           this._getSelected('CENTERED');
+    //     }
+    //     // For all other items, the fixed angle can be set.
+    //     else {
+    //       this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
+    //     }
 
-        // Now we check whether the selected item has a config property.
-        const config = ItemRegistry.getItemTypes()[selectedType].config;
+    //     // Now we check whether the selected item has a config property.
+    //     const config = ItemRegistry.getItemTypes()[selectedType].config;
 
-        // If it has a config property, we can show the revealer for the config widget.
-        const revealer        = this._builder.get_object('item-settings-config-revealer');
-        revealer.reveal_child = config != null;
+    //     // If it has a config property, we can show the revealer for the config widget.
+    //     const revealer        =
+    //     this._builder.get_object('item-settings-config-revealer');
+    //     revealer.reveal_child = config != null;
 
-        // In this case, we also ask the config object to create a new configuration
-        // widget for the selected type.
-        if (config) {
+    //     // In this case, we also ask the config object to create a new configuration
+    //     // widget for the selected type.
+    //     if (config) {
 
-          // To populate the new configuration widget with data, we retrieve the data from
-          // the tree store's data column. This **should** be a JSON string, but if
-          // someone tries to load a config from Fly-Pie 4 or older, this may not be the
-          // case. So we print a warning in this case.
-          let data = this._getSelected('DATA');
-          try {
-            data = JSON.parse(data);
-          } catch (error) {
-            utils.debug(
-                'Warning: Invalid configuration data is stored for the selected item: ' +
-                error);
-          }
+    //       // To populate the new configuration widget with data, we retrieve the data
+    //       from
+    //       // the tree store's data column. This **should** be a JSON string, but if
+    //       // someone tries to load a config from Fly-Pie 4 or older, this may not be
+    //       the
+    //       // case. So we print a warning in this case.
+    //       let data = this._getSelected('DATA');
+    //       try {
+    //         data = JSON.parse(data);
+    //       } catch (error) {
+    //         utils.debug(
+    //             'Warning: Invalid configuration data is stored for the selected item: '
+    //             + error);
+    //       }
 
-          // Then we create and add the new configuration widget. The callback will be
-          // fired when the user changes the data. "data" will contain an object which is
-          // to be stored as JSON string, optionally the name and icon of the currently
-          // selected item can be changed as well (e.g. when an application is selected,
-          // we want to change the item's name and icon accordingly).
-          const newChild = config.getWidget(data, (data, name, icon) => {
-            this._setSelected('DATA', JSON.stringify(data));
+    //       // Then we create and add the new configuration widget. The callback will be
+    //       // fired when the user changes the data. "data" will contain an object which
+    //       is
+    //       // to be stored as JSON string, optionally the name and icon of the currently
+    //       // selected item can be changed as well (e.g. when an application is
+    //       selected,
+    //       // we want to change the item's name and icon accordingly).
+    //       const newChild = config.getWidget(data, (data, name, icon) => {
+    //         this._setSelected('DATA', JSON.stringify(data));
 
-            if (name) {
-              this._builder.get_object('item-name').text = name;
-            }
+    //         if (name) {
+    //           this._builder.get_object('item-name').text = name;
+    //         }
 
-            if (icon) {
-              this._builder.get_object('icon-name').text = icon;
-            }
-          });
+    //         if (icon) {
+    //           this._builder.get_object('icon-name').text = icon;
+    //         }
+    //       });
 
-          revealer.set_child(newChild);
-        }
+    //       revealer.set_child(newChild);
+    //     }
 
-        // All modifications are done, all future modifications will come from the user
-        // and should result in saving the configuration again.
-        this._menuSavingAllowed = true;
-      }
-    });
+    //     // All modifications are done, all future modifications will come from the user
+    //     // and should result in saving the configuration again.
+    //     this._menuSavingAllowed = true;
+    //   }
+    // });
 
     // Initialize the tip-display label.
     this._initInfoLabel();
@@ -961,218 +563,183 @@ var MenuEditorPage = class MenuEditorPage {
     });
   }
 
-  // This adds a new menu item to the currently selected menu. Items will always be
-  // inserted as a sibling following the currently selected item. This is except for
-  // action items added to top-level menus, here we add them as a child.
-  _addNewItem(newType) {
+  // // This adds a new menu item to the currently selected menu. Items will always be
+  // // inserted as a sibling following the currently selected item. This is except for
+  // // action items added to top-level menus, here we add them as a child.
+  // _addNewItem(newType) {
 
-    const [ok, model, selected] = this._selection.get_selected();
-    let iter;
+  //   const [ok, model, selected] = this._selection.get_selected();
+  //   let iter;
 
-    if (ok) {
-      if (this._isToplevelSelected() &&
-          ItemRegistry.getItemTypes()[newType].class == ItemClass.ACTION) {
-        iter = this._store.append(selected);
-      } else {
-        iter = this._store.insert_after(null, selected);
-      }
-    }
-    // If nothing is selected, this will only be called for items of the menu class. We
-    // add them to the end.
-    else {
-      iter = this._store.append(null);
-    }
+  //   if (ok) {
+  //     if (this._isToplevelSelected() &&
+  //         ItemRegistry.getItemTypes()[newType].class == ItemClass.ACTION) {
+  //       iter = this._store.append(selected);
+  //     } else {
+  //       iter = this._store.insert_after(null, selected);
+  //     }
+  //   }
+  //   // If nothing is selected, this will only be called for items of the menu class. We
+  //   // add them to the end.
+  //   else {
+  //     iter = this._store.append(null);
+  //   }
 
-    // New Menus will get a random emoji icon. All other items will get a name
-    // and icon according to the item registry.
-    if (newType == 'CustomMenu') {
-      this._set(iter, 'ICON', this._getRandomEmoji());
-    } else {
-      this._set(iter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
-    }
+  //   // New Menus will get a random emoji icon. All other items will get a name
+  //   // and icon according to the item registry.
+  //   if (newType == 'CustomMenu') {
+  //     this._set(iter, 'ICON', this._getRandomEmoji());
+  //   } else {
+  //     this._set(iter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
+  //   }
 
-    // Assign a new ID for top-level items.
-    if (this._isToplevelSelected()) {
-      this._set(iter, 'ID', this._getNewID());
-    } else {
-      this._set(iter, 'ID', -1);
-    }
+  //   // Assign a new ID for top-level items.
+  //   if (this._isToplevelSelected()) {
+  //     this._set(iter, 'ID', this._getNewID());
+  //   } else {
+  //     this._set(iter, 'ID', -1);
+  //   }
 
-    // Initialize other field to their default values.
-    this._set(iter, 'TYPE', newType);
-    this._set(iter, 'NAME', ItemRegistry.getItemTypes()[newType].name);
-    this._set(iter, 'ANGLE', -1);
-    this._set(iter, 'SHORTCUT', '');
+  //   // Initialize other field to their default values.
+  //   this._set(iter, 'TYPE', newType);
+  //   this._set(iter, 'NAME', ItemRegistry.getItemTypes()[newType].name);
+  //   this._set(iter, 'ANGLE', -1);
+  //   this._set(iter, 'SHORTCUT', '');
 
-    if (ItemRegistry.getItemTypes()[newType].config != undefined) {
-      this._set(
-          iter, 'DATA',
-          JSON.stringify(ItemRegistry.getItemTypes()[newType].config.defaultData));
-    }
+  //   if (ItemRegistry.getItemTypes()[newType].config != undefined) {
+  //     this._set(
+  //         iter, 'DATA',
+  //         JSON.stringify(ItemRegistry.getItemTypes()[newType].config.defaultData));
+  //   }
 
-    // Store this in our statistics.
-    Statistics.getInstance().addItemCreated();
-  }
-
-
-  // This asks the user whether she really wants to delete the currently selected item. If
-  // so, it is actually deleted, else nothing is done.
-  _deleteSelected() {
-    // Nothing to be done if nothing is selected.
-    if (!this._selection.get_selected()[0]) {
-      return;
-    }
-
-    // Create the question dialog.
-    const dialog = new Gtk.MessageDialog({
-      transient_for: this._builder.get_object('main-notebook').get_root(),
-      modal: true,
-      buttons: Gtk.ButtonsType.OK_CANCEL,
-      message_type: Gtk.MessageType.QUESTION,
-      text: _('Delete the selected item?'),
-      secondary_text: _('This cannot be undone!')
-    });
-
-    // Delete the item on a positive response.
-    dialog.connect('response', (dialog, id) => {
-      if (id == Gtk.ResponseType.OK) {
-        const [ok, model, iter] = this._selection.get_selected();
-        if (ok) {
-          model.remove(iter);
-
-          // Save the menu configuration.
-          this._saveMenuConfiguration();
-
-          // If this was the last menu item, store this in our statistics.
-          if (!model.get_iter_first()[0]) {
-            Statistics.getInstance().addDeletedAllMenus();
-          }
-        }
-      }
-      dialog.destroy();
-    });
-
-    dialog.show();
-  }
+  //   // Store this in our statistics.
+  //   Statistics.getInstance().addItemCreated();
+  // }
 
 
-  // Returns true if iter refers to a top-level menu.
-  _isToplevel(iter) {
-    return this._store.get_path(iter).get_depth() <= 1;
-  }
+  // // This asks the user whether she really wants to delete the currently selected item.
+  // If
+  // // so, it is actually deleted, else nothing is done.
+  // _deleteSelected() {
+  //   // Nothing to be done if nothing is selected.
+  //   if (!this._selection.get_selected()[0]) {
+  //     return;
+  //   }
+
+  //   // Create the question dialog.
+  //   const dialog = new Gtk.MessageDialog({
+  //     transient_for: this._builder.get_object('main-notebook').get_root(),
+  //     modal: true,
+  //     buttons: Gtk.ButtonsType.OK_CANCEL,
+  //     message_type: Gtk.MessageType.QUESTION,
+  //     text: _('Delete the selected item?'),
+  //     secondary_text: _('This cannot be undone!')
+  //   });
+
+  //   // Delete the item on a positive response.
+  //   dialog.connect('response', (dialog, id) => {
+  //     if (id == Gtk.ResponseType.OK) {
+  //       const [ok, model, iter] = this._selection.get_selected();
+  //       if (ok) {
+  //         model.remove(iter);
+
+  //         // Save the menu configuration.
+  //         this._saveMenuConfiguration();
+
+  //         // If this was the last menu item, store this in our statistics.
+  //         if (!model.get_iter_first()[0]) {
+  //           Statistics.getInstance().addDeletedAllMenus();
+  //         }
+  //       }
+  //     }
+  //     dialog.destroy();
+  //   });
+
+  //   dialog.show();
+  // }
 
 
-  // Returns true if a top-level menu is currently selected.
-  _isToplevelSelected() {
-    const [ok, model, iter] = this._selection.get_selected();
-    if (ok) {
-      return model.get_path(iter).get_depth() <= 1;
-    }
-    return false;
-  }
+  // // Sets the column data of the row identified by iter. The column should be the name
+  // // of the column - that is for example "ICON", "ANGLE", or "TYPE". This function will
+  // // automatically set the values of "DISPLAY_ICON", "DISPLAY_ANGLE", and
+  // "DISPLAY_NAME"
+  // // when "ICON", "ANGLE", "NAME", or "DATA" are set. Furthermore, it will
+  // automatically
+  // // save a JSON representation of the entire menu store to the "menu-configuration"
+  // // Gio.Settings key of this application.
+  // _set(iter, column, data) {
 
-  // Returns the column data of the row identified by iter. The column should be the name
-  // of the column - that is for example "DISPLAY_NAME", "ANGLE", or "TYPE".
-  _get(iter, column) {
-    return this._store.get_value(iter, this._store.columns[column]);
-  }
+  //   const isDataColumn =
+  //       column != 'DISPLAY_ICON' && column != 'DISPLAY_ANGLE' && column !=
+  //       'DISPLAY_NAME';
 
+  //   // First, store the given value.
+  //   this._store.set_value(iter, this._store.columns[column], data);
 
-  // Sets the column data of the row identified by iter. The column should be the name
-  // of the column - that is for example "ICON", "ANGLE", or "TYPE". This function will
-  // automatically set the values of "DISPLAY_ICON", "DISPLAY_ANGLE", and "DISPLAY_NAME"
-  // when "ICON", "ANGLE", "NAME", or "DATA" are set. Furthermore, it will automatically
-  // save a JSON representation of the entire menu store to the "menu-configuration"
-  // Gio.Settings key of this application.
-  _set(iter, column, data) {
+  //   // If the icon, was set, update the "DISPLAY_ICON" as well.
+  //   if (column == 'ICON') {
+  //     let iconSize = this._isToplevel(iter) ? 24 : 16;
+  //     const font   = this._settings.get_string('font');
+  //     const color  = this._view.get_style_context().get_color();
+  //     this._set(
+  //         iter, 'DISPLAY_ICON',
+  //         Gdk.pixbuf_get_from_surface(
+  //             utils.createIcon(data, iconSize, font, color), 0, 0, iconSize,
+  //             iconSize));
+  //   }
 
-    const isDataColumn =
-        column != 'DISPLAY_ICON' && column != 'DISPLAY_ANGLE' && column != 'DISPLAY_NAME';
+  //   // If the angle, was set, update the "DISPLAY_ANGLE" as well. For top-level menus,
+  //   // this field contains the menu ID, so we update the DISPLAY_ANGLE only for
+  //   // non-top-level menus.
+  //   if (column == 'ANGLE') {
+  //     if (!this._isToplevel(iter)) {
+  //       this._set(iter, 'DISPLAY_ANGLE', data >= 0 ? data : '');
+  //     }
+  //   }
 
-    // First, store the given value.
-    this._store.set_value(iter, this._store.columns[column], data);
+  //   // If the name, was set, update the "DISPLAY_NAME" as well. If iter refers to a
+  //   // top-level menu, the display name contains the shortcut.
+  //   if (column == 'NAME') {
+  //     if (this._isToplevel(iter)) {
+  //       let shortcut      = _('Not bound.');
+  //       const accelerator = this._get(iter, 'SHORTCUT');
+  //       if (accelerator) {
+  //         const [ok, keyval, mods] = Gtk.accelerator_parse(accelerator);
+  //         shortcut                 = Gtk.accelerator_get_label(keyval, mods);
+  //       }
+  //       this._set(
+  //           iter, 'DISPLAY_NAME',
+  //           '<b>' + GLib.markup_escape_text(data, -1) + '</b>\n<small>' +
+  //               GLib.markup_escape_text(shortcut, -1) + '</small>');
+  //     } else {
+  //       this._set(iter, 'DISPLAY_NAME', GLib.markup_escape_text(data, -1));
+  //     }
+  //   }
 
-    // If the icon, was set, update the "DISPLAY_ICON" as well.
-    if (column == 'ICON') {
-      let iconSize = this._isToplevel(iter) ? 24 : 16;
-      const font   = this._settings.get_string('font');
-      const color  = this._view.get_style_context().get_color();
-      this._set(
-          iter, 'DISPLAY_ICON',
-          Gdk.pixbuf_get_from_surface(
-              utils.createIcon(data, iconSize, font, color), 0, 0, iconSize, iconSize));
-    }
+  //   // If the data column was set on a top-level menu, we need to update the
+  //   // "DISPLAY_NAME" as well, as the shortcut is displayed in the cellrenderer.
+  //   if (column == 'SHORTCUT') {
+  //     if (this._isToplevel(iter)) {
+  //       let shortcut = _('Not bound.');
+  //       if (data != '') {
+  //         const [ok, keyval, mods] = Gtk.accelerator_parse(data);
+  //         shortcut                 = Gtk.accelerator_get_label(keyval, mods);
+  //       }
+  //       const name = this._get(iter, 'NAME');
+  //       this._set(
+  //           iter, 'DISPLAY_NAME',
+  //           '<b>' + GLib.markup_escape_text(name, -1) + '</b>\n<small>' +
+  //               GLib.markup_escape_text(shortcut, -1) + '</small>');
+  //     }
+  //   }
 
-    // If the angle, was set, update the "DISPLAY_ANGLE" as well. For top-level menus,
-    // this field contains the menu ID, so we update the DISPLAY_ANGLE only for
-    // non-top-level menus.
-    if (column == 'ANGLE') {
-      if (!this._isToplevel(iter)) {
-        this._set(iter, 'DISPLAY_ANGLE', data >= 0 ? data : '');
-      }
-    }
-
-    // If the name, was set, update the "DISPLAY_NAME" as well. If iter refers to a
-    // top-level menu, the display name contains the shortcut.
-    if (column == 'NAME') {
-      if (this._isToplevel(iter)) {
-        let shortcut      = _('Not bound.');
-        const accelerator = this._get(iter, 'SHORTCUT');
-        if (accelerator) {
-          const [ok, keyval, mods] = Gtk.accelerator_parse(accelerator);
-          shortcut                 = Gtk.accelerator_get_label(keyval, mods);
-        }
-        this._set(
-            iter, 'DISPLAY_NAME',
-            '<b>' + GLib.markup_escape_text(data, -1) + '</b>\n<small>' +
-                GLib.markup_escape_text(shortcut, -1) + '</small>');
-      } else {
-        this._set(iter, 'DISPLAY_NAME', GLib.markup_escape_text(data, -1));
-      }
-    }
-
-    // If the data column was set on a top-level menu, we need to update the
-    // "DISPLAY_NAME" as well, as the shortcut is displayed in the cellrenderer.
-    if (column == 'SHORTCUT') {
-      if (this._isToplevel(iter)) {
-        let shortcut = _('Not bound.');
-        if (data != '') {
-          const [ok, keyval, mods] = Gtk.accelerator_parse(data);
-          shortcut                 = Gtk.accelerator_get_label(keyval, mods);
-        }
-        const name = this._get(iter, 'NAME');
-        this._set(
-            iter, 'DISPLAY_NAME',
-            '<b>' + GLib.markup_escape_text(name, -1) + '</b>\n<small>' +
-                GLib.markup_escape_text(shortcut, -1) + '</small>');
-      }
-    }
-
-    // If loading has finished, any modifications to the tree store are directly committed
-    // to the "menu-configuration" settings key.
-    if (isDataColumn && this._menuSavingAllowed) {
-      this._saveMenuConfiguration();
-    }
-  }
-
-
-  // This is the same as this._get(), however it automatically chooses the currently
-  // selected row.
-  _getSelected(column) {
-    const [ok, model, iter] = this._selection.get_selected();
-    if (ok) {
-      return this._get(iter, column);
-    }
-  }
-
-  // This is the same as this._set(), however it automatically chooses the currently
-  // selected row.
-  _setSelected(column, data) {
-    const [ok, model, iter] = this._selection.get_selected();
-    if (ok) {
-      this._set(iter, column, data);
-    }
-  }
+  //   // If loading has finished, any modifications to the tree store are directly
+  //   committed
+  //   // to the "menu-configuration" settings key.
+  //   if (isDataColumn && this._menuSavingAllowed) {
+  //     this._saveMenuConfiguration();
+  //   }
+  // }
 
 
   // This is a little helper to make creating new menus more fun. New menus
@@ -1209,128 +776,128 @@ var MenuEditorPage = class MenuEditorPage {
     return newID;
   }
 
-  // This stores a JSON representation of the entire menu store in the
-  // "menu-configuration" key of the application settings. This is called whenever
-  // something is changed in the menu store. It does not update the settings
-  // instantaneously, it rather waits a few milliseconds for any additional changes.
-  _saveMenuConfiguration() {
+  // // This stores a JSON representation of the entire menu store in the
+  // // "menu-configuration" key of the application settings. This is called whenever
+  // // something is changed in the menu store. It does not update the settings
+  // // instantaneously, it rather waits a few milliseconds for any additional changes.
+  // _saveMenuConfiguration() {
 
-    // The configuration changed again. Cancel any pending save tasks...
-    if (this._saveSettingsTimeout != null) {
-      GLib.source_remove(this._saveSettingsTimeout);
-      this._saveSettingsTimeout = null;
-    }
+  //   // The configuration changed again. Cancel any pending save tasks...
+  //   if (this._saveSettingsTimeout != null) {
+  //     GLib.source_remove(this._saveSettingsTimeout);
+  //     this._saveSettingsTimeout = null;
+  //   }
 
-    // ... and launch a new one.
-    this._saveSettingsTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
-      this._saveSettingsTimeout = null;
+  //   // ... and launch a new one.
+  //   this._saveSettingsTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
+  //     this._saveSettingsTimeout = null;
 
-      // This is called recursively.
-      const addChildren = (parent, parentIter) => {
-        // Recursively add all children.
-        const count = this._store.iter_n_children(parentIter);
+  //     // This is called recursively.
+  //     const addChildren = (parent, parentIter) => {
+  //       // Recursively add all children.
+  //       const count = this._store.iter_n_children(parentIter);
 
-        if (count > 0) {
-          parent.children = [];
-        }
+  //       if (count > 0) {
+  //         parent.children = [];
+  //       }
 
-        for (let i = 0; i < count; ++i) {
-          const iter = this._store.iter_nth_child(parentIter, i)[1];
-          let item   = {
-            name: this._get(iter, 'NAME'),
-            icon: this._get(iter, 'ICON'),
-            type: this._get(iter, 'TYPE'),
-            data: JSON.parse(this._get(iter, 'DATA')),
-            angle: this._get(iter, 'ANGLE')
-          };
+  //       for (let i = 0; i < count; ++i) {
+  //         const iter = this._store.iter_nth_child(parentIter, i)[1];
+  //         let item   = {
+  //           name: this._get(iter, 'NAME'),
+  //           icon: this._get(iter, 'ICON'),
+  //           type: this._get(iter, 'TYPE'),
+  //           data: JSON.parse(this._get(iter, 'DATA')),
+  //           angle: this._get(iter, 'ANGLE')
+  //         };
 
-          parent.children.push(item);
+  //         parent.children.push(item);
 
-          addChildren(item, iter);
-        }
-      };
+  //         addChildren(item, iter);
+  //       }
+  //     };
 
-      // The top level JSON element is an array containing all menus.
-      let menus      = [];
-      let [ok, iter] = this._store.get_iter_first();
+  //     // The top level JSON element is an array containing all menus.
+  //     let menus      = [];
+  //     let [ok, iter] = this._store.get_iter_first();
 
-      while (ok) {
-        let menu = {
-          name: this._get(iter, 'NAME'),
-          icon: this._get(iter, 'ICON'),
-          type: this._get(iter, 'TYPE'),
-          data: JSON.parse(this._get(iter, 'DATA')),
-          shortcut: this._get(iter, 'SHORTCUT'),
-          id: this._get(iter, 'ID'),
-          centered: this._get(iter, 'CENTERED'),
-        };
+  //     while (ok) {
+  //       let menu = {
+  //         name: this._get(iter, 'NAME'),
+  //         icon: this._get(iter, 'ICON'),
+  //         type: this._get(iter, 'TYPE'),
+  //         data: JSON.parse(this._get(iter, 'DATA')),
+  //         shortcut: this._get(iter, 'SHORTCUT'),
+  //         id: this._get(iter, 'ID'),
+  //         centered: this._get(iter, 'CENTERED'),
+  //       };
 
-        menus.push(menu);
-        addChildren(menu, iter);
+  //       menus.push(menu);
+  //       addChildren(menu, iter);
 
-        ok = this._store.iter_next(iter);
-      }
+  //       ok = this._store.iter_next(iter);
+  //     }
 
-      // Save the configuration as JSON!
-      this._settings.set_string('menu-configuration', JSON.stringify(menus));
+  //     // Save the configuration as JSON!
+  //     this._settings.set_string('menu-configuration', JSON.stringify(menus));
 
-      return false;
-    });
-  }
+  //     return false;
+  //   });
+  // }
 
 
   // This is called once initially and loads the JSON menu configuration from the settings
   // key "menu-configuration". It populates the menu store with all configured menus.
   _loadMenuConfiguration() {
 
-    // This prevents callbacks on the row-inserted signal during initialization.
-    this._menuSavingAllowed = false;
+    //   // This prevents callbacks on the row-inserted signal during initialization.
+    //   this._menuSavingAllowed = false;
 
-    // Remove any previously loaded configuration.
-    this._store.clear();
+    //   // Remove any previously loaded configuration.
+    //   this._store.clear();
 
-    // This is called recursively.
-    const parseChildren = (parent, parentIter) => {
-      // Load all children recursively.
-      if (parent.children) {
-        for (let j = 0; j < parent.children.length; j++) {
-          const child = parent.children[j];
-          const iter  = this._store.append(parentIter);
+    //   // This is called recursively.
+    //   const parseChildren = (parent, parentIter) => {
+    //     // Load all children recursively.
+    //     if (parent.children) {
+    //       for (let j = 0; j < parent.children.length; j++) {
+    //         const child = parent.children[j];
+    //         const iter  = this._store.append(parentIter);
 
-          this._set(iter, 'ICON', child.icon);
-          this._set(iter, 'NAME', child.name);
-          this._set(iter, 'TYPE', child.type);
-          this._set(iter, 'DATA', JSON.stringify(child.data));
-          this._set(iter, 'ANGLE', child.angle);
-          this._set(iter, 'SHORTCUT', '');
+    //         this._set(iter, 'ICON', child.icon);
+    //         this._set(iter, 'NAME', child.name);
+    //         this._set(iter, 'TYPE', child.type);
+    //         this._set(iter, 'DATA', JSON.stringify(child.data));
+    //         this._set(iter, 'ANGLE', child.angle);
+    //         this._set(iter, 'SHORTCUT', '');
 
-          parseChildren(child, iter);
-        }
-      }
-    };
+    //         parseChildren(child, iter);
+    //       }
+    //     }
+    //   };
 
-    // Load the menu configuration in the JSON format.
-    const configs = JSON.parse(this._settings.get_string('menu-configuration'));
+    //   // Load the menu configuration in the JSON format.
+    //   const configs = JSON.parse(this._settings.get_string('menu-configuration'));
 
-    for (let i = 0; i < configs.length; i++) {
-      const config = configs[i];
-      const iter   = this._store.append(null);
+    //   for (let i = 0; i < configs.length; i++) {
+    //     const config = configs[i];
+    //     const iter   = this._store.append(null);
 
-      ItemRegistry.normalizeConfig(config);
+    //     ItemRegistry.normalizeConfig(config);
 
-      this._set(iter, 'ICON', config.icon);
-      this._set(iter, 'NAME', config.name);
-      this._set(iter, 'TYPE', config.type);
-      this._set(iter, 'DATA', JSON.stringify(config.data));
-      this._set(iter, 'SHORTCUT', config.shortcut);
-      this._set(iter, 'CENTERED', config.centered);
-      this._set(iter, 'ID', config.id != undefined ? config.id : this._getNewID());
+    //     this._set(iter, 'ICON', config.icon);
+    //     this._set(iter, 'NAME', config.name);
+    //     this._set(iter, 'TYPE', config.type);
+    //     this._set(iter, 'DATA', JSON.stringify(config.data));
+    //     this._set(iter, 'SHORTCUT', config.shortcut);
+    //     this._set(iter, 'CENTERED', config.centered);
+    //     this._set(iter, 'ID', config.id != undefined ? config.id : this._getNewID());
 
-      parseChildren(config, iter);
-    }
+    //     parseChildren(config, iter);
+    //   }
 
-    // Flag that loading is finished - all next calls to this._set() will update the
-    // "menu-configuration".
-    this._menuSavingAllowed = true;
+    //   // Flag that loading is finished - all next calls to this._set() will update the
+    //   // "menu-configuration".
+    //   this._menuSavingAllowed = true;
   }
 }
