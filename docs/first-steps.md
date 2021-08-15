@@ -7,6 +7,8 @@
 If you installed and enabled Fly-Pie for the very first time, you can bring up the default menu with <kbd>Ctrl</kbd> + <kbd>Space</kbd>.
 Here are some hints to ease your path to become a master pielot:
 
+<a href="https://youtu.be/Lj-uefp36Jk"><img align="right" width="350px" src ="pics/player3.jpg" /></a>
+
 * When you open the settings dialog of Fly-Pie, you will be greeted with an **interactive tutorial** demonstrating effective usage patterns.
 * You can **click anywhere in an item's wedge**. It does not matter whether you click directly on an item or at the edge of your screen as long as you are in the same wedge.
 * To enter **Marking Mode**, click and drag an item. As soon as you pause dragging or make a turn, the item will be selected. **This way you can select items with gestures!**
