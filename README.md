@@ -13,7 +13,7 @@
   <a href="scripts/cloc.sh"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json" /></a>
 </p>
 
-**Fly-Pie** is an extension for GNOME Shell which lets you open _marking menus_ via keyboard shortcuts.
+**Fly-Pie** is an extension for GNOME Shell which lets you open _marking menus_ via keyboard shortcuts. _And — to the best of my knowledge — it is the <a href="https://www.youtube.com/watch?v=Lj-uefp36Jk">first GNOME Shell extension with achievements</a>!_ :trophy:
 
 You can use it to launch applications, simulate hotkeys, open URLs and much more.
 It features a continuous learning curve which lets you gradually lift-off from a grumpie menu rookie to a snappie menu pielot.
