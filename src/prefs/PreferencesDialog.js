@@ -344,5 +344,71 @@ var PreferencesDialog = class PreferencesDialog {
         }
       });
     }
+
+    if (GObject.type_from_name('FlyPieMenuEditor') == null) {
+      // clang-format off
+      GObject.registerClass({
+        GTypeName: 'FlyPieMenuEditor',
+      },
+      class FlyPieMenuEditor extends Gtk.Widget {
+        // clang-format on
+        _init(params = {}) {
+          super._init(params);
+
+          this._items = [];
+        }
+
+        // We use a hard-coded minimum size of 500 pixels.
+        vfunc_measure(orientation, for_size) {
+          return [500, 500, -1, -1];
+        }
+
+        vfunc_size_allocate(width, height, baseline) {
+          const labelHeight = this._infoLabel.measure(Gtk.Orientation.VERTICAL, width)[1];
+
+          const labelAllocation = new Gdk.Rectangle(
+              {x: 0, y: height - labelHeight, width: width, height: labelHeight});
+          this._infoLabel.size_allocate(labelAllocation, -1);
+
+          for (let i = 0; i < this._items.length; i++) {
+            const buttonAllocation = new Gdk.Rectangle(
+                {x: 0, y: 0, width: width, height: height - labelHeight});
+            this._items[i].size_allocate(buttonAllocation, -1);
+          }
+        }
+
+        vfunc_realize() {
+          this._infoLabel = new Gtk.Label({
+            label: _(
+                '<b>Click</b> a menu to edit its properties.\n<b>Double-Click</b> a menu to edit the contained items.'),
+            margin_bottom: 8,
+            justify: Gtk.Justification.CENTER,
+            use_markup: true
+          });
+          this._infoLabel.set_parent(this);
+          super.vfunc_realize();
+        }
+
+        vfunc_unrealize() {
+          this._infoLabel.unparent();
+          super.vfunc_unrealize();
+        }
+
+        setItems(items) {
+          for (let i = 0; i < this._items.length; i++) {
+            this._items[i].unparent();
+          }
+
+          this._items.length = items.length;
+
+          for (let i = 0; i < items.length; i++) {
+            this._items[i] = Gtk.Button.new_with_label(items[i]);
+            this._items[i].set_parent(this);
+          }
+
+          this.queue_allocate();
+        }
+      });
+    }
   }
 }

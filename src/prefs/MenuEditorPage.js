@@ -41,10 +41,58 @@ var MenuEditorPage = class MenuEditorPage {
     this._builder  = builder;
     this._settings = settings;
 
-    // Connect to the server so that we can toggle menu previews from the menu editor.
-    new DBusWrapper(
-        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/flypie',
-        proxy => this._dbus = proxy);
+    // This is the canvas where the editable menu is drawn to. It's a custom container
+    // widget and we use standard widgets such as GtkLabels and GtkButtons to draw the
+    // menu.
+    this._editor = this._builder.get_object('menu-editor');
+
+    // This is later populated with a call to this._loadMenuConfiguration(). It basically
+    // contains the content of the 'menu-configuration' settings key as a JavaScript
+    // object.
+    this._configs = [];
+
+    // This array contains the indices of the current selection chain. If no menu is
+    // selected for editing, the array is empty. If a menu is currently edited,
+    // this._selectionChain[0] will contain the index of the menu in this._configs. All
+    // further entries in this._selectionChain contain the indices of the selected child,
+    // grandchild and so on.
+    this._selectionChain = [];
+
+    // Now we initialize several components of the menu editor.
+    this._initAddItemPopover();
+    this._initPreviewButton();
+    this._initExportImportButtons();
+    this._initBreadCrumbs();
+    this._initInfoLabel();
+    this._initSettingsSidebar();
+
+    // Now that the widgets are set up, we can load the entire menu configuration...
+    try {
+      this._loadMenuConfiguration();
+    } catch (error) {
+      utils.debug('Failed to load menu configuration: ' + error);
+    }
+
+    // ... and draw the menu overview!
+    this._redraw();
+  }
+
+  // ----------------------------------------------------------------------- private stuff
+
+
+  // The breadcrumbs are an GtkLabel that shows the current selection chain and allows for
+  // back navigation. Each item is a clickable link, the URI contains an integer to which
+  // the length of the selection chain must be truncated in order to select it.
+  _initBreadCrumbs() {
+    this._breadCrumbs = this._builder.get_object('menu-editor-breadcrumbs');
+    this._breadCrumbs.connect('activate-link', (label, uri) => {
+      this._selectionChain.length = parseInt(uri);
+      this._redraw();
+      return true;
+    });
+  }
+
+  _initAddItemPopover() {
 
     // First, we initialize the add-new-item popover and the related buttons.
     // Here we add one entry to the add-new-item popover for each registered item type.
@@ -99,27 +147,9 @@ var MenuEditorPage = class MenuEditorPage {
           this._addNewItem(row.get_name());
           this._builder.get_object('item-type-popover').popdown();
         });
+  }
 
-
-    // Open a live-preview for the selected menu when the preview-button is clicked.
-    this._builder.get_object('preview-menu-button').connect('clicked', () => {
-      let [ok, model, iter] = this._selection.get_selected();
-
-      if (ok) {
-        const menuIndex = model.get_path(iter).get_indices()[0];
-        [ok, iter]      = model.get_iter(Gtk.TreePath.new_from_indices([menuIndex]));
-        const menuName  = this._get(iter, 'NAME');
-        this._dbus.PreviewMenuRemote(menuName, (result) => {
-          result = parseInt(result);
-          if (result < 0) {
-            const error = DBusInterface.getErrorDescription(result);
-            utils.debug('Failed to open menu preview: ' + error);
-          } else {
-            Statistics.getInstance().addPreviewMenuOpened();
-          }
-        });
-      }
-    });
+  _initExportImportButtons() {
 
     // Open a save-dialog when the export-config button is pressed.
     this._builder.get_object('export-menu-config-button').connect('clicked', (button) => {
@@ -249,14 +279,111 @@ var MenuEditorPage = class MenuEditorPage {
 
       dialog.show();
     });
+  }
 
+  _initPreviewButton() {
 
-    // Now that the tree store is set up, we can load the entire menu configuration.
-    try {
-      this._loadMenuConfiguration();
-    } catch (error) {
-      utils.debug('Failed to load menu configuration: ' + error);
-    }
+    // Connect to the server so that we can toggle menu previews from the menu editor.
+    new DBusWrapper(
+        Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/flypie',
+        proxy => this._dbus = proxy);
+
+    // Open a live-preview for the selected menu when the preview-button is clicked.
+    this._builder.get_object('preview-menu-button').connect('clicked', () => {
+      let [ok, model, iter] = this._selection.get_selected();
+
+      if (ok) {
+        const menuIndex = model.get_path(iter).get_indices()[0];
+        [ok, iter]      = model.get_iter(Gtk.TreePath.new_from_indices([menuIndex]));
+        const menuName  = this._get(iter, 'NAME');
+        this._dbus.PreviewMenuRemote(menuName, (result) => {
+          result = parseInt(result);
+          if (result < 0) {
+            const error = DBusInterface.getErrorDescription(result);
+            utils.debug('Failed to open menu preview: ' + error);
+          } else {
+            Statistics.getInstance().addPreviewMenuOpened();
+          }
+        });
+      }
+    });
+  }
+
+  // There is a small label in the menu editor which shows random tips at regular
+  // intervals.
+  _initInfoLabel() {
+    const revealer = this._builder.get_object('info-label-revealer');
+    const label    = this._builder.get_object('info-label');
+
+    const tips = [
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('You should try to have no more than twelve items in your menus.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('An even number of entries will make it easier to learn item positions. Four, six and eight are good numbers.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('Fly-Pie is libre software available on <a href="%s">GitHub</a>.')
+          .replace('%s', 'https://github.com/Schneegans/Fly-Pie'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('Suggestions can be posted on <a href="%s">GitHub</a>.')
+          .replace('%s', 'https://github.com/Schneegans/Fly-Pie/issues'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('Bugs can be reported on <a href="%s">GitHub</a>.')
+          .replace('%s', 'https://github.com/Schneegans/Fly-Pie/issues'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('Keep menu hierarchies efficient by putting anything beyond 8 elements into a new menu level.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('If you delete all menus, log out and log in again, the default configuration will be restored.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('You can reorder the menu items on the left via drag and drop.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('You can drop directories, files, links and desktop files into the menu hierarchy on the left.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('You can copy menu items by holding the Ctrl key while dragging them to another location.'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('<a href="%s">Translate Fly-Pie on Hosted Weblate</a>.')
+          .replace(
+              '%s',
+              'https://github.com/Schneegans/Fly-Pie/blob/develop/docs/translating.md'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('💕️ Do you want to show your love for Fly-Pie? <a href="%s">Become a sponsor.</a>')
+          .replace('%s', 'https://github.com/sponsors/Schneegans')
+    ];
+
+    // Every eight seconds we hide the current tip...
+    this._infoLabelTimeoutB = null;
+    this._infoLabelTimeoutA = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 8000, () => {
+      revealer.reveal_child = false;
+
+      // ...  and show a new tip some milliseconds later.
+      this._infoLabelTimeoutB = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
+        label.label           = tips[Math.floor(Math.random() * tips.length)];
+        revealer.reveal_child = true;
+        return false;
+      });
+
+      // Don't show new tips when the window got closed.
+      return label.get_root().visible;
+    });
+
+    label.connect('destroy', () => {
+      GLib.source_remove(this._infoLabelTimeoutA);
+      GLib.source_remove(this._infoLabelTimeoutB);
+    });
+  }
+
+  _initSettingsSidebar() {
 
     // Now we initialize all icon-related UI elements. That is first and foremost the
     // icon-select dialog.
@@ -482,85 +609,104 @@ var MenuEditorPage = class MenuEditorPage {
     //     this._menuSavingAllowed = true;
     //   }
     // });
-
-    // Initialize the tip-display label.
-    this._initInfoLabel();
   }
 
-  // ----------------------------------------------------------------------- private stuff
 
-  // There is a small label in the menu editor which shows random tips at regular
-  // intervals.
-  _initInfoLabel() {
-    const revealer = this._builder.get_object('info-label-revealer');
-    const label    = this._builder.get_object('info-label');
+  // This is called once initially and loads the JSON menu configuration from the settings
+  // key "menu-configuration". This may throw an exception if the currently stored menu
+  // configuration is invalid.
+  _loadMenuConfiguration() {
 
-    const tips = [
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('You should try to have no more than twelve items in your menus.'),
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('An even number of entries will make it easier to learn item positions. Four, six and eight are good numbers.'),
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('Fly-Pie is libre software available on <a href="%s">GitHub</a>.')
-          .replace('%s', 'https://github.com/Schneegans/Fly-Pie'),
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('Suggestions can be posted on <a href="%s">GitHub</a>.')
-          .replace('%s', 'https://github.com/Schneegans/Fly-Pie/issues'),
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('Bugs can be reported on <a href="%s">GitHub</a>.')
-          .replace('%s', 'https://github.com/Schneegans/Fly-Pie/issues'),
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('Keep menu hierarchies efficient by putting anything beyond 8 elements into a new menu level.'),
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('If you delete all menus, log out and log in again, the default configuration will be restored.'),
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('You can reorder the menu items on the left via drag and drop.'),
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('You can drop directories, files, links and desktop files into the menu hierarchy on the left.'),
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('You can copy menu items by holding the Ctrl key while dragging them to another location.'),
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('<a href="%s">Translate Fly-Pie on Hosted Weblate</a>.')
-          .replace(
-              '%s',
-              'https://github.com/Schneegans/Fly-Pie/blob/develop/docs/translating.md'),
-      // Translators: This is one of the hints which are shown in the bottom right corner
-      // of the menu editor.
-      _('💕️ Do you want to show your love for Fly-Pie? <a href="%s">Become a sponsor.</a>')
-          .replace('%s', 'https://github.com/sponsors/Schneegans')
-    ];
+    // Load the menu configuration in the JSON format.
+    this._configs = JSON.parse(this._settings.get_string('menu-configuration'));
 
-    // Every eight seconds we hide the current tip...
-    this._infoLabelTimeoutB = null;
-    this._infoLabelTimeoutA = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 8000, () => {
-      revealer.reveal_child = false;
+    for (let i = 0; i < this._configs.length; i++) {
 
-      // ...  and show a new tip some milliseconds later.
-      this._infoLabelTimeoutB = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
-        label.label           = tips[Math.floor(Math.random() * tips.length)];
-        revealer.reveal_child = true;
-        return false;
-      });
+      // Make sure that all fields of the menu config are initialized to sane defaults.
+      ItemRegistry.normalizeConfig(this._configs[i]);
 
-      // Don't show new tips when the window got closed.
-      return label.get_root().visible;
-    });
+      // If, for some reason, no ID is assigned to a menu, generate a new one.
+      if (this._configs[i].id == undefined) {
+        this._configs[i].id = this._getNewID();
+      }
+    }
+  }
 
-    label.connect('destroy', () => {
-      GLib.source_remove(this._infoLabelTimeoutA);
-      GLib.source_remove(this._infoLabelTimeoutB);
-    });
+  _redraw() {
+
+    // If nothing is selected, we draw a grid of all configured menus. A add-new-menu
+    // button is appended to the end of the grid. This grid could be realized with a
+    // GtkGrid as well, but we want to transition the button positions, so we create
+    // something similar with a GtkFixed.
+    if (this._selectionChain.length == 0) {
+
+      let items = [];
+
+      for (let i = 0; i < this._configs.length; i++) {
+        items.push(this._configs[i].name);
+      }
+      this._editor.setItems(items);
+
+    } else {
+    }
+
+    this._redrawBreadCrumbs();
+  }
+
+  // This updates the bread crumbs at the top of the menu editor. They show the current
+  // selection chain and allow for navigating to parent levels.
+  _redrawBreadCrumbs() {
+
+    // Translators: The top-most item of the menu editor bread crumbs which is always
+    // visible.
+    let label = _('All Menus');
+
+    // Make it clickable if it's not the last item.
+    if (this._selectionChain.length > 0) {
+      label = '<a href="0">' + label + '</a>';
+    }
+
+    for (let i = 0; i < this._selectionChain.length; i++) {
+      const item = this._getSelected(i);
+
+      // Make it only clickable if it's not the last item.
+      if (i + 1 < this._selectionChain.length) {
+        label += ` » <a href="${i + 1}">` + item.name + '</a>';
+      } else {
+        label += ' » ' + item.name;
+      }
+    }
+
+    this._breadCrumbs.label = label;
+  }
+
+  // Returns the item configuration of this._configs according to this._selectionChain. It
+  // will return null if either no menu is currently selected or an invalid selection
+  // chain is detected.
+  // If chainIndex >= 0 is given, the item at the given position in the selection chain is
+  // returned, rather than the last item of the chain.
+  _getSelected(chainIndex = inf) {
+    let item = null;
+
+    // If something is selected, we first determine which menu is selected based on
+    // this._selectionChain[0].
+    if (this._selectionChain.length > 0) {
+      if (this._configs.length > this._selectionChain[0]) {
+        item = this._configs[this._selectionChain[0]]
+      }
+    }
+
+    // Now traverse the selection chain from start to end. If an out-of-range index
+    // occurs, we return null. This shouldn't happen...
+    for (let i = 1; i < this._selectionChain.length && i <= chainIndex; i++) {
+      if (item.children.length > this._selectionChain[i]) {
+        item = item.children[this._selectionChain[i]];
+      } else {
+        return null;
+      }
+    }
+
+    return item;
   }
 
   // // This adds a new menu item to the currently selected menu. Items will always be
@@ -762,13 +908,11 @@ var MenuEditorPage = class MenuEditorPage {
       ++newID;
       isInUse = false;
 
-      let [ok, iter] = this._store.get_iter_first();
-
-      while (ok && !isInUse) {
-        if (this._get(iter, 'ID') == newID) {
+      for (let i = 0; i < this._configs.length; i++) {
+        if (this._configs[i].id != undefined && this._configs[i].id == newID) {
           isInUse = true;
+          break;
         }
-        ok = this._store.iter_next(iter);
       }
 
     } while (isInUse);
@@ -844,60 +988,4 @@ var MenuEditorPage = class MenuEditorPage {
   //     return false;
   //   });
   // }
-
-
-  // This is called once initially and loads the JSON menu configuration from the settings
-  // key "menu-configuration". It populates the menu store with all configured menus.
-  _loadMenuConfiguration() {
-
-    //   // This prevents callbacks on the row-inserted signal during initialization.
-    //   this._menuSavingAllowed = false;
-
-    //   // Remove any previously loaded configuration.
-    //   this._store.clear();
-
-    //   // This is called recursively.
-    //   const parseChildren = (parent, parentIter) => {
-    //     // Load all children recursively.
-    //     if (parent.children) {
-    //       for (let j = 0; j < parent.children.length; j++) {
-    //         const child = parent.children[j];
-    //         const iter  = this._store.append(parentIter);
-
-    //         this._set(iter, 'ICON', child.icon);
-    //         this._set(iter, 'NAME', child.name);
-    //         this._set(iter, 'TYPE', child.type);
-    //         this._set(iter, 'DATA', JSON.stringify(child.data));
-    //         this._set(iter, 'ANGLE', child.angle);
-    //         this._set(iter, 'SHORTCUT', '');
-
-    //         parseChildren(child, iter);
-    //       }
-    //     }
-    //   };
-
-    //   // Load the menu configuration in the JSON format.
-    //   const configs = JSON.parse(this._settings.get_string('menu-configuration'));
-
-    //   for (let i = 0; i < configs.length; i++) {
-    //     const config = configs[i];
-    //     const iter   = this._store.append(null);
-
-    //     ItemRegistry.normalizeConfig(config);
-
-    //     this._set(iter, 'ICON', config.icon);
-    //     this._set(iter, 'NAME', config.name);
-    //     this._set(iter, 'TYPE', config.type);
-    //     this._set(iter, 'DATA', JSON.stringify(config.data));
-    //     this._set(iter, 'SHORTCUT', config.shortcut);
-    //     this._set(iter, 'CENTERED', config.centered);
-    //     this._set(iter, 'ID', config.id != undefined ? config.id : this._getNewID());
-
-    //     parseChildren(config, iter);
-    //   }
-
-    //   // Flag that loading is finished - all next calls to this._set() will update the
-    //   // "menu-configuration".
-    //   this._menuSavingAllowed = true;
-  }
 }
