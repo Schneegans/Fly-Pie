@@ -73,6 +73,11 @@ function logProperties(object) {
 
 function paintIcon(ctx, name, size, opacity, font, textColor) {
 
+  // In this case, we will not draw anything...
+  if (size <= 0) {
+    return;
+  }
+
   // First try to find the icon in the theme. This will also load images from disc if the
   // icon name is actually a file path.
   try {
