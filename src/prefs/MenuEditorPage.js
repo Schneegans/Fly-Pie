@@ -357,9 +357,9 @@ var MenuEditorPage = class MenuEditorPage {
           .replace('%s', 'https://github.com/sponsors/Schneegans')
     ];
 
-    // Every eight seconds we hide the current tip...
+    // Every fifteen seconds we hide the current tip...
     this._infoLabelTimeoutB = null;
-    this._infoLabelTimeoutA = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 8000, () => {
+    this._infoLabelTimeoutA = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 15000, () => {
       revealer.reveal_child = false;
 
       // ...  and show a new tip some milliseconds later.
@@ -374,9 +374,26 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     label.connect('destroy', () => {
-      GLib.source_remove(this._infoLabelTimeoutA);
-      GLib.source_remove(this._infoLabelTimeoutB);
+      if (this._infoLabelTimeoutA) {
+        GLib.source_remove(this._infoLabelTimeoutA);
+      }
+      if (this._infoLabelTimeoutB) {
+        GLib.source_remove(this._infoLabelTimeoutB);
+      }
     });
+  }
+
+  _showInfoLabel(text) {
+    if (this._infoLabelTimeoutA) {
+      GLib.source_remove(this._infoLabelTimeoutA);
+    }
+    if (this._infoLabelTimeoutB) {
+      GLib.source_remove(this._infoLabelTimeoutB);
+    }
+
+    this._builder.get_object('info-label').label = text;
+
+    this._initInfoLabel();
   }
 
   _initSettingsSidebar() {
@@ -398,25 +415,11 @@ var MenuEditorPage = class MenuEditorPage {
       iconSelectDialog.show();
     });
 
-    // Draw an icon to the drawing area whenever it's invalidated. This happens usually
-    // when the text of the icon name input field changes.
-    this._builder.get_object('item-icon-drawingarea').set_draw_func((widget, ctx) => {
-      const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const icon  = this._selectedItem.icon;
-      const font  = this._settings.get_string('font');
-      const color = widget.get_style_context().get_color();
-      if (icon && icon.length > 0) {
-        utils.paintIcon(ctx, icon, size, 1, font, color);
-      }
-      return false;
-    });
-
     // Redraw the icon when the icon name input field is changed. Also, store the new
     // icon name in the tree store. This will lead to a re-draw of the icon in the tree
     // view as well.
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
       this._selectedItem.icon = widget.text;
-      this._builder.get_object('item-icon-drawingarea').queue_draw();
       this._saveMenuConfiguration();
     });
 
@@ -592,8 +595,7 @@ var MenuEditorPage = class MenuEditorPage {
       // something is selected.
       this._builder.get_object('icon-name').text = item.icon;
       this._builder.get_object('item-name').text = item.name;
-      this._builder.get_object('item-description').label =
-          ItemRegistry.getItemTypes()[selectedType].description;
+      this._showInfoLabel(ItemRegistry.getItemTypes()[selectedType].description);
 
       // If the selected item is a top-level menu, the SHORTCUT column contains its
       // shortcut.

@@ -4629,18 +4629,20 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                         <property name="child">
                           <object class="GtkBox">
                             <property name="width_request">300</property>
+                            <property name="margin_top">10</property>
                             <property name="margin_start">10</property>
                             <property name="margin_end">10</property>
                             <property name="vexpand">1</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkDrawingArea" id="item-icon-drawingarea">
-                                <property name="width_request">128</property>
-                                <property name="height_request">128</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
-                                <property name="margin_top">10</property>
+                              <object class="GtkLabel">
+                                <property name="halign">start</property>
+                                <property name="margin_top">20</property>
                                 <property name="margin_bottom">10</property>
+                                <property name="label" translatable="yes">Item Properties</property>
+                                <style>
+                                  <class name="large-title" />
+                                </style>
                               </object>
                             </child>
                             <child>
@@ -4648,26 +4650,8 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">5</property>
                                 <child>
-                                  <object class="GtkBox">
-                                    <property name="spacing">10</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Name</property>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="halign">end</property>
-                                        <style>
-                                          <class name="dim-label" />
-                                        </style>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <child>
                                   <object class="GtkEntry" id="item-name">
+                                    <property name="placeholder_text" translatable="yes">Name</property>
                                     <property name="show_emoji_icon">1</property>
                                   </object>
                                 </child>
@@ -4832,27 +4816,14 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                               </object>
                             </child>
                             <child>
-                              <object class="GtkLabel" id="item-description">
-                                <property name="margin_top">20</property>
-                                <property name="label">label</property>
-                                <property name="use_markup">1</property>
-                                <property name="wrap">1</property>
-                                <property name="max_width_chars">0</property>
-                                <property name="xalign">0</property>
-                                <style>
-                                  <class name="dim-label" />
-                                </style>
-                              </object>
-                            </child>
-                            <child>
                               <object class="GtkRevealer" id="info-label-revealer">
                                 <property name="vexpand">1</property>
+                                <property name="reveal_child">1</property>
                                 <property name="transition_type">crossfade</property>
                                 <property name="child">
                                   <object class="GtkLabel" id="info-label">
                                     <property name="margin_top">10</property>
                                     <property name="margin_bottom">10</property>
-                                    <property name="label">label</property>
                                     <property name="valign">end</property>
                                     <property name="use_markup">1</property>
                                     <property name="wrap">1</property>
