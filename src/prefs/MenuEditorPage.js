@@ -41,11 +41,6 @@ var MenuEditorPage = class MenuEditorPage {
     this._builder  = builder;
     this._settings = settings;
 
-    // This is the canvas where the editable menu is drawn to. It's a custom container
-    // widget and we use standard widgets such as GtkLabels and GtkButtons to draw the
-    // menu.
-    this._editor = this._builder.get_object('menu-editor');
-
     // This is later populated with a call to this._loadMenuConfiguration(). It basically
     // contains the content of the 'menu-configuration' settings key as a JavaScript
     // object.
@@ -53,10 +48,10 @@ var MenuEditorPage = class MenuEditorPage {
 
     // This array contains the indices of the current selection chain. If no menu is
     // selected for editing, the array is empty. If a menu is currently edited,
-    // this._selectionChain[0] will contain the index of the menu in this._configs. All
-    // further entries in this._selectionChain contain the indices of the selected child,
+    // this._menuChain[0] will contain the index of the menu in this._configs. All
+    // further entries in this._menuChain contain the indices of the selected child,
     // grandchild and so on.
-    this._selectionChain = [];
+    this._menuChain = [];
 
     // Now we initialize several components of the menu editor.
     this._initAddItemPopover();
@@ -65,6 +60,7 @@ var MenuEditorPage = class MenuEditorPage {
     this._initBreadCrumbs();
     this._initInfoLabel();
     this._initSettingsSidebar();
+    this._initEditor();
 
     // Now that the widgets are set up, we can load the entire menu configuration...
     try {
@@ -86,7 +82,7 @@ var MenuEditorPage = class MenuEditorPage {
   _initBreadCrumbs() {
     this._breadCrumbs = this._builder.get_object('menu-editor-breadcrumbs');
     this._breadCrumbs.connect('activate-link', (label, uri) => {
-      this._selectionChain.length = parseInt(uri);
+      this._menuChain.length = parseInt(uri);
       this._redraw();
       return true;
     });
@@ -406,7 +402,7 @@ var MenuEditorPage = class MenuEditorPage {
     // when the text of the icon name input field changes.
     this._builder.get_object('item-icon-drawingarea').set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const icon  = this._getSelected('ICON');
+      const icon  = this._selectedItem.icon;
       const font  = this._settings.get_string('font');
       const color = widget.get_style_context().get_color();
       if (icon && icon.length > 0) {
@@ -419,27 +415,24 @@ var MenuEditorPage = class MenuEditorPage {
     // icon name in the tree store. This will lead to a re-draw of the icon in the tree
     // view as well.
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
-      // this._setSelected('ICON', widget.text);
+      this._selectedItem.icon = widget.text;
       this._builder.get_object('item-icon-drawingarea').queue_draw();
+      this._saveMenuConfiguration();
     });
 
     // Store the item's name in the tree store when the text of the name input field is
     // changed.
-    this._builder.get_object('item-name')
-        .connect(
-            'notify::text',
-            (widget) => {
-                // this._setSelected('NAME', widget.text);
-            });
+    this._builder.get_object('item-name').connect('notify::text', (widget) => {
+      this._selectedItem.name = widget.text;
+      this._saveMenuConfiguration();
+    });
 
     // For top-level menus, store whether they should be opened in the center of the
     // screen.
-    this._builder.get_object('menu-centered')
-        .connect(
-            'notify::active',
-            (widget) => {
-                // this._setSelected('CENTERED', widget.active);
-            });
+    this._builder.get_object('menu-centered').connect('notify::active', (widget) => {
+      this._selectedItem.centered = widget.active;
+      this._saveMenuConfiguration();
+    });
 
     // Store the item's fixed angle in the tree store's ANGLE column when the
     // corresponding input field is changed. This is a bit more involved, as we check
@@ -486,129 +479,48 @@ var MenuEditorPage = class MenuEditorPage {
     // createShortcutLabel for details.
     {
       const [box, label] = ConfigWidgetFactory.createShortcutLabel(false, (shortcut) => {
-        this._setSelected('SHORTCUT', shortcut);
+        this._selectedItem.shortcut = shortcut;
+        this._saveMenuConfiguration();
       });
       this._builder.get_object('menu-shortcut-box').append(box);
       this._menuShortcutLabel = label;
     }
+  }
 
-    // // When the currently selected menu item changes, the content of the settings
-    // widgets
-    // // must be updated accordingly.
-    // this._selection.connect('changed', (selection) => {
-    //   // Some widgets are disabled if nothing is selected.
-    //   let somethingSelected = selection.get_selected()[0];
-    //   this._builder.get_object('preview-menu-button').sensitive = somethingSelected;
-    //   this._builder.get_object('remove-item-button').sensitive  = somethingSelected;
+  _initEditor() {
+    // This is the canvas where the editable menu is drawn to. It's a custom container
+    // widget and we use standard widgets such as GtkLabels and GtkButtons to draw the
+    // menu.
+    this._editor = this._builder.get_object('menu-editor');
 
-    //   // The action types list is only available if something is selected and if a
-    //   // top-level element is selected, this must be a custom menu.
-    //   let actionsSensitive = somethingSelected;
-    //   if (this._isToplevelSelected()) {
-    //     actionsSensitive = this._getSelected('TYPE') == 'CustomMenu';
-    //   }
-    //   this._builder.get_object('action-types-list').sensitive = actionsSensitive;
+    this._editor.connect('menu-select', (e, which) => {
+      const somethingSelected = which >= 0 && which < this._configs.length;
+      this._builder.get_object('preview-menu-button').sensitive       = somethingSelected;
+      this._builder.get_object('item-settings-revealer').reveal_child = somethingSelected;
 
-    //   // There are multiple Gtk.Revealers involved. Based on the selected item's type
-    //   // their content is either shown or hidden. All settings are invisible if nothing
-    //   is
-    //   // selected, the menu settings (shortcut, centered) are visible if a top-level
-    //   // element is selected, for all other items the fixed angle can be set.
-    //   this._builder.get_object('item-settings-revealer').reveal_child =
-    //   somethingSelected;
-    //   this._builder.get_object('item-settings-menu-revealer').reveal_child =
-    //       this._isToplevelSelected();
-    //   this._builder.get_object('item-settings-angle-revealer').reveal_child =
-    //       !this._isToplevelSelected();
+      if (somethingSelected) {
+        this._selectedItem = this._configs[which];
+        this._updateSidebar(this._selectedItem);
+      } else {
+        this._selectedItem = null;
+      }
+    });
 
-    //   if (somethingSelected) {
+    this._editor.connect('menu-edit', (e, which) => {
+      utils.debug('menu-edit');
+    });
 
-    //     const selectedType = this._getSelected('TYPE');
+    this._editor.connect('menu-reorder', (e, from, to) => {
+      utils.debug('menu-reorder');
+    });
 
-    //     // If rows are not yet fully added, it may happen that the type is not yet set.
-    //     if (selectedType == null) {
-    //       return;
-    //     }
+    this._editor.connect('menu-delete', (e, which) => {
+      utils.debug('menu-delete');
+    });
 
-    //     // Setting the content of the widgets below will actually trigger menu
-    //     treestore
-    //     // modifications which in turn would lead to saving the menu configuration. As
-    //     // this is not necessary, we disable saving temporarily.
-    //     this._menuSavingAllowed = false;
-
-    //     // The item's name, icon and description have to be updated in any case if
-    //     // something is selected.
-    //     this._builder.get_object('icon-name').text = this._getSelected('ICON');
-    //     this._builder.get_object('item-name').text = this._getSelected('NAME');
-    //     this._builder.get_object('item-description').label =
-    //         ItemRegistry.getItemTypes()[selectedType].description;
-
-    //     // If the selected item is a top-level menu, the SHORTCUT column contains its
-    //     // shortcut.
-    //     if (this._isToplevelSelected()) {
-    //       this._menuShortcutLabel.set_accelerator(this._getSelected('SHORTCUT'));
-    //       this._builder.get_object('menu-centered').active =
-    //           this._getSelected('CENTERED');
-    //     }
-    //     // For all other items, the fixed angle can be set.
-    //     else {
-    //       this._builder.get_object('item-angle').value = this._getSelected('ANGLE');
-    //     }
-
-    //     // Now we check whether the selected item has a config property.
-    //     const config = ItemRegistry.getItemTypes()[selectedType].config;
-
-    //     // If it has a config property, we can show the revealer for the config widget.
-    //     const revealer        =
-    //     this._builder.get_object('item-settings-config-revealer');
-    //     revealer.reveal_child = config != null;
-
-    //     // In this case, we also ask the config object to create a new configuration
-    //     // widget for the selected type.
-    //     if (config) {
-
-    //       // To populate the new configuration widget with data, we retrieve the data
-    //       from
-    //       // the tree store's data column. This **should** be a JSON string, but if
-    //       // someone tries to load a config from Fly-Pie 4 or older, this may not be
-    //       the
-    //       // case. So we print a warning in this case.
-    //       let data = this._getSelected('DATA');
-    //       try {
-    //         data = JSON.parse(data);
-    //       } catch (error) {
-    //         utils.debug(
-    //             'Warning: Invalid configuration data is stored for the selected item: '
-    //             + error);
-    //       }
-
-    //       // Then we create and add the new configuration widget. The callback will be
-    //       // fired when the user changes the data. "data" will contain an object which
-    //       is
-    //       // to be stored as JSON string, optionally the name and icon of the currently
-    //       // selected item can be changed as well (e.g. when an application is
-    //       selected,
-    //       // we want to change the item's name and icon accordingly).
-    //       const newChild = config.getWidget(data, (data, name, icon) => {
-    //         this._setSelected('DATA', JSON.stringify(data));
-
-    //         if (name) {
-    //           this._builder.get_object('item-name').text = name;
-    //         }
-
-    //         if (icon) {
-    //           this._builder.get_object('icon-name').text = icon;
-    //         }
-    //       });
-
-    //       revealer.set_child(newChild);
-    //     }
-
-    //     // All modifications are done, all future modifications will come from the user
-    //     // and should result in saving the configuration again.
-    //     this._menuSavingAllowed = true;
-    //   }
-    // });
+    this._editor.connect('menu-add', () => {
+      utils.debug('menu-add');
+    });
   }
 
 
@@ -634,43 +546,130 @@ var MenuEditorPage = class MenuEditorPage {
 
   _redraw() {
 
-    // If nothing is selected, we draw a grid of all configured menus. A add-new-menu
-    // button is appended to the end of the grid. This grid could be realized with a
-    // GtkGrid as well, but we want to transition the button positions, so we create
-    // something similar with a GtkFixed.
-    if (this._selectionChain.length == 0) {
+    if (this._menuChain.length == 0) {
 
       let items = [];
 
       for (let i = 0; i < this._configs.length; i++) {
-        items.push(this._configs[i].name);
+        items.push(this._configs[i].icon);
       }
       this._editor.setItems(items);
 
     } else {
     }
 
-    this._redrawBreadCrumbs();
+    this._updateBreadCrumbs();
+  }
+
+  // When the currently selected menu item changes, the content of the settings
+  // widgets must be updated accordingly.
+  _updateSidebar(item) {
+    // There are multiple Gtk.Revealers involved. Based on the selected item's type
+    // their content is either shown or hidden. The menu settings (shortcut, centered) are
+    // visible if a top-level element is selected, for all other items the fixed angle can
+    // be set.
+    const toplevelSelected = this._menuChain.length == 0;
+    this._builder.get_object('item-settings-menu-revealer').reveal_child =
+        toplevelSelected;
+    this._builder.get_object('item-settings-angle-revealer').reveal_child =
+        !toplevelSelected;
+
+    if (item) {
+
+      const selectedType = item.type;
+
+      // If rows are not yet fully added, it may happen that the type is not yet set.
+      if (selectedType == null) {
+        return;
+      }
+
+      // Setting the content of the widgets below will actually trigger menu treestore
+      // modifications which in turn would lead to saving the menu configuration. As
+      // this is not necessary, we disable saving temporarily.
+      this._menuSavingAllowed = false;
+
+      // The item's name, icon and description have to be updated in any case if
+      // something is selected.
+      this._builder.get_object('icon-name').text = item.icon;
+      this._builder.get_object('item-name').text = item.name;
+      this._builder.get_object('item-description').label =
+          ItemRegistry.getItemTypes()[selectedType].description;
+
+      // If the selected item is a top-level menu, the SHORTCUT column contains its
+      // shortcut.
+      if (toplevelSelected) {
+        this._menuShortcutLabel.set_accelerator(item.shortcut);
+        this._builder.get_object('menu-centered').active = item.centered;
+      }
+      // For all other items, the fixed angle can be set.
+      else {
+        this._builder.get_object('item-angle').value = item.angle;
+      }
+
+      // Now we check whether the selected item has a config property.
+      const config = ItemRegistry.getItemTypes()[selectedType].config;
+
+      // If it has a config property, we can show the revealer for the config widget.
+      const revealer        = this._builder.get_object('item-settings-config-revealer');
+      revealer.reveal_child = config != null;
+
+      // In this case, we also ask the config object to create a new configuration
+      // widget for the selected type.
+      if (config) {
+
+        // To populate the new configuration widget with data, we retrieve the data from
+        // the tree store's data column. This **should** be a JSON string, but if
+        // someone tries to load a config from Fly-Pie 4 or older, this may not be the
+        // case. So we print a warning in this case.
+        let data = item.data;
+        try {
+          data = JSON.parse(data);
+        } catch (error) {
+          utils.debug(
+              'Warning: Invalid configuration data is stored for the selected item: ' +
+              error);
+        }
+
+        // Then we create and add the new configuration widget. The callback will be
+        // fired when the user changes the data. "data" will contain an object which    is
+        // to be stored as JSON string, optionally the name and icon of the currently
+        // selected item can be changed as well (e.g. when an application is selected,
+        // we want to change the item's name and icon accordingly).
+        const newChild = config.getWidget(data, (data, name, icon) => {
+          this._setSelected('DATA', JSON.stringify(data));
+
+          if (name) {
+            this._builder.get_object('item-name').text = name;
+          }
+
+          if (icon) {
+            this._builder.get_object('icon-name').text = icon;
+          }
+        });
+
+        revealer.set_child(newChild);
+      }
+    }
   }
 
   // This updates the bread crumbs at the top of the menu editor. They show the current
   // selection chain and allow for navigating to parent levels.
-  _redrawBreadCrumbs() {
+  _updateBreadCrumbs() {
 
     // Translators: The top-most item of the menu editor bread crumbs which is always
     // visible.
     let label = _('All Menus');
 
     // Make it clickable if it's not the last item.
-    if (this._selectionChain.length > 0) {
+    if (this._menuChain.length > 0) {
       label = '<a href="0">' + label + '</a>';
     }
 
-    for (let i = 0; i < this._selectionChain.length; i++) {
-      const item = this._getSelected(i);
+    for (let i = 0; i < this._menuChain.length; i++) {
+      const item = this._getCurrentMenu(i);
 
       // Make it only clickable if it's not the last item.
-      if (i + 1 < this._selectionChain.length) {
+      if (i + 1 < this._menuChain.length) {
         label += ` » <a href="${i + 1}">` + item.name + '</a>';
       } else {
         label += ' » ' + item.name;
@@ -680,27 +679,27 @@ var MenuEditorPage = class MenuEditorPage {
     this._breadCrumbs.label = label;
   }
 
-  // Returns the item configuration of this._configs according to this._selectionChain. It
+  // Returns the item configuration of this._configs according to this._menuChain. It
   // will return null if either no menu is currently selected or an invalid selection
   // chain is detected.
   // If chainIndex >= 0 is given, the item at the given position in the selection chain is
   // returned, rather than the last item of the chain.
-  _getSelected(chainIndex = inf) {
+  _getCurrentMenu(chainIndex = inf) {
     let item = null;
 
     // If something is selected, we first determine which menu is selected based on
-    // this._selectionChain[0].
-    if (this._selectionChain.length > 0) {
-      if (this._configs.length > this._selectionChain[0]) {
-        item = this._configs[this._selectionChain[0]]
+    // this._menuChain[0].
+    if (this._menuChain.length > 0) {
+      if (this._configs.length > this._menuChain[0]) {
+        item = this._configs[this._menuChain[0]]
       }
     }
 
     // Now traverse the selection chain from start to end. If an out-of-range index
     // occurs, we return null. This shouldn't happen...
-    for (let i = 1; i < this._selectionChain.length && i <= chainIndex; i++) {
-      if (item.children.length > this._selectionChain[i]) {
-        item = item.children[this._selectionChain[i]];
+    for (let i = 1; i < this._menuChain.length && i <= chainIndex; i++) {
+      if (item.children.length > this._menuChain[i]) {
+        item = item.children[this._menuChain[i]];
       } else {
         return null;
       }
@@ -920,72 +919,26 @@ var MenuEditorPage = class MenuEditorPage {
     return newID;
   }
 
-  // // This stores a JSON representation of the entire menu store in the
-  // // "menu-configuration" key of the application settings. This is called whenever
-  // // something is changed in the menu store. It does not update the settings
-  // // instantaneously, it rather waits a few milliseconds for any additional changes.
-  // _saveMenuConfiguration() {
+  // This stores a JSON representation of the current configuration in the
+  // "menu-configuration" key of the application settings. This is called whenever
+  // something is changed in the sidebar. It does not update the settings
+  // instantaneously, it rather waits a few milliseconds for any additional changes.
+  _saveMenuConfiguration() {
 
-  //   // The configuration changed again. Cancel any pending save tasks...
-  //   if (this._saveSettingsTimeout != null) {
-  //     GLib.source_remove(this._saveSettingsTimeout);
-  //     this._saveSettingsTimeout = null;
-  //   }
+    // The configuration changed again. Cancel any pending save tasks...
+    if (this._saveSettingsTimeout != null) {
+      GLib.source_remove(this._saveSettingsTimeout);
+      this._saveSettingsTimeout = null;
+    }
 
-  //   // ... and launch a new one.
-  //   this._saveSettingsTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
-  //     this._saveSettingsTimeout = null;
+    // ... and launch a new one.
+    this._saveSettingsTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
+      this._saveSettingsTimeout = null;
 
-  //     // This is called recursively.
-  //     const addChildren = (parent, parentIter) => {
-  //       // Recursively add all children.
-  //       const count = this._store.iter_n_children(parentIter);
+      // Save the configuration as JSON!
+      this._settings.set_string('menu-configuration', JSON.stringify(this._configs));
 
-  //       if (count > 0) {
-  //         parent.children = [];
-  //       }
-
-  //       for (let i = 0; i < count; ++i) {
-  //         const iter = this._store.iter_nth_child(parentIter, i)[1];
-  //         let item   = {
-  //           name: this._get(iter, 'NAME'),
-  //           icon: this._get(iter, 'ICON'),
-  //           type: this._get(iter, 'TYPE'),
-  //           data: JSON.parse(this._get(iter, 'DATA')),
-  //           angle: this._get(iter, 'ANGLE')
-  //         };
-
-  //         parent.children.push(item);
-
-  //         addChildren(item, iter);
-  //       }
-  //     };
-
-  //     // The top level JSON element is an array containing all menus.
-  //     let menus      = [];
-  //     let [ok, iter] = this._store.get_iter_first();
-
-  //     while (ok) {
-  //       let menu = {
-  //         name: this._get(iter, 'NAME'),
-  //         icon: this._get(iter, 'ICON'),
-  //         type: this._get(iter, 'TYPE'),
-  //         data: JSON.parse(this._get(iter, 'DATA')),
-  //         shortcut: this._get(iter, 'SHORTCUT'),
-  //         id: this._get(iter, 'ID'),
-  //         centered: this._get(iter, 'CENTERED'),
-  //       };
-
-  //       menus.push(menu);
-  //       addChildren(menu, iter);
-
-  //       ok = this._store.iter_next(iter);
-  //     }
-
-  //     // Save the configuration as JSON!
-  //     this._settings.set_string('menu-configuration', JSON.stringify(menus));
-
-  //     return false;
-  //   });
-  // }
+      return false;
+    });
+  }
 }
