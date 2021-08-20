@@ -45,6 +45,8 @@ var PreferencesDialog = class PreferencesDialog {
     this._resources = Gio.Resource.load(Me.path + '/resources/flypie.gresource');
     Gio.resources_register(this._resources);
 
+    // Register some custom Gtk widgets. This needs to be done before creating the builder
+    // below as this will instantiate some of these custom widgets.
     MenuEditor.registerWidget();
     IconSelectDialog.registerWidget();
     ImageChooserButton.registerWidget();

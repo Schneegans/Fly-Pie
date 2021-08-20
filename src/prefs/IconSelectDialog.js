@@ -10,7 +10,12 @@
 
 const {GObject, GLib, Gtk, Gio, Gdk} = imports.gi;
 
-const _ = imports.gettext.domain('flypie').gettext;
+//////////////////////////////////////////////////////////////////////////////////////////
+// This dialog allows selecting an icon. This can be either from the user's icon theme  //
+// or a local file. Once the user selected an icon, the 'icon-set' signal is emitted.   //
+// The actual string representation of the icon can then be retrieved with the          //
+// get_icon() method.                                                                   //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 function registerWidget() {
 
@@ -55,6 +60,8 @@ function registerWidget() {
         });
       }
 
+      // This either returns a file path to an image file or the name of an icon from the
+      // user's icon theme.
       get_icon() {
         if (this._stack.get_visible_child_name() === 'icon-theme-page') {
           const path       = this._iconView.get_selected_items()[0];
@@ -75,6 +82,7 @@ function registerWidget() {
         return '';
       }
 
+      // This can be used to make the dialog preselect an icon before showing it.
       set_icon(value) {
         if (typeof value === 'string') {
           const file = Gio.File.new_for_path(value);

@@ -10,10 +10,13 @@
 
 const {GObject, Gtk} = imports.gi;
 
-const _ = imports.gettext.domain('flypie').gettext;
+//////////////////////////////////////////////////////////////////////////////////////////
+// The CopyValueButton is instantiated many times in Fly-Pie's settings dialog. It is   //
+// a simple circular button with an arrow which is used to copy values from its left to //
+// its right side.                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 function registerWidget() {
-
   if (GObject.type_from_name('FlyPieCopyValueButton') == null) {
     // clang-format off
       GObject.registerClass({

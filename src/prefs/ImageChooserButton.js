@@ -12,6 +12,12 @@ const {GObject, Gtk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
+//////////////////////////////////////////////////////////////////////////////////////////
+// Since the FileChooserButton from GTK3 is gone, we have to provide a similar          //
+// solution. In Fly-Pie, we only need file chooser buttons for images, so the content   //
+// type is hard-coded.                                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////
+
 function registerWidget() {
 
   if (GObject.type_from_name('FlyPieImageChooserButton') == null) {
@@ -69,10 +75,12 @@ function registerWidget() {
         });
       }
 
+      // Returns the currently selected file.
       get_file() {
         return this._file;
       }
 
+      // This makes the file chooser dialog to preselect the given file.
       set_file(value) {
         if (value != null && value.query_exists(null)) {
           this._label.label = value.get_basename();
