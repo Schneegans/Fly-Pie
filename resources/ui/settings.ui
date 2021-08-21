@@ -4639,7 +4639,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="halign">start</property>
                                 <property name="margin_top">20</property>
                                 <property name="margin_bottom">10</property>
-                                <property name="label" translatable="yes">Item Properties</property>
+                                <property name="label" translatable="yes">Properties</property>
                                 <style>
                                   <class name="large-title" />
                                 </style>
@@ -4904,6 +4904,7 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
 
 
                       <object class="GtkButton" id="preview-menu-button">
+                        <property name="sensitive">0</property>
                         <property name="tooltip_text" translatable="yes">Open Live Preview Menu</property>
                         <property name="child">
                           <object class="GtkBox">

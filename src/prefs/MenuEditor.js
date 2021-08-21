@@ -16,11 +16,57 @@ const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// This class loads the user interface defined in settings.ui and instantiates the      //
-// classes encapsulating code for the individual pages of the preferences dialog.       //
+// This is the canvas where the editable menu is drawn to. It's a custom container      //
+// widget and we use standard widgets such as GtkLabels and GtkButtons to draw the      //
+// menu.                                                                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+let FlyPieMenuEditorItem;
+
 function registerWidget() {
+
+  if (GObject.type_from_name('FlyPieMenuEditorItem') == null) {
+    // clang-format off
+    FlyPieMenuEditorItem = GObject.registerClass({
+      GTypeName: 'FlyPieMenuEditorItem',
+    },
+    class FlyPieMenuEditorItem extends Gtk.ToggleButton {
+          // clang-format on
+          _init(params = {}) {
+            super._init(params);
+
+            this.add_css_class('pill-button');
+            this.set_has_frame(false);
+
+            // Create the Gio.Settings object.
+            this._settings = utils.createSettings();
+
+
+            this._iconName = 'image-missing';
+
+            this._content = new Gtk.DrawingArea();
+
+            this._content.set_draw_func((widget, ctx) => {
+              const size =
+                  Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+              ctx.translate(
+                  (widget.get_allocated_width() - size) / 2,
+                  (widget.get_allocated_height() - size) / 2);
+              const font  = this._settings.get_string('font');
+              const color = widget.get_style_context().get_color();
+              utils.paintIcon(ctx, this._iconName, size, 1, font, color);
+              return false;
+            });
+
+            this.set_child(this._content);
+          }
+
+          setIcon(icon) {
+            this._iconName = icon;
+            this._content.queue_draw();
+          }
+        })
+  }
 
   if (GObject.type_from_name('FlyPieMenuEditor') == null) {
     // clang-format off
@@ -39,15 +85,13 @@ function registerWidget() {
       _init(params = {}) {
         super._init(params);
 
-        // Create the Gio.Settings object.
-        this._settings = utils.createSettings();
-
-        this._items = [];
+        this._items        = [];
+        this._selectedItem = null;
 
         this._menuListMode = true;
       }
 
-      // We use a hard-coded minimum size of 500 pixels.
+      // We use a hard-coded minimum size of 500 by 500 pixels.
       vfunc_measure(orientation, for_size) {
         return [500, 500, -1, -1];
       }
@@ -67,7 +111,7 @@ function registerWidget() {
           // split them evenly in two rows. If there's not enough space again, we split
           // all items into three rows. And so on. If the entire vertical space is
           // filled up, we start to shrink the individual items.
-          const itemSize    = 128
+          const itemSize    = 128 + 4 + 4;
           const rows        = Math.ceil(this._items.length * itemSize / width);
           const itemsPerRow = Math.ceil(this._items.length / rows);
 
@@ -139,7 +183,7 @@ function registerWidget() {
         super.vfunc_unrealize();
       }
 
-      setItems(items) {
+      setItems(icons) {
         for (let i = 0; i < this._items.length; i++) {
           this._items[i].unparent();
         }
@@ -147,69 +191,58 @@ function registerWidget() {
         this._items.length = 0;
         this._radioGroup   = null;
 
-        for (let i = 0; i < items.length; i++) {
-          this._appendRadioButton(items[i], (b) => {
+        for (let i = 0; i < icons.length; i++) {
+          const button = new FlyPieMenuEditorItem({
+            margin_top: 4,
+            margin_bottom: 4,
+            margin_start: 4,
+            margin_end: 4,
+            width_request: 128,
+            height_request: 128,
+          });
+
+          button.setIcon(icons[i]);
+          button.set_parent(this);
+
+          if (this._radioGroup) {
+            button.set_group(this._radioGroup);
+          } else {
+            this._radioGroup = button;
+          }
+
+          const controller = new Gtk.EventControllerMotion();
+          controller.connect(
+              'enter',
+              () => {
+                  this._infoLabel.label = _(
+                      '<b>Click</b> to edit menu properties.\n<b>Double-Click</b> to edit menu items.\n<b>Drag</b> to reorder, move, or delete.')});
+          controller.connect('leave', () => {this._infoLabel.label = ''});
+          button.add_controller(controller);
+
+          button.connect('clicked', (b) => {
             if (b.active) {
+              this._selectedItem = b;
               this.emit('menu-select', i);
             } else {
+              this._selectedItem = null;
               this.emit('menu-select', -1);
             }
           });
+
+          this._items.push(button);
         }
 
-        this._appendAddButton(() => {
-          this.emit('menu-add');
-        });
-
-        this.queue_allocate();
-      }
-
-      _appendRadioButton(iconName, onClick) {
-        const button = new Gtk.ToggleButton({
-          margin_top: 4,
-          margin_bottom: 4,
-          margin_start: 4,
-          margin_end: 4,
-        });
+        const button          = Gtk.Button.new_from_icon_name('list-add-symbolic');
+        button.margin_top     = 4;
+        button.margin_bottom  = 4;
+        button.margin_start   = 4;
+        button.margin_end     = 4;
+        button.width_request  = 128;
+        button.height_request = 128;
         button.add_css_class('pill-button');
         button.set_has_frame(false);
         button.set_parent(this);
 
-        if (this._radioGroup) {
-          button.set_group(this._radioGroup);
-        } else {
-          this._radioGroup = button;
-        }
-
-        const icon = this._createIcon(iconName, 128);
-        button.set_child(icon);
-        this._items.push(button);
-
-        const controller = new Gtk.EventControllerMotion();
-        controller.connect(
-            'enter',
-            () => {
-                this._infoLabel.label = _(
-                    '<b>Click</b> to edit menu properties.\n<b>Double-Click</b> to edit menu items.\n<b>Drag</b> to reorder, move, or delete.')});
-        controller.connect('leave', () => {this._infoLabel.label = ''});
-        button.add_controller(controller);
-
-        button.connect('clicked', onClick);
-      }
-
-      _appendAddButton(onClick) {
-        const button = new Gtk.Button({
-          margin_top: 4,
-          margin_bottom: 4,
-          margin_start: 4,
-          margin_end: 4,
-        });
-        button.add_css_class('pill-button');
-        button.set_has_frame(false);
-        button.set_parent(this);
-
-        const icon = this._createIcon('list-add-symbolic', 64);
-        button.set_child(icon);
         this._items.push(button);
 
         const controller = new Gtk.EventControllerMotion();
@@ -219,22 +252,18 @@ function registerWidget() {
         controller.connect('leave', () => {this._infoLabel.label = ''});
         button.add_controller(controller);
 
-        button.connect('clicked', onClick);
-      }
-
-      _createIcon(iconName, size) {
-        const icon = new Gtk.DrawingArea({height_request: size, width_request: size});
-        icon.set_draw_func((widget, ctx) => {
-          ctx.translate(
-              (widget.get_allocated_width() - size) / 2,
-              (widget.get_allocated_height() - size) / 2);
-          const font  = this._settings.get_string('font');
-          const color = widget.get_style_context().get_color();
-          utils.paintIcon(ctx, iconName, size, 1, font, color);
-          return false;
+        button.connect('clicked', () => {
+          this.emit('menu-add');
         });
 
-        return icon;
+
+        this.queue_allocate();
+      }
+
+      updateSelected(icon) {
+        if (this._selectedItem) {
+          this._selectedItem.setIcon(icon);
+        }
       }
     });
   }

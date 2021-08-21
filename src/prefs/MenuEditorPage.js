@@ -46,12 +46,16 @@ var MenuEditorPage = class MenuEditorPage {
     // object.
     this._configs = [];
 
-    // This array contains the indices of the current selection chain. If no menu is
-    // selected for editing, the array is empty. If a menu is currently edited,
-    // this._menuChain[0] will contain the index of the menu in this._configs. All
-    // further entries in this._menuChain contain the indices of the selected child,
-    // grandchild and so on.
-    this._menuChain = [];
+    // This array contains references to the nested list of currently edited menus. If no
+    // menu is opened for editing, the array is empty. If a menu is opened,
+    // this._menuPath[0] contains it toplevel menu and all further entries in
+    // this._menuPath contain the opened child, grandchild and so on.
+    this._menuPath = [];
+
+    // This contains a reference to the currently selected child of the last item of the
+    // _menuPath (if there is any, else it's null). This can also point to the last item
+    // of the menuPath itself as this can be edited as well by selecting the center item.
+    this._selectedItem = null;
 
     // Now we initialize several components of the menu editor.
     this._initAddItemPopover();
@@ -82,7 +86,7 @@ var MenuEditorPage = class MenuEditorPage {
   _initBreadCrumbs() {
     this._breadCrumbs = this._builder.get_object('menu-editor-breadcrumbs');
     this._breadCrumbs.connect('activate-link', (label, uri) => {
-      this._menuChain.length = parseInt(uri);
+      this._menuPath.length = parseInt(uri);
       this._redraw();
       return true;
     });
@@ -286,22 +290,17 @@ var MenuEditorPage = class MenuEditorPage {
 
     // Open a live-preview for the selected menu when the preview-button is clicked.
     this._builder.get_object('preview-menu-button').connect('clicked', () => {
-      let [ok, model, iter] = this._selection.get_selected();
-
-      if (ok) {
-        const menuIndex = model.get_path(iter).get_indices()[0];
-        [ok, iter]      = model.get_iter(Gtk.TreePath.new_from_indices([menuIndex]));
-        const menuName  = this._get(iter, 'NAME');
-        this._dbus.PreviewMenuRemote(menuName, (result) => {
-          result = parseInt(result);
-          if (result < 0) {
-            const error = DBusInterface.getErrorDescription(result);
-            utils.debug('Failed to open menu preview: ' + error);
-          } else {
-            Statistics.getInstance().addPreviewMenuOpened();
-          }
-        });
-      }
+      const name =
+          this._menuPath.length > 0 ? this._menuPath[0].name : this._selectedItem.name;
+      this._dbus.PreviewMenuRemote(name, (result) => {
+        result = parseInt(result);
+        if (result < 0) {
+          const error = DBusInterface.getErrorDescription(result);
+          utils.debug('Failed to open menu preview: ' + error);
+        } else {
+          Statistics.getInstance().addPreviewMenuOpened();
+        }
+      });
     });
   }
 
@@ -420,11 +419,12 @@ var MenuEditorPage = class MenuEditorPage {
     // view as well.
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
       this._selectedItem.icon = widget.text;
+      this._editor.updateSelected(widget.text);
       this._saveMenuConfiguration();
     });
 
     // Store the item's name in the tree store when the text of the name input field is
-    // changed.
+    // changed.this.
     this._builder.get_object('item-name').connect('notify::text', (widget) => {
       this._selectedItem.name = widget.text;
       this._saveMenuConfiguration();
@@ -491,9 +491,7 @@ var MenuEditorPage = class MenuEditorPage {
   }
 
   _initEditor() {
-    // This is the canvas where the editable menu is drawn to. It's a custom container
-    // widget and we use standard widgets such as GtkLabels and GtkButtons to draw the
-    // menu.
+
     this._editor = this._builder.get_object('menu-editor');
 
     this._editor.connect('menu-select', (e, which) => {
@@ -549,7 +547,7 @@ var MenuEditorPage = class MenuEditorPage {
 
   _redraw() {
 
-    if (this._menuChain.length == 0) {
+    if (this._menuPath.length == 0) {
 
       let items = [];
 
@@ -571,7 +569,7 @@ var MenuEditorPage = class MenuEditorPage {
     // their content is either shown or hidden. The menu settings (shortcut, centered) are
     // visible if a top-level element is selected, for all other items the fixed angle can
     // be set.
-    const toplevelSelected = this._menuChain.length == 0;
+    const toplevelSelected = this._menuPath.length == 0;
     this._builder.get_object('item-settings-menu-revealer').reveal_child =
         toplevelSelected;
     this._builder.get_object('item-settings-angle-revealer').reveal_child =
@@ -658,20 +656,25 @@ var MenuEditorPage = class MenuEditorPage {
   // selection chain and allow for navigating to parent levels.
   _updateBreadCrumbs() {
 
-    // Translators: The top-most item of the menu editor bread crumbs which is always
-    // visible.
+    // Hide the bread crumbs if nothing is selected.
+    if (this._menuPath.length == 0) {
+      this._breadCrumbs.label = '';
+      return;
+    }
+
+    // Translators: The left-most item of the menu editor bread crumbs.
     let label = _('All Menus');
 
     // Make it clickable if it's not the last item.
-    if (this._menuChain.length > 0) {
+    if (this._menuPath.length > 0) {
       label = '<a href="0">' + label + '</a>';
     }
 
-    for (let i = 0; i < this._menuChain.length; i++) {
-      const item = this._getCurrentMenu(i);
+    for (let i = 0; i < this._menuPath.length; i++) {
+      const item = this._menuPath[i];
 
       // Make it only clickable if it's not the last item.
-      if (i + 1 < this._menuChain.length) {
+      if (i + 1 < this._menuPath.length) {
         label += ` » <a href="${i + 1}">` + item.name + '</a>';
       } else {
         label += ' » ' + item.name;
@@ -679,35 +682,6 @@ var MenuEditorPage = class MenuEditorPage {
     }
 
     this._breadCrumbs.label = label;
-  }
-
-  // Returns the item configuration of this._configs according to this._menuChain. It
-  // will return null if either no menu is currently selected or an invalid selection
-  // chain is detected.
-  // If chainIndex >= 0 is given, the item at the given position in the selection chain is
-  // returned, rather than the last item of the chain.
-  _getCurrentMenu(chainIndex = inf) {
-    let item = null;
-
-    // If something is selected, we first determine which menu is selected based on
-    // this._menuChain[0].
-    if (this._menuChain.length > 0) {
-      if (this._configs.length > this._menuChain[0]) {
-        item = this._configs[this._menuChain[0]]
-      }
-    }
-
-    // Now traverse the selection chain from start to end. If an out-of-range index
-    // occurs, we return null. This shouldn't happen...
-    for (let i = 1; i < this._menuChain.length && i <= chainIndex; i++) {
-      if (item.children.length > this._menuChain[i]) {
-        item = item.children[this._menuChain[i]];
-      } else {
-        return null;
-      }
-    }
-
-    return item;
   }
 
   // // This adds a new menu item to the currently selected menu. Items will always be
