@@ -152,10 +152,12 @@ class MenuItem extends Clutter.Actor {
     this._iconContainer.set_layout_manager(new Clutter.BinLayout());
     this.add_child(this._iconContainer);
 
-    // This will contain an actor for each child displaying the name of the respective
-    // child. Once a child is hovered the opacity of the corresponding name will be set
-    // to 255, all others will be set to zero.
-    this._name = Clutter.Text.new();
+    // This will contain an actor displaying the name of the respective item. Once a child
+    // is hovered the opacity of the corresponding name will be set to 255, the opacity of
+    // names of all siblings will be set to zero. For some reason, the Clutter.Text is not
+    // shown when we use the normal constructor. So we use "new_with_text", the font is
+    // however overridden in _onSettingsChange.
+    this._name = Clutter.Text.new_with_text('Sans', 'foo');
     this._name.set_line_wrap(true);
     this._name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
     this._name.set_ellipsize(Pango.EllipsizeMode.END);
