@@ -35,18 +35,19 @@ function registerWidget() {
           _init(params = {}) {
             super._init(params);
 
-            this.add_css_class('pill-button');
-            this.set_has_frame(false);
+            // this.add_css_class('pill-button');
+            // this.set_has_frame(false);
 
             // Create the Gio.Settings object.
             this._settings = utils.createSettings();
 
+            const box = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
+            this.set_child(box);
 
             this._iconName = 'image-missing';
 
-            this._content = new Gtk.DrawingArea();
-
-            this._content.set_draw_func((widget, ctx) => {
+            this._icon = new Gtk.DrawingArea({hexpand: true, vexpand: true});
+            this._icon.set_draw_func((widget, ctx) => {
               const size =
                   Math.min(widget.get_allocated_width(), widget.get_allocated_height());
               ctx.translate(
@@ -54,16 +55,55 @@ function registerWidget() {
                   (widget.get_allocated_height() - size) / 2);
               const font  = this._settings.get_string('font');
               const color = widget.get_style_context().get_color();
-              utils.paintIcon(ctx, this._iconName, size, 1, font, color);
+              utils.paintIcon(ctx, this._config.icon, size, 1, font, color);
               return false;
             });
+            box.append(this._icon);
 
-            this.set_child(this._content);
+            this._nameLabel = new Gtk.Label();
+            this._nameLabel.add_css_class('caption-heading');
+            box.append(this._nameLabel);
+
+            this._shortcutLabel = new Gtk.Label({use_markup: true});
+            this._shortcutLabel.add_css_class('dim-label');
+            box.append(this._shortcutLabel);
+
+            this._dragSource = new Gtk.DragSource();
+            this._dragSource.connect('prepare', (s, x, y) => {
+              s.set_icon(Gtk.WidgetPaintable.new(this._icon), x, y);
+              return Gdk.ContentProvider.new_for_value('value');
+            });
+            this._dragSource.connect('drag-begin', () => {
+              this.opacity = 0;
+            });
+            this._dragSource.connect('drag-end', () => {
+              this.opacity = 1;
+            });
+
+            this.add_controller(this._dragSource);
+
+
+            // For some reason, the drag source does not work anymore once the
+            // ToggleButton was toggled. Resetting the EventController seems to be a
+            // working workaround.
+            this.connect('clicked', () => {
+              this._dragSource.reset();
+            });
           }
 
-          setIcon(icon) {
-            this._iconName = icon;
-            this._content.queue_draw();
+          setConfig(config) {
+            this._config          = config;
+            this._nameLabel.label = config.name;
+
+            this._icon.queue_draw();
+
+            if (config.shortcut) {
+              const [ok, keyval, mods] = Gtk.accelerator_parse(config.shortcut);
+              this._shortcutLabel.label =
+                  '<small>' + Gtk.accelerator_get_label(keyval, mods) + '</small>';
+            } else {
+              this._shortcutLabel.label = '<small>' + _('Not Bound') + '</small>';
+            }
           }
         })
   }
@@ -77,7 +117,7 @@ function registerWidget() {
           'menu-edit':    { param_types: [GObject.TYPE_INT]},
           'menu-reorder': { param_types: [GObject.TYPE_INT, GObject.TYPE_INT]},
           'menu-delete':  { param_types: [GObject.TYPE_INT]},
-          'menu-add':     {},
+          'menu-add':     { param_types: [Gdk.Rectangle.$gtype]},
         },
       },
       class FlyPieMenuEditor extends Gtk.Widget {
@@ -85,8 +125,8 @@ function registerWidget() {
       _init(params = {}) {
         super._init(params);
 
-        this._items        = [];
-        this._selectedItem = null;
+        this._buttons        = [];
+        this._selectedButton = null;
 
         this._menuListMode = true;
       }
@@ -112,8 +152,8 @@ function registerWidget() {
           // all items into three rows. And so on. If the entire vertical space is
           // filled up, we start to shrink the individual items.
           const itemSize    = 128 + 4 + 4;
-          const rows        = Math.ceil(this._items.length * itemSize / width);
-          const itemsPerRow = Math.ceil(this._items.length / rows);
+          const rows        = Math.ceil(this._buttons.length * itemSize / width);
+          const itemsPerRow = Math.ceil(this._buttons.length / rows);
 
           const rowHeights = [];
 
@@ -123,10 +163,10 @@ function registerWidget() {
             for (let c = 0; c < itemsPerRow; c++) {
               const i = r * itemsPerRow + c;
 
-              if (i < this._items.length) {
+              if (i < this._buttons.length) {
                 rowHeight = Math.max(
                     rowHeight,
-                    this._items[i].measure(Gtk.Orientation.VERTICAL, itemSize)[1]);
+                    this._buttons[i].measure(Gtk.Orientation.VERTICAL, itemSize)[1]);
               }
             }
 
@@ -150,7 +190,7 @@ function registerWidget() {
             for (let c = 0; c < itemsPerRow; c++) {
               const i = r * itemsPerRow + c;
 
-              if (i < this._items.length) {
+              if (i < this._buttons.length) {
                 const allocation = new Gdk.Rectangle({
                   x: offsetX + c * itemSize,
                   y: rowStartY,
@@ -158,7 +198,7 @@ function registerWidget() {
                   height: rowHeights[r]
                 });
 
-                this._items[i].size_allocate(allocation, -1);
+                this._buttons[i].size_allocate(allocation, -1);
               }
             }
 
@@ -183,15 +223,15 @@ function registerWidget() {
         super.vfunc_unrealize();
       }
 
-      setItems(icons) {
-        for (let i = 0; i < this._items.length; i++) {
-          this._items[i].unparent();
+      setConfigs(configs) {
+        for (let i = 0; i < this._buttons.length; i++) {
+          this._buttons[i].unparent();
         }
 
-        this._items.length = 0;
-        this._radioGroup   = null;
+        this._buttons.length = 0;
+        this._radioGroup     = null;
 
-        for (let i = 0; i < icons.length; i++) {
+        for (let i = 0; i < configs.length; i++) {
           const button = new FlyPieMenuEditorItem({
             margin_top: 4,
             margin_bottom: 4,
@@ -201,7 +241,7 @@ function registerWidget() {
             height_request: 128,
           });
 
-          button.setIcon(icons[i]);
+          button.setConfig(configs[i]);
           button.set_parent(this);
 
           if (this._radioGroup) {
@@ -221,15 +261,15 @@ function registerWidget() {
 
           button.connect('clicked', (b) => {
             if (b.active) {
-              this._selectedItem = b;
+              this._selectedButton = b;
               this.emit('menu-select', i);
             } else {
-              this._selectedItem = null;
+              this._selectedButton = null;
               this.emit('menu-select', -1);
             }
           });
 
-          this._items.push(button);
+          this._buttons.push(button);
         }
 
         const button          = Gtk.Button.new_from_icon_name('list-add-symbolic');
@@ -243,7 +283,7 @@ function registerWidget() {
         button.set_has_frame(false);
         button.set_parent(this);
 
-        this._items.push(button);
+        this._buttons.push(button);
 
         const controller = new Gtk.EventControllerMotion();
         controller.connect(
@@ -252,17 +292,17 @@ function registerWidget() {
         controller.connect('leave', () => {this._infoLabel.label = ''});
         button.add_controller(controller);
 
-        button.connect('clicked', () => {
-          this.emit('menu-add');
+        button.connect('clicked', (b) => {
+          this.emit('menu-add', b.get_allocation());
         });
 
 
         this.queue_allocate();
       }
 
-      updateSelected(icon) {
-        if (this._selectedItem) {
-          this._selectedItem.setIcon(icon);
+      updateSelected(config) {
+        if (this._selectedButton) {
+          this._selectedButton.setConfig(config);
         }
       }
     });

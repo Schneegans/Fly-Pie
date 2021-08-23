@@ -58,13 +58,13 @@ var MenuEditorPage = class MenuEditorPage {
     this._selectedItem = null;
 
     // Now we initialize several components of the menu editor.
+    this._initEditor();
     this._initAddItemPopover();
     this._initPreviewButton();
     this._initExportImportButtons();
     this._initBreadCrumbs();
     this._initInfoLabel();
     this._initSettingsSidebar();
-    this._initEditor();
 
     // Now that the widgets are set up, we can load the entire menu configuration...
     try {
@@ -128,25 +128,28 @@ var MenuEditorPage = class MenuEditorPage {
 
       // Add the new row either to the menus list or to the actions list.
       if (ItemRegistry.getItemTypes()[type].class == ItemClass.ACTION) {
-        this._builder.get_object('action-types-list').insert(row, -1);
+        this._builder.get_object('add-action-list').insert(row, -1);
       } else {
-        this._builder.get_object('menu-types-list').insert(row, -1);
+        this._builder.get_object('add-menu-list').insert(row, -1);
       }
     }
 
     // Add a new item when one entry of the action-types list it activated.
-    this._builder.get_object('action-types-list')
+    this._builder.get_object('add-action-list')
         .connect('row-activated', (widget, row) => {
           this._addNewItem(row.get_name());
-          this._builder.get_object('item-type-popover').popdown();
+          this._builder.get_object('add-item-popover').popdown();
         });
 
     // Add a new item when one entry of the menu-types list it activated.
-    this._builder.get_object('menu-types-list')
-        .connect('row-activated', (widget, row) => {
-          this._addNewItem(row.get_name());
-          this._builder.get_object('item-type-popover').popdown();
-        });
+    this._builder.get_object('add-menu-list').connect('row-activated', (widget, row) => {
+      this._addNewItem(row.get_name());
+      this._builder.get_object('add-item-popover').popdown();
+    });
+
+    // Set the parent widget of the add-a-new-item popover.
+    const popover = this._builder.get_object('add-item-popover');
+    popover.set_parent(this._editor);
   }
 
   _initExportImportButtons() {
@@ -419,7 +422,7 @@ var MenuEditorPage = class MenuEditorPage {
     // view as well.
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
       this._selectedItem.icon = widget.text;
-      this._editor.updateSelected(widget.text);
+      this._editor.updateSelected(this._selectedItem);
       this._saveMenuConfiguration();
     });
 
@@ -427,6 +430,7 @@ var MenuEditorPage = class MenuEditorPage {
     // changed.this.
     this._builder.get_object('item-name').connect('notify::text', (widget) => {
       this._selectedItem.name = widget.text;
+      this._editor.updateSelected(this._selectedItem);
       this._saveMenuConfiguration();
     });
 
@@ -483,6 +487,7 @@ var MenuEditorPage = class MenuEditorPage {
     {
       const [box, label] = ConfigWidgetFactory.createShortcutLabel(false, (shortcut) => {
         this._selectedItem.shortcut = shortcut;
+        this._editor.updateSelected(this._selectedItem);
         this._saveMenuConfiguration();
       });
       this._builder.get_object('menu-shortcut-box').append(box);
@@ -519,8 +524,13 @@ var MenuEditorPage = class MenuEditorPage {
       utils.debug('menu-delete');
     });
 
-    this._editor.connect('menu-add', () => {
-      utils.debug('menu-add');
+    this._editor.connect('menu-add', (e, rect) => {
+      this._builder.get_object('add-action-list').visible     = false;
+      this._builder.get_object('action-list-heading').visible = false;
+      this._builder.get_object('menu-list-heading').visible   = false;
+      const popover = this._builder.get_object('add-item-popover');
+      popover.set_pointing_to(rect);
+      popover.popup();
     });
   }
 
@@ -548,13 +558,7 @@ var MenuEditorPage = class MenuEditorPage {
   _redraw() {
 
     if (this._menuPath.length == 0) {
-
-      let items = [];
-
-      for (let i = 0; i < this._configs.length; i++) {
-        items.push(this._configs[i].icon);
-      }
-      this._editor.setItems(items);
+      this._editor.setConfigs(this._configs);
 
     } else {
     }
@@ -684,58 +688,43 @@ var MenuEditorPage = class MenuEditorPage {
     this._breadCrumbs.label = label;
   }
 
-  // // This adds a new menu item to the currently selected menu. Items will always be
-  // // inserted as a sibling following the currently selected item. This is except for
-  // // action items added to top-level menus, here we add them as a child.
-  // _addNewItem(newType) {
+  // This adds a new menu item to the currently selected menu. Items will always be
+  // inserted as a sibling following the currently selected item. This is except for
+  // action items added to top-level menus, here we add them as a child.
+  _addNewItem(newType) {
 
-  //   const [ok, model, selected] = this._selection.get_selected();
-  //   let iter;
+    const toplevelSelected = this._menuPath.length == 0;
 
-  //   if (ok) {
-  //     if (this._isToplevelSelected() &&
-  //         ItemRegistry.getItemTypes()[newType].class == ItemClass.ACTION) {
-  //       iter = this._store.append(selected);
-  //     } else {
-  //       iter = this._store.insert_after(null, selected);
-  //     }
-  //   }
-  //   // If nothing is selected, this will only be called for items of the menu class. We
-  //   // add them to the end.
-  //   else {
-  //     iter = this._store.append(null);
-  //   }
+    const newItem = {
+      name: ItemRegistry.getItemTypes()[newType].name,
+      // New Menus will get a random emoji icon. All other items will get a name
+      // and icon according to the item registry.
+      icon: newType == 'CustomMenu' ? this._getRandomEmoji() :
+                                      ItemRegistry.getItemTypes()[newType].icon,
+      type: newType,
+    };
 
-  //   // New Menus will get a random emoji icon. All other items will get a name
-  //   // and icon according to the item registry.
-  //   if (newType == 'CustomMenu') {
-  //     this._set(iter, 'ICON', this._getRandomEmoji());
-  //   } else {
-  //     this._set(iter, 'ICON', ItemRegistry.getItemTypes()[newType].icon);
-  //   }
 
-  //   // Assign a new ID for top-level items.
-  //   if (this._isToplevelSelected()) {
-  //     this._set(iter, 'ID', this._getNewID());
-  //   } else {
-  //     this._set(iter, 'ID', -1);
-  //   }
+    // Assign a new ID for top-level items.
+    if (toplevelSelected) {
+      newItem.id       = this._getNewID();
+      newItem.shortcut = '';
+    }
 
-  //   // Initialize other field to their default values.
-  //   this._set(iter, 'TYPE', newType);
-  //   this._set(iter, 'NAME', ItemRegistry.getItemTypes()[newType].name);
-  //   this._set(iter, 'ANGLE', -1);
-  //   this._set(iter, 'SHORTCUT', '');
+    if (ItemRegistry.getItemTypes()[newType].config != undefined) {
+      newItem.data = ItemRegistry.getItemTypes()[newType].config.defaultData;
+    }
 
-  //   if (ItemRegistry.getItemTypes()[newType].config != undefined) {
-  //     this._set(
-  //         iter, 'DATA',
-  //         JSON.stringify(ItemRegistry.getItemTypes()[newType].config.defaultData));
-  //   }
+    if (toplevelSelected) {
+      this._configs.push(newItem);
+    }
 
-  //   // Store this in our statistics.
-  //   Statistics.getInstance().addItemCreated();
-  // }
+    this._saveMenuConfiguration();
+    this._redraw();
+
+    // Store this in our statistics.
+    Statistics.getInstance().addItemCreated();
+  }
 
 
   // // This asks the user whether she really wants to delete the currently selected item.

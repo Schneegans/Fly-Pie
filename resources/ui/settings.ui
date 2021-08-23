@@ -661,7 +661,7 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
   <!--                                                                                           -->
   <!-- ######################################################################################### -->
 
-  <object class="GtkPopover" id="item-type-popover">
+  <object class="GtkPopover" id="add-item-popover">
     <property name="child">
       <object class="GtkGrid">
         <property name="row_spacing">5</property>
@@ -677,9 +677,9 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                   <object class="GtkBox">
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkListBox" id="menu-types-list">
+                      <object class="GtkListBox" id="add-menu-list">
                         <child>
-                          <object class="GtkListBoxRow">
+                          <object class="GtkListBoxRow" id="menu-list-heading">
                             <property name="name">separator</property>
                             <property name="margin_end">10</property>
                             <property name="activatable">0</property>
@@ -702,10 +702,10 @@ Can be submenus or top-level menus.</property>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkListBox" id="action-types-list">
+                      <object class="GtkListBox" id="add-action-list">
                         <property name="sensitive">0</property>
                         <child>
-                          <object class="GtkListBoxRow">
+                          <object class="GtkListBoxRow" id="action-list-heading">
                             <property name="name">separator</property>
                             <property name="margin_end">10</property>
                             <property name="activatable">0</property>

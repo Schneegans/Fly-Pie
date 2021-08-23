@@ -33,7 +33,7 @@ var menu = {
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.
-  subtitle: _('This can contain actions and other menus.'),
+  subtitle: _('This can contain custom actions and other menus.'),
 
   // This is the (long) description shown when an item of this type is selected.
   description: _(
