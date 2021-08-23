@@ -5093,20 +5093,13 @@ In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&
                         <property name="child">
                           <object class="GtkScrolledWindow">
                             <property name="child">
-                              <object class="GtkViewport">
-                                <property name="child">
-                                  <object class="GtkBox" id="active-achievements-box">
-                                    <property name="width_request">600</property>
-                                    <property name="halign">center</property>
-                                    <property name="valign">start</property>
-                                    <property name="margin_top">30</property>
-                                    <property name="margin_bottom">20</property>
-                                    <property name="orientation">vertical</property>
-                                    <child>
-                                      <placeholder />
-                                    </child>
-                                  </object>
-                                </property>
+                              <object class="GtkBox" id="active-achievements-box">
+                                <property name="width_request">600</property>
+                                <property name="halign">center</property>
+                                <property name="valign">start</property>
+                                <property name="margin_top">30</property>
+                                <property name="margin_bottom">20</property>
+                                <property name="orientation">vertical</property>
                               </object>
                             </property>
                           </object>
