@@ -4577,37 +4577,43 @@ This can be used if you want to capture a video of Fly-Pie.</property>
             <property name="title" translatable="yes" comments="Caption of the menu editor page in the window&apos;s titlebar.">Menu Editor</property>
             <property name="child">
               <object class="GtkBox" id="menu-editor-page">
-                <property name="hexpand">1</property>
-                <property name="vexpand">1</property>
                 <property name="orientation">vertical</property>
 
                 <child>
                   <object class="GtkBox">
-                    <property name="hexpand">1</property>
-                    <property name="vexpand">1</property>
 
                     <child>
-                      <object class="GtkBox">
-                        <property name="hexpand">1</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkLabel" id="menu-editor-breadcrumbs">
-                            <property name="use_markup">1</property>
-                            <property name="margin-top">8</property>
-                            <property name="margin-start">8</property>
-                            <property name="halign">start</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="FlyPieMenuEditor" id="menu-editor">
-                            <property name="vexpand">1</property>
+                      <object class="GtkScrolledWindow">
+                        <property name="hscrollbar_policy">never</property>
+                        <property name="child">
+                          <object class="GtkBox">
                             <property name="hexpand">1</property>
-                            <property name="margin-top">8</property>
-                            <property name="margin-bottom">8</property>
-                            <property name="margin-start">8</property>
-                            <property name="margin-end">8</property>
+                            <property name="orientation">vertical</property>
+                            <child>
+                              <object class="GtkLabel" id="menu-editor-breadcrumbs">
+                                <property name="use_markup">1</property>
+                                <property name="margin-top">8</property>
+                                <property name="margin-start">8</property>
+                                <property name="halign">start</property>
+                                <property name="valign">start</property>
+                                <property name="vexpand">1</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="FlyPieMenuEditor" id="menu-editor">
+                                <property name="margin-top">4</property>
+                                <property name="margin-bottom">4</property>
+                                <property name="margin-start">4</property>
+                                <property name="margin-end">4</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="vexpand">1</property>
+                              </object>
+                            </child>
                           </object>
-                        </child>
+                        </property>
                       </object>
                     </child>
 

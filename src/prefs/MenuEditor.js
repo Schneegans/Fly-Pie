@@ -8,12 +8,13 @@
 
 'use strict';
 
-const {GObject, Gtk, Gio, Gdk} = imports.gi;
+const {GObject, Gtk, Gio, Gdk, Pango} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+const Me            = imports.misc.extensionUtils.getCurrentExtension();
+const utils         = Me.imports.src.common.utils;
+const AnimatedValue = Me.imports.src.prefs.AnimatedValue.AnimatedValue;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This is the canvas where the editable menu is drawn to. It's a custom container      //
@@ -35,13 +36,22 @@ function registerWidget() {
           _init(params = {}) {
             super._init(params);
 
+            this.margin_top    = 4;
+            this.margin_start  = 4;
+            this.margin_end    = 4;
+            this.margin_bottom = 4;
+
             // this.add_css_class('pill-button');
             // this.set_has_frame(false);
+
+            this.x = new AnimatedValue();
+            this.y = new AnimatedValue();
 
             // Create the Gio.Settings object.
             this._settings = utils.createSettings();
 
-            const box = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
+            const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
+            box.vexpand = true;
             this.set_child(box);
 
             this._iconName = 'image-missing';
@@ -60,11 +70,12 @@ function registerWidget() {
             });
             box.append(this._icon);
 
-            this._nameLabel = new Gtk.Label();
+            this._nameLabel = new Gtk.Label({ellipsize: Pango.EllipsizeMode.MIDDLE});
             this._nameLabel.add_css_class('caption-heading');
             box.append(this._nameLabel);
 
-            this._shortcutLabel = new Gtk.Label({use_markup: true});
+            this._shortcutLabel =
+                new Gtk.Label({ellipsize: Pango.EllipsizeMode.MIDDLE, use_markup: true});
             this._shortcutLabel.add_css_class('dim-label');
             box.append(this._shortcutLabel);
 
@@ -125,102 +136,74 @@ function registerWidget() {
       _init(params = {}) {
         super._init(params);
 
+
+
         this._buttons        = [];
         this._selectedButton = null;
 
-        this._menuListMode = true;
+        this._gridMode     = true;
+        this._gridItemSize = 128;
       }
 
-      // We use a hard-coded minimum size of 500 by 500 pixels.
+      vfunc_get_request_mode() {
+        return Gtk.SizeRequestMode.WIDTH_FOR_HEIGHT;
+        // return Gtk.SizeRequestMode.HEIGHT_FOR_WIDTH;
+      }
+
       vfunc_measure(orientation, for_size) {
-        return [500, 500, -1, -1];
+        if (for_size <= 0) {
+          if (orientation == Gtk.Orientation.HORIZONTAL) {
+            return [this._gridItemSize * 4, this._gridItemSize * 4, -1, -1];
+          }
+          return [-1, -1, -1, -1];
+        }
+
+        if (this._gridMode) {
+          const columns = Math.floor(for_size / this._gridItemSize);
+          const rows    = Math.ceil(this._buttons.length / columns);
+
+          const gridSize = rows * this._gridItemSize;
+
+          return [gridSize, gridSize, -1, -1];
+        }
+
+        return [300, 300, -1, -1];
       }
 
       vfunc_size_allocate(width, height, baseline) {
-        const labelHeight = this._infoLabel.measure(Gtk.Orientation.VERTICAL, width)[1];
 
-        const labelAllocation = new Gdk.Rectangle(
-            {x: 0, y: height - labelHeight, width: width, height: labelHeight});
-        this._infoLabel.size_allocate(labelAllocation, -1);
+        if (this._gridMode) {
 
-        if (this._menuListMode) {
+          const columns = Math.floor(width / this._gridItemSize);
+          const rows    = Math.ceil(this._buttons.length / columns);
 
-          // In this mode, we want to arrange the items in a centered grid layout in the
-          // following fashion: At first, each item is assigned a width of 64 pixels. If
-          // the available width is not sufficient to place all items in one row, we
-          // split them evenly in two rows. If there's not enough space again, we split
-          // all items into three rows. And so on. If the entire vertical space is
-          // filled up, we start to shrink the individual items.
-          const itemSize    = 128 + 4 + 4;
-          const rows        = Math.ceil(this._buttons.length * itemSize / width);
-          const itemsPerRow = Math.ceil(this._buttons.length / rows);
+          const offsetX = (width - columns * this._gridItemSize) / 2;
+          const offsetY = (height - rows * this._gridItemSize) / 2;
 
-          const rowHeights = [];
+          let row    = 0;
+          let column = 0;
 
-          for (let r = 0; r < rows; r++) {
-            let rowHeight = 0;
+          for (let i = 0; i < this._buttons.length; i++) {
 
-            for (let c = 0; c < itemsPerRow; c++) {
-              const i = r * itemsPerRow + c;
+            const allocation = new Gdk.Rectangle({
+              x: offsetX + column * this._gridItemSize,
+              y: offsetY + row * this._gridItemSize,
+              width: this._gridItemSize,
+              height: this._gridItemSize
+            });
 
-              if (i < this._buttons.length) {
-                rowHeight = Math.max(
-                    rowHeight,
-                    this._buttons[i].measure(Gtk.Orientation.VERTICAL, itemSize)[1]);
-              }
+            this._buttons[i].size_allocate(allocation, -1);
+
+            column += 1;
+
+            if (column == columns) {
+              row += 1;
+              column = 0;
             }
-
-            rowHeights.push(rowHeight);
           }
-
-          const gridWidth = itemsPerRow * itemSize;
-          let gridHeight  = 0;
-
-          rowHeights.forEach(height => {
-            gridHeight += height;
-          });
-
-
-          const offsetX = Math.floor((width - gridWidth) / 2);
-          const offsetY = Math.max(0, Math.floor((height - gridHeight) / 2));
-
-          let rowStartY = offsetY;
-
-          for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < itemsPerRow; c++) {
-              const i = r * itemsPerRow + c;
-
-              if (i < this._buttons.length) {
-                const allocation = new Gdk.Rectangle({
-                  x: offsetX + c * itemSize,
-                  y: rowStartY,
-                  width: itemSize,
-                  height: rowHeights[r]
-                });
-
-                this._buttons[i].size_allocate(allocation, -1);
-              }
-            }
-
-            rowStartY += rowHeights[r];
-          }
-
 
         } else {
         }
-      }
-
-      vfunc_realize() {
-        this._infoLabel = new Gtk.Label(
-            {margin_bottom: 8, justify: Gtk.Justification.CENTER, use_markup: true});
-        this._infoLabel.add_css_class('dim-label');
-        this._infoLabel.set_parent(this);
-        super.vfunc_realize();
-      }
-
-      vfunc_unrealize() {
-        this._infoLabel.unparent();
-        super.vfunc_unrealize();
       }
 
       setConfigs(configs) {
@@ -232,14 +215,7 @@ function registerWidget() {
         this._radioGroup     = null;
 
         for (let i = 0; i < configs.length; i++) {
-          const button = new FlyPieMenuEditorItem({
-            margin_top: 4,
-            margin_bottom: 4,
-            margin_start: 4,
-            margin_end: 4,
-            width_request: 128,
-            height_request: 128,
-          });
+          const button = new FlyPieMenuEditorItem();
 
           button.setConfig(configs[i]);
           button.set_parent(this);
@@ -249,15 +225,6 @@ function registerWidget() {
           } else {
             this._radioGroup = button;
           }
-
-          const controller = new Gtk.EventControllerMotion();
-          controller.connect(
-              'enter',
-              () => {
-                  this._infoLabel.label = _(
-                      '<b>Click</b> to edit menu properties.\n<b>Double-Click</b> to edit menu items.\n<b>Drag</b> to reorder, move, or delete.')});
-          controller.connect('leave', () => {this._infoLabel.label = ''});
-          button.add_controller(controller);
 
           button.connect('clicked', (b) => {
             if (b.active) {
@@ -272,30 +239,16 @@ function registerWidget() {
           this._buttons.push(button);
         }
 
-        const button          = Gtk.Button.new_from_icon_name('list-add-symbolic');
-        button.margin_top     = 4;
-        button.margin_bottom  = 4;
-        button.margin_start   = 4;
-        button.margin_end     = 4;
-        button.width_request  = 128;
-        button.height_request = 128;
+        const button = Gtk.Button.new_from_icon_name('list-add-symbolic');
         button.add_css_class('pill-button');
         button.set_has_frame(false);
         button.set_parent(this);
 
         this._buttons.push(button);
 
-        const controller = new Gtk.EventControllerMotion();
-        controller.connect(
-            'enter',
-            () => {this._infoLabel.label = _('<b>Click</b> to add a new menu.')});
-        controller.connect('leave', () => {this._infoLabel.label = ''});
-        button.add_controller(controller);
-
         button.connect('clicked', (b) => {
           this.emit('menu-add', b.get_allocation());
         });
-
 
         this.queue_allocate();
       }
