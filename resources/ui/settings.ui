@@ -4583,35 +4583,172 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                   <object class="GtkBox">
 
                     <child>
-                      <object class="GtkScrolledWindow">
-                        <property name="hscrollbar_policy">never</property>
-                        <property name="child">
-                          <object class="GtkBox">
-                            <property name="hexpand">1</property>
-                            <property name="orientation">vertical</property>
-                            <child>
-                              <object class="GtkLabel" id="menu-editor-breadcrumbs">
-                                <property name="use_markup">1</property>
-                                <property name="margin-top">8</property>
-                                <property name="margin-start">8</property>
-                                <property name="halign">start</property>
-                                <property name="valign">start</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="FlyPieMenuEditor" id="menu-editor">
-                                <property name="margin-top">4</property>
-                                <property name="margin-bottom">4</property>
-                                <property name="margin-start">4</property>
-                                <property name="margin-end">4</property>
-                                <property name="vexpand">1</property>
+
+                      <object class="GtkBox">
+                        <property name="hexpand">1</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+
+
+                          <object class="GtkScrolledWindow">
+                            <property name="hscrollbar_policy">never</property>
+                            <property name="child">
+                              <object class="GtkBox">
                                 <property name="hexpand">1</property>
+                                <property name="orientation">vertical</property>
+                                <child>
+                                  <object class="GtkLabel" id="menu-editor-breadcrumbs">
+                                    <property name="use_markup">1</property>
+                                    <property name="margin-top">8</property>
+                                    <property name="margin-bottom">8</property>
+                                    <property name="margin-start">8</property>
+                                    <property name="halign">start</property>
+                                    <property name="valign">start</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="FlyPieMenuEditor" id="menu-editor">
+                                    <property name="overflow">hidden</property>
+                                    <property name="vexpand">1</property>
+                                    <property name="hexpand">1</property>
+                                    <property name="margin-bottom">8</property>
+                                    <property name="margin-start">4</property>
+                                    <property name="margin-end">4</property>
+                                  </object>
+                                </child>
+
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+
+
+                        <child>
+                          <object class="GtkFrame">
+                            <property name="margin-top">0</property>
+                            <property name="margin-bottom">8</property>
+                            <property name="margin-start">8</property>
+                            <property name="margin-end">8</property>
+                            <child>
+                              <object class="GtkBox">
+
+
+                                <child>
+                                  <object class="GtkGrid">
+                                    <property name="hexpand">1</property>
+                                    <property name="margin-top">8</property>
+                                    <property name="margin-bottom">8</property>
+                                    <property name="margin-start">8</property>
+                                    <property name="margin-end">8</property>
+                                    <property name="column_spacing">6</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="icon_name">edit-copy-symbolic</property>
+                                        <property name="pixel_size">24</property>
+                                        <layout>
+                                          <property name="column">0</property>
+                                          <property name="row">0</property>
+                                          <property name="row_span">2</property>
+                                        </layout>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="halign">start</property>
+                                        <property name="valign">center</property>
+                                        <property name="label" translatable="yes">Stash</property>
+                                        <style>
+                                          <class name="caption-heading" />
+                                        </style>
+                                        <layout>
+                                          <property name="column">1</property>
+                                          <property name="row">0</property>
+                                        </layout>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="halign">start</property>
+                                        <property name="valign">center</property>
+                                        <property name="label" translatable="yes">Drop things here to re-use them later!</property>
+                                        <style>
+                                          <class name="dim-label" />
+                                          <class name="caption" />
+                                        </style>
+                                        <layout>
+                                          <property name="column">1</property>
+                                          <property name="row">1</property>
+                                        </layout>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkSeparator"></object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkGrid">
+                                    <property name="margin-top">8</property>
+                                    <property name="margin-bottom">8</property>
+                                    <property name="margin-start">8</property>
+                                    <property name="margin-end">8</property>
+                                    <property name="column_spacing">6</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="icon_name">user-trash-symbolic</property>
+                                        <property name="pixel_size">24</property>
+                                        <layout>
+                                          <property name="column">0</property>
+                                          <property name="row">0</property>
+                                          <property name="row_span">2</property>
+                                        </layout>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="halign">start</property>
+                                        <property name="valign">center</property>
+                                        <property name="label" translatable="yes">Trash</property>
+                                        <style>
+                                          <class name="caption-heading" />
+                                        </style>
+                                        <layout>
+                                          <property name="column">1</property>
+                                          <property name="row">0</property>
+                                        </layout>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="halign">start</property>
+                                        <property name="valign">center</property>
+                                        <property name="label" translatable="yes">Drop things to delete them!</property>
+                                        <style>
+                                          <class name="dim-label" />
+                                          <class name="caption" />
+                                        </style>
+                                        <layout>
+                                          <property name="column">1</property>
+                                          <property name="row">1</property>
+                                        </layout>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+
+
                               </object>
                             </child>
+
                           </object>
-                        </property>
+                        </child>
                       </object>
+
+
                     </child>
+
 
                     <child>
                       <object class="GtkSeparator"></object>

@@ -76,22 +76,46 @@ function registerWidget() {
 
             this._shortcutLabel =
                 new Gtk.Label({ellipsize: Pango.EllipsizeMode.MIDDLE, use_markup: true});
-            this._shortcutLabel.add_css_class('dim-label');
+            this._shortcutLabel.add_css_class('caption');
             box.append(this._shortcutLabel);
 
-            this._dragSource = new Gtk.DragSource();
+            this._dragSource =
+                new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
             this._dragSource.connect('prepare', (s, x, y) => {
               s.set_icon(Gtk.WidgetPaintable.new(this._icon), x, y);
-              return Gdk.ContentProvider.new_for_value('value');
+
+              let value = new GObject.Value();
+              value.init(GObject.TYPE_STRING);
+              value.set_string('huhu');
+
+              return Gdk.ContentProvider.new_for_value(value);
             });
             this._dragSource.connect('drag-begin', () => {
-              this.opacity = 0;
+              this.opacity   = 0.2;
+              this.sensitive = false;
             });
             this._dragSource.connect('drag-end', () => {
-              this.opacity = 1;
+              this.opacity   = 1;
+              this.sensitive = true;
             });
 
             this.add_controller(this._dragSource);
+
+
+            this._dropTarget =
+                new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+            this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
+            this._dropTarget.connect('accept', (t, drop) => {
+              return this._config.type == 'CustomMenu';
+            });
+            this._dropTarget.connect('drop', (t, value, x, y) => {
+              utils.debug('received ' + value);
+              return true;
+            });
+            this._dropTarget.connect('motion', (t, x, y) => {
+              return Gdk.DragAction.MOVE;
+            });
+            this.add_controller(this._dropTarget);
 
 
             // For some reason, the drag source does not work anymore once the
@@ -109,11 +133,10 @@ function registerWidget() {
             this._icon.queue_draw();
 
             if (config.shortcut) {
-              const [ok, keyval, mods] = Gtk.accelerator_parse(config.shortcut);
-              this._shortcutLabel.label =
-                  '<small>' + Gtk.accelerator_get_label(keyval, mods) + '</small>';
+              const [ok, keyval, mods]  = Gtk.accelerator_parse(config.shortcut);
+              this._shortcutLabel.label = Gtk.accelerator_get_label(keyval, mods);
             } else {
-              this._shortcutLabel.label = '<small>' + _('Not Bound') + '</small>';
+              this._shortcutLabel.label = _('Not Bound');
             }
           }
         })
@@ -136,11 +159,60 @@ function registerWidget() {
       _init(params = {}) {
         super._init(params);
 
-        this._buttons         = [];
+        this._buttons      = [];
+        this._gridItemSize = 128;
+        this._gridMode     = true;
+
         this._selectedButton  = null;
         this._lastColumnCount = null;
-        this._gridMode        = true;
-        this._gridItemSize    = 128;
+        this._lastDropColumn  = null;
+        this._lastDropRow     = null;
+
+        this._dropRow    = null;
+        this._dropColumn = null;
+
+        this._dropTarget =
+            new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+        this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
+        this._dropTarget.connect('accept', (t, drop) => {
+          return true;
+        });
+        this._dropTarget.connect('drop', (t, value, x, y) => {
+          utils.debug('received ' + value);
+          this._dropColumn = null;
+          this._dropRow    = null;
+          this.queue_allocate();
+          return true;
+        });
+        // this._dropTarget.connect('enter', (t, x, y) => {
+        //   return Gdk.DragAction.MOVE;
+        // });
+        // this._dropTarget.connect('leave', (t) => {
+        //   utils.debug('hide');
+        // });
+        this._dropTarget.connect('motion', (t, x, y) => {
+          x -= this._gridOffsetX;
+          y -= this._gridOffsetY;
+
+          x = Math.max(0, Math.min(this._columnCount * this._gridItemSize, x));
+          y = Math.max(0, Math.min(this._rowCount * this._gridItemSize, y));
+
+          const dropZoneWidth = this._gridItemSize / 4;
+
+          if (x % this._gridItemSize < dropZoneWidth ||
+              x % this._gridItemSize > this._gridItemSize - dropZoneWidth) {
+            this._dropColumn = Math.floor(x / this._gridItemSize + 0.5);
+            this._dropRow    = Math.floor(y / this._gridItemSize);
+          } else {
+            this._dropColumn = null;
+            this._dropRow    = null;
+          }
+
+          this.queue_allocate();
+
+          return Gdk.DragAction.MOVE;
+        });
+        this.add_controller(this._dropTarget);
       }
 
       vfunc_get_request_mode() {
@@ -185,37 +257,57 @@ function registerWidget() {
 
         if (this._gridMode) {
 
-          const columns     = Math.floor(width / this._gridItemSize);
-          const rows        = Math.ceil(this._buttons.length / columns);
-          const time        = GLib.get_monotonic_time() / 1000;
-          const gridOffsetX = (width - columns * this._gridItemSize) / 2;
-          const gridOffsetY = (height - rows * this._gridItemSize) / 2;
+          this._columnCount = Math.floor(width / this._gridItemSize);
+          this._rowCount    = Math.ceil(this._buttons.length / this._columnCount);
+          this._gridOffsetX = (width - this._columnCount * this._gridItemSize) / 2;
+          this._gridOffsetY = (height - this._rowCount * this._gridItemSize) / 2;
 
+          const time = GLib.get_monotonic_time() / 1000;
 
           let restartAnimation = false;
 
           const firstCall = this._lastColumnCount == undefined;
 
-          if (columns != this._lastColumnCount) {
-            this._lastColumnCount = columns;
+          if (this._columnCount != this._lastColumnCount ||
+              this._dropColumn != this._lastDropColumn ||
+              this._dropRow != this._lastDropRow) {
+            this._lastColumnCount = this._columnCount;
+            this._lastDropRow     = this._dropRow;
+            this._lastDropColumn  = this._dropColumn;
             restartAnimation      = true;
           }
 
           for (let i = 0; i < this._buttons.length; i++) {
 
-            const column = i % columns;
-            const row    = Math.floor(i / columns);
+            const column = i % this._columnCount;
+            const row    = Math.floor(i / this._columnCount);
 
             if (firstCall) {
-              this._buttons[i].x.start = gridOffsetX + column * this._gridItemSize;
-              this._buttons[i].y.start = gridOffsetY + row * this._gridItemSize;
+              this._buttons[i].x.start = this._gridOffsetX + column * this._gridItemSize;
+              this._buttons[i].y.start = this._gridOffsetY + row * this._gridItemSize;
             } else {
               this._buttons[i].x.start = this._buttons[i].x.get(time);
               this._buttons[i].y.start = this._buttons[i].y.get(time);
             }
 
-            this._buttons[i].x.end = gridOffsetX + column * this._gridItemSize;
-            this._buttons[i].y.end = gridOffsetY + row * this._gridItemSize;
+            let dropZoneOffset = 0;
+
+            if (row == this._dropRow) {
+              const range    = 3;
+              const strength = 15;
+
+              if (column < this._dropColumn) {
+                dropZoneOffset =
+                    -Math.max(0, range - (this._dropColumn - column) + 1) * strength;
+              } else {
+                dropZoneOffset =
+                    Math.max(0, range - (column - this._dropColumn)) * strength;
+              }
+            }
+
+            this._buttons[i].x.end =
+                this._gridOffsetX + column * this._gridItemSize + dropZoneOffset;
+            this._buttons[i].y.end = this._gridOffsetY + row * this._gridItemSize;
 
             if (restartAnimation) {
               this._buttons[i].x.startTime = time;
