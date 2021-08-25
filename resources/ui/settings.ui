@@ -4596,7 +4596,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="margin-start">8</property>
                                 <property name="halign">start</property>
                                 <property name="valign">start</property>
-                                <property name="vexpand">1</property>
                               </object>
                             </child>
                             <child>
@@ -4605,11 +4604,8 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="margin-bottom">4</property>
                                 <property name="margin-start">4</property>
                                 <property name="margin-end">4</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
                                 <property name="vexpand">1</property>
+                                <property name="hexpand">1</property>
                               </object>
                             </child>
                           </object>

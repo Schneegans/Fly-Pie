@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {GObject, Gtk, Gio, Gdk, Pango} = imports.gi;
+const {GLib, GObject, Gtk, Gio, Gdk, Pango} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -42,7 +42,7 @@ function registerWidget() {
             this.margin_bottom = 4;
 
             // this.add_css_class('pill-button');
-            // this.set_has_frame(false);
+            this.set_has_frame(false);
 
             this.x = new AnimatedValue();
             this.y = new AnimatedValue();
@@ -136,29 +136,23 @@ function registerWidget() {
       _init(params = {}) {
         super._init(params);
 
-
-
-        this._buttons        = [];
-        this._selectedButton = null;
-
-        this._gridMode     = true;
-        this._gridItemSize = 128;
+        this._buttons         = [];
+        this._selectedButton  = null;
+        this._lastColumnCount = null;
+        this._gridMode        = true;
+        this._gridItemSize    = 128;
       }
 
       vfunc_get_request_mode() {
         return Gtk.SizeRequestMode.WIDTH_FOR_HEIGHT;
-        // return Gtk.SizeRequestMode.HEIGHT_FOR_WIDTH;
       }
 
       vfunc_measure(orientation, for_size) {
-        if (for_size <= 0) {
+        if (this._gridMode) {
           if (orientation == Gtk.Orientation.HORIZONTAL) {
             return [this._gridItemSize * 4, this._gridItemSize * 4, -1, -1];
           }
-          return [-1, -1, -1, -1];
-        }
 
-        if (this._gridMode) {
           const columns = Math.floor(for_size / this._gridItemSize);
           const rows    = Math.ceil(this._buttons.length / columns);
 
@@ -170,37 +164,87 @@ function registerWidget() {
         return [300, 300, -1, -1];
       }
 
+      _updateGrid(time) {
+        for (let i = 0; i < this._buttons.length; i++) {
+          const allocation = new Gdk.Rectangle({
+            x: this._buttons[i].x.get(time),
+            y: this._buttons[i].y.get(time),
+            width: this._gridItemSize,
+            height: this._gridItemSize
+          });
+
+          this._buttons[i].size_allocate(allocation, -1);
+        }
+      }
+
       vfunc_size_allocate(width, height, baseline) {
+
+        if (this._buttons.length == 0) {
+          return;
+        }
 
         if (this._gridMode) {
 
-          const columns = Math.floor(width / this._gridItemSize);
-          const rows    = Math.ceil(this._buttons.length / columns);
+          const columns     = Math.floor(width / this._gridItemSize);
+          const rows        = Math.ceil(this._buttons.length / columns);
+          const time        = GLib.get_monotonic_time() / 1000;
+          const gridOffsetX = (width - columns * this._gridItemSize) / 2;
+          const gridOffsetY = (height - rows * this._gridItemSize) / 2;
 
-          const offsetX = (width - columns * this._gridItemSize) / 2;
-          const offsetY = (height - rows * this._gridItemSize) / 2;
 
-          let row    = 0;
-          let column = 0;
+          let restartAnimation = false;
+
+          const firstCall = this._lastColumnCount == undefined;
+
+          if (columns != this._lastColumnCount) {
+            this._lastColumnCount = columns;
+            restartAnimation      = true;
+          }
 
           for (let i = 0; i < this._buttons.length; i++) {
 
-            const allocation = new Gdk.Rectangle({
-              x: offsetX + column * this._gridItemSize,
-              y: offsetY + row * this._gridItemSize,
-              width: this._gridItemSize,
-              height: this._gridItemSize
-            });
+            const column = i % columns;
+            const row    = Math.floor(i / columns);
 
-            this._buttons[i].size_allocate(allocation, -1);
+            if (firstCall) {
+              this._buttons[i].x.start = gridOffsetX + column * this._gridItemSize;
+              this._buttons[i].y.start = gridOffsetY + row * this._gridItemSize;
+            } else {
+              this._buttons[i].x.start = this._buttons[i].x.get(time);
+              this._buttons[i].y.start = this._buttons[i].y.get(time);
+            }
 
-            column += 1;
+            this._buttons[i].x.end = gridOffsetX + column * this._gridItemSize;
+            this._buttons[i].y.end = gridOffsetY + row * this._gridItemSize;
 
-            if (column == columns) {
-              row += 1;
-              column = 0;
+            if (restartAnimation) {
+              this._buttons[i].x.startTime = time;
+              this._buttons[i].x.endTime   = time + 200;
+              this._buttons[i].y.startTime = time;
+              this._buttons[i].y.endTime   = time + 200;
             }
           }
+
+          if (restartAnimation) {
+            if (this._updateTimeout >= 0) {
+              GLib.source_remove(this._updateTimeout);
+              this._updateTimeout = -1;
+            }
+
+            this._updateTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
+              const time = GLib.get_monotonic_time() / 1000;
+              this._updateGrid(time);
+
+              if (time >= this._buttons[0].x.endTime) {
+                this._updateTimeout = -1;
+                return false;
+              }
+
+              return true;
+            });
+          }
+
+          this._updateGrid(time);
 
         } else {
         }
@@ -242,7 +286,14 @@ function registerWidget() {
         const button = Gtk.Button.new_from_icon_name('list-add-symbolic');
         button.add_css_class('pill-button');
         button.set_has_frame(false);
+        button.set_margin_start(24);
+        button.set_margin_end(24);
+        button.set_margin_top(24);
+        button.set_margin_bottom(24);
         button.set_parent(this);
+
+        button.x = new AnimatedValue();
+        button.y = new AnimatedValue();
 
         this._buttons.push(button);
 
