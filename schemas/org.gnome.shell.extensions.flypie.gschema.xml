@@ -48,7 +48,7 @@
              id="org.gnome.shell.extensions.flypie">
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-    <!--                        Client settings                                        -->
+    <!--                            settings                                           -->
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <key name="menu-configuration" type="s">
@@ -57,9 +57,12 @@
       <description>A JSON representation of all configured menus.</description>
     </key>
 
-    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-    <!--                          Server settings                                      -->
-    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <key name="stashed-items" type="s">
+      <default>"[]"</default>
+      <summary>Stashed Items</summary>
+      <description>A JSON representation of all stashed items.</description>
+    </key>
+
 
     <!-- General Settings -->
 
@@ -782,4 +785,3 @@
 
   </schema>
 </schemalist>
-

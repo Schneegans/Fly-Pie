@@ -4632,53 +4632,70 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                             <child>
                               <object class="GtkBox">
 
-
                                 <child>
-                                  <object class="GtkGrid">
-                                    <property name="hexpand">1</property>
-                                    <property name="margin-top">8</property>
-                                    <property name="margin-bottom">8</property>
-                                    <property name="margin-start">8</property>
-                                    <property name="margin-end">8</property>
-                                    <property name="column_spacing">6</property>
+                                  <object class="GtkScrolledWindow">
                                     <child>
-                                      <object class="GtkImage">
-                                        <property name="icon_name">edit-copy-symbolic</property>
-                                        <property name="pixel_size">24</property>
-                                        <layout>
-                                          <property name="column">0</property>
-                                          <property name="row">0</property>
-                                          <property name="row_span">2</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="halign">start</property>
-                                        <property name="valign">center</property>
-                                        <property name="label" translatable="yes">Stash</property>
-                                        <style>
-                                          <class name="caption-heading" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">1</property>
-                                          <property name="row">0</property>
-                                        </layout>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="halign">start</property>
-                                        <property name="valign">center</property>
-                                        <property name="label" translatable="yes">Drop things here to re-use them later!</property>
-                                        <style>
-                                          <class name="dim-label" />
-                                          <class name="caption" />
-                                        </style>
-                                        <layout>
-                                          <property name="column">1</property>
-                                          <property name="row">1</property>
-                                        </layout>
+                                      <object class="GtkBox" id="menu-editor-stash">
+                                        <child>
+
+                                          <object class="GtkBox" id="menu-editor-stash-content">
+                                            <property name="hexpand">1</property>
+                                            <property name="halign">center</property>
+                                            <property name="visible">0</property>
+                                          </object>
+
+                                        </child>
+                                        <child>
+                                          <object class="GtkGrid" id="menu-editor-stash-label">
+                                            <property name="hexpand">1</property>
+                                            <property name="column_spacing">6</property>
+                                            <child>
+                                              <object class="GtkImage">
+                                                <property name="icon_name">edit-copy-symbolic</property>
+                                                <property name="margin-start">8</property>
+                                                <property name="pixel_size">24</property>
+                                                <layout>
+                                                  <property name="column">0</property>
+                                                  <property name="row">0</property>
+                                                  <property name="row_span">2</property>
+                                                </layout>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="halign">start</property>
+                                                <property name="valign">center</property>
+                                                <property name="margin-top">8</property>
+                                                <property name="margin-end">8</property>
+                                                <property name="label" translatable="yes">Stash</property>
+                                                <style>
+                                                  <class name="caption-heading" />
+                                                </style>
+                                                <layout>
+                                                  <property name="column">1</property>
+                                                  <property name="row">0</property>
+                                                </layout>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="halign">start</property>
+                                                <property name="valign">center</property>
+                                                <property name="margin-bottom">8</property>
+                                                <property name="margin-end">8</property>
+                                                <property name="label" translatable="yes">Store items here and re-use them later.</property>
+                                                <style>
+                                                  <class name="dim-label" />
+                                                  <class name="caption" />
+                                                </style>
+                                                <layout>
+                                                  <property name="column">1</property>
+                                                  <property name="row">1</property>
+                                                </layout>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
                                       </object>
                                     </child>
                                   </object>
@@ -4689,16 +4706,14 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 </child>
 
                                 <child>
-                                  <object class="GtkGrid">
-                                    <property name="margin-top">8</property>
-                                    <property name="margin-bottom">8</property>
-                                    <property name="margin-start">8</property>
-                                    <property name="margin-end">8</property>
+                                  <object class="GtkGrid" id="menu-editor-trash">
+
                                     <property name="column_spacing">6</property>
                                     <child>
                                       <object class="GtkImage">
                                         <property name="icon_name">user-trash-symbolic</property>
                                         <property name="pixel_size">24</property>
+                                        <property name="margin-start">8</property>
                                         <layout>
                                           <property name="column">0</property>
                                           <property name="row">0</property>
@@ -4710,6 +4725,8 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
                                         <property name="valign">center</property>
+                                        <property name="margin-top">8</property>
+                                        <property name="margin-end">8</property>
                                         <property name="label" translatable="yes">Trash</property>
                                         <style>
                                           <class name="caption-heading" />
@@ -4724,7 +4741,9 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
                                         <property name="valign">center</property>
-                                        <property name="label" translatable="yes">Drop things to delete them!</property>
+                                        <property name="margin-end">8</property>
+                                        <property name="margin-bottom">8</property>
+                                        <property name="label" translatable="yes">Drop items here.</property>
                                         <style>
                                           <class name="dim-label" />
                                           <class name="caption" />
@@ -4738,14 +4757,12 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                   </object>
                                 </child>
 
-
                               </object>
                             </child>
 
                           </object>
                         </child>
                       </object>
-
 
                     </child>
 

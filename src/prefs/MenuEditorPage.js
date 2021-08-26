@@ -44,7 +44,7 @@ var MenuEditorPage = class MenuEditorPage {
     // This is later populated with a call to this._loadMenuConfiguration(). It basically
     // contains the content of the 'menu-configuration' settings key as a JavaScript
     // object.
-    this._configs = [];
+    this._menuConfigs = [];
 
     // This array contains references to the nested list of currently edited menus. If no
     // menu is opened for editing, the array is empty. If a menu is opened,
@@ -73,8 +73,22 @@ var MenuEditorPage = class MenuEditorPage {
       utils.debug('Failed to load menu configuration: ' + error);
     }
 
-    // ... and draw the menu overview!
-    this._redraw();
+    // ... and the configuration of all stashed items.
+    try {
+      this._loadStashConfiguration();
+    } catch (error) {
+      utils.debug('Failed to load stash configuration: ' + error);
+    }
+
+    // Then we add all menus to the editor.
+    for (let i = 0; i < this._menuConfigs.length; i++) {
+      this._editor.add(this._menuConfigs[i], i);
+    }
+
+    // And all stashed items to the stash widget.
+    for (let i = 0; i < this._stashedConfigs.length; i++) {
+      this._addStashItem(this._stashedConfigs[i]);
+    }
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -87,7 +101,6 @@ var MenuEditorPage = class MenuEditorPage {
     this._breadCrumbs = this._builder.get_object('menu-editor-breadcrumbs');
     this._breadCrumbs.connect('activate-link', (label, uri) => {
       this._menuPath.length = parseInt(uri);
-      this._redraw();
       return true;
     });
   }
@@ -500,12 +513,12 @@ var MenuEditorPage = class MenuEditorPage {
     this._editor = this._builder.get_object('menu-editor');
 
     this._editor.connect('select', (e, which) => {
-      const somethingSelected = which >= 0 && which < this._configs.length;
+      const somethingSelected = which >= 0 && which < this._menuConfigs.length;
       this._builder.get_object('preview-menu-button').sensitive       = somethingSelected;
       this._builder.get_object('item-settings-revealer').reveal_child = somethingSelected;
 
       if (somethingSelected) {
-        this._selectedItem = this._configs[which];
+        this._selectedItem = this._menuConfigs[which];
         this._updateSidebar(this._selectedItem);
       } else {
         this._selectedItem = null;
@@ -513,18 +526,27 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     this._editor.connect('edit', (e, which) => {
-      utils.debug('edit');
+      utils.debug('edit ' + which);
     });
 
-    this._editor.connect('move', (e, from, to) => {
-      utils.debug('move');
+    this._editor.connect('remove', (e, which) => {
+      this._editor.remove(which);
+      this._menuConfigs.splice(which, 1);
+      this._saveMenuConfiguration();
     });
 
-    this._editor.connect('delete', (e, which) => {
-      utils.debug('delete');
+    this._editor.connect('add', (e, what, where) => {
+      const config = JSON.parse(what);
+      this._editor.add(config, where);
+      this._menuConfigs.splice(where, 0, config);
+      this._saveMenuConfiguration();
     });
 
-    this._editor.connect('add', (e, rect) => {
+    this._editor.connect('add-into', (e, what, where) => {
+      utils.debug('add ' + what + ' into ' + where);
+    });
+
+    this._editor.connect('request-add', (e, rect) => {
       this._builder.get_object('add-action-list').visible     = false;
       this._builder.get_object('action-list-heading').visible = false;
       this._builder.get_object('menu-list-heading').visible   = false;
@@ -532,6 +554,39 @@ var MenuEditorPage = class MenuEditorPage {
       popover.set_pointing_to(rect);
       popover.popup();
     });
+
+    {
+      const trash = this._builder.get_object('menu-editor-trash');
+      const dropTarget =
+          new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+      dropTarget.set_gtypes([GObject.TYPE_STRING]);
+      dropTarget.connect('drop', (t, value) => {
+        utils.debug('Trashed ' + value);
+        return true;
+      });
+      dropTarget.connect('motion', () => {
+        return Gdk.DragAction.MOVE;
+      });
+      trash.add_controller(dropTarget);
+    }
+
+    {
+      const stash = this._builder.get_object('menu-editor-stash');
+      const dropTarget =
+          new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+      dropTarget.set_gtypes([GObject.TYPE_STRING]);
+      dropTarget.connect('drop', (t, value) => {
+        const config = JSON.parse(value);
+        this._stashedConfigs.push(config);
+        this._addStashItem(config);
+        this._saveStashConfiguration();
+        return true;
+      });
+      dropTarget.connect('motion', () => {
+        return Gdk.DragAction.MOVE;
+      });
+      stash.add_controller(dropTarget);
+    }
   }
 
 
@@ -541,29 +596,33 @@ var MenuEditorPage = class MenuEditorPage {
   _loadMenuConfiguration() {
 
     // Load the menu configuration in the JSON format.
-    this._configs = JSON.parse(this._settings.get_string('menu-configuration'));
+    this._menuConfigs = JSON.parse(this._settings.get_string('menu-configuration'));
 
-    for (let i = 0; i < this._configs.length; i++) {
+    for (let i = 0; i < this._menuConfigs.length; i++) {
 
       // Make sure that all fields of the menu config are initialized to sane defaults.
-      ItemRegistry.normalizeConfig(this._configs[i]);
+      ItemRegistry.normalizeConfig(this._menuConfigs[i]);
 
       // If, for some reason, no ID is assigned to a menu, generate a new one.
-      if (this._configs[i].id == undefined) {
-        this._configs[i].id = this._getNewID();
+      if (this._menuConfigs[i].id == undefined) {
+        this._menuConfigs[i].id = this._getNewID();
       }
     }
   }
 
-  _redraw() {
+  // This is called once initially and loads the JSON item configurations from the
+  // settings key "stashed-items". This may throw an exception if the stored item
+  // configuration is invalid.
+  _loadStashConfiguration() {
 
-    if (this._menuPath.length == 0) {
-      this._editor.setConfigs(this._configs);
+    // Load the menu configuration in the JSON format.
+    this._stashedConfigs = JSON.parse(this._settings.get_string('stashed-items'));
 
-    } else {
+    for (let i = 0; i < this._stashedConfigs.length; i++) {
+
+      // Make sure that all fields of the menu config are initialized to sane defaults.
+      ItemRegistry.normalizeConfig(this._stashedConfigs[i]);
     }
-
-    this._updateBreadCrumbs();
   }
 
   // When the currently selected menu item changes, the content of the settings
@@ -621,26 +680,13 @@ var MenuEditorPage = class MenuEditorPage {
       // widget for the selected type.
       if (config) {
 
-        // To populate the new configuration widget with data, we retrieve the data from
-        // the tree store's data column. This **should** be a JSON string, but if
-        // someone tries to load a config from Fly-Pie 4 or older, this may not be the
-        // case. So we print a warning in this case.
-        let data = item.data;
-        try {
-          data = JSON.parse(data);
-        } catch (error) {
-          utils.debug(
-              'Warning: Invalid configuration data is stored for the selected item: ' +
-              error);
-        }
-
         // Then we create and add the new configuration widget. The callback will be
-        // fired when the user changes the data. "data" will contain an object which    is
-        // to be stored as JSON string, optionally the name and icon of the currently
-        // selected item can be changed as well (e.g. when an application is selected,
-        // we want to change the item's name and icon accordingly).
-        const newChild = config.getWidget(data, (data, name, icon) => {
-          this._setSelected('DATA', JSON.stringify(data));
+        // fired when the user changes the data. "data" will contain an object with custom
+        // properties, optionally the name and icon of the currently selected item can be
+        // changed as well (e.g. when an application is selected, we want to change the
+        // item's name and icon accordingly).
+        const newChild = config.getWidget(item.data, (data, name, icon) => {
+          this._selectedItem.data = data;
 
           if (name) {
             this._builder.get_object('item-name').text = name;
@@ -649,6 +695,8 @@ var MenuEditorPage = class MenuEditorPage {
           if (icon) {
             this._builder.get_object('icon-name').text = icon;
           }
+
+          this._saveMenuConfiguration();
         });
 
         revealer.set_child(newChild);
@@ -716,141 +764,71 @@ var MenuEditorPage = class MenuEditorPage {
     }
 
     if (toplevelSelected) {
-      this._configs.push(newItem);
+      this._menuConfigs.push(newItem);
     }
 
+    this._editor.add(newItem, this._menuConfigs.length - 1);
     this._saveMenuConfiguration();
-    this._redraw();
 
     // Store this in our statistics.
     Statistics.getInstance().addItemCreated();
   }
 
+  _addStashItem(config) {
+    this._builder.get_object('menu-editor-stash-label').visible   = false;
+    this._builder.get_object('menu-editor-stash-content').visible = true;
 
-  // // This asks the user whether she really wants to delete the currently selected item.
-  // If
-  // // so, it is actually deleted, else nothing is done.
-  // _deleteSelected() {
-  //   // Nothing to be done if nothing is selected.
-  //   if (!this._selection.get_selected()[0]) {
-  //     return;
-  //   }
+    const item  = new Gtk.DrawingArea({
+      content_width: 32,
+      content_height: 32,
+      valign: Gtk.Align.CENTER,
+      margin_top: 4,
+      margin_bottom: 4,
+      margin_start: 4,
+      margin_end: 4,
+      tooltip_text: config.name
+    });
+    item.config = config;
+    item.set_draw_func((widget, ctx) => {
+      const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+      const font  = this._settings.get_string('font');
+      const color = widget.get_style_context().get_color();
+      utils.paintIcon(ctx, widget.config.icon, size, 1, font, color);
+      return false;
+    });
+    this._builder.get_object('menu-editor-stash-content').append(item);
 
-  //   // Create the question dialog.
-  //   const dialog = new Gtk.MessageDialog({
-  //     transient_for: this._builder.get_object('main-notebook').get_root(),
-  //     modal: true,
-  //     buttons: Gtk.ButtonsType.OK_CANCEL,
-  //     message_type: Gtk.MessageType.QUESTION,
-  //     text: _('Delete the selected item?'),
-  //     secondary_text: _('This cannot be undone!')
-  //   });
+    const dragSource =
+        new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+    dragSource.connect('prepare', (s, x, y) => {
+      s.set_icon(Gtk.WidgetPaintable.new(item), x, y);
+      return Gdk.ContentProvider.new_for_value(JSON.stringify(config));
+    });
+    dragSource.connect('drag-begin', () => {
+      item.opacity = 0.2;
+    });
+    dragSource.connect('drag-end', (s, drag, deleteData) => {
+      if (deleteData) {
+        let removeIndex = this._stashedConfigs.indexOf(config);
+        this._stashedConfigs.splice(removeIndex, 1);
+        item.unparent();
+        this._saveStashConfiguration();
 
-  //   // Delete the item on a positive response.
-  //   dialog.connect('response', (dialog, id) => {
-  //     if (id == Gtk.ResponseType.OK) {
-  //       const [ok, model, iter] = this._selection.get_selected();
-  //       if (ok) {
-  //         model.remove(iter);
+        if (this._stashedConfigs.length == 0) {
+          this._builder.get_object('menu-editor-stash-label').visible   = true;
+          this._builder.get_object('menu-editor-stash-content').visible = false;
+        }
+      } else {
+        item.opacity = 1;
+      }
+    });
+    dragSource.connect('drag-cancel', (s, drag, reason) => {
+      item.opacity = 1;
+      return false;
+    });
 
-  //         // Save the menu configuration.
-  //         this._saveMenuConfiguration();
-
-  //         // If this was the last menu item, store this in our statistics.
-  //         if (!model.get_iter_first()[0]) {
-  //           Statistics.getInstance().addDeletedAllMenus();
-  //         }
-  //       }
-  //     }
-  //     dialog.destroy();
-  //   });
-
-  //   dialog.show();
-  // }
-
-
-  // // Sets the column data of the row identified by iter. The column should be the name
-  // // of the column - that is for example "ICON", "ANGLE", or "TYPE". This function will
-  // // automatically set the values of "DISPLAY_ICON", "DISPLAY_ANGLE", and
-  // "DISPLAY_NAME"
-  // // when "ICON", "ANGLE", "NAME", or "DATA" are set. Furthermore, it will
-  // automatically
-  // // save a JSON representation of the entire menu store to the "menu-configuration"
-  // // Gio.Settings key of this application.
-  // _set(iter, column, data) {
-
-  //   const isDataColumn =
-  //       column != 'DISPLAY_ICON' && column != 'DISPLAY_ANGLE' && column !=
-  //       'DISPLAY_NAME';
-
-  //   // First, store the given value.
-  //   this._store.set_value(iter, this._store.columns[column], data);
-
-  //   // If the icon, was set, update the "DISPLAY_ICON" as well.
-  //   if (column == 'ICON') {
-  //     let iconSize = this._isToplevel(iter) ? 24 : 16;
-  //     const font   = this._settings.get_string('font');
-  //     const color  = this._view.get_style_context().get_color();
-  //     this._set(
-  //         iter, 'DISPLAY_ICON',
-  //         Gdk.pixbuf_get_from_surface(
-  //             utils.createIcon(data, iconSize, font, color), 0, 0, iconSize,
-  //             iconSize));
-  //   }
-
-  //   // If the angle, was set, update the "DISPLAY_ANGLE" as well. For top-level menus,
-  //   // this field contains the menu ID, so we update the DISPLAY_ANGLE only for
-  //   // non-top-level menus.
-  //   if (column == 'ANGLE') {
-  //     if (!this._isToplevel(iter)) {
-  //       this._set(iter, 'DISPLAY_ANGLE', data >= 0 ? data : '');
-  //     }
-  //   }
-
-  //   // If the name, was set, update the "DISPLAY_NAME" as well. If iter refers to a
-  //   // top-level menu, the display name contains the shortcut.
-  //   if (column == 'NAME') {
-  //     if (this._isToplevel(iter)) {
-  //       let shortcut      = _('Not bound.');
-  //       const accelerator = this._get(iter, 'SHORTCUT');
-  //       if (accelerator) {
-  //         const [ok, keyval, mods] = Gtk.accelerator_parse(accelerator);
-  //         shortcut                 = Gtk.accelerator_get_label(keyval, mods);
-  //       }
-  //       this._set(
-  //           iter, 'DISPLAY_NAME',
-  //           '<b>' + GLib.markup_escape_text(data, -1) + '</b>\n<small>' +
-  //               GLib.markup_escape_text(shortcut, -1) + '</small>');
-  //     } else {
-  //       this._set(iter, 'DISPLAY_NAME', GLib.markup_escape_text(data, -1));
-  //     }
-  //   }
-
-  //   // If the data column was set on a top-level menu, we need to update the
-  //   // "DISPLAY_NAME" as well, as the shortcut is displayed in the cellrenderer.
-  //   if (column == 'SHORTCUT') {
-  //     if (this._isToplevel(iter)) {
-  //       let shortcut = _('Not bound.');
-  //       if (data != '') {
-  //         const [ok, keyval, mods] = Gtk.accelerator_parse(data);
-  //         shortcut                 = Gtk.accelerator_get_label(keyval, mods);
-  //       }
-  //       const name = this._get(iter, 'NAME');
-  //       this._set(
-  //           iter, 'DISPLAY_NAME',
-  //           '<b>' + GLib.markup_escape_text(name, -1) + '</b>\n<small>' +
-  //               GLib.markup_escape_text(shortcut, -1) + '</small>');
-  //     }
-  //   }
-
-  //   // If loading has finished, any modifications to the tree store are directly
-  //   committed
-  //   // to the "menu-configuration" settings key.
-  //   if (isDataColumn && this._menuSavingAllowed) {
-  //     this._saveMenuConfiguration();
-  //   }
-  // }
-
+    item.add_controller(dragSource);
+  }
 
   // This is a little helper to make creating new menus more fun. New menus
   // will get a random emoji as a icon!
@@ -872,8 +850,8 @@ var MenuEditorPage = class MenuEditorPage {
       ++newID;
       isInUse = false;
 
-      for (let i = 0; i < this._configs.length; i++) {
-        if (this._configs[i].id != undefined && this._configs[i].id == newID) {
+      for (let i = 0; i < this._menuConfigs.length; i++) {
+        if (this._menuConfigs[i].id != undefined && this._menuConfigs[i].id == newID) {
           isInUse = true;
           break;
         }
@@ -901,7 +879,29 @@ var MenuEditorPage = class MenuEditorPage {
       this._saveSettingsTimeout = null;
 
       // Save the configuration as JSON!
-      this._settings.set_string('menu-configuration', JSON.stringify(this._configs));
+      this._settings.set_string('menu-configuration', JSON.stringify(this._menuConfigs));
+
+      return false;
+    });
+  }
+
+  // This stores a JSON representation of the currently stashed items in the
+  // "stashed-items" key of the application settings. It does not update the settings
+  // instantaneously, it rather waits a few milliseconds for any additional changes.
+  _saveStashConfiguration() {
+
+    // The configuration changed again. Cancel any pending save tasks...
+    if (this._saveStashTimeout != null) {
+      GLib.source_remove(this._saveStashTimeout);
+      this._saveStashTimeout = null;
+    }
+
+    // ... and launch a new one.
+    this._saveStashTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
+      this._saveStashTimeout = null;
+
+      // Save the configuration as JSON!
+      this._settings.set_string('stashed-items', JSON.stringify(this._stashedConfigs));
 
       return false;
     });
