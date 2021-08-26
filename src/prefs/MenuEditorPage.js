@@ -499,7 +499,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     this._editor = this._builder.get_object('menu-editor');
 
-    this._editor.connect('menu-select', (e, which) => {
+    this._editor.connect('select', (e, which) => {
       const somethingSelected = which >= 0 && which < this._configs.length;
       this._builder.get_object('preview-menu-button').sensitive       = somethingSelected;
       this._builder.get_object('item-settings-revealer').reveal_child = somethingSelected;
@@ -512,19 +512,19 @@ var MenuEditorPage = class MenuEditorPage {
       }
     });
 
-    this._editor.connect('menu-edit', (e, which) => {
-      utils.debug('menu-edit');
+    this._editor.connect('edit', (e, which) => {
+      utils.debug('edit');
     });
 
-    this._editor.connect('menu-reorder', (e, from, to) => {
-      utils.debug('menu-reorder');
+    this._editor.connect('move', (e, from, to) => {
+      utils.debug('move');
     });
 
-    this._editor.connect('menu-delete', (e, which) => {
-      utils.debug('menu-delete');
+    this._editor.connect('delete', (e, which) => {
+      utils.debug('delete');
     });
 
-    this._editor.connect('menu-add', (e, rect) => {
+    this._editor.connect('add', (e, rect) => {
       this._builder.get_object('add-action-list').visible     = false;
       this._builder.get_object('action-list-heading').visible = false;
       this._builder.get_object('menu-list-heading').visible   = false;

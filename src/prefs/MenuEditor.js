@@ -78,52 +78,6 @@ function registerWidget() {
                 new Gtk.Label({ellipsize: Pango.EllipsizeMode.MIDDLE, use_markup: true});
             this._shortcutLabel.add_css_class('caption');
             box.append(this._shortcutLabel);
-
-            this._dragSource =
-                new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-            this._dragSource.connect('prepare', (s, x, y) => {
-              s.set_icon(Gtk.WidgetPaintable.new(this._icon), x, y);
-
-              let value = new GObject.Value();
-              value.init(GObject.TYPE_STRING);
-              value.set_string('huhu');
-
-              return Gdk.ContentProvider.new_for_value(value);
-            });
-            this._dragSource.connect('drag-begin', () => {
-              this.opacity   = 0.2;
-              this.sensitive = false;
-            });
-            this._dragSource.connect('drag-end', () => {
-              this.opacity   = 1;
-              this.sensitive = true;
-            });
-
-            this.add_controller(this._dragSource);
-
-
-            this._dropTarget =
-                new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-            this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
-            this._dropTarget.connect('accept', (t, drop) => {
-              return this._config.type == 'CustomMenu';
-            });
-            this._dropTarget.connect('drop', (t, value, x, y) => {
-              utils.debug('received ' + value);
-              return true;
-            });
-            this._dropTarget.connect('motion', (t, x, y) => {
-              return Gdk.DragAction.MOVE;
-            });
-            this.add_controller(this._dropTarget);
-
-
-            // For some reason, the drag source does not work anymore once the
-            // ToggleButton was toggled. Resetting the EventController seems to be a
-            // working workaround.
-            this.connect('clicked', () => {
-              this._dragSource.reset();
-            });
           }
 
           setConfig(config) {
@@ -139,6 +93,14 @@ function registerWidget() {
               this._shortcutLabel.label = _('Not Bound');
             }
           }
+
+          getConfig() {
+            return this._config;
+          }
+
+          getIconWidget() {
+            return this._icon;
+          }
         })
   }
 
@@ -147,11 +109,14 @@ function registerWidget() {
       GObject.registerClass({
         GTypeName: 'FlyPieMenuEditor',
         Signals: {
-          'menu-select':  { param_types: [GObject.TYPE_INT]},
-          'menu-edit':    { param_types: [GObject.TYPE_INT]},
-          'menu-reorder': { param_types: [GObject.TYPE_INT, GObject.TYPE_INT]},
-          'menu-delete':  { param_types: [GObject.TYPE_INT]},
-          'menu-add':     { param_types: [Gdk.Rectangle.$gtype]},
+          'select':    { param_types: [GObject.TYPE_INT]},
+          'edit':      { param_types: [GObject.TYPE_INT]},
+          'delete':    { param_types: [GObject.TYPE_INT]},
+          'add':       { param_types: [Gdk.Rectangle.$gtype]},
+          'move':      { param_types: [GObject.TYPE_INT, GObject.TYPE_INT]},
+          'copy':      { param_types: [GObject.TYPE_INT, GObject.TYPE_INT]},
+          'move-into': { param_types: [GObject.TYPE_INT, GObject.TYPE_INT]},
+          'copy-into': { param_types: [GObject.TYPE_INT, GObject.TYPE_INT]},
         },
       },
       class FlyPieMenuEditor extends Gtk.Widget {
@@ -362,13 +327,57 @@ function registerWidget() {
             this._radioGroup = button;
           }
 
+
+          const dragSource =
+              new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+          dragSource.connect('prepare', (s, x, y) => {
+            s.set_icon(Gtk.WidgetPaintable.new(button.getIconWidget()), x, y);
+
+            let value = new GObject.Value();
+            value.init(GObject.TYPE_STRING);
+            value.set_string('huhu');
+
+            return Gdk.ContentProvider.new_for_value(value);
+          });
+          dragSource.connect('drag-begin', () => {
+            button.opacity   = 0.2;
+            button.sensitive = false;
+          });
+          dragSource.connect('drag-end', () => {
+            button.opacity   = 1;
+            button.sensitive = true;
+          });
+
+          button.add_controller(dragSource);
+
+
+          const dropTarget =
+              new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+          dropTarget.set_gtypes([GObject.TYPE_STRING]);
+          dropTarget.connect('accept', (t, drop) => {
+            return button.getConfig().type == 'CustomMenu';
+          });
+          dropTarget.connect('drop', (t, value, x, y) => {
+            utils.debug('received ' + value);
+            return true;
+          });
+          dropTarget.connect('motion', (t, x, y) => {
+            return Gdk.DragAction.MOVE;
+          });
+          button.add_controller(dropTarget);
+
           button.connect('clicked', (b) => {
+            // For some reason, the drag source does not work anymore once the
+            // ToggleButton was toggled. Resetting the EventController seems to be a
+            // working workaround.
+            dragSource.reset();
+
             if (b.active) {
               this._selectedButton = b;
-              this.emit('menu-select', i);
+              this.emit('select', i);
             } else {
               this._selectedButton = null;
-              this.emit('menu-select', -1);
+              this.emit('select', -1);
             }
           });
 
@@ -390,7 +399,7 @@ function registerWidget() {
         this._buttons.push(button);
 
         button.connect('clicked', (b) => {
-          this.emit('menu-add', b.get_allocation());
+          this.emit('add', b.get_allocation());
         });
 
         this.queue_allocate();
