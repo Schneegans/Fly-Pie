@@ -332,6 +332,15 @@ function registerWidget() {
           this._radioGroup = button;
         }
 
+        const longPress = new Gtk.GestureLongPress();
+        longPress.connect('pressed', () => {
+          if (button.getConfig().type == 'CustomMenu') {
+            this.emit('edit', this._buttons.indexOf(button));
+            button.emit('activate');
+          }
+        });
+        button.add_controller(longPress);
+
         const dragSource =
             new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
         dragSource.connect('prepare', (s, x, y) => {
@@ -390,6 +399,7 @@ function registerWidget() {
           // ToggleButton was toggled. Resetting the EventController seems to be a
           // working workaround.
           dragSource.reset();
+          longPress.reset();
 
           if (b.active) {
             this._selectedButton = b;
@@ -399,6 +409,8 @@ function registerWidget() {
             this.emit('select', -1);
           }
         });
+
+
 
         this._buttons.splice(where, 0, button);
 

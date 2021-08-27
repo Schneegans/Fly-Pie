@@ -62,7 +62,6 @@ var MenuEditorPage = class MenuEditorPage {
     this._initAddItemPopover();
     this._initPreviewButton();
     this._initExportImportButtons();
-    this._initBreadCrumbs();
     this._initInfoLabel();
     this._initSettingsSidebar();
 
@@ -89,21 +88,11 @@ var MenuEditorPage = class MenuEditorPage {
     for (let i = 0; i < this._stashedConfigs.length; i++) {
       this._addStashItem(this._stashedConfigs[i]);
     }
+
+    this._updateBreadCrumbs();
   }
 
   // ----------------------------------------------------------------------- private stuff
-
-
-  // The breadcrumbs are an GtkLabel that shows the current selection chain and allows for
-  // back navigation. Each item is a clickable link, the URI contains an integer to which
-  // the length of the selection chain must be truncated in order to select it.
-  _initBreadCrumbs() {
-    this._breadCrumbs = this._builder.get_object('menu-editor-breadcrumbs');
-    this._breadCrumbs.connect('activate-link', (label, uri) => {
-      this._menuPath.length = parseInt(uri);
-      return true;
-    });
-  }
 
   _initAddItemPopover() {
 
@@ -526,7 +515,10 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     this._editor.connect('edit', (e, which) => {
-      utils.debug('edit ' + which);
+      this._selectedItem = this._menuConfigs[which];
+      this._menuPath.push(this._selectedItem);
+      this._updateSidebar(this._selectedItem);
+      this._updateBreadCrumbs();
     });
 
     this._editor.connect('remove', (e, which) => {
@@ -560,13 +552,8 @@ var MenuEditorPage = class MenuEditorPage {
       const dropTarget =
           new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
       dropTarget.set_gtypes([GObject.TYPE_STRING]);
-      dropTarget.connect('drop', (t, value) => {
-        utils.debug('Trashed ' + value);
-        return true;
-      });
-      dropTarget.connect('motion', () => {
-        return Gdk.DragAction.MOVE;
-      });
+      dropTarget.connect('drop', () => true);
+      dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
       trash.add_controller(dropTarget);
     }
 
@@ -582,9 +569,7 @@ var MenuEditorPage = class MenuEditorPage {
         this._saveStashConfiguration();
         return true;
       });
-      dropTarget.connect('motion', () => {
-        return Gdk.DragAction.MOVE;
-      });
+      dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
       stash.add_controller(dropTarget);
     }
   }
@@ -704,36 +689,37 @@ var MenuEditorPage = class MenuEditorPage {
     }
   }
 
-  // This updates the bread crumbs at the top of the menu editor. They show the current
-  // selection chain and allow for navigating to parent levels.
+  // This updates the menu path visualization at the top of the menu editor. It shows the
+  // current selection chain and allow for navigating to parent levels.
   _updateBreadCrumbs() {
 
-    // Hide the bread crumbs if nothing is selected.
-    if (this._menuPath.length == 0) {
-      this._breadCrumbs.label = '';
-      return;
+    const container = this._builder.get_object('menu-editor-breadcrumbs');
+
+    // Clear the container first.
+    while (container.get_first_child() != null) {
+      container.remove(container.get_first_child());
     }
 
+    const button = new Gtk.Button();
+    button.add_css_class('menu-editor-path-item');
+    const box = new Gtk.Box();
     // Translators: The left-most item of the menu editor bread crumbs.
-    let label = _('All Menus');
+    const label = new Gtk.Label({label: _('All Menus')});
+    const icon  = new Gtk.Image({icon_name: 'go-home-symbolic', margin_end: 4});
+    box.append(icon);
+    box.append(label);
+    button.set_child(box);
 
-    // Make it clickable if it's not the last item.
-    if (this._menuPath.length > 0) {
-      label = '<a href="0">' + label + '</a>';
-    }
+    container.append(button);
 
     for (let i = 0; i < this._menuPath.length; i++) {
-      const item = this._menuPath[i];
-
-      // Make it only clickable if it's not the last item.
-      if (i + 1 < this._menuPath.length) {
-        label += ` » <a href="${i + 1}">` + item.name + '</a>';
-      } else {
-        label += ' » ' + item.name;
-      }
+      const item   = this._menuPath[i];
+      const label  = new Gtk.Label({label: item.name});
+      const button = new Gtk.Button();
+      button.add_css_class('menu-editor-path-item');
+      button.set_child(label);
+      container.append(button);
     }
-
-    this._breadCrumbs.label = label;
   }
 
   // This adds a new menu item to the currently selected menu. Items will always be

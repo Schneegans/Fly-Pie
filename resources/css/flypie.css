@@ -24,3 +24,10 @@
     border-radius: 5px;
     padding: 0px 8px;
 }
+
+.menu-editor-path-item {
+    border-radius: 0;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+}
