@@ -56,6 +56,11 @@ var AnimatedValue = GObject.registerClass({
     super._init(params);
   }
 
+  // Returns true if the given time is past the end time of this.
+  isFinished(time) {
+    return time > this.endTime;
+  }
+
   // Gives back an interpolated result according to the current settings and
   // given time.
   get(time) {

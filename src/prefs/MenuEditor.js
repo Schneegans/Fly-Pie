@@ -232,7 +232,7 @@ function registerWidget() {
       }
 
       vfunc_measure(orientation, for_size) {
-        if (this._items.length == 1) {
+        if (this._inMenuOverviewMode()) {
           if (orientation == Gtk.Orientation.HORIZONTAL) {
             return [this._gridItemSize * 4, this._gridItemSize * 4, -1, -1];
           }
@@ -250,23 +250,45 @@ function registerWidget() {
 
       vfunc_size_allocate(width, height, baseline) {
 
+        const setAnimation = (item, time, startX, startY, endX, endY) => {
+          if (item.x == undefined) {
+            item.x       = new AnimatedValue();
+            item.y       = new AnimatedValue();
+            item.x.start = startX;
+            item.y.start = startY;
+          } else if (this._restartAnimation) {
+            item.x.start = item.x.get(time);
+            item.y.start = item.y.get(time);
+          }
+          item.x.end = endX;
+          item.y.end = endY;
+
+          if (this._restartAnimation) {
+            item.x.startTime = time;
+            item.x.endTime   = time + 200;
+            item.y.startTime = time;
+            item.y.endTime   = time + 200;
+          }
+        };
+
         if (this._items.length == 0) {
           return;
         }
 
-        const time = GLib.get_monotonic_time() / 1000;
+        const time  = GLib.get_monotonic_time() / 1000;
+        const items = this._getCurrentItems();
 
-        if (this._items.length == 1) {
+        if (this._inMenuOverviewMode()) {
 
-          if (this._items[0].length == 0) {
+          if (items.length == 0) {
             return;
           }
 
           this._columnCount = Math.floor(width / this._gridItemSize);
-          this._rowCount    = Math.ceil(this._items[0].length / this._columnCount);
+          this._rowCount    = Math.ceil(items.length / this._columnCount);
 
           if (this._rowCount == 1) {
-            this._columnCount = this._items[0].length;
+            this._columnCount = items.length;
           }
 
           this._gridOffsetX = (width - this._columnCount * this._gridItemSize) / 2;
@@ -281,21 +303,10 @@ function registerWidget() {
             this._restartAnimation = true;
           }
 
-          for (let i = 0; i < this._items[0].length; i++) {
+          for (let i = 0; i < items.length; i++) {
 
             const column = i % this._columnCount;
             const row    = Math.floor(i / this._columnCount);
-
-            if (this._items[0][i].x == undefined) {
-              this._items[0][i].x       = new AnimatedValue();
-              this._items[0][i].y       = new AnimatedValue();
-              this._items[0][i].x.start = this._gridOffsetX +
-                  column * this._gridItemSize - this._gridItemSize / 2;
-              this._items[0][i].y.start = this._gridOffsetY + row * this._gridItemSize;
-            } else {
-              this._items[0][i].x.start = this._items[0][i].x.get(time);
-              this._items[0][i].y.start = this._items[0][i].y.get(time);
-            }
 
             let dropZoneOffset = 0;
 
@@ -312,46 +323,51 @@ function registerWidget() {
               }
             }
 
-            this._items[0][i].x.end =
-                this._gridOffsetX + column * this._gridItemSize + dropZoneOffset;
-            this._items[0][i].y.end = this._gridOffsetY + row * this._gridItemSize;
+            const startX =
+                this._gridOffsetX + column * this._gridItemSize - this._gridItemSize / 2;
+            const startY = this._gridOffsetY + row * this._gridItemSize;
+            const endX = this._gridOffsetX + column * this._gridItemSize + dropZoneOffset;
+            const endY = this._gridOffsetY + row * this._gridItemSize;
 
-            if (this._restartAnimation) {
-              this._items[0][i].x.startTime = time;
-              this._items[0][i].x.endTime   = time + 200;
-              this._items[0][i].y.startTime = time;
-              this._items[0][i].y.endTime   = time + 200;
-            }
+            setAnimation(items[i], time, startX, startY, endX, endY);
           }
 
-          if (this._restartAnimation) {
-            this._restartAnimation = false;
-
-            if (this._updateTimeout >= 0) {
-              GLib.source_remove(this._updateTimeout);
-              this._updateTimeout = -1;
-            }
-
-            this._updateTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
-              const time = GLib.get_monotonic_time() / 1000;
-              this._updateGrid(time);
-
-              if (time >= this._items[0][0].x.endTime) {
-                this._updateTimeout = -1;
-                return false;
-              }
-
-              return true;
-            });
-          }
-
-          this._updateGrid(time);
-
-          utils.debug('foo');
         } else {
-          this._updateGrid(time);
-          utils.debug('bar');
+          const items = this._getCurrentItems();
+
+          for (let i = 0; i < items.length; i++) {
+            // arrange in circle
+          }
+
+          const centerX = (width - this._gridItemSize) / 2;
+          const centerY = (height - this._gridItemSize) / 2;
+
+          setAnimation(this._parentItem, time, centerX, centerY, centerX, centerY);
         }
+
+
+        if (this._restartAnimation) {
+
+          this._restartAnimation = false;
+
+          if (this._updateTimeout >= 0) {
+            GLib.source_remove(this._updateTimeout);
+            this._updateTimeout = -1;
+          }
+
+          this._updateTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
+            const time        = GLib.get_monotonic_time() / 1000;
+            const allFinished = this._updateItemPositions(time);
+
+            if (allFinished) {
+              this._updateTimeout = -1;
+              return false;
+            }
+
+            return true;
+          });
+        }
+        this._updateItemPositions(time);
       }
 
       add(config, where) {
@@ -380,6 +396,11 @@ function registerWidget() {
             new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
         dragSource.connect('prepare', (s, x, y) => {
           s.set_icon(Gtk.WidgetPaintable.new(item.getIconWidget()), x, y);
+
+          if (item == this._parentItem) {
+            return null;
+          }
+
           return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
         });
         dragSource.connect('drag-begin', () => {
@@ -438,7 +459,7 @@ function registerWidget() {
           }
         });
 
-        item.button.emit('activate');
+        // item.button.emit('activate');
 
         this._getCurrentItems().splice(where, 0, item);
         this.queue_allocate();
@@ -477,11 +498,13 @@ function registerWidget() {
           }
         }
 
-        // this._restartAnimation = true;
 
         this._parentItem = items[parentIndex];
         this._items.push([]);
-        // this.queue_allocate();
+
+        this._restartAnimation = true;
+
+        this.queue_allocate();
       }
 
       // navigateBack(parentIndex) {
@@ -494,17 +517,32 @@ function registerWidget() {
         return this._items[this._items.length - 1];
       }
 
-      _updateGrid(time) {
-        for (let i = 0; i < this._items[0].length; i++) {
-          const allocation = new Gdk.Rectangle({
-            x: this._items[0][i].x.get(time),
-            y: this._items[0][i].y.get(time),
-            width: this._gridItemSize,
-            height: this._gridItemSize
-          });
+      // Returns true if this should show the menu grid rather than a submenu.
+      _inMenuOverviewMode() {
+        return this._items.length == 1;
+      }
 
-          this._items[0][i].size_allocate(allocation, -1);
+      // Returns true if all animations are done.
+      _updateItemPositions(time) {
+        let allFinished = true;
+
+        for (let i = 0; i < this._items.length; i++) {
+          for (let j = 0; j < this._items[i].length; j++) {
+            const allocation = new Gdk.Rectangle({
+              x: this._items[i][j].x.get(time),
+              y: this._items[i][j].y.get(time),
+              width: this._gridItemSize,
+              height: this._gridItemSize
+            });
+
+            allFinished &= this._items[i][j].x.isFinished(time);
+            allFinished &= this._items[i][j].y.isFinished(time);
+
+            this._items[i][j].size_allocate(allocation, -1);
+          }
         }
+
+        return allFinished;
       }
 
       _endDrag() {
