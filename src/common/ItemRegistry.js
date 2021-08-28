@@ -184,6 +184,11 @@ var ItemRegistry = class ItemRegistry {
       }
     }
 
+    // Assign default children list.
+    if (config.type == 'CustomMenu' && config.children == undefined) {
+      config.children = [];
+    }
+
     // Assign default name.
     if (config.name == undefined) {
       config.name = this.getItemTypes()[config.type].name;
