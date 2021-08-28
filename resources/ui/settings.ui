@@ -310,13 +310,6 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkAdjustment" id="item-angle">
-    <property name="lower">-1</property>
-    <property name="upper">359</property>
-    <property name="value">-1</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
   <object class="GtkAdjustment" id="item-count">
     <property name="upper">100</property>
     <property name="step_increment">1</property>
@@ -4851,55 +4844,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </style>
                                   </object>
                                 </child>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkRevealer" id="item-settings-angle-revealer">
-                                <property name="transition_type">slide-up</property>
-                                <property name="transition_duration">200</property>
-                                <property name="child">
-                                  <object class="GtkBox" id="box5">
-                                    <property name="margin_top">20</property>
-                                    <property name="orientation">vertical</property>
-                                    <property name="spacing">5</property>
-                                    <child>
-                                      <object class="GtkBox">
-                                        <property name="spacing">10</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="halign">start</property>
-                                            <property name="hexpand">1</property>
-                                            <property name="label" translatable="yes">Fixed Angle</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="halign">end</property>
-                                            <property name="label" translatable="yes">See tooltip for details.</property>
-                                            <style>
-                                              <class name="dim-label" />
-                                            </style>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkSpinButton" id="spinbutton2">
-                                        <property name="tooltip_markup" translatable="yes">Fixed angles can be used to ensure that an item remains at the same position even if other items are added or removed. This way you can edit a menu even if your muscles already learned the item&apos;s direction.
-
-However, there is a &lt;b&gt;restriction&lt;/b&gt; on the fixed angles. Inside a menu the fixed angles must be monotonically increasing, that is each fixed angle must be larger than any previous fixed angle.
-
-In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&gt; if an item is dragged to another position in the menu.
-
-&lt;b&gt;Use -1 to disable this feature&lt;/b&gt;.</property>
-                                        <property name="text">-1</property>
-                                        <property name="adjustment">item-angle</property>
-                                        <property name="numeric">1</property>
-                                        <property name="value">-1</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </property>
                               </object>
                             </child>
                             <child>
