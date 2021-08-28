@@ -31,25 +31,30 @@ function registerWidget() {
     FlyPieMenuEditorItem = GObject.registerClass({
       GTypeName: 'FlyPieMenuEditorItem',
     },
-    class FlyPieMenuEditorItem extends Gtk.ToggleButton {
+    class FlyPieMenuEditorItem extends Gtk.Revealer {
           // clang-format on
           _init(params = {}) {
             super._init(params);
 
-            this.margin_top    = 4;
-            this.margin_start  = 4;
-            this.margin_end    = 4;
-            this.margin_bottom = 4;
+            this.button = new Gtk.ToggleButton({
+              margin_top: 4,
+              margin_start: 4,
+              margin_end: 4,
+              margin_bottom: 4,
+              has_frame: false
+            });
 
-            // this.add_css_class('pill-button');
-            this.set_has_frame(false);
+            this.set_transition_type(Gtk.RevealerTransitionType.CROSSFADE);
+            this.set_reveal_child(true);
+            this.set_child(this.button);
 
             // Create the Gio.Settings object.
             this._settings = utils.createSettings();
 
-            const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
+            const box = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
+
             box.vexpand = true;
-            this.set_child(box);
+            this.button.set_child(box);
 
             this._iconName = 'image-missing';
 
@@ -69,13 +74,27 @@ function registerWidget() {
 
             this._nameLabel = new Gtk.Label({ellipsize: Pango.EllipsizeMode.MIDDLE});
             this._nameLabel.add_css_class('caption-heading');
-            box.append(this._nameLabel);
+
+            this.nameRevealer = new Gtk.Revealer({
+              transition_type: Gtk.RevealerTransitionType.SLIDE_UP,
+              reveal_child: true
+            });
+            this.nameRevealer.set_child(this._nameLabel);
+
+            box.append(this.nameRevealer);
 
             this._shortcutLabel =
                 new Gtk.Label({ellipsize: Pango.EllipsizeMode.MIDDLE, use_markup: true});
             this._shortcutLabel.add_css_class('caption');
             this._shortcutLabel.add_css_class('dim-label');
-            box.append(this._shortcutLabel);
+
+            this.shortcutRevealer = new Gtk.Revealer({
+              transition_type: Gtk.RevealerTransitionType.SLIDE_UP,
+              reveal_child: true
+            });
+            this.shortcutRevealer.set_child(this._shortcutLabel);
+
+            box.append(this.shortcutRevealer);
           }
 
           setConfig(config) {
@@ -120,13 +139,14 @@ function registerWidget() {
       _init(params = {}) {
         super._init(params);
 
-        this._buttons      = [];
+        this._items        = [[]];
         this._gridItemSize = 128;
-        this._gridMode     = true;
 
         this._restartAnimation = false;
 
-        this._selectedButton  = null;
+        this._selectedItem = null;
+        this._parentItem   = null;
+
         this._lastColumnCount = null;
         this._lastDropColumn  = null;
         this._lastDropRow     = null;
@@ -138,12 +158,15 @@ function registerWidget() {
         this._dropTarget =
             new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
         this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
+
         this._dropTarget.connect('accept', (t, drop) => {
           return true;
         });
+
         this._dropTarget.connect('leave', () => {
           this._endDrag();
         });
+
         this._dropTarget.connect('drop', (t, value, x, y) => {
           if (this._dropIndex == null) {
             return false;
@@ -154,6 +177,7 @@ function registerWidget() {
           this.queue_allocate();
           return true;
         });
+
         this._dropTarget.connect('motion', (t, x, y) => {
           x -= this._gridOffsetX;
           y -= this._gridOffsetY;
@@ -168,7 +192,7 @@ function registerWidget() {
             this._dropColumn = Math.floor(x / this._gridItemSize + 0.5);
             this._dropRow    = Math.floor(y / this._gridItemSize);
             this._dropIndex  = Math.min(
-                this._buttons.length - 1,
+                this._items[0].length - 1,
                 this._columnCount * this._dropRow + this._dropColumn);
           } else {
             this._dropColumn = null;
@@ -180,8 +204,12 @@ function registerWidget() {
 
           return Gdk.DragAction.MOVE;
         });
+
         this.add_controller(this._dropTarget);
 
+        const revealer = new Gtk.Revealer(
+            {transition_type: Gtk.RevealerTransitionType.CROSSFADE, reveal_child: true});
+        revealer.set_parent(this);
 
         const button = Gtk.Button.new_from_icon_name('list-add-symbolic');
         button.add_css_class('pill-button');
@@ -190,12 +218,12 @@ function registerWidget() {
         button.set_margin_end(24);
         button.set_margin_top(24);
         button.set_margin_bottom(24);
-        button.set_parent(this);
+        revealer.set_child(button);
 
-        this._buttons.push(button);
+        this._items[0].push(revealer);
 
-        button.connect('clicked', (b) => {
-          this.emit('request-add', b.get_allocation());
+        button.connect('clicked', () => {
+          this.emit('request-add', revealer.get_allocation());
         });
       }
 
@@ -204,41 +232,45 @@ function registerWidget() {
       }
 
       vfunc_measure(orientation, for_size) {
-        if (this._gridMode) {
+        if (this._items.length == 1) {
           if (orientation == Gtk.Orientation.HORIZONTAL) {
             return [this._gridItemSize * 4, this._gridItemSize * 4, -1, -1];
           }
 
           const columns = Math.floor(for_size / this._gridItemSize);
-          const rows    = Math.ceil(this._buttons.length / columns);
+          const rows    = Math.ceil(this._items[0].length / columns);
 
           const gridSize = rows * this._gridItemSize;
 
           return [gridSize, gridSize, -1, -1];
         }
 
-        return [300, 300, -1, -1];
+        return [this._gridItemSize * 4, this._gridItemSize * 4, -1, -1];
       }
 
       vfunc_size_allocate(width, height, baseline) {
 
-        if (this._buttons.length == 0) {
+        if (this._items.length == 0) {
           return;
         }
 
-        if (this._gridMode) {
+        const time = GLib.get_monotonic_time() / 1000;
+
+        if (this._items.length == 1) {
+
+          if (this._items[0].length == 0) {
+            return;
+          }
 
           this._columnCount = Math.floor(width / this._gridItemSize);
-          this._rowCount    = Math.ceil(this._buttons.length / this._columnCount);
+          this._rowCount    = Math.ceil(this._items[0].length / this._columnCount);
 
           if (this._rowCount == 1) {
-            this._columnCount = this._buttons.length;
+            this._columnCount = this._items[0].length;
           }
 
           this._gridOffsetX = (width - this._columnCount * this._gridItemSize) / 2;
           this._gridOffsetY = (height - this._rowCount * this._gridItemSize) / 2;
-
-          const time = GLib.get_monotonic_time() / 1000;
 
           if (this._columnCount != this._lastColumnCount ||
               this._dropColumn != this._lastDropColumn ||
@@ -249,20 +281,20 @@ function registerWidget() {
             this._restartAnimation = true;
           }
 
-          for (let i = 0; i < this._buttons.length; i++) {
+          for (let i = 0; i < this._items[0].length; i++) {
 
             const column = i % this._columnCount;
             const row    = Math.floor(i / this._columnCount);
 
-            if (this._buttons[i].x == undefined) {
-              this._buttons[i].x       = new AnimatedValue();
-              this._buttons[i].y       = new AnimatedValue();
-              this._buttons[i].x.start = this._gridOffsetX + column * this._gridItemSize -
-                  this._gridItemSize / 2;
-              this._buttons[i].y.start = this._gridOffsetY + row * this._gridItemSize;
+            if (this._items[0][i].x == undefined) {
+              this._items[0][i].x       = new AnimatedValue();
+              this._items[0][i].y       = new AnimatedValue();
+              this._items[0][i].x.start = this._gridOffsetX +
+                  column * this._gridItemSize - this._gridItemSize / 2;
+              this._items[0][i].y.start = this._gridOffsetY + row * this._gridItemSize;
             } else {
-              this._buttons[i].x.start = this._buttons[i].x.get(time);
-              this._buttons[i].y.start = this._buttons[i].y.get(time);
+              this._items[0][i].x.start = this._items[0][i].x.get(time);
+              this._items[0][i].y.start = this._items[0][i].y.get(time);
             }
 
             let dropZoneOffset = 0;
@@ -280,15 +312,15 @@ function registerWidget() {
               }
             }
 
-            this._buttons[i].x.end =
+            this._items[0][i].x.end =
                 this._gridOffsetX + column * this._gridItemSize + dropZoneOffset;
-            this._buttons[i].y.end = this._gridOffsetY + row * this._gridItemSize;
+            this._items[0][i].y.end = this._gridOffsetY + row * this._gridItemSize;
 
             if (this._restartAnimation) {
-              this._buttons[i].x.startTime = time;
-              this._buttons[i].x.endTime   = time + 200;
-              this._buttons[i].y.startTime = time;
-              this._buttons[i].y.endTime   = time + 200;
+              this._items[0][i].x.startTime = time;
+              this._items[0][i].x.endTime   = time + 200;
+              this._items[0][i].y.startTime = time;
+              this._items[0][i].y.endTime   = time + 200;
             }
           }
 
@@ -304,7 +336,7 @@ function registerWidget() {
               const time = GLib.get_monotonic_time() / 1000;
               this._updateGrid(time);
 
-              if (time >= this._buttons[0].x.endTime) {
+              if (time >= this._items[0][0].x.endTime) {
                 this._updateTimeout = -1;
                 return false;
               }
@@ -315,86 +347,85 @@ function registerWidget() {
 
           this._updateGrid(time);
 
+          utils.debug('foo');
         } else {
+          this._updateGrid(time);
+          utils.debug('bar');
         }
       }
 
       add(config, where) {
 
-        const button = new FlyPieMenuEditorItem();
+        const item = new FlyPieMenuEditorItem();
 
-        button.setConfig(config);
-        button.set_parent(this);
+        item.setConfig(config);
+        item.set_parent(this);
 
         if (this._radioGroup) {
-          button.set_group(this._radioGroup);
+          item.button.set_group(this._radioGroup);
         } else {
-          this._radioGroup = button;
+          this._radioGroup = item.button;
         }
 
         const longPress = new Gtk.GestureLongPress();
         longPress.connect('pressed', () => {
-          if (button.getConfig().type == 'CustomMenu') {
-            this.emit('edit', this._buttons.indexOf(button));
-            button.emit('activate');
+          if (item.getConfig().type == 'CustomMenu') {
+            this._selectedItem = item;
+            this.emit('edit', this._getCurrentItems().indexOf(item));
           }
         });
-        button.add_controller(longPress);
+        item.button.add_controller(longPress);
 
         const dragSource =
             new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
         dragSource.connect('prepare', (s, x, y) => {
-          s.set_icon(Gtk.WidgetPaintable.new(button.getIconWidget()), x, y);
-          return Gdk.ContentProvider.new_for_value(JSON.stringify(button.getConfig()));
+          s.set_icon(Gtk.WidgetPaintable.new(item.getIconWidget()), x, y);
+          return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
         });
         dragSource.connect('drag-begin', () => {
-          button.opacity   = 0.2;
-          button.sensitive = false;
+          item.opacity   = 0.2;
+          item.sensitive = false;
         });
         dragSource.connect('drag-end', (s, drag, deleteData) => {
           if (deleteData) {
-            let removeIndex = this._buttons.indexOf(button);
+            let removeIndex = this._getCurrentItems().indexOf(item);
 
             if (this._dropIndex != null && this._dropIndex <= removeIndex) {
               removeIndex += 1;
             }
 
             this.emit('remove', removeIndex);
-            button.opacity   = 1;
-            button.sensitive = true;
+            item.opacity   = 1;
+            item.sensitive = true;
           } else {
-            button.opacity   = 1;
-            button.sensitive = true;
+            item.opacity   = 1;
+            item.sensitive = true;
           }
 
           this._endDrag();
         });
-        dragSource.connect('drag-cancel', (s, drag, reason) => {
-          button.opacity   = 1;
-          button.sensitive = true;
+        dragSource.connect('drag-cancel', () => {
+          item.opacity   = 1;
+          item.sensitive = true;
           this._endDrag();
           return false;
         });
 
-        button.add_controller(dragSource);
+        item.button.add_controller(dragSource);
 
         const dropTarget =
             new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
         dropTarget.set_gtypes([GObject.TYPE_STRING]);
-        dropTarget.connect('accept', (t, drop) => {
-          return button.getConfig().type == 'CustomMenu';
-        });
-        dropTarget.connect('drop', (t, value, x, y) => {
-          this.emit('add-into', value, this._buttons.indexOf(button));
+        dropTarget.connect('accept', () => item.getConfig().type == 'CustomMenu');
+        dropTarget.connect('drop', (t, value) => {
+          this.emit('add-into', value, this._getCurrentItems().indexOf(item));
           this._endDrag();
           return true;
         });
-        dropTarget.connect('motion', (t, x, y) => {
-          return Gdk.DragAction.MOVE;
-        });
-        button.add_controller(dropTarget);
+        dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+        item.button.add_controller(dropTarget);
 
-        button.connect('clicked', (b) => {
+        item.button.connect('clicked', (b) => {
           // For some reason, the drag source does not work anymore once the
           // ToggleButton was toggled. Resetting the EventController seems to be a
           // working workaround.
@@ -402,50 +433,77 @@ function registerWidget() {
           longPress.reset();
 
           if (b.active) {
-            this._selectedButton = b;
-            this.emit('select', this._buttons.indexOf(b));
-          } else {
-            this._selectedButton = null;
-            this.emit('select', -1);
+            this._selectedItem = item;
+            this.emit('select', this._getCurrentItems().indexOf(item));
           }
         });
 
+        item.button.emit('activate');
 
-
-        this._buttons.splice(where, 0, button);
-
+        this._getCurrentItems().splice(where, 0, item);
         this.queue_allocate();
       }
 
       remove(which) {
-        const [button] = this._buttons.splice(which, 1);
+        const items     = this._getCurrentItems();
+        const [removed] = items.splice(which, 1);
 
-        if (button == this._selectedButton) {
-          this._selectedButton = null;
-          this.emit('select', -1);
+        if (removed == this._selectedItem) {
+          this._selectedItem = null;
         }
 
-        button.unparent();
+        removed.unparent();
         this._restartAnimation = true;
         this.queue_allocate();
       }
 
       updateSelected(config) {
-        if (this._selectedButton) {
-          this._selectedButton.setConfig(config);
+        if (this._selectedItem) {
+          this._selectedItem.setConfig(config);
         }
       }
 
+      // hide toplevels, hide & delete sublevels, move center
+      navigateInto(parentIndex) {
+        const items = this._getCurrentItems();
+
+        for (let i = 0; i < items.length; i++) {
+          if (i == parentIndex) {
+            items[i].nameRevealer.reveal_child     = false;
+            items[i].shortcutRevealer.reveal_child = false;
+            items[i].button.add_css_class('pill-button');
+          } else {
+            items[i].reveal_child = false;
+          }
+        }
+
+        // this._restartAnimation = true;
+
+        this._parentItem = items[parentIndex];
+        this._items.push([]);
+        // this.queue_allocate();
+      }
+
+      // navigateBack(parentIndex) {
+      //   if (parentIndex >= 0) {
+      //     this._parentItem
+      //   }
+      // }
+
+      _getCurrentItems() {
+        return this._items[this._items.length - 1];
+      }
+
       _updateGrid(time) {
-        for (let i = 0; i < this._buttons.length; i++) {
+        for (let i = 0; i < this._items[0].length; i++) {
           const allocation = new Gdk.Rectangle({
-            x: this._buttons[i].x.get(time),
-            y: this._buttons[i].y.get(time),
+            x: this._items[0][i].x.get(time),
+            y: this._items[0][i].y.get(time),
             width: this._gridItemSize,
             height: this._gridItemSize
           });
 
-          this._buttons[i].size_allocate(allocation, -1);
+          this._items[0][i].size_allocate(allocation, -1);
         }
       }
 

@@ -502,35 +502,36 @@ var MenuEditorPage = class MenuEditorPage {
     this._editor = this._builder.get_object('menu-editor');
 
     this._editor.connect('select', (e, which) => {
-      const somethingSelected = which >= 0 && which < this._menuConfigs.length;
-      this._builder.get_object('preview-menu-button').sensitive       = somethingSelected;
-      this._builder.get_object('item-settings-revealer').reveal_child = somethingSelected;
+      this._builder.get_object('preview-menu-button').sensitive       = true;
+      this._builder.get_object('item-settings-revealer').reveal_child = true;
 
-      if (somethingSelected) {
-        this._selectedItem = this._menuConfigs[which];
-        this._updateSidebar(this._selectedItem);
-      } else {
-        this._selectedItem = null;
-      }
+      this._selectedItem = this._getCurrentConfigs()[which];
+      this._updateSidebar(this._selectedItem);
     });
 
     this._editor.connect('edit', (e, which) => {
-      this._selectedItem = this._menuConfigs[which];
+      this._selectedItem = this._getCurrentConfigs()[which];
       this._menuPath.push(this._selectedItem);
       this._updateSidebar(this._selectedItem);
       this._updateBreadCrumbs();
+      this._editor.navigateInto(which);
     });
 
     this._editor.connect('remove', (e, which) => {
       this._editor.remove(which);
-      this._menuConfigs.splice(which, 1);
+      const [removed] = this._getCurrentConfigs().splice(which, 1);
+      if (removed == this._selectedItem) {
+        this._selectedItem                                              = null;
+        this._builder.get_object('preview-menu-button').sensitive       = false;
+        this._builder.get_object('item-settings-revealer').reveal_child = false;
+      }
       this._saveMenuConfiguration();
     });
 
     this._editor.connect('add', (e, what, where) => {
       const config = JSON.parse(what);
       this._editor.add(config, where);
-      this._menuConfigs.splice(where, 0, config);
+      this._getCurrentConfigs().splice(where, 0, config);
       this._saveMenuConfiguration();
     });
 
@@ -572,6 +573,13 @@ var MenuEditorPage = class MenuEditorPage {
       dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
       stash.add_controller(dropTarget);
     }
+  }
+
+  _getCurrentConfigs() {
+    if (this._menuPath.length == 0) {
+      return this._menuConfigs;
+    }
+    return this._menuPath[this._menuPath.length - 1].children;
   }
 
 
@@ -620,8 +628,6 @@ var MenuEditorPage = class MenuEditorPage {
     const toplevelSelected = this._menuPath.length == 0;
     this._builder.get_object('item-settings-menu-revealer').reveal_child =
         toplevelSelected;
-    this._builder.get_object('item-settings-angle-revealer').reveal_child =
-        !toplevelSelected;
 
     if (item) {
 
@@ -631,11 +637,6 @@ var MenuEditorPage = class MenuEditorPage {
       if (selectedType == null) {
         return;
       }
-
-      // Setting the content of the widgets below will actually trigger menu treestore
-      // modifications which in turn would lead to saving the menu configuration. As
-      // this is not necessary, we disable saving temporarily.
-      this._menuSavingAllowed = false;
 
       // The item's name, icon and description have to be updated in any case if
       // something is selected.
@@ -648,10 +649,6 @@ var MenuEditorPage = class MenuEditorPage {
       if (toplevelSelected) {
         this._menuShortcutLabel.set_accelerator(item.shortcut);
         this._builder.get_object('menu-centered').active = item.centered;
-      }
-      // For all other items, the fixed angle can be set.
-      else {
-        this._builder.get_object('item-angle').value = item.angle;
       }
 
       // Now we check whether the selected item has a config property.
@@ -731,13 +728,16 @@ var MenuEditorPage = class MenuEditorPage {
 
     const newItem = {
       name: ItemRegistry.getItemTypes()[newType].name,
-      // New Menus will get a random emoji icon. All other items will get a name
-      // and icon according to the item registry.
-      icon: newType == 'CustomMenu' ? this._getRandomEmoji() :
-                                      ItemRegistry.getItemTypes()[newType].icon,
       type: newType,
     };
 
+    // Assign default children and icons.
+    if (newType == 'CustomMenu') {
+      newItem.children = [];
+      newItem.icon     = this._getRandomEmoji();
+    } else {
+      newItem.icon = ItemRegistry.getItemTypes()[newType].icon;
+    }
 
     // Assign a new ID for top-level items.
     if (toplevelSelected) {
@@ -745,6 +745,7 @@ var MenuEditorPage = class MenuEditorPage {
       newItem.shortcut = '';
     }
 
+    // Assign default custom data.
     if (ItemRegistry.getItemTypes()[newType].config != undefined) {
       newItem.data = ItemRegistry.getItemTypes()[newType].config.defaultData;
     }
