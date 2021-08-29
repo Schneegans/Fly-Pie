@@ -145,7 +145,7 @@ function registerWidget() {
         this._restartAnimation = false;
 
         this._selectedItem = null;
-        this._parentItem   = null;
+        this._centerItem   = null;
 
         this._lastColumnCount = null;
         this._lastDropColumn  = null;
@@ -192,8 +192,7 @@ function registerWidget() {
             this._dropColumn = Math.floor(x / this._gridItemSize + 0.5);
             this._dropRow    = Math.floor(y / this._gridItemSize);
             this._dropIndex  = Math.min(
-                this._items.length - 1,
-                this._columnCount * this._dropRow + this._dropColumn);
+                this._items.length, this._columnCount * this._dropRow + this._dropColumn);
           } else {
             this._dropColumn = null;
             this._dropRow    = null;
@@ -340,8 +339,8 @@ function registerWidget() {
           // const centerX = (width - this._gridItemSize) / 2;
           // const centerY = (height - this._gridItemSize) / 2;
 
-          // setAnimation(this._parentItem, time, centerX, centerY, centerX, centerY);
-          setAnimation(this._parentItem, time, 0, 0, 0, 0);
+          // setAnimation(this._centerItem, time, centerX, centerY, centerX, centerY);
+          setAnimation(this._centerItem, time, 0, 0, 0, 0);
         }
 
 
@@ -405,9 +404,9 @@ function registerWidget() {
         }
 
         if (parentConfig) {
-          this._parentItem = this._createItem(parentConfig);
+          this._centerItem = this._createItem(parentConfig);
         } else {
-          this._parentItem = null;
+          this._centerItem = null;
         }
 
         this.queue_allocate();
@@ -426,7 +425,7 @@ function registerWidget() {
       //   }
 
 
-      //   this._parentItem = this._items[parentIndex];
+      //   this._centerItem = this._items[parentIndex];
       //   this._restartAnimation = true;
 
       //   this.queue_allocate();
@@ -434,7 +433,7 @@ function registerWidget() {
 
       // navigateBack(parentIndex) {
       //   if (parentIndex >= 0) {
-      //     this._parentItem
+      //     this._centerItem
       //   }
       // }
 
@@ -465,7 +464,7 @@ function registerWidget() {
         dragSource.connect('prepare', (s, x, y) => {
           s.set_icon(Gtk.WidgetPaintable.new(item.getIconWidget()), x, y);
 
-          if (item == this._parentItem) {
+          if (item == this._centerItem) {
             return null;
           }
 
@@ -505,7 +504,9 @@ function registerWidget() {
         const dropTarget =
             new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
         dropTarget.set_gtypes([GObject.TYPE_STRING]);
-        dropTarget.connect('accept', () => item.getConfig().type == 'CustomMenu');
+        dropTarget.connect(
+            'accept',
+            () => item.getConfig().type == 'CustomMenu' && item != this._centerItem);
         dropTarget.connect('drop', (t, value) => {
           this.emit('add-into', value, this._items.indexOf(item));
           this._endDrag();
@@ -535,17 +536,17 @@ function registerWidget() {
           this._items[i].unparent();
         }
 
-        if (this._parentItem) {
-          this._parentItem.unparent();
+        if (this._centerItem) {
+          this._centerItem.unparent();
         }
 
         this._items      = [];
-        this._parentItem = null;
+        this._centerItem = null;
       }
 
       // Returns true if this should show the menu grid rather than a submenu.
       _inMenuOverviewMode() {
-        return this._parentItem == null;
+        return this._centerItem == null;
       }
 
       // Returns true if all animations are done.
@@ -572,8 +573,8 @@ function registerWidget() {
 
         updateItemPosition(this._addButton);
 
-        if (this._parentItem) {
-          updateItemPosition(this._parentItem);
+        if (this._centerItem) {
+          updateItemPosition(this._centerItem);
         }
 
         return allFinished;

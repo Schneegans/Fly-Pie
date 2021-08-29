@@ -431,6 +431,12 @@ var MenuEditorPage = class MenuEditorPage {
     this._builder.get_object('item-name').connect('notify::text', (widget) => {
       this._selectedItem.name = widget.text;
       this._editor.updateSelected(this._selectedItem);
+
+      if (this._menuConfigs.indexOf(this._selectedItem) >= 0 &&
+          this._menuPath.length > 0) {
+        this._updateBreadCrumbs();
+      }
+
       this._saveMenuConfiguration();
     });
 
@@ -534,7 +540,9 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     this._editor.connect('add-into', (e, what, where) => {
-      utils.debug('add ' + what + ' into ' + where);
+      const config = JSON.parse(what);
+      this._getCurrentConfigs()[where].children.push(config);
+      this._saveMenuConfiguration();
     });
 
     this._editor.connect('request-add', (e, rect) => {
@@ -626,7 +634,7 @@ var MenuEditorPage = class MenuEditorPage {
     // visible if a top-level element is selected, for all other items the fixed angle can
     // be set.
     const sometingSelected = this._selectedItem != null;
-    const toplevelSelected = this._menuPath.length == 0;
+    const toplevelSelected = this._menuConfigs.indexOf(this._selectedItem) >= 0;
 
     this._builder.get_object('preview-menu-button').sensitive       = sometingSelected;
     this._builder.get_object('item-settings-revealer').reveal_child = sometingSelected;
