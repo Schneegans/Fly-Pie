@@ -78,6 +78,7 @@ var ItemRegistry = class ItemRegistry {
   // This takes a menu configuration (as created by Fly-Pie's menu editor) and checks that
   // most constraints are fulfilled (e.g. required data fields are set, no top-level
   // actions, etc.) and fills the objects with default data if no data is given.
+  // This may throw an exception if a constraint is violated.
   static normalizeConfig(config) {
     this._normalizeConfig(config, true);
   }
@@ -181,6 +182,11 @@ var ItemRegistry = class ItemRegistry {
       } else {
         config.data = {};
       }
+    }
+
+    // Assign default children list.
+    if (config.type == 'CustomMenu' && config.children == undefined) {
+      config.children = [];
     }
 
     // Assign default name.

@@ -60,8 +60,8 @@ var Menu = class Menu {
 
     // This is a list of active MenuItems. At the beginning it will contain the root
     // MenuItem only. Selected children deeper in the hierarchy are prepended to this
-    // list. This means, the currently active menu node is always _menuSelectionChain[0].
-    this._menuSelectionChain = [];
+    // list. This means, the currently active menu node is always _menuPath[0].
+    this._menuPath = [];
 
     // This is used to warp the mouse pointer at the edges of the screen if necessary.
     this._input = new InputManipulator();
@@ -121,7 +121,7 @@ var Menu = class Menu {
           this._draggedChild == null) {
         const index = this._selectionWedges.getHoveredChild();
         if (index >= 0) {
-          const child = this._menuSelectionChain[0].getChildMenuItems()[index];
+          const child = this._menuPath[0].getChildMenuItems()[index];
           child.setState(MenuItemState.CHILD_DRAGGED);
           this._draggedChild = child;
         }
@@ -189,26 +189,26 @@ var Menu = class Menu {
     // This is fired when the mouse pointer enters one of the wedges.
     this._selectionWedges.connect('child-hovered-event', (o, hoveredIndex) => {
       // If there is a currently hovered child, we will call the unhover signal later.
-      const unhoveredIndex = this._menuSelectionChain[0].getActiveChildIndex();
+      const unhoveredIndex = this._menuPath[0].getActiveChildIndex();
 
       // If no child is hovered (hoveredIndex == -1), the center element is hovered.
       if (hoveredIndex == -1) {
-        this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
+        this._menuPath[0].setState(MenuItemState.CENTER_HOVERED, -1);
       } else {
-        this._menuSelectionChain[0].setState(MenuItemState.CENTER, hoveredIndex);
+        this._menuPath[0].setState(MenuItemState.CENTER, hoveredIndex);
       }
 
       // It could be that the parent of the currently active item was hovered before, so
       // lets set its state back to PARENT.
-      if (this._menuSelectionChain.length > 1) {
-        this._menuSelectionChain[1].setState(MenuItemState.PARENT);
+      if (this._menuPath.length > 1) {
+        this._menuPath[1].setState(MenuItemState.PARENT);
       }
 
       // If we're currently dragging a child around, the newly hovered child will
       // instantaneously become the hovered child.
       const [x, y, mods] = global.get_pointer();
       if (this._selectionWedges.isGestureModifier(mods) && hoveredIndex >= 0) {
-        const child = this._menuSelectionChain[0].getChildMenuItems()[hoveredIndex];
+        const child = this._menuPath[0].getChildMenuItems()[hoveredIndex];
         child.setState(MenuItemState.CHILD_DRAGGED);
         this._draggedChild = child;
       } else {
@@ -217,7 +217,7 @@ var Menu = class Menu {
 
       // Report the unhover event on the D-Bus if an action was hovered before.
       if (unhoveredIndex >= 0) {
-        const child = this._menuSelectionChain[0].getChildMenuItems()[unhoveredIndex];
+        const child = this._menuPath[0].getChildMenuItems()[unhoveredIndex];
 
         // If the item has a selection callback, it is an action.
         if (child.getSelectionCallback() != null) {
@@ -234,7 +234,7 @@ var Menu = class Menu {
 
       // Report the hover event on the D-Bus if an action is hovered.
       if (hoveredIndex >= 0) {
-        const child = this._menuSelectionChain[0].getChildMenuItems()[hoveredIndex];
+        const child = this._menuPath[0].getChildMenuItems()[hoveredIndex];
 
         // If the item has a selection callback, it is an action.
         if (child.getSelectionCallback() != null) {
@@ -256,8 +256,8 @@ var Menu = class Menu {
     // This is fired when the primary mouse button is pressed inside a wedge. This will
     // also be emitted when a gesture is detected.
     this._selectionWedges.connect('child-selected-event', (o, index) => {
-      const parent = this._menuSelectionChain[0];
-      const child  = this._menuSelectionChain[0].getChildMenuItems()[index];
+      const parent = this._menuPath[0];
+      const child  = this._menuPath[0].getChildMenuItems()[index];
 
       const [pointerX, pointerY, mods] = global.get_pointer();
 
@@ -281,7 +281,7 @@ var Menu = class Menu {
       child.setState(MenuItemState.CENTER_HOVERED);
 
       // Prepend the newly active item to our menu selection chain.
-      this._menuSelectionChain.unshift(child);
+      this._menuPath.unshift(child);
 
       // The newly active item will be shown at the pointer position. To prevent it from
       // going offscreen, we clamp the position to the current monitor bounds (we do it
@@ -329,7 +329,7 @@ var Menu = class Menu {
         // Record this selection in the statistics. Parameters are selection depth, time
         // and whether a continuous gesture was used for the selection.
         Statistics.getInstance().addSelection(
-            this._menuSelectionChain.length - 1, this._timer.getElapsed(),
+            this._menuPath.length - 1, this._timer.getElapsed(),
             this._gestureOnlySelection);
 
         this._background.set_easing_delay(
@@ -364,11 +364,11 @@ var Menu = class Menu {
     // CENTER_HOVERED to indicate that the parent is not a child.
     this._selectionWedges.connect('parent-hovered-event', () => {
       // If there is a currently hovered child, we may have to call the unhover signal.
-      const unhoveredIndex = this._menuSelectionChain[0].getActiveChildIndex();
+      const unhoveredIndex = this._menuPath[0].getActiveChildIndex();
 
       // Report the unhover event on the D-Bus if an action was hovered before.
       if (unhoveredIndex >= 0) {
-        const child = this._menuSelectionChain[0].getChildMenuItems()[unhoveredIndex];
+        const child = this._menuPath[0].getChildMenuItems()[unhoveredIndex];
 
         // If the item has a selection callback, it is an action.
         if (child.getSelectionCallback() != null) {
@@ -383,8 +383,8 @@ var Menu = class Menu {
         }
       }
 
-      this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
-      this._menuSelectionChain[1].setState(MenuItemState.PARENT_HOVERED);
+      this._menuPath[0].setState(MenuItemState.CENTER_HOVERED, -1);
+      this._menuPath[1].setState(MenuItemState.PARENT_HOVERED);
 
       // This recursively redraws all children based on their newly assigned state.
       this._root.redraw();
@@ -398,11 +398,11 @@ var Menu = class Menu {
     // If the parent of the currently active item is selected, it becomes the newly active
     // item with the state CENTER_HOVERED.
     this._selectionWedges.connect('parent-selected-event', () => {
-      const parent = this._menuSelectionChain[1];
+      const parent = this._menuPath[1];
       parent.setState(MenuItemState.CENTER_HOVERED, -1);
 
       // Remove the first element of the menu selection chain.
-      this._menuSelectionChain.shift();
+      this._menuPath.shift();
 
       // The parent item will be moved to the pointer position. To prevent it from
       // going offscreen, we clamp the position to the current monitor bounds (we do it
@@ -434,7 +434,7 @@ var Menu = class Menu {
       });
 
       // If necessary, add a wedge for the parent's parent.
-      if (this._menuSelectionChain.length > 1) {
+      if (this._menuPath.length > 1) {
         this._selectionWedges.setItemAngles(itemAngles, (parent.angle + 180) % 360);
       } else {
         this._selectionWedges.setItemAngles(itemAngles);
@@ -562,7 +562,7 @@ var Menu = class Menu {
     this._root = createMenuItem(structure);
     this._background.add_child(this._root);
 
-    this._menuSelectionChain.push(this._root);
+    this._menuPath.push(this._root);
 
     this._root.setState(MenuItemState.CENTER_HOVERED, -1);
     this._root.onSettingsChange(this._settings);
@@ -619,8 +619,8 @@ var Menu = class Menu {
     this._menuID = null;
 
     // Reset some other members.
-    this._draggedChild       = null;
-    this._menuSelectionChain = [];
+    this._draggedChild = null;
+    this._menuPath     = [];
   }
 
   // Emits the DBus-Cancel signal and potentially an unhover signal for the currently
@@ -628,7 +628,7 @@ var Menu = class Menu {
   cancel() {
     const index = this._selectionWedges.getHoveredChild();
     if (index >= 0) {
-      const child = this._menuSelectionChain[0].getChildMenuItems()[index];
+      const child = this._menuPath[0].getChildMenuItems()[index];
 
       // If the item has a selection callback, it is an action.
       if (child.getSelectionCallback() != null) {
@@ -741,10 +741,10 @@ var Menu = class Menu {
       for (let child of children) {
         item.removeMenuItem(child);
 
-        if (this._menuSelectionChain.includes(child)) {
+        if (this._menuPath.includes(child)) {
           let removedElement;
           do {
-            removedElement = this._menuSelectionChain.shift();
+            removedElement = this._menuPath.shift();
           } while (removedElement != child);
         }
       }
@@ -761,22 +761,22 @@ var Menu = class Menu {
     updateMenuItem(structure, this._root);
 
     // This recursively redraws all children based on their newly assigned state.
-    this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
-    for (let i = 1; i < this._menuSelectionChain.length; i++) {
+    this._menuPath[0].setState(MenuItemState.CENTER_HOVERED, -1);
+    for (let i = 1; i < this._menuPath.length; i++) {
       let activeChildIndex = 0;
-      const siblings       = this._menuSelectionChain[i].getChildMenuItems();
+      const siblings       = this._menuPath[i].getChildMenuItems();
       for (let j = 0; j < siblings.length; j++) {
-        if (this._menuSelectionChain[i - 1] == siblings[j]) {
+        if (this._menuPath[i - 1] == siblings[j]) {
           activeChildIndex = j;
           break;
         }
       }
-      this._menuSelectionChain[i].setState(MenuItemState.PARENT, activeChildIndex);
+      this._menuPath[i].setState(MenuItemState.PARENT, activeChildIndex);
     }
 
     // Re-idealize the trace. This can lead to pretty intense changes, but that's the way
     // it's supposed to be.
-    let [x, y] = this._menuSelectionChain[0].get_transformed_position();
+    let [x, y] = this._menuPath[0].get_transformed_position();
     this._idealizeTace(x, y);
 
     // Recursively redraw everything.
@@ -784,13 +784,13 @@ var Menu = class Menu {
 
     // Set the wedge angles of the SelectionWedges according to the new item structure.
     const itemAngles = [];
-    this._menuSelectionChain[0].getChildMenuItems().forEach(item => {
+    this._menuPath[0].getChildMenuItems().forEach(item => {
       itemAngles.push(item.angle);
     });
 
-    if (this._menuSelectionChain.length > 1) {
+    if (this._menuPath.length > 1) {
       this._selectionWedges.setItemAngles(
-          itemAngles, (this._menuSelectionChain[0].angle + 180) % 360);
+          itemAngles, (this._menuPath[0].angle + 180) % 360);
     } else {
       this._selectionWedges.setItemAngles(itemAngles);
     }
@@ -1065,8 +1065,8 @@ var Menu = class Menu {
 
     // Traverse the chain back-to-front (that is from root-to-tip). We start one element
     // after the root, as the root has not to be positioned relative to any other element.
-    for (let i = this._menuSelectionChain.length - 2; i >= 0; i--) {
-      const item = this._menuSelectionChain[i];
+    for (let i = this._menuPath.length - 2; i >= 0; i--) {
+      const item = this._menuPath[i];
 
       // The item's position relative to its parent.
       let x = item.translation_x;
@@ -1105,7 +1105,7 @@ var Menu = class Menu {
     }
 
     // Transform the desired tip coordinates to root-item space.
-    const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
+    const root                             = this._menuPath[this._menuPath.length - 1];
     const [ok, relativeTipX, relativeTipY] = root.transform_stage_point(tipX, tipY);
 
     // The root element needs to move by the distance between the accumulated ideal
