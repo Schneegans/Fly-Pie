@@ -500,17 +500,18 @@ var MenuEditorPage = class MenuEditorPage {
     this._editor = this._builder.get_object('menu-editor');
 
     this._editor.connect('select', (e, which) => {
-      this._builder.get_object('preview-menu-button').sensitive       = true;
-      this._builder.get_object('item-settings-revealer').reveal_child = true;
-
-      this._selectedItem = this._getCurrentConfigs()[which];
-      this._updateSidebar(this._selectedItem);
+      if (which >= 0) {
+        this._selectedItem = this._getCurrentConfigs()[which];
+      } else {
+        this._selectedItem = this._menuPath[this._menuPath.length - 1];
+      }
+      this._updateSidebar();
     });
 
     this._editor.connect('edit', (e, which) => {
       this._selectedItem = this._getCurrentConfigs()[which];
       this._menuPath.push(this._selectedItem);
-      this._updateSidebar(this._selectedItem);
+      this._updateSidebar();
       this._updateBreadCrumbs();
       this._editor.setItems(this._selectedItem.children, this._selectedItem);
     });
@@ -519,9 +520,8 @@ var MenuEditorPage = class MenuEditorPage {
       this._editor.remove(which);
       const [removed] = this._getCurrentConfigs().splice(which, 1);
       if (removed == this._selectedItem) {
-        this._selectedItem                                              = null;
-        this._builder.get_object('preview-menu-button').sensitive       = false;
-        this._builder.get_object('item-settings-revealer').reveal_child = false;
+        this._selectedItem = null;
+        this._updateSidebar();
       }
       this._saveMenuConfiguration();
     });
@@ -538,9 +538,11 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     this._editor.connect('request-add', (e, rect) => {
-      this._builder.get_object('add-action-list').visible     = false;
-      this._builder.get_object('action-list-heading').visible = false;
-      this._builder.get_object('menu-list-heading').visible   = false;
+      const inMenuOverviewMode = this._menuPath.length == 0;
+
+      this._builder.get_object('add-action-list').visible     = !inMenuOverviewMode;
+      this._builder.get_object('action-list-heading').visible = !inMenuOverviewMode;
+      this._builder.get_object('menu-list-heading').visible   = !inMenuOverviewMode;
       const popover = this._builder.get_object('add-item-popover');
       popover.set_pointing_to(rect);
       popover.popup();
@@ -618,18 +620,22 @@ var MenuEditorPage = class MenuEditorPage {
 
   // When the currently selected menu item changes, the content of the settings
   // widgets must be updated accordingly.
-  _updateSidebar(item) {
+  _updateSidebar() {
     // There are multiple Gtk.Revealers involved. Based on the selected item's type
     // their content is either shown or hidden. The menu settings (shortcut, centered) are
     // visible if a top-level element is selected, for all other items the fixed angle can
     // be set.
+    const sometingSelected = this._selectedItem != null;
     const toplevelSelected = this._menuPath.length == 0;
+
+    this._builder.get_object('preview-menu-button').sensitive       = sometingSelected;
+    this._builder.get_object('item-settings-revealer').reveal_child = sometingSelected;
     this._builder.get_object('item-settings-menu-revealer').reveal_child =
         toplevelSelected;
 
-    if (item) {
+    if (sometingSelected) {
 
-      const selectedType = item.type;
+      const selectedType = this._selectedItem.type;
 
       // If rows are not yet fully added, it may happen that the type is not yet set.
       if (selectedType == null) {
@@ -638,15 +644,15 @@ var MenuEditorPage = class MenuEditorPage {
 
       // The item's name, icon and description have to be updated in any case if
       // something is selected.
-      this._builder.get_object('icon-name').text = item.icon;
-      this._builder.get_object('item-name').text = item.name;
+      this._builder.get_object('icon-name').text = this._selectedItem.icon;
+      this._builder.get_object('item-name').text = this._selectedItem.name;
       this._showInfoLabel(ItemRegistry.getItemTypes()[selectedType].description);
 
       // If the selected item is a top-level menu, the SHORTCUT column contains its
       // shortcut.
       if (toplevelSelected) {
-        this._menuShortcutLabel.set_accelerator(item.shortcut);
-        this._builder.get_object('menu-centered').active = item.centered;
+        this._menuShortcutLabel.set_accelerator(this._selectedItem.shortcut);
+        this._builder.get_object('menu-centered').active = this._selectedItem.centered;
       }
 
       // Now we check whether the selected item has a config property.
@@ -665,7 +671,7 @@ var MenuEditorPage = class MenuEditorPage {
         // properties, optionally the name and icon of the currently selected item can be
         // changed as well (e.g. when an application is selected, we want to change the
         // item's name and icon accordingly).
-        const newChild = config.getWidget(item.data, (data, name, icon) => {
+        const newChild = config.getWidget(this._selectedItem.data, (data, name, icon) => {
           this._selectedItem.data = data;
 
           if (name) {
@@ -698,9 +704,13 @@ var MenuEditorPage = class MenuEditorPage {
     const button = new Gtk.Button();
     button.add_css_class('menu-editor-path-item');
     button.connect('clicked', () => {
-      this._editor.setItems(this._menuConfigs);
-      this._menuPath = [];
-      this._updateBreadCrumbs();
+      if (this._menuPath.length > 0) {
+        this._editor.setItems(this._menuConfigs);
+        this._selectedItem = null;
+        this._menuPath     = [];
+        this._updateBreadCrumbs();
+        this._updateSidebar();
+      }
     });
 
     const box = new Gtk.Box();
@@ -718,9 +728,13 @@ var MenuEditorPage = class MenuEditorPage {
       const label  = new Gtk.Label({label: item.name});
       const button = new Gtk.Button();
       button.connect('clicked', () => {
-        this._editor.setItems(item.children, item);
-        this._menuPath.length = i + 1;
-        this._updateBreadCrumbs();
+        if (this._menuPath.length > i + 1) {
+          this._editor.setItems(item.children, item);
+          this._selectedItem    = null;
+          this._menuPath.length = i + 1;
+          this._updateBreadCrumbs();
+          this._updateSidebar();
+        }
       });
       button.add_css_class('menu-editor-path-item');
       button.set_child(label);
@@ -759,11 +773,10 @@ var MenuEditorPage = class MenuEditorPage {
       newItem.data = ItemRegistry.getItemTypes()[newType].config.defaultData;
     }
 
-    if (toplevelSelected) {
-      this._menuConfigs.push(newItem);
-    }
+    const configs = this._getCurrentConfigs();
+    configs.push(newItem);
 
-    this._editor.add(newItem, this._menuConfigs.length - 1);
+    this._editor.add(newItem, configs.length - 1);
     this._saveMenuConfiguration();
 
     // Store this in our statistics.

@@ -653,12 +653,10 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
         <child>
           <object class="GtkScrolledWindow">
             <property name="hscrollbar_policy">never</property>
-            <property name="max_content_height">400</property>
             <property name="propagate_natural_width">1</property>
             <property name="propagate_natural_height">1</property>
             <property name="child">
               <object class="GtkBox">
-                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkListBox" id="add-menu-list">
                     <child>
@@ -686,7 +684,6 @@ Can be submenus or top-level menus.</property>
                 </child>
                 <child>
                   <object class="GtkListBox" id="add-action-list">
-                    <property name="sensitive">0</property>
                     <child>
                       <object class="GtkListBoxRow" id="action-list-heading">
                         <property name="name">separator</property>

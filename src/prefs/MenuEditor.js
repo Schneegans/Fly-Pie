@@ -272,81 +272,76 @@ function registerWidget() {
           }
         };
 
-        if (this._items.length == 0) {
-          return;
-        }
-
         const time = GLib.get_monotonic_time() / 1000;
 
-        if (this._inMenuOverviewMode()) {
+        // if (this._inMenuOverviewMode()) {
 
-          if (this._items.length == 0) {
-            return;
-          }
+        const itemCount = this._items.length + 1;
 
-          const itemCount = this._items.length + 1;
+        this._columnCount = Math.floor(width / this._gridItemSize);
+        this._rowCount    = Math.ceil(itemCount / this._columnCount);
 
-          this._columnCount = Math.floor(width / this._gridItemSize);
-          this._rowCount    = Math.ceil(itemCount / this._columnCount);
+        if (this._rowCount == 1) {
+          this._columnCount = itemCount;
+        }
 
-          if (this._rowCount == 1) {
-            this._columnCount = itemCount;
-          }
+        this._gridOffsetX = (width - this._columnCount * this._gridItemSize) / 2;
+        this._gridOffsetY = (height - this._rowCount * this._gridItemSize) / 2;
 
-          this._gridOffsetX = (width - this._columnCount * this._gridItemSize) / 2;
-          this._gridOffsetY = (height - this._rowCount * this._gridItemSize) / 2;
+        if (this._columnCount != this._lastColumnCount ||
+            this._dropColumn != this._lastDropColumn ||
+            this._dropRow != this._lastDropRow) {
+          this._lastColumnCount  = this._columnCount;
+          this._lastDropRow      = this._dropRow;
+          this._lastDropColumn   = this._dropColumn;
+          this._restartAnimation = true;
+        }
 
-          if (this._columnCount != this._lastColumnCount ||
-              this._dropColumn != this._lastDropColumn ||
-              this._dropRow != this._lastDropRow) {
-            this._lastColumnCount  = this._columnCount;
-            this._lastDropRow      = this._dropRow;
-            this._lastDropColumn   = this._dropColumn;
-            this._restartAnimation = true;
-          }
+        for (let i = 0; i < itemCount; i++) {
 
-          for (let i = 0; i < itemCount; i++) {
+          const column = i % this._columnCount;
+          const row    = Math.floor(i / this._columnCount);
 
-            const column = i % this._columnCount;
-            const row    = Math.floor(i / this._columnCount);
+          let dropZoneOffset = 0;
 
-            let dropZoneOffset = 0;
+          if (row == this._dropRow) {
+            const range    = 3;
+            const strength = 15;
 
-            if (row == this._dropRow) {
-              const range    = 3;
-              const strength = 15;
-
-              if (column < this._dropColumn) {
-                dropZoneOffset =
-                    -Math.max(0, range - (this._dropColumn - column) + 1) * strength;
-              } else {
-                dropZoneOffset =
-                    Math.max(0, range - (column - this._dropColumn)) * strength;
-              }
-            }
-
-            const startX =
-                this._gridOffsetX + column * this._gridItemSize - this._gridItemSize / 2;
-            const startY = this._gridOffsetY + row * this._gridItemSize;
-            const endX = this._gridOffsetX + column * this._gridItemSize + dropZoneOffset;
-            const endY = this._gridOffsetY + row * this._gridItemSize;
-
-            if (i < this._items.length) {
-              setAnimation(this._items[i], time, startX, startY, endX, endY);
+            if (column < this._dropColumn) {
+              dropZoneOffset =
+                  -Math.max(0, range - (this._dropColumn - column) + 1) * strength;
             } else {
-              setAnimation(this._addButton, time, startX, startY, endX, endY);
+              dropZoneOffset =
+                  Math.max(0, range - (column - this._dropColumn)) * strength;
             }
           }
 
-        } else {
-          for (let i = 0; i < this._items.length; i++) {
-            // arrange in circle
+          const startX =
+              this._gridOffsetX + column * this._gridItemSize - this._gridItemSize / 2;
+          const startY = this._gridOffsetY + row * this._gridItemSize;
+          const endX   = this._gridOffsetX + column * this._gridItemSize + dropZoneOffset;
+          const endY   = this._gridOffsetY + row * this._gridItemSize;
+
+          if (i < this._items.length) {
+            setAnimation(this._items[i], time, startX, startY, endX, endY);
+          } else {
+            setAnimation(this._addButton, time, startX, startY, endX, endY);
           }
+        }
 
-          const centerX = (width - this._gridItemSize) / 2;
-          const centerY = (height - this._gridItemSize) / 2;
+        // } else {
+        if (!this._inMenuOverviewMode()) {
 
-          setAnimation(this._parentItem, time, centerX, centerY, centerX, centerY);
+          // for (let i = 0; i < this._items.length; i++) {
+          //   // arrange in circle
+          // }
+
+          // const centerX = (width - this._gridItemSize) / 2;
+          // const centerY = (height - this._gridItemSize) / 2;
+
+          // setAnimation(this._parentItem, time, centerX, centerY, centerX, centerY);
+          setAnimation(this._parentItem, time, 0, 0, 0, 0);
         }
 
 
@@ -375,6 +370,75 @@ function registerWidget() {
       }
 
       add(config, where) {
+
+        const item = this._createItem(config);
+
+        // item.button.emit('activate');
+
+        this._items.splice(where, 0, item);
+        this.queue_allocate();
+      }
+
+      remove(which) {
+        const [removed] = this._items.splice(which, 1);
+
+        if (removed == this._selectedItem) {
+          this._selectedItem = null;
+        }
+
+        removed.unparent();
+        this._restartAnimation = true;
+        this.queue_allocate();
+      }
+
+      updateSelected(config) {
+        if (this._selectedItem) {
+          this._selectedItem.setConfig(config);
+        }
+      }
+
+      setItems(configs, parentConfig) {
+        this._hideAllItems();
+
+        for (let i = 0; i < configs.length; i++) {
+          this.add(configs[i], i);
+        }
+
+        if (parentConfig) {
+          this._parentItem = this._createItem(parentConfig);
+        } else {
+          this._parentItem = null;
+        }
+
+        this.queue_allocate();
+      }
+
+      // hide toplevels, hide & delete sublevels, move center
+      // navigateInto(parentIndex) {
+      //   for (let i = 0; i < this._items.length; i++) {
+      //     if (i == parentIndex) {
+      //       this._items[i].nameRevealer.reveal_child     = false;
+      //       this._items[i].shortcutRevealer.reveal_child = false;
+      //       this._items[i].button.add_css_class('pill-button');
+      //     } else {
+      //       this._items[i].reveal_child = false;
+      //     }
+      //   }
+
+
+      //   this._parentItem = this._items[parentIndex];
+      //   this._restartAnimation = true;
+
+      //   this.queue_allocate();
+      // }
+
+      // navigateBack(parentIndex) {
+      //   if (parentIndex >= 0) {
+      //     this._parentItem
+      //   }
+      // }
+
+      _createItem(config) {
 
         const item = new FlyPieMenuEditorItem();
 
@@ -450,7 +514,7 @@ function registerWidget() {
         dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
         item.button.add_controller(dropTarget);
 
-        item.button.connect('clicked', (b) => {
+        item.button.connect('toggled', (b) => {
           // For some reason, the drag source does not work anymore once the
           // ToggleButton was toggled. Resetting the EventController seems to be a
           // working workaround.
@@ -463,77 +527,20 @@ function registerWidget() {
           }
         });
 
-        // item.button.emit('activate');
-
-        this._items.splice(where, 0, item);
-        this.queue_allocate();
+        return item;
       }
-
-      remove(which) {
-        const [removed] = this._items.splice(which, 1);
-
-        if (removed == this._selectedItem) {
-          this._selectedItem = null;
-        }
-
-        removed.unparent();
-        this._restartAnimation = true;
-        this.queue_allocate();
-      }
-
-      updateSelected(config) {
-        if (this._selectedItem) {
-          this._selectedItem.setConfig(config);
-        }
-      }
-
-      setItems(configs, parentItem) {
-        this._hideAllItems();
-
-        for (let i = 0; i < configs.length; i++) {
-          this.add(configs[i], i);
-        }
-
-        // this._parentItem = parentItem || null;
-
-        this.queue_allocate();
-      }
-
-      // hide toplevels, hide & delete sublevels, move center
-      // navigateInto(parentIndex) {
-      //   for (let i = 0; i < this._items.length; i++) {
-      //     if (i == parentIndex) {
-      //       this._items[i].nameRevealer.reveal_child     = false;
-      //       this._items[i].shortcutRevealer.reveal_child = false;
-      //       this._items[i].button.add_css_class('pill-button');
-      //     } else {
-      //       this._items[i].reveal_child = false;
-      //     }
-      //   }
-
-
-      //   this._parentItem = this._items[parentIndex];
-      //   this._restartAnimation = true;
-
-      //   this.queue_allocate();
-      // }
-
-      // navigateBack(parentIndex) {
-      //   if (parentIndex >= 0) {
-      //     this._parentItem
-      //   }
-      // }
 
       _hideAllItems() {
         for (let i = 0; i < this._items.length; i++) {
           this._items[i].unparent();
-
-          if (this._parentItem) {
-            this._parentItem.unparent();
-          }
         }
 
-        this._items = [];
+        if (this._parentItem) {
+          this._parentItem.unparent();
+        }
+
+        this._items      = [];
+        this._parentItem = null;
       }
 
       // Returns true if this should show the menu grid rather than a submenu.
@@ -562,7 +569,12 @@ function registerWidget() {
         for (let i = 0; i < this._items.length; i++) {
           updateItemPosition(this._items[i]);
         }
+
         updateItemPosition(this._addButton);
+
+        if (this._parentItem) {
+          updateItemPosition(this._parentItem);
+        }
 
         return allFinished;
       }
