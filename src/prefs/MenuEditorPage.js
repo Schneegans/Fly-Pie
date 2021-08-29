@@ -519,11 +519,10 @@ var MenuEditorPage = class MenuEditorPage {
       this._menuPath.push(this._selectedItem);
       this._updateSidebar();
       this._updateBreadCrumbs();
-      this._editor.setItems(this._selectedItem.children, this._selectedItem);
+      this._editor.setItems(this._selectedItem.children, this._selectedItem, -1);
     });
 
     this._editor.connect('remove', (e, which) => {
-      this._editor.remove(which);
       const [removed] = this._getCurrentConfigs().splice(which, 1);
       if (removed == this._selectedItem) {
         this._selectedItem = null;
@@ -534,14 +533,18 @@ var MenuEditorPage = class MenuEditorPage {
 
     this._editor.connect('add', (e, what, where) => {
       const config = JSON.parse(what);
-      this._editor.add(config, where);
       this._getCurrentConfigs().splice(where, 0, config);
+      this._selectedItem = config;
+      this._updateSidebar();
       this._saveMenuConfiguration();
     });
 
     this._editor.connect('add-into', (e, what, where) => {
       const config = JSON.parse(what);
-      this._getCurrentConfigs()[where].children.push(config);
+      const parent = this._getCurrentConfigs()[where];
+      parent.children.push(config);
+      this._selectedItem = parent;
+      this._updateSidebar();
       this._saveMenuConfiguration();
     });
 
@@ -636,10 +639,11 @@ var MenuEditorPage = class MenuEditorPage {
     const sometingSelected = this._selectedItem != null;
     const toplevelSelected = this._menuConfigs.indexOf(this._selectedItem) >= 0;
 
-    this._builder.get_object('preview-menu-button').sensitive       = sometingSelected;
     this._builder.get_object('item-settings-revealer').reveal_child = sometingSelected;
     this._builder.get_object('item-settings-menu-revealer').reveal_child =
         toplevelSelected;
+    this._builder.get_object('preview-menu-button').sensitive =
+        sometingSelected || this._menuPath.length > 0;
 
     if (sometingSelected) {
 
@@ -713,8 +717,9 @@ var MenuEditorPage = class MenuEditorPage {
     button.add_css_class('menu-editor-path-item');
     button.connect('clicked', () => {
       if (this._menuPath.length > 0) {
-        this._editor.setItems(this._menuConfigs);
-        this._selectedItem = null;
+        const selectedIndex = this._menuConfigs.indexOf(this._menuPath[0]);
+        this._editor.setItems(this._menuConfigs, null, selectedIndex);
+        this._selectedItem = this._menuPath[0];
         this._menuPath     = [];
         this._updateBreadCrumbs();
         this._updateSidebar();
@@ -737,8 +742,9 @@ var MenuEditorPage = class MenuEditorPage {
       const button = new Gtk.Button();
       button.connect('clicked', () => {
         if (this._menuPath.length > i + 1) {
-          this._editor.setItems(item.children, item);
-          this._selectedItem    = null;
+          const selectedIndex = item.children.indexOf(this._menuPath[i + 1]);
+          this._editor.setItems(item.children, item, selectedIndex);
+          this._selectedItem    = this._menuPath[i + 1];
           this._menuPath.length = i + 1;
           this._updateBreadCrumbs();
           this._updateSidebar();
@@ -784,8 +790,10 @@ var MenuEditorPage = class MenuEditorPage {
     const configs = this._getCurrentConfigs();
     configs.push(newItem);
 
+    this._selectedItem = newItem;
     this._editor.add(newItem, configs.length - 1);
     this._saveMenuConfiguration();
+    this._updateSidebar();
 
     // Store this in our statistics.
     Statistics.getInstance().addItemCreated();

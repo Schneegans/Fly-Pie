@@ -171,6 +171,8 @@ function registerWidget() {
           if (this._dropIndex == null) {
             return false;
           }
+          const config = JSON.parse(value);
+          this.add(config, this._dropIndex);
           this.emit('add', value, this._dropIndex);
           this._dropColumn = null;
           this._dropRow    = null;
@@ -369,10 +371,10 @@ function registerWidget() {
       }
 
       add(config, where) {
-
         const item = this._createItem(config);
 
-        // item.button.emit('activate');
+        this._selectedItem = item;
+        item.button.active = true;
 
         this._items.splice(where, 0, item);
         this.queue_allocate();
@@ -396,15 +398,27 @@ function registerWidget() {
         }
       }
 
-      setItems(configs, parentConfig) {
+      setItems(configs, parentConfig, selectedIndex) {
         this._hideAllItems();
 
         for (let i = 0; i < configs.length; i++) {
-          this.add(configs[i], i);
+          const item = this._createItem(configs[i]);
+          this._items.push(item);
+
+          if (i == selectedIndex) {
+            this._selectedItem = item;
+            item.button.active = true;
+          }
         }
 
         if (parentConfig) {
           this._centerItem = this._createItem(parentConfig);
+
+          if (selectedIndex == -1) {
+            this._selectedItem             = this._centerItem;
+            this._centerItem.button.active = true;
+          }
+
         } else {
           this._centerItem = null;
         }
@@ -482,6 +496,7 @@ function registerWidget() {
               removeIndex += 1;
             }
 
+            this.remove(removeIndex);
             this.emit('remove', removeIndex);
             item.opacity   = 1;
             item.sensitive = true;
@@ -509,13 +524,15 @@ function registerWidget() {
             () => item.getConfig().type == 'CustomMenu' && item != this._centerItem);
         dropTarget.connect('drop', (t, value) => {
           this.emit('add-into', value, this._items.indexOf(item));
+          this._selectedItem               = item;
+          this._selectedItem.button.active = true;
           this._endDrag();
           return true;
         });
         dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
         item.button.add_controller(dropTarget);
 
-        item.button.connect('toggled', (b) => {
+        item.button.connect('clicked', (b) => {
           // For some reason, the drag source does not work anymore once the
           // ToggleButton was toggled. Resetting the EventController seems to be a
           // working workaround.
@@ -540,8 +557,9 @@ function registerWidget() {
           this._centerItem.unparent();
         }
 
-        this._items      = [];
-        this._centerItem = null;
+        this._items        = [];
+        this._centerItem   = null;
+        this._selectedItem = null;
       }
 
       // Returns true if this should show the menu grid rather than a submenu.
