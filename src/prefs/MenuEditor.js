@@ -139,7 +139,7 @@ function registerWidget() {
       _init(params = {}) {
         super._init(params);
 
-        this._items        = [[]];
+        this._items        = [];
         this._gridItemSize = 128;
 
         this._restartAnimation = false;
@@ -192,7 +192,7 @@ function registerWidget() {
             this._dropColumn = Math.floor(x / this._gridItemSize + 0.5);
             this._dropRow    = Math.floor(y / this._gridItemSize);
             this._dropIndex  = Math.min(
-                this._items[0].length - 1,
+                this._items.length - 1,
                 this._columnCount * this._dropRow + this._dropColumn);
           } else {
             this._dropColumn = null;
@@ -207,23 +207,24 @@ function registerWidget() {
 
         this.add_controller(this._dropTarget);
 
-        const revealer = new Gtk.Revealer(
-            {transition_type: Gtk.RevealerTransitionType.CROSSFADE, reveal_child: true});
-        revealer.set_parent(this);
+        this._addButton = new Gtk.Revealer({
+          transition_type: Gtk.RevealerTransitionType.CROSSFADE,
+          margin_start: 32,
+          margin_end: 32,
+          margin_top: 32,
+          margin_bottom: 32,
+          reveal_child: true
+        });
+        this._addButton.set_parent(this);
 
         const button = Gtk.Button.new_from_icon_name('list-add-symbolic');
         button.add_css_class('pill-button');
         button.set_has_frame(false);
-        button.set_margin_start(24);
-        button.set_margin_end(24);
-        button.set_margin_top(24);
-        button.set_margin_bottom(24);
-        revealer.set_child(button);
+        this._addButton.set_child(button);
 
-        this._items[0].push(revealer);
-
-        button.connect('clicked', () => {
-          this.emit('request-add', revealer.get_allocation());
+        button.connect('clicked', (b) => {
+          const allocation = b.get_parent().get_allocation();
+          this.emit('request-add', allocation);
         });
       }
 
@@ -238,7 +239,7 @@ function registerWidget() {
           }
 
           const columns = Math.floor(for_size / this._gridItemSize);
-          const rows    = Math.ceil(this._items[0].length / columns);
+          const rows    = Math.ceil(this._items.length / columns);
 
           const gridSize = rows * this._gridItemSize;
 
@@ -275,20 +276,21 @@ function registerWidget() {
           return;
         }
 
-        const time  = GLib.get_monotonic_time() / 1000;
-        const items = this._getCurrentItems();
+        const time = GLib.get_monotonic_time() / 1000;
 
         if (this._inMenuOverviewMode()) {
 
-          if (items.length == 0) {
+          if (this._items.length == 0) {
             return;
           }
 
+          const itemCount = this._items.length + 1;
+
           this._columnCount = Math.floor(width / this._gridItemSize);
-          this._rowCount    = Math.ceil(items.length / this._columnCount);
+          this._rowCount    = Math.ceil(itemCount / this._columnCount);
 
           if (this._rowCount == 1) {
-            this._columnCount = items.length;
+            this._columnCount = itemCount;
           }
 
           this._gridOffsetX = (width - this._columnCount * this._gridItemSize) / 2;
@@ -303,7 +305,7 @@ function registerWidget() {
             this._restartAnimation = true;
           }
 
-          for (let i = 0; i < items.length; i++) {
+          for (let i = 0; i < itemCount; i++) {
 
             const column = i % this._columnCount;
             const row    = Math.floor(i / this._columnCount);
@@ -329,13 +331,15 @@ function registerWidget() {
             const endX = this._gridOffsetX + column * this._gridItemSize + dropZoneOffset;
             const endY = this._gridOffsetY + row * this._gridItemSize;
 
-            setAnimation(items[i], time, startX, startY, endX, endY);
+            if (i < this._items.length) {
+              setAnimation(this._items[i], time, startX, startY, endX, endY);
+            } else {
+              setAnimation(this._addButton, time, startX, startY, endX, endY);
+            }
           }
 
         } else {
-          const items = this._getCurrentItems();
-
-          for (let i = 0; i < items.length; i++) {
+          for (let i = 0; i < this._items.length; i++) {
             // arrange in circle
           }
 
@@ -387,7 +391,7 @@ function registerWidget() {
         longPress.connect('pressed', () => {
           if (item.getConfig().type == 'CustomMenu') {
             this._selectedItem = item;
-            this.emit('edit', this._getCurrentItems().indexOf(item));
+            this.emit('edit', this._items.indexOf(item));
           }
         });
         item.button.add_controller(longPress);
@@ -409,7 +413,7 @@ function registerWidget() {
         });
         dragSource.connect('drag-end', (s, drag, deleteData) => {
           if (deleteData) {
-            let removeIndex = this._getCurrentItems().indexOf(item);
+            let removeIndex = this._items.indexOf(item);
 
             if (this._dropIndex != null && this._dropIndex <= removeIndex) {
               removeIndex += 1;
@@ -439,7 +443,7 @@ function registerWidget() {
         dropTarget.set_gtypes([GObject.TYPE_STRING]);
         dropTarget.connect('accept', () => item.getConfig().type == 'CustomMenu');
         dropTarget.connect('drop', (t, value) => {
-          this.emit('add-into', value, this._getCurrentItems().indexOf(item));
+          this.emit('add-into', value, this._items.indexOf(item));
           this._endDrag();
           return true;
         });
@@ -455,19 +459,18 @@ function registerWidget() {
 
           if (b.active) {
             this._selectedItem = item;
-            this.emit('select', this._getCurrentItems().indexOf(item));
+            this.emit('select', this._items.indexOf(item));
           }
         });
 
         // item.button.emit('activate');
 
-        this._getCurrentItems().splice(where, 0, item);
+        this._items.splice(where, 0, item);
         this.queue_allocate();
       }
 
       remove(which) {
-        const items     = this._getCurrentItems();
-        const [removed] = items.splice(which, 1);
+        const [removed] = this._items.splice(which, 1);
 
         if (removed == this._selectedItem) {
           this._selectedItem = null;
@@ -484,28 +487,36 @@ function registerWidget() {
         }
       }
 
-      // hide toplevels, hide & delete sublevels, move center
-      navigateInto(parentIndex) {
-        const items = this._getCurrentItems();
+      setItems(configs, parentItem) {
+        this._hideAllItems();
 
-        for (let i = 0; i < items.length; i++) {
-          if (i == parentIndex) {
-            items[i].nameRevealer.reveal_child     = false;
-            items[i].shortcutRevealer.reveal_child = false;
-            items[i].button.add_css_class('pill-button');
-          } else {
-            items[i].reveal_child = false;
-          }
+        for (let i = 0; i < configs.length; i++) {
+          this.add(configs[i], i);
         }
 
-
-        this._parentItem = items[parentIndex];
-        this._items.push([]);
-
-        this._restartAnimation = true;
+        // this._parentItem = parentItem || null;
 
         this.queue_allocate();
       }
+
+      // hide toplevels, hide & delete sublevels, move center
+      // navigateInto(parentIndex) {
+      //   for (let i = 0; i < this._items.length; i++) {
+      //     if (i == parentIndex) {
+      //       this._items[i].nameRevealer.reveal_child     = false;
+      //       this._items[i].shortcutRevealer.reveal_child = false;
+      //       this._items[i].button.add_css_class('pill-button');
+      //     } else {
+      //       this._items[i].reveal_child = false;
+      //     }
+      //   }
+
+
+      //   this._parentItem = this._items[parentIndex];
+      //   this._restartAnimation = true;
+
+      //   this.queue_allocate();
+      // }
 
       // navigateBack(parentIndex) {
       //   if (parentIndex >= 0) {
@@ -513,34 +524,45 @@ function registerWidget() {
       //   }
       // }
 
-      _getCurrentItems() {
-        return this._items[this._items.length - 1];
+      _hideAllItems() {
+        for (let i = 0; i < this._items.length; i++) {
+          this._items[i].unparent();
+
+          if (this._parentItem) {
+            this._parentItem.unparent();
+          }
+        }
+
+        this._items = [];
       }
 
       // Returns true if this should show the menu grid rather than a submenu.
       _inMenuOverviewMode() {
-        return this._items.length == 1;
+        return this._parentItem == null;
       }
 
       // Returns true if all animations are done.
       _updateItemPositions(time) {
         let allFinished = true;
 
+        const updateItemPosition = (item) => {
+          const allocation = new Gdk.Rectangle({
+            x: item.x.get(time),
+            y: item.y.get(time),
+            width: this._gridItemSize,
+            height: this._gridItemSize
+          });
+
+          allFinished &= item.x.isFinished(time);
+          allFinished &= item.y.isFinished(time);
+
+          item.size_allocate(allocation, -1);
+        };
+
         for (let i = 0; i < this._items.length; i++) {
-          for (let j = 0; j < this._items[i].length; j++) {
-            const allocation = new Gdk.Rectangle({
-              x: this._items[i][j].x.get(time),
-              y: this._items[i][j].y.get(time),
-              width: this._gridItemSize,
-              height: this._gridItemSize
-            });
-
-            allFinished &= this._items[i][j].x.isFinished(time);
-            allFinished &= this._items[i][j].y.isFinished(time);
-
-            this._items[i][j].size_allocate(allocation, -1);
-          }
+          updateItemPosition(this._items[i]);
         }
+        updateItemPosition(this._addButton);
 
         return allFinished;
       }

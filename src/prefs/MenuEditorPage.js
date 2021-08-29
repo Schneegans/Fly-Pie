@@ -80,9 +80,7 @@ var MenuEditorPage = class MenuEditorPage {
     }
 
     // Then we add all menus to the editor.
-    for (let i = 0; i < this._menuConfigs.length; i++) {
-      this._editor.add(this._menuConfigs[i], i);
-    }
+    this._editor.setItems(this._menuConfigs);
 
     // And all stashed items to the stash widget.
     for (let i = 0; i < this._stashedConfigs.length; i++) {
@@ -514,7 +512,7 @@ var MenuEditorPage = class MenuEditorPage {
       this._menuPath.push(this._selectedItem);
       this._updateSidebar(this._selectedItem);
       this._updateBreadCrumbs();
-      this._editor.navigateInto(which);
+      this._editor.setItems(this._selectedItem.children, this._selectedItem);
     });
 
     this._editor.connect('remove', (e, which) => {
@@ -699,6 +697,12 @@ var MenuEditorPage = class MenuEditorPage {
 
     const button = new Gtk.Button();
     button.add_css_class('menu-editor-path-item');
+    button.connect('clicked', () => {
+      this._editor.setItems(this._menuConfigs);
+      this._menuPath = [];
+      this._updateBreadCrumbs();
+    });
+
     const box = new Gtk.Box();
     // Translators: The left-most item of the menu editor bread crumbs.
     const label = new Gtk.Label({label: _('All Menus')});
@@ -713,6 +717,11 @@ var MenuEditorPage = class MenuEditorPage {
       const item   = this._menuPath[i];
       const label  = new Gtk.Label({label: item.name});
       const button = new Gtk.Button();
+      button.connect('clicked', () => {
+        this._editor.setItems(item.children, item);
+        this._menuPath.length = i + 1;
+        this._updateBreadCrumbs();
+      });
       button.add_css_class('menu-editor-path-item');
       button.set_child(label);
       container.append(button);
