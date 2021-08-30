@@ -516,20 +516,20 @@ function registerWidget() {
             'accept',
             () => item.getConfig().type == 'CustomMenu' && item != this._centerItem);
 
-        dropTarget.connect('drop', (t, value) => {
+        dropTarget.connect('drop', (t, what) => {
           const internalDrag = t.get_drop().get_drag() != null;
           const dropIndex    = this._items.indexOf(item);
           if (internalDrag) {
-            this.emit('drop-item-into', value, dropIndex);
+            this.emit('drop-item-into', what, dropIndex);
           } else {
             if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
-              value.split(/\r?\n/).forEach(line => {
+              what.split(/\r?\n/).forEach(line => {
                 if (line != '') {
                   this.emit('drop-data-into', line, dropIndex);
                 }
               });
             } else {
-              this.emit('drop-data-into', value, dropIndex);
+              this.emit('drop-data-into', what, dropIndex);
             }
           }
 

@@ -740,16 +740,32 @@ var MenuEditorPage = class MenuEditorPage {
 
     const button = new Gtk.Button();
     button.add_css_class('menu-editor-path-item');
-    button.connect('clicked', () => {
-      if (this._menuPath.length > 0) {
+    if (this._menuPath.length > 0) {
+      button.connect('clicked', () => {
         const selectedIndex = this._menuConfigs.indexOf(this._menuPath[0]);
         this._editor.setItems(this._menuConfigs, null, selectedIndex);
         this._selectedItem = this._menuPath[0];
         this._menuPath     = [];
         this._updateBreadCrumbs();
         this._updateSidebar();
-      }
-    });
+      });
+
+      const dropTarget =
+          new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+      dropTarget.set_gtypes([GObject.TYPE_STRING]);
+      dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
+      dropTarget.connect('drop', (t, what) => {
+        const config = JSON.parse(what);
+        if (ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
+          return false;
+        }
+        this._menuConfigs.push(config);
+        this._saveMenuConfiguration();
+        return true;
+      });
+      dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+      button.add_controller(dropTarget);
+    }
 
     const box = new Gtk.Box();
     // Translators: The left-most item of the menu editor bread crumbs.
@@ -765,16 +781,28 @@ var MenuEditorPage = class MenuEditorPage {
       const item   = this._menuPath[i];
       const label  = new Gtk.Label({label: item.name});
       const button = new Gtk.Button();
-      button.connect('clicked', () => {
-        if (this._menuPath.length > i + 1) {
+      if (this._menuPath.length > i + 1) {
+        button.connect('clicked', () => {
           const selectedIndex = item.children.indexOf(this._menuPath[i + 1]);
           this._editor.setItems(item.children, item, selectedIndex);
           this._selectedItem    = this._menuPath[i + 1];
           this._menuPath.length = i + 1;
           this._updateBreadCrumbs();
           this._updateSidebar();
-        }
-      });
+        });
+        const dropTarget =
+            new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+        dropTarget.set_gtypes([GObject.TYPE_STRING]);
+        dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
+        dropTarget.connect('drop', (t, what) => {
+          const config = JSON.parse(what);
+          item.children.push(config);
+          this._saveMenuConfiguration();
+          return true;
+        });
+        dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+        button.add_controller(dropTarget);
+      }
       button.add_css_class('menu-editor-path-item');
       button.set_child(label);
       container.append(button);
