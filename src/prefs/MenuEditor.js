@@ -14,6 +14,8 @@ const _ = imports.gettext.domain('flypie').gettext;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.src.common.utils;
+const ItemRegistry  = Me.imports.src.common.ItemRegistry.ItemRegistry;
+const ItemClass     = Me.imports.src.common.ItemRegistry.ItemClass;
 const AnimatedValue = Me.imports.src.prefs.AnimatedValue.AnimatedValue;
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -134,6 +136,7 @@ function registerWidget() {
           'drop-item-into':  { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]},
           'drop-data-into':  { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]},
           'request-add':     { param_types: [Gdk.Rectangle.$gtype]},
+          'notification':    { param_types: [GObject.TYPE_STRING]},
         },
       },
       class FlyPieMenuEditor extends Gtk.Widget {
@@ -163,23 +166,46 @@ function registerWidget() {
 
         this._dropTarget.connect('accept', () => true);
         this._dropTarget.connect('leave', () => this._endDrag());
-        this._dropTarget.connect('drop', (t, value) => {
+        this._dropTarget.connect('drop', (t, what) => {
           if (this._dropIndex == null) {
             return false;
           }
 
           const internalDrag = t.get_drop().get_drag() != null;
           if (internalDrag) {
-            this.emit('drop-item', value, this._dropIndex);
+
+            const config = JSON.parse(what);
+            if (this._inMenuOverviewMode() &&
+                ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
+              // Translators: This is shown as an in-app notification when the user
+              // attempts to drag an action in the menu editor to the menu overview.
+              this.emit(
+                  'notification', _('Actions cannot be turned into toplevel menus.'));
+              this._endDrag();
+              return false;
+            }
+
+            this.emit('drop-item', what, this._dropIndex);
           } else {
+
+            if (this._inMenuOverviewMode()) {
+              // Translators: This is shown as an in-app notification when the user
+              // attempts to drag external stuff to the menu editor's overview.
+              this.emit(
+                  'notification',
+                  _('You can only create new Action items inside of Custom Menus.'));
+              this._endDrag();
+              return false;
+            }
+
             if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
-              value.split(/\r?\n/).forEach((line, i) => {
+              what.split(/\r?\n/).forEach((line, i) => {
                 if (line != '') {
                   this.emit('drop-data', line, this._dropIndex + i);
                 }
               });
             } else {
-              this.emit('drop-data', value, this._dropIndex);
+              this.emit('drop-data', what, this._dropIndex);
             }
           }
 

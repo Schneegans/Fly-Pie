@@ -89,6 +89,11 @@ var PreferencesDialog = class PreferencesDialog {
       }
     });
 
+    // Hide the in-app notification when its close button is pressed.
+    this._builder.get_object('notification-close-button').connect('clicked', () => {
+      this._builder.get_object('notification-revealer').reveal_child = false;
+    });
+
     // We show an info bar if GNOME Shell's animations are disabled. To make this info
     // more apparent, we wait some seconds before showing it.
     this._showAnimationInfoTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {

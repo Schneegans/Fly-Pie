@@ -582,6 +582,8 @@ var MenuEditorPage = class MenuEditorPage {
       popover.popup();
     });
 
+    this._editor.connect('notification', (e, text) => this._showNotification(text));
+
     {
       const trash = this._builder.get_object('menu-editor-trash');
       const dropTarget =
@@ -688,7 +690,7 @@ var MenuEditorPage = class MenuEditorPage {
       // If the selected item is a top-level menu, the SHORTCUT column contains its
       // shortcut.
       if (toplevelSelected) {
-        this._menuShortcutLabel.set_accelerator(this._selectedItem.shortcut);
+        this._menuShortcutLabel.set_accelerator(this._selectedItem.shortcut || '');
         this._builder.get_object('menu-centered').active = this._selectedItem.centered;
       }
 
@@ -757,6 +759,9 @@ var MenuEditorPage = class MenuEditorPage {
       dropTarget.connect('drop', (t, what) => {
         const config = JSON.parse(what);
         if (ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
+          // Translators: This is shown as an in-app notification when the user attempts
+          // to drag an action in the menu editor to the menu overview.
+          this._showNotification(_('Actions cannot be turned into toplevel menus.'));
           return false;
         }
         this._menuConfigs.push(config);
@@ -983,5 +988,10 @@ var MenuEditorPage = class MenuEditorPage {
 
       return false;
     });
+  }
+
+  _showNotification(text) {
+    this._builder.get_object('notification-revealer').reveal_child = true;
+    this._builder.get_object('notification-label').label           = text;
   }
 }
