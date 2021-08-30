@@ -518,10 +518,19 @@ function registerWidget() {
 
         dropTarget.connect('drop', (t, value) => {
           const internalDrag = t.get_drop().get_drag() != null;
+          const dropIndex    = this._items.indexOf(item);
           if (internalDrag) {
-            this.emit('drop-item-into', value, this._items.indexOf(item));
+            this.emit('drop-item-into', value, dropIndex);
           } else {
-            this.emit('drop-data-into', value, this._items.indexOf(item));
+            if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
+              value.split(/\r?\n/).forEach(line => {
+                if (line != '') {
+                  this.emit('drop-data-into', line, dropIndex);
+                }
+              });
+            } else {
+              this.emit('drop-data-into', value, dropIndex);
+            }
           }
 
           this._selectedItem               = item;

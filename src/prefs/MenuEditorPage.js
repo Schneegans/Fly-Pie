@@ -563,7 +563,12 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     this._editor.connect('drop-data-into', (e, what, where) => {
-      utils.debug('drop into ' + what);
+      const config = ItemRegistry.createActionConfig(what);
+      const parent = this._getCurrentConfigs()[where];
+      parent.children.push(config);
+      this._selectedItem = parent;
+      this._updateSidebar();
+      this._saveMenuConfiguration();
     });
 
     this._editor.connect('request-add', (e, rect) => {
