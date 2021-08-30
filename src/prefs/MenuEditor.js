@@ -126,12 +126,14 @@ function registerWidget() {
       GObject.registerClass({
         GTypeName: 'FlyPieMenuEditor',
         Signals: {
-          'select':      { param_types: [GObject.TYPE_INT]},
-          'edit':        { param_types: [GObject.TYPE_INT]},
-          'remove':      { param_types: [GObject.TYPE_INT]},
-          'add':         { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]},
-          'add-into':    { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]},
-          'request-add': { param_types: [Gdk.Rectangle.$gtype]},
+          'select':          { param_types: [GObject.TYPE_INT]},
+          'edit':            { param_types: [GObject.TYPE_INT]},
+          'remove':          { param_types: [GObject.TYPE_INT]},
+          'drop-item':       { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]},
+          'drop-data':       { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]},
+          'drop-item-into':  { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]},
+          'drop-data-into':  { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]},
+          'request-add':     { param_types: [Gdk.Rectangle.$gtype]},
         },
       },
       class FlyPieMenuEditor extends Gtk.Widget {
@@ -159,24 +161,30 @@ function registerWidget() {
             new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
         this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
 
-        this._dropTarget.connect('accept', (t, drop) => {
-          return true;
-        });
-
-        this._dropTarget.connect('leave', () => {
-          this._endDrag();
-        });
-
-        this._dropTarget.connect('drop', (t, value, x, y) => {
+        this._dropTarget.connect('accept', () => true);
+        this._dropTarget.connect('leave', () => this._endDrag());
+        this._dropTarget.connect('drop', (t, value) => {
           if (this._dropIndex == null) {
             return false;
           }
-          const config = JSON.parse(value);
-          this.add(config, this._dropIndex);
-          this.emit('add', value, this._dropIndex);
-          this._dropColumn = null;
-          this._dropRow    = null;
-          this.queue_allocate();
+
+          const internalDrag = t.get_drop().get_drag() != null;
+          if (internalDrag) {
+            this.emit('drop-item', value, this._dropIndex);
+          } else {
+            if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
+              value.split(/\r?\n/).forEach((line, i) => {
+                if (line != '') {
+                  this.emit('drop-data', line, this._dropIndex + i);
+                }
+              });
+            } else {
+              this.emit('drop-data', value, this._dropIndex);
+            }
+          }
+
+          this._endDrag();
+
           return true;
         });
 
@@ -203,7 +211,10 @@ function registerWidget() {
 
           this.queue_allocate();
 
+          // const internalDrag = t.get_drop().get_drag() != null;
+
           return Gdk.DragAction.MOVE;
+          // return internalDrag ? Gdk.DragAction.MOVE : Gdk.DragAction.COPY;
         });
 
         this.add_controller(this._dropTarget);
@@ -377,6 +388,8 @@ function registerWidget() {
         item.button.active = true;
 
         this._items.splice(where, 0, item);
+
+        this._restartAnimation = true;
         this.queue_allocate();
       }
 
@@ -388,6 +401,7 @@ function registerWidget() {
         }
 
         removed.unparent();
+
         this._restartAnimation = true;
         this.queue_allocate();
       }
@@ -425,31 +439,6 @@ function registerWidget() {
 
         this.queue_allocate();
       }
-
-      // hide toplevels, hide & delete sublevels, move center
-      // navigateInto(parentIndex) {
-      //   for (let i = 0; i < this._items.length; i++) {
-      //     if (i == parentIndex) {
-      //       this._items[i].nameRevealer.reveal_child     = false;
-      //       this._items[i].shortcutRevealer.reveal_child = false;
-      //       this._items[i].button.add_css_class('pill-button');
-      //     } else {
-      //       this._items[i].reveal_child = false;
-      //     }
-      //   }
-
-
-      //   this._centerItem = this._items[parentIndex];
-      //   this._restartAnimation = true;
-
-      //   this.queue_allocate();
-      // }
-
-      // navigateBack(parentIndex) {
-      //   if (parentIndex >= 0) {
-      //     this._centerItem
-      //   }
-      // }
 
       _createItem(config) {
 
@@ -492,12 +481,16 @@ function registerWidget() {
           if (deleteData) {
             let removeIndex = this._items.indexOf(item);
 
-            if (this._dropIndex != null && this._dropIndex <= removeIndex) {
-              removeIndex += 1;
-            }
+            // if (this._dropIndex != null && this._dropIndex <= removeIndex) {
+            //   removeIndex += 1;
+            //   utils.debug('remove from ' + removeIndex + '*');
+            // } else {
+            //   utils.debug('remove from ' + removeIndex);
+            // }
 
             this.remove(removeIndex);
             this.emit('remove', removeIndex);
+
             item.opacity   = 1;
             item.sensitive = true;
           } else {
@@ -522,13 +515,21 @@ function registerWidget() {
         dropTarget.connect(
             'accept',
             () => item.getConfig().type == 'CustomMenu' && item != this._centerItem);
+
         dropTarget.connect('drop', (t, value) => {
-          this.emit('add-into', value, this._items.indexOf(item));
+          const internalDrag = t.get_drop().get_drag() != null;
+          if (internalDrag) {
+            this.emit('drop-item-into', value, this._items.indexOf(item));
+          } else {
+            this.emit('drop-data-into', value, this._items.indexOf(item));
+          }
+
           this._selectedItem               = item;
           this._selectedItem.button.active = true;
           this._endDrag();
           return true;
         });
+
         dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
         item.button.add_controller(dropTarget);
 
@@ -572,17 +573,19 @@ function registerWidget() {
         let allFinished = true;
 
         const updateItemPosition = (item) => {
-          const allocation = new Gdk.Rectangle({
-            x: item.x.get(time),
-            y: item.y.get(time),
-            width: this._gridItemSize,
-            height: this._gridItemSize
-          });
+          if (item.x && item.x) {
+            const allocation = new Gdk.Rectangle({
+              x: item.x.get(time),
+              y: item.y.get(time),
+              width: this._gridItemSize,
+              height: this._gridItemSize
+            });
 
-          allFinished &= item.x.isFinished(time);
-          allFinished &= item.y.isFinished(time);
+            allFinished &= item.x.isFinished(time);
+            allFinished &= item.y.isFinished(time);
 
-          item.size_allocate(allocation, -1);
+            item.size_allocate(allocation, -1);
+          }
         };
 
         for (let i = 0; i < this._items.length; i++) {
@@ -601,8 +604,7 @@ function registerWidget() {
       _endDrag() {
         this._dropColumn = null;
         this._dropRow    = null;
-        this._dropIndex  = null;
-        this.queue_allocate();
+        // this.queue_allocate();
       }
     });
   }

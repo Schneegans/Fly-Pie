@@ -378,9 +378,11 @@ var MenuEditorPage = class MenuEditorPage {
     label.connect('destroy', () => {
       if (this._infoLabelTimeoutA) {
         GLib.source_remove(this._infoLabelTimeoutA);
+        this._infoLabelTimeoutA = null;
       }
       if (this._infoLabelTimeoutB) {
         GLib.source_remove(this._infoLabelTimeoutB);
+        this._infoLabelTimeoutB = null;
       }
     });
   }
@@ -388,9 +390,11 @@ var MenuEditorPage = class MenuEditorPage {
   _showInfoLabel(text) {
     if (this._infoLabelTimeoutA) {
       GLib.source_remove(this._infoLabelTimeoutA);
+      this._infoLabelTimeoutA = null;
     }
     if (this._infoLabelTimeoutB) {
       GLib.source_remove(this._infoLabelTimeoutB);
+      this._infoLabelTimeoutB = null;
     }
 
     this._builder.get_object('info-label').label = text;
@@ -531,21 +535,35 @@ var MenuEditorPage = class MenuEditorPage {
       this._saveMenuConfiguration();
     });
 
-    this._editor.connect('add', (e, what, where) => {
+    this._editor.connect('drop-item', (e, what, where) => {
       const config = JSON.parse(what);
-      this._getCurrentConfigs().splice(where, 0, config);
+      this._editor.add(config, where);
       this._selectedItem = config;
+      this._getCurrentConfigs().splice(where, 0, config);
       this._updateSidebar();
       this._saveMenuConfiguration();
     });
 
-    this._editor.connect('add-into', (e, what, where) => {
+    this._editor.connect('drop-data', (e, what, where) => {
+      const config = ItemRegistry.createActionConfig(what);
+      this._editor.add(config, where);
+      this._selectedItem = config;
+      this._getCurrentConfigs().splice(where, 0, config);
+      this._updateSidebar();
+      this._saveMenuConfiguration();
+    });
+
+    this._editor.connect('drop-item-into', (e, what, where) => {
       const config = JSON.parse(what);
       const parent = this._getCurrentConfigs()[where];
       parent.children.push(config);
       this._selectedItem = parent;
       this._updateSidebar();
       this._saveMenuConfiguration();
+    });
+
+    this._editor.connect('drop-data-into', (e, what, where) => {
+      utils.debug('drop into ' + what);
     });
 
     this._editor.connect('request-add', (e, rect) => {
@@ -564,6 +582,7 @@ var MenuEditorPage = class MenuEditorPage {
       const dropTarget =
           new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
       dropTarget.set_gtypes([GObject.TYPE_STRING]);
+      dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
       dropTarget.connect('drop', () => true);
       dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
       trash.add_controller(dropTarget);
@@ -574,6 +593,7 @@ var MenuEditorPage = class MenuEditorPage {
       const dropTarget =
           new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
       dropTarget.set_gtypes([GObject.TYPE_STRING]);
+      dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
       dropTarget.connect('drop', (t, value) => {
         const config = JSON.parse(value);
         this._stashedConfigs.push(config);

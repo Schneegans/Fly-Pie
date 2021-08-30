@@ -8,6 +8,8 @@
 
 'use strict';
 
+const {GLib, Gio} = imports.gi;
+
 const _ = imports.gettext.domain('flypie').gettext;
 
 // GMenu is not necessarily installed on all systems. So we include it optionally here. If
@@ -127,6 +129,95 @@ var ItemRegistry = class ItemRegistry {
     }
 
     return _itemTypes;
+  }
+
+  // This function creates a new action configuration object for a given text. If the text
+  // is an URI to a file, a file action is created. If it's a *.desktop file, a "Launch
+  // Application" action is created, an URI action is created for all other URIs.
+  // If text is not an URI, an "Insert Text" action is created.
+  static createActionConfig(text) {
+    const item = {angle: -1};
+
+    const uriScheme = GLib.uri_parse_scheme(text);
+    let success     = false;
+
+    if (uriScheme != null) {
+      // First we check whether the dragged data contains an URI. If it points to
+      // a *.desktop file, we create a "Launch Application" item for the
+      // corresponding application.
+      if (uriScheme == 'file') {
+        const file = Gio.File.new_for_uri(text);
+
+        if (file.query_exists(null)) {
+
+          if (text.endsWith('.desktop')) {
+
+            const info    = Gio.DesktopAppInfo.new_from_filename(file.get_path());
+            const newType = 'Command';
+
+            let icon = ItemRegistry.getItemTypes()[newType].icon;
+            if (info.get_icon()) {
+              icon = info.get_icon().to_string();
+            }
+
+            if (info != null) {
+              item.data = {command: info.get_commandline()};
+              item.icon = icon;
+              item.name = info.get_display_name();
+              item.type = newType;
+
+              success = true;
+            }
+          }
+
+          // If it's an URI to any other local file, we create an "Open File"
+          // item.
+          if (!success) {
+            const newType = 'File';
+            const info    = file.query_info('standard::icon', 0, null);
+
+            if (info != null) {
+              // Skip the file://
+              item.data = {file: text.substring(7)};
+              item.icon = info.get_icon().to_string();
+              item.name = file.get_basename();
+              item.type = newType;
+
+              success = true;
+            }
+          }
+        }
+      }
+
+      if (!success) {
+
+        // For any other URI we create an "Open URI" item.
+        const newType = 'Uri';
+        const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
+
+        item.data = {uri: text};
+        item.icon = ItemRegistry.getItemTypes()[newType].icon;
+        item.name = name;
+        item.type = newType;
+        success   = true;
+      }
+    }
+
+    // If it's not an URI, we create an "Insert Text" action.
+    else {
+      const newType = 'InsertText';
+      const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
+
+      item.data = {text: text};
+      item.icon = ItemRegistry.getItemTypes()[newType].icon;
+      // Translators: If some text is dragged to the menu editor, an insert-text action is
+      // created. This is the name of the newly created action, %s will be replaced by the
+      // text to insert.
+      item.name = _('Insert: %s').format(name);
+      item.type = newType;
+    }
+
+    return item;
   }
 
   // ----------------------------------------------------------------------- private stuff
