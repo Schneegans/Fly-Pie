@@ -189,10 +189,10 @@ function registerWidget() {
           } else {
 
             if (this._inMenuOverviewMode()) {
-              // Translators: This is shown as an in-app notification when the user
-              // attempts to drag external stuff to the menu editor's overview.
               this.emit(
                   'notification',
+                  // Translators: This is shown as an in-app notification when the user
+                  // attempts to drag external stuff to the menu editor's overview.
                   _('You can only create new Action items inside of Custom Menus.'));
               this._endDrag();
               return false;
