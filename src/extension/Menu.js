@@ -149,11 +149,6 @@ var Menu = class Menu {
 
         // Draw the parent's trace to this position.
         parent.drawTrace(x, y, 0, 0);
-
-        // This shouldn't be necessary but it reduces some severe flickering when children
-        // are dragged around slowly. It almost seems as some buffers are not cleared
-        // sufficiently without this...
-        this._background.queue_redraw();
       }
 
       return Clutter.EVENT_STOP;
