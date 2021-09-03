@@ -324,6 +324,9 @@ function computeItemAngles(items, parentAngle) {
     let wedgeEndIndex   = fixedAngles[(i + 1) % fixedAngles.length].index;
     let wedgeEndAngle   = fixedAngles[(i + 1) % fixedAngles.length].angle;
 
+    // The fixed angle can be stored in our output.
+    itemAngles[wedgeBeginIndex] = wedgeBeginAngle;
+
     // Make sure we loop around.
     if (wedgeEndAngle <= wedgeBeginAngle) {
       wedgeEndAngle += 360;
