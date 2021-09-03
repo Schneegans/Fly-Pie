@@ -26,6 +26,14 @@ const AnimatedValue = Me.imports.src.prefs.AnimatedValue.AnimatedValue;
 
 let FlyPieMenuEditorItem;
 
+const ItemState = {
+  GRID: 0,
+  CENTER: 1,
+  CHILD: 2
+};
+
+const ItemSize = [128, 100, 80];
+
 function registerWidget() {
 
   if (GObject.type_from_name('FlyPieMenuEditorItem') == null) {
@@ -35,32 +43,30 @@ function registerWidget() {
     },
     class FlyPieMenuEditorItem extends Gtk.Revealer {
           // clang-format on
-          _init(params = {}) {
-            super._init(params);
+          _init(itemState) {
+            super._init({});
+
+            this.state = itemState;
+
+            const buttonMargin = itemState == ItemState.GRID ? 4 : 0;
 
             this.button = new Gtk.ToggleButton({
-              margin_top: 4,
-              margin_start: 4,
-              margin_end: 4,
-              margin_bottom: 4,
+              margin_top: buttonMargin,
+              margin_start: buttonMargin,
+              margin_end: buttonMargin,
+              margin_bottom: buttonMargin,
               has_frame: false
             });
 
             this.set_transition_type(Gtk.RevealerTransitionType.CROSSFADE);
             this.set_reveal_child(true);
-            this.set_child(this.button);
 
             // Create the Gio.Settings object.
             this._settings = utils.createSettings();
 
-            const box = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
-
-            box.vexpand = true;
-            this.button.set_child(box);
-
+            // An icon is drawn in any state.
             this._iconName = 'image-missing';
-
-            this._icon = new Gtk.DrawingArea({hexpand: true, vexpand: true});
+            this._icon     = new Gtk.DrawingArea({hexpand: true, vexpand: true});
             this._icon.set_draw_func((widget, ctx) => {
               const size =
                   Math.min(widget.get_allocated_width(), widget.get_allocated_height());
@@ -72,44 +78,79 @@ function registerWidget() {
               utils.paintIcon(ctx, this._config.icon, size, 1, font, color);
               return false;
             });
-            box.append(this._icon);
 
-            this._nameLabel = new Gtk.Label({ellipsize: Pango.EllipsizeMode.MIDDLE});
-            this._nameLabel.add_css_class('caption-heading');
+            // Center items have no caption.
+            if (itemState == ItemState.GRID || itemState == ItemState.CHILD) {
+              this._nameLabel = new Gtk.Label({ellipsize: Pango.EllipsizeMode.MIDDLE});
+              this._nameLabel.add_css_class('caption-heading');
+            }
 
-            this.nameRevealer = new Gtk.Revealer({
-              transition_type: Gtk.RevealerTransitionType.SLIDE_UP,
-              reveal_child: true
-            });
-            this.nameRevealer.set_child(this._nameLabel);
+            if (itemState == ItemState.CENTER || itemState == ItemState.CHILD) {
+              this._icon.margin_top    = 5;
+              this._icon.margin_start  = 5;
+              this._icon.margin_end    = 5;
+              this._icon.margin_bottom = 5;
+            }
 
-            box.append(this.nameRevealer);
+            // The shortcut label is only required for the menu mode.
+            if (itemState == ItemState.GRID) {
+              this._shortcutLabel = new Gtk.Label(
+                  {ellipsize: Pango.EllipsizeMode.MIDDLE, use_markup: true});
+              this._shortcutLabel.add_css_class('caption');
+              this._shortcutLabel.add_css_class('dim-label');
+            }
 
-            this._shortcutLabel =
-                new Gtk.Label({ellipsize: Pango.EllipsizeMode.MIDDLE, use_markup: true});
-            this._shortcutLabel.add_css_class('caption');
-            this._shortcutLabel.add_css_class('dim-label');
+            // In the menu state, the item consists of a big toggle button containing the
+            // icon, a name label and a shortcut label.
+            if (itemState == ItemState.GRID) {
 
-            this.shortcutRevealer = new Gtk.Revealer({
-              transition_type: Gtk.RevealerTransitionType.SLIDE_UP,
-              reveal_child: true
-            });
-            this.shortcutRevealer.set_child(this._shortcutLabel);
+              this.set_child(this.button);
 
-            box.append(this.shortcutRevealer);
+              const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
+              box.vexpand = true;
+              this.button.set_child(box);
+              box.append(this._icon);
+              box.append(this._nameLabel);
+              box.append(this._shortcutLabel);
+            }
+
+            // In the center state, the button is round and simply contains the icon.
+            if (itemState == ItemState.CENTER) {
+              this.button.add_css_class('pill-button');
+              this.set_child(this.button);
+              this.button.set_child(this._icon);
+            }
+
+            // In the child state, the button is round, contains the icon and a label is
+            // drawn underneath.
+            if (itemState == ItemState.CHILD) {
+              this.button.add_css_class('pill-button');
+              this.button.set_child(this._icon);
+
+              const box = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
+              // box.vexpand = true;
+              box.append(this.button);
+              box.append(this._nameLabel);
+              this.set_child(box);
+            }
           }
 
           setConfig(config) {
-            this._config          = config;
-            this._nameLabel.label = config.name;
+            this._config = config;
 
             this._icon.queue_draw();
 
-            if (config.shortcut) {
-              const [ok, keyval, mods]  = Gtk.accelerator_parse(config.shortcut);
-              this._shortcutLabel.label = Gtk.accelerator_get_label(keyval, mods);
-            } else {
-              this._shortcutLabel.label = _('Not Bound');
+            if (this._nameLabel) {
+              this._nameLabel.label = config.name;
+            }
+
+            if (this._shortcutLabel) {
+              if (config.shortcut) {
+                const [ok, keyval, mods]  = Gtk.accelerator_parse(config.shortcut);
+                this._shortcutLabel.label = Gtk.accelerator_get_label(keyval, mods);
+              } else {
+                this._shortcutLabel.label = _('Not Bound');
+              }
             }
           }
 
@@ -144,8 +185,7 @@ function registerWidget() {
       _init(params = {}) {
         super._init(params);
 
-        this._items        = [];
-        this._gridItemSize = 128;
+        this._items = [];
 
         this._restartAnimation = false;
 
@@ -218,15 +258,15 @@ function registerWidget() {
           x -= this._gridOffsetX;
           y -= this._gridOffsetY;
 
-          x = Math.max(0, Math.min(this._columnCount * this._gridItemSize, x));
-          y = Math.max(0, Math.min(this._rowCount * this._gridItemSize, y));
+          x = Math.max(0, Math.min(this._columnCount * ItemSize[ItemState.GRID], x));
+          y = Math.max(0, Math.min(this._rowCount * ItemSize[ItemState.GRID], y));
 
-          const dropZoneWidth = this._gridItemSize / 4;
+          const dropZoneWidth = ItemSize[ItemState.GRID] / 4;
 
-          if (x % this._gridItemSize < dropZoneWidth ||
-              x % this._gridItemSize > this._gridItemSize - dropZoneWidth) {
-            this._dropColumn = Math.floor(x / this._gridItemSize + 0.5);
-            this._dropRow    = Math.floor(y / this._gridItemSize);
+          if (x % ItemSize[ItemState.GRID] < dropZoneWidth ||
+              x % ItemSize[ItemState.GRID] > ItemSize[ItemState.GRID] - dropZoneWidth) {
+            this._dropColumn = Math.floor(x / ItemSize[ItemState.GRID] + 0.5);
+            this._dropRow    = Math.floor(y / ItemSize[ItemState.GRID]);
             this._dropIndex  = Math.min(
                 this._items.length, this._columnCount * this._dropRow + this._dropColumn);
           } else {
@@ -255,6 +295,9 @@ function registerWidget() {
         });
         this._addButton.set_parent(this);
 
+        // Assign a state so that it gets scaled like the other grid buttons;
+        this._addButton.state = ItemState.GRID;
+
         const button = Gtk.Button.new_from_icon_name('list-add-symbolic');
         button.add_css_class('pill-button');
         button.set_has_frame(false);
@@ -273,18 +316,18 @@ function registerWidget() {
       vfunc_measure(orientation, for_size) {
         if (this._inMenuOverviewMode()) {
           if (orientation == Gtk.Orientation.HORIZONTAL) {
-            return [this._gridItemSize * 4, this._gridItemSize * 4, -1, -1];
+            return [ItemSize[ItemState.GRID] * 4, ItemSize[ItemState.GRID] * 4, -1, -1];
           }
 
-          const columns = Math.floor(for_size / this._gridItemSize);
+          const columns = Math.floor(for_size / ItemSize[ItemState.GRID]);
           const rows    = Math.ceil(this._items.length / columns);
 
-          const gridSize = rows * this._gridItemSize;
+          const gridSize = rows * ItemSize[ItemState.GRID];
 
           return [gridSize, gridSize, -1, -1];
         }
 
-        return [this._gridItemSize * 4, this._gridItemSize * 4, -1, -1];
+        return [ItemSize[ItemState.GRID] * 4, ItemSize[ItemState.GRID] * 4, -1, -1];
       }
 
       vfunc_size_allocate(width, height, baseline) {
@@ -312,74 +355,91 @@ function registerWidget() {
 
         const time = GLib.get_monotonic_time() / 1000;
 
-        // if (this._inMenuOverviewMode()) {
+        if (this._inMenuOverviewMode()) {
 
-        const itemCount = this._items.length + 1;
+          const itemCount = this._items.length + 1;
 
-        this._columnCount = Math.floor(width / this._gridItemSize);
-        this._rowCount    = Math.ceil(itemCount / this._columnCount);
+          this._columnCount = Math.floor(width / ItemSize[ItemState.GRID]);
+          this._rowCount    = Math.ceil(itemCount / this._columnCount);
 
-        if (this._rowCount == 1) {
-          this._columnCount = itemCount;
-        }
+          if (this._rowCount == 1) {
+            this._columnCount = itemCount;
+          }
 
-        this._gridOffsetX = (width - this._columnCount * this._gridItemSize) / 2;
-        this._gridOffsetY = (height - this._rowCount * this._gridItemSize) / 2;
+          this._gridOffsetX = (width - this._columnCount * ItemSize[ItemState.GRID]) / 2;
+          this._gridOffsetY = (height - this._rowCount * ItemSize[ItemState.GRID]) / 2;
 
-        if (this._columnCount != this._lastColumnCount ||
-            this._dropColumn != this._lastDropColumn ||
-            this._dropRow != this._lastDropRow) {
-          this._lastColumnCount  = this._columnCount;
-          this._lastDropRow      = this._dropRow;
-          this._lastDropColumn   = this._dropColumn;
-          this._restartAnimation = true;
-        }
+          if (this._columnCount != this._lastColumnCount ||
+              this._dropColumn != this._lastDropColumn ||
+              this._dropRow != this._lastDropRow) {
+            this._lastColumnCount  = this._columnCount;
+            this._lastDropRow      = this._dropRow;
+            this._lastDropColumn   = this._dropColumn;
+            this._restartAnimation = true;
+          }
 
-        for (let i = 0; i < itemCount; i++) {
+          for (let i = 0; i < itemCount; i++) {
 
-          const column = i % this._columnCount;
-          const row    = Math.floor(i / this._columnCount);
+            const column = i % this._columnCount;
+            const row    = Math.floor(i / this._columnCount);
 
-          let dropZoneOffset = 0;
+            let dropZoneOffset = 0;
 
-          if (row == this._dropRow) {
-            const range    = 3;
-            const strength = 15;
+            if (row == this._dropRow) {
+              const range    = 3;
+              const strength = 15;
 
-            if (column < this._dropColumn) {
-              dropZoneOffset =
-                  -Math.max(0, range - (this._dropColumn - column) + 1) * strength;
+              if (column < this._dropColumn) {
+                dropZoneOffset =
+                    -Math.max(0, range - (this._dropColumn - column) + 1) * strength;
+              } else {
+                dropZoneOffset =
+                    Math.max(0, range - (column - this._dropColumn)) * strength;
+              }
+            }
+
+            const startX = this._gridOffsetX + column * ItemSize[ItemState.GRID] -
+                ItemSize[ItemState.GRID] / 2;
+            const startY = this._gridOffsetY + row * ItemSize[ItemState.GRID];
+            const endX =
+                this._gridOffsetX + column * ItemSize[ItemState.GRID] + dropZoneOffset;
+            const endY = this._gridOffsetY + row * ItemSize[ItemState.GRID];
+
+            if (i < this._items.length) {
+              setAnimation(this._items[i], time, startX, startY, endX, endY);
             } else {
-              dropZoneOffset =
-                  Math.max(0, range - (column - this._dropColumn)) * strength;
+              setAnimation(this._addButton, time, startX, startY, endX, endY);
             }
           }
 
-          const startX =
-              this._gridOffsetX + column * this._gridItemSize - this._gridItemSize / 2;
-          const startY = this._gridOffsetY + row * this._gridItemSize;
-          const endX   = this._gridOffsetX + column * this._gridItemSize + dropZoneOffset;
-          const endY   = this._gridOffsetY + row * this._gridItemSize;
+        } else {
 
-          if (i < this._items.length) {
-            setAnimation(this._items[i], time, startX, startY, endX, endY);
-          } else {
-            setAnimation(this._addButton, time, startX, startY, endX, endY);
-          }
-        }
+          const fixedAngles = [];
 
-        // } else {
-        if (!this._inMenuOverviewMode()) {
+          this._items.forEach(item => {
+            if (item.getConfig().angle >= 0) {
+              fixedAngles.push({angle: item.getConfig().angle});
+            } else {
+              fixedAngles.push({});
+            }
+          });
 
-          // for (let i = 0; i < this._items.length; i++) {
-          //   // arrange in circle
-          // }
+          const allAngles = utils.computeItemAngles(fixedAngles);
 
-          // const centerX = (width - this._gridItemSize) / 2;
-          // const centerY = (height - this._gridItemSize) / 2;
+          const centerX = (width - ItemSize[ItemState.GRID]) / 2;
+          const centerY = (height - ItemSize[ItemState.GRID]) / 2;
+          const radius  = ItemSize[ItemState.GRID] * 1.1;
 
-          // setAnimation(this._centerItem, time, centerX, centerY, centerX, centerY);
-          setAnimation(this._centerItem, time, 0, 0, 0, 0);
+          this._items.forEach((item, i) => {
+            const angle = allAngles[i] * Math.PI / 180;
+            const x     = Math.floor(Math.sin(angle) * radius) + centerX;
+            const y     = -Math.floor(Math.cos(angle) * radius) + centerY;
+
+            setAnimation(item, time, x, y, x, y);
+          });
+
+
+          setAnimation(this._centerItem, time, centerX, centerY, centerX, centerY);
         }
 
 
@@ -408,7 +468,8 @@ function registerWidget() {
       }
 
       add(config, where) {
-        const item = this._createItem(config);
+        const item = this._createItem(
+            config, this._inMenuOverviewMode() ? ItemState.GRID : ItemState.CHILD);
 
         this._selectedItem = item;
         item.button.active = true;
@@ -442,7 +503,8 @@ function registerWidget() {
         this._hideAllItems();
 
         for (let i = 0; i < configs.length; i++) {
-          const item = this._createItem(configs[i]);
+          const item = this._createItem(
+              configs[i], parentConfig ? ItemState.CHILD : ItemState.GRID);
           this._items.push(item);
 
           if (i == selectedIndex) {
@@ -452,7 +514,7 @@ function registerWidget() {
         }
 
         if (parentConfig) {
-          this._centerItem = this._createItem(parentConfig);
+          this._centerItem = this._createItem(parentConfig, ItemState.CENTER);
 
           if (selectedIndex == -1) {
             this._selectedItem             = this._centerItem;
@@ -466,9 +528,9 @@ function registerWidget() {
         this.queue_allocate();
       }
 
-      _createItem(config) {
+      _createItem(config, itemState) {
 
-        const item = new FlyPieMenuEditorItem();
+        const item = new FlyPieMenuEditorItem(itemState);
 
         item.setConfig(config);
         item.set_parent(this);
@@ -612,8 +674,8 @@ function registerWidget() {
             const allocation = new Gdk.Rectangle({
               x: item.x.get(time),
               y: item.y.get(time),
-              width: this._gridItemSize,
-              height: this._gridItemSize
+              width: ItemSize[item.state],
+              height: ItemSize[item.state]
             });
 
             allFinished &= item.x.isFinished(time);
