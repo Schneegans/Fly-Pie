@@ -313,7 +313,6 @@ function registerWidget() {
 
         const button = Gtk.Button.new_from_icon_name('list-add-symbolic');
         button.add_css_class('pill-button');
-        button.set_has_frame(false);
         this._addButton.set_child(button);
 
         button.connect('clicked', (b) => {
@@ -453,10 +452,13 @@ function registerWidget() {
             setAnimation(item, time, x, y, x, y);
           });
 
+          let buttonX = centerX - ItemSize[this._centerItem.state] / 2;
+          let buttonY = centerY - ItemSize[this._centerItem.state] / 2;
+          setAnimation(this._centerItem, time, buttonX, buttonY, buttonX, buttonY);
 
-          centerX -= ItemSize[this._centerItem.state] / 2;
-          centerY -= ItemSize[this._centerItem.state] / 2;
-          setAnimation(this._centerItem, time, centerX, centerY, centerX, centerY);
+          buttonX = width - ItemSize[this._centerItem.state];
+          buttonY = height - ItemSize[this._centerItem.state];
+          setAnimation(this._addButton, time, buttonX, buttonY, buttonX, buttonY);
         }
 
 
@@ -541,6 +543,8 @@ function registerWidget() {
         } else {
           this._centerItem = null;
         }
+
+        this._restartAnimation = true;
 
         this.queue_allocate();
       }
