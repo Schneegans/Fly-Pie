@@ -32,7 +32,7 @@ const ItemState = {
   CHILD: 2
 };
 
-const ItemSize = [130, 110, 90];
+const ItemSize = [130, 120, 100];
 
 function registerWidget() {
 
@@ -46,15 +46,22 @@ function registerWidget() {
           _init(itemState) {
             super._init({});
 
+            const overlay = new Gtk.Overlay();
+            this.set_child(overlay);
+
             this.state = itemState;
 
-            const buttonMargin = itemState == ItemState.GRID ? 4 : 0;
+            this.editButton = Gtk.Button.new_from_icon_name('document-edit-symbolic');
+            this.editButton.add_css_class('pill-button');
+            this.editButton.valign = Gtk.Align.START;
+            this.editButton.halign = Gtk.Align.END;
+            overlay.add_overlay(this.editButton);
 
             this.button = new Gtk.ToggleButton({
-              margin_top: buttonMargin,
-              margin_start: buttonMargin,
-              margin_end: buttonMargin,
-              margin_bottom: buttonMargin,
+              margin_top: 5,
+              margin_start: 5,
+              margin_end: 5,
+              margin_bottom: 5,
               has_frame: false
             });
 
@@ -107,7 +114,7 @@ function registerWidget() {
             // icon, a name label and a shortcut label.
             if (itemState == ItemState.GRID) {
 
-              this.set_child(this.button);
+              overlay.set_child(this.button);
 
               const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
               box.vexpand = true;
@@ -120,7 +127,7 @@ function registerWidget() {
             // In the center state, the button is round and simply contains the icon.
             if (itemState == ItemState.CENTER) {
 
-              this.set_child(this.button);
+              overlay.set_child(this.button);
               this.button.set_child(this._icon);
             }
 
@@ -128,7 +135,7 @@ function registerWidget() {
             // drawn underneath.
             if (itemState == ItemState.CHILD) {
 
-              this.set_child(this.button);
+              overlay.set_child(this.button);
 
               const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
               box.vexpand = true;
@@ -140,6 +147,9 @@ function registerWidget() {
 
           setConfig(config) {
             this._config = config;
+
+            this.editButton.visible =
+                this.state != ItemState.CENTER && config.type == 'CustomMenu';
 
             this._icon.queue_draw();
 
@@ -548,14 +558,12 @@ function registerWidget() {
           this._radioGroup = item.button;
         }
 
-        const longPress = new Gtk.GestureLongPress();
-        longPress.connect('pressed', () => {
-          if (item.getConfig().type == 'CustomMenu') {
+        if (config.type == 'CustomMenu') {
+          item.editButton.connect('clicked', () => {
             this._selectedItem = item;
             this.emit('edit', this._items.indexOf(item));
-          }
-        });
-        item.button.add_controller(longPress);
+          });
+        }
 
         const dragSource =
             new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
@@ -642,7 +650,6 @@ function registerWidget() {
           // ToggleButton was toggled. Resetting the EventController seems to be a
           // working workaround.
           dragSource.reset();
-          longPress.reset();
 
           if (b.active) {
             this._selectedItem = item;
