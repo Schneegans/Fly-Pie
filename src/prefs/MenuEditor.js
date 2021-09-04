@@ -32,7 +32,7 @@ const ItemState = {
   CHILD: 2
 };
 
-const ItemSize = [128, 100, 80];
+const ItemSize = [130, 110, 90];
 
 function registerWidget() {
 
@@ -57,6 +57,9 @@ function registerWidget() {
               margin_bottom: buttonMargin,
               has_frame: false
             });
+
+            this.button.add_css_class('round-button');
+
 
             this.set_transition_type(Gtk.RevealerTransitionType.CROSSFADE);
             this.set_reveal_child(true);
@@ -85,11 +88,11 @@ function registerWidget() {
               this._nameLabel.add_css_class('caption-heading');
             }
 
-            if (itemState == ItemState.CENTER || itemState == ItemState.CHILD) {
-              this._icon.margin_top    = 5;
-              this._icon.margin_start  = 5;
-              this._icon.margin_end    = 5;
-              this._icon.margin_bottom = 5;
+            if (itemState == ItemState.CENTER) {
+              this._icon.margin_top    = 3;
+              this._icon.margin_start  = 3;
+              this._icon.margin_end    = 3;
+              this._icon.margin_bottom = 3;
             }
 
             // The shortcut label is only required for the menu mode.
@@ -116,7 +119,7 @@ function registerWidget() {
 
             // In the center state, the button is round and simply contains the icon.
             if (itemState == ItemState.CENTER) {
-              this.button.add_css_class('pill-button');
+
               this.set_child(this.button);
               this.button.set_child(this._icon);
             }
@@ -124,14 +127,14 @@ function registerWidget() {
             // In the child state, the button is round, contains the icon and a label is
             // drawn underneath.
             if (itemState == ItemState.CHILD) {
-              this.button.add_css_class('pill-button');
-              this.button.set_child(this._icon);
 
-              const box = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
-              // box.vexpand = true;
-              box.append(this.button);
+              this.set_child(this.button);
+
+              const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
+              box.vexpand = true;
+              this.button.set_child(box);
+              box.append(this._icon);
               box.append(this._nameLabel);
-              this.set_child(box);
             }
           }
 
@@ -426,19 +429,23 @@ function registerWidget() {
 
           const allAngles = utils.computeItemAngles(fixedAngles);
 
-          const centerX = (width - ItemSize[ItemState.GRID]) / 2;
-          const centerY = (height - ItemSize[ItemState.GRID]) / 2;
-          const radius  = ItemSize[ItemState.GRID] * 1.1;
+          let centerX  = width / 2;
+          let centerY  = height / 2;
+          const radius = ItemSize[ItemState.GRID] * 1.4;
 
           this._items.forEach((item, i) => {
             const angle = allAngles[i] * Math.PI / 180;
-            const x     = Math.floor(Math.sin(angle) * radius) + centerX;
-            const y     = -Math.floor(Math.cos(angle) * radius) + centerY;
+            const x =
+                Math.floor(Math.sin(angle) * radius) + centerX - ItemSize[item.state] / 2;
+            const y = -Math.floor(Math.cos(angle) * radius) + centerY -
+                ItemSize[item.state] / 2;
 
             setAnimation(item, time, x, y, x, y);
           });
 
 
+          centerX -= ItemSize[this._centerItem.state] / 2;
+          centerY -= ItemSize[this._centerItem.state] / 2;
           setAnimation(this._centerItem, time, centerX, centerY, centerX, centerY);
         }
 

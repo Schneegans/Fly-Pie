@@ -7,6 +7,10 @@
     border-radius: 9999px;
 }
 
+.round-button {
+    border-radius: 20px;
+}
+
 .small-popover>contents {
     padding: 0;
 }
