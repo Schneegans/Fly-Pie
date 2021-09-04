@@ -436,7 +436,7 @@ function registerWidget() {
             }
           });
 
-          const allAngles = utils.computeItemAngles(fixedAngles);
+          const allAngles = utils.computeItemAngles(fixedAngles, this._parentAngle);
 
           let centerX  = width / 2;
           let centerY  = height / 2;
@@ -518,8 +518,10 @@ function registerWidget() {
         }
       }
 
-      setItems(configs, parentConfig, selectedIndex) {
+      setItems(configs, selectedIndex, parentConfig, parentAngle) {
         this._hideAllItems();
+
+        this._parentAngle = parentAngle;
 
         for (let i = 0; i < configs.length; i++) {
           const item = this._createItem(

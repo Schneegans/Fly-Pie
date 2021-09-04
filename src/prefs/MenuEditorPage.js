@@ -523,7 +523,9 @@ var MenuEditorPage = class MenuEditorPage {
       this._menuPath.push(this._selectedItem);
       this._updateSidebar();
       this._updateBreadCrumbs();
-      this._editor.setItems(this._selectedItem.children, this._selectedItem, -1);
+      this._editor.setItems(
+          this._selectedItem.children, -1, this._selectedItem,
+          this._getCurrentParentAngle());
     });
 
     this._editor.connect('remove', (e, which) => {
@@ -618,6 +620,26 @@ var MenuEditorPage = class MenuEditorPage {
       return this._menuConfigs;
     }
     return this._menuPath[this._menuPath.length - 1].children;
+  }
+
+  _getCurrentParentAngle() {
+    if (this._menuPath.length <= 1) {
+      return undefined;
+    }
+
+    let itemAngles = utils.computeItemAngles(this._menuPath[0].children);
+
+    for (let i = 1; i < this._menuPath.length; i++) {
+      let parentAngle =
+          itemAngles[this._menuPath[i - 1].children.indexOf(this._menuPath[i])];
+      parentAngle = (parentAngle + 180) % 360;
+
+      if (i == this._menuPath.length - 1) {
+        return parentAngle
+      } else {
+        itemAngles = utils.computeItemAngles(this._menuPath[i].children, parentAngle);
+      }
+    }
   }
 
 
@@ -745,7 +767,7 @@ var MenuEditorPage = class MenuEditorPage {
     if (this._menuPath.length > 0) {
       button.connect('clicked', () => {
         const selectedIndex = this._menuConfigs.indexOf(this._menuPath[0]);
-        this._editor.setItems(this._menuConfigs, null, selectedIndex);
+        this._editor.setItems(this._menuConfigs, selectedIndex);
         this._selectedItem = this._menuPath[0];
         this._menuPath     = [];
         this._updateBreadCrumbs();
@@ -788,12 +810,13 @@ var MenuEditorPage = class MenuEditorPage {
       const button = new Gtk.Button();
       if (this._menuPath.length > i + 1) {
         button.connect('clicked', () => {
-          const selectedIndex = item.children.indexOf(this._menuPath[i + 1]);
-          this._editor.setItems(item.children, item, selectedIndex);
+          const selectedIndex   = item.children.indexOf(this._menuPath[i + 1]);
           this._selectedItem    = this._menuPath[i + 1];
           this._menuPath.length = i + 1;
           this._updateBreadCrumbs();
           this._updateSidebar();
+          this._editor.setItems(
+              item.children, selectedIndex, item, this._getCurrentParentAngle());
         });
         const dropTarget =
             new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
