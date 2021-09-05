@@ -4583,7 +4583,24 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="margin-start">8</property>
                                 <property name="margin-end">8</property>
                                 <child>
-                                  <object class="GtkBox" id="menu-editor-breadcrumbs"></object>
+                                  <object class="GtkCenterBox">
+
+                                    <child type="start">
+                                      <object class="GtkBox" id="menu-editor-breadcrumbs"></object>
+                                    </child>
+
+                                    <child type="end">
+                                      <object class="GtkMenuButton" id="menu-editor-add-button">
+                                        <property name="icon-name">list-add-symbolic</property>
+                                        <property name="popover">add-item-popover</property>
+
+                                        <style>
+                                          <class name="menu-editor-add-button" />
+                                        </style>
+                                      </object>
+                                    </child>
+
+                                  </object>
                                 </child>
                               </object>
                             </child>

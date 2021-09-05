@@ -149,7 +149,13 @@ var MenuEditorPage = class MenuEditorPage {
 
     // Set the parent widget of the add-a-new-item popover.
     const popover = this._builder.get_object('add-item-popover');
-    popover.set_parent(this._editor);
+    popover.connect('notify::visible', () => {
+      const inMenuOverviewMode = this._menuPath.length == 0;
+
+      this._builder.get_object('add-action-list').visible     = !inMenuOverviewMode;
+      this._builder.get_object('action-list-heading').visible = !inMenuOverviewMode;
+      this._builder.get_object('menu-list-heading').visible   = !inMenuOverviewMode;
+    });
   }
 
   _initExportImportButtons() {
@@ -584,6 +590,10 @@ var MenuEditorPage = class MenuEditorPage {
       popover.popup();
     });
 
+    this._editor.connect('go-back', () => {
+      this._gotoMenuPathIndex(this._menuPath.length - 2);
+    });
+
     this._editor.connect('notification', (e, text) => this._showNotification(text));
 
     {
@@ -762,47 +772,44 @@ var MenuEditorPage = class MenuEditorPage {
       container.remove(container.get_first_child());
     }
 
-    const button = new Gtk.Button();
-    button.add_css_class('menu-editor-path-item');
-    if (this._menuPath.length > 0) {
-      button.connect('clicked', () => {
-        const selectedIndex = this._menuConfigs.indexOf(this._menuPath[0]);
-        this._editor.setItems(this._menuConfigs, selectedIndex);
-        this._selectedItem = this._menuPath[0];
-        this._menuPath     = [];
-        this._updateBreadCrumbs();
-        this._updateSidebar();
-      });
+    {
+      const button = new Gtk.Button();
+      button.add_css_class('menu-editor-path-item');
+      if (this._menuPath.length > 0) {
+        button.connect('clicked', () => {
+          this._gotoMenuPathIndex(-1);
+        });
 
-      const dropTarget =
-          new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-      dropTarget.set_gtypes([GObject.TYPE_STRING]);
-      dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
-      dropTarget.connect('drop', (t, what) => {
-        const config = JSON.parse(what);
-        if (ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
-          // Translators: This is shown as an in-app notification when the user attempts
-          // to drag an action in the menu editor to the menu overview.
-          this._showNotification(_('Actions cannot be turned into toplevel menus.'));
-          return false;
-        }
-        this._menuConfigs.push(config);
-        this._saveMenuConfiguration();
-        return true;
-      });
-      dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
-      button.add_controller(dropTarget);
+        const dropTarget =
+            new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+        dropTarget.set_gtypes([GObject.TYPE_STRING]);
+        dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
+        dropTarget.connect('drop', (t, what) => {
+          const config = JSON.parse(what);
+          if (ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
+            // Translators: This is shown as an in-app notification when the user attempts
+            // to drag an action in the menu editor to the menu overview.
+            this._showNotification(_('Actions cannot be turned into toplevel menus.'));
+            return false;
+          }
+          this._menuConfigs.push(config);
+          this._saveMenuConfiguration();
+          return true;
+        });
+        dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+        button.add_controller(dropTarget);
+      }
+
+      const box = new Gtk.Box();
+      // Translators: The left-most item of the menu editor bread crumbs.
+      const label = new Gtk.Label({label: _('All Menus')});
+      const icon  = new Gtk.Image({icon_name: 'go-home-symbolic', margin_end: 4});
+      box.append(icon);
+      box.append(label);
+      button.set_child(box);
+
+      container.append(button);
     }
-
-    const box = new Gtk.Box();
-    // Translators: The left-most item of the menu editor bread crumbs.
-    const label = new Gtk.Label({label: _('All Menus')});
-    const icon  = new Gtk.Image({icon_name: 'go-home-symbolic', margin_end: 4});
-    box.append(icon);
-    box.append(label);
-    button.set_child(box);
-
-    container.append(button);
 
     for (let i = 0; i < this._menuPath.length; i++) {
       const item   = this._menuPath[i];
@@ -810,13 +817,7 @@ var MenuEditorPage = class MenuEditorPage {
       const button = new Gtk.Button();
       if (this._menuPath.length > i + 1) {
         button.connect('clicked', () => {
-          const selectedIndex   = item.children.indexOf(this._menuPath[i + 1]);
-          this._selectedItem    = this._menuPath[i + 1];
-          this._menuPath.length = i + 1;
-          this._updateBreadCrumbs();
-          this._updateSidebar();
-          this._editor.setItems(
-              item.children, selectedIndex, item, this._getCurrentParentAngle());
+          this._gotoMenuPathIndex(i);
         });
         const dropTarget =
             new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
@@ -878,6 +879,41 @@ var MenuEditorPage = class MenuEditorPage {
 
     // Store this in our statistics.
     Statistics.getInstance().addItemCreated();
+  }
+
+  // If index < 0, the menu overview will be shown. If i+1>=menuPath.length, nothing will
+  // happen. For all indices between, the corresponding menu will be opened in the editor
+  // and the previously opened child menu will be selected.
+  _gotoMenuPathIndex(index) {
+    if (index + 1 >= this._menuPath.length) {
+      return;
+    }
+
+    if (index < 0) {
+      let selectedIndex = -1;
+
+      if (this._menuPath.length > 0) {
+        this._selectedItem = this._menuPath[0];
+        selectedIndex      = this._menuConfigs.indexOf(this._menuPath[0]);
+      }
+
+      this._editor.setItems(this._menuConfigs, selectedIndex);
+
+      this._menuPath = [];
+      this._updateBreadCrumbs();
+      this._updateSidebar();
+    } else {
+      const newItem      = this._menuPath[index];
+      const previousItem = this._menuPath[index + 1];
+
+      const selectedIndex   = newItem.children.indexOf(previousItem);
+      this._selectedItem    = previousItem;
+      this._menuPath.length = index + 1;
+      this._updateBreadCrumbs();
+      this._updateSidebar();
+      this._editor.setItems(
+          newItem.children, selectedIndex, newItem, this._getCurrentParentAngle());
+    }
   }
 
   _addStashItem(config) {

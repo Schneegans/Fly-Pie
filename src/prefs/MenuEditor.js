@@ -190,6 +190,7 @@ function registerWidget() {
           'drop-item-into':  { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]},
           'drop-data-into':  { param_types: [GObject.TYPE_STRING, GObject.TYPE_INT]},
           'request-add':     { param_types: [Gdk.Rectangle.$gtype]},
+          'go-back':         { param_types: []},
           'notification':    { param_types: [GObject.TYPE_STRING]},
         },
       },
@@ -298,27 +299,43 @@ function registerWidget() {
 
         this.add_controller(this._dropTarget);
 
-        this._addButton = new Gtk.Revealer({
-          transition_type: Gtk.RevealerTransitionType.CROSSFADE,
-          margin_start: 32,
-          margin_end: 32,
-          margin_top: 32,
-          margin_bottom: 32,
-          reveal_child: true
-        });
-        this._addButton.set_parent(this);
+        {
+          this._backButton = new Gtk.Revealer({
+            transition_type: Gtk.RevealerTransitionType.CROSSFADE,
+            margin_start: 32,
+            margin_end: 32,
+            margin_top: 32,
+            margin_bottom: 32,
+            reveal_child: false
+          });
+          this._backButton.set_parent(this);
 
-        // Assign a state so that it gets scaled like the other grid buttons;
-        this._addButton.state = ItemState.GRID;
+          // Assign a state so that it gets scaled like the other grid buttons;
+          this._backButton.state = ItemState.GRID;
 
-        const button = Gtk.Button.new_from_icon_name('list-add-symbolic');
-        button.add_css_class('pill-button');
-        this._addButton.set_child(button);
+          const button = new Gtk.Button();
+          button.add_css_class('pill-button');
+          this._backButton.set_child(button);
 
-        button.connect('clicked', (b) => {
-          const allocation = b.get_parent().get_allocation();
-          this.emit('request-add', allocation);
-        });
+          const icon = new Gtk.DrawingArea();
+          icon.set_draw_func((widget, ctx) => {
+            const size =
+                Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+            ctx.translate(
+                (widget.get_allocated_width() - size) / 2,
+                (widget.get_allocated_height() - size) / 2);
+            const color = widget.get_style_context().get_color();
+            utils.paintIcon(ctx, 'go-previous-symbolic', size, 1, 'Sans', color);
+
+            return false;
+          });
+
+          button.set_child(icon);
+
+          button.connect('clicked', (b) => {
+            this.emit('go-back');
+          });
+        }
       }
 
       vfunc_get_request_mode() {
@@ -365,17 +382,18 @@ function registerWidget() {
           }
         };
 
-        const time = GLib.get_monotonic_time() / 1000;
+        const time    = GLib.get_monotonic_time() / 1000;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const radius  = ItemSize[ItemState.GRID] * 1.4;
 
         if (this._inMenuOverviewMode()) {
 
-          const itemCount = this._items.length + 1;
-
           this._columnCount = Math.floor(width / ItemSize[ItemState.GRID]);
-          this._rowCount    = Math.ceil(itemCount / this._columnCount);
+          this._rowCount    = Math.ceil(this._items.length / this._columnCount);
 
           if (this._rowCount == 1) {
-            this._columnCount = itemCount;
+            this._columnCount = this._items.length;
           }
 
           this._gridOffsetX = (width - this._columnCount * ItemSize[ItemState.GRID]) / 2;
@@ -390,7 +408,7 @@ function registerWidget() {
             this._restartAnimation = true;
           }
 
-          for (let i = 0; i < itemCount; i++) {
+          for (let i = 0; i < this._items.length; i++) {
 
             const column = i % this._columnCount;
             const row    = Math.floor(i / this._columnCount);
@@ -419,8 +437,6 @@ function registerWidget() {
 
             if (i < this._items.length) {
               setAnimation(this._items[i], time, startX, startY, endX, endY);
-            } else {
-              setAnimation(this._addButton, time, startX, startY, endX, endY);
             }
           }
 
@@ -438,27 +454,34 @@ function registerWidget() {
 
           const allAngles = utils.computeItemAngles(fixedAngles, this._parentAngle);
 
-          let centerX  = width / 2;
-          let centerY  = height / 2;
-          const radius = ItemSize[ItemState.GRID] * 1.4;
+
 
           this._items.forEach((item, i) => {
             const angle = allAngles[i] * Math.PI / 180;
-            const x =
-                Math.floor(Math.sin(angle) * radius) + centerX - ItemSize[item.state] / 2;
-            const y = -Math.floor(Math.cos(angle) * radius) + centerY -
-                ItemSize[item.state] / 2;
+            let x       = Math.floor(Math.sin(angle) * radius) + centerX;
+            let y       = -Math.floor(Math.cos(angle) * radius) + centerY;
+            x -= ItemSize[item.state] / 2;
+            y -= ItemSize[item.state] / 2;
 
             setAnimation(item, time, x, y, x, y);
           });
 
-          let buttonX = centerX - ItemSize[this._centerItem.state] / 2;
-          let buttonY = centerY - ItemSize[this._centerItem.state] / 2;
-          setAnimation(this._centerItem, time, buttonX, buttonY, buttonX, buttonY);
+          let x = centerX - ItemSize[this._centerItem.state] / 2;
+          let y = centerY - ItemSize[this._centerItem.state] / 2;
+          setAnimation(this._centerItem, time, x, y, x, y);
+        }
 
-          buttonX = width - ItemSize[this._centerItem.state];
-          buttonY = height - ItemSize[this._centerItem.state];
-          setAnimation(this._addButton, time, buttonX, buttonY, buttonX, buttonY);
+        if (this._parentAngle != undefined) {
+          const angle = this._parentAngle * Math.PI / 180;
+
+          let x = Math.floor(Math.sin(angle) * radius) + centerX;
+          let y = -Math.floor(Math.cos(angle) * radius) + centerY;
+          x -= ItemSize[this._backButton.state] / 2;
+          y -= ItemSize[this._backButton.state] / 2;
+
+          setAnimation(this._backButton, time, x, y, x, y);
+        } else {
+          setAnimation(this._backButton, time, 0, 0, 0, 0);
         }
 
 
@@ -545,6 +568,8 @@ function registerWidget() {
         } else {
           this._centerItem = null;
         }
+
+        this._backButton.reveal_child = parentAngle != undefined;
 
         this._restartAnimation = true;
 
@@ -690,26 +715,24 @@ function registerWidget() {
         let allFinished = true;
 
         const updateItemPosition = (item) => {
-          if (item.x && item.x) {
-            const allocation = new Gdk.Rectangle({
-              x: item.x.get(time),
-              y: item.y.get(time),
-              width: ItemSize[item.state],
-              height: ItemSize[item.state]
-            });
+          const allocation = new Gdk.Rectangle(
+              {x: 0, y: 0, width: ItemSize[item.state], height: ItemSize[item.state]});
 
+          if (item.x && item.y) {
+            allocation.x = item.x.get(time);
+            allocation.y = item.y.get(time);
             allFinished &= item.x.isFinished(time);
             allFinished &= item.y.isFinished(time);
-
-            item.size_allocate(allocation, -1);
           }
+
+          item.size_allocate(allocation, -1);
         };
 
         for (let i = 0; i < this._items.length; i++) {
           updateItemPosition(this._items[i]);
         }
 
-        updateItemPosition(this._addButton);
+        updateItemPosition(this._backButton);
 
         if (this._centerItem) {
           updateItemPosition(this._centerItem);

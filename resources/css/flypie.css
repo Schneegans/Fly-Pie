@@ -35,3 +35,10 @@
     border-top: none;
     border-bottom: none;
 }
+
+menubutton.menu-editor-add-button button {
+    border-radius: 0;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}
