@@ -106,7 +106,16 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
         const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
             paintable.get_file().get_path(), size, size);
         Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0);
-        ctx.paintWithAlpha(opacity);
+
+        // If it's a symbolic icon, we draw it with the provided text color.
+        if (paintable.is_symbolic) {
+          const pattern = ctx.getSource();
+          ctx.setSourceRGBA(textColor.red, textColor.green, textColor.blue, opacity);
+          ctx.mask(pattern);
+        } else {
+          ctx.paintWithAlpha(opacity);
+        }
+
         return;
       }
     }
