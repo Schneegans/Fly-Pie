@@ -856,6 +856,8 @@ var MenuEditorPage = class MenuEditorPage {
     if (this._menuPath.length == 0) {
       config.id       = this._getNewID();
       config.shortcut = '';
+    } else {
+      config.angle = -1;
     }
 
     // Append to the current item list.
