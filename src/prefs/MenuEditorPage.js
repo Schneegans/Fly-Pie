@@ -464,26 +464,37 @@ var MenuEditorPage = class MenuEditorPage {
     // selected item). The minAngle is set to the largest fixed angle amongst all
     // siblings preceding the selected item; maxAngle is set to the smallest fixed angle
     // amongst siblings after the selected item.
-    // this._builder.get_object('item-angle').connect('value-changed', (adjustment) => {
-    //   let minAngle = -1;
-    //   let maxAngle = 360;
+    this._builder.get_object('item-angle').connect('notify::value', (adjustment) => {
+      if (!this._updatingSidebar) {
+        let minAngle = -1;
+        let maxAngle = 360;
 
-    //   const [ok1, model, selectedIter] = this._selection.get_selected();
-    //   if (!ok1) return;
+        const items         = this._getCurrentConfigs();
+        const selectedIndex = items.indexOf(this._selectedItem);
 
-    //   const [ok2, parentIter] = model.iter_parent(selectedIter);
-    //   if (!ok2) return;
+        for (let i = 0; i < items.length; i++) {
+          const angle = items[i].angle;
 
-    //   const selectedIndices = model.get_path(selectedIter).get_indices();
-    //   const selectedIndex   = selectedIndices[selectedIndices.length - 1];
-    //   const nChildren       = model.iter_n_children(parentIter);
+          if (i < selectedIndex && angle >= 0) {
+            minAngle = angle;
+          }
 
-    //   for (let n = 0; n < nChildren; n++) {
-    //     const angle = this._get(model.iter_nth_child(parentIter, n)[1], 'ANGLE');
+          if (i > selectedIndex && angle >= 0) {
+            maxAngle = angle;
+            break;
+          }
+        }
 
-    //     if (n < selectedIndex && angle >= 0) {
-    //       minAngle = angle;
-    //     }
+        // Set the value of the tree store only if the constraints are fulfilled.
+        if (adjustment.value == -1 ||
+            (adjustment.value > minAngle && adjustment.value < maxAngle)) {
+          this._selectedItem.angle = adjustment.value;
+          this._editor.updateSelected(this._selectedItem);
+          this._editor.updateLayout();
+          this._saveMenuConfiguration();
+        }
+      }
+    });
 
     //     if (n > selectedIndex && angle >= 0) {
     //       maxAngle = angle;

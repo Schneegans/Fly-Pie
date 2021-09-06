@@ -509,6 +509,11 @@ function registerWidget() {
         this._updateItemPositions(time);
       }
 
+      updateLayout() {
+        this._restartAnimation = true;
+        this.queue_allocate();
+      }
+
       add(config, where) {
         const item = this._createItem(
             config, this._inMenuOverviewMode() ? ItemState.GRID : ItemState.CHILD);
