@@ -506,6 +506,7 @@ function registerWidget() {
       }
 
       updateLayout() {
+        this._updateItemAngles();
         this._restartAnimation = true;
         this.queue_allocate();
       }
@@ -568,17 +569,7 @@ function registerWidget() {
             this._centerItem.button.active = true;
           }
 
-          const fixedAngles = [];
-
-          this._items.forEach(item => {
-            if (item.getConfig().angle >= 0) {
-              fixedAngles.push({angle: item.getConfig().angle});
-            } else {
-              fixedAngles.push({});
-            }
-          });
-
-          this._itemAngles = utils.computeItemAngles(fixedAngles, this._parentAngle);
+          this._updateItemAngles();
 
         } else {
           this._centerItem = null;
@@ -716,6 +707,20 @@ function registerWidget() {
       // Returns true if this should show the menu grid rather than a submenu.
       _inMenuOverviewMode() {
         return this._centerItem == null;
+      }
+
+      _updateItemAngles() {
+        const fixedAngles = [];
+
+        this._items.forEach(item => {
+          if (item.getConfig().angle >= 0) {
+            fixedAngles.push({angle: item.getConfig().angle});
+          } else {
+            fixedAngles.push({});
+          }
+        });
+
+        this._itemAngles = utils.computeItemAngles(fixedAngles, this._parentAngle);
       }
 
       // Returns true if all animations are done.
