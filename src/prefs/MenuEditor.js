@@ -303,35 +303,37 @@ function registerWidget() {
         {
           this._backButton = new Gtk.Revealer({
             transition_type: Gtk.RevealerTransitionType.CROSSFADE,
-            margin_start: 32,
-            margin_end: 32,
-            margin_top: 32,
-            margin_bottom: 32,
+            margin_start: 20,
+            margin_end: 20,
+            margin_top: 20,
+            margin_bottom: 20,
             reveal_child: false
           });
           this._backButton.set_parent(this);
 
-          // Assign a state so that it gets scaled like the other grid buttons;
-          this._backButton.state = ItemState.GRID;
+          // Assign a state so that it gets scaled like the other child buttons;
+          this._backButton.state = ItemState.CHILD;
 
           const button = new Gtk.Button();
           button.add_css_class('pill-button');
           this._backButton.set_child(button);
 
-          const icon = new Gtk.DrawingArea();
+          const icon = new Gtk.DrawingArea({
+            margin_start: 10,
+            margin_end: 10,
+            margin_top: 10,
+            margin_bottom: 10,
+          });
           icon.set_draw_func((widget, ctx) => {
-            const size =
-                Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-            if (this._parentAngle) {
-              ctx.translate(
-                  widget.get_allocated_width() / 2, widget.get_allocated_height() / 2);
+            const width  = widget.get_allocated_width();
+            const height = widget.get_allocated_height();
+            const size   = Math.min(width, height);
+            if (this._parentAngle >= 0) {
+              ctx.translate(width / 2, height / 2);
               ctx.rotate((this._parentAngle + 90) * Math.PI / 180);
-              ctx.translate(
-                  -widget.get_allocated_width() / 2, -widget.get_allocated_height() / 2);
+              ctx.translate(-width / 2, -height / 2);
             }
-            ctx.translate(
-                (widget.get_allocated_width() - size) / 2,
-                (widget.get_allocated_height() - size) / 2);
+            ctx.translate((width - size) / 2, (height - size) / 2);
             const color = widget.get_style_context().get_color();
             utils.paintIcon(ctx, 'go-previous-symbolic', size, 1, 'Sans', color);
 
