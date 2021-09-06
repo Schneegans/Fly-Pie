@@ -541,6 +541,8 @@ function registerWidget() {
 
         this._parentAngle = parentAngle;
 
+        this._backButton.get_child().get_child().queue_draw();
+
         for (let i = 0; i < configs.length; i++) {
           const item = this._createItem(
               configs[i], parentConfig ? ItemState.CHILD : ItemState.GRID);
