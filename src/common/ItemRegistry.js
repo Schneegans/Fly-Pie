@@ -131,6 +131,35 @@ var ItemRegistry = class ItemRegistry {
     return _itemTypes;
   }
 
+  // Given an item type (like "CustomMenu"), this will create a default configuration
+  // object. It will have a "name", "type", and "icon" property. If a "CustomMenu" is
+  // requested, it will also contain an empty "children" list. If the type provides an
+  // additional data field, this will be set as well and initialized to the default data.
+  // Note that this does not set the properties required for toplevel menus (e.g. the "id"
+  // and shortcut "properties").
+  static createDefaultConfig(type) {
+
+    const newItem = {
+      name: this.getItemTypes()[type].name,
+      type: type,
+    };
+
+    // Assign default children and icons.
+    if (type == 'CustomMenu') {
+      newItem.children = [];
+      newItem.icon     = this._getRandomEmoji();
+    } else {
+      newItem.icon = this.getItemTypes()[type].icon;
+    }
+
+    // Assign default custom data.
+    if (this.getItemTypes()[type].config != undefined) {
+      newItem.data = this.getItemTypes()[type].config.defaultData;
+    }
+
+    return newItem;
+  }
+
   // This function creates a new action configuration object for a given text. If the text
   // is an URI to a file, a file action is created. If it's a *.desktop file, a "Launch
   // Application" action is created, an URI action is created for all other URIs.
@@ -152,10 +181,10 @@ var ItemRegistry = class ItemRegistry {
 
           if (text.endsWith('.desktop')) {
 
-            const info    = Gio.DesktopAppInfo.new_from_filename(file.get_path());
-            const newType = 'Command';
+            const info = Gio.DesktopAppInfo.new_from_filename(file.get_path());
+            const type = 'Command';
 
-            let icon = ItemRegistry.getItemTypes()[newType].icon;
+            let icon = ItemRegistry.getItemTypes()[type].icon;
             if (info.get_icon()) {
               icon = info.get_icon().to_string();
             }
@@ -164,7 +193,7 @@ var ItemRegistry = class ItemRegistry {
               item.data = {command: info.get_commandline()};
               item.icon = icon;
               item.name = info.get_display_name();
-              item.type = newType;
+              item.type = type;
 
               success = true;
             }
@@ -173,15 +202,15 @@ var ItemRegistry = class ItemRegistry {
           // If it's an URI to any other local file, we create an "Open File"
           // item.
           if (!success) {
-            const newType = 'File';
-            const info    = file.query_info('standard::icon', 0, null);
+            const type = 'File';
+            const info = file.query_info('standard::icon', 0, null);
 
             if (info != null) {
               // Skip the file://
               item.data = {file: text.substring(7)};
               item.icon = info.get_icon().to_string();
               item.name = file.get_basename();
-              item.type = newType;
+              item.type = type;
 
               success = true;
             }
@@ -192,29 +221,29 @@ var ItemRegistry = class ItemRegistry {
       if (!success) {
 
         // For any other URI we create an "Open URI" item.
-        const newType = 'Uri';
-        const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
+        const type = 'Uri';
+        const name = text.length < 20 ? text : text.substring(0, 20) + '...';
 
         item.data = {uri: text};
-        item.icon = ItemRegistry.getItemTypes()[newType].icon;
+        item.icon = ItemRegistry.getItemTypes()[type].icon;
         item.name = name;
-        item.type = newType;
+        item.type = type;
         success   = true;
       }
     }
 
     // If it's not an URI, we create an "Insert Text" action.
     else {
-      const newType = 'InsertText';
-      const name    = text.length < 20 ? text : text.substring(0, 20) + '...';
+      const type = 'InsertText';
+      const name = text.length < 20 ? text : text.substring(0, 20) + '...';
 
       item.data = {text: text};
-      item.icon = ItemRegistry.getItemTypes()[newType].icon;
+      item.icon = ItemRegistry.getItemTypes()[type].icon;
       // Translators: If some text is dragged to the menu editor, an insert-text action is
       // created. This is the name of the newly created action, %s will be replaced by the
       // text to insert.
       item.name = _('Insert: %s').format(name);
-      item.type = newType;
+      item.type = type;
     }
 
     return item;
@@ -331,5 +360,16 @@ var ItemRegistry = class ItemRegistry {
     }
 
     return result;
+  }
+
+  // This is a little helper to make creating new menus more fun. New CustomMenus
+  // will get a random emoji as a icon!
+  static _getRandomEmoji() {
+    let emojis = [
+      ...'💾🐹💞😀🎂🌞🥇💗🌟🐣🔧🌍🐈🍩💕🦔🤣📝🥂💥😁🎉💖😎😛🐸🍕☕🍺🍰🗿'
+    ];
+
+    // The +0 is a little hack - else emojis.length is not recognized as a number?!
+    return emojis[Math.floor(Math.random() * (emojis.length + 0))];
   }
 }

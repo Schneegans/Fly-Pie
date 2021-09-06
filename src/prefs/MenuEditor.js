@@ -269,24 +269,28 @@ function registerWidget() {
         });
 
         this._dropTarget.connect('motion', (t, x, y) => {
-          x -= this._gridOffsetX;
-          y -= this._gridOffsetY;
+          if (this._inMenuOverviewMode()) {
+            x -= this._gridOffsetX;
+            y -= this._gridOffsetY;
 
-          x = Math.max(0, Math.min(this._columnCount * ItemSize[ItemState.GRID], x));
-          y = Math.max(0, Math.min(this._rowCount * ItemSize[ItemState.GRID], y));
+            x = Math.max(0, Math.min(this._columnCount * ItemSize[ItemState.GRID], x));
+            y = Math.max(0, Math.min(this._rowCount * ItemSize[ItemState.GRID], y));
 
-          const dropZoneWidth = ItemSize[ItemState.GRID] / 4;
+            const dropZoneWidth = ItemSize[ItemState.GRID] / 4;
 
-          if (x % ItemSize[ItemState.GRID] < dropZoneWidth ||
-              x % ItemSize[ItemState.GRID] > ItemSize[ItemState.GRID] - dropZoneWidth) {
-            this._dropColumn = Math.floor(x / ItemSize[ItemState.GRID] + 0.5);
-            this._dropRow    = Math.floor(y / ItemSize[ItemState.GRID]);
-            this._dropIndex  = Math.min(
-                this._items.length, this._columnCount * this._dropRow + this._dropColumn);
+            if (x % ItemSize[ItemState.GRID] < dropZoneWidth ||
+                x % ItemSize[ItemState.GRID] > ItemSize[ItemState.GRID] - dropZoneWidth) {
+              this._dropColumn = Math.floor(x / ItemSize[ItemState.GRID] + 0.5);
+              this._dropRow    = Math.floor(y / ItemSize[ItemState.GRID]);
+              this._dropIndex  = Math.min(
+                  this._items.length,
+                  this._columnCount * this._dropRow + this._dropColumn);
+            } else {
+              this._dropColumn = null;
+              this._dropRow    = null;
+              this._dropIndex  = null;
+            }
           } else {
-            this._dropColumn = null;
-            this._dropRow    = null;
-            this._dropIndex  = null;
           }
 
           this.queue_allocate();

@@ -57,6 +57,12 @@ var MenuEditorPage = class MenuEditorPage {
     // of the menuPath itself as this can be edited as well by selecting the center item.
     this._selectedItem = null;
 
+    // This will be set to true while the settings sidebar is updated to show the data
+    // from a newly selected item. This flag is then checked in the on-change signal
+    // handlers of the sidebar widgets so that this does not create unnecessary update
+    // calls.
+    this._updatingSidebar = false;
+
     // Now we initialize several components of the menu editor.
     this._initEditor();
     this._initAddItemPopover();
@@ -431,30 +437,27 @@ var MenuEditorPage = class MenuEditorPage {
     // icon name in the tree store. This will lead to a re-draw of the icon in the tree
     // view as well.
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
-      this._selectedItem.icon = widget.text;
-      this._editor.updateSelected(this._selectedItem);
-      this._saveMenuConfiguration();
+      if (!this._updatingSidebar) {
+        this._selectedItem.icon = widget.text;
+        this._editor.updateSelected(this._selectedItem);
+        this._saveMenuConfiguration();
+      }
     });
 
     // Store the item's name in the tree store when the text of the name input field is
     // changed.this.
     this._builder.get_object('item-name').connect('notify::text', (widget) => {
-      this._selectedItem.name = widget.text;
-      this._editor.updateSelected(this._selectedItem);
+      if (!this._updatingSidebar) {
+        this._selectedItem.name = widget.text;
+        this._editor.updateSelected(this._selectedItem);
 
-      if (this._menuConfigs.indexOf(this._selectedItem) >= 0 &&
-          this._menuPath.length > 0) {
-        this._updateBreadCrumbs();
+        if (this._menuConfigs.indexOf(this._selectedItem) >= 0 &&
+            this._menuPath.length > 0) {
+          this._updateBreadCrumbs();
+        }
+
+        this._saveMenuConfiguration();
       }
-
-      this._saveMenuConfiguration();
-    });
-
-    // For top-level menus, store whether they should be opened in the center of the
-    // screen.
-    this._builder.get_object('menu-centered').connect('notify::active', (widget) => {
-      this._selectedItem.centered = widget.active;
-      this._saveMenuConfiguration();
     });
 
     // Store the item's fixed angle in the tree store's ANGLE column when the
@@ -496,26 +499,24 @@ var MenuEditorPage = class MenuEditorPage {
       }
     });
 
-    //     if (n > selectedIndex && angle >= 0) {
-    //       maxAngle = angle;
-    //       break;
-    //     }
-    //   }
-
-    //   // Set the value of the tree store only if the constraints are fulfilled.
-    //   if (adjustment.value == -1 ||
-    //       (adjustment.value > minAngle && adjustment.value < maxAngle)) {
-    //     this._setSelected('ANGLE', adjustment.value);
-    //   }
-    // });
+    // For top-level menus, store whether they should be opened in the center of the
+    // screen.
+    this._builder.get_object('menu-centered').connect('notify::active', (widget) => {
+      if (!this._updatingSidebar) {
+        this._selectedItem.centered = widget.active;
+        this._saveMenuConfiguration();
+      }
+    });
 
     // Initialize the menu shortcut-select element. See the documentation of
     // createShortcutLabel for details.
     {
       const [box, label] = ConfigWidgetFactory.createShortcutLabel(false, (shortcut) => {
-        this._selectedItem.shortcut = shortcut;
-        this._editor.updateSelected(this._selectedItem);
-        this._saveMenuConfiguration();
+        if (!this._updatingSidebar) {
+          this._selectedItem.shortcut = shortcut;
+          this._editor.updateSelected(this._selectedItem);
+          this._saveMenuConfiguration();
+        }
       });
       this._builder.get_object('menu-shortcut-box').append(box);
       this._menuShortcutLabel = label;
@@ -555,39 +556,25 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     this._editor.connect('drop-item', (e, what, where) => {
-      const config = JSON.parse(what);
-      this._editor.add(config, where);
-      this._selectedItem = config;
-      this._getCurrentConfigs().splice(where, 0, config);
-      this._updateSidebar();
-      this._saveMenuConfiguration();
+      this._addItem(JSON.parse(what), where);
     });
 
     this._editor.connect('drop-data', (e, what, where) => {
-      const config = ItemRegistry.createActionConfig(what);
-      this._editor.add(config, where);
-      this._selectedItem = config;
-      this._getCurrentConfigs().splice(where, 0, config);
-      this._updateSidebar();
-      this._saveMenuConfiguration();
+      this._addItem(ItemRegistry.createActionConfig(what), where);
+
+      // Store this in our statistics.
+      Statistics.getInstance().addItemCreated();
     });
 
     this._editor.connect('drop-item-into', (e, what, where) => {
-      const config = JSON.parse(what);
-      const parent = this._getCurrentConfigs()[where];
-      parent.children.push(config);
-      this._selectedItem = parent;
-      this._updateSidebar();
-      this._saveMenuConfiguration();
+      this._addItemAsChild(JSON.parse(what), where);
     });
 
     this._editor.connect('drop-data-into', (e, what, where) => {
-      const config = ItemRegistry.createActionConfig(what);
-      const parent = this._getCurrentConfigs()[where];
-      parent.children.push(config);
-      this._selectedItem = parent;
-      this._updateSidebar();
-      this._saveMenuConfiguration();
+      this._addItemAsChild(ItemRegistry.createActionConfig(what), where);
+
+      // Store this in our statistics.
+      Statistics.getInstance().addItemCreated();
     });
 
     this._editor.connect('request-add', (e, rect) => {
@@ -702,6 +689,7 @@ var MenuEditorPage = class MenuEditorPage {
   // When the currently selected menu item changes, the content of the settings
   // widgets must be updated accordingly.
   _updateSidebar() {
+
     // There are multiple Gtk.Revealers involved. Based on the selected item's type
     // their content is either shown or hidden. The menu settings (shortcut, centered) are
     // visible if a top-level element is selected, for all other items the fixed angle can
@@ -710,19 +698,22 @@ var MenuEditorPage = class MenuEditorPage {
     const toplevelSelected = this._menuConfigs.indexOf(this._selectedItem) >= 0;
 
     this._builder.get_object('item-settings-revealer').reveal_child = sometingSelected;
+
     this._builder.get_object('item-settings-menu-revealer').reveal_child =
         toplevelSelected;
+
+    this._builder.get_object('item-settings-angle-revealer').reveal_child =
+        !toplevelSelected &&
+        this._selectedItem != this._menuPath[this._menuPath.length - 1];
+
     this._builder.get_object('preview-menu-button').sensitive =
         sometingSelected || this._menuPath.length > 0;
 
     if (sometingSelected) {
 
-      const selectedType = this._selectedItem.type;
+      this._updatingSidebar = true;
 
-      // If rows are not yet fully added, it may happen that the type is not yet set.
-      if (selectedType == null) {
-        return;
-      }
+      const selectedType = this._selectedItem.type;
 
       // The item's name, icon and description have to be updated in any case if
       // something is selected.
@@ -735,6 +726,8 @@ var MenuEditorPage = class MenuEditorPage {
       if (toplevelSelected) {
         this._menuShortcutLabel.set_accelerator(this._selectedItem.shortcut || '');
         this._builder.get_object('menu-centered').active = this._selectedItem.centered;
+      } else {
+        this._builder.get_object('item-angle').value = this._selectedItem.angle;
       }
 
       // Now we check whether the selected item has a config property.
@@ -754,21 +747,25 @@ var MenuEditorPage = class MenuEditorPage {
         // changed as well (e.g. when an application is selected, we want to change the
         // item's name and icon accordingly).
         const newChild = config.getWidget(this._selectedItem.data, (data, name, icon) => {
-          this._selectedItem.data = data;
+          if (!this._updatingSidebar) {
+            this._selectedItem.data = data;
 
-          if (name) {
-            this._builder.get_object('item-name').text = name;
+            if (name) {
+              this._builder.get_object('item-name').text = name;
+            }
+
+            if (icon) {
+              this._builder.get_object('icon-name').text = icon;
+            }
+
+            this._saveMenuConfiguration();
           }
-
-          if (icon) {
-            this._builder.get_object('icon-name').text = icon;
-          }
-
-          this._saveMenuConfiguration();
         });
 
         revealer.set_child(newChild);
       }
+
+      this._updatingSidebar = false;
     }
   }
 
@@ -849,47 +846,37 @@ var MenuEditorPage = class MenuEditorPage {
     }
   }
 
-  // This adds a new menu item to the currently selected menu. Items will always be
-  // inserted as a sibling following the currently selected item. This is except for
-  // action items added to top-level menus, here we add them as a child.
   _addNewItem(newType) {
-
-    const toplevelSelected = this._menuPath.length == 0;
-
-    const newItem = {
-      name: ItemRegistry.getItemTypes()[newType].name,
-      type: newType,
-    };
-
-    // Assign default children and icons.
-    if (newType == 'CustomMenu') {
-      newItem.children = [];
-      newItem.icon     = this._getRandomEmoji();
-    } else {
-      newItem.icon = ItemRegistry.getItemTypes()[newType].icon;
-    }
+    const config = ItemRegistry.createDefaultConfig(newType);
 
     // Assign a new ID for top-level items.
-    if (toplevelSelected) {
-      newItem.id       = this._getNewID();
-      newItem.shortcut = '';
+    if (this._menuPath.length == 0) {
+      config.id       = this._getNewID();
+      config.shortcut = '';
     }
 
-    // Assign default custom data.
-    if (ItemRegistry.getItemTypes()[newType].config != undefined) {
-      newItem.data = ItemRegistry.getItemTypes()[newType].config.defaultData;
-    }
-
+    // Append to the current item list.
     const configs = this._getCurrentConfigs();
-    configs.push(newItem);
-
-    this._selectedItem = newItem;
-    this._editor.add(newItem, configs.length - 1);
-    this._saveMenuConfiguration();
-    this._updateSidebar();
+    this._addItem(config, configs.length);
 
     // Store this in our statistics.
     Statistics.getInstance().addItemCreated();
+  }
+
+  _addItem(config, where) {
+    this._editor.add(config, where);
+    this._selectedItem = config;
+    this._getCurrentConfigs().splice(where, 0, config);
+    this._updateSidebar();
+    this._saveMenuConfiguration();
+  }
+
+  _addItemAsChild(config, where) {
+    const parent = this._getCurrentConfigs()[where];
+    parent.children.push(config);
+    this._selectedItem = parent;
+    this._updateSidebar();
+    this._saveMenuConfiguration();
   }
 
   // If index < 0, the menu overview will be shown. If i+1>=menuPath.length, nothing will
@@ -981,17 +968,6 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     item.add_controller(dragSource);
-  }
-
-  // This is a little helper to make creating new menus more fun. New menus
-  // will get a random emoji as a icon!
-  _getRandomEmoji() {
-    let emojis = [
-      ...'💾🐹💞😀🎂🌞🥇💗🌟🐣🔧🌍🐈🍩💕🦔🤣📝🥂💥😁🎉💖😎😛🐸🍕☕🍺🍰🗿'
-    ];
-
-    // The +0 is a little hack - else emojis.length is not recognized as a number?!
-    return emojis[Math.floor(Math.random() * (emojis.length + 0))];
   }
 
   // This returns an integer > 0 which is not used as menu ID currently.
