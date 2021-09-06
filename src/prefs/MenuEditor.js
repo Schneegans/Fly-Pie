@@ -521,6 +521,7 @@ function registerWidget() {
         this._items.splice(where, 0, item);
 
         this._restartAnimation = true;
+        this.updateLayout();
         this.queue_allocate();
       }
 
@@ -534,6 +535,7 @@ function registerWidget() {
         removed.unparent();
 
         this._restartAnimation = true;
+        this.updateLayout();
         this.queue_allocate();
       }
 
