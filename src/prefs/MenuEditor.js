@@ -321,6 +321,13 @@ function registerWidget() {
           icon.set_draw_func((widget, ctx) => {
             const size =
                 Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+            if (this._parentAngle) {
+              ctx.translate(
+                  widget.get_allocated_width() / 2, widget.get_allocated_height() / 2);
+              ctx.rotate((this._parentAngle + 90) * Math.PI / 180);
+              ctx.translate(
+                  -widget.get_allocated_width() / 2, -widget.get_allocated_height() / 2);
+            }
             ctx.translate(
                 (widget.get_allocated_width() - size) / 2,
                 (widget.get_allocated_height() - size) / 2);
