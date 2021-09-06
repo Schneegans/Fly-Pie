@@ -291,10 +291,7 @@ function registerWidget() {
 
           this.queue_allocate();
 
-          // const internalDrag = t.get_drop().get_drag() != null;
-
           return Gdk.DragAction.MOVE;
-          // return internalDrag ? Gdk.DragAction.MOVE : Gdk.DragAction.COPY;
         });
 
         this.add_controller(this._dropTarget);
@@ -624,13 +621,6 @@ function registerWidget() {
         dragSource.connect('drag-end', (s, drag, deleteData) => {
           if (deleteData) {
             let removeIndex = this._items.indexOf(item);
-
-            // if (this._dropIndex != null && this._dropIndex <= removeIndex) {
-            //   removeIndex += 1;
-            //   utils.debug('remove from ' + removeIndex + '*');
-            // } else {
-            //   utils.debug('remove from ' + removeIndex);
-            // }
 
             this.remove(removeIndex);
             this.emit('remove', removeIndex);
