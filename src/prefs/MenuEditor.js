@@ -449,22 +449,8 @@ function registerWidget() {
 
         } else {
 
-          const fixedAngles = [];
-
-          this._items.forEach(item => {
-            if (item.getConfig().angle >= 0) {
-              fixedAngles.push({angle: item.getConfig().angle});
-            } else {
-              fixedAngles.push({});
-            }
-          });
-
-          const allAngles = utils.computeItemAngles(fixedAngles, this._parentAngle);
-
-
-
           this._items.forEach((item, i) => {
-            const angle = allAngles[i] * Math.PI / 180;
+            const angle = this._itemAngles[i] * Math.PI / 180;
             let x       = Math.floor(Math.sin(angle) * radius) + centerX;
             let y       = -Math.floor(Math.cos(angle) * radius) + centerY;
             x -= ItemSize[item.state] / 2;
@@ -576,6 +562,18 @@ function registerWidget() {
             this._selectedItem             = this._centerItem;
             this._centerItem.button.active = true;
           }
+
+          const fixedAngles = [];
+
+          this._items.forEach(item => {
+            if (item.getConfig().angle >= 0) {
+              fixedAngles.push({angle: item.getConfig().angle});
+            } else {
+              fixedAngles.push({});
+            }
+          });
+
+          this._itemAngles = utils.computeItemAngles(fixedAngles, this._parentAngle);
 
         } else {
           this._centerItem = null;
