@@ -84,16 +84,6 @@ var MenuEditorPage = class MenuEditorPage {
     } catch (error) {
       utils.debug('Failed to load stash configuration: ' + error);
     }
-
-    // Then we add all menus to the editor.
-    this._editor.setItems(this._menuConfigs);
-
-    // And all stashed items to the stash widget.
-    for (let i = 0; i < this._stashedConfigs.length; i++) {
-      this._addStashItem(this._stashedConfigs[i]);
-    }
-
-    this._updateBreadCrumbs();
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -656,6 +646,9 @@ var MenuEditorPage = class MenuEditorPage {
   // configuration is invalid.
   _loadMenuConfiguration() {
 
+    // Clear any previous selection.
+    this._menuPath = [];
+
     // Load the menu configuration in the JSON format.
     this._menuConfigs = JSON.parse(this._settings.get_string('menu-configuration'));
 
@@ -669,6 +662,11 @@ var MenuEditorPage = class MenuEditorPage {
         this._menuConfigs[i].id = this._getNewID();
       }
     }
+
+    // Then we add all menus to the editor.
+    this._editor.setItems(this._menuConfigs);
+
+    this._updateBreadCrumbs();
   }
 
   // This is called once initially and loads the JSON item configurations from the
@@ -683,6 +681,11 @@ var MenuEditorPage = class MenuEditorPage {
 
       // Make sure that all fields of the menu config are initialized to sane defaults.
       ItemRegistry.normalizeConfig(this._stashedConfigs[i]);
+    }
+
+    // And all stashed items to the stash widget.
+    for (let i = 0; i < this._stashedConfigs.length; i++) {
+      this._addStashItem(this._stashedConfigs[i]);
     }
   }
 
