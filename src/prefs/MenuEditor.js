@@ -291,6 +291,37 @@ function registerWidget() {
               this._dropIndex  = null;
             }
           } else {
+
+            x -= this._width / 2;
+            y -= this._height / 2;
+
+            const distance = Math.sqrt(x * x + y * y);
+            if (distance > ItemSize[ItemState.CENTER] / 2) {
+              let mouseAngle = Math.acos(x / distance) * 180 / Math.PI;
+              if (y < 0) {
+                mouseAngle = 360 - mouseAngle;
+              }
+
+              // Turn 0° up.
+              mouseAngle = (mouseAngle + 90) % 360;
+
+              this._dropIndex = 0;
+
+              for (let i = 1; i < this._itemAngles.length; i++) {
+                const wedgeStart = this._itemAngles[i - 1];
+                const wedgeEnd   = this._itemAngles[i];
+                const diff       = wedgeEnd - wedgeStart;
+
+                if (mouseAngle >= wedgeStart + diff * 0.25 &&
+                    mouseAngle <= wedgeEnd - diff * 0.25) {
+                  this._dropIndex = i;
+                  break;
+                }
+              }
+
+            } else {
+              this._dropIndex = null;
+            }
           }
 
           this.queue_allocate();
@@ -370,6 +401,9 @@ function registerWidget() {
       }
 
       vfunc_size_allocate(width, height, baseline) {
+
+        this._width  = width;
+        this._height = height;
 
         const setAnimation = (item, time, startX, startY, endX, endY) => {
           if (item.x == undefined) {
