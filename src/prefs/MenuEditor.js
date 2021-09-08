@@ -215,7 +215,6 @@ function registerWidget() {
         this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
 
         this._dropTarget.connect('accept', () => true);
-        this._dropTarget.connect('leave', () => this._endDrag());
         this._dropTarget.connect('drop', (t, what) => {
           if (this._dropIndex == null) {
             return false;
@@ -815,6 +814,9 @@ function registerWidget() {
         this._dropColumn = null;
         this._dropRow    = null;
         this._dropIndex  = null;
+
+        this._restartAnimation = true;
+        this.queue_allocate();
       }
     });
   }
