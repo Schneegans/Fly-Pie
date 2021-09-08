@@ -206,10 +206,6 @@ function registerWidget() {
         this._selectedItem = null;
         this._centerItem   = null;
 
-        this._lastColumnCount = null;
-        this._lastDropColumn  = null;
-        this._lastDropRow     = null;
-
         this._dropIndex  = null;
         this._dropRow    = null;
         this._dropColumn = null;
@@ -269,6 +265,11 @@ function registerWidget() {
         });
 
         this._dropTarget.connect('motion', (t, x, y) => {
+          const lastColumnCount = this._columnCount;
+          const lastDropRow     = this._dropRow;
+          const lastDropColumn  = this._dropColumn;
+          const lastDropIndex   = this._dropIndex;
+
           if (this._inMenuOverviewMode()) {
             x -= this._gridOffsetX;
             y -= this._gridOffsetY;
@@ -305,16 +306,26 @@ function registerWidget() {
               // Turn 0° up.
               mouseAngle = (mouseAngle + 90) % 360;
 
-              this._dropIndex = 0;
+              this._dropIndex = null;
 
-              for (let i = 1; i < this._itemAngles.length; i++) {
-                const wedgeStart = this._itemAngles[i - 1];
-                const wedgeEnd   = this._itemAngles[i];
-                const diff       = wedgeEnd - wedgeStart;
+              const itemAngles = this._computeItemAngles();
 
-                if (mouseAngle >= wedgeStart + diff * 0.25 &&
-                    mouseAngle <= wedgeEnd - diff * 0.25) {
-                  this._dropIndex = i;
+              for (let i = 0; i < itemAngles.length; i++) {
+                let wedgeStart = itemAngles[i];
+                let wedgeEnd   = itemAngles[(i + 1) % itemAngles.length];
+
+                // Wrap around.
+                if (wedgeEnd < wedgeStart) {
+                  wedgeEnd += 360;
+                }
+
+                const diff = wedgeEnd - wedgeStart;
+
+                if ((mouseAngle >= wedgeStart + diff * 0.25 &&
+                     mouseAngle <= wedgeEnd - diff * 0.25) ||
+                    (mouseAngle + 360 >= wedgeStart + diff * 0.25 &&
+                     mouseAngle + 360 <= wedgeEnd - diff * 0.25)) {
+                  this._dropIndex = i + 1;
                   break;
                 }
               }
@@ -322,6 +333,12 @@ function registerWidget() {
             } else {
               this._dropIndex = null;
             }
+          }
+
+          if (this._columnCount != lastColumnCount ||
+              this._dropColumn != lastDropColumn || this._dropRow != lastDropRow ||
+              this._dropIndex != lastDropIndex) {
+            this._restartAnimation = true;
           }
 
           this.queue_allocate();
@@ -443,14 +460,7 @@ function registerWidget() {
           this._gridOffsetX = (width - this._columnCount * ItemSize[ItemState.GRID]) / 2;
           this._gridOffsetY = (height - this._rowCount * ItemSize[ItemState.GRID]) / 2;
 
-          if (this._columnCount != this._lastColumnCount ||
-              this._dropColumn != this._lastDropColumn ||
-              this._dropRow != this._lastDropRow) {
-            this._lastColumnCount  = this._columnCount;
-            this._lastDropRow      = this._dropRow;
-            this._lastDropColumn   = this._dropColumn;
-            this._restartAnimation = true;
-          }
+
 
           for (let i = 0; i < this._items.length; i++) {
 
@@ -479,15 +489,15 @@ function registerWidget() {
                 this._gridOffsetX + column * ItemSize[ItemState.GRID] + dropZoneOffset;
             const endY = this._gridOffsetY + row * ItemSize[ItemState.GRID];
 
-            if (i < this._items.length) {
-              setAnimation(this._items[i], time, startX, startY, endX, endY);
-            }
+            setAnimation(this._items[i], time, startX, startY, endX, endY);
           }
 
         } else {
 
+          const angles = this._computeItemAngles(this._dropIndex);
+
           this._items.forEach((item, i) => {
-            const angle = this._itemAngles[i] * Math.PI / 180;
+            const angle = angles[i] * Math.PI / 180;
             let x       = Math.floor(Math.sin(angle) * radius) + centerX;
             let y       = -Math.floor(Math.cos(angle) * radius) + centerY;
             x -= ItemSize[item.state] / 2;
@@ -540,7 +550,6 @@ function registerWidget() {
       }
 
       updateLayout() {
-        this._updateItemAngles();
         this._restartAnimation = true;
         this.queue_allocate();
       }
@@ -604,8 +613,6 @@ function registerWidget() {
             this._selectedItem             = this._centerItem;
             this._centerItem.button.active = true;
           }
-
-          this._updateItemAngles();
 
         } else {
           this._centerItem = null;
@@ -745,18 +752,32 @@ function registerWidget() {
         return this._centerItem == null;
       }
 
-      _updateItemAngles() {
+      _computeItemAngles(gapIndex) {
         const fixedAngles = [];
 
-        this._items.forEach(item => {
+        if (gapIndex == 0) {
+          fixedAngles.push({});
+        }
+
+        this._items.forEach((item, i) => {
           if (item.getConfig().angle >= 0) {
             fixedAngles.push({angle: item.getConfig().angle});
           } else {
             fixedAngles.push({});
           }
+
+          if (gapIndex == i + 1) {
+            fixedAngles.push({});
+          }
         });
 
-        this._itemAngles = utils.computeItemAngles(fixedAngles, this._parentAngle);
+        const angles = utils.computeItemAngles(fixedAngles, this._parentAngle);
+
+        if (gapIndex != undefined) {
+          angles.splice(gapIndex, 1);
+        }
+
+        return angles;
       }
 
       // Returns true if all animations are done.
@@ -793,7 +814,7 @@ function registerWidget() {
       _endDrag() {
         this._dropColumn = null;
         this._dropRow    = null;
-        // this.queue_allocate();
+        this._dropIndex  = null;
       }
     });
   }
