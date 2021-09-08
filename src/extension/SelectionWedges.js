@@ -403,8 +403,8 @@ class SelectionWedges extends Clutter.Actor {
           endAngle += 360;
         }
 
-        if (angle > startAngle && angle <= endAngle ||
-            angle + 360 > startAngle && angle + 360 <= endAngle) {
+        if ((angle > startAngle && angle <= endAngle) ||
+            (angle + 360 > startAngle && angle + 360 <= endAngle)) {
           hoveredWedge           = i;
           hoveredWedgeStartAngle = startAngle;
           hoveredWedgeEndAngle   = endAngle;
