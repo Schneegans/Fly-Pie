@@ -207,6 +207,7 @@ function registerWidget() {
         this._centerItem   = null;
 
         this._dropIndex  = null;
+        this._dragIndex  = null;
         this._dropRow    = null;
         this._dropColumn = null;
 
@@ -295,6 +296,8 @@ function registerWidget() {
             x -= this._width / 2;
             y -= this._height / 2;
 
+            this._dropIndex = null;
+
             const distance = Math.sqrt(x * x + y * y);
             if (distance > ItemSize[ItemState.CENTER] / 2) {
               let mouseAngle = Math.acos(x / distance) * 180 / Math.PI;
@@ -304,8 +307,6 @@ function registerWidget() {
 
               // Turn 0° up.
               mouseAngle = (mouseAngle + 90) % 360;
-
-              this._dropIndex = null;
 
               const itemAngles = this._computeItemAngles();
 
@@ -320,17 +321,29 @@ function registerWidget() {
 
                 const diff = wedgeEnd - wedgeStart;
 
-                if ((mouseAngle >= wedgeStart + diff * 0.25 &&
-                     mouseAngle <= wedgeEnd - diff * 0.25) ||
+                const lastWedge = i == itemAngles.length - 1 ||
+                    (i == itemAngles.length - 2 &&
+                     this._dragIndex == itemAngles.length - 1);
+
+                if (lastWedge &&
+                    ((mouseAngle >= wedgeStart + diff * 0.5 &&
+                      mouseAngle < wedgeEnd - diff * 0.0) ||
+                     (mouseAngle + 360 >= wedgeStart + diff * 0.5 &&
+                      mouseAngle + 360 < wedgeEnd - diff * 0.0))) {
+
+                  this._dropIndex = 0;
+                  break;
+
+                } else if (
+                    (mouseAngle >= wedgeStart + diff * 0.25 &&
+                     mouseAngle < wedgeEnd - diff * 0.25) ||
                     (mouseAngle + 360 >= wedgeStart + diff * 0.25 &&
-                     mouseAngle + 360 <= wedgeEnd - diff * 0.25)) {
+                     mouseAngle + 360 < wedgeEnd - diff * 0.25)) {
+
                   this._dropIndex = i + 1;
                   break;
                 }
               }
-
-            } else {
-              this._dropIndex = null;
             }
           }
 
@@ -493,7 +506,7 @@ function registerWidget() {
 
         } else {
 
-          const angles = this._computeItemAngles(this._dropIndex);
+          const angles = this._computeItemAngles();
 
           this._items.forEach((item, i) => {
             const angle = angles[i] * Math.PI / 180;
@@ -656,8 +669,11 @@ function registerWidget() {
           return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
         });
         dragSource.connect('drag-begin', () => {
-          item.opacity   = 0.2;
-          item.sensitive = false;
+          item.opacity           = 0.2;
+          item.sensitive         = false;
+          this._dragIndex        = this._items.indexOf(item);
+          this._restartAnimation = true;
+          this.queue_draw();
         });
         dragSource.connect('drag-end', (s, drag, deleteData) => {
           if (deleteData) {
@@ -751,29 +767,70 @@ function registerWidget() {
         return this._centerItem == null;
       }
 
-      _computeItemAngles(gapIndex) {
+      // This computes the angles at which all current items should be drawn (only useful
+      // if not in overview mode). An array of all angles is returned. The length of the
+      // returned array matches this._items.length. This method will consider the fixed
+      // angles of all items and will leave an angular gap according to this._parentAngle.
+      // The resulting angles are the same as in the real menu.
+      // As this method is also used during drag-and-drop, there are some special cases.
+      // If this._dropIndex != null, there will be an additional angular gap between the
+      // items at adjacent indices. If this._dragIndex != null, the corresponding item
+      // (which is currently being dragged around) will receive the same angle as its
+      // predecessor and all other angles will be computed as if the item did not exist.
+      _computeItemAngles() {
+
+        // This array will be passed utils.computeItemAngles() further below. For each
+        // item in the menu, it should contain an empty object. If the corresponding item
+        // as a fixed angle, the corresponding object in the array should contain the
+        // angle as value for a property called "angle".
         const fixedAngles = [];
 
-        if (gapIndex == 0) {
+        // There's a special case where the drop index is before the first element - in
+        // this case we have to add an artificial item to the front of the list so that
+        // the angles of all other items are shifted to leave a gap for the to-be-dropped
+        // item.
+        if (this._dropIndex == 0) {
           fixedAngles.push({});
         }
 
+        // Loop through all menu items.
         this._items.forEach((item, i) => {
+          // If the current item is dragged around, we do not add a corresponding entry to
+          // the array. This ensures that all other items behave as if the dragged item
+          // did not exist.
+          if (i == this._dragIndex) {
+            return;
+          }
+
+          // Now we push an object for each of our menu items. This is either empty or
+          // contains an "angle" property if the menu item has a fixed angle set.
           if (item.getConfig().angle >= 0) {
             fixedAngles.push({angle: item.getConfig().angle});
           } else {
             fixedAngles.push({});
           }
 
-          if (gapIndex == i + 1) {
+          // If the drop-gap is next to this item, add an artificial item after this one.
+          // This will change the angles of all other items as if there was an item at
+          // this position.
+          if (this._dropIndex == i + 1) {
             fixedAngles.push({});
           }
         });
 
         const angles = utils.computeItemAngles(fixedAngles, this._parentAngle);
 
-        if (gapIndex != undefined) {
-          angles.splice(gapIndex, 1);
+        // If we added an artificial item to leave an angular gap for the to-be-dropped
+        // item, we have to remove this again as there os no real item at this position.
+        // We only wanted to affect the angles for the adjacent items.
+        if (this._dropIndex != null) {
+          angles.splice(
+              this._dropIndex > this._dragIndex ? this._dropIndex - 1 : this._dropIndex,
+              1);
+        }
+
+        if (this._dragIndex != null) {
+          angles.splice(this._dragIndex, 0, angles[this._dragIndex % angles.length]);
         }
 
         return angles;
@@ -814,6 +871,7 @@ function registerWidget() {
         this._dropColumn = null;
         this._dropRow    = null;
         this._dropIndex  = null;
+        this._dragIndex  = null;
 
         this._restartAnimation = true;
         this.queue_allocate();
