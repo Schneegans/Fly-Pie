@@ -446,18 +446,18 @@ function registerWidget() {
         this._width  = width;
         this._height = height;
 
-        const setAnimation = (item, time, startX, startY, endX, endY) => {
+        const setAnimation = (item, time, x, y) => {
           if (item.x == undefined) {
             item.x       = new AnimatedValue();
             item.y       = new AnimatedValue();
-            item.x.start = startX;
-            item.y.start = startY;
+            item.x.start = x;
+            item.y.start = y;
           } else if (this._restartAnimation) {
             item.x.start = item.x.get(time);
             item.y.start = item.y.get(time);
           }
-          item.x.end = endX;
-          item.y.end = endY;
+          item.x.end = x;
+          item.y.end = y;
 
           if (this._restartAnimation) {
             item.x.startTime = time;
@@ -506,14 +506,11 @@ function registerWidget() {
               }
             }
 
-            const startX = this._gridOffsetX + column * ItemSize[ItemState.GRID] -
-                ItemSize[ItemState.GRID] / 2;
-            const startY = this._gridOffsetY + row * ItemSize[ItemState.GRID];
-            const endX =
+            const x =
                 this._gridOffsetX + column * ItemSize[ItemState.GRID] + dropZoneOffset;
-            const endY = this._gridOffsetY + row * ItemSize[ItemState.GRID];
+            const y = this._gridOffsetY + row * ItemSize[ItemState.GRID];
 
-            setAnimation(this._items[i], time, startX, startY, endX, endY);
+            setAnimation(this._items[i], time, x, y);
           }
 
         } else {
@@ -527,12 +524,12 @@ function registerWidget() {
             x -= ItemSize[item.state] / 2;
             y -= ItemSize[item.state] / 2;
 
-            setAnimation(item, time, x, y, x, y);
+            setAnimation(item, time, x, y);
           });
 
           let x = centerX - ItemSize[this._centerItem.state] / 2;
           let y = centerY - ItemSize[this._centerItem.state] / 2;
-          setAnimation(this._centerItem, time, x, y, x, y);
+          setAnimation(this._centerItem, time, x, y);
         }
 
         if (this._parentAngle != undefined) {
@@ -543,9 +540,9 @@ function registerWidget() {
           x -= ItemSize[this._backButton.state] / 2;
           y -= ItemSize[this._backButton.state] / 2;
 
-          setAnimation(this._backButton, time, x, y, x, y);
+          setAnimation(this._backButton, time, x, y);
         } else {
-          setAnimation(this._backButton, time, 0, 0, 0, 0);
+          setAnimation(this._backButton, time, 0, 0);
         }
 
 
@@ -587,8 +584,6 @@ function registerWidget() {
 
         this._items.splice(where, 0, item);
 
-        this._restartAnimation = true;
-        this.updateLayout();
         this.queue_allocate();
       }
 
@@ -601,8 +596,6 @@ function registerWidget() {
 
         removed.unparent();
 
-        this._restartAnimation = true;
-        this.updateLayout();
         this.queue_allocate();
       }
 
@@ -681,7 +674,7 @@ function registerWidget() {
           return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
         });
         dragSource.connect('drag-begin', () => {
-          item.opacity           = 0.2;
+          item.opacity           = this._inMenuOverviewMode() ? 0.2 : 0.0;
           item.sensitive         = false;
           this._dragIndex        = this._items.indexOf(item);
           this._restartAnimation = true;
