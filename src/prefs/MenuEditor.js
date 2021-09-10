@@ -314,6 +314,18 @@ function registerWidget() {
                 let wedgeStart = itemAngles[i];
                 let wedgeEnd   = itemAngles[(i + 1) % itemAngles.length];
 
+                let wedgeStartPadding = 0;
+                let wedgeEndPadding   = 0;
+
+                if (this._items[i].getConfig().type == 'CustomMenu') {
+                  wedgeStartPadding = 0.25;
+                }
+
+                if (this._items[(i + 1) % itemAngles.length].getConfig().type ==
+                    'CustomMenu') {
+                  wedgeEndPadding = 0.25;
+                }
+
                 // Wrap around.
                 if (wedgeEnd < wedgeStart) {
                   wedgeEnd += 360;
@@ -335,10 +347,10 @@ function registerWidget() {
                   break;
 
                 } else if (
-                    (mouseAngle >= wedgeStart + diff * 0.25 &&
-                     mouseAngle < wedgeEnd - diff * 0.25) ||
-                    (mouseAngle + 360 >= wedgeStart + diff * 0.25 &&
-                     mouseAngle + 360 < wedgeEnd - diff * 0.25)) {
+                    (mouseAngle >= wedgeStart + diff * wedgeStartPadding &&
+                     mouseAngle < wedgeEnd - diff * wedgeEndPadding) ||
+                    (mouseAngle + 360 >= wedgeStart + diff * wedgeStartPadding &&
+                     mouseAngle + 360 < wedgeEnd - diff * wedgeEndPadding)) {
 
                   this._dropIndex = i + 1;
                   break;
@@ -355,7 +367,7 @@ function registerWidget() {
 
           this.queue_allocate();
 
-          return Gdk.DragAction.MOVE;
+          return this._dropIndex == null ? null : Gdk.DragAction.MOVE;
         });
 
         this.add_controller(this._dropTarget);
@@ -824,9 +836,13 @@ function registerWidget() {
         // item, we have to remove this again as there os no real item at this position.
         // We only wanted to affect the angles for the adjacent items.
         if (this._dropIndex != null) {
-          angles.splice(
-              this._dropIndex > this._dragIndex ? this._dropIndex - 1 : this._dropIndex,
-              1);
+          let removeIndex = this._dropIndex;
+
+          if (this._dragIndex != null && this._dropIndex > this._dragIndex) {
+            removeIndex -= 1;
+          }
+
+          angles.splice(removeIndex, 1);
         }
 
         if (this._dragIndex != null) {
