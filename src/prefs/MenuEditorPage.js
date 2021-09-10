@@ -546,7 +546,9 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     this._editor.connect('drop-item', (e, what, where) => {
-      this._addItem(JSON.parse(what), where);
+      const config = JSON.parse(what);
+      config.angle = -1;
+      this._addItem(config, where);
     });
 
     this._editor.connect('drop-data', (e, what, where) => {
