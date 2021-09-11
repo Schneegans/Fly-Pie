@@ -792,10 +792,10 @@ function registerWidget() {
 
         const now = GLib.get_monotonic_time();
         if (this._lastHideTime + TRANSITION_DURATION < now) {
-          utils.debug('cleanup');
           this._oldItems.forEach(item => {
             item.unparent();
           });
+          this._oldItems = [];
         }
         this._lastHideTime = now;
 
