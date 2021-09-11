@@ -342,50 +342,76 @@ function registerWidget() {
 
               const itemAngles = this._computeItemAngles();
 
-              for (let i = 0; i < itemAngles.length; i++) {
-                let wedgeStart = itemAngles[i];
-                let wedgeEnd   = itemAngles[(i + 1) % itemAngles.length];
+              if (itemAngles.length == 0) {
+                // If there is no current item, it's easy: We simply drop at index zero.
+                this._dropIndex = 0;
 
-                let wedgeStartPadding = 0;
-                let wedgeEndPadding   = 0;
-
-                if (this._items[i].getConfig().type == 'CustomMenu') {
-                  wedgeStartPadding = 0.25;
-                }
-
-                if (this._items[(i + 1) % itemAngles.length].getConfig().type ==
-                    'CustomMenu') {
-                  wedgeEndPadding = 0.25;
-                }
-
-                // Wrap around.
-                if (wedgeEnd < wedgeStart) {
-                  wedgeEnd += 360;
-                }
-
-                const diff = wedgeEnd - wedgeStart;
-
-                const lastWedge = i == itemAngles.length - 1 ||
-                    (i == itemAngles.length - 2 &&
-                     this._dragIndex == itemAngles.length - 1);
-
-                if (lastWedge &&
-                    ((mouseAngle >= wedgeStart + diff * 0.5 &&
-                      mouseAngle < wedgeEnd - diff * 0.0) ||
-                     (mouseAngle + 360 >= wedgeStart + diff * 0.5 &&
-                      mouseAngle + 360 < wedgeEnd - diff * 0.0))) {
-
+              } else if (itemAngles.length == 1) {
+                // If there is one current item, we always drop at zero if it's an
+                // internal drag (as we are obviously dragging the only item around). If
+                // it's an external drag, we have to decide whether to drop before or
+                // after.
+                if (this._dragIndex != null) {
                   this._dropIndex = 0;
-                  break;
+                } else {
+                  this._dropIndex = (mouseAngle - itemAngles[0] < 90 ||
+                                     mouseAngle - itemAngles[0] > 270) ?
+                      0 :
+                      1;
+                }
 
-                } else if (
-                    (mouseAngle >= wedgeStart + diff * wedgeStartPadding &&
-                     mouseAngle < wedgeEnd - diff * wedgeEndPadding) ||
-                    (mouseAngle + 360 >= wedgeStart + diff * wedgeStartPadding &&
-                     mouseAngle + 360 < wedgeEnd - diff * wedgeEndPadding)) {
+              } else if (itemAngles.length == 2 && this._dragIndex != null) {
+                this._dropIndex = (mouseAngle - itemAngles[0] < 90 ||
+                                   mouseAngle - itemAngles[0] > 270) ?
+                    0 :
+                    2;
+              } else {
 
-                  this._dropIndex = i + 1;
-                  break;
+                for (let i = 0; i < itemAngles.length; i++) {
+                  let wedgeStart = itemAngles[i];
+                  let wedgeEnd   = itemAngles[(i + 1) % itemAngles.length];
+
+                  let wedgeStartPadding = 0;
+                  let wedgeEndPadding   = 0;
+
+                  if (this._items[i].getConfig().type == 'CustomMenu') {
+                    wedgeStartPadding = 0.25;
+                  }
+
+                  if (this._items[(i + 1) % itemAngles.length].getConfig().type ==
+                      'CustomMenu') {
+                    wedgeEndPadding = 0.25;
+                  }
+
+                  // Wrap around.
+                  if (wedgeEnd < wedgeStart) {
+                    wedgeEnd += 360;
+                  }
+
+                  const diff = wedgeEnd - wedgeStart;
+
+                  const lastWedge = i == itemAngles.length - 1 ||
+                      (i == itemAngles.length - 2 &&
+                       this._dragIndex == itemAngles.length - 1);
+
+                  if (lastWedge &&
+                      ((mouseAngle >= wedgeStart + diff * 0.5 &&
+                        mouseAngle < wedgeEnd - diff * 0.0) ||
+                       (mouseAngle + 360 >= wedgeStart + diff * 0.5 &&
+                        mouseAngle + 360 < wedgeEnd - diff * 0.0))) {
+
+                    this._dropIndex = 0;
+                    break;
+
+                  } else if (
+                      (mouseAngle >= wedgeStart + diff * wedgeStartPadding &&
+                       mouseAngle < wedgeEnd - diff * wedgeEndPadding) ||
+                      (mouseAngle + 360 >= wedgeStart + diff * wedgeStartPadding &&
+                       mouseAngle + 360 < wedgeEnd - diff * wedgeEndPadding)) {
+
+                    this._dropIndex = i + 1;
+                    break;
+                  }
                 }
               }
             }
@@ -841,16 +867,14 @@ function registerWidget() {
         // angle as value for a property called "angle".
         const fixedAngles = [];
 
-        // There's a special case where the drop index is before the first element - in
-        // this case we have to add an artificial item to the front of the list so that
-        // the angles of all other items are shifted to leave a gap for the to-be-dropped
-        // item.
-        if (this._dropIndex == 0) {
-          fixedAngles.push({});
-        }
-
         // Loop through all menu items.
         this._items.forEach((item, i) => {
+          // If the drop-gap is at this position, add an artificial item. This will change
+          // the angles of all other items as if there was an item at this position.
+          if (this._dropIndex == i) {
+            fixedAngles.push({});
+          }
+
           // If the current item is dragged around, we do not add a corresponding entry to
           // the array. This ensures that all other items behave as if the dragged item
           // did not exist.
@@ -865,14 +889,15 @@ function registerWidget() {
           } else {
             fixedAngles.push({});
           }
-
-          // If the drop-gap is next to this item, add an artificial item after this one.
-          // This will change the angles of all other items as if there was an item at
-          // this position.
-          if (this._dropIndex == i + 1) {
-            fixedAngles.push({});
-          }
         });
+
+        // There's a special case where the drop index is after the last element - in this
+        // case we have to add an artificial item to the end of the list so that the
+        // angles of all other items are shifted to leave a gap for the to-be-dropped
+        // item.
+        if (this._dropIndex == this._items.length) {
+          fixedAngles.push({});
+        }
 
         const angles = utils.computeItemAngles(fixedAngles, this._parentAngle);
 
@@ -882,7 +907,7 @@ function registerWidget() {
         if (this._dropIndex != null) {
           let removeIndex = this._dropIndex;
 
-          if (this._dragIndex != null && this._dropIndex > this._dragIndex) {
+          if (this._dragIndex != null && this._dropIndex > this._dragIndex + 1) {
             removeIndex -= 1;
           }
 
