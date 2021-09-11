@@ -726,6 +726,7 @@ function registerWidget() {
           item.opacity    = 1;
           item.sensitive  = true;
           this._dragIndex = null;
+          this.updateLayout();
           return false;
         });
 
