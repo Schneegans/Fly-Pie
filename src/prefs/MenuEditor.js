@@ -216,7 +216,26 @@ function registerWidget() {
         this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
 
         this._dropTarget.connect('accept', () => true);
+        this._dropTarget.connect('leave', () => {
+          // For external drag-and-drop events, 'leave' is called before 'drop'. We have
+          // to reset this._dropIndex in 'leave', to make sure that the items move back to
+          // their original position when the pointer leaves the drop area. However, we
+          // need this._dropIndex in 'drop' to fire the 'add-item' and 'add-data' signals.
+          // Therefore, we temporarily store this._dropIndex in this._lastDropIndex. This
+          // is only used a few lines below in the 'drop' signal handler.
+          this._lastDropIndex = this._dropIndex;
+
+          this._dropColumn = null;
+          this._dropRow    = null;
+          this._dropIndex  = null;
+          this.updateLayout();
+        });
+
         this._dropTarget.connect('drop', (t, what) => {
+          if (this._dropIndex == null) {
+            this._dropIndex = this._lastDropIndex;
+          }
+
           if (this._dropIndex == null) {
             return false;
           }
@@ -231,7 +250,9 @@ function registerWidget() {
               // attempts to drag an action in the menu editor to the menu overview.
               this.emit(
                   'notification', _('Actions cannot be turned into toplevel menus.'));
-              this._endDrag();
+              this._dropColumn = null;
+              this._dropRow    = null;
+              this._dropIndex  = null;
               return false;
             }
 
@@ -244,7 +265,9 @@ function registerWidget() {
                   // Translators: This is shown as an in-app notification when the user
                   // attempts to drag external stuff to the menu editor's overview.
                   _('You can only create new Action items inside of Custom Menus.'));
-              this._endDrag();
+              this._dropColumn = null;
+              this._dropRow    = null;
+              this._dropIndex  = null;
               return false;
             }
 
@@ -259,7 +282,10 @@ function registerWidget() {
             }
           }
 
-          this._endDrag();
+
+          this._dropColumn = null;
+          this._dropRow    = null;
+          this._dropIndex  = null;
 
           return true;
         });
@@ -456,6 +482,7 @@ function registerWidget() {
             item.x.start = item.x.get(time);
             item.y.start = item.y.get(time);
           }
+
           item.x.end = x;
           item.y.end = y;
 
@@ -584,7 +611,9 @@ function registerWidget() {
 
         this._items.splice(where, 0, item);
 
-        this.queue_allocate();
+        if (this._dragIndex == null) {
+          this.updateLayout();
+        }
       }
 
       remove(which) {
@@ -595,8 +624,6 @@ function registerWidget() {
         }
 
         removed.unparent();
-
-        this.queue_allocate();
       }
 
       updateSelected(config) {
@@ -637,9 +664,7 @@ function registerWidget() {
 
         this._backButton.reveal_child = parentAngle != undefined;
 
-        this._restartAnimation = true;
-
-        this.queue_allocate();
+        this.updateLayout();
       }
 
       _createItem(config, itemState) {
@@ -674,11 +699,10 @@ function registerWidget() {
           return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
         });
         dragSource.connect('drag-begin', () => {
-          item.opacity           = this._inMenuOverviewMode() ? 0.2 : 0.0;
-          item.sensitive         = false;
-          this._dragIndex        = this._items.indexOf(item);
-          this._restartAnimation = true;
-          this.queue_draw();
+          item.opacity    = this._inMenuOverviewMode() ? 0.2 : 0.0;
+          item.sensitive  = false;
+          this._dragIndex = this._items.indexOf(item);
+          this.updateLayout();
         });
         dragSource.connect('drag-end', (s, drag, deleteData) => {
           if (deleteData) {
@@ -694,12 +718,13 @@ function registerWidget() {
             item.sensitive = true;
           }
 
-          this._endDrag();
+
+          this._dragIndex = null;
         });
         dragSource.connect('drag-cancel', () => {
-          item.opacity   = 1;
-          item.sensitive = true;
-          this._endDrag();
+          item.opacity    = 1;
+          item.sensitive  = true;
+          this._dragIndex = null;
           return false;
         });
 
@@ -731,7 +756,9 @@ function registerWidget() {
 
           this._selectedItem               = item;
           this._selectedItem.button.active = true;
-          this._endDrag();
+          this._dropColumn                 = null;
+          this._dropRow                    = null;
+          this._dropIndex                  = null;
           return true;
         });
 
@@ -874,16 +901,6 @@ function registerWidget() {
         }
 
         return allFinished;
-      }
-
-      _endDrag() {
-        this._dropColumn = null;
-        this._dropRow    = null;
-        this._dropIndex  = null;
-        this._dragIndex  = null;
-
-        this._restartAnimation = true;
-        this.queue_allocate();
       }
     });
   }
