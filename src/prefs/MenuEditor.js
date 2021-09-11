@@ -69,7 +69,7 @@ function registerWidget() {
 
 
             this.set_transition_type(Gtk.RevealerTransitionType.CROSSFADE);
-            this.set_reveal_child(true);
+            this.set_reveal_child(false);
 
             // Create the Gio.Settings object.
             this._settings = utils.createSettings();
@@ -673,6 +673,7 @@ function registerWidget() {
 
         item.setConfig(config);
         item.set_parent(this);
+        item.set_reveal_child(true);
 
         if (this._radioGroup) {
           item.button.set_group(this._radioGroup);
