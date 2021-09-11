@@ -368,13 +368,21 @@ var MenuEditorPage = class MenuEditorPage {
 
       // ...  and show a new tip some milliseconds later.
       this._infoLabelTimeoutB = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250, () => {
-        label.label           = tips[Math.floor(Math.random() * tips.length)];
-        revealer.reveal_child = true;
+        label.label             = tips[Math.floor(Math.random() * tips.length)];
+        revealer.reveal_child   = true;
+        this._infoLabelTimeoutB = null;
+
         return false;
       });
 
+      const showNext = label.get_root().visible;
+
+      if (!showNext) {
+        this._infoLabelTimeoutA = null;
+      }
+
       // Don't show new tips when the window got closed.
-      return label.get_root().visible;
+      return showNext;
     });
 
     label.connect('destroy', () => {
