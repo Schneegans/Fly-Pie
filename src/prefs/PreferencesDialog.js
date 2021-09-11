@@ -83,7 +83,6 @@ var PreferencesDialog = class PreferencesDialog {
 
     // There is a hidden achievement for viewing the sponsors page...
     this._builder.get_object('about-stack').connect('notify::visible-child-name', (o) => {
-      utils.debug(o.visible_child_name);
       if (o.visible_child_name == 'sponsors-page') {
         Statistics.getInstance().addSponsorsViewed();
       }
