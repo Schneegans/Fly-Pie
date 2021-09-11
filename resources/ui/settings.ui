@@ -4799,7 +4799,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <child>
                                   <object class="GtkLabel">
                                     <property name="halign">start</property>
-                                    <property name="margin_top">20</property>
                                     <property name="margin_bottom">10</property>
                                     <property name="label" translatable="yes">Properties</property>
                                     <style>
