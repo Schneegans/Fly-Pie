@@ -575,7 +575,10 @@ function registerWidget() {
 
           setAnimation(this._backButton, time, x, y);
         } else {
-          setAnimation(this._backButton, time, 0, 0);
+
+          let x = centerX - ItemSize[this._backButton.state] / 2;
+          let y = centerY - ItemSize[this._backButton.state] / 2;
+          setAnimation(this._backButton, time, x, y);
         }
 
 
