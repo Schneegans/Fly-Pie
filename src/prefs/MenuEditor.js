@@ -34,6 +34,8 @@ const ItemState = {
 
 const ItemSize = [130, 120, 100];
 
+const TRANSITION_DURATION = 250;
+
 function registerWidget() {
 
   if (GObject.type_from_name('FlyPieMenuEditorItem') == null) {
@@ -66,6 +68,7 @@ function registerWidget() {
             });
 
             this.button.add_css_class('round-button');
+            this.set_transition_duration(TRANSITION_DURATION);
 
 
             this.set_transition_type(Gtk.RevealerTransitionType.CROSSFADE);
@@ -200,6 +203,9 @@ function registerWidget() {
         super._init(params);
 
         this._items = [];
+
+        this._lastHideTime = 0;
+        this._oldItems     = [];
 
         this._restartAnimation = false;
 
@@ -488,9 +494,9 @@ function registerWidget() {
 
           if (this._restartAnimation) {
             item.x.startTime = time;
-            item.x.endTime   = time + 200;
+            item.x.endTime   = time + TRANSITION_DURATION;
             item.y.startTime = time;
-            item.y.endTime   = time + 200;
+            item.y.endTime   = time + TRANSITION_DURATION;
           }
         };
 
@@ -783,13 +789,26 @@ function registerWidget() {
       }
 
       _hideAllItems() {
-        for (let i = 0; i < this._items.length; i++) {
-          this._items[i].unparent();
+
+        const now = GLib.get_monotonic_time();
+        if (this._lastHideTime + TRANSITION_DURATION < now) {
+          utils.debug('cleanup');
+          this._oldItems.forEach(item => {
+            item.unparent();
+          });
         }
+        this._lastHideTime = now;
+
+        this._oldItems.push(...this._items);
 
         if (this._centerItem) {
-          this._centerItem.unparent();
+          this._oldItems.push(this._centerItem);
         }
+
+        this._oldItems.forEach(item => {
+          item.reveal_child = false;
+          item.sensitive    = false;
+        });
 
         this._items        = [];
         this._centerItem   = null;
@@ -892,9 +911,8 @@ function registerWidget() {
           item.size_allocate(allocation, -1);
         };
 
-        for (let i = 0; i < this._items.length; i++) {
-          updateItemPosition(this._items[i]);
-        }
+        this._items.forEach(updateItemPosition);
+        this._oldItems.forEach(updateItemPosition);
 
         updateItemPosition(this._backButton);
 
