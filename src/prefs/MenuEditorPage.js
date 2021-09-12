@@ -375,14 +375,15 @@ var MenuEditorPage = class MenuEditorPage {
         return false;
       });
 
+      // Don't show new tips when the window got closed.
       const showNext = label.get_root().visible;
 
       if (!showNext) {
         this._infoLabelTimeoutA = null;
+        return false;
       }
 
-      // Don't show new tips when the window got closed.
-      return showNext;
+      return true;
     });
 
     label.connect('destroy', () => {
