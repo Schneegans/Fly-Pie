@@ -667,8 +667,96 @@ function registerWidget() {
         }
       }
 
-      setItems(configs, selectedIndex, parentConfig, parentAngle) {
+      // This method completely replaces the current set of displayed menu items. The only
+      // mandatory parameter is 'configs', which has to be an array of menu configurations
+      // (of which this class only requires the 'name', 'icon', 'shortcut', and 'type'
+      // properties).
+      // If 'selectedIndex' is given, the item at the specified position will be
+      // preselected (-1 for the parent item).
+      // If 'centerConfig' is given, the items will be drawn in a circular fashion with an
+      // item based on this config in the center (e.g. we are not in menu overview mode).
+      // If 'parentAngle' is given, a back-navigation item will be drawn at this position
+      // (e.g. we are in submenu mode).
+      //
+      // Based on all these parameters, we can decide whether we should display the
+      // menu-overview, a top-level menu, or a submenu. Based on the old display mode,
+      // this method will create an animated transition to make things a bit more
+      // intuitive for the user. This happens according to the scheme below:
+      //
+      //                                ,----------------------,
+      //   ,------------------------>   |  Menu Overview Mode  |
+      //   |                            '----------------------'
+      //   |                                     |   ^
+      //   |        Fade all items in / out and  |   |  Fade all items in / out and
+      //   |       move selected item to center  |   |  move center item to grid position
+      //   |                                     V   |
+      //   |                            ,----------------------,
+      //   |  Simple fade in / out      |    Top-level Menu    |
+      //   |  of all items              '----------------------'
+      //   |                                     |   ^
+      //   |        Fade all items in / out and  |   |  Fade all items in / out and
+      //   |        move all items a little bit  |   |  move all items a little bit
+      //   |        towards the new parentAngle  |   |  towards the old parentAngle
+      //   |                                     V   |
+      //   |                            ,----------------------,
+      //   |'------------------------   |    Submenu Level n   |
+      //   |                            '----------------------'
+      //   |                                     |   ^
+      //   |                      Same as above  |   |  Same as above
+      //   |                                     V   |
+      //   |                            ,----------------------,
+      //   '-------------------------   |   Submenu Level n+1  |
+      //                                '----------------------'
+      //
+      setItems(configs, selectedIndex, centerConfig, parentAngle) {
+
+        let wentOneLevelDeeper = false;
+        let wentOneLevelUp     = false;
+
+        // If the new center config is amongst the old items, we most likely went down
+        // one level.
+        if (centerConfig) {
+          for (let i = 0; i < this._items.length; i++) {
+            const item = this._items[i].getConfig();
+            if (item.name == centerConfig.name && item.icon == centerConfig.icon) {
+              wentOneLevelDeeper = true;
+              break;
+            }
+          }
+        }
+
+        // If the old center item is amongst the new items, we most likely went up one
+        // level.
+        if (this._centerItem) {
+          for (let i = 0; i < configs.length; i++) {
+            const item = configs[i];
+            if (item.name == this._centerItem.getConfig().name &&
+                item.icon == this._centerItem.getConfig().icon) {
+              wentOneLevelUp = true;
+              break;
+            }
+          }
+        }
+
+        if (this._centerItem == null && parentAngle == null) {
+          // Transition from overview to top-level.
+          utils.debug('overview to toplevel: move selected to center');
+        } else if (this._parentAngle == null && centerConfig == null) {
+          // Transition from top-level to overview.
+          utils.debug('top-level to overview: move center to grid position');
+        } else if (wentOneLevelDeeper) {
+          // Transition one level deeper.
+          utils.debug('go deeper: move all to new parent angle');
+        } else if (wentOneLevelUp) {
+          // Transition one level up.
+          utils.debug('go up: move all to old parent angle');
+        } else {
+          // Any other transition, usually multiple levels up at once.
+          utils.debug('only fade');
+        }
+
         this._hideAllItems();
+
 
         this._parentAngle = parentAngle;
 
@@ -676,7 +764,7 @@ function registerWidget() {
 
         for (let i = 0; i < configs.length; i++) {
           const item = this._createItem(
-              configs[i], parentConfig ? ItemState.CHILD : ItemState.GRID);
+              configs[i], centerConfig ? ItemState.CHILD : ItemState.GRID);
           this._items.push(item);
 
           if (i == selectedIndex) {
@@ -685,16 +773,13 @@ function registerWidget() {
           }
         }
 
-        if (parentConfig) {
-          this._centerItem = this._createItem(parentConfig, ItemState.CENTER);
+        if (centerConfig) {
+          this._centerItem = this._createItem(centerConfig, ItemState.CENTER);
 
           if (selectedIndex == -1) {
             this._selectedItem             = this._centerItem;
             this._centerItem.button.active = true;
           }
-
-        } else {
-          this._centerItem = null;
         }
 
         this._backButton.reveal_child = parentAngle != undefined;
