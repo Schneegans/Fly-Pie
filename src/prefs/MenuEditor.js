@@ -83,7 +83,7 @@ const TransitionType = {
 };
 
 // This is used for most animations / transitions in the menu editor.
-const TRANSITION_DURATION = 450;
+const TRANSITION_DURATION = 350;
 
 
 // The widget itself is instantiated by the Gtk.Builder, here we only register the GObject
