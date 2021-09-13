@@ -796,7 +796,7 @@ function registerWidgets() {
         this._height = height;
 
         // Some values we will use more often below.
-        const time    = GLib.get_monotonic_time() / 1000;
+        const time    = this.get_frame_clock().get_frame_time() / 1000;
         const centerX = Math.floor(width / 2);
         const centerY = Math.floor(height / 2);
         const radius  = ItemSize[ItemState.GRID] * 1.4;  // Radius of the edited menu.
@@ -980,13 +980,13 @@ function registerWidgets() {
 
           // Cancel any running timeouts.
           if (this._updateTimeout >= 0) {
-            GLib.source_remove(this._updateTimeout);
+            this.remove_tick_callback(this._updateTimeout);
             this._updateTimeout = -1;
           }
 
           // Create a new timeout which will cancel itself once all animations are done.
-          this._updateTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 16.66, () => {
-            const time        = GLib.get_monotonic_time() / 1000;
+          this._updateTimeout = this.add_tick_callback(() => {
+            const time        = this.get_frame_clock().get_frame_time() / 1000;
             const allFinished = this._updateItemPositions(time);
 
             if (allFinished) {
@@ -1075,14 +1075,16 @@ function registerWidgets() {
         // removed as they need to hang around until the transition is finished.
 
         // Clear old items which are now completely invisible.
-        const now = GLib.get_monotonic_time();
-        if (this._lastHideTime + TRANSITION_DURATION < now) {
-          this._oldItems.forEach(item => {
-            item.unparent();
-          });
-          this._oldItems = [];
+        if (this.get_frame_clock()) {
+          const now = this.get_frame_clock().get_frame_time();
+          if (this._lastHideTime + TRANSITION_DURATION < now) {
+            this._oldItems.forEach(item => {
+              item.unparent();
+            });
+            this._oldItems = [];
+          }
+          this._lastHideTime = now;
         }
-        this._lastHideTime = now;
 
         // Append all current items to the list of old items.
         this._oldItems.push(...this._items);
