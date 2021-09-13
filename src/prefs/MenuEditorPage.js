@@ -673,18 +673,22 @@ var MenuEditorPage = class MenuEditorPage {
 
     if (somethingSelected) {
 
+      // This prevents a update feedback back to the menu editor as long as this method is
+      // executed.
       this._updatingSidebar = true;
 
-      const selectedType = this._selectedItem.type;
 
       // The item's name, icon and description have to be updated in any case if
       // something is selected.
       this._builder.get_object('icon-name').text = this._selectedItem.icon;
       this._builder.get_object('item-name').text = this._selectedItem.name;
+
+      // Show the description of the selected type in the info label.
+      const selectedType = this._selectedItem.type;
       this._showInfoLabel(ItemRegistry.getItemTypes()[selectedType].description);
 
-      // If the selected item is a top-level menu, the SHORTCUT column contains its
-      // shortcut.
+      // If the selected item is a top-level menu, update the shortcut, else the item
+      // angle.
       if (toplevelSelected) {
         this._menuShortcutLabel.set_accelerator(this._selectedItem.shortcut || '');
         this._builder.get_object('menu-centered').active = this._selectedItem.centered;
@@ -712,11 +716,11 @@ var MenuEditorPage = class MenuEditorPage {
           if (!this._updatingSidebar) {
             this._selectedItem.data = data;
 
-            if (name) {
+            if (name != null) {
               this._builder.get_object('item-name').text = name;
             }
 
-            if (icon) {
+            if (icon != null) {
               this._builder.get_object('icon-name').text = icon;
             }
 
@@ -742,14 +746,18 @@ var MenuEditorPage = class MenuEditorPage {
       container.remove(container.get_first_child());
     }
 
+    // As first item we always create a home button which leads to the menu overview.
     {
       const button = new Gtk.Button();
       button.add_css_class('menu-editor-path-item');
+
+      // Interaction is only possible if there is a menu currently in edit mode.
       if (this._menuPath.length > 0) {
         button.connect('clicked', () => {
           this._gotoMenuPathIndex(-1);
         });
 
+        // If something is dropped onto the home, button create a root menu accordingly.
         const dropTarget =
             new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
         dropTarget.set_gtypes([GObject.TYPE_STRING]);
@@ -781,6 +789,7 @@ var MenuEditorPage = class MenuEditorPage {
       container.append(button);
     }
 
+    // Now add a button for each entry of the menu path.
     for (let i = 0; i < this._menuPath.length; i++) {
       const item   = this._menuPath[i];
       const label  = new Gtk.Label({label: item.name});
@@ -816,9 +825,11 @@ var MenuEditorPage = class MenuEditorPage {
       return;
     }
 
+    // Got to the menu overview.
     if (index < 0) {
-      let selectedIndex = -1;
 
+      // Make the previously edited menu the selected child.
+      let selectedIndex = -1;
       if (this._menuPath.length > 0) {
         this._selectedItem = this._menuPath[0];
         selectedIndex      = this._menuConfigs.indexOf(this._menuPath[0]);
@@ -829,10 +840,13 @@ var MenuEditorPage = class MenuEditorPage {
       this._menuPath = [];
       this._updateBreadCrumbs();
       this._updateSidebar();
+
     } else {
+
       const newItem      = this._menuPath[index];
       const previousItem = this._menuPath[index + 1];
 
+      // Make the previously edited menu the selected child.
       const selectedIndex   = newItem.children.indexOf(previousItem);
       this._selectedItem    = previousItem;
       this._menuPath.length = index + 1;
@@ -894,14 +908,13 @@ var MenuEditorPage = class MenuEditorPage {
     this._builder.get_object('menu-editor-stash-label').visible   = false;
     this._builder.get_object('menu-editor-stash-content').visible = true;
 
+    // Stash items are simple Gtk.DrawingAreas which can be dragged around.
     const item  = new Gtk.DrawingArea({
       content_width: 32,
       content_height: 32,
-      valign: Gtk.Align.CENTER,
-      margin_top: 4,
-      margin_bottom: 4,
       margin_start: 4,
       margin_end: 4,
+      valign: Gtk.Align.CENTER,
       tooltip_text: config.name
     });
     item.config = config;
@@ -916,13 +929,18 @@ var MenuEditorPage = class MenuEditorPage {
 
     const dragSource =
         new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+
     dragSource.connect('prepare', (s, x, y) => {
       s.set_icon(Gtk.WidgetPaintable.new(item), x, y);
       return Gdk.ContentProvider.new_for_value(JSON.stringify(config));
     });
+
+    // Make the item translucent when a drag is started.
     dragSource.connect('drag-begin', () => {
       item.opacity = 0.2;
     });
+
+    // Remove the stash widget on a successful drop.
     dragSource.connect('drag-end', (s, drag, deleteData) => {
       if (deleteData) {
         let removeIndex = this._stashedConfigs.indexOf(config);
@@ -930,6 +948,7 @@ var MenuEditorPage = class MenuEditorPage {
         item.unparent();
         this._saveStashConfiguration();
 
+        // Show the stash info when the last item got deleted.
         if (this._stashedConfigs.length == 0) {
           this._builder.get_object('menu-editor-stash-label').visible   = true;
           this._builder.get_object('menu-editor-stash-content').visible = false;
@@ -938,7 +957,9 @@ var MenuEditorPage = class MenuEditorPage {
         item.opacity = 1;
       }
     });
-    dragSource.connect('drag-cancel', (s, drag, reason) => {
+
+    // Make the item visible again if the drag is aborted.
+    dragSource.connect('drag-cancel', () => {
       item.opacity = 1;
       return false;
     });
@@ -963,6 +984,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     let itemAngles = utils.computeItemAngles(this._menuPath[0].children);
 
+    // Iterate through the menu path from start to end.
     for (let i = 1; i < this._menuPath.length; i++) {
       let parentAngle =
           itemAngles[this._menuPath[i - 1].children.indexOf(this._menuPath[i])];
