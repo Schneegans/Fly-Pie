@@ -8,8 +8,7 @@
 
 'use strict';
 
-const Cairo                                     = imports.cairo;
-const {GObject, Gdk, GLib, Gtk, Gio, GdkPixbuf} = imports.gi;
+const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
 
 const Me                  = imports.misc.extensionUtils.getCurrentExtension();
 const utils               = Me.imports.src.common.utils;
@@ -88,6 +87,8 @@ var MenuEditorPage = class MenuEditorPage {
 
   // ----------------------------------------------------------------------- private stuff
 
+  // Initializes the popover which is shown when the tiny plus-symbol in the navigation
+  // bar is clicked.
   _initAddItemPopover() {
 
     // First, we initialize the add-new-item popover and the related buttons.
@@ -154,6 +155,7 @@ var MenuEditorPage = class MenuEditorPage {
     });
   }
 
+  // Initialize the dialogs required for importing and exporting the menu configuration.
   _initExportImportButtons() {
 
     // Open a save-dialog when the export-config button is pressed.
@@ -286,6 +288,7 @@ var MenuEditorPage = class MenuEditorPage {
     });
   }
 
+  // Initialize the menu-preview button.
   _initPreviewButton() {
 
     // Connect to the server so that we can toggle menu previews from the menu editor.
@@ -398,21 +401,7 @@ var MenuEditorPage = class MenuEditorPage {
     });
   }
 
-  _showInfoLabel(text) {
-    if (this._infoLabelTimeoutA) {
-      GLib.source_remove(this._infoLabelTimeoutA);
-      this._infoLabelTimeoutA = null;
-    }
-    if (this._infoLabelTimeoutB) {
-      GLib.source_remove(this._infoLabelTimeoutB);
-      this._infoLabelTimeoutB = null;
-    }
-
-    this._builder.get_object('info-label').label = text;
-
-    this._initInfoLabel();
-  }
-
+  // Initialize all widgets of the properties-sidebar.
   _initSettingsSidebar() {
 
     // Now we initialize all icon-related UI elements. That is first and foremost the
@@ -522,6 +511,7 @@ var MenuEditorPage = class MenuEditorPage {
     }
   }
 
+  // Initialize the main menu editor widget.
   _initEditor() {
 
     this._editor = this._builder.get_object('menu-editor');
@@ -604,7 +594,7 @@ var MenuEditorPage = class MenuEditorPage {
       dropTarget.connect('drop', (t, value) => {
         const config = JSON.parse(value);
         this._stashedConfigs.push(config);
-        this._addStashItem(config);
+        this._addStashWidget(config);
         this._saveStashConfiguration();
         return true;
       });
@@ -613,80 +603,21 @@ var MenuEditorPage = class MenuEditorPage {
     }
   }
 
-  _getCurrentConfigs() {
-    if (this._menuPath.length == 0) {
-      return this._menuConfigs;
+  // Overrides the currently displayed tip in the info-label with the given text. After
+  // several seconds, a new random tip will be shown.
+  _showInfoLabel(text) {
+    if (this._infoLabelTimeoutA) {
+      GLib.source_remove(this._infoLabelTimeoutA);
+      this._infoLabelTimeoutA = null;
     }
-    return this._menuPath[this._menuPath.length - 1].children;
-  }
-
-  _getCurrentParentAngle() {
-    if (this._menuPath.length <= 1) {
-      return undefined;
-    }
-
-    let itemAngles = utils.computeItemAngles(this._menuPath[0].children);
-
-    for (let i = 1; i < this._menuPath.length; i++) {
-      let parentAngle =
-          itemAngles[this._menuPath[i - 1].children.indexOf(this._menuPath[i])];
-      parentAngle = (parentAngle + 180) % 360;
-
-      if (i == this._menuPath.length - 1) {
-        return parentAngle
-      } else {
-        itemAngles = utils.computeItemAngles(this._menuPath[i].children, parentAngle);
-      }
-    }
-  }
-
-
-  // This is called once initially and loads the JSON menu configuration from the settings
-  // key "menu-configuration". This may throw an exception if the currently stored menu
-  // configuration is invalid.
-  _loadMenuConfiguration() {
-
-    // Clear any previous selection.
-    this._menuPath = [];
-
-    // Load the menu configuration in the JSON format.
-    this._menuConfigs = JSON.parse(this._settings.get_string('menu-configuration'));
-
-    for (let i = 0; i < this._menuConfigs.length; i++) {
-
-      // Make sure that all fields of the menu config are initialized to sane defaults.
-      ItemRegistry.normalizeConfig(this._menuConfigs[i]);
-
-      // If, for some reason, no ID is assigned to a menu, generate a new one.
-      if (this._menuConfigs[i].id == undefined) {
-        this._menuConfigs[i].id = this._getNewID();
-      }
+    if (this._infoLabelTimeoutB) {
+      GLib.source_remove(this._infoLabelTimeoutB);
+      this._infoLabelTimeoutB = null;
     }
 
-    // Then we add all menus to the editor.
-    this._editor.setItems(this._menuConfigs);
+    this._builder.get_object('info-label').label = text;
 
-    this._updateBreadCrumbs();
-  }
-
-  // This is called once initially and loads the JSON item configurations from the
-  // settings key "stashed-items". This may throw an exception if the stored item
-  // configuration is invalid.
-  _loadStashConfiguration() {
-
-    // Load the menu configuration in the JSON format.
-    this._stashedConfigs = JSON.parse(this._settings.get_string('stashed-items'));
-
-    for (let i = 0; i < this._stashedConfigs.length; i++) {
-
-      // Make sure that all fields of the menu config are initialized to sane defaults.
-      ItemRegistry.normalizeConfig(this._stashedConfigs[i]);
-    }
-
-    // And all stashed items to the stash widget.
-    for (let i = 0; i < this._stashedConfigs.length; i++) {
-      this._addStashItem(this._stashedConfigs[i]);
-    }
+    this._initInfoLabel();
   }
 
   // When the currently selected menu item changes, the content of the settings
@@ -849,41 +780,6 @@ var MenuEditorPage = class MenuEditorPage {
     }
   }
 
-  _addNewItem(newType) {
-    const config = ItemRegistry.createDefaultConfig(newType);
-
-    // Assign a new ID for top-level items.
-    if (this._menuPath.length == 0) {
-      config.id       = this._getNewID();
-      config.shortcut = '';
-    } else {
-      config.angle = -1;
-    }
-
-    // Append to the current item list.
-    const configs = this._getCurrentConfigs();
-    this._addItem(config, configs.length);
-
-    // Store this in our statistics.
-    Statistics.getInstance().addItemCreated();
-  }
-
-  _addItem(config, where) {
-    this._editor.add(config, where);
-    this._selectedItem = config;
-    this._getCurrentConfigs().splice(where, 0, config);
-    this._updateSidebar();
-    this._saveMenuConfiguration();
-  }
-
-  _addItemAsChild(config, where) {
-    const parent = this._getCurrentConfigs()[where];
-    parent.children.push(config);
-    this._selectedItem = parent;
-    this._updateSidebar();
-    this._saveMenuConfiguration();
-  }
-
   // If index < 0, the menu overview will be shown. If i+1>=menuPath.length, nothing will
   // happen. For all indices between, the corresponding menu will be opened in the editor
   // and the previously opened child menu will be selected.
@@ -919,7 +815,43 @@ var MenuEditorPage = class MenuEditorPage {
     }
   }
 
-  _addStashItem(config) {
+  _addNewItem(newType) {
+    const config = ItemRegistry.createDefaultConfig(newType);
+
+    // Assign a new ID for top-level items.
+    if (this._menuPath.length == 0) {
+      config.id       = this._getNewID();
+      config.shortcut = '';
+    } else {
+      config.angle = -1;
+    }
+
+    // Append to the current item list.
+    const configs = this._getCurrentConfigs();
+    this._addItem(config, configs.length);
+
+    // Store this in our statistics.
+    Statistics.getInstance().addItemCreated();
+  }
+
+  _addItem(config, where) {
+    this._editor.add(config, where);
+    this._selectedItem = config;
+    this._getCurrentConfigs().splice(where, 0, config);
+    this._updateSidebar();
+    this._saveMenuConfiguration();
+  }
+
+  _addItemAsChild(config, where) {
+    const parent = this._getCurrentConfigs()[where];
+    parent.children.push(config);
+    this._selectedItem = parent;
+    this._updateSidebar();
+    this._saveMenuConfiguration();
+  }
+
+  // Add the item given with the config object to the stash.
+  _addStashWidget(config) {
     this._builder.get_object('menu-editor-stash-label').visible   = false;
     this._builder.get_object('menu-editor-stash-content').visible = true;
 
@@ -975,6 +907,36 @@ var MenuEditorPage = class MenuEditorPage {
     item.add_controller(dragSource);
   }
 
+  // Returns the configurations of the items which are currently displayed in the menu
+  // editor.
+  _getCurrentConfigs() {
+    if (this._menuPath.length == 0) {
+      return this._menuConfigs;
+    }
+    return this._menuPath[this._menuPath.length - 1].children;
+  }
+
+  // Computes the angle of the current center item relative to its parent menu.
+  _getCurrentParentAngle() {
+    if (this._menuPath.length <= 1) {
+      return undefined;
+    }
+
+    let itemAngles = utils.computeItemAngles(this._menuPath[0].children);
+
+    for (let i = 1; i < this._menuPath.length; i++) {
+      let parentAngle =
+          itemAngles[this._menuPath[i - 1].children.indexOf(this._menuPath[i])];
+      parentAngle = (parentAngle + 180) % 360;
+
+      if (i == this._menuPath.length - 1) {
+        return parentAngle
+      } else {
+        itemAngles = utils.computeItemAngles(this._menuPath[i].children, parentAngle);
+      }
+    }
+  }
+
   // This returns an integer > 0 which is not used as menu ID currently.
   _getNewID() {
     let newID   = -1;
@@ -996,6 +958,54 @@ var MenuEditorPage = class MenuEditorPage {
     return newID;
   }
 
+  // This is called once initially and loads the JSON menu configuration from the settings
+  // key "menu-configuration". This may throw an exception if the currently stored menu
+  // configuration is invalid.
+  _loadMenuConfiguration() {
+
+    // Clear any previous selection.
+    this._menuPath = [];
+
+    // Load the menu configuration in the JSON format.
+    this._menuConfigs = JSON.parse(this._settings.get_string('menu-configuration'));
+
+    for (let i = 0; i < this._menuConfigs.length; i++) {
+
+      // Make sure that all fields of the menu config are initialized to sane defaults.
+      ItemRegistry.normalizeConfig(this._menuConfigs[i]);
+
+      // If, for some reason, no ID is assigned to a menu, generate a new one.
+      if (this._menuConfigs[i].id == undefined) {
+        this._menuConfigs[i].id = this._getNewID();
+      }
+    }
+
+    // Then we add all menus to the editor.
+    this._editor.setItems(this._menuConfigs);
+
+    this._updateBreadCrumbs();
+  }
+
+  // This is called once initially and loads the JSON item configurations from the
+  // settings key "stashed-items". This may throw an exception if the stored item
+  // configuration is invalid.
+  _loadStashConfiguration() {
+
+    // Load the menu configuration in the JSON format.
+    this._stashedConfigs = JSON.parse(this._settings.get_string('stashed-items'));
+
+    for (let i = 0; i < this._stashedConfigs.length; i++) {
+
+      // Make sure that all fields of the menu config are initialized to sane defaults.
+      ItemRegistry.normalizeConfig(this._stashedConfigs[i]);
+    }
+
+    // And all stashed items to the stash widget.
+    for (let i = 0; i < this._stashedConfigs.length; i++) {
+      this._addStashWidget(this._stashedConfigs[i]);
+    }
+  }
+
   // This stores a JSON representation of the current configuration in the
   // "menu-configuration" key of the application settings. This is called whenever
   // something is changed in the sidebar. It does not update the settings
@@ -1014,6 +1024,10 @@ var MenuEditorPage = class MenuEditorPage {
 
       // Save the configuration as JSON!
       this._settings.set_string('menu-configuration', JSON.stringify(this._menuConfigs));
+
+      if (this._menuConfigs.length == 0) {
+        Statistics.getInstance().addDeletedAllMenus();
+      }
 
       return false;
     });
@@ -1041,6 +1055,7 @@ var MenuEditorPage = class MenuEditorPage {
     });
   }
 
+  // Shows an in-app notification with the given text.
   _showNotification(text) {
     this._builder.get_object('notification-revealer').reveal_child = true;
     this._builder.get_object('notification-label').label           = text;
