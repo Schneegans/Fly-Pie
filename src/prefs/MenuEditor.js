@@ -661,7 +661,8 @@ function registerWidgets() {
 
             // For internal drop events, the dropped data is a JSON representation of the
             // dropped item.
-            if (this._dragIndex != null) {
+            const internalDrag = t.get_drop().get_drag() != null;
+            if (internalDrag) {
 
               const config = JSON.parse(what);
 
@@ -1295,7 +1296,8 @@ function registerWidgets() {
           dropTarget.connect('drop', (t, what) => {
             const dropIndex = this._items.indexOf(item);
 
-            if (this._dragIndex != null) {
+            const internalDrag = t.get_drop().get_drag() != null;
+            if (internalDrag) {
               this.emit('drop-item-into', what, dropIndex);
 
             } else {
