@@ -357,6 +357,14 @@
     <property name="page_increment">50</property>
   </object>
 
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="tutorial-previous-page-button" />
+      <widget name="tutorial-next-page-button" />
+    </widgets>
+  </object>
+
   <!-- ######################################################################################### -->
   <!--                                                                                           -->
   <!-- About Popover -->
@@ -1503,17 +1511,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                     <child>
 
                       <object class="GtkActionBar">
-
-                        <child>
-                          <object class="GtkSizeGroup">
-                            <property name="mode">horizontal</property>
-                            <widgets>
-                              <widget name="tutorial-previous-page-button" />
-                              <widget name="tutorial-next-page-button" />
-                            </widgets>
-                          </object>
-                        </child>
-
 
                         <child type="center">
                           <object class="GtkCenterBox">
