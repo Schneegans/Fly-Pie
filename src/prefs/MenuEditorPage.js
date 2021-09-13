@@ -28,6 +28,8 @@ const _ = imports.gettext.domain('flypie').gettext;
 // public interface, hence it could just be copy-pasted to the PreferencesDialog class. //
 // But as it's quite decoupled (and huge) as well, it structures the code better when   //
 // written to its own file.                                                             //
+// Quite a lot of the menu editor logic is coded in the MenuEditor widget, which has    //
+// its own class.                                                                       //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var MenuEditorPage = class MenuEditorPage {
@@ -91,7 +93,6 @@ var MenuEditorPage = class MenuEditorPage {
   // bar is clicked.
   _initAddItemPopover() {
 
-    // First, we initialize the add-new-item popover and the related buttons.
     // Here we add one entry to the add-new-item popover for each registered item type.
     for (const type in ItemRegistry.getItemTypes()) {
       const row  = new Gtk.ListBoxRow({selectable: false});
@@ -132,15 +133,14 @@ var MenuEditorPage = class MenuEditorPage {
     }
 
     // Add a new item when one entry of the action-types list it activated.
-    this._builder.get_object('add-action-list')
-        .connect('row-activated', (widget, row) => {
-          this._addNewItem(row.get_name());
-          this._builder.get_object('add-item-popover').popdown();
-        });
+    this._builder.get_object('add-action-list').connect('row-activated', (w, row) => {
+      this._addDefaultItem(row.get_name());
+      this._builder.get_object('add-item-popover').popdown();
+    });
 
     // Add a new item when one entry of the menu-types list it activated.
-    this._builder.get_object('add-menu-list').connect('row-activated', (widget, row) => {
-      this._addNewItem(row.get_name());
+    this._builder.get_object('add-menu-list').connect('row-activated', (w, row) => {
+      this._addDefaultItem(row.get_name());
       this._builder.get_object('add-item-popover').popdown();
     });
 
@@ -389,6 +389,7 @@ var MenuEditorPage = class MenuEditorPage {
       return true;
     });
 
+    // Remove the timeouts when the dialog gets destroyed.
     label.connect('destroy', () => {
       if (this._infoLabelTimeoutA) {
         GLib.source_remove(this._infoLabelTimeoutA);
@@ -404,8 +405,7 @@ var MenuEditorPage = class MenuEditorPage {
   // Initialize all widgets of the properties-sidebar.
   _initSettingsSidebar() {
 
-    // Now we initialize all icon-related UI elements. That is first and foremost the
-    // icon-select dialog.
+    // First, we initialize the icon-select dialog.
     const iconSelectDialog = this._builder.get_object('icon-select-dialog');
     iconSelectDialog.connect('response', (dialog, id) => {
       if (id == Gtk.ResponseType.OK) {
@@ -414,6 +414,7 @@ var MenuEditorPage = class MenuEditorPage {
       iconSelectDialog.hide();
     });
 
+    // The icon-select dialog is shown when the corresponding button is pressed.
     this._builder.get_object('icon-select-button').connect('clicked', () => {
       iconSelectDialog.set_transient_for(
           this._builder.get_object('main-notebook').get_root());
@@ -421,9 +422,8 @@ var MenuEditorPage = class MenuEditorPage {
       iconSelectDialog.show();
     });
 
-    // Redraw the icon when the icon name input field is changed. Also, store the new
-    // icon name in the tree store. This will lead to a re-draw of the icon in the tree
-    // view as well.
+    // Redraw the icon when the icon name input field is changed. Also, save the menu
+    // configuration and update the menu editor widget accordingly.
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
       if (!this._updatingSidebar) {
         this._selectedItem.icon = widget.text;
@@ -432,8 +432,8 @@ var MenuEditorPage = class MenuEditorPage {
       }
     });
 
-    // Store the item's name in the tree store when the text of the name input field is
-    // changed.this.
+    // Save the menu configuration and update the menu editor widget when the name of an
+    // item is changed.
     this._builder.get_object('item-name').connect('notify::text', (widget) => {
       if (!this._updatingSidebar) {
         this._selectedItem.name = widget.text;
@@ -448,13 +448,12 @@ var MenuEditorPage = class MenuEditorPage {
       }
     });
 
-    // Store the item's fixed angle in the tree store's ANGLE column when the
-    // corresponding input field is changed. This is a bit more involved, as we check
-    // for monotonically increasing angles among all sibling items. We iterate through
-    // all children of the selected item's parent (that means all siblings of the
-    // selected item). The minAngle is set to the largest fixed angle amongst all
-    // siblings preceding the selected item; maxAngle is set to the smallest fixed angle
-    // amongst siblings after the selected item.
+    // Update the item's fixed angle when the corresponding input field is changed. This
+    // is a bit more involved, as we check for monotonically increasing angles among all
+    // sibling items. We iterate through all children of the selected item's parent (that
+    // means all siblings of the selected item). The minAngle is set to the largest fixed
+    // angle amongst all siblings preceding the selected item; maxAngle is set to the
+    // smallest fixed angle amongst siblings after the selected item.
     this._builder.get_object('item-angle').connect('notify::value', (adjustment) => {
       if (!this._updatingSidebar) {
         let minAngle = -1;
@@ -497,7 +496,7 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     // Initialize the menu shortcut-select element. See the documentation of
-    // createShortcutLabel for details.
+    // ConfigWidgetFactory.createShortcutLabel for details.
     {
       const [box, label] = ConfigWidgetFactory.createShortcutLabel(false, (shortcut) => {
         if (!this._updatingSidebar) {
@@ -514,8 +513,11 @@ var MenuEditorPage = class MenuEditorPage {
   // Initialize the main menu editor widget.
   _initEditor() {
 
+    // The menu editor class encapsulates a lot of logic already (especially drag-and-drop
+    // behavior), however, we have to connect to several signals to wire everything up.
     this._editor = this._builder.get_object('menu-editor');
 
+    // If an item is selected, we update the settings sidebar accordingly.
     this._editor.connect('select', (e, which) => {
       if (which >= 0) {
         this._selectedItem = this._getCurrentConfigs()[which];
@@ -525,6 +527,8 @@ var MenuEditorPage = class MenuEditorPage {
       this._updateSidebar();
     });
 
+    // If an item is selected for editing, we push it to the menu path, update sidebar and
+    // breadcrumbs, and make the menu editor show the newly visible children.
     this._editor.connect('edit', (e, which) => {
       this._selectedItem = this._getCurrentConfigs()[which];
       this._menuPath.push(this._selectedItem);
@@ -535,6 +539,8 @@ var MenuEditorPage = class MenuEditorPage {
           this._getCurrentParentAngle());
     });
 
+    // If an item is removed, we may have to hide the sidebar and we will save the
+    // resulting menu configuration.
     this._editor.connect('remove', (e, which) => {
       const [removed] = this._getCurrentConfigs().splice(which, 1);
       if (removed == this._selectedItem) {
@@ -544,12 +550,16 @@ var MenuEditorPage = class MenuEditorPage {
       this._saveMenuConfiguration();
     });
 
+    // If an item was dropped onto the menu editor, we add an item accordingly. This is
+    // not considered to be an item creation in terms of statistics, as it's most likely
+    // the result of a drag-and-drop operation.
     this._editor.connect('drop-item', (e, what, where) => {
       const config = JSON.parse(what);
-      config.angle = -1;
       this._addItem(config, where);
     });
 
+    // If arbitrary text is dropped onto the editor, we try our best to create a suitable
+    // action.
     this._editor.connect('drop-data', (e, what, where) => {
       this._addItem(ItemRegistry.createActionConfig(what), where);
 
@@ -557,10 +567,15 @@ var MenuEditorPage = class MenuEditorPage {
       Statistics.getInstance().addItemCreated();
     });
 
+    // If an item was dropped into another item of the menu editor, we add an item
+    // accordingly. This is not considered to be an item creation in terms of statistics,
+    // as it's most likely the result of a drag-and-drop operation.
     this._editor.connect('drop-item-into', (e, what, where) => {
       this._addItemAsChild(JSON.parse(what), where);
     });
 
+    // If arbitrary text is dropped into another item of the editor, we try our best to
+    // create a suitable action.
     this._editor.connect('drop-data-into', (e, what, where) => {
       this._addItemAsChild(ItemRegistry.createActionConfig(what), where);
 
@@ -568,12 +583,16 @@ var MenuEditorPage = class MenuEditorPage {
       Statistics.getInstance().addItemCreated();
     });
 
+    // When the back-button is clicked, we go back one step in the menu path.
     this._editor.connect('go-back', () => {
       this._gotoMenuPathIndex(this._menuPath.length - 2);
     });
 
+    // When a notification is supposed to be shown, we do it!
     this._editor.connect('notification', (e, text) => this._showNotification(text));
 
+    // Initialize the drop target of the trash area. It's pretty simple, it just accepts
+    // any internal drag operation.
     {
       const trash = this._builder.get_object('menu-editor-trash');
       const dropTarget =
@@ -585,6 +604,8 @@ var MenuEditorPage = class MenuEditorPage {
       trash.add_controller(dropTarget);
     }
 
+    // The stash area is slightly more complex, as a new stash widget needs to be created
+    // on drop events.
     {
       const stash = this._builder.get_object('menu-editor-stash');
       const dropTarget =
@@ -606,6 +627,8 @@ var MenuEditorPage = class MenuEditorPage {
   // Overrides the currently displayed tip in the info-label with the given text. After
   // several seconds, a new random tip will be shown.
   _showInfoLabel(text) {
+
+    // Clear any pending timeouts.
     if (this._infoLabelTimeoutA) {
       GLib.source_remove(this._infoLabelTimeoutA);
       this._infoLabelTimeoutA = null;
@@ -615,8 +638,11 @@ var MenuEditorPage = class MenuEditorPage {
       this._infoLabelTimeoutB = null;
     }
 
+    // Show the given text.
     this._builder.get_object('info-label').label = text;
 
+    // Re-initialize the info label; this will make it show the next tip after a couple of
+    // seconds.
     this._initInfoLabel();
   }
 
@@ -628,22 +654,24 @@ var MenuEditorPage = class MenuEditorPage {
     // their content is either shown or hidden. The menu settings (shortcut, centered) are
     // visible if a top-level element is selected, for all other items the fixed angle can
     // be set.
-    const sometingSelected = this._selectedItem != null;
-    const toplevelSelected = this._menuConfigs.indexOf(this._selectedItem) >= 0;
+    const somethingSelected = this._selectedItem != null;
+    const toplevelSelected  = this._menuConfigs.indexOf(this._selectedItem) >= 0;
 
-    this._builder.get_object('item-settings-revealer').reveal_child = sometingSelected;
+    this._builder.get_object('item-settings-revealer').reveal_child = somethingSelected;
 
     this._builder.get_object('item-settings-menu-revealer').reveal_child =
         toplevelSelected;
 
+    // The angle cannot be modified for center items.
     this._builder.get_object('item-settings-angle-revealer').reveal_child =
         !toplevelSelected &&
         this._selectedItem != this._menuPath[this._menuPath.length - 1];
 
+    // Make the preview button non-sensitive if nothing is selected.
     this._builder.get_object('preview-menu-button').sensitive =
-        sometingSelected || this._menuPath.length > 0;
+        somethingSelected || this._menuPath.length > 0;
 
-    if (sometingSelected) {
+    if (somethingSelected) {
 
       this._updatingSidebar = true;
 
@@ -815,8 +843,10 @@ var MenuEditorPage = class MenuEditorPage {
     }
   }
 
-  _addNewItem(newType) {
-    const config = ItemRegistry.createDefaultConfig(newType);
+  // Adds a new item of the given type to the currently edited menu (or to the menu
+  // overview).
+  _addDefaultItem(type) {
+    const config = ItemRegistry.createDefaultConfig(type);
 
     // Assign a new ID for top-level items.
     if (this._menuPath.length == 0) {
@@ -834,7 +864,11 @@ var MenuEditorPage = class MenuEditorPage {
     Statistics.getInstance().addItemCreated();
   }
 
+  // Adds an item based on the given config at the specified index to the menu editor. It
+  // will be the selected item; the sidebar widgets will be updated to reflect the item
+  // configuration. Its fixed angle is reset to prevent invalid configurations.
   _addItem(config, where) {
+    config.angle = -1;
     this._editor.add(config, where);
     this._selectedItem = config;
     this._getCurrentConfigs().splice(where, 0, config);
@@ -842,7 +876,12 @@ var MenuEditorPage = class MenuEditorPage {
     this._saveMenuConfiguration();
   }
 
+  // Adds an item based on the given config as child of the item at the specified index.
+  // The parent item will be the selected item; the sidebar widgets will be updated to
+  // reflect the item configuration. Its fixed angle is reset to prevent invalid
+  // configurations.
   _addItemAsChild(config, where) {
+    config.angle = -1;
     const parent = this._getCurrentConfigs()[where];
     parent.children.push(config);
     this._selectedItem = parent;
