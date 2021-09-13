@@ -47,7 +47,7 @@ var PreferencesDialog = class PreferencesDialog {
 
     // Register some custom Gtk widgets. This needs to be done before creating the builder
     // below as this will instantiate some of these custom widgets.
-    MenuEditor.registerWidget();
+    MenuEditor.registerWidgets();
     IconSelectDialog.registerWidget();
     ImageChooserButton.registerWidget();
     CopyValueButton.registerWidget();
