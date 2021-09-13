@@ -1224,93 +1224,115 @@ function registerWidgets() {
           });
         }
 
-        const dragSource =
-            new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-        dragSource.connect('prepare', (s, x, y) => {
-          s.set_icon(Gtk.WidgetPaintable.new(item.icon), x, y);
+        // Now we set up the drag source. Most items are draggable, except for center
+        // items.
+        if (itemState != ItemState.CENTER) {
 
-          if (item == this._centerItem) {
-            return null;
-          }
+          let dragSource =
+              new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
 
-          return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
-        });
+          // The drag source provides a stringified JSON version of the item config. The
+          // item's icon is used as drag graphic.
+          dragSource.connect('prepare', (s, x, y) => {
+            s.set_icon(Gtk.WidgetPaintable.new(item.icon), x, y);
+            return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
+          });
 
-        dragSource.connect('drag-begin', () => {
-          item.opacity    = this._inMenuOverviewMode() ? 0.2 : 0.0;
-          item.sensitive  = false;
-          this._dragIndex = this._items.indexOf(item);
-          this.updateLayout();
-        });
+          // At drag begin, we make the icon translucent in overview mode and invisible in
+          // menu edit mode.
+          dragSource.connect('drag-begin', () => {
+            item.opacity    = this._inMenuOverviewMode() ? 0.2 : 0.0;
+            item.sensitive  = false;
+            this._dragIndex = this._items.indexOf(item);
+            this.updateLayout();
+          });
 
-        dragSource.connect('drag-end', (s, drag, deleteData) => {
-          if (deleteData) {
-            let removeIndex = this._items.indexOf(item);
-
-            this.remove(removeIndex);
-            this.emit('remove', removeIndex);
-
-            item.opacity   = 1;
-            item.sensitive = true;
-          } else {
-            item.opacity   = 1;
-            item.sensitive = true;
-          }
-
-
-          this._dragIndex = null;
-        });
-
-        dragSource.connect('drag-cancel', () => {
-          item.opacity    = 1;
-          item.sensitive  = true;
-          this._dragIndex = null;
-          this.updateLayout();
-          return false;
-        });
-
-        item.button.add_controller(dragSource);
-
-        const dropTarget =
-            new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-        dropTarget.set_gtypes([GObject.TYPE_STRING]);
-        dropTarget.connect(
-            'accept',
-            () => item.getConfig().type == 'CustomMenu' && item != this._centerItem);
-
-        dropTarget.connect('drop', (t, what) => {
-          const dropIndex = this._items.indexOf(item);
-          if (this._dragIndex != null) {
-            this.emit('drop-item-into', what, dropIndex);
-          } else {
-            if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
-              what.split(/\r?\n/).forEach(line => {
-                if (line != '') {
-                  this.emit('drop-data-into', line, dropIndex);
-                }
-              });
+          // On drag end we either remove the dragged object or make it visible again.
+          dragSource.connect('drag-end', (s, drag, deleteData) => {
+            if (deleteData) {
+              let removeIndex = this._items.indexOf(item);
+              this.remove(removeIndex);
+              this.emit('remove', removeIndex);
             } else {
-              this.emit('drop-data-into', what, dropIndex);
+              item.opacity   = 1;
+              item.sensitive = true;
             }
-          }
 
-          this._selectedItem               = item;
-          this._selectedItem.button.active = true;
-          this._dropColumn                 = null;
-          this._dropRow                    = null;
-          this._dropIndex                  = null;
-          return true;
-        });
+            this._dragIndex = null;
+          });
 
-        dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
-        item.button.add_controller(dropTarget);
+          // If the drag operation is canceled, we make the item visible again and update
+          // the layout.
+          dragSource.connect('drag-cancel', () => {
+            item.opacity    = 1;
+            item.sensitive  = true;
+            this._dragIndex = null;
+            this.updateLayout();
+            return false;
+          });
 
-        item.button.connect('clicked', (b) => {
           // For some reason, the drag source does not work anymore once the
           // ToggleButton was toggled. Resetting the EventController seems to be a
           // working workaround.
-          dragSource.reset();
+          item.button.connect('clicked', (b) => {
+            dragSource.reset();
+          });
 
+          item.button.add_controller(dragSource);
+        }
+
+        // Non-center items of type 'CustomMenu' can also receive drops.
+        if (itemState != ItemState.CENTER) {
+          const dropTarget =
+              new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+          dropTarget.set_gtypes([GObject.TYPE_STRING]);
+
+          // We accept everything as long as the item is a custom menu.
+          dropTarget.connect('accept', () => item.getConfig().type == 'CustomMenu');
+
+          // When something is dropped, we either emit 'drop-data-into' (for external drop
+          // events) or 'drop-data-into' (for internal drop events).
+          dropTarget.connect('drop', (t, what) => {
+            const dropIndex = this._items.indexOf(item);
+
+            if (this._dragIndex != null) {
+              this.emit('drop-item-into', what, dropIndex);
+
+            } else {
+
+              // If the external drop event provides a list of URIs, we call the signal
+              // once for each entry.
+              if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
+                what.split(/\r?\n/).forEach(line => {
+                  if (line != '') {
+                    this.emit('drop-data-into', line, dropIndex);
+                  }
+                });
+              } else {
+                this.emit('drop-data-into', what, dropIndex);
+              }
+            }
+
+            // Make the item the active one.
+            this._selectedItem               = item;
+            this._selectedItem.button.active = true;
+
+            // Reset all drop members.
+            this._dropColumn = null;
+            this._dropRow    = null;
+            this._dropIndex  = null;
+
+            return true;
+          });
+
+          // Highlight the button if the pointer moves over it.
+          dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+
+          item.button.add_controller(dropTarget);
+        }
+
+        // Emit the 'select' signal when the button is pressed.
+        item.button.connect('clicked', (b) => {
           if (b.active) {
             this._selectedItem = item;
             this.emit('select', this._items.indexOf(item));
