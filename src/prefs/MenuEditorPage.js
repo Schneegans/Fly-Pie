@@ -578,17 +578,6 @@ var MenuEditorPage = class MenuEditorPage {
       Statistics.getInstance().addItemCreated();
     });
 
-    this._editor.connect('request-add', (e, rect) => {
-      const inMenuOverviewMode = this._menuPath.length == 0;
-
-      this._builder.get_object('add-action-list').visible     = !inMenuOverviewMode;
-      this._builder.get_object('action-list-heading').visible = !inMenuOverviewMode;
-      this._builder.get_object('menu-list-heading').visible   = !inMenuOverviewMode;
-      const popover = this._builder.get_object('add-item-popover');
-      popover.set_pointing_to(rect);
-      popover.popup();
-    });
-
     this._editor.connect('go-back', () => {
       this._gotoMenuPathIndex(this._menuPath.length - 2);
     });
