@@ -11,6 +11,17 @@
 const Cairo                                         = imports.cairo;
 const {Gdk, Gtk, Gio, Pango, PangoCairo, GdkPixbuf} = imports.gi;
 
+// We import the St module optionally. When this file is included from the daemon
+// side, it is available and can be used below. If this file is included via the pref.js,
+// it will not be available.
+let St = undefined;
+
+try {
+  St = imports.gi.St;
+} catch (error) {
+  // Nothing to be done, we're in settings-mode.
+}
+
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 
 
@@ -62,6 +73,38 @@ function logProperties(object) {
   }
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+// Do to this issue https://gitlab.gnome.org/GNOME/mutter/-/issues/960, the static      //
+// function Gtk.IconTheme.get_for_display() may return null when executed from the      //
+// gnome-shell process o Wayland. In this case, we use St to get a valid icon theme.    //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+let _iconTheme = null;
+function getIconTheme() {
+
+  if (_iconTheme == null) {
+
+    // If St is available (that means we are in the gnome-shell process), we attempt to
+    // get the theme from St. Else we use the X11-dependent Gtk code.
+    if (St) {
+      _iconTheme = new Gtk.IconTheme();
+      _iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
+    } else {
+      if (imports.gi.versions.Gtk === '3.0') {
+        _iconTheme = Gtk.IconTheme.get_default();
+      } else {
+        _iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
+      }
+    }
+
+    // Print an error if this fails as well.
+    if (_iconTheme == null) {
+      debug('Failed to get a valid icon theme object!');
+    }
+  }
+
+  return _iconTheme;
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This draws a square-shaped icon to the given Cairo.Context of the given size. The    //
@@ -82,9 +125,12 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
   // icon name is actually a file path.
   try {
 
+    // Get an icon theme object. How this is done, depends on the Gtk version and whether
+    // we are in GNOME Shell's process.
+    const theme = getIconTheme();
+
     if (imports.gi.versions.Gtk === '3.0') {
-      const theme = Gtk.IconTheme.get_default();
-      const info  = theme.lookup_by_gicon(
+      const info = theme.lookup_by_gicon(
           Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
 
       // We got something, paint it!
@@ -96,7 +142,6 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
 
     } else {
 
-      const theme     = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
       const paintable = theme.lookup_by_gicon(
           Gio.Icon.new_for_string(name), size, 1, Gtk.TextDirection.NONE,
           Gtk.IconLookupFlags.FORCE_SIZE);
