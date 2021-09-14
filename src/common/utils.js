@@ -269,8 +269,7 @@ function computeItemAngles(items, parentAngle) {
     return itemAngles;
   }
 
-  // First we calculate all angles for the current menu level. We begin by storing all
-  // fixed angles.
+  // We begin by storing all fixed angles.
   const fixedAngles = [];
   items.forEach((item, index) => {
     if ('angle' in item && item.angle >= 0) {
@@ -290,14 +289,18 @@ function computeItemAngles(items, parentAngle) {
     }
   }
 
-  // Make sure that the fixed angles increase monotonically and are between 0° and 360°.
+  // Make sure that the fixed angles are between 0° and 360°.
   for (let i = 0; i < fixedAngles.length; i++) {
-    if (i > 0 && fixedAngles[i].angle <= fixedAngles[i - 1].angle) {
-      return null;
-    }
+    fixedAngles[i].angle = fixedAngles[i].angle % 360;
+  }
 
-    if (fixedAngles[i].angle < 0.0 || fixedAngles[i].angle >= 360.0) {
-      return null;
+  // Make sure that the fixed angles increase monotonically. If a fixed angle is larger
+  // than the next one, the next one will be ignored.
+  for (let i = 0; i < fixedAngles.length - 1;) {
+    if (fixedAngles[i].angle > fixedAngles[i + 1].angle) {
+      fixedAngles.splice(i + 1, 1);
+    } else {
+      ++i;
     }
   }
 
