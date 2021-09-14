@@ -24,113 +24,129 @@ var DefaultMenu = class DefaultMenu {
   static get() {
 
     const menu = {
-      name: _('Example Menu'),
-      icon: '🌟️',
-      shortcut: '<Primary>space',
-      centered: false,
-      id: 0,
-      children: [
+      // Translators: This is an entry of the default menu.
+      'name': _('Example Menu'),
+      'icon': '🌟️',
+      'shortcut': '<Primary>space',
+      'centered': false,
+      'id': 0,
+      'children': [
         {
-          name: _('Sound'),
-          icon: 'audio-speakers',
-          children: [
+          // Translators: This is an entry of the default menu.
+          'name': _('Window Management'),
+          'icon': 'desktop',
+          'children': [
             {
-              name: _('Play / Pause'),
-              icon: '⏯️',
-              type: 'Shortcut',
-              data: 'AudioPlay',
+              // Translators: This is an entry of the default menu.
+              'name': _('Open Windows'),
+              'icon': 'preferences-system-windows',
+              'type': 'RunningApps',
+              'data': {
+                'activeWorkspaceOnly': false,
+                'appGrouping': true,
+                'hoverPeeking': true,
+                'nameRegex': ''
+              },
+              'angle': -1
             },
             {
-              name: _('Mute'),
-              icon: '🔈️',
-              type: 'Shortcut',
-              data: 'AudioMute',
+              // Translators: This is an entry of the default menu.
+              'name': _('Close Window'),
+              'icon': 'window-close',
+              'type': 'Shortcut',
+              'data': '<Alt>F4',
+              'angle': -1
             },
             {
-              name: _('Next Title'),
-              icon: '⏩️',
-              type: 'Shortcut',
-              data: 'AudioNext',
-              angle: 90
+              // Translators: This is an entry of the default menu.
+              'name': _('Right'),
+              'icon': '▶️',
+              'type': 'Shortcut',
+              'data': {'shortcut': '<Control><Alt>Right'},
+              'angle': 90
             },
             {
-              name: _('Previous Title'),
-              icon: '⏪️',
-              type: 'Shortcut',
-              data: 'AudioPrev',
-              angle: 270
+              // Translators: This is an entry of the default menu.
+              'name': _('Left'),
+              'icon': '◀️',
+              'type': 'Shortcut',
+              'data': {'shortcut': '<Control><Alt>Left'},
+              'angle': 270
+            },
+            {
+              // Translators: This is an entry of the default menu.
+              'name': _('Maximize Window'),
+              'icon': 'view-fullscreen',
+              'type': 'Shortcut',
+              'data': '<Alt>F10',
+              'angle': -1
             }
-          ]
+          ],
+          'type': 'CustomMenu',
+          'data': {},
+          'angle': -1
         },
         {
-          name: _('Window Management'),
-          icon: 'preferences-system-windows',
-          children: [
+          // Translators: This is an entry of the default menu.
+          'name': _('Favorites'),
+          'icon': 'emblem-favorite',
+          'type': 'Favorites',
+          'data': {},
+          'angle': -1
+        },
+        {
+          // Translators: This is an entry of the default menu.
+          'name': _('Sound'),
+          'icon': 'audio-speakers',
+          'children': [
             {
-              name: _('Maximize Window'),
-              icon: 'view-fullscreen',
-              type: 'Shortcut',
-              data: '<Alt>F10',
+              // Translators: This is an entry of the default menu.
+              'name': _('Next Title'),
+              'icon': '⏩️',
+              'type': 'Shortcut',
+              'data': 'AudioNext',
+              'angle': 90
             },
             {
-              name: _('GNOME Shell'),
-              icon: 'preferences-desktop-remote-desktop',
-              children: [
-                {
-                  name: _('Up'),
-                  icon: '🔼️',
-                  type: 'Shortcut',
-                  data: '<Primary><Alt>Up',
-                  angle: 0
-                },
-                {
-                  name: _('Overview'),
-                  icon: '💠️',
-                  type: 'Shortcut',
-                  data: '<Super>s',
-                },
-                {
-                  name: _('Down'),
-                  icon: '🔽️',
-                  type: 'Shortcut',
-                  data: '<Primary><Alt>Down',
-                  angle: 180
-                },
-                {
-                  name: _('Show Apps'),
-                  icon: 'view-app-grid-symbolic',
-                  type: 'Shortcut',
-                  data: '<Super>a',
-                }
-              ]
+              // Translators: This is an entry of the default menu.
+              'name': _('Play / Pause'),
+              'icon': '⏯️',
+              'type': 'Shortcut',
+              'data': 'AudioPlay',
+              'angle': -1
             },
             {
-              name: _('Open Windows'),
-              icon: 'preferences-system-windows',
-              type: 'RunningApps',
+              // Translators: This is an entry of the default menu.
+              'name': _('Mute'),
+              'icon': '🔈️',
+              'type': 'Shortcut',
+              'data': 'AudioMute',
+              'angle': -1
             },
             {
-              name: _('Close Window'),
-              icon: 'window-close',
-              type: 'Shortcut',
-              data: '<Alt>F4',
+              // Translators: This is an entry of the default menu.
+              'name': _('Previous Title'),
+              'icon': '⏪️',
+              'type': 'Shortcut',
+              'data': 'AudioPrev',
+              'angle': 270
             }
-          ]
+          ],
+          'type': 'CustomMenu',
+          'data': {},
+          'angle': -1
         },
         {
-          name: _('Bookmarks'),
-          icon: 'folder',
-          type: 'Bookmarks',
-        },
-        {
-          name: _('Fly-Pie Settings'),
-          icon: 'preferences-system',
-          type: 'Command',
-          data: 'gnome-extensions prefs flypie@schneegans.github.com',
-        },
-        {name: _('Favorites'), icon: 'emblem-favorite', type: 'Favorites'},
-        {name: _('System'), icon: 'system-log-out', type: 'System'}
-      ]
+          // Translators: This is an entry of the default menu.
+          'name': _('Fly-Pie Settings'),
+          'icon': 'preferences-system',
+          'type': 'Command',
+          'data': 'gnome-extensions prefs flypie@schneegans.github.com',
+          'angle': -1
+        }
+      ],
+      'type': 'CustomMenu',
+      'data': {}
     };
 
     return menu;
