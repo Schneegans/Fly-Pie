@@ -110,7 +110,7 @@ var AchievementsPage = class AchievementsPage {
     this._builder.get_object('achievements-reset-button').connect('clicked', button => {
       // Create the question dialog.
       const dialog = new Gtk.MessageDialog({
-        transient_for: button.get_toplevel(),
+        transient_for: button.get_root(),
         modal: true,
         buttons: Gtk.ButtonsType.OK_CANCEL,
         message_type: Gtk.MessageType.QUESTION,
@@ -231,8 +231,8 @@ var AchievementsPage = class AchievementsPage {
     const widgets   = Object.values(this._activeAchievements);
     widgets.sort((a, b) => b.progress - a.progress || a.name.localeCompare(b.name));
 
-    for (let i = 0; i < widgets.length; i++) {
-      container.reorder_child(widgets[i].revealer, i);
+    for (let i = 1; i < widgets.length; i++) {
+      container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
     }
   }
 
@@ -243,8 +243,8 @@ var AchievementsPage = class AchievementsPage {
     const widgets   = Object.values(this._completedAchievements);
     widgets.sort((a, b) => b.date - a.date || a.name.localeCompare(b.name));
 
-    for (let i = 0; i < widgets.length; i++) {
-      container.reorder_child(widgets[i].revealer, i);
+    for (let i = 1; i < widgets.length; i++) {
+      container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
     }
   }
 
@@ -268,10 +268,8 @@ var AchievementsPage = class AchievementsPage {
     }
 
     // Add them to the UI.
-    this._builder.get_object('active-achievements-box')
-        .pack_start(active.revealer, true, true, 0);
-    this._builder.get_object('completed-achievements-box')
-        .pack_start(completed.revealer, true, true, 0);
+    this._builder.get_object('active-achievements-box').append(active.revealer);
+    this._builder.get_object('completed-achievements-box').append(completed.revealer);
   }
 
   // This method creates a set of widgets contained in a Gtk.Revealer to represent an
@@ -300,9 +298,9 @@ var AchievementsPage = class AchievementsPage {
     const grid = new Gtk.Grid({margin_bottom: completed ? 0 : 8});
 
     // Add the icon.
-    const icon = new Gtk.DrawingArea({margin_right: 8});
+    const icon = new Gtk.DrawingArea({margin_end: 8});
     icon.set_size_request(64, 64);
-    icon.connect('draw', (w, ctx) => {
+    icon.set_draw_func((w, ctx) => {
       Achievements.Achievements.paintAchievementIcon(ctx, achievement);
       return false;
     });
@@ -389,8 +387,7 @@ var AchievementsPage = class AchievementsPage {
 
     // Finally wrap the thing in a Gtk.Revealer.
     result.revealer = new Gtk.Revealer();
-    result.revealer.add(grid);
-    result.revealer.show_all();
+    result.revealer.set_child(grid);
 
     return result;
   }

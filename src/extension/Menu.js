@@ -60,8 +60,8 @@ var Menu = class Menu {
 
     // This is a list of active MenuItems. At the beginning it will contain the root
     // MenuItem only. Selected children deeper in the hierarchy are prepended to this
-    // list. This means, the currently active menu node is always _menuSelectionChain[0].
-    this._menuSelectionChain = [];
+    // list. This means, the currently active menu node is always _menuPath[0].
+    this._menuPath = [];
 
     // This is used to warp the mouse pointer at the edges of the screen if necessary.
     this._input = new InputManipulator();
@@ -121,7 +121,7 @@ var Menu = class Menu {
           this._draggedChild == null) {
         const index = this._selectionWedges.getHoveredChild();
         if (index >= 0) {
-          const child = this._menuSelectionChain[0].getChildMenuItems()[index];
+          const child = this._menuPath[0].getChildMenuItems()[index];
           child.setState(MenuItemState.CHILD_DRAGGED);
           this._draggedChild = child;
         }
@@ -149,11 +149,6 @@ var Menu = class Menu {
 
         // Draw the parent's trace to this position.
         parent.drawTrace(x, y, 0, 0);
-
-        // This shouldn't be necessary but it reduces some severe flickering when children
-        // are dragged around slowly. It almost seems as some buffers are not cleared
-        // sufficiently without this...
-        this._background.queue_redraw();
       }
 
       return Clutter.EVENT_STOP;
@@ -189,26 +184,26 @@ var Menu = class Menu {
     // This is fired when the mouse pointer enters one of the wedges.
     this._selectionWedges.connect('child-hovered-event', (o, hoveredIndex) => {
       // If there is a currently hovered child, we will call the unhover signal later.
-      const unhoveredIndex = this._menuSelectionChain[0].getActiveChildIndex();
+      const unhoveredIndex = this._menuPath[0].getActiveChildIndex();
 
       // If no child is hovered (hoveredIndex == -1), the center element is hovered.
       if (hoveredIndex == -1) {
-        this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
+        this._menuPath[0].setState(MenuItemState.CENTER_HOVERED, -1);
       } else {
-        this._menuSelectionChain[0].setState(MenuItemState.CENTER, hoveredIndex);
+        this._menuPath[0].setState(MenuItemState.CENTER, hoveredIndex);
       }
 
       // It could be that the parent of the currently active item was hovered before, so
       // lets set its state back to PARENT.
-      if (this._menuSelectionChain.length > 1) {
-        this._menuSelectionChain[1].setState(MenuItemState.PARENT);
+      if (this._menuPath.length > 1) {
+        this._menuPath[1].setState(MenuItemState.PARENT);
       }
 
       // If we're currently dragging a child around, the newly hovered child will
       // instantaneously become the hovered child.
       const [x, y, mods] = global.get_pointer();
       if (this._selectionWedges.isGestureModifier(mods) && hoveredIndex >= 0) {
-        const child = this._menuSelectionChain[0].getChildMenuItems()[hoveredIndex];
+        const child = this._menuPath[0].getChildMenuItems()[hoveredIndex];
         child.setState(MenuItemState.CHILD_DRAGGED);
         this._draggedChild = child;
       } else {
@@ -217,7 +212,7 @@ var Menu = class Menu {
 
       // Report the unhover event on the D-Bus if an action was hovered before.
       if (unhoveredIndex >= 0) {
-        const child = this._menuSelectionChain[0].getChildMenuItems()[unhoveredIndex];
+        const child = this._menuPath[0].getChildMenuItems()[unhoveredIndex];
 
         // If the item has a selection callback, it is an action.
         if (child.getSelectionCallback() != null) {
@@ -234,7 +229,7 @@ var Menu = class Menu {
 
       // Report the hover event on the D-Bus if an action is hovered.
       if (hoveredIndex >= 0) {
-        const child = this._menuSelectionChain[0].getChildMenuItems()[hoveredIndex];
+        const child = this._menuPath[0].getChildMenuItems()[hoveredIndex];
 
         // If the item has a selection callback, it is an action.
         if (child.getSelectionCallback() != null) {
@@ -256,8 +251,8 @@ var Menu = class Menu {
     // This is fired when the primary mouse button is pressed inside a wedge. This will
     // also be emitted when a gesture is detected.
     this._selectionWedges.connect('child-selected-event', (o, index) => {
-      const parent = this._menuSelectionChain[0];
-      const child  = this._menuSelectionChain[0].getChildMenuItems()[index];
+      const parent = this._menuPath[0];
+      const child  = this._menuPath[0].getChildMenuItems()[index];
 
       const [pointerX, pointerY, mods] = global.get_pointer();
 
@@ -281,7 +276,7 @@ var Menu = class Menu {
       child.setState(MenuItemState.CENTER_HOVERED);
 
       // Prepend the newly active item to our menu selection chain.
-      this._menuSelectionChain.unshift(child);
+      this._menuPath.unshift(child);
 
       // The newly active item will be shown at the pointer position. To prevent it from
       // going offscreen, we clamp the position to the current monitor bounds (we do it
@@ -329,7 +324,7 @@ var Menu = class Menu {
         // Record this selection in the statistics. Parameters are selection depth, time
         // and whether a continuous gesture was used for the selection.
         Statistics.getInstance().addSelection(
-            this._menuSelectionChain.length - 1, this._timer.getElapsed(),
+            this._menuPath.length - 1, this._timer.getElapsed(),
             this._gestureOnlySelection);
 
         this._background.set_easing_delay(
@@ -364,11 +359,11 @@ var Menu = class Menu {
     // CENTER_HOVERED to indicate that the parent is not a child.
     this._selectionWedges.connect('parent-hovered-event', () => {
       // If there is a currently hovered child, we may have to call the unhover signal.
-      const unhoveredIndex = this._menuSelectionChain[0].getActiveChildIndex();
+      const unhoveredIndex = this._menuPath[0].getActiveChildIndex();
 
       // Report the unhover event on the D-Bus if an action was hovered before.
       if (unhoveredIndex >= 0) {
-        const child = this._menuSelectionChain[0].getChildMenuItems()[unhoveredIndex];
+        const child = this._menuPath[0].getChildMenuItems()[unhoveredIndex];
 
         // If the item has a selection callback, it is an action.
         if (child.getSelectionCallback() != null) {
@@ -383,8 +378,8 @@ var Menu = class Menu {
         }
       }
 
-      this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
-      this._menuSelectionChain[1].setState(MenuItemState.PARENT_HOVERED);
+      this._menuPath[0].setState(MenuItemState.CENTER_HOVERED, -1);
+      this._menuPath[1].setState(MenuItemState.PARENT_HOVERED);
 
       // This recursively redraws all children based on their newly assigned state.
       this._root.redraw();
@@ -398,11 +393,11 @@ var Menu = class Menu {
     // If the parent of the currently active item is selected, it becomes the newly active
     // item with the state CENTER_HOVERED.
     this._selectionWedges.connect('parent-selected-event', () => {
-      const parent = this._menuSelectionChain[1];
+      const parent = this._menuPath[1];
       parent.setState(MenuItemState.CENTER_HOVERED, -1);
 
       // Remove the first element of the menu selection chain.
-      this._menuSelectionChain.shift();
+      this._menuPath.shift();
 
       // The parent item will be moved to the pointer position. To prevent it from
       // going offscreen, we clamp the position to the current monitor bounds (we do it
@@ -434,7 +429,7 @@ var Menu = class Menu {
       });
 
       // If necessary, add a wedge for the parent's parent.
-      if (this._menuSelectionChain.length > 1) {
+      if (this._menuPath.length > 1) {
         this._selectionWedges.setItemAngles(itemAngles, (parent.angle + 180) % 360);
       } else {
         this._selectionWedges.setItemAngles(itemAngles);
@@ -562,7 +557,7 @@ var Menu = class Menu {
     this._root = createMenuItem(structure);
     this._background.add_child(this._root);
 
-    this._menuSelectionChain.push(this._root);
+    this._menuPath.push(this._root);
 
     this._root.setState(MenuItemState.CENTER_HOVERED, -1);
     this._root.onSettingsChange(this._settings);
@@ -619,8 +614,8 @@ var Menu = class Menu {
     this._menuID = null;
 
     // Reset some other members.
-    this._draggedChild       = null;
-    this._menuSelectionChain = [];
+    this._draggedChild = null;
+    this._menuPath     = [];
   }
 
   // Emits the DBus-Cancel signal and potentially an unhover signal for the currently
@@ -628,7 +623,7 @@ var Menu = class Menu {
   cancel() {
     const index = this._selectionWedges.getHoveredChild();
     if (index >= 0) {
-      const child = this._menuSelectionChain[0].getChildMenuItems()[index];
+      const child = this._menuPath[0].getChildMenuItems()[index];
 
       // If the item has a selection callback, it is an action.
       if (child.getSelectionCallback() != null) {
@@ -741,10 +736,10 @@ var Menu = class Menu {
       for (let child of children) {
         item.removeMenuItem(child);
 
-        if (this._menuSelectionChain.includes(child)) {
+        if (this._menuPath.includes(child)) {
           let removedElement;
           do {
-            removedElement = this._menuSelectionChain.shift();
+            removedElement = this._menuPath.shift();
           } while (removedElement != child);
         }
       }
@@ -761,22 +756,22 @@ var Menu = class Menu {
     updateMenuItem(structure, this._root);
 
     // This recursively redraws all children based on their newly assigned state.
-    this._menuSelectionChain[0].setState(MenuItemState.CENTER_HOVERED, -1);
-    for (let i = 1; i < this._menuSelectionChain.length; i++) {
+    this._menuPath[0].setState(MenuItemState.CENTER_HOVERED, -1);
+    for (let i = 1; i < this._menuPath.length; i++) {
       let activeChildIndex = 0;
-      const siblings       = this._menuSelectionChain[i].getChildMenuItems();
+      const siblings       = this._menuPath[i].getChildMenuItems();
       for (let j = 0; j < siblings.length; j++) {
-        if (this._menuSelectionChain[i - 1] == siblings[j]) {
+        if (this._menuPath[i - 1] == siblings[j]) {
           activeChildIndex = j;
           break;
         }
       }
-      this._menuSelectionChain[i].setState(MenuItemState.PARENT, activeChildIndex);
+      this._menuPath[i].setState(MenuItemState.PARENT, activeChildIndex);
     }
 
     // Re-idealize the trace. This can lead to pretty intense changes, but that's the way
     // it's supposed to be.
-    let [x, y] = this._menuSelectionChain[0].get_transformed_position();
+    let [x, y] = this._menuPath[0].get_transformed_position();
     this._idealizeTace(x, y);
 
     // Recursively redraw everything.
@@ -784,13 +779,13 @@ var Menu = class Menu {
 
     // Set the wedge angles of the SelectionWedges according to the new item structure.
     const itemAngles = [];
-    this._menuSelectionChain[0].getChildMenuItems().forEach(item => {
+    this._menuPath[0].getChildMenuItems().forEach(item => {
       itemAngles.push(item.angle);
     });
 
-    if (this._menuSelectionChain.length > 1) {
+    if (this._menuPath.length > 1) {
       this._selectionWedges.setItemAngles(
-          itemAngles, (this._menuSelectionChain[0].angle + 180) % 360);
+          itemAngles, (this._menuPath[0].angle + 180) % 360);
     } else {
       this._selectionWedges.setItemAngles(itemAngles);
     }
@@ -856,124 +851,18 @@ var Menu = class Menu {
   // and so on. This method returns true on success, false otherwise.
   _updateItemAngles(items, parentAngle) {
 
+    // First use the utils method to compute all item angles.
+    const itemAngles = utils.computeItemAngles(items, parentAngle);
+
     // Shouldn't happen, but who knows...
-    if (items.length == 0) {
-      return true;
+    if (itemAngles == null) {
+      return false;
     }
 
-    // First we calculate all angles for the current menu level. We begin by storing all
-    // fixed angles.
-    const fixedAngles = [];
-    items.forEach((item, index) => {
-      if ('angle' in item && item.angle >= 0) {
-        fixedAngles.push({angle: item.angle, index: index});
-      }
+    // Now assign the computed angles to our item list.
+    itemAngles.forEach((angle, index) => {
+      items[index].angle = angle;
     });
-
-    // Make sure that the parent link does not collide with a fixed item. For now, we
-    // just move the fixed angle a tiny bit. This is somewhat error-prone as it may
-    // collide with another fixed angle now. Maybe this could be solved in a better way?
-    // Maybe some global minimum angular spacing of items?
-    if (parentAngle != undefined) {
-      for (let i = 0; i < fixedAngles.length; i++) {
-        if (Math.abs(fixedAngles[i].angle - parentAngle) < 0.0001) {
-          fixedAngles[i].angle += 0.1;
-        }
-      }
-    }
-
-    // Make sure that the fixed angles increase monotonically and are between 0° and 360°.
-    for (let i = 0; i < fixedAngles.length; i++) {
-      if (i > 0 && fixedAngles[i].angle <= fixedAngles[i - 1].angle) {
-        return false;
-      }
-
-      if (fixedAngles[i].angle < 0.0 || fixedAngles[i].angle >= 360.0) {
-        return false;
-      }
-    }
-
-    // If no item has a fixed angle, we assign one to the first item. If there is no
-    // parent item, this is on the top (0°). Else, the angular space will be evenly
-    // distributed to all child items and the first item will be the one closest to the
-    // top.
-    if (fixedAngles.length == 0) {
-      let firstAngle = 0;
-      if (parentAngle != undefined) {
-        const wedgeSize  = 360 / (items.length + 1);
-        let minAngleDiff = 360;
-        for (let i = 0; i < items.length; i++) {
-          const angle     = (parentAngle + (i + 1) * wedgeSize) % 360;
-          const angleDiff = Math.min(angle, 360 - angle);
-
-          if (angleDiff < minAngleDiff) {
-            minAngleDiff = angleDiff;
-            firstAngle   = (angle + 360) % 360;
-          }
-        }
-      }
-      fixedAngles.push({angle: firstAngle, index: 0});
-      items[0].angle = firstAngle;
-    }
-
-    // Now we iterate through the fixed angles, always considering wedges between
-    // consecutive pairs of fixed angles. If there is only one fixed angle, there is also
-    // only one 360°-wedge.
-    for (let i = 0; i < fixedAngles.length; i++) {
-      let wedgeBeginIndex = fixedAngles[i].index;
-      let wedgeBeginAngle = fixedAngles[i].angle;
-      let wedgeEndIndex   = fixedAngles[(i + 1) % fixedAngles.length].index;
-      let wedgeEndAngle   = fixedAngles[(i + 1) % fixedAngles.length].angle;
-
-      // Make sure we loop around.
-      if (wedgeEndAngle <= wedgeBeginAngle) {
-        wedgeEndAngle += 360;
-      }
-
-      // Calculate the number of items between the begin and end indices.
-      let wedgeItemCount =
-          (wedgeEndIndex - wedgeBeginIndex - 1 + items.length) % items.length;
-
-      // We have one item more if the parent link is inside our wedge.
-      let parentInWedge = false;
-
-      if (parentAngle != undefined) {
-        // It can be that the parent link is inside the current wedge, but it's angle if
-        // one full turn off.
-        if (parentAngle < wedgeBeginAngle) {
-          parentAngle += 360;
-        }
-
-        parentInWedge = parentAngle > wedgeBeginAngle && parentAngle < wedgeEndAngle;
-        if (parentInWedge) {
-          wedgeItemCount += 1;
-        }
-      }
-
-      // Calculate the angular difference between consecutive items in the current wedge.
-      const wedgeItemGap = (wedgeEndAngle - wedgeBeginAngle) / (wedgeItemCount + 1);
-
-      // Now we assign an angle to each item between the begin and end indices.
-      let index             = (wedgeBeginIndex + 1) % items.length;
-      let count             = 1;
-      let parentGapRequired = parentInWedge;
-
-      while (index != wedgeEndIndex) {
-        let itemAngle = wedgeBeginAngle + wedgeItemGap * count;
-
-        // Insert gap for parent link if required.
-        if (parentGapRequired && itemAngle + wedgeItemGap / 2 - parentAngle > 0) {
-          count += 1;
-          itemAngle         = wedgeBeginAngle + wedgeItemGap * count;
-          parentGapRequired = false;
-        }
-
-        items[index].angle = itemAngle % 360;
-
-        index = (index + 1) % items.length;
-        count += 1;
-      }
-    }
 
     // Now that all angles are set, update the child items.
     items.forEach(item => {
@@ -1065,8 +954,8 @@ var Menu = class Menu {
 
     // Traverse the chain back-to-front (that is from root-to-tip). We start one element
     // after the root, as the root has not to be positioned relative to any other element.
-    for (let i = this._menuSelectionChain.length - 2; i >= 0; i--) {
-      const item = this._menuSelectionChain[i];
+    for (let i = this._menuPath.length - 2; i >= 0; i--) {
+      const item = this._menuPath[i];
 
       // The item's position relative to its parent.
       let x = item.translation_x;
@@ -1105,7 +994,7 @@ var Menu = class Menu {
     }
 
     // Transform the desired tip coordinates to root-item space.
-    const root = this._menuSelectionChain[this._menuSelectionChain.length - 1];
+    const root                             = this._menuPath[this._menuPath.length - 1];
     const [ok, relativeTipX, relativeTipY] = root.transform_stage_point(tipX, tipY);
 
     // The root element needs to move by the distance between the accumulated ideal

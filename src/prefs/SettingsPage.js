@@ -74,7 +74,7 @@ var SettingsPage = class SettingsPage {
 
     // Now connect the user interface elements to the settings items. All user interface
     // elements have the same ID as the corresponding settings key. Sometimes there is
-    // also a <key>-hover variant and a reset-<key> button. All three are connected with
+    // also a <key>-hover variant and a copy-<key> button. All three are connected with
     // the _bind* calls.
 
     // General Settings.
@@ -103,7 +103,7 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('center-icon-scale');
     this._bindSlider('center-icon-crop');
     this._bindSlider('center-icon-opacity');
-    this._bindFileChooserButton('center-background-image');
+    this._bindFlyPieImageChooserButton('center-background-image');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
     this._bindRevealer('center-color-mode-fixed', 'center-fixed-color-revealer');
@@ -112,20 +112,6 @@ var SettingsPage = class SettingsPage {
         'center-color-mode-hover-fixed', 'center-fixed-color-hover-revealer');
     this._bindRevealer(
         'center-color-mode-hover-auto', 'center-auto-color-hover-revealer');
-
-    // The color reset button resets various settings, so we bind it manually.
-    this._builder.get_object('reset-center-color').connect('clicked', () => {
-      this._settings.reset('center-color-mode');
-      this._settings.reset('center-color-mode-hover');
-      this._settings.reset('center-fixed-color');
-      this._settings.reset('center-fixed-color-hover');
-      this._settings.reset('center-auto-color-saturation');
-      this._settings.reset('center-auto-color-saturation-hover');
-      this._settings.reset('center-auto-color-luminance');
-      this._settings.reset('center-auto-color-luminance-hover');
-      this._settings.reset('center-auto-color-opacity');
-      this._settings.reset('center-auto-color-opacity-hover');
-    });
 
     // The copy-color-settings button copies various settings, so we bind it manually.
     this._builder.get_object('copy-center-color').connect('clicked', () => {
@@ -148,7 +134,7 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('child-icon-scale');
     this._bindSlider('child-icon-crop');
     this._bindSlider('child-icon-opacity');
-    this._bindFileChooserButton('child-background-image');
+    this._bindFlyPieImageChooserButton('child-background-image');
     this._bindSwitch('child-draw-above');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
@@ -157,20 +143,6 @@ var SettingsPage = class SettingsPage {
     this._bindRevealer(
         'child-color-mode-hover-fixed', 'child-fixed-color-hover-revealer');
     this._bindRevealer('child-color-mode-hover-auto', 'child-auto-color-hover-revealer');
-
-    // The color reset button resets various settings, so we bind it manually.
-    this._builder.get_object('reset-child-color').connect('clicked', () => {
-      this._settings.reset('child-color-mode');
-      this._settings.reset('child-color-mode-hover');
-      this._settings.reset('child-fixed-color');
-      this._settings.reset('child-auto-color-saturation');
-      this._settings.reset('child-auto-color-luminance');
-      this._settings.reset('child-auto-color-opacity');
-      this._settings.reset('child-fixed-color-hover');
-      this._settings.reset('child-auto-color-saturation-hover');
-      this._settings.reset('child-auto-color-luminance-hover');
-      this._settings.reset('child-auto-color-opacity-hover');
-    });
 
     // The copy-color-settings button copies various settings, so we bind it manually.
     this._builder.get_object('copy-child-color').connect('clicked', () => {
@@ -187,21 +159,13 @@ var SettingsPage = class SettingsPage {
     this._bindColorButton('grandchild-fixed-color');
     this._bindSlider('grandchild-size');
     this._bindSlider('grandchild-offset');
-    this._bindFileChooserButton('grandchild-background-image');
+    this._bindFlyPieImageChooserButton('grandchild-background-image');
     this._bindSwitch('grandchild-draw-above');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
     this._bindRevealer('grandchild-color-mode-fixed', 'grandchild-fixed-color-revealer');
     this._bindRevealer(
         'grandchild-color-mode-hover-fixed', 'grandchild-fixed-color-hover-revealer');
-
-    // The color reset button resets various settings, so we bind it manually.
-    this._builder.get_object('reset-grandchild-color').connect('clicked', () => {
-      this._settings.reset('grandchild-color-mode');
-      this._settings.reset('grandchild-color-mode-hover');
-      this._settings.reset('grandchild-fixed-color');
-      this._settings.reset('grandchild-fixed-color-hover');
-    });
 
     // The copy-color-settings button copies various settings, so we bind it manually.
     this._builder.get_object('copy-grandchild-color').connect('clicked', () => {
@@ -288,8 +252,7 @@ var SettingsPage = class SettingsPage {
       const dialog = new Gtk.FileChooserDialog({
         title: _('Save Preset'),
         action: Gtk.FileChooserAction.SAVE,
-        do_overwrite_confirmation: true,
-        transient_for: button.get_toplevel(),
+        transient_for: button.get_root(),
         modal: true
       });
 
@@ -313,7 +276,7 @@ var SettingsPage = class SettingsPage {
       dialog.connect('response', (dialog, response_id) => {
         if (response_id === Gtk.ResponseType.OK) {
           try {
-            let path = dialog.get_filename();
+            let path = dialog.get_file().get_path();
 
             // Make sure we have a *.json extension.
             if (!path.endsWith('.json')) {
@@ -339,8 +302,8 @@ var SettingsPage = class SettingsPage {
                     'saved anyways, but please consider to store it in a safer place!')
               });
 
-              warningDialog.run();
-              warningDialog.destroy();
+              warningDialog.connect('response', d => d.destroy());
+              warningDialog.show();
             }
 
             // Now save the preset!
@@ -364,7 +327,7 @@ var SettingsPage = class SettingsPage {
       const dialog = new Gtk.FileChooserDialog({
         title: _('Load Preset'),
         action: Gtk.FileChooserAction.OPEN,
-        transient_for: button.get_toplevel(),
+        transient_for: button.get_root(),
         modal: true
       });
 
@@ -388,22 +351,22 @@ var SettingsPage = class SettingsPage {
       dialog.connect('response', (dialog, response_id) => {
         if (response_id === Gtk.ResponseType.OK) {
           try {
-            const file = Gio.File.new_for_path(dialog.get_filename());
-            Preset.load(file);
+            Preset.load(dialog.get_file());
 
             // Store this in our statistics.
             Statistics.getInstance().addPresetImport();
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
-              transient_for: button.get_toplevel(),
+              transient_for: button.get_root(),
+              modal: true,
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
               text: _('Failed to load preset!'),
               secondary_text: '' + error
             });
-            errorMessage.run();
-            errorMessage.destroy();
+            errorMessage.connect('response', d => d.destroy());
+            errorMessage.show();
           }
         }
 
@@ -420,22 +383,6 @@ var SettingsPage = class SettingsPage {
       // Store this in our statistics.
       Statistics.getInstance().addRandomPreset();
     });
-  }
-
-  // This is used by all the methods below. It checks whether there is a button called
-  // 'reset-*whatever*' in the user interface. If so, it binds a click-handler to that
-  // button resetting the corresponding settings key. It will also reset any setting
-  // called 'settingsKey-hover' if one such exists.
-  _bindResetButton(settingsKey) {
-    const resetButton = this._builder.get_object('reset-' + settingsKey);
-    if (resetButton) {
-      resetButton.connect('clicked', () => {
-        this._settings.reset(settingsKey);
-        if (this._settings.settings_schema.has_key(settingsKey + '-hover')) {
-          this._settings.reset(settingsKey + '-hover');
-        }
-      });
-    }
   }
 
   // This small helper method copies the settings value identified by <settingsKey> to the
@@ -457,35 +404,35 @@ var SettingsPage = class SettingsPage {
   }
 
   // Connects a Gtk.Range (or anything else which has a 'value' property) to a settings
-  // key. It also binds any corresponding reset buttons and '-hover' variants if they
+  // key. It also binds any corresponding copy buttons and '-hover' variants if they
   // exist.
   _bindSlider(settingsKey) {
     this._bind(settingsKey, 'value');
   }
 
   // Connects a Gtk.Switch (or anything else which has an 'active' property) to a settings
-  // key. It also binds any corresponding reset buttons and '-hover' variants if they
+  // key. It also binds any corresponding copy buttons and '-hover' variants if they
   // exist.
   _bindSwitch(settingsKey) {
     this._bind(settingsKey, 'active');
   }
 
-  // Connects a Gtk.FontButton (or anything else which has a 'font-name' property) to a
-  // settings key. It also binds any corresponding reset buttons and '-hover' variants if
+  // Connects a Gtk.FontButton (or anything else which has a 'font' property) to a
+  // settings key. It also binds any corresponding copy buttons and '-hover' variants if
   // they exist.
   _bindFontButton(settingsKey) {
-    this._bind(settingsKey, 'font-name');
+    this._bind(settingsKey, 'font');
   }
 
   // Connects a Gtk.ComboBox (or anything else which has an 'active-id' property) to a
-  // settings key. It also binds any corresponding reset buttons and '-hover' variants if
+  // settings key. It also binds any corresponding copy buttons and '-hover' variants if
   // they exist.
   _bindCombobox(settingsKey) {
     this._bind(settingsKey, 'active-id');
   }
 
   // Connects any widget's property to a settings key. The widget must have the same ID as
-  // the settings key. It also binds any corresponding reset buttons and '-hover' variants
+  // the settings key. It also binds any corresponding copy buttons and '-hover' variants
   // if they exist.
   _bind(settingsKey, property) {
     this._settings.bind(
@@ -498,7 +445,6 @@ var SettingsPage = class SettingsPage {
           property, Gio.SettingsBindFlags.DEFAULT);
     }
 
-    this._bindResetButton(settingsKey);
     this._bindCopyButton(settingsKey);
   }
 
@@ -541,8 +487,7 @@ var SettingsPage = class SettingsPage {
       impl(settingsKey + '-hover', possibleValues);
     }
 
-    // And bind the corresponding reset button.
-    this._bindResetButton(settingsKey);
+    // And bind the corresponding copy button.
     this._bindCopyButton(settingsKey);
   }
 
@@ -551,9 +496,9 @@ var SettingsPage = class SettingsPage {
   // this behaves special for files which are part of Fly-Pie: All paths outside of
   // Fly-Pie's root directory are stored as absolute paths; paths which are descendants of
   // Me.path are stored as relative paths. The button state is also updated when the
-  // corresponding setting changes. It also binds any corresponding reset buttons and
+  // corresponding setting changes. It also binds any corresponding copy buttons and
   // '-hover' variants if they exist.
-  _bindFileChooserButton(settingsKey) {
+  _bindFlyPieImageChooserButton(settingsKey) {
 
     // Called once for settingsKey and once for settingsKey + '-hover'.
     const impl = (key) => {
@@ -563,7 +508,8 @@ var SettingsPage = class SettingsPage {
 
         // Store the absolute file path when the user selects a file.
         button.connect('file-set', (widget) => {
-          this._settings.set_string(key, widget.get_file().get_path());
+          const file = widget.get_file();
+          this._settings.set_string(key, file != null ? file.get_path() : '');
         });
 
         // This will be called whenever the settingsKey changes.
@@ -571,17 +517,10 @@ var SettingsPage = class SettingsPage {
           // If the settings key is empty (default state), reset the button.
           const path = this._settings.get_string(key);
           if (path == '') {
-            button.unselect_all();
+            button.set_file(null);
           } else {
-
             let file = Gio.File.new_for_path(path);
-
-            // Set only if it exists.
-            if (file.query_exists(null)) {
-              button.set_file(file);
-            } else {
-              button.unselect_all();
-            }
+            button.set_file(file);
           }
         };
 
@@ -595,8 +534,7 @@ var SettingsPage = class SettingsPage {
     impl(settingsKey);
     impl(settingsKey + '-hover');
 
-    // And bind the corresponding copy and reset buttons (if any).
-    this._bindResetButton(settingsKey);
+    // And bind the corresponding copy button (if any).
     this._bindCopyButton(settingsKey);
   }
 
@@ -634,8 +572,7 @@ var SettingsPage = class SettingsPage {
       impl(settingsKey + '-hover');
     }
 
-    // And bind the corresponding copy and reset buttons (if any).
-    this._bindResetButton(settingsKey);
+    // And bind the corresponding copy button (if any).
     this._bindCopyButton(settingsKey);
   }
 
@@ -655,9 +592,9 @@ var SettingsPage = class SettingsPage {
 
     // Draw six lines representing the wedge separators.
     let tabIcon = this._builder.get_object('wedges-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.translate(size / 2, size / 2);
       ctx.rotate(2 * Math.PI / 12);
@@ -677,9 +614,9 @@ var SettingsPage = class SettingsPage {
 
     // Draw one circle representing the center item.
     tabIcon = this._builder.get_object('center-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
@@ -691,9 +628,9 @@ var SettingsPage = class SettingsPage {
 
     // Draw six circles representing child items.
     tabIcon = this._builder.get_object('children-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
@@ -710,9 +647,9 @@ var SettingsPage = class SettingsPage {
     // Draw six groups of five grandchildren each. The grandchild at the back-navigation
     // position is skipped.
     tabIcon = this._builder.get_object('grandchildren-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
@@ -738,9 +675,9 @@ var SettingsPage = class SettingsPage {
 
     // Draw a line and some circles representing a trace.
     tabIcon = this._builder.get_object('trace-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
 
@@ -765,9 +702,9 @@ var SettingsPage = class SettingsPage {
 
     // Draw three dots indicating the advanced settings.
     tabIcon = this._builder.get_object('advanced-tab-icon');
-    tabIcon.connect('draw', (widget, ctx) => {
+    tabIcon.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
+      const color = widget.get_style_context().get_color();
 
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
 

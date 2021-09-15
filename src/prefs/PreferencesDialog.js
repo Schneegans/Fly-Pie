@@ -8,15 +8,21 @@
 
 'use strict';
 
-const {GLib, Gtk, Gio, Gdk} = imports.gi;
+const {GObject, GLib, Gtk, Gio, Gdk} = imports.gi;
 
-const Me               = imports.misc.extensionUtils.getCurrentExtension();
-const utils            = Me.imports.src.common.utils;
-const Statistics       = Me.imports.src.common.Statistics.Statistics;
-const TutorialPage     = Me.imports.src.prefs.TutorialPage.TutorialPage;
-const SettingsPage     = Me.imports.src.prefs.SettingsPage.SettingsPage;
-const MenuEditorPage   = Me.imports.src.prefs.MenuEditorPage.MenuEditorPage;
-const AchievementsPage = Me.imports.src.prefs.AchievementsPage.AchievementsPage;
+const _ = imports.gettext.domain('flypie').gettext;
+
+const Me                 = imports.misc.extensionUtils.getCurrentExtension();
+const utils              = Me.imports.src.common.utils;
+const Statistics         = Me.imports.src.common.Statistics.Statistics;
+const TutorialPage       = Me.imports.src.prefs.TutorialPage.TutorialPage;
+const SettingsPage       = Me.imports.src.prefs.SettingsPage.SettingsPage;
+const MenuEditorPage     = Me.imports.src.prefs.MenuEditorPage.MenuEditorPage;
+const MenuEditor         = Me.imports.src.prefs.MenuEditor;
+const IconSelectDialog   = Me.imports.src.prefs.IconSelectDialog;
+const CopyValueButton    = Me.imports.src.prefs.CopyValueButton;
+const ImageChooserButton = Me.imports.src.prefs.ImageChooserButton;
+const AchievementsPage   = Me.imports.src.prefs.AchievementsPage.AchievementsPage;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class loads the user interface defined in settings.ui and instantiates the      //
@@ -39,6 +45,13 @@ var PreferencesDialog = class PreferencesDialog {
     this._resources = Gio.Resource.load(Me.path + '/resources/flypie.gresource');
     Gio.resources_register(this._resources);
 
+    // Register some custom Gtk widgets. This needs to be done before creating the builder
+    // below as this will instantiate some of these custom widgets.
+    MenuEditor.registerWidgets();
+    IconSelectDialog.registerWidget();
+    ImageChooserButton.registerWidget();
+    CopyValueButton.registerWidget();
+
     // Load the user interface file.
     this._builder = new Gtk.Builder();
     this._builder.add_from_resource('/ui/settings.ui');
@@ -46,8 +59,9 @@ var PreferencesDialog = class PreferencesDialog {
     // Load the CSS file for the settings dialog.
     const styleProvider = Gtk.CssProvider.new();
     styleProvider.load_from_resource('/css/flypie.css');
-    Gtk.StyleContext.add_provider_for_screen(
-        Gdk.Screen.get_default(), styleProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    Gtk.StyleContext.add_provider_for_display(
+        Gdk.Display.get_default(), styleProvider,
+        Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
     // To structure the source code, the code for the individual dialog pages has been put
     // into separate classes.
@@ -69,10 +83,14 @@ var PreferencesDialog = class PreferencesDialog {
 
     // There is a hidden achievement for viewing the sponsors page...
     this._builder.get_object('about-stack').connect('notify::visible-child-name', (o) => {
-      utils.debug(o.visible_child_name);
       if (o.visible_child_name == 'sponsors-page') {
         Statistics.getInstance().addSponsorsViewed();
       }
+    });
+
+    // Hide the in-app notification when its close button is pressed.
+    this._builder.get_object('notification-close-button').connect('clicked', () => {
+      this._builder.get_object('notification-revealer').reveal_child = false;
     });
 
     // We show an info bar if GNOME Shell's animations are disabled. To make this info
@@ -96,7 +114,7 @@ var PreferencesDialog = class PreferencesDialog {
     this._widget = this._builder.get_object('main-notebook');
 
     // Because it looks cool, we add the stack switcher and the about button to the
-    // window's title bar.
+    // window's title bar. We also make the bottom corners rounded.
     this._widget.connect('realize', () => {
       const stackSwitcher = this._builder.get_object('main-stack-switcher');
       const aboutButton   = this._builder.get_object('about-button');
@@ -104,9 +122,12 @@ var PreferencesDialog = class PreferencesDialog {
       stackSwitcher.parent.remove(aboutButton);
       stackSwitcher.parent.remove(stackSwitcher);
 
-      const titlebar = this._widget.get_toplevel().get_titlebar();
-      titlebar.set_custom_title(stackSwitcher);
+      const titlebar = this._widget.get_root().get_titlebar();
+      titlebar.set_title_widget(stackSwitcher);
       titlebar.pack_start(aboutButton);
+
+      // This class makes the bottom corners round.
+      this._widget.get_root().get_style_context().add_class('fly-pie-window');
     });
 
     // Save the currently active settings page. This way, the tutorial will be shown when

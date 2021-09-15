@@ -46,7 +46,7 @@ git clone https://github.com/Schneegans/Fly-Pie.git
 ```
 
 Now you will have to install the extension.
-The script below compiles the locales and schemas, creates a zip file of the extension and finally installs it with the `gnome-extensions` tool.
+The script below compiles the locales, schemas and resources, creates a zip file of the extension and finally installs it with the `gnome-extensions` tool.
 
 ```bash
 Fly-Pie/scripts/create-release.sh -i

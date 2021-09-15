@@ -29,15 +29,15 @@ var menu = {
   name: _('Custom Menu'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'view-more-symbolic',
+  icon: 'document-edit-symbolic',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.
-  subtitle: _('This can contain actions and other menus.'),
+  subtitle: _('This can contain custom actions and other menus.'),
 
   // This is the (long) description shown when an item of this type is selected.
   description: _(
-      'A <b>Custom Menu</b> can contain any number of actions and submenus. However, for precise item selection, a maximum number of twelve items is recommended.\nWhen used as top-level menu, it can be opened with a key combination. It is also possible to open a menu with a terminal command. You can read more on <a href="https://github.com/Schneegans/Fly-Pie">Github</a>.'),
+      'A <b>Custom Menu</b> can contain any number of actions and submenus. However, for precise item selection, a maximum number of twelve items is recommended.'),
 
   // This will be called whenever a menu is opened containing an item of this kind.
   createItem: (centered) => {

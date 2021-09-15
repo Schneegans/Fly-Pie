@@ -8,9 +8,12 @@
 
 'use strict';
 
-const {Gtk, Gdk} = imports.gi;
+const {Gio, Gtk, Gdk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
+
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.src.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class contains some static utility functions which can be used to create        //
@@ -34,7 +37,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     const box = this.createConfigWidgetCaption(name, description);
 
     const entry = new Gtk.Entry({text: text, tooltip_markup: tooltip});
-    box.pack_start(entry, false, false, 0);
+    box.append(entry);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
@@ -53,7 +56,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entry = Gtk.SpinButton.new_with_range(min, max, step);
     entry.value = value;
-    box.pack_start(entry, false, false, 0);
+    box.append(entry);
 
     entry.connect('notify::value', (widget) => {
       callback(widget.value);
@@ -72,50 +75,59 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entryBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
     entryBox.get_style_context().add_class('linked');
-    box.pack_start(entryBox, false, false, 0);
+    box.append(entryBox);
 
-    const button = new Gtk.MenuButton();
-    button.image = Gtk.Image.new_from_icon_name('gtk-find', Gtk.IconSize.BUTTON);
+    const button = Gtk.Button.new_from_icon_name('view-more-symbolic');
 
-    const popover = new Gtk.Popover();
-    button.set_popover(popover);
-
-    const fileChooser = new Gtk.FileChooserWidget({
-      action: Gtk.FileChooserAction.OPEN,
-      margin: 5,
-      height_request: 375,
-      width_request: 600
-    });
-
-    popover.add(fileChooser);
-
-    fileChooser.show();
-
-    entryBox.pack_start(button, false, false, 0);
-
-    const entry = new Gtk.Entry({text: file});
-    entryBox.pack_start(entry, true, true, 0);
-
-    // Initialize the file-select-popover. When a file is activated, the popover is
-    // hidden, when a file is selected, the item's name, icon and file input fields are
-    // updated accordingly.
-    fileChooser.connect('file-activated', () => {
-      popover.popdown();
-    });
-
-    fileChooser.connect('selection-changed', (widget) => {
-      if (widget.get_file()) {
-        const info = widget.get_file().query_info('standard::icon', 0, null);
-        callback(
-            widget.get_filename(), widget.get_file().get_basename(),
-            info.get_icon().to_string());
-        entry.text = widget.get_filename();
-      }
-    });
+    const entry = new Gtk.Entry({text: file, hexpand: true});
+    entryBox.append(entry);
+    entryBox.append(button);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
     });
+
+    button.connect('clicked', () => {
+      const dialog = new Gtk.Dialog({
+        use_header_bar: true,
+        modal: true,
+        transient_for: button.get_root(),
+        title: ''
+      });
+      dialog.add_button(_('Select File'), Gtk.ResponseType.OK);
+      dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+      dialog.set_default_response(Gtk.ResponseType.OK);
+
+      const fileChooser = new Gtk.FileChooserWidget({
+        action: Gtk.FileChooserAction.OPEN,
+        hexpand: true,
+        vexpand: true,
+        height_request: 500
+      });
+
+      const currentFile = Gio.File.new_for_path(entry.text);
+      if (currentFile.query_exists(null)) {
+        fileChooser.set_file(currentFile);
+      }
+
+      dialog.get_content_area().append(fileChooser);
+
+      dialog.connect('response', (dialog, id) => {
+        if (id == Gtk.ResponseType.OK) {
+          const file = fileChooser.get_file();
+          if (file) {
+            const info = file.query_info('standard::icon', 0, null);
+            callback(file.get_path(), file.get_basename(), info.get_icon().to_string());
+            entry.text = file.get_path();
+          }
+        }
+        dialog.destroy();
+      });
+
+      dialog.show();
+    });
+
+
 
     return box;
   }
@@ -130,39 +142,56 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entryBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
     entryBox.get_style_context().add_class('linked');
-    box.pack_start(entryBox, false, false, 0);
+    box.append(entryBox);
 
-    const button = new Gtk.MenuButton();
-    button.image = Gtk.Image.new_from_icon_name('gtk-find', Gtk.IconSize.BUTTON);
+    const button = Gtk.Button.new_from_icon_name('view-more-symbolic');
 
-    const popover = new Gtk.Popover();
-    button.set_popover(popover);
-
-    const appChooser = new Gtk.AppChooserWidget({show_all: true, margin: 5});
-    popover.add(appChooser);
-
-    appChooser.show();
-
-    entryBox.pack_start(button, false, false, 0);
-
-    const entry = new Gtk.Entry({text: command});
-    entryBox.pack_start(entry, true, true, 0);
-
-    // Initialize the application-select-popover. On mouse-up the popover is hidden,
-    // whenever an application is selected, the item's name, icon and command input fields
-    // are updated accordingly.
-    appChooser.connect('button-release-event', () => {
-      popover.popdown();
-    });
-
-    appChooser.connect('application-selected', (widget, app) => {
-      callback(app.get_commandline(), app.get_display_name(), app.get_icon().to_string());
-      entry.text = app.get_commandline();
-    });
+    const entry = new Gtk.Entry({text: command, hexpand: true});
+    entryBox.append(entry);
+    entryBox.append(button);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
     });
+
+    button.connect('clicked', () => {
+      const dialog = new Gtk.Dialog({
+        use_header_bar: true,
+        modal: true,
+        transient_for: button.get_root(),
+        title: ''
+      });
+      dialog.add_button(_('Select Application'), Gtk.ResponseType.OK);
+      dialog.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+      dialog.set_default_response(Gtk.ResponseType.OK);
+
+      const appChooser =
+          new Gtk.AppChooserWidget({show_all: true, hexpand: true, vexpand: true});
+
+      dialog.get_content_area().append(appChooser);
+
+      const selectApp = (app) => {
+        callback(
+            app.get_commandline(), app.get_display_name(), app.get_icon().to_string());
+        entry.text = app.get_commandline();
+      };
+
+      dialog.connect('response', (dialog, id) => {
+        if (id == Gtk.ResponseType.OK) {
+          selectApp(appChooser.get_app_info());
+        }
+        dialog.destroy();
+      });
+
+      appChooser.connect('application-activated', (widget, app) => {
+        selectApp(app);
+        dialog.destroy();
+      });
+
+      dialog.show();
+    });
+
+
 
     return box;
   }
@@ -177,7 +206,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     label.set_accelerator(shortcut);
 
     const box = this.createConfigWidgetCaption(name, description);
-    box.pack_start(container, false, false, 0);
+    box.append(container);
 
     return box;
   }
@@ -188,19 +217,20 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
   static createConfigWidgetCaption(name, description) {
     const vBox =
         new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 5, margin_top: 20});
-    const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
+    const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL, spacing: 10});
 
-    vBox.pack_start(hBox, false, false, 0);
+    vBox.append(hBox);
 
     // This is shown on the left above the data widget.
-    const nameLabel = new Gtk.Label({label: name});
+    const nameLabel =
+        new Gtk.Label({label: name, hexpand: true, halign: Gtk.Align.START});
 
     // This is shown on the right above the data widget.
     const descriptionLabel = new Gtk.Label({label: description});
     descriptionLabel.get_style_context().add_class('dim-label');
 
-    hBox.pack_start(nameLabel, false, false, 0);
-    hBox.pack_end(descriptionLabel, false, false, 0);
+    hBox.append(nameLabel);
+    hBox.append(descriptionLabel);
 
     return vBox;
   }
@@ -222,12 +252,12 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
   // can use the set_accelerator method of this label to adjust the currently shown
   // shortcut programmatically.
   static createShortcutLabel(doFullGrab, onSelect) {
-    const frame   = new Gtk.Frame({shadow_type: Gtk.ShadowType.IN});
+    const frame   = new Gtk.Frame();
     const listBox = new Gtk.ListBox();
     const row     = new Gtk.ListBoxRow({height_request: 50});
 
-    frame.add(listBox);
-    listBox.add(row);
+    frame.set_child(listBox);
+    listBox.append(row);
 
     const label = new Gtk.ShortcutLabel({
       // Translators: This is shown on the shortcut-buttons when no shortcut is selected.
@@ -235,7 +265,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       halign: Gtk.Align.CENTER,
       valign: Gtk.Align.CENTER
     });
-    row.add(label);
+    row.set_child(label);
 
     // Whenever the widget is in the please-select-something-state, the label is cleared
     // and a text indicating that the user should press the shortcut is shown. To be able
@@ -249,11 +279,8 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     // is waiting for input.
     const grabKeyboard = () => {
       if (doFullGrab) {
-        const seat = Gdk.Display.get_default().get_default_seat();
-        seat.grab(
-            row.get_window(), Gdk.SeatCapabilities.KEYBOARD, false, null, null, null);
+        label.get_root().get_surface().inhibit_system_shortcuts(null);
       }
-      row.grab_add();
       lastAccelerator = label.get_accelerator();
       label.set_accelerator('');
       label.set_disabled_text(
@@ -264,10 +291,8 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     // bound".
     const cancelGrab = () => {
       if (doFullGrab) {
-        const seat = Gdk.Display.get_default().get_default_seat();
-        seat.ungrab();
+        label.get_root().get_surface().restore_system_shortcuts();
       }
-      row.grab_remove();
       row.parent.unselect_all();
       label.set_disabled_text(_('Not bound.'));
     };
@@ -278,10 +303,10 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     });
 
     // Key input events are received once the input is grabbed.
-    row.connect('key-press-event', (row, event) => {
+    const keyController = Gtk.EventControllerKey.new();
+    keyController.connect('key-pressed', (controller, keyval, keycode, state) => {
       if (row.is_selected()) {
-        const keyval = event.get_keyval()[1];
-        const mods   = event.get_state()[1] & Gtk.accelerator_get_default_mod_mask();
+        const mods = state & Gtk.accelerator_get_default_mod_mask();
 
         if (keyval == Gdk.KEY_Escape) {
           // Escape cancels the shortcut selection.
@@ -308,13 +333,28 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     });
 
     // Clicking with the mouse cancels the shortcut selection.
-    row.connect('button-press-event', () => {
-      if (row.has_grab()) {
+    const clickController = Gtk.GestureClick.new();
+    clickController.connect('pressed', () => {
+      if (row.is_selected()) {
         label.set_accelerator(lastAccelerator);
         cancelGrab();
       }
       return true;
     });
+
+    // Clicking with the mouse cancels the shortcut selection.
+    const focusController = Gtk.EventControllerFocus.new();
+    focusController.connect('leave', () => {
+      if (row.is_selected()) {
+        label.set_accelerator(lastAccelerator);
+        cancelGrab();
+      }
+      return true;
+    });
+
+    row.add_controller(keyController);
+    row.add_controller(clickController);
+    row.add_controller(focusController);
 
     return [frame, label];
   }

@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo            = imports.cairo;
-const {Gio, GLib, Gdk} = imports.gi;
+const Cairo                       = imports.cairo;
+const {Gio, GLib, Gdk, GdkPixbuf} = imports.gi;
 
 const Main = imports.ui.main;
 

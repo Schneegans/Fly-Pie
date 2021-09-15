@@ -8,8 +8,19 @@
 
 'use strict';
 
-const Cairo                                    = imports.cairo;
-const {Gdk, Gtk, Gio, Pango, PangoCairo, GLib} = imports.gi;
+const Cairo                                               = imports.cairo;
+const {GLib, Gdk, Gtk, Gio, Pango, PangoCairo, GdkPixbuf} = imports.gi;
+
+// We import the St module optionally. When this file is included from the daemon
+// side, it is available and can be used below. If this file is included via the pref.js,
+// it will not be available.
+let St = undefined;
+
+try {
+  St = imports.gi.St;
+} catch (error) {
+  // Nothing to be done, we're in settings-mode.
+}
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 
@@ -64,6 +75,51 @@ function logProperties(object) {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// Returns the current session type, e.g. "wayland" or "x11".                           //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+let _sessionType = null;
+function getSessionType() {
+  if (_sessionType == null) {
+    _sessionType = GLib.getenv('XDG_SESSION_TYPE');
+  }
+  return _sessionType;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Do to this issue https://gitlab.gnome.org/GNOME/mutter/-/issues/960, the static      //
+// function Gtk.IconTheme.get_for_display() may return null when executed from the      //
+// gnome-shell process o Wayland. In this case, we use St to get a valid icon theme.    //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+let _iconTheme = null;
+function getIconTheme() {
+
+  if (_iconTheme == null) {
+
+    // If St is available (that means we are in the gnome-shell process), we attempt to
+    // get the theme from St. Else we use the X11-dependent Gtk code.
+    if (St) {
+      _iconTheme = new Gtk.IconTheme();
+      _iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
+    } else {
+      if (imports.gi.versions.Gtk === '3.0') {
+        _iconTheme = Gtk.IconTheme.get_default();
+      } else {
+        _iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
+      }
+    }
+
+    // Print an error if this fails as well.
+    if (_iconTheme == null) {
+      debug('Failed to get a valid icon theme object!');
+    }
+  }
+
+  return _iconTheme;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 // This draws a square-shaped icon to the given Cairo.Context of the given size. The    //
 // name can either be an icon name from the current icon theme or a path to an image    //
 // file. If neither is found, the given name is written to the image. The given font    //
@@ -73,18 +129,53 @@ function logProperties(object) {
 
 function paintIcon(ctx, name, size, opacity, font, textColor) {
 
+  // In this case, we will not draw anything...
+  if (size <= 0) {
+    return;
+  }
+
   // First try to find the icon in the theme. This will also load images from disc if the
   // icon name is actually a file path.
   try {
-    const theme = Gtk.IconTheme.get_default();
-    const info  = theme.lookup_by_gicon(
-        Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
 
-    // We got something, paint it!
-    if (info != null) {
-      Gdk.cairo_set_source_pixbuf(ctx, info.load_icon(), 0, 0);
-      ctx.paintWithAlpha(opacity);
-      return;
+    // Get an icon theme object. How this is done, depends on the Gtk version and whether
+    // we are in GNOME Shell's process.
+    const theme = getIconTheme();
+
+    if (imports.gi.versions.Gtk === '3.0') {
+      const info = theme.lookup_by_gicon(
+          Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
+
+      // We got something, paint it!
+      if (info != null) {
+        Gdk.cairo_set_source_pixbuf(ctx, info.load_icon(), 0, 0);
+        ctx.paintWithAlpha(opacity);
+        return;
+      }
+
+    } else {
+
+      const paintable = theme.lookup_by_gicon(
+          Gio.Icon.new_for_string(name), size, 1, Gtk.TextDirection.NONE,
+          Gtk.IconLookupFlags.FORCE_SIZE);
+
+      // We got something, paint it!
+      if (paintable.get_file() != null && paintable.get_file().get_path() != null) {
+        const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
+            paintable.get_file().get_path(), size, size);
+        Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0);
+
+        // If it's a symbolic icon, we draw it with the provided text color.
+        if (paintable.is_symbolic) {
+          const pattern = ctx.getSource();
+          ctx.setSourceRGBA(textColor.red, textColor.green, textColor.blue, opacity);
+          ctx.mask(pattern);
+        } else {
+          ctx.paintWithAlpha(opacity);
+        }
+
+        return;
+      }
     }
   } catch (error) {
     debug('Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');
@@ -211,4 +302,150 @@ function stringToRGBA(string) {
 function roundToMultiple(number, base) {
   return ((number % base) > base / 2) ? number + base - number % base :
                                         number - number % base;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// This method receives an array of objects, each representing an item in a menu level. //
+// For each item it computes an angle defining the direction in which the item should   //
+// be rendered. The angles are returned in an array (of the same length as the input    //
+// array). If an item in the input array already has an 'angle' property, this is       //
+// considered a fixed angle and all others are distributed more ore less evenly around. //
+// This method also reserves the required angular space for the back navigation link to //
+// the parent item (if given). Angles in items are always in degrees, 0° is on the top, //
+// 90° on the right, 180° on the bottom and so on. This method may return null if for   //
+// some reason the angles could not be computed. For instance, this would be the case   //
+// if the fixed angles are not monotonically increasing.                                //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+function computeItemAngles(items, parentAngle) {
+
+  const itemAngles = [];
+
+  // Shouldn't happen, but who knows...
+  if (items.length == 0) {
+    return itemAngles;
+  }
+
+  // We begin by storing all fixed angles.
+  const fixedAngles = [];
+  items.forEach((item, index) => {
+    if ('angle' in item && item.angle >= 0) {
+      fixedAngles.push({angle: item.angle, index: index});
+    }
+  });
+
+  // Make sure that the parent link does not collide with a fixed item. For now, we
+  // just move the fixed angle a tiny bit. This is somewhat error-prone as it may
+  // collide with another fixed angle now. Maybe this could be solved in a better way?
+  // Maybe some global minimum angular spacing of items?
+  if (parentAngle != undefined) {
+    for (let i = 0; i < fixedAngles.length; i++) {
+      if (Math.abs(fixedAngles[i].angle - parentAngle) < 0.0001) {
+        fixedAngles[i].angle += 0.1;
+      }
+    }
+  }
+
+  // Make sure that the fixed angles are between 0° and 360°.
+  for (let i = 0; i < fixedAngles.length; i++) {
+    fixedAngles[i].angle = fixedAngles[i].angle % 360;
+  }
+
+  // Make sure that the fixed angles increase monotonically. If a fixed angle is larger
+  // than the next one, the next one will be ignored.
+  for (let i = 0; i < fixedAngles.length - 1;) {
+    if (fixedAngles[i].angle > fixedAngles[i + 1].angle) {
+      fixedAngles.splice(i + 1, 1);
+    } else {
+      ++i;
+    }
+  }
+
+  // If no item has a fixed angle, we assign one to the first item. If there is no
+  // parent item, this is on the top (0°). Else, the angular space will be evenly
+  // distributed to all child items and the first item will be the one closest to the
+  // top.
+  if (fixedAngles.length == 0) {
+    let firstAngle = 0;
+    if (parentAngle != undefined) {
+      const wedgeSize  = 360 / (items.length + 1);
+      let minAngleDiff = 360;
+      for (let i = 0; i < items.length; i++) {
+        const angle     = (parentAngle + (i + 1) * wedgeSize) % 360;
+        const angleDiff = Math.min(angle, 360 - angle);
+
+        if (angleDiff < minAngleDiff) {
+          minAngleDiff = angleDiff;
+          firstAngle   = (angle + 360) % 360;
+        }
+      }
+    }
+    fixedAngles.push({angle: firstAngle, index: 0});
+    itemAngles[0] = firstAngle;
+  }
+
+  // Now we iterate through the fixed angles, always considering wedges between
+  // consecutive pairs of fixed angles. If there is only one fixed angle, there is also
+  // only one 360°-wedge.
+  for (let i = 0; i < fixedAngles.length; i++) {
+    let wedgeBeginIndex = fixedAngles[i].index;
+    let wedgeBeginAngle = fixedAngles[i].angle;
+    let wedgeEndIndex   = fixedAngles[(i + 1) % fixedAngles.length].index;
+    let wedgeEndAngle   = fixedAngles[(i + 1) % fixedAngles.length].angle;
+
+    // The fixed angle can be stored in our output.
+    itemAngles[wedgeBeginIndex] = wedgeBeginAngle;
+
+    // Make sure we loop around.
+    if (wedgeEndAngle <= wedgeBeginAngle) {
+      wedgeEndAngle += 360;
+    }
+
+    // Calculate the number of items between the begin and end indices.
+    let wedgeItemCount =
+        (wedgeEndIndex - wedgeBeginIndex - 1 + items.length) % items.length;
+
+    // We have one item more if the parent link is inside our wedge.
+    let parentInWedge = false;
+
+    if (parentAngle != undefined) {
+      // It can be that the parent link is inside the current wedge, but it's angle is
+      // one full turn off.
+      if (parentAngle < wedgeBeginAngle) {
+        parentAngle += 360;
+      }
+
+      parentInWedge = parentAngle > wedgeBeginAngle && parentAngle < wedgeEndAngle;
+      if (parentInWedge) {
+        wedgeItemCount += 1;
+      }
+    }
+
+    // Calculate the angular difference between consecutive items in the current wedge.
+    const wedgeItemGap = (wedgeEndAngle - wedgeBeginAngle) / (wedgeItemCount + 1);
+
+    // Now we assign an angle to each item between the begin and end indices.
+    let index             = (wedgeBeginIndex + 1) % items.length;
+    let count             = 1;
+    let parentGapRequired = parentInWedge;
+
+    while (index != wedgeEndIndex) {
+      let itemAngle = wedgeBeginAngle + wedgeItemGap * count;
+
+      // Insert gap for parent link if required.
+      if (parentGapRequired && itemAngle + wedgeItemGap / 2 - parentAngle > 0) {
+        count += 1;
+        itemAngle         = wedgeBeginAngle + wedgeItemGap * count;
+        parentGapRequired = false;
+      }
+
+      itemAngles[index] = itemAngle % 360;
+
+      index = (index + 1) % items.length;
+      count += 1;
+    }
+  }
+
+  return itemAngles;
 }
