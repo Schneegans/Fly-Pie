@@ -935,8 +935,17 @@ var MenuEditorPage = class MenuEditorPage {
     });
     this._builder.get_object('menu-editor-stash-content').append(item);
 
-    const dragSource =
-        new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+    // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does not work on X11.
+    // If we added the copy action on X11, it would be chosen as default action and the
+    // user would have to hold down shift in order to move items...
+    let actions = Gdk.DragAction.MOVE;
+    if (utils.getSessionType() == 'wayland') {
+      actions |= Gdk.DragAction.COPY;
+    }
+
+    utils.debug(utils.getSessionType());
+
+    const dragSource = new Gtk.DragSource({actions: actions});
 
     dragSource.connect('prepare', (s, x, y) => {
       s.set_icon(Gtk.WidgetPaintable.new(item), x, y);

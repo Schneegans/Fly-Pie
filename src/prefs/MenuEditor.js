@@ -1229,8 +1229,16 @@ function registerWidgets() {
         // items.
         if (itemState != ItemState.CENTER) {
 
-          let dragSource =
-              new Gtk.DragSource({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+          // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does
+          // not work on X11. If we added the copy action on X11, it would be chosen as
+          // default action and the user would have to hold down shift in order to move
+          // items...
+          let actions = Gdk.DragAction.MOVE;
+          if (utils.getSessionType() == 'wayland') {
+            actions |= Gdk.DragAction.COPY;
+          }
+
+          let dragSource = new Gtk.DragSource({actions: actions});
 
           // The drag source provides a stringified JSON version of the item config. The
           // item's icon is used as drag graphic.

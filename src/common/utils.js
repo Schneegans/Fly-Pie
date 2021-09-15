@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                                         = imports.cairo;
-const {Gdk, Gtk, Gio, Pango, PangoCairo, GdkPixbuf} = imports.gi;
+const Cairo                                               = imports.cairo;
+const {GLib, Gdk, Gtk, Gio, Pango, PangoCairo, GdkPixbuf} = imports.gi;
 
 // We import the St module optionally. When this file is included from the daemon
 // side, it is available and can be used below. If this file is included via the pref.js,
@@ -71,6 +71,19 @@ function logProperties(object) {
   for (const element in object) {
     debug(`${element} [${typeof (object[element])}]`);
   }
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Returns the current session type, e.g. "wayland" or "x11".                           //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+let _sessionType = null;
+function getSessionType() {
+  if (_sessionType == null) {
+    _sessionType = GLib.getenv('XDG_SESSION_TYPE');
+  }
+  return _sessionType;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
