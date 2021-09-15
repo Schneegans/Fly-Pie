@@ -182,14 +182,14 @@ function registerWidgets() {
 
             // Only child an overview items have a caption.
             if (itemState == ItemState.GRID || itemState == ItemState.CHILD) {
-              this._nameLabel = new Gtk.Label({ellipsize: Pango.EllipsizeMode.MIDDLE});
+              this._nameLabel = new Gtk.Label({ellipsize: Pango.EllipsizeMode.END});
               this._nameLabel.add_css_class('caption-heading');
             }
 
             // The shortcut label is only required for the menu mode.
             if (itemState == ItemState.GRID) {
-              this._shortcutLabel = new Gtk.Label(
-                  {ellipsize: Pango.EllipsizeMode.MIDDLE, use_markup: true});
+              this._shortcutLabel =
+                  new Gtk.Label({ellipsize: Pango.EllipsizeMode.END, use_markup: true});
               this._shortcutLabel.add_css_class('caption');
               this._shortcutLabel.add_css_class('dim-label');
             }
