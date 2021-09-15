@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-15 21:10+0200\n"
-"PO-Revision-Date: 2021-05-08 10:35+0000\n"
+"PO-Revision-Date: 2021-09-15 20:36+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
-">\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #. A kind of animation.
 #: resources/ui/settings.ui:19
@@ -142,6 +142,8 @@ msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
+"💕️ Willst du zeigen, dass du Fly-Pie liebst? <a href=\"https://github.com/"
+"sponsors/Schneegans\">Werden Sie ein Sponsor für nur 1$ / Monat!</a>"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:688
@@ -167,11 +169,11 @@ msgstr "Standard"
 
 #: resources/ui/settings.ui:802
 msgid "Initializes most settings to random values."
-msgstr ""
+msgstr "Initialisiert die meisten Einstellungen auf zufällige Werte."
 
 #: resources/ui/settings.ui:814
 msgid "Generate a Random Preset"
-msgstr ""
+msgstr "Zufällige Voreinstellung erzeugen"
 
 #. Refers to reward presets
 #: resources/ui/settings.ui:828
@@ -816,27 +818,27 @@ msgstr "Menü-Editor"
 
 #: resources/ui/settings.ui:4685
 msgid "Stash"
-msgstr ""
+msgstr "Ablage"
 
 #: resources/ui/settings.ui:4701
 msgid "Store items here and re-use them later."
-msgstr ""
+msgstr "Legen Sie Einträge hier ab, um sie später wiederzuverwenden."
 
 #: resources/ui/settings.ui:4745
 msgid "Trash"
-msgstr ""
+msgstr "Papierkorb"
 
 #: resources/ui/settings.ui:4761
 msgid "Drop items here."
-msgstr ""
+msgstr "Legen Sie Einträge hier ab."
 
 #: resources/ui/settings.ui:4791
 msgid "Import menu configuration"
-msgstr ""
+msgstr "Menükonfiguration importieren"
 
 #: resources/ui/settings.ui:4814
 msgid "Export menu configuration"
-msgstr ""
+msgstr "Menükonfiguration exportieren"
 
 #: resources/ui/settings.ui:4909
 msgid "Name"
