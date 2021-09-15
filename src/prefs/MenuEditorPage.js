@@ -372,7 +372,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     // Every fifteen seconds we hide the current tip...
     this._infoLabelTimeoutB = null;
-    this._infoLabelTimeoutA = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 15000, () => {
+    this._infoLabelTimeoutA = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10000, () => {
       revealer.reveal_child = false;
 
       // ...  and show a new tip some milliseconds later.
