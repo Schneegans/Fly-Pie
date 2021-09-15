@@ -943,8 +943,6 @@ var MenuEditorPage = class MenuEditorPage {
       actions |= Gdk.DragAction.COPY;
     }
 
-    utils.debug(utils.getSessionType());
-
     const dragSource = new Gtk.DragSource({actions: actions});
 
     dragSource.connect('prepare', (s, x, y) => {
