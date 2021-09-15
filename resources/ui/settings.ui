@@ -4629,7 +4629,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                               </object>
                             </child>
 
-
                             <child>
                               <object class="GtkFrame">
                                 <property name="margin-top">0</property>
@@ -4769,6 +4768,97 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                               </object>
                             </child>
+
+                            <child>
+                              <object class="GtkActionBar">
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="margin_end">8</property>
+                                    <style>
+                                      <class name="linked" />
+                                    </style>
+                                    <child>
+                                      <object class="GtkButton" id="import-menu-config-button">
+                                        <property name="tooltip_text" translatable="yes">Import menu configuration</property>
+                                        <property name="child">
+                                          <object class="GtkBox">
+                                            <property name="margin_start">8</property>
+                                            <property name="margin_end">8</property>
+                                            <property name="spacing">6</property>
+                                            <child>
+                                              <object class="GtkImage">
+                                                <property name="icon_name">document-open-symbolic</property>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="halign">start</property>
+                                                <property name="label" translatable="yes" comments="Text of the import-menu-configuration button.">Import</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkButton" id="export-menu-config-button">
+                                        <property name="tooltip_text" translatable="yes">Export menu configuration</property>
+                                        <property name="child">
+                                          <object class="GtkBox">
+                                            <property name="margin_start">8</property>
+                                            <property name="margin_end">8</property>
+                                            <property name="spacing">6</property>
+                                            <child>
+                                              <object class="GtkImage">
+                                                <property name="icon_name">document-save-symbolic</property>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="halign">start</property>
+                                                <property name="label" translatable="yes" comments="Text of the export-menu-configuration button.">Export</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child type="end">
+
+
+                                  <object class="GtkButton" id="preview-menu-button">
+                                    <property name="sensitive">0</property>
+                                    <property name="tooltip_text" translatable="yes">Open Live Preview Menu</property>
+                                    <property name="child">
+                                      <object class="GtkBox">
+                                        <property name="margin_start">8</property>
+                                        <property name="margin_end">8</property>
+                                        <property name="spacing">6</property>
+                                        <child>
+                                          <object class="GtkImage">
+                                            <property name="icon_name">media-playback-start-symbolic</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="halign">start</property>
+                                            <property name="label" translatable="yes" comments="Text of a button that opens a preview menu to test setting changes on-the-fly. There&apos;s a &apos;Play&apos; button next to the text, so no need to say &quot;Open Live Preview&quot; or similar.">Live Preview</property>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </property>
+                                    <style>
+                                      <class name="pill-button" />
+                                      <class name="suggested-action" />
+                                    </style>
+                                  </object>
+
+
+                                </child>
+                              </object>
+                            </child>
                           </object>
 
                         </child>
@@ -4794,13 +4884,11 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="vexpand">1</property>
                                 <property name="orientation">vertical</property>
                                 <child>
-                                  <object class="GtkLabel">
-                                    <property name="halign">start</property>
-                                    <property name="margin_bottom">10</property>
-                                    <property name="label" translatable="yes">Properties</property>
-                                    <style>
-                                      <class name="large-title" />
-                                    </style>
+                                  <object class="GtkDrawingArea" id="item-icon-preview">
+                                    <property name="width_request">128</property>
+                                    <property name="height_request">128</property>
+                                    <property name="margin_top">30</property>
+                                    <property name="margin_bottom">15</property>
                                   </object>
                                 </child>
                                 <child>
@@ -4982,11 +5070,11 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                       <object class="GtkLabel" id="info-label">
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
-                                        <property name="valign">end</property>
+                                        <property name="valign">center</property>
+                                        <property name="justify">center</property>
                                         <property name="use_markup">1</property>
                                         <property name="wrap">1</property>
                                         <property name="max_width_chars">0</property>
-                                        <property name="xalign">0</property>
                                         <style>
                                           <class name="dim-label" />
                                         </style>
@@ -4999,97 +5087,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                           </object>
                         </child>
 
-                      </object>
-                    </child>
-
-                    <child>
-                      <object class="GtkActionBar">
-                        <child>
-                          <object class="GtkBox">
-                            <property name="margin_end">8</property>
-                            <style>
-                              <class name="linked" />
-                            </style>
-                            <child>
-                              <object class="GtkButton" id="import-menu-config-button">
-                                <property name="tooltip_text" translatable="yes">Import menu configuration</property>
-                                <property name="child">
-                                  <object class="GtkBox">
-                                    <property name="margin_start">8</property>
-                                    <property name="margin_end">8</property>
-                                    <property name="spacing">6</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="icon_name">document-open-symbolic</property>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes" comments="Text of the import-menu-configuration button.">Import</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkButton" id="export-menu-config-button">
-                                <property name="tooltip_text" translatable="yes">Export menu configuration</property>
-                                <property name="child">
-                                  <object class="GtkBox">
-                                    <property name="margin_start">8</property>
-                                    <property name="margin_end">8</property>
-                                    <property name="spacing">6</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="icon_name">document-save-symbolic</property>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes" comments="Text of the export-menu-configuration button.">Export</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child type="end">
-
-
-                          <object class="GtkButton" id="preview-menu-button">
-                            <property name="sensitive">0</property>
-                            <property name="tooltip_text" translatable="yes">Open Live Preview Menu</property>
-                            <property name="child">
-                              <object class="GtkBox">
-                                <property name="margin_start">8</property>
-                                <property name="margin_end">8</property>
-                                <property name="spacing">6</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon_name">media-playback-start-symbolic</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="halign">start</property>
-                                    <property name="label" translatable="yes" comments="Text of a button that opens a preview menu to test setting changes on-the-fly. There&apos;s a &apos;Play&apos; button next to the text, so no need to say &quot;Open Live Preview&quot; or similar.">Live Preview</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </property>
-                            <style>
-                              <class name="pill-button" />
-                              <class name="suggested-action" />
-                            </style>
-                          </object>
-
-
-                        </child>
                       </object>
                     </child>
 

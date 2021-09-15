@@ -428,6 +428,21 @@ var MenuEditorPage = class MenuEditorPage {
       iconSelectDialog.show();
     });
 
+    // Initialize the icon at the top of the settings sidebar.
+    this._builder.get_object('item-icon-preview').set_draw_func((widget, ctx) => {
+      if (this._selectedItem) {
+        const size =
+            Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+        ctx.translate(
+            (widget.get_allocated_width() - size) / 2,
+            (widget.get_allocated_height() - size) / 2);
+        const font  = this._settings.get_string('font');
+        const color = widget.get_style_context().get_color();
+        utils.paintIcon(ctx, this._selectedItem.icon, size, 1, font, color);
+      }
+      return false;
+    });
+
     // Redraw the icon when the icon name input field is changed. Also, save the menu
     // configuration and update the menu editor widget accordingly.
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
@@ -436,6 +451,7 @@ var MenuEditorPage = class MenuEditorPage {
         this._editor.updateSelected(this._selectedItem);
         this._saveMenuConfiguration();
       }
+      this._builder.get_object('item-icon-preview').queue_draw();
     });
 
     // Save the menu configuration and update the menu editor widget when the name of an
