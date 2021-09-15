@@ -348,10 +348,16 @@ var MenuEditorPage = class MenuEditorPage {
       _('You can reorder the menu items on the left via drag and drop.'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
+      _('It is possible to open a menu with a terminal command. You can read more on <a href="%s">Github</a>.')
+          .replace(
+              '%s',
+              'https://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-interface.md'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
       _('You can drop directories, files, links and desktop files into the menu hierarchy on the left.'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
-      _('You can copy menu items by holding the Ctrl key while dragging them to another location.'),
+      _('On Wayland, you can copy menu items by holding the Ctrl key while dragging them to another location.'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
       _('<a href="%s">Translate Fly-Pie on Hosted Weblate</a>.')
