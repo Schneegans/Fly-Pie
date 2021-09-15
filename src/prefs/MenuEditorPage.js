@@ -770,6 +770,10 @@ var MenuEditorPage = class MenuEditorPage {
             this._showNotification(_('Actions cannot be turned into toplevel menus.'));
             return false;
           }
+
+          // Its fixed angle is reset to prevent invalid configurations.
+          config.angle = -1;
+
           this._menuConfigs.push(config);
           this._saveMenuConfiguration();
           return true;
@@ -804,6 +808,10 @@ var MenuEditorPage = class MenuEditorPage {
         dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
         dropTarget.connect('drop', (t, what) => {
           const config = JSON.parse(what);
+
+          // Its fixed angle is reset to prevent invalid configurations.
+          config.angle = -1;
+
           item.children.push(config);
           this._saveMenuConfiguration();
           return true;
