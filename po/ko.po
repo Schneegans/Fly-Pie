@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-08 12:29+0200\n"
+"POT-Creation-Date: 2021-09-15 21:10+0200\n"
 "PO-Revision-Date: 2021-04-24 11:21+0000\n"
 "Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/"
@@ -19,13 +19,72 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.7-dev\n"
 
-#: resources/ui/settings.ui:66
+#. A kind of animation.
+#: resources/ui/settings.ui:19
+msgid "Linear"
+msgstr ""
+
+#. A kind of animation.
+#: resources/ui/settings.ui:23
+msgid "Ease"
+msgstr ""
+
+#. A kind of animation.
+#: resources/ui/settings.ui:27
+msgid "Ease-In"
+msgstr ""
+
+#. A kind of animation.
+#: resources/ui/settings.ui:31
+msgid "Ease-Out"
+msgstr ""
+
+#. A kind of animation.
+#: resources/ui/settings.ui:35
+msgid "Ease-In-Out"
+msgstr ""
+
+#. A kind of animation.
+#: resources/ui/settings.ui:39
+msgid "Ease-In-Quad"
+msgstr ""
+
+#. A kind of animation.
+#: resources/ui/settings.ui:43
+msgid "Ease-Out-Quad"
+msgstr ""
+
+#. A kind of animation.
+#: resources/ui/settings.ui:47
+msgid "Ease-In-Out-Quad"
+msgstr ""
+
+#. A kind of animation.
+#: resources/ui/settings.ui:51
+msgid "Ease-In-Back"
+msgstr ""
+
+#. A kind of animation.
+#: resources/ui/settings.ui:55
+msgid "Ease-Out-Back"
+msgstr ""
+
+#. A kind of animation.
+#: resources/ui/settings.ui:59
+msgid "Ease-In-Out-Back"
+msgstr ""
+
+#: resources/ui/settings.ui:398
+msgid "About"
+msgstr "약"
+
+#: resources/ui/settings.ui:417
 msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
 
-#: resources/ui/settings.ui:81
+#: resources/ui/settings.ui:425
 msgid ""
 "Published under the MIT License.\n"
 "Visit <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie's Homepage</"
@@ -36,153 +95,97 @@ msgid ""
 "\">Github</a>."
 msgstr ""
 
-#: resources/ui/settings.ui:99
-msgid "About"
-msgstr "약"
-
-#: resources/ui/settings.ui:126
-msgid "Created by"
-msgstr ""
-
-#: resources/ui/settings.ui:156
-msgid "Translated by"
-msgstr ""
-
-#: resources/ui/settings.ui:190
-msgid "Artwork by"
-msgstr ""
-
-#: resources/ui/settings.ui:219
+#: resources/ui/settings.ui:442
 msgid "Credits"
 msgstr ""
 
-#: resources/ui/settings.ui:250
-msgid "🥇️ Gold Sponsors"
+#: resources/ui/settings.ui:455
+msgid "Created by"
 msgstr ""
 
-#: resources/ui/settings.ui:264
-msgid "🥈️ Silver Sponsors"
+#: resources/ui/settings.ui:481
+msgid "Translated by"
 msgstr ""
 
-#: resources/ui/settings.ui:278
-msgid "🥉️ Bronze Sponsors"
+#: resources/ui/settings.ui:508
+msgid "Artwork by"
 msgstr ""
 
-#: resources/ui/settings.ui:354
-msgid ""
-"💕️ Do you want to show that you love Fly-Pie?\n"
-"<a href=\"https://github.com/sponsors/Schneegans\">You may already become a "
-"sponsor for as little as 1$ / month!</a>"
-msgstr ""
-
-#: resources/ui/settings.ui:370
+#: resources/ui/settings.ui:537
 msgid "Sponsors"
 msgstr ""
 
-#. A kind of animation. It may be fine to use the English term here.
-#: resources/ui/settings.ui:575
-msgid "Linear"
+#: resources/ui/settings.ui:554
+msgid "🥇️ Gold Sponsors"
 msgstr ""
 
-#. A kind of animation. It may be fine to use the English term here.
-#: resources/ui/settings.ui:579
-msgid "Ease"
+#: resources/ui/settings.ui:566
+msgid "🥈️ Silver Sponsors"
 msgstr ""
 
-#. A kind of animation. It may be fine to use the English term here.
-#: resources/ui/settings.ui:583
-msgid "Ease-In"
+#: resources/ui/settings.ui:578
+msgid "🥉️ Bronze Sponsors"
 msgstr ""
 
-#. A kind of animation. It may be fine to use the English term here.
-#: resources/ui/settings.ui:587
-msgid "Ease-Out"
-msgstr ""
-
-#. A kind of animation. It may be fine to use the English term here.
-#: resources/ui/settings.ui:591
-msgid "Ease-In-Out"
-msgstr ""
-
-#. A kind of animation. It may be fine to use the English term here.
-#: resources/ui/settings.ui:595
-msgid "Ease-In-Quad"
-msgstr ""
-
-#. A kind of animation. It may be fine to use the English term here.
-#: resources/ui/settings.ui:599
-msgid "Ease-Out-Quad"
-msgstr ""
-
-#. A kind of animation. It may be fine to use the English term here.
-#: resources/ui/settings.ui:603
-msgid "Ease-In-Out-Quad"
-msgstr ""
-
-#. A kind of animation. It may be fine to use the English term here.
-#: resources/ui/settings.ui:607
-msgid "Ease-In-Back"
-msgstr ""
-
-#. A kind of animation. It may be fine to use the English term here.
-#: resources/ui/settings.ui:611
-msgid "Ease-Out-Back"
-msgstr ""
-
-#. A kind of animation. It may be fine to use the English term here.
-#: resources/ui/settings.ui:615
-msgid "Ease-In-Out-Back"
-msgstr ""
-
-#. Tab title of the icon-select-popover.
-#: resources/ui/settings.ui:794
-msgid "Icon Theme"
-msgstr ""
-
-#. Tab title of the icon-select-popover.
-#: resources/ui/settings.ui:821
-msgid "Custom Icon"
+#: resources/ui/settings.ui:632
+msgid ""
+"💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
+"sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
 
 #. Heading in the add-new-item-popover of the menu editor.
-#: resources/ui/settings.ui:897
+#: resources/ui/settings.ui:688
 msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
 msgstr ""
 
 #. Heading in the add-new-item-popover of the menu editor.
-#: resources/ui/settings.ui:934
+#: resources/ui/settings.ui:713
 msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
 
-#: resources/ui/settings.ui:1030
-msgid "Initializes the settings below to random values"
+#: resources/ui/settings.ui:764
+msgid "Standard"
 msgstr ""
 
-#: resources/ui/settings.ui:1056
-msgid "Generate Random Preset"
+#: resources/ui/settings.ui:802
+msgid "Initializes most settings to random values."
 msgstr ""
 
-#. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
-#: resources/ui/settings.ui:1127
-msgid "Enable Animations"
+#: resources/ui/settings.ui:814
+msgid "Generate a Random Preset"
 msgstr ""
 
-#: resources/ui/settings.ui:1154
+#. Refers to reward presets
+#: resources/ui/settings.ui:828
+msgid "Rewards"
+msgstr ""
+
+#: resources/ui/settings.ui:859
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
 msgstr ""
 
-#: resources/ui/settings.ui:1280
+#. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
+#: resources/ui/settings.ui:864
+msgid "Enable Animations"
+msgstr ""
+
+#. Caption of the tutorial page in the window's titlebar.
+#: resources/ui/settings.ui:916
+msgid "Tutorial"
+msgstr ""
+
+#: resources/ui/settings.ui:950
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
 
-#: resources/ui/settings.ui:1300
+#: resources/ui/settings.ui:961
 msgid ""
 "• Use your <b>left mouse button to select items</b>.\n"
 "• Use your <b>right mouse button to close the menu</b>.\n"
@@ -192,24 +195,24 @@ msgid ""
 msgstr ""
 
 #. The text of the big tutorial button.
-#: resources/ui/settings.ui:1333 resources/ui/settings.ui:1452
-#: resources/ui/settings.ui:1578 resources/ui/settings.ui:1846
-#: resources/ui/settings.ui:1970
+#: resources/ui/settings.ui:981 resources/ui/settings.ui:1064
+#: resources/ui/settings.ui:1152 resources/ui/settings.ui:1297
+#: resources/ui/settings.ui:1385
 msgid "<big><b>Open the example menu!</b></big>"
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/settings.ui:1371
+#: resources/ui/settings.ui:1013
 msgid "You can click anywhere!"
 msgstr ""
 
-#: resources/ui/settings.ui:1404
+#: resources/ui/settings.ui:1032
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
 msgstr ""
 
-#: resources/ui/settings.ui:1422
+#: resources/ui/settings.ui:1044
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -220,11 +223,11 @@ msgid ""
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/settings.ui:1491
+#: resources/ui/settings.ui:1096
 msgid "Practice Session I"
 msgstr ""
 
-#: resources/ui/settings.ui:1507
+#: resources/ui/settings.ui:1106
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
 "select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
@@ -235,43 +238,43 @@ msgid ""
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1531
+#: resources/ui/settings.ui:1121
 msgid "<big>Last selection time: <b>- ms</b></big>"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1545
+#: resources/ui/settings.ui:1133
 msgid "<big>Best selection time: <b>- ms</b></big>"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1623
+#: resources/ui/settings.ui:1181
 msgid "Unlocked at less than 3000 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1669
+#: resources/ui/settings.ui:1201
 msgid "Unlocked at less than 2000 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1714 resources/ui/settings.ui:2014
+#: resources/ui/settings.ui:1222 resources/ui/settings.ui:1413
 msgid "Unlocked at less than 1000 ms"
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/settings.ui:1766
+#: resources/ui/settings.ui:1249
 msgid "The Marking Mode of Fly-Pie"
 msgstr ""
 
-#: resources/ui/settings.ui:1799
+#: resources/ui/settings.ui:1268
 msgid ""
 "The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
 
-#: resources/ui/settings.ui:1816
+#: resources/ui/settings.ui:1279
 msgid ""
 "Try remembering the path to an item. Open the menu and <b>draw the path with "
 "your mouse</b>. You can start with individual segments of the path, put you "
@@ -279,17 +282,15 @@ msgid ""
 "\n"
 "You may find it more successful if you explicitly try to compose your "
 "gesture of straight parts. <b>Do not draw curvy paths but rather expressive "
-"zig-zag-lines!</b>\n"
-"\n"
-"Click <b>next</b> for an additional practice session!"
+"zig-zag-lines!</b>"
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/settings.ui:1885
+#: resources/ui/settings.ui:1329
 msgid "Practice Session II"
 msgstr ""
 
-#: resources/ui/settings.ui:1901
+#: resources/ui/settings.ui:1339
 msgid ""
 "Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
 "However, as you now learned about the Marking Mode, the time required to get "
@@ -300,22 +301,22 @@ msgid ""
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:2059
+#: resources/ui/settings.ui:1433
 msgid "Unlocked at less than 750 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:2104
+#: resources/ui/settings.ui:1454
 msgid "Unlocked at less than 500 ms"
 msgstr ""
 
 #. The user finished the tutorial. Yay!
-#: resources/ui/settings.ui:2169
+#: resources/ui/settings.ui:1488
 msgid "Congratulations!"
 msgstr "축하합니다!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
-#: resources/ui/settings.ui:2187
+#: resources/ui/settings.ui:1500
 msgid ""
 "Congratulations! If you managed to unlock most of the medals, you will be "
 "using Fly-Pie like a master Pielot!\n"
@@ -334,519 +335,495 @@ msgid ""
 msgstr ""
 
 #. Button for tutorial navigation. Goes back one page.
-#: resources/ui/settings.ui:2262
+#: resources/ui/settings.ui:1545
 msgid "Previous"
 msgstr ""
 
 #. Button for tutorial navigation. Goes to the next page.
-#: resources/ui/settings.ui:2412
+#: resources/ui/settings.ui:1602
 msgid "Next"
 msgstr ""
 
-#. Caption of the tutorial page in the window's titlebar.
-#: resources/ui/settings.ui:2449
-msgid "Tutorial"
+#. Caption of the settings page in the window's titlebar.
+#: resources/ui/settings.ui:1638
+msgid "Settings"
 msgstr ""
 
-#: resources/ui/settings.ui:2526
+#: resources/ui/settings.ui:1671 resources/ui/settings.ui:1869
+msgid "Global Appearance Settings"
+msgstr ""
+
+#: resources/ui/settings.ui:1681
+msgid "These settings affect all menu items."
+msgstr ""
+
+#: resources/ui/settings.ui:1699
 msgid "Animation Duration"
 msgstr ""
 
-#: resources/ui/settings.ui:2544
+#: resources/ui/settings.ui:1713
 msgid "Global Scaling"
 msgstr ""
 
 #. Please keep this short!
-#: resources/ui/settings.ui:2556
+#: resources/ui/settings.ui:1723
 msgid "Independent of the preset."
 msgstr ""
 
-#: resources/ui/settings.ui:2610 resources/ui/settings.ui:2634
-#: resources/ui/settings.ui:2775 resources/ui/settings.ui:2799
-#: resources/ui/settings.ui:2822 resources/ui/settings.ui:2845
-#: resources/ui/settings.ui:3660 resources/ui/settings.ui:3683
-#: resources/ui/settings.ui:3707 resources/ui/settings.ui:3731
-#: resources/ui/settings.ui:3837 resources/ui/settings.ui:3942
-#: resources/ui/settings.ui:4751 resources/ui/settings.ui:4976
-#: resources/ui/settings.ui:4999 resources/ui/settings.ui:5023
-#: resources/ui/settings.ui:5047 resources/ui/settings.ui:5071
-#: resources/ui/settings.ui:5162 resources/ui/settings.ui:5246
-#: resources/ui/settings.ui:5749 resources/ui/settings.ui:5913
-#: resources/ui/settings.ui:5937 resources/ui/settings.ui:5961
-#: resources/ui/settings.ui:6022 resources/ui/settings.ui:6342
-#: resources/ui/settings.ui:6366 resources/ui/settings.ui:6478
-#: resources/ui/settings.ui:6502 resources/ui/settings.ui:6658
-#: resources/ui/settings.ui:6916 resources/ui/settings.ui:6940
-#: resources/ui/settings.ui:6964 resources/ui/settings.ui:7159
-#: resources/ui/settings.ui:7250 resources/ui/settings.ui:7340
-#: resources/ui/settings.ui:7431 resources/ui/settings.ui:7637
-#: resources/ui/settings.ui:7661 resources/ui/settings.ui:7746
-msgid "Reset to default value"
-msgstr ""
-
-#: resources/ui/settings.ui:2691
+#: resources/ui/settings.ui:1773
 msgid "Font"
 msgstr ""
 
-#: resources/ui/settings.ui:2703
+#: resources/ui/settings.ui:1783
 msgid "Text Color"
 msgstr ""
 
-#: resources/ui/settings.ui:2717 resources/ui/settings.ui:3801
-#: resources/ui/settings.ui:4845 resources/ui/settings.ui:5489
+#: resources/ui/settings.ui:1794 resources/ui/settings.ui:2409
+#: resources/ui/settings.ui:3110 resources/ui/settings.ui:3346
 msgid "Background Color"
 msgstr ""
 
-#: resources/ui/settings.ui:2746
+#: resources/ui/settings.ui:1816
 msgid "Pick Text Color"
 msgstr ""
 
-#: resources/ui/settings.ui:2762
+#: resources/ui/settings.ui:1829
 msgid "Pick Background Color"
 msgstr ""
 
-#: resources/ui/settings.ui:2895 resources/ui/settings.ui:2965
-msgid "Global Appearance Settings"
-msgstr ""
-
-#: resources/ui/settings.ui:2912
-msgid "These settings affect all menu items."
-msgstr ""
-
-#: resources/ui/settings.ui:2937
+#: resources/ui/settings.ui:1858
 msgid "Animation Mode"
 msgstr ""
 
-#: resources/ui/settings.ui:3030 resources/ui/settings.ui:4571
-#: resources/ui/settings.ui:5656 resources/ui/settings.ui:6238
-msgid "Size"
+#: resources/ui/settings.ui:1901 resources/ui/settings.ui:2511
+msgid "Center Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:3081 resources/ui/settings.ui:3348
-msgid "Pick Center Item Color"
-msgstr ""
-
-#: resources/ui/settings.ui:3107 resources/ui/settings.ui:3167
-#: resources/ui/settings.ui:3374 resources/ui/settings.ui:3434
-#: resources/ui/settings.ui:4254 resources/ui/settings.ui:4326
-#: resources/ui/settings.ui:4459 resources/ui/settings.ui:4543
-msgid "Saturation"
-msgstr ""
-
-#: resources/ui/settings.ui:3127 resources/ui/settings.ui:3179
-#: resources/ui/settings.ui:3394 resources/ui/settings.ui:3446
-#: resources/ui/settings.ui:4274 resources/ui/settings.ui:4314
-#: resources/ui/settings.ui:4479 resources/ui/settings.ui:4531
-msgid "Luminance"
-msgstr ""
-
-#: resources/ui/settings.ui:3147 resources/ui/settings.ui:3191
-#: resources/ui/settings.ui:3414 resources/ui/settings.ui:3458
-#: resources/ui/settings.ui:4294 resources/ui/settings.ui:4338
-#: resources/ui/settings.ui:4499 resources/ui/settings.ui:4519
-msgid "Opacity"
-msgstr ""
-
-#. Keep this very short! Try to use not more than six or seven letters.
-#. This is a label of the coloring type radio button group.
-#. Fixed = not changing dynamically
-#: resources/ui/settings.ui:3216 resources/ui/settings.ui:3301
-#: resources/ui/settings.ui:4166 resources/ui/settings.ui:4371
-#: resources/ui/settings.ui:5509 resources/ui/settings.ui:5586
-msgid "Fixed"
-msgstr ""
-
-#. Keep this very short! Try to use not more than six or seven letters.
-#. This is a label of the coloring type radio button group.
-#. Auto = changing dynamically
-#: resources/ui/settings.ui:3231 resources/ui/settings.ui:3316
-#: resources/ui/settings.ui:4181 resources/ui/settings.ui:4386
-msgid "Auto"
-msgstr ""
-
-#: resources/ui/settings.ui:3553 resources/ui/settings.ui:4798
-msgid "Icon Opacity"
-msgstr ""
-
-#: resources/ui/settings.ui:3565 resources/ui/settings.ui:3588
-#: resources/ui/settings.ui:3612 resources/ui/settings.ui:3636
-#: resources/ui/settings.ui:3918 resources/ui/settings.ui:3992
-#: resources/ui/settings.ui:4857 resources/ui/settings.ui:4880
-#: resources/ui/settings.ui:4904 resources/ui/settings.ui:4928
-#: resources/ui/settings.ui:4952 resources/ui/settings.ui:5222
-#: resources/ui/settings.ui:5330 resources/ui/settings.ui:5842
-#: resources/ui/settings.ui:5865 resources/ui/settings.ui:5889
-#: resources/ui/settings.ui:6070
-msgid "Copy left value to right side"
+#: resources/ui/settings.ui:1911
+msgid "The center element shows the currently hovered child's name."
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:3755
+#: resources/ui/settings.ui:1927
 msgid "With Hovered Child"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:3771
+#: resources/ui/settings.ui:1940
 msgid "Without Hovered Child"
 msgstr ""
 
-#: resources/ui/settings.ui:3788 resources/ui/settings.ui:5128
+#: resources/ui/settings.ui:1970 resources/ui/settings.ui:2904
+#: resources/ui/settings.ui:3461
+msgid "Size"
+msgstr ""
+
+#: resources/ui/settings.ui:2002 resources/ui/settings.ui:2206
+msgid "Pick Center Item Color"
+msgstr ""
+
+#: resources/ui/settings.ui:2022 resources/ui/settings.ui:2073
+#: resources/ui/settings.ui:2226 resources/ui/settings.ui:2277
+#: resources/ui/settings.ui:2652 resources/ui/settings.ui:2713
+#: resources/ui/settings.ui:2807 resources/ui/settings.ui:2878
+msgid "Saturation"
+msgstr ""
+
+#: resources/ui/settings.ui:2039 resources/ui/settings.ui:2083
+#: resources/ui/settings.ui:2243 resources/ui/settings.ui:2287
+#: resources/ui/settings.ui:2669 resources/ui/settings.ui:2703
+#: resources/ui/settings.ui:2824 resources/ui/settings.ui:2868
+msgid "Luminance"
+msgstr ""
+
+#: resources/ui/settings.ui:2056 resources/ui/settings.ui:2093
+#: resources/ui/settings.ui:2260 resources/ui/settings.ui:2297
+#: resources/ui/settings.ui:2686 resources/ui/settings.ui:2723
+#: resources/ui/settings.ui:2841 resources/ui/settings.ui:2858
+msgid "Opacity"
+msgstr ""
+
+#. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
+#: resources/ui/settings.ui:2114 resources/ui/settings.ui:2178
+#: resources/ui/settings.ui:2597 resources/ui/settings.ui:2752
+#: resources/ui/settings.ui:3360 resources/ui/settings.ui:3412
+msgid "Fixed"
+msgstr ""
+
+#. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
+#: resources/ui/settings.ui:2121 resources/ui/settings.ui:2185
+#: resources/ui/settings.ui:2604 resources/ui/settings.ui:2759
+msgid "Auto"
+msgstr ""
+
+#: resources/ui/settings.ui:2355 resources/ui/settings.ui:3067
+msgid "Icon Opacity"
+msgstr ""
+
+#: resources/ui/settings.ui:2398 resources/ui/settings.ui:3161
 msgid "Icon Scale"
 msgstr ""
 
-#: resources/ui/settings.ui:3872 resources/ui/settings.ui:5210
+#: resources/ui/settings.ui:2428 resources/ui/settings.ui:3180
 msgid "Icon Crop"
 msgstr ""
 
-#: resources/ui/settings.ui:3967 resources/ui/settings.ui:5305
-#: resources/ui/settings.ui:6058
+#: resources/ui/settings.ui:2479 resources/ui/settings.ui:3231
+#: resources/ui/settings.ui:3623
 msgid "Background Image"
 msgstr ""
 
-#: resources/ui/settings.ui:4021 resources/ui/settings.ui:4081
-msgid "Center Appearance"
+#: resources/ui/settings.ui:2541 resources/ui/settings.ui:3263
+msgid "Children Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:4038
-msgid "The center element shows the currently hovered child's name."
-msgstr ""
-
-#. Keep this very short! Try to use not more than six or seven letters.
-#. This is a label of the coloring type radio button group.
-#. Parent = use the parent's setting
-#: resources/ui/settings.ui:4196 resources/ui/settings.ui:4401
-#: resources/ui/settings.ui:5524 resources/ui/settings.ui:5601
-msgid "Parent"
-msgstr ""
-
-#: resources/ui/settings.ui:4229 resources/ui/settings.ui:4434
-msgid "Pick Child Item Color"
-msgstr ""
-
-#: resources/ui/settings.ui:4584 resources/ui/settings.ui:5669
-msgid "Offset"
-msgstr ""
-
-#. Draw above (grand)children items.
-#. There's an explanation string below in the application.
-#: resources/ui/settings.ui:4705 resources/ui/settings.ui:5792
-msgid "Draw Above"
-msgstr ""
-
-#: resources/ui/settings.ui:4717
-msgid "Render children above the center item."
+#: resources/ui/settings.ui:2551
+msgid "Child items are styled differently when their wedge is hovered."
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/settings.ui:5095 resources/ui/settings.ui:5826
+#: resources/ui/settings.ui:2567 resources/ui/settings.ui:3319
 msgid "Standard State"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:5111
+#: resources/ui/settings.ui:2580
 msgid "Hovered State"
 msgstr ""
 
-#: resources/ui/settings.ui:5359 resources/ui/settings.ui:5420
-msgid "Children Appearance"
+#. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent's setting
+#: resources/ui/settings.ui:2611 resources/ui/settings.ui:2766
+#: resources/ui/settings.ui:3367 resources/ui/settings.ui:3419
+msgid "Parent"
 msgstr ""
 
-#. When the mouse pointer is NOT over the item
-#: resources/ui/settings.ui:5376
-msgid "Child items are styled differently when their wedge is hovered."
+#: resources/ui/settings.ui:2633 resources/ui/settings.ui:2788
+msgid "Pick Child Item Color"
 msgstr ""
 
-#: resources/ui/settings.ui:5557 resources/ui/settings.ui:5634
-msgid "Pick Grandchild Item Color"
+#: resources/ui/settings.ui:2915 resources/ui/settings.ui:3472
+msgid "Offset"
 msgstr ""
 
-#: resources/ui/settings.ui:5804
-msgid "Render grandchildren above children items."
+#. Draw above (grand)children items. There's an explanation string below in the application.
+#: resources/ui/settings.ui:3026 resources/ui/settings.ui:3561
+msgid "Draw Above"
 msgstr ""
 
-#. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:5984
-msgid "With Hovered Parent"
+#: resources/ui/settings.ui:3036
+msgid "Render children above the center item."
 msgstr ""
 
-#: resources/ui/settings.ui:6123 resources/ui/settings.ui:6183
+#: resources/ui/settings.ui:3293 resources/ui/settings.ui:3655
 msgid "Grandchildren Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:6140
+#: resources/ui/settings.ui:3303
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
 msgstr ""
 
-#. Keep the individual lines short (around 30 characters max)!
-#. You can use up to three lines if you want.
-#: resources/ui/settings.ui:6251
+#. Hovered: When the mouse pointer is over the item
+#: resources/ui/settings.ui:3332
+msgid "With Hovered Parent"
+msgstr ""
+
+#: resources/ui/settings.ui:3389 resources/ui/settings.ui:3441
+msgid "Pick Grandchild Item Color"
+msgstr ""
+
+#: resources/ui/settings.ui:3571
+msgid "Render grandchildren above children items."
+msgstr ""
+
+#: resources/ui/settings.ui:3686 resources/ui/settings.ui:3931
+msgid "Wedge Appearance"
+msgstr ""
+
+#: resources/ui/settings.ui:3696
+msgid "Clicking inside a wedge will activate the corresponding item."
+msgstr ""
+
+#: resources/ui/settings.ui:3719
+msgid "Inner Radius"
+msgstr ""
+
+#. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
+#: resources/ui/settings.ui:3730
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr ""
 
-#: resources/ui/settings.ui:6275
-msgid "Wedge Separators"
+#: resources/ui/settings.ui:3751
+msgid "Wedge Separator Color"
 msgstr ""
 
-#: resources/ui/settings.ui:6291 resources/ui/settings.ui:6857
-msgid "Color"
+#: resources/ui/settings.ui:3763
+msgid "Wedge Separator Thickness"
 msgstr ""
 
-#: resources/ui/settings.ui:6310 resources/ui/settings.ui:6444
-msgid "Width"
-msgstr ""
-
-#: resources/ui/settings.ui:6392
+#: resources/ui/settings.ui:3790
 msgid "Pick Wedge Separator Color"
 msgstr ""
 
-#: resources/ui/settings.ui:6417
+#: resources/ui/settings.ui:3802
 msgid "Wedge Color"
 msgstr ""
 
-#: resources/ui/settings.ui:6529
-msgid "Inner Radius"
+#: resources/ui/settings.ui:3814
+msgid "Wedge Size"
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/settings.ui:6573
+#: resources/ui/settings.ui:3864
 msgid "Inactive"
 msgstr ""
 
 #. When the mouse pointer is over the item
-#: resources/ui/settings.ui:6592
+#: resources/ui/settings.ui:3877
 msgid "Hovered"
 msgstr ""
 
-#: resources/ui/settings.ui:6615
+#: resources/ui/settings.ui:3894
 msgid "Pick Wedge Color"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:6630
+#: resources/ui/settings.ui:3901
 msgid "Pick Hovered Wedge Color"
 msgstr ""
 
-#: resources/ui/settings.ui:6705 resources/ui/settings.ui:6775
-msgid "Wedge Appearance"
-msgstr ""
-
-#: resources/ui/settings.ui:6722
-msgid "Clicking inside a wedge will activate the corresponding item."
-msgstr ""
-
-#: resources/ui/settings.ui:6844
-msgid "Thickness"
-msgstr ""
-
-#: resources/ui/settings.ui:6903
-msgid "Pick Trace Color"
-msgstr ""
-
-#: resources/ui/settings.ui:6993 resources/ui/settings.ui:7070
+#: resources/ui/settings.ui:3961 resources/ui/settings.ui:4068
 msgid "Trace Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:7010
+#: resources/ui/settings.ui:3971
 msgid "The trace is the connecting line between selected menu items."
 msgstr ""
 
-#: resources/ui/settings.ui:7036
+#: resources/ui/settings.ui:3988
+msgid "Thickness"
+msgstr ""
+
+#: resources/ui/settings.ui:3999
+msgid "Color"
+msgstr ""
+
+#: resources/ui/settings.ui:4040
+msgid "Pick Trace Color"
+msgstr ""
+
+#: resources/ui/settings.ui:4052
 msgid "Minimum Segment Length"
 msgstr ""
 
-#: resources/ui/settings.ui:7110
+#: resources/ui/settings.ui:4098 resources/ui/settings.ui:4451
+msgid "Advanced Settings"
+msgstr ""
+
+#: resources/ui/settings.ui:4108
+msgid "These settings are independent of the presets."
+msgstr ""
+
+#: resources/ui/settings.ui:4127
 msgid "Minimum Stroke Angle"
 msgstr ""
 
-#: resources/ui/settings.ui:7122
+#: resources/ui/settings.ui:4137
 msgid "Smaller turns will not lead to selections."
 msgstr ""
 
-#: resources/ui/settings.ui:7199
+#: resources/ui/settings.ui:4174
 msgid "Minimum Stroke Length"
 msgstr ""
 
-#: resources/ui/settings.ui:7211
+#: resources/ui/settings.ui:4184
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/settings.ui:7290
+#: resources/ui/settings.ui:4223
 msgid "Jitter Threshold"
 msgstr ""
 
-#: resources/ui/settings.ui:7302
+#: resources/ui/settings.ui:4233
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/settings.ui:7380
+#: resources/ui/settings.ui:4271
 msgid "Selection Timeout"
 msgstr ""
 
-#: resources/ui/settings.ui:7392
+#: resources/ui/settings.ui:4281
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
 msgstr ""
 
-#: resources/ui/settings.ui:7482
+#: resources/ui/settings.ui:4320
 msgid "Experimental Hover Mode"
 msgstr ""
 
-#: resources/ui/settings.ui:7494
+#: resources/ui/settings.ui:4330
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
 msgstr ""
 
-#: resources/ui/settings.ui:7522 resources/ui/settings.ui:7793
-msgid "Advanced Settings"
-msgstr ""
-
-#: resources/ui/settings.ui:7539
-msgid "These settings are independent of the presets."
-msgstr ""
-
-#: resources/ui/settings.ui:7580
+#: resources/ui/settings.ui:4353
 msgid "Show Screencast Mouse"
 msgstr ""
 
-#: resources/ui/settings.ui:7592
+#: resources/ui/settings.ui:4363
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
 msgstr ""
 
-#: resources/ui/settings.ui:7702
+#: resources/ui/settings.ui:4396
 msgid "Achievement Notifications"
 msgstr ""
 
-#: resources/ui/settings.ui:7714
+#: resources/ui/settings.ui:4406
 msgid "Show a notification whenever you complete an achievement."
 msgstr ""
 
-#: resources/ui/settings.ui:7852
-msgid "Presets"
+#: resources/ui/settings.ui:4472
+msgid "Load a Preset"
 msgstr ""
 
-#. Where presets are stored by default
-#: resources/ui/settings.ui:7877
-msgid "Load settings fom a file"
+#. Tooltip of the import-settings button.
+#: resources/ui/settings.ui:4484
+msgid "Import settings"
 msgstr ""
 
-#. Where presets are stored by default
-#: resources/ui/settings.ui:7898
-msgid "Save the current settings to a file"
+#. Text of the import-settings button.
+#. Text of the import-menu-configuration button.
+#: resources/ui/settings.ui:4498 resources/ui/settings.ui:4805
+#: src/prefs/MenuEditorPage.js:250
+msgid "Import"
 msgstr ""
 
-#: resources/ui/settings.ui:7929 resources/ui/settings.ui:8150
+#. Tooltip of the export-settings button.
+#: resources/ui/settings.ui:4508
+msgid "Export settings"
+msgstr ""
+
+#. Text of the export-settings button.
+#. Text of the export-menu-configuration button.
+#: resources/ui/settings.ui:4522 resources/ui/settings.ui:4828
+#: src/prefs/MenuEditorPage.js:184
+msgid "Export"
+msgstr ""
+
+#: resources/ui/settings.ui:4535 resources/ui/settings.ui:4842
 msgid "Open Live Preview Menu"
 msgstr ""
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: resources/ui/settings.ui:7955 resources/ui/settings.ui:8176
+#: resources/ui/settings.ui:4549 resources/ui/settings.ui:4856
 msgid "Live Preview"
 msgstr ""
 
-#. Caption of the settings page in the window's titlebar.
-#: resources/ui/settings.ui:7991
-msgid "Settings"
+#. Caption of the menu editor page in the window's titlebar.
+#: resources/ui/settings.ui:4578
+msgid "Menu Editor"
 msgstr ""
 
-#: resources/ui/settings.ui:8067
-msgid "Removes the selected item."
+#: resources/ui/settings.ui:4685
+msgid "Stash"
 msgstr ""
 
-#: resources/ui/settings.ui:8100
-msgid "Imports a menu configuration."
+#: resources/ui/settings.ui:4701
+msgid "Store items here and re-use them later."
 msgstr ""
 
-#: resources/ui/settings.ui:8121
-msgid "Exports the current menu configuration."
+#: resources/ui/settings.ui:4745
+msgid "Trash"
 msgstr ""
 
-#: resources/ui/settings.ui:8269 resources/ui/settings.ui:8306
+#: resources/ui/settings.ui:4761
+msgid "Drop items here."
+msgstr ""
+
+#: resources/ui/settings.ui:4791
+msgid "Import menu configuration"
+msgstr ""
+
+#: resources/ui/settings.ui:4814
+msgid "Export menu configuration"
+msgstr ""
+
+#: resources/ui/settings.ui:4909
 msgid "Name"
 msgstr "이름"
 
-#: resources/ui/settings.ui:8304 resources/ui/settings.ui:8305
-#: resources/ui/settings.ui:8402 resources/ui/settings.ui:8403
-msgid "Insert Emoji"
-msgstr ""
-
-#: resources/ui/settings.ui:8339 resources/ui/settings.ui:8404
+#: resources/ui/settings.ui:4927
 msgid "Icon"
 msgstr ""
 
-#: resources/ui/settings.ui:8352
+#: resources/ui/settings.ui:4933
 msgid "Can be an icon name, text, emoji or a file."
 msgstr ""
 
-#: resources/ui/settings.ui:8453 src/prefs/MenuEditorPage.js:370
+#: resources/ui/settings.ui:4977
 msgid "Fixed Angle"
 msgstr ""
 
-#: resources/ui/settings.ui:8466
+#: resources/ui/settings.ui:4983
 msgid "See tooltip for details."
 msgstr ""
 
-#: resources/ui/settings.ui:8489
+#: resources/ui/settings.ui:4993
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
 "if your muscles already learned the item's direction.\n"
-"\n"
-"However, there is a <b>restriction</b> on the fixed angles. Inside a menu "
-"the fixed angles must be monotonically increasing, that is each fixed angle "
-"must be larger than any previous fixed angle.\n"
-"\n"
-"In order to prevent weird behavior, <b>fixed angles will be removed</b> if "
-"an item is dragged to another position in the menu.\n"
-"\n"
-"<b>Use -1 to disable this feature</b>."
+"        \n"
+"        However, there is a <b>restriction</b> on the fixed angles. Inside a "
+"menu the fixed angles must be monotonically increasing, that is each fixed "
+"angle must be larger than any previous fixed angle.\n"
+"        \n"
+"        In order to prevent weird behavior, <b>fixed angles will be removed</"
+"b> if an item is dragged to another position in the menu.\n"
+"        \n"
+"        <b>Use -1 to disable this feature</b>."
 msgstr ""
 
-#: resources/ui/settings.ui:8547 src/common/actions/Shortcut.js:78
+#: resources/ui/settings.ui:5031 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
 msgstr ""
 
-#: resources/ui/settings.ui:8560
+#: resources/ui/settings.ui:5037
 msgid "This will open the menu."
 msgstr ""
 
-#: resources/ui/settings.ui:8600
+#: resources/ui/settings.ui:5055
 msgid "Open in Screen Center"
 msgstr ""
 
-#. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/settings.ui:8710
-msgid "Menu Editor"
+#. Caption of the achievements page in the window's titlebar.
+#: resources/ui/settings.ui:5116
+msgid "Achievements"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:8988
+#: resources/ui/settings.ui:5310
 msgid "In Progress"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:9016
+#: resources/ui/settings.ui:5324
 msgid "Completed"
 msgstr ""
 
-#: resources/ui/settings.ui:9069
+#: resources/ui/settings.ui:5352
 msgid "Reset all achievements."
-msgstr ""
-
-#. Caption of the achievements page in the window's titlebar.
-#: resources/ui/settings.ui:9098
-msgid "Achievements"
 msgstr ""
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
@@ -1164,16 +1141,38 @@ msgstr ""
 msgid "Consider becoming a sponsor of Fly-Pie."
 msgstr ""
 
+#: src/common/ConfigWidgetFactory.js:97 src/prefs/ImageChooserButton.js:39
+msgid "Select File"
+msgstr ""
+
+#: src/common/ConfigWidgetFactory.js:98 src/common/ConfigWidgetFactory.js:165
+#: src/prefs/ImageChooserButton.js:40 src/prefs/MenuEditorPage.js:183
+#: src/prefs/MenuEditorPage.js:249 src/prefs/SettingsPage.js:272
+#: src/prefs/SettingsPage.js:347
+msgid "Cancel"
+msgstr ""
+
+#: src/common/ConfigWidgetFactory.js:164
+msgid "Select Application"
+msgstr ""
+
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
-#: src/common/ConfigWidgetFactory.js:234 src/common/ConfigWidgetFactory.js:272
-#: src/prefs/MenuEditorPage.js:1180 src/prefs/MenuEditorPage.js:1199
+#: src/common/ConfigWidgetFactory.js:264 src/common/ConfigWidgetFactory.js:297
 msgid "Not bound."
 msgstr ""
 
-#: src/common/ConfigWidgetFactory.js:260
+#: src/common/ConfigWidgetFactory.js:287
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
+msgstr ""
+
+#. Translators: If some text is dragged to the menu editor, an insert-text action is
+#. created. This is the name of the newly created action, %s will be replaced by the
+#. text to insert.
+#: src/common/ItemRegistry.js:245
+#, javascript-format
+msgid "Insert: %s"
 msgstr ""
 
 #: src/extension/Background.js:95
@@ -1213,80 +1212,74 @@ msgstr ""
 msgid "Show Achievements"
 msgstr ""
 
-#: src/extension/DefaultMenu.js:27 src/prefs/ExampleMenu.js:26
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:28 src/prefs/ExampleMenu.js:26
 msgid "Example Menu"
 msgstr ""
 
-#: src/extension/DefaultMenu.js:34
-msgid "Sound"
-msgstr ""
-
-#: src/extension/DefaultMenu.js:38
-msgid "Play / Pause"
-msgstr ""
-
-#: src/extension/DefaultMenu.js:44
-msgid "Mute"
-msgstr ""
-
-#: src/extension/DefaultMenu.js:50
-msgid "Next Title"
-msgstr ""
-
-#: src/extension/DefaultMenu.js:57
-msgid "Previous Title"
-msgstr ""
-
-#: src/extension/DefaultMenu.js:66
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:36
 msgid "Window Management"
 msgstr ""
 
-#: src/extension/DefaultMenu.js:70
-msgid "Maximize Window"
-msgstr ""
-
-#: src/extension/DefaultMenu.js:76
-msgid "GNOME Shell"
-msgstr ""
-
-#: src/extension/DefaultMenu.js:80 src/prefs/ExampleMenu.js:265
-msgid "Up"
-msgstr ""
-
-#: src/extension/DefaultMenu.js:87
-msgid "Overview"
-msgstr ""
-
-#: src/extension/DefaultMenu.js:93 src/prefs/ExampleMenu.js:268
-msgid "Down"
-msgstr ""
-
-#: src/extension/DefaultMenu.js:100
-msgid "Show Apps"
-msgstr ""
-
-#: src/extension/DefaultMenu.js:108
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:41
 msgid "Open Windows"
 msgstr ""
 
-#: src/extension/DefaultMenu.js:113
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:54
 msgid "Close Window"
 msgstr ""
 
-#: src/extension/DefaultMenu.js:121 src/common/menus/Bookmarks.js:33
-msgid "Bookmarks"
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:62 src/prefs/ExampleMenu.js:266
+msgid "Right"
 msgstr ""
 
-#: src/extension/DefaultMenu.js:126
-msgid "Fly-Pie Settings"
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:70 src/prefs/ExampleMenu.js:269
+msgid "Left"
 msgstr ""
 
-#: src/extension/DefaultMenu.js:131 src/common/menus/Favorites.js:43
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:78
+msgid "Maximize Window"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:91 src/common/menus/Favorites.js:43
 msgid "Favorites"
 msgstr ""
 
-#: src/extension/DefaultMenu.js:132 src/common/menus/System.js:46
-msgid "System"
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:99
+msgid "Sound"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:104
+msgid "Next Title"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:112
+msgid "Play / Pause"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:120
+msgid "Mute"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:128
+msgid "Previous Title"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:141
+msgid "Fly-Pie Settings"
 msgstr ""
 
 #: src/prefs/AchievementsPage.js:117
@@ -1733,16 +1726,16 @@ msgstr ""
 msgid "Arrows"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:266
-msgid "Right"
+#: src/prefs/ExampleMenu.js:265
+msgid "Up"
 msgstr ""
 
 #: src/prefs/ExampleMenu.js:267
 msgid "Twisted"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:269
-msgid "Left"
+#: src/prefs/ExampleMenu.js:268
+msgid "Down"
 msgstr ""
 
 #. Translators: An emoji category.
@@ -1770,58 +1763,63 @@ msgstr ""
 msgid "Baby"
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:214
+#: src/prefs/ImageChooserButton.js:88
+msgid "(None)"
+msgstr ""
+
+#: src/prefs/MenuEditor.js:258
+msgid "Not Bound"
+msgstr ""
+
+#. Translators: This is shown as an in-app notification when the user
+#. attempts to drag an action in the menu editor to the menu overview.
+#. Translators: This is shown as an in-app notification when the user attempts
+#. to drag an action in the menu editor to the menu overview.
+#: src/prefs/MenuEditor.js:676 src/prefs/MenuEditorPage.js:792
+msgid "Actions cannot be turned into toplevel menus."
+msgstr ""
+
+#. Translators: This is shown as an in-app notification when the user
+#. attempts to drag external stuff to the menu editor's overview.
+#: src/prefs/MenuEditor.js:695
+msgid "You can only create new Action items inside of Custom Menus."
+msgstr ""
+
+#: src/prefs/MenuEditorPage.js:164
 msgid "Export Menu Configuration"
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:223 src/prefs/MenuEditorPage.js:288
-#: src/prefs/SettingsPage.js:298 src/prefs/SettingsPage.js:373
+#: src/prefs/MenuEditorPage.js:172 src/prefs/MenuEditorPage.js:238
+#: src/prefs/SettingsPage.js:261 src/prefs/SettingsPage.js:336
 msgid "JSON Files"
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:230 src/prefs/MenuEditorPage.js:295
-#: src/prefs/SettingsPage.js:305 src/prefs/SettingsPage.js:380
+#: src/prefs/MenuEditorPage.js:179 src/prefs/MenuEditorPage.js:245
+#: src/prefs/SettingsPage.js:268 src/prefs/SettingsPage.js:343
 msgid "All Files"
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:234 src/prefs/MenuEditorPage.js:299
-#: src/prefs/SettingsPage.js:309 src/prefs/SettingsPage.js:384
-msgid "Cancel"
-msgstr ""
-
-#: src/prefs/MenuEditorPage.js:235
-msgid "Export"
-msgstr ""
-
-#: src/prefs/MenuEditorPage.js:263
+#: src/prefs/MenuEditorPage.js:213
 msgid "Could not export the menu configuration."
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:280
+#: src/prefs/MenuEditorPage.js:230
 msgid "Import Menu Configuration"
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:300
-msgid "Import"
-msgstr ""
-
-#: src/prefs/MenuEditorPage.js:325
+#: src/prefs/MenuEditorPage.js:276
 msgid "Could not import the menu configuration."
-msgstr ""
-
-#: src/prefs/MenuEditorPage.js:355
-msgid "Menu Structure"
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:963
+#: src/prefs/MenuEditorPage.js:324
 msgid "You should try to have no more than twelve items in your menus."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:966
+#: src/prefs/MenuEditorPage.js:327
 msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
@@ -1829,28 +1827,28 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:969
+#: src/prefs/MenuEditorPage.js:330
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:973
+#: src/prefs/MenuEditorPage.js:334
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:977
+#: src/prefs/MenuEditorPage.js:338
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:981
+#: src/prefs/MenuEditorPage.js:342
 msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
@@ -1858,7 +1856,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:984
+#: src/prefs/MenuEditorPage.js:345
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
@@ -1866,13 +1864,22 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:987
+#: src/prefs/MenuEditorPage.js:348
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:990
+#: src/prefs/MenuEditorPage.js:351
+#, javascript-format
+msgid ""
+"It is possible to open a menu with a terminal command. You can read more on "
+"<a href=\"%s\">Github</a>."
+msgstr ""
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:357
 msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
@@ -1880,76 +1887,73 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:993
+#: src/prefs/MenuEditorPage.js:360
 msgid ""
-"You can copy menu items by holding the Ctrl key while dragging them to "
-"another location."
+"On Wayland, you can copy menu items by holding the Ctrl key while dragging "
+"them to another location."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:996
+#: src/prefs/MenuEditorPage.js:363
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:1002
+#: src/prefs/MenuEditorPage.js:369
 #, javascript-format
 msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
 "</a>"
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:1096
-msgid "Delete the selected item?"
+#. Translators: The left-most item of the menu editor bread crumbs.
+#: src/prefs/MenuEditorPage.js:809
+msgid "All Menus"
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:1097
-msgid "This cannot be undone!"
-msgstr ""
-
-#: src/prefs/SettingsPage.js:289
+#: src/prefs/SettingsPage.js:253
 msgid "Save Preset"
 msgstr ""
 
-#: src/prefs/SettingsPage.js:310
+#: src/prefs/SettingsPage.js:273
 msgid "Save"
 msgstr ""
 
-#: src/prefs/SettingsPage.js:334
+#: src/prefs/SettingsPage.js:297
 msgid "You should not store the preset in the extension directory!"
 msgstr ""
 
 #. Translators: "It" refers to the preset if stored in the extension's
 #. directory.
-#: src/prefs/SettingsPage.js:338
+#: src/prefs/SettingsPage.js:301
 msgid ""
 "Here it will be deleted whenever Fly-Pie is updated. It has been saved "
 "anyways, but please consider to store it in a safer place!"
 msgstr ""
 
-#: src/prefs/SettingsPage.js:365
+#: src/prefs/SettingsPage.js:328
 msgid "Load Preset"
 msgstr ""
 
-#: src/prefs/SettingsPage.js:385
+#: src/prefs/SettingsPage.js:348
 msgid "Load"
 msgstr ""
 
-#: src/prefs/SettingsPage.js:402
+#: src/prefs/SettingsPage.js:365
 msgid "Failed to load preset!"
 msgstr ""
 
 #. Translators: Do not translate '%d'. ms = milliseconds
-#: src/prefs/TutorialPage.js:168
+#: src/prefs/TutorialPage.js:167
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
 msgstr ""
 
 #. Translators: Do not translate '%d'. ms = milliseconds
-#: src/prefs/TutorialPage.js:173
+#: src/prefs/TutorialPage.js:172
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
 msgstr ""
@@ -2097,6 +2101,10 @@ msgstr ""
 msgid "URI"
 msgstr ""
 
+#: src/common/menus/Bookmarks.js:33
+msgid "Bookmarks"
+msgstr ""
+
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Bookmarks.js:40
@@ -2116,17 +2124,14 @@ msgstr ""
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:36
-msgid "This can contain actions and other menus."
+msgid "This can contain custom actions and other menus."
 msgstr ""
 
 #: src/common/menus/CustomMenu.js:40
 msgid ""
 "A <b>Custom Menu</b> can contain any number of actions and submenus. "
 "However, for precise item selection, a maximum number of twelve items is "
-"recommended.\n"
-"When used as top-level menu, it can be opened with a key combination. It is "
-"also possible to open a menu with a terminal command. You can read more on "
-"<a href=\"https://github.com/Schneegans/Fly-Pie\">Github</a>."
+"recommended."
 msgstr ""
 
 #: src/common/menus/Devices.js:33
@@ -2250,16 +2255,20 @@ msgstr ""
 msgid "See Tooltip for details."
 msgstr ""
 
-#: src/common/menus/RunningApps.js:124
+#: src/common/menus/RunningApps.js:123
 msgid "Active Workspace Only"
 msgstr ""
 
-#: src/common/menus/RunningApps.js:125
+#: src/common/menus/RunningApps.js:124
 msgid "Group by Application"
 msgstr ""
 
-#: src/common/menus/RunningApps.js:126
+#: src/common/menus/RunningApps.js:125
 msgid "Peek on Hover"
+msgstr ""
+
+#: src/common/menus/System.js:46
+msgid "System"
 msgstr ""
 
 #. Translators: Please keep this short.
