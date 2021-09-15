@@ -1063,12 +1063,6 @@ var MenuEditorPage = class MenuEditorPage {
     // Load the menu configuration in the JSON format.
     this._stashedConfigs = JSON.parse(this._settings.get_string('stashed-items'));
 
-    for (let i = 0; i < this._stashedConfigs.length; i++) {
-
-      // Make sure that all fields of the menu config are initialized to sane defaults.
-      ItemRegistry.normalizeConfig(this._stashedConfigs[i]);
-    }
-
     // And all stashed items to the stash widget.
     for (let i = 0; i < this._stashedConfigs.length; i++) {
       this._addStashWidget(this._stashedConfigs[i]);
