@@ -96,7 +96,7 @@ var menu = {
       const tooltip = _(
           'You can use this to filter the displayed windows. Regular expressions are supported: Use a simple string like "Fire" to show only windows whose titles contain "Fire" (e.g. Firefox). Use "Fire|Water" to match either "Fire" or "Water". A negation would be "^(?!.*Fire)" to match anything but "Fire". Remember to use the live preview to instantly see the results!');
       const regexEntry = ConfigWidgetFactory.createTextWidget(
-          _('Window Filter'), _('See Tooltip for details.'), tooltip, data.nameRegex,
+          _('Window Filter'), _('See tooltip for details.'), tooltip, data.nameRegex,
           text => {
             nameRegex = text;
             _updateData();
