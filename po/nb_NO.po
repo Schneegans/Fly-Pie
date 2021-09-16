@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-16 21:04+0200\n"
+"POT-Creation-Date: 2021-09-16 21:15+0200\n"
 "PO-Revision-Date: 2021-05-08 05:39+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
@@ -767,132 +767,106 @@ msgstr ""
 msgid "Load a Preset"
 msgstr ""
 
-#. Tooltip of the import-settings button.
-#: resources/ui/settings.ui:4453
-msgid "Import settings"
-msgstr ""
-
 #. Text of the import-settings button.
 #. Text of the import-menu-configuration button.
-#: resources/ui/settings.ui:4467 resources/ui/settings.ui:4774
+#: resources/ui/settings.ui:4466 resources/ui/settings.ui:4770
 #: src/prefs/MenuEditorPage.js:250
 msgid "Import"
 msgstr "Importer"
 
-#. Tooltip of the export-settings button.
-#: resources/ui/settings.ui:4477
-msgid "Export settings"
-msgstr ""
-
 #. Text of the export-settings button.
 #. Text of the export-menu-configuration button.
-#: resources/ui/settings.ui:4491 resources/ui/settings.ui:4797
+#: resources/ui/settings.ui:4489 resources/ui/settings.ui:4792
 #: src/prefs/MenuEditorPage.js:184
 msgid "Export"
 msgstr "Eksporter"
 
-#: resources/ui/settings.ui:4504 resources/ui/settings.ui:4811
-msgid "Open Live Preview Menu"
-msgstr ""
-
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: resources/ui/settings.ui:4518 resources/ui/settings.ui:4825
+#: resources/ui/settings.ui:4515 resources/ui/settings.ui:4819
 msgid "Live Preview"
 msgstr "Sanntidsforhåndsvisning"
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/settings.ui:4547
+#: resources/ui/settings.ui:4544
 msgid "Menu Editor"
 msgstr "Menyredigerer"
 
-#: resources/ui/settings.ui:4654
+#: resources/ui/settings.ui:4651
 msgid "Stash"
 msgstr ""
 
-#: resources/ui/settings.ui:4670
+#: resources/ui/settings.ui:4667
 msgid "Store items here and re-use them later."
 msgstr ""
 
-#: resources/ui/settings.ui:4714
+#: resources/ui/settings.ui:4711
 msgid "Trash"
 msgstr ""
 
-#: resources/ui/settings.ui:4730
+#: resources/ui/settings.ui:4727
 msgid "Drop items here."
 msgstr ""
 
-#: resources/ui/settings.ui:4760
-msgid "Import menu configuration"
-msgstr ""
-
-#: resources/ui/settings.ui:4783
-msgid "Export menu configuration"
-msgstr ""
-
-#: resources/ui/settings.ui:4878
+#: resources/ui/settings.ui:4872
 msgid "Name"
 msgstr "Navn"
 
-#: resources/ui/settings.ui:4896
+#: resources/ui/settings.ui:4890
 msgid "Icon"
 msgstr "Ikon"
 
-#: resources/ui/settings.ui:4902
+#: resources/ui/settings.ui:4896
 msgid "Can be an icon name, text, emoji or a file."
 msgstr "Kan være et ikonnavn, tekst, emoji, eller en fil."
 
-#: resources/ui/settings.ui:4946
+#: resources/ui/settings.ui:4940
 msgid "Fixed Angle"
 msgstr "Fast vinkel"
 
-#: resources/ui/settings.ui:4952
+#: resources/ui/settings.ui:4946
 msgid "See tooltip for details."
 msgstr "Se verktøytips for detaljer."
 
-#: resources/ui/settings.ui:4962
+#: resources/ui/settings.ui:4956
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
-"if your muscles already learned the item's direction.\n"
-"        \n"
-"        However, there is a <b>restriction</b> on the fixed angles. Inside a "
-"menu the fixed angles must be monotonically increasing, that is each fixed "
-"angle must be larger than any previous fixed angle.\n"
-"        \n"
-"        In order to prevent weird behavior, <b>fixed angles will be removed</"
-"b> if an item is dragged to another position in the menu.\n"
-"        \n"
-"        <b>Use -1 to disable this feature</b>."
+"if your muscles already learned the item's direction. However, there is a "
+"restriction on the fixed angles. Inside a menu the fixed angles must be "
+"monotonically increasing, that is each fixed angle must be larger than any "
+"previous fixed angle. In order to prevent weird behavior, fixed angles will "
+"be removed if an item is dragged to another position in the menu. Use -1 to "
+"disable this feature."
 msgstr ""
 
-#: resources/ui/settings.ui:5000 src/common/actions/Shortcut.js:78
+#: resources/ui/settings.ui:4988 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
 msgstr "Snarvei"
 
-#: resources/ui/settings.ui:5006
+#: resources/ui/settings.ui:4994
 msgid "This will open the menu."
 msgstr "Dette åpner menyen."
 
-#: resources/ui/settings.ui:5024
+#: resources/ui/settings.ui:5012
 msgid "Open in Screen Center"
 msgstr "Åpne i skjermsenter"
 
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/settings.ui:5085
+#: resources/ui/settings.ui:5073
 msgid "Achievements"
 msgstr "Oppnåelser"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:5279
+#: resources/ui/settings.ui:5267
 msgid "In Progress"
 msgstr "Underveis"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:5293
+#: resources/ui/settings.ui:5281
 msgid "Completed"
 msgstr "Fullført"
 
-#: resources/ui/settings.ui:5321
+#: resources/ui/settings.ui:5309
 msgid "Reset all achievements."
 msgstr "Tilbakestill alle oppnåelser."
 
