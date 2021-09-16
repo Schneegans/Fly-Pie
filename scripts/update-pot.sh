@@ -36,7 +36,7 @@ xgettext --from-code=UTF-8 \
          --package-name="Fly-Pie" \
          --package-version="6" \
          --output=po/flypie.pot \
-         resources/ui/settings.ui ./*/*/*.js ./*/*/*/*.js 
+         resources/ui/*.ui ./*/*/*.js ./*/*/*/*.js 
 
 # Replace some lines of the header with our own.
 sed -i '1s/.*/# <LANGUAGE> translation for the Fly-Pie GNOME Shell Extension./' po/flypie.pot
