@@ -4450,7 +4450,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                             <child>
                               <object class="GtkButton" id="load-preset-button">
-                                <property name="tooltip_text" translatable="yes" comments="Tooltip of the import-settings button.">Import settings</property>
                                 <property name="child">
                                   <object class="GtkBox">
                                     <property name="margin_start">8</property>
@@ -4474,7 +4473,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                             <child>
                               <object class="GtkButton" id="save-preset-button">
-                                <property name="tooltip_text" translatable="yes" comments="Tooltip of the export-settings button.">Export settings</property>
                                 <property name="child">
                                   <object class="GtkBox">
                                     <property name="margin_start">8</property>
@@ -4501,7 +4499,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                         <child type="end">
                           <object class="GtkButton" id="preview-button">
-                            <property name="tooltip_text" translatable="yes">Open Live Preview Menu</property>
                             <property name="child">
                               <object class="GtkBox">
                                 <property name="margin_start">8</property>
@@ -4757,7 +4754,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </style>
                                     <child>
                                       <object class="GtkButton" id="import-menu-config-button">
-                                        <property name="tooltip_text" translatable="yes">Import menu configuration</property>
                                         <property name="child">
                                           <object class="GtkBox">
                                             <property name="margin_start">8</property>
@@ -4780,7 +4776,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="export-menu-config-button">
-                                        <property name="tooltip_text" translatable="yes">Export menu configuration</property>
                                         <property name="child">
                                           <object class="GtkBox">
                                             <property name="margin_start">8</property>
@@ -4808,7 +4803,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                                   <object class="GtkButton" id="preview-menu-button">
                                     <property name="sensitive">0</property>
-                                    <property name="tooltip_text" translatable="yes">Open Live Preview Menu</property>
                                     <property name="child">
                                       <object class="GtkBox">
                                         <property name="margin_start">8</property>
@@ -4959,13 +4953,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                         </child>
                                         <child>
                                           <object class="GtkSpinButton">
-                                            <property name="tooltip_markup" translatable="yes">Fixed angles can be used to ensure that an item remains at the same position even if other items are added or removed. This way you can edit a menu even if your muscles already learned the item&apos;s direction.
-        
-        However, there is a &lt;b&gt;restriction&lt;/b&gt; on the fixed angles. Inside a menu the fixed angles must be monotonically increasing, that is each fixed angle must be larger than any previous fixed angle.
-        
-        In order to prevent weird behavior, &lt;b&gt;fixed angles will be removed&lt;/b&gt; if an item is dragged to another position in the menu.
-        
-        &lt;b&gt;Use -1 to disable this feature&lt;/b&gt;.</property>
+                                            <property name="tooltip_text" translatable="yes">Fixed angles can be used to ensure that an item remains at the same position even if other items are added or removed. This way you can edit a menu even if your muscles already learned the item&apos;s direction. However, there is a restriction on the fixed angles. Inside a menu the fixed angles must be monotonically increasing, that is each fixed angle must be larger than any previous fixed angle. In order to prevent weird behavior, fixed angles will be removed if an item is dragged to another position in the menu. Use -1 to disable this feature.</property>
                                             <property name="text">-1</property>
                                             <property name="adjustment">item-angle</property>
                                             <property name="numeric">1</property>
