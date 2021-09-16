@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 21:10+0200\n"
+"POT-Creation-Date: 2021-09-16 21:04+0200\n"
 "PO-Revision-Date: 2021-05-08 05:39+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
@@ -18,6 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.7-dev\n"
+
+#: resources/ui/copyValueButton.ui:6
+msgid "Copy left value to right side"
+msgstr "Kopier venstre verdi til høyre side"
+
+#: resources/ui/iconSelectDialog.ui:14 src/common/ConfigWidgetFactory.js:98
+#: src/common/ConfigWidgetFactory.js:165 src/prefs/ImageChooserButton.js:40
+#: src/prefs/MenuEditorPage.js:183 src/prefs/MenuEditorPage.js:249
+#: src/prefs/SettingsPage.js:272 src/prefs/SettingsPage.js:347
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: resources/ui/iconSelectDialog.ui:19
+msgid "Select Icon"
+msgstr ""
+
+#. Page title of the icon-select-dialog.
+#: resources/ui/iconSelectDialog.ui:44
+msgid "Icon Theme"
+msgstr "Ikondrakt"
+
+#. Page title of the icon-select-dialog.
+#: resources/ui/iconSelectDialog.ui:106
+msgid "Custom Icon"
+msgstr "Egendefinert ikon"
+
+#: resources/ui/imageChooserButton.ui:16 src/prefs/ImageChooserButton.js:88
+msgid "(None)"
+msgstr ""
 
 #. A kind of animation.
 #: resources/ui/settings.ui:19
@@ -163,40 +192,32 @@ msgstr ""
 "<b>Handlinger</b>\n"
 "Kan legges til egendefinerte menyer."
 
-#: resources/ui/settings.ui:764
-msgid "Standard"
-msgstr ""
-
-#: resources/ui/settings.ui:802
+#. Tooltip of the generate-a-random-preset button
+#: resources/ui/settings.ui:785
 msgid "Initializes most settings to random values."
 msgstr ""
 
-#: resources/ui/settings.ui:814
+#: resources/ui/settings.ui:797
 msgid "Generate a Random Preset"
 msgstr ""
 
-#. Refers to reward presets
 #: resources/ui/settings.ui:828
-msgid "Rewards"
-msgstr ""
-
-#: resources/ui/settings.ui:859
 #, fuzzy
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
 msgstr "Fly-Pie krever at animasjoner er påslått i GNOME Shell."
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
-#: resources/ui/settings.ui:864
+#: resources/ui/settings.ui:833
 #, fuzzy
 msgid "Enable Animations"
 msgstr "Skru på animasjoner"
 
 #. Caption of the tutorial page in the window's titlebar.
-#: resources/ui/settings.ui:916
+#: resources/ui/settings.ui:885
 msgid "Tutorial"
 msgstr "Veiledning"
 
-#: resources/ui/settings.ui:950
+#: resources/ui/settings.ui:919
 #, fuzzy
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
@@ -208,7 +229,7 @@ msgstr ""
 "hvordan du bruker det mest effektivt. Du kan åpne en testmeny med den store "
 "knappen nedenfor."
 
-#: resources/ui/settings.ui:961
+#: resources/ui/settings.ui:930
 #, fuzzy
 msgid ""
 "• Use your <b>left mouse button to select items</b>.\n"
@@ -225,18 +246,18 @@ msgstr ""
 "Når du er klar, kan du trykke på <b>Neste</b> for å ta rede på detaljene."
 
 #. The text of the big tutorial button.
-#: resources/ui/settings.ui:981 resources/ui/settings.ui:1064
-#: resources/ui/settings.ui:1152 resources/ui/settings.ui:1297
-#: resources/ui/settings.ui:1385
+#: resources/ui/settings.ui:950 resources/ui/settings.ui:1033
+#: resources/ui/settings.ui:1121 resources/ui/settings.ui:1266
+#: resources/ui/settings.ui:1354
 msgid "<big><b>Open the example menu!</b></big>"
 msgstr "<big><b>Åpne eksempelmenyen.</b></big>"
 
 #. This is a heading.
-#: resources/ui/settings.ui:1013
+#: resources/ui/settings.ui:982
 msgid "You can click anywhere!"
 msgstr "Du kan klikke hvor som helst!"
 
-#: resources/ui/settings.ui:1032
+#: resources/ui/settings.ui:1001
 #, fuzzy
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
@@ -245,7 +266,7 @@ msgstr ""
 "Det spiller ingen rolle om du klikker direkte på et element eller på kanten "
 "av skjermen, så lenge pekeren forblir i elementets kile."
 
-#: resources/ui/settings.ui:1044
+#: resources/ui/settings.ui:1013
 #, fuzzy
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
@@ -264,11 +285,11 @@ msgstr ""
 "Klikk <b>Neste</b> for en øvelsesøkt."
 
 #. This is a heading.
-#: resources/ui/settings.ui:1096
+#: resources/ui/settings.ui:1065
 msgid "Practice Session I"
 msgstr "Øvingsøkt I"
 
-#: resources/ui/settings.ui:1106
+#: resources/ui/settings.ui:1075
 #, fuzzy
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
@@ -285,36 +306,36 @@ msgstr ""
 "Pie sitt markeringsmodus."
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1121
+#: resources/ui/settings.ui:1090
 msgid "<big>Last selection time: <b>- ms</b></big>"
 msgstr "<big>Siste utvalgstid: <b>- ms</b></big>"
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1133
+#: resources/ui/settings.ui:1102
 msgid "<big>Best selection time: <b>- ms</b></big>"
 msgstr "<big>Beste utvalgstid: <b>- ms</b></big>"
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1181
+#: resources/ui/settings.ui:1150
 msgid "Unlocked at less than 3000 ms"
 msgstr "Opplåst på mindre enn 3000 ms"
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1201
+#: resources/ui/settings.ui:1170
 msgid "Unlocked at less than 2000 ms"
 msgstr "Opplåst på mindre enn 2000 ms"
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1222 resources/ui/settings.ui:1413
+#: resources/ui/settings.ui:1191 resources/ui/settings.ui:1382
 msgid "Unlocked at less than 1000 ms"
 msgstr "Opplåst på mindre enn 1000 ms"
 
 #. This is a heading.
-#: resources/ui/settings.ui:1249
+#: resources/ui/settings.ui:1218
 msgid "The Marking Mode of Fly-Pie"
 msgstr "Markeringsmodus for Fly-Pie"
 
-#: resources/ui/settings.ui:1268
+#: resources/ui/settings.ui:1237
 msgid ""
 "The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
@@ -325,7 +346,7 @@ msgstr ""
 "element. Så snart du tar en pause eller lager en sving vil elementet bli "
 "valgt."
 
-#: resources/ui/settings.ui:1279
+#: resources/ui/settings.ui:1248
 msgid ""
 "Try remembering the path to an item. Open the menu and <b>draw the path with "
 "your mouse</b>. You can start with individual segments of the path, put you "
@@ -337,11 +358,11 @@ msgid ""
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/settings.ui:1329
+#: resources/ui/settings.ui:1298
 msgid "Practice Session II"
 msgstr "Øvingsøkt II"
 
-#: resources/ui/settings.ui:1339
+#: resources/ui/settings.ui:1308
 #, fuzzy
 msgid ""
 "Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
@@ -358,22 +379,22 @@ msgstr ""
 "slutt."
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1433
+#: resources/ui/settings.ui:1402
 msgid "Unlocked at less than 750 ms"
 msgstr "Opplåst på mindre enn 750 ms"
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1454
+#: resources/ui/settings.ui:1423
 msgid "Unlocked at less than 500 ms"
 msgstr "Opplåst på mindre enn 500 ms"
 
 #. The user finished the tutorial. Yay!
-#: resources/ui/settings.ui:1488
+#: resources/ui/settings.ui:1457
 msgid "Congratulations!"
 msgstr "Gratulerer!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
-#: resources/ui/settings.ui:1500
+#: resources/ui/settings.ui:1469
 msgid ""
 "Congratulations! If you managed to unlock most of the medals, you will be "
 "using Fly-Pie like a master Pielot!\n"
@@ -392,226 +413,218 @@ msgid ""
 msgstr ""
 
 #. Button for tutorial navigation. Goes back one page.
-#: resources/ui/settings.ui:1545
+#: resources/ui/settings.ui:1514
 msgid "Previous"
 msgstr "Forrige"
 
 #. Button for tutorial navigation. Goes to the next page.
-#: resources/ui/settings.ui:1602
+#: resources/ui/settings.ui:1571
 msgid "Next"
 msgstr "Neste"
 
 #. Caption of the settings page in the window's titlebar.
-#: resources/ui/settings.ui:1638
+#: resources/ui/settings.ui:1607
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: resources/ui/settings.ui:1671 resources/ui/settings.ui:1869
+#: resources/ui/settings.ui:1640 resources/ui/settings.ui:1838
 msgid "Global Appearance Settings"
 msgstr ""
 
-#: resources/ui/settings.ui:1681
+#: resources/ui/settings.ui:1650
 msgid "These settings affect all menu items."
 msgstr "Disse innstillingene har innvirkning på alle menyelementer."
 
-#: resources/ui/settings.ui:1699
+#: resources/ui/settings.ui:1668
 msgid "Animation Duration"
 msgstr "Animasjonsvarighet"
 
-#: resources/ui/settings.ui:1713
+#: resources/ui/settings.ui:1682
 msgid "Global Scaling"
 msgstr ""
 
 #. Please keep this short!
-#: resources/ui/settings.ui:1723
+#: resources/ui/settings.ui:1692
 #, fuzzy
 msgid "Independent of the preset."
 msgstr "Uavhengig av forhåndsinnstillingen."
 
-#: resources/ui/settings.ui:1773
+#: resources/ui/settings.ui:1742
 msgid "Font"
 msgstr "Skrift"
 
-#: resources/ui/settings.ui:1783
+#: resources/ui/settings.ui:1752 resources/ui/settings.ui:1785
 msgid "Text Color"
 msgstr "Tekstfarge"
 
-#: resources/ui/settings.ui:1794 resources/ui/settings.ui:2409
-#: resources/ui/settings.ui:3110 resources/ui/settings.ui:3346
+#: resources/ui/settings.ui:1763 resources/ui/settings.ui:1798
+#: resources/ui/settings.ui:2378 resources/ui/settings.ui:3079
+#: resources/ui/settings.ui:3315
 msgid "Background Color"
 msgstr "Bakgrunnsfarge"
 
-#: resources/ui/settings.ui:1816
-msgid "Pick Text Color"
-msgstr "Velg tekstfarge"
-
-#: resources/ui/settings.ui:1829
-msgid "Pick Background Color"
-msgstr "Velg bakgrunnsfarge"
-
-#: resources/ui/settings.ui:1858
+#: resources/ui/settings.ui:1827
 msgid "Animation Mode"
 msgstr "Animasjonsmodus"
 
-#: resources/ui/settings.ui:1901 resources/ui/settings.ui:2511
+#: resources/ui/settings.ui:1870 resources/ui/settings.ui:2480
 msgid "Center Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:1911
+#: resources/ui/settings.ui:1880
 msgid "The center element shows the currently hovered child's name."
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:1927
+#: resources/ui/settings.ui:1896
 msgid "With Hovered Child"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:1940
+#: resources/ui/settings.ui:1909
 msgid "Without Hovered Child"
 msgstr ""
 
-#: resources/ui/settings.ui:1970 resources/ui/settings.ui:2904
-#: resources/ui/settings.ui:3461
+#: resources/ui/settings.ui:1939 resources/ui/settings.ui:2873
+#: resources/ui/settings.ui:3430
 msgid "Size"
 msgstr "Størrelse"
 
-#: resources/ui/settings.ui:2002 resources/ui/settings.ui:2206
-#, fuzzy
-msgid "Pick Center Item Color"
-msgstr "Velg senterelementsfarge"
+#: resources/ui/settings.ui:1971 resources/ui/settings.ui:2175
+msgid "Center Item Color"
+msgstr ""
 
-#: resources/ui/settings.ui:2022 resources/ui/settings.ui:2073
-#: resources/ui/settings.ui:2226 resources/ui/settings.ui:2277
-#: resources/ui/settings.ui:2652 resources/ui/settings.ui:2713
-#: resources/ui/settings.ui:2807 resources/ui/settings.ui:2878
+#: resources/ui/settings.ui:1991 resources/ui/settings.ui:2042
+#: resources/ui/settings.ui:2195 resources/ui/settings.ui:2246
+#: resources/ui/settings.ui:2621 resources/ui/settings.ui:2682
+#: resources/ui/settings.ui:2776 resources/ui/settings.ui:2847
 msgid "Saturation"
 msgstr "Metning"
 
-#: resources/ui/settings.ui:2039 resources/ui/settings.ui:2083
-#: resources/ui/settings.ui:2243 resources/ui/settings.ui:2287
-#: resources/ui/settings.ui:2669 resources/ui/settings.ui:2703
-#: resources/ui/settings.ui:2824 resources/ui/settings.ui:2868
+#: resources/ui/settings.ui:2008 resources/ui/settings.ui:2052
+#: resources/ui/settings.ui:2212 resources/ui/settings.ui:2256
+#: resources/ui/settings.ui:2638 resources/ui/settings.ui:2672
+#: resources/ui/settings.ui:2793 resources/ui/settings.ui:2837
 msgid "Luminance"
 msgstr "Luminans"
 
-#: resources/ui/settings.ui:2056 resources/ui/settings.ui:2093
-#: resources/ui/settings.ui:2260 resources/ui/settings.ui:2297
-#: resources/ui/settings.ui:2686 resources/ui/settings.ui:2723
-#: resources/ui/settings.ui:2841 resources/ui/settings.ui:2858
+#: resources/ui/settings.ui:2025 resources/ui/settings.ui:2062
+#: resources/ui/settings.ui:2229 resources/ui/settings.ui:2266
+#: resources/ui/settings.ui:2655 resources/ui/settings.ui:2692
+#: resources/ui/settings.ui:2810 resources/ui/settings.ui:2827
 msgid "Opacity"
 msgstr "Dekkevne"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
-#: resources/ui/settings.ui:2114 resources/ui/settings.ui:2178
-#: resources/ui/settings.ui:2597 resources/ui/settings.ui:2752
-#: resources/ui/settings.ui:3360 resources/ui/settings.ui:3412
+#: resources/ui/settings.ui:2083 resources/ui/settings.ui:2147
+#: resources/ui/settings.ui:2566 resources/ui/settings.ui:2721
+#: resources/ui/settings.ui:3329 resources/ui/settings.ui:3381
 msgid "Fixed"
 msgstr "Fast"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
-#: resources/ui/settings.ui:2121 resources/ui/settings.ui:2185
-#: resources/ui/settings.ui:2604 resources/ui/settings.ui:2759
+#: resources/ui/settings.ui:2090 resources/ui/settings.ui:2154
+#: resources/ui/settings.ui:2573 resources/ui/settings.ui:2728
 msgid "Auto"
 msgstr "Auto"
 
-#: resources/ui/settings.ui:2355 resources/ui/settings.ui:3067
+#: resources/ui/settings.ui:2324 resources/ui/settings.ui:3036
 msgid "Icon Opacity"
 msgstr "Ikon-dekkevne"
 
-#: resources/ui/settings.ui:2398 resources/ui/settings.ui:3161
+#: resources/ui/settings.ui:2367 resources/ui/settings.ui:3130
 #, fuzzy
 msgid "Icon Scale"
 msgstr "Ikonstørrelse"
 
-#: resources/ui/settings.ui:2428 resources/ui/settings.ui:3180
+#: resources/ui/settings.ui:2397 resources/ui/settings.ui:3149
 msgid "Icon Crop"
 msgstr "Ikonbeskjæring"
 
-#: resources/ui/settings.ui:2479 resources/ui/settings.ui:3231
-#: resources/ui/settings.ui:3623
+#: resources/ui/settings.ui:2448 resources/ui/settings.ui:3200
+#: resources/ui/settings.ui:3592
 msgid "Background Image"
 msgstr "Bakgrunnsbilde"
 
-#: resources/ui/settings.ui:2541 resources/ui/settings.ui:3263
+#: resources/ui/settings.ui:2510 resources/ui/settings.ui:3232
 msgid "Children Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:2551
+#: resources/ui/settings.ui:2520
 msgid "Child items are styled differently when their wedge is hovered."
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/settings.ui:2567 resources/ui/settings.ui:3319
+#: resources/ui/settings.ui:2536 resources/ui/settings.ui:3288
 msgid "Standard State"
 msgstr "Forvalgt tilstand"
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:2580
+#: resources/ui/settings.ui:2549
 msgid "Hovered State"
 msgstr ""
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent's setting
-#: resources/ui/settings.ui:2611 resources/ui/settings.ui:2766
-#: resources/ui/settings.ui:3367 resources/ui/settings.ui:3419
+#: resources/ui/settings.ui:2580 resources/ui/settings.ui:2735
+#: resources/ui/settings.ui:3336 resources/ui/settings.ui:3388
 msgid "Parent"
 msgstr ""
 
-#: resources/ui/settings.ui:2633 resources/ui/settings.ui:2788
-msgid "Pick Child Item Color"
+#: resources/ui/settings.ui:2602 resources/ui/settings.ui:2757
+msgid "Child Item Color"
 msgstr ""
 
-#: resources/ui/settings.ui:2915 resources/ui/settings.ui:3472
+#: resources/ui/settings.ui:2884 resources/ui/settings.ui:3441
 msgid "Offset"
 msgstr "Forskyvning"
 
 #. Draw above (grand)children items. There's an explanation string below in the application.
-#: resources/ui/settings.ui:3026 resources/ui/settings.ui:3561
+#: resources/ui/settings.ui:2995 resources/ui/settings.ui:3530
 msgid "Draw Above"
 msgstr ""
 
-#: resources/ui/settings.ui:3036
+#: resources/ui/settings.ui:3005
 msgid "Render children above the center item."
 msgstr ""
 
-#: resources/ui/settings.ui:3293 resources/ui/settings.ui:3655
+#: resources/ui/settings.ui:3262 resources/ui/settings.ui:3624
 msgid "Grandchildren Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:3303
+#: resources/ui/settings.ui:3272
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:3332
+#: resources/ui/settings.ui:3301
 msgid "With Hovered Parent"
 msgstr ""
 
-#: resources/ui/settings.ui:3389 resources/ui/settings.ui:3441
-msgid "Pick Grandchild Item Color"
+#: resources/ui/settings.ui:3358 resources/ui/settings.ui:3410
+msgid "Grandchild Item Color"
 msgstr ""
 
-#: resources/ui/settings.ui:3571
+#: resources/ui/settings.ui:3540
 msgid "Render grandchildren above children items."
 msgstr ""
 
-#: resources/ui/settings.ui:3686 resources/ui/settings.ui:3931
+#: resources/ui/settings.ui:3655 resources/ui/settings.ui:3900
 #, fuzzy
 msgid "Wedge Appearance"
 msgstr "Kile-utseende"
 
-#: resources/ui/settings.ui:3696
+#: resources/ui/settings.ui:3665
 msgid "Clicking inside a wedge will activate the corresponding item."
 msgstr ""
 
-#: resources/ui/settings.ui:3719
+#: resources/ui/settings.ui:3688
 msgid "Inner Radius"
 msgstr "Indre radius"
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
-#: resources/ui/settings.ui:3730
+#: resources/ui/settings.ui:3699
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
@@ -619,233 +632,224 @@ msgstr ""
 "Å klikke i indre radius\n"
 "avbryter utvalget."
 
-#: resources/ui/settings.ui:3751
+#: resources/ui/settings.ui:3720 resources/ui/settings.ui:3759
 msgid "Wedge Separator Color"
 msgstr ""
 
-#: resources/ui/settings.ui:3763
+#: resources/ui/settings.ui:3732
 msgid "Wedge Separator Thickness"
 msgstr ""
 
-#: resources/ui/settings.ui:3790
-msgid "Pick Wedge Separator Color"
-msgstr "Velg en kileinndelingsfarge"
-
-#: resources/ui/settings.ui:3802
+#: resources/ui/settings.ui:3771 resources/ui/settings.ui:3863
 msgid "Wedge Color"
 msgstr "Kilefarge"
 
-#: resources/ui/settings.ui:3814
+#: resources/ui/settings.ui:3783
 msgid "Wedge Size"
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/settings.ui:3864
+#: resources/ui/settings.ui:3833
 msgid "Inactive"
 msgstr "Inaktiv"
 
 #. When the mouse pointer is over the item
-#: resources/ui/settings.ui:3877
+#: resources/ui/settings.ui:3846
 msgid "Hovered"
 msgstr ""
 
-#: resources/ui/settings.ui:3894
-#, fuzzy
-msgid "Pick Wedge Color"
-msgstr "Velg kilefarge"
-
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:3901
-msgid "Pick Hovered Wedge Color"
+#: resources/ui/settings.ui:3870
+msgid "Hovered Wedge Color"
 msgstr ""
 
-#: resources/ui/settings.ui:3961 resources/ui/settings.ui:4068
+#: resources/ui/settings.ui:3930 resources/ui/settings.ui:4037
 msgid "Trace Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:3971
+#: resources/ui/settings.ui:3940
 msgid "The trace is the connecting line between selected menu items."
 msgstr ""
 
-#: resources/ui/settings.ui:3988
+#: resources/ui/settings.ui:3957
 msgid "Thickness"
 msgstr ""
 
-#: resources/ui/settings.ui:3999
+#: resources/ui/settings.ui:3968
 msgid "Color"
 msgstr "Farge"
 
-#: resources/ui/settings.ui:4040
-msgid "Pick Trace Color"
+#: resources/ui/settings.ui:4009
+msgid "Trace Color"
 msgstr ""
 
-#: resources/ui/settings.ui:4052
+#: resources/ui/settings.ui:4021
 msgid "Minimum Segment Length"
 msgstr "Minimumslengde for segmenter"
 
-#: resources/ui/settings.ui:4098 resources/ui/settings.ui:4451
+#: resources/ui/settings.ui:4067 resources/ui/settings.ui:4420
 msgid "Advanced Settings"
 msgstr "Avanserte innstillinger"
 
-#: resources/ui/settings.ui:4108
+#: resources/ui/settings.ui:4077
 msgid "These settings are independent of the presets."
 msgstr ""
 
-#: resources/ui/settings.ui:4127
+#: resources/ui/settings.ui:4096
 msgid "Minimum Stroke Angle"
 msgstr "Minimumsvinkel for strøk"
 
-#: resources/ui/settings.ui:4137
+#: resources/ui/settings.ui:4106
 #, fuzzy
 msgid "Smaller turns will not lead to selections."
 msgstr "Mindre svinger vil ikke lede til utvelging."
 
-#: resources/ui/settings.ui:4174
+#: resources/ui/settings.ui:4143
 msgid "Minimum Stroke Length"
 msgstr "Minimumslengde for strøk"
 
-#: resources/ui/settings.ui:4184
+#: resources/ui/settings.ui:4153
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/settings.ui:4223
+#: resources/ui/settings.ui:4192
 #, fuzzy
 msgid "Jitter Threshold"
 msgstr "Jitter-terskel"
 
-#: resources/ui/settings.ui:4233
+#: resources/ui/settings.ui:4202
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/settings.ui:4271
+#: resources/ui/settings.ui:4240
 msgid "Selection Timeout"
 msgstr "Utvalgstidsavbrudd"
 
-#: resources/ui/settings.ui:4281
+#: resources/ui/settings.ui:4250
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
 msgstr ""
 
-#: resources/ui/settings.ui:4320
+#: resources/ui/settings.ui:4289
 msgid "Experimental Hover Mode"
 msgstr ""
 
-#: resources/ui/settings.ui:4330
+#: resources/ui/settings.ui:4299
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
 msgstr ""
 
-#: resources/ui/settings.ui:4353
+#: resources/ui/settings.ui:4322
 msgid "Show Screencast Mouse"
 msgstr ""
 
-#: resources/ui/settings.ui:4363
+#: resources/ui/settings.ui:4332
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
 msgstr ""
 
-#: resources/ui/settings.ui:4396
+#: resources/ui/settings.ui:4365
 msgid "Achievement Notifications"
 msgstr ""
 
-#: resources/ui/settings.ui:4406
+#: resources/ui/settings.ui:4375
 msgid "Show a notification whenever you complete an achievement."
 msgstr ""
 
-#: resources/ui/settings.ui:4472
+#: resources/ui/settings.ui:4441 src/prefs/SettingsPage.js:328
 msgid "Load a Preset"
 msgstr ""
 
 #. Tooltip of the import-settings button.
-#: resources/ui/settings.ui:4484
+#: resources/ui/settings.ui:4453
 msgid "Import settings"
 msgstr ""
 
 #. Text of the import-settings button.
 #. Text of the import-menu-configuration button.
-#: resources/ui/settings.ui:4498 resources/ui/settings.ui:4805
+#: resources/ui/settings.ui:4467 resources/ui/settings.ui:4774
 #: src/prefs/MenuEditorPage.js:250
 msgid "Import"
 msgstr "Importer"
 
 #. Tooltip of the export-settings button.
-#: resources/ui/settings.ui:4508
+#: resources/ui/settings.ui:4477
 msgid "Export settings"
 msgstr ""
 
 #. Text of the export-settings button.
 #. Text of the export-menu-configuration button.
-#: resources/ui/settings.ui:4522 resources/ui/settings.ui:4828
+#: resources/ui/settings.ui:4491 resources/ui/settings.ui:4797
 #: src/prefs/MenuEditorPage.js:184
 msgid "Export"
 msgstr "Eksporter"
 
-#: resources/ui/settings.ui:4535 resources/ui/settings.ui:4842
+#: resources/ui/settings.ui:4504 resources/ui/settings.ui:4811
 msgid "Open Live Preview Menu"
 msgstr ""
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: resources/ui/settings.ui:4549 resources/ui/settings.ui:4856
+#: resources/ui/settings.ui:4518 resources/ui/settings.ui:4825
 msgid "Live Preview"
 msgstr "Sanntidsforhåndsvisning"
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/settings.ui:4578
+#: resources/ui/settings.ui:4547
 msgid "Menu Editor"
 msgstr "Menyredigerer"
 
-#: resources/ui/settings.ui:4685
+#: resources/ui/settings.ui:4654
 msgid "Stash"
 msgstr ""
 
-#: resources/ui/settings.ui:4701
+#: resources/ui/settings.ui:4670
 msgid "Store items here and re-use them later."
 msgstr ""
 
-#: resources/ui/settings.ui:4745
+#: resources/ui/settings.ui:4714
 msgid "Trash"
 msgstr ""
 
-#: resources/ui/settings.ui:4761
+#: resources/ui/settings.ui:4730
 msgid "Drop items here."
 msgstr ""
 
-#: resources/ui/settings.ui:4791
+#: resources/ui/settings.ui:4760
 msgid "Import menu configuration"
 msgstr ""
 
-#: resources/ui/settings.ui:4814
+#: resources/ui/settings.ui:4783
 msgid "Export menu configuration"
 msgstr ""
 
-#: resources/ui/settings.ui:4909
+#: resources/ui/settings.ui:4878
 msgid "Name"
 msgstr "Navn"
 
-#: resources/ui/settings.ui:4927
+#: resources/ui/settings.ui:4896
 msgid "Icon"
 msgstr "Ikon"
 
-#: resources/ui/settings.ui:4933
+#: resources/ui/settings.ui:4902
 msgid "Can be an icon name, text, emoji or a file."
 msgstr "Kan være et ikonnavn, tekst, emoji, eller en fil."
 
-#: resources/ui/settings.ui:4977
+#: resources/ui/settings.ui:4946
 msgid "Fixed Angle"
 msgstr "Fast vinkel"
 
-#: resources/ui/settings.ui:4983
+#: resources/ui/settings.ui:4952
 msgid "See tooltip for details."
 msgstr "Se verktøytips for detaljer."
 
-#: resources/ui/settings.ui:4993
+#: resources/ui/settings.ui:4962
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -861,34 +865,34 @@ msgid ""
 "        <b>Use -1 to disable this feature</b>."
 msgstr ""
 
-#: resources/ui/settings.ui:5031 src/common/actions/Shortcut.js:78
+#: resources/ui/settings.ui:5000 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
 msgstr "Snarvei"
 
-#: resources/ui/settings.ui:5037
+#: resources/ui/settings.ui:5006
 msgid "This will open the menu."
 msgstr "Dette åpner menyen."
 
-#: resources/ui/settings.ui:5055
+#: resources/ui/settings.ui:5024
 msgid "Open in Screen Center"
 msgstr "Åpne i skjermsenter"
 
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/settings.ui:5116
+#: resources/ui/settings.ui:5085
 msgid "Achievements"
 msgstr "Oppnåelser"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:5310
+#: resources/ui/settings.ui:5279
 msgid "In Progress"
 msgstr "Underveis"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:5324
+#: resources/ui/settings.ui:5293
 msgid "Completed"
 msgstr "Fullført"
 
-#: resources/ui/settings.ui:5352
+#: resources/ui/settings.ui:5321
 msgid "Reset all achievements."
 msgstr "Tilbakestill alle oppnåelser."
 
@@ -1211,13 +1215,6 @@ msgstr "Overvei å kronerulle Fly-Pie."
 #: src/common/ConfigWidgetFactory.js:97 src/prefs/ImageChooserButton.js:39
 msgid "Select File"
 msgstr ""
-
-#: src/common/ConfigWidgetFactory.js:98 src/common/ConfigWidgetFactory.js:165
-#: src/prefs/ImageChooserButton.js:40 src/prefs/MenuEditorPage.js:183
-#: src/prefs/MenuEditorPage.js:249 src/prefs/SettingsPage.js:272
-#: src/prefs/SettingsPage.js:347
-msgid "Cancel"
-msgstr "Avbryt"
 
 #: src/common/ConfigWidgetFactory.js:164
 msgid "Select Application"
@@ -1836,10 +1833,6 @@ msgstr ""
 msgid "Baby"
 msgstr ""
 
-#: src/prefs/ImageChooserButton.js:88
-msgid "(None)"
-msgstr ""
-
 #: src/prefs/MenuEditor.js:258
 msgid "Not Bound"
 msgstr ""
@@ -2006,10 +1999,6 @@ msgid ""
 "Here it will be deleted whenever Fly-Pie is updated. It has been saved "
 "anyways, but please consider to store it in a safer place!"
 msgstr ""
-
-#: src/prefs/SettingsPage.js:328
-msgid "Load Preset"
-msgstr "Last inn forhåndsinnstilling"
 
 #: src/prefs/SettingsPage.js:348
 msgid "Load"
@@ -2390,6 +2379,26 @@ msgstr "Logg ut"
 msgid "Power Off…"
 msgstr "Slå av …"
 
+#~ msgid "Pick Text Color"
+#~ msgstr "Velg tekstfarge"
+
+#~ msgid "Pick Background Color"
+#~ msgstr "Velg bakgrunnsfarge"
+
+#, fuzzy
+#~ msgid "Pick Center Item Color"
+#~ msgstr "Velg senterelementsfarge"
+
+#~ msgid "Pick Wedge Separator Color"
+#~ msgstr "Velg en kileinndelingsfarge"
+
+#, fuzzy
+#~ msgid "Pick Wedge Color"
+#~ msgstr "Velg kilefarge"
+
+#~ msgid "Load Preset"
+#~ msgstr "Last inn forhåndsinnstilling"
+
 #~ msgid ""
 #~ "💕️ Do you want to show that you love Fly-Pie?\n"
 #~ "<a href=\"https://github.com/sponsors/Schneegans\">You may already become "
@@ -2398,12 +2407,6 @@ msgstr "Slå av …"
 #~ "💕️ Vil du vise at du setter pris på Fly-Pie?\n"
 #~ "<a href=\"https://github.com/sponsors/Schneegans\">Du kan allerede bli en "
 #~ "sponsor, for den enkle sum av 1$/måned.</a>"
-
-#~ msgid "Icon Theme"
-#~ msgstr "Ikondrakt"
-
-#~ msgid "Custom Icon"
-#~ msgstr "Egendefinert ikon"
 
 #, fuzzy
 #~ msgid "Initializes the settings below to random values"
@@ -2414,9 +2417,6 @@ msgstr "Slå av …"
 
 #~ msgid "Reset to default value"
 #~ msgstr "Tilbakestill til forvalgt verdi"
-
-#~ msgid "Copy left value to right side"
-#~ msgstr "Kopier venstre verdi til høyre side"
 
 #~ msgid "Wedge Separators"
 #~ msgstr "Kileinndelere"
