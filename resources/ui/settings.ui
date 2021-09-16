@@ -748,91 +748,60 @@ Can be added to custom menus.</property>
         <property name="margin_end">8</property>
         <property name="orientation">vertical</property>
         <property name="spacing">5</property>
+
         <child>
-          <object class="GtkStackSwitcher">
-            <property name="visible">0</property>
-            <property name="stack">stack1</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkStack" id="stack1">
-            <property name="transition_duration">300</property>
-            <property name="transition_type">slide-left-right</property>
-            <child>
-              <object class="GtkStackPage">
-                <property name="name">page0</property>
-                <property name="title" translatable="yes">Standard</property>
-                <property name="child">
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">5</property>
+          <object class="GtkScrolledWindow">
+            <property name="hscrollbar_policy">never</property>
+            <property name="max_content_height">300</property>
+            <property name="propagate_natural_height">1</property>
+            <property name="child">
+              <object class="GtkTreeView" id="preset-treeview">
+                <property name="model">preset-list</property>
+                <property name="headers_visible">0</property>
+                <property name="headers_clickable">0</property>
+                <property name="enable_search">0</property>
+                <property name="search_column">0</property>
+                <property name="activate_on_single_click">1</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" />
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn">
                     <child>
-                      <object class="GtkScrolledWindow">
-                        <property name="hscrollbar_policy">never</property>
-                        <property name="max_content_height">300</property>
-                        <property name="propagate_natural_height">1</property>
-                        <property name="child">
-                          <object class="GtkTreeView" id="preset-treeview">
-                            <property name="model">preset-list</property>
-                            <property name="headers_visible">0</property>
-                            <property name="headers_clickable">0</property>
-                            <property name="enable_search">0</property>
-                            <property name="search_column">0</property>
-                            <property name="activate_on_single_click">1</property>
-                            <child internal-child="selection">
-                              <object class="GtkTreeSelection" />
-                            </child>
-                            <child>
-                              <object class="GtkTreeViewColumn">
-                                <child>
-                                  <object class="GtkCellRendererText" />
-                                  <attributes>
-                                    <attribute name="text">0</attribute>
-                                  </attributes>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                        </property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="random-preset-button">
-                        <property name="halign">fill</property>
-                        <property name="tooltip_text" translatable="yes">Initializes most settings to random values.</property>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="halign">center</property>
-                            <property name="spacing">6</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon_name">applications-science-symbolic</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label" translatable="yes">Generate a Random Preset</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
+                      <object class="GtkCellRendererText" />
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
                     </child>
                   </object>
-                </property>
+                </child>
               </object>
-            </child>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="random-preset-button">
+            <property name="halign">fill</property>
+            <property name="tooltip_text" translatable="yes" comments="Tooltip of the generate-a-random-preset button">Initializes most settings to random values.</property>
             <child>
-              <object class="GtkStackPage">
-                <property name="name">page1</property>
-                <property name="title" translatable="yes" comments="Refers to reward presets">Rewards</property>
-                <property name="child">
-                  <object class="GtkScrolledWindow"></object>
-                </property>
+              <object class="GtkBox">
+                <property name="halign">center</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="icon_name">applications-science-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Generate a Random Preset</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
         </child>
+
       </object>
     </property>
   </object>
@@ -1813,7 +1782,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                 <child>
                                   <object class="GtkColorButton" id="text-color">
                                     <property name="use_alpha">1</property>
-                                    <property name="title" translatable="yes">Pick Text Color</property>
+                                    <property name="title" translatable="yes">Text Color</property>
                                     <property name="show_editor">1</property>
                                     <layout>
                                       <property name="column">1</property>
@@ -1826,7 +1795,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="use_alpha">1</property>
                                     <property name="valign">center</property>
                                     <property name="hexpand">1</property>
-                                    <property name="title" translatable="yes">Pick Background Color</property>
+                                    <property name="title" translatable="yes">Background Color</property>
                                     <property name="show_editor">1</property>
                                     <layout>
                                       <property name="column">1</property>
@@ -1999,7 +1968,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                           <object class="GtkColorButton" id="center-fixed-color">
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
-                                            <property name="title" translatable="yes">Pick Center Item Color</property>
+                                            <property name="title" translatable="yes">Center Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -2203,7 +2172,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                           <object class="GtkColorButton" id="center-fixed-color-hover">
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
-                                            <property name="title" translatable="yes">Pick Center Item Color</property>
+                                            <property name="title" translatable="yes">Center Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -2630,7 +2599,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
                                             <property name="hexpand">1</property>
-                                            <property name="title" translatable="yes">Pick Child Item Color</property>
+                                            <property name="title" translatable="yes">Child Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -2785,7 +2754,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
                                             <property name="hexpand">1</property>
-                                            <property name="title" translatable="yes">Pick Child Item Color</property>
+                                            <property name="title" translatable="yes">Child Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -3386,7 +3355,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
                                             <property name="hexpand">1</property>
-                                            <property name="title" translatable="yes">Pick Grandchild Item Color</property>
+                                            <property name="title" translatable="yes">Grandchild Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -3438,7 +3407,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
                                             <property name="hexpand">1</property>
-                                            <property name="title" translatable="yes">Pick Grandchild Item Color</property>
+                                            <property name="title" translatable="yes">Grandchild Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -3787,7 +3756,7 @@ will cancel the selection.</property>
                                   <object class="GtkColorButton" id="wedge-separator-color">
                                     <property name="use_alpha">1</property>
                                     <property name="valign">center</property>
-                                    <property name="title" translatable="yes">Pick Wedge Separator Color</property>
+                                    <property name="title" translatable="yes">Wedge Separator Color</property>
                                     <property name="show_editor">1</property>
                                     <layout>
                                       <property name="column">1</property>
@@ -3891,14 +3860,14 @@ will cancel the selection.</property>
                                           <object class="GtkColorButton" id="wedge-color">
                                             <property name="use_alpha">1</property>
                                             <property name="hexpand">1</property>
-                                            <property name="title" translatable="yes">Pick Wedge Color</property>
+                                            <property name="title" translatable="yes">Wedge Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </child>
                                         <child>
                                           <object class="GtkColorButton" id="wedge-color-hover">
                                             <property name="use_alpha">1</property>
-                                            <property name="title" translatable="yes" comments="Hovered: When the mouse pointer is over the item">Pick Hovered Wedge Color</property>
+                                            <property name="title" translatable="yes" comments="Hovered: When the mouse pointer is over the item">Hovered Wedge Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </child>
@@ -4037,7 +4006,7 @@ will cancel the selection.</property>
                                 <child>
                                   <object class="GtkColorButton" id="trace-color">
                                     <property name="use_alpha">1</property>
-                                    <property name="title" translatable="yes">Pick Trace Color</property>
+                                    <property name="title" translatable="yes">Trace Color</property>
                                     <property name="show_editor">1</property>
                                     <layout>
                                       <property name="column">1</property>

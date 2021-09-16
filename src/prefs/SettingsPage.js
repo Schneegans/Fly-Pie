@@ -325,7 +325,7 @@ var SettingsPage = class SettingsPage {
 
     this._builder.get_object('load-preset-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
-        title: _('Load Preset'),
+        title: _('Load a Preset'),
         action: Gtk.FileChooserAction.OPEN,
         transient_for: button.get_root(),
         modal: true
