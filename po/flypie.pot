@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-16 21:15+0200\n"
+"POT-Creation-Date: 2021-09-16 22:08+0200\n"
 "PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -703,20 +703,20 @@ msgstr ""
 
 #. Text of the import-settings button.
 #. Text of the import-menu-configuration button.
-#: resources/ui/settings.ui:4466 resources/ui/settings.ui:4770
+#: resources/ui/settings.ui:4466 resources/ui/settings.ui:4771
 #: src/prefs/MenuEditorPage.js:250
 msgid "Import"
 msgstr ""
 
 #. Text of the export-settings button.
 #. Text of the export-menu-configuration button.
-#: resources/ui/settings.ui:4489 resources/ui/settings.ui:4792
+#: resources/ui/settings.ui:4489 resources/ui/settings.ui:4793
 #: src/prefs/MenuEditorPage.js:184
 msgid "Export"
 msgstr ""
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: resources/ui/settings.ui:4515 resources/ui/settings.ui:4819
+#: resources/ui/settings.ui:4515 resources/ui/settings.ui:4820
 msgid "Live Preview"
 msgstr ""
 
@@ -725,43 +725,47 @@ msgstr ""
 msgid "Menu Editor"
 msgstr ""
 
-#: resources/ui/settings.ui:4651
+#: resources/ui/settings.ui:4573
+msgid "Add a new menu item"
+msgstr ""
+
+#: resources/ui/settings.ui:4652
 msgid "Stash"
 msgstr ""
 
-#: resources/ui/settings.ui:4667
+#: resources/ui/settings.ui:4668
 msgid "Store items here and re-use them later."
 msgstr ""
 
-#: resources/ui/settings.ui:4711
+#: resources/ui/settings.ui:4712
 msgid "Trash"
 msgstr ""
 
-#: resources/ui/settings.ui:4727
+#: resources/ui/settings.ui:4728
 msgid "Drop items here."
 msgstr ""
 
-#: resources/ui/settings.ui:4872
+#: resources/ui/settings.ui:4873
 msgid "Name"
 msgstr ""
 
-#: resources/ui/settings.ui:4890
+#: resources/ui/settings.ui:4891
 msgid "Icon"
 msgstr ""
 
-#: resources/ui/settings.ui:4896
+#: resources/ui/settings.ui:4897
 msgid "Can be an icon name, text, emoji or a file."
 msgstr ""
 
-#: resources/ui/settings.ui:4940
+#: resources/ui/settings.ui:4941
 msgid "Fixed Angle"
 msgstr ""
 
-#: resources/ui/settings.ui:4946
+#: resources/ui/settings.ui:4947 src/common/menus/RunningApps.js:99
 msgid "See tooltip for details."
 msgstr ""
 
-#: resources/ui/settings.ui:4956
+#: resources/ui/settings.ui:4957
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -773,34 +777,34 @@ msgid ""
 "disable this feature."
 msgstr ""
 
-#: resources/ui/settings.ui:4988 src/common/actions/Shortcut.js:78
+#: resources/ui/settings.ui:4989 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
 msgstr ""
 
-#: resources/ui/settings.ui:4994
+#: resources/ui/settings.ui:4995
 msgid "This will open the menu."
 msgstr ""
 
-#: resources/ui/settings.ui:5012
+#: resources/ui/settings.ui:5013
 msgid "Open in Screen Center"
 msgstr ""
 
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/settings.ui:5073
+#: resources/ui/settings.ui:5074
 msgid "Achievements"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:5267
+#: resources/ui/settings.ui:5268
 msgid "In Progress"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:5281
+#: resources/ui/settings.ui:5282
 msgid "Completed"
 msgstr ""
 
-#: resources/ui/settings.ui:5309
+#: resources/ui/settings.ui:5310
 msgid "Reset all achievements."
 msgstr ""
 
@@ -2212,10 +2216,6 @@ msgstr ""
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
-msgstr ""
-
-#: src/common/menus/RunningApps.js:99
-msgid "See Tooltip for details."
 msgstr ""
 
 #: src/common/menus/RunningApps.js:123
