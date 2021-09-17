@@ -1782,7 +1782,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                 <child>
                                   <object class="GtkColorButton" id="text-color">
                                     <property name="use_alpha">1</property>
-                                    <property name="title" translatable="yes">Text Color</property>
                                     <property name="show_editor">1</property>
                                     <layout>
                                       <property name="column">1</property>
@@ -1795,7 +1794,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                     <property name="use_alpha">1</property>
                                     <property name="valign">center</property>
                                     <property name="hexpand">1</property>
-                                    <property name="title" translatable="yes">Background Color</property>
                                     <property name="show_editor">1</property>
                                     <layout>
                                       <property name="column">1</property>
@@ -1968,7 +1966,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                           <object class="GtkColorButton" id="center-fixed-color">
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
-                                            <property name="title" translatable="yes">Center Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -2172,7 +2169,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                           <object class="GtkColorButton" id="center-fixed-color-hover">
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
-                                            <property name="title" translatable="yes">Center Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -2599,7 +2595,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
                                             <property name="hexpand">1</property>
-                                            <property name="title" translatable="yes">Child Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -2754,7 +2749,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
                                             <property name="hexpand">1</property>
-                                            <property name="title" translatable="yes">Child Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -3355,7 +3349,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
                                             <property name="hexpand">1</property>
-                                            <property name="title" translatable="yes">Grandchild Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -3407,7 +3400,6 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <property name="use_alpha">1</property>
                                             <property name="margin_top">5</property>
                                             <property name="hexpand">1</property>
-                                            <property name="title" translatable="yes">Grandchild Item Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </property>
@@ -3756,7 +3748,6 @@ will cancel the selection.</property>
                                   <object class="GtkColorButton" id="wedge-separator-color">
                                     <property name="use_alpha">1</property>
                                     <property name="valign">center</property>
-                                    <property name="title" translatable="yes">Wedge Separator Color</property>
                                     <property name="show_editor">1</property>
                                     <layout>
                                       <property name="column">1</property>
@@ -3860,14 +3851,12 @@ will cancel the selection.</property>
                                           <object class="GtkColorButton" id="wedge-color">
                                             <property name="use_alpha">1</property>
                                             <property name="hexpand">1</property>
-                                            <property name="title" translatable="yes">Wedge Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </child>
                                         <child>
                                           <object class="GtkColorButton" id="wedge-color-hover">
                                             <property name="use_alpha">1</property>
-                                            <property name="title" translatable="yes" comments="Hovered: When the mouse pointer is over the item">Hovered Wedge Color</property>
                                             <property name="show_editor">1</property>
                                           </object>
                                         </child>
@@ -4006,7 +3995,6 @@ will cancel the selection.</property>
                                 <child>
                                   <object class="GtkColorButton" id="trace-color">
                                     <property name="use_alpha">1</property>
-                                    <property name="title" translatable="yes">Trace Color</property>
                                     <property name="show_editor">1</property>
                                     <layout>
                                       <property name="column">1</property>
