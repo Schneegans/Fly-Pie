@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-17 20:22+0200\n"
+"POT-Creation-Date: 2021-09-17 21:32+0200\n"
 "PO-Revision-Date: 2021-04-23 15:14+0000\n"
 "Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
 "Language-Team: Sinhala <https://hosted.weblate.org/projects/fly-pie/core/si/"
@@ -678,7 +678,7 @@ msgid "Load a Preset"
 msgstr ""
 
 #: resources/ui/settings.ui:4441
-msgid "Imports settings from a JSON file."
+msgid "Import settings from a JSON file."
 msgstr ""
 
 #. Text of the import-settings button.
@@ -689,7 +689,7 @@ msgid "Import"
 msgstr ""
 
 #: resources/ui/settings.ui:4465
-msgid "Saves the settings above to a JSON file."
+msgid "Save the settings above to a JSON file."
 msgstr ""
 
 #. Text of the export-settings button.
@@ -730,11 +730,11 @@ msgid "Drop items here."
 msgstr ""
 
 #: resources/ui/settings.ui:4748
-msgid "Loads previously exported menu configurations from a JSON file."
+msgid "Load previously exported menu configurations from a JSON file."
 msgstr ""
 
 #: resources/ui/settings.ui:4771
-msgid "Exports all menus to a JSON file."
+msgid "Export all menus to a JSON file."
 msgstr ""
 
 #: resources/ui/settings.ui:4865
