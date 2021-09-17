@@ -3821,7 +3821,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Inactive</property>
+                                        <property name="label" translatable="yes" comments="When the mouse pointer is NOT over the item">Inactive State</property>
                                         <style>
                                           <class name="dim-label" />
                                         </style>
@@ -3834,7 +3834,7 @@ will cancel the selection.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
-                                        <property name="label" translatable="yes" comments="When the mouse pointer is over the item">Hovered</property>
+                                        <property name="label" translatable="yes" comments="When the mouse pointer is over the item">Hovered State</property>
                                         <style>
                                           <class name="dim-label" />
                                         </style>
@@ -4438,6 +4438,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                             <child>
                               <object class="GtkButton" id="load-preset-button">
+                                <property name="tooltip_text" translatable="yes">Imports settings from a JSON file.</property>
                                 <property name="child">
                                   <object class="GtkBox">
                                     <property name="margin_start">8</property>
@@ -4461,6 +4462,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                             <child>
                               <object class="GtkButton" id="save-preset-button">
+                                <property name="tooltip_text" translatable="yes">Saves the settings above to a JSON file.</property>
                                 <property name="child">
                                   <object class="GtkBox">
                                     <property name="margin_start">8</property>
@@ -4743,6 +4745,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </style>
                                     <child>
                                       <object class="GtkButton" id="import-menu-config-button">
+                                        <property name="tooltip_text" translatable="yes">Loads previously exported menu configurations from a JSON file.</property>
                                         <property name="child">
                                           <object class="GtkBox">
                                             <property name="margin_start">8</property>
@@ -4765,6 +4768,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="export-menu-config-button">
+                                        <property name="tooltip_text" translatable="yes">Exports all menus to a JSON file.</property>
                                         <property name="child">
                                           <object class="GtkBox">
                                             <property name="margin_start">8</property>
