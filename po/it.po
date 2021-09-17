@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-17 17:18+0200\n"
+"POT-Creation-Date: 2021-09-17 20:22+0200\n"
 "PO-Revision-Date: 2021-05-31 10:33+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
@@ -25,8 +25,8 @@ msgstr "Copia il valore sinistro sul lato destro"
 
 #: resources/ui/iconSelectDialog.ui:14 src/common/ConfigWidgetFactory.js:98
 #: src/common/ConfigWidgetFactory.js:165 src/prefs/ImageChooserButton.js:40
-#: src/prefs/MenuEditorPage.js:183 src/prefs/MenuEditorPage.js:249
-#: src/prefs/SettingsPage.js:272 src/prefs/SettingsPage.js:347
+#: src/prefs/MenuEditorPage.js:182 src/prefs/MenuEditorPage.js:247
+#: src/prefs/SettingsPage.js:271 src/prefs/SettingsPage.js:345
 msgid "Cancel"
 msgstr "Cancella"
 
@@ -563,7 +563,8 @@ msgid "Standard State"
 msgstr "Stato standard"
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:2545
+#. When the mouse pointer is over the item
+#: resources/ui/settings.ui:2545 resources/ui/settings.ui:3837
 msgid "Hovered State"
 msgstr "Stato attivo"
 
@@ -648,13 +649,8 @@ msgstr ""
 
 #. When the mouse pointer is NOT over the item
 #: resources/ui/settings.ui:3824
-msgid "Inactive"
-msgstr "Non attivo"
-
-#. When the mouse pointer is over the item
-#: resources/ui/settings.ui:3837
-msgid "Hovered"
-msgstr "Attivo"
+msgid "Inactive State"
+msgstr ""
 
 #: resources/ui/settings.ui:3919 resources/ui/settings.ui:4025
 msgid "Trace Appearance"
@@ -762,75 +758,91 @@ msgstr "Notifiche sui Risultati"
 msgid "Show a notification whenever you complete an achievement."
 msgstr "Mostra una notifica ogni volta che completi un obiettivo."
 
-#: resources/ui/settings.ui:4429 src/prefs/SettingsPage.js:328
+#: resources/ui/settings.ui:4429
 msgid "Load a Preset"
+msgstr ""
+
+#: resources/ui/settings.ui:4441
+msgid "Imports settings from a JSON file."
 msgstr ""
 
 #. Text of the import-settings button.
 #. Text of the import-menu-configuration button.
-#: resources/ui/settings.ui:4454 resources/ui/settings.ui:4759
-#: src/prefs/MenuEditorPage.js:250
+#: resources/ui/settings.ui:4455 resources/ui/settings.ui:4762
+#: src/prefs/MenuEditorPage.js:248
 msgid "Import"
 msgstr "Importa"
 
+#: resources/ui/settings.ui:4465
+msgid "Saves the settings above to a JSON file."
+msgstr ""
+
 #. Text of the export-settings button.
 #. Text of the export-menu-configuration button.
-#: resources/ui/settings.ui:4477 resources/ui/settings.ui:4781
-#: src/prefs/MenuEditorPage.js:184
+#: resources/ui/settings.ui:4479 resources/ui/settings.ui:4785
+#: src/prefs/MenuEditorPage.js:183
 msgid "Export"
 msgstr "Esporta"
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: resources/ui/settings.ui:4503 resources/ui/settings.ui:4808
+#: resources/ui/settings.ui:4505 resources/ui/settings.ui:4812
 msgid "Live Preview"
 msgstr "Anteprima dal Vivo"
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/settings.ui:4532
+#: resources/ui/settings.ui:4534
 msgid "Menu Editor"
 msgstr "Menu Editore"
 
-#: resources/ui/settings.ui:4561
+#: resources/ui/settings.ui:4563
 msgid "Add a new menu item"
 msgstr ""
 
-#: resources/ui/settings.ui:4640
+#: resources/ui/settings.ui:4642
 msgid "Stash"
 msgstr ""
 
-#: resources/ui/settings.ui:4656
+#: resources/ui/settings.ui:4658
 msgid "Store items here and re-use them later."
 msgstr ""
 
-#: resources/ui/settings.ui:4700
+#: resources/ui/settings.ui:4702
 msgid "Trash"
 msgstr ""
 
-#: resources/ui/settings.ui:4716
+#: resources/ui/settings.ui:4718
 msgid "Drop items here."
 msgstr ""
 
-#: resources/ui/settings.ui:4861
+#: resources/ui/settings.ui:4748
+msgid "Loads previously exported menu configurations from a JSON file."
+msgstr ""
+
+#: resources/ui/settings.ui:4771
+msgid "Exports all menus to a JSON file."
+msgstr ""
+
+#: resources/ui/settings.ui:4865
 msgid "Name"
 msgstr "Nome"
 
-#: resources/ui/settings.ui:4879
+#: resources/ui/settings.ui:4883
 msgid "Icon"
 msgstr "Icona"
 
-#: resources/ui/settings.ui:4885
+#: resources/ui/settings.ui:4889
 msgid "Can be an icon name, text, emoji or a file."
 msgstr "Può essere il nome di un'icona, testo, emoji o un file."
 
-#: resources/ui/settings.ui:4929
+#: resources/ui/settings.ui:4933
 msgid "Fixed Angle"
 msgstr "Angolo Fisso"
 
-#: resources/ui/settings.ui:4935 src/common/menus/RunningApps.js:99
+#: resources/ui/settings.ui:4939 src/common/menus/RunningApps.js:99
 msgid "See tooltip for details."
 msgstr "Vedere dettagli nella descrizione del comando."
 
-#: resources/ui/settings.ui:4945
+#: resources/ui/settings.ui:4949
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -842,34 +854,34 @@ msgid ""
 "disable this feature."
 msgstr ""
 
-#: resources/ui/settings.ui:4977 src/common/actions/Shortcut.js:78
+#: resources/ui/settings.ui:4981 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
 msgstr "Collegamento"
 
-#: resources/ui/settings.ui:4983
+#: resources/ui/settings.ui:4987
 msgid "This will open the menu."
 msgstr "Questo aprirà il menu."
 
-#: resources/ui/settings.ui:5001
+#: resources/ui/settings.ui:5005
 msgid "Open in Screen Center"
 msgstr "Apri al Centro dello Schermo"
 
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/settings.ui:5062
+#: resources/ui/settings.ui:5066
 msgid "Achievements"
 msgstr "Premi"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:5256
+#: resources/ui/settings.ui:5260
 msgid "In Progress"
 msgstr "In corso"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:5270
+#: resources/ui/settings.ui:5274
 msgid "Completed"
 msgstr "Completato"
 
-#: resources/ui/settings.ui:5298
+#: resources/ui/settings.ui:5302
 msgid "Reset all achievements."
 msgstr "Ripristina tutti gli obiettivi."
 
@@ -1813,7 +1825,7 @@ msgstr ""
 #. attempts to drag an action in the menu editor to the menu overview.
 #. Translators: This is shown as an in-app notification when the user attempts
 #. to drag an action in the menu editor to the menu overview.
-#: src/prefs/MenuEditor.js:676 src/prefs/MenuEditorPage.js:792
+#: src/prefs/MenuEditor.js:676 src/prefs/MenuEditorPage.js:790
 msgid "Actions cannot be turned into toplevel menus."
 msgstr ""
 
@@ -1823,41 +1835,33 @@ msgstr ""
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:164
-msgid "Export Menu Configuration"
-msgstr "Esporta Configurazione del Menu"
-
-#: src/prefs/MenuEditorPage.js:172 src/prefs/MenuEditorPage.js:238
-#: src/prefs/SettingsPage.js:261 src/prefs/SettingsPage.js:336
+#: src/prefs/MenuEditorPage.js:171 src/prefs/MenuEditorPage.js:236
+#: src/prefs/SettingsPage.js:260 src/prefs/SettingsPage.js:334
 msgid "JSON Files"
 msgstr "File JSON"
 
-#: src/prefs/MenuEditorPage.js:179 src/prefs/MenuEditorPage.js:245
-#: src/prefs/SettingsPage.js:268 src/prefs/SettingsPage.js:343
+#: src/prefs/MenuEditorPage.js:178 src/prefs/MenuEditorPage.js:243
+#: src/prefs/SettingsPage.js:267 src/prefs/SettingsPage.js:341
 msgid "All Files"
 msgstr "Tutti i File"
 
-#: src/prefs/MenuEditorPage.js:213
+#: src/prefs/MenuEditorPage.js:212
 msgid "Could not export the menu configuration."
 msgstr "Impossibile esportare la configurazione del menu."
 
-#: src/prefs/MenuEditorPage.js:230
-msgid "Import Menu Configuration"
-msgstr "Importa Configurazione del Menu"
-
-#: src/prefs/MenuEditorPage.js:276
+#: src/prefs/MenuEditorPage.js:274
 msgid "Could not import the menu configuration."
 msgstr "Impossibile importare la configurazione del menu."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:324
+#: src/prefs/MenuEditorPage.js:322
 msgid "You should try to have no more than twelve items in your menus."
 msgstr "Dovresti provare a non avere più di dodici voci nei tuoi menu."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:327
+#: src/prefs/MenuEditorPage.js:325
 msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
@@ -1867,7 +1871,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:330
+#: src/prefs/MenuEditorPage.js:328
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr ""
@@ -1875,21 +1879,21 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:334
+#: src/prefs/MenuEditorPage.js:332
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
 msgstr "I suggerimenti possono essere pubblicati su <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:338
+#: src/prefs/MenuEditorPage.js:336
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
 msgstr "I bug possono essere segnalati su <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:342
+#: src/prefs/MenuEditorPage.js:340
 msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
@@ -1899,7 +1903,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:345
+#: src/prefs/MenuEditorPage.js:343
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
@@ -1909,14 +1913,14 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:348
+#: src/prefs/MenuEditorPage.js:346
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr ""
 "È possibile riordinare le voci di menu a sinistra tramite trascinamento."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:351
+#: src/prefs/MenuEditorPage.js:349
 #, javascript-format
 msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
@@ -1925,7 +1929,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:357
+#: src/prefs/MenuEditorPage.js:355
 msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
@@ -1935,7 +1939,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:360
+#: src/prefs/MenuEditorPage.js:358
 msgid ""
 "On Wayland, you can copy menu items by holding the Ctrl key while dragging "
 "them to another location."
@@ -1943,14 +1947,14 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:363
+#: src/prefs/MenuEditorPage.js:361
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
 msgstr "<a href=\"%s\">Traduci Fly-Pie su Hosted Weblate</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:369
+#: src/prefs/MenuEditorPage.js:367
 #, javascript-format
 msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
@@ -1960,25 +1964,21 @@ msgstr ""
 "</a>"
 
 #. Translators: The left-most item of the menu editor bread crumbs.
-#: src/prefs/MenuEditorPage.js:809
+#: src/prefs/MenuEditorPage.js:807
 msgid "All Menus"
 msgstr ""
 
-#: src/prefs/SettingsPage.js:253
-msgid "Save Preset"
-msgstr "Salva Predefinito"
-
-#: src/prefs/SettingsPage.js:273
+#: src/prefs/SettingsPage.js:272
 msgid "Save"
 msgstr "Salva"
 
-#: src/prefs/SettingsPage.js:297
+#: src/prefs/SettingsPage.js:296
 msgid "You should not store the preset in the extension directory!"
 msgstr "Non memorizzare il preset nella directory dell'estensione!"
 
 #. Translators: "It" refers to the preset if stored in the extension's
 #. directory.
-#: src/prefs/SettingsPage.js:301
+#: src/prefs/SettingsPage.js:300
 msgid ""
 "Here it will be deleted whenever Fly-Pie is updated. It has been saved "
 "anyways, but please consider to store it in a safer place!"
@@ -1986,11 +1986,11 @@ msgstr ""
 "Qui verrà cancellato ogni volta che Fly-Pie viene aggiornato. È stato "
 "comunque salvato, ma ti preghiamo di conservarlo in un luogo più sicuro!"
 
-#: src/prefs/SettingsPage.js:348
+#: src/prefs/SettingsPage.js:346
 msgid "Load"
 msgstr "Carica"
 
-#: src/prefs/SettingsPage.js:365
+#: src/prefs/SettingsPage.js:363
 msgid "Failed to load preset!"
 msgstr "Impossibile caricare il preset!"
 
@@ -2397,6 +2397,21 @@ msgstr "Disconnetti"
 #: src/common/menus/System.js:117
 msgid "Power Off…"
 msgstr "Spegni…"
+
+#~ msgid "Inactive"
+#~ msgstr "Non attivo"
+
+#~ msgid "Hovered"
+#~ msgstr "Attivo"
+
+#~ msgid "Export Menu Configuration"
+#~ msgstr "Esporta Configurazione del Menu"
+
+#~ msgid "Import Menu Configuration"
+#~ msgstr "Importa Configurazione del Menu"
+
+#~ msgid "Save Preset"
+#~ msgstr "Salva Predefinito"
 
 #~ msgid "See Tooltip for details."
 #~ msgstr "Vedere la descrizione del comando per i dettagli."
