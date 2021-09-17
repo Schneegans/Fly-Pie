@@ -4438,7 +4438,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                             <child>
                               <object class="GtkButton" id="load-preset-button">
-                                <property name="tooltip_text" translatable="yes">Imports settings from a JSON file.</property>
+                                <property name="tooltip_text" translatable="yes">Import settings from a JSON file.</property>
                                 <property name="child">
                                   <object class="GtkBox">
                                     <property name="margin_start">8</property>
@@ -4462,7 +4462,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                             <child>
                               <object class="GtkButton" id="save-preset-button">
-                                <property name="tooltip_text" translatable="yes">Saves the settings above to a JSON file.</property>
+                                <property name="tooltip_text" translatable="yes">Save the settings above to a JSON file.</property>
                                 <property name="child">
                                   <object class="GtkBox">
                                     <property name="margin_start">8</property>
@@ -4745,7 +4745,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </style>
                                     <child>
                                       <object class="GtkButton" id="import-menu-config-button">
-                                        <property name="tooltip_text" translatable="yes">Loads previously exported menu configurations from a JSON file.</property>
+                                        <property name="tooltip_text" translatable="yes">Load previously exported menu configurations from a JSON file.</property>
                                         <property name="child">
                                           <object class="GtkBox">
                                             <property name="margin_start">8</property>
@@ -4768,7 +4768,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="export-menu-config-button">
-                                        <property name="tooltip_text" translatable="yes">Exports all menus to a JSON file.</property>
+                                        <property name="tooltip_text" translatable="yes">Export all menus to a JSON file.</property>
                                         <property name="child">
                                           <object class="GtkBox">
                                             <property name="margin_start">8</property>
