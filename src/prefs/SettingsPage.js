@@ -250,7 +250,6 @@ var SettingsPage = class SettingsPage {
     // Open a save-dialog when the save button is pressed.
     this._builder.get_object('save-preset-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
-        title: _('Save Preset'),
         action: Gtk.FileChooserAction.SAVE,
         transient_for: button.get_root(),
         modal: true
@@ -325,7 +324,6 @@ var SettingsPage = class SettingsPage {
 
     this._builder.get_object('load-preset-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
-        title: _('Load a Preset'),
         action: Gtk.FileChooserAction.OPEN,
         transient_for: button.get_root(),
         modal: true

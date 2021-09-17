@@ -161,7 +161,6 @@ var MenuEditorPage = class MenuEditorPage {
     // Open a save-dialog when the export-config button is pressed.
     this._builder.get_object('export-menu-config-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
-        title: _('Export Menu Configuration'),
         action: Gtk.FileChooserAction.SAVE,
         transient_for: button.get_root(),
         modal: true
@@ -227,7 +226,6 @@ var MenuEditorPage = class MenuEditorPage {
     // Open a load-dialog when the import-config button is pressed.
     this._builder.get_object('import-menu-config-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
-        title: _('Import Menu Configuration'),
         action: Gtk.FileChooserAction.OPEN,
         transient_for: button.get_root(),
         modal: true
