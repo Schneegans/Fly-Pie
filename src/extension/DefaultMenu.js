@@ -37,8 +37,8 @@ var DefaultMenu = class DefaultMenu {
           'icon': 'desktop',
           'children': [
             {
-              // Translators: This is an entry of the default menu.
-              'name': _('Open Windows'),
+              // Translators: This is an entry of the default menu. I
+              'name': _('Running Apps'),
               'icon': 'preferences-system-windows',
               'type': 'RunningApps',
               'data': {
@@ -59,7 +59,7 @@ var DefaultMenu = class DefaultMenu {
             },
             {
               // Translators: This is an entry of the default menu.
-              'name': _('Right'),
+              'name': _('Next Workspace'),
               'icon': '▶️',
               'type': 'Shortcut',
               'data': {'shortcut': '<Control><Alt>Right'},
@@ -67,7 +67,7 @@ var DefaultMenu = class DefaultMenu {
             },
             {
               // Translators: This is an entry of the default menu.
-              'name': _('Left'),
+              'name': _('Previous Workspace'),
               'icon': '◀️',
               'type': 'Shortcut',
               'data': {'shortcut': '<Control><Alt>Left'},
