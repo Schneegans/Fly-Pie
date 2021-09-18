@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 13:04+0200\n"
+"POT-Creation-Date: 2021-09-18 13:27+0200\n"
 "PO-Revision-Date: 2021-09-15 20:36+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
@@ -1233,8 +1233,8 @@ msgstr ""
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:264 src/common/ConfigWidgetFactory.js:297
-msgid "Not bound."
-msgstr "Nicht gesetzt."
+msgid "Not bound"
+msgstr ""
 
 #: src/common/ConfigWidgetFactory.js:287
 msgid ""
@@ -1289,7 +1289,7 @@ msgstr "Sie haben den Erfolg \"%s\" erzielt!"
 msgid "Show Achievements"
 msgstr "Erfolge ansehen"
 
-#. Translators: This is an entry of the default menu.
+#. Translators: This is the name of the default menu.
 #: src/extension/DefaultMenu.js:28 src/prefs/ExampleMenu.js:26
 msgid "Example Menu"
 msgstr "Beispiel-Menü"
@@ -1310,12 +1310,14 @@ msgid "Close Window"
 msgstr "Fenster schließen"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:62 src/prefs/ExampleMenu.js:266
+#. Translators: The name of the ⏩ emoji of the tutorial menu.
+#: src/extension/DefaultMenu.js:62 src/prefs/ExampleMenu.js:349
 msgid "Right"
 msgstr "Rechts"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:70 src/prefs/ExampleMenu.js:269
+#. Translators: The name of the ⏪ emoji of the tutorial menu.
+#: src/extension/DefaultMenu.js:70 src/prefs/ExampleMenu.js:355
 msgid "Left"
 msgstr "Links"
 
@@ -1367,476 +1369,565 @@ msgstr "Möchten Sie wirklich alle Statistiken zurücksetzen?"
 msgid "All achievements will be lost!"
 msgstr "Alle Erfolge gehen verloren!"
 
-#. Translators: An emoji category.
+#. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:29
 msgid "Animals & Nature"
 msgstr "Tiere & Natur"
 
-#: src/prefs/ExampleMenu.js:33
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:34
 msgid "Flowers"
 msgstr "Blumen"
 
-#: src/prefs/ExampleMenu.js:36
+#. Translators: The name of the 🌷 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:38
 msgid "Tulip"
 msgstr "Tulpe"
 
-#: src/prefs/ExampleMenu.js:37
+#. Translators: The name of the 🌹 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:40
 msgid "Rose"
 msgstr "Rose"
 
-#: src/prefs/ExampleMenu.js:38
+#. Translators: The name of the 🌻 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:42
 msgid "Sunflower"
 msgstr "Sonnenblume"
 
-#: src/prefs/ExampleMenu.js:39
+#. Translators: The name of the 🌼 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:44
 msgid "Blossom"
 msgstr "Blüte"
 
-#: src/prefs/ExampleMenu.js:40
+#. Translators: The name of the 💐 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:46
 msgid "Bouquet"
 msgstr "Blumenstrauß"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:45
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:51
 msgid "Mammals"
 msgstr "Säugetiere"
 
-#: src/prefs/ExampleMenu.js:48
+#. Translators: The name of the 🐈 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:55
 msgid "Cat"
 msgstr "Katze"
 
-#: src/prefs/ExampleMenu.js:49
+#. Translators: The name of the 🐂 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:57
 msgid "Ox"
 msgstr "Ochse"
 
-#: src/prefs/ExampleMenu.js:50
+#. Translators: The name of the 🐕 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:59
 msgid "Dog"
 msgstr "Hund"
 
-#: src/prefs/ExampleMenu.js:51
+#. Translators: The name of the 🐖 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:61
 msgid "Pig"
 msgstr "Schwein"
 
-#: src/prefs/ExampleMenu.js:52
+#. Translators: The name of the 🐒 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:63
 msgid "Monkey"
 msgstr "Affe"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:57
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:68
 msgid "Reptiles"
 msgstr "Reptilien"
 
-#: src/prefs/ExampleMenu.js:60
+#. Translators: The name of the 🐊 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:72
 msgid "Crocodile"
 msgstr "Krokodil"
 
-#: src/prefs/ExampleMenu.js:61
+#. Translators: The name of the 🐍 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:74
 msgid "Snake"
 msgstr "Schlange"
 
-#: src/prefs/ExampleMenu.js:62
+#. Translators: The name of the 🐢 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:76
 msgid "Turtle"
 msgstr "Schildkröte"
 
-#: src/prefs/ExampleMenu.js:63
+#. Translators: The name of the 🦖 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:78
 msgid "T-Rex"
 msgstr "T-Rex"
 
-#: src/prefs/ExampleMenu.js:64
+#. Translators: The name of the 🦕 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:80
 msgid "Apatosaurus"
 msgstr "Apatosaurus"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:71
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:87
 msgid "Food & Drink"
 msgstr "Essen & Getränke"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:76
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:92
 msgid "Fruit"
 msgstr "Früchte"
 
-#: src/prefs/ExampleMenu.js:79
+#. Translators: The name of the 🍏 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:96
 msgid "Apple"
 msgstr "Apfel"
 
-#: src/prefs/ExampleMenu.js:80
+#. Translators: The name of the 🍉 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:98
 msgid "Watermelon"
 msgstr "Wassermelone"
 
-#: src/prefs/ExampleMenu.js:81
+#. Translators: The name of the 🍋 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:100
 msgid "Lemon"
 msgstr "Zitrone"
 
-#: src/prefs/ExampleMenu.js:82
+#. Translators: The name of the 🍌 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:102
 msgid "Banana"
 msgstr "Banane"
 
-#: src/prefs/ExampleMenu.js:83
+#. Translators: The name of the 🍓 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:104
 msgid "Strawberry"
 msgstr "Erdbeere"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:88
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:109
 msgid "Drink"
 msgstr "Getränke"
 
-#: src/prefs/ExampleMenu.js:91
+#. Translators: The name of the 🍵 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:113
 msgid "Tea"
 msgstr "Tee"
 
-#: src/prefs/ExampleMenu.js:92
+#. Translators: The name of the ☕ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:115
 msgid "Coffee"
 msgstr "Kaffee"
 
-#: src/prefs/ExampleMenu.js:93
+#. Translators: The name of the 🍺 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:117
 msgid "Beer"
 msgstr "Bier"
 
-#: src/prefs/ExampleMenu.js:94
+#. Translators: The name of the 🥃 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:119
 msgid "Whiskey"
 msgstr "Whiskey"
 
-#: src/prefs/ExampleMenu.js:95
+#. Translators: The name of the 🍹 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:121
 msgid "Cocktail"
 msgstr "Cocktail"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:100
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:126
 msgid "Sweets"
 msgstr "Süßigkeiten"
 
 #. Translators: This is the item which should be selected in the tutorial.
 #. Make sure the translation matches the name given in the tutorial!
-#: src/prefs/ExampleMenu.js:105
+#. Translators: The name of the 🍰 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:132
 msgid "Shortcake"
 msgstr "Törtchen"
 
-#: src/prefs/ExampleMenu.js:106
+#. Translators: The name of the 🍬 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:134
 msgid "Candy"
 msgstr "Bonbon"
 
-#: src/prefs/ExampleMenu.js:107
+#. Translators: The name of the 🍩 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:136
 msgid "Doughnut"
 msgstr "Doughnut"
 
-#: src/prefs/ExampleMenu.js:108
+#. Translators: The name of the 🍪 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:138
 msgid "Cookie"
 msgstr "Keks"
 
-#: src/prefs/ExampleMenu.js:109
+#. Translators: The name of the 🍫 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:140
 msgid "Chocolate"
 msgstr "Schokolade"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:116
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:147
 msgid "Activities"
 msgstr "Aktivitäten"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:121
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:152
 msgid "Games"
 msgstr "Spiele"
 
-#: src/prefs/ExampleMenu.js:124
+#. Translators: The name of the 🎱 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:156
 msgid "Billards"
 msgstr "Billard"
 
-#: src/prefs/ExampleMenu.js:125
+#. Translators: The name of the 🀄 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:158
 msgid "Mahjong"
 msgstr "Mahjong"
 
-#: src/prefs/ExampleMenu.js:126
+#. Translators: The name of the 🎳 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:160
 msgid "Bowling"
 msgstr "Bowling"
 
-#: src/prefs/ExampleMenu.js:127
+#. Translators: The name of the 🎯 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:162
 msgid "Darts"
 msgstr "Dart"
 
-#: src/prefs/ExampleMenu.js:128
+#. Translators: The name of the 🎮 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:164
 msgid "Video Game"
 msgstr "Computerspiel"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:133
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:169
 msgid "Sports"
 msgstr "Sport"
 
-#: src/prefs/ExampleMenu.js:136
+#. Translators: The name of the 🏏 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:173
 msgid "Cricket"
 msgstr "Cricket"
 
-#: src/prefs/ExampleMenu.js:137
+#. Translators: The name of the 🏒 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:175
 msgid "Ice Hockey"
 msgstr "Icehockey"
 
-#: src/prefs/ExampleMenu.js:138
+#. Translators: The name of the 🎾 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:177
 msgid "Tennis"
 msgstr "Tennis"
 
-#: src/prefs/ExampleMenu.js:139
+#. Translators: The name of the 🎣 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:179
 msgid "Fishing"
 msgstr "Angeln"
 
-#: src/prefs/ExampleMenu.js:140
+#. Translators: The name of the 🎿 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:181
 msgid "Skiing"
 msgstr "Skifahren"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:145
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:186
 msgid "Places"
 msgstr "Orte"
 
-#: src/prefs/ExampleMenu.js:148
+#. Translators: The name of the 🗻 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:190
 msgid "Mount Fuji"
 msgstr "Fuji"
 
-#: src/prefs/ExampleMenu.js:149
+#. Translators: The name of the 🌋 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:192
 msgid "Mount Etna"
 msgstr "Ätna"
 
-#: src/prefs/ExampleMenu.js:150
+#. Translators: The name of the 🗽 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:194
 msgid "Statue of Liberty"
 msgstr "Freiheitsstatue"
 
-#: src/prefs/ExampleMenu.js:151
+#. Translators: The name of the 🗾 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:196
 msgid "Japan"
 msgstr "Japan"
 
-#: src/prefs/ExampleMenu.js:152
+#. Translators: The name of the 🗿 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:198
 msgid "Moyai"
 msgstr "Moyai"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:159
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:205
 msgid "Objects"
 msgstr "Gegenstände"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:164
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:210
 msgid "Cars"
 msgstr "Autos"
 
-#: src/prefs/ExampleMenu.js:167
+#. Translators: The name of the 🚌 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:214
 msgid "Bus"
 msgstr "Bus"
 
-#: src/prefs/ExampleMenu.js:168
+#. Translators: The name of the 🚒 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:216
 msgid "Fire Engine"
 msgstr "Feuerwehr"
 
-#: src/prefs/ExampleMenu.js:169
+#. Translators: The name of the 🚗 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:218
 msgid "Automobile"
 msgstr "PKW"
 
-#: src/prefs/ExampleMenu.js:170
+#. Translators: The name of the 🚜 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:220
 msgid "Tractor"
 msgstr "Traktor"
 
-#: src/prefs/ExampleMenu.js:171
+#. Translators: The name of the 🚚 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:222
 msgid "Truck"
 msgstr "LKW"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:176
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:227
 msgid "Buildings"
 msgstr "Gebäude"
 
-#: src/prefs/ExampleMenu.js:179
+#. Translators: The name of the 🏤 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:231
 msgid "Post Office"
 msgstr "Post"
 
-#: src/prefs/ExampleMenu.js:180
+#. Translators: The name of the 🏫 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:233
 msgid "School"
 msgstr "Schule"
 
-#: src/prefs/ExampleMenu.js:181
+#. Translators: The name of the 🏥 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:235
 msgid "Hospital"
 msgstr "Krankenhaus"
 
-#: src/prefs/ExampleMenu.js:182
+#. Translators: The name of the 🏦 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:237
 msgid "Bank"
 msgstr "Bank"
 
-#: src/prefs/ExampleMenu.js:183
+#. Translators: The name of the 🏩 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:239
 msgid "Love Hotel"
 msgstr "Liebeshotel"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:188
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:244
 msgid "Instruments"
 msgstr "Instrumente"
 
-#: src/prefs/ExampleMenu.js:191
+#. Translators: The name of the 🎷 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:248
 msgid "Saxophone"
 msgstr "Saxophon"
 
-#: src/prefs/ExampleMenu.js:192
+#. Translators: The name of the 🎸 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:250
 msgid "Guitar"
 msgstr "Gitarre"
 
-#: src/prefs/ExampleMenu.js:193
+#. Translators: The name of the 🎺 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:252
 msgid "Trumpet"
 msgstr "Trompete"
 
-#: src/prefs/ExampleMenu.js:194
+#. Translators: The name of the 🎤 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:254
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: src/prefs/ExampleMenu.js:195
+#. Translators: The name of the 🥁 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:256
 msgid "Drum"
 msgstr "Trommel"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:202
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:263
 msgid "Smileys"
 msgstr "Smileys"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:207
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:268
 msgid "Happy Faces"
 msgstr "Fröhliche Smileys"
 
-#: src/prefs/ExampleMenu.js:210
+#. Translators: The name of the 😃 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:272
 msgid "Smiley"
 msgstr "Smiley"
 
-#: src/prefs/ExampleMenu.js:211
+#. Translators: The name of the 😉 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:274
 msgid "Winking Face"
 msgstr "Zwinkernd"
 
-#: src/prefs/ExampleMenu.js:212
+#. Translators: The name of the 😊 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:276
 msgid "Face With Smiling Eyes"
 msgstr "Lachende Augen"
 
-#: src/prefs/ExampleMenu.js:213
+#. Translators: The name of the 😅 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:278
 msgid "Face With Sweat"
 msgstr "Schwitzend"
 
-#: src/prefs/ExampleMenu.js:214
+#. Translators: The name of the 🤣 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:280
 msgid "ROFL"
 msgstr "ROFL"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:219
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:285
 msgid "Angry Faces"
 msgstr "Wütende Smileys"
 
-#: src/prefs/ExampleMenu.js:222
+#. Translators: The name of the 🤮 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:289
 msgid "Vomiting Face"
 msgstr "Kotzend"
 
-#: src/prefs/ExampleMenu.js:223
+#. Translators: The name of the 🤨 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:291
 msgid "Skeptical Face"
 msgstr "Skeptisch"
 
-#: src/prefs/ExampleMenu.js:224
+#. Translators: The name of the 😡 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:293
 msgid "Pouting Face"
 msgstr "Schmollend"
 
-#: src/prefs/ExampleMenu.js:225
+#. Translators: The name of the 😠 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:295
 msgid "Angry Face"
 msgstr "Wütend"
 
-#: src/prefs/ExampleMenu.js:226
+#. Translators: The name of the 🤬 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:297
 msgid "Very Angry Face"
 msgstr "Sehr wütend"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:231
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:302
 msgid "Surprised Faces"
 msgstr "Überraschte Smileys"
 
-#: src/prefs/ExampleMenu.js:234
+#. Translators: The name of the 😳 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:306
 msgid "Flushed Face"
 msgstr "Errötend"
 
-#: src/prefs/ExampleMenu.js:235
+#. Translators: The name of the 😧 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:308
 msgid "Anguished Face"
 msgstr "Schmerzgeplagt"
 
-#: src/prefs/ExampleMenu.js:236
+#. Translators: The name of the 😲 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:310
 msgid "Astonished Face"
 msgstr "Verblüfft"
 
-#: src/prefs/ExampleMenu.js:237
+#. Translators: The name of the 😱 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:312
 msgid "Screaming Face"
 msgstr "Schreiend"
 
-#: src/prefs/ExampleMenu.js:238
+#. Translators: The name of the 🤯 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:314
 msgid "Pouff"
 msgstr "Puff"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:245
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:321
 msgid "Symbols"
 msgstr "Symbole"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:250
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:326
 msgid "Star Signs"
 msgstr "Sternzeichen"
 
-#: src/prefs/ExampleMenu.js:253
+#. Translators: The name of the ♉ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:330
 msgid "Taurus"
 msgstr "Stier"
 
-#: src/prefs/ExampleMenu.js:254
+#. Translators: The name of the ♋ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:332
 msgid "Cancer"
 msgstr "Krebs"
 
-#: src/prefs/ExampleMenu.js:255
+#. Translators: The name of the ♍ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:334
 msgid "Virgo"
 msgstr "Jungfrau"
 
-#: src/prefs/ExampleMenu.js:256
+#. Translators: The name of the ♏ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:336
 msgid "Scorpius"
 msgstr "Skorpion"
 
-#: src/prefs/ExampleMenu.js:257
+#. Translators: The name of the ♑ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:338
 msgid "Capricorn"
 msgstr "Steinbock"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:262
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:343
 msgid "Arrows"
 msgstr "Pfeile"
 
-#: src/prefs/ExampleMenu.js:265
+#. Translators: The name of the ⏫ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:347
 msgid "Up"
 msgstr "Hoch"
 
-#: src/prefs/ExampleMenu.js:267
+#. Translators: The name of the 🔀 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:351
 msgid "Twisted"
 msgstr "Verschlungen"
 
-#: src/prefs/ExampleMenu.js:268
+#. Translators: The name of the ⏬ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:353
 msgid "Down"
 msgstr "Runter"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:274
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:360
 msgid "Info Signs"
 msgstr "Infozeichen"
 
-#: src/prefs/ExampleMenu.js:277
+#. Translators: The name of the 🚮 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:364
 msgid "Litter Bin"
 msgstr "Mülleimer"
 
-#: src/prefs/ExampleMenu.js:278
+#. Translators: The name of the 🚰 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:366
 msgid "Potable Water"
 msgstr "Trinkwasser"
 
-#: src/prefs/ExampleMenu.js:279
+#. Translators: The name of the 🚹 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:368
 msgid "Mens"
 msgstr "Herren"
 
-#: src/prefs/ExampleMenu.js:280
+#. Translators: The name of the 🚺 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:370
 msgid "Womens"
 msgstr "Damen"
 
-#: src/prefs/ExampleMenu.js:281
+#. Translators: The name of the 🚼 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:372
 msgid "Baby"
 msgstr "Baby"
 
@@ -2418,6 +2509,9 @@ msgstr "Abmelden"
 #: src/common/menus/System.js:117
 msgid "Power Off…"
 msgstr "Ausschalten…"
+
+#~ msgid "Not bound."
+#~ msgstr "Nicht gesetzt."
 
 #~ msgid "Inactive"
 #~ msgstr "Inaktiv"
