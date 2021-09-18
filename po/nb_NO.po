@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-18 13:56+0200\n"
-"PO-Revision-Date: 2021-05-08 05:39+0000\n"
+"PO-Revision-Date: 2021-09-18 17:54+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
 "core/nb_NO/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: resources/ui/copyValueButton.ui:6
 msgid "Copy left value to right side"
@@ -32,7 +32,7 @@ msgstr "Avbryt"
 
 #: resources/ui/iconSelectDialog.ui:19
 msgid "Select Icon"
-msgstr ""
+msgstr "Velg ikon"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:44
@@ -46,7 +46,7 @@ msgstr "Egendefinert ikon"
 
 #: resources/ui/imageChooserButton.ui:16 src/prefs/ImageChooserButton.js:88
 msgid "(None)"
-msgstr ""
+msgstr "(Ingen)"
 
 #. A kind of animation.
 #: resources/ui/settings.ui:19
@@ -199,7 +199,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:797
 msgid "Generate a Random Preset"
-msgstr ""
+msgstr "Generer en tilfeldig forhåndsinnstilling"
 
 #: resources/ui/settings.ui:828
 #, fuzzy
@@ -1565,7 +1565,7 @@ msgstr "Bowling"
 #. Translators: The name of the 🎯 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:162
 msgid "Darts"
-msgstr ""
+msgstr "Dart"
 
 #. Translators: The name of the 🎮 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:164
@@ -1907,7 +1907,7 @@ msgstr ""
 #. Translators: The name of the 🚼 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:372
 msgid "Baby"
-msgstr ""
+msgstr "Baby"
 
 #: src/prefs/MenuEditor.js:258
 msgid "Not Bound"
