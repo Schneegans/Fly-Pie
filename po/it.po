@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-17 21:32+0200\n"
+"POT-Creation-Date: 2021-09-18 13:04+0200\n"
 "PO-Revision-Date: 2021-05-31 10:33+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
@@ -795,7 +795,7 @@ msgid "Menu Editor"
 msgstr "Menu Editore"
 
 #: resources/ui/settings.ui:4563
-msgid "Add a new menu item"
+msgid "Add a new menu item."
 msgstr ""
 
 #: resources/ui/settings.ui:4642
@@ -815,7 +815,7 @@ msgid "Drop items here."
 msgstr ""
 
 #: resources/ui/settings.ui:4748
-msgid "Load previously exported menu configurations from a JSON file."
+msgid "Load a previously exported menu configurations from a JSON file."
 msgstr ""
 
 #: resources/ui/settings.ui:4771
@@ -951,252 +951,279 @@ msgstr "V"
 msgid "%s Cancellor"
 msgstr "%s Cancellor"
 
-#: src/common/Achievements.js:414
+#. Translators: The description of the '%s Cancellor' achievement.
+#: src/common/Achievements.js:415
 #, javascript-format
 msgid "Abort a selection %x times."
 msgstr "Annulla una selezione %x volte."
 
 #. Translators: The name of the 'Select %x items.' achievement.
-#: src/common/Achievements.js:427
+#: src/common/Achievements.js:428
 #, javascript-format
 msgid "%s Pielot"
 msgstr "%s Pielot"
 
-#: src/common/Achievements.js:428
+#. Translators: The description of the '%s Pielot' achievement.
+#: src/common/Achievements.js:430
 #, javascript-format
 msgid "Select %x items."
 msgstr "Seleziona %x elementi."
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:442
+#: src/common/Achievements.js:444
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
 msgstr "%s Selettore di Gesti di Primo Livello"
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:445
+#: src/common/Achievements.js:447
 #, javascript-format
 msgid "%s Submenu Gesture-Selector"
 msgstr "%s Selettore delle Gesture del Sottomenu"
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:448
+#: src/common/Achievements.js:450
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
 msgstr "%s Sottomenu Selettore-Gesture"
 
-#: src/common/Achievements.js:454
+#. Translators: The description of the 'Gesture-Selector' achievement.
+#: src/common/Achievements.js:457
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
 msgstr "Seleziona %x elementi alla profondità %d in modalità di marcatura."
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:471
+#: src/common/Achievements.js:474
 #, javascript-format
 msgid "%s Toplevel Click-Selector"
 msgstr "%s Selettore di Clic di Primo Livello"
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:474
+#: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Submenu Click-Selector"
 msgstr "%s Selettore Clic del Sottomenu"
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:477
+#: src/common/Achievements.js:480
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
 msgstr "%s Selettore Clic del Sottomenu"
 
-#: src/common/Achievements.js:483
+#. Translators: The description of the 'Click-Selector' achievement.
+#: src/common/Achievements.js:487
 #, javascript-format
 msgid "Select %x items at depth %d with mouse clicks."
 msgstr "Seleziona %x elementi alla profondità %d con i clic del mouse."
 
 #. Translators: The name of the 'Select %x items at depth 1 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:505
+#: src/common/Achievements.js:509
 #, javascript-format
 msgid "%s Toplevel Selector"
 msgstr "%s Selettore di Primo livello"
 
 #. Translators: The name of the 'Select %x items at depth 2 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:508
+#: src/common/Achievements.js:512
 #, javascript-format
 msgid "%s Submenu Selector"
 msgstr "%s Selettore Sottomenu"
 
 #. Translators: The name of the 'Select %x items at depth 3 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:511
+#: src/common/Achievements.js:515
 #, javascript-format
 msgid "%s Subsubmenu Selector"
 msgstr "%s Selettore sotto sottomenu"
 
-#: src/common/Achievements.js:522
+#. Translators: The description of the 'Selector' achievement.
+#: src/common/Achievements.js:527
 msgid "Select %x items at depth %d in less than %t milliseconds."
 msgstr "Seleziona %x elementi alla profondità %d in meno di %t millisecondi."
 
 #. Translators: The name of the 'Open the settings dialog %x times.'
 #. achievement.
-#: src/common/Achievements.js:542
+#: src/common/Achievements.js:547
 msgid "The Journey Is The Reward %i"
 msgstr "Il Viaggio è la Ricompensa %i"
 
-#: src/common/Achievements.js:543
+#. Translators: The description of the 'The Journey Is The Reward %i'
+#. achievement.
+#: src/common/Achievements.js:550
 #, javascript-format
 msgid "Open the settings dialog %x times."
 msgstr "Apri la finestra di dialogo delle impostazioni %x volte."
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
-#: src/common/Achievements.js:558
+#: src/common/Achievements.js:565
 msgid "Nerd Alert %i"
 msgstr "Avviso Nerd %i"
 
-#: src/common/Achievements.js:559
+#. Translators: The description of the 'Nerd Alert %i' achievement.
+#: src/common/Achievements.js:567
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
 msgstr "Apri i menu %x con l'interfaccia D-Bus."
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
-#: src/common/Achievements.js:573
+#: src/common/Achievements.js:581
 msgid "Entropie %i"
 msgstr "Entropia %i"
 
-#: src/common/Achievements.js:575
+#: src/common/Achievements.js:585
 #, javascript-format
 msgid "Generate %x random presets."
 msgstr "Genera %x preset casuali."
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
-#: src/common/Achievements.js:588
+#: src/common/Achievements.js:598
 #, javascript-format
 msgid "%s Preset Exporter"
 msgstr "%s Esportatore Preset"
 
-#: src/common/Achievements.js:590
+#. Translators: The description of the '%s Preset Exporter' achievement if
+#. only one preset needs to be exported.
+#: src/common/Achievements.js:602
 msgid "Export a custom preset."
 msgstr "Esportare un preset personalizzato."
 
-#: src/common/Achievements.js:591
+#. Translators: The description of the '%s Preset Exporter' achievement.
+#: src/common/Achievements.js:604
 #, javascript-format
 msgid "Export %x custom presets."
 msgstr "Esporta %x preset personalizzati."
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
-#: src/common/Achievements.js:604
+#: src/common/Achievements.js:617
 #, javascript-format
 msgid "%s Preset Importer"
 msgstr "%s Importatore Preset"
 
-#: src/common/Achievements.js:606
+#. Translators: The description of the '%s Preset Importer' achievement if
+#. only one preset needs to be imported.
+#: src/common/Achievements.js:621
 msgid "Import a custom preset."
 msgstr "Importa un preset personalizzato."
 
-#: src/common/Achievements.js:607
+#. Translators: The description of the '%s Preset Importer' achievement.
+#: src/common/Achievements.js:623
 #, javascript-format
 msgid "Import %x custom presets."
 msgstr "Importa %x preset personalizzati."
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
-#: src/common/Achievements.js:620
+#: src/common/Achievements.js:636
 #, javascript-format
 msgid "%s Menu Importer"
 msgstr "%s Importatore di Menu"
 
-#: src/common/Achievements.js:622
+#. Translators: The description of the '%s Menu Importer' achievement if
+#. only one menu needs to be imported.
+#: src/common/Achievements.js:640
 msgid "Import a menu configuration."
 msgstr "Importa una configurazione del menu."
 
-#: src/common/Achievements.js:623
+#. Translators: The description of the '%s Menu Importer' achievement.
+#: src/common/Achievements.js:642
 #, javascript-format
 msgid "Import %x menu configurations."
 msgstr "Importa %x configurazioni del menu."
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
-#: src/common/Achievements.js:637
+#: src/common/Achievements.js:656
 #, javascript-format
 msgid "%s Menu Exporter"
 msgstr "%s Esportatore di Menu"
 
-#: src/common/Achievements.js:639
+#. Translators: The description of the '%s Menu Exporter' achievement if
+#. only one menu needs to be exported.
+#: src/common/Achievements.js:660
 msgid "Export a menu configuration."
 msgstr "Esporta una configurazione del menu."
 
-#: src/common/Achievements.js:640
+#. Translators: The description of the '%s Menu Exporter' achievement.
+#: src/common/Achievements.js:662
 #, javascript-format
 msgid "Export %x menu configurations."
 msgstr "Esporta %x configurazioni del menu."
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
-#: src/common/Achievements.js:655
+#: src/common/Achievements.js:677
 msgid "There Should Be No More Than Twelve Items…? %i"
 msgstr "Non dovrebbero esserci più di dodici elementi ...? %i"
 
-#: src/common/Achievements.js:656
+#. Translators: The description of the 'There Should Be No More Than Twelve
+#. Items…? %i' achievement.
+#: src/common/Achievements.js:680
 #, javascript-format
 msgid "Create %x items in the menu editor."
 msgstr "Crea %x elementi nell'editor del menu."
 
 #. Translators: The name of the 'Open a preview menu %x times.' achievement.
-#: src/common/Achievements.js:670
+#: src/common/Achievements.js:694
 #, javascript-format
 msgid "%s Menu Designer"
 msgstr "%s Designer del Menu"
 
-#: src/common/Achievements.js:672
+#. Translators: The description of the '%s Menu Designer' achievement.
+#: src/common/Achievements.js:697
 #, javascript-format
 msgid "Open a preview menu %x times."
 msgstr "Apri un menu di anteprima %x volte."
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:685
+#: src/common/Achievements.js:710
 msgid "Grumpie Rookie"
 msgstr "Grumpie Rookie"
 
-#: src/common/Achievements.js:686
+#. Translators: The description of the 'Grumpie Rookie' achievement.
+#: src/common/Achievements.js:712
 #, javascript-format
 msgid "Open the tutorial menu %x times."
 msgstr "Apri il menu del tutorial %x volte."
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:698
+#: src/common/Achievements.js:724
 msgid "Bachelor Pielot"
 msgstr "Bachelor Pielot"
 
-#: src/common/Achievements.js:699
+#. Translators: The description of the 'Bachelor Pielot' achievement.
+#: src/common/Achievements.js:726
 msgid "Get all medals of the tutorial."
 msgstr "Ottieni tutte le medaglie del tutorial."
 
 #. Translators: The name of the hidden 'Delete all of your menus.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:711
+#: src/common/Achievements.js:738
 msgid "Say Good-Pie!"
 msgstr "Dì Good-Pie!"
 
-#: src/common/Achievements.js:712
+#. Translators: The description of the 'Say Good-Pie!' achievement.
+#: src/common/Achievements.js:740
 msgid "Delete all of your menus."
 msgstr "Elimina tutti i tuoi menu."
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
 #. achievement.
-#: src/common/Achievements.js:725
+#: src/common/Achievements.js:753
 msgid "That's Philanthropie!"
 msgstr "Questa è Filantropia!"
 
-#: src/common/Achievements.js:726
+#. Translators: The description of the 'That's Philanthropie!' achievement.
+#: src/common/Achievements.js:755
 msgid "Consider becoming a sponsor of Fly-Pie."
 msgstr "Considera l'idea di diventare uno sponsor di Fly-Pie."
 
