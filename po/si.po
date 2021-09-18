@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 19:54+0200\n"
+"POT-Creation-Date: 2021-09-18 20:20+0200\n"
 "PO-Revision-Date: 2021-04-23 15:14+0000\n"
 "Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
 "Language-Team: Sinhala <https://hosted.weblate.org/projects/fly-pie/core/si/"
@@ -48,57 +48,57 @@ msgstr ""
 msgid "(None)"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:19
 msgid "Linear"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:23
 msgid "Ease"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:27
 msgid "Ease-In"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:31
 msgid "Ease-Out"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:35
 msgid "Ease-In-Out"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:39
 msgid "Ease-In-Quad"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:43
 msgid "Ease-Out-Quad"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:47
 msgid "Ease-In-Out-Quad"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:51
 msgid "Ease-In-Back"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:55
 msgid "Ease-Out-Back"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:59
 msgid "Ease-In-Out-Back"
 msgstr ""
@@ -178,11 +178,11 @@ msgstr ""
 
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/settings.ui:785
-msgid "Initializes most settings to random values."
+msgid "Initialize most settings to random values."
 msgstr ""
 
 #: resources/ui/settings.ui:797
-msgid "Generate a Random Preset"
+msgid "Generate Random Preset"
 msgstr ""
 
 #: resources/ui/settings.ui:828
@@ -664,7 +664,7 @@ msgid "Show a notification whenever you complete an achievement."
 msgstr ""
 
 #: resources/ui/settings.ui:4425
-msgid "Load a Preset"
+msgid "Load Preset"
 msgstr ""
 
 #: resources/ui/settings.ui:4437

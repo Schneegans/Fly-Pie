@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 19:54+0200\n"
+"POT-Creation-Date: 2021-09-18 20:20+0200\n"
 "PO-Revision-Date: 2021-09-15 20:36+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
@@ -49,57 +49,57 @@ msgstr "Benutzerdefiniertes Symbol"
 msgid "(None)"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:19
 msgid "Linear"
 msgstr "Linear"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:23
 msgid "Ease"
 msgstr "Ease"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:27
 msgid "Ease-In"
 msgstr "Ease-In"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:31
 msgid "Ease-Out"
 msgstr "Ease-Out"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:35
 msgid "Ease-In-Out"
 msgstr "Ease-In-Out"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:39
 msgid "Ease-In-Quad"
 msgstr "Ease-In-Quad"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:43
 msgid "Ease-Out-Quad"
 msgstr "Ease-Out-Quad"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:47
 msgid "Ease-In-Out-Quad"
 msgstr "Ease-In-Out-Quad"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:51
 msgid "Ease-In-Back"
 msgstr "Ease-In-Back"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:55
 msgid "Ease-Out-Back"
 msgstr "Ease-Out-Back"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:59
 msgid "Ease-In-Out-Back"
 msgstr "Ease-In-Out-Back"
@@ -194,12 +194,12 @@ msgstr ""
 
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/settings.ui:785
-msgid "Initializes most settings to random values."
-msgstr "Initialisiert die meisten Einstellungen auf zufällige Werte."
+msgid "Initialize most settings to random values."
+msgstr ""
 
 #: resources/ui/settings.ui:797
-msgid "Generate a Random Preset"
-msgstr "Zufällige Voreinstellung erzeugen"
+msgid "Generate Random Preset"
+msgstr "Zufällig erzeugen"
 
 #: resources/ui/settings.ui:828
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
@@ -745,8 +745,8 @@ msgid "Show a notification whenever you complete an achievement."
 msgstr "Beim Abschließen eines Erfolges eine Benachrichtigung anzeigen."
 
 #: resources/ui/settings.ui:4425
-msgid "Load a Preset"
-msgstr ""
+msgid "Load Preset"
+msgstr "Voreinstellung laden"
 
 #: resources/ui/settings.ui:4437
 msgid "Load settings from a JSON file."
@@ -2479,6 +2479,12 @@ msgstr "Abmelden"
 msgid "Power Off…"
 msgstr "Ausschalten…"
 
+#~ msgid "Initializes most settings to random values."
+#~ msgstr "Initialisiert die meisten Einstellungen auf zufällige Werte."
+
+#~ msgid "Generate a Random Preset"
+#~ msgstr "Zufällige Voreinstellung erzeugen"
+
 #~ msgid "<big>Last selection time: <b>- ms</b></big>"
 #~ msgstr "<big>Letzte Auswahlzeit: <b>- ms</b></big>"
 
@@ -2559,9 +2565,6 @@ msgstr "Ausschalten…"
 #~ msgid "Pick Trace Color"
 #~ msgstr "Farbe der Verbindungslinien wählen"
 
-#~ msgid "Load Preset"
-#~ msgstr "Voreinstellung laden"
-
 #~ msgid ""
 #~ "💕️ Do you want to show that you love Fly-Pie?\n"
 #~ "<a href=\"https://github.com/sponsors/Schneegans\">You may already become "
@@ -2573,9 +2576,6 @@ msgstr "Ausschalten…"
 
 #~ msgid "Initializes the settings below to random values"
 #~ msgstr "Initialisiert die Einstellungen weiter unten mit zufälligen Werten"
-
-#~ msgid "Generate Random Preset"
-#~ msgstr "Zufällig erzeugen"
 
 #~ msgid ""
 #~ "Try remembering the path to an item. Open the menu and <b>draw the path "

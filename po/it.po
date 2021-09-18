@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 19:54+0200\n"
+"POT-Creation-Date: 2021-09-18 20:20+0200\n"
 "PO-Revision-Date: 2021-05-31 10:33+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
@@ -48,57 +48,57 @@ msgstr "Icona personalizzata"
 msgid "(None)"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:19
 msgid "Linear"
 msgstr "Lineare"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:23
 msgid "Ease"
 msgstr "Ease"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:27
 msgid "Ease-In"
 msgstr "Ease-In"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:31
 msgid "Ease-Out"
 msgstr "Ease-Out"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:35
 msgid "Ease-In-Out"
 msgstr "Ease-In-Out"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:39
 msgid "Ease-In-Quad"
 msgstr "Ease-In-Quad"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:43
 msgid "Ease-Out-Quad"
 msgstr "Ease-Out-Quad"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:47
 msgid "Ease-In-Out-Quad"
 msgstr "Ease-In-Out-Quad"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:51
 msgid "Ease-In-Back"
 msgstr "Ease-In-Back"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:55
 msgid "Ease-Out-Back"
 msgstr "Ease-Out-Back"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:59
 msgid "Ease-In-Out-Back"
 msgstr "Ease-In-Out-Back"
@@ -191,12 +191,12 @@ msgstr ""
 
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/settings.ui:785
-msgid "Initializes most settings to random values."
+msgid "Initialize most settings to random values."
 msgstr ""
 
 #: resources/ui/settings.ui:797
-msgid "Generate a Random Preset"
-msgstr ""
+msgid "Generate Random Preset"
+msgstr "Genera un predefinito casuale"
 
 #: resources/ui/settings.ui:828
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
@@ -749,8 +749,8 @@ msgid "Show a notification whenever you complete an achievement."
 msgstr "Mostra una notifica ogni volta che completi un obiettivo."
 
 #: resources/ui/settings.ui:4425
-msgid "Load a Preset"
-msgstr ""
+msgid "Load Preset"
+msgstr "Carica un Preset"
 
 #: resources/ui/settings.ui:4437
 msgid "Load settings from a JSON file."
@@ -2558,9 +2558,6 @@ msgstr "Spegni…"
 #~ msgid "Pick Trace Color"
 #~ msgstr "Scegli colore traccia"
 
-#~ msgid "Load Preset"
-#~ msgstr "Carica un Preset"
-
 #~ msgid ""
 #~ "💕️ Do you want to show that you love Fly-Pie?\n"
 #~ "<a href=\"https://github.com/sponsors/Schneegans\">You may already become "
@@ -2572,9 +2569,6 @@ msgstr "Spegni…"
 
 #~ msgid "Initializes the settings below to random values"
 #~ msgstr "Inizializza le impostazioni di seguito per valori casuali"
-
-#~ msgid "Generate Random Preset"
-#~ msgstr "Genera un predefinito casuale"
 
 #~ msgid ""
 #~ "Try remembering the path to an item. Open the menu and <b>draw the path "
