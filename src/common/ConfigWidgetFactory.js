@@ -261,7 +261,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const label = new Gtk.ShortcutLabel({
       // Translators: This is shown on the shortcut-buttons when no shortcut is selected.
-      disabled_text: _('Not bound.'),
+      disabled_text: _('Not bound'),
       halign: Gtk.Align.CENTER,
       valign: Gtk.Align.CENTER
     });
@@ -294,7 +294,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         label.get_root().get_surface().restore_system_shortcuts();
       }
       row.parent.unselect_all();
-      label.set_disabled_text(_('Not bound.'));
+      label.set_disabled_text(_('Not bound'));
     };
 
     // When the row is activated, the input is grabbed.

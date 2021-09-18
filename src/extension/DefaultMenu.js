@@ -24,7 +24,7 @@ var DefaultMenu = class DefaultMenu {
   static get() {
 
     const menu = {
-      // Translators: This is an entry of the default menu.
+      // Translators: This is the name of the default menu.
       'name': _('Example Menu'),
       'icon': '🌟️',
       'shortcut': '<Primary>space',
