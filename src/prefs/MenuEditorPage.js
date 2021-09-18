@@ -256,9 +256,15 @@ var MenuEditorPage = class MenuEditorPage {
             // here. We also run the ItemRegistry.normalizeConfig() to catch some obvious
             // format errors.
             if (success) {
-              const config = JSON.parse(contents);
-              ItemRegistry.normalizeConfig(config);
-              this._settings.set_string('menu-configuration', JSON.stringify(config));
+              const configs = JSON.parse(contents);
+
+              if (!Array.isArray(configs)) {
+                throw 'The JSON file should contain an array of menu configurations!';
+              }
+
+              configs.forEach(config => ItemRegistry.normalizeConfig(config));
+
+              this._settings.set_string('menu-configuration', JSON.stringify(configs));
               this._loadMenuConfiguration();
 
               // Store this in our statistics.

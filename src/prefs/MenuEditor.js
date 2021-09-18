@@ -1051,10 +1051,12 @@ function registerWidgets() {
           }
         }
 
-        if (this._centerItem == null && parentAngle == null) {
+        if (this._centerItem == null && parentAngle == null && centerConfig != null) {
           // Transition from overview to top-level.
           this._upcomingTransition = TransitionType.TRANSITION_A;
-        } else if (this._parentAngle == null && centerConfig == null) {
+        } else if (
+            this._centerItem != null && this._parentAngle == null &&
+            centerConfig == null) {
           // Transition from top-level to overview.
           this._upcomingTransition = TransitionType.TRANSITION_B;
         } else if (wentOneLevelDeeper) {
