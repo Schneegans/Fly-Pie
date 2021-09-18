@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 20:20+0200\n"
+"POT-Creation-Date: 2021-09-18 20:29+0200\n"
 "PO-Revision-Date: 2021-08-06 09:34+0000\n"
 "Last-Translator: Thiago Carmona Monteiro <Guarakami1807@protonmail.ch>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/fly-"
@@ -1171,7 +1171,8 @@ msgstr ""
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:264 src/common/ConfigWidgetFactory.js:297
-msgid "Not bound"
+#: src/prefs/MenuEditor.js:258
+msgid "Not Bound"
 msgstr ""
 
 #: src/common/ConfigWidgetFactory.js:287
@@ -1865,10 +1866,6 @@ msgstr ""
 #. Translators: The name of the 🚼 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:372
 msgid "Baby"
-msgstr ""
-
-#: src/prefs/MenuEditor.js:258
-msgid "Not Bound"
 msgstr ""
 
 #. Translators: This is shown as an in-app notification when the user
