@@ -1087,7 +1087,6 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                       <object class="GtkLabel" id="last-selection-time-1">
                                         <property name="halign">start</property>
                                         <property name="hexpand">1</property>
-                                        <property name="label" translatable="yes" comments="ms = milliseconds">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                                         <property name="use_markup">1</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -1099,7 +1098,6 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                       <object class="GtkLabel" id="best-selection-time-1">
                                         <property name="halign">start</property>
                                         <property name="hexpand">1</property>
-                                        <property name="label" translatable="yes" comments="ms = milliseconds">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                                         <property name="use_markup">1</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -1320,7 +1318,6 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                                       <object class="GtkLabel" id="best-selection-time-2">
                                         <property name="halign">start</property>
                                         <property name="hexpand">1</property>
-                                        <property name="label">&lt;big&gt;Best selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                                         <property name="use_markup">1</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -1332,7 +1329,6 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                                       <object class="GtkLabel" id="last-selection-time-2">
                                         <property name="halign">start</property>
                                         <property name="hexpand">1</property>
-                                        <property name="label">&lt;big&gt;Last selection time: &lt;b&gt;- ms&lt;/b&gt;&lt;/big&gt;</property>
                                         <property name="use_markup">1</property>
                                         <layout>
                                           <property name="column">0</property>
