@@ -411,6 +411,7 @@ var Achievements = GObject.registerClass(
             // Translators: The name of the 'Abort a selection %x times.' achievement.
             name: formatName(_('%s Cancellor'), i),
             description:
+                // Translators: The description of the '%s Cancellor' achievement.
                 _('Abort a selection %x times.').replace('%x', BASE_RANGES[i + 1] * 2),
             bgImage: bgImages[i],
             fgImage: 'cancel.svg',
@@ -425,6 +426,7 @@ var Achievements = GObject.registerClass(
           achievements.set('master' + i, {
             // Translators: The name of the 'Select %x items.' achievement.
             name: formatName(_('%s Pielot'), i),
+            // Translators: The description of the '%s Pielot' achievement.
             description: _('Select %x items.').replace('%x', BASE_RANGES[i + 1] * 5),
             bgImage: bgImages[i],
             fgImage: `award${i}.svg`,
@@ -451,6 +453,7 @@ var Achievements = GObject.registerClass(
           for (let i = 0; i < 5; i++) {
             achievements.set(`depth${depth}-gesture-selector${i}`, {
               name: formatName(names[depth - 1], i),
+              // Translators: The description of the 'Gesture-Selector' achievement.
               description: _('Select %x items at depth %d in marking mode.')
                                .replace('%x', BASE_RANGES[i + 1] * 2)
                                .replace('%d', depth),
@@ -480,6 +483,7 @@ var Achievements = GObject.registerClass(
           for (let i = 0; i < 5; i++) {
             achievements.set(`depth${depth}-click-selector${i}`, {
               name: formatName(names[depth - 1], i),
+              // Translators: The description of the 'Click-Selector' achievement.
               description: _('Select %x items at depth %d with mouse clicks.')
                                .replace('%x', BASE_RANGES[i + 1] * 2)
                                .replace('%d', depth),
@@ -519,6 +523,7 @@ var Achievements = GObject.registerClass(
               achievements.set(`depth${depth}-selector${i}`, {
                 name: formatName(names[depth - 1], i),
                 description:
+                    // Translators: The description of the 'Selector' achievement.
                     _('Select %x items at depth %d in less than %t milliseconds.')
                         .replace('%x', counts[i])
                         .replace('%t', timeLimits[depth - 1][i])
@@ -540,6 +545,8 @@ var Achievements = GObject.registerClass(
             // Translators: The name of the 'Open the settings dialog %x times.'
             // achievement.
             name: formatName(_('The Journey Is The Reward %i'), i),
+            // Translators: The description of the 'The Journey Is The Reward %i'
+            // achievement.
             description: _('Open the settings dialog %x times.')
                              .replace('%x', BASE_RANGES[i + 1] / 2),
             bgImage: bgImages[i],
@@ -556,6 +563,7 @@ var Achievements = GObject.registerClass(
             // Translators: The name of the 'Open %x menus with the D-Bus interface.'
             // achievement.
             name: formatName(_('Nerd Alert %i'), i),
+            // Translators: The description of the 'Nerd Alert %i' achievement.
             description: _('Open %x menus with the D-Bus interface.')
                              .replace('%x', BASE_RANGES[i + 1]),
             bgImage: bgImages[i],
@@ -571,6 +579,8 @@ var Achievements = GObject.registerClass(
           achievements.set('entropie' + i, {
             // Translators: The name of the 'Generate %x random presets.' achievement.
             name: formatName(_('Entropie %i'), i),
+            // Translators: The description of the 'Generate %x random presets.'
+            // achievement.
             description:
                 _('Generate %x random presets.').replace('%x', BASE_RANGES[i + 1] / 2),
             bgImage: bgImages[i],
@@ -587,7 +597,10 @@ var Achievements = GObject.registerClass(
             // Translators: The name of the 'Export %x custom presets.' achievement.
             name: formatName(_('%s Preset Exporter'), i),
             description: BASE_RANGES[i + 1] / 10 == 1 ?
+                // Translators: The description of the '%s Preset Exporter' achievement if
+                // only one preset needs to be exported.
                 _('Export a custom preset.') :
+                // Translators: The description of the '%s Preset Exporter' achievement.
                 _('Export %x custom presets.').replace('%x', BASE_RANGES[i + 1] / 10),
             bgImage: bgImages[i],
             fgImage: 'export.svg',
@@ -603,7 +616,10 @@ var Achievements = GObject.registerClass(
             // Translators: The name of the 'Import %x custom presets.' achievement.
             name: formatName(_('%s Preset Importer'), i),
             description: BASE_RANGES[i + 1] / 10 == 1 ?
+                // Translators: The description of the '%s Preset Importer' achievement if
+                // only one preset needs to be imported.
                 _('Import a custom preset.') :
+                // Translators: The description of the '%s Preset Importer' achievement.
                 _('Import %x custom presets.').replace('%x', BASE_RANGES[i + 1] / 10),
             bgImage: bgImages[i],
             fgImage: 'import.svg',
@@ -619,7 +635,10 @@ var Achievements = GObject.registerClass(
             // Translators: The name of the 'Import %x menu configurations.' achievement.
             name: formatName(_('%s Menu Importer'), i),
             description: BASE_RANGES[i + 1] / 10 == 1 ?
+                // Translators: The description of the '%s Menu Importer' achievement if
+                // only one menu needs to be imported.
                 _('Import a menu configuration.') :
+                // Translators: The description of the '%s Menu Importer' achievement.
                 _('Import %x menu configurations.')
                     .replace('%x', BASE_RANGES[i + 1] / 10),
             bgImage: bgImages[i],
@@ -636,7 +655,10 @@ var Achievements = GObject.registerClass(
             // Translators: The name of the 'Export %x menu configurations.' achievement.
             name: formatName(_('%s Menu Exporter'), i),
             description: BASE_RANGES[i + 1] / 10 == 1 ?
+                // Translators: The description of the '%s Menu Exporter' achievement if
+                // only one menu needs to be exported.
                 _('Export a menu configuration.') :
+                // Translators: The description of the '%s Menu Exporter' achievement.
                 _('Export %x menu configurations.')
                     .replace('%x', BASE_RANGES[i + 1] / 10),
             bgImage: bgImages[i],
@@ -653,6 +675,8 @@ var Achievements = GObject.registerClass(
             // Translators: The name of the 'Create %x items in the menu editor.'
             // achievement.
             name: formatName(_('There Should Be No More Than Twelve Items…? %i'), i),
+            // Translators: The description of the 'There Should Be No More Than Twelve
+            // Items…? %i' achievement.
             description: _('Create %x items in the menu editor.')
                              .replace('%x', BASE_RANGES[i + 1] / 2),
             bgImage: bgImages[i],
@@ -669,6 +693,7 @@ var Achievements = GObject.registerClass(
             // Translators: The name of the 'Open a preview menu %x times.' achievement.
             name: formatName(_('%s Menu Designer'), i),
             description:
+                // Translators: The description of the '%s Menu Designer' achievement.
                 _('Open a preview menu %x times.').replace('%x', BASE_RANGES[i + 1] / 2),
             bgImage: bgImages[i],
             fgImage: 'eye.svg',
@@ -683,6 +708,7 @@ var Achievements = GObject.registerClass(
           // Translators: The name of the 'Open the tutorial menu %x times.' achievement.
           // This does not support %s and %i.
           name: _('Grumpie Rookie'),
+          // Translators: The description of the 'Grumpie Rookie' achievement.
           description: _('Open the tutorial menu %x times.').replace('%x', 50),
           bgImage: 'special3.png',
           fgImage: 'grumpie.svg',
@@ -696,6 +722,7 @@ var Achievements = GObject.registerClass(
           // Translators: The name of the 'Get all medals of the tutorial.' achievement.
           // This does not support %s and %i.
           name: _('Bachelor Pielot'),
+          // Translators: The description of the 'Bachelor Pielot' achievement.
           description: _('Get all medals of the tutorial.'),
           bgImage: 'special1.png',
           fgImage: 'scholar.svg',
@@ -709,6 +736,7 @@ var Achievements = GObject.registerClass(
           // Translators: The name of the hidden 'Delete all of your menus.' achievement.
           // This does not support %s and %i.
           name: _('Say Good-Pie!'),
+          // Translators: The description of the 'Say Good-Pie!' achievement.
           description: _('Delete all of your menus.'),
           bgImage: 'special2.png',
           fgImage: 'fire.svg',
@@ -723,6 +751,7 @@ var Achievements = GObject.registerClass(
           // This does not support %s and %i.
           // achievement.
           name: _('That\'s Philanthropie!'),
+          // Translators: The description of the 'That's Philanthropie!' achievement.
           description: _('Consider becoming a sponsor of Fly-Pie.'),
           bgImage: 'special3.png',
           fgImage: 'heart.svg',

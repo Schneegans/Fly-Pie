@@ -4560,7 +4560,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                                     <child type="end">
                                       <object class="GtkMenuButton" id="menu-editor-add-button">
-                                        <property name="tooltip_text" translatable="yes">Add a new menu item</property>
+                                        <property name="tooltip_text" translatable="yes">Add a new menu item.</property>
                                         <property name="icon-name">list-add-symbolic</property>
                                         <property name="popover">add-item-popover</property>
 
@@ -4745,7 +4745,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </style>
                                     <child>
                                       <object class="GtkButton" id="import-menu-config-button">
-                                        <property name="tooltip_text" translatable="yes">Load previously exported menu configurations from a JSON file.</property>
+                                        <property name="tooltip_text" translatable="yes">Load a previously exported menu configurations from a JSON file.</property>
                                         <property name="child">
                                           <object class="GtkBox">
                                             <property name="margin_start">8</property>
