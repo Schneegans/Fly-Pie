@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 20:41+0200\n"
+"POT-Creation-Date: 2021-09-18 20:46+0200\n"
 "PO-Revision-Date: 2021-05-31 10:33+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
@@ -2124,8 +2124,8 @@ msgid "Command"
 msgstr "Comando"
 
 #: src/common/actions/Command.js:69
-msgid "Use the button to list installed apps!"
-msgstr "Usa il pulsante per elencare le app installate!"
+msgid "Use the button to list installed apps."
+msgstr ""
 
 #: src/common/actions/DBusSignal.js:32
 msgid "D-Bus Signal"
@@ -2486,6 +2486,9 @@ msgstr "Disconnetti"
 #: src/common/menus/System.js:117
 msgid "Power Off…"
 msgstr "Spegni…"
+
+#~ msgid "Use the button to list installed apps!"
+#~ msgstr "Usa il pulsante per elencare le app installate!"
 
 #~ msgid "Open Windows"
 #~ msgstr "Apri Finestra"

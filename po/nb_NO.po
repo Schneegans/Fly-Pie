@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 20:41+0200\n"
+"POT-Creation-Date: 2021-09-18 20:46+0200\n"
 "PO-Revision-Date: 2021-09-18 18:47+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
@@ -273,8 +273,8 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
-"<b>Elementer velges ved å klikke hvor som helst i deres tilhørende kiler</b>."
-"\n"
+"<b>Elementer velges ved å klikke hvor som helst i deres tilhørende kiler</"
+"b>.\n"
 "\n"
 "Du trenger ikke å vente på at animasjonen fullføres, siden undermenykiler "
 "vises umiddelbart rundt posisjonen du har klikket.\n"
@@ -2087,9 +2087,8 @@ msgid "Command"
 msgstr "Kommando"
 
 #: src/common/actions/Command.js:69
-#, fuzzy
-msgid "Use the button to list installed apps!"
-msgstr "Bruk knappen til å liste opp installerte programmer."
+msgid "Use the button to list installed apps."
+msgstr ""
 
 #: src/common/actions/DBusSignal.js:32
 #, fuzzy
@@ -2412,6 +2411,10 @@ msgstr "Logg ut"
 #, fuzzy
 msgid "Power Off…"
 msgstr "Slå av …"
+
+#, fuzzy
+#~ msgid "Use the button to list installed apps!"
+#~ msgstr "Bruk knappen til å liste opp installerte programmer."
 
 #, fuzzy
 #~ msgid "Open Windows"
