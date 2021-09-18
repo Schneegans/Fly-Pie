@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-18 20:41+0200\n"
-"PO-Revision-Date: 2021-09-18 17:54+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"PO-Revision-Date: 2021-09-18 18:47+0000\n"
+"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
 "core/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -218,7 +218,6 @@ msgid "Tutorial"
 msgstr "Veiledning"
 
 #: resources/ui/settings.ui:919
-#, fuzzy
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
@@ -227,10 +226,9 @@ msgstr ""
 "Du kan bruke Fly-Pie til å kjøre programmer, simulere tastatursnarveier, "
 "åpne nettadresser og mye mer. Denne interaktive veiledningen lærer deg "
 "hvordan du bruker det mest effektivt. Du kan åpne en testmeny med den store "
-"knappen nedenfor."
+"knappen nedenfor!"
 
 #: resources/ui/settings.ui:930
-#, fuzzy
 msgid ""
 "• Use your <b>left mouse button to select items</b>.\n"
 "• Use your <b>right mouse button to close the menu</b>.\n"
@@ -241,9 +239,9 @@ msgstr ""
 "• Bruk din <b>venstre museknapp for å velge elementer</b>.\n"
 "• Bruk din <b>høyre museknapp for å lukke menyen</b>.\n"
 "• Testmenyen er kun der for testing, å velge elementer i den har ingen "
-"effekt..\n"
+"effekt.\n"
 "\n"
-"Når du er klar, kan du trykke på <b>Neste</b> for å ta rede på detaljene."
+"Når du er klar, kan du trykke på <b>Neste</b> for å ta rede på detaljene!"
 
 #. The text of the big tutorial button.
 #: resources/ui/settings.ui:950 resources/ui/settings.ui:1033
@@ -267,7 +265,6 @@ msgstr ""
 "av skjermen, så lenge pekeren forblir i elementets kile."
 
 #: resources/ui/settings.ui:1013
-#, fuzzy
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -276,13 +273,13 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
-"<b>Elementer velges ved å klikke hvor som helst i deres tilhørende kiler</"
-"b>.\n"
+"<b>Elementer velges ved å klikke hvor som helst i deres tilhørende kiler</b>."
+"\n"
 "\n"
 "Du trenger ikke å vente på at animasjonen fullføres, siden undermenykiler "
 "vises umiddelbart rundt posisjonen du har klikket.\n"
 "\n"
-"Klikk <b>Neste</b> for en øvelsesøkt."
+"Klikk <b>Neste</b> for en øvelsesøkt!"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1065
@@ -290,7 +287,6 @@ msgid "Practice Session I"
 msgstr "Øvingsøkt I"
 
 #: resources/ui/settings.ui:1075
-#, fuzzy
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
 "select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
@@ -303,7 +299,7 @@ msgstr ""
 "Velg kakestykket (🍔 🠚 🍭 🠚 🍰) så raskt som mulig. Klarer du gullmedaljen?\n"
 "\n"
 "Når du er fornøyd med resultatet klikker du <b>Neste</b> for å lære om Fly-"
-"Pie sitt markeringsmodus."
+"Pie sitt markeringsmodus!"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1148
@@ -353,7 +349,6 @@ msgid "Practice Session II"
 msgstr "Øvingsøkt II"
 
 #: resources/ui/settings.ui:1306
-#, fuzzy
 msgid ""
 "Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
 "However, as you now learned about the Marking Mode, the time required to get "
@@ -366,7 +361,7 @@ msgstr ""
 "er likeledes veldig tidsbegrenset.\n"
 "\n"
 "Når du er fornøyd klikker du <b>Neste</b> for å lære noen tips og triks til "
-"slutt."
+"slutt!"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1398
@@ -1234,7 +1229,7 @@ msgstr "Du har nådd nivå %i!"
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:159
 msgid "Fly-Pie Achievement Completed!"
-msgstr "Fly-Pie-oppnåelse innvilget."
+msgstr "Fly-Pie-oppnåelse innvilget!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:161
@@ -2397,14 +2392,12 @@ msgstr ""
 
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:81
-#, fuzzy
 msgid "Lock"
-msgstr "Lås …"
+msgstr "Lås"
 
 #: src/common/menus/System.js:90
-#, fuzzy
 msgid "Suspend"
-msgstr "Hvilemodus …"
+msgstr "Hvilemodus"
 
 #: src/common/menus/System.js:99
 #, fuzzy
