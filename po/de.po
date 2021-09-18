@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-18 20:46+0200\n"
-"PO-Revision-Date: 2021-09-15 20:36+0000\n"
+"PO-Revision-Date: 2021-09-18 19:01+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
-">\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +33,7 @@ msgstr "Abbrechen"
 
 #: resources/ui/iconSelectDialog.ui:19
 msgid "Select Icon"
-msgstr ""
+msgstr "Symbol Wählen"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:44
@@ -47,7 +47,7 @@ msgstr "Benutzerdefiniertes Symbol"
 
 #: resources/ui/imageChooserButton.ui:16 src/prefs/ImageChooserButton.js:88
 msgid "(None)"
-msgstr ""
+msgstr "(Keins)"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:19
@@ -195,7 +195,7 @@ msgstr ""
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/settings.ui:785
 msgid "Initialize most settings to random values."
-msgstr ""
+msgstr "Initialisieren Sie die meisten Einstellungen auf zufällige Werte."
 
 #: resources/ui/settings.ui:797
 msgid "Generate Random Preset"
@@ -343,6 +343,14 @@ msgid ""
 "gesture of straight parts. <b>Do not draw curvy paths but rather expressive "
 "zig-zag-lines!</b>"
 msgstr ""
+"Versuchen Sie, sich den Pfad zu einem Element zu merken. Öffnen Sie das Menü "
+"und <b>zeichnen Sie den Pfad mit der Maus</b>. Sie können mit einzelnen "
+"Segmenten des Pfades beginnen, aber auch versuchen, den gesamten Pfad zu "
+"zeichnen!\n"
+"\n"
+"Es kann erfolgreicher sein, wenn Sie ausdrücklich versuchen, Ihre Geste aus "
+"geraden Teilen zusammenzusetzen. <b>Zeichnen Sie keine kurvenreichen Pfade, "
+"sondern ausdrucksstarke Zick-Zack-Linien!</b>"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1296
@@ -621,11 +629,11 @@ msgstr ""
 
 #: resources/ui/settings.ui:3708
 msgid "Wedge Separator Color"
-msgstr ""
+msgstr "Farbe der Segmenttrennlinien"
 
 #: resources/ui/settings.ui:3720
 msgid "Wedge Separator Thickness"
-msgstr ""
+msgstr "Breite der Segmenttrennlinien"
 
 #: resources/ui/settings.ui:3758
 msgid "Wedge Color"
@@ -633,12 +641,12 @@ msgstr "Farbe der Kreissegmente"
 
 #: resources/ui/settings.ui:3770
 msgid "Wedge Size"
-msgstr ""
+msgstr "Größe der Kreissegmente"
 
 #. When the mouse pointer is NOT over the item
 #: resources/ui/settings.ui:3820
 msgid "Inactive State"
-msgstr ""
+msgstr "Inaktiver Zustand"
 
 #: resources/ui/settings.ui:3915 resources/ui/settings.ui:4021
 msgid "Trace Appearance"
@@ -750,11 +758,11 @@ msgstr "Voreinstellung laden"
 
 #: resources/ui/settings.ui:4437
 msgid "Load settings from a JSON file."
-msgstr ""
+msgstr "Einstellungen aus einer JSON-Datei laden."
 
 #: resources/ui/settings.ui:4444
 msgid "Save the settings to a JSON file."
-msgstr ""
+msgstr "Speichern Sie die Einstellungen in einer JSON-Datei."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: resources/ui/settings.ui:4467 resources/ui/settings.ui:4740
@@ -768,7 +776,7 @@ msgstr "Menü-Editor"
 
 #: resources/ui/settings.ui:4525
 msgid "Add a new menu item."
-msgstr ""
+msgstr "Fügen Sie ein neues Menüelement hinzu."
 
 #: resources/ui/settings.ui:4604
 msgid "Stash"
@@ -789,10 +797,12 @@ msgstr "Legen Sie Einträge hier ab."
 #: resources/ui/settings.ui:4710
 msgid "Restore menus from a JSON file. This will override your current menus!"
 msgstr ""
+"Stellen Sie die Menüs aus einer JSON-Datei wieder her. Dadurch werden Ihre "
+"aktuellen Menüs überschrieben!"
 
 #: resources/ui/settings.ui:4716
 msgid "Export all menus to a JSON file."
-msgstr ""
+msgstr "Exportieren Sie alle Menüs in eine JSON-Datei."
 
 #: resources/ui/settings.ui:4793
 msgid "Name"
@@ -825,6 +835,16 @@ msgid ""
 "be removed if an item is dragged to another position in the menu. Use -1 to "
 "disable this feature."
 msgstr ""
+"Feste Winkel können verwendet werden, um sicherzustellen, dass ein Element "
+"an der gleichen Position bleibt, auch wenn andere Elemente hinzugefügt oder "
+"entfernt werden. Auf diese Weise können Sie ein Menü bearbeiten, auch wenn "
+"Ihre Muskeln die Richtung des Elements bereits gelernt haben. Allerdings "
+"gibt es eine Einschränkung bei den festen Winkeln. Innerhalb eines Menüs "
+"müssen die festen Winkel monoton ansteigend sein, d. h. jeder feste Winkel "
+"muss größer sein als der vorherige feste Winkel. Um seltsames Verhalten zu "
+"verhindern, werden die festen Winkel entfernt, wenn ein Element an eine "
+"andere Position im Menü gezogen wird. Verwenden Sie -1, um diese Funktion zu "
+"deaktivieren."
 
 #: resources/ui/settings.ui:4909 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
@@ -1201,17 +1221,17 @@ msgstr "Erwägen Sie, Sponsor von Fly-Pie zu werden."
 
 #: src/common/ConfigWidgetFactory.js:97 src/prefs/ImageChooserButton.js:39
 msgid "Select File"
-msgstr ""
+msgstr "Datei auswählen"
 
 #: src/common/ConfigWidgetFactory.js:164
 msgid "Select Application"
-msgstr ""
+msgstr "Anwendung auswählen"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:264 src/common/ConfigWidgetFactory.js:297
 #: src/prefs/MenuEditor.js:258
 msgid "Not Bound"
-msgstr ""
+msgstr "Deaktiviert"
 
 #: src/common/ConfigWidgetFactory.js:287
 msgid ""
@@ -1227,7 +1247,7 @@ msgstr ""
 #: src/common/ItemRegistry.js:245
 #, javascript-format
 msgid "Insert: %s"
-msgstr ""
+msgstr "Einfügen: %s"
 
 #: src/extension/Background.js:95
 msgid "Close"
@@ -1289,12 +1309,12 @@ msgstr "Fenster schließen"
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:62
 msgid "Next Workspace"
-msgstr ""
+msgstr "Nächste Arbeitsfläche"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:70
 msgid "Previous Workspace"
-msgstr ""
+msgstr "Vorherige Arbeitsfläche"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:78
@@ -1922,13 +1942,15 @@ msgstr "Baby"
 #. to drag an action in the menu editor to the menu overview.
 #: src/prefs/MenuEditor.js:676 src/prefs/MenuEditorPage.js:792
 msgid "Actions cannot be turned into toplevel menus."
-msgstr ""
+msgstr "Aktionen können nicht in Menüs der obersten Ebene umgewandelt werden."
 
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag external stuff to the menu editor's overview.
 #: src/prefs/MenuEditor.js:695
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr ""
+"Sie können neue Menüeinträge nur innerhalb von benutzerdefinierten Menüs "
+"erstellen."
 
 #: src/prefs/MenuEditorPage.js:171 src/prefs/MenuEditorPage.js:236
 #: src/prefs/SettingsPage.js:260 src/prefs/SettingsPage.js:311
@@ -2031,6 +2053,8 @@ msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
 "<a href=\"%s\">Github</a>."
 msgstr ""
+"Es ist möglich, ein Menü mit einem Terminalbefehl zu öffnen. Sie können mehr "
+"auf <a href=\"%s\">Github</a> lesen."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -2049,6 +2073,8 @@ msgid ""
 "On Wayland, you can copy menu items by holding the Ctrl key while dragging "
 "them to another location."
 msgstr ""
+"Unter Wayland können Sie Menüeinträge kopieren, indem Sie sie bei gedrückter "
+"Strg-Taste an eine andere Stelle ziehen."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -2071,7 +2097,7 @@ msgstr ""
 #. Translators: The left-most item of the menu editor bread crumbs.
 #: src/prefs/MenuEditorPage.js:809
 msgid "All Menus"
-msgstr ""
+msgstr "Alle Menüs"
 
 #: src/prefs/SettingsPage.js:272
 msgid "Save"
@@ -2123,7 +2149,7 @@ msgstr "Kommando"
 
 #: src/common/actions/Command.js:69
 msgid "Use the button to list installed apps."
-msgstr ""
+msgstr "Die Schaltfläche zeigt installierte Apps."
 
 #: src/common/actions/DBusSignal.js:32
 msgid "D-Bus Signal"
@@ -2286,7 +2312,7 @@ msgstr "Benutzerdefiniertes Menü"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:36
 msgid "This can contain custom actions and other menus."
-msgstr ""
+msgstr "Kann Aktionen und andere Menüs enthalten."
 
 #: src/common/menus/CustomMenu.js:40
 msgid ""
@@ -2294,6 +2320,9 @@ msgid ""
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended."
 msgstr ""
+"Ein <b>Benutzerdefiniertes Menü</b> kann eine beliebige Anzahl von Aktionen "
+"und Untermenüs enthalten. Für eine präzise Auswahl der Elemente wird jedoch "
+"eine maximale Anzahl von zwölf Elementen empfohlen."
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
