@@ -16,47 +16,47 @@
     </columns>
     <data>
       <row>
-        <col id="0" translatable="yes" comments="A kind of animation.">Linear</col>
+        <col id="0" translatable="yes" comments="A kind of animation. Feel free to use the english term if there is no simple translation to your language.">Linear</col>
         <col id="1">linear</col>
       </row>
       <row>
-        <col id="0" translatable="yes" comments="A kind of animation.">Ease</col>
+        <col id="0" translatable="yes" comments="A kind of animation. Feel free to use the english term if there is no simple translation to your language.">Ease</col>
         <col id="1">ease</col>
       </row>
       <row>
-        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In</col>
+        <col id="0" translatable="yes" comments="A kind of animation. Feel free to use the english term if there is no simple translation to your language.">Ease-In</col>
         <col id="1">ease-in</col>
       </row>
       <row>
-        <col id="0" translatable="yes" comments="A kind of animation.">Ease-Out</col>
+        <col id="0" translatable="yes" comments="A kind of animation. Feel free to use the english term if there is no simple translation to your language.">Ease-Out</col>
         <col id="1">ease-out</col>
       </row>
       <row>
-        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Out</col>
+        <col id="0" translatable="yes" comments="A kind of animation. Feel free to use the english term if there is no simple translation to your language.">Ease-In-Out</col>
         <col id="1">ease-in-out</col>
       </row>
       <row>
-        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Quad</col>
+        <col id="0" translatable="yes" comments="A kind of animation. Feel free to use the english term if there is no simple translation to your language.">Ease-In-Quad</col>
         <col id="1">ease-in-quad</col>
       </row>
       <row>
-        <col id="0" translatable="yes" comments="A kind of animation.">Ease-Out-Quad</col>
+        <col id="0" translatable="yes" comments="A kind of animation. Feel free to use the english term if there is no simple translation to your language.">Ease-Out-Quad</col>
         <col id="1">ease-out-quad</col>
       </row>
       <row>
-        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Out-Quad</col>
+        <col id="0" translatable="yes" comments="A kind of animation. Feel free to use the english term if there is no simple translation to your language.">Ease-In-Out-Quad</col>
         <col id="1">ease-in-out-quad</col>
       </row>
       <row>
-        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Back</col>
+        <col id="0" translatable="yes" comments="A kind of animation. Feel free to use the english term if there is no simple translation to your language.">Ease-In-Back</col>
         <col id="1">ease-in-back</col>
       </row>
       <row>
-        <col id="0" translatable="yes" comments="A kind of animation.">Ease-Out-Back</col>
+        <col id="0" translatable="yes" comments="A kind of animation. Feel free to use the english term if there is no simple translation to your language.">Ease-Out-Back</col>
         <col id="1">ease-out-back</col>
       </row>
       <row>
-        <col id="0" translatable="yes" comments="A kind of animation.">Ease-In-Out-Back</col>
+        <col id="0" translatable="yes" comments="A kind of animation. Feel free to use the english term if there is no simple translation to your language.">Ease-In-Out-Back</col>
         <col id="1">ease-in-out-back</col>
       </row>
     </data>
@@ -782,7 +782,7 @@ Can be added to custom menus.</property>
         <child>
           <object class="GtkButton" id="random-preset-button">
             <property name="halign">fill</property>
-            <property name="tooltip_text" translatable="yes" comments="Tooltip of the generate-a-random-preset button">Initializes most settings to random values.</property>
+            <property name="tooltip_text" translatable="yes" comments="Tooltip of the generate-a-random-preset button">Initialize most settings to random values.</property>
             <child>
               <object class="GtkBox">
                 <property name="halign">center</property>
@@ -794,7 +794,7 @@ Can be added to custom menus.</property>
                 </child>
                 <child>
                   <object class="GtkLabel">
-                    <property name="label" translatable="yes">Generate a Random Preset</property>
+                    <property name="label" translatable="yes">Generate Random Preset</property>
                   </object>
                 </child>
               </object>
@@ -4422,7 +4422,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                           <object class="GtkMenuButton">
                             <property name="margin_end">8</property>
                             <property name="popover">preset-popover</property>
-                            <property name="label" translatable="yes">Load a Preset</property>
+                            <property name="label" translatable="yes">Load Preset</property>
                           </object>
                         </child>
 
