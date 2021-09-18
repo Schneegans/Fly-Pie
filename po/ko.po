@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 20:29+0200\n"
+"POT-Creation-Date: 2021-09-18 20:41+0200\n"
 "PO-Revision-Date: 2021-04-24 11:21+0000\n"
 "Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/"
@@ -1193,9 +1193,9 @@ msgstr ""
 msgid "Window Management"
 msgstr ""
 
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:41
-msgid "Open Windows"
+#. Translators: This is an entry of the default menu. I
+#: src/extension/DefaultMenu.js:41 src/common/menus/RunningApps.js:47
+msgid "Running Apps"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
@@ -1204,15 +1204,13 @@ msgid "Close Window"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
-#. Translators: The name of the ⏩ emoji of the tutorial menu.
-#: src/extension/DefaultMenu.js:62 src/prefs/ExampleMenu.js:349
-msgid "Right"
+#: src/extension/DefaultMenu.js:62
+msgid "Next Workspace"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
-#. Translators: The name of the ⏪ emoji of the tutorial menu.
-#: src/extension/DefaultMenu.js:70 src/prefs/ExampleMenu.js:355
-msgid "Left"
+#: src/extension/DefaultMenu.js:70
+msgid "Previous Workspace"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
@@ -1785,6 +1783,11 @@ msgstr ""
 msgid "Up"
 msgstr ""
 
+#. Translators: The name of the ⏩ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:349
+msgid "Right"
+msgstr ""
+
 #. Translators: The name of the 🔀 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:351
 msgid "Twisted"
@@ -1793,6 +1796,11 @@ msgstr ""
 #. Translators: The name of the ⏬ emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:353
 msgid "Down"
+msgstr ""
+
+#. Translators: The name of the ⏪ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:355
+msgid "Left"
 msgstr ""
 
 #. Translators: An emoji category of the example tutorial menu.
@@ -2253,10 +2261,6 @@ msgid ""
 "The <b>Recent Files</b> menu shows a list of recently used files. For "
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
-msgstr ""
-
-#: src/common/menus/RunningApps.js:47
-msgid "Running Apps"
 msgstr ""
 
 #. Translators: Please keep this short.

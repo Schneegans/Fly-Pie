@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 20:29+0200\n"
+"POT-Creation-Date: 2021-09-18 20:41+0200\n"
 "PO-Revision-Date: 2021-09-18 17:54+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
@@ -1258,11 +1258,10 @@ msgstr "Eksempelmeny"
 msgid "Window Management"
 msgstr "Vindusbehandling"
 
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:41
-#, fuzzy
-msgid "Open Windows"
-msgstr "Åpne vinduer"
+#. Translators: This is an entry of the default menu. I
+#: src/extension/DefaultMenu.js:41 src/common/menus/RunningApps.js:47
+msgid "Running Apps"
+msgstr "Kjørende programmer"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:54
@@ -1271,15 +1270,13 @@ msgid "Close Window"
 msgstr "Lukk vindu"
 
 #. Translators: This is an entry of the default menu.
-#. Translators: The name of the ⏩ emoji of the tutorial menu.
-#: src/extension/DefaultMenu.js:62 src/prefs/ExampleMenu.js:349
-msgid "Right"
+#: src/extension/DefaultMenu.js:62
+msgid "Next Workspace"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
-#. Translators: The name of the ⏪ emoji of the tutorial menu.
-#: src/extension/DefaultMenu.js:70 src/prefs/ExampleMenu.js:355
-msgid "Left"
+#: src/extension/DefaultMenu.js:70
+msgid "Previous Workspace"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
@@ -1855,6 +1852,11 @@ msgstr "Piler"
 msgid "Up"
 msgstr "Oppover"
 
+#. Translators: The name of the ⏩ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:349
+msgid "Right"
+msgstr ""
+
 #. Translators: The name of the 🔀 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:351
 msgid "Twisted"
@@ -1865,6 +1867,11 @@ msgstr ""
 #, fuzzy
 msgid "Down"
 msgstr "Nedover"
+
+#. Translators: The name of the ⏪ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:355
+msgid "Left"
+msgstr ""
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:360
@@ -2330,10 +2337,6 @@ msgid ""
 "about twelve."
 msgstr ""
 
-#: src/common/menus/RunningApps.js:47
-msgid "Running Apps"
-msgstr "Kjørende programmer"
-
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:54
@@ -2416,6 +2419,10 @@ msgstr "Logg ut"
 #, fuzzy
 msgid "Power Off…"
 msgstr "Slå av …"
+
+#, fuzzy
+#~ msgid "Open Windows"
+#~ msgstr "Åpne vinduer"
 
 #~ msgid "Generate a Random Preset"
 #~ msgstr "Generer en tilfeldig forhåndsinnstilling"
