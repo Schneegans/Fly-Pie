@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 19:54+0200\n"
+"POT-Creation-Date: 2021-09-18 20:20+0200\n"
 "PO-Revision-Date: 2021-09-18 17:54+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
@@ -48,59 +48,59 @@ msgstr "Egendefinert ikon"
 msgid "(None)"
 msgstr "(Ingen)"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:19
 msgid "Linear"
 msgstr "Lineær"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:23
 #, fuzzy
 msgid "Ease"
 msgstr "Toning"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:27
 msgid "Ease-In"
 msgstr "Inntoning"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:31
 msgid "Ease-Out"
 msgstr "Uttoning"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:35
 msgid "Ease-In-Out"
 msgstr "Inn- og uttoning"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:39
 #, fuzzy
 msgid "Ease-In-Quad"
 msgstr "Inntoningskvadruppel"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:43
 msgid "Ease-Out-Quad"
 msgstr "Uttoningskvadruppel"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:47
 msgid "Ease-In-Out-Quad"
 msgstr "Inn- og uttoningskvadruppel"
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:51
 msgid "Ease-In-Back"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:55
 msgid "Ease-Out-Back"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:59
 msgid "Ease-In-Out-Back"
 msgstr ""
@@ -194,12 +194,12 @@ msgstr ""
 
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/settings.ui:785
-msgid "Initializes most settings to random values."
+msgid "Initialize most settings to random values."
 msgstr ""
 
 #: resources/ui/settings.ui:797
-msgid "Generate a Random Preset"
-msgstr "Generer en tilfeldig forhåndsinnstilling"
+msgid "Generate Random Preset"
+msgstr "Generer tilfeldig forhåndsinnstilling"
 
 #: resources/ui/settings.ui:828
 #, fuzzy
@@ -728,8 +728,8 @@ msgid "Show a notification whenever you complete an achievement."
 msgstr ""
 
 #: resources/ui/settings.ui:4425
-msgid "Load a Preset"
-msgstr ""
+msgid "Load Preset"
+msgstr "Last inn forhåndsinnstilling"
 
 #: resources/ui/settings.ui:4437
 msgid "Load settings from a JSON file."
@@ -2420,6 +2420,9 @@ msgstr "Logg ut"
 msgid "Power Off…"
 msgstr "Slå av …"
 
+#~ msgid "Generate a Random Preset"
+#~ msgstr "Generer en tilfeldig forhåndsinnstilling"
+
 #~ msgid "<big>Last selection time: <b>- ms</b></big>"
 #~ msgstr "<big>Siste utvalgstid: <b>- ms</b></big>"
 
@@ -2456,9 +2459,6 @@ msgstr "Slå av …"
 #~ msgid "Pick Wedge Color"
 #~ msgstr "Velg kilefarge"
 
-#~ msgid "Load Preset"
-#~ msgstr "Last inn forhåndsinnstilling"
-
 #~ msgid ""
 #~ "💕️ Do you want to show that you love Fly-Pie?\n"
 #~ "<a href=\"https://github.com/sponsors/Schneegans\">You may already become "
@@ -2471,9 +2471,6 @@ msgstr "Slå av …"
 #, fuzzy
 #~ msgid "Initializes the settings below to random values"
 #~ msgstr "Bruker tilfeldige verdier for innstillingene nedenfor"
-
-#~ msgid "Generate Random Preset"
-#~ msgstr "Generer tilfeldig forhåndsinnstilling"
 
 #~ msgid "Reset to default value"
 #~ msgstr "Tilbakestill til forvalgt verdi"
