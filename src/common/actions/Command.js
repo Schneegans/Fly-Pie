@@ -66,7 +66,7 @@ var action = {
       }
 
       return ConfigWidgetFactory.createCommandWidget(
-          _('Command'), _('Use the button to list installed apps!'), command,
+          _('Command'), _('Use the button to list installed apps.'), command,
           (command, name, icon) => {
             updateCallback({command: command}, name, icon);
           });
