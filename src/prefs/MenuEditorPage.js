@@ -255,9 +255,11 @@ var MenuEditorPage = class MenuEditorPage {
             const [success, contents] = file.load_contents(null);
 
             // Load the configuration! We do a parse / stringify to catch any JSON errors
-            // here.
+            // here. We also run the ItemRegistry.normalizeConfig() to catch some obvious
+            // format errors.
             if (success) {
               const config = JSON.parse(contents);
+              ItemRegistry.normalizeConfig(config);
               this._settings.set_string('menu-configuration', JSON.stringify(config));
               this._loadMenuConfiguration();
 
