@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 20:29+0200\n"
+"POT-Creation-Date: 2021-09-18 20:41+0200\n"
 "PO-Revision-Date: 2021-05-31 10:33+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
@@ -1280,10 +1280,10 @@ msgstr "Menu Esempio"
 msgid "Window Management"
 msgstr "Gestione Finestre"
 
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:41
-msgid "Open Windows"
-msgstr "Apri Finestra"
+#. Translators: This is an entry of the default menu. I
+#: src/extension/DefaultMenu.js:41 src/common/menus/RunningApps.js:47
+msgid "Running Apps"
+msgstr "App in Esecuzione"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:54
@@ -1291,16 +1291,14 @@ msgid "Close Window"
 msgstr "Chiudi Finestra"
 
 #. Translators: This is an entry of the default menu.
-#. Translators: The name of the ⏩ emoji of the tutorial menu.
-#: src/extension/DefaultMenu.js:62 src/prefs/ExampleMenu.js:349
-msgid "Right"
-msgstr "Destra"
+#: src/extension/DefaultMenu.js:62
+msgid "Next Workspace"
+msgstr ""
 
 #. Translators: This is an entry of the default menu.
-#. Translators: The name of the ⏪ emoji of the tutorial menu.
-#: src/extension/DefaultMenu.js:70 src/prefs/ExampleMenu.js:355
-msgid "Left"
-msgstr "Sinistra"
+#: src/extension/DefaultMenu.js:70
+msgid "Previous Workspace"
+msgstr ""
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:78
@@ -1872,6 +1870,11 @@ msgstr "Frecce"
 msgid "Up"
 msgstr "Su"
 
+#. Translators: The name of the ⏩ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:349
+msgid "Right"
+msgstr "Destra"
+
 #. Translators: The name of the 🔀 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:351
 msgid "Twisted"
@@ -1881,6 +1884,11 @@ msgstr "Contorto"
 #: src/prefs/ExampleMenu.js:353
 msgid "Down"
 msgstr "Giù"
+
+#. Translators: The name of the ⏪ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:355
+msgid "Left"
+msgstr "Sinistra"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:360
@@ -2390,10 +2398,6 @@ msgstr ""
 "Per selezioni efficienti, dovresti limitare il numero massimo di file "
 "visualizzati a circa dodici."
 
-#: src/common/menus/RunningApps.js:47
-msgid "Running Apps"
-msgstr "App in Esecuzione"
-
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:54
@@ -2482,6 +2486,9 @@ msgstr "Disconnetti"
 #: src/common/menus/System.js:117
 msgid "Power Off…"
 msgstr "Spegni…"
+
+#~ msgid "Open Windows"
+#~ msgstr "Apri Finestra"
 
 #~ msgid "<big>Last selection time: <b>- ms</b></big>"
 #~ msgstr "<big>Tempo dell'ultima selezione:<b>- ms</b></big>"
