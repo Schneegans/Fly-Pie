@@ -4434,49 +4434,15 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                             <child>
                               <object class="GtkButton" id="load-preset-button">
-                                <property name="tooltip_text" translatable="yes">Import settings from a JSON file.</property>
-                                <property name="child">
-                                  <object class="GtkBox">
-                                    <property name="margin_start">8</property>
-                                    <property name="margin_end">8</property>
-                                    <property name="spacing">6</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="icon_name">document-open-symbolic</property>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes" comments="Text of the import-settings button.">Import</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </property>
+                                <property name="tooltip_text" translatable="yes">Load settings from a JSON file.</property>
+                                <property name="icon_name">document-open-symbolic</property>
                               </object>
                             </child>
 
                             <child>
                               <object class="GtkButton" id="save-preset-button">
-                                <property name="tooltip_text" translatable="yes">Save the settings above to a JSON file.</property>
-                                <property name="child">
-                                  <object class="GtkBox">
-                                    <property name="margin_start">8</property>
-                                    <property name="margin_end">8</property>
-                                    <property name="spacing">6</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="icon_name">document-save-symbolic</property>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes" comments="Text of the export-settings button.">Export</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </property>
+                                <property name="tooltip_text" translatable="yes">Save the settings to a JSON file.</property>
+                                <property name="icon_name">document-save-symbolic</property>
                               </object>
                             </child>
 
@@ -4741,48 +4707,14 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </style>
                                     <child>
                                       <object class="GtkButton" id="import-menu-config-button">
-                                        <property name="tooltip_text" translatable="yes">Load a previously exported menu configurations from a JSON file.</property>
-                                        <property name="child">
-                                          <object class="GtkBox">
-                                            <property name="margin_start">8</property>
-                                            <property name="margin_end">8</property>
-                                            <property name="spacing">6</property>
-                                            <child>
-                                              <object class="GtkImage">
-                                                <property name="icon_name">document-open-symbolic</property>
-                                              </object>
-                                            </child>
-                                            <child>
-                                              <object class="GtkLabel">
-                                                <property name="halign">start</property>
-                                                <property name="label" translatable="yes" comments="Text of the import-menu-configuration button.">Import</property>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </property>
+                                        <property name="tooltip_text" translatable="yes">Restore menus from a JSON file. This will override your current menus!</property>
+                                        <property name="icon_name">document-open-symbolic</property>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkButton" id="export-menu-config-button">
                                         <property name="tooltip_text" translatable="yes">Export all menus to a JSON file.</property>
-                                        <property name="child">
-                                          <object class="GtkBox">
-                                            <property name="margin_start">8</property>
-                                            <property name="margin_end">8</property>
-                                            <property name="spacing">6</property>
-                                            <child>
-                                              <object class="GtkImage">
-                                                <property name="icon_name">document-save-symbolic</property>
-                                              </object>
-                                            </child>
-                                            <child>
-                                              <object class="GtkLabel">
-                                                <property name="halign">start</property>
-                                                <property name="label" translatable="yes" comments="Text of the export-menu-configuration button.">Export</property>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </property>
+                                        <property name="icon_name">document-save-symbolic</property>
                                       </object>
                                     </child>
                                   </object>
