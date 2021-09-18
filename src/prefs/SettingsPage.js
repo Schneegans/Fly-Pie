@@ -282,31 +282,8 @@ var SettingsPage = class SettingsPage {
               path += '.json';
             }
 
-            const file         = Gio.File.new_for_path(path);
-            const relativePath = Gio.File.new_for_path(Me.path).get_relative_path(file);
-
-            // Show warning when attempting to save in Fly-Pie's directory as this will
-            // get deleted when the extension is updated.
-            if (relativePath != null) {
-              const warningDialog = new Gtk.MessageDialog({
-                transient_for: dialog,
-                modal: true,
-                buttons: Gtk.ButtonsType.OK,
-                message_type: Gtk.MessageType.WARNING,
-                text: _('You should not store the preset in the extension directory!'),
-                secondary_text: _(
-                    // Translators: "It" refers to the preset if stored in the extension's
-                    // directory.
-                    'Here it will be deleted whenever Fly-Pie is updated. It has been ' +
-                    'saved anyways, but please consider to store it in a safer place!')
-              });
-
-              warningDialog.connect('response', d => d.destroy());
-              warningDialog.show();
-            }
-
             // Now save the preset!
-            Preset.save(file);
+            Preset.save(Gio.File.new_for_path(path));
 
             // Store this in our statistics.
             Statistics.getInstance().addPresetExport();
