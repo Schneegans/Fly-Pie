@@ -149,9 +149,7 @@ var MenuEditorPage = class MenuEditorPage {
     popover.connect('notify::visible', () => {
       const inMenuOverviewMode = this._menuPath.length == 0;
 
-      this._builder.get_object('add-action-list').visible     = !inMenuOverviewMode;
-      this._builder.get_object('action-list-heading').visible = !inMenuOverviewMode;
-      this._builder.get_object('menu-list-heading').visible   = !inMenuOverviewMode;
+      this._builder.get_object('add-action-list').sensitive = !inMenuOverviewMode;
     });
   }
 
