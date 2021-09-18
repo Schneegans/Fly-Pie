@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 20:41+0200\n"
+"POT-Creation-Date: 2021-09-18 20:46+0200\n"
 "PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -2020,7 +2020,7 @@ msgid "Command"
 msgstr ""
 
 #: src/common/actions/Command.js:69
-msgid "Use the button to list installed apps!"
+msgid "Use the button to list installed apps."
 msgstr ""
 
 #: src/common/actions/DBusSignal.js:32
