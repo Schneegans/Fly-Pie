@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 21:10+0200\n"
+"POT-Creation-Date: 2021-09-18 20:46+0200\n"
 "PO-Revision-Date: 2021-04-23 15:14+0000\n"
 "Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
 "Language-Team: Sinhala <https://hosted.weblate.org/projects/fly-pie/core/si/"
@@ -19,57 +19,86 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.7-dev\n"
 
-#. A kind of animation.
+#: resources/ui/copyValueButton.ui:6
+msgid "Copy left value to right side"
+msgstr ""
+
+#: resources/ui/iconSelectDialog.ui:14 src/common/ConfigWidgetFactory.js:98
+#: src/common/ConfigWidgetFactory.js:165 src/prefs/ImageChooserButton.js:40
+#: src/prefs/MenuEditorPage.js:182 src/prefs/MenuEditorPage.js:247
+#: src/prefs/SettingsPage.js:271 src/prefs/SettingsPage.js:322
+msgid "Cancel"
+msgstr ""
+
+#: resources/ui/iconSelectDialog.ui:19
+msgid "Select Icon"
+msgstr ""
+
+#. Page title of the icon-select-dialog.
+#: resources/ui/iconSelectDialog.ui:44
+msgid "Icon Theme"
+msgstr ""
+
+#. Page title of the icon-select-dialog.
+#: resources/ui/iconSelectDialog.ui:106
+msgid "Custom Icon"
+msgstr ""
+
+#: resources/ui/imageChooserButton.ui:16 src/prefs/ImageChooserButton.js:88
+msgid "(None)"
+msgstr ""
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:19
 msgid "Linear"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:23
 msgid "Ease"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:27
 msgid "Ease-In"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:31
 msgid "Ease-Out"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:35
 msgid "Ease-In-Out"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:39
 msgid "Ease-In-Quad"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:43
 msgid "Ease-Out-Quad"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:47
 msgid "Ease-In-Out-Quad"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:51
 msgid "Ease-In-Back"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:55
 msgid "Ease-Out-Back"
 msgstr ""
 
-#. A kind of animation.
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:59
 msgid "Ease-In-Out-Back"
 msgstr ""
@@ -147,45 +176,37 @@ msgid ""
 "Can be added to custom menus."
 msgstr ""
 
-#: resources/ui/settings.ui:764
-msgid "Standard"
+#. Tooltip of the generate-a-random-preset button
+#: resources/ui/settings.ui:785
+msgid "Initialize most settings to random values."
 msgstr ""
 
-#: resources/ui/settings.ui:802
-msgid "Initializes most settings to random values."
+#: resources/ui/settings.ui:797
+msgid "Generate Random Preset"
 msgstr ""
 
-#: resources/ui/settings.ui:814
-msgid "Generate a Random Preset"
-msgstr ""
-
-#. Refers to reward presets
 #: resources/ui/settings.ui:828
-msgid "Rewards"
-msgstr ""
-
-#: resources/ui/settings.ui:859
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
 msgstr ""
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
-#: resources/ui/settings.ui:864
+#: resources/ui/settings.ui:833
 msgid "Enable Animations"
 msgstr ""
 
 #. Caption of the tutorial page in the window's titlebar.
-#: resources/ui/settings.ui:916
+#: resources/ui/settings.ui:885
 msgid "Tutorial"
 msgstr ""
 
-#: resources/ui/settings.ui:950
+#: resources/ui/settings.ui:919
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
 
-#: resources/ui/settings.ui:961
+#: resources/ui/settings.ui:930
 msgid ""
 "• Use your <b>left mouse button to select items</b>.\n"
 "• Use your <b>right mouse button to close the menu</b>.\n"
@@ -195,24 +216,24 @@ msgid ""
 msgstr ""
 
 #. The text of the big tutorial button.
-#: resources/ui/settings.ui:981 resources/ui/settings.ui:1064
-#: resources/ui/settings.ui:1152 resources/ui/settings.ui:1297
-#: resources/ui/settings.ui:1385
+#: resources/ui/settings.ui:950 resources/ui/settings.ui:1033
+#: resources/ui/settings.ui:1119 resources/ui/settings.ui:1264
+#: resources/ui/settings.ui:1350
 msgid "<big><b>Open the example menu!</b></big>"
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/settings.ui:1013
+#: resources/ui/settings.ui:982
 msgid "You can click anywhere!"
 msgstr ""
 
-#: resources/ui/settings.ui:1032
+#: resources/ui/settings.ui:1001
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
 msgstr ""
 
-#: resources/ui/settings.ui:1044
+#: resources/ui/settings.ui:1013
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -223,11 +244,11 @@ msgid ""
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/settings.ui:1096
+#: resources/ui/settings.ui:1065
 msgid "Practice Session I"
 msgstr ""
 
-#: resources/ui/settings.ui:1106
+#: resources/ui/settings.ui:1075
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
 "select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
@@ -238,43 +259,33 @@ msgid ""
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1121
-msgid "<big>Last selection time: <b>- ms</b></big>"
-msgstr ""
-
-#. ms = milliseconds
-#: resources/ui/settings.ui:1133
-msgid "<big>Best selection time: <b>- ms</b></big>"
-msgstr ""
-
-#. ms = milliseconds
-#: resources/ui/settings.ui:1181
+#: resources/ui/settings.ui:1148
 msgid "Unlocked at less than 3000 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1201
+#: resources/ui/settings.ui:1168
 msgid "Unlocked at less than 2000 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1222 resources/ui/settings.ui:1413
+#: resources/ui/settings.ui:1189 resources/ui/settings.ui:1378
 msgid "Unlocked at less than 1000 ms"
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/settings.ui:1249
+#: resources/ui/settings.ui:1216
 msgid "The Marking Mode of Fly-Pie"
 msgstr ""
 
-#: resources/ui/settings.ui:1268
+#: resources/ui/settings.ui:1235
 msgid ""
 "The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
 
-#: resources/ui/settings.ui:1279
+#: resources/ui/settings.ui:1246
 msgid ""
 "Try remembering the path to an item. Open the menu and <b>draw the path with "
 "your mouse</b>. You can start with individual segments of the path, put you "
@@ -286,11 +297,11 @@ msgid ""
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/settings.ui:1329
+#: resources/ui/settings.ui:1296
 msgid "Practice Session II"
 msgstr ""
 
-#: resources/ui/settings.ui:1339
+#: resources/ui/settings.ui:1306
 msgid ""
 "Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
 "However, as you now learned about the Marking Mode, the time required to get "
@@ -301,22 +312,22 @@ msgid ""
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1433
+#: resources/ui/settings.ui:1398
 msgid "Unlocked at less than 750 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/settings.ui:1454
+#: resources/ui/settings.ui:1419
 msgid "Unlocked at less than 500 ms"
 msgstr ""
 
 #. The user finished the tutorial. Yay!
-#: resources/ui/settings.ui:1488
+#: resources/ui/settings.ui:1453
 msgid "Congratulations!"
 msgstr ""
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
-#: resources/ui/settings.ui:1500
+#: resources/ui/settings.ui:1465
 msgid ""
 "Congratulations! If you managed to unlock most of the medals, you will be "
 "using Fly-Pie like a master Pielot!\n"
@@ -335,494 +346,433 @@ msgid ""
 msgstr ""
 
 #. Button for tutorial navigation. Goes back one page.
-#: resources/ui/settings.ui:1545
+#: resources/ui/settings.ui:1510
 msgid "Previous"
 msgstr ""
 
 #. Button for tutorial navigation. Goes to the next page.
-#: resources/ui/settings.ui:1602
+#: resources/ui/settings.ui:1567
 msgid "Next"
 msgstr ""
 
 #. Caption of the settings page in the window's titlebar.
-#: resources/ui/settings.ui:1638
+#: resources/ui/settings.ui:1603
 msgid "Settings"
 msgstr ""
 
-#: resources/ui/settings.ui:1671 resources/ui/settings.ui:1869
+#: resources/ui/settings.ui:1636 resources/ui/settings.ui:1832
 msgid "Global Appearance Settings"
 msgstr ""
 
-#: resources/ui/settings.ui:1681
+#: resources/ui/settings.ui:1646
 msgid "These settings affect all menu items."
 msgstr ""
 
-#: resources/ui/settings.ui:1699
+#: resources/ui/settings.ui:1664
 msgid "Animation Duration"
 msgstr ""
 
-#: resources/ui/settings.ui:1713
+#: resources/ui/settings.ui:1678
 msgid "Global Scaling"
 msgstr ""
 
 #. Please keep this short!
-#: resources/ui/settings.ui:1723
+#: resources/ui/settings.ui:1688
 msgid "Independent of the preset."
 msgstr ""
 
-#: resources/ui/settings.ui:1773
+#: resources/ui/settings.ui:1738
 msgid "Font"
 msgstr ""
 
-#: resources/ui/settings.ui:1783
+#: resources/ui/settings.ui:1748
 msgid "Text Color"
 msgstr ""
 
-#: resources/ui/settings.ui:1794 resources/ui/settings.ui:2409
-#: resources/ui/settings.ui:3110 resources/ui/settings.ui:3346
+#: resources/ui/settings.ui:1759 resources/ui/settings.ui:2370
+#: resources/ui/settings.ui:3069 resources/ui/settings.ui:3305
 msgid "Background Color"
 msgstr ""
 
-#: resources/ui/settings.ui:1816
-msgid "Pick Text Color"
-msgstr ""
-
-#: resources/ui/settings.ui:1829
-msgid "Pick Background Color"
-msgstr ""
-
-#: resources/ui/settings.ui:1858
+#: resources/ui/settings.ui:1821
 msgid "Animation Mode"
 msgstr ""
 
-#: resources/ui/settings.ui:1901 resources/ui/settings.ui:2511
+#: resources/ui/settings.ui:1864 resources/ui/settings.ui:2472
 msgid "Center Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:1911
+#: resources/ui/settings.ui:1874
 msgid "The center element shows the currently hovered child's name."
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:1927
+#: resources/ui/settings.ui:1890
 msgid "With Hovered Child"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:1940
+#: resources/ui/settings.ui:1903
 msgid "Without Hovered Child"
 msgstr ""
 
-#: resources/ui/settings.ui:1970 resources/ui/settings.ui:2904
-#: resources/ui/settings.ui:3461
+#: resources/ui/settings.ui:1933 resources/ui/settings.ui:2863
+#: resources/ui/settings.ui:3418
 msgid "Size"
 msgstr ""
 
-#: resources/ui/settings.ui:2002 resources/ui/settings.ui:2206
-msgid "Pick Center Item Color"
-msgstr ""
-
-#: resources/ui/settings.ui:2022 resources/ui/settings.ui:2073
-#: resources/ui/settings.ui:2226 resources/ui/settings.ui:2277
-#: resources/ui/settings.ui:2652 resources/ui/settings.ui:2713
-#: resources/ui/settings.ui:2807 resources/ui/settings.ui:2878
+#: resources/ui/settings.ui:1984 resources/ui/settings.ui:2035
+#: resources/ui/settings.ui:2187 resources/ui/settings.ui:2238
+#: resources/ui/settings.ui:2612 resources/ui/settings.ui:2673
+#: resources/ui/settings.ui:2766 resources/ui/settings.ui:2837
 msgid "Saturation"
 msgstr ""
 
-#: resources/ui/settings.ui:2039 resources/ui/settings.ui:2083
-#: resources/ui/settings.ui:2243 resources/ui/settings.ui:2287
-#: resources/ui/settings.ui:2669 resources/ui/settings.ui:2703
-#: resources/ui/settings.ui:2824 resources/ui/settings.ui:2868
+#: resources/ui/settings.ui:2001 resources/ui/settings.ui:2045
+#: resources/ui/settings.ui:2204 resources/ui/settings.ui:2248
+#: resources/ui/settings.ui:2629 resources/ui/settings.ui:2663
+#: resources/ui/settings.ui:2783 resources/ui/settings.ui:2827
 msgid "Luminance"
 msgstr ""
 
-#: resources/ui/settings.ui:2056 resources/ui/settings.ui:2093
-#: resources/ui/settings.ui:2260 resources/ui/settings.ui:2297
-#: resources/ui/settings.ui:2686 resources/ui/settings.ui:2723
-#: resources/ui/settings.ui:2841 resources/ui/settings.ui:2858
+#: resources/ui/settings.ui:2018 resources/ui/settings.ui:2055
+#: resources/ui/settings.ui:2221 resources/ui/settings.ui:2258
+#: resources/ui/settings.ui:2646 resources/ui/settings.ui:2683
+#: resources/ui/settings.ui:2800 resources/ui/settings.ui:2817
 msgid "Opacity"
 msgstr ""
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
-#: resources/ui/settings.ui:2114 resources/ui/settings.ui:2178
-#: resources/ui/settings.ui:2597 resources/ui/settings.ui:2752
-#: resources/ui/settings.ui:3360 resources/ui/settings.ui:3412
+#: resources/ui/settings.ui:2076 resources/ui/settings.ui:2140
+#: resources/ui/settings.ui:2558 resources/ui/settings.ui:2712
+#: resources/ui/settings.ui:3319 resources/ui/settings.ui:3370
 msgid "Fixed"
 msgstr ""
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
-#: resources/ui/settings.ui:2121 resources/ui/settings.ui:2185
-#: resources/ui/settings.ui:2604 resources/ui/settings.ui:2759
+#: resources/ui/settings.ui:2083 resources/ui/settings.ui:2147
+#: resources/ui/settings.ui:2565 resources/ui/settings.ui:2719
 msgid "Auto"
 msgstr ""
 
-#: resources/ui/settings.ui:2355 resources/ui/settings.ui:3067
+#: resources/ui/settings.ui:2316 resources/ui/settings.ui:3026
 msgid "Icon Opacity"
 msgstr ""
 
-#: resources/ui/settings.ui:2398 resources/ui/settings.ui:3161
+#: resources/ui/settings.ui:2359 resources/ui/settings.ui:3120
 msgid "Icon Scale"
 msgstr ""
 
-#: resources/ui/settings.ui:2428 resources/ui/settings.ui:3180
+#: resources/ui/settings.ui:2389 resources/ui/settings.ui:3139
 msgid "Icon Crop"
 msgstr ""
 
-#: resources/ui/settings.ui:2479 resources/ui/settings.ui:3231
-#: resources/ui/settings.ui:3623
+#: resources/ui/settings.ui:2440 resources/ui/settings.ui:3190
+#: resources/ui/settings.ui:3580
 msgid "Background Image"
 msgstr ""
 
-#: resources/ui/settings.ui:2541 resources/ui/settings.ui:3263
+#: resources/ui/settings.ui:2502 resources/ui/settings.ui:3222
 msgid "Children Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:2551
+#: resources/ui/settings.ui:2512
 msgid "Child items are styled differently when their wedge is hovered."
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/settings.ui:2567 resources/ui/settings.ui:3319
+#: resources/ui/settings.ui:2528 resources/ui/settings.ui:3278
 msgid "Standard State"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:2580
+#. When the mouse pointer is over the item
+#: resources/ui/settings.ui:2541 resources/ui/settings.ui:3833
 msgid "Hovered State"
 msgstr ""
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent's setting
-#: resources/ui/settings.ui:2611 resources/ui/settings.ui:2766
-#: resources/ui/settings.ui:3367 resources/ui/settings.ui:3419
+#: resources/ui/settings.ui:2572 resources/ui/settings.ui:2726
+#: resources/ui/settings.ui:3326 resources/ui/settings.ui:3377
 msgid "Parent"
 msgstr ""
 
-#: resources/ui/settings.ui:2633 resources/ui/settings.ui:2788
-msgid "Pick Child Item Color"
-msgstr ""
-
-#: resources/ui/settings.ui:2915 resources/ui/settings.ui:3472
+#: resources/ui/settings.ui:2874 resources/ui/settings.ui:3429
 msgid "Offset"
 msgstr ""
 
 #. Draw above (grand)children items. There's an explanation string below in the application.
-#: resources/ui/settings.ui:3026 resources/ui/settings.ui:3561
+#: resources/ui/settings.ui:2985 resources/ui/settings.ui:3518
 msgid "Draw Above"
 msgstr ""
 
-#: resources/ui/settings.ui:3036
+#: resources/ui/settings.ui:2995
 msgid "Render children above the center item."
 msgstr ""
 
-#: resources/ui/settings.ui:3293 resources/ui/settings.ui:3655
+#: resources/ui/settings.ui:3252 resources/ui/settings.ui:3612
 msgid "Grandchildren Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:3303
+#: resources/ui/settings.ui:3262
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:3332
+#: resources/ui/settings.ui:3291
 msgid "With Hovered Parent"
 msgstr ""
 
-#: resources/ui/settings.ui:3389 resources/ui/settings.ui:3441
-msgid "Pick Grandchild Item Color"
-msgstr ""
-
-#: resources/ui/settings.ui:3571
+#: resources/ui/settings.ui:3528
 msgid "Render grandchildren above children items."
 msgstr ""
 
-#: resources/ui/settings.ui:3686 resources/ui/settings.ui:3931
+#: resources/ui/settings.ui:3643 resources/ui/settings.ui:3885
 msgid "Wedge Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:3696
+#: resources/ui/settings.ui:3653
 msgid "Clicking inside a wedge will activate the corresponding item."
 msgstr ""
 
-#: resources/ui/settings.ui:3719
+#: resources/ui/settings.ui:3676
 msgid "Inner Radius"
 msgstr ""
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
-#: resources/ui/settings.ui:3730
+#: resources/ui/settings.ui:3687
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr ""
 
-#: resources/ui/settings.ui:3751
+#: resources/ui/settings.ui:3708
 msgid "Wedge Separator Color"
 msgstr ""
 
-#: resources/ui/settings.ui:3763
+#: resources/ui/settings.ui:3720
 msgid "Wedge Separator Thickness"
 msgstr ""
 
-#: resources/ui/settings.ui:3790
-msgid "Pick Wedge Separator Color"
-msgstr ""
-
-#: resources/ui/settings.ui:3802
+#: resources/ui/settings.ui:3758
 msgid "Wedge Color"
 msgstr ""
 
-#: resources/ui/settings.ui:3814
+#: resources/ui/settings.ui:3770
 msgid "Wedge Size"
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/settings.ui:3864
-msgid "Inactive"
+#: resources/ui/settings.ui:3820
+msgid "Inactive State"
 msgstr ""
 
-#. When the mouse pointer is over the item
-#: resources/ui/settings.ui:3877
-msgid "Hovered"
-msgstr ""
-
-#: resources/ui/settings.ui:3894
-msgid "Pick Wedge Color"
-msgstr ""
-
-#. Hovered: When the mouse pointer is over the item
-#: resources/ui/settings.ui:3901
-msgid "Pick Hovered Wedge Color"
-msgstr ""
-
-#: resources/ui/settings.ui:3961 resources/ui/settings.ui:4068
+#: resources/ui/settings.ui:3915 resources/ui/settings.ui:4021
 msgid "Trace Appearance"
 msgstr ""
 
-#: resources/ui/settings.ui:3971
+#: resources/ui/settings.ui:3925
 msgid "The trace is the connecting line between selected menu items."
 msgstr ""
 
-#: resources/ui/settings.ui:3988
+#: resources/ui/settings.ui:3942
 msgid "Thickness"
 msgstr ""
 
-#: resources/ui/settings.ui:3999
+#: resources/ui/settings.ui:3953
 msgid "Color"
 msgstr ""
 
-#: resources/ui/settings.ui:4040
-msgid "Pick Trace Color"
-msgstr ""
-
-#: resources/ui/settings.ui:4052
+#: resources/ui/settings.ui:4005
 msgid "Minimum Segment Length"
 msgstr ""
 
-#: resources/ui/settings.ui:4098 resources/ui/settings.ui:4451
+#: resources/ui/settings.ui:4051 resources/ui/settings.ui:4404
 msgid "Advanced Settings"
 msgstr ""
 
-#: resources/ui/settings.ui:4108
+#: resources/ui/settings.ui:4061
 msgid "These settings are independent of the presets."
 msgstr ""
 
-#: resources/ui/settings.ui:4127
+#: resources/ui/settings.ui:4080
 msgid "Minimum Stroke Angle"
 msgstr ""
 
-#: resources/ui/settings.ui:4137
+#: resources/ui/settings.ui:4090
 msgid "Smaller turns will not lead to selections."
 msgstr ""
 
-#: resources/ui/settings.ui:4174
+#: resources/ui/settings.ui:4127
 msgid "Minimum Stroke Length"
 msgstr ""
 
-#: resources/ui/settings.ui:4184
+#: resources/ui/settings.ui:4137
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/settings.ui:4223
+#: resources/ui/settings.ui:4176
 msgid "Jitter Threshold"
 msgstr ""
 
-#: resources/ui/settings.ui:4233
+#: resources/ui/settings.ui:4186
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/settings.ui:4271
+#: resources/ui/settings.ui:4224
 msgid "Selection Timeout"
 msgstr ""
 
-#: resources/ui/settings.ui:4281
+#: resources/ui/settings.ui:4234
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
 msgstr ""
 
-#: resources/ui/settings.ui:4320
+#: resources/ui/settings.ui:4273
 msgid "Experimental Hover Mode"
 msgstr ""
 
-#: resources/ui/settings.ui:4330
+#: resources/ui/settings.ui:4283
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
 msgstr ""
 
-#: resources/ui/settings.ui:4353
+#: resources/ui/settings.ui:4306
 msgid "Show Screencast Mouse"
 msgstr ""
 
-#: resources/ui/settings.ui:4363
+#: resources/ui/settings.ui:4316
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
 msgstr ""
 
-#: resources/ui/settings.ui:4396
+#: resources/ui/settings.ui:4349
 msgid "Achievement Notifications"
 msgstr ""
 
-#: resources/ui/settings.ui:4406
+#: resources/ui/settings.ui:4359
 msgid "Show a notification whenever you complete an achievement."
 msgstr ""
 
-#: resources/ui/settings.ui:4472
-msgid "Load a Preset"
+#: resources/ui/settings.ui:4425
+msgid "Load Preset"
 msgstr ""
 
-#. Tooltip of the import-settings button.
-#: resources/ui/settings.ui:4484
-msgid "Import settings"
+#: resources/ui/settings.ui:4437
+msgid "Load settings from a JSON file."
 msgstr ""
 
-#. Text of the import-settings button.
-#. Text of the import-menu-configuration button.
-#: resources/ui/settings.ui:4498 resources/ui/settings.ui:4805
-#: src/prefs/MenuEditorPage.js:250
-msgid "Import"
-msgstr ""
-
-#. Tooltip of the export-settings button.
-#: resources/ui/settings.ui:4508
-msgid "Export settings"
-msgstr ""
-
-#. Text of the export-settings button.
-#. Text of the export-menu-configuration button.
-#: resources/ui/settings.ui:4522 resources/ui/settings.ui:4828
-#: src/prefs/MenuEditorPage.js:184
-msgid "Export"
-msgstr ""
-
-#: resources/ui/settings.ui:4535 resources/ui/settings.ui:4842
-msgid "Open Live Preview Menu"
+#: resources/ui/settings.ui:4444
+msgid "Save the settings to a JSON file."
 msgstr ""
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: resources/ui/settings.ui:4549 resources/ui/settings.ui:4856
+#: resources/ui/settings.ui:4467 resources/ui/settings.ui:4740
 msgid "Live Preview"
 msgstr ""
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/settings.ui:4578
+#: resources/ui/settings.ui:4496
 msgid "Menu Editor"
 msgstr ""
 
-#: resources/ui/settings.ui:4685
+#: resources/ui/settings.ui:4525
+msgid "Add a new menu item."
+msgstr ""
+
+#: resources/ui/settings.ui:4604
 msgid "Stash"
 msgstr ""
 
-#: resources/ui/settings.ui:4701
+#: resources/ui/settings.ui:4620
 msgid "Store items here and re-use them later."
 msgstr ""
 
-#: resources/ui/settings.ui:4745
+#: resources/ui/settings.ui:4664
 msgid "Trash"
 msgstr ""
 
-#: resources/ui/settings.ui:4761
+#: resources/ui/settings.ui:4680
 msgid "Drop items here."
 msgstr ""
 
-#: resources/ui/settings.ui:4791
-msgid "Import menu configuration"
+#: resources/ui/settings.ui:4710
+msgid "Restore menus from a JSON file. This will override your current menus!"
 msgstr ""
 
-#: resources/ui/settings.ui:4814
-msgid "Export menu configuration"
+#: resources/ui/settings.ui:4716
+msgid "Export all menus to a JSON file."
 msgstr ""
 
-#: resources/ui/settings.ui:4909
+#: resources/ui/settings.ui:4793
 msgid "Name"
 msgstr ""
 
-#: resources/ui/settings.ui:4927
+#: resources/ui/settings.ui:4811
 msgid "Icon"
 msgstr ""
 
-#: resources/ui/settings.ui:4933
+#: resources/ui/settings.ui:4817
 msgid "Can be an icon name, text, emoji or a file."
 msgstr ""
 
-#: resources/ui/settings.ui:4977
+#: resources/ui/settings.ui:4861
 msgid "Fixed Angle"
 msgstr ""
 
-#: resources/ui/settings.ui:4983
+#: resources/ui/settings.ui:4867 src/common/menus/RunningApps.js:99
 msgid "See tooltip for details."
 msgstr ""
 
-#: resources/ui/settings.ui:4993
+#: resources/ui/settings.ui:4877
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
-"if your muscles already learned the item's direction.\n"
-"        \n"
-"        However, there is a <b>restriction</b> on the fixed angles. Inside a "
-"menu the fixed angles must be monotonically increasing, that is each fixed "
-"angle must be larger than any previous fixed angle.\n"
-"        \n"
-"        In order to prevent weird behavior, <b>fixed angles will be removed</"
-"b> if an item is dragged to another position in the menu.\n"
-"        \n"
-"        <b>Use -1 to disable this feature</b>."
+"if your muscles already learned the item's direction. However, there is a "
+"restriction on the fixed angles. Inside a menu the fixed angles must be "
+"monotonically increasing, that is each fixed angle must be larger than any "
+"previous fixed angle. In order to prevent weird behavior, fixed angles will "
+"be removed if an item is dragged to another position in the menu. Use -1 to "
+"disable this feature."
 msgstr ""
 
-#: resources/ui/settings.ui:5031 src/common/actions/Shortcut.js:78
+#: resources/ui/settings.ui:4909 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
 msgstr ""
 
-#: resources/ui/settings.ui:5037
+#: resources/ui/settings.ui:4915
 msgid "This will open the menu."
 msgstr ""
 
-#: resources/ui/settings.ui:5055
+#: resources/ui/settings.ui:4933
 msgid "Open in Screen Center"
 msgstr ""
 
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/settings.ui:5116
+#: resources/ui/settings.ui:4994
 msgid "Achievements"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:5310
+#: resources/ui/settings.ui:5188
 msgid "In Progress"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/settings.ui:5324
+#: resources/ui/settings.ui:5202
 msgid "Completed"
 msgstr ""
 
-#: resources/ui/settings.ui:5352
+#: resources/ui/settings.ui:5230
 msgid "Reset all achievements."
 msgstr ""
 
@@ -892,264 +842,284 @@ msgstr ""
 msgid "%s Cancellor"
 msgstr ""
 
-#: src/common/Achievements.js:414
+#. Translators: The description of the '%s Cancellor' achievement.
+#: src/common/Achievements.js:415
 #, javascript-format
 msgid "Abort a selection %x times."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items.' achievement.
-#: src/common/Achievements.js:427
+#: src/common/Achievements.js:428
 #, javascript-format
 msgid "%s Pielot"
 msgstr ""
 
-#: src/common/Achievements.js:428
+#. Translators: The description of the '%s Pielot' achievement.
+#: src/common/Achievements.js:430
 #, javascript-format
 msgid "Select %x items."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:442
+#: src/common/Achievements.js:444
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:445
+#: src/common/Achievements.js:447
 #, javascript-format
 msgid "%s Submenu Gesture-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:448
+#: src/common/Achievements.js:450
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
 msgstr ""
 
-#: src/common/Achievements.js:454
+#. Translators: The description of the 'Gesture-Selector' achievement.
+#: src/common/Achievements.js:457
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:471
+#: src/common/Achievements.js:474
 #, javascript-format
 msgid "%s Toplevel Click-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:474
+#: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Submenu Click-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:477
+#: src/common/Achievements.js:480
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
 msgstr ""
 
-#: src/common/Achievements.js:483
+#. Translators: The description of the 'Click-Selector' achievement.
+#: src/common/Achievements.js:487
 #, javascript-format
 msgid "Select %x items at depth %d with mouse clicks."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 1 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:505
+#: src/common/Achievements.js:509
 #, javascript-format
 msgid "%s Toplevel Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 2 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:508
+#: src/common/Achievements.js:512
 #, javascript-format
 msgid "%s Submenu Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 3 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:511
+#: src/common/Achievements.js:515
 #, javascript-format
 msgid "%s Subsubmenu Selector"
 msgstr ""
 
-#: src/common/Achievements.js:522
+#. Translators: The description of the 'Selector' achievement.
+#: src/common/Achievements.js:527
 msgid "Select %x items at depth %d in less than %t milliseconds."
 msgstr ""
 
 #. Translators: The name of the 'Open the settings dialog %x times.'
 #. achievement.
-#: src/common/Achievements.js:542
+#: src/common/Achievements.js:547
 msgid "The Journey Is The Reward %i"
 msgstr ""
 
-#: src/common/Achievements.js:543
+#. Translators: The description of the 'The Journey Is The Reward %i'
+#. achievement.
+#: src/common/Achievements.js:550
 #, javascript-format
 msgid "Open the settings dialog %x times."
 msgstr ""
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
-#: src/common/Achievements.js:558
+#: src/common/Achievements.js:565
 msgid "Nerd Alert %i"
 msgstr ""
 
-#: src/common/Achievements.js:559
+#. Translators: The description of the 'Nerd Alert %i' achievement.
+#: src/common/Achievements.js:567
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
 msgstr ""
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
-#: src/common/Achievements.js:573
+#: src/common/Achievements.js:581
 msgid "Entropie %i"
 msgstr ""
 
-#: src/common/Achievements.js:575
+#: src/common/Achievements.js:585
 #, javascript-format
 msgid "Generate %x random presets."
 msgstr ""
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
-#: src/common/Achievements.js:588
+#: src/common/Achievements.js:598
 #, javascript-format
 msgid "%s Preset Exporter"
 msgstr ""
 
-#: src/common/Achievements.js:590
+#. Translators: The description of the '%s Preset Exporter' achievement if
+#. only one preset needs to be exported.
+#: src/common/Achievements.js:602
 msgid "Export a custom preset."
 msgstr ""
 
-#: src/common/Achievements.js:591
+#. Translators: The description of the '%s Preset Exporter' achievement.
+#: src/common/Achievements.js:604
 #, javascript-format
 msgid "Export %x custom presets."
 msgstr ""
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
-#: src/common/Achievements.js:604
+#: src/common/Achievements.js:617
 #, javascript-format
 msgid "%s Preset Importer"
 msgstr ""
 
-#: src/common/Achievements.js:606
+#. Translators: The description of the '%s Preset Importer' achievement if
+#. only one preset needs to be imported.
+#: src/common/Achievements.js:621
 msgid "Import a custom preset."
 msgstr ""
 
-#: src/common/Achievements.js:607
+#. Translators: The description of the '%s Preset Importer' achievement.
+#: src/common/Achievements.js:623
 #, javascript-format
 msgid "Import %x custom presets."
 msgstr ""
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
-#: src/common/Achievements.js:620
+#: src/common/Achievements.js:636
 #, javascript-format
 msgid "%s Menu Importer"
 msgstr ""
 
-#: src/common/Achievements.js:622
+#. Translators: The description of the '%s Menu Importer' achievement if
+#. only one menu needs to be imported.
+#: src/common/Achievements.js:640
 msgid "Import a menu configuration."
 msgstr ""
 
-#: src/common/Achievements.js:623
+#. Translators: The description of the '%s Menu Importer' achievement.
+#: src/common/Achievements.js:642
 #, javascript-format
 msgid "Import %x menu configurations."
 msgstr ""
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
-#: src/common/Achievements.js:637
+#: src/common/Achievements.js:656
 #, javascript-format
 msgid "%s Menu Exporter"
 msgstr ""
 
-#: src/common/Achievements.js:639
+#. Translators: The description of the '%s Menu Exporter' achievement if
+#. only one menu needs to be exported.
+#: src/common/Achievements.js:660
 msgid "Export a menu configuration."
 msgstr ""
 
-#: src/common/Achievements.js:640
+#. Translators: The description of the '%s Menu Exporter' achievement.
+#: src/common/Achievements.js:662
 #, javascript-format
 msgid "Export %x menu configurations."
 msgstr ""
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
-#: src/common/Achievements.js:655
+#: src/common/Achievements.js:677
 msgid "There Should Be No More Than Twelve Items…? %i"
 msgstr ""
 
-#: src/common/Achievements.js:656
+#. Translators: The description of the 'There Should Be No More Than Twelve
+#. Items…? %i' achievement.
+#: src/common/Achievements.js:680
 #, javascript-format
 msgid "Create %x items in the menu editor."
 msgstr ""
 
 #. Translators: The name of the 'Open a preview menu %x times.' achievement.
-#: src/common/Achievements.js:670
+#: src/common/Achievements.js:694
 #, javascript-format
 msgid "%s Menu Designer"
 msgstr ""
 
-#: src/common/Achievements.js:672
+#. Translators: The description of the '%s Menu Designer' achievement.
+#: src/common/Achievements.js:697
 #, javascript-format
 msgid "Open a preview menu %x times."
 msgstr ""
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:685
+#: src/common/Achievements.js:710
 msgid "Grumpie Rookie"
 msgstr ""
 
-#: src/common/Achievements.js:686
+#. Translators: The description of the 'Grumpie Rookie' achievement.
+#: src/common/Achievements.js:712
 #, javascript-format
 msgid "Open the tutorial menu %x times."
 msgstr ""
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:698
+#: src/common/Achievements.js:724
 msgid "Bachelor Pielot"
 msgstr ""
 
-#: src/common/Achievements.js:699
+#. Translators: The description of the 'Bachelor Pielot' achievement.
+#: src/common/Achievements.js:726
 msgid "Get all medals of the tutorial."
 msgstr ""
 
 #. Translators: The name of the hidden 'Delete all of your menus.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:711
+#: src/common/Achievements.js:738
 msgid "Say Good-Pie!"
 msgstr ""
 
-#: src/common/Achievements.js:712
+#. Translators: The description of the 'Say Good-Pie!' achievement.
+#: src/common/Achievements.js:740
 msgid "Delete all of your menus."
 msgstr ""
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
 #. achievement.
-#: src/common/Achievements.js:725
+#: src/common/Achievements.js:753
 msgid "That's Philanthropie!"
 msgstr ""
 
-#: src/common/Achievements.js:726
+#. Translators: The description of the 'That's Philanthropie!' achievement.
+#: src/common/Achievements.js:755
 msgid "Consider becoming a sponsor of Fly-Pie."
 msgstr ""
 
 #: src/common/ConfigWidgetFactory.js:97 src/prefs/ImageChooserButton.js:39
 msgid "Select File"
-msgstr ""
-
-#: src/common/ConfigWidgetFactory.js:98 src/common/ConfigWidgetFactory.js:165
-#: src/prefs/ImageChooserButton.js:40 src/prefs/MenuEditorPage.js:183
-#: src/prefs/MenuEditorPage.js:249 src/prefs/SettingsPage.js:272
-#: src/prefs/SettingsPage.js:347
-msgid "Cancel"
 msgstr ""
 
 #: src/common/ConfigWidgetFactory.js:164
@@ -1158,7 +1128,8 @@ msgstr ""
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:264 src/common/ConfigWidgetFactory.js:297
-msgid "Not bound."
+#: src/prefs/MenuEditor.js:258
+msgid "Not Bound"
 msgstr ""
 
 #: src/common/ConfigWidgetFactory.js:287
@@ -1212,7 +1183,7 @@ msgstr ""
 msgid "Show Achievements"
 msgstr ""
 
-#. Translators: This is an entry of the default menu.
+#. Translators: This is the name of the default menu.
 #: src/extension/DefaultMenu.js:28 src/prefs/ExampleMenu.js:26
 msgid "Example Menu"
 msgstr ""
@@ -1222,9 +1193,9 @@ msgstr ""
 msgid "Window Management"
 msgstr ""
 
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:41
-msgid "Open Windows"
+#. Translators: This is an entry of the default menu. I
+#: src/extension/DefaultMenu.js:41 src/common/menus/RunningApps.js:47
+msgid "Running Apps"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
@@ -1233,13 +1204,13 @@ msgid "Close Window"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:62 src/prefs/ExampleMenu.js:266
-msgid "Right"
+#: src/extension/DefaultMenu.js:62
+msgid "Next Workspace"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:70 src/prefs/ExampleMenu.js:269
-msgid "Left"
+#: src/extension/DefaultMenu.js:70
+msgid "Previous Workspace"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
@@ -1290,485 +1261,576 @@ msgstr ""
 msgid "All achievements will be lost!"
 msgstr ""
 
-#. Translators: An emoji category.
+#. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:29
 msgid "Animals & Nature"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:33
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:34
 msgid "Flowers"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:36
+#. Translators: The name of the 🌷 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:38
 msgid "Tulip"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:37
+#. Translators: The name of the 🌹 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:40
 msgid "Rose"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:38
+#. Translators: The name of the 🌻 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:42
 msgid "Sunflower"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:39
+#. Translators: The name of the 🌼 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:44
 msgid "Blossom"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:40
+#. Translators: The name of the 💐 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:46
 msgid "Bouquet"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:45
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:51
 msgid "Mammals"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:48
+#. Translators: The name of the 🐈 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:55
 msgid "Cat"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:49
+#. Translators: The name of the 🐂 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:57
 msgid "Ox"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:50
+#. Translators: The name of the 🐕 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:59
 msgid "Dog"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:51
+#. Translators: The name of the 🐖 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:61
 msgid "Pig"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:52
+#. Translators: The name of the 🐒 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:63
 msgid "Monkey"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:57
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:68
 msgid "Reptiles"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:60
+#. Translators: The name of the 🐊 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:72
 msgid "Crocodile"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:61
+#. Translators: The name of the 🐍 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:74
 msgid "Snake"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:62
+#. Translators: The name of the 🐢 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:76
 msgid "Turtle"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:63
+#. Translators: The name of the 🦖 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:78
 msgid "T-Rex"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:64
+#. Translators: The name of the 🦕 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:80
 msgid "Apatosaurus"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:71
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:87
 msgid "Food & Drink"
 msgstr "ආහාර සහ පාන"
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:76
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:92
 msgid "Fruit"
 msgstr "පලතුරු"
 
-#: src/prefs/ExampleMenu.js:79
+#. Translators: The name of the 🍏 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:96
 msgid "Apple"
 msgstr "ඇපල්"
 
-#: src/prefs/ExampleMenu.js:80
+#. Translators: The name of the 🍉 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:98
 msgid "Watermelon"
 msgstr "පැණි කොමඩු"
 
-#: src/prefs/ExampleMenu.js:81
+#. Translators: The name of the 🍋 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:100
 msgid "Lemon"
 msgstr "දෙහි"
 
-#: src/prefs/ExampleMenu.js:82
+#. Translators: The name of the 🍌 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:102
 msgid "Banana"
 msgstr "කෙසෙල්"
 
-#: src/prefs/ExampleMenu.js:83
+#. Translators: The name of the 🍓 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:104
 msgid "Strawberry"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:88
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:109
 msgid "Drink"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:91
+#. Translators: The name of the 🍵 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:113
 msgid "Tea"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:92
+#. Translators: The name of the ☕ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:115
 msgid "Coffee"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:93
+#. Translators: The name of the 🍺 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:117
 msgid "Beer"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:94
+#. Translators: The name of the 🥃 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:119
 msgid "Whiskey"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:95
+#. Translators: The name of the 🍹 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:121
 msgid "Cocktail"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:100
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:126
 msgid "Sweets"
 msgstr ""
 
 #. Translators: This is the item which should be selected in the tutorial.
 #. Make sure the translation matches the name given in the tutorial!
-#: src/prefs/ExampleMenu.js:105
+#. Translators: The name of the 🍰 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:132
 msgid "Shortcake"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:106
+#. Translators: The name of the 🍬 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:134
 msgid "Candy"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:107
+#. Translators: The name of the 🍩 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:136
 msgid "Doughnut"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:108
+#. Translators: The name of the 🍪 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:138
 msgid "Cookie"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:109
+#. Translators: The name of the 🍫 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:140
 msgid "Chocolate"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:116
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:147
 msgid "Activities"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:121
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:152
 msgid "Games"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:124
+#. Translators: The name of the 🎱 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:156
 msgid "Billards"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:125
+#. Translators: The name of the 🀄 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:158
 msgid "Mahjong"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:126
+#. Translators: The name of the 🎳 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:160
 msgid "Bowling"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:127
+#. Translators: The name of the 🎯 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:162
 msgid "Darts"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:128
+#. Translators: The name of the 🎮 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:164
 msgid "Video Game"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:133
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:169
 msgid "Sports"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:136
+#. Translators: The name of the 🏏 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:173
 msgid "Cricket"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:137
+#. Translators: The name of the 🏒 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:175
 msgid "Ice Hockey"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:138
+#. Translators: The name of the 🎾 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:177
 msgid "Tennis"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:139
+#. Translators: The name of the 🎣 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:179
 msgid "Fishing"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:140
+#. Translators: The name of the 🎿 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:181
 msgid "Skiing"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:145
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:186
 msgid "Places"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:148
+#. Translators: The name of the 🗻 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:190
 msgid "Mount Fuji"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:149
+#. Translators: The name of the 🌋 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:192
 msgid "Mount Etna"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:150
+#. Translators: The name of the 🗽 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:194
 msgid "Statue of Liberty"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:151
+#. Translators: The name of the 🗾 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:196
 msgid "Japan"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:152
+#. Translators: The name of the 🗿 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:198
 msgid "Moyai"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:159
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:205
 msgid "Objects"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:164
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:210
 msgid "Cars"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:167
+#. Translators: The name of the 🚌 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:214
 msgid "Bus"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:168
+#. Translators: The name of the 🚒 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:216
 msgid "Fire Engine"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:169
+#. Translators: The name of the 🚗 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:218
 msgid "Automobile"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:170
+#. Translators: The name of the 🚜 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:220
 msgid "Tractor"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:171
+#. Translators: The name of the 🚚 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:222
 msgid "Truck"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:176
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:227
 msgid "Buildings"
 msgstr "ගොඩනැගිලි"
 
-#: src/prefs/ExampleMenu.js:179
+#. Translators: The name of the 🏤 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:231
 msgid "Post Office"
 msgstr "තැපැල් කාර්යාලය"
 
-#: src/prefs/ExampleMenu.js:180
+#. Translators: The name of the 🏫 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:233
 msgid "School"
 msgstr "පාසැල"
 
-#: src/prefs/ExampleMenu.js:181
+#. Translators: The name of the 🏥 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:235
 msgid "Hospital"
 msgstr "රෝහල"
 
-#: src/prefs/ExampleMenu.js:182
+#. Translators: The name of the 🏦 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:237
 msgid "Bank"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:183
+#. Translators: The name of the 🏩 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:239
 msgid "Love Hotel"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:188
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:244
 msgid "Instruments"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:191
+#. Translators: The name of the 🎷 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:248
 msgid "Saxophone"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:192
+#. Translators: The name of the 🎸 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:250
 msgid "Guitar"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:193
+#. Translators: The name of the 🎺 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:252
 msgid "Trumpet"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:194
+#. Translators: The name of the 🎤 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:254
 msgid "Microphone"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:195
+#. Translators: The name of the 🥁 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:256
 msgid "Drum"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:202
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:263
 msgid "Smileys"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:207
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:268
 msgid "Happy Faces"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:210
+#. Translators: The name of the 😃 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:272
 msgid "Smiley"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:211
+#. Translators: The name of the 😉 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:274
 msgid "Winking Face"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:212
+#. Translators: The name of the 😊 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:276
 msgid "Face With Smiling Eyes"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:213
+#. Translators: The name of the 😅 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:278
 msgid "Face With Sweat"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:214
+#. Translators: The name of the 🤣 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:280
 msgid "ROFL"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:219
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:285
 msgid "Angry Faces"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:222
+#. Translators: The name of the 🤮 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:289
 msgid "Vomiting Face"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:223
+#. Translators: The name of the 🤨 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:291
 msgid "Skeptical Face"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:224
+#. Translators: The name of the 😡 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:293
 msgid "Pouting Face"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:225
+#. Translators: The name of the 😠 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:295
 msgid "Angry Face"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:226
+#. Translators: The name of the 🤬 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:297
 msgid "Very Angry Face"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:231
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:302
 msgid "Surprised Faces"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:234
+#. Translators: The name of the 😳 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:306
 msgid "Flushed Face"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:235
+#. Translators: The name of the 😧 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:308
 msgid "Anguished Face"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:236
+#. Translators: The name of the 😲 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:310
 msgid "Astonished Face"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:237
+#. Translators: The name of the 😱 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:312
 msgid "Screaming Face"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:238
+#. Translators: The name of the 🤯 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:314
 msgid "Pouff"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:245
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:321
 msgid "Symbols"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:250
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:326
 msgid "Star Signs"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:253
+#. Translators: The name of the ♉ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:330
 msgid "Taurus"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:254
+#. Translators: The name of the ♋ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:332
 msgid "Cancer"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:255
+#. Translators: The name of the ♍ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:334
 msgid "Virgo"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:256
+#. Translators: The name of the ♏ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:336
 msgid "Scorpius"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:257
+#. Translators: The name of the ♑ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:338
 msgid "Capricorn"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:262
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:343
 msgid "Arrows"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:265
+#. Translators: The name of the ⏫ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:347
 msgid "Up"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:267
+#. Translators: The name of the ⏩ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:349
+msgid "Right"
+msgstr ""
+
+#. Translators: The name of the 🔀 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:351
 msgid "Twisted"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:268
+#. Translators: The name of the ⏬ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:353
 msgid "Down"
 msgstr ""
 
-#. Translators: An emoji category.
-#: src/prefs/ExampleMenu.js:274
+#. Translators: The name of the ⏪ emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:355
+msgid "Left"
+msgstr ""
+
+#. Translators: An emoji category of the example tutorial menu.
+#: src/prefs/ExampleMenu.js:360
 msgid "Info Signs"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:277
+#. Translators: The name of the 🚮 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:364
 msgid "Litter Bin"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:278
+#. Translators: The name of the 🚰 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:366
 msgid "Potable Water"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:279
+#. Translators: The name of the 🚹 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:368
 msgid "Mens"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:280
+#. Translators: The name of the 🚺 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:370
 msgid "Womens"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:281
+#. Translators: The name of the 🚼 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:372
 msgid "Baby"
-msgstr ""
-
-#: src/prefs/ImageChooserButton.js:88
-msgid "(None)"
-msgstr ""
-
-#: src/prefs/MenuEditor.js:258
-msgid "Not Bound"
 msgstr ""
 
 #. Translators: This is shown as an in-app notification when the user
@@ -1785,26 +1847,26 @@ msgstr ""
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:164
-msgid "Export Menu Configuration"
-msgstr ""
-
-#: src/prefs/MenuEditorPage.js:172 src/prefs/MenuEditorPage.js:238
-#: src/prefs/SettingsPage.js:261 src/prefs/SettingsPage.js:336
+#: src/prefs/MenuEditorPage.js:171 src/prefs/MenuEditorPage.js:236
+#: src/prefs/SettingsPage.js:260 src/prefs/SettingsPage.js:311
 msgid "JSON Files"
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:179 src/prefs/MenuEditorPage.js:245
-#: src/prefs/SettingsPage.js:268 src/prefs/SettingsPage.js:343
+#: src/prefs/MenuEditorPage.js:178 src/prefs/MenuEditorPage.js:243
+#: src/prefs/SettingsPage.js:267 src/prefs/SettingsPage.js:318
 msgid "All Files"
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:213
+#: src/prefs/MenuEditorPage.js:183
+msgid "Export"
+msgstr ""
+
+#: src/prefs/MenuEditorPage.js:212
 msgid "Could not export the menu configuration."
 msgstr ""
 
-#: src/prefs/MenuEditorPage.js:230
-msgid "Import Menu Configuration"
+#: src/prefs/MenuEditorPage.js:248
+msgid "Import"
 msgstr ""
 
 #: src/prefs/MenuEditorPage.js:276
@@ -1914,35 +1976,15 @@ msgstr ""
 msgid "All Menus"
 msgstr ""
 
-#: src/prefs/SettingsPage.js:253
-msgid "Save Preset"
-msgstr ""
-
-#: src/prefs/SettingsPage.js:273
+#: src/prefs/SettingsPage.js:272
 msgid "Save"
 msgstr "සුරකින්න"
 
-#: src/prefs/SettingsPage.js:297
-msgid "You should not store the preset in the extension directory!"
-msgstr ""
-
-#. Translators: "It" refers to the preset if stored in the extension's
-#. directory.
-#: src/prefs/SettingsPage.js:301
-msgid ""
-"Here it will be deleted whenever Fly-Pie is updated. It has been saved "
-"anyways, but please consider to store it in a safer place!"
-msgstr ""
-
-#: src/prefs/SettingsPage.js:328
-msgid "Load Preset"
-msgstr ""
-
-#: src/prefs/SettingsPage.js:348
+#: src/prefs/SettingsPage.js:323
 msgid "Load"
 msgstr ""
 
-#: src/prefs/SettingsPage.js:365
+#: src/prefs/SettingsPage.js:340
 msgid "Failed to load preset!"
 msgstr ""
 
@@ -1980,7 +2022,7 @@ msgid "Command"
 msgstr ""
 
 #: src/common/actions/Command.js:69
-msgid "Use the button to list installed apps!"
+msgid "Use the button to list installed apps."
 msgstr ""
 
 #: src/common/actions/DBusSignal.js:32
@@ -2221,10 +2263,6 @@ msgid ""
 "about twelve."
 msgstr ""
 
-#: src/common/menus/RunningApps.js:47
-msgid "Running Apps"
-msgstr ""
-
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:54
@@ -2249,10 +2287,6 @@ msgstr ""
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
-msgstr ""
-
-#: src/common/menus/RunningApps.js:99
-msgid "See Tooltip for details."
 msgstr ""
 
 #: src/common/menus/RunningApps.js:123
