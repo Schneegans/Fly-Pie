@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-18 20:46+0200\n"
-"PO-Revision-Date: 2021-09-18 18:47+0000\n"
-"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
+"PO-Revision-Date: 2021-09-20 08:39+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
 "core/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -169,10 +169,13 @@ msgid "🥉️ Bronze Sponsors"
 msgstr "🥉️ Bronsesponsorer"
 
 #: resources/ui/settings.ui:632
+#, fuzzy
 msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
+"Vil du vise at du bryr deg om Fly-Pie? <a href=\"https://github.com/sponsors/"
+"Schneegans\">Bli sponsor for kun 1 dollar per måned</a>."
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:688
@@ -728,11 +731,11 @@ msgstr "Last inn forhåndsinnstilling"
 
 #: resources/ui/settings.ui:4437
 msgid "Load settings from a JSON file."
-msgstr ""
+msgstr "Last inn innstillinger fra en JSON-fil."
 
 #: resources/ui/settings.ui:4444
 msgid "Save the settings to a JSON file."
-msgstr ""
+msgstr "Lagre innstillingene i en JSON-fil."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: resources/ui/settings.ui:4467 resources/ui/settings.ui:4740
@@ -746,7 +749,7 @@ msgstr "Menyredigerer"
 
 #: resources/ui/settings.ui:4525
 msgid "Add a new menu item."
-msgstr ""
+msgstr "Legg til et nytt menyelement."
 
 #: resources/ui/settings.ui:4604
 msgid "Stash"
@@ -758,19 +761,20 @@ msgstr ""
 
 #: resources/ui/settings.ui:4664
 msgid "Trash"
-msgstr ""
+msgstr "Papirkurv"
 
 #: resources/ui/settings.ui:4680
 msgid "Drop items here."
-msgstr ""
+msgstr "Slipp elementer her."
 
 #: resources/ui/settings.ui:4710
 msgid "Restore menus from a JSON file. This will override your current menus!"
 msgstr ""
+"Gjenopprett menyer fra en JSON-fil. Dette vil overskrive nåværende menyer."
 
 #: resources/ui/settings.ui:4716
 msgid "Export all menus to a JSON file."
-msgstr ""
+msgstr "Eksporter alle menyer til en JSON-fil."
 
 #: resources/ui/settings.ui:4793
 msgid "Name"
@@ -1027,7 +1031,7 @@ msgstr "Åpne %x menyer med D-Bus-grensesnittet."
 #. Translators: The name of the 'Generate %x random presets.' achievement.
 #: src/common/Achievements.js:581
 msgid "Entropie %i"
-msgstr ""
+msgstr "Entropipai %i"
 
 #: src/common/Achievements.js:585
 #, javascript-format
@@ -1136,7 +1140,7 @@ msgstr "Åpne forhåndsvisningsmenyen %x ganger."
 #. This does not support %s and %i.
 #: src/common/Achievements.js:710
 msgid "Grumpie Rookie"
-msgstr ""
+msgstr "Snurt nybegynner"
 
 #. Translators: The description of the 'Grumpie Rookie' achievement.
 #: src/common/Achievements.js:712
@@ -1180,11 +1184,11 @@ msgstr "Overvei å kronerulle Fly-Pie."
 
 #: src/common/ConfigWidgetFactory.js:97 src/prefs/ImageChooserButton.js:39
 msgid "Select File"
-msgstr ""
+msgstr "Velg fil"
 
 #: src/common/ConfigWidgetFactory.js:164
 msgid "Select Application"
-msgstr ""
+msgstr "Velg program"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:264 src/common/ConfigWidgetFactory.js:297
@@ -1204,7 +1208,7 @@ msgstr ""
 #: src/common/ItemRegistry.js:245
 #, javascript-format
 msgid "Insert: %s"
-msgstr ""
+msgstr "Sett inn: %s"
 
 #: src/extension/Background.js:95
 msgid "Close"
@@ -1272,7 +1276,7 @@ msgstr ""
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:70
 msgid "Previous Workspace"
-msgstr ""
+msgstr "Forrige arbeidsområde"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:78
@@ -1744,7 +1748,7 @@ msgstr ""
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:285
 msgid "Angry Faces"
-msgstr ""
+msgstr "Sinte fjes"
 
 #. Translators: The name of the 🤮 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:289
@@ -1764,7 +1768,7 @@ msgstr "Trutmunn"
 #. Translators: The name of the 😠 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:295
 msgid "Angry Face"
-msgstr ""
+msgstr "Sint fjes"
 
 #. Translators: The name of the 🤬 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:297
@@ -1942,7 +1946,7 @@ msgstr ""
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:324
 msgid "You should try to have no more than twelve items in your menus."
-msgstr ""
+msgstr "Du bør tilstrebe å ha mindre enn tolv elementer i menyene dine."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1957,21 +1961,21 @@ msgstr ""
 #: src/prefs/MenuEditorPage.js:330
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "Fry-Pie er fri programvare tilgjengelig på <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:334
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "Forslag kan innsendes på <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:338
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "Feil kan innrapporteres på <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -2039,7 +2043,7 @@ msgstr ""
 #. Translators: The left-most item of the menu editor bread crumbs.
 #: src/prefs/MenuEditorPage.js:809
 msgid "All Menus"
-msgstr ""
+msgstr "Alle menyer"
 
 #: src/prefs/SettingsPage.js:272
 msgid "Save"
@@ -2115,7 +2119,7 @@ msgstr "ID"
 
 #: src/common/actions/DBusSignal.js:67
 msgid "This will be passed to the D-Bus signal."
-msgstr ""
+msgstr "Dette vil bli sendt til D-Bus-signalet."
 
 #: src/common/actions/File.js:34
 msgid "Open File"
@@ -2139,7 +2143,7 @@ msgstr "Fil"
 
 #: src/common/actions/File.js:69 src/common/actions/Uri.js:68
 msgid "It will be opened with the default app."
-msgstr ""
+msgstr "Det vil åpnes i forvalgt program."
 
 #: src/common/actions/InsertText.js:45
 msgid "Insert Text"
@@ -2149,7 +2153,7 @@ msgstr "Sett inn tekst"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/InsertText.js:52
 msgid "Types some text automatically."
-msgstr ""
+msgstr "Skriver noe tekst automatisk."
 
 #: src/common/actions/InsertText.js:56
 msgid ""
@@ -2185,7 +2189,7 @@ msgstr ""
 
 #: src/common/actions/Shortcut.js:78
 msgid "This shortcut will be simulated."
-msgstr ""
+msgstr "Denne snarveien vil bli simulert."
 
 #: src/common/actions/Uri.js:33
 msgid "Open URI"
@@ -2234,7 +2238,7 @@ msgstr "Egendefinert meny"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:36
 msgid "This can contain custom actions and other menus."
-msgstr ""
+msgstr "Dette kan inneholde egendefinerte handlinger og andre menyer."
 
 #: src/common/menus/CustomMenu.js:40
 msgid ""
@@ -2312,6 +2316,9 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather setup your own menus!"
 msgstr ""
+"<b>Hovedmenyen</b> viser installerte programmer. Vanlig er dette veldig "
+"uoversiktlig, siden den da inneholder for mange elementer til å brukes "
+"effektivt. Du burde heller sette opp dine egne menyer."
 
 #: src/common/menus/RecentFiles.js:34
 msgid "Recent Files"
