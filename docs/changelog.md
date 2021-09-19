@@ -4,6 +4,33 @@
 
 # Changelog of Fly-Pie
 
+## [Fly-Pie 7](https://github.com/schneegans/fly-pie/releases/tag/v7)
+
+**Release Date:** TBD
+
+#### New Features
+
+* **Port to GNOME 40+**: Fly-Pie 7 has been tested on Fedora 34 and Fedora 35 which use GNOME Shell 40 and GNOME Shell 41.beta respectively.
+  * Due to the massive changes to the codebase, this version is **not compatible with GNOME 3.3x**.
+  * GNOME 40 makes some previously required workarounds to remove visual artifacts obsolete. This **improves menu performance** significantly!
+* **WYSIWYG Menu Editor**: Due to [this bug](https://gitlab.gnome.org/GNOME/gtk/-/issues/3649), the old TreeView-based menu editor did not work under Gtk4. Therefore I choose to create a new menu editor from scratch!
+  * The **menu items in the new editor are arranged in a circle**, exactly in the same directions as they will show up in the real menu.
+  * The new menu editor fully supports **drag and drop**: You can reorder items, copy items (at least on Wayland, see [this bug](https://gitlab.gnome.org/GNOME/gtk/-/issues/4259)), and drop things from outside into the menu editor.
+  * To simplify moving menu items around, there is a **Stash Area** at the bottom of the menu editor. You can drop menu items there and re-use them later.
+  * The preferences dialog **opens much faster** on Gtk4 than it did on Gtk3. Thank you, GNOME devs!
+
+#### Other Enhancements
+
+* A warning will now be shown when the user imports a corrupt menu configuration.
+* The **default menu** has been tweaked to be useful with horizontal workspaces. 
+* The Custom Menu now uses a pencil as icon to emphasize that it's editable.
+* The **documentation for translators** has been improved significantly. For instance, there are now screenshots available at [Weblate](https://hosted.weblate.org/projects/fly-pie/core/) for most strings.
+
+#### Bug Fixes
+
+* Fix Orchis theme. There were some issues with the center item cropping.
+* Symbolic icons are now colored correctly in the menu editor.
+
 ## [Fly-Pie 6](https://github.com/schneegans/fly-pie/releases/tag/v6)
 
 **Release Date:** 2021-05-09
