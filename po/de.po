@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-20 19:53+0200\n"
-"PO-Revision-Date: 2021-09-18 19:01+0000\n"
+"PO-Revision-Date: 2021-09-20 17:59+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
-">\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1938,15 +1938,16 @@ msgstr "Baby"
 
 #: src/prefs/MenuEditor.js:370
 msgid "No menus configured"
-msgstr ""
+msgstr "Keine Menüs eingerichtet"
 
 #: src/prefs/MenuEditor.js:373
 msgid "Create a new menu with the button in the top right corner."
 msgstr ""
+"Erstellen Sie ein neues Menü mit der Schaltfläche in der oberen rechten Ecke."
 
 #: src/prefs/MenuEditor.js:391
 msgid "Add a new item"
-msgstr ""
+msgstr "Ein Menüeintrag hinzufügen"
 
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag an action in the menu editor to the menu overview.
