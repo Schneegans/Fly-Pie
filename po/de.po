@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 20:46+0200\n"
+"POT-Creation-Date: 2021-09-20 19:53+0200\n"
 "PO-Revision-Date: 2021-09-18 19:01+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
-"\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
+">\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr "Kopiere linken Wert nach rechts"
 
 #: resources/ui/iconSelectDialog.ui:14 src/common/ConfigWidgetFactory.js:98
 #: src/common/ConfigWidgetFactory.js:165 src/prefs/ImageChooserButton.js:40
-#: src/prefs/MenuEditorPage.js:182 src/prefs/MenuEditorPage.js:247
+#: src/prefs/MenuEditorPage.js:180 src/prefs/MenuEditorPage.js:245
 #: src/prefs/SettingsPage.js:271 src/prefs/SettingsPage.js:322
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -1936,58 +1936,70 @@ msgstr "Damen"
 msgid "Baby"
 msgstr "Baby"
 
+#: src/prefs/MenuEditor.js:370
+msgid "No menus configured"
+msgstr ""
+
+#: src/prefs/MenuEditor.js:373
+msgid "Create a new menu with the button in the top right corner."
+msgstr ""
+
+#: src/prefs/MenuEditor.js:391
+msgid "Add a new item"
+msgstr ""
+
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag an action in the menu editor to the menu overview.
 #. Translators: This is shown as an in-app notification when the user attempts
 #. to drag an action in the menu editor to the menu overview.
-#: src/prefs/MenuEditor.js:676 src/prefs/MenuEditorPage.js:792
+#: src/prefs/MenuEditor.js:715 src/prefs/MenuEditorPage.js:796
 msgid "Actions cannot be turned into toplevel menus."
 msgstr "Aktionen können nicht in Menüs der obersten Ebene umgewandelt werden."
 
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag external stuff to the menu editor's overview.
-#: src/prefs/MenuEditor.js:695
+#: src/prefs/MenuEditor.js:734
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr ""
 "Sie können neue Menüeinträge nur innerhalb von benutzerdefinierten Menüs "
 "erstellen."
 
-#: src/prefs/MenuEditorPage.js:171 src/prefs/MenuEditorPage.js:236
+#: src/prefs/MenuEditorPage.js:169 src/prefs/MenuEditorPage.js:234
 #: src/prefs/SettingsPage.js:260 src/prefs/SettingsPage.js:311
 msgid "JSON Files"
 msgstr "JSON-Dateien"
 
-#: src/prefs/MenuEditorPage.js:178 src/prefs/MenuEditorPage.js:243
+#: src/prefs/MenuEditorPage.js:176 src/prefs/MenuEditorPage.js:241
 #: src/prefs/SettingsPage.js:267 src/prefs/SettingsPage.js:318
 msgid "All Files"
 msgstr "Alle Dateien"
 
-#: src/prefs/MenuEditorPage.js:183
+#: src/prefs/MenuEditorPage.js:181
 msgid "Export"
 msgstr "Exportieren"
 
-#: src/prefs/MenuEditorPage.js:212
+#: src/prefs/MenuEditorPage.js:210
 msgid "Could not export the menu configuration."
 msgstr "Die Menükonfiguration konnte nicht exportiert werden."
 
-#: src/prefs/MenuEditorPage.js:248
+#: src/prefs/MenuEditorPage.js:246
 msgid "Import"
 msgstr "Importieren"
 
-#: src/prefs/MenuEditorPage.js:276
+#: src/prefs/MenuEditorPage.js:280
 msgid "Could not import the menu configuration."
 msgstr "Die Menükonfiguration konnte nicht importiert werden."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:324
+#: src/prefs/MenuEditorPage.js:328
 msgid "You should try to have no more than twelve items in your menus."
 msgstr ""
 "Sie sollten versuchen, nicht mehr als zwölf Einträge in einem Menü zu haben."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:327
+#: src/prefs/MenuEditorPage.js:331
 msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
@@ -1997,7 +2009,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:330
+#: src/prefs/MenuEditorPage.js:334
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr ""
@@ -2005,7 +2017,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:334
+#: src/prefs/MenuEditorPage.js:338
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
 msgstr ""
@@ -2014,14 +2026,14 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:338
+#: src/prefs/MenuEditorPage.js:342
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
 msgstr "Fehler können auf <a href=\"%s\">GitHub</a> gemeldet werden."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:342
+#: src/prefs/MenuEditorPage.js:346
 msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
@@ -2031,7 +2043,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:345
+#: src/prefs/MenuEditorPage.js:349
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
@@ -2041,13 +2053,13 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:348
+#: src/prefs/MenuEditorPage.js:352
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr "Menüeinträge können in der Liste mit der Maus verschoben werden."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:351
+#: src/prefs/MenuEditorPage.js:355
 #, javascript-format
 msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
@@ -2058,7 +2070,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:357
+#: src/prefs/MenuEditorPage.js:361
 msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
@@ -2068,7 +2080,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:360
+#: src/prefs/MenuEditorPage.js:364
 msgid ""
 "On Wayland, you can copy menu items by holding the Ctrl key while dragging "
 "them to another location."
@@ -2078,14 +2090,14 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:363
+#: src/prefs/MenuEditorPage.js:367
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
 msgstr "<a href=\"%s\">Übersetzen Sie Fly-Pie auf Hosted Weblate</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:369
+#: src/prefs/MenuEditorPage.js:373
 #, javascript-format
 msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
@@ -2095,7 +2107,7 @@ msgstr ""
 "Sponsor.</a>"
 
 #. Translators: The left-most item of the menu editor bread crumbs.
-#: src/prefs/MenuEditorPage.js:809
+#: src/prefs/MenuEditorPage.js:813
 msgid "All Menus"
 msgstr "Alle Menüs"
 
