@@ -41,7 +41,7 @@ var menu = {
 
   // This is the (long) description shown when an item of this type is selected.
   description: _(
-      'The <b>Main Menu</b> shows all installed applications. Usually, this is very cluttered as many sections contain too many items to be used efficiently. You should rather setup your own menus!'),
+      'The <b>Main Menu</b> shows all installed applications. Usually, this is very cluttered as many sections contain too many items to be used efficiently. You should rather set up your own menus!'),
 
   // This will be called whenever a menu is opened containing an item of this kind.
   createItem: () => {
