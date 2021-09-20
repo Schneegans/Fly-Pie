@@ -8,47 +8,49 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-18 20:46+0200\n"
-"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-09-20 17:52+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/fly-pie/core/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: resources/ui/copyValueButton.ui:6
 msgid "Copy left value to right side"
-msgstr ""
+msgstr "Waarde kopiëren naar rechterzijde"
 
 #: resources/ui/iconSelectDialog.ui:14 src/common/ConfigWidgetFactory.js:98
 #: src/common/ConfigWidgetFactory.js:165 src/prefs/ImageChooserButton.js:40
 #: src/prefs/MenuEditorPage.js:182 src/prefs/MenuEditorPage.js:247
 #: src/prefs/SettingsPage.js:271 src/prefs/SettingsPage.js:322
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: resources/ui/iconSelectDialog.ui:19
 msgid "Select Icon"
-msgstr ""
+msgstr "Pictogram kiezen"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:44
 msgid "Icon Theme"
-msgstr ""
+msgstr "Pictogramthema"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:106
 msgid "Custom Icon"
-msgstr ""
+msgstr "Eigen pictogram"
 
 #: resources/ui/imageChooserButton.ui:16 src/prefs/ImageChooserButton.js:88
 msgid "(None)"
-msgstr ""
+msgstr "(geen)"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:19
 msgid "Linear"
-msgstr ""
+msgstr "Lineair"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:23
@@ -102,13 +104,15 @@ msgstr ""
 
 #: resources/ui/settings.ui:398
 msgid "About"
-msgstr ""
+msgstr "Over"
 
 #: resources/ui/settings.ui:417
 msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
+"Bekijk het <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
+"changelog.md\">wijzigingslog</a> (Engels)."
 
 #: resources/ui/settings.ui:425
 msgid ""
@@ -120,44 +124,52 @@ msgid ""
 "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
+"Uitgebracht onder de MIT-licentie.\n"
+"Ga voor meer informatie naar <a href=\"https://github.com/Schneegans/Fly-"
+"Pie\">Fly-Pie's website</a>.\n"
+"\n"
+"Als u een 🐞️ bug tegenkomt of een 🎉️ idee wilt delen, ga dan naar onze <a "
+"href=\"https://github.com/Schneegans/Fly-Pie/issues\">GitHub</a>-pagina."
 
 #: resources/ui/settings.ui:442
 msgid "Credits"
-msgstr ""
+msgstr "Met dank aan"
 
 #: resources/ui/settings.ui:455
 msgid "Created by"
-msgstr ""
+msgstr "Gemaakt door"
 
 #: resources/ui/settings.ui:481
 msgid "Translated by"
-msgstr ""
+msgstr "Vertaald door"
 
 #: resources/ui/settings.ui:508
 msgid "Artwork by"
-msgstr ""
+msgstr "Grafisch vormgegeven door"
 
 #: resources/ui/settings.ui:537
 msgid "Sponsors"
-msgstr ""
+msgstr "Sponsoren"
 
 #: resources/ui/settings.ui:554
 msgid "🥇️ Gold Sponsors"
-msgstr ""
+msgstr "🥇️ Gouden sponsoren"
 
 #: resources/ui/settings.ui:566
 msgid "🥈️ Silver Sponsors"
-msgstr ""
+msgstr "🥈️ Zilveren sponsoren"
 
 #: resources/ui/settings.ui:578
 msgid "🥉️ Bronze Sponsors"
-msgstr ""
+msgstr "🥉️ Bronzen sponsoren"
 
 #: resources/ui/settings.ui:632
 msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
+"💕️ Wilt u laten zien hoe graag u Fly-Pie gebruikt? <a href=\"https://github."
+"com/sponsors/Schneegans\">Word dan sponsor voor €1 of meer per maand!</a>"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:688
@@ -165,6 +177,8 @@ msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
 msgstr ""
+"<b>Menu's</b>\n"
+"Dit kunnen onderliggende of bovenliggende menu's zijn."
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:713
@@ -172,29 +186,33 @@ msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
+"<b>Acties</b>\n"
+"Deze kunnen worden toegevoegd aan eigen menu's."
 
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/settings.ui:785
 msgid "Initialize most settings to random values."
-msgstr ""
+msgstr "Stel de meeste voorkeuren in op willekeurige waarden."
 
 #: resources/ui/settings.ui:797
 msgid "Generate Random Preset"
-msgstr ""
+msgstr "Willekeurige instellingen"
 
 #: resources/ui/settings.ui:828
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
 msgstr ""
+"GNOME Shell-animaties dienen ingeschakeld te zijn om Fly-Pie te kunnen "
+"gebruiken."
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: resources/ui/settings.ui:833
 msgid "Enable Animations"
-msgstr ""
+msgstr "Animaties inschakelen"
 
 #. Caption of the tutorial page in the window's titlebar.
 #: resources/ui/settings.ui:885
 msgid "Tutorial"
-msgstr ""
+msgstr "Rondleiding"
 
 #: resources/ui/settings.ui:919
 msgid ""
@@ -217,12 +235,12 @@ msgstr ""
 #: resources/ui/settings.ui:1119 resources/ui/settings.ui:1264
 #: resources/ui/settings.ui:1350
 msgid "<big><b>Open the example menu!</b></big>"
-msgstr ""
+msgstr "<big><b>Open het voorbeeldmenu!</b></big>"
 
 #. This is a heading.
 #: resources/ui/settings.ui:982
 msgid "You can click anywhere!"
-msgstr ""
+msgstr "U kunt overal klikken!"
 
 #: resources/ui/settings.ui:1001
 msgid ""
@@ -243,7 +261,7 @@ msgstr ""
 #. This is a heading.
 #: resources/ui/settings.ui:1065
 msgid "Practice Session I"
-msgstr ""
+msgstr "Oefensessie I"
 
 #: resources/ui/settings.ui:1075
 msgid ""
@@ -258,22 +276,22 @@ msgstr ""
 #. ms = milliseconds
 #: resources/ui/settings.ui:1148
 msgid "Unlocked at less than 3000 ms"
-msgstr ""
+msgstr "Ontgrendeld in minder dan 3000 ms"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1168
 msgid "Unlocked at less than 2000 ms"
-msgstr ""
+msgstr "Ontgrendeld in minder dan 2000 ms"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1189 resources/ui/settings.ui:1378
 msgid "Unlocked at less than 1000 ms"
-msgstr ""
+msgstr "Ontgrendeld in minder dan 1000 ms"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1216
 msgid "The Marking Mode of Fly-Pie"
-msgstr ""
+msgstr "Fly-Pie's markeermodus"
 
 #: resources/ui/settings.ui:1235
 msgid ""
@@ -296,7 +314,7 @@ msgstr ""
 #. This is a heading.
 #: resources/ui/settings.ui:1296
 msgid "Practice Session II"
-msgstr ""
+msgstr "Oefensessie II"
 
 #: resources/ui/settings.ui:1306
 msgid ""
@@ -311,17 +329,17 @@ msgstr ""
 #. ms = milliseconds
 #: resources/ui/settings.ui:1398
 msgid "Unlocked at less than 750 ms"
-msgstr ""
+msgstr "Ontgrendeld in minder dan 750 ms"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1419
 msgid "Unlocked at less than 500 ms"
-msgstr ""
+msgstr "Ontgrendeld in minder dan 500 ms"
 
 #. The user finished the tutorial. Yay!
 #: resources/ui/settings.ui:1453
 msgid "Congratulations!"
-msgstr ""
+msgstr "Gefeliciteerd!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: resources/ui/settings.ui:1465
@@ -345,55 +363,55 @@ msgstr ""
 #. Button for tutorial navigation. Goes back one page.
 #: resources/ui/settings.ui:1510
 msgid "Previous"
-msgstr ""
+msgstr "Vorige"
 
 #. Button for tutorial navigation. Goes to the next page.
 #: resources/ui/settings.ui:1567
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
 #. Caption of the settings page in the window's titlebar.
 #: resources/ui/settings.ui:1603
 msgid "Settings"
-msgstr ""
+msgstr "Voorkeuren"
 
 #: resources/ui/settings.ui:1636 resources/ui/settings.ui:1832
 msgid "Global Appearance Settings"
-msgstr ""
+msgstr "Algemene vormgeving"
 
 #: resources/ui/settings.ui:1646
 msgid "These settings affect all menu items."
-msgstr ""
+msgstr "Deze voorkeuren zijn van toepassing op alle menu-items."
 
 #: resources/ui/settings.ui:1664
 msgid "Animation Duration"
-msgstr ""
+msgstr "Animatieduur"
 
 #: resources/ui/settings.ui:1678
 msgid "Global Scaling"
-msgstr ""
+msgstr "Algemene grootte"
 
 #. Please keep this short!
 #: resources/ui/settings.ui:1688
 msgid "Independent of the preset."
-msgstr ""
+msgstr "Onafhankelijk van de voorinstelling."
 
 #: resources/ui/settings.ui:1738
 msgid "Font"
-msgstr ""
+msgstr "Lettertype"
 
 #: resources/ui/settings.ui:1748
 msgid "Text Color"
-msgstr ""
+msgstr "Tekstkleur"
 
 #: resources/ui/settings.ui:1759 resources/ui/settings.ui:2370
 #: resources/ui/settings.ui:3069 resources/ui/settings.ui:3305
 msgid "Background Color"
-msgstr ""
+msgstr "Achtergrondkleur"
 
 #: resources/ui/settings.ui:1821
 msgid "Animation Mode"
-msgstr ""
+msgstr "Animatiemodus"
 
 #: resources/ui/settings.ui:1864 resources/ui/settings.ui:2472
 msgid "Center Appearance"
@@ -416,58 +434,58 @@ msgstr ""
 #: resources/ui/settings.ui:1933 resources/ui/settings.ui:2863
 #: resources/ui/settings.ui:3418
 msgid "Size"
-msgstr ""
+msgstr "Afmetingen"
 
 #: resources/ui/settings.ui:1984 resources/ui/settings.ui:2035
 #: resources/ui/settings.ui:2187 resources/ui/settings.ui:2238
 #: resources/ui/settings.ui:2612 resources/ui/settings.ui:2673
 #: resources/ui/settings.ui:2766 resources/ui/settings.ui:2837
 msgid "Saturation"
-msgstr ""
+msgstr "Verzadiging"
 
 #: resources/ui/settings.ui:2001 resources/ui/settings.ui:2045
 #: resources/ui/settings.ui:2204 resources/ui/settings.ui:2248
 #: resources/ui/settings.ui:2629 resources/ui/settings.ui:2663
 #: resources/ui/settings.ui:2783 resources/ui/settings.ui:2827
 msgid "Luminance"
-msgstr ""
+msgstr "Helderheid"
 
 #: resources/ui/settings.ui:2018 resources/ui/settings.ui:2055
 #: resources/ui/settings.ui:2221 resources/ui/settings.ui:2258
 #: resources/ui/settings.ui:2646 resources/ui/settings.ui:2683
 #: resources/ui/settings.ui:2800 resources/ui/settings.ui:2817
 msgid "Opacity"
-msgstr ""
+msgstr "Doorzichtigheid"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
 #: resources/ui/settings.ui:2076 resources/ui/settings.ui:2140
 #: resources/ui/settings.ui:2558 resources/ui/settings.ui:2712
 #: resources/ui/settings.ui:3319 resources/ui/settings.ui:3370
 msgid "Fixed"
-msgstr ""
+msgstr "Eigen"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
 #: resources/ui/settings.ui:2083 resources/ui/settings.ui:2147
 #: resources/ui/settings.ui:2565 resources/ui/settings.ui:2719
 msgid "Auto"
-msgstr ""
+msgstr "Automatisch"
 
 #: resources/ui/settings.ui:2316 resources/ui/settings.ui:3026
 msgid "Icon Opacity"
-msgstr ""
+msgstr "Pictogramdoorzichtigheid"
 
 #: resources/ui/settings.ui:2359 resources/ui/settings.ui:3120
 msgid "Icon Scale"
-msgstr ""
+msgstr "Pictogramgrootte"
 
 #: resources/ui/settings.ui:2389 resources/ui/settings.ui:3139
 msgid "Icon Crop"
-msgstr ""
+msgstr "Pictogrambijsnijding"
 
 #: resources/ui/settings.ui:2440 resources/ui/settings.ui:3190
 #: resources/ui/settings.ui:3580
 msgid "Background Image"
-msgstr ""
+msgstr "Achtergrondafbeelding"
 
 #: resources/ui/settings.ui:2502 resources/ui/settings.ui:3222
 msgid "Children Appearance"
@@ -496,7 +514,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:2874 resources/ui/settings.ui:3429
 msgid "Offset"
-msgstr ""
+msgstr "Verschuiving"
 
 #. Draw above (grand)children items. There's an explanation string below in the application.
 #: resources/ui/settings.ui:2985 resources/ui/settings.ui:3518
