@@ -364,6 +364,45 @@ function registerWidgets() {
         this._upcomingTransition = TransitionType.NONE;
         this._transitionAngle    = 0;
 
+        // Here we create the icon and label which are shown if no menu is present.
+        {
+          let icon  = new Gtk.Image({icon_name: 'face-crying-symbolic', pixel_size: 128});
+          let label = new Gtk.Label({label: _('No menus configured')});
+          label.add_css_class('title-3');
+          let description = new Gtk.Label(
+              {label: _('Create a new menu with the button in the top right corner.')});
+          description.add_css_class('caption');
+
+          this._ifEmptyHint           = Gtk.Box.new(Gtk.Orientation.VERTICAL, 4);
+          this._ifEmptyHint.vexpand   = true;
+          this._ifEmptyHint.valign    = Gtk.Align.CENTER;
+          this._ifEmptyHint.sensitive = false;
+          this._ifEmptyHint.append(icon);
+          this._ifEmptyHint.append(label);
+          this._ifEmptyHint.append(description);
+
+          this._ifEmptyHint.set_parent(this);
+        }
+
+        // Here we create the icon and label which are shown to highlight the add-new-item
+        // button.
+        {
+          let icon  = Gtk.Image.new_from_resource('/img/arrow-up-symbolic.svg');
+          let label = new Gtk.Label({label: _('Add a new item')});
+          label.add_css_class('caption');
+
+          this._addItemHint            = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 4);
+          this._addItemHint.hexpand    = true;
+          this._addItemHint.halign     = Gtk.Align.END;
+          this._addItemHint.valign     = Gtk.Align.START;
+          this._addItemHint.sensitive  = false;
+          this._addItemHint.margin_end = 20;
+          this._addItemHint.append(label);
+          this._addItemHint.append(icon);
+
+          this._addItemHint.set_parent(this);
+        }
+
         // Now we set up the back-navigation button which is shown whenever we are in a
         // submenu. Similar to the FlyPieMenuEditorItem, this is actually a Gtk.Revealer
         // which we can use to show or hide the button.
@@ -804,7 +843,16 @@ function registerWidgets() {
 
         // -------------------------------------------------------------------------------
 
-        // In part of the method we will compute the position of each item.
+        // We show the if-empty hint if no items were given.
+        this._ifEmptyHint.visible = this._items.length == 0 && this._centerItem == null;
+
+        // The add-new-item hint is shown whenever there are zero items in the current
+        // list.
+        this._addItemHint.visible = this._items.length == 0;
+
+        // -------------------------------------------------------------------------------
+
+        // In this part of the method we will compute the position of each item.
 
         // In menu-overview mode, we have to compute the grid position of each item. If
         // there is a drag operation going on, the items will move sideways to make space
@@ -1463,6 +1511,12 @@ function registerWidgets() {
         if (this._centerItem) {
           impl(this._centerItem);
         }
+
+        // Update the allocations of the various hint labels.
+        const allocation =
+            new Gdk.Rectangle({x: 0, y: 0, width: this._width, height: this._height});
+        this._ifEmptyHint.size_allocate(allocation, -1);
+        this._addItemHint.size_allocate(allocation, -1);
 
         return allFinished;
       }
