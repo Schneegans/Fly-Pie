@@ -33,79 +33,16 @@ var DefaultMenu = class DefaultMenu {
       'children': [
         {
           // Translators: This is an entry of the default menu.
-          'name': _('Window Management'),
-          'icon': 'desktop',
-          'children': [
-            {
-              // Translators: This is an entry of the default menu. I
-              'name': _('Running Apps'),
-              'icon': 'preferences-system-windows',
-              'type': 'RunningApps',
-              'data': {
-                'activeWorkspaceOnly': false,
-                'appGrouping': true,
-                'hoverPeeking': true,
-                'nameRegex': ''
-              },
-              'angle': -1
-            },
-            {
-              // Translators: This is an entry of the default menu.
-              'name': _('Close Window'),
-              'icon': 'window-close',
-              'type': 'Shortcut',
-              'data': '<Alt>F4',
-              'angle': -1
-            },
-            {
-              // Translators: This is an entry of the default menu.
-              'name': _('Next Workspace'),
-              'icon': '▶️',
-              'type': 'Shortcut',
-              'data': {'shortcut': '<Control><Alt>Right'},
-              'angle': 90
-            },
-            {
-              // Translators: This is an entry of the default menu.
-              'name': _('Previous Workspace'),
-              'icon': '◀️',
-              'type': 'Shortcut',
-              'data': {'shortcut': '<Control><Alt>Left'},
-              'angle': 270
-            },
-            {
-              // Translators: This is an entry of the default menu.
-              'name': _('Maximize Window'),
-              'icon': 'view-fullscreen',
-              'type': 'Shortcut',
-              'data': '<Alt>F10',
-              'angle': -1
-            }
-          ],
-          'type': 'CustomMenu',
-          'data': {},
-          'angle': -1
-        },
-        {
-          // Translators: This is an entry of the default menu.
-          'name': _('Favorites'),
-          'icon': 'emblem-favorite',
-          'type': 'Favorites',
-          'data': {},
-          'angle': -1
-        },
-        {
-          // Translators: This is an entry of the default menu.
           'name': _('Sound'),
           'icon': 'audio-speakers',
           'children': [
             {
               // Translators: This is an entry of the default menu.
-              'name': _('Next Title'),
-              'icon': '⏩️',
+              'name': _('Mute'),
+              'icon': '🔈️',
               'type': 'Shortcut',
-              'data': 'AudioNext',
-              'angle': 90
+              'data': 'AudioMute',
+              'angle': -1
             },
             {
               // Translators: This is an entry of the default menu.
@@ -117,11 +54,11 @@ var DefaultMenu = class DefaultMenu {
             },
             {
               // Translators: This is an entry of the default menu.
-              'name': _('Mute'),
-              'icon': '🔈️',
+              'name': _('Next Title'),
+              'icon': '⏩️',
               'type': 'Shortcut',
-              'data': 'AudioMute',
-              'angle': -1
+              'data': 'AudioNext',
+              'angle': 90
             },
             {
               // Translators: This is an entry of the default menu.
@@ -138,10 +75,63 @@ var DefaultMenu = class DefaultMenu {
         },
         {
           // Translators: This is an entry of the default menu.
+          'name': _('Favorites'),
+          'icon': 'emblem-favorite',
+          'type': 'Favorites',
+          'data': {},
+          'angle': -1
+        },
+        {
+          // Translators: This is an entry of the default menu.
+          'name': _('Next Workspace'),
+          'icon': 'go-next',
+          'type': 'Shortcut',
+          'data': {'shortcut': '<Control><Alt>Right'},
+          'angle': -1
+        },
+        {
+          // Translators: This is an entry of the default menu.
+          'name': _('Maximize Window'),
+          'icon': 'view-fullscreen',
+          'type': 'Shortcut',
+          'data': '<Alt>F10',
+          'angle': -1
+        },
+        {
+          // Translators: This is an entry of the default menu.
           'name': _('Fly-Pie Settings'),
-          'icon': 'preferences-system',
+          'icon': 'applications-system',
           'type': 'Command',
           'data': 'gnome-extensions prefs flypie@schneegans.github.com',
+          'angle': -1
+        },
+        {
+          // Translators: This is an entry of the default menu.
+          'name': _('Close Window'),
+          'icon': 'window-close',
+          'type': 'Shortcut',
+          'data': '<Alt>F4',
+          'angle': -1
+        },
+        {
+          // Translators: This is an entry of the default menu.
+          'name': _('Previous Workspace'),
+          'icon': 'go-previous',
+          'type': 'Shortcut',
+          'data': {'shortcut': '<Control><Alt>Left'},
+          'angle': 270
+        },
+        {
+          // Translators: This is an entry of the default menu. I
+          'name': _('Running Apps'),
+          'icon': 'preferences-system-windows',
+          'type': 'RunningApps',
+          'data': {
+            'activeWorkspaceOnly': false,
+            'appGrouping': true,
+            'hoverPeeking': true,
+            'nameRegex': ''
+          },
           'angle': -1
         }
       ],
