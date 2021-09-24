@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-20 19:58+0200\n"
+"POT-Creation-Date: 2021-09-24 21:44+0200\n"
 "PO-Revision-Date: 2021-09-20 17:52+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/fly-pie/core/nl/>\n"
@@ -1205,67 +1205,62 @@ msgstr ""
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:36
-msgid "Window Management"
-msgstr ""
-
-#. Translators: This is an entry of the default menu. I
-#: src/extension/DefaultMenu.js:41 src/common/menus/RunningApps.js:47
-msgid "Running Apps"
-msgstr ""
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:54
-msgid "Close Window"
-msgstr ""
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:62
-msgid "Next Workspace"
-msgstr ""
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:70
-msgid "Previous Workspace"
-msgstr ""
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:78
-msgid "Maximize Window"
-msgstr ""
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:91 src/common/menus/Favorites.js:43
-msgid "Favorites"
-msgstr ""
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:99
 msgid "Sound"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:104
-msgid "Next Title"
-msgstr ""
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:112
-msgid "Play / Pause"
-msgstr ""
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:120
+#: src/extension/DefaultMenu.js:41
 msgid "Mute"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:128
+#: src/extension/DefaultMenu.js:49
+msgid "Play / Pause"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:57
+msgid "Next Title"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:65
 msgid "Previous Title"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:141
+#: src/extension/DefaultMenu.js:78 src/common/menus/Favorites.js:43
+msgid "Favorites"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:86
+msgid "Next Workspace"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:94
+msgid "Maximize Window"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:102
 msgid "Fly-Pie Settings"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:110
+msgid "Close Window"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:118
+msgid "Previous Workspace"
+msgstr ""
+
+#. Translators: This is an entry of the default menu. I
+#: src/extension/DefaultMenu.js:126 src/common/menus/RunningApps.js:47
+msgid "Running Apps"
 msgstr ""
 
 #: src/prefs/AchievementsPage.js:117

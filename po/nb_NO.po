@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-20 19:58+0200\n"
+"POT-Creation-Date: 2021-09-24 21:44+0200\n"
 "PO-Revision-Date: 2021-09-20 08:39+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
@@ -1254,69 +1254,64 @@ msgstr "Eksempelmeny"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:36
-msgid "Window Management"
-msgstr "Vindusbehandling"
-
-#. Translators: This is an entry of the default menu. I
-#: src/extension/DefaultMenu.js:41 src/common/menus/RunningApps.js:47
-msgid "Running Apps"
-msgstr "Kjørende programmer"
+msgid "Sound"
+msgstr "Lyd"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:54
+#: src/extension/DefaultMenu.js:41
+msgid "Mute"
+msgstr "Forstum"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:49
+msgid "Play / Pause"
+msgstr "Spill av/pause"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:57
+msgid "Next Title"
+msgstr "Neste tittel"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:65
+msgid "Previous Title"
+msgstr "Forrige tittel"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:78 src/common/menus/Favorites.js:43
+msgid "Favorites"
+msgstr "Favoritter"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:86
+msgid "Next Workspace"
+msgstr ""
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:94
+msgid "Maximize Window"
+msgstr "Maksimer vindu"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:102
+msgid "Fly-Pie Settings"
+msgstr "Fly-Pie-innstillinger"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:110
 #, fuzzy
 msgid "Close Window"
 msgstr "Lukk vindu"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:62
-msgid "Next Workspace"
-msgstr ""
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:70
+#: src/extension/DefaultMenu.js:118
 msgid "Previous Workspace"
 msgstr "Forrige arbeidsområde"
 
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:78
-msgid "Maximize Window"
-msgstr "Maksimer vindu"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:91 src/common/menus/Favorites.js:43
-msgid "Favorites"
-msgstr "Favoritter"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:99
-msgid "Sound"
-msgstr "Lyd"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:104
-msgid "Next Title"
-msgstr "Neste tittel"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:112
-msgid "Play / Pause"
-msgstr "Spill av/pause"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:120
-msgid "Mute"
-msgstr "Forstum"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:128
-msgid "Previous Title"
-msgstr "Forrige tittel"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:141
-msgid "Fly-Pie Settings"
-msgstr "Fly-Pie-innstillinger"
+#. Translators: This is an entry of the default menu. I
+#: src/extension/DefaultMenu.js:126 src/common/menus/RunningApps.js:47
+msgid "Running Apps"
+msgstr "Kjørende programmer"
 
 #: src/prefs/AchievementsPage.js:117
 #, fuzzy
@@ -2427,6 +2422,9 @@ msgstr "Logg ut"
 #, fuzzy
 msgid "Power Off…"
 msgstr "Slå av …"
+
+#~ msgid "Window Management"
+#~ msgstr "Vindusbehandling"
 
 #~ msgid ""
 #~ "The <b>Main Menu</b> shows all installed applications. Usually, this is "
