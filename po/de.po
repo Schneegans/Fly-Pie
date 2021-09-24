@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-20 19:58+0200\n"
+"POT-Creation-Date: 2021-09-24 21:44+0200\n"
 "PO-Revision-Date: 2021-09-21 18:36+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
-"\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
+">\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1293,68 +1293,63 @@ msgstr "Beispiel-Menü"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:36
-msgid "Window Management"
-msgstr "Fensterverwaltung"
-
-#. Translators: This is an entry of the default menu. I
-#: src/extension/DefaultMenu.js:41 src/common/menus/RunningApps.js:47
-msgid "Running Apps"
-msgstr "Laufende Anwendungen"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:54
-msgid "Close Window"
-msgstr "Fenster schließen"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:62
-msgid "Next Workspace"
-msgstr "Nächste Arbeitsfläche"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:70
-msgid "Previous Workspace"
-msgstr "Vorherige Arbeitsfläche"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:78
-msgid "Maximize Window"
-msgstr "Fenster maximieren"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:91 src/common/menus/Favorites.js:43
-msgid "Favorites"
-msgstr "Favoriten"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:99
 msgid "Sound"
 msgstr "Audio"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:104
-msgid "Next Title"
-msgstr "Nächster Titel"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:112
-msgid "Play / Pause"
-msgstr "Play / Pause"
-
-#. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:120
+#: src/extension/DefaultMenu.js:41
 msgid "Mute"
 msgstr "Stummschalten"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:128
+#: src/extension/DefaultMenu.js:49
+msgid "Play / Pause"
+msgstr "Play / Pause"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:57
+msgid "Next Title"
+msgstr "Nächster Titel"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:65
 msgid "Previous Title"
 msgstr "Vorheriger Titel"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:141
+#: src/extension/DefaultMenu.js:78 src/common/menus/Favorites.js:43
+msgid "Favorites"
+msgstr "Favoriten"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:86
+msgid "Next Workspace"
+msgstr "Nächste Arbeitsfläche"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:94
+msgid "Maximize Window"
+msgstr "Fenster maximieren"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:102
 msgid "Fly-Pie Settings"
 msgstr "Fly-Pie-Einstellungen"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:110
+msgid "Close Window"
+msgstr "Fenster schließen"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:118
+msgid "Previous Workspace"
+msgstr "Vorherige Arbeitsfläche"
+
+#. Translators: This is an entry of the default menu. I
+#: src/extension/DefaultMenu.js:126 src/common/menus/RunningApps.js:47
+msgid "Running Apps"
+msgstr "Laufende Anwendungen"
 
 #: src/prefs/AchievementsPage.js:117
 msgid "Do you really want to reset all statistics?"
@@ -2521,6 +2516,9 @@ msgstr "Abmelden"
 #: src/common/menus/System.js:117
 msgid "Power Off…"
 msgstr "Ausschalten…"
+
+#~ msgid "Window Management"
+#~ msgstr "Fensterverwaltung"
 
 #~ msgid ""
 #~ "The <b>Main Menu</b> shows all installed applications. Usually, this is "
