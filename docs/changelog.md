@@ -6,7 +6,7 @@
 
 ## [Fly-Pie 7](https://github.com/schneegans/fly-pie/releases/tag/v7)
 
-**Release Date:** TBD
+**Release Date:** 2021-09-25
 
 #### New Features
 
