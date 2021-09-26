@@ -8,47 +8,50 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-24 21:44+0200\n"
-"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-09-26 11:35+0000\n"
+"Last-Translator: Danilo Reyes <captainjawz@outlook.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/fly-pie/core/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: resources/ui/copyValueButton.ui:6
 msgid "Copy left value to right side"
-msgstr ""
+msgstr "Copiar el valor izquierdo al lado derecho"
 
 #: resources/ui/iconSelectDialog.ui:14 src/common/ConfigWidgetFactory.js:98
 #: src/common/ConfigWidgetFactory.js:165 src/prefs/ImageChooserButton.js:40
 #: src/prefs/MenuEditorPage.js:180 src/prefs/MenuEditorPage.js:245
 #: src/prefs/SettingsPage.js:271 src/prefs/SettingsPage.js:322
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: resources/ui/iconSelectDialog.ui:19
 msgid "Select Icon"
-msgstr ""
+msgstr "Seleccionar icono"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:44
 msgid "Icon Theme"
-msgstr ""
+msgstr "Paquete de iconos"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:106
 msgid "Custom Icon"
-msgstr ""
+msgstr "Icono personalizado"
 
 #: resources/ui/imageChooserButton.ui:16 src/prefs/ImageChooserButton.js:88
 msgid "(None)"
-msgstr ""
+msgstr "(Ninguno)"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:19
 msgid "Linear"
-msgstr ""
+msgstr "Lineal"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:23
@@ -102,13 +105,15 @@ msgstr ""
 
 #: resources/ui/settings.ui:398
 msgid "About"
-msgstr ""
+msgstr "Acerca de"
 
 #: resources/ui/settings.ui:417
 msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
+"Leer sobre el <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/"
+"docs/changelog.md\"> historial de cambios </a>."
 
 #: resources/ui/settings.ui:425
 msgid ""
@@ -120,44 +125,53 @@ msgid ""
 "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
+"Publicado bajo licencia MIT.\n"
+"Visita <a href=\"https://github.com/Schneegans/Fly-Pie\"> el portal de Fly-"
+"Pie </a> para más información.\n"
+"Si encuentras un bug 🐞️ o quieres solicitar una nueva función  🎉️, por favor "
+"visita nuestro portal en\n"
+"<a href=\"https://github.com/Schneegans/Fly-Pie/issues\">Github</a>."
 
 #: resources/ui/settings.ui:442
 msgid "Credits"
-msgstr ""
+msgstr "Créditos"
 
 #: resources/ui/settings.ui:455
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #: resources/ui/settings.ui:481
 msgid "Translated by"
-msgstr ""
+msgstr "Traducido por"
 
 #: resources/ui/settings.ui:508
 msgid "Artwork by"
-msgstr ""
+msgstr "Arte por"
 
 #: resources/ui/settings.ui:537
 msgid "Sponsors"
-msgstr ""
+msgstr "Patrocinadores"
 
 #: resources/ui/settings.ui:554
 msgid "🥇️ Gold Sponsors"
-msgstr ""
+msgstr "🥇️ Patrocinadores de oro"
 
 #: resources/ui/settings.ui:566
 msgid "🥈️ Silver Sponsors"
-msgstr ""
+msgstr "🥈️ Patrocinadores de plata"
 
 #: resources/ui/settings.ui:578
 msgid "🥉️ Bronze Sponsors"
-msgstr ""
+msgstr "🥉️ Patrocinadores de bronce"
 
 #: resources/ui/settings.ui:632
 msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
+"💕️ Quieres demostrar tu aprecio por Fly-Pie? <a href=\"https://github.com/"
+"sponsors/Schneegans\">Conviértete en un patrocinador por tan solo $1/por "
+"mes!</a>"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:688
@@ -165,6 +179,8 @@ msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
 msgstr ""
+"<b>Menú</b>\n"
+"Pueden ser submenús o menús principales."
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:713
@@ -172,29 +188,31 @@ msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
+"<b>Acciones</b>\n"
+"Pueden ser añadidos a menús personalizados."
 
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/settings.ui:785
 msgid "Initialize most settings to random values."
-msgstr ""
+msgstr "Inicialice la mayoría de las configuraciones a valores aleatorios."
 
 #: resources/ui/settings.ui:797
 msgid "Generate Random Preset"
-msgstr ""
+msgstr "Generar preajuste aleatorio"
 
 #: resources/ui/settings.ui:828
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
-msgstr ""
+msgstr "Fly-Pie requiere que las animaciones de GNOME Shell estén habilitadas."
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: resources/ui/settings.ui:833
 msgid "Enable Animations"
-msgstr ""
+msgstr "Habilitar animaciones"
 
 #. Caption of the tutorial page in the window's titlebar.
 #: resources/ui/settings.ui:885
 msgid "Tutorial"
-msgstr ""
+msgstr "Tutorial"
 
 #: resources/ui/settings.ui:919
 msgid ""
@@ -202,6 +220,10 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
+"Puede utilizar Fly-Pie para lanzar aplicaciones, simular teclas de acceso "
+"rápido, abrir URL y mucho más. Este tutorial interactivo le enseñará cómo "
+"usar Fly-Pie de la manera más eficiente. ¡Haga clic en el gran botón a "
+"continuación para abrir un menú de prueba!"
 
 #: resources/ui/settings.ui:930
 msgid ""
@@ -211,26 +233,38 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"• Utilice el <b> botón izquierdo del ratón para seleccionar elementos </b>.\n"
+"• Utilice el <b> botón derecho del ratón para cerrar el menú </b>.\n"
+"• El menú de pruebas es solo un área para experimentar, la selección de "
+"elementos no tiene ningún efecto real.\n"
+"\n"
+"Una vez que se sienta cómodo, haga clic en <b> siguiente </b> para obtener "
+"más detalles!"
 
 #. The text of the big tutorial button.
 #: resources/ui/settings.ui:950 resources/ui/settings.ui:1033
 #: resources/ui/settings.ui:1119 resources/ui/settings.ui:1264
 #: resources/ui/settings.ui:1350
 msgid "<big><b>Open the example menu!</b></big>"
-msgstr ""
+msgstr "<big><b>¡Abra el menú de ejemplo!</b></big>"
 
 #. This is a heading.
 #: resources/ui/settings.ui:982
 msgid "You can click anywhere!"
-msgstr ""
+msgstr "¡Puedes hacer clic en cualquier lugar!"
 
 #: resources/ui/settings.ui:1001
+#, fuzzy
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
 msgstr ""
+"No importa si hace clic directamente en un elemento o en el borde de la "
+"pantalla siempre que el puntero del ratón permanezca en el perímetro del "
+"elemento."
 
 #: resources/ui/settings.ui:1013
+#, fuzzy
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -239,13 +273,21 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
+"<b> Los elementos se seleccionan haciendo clic en cualquier lugar de sus "
+"respectivos sectores</b>.\n"
+"\n"
+"Además, no requiere esperar a que termine la animación, ya que las cuñas del "
+"submenú aparecerán instantáneamente alrededor del area en la que hizo clic.\n"
+"\n"
+"Haga clic en <b> siguiente </b> para una sesión de práctica!"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1065
 msgid "Practice Session I"
-msgstr ""
+msgstr "Sesión de práctica I"
 
 #: resources/ui/settings.ui:1075
+#, fuzzy
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
 "select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
@@ -254,33 +296,44 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!"
 msgstr ""
+"Para esta sesión de práctica, abra el menú haciendo clic en el botón grande. "
+"Luego, seleccione \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) lo más rápido posible. ¿Puedes "
+"conseguir la medalla de oro?\n"
+"\n"
+"Una vez que esté satisfecho con su resultado, haga clic en <b> siguiente </"
+"b> para conocer el modo de marcado de Fly-Pie."
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1148
 msgid "Unlocked at less than 3000 ms"
-msgstr ""
+msgstr "Desbloqueado a menos de 3000 ms"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1168
 msgid "Unlocked at less than 2000 ms"
-msgstr ""
+msgstr "Desbloqueado a menos de 2000 ms"
 
 #. ms = milliseconds
 #: resources/ui/settings.ui:1189 resources/ui/settings.ui:1378
 msgid "Unlocked at less than 1000 ms"
-msgstr ""
+msgstr "Desbloqueado a menos de 1000 ms"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1216
 msgid "The Marking Mode of Fly-Pie"
-msgstr ""
+msgstr "El modo de marcado de Fly-Pie"
 
 #: resources/ui/settings.ui:1235
+#, fuzzy
 msgid ""
 "The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
+"¡El <b> modo de marcado </b> de Fly-Pie le permite seleccionar elementos <b> "
+"dibujando gestos</b>! Para ingresar al modo de marcado, haga clic y arrastre "
+"un elemento. Tan pronto como suelte el elemento o dé un giro, se "
+"seleccionará el elemento."
 
 #: resources/ui/settings.ui:1246
 msgid ""
@@ -292,6 +345,13 @@ msgid ""
 "gesture of straight parts. <b>Do not draw curvy paths but rather expressive "
 "zig-zag-lines!</b>"
 msgstr ""
+"Intente recordar la ruta hacia un elemento. Abra el menú y <b> dibuje la "
+"ruta con el cursor</b>. Puede comenzar con segmentos individuales de la "
+"ruta, ¡pero también puede intentar dibujar la ruta completa!\n"
+"\n"
+"Puede que le resulte más eficaz si trata explícitamente de componer su gesto "
+"de partes rectas. <b>¡No dibujes caminos con curvas, sino líneas expresivas "
+"en zig-zag!</b>"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1296
