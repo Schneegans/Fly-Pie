@@ -302,8 +302,12 @@ var MenuEditorPage = class MenuEditorPage {
 
     // Open a live-preview for the selected menu when the preview-button is clicked.
     this._builder.get_object('preview-menu-button').connect('clicked', () => {
+      // The name of the menu is either the beginning of the menu path or (if we are in
+      // overview mode) the name of the selected item.
       const name =
           this._menuPath.length > 0 ? this._menuPath[0].name : this._selectedItem.name;
+
+      // Show the menu.
       this._dbus.PreviewMenuRemote(name, (result) => {
         result = parseInt(result);
         if (result < 0) {
@@ -313,6 +317,26 @@ var MenuEditorPage = class MenuEditorPage {
           Statistics.getInstance().addPreviewMenuOpened();
         }
       });
+
+      // Select the currently selected submenu also in the preview.
+      if (this._menuPath.length > 0) {
+
+        // First construct the path to the currently selected submenu.
+        let path = '/';
+        for (let i = 1; i < this._menuPath.length; i++) {
+          const index = this._menuPath[i - 1].children.indexOf(this._menuPath[i]);
+          path += index + '/';
+        }
+
+        // Then call the selectItem D-Bus method.
+        this._dbus.SelectItemRemote(path, (result) => {
+          result = parseInt(result);
+          if (result < 0) {
+            const error = DBusInterface.getErrorDescription(result);
+            utils.debug('Failed to select an item in the menu preview: ' + error);
+          }
+        });
+      }
     });
   }
 
@@ -699,10 +723,9 @@ var MenuEditorPage = class MenuEditorPage {
 
     if (somethingSelected) {
 
-      // This prevents a update feedback back to the menu editor as long as this method is
-      // executed.
+      // This prevents an update feedback back to the menu editor as long as this method
+      // is executed.
       this._updatingSidebar = true;
-
 
       // The item's name, icon and description have to be updated in any case if
       // something is selected.
