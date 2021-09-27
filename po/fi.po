@@ -8,47 +8,50 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-24 21:44+0200\n"
-"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-09-27 23:00+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/fly-pie/core/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: resources/ui/copyValueButton.ui:6
 msgid "Copy left value to right side"
-msgstr ""
+msgstr "Kopioi vasen arvo oikealle puolelle"
 
 #: resources/ui/iconSelectDialog.ui:14 src/common/ConfigWidgetFactory.js:98
 #: src/common/ConfigWidgetFactory.js:165 src/prefs/ImageChooserButton.js:40
 #: src/prefs/MenuEditorPage.js:180 src/prefs/MenuEditorPage.js:245
 #: src/prefs/SettingsPage.js:271 src/prefs/SettingsPage.js:322
 msgid "Cancel"
-msgstr ""
+msgstr "Peru"
 
 #: resources/ui/iconSelectDialog.ui:19
 msgid "Select Icon"
-msgstr ""
+msgstr "Valitse kuvake"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:44
 msgid "Icon Theme"
-msgstr ""
+msgstr "Kuvaketeema"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:106
 msgid "Custom Icon"
-msgstr ""
+msgstr "Mukautettu kuvake"
 
 #: resources/ui/imageChooserButton.ui:16 src/prefs/ImageChooserButton.js:88
 msgid "(None)"
-msgstr ""
+msgstr "(Ei mitään)"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:19
 msgid "Linear"
-msgstr ""
+msgstr "Lineaarinen"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:23
@@ -102,13 +105,15 @@ msgstr ""
 
 #: resources/ui/settings.ui:398
 msgid "About"
-msgstr ""
+msgstr "Tietoja"
 
 #: resources/ui/settings.ui:417
 msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
+"Lue <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
+"changelog.md\">muutosloki</a>."
 
 #: resources/ui/settings.ui:425
 msgid ""
@@ -120,44 +125,53 @@ msgid ""
 "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
+"Julkaistu MIT-lisenssillä.\n"
+"Käy <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pien "
+"verkkosivustolla</a> saadaksesi lisätietoja.\n"
+"\n"
+"Jos kohtaat 🐞️ bugin tai sinulla on 🎉️ ominaisuuspyyntö, ilmoita niistä <a "
+"href=\"https://github.com/Schneegans/Fly-Pie/issues\">Githubiin</a>."
 
 #: resources/ui/settings.ui:442
 msgid "Credits"
-msgstr ""
+msgstr "Tekijät"
 
 #: resources/ui/settings.ui:455
 msgid "Created by"
-msgstr ""
+msgstr "Luonut"
 
 #: resources/ui/settings.ui:481
 msgid "Translated by"
-msgstr ""
+msgstr "Kääntänyt"
 
 #: resources/ui/settings.ui:508
 msgid "Artwork by"
-msgstr ""
+msgstr "Kuvitus"
 
 #: resources/ui/settings.ui:537
 msgid "Sponsors"
-msgstr ""
+msgstr "Sponsorit"
 
 #: resources/ui/settings.ui:554
 msgid "🥇️ Gold Sponsors"
-msgstr ""
+msgstr "🥇️ Kultasponsorit"
 
 #: resources/ui/settings.ui:566
 msgid "🥈️ Silver Sponsors"
-msgstr ""
+msgstr "🥈️ Hopeasponsorit"
 
 #: resources/ui/settings.ui:578
 msgid "🥉️ Bronze Sponsors"
-msgstr ""
+msgstr "🥉️ Pronssisponsorit"
 
 #: resources/ui/settings.ui:632
 msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
+"💕️ Haluatko osoittaa arvostusta Fly-Pielle? <a href=\"https://github.com/"
+"sponsors/Schneegans\">Aloita sponsorointi jopa niin pienellä summalla kuin 1$"
+" / kuukausi!</a>"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:688
@@ -165,6 +179,8 @@ msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
 msgstr ""
+"<b>Valikot</b>\n"
+"Voivat olla alivalikoita tai päätason valikoita."
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:713
@@ -172,29 +188,31 @@ msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
+"<b>Toiminnot</b>\n"
+"Lisättävissä mukautettuihin valikoihin."
 
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/settings.ui:785
 msgid "Initialize most settings to random values."
-msgstr ""
+msgstr "Alusta useimmat asetukset satunnaisarvoihin."
 
 #: resources/ui/settings.ui:797
 msgid "Generate Random Preset"
-msgstr ""
+msgstr "Luo satunnaiset esiasetukset"
 
 #: resources/ui/settings.ui:828
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
-msgstr ""
+msgstr "Fly-Pie vaatii, että Gnome Shellin animaatiot ovat käytössä."
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: resources/ui/settings.ui:833
 msgid "Enable Animations"
-msgstr ""
+msgstr "Ota animaatiot käyttöön"
 
 #. Caption of the tutorial page in the window's titlebar.
 #: resources/ui/settings.ui:885
 msgid "Tutorial"
-msgstr ""
+msgstr "Ohje"
 
 #: resources/ui/settings.ui:919
 msgid ""
@@ -202,6 +220,10 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
+"Voit käyttää Fly-Pie-sovellusta käynnistääksesi sovelluksia, simuloidaksesi "
+"pikanäppäimiä, avataksesi URL-osoitteita ja paljon muuta. Tämä "
+"vuorovaikutteinen opas näyttää, miten Fly-Pien käyttö onnistuu tehokkaasti. "
+"Napsauta alla olevaa isoa painiketta avataksesi testivalikon!"
 
 #: resources/ui/settings.ui:930
 msgid ""
@@ -211,18 +233,24 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"• Käytä <b>hiiren vasenta painiketta valitaksesi tietueita</b>\n"
+"• Käytä <b>hiiren oikeaa painiketta sulkeaksesi valikon</b>\n"
+"• Testivalikko on vain leikkikenttä, tietueiden valitsemisella ei ole "
+"todellista vaikutusta.\n"
+"\n"
+"Kun koet hallitsevasi perusasiat, napsauta <b>Seuraava</b> oppiaksesi lisää!"
 
 #. The text of the big tutorial button.
 #: resources/ui/settings.ui:950 resources/ui/settings.ui:1033
 #: resources/ui/settings.ui:1119 resources/ui/settings.ui:1264
 #: resources/ui/settings.ui:1350
 msgid "<big><b>Open the example menu!</b></big>"
-msgstr ""
+msgstr "<big><b>Avaa esimerkkivalikko!</b></big>"
 
 #. This is a heading.
 #: resources/ui/settings.ui:982
 msgid "You can click anywhere!"
-msgstr ""
+msgstr "Napsauta missä tahansa!"
 
 #: resources/ui/settings.ui:1001
 msgid ""
@@ -243,7 +271,7 @@ msgstr ""
 #. This is a heading.
 #: resources/ui/settings.ui:1065
 msgid "Practice Session I"
-msgstr ""
+msgstr "Harjoitusistunto I"
 
 #: resources/ui/settings.ui:1075
 msgid ""
@@ -273,7 +301,7 @@ msgstr ""
 #. This is a heading.
 #: resources/ui/settings.ui:1216
 msgid "The Marking Mode of Fly-Pie"
-msgstr ""
+msgstr "Fly-Pien merkintätila"
 
 #: resources/ui/settings.ui:1235
 msgid ""
@@ -296,7 +324,7 @@ msgstr ""
 #. This is a heading.
 #: resources/ui/settings.ui:1296
 msgid "Practice Session II"
-msgstr ""
+msgstr "Harjoitusistunto II"
 
 #: resources/ui/settings.ui:1306
 msgid ""
@@ -321,7 +349,7 @@ msgstr ""
 #. The user finished the tutorial. Yay!
 #: resources/ui/settings.ui:1453
 msgid "Congratulations!"
-msgstr ""
+msgstr "Onnittelut!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: resources/ui/settings.ui:1465
@@ -345,55 +373,55 @@ msgstr ""
 #. Button for tutorial navigation. Goes back one page.
 #: resources/ui/settings.ui:1510
 msgid "Previous"
-msgstr ""
+msgstr "Edellinen"
 
 #. Button for tutorial navigation. Goes to the next page.
 #: resources/ui/settings.ui:1567
 msgid "Next"
-msgstr ""
+msgstr "Seuraava"
 
 #. Caption of the settings page in the window's titlebar.
 #: resources/ui/settings.ui:1603
 msgid "Settings"
-msgstr ""
+msgstr "Asetukset"
 
 #: resources/ui/settings.ui:1636 resources/ui/settings.ui:1832
 msgid "Global Appearance Settings"
-msgstr ""
+msgstr "Yleiset ulkoasuasetukset"
 
 #: resources/ui/settings.ui:1646
 msgid "These settings affect all menu items."
-msgstr ""
+msgstr "Nämä asetukset vaikuttavat kaikkiin valikkojen tietueisiin."
 
 #: resources/ui/settings.ui:1664
 msgid "Animation Duration"
-msgstr ""
+msgstr "Animaation kesto"
 
 #: resources/ui/settings.ui:1678
 msgid "Global Scaling"
-msgstr ""
+msgstr "Yleinen skaalaus"
 
 #. Please keep this short!
 #: resources/ui/settings.ui:1688
 msgid "Independent of the preset."
-msgstr ""
+msgstr "Ei yhteydessä esiasetukseen."
 
 #: resources/ui/settings.ui:1738
 msgid "Font"
-msgstr ""
+msgstr "Fontti"
 
 #: resources/ui/settings.ui:1748
 msgid "Text Color"
-msgstr ""
+msgstr "Tekstin väri"
 
 #: resources/ui/settings.ui:1759 resources/ui/settings.ui:2370
 #: resources/ui/settings.ui:3069 resources/ui/settings.ui:3305
 msgid "Background Color"
-msgstr ""
+msgstr "Taustaväri"
 
 #: resources/ui/settings.ui:1821
 msgid "Animation Mode"
-msgstr ""
+msgstr "Animaatiotila"
 
 #: resources/ui/settings.ui:1864 resources/ui/settings.ui:2472
 msgid "Center Appearance"
@@ -416,58 +444,58 @@ msgstr ""
 #: resources/ui/settings.ui:1933 resources/ui/settings.ui:2863
 #: resources/ui/settings.ui:3418
 msgid "Size"
-msgstr ""
+msgstr "Koko"
 
 #: resources/ui/settings.ui:1984 resources/ui/settings.ui:2035
 #: resources/ui/settings.ui:2187 resources/ui/settings.ui:2238
 #: resources/ui/settings.ui:2612 resources/ui/settings.ui:2673
 #: resources/ui/settings.ui:2766 resources/ui/settings.ui:2837
 msgid "Saturation"
-msgstr ""
+msgstr "Kylläisyys"
 
 #: resources/ui/settings.ui:2001 resources/ui/settings.ui:2045
 #: resources/ui/settings.ui:2204 resources/ui/settings.ui:2248
 #: resources/ui/settings.ui:2629 resources/ui/settings.ui:2663
 #: resources/ui/settings.ui:2783 resources/ui/settings.ui:2827
 msgid "Luminance"
-msgstr ""
+msgstr "Luminanssi"
 
 #: resources/ui/settings.ui:2018 resources/ui/settings.ui:2055
 #: resources/ui/settings.ui:2221 resources/ui/settings.ui:2258
 #: resources/ui/settings.ui:2646 resources/ui/settings.ui:2683
 #: resources/ui/settings.ui:2800 resources/ui/settings.ui:2817
 msgid "Opacity"
-msgstr ""
+msgstr "Peittokyky"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
 #: resources/ui/settings.ui:2076 resources/ui/settings.ui:2140
 #: resources/ui/settings.ui:2558 resources/ui/settings.ui:2712
 #: resources/ui/settings.ui:3319 resources/ui/settings.ui:3370
 msgid "Fixed"
-msgstr ""
+msgstr "Kiinteä"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
 #: resources/ui/settings.ui:2083 resources/ui/settings.ui:2147
 #: resources/ui/settings.ui:2565 resources/ui/settings.ui:2719
 msgid "Auto"
-msgstr ""
+msgstr "Automaattinen"
 
 #: resources/ui/settings.ui:2316 resources/ui/settings.ui:3026
 msgid "Icon Opacity"
-msgstr ""
+msgstr "Kuvakkeen peittokyky"
 
 #: resources/ui/settings.ui:2359 resources/ui/settings.ui:3120
 msgid "Icon Scale"
-msgstr ""
+msgstr "Kuvakkeen skaalaus"
 
 #: resources/ui/settings.ui:2389 resources/ui/settings.ui:3139
 msgid "Icon Crop"
-msgstr ""
+msgstr "Kuvakkeen rajaus"
 
 #: resources/ui/settings.ui:2440 resources/ui/settings.ui:3190
 #: resources/ui/settings.ui:3580
 msgid "Background Image"
-msgstr ""
+msgstr "Taustakuva"
 
 #: resources/ui/settings.ui:2502 resources/ui/settings.ui:3222
 msgid "Children Appearance"
@@ -501,7 +529,7 @@ msgstr ""
 #. Draw above (grand)children items. There's an explanation string below in the application.
 #: resources/ui/settings.ui:2985 resources/ui/settings.ui:3518
 msgid "Draw Above"
-msgstr ""
+msgstr "Piirrä yläpuolelle"
 
 #: resources/ui/settings.ui:2995
 msgid "Render children above the center item."
@@ -536,7 +564,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:3676
 msgid "Inner Radius"
-msgstr ""
+msgstr "Sisäinen säde"
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
 #: resources/ui/settings.ui:3687
@@ -576,11 +604,11 @@ msgstr ""
 
 #: resources/ui/settings.ui:3942
 msgid "Thickness"
-msgstr ""
+msgstr "Paksuus"
 
 #: resources/ui/settings.ui:3953
 msgid "Color"
-msgstr ""
+msgstr "Väri"
 
 #: resources/ui/settings.ui:4005
 msgid "Minimum Segment Length"
@@ -588,11 +616,11 @@ msgstr ""
 
 #: resources/ui/settings.ui:4051 resources/ui/settings.ui:4404
 msgid "Advanced Settings"
-msgstr ""
+msgstr "Lisäasetukset"
 
 #: resources/ui/settings.ui:4061
 msgid "These settings are independent of the presets."
-msgstr ""
+msgstr "Nämä asetukset eivät ole riippuvaisia esiasetuksista."
 
 #: resources/ui/settings.ui:4080
 msgid "Minimum Stroke Angle"
@@ -624,7 +652,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:4224
 msgid "Selection Timeout"
-msgstr ""
+msgstr "Valinnan aikakatkaisu"
 
 #: resources/ui/settings.ui:4234
 msgid ""
@@ -634,7 +662,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:4273
 msgid "Experimental Hover Mode"
-msgstr ""
+msgstr "Kokeellinen kohdistustila"
 
 #: resources/ui/settings.ui:4283
 msgid ""
@@ -644,7 +672,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:4306
 msgid "Show Screencast Mouse"
-msgstr ""
+msgstr "Esitä näyttötallenteen hiirenosoitin"
 
 #: resources/ui/settings.ui:4316
 msgid ""
@@ -654,81 +682,81 @@ msgstr ""
 
 #: resources/ui/settings.ui:4349
 msgid "Achievement Notifications"
-msgstr ""
+msgstr "Saavutusilmoitukset"
 
 #: resources/ui/settings.ui:4359
 msgid "Show a notification whenever you complete an achievement."
-msgstr ""
+msgstr "Näytä ilmoitus kun saat saavutuksen."
 
 #: resources/ui/settings.ui:4425
 msgid "Load Preset"
-msgstr ""
+msgstr "Lataa esiasetus"
 
 #: resources/ui/settings.ui:4437
 msgid "Load settings from a JSON file."
-msgstr ""
+msgstr "Lataa asetukset JSON-tiedostosta."
 
 #: resources/ui/settings.ui:4444
 msgid "Save the settings to a JSON file."
-msgstr ""
+msgstr "Tallenna asetukset JSON-tiedostoon."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: resources/ui/settings.ui:4467 resources/ui/settings.ui:4740
 msgid "Live Preview"
-msgstr ""
+msgstr "Välitön esikatselu"
 
 #. Caption of the menu editor page in the window's titlebar.
 #: resources/ui/settings.ui:4496
 msgid "Menu Editor"
-msgstr ""
+msgstr "Valikkomuokkain"
 
 #: resources/ui/settings.ui:4525
 msgid "Add a new menu item."
-msgstr ""
+msgstr "Lisää uusi valikkotietue."
 
 #: resources/ui/settings.ui:4604
 msgid "Stash"
-msgstr ""
+msgstr "Lokero"
 
 #: resources/ui/settings.ui:4620
 msgid "Store items here and re-use them later."
-msgstr ""
+msgstr "Talleta tietueet tänne ja käytä niitä uudelleen myöhemmin."
 
 #: resources/ui/settings.ui:4664
 msgid "Trash"
-msgstr ""
+msgstr "Roskakori"
 
 #: resources/ui/settings.ui:4680
 msgid "Drop items here."
-msgstr ""
+msgstr "Pudota tietueet tänne."
 
 #: resources/ui/settings.ui:4710
 msgid "Restore menus from a JSON file. This will override your current menus!"
-msgstr ""
+msgstr "Palauta valikot JSON-tiedostosta. Tämä korvaa nykyiset valikkosi!"
 
 #: resources/ui/settings.ui:4716
 msgid "Export all menus to a JSON file."
-msgstr ""
+msgstr "Vie kaikki valikot JSON-tiedostoon."
 
 #: resources/ui/settings.ui:4793
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 #: resources/ui/settings.ui:4811
 msgid "Icon"
-msgstr ""
+msgstr "Kuvake"
 
 #: resources/ui/settings.ui:4817
 msgid "Can be an icon name, text, emoji or a file."
-msgstr ""
+msgstr "Voi olla kuvakkeen nimi, teksti, emoji tai tiedosto."
 
 #: resources/ui/settings.ui:4861
 msgid "Fixed Angle"
-msgstr ""
+msgstr "Kiinteä kulma"
 
 #: resources/ui/settings.ui:4867 src/common/menus/RunningApps.js:99
 msgid "See tooltip for details."
-msgstr ""
+msgstr "Katso työkaluvihje saadaksesi lisätietoja."
 
 #: resources/ui/settings.ui:4877
 msgid ""
@@ -744,34 +772,34 @@ msgstr ""
 
 #: resources/ui/settings.ui:4909 src/common/actions/Shortcut.js:78
 msgid "Shortcut"
-msgstr ""
+msgstr "Pikanäppäin"
 
 #: resources/ui/settings.ui:4915
 msgid "This will open the menu."
-msgstr ""
+msgstr "Tämä avaa valikon."
 
 #: resources/ui/settings.ui:4933
 msgid "Open in Screen Center"
-msgstr ""
+msgstr "Avaa näytön keskiosaan"
 
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/settings.ui:4994
 msgid "Achievements"
-msgstr ""
+msgstr "Saavutukset"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/settings.ui:5188
 msgid "In Progress"
-msgstr ""
+msgstr "Meneillään"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/settings.ui:5202
 msgid "Completed"
-msgstr ""
+msgstr "Suoritettu"
 
 #: resources/ui/settings.ui:5230
 msgid "Reset all achievements."
-msgstr ""
+msgstr "Nollaa kaikki saavutukset."
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
@@ -843,7 +871,7 @@ msgstr ""
 #: src/common/Achievements.js:415
 #, javascript-format
 msgid "Abort a selection %x times."
-msgstr ""
+msgstr "Peru valinta %x kertaa."
 
 #. Translators: The name of the 'Select %x items.' achievement.
 #: src/common/Achievements.js:428
@@ -855,7 +883,7 @@ msgstr ""
 #: src/common/Achievements.js:430
 #, javascript-format
 msgid "Select %x items."
-msgstr ""
+msgstr "Valitse %x tietuetta."
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
@@ -948,19 +976,19 @@ msgstr ""
 #: src/common/Achievements.js:550
 #, javascript-format
 msgid "Open the settings dialog %x times."
-msgstr ""
+msgstr "Avaa asetusikkuna %x kertaa."
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
 #: src/common/Achievements.js:565
 msgid "Nerd Alert %i"
-msgstr ""
+msgstr "Nörttihälytys %i"
 
 #. Translators: The description of the 'Nerd Alert %i' achievement.
 #: src/common/Achievements.js:567
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
-msgstr ""
+msgstr "Avaa %x valikkoa D-Bus-liitännällä."
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
 #: src/common/Achievements.js:581
@@ -970,7 +998,7 @@ msgstr ""
 #: src/common/Achievements.js:585
 #, javascript-format
 msgid "Generate %x random presets."
-msgstr ""
+msgstr "Luo %x satunnaista esiasetusta."
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
 #: src/common/Achievements.js:598
@@ -982,13 +1010,13 @@ msgstr ""
 #. only one preset needs to be exported.
 #: src/common/Achievements.js:602
 msgid "Export a custom preset."
-msgstr ""
+msgstr "Vie mukautettu esiasetus."
 
 #. Translators: The description of the '%s Preset Exporter' achievement.
 #: src/common/Achievements.js:604
 #, javascript-format
 msgid "Export %x custom presets."
-msgstr ""
+msgstr "Vie %x mukautettua esiasetusta."
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
 #: src/common/Achievements.js:617
@@ -1000,13 +1028,13 @@ msgstr ""
 #. only one preset needs to be imported.
 #: src/common/Achievements.js:621
 msgid "Import a custom preset."
-msgstr ""
+msgstr "Tuo mukautettu esiasetus."
 
 #. Translators: The description of the '%s Preset Importer' achievement.
 #: src/common/Achievements.js:623
 #, javascript-format
 msgid "Import %x custom presets."
-msgstr ""
+msgstr "Tuo %x mukautettua esiasetusta."
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
 #: src/common/Achievements.js:636
@@ -1018,13 +1046,13 @@ msgstr ""
 #. only one menu needs to be imported.
 #: src/common/Achievements.js:640
 msgid "Import a menu configuration."
-msgstr ""
+msgstr "Tuo valikkoasetukset."
 
 #. Translators: The description of the '%s Menu Importer' achievement.
 #: src/common/Achievements.js:642
 #, javascript-format
 msgid "Import %x menu configurations."
-msgstr ""
+msgstr "Tuo %x valikkokokoonpanoa."
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
 #: src/common/Achievements.js:656
@@ -1036,13 +1064,13 @@ msgstr ""
 #. only one menu needs to be exported.
 #: src/common/Achievements.js:660
 msgid "Export a menu configuration."
-msgstr ""
+msgstr "Vie valikkoasetukset."
 
 #. Translators: The description of the '%s Menu Exporter' achievement.
 #: src/common/Achievements.js:662
 #, javascript-format
 msgid "Export %x menu configurations."
-msgstr ""
+msgstr "Vie %x valikkokokoonpanoa."
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
@@ -1067,7 +1095,7 @@ msgstr ""
 #: src/common/Achievements.js:697
 #, javascript-format
 msgid "Open a preview menu %x times."
-msgstr ""
+msgstr "Avaa esikatseluvalikko %x kertaa."
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
@@ -1079,7 +1107,7 @@ msgstr ""
 #: src/common/Achievements.js:712
 #, javascript-format
 msgid "Open the tutorial menu %x times."
-msgstr ""
+msgstr "Avaa ohjevalikko %x kertaa."
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
@@ -1101,7 +1129,7 @@ msgstr ""
 #. Translators: The description of the 'Say Good-Pie!' achievement.
 #: src/common/Achievements.js:740
 msgid "Delete all of your menus."
-msgstr ""
+msgstr "Poista kaikki valikot."
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
@@ -1117,23 +1145,25 @@ msgstr ""
 
 #: src/common/ConfigWidgetFactory.js:97 src/prefs/ImageChooserButton.js:39
 msgid "Select File"
-msgstr ""
+msgstr "Valitse tiedosto"
 
 #: src/common/ConfigWidgetFactory.js:164
 msgid "Select Application"
-msgstr ""
+msgstr "Valitse sovellus"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:264 src/common/ConfigWidgetFactory.js:297
 #: src/prefs/MenuEditor.js:258
 msgid "Not Bound"
-msgstr ""
+msgstr "Ei määritetty"
 
 #: src/common/ConfigWidgetFactory.js:287
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
+"Paina pikanäppäintä!\n"
+"Paina ESC peruaksesi, askelpalautin poistaaksesi pikanäppäimen"
 
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
@@ -1141,11 +1171,11 @@ msgstr ""
 #: src/common/ItemRegistry.js:245
 #, javascript-format
 msgid "Insert: %s"
-msgstr ""
+msgstr "Syötä: %s"
 
 #: src/extension/Background.js:95
 msgid "Close"
-msgstr ""
+msgstr "Sulje"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
@@ -1156,49 +1186,49 @@ msgstr ""
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:137
 msgid "Fly-Pie Level Up!"
-msgstr ""
+msgstr "Fly-Pie-tason nousu!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:139
 msgid "You reached level %i!"
-msgstr ""
+msgstr "Saavutit tason %i!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:159
 msgid "Fly-Pie Achievement Completed!"
-msgstr ""
+msgstr "Fly-Pie-saavutus suoritettu!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:161
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
-msgstr ""
+msgstr "Sait saavutuksen \"%s\"!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
 #: src/extension/Daemon.js:455
 msgid "Show Achievements"
-msgstr ""
+msgstr "Näytä saavutukset"
 
 #. Translators: This is the name of the default menu.
 #: src/extension/DefaultMenu.js:28 src/prefs/ExampleMenu.js:26
 msgid "Example Menu"
-msgstr ""
+msgstr "Esimerkkivalikko"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:36
 msgid "Sound"
-msgstr ""
+msgstr "Ääni"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:41
 msgid "Mute"
-msgstr ""
+msgstr "Mykistä"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:49
 msgid "Play / Pause"
-msgstr ""
+msgstr "Toista / keskeytä"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:57
@@ -1213,70 +1243,70 @@ msgstr ""
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:78 src/common/menus/Favorites.js:43
 msgid "Favorites"
-msgstr ""
+msgstr "Suosikit"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:86
 msgid "Next Workspace"
-msgstr ""
+msgstr "Seuraava työtila"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:94
 msgid "Maximize Window"
-msgstr ""
+msgstr "Suurenna ikkuna"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:102
 msgid "Fly-Pie Settings"
-msgstr ""
+msgstr "Fly-Pien asetukset"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:110
 msgid "Close Window"
-msgstr ""
+msgstr "Sulje ikkuna"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:118
 msgid "Previous Workspace"
-msgstr ""
+msgstr "Edellinen työtila"
 
 #. Translators: This is an entry of the default menu. I
 #: src/extension/DefaultMenu.js:126 src/common/menus/RunningApps.js:47
 msgid "Running Apps"
-msgstr ""
+msgstr "Käynnissä olevat sovellukset"
 
 #: src/prefs/AchievementsPage.js:117
 msgid "Do you really want to reset all statistics?"
-msgstr ""
+msgstr "Haluatko nollata kaikki tilastot?"
 
 #: src/prefs/AchievementsPage.js:118
 msgid "All achievements will be lost!"
-msgstr ""
+msgstr "Kaikki saavutukset häviävät!"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:29
 msgid "Animals & Nature"
-msgstr ""
+msgstr "Eläimet ja luonto"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:34
 msgid "Flowers"
-msgstr ""
+msgstr "Kukat"
 
 #. Translators: The name of the 🌷 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:38
 msgid "Tulip"
-msgstr ""
+msgstr "Tulppaani"
 
 #. Translators: The name of the 🌹 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:40
 msgid "Rose"
-msgstr ""
+msgstr "Ruusu"
 
 #. Translators: The name of the 🌻 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:42
 msgid "Sunflower"
-msgstr ""
+msgstr "Auringonkukka"
 
 #. Translators: The name of the 🌼 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:44
@@ -1286,17 +1316,17 @@ msgstr ""
 #. Translators: The name of the 💐 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:46
 msgid "Bouquet"
-msgstr ""
+msgstr "Kimppu"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:51
 msgid "Mammals"
-msgstr ""
+msgstr "Nisäkkäät"
 
 #. Translators: The name of the 🐈 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:55
 msgid "Cat"
-msgstr ""
+msgstr "Kissa"
 
 #. Translators: The name of the 🐂 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:57
@@ -1306,42 +1336,42 @@ msgstr ""
 #. Translators: The name of the 🐕 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:59
 msgid "Dog"
-msgstr ""
+msgstr "Koira"
 
 #. Translators: The name of the 🐖 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:61
 msgid "Pig"
-msgstr ""
+msgstr "Sika"
 
 #. Translators: The name of the 🐒 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:63
 msgid "Monkey"
-msgstr ""
+msgstr "Apina"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:68
 msgid "Reptiles"
-msgstr ""
+msgstr "Matelijat"
 
 #. Translators: The name of the 🐊 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:72
 msgid "Crocodile"
-msgstr ""
+msgstr "Krokotiili"
 
 #. Translators: The name of the 🐍 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:74
 msgid "Snake"
-msgstr ""
+msgstr "Käärme"
 
 #. Translators: The name of the 🐢 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:76
 msgid "Turtle"
-msgstr ""
+msgstr "Kilpikonna"
 
 #. Translators: The name of the 🦖 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:78
 msgid "T-Rex"
-msgstr ""
+msgstr "T-Rex"
 
 #. Translators: The name of the 🦕 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:80
@@ -1351,109 +1381,109 @@ msgstr ""
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:87
 msgid "Food & Drink"
-msgstr ""
+msgstr "Ruoka ja juoma"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:92
 msgid "Fruit"
-msgstr ""
+msgstr "Hedelmä"
 
 #. Translators: The name of the 🍏 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:96
 msgid "Apple"
-msgstr ""
+msgstr "Omena"
 
 #. Translators: The name of the 🍉 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:98
 msgid "Watermelon"
-msgstr ""
+msgstr "Vesimeloni"
 
 #. Translators: The name of the 🍋 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:100
 msgid "Lemon"
-msgstr ""
+msgstr "Sitruuna"
 
 #. Translators: The name of the 🍌 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:102
 msgid "Banana"
-msgstr ""
+msgstr "Banaani"
 
 #. Translators: The name of the 🍓 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:104
 msgid "Strawberry"
-msgstr ""
+msgstr "Mansikka"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:109
 msgid "Drink"
-msgstr ""
+msgstr "Juomat"
 
 #. Translators: The name of the 🍵 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:113
 msgid "Tea"
-msgstr ""
+msgstr "Tee"
 
 #. Translators: The name of the ☕ emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:115
 msgid "Coffee"
-msgstr ""
+msgstr "Kahvi"
 
 #. Translators: The name of the 🍺 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:117
 msgid "Beer"
-msgstr ""
+msgstr "Olut"
 
 #. Translators: The name of the 🥃 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:119
 msgid "Whiskey"
-msgstr ""
+msgstr "Viski"
 
 #. Translators: The name of the 🍹 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:121
 msgid "Cocktail"
-msgstr ""
+msgstr "Cocktail"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:126
 msgid "Sweets"
-msgstr ""
+msgstr "Herkut"
 
 #. Translators: This is the item which should be selected in the tutorial.
 #. Make sure the translation matches the name given in the tutorial!
 #. Translators: The name of the 🍰 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:132
 msgid "Shortcake"
-msgstr ""
+msgstr "Murokeksi"
 
 #. Translators: The name of the 🍬 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:134
 msgid "Candy"
-msgstr ""
+msgstr "Makeinen"
 
 #. Translators: The name of the 🍩 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:136
 msgid "Doughnut"
-msgstr ""
+msgstr "Donitsi"
 
 #. Translators: The name of the 🍪 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:138
 msgid "Cookie"
-msgstr ""
+msgstr "Keksi"
 
 #. Translators: The name of the 🍫 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:140
 msgid "Chocolate"
-msgstr ""
+msgstr "Suklaa"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:147
 msgid "Activities"
-msgstr ""
+msgstr "Aktiviteetit"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:152
 msgid "Games"
-msgstr ""
+msgstr "Pelit"
 
 #. Translators: The name of the 🎱 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:156
@@ -1463,47 +1493,47 @@ msgstr ""
 #. Translators: The name of the 🀄 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:158
 msgid "Mahjong"
-msgstr ""
+msgstr "Mahjong"
 
 #. Translators: The name of the 🎳 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:160
 msgid "Bowling"
-msgstr ""
+msgstr "Keilaus"
 
 #. Translators: The name of the 🎯 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:162
 msgid "Darts"
-msgstr ""
+msgstr "Tikanheitto"
 
 #. Translators: The name of the 🎮 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:164
 msgid "Video Game"
-msgstr ""
+msgstr "Videopeli"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:169
 msgid "Sports"
-msgstr ""
+msgstr "Urheilu"
 
 #. Translators: The name of the 🏏 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:173
 msgid "Cricket"
-msgstr ""
+msgstr "Kriketti"
 
 #. Translators: The name of the 🏒 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:175
 msgid "Ice Hockey"
-msgstr ""
+msgstr "Jääkiekko"
 
 #. Translators: The name of the 🎾 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:177
 msgid "Tennis"
-msgstr ""
+msgstr "Tennis"
 
 #. Translators: The name of the 🎣 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:179
 msgid "Fishing"
-msgstr ""
+msgstr "Kalastus"
 
 #. Translators: The name of the 🎿 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:181
@@ -1513,7 +1543,7 @@ msgstr ""
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:186
 msgid "Places"
-msgstr ""
+msgstr "Sijainnit"
 
 #. Translators: The name of the 🗻 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:190
@@ -1528,12 +1558,12 @@ msgstr ""
 #. Translators: The name of the 🗽 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:194
 msgid "Statue of Liberty"
-msgstr ""
+msgstr "Vapaudenpatsas"
 
 #. Translators: The name of the 🗾 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:196
 msgid "Japan"
-msgstr ""
+msgstr "Japani"
 
 #. Translators: The name of the 🗿 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:198
@@ -1543,62 +1573,62 @@ msgstr ""
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:205
 msgid "Objects"
-msgstr ""
+msgstr "Objektit"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:210
 msgid "Cars"
-msgstr ""
+msgstr "Autot"
 
 #. Translators: The name of the 🚌 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:214
 msgid "Bus"
-msgstr ""
+msgstr "Bussi"
 
 #. Translators: The name of the 🚒 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:216
 msgid "Fire Engine"
-msgstr ""
+msgstr "Paloauto"
 
 #. Translators: The name of the 🚗 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:218
 msgid "Automobile"
-msgstr ""
+msgstr "Ajoneuvo"
 
 #. Translators: The name of the 🚜 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:220
 msgid "Tractor"
-msgstr ""
+msgstr "Traktori"
 
 #. Translators: The name of the 🚚 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:222
 msgid "Truck"
-msgstr ""
+msgstr "Rekka"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:227
 msgid "Buildings"
-msgstr ""
+msgstr "Rakennukset"
 
 #. Translators: The name of the 🏤 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:231
 msgid "Post Office"
-msgstr ""
+msgstr "Postitoimisto"
 
 #. Translators: The name of the 🏫 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:233
 msgid "School"
-msgstr ""
+msgstr "Koulu"
 
 #. Translators: The name of the 🏥 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:235
 msgid "Hospital"
-msgstr ""
+msgstr "Sairaala"
 
 #. Translators: The name of the 🏦 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:237
 msgid "Bank"
-msgstr ""
+msgstr "Pankki"
 
 #. Translators: The name of the 🏩 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:239
@@ -1608,42 +1638,42 @@ msgstr ""
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:244
 msgid "Instruments"
-msgstr ""
+msgstr "Soittimet"
 
 #. Translators: The name of the 🎷 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:248
 msgid "Saxophone"
-msgstr ""
+msgstr "Saksofoni"
 
 #. Translators: The name of the 🎸 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:250
 msgid "Guitar"
-msgstr ""
+msgstr "Kitara"
 
 #. Translators: The name of the 🎺 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:252
 msgid "Trumpet"
-msgstr ""
+msgstr "Trumpetti"
 
 #. Translators: The name of the 🎤 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:254
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofoni"
 
 #. Translators: The name of the 🥁 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:256
 msgid "Drum"
-msgstr ""
+msgstr "Rummut"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:263
 msgid "Smileys"
-msgstr ""
+msgstr "Hymiöt"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:268
 msgid "Happy Faces"
-msgstr ""
+msgstr "Iloiset naamat"
 
 #. Translators: The name of the 😃 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:272
@@ -1653,7 +1683,7 @@ msgstr ""
 #. Translators: The name of the 😉 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:274
 msgid "Winking Face"
-msgstr ""
+msgstr "Vinkkaava naama"
 
 #. Translators: The name of the 😊 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:276
@@ -1673,17 +1703,17 @@ msgstr ""
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:285
 msgid "Angry Faces"
-msgstr ""
+msgstr "Vihaiset naamat"
 
 #. Translators: The name of the 🤮 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:289
 msgid "Vomiting Face"
-msgstr ""
+msgstr "Oksentava naama"
 
 #. Translators: The name of the 🤨 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:291
 msgid "Skeptical Face"
-msgstr ""
+msgstr "Skeptinen naama"
 
 #. Translators: The name of the 😡 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:293
@@ -1693,17 +1723,17 @@ msgstr ""
 #. Translators: The name of the 😠 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:295
 msgid "Angry Face"
-msgstr ""
+msgstr "Vihainen naama"
 
 #. Translators: The name of the 🤬 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:297
 msgid "Very Angry Face"
-msgstr ""
+msgstr "Erittäin vihainen naama"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:302
 msgid "Surprised Faces"
-msgstr ""
+msgstr "Yllätyneet naamat"
 
 #. Translators: The name of the 😳 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:306
@@ -1733,12 +1763,12 @@ msgstr ""
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:321
 msgid "Symbols"
-msgstr ""
+msgstr "Symbolit"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:326
 msgid "Star Signs"
-msgstr ""
+msgstr "Horoskoopit"
 
 #. Translators: The name of the ♉ emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:330
@@ -1768,74 +1798,74 @@ msgstr ""
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:343
 msgid "Arrows"
-msgstr ""
+msgstr "Nuolet"
 
 #. Translators: The name of the ⏫ emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:347
 msgid "Up"
-msgstr ""
+msgstr "Ylös"
 
 #. Translators: The name of the ⏩ emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:349
 msgid "Right"
-msgstr ""
+msgstr "Oikea"
 
 #. Translators: The name of the 🔀 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:351
 msgid "Twisted"
-msgstr ""
+msgstr "Kierretty"
 
 #. Translators: The name of the ⏬ emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:353
 msgid "Down"
-msgstr ""
+msgstr "Alas"
 
 #. Translators: The name of the ⏪ emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:355
 msgid "Left"
-msgstr ""
+msgstr "Vasen"
 
 #. Translators: An emoji category of the example tutorial menu.
 #: src/prefs/ExampleMenu.js:360
 msgid "Info Signs"
-msgstr ""
+msgstr "Opastekyltit"
 
 #. Translators: The name of the 🚮 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:364
 msgid "Litter Bin"
-msgstr ""
+msgstr "Roskakori"
 
 #. Translators: The name of the 🚰 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:366
 msgid "Potable Water"
-msgstr ""
+msgstr "Juomakelpoinen vesi"
 
 #. Translators: The name of the 🚹 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:368
 msgid "Mens"
-msgstr ""
+msgstr "Miehet"
 
 #. Translators: The name of the 🚺 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:370
 msgid "Womens"
-msgstr ""
+msgstr "Naiset"
 
 #. Translators: The name of the 🚼 emoji of the tutorial menu.
 #: src/prefs/ExampleMenu.js:372
 msgid "Baby"
-msgstr ""
+msgstr "Lastenhoito"
 
 #: src/prefs/MenuEditor.js:370
 msgid "No menus configured"
-msgstr ""
+msgstr "Valikkoja ei ole määritetty"
 
 #: src/prefs/MenuEditor.js:373
 msgid "Create a new menu with the button in the top right corner."
-msgstr ""
+msgstr "Luo uusi valikko oikean yläkulman painikkeella."
 
 #: src/prefs/MenuEditor.js:391
 msgid "Add a new item"
-msgstr ""
+msgstr "Lisää uusi tietue"
 
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag an action in the menu editor to the menu overview.
@@ -1843,45 +1873,46 @@ msgstr ""
 #. to drag an action in the menu editor to the menu overview.
 #: src/prefs/MenuEditor.js:715 src/prefs/MenuEditorPage.js:796
 msgid "Actions cannot be turned into toplevel menus."
-msgstr ""
+msgstr "Toimintoja ei voi muuntaa päätason valikoiksi."
 
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag external stuff to the menu editor's overview.
 #: src/prefs/MenuEditor.js:734
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr ""
+"Voit luoda uusia toimintotietueita vain mukautettujen valikkojen sisään."
 
 #: src/prefs/MenuEditorPage.js:169 src/prefs/MenuEditorPage.js:234
 #: src/prefs/SettingsPage.js:260 src/prefs/SettingsPage.js:311
 msgid "JSON Files"
-msgstr ""
+msgstr "JSON-tiedostot"
 
 #: src/prefs/MenuEditorPage.js:176 src/prefs/MenuEditorPage.js:241
 #: src/prefs/SettingsPage.js:267 src/prefs/SettingsPage.js:318
 msgid "All Files"
-msgstr ""
+msgstr "Kaikki tiedostot"
 
 #: src/prefs/MenuEditorPage.js:181
 msgid "Export"
-msgstr ""
+msgstr "Vie"
 
 #: src/prefs/MenuEditorPage.js:210
 msgid "Could not export the menu configuration."
-msgstr ""
+msgstr "Valikkoasetuksia ei voitu viedä."
 
 #: src/prefs/MenuEditorPage.js:246
 msgid "Import"
-msgstr ""
+msgstr "Tuo"
 
 #: src/prefs/MenuEditorPage.js:280
 msgid "Could not import the menu configuration."
-msgstr ""
+msgstr "Valikkoasetuksia ei voitu tuoda."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:328
 msgid "You should try to have no more than twelve items in your menus."
-msgstr ""
+msgstr "Valikossa ei tulisi olla enempää kuin kaksitoista tietuetta."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1890,6 +1921,8 @@ msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
 msgstr ""
+"Parillinen määrä tietueita tekee niiden sijainnin oppimisesta helpompaa. "
+"Neljä, kuusi ja kahdeksan ovat hyviä lukumääriä."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1897,20 +1930,21 @@ msgstr ""
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr ""
+"Fly-Pie on vapaa ohjelmisto ja saatavilla <a href=\"%s\">GitHubin</a> kautta."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:338
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "Ehdotuksia voi lähettää <a href=\"%s\">GitHubiin</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:342
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "Ilmoita ongelmista <a href=\"%s\">GitHubiin</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1919,6 +1953,8 @@ msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
 msgstr ""
+"Pidä valikkorakenteet tehokkaina asettamalla yli kahdeksan tietuetta "
+"sisältävät kokonaisuudet uudelle valikkotasolle."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1927,12 +1963,14 @@ msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
 msgstr ""
+"Jos poistat kaikki valikot, kirjaudut ulos ja takaisin sisään, "
+"oletusasetukset palautetaan käyttöön."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:352
 msgid "You can reorder the menu items on the left via drag and drop."
-msgstr ""
+msgstr "Voit järjestää valikon tietueet vasemmalla raahaamalla ja pudottamalla."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1942,6 +1980,8 @@ msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
 "<a href=\"%s\">Github</a>."
 msgstr ""
+"Voit avata valikon komentorivillä annettavalla komennolla. Lue lisää <a href="
+"\"%s\">Githubin</a> kautta."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1950,6 +1990,8 @@ msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
 msgstr ""
+"Voit pudottaa kansioita, tiedostoja, linkkejä ja työpöytätiedostoja valikon "
+"hierarkiaan vasemmalla."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1964,7 +2006,7 @@ msgstr ""
 #: src/prefs/MenuEditorPage.js:367
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
-msgstr ""
+msgstr "<a href=\"%s\">Käännä Fly-Pie Weblaten kautta</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1974,45 +2016,47 @@ msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
 "</a>"
 msgstr ""
+"💕️ Haluatko osoittaa arvostusta Fly-Pielle? <a href=\"%s\">Ryhdy "
+"sponsoriksi.</a>"
 
 #. Translators: The left-most item of the menu editor bread crumbs.
 #: src/prefs/MenuEditorPage.js:813
 msgid "All Menus"
-msgstr ""
+msgstr "Kaikki valikot"
 
 #: src/prefs/SettingsPage.js:272
 msgid "Save"
-msgstr ""
+msgstr "Tallenna"
 
 #: src/prefs/SettingsPage.js:323
 msgid "Load"
-msgstr ""
+msgstr "Lataa"
 
 #: src/prefs/SettingsPage.js:340
 msgid "Failed to load preset!"
-msgstr ""
+msgstr "Esiasetuksen lataaminen epäonnistui!"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:167
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big>Viimeisin valinta-aika: <b>%d ms</b></big>"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:172
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big>Paras valinta-aika: <b>%d ms</b></big>"
 
 #: src/common/actions/Command.js:34
 msgid "Launch Application"
-msgstr ""
+msgstr "Käynnistä sovellus"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Command.js:41
 msgid "Runs any shell command."
-msgstr ""
+msgstr "Suorittaa minkä tahansa komentorivikäskyn."
 
 #: src/common/actions/Command.js:45
 msgid ""
@@ -2020,24 +2064,27 @@ msgid ""
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
 msgstr ""
+"<b>Käynnistä sovellus</b> suorittaa minkä tahansa annetun komennon. Tätä "
+"käytetään ensisijaisesti sovellusten avaamiseen, mutta sillä voi olla paljon "
+"muita käyttötapauksia."
 
 #: src/common/actions/Command.js:69
 msgid "Command"
-msgstr ""
+msgstr "Komento"
 
 #: src/common/actions/Command.js:69
 msgid "Use the button to list installed apps."
-msgstr ""
+msgstr "Käytä painiketta listataksesi asennetut sovellukset."
 
 #: src/common/actions/DBusSignal.js:32
 msgid "D-Bus Signal"
-msgstr ""
+msgstr "D-Bus-signaali"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/DBusSignal.js:39
 msgid "Emits a D-Bus signal."
-msgstr ""
+msgstr "Lähettää D-Bus-signaalin."
 
 #: src/common/actions/DBusSignal.js:43
 msgid ""
@@ -2049,45 +2096,47 @@ msgstr ""
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: src/common/actions/DBusSignal.js:67
 msgid "This will be passed to the D-Bus signal."
-msgstr ""
+msgstr "Tämä välitetään D-Bus-signaalille."
 
 #: src/common/actions/File.js:34
 msgid "Open File"
-msgstr ""
+msgstr "Avaa tiedosto"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:41
 msgid "Opens a file with the default application."
-msgstr ""
+msgstr "Avaa tiedoston oletussovelluksella."
 
 #: src/common/actions/File.js:45
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
+"<b>Avaa tiedosto</b> -toiminto avaa yllä määritetyn tiedoston järjestelmän "
+"oletussovelluksella."
 
 #: src/common/actions/File.js:69
 msgid "File"
-msgstr ""
+msgstr "Tiedosto"
 
 #: src/common/actions/File.js:69 src/common/actions/Uri.js:68
 msgid "It will be opened with the default app."
-msgstr ""
+msgstr "Avataan oletussovelluksella."
 
 #: src/common/actions/InsertText.js:45
 msgid "Insert Text"
-msgstr ""
+msgstr "Lisää teksti"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/InsertText.js:52
 msgid "Types some text automatically."
-msgstr ""
+msgstr "Syöttää haluttua tekstiä automaattisesti."
 
 #: src/common/actions/InsertText.js:56
 msgid ""
@@ -2095,24 +2144,27 @@ msgid ""
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
 "write the same things."
 msgstr ""
+"<b>Lisää teksti</b> -toiminto kopioi annetun tekstin leikepöydälle ja sen "
+"jälkeen simuloi Ctrl+V-toiminnon. Tämä voi olla hyödyllistä, jos kirjoitat "
+"usein samoja asioita."
 
 #: src/common/actions/InsertText.js:80
 msgid "Text"
-msgstr ""
+msgstr "Teksti"
 
 #: src/common/actions/InsertText.js:80
 msgid "This text will be inserted."
-msgstr ""
+msgstr "Tämä teksti syötetään."
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
-msgstr ""
+msgstr "Aktivoi pikanäppäin"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:50
 msgid "Simulates a key combination."
-msgstr ""
+msgstr "Simuloi näppäinyhdistelmää."
 
 #: src/common/actions/Shortcut.js:54
 msgid ""
@@ -2120,20 +2172,23 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
+"<b>Aktivoi pikanäppäin</b> -toiminto simuloi näppäinyhdistelmää. Tätä voi "
+"käyttää esimerkiksi työtilojen välillä vaihtamiseen, mediasoitinten "
+"ohjaamiseen tai \"Kumoa\"- ja \"Tee uudelleen\"-toimintoihin."
 
 #: src/common/actions/Shortcut.js:78
 msgid "This shortcut will be simulated."
-msgstr ""
+msgstr "Tätä pikanäppäintä simuloidaan."
 
 #: src/common/actions/Uri.js:33
 msgid "Open URI"
-msgstr ""
+msgstr "Avaa URI"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Uri.js:40
 msgid "Opens an URI with the default application."
-msgstr ""
+msgstr "Avaa URI:n oletussovelluksella."
 
 #: src/common/actions/Uri.js:44
 msgid ""
@@ -2145,33 +2200,35 @@ msgstr ""
 
 #: src/common/actions/Uri.js:68
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: src/common/menus/Bookmarks.js:33
 msgid "Bookmarks"
-msgstr ""
+msgstr "Kirjanmerkit"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Bookmarks.js:40
 msgid "Shows your frequently used directories."
-msgstr ""
+msgstr "Näyttää useimmiten käyttämäsi kansiot."
 
 #: src/common/menus/Bookmarks.js:44
 msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
 msgstr ""
+"<b>Kirjanmerkit</b>-valikko näyttää tietueet roskakorille, työpöydälle ja "
+"jokaiselle kirjanmerkitylle kansiolle."
 
 #: src/common/menus/CustomMenu.js:29
 msgid "Custom Menu"
-msgstr ""
+msgstr "Mukautettu valikko"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:36
 msgid "This can contain custom actions and other menus."
-msgstr ""
+msgstr "Voi sisältää mukautettuja toimintoja ja muita valikoita."
 
 #: src/common/menus/CustomMenu.js:40
 msgid ""
@@ -2179,44 +2236,50 @@ msgid ""
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended."
 msgstr ""
+"<b>Mukautettu valikko</b> voi sisältää haluamasi määrän toimintoja ja "
+"alivalikoita. Käyttökokemuksen vuoksi suositellaan enintään kahtatoista "
+"tietuetta."
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
-msgstr ""
+msgstr "Laitteet"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:40
 msgid "Shows connected devices."
-msgstr ""
+msgstr "Näyttää yhdistetyt laitteet."
 
 #: src/common/menus/Devices.js:44
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
 msgstr ""
+"<b>Laitteet</b>-valikko näyttää tietueen jokaiselle liitetylle taltiolle "
+"kuten USB-tikuille."
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:50
 msgid "Shows pinned applications."
-msgstr ""
+msgstr "Näyttää kiinnitetyt sovellukset."
 
 #: src/common/menus/Favorites.js:54
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
 msgstr ""
+"<b>Suosikit</b>-valikko näyttää Gnomen telakkaan kiinnitetyt sovellukset."
 
 #: src/common/menus/FrequentlyUsed.js:44
 msgid "Frequently Used"
-msgstr ""
+msgstr "Usein käytetyt"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/FrequentlyUsed.js:51
 msgid "Shows your frequently used applications."
-msgstr ""
+msgstr "Näyttää useimmiten käyttämäsi sovellukset."
 
 #: src/common/menus/FrequentlyUsed.js:55
 msgid ""
@@ -2224,10 +2287,13 @@ msgid ""
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
 msgstr ""
+"<b>Usein käytetyt</b> -valikko näyttää usein käytetyt sovellukset. Tehokkaan "
+"valinnan vuoksi näytettävien sovellusten enimmäismääräksi suositellaan "
+"asetettavan kaksitoista."
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
 msgid "Max Item Count"
-msgstr ""
+msgstr "Tietueiden enimmäismäärä"
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
 msgid "Limits the number of children."
@@ -2235,13 +2301,13 @@ msgstr ""
 
 #: src/common/menus/MainMenu.js:33
 msgid "Main Menu"
-msgstr ""
+msgstr "Päävalikko"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/MainMenu.js:40
 msgid "Shows all installed applications."
-msgstr ""
+msgstr "Näyttää kaikki asennetut sovellukset."
 
 #: src/common/menus/MainMenu.js:44
 msgid ""
@@ -2249,16 +2315,19 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather set up your own menus!"
 msgstr ""
+"<b>Päävalikko</b> näyttää kaikki asennetut sovellukset. Yleensä tämä "
+"sisältää paljon tietueita, eikä käyttäminen ole kovin tehokasta. Tämän "
+"sijaan on suositeltavaa käyttää mukautettuja valikoita!"
 
 #: src/common/menus/RecentFiles.js:34
 msgid "Recent Files"
-msgstr ""
+msgstr "Viimeisimmät tiedostot"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RecentFiles.js:41
 msgid "Shows your recently used files."
-msgstr ""
+msgstr "Näyttää viimeksi käyttämäsi tiedostot."
 
 #: src/common/menus/RecentFiles.js:45
 msgid ""
@@ -2266,12 +2335,15 @@ msgid ""
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
 msgstr ""
+"<b>Viimeisimmät tiedostot</b> -valikko näyttää viimeksi käyttämäsi "
+"tiedostot. Käyttökokemuksen vuoksi on suositeltavaa asettaa näytettävien "
+"tiedostojen enimmäismääräksi kaksitoista."
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:54
 msgid "Shows the currently running applications."
-msgstr ""
+msgstr "Näyttää käynnissä olevat sovellukset."
 
 #: src/common/menus/RunningApps.js:58
 msgid ""
@@ -2279,6 +2351,9 @@ msgid ""
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
+"<b>Käynnissä olevat sovellukset</b> -valikko näyttää kaikki käynnissä olevat "
+"sovellukset. Tämä vastaa Alt+Tab-valintaikkunan toimintaa. Koska tietueiden "
+"järjestys muuttuu usein, tämä ei ole kovin käyttökelpoinen toteutus."
 
 #: src/common/menus/RunningApps.js:97
 msgid ""
@@ -2291,53 +2366,55 @@ msgstr ""
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
-msgstr ""
+msgstr "Ikkunasuodatin"
 
 #: src/common/menus/RunningApps.js:123
 msgid "Active Workspace Only"
-msgstr ""
+msgstr "Vain aktiivinen työtila"
 
 #: src/common/menus/RunningApps.js:124
 msgid "Group by Application"
-msgstr ""
+msgstr "Ryhmitä sovelluksen mukaan"
 
 #: src/common/menus/RunningApps.js:125
 msgid "Peek on Hover"
-msgstr ""
+msgstr "Kurkista kohdistamalla"
 
 #: src/common/menus/System.js:46
 msgid "System"
-msgstr ""
+msgstr "Järjestelmä"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/System.js:53
 msgid "Allows screen lock, shutdown and other things."
-msgstr ""
+msgstr "Mahdollistaa näytön lukituksen, sammuttamisen ja muita asioita."
 
 #: src/common/menus/System.js:57
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
 msgstr ""
+"<b>Järjestelmä</b>-valikko näyttää tietueet esimerkiksi näytön lukitukselle, "
+"sammuttamiselle ja asetuksille."
 
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:81
 msgid "Lock"
-msgstr ""
+msgstr "Lukitse"
 
 #: src/common/menus/System.js:90
 msgid "Suspend"
-msgstr ""
+msgstr "Valmiustila"
 
 #: src/common/menus/System.js:99
 msgid "Switch User…"
-msgstr ""
+msgstr "Vaihda käyttäjää…"
 
 #: src/common/menus/System.js:108
 msgid "Log Out"
-msgstr ""
+msgstr "Kirjaudu ulos"
 
 #: src/common/menus/System.js:117
 msgid "Power Off…"
-msgstr ""
+msgstr "Sammuta…"
