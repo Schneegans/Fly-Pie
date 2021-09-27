@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-24 21:44+0200\n"
-"PO-Revision-Date: 2021-09-18 19:33+0000\n"
-"Last-Translator: Thiago Carmona Monteiro <Guarakami1807@protonmail.ch>\n"
-"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/fly-"
-"pie/core/pt_BR/>\n"
+"PO-Revision-Date: 2021-09-27 23:00+0000\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
+"fly-pie/core/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr ""
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:44
 msgid "Icon Theme"
-msgstr "Tema do Ícone"
+msgstr "Tema de Ícones"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:106
@@ -139,11 +139,11 @@ msgstr "Créditos"
 
 #: resources/ui/settings.ui:455
 msgid "Created by"
-msgstr "Criado por "
+msgstr "Criado por"
 
 #: resources/ui/settings.ui:481
 msgid "Translated by"
-msgstr "Traduzido por "
+msgstr "Traduzido por"
 
 #: resources/ui/settings.ui:508
 msgid "Artwork by"
