@@ -8,67 +8,71 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-24 21:44+0200\n"
-"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-09-27 23:00+0000\n"
+"Last-Translator: Daniel' Ishmaev <dan.samara@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/fly-pie/core/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: resources/ui/copyValueButton.ui:6
 msgid "Copy left value to right side"
-msgstr ""
+msgstr "Копировать левое значение в правую сторону"
 
 #: resources/ui/iconSelectDialog.ui:14 src/common/ConfigWidgetFactory.js:98
 #: src/common/ConfigWidgetFactory.js:165 src/prefs/ImageChooserButton.js:40
 #: src/prefs/MenuEditorPage.js:180 src/prefs/MenuEditorPage.js:245
 #: src/prefs/SettingsPage.js:271 src/prefs/SettingsPage.js:322
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #: resources/ui/iconSelectDialog.ui:19
 msgid "Select Icon"
-msgstr ""
+msgstr "Выберите значок"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:44
 msgid "Icon Theme"
-msgstr ""
+msgstr "Тема иконок"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:106
 msgid "Custom Icon"
-msgstr ""
+msgstr "Пользовательский значок"
 
 #: resources/ui/imageChooserButton.ui:16 src/prefs/ImageChooserButton.js:88
 msgid "(None)"
-msgstr ""
+msgstr "(Нет)"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:19
 msgid "Linear"
-msgstr ""
+msgstr "Линейный"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:23
 msgid "Ease"
-msgstr ""
+msgstr "Замедление"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:27
 msgid "Ease-In"
-msgstr ""
+msgstr "Замедление в начале"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:31
 msgid "Ease-Out"
-msgstr ""
+msgstr "Замедление в конце"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:35
 msgid "Ease-In-Out"
-msgstr ""
+msgstr "Замедление в начале и конце"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:39
@@ -345,33 +349,33 @@ msgstr ""
 #. Button for tutorial navigation. Goes back one page.
 #: resources/ui/settings.ui:1510
 msgid "Previous"
-msgstr ""
+msgstr "Назад"
 
 #. Button for tutorial navigation. Goes to the next page.
 #: resources/ui/settings.ui:1567
 msgid "Next"
-msgstr ""
+msgstr "Вперёд"
 
 #. Caption of the settings page in the window's titlebar.
 #: resources/ui/settings.ui:1603
 msgid "Settings"
-msgstr ""
+msgstr "Настройки"
 
 #: resources/ui/settings.ui:1636 resources/ui/settings.ui:1832
 msgid "Global Appearance Settings"
-msgstr ""
+msgstr "Глобальные настройки внешнего вида"
 
 #: resources/ui/settings.ui:1646
 msgid "These settings affect all menu items."
-msgstr ""
+msgstr "Эти настройки влияют на все пункты меню."
 
 #: resources/ui/settings.ui:1664
 msgid "Animation Duration"
-msgstr ""
+msgstr "Продолжительность анимации"
 
 #: resources/ui/settings.ui:1678
 msgid "Global Scaling"
-msgstr ""
+msgstr "Глобальный масштаб"
 
 #. Please keep this short!
 #: resources/ui/settings.ui:1688
