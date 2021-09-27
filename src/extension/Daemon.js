@@ -229,6 +229,10 @@ var Daemon = class Daemon {
     return this._openCustomMenu(json, true, this._lastMenuID);
   }
 
+  SelectItem(path) {
+    return this._menu.selectItem(path);
+  }
+
   // ----------------------------------------------------------------------- private stuff
 
   // Opens a menu configured with Fly-Pie's menu editor, optionally in preview mode. The

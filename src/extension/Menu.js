@@ -33,8 +33,8 @@ var Menu = class Menu {
 
   // ------------------------------------------------------------ constructor / destructor
 
-  // The Menu is only instantiated once by the Server. It is re-used for each new incoming
-  // ShowMenu request. The three parameters are callbacks which are fired when the
+  // The Menu is only instantiated once by the Daemon. It is re-used for each new incoming
+  // ShowMenu request. The four parameters are callbacks which are fired when the
   // corresponding event occurs.
   constructor(emitHoverSignal, emitUnhoverSignal, emitSelectSignal, emitCancelSignal) {
 
@@ -110,7 +110,7 @@ var Menu = class Menu {
     });
 
     // Forward motion events to the SelectionWedges. If the primary mouse button is
-    // pressed, this will also drag the currently active child around.
+    // pressed, this will also drag the currently active chilthreed around.
     this._background.connect('motion-event', (actor, event) => {
       this._selectionWedges.onMotionEvent(event);
 
@@ -211,21 +211,7 @@ var Menu = class Menu {
       }
 
       // Report the unhover event on the D-Bus if an action was hovered before.
-      if (unhoveredIndex >= 0) {
-        const child = this._menuPath[0].getChildMenuItems()[unhoveredIndex];
-
-        // If the item has a selection callback, it is an action.
-        if (child.getSelectionCallback() != null) {
-
-          // If the action has a hover callback, call it!
-          if (child.getUnhoverCallback() != null) {
-            child.getUnhoverCallback()();
-          }
-
-          // Then emit the D-Bus unhover signal!
-          this._emitUnhoverSignal(this._menuID, child.id);
-        }
-      }
+      this._unhoverChild(unhoveredIndex);
 
       // Report the hover event on the D-Bus if an action is hovered.
       if (hoveredIndex >= 0) {
@@ -319,40 +305,7 @@ var Menu = class Menu {
 
       // Finally, if a child was selected which is activatable, we report a selection and
       // hide the entire menu.
-      if (child.getSelectionCallback() != null) {
-
-        // Record this selection in the statistics. Parameters are selection depth, time
-        // and whether a continuous gesture was used for the selection.
-        Statistics.getInstance().addSelection(
-            this._menuPath.length - 1, this._timer.getElapsed(),
-            this._gestureOnlySelection);
-
-        this._background.set_easing_delay(
-            this._settings.get_double('easing-duration') * 1000);
-
-        // hide() will reset our menu ID. However, we need to pass it to the onSelect
-        // callback so we create a copy here. hide() has to be called before
-        // _emitSelectSignal(), else any resulting action (like simulated key presses) may
-        // be blocked by our input grab.
-        const menuID = this._menuID;
-        this.hide();
-        this._background.set_easing_delay(0);
-
-        // If the action has an unhover callback, we call it before. This is to ensure
-        // that there are always pairs of hover / unhover events.
-        if (child.getUnhoverCallback() != null) {
-          child.getUnhoverCallback()();
-        }
-
-        // Then emit the D-Bus unhover signal!
-        this._emitUnhoverSignal(this._menuID, child.id);
-
-        // Then call the activation callback!
-        child.getSelectionCallback()();
-
-        // Finally report the selection over the D-Bus.
-        this._emitSelectSignal(menuID, child.id);
-      }
+      this._selectChild(child);
     });
 
     // When a parent item is hovered, we draw the currently active item with the state
@@ -360,23 +313,7 @@ var Menu = class Menu {
     this._selectionWedges.connect('parent-hovered-event', () => {
       // If there is a currently hovered child, we may have to call the unhover signal.
       const unhoveredIndex = this._menuPath[0].getActiveChildIndex();
-
-      // Report the unhover event on the D-Bus if an action was hovered before.
-      if (unhoveredIndex >= 0) {
-        const child = this._menuPath[0].getChildMenuItems()[unhoveredIndex];
-
-        // If the item has a selection callback, it is an action.
-        if (child.getSelectionCallback() != null) {
-
-          // If the action has a hover callback, call it!
-          if (child.getUnhoverCallback() != null) {
-            child.getUnhoverCallback()();
-          }
-
-          // Then emit the D-Bus unhover signal!
-          this._emitUnhoverSignal(this._menuID, child.id);
-        }
-      }
+      this._unhoverChild(unhoveredIndex);
 
       this._menuPath[0].setState(MenuItemState.CENTER_HOVERED, -1);
       this._menuPath[1].setState(MenuItemState.PARENT_HOVERED);
@@ -598,6 +535,76 @@ var Menu = class Menu {
     return this._menuID;
   }
 
+  // This makes a given item the currently selected item. The given path should be
+  // something like "/0/1" which would mean that the second child of the first child item
+  // will be selected. Passing "/" will select the root item. If an invalid path is given,
+  // DBusInterface.errorCodes.eInvalidPath will be returned. If currently no menu is
+  // shown, DBusInterface.errorCodes.eNoActiveMenu will be returned.
+  selectItem(path) {
+
+    // Check whether a menu is currently visible.
+    if (this._menuID == null) {
+      return DBusInterface.errorCodes.eNoActiveMenu;
+    }
+
+    // The path should start with a '/'.
+    if (path.length == 0 || path[0] != '/') {
+      return DBusInterface.errorCodes.eInvalidPath;
+    }
+
+    // Remove first slash.
+    path = path.substring(1);
+
+    // Remove trailing slash (if any).
+    if (path[path.length - 1] == '/') {
+      path = path.substring(0, path.length - 1);
+    }
+
+    // Split at "/" and convert to numbers.
+    let items = [];
+    if (path.length > 0) {
+      items = path.split('/').map((x) => parseInt(x));
+    }
+
+    // Let's try to construct the menu path accordingly.
+    let newMenuPath = [this._root];
+
+    for (let i = 0; i < items.length; i++) {
+      const index = items[i];
+      if (index < newMenuPath[0].getChildMenuItems().length) {
+        newMenuPath.unshift(newMenuPath[0].getChildMenuItems()[index]);
+      } else {
+        return DBusInterface.errorCodes.eInvalidPath;
+      }
+    }
+
+    // If there is a currently hovered child, we may have to call the unhover signal.
+    const unhoveredIndex = this._menuPath[0].getActiveChildIndex();
+    this._unhoverChild(unhoveredIndex);
+
+    // We will make the newly selected item to move to the same position as the previously
+    // selected item.
+    let [x, y] = this._menuPath[0].get_transformed_position();
+
+    // The call above may return NaN in some cases. I think this happens when the menu has
+    // never been drawn and the selectItem() method is directly called after the show()
+    // method.
+    if (isNaN(x)) x = this._menuPath[0].translation_x + this._background.x;
+    if (isNaN(y)) y = this._menuPath[0].translation_y + this._background.y;
+
+    // Store the new menu path.
+    this._menuPath = newMenuPath;
+
+    // And redraw everything.
+    this._resetState(x, y);
+
+    // Finally, if the selected item is activatable, we report a selection and hide the
+    // entire menu.
+    this._selectChild(this._menuPath[0]);
+
+    return 0;
+  }
+
   // Hides the menu and the background actor.
   hide() {
 
@@ -755,43 +762,10 @@ var Menu = class Menu {
     // This recursively updates all children based on the settings in structure.
     updateMenuItem(structure, this._root);
 
-    // This recursively redraws all children based on their newly assigned state.
-    this._menuPath[0].setState(MenuItemState.CENTER_HOVERED, -1);
-    for (let i = 1; i < this._menuPath.length; i++) {
-      let activeChildIndex = 0;
-      const siblings       = this._menuPath[i].getChildMenuItems();
-      for (let j = 0; j < siblings.length; j++) {
-        if (this._menuPath[i - 1] == siblings[j]) {
-          activeChildIndex = j;
-          break;
-        }
-      }
-      this._menuPath[i].setState(MenuItemState.PARENT, activeChildIndex);
-    }
-
     // Re-idealize the trace. This can lead to pretty intense changes, but that's the way
     // it's supposed to be.
     let [x, y] = this._menuPath[0].get_transformed_position();
-    this._idealizeTace(x, y);
-
-    // Recursively redraw everything.
-    this._root.redraw();
-
-    // Set the wedge angles of the SelectionWedges according to the new item structure.
-    const itemAngles = [];
-    this._menuPath[0].getChildMenuItems().forEach(item => {
-      itemAngles.push(item.angle);
-    });
-
-    if (this._menuPath.length > 1) {
-      this._selectionWedges.setItemAngles(
-          itemAngles, (this._menuPath[0].angle + 180) % 360);
-    } else {
-      this._selectionWedges.setItemAngles(itemAngles);
-    }
-
-    this._selectionWedges.set_translation(
-        x - this._background.x, y - this._background.y, 0);
+    this._resetState(x, y);
 
     return 0;
   }
@@ -874,6 +848,48 @@ var Menu = class Menu {
     });
 
     return true;
+  }
+
+  // This assigns MenuItemState.CENTER_HOVERED to the first entry of the menu path and
+  // MenuItemState.PARENT to all other menu path entries. All other items get an
+  // appropriate state recursively. In addition, the trace between the item is idealized.
+  _resetState(tipX, tipY) {
+    // This recursively redraws all children based on their newly assigned state.
+    this._menuPath[0].setState(MenuItemState.CENTER_HOVERED, -1);
+    for (let i = 1; i < this._menuPath.length; i++) {
+      let activeChildIndex = 0;
+      const siblings       = this._menuPath[i].getChildMenuItems();
+      for (let j = 0; j < siblings.length; j++) {
+        if (this._menuPath[i - 1] == siblings[j]) {
+          activeChildIndex = j;
+          break;
+        }
+      }
+      this._menuPath[i].setState(MenuItemState.PARENT, activeChildIndex);
+    }
+
+    // Re-idealize the trace. This can lead to pretty intense changes, but that's the way
+    // it's supposed to be.
+    this._idealizeTace(tipX, tipY);
+
+    // Recursively redraw everything.
+    this._root.redraw();
+
+    // Set the wedge angles of the SelectionWedges according to the new item structure.
+    const itemAngles = [];
+    this._menuPath[0].getChildMenuItems().forEach(item => {
+      itemAngles.push(item.angle);
+    });
+
+    if (this._menuPath.length > 1) {
+      this._selectionWedges.setItemAngles(
+          itemAngles, (this._menuPath[0].angle + 180) % 360);
+    } else {
+      this._selectionWedges.setItemAngles(itemAngles);
+    }
+
+    this._selectionWedges.set_translation(
+        tipX - this._background.x, tipY - this._background.y, 0);
   }
 
   // This is called every time a settings key changes. This is simply forwarded to all
@@ -1006,5 +1022,62 @@ var Menu = class Menu {
     // mouse pointer.
     root.set_translation(
         root.translation_x + requiredOffsetX, root.translation_y + requiredOffsetY, 0);
+  }
+
+  // Reports an unhover event on the D-Bus for the child of the currently selected menu.
+  _unhoverChild(childIndex) {
+    if (childIndex >= 0) {
+      const child = this._menuPath[0].getChildMenuItems()[childIndex];
+
+      // If the item has a selection callback, it is an action.
+      if (child.getSelectionCallback() != null) {
+
+        // If the action has a unhover callback, call it!
+        if (child.getUnhoverCallback() != null) {
+          child.getUnhoverCallback()();
+        }
+
+        // Then emit the D-Bus unhover signal!
+        this._emitUnhoverSignal(this._menuID, child.id);
+      }
+    }
+  }
+
+  // Activates the given menu item by emitting all required signals and hides the menu.
+  _selectChild(child) {
+    if (child.getSelectionCallback() != null) {
+
+      // Record this selection in the statistics. Parameters are selection depth, time
+      // and whether a continuous gesture was used for the selection.
+      Statistics.getInstance().addSelection(
+          this._menuPath.length - 1, this._timer.getElapsed(),
+          this._gestureOnlySelection);
+
+      this._background.set_easing_delay(
+          this._settings.get_double('easing-duration') * 1000);
+
+      // hide() will reset our menu ID. However, we need to pass it to the onSelect
+      // callback so we create a copy here. hide() has to be called before
+      // _emitSelectSignal(), else any resulting action (like simulated key presses) may
+      // be blocked by our input grab.
+      const menuID = this._menuID;
+      this.hide();
+      this._background.set_easing_delay(0);
+
+      // If the action has an unhover callback, we call it before. This is to ensure
+      // that there are always pairs of hover / unhover events.
+      if (child.getUnhoverCallback() != null) {
+        child.getUnhoverCallback()();
+      }
+
+      // Then emit the D-Bus unhover signal!
+      this._emitUnhoverSignal(this._menuID, child.id);
+
+      // Then call the activation callback!
+      child.getSelectionCallback()();
+
+      // Finally report the selection over the D-Bus.
+      this._emitSelectSignal(menuID, child.id);
+    }
   }
 };
