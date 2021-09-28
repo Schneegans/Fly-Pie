@@ -229,6 +229,8 @@ var Daemon = class Daemon {
     return this._openCustomMenu(json, true, this._lastMenuID);
   }
 
+  // This selects an item in the currently opened menu.
+  // See the README.md for a description of Fly-Pie's DBusInterface.
   SelectItem(path) {
     return this._menu.selectItem(path);
   }
