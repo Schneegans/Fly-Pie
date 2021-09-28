@@ -26,7 +26,10 @@ uninstall:
 
 all-po: $(LOCALES_PO)
 
-flypie@schneegans.github.com.zip: resources/flypie.gresource schemas/gschemas.compiled $(LOCALES_MO)
+flypie@schneegans.github.com.zip: schemas/gschemas.compiled $(LOCALES_MO)
+	@echo "Compiling resources..."
+	@glib-compile-resources --sourcedir="resources" --generate resources/flypie.gresource.xml
+
 	@# Check if the VERSION variable was passed and set version to it
 	@if [[ "$(VERSION)" != "" ]]; then \
 	  sed -i "s|  \"version\":.*|  \"version\": $(VERSION)|g" metadata.json; \
@@ -36,10 +39,6 @@ flypie@schneegans.github.com.zip: resources/flypie.gresource schemas/gschemas.co
 	@echo "Packing zip file..."
 	@rm --force flypie@schneegans.github.com.zip
 	@zip -r flypie@schneegans.github.com.zip -- src presets resources/flypie.gresource schemas/gschemas.compiled $(LOCALES_MO) *.js metadata.json LICENSE
-
-resources/flypie.gresource: resources/flypie.gresource.xml
-	@echo "Compiling resources..."
-	@glib-compile-resources --sourcedir="resources" --generate $<
 
 schemas/gschemas.compiled: schemas/org.gnome.shell.extensions.flypie.gschema.xml
 	@echo "Compiling schemas..."
