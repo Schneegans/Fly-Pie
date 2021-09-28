@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-24 21:44+0200\n"
-"PO-Revision-Date: 2021-09-27 23:00+0000\n"
+"PO-Revision-Date: 2021-09-28 18:06+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/fly-pie/core/fi/>"
 "\n"
@@ -425,7 +425,7 @@ msgstr "Animaatiotila"
 
 #: resources/ui/settings.ui:1864 resources/ui/settings.ui:2472
 msgid "Center Appearance"
-msgstr ""
+msgstr "Keskustan ulkoasu"
 
 #: resources/ui/settings.ui:1874
 msgid "The center element shows the currently hovered child's name."
@@ -499,7 +499,7 @@ msgstr "Taustakuva"
 
 #: resources/ui/settings.ui:2502 resources/ui/settings.ui:3222
 msgid "Children Appearance"
-msgstr ""
+msgstr "Jälkeläisen ulkoasu"
 
 #: resources/ui/settings.ui:2512
 msgid "Child items are styled differently when their wedge is hovered."
@@ -537,7 +537,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:3252 resources/ui/settings.ui:3612
 msgid "Grandchildren Appearance"
-msgstr ""
+msgstr "Alijälkeläisen ulkoasu"
 
 #: resources/ui/settings.ui:3262
 msgid ""
@@ -556,7 +556,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:3643 resources/ui/settings.ui:3885
 msgid "Wedge Appearance"
-msgstr ""
+msgstr "Kiilan ulkoasu"
 
 #: resources/ui/settings.ui:3653
 msgid "Clicking inside a wedge will activate the corresponding item."
@@ -596,7 +596,7 @@ msgstr ""
 
 #: resources/ui/settings.ui:3915 resources/ui/settings.ui:4021
 msgid "Trace Appearance"
-msgstr ""
+msgstr "Viivan ulkoasu"
 
 #: resources/ui/settings.ui:3925
 msgid "The trace is the connecting line between selected menu items."
@@ -1181,7 +1181,7 @@ msgstr "Sulje"
 #. opened'.
 #: src/extension/Background.js:101
 msgid "Flip Side"
-msgstr ""
+msgstr "Vaihda puolta"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:137
