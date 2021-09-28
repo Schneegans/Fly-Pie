@@ -34,6 +34,10 @@ var DBusInterface = {
             <arg name="description" type="s" direction="in"/>                            \
             <arg name="menuID"      type="i" direction="out"/>                           \
           </method>                                                                      \
+          <method name="SelectItem">                                                     \
+            <arg name="path"    type="s" direction="in"/>                                \
+            <arg name="result"  type="i" direction="out"/>                               \
+          </method>                                                                      \
           <signal name="OnHover">                                                        \
               <arg name="menuID" type="i"/>                                              \
               <arg name="itemID" type="s"/>                                              \
@@ -61,6 +65,8 @@ var DBusInterface = {
     eInvalidMenuConfiguration: -3,
     eInvalidAngles: -4,
     eNoSuchMenu: -5,
+    eNoActiveMenu: -6,
+    eInvalidPath: -7,
   },
 
   // This can be used to translate an error code to a human-readable message.
@@ -74,6 +80,10 @@ var DBusInterface = {
         return 'The angles of the children did not follow the rules.';
       case -5:
         return 'No menu with this name exists.';
+      case -6:
+        return 'There is currently no menu open.';
+      case -7:
+        return 'No menu item with this path exists.';
       default:
         return 'An unknown error occurred.';
     }

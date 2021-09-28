@@ -17,18 +17,18 @@ gdbus introspect --session --dest org.gnome.Shell \
 ## Opening Menus Configured with the Menu Editor
 
 Use the following command to open a menu you configured with the Fly-Pie's Menu Editor.
-You just have to replace the only parameter `My Menu` with the name of your desired menu!
+You just have to replace the only parameter `Main Menu` with the name of your desired menu!
 
 ```bash
 gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie \
-           --method org.gnome.Shell.Extensions.flypie.ShowMenu 'My Menu'
+           --method org.gnome.Shell.Extensions.flypie.ShowMenu 'Main Menu'
 ```
 
 There is also a similar method called `PreviewMenu` which will open the given menu in preview mode.
 
 ```bash
 gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie \
-           --method org.gnome.Shell.Extensions.flypie.PreviewMenu 'My Menu'
+           --method org.gnome.Shell.Extensions.flypie.PreviewMenu 'Main Menu'
 ```
 
 ## Opening Custom Menus via JSON
@@ -173,6 +173,41 @@ You can use the following command to monitor the emitted signals:
 ```bash
 gdbus monitor --session --dest org.gnome.Shell \
               --object-path /org/gnome/shell/extensions/flypie
+```
+
+## Selecting Items via D-Bus
+
+There is also a `SelectItem` method exposed, which you can use to select an item in a currently opened menu.
+As a parameter, this method expects a /-delimited path to the menu item where each element of the path is the to-be-selected item's index.
+For instance, you can open a menu in preview mode like this:
+
+```bash
+gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie \
+           --method org.gnome.Shell.Extensions.flypie.PreviewMenu 'Main Menu'
+```
+
+Once this is visible, you can select the first item (usually at the top) with the following command:
+
+```bash
+gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie \
+           --method org.gnome.Shell.Extensions.flypie.SelectItem '/0'
+```
+
+The path `/` selects the root item, `/0/1` would select the second child of the first child of the root item.
+
+
+## Preselecting Items via D-Bus
+
+You can use the `SelectItem` right after a menu is shown to preselect this item.
+The following command will open the top item of the `"Main Menu"` selected and centered at the pointer.
+This will only work if your `"Main Menu"` has custom menu at the top position!
+Else it will be executed right away...
+
+```bash
+gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie \
+           --method org.gnome.Shell.Extensions.flypie.ShowMenu 'Main Menu' &&                \
+gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie \
+           --method org.gnome.Shell.Extensions.flypie.SelectItem '/0'
 ```
 
 <p align="center"><img src ="pics/hr.svg" /></p>
