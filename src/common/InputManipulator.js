@@ -34,23 +34,13 @@ var InputManipulator = class InputManipulator {
       this._mouse    = dev.create_virtual_device(Clutter.InputDeviceType.POINTER_DEVICE);
       this._keyboard = dev.create_virtual_device(Clutter.InputDeviceType.KEYBOARD_DEVICE);
     }
-
-    // We store the modifier button's keyvals for later access.
-    this._shiftL = Gdk.keyval_from_name('Shift_L');
-    this._shiftR = Gdk.keyval_from_name('Shift_R');
-    this._ctrlL  = Gdk.keyval_from_name('Control_L');
-    this._ctrlR  = Gdk.keyval_from_name('Control_R');
-    this._altL   = Gdk.keyval_from_name('Alt_L');
-    this._altR   = Gdk.keyval_from_name('Alt_R');
-    this._superL = Gdk.keyval_from_name('Super_L');
-    this._superR = Gdk.keyval_from_name('Super_R');
   }
 
   // -------------------------------------------------------------------- public interface
 
   // Warps the mouse pointer to the specified position.
   warpPointer(x, y) {
-    this._mouse.notify_absolute_motion(global.get_current_time(), x, y);
+    this._mouse.notify_absolute_motion(0, x, y);
   }
 
   // Simulates the activation of a given accelerator. The string can be anything accepted
@@ -64,10 +54,8 @@ var InputManipulator = class InputManipulator {
     // Now parse the string and press the buttons accordingly.
     const [keyval, mods] = Gtk.accelerator_parse(string);
     this._pressModifiers(mods);
-    this._keyboard.notify_keyval(
-        global.get_current_time(), keyval, Clutter.KeyState.PRESSED);
-    this._keyboard.notify_keyval(
-        global.get_current_time(), keyval, Clutter.KeyState.RELEASED);
+    this._keyboard.notify_keyval(0, keyval, Clutter.KeyState.PRESSED);
+    this._keyboard.notify_keyval(0, keyval, Clutter.KeyState.RELEASED);
     this._releaseModifiers(mods);
 
     // Finally we re-press the modifiers which were pressed before.
@@ -78,49 +66,46 @@ var InputManipulator = class InputManipulator {
 
   // Helper method which 'releases' the desired modifier keys.
   _releaseModifiers(modifiers) {
-    const state = Clutter.KeyState.RELEASED;
 
     // Since we do not know whether left or right version of each key is pressed, we
     // release both...
     if (modifiers & Gdk.ModifierType.CONTROL_MASK) {
-      this._keyboard.notify_keyval(global.get_current_time(), this._ctrlL, state);
-      this._keyboard.notify_keyval(global.get_current_time(), this._ctrlR, state);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Control_L, Clutter.KeyState.RELEASED);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Control_R, Clutter.KeyState.RELEASED);
     }
 
     if (modifiers & Gdk.ModifierType.SHIFT_MASK) {
-      this._keyboard.notify_keyval(global.get_current_time(), this._shiftL, state);
-      this._keyboard.notify_keyval(global.get_current_time(), this._shiftR, state);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Shift_L, Clutter.KeyState.RELEASED);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Shift_R, Clutter.KeyState.RELEASED);
     }
 
     if (modifiers & Gdk.ModifierType.MOD1_MASK) {
-      this._keyboard.notify_keyval(global.get_current_time(), this._altL, state);
-      this._keyboard.notify_keyval(global.get_current_time(), this._altR, state);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Alt_L, Clutter.KeyState.RELEASED);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Alt_R, Clutter.KeyState.RELEASED);
     }
 
     if (modifiers & Gdk.ModifierType.SUPER_MASK) {
-      this._keyboard.notify_keyval(global.get_current_time(), this._superL, state);
-      this._keyboard.notify_keyval(global.get_current_time(), this._superR, state);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Super_L, Clutter.KeyState.RELEASED);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Super_R, Clutter.KeyState.RELEASED);
     }
   }
 
   // Helper method which 'presses' the desired modifier keys.
   _pressModifiers(modifiers) {
-    const state = Clutter.KeyState.PRESSED;
-
     if (modifiers & Gdk.ModifierType.CONTROL_MASK) {
-      this._keyboard.notify_keyval(global.get_current_time(), this._ctrlL, state);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Control_L, Clutter.KeyState.PRESSED);
     }
 
     if (modifiers & Gdk.ModifierType.SHIFT_MASK) {
-      this._keyboard.notify_keyval(global.get_current_time(), this._shiftL, state);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Shift_L, Clutter.KeyState.PRESSED);
     }
 
     if (modifiers & Gdk.ModifierType.MOD1_MASK) {
-      this._keyboard.notify_keyval(global.get_current_time(), this._altL, state);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Alt_L, Clutter.KeyState.PRESSED);
     }
 
     if (modifiers & Gdk.ModifierType.SUPER_MASK) {
-      this._keyboard.notify_keyval(global.get_current_time(), this._superL, state);
+      this._keyboard.notify_keyval(0, Clutter.KEY_Super_L, Clutter.KeyState.PRESSED);
     }
   }
 };
