@@ -319,8 +319,11 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
           onSelect('');
           cancelGrab();
 
-        } else if (Gtk.accelerator_valid(keyval, mods)) {
-          // Else, if a valid accelerator was pressed, we store it.
+        } else if (
+            Gtk.accelerator_valid(keyval, mods) || keyval == Gdk.KEY_Tab ||
+            keyval == Gdk.KEY_ISO_Left_Tab || keyval == Gdk.KEY_KP_Tab) {
+          // Else, if a valid accelerator was pressed, we store it. The tab key is for
+          // some reason not considered to be a valid key for accelerators.
           const accelerator = Gtk.accelerator_name(keyval, mods);
           onSelect(accelerator);
           label.set_accelerator(accelerator);
