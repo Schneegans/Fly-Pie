@@ -7,7 +7,7 @@ LOCALES_PO = $(wildcard po/*.po)
 LOCALES_MO = $(patsubst po/%.po,locale/%/LC_MESSAGES/flypie.mo,$(LOCALES_PO))
 
 
-.PHONY: build release install uninstall all-po clean
+.PHONY: build release install uninstall all-po pot clean
 
 build: flypie@schneegans.github.com.zip
 
@@ -44,18 +44,18 @@ schemas/gschemas.compiled: schemas/org.gnome.shell.extensions.flypie.gschema.xml
 	@echo "Compiling schemas..."
 	@glib-compile-schemas schemas
 
-locale/%/LC_MESSAGES/flypie.mo: po/%.po po/flypie.pot
+locale/%/LC_MESSAGES/flypie.mo: po/%.po
 	@echo "Compiling $@"
 	@mkdir -p locale/$*/LC_MESSAGES
 	@msgfmt -c -o $@ $<
 
-po/%.po : po/flypie.pot
+po/%.po:
 	@echo "Updating $@"
-	msgmerge --previous --update $@ $<
+	msgmerge --previous --update $@ po/flypie.pot
 	@# Output translation progress
 	@msgfmt --check --verbose --output-file=/dev/null $@
 
-po/flypie.pot: $(JS_FILES) $(UI_FILES)
+pot: $(JS_FILES) $(UI_FILES)
 	@echo "Generating 'flypie.pot'..."
 	@xgettext --from-code=UTF-8 \
         	  --add-comments=Translators \
