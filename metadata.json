@@ -5,6 +5,8 @@
     "gettext-domain": "flypie",
     "settings-schema": "org.gnome.shell.extensions.flypie",
     "shell-version": [
+        "3.36",
+        "3.38",
         "40",
         "41"
     ],
