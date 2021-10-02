@@ -26,6 +26,30 @@ uninstall:
 
 all-po: $(LOCALES_PO)
 
+pot: $(JS_FILES) $(UI_FILES)
+	@echo "Generating 'flypie.pot'..."
+	@xgettext --from-code=UTF-8 \
+        	  --add-comments=Translators \
+        	  --copyright-holder="Simon Schneegans" \
+        	  --package-name="Fly-Pie" \
+        	  --output=po/flypie.pot \
+        	  $(JS_FILES) $(UI_FILES)
+	@sed -i '1s/.*/# <LANGUAGE> translation for the Fly-Pie GNOME Shell Extension./' po/flypie.pot
+	@sed -i "2s/.*/# Copyright (C) $$(date +%Y) Simon Schneegans/" po/flypie.pot
+	@sed -i "4s/.*/# <FIRSTNAME LASTNAME <EMAIL@ADDRESS>, $$(date +%Y)./" po/flypie.pot
+	@sed -i '12s/.*/"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\\n"/' po/flypie.pot
+	@sed -i '14s/.*/"Language-Team: \\n"/' po/flypie.pot
+	@sed -i '15s/.*/"Language: <LANGUAGE_CODE>\\n"/' po/flypie.pot
+
+clean:
+	rm -rf \
+	flypie@schneegans.github.com.zip \
+	resources/flypie.gresource \
+	schemas/gschemas.compiled \
+	locale \
+	ui/*.ui~ \
+	po/*.po~
+
 flypie@schneegans.github.com.zip: schemas/gschemas.compiled $(LOCALES_MO)
 	@echo "Compiling resources..."
 	@glib-compile-resources --sourcedir="resources" --generate resources/flypie.gresource.xml
@@ -54,27 +78,3 @@ po/%.po:
 	msgmerge --previous --update $@ po/flypie.pot
 	@# Output translation progress
 	@msgfmt --check --verbose --output-file=/dev/null $@
-
-pot: $(JS_FILES) $(UI_FILES)
-	@echo "Generating 'flypie.pot'..."
-	@xgettext --from-code=UTF-8 \
-        	  --add-comments=Translators \
-        	  --copyright-holder="Simon Schneegans" \
-        	  --package-name="Fly-Pie" \
-        	  --output=po/flypie.pot \
-        	  $(JS_FILES) $(UI_FILES)
-	@sed -i '1s/.*/# <LANGUAGE> translation for the Fly-Pie GNOME Shell Extension./' po/flypie.pot
-	@sed -i "2s/.*/# Copyright (C) $$(date +%Y) Simon Schneegans/" po/flypie.pot
-	@sed -i "4s/.*/# <FIRSTNAME LASTNAME <EMAIL@ADDRESS>, $$(date +%Y)./" po/flypie.pot
-	@sed -i '12s/.*/"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\\n"/' po/flypie.pot
-	@sed -i '14s/.*/"Language-Team: \\n"/' po/flypie.pot
-	@sed -i '15s/.*/"Language: <LANGUAGE_CODE>\\n"/' po/flypie.pot
-
-clean:
-	rm -rf \
-	flypie@schneegans.github.com.zip \
-	resources/flypie.gresource \
-	schemas/gschemas.compiled \
-	locale \
-	ui/*.ui~ \
-	po/*.po~
