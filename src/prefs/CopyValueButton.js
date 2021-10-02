@@ -21,7 +21,7 @@ function registerWidget() {
     // clang-format off
       GObject.registerClass({
         GTypeName: 'FlyPieCopyValueButton',
-        Template: 'resource:///ui/copyValueButton.ui',
+        Template: 'resource:///ui/gtk4/copyValueButton.ui',
       }, class FlyPieCopyValueButton extends Gtk.Button {});
     // clang-format on
   }

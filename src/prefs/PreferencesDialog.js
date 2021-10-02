@@ -54,7 +54,7 @@ var PreferencesDialog = class PreferencesDialog {
 
     // Load the user interface file.
     this._builder = new Gtk.Builder();
-    this._builder.add_from_resource('/ui/settings.ui');
+    this._builder.add_from_resource('/ui/gtk4/settings.ui');
 
     // Load the CSS file for the settings dialog.
     const styleProvider = Gtk.CssProvider.new();

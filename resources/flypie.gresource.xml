@@ -50,10 +50,10 @@
     <file>img/tutorial/bronze.png</file>
     <file>img/tutorial/gold.png</file>
     <file>img/tutorial/silver.png</file>
-    <file>ui/copyValueButton.ui</file>
-    <file>ui/iconSelectDialog.ui</file>
-    <file>ui/imageChooserButton.ui</file>
-    <file>ui/settings.ui</file>
+    <file>ui/gtk4/copyValueButton.ui</file>
+    <file>ui/gtk4/iconSelectDialog.ui</file>
+    <file>ui/gtk4/imageChooserButton.ui</file>
+    <file>ui/gtk4/settings.ui</file>
     <file>video/video1.webm</file>
     <file>video/video2.webm</file>
   </gresource>
