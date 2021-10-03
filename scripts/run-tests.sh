@@ -24,7 +24,7 @@ cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
   { echo "ERROR: Could not find the repo root."; exit 1; }
 
 # First compile the extension.
-scripts/create-release.sh -s
+make release
 
 # Run the container in detached mode.
 podman pull ghcr.io/schneegans/gnome-shell:"$VERSION"
