@@ -43,6 +43,7 @@ Execute the clone command below where you want to have the source code of Fly-Pi
 
 ```bash
 git clone https://github.com/Schneegans/Fly-Pie.git
+cd Fly-Pie
 ```
 
 Now you will have to install the extension.
