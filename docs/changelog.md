@@ -14,6 +14,7 @@
 
 #### Other Enhancements
 
+* Fly-Pie now uses a `Makefile` for building the extension instead of a bunch of custom scripts. Thank you, [@daPhipz](https://github.com/daPhipz)!
 * New Translations!
   * ...
 
