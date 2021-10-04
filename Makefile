@@ -50,7 +50,7 @@ clean:
 	ui/*.ui~ \
 	po/*.po~
 
-flypie@schneegans.github.com.zip: schemas/gschemas.compiled $(JS_FILES) $(LOCALES_MO)
+flypie@schneegans.github.com.zip: schemas/gschemas.compiled resources/flypie.gresource.xml $(JS_FILES) $(LOCALES_MO)
 	@echo "Compiling resources..."
 	@glib-compile-resources --sourcedir="resources" --generate resources/flypie.gresource.xml
 
