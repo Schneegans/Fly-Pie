@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-24 21:44+0200\n"
-"PO-Revision-Date: 2021-09-27 23:00+0000\n"
-"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"PO-Revision-Date: 2021-10-04 17:35+0000\n"
+"Last-Translator: Daimar Stein <570cxat11@relay.firefox.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "fly-pie/core/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -28,11 +28,11 @@ msgstr "Copiar o valor esquerdo para o lado direito"
 #: src/prefs/MenuEditorPage.js:180 src/prefs/MenuEditorPage.js:245
 #: src/prefs/SettingsPage.js:271 src/prefs/SettingsPage.js:322
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: resources/ui/iconSelectDialog.ui:19
 msgid "Select Icon"
-msgstr ""
+msgstr "Selecionar Ícone"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/iconSelectDialog.ui:44
@@ -46,7 +46,7 @@ msgstr "Ícone Personalizado"
 
 #: resources/ui/imageChooserButton.ui:16 src/prefs/ImageChooserButton.js:88
 msgid "(None)"
-msgstr ""
+msgstr "(Nenhuma)"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:19
@@ -338,6 +338,13 @@ msgid ""
 "gesture of straight parts. <b>Do not draw curvy paths but rather expressive "
 "zig-zag-lines!</b>"
 msgstr ""
+"Tente lembrar-se do caminho para um item. Abra o menu e <b> desenhe o "
+"caminho com o seu mouse </b>. Você pode começar com segmentos individuais do "
+"caminho, mas você também pode tentar desenhar o caminho inteiro!\n"
+"\n"
+"Você pode achá-lo mais intuitivo se você tentar explicitamente criar seu "
+"gesto com partes retas. <b>Não desenhe caminhos curvados, mas sim linhas em "
+"zig-zag expressivas!</b>"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1296
