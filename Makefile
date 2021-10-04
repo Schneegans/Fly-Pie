@@ -29,11 +29,11 @@ all-po: $(LOCALES_PO)
 pot: $(JS_FILES) $(UI_FILES)
 	@echo "Generating 'flypie.pot'..."
 	@xgettext --from-code=UTF-8 \
-        	  --add-comments=Translators \
-        	  --copyright-holder="Simon Schneegans" \
-        	  --package-name="Fly-Pie" \
-        	  --output=po/flypie.pot \
-        	  $(JS_FILES) $(UI_FILES)
+			  --add-comments=Translators \
+			  --copyright-holder="Simon Schneegans" \
+			  --package-name="Fly-Pie" \
+			  --output=po/flypie.pot \
+			  $(JS_FILES) $(UI_FILES)
 	@sed -i '1s/.*/# <LANGUAGE> translation for the Fly-Pie GNOME Shell Extension./' po/flypie.pot
 	@sed -i "2s/.*/# Copyright (C) $$(date +%Y) Simon Schneegans/" po/flypie.pot
 	@sed -i "4s/.*/# <FIRSTNAME LASTNAME <EMAIL@ADDRESS>, $$(date +%Y)./" po/flypie.pot
