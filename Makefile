@@ -2,6 +2,7 @@ SHELL := /bin/bash
 
 JS_FILES = $(shell find -type f -and \( -name "*.js" \))
 UI_FILES = $(shell find -type f -and \( -name "*.ui" \))
+RESOURCE_FILES = $(shell find resources -mindepth 2 -type f)
 
 LOCALES_PO = $(wildcard po/*.po)
 LOCALES_MO = $(patsubst po/%.po,locale/%/LC_MESSAGES/flypie.mo,$(LOCALES_PO))
@@ -50,10 +51,7 @@ clean:
 	ui/*.ui~ \
 	po/*.po~
 
-flypie@schneegans.github.com.zip: schemas/gschemas.compiled resources/flypie.gresource.xml $(JS_FILES) $(LOCALES_MO)
-	@echo "Compiling resources..."
-	@glib-compile-resources --sourcedir="resources" --generate resources/flypie.gresource.xml
-
+flypie@schneegans.github.com.zip: schemas/gschemas.compiled resources/flypie.gresource $(JS_FILES) $(LOCALES_MO)
 	@# Check if the VERSION variable was passed and set version to it
 	@if [[ "$(VERSION)" != "" ]]; then \
 	  sed -i "s|  \"version\":.*|  \"version\": $(VERSION)|g" metadata.json; \
@@ -63,6 +61,10 @@ flypie@schneegans.github.com.zip: schemas/gschemas.compiled resources/flypie.gre
 	@echo "Packing zip file..."
 	@rm --force flypie@schneegans.github.com.zip
 	@zip -r flypie@schneegans.github.com.zip -- src presets resources/flypie.gresource schemas/gschemas.compiled $(LOCALES_MO) *.js metadata.json LICENSE
+
+resources/flypie.gresource: resources/flypie.gresource.xml $(RESOURCE_FILES)
+	@echo "Compiling resources..."
+	@glib-compile-resources --sourcedir="resources" --generate resources/flypie.gresource.xml
 
 schemas/gschemas.compiled: schemas/org.gnome.shell.extensions.flypie.gschema.xml
 	@echo "Compiling schemas..."
