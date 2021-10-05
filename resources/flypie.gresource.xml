@@ -53,6 +53,10 @@
     <file>img/tutorial/bronze.png</file>
     <file>img/tutorial/gold.png</file>
     <file>img/tutorial/silver.png</file>
+    <file>ui/gtk3/copyValueButton.ui</file>
+    <file>ui/gtk3/iconSelectDialog.ui</file>
+    <file>ui/gtk3/imageChooserButton.ui</file>
+    <file>ui/gtk3/settings.ui</file>
     <file>ui/gtk4/copyValueButton.ui</file>
     <file>ui/gtk4/iconSelectDialog.ui</file>
     <file>ui/gtk4/imageChooserButton.ui</file>

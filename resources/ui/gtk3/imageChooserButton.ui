@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface domain="flypie">
+  <requires lib="gtk" version="4.0" />
+
+  <template class="FlyPieImageChooserButton" parent="GtkBox">
+    <child>
+      <object class="GtkButton" id="button">
+        <property name="child">
+          <object class="GtkBox">
+            <property name="spacing">8</property>
+            <child>
+              <object class="GtkLabel" id="label">
+                <property name="hexpand">1</property>
+                <property name="halign">start</property>
+                <property name="ellipsize">middle</property>
+                <property name="label" translatable="yes">(None)</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="icon_name">document-open-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="resetButton">
+        <property name="icon-name">edit-clear-all-symbolic</property>
+      </object>
+    </child>
+    <style>
+      <class name="linked" />
+    </style>
+  </template>
+</interface>
