@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource>
+    <file>credits/contributors.json</file>
+    <file>credits/sponsors.json</file>
+    <file>credits/translators.json</file>
     <file>css/flypie.css</file>
     <file>img/achievements/award0.svg</file>
     <file>img/achievements/award1.svg</file>
