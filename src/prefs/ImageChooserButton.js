@@ -24,7 +24,7 @@ function registerWidget() {
     // clang-format off
       GObject.registerClass({
         GTypeName: 'FlyPieImageChooserButton',
-        Template: 'resource:///ui/imageChooserButton.ui',
+        Template: 'resource:///ui/gtk4/imageChooserButton.ui',
         InternalChildren: ['button', 'label', 'resetButton'],
         Signals: {
           'file-set': {}

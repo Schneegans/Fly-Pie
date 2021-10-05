@@ -4,12 +4,11 @@
 
 <img align="right" width="350px" src ="pics/achievements.jpg" />
 
-A great way to contribute to Fly-Pie is creating a translation to another language! There are two ways, you can either use the [Weblate](https://hosted.weblate.org/engage/fly-pie/) online translation tool or standard offline tools such as [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
+A great way to contribute to Fly-Pie is creating a translation to another language! 
 
-### General Remarks
-
-While there are explanations for many source strings available, some may be still quite unclear.
-Please open an issue on GitHub indicating which strings are not clear to you and we will add more explanations!
+Just head over to [Weblate](https://hosted.weblate.org/engage/fly-pie/) and start a new translation or update an existing one.
+If you are logged in, you can directly edit the translations.
+If you are not logged in, you can make suggestions for improving existing translations.
 
 An especially challenging part for translations are the **achievements**.
 Most achievements have five tiers.
@@ -20,11 +19,6 @@ The image on the right illustrates this.
 
 <p style="clear:both"></p>
 
-## Translating Using Weblate (recommended)
-
-Just head over to [Weblate](https://hosted.weblate.org/engage/fly-pie/) and start a new translation or update an existing one.
-If you are logged in, you can directly edit the translations.
-If you are not logged in, you can make suggestions for improving existing translations.
 
 ### Testing Your Translation
 
@@ -33,36 +27,56 @@ To do this, you should clone the [Weblate fork of Fly-Pie](https://github.com/we
 
 ```bash
 git clone https://github.com/weblate/Fly-Pie.git
-./Fly-Pie/scripts/create-release.sh -i
+cd Fly-Pie
+make install
 ```
+
 Then, restart GNOME Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
 Or logout / login if you are on Wayland.
 If all strings you translated are looking good, you're done!
 A pull request including your changes will be created automatically.
 
+<!-- Commented out until this works properly
+
 ## Translating Using Offline Tools
 
 If you do not want to use Weblate, you can also contribute to the translations of Fly-Pie using standard offline tools.
-First you should [fork the Fly-Pie repository](https://github.com/schneegans/fly-pie/fork) and clone the latest `develop` branch from your fork. You can then install the extension by executing `scripts/create-release.sh -i`. Then restart GNOME Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
+First you should [fork the Fly-Pie repository](https://github.com/schneegans/fly-pie/fork) and clone the latest `develop` branch from your fork.
+You can then install the extension by executing
+
+```bash
+make install
+```
+
+Then restart GNOME Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
 Or logout / login if you are on Wayland.
+
+### Start a translation to a new language
+
+If you want to contribute a translation to a completely new language, this is best done via Weblate (see above).
+Direct PRs to add a new translation to the Fly-Pie project are also supported.
+However, automatic creation of a completely new `po` file with `make` is in the works, but not yet implemented.
+
+
+There are two ways, you can either use the [Weblate](https://hosted.weblate.org/engage/fly-pie/) online translation tool or standard offline tools such as [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
 
 * You can then start your contribution with the following command:
 
   ```bash
-  scripts/update-po.sh -l <LANG-CODE> # <LANG-CODE>` is the language code for the
-                                      # translation (`de` for German, `it` for Italian etc.)
+  make po/XX.po   # XX is the language code for the translation
+                  # (`de` for German, `it` for Italian etc.)
   ```
 
-* In case you are the first translator to a language, this script will create a `po/<LANG-CODE>.po` file for you.
-Otherwise, it pulls the latest strings and merges them into the existing translation file.
+* In case you are the first translator to a language, this `make` command will create the `po/XX.po` file for you.
+Otherwise, it pulls the latest strings from `po/flypie.pot` and merges them into the existing translation file for your language.
 
-* Now open the file and start translating! We suggest using a tool like
+* Now open this file and start translating! We suggest using a tool like
 [Poedit](https://poedit.net/) or the [GNOME Translation Editor](https://wiki.gnome.org/Apps/Gtranslator).
 
 * Once you are happy to test your translation, install the extension with your updated translations:
 
   ```bash
-  scripts/create-release.sh -i
+  make install
   ```
 
   Then, restart GNOME Shell with <kbd>Alt</kbd> + <kbd>F2</kbd>, <kbd>r</kbd> + <kbd>Enter</kbd>.
@@ -79,7 +93,7 @@ to the URL to auto-populate the body of your pull request with the template.
 
 Please refer to [contributing.md](contributing.md) for further contribution guidelines.
 
-
+-->
 
 <p align="center"><img src ="pics/hr.svg" /></p>
 

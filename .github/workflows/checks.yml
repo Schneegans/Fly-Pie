@@ -68,32 +68,6 @@ jobs:
         run: |
           find $GITHUB_WORKSPACE -type f -and \( -name "*.sh" \) | xargs shellcheck
 
-  script_functionality:
-    name: Check Script Functionality
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Check error conditions # Currently, gettext is not installed. Both if statements should be false.
-      run: |
-        if $GITHUB_WORKSPACE/scripts/compile-locales.sh; then
-          if $GITHUB_WORKSPACE/scripts/update-po.sh; then
-            if $GITHUB_WORKSPACE/scripts/update-pot.sh; then
-              exit 1
-            fi
-          fi
-        fi
-    - name: Check correct workflow # Now, gettext will be installed and both INVERTED if statements should be false.
-      run: |
-        sudo apt update -qq
-        sudo apt install gettext -qq
-        if ! $GITHUB_WORKSPACE/scripts/compile-locales.sh; then
-          if ! $GITHUB_WORKSPACE/scripts/update-po.sh; then
-            if ! $GITHUB_WORKSPACE/scripts/update-pot.sh; then
-              exit 1
-            fi
-          fi
-        fi
-
   build:
     name: Run Tests
     runs-on: ubuntu-latest

@@ -23,7 +23,7 @@ function registerWidget() {
     // clang-format off
       GObject.registerClass({
         GTypeName: 'FlyPieIconSelectDialog',
-        Template: 'resource:///ui/iconSelectDialog.ui',
+        Template: 'resource:///ui/gtk4/iconSelectDialog.ui',
         InternalChildren: ["stack", "iconFileChooser", "iconList", "iconView",
                           "spinner", "iconListFiltered", "filterEntry"],
         Signals: {

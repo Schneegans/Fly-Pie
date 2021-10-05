@@ -24,7 +24,7 @@ When a new version of Fly-Pie is released, the following steps are performed.
    ```
 2. First the translation template is updated:
    ```bash
-   ./scripts/update-pot.sh
+   make pot
    git add po/flypie.pot
    git commit -m ":globe_with_meridians: Update translation template"
    ```

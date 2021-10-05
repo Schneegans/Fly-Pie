@@ -4,6 +4,24 @@
 
 # Changelog of Fly-Pie
 
+## [Fly-Pie 8](https://github.com/schneegans/fly-pie/releases/tag/v8)
+
+**Release Date:** TBD
+
+#### New Features
+
+* The D-Bus API of Fly-Pie now includes a `SelectItem()` method which can be used to select an item of a currently opened menu programmatically. For example, this can be useful if you want to directly open a submenu. This is now also used by the live preview of the menu editor: If you click the preview button while you're inside a submenu, this submenu will be directly opened in the preview! 
+
+#### Other Enhancements
+
+* Fly-Pie now uses a `Makefile` for building the extension instead of a bunch of custom scripts. Thank you, [@daPhipz](https://github.com/daPhipz)!
+* New Translations!
+  * ...
+
+#### Bug Fixes
+
+* The <kbd>Tab</kbd> can now be used properly for opening menus.
+
 ## [Fly-Pie 7](https://github.com/schneegans/fly-pie/releases/tag/v7)
 
 **Release Date:** 2021-09-25

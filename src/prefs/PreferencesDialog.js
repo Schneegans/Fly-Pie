@@ -9,6 +9,7 @@
 'use strict';
 
 const {GObject, GLib, Gtk, Gio, Gdk} = imports.gi;
+const ByteArray                      = imports.byteArray;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -54,7 +55,7 @@ var PreferencesDialog = class PreferencesDialog {
 
     // Load the user interface file.
     this._builder = new Gtk.Builder();
-    this._builder.add_from_resource('/ui/settings.ui');
+    this._builder.add_from_resource('/ui/gtk4/settings.ui');
 
     // Load the CSS file for the settings dialog.
     const styleProvider = Gtk.CssProvider.new();
@@ -87,6 +88,62 @@ var PreferencesDialog = class PreferencesDialog {
         Statistics.getInstance().addSponsorsViewed();
       }
     });
+
+    // Now add all contributors to the about-popover.
+    {
+
+      // This lambda adds a list of contributors to the given label.
+      const addContributors = (labelID, contributors) => {
+        // Do not touch the label if nothing needs to be done. This ensures that any
+        // default state (like "- none -") is kept.
+        if (Object.keys(contributors).length == 0) {
+          return;
+        }
+
+        // Clear the label first.
+        const label   = this._builder.get_object(labelID);
+        label.label   = '';
+        label.opacity = 1;
+
+        // Then add a new line for each contributor.
+        for (const [contributor, link] of Object.entries(contributors)) {
+          if (link != '') {
+            label.label += `<a href='${link}'>${contributor}</a>\n`;
+          } else {
+            label.label += `${contributor}\n`;
+          }
+        }
+
+        // Remove the last newline.
+        label.label = label.label.slice(0, label.label.length - 1);
+      };
+
+      // Add all contributors to the credits-page of the about-popover.
+      const contributors = this._getJSONResource('/credits/contributors.json');
+      addContributors('credits-created-by', contributors.code);
+      addContributors('credits-artwork-by', contributors.artwork);
+
+      // The JSON report format from weblate is a bit weird. Here we extract all unique
+      // names from the translation report.
+      const data        = this._getJSONResource('/credits/translators.json');
+      const translators = {};
+      data.forEach(i => {
+        for (const j of Object.values(i)) {
+          j.forEach(k => {
+            translators[k[1]] = '';
+          });
+        }
+      });
+
+      addContributors('credits-translated-by', translators);
+
+      // Add all sponsors to the sponsors page of the about-popover.
+      const sponsors = this._getJSONResource('/credits/sponsors.json');
+      addContributors('credits-gold-sponsors', sponsors.gold);
+      addContributors('credits-silver-sponsors', sponsors.silver);
+      addContributors('credits-bronze-sponsors', sponsors.bronze);
+      addContributors('credits-past-sponsors', sponsors.past);
+    }
 
     // Hide the in-app notification when its close button is pressed.
     this._builder.get_object('notification-close-button').connect('clicked', () => {
@@ -168,5 +225,15 @@ var PreferencesDialog = class PreferencesDialog {
   // Returns the widget used for the settings of this extension.
   getWidget() {
     return this._widget;
+  }
+
+  // ----------------------------------------------------------------------- private stuff
+
+  // Reads the contents of a JSON file contained in the global resources archive. The data
+  // is parsed and returned as a JavaScript object / array.
+  _getJSONResource(path) {
+    const data   = Gio.resources_lookup_data(path, 0);
+    const string = ByteArray.toString(ByteArray.fromGBytes(data));
+    return JSON.parse(string);
   }
 }

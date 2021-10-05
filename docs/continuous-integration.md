@@ -18,12 +18,11 @@ This executes several checks whenever a commit is pushed or a pull request is op
   The percentage of source lines of code containing comments is calculated with the script [`cloc.sh`](../scripts/cloc.sh) and compared with the amount of comments in the base branch.
   This test will pass if the amount of comments did not decrease.
 * **ShellCheck:** At each push event, all shell scripts are checked with ShellCheck.
-* **Script Functionality:** Some scripts are tested whether they correctly return errors if some software is not installed.
 * **Run Tests:** This checks whether the release archive can be created successfully. 
   It also checks whether the resulting archive is not too large to be uploaded to extensions.gnome.org. Then, several containers are booted (using [gnome-shell-pod](https://github.com/Schneegans/gnome-shell-pod)) to test Fly-Pie on various GNOME Shell versions.
 
 ## [`deploy.yml`](../.github/workflows/deploy.yml) 
-This runs the [`create_release.sh`](../scripts/create-release.sh) script whenever a tag is pushed.
+This runs `make release` whenever a tag is pushed.
 The resulting `flypie@schneegans.github.com.zip` is uploaded to an automatically created release.
 
 ## [`badges.yml`](../.github/workflows/badges.yml) 

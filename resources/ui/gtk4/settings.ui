@@ -67,7 +67,6 @@
       <column type="gchararray" />
     </columns>
   </object>
-  <object class="GtkListStore" id="achievements-list" />
   <object class="GtkAdjustment" id="center-auto-color-luminance">
     <property name="upper">1</property>
     <property name="step_increment">0.01</property>
@@ -317,11 +316,6 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkAdjustment" id="item-count">
-    <property name="upper">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
   <object class="GtkAdjustment" id="trace-min-length">
     <property name="lower">100</property>
     <property name="upper">500</property>
@@ -460,12 +454,10 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                           </object>
                         </child>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkLabel" id="credits-created-by">
                             <property name="halign">start</property>
                             <property name="valign">end</property>
                             <property name="margin_top">8</property>
-                            <property name="label">&lt;a href=&quot;https://github.com/Schneegans&quot;&gt;@Schneegans&lt;/a&gt;
-&lt;a href=&quot;https://github.com/daPhipz&quot;&gt;@daPhipz&lt;/a&gt;</property>
                             <property name="use_markup">1</property>
                             <layout>
                               <property name="column">1</property>
@@ -486,15 +478,10 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                           </object>
                         </child>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkLabel" id="credits-translated-by">
                             <property name="halign">start</property>
                             <property name="valign">end</property>
                             <property name="margin_top">8</property>
-                            <property name="label">&lt;a href=&quot;https://github.com/Schneegans&quot;&gt;@Schneegans&lt;/a&gt; (de)
-&lt;a href=&quot;https://github.com/daPhipz&quot;&gt;@daPhipz&lt;/a&gt; (de)
-&lt;a href=&quot;https://github.com/albanobattistella&quot;&gt;@albanobattistella&lt;/a&gt; (it)
-&lt;a href=&quot;https://github.com/comradekingu&quot;&gt;@comradekingu&lt;/a&gt; (nb-NO)
-&lt;a href=&quot;https://github.com/Vistaus&quot;&gt;@Vistaus&lt;/a&gt; (nl)</property>
                             <property name="use_markup">1</property>
                             <layout>
                               <property name="column">1</property>
@@ -515,11 +502,11 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                           </object>
                         </child>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkLabel" id="credits-artwork-by">
                             <property name="halign">start</property>
                             <property name="valign">end</property>
                             <property name="margin_top">8</property>
-                            <property name="label">&lt;a href=&quot;https://github.com/Schneegans&quot;&gt;@Schneegans&lt;/a&gt;</property>
+                            <property name="margin_bottom">8</property>
                             <property name="use_markup">1</property>
                             <layout>
                               <property name="column">1</property>
@@ -586,13 +573,23 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                             </child>
                             <child>
                               <object class="GtkLabel">
+                                <property name="halign">end</property>
+                                <property name="valign">start</property>
+                                <property name="margin_top">8</property>
+                                <property name="label" translatable="yes">🏅️ Past Sponsors</property>
+                                <layout>
+                                  <property name="column">0</property>
+                                  <property name="row">3</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="credits-gold-sponsors">
                                 <property name="halign">start</property>
                                 <property name="margin_top">8</property>
                                 <property name="opacity">0.5</property>
-                                <property name="label">- none -</property>
-                                <attributes>
-                                  <attribute name="style" value="italic"></attribute>
-                                </attributes>
+                                <property name="label" translatable="yes" comments="Shown in the about-popover if there is no sponsor for a given tier">- none -</property>
+                                <property name="use_markup">1</property>
                                 <layout>
                                   <property name="column">1</property>
                                   <property name="row">0</property>
@@ -600,11 +597,11 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                               </object>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkLabel" id="credits-silver-sponsors">
                                 <property name="halign">start</property>
                                 <property name="margin_top">8</property>
-                                <property name="label">GEPLlinux
-&lt;a href="https://github.com/SimHacker"&gt;@SimHacker&lt;/a&gt;</property>
+                                <property name="opacity">0.5</property>
+                                <property name="label" translatable="yes" comments="Shown in the about-popover if there is no sponsor for a given tier">- none -</property>
                                 <property name="use_markup">1</property>
                                 <layout>
                                   <property name="column">1</property>
@@ -613,15 +610,28 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
                               </object>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkLabel" id="credits-bronze-sponsors">
                                 <property name="halign">start</property>
                                 <property name="margin_top">8</property>
-                                <property name="label">&lt;a href=&quot;https://github.com/denis-roy&quot;&gt;@denis-roy&lt;/a&gt;
-&lt;a href=&quot;https://github.com/ykhurshid&quot;&gt;@ykhurshid&lt;/a&gt;</property>
+                                <property name="opacity">0.5</property>
+                                <property name="label" translatable="yes" comments="Shown in the about-popover if there is no sponsor for a given tier">- none -</property>
                                 <property name="use_markup">1</property>
                                 <layout>
                                   <property name="column">1</property>
                                   <property name="row">2</property>
+                                </layout>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="credits-past-sponsors">
+                                <property name="halign">start</property>
+                                <property name="margin_top">8</property>
+                                <property name="opacity">0.5</property>
+                                <property name="label" translatable="yes" comments="Shown in the about-popover if there is no sponsor for a given tier">- none -</property>
+                                <property name="use_markup">1</property>
+                                <layout>
+                                  <property name="column">1</property>
+                                  <property name="row">3</property>
                                 </layout>
                               </object>
                             </child>
@@ -665,69 +675,61 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
 
   <object class="GtkPopover" id="add-item-popover">
     <property name="child">
-      <object class="GtkGrid">
-        <property name="row_spacing">5</property>
-        <child>
-          <object class="GtkScrolledWindow">
-            <property name="hscrollbar_policy">never</property>
-            <property name="propagate_natural_width">1</property>
-            <property name="propagate_natural_height">1</property>
-            <property name="child">
-              <object class="GtkBox">
+      <object class="GtkScrolledWindow">
+        <property name="propagate_natural_width">1</property>
+        <property name="propagate_natural_height">1</property>
+        <property name="child">
+          <object class="GtkBox">
+            <child>
+              <object class="GtkListBox" id="add-menu-list">
                 <child>
-                  <object class="GtkListBox" id="add-menu-list">
-                    <child>
-                      <object class="GtkListBoxRow" id="menu-list-heading">
-                        <property name="name">separator</property>
-                        <property name="margin_end">10</property>
-                        <property name="activatable">0</property>
-                        <property name="selectable">0</property>
-                        <property name="child">
-                          <object class="GtkLabel">
-                            <property name="halign">start</property>
-                            <property name="margin_start">6</property>
-                            <property name="margin_top">10</property>
-                            <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">&lt;b&gt;Menus&lt;/b&gt;
+                  <object class="GtkListBoxRow" id="menu-list-heading">
+                    <property name="margin_end">10</property>
+                    <property name="activatable">0</property>
+                    <property name="selectable">0</property>
+                    <property name="child">
+                      <object class="GtkLabel">
+                        <property name="halign">start</property>
+                        <property name="margin_start">6</property>
+                        <property name="margin_top">10</property>
+                        <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">&lt;b&gt;Menus&lt;/b&gt;
 Can be submenus or top-level menus.</property>
-                            <property name="use_markup">1</property>
-                            <style>
-                              <class name="dim-label" />
-                            </style>
-                          </object>
-                        </property>
+                        <property name="use_markup">1</property>
+                        <style>
+                          <class name="dim-label" />
+                        </style>
                       </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkListBox" id="add-action-list">
-                    <child>
-                      <object class="GtkListBoxRow" id="action-list-heading">
-                        <property name="name">separator</property>
-                        <property name="margin_end">10</property>
-                        <property name="activatable">0</property>
-                        <property name="selectable">0</property>
-                        <property name="child">
-                          <object class="GtkLabel">
-                            <property name="halign">start</property>
-                            <property name="margin_start">6</property>
-                            <property name="margin_top">10</property>
-                            <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">&lt;b&gt;Actions&lt;/b&gt;
-Can be added to custom menus.</property>
-                            <property name="use_markup">1</property>
-                            <style>
-                              <class name="dim-label" />
-                            </style>
-                          </object>
-                        </property>
-                      </object>
-                    </child>
+                    </property>
                   </object>
                 </child>
               </object>
-            </property>
+            </child>
+            <child>
+              <object class="GtkListBox" id="add-action-list">
+                <child>
+                  <object class="GtkListBoxRow" id="action-list-heading">
+                    <property name="margin_end">10</property>
+                    <property name="activatable">0</property>
+                    <property name="selectable">0</property>
+                    <property name="child">
+                      <object class="GtkLabel">
+                        <property name="halign">start</property>
+                        <property name="margin_start">6</property>
+                        <property name="margin_top">10</property>
+                        <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">&lt;b&gt;Actions&lt;/b&gt;
+Can be added to custom menus.</property>
+                        <property name="use_markup">1</property>
+                        <style>
+                          <class name="dim-label" />
+                        </style>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
-        </child>
+        </property>
       </object>
     </property>
   </object>
