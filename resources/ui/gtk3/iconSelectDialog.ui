@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface domain="flypie">
-  <requires lib="gtk" version="4.0" />
+  <requires lib="gtk" version="3.0" />
 
   <template class="FlyPieIconSelectDialog" parent="GtkDialog">
     <property name="modal">1</property>
@@ -31,23 +31,22 @@
       </object>
     </child>
 
-    <child>
-      <object class="GtkStack" id="stack">
-        <property name="hexpand">1</property>
-        <property name="vexpand">1</property>
-        <property name="transition_duration">300</property>
-        <property name="transition_type">slide-left-right</property>
-
+    <child internal-child="vbox">
+      <object class="GtkBox">
         <child>
-          <object class="GtkStackPage">
-            <property name="name">icon-theme-page</property>
-            <property name="title" translatable="yes" comments="Page title of the icon-select-dialog.">Icon Theme</property>
-            <property name="child">
+
+          <object class="GtkStack" id="stack">
+            <property name="hexpand">1</property>
+            <property name="vexpand">1</property>
+            <property name="transition_duration">300</property>
+            <property name="transition_type">slide-left-right</property>
+
+            <child>
               <object class="GtkBox">
                 <property name="orientation">vertical</property>
 
                 <child>
-                  <object class="GtkCenterBox">
+                  <object class="GtkBox">
                     <property name="halign">fill</property>
                     <style>
                       <class name="toolbar" />
@@ -55,13 +54,13 @@
                     <child type="center">
                       <object class="GtkSearchEntry" id="filterEntry"></object>
                     </child>
-                    <child type="end">
+                    <child>
                       <object class="GtkSpinner" id="spinner">
                         <property name="margin_start">5</property>
                         <property name="margin_end">5</property>
                         <property name="margin_top">5</property>
                         <property name="margin_bottom">5</property>
-                        <property name="spinning">1</property>
+                        <property name="active">1</property>
                       </object>
                     </child>
                   </object>
@@ -75,7 +74,7 @@
                   <object class="GtkScrolledWindow">
                     <property name="hexpand">1</property>
                     <property name="vexpand">1</property>
-                    <property name="child">
+                    <child>
                       <object class="GtkIconView" id="iconView">
                         <property name="item_orientation">horizontal</property>
                         <property name="model">iconListFiltered</property>
@@ -92,27 +91,30 @@
                           </attributes>
                         </child>
                       </object>
-                    </property>
+                    </child>
                   </object>
                 </child>
               </object>
-            </property>
-          </object>
-        </child>
+              <packing>
+                <property name="name">icon-theme-page</property>
+                <property name="title" translatable="yes" comments="Page title of the icon-select-dialog.">Icon Theme</property>
+              </packing>
+            </child>
 
-        <child>
-          <object class="GtkStackPage">
-            <property name="name">custom-icon-page</property>
-            <property name="title" translatable="yes" comments="Page title of the icon-select-dialog.">Custom Icon</property>
-            <property name="child">
+            <child>
               <object class="GtkFileChooserWidget" id="iconFileChooser">
                 <property name="height_request">500</property>
                 <property name="filter">image-file-filter</property>
               </object>
-            </property>
-          </object>
-        </child>
+              <packing>
+                <property name="name">custom-icon-page</property>
+                <property name="title" translatable="yes" comments="Page title of the icon-select-dialog.">Custom Icon</property>
+              </packing>
+            </child>
 
+          </object>
+
+        </child>
       </object>
     </child>
 
