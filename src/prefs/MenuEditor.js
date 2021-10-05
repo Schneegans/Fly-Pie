@@ -90,6 +90,7 @@ const TRANSITION_DURATION = 350;
 // type. This method is called by the constructor of the PreferencesDialog.
 function registerWidgets() {
   let FlyPieMenuEditorItem;
+  let FlyPieMenuEditorBase;
 
   ////////////////////////////////////////////////////////////////////////////////////////
   // Instances of this class are used to draw the individual menu items in the menu     //
@@ -275,10 +276,10 @@ function registerWidgets() {
   // (e.g. select, drag-and-drop) signals are emitted.                                  //
   ////////////////////////////////////////////////////////////////////////////////////////
 
-  if (GObject.type_from_name('FlyPieMenuEditor') == null) {
+  if (GObject.type_from_name('FlyPieMenuEditorBase') == null) {
     // clang-format off
-      GObject.registerClass({
-        GTypeName: 'FlyPieMenuEditor',
+    FlyPieMenuEditorBase = GObject.registerClass({
+        GTypeName: 'FlyPieMenuEditorBase',
         Signals: {
           // Emitted whenever an item got selected by the user. The index of the selected
           // item is passed as parameter.
@@ -775,27 +776,6 @@ function registerWidgets() {
       // This widget requests a width so that in overview mode at least four items can be
       // displayed per row. The height is requested so that all items can be shown at the
       // given width.
-      vfunc_measure(orientation, for_size) {
-        if (this._inMenuOverviewMode()) {
-          if (orientation == Gtk.Orientation.HORIZONTAL) {
-            return [ItemSize[ItemState.GRID] * 4, ItemSize[ItemState.GRID] * 4, -1, -1];
-          }
-
-          // The possible amount of columns.
-          const columns = Math.floor(for_size / ItemSize[ItemState.GRID]);
-
-          // The required amount of rows.
-          const rows = Math.ceil(this._items.length / columns);
-
-          // The required height of the grid.
-          const gridHeight = rows * ItemSize[ItemState.GRID];
-          return [gridHeight, gridHeight, -1, -1];
-        }
-
-        // In menu-edit mode we simply return a square shaped region of the same size as
-        // the grid width.
-        return [ItemSize[ItemState.GRID] * 4, ItemSize[ItemState.GRID] * 4, -1, -1];
-      }
 
       // This method is responsible for computing the positions of all display items.
       // There are two completely different display modes: The menu overview mode and menu
@@ -1522,4 +1502,50 @@ function registerWidgets() {
       }
     });
   }
+
+  if (GObject.type_from_name('FlyPieMenuEditor') == null) {
+    
+    if (utils.gtk4()) {
+
+      GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
+      class FlyPieMenuEditor extends FlyPieMenuEditorBase {
+
+      // ------------------------------------------------------ overridden virtual methods
+
+      vfunc_measure(orientation, for_size) {
+        if (this._inMenuOverviewMode()) {
+          if (orientation == Gtk.Orientation.HORIZONTAL) {
+            return [ItemSize[ItemState.GRID] * 4, ItemSize[ItemState.GRID] * 4, -1, -1];
+          }
+
+          // The possible amount of columns.
+          const columns = Math.floor(for_size / ItemSize[ItemState.GRID]);
+
+          // The required amount of rows.
+          const rows = Math.ceil(this._items.length / columns);
+
+          // The required height of the grid.
+          const gridHeight = rows * ItemSize[ItemState.GRID];
+          return [gridHeight, gridHeight, -1, -1];
+        }
+
+        // In menu-edit mode we simply return a square shaped region of the same size as
+        // the grid width.
+        return [ItemSize[ItemState.GRID] * 4, ItemSize[ItemState.GRID] * 4, -1, -1];
+      }
+    });
+
+  } else {
+
+    GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
+      class FlyPieMenuEditor extends FlyPieMenuEditorBase {
+
+      // ------------------------------------------------------ overridden virtual methods
+
+     
+    });
+
+  }
+  }
+
 }

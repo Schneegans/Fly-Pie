@@ -10,6 +10,9 @@
 
 const {GObject, GLib, Gtk, Gio, Gdk} = imports.gi;
 
+const Me                 = imports.misc.extensionUtils.getCurrentExtension();
+const utils              = Me.imports.src.common.utils;
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // This dialog allows selecting an icon. This can be either from the user's icon theme  //
 // or a local file. Once the user selected an icon, the 'icon-set' signal is emitted.   //
@@ -23,7 +26,7 @@ function registerWidget() {
     // clang-format off
       GObject.registerClass({
         GTypeName: 'FlyPieIconSelectDialog',
-        Template: 'resource:///ui/gtk4/iconSelectDialog.ui',
+        Template: `resource:///ui/${utils.gtk4() ? "gtk4" : "gtk3"}/iconSelectDialog.ui`,
         InternalChildren: ["stack", "iconFileChooser", "iconList", "iconView",
                           "spinner", "iconListFiltered", "filterEntry"],
         Signals: {
@@ -38,7 +41,11 @@ function registerWidget() {
         // Icons are loaded asynchronously. Once this is finished, the little spinner in
         // the top right of the dialog is hidden.
         this._loadIcons().then(() => {
-          this._spinner.spinning = false;
+          if (utils.gtk4()) {
+            this._spinner.spinning = false;
+          } else {
+            this._spinner.active = false;
+          }
         });
 
         // Filter the icon view based on the content of the search field.

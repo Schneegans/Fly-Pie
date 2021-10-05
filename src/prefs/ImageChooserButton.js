@@ -12,6 +12,9 @@ const {GObject, Gtk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
+const Me                 = imports.misc.extensionUtils.getCurrentExtension();
+const utils              = Me.imports.src.common.utils;
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // Since the FileChooserButton from GTK3 is gone, we have to provide a similar          //
 // solution. In Fly-Pie, we only need file chooser buttons for images, so the content   //
@@ -24,7 +27,7 @@ function registerWidget() {
     // clang-format off
       GObject.registerClass({
         GTypeName: 'FlyPieImageChooserButton',
-        Template: 'resource:///ui/gtk4/imageChooserButton.ui',
+        Template: `resource:///ui/${utils.gtk4() ? "gtk4" : "gtk3"}/imageChooserButton.ui`,
         InternalChildren: ['button', 'label', 'resetButton'],
         Signals: {
           'file-set': {}

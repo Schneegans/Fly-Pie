@@ -10,6 +10,9 @@
 
 const {GObject, Gtk} = imports.gi;
 
+const Me                 = imports.misc.extensionUtils.getCurrentExtension();
+const utils              = Me.imports.src.common.utils;
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // The CopyValueButton is instantiated many times in Fly-Pie's settings dialog. It is   //
 // a simple circular button with an arrow which is used to copy values from its left to //
@@ -21,7 +24,7 @@ function registerWidget() {
     // clang-format off
       GObject.registerClass({
         GTypeName: 'FlyPieCopyValueButton',
-        Template: 'resource:///ui/gtk4/copyValueButton.ui',
+        Template: `resource:///ui/${utils.gtk4() ? "gtk4" : "gtk3"}/copyValueButton.ui`,
       }, class FlyPieCopyValueButton extends Gtk.Button {});
     // clang-format on
   }
