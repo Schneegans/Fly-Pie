@@ -120,6 +120,14 @@ function getIconTheme() {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// This method simply returns true if we are currently using GTK4.                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+function gtk4() {
+  return Gtk.get_major_version() == 4;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 // This draws a square-shaped icon to the given Cairo.Context of the given size. The    //
 // name can either be an icon name from the current icon theme or a path to an image    //
 // file. If neither is found, the given name is written to the image. The given font    //
