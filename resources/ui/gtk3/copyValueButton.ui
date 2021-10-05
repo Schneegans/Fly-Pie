@@ -4,7 +4,7 @@
 
   <template class="FlyPieCopyValueButton" parent="GtkButton">
     <property name="tooltip_text" translatable="yes">Copy left value to right side</property>
-    <property name="has_frame">0</property>
+    <property name="relief">none</property>
     <child>
       <object class="GtkImage">
         <property name="icon_name">go-next-symbolic</property>

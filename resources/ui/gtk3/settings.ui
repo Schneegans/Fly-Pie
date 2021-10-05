@@ -658,9 +658,9 @@ Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free 
   <!--                                                                                           -->
   <!-- ######################################################################################### -->
 
-  <!-- <object class="FlyPieIconSelectDialog" id="icon-select-dialog">
+  <object class="FlyPieIconSelectDialog" id="icon-select-dialog">
     <property name="use-header-bar">1</property>
-  </object> -->
+  </object>
 
   <!-- ######################################################################################### -->
   <!--                                                                                           -->
@@ -4456,7 +4456,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                             <property name="margin-start">8</property>
                             <property name="margin-end">8</property>
                             <child>
-                              <object class="GtkCenterBox">
+                              <object class="GtkBox">
 
                                 <child type="start">
                                   <object class="GtkBox" id="menu-editor-breadcrumbs"></object>
@@ -4465,8 +4465,12 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <child type="end">
                                   <object class="GtkMenuButton" id="menu-editor-add-button">
                                     <property name="tooltip_text" translatable="yes">Add a new menu item.</property>
-                                    <property name="icon-name">list-add-symbolic</property>
                                     <property name="popover">add-item-popover</property>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="icon_name">list-add-symbolic</property>
+                                      </object>
+                                    </child>
 
                                     <style>
                                       <class name="menu-editor-add-button" />
@@ -4486,7 +4490,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                             <child>
                               <object class="FlyPieMenuEditor" id="menu-editor">
-                                <property name="overflow">hidden</property>
                                 <property name="vexpand">1</property>
                                 <property name="hexpand">1</property>
                                 <property name="margin-bottom">4</property>

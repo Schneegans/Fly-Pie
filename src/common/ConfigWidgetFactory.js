@@ -110,7 +110,11 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         fileChooser.set_file(currentFile);
       }
 
-      dialog.get_content_area().append(fileChooser);
+      if (utils.gtk4()) {
+        dialog.get_content_area().append(fileChooser);
+      } else {
+        dialog.get_content_area().pack_start(fileChooser, false, false, 0);
+      }
 
       dialog.connect('response', (dialog, id) => {
         if (id == Gtk.ResponseType.OK) {
@@ -168,7 +172,11 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       const appChooser =
           new Gtk.AppChooserWidget({show_all: true, hexpand: true, vexpand: true});
 
-      dialog.get_content_area().append(appChooser);
+      if (utils.gtk4()) {
+        dialog.get_content_area().append(appChooser);
+      } else {
+        dialog.get_content_area().pack_start(appChooser, false, false, 0);
+      }
 
       const selectApp = (app) => {
         callback(

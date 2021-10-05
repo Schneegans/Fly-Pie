@@ -27,7 +27,11 @@
     </child>
     <child>
       <object class="GtkButton" id="resetButton">
-        <property name="icon-name">edit-clear-all-symbolic</property>
+        <child>
+          <object class="GtkImage">
+            <property name="icon_name">edit-clear-all-symbolic</property>
+          </object>
+        </child>
       </object>
     </child>
     <style>

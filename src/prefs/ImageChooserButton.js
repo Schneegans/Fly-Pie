@@ -54,7 +54,11 @@ function registerWidget() {
           filter: fileFilter
         });
 
-        this._dialog.get_content_area().append(this._fileChooser);
+        if (utils.gtk4()) {
+          this._dialog.get_content_area().append(this._fileChooser);
+        } else {
+          this._dialog.get_content_area().pack_start(this._fileChooser, false, false, 0);
+        }
 
         this._dialog.connect('response', (dialog, id) => {
           if (id == Gtk.ResponseType.OK) {

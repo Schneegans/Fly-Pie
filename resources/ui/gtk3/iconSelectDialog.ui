@@ -84,7 +84,7 @@
                         <property name="item_padding">3</property>
                         <child>
                           <object class="GtkCellRendererPixbuf">
-                            <property name="icon_size">2</property>
+                            <property name="stock_size">5</property>
                           </object>
                           <attributes>
                             <attribute name="icon-name">0</attribute>
