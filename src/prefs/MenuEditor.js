@@ -283,23 +283,29 @@ function registerWidgets() {
   ////////////////////////////////////////////////////////////////////////////////////////
 
   if (GObject.type_from_name('FlyPieMenuEditorBase') == null) {
+    let BASE_CLASS = Gtk.Fixed;
+
+    if (utils.gtk4()) {
+      BASE_CLASS = Gtk.Widget;
+    }
+
     // clang-format off
     FlyPieMenuEditorBase = GObject.registerClass({
         GTypeName: 'FlyPieMenuEditorBase',
         Signals: {
           // Emitted whenever an item got selected by the user. The index of the selected
           // item is passed as parameter.
-          'select': { param_types: [GObject.TYPE_INT]},
+          'select-item': { param_types: [GObject.TYPE_INT]},
           
           // Emitted whenever the edit-button of an item got clicked by the user. The
           // index of the to-be-edited item is passed as parameter.
-          'edit': { param_types: [GObject.TYPE_INT]},
+          'edit-item': { param_types: [GObject.TYPE_INT]},
 
           // Emitted whenever an item got deleted (usually due to an ending drag-and-drop
           // operation). It is not necessary to call the remove() method in response; the
           // item will be removed automatically.
           // The index of the deleted item is passed as parameter.
-          'remove': { param_types: [GObject.TYPE_INT]},
+          'remove-item': { param_types: [GObject.TYPE_INT]},
 
           // Emitted whenever a new item should be created because of a successful
           // internal drag-and-dop operation. A JSON representation of the dropped item
@@ -334,7 +340,7 @@ function registerWidgets() {
           'notification': { param_types: [GObject.TYPE_STRING]},
         },
       },
-      class FlyPieMenuEditor extends Gtk.Widget {
+      class FlyPieMenuEditor extends BASE_CLASS {
       // clang-format on
 
       // -------------------------------------------------------- constructor / destructor
@@ -388,7 +394,11 @@ function registerWidgets() {
           utils.boxAppend(this._ifEmptyHint, label);
           utils.boxAppend(this._ifEmptyHint, description);
 
-          this._ifEmptyHint.set_parent(this);
+          if (utils.gtk4()) {
+            this._ifEmptyHint.set_parent(this);
+          } else {
+            this.put(this._ifEmptyHint, 0, 0);
+          }
         }
 
         // Here we create the icon and label which are shown to highlight the add-new-item
@@ -407,7 +417,11 @@ function registerWidgets() {
           utils.boxAppend(this._addItemHint, label);
           utils.boxAppend(this._addItemHint, icon);
 
-          this._addItemHint.set_parent(this);
+          if (utils.gtk4()) {
+            this._addItemHint.set_parent(this);
+          } else {
+            this.put(this._addItemHint, 0, 0);
+          }
         }
 
         // Now we set up the back-navigation button which is shown whenever we are in a
@@ -422,7 +436,12 @@ function registerWidgets() {
             margin_bottom: 20,
             reveal_child: false
           });
-          this._backButton.set_parent(this);
+
+          if (utils.gtk4()) {
+            this._backButton.set_parent(this);
+          } else {
+            this.put(this._backButton, 0, 0);
+          }
 
           // Assign a state so that it gets scaled like the other child buttons.
           this._backButton.state = ItemState.CHILD;
@@ -777,6 +796,10 @@ function registerWidgets() {
             this.add_controller(this._dropTarget);
           }
         }
+
+        if (!utils.gtk4()) {
+          this.show_all();
+        }
       }
 
       // ------------------------------------------------------ overridden virtual methods
@@ -795,6 +818,12 @@ function registerWidgets() {
       // edit mode. It considers the current _dropIndex so that an artificial gap is
       // created where a item is about to be dropped.
       vfunc_size_allocate(width, height, baseline) {
+
+        // On GTK3, the parameters are different. The first parameter is actually a rectangle.
+        if (!utils.gtk4()) {
+          height = width.height;
+          width = width.width;
+        }
 
         // This helper lambda assigns animated values to the given item which can be used
         // to smoothly animate the item position in the given time to the specified
@@ -1012,9 +1041,9 @@ function registerWidgets() {
 
         // -------------------------------------------------------------------------------
 
-        // Now, in the last part, we will call _updateItemPositions() to actually move the
+        // Now, in the last part, we will call _allocateChildren() to actually move the
         // items according to their animated values. If _restartAnimation is set, a
-        // timeout will be used to call _updateItemPositions repeatedly.
+        // timeout will be used to call _allocateChildren repeatedly.
 
         if (this._restartAnimation) {
 
@@ -1029,7 +1058,7 @@ function registerWidgets() {
           // Create a new timeout which will cancel itself once all animations are done.
           this._updateTimeout = this.add_tick_callback(() => {
             const time        = this.get_frame_clock().get_frame_time() / 1000;
-            const allFinished = this._updateItemPositions(time);
+            const allFinished = this._allocateChildren(time);
 
             if (allFinished) {
               this._updateTimeout = -1;
@@ -1039,7 +1068,7 @@ function registerWidgets() {
             return true;
           });
         }
-        this._updateItemPositions(time);
+        this._allocateChildren(time);
       }
 
       // ---------------------------------------------------------------- public interface
@@ -1055,8 +1084,6 @@ function registerWidgets() {
       // If 'parentAngle' is given, a back-navigation item will be drawn at this position
       // (e.g. we are in submenu mode).
       setItems(configs, selectedIndex, centerConfig, parentAngle) {
-
-        utils.debug('setItems');
 
         // In the first part of this method we will decide what kind of transition
         // animation will be required to show the new items.
@@ -1191,7 +1218,7 @@ function registerWidgets() {
 
       // Adds a new item to the list of currently displayed items at the given index. The
       // new item will be automatically selected.
-      add(config, where) {
+      addItem(config, where) {
 
         // Create the new item.
         const item = this._createItem(
@@ -1251,13 +1278,22 @@ function registerWidgets() {
         // Create the item.
         const item = new FlyPieMenuEditorItem(itemState);
         item.setConfig(config);
-        item.set_parent(this);
+
+        if (utils.gtk4()) {
+          item.set_parent(this);
+        } else {
+          this.put(item, 0, 0);
+        }
         item.set_reveal_child(true);
 
         // Assign the new item's toggle button to our radio button group so that only one
         // item can be selected at any time.
         if (this._radioGroup) {
-          item.button.set_group(this._radioGroup);
+          if (utils.gtk4()) {
+            item.button.set_group(this._radioGroup);
+          } else {
+            item.button.join_group(this._radioGroup);
+          }
         } else {
           this._radioGroup = item.button;
         }
@@ -1266,7 +1302,7 @@ function registerWidgets() {
         if (config.type == 'CustomMenu') {
           item.editButton.connect('clicked', () => {
             this._selectedItem = item;
-            this.emit('edit', this._items.indexOf(item));
+            this.emit('edit-item', this._items.indexOf(item));
           });
         }
 
@@ -1307,7 +1343,7 @@ function registerWidgets() {
               if (deleteData) {
                 let removeIndex = this._items.indexOf(item);
                 this.remove(removeIndex);
-                this.emit('remove', removeIndex);
+                this.emit('remove-item', removeIndex);
               } else {
                 item.opacity   = 1;
                 item.sensitive = true;
@@ -1395,7 +1431,7 @@ function registerWidgets() {
         item.button.connect('clicked', (b) => {
           if (b.active) {
             this._selectedItem = item;
-            this.emit('select', this._items.indexOf(item));
+            this.emit('select-item', this._items.indexOf(item));
           }
         });
 
@@ -1487,7 +1523,7 @@ function registerWidgets() {
       // Calls size_allocate() on all child items of this. For the position of each item
       // the AnimatedValues are queried, the size of each item depends on its ItemState.
       // Returns true if all animations are done.
-      _updateItemPositions(time) {
+      _allocateChildren(time) {
         let allFinished = true;
 
         // This will be called once for each item.
@@ -1502,7 +1538,7 @@ function registerWidgets() {
             allFinished &= item.y.isFinished(time);
           }
 
-          item.size_allocate(allocation, -1);
+          utils.sizeAllocate(item, allocation);
         };
 
         // Update the position of all current items, old items, the center item and the
@@ -1519,8 +1555,8 @@ function registerWidgets() {
         // Update the allocations of the various hint labels.
         const allocation =
             new Gdk.Rectangle({x: 0, y: 0, width: this._width, height: this._height});
-        this._ifEmptyHint.size_allocate(allocation, -1);
-        this._addItemHint.size_allocate(allocation, -1);
+        utils.sizeAllocate(this._ifEmptyHint, allocation);
+        utils.sizeAllocate(this._addItemHint, allocation);
 
         return allFinished;
       }
@@ -1535,8 +1571,7 @@ function registerWidgets() {
 
       GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
                             class FlyPieMenuEditor extends FlyPieMenuEditorBase {
-        // ------------------------------------------------------ overridden virtual
-        // methods
+        // ---------------------------------------------------- overridden virtual methods
 
         vfunc_measure(orientation, for_size) {
           if (this._inMenuOverviewMode()) {
@@ -1565,16 +1600,13 @@ function registerWidgets() {
 
       GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
                             class FlyPieMenuEditor extends FlyPieMenuEditorBase {
-        // ------------------------------------------------------ overridden virtual
-        // methods
+        // ---------------------------------------------------- overridden virtual methods
 
         vfunc_get_preferred_height() {
-          utils.debug('vfunc_get_preferred_height');
           return [MIN_GRID_SIZE, MIN_GRID_SIZE];
         }
 
         vfunc_get_preferred_height_for_width(width) {
-          utils.debug('vfunc_get_preferred_height_for_width');
           if (this._inMenuOverviewMode()) {
             // The possible amount of columns.
             const columns = Math.floor(width / ItemSize[ItemState.GRID]);
@@ -1593,14 +1625,47 @@ function registerWidgets() {
         }
 
         vfunc_get_preferred_width() {
-          utils.debug('vfunc_get_preferred_width');
           return [MIN_GRID_SIZE, MIN_GRID_SIZE];
         }
 
         vfunc_get_preferred_width_for_height(height) {
-          utils.debug('vfunc_get_preferred_width_for_height');
           return [MIN_GRID_SIZE, MIN_GRID_SIZE];
         }
+
+        // vfunc_map() {
+        //   this.set_mapped(true);
+
+        //   this._ifEmptyHint.map();
+        //   this._addItemHint.map();
+        //   this._backButton.map();
+        // }
+
+        // vfunc_unmap() {
+        //   this.set_mapped(false);
+
+        //   this._ifEmptyHint.unmap();
+        //   this._addItemHint.unmap();
+        //   this._backButton.unmap();
+        // }
+
+        // vfunc_realize() {
+        //   const allocation = this.get_allocation();
+
+        // const attr = new Gdk.WindowAttr();
+        // attr.window_type = Gdk.WindowType.CHILD;
+        // attr.x = allocation.x;
+        // attr.y = allocation.y;
+        // attr.width = allocation.width;
+        // attr.height = allocation.height;
+        // attr.visual = this.get_visual();
+        // attr.event_mask = this.get_events() | Gdk.EventMask.EXPOSURE_MASK;
+
+        // const window = new Gdk.Window(this.get_parent_window(), attr, Gdk.WindowAttributesType.X | Gdk.WindowAttributesType.Y | Gdk.WindowAttributesType.VISUAL);
+        // this.set_window(window);
+        // this.register_window(window);
+        // this.set_realized(true);
+        // // window.set_background_pattern(None);
+        // }
       });
     }
   }

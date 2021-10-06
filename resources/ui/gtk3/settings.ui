@@ -4532,7 +4532,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                             <property name="hscrollbar_policy">never</property>
                             <property name="hexpand">1</property>
 
-                            <!-- <child>
+                            <child>
                               <object class="FlyPieMenuEditor" id="menu-editor">
                                 <property name="vexpand">1</property>
                                 <property name="hexpand">1</property>
@@ -4541,7 +4541,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="margin-start">4</property>
                                 <property name="margin-end">4</property>
                               </object>
-                            </child> -->
+                            </child>
 
                           </object>
                         </child>
@@ -4564,7 +4564,6 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                           <object class="GtkBox" id="menu-editor-stash-content">
                                             <property name="hexpand">1</property>
                                             <property name="halign">center</property>
-                                            <property name="visible">0</property>
                                           </object>
 
                                         </child>

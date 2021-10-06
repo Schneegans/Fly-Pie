@@ -577,7 +577,7 @@ var MenuEditorPage = class MenuEditorPage {
     this._editor = this._builder.get_object('menu-editor');
 
     // If an item is selected, we update the settings sidebar accordingly.
-    this._editor.connect('select', (e, which) => {
+    this._editor.connect('select-item', (e, which) => {
       if (which >= 0) {
         this._selectedItem = this._getCurrentConfigs()[which];
       } else {
@@ -588,7 +588,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     // If an item is selected for editing, we push it to the menu path, update sidebar and
     // breadcrumbs, and make the menu editor show the newly visible children.
-    this._editor.connect('edit', (e, which) => {
+    this._editor.connect('edit-item', (e, which) => {
       this._selectedItem = this._getCurrentConfigs()[which];
       this._menuPath.push(this._selectedItem);
       this._updateSidebar();
@@ -600,7 +600,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     // If an item is removed, we may have to hide the sidebar and we will save the
     // resulting menu configuration.
-    this._editor.connect('remove', (e, which) => {
+    this._editor.connect('remove-item', (e, which) => {
       const [removed] = this._getCurrentConfigs().splice(which, 1);
       if (removed == this._selectedItem) {
         this._selectedItem = null;
@@ -964,7 +964,7 @@ var MenuEditorPage = class MenuEditorPage {
   // configuration. Its fixed angle is reset to prevent invalid configurations.
   _addItem(config, where) {
     config.angle = -1;
-    this._editor.add(config, where);
+    this._editor.addItem(config, where);
     this._selectedItem = config;
     this._getCurrentConfigs().splice(where, 0, config);
     this._updateSidebar();
@@ -1141,6 +1141,10 @@ var MenuEditorPage = class MenuEditorPage {
   // settings key "stashed-items". This may throw an exception if the stored item
   // configuration is invalid.
   _loadStashConfiguration() {
+
+    // Initially show the stash label.
+    this._builder.get_object('menu-editor-stash-label').visible   = true;
+    this._builder.get_object('menu-editor-stash-content').visible = false;
 
     // Load the menu configuration in the JSON format.
     this._stashedConfigs = JSON.parse(this._settings.get_string('stashed-items'));

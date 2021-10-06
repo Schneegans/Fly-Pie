@@ -158,6 +158,15 @@ function setChild(widget, child) {
   }
 }
 
+// Calls size_allocate() with the given allocation on the given widget.
+function sizeAllocate(widget, allocation) {
+  if (gtk4()) {
+    widget.size_allocate(allocation, -1);
+  } else {
+    widget.size_allocate(allocation);
+  }
+}
+
 // Sets the drawing function of the given Gtk.DrawingArea.
 function setDrawFunc(drawingArea, func) {
   if (gtk4()) {
