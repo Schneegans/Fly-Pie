@@ -821,17 +821,28 @@ Can be added to custom menus.</property>
         <property name="valign">center</property>
         <property name="message_type">warning</property>
         <property name="revealed">0</property>
-        <child>
-          <object class="GtkLabel">
-            <property name="halign">start</property>
-            <property name="label" translatable="yes">Fly-Pie requires that GNOME Shell&apos;s animations are enabled.</property>
+
+        <child internal-child="content_area">
+          <object class="GtkBox">
+            <child>
+              <object class="GtkLabel">
+                <property name="halign">start</property>
+                <property name="label" translatable="yes">Fly-Pie requires that GNOME Shell&apos;s animations are enabled.</property>
+              </object>
+            </child>
           </object>
         </child>
-        <child type="action">
-          <object class="GtkButton" id="enable-animations-button">
-            <property name="label" translatable="yes" comments="Text of the button of the InfoBar which is shown when GNOME Shell&apos;s animations are disabled.">Enable Animations</property>
+
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <child>
+              <object class="GtkButton" id="enable-animations-button">
+                <property name="label" translatable="yes" comments="Text of the button of the InfoBar which is shown when GNOME Shell&apos;s animations are disabled.">Enable Animations</property>
+              </object>
+            </child>
           </object>
         </child>
+
       </object>
     </child>
 
@@ -847,8 +858,6 @@ Can be added to custom menus.</property>
             <property name="popover">about-popover</property>
             <child>
               <object class="GtkImage">
-                <property name="visible">1</property>
-                <property name="can-focus">0</property>
                 <property name="icon-name">dialog-information-symbolic</property>
                 <property name="icon-size">1</property>
               </object>
@@ -985,7 +994,6 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                         <child>
                           <object class="GtkImage" id="tutorial-animation-1">
                             <property name="width_request">480</property>
-                            <property name="height_request">300</property>
                             <style>
                               <class name="tutorial-video" />
                             </style>
@@ -1215,7 +1223,6 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                         <child>
                           <object class="GtkImage" id="tutorial-animation-2">
                             <property name="width_request">480</property>
-                            <property name="height_request">300</property>
                             <style>
                               <class name="tutorial-video" />
                             </style>
@@ -1480,7 +1487,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                       <object class="GtkBox">
                         <property name="width_request">480</property>
                         <property name="halign">center</property>
-                        <child type="start">
+                        <child>
                           <object class="GtkButton" id="tutorial-previous-page-button">
                             <property name="sensitive">0</property>
                             <child>
@@ -1543,7 +1550,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             </child>
                           </object>
                         </child>
-                        <child type="end">
+                        <child>
                           <object class="GtkButton" id="tutorial-next-page-button">
                             <property name="halign">end</property>
                             <child>
@@ -1566,6 +1573,9 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                               </object>
                             </child>
                           </object>
+                          <packing>
+                            <property name="pack_type">end</property>
+                          </packing>
                         </child>
                       </object>
 
@@ -1815,6 +1825,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                     </child>
                     <child type="tab">
                       <object class="GtkImage">
+                        <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="tooltip_text" translatable="yes">Global Appearance Settings</property>
                         <property name="halign">center</property>
                         <property name="valign">center</property>
@@ -2441,6 +2452,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                     </child>
                     <child type="tab">
                       <object class="GtkDrawingArea" id="center-tab-icon">
+                        <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="margin_start">4</property>
                         <property name="margin_end">4</property>
                         <property name="width_request">28</property>
@@ -3181,6 +3193,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                     </child>
                     <child type="tab">
                       <object class="GtkDrawingArea" id="children-tab-icon">
+                        <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="margin_start">4</property>
                         <property name="margin_end">4</property>
                         <property name="width_request">28</property>
@@ -3562,6 +3575,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                     </child>
                     <child type="tab">
                       <object class="GtkDrawingArea" id="grandchildren-tab-icon">
+                        <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="margin_start">4</property>
                         <property name="margin_end">4</property>
                         <property name="width_request">28</property>
@@ -3813,7 +3827,7 @@ will cancel the selection.</property>
                               <packing>
                                 <property name="left_attach">0</property>
                                 <property name="top_attach">1</property>
-                                <property name="column_span">2</property>
+                                <property name="width">2</property>
                               </packing>
                             </child>
                           </object>
@@ -3826,6 +3840,7 @@ will cancel the selection.</property>
                     </child>
                     <child type="tab">
                       <object class="GtkDrawingArea" id="wedges-tab-icon">
+                        <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="margin_start">4</property>
                         <property name="margin_end">4</property>
                         <property name="width_request">28</property>
@@ -3955,6 +3970,7 @@ will cancel the selection.</property>
                     </child>
                     <child type="tab">
                       <object class="GtkDrawingArea" id="trace-tab-icon">
+                        <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="margin_start">4</property>
                         <property name="margin_end">4</property>
                         <property name="width_request">28</property>
@@ -4331,6 +4347,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                     </child>
                     <child type="tab">
                       <object class="GtkDrawingArea" id="advanced-tab-icon">
+                        <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                         <property name="margin_start">4</property>
                         <property name="margin_end">4</property>
                         <property name="width_request">28</property>
@@ -4352,9 +4369,31 @@ This can be used if you want to capture a video of Fly-Pie.</property>
 
                     <child>
                       <object class="GtkMenuButton">
-                        <property name="margin_end">8</property>
                         <property name="popover">preset-popover</property>
-                        <property name="label" translatable="yes">Load Preset</property>
+                        <child>
+                          <object class="GtkGrid">
+                            <property name="valign">center</property>
+                            <property name="column_spacing">6</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon_name">pan-down-symbolic</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label" translatable="yes">Load Preset</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
                       </object>
                     </child>
 
@@ -4393,7 +4432,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                       </object>
                     </child>
 
-                    <child type="end">
+                    <child>
                       <object class="GtkButton" id="preview-button">
                         <child>
                           <object class="GtkBox">
@@ -4418,6 +4457,9 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                           <class name="suggested-action" />
                         </style>
                       </object>
+                      <packing>
+                        <property name="pack_type">end</property>
+                      </packing>
                     </child>
 
                   </object>
@@ -4458,11 +4500,11 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                             <child>
                               <object class="GtkBox">
 
-                                <child type="start">
+                                <child>
                                   <object class="GtkBox" id="menu-editor-breadcrumbs"></object>
                                 </child>
 
-                                <child type="end">
+                                <child>
                                   <object class="GtkMenuButton" id="menu-editor-add-button">
                                     <property name="tooltip_text" translatable="yes">Add a new menu item.</property>
                                     <property name="popover">add-item-popover</property>
@@ -4471,11 +4513,13 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                         <property name="icon_name">list-add-symbolic</property>
                                       </object>
                                     </child>
-
                                     <style>
                                       <class name="menu-editor-add-button" />
                                     </style>
                                   </object>
+                                  <packing>
+                                    <property name="pack_type">end</property>
+                                  </packing>
                                 </child>
 
                               </object>
@@ -4488,7 +4532,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                             <property name="hscrollbar_policy">never</property>
                             <property name="hexpand">1</property>
 
-                            <child>
+                            <!-- <child>
                               <object class="FlyPieMenuEditor" id="menu-editor">
                                 <property name="vexpand">1</property>
                                 <property name="hexpand">1</property>
@@ -4497,7 +4541,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 <property name="margin-start">4</property>
                                 <property name="margin-end">4</property>
                               </object>
-                            </child>
+                            </child> -->
 
                           </object>
                         </child>
@@ -4537,7 +4581,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                               <packing>
                                                 <property name="left_attach">0</property>
                                                 <property name="top_attach">0</property>
-                                                <property name="row_span">2</property>
+                                                <property name="height">2</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -4597,7 +4641,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                       <packing>
                                         <property name="left_attach">0</property>
                                         <property name="top_attach">0</property>
-                                        <property name="row_span">2</property>
+                                        <property name="height">2</property>
                                       </packing>
                                     </child>
                                     <child>
@@ -4676,9 +4720,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                 </child>
                               </object>
                             </child>
-                            <child type="end">
-
-
+                            <child>
                               <object class="GtkButton" id="preview-menu-button">
                                 <property name="sensitive">0</property>
                                 <child>
@@ -4704,8 +4746,9 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                   <class name="suggested-action" />
                                 </style>
                               </object>
-
-
+                              <packing>
+                                <property name="pack_type">end</property>
+                              </packing>
                             </child>
                           </object>
                         </child>
@@ -4963,114 +5006,94 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                     <property name="transition_duration">250</property>
                     <property name="transition_type">slide-left-right</property>
                     <child>
-                      <object class="GtkStackPage">
+                      <object class="GtkImage" id="level-image1">
+                        <property name="resource">/img/levels/level1.png</property>
+                        <property name="pixel_size">256</property>
+                      </object>
+                      <packing>
                         <property name="name">level1</property>
-                        <child>
-                          <object class="GtkImage" id="level-image1">
-                            <property name="resource">/img/levels/level1.png</property>
-                            <property name="pixel_size">256</property>
-                          </object>
-                        </child>
-                      </object>
+                      </packing>
                     </child>
                     <child>
-                      <object class="GtkStackPage">
+                      <object class="GtkImage" id="level-image2">
+                        <property name="resource">/img/levels/level2.png</property>
+                        <property name="pixel_size">256</property>
+                      </object>
+                      <packing>
                         <property name="name">level2</property>
-                        <child>
-                          <object class="GtkImage" id="level-image2">
-                            <property name="resource">/img/levels/level2.png</property>
-                            <property name="pixel_size">256</property>
-                          </object>
-                        </child>
-                      </object>
+                      </packing>
                     </child>
                     <child>
-                      <object class="GtkStackPage">
+                      <object class="GtkImage" id="level-image3">
+                        <property name="resource">/img/levels/level3.png</property>
+                        <property name="pixel_size">256</property>
+                      </object>
+                      <packing>
                         <property name="name">level3</property>
-                        <child>
-                          <object class="GtkImage" id="level-image3">
-                            <property name="resource">/img/levels/level3.png</property>
-                            <property name="pixel_size">256</property>
-                          </object>
-                        </child>
-                      </object>
+                      </packing>
                     </child>
                     <child>
-                      <object class="GtkStackPage">
+                      <object class="GtkImage" id="level-image4">
+                        <property name="resource">/img/levels/level4.png</property>
+                        <property name="pixel_size">256</property>
+                      </object>
+                      <packing>
                         <property name="name">level4</property>
-                        <child>
-                          <object class="GtkImage" id="level-image4">
-                            <property name="resource">/img/levels/level4.png</property>
-                            <property name="pixel_size">256</property>
-                          </object>
-                        </child>
-                      </object>
+                      </packing>
                     </child>
                     <child>
-                      <object class="GtkStackPage">
+                      <object class="GtkImage" id="level-image5">
+                        <property name="resource">/img/levels/level5.png</property>
+                        <property name="pixel_size">256</property>
+                      </object>
+                      <packing>
                         <property name="name">level5</property>
-                        <child>
-                          <object class="GtkImage" id="level-image5">
-                            <property name="resource">/img/levels/level5.png</property>
-                            <property name="pixel_size">256</property>
-                          </object>
-                        </child>
-                      </object>
+                      </packing>
                     </child>
                     <child>
-                      <object class="GtkStackPage">
+                      <object class="GtkImage" id="level-image6">
+                        <property name="resource">/img/levels/level6.png</property>
+                        <property name="pixel_size">256</property>
+                      </object>
+                      <packing>
                         <property name="name">level6</property>
-                        <child>
-                          <object class="GtkImage" id="level-image6">
-                            <property name="resource">/img/levels/level6.png</property>
-                            <property name="pixel_size">256</property>
-                          </object>
-                        </child>
-                      </object>
+                      </packing>
                     </child>
                     <child>
-                      <object class="GtkStackPage">
+                      <object class="GtkImage" id="level-image7">
+                        <property name="resource">/img/levels/level7.png</property>
+                        <property name="pixel_size">256</property>
+                      </object>
+                      <packing>
                         <property name="name">level7</property>
-                        <child>
-                          <object class="GtkImage" id="level-image7">
-                            <property name="resource">/img/levels/level7.png</property>
-                            <property name="pixel_size">256</property>
-                          </object>
-                        </child>
-                      </object>
+                      </packing>
                     </child>
                     <child>
-                      <object class="GtkStackPage">
+                      <object class="GtkImage" id="level-image8">
+                        <property name="resource">/img/levels/level8.png</property>
+                        <property name="pixel_size">256</property>
+                      </object>
+                      <packing>
                         <property name="name">level8</property>
-                        <child>
-                          <object class="GtkImage" id="level-image8">
-                            <property name="resource">/img/levels/level8.png</property>
-                            <property name="pixel_size">256</property>
-                          </object>
-                        </child>
-                      </object>
+                      </packing>
                     </child>
                     <child>
-                      <object class="GtkStackPage">
+                      <object class="GtkImage" id="level-image9">
+                        <property name="resource">/img/levels/level9.png</property>
+                        <property name="pixel_size">256</property>
+                      </object>
+                      <packing>
                         <property name="name">level9</property>
-                        <child>
-                          <object class="GtkImage" id="level-image9">
-                            <property name="resource">/img/levels/level9.png</property>
-                            <property name="pixel_size">256</property>
-                          </object>
-                        </child>
-                      </object>
+                      </packing>
                     </child>
                     <child>
-                      <object class="GtkStackPage">
-                        <property name="name">level10</property>
-                        <child>
-                          <object class="GtkImage" id="level-image10">
-                            <property name="resource">/img/levels/level10.png</property>
-                            <property name="pixel_size">256</property>
-                          </object>
-                        </child>
+                      <object class="GtkImage" id="level-image10">
+                        <property name="resource">/img/levels/level10.png</property>
+                        <property name="pixel_size">256</property>
                       </object>
+                      <packing>
+                        <property name="name">level10</property>
+                      </packing>
                     </child>
                   </object>
                 </child>
@@ -5095,42 +5118,38 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                     <property name="transition_duration">300</property>
                     <property name="transition_type">slide-left-right</property>
                     <child>
-                      <object class="GtkStackPage">
-                        <property name="name">page0</property>
+                      <object class="GtkScrolledWindow">
                         <child>
-                          <object class="GtkScrolledWindow">
-                            <child>
-                              <object class="GtkBox" id="active-achievements-box">
-                                <property name="width_request">600</property>
-                                <property name="halign">center</property>
-                                <property name="valign">start</property>
-                                <property name="margin_top">30</property>
-                                <property name="margin_bottom">20</property>
-                                <property name="orientation">vertical</property>
-                              </object>
-                            </child>
+                          <object class="GtkBox" id="active-achievements-box">
+                            <property name="width_request">600</property>
+                            <property name="halign">center</property>
+                            <property name="valign">start</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">20</property>
+                            <property name="orientation">vertical</property>
                           </object>
                         </child>
                       </object>
+                      <packing>
+                        <property name="name">page0</property>
+                      </packing>
                     </child>
                     <child>
-                      <object class="GtkStackPage">
-                        <property name="name">page1</property>
+                      <object class="GtkScrolledWindow">
                         <child>
-                          <object class="GtkScrolledWindow">
-                            <child>
-                              <object class="GtkBox" id="completed-achievements-box">
-                                <property name="width_request">600</property>
-                                <property name="halign">center</property>
-                                <property name="valign">start</property>
-                                <property name="margin_top">30</property>
-                                <property name="margin_bottom">20</property>
-                                <property name="orientation">vertical</property>
-                              </object>
-                            </child>
+                          <object class="GtkBox" id="completed-achievements-box">
+                            <property name="width_request">600</property>
+                            <property name="halign">center</property>
+                            <property name="valign">start</property>
+                            <property name="margin_top">30</property>
+                            <property name="margin_bottom">20</property>
+                            <property name="orientation">vertical</property>
                           </object>
                         </child>
                       </object>
+                      <packing>
+                        <property name="name">page1</property>
+                      </packing>
                     </child>
                   </object>
                 </child>
@@ -5188,7 +5207,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                         </style>
                       </object>
                     </child>
-                    <child type="end">
+                    <child>
                       <object class="GtkButton" id="achievements-reset-button">
                         <property name="tooltip_text" translatable="yes">Reset all achievements.</property>
                         <child>
@@ -5202,6 +5221,9 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                           <class name="destructive-action" />
                         </style>
                       </object>
+                      <packing>
+                        <property name="pack_type">end</property>
+                      </packing>
                     </child>
                   </object>
                 </child>

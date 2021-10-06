@@ -136,11 +136,16 @@ function registerWidgets() {
             // We use a Gtk.Overlay for the edit-button. This is actually only required
             // for items of type 'CustomMenu' but we create it anyways.
             const overlay = new Gtk.Overlay();
-            this.set_child(overlay);
+            utils.setChild(this,overlay);
 
             // Create the edit button.
-            this.editButton = Gtk.Button.new_from_icon_name('edit-symbolic');
-            this.editButton.add_css_class('pill-button');
+            if (utils.gtk4()) {
+              this.editButton = Gtk.Button.new_from_icon_name('edit-symbolic');
+            } else {
+              this.editButton = Gtk.Button.new_from_icon_name('edit-symbolic', Gtk.IconSize.BUTTON);
+            }
+
+            utils.addCSSClass(this.editButton, 'pill-button');
             this.editButton.valign = Gtk.Align.START;
             this.editButton.halign = Gtk.Align.END;
             overlay.add_overlay(this.editButton);
@@ -152,23 +157,27 @@ function registerWidgets() {
               margin_top: 5,
               margin_start: 5,
               margin_end: 5,
-              margin_bottom: 5,
-              has_frame: false
+              margin_bottom: 5
             });
-            this.button.add_css_class('round-button');
+            if (utils.gtk4()) {
+              this.button.has_frame = false;
+            } else {
+              this.button.relief = Gtk.ReliefStyle.NONE;
+            }
+            utils.addCSSClass(this.button, 'round-button');
 
             // Each item has an icon. THis is drawn using a GtkDrawingArea. Again, we do
             // not add this to a container yet, as where this is appended depends on the
             // given state. This is done further below.
             this.icon = new Gtk.DrawingArea({hexpand: true, vexpand: true});
-            this.icon.set_draw_func((widget, ctx) => {
+            utils.setDrawFunc(this.icon, (widget, ctx) => {
               const size =
                   Math.min(widget.get_allocated_width(), widget.get_allocated_height());
               ctx.translate(
                   (widget.get_allocated_width() - size) / 2,
                   (widget.get_allocated_height() - size) / 2);
               const font  = this._settings.get_string('font');
-              const color = widget.get_style_context().get_color();
+              const color = utils.getColor(widget);
               utils.paintIcon(ctx, this._config.icon, size, 1, font, color);
               return false;
             });
@@ -184,15 +193,15 @@ function registerWidgets() {
             // Only child an overview items have a caption.
             if (itemState == ItemState.GRID || itemState == ItemState.CHILD) {
               this._nameLabel = new Gtk.Label({ellipsize: Pango.EllipsizeMode.END});
-              this._nameLabel.add_css_class('caption-heading');
+              utils.addCSSClass(this._nameLabel, 'caption-heading');
             }
 
             // The shortcut label is only required for the menu mode.
             if (itemState == ItemState.GRID) {
               this._shortcutLabel =
                   new Gtk.Label({ellipsize: Pango.EllipsizeMode.END, use_markup: true});
-              this._shortcutLabel.add_css_class('caption');
-              this._shortcutLabel.add_css_class('dim-label');
+              utils.addCSSClass(this._shortcutLabel, 'caption');
+              utils.addCSSClass(this._shortcutLabel, 'dim-label');
             }
 
             // Now that all required widgets are set up, we add the to some containers.
@@ -202,29 +211,29 @@ function registerWidgets() {
             if (itemState == ItemState.GRID) {
               const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
               box.vexpand = true;
-              box.append(this.icon);
-              box.append(this._nameLabel);
-              box.append(this._shortcutLabel);
+              utils.boxAppend(box, this.icon);
+              utils.boxAppend(box, this._nameLabel);
+              utils.boxAppend(box, this._shortcutLabel);
 
-              this.button.set_child(box);
-              overlay.set_child(this.button);
+              utils.setChild(this.button,box);
+              utils.setChild(overlay,this.button);
             }
 
             // For the center item, the icon is directly add to the toggle button.
             if (itemState == ItemState.CENTER) {
-              overlay.set_child(this.button);
-              this.button.set_child(this.icon);
+              utils.setChild(overlay,this.button);
+              utils.setChild(this.button,this.icon);
             }
 
             // Child items are similar to grid items but do not contain a shortcut label.
             if (itemState == ItemState.CHILD) {
               const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
               box.vexpand = true;
-              box.append(this.icon);
-              box.append(this._nameLabel);
+              utils.boxAppend(box, this.icon);
+              utils.boxAppend(box, this._nameLabel);
 
-              this.button.set_child(box);
-              overlay.set_child(this.button);
+              utils.setChild(this.button,box);
+              utils.setChild(overlay,this.button);
             }
           }
 
@@ -369,18 +378,18 @@ function registerWidgets() {
         {
           let icon  = new Gtk.Image({icon_name: 'face-crying-symbolic', pixel_size: 128});
           let label = new Gtk.Label({label: _('No menus configured')});
-          label.add_css_class('title-3');
+          utils.addCSSClass(label, 'title-3');
           let description = new Gtk.Label(
               {label: _('Create a new menu with the button in the top right corner.')});
-          description.add_css_class('caption');
+          utils.addCSSClass(description, 'caption');
 
           this._ifEmptyHint           = Gtk.Box.new(Gtk.Orientation.VERTICAL, 4);
           this._ifEmptyHint.vexpand   = true;
           this._ifEmptyHint.valign    = Gtk.Align.CENTER;
           this._ifEmptyHint.sensitive = false;
-          this._ifEmptyHint.append(icon);
-          this._ifEmptyHint.append(label);
-          this._ifEmptyHint.append(description);
+          utils.boxAppend(this._ifEmptyHint, icon);
+          utils.boxAppend(this._ifEmptyHint, label);
+          utils.boxAppend(this._ifEmptyHint, description);
 
           this._ifEmptyHint.set_parent(this);
         }
@@ -390,7 +399,7 @@ function registerWidgets() {
         {
           let icon  = Gtk.Image.new_from_resource('/img/arrow-up-symbolic.svg');
           let label = new Gtk.Label({label: _('Add a new item')});
-          label.add_css_class('caption');
+          utils.addCSSClass(label, 'caption');
 
           this._addItemHint            = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 4);
           this._addItemHint.hexpand    = true;
@@ -398,8 +407,8 @@ function registerWidgets() {
           this._addItemHint.valign     = Gtk.Align.START;
           this._addItemHint.sensitive  = false;
           this._addItemHint.margin_end = 20;
-          this._addItemHint.append(label);
-          this._addItemHint.append(icon);
+          utils.boxAppend(this._addItemHint, label);
+          utils.boxAppend(this._addItemHint, icon);
 
           this._addItemHint.set_parent(this);
         }
@@ -429,7 +438,7 @@ function registerWidgets() {
             margin_top: 10,
             margin_bottom: 10,
           });
-          icon.set_draw_func((widget, ctx) => {
+          utils.setDrawFunc(icon, (widget, ctx) => {
             const width  = widget.get_allocated_width();
             const height = widget.get_allocated_height();
             const size   = Math.min(width, height);
@@ -439,21 +448,21 @@ function registerWidgets() {
               ctx.translate(-width / 2, -height / 2);
             }
             ctx.translate((width - size) / 2, (height - size) / 2);
-            const color = widget.get_style_context().get_color();
+            const color = utils.getColor(widget);
             utils.paintIcon(ctx, 'go-previous-symbolic', size, 1, 'Sans', color);
 
             return false;
           });
 
           const button = new Gtk.Button();
-          button.add_css_class('pill-button');
-          button.set_child(icon);
+          utils.addCSSClass(button, 'pill-button');
+          utils.setChild(button,icon);
           button.connect('clicked', (b) => {
             // Emit the 'go-back' signal when clicked.
             this.emit('go-back');
           });
 
-          this._backButton.set_child(button);
+          utils.setChild(this._backButton,button);
         }
 
         // The entire menu editor is a drop target. This is used both for internal
@@ -472,6 +481,7 @@ function registerWidgets() {
           this._dropRow    = null;
           this._dropColumn = null;
 
+          if (utils.gtk4()) {
           this._dropTarget =
               new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
 
@@ -764,6 +774,7 @@ function registerWidgets() {
 
           this.add_controller(this._dropTarget);
         }
+        }
       }
 
       // ------------------------------------------------------ overridden virtual methods
@@ -1043,6 +1054,8 @@ function registerWidgets() {
       // (e.g. we are in submenu mode).
       setItems(configs, selectedIndex, centerConfig, parentAngle) {
 
+        utils.debug("setItems");
+
         // In the first part of this method we will decide what kind of transition
         // animation will be required to show the new items.
         // Based on the parameters, we can decide whether we should display the
@@ -1268,6 +1281,7 @@ function registerWidgets() {
             actions |= Gdk.DragAction.COPY;
           }
 
+          if (utils.gtk4()) {
           let dragSource = new Gtk.DragSource({actions: actions});
 
           // The drag source provides a stringified JSON version of the item config. The
@@ -1319,9 +1333,12 @@ function registerWidgets() {
 
           item.button.add_controller(dragSource);
         }
+        }
 
         // Non-center items of type 'CustomMenu' can also receive drops.
         if (itemState != ItemState.CENTER) {
+
+          if (utils.gtk4()) {
           const dropTarget =
               new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
           dropTarget.set_gtypes([GObject.TYPE_STRING]);
@@ -1370,6 +1387,7 @@ function registerWidgets() {
 
           item.button.add_controller(dropTarget);
         }
+        }
 
         // Emit the 'select' signal when the button is pressed.
         item.button.connect('clicked', (b) => {
@@ -1378,6 +1396,10 @@ function registerWidgets() {
             this.emit('select', this._items.indexOf(item));
           }
         });
+
+        if (!utils.gtk4()) {
+          item.show_all();
+        }
 
         return item;
       }
@@ -1504,6 +1526,8 @@ function registerWidgets() {
   }
 
   if (GObject.type_from_name('FlyPieMenuEditor') == null) {
+
+    const MIN_GRID_SIZE = ItemSize[ItemState.GRID] * 4;
     
     if (utils.gtk4()) {
 
@@ -1515,7 +1539,7 @@ function registerWidgets() {
       vfunc_measure(orientation, for_size) {
         if (this._inMenuOverviewMode()) {
           if (orientation == Gtk.Orientation.HORIZONTAL) {
-            return [ItemSize[ItemState.GRID] * 4, ItemSize[ItemState.GRID] * 4, -1, -1];
+            return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
           }
 
           // The possible amount of columns.
@@ -1531,7 +1555,7 @@ function registerWidgets() {
 
         // In menu-edit mode we simply return a square shaped region of the same size as
         // the grid width.
-        return [ItemSize[ItemState.GRID] * 4, ItemSize[ItemState.GRID] * 4, -1, -1];
+        return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
       }
     });
 
@@ -1542,7 +1566,40 @@ function registerWidgets() {
 
       // ------------------------------------------------------ overridden virtual methods
 
-     
+      vfunc_get_preferred_height() {
+        utils.debug("vfunc_get_preferred_height");
+        return [MIN_GRID_SIZE, MIN_GRID_SIZE];
+      }
+
+      vfunc_get_preferred_height_for_width(width) {
+        utils.debug("vfunc_get_preferred_height_for_width");
+        if (this._inMenuOverviewMode()) {
+          // The possible amount of columns.
+          const columns = Math.floor(width / ItemSize[ItemState.GRID]);
+
+          // The required amount of rows.
+          const rows = Math.ceil(this._items.length / columns);
+
+          // The required height of the grid.
+          const gridHeight = rows * ItemSize[ItemState.GRID];
+          return [gridHeight, gridHeight];
+        }
+
+        // In menu-edit mode we simply return a square shaped region of the same size as
+        // the grid width.
+        return [MIN_GRID_SIZE, MIN_GRID_SIZE];
+      }
+
+      vfunc_get_preferred_width() {
+        utils.debug("vfunc_get_preferred_width");
+        return [MIN_GRID_SIZE, MIN_GRID_SIZE];
+      }
+
+      vfunc_get_preferred_width_for_height(height)  {
+        utils.debug("vfunc_get_preferred_width_for_height");
+        return [MIN_GRID_SIZE, MIN_GRID_SIZE];
+      }
+
     });
 
   }

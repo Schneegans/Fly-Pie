@@ -63,5 +63,7 @@
     <file>ui/gtk4/settings.ui</file>
     <file>video/video1.webm</file>
     <file>video/video2.webm</file>
+    <file>video/video1.gif</file>
+    <file>video/video2.gif</file>
   </gresource>
 </gresources>

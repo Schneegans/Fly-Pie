@@ -103,8 +103,8 @@ var TutorialPage = class TutorialPage {
     });
 
     // Draw the Fly-Pie logo with the current theme's foreground color.
-    this._builder.get_object('fly-pie-logo').set_draw_func((widget, ctx) => {
-      const color = widget.get_style_context().get_color();
+    utils.setDrawFunc(this._builder.get_object('fly-pie-logo'),(widget, ctx) => {
+      const color = utils.getColor(widget);
       const logo  = GdkPixbuf.Pixbuf.new_from_resource('/img/logo.svg');
 
       ctx.pushGroup();
@@ -120,7 +120,13 @@ var TutorialPage = class TutorialPage {
     // for now as the GtkVideo does not seem to have a resource property.
     for (let i = 1; i <= 2; i++) {
       const video = this._builder.get_object('tutorial-animation-' + i);
-      video.set_resource('/video/video' + i + '.webm');
+
+      if (utils.gtk4()) {
+        video.set_resource('/video/video' + i + '.webm');
+      } else {
+        video.set_from_animation(
+          GdkPixbuf.PixbufAnimation.new_from_resource('/video/video' + i + '.gif'));
+      }
     }
 
     // Make the five Show-Menu buttons of the tutorial pages actually show a menu.

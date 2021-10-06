@@ -54,11 +54,7 @@ function registerWidget() {
           filter: fileFilter
         });
 
-        if (utils.gtk4()) {
-          this._dialog.get_content_area().append(this._fileChooser);
-        } else {
-          this._dialog.get_content_area().pack_start(this._fileChooser, false, false, 0);
-        }
+        utils.boxAppend(this._dialog.get_content_area(), this._fileChooser);
 
         this._dialog.connect('response', (dialog, id) => {
           if (id == Gtk.ResponseType.OK) {
@@ -69,8 +65,14 @@ function registerWidget() {
         });
 
         this._button.connect('clicked', (button) => {
-          this._dialog.set_transient_for(button.get_root());
-          this._dialog.show();
+          this._dialog.set_transient_for(utils.getRoot(button));
+
+          if (utils.gtk4()) {
+            this._dialog.show();
+          } else {
+            this._dialog.show_all();
+          }
+          
           if (this._file != null) {
             this._fileChooser.set_file(this._file);
           }

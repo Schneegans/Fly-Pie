@@ -251,7 +251,7 @@ var SettingsPage = class SettingsPage {
     this._builder.get_object('save-preset-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
         action: Gtk.FileChooserAction.SAVE,
-        transient_for: button.get_root(),
+        transient_for: utils.getRoot(button),
         modal: true
       });
 
@@ -296,13 +296,17 @@ var SettingsPage = class SettingsPage {
         dialog.destroy();
       });
 
-      dialog.show();
+      if (utils.gtk4()) {
+        dialog.show();
+      } else {
+        dialog.show_all();
+      }
     });
 
     this._builder.get_object('load-preset-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
         action: Gtk.FileChooserAction.OPEN,
-        transient_for: button.get_root(),
+        transient_for: utils.getRoot(button),
         modal: true
       });
 
@@ -333,7 +337,7 @@ var SettingsPage = class SettingsPage {
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
-              transient_for: button.get_root(),
+              transient_for: utils.getRoot(button),
               modal: true,
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
@@ -348,7 +352,11 @@ var SettingsPage = class SettingsPage {
         dialog.destroy();
       });
 
-      dialog.show();
+      if (utils.gtk4()) {
+        dialog.show();
+      } else {
+        dialog.show_all();
+      }
     });
 
     // Create a random preset when the corresponding button is pressed.
@@ -396,7 +404,7 @@ var SettingsPage = class SettingsPage {
   // settings key. It also binds any corresponding copy buttons and '-hover' variants if
   // they exist.
   _bindFontButton(settingsKey) {
-    this._bind(settingsKey, 'font');
+      this._bind(settingsKey, utils.gtk4() ? 'font' : 'font-name');
   }
 
   // Connects a Gtk.ComboBox (or anything else which has an 'active-id' property) to a
@@ -567,9 +575,9 @@ var SettingsPage = class SettingsPage {
 
     // Draw six lines representing the wedge separators.
     let tabIcon = this._builder.get_object('wedges-tab-icon');
-    tabIcon.set_draw_func((widget, ctx) => {
+    utils.setDrawFunc(tabIcon,(widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color();
+      const color = utils.getColor(widget);
 
       ctx.translate(size / 2, size / 2);
       ctx.rotate(2 * Math.PI / 12);
@@ -589,9 +597,9 @@ var SettingsPage = class SettingsPage {
 
     // Draw one circle representing the center item.
     tabIcon = this._builder.get_object('center-tab-icon');
-    tabIcon.set_draw_func((widget, ctx) => {
+    utils.setDrawFunc(tabIcon,(widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color();
+      const color = utils.getColor(widget);
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
@@ -603,9 +611,9 @@ var SettingsPage = class SettingsPage {
 
     // Draw six circles representing child items.
     tabIcon = this._builder.get_object('children-tab-icon');
-    tabIcon.set_draw_func((widget, ctx) => {
+    utils.setDrawFunc(tabIcon,(widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color();
+      const color = utils.getColor(widget);
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
@@ -622,9 +630,9 @@ var SettingsPage = class SettingsPage {
     // Draw six groups of five grandchildren each. The grandchild at the back-navigation
     // position is skipped.
     tabIcon = this._builder.get_object('grandchildren-tab-icon');
-    tabIcon.set_draw_func((widget, ctx) => {
+    utils.setDrawFunc(tabIcon,(widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color();
+      const color = utils.getColor(widget);
 
       ctx.translate(size / 2, size / 2);
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
@@ -650,9 +658,9 @@ var SettingsPage = class SettingsPage {
 
     // Draw a line and some circles representing a trace.
     tabIcon = this._builder.get_object('trace-tab-icon');
-    tabIcon.set_draw_func((widget, ctx) => {
+    utils.setDrawFunc(tabIcon,(widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color();
+      const color = utils.getColor(widget);
 
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
 
@@ -677,9 +685,9 @@ var SettingsPage = class SettingsPage {
 
     // Draw three dots indicating the advanced settings.
     tabIcon = this._builder.get_object('advanced-tab-icon');
-    tabIcon.set_draw_func((widget, ctx) => {
+    utils.setDrawFunc(tabIcon,(widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
-      const color = widget.get_style_context().get_color();
+      const color = utils.getColor(widget);
 
       ctx.setSourceRGBA(color.red, color.green, color.blue, color.alpha);
 
