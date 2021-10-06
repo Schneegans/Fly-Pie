@@ -237,8 +237,8 @@ var AchievementsPage = class AchievementsPage {
 
     for (let i = 1; i < widgets.length; i++) {
       if (utils.gtk4()) {
-      container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
-    }else {
+        container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
+      } else {
         container.reorder_child(widgets[i].revealer, i);
       }
     }
@@ -253,8 +253,8 @@ var AchievementsPage = class AchievementsPage {
 
     for (let i = 1; i < widgets.length; i++) {
       if (utils.gtk4()) {
-      container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
-    }else {
+        container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
+      } else {
         container.reorder_child(widgets[i].revealer, i);
       }
     }
@@ -280,8 +280,9 @@ var AchievementsPage = class AchievementsPage {
     }
 
     // Add them to the UI.
-    utils.boxAppend(this._builder.get_object('active-achievements-box'),active.revealer);
-    utils.boxAppend(this._builder.get_object('completed-achievements-box'),completed.revealer);
+    utils.boxAppend(this._builder.get_object('active-achievements-box'), active.revealer);
+    utils.boxAppend(
+        this._builder.get_object('completed-achievements-box'), completed.revealer);
   }
 
   // This method creates a set of widgets contained in a Gtk.Revealer to represent an
@@ -399,7 +400,7 @@ var AchievementsPage = class AchievementsPage {
 
     // Finally wrap the thing in a Gtk.Revealer.
     result.revealer = new Gtk.Revealer();
-    utils.setChild(result.revealer,grid);
+    utils.setChild(result.revealer, grid);
 
     return result;
   }

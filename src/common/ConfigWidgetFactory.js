@@ -37,7 +37,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     const box = this.createConfigWidgetCaption(name, description);
 
     const entry = new Gtk.Entry({text: text, tooltip_markup: tooltip});
-    utils.boxAppend(box,entry);
+    utils.boxAppend(box, entry);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
@@ -56,7 +56,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entry = Gtk.SpinButton.new_with_range(min, max, step);
     entry.value = value;
-    utils.boxAppend(box,entry);
+    utils.boxAppend(box, entry);
 
     entry.connect('notify::value', (widget) => {
       callback(widget.value);
@@ -75,7 +75,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entryBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
     entryBox.get_style_context().add_class('linked');
-    utils.boxAppend(box,entryBox);
+    utils.boxAppend(box, entryBox);
 
     let button;
     if (utils.gtk4()) {
@@ -85,8 +85,8 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     }
 
     const entry = new Gtk.Entry({text: file, hexpand: true});
-    utils.boxAppend(entryBox,entry);
-    utils.boxAppend(entryBox,button);
+    utils.boxAppend(entryBox, entry);
+    utils.boxAppend(entryBox, button);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
@@ -115,7 +115,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         fileChooser.set_file(currentFile);
       }
 
-      utils.boxAppend(dialog.get_content_area(),fileChooser);
+      utils.boxAppend(dialog.get_content_area(), fileChooser);
 
       dialog.connect('response', (dialog, id) => {
         if (id == Gtk.ResponseType.OK) {
@@ -151,7 +151,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entryBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
     entryBox.get_style_context().add_class('linked');
-    utils.boxAppend(box,entryBox);
+    utils.boxAppend(box, entryBox);
 
     let button;
     if (utils.gtk4()) {
@@ -161,8 +161,8 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     }
 
     const entry = new Gtk.Entry({text: command, hexpand: true});
-    utils.boxAppend(entryBox,entry);
-    utils.boxAppend(entryBox,button);
+    utils.boxAppend(entryBox, entry);
+    utils.boxAppend(entryBox, button);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
@@ -182,7 +182,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       const appChooser =
           new Gtk.AppChooserWidget({show_all: true, hexpand: true, vexpand: true});
 
-        utils.boxAppend(dialog.get_content_area(),appChooser);
+      utils.boxAppend(dialog.get_content_area(), appChooser);
 
       const selectApp = (app) => {
         callback(
@@ -224,7 +224,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     label.set_accelerator(shortcut);
 
     const box = this.createConfigWidgetCaption(name, description);
-    utils.boxAppend(box,container);
+    utils.boxAppend(box, container);
 
     return box;
   }
@@ -237,7 +237,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 5, margin_top: 20});
     const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL, spacing: 10});
 
-    utils.boxAppend(vBox,hBox);
+    utils.boxAppend(vBox, hBox);
 
     // This is shown on the left above the data widget.
     const nameLabel =
@@ -247,8 +247,8 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     const descriptionLabel = new Gtk.Label({label: description});
     descriptionLabel.get_style_context().add_class('dim-label');
 
-    utils.boxAppend(hBox,nameLabel);
-    utils.boxAppend(hBox,descriptionLabel);
+    utils.boxAppend(hBox, nameLabel);
+    utils.boxAppend(hBox, descriptionLabel);
 
     return vBox;
   }
@@ -274,7 +274,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     const listBox = new Gtk.ListBox();
     const row     = new Gtk.ListBoxRow({height_request: 50});
 
-    utils.setChild(frame,listBox);
+    utils.setChild(frame, listBox);
 
     if (utils.gtk4()) {
       listBox.append(row);
@@ -288,7 +288,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       halign: Gtk.Align.CENTER,
       valign: Gtk.Align.CENTER
     });
-    utils.setChild(row,label);
+    utils.setChild(row, label);
 
     // Whenever the widget is in the please-select-something-state, the label is cleared
     // and a text indicating that the user should press the shortcut is shown. To be able
@@ -326,63 +326,63 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     });
 
     // Key input events are received once the input is grabbed.
-    if(utils.gtk4()) {
-    const keyController = Gtk.EventControllerKey.new();
-    keyController.connect('key-pressed', (controller, keyval, keycode, state) => {
-      if (row.is_selected()) {
-        const mods = state & Gtk.accelerator_get_default_mod_mask();
+    if (utils.gtk4()) {
+      const keyController = Gtk.EventControllerKey.new();
+      keyController.connect('key-pressed', (controller, keyval, keycode, state) => {
+        if (row.is_selected()) {
+          const mods = state & Gtk.accelerator_get_default_mod_mask();
 
-        if (keyval == Gdk.KEY_Escape) {
-          // Escape cancels the shortcut selection.
+          if (keyval == Gdk.KEY_Escape) {
+            // Escape cancels the shortcut selection.
+            label.set_accelerator(lastAccelerator);
+            cancelGrab();
+
+          } else if (keyval == Gdk.KEY_BackSpace) {
+            // BackSpace removes any bindings.
+            label.set_accelerator('');
+            onSelect('');
+            cancelGrab();
+
+          } else if (
+              Gtk.accelerator_valid(keyval, mods) || keyval == Gdk.KEY_Tab ||
+              keyval == Gdk.KEY_ISO_Left_Tab || keyval == Gdk.KEY_KP_Tab) {
+            // Else, if a valid accelerator was pressed, we store it. The tab key is for
+            // some reason not considered to be a valid key for accelerators.
+            const accelerator = Gtk.accelerator_name(keyval, mods);
+            onSelect(accelerator);
+            label.set_accelerator(accelerator);
+            cancelGrab();
+          }
+
+          return true;
+        }
+        return false;
+      });
+
+      // Clicking with the mouse cancels the shortcut selection.
+      const clickController = Gtk.GestureClick.new();
+      clickController.connect('pressed', () => {
+        if (row.is_selected()) {
           label.set_accelerator(lastAccelerator);
           cancelGrab();
+        }
+        return true;
+      });
 
-        } else if (keyval == Gdk.KEY_BackSpace) {
-          // BackSpace removes any bindings.
-          label.set_accelerator('');
-          onSelect('');
-          cancelGrab();
-
-        } else if (
-            Gtk.accelerator_valid(keyval, mods) || keyval == Gdk.KEY_Tab ||
-            keyval == Gdk.KEY_ISO_Left_Tab || keyval == Gdk.KEY_KP_Tab) {
-          // Else, if a valid accelerator was pressed, we store it. The tab key is for
-          // some reason not considered to be a valid key for accelerators.
-          const accelerator = Gtk.accelerator_name(keyval, mods);
-          onSelect(accelerator);
-          label.set_accelerator(accelerator);
+      // Clicking with the mouse cancels the shortcut selection.
+      const focusController = Gtk.EventControllerFocus.new();
+      focusController.connect('leave', () => {
+        if (row.is_selected()) {
+          label.set_accelerator(lastAccelerator);
           cancelGrab();
         }
-
         return true;
-      }
-      return false;
-    });
+      });
 
-    // Clicking with the mouse cancels the shortcut selection.
-    const clickController = Gtk.GestureClick.new();
-    clickController.connect('pressed', () => {
-      if (row.is_selected()) {
-        label.set_accelerator(lastAccelerator);
-        cancelGrab();
-      }
-      return true;
-    });
-
-    // Clicking with the mouse cancels the shortcut selection.
-    const focusController = Gtk.EventControllerFocus.new();
-    focusController.connect('leave', () => {
-      if (row.is_selected()) {
-        label.set_accelerator(lastAccelerator);
-        cancelGrab();
-      }
-      return true;
-    });
-
-    row.add_controller(keyController);
-    row.add_controller(clickController);
-    row.add_controller(focusController);
-  }
+      row.add_controller(keyController);
+      row.add_controller(clickController);
+      row.add_controller(focusController);
+    }
 
     return [frame, label];
   }

@@ -55,7 +55,7 @@ var PreferencesDialog = class PreferencesDialog {
 
     // Load the user interface file.
     this._builder = new Gtk.Builder();
-    this._builder.add_from_resource(`/ui/${utils.gtk4() ? "gtk4" : "gtk3"}/settings.ui`);
+    this._builder.add_from_resource(`/ui/${utils.gtk4() ? 'gtk4' : 'gtk3'}/settings.ui`);
 
     // Load the CSS file for the settings dialog.
     const styleProvider = Gtk.CssProvider.new();
@@ -66,7 +66,8 @@ var PreferencesDialog = class PreferencesDialog {
           Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     } else {
       Gtk.StyleContext.add_provider_for_screen(
-        Gdk.Screen.get_default(), styleProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+          Gdk.Screen.get_default(), styleProvider,
+          Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
     // To structure the source code, the code for the individual dialog pages has been put
@@ -79,7 +80,7 @@ var PreferencesDialog = class PreferencesDialog {
     this._settingsPage = new SettingsPage(this._builder, this._settings);
 
     // Initialize the Menu Editor page.
-    //this._menuEditorPage = new MenuEditorPage(this._builder, this._settings);
+    // this._menuEditorPage = new MenuEditorPage(this._builder, this._settings);
 
     // Initialize the Achievements page.
     this._achievementsPage = new AchievementsPage(this._builder, this._settings);
@@ -231,7 +232,7 @@ var PreferencesDialog = class PreferencesDialog {
     Statistics.getInstance().addSettingsOpened();
 
     // On GTK3, we have to show the widgets.
-    if (!utils.gtk4()){
+    if (!utils.gtk4()) {
       this._widget.show_all();
       this._builder.get_object('about-popover').foreach(w => w.show_all());
       this._builder.get_object('preset-popover').foreach(w => w.show_all());

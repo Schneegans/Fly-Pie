@@ -103,7 +103,7 @@ var TutorialPage = class TutorialPage {
     });
 
     // Draw the Fly-Pie logo with the current theme's foreground color.
-    utils.setDrawFunc(this._builder.get_object('fly-pie-logo'),(widget, ctx) => {
+    utils.setDrawFunc(this._builder.get_object('fly-pie-logo'), (widget, ctx) => {
       const color = utils.getColor(widget);
       const logo  = GdkPixbuf.Pixbuf.new_from_resource('/img/logo.svg');
 
@@ -125,7 +125,7 @@ var TutorialPage = class TutorialPage {
         video.set_resource('/video/video' + i + '.webm');
       } else {
         video.set_from_animation(
-          GdkPixbuf.PixbufAnimation.new_from_resource('/video/video' + i + '.gif'));
+            GdkPixbuf.PixbufAnimation.new_from_resource('/video/video' + i + '.gif'));
       }
     }
 

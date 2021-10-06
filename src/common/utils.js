@@ -148,7 +148,8 @@ function boxAppend(box, child) {
   }
 }
 
-// Appends the given child to the given one-child container. This could be a Gtk.Button for example. Or a Gtk.Revealer.
+// Appends the given child to the given one-child container. This could be a Gtk.Button
+// for example. Or a Gtk.Revealer.
 function setChild(widget, child) {
   if (gtk4()) {
     widget.set_child(child);
@@ -162,7 +163,7 @@ function setDrawFunc(drawingArea, func) {
   if (gtk4()) {
     drawingArea.set_draw_func(func);
   } else {
-    drawingArea.connect("draw", func);
+    drawingArea.connect('draw', func);
   }
 }
 
@@ -170,7 +171,7 @@ function setDrawFunc(drawingArea, func) {
 function getColor(widget) {
   if (gtk4()) {
     return widget.get_style_context().get_color();
-  } 
+  }
 
   return widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
 }
@@ -179,7 +180,7 @@ function getColor(widget) {
 function getRoot(widget) {
   if (gtk4()) {
     return widget.get_root();
-  } 
+  }
 
   return widget.get_toplevel();
 }

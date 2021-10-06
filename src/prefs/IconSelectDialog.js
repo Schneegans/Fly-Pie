@@ -10,8 +10,8 @@
 
 const {GObject, GLib, Gtk, Gio, Gdk} = imports.gi;
 
-const Me                 = imports.misc.extensionUtils.getCurrentExtension();
-const utils              = Me.imports.src.common.utils;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.src.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This dialog allows selecting an icon. This can be either from the user's icon theme  //

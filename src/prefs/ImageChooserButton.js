@@ -12,8 +12,8 @@ const {GObject, Gtk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me                 = imports.misc.extensionUtils.getCurrentExtension();
-const utils              = Me.imports.src.common.utils;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.src.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Since the FileChooserButton from GTK3 is gone, we have to provide a similar          //
@@ -72,7 +72,7 @@ function registerWidget() {
           } else {
             this._dialog.show_all();
           }
-          
+
           if (this._file != null) {
             this._fileChooser.set_file(this._file);
           }

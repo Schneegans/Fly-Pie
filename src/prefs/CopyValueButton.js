@@ -10,8 +10,8 @@
 
 const {GObject, Gtk} = imports.gi;
 
-const Me                 = imports.misc.extensionUtils.getCurrentExtension();
-const utils              = Me.imports.src.common.utils;
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.src.common.utils;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The CopyValueButton is instantiated many times in Fly-Pie's settings dialog. It is   //

@@ -136,13 +136,14 @@ function registerWidgets() {
             // We use a Gtk.Overlay for the edit-button. This is actually only required
             // for items of type 'CustomMenu' but we create it anyways.
             const overlay = new Gtk.Overlay();
-            utils.setChild(this,overlay);
+            utils.setChild(this, overlay);
 
             // Create the edit button.
             if (utils.gtk4()) {
               this.editButton = Gtk.Button.new_from_icon_name('edit-symbolic');
             } else {
-              this.editButton = Gtk.Button.new_from_icon_name('edit-symbolic', Gtk.IconSize.BUTTON);
+              this.editButton =
+                  Gtk.Button.new_from_icon_name('edit-symbolic', Gtk.IconSize.BUTTON);
             }
 
             utils.addCSSClass(this.editButton, 'pill-button');
@@ -153,12 +154,8 @@ function registerWidgets() {
             // Create the main toggle button which makes the item selectable. We do not
             // add this to a container yet, as where this is appended depends on the given
             // state. This is done further below.
-            this.button = new Gtk.ToggleButton({
-              margin_top: 5,
-              margin_start: 5,
-              margin_end: 5,
-              margin_bottom: 5
-            });
+            this.button = new Gtk.ToggleButton(
+                {margin_top: 5, margin_start: 5, margin_end: 5, margin_bottom: 5});
             if (utils.gtk4()) {
               this.button.has_frame = false;
             } else {
@@ -215,14 +212,14 @@ function registerWidgets() {
               utils.boxAppend(box, this._nameLabel);
               utils.boxAppend(box, this._shortcutLabel);
 
-              utils.setChild(this.button,box);
-              utils.setChild(overlay,this.button);
+              utils.setChild(this.button, box);
+              utils.setChild(overlay, this.button);
             }
 
             // For the center item, the icon is directly add to the toggle button.
             if (itemState == ItemState.CENTER) {
-              utils.setChild(overlay,this.button);
-              utils.setChild(this.button,this.icon);
+              utils.setChild(overlay, this.button);
+              utils.setChild(this.button, this.icon);
             }
 
             // Child items are similar to grid items but do not contain a shortcut label.
@@ -232,8 +229,8 @@ function registerWidgets() {
               utils.boxAppend(box, this.icon);
               utils.boxAppend(box, this._nameLabel);
 
-              utils.setChild(this.button,box);
-              utils.setChild(overlay,this.button);
+              utils.setChild(this.button, box);
+              utils.setChild(overlay, this.button);
             }
           }
 
@@ -456,13 +453,13 @@ function registerWidgets() {
 
           const button = new Gtk.Button();
           utils.addCSSClass(button, 'pill-button');
-          utils.setChild(button,icon);
+          utils.setChild(button, icon);
           button.connect('clicked', (b) => {
             // Emit the 'go-back' signal when clicked.
             this.emit('go-back');
           });
 
-          utils.setChild(this._backButton,button);
+          utils.setChild(this._backButton, button);
         }
 
         // The entire menu editor is a drop target. This is used both for internal
@@ -482,298 +479,303 @@ function registerWidgets() {
           this._dropColumn = null;
 
           if (utils.gtk4()) {
-          this._dropTarget =
-              new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+            this._dropTarget =
+                new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
 
-          // We accept strings: Menu items are represented with a JSON representation (the
-          // same format which is used for saving Fly-Pie's settings). External drops
-          // usually are URIs.
-          this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
+            // We accept strings: Menu items are represented with a JSON representation
+            // (the same format which is used for saving Fly-Pie's settings). External
+            // drops usually are URIs.
+            this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
 
-          // We accept everything :)
-          this._dropTarget.connect('accept', () => true);
+            // We accept everything :)
+            this._dropTarget.connect('accept', () => true);
 
-          // When the user drags something across the widget, we re-arrange all items to
-          // visually show where the new item would be created if dropped. In this
-          // 'motion' callback, we compute the index where the data is supposed to be
-          // dropped. The actual item positioning is later done in vfunc_size_allocate()
-          // based on the computed index.
-          this._dropTarget.connect('motion', (t, x, y) => {
-            // If any of the below values changes during this callback, we will trigger an
-            // animation so that items move around smoothly.
-            const lastDropRow    = this._dropRow;
-            const lastDropColumn = this._dropColumn;
-            const lastDropIndex  = this._dropIndex;
+            // When the user drags something across the widget, we re-arrange all items to
+            // visually show where the new item would be created if dropped. In this
+            // 'motion' callback, we compute the index where the data is supposed to be
+            // dropped. The actual item positioning is later done in vfunc_size_allocate()
+            // based on the computed index.
+            this._dropTarget.connect('motion', (t, x, y) => {
+              // If any of the below values changes during this callback, we will trigger
+              // an animation so that items move around smoothly.
+              const lastDropRow    = this._dropRow;
+              const lastDropColumn = this._dropColumn;
+              const lastDropIndex  = this._dropIndex;
 
-            // Computing the _dropIndex in menu overview mode is rather simple as we just
-            // have to compute the row and column the pointer resides currently over.
-            if (this._inMenuOverviewMode()) {
+              // Computing the _dropIndex in menu overview mode is rather simple as we
+              // just have to compute the row and column the pointer resides currently
+              // over.
+              if (this._inMenuOverviewMode()) {
 
-              // The grid is drawn centered. Here we make the coordinates relative to the
-              // grid and clamp the coordinates to the grid bounds.
-              x -= this._gridOffsetX;
-              y -= this._gridOffsetY;
-              x = Math.max(0, Math.min(this._columnCount * ItemSize[ItemState.GRID], x));
-              y = Math.max(0, Math.min(this._rowCount * ItemSize[ItemState.GRID], y));
+                // The grid is drawn centered. Here we make the coordinates relative to
+                // the grid and clamp the coordinates to the grid bounds.
+                x -= this._gridOffsetX;
+                y -= this._gridOffsetY;
+                x = Math.max(
+                    0, Math.min(this._columnCount * ItemSize[ItemState.GRID], x));
+                y = Math.max(0, Math.min(this._rowCount * ItemSize[ItemState.GRID], y));
 
-              // To allow for drops into items, the valid drop zones are between two items
-              // with a total width of half an item (one quarter from the one item and a
-              // quarter of the next item).
-              const dropZoneWidth = ItemSize[ItemState.GRID] / 4;
+                // To allow for drops into items, the valid drop zones are between two
+                // items with a total width of half an item (one quarter from the one item
+                // and a quarter of the next item).
+                const dropZoneWidth = ItemSize[ItemState.GRID] / 4;
 
-              // Compute the _drop* members if we are in a drop zone, else set them to
-              // null.
-              if (x % ItemSize[ItemState.GRID] < dropZoneWidth ||
-                  x % ItemSize[ItemState.GRID] >
-                      ItemSize[ItemState.GRID] - dropZoneWidth) {
-                this._dropColumn = Math.floor(x / ItemSize[ItemState.GRID] + 0.5);
-                this._dropRow    = Math.floor(y / ItemSize[ItemState.GRID]);
-                this._dropIndex  = Math.min(
-                    this._items.length,
-                    this._columnCount * this._dropRow + this._dropColumn);
-              } else {
-                this._dropColumn = null;
-                this._dropRow    = null;
-                this._dropIndex  = null;
-              }
-
-            } else {
-              // In menu edit mode, the computation is much more involved.
-
-              // First we make the coordinates relative to the center.
-              x -= this._width / 2;
-              y -= this._height / 2;
-
-              // We assume that we are not in a valid drop zone. If we are, this will be
-              // set to the appropriate index later.
-              this._dropIndex = null;
-
-              // We compute the pointer-center distance. Items cannot be dropped too close
-              // to the center.
-              const distance = Math.sqrt(x * x + y * y);
-              if (distance > ItemSize[ItemState.CENTER] / 2) {
-
-                // Compute the angle between center-pointer and center-up.
-                let mouseAngle = Math.acos(x / distance) * 180 / Math.PI;
-                if (y < 0) {
-                  mouseAngle = 360 - mouseAngle;
+                // Compute the _drop* members if we are in a drop zone, else set them to
+                // null.
+                if (x % ItemSize[ItemState.GRID] < dropZoneWidth ||
+                    x % ItemSize[ItemState.GRID] >
+                        ItemSize[ItemState.GRID] - dropZoneWidth) {
+                  this._dropColumn = Math.floor(x / ItemSize[ItemState.GRID] + 0.5);
+                  this._dropRow    = Math.floor(y / ItemSize[ItemState.GRID]);
+                  this._dropIndex  = Math.min(
+                      this._items.length,
+                      this._columnCount * this._dropRow + this._dropColumn);
+                } else {
+                  this._dropColumn = null;
+                  this._dropRow    = null;
+                  this._dropIndex  = null;
                 }
-                mouseAngle = (mouseAngle + 90) % 360;
 
-                // Compute the angle of all items. As we reset this._dropIndex before,
-                // these will not include the gap for the to-be-dropped item. If an item
-                // is dragged around (as opposed to external data), the angle of the
-                // dragged item will coincide with its successor.
-                const itemAngles = this._computeItemAngles();
+              } else {
+                // In menu edit mode, the computation is much more involved.
 
-                // Now compute the _dropIndex by comparing the mouseAngle with the
-                // itemAngles. There are a few special cases when there are only a few
-                // items in the menu.
-                if (itemAngles.length == 0) {
-                  // If there is no current item, it's easy: We simply drop at index zero.
-                  this._dropIndex = 0;
+                // First we make the coordinates relative to the center.
+                x -= this._width / 2;
+                y -= this._height / 2;
 
-                } else if (itemAngles.length == 1) {
-                  // If there is one current item, we always drop at zero if it's an
-                  // internal drag (as we are obviously dragging the only item around). If
-                  // it's an external drag, we have to decide whether to drop before or
-                  // after.
-                  if (this._dragIndex != null) {
+                // We assume that we are not in a valid drop zone. If we are, this will be
+                // set to the appropriate index later.
+                this._dropIndex = null;
+
+                // We compute the pointer-center distance. Items cannot be dropped too
+                // close to the center.
+                const distance = Math.sqrt(x * x + y * y);
+                if (distance > ItemSize[ItemState.CENTER] / 2) {
+
+                  // Compute the angle between center-pointer and center-up.
+                  let mouseAngle = Math.acos(x / distance) * 180 / Math.PI;
+                  if (y < 0) {
+                    mouseAngle = 360 - mouseAngle;
+                  }
+                  mouseAngle = (mouseAngle + 90) % 360;
+
+                  // Compute the angle of all items. As we reset this._dropIndex before,
+                  // these will not include the gap for the to-be-dropped item. If an item
+                  // is dragged around (as opposed to external data), the angle of the
+                  // dragged item will coincide with its successor.
+                  const itemAngles = this._computeItemAngles();
+
+                  // Now compute the _dropIndex by comparing the mouseAngle with the
+                  // itemAngles. There are a few special cases when there are only a few
+                  // items in the menu.
+                  if (itemAngles.length == 0) {
+                    // If there is no current item, it's easy: We simply drop at index
+                    // zero.
                     this._dropIndex = 0;
-                  } else {
+
+                  } else if (itemAngles.length == 1) {
+                    // If there is one current item, we always drop at zero if it's an
+                    // internal drag (as we are obviously dragging the only item around).
+                    // If it's an external drag, we have to decide whether to drop before
+                    // or after.
+                    if (this._dragIndex != null) {
+                      this._dropIndex = 0;
+                    } else {
+                      this._dropIndex = (mouseAngle - itemAngles[0] < 90 ||
+                                         mouseAngle - itemAngles[0] > 270) ?
+                          0 :
+                          1;
+                    }
+
+                  } else if (itemAngles.length == 2 && this._dragIndex != null) {
+                    // If there are two items but one of them is dragged around, we have
+                    // to decide whether to drop before or after. However, 'after' means
+                    // at index 2, as the item addition happens before the item removal
+                    // during an internal drag-and-drop.
                     this._dropIndex = (mouseAngle - itemAngles[0] < 90 ||
                                        mouseAngle - itemAngles[0] > 270) ?
                         0 :
-                        1;
-                  }
+                        2;
 
-                } else if (itemAngles.length == 2 && this._dragIndex != null) {
-                  // If there are two items but one of them is dragged around, we have to
-                  // decide whether to drop before or after. However, 'after' means at
-                  // index 2, as the item addition happens before the item removal during
-                  // an internal drag-and-drop.
-                  this._dropIndex = (mouseAngle - itemAngles[0] < 90 ||
-                                     mouseAngle - itemAngles[0] > 270) ?
-                      0 :
-                      2;
+                  } else {
 
-                } else {
+                    // All other cases can be handled with a loop through the drop zone
+                    // wedges between the items. For each wedge, we decide whether the
+                    // pointer is inside the wedge.
+                    for (let i = 0; i < itemAngles.length; i++) {
+                      let wedgeStart = itemAngles[i];
+                      let wedgeEnd   = itemAngles[(i + 1) % itemAngles.length];
 
-                  // All other cases can be handled with a loop through the drop zone
-                  // wedges between the items. For each wedge, we decide whether the
-                  // pointer is inside the wedge.
-                  for (let i = 0; i < itemAngles.length; i++) {
-                    let wedgeStart = itemAngles[i];
-                    let wedgeEnd   = itemAngles[(i + 1) % itemAngles.length];
+                      // Wrap around.
+                      if (wedgeEnd < wedgeStart) {
+                        wedgeEnd += 360;
+                      }
 
-                    // Wrap around.
-                    if (wedgeEnd < wedgeStart) {
-                      wedgeEnd += 360;
-                    }
+                      // Angular width of the wedge.
+                      const diff = wedgeEnd - wedgeStart;
 
-                    // Angular width of the wedge.
-                    const diff = wedgeEnd - wedgeStart;
+                      // The drop zone wedges are considered to directly start at one item
+                      // and end at the next one. If however, there is a custom menu at
+                      // one side of the wedge, we at some padding to allow dropping into
+                      // the custom menu.
+                      let wedgeStartPadding = 0;
+                      let wedgeEndPadding   = 0;
 
-                    // The drop zone wedges are considered to directly start at one item
-                    // and end at the next one. If however, there is a custom menu at one
-                    // side of the wedge, we at some padding to allow dropping into the
-                    // custom menu.
-                    let wedgeStartPadding = 0;
-                    let wedgeEndPadding   = 0;
+                      if (this._items[i].getConfig().type == 'CustomMenu') {
+                        wedgeStartPadding = 0.25;
+                      }
 
-                    if (this._items[i].getConfig().type == 'CustomMenu') {
-                      wedgeStartPadding = 0.25;
-                    }
+                      if (this._items[(i + 1) % itemAngles.length].getConfig().type ==
+                          'CustomMenu') {
+                        wedgeEndPadding = 0.25;
+                      }
 
-                    if (this._items[(i + 1) % itemAngles.length].getConfig().type ==
-                        'CustomMenu') {
-                      wedgeEndPadding = 0.25;
-                    }
+                      // The last wedge has to be handled in a special manner as it allows
+                      // dropping at index zero.
+                      const lastWedge = i == itemAngles.length - 1 ||
+                          (i == itemAngles.length - 2 &&
+                           this._dragIndex == itemAngles.length - 1);
 
-                    // The last wedge has to be handled in a special manner as it allows
-                    // dropping at index zero.
-                    const lastWedge = i == itemAngles.length - 1 ||
-                        (i == itemAngles.length - 2 &&
-                         this._dragIndex == itemAngles.length - 1);
+                      // The last wedge is basically split in the middle - if dropped in
+                      // the clockwise side, we will drop at index zero, if dropped in the
+                      // counter-clockwise side, we will drop after the last element.
+                      if (lastWedge &&
+                          ((mouseAngle >= wedgeStart + diff * 0.5 &&
+                            mouseAngle < wedgeEnd - diff * wedgeEndPadding) ||
+                           (mouseAngle + 360 >= wedgeStart + diff * 0.5 &&
+                            mouseAngle + 360 < wedgeEnd - diff * wedgeEndPadding))) {
 
-                    // The last wedge is basically split in the middle - if dropped in the
-                    // clockwise side, we will drop at index zero, if dropped in the
-                    // counter-clockwise side, we will drop after the last element.
-                    if (lastWedge &&
-                        ((mouseAngle >= wedgeStart + diff * 0.5 &&
-                          mouseAngle < wedgeEnd - diff * wedgeEndPadding) ||
-                         (mouseAngle + 360 >= wedgeStart + diff * 0.5 &&
-                          mouseAngle + 360 < wedgeEnd - diff * wedgeEndPadding))) {
+                        this._dropIndex = 0;
+                        break;
 
-                      this._dropIndex = 0;
-                      break;
+                      } else if (
+                          (mouseAngle >= wedgeStart + diff * wedgeStartPadding &&
+                           mouseAngle < wedgeEnd - diff * wedgeEndPadding) ||
+                          (mouseAngle + 360 >= wedgeStart + diff * wedgeStartPadding &&
+                           mouseAngle + 360 < wedgeEnd - diff * wedgeEndPadding)) {
 
-                    } else if (
-                        (mouseAngle >= wedgeStart + diff * wedgeStartPadding &&
-                         mouseAngle < wedgeEnd - diff * wedgeEndPadding) ||
-                        (mouseAngle + 360 >= wedgeStart + diff * wedgeStartPadding &&
-                         mouseAngle + 360 < wedgeEnd - diff * wedgeEndPadding)) {
-
-                      // In all other cases we simply drop after the current wedge.
-                      this._dropIndex = i + 1;
-                      break;
+                        // In all other cases we simply drop after the current wedge.
+                        this._dropIndex = i + 1;
+                        break;
+                      }
                     }
                   }
                 }
               }
-            }
 
-            // We need to reposition all items with a smooth animation if any of the below
-            // items changed during this callback.
-            if (this._dropColumn != lastDropColumn || this._dropRow != lastDropRow ||
-                this._dropIndex != lastDropIndex) {
-              this._restartAnimation = true;
-            }
+              // We need to reposition all items with a smooth animation if any of the
+              // below items changed during this callback.
+              if (this._dropColumn != lastDropColumn || this._dropRow != lastDropRow ||
+                  this._dropIndex != lastDropIndex) {
+                this._restartAnimation = true;
+              }
 
-            this.queue_allocate();
+              this.queue_allocate();
 
-            // Return null if the drop at the current position is not possible.
-            return this._dropIndex == null ? null : Gdk.DragAction.MOVE;
-          });
+              // Return null if the drop at the current position is not possible.
+              return this._dropIndex == null ? null : Gdk.DragAction.MOVE;
+            });
 
-          // When the pointer leaves the widget, we reset the _drop* members and update
-          // the item layout.
-          this._dropTarget.connect('leave', () => {
-            // For external drag-and-drop events, 'leave' is called before 'drop'. We have
-            // to reset this._dropIndex in 'leave', to make sure that the items move back
-            // to their original position when the pointer leaves the drop area. However,
-            // we need this._dropIndex in 'drop' to fire the 'add-item' and 'add-data'
-            // signals. Therefore, we temporarily store this._dropIndex in
-            // this._lastDropIndex. This is only used a few lines below in the 'drop'
-            // signal handler.
-            this._lastDropIndex = this._dropIndex;
+            // When the pointer leaves the widget, we reset the _drop* members and update
+            // the item layout.
+            this._dropTarget.connect('leave', () => {
+              // For external drag-and-drop events, 'leave' is called before 'drop'. We
+              // have to reset this._dropIndex in 'leave', to make sure that the items
+              // move back to their original position when the pointer leaves the drop
+              // area. However, we need this._dropIndex in 'drop' to fire the 'add-item'
+              // and 'add-data' signals. Therefore, we temporarily store this._dropIndex
+              // in this._lastDropIndex. This is only used a few lines below in the 'drop'
+              // signal handler.
+              this._lastDropIndex = this._dropIndex;
 
-            this._dropColumn = null;
-            this._dropRow    = null;
-            this._dropIndex  = null;
-            this.updateLayout();
-          });
+              this._dropColumn = null;
+              this._dropRow    = null;
+              this._dropIndex  = null;
+              this.updateLayout();
+            });
 
-          // When an internal item or external data is dropped, either the 'drop-item' or
-          // 'drop-data' signals are emitted. There are several cases where this may fail;
-          // usually the 'notification' signal will be emitted to notify the user about
-          // the reason.
-          this._dropTarget.connect('drop', (t, what) => {
-            // See documentation of the 'leave' signal above.
-            if (this._dropIndex == null) {
-              this._dropIndex = this._lastDropIndex;
-            }
+            // When an internal item or external data is dropped, either the 'drop-item'
+            // or 'drop-data' signals are emitted. There are several cases where this may
+            // fail; usually the 'notification' signal will be emitted to notify the user
+            // about the reason.
+            this._dropTarget.connect('drop', (t, what) => {
+              // See documentation of the 'leave' signal above.
+              if (this._dropIndex == null) {
+                this._dropIndex = this._lastDropIndex;
+              }
 
-            // This shouldn't happen.
-            if (this._dropIndex == null) {
-              return false;
-            }
-
-            // For internal drop events, the dropped data is a JSON representation of the
-            // dropped item.
-            const internalDrag = t.get_drop().get_drag() != null;
-            if (internalDrag) {
-
-              const config = JSON.parse(what);
-
-              // Do not allow top-level drops of actions.
-              if (this._inMenuOverviewMode() &&
-                  ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
-
-                this.emit(
-                    // Translators: This is shown as an in-app notification when the user
-                    // attempts to drag an action in the menu editor to the menu overview.
-                    'notification', _('Actions cannot be turned into toplevel menus.'));
-
-                this._dropColumn = null;
-                this._dropRow    = null;
-                this._dropIndex  = null;
+              // This shouldn't happen.
+              if (this._dropIndex == null) {
                 return false;
               }
 
-              this.emit('drop-item', what, this._dropIndex);
+              // For internal drop events, the dropped data is a JSON representation of
+              // the dropped item.
+              const internalDrag = t.get_drop().get_drag() != null;
+              if (internalDrag) {
 
-            } else {
+                const config = JSON.parse(what);
 
-              // Do not allow external drops in menu overview mode.
-              if (this._inMenuOverviewMode()) {
+                // Do not allow top-level drops of actions.
+                if (this._inMenuOverviewMode() &&
+                    ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
 
-                this.emit(
-                    'notification',
-                    // Translators: This is shown as an in-app notification when the user
-                    // attempts to drag external stuff to the menu editor's overview.
-                    _('You can only create new Action items inside of Custom Menus.'));
+                  this.emit(
+                      // Translators: This is shown as an in-app notification when the
+                      // user attempts to drag an action in the menu editor to the menu
+                      // overview.
+                      'notification', _('Actions cannot be turned into toplevel menus.'));
 
-                this._dropColumn = null;
-                this._dropRow    = null;
-                this._dropIndex  = null;
-                return false;
-              }
+                  this._dropColumn = null;
+                  this._dropRow    = null;
+                  this._dropIndex  = null;
+                  return false;
+                }
 
-              // If the dropped data contains a list of URIs, call the 'drop-data' once
-              // for each item.
-              if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
-                what.split(/\r?\n/).forEach((line, i) => {
-                  if (line != '') {
-                    this.emit('drop-data', line, this._dropIndex + i);
-                  }
-                });
+                this.emit('drop-item', what, this._dropIndex);
+
               } else {
-                this.emit('drop-data', what, this._dropIndex);
+
+                // Do not allow external drops in menu overview mode.
+                if (this._inMenuOverviewMode()) {
+
+                  this.emit(
+                      'notification',
+                      // Translators: This is shown as an in-app notification when the
+                      // user attempts to drag external stuff to the menu editor's
+                      // overview.
+                      _('You can only create new Action items inside of Custom Menus.'));
+
+                  this._dropColumn = null;
+                  this._dropRow    = null;
+                  this._dropIndex  = null;
+                  return false;
+                }
+
+                // If the dropped data contains a list of URIs, call the 'drop-data' once
+                // for each item.
+                if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
+                  what.split(/\r?\n/).forEach((line, i) => {
+                    if (line != '') {
+                      this.emit('drop-data', line, this._dropIndex + i);
+                    }
+                  });
+                } else {
+                  this.emit('drop-data', what, this._dropIndex);
+                }
               }
-            }
 
-            // Reset all _drop* members. We do not need to trigger a re-layout as this
-            // will be done in the resulting add() call.
-            this._dropColumn = null;
-            this._dropRow    = null;
-            this._dropIndex  = null;
+              // Reset all _drop* members. We do not need to trigger a re-layout as this
+              // will be done in the resulting add() call.
+              this._dropColumn = null;
+              this._dropRow    = null;
+              this._dropIndex  = null;
 
-            return true;
-          });
+              return true;
+            });
 
-          this.add_controller(this._dropTarget);
-        }
+            this.add_controller(this._dropTarget);
+          }
         }
       }
 
@@ -1054,7 +1056,7 @@ function registerWidgets() {
       // (e.g. we are in submenu mode).
       setItems(configs, selectedIndex, centerConfig, parentAngle) {
 
-        utils.debug("setItems");
+        utils.debug('setItems');
 
         // In the first part of this method we will decide what kind of transition
         // animation will be required to show the new items.
@@ -1282,111 +1284,111 @@ function registerWidgets() {
           }
 
           if (utils.gtk4()) {
-          let dragSource = new Gtk.DragSource({actions: actions});
+            let dragSource = new Gtk.DragSource({actions: actions});
 
-          // The drag source provides a stringified JSON version of the item config. The
-          // item's icon is used as drag graphic.
-          dragSource.connect('prepare', (s, x, y) => {
-            s.set_icon(Gtk.WidgetPaintable.new(item.icon), x, y);
-            return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
-          });
+            // The drag source provides a stringified JSON version of the item config. The
+            // item's icon is used as drag graphic.
+            dragSource.connect('prepare', (s, x, y) => {
+              s.set_icon(Gtk.WidgetPaintable.new(item.icon), x, y);
+              return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
+            });
 
-          // At drag begin, we make the icon translucent in overview mode and invisible in
-          // menu edit mode.
-          dragSource.connect('drag-begin', () => {
-            item.opacity    = this._inMenuOverviewMode() ? 0.2 : 0.0;
-            item.sensitive  = false;
-            this._dragIndex = this._items.indexOf(item);
-            this.updateLayout();
-          });
+            // At drag begin, we make the icon translucent in overview mode and invisible
+            // in menu edit mode.
+            dragSource.connect('drag-begin', () => {
+              item.opacity    = this._inMenuOverviewMode() ? 0.2 : 0.0;
+              item.sensitive  = false;
+              this._dragIndex = this._items.indexOf(item);
+              this.updateLayout();
+            });
 
-          // On drag end we either remove the dragged object or make it visible again.
-          dragSource.connect('drag-end', (s, drag, deleteData) => {
-            if (deleteData) {
-              let removeIndex = this._items.indexOf(item);
-              this.remove(removeIndex);
-              this.emit('remove', removeIndex);
-            } else {
-              item.opacity   = 1;
-              item.sensitive = true;
-            }
+            // On drag end we either remove the dragged object or make it visible again.
+            dragSource.connect('drag-end', (s, drag, deleteData) => {
+              if (deleteData) {
+                let removeIndex = this._items.indexOf(item);
+                this.remove(removeIndex);
+                this.emit('remove', removeIndex);
+              } else {
+                item.opacity   = 1;
+                item.sensitive = true;
+              }
 
-            this._dragIndex = null;
-          });
+              this._dragIndex = null;
+            });
 
-          // If the drag operation is canceled, we make the item visible again and update
-          // the layout.
-          dragSource.connect('drag-cancel', () => {
-            item.opacity    = 1;
-            item.sensitive  = true;
-            this._dragIndex = null;
-            this.updateLayout();
-            return false;
-          });
+            // If the drag operation is canceled, we make the item visible again and
+            // update the layout.
+            dragSource.connect('drag-cancel', () => {
+              item.opacity    = 1;
+              item.sensitive  = true;
+              this._dragIndex = null;
+              this.updateLayout();
+              return false;
+            });
 
-          // For some reason, the drag source does not work anymore once the
-          // ToggleButton was toggled. Resetting the EventController seems to be a
-          // working workaround.
-          item.button.connect('clicked', (b) => {
-            dragSource.reset();
-          });
+            // For some reason, the drag source does not work anymore once the
+            // ToggleButton was toggled. Resetting the EventController seems to be a
+            // working workaround.
+            item.button.connect('clicked', (b) => {
+              dragSource.reset();
+            });
 
-          item.button.add_controller(dragSource);
-        }
+            item.button.add_controller(dragSource);
+          }
         }
 
         // Non-center items of type 'CustomMenu' can also receive drops.
         if (itemState != ItemState.CENTER) {
 
           if (utils.gtk4()) {
-          const dropTarget =
-              new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-          dropTarget.set_gtypes([GObject.TYPE_STRING]);
+            const dropTarget =
+                new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+            dropTarget.set_gtypes([GObject.TYPE_STRING]);
 
-          // We accept everything as long as the item is a custom menu.
-          dropTarget.connect('accept', () => item.getConfig().type == 'CustomMenu');
+            // We accept everything as long as the item is a custom menu.
+            dropTarget.connect('accept', () => item.getConfig().type == 'CustomMenu');
 
-          // When something is dropped, we either emit 'drop-data-into' (for external drop
-          // events) or 'drop-data-into' (for internal drop events).
-          dropTarget.connect('drop', (t, what) => {
-            const dropIndex = this._items.indexOf(item);
+            // When something is dropped, we either emit 'drop-data-into' (for external
+            // drop events) or 'drop-data-into' (for internal drop events).
+            dropTarget.connect('drop', (t, what) => {
+              const dropIndex = this._items.indexOf(item);
 
-            const internalDrag = t.get_drop().get_drag() != null;
-            if (internalDrag) {
-              this.emit('drop-item-into', what, dropIndex);
+              const internalDrag = t.get_drop().get_drag() != null;
+              if (internalDrag) {
+                this.emit('drop-item-into', what, dropIndex);
 
-            } else {
-
-              // If the external drop event provides a list of URIs, we call the signal
-              // once for each entry.
-              if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
-                what.split(/\r?\n/).forEach(line => {
-                  if (line != '') {
-                    this.emit('drop-data-into', line, dropIndex);
-                  }
-                });
               } else {
-                this.emit('drop-data-into', what, dropIndex);
+
+                // If the external drop event provides a list of URIs, we call the signal
+                // once for each entry.
+                if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
+                  what.split(/\r?\n/).forEach(line => {
+                    if (line != '') {
+                      this.emit('drop-data-into', line, dropIndex);
+                    }
+                  });
+                } else {
+                  this.emit('drop-data-into', what, dropIndex);
+                }
               }
-            }
 
-            // Make the item the active one.
-            this._selectedItem               = item;
-            this._selectedItem.button.active = true;
+              // Make the item the active one.
+              this._selectedItem               = item;
+              this._selectedItem.button.active = true;
 
-            // Reset all drop members.
-            this._dropColumn = null;
-            this._dropRow    = null;
-            this._dropIndex  = null;
+              // Reset all drop members.
+              this._dropColumn = null;
+              this._dropRow    = null;
+              this._dropIndex  = null;
 
-            return true;
-          });
+              return true;
+            });
 
-          // Highlight the button if the pointer moves over it.
-          dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+            // Highlight the button if the pointer moves over it.
+            dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
 
-          item.button.add_controller(dropTarget);
-        }
+            item.button.add_controller(dropTarget);
+          }
         }
 
         // Emit the 'select' signal when the button is pressed.
@@ -1528,81 +1530,78 @@ function registerWidgets() {
   if (GObject.type_from_name('FlyPieMenuEditor') == null) {
 
     const MIN_GRID_SIZE = ItemSize[ItemState.GRID] * 4;
-    
+
     if (utils.gtk4()) {
 
       GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
-      class FlyPieMenuEditor extends FlyPieMenuEditorBase {
+                            class FlyPieMenuEditor extends FlyPieMenuEditorBase {
+        // ------------------------------------------------------ overridden virtual
+        // methods
 
-      // ------------------------------------------------------ overridden virtual methods
+        vfunc_measure(orientation, for_size) {
+          if (this._inMenuOverviewMode()) {
+            if (orientation == Gtk.Orientation.HORIZONTAL) {
+              return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
+            }
 
-      vfunc_measure(orientation, for_size) {
-        if (this._inMenuOverviewMode()) {
-          if (orientation == Gtk.Orientation.HORIZONTAL) {
-            return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
+            // The possible amount of columns.
+            const columns = Math.floor(for_size / ItemSize[ItemState.GRID]);
+
+            // The required amount of rows.
+            const rows = Math.ceil(this._items.length / columns);
+
+            // The required height of the grid.
+            const gridHeight = rows * ItemSize[ItemState.GRID];
+            return [gridHeight, gridHeight, -1, -1];
           }
 
-          // The possible amount of columns.
-          const columns = Math.floor(for_size / ItemSize[ItemState.GRID]);
+          // In menu-edit mode we simply return a square shaped region of the same size as
+          // the grid width.
+          return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
+        }
+      });
 
-          // The required amount of rows.
-          const rows = Math.ceil(this._items.length / columns);
+    } else {
 
-          // The required height of the grid.
-          const gridHeight = rows * ItemSize[ItemState.GRID];
-          return [gridHeight, gridHeight, -1, -1];
+      GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
+                            class FlyPieMenuEditor extends FlyPieMenuEditorBase {
+        // ------------------------------------------------------ overridden virtual
+        // methods
+
+        vfunc_get_preferred_height() {
+          utils.debug('vfunc_get_preferred_height');
+          return [MIN_GRID_SIZE, MIN_GRID_SIZE];
         }
 
-        // In menu-edit mode we simply return a square shaped region of the same size as
-        // the grid width.
-        return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
-      }
-    });
+        vfunc_get_preferred_height_for_width(width) {
+          utils.debug('vfunc_get_preferred_height_for_width');
+          if (this._inMenuOverviewMode()) {
+            // The possible amount of columns.
+            const columns = Math.floor(width / ItemSize[ItemState.GRID]);
 
-  } else {
+            // The required amount of rows.
+            const rows = Math.ceil(this._items.length / columns);
 
-    GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
-      class FlyPieMenuEditor extends FlyPieMenuEditorBase {
+            // The required height of the grid.
+            const gridHeight = rows * ItemSize[ItemState.GRID];
+            return [gridHeight, gridHeight];
+          }
 
-      // ------------------------------------------------------ overridden virtual methods
-
-      vfunc_get_preferred_height() {
-        utils.debug("vfunc_get_preferred_height");
-        return [MIN_GRID_SIZE, MIN_GRID_SIZE];
-      }
-
-      vfunc_get_preferred_height_for_width(width) {
-        utils.debug("vfunc_get_preferred_height_for_width");
-        if (this._inMenuOverviewMode()) {
-          // The possible amount of columns.
-          const columns = Math.floor(width / ItemSize[ItemState.GRID]);
-
-          // The required amount of rows.
-          const rows = Math.ceil(this._items.length / columns);
-
-          // The required height of the grid.
-          const gridHeight = rows * ItemSize[ItemState.GRID];
-          return [gridHeight, gridHeight];
+          // In menu-edit mode we simply return a square shaped region of the same size as
+          // the grid width.
+          return [MIN_GRID_SIZE, MIN_GRID_SIZE];
         }
 
-        // In menu-edit mode we simply return a square shaped region of the same size as
-        // the grid width.
-        return [MIN_GRID_SIZE, MIN_GRID_SIZE];
-      }
+        vfunc_get_preferred_width() {
+          utils.debug('vfunc_get_preferred_width');
+          return [MIN_GRID_SIZE, MIN_GRID_SIZE];
+        }
 
-      vfunc_get_preferred_width() {
-        utils.debug("vfunc_get_preferred_width");
-        return [MIN_GRID_SIZE, MIN_GRID_SIZE];
-      }
-
-      vfunc_get_preferred_width_for_height(height)  {
-        utils.debug("vfunc_get_preferred_width_for_height");
-        return [MIN_GRID_SIZE, MIN_GRID_SIZE];
-      }
-
-    });
-
+        vfunc_get_preferred_width_for_height(height) {
+          utils.debug('vfunc_get_preferred_width_for_height');
+          return [MIN_GRID_SIZE, MIN_GRID_SIZE];
+        }
+      });
+    }
   }
-  }
-
 }
