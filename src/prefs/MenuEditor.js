@@ -140,10 +140,11 @@ function registerWidgets() {
 
             // Create the edit button.
             if (utils.gtk4()) {
-              this.editButton = Gtk.Button.new_from_icon_name('edit-symbolic');
+              this.editButton = Gtk.Button.new_from_icon_name('document-edit-symbolic');
             } else {
               this.editButton =
-                  Gtk.Button.new_from_icon_name('edit-symbolic', Gtk.IconSize.BUTTON);
+                  Gtk.Button.new_from_icon_name('document-edit-symbolic', Gtk.IconSize.BUTTON);
+              this.editButton.no_show_all = true;
             }
 
             utils.addCSSClass(this.editButton, 'pill-button');
@@ -260,8 +261,13 @@ function registerWidgets() {
             // Update the shortcut label of menu overview items.
             if (this._shortcutLabel) {
               if (config.shortcut) {
-                const [ok, keyval, mods]  = Gtk.accelerator_parse(config.shortcut);
-                this._shortcutLabel.label = Gtk.accelerator_get_label(keyval, mods);
+                if (utils.gtk4()) {
+                  const [ok, keyval, mods]  = Gtk.accelerator_parse(config.shortcut);
+                  this._shortcutLabel.label = Gtk.accelerator_get_label(keyval, mods);
+                } else {
+                  const [keyval, mods]  = Gtk.accelerator_parse(config.shortcut);
+                  this._shortcutLabel.label = Gtk.accelerator_get_label(keyval, mods);
+                }
               } else {
                 this._shortcutLabel.label = _('Not Bound');
               }
