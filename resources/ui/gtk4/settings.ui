@@ -4577,6 +4577,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                             <child>
 
                                               <object class="GtkBox" id="menu-editor-stash-content">
+                                                <property name="no_show_all">1</property>
                                                 <property name="hexpand">1</property>
                                                 <property name="halign">center</property>
                                                 <property name="visible">0</property>

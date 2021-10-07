@@ -1142,10 +1142,6 @@ var MenuEditorPage = class MenuEditorPage {
   // configuration is invalid.
   _loadStashConfiguration() {
 
-    // Initially show the stash label.
-    this._builder.get_object('menu-editor-stash-label').visible   = true;
-    this._builder.get_object('menu-editor-stash-content').visible = false;
-
     // Load the menu configuration in the JSON format.
     this._stashedConfigs = JSON.parse(this._settings.get_string('stashed-items'));
 
