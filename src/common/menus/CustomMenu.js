@@ -29,7 +29,7 @@ var menu = {
   name: _('Custom Menu'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'edit-symbolic',
+  icon: 'document-edit-symbolic',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.
