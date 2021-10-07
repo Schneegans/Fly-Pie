@@ -140,11 +140,11 @@ function addCSSClass(widget, klass) {
 }
 
 // Appends the given child widget to the given Gtk.Box.
-function boxAppend(box, child) {
+function boxAppend(box, child, expand=false, fill=false) {
   if (gtk4()) {
     box.append(child);
   } else {
-    box.pack_start(child, false, false, 0);
+    box.pack_start(child, expand, fill, 0);
   }
 }
 

@@ -483,7 +483,7 @@ var MenuEditorPage = class MenuEditorPage {
     // Redraw the icon when the icon name input field is changed. Also, save the menu
     // configuration and update the menu editor widget accordingly.
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
-      if (!this._updatingSidebar) {
+      if (!this._updatingSidebar && this._selectedItem) {
         this._selectedItem.icon = widget.text;
         this._editor.updateSelected(this._selectedItem);
         this._saveMenuConfiguration();
@@ -494,7 +494,7 @@ var MenuEditorPage = class MenuEditorPage {
     // Save the menu configuration and update the menu editor widget when the name of an
     // item is changed.
     this._builder.get_object('item-name').connect('notify::text', (widget) => {
-      if (!this._updatingSidebar) {
+      if (!this._updatingSidebar && this._selectedItem) {
         this._selectedItem.name = widget.text;
         this._editor.updateSelected(this._selectedItem);
 
@@ -514,7 +514,7 @@ var MenuEditorPage = class MenuEditorPage {
     // angle amongst all siblings preceding the selected item; maxAngle is set to the
     // smallest fixed angle amongst siblings after the selected item.
     this._builder.get_object('item-angle').connect('notify::value', (adjustment) => {
-      if (!this._updatingSidebar) {
+      if (!this._updatingSidebar && this._selectedItem) {
         let minAngle = -1;
         let maxAngle = 360;
 

@@ -42,6 +42,10 @@
     border-bottom: none;
 }
 
+.menu-editor-path-item:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
 /* The top selector is for GTK3, the bottom one for GTK4. */
 
 .menu-editor-add-button,
@@ -52,8 +56,9 @@ menubutton.menu-editor-add-button button {
     border-bottom: none;
 }
 
-/* On GTK4, this seems to be the default, however we have to set this on GTK3. */
+/* Let's make frames nicely rounded. On GTK4's Adwaita this seems to be the default,
+   however we have to set this here to get a more unified look on GTK3. */
 
-frame border {
+frame>* {
     border-radius: 8px;
 }

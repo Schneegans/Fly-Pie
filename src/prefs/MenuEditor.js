@@ -154,13 +154,14 @@ function registerWidgets() {
             // Create the main toggle button which makes the item selectable. We do not
             // add this to a container yet, as where this is appended depends on the given
             // state. This is done further below.
-            this.button = new Gtk.ToggleButton(
-                {margin_top: 5, margin_start: 5, margin_end: 5, margin_bottom: 5});
             if (utils.gtk4()) {
-              this.button.has_frame = false;
+              this.button = new Gtk.ToggleButton(
+                  {margin_top: 5, margin_start: 5, margin_end: 5, margin_bottom: 5, has_frame:false});
             } else {
-              this.button.relief = Gtk.ReliefStyle.NONE;
+              this.button = new Gtk.RadioButton(
+                {margin_top: 5, margin_start: 5, margin_end: 5, margin_bottom: 5, relief: Gtk.ReliefStyle.NONE, draw_indicator:false});
             }
+
             utils.addCSSClass(this.button, 'round-button');
 
             // Each item has an icon. THis is drawn using a GtkDrawingArea. Again, we do
@@ -208,7 +209,7 @@ function registerWidgets() {
             if (itemState == ItemState.GRID) {
               const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
               box.vexpand = true;
-              utils.boxAppend(box, this.icon);
+              utils.boxAppend(box, this.icon, false, true);
               utils.boxAppend(box, this._nameLabel);
               utils.boxAppend(box, this._shortcutLabel);
 
@@ -219,14 +220,14 @@ function registerWidgets() {
             // For the center item, the icon is directly add to the toggle button.
             if (itemState == ItemState.CENTER) {
               utils.setChild(overlay, this.button);
-              utils.setChild(this.button, this.icon);
+              utils.setChild(this.button, this.icon, false, true);
             }
 
             // Child items are similar to grid items but do not contain a shortcut label.
             if (itemState == ItemState.CHILD) {
               const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
               box.vexpand = true;
-              utils.boxAppend(box, this.icon);
+              utils.boxAppend(box, this.icon, false, true);
               utils.boxAppend(box, this._nameLabel);
 
               utils.setChild(this.button, box);
@@ -414,6 +415,7 @@ function registerWidgets() {
           this._addItemHint.valign     = Gtk.Align.START;
           this._addItemHint.sensitive  = false;
           this._addItemHint.margin_end = 20;
+          this._addItemHint.margin_top = 8;
           utils.boxAppend(this._addItemHint, label);
           utils.boxAppend(this._addItemHint, icon);
 
@@ -811,18 +813,25 @@ function registerWidgets() {
 
       // This widget requests a width so that in overview mode at least four items can be
       // displayed per row. The height is requested so that all items can be shown at the
-      // given width.
+      // given width. However, this is implemented differently on GTK3 and GTK4. Therefore,
+      // there are two different versions of the FlyPieMenuEditor defined at the bottom of this
+      // file overriding the respective vfuncs.
 
-      // This method is responsible for computing the positions of all display items.
+      // This method is responsible for computing the positions of all displayed items.
       // There are two completely different display modes: The menu overview mode and menu
       // edit mode. It considers the current _dropIndex so that an artificial gap is
       // created where a item is about to be dropped.
       vfunc_size_allocate(width, height, baseline) {
-
-        // On GTK3, the parameters are different. The first parameter is actually a rectangle.
+        
+        // On GTK3, the parameters are different. The first parameter is actually an allocation rectangle.
         if (!utils.gtk4()) {
-          height = width.height;
-          width = width.width;
+          const allocation = width;
+
+          // We also have to chain-up to the base class.
+          super.vfunc_size_allocate(allocation);
+
+          height = allocation.height;
+          width = allocation.width;
         }
 
         // This helper lambda assigns animated values to the given item which can be used
@@ -1538,6 +1547,12 @@ function registerWidgets() {
             allFinished &= item.y.isFinished(time);
           }
 
+          if (!utils.gtk4()) {
+            // this.move(item, allocation.x, allocation.y);
+           // allocation.x = 0;
+           // allocation.y = 0;
+          }
+
           utils.sizeAllocate(item, allocation);
         };
 
@@ -1632,40 +1647,6 @@ function registerWidgets() {
           return [MIN_GRID_SIZE, MIN_GRID_SIZE];
         }
 
-        // vfunc_map() {
-        //   this.set_mapped(true);
-
-        //   this._ifEmptyHint.map();
-        //   this._addItemHint.map();
-        //   this._backButton.map();
-        // }
-
-        // vfunc_unmap() {
-        //   this.set_mapped(false);
-
-        //   this._ifEmptyHint.unmap();
-        //   this._addItemHint.unmap();
-        //   this._backButton.unmap();
-        // }
-
-        // vfunc_realize() {
-        //   const allocation = this.get_allocation();
-
-        // const attr = new Gdk.WindowAttr();
-        // attr.window_type = Gdk.WindowType.CHILD;
-        // attr.x = allocation.x;
-        // attr.y = allocation.y;
-        // attr.width = allocation.width;
-        // attr.height = allocation.height;
-        // attr.visual = this.get_visual();
-        // attr.event_mask = this.get_events() | Gdk.EventMask.EXPOSURE_MASK;
-
-        // const window = new Gdk.Window(this.get_parent_window(), attr, Gdk.WindowAttributesType.X | Gdk.WindowAttributesType.Y | Gdk.WindowAttributesType.VISUAL);
-        // this.set_window(window);
-        // this.register_window(window);
-        // this.set_realized(true);
-        // // window.set_background_pattern(None);
-        // }
       });
     }
   }
