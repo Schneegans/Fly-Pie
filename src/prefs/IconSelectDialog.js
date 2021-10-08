@@ -110,8 +110,14 @@ function registerWidget() {
         // Disable sorting for now. Else this is horribly slow...
         this._iconList.set_sort_column_id(-2, Gtk.SortType.ASCENDING);
 
-        const iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-        const icons     = iconTheme.get_icon_names();
+        const iconTheme = utils.getIconTheme();
+
+        let icons;
+        if (utils.gtk4()) {
+          icons     = iconTheme.get_icon_names();
+        } else {
+          icons     = iconTheme.list_icons(null);
+        }
 
         // We add icons in batches. This number is somewhat arbitrary - if reduced to 1,
         // the icon loading takes quite long, if increased further the user interface

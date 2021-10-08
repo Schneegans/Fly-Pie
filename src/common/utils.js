@@ -87,9 +87,9 @@ function getSessionType() {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Do to this issue https://gitlab.gnome.org/GNOME/mutter/-/issues/960, the static      //
+// Due to this issue https://gitlab.gnome.org/GNOME/mutter/-/issues/960, the static     //
 // function Gtk.IconTheme.get_for_display() may return null when executed from the      //
-// gnome-shell process o Wayland. In this case, we use St to get a valid icon theme.    //
+// gnome-shell process of Wayland. In this case, we use St to get a valid icon theme.   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let _iconTheme = null;
@@ -103,10 +103,10 @@ function getIconTheme() {
       _iconTheme = new Gtk.IconTheme();
       _iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
     } else {
-      if (imports.gi.versions.Gtk === '3.0') {
-        _iconTheme = Gtk.IconTheme.get_default();
-      } else {
+      if (gtk4()) {
         _iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
+      } else {
+        _iconTheme = Gtk.IconTheme.get_default();
       }
     }
 
@@ -139,6 +139,17 @@ function addCSSClass(widget, klass) {
   }
 }
 
+// Removes all children from the given widget.
+function clearChildren(container) {
+  if (gtk4()) {
+    while (container.get_first_child() != null) {
+      container.remove(container.get_first_child());
+    }
+  } else {
+    container.foreach(w => container.remove(w));
+  }
+}
+
 // Appends the given child widget to the given Gtk.Box.
 function boxAppend(box, child, expand=false, fill=false) {
   if (gtk4()) {
@@ -154,6 +165,7 @@ function setChild(widget, child) {
   if (gtk4()) {
     widget.set_child(child);
   } else {
+    clearChildren(widget);
     widget.add(child);
   }
 }
