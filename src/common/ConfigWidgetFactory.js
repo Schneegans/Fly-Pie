@@ -85,7 +85,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     }
 
     const entry = new Gtk.Entry({text: file, hexpand: true});
-    utils.boxAppend(entryBox, entry);
+    utils.boxAppend(entryBox, entry, false, true);
     utils.boxAppend(entryBox, button);
 
     entry.connect('notify::text', (widget) => {
@@ -161,7 +161,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     }
 
     const entry = new Gtk.Entry({text: command, hexpand: true});
-    utils.boxAppend(entryBox, entry);
+    utils.boxAppend(entryBox, entry, false, true);
     utils.boxAppend(entryBox, button);
 
     entry.connect('notify::text', (widget) => {
@@ -247,7 +247,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     const descriptionLabel = new Gtk.Label({label: description});
     descriptionLabel.get_style_context().add_class('dim-label');
 
-    utils.boxAppend(hBox, nameLabel);
+    utils.boxAppend(hBox, nameLabel, false, true);
     utils.boxAppend(hBox, descriptionLabel);
 
     return vBox;
