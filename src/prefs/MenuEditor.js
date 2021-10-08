@@ -138,7 +138,7 @@ function registerWidgets() {
             this.set_child(overlay);
 
             // Create the edit button.
-            this.editButton = Gtk.Button.new_from_icon_name('edit-symbolic');
+            this.editButton = Gtk.Button.new_from_icon_name('document-edit-symbolic');
             this.editButton.add_css_class('pill-button');
             this.editButton.valign = Gtk.Align.START;
             this.editButton.halign = Gtk.Align.END;
