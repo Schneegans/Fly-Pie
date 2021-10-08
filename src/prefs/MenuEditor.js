@@ -142,11 +142,22 @@ function registerWidgets() {
             // add this to a container yet, as where this is appended depends on the given
             // state. This is done further below.
             if (utils.gtk4()) {
-              this.button = new Gtk.ToggleButton(
-                  {margin_top: 5, margin_start: 5, margin_end: 5, margin_bottom: 5, has_frame:false});
+              this.button = new Gtk.ToggleButton({
+                margin_top: 5,
+                margin_start: 5,
+                margin_end: 5,
+                margin_bottom: 5,
+                has_frame: false
+              });
             } else {
-              this.button = new Gtk.RadioButton(
-                {margin_top: 5, margin_start: 5, margin_end: 5, margin_bottom: 5, relief: Gtk.ReliefStyle.NONE, draw_indicator:false});
+              this.button = new Gtk.RadioButton({
+                margin_top: 5,
+                margin_start: 5,
+                margin_end: 5,
+                margin_bottom: 5,
+                relief: Gtk.ReliefStyle.NONE,
+                draw_indicator: false
+              });
             }
 
             utils.addCSSClass(this.button, 'round-button');
@@ -223,10 +234,10 @@ function registerWidgets() {
 
             // Create the edit button.
             if (utils.gtk4()) {
-              this.editButton = Gtk.Button.new_from_icon_name('document-edit-symbolic');
+              this.editButton = Gtk.Button.new_from_icon_name('custom-menu-symbolic');
             } else {
-              this.editButton =
-                  Gtk.Button.new_from_icon_name('document-edit-symbolic', Gtk.IconSize.BUTTON);
+              this.editButton = Gtk.Button.new_from_icon_name(
+                  'custom-menu-symbolic', Gtk.IconSize.BUTTON);
               this.editButton.no_show_all = true;
             }
 
@@ -265,7 +276,7 @@ function registerWidgets() {
                   const [ok, keyval, mods]  = Gtk.accelerator_parse(config.shortcut);
                   this._shortcutLabel.label = Gtk.accelerator_get_label(keyval, mods);
                 } else {
-                  const [keyval, mods]  = Gtk.accelerator_parse(config.shortcut);
+                  const [keyval, mods]      = Gtk.accelerator_parse(config.shortcut);
                   this._shortcutLabel.label = Gtk.accelerator_get_label(keyval, mods);
                 }
               } else {
@@ -411,7 +422,7 @@ function registerWidgets() {
         // Here we create the icon and label which are shown to highlight the add-new-item
         // button.
         {
-          let icon  = Gtk.Image.new_from_resource('/img/arrow-up-symbolic.svg');
+          let icon  = Gtk.Image.new_from_icon_name('arrow-up-symbolic');
           let label = new Gtk.Label({label: _('Add a new item')});
           utils.addCSSClass(label, 'caption');
 
@@ -819,17 +830,18 @@ function registerWidgets() {
 
       // This widget requests a width so that in overview mode at least four items can be
       // displayed per row. The height is requested so that all items can be shown at the
-      // given width. However, this is implemented differently on GTK3 and GTK4. Therefore,
-      // there are two different versions of the FlyPieMenuEditor defined at the bottom of this
-      // file overriding the respective vfuncs.
+      // given width. However, this is implemented differently on GTK3 and GTK4.
+      // Therefore, there are two different versions of the FlyPieMenuEditor defined at
+      // the bottom of this file overriding the respective vfuncs.
 
       // This method is responsible for computing the positions of all displayed items.
       // There are two completely different display modes: The menu overview mode and menu
       // edit mode. It considers the current _dropIndex so that an artificial gap is
       // created where a item is about to be dropped.
       vfunc_size_allocate(width, height, baseline) {
-        
-        // On GTK3, the parameters are different. The first parameter is actually an allocation rectangle.
+
+        // On GTK3, the parameters are different. The first parameter is actually an
+        // allocation rectangle.
         if (!utils.gtk4()) {
           const allocation = width;
 
@@ -837,7 +849,7 @@ function registerWidgets() {
           super.vfunc_size_allocate(allocation);
 
           height = allocation.height;
-          width = allocation.width;
+          width  = allocation.width;
         }
 
         // This helper lambda assigns animated values to the given item which can be used
@@ -1654,7 +1666,6 @@ function registerWidgets() {
         vfunc_get_preferred_width_for_height(height) {
           return [MIN_GRID_SIZE, MIN_GRID_SIZE];
         }
-
       });
     }
   }

@@ -114,6 +114,9 @@ function getIconTheme() {
     if (_iconTheme == null) {
       debug('Failed to get a valid icon theme object!');
     }
+
+    // Make sure that the icons under resources/img are available as system icons.
+    _iconTheme.add_resource_path('/img');
   }
 
   return _iconTheme;
@@ -151,7 +154,7 @@ function clearChildren(container) {
 }
 
 // Appends the given child widget to the given Gtk.Box.
-function boxAppend(box, child, expand=false, fill=false) {
+function boxAppend(box, child, expand = false, fill = false) {
   if (gtk4()) {
     box.append(child);
   } else {
