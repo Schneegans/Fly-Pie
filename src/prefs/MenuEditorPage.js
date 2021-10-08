@@ -457,6 +457,10 @@ var MenuEditorPage = class MenuEditorPage {
       iconSelectDialog.hide();
     });
 
+    if (!utils.gtk4()) {
+      iconSelectDialog.foreach(w => w.show_all());
+    }
+
     // The icon-select dialog is shown when the corresponding button is pressed.
     this._builder.get_object('icon-select-button').connect('clicked', () => {
       iconSelectDialog.set_transient_for(
@@ -792,6 +796,10 @@ var MenuEditorPage = class MenuEditorPage {
           }
         });
 
+        if (!utils.gtk4()) {
+          newChild.show_all();
+        }
+
         utils.setChild(revealer, newChild);
       }
 
@@ -806,13 +814,7 @@ var MenuEditorPage = class MenuEditorPage {
     const container = this._builder.get_object('menu-editor-breadcrumbs');
 
     // Clear the container first.
-    if (utils.gtk4()) {
-      while (container.get_first_child() != null) {
-        container.remove(container.get_first_child());
-      }
-    } else {
-      container.foreach(w => container.remove(w));
-    }
+    utils.clearChildren(container);
 
     // As first item we always create a home button which leads to the menu overview.
     {
@@ -895,6 +897,10 @@ var MenuEditorPage = class MenuEditorPage {
       utils.addCSSClass(button, 'menu-editor-path-item');
       utils.setChild(button, label);
       utils.boxAppend(container, button);
+    }
+
+    if (!utils.gtk4()) {
+      container.show_all();
     }
   }
 

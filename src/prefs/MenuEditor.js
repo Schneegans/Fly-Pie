@@ -138,20 +138,6 @@ function registerWidgets() {
             const overlay = new Gtk.Overlay();
             utils.setChild(this, overlay);
 
-            // Create the edit button.
-            if (utils.gtk4()) {
-              this.editButton = Gtk.Button.new_from_icon_name('document-edit-symbolic');
-            } else {
-              this.editButton =
-                  Gtk.Button.new_from_icon_name('document-edit-symbolic', Gtk.IconSize.BUTTON);
-              this.editButton.no_show_all = true;
-            }
-
-            utils.addCSSClass(this.editButton, 'pill-button');
-            this.editButton.valign = Gtk.Align.START;
-            this.editButton.halign = Gtk.Align.END;
-            overlay.add_overlay(this.editButton);
-
             // Create the main toggle button which makes the item selectable. We do not
             // add this to a container yet, as where this is appended depends on the given
             // state. This is done further below.
@@ -234,6 +220,20 @@ function registerWidgets() {
               utils.setChild(this.button, box);
               utils.setChild(overlay, this.button);
             }
+
+            // Create the edit button.
+            if (utils.gtk4()) {
+              this.editButton = Gtk.Button.new_from_icon_name('document-edit-symbolic');
+            } else {
+              this.editButton =
+                  Gtk.Button.new_from_icon_name('document-edit-symbolic', Gtk.IconSize.BUTTON);
+              this.editButton.no_show_all = true;
+            }
+
+            utils.addCSSClass(this.editButton, 'pill-button');
+            this.editButton.valign = Gtk.Align.START;
+            this.editButton.halign = Gtk.Align.END;
+            overlay.add_overlay(this.editButton);
           }
 
           // ------------------------------------------------------------ public interface
@@ -1167,7 +1167,11 @@ function registerWidgets() {
           const now = this.get_frame_clock().get_frame_time();
           if (this._lastHideTime + TRANSITION_DURATION < now) {
             this._oldItems.forEach(item => {
-              item.unparent();
+              if (utils.gtk4()) {
+                item.unparent();
+              } else {
+                this.remove(item);
+              }
             });
             this._oldItems = [];
           }
@@ -1257,14 +1261,18 @@ function registerWidgets() {
       }
 
       // Deletes the item at the given index.
-      remove(which) {
+      removeItem(which) {
         const [removed] = this._items.splice(which, 1);
 
         if (removed == this._selectedItem) {
           this._selectedItem = null;
         }
 
-        removed.unparent();
+        if (utils.gtk4()) {
+          removed.unparent();
+        } else {
+          this.remove(removed);
+        }
       }
 
       // Updates the currently selected item with the data from the given configuration.
@@ -1357,7 +1365,7 @@ function registerWidgets() {
             dragSource.connect('drag-end', (s, drag, deleteData) => {
               if (deleteData) {
                 let removeIndex = this._items.indexOf(item);
-                this.remove(removeIndex);
+                this.removeItem(removeIndex);
                 this.emit('remove-item', removeIndex);
               } else {
                 item.opacity   = 1;
@@ -1551,12 +1559,6 @@ function registerWidgets() {
             allocation.y = item.y.get(time);
             allFinished &= item.x.isFinished(time);
             allFinished &= item.y.isFinished(time);
-          }
-
-          if (!utils.gtk4()) {
-            // this.move(item, allocation.x, allocation.y);
-           // allocation.x = 0;
-           // allocation.y = 0;
           }
 
           utils.sizeAllocate(item, allocation);
