@@ -40,6 +40,7 @@
             <property name="vexpand">1</property>
             <property name="transition_duration">300</property>
             <property name="transition_type">slide-left-right</property>
+            <property name="visible_child_name">icon-theme-page</property>
 
             <child>
               <object class="GtkBox">
