@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-24 21:44+0200\n"
-"PO-Revision-Date: 2021-10-09 03:20+0000\n"
-"Last-Translator: Frank.wu <wzp1515@163.com>\n"
+"PO-Revision-Date: 2021-10-10 04:04+0000\n"
+"Last-Translator: Frank.wu <me@wuzhiping.top>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "fly-pie/core/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -56,7 +56,7 @@ msgstr "线性"
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:23
 msgid "Ease"
-msgstr "舒适"
+msgstr "擦除"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:27
@@ -76,42 +76,44 @@ msgstr "淡进淡出"
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:39
 msgid "Ease-In-Quad"
-msgstr "四重奏"
+msgstr "菱形进入"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:43
 msgid "Ease-Out-Quad"
-msgstr "缓出四边形"
+msgstr "菱形淡出"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:47
 msgid "Ease-In-Out-Quad"
-msgstr "缓入四边形"
+msgstr "菱形淡入"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:51
 msgid "Ease-In-Back"
-msgstr "缓入"
+msgstr "由后淡入"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:55
 msgid "Ease-Out-Back"
-msgstr "淡出"
+msgstr "由后淡出"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/settings.ui:59
 msgid "Ease-In-Out-Back"
-msgstr ""
+msgstr "缓入缓出"
 
 #: resources/ui/settings.ui:398
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: resources/ui/settings.ui:417
 msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
+"查看<a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/changelog"
+".md\">更新日志</a>。"
 
 #: resources/ui/settings.ui:425
 msgid ""
@@ -123,44 +125,51 @@ msgid ""
 "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
+"基于MIT许可证发布。\n"
+"请访问<a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie的主页</a>了解详情。\n"
+"\n"
+"当你遇到🐞️错误或有🎉️功能要求时，请随时在<a href=\"https://github.com/Schneegans/Fly-Pie/"
+"issues\">Github</a>上报告。"
 
 #: resources/ui/settings.ui:442
 msgid "Credits"
-msgstr ""
+msgstr "制作组"
 
 #: resources/ui/settings.ui:455
 msgid "Created by"
-msgstr ""
+msgstr "创建者: "
 
 #: resources/ui/settings.ui:481
 msgid "Translated by"
-msgstr ""
+msgstr "翻译: "
 
 #: resources/ui/settings.ui:508
 msgid "Artwork by"
-msgstr ""
+msgstr "界面设计: "
 
 #: resources/ui/settings.ui:537
 msgid "Sponsors"
-msgstr ""
+msgstr "赞助"
 
 #: resources/ui/settings.ui:554
 msgid "🥇️ Gold Sponsors"
-msgstr ""
+msgstr "🥇️金牌赞助商"
 
 #: resources/ui/settings.ui:566
 msgid "🥈️ Silver Sponsors"
-msgstr ""
+msgstr "🥈️银牌赞助商"
 
 #: resources/ui/settings.ui:578
 msgid "🥉️ Bronze Sponsors"
-msgstr ""
+msgstr "🥉️铜牌赞助商"
 
 #: resources/ui/settings.ui:632
 msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
+"💕️ 想表达你对 Fly-Pie 的喜爱吗？ <a href=\"https://github.com/sponsors/Schneegans\""
+">欢迎赞助，每月只需 1 美元！</a>"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:688
@@ -168,6 +177,8 @@ msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
 msgstr ""
+"<b>菜单</b>\n"
+"可以是子菜单或顶层菜单。"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/settings.ui:713
@@ -175,29 +186,31 @@ msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
+"<b>操作 </b>\n"
+"可添加到自定义菜单中。"
 
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/settings.ui:785
 msgid "Initialize most settings to random values."
-msgstr ""
+msgstr "将大多数设置初始化为随机值。"
 
 #: resources/ui/settings.ui:797
 msgid "Generate Random Preset"
-msgstr ""
+msgstr "生成随机预设"
 
 #: resources/ui/settings.ui:828
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
-msgstr ""
+msgstr "Fly-Pie 需要启用 GNOME Shell 的动画。"
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: resources/ui/settings.ui:833
 msgid "Enable Animations"
-msgstr ""
+msgstr "启用动画"
 
 #. Caption of the tutorial page in the window's titlebar.
 #: resources/ui/settings.ui:885
 msgid "Tutorial"
-msgstr ""
+msgstr "教程"
 
 #: resources/ui/settings.ui:919
 msgid ""
@@ -205,6 +218,7 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
+"你可以用 Fly-Pie 来启动应用程序、模拟热键、打开URL等等。本互动教程将教你如何最有效地使用Fly-Pie。点击下面的大按钮以打开测试菜单！"
 
 #: resources/ui/settings.ui:930
 msgid ""
@@ -214,24 +228,29 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"- 使用你的<b>鼠标左键来选择项目</b>。\n"
+"- 使用你的<b>鼠标右键来关闭菜单</b>。\n"
+"- 测试菜单仅仅是示范，选择项目没有实际效果。\n"
+"\n"
+"如感到舒适，请点击<b>下一步</b>，了解更多细节！"
 
 #. The text of the big tutorial button.
 #: resources/ui/settings.ui:950 resources/ui/settings.ui:1033
 #: resources/ui/settings.ui:1119 resources/ui/settings.ui:1264
 #: resources/ui/settings.ui:1350
 msgid "<big><b>Open the example menu!</b></big>"
-msgstr ""
+msgstr "<big><b>打开示例菜单！</b></big> "
 
 #. This is a heading.
 #: resources/ui/settings.ui:982
 msgid "You can click anywhere!"
-msgstr ""
+msgstr "你可以点击任何地方!"
 
 #: resources/ui/settings.ui:1001
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
-msgstr ""
+msgstr "只要你的鼠标指针停留在项目的楔子里，你是直接点击项目还是在屏幕的边缘点击都没有关系。"
 
 #: resources/ui/settings.ui:1013
 msgid ""
@@ -242,11 +261,16 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
+"<b>通过单击其各个挂件中的任意位置来选择项目</b>。\n"
+"\n"
+"此外，你不必等待动画完成，因为子菜单挂件会立即出现在你单击的位置周围。\n"
+"\n"
+"点击<b>下一步</b>进行练习！"
 
 #. This is a heading.
 #: resources/ui/settings.ui:1065
 msgid "Practice Session I"
-msgstr ""
+msgstr "练习一"
 
 #: resources/ui/settings.ui:1075
 msgid ""
