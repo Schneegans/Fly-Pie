@@ -461,12 +461,6 @@ function registerWidgets() {
             reveal_child: false
           });
 
-          if (utils.gtk4()) {
-            this._backButton.set_parent(this);
-          } else {
-            this.put(this._backButton, 0, 0);
-          }
-
           // Assign a state so that it gets scaled like the other child buttons.
           this._backButton.state = ItemState.CHILD;
 
@@ -478,6 +472,7 @@ function registerWidgets() {
             margin_top: 10,
             margin_bottom: 10,
           });
+
           utils.setDrawFunc(icon, (widget, ctx) => {
             const width  = widget.get_allocated_width();
             const height = widget.get_allocated_height();
@@ -498,11 +493,17 @@ function registerWidgets() {
           utils.addCSSClass(button, 'pill-button');
           utils.setChild(button, icon);
           button.connect('clicked', (b) => {
-            // Emit the 'go-back' signal when clicked.
+            // Navigate to the previous level when clicked.
             this.emit('go-back');
           });
 
           utils.setChild(this._backButton, button);
+
+          if (utils.gtk4()) {
+            this._backButton.set_parent(this);
+          } else {
+            this.put(this._backButton, 0, 0);
+          }
         }
 
         // The entire menu editor is a drop target. This is used both for internal
@@ -1241,7 +1242,18 @@ function registerWidgets() {
           }
         }
 
+        // -------------------------------------------------------------------------------
+
         // Last but not least, update the back-navigation button.
+
+        // On GTK3, the old items - while being completely faded out - still block mouse clicks.
+        // In order to be able to click the back navigation button, we put it to the end of the children list.
+        // Then it's drawn above the invisible items and it's clickable again!
+        if (!utils.gtk4()) {
+          this.remove(this._backButton);
+          this.put(this._backButton, 0, 0);
+        }
+
         this._parentAngle             = parentAngle;
         this._backButton.reveal_child = parentAngle != undefined;
         if (parentAngle != undefined) {
