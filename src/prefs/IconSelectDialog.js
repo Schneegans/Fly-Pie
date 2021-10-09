@@ -114,9 +114,9 @@ function registerWidget() {
 
         let icons;
         if (utils.gtk4()) {
-          icons     = iconTheme.get_icon_names();
+          icons = iconTheme.get_icon_names();
         } else {
-          icons     = iconTheme.list_icons(null);
+          icons = iconTheme.list_icons(null);
         }
 
         // We add icons in batches. This number is somewhat arbitrary - if reduced to 1,

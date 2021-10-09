@@ -107,8 +107,8 @@ var menu = {
       const _createToggle = (i, name, value) => {
         const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL, spacing: 5});
         utils.boxAppend(
-            hBox,
-            new Gtk.Label({label: name, halign: Gtk.Align.START, hexpand: true}), false, true);
+            hBox, new Gtk.Label({label: name, halign: Gtk.Align.START, hexpand: true}),
+            false, true);
 
         const toggle = new Gtk.Switch({active: value, halign: Gtk.Align.END});
         utils.boxAppend(hBox, toggle);

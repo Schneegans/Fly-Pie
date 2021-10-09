@@ -295,7 +295,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     // to reset to the state before (e.g. when ESC is pressed), this stores the previous
     // value.
     let lastAccelerator = '';
-    let isGrabbed = false;
+    let isGrabbed       = false;
 
     // This function grabs the keyboard input. If doFullGrab == true, the complete
     // keyboard input of the default Seat will be grabbed. Else only a Gtk grab is
@@ -307,11 +307,11 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
           utils.getRoot(label).get_surface().inhibit_system_shortcuts(null);
         } else {
           const seat = Gdk.Display.get_default().get_default_seat();
-        seat.grab(
-            row.get_window(), Gdk.SeatCapabilities.KEYBOARD, false, null, null, null);
+          seat.grab(
+              row.get_window(), Gdk.SeatCapabilities.KEYBOARD, false, null, null, null);
         }
       }
-      isGrabbed =true;
+      isGrabbed       = true;
       lastAccelerator = label.get_accelerator();
       label.set_accelerator('');
       label.set_disabled_text(
@@ -322,20 +322,21 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     // bound".
     const cancelGrab = () => {
       if (doFullGrab) {
-        if(utils.gtk4()) {
+        if (utils.gtk4()) {
           utils.getRoot(label).get_surface().restore_system_shortcuts();
         } else {
           const seat = Gdk.Display.get_default().get_default_seat();
           seat.ungrab();
         }
       }
-      isGrabbed =false;
+      isGrabbed = false;
       label.set_accelerator(lastAccelerator);
       row.parent.unselect_all();
       label.set_disabled_text(_('Not Bound'));
     };
 
-    // When the row is activated, the input is grabbed. If it's already grabbed, un-grab it.
+    // When the row is activated, the input is grabbed. If it's already grabbed, un-grab
+    // it.
     row.parent.connect('row-activated', () => {
       if (isGrabbed) {
         cancelGrab();
@@ -378,13 +379,14 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
       if (utils.gtk4()) {
         const controller = Gtk.EventControllerKey.new();
-        controller.connect('key-press', (c, keyval, keycode, state) => handler(keyval, state));
+        controller.connect(
+            'key-press', (c, keyval, keycode, state) => handler(keyval, state));
         row.add_controller(controller);
       } else {
         row.connect('key-press-event', (row, event) => {
-            const keyval = event.get_keyval()[1];
-            const state   = event.get_state()[1];
-            return handler(keyval, state);
+          const keyval = event.get_keyval()[1];
+          const state  = event.get_state()[1];
+          return handler(keyval, state);
         });
       }
     }
@@ -407,7 +409,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         row.connect('focus-out-event', handler);
       }
     }
-      
+
     return [frame, label];
   }
 }

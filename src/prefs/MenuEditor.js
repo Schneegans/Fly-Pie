@@ -397,7 +397,8 @@ function registerWidgets() {
 
         // Here we create the icon and label which are shown if no menu is present.
         {
-          const icon  = new Gtk.Image({icon_name: 'face-crying-symbolic', pixel_size: 128});
+          const icon =
+              new Gtk.Image({icon_name: 'face-crying-symbolic', pixel_size: 128});
           const label = new Gtk.Label({label: _('No menus configured')});
           utils.addCSSClass(label, 'title-3');
           const description = new Gtk.Label(
@@ -424,9 +425,9 @@ function registerWidgets() {
         {
           let icon;
           if (utils.gtk4()) {
-             icon  = Gtk.Image.new_from_icon_name('arrow-up-symbolic');
-            } else {
-            icon  = Gtk.Image.new_from_icon_name('arrow-up-symbolic', Gtk.IconSize.BUTTON);
+            icon = Gtk.Image.new_from_icon_name('arrow-up-symbolic');
+          } else {
+            icon = Gtk.Image.new_from_icon_name('arrow-up-symbolic', Gtk.IconSize.BUTTON);
           }
           const label = new Gtk.Label({label: _('Add a new item')});
           utils.addCSSClass(label, 'caption');
@@ -1246,9 +1247,10 @@ function registerWidgets() {
 
         // Last but not least, update the back-navigation button.
 
-        // On GTK3, the old items - while being completely faded out - still block mouse clicks.
-        // In order to be able to click the back navigation button, we put it to the end of the children list.
-        // Then it's drawn above the invisible items and it's clickable again!
+        // On GTK3, the old items - while being completely faded out - still block mouse
+        // clicks. In order to be able to click the back navigation button, we put it to
+        // the end of the children list. Then it's drawn above the invisible items and
+        // it's clickable again!
         if (!utils.gtk4()) {
           this.remove(this._backButton);
           this.put(this._backButton, 0, 0);
