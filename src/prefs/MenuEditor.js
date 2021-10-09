@@ -397,10 +397,10 @@ function registerWidgets() {
 
         // Here we create the icon and label which are shown if no menu is present.
         {
-          let icon  = new Gtk.Image({icon_name: 'face-crying-symbolic', pixel_size: 128});
-          let label = new Gtk.Label({label: _('No menus configured')});
+          const icon  = new Gtk.Image({icon_name: 'face-crying-symbolic', pixel_size: 128});
+          const label = new Gtk.Label({label: _('No menus configured')});
           utils.addCSSClass(label, 'title-3');
-          let description = new Gtk.Label(
+          const description = new Gtk.Label(
               {label: _('Create a new menu with the button in the top right corner.')});
           utils.addCSSClass(description, 'caption');
 
@@ -422,8 +422,13 @@ function registerWidgets() {
         // Here we create the icon and label which are shown to highlight the add-new-item
         // button.
         {
-          let icon  = Gtk.Image.new_from_icon_name('arrow-up-symbolic');
-          let label = new Gtk.Label({label: _('Add a new item')});
+          let icon;
+          if (utils.gtk4()) {
+             icon  = Gtk.Image.new_from_icon_name('arrow-up-symbolic');
+            } else {
+            icon  = Gtk.Image.new_from_icon_name('arrow-up-symbolic', Gtk.IconSize.BUTTON);
+          }
+          const label = new Gtk.Label({label: _('Add a new item')});
           utils.addCSSClass(label, 'caption');
 
           this._addItemHint            = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 4);
