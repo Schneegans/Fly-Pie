@@ -303,7 +303,13 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     // is waiting for input.
     const grabKeyboard = () => {
       if (doFullGrab) {
-        utils.getRoot(label).get_surface().inhibit_system_shortcuts(null);
+        if (utils.gtk4()) {
+          utils.getRoot(label).get_surface().inhibit_system_shortcuts(null);
+        } else {
+          const seat = Gdk.Display.get_default().get_default_seat();
+        seat.grab(
+            row.get_window(), Gdk.SeatCapabilities.KEYBOARD, false, null, null, null);
+        }
       }
       isGrabbed =true;
       lastAccelerator = label.get_accelerator();
@@ -316,7 +322,12 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     // bound".
     const cancelGrab = () => {
       if (doFullGrab) {
-        utils.getRoot(label).get_surface().restore_system_shortcuts();
+        if(utils.gtk4()) {
+          utils.getRoot(label).get_surface().restore_system_shortcuts();
+        } else {
+          const seat = Gdk.Display.get_default().get_default_seat();
+          seat.ungrab();
+        }
       }
       isGrabbed =false;
       label.set_accelerator(lastAccelerator);
