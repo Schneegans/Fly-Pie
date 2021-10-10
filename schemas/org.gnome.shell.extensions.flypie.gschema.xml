@@ -301,7 +301,7 @@
       <description>The luminance of automatically generated item colors.</description>
     </key>
     <key name="child-auto-color-luminance-hover" type="d">
-      <default>0.15</default>
+      <default>0.2</default>
       <summary>Child Auto Color Luminance Hover</summary>
       <description>The luminance of automatically generated item colors when hovered.</description>
     </key>
