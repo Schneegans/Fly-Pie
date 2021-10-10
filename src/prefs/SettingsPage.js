@@ -490,7 +490,7 @@ var SettingsPage = class SettingsPage {
         // This will be called whenever the settingsKey changes.
         const settingSignalHandler = () => {
           // If the settings key is empty (default state), reset the button.
-          const path = this._settings.get_string(key);
+          let path = this._settings.get_string(key);
           if (path == '') {
             button.set_file(null);
           } else {
