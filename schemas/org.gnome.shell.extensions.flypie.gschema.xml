@@ -14,38 +14,37 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <enum id='org.gnome.shell.extensions.flypie.CenterColorMode'>
-    <value value='0' nick='fixed'/>
-    <value value='1' nick='auto'/>
+    <value value='0' nick='fixed' />
+    <value value='1' nick='auto' />
   </enum>
 
   <enum id='org.gnome.shell.extensions.flypie.ChildColorMode'>
-    <value value='0' nick='fixed'/>
-    <value value='1' nick='auto'/>
-    <value value='2' nick='parent'/>
+    <value value='0' nick='fixed' />
+    <value value='1' nick='auto' />
+    <value value='2' nick='parent' />
   </enum>
 
   <enum id='org.gnome.shell.extensions.flypie.GrandchildColorMode'>
-    <value value='0' nick='fixed'/>
-    <value value='1' nick='parent'/>
+    <value value='0' nick='fixed' />
+    <value value='1' nick='parent' />
   </enum>
 
   <enum id='org.gnome.shell.extensions.flypie.EasingMode'>
-    <value value='1'  nick='linear' />
+    <value value='1' nick='linear' />
     <value value='36' nick='ease' />
     <value value='37' nick='ease-in' />
     <value value='38' nick='ease-out' />
     <value value='39' nick='ease-in-out,' />
-    <value value='2'  nick='ease-in-quad' />
-    <value value='3'  nick='ease-out-quad' />
-    <value value='4'  nick='ease-in-out-quad' />
+    <value value='2' nick='ease-in-quad' />
+    <value value='3' nick='ease-out-quad' />
+    <value value='4' nick='ease-in-out-quad' />
     <value value='26' nick='ease-in-back' />
     <value value='27' nick='ease-out-back' />
     <value value='28' nick='ease-in-out-back' />
   </enum>
 
 
-  <schema path="/org/gnome/shell/extensions/flypie/" 
-             id="org.gnome.shell.extensions.flypie">
+  <schema path="/org/gnome/shell/extensions/flypie/" id="org.gnome.shell.extensions.flypie">
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <!--                            settings                                           -->
@@ -85,20 +84,20 @@
     </key>
 
     <key name="background-color" type="s">
-      <default>"rgba(0, 0, 0, 0.26)"</default>
+      <default>"rgba(0, 0, 0, 0.13)"</default>
       <summary>Background Color</summary>
       <description>The color of the menu backdrop.</description>
     </key>
 
     <key name="text-color" type="s">
-      <default>"rgb(37, 37, 37)"</default>
+      <default>"rgb(238, 238, 238)"</default>
       <summary>Text Color</summary>
       <description>The color of the menu text.</description>
     </key>
 
     <key name="font" type="s">
-      <default>"Open Sans 11"</default>
-      <summary>Center Font</summary>
+      <default>"Cantarell 11"</default>
+      <summary>Font</summary>
       <description>The font used in the menu.</description>
     </key>
 
@@ -112,25 +111,25 @@
     </key>
 
     <key name="wedge-inner-radius" type="d">
-      <default>58</default>
+      <default>51</default>
       <summary>Wedge Inner Radius</summary>
       <description>The inner radius of the wedges in pixels.</description>
     </key>
 
     <key name="wedge-color" type="s">
-      <default>"rgba(0, 0, 0, 0.2)"</default>
+      <default>"rgba(0, 0, 0, 0.13)"</default>
       <summary>Wedge Color</summary>
       <description>The color of the menu's inactive wedges.</description>
     </key>
 
     <key name="wedge-color-hover" type="s">
-      <default>"rgba(47, 47, 47, 0.2)"</default>
+      <default>"rgba(255, 255, 255, 0.014)"</default>
       <summary>Wedge Color Hover</summary>
       <description>The color of the menu's active wedges.</description>
     </key>
 
     <key name="wedge-separator-color" type="s">
-      <default>"rgba(255, 255, 255, 0.13)"</default>
+      <default>"rgba(38, 38, 38, 0.32)"</default>
       <summary>Wedge Separator Color</summary>
       <description>The color of the separators between the menu's wedges.</description>
     </key>
@@ -145,25 +144,25 @@
     <!-- Center Item Settings -->
 
     <key name="center-color-mode" enum="org.gnome.shell.extensions.flypie.CenterColorMode">
-      <default>"auto"</default>
+      <default>"fixed"</default>
       <summary>Center Color Mode</summary>
       <description>If set to auto, the menu's center element will be colored
                    according to its icon. Else the 'center-color' will be used.</description>
     </key>
     <key name="center-color-mode-hover" enum="org.gnome.shell.extensions.flypie.CenterColorMode">
-      <default>"auto"</default>
+      <default>"fixed"</default>
       <summary>Center Color Mode Hover</summary>
       <description>If set to auto, the menu's center element will be colored
                    according to its icon. Else the 'center-color' will be used.</description>
     </key>
 
     <key name="center-fixed-color" type="s">
-      <default>"rgb(215, 215, 215)"</default>
+      <default>"rgba(255, 255, 255, 0)"</default>
       <summary>Center Color</summary>
       <description>The color of the menu's center element.</description>
     </key>
     <key name="center-fixed-color-hover" type="s">
-      <default>"rgb(215, 215, 215)"</default>
+      <default>"rgba(255, 255, 255, 0)"</default>
       <summary>Center Color Hover</summary>
       <description>The color of the menu's center element when a child is hovered.</description>
     </key>
@@ -191,51 +190,51 @@
     </key>
 
     <key name="center-auto-color-opacity" type="d">
-      <default>1.0</default>
+      <default>0</default>
       <summary>Center Auto Color Opacity</summary>
       <description>The opacity value of automatically generated item colors.</description>
     </key>
     <key name="center-auto-color-opacity-hover" type="d">
-      <default>1.0</default>
+      <default>0</default>
       <summary>Center Auto Color Opacity Hover</summary>
       <description>The opacity value of automatically generated item colors when a child is hovered.</description>
     </key>
 
     <key name="center-size" type="d">
-      <default>110</default>
+      <default>109</default>
       <summary>Center Size</summary>
       <description>The size of the center element in pixels.</description>
     </key>
     <key name="center-size-hover" type="d">
-      <default>90</default>
+      <default>109</default>
       <summary>Center Size Hover</summary>
       <description>The size of the center element in pixels when a child is hovered.</description>
     </key>
 
     <key name="center-icon-scale" type="d">
-      <default>0.8</default>
+      <default>0.55</default>
       <summary>Center Icon Scale</summary>
       <description>A scale factor for the center icon.</description>
     </key>
     <key name="center-icon-scale-hover" type="d">
-      <default>0.8</default>
+      <default>0.78</default>
       <summary>Center Icon Scale Hover</summary>
       <description>A scale factor for the center icon when a child is hovered.</description>
     </key>
 
     <key name="center-icon-crop" type="d">
-      <default>1.0</default>
+      <default>0.93</default>
       <summary>Center Icon Crop</summary>
       <description>A crop factor for the center icon.</description>
     </key>
     <key name="center-icon-crop-hover" type="d">
-      <default>1.0</default>
+      <default>0.75</default>
       <summary>Center Icon Crop Hover</summary>
       <description>A crop factor for the center icon when a child is hovered.</description>
     </key>
 
     <key name="center-icon-opacity" type="d">
-      <default>0.17</default>
+      <default>0</default>
       <summary>Center Icon Opacity</summary>
       <description>The opacity of center icons.</description>
     </key>
@@ -246,12 +245,12 @@
     </key>
 
     <key name="center-background-image" type="s">
-      <default>""</default>
+      <default>"assets/default.svg"</default>
       <summary>Background Image File Path</summary>
       <description>Relative or absolute path to the background image.</description>
     </key>
     <key name="center-background-image-hover" type="s">
-      <default>""</default>
+      <default>"assets/default.svg"</default>
       <summary>Background Image File Path Hover</summary>
       <description>Relative or absolute path to the background image when hovered.</description>
     </key>
@@ -260,7 +259,7 @@
     <!-- Child Item Settings -->
 
     <key name="child-color-mode" enum="org.gnome.shell.extensions.flypie.ChildColorMode">
-      <default>"auto"</default>
+      <default>"fixed"</default>
       <summary>Child Color Mode</summary>
       <description>If set to auto, the menu's child elements will be colored
                    according to their icons. Else the 'child-color' will be
@@ -275,34 +274,34 @@
     </key>
 
     <key name="child-fixed-color" type="s">
-      <default>"rgb(255, 255, 255)"</default>
+      <default>"rgba(255, 255, 255, 0)"</default>
       <summary>Child Color</summary>
       <description>The color of the menu's child element.</description>
     </key>
     <key name="child-fixed-color-hover" type="s">
-      <default>"rgb(255, 255, 255)"</default>
+      <default>"rgba(255, 255, 255, 0)"</default>
       <summary>Child Color Hover</summary>
       <description>The color of the menu's child element when hovered.</description>
     </key>
 
     <key name="child-auto-color-saturation" type="d">
-      <default>0.9</default>
+      <default>0.26</default>
       <summary>Child Auto Color Saturation</summary>
       <description>The saturation of automatically generated item colors.</description>
     </key>
     <key name="child-auto-color-saturation-hover" type="d">
-      <default>1.0</default>
+      <default>0.9</default>
       <summary>Child Auto Color Saturation Hover</summary>
       <description>The saturation of automatically generated item colors when hovered.</description>
     </key>
 
     <key name="child-auto-color-luminance" type="d">
-      <default>0.7</default>
+      <default>0.17</default>
       <summary>Child Auto Color Luminance</summary>
       <description>The luminance of automatically generated item colors.</description>
     </key>
     <key name="child-auto-color-luminance-hover" type="d">
-      <default>0.9</default>
+      <default>0.15</default>
       <summary>Child Auto Color Luminance Hover</summary>
       <description>The luminance of automatically generated item colors when hovered.</description>
     </key>
@@ -319,12 +318,12 @@
     </key>
 
     <key name="child-size" type="d">
-      <default>50</default>
+      <default>58</default>
       <summary>Child Size</summary>
       <description>The size of the children elements in pixels.</description>
     </key>
     <key name="child-size-hover" type="d">
-      <default>64</default>
+      <default>66</default>
       <summary>Child Size Hover</summary>
       <description>The size of the children elements in pixels when hovered.</description>
     </key>
@@ -341,23 +340,23 @@
     </key>
 
     <key name="child-icon-scale" type="d">
-      <default>0.8</default>
+      <default>0.73</default>
       <summary>Child Icon Scale</summary>
       <description>A scale factor for child icons.</description>
     </key>
     <key name="child-icon-scale-hover" type="d">
-      <default>0.8</default>
+      <default>0.73</default>
       <summary>Child Icon Scale Hover</summary>
       <description>A scale factor for child icons when hovered.</description>
     </key>
 
     <key name="child-icon-crop" type="d">
-      <default>1.0</default>
+      <default>0.8</default>
       <summary>Child Icon Crop</summary>
       <description>A crop factor for the child icon.</description>
     </key>
     <key name="child-icon-crop-hover" type="d">
-      <default>1.0</default>
+      <default>0.8</default>
       <summary>Child Icon Crop Hover</summary>
       <description>A crop factor for the child icon when a child is hovered.</description>
     </key>
@@ -374,12 +373,12 @@
     </key>
 
     <key name="child-background-image" type="s">
-      <default>""</default>
+      <default>"assets/default-child.svg"</default>
       <summary>Background Image File Path</summary>
       <description>Relative or absolute path to the background image.</description>
     </key>
     <key name="child-background-image-hover" type="s">
-      <default>""</default>
+      <default>"assets/default-child-highlight.svg"</default>
       <summary>Background Image File Path Hover</summary>
       <description>Relative or absolute path to the background image when hovered.</description>
     </key>
@@ -394,14 +393,14 @@
     <!-- Grandchild Item Settings -->
 
     <key name="grandchild-color-mode" enum="org.gnome.shell.extensions.flypie.GrandchildColorMode">
-      <default>"parent"</default>
+      <default>"fixed"</default>
       <summary>Grandchild Color Mode</summary>
       <description>If set to parent, the menu's grandchild elements will be colored
                    according to their parent's icons. Else the 'grandchild-color'
                    will be used.</description>
     </key>
     <key name="grandchild-color-mode-hover" enum="org.gnome.shell.extensions.flypie.GrandchildColorMode">
-      <default>"parent"</default>
+      <default>"fixed"</default>
       <summary>Grandchild Color Mode Hover</summary>
       <description>If set to parent, the menu's grandchild elements will be colored
                    according to their parent's icons. Else the 'grandchild-color'
@@ -409,45 +408,45 @@
     </key>
 
     <key name="grandchild-fixed-color" type="s">
-      <default>"rgb(200, 200, 200)"</default>
+      <default>"rgba(255, 255, 255, 0)"</default>
       <summary>Grandchild Color</summary>
       <description>The color of the menu's grandchild element.</description>
     </key>
     <key name="grandchild-fixed-color-hover" type="s">
-      <default>"rgb(200, 200, 200)"</default>
+      <default>"rgba(255, 255, 255, 0)"</default>
       <summary>Grandchild Color Hover</summary>
       <description>The color of the menu's grandchild element when hovered.</description>
     </key>
 
     <key name="grandchild-size" type="d">
-      <default>12</default>
+      <default>20</default>
       <summary>grandChild Size</summary>
       <description>The size of the grandchildren elements in pixels.</description>
     </key>
     <key name="grandchild-size-hover" type="d">
-      <default>15</default>
+      <default>23</default>
       <summary>grandChild Size Hover</summary>
       <description>The size of the grandchildren elements in pixels when hovered.</description>
     </key>
 
     <key name="grandchild-offset" type="d">
-      <default>22</default>
+      <default>24</default>
       <summary>Grandchild Offset</summary>
       <description>The offset of the grandchildren elements in pixels.</description>
     </key>
     <key name="grandchild-offset-hover" type="d">
-      <default>32</default>
+      <default>28</default>
       <summary>Grandchild Offset Hover</summary>
       <description>The offset of the grandchildren elements in pixels when hovered.</description>
     </key>
 
     <key name="grandchild-background-image" type="s">
-      <default>""</default>
+      <default>"assets/default-grandchild.svg"</default>
       <summary>Background Image File Path</summary>
       <description>Relative or absolute path to the background image.</description>
     </key>
     <key name="grandchild-background-image-hover" type="s">
-      <default>""</default>
+      <default>"assets/default-grandchild.svg"</default>
       <summary>Background Image File Path Hover</summary>
       <description>Relative or absolute path to the background image when hovered.</description>
     </key>
@@ -473,7 +472,7 @@
     </key>
 
     <key name="trace-color" type="s">
-      <default>"rgb(200, 200, 200)"</default>
+      <default>"rgb(38, 38, 38)"</default>
       <summary>Trace Color</summary>
       <description>The color of the menu's trace.</description>
     </key>
@@ -651,8 +650,6 @@
     </key>
 
 
-
-
     <key name="stats-selections-2000ms-depth2" type="u">
       <default>0</default>
       <summary>Selection Count 2000ms Depth 2</summary>
@@ -684,7 +681,6 @@
     </key>
 
 
-
     <key name="stats-selections-3000ms-depth3" type="u">
       <default>0</default>
       <summary>Selection Count 3000ms Depth 3</summary>
@@ -714,7 +710,6 @@
       <summary>Selection Count 500ms Depth 3</summary>
       <description>The number of selections at depth 3 faster than 500ms.</description>
     </key>
-
 
 
     <key name="stats-abortions" type="u">
