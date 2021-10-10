@@ -380,7 +380,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       if (utils.gtk4()) {
         const controller = Gtk.EventControllerKey.new();
         controller.connect(
-            'key-press', (c, keyval, keycode, state) => handler(keyval, state));
+            'key-pressed', (c, keyval, keycode, state) => handler(keyval, state));
         row.add_controller(controller);
       } else {
         row.connect('key-press-event', (row, event) => {
