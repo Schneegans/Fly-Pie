@@ -494,6 +494,11 @@ var SettingsPage = class SettingsPage {
           if (path == '') {
             button.set_file(null);
           } else {
+            // If the path is a relative path, it may be a child of the preset directory.
+            if (!GLib.path_is_absolute(path)) {
+              path = Me.path + '/presets/' + path;
+            }
+
             let file = Gio.File.new_for_path(path);
             button.set_file(file);
           }
