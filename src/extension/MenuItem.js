@@ -331,6 +331,11 @@ class MenuItem extends Clutter.Actor {
 
     // We load the background images once for all menu items.
     const loadBackgroundImage = (file, size) => {
+      // If the path is a relative path, it may be a child of the preset directory.
+      if (file != '' && !GLib.path_is_absolute(file)) {
+        file = Me.path + '/presets/' + file;
+      }
+
       // Only attempt to load an image if the background image property is set and exists.
       if (file != '' && Gio.File.new_for_path(file).query_exists(null)) {
         try {
