@@ -368,6 +368,10 @@ function registerWidgets() {
       _init(params = {}) {
         super._init(params);
 
+        // Create a Gio.Settings object. This is required to use the correct font when
+        // drawing a text icon.
+        this._settings = utils.createSettings();
+
         // This list contains all currently visible items. The only exception are the
         // _centerItem and the _backButton which are not in this list but managed
         // separately.
@@ -1361,59 +1365,70 @@ function registerWidgets() {
         }
 
         // Now we set up the drag source. Most items are draggable, except for center
-        // items.
+        // items. The drag source provides a stringified JSON version of the item config.
+        // This is a bit confusing as it needs to be set up differently for GTK4 and GTK3.
         if (itemState != ItemState.CENTER) {
 
-          // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does
-          // not work on X11. If we added the copy action on X11, it would be chosen as
-          // default action and the user would have to hold down shift in order to move
-          // items...
-          let actions = Gdk.DragAction.MOVE;
-          if (utils.getSessionType() == 'wayland') {
-            actions |= Gdk.DragAction.COPY;
-          }
+          // At drag begin, we make the icon translucent in overview mode and invisible
+          // in menu edit mode.
+          const dragBegin = () => {
+            item.opacity    = this._inMenuOverviewMode() ? 0.2 : 0.0;
+            item.sensitive  = false;
+            this._dragIndex = this._items.indexOf(item);
+            this.updateLayout();
+          };
+
+          // On drag end we make it visible again.
+          const dragEnd = () => {
+            item.opacity   = 1;
+            item.sensitive = true;
+            this._dragIndex = null;
+          };
+
+          // If the drag was a move action, the item will be deleted.
+          const dragDeleteData = () => {
+            let removeIndex = this._items.indexOf(item);
+            this.removeItem(removeIndex);
+            this.emit('remove-item', removeIndex);
+          };
+
+          // If the drag operation is canceled, we make the item visible again and
+          // update the layout.
+          const dragCancel = () => {
+            item.opacity    = 1;
+            item.sensitive  = true;
+            this._dragIndex = null;
+            this.updateLayout();
+            return false;
+          };
 
           if (utils.gtk4()) {
-            let dragSource = new Gtk.DragSource({actions: actions});
+            // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does
+            // not work on X11. If we added the copy action on X11, it would be chosen as
+            // default action and the user would have to hold down shift in order to move
+            // items...
+            let actions = Gdk.DragAction.MOVE;
+            if (utils.getSessionType() == 'wayland') {
+              actions |= Gdk.DragAction.COPY;
+            }
 
-            // The drag source provides a stringified JSON version of the item config. The
-            // item's icon is used as drag graphic.
+            let dragSource = new Gtk.DragSource({actions: actions});
+            
+            // The item's icon is used as drag graphic.
             dragSource.connect('prepare', (s, x, y) => {
               s.set_icon(Gtk.WidgetPaintable.new(item.icon), x, y);
               return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
             });
 
-            // At drag begin, we make the icon translucent in overview mode and invisible
-            // in menu edit mode.
-            dragSource.connect('drag-begin', () => {
-              item.opacity    = this._inMenuOverviewMode() ? 0.2 : 0.0;
-              item.sensitive  = false;
-              this._dragIndex = this._items.indexOf(item);
-              this.updateLayout();
-            });
+            dragSource.connect('drag-begin', dragBegin);
+            dragSource.connect('drag-cancel', dragCancel);
 
-            // On drag end we either remove the dragged object or make it visible again.
             dragSource.connect('drag-end', (s, drag, deleteData) => {
               if (deleteData) {
-                let removeIndex = this._items.indexOf(item);
-                this.removeItem(removeIndex);
-                this.emit('remove-item', removeIndex);
-              } else {
-                item.opacity   = 1;
-                item.sensitive = true;
-              }
+                dragDeleteData();
+              } 
 
-              this._dragIndex = null;
-            });
-
-            // If the drag operation is canceled, we make the item visible again and
-            // update the layout.
-            dragSource.connect('drag-cancel', () => {
-              item.opacity    = 1;
-              item.sensitive  = true;
-              this._dragIndex = null;
-              this.updateLayout();
-              return false;
+              dragEnd();
             });
 
             // For some reason, the drag source does not work anymore once the
@@ -1424,6 +1439,26 @@ function registerWidgets() {
             });
 
             item.button.add_controller(dragSource);
+
+          } else {
+
+            item.button.drag_source_set(Gdk.ModifierType.BUTTON1_MASK, [Gtk.TargetEntry.new("STRING", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
+
+            // The item's icon is used as drag graphic.
+            item.button.connect("drag-begin", () => {
+              const font  = this._settings.get_string('font');
+              const color = utils.getColor(item.button);
+              const size = ItemSize[item.state] - 50;
+              const surface = utils.createIcon(item.getConfig().icon, size, font, color);
+              const pixbuf = Gdk.pixbuf_get_from_surface(surface, 0, 0, size, size);
+              item.button.drag_source_set_icon_pixbuf(pixbuf);
+              dragBegin();
+            });
+            
+            item.button.connect("drag-data-get", (w, c, data) => data.set_text(JSON.stringify(item.getConfig()), -1));
+            item.button.connect("drag-failed", dragCancel);
+            item.button.connect("drag-data-delete", dragDeleteData);
+            item.button.connect("drag-end", dragEnd);
           }
         }
 
