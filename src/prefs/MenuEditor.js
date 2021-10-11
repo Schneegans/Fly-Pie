@@ -1379,13 +1379,6 @@ function registerWidgets() {
             this.updateLayout();
           };
 
-          // On drag end we make it visible again.
-          const dragEnd = () => {
-            item.opacity   = 1;
-            item.sensitive = true;
-            this._dragIndex = null;
-          };
-
           // If the drag was a move action, the item will be deleted.
           const dragDeleteData = () => {
             let removeIndex = this._items.indexOf(item);
@@ -1393,9 +1386,9 @@ function registerWidgets() {
             this.emit('remove-item', removeIndex);
           };
 
-          // If the drag operation is canceled, we make the item visible again and
+          // If the drag operation is ended, we make the item visible again and
           // update the layout.
-          const dragCancel = () => {
+          const dragEnd = () => {
             item.opacity    = 1;
             item.sensitive  = true;
             this._dragIndex = null;
@@ -1422,7 +1415,7 @@ function registerWidgets() {
             });
 
             dragSource.connect('drag-begin', dragBegin);
-            dragSource.connect('drag-cancel', dragCancel);
+            dragSource.connect('drag-cancel', dragEnd);
 
             dragSource.connect('drag-end', (s, drag, deleteData) => {
               if (deleteData) {
@@ -1449,7 +1442,7 @@ function registerWidgets() {
             item.button.connect("drag-begin", () => {
               const font  = this._settings.get_string('font');
               const color = utils.getColor(item.button);
-              const size = ItemSize[item.state] - 50;
+              const size = Math.min(item.icon.get_allocated_width(), item.icon.get_allocated_height());
               const surface = utils.createIcon(item.getConfig().icon, size, font, color);
               const pixbuf = Gdk.pixbuf_get_from_surface(surface, 0, 0, size, size);
               item.button.drag_source_set_icon_pixbuf(pixbuf);
@@ -1457,8 +1450,8 @@ function registerWidgets() {
             });
 
             item.button.connect("drag-data-get", (w, c, data) => data.set("text/plain", 8, ByteArray.fromString(JSON.stringify(item.getConfig()))));
-            item.button.connect("drag-failed", dragCancel);
             item.button.connect("drag-data-delete", dragDeleteData);
+            item.button.connect("drag-failed", dragEnd);
             item.button.connect("drag-end", dragEnd);
           }
         }

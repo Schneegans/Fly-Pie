@@ -1034,7 +1034,39 @@ var MenuEditorPage = class MenuEditorPage {
     });
     utils.boxAppend(this._builder.get_object('menu-editor-stash-content'), item);
 
-    // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does not work on X11.
+      // Make the item translucent when a drag is started.
+    const dragBegin = () => {
+      item.opacity = 0.2;
+    };
+
+      // Remove the stash widget on a successful drop.
+    const dragDeleteData = () => {
+      let removeIndex = this._stashedConfigs.indexOf(config);
+      this._stashedConfigs.splice(removeIndex, 1);
+
+      if (utils.gtk4()) {
+        item.unparent();
+      } else {
+        this._builder.get_object('menu-editor-stash-content').remove(item);
+      }
+      this._saveStashConfiguration();
+
+      // Show the stash info when the last item got deleted.
+      if (this._stashedConfigs.length == 0) {
+        this._builder.get_object('menu-editor-stash-label').visible   = true;
+        this._builder.get_object('menu-editor-stash-content').visible = false;
+      }
+    };
+
+      // Make the item visible again if the drag is aborted.
+    const dragEnd = () => {
+      item.opacity = 1;
+      return false;
+    };
+
+
+    if (utils.gtk4()) {
+       // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does not work on X11.
     // If we added the copy action on X11, it would be chosen as default action and the
     // user would have to hold down shift in order to move items...
     let actions = Gdk.DragAction.MOVE;
@@ -1042,7 +1074,6 @@ var MenuEditorPage = class MenuEditorPage {
       actions |= Gdk.DragAction.COPY;
     }
 
-    if (utils.gtk4()) {
       const dragSource = new Gtk.DragSource({actions: actions});
 
       dragSource.connect('prepare', (s, x, y) => {
@@ -1050,37 +1081,37 @@ var MenuEditorPage = class MenuEditorPage {
         return Gdk.ContentProvider.new_for_value(JSON.stringify(config));
       });
 
-      // Make the item translucent when a drag is started.
-      dragSource.connect('drag-begin', () => {
-        item.opacity = 0.2;
-      });
-
-      // Remove the stash widget on a successful drop.
       dragSource.connect('drag-end', (s, drag, deleteData) => {
         if (deleteData) {
-          let removeIndex = this._stashedConfigs.indexOf(config);
-          this._stashedConfigs.splice(removeIndex, 1);
-          item.unparent();
-          this._saveStashConfiguration();
-
-          // Show the stash info when the last item got deleted.
-          if (this._stashedConfigs.length == 0) {
-            this._builder.get_object('menu-editor-stash-label').visible   = true;
-            this._builder.get_object('menu-editor-stash-content').visible = false;
-          }
+         dragDeleteData();
         } else {
-          item.opacity = 1;
+          dragEnd();
         }
       });
 
-      // Make the item visible again if the drag is aborted.
-      dragSource.connect('drag-cancel', () => {
-        item.opacity = 1;
-        return false;
-      });
+      dragSource.connect('drag-begin', dragBegin);
+      dragSource.connect('drag-cancel', dragEnd);
 
       item.add_controller(dragSource);
     } else {
+
+      item.drag_source_set(Gdk.ModifierType.BUTTON1_MASK, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
+
+      // The item's icon is used as drag graphic.
+      item.connect("drag-begin", () => {
+        const font  = this._settings.get_string('font');
+        const color = utils.getColor(item);
+        const size = Math.min(item.width_request, item.height_request);
+        const surface = utils.createIcon(config.icon, size, font, color);
+        const pixbuf = Gdk.pixbuf_get_from_surface(surface, 0, 0, size, size);
+        item.drag_source_set_icon_pixbuf(pixbuf);
+        dragBegin();
+      });
+
+      item.connect("drag-data-get", (w, c, data) => data.set("text/plain", 8, ByteArray.fromString(JSON.stringify(config))));
+      item.connect("drag-data-delete", dragDeleteData);
+      item.connect("drag-failed", dragEnd);
+      item.connect("drag-end", dragEnd);
 
       item.show();
     }
