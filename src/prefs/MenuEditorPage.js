@@ -667,6 +667,8 @@ var MenuEditorPage = class MenuEditorPage {
         dropTarget.connect('drop', () => true);
         dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
         trash.add_controller(dropTarget);
+      } else {
+        trash.drag_dest_set(Gtk.DestDefaults.ALL, [Gtk.TargetEntry.new("STRING", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
       }
     }
 
