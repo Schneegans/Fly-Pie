@@ -9,6 +9,7 @@
 'use strict';
 
 const {GLib, GObject, Gtk, Gdk, Pango} = imports.gi;
+const ByteArray   = imports.byteArray;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -1442,7 +1443,7 @@ function registerWidgets() {
 
           } else {
 
-            item.button.drag_source_set(Gdk.ModifierType.BUTTON1_MASK, [Gtk.TargetEntry.new("STRING", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
+            item.button.drag_source_set(Gdk.ModifierType.BUTTON1_MASK, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
 
             // The item's icon is used as drag graphic.
             item.button.connect("drag-begin", () => {
@@ -1454,8 +1455,8 @@ function registerWidgets() {
               item.button.drag_source_set_icon_pixbuf(pixbuf);
               dragBegin();
             });
-            
-            item.button.connect("drag-data-get", (w, c, data) => data.set_text(JSON.stringify(item.getConfig()), -1));
+
+            item.button.connect("drag-data-get", (w, c, data) => data.set("text/plain", 8, ByteArray.fromString(JSON.stringify(item.getConfig()))));
             item.button.connect("drag-failed", dragCancel);
             item.button.connect("drag-data-delete", dragDeleteData);
             item.button.connect("drag-end", dragEnd);

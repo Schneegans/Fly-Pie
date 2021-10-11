@@ -9,6 +9,7 @@
 'use strict';
 
 const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
+const ByteArray   = imports.byteArray;
 
 const Me                  = imports.misc.extensionUtils.getCurrentExtension();
 const utils               = Me.imports.src.common.utils;
@@ -668,7 +669,7 @@ var MenuEditorPage = class MenuEditorPage {
         dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
         trash.add_controller(dropTarget);
       } else {
-        trash.drag_dest_set(Gtk.DestDefaults.ALL, [Gtk.TargetEntry.new("STRING", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
+        trash.drag_dest_set(Gtk.DestDefaults.ALL, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
       }
     }
 
@@ -677,20 +678,30 @@ var MenuEditorPage = class MenuEditorPage {
     {
       const stash = this._builder.get_object('menu-editor-stash');
 
+      const handler = (value) => {
+        const config = JSON.parse(value);
+          this._stashedConfigs.push(config);
+          this._addStashWidget(config);
+          this._saveStashConfiguration();
+      };
+
       if (utils.gtk4()) {
         const dropTarget =
             new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
         dropTarget.set_gtypes([GObject.TYPE_STRING]);
         dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
         dropTarget.connect('drop', (t, value) => {
-          const config = JSON.parse(value);
-          this._stashedConfigs.push(config);
-          this._addStashWidget(config);
-          this._saveStashConfiguration();
+          handler(value);
           return true;
         });
         dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
         stash.add_controller(dropTarget);
+      } else {
+        stash.drag_dest_set(Gtk.DestDefaults.ALL, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
+        stash.connect("drag-data-received", (w, context, x, y, data, i, time) => {
+          handler(ByteArray.toString(data.get_data()));
+          Gtk.drag_finish(context, true, context.get_selected_action() == Gdk.DragAction.MOVE, time);
+        });
       }
     }
   }
@@ -999,13 +1010,20 @@ var MenuEditorPage = class MenuEditorPage {
 
     // Stash items are simple Gtk.DrawingAreas which can be dragged around.
     const item  = new Gtk.DrawingArea({
-      content_width: 32,
-      content_height: 32,
       margin_start: 4,
       margin_end: 4,
       valign: Gtk.Align.CENTER,
       tooltip_text: config.name
     });
+
+    if (utils.gtk4()) {
+      item.content_width = 32;
+      item.content_height = 32;
+    } else {
+      item.width_request = 32;
+      item.height_request = 32;
+    }
+
     item.config = config;
     utils.setDrawFunc(item, (widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
@@ -1062,6 +1080,9 @@ var MenuEditorPage = class MenuEditorPage {
       });
 
       item.add_controller(dragSource);
+    } else {
+
+      item.show();
     }
   }
 
