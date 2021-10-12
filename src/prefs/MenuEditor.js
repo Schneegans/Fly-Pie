@@ -9,7 +9,7 @@
 'use strict';
 
 const {GLib, GObject, Gtk, Gdk, Pango} = imports.gi;
-const ByteArray   = imports.byteArray;
+const ByteArray                        = imports.byteArray;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -510,8 +510,8 @@ function registerWidgets() {
           } else {
             this.put(this._backButton, 0, 0);
             this._backButton.no_show_all = true;
-            button.visible = true;
-            icon.visible = true;
+            button.visible               = true;
+            icon.visible                 = true;
           }
         }
 
@@ -1411,7 +1411,7 @@ function registerWidgets() {
             }
 
             let dragSource = new Gtk.DragSource({actions: actions});
-            
+
             // The item's icon is used as drag graphic.
             dragSource.connect('prepare', (s, x, y) => {
               s.set_icon(Gtk.WidgetPaintable.new(item.icon), x, y);
@@ -1424,7 +1424,7 @@ function registerWidgets() {
             dragSource.connect('drag-end', (s, drag, deleteData) => {
               if (deleteData) {
                 dragDeleteData();
-              } 
+              }
 
               dragEnd();
             });
@@ -1440,23 +1440,31 @@ function registerWidgets() {
 
           } else {
 
-            item.button.drag_source_set(Gdk.ModifierType.BUTTON1_MASK, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
+            item.button.drag_source_set(
+                Gdk.ModifierType.BUTTON1_MASK,
+                [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+                Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
 
             // The item's icon is used as drag graphic.
-            item.button.connect("drag-begin", () => {
+            item.button.connect('drag-begin', () => {
               const font  = this._settings.get_string('font');
               const color = utils.getColor(item.button);
-              const size = Math.min(item.icon.get_allocated_width(), item.icon.get_allocated_height());
+              const size  = Math.min(
+                  item.icon.get_allocated_width(), item.icon.get_allocated_height());
               const surface = utils.createIcon(item.getConfig().icon, size, font, color);
-              const pixbuf = Gdk.pixbuf_get_from_surface(surface, 0, 0, size, size);
+              const pixbuf  = Gdk.pixbuf_get_from_surface(surface, 0, 0, size, size);
               item.button.drag_source_set_icon_pixbuf(pixbuf);
               dragBegin();
             });
 
-            item.button.connect("drag-data-get", (w, c, data) => data.set("text/plain", 8, ByteArray.fromString(JSON.stringify(item.getConfig()))));
-            item.button.connect("drag-data-delete", dragDeleteData);
-            item.button.connect("drag-failed", dragEnd);
-            item.button.connect("drag-end", dragEnd);
+            item.button.connect(
+                'drag-data-get',
+                (w, c, data) => data.set(
+                    'text/plain', 8,
+                    ByteArray.fromString(JSON.stringify(item.getConfig()))));
+            item.button.connect('drag-data-delete', dragDeleteData);
+            item.button.connect('drag-failed', dragEnd);
+            item.button.connect('drag-end', dragEnd);
           }
         }
 
@@ -1464,7 +1472,7 @@ function registerWidgets() {
         if (itemState != ItemState.CENTER) {
 
           // When something is dropped, we either emit 'drop-data-into' (for external
-            // drop events) or 'drop-data-into' (for internal drop events).
+          // drop events) or 'drop-data-into' (for internal drop events).
           const handler = (value, internalDrag, containsUris) => {
             const dropIndex = this._items.indexOf(item);
 
@@ -1507,7 +1515,9 @@ function registerWidgets() {
             dropTarget.connect('accept', () => item.getConfig().type == 'CustomMenu');
 
             dropTarget.connect('drop', (t, what) => {
-             return handler(what, t.get_drop().get_drag() != null, t.get_drop().formats.contain_mime_type('text/uri-list'));
+              return handler(
+                  what, t.get_drop().get_drag() != null,
+                  t.get_drop().formats.contain_mime_type('text/uri-list'));
             });
 
             // Highlight the button if the pointer moves over it.
@@ -1515,15 +1525,21 @@ function registerWidgets() {
 
             item.button.add_controller(dropTarget);
           } else {
-            item.button.drag_dest_set(Gtk.DestDefaults.DROP, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
-            item.button.drag_dest_set_track_motion(true); 
-            item.button.connect("drag-data-received", (w, context, x, y, data, i, time) => {
-              utils.debug(i);
-              handler(ByteArray.toString(data.get_data()), true, data.targets_include_uri());
-            });
+            item.button.drag_dest_set(
+                Gtk.DestDefaults.DROP,
+                [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+                Gdk.DragAction.MOVE);
+            item.button.drag_dest_set_track_motion(true);
+            item.button.connect(
+                'drag-data-received', (w, context, x, y, data, i, time) => {
+                  utils.debug(i);
+                  handler(
+                      ByteArray.toString(data.get_data()), true,
+                      data.targets_include_uri());
+                });
 
             // We accept everything as long as the item is a custom menu.
-            item.button.connect("drag-motion", (w, context, x, y, time) => {
+            item.button.connect('drag-motion', (w, context, x, y, time) => {
               if (item.getConfig().type != 'CustomMenu') {
                 return false;
               }
@@ -1534,7 +1550,7 @@ function registerWidgets() {
               return true;
             });
 
-            item.button.connect("drag-leave", () => {
+            item.button.connect('drag-leave', () => {
               item.button.drag_unhighlight();
             });
           }
