@@ -299,11 +299,32 @@ function registerWidgets() {
   ////////////////////////////////////////////////////////////////////////////////////////
 
   if (GObject.type_from_name('FlyPieMenuEditorBase') == null) {
-    let BASE_CLASS = Gtk.Fixed;
 
-    if (utils.gtk4()) {
-      BASE_CLASS = Gtk.Widget;
-    }
+    // To support both, GTK3 and GTK4 from the same codebase, some weird things have to be
+    // done here. On GTK4, everything is fine but creating a custom container widget on
+    // GTK3 is ... challenging. Therefore, the FlyPieMenuEditor is derived from Gtk.Widget
+    // on GTK4 and from Gtk.Fixed on GTK3 (hacky, but possible).
+    // There are also different abstract methods which need to be overridden on GTK43 /
+    // GTK4. Therefore there is a main FlyPieMenuEditorBase class and derived therefrom
+    // different FlyPieMenuEditor's on GTK3 / GTK4. So it looks a bit like this:
+    //
+    //                    GTK3                                    GTK4
+    //
+    //          ,----------------------,                ,----------------------,
+    //          |      Gtk.Fixed       |                |     Gtk.Widget       |
+    //          '----------------------'                '----------------------'
+    //                      ^                                       ^
+    //                      |                                       |
+    //          ,--------------------------------------------------------------,
+    //          |                     FlyPieMenuEditorBase                     |
+    //          '--------------------------------------------------------------'
+    //                      ^                                       ^
+    //                      |                                       |
+    //    ,---------------------------------,      ,---------------------------------,
+    //    | FlyPieMenuEditor (GTK3 Version) |      | FlyPieMenuEditor (GTK4 Version) |
+    //    '---------------------------------'      '---------------------------------'
+    //
+    const BASE_CLASS = utils.gtk4() ? Gtk.Widget : Gtk.Fixed;
 
     // clang-format off
     FlyPieMenuEditorBase = GObject.registerClass({
@@ -870,10 +891,6 @@ function registerWidgets() {
               return true;
             });
           }
-        }
-
-        if (!utils.gtk4()) {
-          this.show_all();
         }
       }
 
