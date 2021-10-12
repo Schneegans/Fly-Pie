@@ -519,180 +519,179 @@ function registerWidgets() {
           // based on the computed index.
           const dragMotion = (x, y) => {
             // If any of the below values changes during this callback, we will trigger
-              // an animation so that items move around smoothly.
-              const lastDropRow    = this._dropRow;
-              const lastDropColumn = this._dropColumn;
-              const lastDropIndex  = this._dropIndex;
+            // an animation so that items move around smoothly.
+            const lastDropRow    = this._dropRow;
+            const lastDropColumn = this._dropColumn;
+            const lastDropIndex  = this._dropIndex;
 
-              // Computing the _dropIndex in menu overview mode is rather simple as we
-              // just have to compute the row and column the pointer resides currently
-              // over.
-              if (this._inMenuOverviewMode()) {
+            // Computing the _dropIndex in menu overview mode is rather simple as we
+            // just have to compute the row and column the pointer resides currently
+            // over.
+            if (this._inMenuOverviewMode()) {
 
-                // The grid is drawn centered. Here we make the coordinates relative to
-                // the grid and clamp the coordinates to the grid bounds.
-                x -= this._gridOffsetX;
-                y -= this._gridOffsetY;
-                x = Math.max(
-                    0, Math.min(this._columnCount * ItemSize[ItemState.GRID], x));
-                y = Math.max(0, Math.min(this._rowCount * ItemSize[ItemState.GRID], y));
+              // The grid is drawn centered. Here we make the coordinates relative to
+              // the grid and clamp the coordinates to the grid bounds.
+              x -= this._gridOffsetX;
+              y -= this._gridOffsetY;
+              x = Math.max(0, Math.min(this._columnCount * ItemSize[ItemState.GRID], x));
+              y = Math.max(0, Math.min(this._rowCount * ItemSize[ItemState.GRID], y));
 
-                // To allow for drops into items, the valid drop zones are between two
-                // items with a total width of half an item (one quarter from the one item
-                // and a quarter of the next item).
-                const dropZoneWidth = ItemSize[ItemState.GRID] / 4;
+              // To allow for drops into items, the valid drop zones are between two
+              // items with a total width of half an item (one quarter from the one item
+              // and a quarter of the next item).
+              const dropZoneWidth = ItemSize[ItemState.GRID] / 4;
 
-                // Compute the _drop* members if we are in a drop zone, else set them to
-                // null.
-                if (x % ItemSize[ItemState.GRID] < dropZoneWidth ||
-                    x % ItemSize[ItemState.GRID] >
-                        ItemSize[ItemState.GRID] - dropZoneWidth) {
-                  this._dropColumn = Math.floor(x / ItemSize[ItemState.GRID] + 0.5);
-                  this._dropRow    = Math.floor(y / ItemSize[ItemState.GRID]);
-                  this._dropIndex  = Math.min(
-                      this._items.length,
-                      this._columnCount * this._dropRow + this._dropColumn);
-                } else {
-                  this._dropColumn = null;
-                  this._dropRow    = null;
-                  this._dropIndex  = null;
-                }
-
+              // Compute the _drop* members if we are in a drop zone, else set them to
+              // null.
+              if (x % ItemSize[ItemState.GRID] < dropZoneWidth ||
+                  x % ItemSize[ItemState.GRID] >
+                      ItemSize[ItemState.GRID] - dropZoneWidth) {
+                this._dropColumn = Math.floor(x / ItemSize[ItemState.GRID] + 0.5);
+                this._dropRow    = Math.floor(y / ItemSize[ItemState.GRID]);
+                this._dropIndex  = Math.min(
+                    this._items.length,
+                    this._columnCount * this._dropRow + this._dropColumn);
               } else {
-                // In menu edit mode, the computation is much more involved.
+                this._dropColumn = null;
+                this._dropRow    = null;
+                this._dropIndex  = null;
+              }
 
-                // First we make the coordinates relative to the center.
-                x -= this._width / 2;
-                y -= this._height / 2;
+            } else {
+              // In menu edit mode, the computation is much more involved.
 
-                // We assume that we are not in a valid drop zone. If we are, this will be
-                // set to the appropriate index later.
-                this._dropIndex = null;
+              // First we make the coordinates relative to the center.
+              x -= this._width / 2;
+              y -= this._height / 2;
 
-                // We compute the pointer-center distance. Items cannot be dropped too
-                // close to the center.
-                const distance = Math.sqrt(x * x + y * y);
-                if (distance > ItemSize[ItemState.CENTER] / 2) {
+              // We assume that we are not in a valid drop zone. If we are, this will be
+              // set to the appropriate index later.
+              this._dropIndex = null;
 
-                  // Compute the angle between center-pointer and center-up.
-                  let mouseAngle = Math.acos(x / distance) * 180 / Math.PI;
-                  if (y < 0) {
-                    mouseAngle = 360 - mouseAngle;
-                  }
-                  mouseAngle = (mouseAngle + 90) % 360;
+              // We compute the pointer-center distance. Items cannot be dropped too
+              // close to the center.
+              const distance = Math.sqrt(x * x + y * y);
+              if (distance > ItemSize[ItemState.CENTER] / 2) {
 
-                  // Compute the angle of all items. As we reset this._dropIndex before,
-                  // these will not include the gap for the to-be-dropped item. If an item
-                  // is dragged around (as opposed to external data), the angle of the
-                  // dragged item will coincide with its successor.
-                  const itemAngles = this._computeItemAngles();
+                // Compute the angle between center-pointer and center-up.
+                let mouseAngle = Math.acos(x / distance) * 180 / Math.PI;
+                if (y < 0) {
+                  mouseAngle = 360 - mouseAngle;
+                }
+                mouseAngle = (mouseAngle + 90) % 360;
 
-                  // Now compute the _dropIndex by comparing the mouseAngle with the
-                  // itemAngles. There are a few special cases when there are only a few
-                  // items in the menu.
-                  if (itemAngles.length == 0) {
-                    // If there is no current item, it's easy: We simply drop at index
-                    // zero.
+                // Compute the angle of all items. As we reset this._dropIndex before,
+                // these will not include the gap for the to-be-dropped item. If an item
+                // is dragged around (as opposed to external data), the angle of the
+                // dragged item will coincide with its successor.
+                const itemAngles = this._computeItemAngles();
+
+                // Now compute the _dropIndex by comparing the mouseAngle with the
+                // itemAngles. There are a few special cases when there are only a few
+                // items in the menu.
+                if (itemAngles.length == 0) {
+                  // If there is no current item, it's easy: We simply drop at index
+                  // zero.
+                  this._dropIndex = 0;
+
+                } else if (itemAngles.length == 1) {
+                  // If there is one current item, we always drop at zero if it's an
+                  // internal drag (as we are obviously dragging the only item around).
+                  // If it's an external drag, we have to decide whether to drop before
+                  // or after.
+                  if (this._dragIndex != null) {
                     this._dropIndex = 0;
-
-                  } else if (itemAngles.length == 1) {
-                    // If there is one current item, we always drop at zero if it's an
-                    // internal drag (as we are obviously dragging the only item around).
-                    // If it's an external drag, we have to decide whether to drop before
-                    // or after.
-                    if (this._dragIndex != null) {
-                      this._dropIndex = 0;
-                    } else {
-                      this._dropIndex = (mouseAngle - itemAngles[0] < 90 ||
-                                         mouseAngle - itemAngles[0] > 270) ?
-                          0 :
-                          1;
-                    }
-
-                  } else if (itemAngles.length == 2 && this._dragIndex != null) {
-                    // If there are two items but one of them is dragged around, we have
-                    // to decide whether to drop before or after. However, 'after' means
-                    // at index 2, as the item addition happens before the item removal
-                    // during an internal drag-and-drop.
+                  } else {
                     this._dropIndex = (mouseAngle - itemAngles[0] < 90 ||
                                        mouseAngle - itemAngles[0] > 270) ?
                         0 :
-                        2;
+                        1;
+                  }
 
-                  } else {
+                } else if (itemAngles.length == 2 && this._dragIndex != null) {
+                  // If there are two items but one of them is dragged around, we have
+                  // to decide whether to drop before or after. However, 'after' means
+                  // at index 2, as the item addition happens before the item removal
+                  // during an internal drag-and-drop.
+                  this._dropIndex = (mouseAngle - itemAngles[0] < 90 ||
+                                     mouseAngle - itemAngles[0] > 270) ?
+                      0 :
+                      2;
 
-                    // All other cases can be handled with a loop through the drop zone
-                    // wedges between the items. For each wedge, we decide whether the
-                    // pointer is inside the wedge.
-                    for (let i = 0; i < itemAngles.length; i++) {
-                      let wedgeStart = itemAngles[i];
-                      let wedgeEnd   = itemAngles[(i + 1) % itemAngles.length];
+                } else {
 
-                      // Wrap around.
-                      if (wedgeEnd < wedgeStart) {
-                        wedgeEnd += 360;
-                      }
+                  // All other cases can be handled with a loop through the drop zone
+                  // wedges between the items. For each wedge, we decide whether the
+                  // pointer is inside the wedge.
+                  for (let i = 0; i < itemAngles.length; i++) {
+                    let wedgeStart = itemAngles[i];
+                    let wedgeEnd   = itemAngles[(i + 1) % itemAngles.length];
 
-                      // Angular width of the wedge.
-                      const diff = wedgeEnd - wedgeStart;
+                    // Wrap around.
+                    if (wedgeEnd < wedgeStart) {
+                      wedgeEnd += 360;
+                    }
 
-                      // The drop zone wedges are considered to directly start at one item
-                      // and end at the next one. If however, there is a custom menu at
-                      // one side of the wedge, we at some padding to allow dropping into
-                      // the custom menu.
-                      let wedgeStartPadding = 0;
-                      let wedgeEndPadding   = 0;
+                    // Angular width of the wedge.
+                    const diff = wedgeEnd - wedgeStart;
 
-                      if (this._items[i].getConfig().type == 'CustomMenu') {
-                        wedgeStartPadding = 0.25;
-                      }
+                    // The drop zone wedges are considered to directly start at one item
+                    // and end at the next one. If however, there is a custom menu at
+                    // one side of the wedge, we at some padding to allow dropping into
+                    // the custom menu.
+                    let wedgeStartPadding = 0;
+                    let wedgeEndPadding   = 0;
 
-                      if (this._items[(i + 1) % itemAngles.length].getConfig().type ==
-                          'CustomMenu') {
-                        wedgeEndPadding = 0.25;
-                      }
+                    if (this._items[i].getConfig().type == 'CustomMenu') {
+                      wedgeStartPadding = 0.25;
+                    }
 
-                      // The last wedge has to be handled in a special manner as it allows
-                      // dropping at index zero.
-                      const lastWedge = i == itemAngles.length - 1 ||
-                          (i == itemAngles.length - 2 &&
-                           this._dragIndex == itemAngles.length - 1);
+                    if (this._items[(i + 1) % itemAngles.length].getConfig().type ==
+                        'CustomMenu') {
+                      wedgeEndPadding = 0.25;
+                    }
 
-                      // The last wedge is basically split in the middle - if dropped in
-                      // the clockwise side, we will drop at index zero, if dropped in the
-                      // counter-clockwise side, we will drop after the last element.
-                      if (lastWedge &&
-                          ((mouseAngle >= wedgeStart + diff * 0.5 &&
-                            mouseAngle < wedgeEnd - diff * wedgeEndPadding) ||
-                           (mouseAngle + 360 >= wedgeStart + diff * 0.5 &&
-                            mouseAngle + 360 < wedgeEnd - diff * wedgeEndPadding))) {
+                    // The last wedge has to be handled in a special manner as it allows
+                    // dropping at index zero.
+                    const lastWedge = i == itemAngles.length - 1 ||
+                        (i == itemAngles.length - 2 &&
+                         this._dragIndex == itemAngles.length - 1);
 
-                        this._dropIndex = 0;
-                        break;
+                    // The last wedge is basically split in the middle - if dropped in
+                    // the clockwise side, we will drop at index zero, if dropped in the
+                    // counter-clockwise side, we will drop after the last element.
+                    if (lastWedge &&
+                        ((mouseAngle >= wedgeStart + diff * 0.5 &&
+                          mouseAngle < wedgeEnd - diff * wedgeEndPadding) ||
+                         (mouseAngle + 360 >= wedgeStart + diff * 0.5 &&
+                          mouseAngle + 360 < wedgeEnd - diff * wedgeEndPadding))) {
 
-                      } else if (
-                          (mouseAngle >= wedgeStart + diff * wedgeStartPadding &&
-                           mouseAngle < wedgeEnd - diff * wedgeEndPadding) ||
-                          (mouseAngle + 360 >= wedgeStart + diff * wedgeStartPadding &&
-                           mouseAngle + 360 < wedgeEnd - diff * wedgeEndPadding)) {
+                      this._dropIndex = 0;
+                      break;
 
-                        // In all other cases we simply drop after the current wedge.
-                        this._dropIndex = i + 1;
-                        break;
-                      }
+                    } else if (
+                        (mouseAngle >= wedgeStart + diff * wedgeStartPadding &&
+                         mouseAngle < wedgeEnd - diff * wedgeEndPadding) ||
+                        (mouseAngle + 360 >= wedgeStart + diff * wedgeStartPadding &&
+                         mouseAngle + 360 < wedgeEnd - diff * wedgeEndPadding)) {
+
+                      // In all other cases we simply drop after the current wedge.
+                      this._dropIndex = i + 1;
+                      break;
                     }
                   }
                 }
               }
+            }
 
-              // We need to reposition all items with a smooth animation if any of the
-              // below items changed during this callback.
-              if (this._dropColumn != lastDropColumn || this._dropRow != lastDropRow ||
-                  this._dropIndex != lastDropIndex) {
-                this._restartAnimation = true;
-              }
+            // We need to reposition all items with a smooth animation if any of the
+            // below items changed during this callback.
+            if (this._dropColumn != lastDropColumn || this._dropRow != lastDropRow ||
+                this._dropIndex != lastDropIndex) {
+              this._restartAnimation = true;
+            }
 
-              this.queue_allocate();
+            this.queue_allocate();
           };
 
           // When the pointer leaves the widget, we reset the _drop* members and update
@@ -811,56 +810,57 @@ function registerWidgets() {
               return this._dropIndex == null ? null : Gdk.DragAction.MOVE;
             });
 
-            
+
             this._dropTarget.connect('leave', dragLeave);
 
             this._dropTarget.connect('drop', (t, what) => {
               const internalDrag = t.get_drop().get_drag() != null;
-              const containsUris = t.get_drop().formats.contain_mime_type('text/uri-list');
+              const containsUris =
+                  t.get_drop().formats.contain_mime_type('text/uri-list');
               return dragDrop(what, internalDrag, containsUris);
             });
 
             this.add_controller(this._dropTarget);
           } else {
             const targets = [
-              Gtk.TargetEntry.new("FLY-PIE-ITEM", Gtk.TargetFlags.SAME_APP, 0),
-              Gtk.TargetEntry.new("text/uri-list", 0, 1),
-              Gtk.TargetEntry.new("text/plain", 0, 2),
+              Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0),
+              Gtk.TargetEntry.new('text/uri-list', 0, 1),
+              Gtk.TargetEntry.new('text/plain', 0, 2),
             ];
             this.drag_dest_set(0, targets, Gdk.DragAction.MOVE);
-            this.drag_dest_set_track_motion(true); 
-            this.connect("drag-leave", () => {
+            this.drag_dest_set_track_motion(true);
+            this.connect('drag-leave', () => {
               dragLeave();
               this.drag_unhighlight();
             });
-            this.connect(
-              'drag-data-received', (w, context, x, y, data, i, time) => {
-                const internalDrag = i == 0;
-                const containsUris = i == 1;
-                const success = dragDrop(ByteArray.toString(data.get_data()), internalDrag, containsUris);
-                Gtk.drag_finish(
+            this.connect('drag-data-received', (w, context, x, y, data, i, time) => {
+              const internalDrag = i == 0;
+              const containsUris = i == 1;
+              const success      = dragDrop(
+                  ByteArray.toString(data.get_data()), internalDrag, containsUris);
+              Gtk.drag_finish(
                   context, success, context.get_selected_action() == Gdk.DragAction.MOVE,
                   time);
-              });
+            });
 
-              this.connect('drag-drop', (w, context, x, y, time) => {
-                const availableTargets = context.list_targets();
+            this.connect('drag-drop', (w, context, x, y, time) => {
+              const availableTargets = context.list_targets();
 
-                for (let i = 0; i < targets.length; i++) {
-                  if (availableTargets.includes(targets[i].target)) {
-                    this.drag_get_data(context, targets[i].target, time);
-                    return;
-                  }
+              for (let i = 0; i < targets.length; i++) {
+                if (availableTargets.includes(targets[i].target)) {
+                  this.drag_get_data(context, targets[i].target, time);
+                  return;
                 }
+              }
 
-                this.drag_get_data(context, "text/plain", time);
-              });
+              this.drag_get_data(context, 'text/plain', time);
+            });
 
-            this.connect("drag-motion", (w, context, x, y, time) => {
+            this.connect('drag-motion', (w, context, x, y, time) => {
               dragMotion(x, y);
 
               // Return false if the drop at the current position is not possible.
-              if(this._dropIndex == null) {
+              if (this._dropIndex == null) {
                 return false;
               }
 
@@ -1226,9 +1226,9 @@ function registerWidgets() {
 
         // Last but not least, update the back-navigation button.
 
-        this._parentAngle             = parentAngle;
+        this._parentAngle        = parentAngle;
         this._backButton.visible = parentAngle != undefined;
-        
+
         if (parentAngle != undefined) {
           this._backButton.get_child().queue_draw();
         }
@@ -1403,7 +1403,7 @@ function registerWidgets() {
 
             item.button.drag_source_set(
                 Gdk.ModifierType.BUTTON1_MASK,
-                [Gtk.TargetEntry.new("FLY-PIE-ITEM", 0, 0)],
+                [Gtk.TargetEntry.new('FLY-PIE-ITEM', 0, 0)],
                 Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
 
             // The item's icon is used as drag graphic.
@@ -1421,7 +1421,7 @@ function registerWidgets() {
             item.button.connect(
                 'drag-data-get',
                 (w, c, data) => data.set(
-                  "FLY-PIE-ITEM", 8,
+                    'FLY-PIE-ITEM', 8,
                     ByteArray.fromString(JSON.stringify(item.getConfig()))));
             item.button.connect('drag-data-delete', dragDeleteData);
             item.button.connect('drag-failed', dragEnd);
@@ -1477,7 +1477,8 @@ function registerWidgets() {
 
             dropTarget.connect('drop', (t, what) => {
               const internalDrag = t.get_drop().get_drag() != null;
-              const containsUris = t.get_drop().formats.contain_mime_type('text/uri-list');
+              const containsUris =
+                  t.get_drop().formats.contain_mime_type('text/uri-list');
               return dragDrop(what, internalDrag, containsUris);
             });
 
@@ -1487,20 +1488,19 @@ function registerWidgets() {
             item.button.add_controller(dropTarget);
           } else {
             const targets = [
-              Gtk.TargetEntry.new("FLY-PIE-ITEM", Gtk.TargetFlags.SAME_APP, 0),
-              Gtk.TargetEntry.new("text/uri-list", 0, 1),
-              Gtk.TargetEntry.new("text/plain", 0, 2),
+              Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0),
+              Gtk.TargetEntry.new('text/uri-list', 0, 1),
+              Gtk.TargetEntry.new('text/plain', 0, 2),
             ];
             item.button.drag_dest_set(
-                Gtk.DestDefaults.DROP,
-                targets,
-                Gdk.DragAction.MOVE);
+                Gtk.DestDefaults.DROP, targets, Gdk.DragAction.MOVE);
             item.button.drag_dest_set_track_motion(true);
             item.button.connect(
                 'drag-data-received', (w, context, x, y, data, i, time) => {
                   const internalDrag = i == 0;
                   const containsUris = i == 1;
-                  dragDrop(ByteArray.toString(data.get_data()), internalDrag, containsUris);
+                  dragDrop(
+                      ByteArray.toString(data.get_data()), internalDrag, containsUris);
                 });
 
             // We accept everything as long as the item is a custom menu.
