@@ -519,25 +519,13 @@ function registerWidgets() {
           this._dropRow    = null;
           this._dropColumn = null;
 
-          if (utils.gtk4()) {
-            this._dropTarget =
-                new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-
-            // We accept strings: Menu items are represented with a JSON representation
-            // (the same format which is used for saving Fly-Pie's settings). External
-            // drops usually are URIs.
-            this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
-
-            // We accept everything :)
-            this._dropTarget.connect('accept', () => true);
-
-            // When the user drags something across the widget, we re-arrange all items to
-            // visually show where the new item would be created if dropped. In this
-            // 'motion' callback, we compute the index where the data is supposed to be
-            // dropped. The actual item positioning is later done in vfunc_size_allocate()
-            // based on the computed index.
-            this._dropTarget.connect('motion', (t, x, y) => {
-              // If any of the below values changes during this callback, we will trigger
+          // When the user drags something across the widget, we re-arrange all items to
+          // visually show where the new item would be created if dropped. In this
+          // 'motion' callback, we compute the index where the data is supposed to be
+          // dropped. The actual item positioning is later done in vfunc_size_allocate()
+          // based on the computed index.
+          const dragMotion = (x, y) => {
+            // If any of the below values changes during this callback, we will trigger
               // an animation so that items move around smoothly.
               const lastDropRow    = this._dropRow;
               const lastDropColumn = this._dropColumn;
@@ -712,6 +700,22 @@ function registerWidgets() {
               }
 
               this.queue_allocate();
+          };
+
+          if (utils.gtk4()) {
+            this._dropTarget =
+                new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+
+            // We accept strings: Menu items are represented with a JSON representation
+            // (the same format which is used for saving Fly-Pie's settings). External
+            // drops usually are URIs.
+            this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
+
+            // We accept everything :)
+            this._dropTarget.connect('accept', () => true);
+
+            this._dropTarget.connect('motion', (t, x, y) => {
+              dragMotion(x, y);
 
               // Return null if the drop at the current position is not possible.
               return this._dropIndex == null ? null : Gdk.DragAction.MOVE;
@@ -816,6 +820,24 @@ function registerWidgets() {
             });
 
             this.add_controller(this._dropTarget);
+          } else {
+            this.drag_dest_set(0, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
+            this.drag_dest_set_track_motion(true); 
+            // this.connect("drag-data-received", (w, context, x, y, data, i, time) => {
+            //   handler(ByteArray.toString(data.get_data()));
+            //   Gtk.drag_finish(context, false, context.get_selected_action() == Gdk.DragAction.MOVE, time);
+            // });
+            this.connect("drag-motion", (w, context, x, y, time) => {
+              dragMotion(x, y);
+
+              // Return false if the drop at the current position is not possible.
+              if(this._dropIndex == null) {
+                return false;
+              }
+
+              Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
+              return true;
+            });
           }
         }
 
@@ -1578,8 +1600,7 @@ function registerWidgets() {
           utils.sizeAllocate(item, allocation);
         };
 
-        // Update the position of all current items, old items, the center item and the
-        // back button.
+        // Update the position of all current items, the center item and the back button.
         this._items.forEach(impl);
 
         impl(this._backButton);
