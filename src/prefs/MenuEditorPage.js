@@ -9,7 +9,7 @@
 'use strict';
 
 const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
-const ByteArray   = imports.byteArray;
+const ByteArray                      = imports.byteArray;
 
 const Me                  = imports.misc.extensionUtils.getCurrentExtension();
 const utils               = Me.imports.src.common.utils;
@@ -669,7 +669,10 @@ var MenuEditorPage = class MenuEditorPage {
         dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
         trash.add_controller(dropTarget);
       } else {
-        trash.drag_dest_set(Gtk.DestDefaults.ALL, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
+        trash.drag_dest_set(
+            Gtk.DestDefaults.ALL,
+            [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+            Gdk.DragAction.MOVE);
       }
     }
 
@@ -680,9 +683,9 @@ var MenuEditorPage = class MenuEditorPage {
 
       const handler = (value) => {
         const config = JSON.parse(value);
-          this._stashedConfigs.push(config);
-          this._addStashWidget(config);
-          this._saveStashConfiguration();
+        this._stashedConfigs.push(config);
+        this._addStashWidget(config);
+        this._saveStashConfiguration();
       };
 
       if (utils.gtk4()) {
@@ -697,12 +700,15 @@ var MenuEditorPage = class MenuEditorPage {
         dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
         stash.add_controller(dropTarget);
       } else {
-        stash.drag_dest_set(Gtk.DestDefaults.ALL, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
-        stash.connect("drag-data-received", (w, context, x, y, data, i, time) => {
+        stash.drag_dest_set(
+            Gtk.DestDefaults.ALL,
+            [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+            Gdk.DragAction.MOVE);
+        stash.connect('drag-data-received', (w, context, x, y, data, i, time) => {
           handler(ByteArray.toString(data.get_data()));
-          Gtk.drag_finish(context, false, context.get_selected_action() == Gdk.DragAction.MOVE, time);
+          Gtk.drag_finish(
+              context, false, context.get_selected_action() == Gdk.DragAction.MOVE, time);
         });
-
       }
     }
   }
@@ -871,16 +877,21 @@ var MenuEditorPage = class MenuEditorPage {
           dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
           button.add_controller(dropTarget);
         } else {
-          button.drag_dest_set(Gtk.DestDefaults.HIGHLIGHT, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
-          button.drag_dest_set_track_motion(true); 
-          button.connect("drag-data-received", (w, context, x, y, data, i, time) => {
+          button.drag_dest_set(
+              Gtk.DestDefaults.HIGHLIGHT,
+              [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+              Gdk.DragAction.MOVE);
+          button.drag_dest_set_track_motion(true);
+          button.connect('drag-data-received', (w, context, x, y, data, i, time) => {
             const success = handler(ByteArray.toString(data.get_data()));
-            Gtk.drag_finish(context, success, context.get_selected_action() == Gdk.DragAction.MOVE, time);
+            Gtk.drag_finish(
+                context, success, context.get_selected_action() == Gdk.DragAction.MOVE,
+                time);
           });
-          button.connect("drag-drop", (w, context, x, y, time) => {
-            button.drag_get_data(context, "text/plain", time);
+          button.connect('drag-drop', (w, context, x, y, time) => {
+            button.drag_get_data(context, 'text/plain', time);
           });
-          button.connect("drag-motion", (w, context, x, y, time) => {
+          button.connect('drag-motion', (w, context, x, y, time) => {
             Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
             return true;
           });
@@ -931,8 +942,11 @@ var MenuEditorPage = class MenuEditorPage {
           dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
           button.add_controller(dropTarget);
         } else {
-          button.drag_dest_set(Gtk.DestDefaults.ALL, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
-          button.connect("drag-data-received", (w, context, x, y, data, i, time) => {
+          button.drag_dest_set(
+              Gtk.DestDefaults.ALL,
+              [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+              Gdk.DragAction.MOVE);
+          button.connect('drag-data-received', (w, context, x, y, data, i, time) => {
             handler(ByteArray.toString(data.get_data()));
           });
         }
@@ -1039,7 +1053,7 @@ var MenuEditorPage = class MenuEditorPage {
     this._builder.get_object('menu-editor-stash-content').visible = true;
 
     // Stash items are simple Gtk.DrawingAreas which can be dragged around.
-    const item  = new Gtk.DrawingArea({
+    const item = new Gtk.DrawingArea({
       margin_start: 4,
       margin_end: 4,
       valign: Gtk.Align.CENTER,
@@ -1047,10 +1061,10 @@ var MenuEditorPage = class MenuEditorPage {
     });
 
     if (utils.gtk4()) {
-      item.content_width = 32;
+      item.content_width  = 32;
       item.content_height = 32;
     } else {
-      item.width_request = 32;
+      item.width_request  = 32;
       item.height_request = 32;
     }
 
@@ -1064,12 +1078,12 @@ var MenuEditorPage = class MenuEditorPage {
     });
     utils.boxAppend(this._builder.get_object('menu-editor-stash-content'), item);
 
-      // Make the item translucent when a drag is started.
+    // Make the item translucent when a drag is started.
     const dragBegin = () => {
       item.opacity = 0.2;
     };
 
-      // Remove the stash widget on a successful drop.
+    // Remove the stash widget on a successful drop.
     const dragDeleteData = () => {
       let removeIndex = this._stashedConfigs.indexOf(config);
       this._stashedConfigs.splice(removeIndex, 1);
@@ -1088,7 +1102,7 @@ var MenuEditorPage = class MenuEditorPage {
       }
     };
 
-      // Make the item visible again if the drag is aborted.
+    // Make the item visible again if the drag is aborted.
     const dragEnd = () => {
       item.opacity = 1;
       return false;
@@ -1096,13 +1110,14 @@ var MenuEditorPage = class MenuEditorPage {
 
 
     if (utils.gtk4()) {
-       // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does not work on X11.
-    // If we added the copy action on X11, it would be chosen as default action and the
-    // user would have to hold down shift in order to move items...
-    let actions = Gdk.DragAction.MOVE;
-    if (utils.getSessionType() == 'wayland') {
-      actions |= Gdk.DragAction.COPY;
-    }
+      // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does not work on
+      // X11.
+      // If we added the copy action on X11, it would be chosen as default action and the
+      // user would have to hold down shift in order to move items...
+      let actions = Gdk.DragAction.MOVE;
+      if (utils.getSessionType() == 'wayland') {
+        actions |= Gdk.DragAction.COPY;
+      }
 
       const dragSource = new Gtk.DragSource({actions: actions});
 
@@ -1113,7 +1128,7 @@ var MenuEditorPage = class MenuEditorPage {
 
       dragSource.connect('drag-end', (s, drag, deleteData) => {
         if (deleteData) {
-         dragDeleteData();
+          dragDeleteData();
         } else {
           dragEnd();
         }
@@ -1125,23 +1140,29 @@ var MenuEditorPage = class MenuEditorPage {
       item.add_controller(dragSource);
     } else {
 
-      item.drag_source_set(Gdk.ModifierType.BUTTON1_MASK, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
+      item.drag_source_set(
+          Gdk.ModifierType.BUTTON1_MASK,
+          [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+          Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
 
       // The item's icon is used as drag graphic.
-      item.connect("drag-begin", () => {
-        const font  = this._settings.get_string('font');
-        const color = utils.getColor(item);
-        const size = Math.min(item.width_request, item.height_request);
+      item.connect('drag-begin', () => {
+        const font    = this._settings.get_string('font');
+        const color   = utils.getColor(item);
+        const size    = Math.min(item.width_request, item.height_request);
         const surface = utils.createIcon(config.icon, size, font, color);
-        const pixbuf = Gdk.pixbuf_get_from_surface(surface, 0, 0, size, size);
+        const pixbuf  = Gdk.pixbuf_get_from_surface(surface, 0, 0, size, size);
         item.drag_source_set_icon_pixbuf(pixbuf);
         dragBegin();
       });
 
-      item.connect("drag-data-get", (w, c, data) => data.set("text/plain", 8, ByteArray.fromString(JSON.stringify(config))));
-      item.connect("drag-data-delete", dragDeleteData);
-      item.connect("drag-failed", dragEnd);
-      item.connect("drag-end", dragEnd);
+      item.connect(
+          'drag-data-get',
+          (w, c, data) =>
+              data.set('text/plain', 8, ByteArray.fromString(JSON.stringify(config))));
+      item.connect('drag-data-delete', dragDeleteData);
+      item.connect('drag-failed', dragEnd);
+      item.connect('drag-end', dragEnd);
 
       item.show();
     }
@@ -1243,7 +1264,7 @@ var MenuEditorPage = class MenuEditorPage {
     // Show the stash label if there are no stashed items.
     if (!utils.gtk4()) {
       if (this._stashedConfigs.length == 0) {
-        this._builder.get_object('menu-editor-stash-label').visible   = true;
+        this._builder.get_object('menu-editor-stash-label').visible = true;
       }
     }
   }
