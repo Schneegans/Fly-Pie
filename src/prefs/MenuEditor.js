@@ -443,16 +443,18 @@ function registerWidgets() {
         }
 
         // Now we set up the back-navigation button which is shown whenever we are in a
-        // submenu. Similar to the FlyPieMenuEditorItem, this is actually a Gtk.Revealer
-        // which we can use to show or hide the button.
+        // submenu.
         {
-          this._backButton = new Gtk.Revealer({
-            transition_type: Gtk.RevealerTransitionType.CROSSFADE,
+          this._backButton = new Gtk.Button({
             margin_start: 20,
             margin_end: 20,
             margin_top: 20,
             margin_bottom: 20,
-            reveal_child: false
+          });
+          utils.addCSSClass(this._backButton, 'pill-button');
+          this._backButton.connect('clicked', (b) => {
+            // Navigate to the previous level when clicked.
+            this.emit('go-back');
           });
 
           // Assign a state so that it gets scaled like the other child buttons.
@@ -483,22 +485,13 @@ function registerWidgets() {
             return false;
           });
 
-          const button = new Gtk.Button();
-          utils.addCSSClass(button, 'pill-button');
-          utils.setChild(button, icon);
-          button.connect('clicked', (b) => {
-            // Navigate to the previous level when clicked.
-            this.emit('go-back');
-          });
-
-          utils.setChild(this._backButton, button);
+          utils.setChild(this._backButton, icon);
 
           if (utils.gtk4()) {
             this._backButton.set_parent(this);
           } else {
             this.put(this._backButton, 0, 0);
             this._backButton.no_show_all = true;
-            button.visible               = true;
             icon.visible                 = true;
           }
         }
@@ -702,6 +695,103 @@ function registerWidgets() {
               this.queue_allocate();
           };
 
+          // When the pointer leaves the widget, we reset the _drop* members and update
+          // the item layout.
+          const dragLeave = () => {
+            // For external drag-and-drop events, 'leave' is called before 'drop'. We
+            // have to reset this._dropIndex in 'leave', to make sure that the items
+            // move back to their original position when the pointer leaves the drop
+            // area. However, we need this._dropIndex in 'drop' to fire the 'add-item'
+            // and 'add-data' signals. Therefore, we temporarily store this._dropIndex
+            // in this._lastDropIndex. This is only used a few lines below in the 'drop'
+            // signal handler.
+            this._lastDropIndex = this._dropIndex;
+
+            this._dropColumn = null;
+            this._dropRow    = null;
+            this._dropIndex  = null;
+            this.updateLayout();
+          };
+
+          // When an internal item or external data is dropped, either the 'drop-item'
+          // or 'drop-data' signals are emitted. There are several cases where this may
+          // fail; usually the 'notification' signal will be emitted to notify the user
+          // about the reason.
+          const dragDrop = (value, internalDrag, containsUris) => {
+            // See documentation of the 'leave' signal above.
+            if (this._dropIndex == null) {
+              this._dropIndex = this._lastDropIndex;
+            }
+
+            // This shouldn't happen.
+            if (this._dropIndex == null) {
+              return false;
+            }
+
+            // For internal drop events, the dropped data is a JSON representation of
+            // the dropped item.
+            if (internalDrag) {
+
+              const config = JSON.parse(value);
+
+              // Do not allow top-level drops of actions.
+              if (this._inMenuOverviewMode() &&
+                  ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
+
+                this.emit(
+                    // Translators: This is shown as an in-app notification when the
+                    // user attempts to drag an action in the menu editor to the menu
+                    // overview.
+                    'notification', _('Actions cannot be turned into toplevel menus.'));
+
+                this._dropColumn = null;
+                this._dropRow    = null;
+                this._dropIndex  = null;
+                return false;
+              }
+
+              this.emit('drop-item', value, this._dropIndex);
+
+            } else {
+
+              // Do not allow external drops in menu overview mode.
+              if (this._inMenuOverviewMode()) {
+
+                this.emit(
+                    'notification',
+                    // Translators: This is shown as an in-app notification when the
+                    // user attempts to drag external stuff to the menu editor's
+                    // overview.
+                    _('You can only create new Action items inside of Custom Menus.'));
+
+                this._dropColumn = null;
+                this._dropRow    = null;
+                this._dropIndex  = null;
+                return false;
+              }
+
+              // If the dropped data contains a list of URIs, call the 'drop-data' once
+              // for each item.
+              if (containsUris) {
+                value.split(/\r?\n/).forEach((line, i) => {
+                  if (line != '') {
+                    this.emit('drop-data', line, this._dropIndex + i);
+                  }
+                });
+              } else {
+                this.emit('drop-data', value, this._dropIndex);
+              }
+            }
+
+            // Reset all _drop* members. We do not need to trigger a re-layout as this
+            // will be done in the resulting add() call.
+            this._dropColumn = null;
+            this._dropRow    = null;
+            this._dropIndex  = null;
+
+            return true;
+          };
+
           if (utils.gtk4()) {
             this._dropTarget =
                 new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
@@ -721,112 +811,35 @@ function registerWidgets() {
               return this._dropIndex == null ? null : Gdk.DragAction.MOVE;
             });
 
-            // When the pointer leaves the widget, we reset the _drop* members and update
-            // the item layout.
-            this._dropTarget.connect('leave', () => {
-              // For external drag-and-drop events, 'leave' is called before 'drop'. We
-              // have to reset this._dropIndex in 'leave', to make sure that the items
-              // move back to their original position when the pointer leaves the drop
-              // area. However, we need this._dropIndex in 'drop' to fire the 'add-item'
-              // and 'add-data' signals. Therefore, we temporarily store this._dropIndex
-              // in this._lastDropIndex. This is only used a few lines below in the 'drop'
-              // signal handler.
-              this._lastDropIndex = this._dropIndex;
+            
+            this._dropTarget.connect('leave', dragLeave);
 
-              this._dropColumn = null;
-              this._dropRow    = null;
-              this._dropIndex  = null;
-              this.updateLayout();
-            });
-
-            // When an internal item or external data is dropped, either the 'drop-item'
-            // or 'drop-data' signals are emitted. There are several cases where this may
-            // fail; usually the 'notification' signal will be emitted to notify the user
-            // about the reason.
             this._dropTarget.connect('drop', (t, what) => {
-              // See documentation of the 'leave' signal above.
-              if (this._dropIndex == null) {
-                this._dropIndex = this._lastDropIndex;
-              }
-
-              // This shouldn't happen.
-              if (this._dropIndex == null) {
-                return false;
-              }
-
-              // For internal drop events, the dropped data is a JSON representation of
-              // the dropped item.
               const internalDrag = t.get_drop().get_drag() != null;
-              if (internalDrag) {
-
-                const config = JSON.parse(what);
-
-                // Do not allow top-level drops of actions.
-                if (this._inMenuOverviewMode() &&
-                    ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
-
-                  this.emit(
-                      // Translators: This is shown as an in-app notification when the
-                      // user attempts to drag an action in the menu editor to the menu
-                      // overview.
-                      'notification', _('Actions cannot be turned into toplevel menus.'));
-
-                  this._dropColumn = null;
-                  this._dropRow    = null;
-                  this._dropIndex  = null;
-                  return false;
-                }
-
-                this.emit('drop-item', what, this._dropIndex);
-
-              } else {
-
-                // Do not allow external drops in menu overview mode.
-                if (this._inMenuOverviewMode()) {
-
-                  this.emit(
-                      'notification',
-                      // Translators: This is shown as an in-app notification when the
-                      // user attempts to drag external stuff to the menu editor's
-                      // overview.
-                      _('You can only create new Action items inside of Custom Menus.'));
-
-                  this._dropColumn = null;
-                  this._dropRow    = null;
-                  this._dropIndex  = null;
-                  return false;
-                }
-
-                // If the dropped data contains a list of URIs, call the 'drop-data' once
-                // for each item.
-                if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
-                  what.split(/\r?\n/).forEach((line, i) => {
-                    if (line != '') {
-                      this.emit('drop-data', line, this._dropIndex + i);
-                    }
-                  });
-                } else {
-                  this.emit('drop-data', what, this._dropIndex);
-                }
-              }
-
-              // Reset all _drop* members. We do not need to trigger a re-layout as this
-              // will be done in the resulting add() call.
-              this._dropColumn = null;
-              this._dropRow    = null;
-              this._dropIndex  = null;
-
-              return true;
+              const containsUris = t.get_drop().formats.contain_mime_type('text/uri-list');
+              return dragDrop(what, internalDrag, containsUris);
             });
 
             this.add_controller(this._dropTarget);
           } else {
             this.drag_dest_set(0, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
             this.drag_dest_set_track_motion(true); 
-            // this.connect("drag-data-received", (w, context, x, y, data, i, time) => {
-            //   handler(ByteArray.toString(data.get_data()));
-            //   Gtk.drag_finish(context, false, context.get_selected_action() == Gdk.DragAction.MOVE, time);
-            // });
+            this.connect("drag-leave", dragLeave);
+            this.connect(
+              'drag-data-received', (w, context, x, y, data, i, time) => {
+                utils.debug(i);
+                const internalDrag = i == 0;
+                const containsUris = data.targets_include_uri();
+                const success = dragDrop(ByteArray.toString(data.get_data()), internalDrag, containsUris);
+                Gtk.drag_finish(
+                  context, success, context.get_selected_action() == Gdk.DragAction.MOVE,
+                  time);
+              });
+
+              this.connect('drag-drop', (w, context, x, y, time) => {
+                this.drag_get_data(context, 'text/plain', time);
+              });
+
             this.connect("drag-motion", (w, context, x, y, time) => {
               dragMotion(x, y);
 
@@ -1196,10 +1209,10 @@ function registerWidgets() {
         // Last but not least, update the back-navigation button.
 
         this._parentAngle             = parentAngle;
-        this._backButton.reveal_child = parentAngle != undefined;
-
+        this._backButton.visible = parentAngle != undefined;
+        
         if (parentAngle != undefined) {
-          this._backButton.get_child().get_child().queue_draw();
+          this._backButton.get_child().queue_draw();
         }
 
         // Finally, queue up a complete re-layout.
@@ -1403,7 +1416,7 @@ function registerWidgets() {
 
           // When something is dropped, we either emit 'drop-data-into' (for external
           // drop events) or 'drop-data-into' (for internal drop events).
-          const handler = (value, internalDrag, containsUris) => {
+          const dragDrop = (value, internalDrag, containsUris) => {
             const dropIndex = this._items.indexOf(item);
 
             if (internalDrag) {
@@ -1445,9 +1458,9 @@ function registerWidgets() {
             dropTarget.connect('accept', () => item.getConfig().type == 'CustomMenu');
 
             dropTarget.connect('drop', (t, what) => {
-              return handler(
-                  what, t.get_drop().get_drag() != null,
-                  t.get_drop().formats.contain_mime_type('text/uri-list'));
+              const internalDrag = t.get_drop().get_drag() != null;
+              const containsUris = t.get_drop().formats.contain_mime_type('text/uri-list');
+              return dragDrop(what, internalDrag, containsUris);
             });
 
             // Highlight the button if the pointer moves over it.
@@ -1463,9 +1476,9 @@ function registerWidgets() {
             item.button.connect(
                 'drag-data-received', (w, context, x, y, data, i, time) => {
                   utils.debug(i);
-                  handler(
-                      ByteArray.toString(data.get_data()), true,
-                      data.targets_include_uri());
+                  const internalDrag = i == 0;
+                  const containsUris = data.targets_include_uri();
+                  dragDrop(ByteArray.toString(data.get_data()), internalDrag, containsUris);
                 });
 
             // We accept everything as long as the item is a custom menu.
