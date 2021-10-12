@@ -4578,6 +4578,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                                 <property name="icon_name">edit-copy-symbolic</property>
                                                 <property name="margin-start">8</property>
                                                 <property name="pixel_size">24</property>
+                                                <property name="visible">1</property>
                                               </object>
                                               <packing>
                                                 <property name="left_attach">0</property>
@@ -4591,6 +4592,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                                 <property name="valign">center</property>
                                                 <property name="margin-top">8</property>
                                                 <property name="margin-end">8</property>
+                                                <property name="visible">1</property>
                                                 <property name="label" translatable="yes">Stash</property>
                                                 <style>
                                                   <class name="caption-heading" />
@@ -4607,6 +4609,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                                 <property name="valign">center</property>
                                                 <property name="margin-bottom">8</property>
                                                 <property name="margin-end">8</property>
+                                                <property name="visible">1</property>
                                                 <property name="label" translatable="yes">Store items here and re-use them later.</property>
                                                 <style>
                                                   <class name="dim-label" />

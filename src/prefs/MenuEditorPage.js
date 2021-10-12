@@ -700,8 +700,9 @@ var MenuEditorPage = class MenuEditorPage {
         stash.drag_dest_set(Gtk.DestDefaults.ALL, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
         stash.connect("drag-data-received", (w, context, x, y, data, i, time) => {
           handler(ByteArray.toString(data.get_data()));
-          Gtk.drag_finish(context, true, context.get_selected_action() == Gdk.DragAction.MOVE, time);
+          Gtk.drag_finish(context, false, context.get_selected_action() == Gdk.DragAction.MOVE, time);
         });
+
       }
     }
   }
@@ -840,6 +841,24 @@ var MenuEditorPage = class MenuEditorPage {
           this._gotoMenuPathIndex(-1);
         });
 
+        const handler = (value) => {
+          const config = JSON.parse(value);
+          if (ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
+            // Translators: This is shown as an in-app notification when the user
+            // attempts to drag an action in the menu editor to the menu overview.
+            this._showNotification(_('Actions cannot be turned into toplevel menus.'));
+            return false;
+          }
+
+          // Its fixed angle is reset to prevent invalid configurations.
+          config.angle = -1;
+
+          this._menuConfigs.push(config);
+          this._saveMenuConfiguration();
+
+          return true;
+        };
+
         // If something is dropped onto the home, button create a root menu accordingly.
         if (utils.gtk4()) {
           const dropTarget =
@@ -847,23 +866,24 @@ var MenuEditorPage = class MenuEditorPage {
           dropTarget.set_gtypes([GObject.TYPE_STRING]);
           dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
           dropTarget.connect('drop', (t, what) => {
-            const config = JSON.parse(what);
-            if (ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
-              // Translators: This is shown as an in-app notification when the user
-              // attempts to drag an action in the menu editor to the menu overview.
-              this._showNotification(_('Actions cannot be turned into toplevel menus.'));
-              return false;
-            }
-
-            // Its fixed angle is reset to prevent invalid configurations.
-            config.angle = -1;
-
-            this._menuConfigs.push(config);
-            this._saveMenuConfiguration();
-            return true;
+            return handler(what);
           });
           dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
           button.add_controller(dropTarget);
+        } else {
+          button.drag_dest_set(Gtk.DestDefaults.HIGHLIGHT, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
+          button.drag_dest_set_track_motion(true); 
+          button.connect("drag-data-received", (w, context, x, y, data, i, time) => {
+            const success = handler(ByteArray.toString(data.get_data()));
+            Gtk.drag_finish(context, success, context.get_selected_action() == Gdk.DragAction.MOVE, time);
+          });
+          button.connect("drag-drop", (w, context, x, y, time) => {
+            button.drag_get_data(context, "text/plain", time);
+          });
+          button.connect("drag-motion", (w, context, x, y, time) => {
+            Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
+            return true;
+          });
         }
       }
 
@@ -888,23 +908,33 @@ var MenuEditorPage = class MenuEditorPage {
           this._gotoMenuPathIndex(i);
         });
 
+        const handler = (value) => {
+          const config = JSON.parse(value);
+
+          // Its fixed angle is reset to prevent invalid configurations.
+          config.angle = -1;
+
+          item.children.push(config);
+          this._saveMenuConfiguration();
+
+          return true;
+        };
+
         if (utils.gtk4()) {
           const dropTarget =
               new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
           dropTarget.set_gtypes([GObject.TYPE_STRING]);
           dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
           dropTarget.connect('drop', (t, what) => {
-            const config = JSON.parse(what);
-
-            // Its fixed angle is reset to prevent invalid configurations.
-            config.angle = -1;
-
-            item.children.push(config);
-            this._saveMenuConfiguration();
-            return true;
+            return handler(what);
           });
           dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
           button.add_controller(dropTarget);
+        } else {
+          button.drag_dest_set(Gtk.DestDefaults.ALL, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
+          button.connect("drag-data-received", (w, context, x, y, data, i, time) => {
+            handler(ByteArray.toString(data.get_data()));
+          });
         }
       }
       utils.addCSSClass(button, 'menu-editor-path-item');
@@ -1208,6 +1238,13 @@ var MenuEditorPage = class MenuEditorPage {
     // And all stashed items to the stash widget.
     for (let i = 0; i < this._stashedConfigs.length; i++) {
       this._addStashWidget(this._stashedConfigs[i]);
+    }
+
+    // Show the stash label if there are no stashed items.
+    if (!utils.gtk4()) {
+      if (this._stashedConfigs.length == 0) {
+        this._builder.get_object('menu-editor-stash-label').visible   = true;
+      }
     }
   }
 

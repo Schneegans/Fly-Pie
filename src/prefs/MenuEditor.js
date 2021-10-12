@@ -509,6 +509,9 @@ function registerWidgets() {
             this._backButton.set_parent(this);
           } else {
             this.put(this._backButton, 0, 0);
+            this._backButton.no_show_all = true;
+            button.visible = true;
+            icon.visible = true;
           }
         }
 
@@ -1252,17 +1255,19 @@ function registerWidgets() {
 
         // Last but not least, update the back-navigation button.
 
+        this._parentAngle             = parentAngle;
+        this._backButton.reveal_child = parentAngle != undefined;
+
         // On GTK3, the old items - while being completely faded out - still block mouse
         // clicks. In order to be able to click the back navigation button, we put it to
         // the end of the children list. Then it's drawn above the invisible items and
-        // it's clickable again!
+        // it's clickable again! The button itself however blocks input as well when hidden, so we make it completely invisible under GTK3.
         if (!utils.gtk4()) {
           this.remove(this._backButton);
           this.put(this._backButton, 0, 0);
+          this._backButton.visible = this._backButton.reveal_child;
         }
-
-        this._parentAngle             = parentAngle;
-        this._backButton.reveal_child = parentAngle != undefined;
+        
         if (parentAngle != undefined) {
           this._backButton.get_child().get_child().queue_draw();
         }
@@ -1393,7 +1398,6 @@ function registerWidgets() {
             item.sensitive  = true;
             this._dragIndex = null;
             this.updateLayout();
-            return false;
           };
 
           if (utils.gtk4()) {
@@ -1459,6 +1463,41 @@ function registerWidgets() {
         // Non-center items of type 'CustomMenu' can also receive drops.
         if (itemState != ItemState.CENTER) {
 
+          // When something is dropped, we either emit 'drop-data-into' (for external
+            // drop events) or 'drop-data-into' (for internal drop events).
+          const handler = (value, internalDrag, containsUris) => {
+            const dropIndex = this._items.indexOf(item);
+
+            if (internalDrag) {
+              this.emit('drop-item-into', value, dropIndex);
+
+            } else {
+
+              // If the external drop event provides a list of URIs, we call the signal
+              // once for each entry.
+              if (containsUris) {
+                value.split(/\r?\n/).forEach(line => {
+                  if (line != '') {
+                    this.emit('drop-data-into', line, dropIndex);
+                  }
+                });
+              } else {
+                this.emit('drop-data-into', value, dropIndex);
+              }
+            }
+
+            // Make the item the active one.
+            this._selectedItem               = item;
+            this._selectedItem.button.active = true;
+
+            // Reset all drop members.
+            this._dropColumn = null;
+            this._dropRow    = null;
+            this._dropIndex  = null;
+
+            return true;
+          };
+
           if (utils.gtk4()) {
             const dropTarget =
                 new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
@@ -1467,46 +1506,37 @@ function registerWidgets() {
             // We accept everything as long as the item is a custom menu.
             dropTarget.connect('accept', () => item.getConfig().type == 'CustomMenu');
 
-            // When something is dropped, we either emit 'drop-data-into' (for external
-            // drop events) or 'drop-data-into' (for internal drop events).
             dropTarget.connect('drop', (t, what) => {
-              const dropIndex = this._items.indexOf(item);
-
-              const internalDrag = t.get_drop().get_drag() != null;
-              if (internalDrag) {
-                this.emit('drop-item-into', what, dropIndex);
-
-              } else {
-
-                // If the external drop event provides a list of URIs, we call the signal
-                // once for each entry.
-                if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
-                  what.split(/\r?\n/).forEach(line => {
-                    if (line != '') {
-                      this.emit('drop-data-into', line, dropIndex);
-                    }
-                  });
-                } else {
-                  this.emit('drop-data-into', what, dropIndex);
-                }
-              }
-
-              // Make the item the active one.
-              this._selectedItem               = item;
-              this._selectedItem.button.active = true;
-
-              // Reset all drop members.
-              this._dropColumn = null;
-              this._dropRow    = null;
-              this._dropIndex  = null;
-
-              return true;
+             return handler(what, t.get_drop().get_drag() != null, t.get_drop().formats.contain_mime_type('text/uri-list'));
             });
 
             // Highlight the button if the pointer moves over it.
             dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
 
             item.button.add_controller(dropTarget);
+          } else {
+            item.button.drag_dest_set(Gtk.DestDefaults.DROP, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
+            item.button.drag_dest_set_track_motion(true); 
+            item.button.connect("drag-data-received", (w, context, x, y, data, i, time) => {
+              utils.debug(i);
+              handler(ByteArray.toString(data.get_data()), true, data.targets_include_uri());
+            });
+
+            // We accept everything as long as the item is a custom menu.
+            item.button.connect("drag-motion", (w, context, x, y, time) => {
+              if (item.getConfig().type != 'CustomMenu') {
+                return false;
+              }
+
+              item.button.drag_highlight();
+              Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
+
+              return true;
+            });
+
+            item.button.connect("drag-leave", () => {
+              item.button.drag_unhighlight();
+            });
           }
         }
 
