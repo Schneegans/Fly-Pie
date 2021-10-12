@@ -112,16 +112,6 @@ var Preset = class Preset {
         if (key in preset) {
           let value = preset[key];
           if (typeof value === 'string') {
-            // There's a special case for the image keys. They are allowed to be relative
-            // paths to the preset file to make sharing of presets easier. But we should
-            // convert them to absolute paths here.
-            if (key.includes('image') && value != '' && !GLib.path_is_absolute(value)) {
-              const path = file.get_parent().resolve_relative_path(value);
-              if (path != null) {
-                value = path.get_path();
-              }
-            }
-
             settings.set_string(key, value);
           } else if (typeof value === 'number') {
             settings.set_double(key, value);
