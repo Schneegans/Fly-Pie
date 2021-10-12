@@ -671,7 +671,7 @@ var MenuEditorPage = class MenuEditorPage {
       } else {
         trash.drag_dest_set(
             Gtk.DestDefaults.ALL,
-            [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+            [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
             Gdk.DragAction.MOVE);
       }
     }
@@ -702,7 +702,7 @@ var MenuEditorPage = class MenuEditorPage {
       } else {
         stash.drag_dest_set(
             Gtk.DestDefaults.ALL,
-            [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+            [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
             Gdk.DragAction.MOVE);
         stash.connect('drag-data-received', (w, context, x, y, data, i, time) => {
           handler(ByteArray.toString(data.get_data()));
@@ -879,7 +879,7 @@ var MenuEditorPage = class MenuEditorPage {
         } else {
           button.drag_dest_set(
               Gtk.DestDefaults.HIGHLIGHT,
-              [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+              [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
               Gdk.DragAction.MOVE);
           button.drag_dest_set_track_motion(true);
           button.connect('drag-data-received', (w, context, x, y, data, i, time) => {
@@ -889,7 +889,7 @@ var MenuEditorPage = class MenuEditorPage {
                 time);
           });
           button.connect('drag-drop', (w, context, x, y, time) => {
-            button.drag_get_data(context, 'text/plain', time);
+            button.drag_get_data(context, 'FLY-PIE-ITEM', time);
           });
           button.connect('drag-motion', (w, context, x, y, time) => {
             Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
@@ -944,7 +944,7 @@ var MenuEditorPage = class MenuEditorPage {
         } else {
           button.drag_dest_set(
               Gtk.DestDefaults.ALL,
-              [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+              [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
               Gdk.DragAction.MOVE);
           button.connect('drag-data-received', (w, context, x, y, data, i, time) => {
             handler(ByteArray.toString(data.get_data()));
@@ -1142,7 +1142,7 @@ var MenuEditorPage = class MenuEditorPage {
 
       item.drag_source_set(
           Gdk.ModifierType.BUTTON1_MASK,
-          [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+          [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
           Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
 
       // The item's icon is used as drag graphic.
@@ -1159,7 +1159,7 @@ var MenuEditorPage = class MenuEditorPage {
       item.connect(
           'drag-data-get',
           (w, c, data) =>
-              data.set('text/plain', 8, ByteArray.fromString(JSON.stringify(config))));
+              data.set('FLY-PIE-ITEM', 8, ByteArray.fromString(JSON.stringify(config))));
       item.connect('drag-data-delete', dragDeleteData);
       item.connect('drag-failed', dragEnd);
       item.connect('drag-end', dragEnd);

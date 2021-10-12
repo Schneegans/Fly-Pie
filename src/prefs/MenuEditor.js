@@ -822,14 +822,21 @@ function registerWidgets() {
 
             this.add_controller(this._dropTarget);
           } else {
-            this.drag_dest_set(0, [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)], Gdk.DragAction.MOVE);
+            const targets = [
+              Gtk.TargetEntry.new("FLY-PIE-ITEM", Gtk.TargetFlags.SAME_APP, 0),
+              Gtk.TargetEntry.new("text/uri-list", 0, 1),
+              Gtk.TargetEntry.new("text/plain", 0, 2),
+            ];
+            this.drag_dest_set(0, targets, Gdk.DragAction.MOVE);
             this.drag_dest_set_track_motion(true); 
-            this.connect("drag-leave", dragLeave);
+            this.connect("drag-leave", () => {
+              dragLeave();
+              this.drag_unhighlight();
+            });
             this.connect(
               'drag-data-received', (w, context, x, y, data, i, time) => {
-                utils.debug(i);
                 const internalDrag = i == 0;
-                const containsUris = data.targets_include_uri();
+                const containsUris = i == 1;
                 const success = dragDrop(ByteArray.toString(data.get_data()), internalDrag, containsUris);
                 Gtk.drag_finish(
                   context, success, context.get_selected_action() == Gdk.DragAction.MOVE,
@@ -837,7 +844,16 @@ function registerWidgets() {
               });
 
               this.connect('drag-drop', (w, context, x, y, time) => {
-                this.drag_get_data(context, 'text/plain', time);
+                const availableTargets = context.list_targets();
+
+                for (let i = 0; i < targets.length; i++) {
+                  if (availableTargets.includes(targets[i].target)) {
+                    this.drag_get_data(context, targets[i].target, time);
+                    return;
+                  }
+                }
+
+                this.drag_get_data(context, "text/plain", time);
               });
 
             this.connect("drag-motion", (w, context, x, y, time) => {
@@ -847,6 +863,8 @@ function registerWidgets() {
               if(this._dropIndex == null) {
                 return false;
               }
+
+              this.drag_highlight();
 
               Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
               return true;
@@ -1385,7 +1403,7 @@ function registerWidgets() {
 
             item.button.drag_source_set(
                 Gdk.ModifierType.BUTTON1_MASK,
-                [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+                [Gtk.TargetEntry.new("FLY-PIE-ITEM", 0, 0)],
                 Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
 
             // The item's icon is used as drag graphic.
@@ -1403,7 +1421,7 @@ function registerWidgets() {
             item.button.connect(
                 'drag-data-get',
                 (w, c, data) => data.set(
-                    'text/plain', 8,
+                  "FLY-PIE-ITEM", 8,
                     ByteArray.fromString(JSON.stringify(item.getConfig()))));
             item.button.connect('drag-data-delete', dragDeleteData);
             item.button.connect('drag-failed', dragEnd);
@@ -1468,16 +1486,20 @@ function registerWidgets() {
 
             item.button.add_controller(dropTarget);
           } else {
+            const targets = [
+              Gtk.TargetEntry.new("FLY-PIE-ITEM", Gtk.TargetFlags.SAME_APP, 0),
+              Gtk.TargetEntry.new("text/uri-list", 0, 1),
+              Gtk.TargetEntry.new("text/plain", 0, 2),
+            ];
             item.button.drag_dest_set(
                 Gtk.DestDefaults.DROP,
-                [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)],
+                targets,
                 Gdk.DragAction.MOVE);
             item.button.drag_dest_set_track_motion(true);
             item.button.connect(
                 'drag-data-received', (w, context, x, y, data, i, time) => {
-                  utils.debug(i);
                   const internalDrag = i == 0;
-                  const containsUris = data.targets_include_uri();
+                  const containsUris = i == 1;
                   dragDrop(ByteArray.toString(data.get_data()), internalDrag, containsUris);
                 });
 
