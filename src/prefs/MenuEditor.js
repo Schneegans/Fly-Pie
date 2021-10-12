@@ -45,7 +45,7 @@ const ItemState = {
 const ItemSize = [130, 120, 100];
 
 // When a new set of menu items is provided via the setItems() method of the
-// FlyPieMenuEditor, an animated transition is made. There are five different transitions
+// FlyPieMenuEditor, an animated transition is made. There are three different transitions
 // and which is used is based on the menu level which is currently displayed and the menu
 // level which will be displayed next. The scheme below shows which transitions are used
 // when:
@@ -54,16 +54,15 @@ const ItemSize = [130, 120, 100];
 //   ,---------------------------->   |  Menu Overview Mode  |
 //   |                                '----------------------'
 //   |                                         |   ^
-//   |         A: Fade all items in / out and  |   |  B: Fade all items in / out and
-//   |           move selected item to center  |   |     move center item to grid position
+//   |                   A: Fade in new items  |   |  A: Fade in new items
 //   |                                         V   |
 //   |                                ,----------------------,
-//   | E: Simple fade in / out        |    Top-level Menu    |
-//   |    of all items                '----------------------'
+//   | A: Fade in new items           |    Top-level Menu    |
+//   |                                '----------------------'
 //   |                                         |   ^
-//   |         C: Fade all items in / out and  |   |  D: Fade all items in / out and
-//   |            move all items a little bit  |   |     move all items a little bit
-//   |            towards the new parentAngle  |   |     towards the old parentAngle
+//   |          B: Fade in new items and move  |   |  C: Fade in new items and move
+//   |              them a little bit towards  |   |     them a little bit towards
+//   |                the **new** parentAngle  |   |     the **old** parentAngle
 //   |                                         V   |
 //   |                                ,----------------------,
 //   |'----------------------------   |    Submenu Level n   |
@@ -78,9 +77,7 @@ const TransitionType = {
   NONE: 0,
   TRANSITION_A: 1,
   TRANSITION_B: 2,
-  TRANSITION_C: 3,
-  TRANSITION_D: 4,
-  TRANSITION_E: 5
+  TRANSITION_C: 3
 };
 
 // This is used for most animations / transitions in the menu editor.
@@ -381,15 +378,6 @@ function registerWidgets() {
 
         // This stores a reference to the currently selected item.
         this._selectedItem = null;
-
-        // Once new items are given via setItems, the old ones are kept around in this
-        // list to show them during the transition.
-        this._oldItems = [];
-
-        // This is used to clean up old items. If the items are longer than
-        // TRANSITION_DURATION in the _oldItems list, they will be invisible and can be
-        // removed safely.
-        this._lastHideTime = 0;
 
         // When this is set to true, vfunc_size_allocate() will be called repeatedly for
         // the TRANSITION_DURATION.
@@ -1009,56 +997,14 @@ function registerWidgets() {
         // Different things have to be done for the different transitions. You can read
         // more in the documentation of TransitionType at the top of this file.
         switch (this._upcomingTransition) {
-          // Transition from overview to top-level. The menu which was selected for
-          // editing is moved to the center.
-          case TransitionType.TRANSITION_A:
-
-            // Find the old item which corresponds to the new center item.
-            for (let i = 0; i < this._oldItems.length; i++) {
-              const item = this._oldItems[i];
-              if (item.getConfig().name == this._centerItem.getConfig().name &&
-                  item.getConfig().icon == this._centerItem.getConfig().icon) {
-
-                const x = centerX - ItemSize[item.state] / 2;
-                const y = centerY - ItemSize[item.state] / 2;
-                setAnimation(item, time, x, y);
-                break;
-              }
-            }
-            break;
-
-          // Transition from top-level to overview. The previous center is moved to its
-          // new grid position.
-          case TransitionType.TRANSITION_B:
-
-            // Find the old item which corresponds to the newly selected item.
-            for (let i = 0; i < this._oldItems.length; i++) {
-              const item = this._oldItems[i];
-              if (item.getConfig().name == this._selectedItem.getConfig().name &&
-                  item.getConfig().icon == this._selectedItem.getConfig().icon) {
-
-                // Get the position where the old item should move to.
-                const x = this._selectedItem.x.end;
-                const y = this._selectedItem.y.end;
-                setAnimation(item, time, x, y);
-                break;
-              }
-            }
-
-            break;
-
           // Transitions between deeper menu levels are basically the same, only the
           // direction in which items are moved differs. As this angle is set in
           // setItems(), we do not have to differentiate here.
+          case TransitionType.TRANSITION_B:
           case TransitionType.TRANSITION_C:
-          case TransitionType.TRANSITION_D:
             const angle   = this._transitionAngle * Math.PI / 180;
             const offsetX = Math.floor(Math.sin(angle) * radius);
             const offsetY = -Math.floor(Math.cos(angle) * radius);
-
-            this._oldItems.forEach(item => {
-              setAnimation(item, time, item.x.end + offsetX, item.y.end + offsetY);
-            });
 
             this._items.forEach(item => {
               item.x.start -= offsetX;
@@ -1070,10 +1016,7 @@ function registerWidgets() {
 
             break;
 
-          // Any other transition. This usually means that levels were skipped while
-          // navigating up. This transitions simply fades the old items out and the new
-          // items in. This does not require anything here, as fading happens always.
-          case TransitionType.TRANSITION_E:
+          // All other transitions do not require moving the items.
           default:
             break;
         }
@@ -1163,59 +1106,34 @@ function registerWidgets() {
           }
         }
 
-        if (this._centerItem == null && parentAngle == null && centerConfig != null) {
-          // Transition from overview to top-level.
-          this._upcomingTransition = TransitionType.TRANSITION_A;
-        } else if (
-            this._centerItem != null && this._parentAngle == null &&
-            centerConfig == null) {
-          // Transition from top-level to overview.
-          this._upcomingTransition = TransitionType.TRANSITION_B;
-        } else if (wentOneLevelDeeper) {
+        if (this._centerItem != null && wentOneLevelDeeper) {
           // Transition one level deeper.
-          this._upcomingTransition = TransitionType.TRANSITION_C;
+          this._upcomingTransition = TransitionType.TRANSITION_B;
           this._transitionAngle    = parentAngle;
-        } else if (wentOneLevelUp) {
+        } else if (centerConfig != null && wentOneLevelUp) {
           // Transition one level up.
-          this._upcomingTransition = TransitionType.TRANSITION_D;
+          this._upcomingTransition = TransitionType.TRANSITION_C;
           this._transitionAngle    = (this._parentAngle + 180) % 360;
         } else {
           // Any other transition, usually multiple levels up at once.
-          this._upcomingTransition = TransitionType.TRANSITION_E;
+          this._upcomingTransition = TransitionType.TRANSITION_A;
         }
 
         // -------------------------------------------------------------------------------
 
-        // In the next part we will hide all existing items. They are not immediately
-        // removed as they need to hang around until the transition is finished.
-
-        // Clear old items which are now completely invisible.
-        if (this.get_frame_clock()) {
-          const now = this.get_frame_clock().get_frame_time();
-          if (this._lastHideTime + TRANSITION_DURATION < now) {
-            this._oldItems.forEach(item => {
-              if (utils.gtk4()) {
-                item.unparent();
-              } else {
-                this.remove(item);
-              }
-            });
-            this._oldItems = [];
-          }
-          this._lastHideTime = now;
-        }
-
-        // Append all current items to the list of old items.
-        this._oldItems.push(...this._items);
+        // In the next part we will hide all existing items.
+        const oldItems = [...this._items];
 
         if (this._centerItem) {
-          this._oldItems.push(this._centerItem);
+          oldItems.push(this._centerItem);
         }
 
-        // Make all old items insensitive and start their fade-out animation.
-        this._oldItems.forEach(item => {
-          item.reveal_child = false;
-          item.sensitive    = false;
+        oldItems.forEach(item => {
+          if (utils.gtk4()) {
+            item.unparent();
+          } else {
+            this.remove(item);
+          }
         });
 
         // Reset all currently displayed items.
@@ -1258,16 +1176,6 @@ function registerWidgets() {
         this._parentAngle             = parentAngle;
         this._backButton.reveal_child = parentAngle != undefined;
 
-        // On GTK3, the old items - while being completely faded out - still block mouse
-        // clicks. In order to be able to click the back navigation button, we put it to
-        // the end of the children list. Then it's drawn above the invisible items and
-        // it's clickable again! The button itself however blocks input as well when hidden, so we make it completely invisible under GTK3.
-        if (!utils.gtk4()) {
-          this.remove(this._backButton);
-          this.put(this._backButton, 0, 0);
-          this._backButton.visible = this._backButton.reveal_child;
-        }
-        
         if (parentAngle != undefined) {
           this._backButton.get_child().get_child().queue_draw();
         }
@@ -1673,7 +1581,6 @@ function registerWidgets() {
         // Update the position of all current items, old items, the center item and the
         // back button.
         this._items.forEach(impl);
-        this._oldItems.forEach(impl);
 
         impl(this._backButton);
 
