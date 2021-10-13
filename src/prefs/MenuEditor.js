@@ -427,6 +427,8 @@ function registerWidgets() {
           utils.boxAppend(this._ifEmptyHint, label);
           utils.boxAppend(this._ifEmptyHint, description);
 
+          // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
+          // So we have add child items differently.
           if (utils.gtk4()) {
             this._ifEmptyHint.set_parent(this);
           } else {
@@ -456,6 +458,8 @@ function registerWidgets() {
           utils.boxAppend(this._addItemHint, label);
           utils.boxAppend(this._addItemHint, icon);
 
+          // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
+          // So we have add child items differently.
           if (utils.gtk4()) {
             this._addItemHint.set_parent(this);
           } else {
@@ -508,10 +512,14 @@ function registerWidgets() {
 
           utils.setChild(this._backButton, icon);
 
+          // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
+          // So we have add child items differently.
           if (utils.gtk4()) {
             this._backButton.set_parent(this);
           } else {
             this.put(this._backButton, 0, 0);
+
+            // Make sure that the button is not shown automatically.
             this._backButton.no_show_all = true;
             icon.visible                 = true;
           }
@@ -519,8 +527,20 @@ function registerWidgets() {
 
         // The entire menu editor is a drop target. This is used both for internal
         // drag-and-drop of menu items and external drops for item creation based on URLs
-        // etc.
+        // etc. Setting up drag and drop is quite different on GTK3 / GTK4. Therefore this
+        // code looks a bit more difficult than it actually is. There are a few lambdas
+        // involved which are then connected to the various signals of the widget (GTK3)
+        // or the EventController (GTK4).
         {
+
+          // On GTK3, we need special drag and drop targets.
+          if (!utils.gtk4()) {
+            this._dndTargets = [
+              Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0),
+              Gtk.TargetEntry.new('text/uri-list', 0, 1),
+              Gtk.TargetEntry.new('text/plain', 0, 2),
+            ];
+          }
 
           // The index of the dragged item.
           this._dragIndex = null;
@@ -843,18 +863,15 @@ function registerWidgets() {
 
             this.add_controller(this._dropTarget);
           } else {
-            const targets = [
-              Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0),
-              Gtk.TargetEntry.new('text/uri-list', 0, 1),
-              Gtk.TargetEntry.new('text/plain', 0, 2),
-            ];
-            this.drag_dest_set(0, targets, Gdk.DragAction.MOVE);
+
+            this.drag_dest_set(0, this._dndTargets, Gdk.DragAction.MOVE);
             this.drag_dest_set_track_motion(true);
             this.connect('drag-leave', () => {
               dragLeave();
               this.drag_unhighlight();
             });
             this.connect('drag-data-received', (w, context, x, y, data, i, time) => {
+              // These numbers refer to the number in this._dndTargets.
               const internalDrag = i == 0;
               const containsUris = i == 1;
               const success      = dragDrop(
@@ -867,9 +884,9 @@ function registerWidgets() {
             this.connect('drag-drop', (w, context, x, y, time) => {
               const availableTargets = context.list_targets();
 
-              for (let i = 0; i < targets.length; i++) {
-                if (availableTargets.includes(targets[i].target)) {
-                  this.drag_get_data(context, targets[i].target, time);
+              for (let i = 0; i < this._dndTargets.length; i++) {
+                if (availableTargets.includes(this._dndTargets[i].target)) {
+                  this.drag_get_data(context, this._dndTargets[i].target, time);
                   return;
                 }
               }
@@ -1191,13 +1208,14 @@ function registerWidgets() {
 
         // -------------------------------------------------------------------------------
 
-        // In the next part we will hide all existing items.
+        // In this part we will hide all existing items.
         const oldItems = [...this._items];
 
         if (this._centerItem) {
           oldItems.push(this._centerItem);
         }
 
+        // This is done differently on GTK3 / GTK4.
         oldItems.forEach(item => {
           if (utils.gtk4()) {
             item.unparent();
@@ -1321,6 +1339,8 @@ function registerWidgets() {
         const item = new FlyPieMenuEditorItem(itemState);
         item.setConfig(config);
 
+        // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
+        // So we have add child items differently.
         if (utils.gtk4()) {
           item.set_parent(this);
         } else {
@@ -1350,7 +1370,10 @@ function registerWidgets() {
 
         // Now we set up the drag source. Most items are draggable, except for center
         // items. The drag source provides a stringified JSON version of the item config.
-        // This is a bit confusing as it needs to be set up differently for GTK4 and GTK3.
+        // Setting up drag and drop is quite different on GTK3 / GTK4. Therefore this code
+        // looks a bit more difficult than it actually is. There are a few lambdas
+        // involved which are then connected to the various signals of the widget (GTK3)
+        // or the EventController (GTK4).
         if (itemState != ItemState.CENTER) {
 
           // At drag begin, we make the icon translucent in overview mode and invisible
@@ -1378,7 +1401,9 @@ function registerWidgets() {
             this.updateLayout();
           };
 
+          // Now connect all the handlers from above.
           if (utils.gtk4()) {
+
             // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does
             // not work on X11. If we added the copy action on X11, it would be chosen as
             // default action and the user would have to hold down shift in order to move
@@ -1390,21 +1415,21 @@ function registerWidgets() {
 
             let dragSource = new Gtk.DragSource({actions: actions});
 
-            // The item's icon is used as drag graphic.
-            dragSource.connect('prepare', (s, x, y) => {
-              s.set_icon(Gtk.WidgetPaintable.new(item.icon), x, y);
-              return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
-            });
-
+            // Connect all handlers.
             dragSource.connect('drag-begin', dragBegin);
             dragSource.connect('drag-cancel', dragEnd);
-
             dragSource.connect('drag-end', (s, drag, deleteData) => {
               if (deleteData) {
                 dragDeleteData();
               }
 
               dragEnd();
+            });
+
+            // The item's icon is used as drag graphic.
+            dragSource.connect('prepare', (s, x, y) => {
+              s.set_icon(Gtk.WidgetPaintable.new(item.icon), x, y);
+              return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
             });
 
             // For some reason, the drag source does not work anymore once the
@@ -1418,10 +1443,22 @@ function registerWidgets() {
 
           } else {
 
+            // Items provide data in the custom 'FLY-PIE-ITEM' format (which is actually
+            // json data).
             item.button.drag_source_set(
                 Gdk.ModifierType.BUTTON1_MASK,
                 [Gtk.TargetEntry.new('FLY-PIE-ITEM', 0, 0)],
                 Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
+
+            // Connect all handlers.
+            item.button.connect('drag-data-delete', dragDeleteData);
+            item.button.connect('drag-failed', dragEnd);
+            item.button.connect('drag-end', dragEnd);
+            item.button.connect('drag-data-get', (w, c, data) => {
+              data.set(
+                  'FLY-PIE-ITEM', 8,
+                  ByteArray.fromString(JSON.stringify(item.getConfig())));
+            });
 
             // The item's icon is used as drag graphic.
             item.button.connect('drag-begin', () => {
@@ -1434,19 +1471,13 @@ function registerWidgets() {
               item.button.drag_source_set_icon_pixbuf(pixbuf);
               dragBegin();
             });
-
-            item.button.connect(
-                'drag-data-get',
-                (w, c, data) => data.set(
-                    'FLY-PIE-ITEM', 8,
-                    ByteArray.fromString(JSON.stringify(item.getConfig()))));
-            item.button.connect('drag-data-delete', dragDeleteData);
-            item.button.connect('drag-failed', dragEnd);
-            item.button.connect('drag-end', dragEnd);
           }
         }
 
-        // Non-center items of type 'CustomMenu' can also receive drops.
+        // Non-center items of type 'CustomMenu' can also receive drops. The items type
+        // could theoretically change at runtime when the setConfig() method is called.
+        // Therefore, we check the type in the drop handler and not right here in the
+        // beginning.
         if (itemState != ItemState.CENTER) {
 
           // When something is dropped, we either emit 'drop-data-into' (for external
@@ -1484,7 +1515,9 @@ function registerWidgets() {
             return true;
           };
 
+          // Now connect the handler. This differs on GTK3 / GTK4.
           if (utils.gtk4()) {
+
             const dropTarget =
                 new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
             dropTarget.set_gtypes([GObject.TYPE_STRING]);
@@ -1503,17 +1536,16 @@ function registerWidgets() {
             dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
 
             item.button.add_controller(dropTarget);
+
           } else {
-            const targets = [
-              Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0),
-              Gtk.TargetEntry.new('text/uri-list', 0, 1),
-              Gtk.TargetEntry.new('text/plain', 0, 2),
-            ];
+
             item.button.drag_dest_set(
-                Gtk.DestDefaults.DROP, targets, Gdk.DragAction.MOVE);
+                Gtk.DestDefaults.DROP, this._dndTargets, Gdk.DragAction.MOVE);
             item.button.drag_dest_set_track_motion(true);
+
             item.button.connect(
                 'drag-data-received', (w, context, x, y, data, i, time) => {
+                  // These numbers refer to the number in this._dndTargets.
                   const internalDrag = i == 0;
                   const containsUris = i == 1;
                   dragDrop(
@@ -1526,7 +1558,10 @@ function registerWidgets() {
                 return false;
               }
 
+              // Draw a highlight around the button.
               item.button.drag_highlight();
+
+              // Prefer a move action.
               Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
 
               return true;
@@ -1546,6 +1581,7 @@ function registerWidgets() {
           }
         });
 
+        // Show all children on GTK3.
         if (!utils.gtk4()) {
           item.show_all();
         }
@@ -1672,16 +1708,28 @@ function registerWidgets() {
     });
   }
 
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // As mentioned in the description of the FlyPieMenuEditorBase class, we need to      //
+  // override different vfuncs on GTK3 / GTK4. Therefore we derive different            //
+  // FlyPieMenuEditors for GTK3 and GTK4.                                               //
+  ////////////////////////////////////////////////////////////////////////////////////////
+
   if (GObject.type_from_name('FlyPieMenuEditor') == null) {
 
     const MIN_GRID_SIZE = ItemSize[ItemState.GRID] * 4;
 
     if (utils.gtk4()) {
 
+      ////////////////////////////////////////////////////////////////////////////////////
+      // The GTK4 FlyPieMenuEditor.                                                     //
+      ////////////////////////////////////////////////////////////////////////////////////
+
       GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
                             class FlyPieMenuEditor extends FlyPieMenuEditorBase {
         // ---------------------------------------------------- overridden virtual methods
 
+        // This computes the required hight for a given width when in menu overview mode.
+        // In all other cases it simply returns the size required to fit 4x4 grid items.
         vfunc_measure(orientation, for_size) {
           if (this._inMenuOverviewMode()) {
             if (orientation == Gtk.Orientation.HORIZONTAL) {
@@ -1707,14 +1755,15 @@ function registerWidgets() {
 
     } else {
 
+      ////////////////////////////////////////////////////////////////////////////////////
+      // The GTK3 FlyPieMenuEditor.                                                     //
+      ////////////////////////////////////////////////////////////////////////////////////
+
       GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
                             class FlyPieMenuEditor extends FlyPieMenuEditorBase {
         // ---------------------------------------------------- overridden virtual methods
 
-        vfunc_get_preferred_height() {
-          return [MIN_GRID_SIZE, MIN_GRID_SIZE];
-        }
-
+        // This computes the required hight for a given width when in menu overview mode.
         vfunc_get_preferred_height_for_width(width) {
           if (this._inMenuOverviewMode()) {
             // The possible amount of columns.
@@ -1733,10 +1782,17 @@ function registerWidgets() {
           return [MIN_GRID_SIZE, MIN_GRID_SIZE];
         }
 
+        // In all other cases we simply return the size required to fit 4x4 grid items.
+        vfunc_get_preferred_height() {
+          return [MIN_GRID_SIZE, MIN_GRID_SIZE];
+        }
+
+        // In all other cases we simply return the size required to fit 4x4 grid items.
         vfunc_get_preferred_width() {
           return [MIN_GRID_SIZE, MIN_GRID_SIZE];
         }
 
+        // In all other cases we simply return the size required to fit 4x4 grid items.
         vfunc_get_preferred_width_for_height(height) {
           return [MIN_GRID_SIZE, MIN_GRID_SIZE];
         }

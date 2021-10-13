@@ -224,6 +224,7 @@ var MenuEditorPage = class MenuEditorPage {
         dialog.destroy();
       });
 
+      // Showing the dialog is different on GTK3 / GTK4...
       if (utils.gtk4()) {
         dialog.show();
       } else {
@@ -458,6 +459,7 @@ var MenuEditorPage = class MenuEditorPage {
       iconSelectDialog.hide();
     });
 
+    // On GTK3, we have to show all children of the dialog manually.
     if (!utils.gtk4()) {
       iconSelectDialog.foreach(w => w.show_all());
     }
@@ -656,7 +658,7 @@ var MenuEditorPage = class MenuEditorPage {
     this._editor.connect('notification', (e, text) => this._showNotification(text));
 
     // Initialize the drop target of the trash area. It's pretty simple, it just accepts
-    // any internal drag operation.
+    // any internal drag operation. Only slight differences between GTK3 and GTK4...
     {
       const trash = this._builder.get_object('menu-editor-trash');
 
@@ -677,7 +679,7 @@ var MenuEditorPage = class MenuEditorPage {
     }
 
     // The stash area is slightly more complex, as a new stash widget needs to be created
-    // on drop events.
+    // on drop events. Only slight differences between GTK3 and GTK4...
     {
       const stash = this._builder.get_object('menu-editor-stash');
 
@@ -686,6 +688,7 @@ var MenuEditorPage = class MenuEditorPage {
         this._stashedConfigs.push(config);
         this._addStashWidget(config);
         this._saveStashConfiguration();
+        return true;
       };
 
       if (utils.gtk4()) {
@@ -693,10 +696,7 @@ var MenuEditorPage = class MenuEditorPage {
             new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
         dropTarget.set_gtypes([GObject.TYPE_STRING]);
         dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
-        dropTarget.connect('drop', (t, value) => {
-          handler(value);
-          return true;
-        });
+        dropTarget.connect('drop', (t, value) => handler(value));
         dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
         stash.add_controller(dropTarget);
       } else {
@@ -707,7 +707,7 @@ var MenuEditorPage = class MenuEditorPage {
         stash.connect('drag-data-received', (w, context, x, y, data, i, time) => {
           handler(ByteArray.toString(data.get_data()));
           Gtk.drag_finish(
-              context, false, context.get_selected_action() == Gdk.DragAction.MOVE, time);
+              context, true, context.get_selected_action() == Gdk.DragAction.MOVE, time);
         });
       }
     }
@@ -816,6 +816,7 @@ var MenuEditorPage = class MenuEditorPage {
           }
         });
 
+        // We have to show the new child on GTK3 manually.
         if (!utils.gtk4()) {
           newChild.show_all();
         }
@@ -847,7 +848,8 @@ var MenuEditorPage = class MenuEditorPage {
           this._gotoMenuPathIndex(-1);
         });
 
-        const handler = (value) => {
+        // This handler creates a new toplevel menu item based on the provided config.
+        const dragDrop = (value) => {
           const config = JSON.parse(value);
           if (ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
             // Translators: This is shown as an in-app notification when the user
@@ -865,32 +867,38 @@ var MenuEditorPage = class MenuEditorPage {
           return true;
         };
 
-        // If something is dropped onto the home, button create a root menu accordingly.
+        // Things need to be wired up differently on GTK3 / GTK4.
         if (utils.gtk4()) {
           const dropTarget =
               new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
           dropTarget.set_gtypes([GObject.TYPE_STRING]);
+          dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
           dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
           dropTarget.connect('drop', (t, what) => {
-            return handler(what);
+            return dragDrop(what);
           });
-          dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+
           button.add_controller(dropTarget);
+
         } else {
+
           button.drag_dest_set(
               Gtk.DestDefaults.HIGHLIGHT,
               [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
               Gdk.DragAction.MOVE);
           button.drag_dest_set_track_motion(true);
+
           button.connect('drag-data-received', (w, context, x, y, data, i, time) => {
-            const success = handler(ByteArray.toString(data.get_data()));
+            const success = dragDrop(ByteArray.toString(data.get_data()));
             Gtk.drag_finish(
                 context, success, context.get_selected_action() == Gdk.DragAction.MOVE,
                 time);
           });
+
           button.connect('drag-drop', (w, context, x, y, time) => {
             button.drag_get_data(context, 'FLY-PIE-ITEM', time);
           });
+
           button.connect('drag-motion', (w, context, x, y, time) => {
             Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
             return true;
@@ -919,7 +927,7 @@ var MenuEditorPage = class MenuEditorPage {
           this._gotoMenuPathIndex(i);
         });
 
-        const handler = (value) => {
+        const dragDrop = (value) => {
           const config = JSON.parse(value);
 
           // Its fixed angle is reset to prevent invalid configurations.
@@ -931,23 +939,25 @@ var MenuEditorPage = class MenuEditorPage {
           return true;
         };
 
+        // Things need to be wired up differently on GTK3 / GTK4.
         if (utils.gtk4()) {
           const dropTarget =
               new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
           dropTarget.set_gtypes([GObject.TYPE_STRING]);
           dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
-          dropTarget.connect('drop', (t, what) => {
-            return handler(what);
-          });
+          dropTarget.connect('drop', (t, what) => dragDrop(what));
           dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
           button.add_controller(dropTarget);
+
         } else {
+
           button.drag_dest_set(
               Gtk.DestDefaults.ALL,
               [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
               Gdk.DragAction.MOVE);
+
           button.connect('drag-data-received', (w, context, x, y, data, i, time) => {
-            handler(ByteArray.toString(data.get_data()));
+            dragDrop(ByteArray.toString(data.get_data()));
           });
         }
       }
@@ -956,6 +966,7 @@ var MenuEditorPage = class MenuEditorPage {
       utils.boxAppend(container, button);
     }
 
+    // Show the breadcrumbs manually on GTK3.
     if (!utils.gtk4()) {
       container.show_all();
     }
@@ -1093,6 +1104,7 @@ var MenuEditorPage = class MenuEditorPage {
       } else {
         this._builder.get_object('menu-editor-stash-content').remove(item);
       }
+
       this._saveStashConfiguration();
 
       // Show the stash info when the last item got deleted.
@@ -1108,8 +1120,9 @@ var MenuEditorPage = class MenuEditorPage {
       return false;
     };
 
-
+    // Things need to be wired up differently on GTK3 / GTK4.
     if (utils.gtk4()) {
+
       // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does not work on
       // X11.
       // If we added the copy action on X11, it would be chosen as default action and the
@@ -1138,6 +1151,7 @@ var MenuEditorPage = class MenuEditorPage {
       dragSource.connect('drag-cancel', dragEnd);
 
       item.add_controller(dragSource);
+
     } else {
 
       item.drag_source_set(
@@ -1156,13 +1170,12 @@ var MenuEditorPage = class MenuEditorPage {
         dragBegin();
       });
 
-      item.connect(
-          'drag-data-get',
-          (w, c, data) =>
-              data.set('FLY-PIE-ITEM', 8, ByteArray.fromString(JSON.stringify(config))));
       item.connect('drag-data-delete', dragDeleteData);
       item.connect('drag-failed', dragEnd);
       item.connect('drag-end', dragEnd);
+      item.connect('drag-data-get', (w, c, data) => {
+        data.set('FLY-PIE-ITEM', 8, ByteArray.fromString(JSON.stringify(config)));
+      });
 
       item.show();
     }
