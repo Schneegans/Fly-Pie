@@ -10,10 +10,13 @@
 
 #### New Features
 
-* The D-Bus API of Fly-Pie now includes a `SelectItem()` method which can be used to select an item of a currently opened menu programmatically. For example, this can be useful if you want to directly open a submenu. This is now also used by the live preview of the menu editor: If you click the preview button while you're inside a submenu, this submenu will be directly opened in the preview! 
+* A new default theme has been added. The dark color scheme is supposed to blend better with the default GNOME Shell theme.
+* The D-Bus API of Fly-Pie now includes a `SelectItem()` method which can be used to select an item of a currently opened menu programmatically. For example, this can be useful if you want to directly open a submenu. This is now also used by the live preview of the menu editor: If you click the preview button while you're inside a submenu, this submenu will be directly opened in the preview!
 
 #### Other Enhancements
 
+* Fly-Pie now supports GNOME 3.36, 3.38, 40, and 41 from one code base.
+* Continuous integration is now used to run automated tests on the above GNOME versions on both, X11 and Wayland.
 * Fly-Pie now uses a `Makefile` for building the extension instead of a bunch of custom scripts. Thank you, [@daPhipz](https://github.com/daPhipz)!
 * New Translations!
   * ...
