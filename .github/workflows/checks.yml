@@ -77,14 +77,23 @@ jobs:
       ( contains(github.ref, 'develop') && !contains(github.event.head_commit.message, '[no-ci]') ) ||
       contains(github.event.head_commit.message, '[run-ci]')
     strategy:
+      fail-fast: false
       matrix:
-        version: ["40.0"]
+        version:
+          - '32'
+          - '33'
+          - '34'
+          - '35'
+        session:
+          - 'gnome-xsession'
+          - 'gnome-wayland-nested'
     steps:
     - uses: actions/checkout@v2
     - name: Download Dependencies
       run: |
         sudo apt update -qq
         sudo apt install gettext -qq
+    - name: Build Fly-Pie
+      run: make
     - name: Test Fly-Pie
-      run: |
-        sudo $GITHUB_WORKSPACE/scripts/run-tests.sh ${{ matrix.version }}
+      run: sudo $GITHUB_WORKSPACE/tests/test.sh -v ${{ matrix.version }} -s ${{ matrix.session }}
