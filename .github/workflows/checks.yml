@@ -97,3 +97,13 @@ jobs:
       run: make
     - name: Test Fly-Pie
       run: sudo $GITHUB_WORKSPACE/tests/test.sh -v ${{ matrix.version }} -s ${{ matrix.session }}
+    - uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+        name: log_${{ matrix.version }}_${{ matrix.session }}
+        path: fail.log
+    - uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+        name: screen_${{ matrix.version }}_${{ matrix.session }}
+        path: fail.png
