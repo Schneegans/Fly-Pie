@@ -15,10 +15,14 @@
     padding: 0;
 }
 
+/* This only works on GTK4. */
+
 .fly-pie-window {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+
+/* This is used for the unread-achievements counter. */
 
 .counter-label {
     text-shadow: none;
@@ -29,6 +33,8 @@
     padding: 0px 8px;
 }
 
+/* This is an entry at the top of the menu editor. */
+
 .menu-editor-path-item {
     border-radius: 0;
     border-left: none;
@@ -36,9 +42,23 @@
     border-bottom: none;
 }
 
+.menu-editor-path-item:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+/* The top selector is for GTK3, the bottom one for GTK4. */
+
+.menu-editor-add-button,
 menubutton.menu-editor-add-button button {
-    border-radius: 0;
+    border-radius: 0 8px 8px 0;
     border-right: none;
     border-top: none;
     border-bottom: none;
+}
+
+/* Let's make frames nicely rounded. On GTK4's Adwaita this seems to be the default,
+   however we have to set this here to get a more unified look on GTK3. */
+
+frame>* {
+    border-radius: 8px;
 }

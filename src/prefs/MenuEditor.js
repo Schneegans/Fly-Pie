@@ -9,6 +9,7 @@
 'use strict';
 
 const {GLib, GObject, Gtk, Gdk, Pango} = imports.gi;
+const ByteArray                        = imports.byteArray;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -44,7 +45,7 @@ const ItemState = {
 const ItemSize = [130, 120, 100];
 
 // When a new set of menu items is provided via the setItems() method of the
-// FlyPieMenuEditor, an animated transition is made. There are five different transitions
+// FlyPieMenuEditor, an animated transition is made. There are three different transitions
 // and which is used is based on the menu level which is currently displayed and the menu
 // level which will be displayed next. The scheme below shows which transitions are used
 // when:
@@ -53,16 +54,15 @@ const ItemSize = [130, 120, 100];
 //   ,---------------------------->   |  Menu Overview Mode  |
 //   |                                '----------------------'
 //   |                                         |   ^
-//   |         A: Fade all items in / out and  |   |  B: Fade all items in / out and
-//   |           move selected item to center  |   |     move center item to grid position
+//   |                   A: Fade in new items  |   |  A: Fade in new items
 //   |                                         V   |
 //   |                                ,----------------------,
-//   | E: Simple fade in / out        |    Top-level Menu    |
-//   |    of all items                '----------------------'
+//   | A: Fade in new items           |    Top-level Menu    |
+//   |                                '----------------------'
 //   |                                         |   ^
-//   |         C: Fade all items in / out and  |   |  D: Fade all items in / out and
-//   |            move all items a little bit  |   |     move all items a little bit
-//   |            towards the new parentAngle  |   |     towards the old parentAngle
+//   |          B: Fade in new items and move  |   |  C: Fade in new items and move
+//   |              them a little bit towards  |   |     them a little bit towards
+//   |                the **new** parentAngle  |   |     the **old** parentAngle
 //   |                                         V   |
 //   |                                ,----------------------,
 //   |'----------------------------   |    Submenu Level n   |
@@ -77,9 +77,7 @@ const TransitionType = {
   NONE: 0,
   TRANSITION_A: 1,
   TRANSITION_B: 2,
-  TRANSITION_C: 3,
-  TRANSITION_D: 4,
-  TRANSITION_E: 5
+  TRANSITION_C: 3
 };
 
 // This is used for most animations / transitions in the menu editor.
@@ -90,6 +88,7 @@ const TRANSITION_DURATION = 350;
 // type. This method is called by the constructor of the PreferencesDialog.
 function registerWidgets() {
   let FlyPieMenuEditorItem;
+  let FlyPieMenuEditorBase;
 
   ////////////////////////////////////////////////////////////////////////////////////////
   // Instances of this class are used to draw the individual menu items in the menu     //
@@ -135,39 +134,44 @@ function registerWidgets() {
             // We use a Gtk.Overlay for the edit-button. This is actually only required
             // for items of type 'CustomMenu' but we create it anyways.
             const overlay = new Gtk.Overlay();
-            this.set_child(overlay);
-
-            // Create the edit button.
-            this.editButton = Gtk.Button.new_from_icon_name('document-edit-symbolic');
-            this.editButton.add_css_class('pill-button');
-            this.editButton.valign = Gtk.Align.START;
-            this.editButton.halign = Gtk.Align.END;
-            overlay.add_overlay(this.editButton);
+            utils.setChild(this, overlay);
 
             // Create the main toggle button which makes the item selectable. We do not
             // add this to a container yet, as where this is appended depends on the given
             // state. This is done further below.
-            this.button = new Gtk.ToggleButton({
-              margin_top: 5,
-              margin_start: 5,
-              margin_end: 5,
-              margin_bottom: 5,
-              has_frame: false
-            });
-            this.button.add_css_class('round-button');
+            if (utils.gtk4()) {
+              this.button = new Gtk.ToggleButton({
+                margin_top: 5,
+                margin_start: 5,
+                margin_end: 5,
+                margin_bottom: 5,
+                has_frame: false
+              });
+            } else {
+              this.button = new Gtk.RadioButton({
+                margin_top: 5,
+                margin_start: 5,
+                margin_end: 5,
+                margin_bottom: 5,
+                relief: Gtk.ReliefStyle.NONE,
+                draw_indicator: false
+              });
+            }
+
+            utils.addCSSClass(this.button, 'round-button');
 
             // Each item has an icon. THis is drawn using a GtkDrawingArea. Again, we do
             // not add this to a container yet, as where this is appended depends on the
             // given state. This is done further below.
             this.icon = new Gtk.DrawingArea({hexpand: true, vexpand: true});
-            this.icon.set_draw_func((widget, ctx) => {
+            utils.setDrawFunc(this.icon, (widget, ctx) => {
               const size =
                   Math.min(widget.get_allocated_width(), widget.get_allocated_height());
               ctx.translate(
                   (widget.get_allocated_width() - size) / 2,
                   (widget.get_allocated_height() - size) / 2);
               const font  = this._settings.get_string('font');
-              const color = widget.get_style_context().get_color();
+              const color = utils.getColor(widget);
               utils.paintIcon(ctx, this._config.icon, size, 1, font, color);
               return false;
             });
@@ -183,15 +187,15 @@ function registerWidgets() {
             // Only child an overview items have a caption.
             if (itemState == ItemState.GRID || itemState == ItemState.CHILD) {
               this._nameLabel = new Gtk.Label({ellipsize: Pango.EllipsizeMode.END});
-              this._nameLabel.add_css_class('caption-heading');
+              utils.addCSSClass(this._nameLabel, 'caption-heading');
             }
 
             // The shortcut label is only required for the menu mode.
             if (itemState == ItemState.GRID) {
               this._shortcutLabel =
                   new Gtk.Label({ellipsize: Pango.EllipsizeMode.END, use_markup: true});
-              this._shortcutLabel.add_css_class('caption');
-              this._shortcutLabel.add_css_class('dim-label');
+              utils.addCSSClass(this._shortcutLabel, 'caption');
+              utils.addCSSClass(this._shortcutLabel, 'dim-label');
             }
 
             // Now that all required widgets are set up, we add the to some containers.
@@ -201,30 +205,44 @@ function registerWidgets() {
             if (itemState == ItemState.GRID) {
               const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
               box.vexpand = true;
-              box.append(this.icon);
-              box.append(this._nameLabel);
-              box.append(this._shortcutLabel);
+              utils.boxAppend(box, this.icon, false, true);
+              utils.boxAppend(box, this._nameLabel);
+              utils.boxAppend(box, this._shortcutLabel);
 
-              this.button.set_child(box);
-              overlay.set_child(this.button);
+              utils.setChild(this.button, box);
+              utils.setChild(overlay, this.button);
             }
 
             // For the center item, the icon is directly add to the toggle button.
             if (itemState == ItemState.CENTER) {
-              overlay.set_child(this.button);
-              this.button.set_child(this.icon);
+              utils.setChild(overlay, this.button);
+              utils.setChild(this.button, this.icon, false, true);
             }
 
             // Child items are similar to grid items but do not contain a shortcut label.
             if (itemState == ItemState.CHILD) {
               const box   = Gtk.Box.new(Gtk.Orientation.VERTICAL, 2);
               box.vexpand = true;
-              box.append(this.icon);
-              box.append(this._nameLabel);
+              utils.boxAppend(box, this.icon, false, true);
+              utils.boxAppend(box, this._nameLabel);
 
-              this.button.set_child(box);
-              overlay.set_child(this.button);
+              utils.setChild(this.button, box);
+              utils.setChild(overlay, this.button);
             }
+
+            // Create the edit button.
+            if (utils.gtk4()) {
+              this.editButton = Gtk.Button.new_from_icon_name('custom-menu-symbolic');
+            } else {
+              this.editButton = Gtk.Button.new_from_icon_name(
+                  'custom-menu-symbolic', Gtk.IconSize.BUTTON);
+              this.editButton.no_show_all = true;
+            }
+
+            utils.addCSSClass(this.editButton, 'pill-button');
+            this.editButton.valign = Gtk.Align.START;
+            this.editButton.halign = Gtk.Align.END;
+            overlay.add_overlay(this.editButton);
           }
 
           // ------------------------------------------------------------ public interface
@@ -252,8 +270,13 @@ function registerWidgets() {
             // Update the shortcut label of menu overview items.
             if (this._shortcutLabel) {
               if (config.shortcut) {
-                const [ok, keyval, mods]  = Gtk.accelerator_parse(config.shortcut);
-                this._shortcutLabel.label = Gtk.accelerator_get_label(keyval, mods);
+                if (utils.gtk4()) {
+                  const [ok, keyval, mods]  = Gtk.accelerator_parse(config.shortcut);
+                  this._shortcutLabel.label = Gtk.accelerator_get_label(keyval, mods);
+                } else {
+                  const [keyval, mods]      = Gtk.accelerator_parse(config.shortcut);
+                  this._shortcutLabel.label = Gtk.accelerator_get_label(keyval, mods);
+                }
               } else {
                 this._shortcutLabel.label = _('Not Bound');
               }
@@ -275,24 +298,51 @@ function registerWidgets() {
   // (e.g. select, drag-and-drop) signals are emitted.                                  //
   ////////////////////////////////////////////////////////////////////////////////////////
 
-  if (GObject.type_from_name('FlyPieMenuEditor') == null) {
+  if (GObject.type_from_name('FlyPieMenuEditorBase') == null) {
+
+    // To support both, GTK3 and GTK4 from the same codebase, some weird things have to be
+    // done here. On GTK4, everything is fine but creating a custom container widget on
+    // GTK3 is ... challenging. Therefore, the FlyPieMenuEditor is derived from Gtk.Widget
+    // on GTK4 and from Gtk.Fixed on GTK3 (hacky, but possible).
+    // There are also different abstract methods which need to be overridden on GTK43 /
+    // GTK4. Therefore there is a main FlyPieMenuEditorBase class and derived therefrom
+    // different FlyPieMenuEditor's on GTK3 / GTK4. So it looks a bit like this:
+    //
+    //                    GTK3                                    GTK4
+    //
+    //          ,----------------------,                ,----------------------,
+    //          |      Gtk.Fixed       |                |     Gtk.Widget       |
+    //          '----------------------'                '----------------------'
+    //                      ^                                       ^
+    //                      |                                       |
+    //          ,--------------------------------------------------------------,
+    //          |                     FlyPieMenuEditorBase                     |
+    //          '--------------------------------------------------------------'
+    //                      ^                                       ^
+    //                      |                                       |
+    //    ,---------------------------------,      ,---------------------------------,
+    //    | FlyPieMenuEditor (GTK3 Version) |      | FlyPieMenuEditor (GTK4 Version) |
+    //    '---------------------------------'      '---------------------------------'
+    //
+    const BASE_CLASS = utils.gtk4() ? Gtk.Widget : Gtk.Fixed;
+
     // clang-format off
-      GObject.registerClass({
-        GTypeName: 'FlyPieMenuEditor',
+    FlyPieMenuEditorBase = GObject.registerClass({
+        GTypeName: 'FlyPieMenuEditorBase',
         Signals: {
           // Emitted whenever an item got selected by the user. The index of the selected
           // item is passed as parameter.
-          'select': { param_types: [GObject.TYPE_INT]},
+          'select-item': { param_types: [GObject.TYPE_INT]},
           
           // Emitted whenever the edit-button of an item got clicked by the user. The
           // index of the to-be-edited item is passed as parameter.
-          'edit': { param_types: [GObject.TYPE_INT]},
+          'edit-item': { param_types: [GObject.TYPE_INT]},
 
           // Emitted whenever an item got deleted (usually due to an ending drag-and-drop
           // operation). It is not necessary to call the remove() method in response; the
           // item will be removed automatically.
           // The index of the deleted item is passed as parameter.
-          'remove': { param_types: [GObject.TYPE_INT]},
+          'remove-item': { param_types: [GObject.TYPE_INT]},
 
           // Emitted whenever a new item should be created because of a successful
           // internal drag-and-dop operation. A JSON representation of the dropped item
@@ -327,7 +377,7 @@ function registerWidgets() {
           'notification': { param_types: [GObject.TYPE_STRING]},
         },
       },
-      class FlyPieMenuEditor extends Gtk.Widget {
+      class FlyPieMenuEditor extends BASE_CLASS {
       // clang-format on
 
       // -------------------------------------------------------- constructor / destructor
@@ -337,6 +387,10 @@ function registerWidgets() {
       _init(params = {}) {
         super._init(params);
 
+        // Create a Gio.Settings object. This is required to use the correct font when
+        // drawing a text icon.
+        this._settings = utils.createSettings();
+
         // This list contains all currently visible items. The only exception are the
         // _centerItem and the _backButton which are not in this list but managed
         // separately.
@@ -345,15 +399,6 @@ function registerWidgets() {
 
         // This stores a reference to the currently selected item.
         this._selectedItem = null;
-
-        // Once new items are given via setItems, the old ones are kept around in this
-        // list to show them during the transition.
-        this._oldItems = [];
-
-        // This is used to clean up old items. If the items are longer than
-        // TRANSITION_DURATION in the _oldItems list, they will be invisible and can be
-        // removed safely.
-        this._lastHideTime = 0;
 
         // When this is set to true, vfunc_size_allocate() will be called repeatedly for
         // the TRANSITION_DURATION.
@@ -366,30 +411,42 @@ function registerWidgets() {
 
         // Here we create the icon and label which are shown if no menu is present.
         {
-          let icon  = new Gtk.Image({icon_name: 'face-crying-symbolic', pixel_size: 128});
-          let label = new Gtk.Label({label: _('No menus configured')});
-          label.add_css_class('title-3');
-          let description = new Gtk.Label(
+          const icon =
+              new Gtk.Image({icon_name: 'face-crying-symbolic', pixel_size: 128});
+          const label = new Gtk.Label({label: _('No menus configured')});
+          utils.addCSSClass(label, 'title-3');
+          const description = new Gtk.Label(
               {label: _('Create a new menu with the button in the top right corner.')});
-          description.add_css_class('caption');
+          utils.addCSSClass(description, 'caption');
 
           this._ifEmptyHint           = Gtk.Box.new(Gtk.Orientation.VERTICAL, 4);
           this._ifEmptyHint.vexpand   = true;
           this._ifEmptyHint.valign    = Gtk.Align.CENTER;
           this._ifEmptyHint.sensitive = false;
-          this._ifEmptyHint.append(icon);
-          this._ifEmptyHint.append(label);
-          this._ifEmptyHint.append(description);
+          utils.boxAppend(this._ifEmptyHint, icon);
+          utils.boxAppend(this._ifEmptyHint, label);
+          utils.boxAppend(this._ifEmptyHint, description);
 
-          this._ifEmptyHint.set_parent(this);
+          // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
+          // So we have add child items differently.
+          if (utils.gtk4()) {
+            this._ifEmptyHint.set_parent(this);
+          } else {
+            this.put(this._ifEmptyHint, 0, 0);
+          }
         }
 
         // Here we create the icon and label which are shown to highlight the add-new-item
         // button.
         {
-          let icon  = Gtk.Image.new_from_resource('/img/arrow-up-symbolic.svg');
-          let label = new Gtk.Label({label: _('Add a new item')});
-          label.add_css_class('caption');
+          let icon;
+          if (utils.gtk4()) {
+            icon = Gtk.Image.new_from_icon_name('arrow-up-symbolic');
+          } else {
+            icon = Gtk.Image.new_from_icon_name('arrow-up-symbolic', Gtk.IconSize.BUTTON);
+          }
+          const label = new Gtk.Label({label: _('Add a new item')});
+          utils.addCSSClass(label, 'caption');
 
           this._addItemHint            = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 4);
           this._addItemHint.hexpand    = true;
@@ -397,25 +454,33 @@ function registerWidgets() {
           this._addItemHint.valign     = Gtk.Align.START;
           this._addItemHint.sensitive  = false;
           this._addItemHint.margin_end = 20;
-          this._addItemHint.append(label);
-          this._addItemHint.append(icon);
+          this._addItemHint.margin_top = 8;
+          utils.boxAppend(this._addItemHint, label);
+          utils.boxAppend(this._addItemHint, icon);
 
-          this._addItemHint.set_parent(this);
+          // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
+          // So we have add child items differently.
+          if (utils.gtk4()) {
+            this._addItemHint.set_parent(this);
+          } else {
+            this.put(this._addItemHint, 0, 0);
+          }
         }
 
         // Now we set up the back-navigation button which is shown whenever we are in a
-        // submenu. Similar to the FlyPieMenuEditorItem, this is actually a Gtk.Revealer
-        // which we can use to show or hide the button.
+        // submenu.
         {
-          this._backButton = new Gtk.Revealer({
-            transition_type: Gtk.RevealerTransitionType.CROSSFADE,
+          this._backButton = new Gtk.Button({
             margin_start: 20,
             margin_end: 20,
             margin_top: 20,
             margin_bottom: 20,
-            reveal_child: false
           });
-          this._backButton.set_parent(this);
+          utils.addCSSClass(this._backButton, 'pill-button');
+          this._backButton.connect('clicked', (b) => {
+            // Navigate to the previous level when clicked.
+            this.emit('go-back');
+          });
 
           // Assign a state so that it gets scaled like the other child buttons.
           this._backButton.state = ItemState.CHILD;
@@ -428,7 +493,8 @@ function registerWidgets() {
             margin_top: 10,
             margin_bottom: 10,
           });
-          icon.set_draw_func((widget, ctx) => {
+
+          utils.setDrawFunc(icon, (widget, ctx) => {
             const width  = widget.get_allocated_width();
             const height = widget.get_allocated_height();
             const size   = Math.min(width, height);
@@ -438,27 +504,43 @@ function registerWidgets() {
               ctx.translate(-width / 2, -height / 2);
             }
             ctx.translate((width - size) / 2, (height - size) / 2);
-            const color = widget.get_style_context().get_color();
+            const color = utils.getColor(widget);
             utils.paintIcon(ctx, 'go-previous-symbolic', size, 1, 'Sans', color);
 
             return false;
           });
 
-          const button = new Gtk.Button();
-          button.add_css_class('pill-button');
-          button.set_child(icon);
-          button.connect('clicked', (b) => {
-            // Emit the 'go-back' signal when clicked.
-            this.emit('go-back');
-          });
+          utils.setChild(this._backButton, icon);
 
-          this._backButton.set_child(button);
+          // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
+          // So we have add child items differently.
+          if (utils.gtk4()) {
+            this._backButton.set_parent(this);
+          } else {
+            this.put(this._backButton, 0, 0);
+
+            // Make sure that the button is not shown automatically.
+            this._backButton.no_show_all = true;
+            icon.visible                 = true;
+          }
         }
 
         // The entire menu editor is a drop target. This is used both for internal
         // drag-and-drop of menu items and external drops for item creation based on URLs
-        // etc.
+        // etc. Setting up drag and drop is quite different on GTK3 / GTK4. Therefore this
+        // code looks a bit more difficult than it actually is. There are a few lambdas
+        // involved which are then connected to the various signals of the widget (GTK3)
+        // or the EventController (GTK4).
         {
+
+          // On GTK3, we need special drag and drop targets.
+          if (!utils.gtk4()) {
+            this._dndTargets = [
+              Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0),
+              Gtk.TargetEntry.new('text/uri-list', 0, 1),
+              Gtk.TargetEntry.new('text/plain', 0, 2),
+            ];
+          }
 
           // The index of the dragged item.
           this._dragIndex = null;
@@ -471,43 +553,33 @@ function registerWidgets() {
           this._dropRow    = null;
           this._dropColumn = null;
 
-          this._dropTarget =
-              new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-
-          // We accept strings: Menu items are represented with a JSON representation (the
-          // same format which is used for saving Fly-Pie's settings). External drops
-          // usually are URIs.
-          this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
-
-          // We accept everything :)
-          this._dropTarget.connect('accept', () => true);
-
           // When the user drags something across the widget, we re-arrange all items to
           // visually show where the new item would be created if dropped. In this
           // 'motion' callback, we compute the index where the data is supposed to be
           // dropped. The actual item positioning is later done in vfunc_size_allocate()
           // based on the computed index.
-          this._dropTarget.connect('motion', (t, x, y) => {
-            // If any of the below values changes during this callback, we will trigger an
-            // animation so that items move around smoothly.
+          const dragMotion = (x, y) => {
+            // If any of the below values changes during this callback, we will trigger
+            // an animation so that items move around smoothly.
             const lastDropRow    = this._dropRow;
             const lastDropColumn = this._dropColumn;
             const lastDropIndex  = this._dropIndex;
 
-            // Computing the _dropIndex in menu overview mode is rather simple as we just
-            // have to compute the row and column the pointer resides currently over.
+            // Computing the _dropIndex in menu overview mode is rather simple as we
+            // just have to compute the row and column the pointer resides currently
+            // over.
             if (this._inMenuOverviewMode()) {
 
-              // The grid is drawn centered. Here we make the coordinates relative to the
-              // grid and clamp the coordinates to the grid bounds.
+              // The grid is drawn centered. Here we make the coordinates relative to
+              // the grid and clamp the coordinates to the grid bounds.
               x -= this._gridOffsetX;
               y -= this._gridOffsetY;
               x = Math.max(0, Math.min(this._columnCount * ItemSize[ItemState.GRID], x));
               y = Math.max(0, Math.min(this._rowCount * ItemSize[ItemState.GRID], y));
 
-              // To allow for drops into items, the valid drop zones are between two items
-              // with a total width of half an item (one quarter from the one item and a
-              // quarter of the next item).
+              // To allow for drops into items, the valid drop zones are between two
+              // items with a total width of half an item (one quarter from the one item
+              // and a quarter of the next item).
               const dropZoneWidth = ItemSize[ItemState.GRID] / 4;
 
               // Compute the _drop* members if we are in a drop zone, else set them to
@@ -537,8 +609,8 @@ function registerWidgets() {
               // set to the appropriate index later.
               this._dropIndex = null;
 
-              // We compute the pointer-center distance. Items cannot be dropped too close
-              // to the center.
+              // We compute the pointer-center distance. Items cannot be dropped too
+              // close to the center.
               const distance = Math.sqrt(x * x + y * y);
               if (distance > ItemSize[ItemState.CENTER] / 2) {
 
@@ -559,14 +631,15 @@ function registerWidgets() {
                 // itemAngles. There are a few special cases when there are only a few
                 // items in the menu.
                 if (itemAngles.length == 0) {
-                  // If there is no current item, it's easy: We simply drop at index zero.
+                  // If there is no current item, it's easy: We simply drop at index
+                  // zero.
                   this._dropIndex = 0;
 
                 } else if (itemAngles.length == 1) {
                   // If there is one current item, we always drop at zero if it's an
-                  // internal drag (as we are obviously dragging the only item around). If
-                  // it's an external drag, we have to decide whether to drop before or
-                  // after.
+                  // internal drag (as we are obviously dragging the only item around).
+                  // If it's an external drag, we have to decide whether to drop before
+                  // or after.
                   if (this._dragIndex != null) {
                     this._dropIndex = 0;
                   } else {
@@ -577,10 +650,10 @@ function registerWidgets() {
                   }
 
                 } else if (itemAngles.length == 2 && this._dragIndex != null) {
-                  // If there are two items but one of them is dragged around, we have to
-                  // decide whether to drop before or after. However, 'after' means at
-                  // index 2, as the item addition happens before the item removal during
-                  // an internal drag-and-drop.
+                  // If there are two items but one of them is dragged around, we have
+                  // to decide whether to drop before or after. However, 'after' means
+                  // at index 2, as the item addition happens before the item removal
+                  // during an internal drag-and-drop.
                   this._dropIndex = (mouseAngle - itemAngles[0] < 90 ||
                                      mouseAngle - itemAngles[0] > 270) ?
                       0 :
@@ -604,9 +677,9 @@ function registerWidgets() {
                     const diff = wedgeEnd - wedgeStart;
 
                     // The drop zone wedges are considered to directly start at one item
-                    // and end at the next one. If however, there is a custom menu at one
-                    // side of the wedge, we at some padding to allow dropping into the
-                    // custom menu.
+                    // and end at the next one. If however, there is a custom menu at
+                    // one side of the wedge, we at some padding to allow dropping into
+                    // the custom menu.
                     let wedgeStartPadding = 0;
                     let wedgeEndPadding   = 0;
 
@@ -625,8 +698,8 @@ function registerWidgets() {
                         (i == itemAngles.length - 2 &&
                          this._dragIndex == itemAngles.length - 1);
 
-                    // The last wedge is basically split in the middle - if dropped in the
-                    // clockwise side, we will drop at index zero, if dropped in the
+                    // The last wedge is basically split in the middle - if dropped in
+                    // the clockwise side, we will drop at index zero, if dropped in the
                     // counter-clockwise side, we will drop after the last element.
                     if (lastWedge &&
                         ((mouseAngle >= wedgeStart + diff * 0.5 &&
@@ -652,28 +725,25 @@ function registerWidgets() {
               }
             }
 
-            // We need to reposition all items with a smooth animation if any of the below
-            // items changed during this callback.
+            // We need to reposition all items with a smooth animation if any of the
+            // below items changed during this callback.
             if (this._dropColumn != lastDropColumn || this._dropRow != lastDropRow ||
                 this._dropIndex != lastDropIndex) {
               this._restartAnimation = true;
             }
 
             this.queue_allocate();
-
-            // Return null if the drop at the current position is not possible.
-            return this._dropIndex == null ? null : Gdk.DragAction.MOVE;
-          });
+          };
 
           // When the pointer leaves the widget, we reset the _drop* members and update
           // the item layout.
-          this._dropTarget.connect('leave', () => {
-            // For external drag-and-drop events, 'leave' is called before 'drop'. We have
-            // to reset this._dropIndex in 'leave', to make sure that the items move back
-            // to their original position when the pointer leaves the drop area. However,
-            // we need this._dropIndex in 'drop' to fire the 'add-item' and 'add-data'
-            // signals. Therefore, we temporarily store this._dropIndex in
-            // this._lastDropIndex. This is only used a few lines below in the 'drop'
+          const dragLeave = () => {
+            // For external drag-and-drop events, 'leave' is called before 'drop'. We
+            // have to reset this._dropIndex in 'leave', to make sure that the items
+            // move back to their original position when the pointer leaves the drop
+            // area. However, we need this._dropIndex in 'drop' to fire the 'add-item'
+            // and 'add-data' signals. Therefore, we temporarily store this._dropIndex
+            // in this._lastDropIndex. This is only used a few lines below in the 'drop'
             // signal handler.
             this._lastDropIndex = this._dropIndex;
 
@@ -681,13 +751,13 @@ function registerWidgets() {
             this._dropRow    = null;
             this._dropIndex  = null;
             this.updateLayout();
-          });
+          };
 
-          // When an internal item or external data is dropped, either the 'drop-item' or
-          // 'drop-data' signals are emitted. There are several cases where this may fail;
-          // usually the 'notification' signal will be emitted to notify the user about
-          // the reason.
-          this._dropTarget.connect('drop', (t, what) => {
+          // When an internal item or external data is dropped, either the 'drop-item'
+          // or 'drop-data' signals are emitted. There are several cases where this may
+          // fail; usually the 'notification' signal will be emitted to notify the user
+          // about the reason.
+          const dragDrop = (value, internalDrag, containsUris) => {
             // See documentation of the 'leave' signal above.
             if (this._dropIndex == null) {
               this._dropIndex = this._lastDropIndex;
@@ -698,20 +768,20 @@ function registerWidgets() {
               return false;
             }
 
-            // For internal drop events, the dropped data is a JSON representation of the
-            // dropped item.
-            const internalDrag = t.get_drop().get_drag() != null;
+            // For internal drop events, the dropped data is a JSON representation of
+            // the dropped item.
             if (internalDrag) {
 
-              const config = JSON.parse(what);
+              const config = JSON.parse(value);
 
               // Do not allow top-level drops of actions.
               if (this._inMenuOverviewMode() &&
                   ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
 
                 this.emit(
-                    // Translators: This is shown as an in-app notification when the user
-                    // attempts to drag an action in the menu editor to the menu overview.
+                    // Translators: This is shown as an in-app notification when the
+                    // user attempts to drag an action in the menu editor to the menu
+                    // overview.
                     'notification', _('Actions cannot be turned into toplevel menus.'));
 
                 this._dropColumn = null;
@@ -720,7 +790,7 @@ function registerWidgets() {
                 return false;
               }
 
-              this.emit('drop-item', what, this._dropIndex);
+              this.emit('drop-item', value, this._dropIndex);
 
             } else {
 
@@ -729,8 +799,9 @@ function registerWidgets() {
 
                 this.emit(
                     'notification',
-                    // Translators: This is shown as an in-app notification when the user
-                    // attempts to drag external stuff to the menu editor's overview.
+                    // Translators: This is shown as an in-app notification when the
+                    // user attempts to drag external stuff to the menu editor's
+                    // overview.
                     _('You can only create new Action items inside of Custom Menus.'));
 
                 this._dropColumn = null;
@@ -741,14 +812,14 @@ function registerWidgets() {
 
               // If the dropped data contains a list of URIs, call the 'drop-data' once
               // for each item.
-              if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
-                what.split(/\r?\n/).forEach((line, i) => {
+              if (containsUris) {
+                value.split(/\r?\n/).forEach((line, i) => {
                   if (line != '') {
                     this.emit('drop-data', line, this._dropIndex + i);
                   }
                 });
               } else {
-                this.emit('drop-data', what, this._dropIndex);
+                this.emit('drop-data', value, this._dropIndex);
               }
             }
 
@@ -759,9 +830,84 @@ function registerWidgets() {
             this._dropIndex  = null;
 
             return true;
-          });
+          };
 
-          this.add_controller(this._dropTarget);
+          if (utils.gtk4()) {
+            this._dropTarget =
+                new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+
+            // We accept strings: Menu items are represented with a JSON representation
+            // (the same format which is used for saving Fly-Pie's settings). External
+            // drops usually are URIs.
+            this._dropTarget.set_gtypes([GObject.TYPE_STRING]);
+
+            // We accept everything :)
+            this._dropTarget.connect('accept', () => true);
+
+            this._dropTarget.connect('motion', (t, x, y) => {
+              dragMotion(x, y);
+
+              // Return null if the drop at the current position is not possible.
+              return this._dropIndex == null ? null : Gdk.DragAction.MOVE;
+            });
+
+
+            this._dropTarget.connect('leave', dragLeave);
+
+            this._dropTarget.connect('drop', (t, what) => {
+              const internalDrag = t.get_drop().get_drag() != null;
+              const containsUris =
+                  t.get_drop().formats.contain_mime_type('text/uri-list');
+              return dragDrop(what, internalDrag, containsUris);
+            });
+
+            this.add_controller(this._dropTarget);
+          } else {
+
+            this.drag_dest_set(0, this._dndTargets, Gdk.DragAction.MOVE);
+            this.drag_dest_set_track_motion(true);
+            this.connect('drag-leave', () => {
+              dragLeave();
+              this.drag_unhighlight();
+            });
+            this.connect('drag-data-received', (w, context, x, y, data, i, time) => {
+              // These numbers refer to the number in this._dndTargets.
+              const internalDrag = i == 0;
+              const containsUris = i == 1;
+              const success      = dragDrop(
+                  ByteArray.toString(data.get_data()), internalDrag, containsUris);
+              Gtk.drag_finish(
+                  context, success, context.get_selected_action() == Gdk.DragAction.MOVE,
+                  time);
+            });
+
+            this.connect('drag-drop', (w, context, x, y, time) => {
+              const availableTargets = context.list_targets();
+
+              for (let i = 0; i < this._dndTargets.length; i++) {
+                if (availableTargets.includes(this._dndTargets[i].target)) {
+                  this.drag_get_data(context, this._dndTargets[i].target, time);
+                  return;
+                }
+              }
+
+              this.drag_get_data(context, 'text/plain', time);
+            });
+
+            this.connect('drag-motion', (w, context, x, y, time) => {
+              dragMotion(x, y);
+
+              // Return false if the drop at the current position is not possible.
+              if (this._dropIndex == null) {
+                return false;
+              }
+
+              this.drag_highlight();
+
+              Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
+              return true;
+            });
+          }
         }
       }
 
@@ -774,34 +920,27 @@ function registerWidgets() {
 
       // This widget requests a width so that in overview mode at least four items can be
       // displayed per row. The height is requested so that all items can be shown at the
-      // given width.
-      vfunc_measure(orientation, for_size) {
-        if (this._inMenuOverviewMode()) {
-          if (orientation == Gtk.Orientation.HORIZONTAL) {
-            return [ItemSize[ItemState.GRID] * 4, ItemSize[ItemState.GRID] * 4, -1, -1];
-          }
+      // given width. However, this is implemented differently on GTK3 and GTK4.
+      // Therefore, there are two different versions of the FlyPieMenuEditor defined at
+      // the bottom of this file overriding the respective vfuncs.
 
-          // The possible amount of columns.
-          const columns = Math.floor(for_size / ItemSize[ItemState.GRID]);
-
-          // The required amount of rows.
-          const rows = Math.ceil(this._items.length / columns);
-
-          // The required height of the grid.
-          const gridHeight = rows * ItemSize[ItemState.GRID];
-          return [gridHeight, gridHeight, -1, -1];
-        }
-
-        // In menu-edit mode we simply return a square shaped region of the same size as
-        // the grid width.
-        return [ItemSize[ItemState.GRID] * 4, ItemSize[ItemState.GRID] * 4, -1, -1];
-      }
-
-      // This method is responsible for computing the positions of all display items.
+      // This method is responsible for computing the positions of all displayed items.
       // There are two completely different display modes: The menu overview mode and menu
       // edit mode. It considers the current _dropIndex so that an artificial gap is
       // created where a item is about to be dropped.
       vfunc_size_allocate(width, height, baseline) {
+
+        // On GTK3, the parameters are different. The first parameter is actually an
+        // allocation rectangle.
+        if (!utils.gtk4()) {
+          const allocation = width;
+
+          // We also have to chain-up to the base class.
+          super.vfunc_size_allocate(allocation);
+
+          height = allocation.height;
+          width  = allocation.width;
+        }
 
         // This helper lambda assigns animated values to the given item which can be used
         // to smoothly animate the item position in the given time to the specified
@@ -945,56 +1084,14 @@ function registerWidgets() {
         // Different things have to be done for the different transitions. You can read
         // more in the documentation of TransitionType at the top of this file.
         switch (this._upcomingTransition) {
-          // Transition from overview to top-level. The menu which was selected for
-          // editing is moved to the center.
-          case TransitionType.TRANSITION_A:
-
-            // Find the old item which corresponds to the new center item.
-            for (let i = 0; i < this._oldItems.length; i++) {
-              const item = this._oldItems[i];
-              if (item.getConfig().name == this._centerItem.getConfig().name &&
-                  item.getConfig().icon == this._centerItem.getConfig().icon) {
-
-                const x = centerX - ItemSize[item.state] / 2;
-                const y = centerY - ItemSize[item.state] / 2;
-                setAnimation(item, time, x, y);
-                break;
-              }
-            }
-            break;
-
-          // Transition from top-level to overview. The previous center is moved to its
-          // new grid position.
-          case TransitionType.TRANSITION_B:
-
-            // Find the old item which corresponds to the newly selected item.
-            for (let i = 0; i < this._oldItems.length; i++) {
-              const item = this._oldItems[i];
-              if (item.getConfig().name == this._selectedItem.getConfig().name &&
-                  item.getConfig().icon == this._selectedItem.getConfig().icon) {
-
-                // Get the position where the old item should move to.
-                const x = this._selectedItem.x.end;
-                const y = this._selectedItem.y.end;
-                setAnimation(item, time, x, y);
-                break;
-              }
-            }
-
-            break;
-
           // Transitions between deeper menu levels are basically the same, only the
           // direction in which items are moved differs. As this angle is set in
           // setItems(), we do not have to differentiate here.
+          case TransitionType.TRANSITION_B:
           case TransitionType.TRANSITION_C:
-          case TransitionType.TRANSITION_D:
             const angle   = this._transitionAngle * Math.PI / 180;
             const offsetX = Math.floor(Math.sin(angle) * radius);
             const offsetY = -Math.floor(Math.cos(angle) * radius);
-
-            this._oldItems.forEach(item => {
-              setAnimation(item, time, item.x.end + offsetX, item.y.end + offsetY);
-            });
 
             this._items.forEach(item => {
               item.x.start -= offsetX;
@@ -1006,10 +1103,7 @@ function registerWidgets() {
 
             break;
 
-          // Any other transition. This usually means that levels were skipped while
-          // navigating up. This transitions simply fades the old items out and the new
-          // items in. This does not require anything here, as fading happens always.
-          case TransitionType.TRANSITION_E:
+          // All other transitions do not require moving the items.
           default:
             break;
         }
@@ -1019,9 +1113,9 @@ function registerWidgets() {
 
         // -------------------------------------------------------------------------------
 
-        // Now, in the last part, we will call _updateItemPositions() to actually move the
+        // Now, in the last part, we will call _allocateChildren() to actually move the
         // items according to their animated values. If _restartAnimation is set, a
-        // timeout will be used to call _updateItemPositions repeatedly.
+        // timeout will be used to call _allocateChildren repeatedly.
 
         if (this._restartAnimation) {
 
@@ -1036,7 +1130,7 @@ function registerWidgets() {
           // Create a new timeout which will cancel itself once all animations are done.
           this._updateTimeout = this.add_tick_callback(() => {
             const time        = this.get_frame_clock().get_frame_time() / 1000;
-            const allFinished = this._updateItemPositions(time);
+            const allFinished = this._allocateChildren(time);
 
             if (allFinished) {
               this._updateTimeout = -1;
@@ -1046,7 +1140,7 @@ function registerWidgets() {
             return true;
           });
         }
-        this._updateItemPositions(time);
+        this._allocateChildren(time);
       }
 
       // ---------------------------------------------------------------- public interface
@@ -1099,55 +1193,35 @@ function registerWidgets() {
           }
         }
 
-        if (this._centerItem == null && parentAngle == null && centerConfig != null) {
-          // Transition from overview to top-level.
-          this._upcomingTransition = TransitionType.TRANSITION_A;
-        } else if (
-            this._centerItem != null && this._parentAngle == null &&
-            centerConfig == null) {
-          // Transition from top-level to overview.
-          this._upcomingTransition = TransitionType.TRANSITION_B;
-        } else if (wentOneLevelDeeper) {
+        if (this._centerItem != null && wentOneLevelDeeper) {
           // Transition one level deeper.
-          this._upcomingTransition = TransitionType.TRANSITION_C;
+          this._upcomingTransition = TransitionType.TRANSITION_B;
           this._transitionAngle    = parentAngle;
-        } else if (wentOneLevelUp) {
+        } else if (centerConfig != null && wentOneLevelUp) {
           // Transition one level up.
-          this._upcomingTransition = TransitionType.TRANSITION_D;
+          this._upcomingTransition = TransitionType.TRANSITION_C;
           this._transitionAngle    = (this._parentAngle + 180) % 360;
         } else {
           // Any other transition, usually multiple levels up at once.
-          this._upcomingTransition = TransitionType.TRANSITION_E;
+          this._upcomingTransition = TransitionType.TRANSITION_A;
         }
 
         // -------------------------------------------------------------------------------
 
-        // In the next part we will hide all existing items. They are not immediately
-        // removed as they need to hang around until the transition is finished.
-
-        // Clear old items which are now completely invisible.
-        if (this.get_frame_clock()) {
-          const now = this.get_frame_clock().get_frame_time();
-          if (this._lastHideTime + TRANSITION_DURATION < now) {
-            this._oldItems.forEach(item => {
-              item.unparent();
-            });
-            this._oldItems = [];
-          }
-          this._lastHideTime = now;
-        }
-
-        // Append all current items to the list of old items.
-        this._oldItems.push(...this._items);
+        // In this part we will hide all existing items.
+        const oldItems = [...this._items];
 
         if (this._centerItem) {
-          this._oldItems.push(this._centerItem);
+          oldItems.push(this._centerItem);
         }
 
-        // Make all old items insensitive and start their fade-out animation.
-        this._oldItems.forEach(item => {
-          item.reveal_child = false;
-          item.sensitive    = false;
+        // This is done differently on GTK3 / GTK4.
+        oldItems.forEach(item => {
+          if (utils.gtk4()) {
+            item.unparent();
+          } else {
+            this.remove(item);
+          }
         });
 
         // Reset all currently displayed items.
@@ -1183,11 +1257,15 @@ function registerWidgets() {
           }
         }
 
+        // -------------------------------------------------------------------------------
+
         // Last but not least, update the back-navigation button.
-        this._parentAngle             = parentAngle;
-        this._backButton.reveal_child = parentAngle != undefined;
+
+        this._parentAngle        = parentAngle;
+        this._backButton.visible = parentAngle != undefined;
+
         if (parentAngle != undefined) {
-          this._backButton.get_child().get_child().queue_draw();
+          this._backButton.get_child().queue_draw();
         }
 
         // Finally, queue up a complete re-layout.
@@ -1196,7 +1274,7 @@ function registerWidgets() {
 
       // Adds a new item to the list of currently displayed items at the given index. The
       // new item will be automatically selected.
-      add(config, where) {
+      addItem(config, where) {
 
         // Create the new item.
         const item = this._createItem(
@@ -1220,14 +1298,18 @@ function registerWidgets() {
       }
 
       // Deletes the item at the given index.
-      remove(which) {
+      removeItem(which) {
         const [removed] = this._items.splice(which, 1);
 
         if (removed == this._selectedItem) {
           this._selectedItem = null;
         }
 
-        removed.unparent();
+        if (utils.gtk4()) {
+          removed.unparent();
+        } else {
+          this.remove(removed);
+        }
       }
 
       // Updates the currently selected item with the data from the given configuration.
@@ -1256,13 +1338,24 @@ function registerWidgets() {
         // Create the item.
         const item = new FlyPieMenuEditorItem(itemState);
         item.setConfig(config);
-        item.set_parent(this);
+
+        // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
+        // So we have add child items differently.
+        if (utils.gtk4()) {
+          item.set_parent(this);
+        } else {
+          this.put(item, 0, 0);
+        }
         item.set_reveal_child(true);
 
         // Assign the new item's toggle button to our radio button group so that only one
         // item can be selected at any time.
         if (this._radioGroup) {
-          item.button.set_group(this._radioGroup);
+          if (utils.gtk4()) {
+            item.button.set_group(this._radioGroup);
+          } else {
+            item.button.join_group(this._radioGroup);
+          }
         } else {
           this._radioGroup = item.button;
         }
@@ -1271,105 +1364,142 @@ function registerWidgets() {
         if (config.type == 'CustomMenu') {
           item.editButton.connect('clicked', () => {
             this._selectedItem = item;
-            this.emit('edit', this._items.indexOf(item));
+            this.emit('edit-item', this._items.indexOf(item));
           });
         }
 
         // Now we set up the drag source. Most items are draggable, except for center
-        // items.
+        // items. The drag source provides a stringified JSON version of the item config.
+        // Setting up drag and drop is quite different on GTK3 / GTK4. Therefore this code
+        // looks a bit more difficult than it actually is. There are a few lambdas
+        // involved which are then connected to the various signals of the widget (GTK3)
+        // or the EventController (GTK4).
         if (itemState != ItemState.CENTER) {
 
-          // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does
-          // not work on X11. If we added the copy action on X11, it would be chosen as
-          // default action and the user would have to hold down shift in order to move
-          // items...
-          let actions = Gdk.DragAction.MOVE;
-          if (utils.getSessionType() == 'wayland') {
-            actions |= Gdk.DragAction.COPY;
-          }
-
-          let dragSource = new Gtk.DragSource({actions: actions});
-
-          // The drag source provides a stringified JSON version of the item config. The
-          // item's icon is used as drag graphic.
-          dragSource.connect('prepare', (s, x, y) => {
-            s.set_icon(Gtk.WidgetPaintable.new(item.icon), x, y);
-            return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
-          });
-
-          // At drag begin, we make the icon translucent in overview mode and invisible in
-          // menu edit mode.
-          dragSource.connect('drag-begin', () => {
+          // At drag begin, we make the icon translucent in overview mode and invisible
+          // in menu edit mode.
+          const dragBegin = () => {
             item.opacity    = this._inMenuOverviewMode() ? 0.2 : 0.0;
             item.sensitive  = false;
             this._dragIndex = this._items.indexOf(item);
             this.updateLayout();
-          });
+          };
 
-          // On drag end we either remove the dragged object or make it visible again.
-          dragSource.connect('drag-end', (s, drag, deleteData) => {
-            if (deleteData) {
-              let removeIndex = this._items.indexOf(item);
-              this.remove(removeIndex);
-              this.emit('remove', removeIndex);
-            } else {
-              item.opacity   = 1;
-              item.sensitive = true;
-            }
+          // If the drag was a move action, the item will be deleted.
+          const dragDeleteData = () => {
+            let removeIndex = this._items.indexOf(item);
+            this.removeItem(removeIndex);
+            this.emit('remove-item', removeIndex);
+          };
 
-            this._dragIndex = null;
-          });
-
-          // If the drag operation is canceled, we make the item visible again and update
-          // the layout.
-          dragSource.connect('drag-cancel', () => {
+          // If the drag operation is ended, we make the item visible again and
+          // update the layout.
+          const dragEnd = () => {
             item.opacity    = 1;
             item.sensitive  = true;
             this._dragIndex = null;
             this.updateLayout();
-            return false;
-          });
+          };
 
-          // For some reason, the drag source does not work anymore once the
-          // ToggleButton was toggled. Resetting the EventController seems to be a
-          // working workaround.
-          item.button.connect('clicked', (b) => {
-            dragSource.reset();
-          });
+          // Now connect all the handlers from above.
+          if (utils.gtk4()) {
 
-          item.button.add_controller(dragSource);
+            // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does
+            // not work on X11. If we added the copy action on X11, it would be chosen as
+            // default action and the user would have to hold down shift in order to move
+            // items...
+            let actions = Gdk.DragAction.MOVE;
+            if (utils.getSessionType() == 'wayland') {
+              actions |= Gdk.DragAction.COPY;
+            }
+
+            let dragSource = new Gtk.DragSource({actions: actions});
+
+            // Connect all handlers.
+            dragSource.connect('drag-begin', dragBegin);
+            dragSource.connect('drag-cancel', dragEnd);
+            dragSource.connect('drag-end', (s, drag, deleteData) => {
+              if (deleteData) {
+                dragDeleteData();
+              }
+
+              dragEnd();
+            });
+
+            // The item's icon is used as drag graphic.
+            dragSource.connect('prepare', (s, x, y) => {
+              s.set_icon(Gtk.WidgetPaintable.new(item.icon), x, y);
+              return Gdk.ContentProvider.new_for_value(JSON.stringify(item.getConfig()));
+            });
+
+            // For some reason, the drag source does not work anymore once the
+            // ToggleButton was toggled. Resetting the EventController seems to be a
+            // working workaround.
+            item.button.connect('clicked', (b) => {
+              dragSource.reset();
+            });
+
+            item.button.add_controller(dragSource);
+
+          } else {
+
+            // Items provide data in the custom 'FLY-PIE-ITEM' format (which is actually
+            // json data).
+            item.button.drag_source_set(
+                Gdk.ModifierType.BUTTON1_MASK,
+                [Gtk.TargetEntry.new('FLY-PIE-ITEM', 0, 0)],
+                Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
+
+            // Connect all handlers.
+            item.button.connect('drag-data-delete', dragDeleteData);
+            item.button.connect('drag-failed', dragEnd);
+            item.button.connect('drag-end', dragEnd);
+            item.button.connect('drag-data-get', (w, c, data) => {
+              data.set(
+                  'FLY-PIE-ITEM', 8,
+                  ByteArray.fromString(JSON.stringify(item.getConfig())));
+            });
+
+            // The item's icon is used as drag graphic.
+            item.button.connect('drag-begin', () => {
+              const font  = this._settings.get_string('font');
+              const color = utils.getColor(item.button);
+              const size  = Math.min(
+                  item.icon.get_allocated_width(), item.icon.get_allocated_height());
+              const surface = utils.createIcon(item.getConfig().icon, size, font, color);
+              const pixbuf  = Gdk.pixbuf_get_from_surface(surface, 0, 0, size, size);
+              item.button.drag_source_set_icon_pixbuf(pixbuf);
+              dragBegin();
+            });
+          }
         }
 
-        // Non-center items of type 'CustomMenu' can also receive drops.
+        // Non-center items of type 'CustomMenu' can also receive drops. The items type
+        // could theoretically change at runtime when the setConfig() method is called.
+        // Therefore, we check the type in the drop handler and not right here in the
+        // beginning.
         if (itemState != ItemState.CENTER) {
-          const dropTarget =
-              new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-          dropTarget.set_gtypes([GObject.TYPE_STRING]);
 
-          // We accept everything as long as the item is a custom menu.
-          dropTarget.connect('accept', () => item.getConfig().type == 'CustomMenu');
-
-          // When something is dropped, we either emit 'drop-data-into' (for external drop
-          // events) or 'drop-data-into' (for internal drop events).
-          dropTarget.connect('drop', (t, what) => {
+          // When something is dropped, we either emit 'drop-data-into' (for external
+          // drop events) or 'drop-data-into' (for internal drop events).
+          const dragDrop = (value, internalDrag, containsUris) => {
             const dropIndex = this._items.indexOf(item);
 
-            const internalDrag = t.get_drop().get_drag() != null;
             if (internalDrag) {
-              this.emit('drop-item-into', what, dropIndex);
+              this.emit('drop-item-into', value, dropIndex);
 
             } else {
 
               // If the external drop event provides a list of URIs, we call the signal
               // once for each entry.
-              if (t.get_drop().formats.contain_mime_type('text/uri-list')) {
-                what.split(/\r?\n/).forEach(line => {
+              if (containsUris) {
+                value.split(/\r?\n/).forEach(line => {
                   if (line != '') {
                     this.emit('drop-data-into', line, dropIndex);
                   }
                 });
               } else {
-                this.emit('drop-data-into', what, dropIndex);
+                this.emit('drop-data-into', value, dropIndex);
               }
             }
 
@@ -1383,21 +1513,78 @@ function registerWidgets() {
             this._dropIndex  = null;
 
             return true;
-          });
+          };
 
-          // Highlight the button if the pointer moves over it.
-          dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+          // Now connect the handler. This differs on GTK3 / GTK4.
+          if (utils.gtk4()) {
 
-          item.button.add_controller(dropTarget);
+            const dropTarget =
+                new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+            dropTarget.set_gtypes([GObject.TYPE_STRING]);
+
+            // We accept everything as long as the item is a custom menu.
+            dropTarget.connect('accept', () => item.getConfig().type == 'CustomMenu');
+
+            dropTarget.connect('drop', (t, what) => {
+              const internalDrag = t.get_drop().get_drag() != null;
+              const containsUris =
+                  t.get_drop().formats.contain_mime_type('text/uri-list');
+              return dragDrop(what, internalDrag, containsUris);
+            });
+
+            // Highlight the button if the pointer moves over it.
+            dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+
+            item.button.add_controller(dropTarget);
+
+          } else {
+
+            item.button.drag_dest_set(
+                Gtk.DestDefaults.DROP, this._dndTargets, Gdk.DragAction.MOVE);
+            item.button.drag_dest_set_track_motion(true);
+
+            item.button.connect(
+                'drag-data-received', (w, context, x, y, data, i, time) => {
+                  // These numbers refer to the number in this._dndTargets.
+                  const internalDrag = i == 0;
+                  const containsUris = i == 1;
+                  dragDrop(
+                      ByteArray.toString(data.get_data()), internalDrag, containsUris);
+                });
+
+            // We accept everything as long as the item is a custom menu.
+            item.button.connect('drag-motion', (w, context, x, y, time) => {
+              if (item.getConfig().type != 'CustomMenu') {
+                return false;
+              }
+
+              // Draw a highlight around the button.
+              item.button.drag_highlight();
+
+              // Prefer a move action.
+              Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
+
+              return true;
+            });
+
+            item.button.connect('drag-leave', () => {
+              item.button.drag_unhighlight();
+            });
+          }
         }
 
         // Emit the 'select' signal when the button is pressed.
         item.button.connect('clicked', (b) => {
           if (b.active) {
             this._selectedItem = item;
-            this.emit('select', this._items.indexOf(item));
+            this.emit('select-item', this._items.indexOf(item));
           }
         });
+
+        // Show all children on GTK3.
+        if (!utils.gtk4()) {
+          item.show_all();
+        }
 
         return item;
       }
@@ -1483,7 +1670,7 @@ function registerWidgets() {
       // Calls size_allocate() on all child items of this. For the position of each item
       // the AnimatedValues are queried, the size of each item depends on its ItemState.
       // Returns true if all animations are done.
-      _updateItemPositions(time) {
+      _allocateChildren(time) {
         let allFinished = true;
 
         // This will be called once for each item.
@@ -1498,13 +1685,11 @@ function registerWidgets() {
             allFinished &= item.y.isFinished(time);
           }
 
-          item.size_allocate(allocation, -1);
+          utils.sizeAllocate(item, allocation);
         };
 
-        // Update the position of all current items, old items, the center item and the
-        // back button.
+        // Update the position of all current items, the center item and the back button.
         this._items.forEach(impl);
-        this._oldItems.forEach(impl);
 
         impl(this._backButton);
 
@@ -1515,11 +1700,103 @@ function registerWidgets() {
         // Update the allocations of the various hint labels.
         const allocation =
             new Gdk.Rectangle({x: 0, y: 0, width: this._width, height: this._height});
-        this._ifEmptyHint.size_allocate(allocation, -1);
-        this._addItemHint.size_allocate(allocation, -1);
+        utils.sizeAllocate(this._ifEmptyHint, allocation);
+        utils.sizeAllocate(this._addItemHint, allocation);
 
         return allFinished;
       }
     });
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////
+  // As mentioned in the description of the FlyPieMenuEditorBase class, we need to      //
+  // override different vfuncs on GTK3 / GTK4. Therefore we derive different            //
+  // FlyPieMenuEditors for GTK3 and GTK4.                                               //
+  ////////////////////////////////////////////////////////////////////////////////////////
+
+  if (GObject.type_from_name('FlyPieMenuEditor') == null) {
+
+    const MIN_GRID_SIZE = ItemSize[ItemState.GRID] * 4;
+
+    if (utils.gtk4()) {
+
+      ////////////////////////////////////////////////////////////////////////////////////
+      // The GTK4 FlyPieMenuEditor.                                                     //
+      ////////////////////////////////////////////////////////////////////////////////////
+
+      GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
+                            class FlyPieMenuEditor extends FlyPieMenuEditorBase {
+        // ---------------------------------------------------- overridden virtual methods
+
+        // This computes the required hight for a given width when in menu overview mode.
+        // In all other cases it simply returns the size required to fit 4x4 grid items.
+        vfunc_measure(orientation, for_size) {
+          if (this._inMenuOverviewMode()) {
+            if (orientation == Gtk.Orientation.HORIZONTAL) {
+              return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
+            }
+
+            // The possible amount of columns.
+            const columns = Math.floor(for_size / ItemSize[ItemState.GRID]);
+
+            // The required amount of rows.
+            const rows = Math.ceil(this._items.length / columns);
+
+            // The required height of the grid.
+            const gridHeight = rows * ItemSize[ItemState.GRID];
+            return [gridHeight, gridHeight, -1, -1];
+          }
+
+          // In menu-edit mode we simply return a square shaped region of the same size as
+          // the grid width.
+          return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
+        }
+      });
+
+    } else {
+
+      ////////////////////////////////////////////////////////////////////////////////////
+      // The GTK3 FlyPieMenuEditor.                                                     //
+      ////////////////////////////////////////////////////////////////////////////////////
+
+      GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
+                            class FlyPieMenuEditor extends FlyPieMenuEditorBase {
+        // ---------------------------------------------------- overridden virtual methods
+
+        // This computes the required hight for a given width when in menu overview mode.
+        vfunc_get_preferred_height_for_width(width) {
+          if (this._inMenuOverviewMode()) {
+            // The possible amount of columns.
+            const columns = Math.floor(width / ItemSize[ItemState.GRID]);
+
+            // The required amount of rows.
+            const rows = Math.ceil(this._items.length / columns);
+
+            // The required height of the grid.
+            const gridHeight = rows * ItemSize[ItemState.GRID];
+            return [gridHeight, gridHeight];
+          }
+
+          // In menu-edit mode we simply return a square shaped region of the same size as
+          // the grid width.
+          return [MIN_GRID_SIZE, MIN_GRID_SIZE];
+        }
+
+        // In all other cases we simply return the size required to fit 4x4 grid items.
+        vfunc_get_preferred_height() {
+          return [MIN_GRID_SIZE, MIN_GRID_SIZE];
+        }
+
+        // In all other cases we simply return the size required to fit 4x4 grid items.
+        vfunc_get_preferred_width() {
+          return [MIN_GRID_SIZE, MIN_GRID_SIZE];
+        }
+
+        // In all other cases we simply return the size required to fit 4x4 grid items.
+        vfunc_get_preferred_width_for_height(height) {
+          return [MIN_GRID_SIZE, MIN_GRID_SIZE];
+        }
+      });
+    }
   }
 }

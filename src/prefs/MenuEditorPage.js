@@ -9,6 +9,7 @@
 'use strict';
 
 const {GObject, Gdk, GLib, Gtk, Gio} = imports.gi;
+const ByteArray                      = imports.byteArray;
 
 const Me                  = imports.misc.extensionUtils.getCurrentExtension();
 const utils               = Me.imports.src.common.utils;
@@ -118,7 +119,7 @@ var MenuEditorPage = class MenuEditorPage {
       grid.attach(name, 1, 0, 1, 1);
       grid.attach(subtitle, 1, 1, 1, 1);
 
-      row.set_child(grid);
+      utils.setChild(row, grid);
 
       // The name is important - this is later used to identify the type of the
       // item which is to be created.
@@ -151,6 +152,11 @@ var MenuEditorPage = class MenuEditorPage {
 
       this._builder.get_object('add-action-list').sensitive = !inMenuOverviewMode;
     });
+
+    // On GTK3, we have to show the widgets.
+    if (!utils.gtk4()) {
+      popover.foreach(w => w.show_all());
+    }
   }
 
   // Initialize the dialogs required for importing and exporting the menu configuration.
@@ -160,7 +166,7 @@ var MenuEditorPage = class MenuEditorPage {
     this._builder.get_object('export-menu-config-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
         action: Gtk.FileChooserAction.SAVE,
-        transient_for: button.get_root(),
+        transient_for: utils.getRoot(button),
         modal: true
       });
 
@@ -203,7 +209,7 @@ var MenuEditorPage = class MenuEditorPage {
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
-              transient_for: button.get_root(),
+              transient_for: utils.getRoot(button),
               modal: true,
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
@@ -218,14 +224,19 @@ var MenuEditorPage = class MenuEditorPage {
         dialog.destroy();
       });
 
-      dialog.show();
+      // Showing the dialog is different on GTK3 / GTK4...
+      if (utils.gtk4()) {
+        dialog.show();
+      } else {
+        dialog.show_all();
+      }
     });
 
     // Open a load-dialog when the import-config button is pressed.
     this._builder.get_object('import-menu-config-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
         action: Gtk.FileChooserAction.OPEN,
-        transient_for: button.get_root(),
+        transient_for: utils.getRoot(button),
         modal: true
       });
 
@@ -273,7 +284,7 @@ var MenuEditorPage = class MenuEditorPage {
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
-              transient_for: button.get_root(),
+              transient_for: utils.getRoot(button),
               modal: true,
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
@@ -413,7 +424,7 @@ var MenuEditorPage = class MenuEditorPage {
       });
 
       // Don't show new tips when the window got closed.
-      const showNext = label.get_root().visible;
+      const showNext = utils.getRoot(label).visible;
 
       if (!showNext) {
         this._infoLabelTimeoutA = null;
@@ -448,16 +459,21 @@ var MenuEditorPage = class MenuEditorPage {
       iconSelectDialog.hide();
     });
 
+    // On GTK3, we have to show all children of the dialog manually.
+    if (!utils.gtk4()) {
+      iconSelectDialog.foreach(w => w.show_all());
+    }
+
     // The icon-select dialog is shown when the corresponding button is pressed.
     this._builder.get_object('icon-select-button').connect('clicked', () => {
       iconSelectDialog.set_transient_for(
-          this._builder.get_object('main-notebook').get_root());
+          utils.getRoot(this._builder.get_object('main-notebook')));
       iconSelectDialog.set_icon(this._builder.get_object('icon-name').text);
       iconSelectDialog.show();
     });
 
     // Initialize the icon at the top of the settings sidebar.
-    this._builder.get_object('item-icon-preview').set_draw_func((widget, ctx) => {
+    utils.setDrawFunc(this._builder.get_object('item-icon-preview'), (widget, ctx) => {
       if (this._selectedItem) {
         const size =
             Math.min(widget.get_allocated_width(), widget.get_allocated_height());
@@ -465,7 +481,7 @@ var MenuEditorPage = class MenuEditorPage {
             (widget.get_allocated_width() - size) / 2,
             (widget.get_allocated_height() - size) / 2);
         const font  = this._settings.get_string('font');
-        const color = widget.get_style_context().get_color();
+        const color = utils.getColor(widget);
         utils.paintIcon(ctx, this._selectedItem.icon, size, 1, font, color);
       }
       return false;
@@ -474,7 +490,7 @@ var MenuEditorPage = class MenuEditorPage {
     // Redraw the icon when the icon name input field is changed. Also, save the menu
     // configuration and update the menu editor widget accordingly.
     this._builder.get_object('icon-name').connect('notify::text', (widget) => {
-      if (!this._updatingSidebar) {
+      if (!this._updatingSidebar && this._selectedItem) {
         this._selectedItem.icon = widget.text;
         this._editor.updateSelected(this._selectedItem);
         this._saveMenuConfiguration();
@@ -485,7 +501,7 @@ var MenuEditorPage = class MenuEditorPage {
     // Save the menu configuration and update the menu editor widget when the name of an
     // item is changed.
     this._builder.get_object('item-name').connect('notify::text', (widget) => {
-      if (!this._updatingSidebar) {
+      if (!this._updatingSidebar && this._selectedItem) {
         this._selectedItem.name = widget.text;
         this._editor.updateSelected(this._selectedItem);
 
@@ -505,7 +521,7 @@ var MenuEditorPage = class MenuEditorPage {
     // angle amongst all siblings preceding the selected item; maxAngle is set to the
     // smallest fixed angle amongst siblings after the selected item.
     this._builder.get_object('item-angle').connect('notify::value', (adjustment) => {
-      if (!this._updatingSidebar) {
+      if (!this._updatingSidebar && this._selectedItem) {
         let minAngle = -1;
         let maxAngle = 360;
 
@@ -555,7 +571,7 @@ var MenuEditorPage = class MenuEditorPage {
           this._saveMenuConfiguration();
         }
       });
-      this._builder.get_object('menu-shortcut-box').append(box);
+      utils.boxAppend(this._builder.get_object('menu-shortcut-box'), box);
       this._menuShortcutLabel = label;
     }
   }
@@ -568,7 +584,7 @@ var MenuEditorPage = class MenuEditorPage {
     this._editor = this._builder.get_object('menu-editor');
 
     // If an item is selected, we update the settings sidebar accordingly.
-    this._editor.connect('select', (e, which) => {
+    this._editor.connect('select-item', (e, which) => {
       if (which >= 0) {
         this._selectedItem = this._getCurrentConfigs()[which];
       } else {
@@ -579,7 +595,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     // If an item is selected for editing, we push it to the menu path, update sidebar and
     // breadcrumbs, and make the menu editor show the newly visible children.
-    this._editor.connect('edit', (e, which) => {
+    this._editor.connect('edit-item', (e, which) => {
       this._selectedItem = this._getCurrentConfigs()[which];
       this._menuPath.push(this._selectedItem);
       this._updateSidebar();
@@ -591,7 +607,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     // If an item is removed, we may have to hide the sidebar and we will save the
     // resulting menu configuration.
-    this._editor.connect('remove', (e, which) => {
+    this._editor.connect('remove-item', (e, which) => {
       const [removed] = this._getCurrentConfigs().splice(which, 1);
       if (removed == this._selectedItem) {
         this._selectedItem = null;
@@ -642,35 +658,58 @@ var MenuEditorPage = class MenuEditorPage {
     this._editor.connect('notification', (e, text) => this._showNotification(text));
 
     // Initialize the drop target of the trash area. It's pretty simple, it just accepts
-    // any internal drag operation.
+    // any internal drag operation. Only slight differences between GTK3 and GTK4...
     {
       const trash = this._builder.get_object('menu-editor-trash');
-      const dropTarget =
-          new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-      dropTarget.set_gtypes([GObject.TYPE_STRING]);
-      dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
-      dropTarget.connect('drop', () => true);
-      dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
-      trash.add_controller(dropTarget);
+
+      if (utils.gtk4()) {
+        const dropTarget =
+            new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+        dropTarget.set_gtypes([GObject.TYPE_STRING]);
+        dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
+        dropTarget.connect('drop', () => true);
+        dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+        trash.add_controller(dropTarget);
+      } else {
+        trash.drag_dest_set(
+            Gtk.DestDefaults.ALL,
+            [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
+            Gdk.DragAction.MOVE);
+      }
     }
 
     // The stash area is slightly more complex, as a new stash widget needs to be created
-    // on drop events.
+    // on drop events. Only slight differences between GTK3 and GTK4...
     {
       const stash = this._builder.get_object('menu-editor-stash');
-      const dropTarget =
-          new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-      dropTarget.set_gtypes([GObject.TYPE_STRING]);
-      dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
-      dropTarget.connect('drop', (t, value) => {
+
+      const handler = (value) => {
         const config = JSON.parse(value);
         this._stashedConfigs.push(config);
         this._addStashWidget(config);
         this._saveStashConfiguration();
         return true;
-      });
-      dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
-      stash.add_controller(dropTarget);
+      };
+
+      if (utils.gtk4()) {
+        const dropTarget =
+            new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+        dropTarget.set_gtypes([GObject.TYPE_STRING]);
+        dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
+        dropTarget.connect('drop', (t, value) => handler(value));
+        dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+        stash.add_controller(dropTarget);
+      } else {
+        stash.drag_dest_set(
+            Gtk.DestDefaults.ALL,
+            [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
+            Gdk.DragAction.MOVE);
+        stash.connect('drag-data-received', (w, context, x, y, data, i, time) => {
+          handler(ByteArray.toString(data.get_data()));
+          Gtk.drag_finish(
+              context, true, context.get_selected_action() == Gdk.DragAction.MOVE, time);
+        });
+      }
     }
   }
 
@@ -777,7 +816,12 @@ var MenuEditorPage = class MenuEditorPage {
           }
         });
 
-        revealer.set_child(newChild);
+        // We have to show the new child on GTK3 manually.
+        if (!utils.gtk4()) {
+          newChild.show_all();
+        }
+
+        utils.setChild(revealer, newChild);
       }
 
       this._updatingSidebar = false;
@@ -791,14 +835,12 @@ var MenuEditorPage = class MenuEditorPage {
     const container = this._builder.get_object('menu-editor-breadcrumbs');
 
     // Clear the container first.
-    while (container.get_first_child() != null) {
-      container.remove(container.get_first_child());
-    }
+    utils.clearChildren(container);
 
     // As first item we always create a home button which leads to the menu overview.
     {
       const button = new Gtk.Button();
-      button.add_css_class('menu-editor-path-item');
+      utils.addCSSClass(button, 'menu-editor-path-item');
 
       // Interaction is only possible if there is a menu currently in edit mode.
       if (this._menuPath.length > 0) {
@@ -806,16 +848,12 @@ var MenuEditorPage = class MenuEditorPage {
           this._gotoMenuPathIndex(-1);
         });
 
-        // If something is dropped onto the home, button create a root menu accordingly.
-        const dropTarget =
-            new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-        dropTarget.set_gtypes([GObject.TYPE_STRING]);
-        dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
-        dropTarget.connect('drop', (t, what) => {
-          const config = JSON.parse(what);
+        // This handler creates a new toplevel menu item based on the provided config.
+        const dragDrop = (value) => {
+          const config = JSON.parse(value);
           if (ItemRegistry.getItemTypes()[config.type].class != ItemClass.MENU) {
-            // Translators: This is shown as an in-app notification when the user attempts
-            // to drag an action in the menu editor to the menu overview.
+            // Translators: This is shown as an in-app notification when the user
+            // attempts to drag an action in the menu editor to the menu overview.
             this._showNotification(_('Actions cannot be turned into toplevel menus.'));
             return false;
           }
@@ -825,21 +863,58 @@ var MenuEditorPage = class MenuEditorPage {
 
           this._menuConfigs.push(config);
           this._saveMenuConfiguration();
+
           return true;
-        });
-        dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
-        button.add_controller(dropTarget);
+        };
+
+        // Things need to be wired up differently on GTK3 / GTK4.
+        if (utils.gtk4()) {
+          const dropTarget =
+              new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+          dropTarget.set_gtypes([GObject.TYPE_STRING]);
+          dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+          dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
+          dropTarget.connect('drop', (t, what) => {
+            return dragDrop(what);
+          });
+
+          button.add_controller(dropTarget);
+
+        } else {
+
+          button.drag_dest_set(
+              Gtk.DestDefaults.HIGHLIGHT,
+              [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
+              Gdk.DragAction.MOVE);
+          button.drag_dest_set_track_motion(true);
+
+          button.connect('drag-data-received', (w, context, x, y, data, i, time) => {
+            const success = dragDrop(ByteArray.toString(data.get_data()));
+            Gtk.drag_finish(
+                context, success, context.get_selected_action() == Gdk.DragAction.MOVE,
+                time);
+          });
+
+          button.connect('drag-drop', (w, context, x, y, time) => {
+            button.drag_get_data(context, 'FLY-PIE-ITEM', time);
+          });
+
+          button.connect('drag-motion', (w, context, x, y, time) => {
+            Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
+            return true;
+          });
+        }
       }
 
       const box = new Gtk.Box();
       // Translators: The left-most item of the menu editor bread crumbs.
       const label = new Gtk.Label({label: _('All Menus')});
       const icon  = new Gtk.Image({icon_name: 'go-home-symbolic', margin_end: 4});
-      box.append(icon);
-      box.append(label);
-      button.set_child(box);
+      utils.boxAppend(box, icon);
+      utils.boxAppend(box, label);
+      utils.setChild(button, box);
 
-      container.append(button);
+      utils.boxAppend(container, button);
     }
 
     // Now add a button for each entry of the menu path.
@@ -851,26 +926,49 @@ var MenuEditorPage = class MenuEditorPage {
         button.connect('clicked', () => {
           this._gotoMenuPathIndex(i);
         });
-        const dropTarget =
-            new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
-        dropTarget.set_gtypes([GObject.TYPE_STRING]);
-        dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
-        dropTarget.connect('drop', (t, what) => {
-          const config = JSON.parse(what);
+
+        const dragDrop = (value) => {
+          const config = JSON.parse(value);
 
           // Its fixed angle is reset to prevent invalid configurations.
           config.angle = -1;
 
           item.children.push(config);
           this._saveMenuConfiguration();
+
           return true;
-        });
-        dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
-        button.add_controller(dropTarget);
+        };
+
+        // Things need to be wired up differently on GTK3 / GTK4.
+        if (utils.gtk4()) {
+          const dropTarget =
+              new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+          dropTarget.set_gtypes([GObject.TYPE_STRING]);
+          dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
+          dropTarget.connect('drop', (t, what) => dragDrop(what));
+          dropTarget.connect('motion', () => Gdk.DragAction.MOVE);
+          button.add_controller(dropTarget);
+
+        } else {
+
+          button.drag_dest_set(
+              Gtk.DestDefaults.ALL,
+              [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
+              Gdk.DragAction.MOVE);
+
+          button.connect('drag-data-received', (w, context, x, y, data, i, time) => {
+            dragDrop(ByteArray.toString(data.get_data()));
+          });
+        }
       }
-      button.add_css_class('menu-editor-path-item');
-      button.set_child(label);
-      container.append(button);
+      utils.addCSSClass(button, 'menu-editor-path-item');
+      utils.setChild(button, label);
+      utils.boxAppend(container, button);
+    }
+
+    // Show the breadcrumbs manually on GTK3.
+    if (!utils.gtk4()) {
+      container.show_all();
     }
   }
 
@@ -940,7 +1038,7 @@ var MenuEditorPage = class MenuEditorPage {
   // configuration. Its fixed angle is reset to prevent invalid configurations.
   _addItem(config, where) {
     config.angle = -1;
-    this._editor.add(config, where);
+    this._editor.addItem(config, where);
     this._selectedItem = config;
     this._getCurrentConfigs().splice(where, 0, config);
     this._updateSidebar();
@@ -966,69 +1064,121 @@ var MenuEditorPage = class MenuEditorPage {
     this._builder.get_object('menu-editor-stash-content').visible = true;
 
     // Stash items are simple Gtk.DrawingAreas which can be dragged around.
-    const item  = new Gtk.DrawingArea({
-      content_width: 32,
-      content_height: 32,
+    const item = new Gtk.DrawingArea({
       margin_start: 4,
       margin_end: 4,
       valign: Gtk.Align.CENTER,
       tooltip_text: config.name
     });
+
+    if (utils.gtk4()) {
+      item.content_width  = 32;
+      item.content_height = 32;
+    } else {
+      item.width_request  = 32;
+      item.height_request = 32;
+    }
+
     item.config = config;
-    item.set_draw_func((widget, ctx) => {
+    utils.setDrawFunc(item, (widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const font  = this._settings.get_string('font');
-      const color = widget.get_style_context().get_color();
+      const color = utils.getColor(widget);
       utils.paintIcon(ctx, widget.config.icon, size, 1, font, color);
       return false;
     });
-    this._builder.get_object('menu-editor-stash-content').append(item);
-
-    // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does not work on X11.
-    // If we added the copy action on X11, it would be chosen as default action and the
-    // user would have to hold down shift in order to move items...
-    let actions = Gdk.DragAction.MOVE;
-    if (utils.getSessionType() == 'wayland') {
-      actions |= Gdk.DragAction.COPY;
-    }
-
-    const dragSource = new Gtk.DragSource({actions: actions});
-
-    dragSource.connect('prepare', (s, x, y) => {
-      s.set_icon(Gtk.WidgetPaintable.new(item), x, y);
-      return Gdk.ContentProvider.new_for_value(JSON.stringify(config));
-    });
+    utils.boxAppend(this._builder.get_object('menu-editor-stash-content'), item);
 
     // Make the item translucent when a drag is started.
-    dragSource.connect('drag-begin', () => {
+    const dragBegin = () => {
       item.opacity = 0.2;
-    });
+    };
 
     // Remove the stash widget on a successful drop.
-    dragSource.connect('drag-end', (s, drag, deleteData) => {
-      if (deleteData) {
-        let removeIndex = this._stashedConfigs.indexOf(config);
-        this._stashedConfigs.splice(removeIndex, 1);
-        item.unparent();
-        this._saveStashConfiguration();
+    const dragDeleteData = () => {
+      let removeIndex = this._stashedConfigs.indexOf(config);
+      this._stashedConfigs.splice(removeIndex, 1);
 
-        // Show the stash info when the last item got deleted.
-        if (this._stashedConfigs.length == 0) {
-          this._builder.get_object('menu-editor-stash-label').visible   = true;
-          this._builder.get_object('menu-editor-stash-content').visible = false;
-        }
+      if (utils.gtk4()) {
+        item.unparent();
       } else {
-        item.opacity = 1;
+        this._builder.get_object('menu-editor-stash-content').remove(item);
       }
-    });
+
+      this._saveStashConfiguration();
+
+      // Show the stash info when the last item got deleted.
+      if (this._stashedConfigs.length == 0) {
+        this._builder.get_object('menu-editor-stash-label').visible   = true;
+        this._builder.get_object('menu-editor-stash-content').visible = false;
+      }
+    };
 
     // Make the item visible again if the drag is aborted.
-    dragSource.connect('drag-cancel', () => {
+    const dragEnd = () => {
       item.opacity = 1;
       return false;
-    });
+    };
 
-    item.add_controller(dragSource);
+    // Things need to be wired up differently on GTK3 / GTK4.
+    if (utils.gtk4()) {
+
+      // Do to https://gitlab.gnome.org/GNOME/gtk/-/issues/4259, copy does not work on
+      // X11.
+      // If we added the copy action on X11, it would be chosen as default action and the
+      // user would have to hold down shift in order to move items...
+      let actions = Gdk.DragAction.MOVE;
+      if (utils.getSessionType() == 'wayland') {
+        actions |= Gdk.DragAction.COPY;
+      }
+
+      const dragSource = new Gtk.DragSource({actions: actions});
+
+      dragSource.connect('prepare', (s, x, y) => {
+        s.set_icon(Gtk.WidgetPaintable.new(item), x, y);
+        return Gdk.ContentProvider.new_for_value(JSON.stringify(config));
+      });
+
+      dragSource.connect('drag-end', (s, drag, deleteData) => {
+        if (deleteData) {
+          dragDeleteData();
+        } else {
+          dragEnd();
+        }
+      });
+
+      dragSource.connect('drag-begin', dragBegin);
+      dragSource.connect('drag-cancel', dragEnd);
+
+      item.add_controller(dragSource);
+
+    } else {
+
+      item.drag_source_set(
+          Gdk.ModifierType.BUTTON1_MASK,
+          [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
+          Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
+
+      // The item's icon is used as drag graphic.
+      item.connect('drag-begin', () => {
+        const font    = this._settings.get_string('font');
+        const color   = utils.getColor(item);
+        const size    = Math.min(item.width_request, item.height_request);
+        const surface = utils.createIcon(config.icon, size, font, color);
+        const pixbuf  = Gdk.pixbuf_get_from_surface(surface, 0, 0, size, size);
+        item.drag_source_set_icon_pixbuf(pixbuf);
+        dragBegin();
+      });
+
+      item.connect('drag-data-delete', dragDeleteData);
+      item.connect('drag-failed', dragEnd);
+      item.connect('drag-end', dragEnd);
+      item.connect('drag-data-get', (w, c, data) => {
+        data.set('FLY-PIE-ITEM', 8, ByteArray.fromString(JSON.stringify(config)));
+      });
+
+      item.show();
+    }
   }
 
   // Returns the configurations of the items which are currently displayed in the menu
@@ -1122,6 +1272,13 @@ var MenuEditorPage = class MenuEditorPage {
     // And all stashed items to the stash widget.
     for (let i = 0; i < this._stashedConfigs.length; i++) {
       this._addStashWidget(this._stashedConfigs[i]);
+    }
+
+    // Show the stash label if there are no stashed items.
+    if (!utils.gtk4()) {
+      if (this._stashedConfigs.length == 0) {
+        this._builder.get_object('menu-editor-stash-label').visible = true;
+      }
     }
   }
 

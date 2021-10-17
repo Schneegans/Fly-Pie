@@ -101,21 +101,23 @@ var menu = {
             nameRegex = text;
             _updateData();
           });
-      vBox.append(regexEntry);
+      utils.boxAppend(vBox, regexEntry);
 
       // Then create the three switches.
       const _createToggle = (i, name, value) => {
         const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL, spacing: 5});
-        hBox.append(new Gtk.Label({label: name, halign: Gtk.Align.START, hexpand: true}));
+        utils.boxAppend(
+            hBox, new Gtk.Label({label: name, halign: Gtk.Align.START, hexpand: true}),
+            false, true);
 
         const toggle = new Gtk.Switch({active: value, halign: Gtk.Align.END});
-        hBox.append(toggle);
+        utils.boxAppend(hBox, toggle);
 
         toggle.connect('notify::active', () => {
           _updateData();
         });
 
-        vBox.append(hBox);
+        utils.boxAppend(vBox, hBox);
 
         return toggle;
       };

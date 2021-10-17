@@ -49,15 +49,22 @@
     <file>img/levels/level8.png</file>
     <file>img/levels/level9.png</file>
     <file>img/logo.svg</file>
-    <file>img/arrow-up-symbolic.svg</file>
+    <file>img/scalable/actions/arrow-up-symbolic.svg</file>
+    <file>img/scalable/actions/custom-menu-symbolic.svg</file>
     <file>img/tutorial/bronze.png</file>
     <file>img/tutorial/gold.png</file>
     <file>img/tutorial/silver.png</file>
+    <file>ui/gtk3/copyValueButton.ui</file>
+    <file>ui/gtk3/iconSelectDialog.ui</file>
+    <file>ui/gtk3/imageChooserButton.ui</file>
+    <file>ui/gtk3/settings.ui</file>
     <file>ui/gtk4/copyValueButton.ui</file>
     <file>ui/gtk4/iconSelectDialog.ui</file>
     <file>ui/gtk4/imageChooserButton.ui</file>
     <file>ui/gtk4/settings.ui</file>
     <file>video/video1.webm</file>
     <file>video/video2.webm</file>
+    <file>video/video1.gif</file>
+    <file>video/video2.gif</file>
   </gresource>
 </gresources>

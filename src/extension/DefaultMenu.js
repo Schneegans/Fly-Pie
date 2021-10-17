@@ -8,7 +8,8 @@
 
 'use strict';
 
-const Gio = imports.gi.Gio;
+const Gio    = imports.gi.Gio;
+const Config = imports.misc.config;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -83,14 +84,6 @@ var DefaultMenu = class DefaultMenu {
         },
         {
           // Translators: This is an entry of the default menu.
-          'name': _('Next Workspace'),
-          'icon': 'go-next',
-          'type': 'Shortcut',
-          'data': {'shortcut': '<Control><Alt>Right'},
-          'angle': -1
-        },
-        {
-          // Translators: This is an entry of the default menu.
           'name': _('Maximize Window'),
           'icon': 'view-fullscreen',
           'type': 'Shortcut',
@@ -114,14 +107,6 @@ var DefaultMenu = class DefaultMenu {
           'angle': -1
         },
         {
-          // Translators: This is an entry of the default menu.
-          'name': _('Previous Workspace'),
-          'icon': 'go-previous',
-          'type': 'Shortcut',
-          'data': {'shortcut': '<Control><Alt>Left'},
-          'angle': 270
-        },
-        {
           // Translators: This is an entry of the default menu. I
           'name': _('Running Apps'),
           'icon': 'preferences-system-windows',
@@ -138,6 +123,85 @@ var DefaultMenu = class DefaultMenu {
       'type': 'CustomMenu',
       'data': {}
     };
+
+    // The workspace switcher items are different on GNOME 3.3x and GNOME 40+ as the
+    // workspace layout changed.
+    const [major]      = Config.PACKAGE_VERSION.split('.');
+    const shellVersion = Number.parseInt(major);
+    if (shellVersion >= 40) {
+
+      menu.children.splice(2, 0, {
+        // Translators: This is an entry of the default menu under GNOME 40 and beyond.
+        'name': _('Next Workspace'),
+        'icon': 'go-next',
+        'type': 'Shortcut',
+        'data': {'shortcut': '<Control><Alt>Right'},
+        'angle': -1
+      });
+
+      menu.children.splice(6, 0, {
+        // Translators: This is an entry of the default menu under GNOME 40 and beyond.
+        'name': _('Previous Workspace'),
+        'icon': 'go-previous',
+        'type': 'Shortcut',
+        'data': {'shortcut': '<Control><Alt>Left'},
+        'angle': -1
+      });
+
+    } else {
+
+      menu.children.splice(2, 0, {
+        // Translators: This is an entry of the default menu under GNOME 3.3x only.
+        'name': _('Switch Workspace'),
+        'type': 'CustomMenu',
+        'children': [
+          {
+            // Translators: This is an entry of the default menu under GNOME 3.3x only.
+            'name': _('Go Up'),
+            'icon': '⬆️',
+            'type': 'Shortcut',
+            'data': {'shortcut': '<Control><Alt>Up'},
+            'angle': 0
+          },
+          {
+            // Translators: This is an entry of the default menu under GNOME 3.3x only.
+            'name': _('Go Down'),
+            'type': 'Shortcut',
+            'icon': '⬇️',
+            'data': {'shortcut': '<Control><Alt>Down'},
+            'angle': 180
+          }
+        ],
+        'icon': '↕️',
+        'angle': -1
+      });
+
+      menu.children.splice(6, 0, {
+        // Translators: This is an entry of the default menu under GNOME 3.3x only.
+        'name': _('Move Window'),
+        'type': 'CustomMenu',
+        'children': [
+          {
+            // Translators: This is an entry of the default menu under GNOME 3.3x only.
+            'name': _('Move Window Up'),
+            'type': 'Shortcut',
+            'icon': '⬆️',
+            'data': {'shortcut': '<Shift><Control><Alt>Up'},
+            'angle': 0
+          },
+          {
+            // Translators: This is an entry of the default menu under GNOME 3.3x only.
+            'name': _('Move Window Down'),
+            'type': 'Shortcut',
+            'icon': '⬇️',
+            'data': {'shortcut': '<Shift><Control><Alt>Down'},
+            'angle': 180
+          }
+        ],
+        'icon': '↕️',
+        'angle': -1
+      });
+    }
 
     return menu;
   }

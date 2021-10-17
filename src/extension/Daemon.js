@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                       = imports.cairo;
-const {Gio, GLib, Gdk, GdkPixbuf} = imports.gi;
+const Cairo                           = imports.cairo;
+const {Gio, GLib, Gdk, GdkPixbuf, St} = imports.gi;
 
 const Main = imports.ui.main;
 
@@ -45,6 +45,11 @@ var Daemon = class Daemon {
     // methods available on the D-Bus.
     this._dbus = Gio.DBusExportedObject.wrapJSObject(DBusInterface.description, this);
     this._dbus.export(Gio.DBus.session, '/org/gnome/shell/extensions/flypie');
+
+    // Enable animations even if no hardware acceleration is available.
+    if (global.backend && !global.backend.is_rendering_hardware_accelerated()) {
+      St.Settings.get().uninhibit_animations();
+    }
 
     // Initialize the menu. For performance reasons the same menu is used again and again.
     // It is just reconfigured according to incoming requests.
@@ -170,6 +175,12 @@ var Daemon = class Daemon {
 
   // Cleans up stuff which is not cleaned up automatically.
   destroy() {
+
+    // Disable animations again (if no hardware acceleration was available).
+    if (global.backend && !global.backend.is_rendering_hardware_accelerated()) {
+      St.Settings.get().inhibit_animations();
+    }
+
     this._menu.destroy();
 
     this._dbus.flush();

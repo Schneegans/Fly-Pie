@@ -55,14 +55,20 @@ var PreferencesDialog = class PreferencesDialog {
 
     // Load the user interface file.
     this._builder = new Gtk.Builder();
-    this._builder.add_from_resource('/ui/gtk4/settings.ui');
+    this._builder.add_from_resource(`/ui/${utils.gtk4() ? 'gtk4' : 'gtk3'}/settings.ui`);
 
     // Load the CSS file for the settings dialog.
     const styleProvider = Gtk.CssProvider.new();
     styleProvider.load_from_resource('/css/flypie.css');
-    Gtk.StyleContext.add_provider_for_display(
-        Gdk.Display.get_default(), styleProvider,
-        Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    if (utils.gtk4()) {
+      Gtk.StyleContext.add_provider_for_display(
+          Gdk.Display.get_default(), styleProvider,
+          Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    } else {
+      Gtk.StyleContext.add_provider_for_screen(
+          Gdk.Screen.get_default(), styleProvider,
+          Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
 
     // To structure the source code, the code for the individual dialog pages has been put
     // into separate classes.
@@ -179,12 +185,18 @@ var PreferencesDialog = class PreferencesDialog {
       stackSwitcher.parent.remove(aboutButton);
       stackSwitcher.parent.remove(stackSwitcher);
 
-      const titlebar = this._widget.get_root().get_titlebar();
-      titlebar.set_title_widget(stackSwitcher);
-      titlebar.pack_start(aboutButton);
+      if (utils.gtk4()) {
+        const titlebar = this._widget.get_root().get_titlebar();
+        titlebar.set_title_widget(stackSwitcher);
+        titlebar.pack_start(aboutButton);
 
-      // This class makes the bottom corners round.
-      this._widget.get_root().get_style_context().add_class('fly-pie-window');
+        // This class makes the bottom corners round.
+        this._widget.get_root().get_style_context().add_class('fly-pie-window');
+      } else {
+        const titlebar = this._widget.get_toplevel().get_titlebar();
+        titlebar.set_custom_title(stackSwitcher);
+        titlebar.pack_start(aboutButton);
+      }
     });
 
     // Save the currently active settings page. This way, the tutorial will be shown when
@@ -218,6 +230,13 @@ var PreferencesDialog = class PreferencesDialog {
 
     // Record this construction for the statistics.
     Statistics.getInstance().addSettingsOpened();
+
+    // On GTK3, we have to show the widgets.
+    if (!utils.gtk4()) {
+      this._widget.show_all();
+      this._builder.get_object('about-popover').foreach(w => w.show_all());
+      this._builder.get_object('preset-popover').foreach(w => w.show_all());
+    }
   }
 
   // -------------------------------------------------------------------- public interface

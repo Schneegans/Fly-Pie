@@ -110,7 +110,7 @@ var AchievementsPage = class AchievementsPage {
     this._builder.get_object('achievements-reset-button').connect('clicked', button => {
       // Create the question dialog.
       const dialog = new Gtk.MessageDialog({
-        transient_for: button.get_root(),
+        transient_for: utils.getRoot(button),
         modal: true,
         buttons: Gtk.ButtonsType.OK_CANCEL,
         message_type: Gtk.MessageType.QUESTION,
@@ -130,7 +130,11 @@ var AchievementsPage = class AchievementsPage {
         dialog.destroy();
       });
 
-      dialog.show();
+      if (utils.gtk4()) {
+        dialog.show();
+      } else {
+        dialog.show_all();
+      }
     });
 
     // Initialize the user interface with the current setting values.
@@ -232,7 +236,11 @@ var AchievementsPage = class AchievementsPage {
     widgets.sort((a, b) => b.progress - a.progress || a.name.localeCompare(b.name));
 
     for (let i = 1; i < widgets.length; i++) {
-      container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
+      if (utils.gtk4()) {
+        container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
+      } else {
+        container.reorder_child(widgets[i].revealer, i);
+      }
     }
   }
 
@@ -244,7 +252,11 @@ var AchievementsPage = class AchievementsPage {
     widgets.sort((a, b) => b.date - a.date || a.name.localeCompare(b.name));
 
     for (let i = 1; i < widgets.length; i++) {
-      container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
+      if (utils.gtk4()) {
+        container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
+      } else {
+        container.reorder_child(widgets[i].revealer, i);
+      }
     }
   }
 
@@ -268,8 +280,9 @@ var AchievementsPage = class AchievementsPage {
     }
 
     // Add them to the UI.
-    this._builder.get_object('active-achievements-box').append(active.revealer);
-    this._builder.get_object('completed-achievements-box').append(completed.revealer);
+    utils.boxAppend(this._builder.get_object('active-achievements-box'), active.revealer);
+    utils.boxAppend(
+        this._builder.get_object('completed-achievements-box'), completed.revealer);
   }
 
   // This method creates a set of widgets contained in a Gtk.Revealer to represent an
@@ -300,7 +313,7 @@ var AchievementsPage = class AchievementsPage {
     // Add the icon.
     const icon = new Gtk.DrawingArea({margin_end: 8});
     icon.set_size_request(64, 64);
-    icon.set_draw_func((w, ctx) => {
+    utils.setDrawFunc(icon, (w, ctx) => {
       Achievements.Achievements.paintAchievementIcon(ctx, achievement);
       return false;
     });
@@ -387,7 +400,7 @@ var AchievementsPage = class AchievementsPage {
 
     // Finally wrap the thing in a Gtk.Revealer.
     result.revealer = new Gtk.Revealer();
-    result.revealer.set_child(grid);
+    utils.setChild(result.revealer, grid);
 
     return result;
   }

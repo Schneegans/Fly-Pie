@@ -37,7 +37,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     const box = this.createConfigWidgetCaption(name, description);
 
     const entry = new Gtk.Entry({text: text, tooltip_markup: tooltip});
-    box.append(entry);
+    utils.boxAppend(box, entry);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
@@ -56,7 +56,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entry = Gtk.SpinButton.new_with_range(min, max, step);
     entry.value = value;
-    box.append(entry);
+    utils.boxAppend(box, entry);
 
     entry.connect('notify::value', (widget) => {
       callback(widget.value);
@@ -75,13 +75,18 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entryBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
     entryBox.get_style_context().add_class('linked');
-    box.append(entryBox);
+    utils.boxAppend(box, entryBox);
 
-    const button = Gtk.Button.new_from_icon_name('view-more-symbolic');
+    let button;
+    if (utils.gtk4()) {
+      button = Gtk.Button.new_from_icon_name('view-more-symbolic');
+    } else {
+      button = Gtk.Button.new_from_icon_name('view-more-symbolic', Gtk.IconSize.BUTTON);
+    }
 
     const entry = new Gtk.Entry({text: file, hexpand: true});
-    entryBox.append(entry);
-    entryBox.append(button);
+    utils.boxAppend(entryBox, entry, false, true);
+    utils.boxAppend(entryBox, button);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
@@ -91,7 +96,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       const dialog = new Gtk.Dialog({
         use_header_bar: true,
         modal: true,
-        transient_for: button.get_root(),
+        transient_for: utils.getRoot(button),
         title: ''
       });
       dialog.add_button(_('Select File'), Gtk.ResponseType.OK);
@@ -110,7 +115,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         fileChooser.set_file(currentFile);
       }
 
-      dialog.get_content_area().append(fileChooser);
+      utils.boxAppend(dialog.get_content_area(), fileChooser);
 
       dialog.connect('response', (dialog, id) => {
         if (id == Gtk.ResponseType.OK) {
@@ -124,7 +129,11 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         dialog.destroy();
       });
 
-      dialog.show();
+      if (utils.gtk4()) {
+        dialog.show();
+      } else {
+        dialog.show_all();
+      }
     });
 
 
@@ -142,13 +151,18 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entryBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
     entryBox.get_style_context().add_class('linked');
-    box.append(entryBox);
+    utils.boxAppend(box, entryBox);
 
-    const button = Gtk.Button.new_from_icon_name('view-more-symbolic');
+    let button;
+    if (utils.gtk4()) {
+      button = Gtk.Button.new_from_icon_name('view-more-symbolic');
+    } else {
+      button = Gtk.Button.new_from_icon_name('view-more-symbolic', Gtk.IconSize.BUTTON);
+    }
 
     const entry = new Gtk.Entry({text: command, hexpand: true});
-    entryBox.append(entry);
-    entryBox.append(button);
+    utils.boxAppend(entryBox, entry, false, true);
+    utils.boxAppend(entryBox, button);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
@@ -158,7 +172,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       const dialog = new Gtk.Dialog({
         use_header_bar: true,
         modal: true,
-        transient_for: button.get_root(),
+        transient_for: utils.getRoot(button),
         title: ''
       });
       dialog.add_button(_('Select Application'), Gtk.ResponseType.OK);
@@ -168,7 +182,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       const appChooser =
           new Gtk.AppChooserWidget({show_all: true, hexpand: true, vexpand: true});
 
-      dialog.get_content_area().append(appChooser);
+      utils.boxAppend(dialog.get_content_area(), appChooser);
 
       const selectApp = (app) => {
         callback(
@@ -188,7 +202,11 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         dialog.destroy();
       });
 
-      dialog.show();
+      if (utils.gtk4()) {
+        dialog.show();
+      } else {
+        dialog.show_all();
+      }
     });
 
 
@@ -206,7 +224,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     label.set_accelerator(shortcut);
 
     const box = this.createConfigWidgetCaption(name, description);
-    box.append(container);
+    utils.boxAppend(box, container);
 
     return box;
   }
@@ -219,7 +237,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 5, margin_top: 20});
     const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL, spacing: 10});
 
-    vBox.append(hBox);
+    utils.boxAppend(vBox, hBox);
 
     // This is shown on the left above the data widget.
     const nameLabel =
@@ -229,8 +247,8 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     const descriptionLabel = new Gtk.Label({label: description});
     descriptionLabel.get_style_context().add_class('dim-label');
 
-    hBox.append(nameLabel);
-    hBox.append(descriptionLabel);
+    utils.boxAppend(hBox, nameLabel, false, true);
+    utils.boxAppend(hBox, descriptionLabel);
 
     return vBox;
   }
@@ -256,8 +274,13 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     const listBox = new Gtk.ListBox();
     const row     = new Gtk.ListBoxRow({height_request: 50});
 
-    frame.set_child(listBox);
-    listBox.append(row);
+    utils.setChild(frame, listBox);
+
+    if (utils.gtk4()) {
+      listBox.append(row);
+    } else {
+      listBox.add(row);
+    }
 
     const label = new Gtk.ShortcutLabel({
       // Translators: This is shown on the shortcut-buttons when no shortcut is selected.
@@ -265,13 +288,14 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       halign: Gtk.Align.CENTER,
       valign: Gtk.Align.CENTER
     });
-    row.set_child(label);
+    utils.setChild(row, label);
 
     // Whenever the widget is in the please-select-something-state, the label is cleared
     // and a text indicating that the user should press the shortcut is shown. To be able
     // to reset to the state before (e.g. when ESC is pressed), this stores the previous
     // value.
     let lastAccelerator = '';
+    let isGrabbed       = false;
 
     // This function grabs the keyboard input. If doFullGrab == true, the complete
     // keyboard input of the default Seat will be grabbed. Else only a Gtk grab is
@@ -279,8 +303,15 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     // is waiting for input.
     const grabKeyboard = () => {
       if (doFullGrab) {
-        label.get_root().get_surface().inhibit_system_shortcuts(null);
+        if (utils.gtk4()) {
+          utils.getRoot(label).get_surface().inhibit_system_shortcuts(null);
+        } else {
+          const seat = Gdk.Display.get_default().get_default_seat();
+          seat.grab(
+              row.get_window(), Gdk.SeatCapabilities.KEYBOARD, false, null, null, null);
+        }
       }
+      isGrabbed       = true;
       lastAccelerator = label.get_accelerator();
       label.set_accelerator('');
       label.set_disabled_text(
@@ -291,73 +322,93 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     // bound".
     const cancelGrab = () => {
       if (doFullGrab) {
-        label.get_root().get_surface().restore_system_shortcuts();
+        if (utils.gtk4()) {
+          utils.getRoot(label).get_surface().restore_system_shortcuts();
+        } else {
+          const seat = Gdk.Display.get_default().get_default_seat();
+          seat.ungrab();
+        }
       }
+      isGrabbed = false;
+      label.set_accelerator(lastAccelerator);
       row.parent.unselect_all();
       label.set_disabled_text(_('Not Bound'));
     };
 
-    // When the row is activated, the input is grabbed.
-    row.parent.connect('row-activated', (row) => {
-      grabKeyboard();
+    // When the row is activated, the input is grabbed. If it's already grabbed, un-grab
+    // it.
+    row.parent.connect('row-activated', () => {
+      if (isGrabbed) {
+        cancelGrab();
+      } else {
+        grabKeyboard();
+      }
     });
 
     // Key input events are received once the input is grabbed.
-    const keyController = Gtk.EventControllerKey.new();
-    keyController.connect('key-pressed', (controller, keyval, keycode, state) => {
-      if (row.is_selected()) {
-        const mods = state & Gtk.accelerator_get_default_mod_mask();
+    {
+      const handler = (keyval, state) => {
+        if (row.is_selected()) {
+          const mods = state & Gtk.accelerator_get_default_mod_mask();
 
-        if (keyval == Gdk.KEY_Escape) {
-          // Escape cancels the shortcut selection.
+          if (keyval == Gdk.KEY_Escape) {
+            // Escape cancels the shortcut selection.
+            cancelGrab();
+
+          } else if (keyval == Gdk.KEY_BackSpace) {
+            // BackSpace removes any bindings.
+            lastAccelerator = '';
+            onSelect('');
+            cancelGrab();
+
+          } else if (
+              Gtk.accelerator_valid(keyval, mods) || keyval == Gdk.KEY_Tab ||
+              keyval == Gdk.KEY_ISO_Left_Tab || keyval == Gdk.KEY_KP_Tab) {
+            // Else, if a valid accelerator was pressed, we store it. The tab key is for
+            // some reason not considered to be a valid key for accelerators.
+            const accelerator = Gtk.accelerator_name(keyval, mods);
+            onSelect(accelerator);
+            lastAccelerator = accelerator;
+            cancelGrab();
+          }
+
+          return true;
+        }
+        return false;
+      };
+
+      if (utils.gtk4()) {
+        const controller = Gtk.EventControllerKey.new();
+        controller.connect(
+            'key-pressed', (c, keyval, keycode, state) => handler(keyval, state));
+        row.add_controller(controller);
+      } else {
+        row.connect('key-press-event', (row, event) => {
+          const keyval = event.get_keyval()[1];
+          const state  = event.get_state()[1];
+          return handler(keyval, state);
+        });
+      }
+    }
+
+    // Clicking somewhere else cancels the shortcut selection.
+    {
+      const handler = () => {
+        if (row.is_selected()) {
           label.set_accelerator(lastAccelerator);
           cancelGrab();
-
-        } else if (keyval == Gdk.KEY_BackSpace) {
-          // BackSpace removes any bindings.
-          label.set_accelerator('');
-          onSelect('');
-          cancelGrab();
-
-        } else if (
-            Gtk.accelerator_valid(keyval, mods) || keyval == Gdk.KEY_Tab ||
-            keyval == Gdk.KEY_ISO_Left_Tab || keyval == Gdk.KEY_KP_Tab) {
-          // Else, if a valid accelerator was pressed, we store it. The tab key is for
-          // some reason not considered to be a valid key for accelerators.
-          const accelerator = Gtk.accelerator_name(keyval, mods);
-          onSelect(accelerator);
-          label.set_accelerator(accelerator);
-          cancelGrab();
         }
-
         return true;
-      }
-      return false;
-    });
+      };
 
-    // Clicking with the mouse cancels the shortcut selection.
-    const clickController = Gtk.GestureClick.new();
-    clickController.connect('pressed', () => {
-      if (row.is_selected()) {
-        label.set_accelerator(lastAccelerator);
-        cancelGrab();
+      if (utils.gtk4()) {
+        const controller = Gtk.EventControllerFocus.new();
+        controller.connect('leave', handler);
+        row.add_controller(controller);
+      } else {
+        row.connect('focus-out-event', handler);
       }
-      return true;
-    });
-
-    // Clicking with the mouse cancels the shortcut selection.
-    const focusController = Gtk.EventControllerFocus.new();
-    focusController.connect('leave', () => {
-      if (row.is_selected()) {
-        label.set_accelerator(lastAccelerator);
-        cancelGrab();
-      }
-      return true;
-    });
-
-    row.add_controller(keyController);
-    row.add_controller(clickController);
-    row.add_controller(focusController);
+    }
 
     return [frame, label];
   }

@@ -12,6 +12,9 @@ const {GObject, Gtk} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
+const Me    = imports.misc.extensionUtils.getCurrentExtension();
+const utils = Me.imports.src.common.utils;
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // Since the FileChooserButton from GTK3 is gone, we have to provide a similar          //
 // solution. In Fly-Pie, we only need file chooser buttons for images, so the content   //
@@ -24,7 +27,7 @@ function registerWidget() {
     // clang-format off
       GObject.registerClass({
         GTypeName: 'FlyPieImageChooserButton',
-        Template: 'resource:///ui/gtk4/imageChooserButton.ui',
+        Template: `resource:///ui/${utils.gtk4() ? "gtk4" : "gtk3"}/imageChooserButton.ui`,
         InternalChildren: ['button', 'label', 'resetButton'],
         Signals: {
           'file-set': {}
@@ -51,7 +54,7 @@ function registerWidget() {
           filter: fileFilter
         });
 
-        this._dialog.get_content_area().append(this._fileChooser);
+        utils.boxAppend(this._dialog.get_content_area(), this._fileChooser);
 
         this._dialog.connect('response', (dialog, id) => {
           if (id == Gtk.ResponseType.OK) {
@@ -62,8 +65,14 @@ function registerWidget() {
         });
 
         this._button.connect('clicked', (button) => {
-          this._dialog.set_transient_for(button.get_root());
-          this._dialog.show();
+          this._dialog.set_transient_for(utils.getRoot(button));
+
+          if (utils.gtk4()) {
+            this._dialog.show();
+          } else {
+            this._dialog.show_all();
+          }
+
           if (this._file != null) {
             this._fileChooser.set_file(this._file);
           }
