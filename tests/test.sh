@@ -77,27 +77,27 @@ do_in_pod gnome-extensions enable "${EXTENSION}"
 
 echo "Starting $(do_in_pod gnome-shell --version)..."
 do_in_pod systemctl --user start "${SESSION}@:99"
-do_in_pod wait-dbus-interface.sh -d org.gnome.Shell -o /org/gnome/Shell -i org.gnome.Shell.Extensions
+sleep 5
 
 if [[ "${FEDORA_VERSION}" -gt 33 ]]; then
   echo "Closing Overview..."
-  sleep 5
   do_in_pod xdotool key "super"
+  sleep 1
 fi
 
 echo "Opening Preferences..."
 do_in_pod gnome-extensions prefs "${EXTENSION}"
-sleep 2
+sleep 3
 find_target "references/preferences.png" "Failed to open preferences!"
 
 echo "Opening Default Menu..."
 do_in_pod xdotool key "ctrl+space"
-sleep 1
+sleep 3
 find_target "references/default_menu.png" "Failed to open default menu!"
 
 do_in_pod move-mouse-to-target.sh "references/default_menu.png"
 do_in_pod xdotool click 1
-sleep 1
+sleep 2
 
 podman cp "${POD}:/opt/Xvfb_screen0" - | tar xf - --to-command 'convert xwd:- result.png'
 echo "All tests executed successfully."
