@@ -31,7 +31,8 @@ while getopts "v:s:h" opt; do
 done
 
 # Go to the repo root.
-cd "$(cd "$(dirname "$0")" && pwd)/.."
+cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
+  { echo "ERROR: Could not find the repo root."; exit 1; }
 
 IMAGE="ghcr.io/schneegans/gnome-shell-pod-${FEDORA_VERSION}"
 EXTENSION="flypie@schneegans.github.com"
