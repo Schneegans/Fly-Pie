@@ -81,7 +81,7 @@ do_in_pod wait-dbus-interface.sh -d org.gnome.Shell -o /org/gnome/Shell -i org.g
 
 if [[ "${FEDORA_VERSION}" -gt 33 ]]; then
   echo "Closing Overview..."
-  sleep 3
+  sleep 5
   do_in_pod xdotool key "super"
 fi
 
