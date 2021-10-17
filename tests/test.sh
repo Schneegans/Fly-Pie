@@ -77,12 +77,12 @@ do_in_pod gnome-extensions enable "${EXTENSION}"
 
 echo "Starting $(do_in_pod gnome-shell --version)..."
 do_in_pod systemctl --user start "${SESSION}@:99"
-sleep 5
+sleep 10
 
 if [[ "${FEDORA_VERSION}" -gt 33 ]]; then
   echo "Closing Overview..."
   do_in_pod xdotool key "super"
-  sleep 1
+  sleep 3
 fi
 
 echo "Opening Preferences..."
