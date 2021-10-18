@@ -909,7 +909,7 @@ var MenuEditorPage = class MenuEditorPage {
       const box = new Gtk.Box();
       // Translators: The left-most item of the menu editor bread crumbs.
       const label = new Gtk.Label({label: _('All Menus')});
-      const icon  = new Gtk.Image({icon_name: 'go-home-symbolic', margin_end: 4});
+      const icon  = new Gtk.Image({icon_name: 'flypie-overview-symbolic', margin_end: 4});
       utils.boxAppend(box, icon);
       utils.boxAppend(box, label);
       utils.setChild(button, box);
