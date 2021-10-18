@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-17 21:49+0200\n"
-"PO-Revision-Date: 2021-10-18 07:48+0000\n"
-"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
+"PO-Revision-Date: 2021-10-19 18:26+0000\n"
+"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
 "\n"
 "Language: de\n"
@@ -1657,12 +1657,12 @@ msgstr "Arbeitsfläche wechseln"
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:160
 msgid "Go Up"
-msgstr ""
+msgstr "Nach Oben"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:168
 msgid "Go Down"
-msgstr ""
+msgstr "Nach Unten"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:181
@@ -1857,7 +1857,7 @@ msgstr "🥉️ Bronze-Sponsoren"
 
 #: resources/ui/gtk4/settings.ui:579 resources/ui/gtk3/settings.ui:572
 msgid "🏅️ Past Sponsors"
-msgstr ""
+msgstr "🏅️ Ehemalige Sponsoren"
 
 #. Shown in the about-popover if there is no sponsor for a given tier
 #: resources/ui/gtk4/settings.ui:591 resources/ui/gtk4/settings.ui:604
@@ -1865,7 +1865,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:584 resources/ui/gtk3/settings.ui:597
 #: resources/ui/gtk3/settings.ui:610 resources/ui/gtk3/settings.ui:623
 msgid "- none -"
-msgstr ""
+msgstr "- keine -"
 
 #: resources/ui/gtk4/settings.ui:644 resources/ui/gtk3/settings.ui:637
 msgid ""
