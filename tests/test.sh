@@ -81,7 +81,9 @@ sleep 10
 
 if [[ "${FEDORA_VERSION}" -gt 33 ]]; then
   echo "Closing Overview..."
-  do_in_pod xdotool key "super"
+  do_in_pod xdotool keydown "super"
+  sleep 0.5
+  do_in_pod xdotool keyup "super"
   sleep 3
 fi
 
@@ -91,7 +93,9 @@ sleep 3
 find_target "references/preferences.png" "Failed to open preferences!"
 
 echo "Opening Default Menu..."
-do_in_pod xdotool key "ctrl+space"
+do_in_pod xdotool keydown "ctrl+space"
+sleep 0.5
+do_in_pod xdotool keyup "ctrl+space"
 sleep 3
 find_target "references/default_menu.png" "Failed to open default menu!"
 
