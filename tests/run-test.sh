@@ -73,7 +73,7 @@ fail() {
   echo "${1}"
   podman cp "${POD}:/opt/Xvfb_screen0" - | tar xf - --to-command 'convert xwd:- fail.png'
   LOG=$(do_in_pod sudo journalctl | grep -C 5 "error\|gjs")
-  echo "$LOG" > fail.log
+  echo "${LOG}" > fail.log
   exit 1
 }
 
@@ -99,25 +99,25 @@ move_mouse_to_target() {
     fail "${2}"
   fi
 
-  do_in_pod xdotool mousemove $POS
+  do_in_pod xdotool mousemove ${POS}
 }
 
 # This simulates the given keystroke in the container. Simply calling "xdotool key $1"
 # sometimes fails to be recognized. Maybe the default 12ms between key-down and key-up
 # are too short for xvfb...
 send_keystroke() {
-  do_in_pod xdotool keydown $1
+  do_in_pod xdotool keydown ${1}
   sleep 0.5
-  do_in_pod xdotool keyup $1
+  do_in_pod xdotool keyup ${1}
 }
 
 # This simulates a mouse click in the container. Simply calling "xdotool click $1"
 # sometimes fails to be recognized. Maybe the default 12ms between button-down and
 # button-up are too short for xvfb...
 send_click() {
-  do_in_pod xdotool mousedown $1
+  do_in_pod xdotool mousedown ${1}
   sleep 0.5
-  do_in_pod xdotool mouseup $1
+  do_in_pod xdotool mouseup ${1}
 }
 
 
@@ -147,7 +147,7 @@ fi
 
 echo "Starting $(do_in_pod gnome-shell --version)."
 do_in_pod systemctl --user start "${SESSION}@:99"
-sleep 5
+sleep 10
 
 # Starting with GNOME 40, the overview is the default mode. We close this here by hitting
 # the super key.
