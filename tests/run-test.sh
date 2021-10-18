@@ -50,7 +50,7 @@ IMAGE="ghcr.io/schneegans/gnome-shell-pod-${FEDORA_VERSION}"
 EXTENSION="flypie@schneegans.github.com"
 
 # Run the container. For more info, visit https://github.com/Schneegans/gnome-shell-pod.
-POD=$(podman run --pull=always --rm --cap-add=SYS_NICE --cap-add=IPC_LOCK -td "${IMAGE}")
+POD=$(podman run --rm --cap-add=SYS_NICE --cap-add=IPC_LOCK -td "${IMAGE}")
 
 # Properly shutdown podman when this script is exited.
 quit() {
@@ -99,7 +99,8 @@ move_mouse_to_target() {
     fail "${2}"
   fi
 
-  do_in_pod xdotool mousemove "${POS}"
+  # shellcheck disable=SC2086
+  do_in_pod xdotool mousemove $POS
 }
 
 # This simulates the given keystroke in the container. Simply calling "xdotool key $1"
