@@ -23,7 +23,8 @@
 
 #### Bug Fixes
 
-* The <kbd>Tab</kbd> can now be used properly for opening menus.
+* <kbd>Tab</kbd> can now be used properly for opening menus.
+* Symbolic icons are now colored correctly in menus.
 
 ## [Fly-Pie 7](https://github.com/schneegans/fly-pie/releases/tag/v7)
 

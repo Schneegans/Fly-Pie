@@ -231,42 +231,55 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
     // Get an icon theme object. How this is done, depends on the Gtk version and whether
     // we are in GNOME Shell's process.
     const theme = getIconTheme();
+    let pixbuf  = null;
 
-    if (imports.gi.versions.Gtk === '3.0') {
-      const info = theme.lookup_by_gicon(
-          Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
+    if (gtk4()) {
 
-      // We got something, paint it!
-      if (info != null) {
-        Gdk.cairo_set_source_pixbuf(ctx, info.load_icon(), 0, 0);
-        ctx.paintWithAlpha(opacity);
-        return;
-      }
-
-    } else {
-
+      // Getting a pixbuf from an icon on GTK is a bit involved.
       const paintable = theme.lookup_by_gicon(
           Gio.Icon.new_for_string(name), size, 1, Gtk.TextDirection.NONE,
           Gtk.IconLookupFlags.FORCE_SIZE);
 
-      // We got something, paint it!
-      if (paintable.get_file() != null && paintable.get_file().get_path() != null) {
-        const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
-            paintable.get_file().get_path(), size, size);
-        Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0);
+      if (paintable && paintable.get_file() != null) {
+        if (paintable.get_file().get_uri_scheme() == 'resource') {
 
-        // If it's a symbolic icon, we draw it with the provided text color.
-        if (paintable.is_symbolic) {
-          const pattern = ctx.getSource();
-          ctx.setSourceRGBA(textColor.red, textColor.green, textColor.blue, opacity);
-          ctx.mask(pattern);
-        } else {
-          ctx.paintWithAlpha(opacity);
+          // Remove the resource:/// part.
+          const res = paintable.get_file().get_uri().slice(11);
+          pixbuf    = GdkPixbuf.Pixbuf.new_from_resource_at_scale(res, size, size, false);
+
+        } else if (paintable.get_file().get_uri_scheme() == 'file') {
+          pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
+              paintable.get_file().get_path(), size, size);
         }
+      }
 
-        return;
+    } else {
+
+      // To get a pixbuf from an icon is quite simple on GTK3.
+      const info = theme.lookup_by_gicon(
+          Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
+
+      if (info != null) {
+        pixbuf = info.load_icon();
       }
     }
+
+    // We got something, paint it!
+    if (pixbuf) {
+      Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0);
+
+      // If it's a symbolic icon, we draw it with the provided text color.
+      if (name.includes('-symbolic')) {
+        const pattern = ctx.getSource();
+        ctx.setSourceRGBA(textColor.red, textColor.green, textColor.blue, opacity);
+        ctx.mask(pattern);
+      } else {
+        ctx.paintWithAlpha(opacity);
+      }
+
+      return;
+    }
+
   } catch (error) {
     debug('Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');
   }
