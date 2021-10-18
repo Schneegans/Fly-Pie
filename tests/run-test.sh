@@ -99,25 +99,25 @@ move_mouse_to_target() {
     fail "${2}"
   fi
 
-  do_in_pod xdotool mousemove ${POS}
+  do_in_pod xdotool mousemove "${POS}"
 }
 
 # This simulates the given keystroke in the container. Simply calling "xdotool key $1"
 # sometimes fails to be recognized. Maybe the default 12ms between key-down and key-up
 # are too short for xvfb...
 send_keystroke() {
-  do_in_pod xdotool keydown ${1}
+  do_in_pod xdotool keydown "${1}"
   sleep 0.5
-  do_in_pod xdotool keyup ${1}
+  do_in_pod xdotool keyup "${1}"
 }
 
 # This simulates a mouse click in the container. Simply calling "xdotool click $1"
 # sometimes fails to be recognized. Maybe the default 12ms between button-down and
 # button-up are too short for xvfb...
 send_click() {
-  do_in_pod xdotool mousedown ${1}
+  do_in_pod xdotool mousedown "${1}"
   sleep 0.5
-  do_in_pod xdotool mouseup ${1}
+  do_in_pod xdotool mouseup "${1}"
 }
 
 
