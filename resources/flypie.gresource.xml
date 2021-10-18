@@ -49,8 +49,19 @@
     <file>img/levels/level8.png</file>
     <file>img/levels/level9.png</file>
     <file>img/logo.svg</file>
-    <file>img/scalable/actions/arrow-up-symbolic.svg</file>
-    <file>img/scalable/actions/custom-menu-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-arrow-up-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-custom-menu-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-edit-advanced-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-edit-center-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-edit-children-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-edit-grandchildren-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-edit-trace-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-edit-wedges-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-global-appearance-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-luminance-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-opacity-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-overview-symbolic.svg</file>
+    <file>img/scalable/actions/flypie-saturation-symbolic.svg</file>
     <file>img/tutorial/bronze.png</file>
     <file>img/tutorial/gold.png</file>
     <file>img/tutorial/silver.png</file>
