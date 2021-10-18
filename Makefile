@@ -8,9 +8,19 @@ LOCALES_PO = $(wildcard po/*.po)
 LOCALES_MO = $(patsubst po/%.po,locale/%/LC_MESSAGES/flypie.mo,$(LOCALES_PO))
 
 
-.PHONY: build release install uninstall all-po pot clean
+.PHONY: build test release install uninstall all-po pot clean
 
 build: flypie@schneegans.github.com.zip
+
+test:
+	@ for version in 32 33 34 35 ; do \
+	  for session in "gnome-xsession" "gnome-wayland-nested" ; do \
+	    echo ; \
+	    echo "Running Tests on Fedora $$version ($$session)." ; \
+	    echo ; \
+	    ./tests/run-test.sh -s $$session -v $$version ; \
+	  done \
+	done
 
 release: flypie@schneegans.github.com.zip
 	@#Check if the zip size is too big to be uploaded
