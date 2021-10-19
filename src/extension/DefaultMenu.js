@@ -85,7 +85,7 @@ var DefaultMenu = class DefaultMenu {
         {
           // Translators: This is an entry of the default menu.
           'name': _('Maximize Window'),
-          'icon': 'flypie-window-maximize-symbolic-#b79',
+          'icon': 'flypie-window-maximize-symbolic-#b68',
           'type': 'Shortcut',
           'data': '<Alt>F10',
           'angle': -1
@@ -93,7 +93,7 @@ var DefaultMenu = class DefaultMenu {
         {
           // Translators: This is an entry of the default menu.
           'name': _('Fly-Pie Settings'),
-          'icon': 'flypie-menu-system-symbolic-#4ab',
+          'icon': 'flypie-menu-system-symbolic-#3ab',
           'type': 'Command',
           'data': 'gnome-extensions prefs flypie@schneegans.github.com',
           'angle': -1
@@ -101,7 +101,7 @@ var DefaultMenu = class DefaultMenu {
         {
           // Translators: This is an entry of the default menu.
           'name': _('Close Window'),
-          'icon': 'flypie-window-close-symbolic-#a44',
+          'icon': 'flypie-window-close-symbolic-#a33',
           'type': 'Shortcut',
           'data': '<Alt>F4',
           'angle': -1
@@ -109,7 +109,7 @@ var DefaultMenu = class DefaultMenu {
         {
           // Translators: This is an entry of the default menu. I
           'name': _('Running Apps'),
-          'icon': 'flypie-menu-running-apps-symbolic-#76a',
+          'icon': 'flypie-menu-running-apps-symbolic-#65a',
           'type': 'RunningApps',
           'data': {
             'activeWorkspaceOnly': false,
@@ -133,7 +133,7 @@ var DefaultMenu = class DefaultMenu {
       menu.children.splice(2, 0, {
         // Translators: This is an entry of the default menu under GNOME 40 and beyond.
         'name': _('Next Workspace'),
-        'icon': 'flypie-go-right-symbolic-#7b6',
+        'icon': 'flypie-go-right-symbolic-#6b5',
         'type': 'Shortcut',
         'data': {'shortcut': '<Control><Alt>Right'},
         'angle': -1
@@ -142,7 +142,7 @@ var DefaultMenu = class DefaultMenu {
       menu.children.splice(6, 0, {
         // Translators: This is an entry of the default menu under GNOME 40 and beyond.
         'name': _('Previous Workspace'),
-        'icon': 'flypie-go-left-symbolic-#7b6',
+        'icon': 'flypie-go-left-symbolic-#6b5',
         'type': 'Shortcut',
         'data': {'shortcut': '<Control><Alt>Left'},
         'angle': -1
@@ -158,7 +158,7 @@ var DefaultMenu = class DefaultMenu {
           {
             // Translators: This is an entry of the default menu under GNOME 3.3x only.
             'name': _('Go Up'),
-            'icon': 'flypie-go-up-symbolic-#7b6',
+            'icon': 'flypie-go-up-symbolic-#6b5',
             'type': 'Shortcut',
             'data': {'shortcut': '<Control><Alt>Up'},
             'angle': 0
@@ -167,12 +167,12 @@ var DefaultMenu = class DefaultMenu {
             // Translators: This is an entry of the default menu under GNOME 3.3x only.
             'name': _('Go Down'),
             'type': 'Shortcut',
-            'icon': 'flypie-go-down-symbolic-#7b6',
+            'icon': 'flypie-go-down-symbolic-#6b5',
             'data': {'shortcut': '<Control><Alt>Down'},
             'angle': 180
           }
         ],
-        'icon': 'flypie-go-updown-symbolic-#7b6',
+        'icon': 'flypie-go-updown-symbolic-#6b5',
         'angle': -1
       });
 
@@ -185,7 +185,7 @@ var DefaultMenu = class DefaultMenu {
             // Translators: This is an entry of the default menu under GNOME 3.3x only.
             'name': _('Move Window Up'),
             'type': 'Shortcut',
-            'icon': 'flypie-move-up-symbolic-#7b6',
+            'icon': 'flypie-move-up-symbolic-#6b5',
             'data': {'shortcut': '<Shift><Control><Alt>Up'},
             'angle': 0
           },
@@ -193,12 +193,12 @@ var DefaultMenu = class DefaultMenu {
             // Translators: This is an entry of the default menu under GNOME 3.3x only.
             'name': _('Move Window Down'),
             'type': 'Shortcut',
-            'icon': 'flypie-move-down-symbolic-#7b6',
+            'icon': 'flypie-move-down-symbolic-#6b5',
             'data': {'shortcut': '<Shift><Control><Alt>Down'},
             'angle': 180
           }
         ],
-        'icon': 'flypie-move-updown-symbolic-#7b6',
+        'icon': 'flypie-move-updown-symbolic-#6b5',
         'angle': -1
       });
     }
