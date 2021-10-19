@@ -104,8 +104,27 @@ var MenuEditorPage = class MenuEditorPage {
         margin_start: 4,
         margin_end: 10
       });
-      const icon = new Gtk.Image(
-          {icon_name: ItemRegistry.getItemTypes()[type].icon, pixel_size: 32});
+
+      const icon = new Gtk.DrawingArea();
+
+      if (utils.gtk4()) {
+        icon.content_width  = 32;
+        icon.content_height = 32;
+      } else {
+        icon.width_request  = 32;
+        icon.height_request = 32;
+      }
+
+      utils.setDrawFunc(icon, (widget, ctx) => {
+        const size =
+            Math.min(widget.get_allocated_width(), widget.get_allocated_height());
+        const font  = this._settings.get_string('font');
+        const color = utils.getColor(widget);
+        utils.paintIcon(
+            ctx, ItemRegistry.getItemTypes()[type].icon, size, 1, font, color);
+        return false;
+      });
+
       const name =
           new Gtk.Label({label: ItemRegistry.getItemTypes()[type].name, xalign: 0});
       const subtitle = new Gtk.Label({
@@ -909,7 +928,7 @@ var MenuEditorPage = class MenuEditorPage {
       const box = new Gtk.Box();
       // Translators: The left-most item of the menu editor bread crumbs.
       const label = new Gtk.Label({label: _('All Menus')});
-      const icon  = new Gtk.Image({icon_name: 'go-home-symbolic', margin_end: 4});
+      const icon  = new Gtk.Image({icon_name: 'flypie-overview-symbolic', margin_end: 4});
       utils.boxAppend(box, icon);
       utils.boxAppend(box, label);
       utils.setChild(button, box);

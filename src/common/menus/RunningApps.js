@@ -47,7 +47,7 @@ var menu = {
   name: _('Running Apps'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'preferences-system-windows',
+  icon: 'flypie-menu-running-apps-symbolic-#74a',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.

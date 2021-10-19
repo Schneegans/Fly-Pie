@@ -72,9 +72,14 @@ flypie@schneegans.github.com.zip: schemas/gschemas.compiled resources/flypie.gre
 	@rm --force flypie@schneegans.github.com.zip
 	@zip -r flypie@schneegans.github.com.zip -- src presets resources/flypie.gresource schemas/gschemas.compiled $(LOCALES_MO) *.js metadata.json LICENSE
 
-resources/flypie.gresource: resources/flypie.gresource.xml $(RESOURCE_FILES)
+resources/flypie.gresource: resources/flypie.gresource.xml
 	@echo "Compiling resources..."
 	@glib-compile-resources --sourcedir="resources" --generate resources/flypie.gresource.xml
+
+resources/flypie.gresource.xml: $(RESOURCE_FILES)
+	@echo "Creating resources xml..."
+	@FILES=$$(find "resources" -mindepth 2 -type f -printf "%P\n" | xargs -i echo "<file>{}</file>") ; \
+	echo "<?xml version='1.0' encoding='UTF-8'?><gresources><gresource> $$FILES </gresource></gresources>" > resources/flypie.gresource.xml
 
 schemas/gschemas.compiled: schemas/org.gnome.shell.extensions.flypie.gschema.xml
 	@echo "Compiling schemas..."

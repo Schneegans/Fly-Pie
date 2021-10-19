@@ -34,7 +34,7 @@ var action = {
   name: _('Launch Application'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'utilities-terminal',
+  icon: 'flypie-action-command-symbolic-#444',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.

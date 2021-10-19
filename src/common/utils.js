@@ -215,6 +215,10 @@ function getRoot(widget) {
 // file. If neither is found, the given name is written to the image. The given font    //
 // (like 'Sans') and textColor (an object with properties 'red', 'green' and 'blue' in  //
 // the range 0..1) are used in this case. This is very useful for emojis like 😆 or 🌟!   //
+// Symbolic icons are colored by the given textColor as well. To make things fancy,     //
+// there is the possibility to create circle-shaped icons based on symbolic icons: If   //
+// the icon name references an existing symbolic icon, you can append -#rrggbb to the   //
+// icon name! A circle of this color will be drawn below the icon.                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function paintIcon(ctx, name, size, opacity, font, textColor) {
@@ -224,6 +228,60 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
     return;
   }
 
+  // Further below, test whether there is a -#rrggbb suffix appended to the icon name. If
+  // so, we draw a circle with this color (stored in iconBackgroundColor) below the icon.
+  // We will also use a hard-coded bright color for text-icons in this case.
+  let iconName            = name;
+  let iconBackgroundColor = null;
+  let iconColor           = textColor;
+
+  // We test whether there is a -#rrggbb suffix appended to the icon name.
+  {
+    const iconNameComponents = name.split('-#');
+
+    if (iconNameComponents.length >= 2) {
+      const color = new Gdk.RGBA();
+      const valid = color.parse('#' + iconNameComponents[iconNameComponents.length - 1]);
+
+      if (valid) {
+        iconName            = iconName.slice(0, iconName.lastIndexOf('-'));
+        iconBackgroundColor = color;
+        iconColor           = new Gdk.RGBA({red: 230, green: 230, blue: 230, alpha: 1.0});
+      }
+    }
+  }
+
+  // We draw to a group to be able to paint the complete icon with opacity.
+  ctx.pushGroup();
+
+  // Draw a colored background circle if a -#rrggbb color was part of the icon name.
+  if (iconBackgroundColor) {
+
+    // Draw the background circle.
+    ctx.save()
+    ctx.setSourceRGBA(
+        iconBackgroundColor.red, iconBackgroundColor.green, iconBackgroundColor.blue,
+        iconBackgroundColor.alpha);
+    ctx.translate(size / 2, size / 2);
+    ctx.arc(0, 0, size * 30 / 64, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.restore();
+
+    // This contains some slight shadow to provide a bit of depth.
+    const decor = GdkPixbuf.Pixbuf.new_from_resource('/img/symbolic-icon-decor.svg');
+    ctx.save()
+    ctx.scale(size / decor.get_width(), size / decor.get_height());
+    Gdk.cairo_set_source_pixbuf(ctx, decor, 0, 0);
+    ctx.paint();
+    ctx.restore();
+
+    // The actual icon is drawn smaller when there is a background.
+    const scale = 1.6;
+    ctx.translate(size / 2, size / 2);
+    ctx.scale(1 / scale, 1 / scale);
+    ctx.translate(-size / 2, -size / 2);
+  }
+
   // First try to find the icon in the theme. This will also load images from disc if the
   // icon name is actually a file path.
   try {
@@ -231,42 +289,73 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
     // Get an icon theme object. How this is done, depends on the Gtk version and whether
     // we are in GNOME Shell's process.
     const theme = getIconTheme();
+    const gicon = Gio.Icon.new_for_string(iconName);
+    let pixbuf  = null;
 
-    if (imports.gi.versions.Gtk === '3.0') {
-      const info = theme.lookup_by_gicon(
-          Gio.Icon.new_for_string(name), size, Gtk.IconLookupFlags.FORCE_SIZE);
+    if (gtk4()) {
 
-      // We got something, paint it!
-      if (info != null) {
-        Gdk.cairo_set_source_pixbuf(ctx, info.load_icon(), 0, 0);
-        ctx.paintWithAlpha(opacity);
-        return;
+      if (theme.has_gicon(gicon)) {
+
+        // Getting a pixbuf from an icon on GTK is a bit involved.
+        const paintable = theme.lookup_by_gicon(
+            gicon, size, 1, Gtk.TextDirection.NONE, Gtk.IconLookupFlags.FORCE_SIZE);
+
+        if (paintable && paintable.get_file() != null) {
+
+          if (paintable.get_file().get_uri_scheme() == 'resource') {
+
+            // Remove the resource:/// part.
+            const res = paintable.get_file().get_uri().slice(11);
+            pixbuf = GdkPixbuf.Pixbuf.new_from_resource_at_scale(res, size, size, false);
+
+          } else if (paintable.get_file().get_uri_scheme() == 'file') {
+
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
+                paintable.get_file().get_path(), size, size);
+          }
+        }
       }
 
     } else {
 
-      const paintable = theme.lookup_by_gicon(
-          Gio.Icon.new_for_string(name), size, 1, Gtk.TextDirection.NONE,
-          Gtk.IconLookupFlags.FORCE_SIZE);
+      // To get a pixbuf from an icon is quite simple on GTK3.
+      const info = theme.lookup_by_gicon(gicon, size, Gtk.IconLookupFlags.FORCE_SIZE);
 
-      // We got something, paint it!
-      if (paintable.get_file() != null && paintable.get_file().get_path() != null) {
-        const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
-            paintable.get_file().get_path(), size, size);
-        Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0);
-
-        // If it's a symbolic icon, we draw it with the provided text color.
-        if (paintable.is_symbolic) {
-          const pattern = ctx.getSource();
-          ctx.setSourceRGBA(textColor.red, textColor.green, textColor.blue, opacity);
-          ctx.mask(pattern);
-        } else {
-          ctx.paintWithAlpha(opacity);
-        }
-
-        return;
+      if (info != null) {
+        pixbuf = info.load_icon();
       }
     }
+
+    // We got something, paint it!
+    if (pixbuf) {
+
+      Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0);
+
+      // If it's a symbolic icon, we draw it with the provided text color.
+      if (name.includes('-symbolic')) {
+        const pattern = ctx.getSource();
+
+        // Draw a slight shadow below the icon.
+        if (iconBackgroundColor) {
+          ctx.setSourceRGBA(0, 0, 0, 0.25);
+          ctx.translate(2, 2);
+          ctx.mask(pattern);
+          ctx.translate(-2, -2);
+        }
+
+        ctx.setSourceRGBA(iconColor.red, iconColor.green, iconColor.blue, 1.0);
+
+        ctx.mask(pattern);
+      } else {
+        ctx.paint();
+      }
+
+      ctx.popGroupToSource();
+      ctx.paintWithAlpha(opacity);
+
+      return;
+    }
+
   } catch (error) {
     debug('Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');
   }
@@ -284,7 +373,7 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
   layout.set_font_description(fontDescription);
   layout.set_alignment(Pango.Alignment.CENTER);
   layout.set_wrap(Pango.WrapMode.CHAR);
-  layout.set_text(name, -1);
+  layout.set_text(iconName, -1);
 
   // We created a one-line layout above. We now estimate a proper width for the layout so
   // that the text covers more ore less a square shaped region. For this we compute the
@@ -302,27 +391,22 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
   const maxExtent = Math.max(extents.width, extents.height);
   const scale     = Math.min(100, size / maxExtent);
 
-  ctx.setSourceRGBA(textColor.red, textColor.green, textColor.blue, opacity);
+  ctx.setSourceRGBA(iconColor.red, iconColor.green, iconColor.blue, opacity);
   ctx.scale(scale, scale);
   ctx.translate(-extents.x, -extents.y);
   ctx.translate((maxExtent - extents.width) / 2, (maxExtent - extents.height) / 2);
 
-  // We draw to a group to be able to paint emojis with opacity. Is there any other way of
-  // doing this?
-  ctx.pushGroup();
   PangoCairo.update_layout(ctx, layout);
   PangoCairo.show_layout(ctx, layout);
+
   ctx.popGroupToSource();
   ctx.paintWithAlpha(opacity);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This creates a new square-shaped Cairo.ImageSurface of the given size and draws an   //
-// icon to it. The name can either be an icon name from the current icon theme or a     //
-// path to an image file. If neither is found, the given name is written to the image.  //
-// The given font (like 'Sans') and textColor (an object with properties 'red', 'green' //
-// and 'blue' in the range 0..1) are used in this case. This is very useful for emojis  //
-// like 😆 or 🌟!                                                                         //
+// icon to it. See the documentation of paintIcon() above for an explanation what could //
+// be used for icon names.                                                              //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 function createIcon(name, size, font, textColor) {

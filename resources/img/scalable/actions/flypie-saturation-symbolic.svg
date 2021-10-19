@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="4.2333mm"
+   height="4.2333mm"
+   version="1.1"
+   viewBox="0 0 4.2333 4.2333"
+   id="svg19771"
+   sodipodi:docname="flypie-saturation-symbolic.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+  <defs
+     id="defs19775" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="930"
+     id="namedview19773"
+     showgrid="false"
+     inkscape:zoom="45.937859"
+     inkscape:cx="7.9999374"
+     inkscape:cy="7.9999374"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg19771" />
+  <metadata
+     id="metadata19759">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="M 2.11582,0.26744 0.92521,1.45805 H 0.932433 C 0.6721604,1.7491145 0.52828708,2.1259028 0.52834,2.51637 c 0,0.8767387 0.7107413,1.58748 1.58748,1.58748 0.8767387,0 1.58748,-0.7107413 1.58748,-1.58748 C 3.7031968,2.1258499 3.5591383,1.7490351 3.2986778,1.45805 h 0.00775 z M 2.11116,0.97931895 c 0,0 0.6194082,0.65213675 0.8144037,0.88438515 0.1551497,0.1847615 0.2485597,0.4230105 0.2485597,0.6831455 0,0.034403 -0.00185,0.068238 -0.00516,0.1018025 H 1.0533593 C 1.0501579,2.6150874 1.0482,2.581253 1.0482,2.5468496 1.0482,2.2765018 1.1491611,2.0295957 1.3153729,1.841982 1.5101302,1.6221637 2.1111766,0.97931895 2.1111766,0.97931895 Z"
+     fill="#2e3436"
+     stop-color="#000000"
+     stroke-width="0.151456"
+     id="path19765" />
+</svg>

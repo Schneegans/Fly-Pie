@@ -43,7 +43,7 @@ var action = {
   name: _('Activate Shortcut'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'preferences-desktop-keyboard-shortcuts',
+  icon: 'flypie-action-shortcut-symbolic-#c73',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.

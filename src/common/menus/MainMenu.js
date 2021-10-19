@@ -33,7 +33,7 @@ var menu = {
   name: _('Main Menu'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'applications-system',
+  icon: 'flypie-menu-main-menu-symbolic-#49a',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.

@@ -11,19 +11,22 @@
 #### New Features
 
 * A new default theme has been added. The dark color scheme is supposed to blend better with the default GNOME Shell theme.
+* Icons can now be decorated with a colorful background circle! Just append a `-#rrggbb` to the icon name. A circle with the given RGB color will be drawn behind the icon. This is especially useful for symbolic icons. For example, the icon `go-left-symbolic` will look much more interesting like this: `go-left-symbolic-#4499cc`. This works for all icon types (e.g. system icons, built-in icons, emoji or text icons).
 * The D-Bus API of Fly-Pie now includes a `SelectItem()` method which can be used to select an item of a currently opened menu programmatically. For example, this can be useful if you want to directly open a submenu. This is now also used by the live preview of the menu editor: If you click the preview button while you're inside a submenu, this submenu will be directly opened in the preview!
 
 #### Other Enhancements
 
 * Fly-Pie now supports GNOME 3.36, 3.38, 40, and 41 from one code base.
 * Continuous integration is now used to run automated tests on the above GNOME versions on both, X11 and Wayland.
+* A set of built-in icons has been added. The default example menu now uses these icons. Therefore, it should look the same on all systems now.
 * Fly-Pie now uses a `Makefile` for building the extension instead of a bunch of custom scripts. Thank you, [@daPhipz](https://github.com/daPhipz)!
 * New Translations!
   * ...
 
 #### Bug Fixes
 
-* The <kbd>Tab</kbd> can now be used properly for opening menus.
+* <kbd>Tab</kbd> can now be used properly for opening menus.
+* Symbolic icons are now colored correctly in menus.
 
 ## [Fly-Pie 7](https://github.com/schneegans/fly-pie/releases/tag/v7)
 

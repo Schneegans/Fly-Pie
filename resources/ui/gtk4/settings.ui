@@ -1833,12 +1833,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             </property>
                             <property name="tab">
                               <object class="GtkImage">
+                                <property name="icon_name">flypie-global-appearance-symbolic</property>
                                 <property name="tooltip_text" translatable="yes">Global Appearance Settings</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
+                                <property name="icon_size">2</property>
                                 <property name="vexpand">1</property>
-                                <property name="pixel_size">24</property>
-                                <property name="icon_name">document-properties-symbolic</property>
                               </object>
                             </property>
                           </object>
@@ -2037,7 +2035,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Saturation</property>
-                                                <property name="icon_name">preferences-color-symbolic</property>
+                                                <property name="icon_name">flypie-saturation-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">0</property>
@@ -2047,7 +2045,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Luminance</property>
-                                                <property name="icon_name">display-brightness-symbolic</property>
+                                                <property name="icon_name">flypie-luminance-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">1</property>
@@ -2057,7 +2055,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Opacity</property>
-                                                <property name="icon_name">view-reveal-symbolic</property>
+                                                <property name="icon_name">flypie-opacity-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">2</property>
@@ -2240,7 +2238,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Saturation</property>
-                                                <property name="icon_name">preferences-color-symbolic</property>
+                                                <property name="icon_name">flypie-saturation-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">0</property>
@@ -2250,7 +2248,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Luminance</property>
-                                                <property name="icon_name">display-brightness-symbolic</property>
+                                                <property name="icon_name">flypie-luminance-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">1</property>
@@ -2260,7 +2258,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Opacity</property>
-                                                <property name="icon_name">view-reveal-symbolic</property>
+                                                <property name="icon_name">flypie-opacity-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">2</property>
@@ -2468,14 +2466,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             </property>
 
                             <property name="tab">
-                              <object class="GtkDrawingArea" id="center-tab-icon">
-                                <property name="margin_start">4</property>
-                                <property name="margin_end">4</property>
-                                <property name="width_request">28</property>
-                                <property name="height_request">28</property>
+                              <object class="GtkImage">
+                                <property name="icon_name">flypie-edit-center-symbolic</property>
                                 <property name="tooltip_text" translatable="yes">Center Appearance</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
+                                <property name="icon_size">2</property>
                                 <property name="vexpand">1</property>
                               </object>
                             </property>
@@ -2665,7 +2659,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Luminance</property>
-                                                <property name="icon_name">display-brightness-symbolic</property>
+                                                <property name="icon_name">flypie-luminance-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">1</property>
@@ -2675,7 +2669,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Saturation</property>
-                                                <property name="icon_name">preferences-color-symbolic</property>
+                                                <property name="icon_name">flypie-saturation-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">0</property>
@@ -2685,7 +2679,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Opacity</property>
-                                                <property name="icon_name">view-reveal-symbolic</property>
+                                                <property name="icon_name">flypie-opacity-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">2</property>
@@ -2819,7 +2813,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Opacity</property>
-                                                <property name="icon_name">view-reveal-symbolic</property>
+                                                <property name="icon_name">flypie-opacity-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">2</property>
@@ -2829,7 +2823,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Luminance</property>
-                                                <property name="icon_name">display-brightness-symbolic</property>
+                                                <property name="icon_name">flypie-luminance-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">1</property>
@@ -2839,7 +2833,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                                             <child>
                                               <object class="GtkImage">
                                                 <property name="tooltip_text" translatable="yes">Saturation</property>
-                                                <property name="icon_name">preferences-color-symbolic</property>
+                                                <property name="icon_name">flypie-saturation-symbolic</property>
                                                 <layout>
                                                   <property name="column">0</property>
                                                   <property name="row">0</property>
@@ -3218,14 +3212,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             </property>
 
                             <property name="tab">
-                              <object class="GtkDrawingArea" id="children-tab-icon">
-                                <property name="margin_start">4</property>
-                                <property name="margin_end">4</property>
-                                <property name="width_request">28</property>
-                                <property name="height_request">28</property>
+                              <object class="GtkImage">
+                                <property name="icon_name">flypie-edit-children-symbolic</property>
                                 <property name="tooltip_text" translatable="yes">Children Appearance</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
+                                <property name="icon_size">2</property>
                                 <property name="vexpand">1</property>
                               </object>
                             </property>
@@ -3608,14 +3598,10 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                             </property>
 
                             <property name="tab">
-                              <object class="GtkDrawingArea" id="grandchildren-tab-icon">
-                                <property name="margin_start">4</property>
-                                <property name="margin_end">4</property>
-                                <property name="width_request">28</property>
-                                <property name="height_request">28</property>
+                              <object class="GtkImage">
+                                <property name="icon_name">flypie-edit-grandchildren-symbolic</property>
                                 <property name="tooltip_text" translatable="yes">Grandchildren Appearance</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
+                                <property name="icon_size">2</property>
                                 <property name="vexpand">1</property>
                               </object>
                             </property>
@@ -3881,14 +3867,10 @@ will cancel the selection.</property>
 
 
                             <property name="tab">
-                              <object class="GtkDrawingArea" id="wedges-tab-icon">
-                                <property name="margin_start">4</property>
-                                <property name="margin_end">4</property>
-                                <property name="width_request">28</property>
-                                <property name="height_request">28</property>
+                              <object class="GtkImage">
+                                <property name="icon_name">flypie-edit-wedges-symbolic</property>
                                 <property name="tooltip_text" translatable="yes">Wedge Appearance</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
+                                <property name="icon_size">2</property>
                                 <property name="vexpand">1</property>
                               </object>
                             </property>
@@ -4017,14 +3999,10 @@ will cancel the selection.</property>
                             </property>
 
                             <property name="tab">
-                              <object class="GtkDrawingArea" id="trace-tab-icon">
-                                <property name="margin_start">4</property>
-                                <property name="margin_end">4</property>
-                                <property name="width_request">28</property>
-                                <property name="height_request">28</property>
+                              <object class="GtkImage">
+                                <property name="icon_name">flypie-edit-trace-symbolic</property>
                                 <property name="tooltip_text" translatable="yes">Trace Appearance</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
+                                <property name="icon_size">2</property>
                                 <property name="vexpand">1</property>
                               </object>
                             </property>
@@ -4400,14 +4378,10 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                             </property>
 
                             <property name="tab">
-                              <object class="GtkDrawingArea" id="advanced-tab-icon">
-                                <property name="margin_start">4</property>
-                                <property name="margin_end">4</property>
-                                <property name="width_request">28</property>
-                                <property name="height_request">28</property>
+                              <object class="GtkImage">
+                                <property name="icon_name">flypie-edit-advanced-symbolic</property>
                                 <property name="tooltip_text" translatable="yes">Advanced Settings</property>
-                                <property name="halign">center</property>
-                                <property name="valign">center</property>
+                                <property name="icon_size">2</property>
                                 <property name="vexpand">1</property>
                               </object>
                             </property>

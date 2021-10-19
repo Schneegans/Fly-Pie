@@ -232,10 +232,11 @@ function registerWidgets() {
 
             // Create the edit button.
             if (utils.gtk4()) {
-              this.editButton = Gtk.Button.new_from_icon_name('custom-menu-symbolic');
+              this.editButton =
+                  Gtk.Button.new_from_icon_name('flypie-custom-menu-symbolic');
             } else {
               this.editButton = Gtk.Button.new_from_icon_name(
-                  'custom-menu-symbolic', Gtk.IconSize.BUTTON);
+                  'flypie-custom-menu-symbolic', Gtk.IconSize.BUTTON);
               this.editButton.no_show_all = true;
             }
 
@@ -441,9 +442,10 @@ function registerWidgets() {
         {
           let icon;
           if (utils.gtk4()) {
-            icon = Gtk.Image.new_from_icon_name('arrow-up-symbolic');
+            icon = Gtk.Image.new_from_icon_name('flypie-arrow-up-symbolic');
           } else {
-            icon = Gtk.Image.new_from_icon_name('arrow-up-symbolic', Gtk.IconSize.BUTTON);
+            icon = Gtk.Image.new_from_icon_name(
+                'flypie-arrow-up-symbolic', Gtk.IconSize.BUTTON);
           }
           const label = new Gtk.Label({label: _('Add a new item')});
           utils.addCSSClass(label, 'caption');

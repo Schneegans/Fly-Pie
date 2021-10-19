@@ -33,7 +33,7 @@ var menu = {
   name: _('Devices'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'drive-harddisk',
+  icon: 'flypie-menu-devices-symbolic-#979',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.
