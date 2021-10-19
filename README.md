@@ -84,6 +84,7 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
 
 ## :medal_sports: Previous Sponsors and One-Time Donators
 <p align="center">
+  <a href="https://github.com/p2004a">@p2004a</a><br>
   <a href="https://github.com/BakiDance">@BakiDance</a><br>
   GEPLlinux<br>
   <a href="https://github.com/denis-roy">@denis-roy</a><br>
