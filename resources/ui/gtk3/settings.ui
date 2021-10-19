@@ -1827,7 +1827,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                       <object class="GtkImage">
                         <property name="icon_name">flypie-global-appearance-symbolic</property>
                         <property name="tooltip_text" translatable="yes">Global Appearance Settings</property>
-                        <property name="icon_size">2</property>
+                        <property name="pixel_size">32</property>
                         <property name="vexpand">1</property>
                       </object>
                     </child>
@@ -2451,7 +2451,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                       <object class="GtkImage">
                         <property name="icon_name">flypie-edit-center-symbolic</property>
                         <property name="tooltip_text" translatable="yes">Center Appearance</property>
-                        <property name="icon_size">2</property>
+                        <property name="pixel_size">32</property>
                         <property name="vexpand">1</property>
                       </object>
                     </child>
@@ -3187,7 +3187,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                       <object class="GtkImage">
                         <property name="icon_name">flypie-edit-children-symbolic</property>
                         <property name="tooltip_text" translatable="yes">Children Appearance</property>
-                        <property name="icon_size">2</property>
+                        <property name="pixel_size">32</property>
                         <property name="vexpand">1</property>
                       </object>
                     </child>
@@ -3564,7 +3564,7 @@ If you like Fly-Pie, I would be happy if you left a positive review on &lt;a hre
                       <object class="GtkImage">
                         <property name="icon_name">flypie-edit-grandchildren-symbolic</property>
                         <property name="tooltip_text" translatable="yes">Grandchildren Appearance</property>
-                        <property name="icon_size">2</property>
+                        <property name="pixel_size">32</property>
                         <property name="vexpand">1</property>
                       </object>
                     </child>
@@ -3824,7 +3824,7 @@ will cancel the selection.</property>
                       <object class="GtkImage">
                         <property name="icon_name">flypie-edit-wedges-symbolic</property>
                         <property name="tooltip_text" translatable="yes">Wedge Appearance</property>
-                        <property name="icon_size">2</property>
+                        <property name="pixel_size">32</property>
                         <property name="vexpand">1</property>
                       </object>
                     </child>
@@ -3949,7 +3949,7 @@ will cancel the selection.</property>
                       <object class="GtkImage">
                         <property name="icon_name">flypie-edit-trace-symbolic</property>
                         <property name="tooltip_text" translatable="yes">Trace Appearance</property>
-                        <property name="icon_size">2</property>
+                        <property name="pixel_size">32</property>
                         <property name="vexpand">1</property>
                       </object>
                     </child>
@@ -4321,7 +4321,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                       <object class="GtkImage">
                         <property name="icon_name">flypie-edit-advanced-symbolic</property>
                         <property name="tooltip_text" translatable="yes">Advanced Settings</property>
-                        <property name="icon_size">2</property>
+                        <property name="pixel_size">32</property>
                         <property name="vexpand">1</property>
                       </object>
                     </child>
@@ -5182,9 +5182,8 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                       <object class="GtkButton" id="achievements-reset-button">
                         <property name="tooltip_text" translatable="yes">Reset all achievements.</property>
                         <child>
-                          <object class="GtkImage" id="help_image1">
+                          <object class="GtkImage">
                             <property name="icon_name">edit-clear-all-symbolic</property>
-                            <property name="icon_size">1</property>
                           </object>
                         </child>
                         <style>
