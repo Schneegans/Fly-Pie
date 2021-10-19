@@ -45,7 +45,7 @@ var action = {
   name: _('Insert Text'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'input-keyboard',
+  icon: 'flypie-action-insert-text-symbolic-#975',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.

@@ -34,7 +34,7 @@ var menu = {
   name: _('Recent Files'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'document-open-recent',
+  icon: 'flypie-menu-recent-files-symbolic-#67b',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.

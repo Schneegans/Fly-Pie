@@ -43,7 +43,7 @@ var menu = {
   name: _('Favorites'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'starred',
+  icon: 'flypie-menu-favorites-symbolic-#da3',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.

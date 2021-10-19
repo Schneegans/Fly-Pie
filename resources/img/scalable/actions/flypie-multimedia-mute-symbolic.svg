@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="4.2333mm"
+   height="4.2499mm"
+   version="1.1"
+   viewBox="0 0 4.2333 4.2499"
+   id="svg15069"
+   sodipodi:docname="flypie-multimedia-mute-symbolic.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+  <defs
+     id="defs15073" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1526"
+     inkscape:window-height="991"
+     id="namedview15071"
+     showgrid="false"
+     inkscape:zoom="45.758431"
+     inkscape:cx="7.9999374"
+     inkscape:cy="8.0313068"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg15069" />
+  <metadata
+     id="metadata15059">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="m 0.27,1.34 h 0.65732 l 0.78548,-0.79375 0.1447,0.004 v 3.175 L 1.73174,3.72547 0.92732,2.92737 H 0.27 Z"
+     color="#bebebe"
+     fill="#2e3436"
+     id="path15061" />
+  <path
+     d="M 2.67,1.35 2.664,1.356 H 2.26608 v 0.39953 l -0.002,0.002 0.002,0.002 v 0.006 h 0.006 l 0.40754,0.40593 -0.41636,0.41397 0.002,0.002 V 2.99819 H 2.67602 V 2.98699 L 3.08757,2.57784 3.49833,2.98699 v 0.0112 H 3.90908 V 2.58743 l 0.002,-0.002 L 3.4947,2.17146 3.90218,1.76556 h 0.006 v -0.006 l 0.002,-0.002 -0.002,-0.002 V 1.35614 H 3.51026 l -0.006,-0.006 -0.006,0.006 h -0.002 v 0.002 L 3.08638,1.76725 2.67563,1.3581 v -0.002 h -0.002 z"
+     fill="#2e3436"
+     stop-color="#000000"
+     id="path15065" />
+</svg>

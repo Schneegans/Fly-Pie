@@ -141,15 +141,13 @@ var ItemRegistry = class ItemRegistry {
 
     const newItem = {
       name: this.getItemTypes()[type].name,
+      icon: this.getItemTypes()[type].icon,
       type: type,
     };
 
-    // Assign default children and icons.
+    // Assign default children.
     if (type == 'CustomMenu') {
       newItem.children = [];
-      newItem.icon     = this._getRandomEmoji();
-    } else {
-      newItem.icon = this.getItemTypes()[type].icon;
     }
 
     // Assign default custom data.
@@ -360,16 +358,5 @@ var ItemRegistry = class ItemRegistry {
     }
 
     return result;
-  }
-
-  // This is a little helper to make creating new menus more fun. New CustomMenus
-  // will get a random emoji as a icon!
-  static _getRandomEmoji() {
-    let emojis = [
-      ...'💾🐹💞😀🎂🌞🥇💗🌟🐣🔧🌍🐈🍩💕🦔🤣📝🥂💥😁🎉💖😎😛🐸🍕☕🍺🍰🗿'
-    ];
-
-    // The +0 is a little hack - else emojis.length is not recognized as a number?!
-    return emojis[Math.floor(Math.random() * (emojis.length + 0))];
   }
 }

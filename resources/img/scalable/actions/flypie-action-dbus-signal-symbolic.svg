@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="4.2333mm"
+   height="4.2333mm"
+   version="1.1"
+   viewBox="0 0 4.2333 4.2333"
+   id="svg14"
+   sodipodi:docname="flypie-action-dbus-signal-symbolic.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+  <defs
+     id="defs18" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1131"
+     id="namedview16"
+     showgrid="false"
+     inkscape:zoom="12.959127"
+     inkscape:cx="-1.686595"
+     inkscape:cy="5.9280648"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg14"
+     inkscape:document-rotation="0" />
+  <metadata
+     id="metadata2">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="m 1.8420578,0.19136424 c -0.219866,0 -0.39687,0.17700402 -0.39687,0.39687 v 0.39687 H 0.65144783 c -0.14657732,0 -0.26458,0.11800266 -0.26458,0.26457996 v 0.79374 h 0.39687 c 0.21986597,0 0.39686997,0.177004 0.39686997,0.39687 0,0.219866 -0.177004,0.39687 -0.39686997,0.39687 h -0.39687 v 0.79374 c 0,0.1465773 0.11800268,0.26458 0.26458,0.26458 H 1.4451878 v -0.39687 c 0,-0.219866 0.177004,-0.39687 0.39687,-0.39687 0.219866,0 0.39687,0.177004 0.39687,0.39687 v 0.39687 h 0.79374 c 0.1465773,0 0.26458,-0.1180027 0.26458,-0.26458 v -0.79374 h 0.39687 c 0.219866,0 0.39687,-0.177004 0.39687,-0.39687 0,-0.219866 -0.177004,-0.39687 -0.39687,-0.39687 h -0.39687 v -0.79374 c 0,-0.1465773 -0.1180027,-0.26457996 -0.26458,-0.26457996 h -0.79374 v -0.39687 c 0,-0.21986598 -0.177004,-0.39687 -0.39687,-0.39687 z"
+     color="#000000"
+     color-rendering="auto"
+     enable-background="new"
+     fill="#2e3436"
+     image-rendering="auto"
+     shape-rendering="auto"
+     solid-color="#000000"
+     style="isolation:auto;mix-blend-mode:normal;stroke-width:0.26458"
+     id="path6" />
+</svg>

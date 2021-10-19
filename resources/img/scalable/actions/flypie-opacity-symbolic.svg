@@ -7,15 +7,42 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   height="16px"
-   viewBox="0 0 16 16"
-   width="16px"
+   width="4.2333336mm"
+   height="4.2333336mm"
    version="1.1"
-   id="svg6401"
+   viewBox="0 0 4.2333334 4.2333334"
+   id="svg14"
    sodipodi:docname="flypie-opacity-symbolic.svg"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+  <defs
+     id="defs18" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="960"
+     inkscape:window-height="1131"
+     id="namedview16"
+     showgrid="false"
+     inkscape:zoom="12.959127"
+     inkscape:cx="11.869331"
+     inkscape:cy="19.252497"
+     inkscape:window-x="960"
+     inkscape:window-y="32"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg14"
+     inkscape:document-rotation="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
-     id="metadata6407">
+     id="metadata2">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -26,403 +53,22 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <defs
-     id="defs6405" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="776"
-     inkscape:window-height="480"
-     id="namedview6403"
-     showgrid="false"
-     inkscape:zoom="45.9375"
-     inkscape:cx="8"
-     inkscape:cy="8"
-     inkscape:window-x="26"
-     inkscape:window-y="23"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg6401" />
-  <filter
-     id="a"
-     height="100%"
-     width="100%"
-     x="0%"
-     y="0%">
-    <feColorMatrix
-       in="SourceGraphic"
-       type="matrix"
-       values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"
-       id="feColorMatrix6238" />
-  </filter>
-  <mask
-     id="b">
-    <g
-       filter="url(#a)"
-       id="g6243">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.3"
-         id="path6241" />
-    </g>
-  </mask>
-  <clipPath
-     id="c">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6246" />
-  </clipPath>
-  <mask
-     id="d">
-    <g
-       filter="url(#a)"
-       id="g6251">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.05"
-         id="path6249" />
-    </g>
-  </mask>
-  <clipPath
-     id="e">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6254" />
-  </clipPath>
-  <mask
-     id="f">
-    <g
-       filter="url(#a)"
-       id="g6259">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.05"
-         id="path6257" />
-    </g>
-  </mask>
-  <clipPath
-     id="g">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6262" />
-  </clipPath>
-  <mask
-     id="h">
-    <g
-       filter="url(#a)"
-       id="g6267">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.05"
-         id="path6265" />
-    </g>
-  </mask>
-  <clipPath
-     id="i">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6270" />
-  </clipPath>
-  <mask
-     id="j">
-    <g
-       filter="url(#a)"
-       id="g6275">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.05"
-         id="path6273" />
-    </g>
-  </mask>
-  <clipPath
-     id="k">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6278" />
-  </clipPath>
-  <mask
-     id="l">
-    <g
-       filter="url(#a)"
-       id="g6283">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.05"
-         id="path6281" />
-    </g>
-  </mask>
-  <clipPath
-     id="m">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6286" />
-  </clipPath>
-  <mask
-     id="n">
-    <g
-       filter="url(#a)"
-       id="g6291">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.05"
-         id="path6289" />
-    </g>
-  </mask>
-  <clipPath
-     id="o">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6294" />
-  </clipPath>
-  <mask
-     id="p">
-    <g
-       filter="url(#a)"
-       id="g6299">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.3"
-         id="path6297" />
-    </g>
-  </mask>
-  <clipPath
-     id="q">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6302" />
-  </clipPath>
-  <mask
-     id="r">
-    <g
-       filter="url(#a)"
-       id="g6307">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.5"
-         id="path6305" />
-    </g>
-  </mask>
-  <clipPath
-     id="s">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6310" />
-  </clipPath>
-  <mask
-     id="t">
-    <g
-       filter="url(#a)"
-       id="g6315">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.4"
-         id="path6313" />
-    </g>
-  </mask>
-  <clipPath
-     id="u">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6318" />
-  </clipPath>
-  <mask
-     id="v">
-    <g
-       filter="url(#a)"
-       id="g6323">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.4"
-         id="path6321" />
-    </g>
-  </mask>
-  <clipPath
-     id="w">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6326" />
-  </clipPath>
-  <mask
-     id="x">
-    <g
-       filter="url(#a)"
-       id="g6331">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.5"
-         id="path6329" />
-    </g>
-  </mask>
-  <clipPath
-     id="y">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6334" />
-  </clipPath>
-  <mask
-     id="z">
-    <g
-       filter="url(#a)"
-       id="g6339">
-      <path
-         d="m 0 0 h 16 v 16 h -16 z"
-         fill-opacity="0.5"
-         id="path6337" />
-    </g>
-  </mask>
-  <clipPath
-     id="A">
-    <path
-       d="m 0 0 h 1024 v 800 h -1024 z"
-       id="path6342" />
-  </clipPath>
-  <g
-     clip-path="url(#c)"
-     mask="url(#b)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6347">
-    <path
-       d="m 562.460938 212.058594 h 10.449218 c -1.183594 0.492187 -1.296875 2.460937 0 3 h -10.449218 z m 0 0"
-       fill="#2e3436"
-       id="path6345" />
-  </g>
-  <g
-     clip-path="url(#e)"
-     mask="url(#d)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6351">
-    <path
-       d="m 16 632 h 1 v 1 h -1 z m 0 0"
-       fill="#2e3436"
-       fill-rule="evenodd"
-       id="path6349" />
-  </g>
-  <g
-     clip-path="url(#g)"
-     mask="url(#f)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6355">
-    <path
-       d="m 17 631 h 1 v 1 h -1 z m 0 0"
-       fill="#2e3436"
-       fill-rule="evenodd"
-       id="path6353" />
-  </g>
-  <g
-     clip-path="url(#i)"
-     mask="url(#h)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6359">
-    <path
-       d="m 18 634 h 1 v 1 h -1 z m 0 0"
-       fill="#2e3436"
-       fill-rule="evenodd"
-       id="path6357" />
-  </g>
-  <g
-     clip-path="url(#k)"
-     mask="url(#j)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6363">
-    <path
-       d="m 16 634 h 1 v 1 h -1 z m 0 0"
-       fill="#2e3436"
-       fill-rule="evenodd"
-       id="path6361" />
-  </g>
-  <g
-     clip-path="url(#m)"
-     mask="url(#l)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6367">
-    <path
-       d="m 17 635 h 1 v 1 h -1 z m 0 0"
-       fill="#2e3436"
-       fill-rule="evenodd"
-       id="path6365" />
-  </g>
-  <g
-     clip-path="url(#o)"
-     mask="url(#n)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6371">
-    <path
-       d="m 19 635 h 1 v 1 h -1 z m 0 0"
-       fill="#2e3436"
-       fill-rule="evenodd"
-       id="path6369" />
-  </g>
-  <g
-     clip-path="url(#q)"
-     mask="url(#p)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6375">
-    <path
-       d="m 136 660 v 7 h 7 v -7 z m 0 0"
-       fill="#2e3436"
-       id="path6373" />
-  </g>
-  <g
-     clip-path="url(#s)"
-     mask="url(#r)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6379">
-    <path
-       d="m 199 642 h 3 v 12 h -3 z m 0 0"
-       fill="#2e3436"
-       id="path6377" />
-  </g>
   <path
-     d="m 8 2 c -3.648438 0.003906 -6.832031 2.476562 -7.738281 6.007812 c 0.914062 3.527344 4.097656 5.988282 7.738281 5.992188 c 3.648438 -0.003906 6.832031 -2.476562 7.738281 -6.011719 c -0.914062 -3.523437 -4.097656 -5.984375 -7.738281 -5.988281 z m 0 2 c 2.210938 0 4 1.789062 4 4 s -1.789062 4 -4 4 s -4 -1.789062 -4 -4 s 1.789062 -4 4 -4 z m 0 0"
-     fill="#2e3436"
-     id="path6381" />
+     sodipodi:nodetypes="ccccccccccccccccccccccccc"
+     inkscape:connector-curvature="0"
+     style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#2e3436;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.264583px;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+     d="m 0.58600992,1.1926177 c -0.0608886,0.064414 -0.11767079,0.1325888 -0.1700133,0.204122 L 1.0614344,2.0421783 c 0.00786,-0.1044982 0.031197,-0.2072494 0.069247,-0.304891 z m -0.33124509,0.462504 c -0.0449289,0.082723 -0.084291,0.1683518 -0.1178216,0.2563151 l 1.74009037,1.736032 c 0.1073415,0.056624 0.3819631,0.031911 0.368308,0.031304 L 1.6872348,3.0875949 C 1.4477234,2.9811758 1.256218,2.7896712 1.1497999,2.55016 Z M 1.593702,2.2003081 C 1.628296,2.4299045 1.8085198,2.6101299 2.0381173,2.6447255 Z M 0.13487684,2.3289824 c 0.20676128,0.5566531 0.6378363,1.0008557 1.18803996,1.2242148 -0.00439,-0.028537 -0.018018,-0.054852 -0.038756,-0.074931 z M 2.5001062,3.1067129 c -0.097451,0.038176 -0.200025,0.061687 -0.304374,0.069763 l 0.4599199,0.4599205 c 0.08664,-0.022998 0.1717331,-0.051478 0.2547646,-0.085266 -0.00482,-0.027799 -0.018388,-0.053329 -0.038756,-0.072864 z"
+     id="path3244" />
   <path
-     d="m 10 8 c 0 1.105469 -0.894531 2 -2 2 s -2 -0.894531 -2 -2 s 0.894531 -2 2 -2 s 2 0.894531 2 2 z m 0 0"
-     fill="#2e3436"
-     id="path6383" />
-  <g
-     clip-path="url(#u)"
-     mask="url(#t)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6387">
-    <path
-       d="m 209.5 144.160156 c 0.277344 0 0.5 0.222656 0.5 0.5 v 1 c 0 0.277344 -0.222656 0.5 -0.5 0.5 s -0.5 -0.222656 -0.5 -0.5 v -1 c 0 -0.277344 0.222656 -0.5 0.5 -0.5 z m 0 0"
-       fill="#2e3436"
-       id="path6385" />
-  </g>
-  <g
-     clip-path="url(#w)"
-     mask="url(#v)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6391">
-    <path
-       d="m 206.5 144.160156 c 0.277344 0 0.5 0.222656 0.5 0.5 v 1 c 0 0.277344 -0.222656 0.5 -0.5 0.5 s -0.5 -0.222656 -0.5 -0.5 v -1 c 0 -0.277344 0.222656 -0.5 0.5 -0.5 z m 0 0"
-       fill="#2e3436"
-       id="path6389" />
-  </g>
-  <g
-     clip-path="url(#y)"
-     mask="url(#x)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6395">
-    <path
-       d="m 229.5 143.160156 c -0.546875 0 -1 0.457032 -1 1 c 0 0.546875 0.453125 1 1 1 s 1 -0.453125 1 -1 c 0 -0.542968 -0.453125 -1 -1 -1 z m 0 0"
-       fill="#2e3436"
-       id="path6393" />
-  </g>
-  <g
-     clip-path="url(#A)"
-     mask="url(#z)"
-     transform="matrix(1 0 0 1 -100 -200)"
-     id="g6399">
-    <path
-       d="m 226.453125 143.160156 c -0.519531 0 -0.953125 0.433594 -0.953125 0.953125 v 0.09375 c 0 0.519531 0.433594 0.953125 0.953125 0.953125 h 0.09375 c 0.519531 0 0.953125 -0.433594 0.953125 -0.953125 v -0.09375 c 0 -0.519531 -0.433594 -0.953125 -0.953125 -0.953125 z m 0 0"
-       fill="#2e3436"
-       id="path6397" />
-  </g>
+     style="vector-effect:none;fill:#2e3436;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 2.1166668,0.52909244 C 1.7121877,0.53052119 1.3165827,0.64779404 0.97668571,0.86705636 L 1.4257524,1.3161244 C 1.6176917,1.1501137 1.8628943,1.0585988 2.1166668,1.0582591 2.7011684,1.0582591 3.175,1.532091 3.175,2.1165924 3.1744709,2.3702526 3.0827001,2.6152578 2.9166186,2.8069895 l 0.468704,0.4687051 C 3.7680741,2.9892022 4.0425608,2.5815698 4.1640866,2.1191763 3.9239693,1.1843359 3.0818508,0.53032355 2.1166668,0.52909244 Z m 0,1.05833326 c -0.1135539,7.17e-5 -0.224073,0.03667 -0.3152273,0.1043863 l 0.3178122,0.3178101 c -0.00159,-0.00834 -0.00265,-0.016817 -0.00265,-0.025321 0,-0.073063 0.05923,-0.1322917 0.1322917,-0.1322917 0.073062,0 0.1322916,0.059229 0.1322916,0.1322917 0,0.073063 -0.05923,0.1322917 -0.1322916,0.1322917 -0.00849,-4.56e-5 -0.016986,-8.996e-4 -0.025321,-0.00259 l 0.3172937,0.3172934 c 0.067855,-0.09094 0.1046321,-0.2012659 0.1049628,-0.3147012 0,-0.2922506 -0.2369158,-0.5291667 -0.5291666,-0.5291667 z"
+     id="path3216"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cccccccccccccssccccc" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#2e3436;stroke-width:0.264583px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 0.39687518,0.39680078 3.8364583,3.8363839"
+     id="path3242"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cc" />
 </svg>

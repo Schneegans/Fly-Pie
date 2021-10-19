@@ -33,7 +33,7 @@ var menu = {
   name: _('Bookmarks'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'folder',
+  icon: 'flypie-menu-bookmarks-symbolic-#7a3',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.

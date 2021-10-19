@@ -46,7 +46,7 @@ var menu = {
   name: _('System'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'system-log-out',
+  icon: 'flypie-menu-system-symbolic-#69b',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.
@@ -69,7 +69,7 @@ var menu = {
     if (app) {
       result.children.push({
         name: app.get_name(),
-        icon: app.get_app_info().get_icon().to_string(),
+        icon: 'flypie-menu-system-settings-symbolic-#69b',
         onSelect: () => app.activate()
       });
     }
@@ -79,7 +79,7 @@ var menu = {
       result.children.push({
         // Translators: As in 'Lock the screen.'
         name: _('Lock'),
-        icon: 'system-lock-screen',
+        icon: 'flypie-menu-system-lock-symbolic-#69b',
         onSelect: () => SystemActions.activateLockScreen()
       });
     }
@@ -88,7 +88,7 @@ var menu = {
     if (SystemActions.can_suspend) {
       result.children.push({
         name: _('Suspend'),
-        icon: 'system-suspend',
+        icon: 'flypie-menu-system-suspend-symbolic-#69b',
         onSelect: () => SystemActions.activateSuspend()
       });
     }
@@ -97,7 +97,7 @@ var menu = {
     if (SystemActions.can_switch_user) {
       result.children.push({
         name: _('Switch User…'),
-        icon: 'system-users',
+        icon: 'flypie-menu-system-switchuser-symbolic-#69b',
         onSelect: () => SystemActions.activateSwitchUser()
       });
     }
@@ -106,7 +106,7 @@ var menu = {
     if (SystemActions.can_logout) {
       result.children.push({
         name: _('Log Out'),
-        icon: 'system-log-out',
+        icon: 'flypie-menu-system-logout-symbolic-#69b',
         onSelect: () => SystemActions.activateLogout()
       });
     }
@@ -115,7 +115,7 @@ var menu = {
     if (SystemActions.can_power_off) {
       result.children.push({
         name: _('Power Off…'),
-        icon: 'system-shutdown',
+        icon: 'flypie-menu-system-poweroff-symbolic-#69b',
         onSelect: () => SystemActions.activatePowerOff()
       });
     }

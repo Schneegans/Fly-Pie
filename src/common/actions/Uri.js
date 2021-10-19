@@ -33,7 +33,7 @@ var action = {
   name: _('Open URI'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'applications-internet',
+  icon: 'flypie-action-uri-symbolic-#449',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.

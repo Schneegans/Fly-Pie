@@ -32,7 +32,7 @@ var action = {
   name: _('D-Bus Signal'),
 
   // This is also used in the add-new-item-popover.
-  icon: 'application-x-addon',
+  icon: 'flypie-action-dbus-signal-symbolic-#5a6',
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.
