@@ -56,14 +56,14 @@ var ExampleMenu = class ExampleMenu {
   }
 
   static getItems() {
+    // clang-format off
     return [
       {
         // Translators: The tutorial menu allows selecting triplets such as "Smelly
         // Chocolate Muffin". This is one of the first words. The three words are directly
         // appended to each other; therefore the trailing space is important. You can also
         // use hyphens if appropriate.
-        names:
-            [_('Cold '), _('Hot '), _('Wet '), _('Deadly '), _('Smelly '), _('Vegan ')],
+        names: [_('Cold '), _('Hot '), _('Wet '), _('Deadly '), _('Smelly '), _('Vegan ')],
         icons: [
           'flypie-cold-symbolic-#68c', 'flypie-hot-symbolic-#b42',
           'flypie-wet-symbolic-#349', 'flypie-deadly-symbolic-#523',
@@ -95,5 +95,6 @@ var ExampleMenu = class ExampleMenu {
         ]
       }
     ];
+    // clang-format on
   }
 }
