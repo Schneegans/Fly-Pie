@@ -4,7 +4,6 @@
 
 <p align="center">
   <a href="https://extensions.gnome.org/extension/3433/fly-pie"><img src="https://img.shields.io/badge/Download-extensions.gnome.org-e67f4d.svg?logo=gnome&logoColor=lightgrey&labelColor=303030" /></a>
-  <a href="https://open.vscode.dev/Schneegans/Fly-Pie"><img src="https://open.vscode.dev/badges/open-in-vscode.svg" /></a>
   <br />
   <a href="https://github.com/Schneegans/Fly-Pie/actions"><img src="https://github.com/Schneegans/Fly-Pie/workflows/Checks/badge.svg?branch=develop" /></a>
   <a href="https://hosted.weblate.org/engage/fly-pie/"><img src="https://img.shields.io/weblate/progress/fly-pie?label=Translated&logo=weblate&logoColor=lightgray&labelColor=303030" /></a>
