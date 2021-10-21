@@ -125,7 +125,7 @@ var AchievementsPage = class AchievementsPage {
             if (key.startsWith('stats-')) {
               this._settings.reset(key);
             }
-          })
+          });
         }
         dialog.destroy();
       });
