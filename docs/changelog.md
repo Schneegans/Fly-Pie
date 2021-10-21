@@ -19,6 +19,7 @@
 * Fly-Pie now supports GNOME 3.36, 3.38, 40, and 41 from one code base.
 * Continuous integration is now used to run automated tests on the above GNOME versions on both, X11 and Wayland.
 * A set of built-in icons has been added. The default example menu now uses these icons. Therefore, it should look the same on all systems now.
+* The tutorial menu does not use Emojis any more because some systems have no emoji font installed per default. It now uses built-in icons as well and should be much easier to translate!
 * Fly-Pie now uses a `Makefile` for building the extension instead of a bunch of custom scripts. Thank you, [@daPhipz](https://github.com/daPhipz)!
 * New Translations!
   * ...
