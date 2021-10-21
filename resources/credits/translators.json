@@ -1,39 +1,33 @@
 [
   {
-    "Portuguese (Brazil)": [
+    "Norwegian Bokm\u00e5l": [
       [
-        "570cxat11@relay.firefox.com",
-        "Daimar Stein",
-        3
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        12
       ],
       [
-        "hugokarvalho@hotmail.com",
-        "Hugo Carvalho",
-        4
-      ],
-      [
-        "Guarakami1807@protonmail.ch",
-        "Thiago Carmona Monteiro",
-        89
+        "epost@anotheragency.no",
+        "Allan Nordh\u00f8y",
+        319
       ]
     ]
   },
   {
-    "German": [
+    "Dutch": [
       [
-        "j.lavoie@net-c.ca",
-        "J. Lavoie",
-        17
-      ],
+        "vistausss@fastmail.com",
+        "Heimen Stoffels",
+        63
+      ]
+    ]
+  },
+  {
+    "Finnish": [
       [
-        "philipp.kiemle@gmail.com",
-        "Philipp Kiemle",
-        20
-      ],
-      [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
-        127
+        "jiri.gronroos@iki.fi",
+        "Jiri Gr\u00f6nroos",
+        233
       ]
     ]
   },
@@ -47,11 +41,35 @@
     ]
   },
   {
-    "Portuguese": [
+    "Sinhala": [
+      [
+        "R45XvezA@protonmail.ch",
+        "HelaBasa",
+        8
+      ]
+    ]
+  },
+  {
+    "Portuguese (Brazil)": [
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        1
+      ],
       [
         "hugokarvalho@hotmail.com",
         "Hugo Carvalho",
-        188
+        4
+      ],
+      [
+        "570cxat11@relay.firefox.com",
+        "Daimar Stein",
+        4
+      ],
+      [
+        "Guarakami1807@protonmail.ch",
+        "Thiago Carmona Monteiro",
+        86
       ]
     ]
   },
@@ -60,7 +78,7 @@
       [
         "code@simonschneegans.de",
         "Simon Schneegans",
-        22
+        23
       ],
       [
         "j.lavoie@net-c.ca",
@@ -75,29 +93,30 @@
     ]
   },
   {
-    "Dutch": [
+    "Chinese (Simplified)": [
       [
-        "vistausss@fastmail.com",
-        "Heimen Stoffels",
-        63
+        "me@wuzhiping.top",
+        "Frank.wu",
+        58
       ]
     ]
   },
   {
-    "Spanish": [
+    "German": [
       [
-        "captainjawz@outlook.com",
-        "Danilo Reyes",
-        143
-      ]
-    ]
-  },
-  {
-    "Finnish": [
+        "j.lavoie@net-c.ca",
+        "J. Lavoie",
+        13
+      ],
       [
-        "jiri.gronroos@iki.fi",
-        "Jiri Gr\u00f6nroos",
-        321
+        "philipp.kiemle@gmail.com",
+        "Philipp Kiemle",
+        24
+      ],
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        148
       ]
     ]
   },
@@ -106,30 +125,30 @@
       [
         "R45XvezA@protonmail.ch",
         "HelaBasa",
-        13
+        4
       ]
     ]
   },
   {
-    "Sinhala": [
+    "Portuguese": [
       [
-        "R45XvezA@protonmail.ch",
-        "HelaBasa",
-        18
+        "hugokarvalho@hotmail.com",
+        "Hugo Carvalho",
+        116
       ]
     ]
   },
   {
-    "Norwegian Bokm\u00e5l": [
+    "Spanish": [
       [
         "code@simonschneegans.de",
         "Simon Schneegans",
-        13
+        1
       ],
       [
-        "epost@anotheragency.no",
-        "Allan Nordh\u00f8y",
-        416
+        "captainjawz@outlook.com",
+        "Danilo Reyes",
+        137
       ]
     ]
   }
