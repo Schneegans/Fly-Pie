@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-21 21:11+0200\n"
-"PO-Revision-Date: 2021-10-21 19:37+0000\n"
+"PO-Revision-Date: 2021-10-22 20:42+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
 "\n"
@@ -1092,11 +1092,11 @@ msgstr "muffin"
 
 #: src/prefs/ExampleMenu.js:52
 msgid "Doughnut"
-msgstr "Doughnut"
+msgstr "doughnut"
 
 #: src/prefs/ExampleMenu.js:52
 msgid "Cookie"
-msgstr "Keks"
+msgstr "keks"
 
 #. Translators: This is the name of the tutorial menu.
 #. Translators: This is the name of the default menu.
