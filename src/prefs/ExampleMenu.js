@@ -19,7 +19,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 // leaf items.                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var Levels = [
+var ExampleMenuItems = [
   {
     // Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
     // Muffin". This is one of the first words. The three words are directly appended to
@@ -67,23 +67,27 @@ var ExampleMenu = class ExampleMenu {
     // Translators: This is the name of the tutorial menu.
     const menu = {name: _('Example Menu'), icon: 'flypie-symbolic-#555', children: []};
 
-    for (let i = 0; i < Levels[0].names.length; i++) {
+    for (let i = 0; i < ExampleMenuItems[0].names.length; i++) {
 
-      const child = {name: Levels[0].names[i], icon: Levels[0].icons[i], children: []};
+      const child = {
+        name: ExampleMenuItems[0].names[i],
+        icon: ExampleMenuItems[0].icons[i],
+        children: []
+      };
       menu.children.push(child);
 
-      for (let i = 0; i < Levels[1].names.length; i++) {
+      for (let i = 0; i < ExampleMenuItems[1].names.length; i++) {
         const grandchild = {
-          name: child.name + Levels[1].names[i],
-          icon: Levels[1].icons[i],
+          name: child.name + ExampleMenuItems[1].names[i],
+          icon: ExampleMenuItems[1].icons[i],
           children: []
         };
         child.children.push(grandchild);
 
-        for (let i = 0; i < Levels[2].names.length; i++) {
+        for (let i = 0; i < ExampleMenuItems[2].names.length; i++) {
           const grandgrandchild = {
-            name: grandchild.name + Levels[2].names[i],
-            icon: Levels[2].icons[i],
+            name: grandchild.name + ExampleMenuItems[2].names[i],
+            icon: ExampleMenuItems[2].icons[i],
           };
           grandchild.children.push(grandgrandchild);
         }
