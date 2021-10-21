@@ -390,8 +390,16 @@ var Menu = class Menu {
     });
 
     // Whenever settings are changed, we adapt the currently shown menu accordingly.
-    this._settingsConnection =
-        this._settings.connect('change-event', this._onSettingsChange.bind(this));
+    this._settingsConnection = this._settings.connect('change-event', (o, keys) => {
+      // For historical reasons, all settings of Fly-Pie are included in one schema. This
+      // is a bit unfortunate, as we cannot easily listen only for appearance changes, as
+      // all statistics are included in the schema as well. To avoid reconfiguration of
+      // the menu if a statistics key changes, we have to manual filter here.
+      if (Statistics.getInstance().containsAnyNonStatsKey(keys)) {
+        this._onSettingsChange();
+      }
+    });
+
     this._onSettingsChange();
   }
 
@@ -1047,12 +1055,9 @@ var Menu = class Menu {
   _selectChild(child) {
     if (child.getSelectionCallback() != null) {
 
-      // Record this selection in the statistics. Parameters are selection depth, time
-      // and whether a continuous gesture was used for the selection.
-      Statistics.getInstance().addSelection(
-          this._menuPath.length - 1, this._timer.getElapsed(),
-          this._gestureOnlySelection);
-
+      // This is required for the statistics.
+      const selectionTime  = this._timer.getElapsed();
+      const selectionDepth = this._menuPath.length - 1;
       this._background.set_easing_delay(
           this._settings.get_double('easing-duration') * 1000);
 
@@ -1076,8 +1081,13 @@ var Menu = class Menu {
       // Then call the activation callback!
       child.getSelectionCallback()();
 
-      // Finally report the selection over the D-Bus.
+      // Report the selection over the D-Bus.
       this._emitSelectSignal(menuID, child.id);
+
+      // Finally, record this selection in the statistics. Parameters are selection depth,
+      // time and whether a continuous gesture was used for the selection.
+      Statistics.getInstance().addSelection(
+          selectionDepth, selectionTime, this._gestureOnlySelection);
     }
   }
 };

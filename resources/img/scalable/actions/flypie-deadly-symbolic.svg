@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="4.2333mm"
+   height="4.2333mm"
+   version="1.1"
+   viewBox="0 0 4.2333 4.2333"
+   id="svg17081"
+   sodipodi:docname="flypie-deadly-symbolic.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+  <defs
+     id="defs17085" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1461"
+     inkscape:window-height="1061"
+     id="namedview17083"
+     showgrid="false"
+     inkscape:zoom="45.937859"
+     inkscape:cx="3.809494"
+     inkscape:cy="7.9999374"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg17081"
+     inkscape:document-rotation="0" />
+  <metadata
+     id="metadata17051">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     id="rect25896"
+     style="fill:#2e3436;fill-opacity:1;stroke:none;stroke-width:0.529169;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:26.4"
+     d="M 2.0023353,0.27090046 A 1.5874999,1.5874999 0 0 0 1.3274415,0.47915663 1.5874999,1.5874999 0 0 0 0.53369151,1.853749 V 2.9120823 H 1.3274415 V 3.9704156 H 1.5920248 V 3.4412489 H 1.8566081 V 3.9704156 H 2.3857747 V 3.4412489 H 2.6503581 V 3.9704156 H 2.9149414 V 2.9120823 H 3.7086913 V 1.853749 A 1.5874999,1.5874999 0 0 0 2.9149414,0.47915663 1.5874999,1.5874999 0 0 0 2.0023353,0.27090046 Z M 1.3274415,1.853749 h 0.2645833 c 0.1465791,0 0.2645833,0.1180042 0.2645833,0.2645833 0,0.1465792 -0.1180042,0.2645833 -0.2645833,0.2645833 H 1.3274415 c -0.1465792,0 -0.2645834,-0.1180041 -0.2645834,-0.2645833 0,-0.1465791 0.1180042,-0.2645833 0.2645834,-0.2645833 z m 1.3229166,0 h 0.2645833 c 0.1465791,0 0.2645833,0.1180042 0.2645833,0.2645833 0,0.1465792 -0.1180042,0.2645833 -0.2645833,0.2645833 H 2.6503581 c -0.1465792,0 -0.2645834,-0.1180041 -0.2645834,-0.2645833 0,-0.1465791 0.1180042,-0.2645833 0.2645834,-0.2645833 z M 2.1211914,2.3829156 2.3857747,2.9120823 H 1.8566081 Z" />
+</svg>

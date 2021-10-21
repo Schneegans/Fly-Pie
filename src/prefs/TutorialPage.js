@@ -12,12 +12,13 @@ const {Gio, Gdk, Gtk, GdkPixbuf} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me            = imports.misc.extensionUtils.getCurrentExtension();
-const utils         = Me.imports.src.common.utils;
-const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
-const Timer         = Me.imports.src.common.Timer.Timer;
-const Statistics    = Me.imports.src.common.Statistics.Statistics;
-const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
+const Me               = imports.misc.extensionUtils.getCurrentExtension();
+const utils            = Me.imports.src.common.utils;
+const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
+const Timer            = Me.imports.src.common.Timer.Timer;
+const Statistics       = Me.imports.src.common.Statistics.Statistics;
+const ExampleMenu      = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
+const ExampleMenuItems = Me.imports.src.prefs.ExampleMenu.ExampleMenuItems;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -54,7 +55,7 @@ var TutorialPage = class TutorialPage {
           this._dbus.connectSignal('OnSelect', (proxy, sender, [menuID, itemID]) => {
             // When the target item was selected, we store the last and best selection
             // time in the settings.
-            if (menuID == this._lastID && itemID == '/1/2/0') {
+            if (menuID == this._lastID && itemID == '/1/3/0') {
               const time     = this._timer.getElapsed();
               const bestTime = this._settings.get_uint('stats-best-tutorial-time');
 
@@ -127,6 +128,15 @@ var TutorialPage = class TutorialPage {
         video.set_from_animation(
             GdkPixbuf.PixbufAnimation.new_from_resource('/video/video' + i + '.gif'));
       }
+    }
+
+    // Inject the tutorial selection goal (Hot Apple Pie) strings.
+    for (let i = 1; i <= 2; i++) {
+      const label = this._builder.get_object('tutorial-label-' + i);
+      label.label = label.label.replace(
+          '%s',
+          `<b>${ExampleMenuItems[0].names[1]}${ExampleMenuItems[1].names[3]}${
+              ExampleMenuItems[2].names[0]}</b>`);
     }
 
     // Make the five Show-Menu buttons of the tutorial pages actually show a menu.

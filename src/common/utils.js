@@ -221,6 +221,7 @@ function getRoot(widget) {
 // icon name! A circle of this color will be drawn below the icon.                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+let _iconDecor = null;
 function paintIcon(ctx, name, size, opacity, font, textColor) {
 
   // In this case, we will not draw anything...
@@ -268,10 +269,13 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
     ctx.restore();
 
     // This contains some slight shadow to provide a bit of depth.
-    const decor = GdkPixbuf.Pixbuf.new_from_resource('/img/symbolic-icon-decor.svg');
+    if (!_iconDecor) {
+      _iconDecor = GdkPixbuf.Pixbuf.new_from_resource('/img/symbolic-icon-decor.svg');
+    }
+
     ctx.save()
-    ctx.scale(size / decor.get_width(), size / decor.get_height());
-    Gdk.cairo_set_source_pixbuf(ctx, decor, 0, 0);
+    ctx.scale(size / _iconDecor.get_width(), size / _iconDecor.get_height());
+    Gdk.cairo_set_source_pixbuf(ctx, _iconDecor, 0, 0);
     ctx.paint();
     ctx.restore();
 

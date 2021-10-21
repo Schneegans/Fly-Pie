@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="4.2333mm"
+   height="4.2333mm"
+   version="1.1"
+   viewBox="0 0 4.2333 4.2333"
+   id="svg14"
+   sodipodi:docname="flypie-chocolate-symbolic.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+  <defs
+     id="defs18">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect981"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,0.1,0,1 @ F,0,0,1,0,0.1,0,1 @ F,0,0,1,0,0.1,0,1 @ F,0,0,1,0,0.1,0,1 @ F,0,0,1,0,0.1,0,1 @ F,0,0,1,0,0.1,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="0.1"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect975"
+       is_visible="true"
+       lpeversion="1"
+       satellites_param="F,0,0,1,0,0.1,0,1 @ F,0,0,1,0,0.1,0,1 @ F,0,0,1,0,0.1,0,1 @ F,0,0,1,0,0.1,0,1 @ F,0,0,1,0,0.1,0,1 @ F,0,0,1,0,0.1,0,1"
+       unit="px"
+       method="auto"
+       mode="F"
+       radius="0.1"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="-5.4065435 : 7.3003591 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="11.931435 : 7.2381679 : 1"
+       inkscape:persp3d-origin="2.11665 : 1.4111 : 1"
+       id="perspective929" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1131"
+     id="namedview16"
+     showgrid="false"
+     inkscape:zoom="15.165579"
+     inkscape:cx="3.708706"
+     inkscape:cy="19.651577"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg14"
+     inkscape:document-rotation="0" />
+  <metadata
+     id="metadata2">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     id="path973"
+     style="fill:#2e3436;fill-opacity:1;stroke:none;stroke-width:0.264582px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 2.4440544,0.49993042 c -0.024398,2.1115e-4 -0.048354,0.00655 -0.069669,0.0184178 L 0.6863173,1.4648839 c -0.0436514,0.02438 -0.0769504,0.063798 -0.0936925,0.11091 L 0.16460177,2.7837876 c -0.0153875,0.043183 -3.6901e-4,0.091336 0.0368365,0.1181167 L 1.6865056,3.9645544 c 0.038207,0.027182 0.088955,0.028916 0.1289274,0.0044 l 2.2290026,-1.364152 c 0.039156,-0.023806 0.057526,-0.070879 0.044845,-0.1149135 L 3.7109061,1.1826043 C 3.6971505,1.1353245 3.6643766,1.0958808 3.6204167,1.0736966 L 2.5113208,0.51554583 C 2.4904725,0.50502234 2.4674037,0.49967204 2.4440544,0.49993042 Z M 3.4218205,1.2598815 c 0.00545,4.345e-4 0.00712,0.00763 0.00241,0.01041 L 1.9912066,2.1107222 c -0.041902,0.024633 -0.069561,0.067757 -0.074474,0.1161147 L 1.7705882,3.675869 c -7.981e-4,0.00878 -0.013617,0.00878 -0.014414,0 L 1.6280483,2.1851958 C 1.623882,2.136698 1.5968047,2.0931067 1.5551762,2.0678798 L 0.8172467,1.6210383 c -0.008649,-0.00487 -0.002444,-0.018002 0.006806,-0.014414 l 0.9336267,0.3201854 c 0.04713,0.016563 0.098695,0.015281 0.1449431,-0.0036 l 1.516795,-0.6629291 c 7.585e-4,-3.075e-4 0.00158,-4.448e-4 0.00241,-3.998e-4 z"
+     sodipodi:nodetypes="cccccccccccccccccccccccccccc" />
+</svg>
