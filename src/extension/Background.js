@@ -45,17 +45,23 @@ class Background extends Clutter.Actor {
     this.visible = false;
     this.opacity = 0;
 
-    // We transition everything. This is used for the position when in preview mode, the
-    // opacity and the color.
-    this.set_easing_duration(300);
+    // Will be true as long as we have the input grabbed.
+    this._isModal = false;
 
     // We keep several connections to the Gio.Settings object. Once the settings dialog is
     // closed, we use this array to disconnect all of them.
     this._settings            = utils.createSettings();
     this._settingsConnections = [];
 
-    // Will be true as long as we have the input grabbed.
-    this._isModal = false;
+    // We transition everything. This is used for the position when in preview mode, the
+    // opacity and the color.
+    this.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
+
+    // And update it in case of changes.
+    this._settingsConnections.push(
+        this._settings.connect('changed::easing-duration', () => {
+          this.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
+        }));
 
     // Set the background color according to the settings.
     this.backgroundColor =
