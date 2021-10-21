@@ -184,6 +184,35 @@ var Statistics = class Statistics {
     this._addOneTo('stats-sponsors-viewed');
   }
 
+  // For historical reasons, all settings of Fly-Pie are included in one schema, including
+  // the statistics keys. This is a bit unfortunate, as we cannot easily listen only for
+  // appearance changes. This method can be used to check whether a given quark
+  // corresponds to a statistics key.
+  isStatsKey(quark) {
+    const keys = this._settings.settings_schema.list_keys();
+    for (let i = 0; i < keys.length; i++) {
+      if (keys[i].startsWith('stats-')) {
+        if (quark == GLib.quark_try_string(keys[i]) && quark != 0) {
+          return true;
+        }
+      }
+    };
+
+    return false;
+  }
+
+  // This uses the method above to check whether the given list of quarks contains any
+  // non-statistics key.
+  containsAnyNonStatsKey(quarkList) {
+    for (let i = 0; i < quarkList.length; i++) {
+      if (!this.isStatsKey(quarkList[i])) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   // ----------------------------------------------------------------------- private stuff
 
   // Our Gio.Settings object is in "delayed" mode so we have to manually call apply()
