@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-21 21:11+0200\n"
-"PO-Revision-Date: 2021-10-19 18:26+0000\n"
+"PO-Revision-Date: 2021-10-21 19:37+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
-">\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1028,27 +1028,27 @@ msgstr "<big>Beste Auswahlzeit: <b>%d ms</b></big>"
 #. appropriate.
 #: src/prefs/ExampleMenu.js:28
 msgid "Cold "
-msgstr ""
+msgstr "Kalter "
 
 #: src/prefs/ExampleMenu.js:28
 msgid "Hot "
-msgstr ""
+msgstr "Warmer "
 
 #: src/prefs/ExampleMenu.js:28
 msgid "Wet "
-msgstr ""
+msgstr "Feuchter "
 
 #: src/prefs/ExampleMenu.js:28
 msgid "Deadly "
-msgstr ""
+msgstr "Tödlicher "
 
 #: src/prefs/ExampleMenu.js:28
 msgid "Smelly "
-msgstr ""
+msgstr "Stinkender "
 
 #: src/prefs/ExampleMenu.js:28
 msgid "Vegan "
-msgstr ""
+msgstr "Veganer "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
 #. Muffin". This is one of the middle words. The three words are directly appended to
@@ -1056,23 +1056,23 @@ msgstr ""
 #. appropriate.
 #: src/prefs/ExampleMenu.js:40
 msgid "Chocolate "
-msgstr ""
+msgstr "Schokoladen"
 
 #: src/prefs/ExampleMenu.js:40
 msgid "Cherry "
-msgstr ""
+msgstr "Kirsch"
 
 #: src/prefs/ExampleMenu.js:40
 msgid "Garlic "
-msgstr ""
+msgstr "Knoblauch"
 
 #: src/prefs/ExampleMenu.js:40
 msgid "Apple "
-msgstr ""
+msgstr "Apfel"
 
 #: src/prefs/ExampleMenu.js:40
 msgid "Pepper "
-msgstr ""
+msgstr "Peperoni"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
 #. Muffin". This is one of the last words. The three words are directly appended to
@@ -1080,15 +1080,15 @@ msgstr ""
 #. appropriate.
 #: src/prefs/ExampleMenu.js:52
 msgid "Pie"
-msgstr ""
+msgstr "strudel"
 
 #: src/prefs/ExampleMenu.js:52
 msgid "Cake"
-msgstr ""
+msgstr "kuchen"
 
 #: src/prefs/ExampleMenu.js:52
 msgid "Muffin"
-msgstr ""
+msgstr "muffin"
 
 #: src/prefs/ExampleMenu.js:52
 msgid "Doughnut"
@@ -1504,6 +1504,11 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!"
 msgstr ""
+"Öffnen Sie für diese Übung das Beispielmenü und wählen Sie \"%s\" so schnell "
+"wie möglich. Können Sie die Goldmedaille freischalten?\n"
+"\n"
+"Wenn Sie mit Ihrem Ergebnis zufrieden sind, klicken Sie auf <b>Weiter</b> um "
+"etwas über den \"Marking Mode\" von Fly-Pie zu erfahren!"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:1152 resources/ui/gtk3/settings.ui:1151
@@ -1571,6 +1576,12 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn some final "
 "tips and tricks!"
 msgstr ""
+"Wählen Sie wieder so schnell wie möglich \"%s\" aus. Da Sie aber nun den "
+"\"Marking Mode\" kennen, ist die Zeit, die für die Goldmedaille erreicht "
+"werden muss, deutlich kürzer!\n"
+"\n"
+"Wenn Sie mit Ihrem Ergebnis zufrieden sind, klicken Sie auf <b>Weiter</b> um "
+"einige abschließende Tipps und Tricks zu erfahren!"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:1402 resources/ui/gtk3/settings.ui:1396
