@@ -19,45 +19,6 @@ const _ = imports.gettext.domain('flypie').gettext;
 // leaf items.                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var ExampleMenuItems = [
-  {
-    // Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
-    // Muffin". This is one of the first words. The three words are directly appended to
-    // each other; therefore the trailing space is important. You can also use hyphens if
-    // appropriate.
-    names: [_('Cold '), _('Hot '), _('Wet '), _('Deadly '), _('Smelly '), _('Vegan ')],
-    icons: [
-      'flypie-cold-symbolic-#68c', 'flypie-hot-symbolic-#b42', 'flypie-wet-symbolic-#349',
-      'flypie-deadly-symbolic-#523', 'flypie-smelly-symbolic-#aa5',
-      'flypie-vegan-symbolic-#4a4'
-    ]
-  },
-  {
-    // Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
-    // Muffin". This is one of the middle words. The three words are directly appended to
-    // each other; therefore the trailing space is important. You can also use hyphens if
-    // appropriate.
-    names: [_('Chocolate '), _('Cherry '), _('Garlic '), _('Apple '), _('Pepper ')],
-    icons: [
-      'flypie-chocolate-symbolic-#432', 'flypie-cherry-symbolic-#a47',
-      'flypie-garlic-symbolic-#a88', 'flypie-apple-symbolic-#5a3',
-      'flypie-pepper-symbolic-#a44'
-    ]
-  },
-  {
-    // Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
-    // Muffin". This is one of the last words. The three words are directly appended to
-    // each other; therefore the trailing space is important. You can also use hyphens if
-    // appropriate.
-    names: [_('Pie'), _('Cake'), _('Muffin'), _('Doughnut'), _('Cookie')],
-    icons: [
-      'flypie-pie-symbolic-#526', 'flypie-cake-symbolic-#baa',
-      'flypie-muffin-symbolic-#973', 'flypie-doughnut-symbolic-#67c',
-      'flypie-cookie-symbolic-#643'
-    ]
-  }
-];
-
 var ExampleMenu = class ExampleMenu {
 
   // ---------------------------------------------------------------------- static methods
@@ -65,29 +26,26 @@ var ExampleMenu = class ExampleMenu {
   static get() {
 
     // Translators: This is the name of the tutorial menu.
-    const menu = {name: _('Example Menu'), icon: 'flypie-symbolic-#555', children: []};
+    const menu  = {name: _('Example Menu'), icon: 'flypie-symbolic-#555', children: []};
+    const items = this.getItems();
 
-    for (let i = 0; i < ExampleMenuItems[0].names.length; i++) {
+    for (let i = 0; i < items[0].names.length; i++) {
 
-      const child = {
-        name: ExampleMenuItems[0].names[i],
-        icon: ExampleMenuItems[0].icons[i],
-        children: []
-      };
+      const child = {name: items[0].names[i], icon: items[0].icons[i], children: []};
       menu.children.push(child);
 
-      for (let i = 0; i < ExampleMenuItems[1].names.length; i++) {
+      for (let i = 0; i < items[1].names.length; i++) {
         const grandchild = {
-          name: child.name + ExampleMenuItems[1].names[i],
-          icon: ExampleMenuItems[1].icons[i],
+          name: child.name + items[1].names[i],
+          icon: items[1].icons[i],
           children: []
         };
         child.children.push(grandchild);
 
-        for (let i = 0; i < ExampleMenuItems[2].names.length; i++) {
+        for (let i = 0; i < items[2].names.length; i++) {
           const grandgrandchild = {
-            name: grandchild.name + ExampleMenuItems[2].names[i],
-            icon: ExampleMenuItems[2].icons[i],
+            name: grandchild.name + items[2].names[i],
+            icon: items[2].icons[i],
           };
           grandchild.children.push(grandgrandchild);
         }
@@ -95,5 +53,47 @@ var ExampleMenu = class ExampleMenu {
     }
 
     return menu;
+  }
+
+  static getItems() {
+    return [
+      {
+        // Translators: The tutorial menu allows selecting triplets such as "Smelly
+        // Chocolate Muffin". This is one of the first words. The three words are directly
+        // appended to each other; therefore the trailing space is important. You can also
+        // use hyphens if appropriate.
+        names:
+            [_('Cold '), _('Hot '), _('Wet '), _('Deadly '), _('Smelly '), _('Vegan ')],
+        icons: [
+          'flypie-cold-symbolic-#68c', 'flypie-hot-symbolic-#b42',
+          'flypie-wet-symbolic-#349', 'flypie-deadly-symbolic-#523',
+          'flypie-smelly-symbolic-#aa5', 'flypie-vegan-symbolic-#4a4'
+        ]
+      },
+      {
+        // Translators: The tutorial menu allows selecting triplets such as "Smelly
+        // Chocolate Muffin". This is one of the middle words. The three words are
+        // directly appended to each other; therefore the trailing space is important. You
+        // can also use hyphens if appropriate.
+        names: [_('Chocolate '), _('Cherry '), _('Garlic '), _('Apple '), _('Pepper ')],
+        icons: [
+          'flypie-chocolate-symbolic-#432', 'flypie-cherry-symbolic-#a47',
+          'flypie-garlic-symbolic-#a88', 'flypie-apple-symbolic-#5a3',
+          'flypie-pepper-symbolic-#a44'
+        ]
+      },
+      {
+        // Translators: The tutorial menu allows selecting triplets such as "Smelly
+        // Chocolate Muffin". This is one of the last words. The three words are directly
+        // appended to each other; therefore the trailing space is important. You can also
+        // use hyphens if appropriate.
+        names: [_('Pie'), _('Cake'), _('Muffin'), _('Doughnut'), _('Cookie')],
+        icons: [
+          'flypie-pie-symbolic-#526', 'flypie-cake-symbolic-#baa',
+          'flypie-muffin-symbolic-#973', 'flypie-doughnut-symbolic-#67c',
+          'flypie-cookie-symbolic-#643'
+        ]
+      }
+    ];
   }
 }

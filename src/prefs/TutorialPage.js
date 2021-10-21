@@ -12,13 +12,12 @@ const {Gio, Gdk, Gtk, GdkPixbuf} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Me               = imports.misc.extensionUtils.getCurrentExtension();
-const utils            = Me.imports.src.common.utils;
-const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
-const Timer            = Me.imports.src.common.Timer.Timer;
-const Statistics       = Me.imports.src.common.Statistics.Statistics;
-const ExampleMenu      = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
-const ExampleMenuItems = Me.imports.src.prefs.ExampleMenu.ExampleMenuItems;
+const Me            = imports.misc.extensionUtils.getCurrentExtension();
+const utils         = Me.imports.src.common.utils;
+const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
+const Timer         = Me.imports.src.common.Timer.Timer;
+const Statistics    = Me.imports.src.common.Statistics.Statistics;
+const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -135,8 +134,8 @@ var TutorialPage = class TutorialPage {
       const label = this._builder.get_object('tutorial-label-' + i);
       label.label = label.label.replace(
           '%s',
-          `<b>${ExampleMenuItems[0].names[1]}${ExampleMenuItems[1].names[3]}${
-              ExampleMenuItems[2].names[0]}</b>`);
+          `<b>${ExampleMenu.getItems()[0].names[1]}${ExampleMenu.getItems()[1].names[3]}${
+              ExampleMenu.getItems()[2].names[0]}</b>`);
     }
 
     // Make the five Show-Menu buttons of the tutorial pages actually show a menu.
