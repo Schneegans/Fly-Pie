@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-17 21:49+0200\n"
+"POT-Creation-Date: 2021-10-21 21:11+0200\n"
 "PO-Revision-Date: 2021-09-28 18:06+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/fly-pie/core/fi/"
@@ -39,8 +39,8 @@ msgstr ""
 "käyttää esimerkiksi työtilojen välillä vaihtamiseen, mediasoitinten "
 "ohjaamiseen tai \"Kumoa\"- ja \"Tee uudelleen\"-toimintoihin."
 
-#: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:4913
-#: resources/ui/gtk3/settings.ui:4919
+#: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:4887
+#: resources/ui/gtk3/settings.ui:4886
 msgid "Shortcut"
 msgstr "Pikanäppäin"
 
@@ -183,9 +183,9 @@ msgid "Select File"
 msgstr "Valitse tiedosto"
 
 #: src/common/ConfigWidgetFactory.js:103 src/common/ConfigWidgetFactory.js:179
-#: src/prefs/ImageChooserButton.js:43 src/prefs/MenuEditorPage.js:186
-#: src/prefs/MenuEditorPage.js:256 src/prefs/SettingsPage.js:271
-#: src/prefs/SettingsPage.js:326 resources/ui/gtk4/iconSelectDialog.ui:14
+#: src/prefs/ImageChooserButton.js:43 src/prefs/MenuEditorPage.js:205
+#: src/prefs/MenuEditorPage.js:275 src/prefs/SettingsPage.js:268
+#: src/prefs/SettingsPage.js:323 resources/ui/gtk4/iconSelectDialog.ui:14
 #: resources/ui/gtk3/iconSelectDialog.ui:14
 msgid "Cancel"
 msgstr "Peru"
@@ -196,7 +196,7 @@ msgstr "Valitse sovellus"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
-#: src/prefs/MenuEditor.js:281
+#: src/prefs/MenuEditor.js:282
 msgid "Not Bound"
 msgstr "Ei määritetty"
 
@@ -211,7 +211,7 @@ msgstr ""
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
 #. text to insert.
-#: src/common/ItemRegistry.js:245
+#: src/common/ItemRegistry.js:243
 #, javascript-format
 msgid "Insert: %s"
 msgstr "Syötä: %s"
@@ -413,8 +413,8 @@ msgstr ""
 msgid "Window Filter"
 msgstr "Ikkunasuodatin"
 
-#: src/common/menus/RunningApps.js:99 resources/ui/gtk4/settings.ui:4871
-#: resources/ui/gtk3/settings.ui:4877
+#: src/common/menus/RunningApps.js:99 resources/ui/gtk4/settings.ui:4845
+#: resources/ui/gtk3/settings.ui:4844
 msgid "See tooltip for details."
 msgstr "Katso työkaluvihje saadaksesi lisätietoja."
 
@@ -798,15 +798,15 @@ msgstr "Haluatko nollata kaikki tilastot?"
 msgid "All achievements will be lost!"
 msgstr "Kaikki saavutukset häviävät!"
 
-#: src/prefs/MenuEditor.js:416
+#: src/prefs/MenuEditor.js:417
 msgid "No menus configured"
 msgstr "Valikkoja ei ole määritetty"
 
-#: src/prefs/MenuEditor.js:419
+#: src/prefs/MenuEditor.js:420
 msgid "Create a new menu with the button in the top right corner."
 msgstr "Luo uusi valikko oikean yläkulman painikkeella."
 
-#: src/prefs/MenuEditor.js:448
+#: src/prefs/MenuEditor.js:450
 msgid "Add a new item"
 msgstr "Lisää uusi tietue"
 
@@ -815,14 +815,14 @@ msgstr "Lisää uusi tietue"
 #. overview.
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag an action in the menu editor to the menu overview.
-#: src/prefs/MenuEditor.js:785 src/prefs/MenuEditorPage.js:857
+#: src/prefs/MenuEditor.js:787 src/prefs/MenuEditorPage.js:876
 msgid "Actions cannot be turned into toplevel menus."
 msgstr "Toimintoja ei voi muuntaa päätason valikoiksi."
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag external stuff to the menu editor's
 #. overview.
-#: src/prefs/MenuEditor.js:805
+#: src/prefs/MenuEditor.js:807
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr ""
 "Voit luoda uusia toimintotietueita vain mukautettujen valikkojen sisään."
@@ -833,41 +833,41 @@ msgstr ""
 msgid "(None)"
 msgstr "(Ei mitään)"
 
-#: src/prefs/MenuEditorPage.js:175 src/prefs/MenuEditorPage.js:245
-#: src/prefs/SettingsPage.js:260 src/prefs/SettingsPage.js:315
+#: src/prefs/MenuEditorPage.js:194 src/prefs/MenuEditorPage.js:264
+#: src/prefs/SettingsPage.js:257 src/prefs/SettingsPage.js:312
 msgid "JSON Files"
 msgstr "JSON-tiedostot"
 
-#: src/prefs/MenuEditorPage.js:182 src/prefs/MenuEditorPage.js:252
-#: src/prefs/SettingsPage.js:267 src/prefs/SettingsPage.js:322
+#: src/prefs/MenuEditorPage.js:201 src/prefs/MenuEditorPage.js:271
+#: src/prefs/SettingsPage.js:264 src/prefs/SettingsPage.js:319
 msgid "All Files"
 msgstr "Kaikki tiedostot"
 
-#: src/prefs/MenuEditorPage.js:187
+#: src/prefs/MenuEditorPage.js:206
 msgid "Export"
 msgstr "Vie"
 
-#: src/prefs/MenuEditorPage.js:216
+#: src/prefs/MenuEditorPage.js:235
 msgid "Could not export the menu configuration."
 msgstr "Valikkoasetuksia ei voitu viedä."
 
-#: src/prefs/MenuEditorPage.js:257
+#: src/prefs/MenuEditorPage.js:276
 msgid "Import"
 msgstr "Tuo"
 
-#: src/prefs/MenuEditorPage.js:291
+#: src/prefs/MenuEditorPage.js:310
 msgid "Could not import the menu configuration."
 msgstr "Valikkoasetuksia ei voitu tuoda."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:363
+#: src/prefs/MenuEditorPage.js:382
 msgid "You should try to have no more than twelve items in your menus."
 msgstr "Valikossa ei tulisi olla enempää kuin kaksitoista tietuetta."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:366
+#: src/prefs/MenuEditorPage.js:385
 msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
@@ -877,7 +877,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:369
+#: src/prefs/MenuEditorPage.js:388
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr ""
@@ -885,21 +885,21 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:373
+#: src/prefs/MenuEditorPage.js:392
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
 msgstr "Ehdotuksia voi lähettää <a href=\"%s\">GitHubiin</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:377
+#: src/prefs/MenuEditorPage.js:396
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
 msgstr "Ilmoita ongelmista <a href=\"%s\">GitHubiin</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:381
+#: src/prefs/MenuEditorPage.js:400
 msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
@@ -909,7 +909,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:384
+#: src/prefs/MenuEditorPage.js:403
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
@@ -919,14 +919,14 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:387
+#: src/prefs/MenuEditorPage.js:406
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr ""
 "Voit järjestää valikon tietueet vasemmalla raahaamalla ja pudottamalla."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:390
+#: src/prefs/MenuEditorPage.js:409
 #, javascript-format
 msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
@@ -937,7 +937,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:396
+#: src/prefs/MenuEditorPage.js:415
 msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
@@ -947,7 +947,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:399
+#: src/prefs/MenuEditorPage.js:418
 msgid ""
 "On Wayland, you can copy menu items by holding the Ctrl key while dragging "
 "them to another location."
@@ -955,14 +955,14 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:402
+#: src/prefs/MenuEditorPage.js:421
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
 msgstr "<a href=\"%s\">Käännä Fly-Pie Weblaten kautta</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:408
+#: src/prefs/MenuEditorPage.js:427
 #, javascript-format
 msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
@@ -972,610 +972,115 @@ msgstr ""
 "</a>"
 
 #. Translators: The left-most item of the menu editor bread crumbs.
-#: src/prefs/MenuEditorPage.js:911
+#: src/prefs/MenuEditorPage.js:930
 msgid "All Menus"
 msgstr "Kaikki valikot"
 
-#: src/prefs/SettingsPage.js:272
+#: src/prefs/SettingsPage.js:269
 msgid "Save"
 msgstr "Tallenna"
 
-#: src/prefs/SettingsPage.js:327
+#: src/prefs/SettingsPage.js:324
 msgid "Load"
 msgstr "Lataa"
 
-#: src/prefs/SettingsPage.js:344
+#: src/prefs/SettingsPage.js:341
 msgid "Failed to load preset!"
 msgstr "Esiasetuksen lataaminen epäonnistui!"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
-#: src/prefs/TutorialPage.js:173
+#: src/prefs/TutorialPage.js:183
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
 msgstr "<big>Viimeisin valinta-aika: <b>%d ms</b></big>"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
-#: src/prefs/TutorialPage.js:178
+#: src/prefs/TutorialPage.js:188
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
 msgstr "<big>Paras valinta-aika: <b>%d ms</b></big>"
 
-#. Translators: This is the name of the default menu.
-#: src/prefs/ExampleMenu.js:26 src/extension/DefaultMenu.js:29
-msgid "Example Menu"
-msgstr "Esimerkkivalikko"
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
+#. Muffin". This is one of the first words. The three words are directly appended to
+#. each other; therefore the trailing space is important. You can also use hyphens if
+#. appropriate.
+#: src/prefs/ExampleMenu.js:28
+msgid "Cold "
+msgstr ""
 
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:29
-msgid "Animals & Nature"
-msgstr "Eläimet ja luonto"
+#: src/prefs/ExampleMenu.js:28
+msgid "Hot "
+msgstr ""
 
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:34
-msgid "Flowers"
-msgstr "Kukat"
+#: src/prefs/ExampleMenu.js:28
+msgid "Wet "
+msgstr ""
 
-#. Translators: The name of the 🌷 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:38
-msgid "Tulip"
-msgstr "Tulppaani"
+#: src/prefs/ExampleMenu.js:28
+msgid "Deadly "
+msgstr ""
 
-#. Translators: The name of the 🌹 emoji of the tutorial menu.
+#: src/prefs/ExampleMenu.js:28
+msgid "Smelly "
+msgstr ""
+
+#: src/prefs/ExampleMenu.js:28
+msgid "Vegan "
+msgstr ""
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
+#. Muffin". This is one of the middle words. The three words are directly appended to
+#. each other; therefore the trailing space is important. You can also use hyphens if
+#. appropriate.
 #: src/prefs/ExampleMenu.js:40
-msgid "Rose"
-msgstr "Ruusu"
-
-#. Translators: The name of the 🌻 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:42
-msgid "Sunflower"
-msgstr "Auringonkukka"
-
-#. Translators: The name of the 🌼 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:44
-msgid "Blossom"
+msgid "Chocolate "
 msgstr ""
 
-#. Translators: The name of the 💐 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:46
-msgid "Bouquet"
-msgstr "Kimppu"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:51
-msgid "Mammals"
-msgstr "Nisäkkäät"
-
-#. Translators: The name of the 🐈 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:55
-msgid "Cat"
-msgstr "Kissa"
-
-#. Translators: The name of the 🐂 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:57
-msgid "Ox"
+#: src/prefs/ExampleMenu.js:40
+msgid "Cherry "
 msgstr ""
 
-#. Translators: The name of the 🐕 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:59
-msgid "Dog"
-msgstr "Koira"
-
-#. Translators: The name of the 🐖 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:61
-msgid "Pig"
-msgstr "Sika"
-
-#. Translators: The name of the 🐒 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:63
-msgid "Monkey"
-msgstr "Apina"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:68
-msgid "Reptiles"
-msgstr "Matelijat"
-
-#. Translators: The name of the 🐊 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:72
-msgid "Crocodile"
-msgstr "Krokotiili"
-
-#. Translators: The name of the 🐍 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:74
-msgid "Snake"
-msgstr "Käärme"
-
-#. Translators: The name of the 🐢 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:76
-msgid "Turtle"
-msgstr "Kilpikonna"
-
-#. Translators: The name of the 🦖 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:78
-msgid "T-Rex"
-msgstr "T-Rex"
-
-#. Translators: The name of the 🦕 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:80
-msgid "Apatosaurus"
+#: src/prefs/ExampleMenu.js:40
+msgid "Garlic "
 msgstr ""
 
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:87
-msgid "Food & Drink"
-msgstr "Ruoka ja juoma"
+#: src/prefs/ExampleMenu.js:40
+msgid "Apple "
+msgstr ""
 
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:92
-msgid "Fruit"
-msgstr "Hedelmä"
+#: src/prefs/ExampleMenu.js:40
+msgid "Pepper "
+msgstr ""
 
-#. Translators: The name of the 🍏 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:96
-msgid "Apple"
-msgstr "Omena"
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
+#. Muffin". This is one of the last words. The three words are directly appended to
+#. each other; therefore the trailing space is important. You can also use hyphens if
+#. appropriate.
+#: src/prefs/ExampleMenu.js:52
+msgid "Pie"
+msgstr ""
 
-#. Translators: The name of the 🍉 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:98
-msgid "Watermelon"
-msgstr "Vesimeloni"
+#: src/prefs/ExampleMenu.js:52
+msgid "Cake"
+msgstr ""
 
-#. Translators: The name of the 🍋 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:100
-msgid "Lemon"
-msgstr "Sitruuna"
+#: src/prefs/ExampleMenu.js:52
+msgid "Muffin"
+msgstr ""
 
-#. Translators: The name of the 🍌 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:102
-msgid "Banana"
-msgstr "Banaani"
-
-#. Translators: The name of the 🍓 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:104
-msgid "Strawberry"
-msgstr "Mansikka"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:109
-msgid "Drink"
-msgstr "Juomat"
-
-#. Translators: The name of the 🍵 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:113
-msgid "Tea"
-msgstr "Tee"
-
-#. Translators: The name of the ☕ emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:115
-msgid "Coffee"
-msgstr "Kahvi"
-
-#. Translators: The name of the 🍺 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:117
-msgid "Beer"
-msgstr "Olut"
-
-#. Translators: The name of the 🥃 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:119
-msgid "Whiskey"
-msgstr "Viski"
-
-#. Translators: The name of the 🍹 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:121
-msgid "Cocktail"
-msgstr "Cocktail"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:126
-msgid "Sweets"
-msgstr "Herkut"
-
-#. Translators: This is the item which should be selected in the tutorial.
-#. Make sure the translation matches the name given in the tutorial!
-#. Translators: The name of the 🍰 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:132
-msgid "Shortcake"
-msgstr "Murokeksi"
-
-#. Translators: The name of the 🍬 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:134
-msgid "Candy"
-msgstr "Makeinen"
-
-#. Translators: The name of the 🍩 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:136
+#: src/prefs/ExampleMenu.js:52
 msgid "Doughnut"
 msgstr "Donitsi"
 
-#. Translators: The name of the 🍪 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:138
+#: src/prefs/ExampleMenu.js:52
 msgid "Cookie"
 msgstr "Keksi"
 
-#. Translators: The name of the 🍫 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:140
-msgid "Chocolate"
-msgstr "Suklaa"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:147
-msgid "Activities"
-msgstr "Aktiviteetit"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:152
-msgid "Games"
-msgstr "Pelit"
-
-#. Translators: The name of the 🎱 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:156
-msgid "Billards"
-msgstr ""
-
-#. Translators: The name of the 🀄 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:158
-msgid "Mahjong"
-msgstr "Mahjong"
-
-#. Translators: The name of the 🎳 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:160
-msgid "Bowling"
-msgstr "Keilaus"
-
-#. Translators: The name of the 🎯 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:162
-msgid "Darts"
-msgstr "Tikanheitto"
-
-#. Translators: The name of the 🎮 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:164
-msgid "Video Game"
-msgstr "Videopeli"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:169
-msgid "Sports"
-msgstr "Urheilu"
-
-#. Translators: The name of the 🏏 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:173
-msgid "Cricket"
-msgstr "Kriketti"
-
-#. Translators: The name of the 🏒 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:175
-msgid "Ice Hockey"
-msgstr "Jääkiekko"
-
-#. Translators: The name of the 🎾 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:177
-msgid "Tennis"
-msgstr "Tennis"
-
-#. Translators: The name of the 🎣 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:179
-msgid "Fishing"
-msgstr "Kalastus"
-
-#. Translators: The name of the 🎿 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:181
-msgid "Skiing"
-msgstr ""
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:186
-msgid "Places"
-msgstr "Sijainnit"
-
-#. Translators: The name of the 🗻 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:190
-msgid "Mount Fuji"
-msgstr ""
-
-#. Translators: The name of the 🌋 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:192
-msgid "Mount Etna"
-msgstr ""
-
-#. Translators: The name of the 🗽 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:194
-msgid "Statue of Liberty"
-msgstr "Vapaudenpatsas"
-
-#. Translators: The name of the 🗾 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:196
-msgid "Japan"
-msgstr "Japani"
-
-#. Translators: The name of the 🗿 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:198
-msgid "Moyai"
-msgstr ""
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:205
-msgid "Objects"
-msgstr "Objektit"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:210
-msgid "Cars"
-msgstr "Autot"
-
-#. Translators: The name of the 🚌 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:214
-msgid "Bus"
-msgstr "Bussi"
-
-#. Translators: The name of the 🚒 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:216
-msgid "Fire Engine"
-msgstr "Paloauto"
-
-#. Translators: The name of the 🚗 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:218
-msgid "Automobile"
-msgstr "Ajoneuvo"
-
-#. Translators: The name of the 🚜 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:220
-msgid "Tractor"
-msgstr "Traktori"
-
-#. Translators: The name of the 🚚 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:222
-msgid "Truck"
-msgstr "Rekka"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:227
-msgid "Buildings"
-msgstr "Rakennukset"
-
-#. Translators: The name of the 🏤 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:231
-msgid "Post Office"
-msgstr "Postitoimisto"
-
-#. Translators: The name of the 🏫 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:233
-msgid "School"
-msgstr "Koulu"
-
-#. Translators: The name of the 🏥 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:235
-msgid "Hospital"
-msgstr "Sairaala"
-
-#. Translators: The name of the 🏦 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:237
-msgid "Bank"
-msgstr "Pankki"
-
-#. Translators: The name of the 🏩 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:239
-msgid "Love Hotel"
-msgstr ""
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:244
-msgid "Instruments"
-msgstr "Soittimet"
-
-#. Translators: The name of the 🎷 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:248
-msgid "Saxophone"
-msgstr "Saksofoni"
-
-#. Translators: The name of the 🎸 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:250
-msgid "Guitar"
-msgstr "Kitara"
-
-#. Translators: The name of the 🎺 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:252
-msgid "Trumpet"
-msgstr "Trumpetti"
-
-#. Translators: The name of the 🎤 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:254
-msgid "Microphone"
-msgstr "Mikrofoni"
-
-#. Translators: The name of the 🥁 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:256
-msgid "Drum"
-msgstr "Rummut"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:263
-msgid "Smileys"
-msgstr "Hymiöt"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:268
-msgid "Happy Faces"
-msgstr "Iloiset naamat"
-
-#. Translators: The name of the 😃 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:272
-msgid "Smiley"
-msgstr ""
-
-#. Translators: The name of the 😉 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:274
-msgid "Winking Face"
-msgstr "Vinkkaava naama"
-
-#. Translators: The name of the 😊 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:276
-msgid "Face With Smiling Eyes"
-msgstr ""
-
-#. Translators: The name of the 😅 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:278
-msgid "Face With Sweat"
-msgstr ""
-
-#. Translators: The name of the 🤣 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:280
-msgid "ROFL"
-msgstr ""
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:285
-msgid "Angry Faces"
-msgstr "Vihaiset naamat"
-
-#. Translators: The name of the 🤮 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:289
-msgid "Vomiting Face"
-msgstr "Oksentava naama"
-
-#. Translators: The name of the 🤨 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:291
-msgid "Skeptical Face"
-msgstr "Skeptinen naama"
-
-#. Translators: The name of the 😡 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:293
-msgid "Pouting Face"
-msgstr ""
-
-#. Translators: The name of the 😠 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:295
-msgid "Angry Face"
-msgstr "Vihainen naama"
-
-#. Translators: The name of the 🤬 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:297
-msgid "Very Angry Face"
-msgstr "Erittäin vihainen naama"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:302
-msgid "Surprised Faces"
-msgstr "Yllätyneet naamat"
-
-#. Translators: The name of the 😳 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:306
-msgid "Flushed Face"
-msgstr ""
-
-#. Translators: The name of the 😧 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:308
-msgid "Anguished Face"
-msgstr ""
-
-#. Translators: The name of the 😲 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:310
-msgid "Astonished Face"
-msgstr ""
-
-#. Translators: The name of the 😱 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:312
-msgid "Screaming Face"
-msgstr ""
-
-#. Translators: The name of the 🤯 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:314
-msgid "Pouff"
-msgstr ""
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:321
-msgid "Symbols"
-msgstr "Symbolit"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:326
-msgid "Star Signs"
-msgstr "Horoskoopit"
-
-#. Translators: The name of the ♉ emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:330
-msgid "Taurus"
-msgstr ""
-
-#. Translators: The name of the ♋ emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:332
-msgid "Cancer"
-msgstr ""
-
-#. Translators: The name of the ♍ emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:334
-msgid "Virgo"
-msgstr ""
-
-#. Translators: The name of the ♏ emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:336
-msgid "Scorpius"
-msgstr ""
-
-#. Translators: The name of the ♑ emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:338
-msgid "Capricorn"
-msgstr ""
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:343
-msgid "Arrows"
-msgstr "Nuolet"
-
-#. Translators: The name of the ⏫ emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:347
-msgid "Up"
-msgstr "Ylös"
-
-#. Translators: The name of the ⏩ emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:349
-msgid "Right"
-msgstr "Oikea"
-
-#. Translators: The name of the 🔀 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:351
-msgid "Twisted"
-msgstr "Kierretty"
-
-#. Translators: The name of the ⏬ emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:353
-msgid "Down"
-msgstr "Alas"
-
-#. Translators: The name of the ⏪ emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:355
-msgid "Left"
-msgstr "Vasen"
-
-#. Translators: An emoji category of the example tutorial menu.
-#: src/prefs/ExampleMenu.js:360
-msgid "Info Signs"
-msgstr "Opastekyltit"
-
-#. Translators: The name of the 🚮 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:364
-msgid "Litter Bin"
-msgstr "Roskakori"
-
-#. Translators: The name of the 🚰 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:366
-msgid "Potable Water"
-msgstr "Juomakelpoinen vesi"
-
-#. Translators: The name of the 🚹 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:368
-msgid "Mens"
-msgstr "Miehet"
-
-#. Translators: The name of the 🚺 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:370
-msgid "Womens"
-msgstr "Naiset"
-
-#. Translators: The name of the 🚼 emoji of the tutorial menu.
-#: src/prefs/ExampleMenu.js:372
-msgid "Baby"
-msgstr "Lastenhoito"
+#. Translators: This is the name of the tutorial menu.
+#. Translators: This is the name of the default menu.
+#: src/prefs/ExampleMenu.js:68 src/extension/DefaultMenu.js:29
+msgid "Example Menu"
+msgstr "Esimerkkivalikko"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:37
@@ -1657,13 +1162,13 @@ msgstr ""
 msgid "Move Window Down"
 msgstr ""
 
-#: src/extension/Background.js:95
+#: src/extension/Background.js:101
 msgid "Close"
 msgstr "Sulje"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
-#: src/extension/Background.js:101
+#: src/extension/Background.js:107
 msgid "Flip Side"
 msgstr "Vaihda puolta"
 
@@ -1956,10 +1461,10 @@ msgid "Practice Session I"
 msgstr "Harjoitusistunto I"
 
 #: resources/ui/gtk4/settings.ui:1079 resources/ui/gtk3/settings.ui:1078
+#, javascript-format
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
-"select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. Can you get the "
-"gold medal?\n"
+"select \"%s\" as quickly as possible. Can you get the gold medal?\n"
 "\n"
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!"
@@ -2010,10 +1515,11 @@ msgid "Practice Session II"
 msgstr "Harjoitusistunto II"
 
 #: resources/ui/gtk4/settings.ui:1310 resources/ui/gtk3/settings.ui:1304
+#, javascript-format
 msgid ""
-"Again, you should select \"Shortcake\" (🍔 🠚 🍭 🠚 🍰) as quickly as possible. "
-"However, as you now learned about the Marking Mode, the time required to get "
-"the gold medal is much shorter!\n"
+"Again, you should select \"%s\" as quickly as possible. However, as you now "
+"learned about the Marking Mode, the time required to get the gold medal is "
+"much shorter!\n"
 "\n"
 "Once you are pleased with your result, click <b>next</b> to learn some final "
 "tips and tricks!"
@@ -2064,11 +1570,11 @@ msgid "Next"
 msgstr "Seuraava"
 
 #. Caption of the settings page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:1607 resources/ui/gtk3/settings.ui:4471
+#: resources/ui/gtk4/settings.ui:1607 resources/ui/gtk3/settings.ui:4438
 msgid "Settings"
 msgstr "Asetukset"
 
-#: resources/ui/gtk4/settings.ui:1640 resources/ui/gtk4/settings.ui:1836
+#: resources/ui/gtk4/settings.ui:1640 resources/ui/gtk4/settings.ui:1837
 #: resources/ui/gtk3/settings.ui:1632 resources/ui/gtk3/settings.ui:1829
 msgid "Global Appearance Settings"
 msgstr "Yleiset ulkoasuasetukset"
@@ -2098,10 +1604,10 @@ msgstr "Fontti"
 msgid "Text Color"
 msgstr "Tekstin väri"
 
-#: resources/ui/gtk4/settings.ui:1763 resources/ui/gtk4/settings.ui:2374
-#: resources/ui/gtk4/settings.ui:3073 resources/ui/gtk4/settings.ui:3309
-#: resources/ui/gtk3/settings.ui:1755 resources/ui/gtk3/settings.ui:2362
-#: resources/ui/gtk3/settings.ui:3057 resources/ui/gtk3/settings.ui:3278
+#: resources/ui/gtk4/settings.ui:1763 resources/ui/gtk4/settings.ui:2372
+#: resources/ui/gtk4/settings.ui:3067 resources/ui/gtk4/settings.ui:3299
+#: resources/ui/gtk3/settings.ui:1755 resources/ui/gtk3/settings.ui:2359
+#: resources/ui/gtk3/settings.ui:3049 resources/ui/gtk3/settings.ui:3265
 msgid "Background Color"
 msgstr "Taustaväri"
 
@@ -2109,115 +1615,115 @@ msgstr "Taustaväri"
 msgid "Animation Mode"
 msgstr "Animaatiotila"
 
-#: resources/ui/gtk4/settings.ui:1868 resources/ui/gtk4/settings.ui:2476
-#: resources/ui/gtk3/settings.ui:1856 resources/ui/gtk3/settings.ui:2460
+#: resources/ui/gtk4/settings.ui:1866 resources/ui/gtk4/settings.ui:2471
+#: resources/ui/gtk3/settings.ui:1853 resources/ui/gtk3/settings.ui:2453
 msgid "Center Appearance"
 msgstr "Keskustan ulkoasu"
 
-#: resources/ui/gtk4/settings.ui:1878 resources/ui/gtk3/settings.ui:1866
+#: resources/ui/gtk4/settings.ui:1876 resources/ui/gtk3/settings.ui:1863
 msgid "The center element shows the currently hovered child's name."
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:1894 resources/ui/gtk3/settings.ui:1882
+#: resources/ui/gtk4/settings.ui:1892 resources/ui/gtk3/settings.ui:1879
 msgid "With Hovered Child"
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:1907 resources/ui/gtk3/settings.ui:1895
+#: resources/ui/gtk4/settings.ui:1905 resources/ui/gtk3/settings.ui:1892
 msgid "Without Hovered Child"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:1937 resources/ui/gtk4/settings.ui:2867
-#: resources/ui/gtk4/settings.ui:3422 resources/ui/gtk3/settings.ui:1925
-#: resources/ui/gtk3/settings.ui:2851 resources/ui/gtk3/settings.ui:3395
+#: resources/ui/gtk4/settings.ui:1935 resources/ui/gtk4/settings.ui:2861
+#: resources/ui/gtk4/settings.ui:3412 resources/ui/gtk3/settings.ui:1922
+#: resources/ui/gtk3/settings.ui:2843 resources/ui/gtk3/settings.ui:3382
 msgid "Size"
 msgstr "Koko"
 
-#: resources/ui/gtk4/settings.ui:1988 resources/ui/gtk4/settings.ui:2039
-#: resources/ui/gtk4/settings.ui:2191 resources/ui/gtk4/settings.ui:2242
-#: resources/ui/gtk4/settings.ui:2616 resources/ui/gtk4/settings.ui:2677
-#: resources/ui/gtk4/settings.ui:2770 resources/ui/gtk4/settings.ui:2841
-#: resources/ui/gtk3/settings.ui:1976 resources/ui/gtk3/settings.ui:2027
-#: resources/ui/gtk3/settings.ui:2183 resources/ui/gtk3/settings.ui:2234
-#: resources/ui/gtk3/settings.ui:2597 resources/ui/gtk3/settings.ui:2658
-#: resources/ui/gtk3/settings.ui:2754 resources/ui/gtk3/settings.ui:2825
+#: resources/ui/gtk4/settings.ui:1986 resources/ui/gtk4/settings.ui:2037
+#: resources/ui/gtk4/settings.ui:2189 resources/ui/gtk4/settings.ui:2240
+#: resources/ui/gtk4/settings.ui:2610 resources/ui/gtk4/settings.ui:2671
+#: resources/ui/gtk4/settings.ui:2764 resources/ui/gtk4/settings.ui:2835
+#: resources/ui/gtk3/settings.ui:1973 resources/ui/gtk3/settings.ui:2024
+#: resources/ui/gtk3/settings.ui:2180 resources/ui/gtk3/settings.ui:2231
+#: resources/ui/gtk3/settings.ui:2589 resources/ui/gtk3/settings.ui:2650
+#: resources/ui/gtk3/settings.ui:2746 resources/ui/gtk3/settings.ui:2817
 msgid "Saturation"
 msgstr "Kylläisyys"
 
-#: resources/ui/gtk4/settings.ui:2005 resources/ui/gtk4/settings.ui:2049
-#: resources/ui/gtk4/settings.ui:2208 resources/ui/gtk4/settings.ui:2252
-#: resources/ui/gtk4/settings.ui:2633 resources/ui/gtk4/settings.ui:2667
-#: resources/ui/gtk4/settings.ui:2787 resources/ui/gtk4/settings.ui:2831
-#: resources/ui/gtk3/settings.ui:1993 resources/ui/gtk3/settings.ui:2037
-#: resources/ui/gtk3/settings.ui:2200 resources/ui/gtk3/settings.ui:2244
-#: resources/ui/gtk3/settings.ui:2614 resources/ui/gtk3/settings.ui:2648
-#: resources/ui/gtk3/settings.ui:2771 resources/ui/gtk3/settings.ui:2815
+#: resources/ui/gtk4/settings.ui:2003 resources/ui/gtk4/settings.ui:2047
+#: resources/ui/gtk4/settings.ui:2206 resources/ui/gtk4/settings.ui:2250
+#: resources/ui/gtk4/settings.ui:2627 resources/ui/gtk4/settings.ui:2661
+#: resources/ui/gtk4/settings.ui:2781 resources/ui/gtk4/settings.ui:2825
+#: resources/ui/gtk3/settings.ui:1990 resources/ui/gtk3/settings.ui:2034
+#: resources/ui/gtk3/settings.ui:2197 resources/ui/gtk3/settings.ui:2241
+#: resources/ui/gtk3/settings.ui:2606 resources/ui/gtk3/settings.ui:2640
+#: resources/ui/gtk3/settings.ui:2763 resources/ui/gtk3/settings.ui:2807
 msgid "Luminance"
 msgstr "Luminanssi"
 
-#: resources/ui/gtk4/settings.ui:2022 resources/ui/gtk4/settings.ui:2059
-#: resources/ui/gtk4/settings.ui:2225 resources/ui/gtk4/settings.ui:2262
-#: resources/ui/gtk4/settings.ui:2650 resources/ui/gtk4/settings.ui:2687
-#: resources/ui/gtk4/settings.ui:2804 resources/ui/gtk4/settings.ui:2821
-#: resources/ui/gtk3/settings.ui:2010 resources/ui/gtk3/settings.ui:2047
-#: resources/ui/gtk3/settings.ui:2217 resources/ui/gtk3/settings.ui:2254
-#: resources/ui/gtk3/settings.ui:2631 resources/ui/gtk3/settings.ui:2668
-#: resources/ui/gtk3/settings.ui:2788 resources/ui/gtk3/settings.ui:2805
+#: resources/ui/gtk4/settings.ui:2020 resources/ui/gtk4/settings.ui:2057
+#: resources/ui/gtk4/settings.ui:2223 resources/ui/gtk4/settings.ui:2260
+#: resources/ui/gtk4/settings.ui:2644 resources/ui/gtk4/settings.ui:2681
+#: resources/ui/gtk4/settings.ui:2798 resources/ui/gtk4/settings.ui:2815
+#: resources/ui/gtk3/settings.ui:2007 resources/ui/gtk3/settings.ui:2044
+#: resources/ui/gtk3/settings.ui:2214 resources/ui/gtk3/settings.ui:2251
+#: resources/ui/gtk3/settings.ui:2623 resources/ui/gtk3/settings.ui:2660
+#: resources/ui/gtk3/settings.ui:2780 resources/ui/gtk3/settings.ui:2797
 msgid "Opacity"
 msgstr "Peittokyky"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
-#: resources/ui/gtk4/settings.ui:2080 resources/ui/gtk4/settings.ui:2144
-#: resources/ui/gtk4/settings.ui:2562 resources/ui/gtk4/settings.ui:2716
-#: resources/ui/gtk4/settings.ui:3323 resources/ui/gtk4/settings.ui:3374
-#: resources/ui/gtk3/settings.ui:2069 resources/ui/gtk3/settings.ui:2135
-#: resources/ui/gtk3/settings.ui:2541 resources/ui/gtk3/settings.ui:2698
-#: resources/ui/gtk3/settings.ui:3293 resources/ui/gtk3/settings.ui:3346
+#: resources/ui/gtk4/settings.ui:2078 resources/ui/gtk4/settings.ui:2142
+#: resources/ui/gtk4/settings.ui:2556 resources/ui/gtk4/settings.ui:2710
+#: resources/ui/gtk4/settings.ui:3313 resources/ui/gtk4/settings.ui:3364
+#: resources/ui/gtk3/settings.ui:2066 resources/ui/gtk3/settings.ui:2132
+#: resources/ui/gtk3/settings.ui:2533 resources/ui/gtk3/settings.ui:2690
+#: resources/ui/gtk3/settings.ui:3280 resources/ui/gtk3/settings.ui:3333
 msgid "Fixed"
 msgstr "Kiinteä"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
-#: resources/ui/gtk4/settings.ui:2087 resources/ui/gtk4/settings.ui:2151
-#: resources/ui/gtk4/settings.ui:2569 resources/ui/gtk4/settings.ui:2723
-#: resources/ui/gtk3/settings.ui:2077 resources/ui/gtk3/settings.ui:2143
-#: resources/ui/gtk3/settings.ui:2549 resources/ui/gtk3/settings.ui:2706
+#: resources/ui/gtk4/settings.ui:2085 resources/ui/gtk4/settings.ui:2149
+#: resources/ui/gtk4/settings.ui:2563 resources/ui/gtk4/settings.ui:2717
+#: resources/ui/gtk3/settings.ui:2074 resources/ui/gtk3/settings.ui:2140
+#: resources/ui/gtk3/settings.ui:2541 resources/ui/gtk3/settings.ui:2698
 msgid "Auto"
 msgstr "Automaattinen"
 
-#: resources/ui/gtk4/settings.ui:2320 resources/ui/gtk4/settings.ui:3030
-#: resources/ui/gtk3/settings.ui:2312 resources/ui/gtk3/settings.ui:3014
+#: resources/ui/gtk4/settings.ui:2318 resources/ui/gtk4/settings.ui:3024
+#: resources/ui/gtk3/settings.ui:2309 resources/ui/gtk3/settings.ui:3006
 msgid "Icon Opacity"
 msgstr "Kuvakkeen peittokyky"
 
-#: resources/ui/gtk4/settings.ui:2363 resources/ui/gtk4/settings.ui:3124
-#: resources/ui/gtk3/settings.ui:2351 resources/ui/gtk3/settings.ui:3103
+#: resources/ui/gtk4/settings.ui:2361 resources/ui/gtk4/settings.ui:3118
+#: resources/ui/gtk3/settings.ui:2348 resources/ui/gtk3/settings.ui:3095
 msgid "Icon Scale"
 msgstr "Kuvakkeen skaalaus"
 
-#: resources/ui/gtk4/settings.ui:2393 resources/ui/gtk4/settings.ui:3143
-#: resources/ui/gtk3/settings.ui:2380 resources/ui/gtk3/settings.ui:3121
+#: resources/ui/gtk4/settings.ui:2391 resources/ui/gtk4/settings.ui:3137
+#: resources/ui/gtk3/settings.ui:2377 resources/ui/gtk3/settings.ui:3113
 msgid "Icon Crop"
 msgstr "Kuvakkeen rajaus"
 
-#: resources/ui/gtk4/settings.ui:2444 resources/ui/gtk4/settings.ui:3194
-#: resources/ui/gtk4/settings.ui:3584 resources/ui/gtk3/settings.ui:2430
-#: resources/ui/gtk3/settings.ui:3171 resources/ui/gtk3/settings.ui:3553
+#: resources/ui/gtk4/settings.ui:2442 resources/ui/gtk4/settings.ui:3188
+#: resources/ui/gtk4/settings.ui:3574 resources/ui/gtk3/settings.ui:2427
+#: resources/ui/gtk3/settings.ui:3163 resources/ui/gtk3/settings.ui:3540
 msgid "Background Image"
 msgstr "Taustakuva"
 
-#: resources/ui/gtk4/settings.ui:2506 resources/ui/gtk4/settings.ui:3226
-#: resources/ui/gtk3/settings.ui:2484 resources/ui/gtk3/settings.ui:3201
+#: resources/ui/gtk4/settings.ui:2500 resources/ui/gtk4/settings.ui:3217
+#: resources/ui/gtk3/settings.ui:2476 resources/ui/gtk3/settings.ui:3189
 msgid "Children Appearance"
 msgstr "Jälkeläisen ulkoasu"
 
-#: resources/ui/gtk4/settings.ui:2516 resources/ui/gtk3/settings.ui:2494
+#: resources/ui/gtk4/settings.ui:2510 resources/ui/gtk3/settings.ui:2486
 msgid "Child items are styled differently when their wedge is hovered."
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/gtk4/settings.ui:2532 resources/ui/gtk4/settings.ui:3282
-#: resources/ui/gtk3/settings.ui:2510 resources/ui/gtk3/settings.ui:3251
+#: resources/ui/gtk4/settings.ui:2526 resources/ui/gtk4/settings.ui:3272
+#: resources/ui/gtk3/settings.ui:2502 resources/ui/gtk3/settings.ui:3238
 msgid "Standard State"
 msgstr ""
 
@@ -2225,259 +1731,259 @@ msgstr ""
 #. When the mouse pointer is over the item
 #. Hovered: When the mouse pointer is over the item
 #. When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:2545 resources/ui/gtk4/settings.ui:3837
-#: resources/ui/gtk3/settings.ui:2523 resources/ui/gtk3/settings.ui:3797
+#: resources/ui/gtk4/settings.ui:2539 resources/ui/gtk4/settings.ui:3823
+#: resources/ui/gtk3/settings.ui:2515 resources/ui/gtk3/settings.ui:3779
 msgid "Hovered State"
 msgstr ""
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent's setting
-#: resources/ui/gtk4/settings.ui:2576 resources/ui/gtk4/settings.ui:2730
-#: resources/ui/gtk4/settings.ui:3330 resources/ui/gtk4/settings.ui:3381
-#: resources/ui/gtk3/settings.ui:2557 resources/ui/gtk3/settings.ui:2714
-#: resources/ui/gtk3/settings.ui:3301 resources/ui/gtk3/settings.ui:3354
+#: resources/ui/gtk4/settings.ui:2570 resources/ui/gtk4/settings.ui:2724
+#: resources/ui/gtk4/settings.ui:3320 resources/ui/gtk4/settings.ui:3371
+#: resources/ui/gtk3/settings.ui:2549 resources/ui/gtk3/settings.ui:2706
+#: resources/ui/gtk3/settings.ui:3288 resources/ui/gtk3/settings.ui:3341
 msgid "Parent"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:2878 resources/ui/gtk4/settings.ui:3433
-#: resources/ui/gtk3/settings.ui:2862 resources/ui/gtk3/settings.ui:3406
+#: resources/ui/gtk4/settings.ui:2872 resources/ui/gtk4/settings.ui:3423
+#: resources/ui/gtk3/settings.ui:2854 resources/ui/gtk3/settings.ui:3393
 msgid "Offset"
 msgstr ""
 
 #. Draw above (grand)children items. There's an explanation string below in the application.
-#: resources/ui/gtk4/settings.ui:2989 resources/ui/gtk4/settings.ui:3522
-#: resources/ui/gtk3/settings.ui:2973 resources/ui/gtk3/settings.ui:3495
+#: resources/ui/gtk4/settings.ui:2983 resources/ui/gtk4/settings.ui:3512
+#: resources/ui/gtk3/settings.ui:2965 resources/ui/gtk3/settings.ui:3482
 msgid "Draw Above"
 msgstr "Piirrä yläpuolelle"
 
-#: resources/ui/gtk4/settings.ui:2999 resources/ui/gtk3/settings.ui:2983
+#: resources/ui/gtk4/settings.ui:2993 resources/ui/gtk3/settings.ui:2975
 msgid "Render children above the center item."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3256 resources/ui/gtk4/settings.ui:3616
-#: resources/ui/gtk3/settings.ui:3225 resources/ui/gtk3/settings.ui:3583
+#: resources/ui/gtk4/settings.ui:3246 resources/ui/gtk4/settings.ui:3603
+#: resources/ui/gtk3/settings.ui:3212 resources/ui/gtk3/settings.ui:3566
 msgid "Grandchildren Appearance"
 msgstr "Alijälkeläisen ulkoasu"
 
-#: resources/ui/gtk4/settings.ui:3266 resources/ui/gtk3/settings.ui:3235
+#: resources/ui/gtk4/settings.ui:3256 resources/ui/gtk3/settings.ui:3222
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
 msgstr ""
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:3295 resources/ui/gtk3/settings.ui:3264
+#: resources/ui/gtk4/settings.ui:3285 resources/ui/gtk3/settings.ui:3251
 msgid "With Hovered Parent"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3532 resources/ui/gtk3/settings.ui:3505
+#: resources/ui/gtk4/settings.ui:3522 resources/ui/gtk3/settings.ui:3492
 msgid "Render grandchildren above children items."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3647 resources/ui/gtk4/settings.ui:3889
-#: resources/ui/gtk3/settings.ui:3607 resources/ui/gtk3/settings.ui:3848
+#: resources/ui/gtk4/settings.ui:3633 resources/ui/gtk4/settings.ui:3872
+#: resources/ui/gtk3/settings.ui:3589 resources/ui/gtk3/settings.ui:3826
 msgid "Wedge Appearance"
 msgstr "Kiilan ulkoasu"
 
-#: resources/ui/gtk4/settings.ui:3657 resources/ui/gtk3/settings.ui:3617
+#: resources/ui/gtk4/settings.ui:3643 resources/ui/gtk3/settings.ui:3599
 msgid "Clicking inside a wedge will activate the corresponding item."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3680 resources/ui/gtk3/settings.ui:3640
+#: resources/ui/gtk4/settings.ui:3666 resources/ui/gtk3/settings.ui:3622
 msgid "Inner Radius"
 msgstr "Sisäinen säde"
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
-#: resources/ui/gtk4/settings.ui:3691 resources/ui/gtk3/settings.ui:3651
+#: resources/ui/gtk4/settings.ui:3677 resources/ui/gtk3/settings.ui:3633
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3712 resources/ui/gtk3/settings.ui:3672
+#: resources/ui/gtk4/settings.ui:3698 resources/ui/gtk3/settings.ui:3654
 msgid "Wedge Separator Color"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3724 resources/ui/gtk3/settings.ui:3684
+#: resources/ui/gtk4/settings.ui:3710 resources/ui/gtk3/settings.ui:3666
 msgid "Wedge Separator Thickness"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3762 resources/ui/gtk3/settings.ui:3722
+#: resources/ui/gtk4/settings.ui:3748 resources/ui/gtk3/settings.ui:3704
 msgid "Wedge Color"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3774 resources/ui/gtk3/settings.ui:3734
+#: resources/ui/gtk4/settings.ui:3760 resources/ui/gtk3/settings.ui:3716
 msgid "Wedge Size"
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/gtk4/settings.ui:3824 resources/ui/gtk3/settings.ui:3784
+#: resources/ui/gtk4/settings.ui:3810 resources/ui/gtk3/settings.ui:3766
 msgid "Inactive State"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3919 resources/ui/gtk4/settings.ui:4025
-#: resources/ui/gtk3/settings.ui:3872 resources/ui/gtk3/settings.ui:3978
+#: resources/ui/gtk4/settings.ui:3901 resources/ui/gtk4/settings.ui:4004
+#: resources/ui/gtk3/settings.ui:3849 resources/ui/gtk3/settings.ui:3951
 msgid "Trace Appearance"
 msgstr "Viivan ulkoasu"
 
-#: resources/ui/gtk4/settings.ui:3929 resources/ui/gtk3/settings.ui:3882
+#: resources/ui/gtk4/settings.ui:3911 resources/ui/gtk3/settings.ui:3859
 msgid "The trace is the connecting line between selected menu items."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3946 resources/ui/gtk3/settings.ui:3899
+#: resources/ui/gtk4/settings.ui:3928 resources/ui/gtk3/settings.ui:3876
 msgid "Thickness"
 msgstr "Paksuus"
 
-#: resources/ui/gtk4/settings.ui:3957 resources/ui/gtk3/settings.ui:3910
+#: resources/ui/gtk4/settings.ui:3939 resources/ui/gtk3/settings.ui:3887
 msgid "Color"
 msgstr "Väri"
 
-#: resources/ui/gtk4/settings.ui:4009 resources/ui/gtk3/settings.ui:3962
+#: resources/ui/gtk4/settings.ui:3991 resources/ui/gtk3/settings.ui:3939
 msgid "Minimum Segment Length"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4055 resources/ui/gtk4/settings.ui:4408
-#: resources/ui/gtk3/settings.ui:4002 resources/ui/gtk3/settings.ui:4355
+#: resources/ui/gtk4/settings.ui:4033 resources/ui/gtk4/settings.ui:4383
+#: resources/ui/gtk3/settings.ui:3974 resources/ui/gtk3/settings.ui:4323
 msgid "Advanced Settings"
 msgstr "Lisäasetukset"
 
-#: resources/ui/gtk4/settings.ui:4065 resources/ui/gtk3/settings.ui:4012
+#: resources/ui/gtk4/settings.ui:4043 resources/ui/gtk3/settings.ui:3984
 msgid "These settings are independent of the presets."
 msgstr "Nämä asetukset eivät ole riippuvaisia esiasetuksista."
 
-#: resources/ui/gtk4/settings.ui:4084 resources/ui/gtk3/settings.ui:4031
+#: resources/ui/gtk4/settings.ui:4062 resources/ui/gtk3/settings.ui:4003
 msgid "Minimum Stroke Angle"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4094 resources/ui/gtk3/settings.ui:4041
+#: resources/ui/gtk4/settings.ui:4072 resources/ui/gtk3/settings.ui:4013
 msgid "Smaller turns will not lead to selections."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4131 resources/ui/gtk3/settings.ui:4078
+#: resources/ui/gtk4/settings.ui:4109 resources/ui/gtk3/settings.ui:4050
 msgid "Minimum Stroke Length"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4141 resources/ui/gtk3/settings.ui:4088
+#: resources/ui/gtk4/settings.ui:4119 resources/ui/gtk3/settings.ui:4060
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4180 resources/ui/gtk3/settings.ui:4127
+#: resources/ui/gtk4/settings.ui:4158 resources/ui/gtk3/settings.ui:4099
 msgid "Jitter Threshold"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4190 resources/ui/gtk3/settings.ui:4137
+#: resources/ui/gtk4/settings.ui:4168 resources/ui/gtk3/settings.ui:4109
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4228 resources/ui/gtk3/settings.ui:4175
+#: resources/ui/gtk4/settings.ui:4206 resources/ui/gtk3/settings.ui:4147
 msgid "Selection Timeout"
 msgstr "Valinnan aikakatkaisu"
 
-#: resources/ui/gtk4/settings.ui:4238 resources/ui/gtk3/settings.ui:4185
+#: resources/ui/gtk4/settings.ui:4216 resources/ui/gtk3/settings.ui:4157
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4277 resources/ui/gtk3/settings.ui:4224
+#: resources/ui/gtk4/settings.ui:4255 resources/ui/gtk3/settings.ui:4196
 msgid "Experimental Hover Mode"
 msgstr "Kokeellinen kohdistustila"
 
-#: resources/ui/gtk4/settings.ui:4287 resources/ui/gtk3/settings.ui:4234
+#: resources/ui/gtk4/settings.ui:4265 resources/ui/gtk3/settings.ui:4206
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4310 resources/ui/gtk3/settings.ui:4257
+#: resources/ui/gtk4/settings.ui:4288 resources/ui/gtk3/settings.ui:4229
 msgid "Show Screencast Mouse"
 msgstr "Esitä näyttötallenteen hiirenosoitin"
 
-#: resources/ui/gtk4/settings.ui:4320 resources/ui/gtk3/settings.ui:4267
+#: resources/ui/gtk4/settings.ui:4298 resources/ui/gtk3/settings.ui:4239
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4353 resources/ui/gtk3/settings.ui:4300
+#: resources/ui/gtk4/settings.ui:4331 resources/ui/gtk3/settings.ui:4272
 msgid "Achievement Notifications"
 msgstr "Saavutusilmoitukset"
 
-#: resources/ui/gtk4/settings.ui:4363 resources/ui/gtk3/settings.ui:4310
+#: resources/ui/gtk4/settings.ui:4341 resources/ui/gtk3/settings.ui:4282
 msgid "Show a notification whenever you complete an achievement."
 msgstr "Näytä ilmoitus kun saat saavutuksen."
 
-#: resources/ui/gtk4/settings.ui:4429 resources/ui/gtk3/settings.ui:4388
+#: resources/ui/gtk4/settings.ui:4403 resources/ui/gtk3/settings.ui:4355
 msgid "Load Preset"
 msgstr "Lataa esiasetus"
 
-#: resources/ui/gtk4/settings.ui:4441 resources/ui/gtk3/settings.ui:4408
+#: resources/ui/gtk4/settings.ui:4415 resources/ui/gtk3/settings.ui:4375
 msgid "Load settings from a JSON file."
 msgstr "Lataa asetukset JSON-tiedostosta."
 
-#: resources/ui/gtk4/settings.ui:4448 resources/ui/gtk3/settings.ui:4421
+#: resources/ui/gtk4/settings.ui:4422 resources/ui/gtk3/settings.ui:4388
 msgid "Save the settings to a JSON file."
 msgstr "Tallenna asetukset JSON-tiedostoon."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: resources/ui/gtk4/settings.ui:4471 resources/ui/gtk4/settings.ui:4744
-#: resources/ui/gtk3/settings.ui:4450 resources/ui/gtk3/settings.ui:4743
+#: resources/ui/gtk4/settings.ui:4445 resources/ui/gtk4/settings.ui:4718
+#: resources/ui/gtk3/settings.ui:4417 resources/ui/gtk3/settings.ui:4710
 msgid "Live Preview"
 msgstr "Välitön esikatselu"
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:4500 resources/ui/gtk3/settings.ui:4993
+#: resources/ui/gtk4/settings.ui:4474 resources/ui/gtk3/settings.ui:4960
 msgid "Menu Editor"
 msgstr "Valikkomuokkain"
 
-#: resources/ui/gtk4/settings.ui:4529 resources/ui/gtk3/settings.ui:4509
+#: resources/ui/gtk4/settings.ui:4503 resources/ui/gtk3/settings.ui:4476
 msgid "Add a new menu item."
 msgstr "Lisää uusi valikkotietue."
 
-#: resources/ui/gtk4/settings.ui:4608 resources/ui/gtk3/settings.ui:4596
+#: resources/ui/gtk4/settings.ui:4582 resources/ui/gtk3/settings.ui:4563
 msgid "Stash"
 msgstr "Lokero"
 
-#: resources/ui/gtk4/settings.ui:4624 resources/ui/gtk3/settings.ui:4613
+#: resources/ui/gtk4/settings.ui:4598 resources/ui/gtk3/settings.ui:4580
 msgid "Store items here and re-use them later."
 msgstr "Talleta tietueet tänne ja käytä niitä uudelleen myöhemmin."
 
-#: resources/ui/gtk4/settings.ui:4668 resources/ui/gtk3/settings.ui:4657
+#: resources/ui/gtk4/settings.ui:4642 resources/ui/gtk3/settings.ui:4624
 msgid "Trash"
 msgstr "Roskakori"
 
-#: resources/ui/gtk4/settings.ui:4684 resources/ui/gtk3/settings.ui:4673
+#: resources/ui/gtk4/settings.ui:4658 resources/ui/gtk3/settings.ui:4640
 msgid "Drop items here."
 msgstr "Pudota tietueet tänne."
 
-#: resources/ui/gtk4/settings.ui:4714 resources/ui/gtk3/settings.ui:4703
+#: resources/ui/gtk4/settings.ui:4688 resources/ui/gtk3/settings.ui:4670
 msgid "Restore menus from a JSON file. This will override your current menus!"
 msgstr "Palauta valikot JSON-tiedostosta. Tämä korvaa nykyiset valikkosi!"
 
-#: resources/ui/gtk4/settings.ui:4720 resources/ui/gtk3/settings.ui:4715
+#: resources/ui/gtk4/settings.ui:4694 resources/ui/gtk3/settings.ui:4682
 msgid "Export all menus to a JSON file."
 msgstr "Vie kaikki valikot JSON-tiedostoon."
 
-#: resources/ui/gtk4/settings.ui:4797 resources/ui/gtk3/settings.ui:4797
+#: resources/ui/gtk4/settings.ui:4771 resources/ui/gtk3/settings.ui:4764
 msgid "Name"
 msgstr "Nimi"
 
-#: resources/ui/gtk4/settings.ui:4815 resources/ui/gtk3/settings.ui:4815
+#: resources/ui/gtk4/settings.ui:4789 resources/ui/gtk3/settings.ui:4782
 msgid "Icon"
 msgstr "Kuvake"
 
-#: resources/ui/gtk4/settings.ui:4821 resources/ui/gtk3/settings.ui:4821
+#: resources/ui/gtk4/settings.ui:4795 resources/ui/gtk3/settings.ui:4788
 msgid "Can be an icon name, text, emoji or a file."
 msgstr "Voi olla kuvakkeen nimi, teksti, emoji tai tiedosto."
 
-#: resources/ui/gtk4/settings.ui:4865 resources/ui/gtk3/settings.ui:4871
+#: resources/ui/gtk4/settings.ui:4839 resources/ui/gtk3/settings.ui:4838
 msgid "Fixed Angle"
 msgstr "Kiinteä kulma"
 
-#: resources/ui/gtk4/settings.ui:4881 resources/ui/gtk3/settings.ui:4887
+#: resources/ui/gtk4/settings.ui:4855 resources/ui/gtk3/settings.ui:4854
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -2489,29 +1995,293 @@ msgid ""
 "disable this feature."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4919 resources/ui/gtk3/settings.ui:4925
+#: resources/ui/gtk4/settings.ui:4893 resources/ui/gtk3/settings.ui:4892
 msgid "This will open the menu."
 msgstr "Tämä avaa valikon."
 
-#: resources/ui/gtk4/settings.ui:4937 resources/ui/gtk3/settings.ui:4943
+#: resources/ui/gtk4/settings.ui:4911 resources/ui/gtk3/settings.ui:4910
 msgid "Open in Screen Center"
 msgstr "Avaa näytön keskiosaan"
 
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:4998 resources/ui/gtk3/settings.ui:5237
+#: resources/ui/gtk4/settings.ui:4972 resources/ui/gtk3/settings.ui:5203
 msgid "Achievements"
 msgstr "Saavutukset"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5192 resources/ui/gtk3/settings.ui:5173
+#: resources/ui/gtk4/settings.ui:5166 resources/ui/gtk3/settings.ui:5140
 msgid "In Progress"
 msgstr "Meneillään"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5206 resources/ui/gtk3/settings.ui:5188
+#: resources/ui/gtk4/settings.ui:5180 resources/ui/gtk3/settings.ui:5155
 msgid "Completed"
 msgstr "Suoritettu"
 
-#: resources/ui/gtk4/settings.ui:5234 resources/ui/gtk3/settings.ui:5216
+#: resources/ui/gtk4/settings.ui:5208 resources/ui/gtk3/settings.ui:5183
 msgid "Reset all achievements."
 msgstr "Nollaa kaikki saavutukset."
+
+#~ msgid "Animals & Nature"
+#~ msgstr "Eläimet ja luonto"
+
+#~ msgid "Flowers"
+#~ msgstr "Kukat"
+
+#~ msgid "Tulip"
+#~ msgstr "Tulppaani"
+
+#~ msgid "Rose"
+#~ msgstr "Ruusu"
+
+#~ msgid "Sunflower"
+#~ msgstr "Auringonkukka"
+
+#~ msgid "Bouquet"
+#~ msgstr "Kimppu"
+
+#~ msgid "Mammals"
+#~ msgstr "Nisäkkäät"
+
+#~ msgid "Cat"
+#~ msgstr "Kissa"
+
+#~ msgid "Dog"
+#~ msgstr "Koira"
+
+#~ msgid "Pig"
+#~ msgstr "Sika"
+
+#~ msgid "Monkey"
+#~ msgstr "Apina"
+
+#~ msgid "Reptiles"
+#~ msgstr "Matelijat"
+
+#~ msgid "Crocodile"
+#~ msgstr "Krokotiili"
+
+#~ msgid "Snake"
+#~ msgstr "Käärme"
+
+#~ msgid "Turtle"
+#~ msgstr "Kilpikonna"
+
+#~ msgid "T-Rex"
+#~ msgstr "T-Rex"
+
+#~ msgid "Food & Drink"
+#~ msgstr "Ruoka ja juoma"
+
+#~ msgid "Fruit"
+#~ msgstr "Hedelmä"
+
+#~ msgid "Apple"
+#~ msgstr "Omena"
+
+#~ msgid "Watermelon"
+#~ msgstr "Vesimeloni"
+
+#~ msgid "Lemon"
+#~ msgstr "Sitruuna"
+
+#~ msgid "Banana"
+#~ msgstr "Banaani"
+
+#~ msgid "Strawberry"
+#~ msgstr "Mansikka"
+
+#~ msgid "Drink"
+#~ msgstr "Juomat"
+
+#~ msgid "Tea"
+#~ msgstr "Tee"
+
+#~ msgid "Coffee"
+#~ msgstr "Kahvi"
+
+#~ msgid "Beer"
+#~ msgstr "Olut"
+
+#~ msgid "Whiskey"
+#~ msgstr "Viski"
+
+#~ msgid "Cocktail"
+#~ msgstr "Cocktail"
+
+#~ msgid "Sweets"
+#~ msgstr "Herkut"
+
+#~ msgid "Shortcake"
+#~ msgstr "Murokeksi"
+
+#~ msgid "Candy"
+#~ msgstr "Makeinen"
+
+#~ msgid "Chocolate"
+#~ msgstr "Suklaa"
+
+#~ msgid "Activities"
+#~ msgstr "Aktiviteetit"
+
+#~ msgid "Games"
+#~ msgstr "Pelit"
+
+#~ msgid "Mahjong"
+#~ msgstr "Mahjong"
+
+#~ msgid "Bowling"
+#~ msgstr "Keilaus"
+
+#~ msgid "Darts"
+#~ msgstr "Tikanheitto"
+
+#~ msgid "Video Game"
+#~ msgstr "Videopeli"
+
+#~ msgid "Sports"
+#~ msgstr "Urheilu"
+
+#~ msgid "Cricket"
+#~ msgstr "Kriketti"
+
+#~ msgid "Ice Hockey"
+#~ msgstr "Jääkiekko"
+
+#~ msgid "Tennis"
+#~ msgstr "Tennis"
+
+#~ msgid "Fishing"
+#~ msgstr "Kalastus"
+
+#~ msgid "Places"
+#~ msgstr "Sijainnit"
+
+#~ msgid "Statue of Liberty"
+#~ msgstr "Vapaudenpatsas"
+
+#~ msgid "Japan"
+#~ msgstr "Japani"
+
+#~ msgid "Objects"
+#~ msgstr "Objektit"
+
+#~ msgid "Cars"
+#~ msgstr "Autot"
+
+#~ msgid "Bus"
+#~ msgstr "Bussi"
+
+#~ msgid "Fire Engine"
+#~ msgstr "Paloauto"
+
+#~ msgid "Automobile"
+#~ msgstr "Ajoneuvo"
+
+#~ msgid "Tractor"
+#~ msgstr "Traktori"
+
+#~ msgid "Truck"
+#~ msgstr "Rekka"
+
+#~ msgid "Buildings"
+#~ msgstr "Rakennukset"
+
+#~ msgid "Post Office"
+#~ msgstr "Postitoimisto"
+
+#~ msgid "School"
+#~ msgstr "Koulu"
+
+#~ msgid "Hospital"
+#~ msgstr "Sairaala"
+
+#~ msgid "Bank"
+#~ msgstr "Pankki"
+
+#~ msgid "Instruments"
+#~ msgstr "Soittimet"
+
+#~ msgid "Saxophone"
+#~ msgstr "Saksofoni"
+
+#~ msgid "Guitar"
+#~ msgstr "Kitara"
+
+#~ msgid "Trumpet"
+#~ msgstr "Trumpetti"
+
+#~ msgid "Microphone"
+#~ msgstr "Mikrofoni"
+
+#~ msgid "Drum"
+#~ msgstr "Rummut"
+
+#~ msgid "Smileys"
+#~ msgstr "Hymiöt"
+
+#~ msgid "Happy Faces"
+#~ msgstr "Iloiset naamat"
+
+#~ msgid "Winking Face"
+#~ msgstr "Vinkkaava naama"
+
+#~ msgid "Angry Faces"
+#~ msgstr "Vihaiset naamat"
+
+#~ msgid "Vomiting Face"
+#~ msgstr "Oksentava naama"
+
+#~ msgid "Skeptical Face"
+#~ msgstr "Skeptinen naama"
+
+#~ msgid "Angry Face"
+#~ msgstr "Vihainen naama"
+
+#~ msgid "Very Angry Face"
+#~ msgstr "Erittäin vihainen naama"
+
+#~ msgid "Surprised Faces"
+#~ msgstr "Yllätyneet naamat"
+
+#~ msgid "Symbols"
+#~ msgstr "Symbolit"
+
+#~ msgid "Star Signs"
+#~ msgstr "Horoskoopit"
+
+#~ msgid "Arrows"
+#~ msgstr "Nuolet"
+
+#~ msgid "Up"
+#~ msgstr "Ylös"
+
+#~ msgid "Right"
+#~ msgstr "Oikea"
+
+#~ msgid "Twisted"
+#~ msgstr "Kierretty"
+
+#~ msgid "Down"
+#~ msgstr "Alas"
+
+#~ msgid "Left"
+#~ msgstr "Vasen"
+
+#~ msgid "Info Signs"
+#~ msgstr "Opastekyltit"
+
+#~ msgid "Litter Bin"
+#~ msgstr "Roskakori"
+
+#~ msgid "Potable Water"
+#~ msgstr "Juomakelpoinen vesi"
+
+#~ msgid "Mens"
+#~ msgstr "Miehet"
+
+#~ msgid "Womens"
+#~ msgstr "Naiset"
+
+#~ msgid "Baby"
+#~ msgstr "Lastenhoito"
