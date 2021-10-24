@@ -56,6 +56,14 @@ var AnimatedValue = GObject.registerClass({
     super._init(params);
   }
 
+  // For some reason this getter and setter is required for older gjs versions... bug?
+  get exponent() {
+    return this._exponent || 0;
+  }
+  set exponent(val) {
+    this._exponent = val;
+  }
+
   // Returns true if the given time is past the end time of this.
   isFinished(time) {
     return time > this.endTime;

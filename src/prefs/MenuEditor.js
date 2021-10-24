@@ -1124,7 +1124,7 @@ function registerWidgets() {
           this._restartAnimation = false;
 
           // Cancel any running timeouts.
-          if (this._updateTimeout >= 0) {
+          if (this._updateTimeout != undefined && this._updateTimeout >= 0) {
             this.remove_tick_callback(this._updateTimeout);
             this._updateTimeout = -1;
           }
