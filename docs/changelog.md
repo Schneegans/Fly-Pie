@@ -4,6 +4,19 @@
 
 # Changelog of Fly-Pie
 
+
+## [Fly-Pie 9](https://github.com/schneegans/fly-pie/releases/tag/v9)
+
+**Release Date:** TBD
+
+#### New Features
+
+#### Other Enhancements
+
+#### Bug Fixes
+
+* Fixed a bug which crashed the settings dialog when the introspection data for Clutter was not installed.
+
 ## [Fly-Pie 8](https://github.com/schneegans/fly-pie/releases/tag/v8)
 
 **Release Date:** 2021-10-26
