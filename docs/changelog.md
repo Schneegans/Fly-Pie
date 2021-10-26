@@ -21,8 +21,20 @@
 * A set of built-in icons has been added. The default example menu now uses these icons. Therefore, it should look the same on all systems now.
 * The tutorial menu does not use Emojis any more because some systems have no emoji font installed per default. It now uses built-in icons as well and should be much easier to translate!
 * Fly-Pie now uses a `Makefile` for building the extension instead of a bunch of custom scripts. Thank you, [@daPhipz](https://github.com/daPhipz)!
-* New Translations!
-  * ...
+* Fly-Pie is now translated into the following languages (in most cases partially, feel free to [contribute](https://hosted.weblate.org/engage/fly-pie/)!):
+  * German
+  * English
+  * Chinese (Simplified)
+  * Dutch
+  * Finnish
+  * Italian
+  * Korean
+  * Norwegian Bokmål
+  * Portuguese
+  * Portuguese (Brazil)
+  * Russian
+  * Sinhala
+  * Spanish
 
 #### Bug Fixes
 
