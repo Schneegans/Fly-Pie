@@ -113,6 +113,7 @@ var ItemRegistry = class ItemRegistry {
 
         // Menu types.
         CustomMenu: menus.CustomMenu.menu,
+        Clipboard: menus.Clipboard.menu,
         Devices: menus.Devices.menu,
         Bookmarks: menus.Bookmarks.menu,
         System: menus.System.menu,
