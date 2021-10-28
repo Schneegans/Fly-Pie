@@ -11,6 +11,8 @@
 
 #### New Features
 
+* Icons can now be given as [base64 encoded data URIs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). This allows creating menus with completely application defined icons.
+
 #### Other Enhancements
 
 #### Bug Fixes
