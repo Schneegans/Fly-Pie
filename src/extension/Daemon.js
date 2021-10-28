@@ -13,16 +13,17 @@ const {Gio, GLib, Gdk, GdkPixbuf, St} = imports.gi;
 
 const Main = imports.ui.main;
 
-const Me             = imports.misc.extensionUtils.getCurrentExtension();
-const utils          = Me.imports.src.common.utils;
-const Statistics     = Me.imports.src.common.Statistics.Statistics;
-const Achievements   = Me.imports.src.common.Achievements.Achievements;
-const ItemRegistry   = Me.imports.src.common.ItemRegistry.ItemRegistry;
-const DBusInterface  = Me.imports.src.common.DBusInterface.DBusInterface;
-const Shortcuts      = Me.imports.src.extension.Shortcuts.Shortcuts;
-const MouseHighlight = Me.imports.src.extension.MouseHighlight.MouseHighlight;
-const Menu           = Me.imports.src.extension.Menu.Menu;
-const DefaultMenu    = Me.imports.src.extension.DefaultMenu.DefaultMenu;
+const Me               = imports.misc.extensionUtils.getCurrentExtension();
+const utils            = Me.imports.src.common.utils;
+const Statistics       = Me.imports.src.common.Statistics.Statistics;
+const Achievements     = Me.imports.src.common.Achievements.Achievements;
+const ItemRegistry     = Me.imports.src.common.ItemRegistry.ItemRegistry;
+const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
+const Shortcuts        = Me.imports.src.extension.Shortcuts.Shortcuts;
+const MouseHighlight   = Me.imports.src.extension.MouseHighlight.MouseHighlight;
+const Menu             = Me.imports.src.extension.Menu.Menu;
+const DefaultMenu      = Me.imports.src.extension.DefaultMenu.DefaultMenu;
+const ClipboardManager = Me.imports.src.extension.ClipboardManager.ClipboardManager;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
@@ -50,6 +51,9 @@ var Daemon = class Daemon {
     if (global.backend && !global.backend.is_rendering_hardware_accelerated()) {
       St.Settings.get().uninhibit_animations();
     }
+
+    // Create the clipboard manager singleton. This is used by the clipboard menu.
+    ClipboardManager.getInstance();
 
     // Initialize the menu. For performance reasons the same menu is used again and again.
     // It is just reconfigured according to incoming requests.
@@ -180,6 +184,9 @@ var Daemon = class Daemon {
     if (global.backend && !global.backend.is_rendering_hardware_accelerated()) {
       St.Settings.get().inhibit_animations();
     }
+
+    // Delete the clipboard manager singleton. This is used by the clipboard menu.
+    ClipboardManager.destroyInstance();
 
     this._menu.destroy();
 
