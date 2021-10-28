@@ -99,12 +99,13 @@ The table below lists all possible item types. Some of the types require that th
 | **Menus** | | |
 | **`"CustomMenu"`** | _not used_ | Use the `"children"` property to add as many actions or submenus as you want! |
 | **`"Bookmarks"`** | _not used_ | This menu shows an item for the trash, your desktop and each bookmarked directory. |
+| **`"Clipboard"`** | `{"maxNum":7, "startAngle":-1}` | This menu shows items for the most recently copied items. |
 | **`"Devices"`** | _not used_ | This menu shows an item for each mounted volume, like USB-Sticks. |
 | **`"Favorites"`** | _not used_ | This menu shows the applications you have pinned to GNOME Shell's Dash. |
 | **`"FrequentlyUsed"`** | `{"maxNum":7}` | This menu shows a list of frequently used applications. You should limit the maximum number of shown applications to a reasonable number given in `data`. |
 | **`"MainMenu"`** | _not used_ | This menu shows all installed applications. Usually, this is very cluttered as many sections contain too many items to be used efficiently. You should rather setup your own menus! This menu is only available if the typelib for GMenu is installed on the system. Usually the package is called something like `gir1.2-gmenu-3.0`. |
 | **`"RecentFiles"`** | `{"maxNum":7}` | This menu shows a list of recently used files. You should limit the maximum number of shown files to a reasonable number given in `data`. |
-| **`"RunningApps"`** | _not used_ | This menu shows all currently running applications. This is similar to the Alt+Tab window selection. As the entries change position frequently, this is actually not very effective. |
+| **`"RunningApps"`** | `{"activeWorkspaceOnly": false, "appGrouping": true, "hoverPeeking": true, "nameRegex": ''}` | This menu shows all currently running applications. This is similar to the Alt+Tab window selection. As the entries change position frequently, this is actually not very effective. |
 | **`"System"`** | _not used_ | This menu shows an items for screen-lock, shutdown, settings, etc. |
 
 ### Return Value
