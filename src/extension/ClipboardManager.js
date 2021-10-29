@@ -31,7 +31,7 @@ const InputManipulator = Me.imports.src.common.InputManipulator.InputManipulator
 // So it just makes some assumptions and stores the data in a quite commonly used       //
 // format and hopes that the receiver will understands the format.                      //
 // Currently, these mime types are requested (in this order):                           //
-// - 'text/uri-list'                                                                    //
+// - 'x-special/gnome-copied-files'                                                     //
 // - 'image/svg+xml'                                                                    //
 // - 'image/png'                                                                        //
 // - 'text/plain;charset=utf-8'                                                         //
@@ -105,7 +105,7 @@ var ClipboardManager = class ClipboardManager {
           // The data from the new owner is requested in one of these formats, attempted
           // top to bttom.
           const knownMimeTypes = [
-            'text/uri-list',
+            'x-special/gnome-copied-files',
             'image/svg+xml',
             'image/png',
             'text/plain;charset=utf-8',

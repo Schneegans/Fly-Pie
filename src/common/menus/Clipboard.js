@@ -142,13 +142,14 @@ var menu = {
           name: text.substring(0, 30) + (text.length > 30 ? '…' : '')
         };
       }
-      // If the copied item contains a list of URIs, we display an appropriate icon and
-      // name for the first URI.
-      else if (item.type === 'text/uri-list') {
+      // If the copied item contains a list of copied files, we display an appropriate
+      // icon and name for the first file.
+      else if (item.type === 'x-special/gnome-copied-files') {
 
         const data   = ByteArray.toString(ByteArray.fromGBytes(item.data));
-        const uris   = data.split(/\r?\n/);
-        const config = ItemRegistry.ItemRegistry.createActionConfig(uris[0]);
+        const lines  = data.split(/\r?\n/);
+        const file   = lines[1];  // The first item contains the action (cut, copy).
+        const config = ItemRegistry.ItemRegistry.createActionConfig(file);
 
         child = {icon: config.icon, name: config.name};
       }
