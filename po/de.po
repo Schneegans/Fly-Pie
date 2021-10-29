@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-29 16:41+0200\n"
-"PO-Revision-Date: 2021-10-22 20:42+0000\n"
+"PO-Revision-Date: 2021-10-30 08:09+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
-">\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -469,37 +469,39 @@ msgstr ""
 
 #: src/common/menus/Clipboard.js:54
 msgid "Clipboard"
-msgstr ""
+msgstr "Zwischenablage"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Clipboard.js:61
 msgid "Shows recently copied things."
-msgstr ""
+msgstr "Zeigt kürzliche kopierte Dinge."
 
 #: src/common/menus/Clipboard.js:64
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
 msgstr ""
+"Das <b>Zwischenablage</b>-Menü zeigt eine Liste der zuletzt kopierten "
+"Objekte an."
 
 #: src/common/menus/Clipboard.js:94
 msgid "First Child Angle"
-msgstr ""
+msgstr "Kind-Startwinkel"
 
 #: src/common/menus/Clipboard.js:94
 msgid "Direction of the most recent item."
-msgstr ""
+msgstr "Richtung des neuesten Elements."
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a vector image.
 #: src/common/menus/Clipboard.js:165
 msgid "Vector Image"
-msgstr ""
+msgstr "Vektorbild"
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a raster image.
 #: src/common/menus/Clipboard.js:177
 msgid "Raster Image"
-msgstr ""
+msgstr "Rasterbild"
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
@@ -2106,6 +2108,10 @@ msgid ""
 "#rgb\" to the icon in order to draw a circle with the given RGB color behind "
 "the icon."
 msgstr ""
+"Der Name kann entweder ein Bilddateipfad, ein Symbolname aus dem aktuellen "
+"Symbolthema, eine base64-codierte Data-URI, Text oder ein Emoji sein. Sie "
+"können \"-#rgb\" an den Name anhängen, um einen Kreis mit der angegebenen "
+"RGB-Farbe hinter dem Symbol zu zeichnen."
 
 #: resources/ui/gtk4/settings.ui:4840 resources/ui/gtk3/settings.ui:4839
 msgid "Fixed Angle"
