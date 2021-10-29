@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-21 21:11+0200\n"
+"POT-Creation-Date: 2021-10-29 16:41+0200\n"
 "PO-Revision-Date: 2021-10-22 20:42+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/fly-pie/core/es/>"
-"\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/fly-pie/core/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,8 +36,8 @@ msgid ""
 "multimedia playback or to undo / redo operations."
 msgstr ""
 
-#: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:4887
-#: resources/ui/gtk3/settings.ui:4886
+#: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:4888
+#: resources/ui/gtk3/settings.ui:4887
 msgid "Shortcut"
 msgstr ""
 
@@ -198,7 +198,7 @@ msgstr ""
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
 #. text to insert.
-#: src/common/ItemRegistry.js:243
+#: src/common/ItemRegistry.js:244
 #, javascript-format
 msgid "Insert: %s"
 msgstr ""
@@ -221,10 +221,12 @@ msgid ""
 msgstr ""
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
+#: src/common/menus/Clipboard.js:85
 msgid "Max Item Count"
 msgstr ""
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
+#: src/common/menus/Clipboard.js:85
 msgid "Limits the number of children."
 msgstr ""
 
@@ -380,8 +382,9 @@ msgstr ""
 msgid "Window Filter"
 msgstr ""
 
-#: src/common/menus/RunningApps.js:99 resources/ui/gtk4/settings.ui:4845
-#: resources/ui/gtk3/settings.ui:4844
+#: src/common/menus/RunningApps.js:99 resources/ui/gtk4/settings.ui:4795
+#: resources/ui/gtk4/settings.ui:4846 resources/ui/gtk3/settings.ui:4788
+#: resources/ui/gtk3/settings.ui:4845
 msgid "See tooltip for details."
 msgstr ""
 
@@ -411,6 +414,40 @@ msgstr ""
 msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
+msgstr ""
+
+#: src/common/menus/Clipboard.js:54
+msgid "Clipboard"
+msgstr ""
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/menus/Clipboard.js:61
+msgid "Shows recently copied things."
+msgstr ""
+
+#: src/common/menus/Clipboard.js:64
+msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
+msgstr ""
+
+#: src/common/menus/Clipboard.js:94
+msgid "First Child Angle"
+msgstr ""
+
+#: src/common/menus/Clipboard.js:94
+msgid "Direction of the most recent item."
+msgstr ""
+
+#. Translators: This is shown as item name in the clipboard menu when the user
+#. copied a vector image.
+#: src/common/menus/Clipboard.js:165
+msgid "Vector Image"
+msgstr ""
+
+#. Translators: This is shown as item name in the clipboard menu when the user
+#. copied a raster image.
+#: src/common/menus/Clipboard.js:177
+msgid "Raster Image"
 msgstr ""
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
@@ -939,97 +976,97 @@ msgid "Failed to load preset!"
 msgstr ""
 
 #. Translators: Do not translate '%d'. ms = milliseconds
-#: src/prefs/TutorialPage.js:183
+#: src/prefs/TutorialPage.js:182
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
 msgstr ""
 
 #. Translators: Do not translate '%d'. ms = milliseconds
-#: src/prefs/TutorialPage.js:188
+#: src/prefs/TutorialPage.js:187
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
 msgstr ""
 
-#. Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
-#. Muffin". This is one of the first words. The three words are directly appended to
-#. each other; therefore the trailing space is important. You can also use hyphens if
-#. appropriate.
-#: src/prefs/ExampleMenu.js:28
+#. Translators: This is the name of the tutorial menu.
+#. Translators: This is the name of the default menu.
+#: src/prefs/ExampleMenu.js:27 src/extension/DefaultMenu.js:29
+msgid "Example Menu"
+msgstr ""
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:64
 msgid "Cold "
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:28
+#: src/prefs/ExampleMenu.js:64
 msgid "Hot "
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:28
+#: src/prefs/ExampleMenu.js:64
 msgid "Wet "
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:28
+#: src/prefs/ExampleMenu.js:64
 msgid "Deadly "
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:28
+#: src/prefs/ExampleMenu.js:64
 msgid "Smelly "
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:28
+#: src/prefs/ExampleMenu.js:64
 msgid "Vegan "
 msgstr ""
 
-#. Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
-#. Muffin". This is one of the middle words. The three words are directly appended to
-#. each other; therefore the trailing space is important. You can also use hyphens if
-#. appropriate.
-#: src/prefs/ExampleMenu.js:40
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the middle words. The three words are
+#. directly appended to each other; therefore the trailing space is important. You
+#. can also use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:76
 msgid "Chocolate "
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:40
+#: src/prefs/ExampleMenu.js:76
 msgid "Cherry "
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:40
+#: src/prefs/ExampleMenu.js:76
 msgid "Garlic "
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:40
+#: src/prefs/ExampleMenu.js:76
 msgid "Apple "
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:40
+#: src/prefs/ExampleMenu.js:76
 msgid "Pepper "
 msgstr ""
 
-#. Translators: The tutorial menu allows selecting triplets such as "Smelly Chocolate
-#. Muffin". This is one of the last words. The three words are directly appended to
-#. each other; therefore the trailing space is important. You can also use hyphens if
-#. appropriate.
-#: src/prefs/ExampleMenu.js:52
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the last words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:88
 msgid "Pie"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:52
+#: src/prefs/ExampleMenu.js:88
 msgid "Cake"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:52
+#: src/prefs/ExampleMenu.js:88
 msgid "Muffin"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:52
+#: src/prefs/ExampleMenu.js:88
 msgid "Doughnut"
 msgstr ""
 
-#: src/prefs/ExampleMenu.js:52
+#: src/prefs/ExampleMenu.js:88
 msgid "Cookie"
-msgstr ""
-
-#. Translators: This is the name of the tutorial menu.
-#. Translators: This is the name of the default menu.
-#: src/prefs/ExampleMenu.js:68 src/extension/DefaultMenu.js:29
-msgid "Example Menu"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
@@ -1123,29 +1160,29 @@ msgid "Flip Side"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:142
+#: src/extension/Daemon.js:146
 msgid "Fly-Pie Level Up!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:144
+#: src/extension/Daemon.js:148
 msgid "You reached level %i!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:164
+#: src/extension/Daemon.js:168
 msgid "Fly-Pie Achievement Completed!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:166
+#: src/extension/Daemon.js:170
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
 msgstr ""
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:472
+#: src/extension/Daemon.js:479
 msgid "Show Achievements"
 msgstr ""
 
@@ -1942,7 +1979,7 @@ msgid "Live Preview"
 msgstr ""
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:4474 resources/ui/gtk3/settings.ui:4960
+#: resources/ui/gtk4/settings.ui:4474 resources/ui/gtk3/settings.ui:4961
 msgid "Menu Editor"
 msgstr ""
 
@@ -1982,15 +2019,19 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4795 resources/ui/gtk3/settings.ui:4788
-msgid "Can be an icon name, text, emoji or a file."
+#: resources/ui/gtk4/settings.ui:4807 resources/ui/gtk3/settings.ui:4800
+msgid ""
+"The icon can be either an image file path, an icon name from the current "
+"icon theme, a base64 encoded data URI, text, or an emoji. You can append \"-"
+"#rgb\" to the icon in order to draw a circle with the given RGB color behind "
+"the icon."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4839 resources/ui/gtk3/settings.ui:4838
+#: resources/ui/gtk4/settings.ui:4840 resources/ui/gtk3/settings.ui:4839
 msgid "Fixed Angle"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4855 resources/ui/gtk3/settings.ui:4854
+#: resources/ui/gtk4/settings.ui:4856 resources/ui/gtk3/settings.ui:4855
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -2002,30 +2043,30 @@ msgid ""
 "disable this feature."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4893 resources/ui/gtk3/settings.ui:4892
+#: resources/ui/gtk4/settings.ui:4894 resources/ui/gtk3/settings.ui:4893
 msgid "This will open the menu."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4911 resources/ui/gtk3/settings.ui:4910
+#: resources/ui/gtk4/settings.ui:4912 resources/ui/gtk3/settings.ui:4911
 msgid "Open in Screen Center"
 msgstr ""
 
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:4972 resources/ui/gtk3/settings.ui:5203
+#: resources/ui/gtk4/settings.ui:4973 resources/ui/gtk3/settings.ui:5204
 msgid "Achievements"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5166 resources/ui/gtk3/settings.ui:5140
+#: resources/ui/gtk4/settings.ui:5167 resources/ui/gtk3/settings.ui:5141
 msgid "In Progress"
 msgstr ""
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5180 resources/ui/gtk3/settings.ui:5155
+#: resources/ui/gtk4/settings.ui:5181 resources/ui/gtk3/settings.ui:5156
 msgid "Completed"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:5208 resources/ui/gtk3/settings.ui:5183
+#: resources/ui/gtk4/settings.ui:5209 resources/ui/gtk3/settings.ui:5184
 msgid "Reset all achievements."
 msgstr ""
 
