@@ -4785,7 +4785,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">end</property>
-                                        <property name="label" translatable="yes">Can be an icon name, text, emoji or a file.</property>
+                                        <property name="label" translatable="yes">See tooltip for details.</property>
                                         <style>
                                           <class name="dim-label" />
                                         </style>
@@ -4797,6 +4797,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                   <object class="GtkBox" id="box7">
                                     <child>
                                       <object class="GtkEntry" id="icon-name">
+                                        <property name="tooltip_text" translatable="yes">The icon can be either an image file path, an icon name from the current icon theme, a base64 encoded data URI, text, or an emoji. You can append "-#rgb" to the icon in order to draw a circle with the given RGB color behind the icon.</property>
                                         <property name="hexpand">1</property>
                                         <property name="show_emoji_icon">1</property>
                                       </object>
