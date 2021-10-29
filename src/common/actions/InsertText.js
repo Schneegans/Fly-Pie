@@ -100,7 +100,7 @@ var action = {
       onSelect: () => {
         const clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default());
         clipboard.set_text(text, -1);
-        this._input.activateAccelerator('<Primary>v');
+        InputManipulator.activateAccelerator('<Primary>v');
       }
     };
   }
