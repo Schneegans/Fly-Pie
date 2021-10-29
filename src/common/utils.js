@@ -211,14 +211,16 @@ function getRoot(widget) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This draws a square-shaped icon to the given Cairo.Context of the given size. The    //
-// name can either be an icon name from the current icon theme or a path to an image    //
-// file. If neither is found, the given name is written to the image. The given font    //
-// (like 'Sans') and textColor (an object with properties 'red', 'green' and 'blue' in  //
-// the range 0..1) are used in this case. This is very useful for emojis like 😆 or 🌟!   //
-// Symbolic icons are colored by the given textColor as well. To make things fancy,     //
-// there is the possibility to create circle-shaped icons based on symbolic icons: If   //
-// the icon name references an existing symbolic icon, you can append -#rrggbb to the   //
-// icon name! A circle of this color will be drawn below the icon.                      //
+// name can either be an icon name from the current icon theme, a path to an image      //
+// file, or a base64 encoded image. If none of this is given, the icon name is written  //
+// to the image. The given font (like 'Sans') and textColor (an object with properties  //
+// 'red', 'green' and 'blue' inthe range 0..1) are used in this case. This is very      //
+// useful for emojis like 😆 or 🌟! Symbolic icons are colored by the given textColor   //
+// as well.                                                                             //
+// To make things fancy, there is the possibility to create circle-shaped icons based   //
+// on symbolic icons: If the icon name references an existing symbolic icon, you can    //
+// append -#rrggbb to the icon name! A circle of this color will be drawn below the     //
+// icon.                                                                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let _iconDecor = null;
@@ -286,6 +288,48 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
     ctx.translate(-size / 2, -size / 2);
   }
 
+  // Here we check whether the given icon name is actually a base64 encode image.
+  try {
+
+    // If that is the case, the icon name should be something like this:
+    // data:image/svg+xml;base64,<...... base64 data ........>
+    // So we look for this 'data:image' beginning.
+    if (iconName.startsWith('data:image')) {
+
+      // Extract the mime type and the actual base64 data.
+      const mimeType = iconName.slice(5, iconName.indexOf(';'));
+      const data     = GLib.base64_decode(iconName.slice(iconName.indexOf(',') + 1));
+
+      if (data.length == 0) {
+        throw 'Base64 image data was empty!';
+      }
+
+      // Try to load the image data. This may throw an error.
+      const loader = GdkPixbuf.PixbufLoader.new_with_mime_type(mimeType);
+      loader.set_size(size, size);
+      loader.write(data);
+      loader.close();
+
+      const pixbuf = loader.get_pixbuf();
+
+      // If we got a valid pixbuf, paint it!
+      if (pixbuf && pixbuf.get_width() > 0 && pixbuf.get_height() > 0) {
+        Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0);
+        ctx.paint();
+
+        ctx.popGroupToSource();
+        ctx.paintWithAlpha(opacity);
+
+        return;
+      }
+
+      throw 'Unknown error.';
+    }
+  } catch (error) {
+    debug('Failed to draw base64 image: ' + error);
+    iconName = 'flypie-image-symbolic';
+  }
+
   // First try to find the icon in the theme. This will also load images from disc if the
   // icon name is actually a file path.
   try {
@@ -336,7 +380,7 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
       Gdk.cairo_set_source_pixbuf(ctx, pixbuf, 0, 0);
 
       // If it's a symbolic icon, we draw it with the provided text color.
-      if (name.includes('-symbolic')) {
+      if (iconName.includes('-symbolic')) {
         const pattern = ctx.getSource();
 
         // Draw a slight shadow below the icon.

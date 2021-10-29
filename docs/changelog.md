@@ -11,6 +11,17 @@
 
 #### New Features
 
+* New **Clipboard Menu**: This menu shows recently copied things.
+On selection, the respective item is pasted.
+The menu currently supports text, raster and vector images, and files copied from the file manager.
+However, the clipboard is a very complex thing and there are some limitations.
+When the user presses <kbd>Ctrl</kbd>+<kbd>C</kbd>, the clipboard does not magically store the data, it rather registers the data provider together with a list of data formats (mime types) in which the provider could later deliver the data directly to a receiver (e.g. when the user presses <kbd>Ctrl</kbd>+<kbd>V</kbd> somewhere else).
+To store a history of copied things, Fly-Pie has to request the data from the current provider.
+However, it cannot know beforehand, in which format any receiving application would like to have the data.
+So it just makes some assumptions and stores the data in a quite commonly used format and hopes that the receiver will understand the format.
+* Icons can now be given as [base64 encoded data URIs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs).
+This allows creating menus with completely application defined icons.
+
 #### Other Enhancements
 
 #### Bug Fixes
