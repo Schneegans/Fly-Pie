@@ -160,6 +160,8 @@ var menu = {
         child = {
           icon: 'data:image/svg+xml;base64,' +
               GLib.base64_encode(ByteArray.fromGBytes(item.data)),
+          // Translators: This is shown as item name in the clipboard menu when the user
+          // copied a vector image.
           name: _('Vector Image')
         };
       }
@@ -170,6 +172,8 @@ var menu = {
         child = {
           icon: 'data:image/png;base64,' +
               GLib.base64_encode(ByteArray.fromGBytes(item.data)),
+          // Translators: This is shown as item name in the clipboard menu when the user
+          // copied a raster image.
           name: _('Raster Image')
         };
       }
