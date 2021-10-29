@@ -18,7 +18,6 @@
 #### Bug Fixes
 
 * Fixed a bug which crashed the settings dialog when the introspection data for Clutter was not installed.
-* The "Insert Text" action now uses <kbd>Paste</kbd> instead of <kbd>Ctrl</kbd>+<kbd>V</kbd> to paste the text.
 
 ## [Fly-Pie 8](https://github.com/schneegans/fly-pie/releases/tag/v8)
 
