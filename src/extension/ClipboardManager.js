@@ -195,7 +195,15 @@ var ClipboardManager = class ClipboardManager {
         Meta.SelectionType.SELECTION_CLIPBOARD,
         Meta.SelectionSourceMemory.new(item.type, item.data));
 
-    // Simulate Ctrl+V.
-    this._input.activateAccelerator('<Primary>v');
+    // Simulate Ctrl+V. On Wayland, we can do this directly, on X11 a short timeout seems
+    // to be required.
+    if (utils.getSessionType() == 'wayland') {
+      this._input.activateAccelerator('<Primary>v');
+    } else {
+      GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
+        this._input.activateAccelerator('<Primary>v');
+        return false;
+      });
+    }
   }
 }
