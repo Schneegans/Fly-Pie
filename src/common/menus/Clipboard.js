@@ -18,11 +18,11 @@ const utils               = Me.imports.src.common.utils;
 const ItemRegistry        = Me.imports.src.common.ItemRegistry;
 const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
-// We have to import the ClipboardManager, InputManipulator, and Meta modules optionally.
-// This is because this file is included from both sides: From prefs.js and from
-// extension.js. When included from prefs.js, these are not available. This is not a
-// problem, as the preferences will not call the createItem() methods below; they are
-// merely interested in the menu's name, icon and description.
+// We have to import the ClipboardManager module optionally. This is because this file is
+// included from both sides: From prefs.js and from extension.js. When included from
+// prefs.js, the module not available. This is not a problem, as the preferences will not
+// call the createItem() methods below; they are merely interested in the menu's name,
+// icon and description.
 let ClipboardManager = undefined;
 
 try {
@@ -61,7 +61,7 @@ var menu = {
   subtitle: _('Shows recently copied things.'),
 
   // This is the (long) description shown when an item of this type is selected.
-  description: _('The <b>Clipboard</b> menu shows a list of copied items.'),
+  description: _('The <b>Clipboard</b> menu shows a list of recently copied things.'),
 
   // Items of this type have an additional count configuration parameter which is the
   // maximum number of items to display.
@@ -72,14 +72,15 @@ var menu = {
     // This is called whenever an item of this type is selected in the menu editor. It
     // returns a Gtk.Widget which will be shown in the sidebar of the menu editor. The
     // currently configured data object will be passed as first parameter and *should* be
-    // an object like the "defaultData" above. The second parameter is a callback which is
-    // fired whenever the user changes something in the widgets.
+    // an object like the "defaultData" above. The second parameter is a callback which
+    // has to be fired whenever the user changes something in the widgets.
     getWidget(data, updateCallback) {
       // Use default data for undefined properties.
       data = {...this.defaultData, ...data};
 
       const box = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
 
+      // Add a spin button for configuring the number of displayed items.
       const countBox = ConfigWidgetFactory.createConfigWidgetCaption(
           _('Max Item Count'), _('Limits the number of children.'));
       const countSpinButton = Gtk.SpinButton.new_with_range(1, 20, 1);
@@ -87,6 +88,8 @@ var menu = {
       utils.boxAppend(countBox, countSpinButton);
       utils.boxAppend(box, countBox);
 
+      // Add a spin button for configuring the fixed angle of the most recently copied
+      // item.
       const angleBox = ConfigWidgetFactory.createConfigWidgetCaption(
           _('First Child Angle'), _('Direction of the most recent item.'));
       const angleSpinButton = Gtk.SpinButton.new_with_range(-1, 359, 1);
@@ -109,58 +112,82 @@ var menu = {
     }
   },
 
-  // This will be called whenever a menu is opened containing an item of this kind.
-  // The data parameter *should* be an object containing a single "maxNum" property. To
-  // stay backwards compatible with Fly-Pie 4, we have to also handle the case where
-  // the maxNum is given as a simple string value.
+  // This will be called whenever a menu is opened containing an item of this kind. We
+  // have to create a list of items, one for each recently copied item.
   createItem: (data) => {
-    let maxNum = 7;
-    if (typeof data === 'string') {
-      maxNum = parseInt(data);
-    } else if (data.maxNum != undefined) {
-      maxNum = data.maxNum;
-    }
+    // Use default data for undefined properties.
+    data = {...menu.config.defaultData, ...data};
 
+    // This menu configuration will be filled with children and returned at the end.
     const result = {children: []};
 
+    // Get a list of recently copied things from the ClipboardManager.
     const items = ClipboardManager.getInstance().getItems();
 
-    for (let i = 0; i < items.length && i < maxNum; i++) {
+    // The ClipboardManager stores the copied things in several hard-coded mime type
+    // formats (see the documentation of that class for more details). Based on the mime
+    // type, we create different child items.
+    for (let i = 0; i < items.length && i < data.maxNum; i++) {
       const item = items[i];
       let child  = null;
 
+      // If the copied data was text, we create an item which shows a small portion of the
+      // text as icon and a longer portion as name.
       if (item.type === 'text/plain' || item.type == 'text/plain;charset=utf-8') {
 
-        const data = ByteArray.toString(ByteArray.fromGBytes(item.data));
-        let icon   = data.substring(0, 8) + (data.length > 8 ? '…' : '');
-        const name = data.substring(0, 30) + (data.length > 30 ? '…' : '');
+        const text = ByteArray.toString(ByteArray.fromGBytes(item.data));
 
-        child = {icon: icon, name: name};
-
-      } else if (item.type === 'text/uri-list') {
+        child = {
+          icon: text.substring(0, 8) + (text.length > 8 ? '…' : ''),
+          name: text.substring(0, 30) + (text.length > 30 ? '…' : '')
+        };
+      }
+      // If the copied item contains a list of URIs, we display an appropriate icon and
+      // name for the first URI.
+      else if (item.type === 'text/uri-list') {
 
         const data   = ByteArray.toString(ByteArray.fromGBytes(item.data));
         const uris   = data.split(/\r?\n/);
         const config = ItemRegistry.ItemRegistry.createActionConfig(uris[0]);
 
         child = {icon: config.icon, name: config.name};
+      }
+      // If the copied item contains a vector image, we encode the data as base64 image so
+      // that we can actually preview it as icon.
+      else if (item.type === 'image/svg+xml') {
 
-      } else if (item.type === 'image/svg+xml') {
+        child = {
+          icon: 'data:image/svg+xml;base64,' +
+              GLib.base64_encode(ByteArray.fromGBytes(item.data)),
+          name: _('Vector Image')
+        };
+      }
+      // If the copied item contains a raster image, we encode the data as base64 image so
+      // that we can actually preview it as icon.
+      else if (item.type === 'image/png') {
 
-        const icon = 'data:image/svg+xml;base64,' +
-            GLib.base64_encode(ByteArray.fromGBytes(item.data));
-        child = {icon: icon, name: _('Vector Image')};
-
-      } else if (item.type === 'image/png') {
-
-        const icon = 'data:image/png;base64,' +
-            GLib.base64_encode(ByteArray.fromGBytes(item.data));
-        child = {icon: icon, name: _('Raster Image')};
+        child = {
+          icon: 'data:image/png;base64,' +
+              GLib.base64_encode(ByteArray.fromGBytes(item.data)),
+          name: _('Raster Image')
+        };
+      }
+      // In all other cases we log an error.
+      else {
+        utils.debug(
+            `Failed to add clipboard item: Unsupported mime type "${item.type}" given!`);
       }
 
+      // If we successfully created an item, we add it to the result children list and
+      // assign an "onSelect" callback which will paster the contained data.
       if (child) {
         child.onSelect = () => ClipboardManager.getInstance().pasteItem(item);
         result.children.push(child);
+
+        // Assign the configured fixed angle for the first child.
+        if (result.children.length == 1) {
+          result.children[0].angle = data.firstAngle;
+        }
       }
     }
 
