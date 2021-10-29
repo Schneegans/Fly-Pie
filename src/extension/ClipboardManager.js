@@ -131,8 +131,15 @@ var ClipboardManager = class ClipboardManager {
 
           // Attempt to transfer the data in the selected format.
           global.display.get_selection().transfer_async(
-              type, mimeType, MAX_DATA_SIZE_MB * 1024 * 1024, output, null, () => {
+              type, mimeType, MAX_DATA_SIZE_MB * 1024 * 1024, output, null,
+              (o, result) => {
                 // Finish the transfer.
+                if (!global.display.get_selection().transfer_finish(result)) {
+                  utils.debug('Failed to create clipboard item: Data transfer failed!');
+                  return;
+                }
+
+                // Close the stream.
                 output.close(null);
 
                 // Log an error if the data was apparently larger than we expected.
