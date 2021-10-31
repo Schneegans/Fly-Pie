@@ -8,9 +8,16 @@ LOCALES_PO = $(wildcard po/*.po)
 LOCALES_MO = $(patsubst po/%.po,locale/%/LC_MESSAGES/flypie.mo,$(LOCALES_PO))
 
 
-.PHONY: build test release install uninstall all-po pot clean
+.PHONY: zip install uninstall test all-po pot clean
 
-build: flypie@schneegans.github.com.zip
+zip: flypie@schneegans.github.com.zip
+
+install: flypie@schneegans.github.com.zip
+	gnome-extensions install "flypie@schneegans.github.com.zip" --force
+	@echo "Extension installed successfully! Now restart the Shell ('Alt'+'F2', then 'r')."
+
+uninstall:
+	gnome-extensions uninstall "flypie@schneegans.github.com"
 
 test:
 	@ for version in 32 33 34 35 ; do \
@@ -21,19 +28,6 @@ test:
 	    ./tests/run-test.sh -s $$session -v $$version ; \
 	  done \
 	done
-
-release: flypie@schneegans.github.com.zip
-	@#Check if the zip size is too big to be uploaded
-	@if [[ "$$(stat -c %s flypie@schneegans.github.com.zip)" -gt 4096000 ]]; then \
-	  echo "ERROR! The extension is too big to be uploaded to the extensions website, keep it smaller than 4096 KB!"; exit 1; \
-	fi
-
-install: flypie@schneegans.github.com.zip
-	gnome-extensions install "flypie@schneegans.github.com.zip" --force
-	@echo "Extension installed successfully! Now restart the Shell ('Alt'+'F2', then 'r')."
-
-uninstall:
-	gnome-extensions uninstall "flypie@schneegans.github.com"
 
 all-po: $(LOCALES_PO)
 
@@ -71,6 +65,11 @@ flypie@schneegans.github.com.zip: schemas/gschemas.compiled resources/flypie.gre
 	@echo "Packing zip file..."
 	@rm --force flypie@schneegans.github.com.zip
 	@zip -r flypie@schneegans.github.com.zip -- src presets resources/flypie.gresource schemas/gschemas.compiled $(LOCALES_MO) *.js metadata.json LICENSE
+	
+	@#Check if the zip size is too big to be uploaded
+	@if [[ "$$(stat -c %s flypie@schneegans.github.com.zip)" -gt 4096000 ]]; then \
+	  echo "ERROR! The extension is too big to be uploaded to the extensions website, keep it smaller than 4096 KB!"; exit 1; \
+	fi
 
 resources/flypie.gresource: resources/flypie.gresource.xml
 	@echo "Compiling resources..."
