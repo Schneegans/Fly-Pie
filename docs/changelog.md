@@ -5,7 +5,7 @@
 # Changelog of Fly-Pie
 
 
-## [Fly-Pie 9](https://github.com/schneegans/fly-pie/releases/tag/v9)
+## [Fly-Pie 10](https://github.com/schneegans/fly-pie/releases/tag/v10)
 
 **Release Date:** TBD
 
@@ -23,6 +23,12 @@ So it just makes some assumptions and stores the data in a quite commonly used f
 This allows creating menus with completely application defined icons.
 
 #### Other Enhancements
+
+#### Bug Fixes
+
+## [Fly-Pie 9](https://github.com/schneegans/fly-pie/releases/tag/v9)
+
+**Release Date:** 2021-11-05
 
 #### Bug Fixes
 
