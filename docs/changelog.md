@@ -24,7 +24,11 @@ This allows creating menus with completely application defined icons.
 
 #### Other Enhancements
 
+* It is now possible to copy items in the menu editor under GTK3 by holding the <kbd>Ctrl</kbd> key while dragging.
+
 #### Bug Fixes
+
+* Fixed a bug which caused random menus get deleted while dragging something to the stash area under GTK3.
 
 ## [Fly-Pie 9](https://github.com/schneegans/fly-pie/releases/tag/v9)
 
