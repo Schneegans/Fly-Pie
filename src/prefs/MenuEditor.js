@@ -866,7 +866,8 @@ function registerWidgets() {
             this.add_controller(this._dropTarget);
           } else {
 
-            this.drag_dest_set(0, this._dndTargets, Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
+            this.drag_dest_set(
+                0, this._dndTargets, Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
             this.drag_dest_set_track_motion(true);
             this.connect('drag-leave', () => {
               dragLeave();
@@ -908,7 +909,7 @@ function registerWidgets() {
 
               // Make sure to choose the copy action if Ctrl is held down.
               const pointer = Gdk.Display.get_default().get_default_seat().get_pointer();
-              const mods = w.get_window().get_device_position(pointer)[3];
+              const mods    = w.get_window().get_device_position(pointer)[3];
 
               if (mods & Gdk.ModifierType.CONTROL_MASK) {
                 Gdk.drag_status(context, Gdk.DragAction.COPY, time);
@@ -1551,7 +1552,8 @@ function registerWidgets() {
           } else {
 
             item.button.drag_dest_set(
-                Gtk.DestDefaults.DROP, this._dndTargets, Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
+                Gtk.DestDefaults.DROP, this._dndTargets,
+                Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
             item.button.drag_dest_set_track_motion(true);
 
             item.button.connect(
@@ -1574,7 +1576,7 @@ function registerWidgets() {
 
               // Make sure to choose the copy action if Ctrl is held down.
               const pointer = Gdk.Display.get_default().get_default_seat().get_pointer();
-              const mods = w.get_window().get_device_position(pointer)[3];
+              const mods    = w.get_window().get_device_position(pointer)[3];
 
               if (mods & Gdk.ModifierType.CONTROL_MASK) {
                 Gdk.drag_status(context, Gdk.DragAction.COPY, time);

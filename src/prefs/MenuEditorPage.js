@@ -682,8 +682,7 @@ var MenuEditorPage = class MenuEditorPage {
       const trash = this._builder.get_object('menu-editor-trash');
 
       if (utils.gtk4()) {
-        const dropTarget =
-            new Gtk.DropTarget({actions: Gdk.DragAction.MOVE});
+        const dropTarget = new Gtk.DropTarget({actions: Gdk.DragAction.MOVE});
         dropTarget.set_gtypes([GObject.TYPE_STRING]);
         dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
         dropTarget.connect('drop', () => true);
@@ -727,10 +726,9 @@ var MenuEditorPage = class MenuEditorPage {
           handler(ByteArray.toString(data.get_data()));
         });
         stash.connect('drag-motion', (w, context, x, y, time) => {
-            
           // Make sure to choose the copy action if Ctrl is held down.
           const pointer = Gdk.Display.get_default().get_default_seat().get_pointer();
-          const mods = w.get_window().get_device_position(pointer)[3];
+          const mods    = w.get_window().get_device_position(pointer)[3];
 
           if (mods & Gdk.ModifierType.CONTROL_MASK) {
             Gdk.drag_status(context, Gdk.DragAction.COPY, time);
@@ -931,10 +929,9 @@ var MenuEditorPage = class MenuEditorPage {
           });
 
           button.connect('drag-motion', (w, context, x, y, time) => {
-            
             // Make sure to choose the copy action if Ctrl is held down.
             const pointer = Gdk.Display.get_default().get_default_seat().get_pointer();
-            const mods = w.get_window().get_device_position(pointer)[3];
+            const mods    = w.get_window().get_device_position(pointer)[3];
 
             if (mods & Gdk.ModifierType.CONTROL_MASK) {
               Gdk.drag_status(context, Gdk.DragAction.COPY, time);
@@ -1001,17 +998,16 @@ var MenuEditorPage = class MenuEditorPage {
             dragDrop(ByteArray.toString(data.get_data()));
           });
           button.connect('drag-motion', (w, context, x, y, time) => {
-            
             // Make sure to choose the copy action if Ctrl is held down.
             const pointer = Gdk.Display.get_default().get_default_seat().get_pointer();
-            const mods = w.get_window().get_device_position(pointer)[3];
-  
+            const mods    = w.get_window().get_device_position(pointer)[3];
+
             if (mods & Gdk.ModifierType.CONTROL_MASK) {
               Gdk.drag_status(context, Gdk.DragAction.COPY, time);
             } else {
               Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
             }
-  
+
             return true;
           });
         }
