@@ -683,7 +683,7 @@ var MenuEditorPage = class MenuEditorPage {
 
       if (utils.gtk4()) {
         const dropTarget =
-            new Gtk.DropTarget({actions: Gdk.DragAction.MOVE | Gdk.DragAction.COPY});
+            new Gtk.DropTarget({actions: Gdk.DragAction.MOVE});
         dropTarget.set_gtypes([GObject.TYPE_STRING]);
         dropTarget.connect('accept', (d, drop) => drop.get_drag() != null);
         dropTarget.connect('drop', () => true);
@@ -722,11 +722,23 @@ var MenuEditorPage = class MenuEditorPage {
         stash.drag_dest_set(
             Gtk.DestDefaults.ALL,
             [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
-            Gdk.DragAction.MOVE);
+            Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
         stash.connect('drag-data-received', (w, context, x, y, data, i, time) => {
           handler(ByteArray.toString(data.get_data()));
-          Gtk.drag_finish(
-              context, true, context.get_selected_action() == Gdk.DragAction.MOVE, time);
+        });
+        stash.connect('drag-motion', (w, context, x, y, time) => {
+            
+          // Make sure to choose the copy action if Ctrl is held down.
+          const pointer = Gdk.Display.get_default().get_default_seat().get_pointer();
+          const mods = w.get_window().get_device_position(pointer)[3];
+
+          if (mods & Gdk.ModifierType.CONTROL_MASK) {
+            Gdk.drag_status(context, Gdk.DragAction.COPY, time);
+          } else {
+            Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
+          }
+
+          return true;
         });
       }
     }
@@ -904,7 +916,7 @@ var MenuEditorPage = class MenuEditorPage {
           button.drag_dest_set(
               Gtk.DestDefaults.HIGHLIGHT,
               [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
-              Gdk.DragAction.MOVE);
+              Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
           button.drag_dest_set_track_motion(true);
 
           button.connect('drag-data-received', (w, context, x, y, data, i, time) => {
@@ -919,7 +931,17 @@ var MenuEditorPage = class MenuEditorPage {
           });
 
           button.connect('drag-motion', (w, context, x, y, time) => {
-            Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
+            
+            // Make sure to choose the copy action if Ctrl is held down.
+            const pointer = Gdk.Display.get_default().get_default_seat().get_pointer();
+            const mods = w.get_window().get_device_position(pointer)[3];
+
+            if (mods & Gdk.ModifierType.CONTROL_MASK) {
+              Gdk.drag_status(context, Gdk.DragAction.COPY, time);
+            } else {
+              Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
+            }
+
             return true;
           });
         }
@@ -973,10 +995,24 @@ var MenuEditorPage = class MenuEditorPage {
           button.drag_dest_set(
               Gtk.DestDefaults.ALL,
               [Gtk.TargetEntry.new('FLY-PIE-ITEM', Gtk.TargetFlags.SAME_APP, 0)],
-              Gdk.DragAction.MOVE);
+              Gdk.DragAction.MOVE | Gdk.DragAction.COPY);
 
           button.connect('drag-data-received', (w, context, x, y, data, i, time) => {
             dragDrop(ByteArray.toString(data.get_data()));
+          });
+          button.connect('drag-motion', (w, context, x, y, time) => {
+            
+            // Make sure to choose the copy action if Ctrl is held down.
+            const pointer = Gdk.Display.get_default().get_default_seat().get_pointer();
+            const mods = w.get_window().get_device_position(pointer)[3];
+  
+            if (mods & Gdk.ModifierType.CONTROL_MASK) {
+              Gdk.drag_status(context, Gdk.DragAction.COPY, time);
+            } else {
+              Gdk.drag_status(context, Gdk.DragAction.MOVE, time);
+            }
+  
+            return true;
           });
         }
       }
