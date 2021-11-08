@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-29 16:41+0200\n"
-"PO-Revision-Date: 2021-09-28 18:06+0000\n"
+"PO-Revision-Date: 2021-11-09 14:53+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/fly-pie/core/fi/"
-">\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/fly-pie/core/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -453,17 +453,18 @@ msgstr ""
 
 #: src/common/menus/Clipboard.js:54
 msgid "Clipboard"
-msgstr ""
+msgstr "Leikepöytä"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Clipboard.js:61
 msgid "Shows recently copied things."
-msgstr ""
+msgstr "Näyttää viimeksi kopioidut asiat."
 
 #: src/common/menus/Clipboard.js:64
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
 msgstr ""
+"<b>Leikepöytä</b>-valikko näyttää luettelon viimeksi kopioiduista asioista."
 
 #: src/common/menus/Clipboard.js:94
 msgid "First Child Angle"
@@ -477,13 +478,13 @@ msgstr ""
 #. copied a vector image.
 #: src/common/menus/Clipboard.js:165
 msgid "Vector Image"
-msgstr ""
+msgstr "Vektorikuva"
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a raster image.
 #: src/common/menus/Clipboard.js:177
 msgid "Raster Image"
-msgstr ""
+msgstr "Rasterikuva"
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
@@ -1172,32 +1173,32 @@ msgstr "Edellinen työtila"
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:155
 msgid "Switch Workspace"
-msgstr ""
+msgstr "Vaihda työtilaa"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:160
 msgid "Go Up"
-msgstr ""
+msgstr "Siirry ylös"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:168
 msgid "Go Down"
-msgstr ""
+msgstr "Siirry alas"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:181
 msgid "Move Window"
-msgstr ""
+msgstr "Siirrä ikkuna"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:186
 msgid "Move Window Up"
-msgstr ""
+msgstr "Siirrä ikkuna ylös"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:194
 msgid "Move Window Down"
-msgstr ""
+msgstr "Siirrä ikkuna alas"
 
 #: src/extension/Background.js:101
 msgid "Close"
@@ -1376,7 +1377,7 @@ msgstr "🥉️ Pronssisponsorit"
 
 #: resources/ui/gtk4/settings.ui:579 resources/ui/gtk3/settings.ui:572
 msgid "🏅️ Past Sponsors"
-msgstr ""
+msgstr "🏅️ Aiemmat sponsorit"
 
 #. Shown in the about-popover if there is no sponsor for a given tier
 #: resources/ui/gtk4/settings.ui:591 resources/ui/gtk4/settings.ui:604
