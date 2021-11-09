@@ -36,10 +36,11 @@ var Menu = class Menu {
   // The Menu is only instantiated once by the Daemon. It is re-used for each new incoming
   // ShowMenu request. The four parameters are callbacks which are fired when the
   // corresponding event occurs.
-  constructor(emitHoverSignal, emitUnhoverSignal, emitSelectSignal, emitCancelSignal) {
+  constructor(
+      settings, emitHoverSignal, emitUnhoverSignal, emitSelectSignal, emitCancelSignal) {
 
     // Create Gio.Settings object for org.gnome.shell.extensions.flypie.
-    this._settings = utils.createSettings();
+    this._settings = settings;
 
     // This is primarily for the statistics.
     this._timer = new Timer();
@@ -389,25 +390,13 @@ var Menu = class Menu {
       this.hide();
     });
 
-    // Whenever settings are changed, we adapt the currently shown menu accordingly.
-    this._settingsConnection = this._settings.connect('change-event', (o, keys) => {
-      // For historical reasons, all settings of Fly-Pie are included in one schema. This
-      // is a bit unfortunate, as we cannot easily listen only for appearance changes, as
-      // all statistics are included in the schema as well. To avoid reconfiguration of
-      // the menu if a statistics key changes, we have to manual filter here.
-      if (Statistics.getInstance().containsAnyNonStatsKey(keys)) {
-        this._onSettingsChange();
-      }
-    });
-
-    this._onSettingsChange();
+    this.onSettingsChange();
   }
 
   // This removes our root actor from GNOME Shell.
   destroy() {
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();
-    this._settings.disconnect(this._settingsConnection);
   }
 
   // -------------------------------------------------------------------- public interface
@@ -778,6 +767,22 @@ var Menu = class Menu {
     return 0;
   }
 
+
+  // This is called every time a settings key changes. This is simply forwarded to all
+  // items which need redrawing. This could definitely be optimized.
+  onSettingsChange() {
+
+    // Notify the selection wedges on the change.
+    this._selectionWedges.onSettingsChange(this._settings);
+
+    // Then call onSettingsChange() for each item of our menu. This ensures that the menu
+    // is instantly updated in preview mode.
+    if (this._root != undefined) {
+      this._root.onSettingsChange(this._settings);
+      this._root.redraw();
+    }
+  }
+
   // ----------------------------------------------------------------------- private stuff
 
   // This assigns IDs and angles to each and every item. It also ensures that the root
@@ -898,21 +903,6 @@ var Menu = class Menu {
 
     this._selectionWedges.set_translation(
         tipX - this._background.x, tipY - this._background.y, 0);
-  }
-
-  // This is called every time a settings key changes. This is simply forwarded to all
-  // items which need redrawing. This could definitely be optimized.
-  _onSettingsChange() {
-
-    // Notify the selection wedges on the change.
-    this._selectionWedges.onSettingsChange(this._settings);
-
-    // Then call onSettingsChange() for each item of our menu. This ensures that the menu
-    // is instantly updated in preview mode.
-    if (this._root != undefined) {
-      this._root.onSettingsChange(this._settings);
-      this._root.redraw();
-    }
   }
 
   // x and y are the center coordinates of a MenuItem. This method returns a new position
