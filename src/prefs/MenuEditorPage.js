@@ -571,6 +571,14 @@ var MenuEditorPage = class MenuEditorPage {
       }
     });
 
+    // For top-level menus, store the touch-button mode.
+    this._builder.get_object('touch-button').connect('notify::active', (widget) => {
+      if (!this._updatingSidebar) {
+        this._selectedItem.touchButton = widget.active;
+        this._saveMenuConfiguration();
+      }
+    });
+
     // For top-level menus, store whether they should be opened in the center of the
     // screen.
     this._builder.get_object('menu-centered').connect('notify::active', (widget) => {
@@ -809,6 +817,7 @@ var MenuEditorPage = class MenuEditorPage {
       if (toplevelSelected) {
         this._menuShortcutLabel.set_accelerator(this._selectedItem.shortcut || '');
         this._builder.get_object('menu-centered').active = this._selectedItem.centered;
+        this._builder.get_object('touch-button').active  = this._selectedItem.touchButton;
       } else {
         this._builder.get_object('item-angle').value = this._selectedItem.angle;
       }
