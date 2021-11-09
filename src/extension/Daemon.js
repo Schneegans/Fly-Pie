@@ -20,6 +20,7 @@ const Achievements     = Me.imports.src.common.Achievements.Achievements;
 const ItemRegistry     = Me.imports.src.common.ItemRegistry.ItemRegistry;
 const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
 const Shortcuts        = Me.imports.src.extension.Shortcuts.Shortcuts;
+const TouchButtons     = Me.imports.src.extension.TouchButtons.TouchButtons;
 const MouseHighlight   = Me.imports.src.extension.MouseHighlight.MouseHighlight;
 const Menu             = Me.imports.src.extension.Menu.Menu;
 const DefaultMenu      = Me.imports.src.extension.DefaultMenu.DefaultMenu;
@@ -55,9 +56,18 @@ var Daemon = class Daemon {
     // Create the clipboard manager singleton. This is used by the clipboard menu.
     ClipboardManager.getInstance();
 
+    // Create a settings object and listen for menu configuration changes. Once the
+    // configuration changes, we bind all the configured shortcuts.
+    this._settings = utils.createSettings();
+
+    // We keep several connections to the Gio.Settings object. Once the extension is
+    // unloaded, we use this array to disconnect all of them.
+    this._settingsConnections = [];
+
     // Initialize the menu. For performance reasons the same menu is used again and again.
     // It is just reconfigured according to incoming requests.
     this._menu = new Menu(
+        this._settings,
         // This gets called whenever the user starts hovering an action in point-and-click
         // mode or starts dragging an action in marking mode. It emits the OnHover signal
         // of our D-Bus interface.
@@ -95,13 +105,8 @@ var Daemon = class Daemon {
       }
     });
 
-    // Create a settings object and listen for menu configuration changes. Once the
-    // configuration changes, we bind all the configured shortcuts.
-    this._settings = utils.createSettings();
-
-    // We keep several connections to the Gio.Settings object. Once the extension is
-    // unloaded, we use this array to disconnect all of them.
-    this._settingsConnections = [];
+    // Create the touch buttons.
+    this._touchButtons = new TouchButtons(this._settings);
 
     // Here we test whether any menus are configured. If the key is completely empty, this
     // is considered to be the same as "[]". If no menus are configured, the default
@@ -126,6 +131,20 @@ var Daemon = class Daemon {
       // If parsing fails, we do nothing here - an error will be shown by the next call to
       // _onMenuConfigsChanged().
     }
+
+    // Whenever settings are changed, we adapt the currently shown menu accordingly.
+    this._settingsConnections.push(this._settings.connect('change-event', (o, keys) => {
+      // For historical reasons, all settings of Fly-Pie are included in one schema. This
+      // is a bit unfortunate, as we cannot easily listen only for appearance changes, as
+      // all statistics are included in the schema as well. To avoid reconfiguration of
+      // the menu if a statistics key changes, we have to manual filter here.
+      if (Statistics.getInstance().containsAnyNonStatsKey(keys)) {
+        this._menu.onSettingsChange();
+        this._touchButtons.onSettingsChange();
+      }
+
+      return false;
+    }));
 
     // Reload the menu configuration when the settings key changes.
     this._settingsConnections.push(this._settings.connect(
@@ -187,6 +206,9 @@ var Daemon = class Daemon {
 
     // Delete the clipboard manager singleton. This is used by the clipboard menu.
     ClipboardManager.destroyInstance();
+
+    // Delete the touch buttons.
+    this._touchButtons.destroy();
 
     this._menu.destroy();
 
@@ -368,6 +390,12 @@ var Daemon = class Daemon {
       this._menuConfigs = [];
     }
 
+    // Update touch buttons --------------------------------------------------------------
+
+    this._touchButtons.setMenuConfigs(this._menuConfigs);
+
+    // Update currently bound global shortcuts -------------------------------------------
+
     // First we create a set of all required shortcuts.
     const newShortcuts = new Set();
     for (let i = 0; i < this._menuConfigs.length; i++) {
@@ -391,6 +419,8 @@ var Daemon = class Daemon {
     for (let requiredShortcut of newShortcuts) {
       this._shortcuts.bind(requiredShortcut);
     }
+
+    // Update currently shown menu (if any) ----------------------------------------------
 
     // There is currently a menu open, so we potentially have to update the displayed
     // menu.
