@@ -407,9 +407,10 @@ var Menu = class Menu {
     return this._menuID;
   }
 
-  // This shows the menu, or updates the menu if it is already visible. Returns an error
-  // code if something went wrong. See DBusInerface.js for all possible error codes.
-  show(menuID, structure, previewMode) {
+  // This shows the menu, or updates the menu if it is already visible. If the pixel
+  // positions x and y are given, the menu will be shown at this position. Returns an
+  // error code if something went wrong. See DBusInerface.js for all possible error codes.
+  show(menuID, structure, previewMode, x, y) {
 
     // The menu is already active. Try to update the existing menu according to the new
     // structure and if that is successful, emit an onCancel signal for the current menu.
@@ -517,13 +518,18 @@ var Menu = class Menu {
         this._input.warpPointer(posX + this._background.x, posY + this._background.y);
       }
     } else {
-      const [pointerX, pointerY] = global.get_pointer();
-      const [clampedX, clampedY] = this._clampToToMonitor(
-          pointerX - this._background.x, pointerY - this._background.y, 10);
+
+      // Use pointer location if no coordinates are given.
+      if (x == null && y == null) {
+        [x, y] = global.get_pointer();
+      }
+
+      const [clampedX, clampedY] =
+          this._clampToToMonitor(x - this._background.x, y - this._background.y, 10);
       this._root.set_translation(clampedX, clampedY, 0);
       this._selectionWedges.set_translation(clampedX, clampedY, 0);
 
-      if (pointerX != clampedX || pointerY != clampedY) {
+      if (x != clampedX || y != clampedY) {
         this._input.warpPointer(
             clampedX + this._background.x, clampedY + this._background.y);
       }

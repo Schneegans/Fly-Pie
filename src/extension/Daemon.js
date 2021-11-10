@@ -242,7 +242,13 @@ var Daemon = class Daemon {
   // over the D-Bus. See the README.md for a description of Fly-Pie's DBusInterface. If
   // there are more than one menu with the same name, the first will be opened.
   ShowMenu(name) {
-    return this._openMenu(name, false);
+    return this.ShowMenuAt(name, null, null);
+  }
+
+  // Same as above, but instead at the pointer location, the menu will be opened at the
+  // given pixel coordinates.
+  ShowMenuAt(name, x, y) {
+    return this._openMenu(name, false, x, y);
   }
 
   // This opens a menu configured with Fly-Pie's menu editor in preview mode and can be
@@ -250,15 +256,21 @@ var Daemon = class Daemon {
   // DBusInterface. If there are more than one menu with the same name, the first will be
   // opened.
   PreviewMenu(name) {
-    return this._openMenu(name, true);
+    return this._openMenu(name, true, null, null);
   }
 
   // This opens a custom menu and can be directly called over the D-Bus.
   // See the README.md for a description of Fly-Pie's DBusInterface.
   ShowCustomMenu(json) {
+    return this.ShowCustomMenuAt(json, null, null);
+  }
+
+  // Same as above, but instead at the pointer location, the menu will be opened at the
+  // given pixel coordinates.
+  ShowCustomMenuAt(json, x, y) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
     Statistics.getInstance().addCustomDBusMenu();
-    return this._openCustomMenu(json, false, this._lastMenuID);
+    return this._openCustomMenu(json, false, this._lastMenuID, x, y);
   }
 
   // This opens a custom menu in preview mode and can be directly called over the D-Bus.
@@ -266,7 +278,7 @@ var Daemon = class Daemon {
   PreviewCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
     Statistics.getInstance().addCustomDBusMenu();
-    return this._openCustomMenu(json, true, this._lastMenuID);
+    return this._openCustomMenu(json, true, this._lastMenuID, null, null);
   }
 
   // This selects an item in the currently opened menu.
@@ -280,7 +292,7 @@ var Daemon = class Daemon {
   // Opens a menu configured with Fly-Pie's menu editor, optionally in preview mode. The
   // menu's name must be given as parameter. It will return a positive number on success
   // and a negative on failure. See common/DBusInterface.js for a list of error codes.
-  _openMenu(name, previewMode) {
+  _openMenu(name, previewMode, x, y) {
 
     // Search for the meu with the given name.
     for (let i = 0; i < this._menuConfigs.length; i++) {
@@ -290,7 +302,7 @@ var Daemon = class Daemon {
         // Once we found the desired menu, we can open the menu with the custom-menu
         // method.
         return this._openCustomMenu(
-            this._menuConfigs[i], previewMode, this._menuConfigs[i].id);
+            this._menuConfigs[i], previewMode, this._menuConfigs[i].id, x, y);
       }
     }
 
@@ -302,7 +314,7 @@ var Daemon = class Daemon {
   // be a JSON string or an object containing the menu configuration. This method will
   // return the menu's ID on success or an error code on failure. See
   // common/DBusInterface.js for a list of error codes.
-  _openCustomMenu(config, previewMode, menuID) {
+  _openCustomMenu(config, previewMode, menuID, x, y) {
 
     // First try to parse the menu configuration if it's given as a json string.
     if (typeof config === 'string') {
@@ -335,7 +347,7 @@ var Daemon = class Daemon {
     // Then try to open the menu. This will return the menu's ID on success or an error
     // code on failure.
     try {
-      return this._menu.show(menuID, structure, previewMode);
+      return this._menu.show(menuID, structure, previewMode, x, y);
     } catch (error) {
       utils.debug('Failed to show menu: ' + error);
     }
