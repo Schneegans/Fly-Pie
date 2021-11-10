@@ -24,7 +24,13 @@ gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/exten
            --method org.gnome.Shell.Extensions.flypie.ShowMenu 'Main Menu'
 ```
 
-There is also a similar method called `PreviewMenu` which will open the given menu in preview mode.
+There is also a similar method called `ShowMenuAt` which will open the given menu at the specified pixel location.
+
+```bash
+gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie \
+           --method org.gnome.Shell.Extensions.flypie.ShowMenuAt 'Main Menu' 234 456
+```
+Lastly, there is a method called `PreviewMenu` which will open the given menu in preview mode.
 
 ```bash
 gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie \
@@ -33,7 +39,7 @@ gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/exten
 
 ## Opening Custom Menus via JSON
 
-You can pass a JSON menu configuration to the `ShowCustomMenu` to show a custom menu.
+You can pass a JSON menu configuration to the `ShowCustomMenu` (and `ShowCustomMenuAt`, `PreviewCustomMenu`) to show a custom menu.
 Here is an example showing a menu with two elements.
 Selecting them will change your workspace up or down (by simulating a <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Up</kbd>
 or a <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Down</kbd> respectively).

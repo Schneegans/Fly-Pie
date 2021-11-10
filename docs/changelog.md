@@ -19,8 +19,9 @@ When the user presses <kbd>Ctrl</kbd>+<kbd>C</kbd>, the clipboard does not magic
 To store a history of copied things, Fly-Pie has to request the data from the current provider.
 However, it cannot know beforehand, in which format any receiving application would like to have the data.
 So it just makes some assumptions and stores the data in a quite commonly used format and hopes that the receiver will understand the format.
-* Icons can now be given as [base64 encoded data URIs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs).
+* Icons can now be given as [**base64 encoded data URIs**](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs).
 This allows creating menus with completely application defined icons.
+* Two **new D-Bus methods** have been added (`ShowMenuAt` and `ShowCustomMenuAt`) which can be used to open a menu at specific pixel coordinates.
 
 #### Other Enhancements
 
