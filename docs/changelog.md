@@ -21,6 +21,8 @@ However, it cannot know beforehand, in which format any receiving application wo
 So it just makes some assumptions and stores the data in a quite commonly used format and hopes that the receiver will understand the format.
 * Icons can now be given as [base64 encoded data URIs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs).
 This allows creating menus with completely application defined icons.
+* **Two new D-Bus methods** have been added (`ShowMenuAt` and `ShowCustomMenuAt`) which can be used to open a menu at specific pixel coordinates.
+* Fly-Pie will now attempt to **open windows at the current pointer location** in order to reduce mouse travel. Whenever an action is executed, Fly-Pie checks whether a window is opened within the next second. If this happens, the newly opened window is moved to the pointer.
 
 #### Other Enhancements
 
@@ -44,15 +46,15 @@ This allows creating menus with completely application defined icons.
 
 #### New Features
 
-* A new default theme has been added. The dark color scheme is supposed to blend better with the default GNOME Shell theme.
-* Icons can now be decorated with a colorful background circle! Just append a `-#rgb` or `-#rrggbb` to the icon name. A circle with the given RGB color will be drawn behind the icon. This is especially useful for symbolic icons. For example, the icon `go-left-symbolic` will look much more interesting like this: `go-left-symbolic-#49c`. This works for all icon types (e.g. system icons, built-in icons, emoji or text icons).
-* The D-Bus API of Fly-Pie now includes a `SelectItem()` method which can be used to select an item of a currently opened menu programmatically. For example, this can be useful if you want to directly open a submenu. This is now also used by the live preview of the menu editor: If you click the preview button while you're inside a submenu, this submenu will be directly opened in the preview!
+* A **new default theme** has been added. The dark color scheme is supposed to blend better with the default GNOME Shell theme.
+* **Icons can now be decorated with a colorful background circle!** Just append a `-#rgb` or `-#rrggbb` to the icon name. A circle with the given RGB color will be drawn behind the icon. This is especially useful for symbolic icons. For example, the icon `go-left-symbolic` will look much more interesting like this: `go-left-symbolic-#49c`. This works for all icon types (e.g. system icons, built-in icons, emoji or text icons).
+* The D-Bus API of Fly-Pie now includes a `SelectItem()` method which can be used to **select an item of a currently opened menu programmatically**. For example, this can be useful if you want to directly open a submenu. This is now also used by the live preview of the menu editor: If you click the preview button while you're inside a submenu, this submenu will be directly opened in the preview!
 
 #### Other Enhancements
 
-* Fly-Pie now supports GNOME 3.36, 3.38, 40, and 41 from one code base.
-* Continuous integration is now used to run automated tests on the above GNOME versions on both, X11 and Wayland.
-* A set of built-in icons has been added. The default example menu now uses these icons. Therefore, it should look the same on all systems now.
+* Fly-Pie now **supports GNOME 3.36, 3.38, 40, and 41** from one code base.
+* **Continuous integration** is now used to run automated tests on the above GNOME versions on both, X11 and Wayland.
+* A set of **built-in icons** has been added. The default example menu now uses these icons. Therefore, it should look the same on all systems now.
 * The tutorial menu does not use Emojis any more because some systems have no emoji font installed per default. It now uses built-in icons as well and should be much easier to translate!
 * Fly-Pie now uses a `Makefile` for building the extension instead of a bunch of custom scripts. Thank you, [@daPhipz](https://github.com/daPhipz)!
 * Fly-Pie is now translated into the following languages (in most cases partially, feel free to [contribute](https://hosted.weblate.org/engage/fly-pie/)!):
