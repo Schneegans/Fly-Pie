@@ -170,11 +170,16 @@ var SettingsPage = class SettingsPage {
       this._copyToHover('grandchild-fixed-color');
     });
 
-
     // Trace Settings.
     this._bindColorButton('trace-color');
     this._bindSlider('trace-min-length');
     this._bindSlider('trace-thickness');
+
+    // Touch button settings.
+    this._bindSlider('touch-buttons-opacity');
+    this._bindSwitch('touch-buttons-show-in-overview-mode');
+    this._bindSwitch('touch-buttons-show-in-desktop-mode');
+    this._bindSwitch('touch-buttons-show-above-fullscreen');
 
     // Advanced Settings
     this._bindSlider('gesture-selection-timeout');

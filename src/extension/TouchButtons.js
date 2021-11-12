@@ -22,9 +22,8 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-const INACTIVE_OPACITY = 50;
-const DRAG_OPACITY     = 100;
-const DRAG_SCALE       = 0.7;
+const DRAG_OPACITY = 100;
+const DRAG_SCALE   = 0.7;
 
 var TouchButtons = class TouchButtons {
 
@@ -37,23 +36,30 @@ var TouchButtons = class TouchButtons {
     this._configs           = [];
     this._startupCompleteID = 0;
     this._inOverview        = false;
+    this._menuOpened        = false;
 
     // Connect to the server so that we can toggle the demo menu from the tutorial.
     new DBusWrapper(
         Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/flypie',
         proxy => {
           this._dbus = proxy;
-          this._dbus.connectSignal('OnSelect', () => this._toggleButtons(true));
-          this._dbus.connectSignal('OnCancel', () => this._toggleButtons(true));
+          this._dbus.connectSignal('OnSelect', () => {
+            this._menuOpened = false;
+            this._updateVisibility();
+          });
+          this._dbus.connectSignal('OnCancel', () => {
+            this._menuOpened = false;
+            this._updateVisibility();
+          });
         });
 
     this._shownOverviewID = Main.overview.connect('showing', () => {
-      this._toggleButtons(false);
       this._inOverview = true;
+      this._updateVisibility();
     });
     this._hideOverviewID  = Main.overview.connect('hiding', () => {
-      this._toggleButtons(true);
       this._inOverview = false;
+      this._updateVisibility();
     });
 
     this.onSettingsChange();
@@ -91,15 +97,19 @@ var TouchButtons = class TouchButtons {
 
     // clang-format off
     this._cachedSettings = {
-      easingDuration:  this._settings.get_double('easing-duration') * 1000,
-      textColor:       Clutter.Color.from_string(this._settings.get_string('text-color'))[1],
-      font:            this._settings.get_string('font'),
-      size:            this._settings.get_double('center-size-hover') * globalScale,
-      iconScale:       this._settings.get_double('center-icon-scale-hover'),
-      iconCrop:        this._settings.get_double('center-icon-crop-hover'),
-      iconOpacity:     this._settings.get_double('center-icon-opacity-hover'),
-      backgroundImage: MenuItem.loadBackgroundImage(this._settings.get_string('center-background-image-hover'),
-                                                    this._settings.get_double('center-size-hover') * globalScale)
+      easingDuration:      this._settings.get_double('easing-duration') * 1000,
+      textColor:           Clutter.Color.from_string(this._settings.get_string('text-color'))[1],
+      font:                this._settings.get_string('font'),
+      opacity:             this._settings.get_double('touch-buttons-opacity') * 255,
+      showInOverview:      this._settings.get_boolean('touch-buttons-show-in-overview-mode'),
+      showOnDesktop:       this._settings.get_boolean('touch-buttons-show-in-desktop-mode'),
+      showAboveFullscreen: this._settings.get_boolean('touch-buttons-show-above-fullscreen'),
+      size:                this._settings.get_double('center-size-hover') * globalScale,
+      iconScale:           this._settings.get_double('center-icon-scale-hover'),
+      iconCrop:            this._settings.get_double('center-icon-crop-hover'),
+      iconOpacity:         this._settings.get_double('center-icon-opacity-hover'),
+      backgroundImage:     MenuItem.loadBackgroundImage(this._settings.get_string('center-background-image-hover'),
+                                                        this._settings.get_double('center-size-hover') * globalScale)
     };
     // clang-format on
 
@@ -137,10 +147,22 @@ var TouchButtons = class TouchButtons {
 
   // ----------------------------------------------------------------------- private stuff
 
-  _toggleButtons(enable) {
+  _updateVisibility() {
+    const visible = !this._menuOpened &&
+        ((this._inOverview && this._cachedSettings.showInOverview) ||
+         (!this._inOverview && this._cachedSettings.showOnDesktop));
+
     this._touchButtons.forEach(button => {
-      button.reactive = enable;
-      this._ease(button, {opacity: enable ? INACTIVE_OPACITY : 0});
+      if (button.get_parent()) {
+        Main.layoutManager.removeChrome(button);
+      }
+      Main.layoutManager.addChrome(button, {
+        affectsInputRegion: visible,
+        trackFullscreen: !this._cachedSettings.showAboveFullscreen,
+      });
+
+      button.reactive = visible;
+      this._ease(button, {opacity: visible ? this._cachedSettings.opacity : 0});
     });
   }
 
@@ -155,13 +177,11 @@ var TouchButtons = class TouchButtons {
             this._cachedSettings.size, config.icon, this._cachedSettings.iconScale,
             this._cachedSettings.iconCrop, this._cachedSettings.iconOpacity,
             this._cachedSettings.textColor, this._cachedSettings.font);
-        actor.name     = `Fly-Pie TouchButton (${config.name})`;
-        actor.width    = this._cachedSettings.size;
-        actor.height   = this._cachedSettings.size;
-        actor.opacity  = this._inOverview ? 0 : INACTIVE_OPACITY;
-        actor.reactive = !this._inOverview;
+        actor.name    = `Fly-Pie TouchButton (${config.name})`;
+        actor.width   = this._cachedSettings.size;
+        actor.height  = this._cachedSettings.size;
+        actor.opacity = 0;
 
-        Main.layoutManager.addChrome(actor);
         this._touchButtons.push(actor);
 
         actor.connect('enter-event', (a) => {
@@ -172,7 +192,7 @@ var TouchButtons = class TouchButtons {
 
         actor.connect('leave-event', (a) => {
           if (!a._dragging) {
-            this._ease(actor, {opacity: INACTIVE_OPACITY});
+            this._ease(actor, {opacity: this._cachedSettings.opacity});
           }
         });
 
@@ -230,14 +250,17 @@ var TouchButtons = class TouchButtons {
 
 
           } else if (state == Clutter.LongPressState.CANCEL) {
-            this._toggleButtons(false);
             this._dbus.ShowMenuAtRemote(
                 config.name, actor.x + actor.width / 2, actor.y + actor.height / 2);
+            this._menuOpened = true;
+            this._updateVisibility();
           }
         });
         actor.add_action(action);
       }
     });
+
+    this._updateVisibility();
   }
 
   _ease(actor, params) {

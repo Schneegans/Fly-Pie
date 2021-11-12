@@ -477,6 +477,32 @@
       <description>The color of the menu's trace.</description>
     </key>
 
+    <!-- Touch Button Settings -->
+
+    <key name="touch-buttons-opacity" type="d">
+      <default>0.3</default>
+      <summary>Touch button opacity</summary>
+      <description>Opacity on inactive touch buttons.</description>
+    </key>
+
+    <key name="touch-buttons-show-in-overview-mode" type="b">
+      <default>false</default>
+      <summary>Show touch buttons in overview mode</summary>
+      <description>If set to true, touch buttons are shown in overview mode.</description>
+    </key>
+
+    <key name="touch-buttons-show-in-desktop-mode" type="b">
+      <default>true</default>
+      <summary>Show touch buttons in desktop mode</summary>
+      <description>If set to true, touch buttons are shown in desktop mode.</description>
+    </key>
+
+    <key name="touch-buttons-show-above-fullscreen" type="b">
+      <default>false</default>
+      <summary>Show touch buttons above fullscreen</summary>
+      <description>If set to true, touch buttons will be shown above fullscreen windows.</description>
+    </key>
+
     <!-- Behavior Settings -->
 
     <key name="gesture-selection-timeout" type="d">

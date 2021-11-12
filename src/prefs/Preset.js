@@ -92,6 +92,10 @@ let presetKeys = [
   'trace-min-length',
   'trace-thickness',
   'trace-color',
+  'touch-buttons-opacity',
+  'touch-buttons-show-in-overview-mode',
+  'touch-buttons-show-in-desktop-mode',
+  'touch-buttons-show-above-fullscreen',
 ];
 
 var Preset = class Preset {
