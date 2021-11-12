@@ -1074,7 +1074,9 @@ var Menu = class Menu {
       // Then emit the D-Bus unhover signal!
       this._emitUnhoverSignal(this._menuID, child.id);
 
-      // Then call the activation callback!
+      // Then call the activation callback! Oftentimes, this will open a new window. We
+      // make sure that this window is opened at the current pointer location!
+      utils.openNextWindowAtPointer();
       child.getSelectionCallback()();
 
       // Report the selection over the D-Bus.

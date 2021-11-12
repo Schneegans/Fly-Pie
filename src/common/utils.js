@@ -671,3 +671,49 @@ function computeItemAngles(items, parentAngle) {
 
   return itemAngles;
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// When executed, this function will move the first window created within the next one  //
+// second to the current location of the mouse pointer. This method can only be called  //
+// within the GNOME Shell process.                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+function openNextWindowAtPointer() {
+  let createdID = null;
+  let focusedID = null;
+
+  // Wait until the next window is created.
+  createdID = global.display.connect('window-created', () => {
+    focusedID = global.display.connect('notify::focus-window', () => {
+      const frame = global.display.focus_window.get_frame_rect();
+      const area  = global.display.focus_window.get_work_area_current_monitor();
+      const [pointerX, pointerY] = global.get_pointer();
+
+      // Center on the pointer.
+      frame.x = pointerX - frame.width / 2;
+      frame.y = pointerY - frame.height / 2;
+
+      // Clamp to the work area.
+      frame.x = Math.min(Math.max(frame.x, area.x), area.x + area.width - frame.width);
+      frame.y = Math.min(Math.max(frame.y, area.y), area.y + area.height - frame.height);
+
+      // Move the window!
+      global.display.focus_window.move_frame(true, frame.x, frame.y);
+
+      // Disconnect, we will only move the window once.
+      global.display.disconnect(focusedID);
+      focusedID = null;
+    });
+
+    // Disconnect, we will only move the first window created within the timeout period.
+    global.display.disconnect(createdID);
+    createdID = null;
+  });
+
+  // Disconnect the handlers above latest after one second.
+  GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+    if (createdID) global.display.disconnect(createdID);
+    if (focusedID) global.display.disconnect(focusedID);
+    return false;
+  });
+}
