@@ -140,7 +140,7 @@ var Daemon = class Daemon {
       // the menu if a statistics key changes, we have to manual filter here.
       if (Statistics.getInstance().containsAnyNonStatsKey(keys)) {
         this._menu.onSettingsChange();
-        this._touchButtons.onSettingsChange();
+        this._touchButtons.onSettingsChange(keys);
       }
 
       return false;

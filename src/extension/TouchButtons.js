@@ -45,21 +45,22 @@ var TouchButtons = class TouchButtons {
           this._dbus = proxy;
           this._dbus.connectSignal('OnSelect', () => {
             this._menuOpened = false;
-            this._updateVisibility();
+            this._updateVisibility(true);
           });
           this._dbus.connectSignal('OnCancel', () => {
             this._menuOpened = false;
-            this._updateVisibility();
+            this._updateVisibility(true);
           });
         });
 
     this._shownOverviewID = Main.overview.connect('showing', () => {
       this._inOverview = true;
-      this._updateVisibility();
+      this._updateVisibility(true);
     });
-    this._hideOverviewID  = Main.overview.connect('hiding', () => {
+
+    this._hideOverviewID = Main.overview.connect('hiding', () => {
       this._inOverview = false;
-      this._updateVisibility();
+      this._updateVisibility(true);
     });
 
     this.onSettingsChange();
@@ -91,7 +92,39 @@ var TouchButtons = class TouchButtons {
     }
   }
 
-  onSettingsChange() {
+  onSettingsChange(keys) {
+
+    if (keys) {
+      const relevantKeys = [
+        'global-scale',
+        'center-auto-color-luminance-hover',
+        'center-auto-color-opacity-hover',
+        'center-auto-color-saturation-hover',
+        'center-background-image-hover',
+        'center-color-mode-hover',
+        'center-fixed-color-hover',
+        'center-icon-crop-hover',
+        'center-icon-opacity-hover',
+        'center-icon-scale-hover',
+        'center-size-hover',
+        'easing-duration',
+        'font',
+        'text-color',
+        'touch-buttons-opacity',
+        'touch-buttons-show-above-fullscreen',
+        'touch-buttons-show-in-desktop-mode',
+        'touch-buttons-show-in-overview-mode',
+      ];
+
+      const changedRelevantKey = keys.some(key => {
+        return relevantKeys.some(
+            relevantKey => key == GLib.quark_try_string(relevantKey));
+      });
+
+      if (!changedRelevantKey) {
+        return;
+      }
+    }
 
     const globalScale = this._settings.get_double('global-scale');
 
@@ -147,7 +180,7 @@ var TouchButtons = class TouchButtons {
 
   // ----------------------------------------------------------------------- private stuff
 
-  _updateVisibility() {
+  _updateVisibility(doEase) {
     const visible = !this._menuOpened &&
         ((this._inOverview && this._cachedSettings.showInOverview) ||
          (!this._inOverview && this._cachedSettings.showOnDesktop));
@@ -162,20 +195,24 @@ var TouchButtons = class TouchButtons {
       });
 
       button.reactive = visible;
-      this._ease(button, {opacity: visible ? this._cachedSettings.opacity : 0});
+
+      if (doEase) {
+        this._ease(button, {opacity: visible ? this._cachedSettings.opacity : 0});
+      } else {
+        button.opacity = visible ? this._cachedSettings.opacity : 0;
+      }
     });
   }
 
   _createButtons() {
+    if (Main.layoutManager._startingUp) {
+      return;
+    }
+
     this._touchButtons.forEach(button => button.destroy());
     this._touchButtons = [];
 
-    let positions = this._settings.get_value('touch-button-positions').deep_unpack();
-
-    positions = [[-1, 12, 45], [12, 12, 12], [0, 1, -2]];
-
-    const data = new GLib.Variant('a(hhh)', positions);
-    this._settings.set_value('touch-button-positions', data);
+    const positions = this._settings.get_value('touch-button-positions').deep_unpack();
 
     this._configs.forEach((config, i) => {
       if (config.touchButton) {
@@ -188,6 +225,16 @@ var TouchButtons = class TouchButtons {
         actor.width   = this._cachedSettings.size;
         actor.height  = this._cachedSettings.size;
         actor.opacity = 0;
+
+        if (positions[i] && positions[i].length == 2) {
+          actor.x = positions[i][0];
+          actor.y = positions[i][1];
+        } else {
+          actor.x = Main.layoutManager.currentMonitor.x +
+              (Main.layoutManager.currentMonitor.width - actor.width) / 2;
+          actor.y = Main.layoutManager.currentMonitor.y +
+              (Main.layoutManager.currentMonitor.height - actor.height) / 2;
+        }
 
         this._touchButtons.push(actor);
 
@@ -228,7 +275,16 @@ var TouchButtons = class TouchButtons {
             this._ease(actor, {scale_x: 1});
             this._ease(actor, {scale_y: 1});
 
-            utils.debug(`drop at ${actor.x}x${actor.y}`);
+            const positions =
+                this._settings.get_value('touch-button-positions').deep_unpack();
+            positions[i] = [actor.x, actor.y];
+
+            for (let j = 0; j < i; j++) {
+              positions[j] = positions[j] || [];
+            }
+
+            const variant = new GLib.Variant('aah', positions);
+            this._settings.set_value('touch-button-positions', variant);
           }
         });
 
@@ -262,14 +318,14 @@ var TouchButtons = class TouchButtons {
             this._dbus.ShowMenuAtRemote(
                 config.name, actor.x + actor.width / 2, actor.y + actor.height / 2);
             this._menuOpened = true;
-            this._updateVisibility();
+            this._updateVisibility(true);
           }
         });
         actor.add_action(action);
       }
     });
 
-    this._updateVisibility();
+    this._updateVisibility(false);
   }
 
   _ease(actor, params) {

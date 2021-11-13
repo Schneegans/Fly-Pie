@@ -575,6 +575,19 @@ var MenuEditorPage = class MenuEditorPage {
     this._builder.get_object('touch-button').connect('notify::active', (widget) => {
       if (!this._updatingSidebar) {
         this._selectedItem.touchButton = widget.active;
+
+        const positions =
+            this._settings.get_value('touch-button-positions').deep_unpack();
+
+        const index = this._menuConfigs.indexOf(this._selectedItem);
+
+        if (positions.length > index && positions[index].length > 0) {
+          positions[index] = [];
+        }
+
+        const variant = new GLib.Variant('aah', positions);
+        this._settings.set_value('touch-button-positions', variant);
+
         this._saveMenuConfiguration();
       }
     });
