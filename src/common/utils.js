@@ -673,8 +673,8 @@ function computeItemAngles(items, parentAngle) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// When executed, this function will move the first window created within the next one  //
-// second to the current location of the mouse pointer. This method can only be called  //
+// When executed, this function will move the first window created within the next two  //
+// seconds to the current location of the mouse pointer. This method can only be called //
 // within the GNOME Shell process.                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -682,12 +682,15 @@ function openNextWindowAtPointer() {
   let createdID = null;
   let focusedID = null;
 
+  // Store pointer location. If a new window is opened, it will be centered at this
+  // position.
+  const [pointerX, pointerY] = global.get_pointer();
+
   // Wait until the next window is created.
   createdID = global.display.connect('window-created', () => {
     focusedID = global.display.connect('notify::focus-window', () => {
       const frame = global.display.focus_window.get_frame_rect();
       const area  = global.display.focus_window.get_work_area_current_monitor();
-      const [pointerX, pointerY] = global.get_pointer();
 
       // Center on the pointer.
       frame.x = pointerX - frame.width / 2;
@@ -710,8 +713,8 @@ function openNextWindowAtPointer() {
     createdID = null;
   });
 
-  // Disconnect the handlers above latest after one second.
-  GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
+  // Disconnect the handlers after two seconds (if they were not called).
+  GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
     if (createdID) global.display.disconnect(createdID);
     if (focusedID) global.display.disconnect(focusedID);
     return false;
