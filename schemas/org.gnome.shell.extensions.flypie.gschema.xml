@@ -503,6 +503,12 @@
       <description>If set to true, touch buttons will be shown above fullscreen windows.</description>
     </key>
 
+    <key name="touch-button-positions" type="a(hhh)">
+      <default>[]</default>
+      <summary>Touch Button Positions</summary>
+      <description>The monitor number and pixel positions of the touch buttons.</description>
+    </key>
+
     <!-- Behavior Settings -->
 
     <key name="gesture-selection-timeout" type="d">

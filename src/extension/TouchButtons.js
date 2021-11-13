@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Main                 = imports.ui.main;
-const {Meta, Clutter, Gio} = imports.gi;
+const Main                       = imports.ui.main;
+const {Meta, Clutter, Gio, GLib} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.src.common.utils;
@@ -170,7 +170,14 @@ var TouchButtons = class TouchButtons {
     this._touchButtons.forEach(button => button.destroy());
     this._touchButtons = [];
 
-    this._configs.forEach(config => {
+    let positions = this._settings.get_value('touch-button-positions').deep_unpack();
+
+    positions = [[-1, 12, 45], [12, 12, 12], [0, 1, -2]];
+
+    const data = new GLib.Variant('a(hhh)', positions);
+    this._settings.set_value('touch-button-positions', data);
+
+    this._configs.forEach((config, i) => {
       if (config.touchButton) {
         const actor = MenuItem.createIcon(
             this._cachedSettings.backgroundColor, this._cachedSettings.backgroundImage,
@@ -220,6 +227,8 @@ var TouchButtons = class TouchButtons {
             this._ease(actor, {opacity: 255});
             this._ease(actor, {scale_x: 1});
             this._ease(actor, {scale_y: 1});
+
+            utils.debug(`drop at ${actor.x}x${actor.y}`);
           }
         });
 
