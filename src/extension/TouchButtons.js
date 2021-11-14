@@ -19,11 +19,13 @@ const MenuItem      = Me.imports.src.extension.MenuItem.MenuItem;
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// This class maintains a list of "Touch Buttons". There can be one touch button for    //
+// each configured menu. They are floating above everything and can be used to quickly  //
+// open the corresponding menu.                                                         //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-
-const DRAG_OPACITY = 100;
-const DRAG_SCALE   = 0.7;
+const DRAG_OPACITY = 100;  // Opacity (0...255) for touch buttons when being dragged.
+const DRAG_SCALE   = 0.7;  // Scale factor for touch buttons when being dragged.
 
 var TouchButtons = class TouchButtons {
 
@@ -31,48 +33,73 @@ var TouchButtons = class TouchButtons {
 
   constructor(settings) {
 
-    this._settings          = settings;
-    this._touchButtons      = [];
-    this._configs           = [];
-    this._startupCompleteID = 0;
-    this._inOverview        = false;
-    this._menuOpened        = false;
+    // Keep a reference to the settings.
+    this._settings = settings;
 
-    // Connect to the server so that we can toggle the demo menu from the tutorial.
+    // This will contain an Clutter.Actor for each touch button.
+    this._touchButtons = [];
+
+    // This will contain a reference to the currently configured menus.
+    this._configs = [];
+
+    // We have to wait until GNOME Shell has been started so that we can add the touch
+    // buttons.
+    this._startupCompleteID = 0;
+
+    // True, if GNOME Shell is currently in overview mode (as opposed to the desktop
+    // mode).
+    this._inOverview = false;
+
+    // True, if there is currently a Fly-Pie menu opened.
+    this._menuOpened = false;
+
+    // Connect to the daemon so that we can open the menus.
     new DBusWrapper(
         Gio.DBus.session, 'org.gnome.Shell', '/org/gnome/shell/extensions/flypie',
         proxy => {
           this._dbus = proxy;
+
+          // Make all touch buttons visible once a menu is closed again. They are hidden
+          // when a menu is opened to reduce screen clutter.
           this._dbus.connectSignal('OnSelect', () => {
             this._menuOpened = false;
             this._updateVisibility(true);
           });
+
           this._dbus.connectSignal('OnCancel', () => {
             this._menuOpened = false;
             this._updateVisibility(true);
           });
         });
 
+    // Keep track of the overview / desktop mode. Touch buttons can be shown or hidden in
+    // the one or the other mode.
     this._shownOverviewID = Main.overview.connect('showing', () => {
       this._inOverview = true;
       this._updateVisibility(true);
     });
 
+    // Keep track of the overview / desktop mode. Touch buttons can be shown or hidden in
+    // the one or the other mode.
     this._hideOverviewID = Main.overview.connect('hiding', () => {
       this._inOverview = false;
       this._updateVisibility(true);
     });
 
+    // Trigger an initial parsing of the settings.
     this.onSettingsChange();
   }
 
+  // This is called by the Daemon once the extension is unloaded.
   destroy() {
+
+    // Destroy all touch buttons.
     this._touchButtons.forEach(button => button.destroy());
     this._touchButtons = [];
 
+    // Disconnect handlers.
     if (this._startupCompleteID) {
       Main.layoutManager.disconnect(this._startupCompleteID);
-      this._startupCompleteID = 0;
     }
 
     Main.overview.disconnect(this._shownOverviewID);
@@ -81,9 +108,12 @@ var TouchButtons = class TouchButtons {
 
   // -------------------------------------------------------------------- public interface
 
+  // This is called by the daemon whenever the menu configuration is changed by the user.
   setMenuConfigs(configs) {
     this._configs = configs;
 
+    // We have to wait until GNOME Shell has been started so that we can add the touch
+    // buttons.
     if (Main.layoutManager._startingUp) {
       this._startupCompleteID =
           Main.layoutManager.connect('startup-complete', () => this._createButtons());
@@ -92,8 +122,14 @@ var TouchButtons = class TouchButtons {
     }
   }
 
+  // This is called by the daemon whenever something changed in Fly-Pie's settings. This
+  // updates the appearance of the touch buttons to look like the center item of the
+  // menus.
   onSettingsChange(keys) {
 
+    // We try to prevent to frequent updates by checking which settings keys actually
+    // changed. Only if one of the following settings keys was changed, we continue
+    // updating the buttons.
     if (keys) {
       const relevantKeys = [
         'global-scale',
@@ -116,16 +152,19 @@ var TouchButtons = class TouchButtons {
         'touch-buttons-show-in-overview-mode',
       ];
 
-      const changedRelevantKey = keys.some(key => {
-        return relevantKeys.some(
-            relevantKey => key == GLib.quark_try_string(relevantKey));
-      });
+      // This fancy nested loop checks whether "keys" contains any of the relevant keys
+      // above. It terminates early if one is found.
+      const changedRelevantKey = keys.some(
+          key => relevantKeys.some(
+              relevantKey => key == GLib.quark_try_string(relevantKey)));
 
       if (!changedRelevantKey) {
         return;
       }
     }
 
+    // Now we store a copy of all settings we require to draw the buttons. This makes is
+    // unnecessary to query them whenever the menu configuration is changed.
     const globalScale = this._settings.get_double('global-scale');
 
     // clang-format off
@@ -146,19 +185,17 @@ var TouchButtons = class TouchButtons {
     };
     // clang-format on
 
-    const colorMode = this._settings.get_string('center-color-mode-hover');
-
     // If the color mode is 'auto', we calculate an average color of the icon.
-    if (colorMode == 'auto') {
-
-      const iconName = this._settings.get_string('center-background-image-hover');
+    if (this._settings.get_string('center-color-mode-hover') == 'auto') {
 
       // Compute the average color on a smaller version of the icon.
-      const surface          = utils.createIcon(iconName, 24, this._cachedSettings.font, {
+      const iconName = this._settings.get_string('center-background-image-hover');
+      const surface  = utils.createIcon(iconName, 24, this._cachedSettings.font, {
         red: this._cachedSettings.textColor.red / 255,
         green: this._cachedSettings.textColor.green / 255,
         blue: this._cachedSettings.textColor.blue / 255
       });
+
       const [r, g, b]        = utils.getAverageIconColor(surface, 24);
       const averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
 
@@ -167,65 +204,61 @@ var TouchButtons = class TouchButtons {
       const luminance  = this._settings.get_double('center-auto-color-luminance-hover');
       const opacity = this._settings.get_double('center-auto-color-opacity-hover') * 255;
 
+      // Store the resulting color.
       this._cachedSettings.backgroundColor =
           MenuItem.getAutoColor(averageIconColor, luminance, saturation, opacity);
 
-    } else {
+    }
+    // Else we simply use the configured fixed color.
+    else {
       this._cachedSettings.backgroundColor = Clutter.Color.from_string(
           this._settings.get_string('center-fixed-color-hover'))[1];
     }
 
+    // Now (re-)create the buttons!
     this._createButtons();
   }
 
   // ----------------------------------------------------------------------- private stuff
 
-  _updateVisibility(doEase) {
-    const visible = !this._menuOpened &&
-        ((this._inOverview && this._cachedSettings.showInOverview) ||
-         (!this._inOverview && this._cachedSettings.showOnDesktop));
-
-    this._touchButtons.forEach(button => {
-      if (button.get_parent()) {
-        Main.layoutManager.removeChrome(button);
-      }
-      Main.layoutManager.addChrome(button, {
-        affectsInputRegion: visible,
-        trackFullscreen: !this._cachedSettings.showAboveFullscreen,
-      });
-
-      button.reactive = visible;
-
-      if (doEase) {
-        this._ease(button, {opacity: visible ? this._cachedSettings.opacity : 0});
-      } else {
-        button.opacity = visible ? this._cachedSettings.opacity : 0;
-      }
-    });
-  }
-
+  // This method (re-)creates all touch buttons.
   _createButtons() {
+
+    // Try not to create the buttons if GNOME Shell is not fully started yet.
     if (Main.layoutManager._startingUp) {
       return;
     }
 
+    // First remove all existing buttons.
     this._touchButtons.forEach(button => button.destroy());
     this._touchButtons = [];
 
+    // This settings item stores the touch-button positions for all menus as simple [x, y]
+    // pairs. If a menu has no touch button enabled, the position at the menu's index will
+    // be an empty array [].
     const positions = this._settings.get_value('touch-button-positions').deep_unpack();
 
+    // Loop through all menu configurations.
     this._configs.forEach((config, i) => {
+      // We only have to do something if the touch button is enabled.
       if (config.touchButton) {
+
+        // Create a Clutter.Actor which looks like the center item of a menu.
         const actor = MenuItem.createIcon(
             this._cachedSettings.backgroundColor, this._cachedSettings.backgroundImage,
             this._cachedSettings.size, config.icon, this._cachedSettings.iconScale,
             this._cachedSettings.iconCrop, this._cachedSettings.iconOpacity,
             this._cachedSettings.textColor, this._cachedSettings.font);
-        actor.name    = `Fly-Pie TouchButton (${config.name})`;
-        actor.width   = this._cachedSettings.size;
-        actor.height  = this._cachedSettings.size;
-        actor.opacity = 0;
 
+        // This way we can identify the actor with the looking glass tool.
+        actor.name = `Fly-Pie TouchButton (${config.name})`;
+
+        // Set the actor's size.
+        actor.width  = this._cachedSettings.size;
+        actor.height = this._cachedSettings.size;
+
+        // Set the actor's position. This is either the stored position or -- if non is
+        // stored -- the center of the current monitor.
         if (positions[i] && positions[i].length == 2) {
           actor.x = positions[i][0];
           actor.y = positions[i][1];
@@ -236,63 +269,79 @@ var TouchButtons = class TouchButtons {
               (Main.layoutManager.currentMonitor.height - actor.height) / 2;
         }
 
-        this._touchButtons.push(actor);
-
-        actor.connect('enter-event', (a) => {
-          if (!a._dragging) {
+        // Now we have to wire up some events. If the pointer enters the touch button, we
+        // make it fully opaque.
+        actor.connect('enter-event', (actor) => {
+          if (!actor._dragging) {
             this._ease(actor, {opacity: 255});
           }
         });
 
-        actor.connect('leave-event', (a) => {
-          if (!a._dragging) {
+        // If the pointer leaves the touch button, we make it somewhat transparent.
+        actor.connect('leave-event', (actor) => {
+          if (!actor._dragging) {
             this._ease(actor, {opacity: this._cachedSettings.opacity});
           }
         });
 
-        actor.connect('motion-event', (a, event) => {
-          if (a._dragging) {
+        // Update the actor's position when dragged around.
+        actor.connect('motion-event', (actor, event) => {
+          if (actor._dragging) {
             const [x, y] = event.get_coords();
-            a.x          = x - a._dragStartX;
-            a.y          = y - a._dragStartY;
+            actor.x      = x - actor._dragStartX;
+            actor.y      = y - actor._dragStartY;
           }
           return true;
         });
 
-        actor.connect('button-release-event', (actor, event) => {
+        // The button-release event is used to end a drag operation.
+        actor.connect('button-release-event', (actor) => {
           if (actor._dragging) {
+            actor._dragging = false;
 
-            const pointer =
-                Clutter.get_default_backend().get_default_seat().get_pointer();
-            pointer.ungrab();
-
+            // Release the pointer grab.
+            Clutter.get_default_backend().get_default_seat().get_pointer().ungrab();
             global.end_modal(global.get_current_time());
 
+            // Use the normal cursor again.
             global.display.set_cursor(Meta.Cursor.DEFAULT);
 
-            actor._dragging = false;
+            // Make the button's size and opacity "normal" again.
             this._ease(actor, {opacity: 255});
             this._ease(actor, {scale_x: 1});
             this._ease(actor, {scale_y: 1});
 
+            // Now save the updated touch button position. We retrieve the current
+            // positions list and update the entry for currently dragged item.
             const positions =
                 this._settings.get_value('touch-button-positions').deep_unpack();
             positions[i] = [actor.x, actor.y];
 
+            // It can be possible that there are undefined entries before the current one,
+            // so we set them to [].
             for (let j = 0; j < i; j++) {
               positions[j] = positions[j] || [];
             }
 
+            // Save the updated positions.
             const variant = new GLib.Variant('aah', positions);
             this._settings.set_value('touch-button-positions', variant);
           }
         });
 
+        // This long-press action is used to initiate dragging as well es opening the
+        // menu. The latter is done whenever the long press is aborted.
         const action = Clutter.ClickAction.new();
         action.connect('long-press', (action, actor, state) => {
+          // We support long presses.
           if (state == Clutter.LongPressState.QUERY) {
             return true;
-          } else if (state == Clutter.LongPressState.ACTIVATE) {
+          }
+          // If the long press was executed, we initiate dragging of the actor.
+          else if (state == Clutter.LongPressState.ACTIVATE) {
+
+            // First we shrink the button a bit and make it translucent. The pivot point
+            // for shrinking is the pointer position inside the actor.
             let x, y, ok;
             [x, y]     = action.get_coords();
             [ok, x, y] = actor.transform_stage_point(x, y);
@@ -301,33 +350,79 @@ var TouchButtons = class TouchButtons {
             this._ease(actor, {scale_x: DRAG_SCALE});
             this._ease(actor, {scale_y: DRAG_SCALE});
 
+            // Store some dragging state.
             actor._dragging   = true;
             actor._dragStartX = x;
             actor._dragStartY = y;
 
-            const pointer =
-                Clutter.get_default_backend().get_default_seat().get_pointer();
-            pointer.grab(actor);
-
+            // Grab the input so that we do not loose the actor during quick movements.
+            Clutter.get_default_backend().get_default_seat().get_pointer().grab(actor);
             global.begin_modal(global.get_current_time(), 0);
 
+            // Use a dragging graphic for the cursor.
             global.display.set_cursor(Meta.Cursor.DND_IN_DRAG);
 
+          }
+          // If the long press was canceled (either due to it being to short or because
+          // the pointer moved while the button was pressed), we open the menu.
+          else if (state == Clutter.LongPressState.CANCEL) {
 
-          } else if (state == Clutter.LongPressState.CANCEL) {
+            // Show the menu directly centered above the touch button.
             this._dbus.ShowMenuAtRemote(
                 config.name, actor.x + actor.width / 2, actor.y + actor.height / 2);
             this._menuOpened = true;
+
+            // Hide all touch buttons as long as the menu is opened.
             this._updateVisibility(true);
           }
         });
+
         actor.add_action(action);
+
+        // Finally, save the actor in our list.
+        this._touchButtons.push(actor);
       }
     });
 
+    // Set the initial visibility without an animation.
     this._updateVisibility(false);
   }
 
+  // This method updates the visibility of all touch buttons. They are hidden if a menu is
+  // currently shown or -- depending on the settings -- when GNOME Shell is currently in
+  // overview or desktop mode.
+  // The parameter controls whether the opacity should be animated.
+  _updateVisibility(doEase) {
+    const visible = !this._menuOpened &&
+        ((this._inOverview && this._cachedSettings.showInOverview) ||
+         (!this._inOverview && this._cachedSettings.showOnDesktop));
+
+    // We have to re-add the actors the interface because the parameters passed to
+    // addChrome() cannot be changed for already added actors. So we remove them and add
+    // the with updated parameters.
+    this._touchButtons.forEach(button => {
+      if (button.get_parent()) {
+        Main.layoutManager.removeChrome(button);
+      }
+
+      Main.layoutManager.addChrome(button, {
+        affectsInputRegion: visible,
+        trackFullscreen: !this._cachedSettings.showAboveFullscreen,
+      });
+
+      button.reactive = visible;
+
+      // Use a smooth transition if required.
+      if (doEase) {
+        this._ease(button, {opacity: visible ? this._cachedSettings.opacity : 0});
+      } else {
+        button.opacity = visible ? this._cachedSettings.opacity : 0;
+      }
+    });
+  }
+
+  // Little helper which smoothly transitions the given properties of the provided
+  // Clutter.Actor.
   _ease(actor, params) {
     actor.ease(Object.assign(params, {
       duration: this._cachedSettings.easingDuration,
