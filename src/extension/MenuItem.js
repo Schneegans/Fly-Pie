@@ -329,25 +329,6 @@ class MenuItem extends Clutter.Actor {
     // Then parse all settings required during the next call to redraw().
     const globalScale = settings.get_double('global-scale');
 
-    // We load the background images once for all menu items.
-    const loadBackgroundImage = (file, size) => {
-      // If the path is a relative path, it may be a child of the preset directory.
-      if (file != '' && !GLib.path_is_absolute(file)) {
-        file = Me.path + '/presets/' + file;
-      }
-
-      // Only attempt to load an image if the background image property is set and exists.
-      if (file != '' && Gio.File.new_for_path(file).query_exists(null)) {
-        try {
-          return GdkPixbuf.Pixbuf.new_from_file_at_scale(file, size, size, false);
-        } catch (error) {
-          utils.debug('Failed to load background image: ' + error);
-        }
-      }
-
-      return null;
-    };
-
     // clang-format off
     MenuItemSettings = {
       globalScale:             globalScale,
@@ -375,8 +356,8 @@ class MenuItem extends Clutter.Actor {
           autoColorSaturation: settings.get_double('center-auto-color-saturation'),
           autoColorLuminance:  settings.get_double('center-auto-color-luminance'),
           autoColorOpacity:    settings.get_double('center-auto-color-opacity') * 255,
-          backgroundImage:     loadBackgroundImage(settings.get_string('center-background-image'),
-                                                   settings.get_double('center-size') * globalScale),
+          backgroundImage:     MenuItem.loadBackgroundImage(settings.get_string('center-background-image'),
+                                                            settings.get_double('center-size') * globalScale),
           drawChildrenAbove:   settings.get_boolean('child-draw-above'),
         }],
         [MenuItemState.CENTER_HOVERED, {
@@ -390,8 +371,8 @@ class MenuItem extends Clutter.Actor {
           autoColorSaturation: settings.get_double('center-auto-color-saturation-hover'),
           autoColorLuminance:  settings.get_double('center-auto-color-luminance-hover'),
           autoColorOpacity:    settings.get_double('center-auto-color-opacity-hover') * 255,
-          backgroundImage:     loadBackgroundImage(settings.get_string('center-background-image-hover'),
-                                                   settings.get_double('center-size-hover') * globalScale),
+          backgroundImage:     MenuItem.loadBackgroundImage(settings.get_string('center-background-image-hover'),
+                                                            settings.get_double('center-size-hover') * globalScale),
           drawChildrenAbove:   settings.get_boolean('child-draw-above'),
         }],
         [MenuItemState.CHILD, {
@@ -405,8 +386,8 @@ class MenuItem extends Clutter.Actor {
           autoColorSaturation: settings.get_double('child-auto-color-saturation'),
           autoColorLuminance:  settings.get_double('child-auto-color-luminance'),
           autoColorOpacity:    settings.get_double('child-auto-color-opacity')  * 255,
-          backgroundImage:     loadBackgroundImage(settings.get_string('child-background-image'),
-                                                   settings.get_double('child-size') * globalScale),
+          backgroundImage:     MenuItem.loadBackgroundImage(settings.get_string('child-background-image'),
+                                                            settings.get_double('child-size') * globalScale),
           drawChildrenAbove:   settings.get_boolean('grandchild-draw-above'),
         }],
         [MenuItemState.CHILD_HOVERED, {
@@ -420,8 +401,8 @@ class MenuItem extends Clutter.Actor {
           autoColorSaturation: settings.get_double('child-auto-color-saturation-hover'),
           autoColorLuminance:  settings.get_double('child-auto-color-luminance-hover'),
           autoColorOpacity:    settings.get_double('child-auto-color-opacity-hover') * 255,
-          backgroundImage:     loadBackgroundImage(settings.get_string('child-background-image-hover'),
-                                                   settings.get_double('child-size-hover') * globalScale),
+          backgroundImage:     MenuItem.loadBackgroundImage(settings.get_string('child-background-image-hover'),
+                                                            settings.get_double('child-size-hover') * globalScale),
           drawChildrenAbove:   settings.get_boolean('grandchild-draw-above'),
         }],
         [MenuItemState.GRANDCHILD, {
@@ -430,8 +411,8 @@ class MenuItem extends Clutter.Actor {
           size:                settings.get_double('grandchild-size')    * globalScale,
           offset:              settings.get_double('grandchild-offset')  * globalScale,
           iconOpacity:         0,
-          backgroundImage:     loadBackgroundImage(settings.get_string('grandchild-background-image'),
-                                                   settings.get_double('grandchild-size') * globalScale),
+          backgroundImage:     MenuItem.loadBackgroundImage(settings.get_string('grandchild-background-image'),
+                                                            settings.get_double('grandchild-size') * globalScale),
           drawAbove:           settings.get_boolean('grandchild-draw-above'),
         }],
         [MenuItemState.GRANDCHILD_HOVERED, {
@@ -440,8 +421,8 @@ class MenuItem extends Clutter.Actor {
           size:                settings.get_double('grandchild-size-hover')   * globalScale,
           offset:              settings.get_double('grandchild-offset-hover') * globalScale,
           iconOpacity:         0,
-          backgroundImage:     loadBackgroundImage(settings.get_string('grandchild-background-image-hover'),
-                                                   settings.get_double('grandchild-size-hover') * globalScale),
+          backgroundImage:     MenuItem.loadBackgroundImage(settings.get_string('grandchild-background-image-hover'),
+                                                            settings.get_double('grandchild-size-hover') * globalScale),
           drawAbove:           settings.get_boolean('grandchild-draw-above'),
         }]
       ]),
@@ -546,26 +527,10 @@ class MenuItem extends Clutter.Actor {
         this._averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
       }
 
-      // Now we modify this color based on luminance and saturation.
-      let [h, l, s] = this._averageIconColor.to_hls();
-
-      // First we increase the base luminance to 0.5 so that we do not create pitch black
-      // colors.
-      l = 0.5 + l * 0.5;
-
-      // Tweak the luminance based on the settings values.
-      const lFac = settings.autoColorLuminance * 2 - 1;
-      l          = lFac > 0 ? l * (1 - lFac) + 1 * lFac : l * (lFac + 1);
-
-      // We only modify the saturation if it's not too low. Else we will get artificial
-      // colors for already quite desaturated icons.
-      if (s > 0.1) {
-        const sFac = settings.autoColorSaturation * 2 - 1;
-        s          = sFac > 0 ? s * (1 - sFac) + 1 * sFac : s * (sFac + 1);
-      }
-
-      backgroundColor       = Clutter.Color.from_hls(h, l, s);
-      backgroundColor.alpha = settings.autoColorOpacity;
+      // Now we modify this color based on the configured luminance and saturation values.
+      backgroundColor = MenuItem.getAutoColor(
+          this._averageIconColor, settings.autoColorLuminance,
+          settings.autoColorSaturation, settings.autoColorOpacity);
 
     } else if (settings.colorMode == 'parent') {
       backgroundColor = this._parentColor;
@@ -587,13 +552,15 @@ class MenuItem extends Clutter.Actor {
           visualState == MenuItemState.CENTER_HOVERED ||
           visualState == MenuItemState.CHILD ||
           visualState == MenuItemState.CHILD_HOVERED) {
-        icon = this._createIcon(
+        icon = MenuItem.createIcon(
             backgroundColor, settings.backgroundImage, settings.size, this.icon,
-            settings.iconScale, settings.iconCrop, settings.iconOpacity);
+            settings.iconScale, settings.iconCrop, settings.iconOpacity,
+            MenuItemSettings.textColor, MenuItemSettings.font);
       } else {
         // Grandchildren have only a circle as icon. Therefore no icon name is passed to
         // this method.
-        icon = this._createIcon(backgroundColor, settings.backgroundImage, settings.size);
+        icon =
+            MenuItem.createIcon(backgroundColor, settings.backgroundImage, settings.size);
       }
 
       this._iconContainer[visualState] = icon;
@@ -774,53 +741,63 @@ class MenuItem extends Clutter.Actor {
     }
   }
 
-  // ----------------------------------------------------------------------- private stuff
+  // ------------------------------------------------------------------------ static stuff
 
-  // This is called once after construction and then whenever something in the appearance
-  // settings has changed. This calls itself recursively on the entire menu tree below
-  // this MenuItem.
-  _onSettingsChange() {
+  // If the items automatically define their background color, we have to adjust the
+  // luminance and saturation according to the settings. This method takes a Clutter.Color
+  // and returns a new Clutter.Color. The output color has the same hue as the input color
+  // but the luminance and saturation values are based on the given input values.
+  static getAutoColor(averageColor, luminance, saturation, opacity) {
 
-    // First we reset the icon members to force their re-creation during the next state
-    // change. As many settings affect the icon size or background color, we simply do
-    // this in any case. This could be optimized by limiting this to the cases where
-    // settings keys were changed which actually affect the icons.
-    this._forceIconRecreation();
+    let [h, l, s] = averageColor.to_hls();
 
-    // Most of the settings will come into effect during the call to redraw(). However,
-    // some name settings we can apply here as they won't be affected by state changes.
+    // First we increase the base luminance to 0.5 so that we do not create pitch black
+    // colors.
+    l = 0.5 + l * 0.5;
 
-    // The name width is set so that the text always stays inside the (cropped) icon of
-    // the center item. The sqrt(2) is because the an iconCrop of 1 means that the entire
-    // square icon is visible.
-    const state    = MenuItemSettings.state.get(MenuItemState.CENTER);
-    const nameSize = state.size * state.iconScale * state.iconCrop * Math.sqrt(2);
-    this._name.set_size(nameSize, nameSize);
-    this._name.set_color(MenuItemSettings.textColor);
+    // Tweak the luminance based on the settings values.
+    const lFac = luminance * 2 - 1;
+    l          = lFac > 0 ? l * (1 - lFac) + 1 * lFac : l * (lFac + 1);
 
-    // Multiply the size of the font by globalScale.
-    const fontDescription = Pango.FontDescription.from_string(MenuItemSettings.font);
-    const fontSize        = fontDescription.get_size();
-    if (fontDescription.get_size_is_absolute()) {
-      fontSize = Pango.units_from_double(fontSize);
-    }
-    fontDescription.set_size(fontSize * MenuItemSettings.globalScale);
-    this._name.set_font_description(fontDescription);
-
-    // We also re-draw the trace line to the currently active child if there is any.
-    if (this._trace != undefined) {
-      this._trace.get_content().invalidate();
+    // We only modify the saturation if it's not too low. Else we will get artificial
+    // colors for already quite desaturated icons.
+    if (s > 0.1) {
+      const sFac = saturation * 2 - 1;
+      s          = sFac > 0 ? s * (1 - sFac) + 1 * sFac : s * (sFac + 1);
     }
 
-    // Finally, call this recursively for all children.
-    this._childrenContainer.get_children().forEach(child => child._onSettingsChange());
+    const result = Clutter.Color.from_hls(h, l, s);
+    result.alpha = opacity;
+
+    return result;
+  }
+
+  // Static helper to load the background image of a menu item. If "file" exists, a pixbuf
+  // with the given size will be returned.
+  static loadBackgroundImage(file, size) {
+    // If the path is a relative path, it may be a child of the preset directory.
+    if (file != '' && !GLib.path_is_absolute(file)) {
+      file = Me.path + '/presets/' + file;
+    }
+
+    // Only attempt to load an image if the background image property is set and exists.
+    if (file != '' && Gio.File.new_for_path(file).query_exists(null)) {
+      try {
+        return GdkPixbuf.Pixbuf.new_from_file_at_scale(file, size, size, false);
+      } catch (error) {
+        utils.debug('Failed to load background image: ' + error);
+      }
+    }
+
+    return null;
   }
 
   // This creates a Clutter.Actor with an attached Clutter.Canvas containing an image of
-  // this MenuItem's icon.
-  _createIcon(
+  // this MenuItem's icon. It's static so that others can use this to create similar icons
+  // (for example the touch buttons).
+  static createIcon(
       backgroundColor, backgroundImage, backgroundSize, iconName, iconScale, iconCrop,
-      iconOpacity) {
+      iconOpacity, textColor, font) {
 
     const canvas = new Clutter.Canvas({height: backgroundSize, width: backgroundSize});
     canvas.connect('draw', (c, ctx, width, height) => {
@@ -886,10 +863,10 @@ class MenuItem extends Clutter.Actor {
         ctx.clip();
 
         ctx.translate((backgroundSize - iconSize) / 2, (backgroundSize - iconSize) / 2);
-        utils.paintIcon(ctx, iconName, iconSize, iconOpacity, MenuItemSettings.font, {
-          red: MenuItemSettings.textColor.red / 255,
-          green: MenuItemSettings.textColor.green / 255,
-          blue: MenuItemSettings.textColor.blue / 255
+        utils.paintIcon(ctx, iconName, iconSize, iconOpacity, font, {
+          red: textColor.red / 255,
+          green: textColor.green / 255,
+          blue: textColor.blue / 255
         });
       }
 
@@ -908,6 +885,48 @@ class MenuItem extends Clutter.Actor {
     actor.set_y_expand(true);
 
     return actor;
+  }
+
+  // ----------------------------------------------------------------------- private stuff
+
+  // This is called once after construction and then whenever something in the appearance
+  // settings has changed. This calls itself recursively on the entire menu tree below
+  // this MenuItem.
+  _onSettingsChange() {
+
+    // First we reset the icon members to force their re-creation during the next state
+    // change. As many settings affect the icon size or background color, we simply do
+    // this in any case. This could be optimized by limiting this to the cases where
+    // settings keys were changed which actually affect the icons.
+    this._forceIconRecreation();
+
+    // Most of the settings will come into effect during the call to redraw(). However,
+    // some name settings we can apply here as they won't be affected by state changes.
+
+    // The name width is set so that the text always stays inside the (cropped) icon of
+    // the center item. The sqrt(2) is because the an iconCrop of 1 means that the entire
+    // square icon is visible.
+    const state    = MenuItemSettings.state.get(MenuItemState.CENTER);
+    const nameSize = state.size * state.iconScale * state.iconCrop * Math.sqrt(2);
+    this._name.set_size(nameSize, nameSize);
+    this._name.set_color(MenuItemSettings.textColor);
+
+    // Multiply the size of the font by globalScale.
+    const fontDescription = Pango.FontDescription.from_string(MenuItemSettings.font);
+    const fontSize        = fontDescription.get_size();
+    if (fontDescription.get_size_is_absolute()) {
+      fontSize = Pango.units_from_double(fontSize);
+    }
+    fontDescription.set_size(fontSize * MenuItemSettings.globalScale);
+    this._name.set_font_description(fontDescription);
+
+    // We also re-draw the trace line to the currently active child if there is any.
+    if (this._trace != undefined) {
+      this._trace.get_content().invalidate();
+    }
+
+    // Finally, call this recursively for all children.
+    this._childrenContainer.get_children().forEach(child => child._onSettingsChange());
   }
 
   // This deletes all icon actors, triggering their recreation during the next call to

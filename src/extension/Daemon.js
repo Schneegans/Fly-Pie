@@ -20,6 +20,7 @@ const Achievements     = Me.imports.src.common.Achievements.Achievements;
 const ItemRegistry     = Me.imports.src.common.ItemRegistry.ItemRegistry;
 const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
 const Shortcuts        = Me.imports.src.extension.Shortcuts.Shortcuts;
+const TouchButtons     = Me.imports.src.extension.TouchButtons.TouchButtons;
 const MouseHighlight   = Me.imports.src.extension.MouseHighlight.MouseHighlight;
 const Menu             = Me.imports.src.extension.Menu.Menu;
 const DefaultMenu      = Me.imports.src.extension.DefaultMenu.DefaultMenu;
@@ -55,9 +56,18 @@ var Daemon = class Daemon {
     // Create the clipboard manager singleton. This is used by the clipboard menu.
     ClipboardManager.getInstance();
 
+    // Create a settings object and listen for menu configuration changes. Once the
+    // configuration changes, we bind all the configured shortcuts.
+    this._settings = utils.createSettings();
+
+    // We keep several connections to the Gio.Settings object. Once the extension is
+    // unloaded, we use this array to disconnect all of them.
+    this._settingsConnections = [];
+
     // Initialize the menu. For performance reasons the same menu is used again and again.
     // It is just reconfigured according to incoming requests.
     this._menu = new Menu(
+        this._settings,
         // This gets called whenever the user starts hovering an action in point-and-click
         // mode or starts dragging an action in marking mode. It emits the OnHover signal
         // of our D-Bus interface.
@@ -95,13 +105,8 @@ var Daemon = class Daemon {
       }
     });
 
-    // Create a settings object and listen for menu configuration changes. Once the
-    // configuration changes, we bind all the configured shortcuts.
-    this._settings = utils.createSettings();
-
-    // We keep several connections to the Gio.Settings object. Once the extension is
-    // unloaded, we use this array to disconnect all of them.
-    this._settingsConnections = [];
+    // Create the touch buttons.
+    this._touchButtons = new TouchButtons(this._settings);
 
     // Here we test whether any menus are configured. If the key is completely empty, this
     // is considered to be the same as "[]". If no menus are configured, the default
@@ -126,6 +131,20 @@ var Daemon = class Daemon {
       // If parsing fails, we do nothing here - an error will be shown by the next call to
       // _onMenuConfigsChanged().
     }
+
+    // Whenever settings are changed, we adapt the currently shown menu accordingly.
+    this._settingsConnections.push(this._settings.connect('change-event', (o, keys) => {
+      // For historical reasons, all settings of Fly-Pie are included in one schema. This
+      // is a bit unfortunate, as we cannot easily listen only for appearance changes, as
+      // all statistics are included in the schema as well. To avoid reconfiguration of
+      // the menu if a statistics key changes, we have to manual filter here.
+      if (Statistics.getInstance().containsAnyNonStatsKey(keys)) {
+        this._menu.onSettingsChange();
+        this._touchButtons.onSettingsChange(keys);
+      }
+
+      return false;
+    }));
 
     // Reload the menu configuration when the settings key changes.
     this._settingsConnections.push(this._settings.connect(
@@ -188,6 +207,9 @@ var Daemon = class Daemon {
     // Delete the clipboard manager singleton. This is used by the clipboard menu.
     ClipboardManager.destroyInstance();
 
+    // Delete the touch buttons.
+    this._touchButtons.destroy();
+
     this._menu.destroy();
 
     this._dbus.flush();
@@ -220,7 +242,13 @@ var Daemon = class Daemon {
   // over the D-Bus. See the README.md for a description of Fly-Pie's DBusInterface. If
   // there are more than one menu with the same name, the first will be opened.
   ShowMenu(name) {
-    return this._openMenu(name, false);
+    return this.ShowMenuAt(name, null, null);
+  }
+
+  // Same as above, but instead at the pointer location, the menu will be opened at the
+  // given pixel coordinates.
+  ShowMenuAt(name, x, y) {
+    return this._openMenu(name, false, x, y);
   }
 
   // This opens a menu configured with Fly-Pie's menu editor in preview mode and can be
@@ -228,15 +256,21 @@ var Daemon = class Daemon {
   // DBusInterface. If there are more than one menu with the same name, the first will be
   // opened.
   PreviewMenu(name) {
-    return this._openMenu(name, true);
+    return this._openMenu(name, true, null, null);
   }
 
   // This opens a custom menu and can be directly called over the D-Bus.
   // See the README.md for a description of Fly-Pie's DBusInterface.
   ShowCustomMenu(json) {
+    return this.ShowCustomMenuAt(json, null, null);
+  }
+
+  // Same as above, but instead at the pointer location, the menu will be opened at the
+  // given pixel coordinates.
+  ShowCustomMenuAt(json, x, y) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
     Statistics.getInstance().addCustomDBusMenu();
-    return this._openCustomMenu(json, false, this._lastMenuID);
+    return this._openCustomMenu(json, false, this._lastMenuID, x, y);
   }
 
   // This opens a custom menu in preview mode and can be directly called over the D-Bus.
@@ -244,7 +278,7 @@ var Daemon = class Daemon {
   PreviewCustomMenu(json) {
     this._lastMenuID = this._getNextMenuID(this._lastMenuID);
     Statistics.getInstance().addCustomDBusMenu();
-    return this._openCustomMenu(json, true, this._lastMenuID);
+    return this._openCustomMenu(json, true, this._lastMenuID, null, null);
   }
 
   // This selects an item in the currently opened menu.
@@ -258,7 +292,7 @@ var Daemon = class Daemon {
   // Opens a menu configured with Fly-Pie's menu editor, optionally in preview mode. The
   // menu's name must be given as parameter. It will return a positive number on success
   // and a negative on failure. See common/DBusInterface.js for a list of error codes.
-  _openMenu(name, previewMode) {
+  _openMenu(name, previewMode, x, y) {
 
     // Search for the meu with the given name.
     for (let i = 0; i < this._menuConfigs.length; i++) {
@@ -268,7 +302,7 @@ var Daemon = class Daemon {
         // Once we found the desired menu, we can open the menu with the custom-menu
         // method.
         return this._openCustomMenu(
-            this._menuConfigs[i], previewMode, this._menuConfigs[i].id);
+            this._menuConfigs[i], previewMode, this._menuConfigs[i].id, x, y);
       }
     }
 
@@ -280,7 +314,7 @@ var Daemon = class Daemon {
   // be a JSON string or an object containing the menu configuration. This method will
   // return the menu's ID on success or an error code on failure. See
   // common/DBusInterface.js for a list of error codes.
-  _openCustomMenu(config, previewMode, menuID) {
+  _openCustomMenu(config, previewMode, menuID, x, y) {
 
     // First try to parse the menu configuration if it's given as a json string.
     if (typeof config === 'string') {
@@ -313,7 +347,7 @@ var Daemon = class Daemon {
     // Then try to open the menu. This will return the menu's ID on success or an error
     // code on failure.
     try {
-      return this._menu.show(menuID, structure, previewMode);
+      return this._menu.show(menuID, structure, previewMode, x, y);
     } catch (error) {
       utils.debug('Failed to show menu: ' + error);
     }
@@ -368,6 +402,12 @@ var Daemon = class Daemon {
       this._menuConfigs = [];
     }
 
+    // Update touch buttons --------------------------------------------------------------
+
+    this._touchButtons.setMenuConfigs(this._menuConfigs);
+
+    // Update currently bound global shortcuts -------------------------------------------
+
     // First we create a set of all required shortcuts.
     const newShortcuts = new Set();
     for (let i = 0; i < this._menuConfigs.length; i++) {
@@ -391,6 +431,8 @@ var Daemon = class Daemon {
     for (let requiredShortcut of newShortcuts) {
       this._shortcuts.bind(requiredShortcut);
     }
+
+    // Update currently shown menu (if any) ----------------------------------------------
 
     // There is currently a menu open, so we potentially have to update the displayed
     // menu.

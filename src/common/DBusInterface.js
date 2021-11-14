@@ -22,12 +22,24 @@ var DBusInterface = {
             <arg name="name"   type="s" direction="in"/>                                 \
             <arg name="menuID" type="i" direction="out"/>                                \
           </method>                                                                      \
+          <method name="ShowMenuAt">                                                     \
+            <arg name="name"   type="s" direction="in"/>                                 \
+            <arg name="x"      type="i" direction="in"/>                                 \
+            <arg name="y"      type="i" direction="in"/>                                 \
+            <arg name="menuID" type="i" direction="out"/>                                \
+          </method>                                                                      \
           <method name="PreviewMenu">                                                    \
             <arg name="name"   type="s" direction="in"/>                                 \
             <arg name="menuID" type="i" direction="out"/>                                \
           </method>                                                                      \
           <method name="ShowCustomMenu">                                                 \
             <arg name="description" type="s" direction="in"/>                            \
+            <arg name="menuID"      type="i" direction="out"/>                           \
+          </method>                                                                      \
+          <method name="ShowCustomMenuAt">                                               \
+            <arg name="description" type="s" direction="in"/>                            \
+            <arg name="x"           type="i" direction="in"/>                            \
+            <arg name="y"           type="i" direction="in"/>                            \
             <arg name="menuID"      type="i" direction="out"/>                           \
           </method>                                                                      \
           <method name="PreviewCustomMenu">                                              \

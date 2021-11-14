@@ -571,6 +571,35 @@ var MenuEditorPage = class MenuEditorPage {
       }
     });
 
+    // For top-level menus, store whether a touch button should be shown.
+    this._builder.get_object('touch-button').connect('notify::active', (widget) => {
+      if (!this._updatingSidebar) {
+        this._selectedItem.touchButton = widget.active;
+
+        // We reset the touch button's position when this setting is toggled. This means
+        // if a touch button is disabled and then enabled again, it will be shown in the
+        // middle of the screen again. This prevents that touch buttons get lost outside
+        // of the screen area. This way, a user can always get them back.
+        // First, we get the current positions list.
+        const positions =
+            this._settings.get_value('touch-button-positions').deep_unpack();
+
+        // Then we reset the entry for the current menu.
+        const index = this._menuConfigs.indexOf(this._selectedItem);
+        if (positions.length > index && positions[index].length > 0) {
+          positions[index] = [];
+        }
+
+        // Then we save the updated position list.
+        const variant = new GLib.Variant('aah', positions);
+        this._settings.set_value('touch-button-positions', variant);
+
+        // Finally we store the updated menu configuration. This will trigger the
+        // re-creation of all touch buttons.
+        this._saveMenuConfiguration();
+      }
+    });
+
     // For top-level menus, store whether they should be opened in the center of the
     // screen.
     this._builder.get_object('menu-centered').connect('notify::active', (widget) => {
@@ -809,6 +838,7 @@ var MenuEditorPage = class MenuEditorPage {
       if (toplevelSelected) {
         this._menuShortcutLabel.set_accelerator(this._selectedItem.shortcut || '');
         this._builder.get_object('menu-centered').active = this._selectedItem.centered;
+        this._builder.get_object('touch-button').active  = this._selectedItem.touchButton;
       } else {
         this._builder.get_object('item-angle').value = this._selectedItem.angle;
       }

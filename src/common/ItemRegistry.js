@@ -318,11 +318,12 @@ var ItemRegistry = class ItemRegistry {
       config.icon = this.getItemTypes()[config.type].icon;
     }
 
-    // The 'shortcut' and the 'centered' property is only available on top-level items,
-    // the 'angle' property on all other items.
+    // The 'shortcut', 'touchButton', and 'centered' property is only available on
+    // top-level items, the 'angle' property on all other items.
     if (isToplevel) {
-      config.centered = config.centered != undefined ? config.centered : false;
-      config.shortcut = config.shortcut != undefined ? config.shortcut : '';
+      config.centered    = config.centered != undefined ? config.centered : false;
+      config.shortcut    = config.shortcut != undefined ? config.shortcut : '';
+      config.touchButton = config.touchButton != undefined ? config.touchButton : false;
     } else {
       config.angle = config.angle != undefined ? config.angle : -1;
     }

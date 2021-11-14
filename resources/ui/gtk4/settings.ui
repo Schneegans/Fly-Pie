@@ -350,6 +350,11 @@
     <property name="step_increment">1</property>
     <property name="page_increment">50</property>
   </object>
+  <object class="GtkAdjustment" id="touch-buttons-opacity">
+    <property name="upper">1</property>
+    <property name="step_increment">0.01</property>
+    <property name="page_increment">0.1</property>
+  </object>
 
   <object class="GtkSizeGroup">
     <property name="mode">horizontal</property>
@@ -4009,11 +4014,165 @@ will cancel the selection.</property>
                           </object>
                         </child>
 
-                        <!-- Advanced Settings -->
+
+                        <!-- Touch Button Settings -->
 
                         <child>
                           <object class="GtkNotebookPage">
                             <property name="position">6</property>
+
+                            <property name="child">
+                              <object class="GtkGrid">
+                                <property name="margin_start">40</property>
+                                <property name="margin_end">40</property>
+                                <property name="margin_top">30</property>
+                                <property name="margin_bottom">30</property>
+                                <property name="row_spacing">10</property>
+                                <property name="column_spacing">5</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">2</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="halign">start</property>
+                                        <property name="label" translatable="yes">Touch Button Settings</property>
+                                        <style>
+                                          <class name="large-title" />
+                                        </style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="margin_bottom">30</property>
+                                        <property name="halign">start</property>
+                                        <property name="label" translatable="yes">You can show a touch button for each of your menus.</property>
+                                        <style>
+                                          <class name="dim-label" />
+                                        </style>
+                                      </object>
+                                    </child>
+                                    <layout>
+                                      <property name="column">0</property>
+                                      <property name="row">0</property>
+                                      <property name="column-span">2</property>
+                                    </layout>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_end">20</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Inactive Opacity</property>
+                                    <layout>
+                                      <property name="column">0</property>
+                                      <property name="row">4</property>
+                                    </layout>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkScale">
+                                    <property name="draw-value">1</property>
+                                    <property name="hexpand">1</property>
+                                    <property name="adjustment">touch-buttons-opacity</property>
+                                    <property name="restrict_to_fill_level">0</property>
+                                    <property name="fill_level">0</property>
+                                    <property name="round_digits">2</property>
+                                    <property name="digits">2</property>
+                                    <property name="value_pos">left</property>
+                                    <layout>
+                                      <property name="column">1</property>
+                                      <property name="row">4</property>
+                                    </layout>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_end">20</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Show in Overview Mode</property>
+                                    <layout>
+                                      <property name="column">0</property>
+                                      <property name="row">5</property>
+                                    </layout>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkSwitch" id="touch-buttons-show-in-overview-mode">
+                                    <property name="halign">end</property>
+                                    <property name="valign">center</property>
+                                    <layout>
+                                      <property name="column">1</property>
+                                      <property name="row">5</property>
+                                    </layout>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_end">20</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Show in Desktop Mode</property>
+                                    <layout>
+                                      <property name="column">0</property>
+                                      <property name="row">6</property>
+                                    </layout>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkSwitch" id="touch-buttons-show-in-desktop-mode">
+                                    <property name="halign">end</property>
+                                    <property name="valign">center</property>
+                                    <layout>
+                                      <property name="column">1</property>
+                                      <property name="row">6</property>
+                                    </layout>
+                                  </object>
+                                </child>
+
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_end">20</property>
+                                    <property name="halign">start</property>
+                                    <property name="label" translatable="yes">Show above Fullscreen Windows</property>
+                                    <layout>
+                                      <property name="column">0</property>
+                                      <property name="row">7</property>
+                                    </layout>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkSwitch" id="touch-buttons-show-above-fullscreen">
+                                    <property name="halign">end</property>
+                                    <property name="valign">center</property>
+                                    <layout>
+                                      <property name="column">1</property>
+                                      <property name="row">7</property>
+                                    </layout>
+                                  </object>
+                                </child>
+
+                              </object>
+                            </property>
+
+                            <property name="tab">
+                              <object class="GtkImage">
+                                <property name="icon_name">flypie-edit-touch-buttons-symbolic</property>
+                                <property name="tooltip_text" translatable="yes">Touch Button Settings</property>
+                                <property name="icon_size">2</property>
+                                <property name="vexpand">1</property>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+
+                        <!-- Advanced Settings -->
+
+                        <child>
+                          <object class="GtkNotebookPage">
+                            <property name="position">7</property>
 
                             <property name="child">
                               <object class="GtkGrid">
@@ -4898,6 +5057,22 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                                   </object>
                                                 </child>
                                               </object>
+                                            </child>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkBox">
+                                            <property name="margin_top">10</property>
+                                            <property name="spacing">10</property>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="hexpand">1</property>
+                                                <property name="halign">start</property>
+                                                <property name="label" translatable="yes">Show Touch Button</property>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="GtkSwitch" id="touch-button" />
                                             </child>
                                           </object>
                                         </child>
