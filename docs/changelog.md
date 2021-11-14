@@ -11,6 +11,7 @@
 
 #### New Features
 
+* **Touch Buttons** can now be enabled for each configured menu. A touch button is a floating button which can be moved anywhere on your screen and will open the corresponding menu when activated. In fact, you do not need to click the button, you can also start dragging on the button in a specific direction to directly enter the marking mode of the menu.
 * New **Clipboard Menu**: This menu shows recently copied things.
 On selection, the respective item is pasted.
 The menu currently supports text, raster and vector images, and files copied from the file manager.
@@ -19,10 +20,10 @@ When the user presses <kbd>Ctrl</kbd>+<kbd>C</kbd>, the clipboard does not magic
 To store a history of copied things, Fly-Pie has to request the data from the current provider.
 However, it cannot know beforehand, in which format any receiving application would like to have the data.
 So it just makes some assumptions and stores the data in a quite commonly used format and hopes that the receiver will understand the format.
+* Fly-Pie will now attempt to **open windows at the current pointer location** in order to reduce mouse travel. Whenever an action is executed, Fly-Pie checks whether a window is opened within the next second. If this happens, the newly opened window is moved to the pointer.
 * Icons can now be given as [**base64 encoded data URIs**](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs).
 This allows creating menus with completely application defined icons.
 * **Two new D-Bus methods** have been added (`ShowMenuAt` and `ShowCustomMenuAt`) which can be used to open a menu at specific pixel coordinates.
-* Fly-Pie will now attempt to **open windows at the current pointer location** in order to reduce mouse travel. Whenever an action is executed, Fly-Pie checks whether a window is opened within the next second. If this happens, the newly opened window is moved to the pointer.
 
 #### Other Enhancements
 
