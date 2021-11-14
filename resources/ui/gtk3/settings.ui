@@ -3962,8 +3962,7 @@ will cancel the selection.</property>
 
                     <!-- Touch Button Settings -->
 
-
-                    <child name="child">
+                    <child>
                       <object class="GtkGrid">
                         <property name="margin_start">40</property>
                         <property name="margin_end">40</property>
