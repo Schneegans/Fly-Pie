@@ -125,7 +125,7 @@ class Background extends Clutter.Actor {
   // screen and is pushed as modal, grabbing the complete user input. In preview mode the
   // background covers only one half of the monitor. Furthermore, the control buttons are
   // shown.
-  show(previewMode) {
+  open(previewMode) {
 
     this._previewMode = previewMode;
 
@@ -166,7 +166,7 @@ class Background extends Clutter.Actor {
       // Remove any previous clips set in preview mode.
       this.remove_clip();
 
-      // Actually this show() method can be called multiple times to toggle preview mode.
+      // Actually this open() method can be called multiple times to toggle preview mode.
       // We only attempt to grab the input if we do not have it grabbed already.
       if (!this._isModal) {
 
@@ -185,15 +185,20 @@ class Background extends Clutter.Actor {
     // Make the background visible and clickable.
     this.reactive = true;
     this.visible  = true;
-    this.opacity  = 255;
 
     return true;
+  }
+
+  // The open() method above does not really show the background; it's still translucent.
+  // The actual revealing is done by this method.
+  reveal() {
+    this.opacity = 255;
   }
 
   // This hides the background again. A fade-out animation is used for the opacity, but
   // the input is immediately un-grabbed allowing the user to click through the fading
   // background.
-  hide() {
+  close() {
     // Un-grab the input.
     if (this._isModal) {
       Main.popModal(this);

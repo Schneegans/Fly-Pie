@@ -20,6 +20,7 @@ When the user presses <kbd>Ctrl</kbd>+<kbd>C</kbd>, the clipboard does not magic
 To store a history of copied things, Fly-Pie has to request the data from the current provider.
 However, it cannot know beforehand, in which format any receiving application would like to have the data.
 So it just makes some assumptions and stores the data in a quite commonly used format and hopes that the receiver will understand the format.
+* A new advanced setting has been added to **delay the visual appearance** of Fly-Pie menus. This allows selecting items without showing the menu resulting in a less disruptive workflow for expert users.
 * Fly-Pie will now attempt to **open windows at the current pointer location** in order to reduce mouse travel. Whenever an action is executed, Fly-Pie checks whether a window is opened within the next second. If this happens, the newly opened window is moved to the pointer.
 * Icons can now be given as [**base64 encoded data URIs**](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs).
 This allows creating menus with completely application defined icons.
