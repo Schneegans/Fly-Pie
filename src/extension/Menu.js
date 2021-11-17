@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Main                = imports.ui.main;
-const {Clutter, Gdk, Gtk} = imports.gi;
+const Main                      = imports.ui.main;
+const {Clutter, Gdk, Gtk, GLib} = imports.gi;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.src.common.utils;
@@ -55,6 +55,11 @@ var Menu = class Menu {
     // shown.
     this._menuID = null;
 
+    // If a display-timeout is configured, the menu is only shown when the pointer is
+    // stationary for some time. Here we restart the timeout if it is currently pending.
+    // This member stores the timeout ID.
+    this._displayTimeoutID = -1;
+
     // Stores a reference to the MenuItem which is currently dragged around while a
     // gesture is performed.
     this._draggedChild = null;
@@ -85,7 +90,7 @@ var Menu = class Menu {
     this._background.connect('key-press-event', (actor, event) => {
       if (event.get_key_symbol() == Clutter.KEY_Escape && this._menuID != null) {
         this.cancel();
-        this.hide();
+        this.close();
       }
       return Clutter.EVENT_STOP;
     });
@@ -111,8 +116,16 @@ var Menu = class Menu {
     });
 
     // Forward motion events to the SelectionWedges. If the primary mouse button is
-    // pressed, this will also drag the currently active chilthreed around.
+    // pressed, this will also drag the currently active child around.
     this._background.connect('motion-event', (actor, event) => {
+      // If a display-timeout is configured, the menu is only shown when the pointer is
+      // stationary for some time. Here we restart the timeout if it is currently pending.
+      if (this._displayTimeoutID >= 0) {
+        GLib.source_remove(this._displayTimeoutID);
+        this._revealDelayed();
+      }
+
+      // Forward the motion event to the selection wedges.
       this._selectionWedges.onMotionEvent(event);
 
       // If the primary button is pressed or a modifier is held down (for the
@@ -166,7 +179,7 @@ var Menu = class Menu {
     // This is fired when the close button of the preview mode is clicked.
     this._background.connect('close-event', () => {
       this.cancel();
-      this.hide();
+      this.close();
     });
 
     // All interaction with the menu happens through the SelectionWedges. They receive
@@ -387,7 +400,7 @@ var Menu = class Menu {
     // This is usually fired when the right mouse button is pressed.
     this._selectionWedges.connect('cancel-selection-event', () => {
       this.cancel();
-      this.hide();
+      this.close();
     });
 
     this.onSettingsChange();
@@ -395,6 +408,8 @@ var Menu = class Menu {
 
   // This removes our root actor from GNOME Shell.
   destroy() {
+    this.close();
+
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();
   }
@@ -410,7 +425,7 @@ var Menu = class Menu {
   // This shows the menu, or updates the menu if it is already visible. If the pixel
   // positions x and y are given, the menu will be shown at this position. Returns an
   // error code if something went wrong. See DBusInerface.js for all possible error codes.
-  show(menuID, structure, previewMode, x, y) {
+  open(menuID, structure, previewMode, x, y) {
 
     // The menu is already active. Try to update the existing menu according to the new
     // structure and if that is successful, emit an onCancel signal for the current menu.
@@ -426,7 +441,7 @@ var Menu = class Menu {
       this._menuID = menuID;
 
       // Update the preview-mode state of the background.
-      this._background.show(previewMode);
+      this._background.open(previewMode);
 
       return this._menuID;
     }
@@ -444,7 +459,7 @@ var Menu = class Menu {
     }
 
     // Show the background actor.
-    this._background.show(previewMode);
+    this._background.open(previewMode);
 
     // Everything seems alright, start opening the menu!
     this._menuID = menuID;
@@ -535,6 +550,15 @@ var Menu = class Menu {
       }
     }
 
+    // If a display-timeout is configured and we are not in preview mode, the menu is only
+    // shown when the pointer is stationary for some time. Here we restart the timeout if
+    // it is currently pending.
+    if (previewMode) {
+      this._reveal();
+    } else {
+      this._revealDelayed();
+    }
+
     return this._menuID;
   }
 
@@ -609,16 +633,22 @@ var Menu = class Menu {
   }
 
   // Hides the menu and the background actor.
-  hide() {
+  close() {
 
     // The menu is not active; nothing to be done.
     if (this._menuID == null) {
       return;
     }
 
+    // Cancel the timeout.
+    if (this._displayTimeoutID >= 0) {
+      GLib.source_remove(this._displayTimeoutID);
+      this._displayTimeoutID = -1;
+    }
+
     // Fade out the background actor. Once this transition is completed, the _root item
     // will be destroyed by the background's "transitions-completed" signal handler.
-    this._background.hide();
+    this._background.close();
 
     // Rest menu ID. With this set to null, we can accept new menu requests.
     this._menuID = null;
@@ -778,6 +808,9 @@ var Menu = class Menu {
   // items which need redrawing. This could definitely be optimized.
   onSettingsChange() {
 
+    // Cache the display delay value.
+    this._displayTimeout = this._settings.get_double('display-timeout');
+
     // Notify the selection wedges on the change.
     this._selectionWedges.onSettingsChange(this._settings);
 
@@ -790,6 +823,26 @@ var Menu = class Menu {
   }
 
   // ----------------------------------------------------------------------- private stuff
+
+  // The open() method does not make the menu visible. This is done separately with this
+  // method. This allows for the mark-ahead mode in which the user can use the menu
+  // blindly.
+  _reveal() {
+    this._background.reveal();
+  }
+
+  // This calls the _reveal() method after this._displayTimeout milliseconds.
+  _revealDelayed() {
+    if (this._displayTimeout == 0) {
+      this._reveal();
+    } else {
+      this._displayTimeoutID =
+          GLib.timeout_add(GLib.PRIORITY_DEFAULT, this._displayTimeout, () => {
+            this._reveal();
+            this._displayTimeoutID = -1;
+          });
+    }
+  }
 
   // This assigns IDs and angles to each and every item. It also ensures that the root
   // item has a name and an icon set.
@@ -1057,12 +1110,12 @@ var Menu = class Menu {
       this._background.set_easing_delay(
           this._settings.get_double('easing-duration') * 1000);
 
-      // hide() will reset our menu ID. However, we need to pass it to the onSelect
-      // callback so we create a copy here. hide() has to be called before
+      // close() will reset our menu ID. However, we need to pass it to the onSelect
+      // callback so we create a copy here. close() has to be called before
       // _emitSelectSignal(), else any resulting action (like simulated key presses) may
       // be blocked by our input grab.
       const menuID = this._menuID;
-      this.hide();
+      this.close();
       this._background.set_easing_delay(0);
 
       // If the action has an unhover callback, we call it before. This is to ensure

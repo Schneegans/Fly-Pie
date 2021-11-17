@@ -347,7 +347,7 @@ var Daemon = class Daemon {
     // Then try to open the menu. This will return the menu's ID on success or an error
     // code on failure.
     try {
-      return this._menu.show(menuID, structure, previewMode, x, y);
+      return this._menu.open(menuID, structure, previewMode, x, y);
     } catch (error) {
       utils.debug('Failed to show menu: ' + error);
     }
@@ -458,7 +458,7 @@ var Daemon = class Daemon {
 
       // Something went wrong in updating the preview. Let's hide it.
       this._onCancel(this._menu.getID());
-      this._menu.hide();
+      this._menu.close();
     }
   }
 
