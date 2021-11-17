@@ -511,6 +511,13 @@
 
     <!-- Behavior Settings -->
 
+    <key name="display-timeout" type="d">
+      <default>0</default>
+      <summary>Display Timeout</summary>
+      <description>Menus will be shown after this many milliseconds.
+                   Use this to quickly select items without showing the menu.</description>
+    </key>
+
     <key name="gesture-selection-timeout" type="d">
       <default>100</default>
       <summary>Gesture Selection Timeout</summary>

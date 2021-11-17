@@ -182,6 +182,7 @@ var SettingsPage = class SettingsPage {
     this._bindSwitch('touch-buttons-show-above-fullscreen');
 
     // Advanced Settings
+    this._bindSlider('display-timeout');
     this._bindSlider('gesture-selection-timeout');
     this._bindSlider('gesture-jitter-threshold');
     this._bindSlider('gesture-min-stroke-length');
