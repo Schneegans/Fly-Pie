@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-14 20:37+0100\n"
-"PO-Revision-Date: 2021-10-10 04:04+0000\n"
-"Last-Translator: Frank.wu <me@wuzhiping.top>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/fly-"
-"pie/core/zh_Hans/>\n"
+"PO-Revision-Date: 2021-11-17 19:45+0000\n"
+"Last-Translator: jingxuan@nfschina.com <jingxuan@nfschina.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"fly-pie/core/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.9.1-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
-msgstr ""
+msgstr "激活快捷方式"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:50
 msgid "Simulates a key combination."
-msgstr ""
+msgstr "模拟一个密钥组合."
 
 #: src/common/actions/Shortcut.js:54
 msgid ""
@@ -39,21 +39,21 @@ msgstr ""
 #: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5047
 #: resources/ui/gtk3/settings.ui:5039
 msgid "Shortcut"
-msgstr ""
+msgstr "快捷方式"
 
 #: src/common/actions/Shortcut.js:78
 msgid "This shortcut will be simulated."
-msgstr ""
+msgstr "这条快捷方式将会被模拟."
 
 #: src/common/actions/File.js:34
 msgid "Open File"
-msgstr ""
+msgstr "打开文件"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:41
 msgid "Opens a file with the default application."
-msgstr ""
+msgstr "以默认应用打开文件."
 
 #: src/common/actions/File.js:45
 msgid ""
@@ -63,7 +63,7 @@ msgstr ""
 
 #: src/common/actions/File.js:69
 msgid "File"
-msgstr ""
+msgstr "文件"
 
 #: src/common/actions/File.js:69 src/common/actions/Uri.js:68
 msgid "It will be opened with the default app."
