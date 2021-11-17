@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-14 20:37+0100\n"
-"PO-Revision-Date: 2021-10-22 20:42+0000\n"
-"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
+"PO-Revision-Date: 2021-11-17 19:45+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
 "core/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.9.1-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -35,6 +35,9 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
+"<b>Aktiver snarvei</b>-handlingen simulerer et tastaturtrykk når det er "
+"aktivert. For eksempel kan dette brukes til å bytte virtuelle skrivebord, "
+"kontrollere multimediaavspilling, eller for å angre/gjenta operasjoner."
 
 #: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5047
 #: resources/ui/gtk3/settings.ui:5039
@@ -60,6 +63,8 @@ msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
+"<b>Åpne fil</b>-handlingen åpner angitt filen angitt ovenfor med systemets "
+"forvalgte program."
 
 #: src/common/actions/File.js:69
 msgid "File"
@@ -85,6 +90,8 @@ msgid ""
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
 msgstr ""
+"<b>Kjør program</b>-handlingen kjører enhver gitt kommando. Dette brukes "
+"primært til å åpne programmer, men det kan brukes til mange andre ting også."
 
 #: src/common/actions/Command.js:69
 msgid "Command"
@@ -92,7 +99,7 @@ msgstr "Kommando"
 
 #: src/common/actions/Command.js:69
 msgid "Use the button to list installed apps."
-msgstr ""
+msgstr "Bruk knappen til å liste opp installerte programmer."
 
 #: src/common/actions/Uri.js:33
 msgid "Open URI"
@@ -324,6 +331,8 @@ msgid ""
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
 msgstr ""
+"<b>Nylige filer</b>-menyen viser en liste over nylig brukte filer. "
+"Formålstjenlig bør du begrense antall filer til rundt 12."
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
@@ -336,10 +345,13 @@ msgid "Shows connected devices."
 msgstr "Vis tilkoblede enheter."
 
 #: src/common/menus/Devices.js:44
+#, fuzzy
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
 msgstr ""
+"<b>Enheter</b>-menyen viser et element for hver montert volum, som for "
+"eksempel USB-minnepinner."
 
 #: src/common/menus/MainMenu.js:33
 msgid "Main Menu"
@@ -357,6 +369,9 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather set up your own menus!"
 msgstr ""
+"<b>Hovedmenyen</b> viser alle installerte programmer. Vanligvis er dette "
+"uoversiktlig, siden mange deler inneholder for mange elementer for effektiv "
+"bruk. Du bør heller sette opp egne menyer."
 
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:47 src/extension/DefaultMenu.js:111
@@ -376,6 +391,9 @@ msgid ""
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
+"<b>Kjørende programmer</b>-menyen viser alle programmer som kjører. Dette "
+"ligner Alt+Tab-vindusvelgeren. Siden oppføringer endrer posisjon ofte, er "
+"dette vanligvis ikke veldig effektivt."
 
 #: src/common/menus/RunningApps.js:97
 msgid ""
@@ -451,13 +469,13 @@ msgstr ""
 #. copied a vector image.
 #: src/common/menus/Clipboard.js:165
 msgid "Vector Image"
-msgstr ""
+msgstr "Vektor-bilde"
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a raster image.
 #: src/common/menus/Clipboard.js:177
 msgid "Raster Image"
-msgstr ""
+msgstr "Raster-bilde"
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
@@ -813,7 +831,7 @@ msgstr "Alle oppnåelser vil gå tapt!"
 
 #: src/prefs/MenuEditor.js:417
 msgid "No menus configured"
-msgstr ""
+msgstr "Ingen menyer er satt opp"
 
 #: src/prefs/MenuEditor.js:420
 msgid "Create a new menu with the button in the top right corner."
@@ -821,7 +839,7 @@ msgstr ""
 
 #: src/prefs/MenuEditor.js:450
 msgid "Add a new item"
-msgstr ""
+msgstr "Legg til nytt element"
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag an action in the menu editor to the menu
@@ -1010,27 +1028,27 @@ msgstr "Eksempelmeny"
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:64
 msgid "Cold "
-msgstr ""
+msgstr "Kald "
 
 #: src/prefs/ExampleMenu.js:64
 msgid "Hot "
-msgstr ""
+msgstr "Varm "
 
 #: src/prefs/ExampleMenu.js:64
 msgid "Wet "
-msgstr ""
+msgstr "Våt "
 
 #: src/prefs/ExampleMenu.js:64
 msgid "Deadly "
-msgstr ""
+msgstr "Dødlig "
 
 #: src/prefs/ExampleMenu.js:64
 msgid "Smelly "
-msgstr ""
+msgstr "Stinkende "
 
 #: src/prefs/ExampleMenu.js:64
 msgid "Vegan "
-msgstr ""
+msgstr "Vegansk "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1038,23 +1056,23 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:76
 msgid "Chocolate "
-msgstr ""
+msgstr "Sjokolade-"
 
 #: src/prefs/ExampleMenu.js:76
 msgid "Cherry "
-msgstr ""
+msgstr "Kirsebær-"
 
 #: src/prefs/ExampleMenu.js:76
 msgid "Garlic "
-msgstr ""
+msgstr "Hvitløk-"
 
 #: src/prefs/ExampleMenu.js:76
 msgid "Apple "
-msgstr ""
+msgstr "Eple-"
 
 #: src/prefs/ExampleMenu.js:76
 msgid "Pepper "
-msgstr ""
+msgstr "Paprika-"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1062,19 +1080,19 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:88
 msgid "Pie"
-msgstr ""
+msgstr "pai"
 
 #: src/prefs/ExampleMenu.js:88
 msgid "Cake"
-msgstr ""
+msgstr "kake"
 
 #: src/prefs/ExampleMenu.js:88
 msgid "Muffin"
-msgstr ""
+msgstr "muffin"
 
 #: src/prefs/ExampleMenu.js:88
 msgid "Doughnut"
-msgstr ""
+msgstr "smultring"
 
 #: src/prefs/ExampleMenu.js:88
 msgid "Cookie"
@@ -1124,7 +1142,7 @@ msgstr "Lukk vindu"
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
 #: src/extension/DefaultMenu.js:135
 msgid "Next Workspace"
-msgstr ""
+msgstr "Neste arbeidsområde"
 
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
 #: src/extension/DefaultMenu.js:144
@@ -1134,32 +1152,32 @@ msgstr "Forrige arbeidsområde"
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:155
 msgid "Switch Workspace"
-msgstr ""
+msgstr "Bytt arbeidsområde"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:160
 msgid "Go Up"
-msgstr ""
+msgstr "Gå oppover"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:168
 msgid "Go Down"
-msgstr ""
+msgstr "Gå nedover"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:181
 msgid "Move Window"
-msgstr ""
+msgstr "Flytt vindu"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:186
 msgid "Move Window Up"
-msgstr ""
+msgstr "Flytt vindu oppover"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:194
 msgid "Move Window Down"
-msgstr ""
+msgstr "Flytt vindu nedover"
 
 #: src/extension/Background.js:101
 msgid "Close"
@@ -2067,7 +2085,7 @@ msgstr "Dette åpner menyen."
 
 #: resources/ui/gtk4/settings.ui:5071 resources/ui/gtk3/settings.ui:5063
 msgid "Show Touch Button"
-msgstr ""
+msgstr "Vis trykk-knapp"
 
 #: resources/ui/gtk4/settings.ui:5087 resources/ui/gtk3/settings.ui:5079
 msgid "Open in Screen Center"
