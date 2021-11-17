@@ -44,6 +44,8 @@ This allows creating menus with completely application defined icons.
 
 ## [Fly-Pie 8](https://github.com/schneegans/fly-pie/releases/tag/v8)
 
+<a href="https://youtu.be/j9t7hfkE_5w"><img align="right" width="350px" src ="pics/player5.jpg" /></a>
+
 **Release Date:** 2021-10-26
 
 #### New Features
@@ -81,6 +83,8 @@ This allows creating menus with completely application defined icons.
 
 ## [Fly-Pie 7](https://github.com/schneegans/fly-pie/releases/tag/v7)
 
+<a href="https://youtu.be/sRT3O9-H5Xs"><img align="right" width="350px" src ="pics/player4.jpg" /></a>
+
 **Release Date:** 2021-09-25
 
 #### New Features
@@ -108,6 +112,8 @@ This allows creating menus with completely application defined icons.
 
 ## [Fly-Pie 6](https://github.com/schneegans/fly-pie/releases/tag/v6)
 
+<a href="https://youtu.be/Lj-uefp36Jk"><img align="right"  width="350px" src ="pics/player3.jpg" /></a>
+
 **Release Date:** 2021-05-09
 
 #### New Features
@@ -134,6 +140,9 @@ This allows creating menus with completely application defined icons.
 
 
 ## [Fly-Pie 5](https://github.com/schneegans/fly-pie/releases/tag/v5)
+
+<a href="https://youtu.be/U22VxoT-tNU"><img align="right" width="350px" src ="pics/player1.jpg" /></a>
+
 
 **Release Date:** 2021-04-12
 

@@ -19,7 +19,7 @@ It features a continuous learning curve which lets you gradually lift-off from a
 (You got it? Like pilot, but with a :cake:).
 Once you opened a marking menu, you can seamlessly transition between three alternative selection modes:
 
-<a href="https://youtu.be/U22VxoT-tNU"><img align="right" width="350px" src ="docs/pics/player.jpg" /></a>
+<a href="https://youtu.be/j9t7hfkE_5w"><img align="right" width="350px" src ="docs/pics/player5.jpg" /></a>
 
 * **Point-and-Click:** Select items by clicking on them or anywhere in the corresponding wedges.
 * **Marking-Mode:** Select items by drawing gestures. To do this, click anywhere and drag your mouse. Pausing or making a turn selects the currently dragged item.
