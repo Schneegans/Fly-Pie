@@ -343,11 +343,10 @@ class SelectionWedges extends Clutter.Actor {
   // This is called by the Menu when the user clicks somewhere on the background. It fires
   // either 'parent-selected-event' or 'child-selected-event' if the corresponding wedge
   // is hovered or 'cancel-selection-event' if the secondary mouse button is pressed.
-  onButtonReleaseEvent(event) {
-    if (event.get_button() == 1) {
+  onButtonReleaseEvent(button) {
+    if (button == 1) {
       this._emitSelection();
-
-    } else if (event.get_button() == 3) {
+    } else if (button == 3) {
       this.emit('cancel-selection-event');
     }
   }
