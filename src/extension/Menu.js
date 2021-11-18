@@ -126,7 +126,7 @@ var Menu = class Menu {
       }
 
       // Forward the motion event to the selection wedges.
-      this._selectionWedges.onMotionEvent(event);
+      this._selectionWedges.onMotionEvent(event.get_coords(), event.get_state());
 
       // If the primary button is pressed or a modifier is held down (for the
       // "Turbo-Mode"), but we do not have a dragged child yet, we mark the currently

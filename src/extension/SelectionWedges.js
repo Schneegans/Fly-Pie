@@ -367,9 +367,8 @@ class SelectionWedges extends Clutter.Actor {
   // hovered wedge changes.
   // It also tracks the motion of the mouse while the left mouse button is pressed and
   // emits selection events when a stroke corner or a pause in the motion is detected.
-  onMotionEvent(event) {
-    const [screenX, screenY] = event.get_coords();
-    const [ok, x, y]         = this.transform_stage_point(screenX, screenY);
+  onMotionEvent(coords, state) {
+    const [ok, x, y] = this.transform_stage_point(coords[0], coords[1]);
 
     const distance             = Math.sqrt(x * x + y * y);
     let hoveredWedge           = -1;
@@ -440,16 +439,13 @@ class SelectionWedges extends Clutter.Actor {
     // considered a corner. There are some minimum lengths for both vectors - if they are
     // not long enough, nothing is done. If E->M is long enough, but there is no corner, E
     // is set to M and we wait for the next motion event.
-    if (this.isGestureModifier(event.get_state())) {
-      // Store the current mouse position.
-      const mouse = {x: screenX, y: screenY};
-
+    if (this.isGestureModifier(state)) {
       if (this._stroke.start == null) {
 
         // It's the first event of this gesture, so we store the current mouse position as
         // start and end. There is nothing more to be done.
-        this._stroke.start = {x: mouse.x, y: mouse.y};
-        this._stroke.end   = {x: mouse.x, y: mouse.y};
+        this._stroke.start = {x: coords[0], y: coords[1]};
+        this._stroke.end   = {x: coords[0], y: coords[1]};
 
       } else {
 
@@ -466,8 +462,8 @@ class SelectionWedges extends Clutter.Actor {
 
           // Calculate the vector E->M in the diagram above.
           const tipDir = {
-            x: mouse.x - this._stroke.end.x,
-            y: mouse.y - this._stroke.end.y
+            x: coords[0] - this._stroke.end.x,
+            y: coords[1] - this._stroke.end.y
           };
 
           const tipLength = Math.sqrt(tipDir.x * tipDir.x + tipDir.y * tipDir.y);
@@ -483,7 +479,7 @@ class SelectionWedges extends Clutter.Actor {
 
             // Update the point M in the diagram above to be the new E for the next motion
             // event.
-            this._stroke.end = {x: mouse.x, y: mouse.y};
+            this._stroke.end = {x: coords[0], y: coords[1]};
 
             // Now compute the angle between S->E and E->M.
             const angle = Math.acos(
@@ -511,7 +507,7 @@ class SelectionWedges extends Clutter.Actor {
 
           // The vector S->E is not long enough to be a gesture, so we only update the end
           // point.
-          this._stroke.end = {x: mouse.x, y: mouse.y};
+          this._stroke.end = {x: coords[0], y: coords[1]};
         }
       }
     } else {
