@@ -28,6 +28,7 @@ This allows creating menus with completely application defined icons.
 
 #### Other Enhancements
 
+* Gesture detection has been improved. Really fast pointer movements should now be detected more reliably.
 * It is now possible to copy items in the menu editor under GTK3 by holding the <kbd>Ctrl</kbd> key while dragging.
 
 #### Bug Fixes

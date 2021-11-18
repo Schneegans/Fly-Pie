@@ -548,6 +548,11 @@ var Menu = class Menu {
         this._input.warpPointer(
             clampedX + this._background.x, clampedY + this._background.y);
       }
+
+      // Report an initial motion event at the menu's center. This ensures that gestures
+      // are detected properly even if the initial pointer movement is really fast.
+      const mods = global.get_pointer()[2];
+      this._selectionWedges.onMotionEvent([clampedX, clampedY], mods);
     }
 
     // If a display-timeout is configured and we are not in preview mode, the menu is only
