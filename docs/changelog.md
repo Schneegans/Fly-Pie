@@ -29,6 +29,7 @@ This allows creating menus with completely application defined icons.
 #### Other Enhancements
 
 * **Better touch support**! Touch screens are now well-supported on Wayland and X11.
+* **Support for tablets**! Pen input is now well-supported on Wayland and X11. On Wayland, multi-cursor setups should be working as well.
 * **Gesture detection has been improved**. Really fast pointer movements should now be detected more reliably.
 * It is now possible to **copy items in the menu editor** under GTK3 by holding the <kbd>Ctrl</kbd> key while dragging.
 
