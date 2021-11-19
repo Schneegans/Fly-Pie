@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-14 20:37+0100\n"
-"PO-Revision-Date: 2021-09-27 23:00+0000\n"
-"Last-Translator: Daniel' Ishmaev <dan.samara@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/fly-pie/core/ru/"
-">\n"
+"PO-Revision-Date: 2021-11-19 20:52+0000\n"
+"Last-Translator: Artem Kulikov <artem.job.kulikov@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/fly-pie/core/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -1753,7 +1753,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:3671 resources/ui/gtk3/settings.ui:3627
 msgid "Inner Radius"
-msgstr ""
+msgstr "Внутренний радиус"
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
 #: resources/ui/gtk4/settings.ui:3682 resources/ui/gtk3/settings.ui:3638
@@ -1761,207 +1761,228 @@ msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr ""
+"Клик по внутреннему радиусу\n"
+"отменит выбор."
 
 #: resources/ui/gtk4/settings.ui:3703 resources/ui/gtk3/settings.ui:3659
+#, fuzzy
 msgid "Wedge Separator Color"
-msgstr ""
+msgstr "Цвет разделителя клина"
 
 #: resources/ui/gtk4/settings.ui:3715 resources/ui/gtk3/settings.ui:3671
+#, fuzzy
 msgid "Wedge Separator Thickness"
-msgstr ""
+msgstr "Толщина разделителя клина"
 
 #: resources/ui/gtk4/settings.ui:3753 resources/ui/gtk3/settings.ui:3709
+#, fuzzy
 msgid "Wedge Color"
-msgstr ""
+msgstr "Цвет клина"
 
 #: resources/ui/gtk4/settings.ui:3765 resources/ui/gtk3/settings.ui:3721
+#, fuzzy
 msgid "Wedge Size"
-msgstr ""
+msgstr "Размер клина"
 
 #. When the mouse pointer is NOT over the item
 #: resources/ui/gtk4/settings.ui:3815 resources/ui/gtk3/settings.ui:3771
 msgid "Inactive State"
-msgstr ""
+msgstr "Неактивное состояние"
 
 #: resources/ui/gtk4/settings.ui:3906 resources/ui/gtk4/settings.ui:4009
 #: resources/ui/gtk3/settings.ui:3854 resources/ui/gtk3/settings.ui:3956
 msgid "Trace Appearance"
-msgstr ""
+msgstr "Внешний вид следа"
 
 #: resources/ui/gtk4/settings.ui:3916 resources/ui/gtk3/settings.ui:3864
 msgid "The trace is the connecting line between selected menu items."
-msgstr ""
+msgstr "След - это линия, соединяющая выбранные пункты меню."
 
 #: resources/ui/gtk4/settings.ui:3933 resources/ui/gtk3/settings.ui:3881
 msgid "Thickness"
-msgstr ""
+msgstr "Толщина"
 
 #: resources/ui/gtk4/settings.ui:3944 resources/ui/gtk3/settings.ui:3892
 msgid "Color"
-msgstr ""
+msgstr "Цвет"
 
 #: resources/ui/gtk4/settings.ui:3996 resources/ui/gtk3/settings.ui:3944
 msgid "Minimum Segment Length"
-msgstr ""
+msgstr "Минимальная длина сегмента"
 
 #: resources/ui/gtk4/settings.ui:4039 resources/ui/gtk4/settings.ui:4163
 #: resources/ui/gtk3/settings.ui:3980 resources/ui/gtk3/settings.ui:4103
 msgid "Touch Button Settings"
-msgstr ""
+msgstr "Настройки нажатия кнопок"
 
 #: resources/ui/gtk4/settings.ui:4049 resources/ui/gtk3/settings.ui:3990
 msgid "You can show a touch button for each of your menus."
-msgstr ""
+msgstr "Вы можете показать нажатия кнопок для каждого из ваших меню."
 
 #: resources/ui/gtk4/settings.ui:4067 resources/ui/gtk3/settings.ui:4008
+#, fuzzy
 msgid "Inactive Opacity"
-msgstr ""
+msgstr "Неактивная непрозрачность"
 
 #: resources/ui/gtk4/settings.ui:4095 resources/ui/gtk3/settings.ui:4036
 msgid "Show in Overview Mode"
-msgstr ""
+msgstr "Показывать в режиме обзора"
 
 #: resources/ui/gtk4/settings.ui:4117 resources/ui/gtk3/settings.ui:4058
 msgid "Show in Desktop Mode"
-msgstr ""
+msgstr "Показывать в режиме рабочего стола"
 
 #: resources/ui/gtk4/settings.ui:4139 resources/ui/gtk3/settings.ui:4080
 msgid "Show above Fullscreen Windows"
-msgstr ""
+msgstr "Показать выше полноэкранных окон"
 
 #: resources/ui/gtk4/settings.ui:4192 resources/ui/gtk4/settings.ui:4542
 #: resources/ui/gtk3/settings.ui:4126 resources/ui/gtk3/settings.ui:4475
 msgid "Advanced Settings"
-msgstr ""
+msgstr "Расширенные настройки"
 
 #: resources/ui/gtk4/settings.ui:4202 resources/ui/gtk3/settings.ui:4136
 msgid "These settings are independent of the presets."
-msgstr ""
+msgstr "Эти настройки не зависят от пресета."
 
 #: resources/ui/gtk4/settings.ui:4221 resources/ui/gtk3/settings.ui:4155
+#, fuzzy
 msgid "Minimum Stroke Angle"
-msgstr ""
+msgstr "Минимальный угол строки"
 
 #: resources/ui/gtk4/settings.ui:4231 resources/ui/gtk3/settings.ui:4165
 msgid "Smaller turns will not lead to selections."
-msgstr ""
+msgstr "Меньшие повороты не ведут к выбору."
 
 #: resources/ui/gtk4/settings.ui:4268 resources/ui/gtk3/settings.ui:4202
+#, fuzzy
 msgid "Minimum Stroke Length"
-msgstr ""
+msgstr "Минимальная длина строки"
 
 #: resources/ui/gtk4/settings.ui:4278 resources/ui/gtk3/settings.ui:4212
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
+"Более короткие жесты не приводят к выбору.\n"
+"Это умножается на значение глобальной шкалы."
 
 #: resources/ui/gtk4/settings.ui:4317 resources/ui/gtk3/settings.ui:4251
 msgid "Jitter Threshold"
-msgstr ""
+msgstr "Порог дрожания"
 
 #: resources/ui/gtk4/settings.ui:4327 resources/ui/gtk3/settings.ui:4261
+#, fuzzy
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
+"Меньшие движения не рассматриваются.\n"
+"Это умножается на значение глобальной шкалы."
 
 #: resources/ui/gtk4/settings.ui:4365 resources/ui/gtk3/settings.ui:4299
 msgid "Selection Timeout"
-msgstr ""
+msgstr "Тайм-аут выделения"
 
 #: resources/ui/gtk4/settings.ui:4375 resources/ui/gtk3/settings.ui:4309
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
 msgstr ""
+"Если указатель неподвижен в течение этого количества миллисекунд,\n"
+"текущий элемент будет выбран."
 
 #: resources/ui/gtk4/settings.ui:4414 resources/ui/gtk3/settings.ui:4348
 msgid "Experimental Hover Mode"
-msgstr ""
+msgstr "Экспериментальный режим наведения"
 
 #: resources/ui/gtk4/settings.ui:4424 resources/ui/gtk3/settings.ui:4358
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
 msgstr ""
+"Когда это включено, вам больше не нужно нажимать кнопку мыши.\n"
+"или удерживайте клавишу-модификатор во время выбора."
 
 #: resources/ui/gtk4/settings.ui:4447 resources/ui/gtk3/settings.ui:4381
+#, fuzzy
 msgid "Show Screencast Mouse"
-msgstr ""
+msgstr "Показывать указатель при записи"
 
 #: resources/ui/gtk4/settings.ui:4457 resources/ui/gtk3/settings.ui:4391
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
 msgstr ""
+"Показывает большой дополнительный указатель мыши, показывающий щелчки мыши.\n"
+"Это можно использовать, если вы хотите снять видео с Fly-Pie."
 
 #: resources/ui/gtk4/settings.ui:4490 resources/ui/gtk3/settings.ui:4424
 msgid "Achievement Notifications"
-msgstr ""
+msgstr "Уведомления о достижениях"
 
 #: resources/ui/gtk4/settings.ui:4500 resources/ui/gtk3/settings.ui:4434
 msgid "Show a notification whenever you complete an achievement."
-msgstr ""
+msgstr "Показывать уведомление всякий раз, когда вы выполняете достижение."
 
 #: resources/ui/gtk4/settings.ui:4562 resources/ui/gtk3/settings.ui:4507
 msgid "Load Preset"
-msgstr ""
+msgstr "Загрузить пресет"
 
 #: resources/ui/gtk4/settings.ui:4574 resources/ui/gtk3/settings.ui:4527
 msgid "Load settings from a JSON file."
-msgstr ""
+msgstr "Загрузить настройки из JSON файла."
 
 #: resources/ui/gtk4/settings.ui:4581 resources/ui/gtk3/settings.ui:4540
 msgid "Save the settings to a JSON file."
-msgstr ""
+msgstr "Сохранить настройки в JSON файл."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: resources/ui/gtk4/settings.ui:4604 resources/ui/gtk4/settings.ui:4877
 #: resources/ui/gtk3/settings.ui:4569 resources/ui/gtk3/settings.ui:4862
 msgid "Live Preview"
-msgstr ""
+msgstr "Предпросмотр"
 
 #. Caption of the menu editor page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:4633 resources/ui/gtk3/settings.ui:5129
 msgid "Menu Editor"
-msgstr ""
+msgstr "Редактор меню"
 
 #: resources/ui/gtk4/settings.ui:4662 resources/ui/gtk3/settings.ui:4628
 msgid "Add a new menu item."
-msgstr ""
+msgstr "Добавить новый элемент меню."
 
 #: resources/ui/gtk4/settings.ui:4741 resources/ui/gtk3/settings.ui:4715
 msgid "Stash"
-msgstr ""
+msgstr "Тайник"
 
 #: resources/ui/gtk4/settings.ui:4757 resources/ui/gtk3/settings.ui:4732
 msgid "Store items here and re-use them later."
-msgstr ""
+msgstr "Хранить элементы здесь и переиспользовать позже."
 
 #: resources/ui/gtk4/settings.ui:4801 resources/ui/gtk3/settings.ui:4776
 msgid "Trash"
-msgstr ""
+msgstr "Корзина"
 
 #: resources/ui/gtk4/settings.ui:4817 resources/ui/gtk3/settings.ui:4792
 msgid "Drop items here."
-msgstr ""
+msgstr "Удалить элемент отсюда."
 
 #: resources/ui/gtk4/settings.ui:4847 resources/ui/gtk3/settings.ui:4822
 msgid "Restore menus from a JSON file. This will override your current menus!"
-msgstr ""
+msgstr "Восстановить меню из JSON файла. Это заменить текущие меню!"
 
 #: resources/ui/gtk4/settings.ui:4853 resources/ui/gtk3/settings.ui:4834
 msgid "Export all menus to a JSON file."
-msgstr ""
+msgstr "Экспорт всех меню в JSON файл."
 
 #: resources/ui/gtk4/settings.ui:4930 resources/ui/gtk3/settings.ui:4916
 msgid "Name"
-msgstr ""
+msgstr "Имя"
 
 #: resources/ui/gtk4/settings.ui:4948 resources/ui/gtk3/settings.ui:4934
 msgid "Icon"
-msgstr ""
+msgstr "Иконка"
 
 #: resources/ui/gtk4/settings.ui:4966 resources/ui/gtk3/settings.ui:4952
 msgid ""
@@ -1970,10 +1991,14 @@ msgid ""
 "#rgb\" to the icon in order to draw a circle with the given RGB color behind "
 "the icon."
 msgstr ""
+"Иконка может быть либо путем к файлу изображения, либо именем значка из "
+"текущей темы иконок, URI данных в кодировке base64, текстом или смайликом. "
+"Вы можете добавить к значку \"-#rgb\", чтобы нарисовать за значком круг с "
+"заданным цветом RGB."
 
 #: resources/ui/gtk4/settings.ui:4999 resources/ui/gtk3/settings.ui:4991
 msgid "Fixed Angle"
-msgstr ""
+msgstr "Фиксированный угол"
 
 #: resources/ui/gtk4/settings.ui:5015 resources/ui/gtk3/settings.ui:5007
 msgid ""
@@ -1986,34 +2011,43 @@ msgid ""
 "be removed if an item is dragged to another position in the menu. Use -1 to "
 "disable this feature."
 msgstr ""
+"Фиксированные углы можно использовать для обеспечения того, чтобы элемент "
+"оставался в том же положении, даже если другие элементы добавляются или "
+"удаляются. Таким образом, вы можете редактировать меню, даже если ваши мышцы "
+"уже усвоили направление элемента. Однако есть ограничение на фиксированные "
+"углы. Внутри меню фиксированные углы должны монотонно увеличиваться, то есть "
+"каждый фиксированный угол должен быть больше любого предыдущего "
+"фиксированного угла. Чтобы предотвратить странное поведение, фиксированные "
+"углы будут удалены, если элемент перетащить в другое место в меню. "
+"Используйте -1, чтобы отключить эту функцию."
 
 #: resources/ui/gtk4/settings.ui:5053 resources/ui/gtk3/settings.ui:5045
 msgid "This will open the menu."
-msgstr ""
+msgstr "Это откроет меню."
 
 #: resources/ui/gtk4/settings.ui:5071 resources/ui/gtk3/settings.ui:5063
 msgid "Show Touch Button"
-msgstr ""
+msgstr "Показать нажатие кнопки"
 
 #: resources/ui/gtk4/settings.ui:5087 resources/ui/gtk3/settings.ui:5079
 msgid "Open in Screen Center"
-msgstr ""
+msgstr "Открыть по центру"
 
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:5148 resources/ui/gtk3/settings.ui:5372
 msgid "Achievements"
-msgstr ""
+msgstr "Достижения"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/gtk4/settings.ui:5342 resources/ui/gtk3/settings.ui:5309
 msgid "In Progress"
-msgstr ""
+msgstr "В процессе"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/gtk4/settings.ui:5356 resources/ui/gtk3/settings.ui:5324
 msgid "Completed"
-msgstr ""
+msgstr "Завершено"
 
 #: resources/ui/gtk4/settings.ui:5384 resources/ui/gtk3/settings.ui:5352
 msgid "Reset all achievements."
-msgstr ""
+msgstr "Сбросить все достижения."
