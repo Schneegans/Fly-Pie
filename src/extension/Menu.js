@@ -72,6 +72,26 @@ var Menu = class Menu {
     // This is used to warp the mouse pointer at the edges of the screen if necessary.
     this._input = new InputManipulator();
 
+    // This will contain the latest pointer location, similar to the value returned by
+    // global.get_pointer(). However, it is not limited to the mouse pointer position but
+    // works for as well for stylus or touch input.
+    this._pointer = {x: 0, y: 0};
+
+    // This will contain the Clutter.InputDevice which controls an extra cursor (such as a
+    // stylus) if it was used most recently by the user. We will try to open the menu at
+    // the current position of this device.
+    this._lastNonPointerDevice = null;
+
+    // When the menu is opened, we cannot directly get the position of the
+    // _lastNonPointerDevice (as Clutter.Seat.query_device_state() is not available).
+    // Therefore we wait for the next ENTER event for this device and move the menu to the
+    // position given by this event.
+    this._initialRepositioningRequired = false;
+
+    // This is set to true when the user is potentially dragging an item around with a
+    // finger, the pressed left mouse button or a stylus.
+    this._canDrag = false;
+
     // The background covers the entire screen. Usually it's transparent and thus
     // invisible but once a menu is shown, it will be pushed as modal capturing the
     // complete user input. The color of the then visible background can be configured via
@@ -86,87 +106,193 @@ var Menu = class Menu {
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
 
-    // Hide the menu when the escape key is pressed.
-    this._background.connect('key-press-event', (actor, event) => {
-      if (event.get_key_symbol() == Clutter.KEY_Escape && this._menuID != null) {
-        this.cancel();
-        this.close();
-      }
-      return Clutter.EVENT_STOP;
-    });
-
-    // When a button is released while an item is dragged around, this can lead to a
-    // selection in "Turbo Mode".
-    this._background.connect('key-release-event', (actor, event) => {
-      if (this._draggedChild != null) {
-        // This will potentially fire the OnSelect signal.
-        this._selectionWedges.onKeyReleaseEvent();
-      }
-      return Clutter.EVENT_STOP;
-    });
-
-    // Forward button release events to the SelectionWedges.
-    this._background.connect('button-release-event', (actor, event) => {
+    // This is called further below in various cases. It is not only called on real button
+    // release events but also on semantically similar events such as touch end events.
+    const onButtonRelease = (button) => {
+      this._canDrag = false;
+      // Forward button release events to the SelectionWedges.
       // This will potentially fire the OnSelect signal.
-      this._selectionWedges.onButtonReleaseEvent(event);
+      this._selectionWedges.onButtonReleaseEvent(button);
       // This is for the statistics only: As the mouse button was released, this is not
       // going to be a gesture-only selection.
       this._gestureOnlySelection = false;
-      return Clutter.EVENT_STOP;
+    };
+
+    // Here we store the Clutter.InputDevice which controls an extra cursor if it was used
+    // most recently by the user. We will try to open the menu at the current position of
+    // this device later.
+    this._deviceChangedID = global.backend.connect('last-device-changed', (b, device) => {
+      // Multi-cursor stuff only works on Wayland. For now, I assume that tablets, pens
+      // and erasers create a secondary cursor. Is this true?
+      if (utils.getSessionType() == 'wayland') {
+        if (device.get_device_type() == Clutter.InputDeviceType.TABLET_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.PEN_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.ERASER_DEVICE) {
+
+          this._lastNonPointerDevice = device;
+
+        }
+        // For all other pointer-input devices, we use the main mouse pointer location.
+        else if (
+            device.get_device_type() == Clutter.InputDeviceType.POINTER_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.TOUCHPAD_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.TOUCHSCREEN_DEVICE) {
+
+          this._lastNonPointerDevice = null;
+        }
+      }
     });
 
-    // Forward motion events to the SelectionWedges. If the primary mouse button is
-    // pressed, this will also drag the currently active child around.
-    this._background.connect('motion-event', (actor, event) => {
-      // If a display-timeout is configured, the menu is only shown when the pointer is
-      // stationary for some time. Here we restart the timeout if it is currently pending.
-      if (this._displayTimeoutID >= 0) {
-        GLib.source_remove(this._displayTimeoutID);
-        this._revealDelayed();
+    // We connect to the generic "event" event and handle all kinds of events in there.
+    this._background.connect('event', (actor, event) => {
+      // Store the latest input position.
+      if (event.type() == Clutter.EventType.MOTION ||
+          event.type() == Clutter.EventType.TOUCH_UPDATE ||
+          event.type() == Clutter.EventType.ENTER) {
+        [this._pointer.x, this._pointer.y] = event.get_coords();
       }
 
-      // Forward the motion event to the selection wedges.
-      this._selectionWedges.onMotionEvent(event.get_coords(), event.get_state());
-
-      // If the primary button is pressed or a modifier is held down (for the
-      // "Turbo-Mode"), but we do not have a dragged child yet, we mark the currently
-      // hovered child as being the dragged child.
-      if ((this._selectionWedges.isGestureModifier(event.get_state())) &&
-          this._draggedChild == null) {
-        const index = this._selectionWedges.getHoveredChild();
-        if (index >= 0) {
-          const child = this._menuPath[0].getChildMenuItems()[index];
-          child.setState(MenuItemState.CHILD_DRAGGED);
-          this._draggedChild = child;
+      // If we have to open the menu at a secondary pointer (e.g. from a stylus), we use
+      // this enter event to position the menu.
+      if (event.type() == Clutter.EventType.ENTER && this._lastNonPointerDevice &&
+          this._initialRepositioningRequired) {
+        if (event.get_device().get_device_name() ===
+            this._lastNonPointerDevice.get_device_name()) {
+          this._setPosition(this._pointer.x, this._pointer.y, false);
+          this._initialRepositioningRequired = false;
         }
       }
 
-      // If there is a dragged child, update its position.
-      if (this._draggedChild != null) {
-
-        // This is for the statistics only: If this is the first gesture during the
-        // current selection, we set this member to true. It will be set to false as soon
-        // as the mouse button is released again.
-        if (this._gestureOnlySelection == null) {
-          this._gestureOnlySelection = true;
-        }
-
-        // Transform event coordinates to parent-relative coordinates.
-        let ok, x, y;
-        [x, y]       = event.get_coords();
-        const parent = this._draggedChild.get_parent().get_parent();
-        [ok, x, y]   = parent.transform_stage_point(x, y);
-
-        // Set the child's position without any transition.
-        this._draggedChild.set_easing_duration(0);
-        this._draggedChild.set_translation(x, y, 0);
-
-        // Draw the parent's trace to this position.
-        parent.drawTrace(x, y, 0, 0);
+      // On Wayland, touch input does not generate motion events. Therefore, we manage
+      // this manually.
+      if (event.type() == Clutter.EventType.TOUCH_UPDATE ||
+          event.type() == Clutter.EventType.MOTION) {
+        this._canDrag = true;
       }
 
-      return Clutter.EVENT_STOP;
+      if (event.type() == Clutter.EventType.TOUCH_END ||
+          event.type() == Clutter.EventType.TOUCH_CANCEL ||
+          event.type() == Clutter.EventType.BUTTON_RELEASE ||
+          event.type() == Clutter.EventType.LEAVE) {
+        this._canDrag = false;
+      }
+
+      // When a button is released while an item is dragged around, this can lead to a
+      // selection in "Turbo Mode".
+      if (event.type() == Clutter.EventType.KEY_RELEASE) {
+        if (this._draggedChild != null) {
+          this._canDrag = false;
+          // This will potentially fire the OnSelect signal.
+          this._selectionWedges.onKeyReleaseEvent();
+        }
+        return Clutter.EVENT_STOP;
+      }
+
+      // Hide the menu when the escape key is pressed.
+      if (event.type() == Clutter.EventType.KEY_PRESS) {
+        if (event.get_key_symbol() == Clutter.KEY_Escape && this._menuID != null) {
+          this.cancel();
+          this.close();
+        }
+        return Clutter.EVENT_STOP;
+      }
+
+      // Forward button release events to the selection wedges. This can lead to
+      // selections and abortions.
+      if (event.type() == Clutter.EventType.BUTTON_RELEASE) {
+        onButtonRelease(event.get_button());
+        return Clutter.EVENT_STOP;
+      }
+
+      // Touch-end events are handled as if the left mouse button was released.
+      if (event.type() == Clutter.EventType.TOUCH_END) {
+        onButtonRelease(1);
+        return Clutter.EVENT_STOP;
+      }
+
+      // Forward motion events to the SelectionWedges. If the primary mouse button is
+      // pressed, this will also drag the currently active child around.
+      if (event.type() == Clutter.EventType.MOTION ||
+          event.type() == Clutter.EventType.TOUCH_UPDATE) {
+
+        // If a display-timeout is configured, the menu is only shown when the pointer is
+        // stationary for some time. Here we restart the timeout if it is currently
+        // pending.
+        if (this._displayTimeoutID >= 0) {
+          GLib.source_remove(this._displayTimeoutID);
+          this._revealDelayed();
+        }
+
+        // Forward the motion event to the selection wedges.
+        this._selectionWedges.onMotionEvent(event.get_coords(), event.get_state());
+
+        // If the primary button is pressed or a modifier is held down (for the
+        // "Turbo-Mode"), but we do not have a dragged child yet, we mark the currently
+        // hovered child as being the dragged child.
+        if ((this._selectionWedges.isGestureModifier(event.get_state())) &&
+            this._draggedChild == null) {
+          const index = this._selectionWedges.getHoveredChild();
+          if (index >= 0) {
+            const child = this._menuPath[0].getChildMenuItems()[index];
+            child.setState(MenuItemState.CHILD_DRAGGED);
+            this._draggedChild = child;
+          }
+        }
+
+        // If there is a dragged child, update its position.
+        if (this._draggedChild != null) {
+
+          // This is for the statistics only: If this is the first gesture during the
+          // current selection, we set this member to true. It will be set to false as
+          // soon as the mouse button is released again.
+          if (this._gestureOnlySelection == null) {
+            this._gestureOnlySelection = true;
+          }
+
+          // Transform event coordinates to parent-relative coordinates.
+          let ok, x, y;
+          [x, y]       = event.get_coords();
+          const parent = this._draggedChild.get_parent().get_parent();
+          [ok, x, y]   = parent.transform_stage_point(x, y);
+
+          // Set the child's position without any transition.
+          this._draggedChild.set_easing_duration(0);
+          this._draggedChild.set_translation(x, y, 0);
+
+          // Draw the parent's trace to this position.
+          parent.drawTrace(x, y, 0, 0);
+        }
+
+        return Clutter.EVENT_STOP;
+      }
+
+      return Clutter.EVENT_CONTINUE;
     });
+
+    // We use a ClickAction to handle simple clicks on menu items and long-press events to
+    // close the menu.
+    const action = Clutter.ClickAction.new();
+    action.connect('long-press', (action, actor, state) => {
+      if (state == Clutter.LongPressState.QUERY) {
+        return true;
+      }
+
+      // Simulate right mouse button click on long press.
+      if (state == Clutter.LongPressState.ACTIVATE) {
+        onButtonRelease(3);
+      }
+    });
+
+    // Activate or abort on click events.
+    action.connect('clicked', (action) => {
+      // Ensure that the latest input position is used for clicking.
+      this._selectionWedges.onMotionEvent(action.get_coords(), action.get_state());
+      // On touch-based clicks, get_button() returns 0. This should select items,
+      // therefore we pass a 1 (left button) in this case.
+      onButtonRelease(action.get_button() || 1);
+    });
+
+    this._background.add_action(action);
 
     // Delete the currently active menu once the background was faded-out.
     this._background.connect('transitions-completed', () => {
@@ -215,7 +341,7 @@ var Menu = class Menu {
 
       // If we're currently dragging a child around, the newly hovered child will
       // instantaneously become the hovered child.
-      const [x, y, mods] = global.get_pointer();
+      const mods = global.get_pointer()[2];
       if (this._selectionWedges.isGestureModifier(mods) && hoveredIndex >= 0) {
         const child = this._menuPath[0].getChildMenuItems()[hoveredIndex];
         child.setState(MenuItemState.CHILD_DRAGGED);
@@ -253,14 +379,14 @@ var Menu = class Menu {
     this._selectionWedges.connect('child-selected-event', (o, index) => {
       const parent = this._menuPath[0];
       const child  = this._menuPath[0].getChildMenuItems()[index];
-
-      const [pointerX, pointerY, mods] = global.get_pointer();
+      const mods   = global.get_pointer()[2];
 
       // Ignore any gesture-based selection of leaf nodes. Final selections are only done
       // when the mouse button or a modifier button is released. An exception is the
       // experimental hover mode in which we also allow selections by gestures.
       const hoverMode = this._settings.get_boolean('hover-mode');
-      if (!hoverMode && this._selectionWedges.isGestureModifier(mods) &&
+      if (!hoverMode &&
+          (this._selectionWedges.isGestureModifier(mods) || this._canDrag) &&
           child.getChildMenuItems().length == 0) {
         return;
       }
@@ -282,11 +408,11 @@ var Menu = class Menu {
       // going offscreen, we clamp the position to the current monitor bounds (we do it
       // removing background boundaries from mouse pointer).
       const [clampedX, clampedY] = this._clampToToMonitor(
-          pointerX - this._background.x, pointerY - this._background.y, 10);
+          this._pointer.x - this._background.x, this._pointer.y - this._background.y, 10);
 
       // Warp the mouse pointer to this position if necessary accounting background
       // position as well.
-      if (pointerX != clampedX || pointerY != clampedY) {
+      if (this._pointer.x != clampedX || this._pointer.y != clampedY) {
         this._input.warpPointer(
             clampedX + this._background.x, clampedY + this._background.y);
       }
@@ -353,13 +479,12 @@ var Menu = class Menu {
       // The parent item will be moved to the pointer position. To prevent it from
       // going offscreen, we clamp the position to the current monitor bounds (we do it
       // removing background boundaries from mouse pointer).
-      const [pointerX, pointerY] = global.get_pointer();
       const [clampedX, clampedY] = this._clampToToMonitor(
-          pointerX - this._background.x, pointerY - this._background.y, 10);
+          this._pointer.x - this._background.x, this._pointer.y - this._background.y, 10);
 
       // Warp the mouse pointer to this position if necessary accounting background
       // position as well.
-      if (pointerX != clampedX || pointerY != clampedY) {
+      if (this._pointer.x != clampedX || this._pointer.y != clampedY) {
         this._input.warpPointer(
             clampedX + this._background.x, clampedY + this._background.y);
       }
@@ -409,7 +534,7 @@ var Menu = class Menu {
   // This removes our root actor from GNOME Shell.
   destroy() {
     this.close();
-
+    global.backend.disconnect(this._deviceChangedID);
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();
   }
@@ -534,25 +659,18 @@ var Menu = class Menu {
       }
     } else {
 
-      // Use pointer location if no coordinates are given.
-      if (x == null && y == null) {
+      // Use mouse pointer location if no coordinates are given. In many cases, this will
+      // be correct, however, the user may be using touch input, a tablet or something
+      // completely different. Therefore we set _initialRepositioningRequired to true and
+      // attempt to reposition the menu in the next ENTER event.
+      if (x != null && y != null) {
+        this._setPosition(x, y, true);
+      } else if (this._lastNonPointerDevice != null) {
+        this._initialRepositioningRequired = true;
+      } else {
         [x, y] = global.get_pointer();
+        this._setPosition(x, y, true);
       }
-
-      const [clampedX, clampedY] =
-          this._clampToToMonitor(x - this._background.x, y - this._background.y, 10);
-      this._root.set_translation(clampedX, clampedY, 0);
-      this._selectionWedges.set_translation(clampedX, clampedY, 0);
-
-      if (x != clampedX || y != clampedY) {
-        this._input.warpPointer(
-            clampedX + this._background.x, clampedY + this._background.y);
-      }
-
-      // Report an initial motion event at the menu's center. This ensures that gestures
-      // are detected properly even if the initial pointer movement is really fast.
-      const mods = global.get_pointer()[2];
-      this._selectionWedges.onMotionEvent([clampedX, clampedY], mods);
     }
 
     // If a display-timeout is configured and we are not in preview mode, the menu is only
@@ -847,6 +965,26 @@ var Menu = class Menu {
             this._displayTimeoutID = -1;
           });
     }
+  }
+
+  // This is called whenever a menu is opened to position it on the screen. It will not
+  // only move the root actor but also the selection wedges.
+  _setPosition(x, y, doPointerWarp) {
+    const [clampedX, clampedY] =
+        this._clampToToMonitor(x - this._background.x, y - this._background.y, 10);
+    this._root.set_translation(clampedX, clampedY, 0);
+    this._selectionWedges.set_translation(clampedX, clampedY, 0);
+
+    // Warp the mouse pointer if required.
+    if (doPointerWarp && (x != clampedX || y != clampedY)) {
+      this._input.warpPointer(
+          clampedX + this._background.x, clampedY + this._background.y);
+    }
+
+    // Report an initial motion event at the menu's center. This ensures that gestures
+    // are detected properly even if the initial pointer movement is really fast.
+    const mods = global.get_pointer()[2];
+    this._selectionWedges.onMotionEvent([clampedX, clampedY], mods);
   }
 
   // This assigns IDs and angles to each and every item. It also ensures that the root
