@@ -50,6 +50,10 @@ var TouchButtons = class TouchButtons {
     // mode).
     this._inOverview = false;
 
+    // This stores a reference to the latest input device we received motion events from.
+    // This device will be grabbed when we move the touch buttons around.
+    this._latestInputDevice = null;
+
     // True, if there is currently a Fly-Pie menu opened.
     this._menuOpened = false;
 
@@ -269,10 +273,14 @@ var TouchButtons = class TouchButtons {
               (Main.layoutManager.currentMonitor.height - actor.height) / 2;
         }
 
-        // Update the actor's position when dragged around.
         actor.connect('event', (actor, event) => {
+          // Update the actor's position when dragged around. We also store a reference to
+          // the latest input device interacting with the touch button so that we can grab
+          // it later.
           if (event.type() == Clutter.EventType.MOTION ||
               event.type() == Clutter.EventType.TOUCH_UPDATE) {
+
+            this._latestInputDevice = event.get_device();
 
             if (actor._dragging) {
               const [x, y] = event.get_coords();
@@ -315,8 +323,7 @@ var TouchButtons = class TouchButtons {
               actor._dragging = false;
 
               // Release the pointer grab.
-              Clutter.get_default_backend().get_default_seat().get_pointer().ungrab();
-              global.end_modal(global.get_current_time());
+              this._ungrab();
 
               // Use the normal cursor again.
               global.display.set_cursor(Meta.Cursor.DEFAULT);
@@ -360,15 +367,13 @@ var TouchButtons = class TouchButtons {
             // canceled directly after it started for touch events. With mouse input,
             // everything works without these two lines, but to get touch input working,
             // we have to grab the input here. It is released a few lines further below.
-            Clutter.get_default_backend().get_default_seat().get_pointer().grab(actor);
-            global.begin_modal(global.get_current_time(), 0);
+            this._grab(actor);
 
             return true;
           }
 
           // Second part of the workaround mentioned above.
-          Clutter.get_default_backend().get_default_seat().get_pointer().ungrab();
-          global.end_modal(global.get_current_time());
+          this._ungrab();
 
           // If the long press was executed, we initiate dragging of the actor.
           if (state == Clutter.LongPressState.ACTIVATE) {
@@ -389,8 +394,7 @@ var TouchButtons = class TouchButtons {
             actor._dragStartY = y;
 
             // Grab the input so that we do not loose the actor during quick movements.
-            Clutter.get_default_backend().get_default_seat().get_pointer().grab(actor);
-            global.begin_modal(global.get_current_time(), 0);
+            this._grab(actor);
 
             // Use a dragging graphic for the cursor.
             global.display.set_cursor(Meta.Cursor.DND_IN_DRAG);
@@ -461,5 +465,23 @@ var TouchButtons = class TouchButtons {
       duration: this._cachedSettings.easingDuration,
       mode: Clutter.AnimationMode.EASE_OUT_QUAD
     }));
+  }
+
+  // Makes sure that all events from the pointing device we received last input from is
+  // passed to the given actor. This is used to ensure that we do not "loose" the touch
+  // buttons will dragging them around.
+  _grab(actor) {
+    if (this._latestInputDevice) {
+      this._latestInputDevice.grab(actor);
+      global.begin_modal(global.get_current_time(), 0);
+    }
+  }
+
+  // Releases a grab created with the method above.
+  _ungrab() {
+    if (this._latestInputDevice) {
+      this._latestInputDevice.ungrab();
+      global.end_modal(global.get_current_time());
+    }
   }
 };
