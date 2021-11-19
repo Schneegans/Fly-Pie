@@ -77,6 +77,17 @@ var Menu = class Menu {
     // works for as well for stylus or touch input.
     this._pointer = {x: 0, y: 0};
 
+    // This will contain the Clutter.InputDevice which controls an extra cursor (such as a
+    // stylus) if it was used most recently by the user. We will try to open the menu at
+    // the current position of this device.
+    this._lastNonPointerDevice = null;
+
+    // When the menu is opened, we cannot directly get the position of the
+    // _lastNonPointerDevice (as Clutter.Seat.query_device_state() is not available).
+    // Therefore we wait for the next ENTER event for this device and move the menu to the
+    // position given by this event.
+    this._initialRepositioningRequired = false;
+
     // This is set to true when the user is potentially dragging an item around with a
     // finger, the pressed left mouse button or a stylus.
     this._canDrag = false;
@@ -107,6 +118,31 @@ var Menu = class Menu {
       this._gestureOnlySelection = false;
     };
 
+    // Here we store the Clutter.InputDevice which controls an extra cursor if it was used
+    // most recently by the user. We will try to open the menu at the current position of
+    // this device later.
+    this._deviceChangedID = global.backend.connect('last-device-changed', (b, device) => {
+      // Multi-cursor stuff only works on Wayland. For now, I assume that tablets, pens
+      // and erasers create a secondary cursor. Is this true?
+      if (utils.getSessionType() == 'wayland') {
+        if (device.get_device_type() == Clutter.InputDeviceType.TABLET_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.PEN_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.ERASER_DEVICE) {
+
+          this._lastNonPointerDevice = device;
+
+        }
+        // For all other pointer-input devices, we use the main mouse pointer location.
+        else if (
+            device.get_device_type() == Clutter.InputDeviceType.POINTER_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.TOUCHPAD_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.TOUCHSCREEN_DEVICE) {
+
+          this._lastNonPointerDevice = null;
+        }
+      }
+    });
+
     // We connect to the generic "event" event and handle all kinds of events in there.
     this._background.connect('event', (actor, event) => {
       // Store the latest input position.
@@ -114,6 +150,17 @@ var Menu = class Menu {
           event.type() == Clutter.EventType.TOUCH_UPDATE ||
           event.type() == Clutter.EventType.ENTER) {
         [this._pointer.x, this._pointer.y] = event.get_coords();
+      }
+
+      // If we have to open the menu at a secondary pointer (e.g. from a stylus), we use
+      // this enter event to position the menu.
+      if (event.type() == Clutter.EventType.ENTER && this._lastNonPointerDevice &&
+          this._initialRepositioningRequired) {
+        if (event.get_device().get_device_name() ===
+            this._lastNonPointerDevice.get_device_name()) {
+          this._setPosition(this._pointer.x, this._pointer.y, false);
+          this._initialRepositioningRequired = false;
+        }
       }
 
       // On Wayland, touch input does not generate motion events. Therefore, we manage
@@ -487,7 +534,7 @@ var Menu = class Menu {
   // This removes our root actor from GNOME Shell.
   destroy() {
     this.close();
-
+    global.backend.disconnect(this._deviceChangedID);
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();
   }
@@ -612,25 +659,18 @@ var Menu = class Menu {
       }
     } else {
 
-      // Use pointer location if no coordinates are given.
-      if (x == null && y == null) {
+      // Use mouse pointer location if no coordinates are given. In many cases, this will
+      // be correct, however, the user may be using touch input, a tablet or something
+      // completely different. Therefore we set _initialRepositioningRequired to true and
+      // attempt to reposition the menu in the next ENTER event.
+      if (x != null && y != null) {
+        this._setPosition(x, y, true);
+      } else if (this._lastNonPointerDevice != null) {
+        this._initialRepositioningRequired = true;
+      } else {
         [x, y] = global.get_pointer();
+        this._setPosition(x, y, true);
       }
-
-      const [clampedX, clampedY] =
-          this._clampToToMonitor(x - this._background.x, y - this._background.y, 10);
-      this._root.set_translation(clampedX, clampedY, 0);
-      this._selectionWedges.set_translation(clampedX, clampedY, 0);
-
-      if (x != clampedX || y != clampedY) {
-        this._input.warpPointer(
-            clampedX + this._background.x, clampedY + this._background.y);
-      }
-
-      // Report an initial motion event at the menu's center. This ensures that gestures
-      // are detected properly even if the initial pointer movement is really fast.
-      const mods = global.get_pointer()[2];
-      this._selectionWedges.onMotionEvent([clampedX, clampedY], mods);
     }
 
     // If a display-timeout is configured and we are not in preview mode, the menu is only
@@ -925,6 +965,26 @@ var Menu = class Menu {
             this._displayTimeoutID = -1;
           });
     }
+  }
+
+  // This is called whenever a menu is opened to position it on the screen. It will not
+  // only move the root actor but also the selection wedges.
+  _setPosition(x, y, doPointerWarp) {
+    const [clampedX, clampedY] =
+        this._clampToToMonitor(x - this._background.x, y - this._background.y, 10);
+    this._root.set_translation(clampedX, clampedY, 0);
+    this._selectionWedges.set_translation(clampedX, clampedY, 0);
+
+    // Warp the mouse pointer if required.
+    if (doPointerWarp && (x != clampedX || y != clampedY)) {
+      this._input.warpPointer(
+          clampedX + this._background.x, clampedY + this._background.y);
+    }
+
+    // Report an initial motion event at the menu's center. This ensures that gestures
+    // are detected properly even if the initial pointer movement is really fast.
+    const mods = global.get_pointer()[2];
+    this._selectionWedges.onMotionEvent([clampedX, clampedY], mods);
   }
 
   // This assigns IDs and angles to each and every item. It also ensures that the root
