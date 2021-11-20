@@ -121,27 +121,33 @@ var Menu = class Menu {
     // Here we store the Clutter.InputDevice which controls an extra cursor if it was used
     // most recently by the user. We will try to open the menu at the current position of
     // this device later.
-    this._deviceChangedID = global.backend.connect('last-device-changed', (b, device) => {
-      // Multi-cursor stuff only works on Wayland. For now, I assume that tablets, pens
-      // and erasers create a secondary cursor. Is this true?
-      if (utils.getSessionType() == 'wayland') {
-        if (device.get_device_type() == Clutter.InputDeviceType.TABLET_DEVICE ||
-            device.get_device_type() == Clutter.InputDeviceType.PEN_DEVICE ||
-            device.get_device_type() == Clutter.InputDeviceType.ERASER_DEVICE) {
+    if (global.backend) {
+      this._deviceChangedID =
+          global.backend.connect('last-device-changed', (b, device) => {
+            const type = device.get_device_type();
 
-          this._lastNonPointerDevice = device;
+            // Multi-cursor stuff only works on Wayland. For now, I assume that tablets,
+            // pens and erasers create a secondary cursor. Is this true?
+            if (utils.getSessionType() == 'wayland') {
+              if (type == Clutter.InputDeviceType.TABLET_DEVICE ||
+                  type == Clutter.InputDeviceType.PEN_DEVICE ||
+                  type == Clutter.InputDeviceType.ERASER_DEVICE) {
 
-        }
-        // For all other pointer-input devices, we use the main mouse pointer location.
-        else if (
-            device.get_device_type() == Clutter.InputDeviceType.POINTER_DEVICE ||
-            device.get_device_type() == Clutter.InputDeviceType.TOUCHPAD_DEVICE ||
-            device.get_device_type() == Clutter.InputDeviceType.TOUCHSCREEN_DEVICE) {
+                this._lastNonPointerDevice = device;
 
-          this._lastNonPointerDevice = null;
-        }
-      }
-    });
+              }
+              // For all other pointer-input devices, we use the main mouse pointer
+              // location.
+              else if (
+                  type == Clutter.InputDeviceType.POINTER_DEVICE ||
+                  type == Clutter.InputDeviceType.TOUCHPAD_DEVICE ||
+                  type == Clutter.InputDeviceType.TOUCHSCREEN_DEVICE) {
+
+                this._lastNonPointerDevice = null;
+              }
+            }
+          });
+    }
 
     // We connect to the generic "event" event and handle all kinds of events in there.
     this._background.connect('event', (actor, event) => {
@@ -534,9 +540,12 @@ var Menu = class Menu {
   // This removes our root actor from GNOME Shell.
   destroy() {
     this.close();
-    global.backend.disconnect(this._deviceChangedID);
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();
+
+    if (global.backend) {
+      global.backend.disconnect(this._deviceChangedID);
+    }
   }
 
   // -------------------------------------------------------------------- public interface
