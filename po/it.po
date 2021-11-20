@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-14 20:37+0100\n"
-"PO-Revision-Date: 2021-10-22 20:42+0000\n"
-"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
-">\n"
+"PO-Revision-Date: 2021-11-20 12:12+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -101,7 +101,7 @@ msgstr "Comando"
 
 #: src/common/actions/Command.js:69
 msgid "Use the button to list installed apps."
-msgstr ""
+msgstr "Usa il pulsante per elencare le app installate."
 
 #: src/common/actions/Uri.js:33
 msgid "Open URI"
@@ -189,7 +189,7 @@ msgstr "Questo testo verrà inserito."
 
 #: src/common/ConfigWidgetFactory.js:102 src/prefs/ImageChooserButton.js:42
 msgid "Select File"
-msgstr ""
+msgstr "Seleziona File"
 
 #: src/common/ConfigWidgetFactory.js:103 src/common/ConfigWidgetFactory.js:179
 #: src/prefs/ImageChooserButton.js:43 src/prefs/MenuEditorPage.js:205
@@ -201,13 +201,13 @@ msgstr "Cancella"
 
 #: src/common/ConfigWidgetFactory.js:178
 msgid "Select Application"
-msgstr ""
+msgstr "Seleziona Applicazione"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
 #: src/prefs/MenuEditor.js:282
 msgid "Not Bound"
-msgstr ""
+msgstr "Non vincolato"
 
 #: src/common/ConfigWidgetFactory.js:318
 msgid ""
@@ -302,7 +302,7 @@ msgstr "Menu Personalizzato"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:36
 msgid "This can contain custom actions and other menus."
-msgstr ""
+msgstr "Questo può contenere azioni personalizzate e altri menu."
 
 #: src/common/menus/CustomMenu.js:40
 msgid ""
@@ -310,6 +310,9 @@ msgid ""
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended."
 msgstr ""
+"Un <b>menu personalizzato</b> può contenere un numero qualsiasi di azioni e "
+"sottomenu. Tuttavia, per una selezione precisa degli elementi, si consiglia "
+"un numero massimo di dodici elementi."
 
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:43 src/extension/DefaultMenu.js:79
@@ -384,6 +387,10 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather set up your own menus!"
 msgstr ""
+"Il <b>Menu principale</b> mostra tutte le applicazioni installate. Di "
+"solito, questo è molto disordinato poiché molte sezioni contengono troppi "
+"elementi per essere utilizzati in modo efficiente. Dovresti piuttosto "
+"impostare i tuoi menu!"
 
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:47 src/extension/DefaultMenu.js:111
@@ -466,17 +473,17 @@ msgstr ""
 
 #: src/common/menus/Clipboard.js:54
 msgid "Clipboard"
-msgstr ""
+msgstr "Appunti"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Clipboard.js:61
 msgid "Shows recently copied things."
-msgstr ""
+msgstr "Mostra le cose copiate di recente."
 
 #: src/common/menus/Clipboard.js:64
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
-msgstr ""
+msgstr "Il menu <b>Appunti</b> mostra un elenco di cose copiate di recente."
 
 #: src/common/menus/Clipboard.js:94
 msgid "First Child Angle"
@@ -484,13 +491,13 @@ msgstr ""
 
 #: src/common/menus/Clipboard.js:94
 msgid "Direction of the most recent item."
-msgstr ""
+msgstr "Direzione dell'elemento più recente."
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a vector image.
 #: src/common/menus/Clipboard.js:165
 msgid "Vector Image"
-msgstr ""
+msgstr "Immagine Vettoriale"
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a raster image.
@@ -850,15 +857,15 @@ msgstr "Tutti i risultati andranno persi!"
 
 #: src/prefs/MenuEditor.js:417
 msgid "No menus configured"
-msgstr ""
+msgstr "Nessun menu configurato"
 
 #: src/prefs/MenuEditor.js:420
 msgid "Create a new menu with the button in the top right corner."
-msgstr ""
+msgstr "Crea un nuovo menu con il pulsante nell'angolo in alto a destra."
 
 #: src/prefs/MenuEditor.js:450
 msgid "Add a new item"
-msgstr ""
+msgstr "Aggiungi un nuovo elemento"
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag an action in the menu editor to the menu
