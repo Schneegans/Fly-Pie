@@ -92,7 +92,8 @@ var Daemon = class Daemon {
     // This class manages the global shortcuts. Once one of the registered shortcuts is
     // pressed, the corresponding menu is shown via the ShowMenu() method. If an error
     // occurred, a notification is shown.
-    this._shortcuts = new Shortcuts((shortcut) => {
+    this._shortcuts = new Shortcuts();
+    this._shortcuts.connect('activated', (s, shortcut) => {
       for (let i = 0; i < this._menuConfigs.length; i++) {
         if (shortcut == this._menuConfigs[i].shortcut) {
           const result = this.ShowMenu(this._menuConfigs[i].name);
@@ -103,6 +104,11 @@ var Daemon = class Daemon {
           }
         }
       }
+    });
+
+    this._shortcuts.connect('super-rmb', (s, shortcut) => {
+      utils.debug('super-rmb!');
+      return true;
     });
 
     // Create the touch buttons.
