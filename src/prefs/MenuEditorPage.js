@@ -571,6 +571,16 @@ var MenuEditorPage = class MenuEditorPage {
       }
     });
 
+    // For top-level menus, store whether they should be bound to Super + Right Mouse
+    // Button. Only one menu can be bound to Super+RMB, therefore we unbind all others.
+    this._builder.get_object('super-rmb').connect('notify::active', (widget) => {
+      if (!this._updatingSidebar) {
+        this._menuConfigs.forEach(config => config.superRMB = false);
+        this._selectedItem.superRMB = widget.active;
+        this._saveMenuConfiguration();
+      }
+    });
+
     // For top-level menus, store whether a touch button should be shown.
     this._builder.get_object('touch-button').connect('notify::active', (widget) => {
       if (!this._updatingSidebar) {
@@ -839,6 +849,7 @@ var MenuEditorPage = class MenuEditorPage {
         this._menuShortcutLabel.set_accelerator(this._selectedItem.shortcut || '');
         this._builder.get_object('menu-centered').active = this._selectedItem.centered;
         this._builder.get_object('touch-button').active  = this._selectedItem.touchButton;
+        this._builder.get_object('super-rmb').active     = this._selectedItem.superRMB;
       } else {
         this._builder.get_object('item-angle').value = this._selectedItem.angle;
       }
