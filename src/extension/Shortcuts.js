@@ -79,7 +79,7 @@ var Shortcuts = GObject.registerClass(
           if (event.type() == Clutter.EventType.BUTTON_PRESS &&
               (event.get_state() & Clutter.ModifierType.MOD4_MASK) > 0) {
 
-            if ((event.get_state() & Clutter.ModifierType.BUTTON3_MASK) > 0) {
+            if (event.get_button() == 3) {
               if (this.emit('super-rmb')) {
                 return Clutter.EVENT_STOP;
               }
