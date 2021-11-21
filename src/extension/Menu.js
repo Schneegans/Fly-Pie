@@ -88,10 +88,6 @@ var Menu = class Menu {
     // position given by this event.
     this._initialRepositioningRequired = false;
 
-    // This is set to true when the user is potentially dragging an item around with a
-    // finger, the pressed left mouse button or a stylus.
-    this._canDrag = false;
-
     // The background covers the entire screen. Usually it's transparent and thus
     // invisible but once a menu is shown, it will be pushed as modal capturing the
     // complete user input. The color of the then visible background can be configured via
@@ -105,18 +101,6 @@ var Menu = class Menu {
     // Menu to the individual MenuItems.
     this._background = new Background();
     Main.layoutManager.addChrome(this._background);
-
-    // This is called further below in various cases. It is not only called on real button
-    // release events but also on semantically similar events such as touch end events.
-    const onButtonRelease = (button) => {
-      this._canDrag = false;
-      // Forward button release events to the SelectionWedges.
-      // This will potentially fire the OnSelect signal.
-      this._selectionWedges.onButtonReleaseEvent(button);
-      // This is for the statistics only: As the mouse button was released, this is not
-      // going to be a gesture-only selection.
-      this._gestureOnlySelection = false;
-    };
 
     // Here we store the Clutter.InputDevice which controls an extra cursor if it was used
     // most recently by the user. We will try to open the menu at the current position of
@@ -149,6 +133,17 @@ var Menu = class Menu {
           });
     }
 
+    // This is called further below in various cases. It is not only called on real button
+    // release events but also on semantically similar events such as touch end events.
+    const emitSelection = () => {
+      // Forward button release events to the SelectionWedges.
+      // This will potentially fire the OnSelect signal.
+      this._selectionWedges.emitSelection();
+      // This is for the statistics only: As the mouse button was released, any further
+      // (final) selections will not be gesture-only selections.
+      this._gestureOnlySelection = false;
+    };
+
     // We connect to the generic "event" event and handle all kinds of events in there.
     this._background.connect('event', (actor, event) => {
       // Store the latest input position.
@@ -169,28 +164,32 @@ var Menu = class Menu {
         }
       }
 
-      // On Wayland, touch input does not generate motion events. Therefore, we manage
-      // this manually.
-      if (event.type() == Clutter.EventType.TOUCH_UPDATE ||
-          event.type() == Clutter.EventType.MOTION) {
-        this._canDrag = true;
-      }
-
-      if (event.type() == Clutter.EventType.TOUCH_END ||
-          event.type() == Clutter.EventType.TOUCH_CANCEL ||
-          event.type() == Clutter.EventType.BUTTON_RELEASE ||
-          event.type() == Clutter.EventType.LEAVE) {
-        this._canDrag = false;
-      }
-
-      // When a button is released while an item is dragged around, this can lead to a
-      // selection in "Turbo Mode".
+      // If a modifier key is released while an item is dragged around, this can lead to
+      // a selection in "Turbo Mode".
       if (event.type() == Clutter.EventType.KEY_RELEASE) {
         if (this._draggedChild != null) {
-          this._canDrag = false;
-          // This will potentially fire the OnSelect signal.
-          this._selectionWedges.onKeyReleaseEvent();
+
+          // This seems kind-of hard-coded... Is there a better way to test whether the
+          // released key was a modifier key?
+          if (event.get_key_symbol() == Clutter.KEY_Control_L ||
+              event.get_key_symbol() == Clutter.KEY_Control_R ||
+              event.get_key_symbol() == Clutter.KEY_Shift_L ||
+              event.get_key_symbol() == Clutter.KEY_Shift_R ||
+              event.get_key_symbol() == Clutter.KEY_Alt_L ||
+              event.get_key_symbol() == Clutter.KEY_Alt_R ||
+              event.get_key_symbol() == Clutter.KEY_Super_L ||
+              event.get_key_symbol() == Clutter.KEY_Super_R) {
+            emitSelection();
+          }
         }
+        return Clutter.EVENT_STOP;
+      }
+
+      // Forward button release events to the selection wedges.
+      // Touch-end events are handled as if the left mouse button was released.
+      if (event.type() == Clutter.EventType.BUTTON_RELEASE ||
+          event.type() == Clutter.EventType.TOUCH_END) {
+        emitSelection();
         return Clutter.EVENT_STOP;
       }
 
@@ -200,19 +199,6 @@ var Menu = class Menu {
           this.cancel();
           this.close();
         }
-        return Clutter.EVENT_STOP;
-      }
-
-      // Forward button release events to the selection wedges. This can lead to
-      // selections and abortions.
-      if (event.type() == Clutter.EventType.BUTTON_RELEASE) {
-        onButtonRelease(event.get_button());
-        return Clutter.EVENT_STOP;
-      }
-
-      // Touch-end events are handled as if the left mouse button was released.
-      if (event.type() == Clutter.EventType.TOUCH_END) {
-        onButtonRelease(1);
         return Clutter.EVENT_STOP;
       }
 
@@ -283,9 +269,10 @@ var Menu = class Menu {
         return true;
       }
 
-      // Simulate right mouse button click on long press.
+      // Close the menu on long press.
       if (state == Clutter.LongPressState.ACTIVATE) {
-        onButtonRelease(3);
+        this.cancel();
+        this.close();
       }
     });
 
@@ -293,9 +280,19 @@ var Menu = class Menu {
     action.connect('clicked', (action) => {
       // Ensure that the latest input position is used for clicking.
       this._selectionWedges.onMotionEvent(action.get_coords(), action.get_state());
-      // On touch-based clicks, get_button() returns 0. This should select items,
-      // therefore we pass a 1 (left button) in this case.
-      onButtonRelease(action.get_button() || 1);
+
+      // Cancel on right mouse button click.
+      if (action.get_button() == 3) {
+        this.cancel();
+        this.close();
+        return;
+      }
+
+      // Select something on left mouse button clicks. On touch-based clicks, get_button()
+      // returns 0.
+      if (action.get_button() == 0 || action.get_button() == 1) {
+        emitSelection();
+      }
     });
 
     this._background.add_action(action);
@@ -382,18 +379,15 @@ var Menu = class Menu {
 
     // This is fired when the primary mouse button is pressed inside a wedge. This will
     // also be emitted when a gesture is detected.
-    this._selectionWedges.connect('child-selected-event', (o, index) => {
+    this._selectionWedges.connect('child-selected-event', (o, index, fromGesture) => {
       const parent = this._menuPath[0];
       const child  = this._menuPath[0].getChildMenuItems()[index];
-      const mods   = global.get_pointer()[2];
 
       // Ignore any gesture-based selection of leaf nodes. Final selections are only done
       // when the mouse button or a modifier button is released. An exception is the
       // experimental hover mode in which we also allow selections by gestures.
       const hoverMode = this._settings.get_boolean('hover-mode');
-      if (!hoverMode &&
-          (this._selectionWedges.isGestureModifier(mods) || this._canDrag) &&
-          child.getChildMenuItems().length == 0) {
+      if (fromGesture && !hoverMode && child.getChildMenuItems().length == 0) {
         return;
       }
 

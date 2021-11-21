@@ -49,14 +49,15 @@ var SelectionWedges = GObject.registerClass({
     "child-hovered-event":    { param_types: [GObject.TYPE_INT] },
 
     // This is fired when the primary mouse button is pressed inside a wedge. It will also
-    // be fired if a gesture was detected (either a corner or a timeout).
-    "child-selected-event":   { param_types: [GObject.TYPE_INT] },
+    // be fired if a gesture was detected (either a corner or a timeout). In the latter
+    // case, the passed boolean will be true.
+    "child-selected-event":   { param_types: [GObject.TYPE_INT, GObject.TYPE_BOOLEAN] },
 
     // Same as "child-hovered-event", but for the parent wedge.
     "parent-hovered-event":   {},
 
     // Same as "child-selected-event", but for the parent wedge.
-    "parent-selected-event":  {},
+    "parent-selected-event":  { param_types: [GObject.TYPE_BOOLEAN] },
 
     // This is fired if secondary mouse button is pressed. In future there might be ofter
     // reasons for this to get fired.
@@ -340,23 +341,18 @@ class SelectionWedges extends Clutter.Actor {
     }
   }
 
-  // This is called by the Menu when the user clicks somewhere on the background. It fires
-  // either 'parent-selected-event' or 'child-selected-event' if the corresponding wedge
-  // is hovered or 'cancel-selection-event' if the secondary mouse button is pressed.
-  onButtonReleaseEvent(button) {
-    if (button == 1) {
-      this._emitSelection();
-    } else if (button == 3) {
-      this.emit('cancel-selection-event');
-    }
-  }
+  // This emits 'parent-selected-event' or 'child-selected-event' depending on the
+  // currently hovered wedge. It also resets the current gesture detection.
+  emitSelection(fromGesture = false) {
+    this._resetStroke();
 
-  // This is called by the Menu when the user releases a button. It fires either
-  // 'parent-selected-event' or 'child-selected-event' if the corresponding wedge is
-  // hovered. This is required for the "Turbo Mode" in which items are selected when a
-  // modifier key is released.
-  onKeyReleaseEvent() {
-    this._emitSelection();
+    if (this._hoveredWedge >= 0) {
+      if (this._hoveredWedge == this._parentIndex) {
+        this.emit('parent-selected-event', fromGesture);
+      } else {
+        this.emit('child-selected-event', this.getHoveredChild(), fromGesture);
+      }
+    }
   }
 
   // Given the relative pointer position, this calculates the currently active child
@@ -487,7 +483,7 @@ class SelectionWedges extends Clutter.Actor {
 
             //  Emit the selection events if it exceeds the configured threshold.
             if (angle * 180 / Math.PI > this._settings.gestureMinStrokeAngle) {
-              this._emitSelection();
+              this.emitSelection(true);
             }
           }
 
@@ -497,7 +493,7 @@ class SelectionWedges extends Clutter.Actor {
           if (this._stroke.pauseTimeout == null) {
             this._stroke.pauseTimeout = GLib.timeout_add(
                 GLib.PRIORITY_DEFAULT, this._settings.gestureSelectionTimeout, () => {
-                  this._emitSelection();
+                  this.emitSelection(true);
                   return false;
                 });
           }
@@ -516,15 +512,18 @@ class SelectionWedges extends Clutter.Actor {
   }
 
 
-  // Returns true if the primary button is pressed or a modifier is held down (for the
-  // "Turbo-Mode"),
+  // Returns true if the left or right button is pressed, or a modifier is held down (for
+  // the "Turbo-Mode"). Thanks to the Super+RMB mode, we can actually select items with
+  // the right mouse button...
   isGestureModifier(mods) {
-    const hoverMode         = this._settings.hoverMode;
-    const leftButtonPressed = mods & Clutter.ModifierType.BUTTON1_MASK;
+    const hoverMode          = this._settings.hoverMode;
+    const leftButtonPressed  = (mods & Clutter.ModifierType.BUTTON1_MASK) > 0;
+    const rightButtonPressed = (mods & Clutter.ModifierType.BUTTON3_MASK) > 0;
     const shortcutPressed =
-        mods & (Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK);
+        (mods &
+         (Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK)) > 0;
 
-    return hoverMode || leftButtonPressed || shortcutPressed;
+    return hoverMode || leftButtonPressed || rightButtonPressed || shortcutPressed;
   }
 
   // ----------------------------------------------------------------------- private stuff
@@ -539,21 +538,6 @@ class SelectionWedges extends Clutter.Actor {
       value += 0.0000001;
     }
     this._wedgeShader.set_uniform_value(name, value);
-  }
-
-  // Small helper method which either emits 'parent-selected-event' or
-  // 'child-selected-event' depending on the currently hovered wedge. It also resets the
-  // current gesture detection.
-  _emitSelection() {
-    this._resetStroke();
-
-    if (this._hoveredWedge >= 0) {
-      if (this._hoveredWedge == this._parentIndex) {
-        this.emit('parent-selected-event');
-      } else {
-        this.emit('child-selected-event', this.getHoveredChild());
-      }
-    }
   }
 
   // Resets the current gesture detection. This is done when an item was selected or the
