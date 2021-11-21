@@ -93,22 +93,41 @@ var Daemon = class Daemon {
     // pressed, the corresponding menu is shown via the ShowMenu() method. If an error
     // occurred, a notification is shown.
     this._shortcuts = new Shortcuts();
+
+    // This is called further below. It opens the preconfigured menu with the given name.
+    const showMenu = (name) => {
+      const result = this.ShowMenu(name);
+      if (result < 0) {
+        utils.debug(
+            'Failed to open a Fly-Pie menu: ' +
+            DBusInterface.getErrorDescription(result));
+      }
+    };
+
+    // Open a menu when the corresponding shortcut is pressed.
     this._shortcuts.connect('activated', (s, shortcut) => {
       for (let i = 0; i < this._menuConfigs.length; i++) {
         if (shortcut == this._menuConfigs[i].shortcut) {
-          const result = this.ShowMenu(this._menuConfigs[i].name);
-          if (result < 0) {
-            utils.debug(
-                'Failed to open a Fly-Pie menu: ' +
-                DBusInterface.getErrorDescription(result));
-          }
+          showMenu(this._menuConfigs[i].name);
+          break;
         }
       }
     });
 
-    this._shortcuts.connect('super-rmb', (s, shortcut) => {
-      utils.debug('super-rmb!');
-      return true;
+    // Open a menu when the Super+RMB combination is pressed and a menu is configured to
+    // listen to it.
+    this._shortcuts.connect('super-rmb', () => {
+      for (let i = 0; i < this._menuConfigs.length; i++) {
+        if (this._menuConfigs[i].superRMB) {
+          showMenu(this._menuConfigs[i].name);
+
+          // We have a menu bound to Super+RMB, so we have to prevent the normal behavior.
+          return true;
+        }
+      }
+
+      // No menu is bound to Super+RMB, let the event propagate.
+      return false;
     });
 
     // Create the touch buttons.

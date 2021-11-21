@@ -21,7 +21,8 @@ const utils  = Me.imports.src.common.utils;
 // shortcuts is pressed, the "activated" signal will be executed. The pressed shortcut  //
 // is passed as a parameter to the callback.                                            //
 // In addition, this class intercepts to the global Super+RMB event and allows          //
-// executing code when this is received.                                                //
+// executing code when this is received. This is possible as Super+RMB usually shows    //
+// the window menu and we can intercept this.                                           //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 var Shortcuts = GObject.registerClass(
@@ -72,12 +73,26 @@ var Shortcuts = GObject.registerClass(
             me._oldShowWindowMenu.apply(this, params);
           }
         };
-      }
 
+        // Intercept the Super+RMB when clicked anywhere else.
+        this._stageConnection = global.stage.connect('captured-event', (a, event) => {
+          if (event.type() == Clutter.EventType.BUTTON_PRESS &&
+              (event.get_state() & Clutter.ModifierType.MOD4_MASK) > 0) {
+
+            if ((event.get_state() & Clutter.ModifierType.BUTTON3_MASK) > 0) {
+              if (this.emit('super-rmb')) {
+                return Clutter.EVENT_STOP;
+              }
+            }
+          }
+          return Clutter.EVENT_CONTINUE;
+        });
+      }
 
       // Unbinds all registered shortcuts.
       destroy() {
         global.display.disconnect(this._displayConnection);
+        global.stage.disconnect(this._stageConnection);
 
         Main.wm._windowMenuManager.showWindowMenuForWindow = this._oldShowWindowMenu;
 
