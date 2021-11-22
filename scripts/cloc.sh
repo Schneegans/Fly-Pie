@@ -50,7 +50,7 @@ if [[ $# -eq 0 ]] ; then
   awk -v a=$COMMENT_LINES \
       'BEGIN {printf "Lines of comments:    %6.1fk\n", a/1000}'
   awk -v a=$COMMENT_LINES -v b="$LINES_OF_CODE" \
-      'BEGIN {printf "Comment Percentage:   %6.1f%\n", 100*a/b}'
+      'BEGIN {printf "Comment Percentage:   %6.1f%\n", 100*a/(a+b)}'
   exit 0
 fi
 
@@ -72,5 +72,5 @@ fi
 if [[ "$*" == *--percentage* ]]
 then
   awk -v a=$COMMENT_LINES -v b="$LINES_OF_CODE" \
-      'BEGIN {printf "%.1f\n", 100*a/b}'
+      'BEGIN {printf "%.1f\n", 100*a/(a+b)}'
 fi
