@@ -189,7 +189,15 @@ var Menu = class Menu {
       // Touch-end events are handled as if the left mouse button was released.
       if (event.type() == Clutter.EventType.BUTTON_RELEASE ||
           event.type() == Clutter.EventType.TOUCH_END) {
-        emitSelection();
+        // Only emit selection events if no modifier buttons are still held down. Without,
+        // the main issue is that releasing the Super key after the Fly-Pie menus has been
+        // closed would lead to toggling the overview.
+        const turboModifiers =
+            Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK;
+
+        if ((event.get_state() & turboModifiers) == 0) {
+          emitSelection();
+        }
         return Clutter.EVENT_STOP;
       }
 
