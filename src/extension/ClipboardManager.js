@@ -96,6 +96,11 @@ var ClipboardManager = class ClipboardManager {
             return;
           }
 
+          // If there is no owner anymore, this will be called as well.
+          if (owner == null) {
+            return;
+          }
+
           // Ignore changes we induced ourselves.
           if (this._ignoreNextOwnerChange) {
             this._ignoreNextOwnerChange = false;
