@@ -117,12 +117,16 @@ var Daemon = class Daemon {
     // Open a menu when the Super+RMB combination is pressed and a menu is configured to
     // listen to it.
     this._shortcuts.connect('super-rmb', () => {
-      for (let i = 0; i < this._menuConfigs.length; i++) {
-        if (this._menuConfigs[i].superRMB) {
-          showMenu(this._menuConfigs[i].name);
+      // Do not attempt to open a new menu if one is already opened.
+      if (this._menu.getID() == null) {
+        for (let i = 0; i < this._menuConfigs.length; i++) {
+          if (this._menuConfigs[i].superRMB) {
+            showMenu(this._menuConfigs[i].name);
 
-          // We have a menu bound to Super+RMB, so we have to prevent the normal behavior.
-          return true;
+            // We have a menu bound to Super+RMB, so we have to prevent the normal
+            // behavior.
+            return true;
+          }
         }
       }
 
