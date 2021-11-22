@@ -31,7 +31,8 @@ var Shortcuts = GObject.registerClass(
       Properties: {},
       Signals: {
         'activated': {param_types: [GObject.TYPE_STRING]},
-        'super-rmb': {return_type: GObject.TYPE_BOOLEAN},
+        'super-rmb':
+            {return_type: GObject.TYPE_BOOLEAN, flags: GObject.SignalFlags.RUN_LAST},
       }
     },
 
