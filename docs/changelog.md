@@ -12,6 +12,7 @@
 #### New Features
 
 * **Touch Buttons** can now be enabled for each configured menu. A touch button is a floating button which can be moved anywhere on your screen and will open the corresponding menu when activated. In fact, you do not need to click the button, you can also start dragging on the button in a specific direction to directly enter the marking mode of the menu.
+* **Open menus with <kbd>Super</kbd>+<kbd>RMB</kbd>**: You can now assign one of your menus to be opened when you press the right mouse button while holding down the <kbd>Super</kbd> key. This option then replaces the default window menu which would be opened with this combination.
 * New **Clipboard Menu**: This menu shows recently copied things.
 On selection, the respective item is pasted.
 The menu currently supports text, raster and vector images, and files copied from the file manager.
