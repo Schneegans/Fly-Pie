@@ -97,7 +97,9 @@ class MouseHighlight extends Clutter.Actor {
       ctx.lineTo(dx, dy);
       ctx.lineTo(ax, ay);
 
-      if (this._mods & Clutter.ModifierType.BUTTON3_MASK) {
+      // The right mouse button is BUTTON2 on Wayland and BUTTON3 on X11...
+      if (this._mods & Clutter.ModifierType.BUTTON2_MASK ||
+          this._mods & Clutter.ModifierType.BUTTON3_MASK) {
         ctx.setSourceRGB(1.0, 0.5, 0.5);
       } else {
         ctx.setSourceRGB(0.2, 0.2, 0.2);
