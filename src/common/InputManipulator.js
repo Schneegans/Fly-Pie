@@ -105,6 +105,9 @@ var InputManipulator = class InputManipulator {
       this._keyboard.notify_keyval(0, Clutter.KEY_Alt_L, Clutter.KeyState.PRESSED);
     }
 
-    // The super key is special, as it opens the overview. We do not press it again...
+    if ((modifiers & Gdk.ModifierType.MOD4_MASK) ||
+        (modifiers & Gdk.ModifierType.SUPER_MASK)) {
+      this._keyboard.notify_keyval(0, Clutter.KEY_Super_L, Clutter.KeyState.PRESSED);
+    }
   }
 };
