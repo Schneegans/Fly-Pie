@@ -516,14 +516,17 @@ class SelectionWedges extends Clutter.Actor {
   // the "Turbo-Mode"). Thanks to the Super+RMB mode, we can actually select items with
   // the right mouse button...
   isGestureModifier(mods) {
-    const hoverMode          = this._settings.hoverMode;
-    const leftButtonPressed  = (mods & Clutter.ModifierType.BUTTON1_MASK) > 0;
-    const rightButtonPressed = (mods & Clutter.ModifierType.BUTTON3_MASK) > 0;
+    const hoverMode = this._settings.hoverMode;
+    const buttonPressed =
+        (mods &
+         (Clutter.ModifierType.BUTTON1_MASK | Clutter.ModifierType.BUTTON2_MASK |
+          Clutter.ModifierType.BUTTON3_MASK)) > 0;
+
     const shortcutPressed =
         (mods &
          (Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK)) > 0;
 
-    return hoverMode || leftButtonPressed || rightButtonPressed || shortcutPressed;
+    return hoverMode || buttonPressed || shortcutPressed;
   }
 
   // ----------------------------------------------------------------------- private stuff
