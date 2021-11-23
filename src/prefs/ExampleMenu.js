@@ -53,15 +53,43 @@ var ExampleMenu = class ExampleMenu {
     return menu;
   }
 
+  // Is there a way to assign the same gettext comment to multiple strings...?
   static getItems() {
     // clang-format off
     return [
       {
-        // Translators: The tutorial menu allows selecting triplets such as "Smelly
-        // Chocolate Muffin". This is one of the first words. The three words are directly
-        // appended to each other; therefore the trailing space is important. You can also
-        // use hyphens if appropriate.
-        names: [_('Cold '), _('Hot '), _('Wet '), _('Deadly '), _('Smelly '), _('Vegan ')],
+        names: [
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the first words. The three words are directly
+          // appended to each other; therefore the trailing space is important. You can also
+          // use hyphens if appropriate.
+          _('Cold '),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the first words. The three words are directly
+          // appended to each other; therefore the trailing space is important. You can also
+          // use hyphens if appropriate.
+         _('Hot '),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the first words. The three words are directly
+          // appended to each other; therefore the trailing space is important. You can also
+          // use hyphens if appropriate.
+          _('Wet '),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the first words. The three words are directly
+          // appended to each other; therefore the trailing space is important. You can also
+          // use hyphens if appropriate.
+          _('Deadly '),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the first words. The three words are directly
+          // appended to each other; therefore the trailing space is important. You can also
+          // use hyphens if appropriate.
+          _('Smelly '),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the first words. The three words are directly
+          // appended to each other; therefore the trailing space is important. You can also
+          // use hyphens if appropriate.
+          _('Vegan ')
+        ],
         icons: [
           'flypie-cold-symbolic-#68c', 'flypie-hot-symbolic-#b42',
           'flypie-wet-symbolic-#349', 'flypie-deadly-symbolic-#523',
@@ -69,11 +97,33 @@ var ExampleMenu = class ExampleMenu {
         ]
       },
       {
-        // Translators: The tutorial menu allows selecting triplets such as "Smelly
-        // Chocolate Muffin". This is one of the middle words. The three words are
-        // directly appended to each other; therefore the trailing space is important. You
-        // can also use hyphens if appropriate.
-        names: [_('Chocolate '), _('Cherry '), _('Garlic '), _('Apple '), _('Pepper ')],
+        names: [
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the middle words. The three words are
+          // directly appended to each other; therefore the trailing space is important. You
+          // can also use hyphens if appropriate.
+          _('Chocolate '),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the middle words. The three words are
+          // directly appended to each other; therefore the trailing space is important. You
+          // can also use hyphens if appropriate.
+          _('Cherry '),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the middle words. The three words are
+          // directly appended to each other; therefore the trailing space is important. You
+          // can also use hyphens if appropriate.
+          _('Garlic '),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the middle words. The three words are
+          // directly appended to each other; therefore the trailing space is important. You
+          // can also use hyphens if appropriate.
+          _('Apple '),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the middle words. The three words are
+          // directly appended to each other; therefore the trailing space is important. You
+          // can also use hyphens if appropriate.
+          _('Pepper ')
+        ],
         icons: [
           'flypie-chocolate-symbolic-#432', 'flypie-cherry-symbolic-#a47',
           'flypie-garlic-symbolic-#a88', 'flypie-apple-symbolic-#5a3',
@@ -81,11 +131,33 @@ var ExampleMenu = class ExampleMenu {
         ]
       },
       {
-        // Translators: The tutorial menu allows selecting triplets such as "Smelly
-        // Chocolate Muffin". This is one of the last words. The three words are directly
-        // appended to each other; therefore the trailing space is important. You can also
-        // use hyphens if appropriate.
-        names: [_('Pie'), _('Cake'), _('Muffin'), _('Doughnut'), _('Cookie')],
+        names: [
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the last words. The three words are directly
+          // appended to each other; therefore the trailing space is important. You can also
+          // use hyphens if appropriate.
+          _('Pie'),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the last words. The three words are directly
+          // appended to each other; therefore the trailing space is important. You can also
+          // use hyphens if appropriate.
+          _('Cake'),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the last words. The three words are directly
+          // appended to each other; therefore the trailing space is important. You can also
+          // use hyphens if appropriate.
+          _('Muffin'),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the last words. The three words are directly
+          // appended to each other; therefore the trailing space is important. You can also
+          // use hyphens if appropriate.
+          _('Doughnut'),
+          // Translators: The tutorial menu allows selecting triplets such as "Smelly
+          // Chocolate Muffin". This is one of the last words. The three words are directly
+          // appended to each other; therefore the trailing space is important. You can also
+          // use hyphens if appropriate.
+          _('Cookie')
+        ],
         icons: [
           'flypie-pie-symbolic-#526', 'flypie-cake-symbolic-#baa',
           'flypie-muffin-symbolic-#973', 'flypie-doughnut-symbolic-#67c',
