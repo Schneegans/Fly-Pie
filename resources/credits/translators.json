@@ -1,55 +1,5 @@
 [
   {
-    "Norwegian Bokm\u00e5l": [
-      [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
-        12
-      ],
-      [
-        "epost@anotheragency.no",
-        "Allan Nordh\u00f8y",
-        319
-      ]
-    ]
-  },
-  {
-    "Dutch": [
-      [
-        "vistausss@fastmail.com",
-        "Heimen Stoffels",
-        63
-      ]
-    ]
-  },
-  {
-    "Finnish": [
-      [
-        "jiri.gronroos@iki.fi",
-        "Jiri Gr\u00f6nroos",
-        233
-      ]
-    ]
-  },
-  {
-    "Russian": [
-      [
-        "dan.samara@gmail.com",
-        "Daniel' Ishmaev",
-        26
-      ]
-    ]
-  },
-  {
-    "Sinhala": [
-      [
-        "R45XvezA@protonmail.ch",
-        "HelaBasa",
-        8
-      ]
-    ]
-  },
-  {
     "Portuguese (Brazil)": [
       [
         "code@simonschneegans.de",
@@ -74,34 +24,6 @@
     ]
   },
   {
-    "Italian": [
-      [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
-        23
-      ],
-      [
-        "j.lavoie@net-c.ca",
-        "J. Lavoie",
-        31
-      ],
-      [
-        "albano_battistella@hotmail.com",
-        "albanobattistella",
-        105
-      ]
-    ]
-  },
-  {
-    "Chinese (Simplified)": [
-      [
-        "me@wuzhiping.top",
-        "Frank.wu",
-        58
-      ]
-    ]
-  },
-  {
     "German": [
       [
         "j.lavoie@net-c.ca",
@@ -111,21 +33,26 @@
       [
         "philipp.kiemle@gmail.com",
         "Philipp Kiemle",
-        24
+        26
       ],
       [
         "code@simonschneegans.de",
         "Simon Schneegans",
-        148
+        158
       ]
     ]
   },
   {
-    "Korean": [
+    "Russian": [
       [
-        "R45XvezA@protonmail.ch",
-        "HelaBasa",
-        4
+        "dan.samara@gmail.com",
+        "Daniel' Ishmaev",
+        26
+      ],
+      [
+        "artem.job.kulikov@gmail.com",
+        "Artem Kulikov",
+        74
       ]
     ]
   },
@@ -139,16 +66,99 @@
     ]
   },
   {
+    "Italian": [
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        24
+      ],
+      [
+        "j.lavoie@net-c.ca",
+        "J. Lavoie",
+        31
+      ],
+      [
+        "albano_battistella@hotmail.com",
+        "albanobattistella",
+        120
+      ]
+    ]
+  },
+  {
+    "Dutch": [
+      [
+        "vistausss@fastmail.com",
+        "Heimen Stoffels",
+        63
+      ]
+    ]
+  },
+  {
     "Spanish": [
       [
         "code@simonschneegans.de",
         "Simon Schneegans",
-        1
+        2
       ],
       [
         "captainjawz@outlook.com",
         "Danilo Reyes",
         137
+      ]
+    ]
+  },
+  {
+    "Finnish": [
+      [
+        "jiri.gronroos@iki.fi",
+        "Jiri Gr\u00f6nroos",
+        244
+      ]
+    ]
+  },
+  {
+    "Korean": [
+      [
+        "R45XvezA@protonmail.ch",
+        "HelaBasa",
+        4
+      ]
+    ]
+  },
+  {
+    "Sinhala": [
+      [
+        "R45XvezA@protonmail.ch",
+        "HelaBasa",
+        8
+      ]
+    ]
+  },
+  {
+    "Chinese (Simplified)": [
+      [
+        "jingxuan@nfschina.com",
+        "jingxuan@nfschina.com",
+        8
+      ],
+      [
+        "me@wuzhiping.top",
+        "Frank.wu",
+        58
+      ]
+    ]
+  },
+  {
+    "Norwegian Bokm\u00e5l": [
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        13
+      ],
+      [
+        "epost@anotheragency.no",
+        "Allan Nordh\u00f8y",
+        387
       ]
     ]
   }
