@@ -5112,6 +5112,23 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                       <object class="GtkBox">
                                         <property name="margin_top">10</property>
                                         <property name="spacing">10</property>
+                                        <property name="tooltip_text" translatable="yes">Usually, Super + Right Mouse Button opens the window menu. With this setting, you can instead open a Fly-Pie menu.</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="hexpand">1</property>
+                                            <property name="halign">start</property>
+                                            <property name="label" translatable="yes">Bind to Super + RMB</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkSwitch" id="super-rmb" />
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="margin_top">10</property>
+                                        <property name="spacing">10</property>
                                         <child>
                                           <object class="GtkLabel">
                                             <property name="hexpand">1</property>
