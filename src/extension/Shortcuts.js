@@ -63,7 +63,7 @@ var Shortcuts = GObject.registerClass(
         const me                = this;
         Main.wm._windowMenuManager.showWindowMenuForWindow = function(...params) {
           const mods = global.get_pointer()[2];
-          if (mods & Clutter.ModifierType.MOD4_MASK == 0) {
+          if ((mods & Clutter.ModifierType.MOD4_MASK) == 0) {
             me._oldShowWindowMenu.apply(this, params);
             return;
           }
