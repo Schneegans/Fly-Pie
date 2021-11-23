@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-23 13:32+0100\n"
+"POT-Creation-Date: 2021-11-23 14:05+0100\n"
 "PO-Revision-Date: 2021-11-17 19:45+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/fly-pie/"
@@ -1026,27 +1026,47 @@ msgstr "Eksempelmeny"
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:64
+#: src/prefs/ExampleMenu.js:66
 msgid "Cold "
 msgstr "Kald "
 
-#: src/prefs/ExampleMenu.js:64
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:71
 msgid "Hot "
 msgstr "Varm "
 
-#: src/prefs/ExampleMenu.js:64
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:76
 msgid "Wet "
 msgstr "Våt "
 
-#: src/prefs/ExampleMenu.js:64
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:81
 msgid "Deadly "
 msgstr "Dødlig "
 
-#: src/prefs/ExampleMenu.js:64
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:86
 msgid "Smelly "
 msgstr "Stinkende "
 
-#: src/prefs/ExampleMenu.js:64
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:91
 msgid "Vegan "
 msgstr "Vegansk "
 
@@ -1054,23 +1074,39 @@ msgstr "Vegansk "
 #. Chocolate Muffin". This is one of the middle words. The three words are
 #. directly appended to each other; therefore the trailing space is important. You
 #. can also use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:76
+#: src/prefs/ExampleMenu.js:105
 msgid "Chocolate "
 msgstr "Sjokolade-"
 
-#: src/prefs/ExampleMenu.js:76
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the middle words. The three words are
+#. directly appended to each other; therefore the trailing space is important. You
+#. can also use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:110
 msgid "Cherry "
 msgstr "Kirsebær-"
 
-#: src/prefs/ExampleMenu.js:76
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the middle words. The three words are
+#. directly appended to each other; therefore the trailing space is important. You
+#. can also use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:115
 msgid "Garlic "
 msgstr "Hvitløk-"
 
-#: src/prefs/ExampleMenu.js:76
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the middle words. The three words are
+#. directly appended to each other; therefore the trailing space is important. You
+#. can also use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:120
 msgid "Apple "
 msgstr "Eple-"
 
-#: src/prefs/ExampleMenu.js:76
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the middle words. The three words are
+#. directly appended to each other; therefore the trailing space is important. You
+#. can also use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:125
 msgid "Pepper "
 msgstr "Paprika-"
 
@@ -1078,23 +1114,39 @@ msgstr "Paprika-"
 #. Chocolate Muffin". This is one of the last words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:88
+#: src/prefs/ExampleMenu.js:139
 msgid "Pie"
 msgstr "pai"
 
-#: src/prefs/ExampleMenu.js:88
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the last words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:144
 msgid "Cake"
 msgstr "kake"
 
-#: src/prefs/ExampleMenu.js:88
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the last words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:149
 msgid "Muffin"
 msgstr "muffin"
 
-#: src/prefs/ExampleMenu.js:88
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the last words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:154
 msgid "Doughnut"
 msgstr "smultring"
 
-#: src/prefs/ExampleMenu.js:88
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the last words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:159
 msgid "Cookie"
 msgstr "Kjeks"
 
