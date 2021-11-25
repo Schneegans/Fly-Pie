@@ -200,16 +200,14 @@ var ClipboardManager = class ClipboardManager {
         Meta.SelectionType.SELECTION_CLIPBOARD,
         Meta.SelectionSourceMemory.new(item.type, item.data));
 
-    // Simulate Ctrl+V. On Wayland, we can do this directly, on X11 a short timeout seems
-    // to be required.
-    if (utils.getSessionType() == 'wayland') {
+    // Simulate Ctrl+V. Sometimes, this does not work if done directly. Maybe there's a
+    // race condition between simulating the modifiers here and un-grabbing the input of
+    // the closed Fly-Pie menu. A short timeout seems to fix it.
+    GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
       this._input.activateAccelerator('<Primary>v');
-    } else {
-      GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
-        this._input.activateAccelerator('<Primary>v');
-        return false;
-      });
-    }
+      return false;
+    });
+  }
 
   // If we mess with the clipboard from within Fly-Pie, we can use this to prevent the
   // next owner change from creating an item.

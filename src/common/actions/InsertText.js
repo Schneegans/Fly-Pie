@@ -8,7 +8,7 @@
 
 'use strict';
 
-const {Gdk, Gtk} = imports.gi;
+const {Gdk, Gtk, GLib} = imports.gi;
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -108,7 +108,14 @@ var action = {
 
         const clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default());
         clipboard.set_text(text, -1);
-        InputManipulator.activateAccelerator('<Primary>v');
+
+        // Simulate Ctrl+V. Sometimes, this does not work if done directly. Maybe there's
+        // a race condition between simulating the modifiers here and un-grabbing the
+        // input of the closed Fly-Pie menu. A short timeout seems to fix it.
+        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
+          InputManipulator.activateAccelerator('<Primary>v');
+          return false;
+        });
       }
     };
   }
