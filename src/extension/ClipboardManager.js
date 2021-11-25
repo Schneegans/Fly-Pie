@@ -160,11 +160,28 @@ var ClipboardManager = class ClipboardManager {
                   return;
                 }
 
-                // Add the new item to the list of items.
-                const length = this._items.unshift({
+                // Create a new item.
+                const newItem = {
                   type: mimeType,
                   data: output.steal_as_bytes(),
-                });
+                };
+
+                // Check whether we have the same item already. If so, we remove it so we
+                // do not have duplicated entries..
+                for (let i = 0; i < this._items.length; i++) {
+                  const item = this._items[i];
+                  if (newItem.mimeType == item.mimeType &&
+                      item.data.equal(newItem.data)) {
+
+                    this._items.splice(i, 1);
+
+                    // There can be at most one duplicated entry.
+                    break;
+                  }
+                }
+
+                // Add the new item to the list of items.
+                const length = this._items.unshift(newItem);
 
                 // Pop the last entry if we have stored more than MAX_ENTRIES of items.
                 if (length > MAX_ENTRIES) {
