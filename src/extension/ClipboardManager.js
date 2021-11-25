@@ -193,7 +193,7 @@ var ClipboardManager = class ClipboardManager {
   pasteItem(item) {
 
     // Make sure that the clipboard owner change does not modify our list of copied items.
-    this._ignoreNextOwnerChange = true;
+    this.ignoreNextOwnerChange();
 
     // Provide the data on the clipboard.
     global.display.get_selection().set_owner(
@@ -210,5 +210,10 @@ var ClipboardManager = class ClipboardManager {
         return false;
       });
     }
+
+  // If we mess with the clipboard from within Fly-Pie, we can use this to prevent the
+  // next owner change from creating an item.
+  ignoreNextOwnerChange() {
+    this._ignoreNextOwnerChange = true;
   }
 }

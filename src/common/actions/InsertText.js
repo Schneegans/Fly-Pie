@@ -16,15 +16,18 @@ const Me                  = imports.misc.extensionUtils.getCurrentExtension();
 const ItemRegistry        = Me.imports.src.common.ItemRegistry;
 const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
-// We import the InputManipulator optionally. When this file is included from the daemon
-// side, it is available and can be used in the activation code of the action defined
-// below. If this file is included via the pref.js, it will not be available. But this is
-// not a problem, as the preferences will not call the createItem() methods below; they
-// are merely interested in the action's name, icon and description.
+// We import the ClipboardManager and InputManipulator optionally. When this file is
+// included from the daemon side, they are available and can be used in the activation
+// code of the action defined below. If this file is included via the pref.js, they will
+// not be available. But this is not a problem, as the preferences will not call the
+// createItem() methods below; they are merely interested in the action's name, icon and
+// description.
 let InputManipulator = undefined;
+let ClipboardManager = undefined;
 
 try {
   InputManipulator = new Me.imports.src.common.InputManipulator.InputManipulator();
+  ClipboardManager = Me.imports.src.extension.ClipboardManager.ClipboardManager;
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
@@ -98,6 +101,11 @@ var action = {
     // The onSelect() function will be called when the user selects this action.
     return {
       onSelect: () => {
+        // Make sure that the set_text() further below does not affect our clipboard
+        // menus.
+        const clipboardManager = ClipboardManager.getInstance();
+        clipboardManager.ignoreNextOwnerChange();
+
         const clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default());
         clipboard.set_text(text, -1);
         InputManipulator.activateAccelerator('<Primary>v');
