@@ -217,9 +217,7 @@ var ClipboardManager = class ClipboardManager {
         Meta.SelectionType.SELECTION_CLIPBOARD,
         Meta.SelectionSourceMemory.new(item.type, item.data));
 
-    // Simulate Ctrl+V. Sometimes, this does not work if done directly. Maybe there's a
-    // race condition between simulating the modifiers here and un-grabbing the input of
-    // the closed Fly-Pie menu. A short timeout seems to fix it.
+    // Finally, simulate Ctrl+V.
     this._input.activateAccelerator('<Primary>v');
   }
 

@@ -109,9 +109,7 @@ var action = {
         const clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default());
         clipboard.set_text(text, -1);
 
-        // Simulate Ctrl+V. Sometimes, this does not work if done directly. Maybe there's
-        // a race condition between simulating the modifiers here and un-grabbing the
-        // input of the closed Fly-Pie menu. A short timeout seems to fix it.
+        // Finally, simulate Ctrl+V.
         InputManipulator.activateAccelerator('<Primary>v');
       }
     };
