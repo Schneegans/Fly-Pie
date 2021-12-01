@@ -535,12 +535,14 @@ var Menu = class Menu {
     this.onSettingsChange();
   }
 
-  // This removes our root actor from GNOME Shell.
+  // This removes our root actor from GNOME Shell and disconnects various handlers and
+  // timeouts.
   destroy() {
     this.close();
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();
     Meta.get_backend().disconnect(this._deviceChangedID);
+    this._cancelMoveWindowTimeouts();
   }
 
   // -------------------------------------------------------------------- public interface
@@ -1276,7 +1278,7 @@ var Menu = class Menu {
 
       // Then call the activation callback! Oftentimes, this will open a new window. We
       // make sure that this window is opened at the current pointer location!
-      utils.openNextWindowAtPointer();
+      this._openNextWindowAtPointer();
       child.getSelectionCallback()();
 
       // Report the selection over the D-Bus.
@@ -1286,6 +1288,72 @@ var Menu = class Menu {
       // time and whether a continuous gesture was used for the selection.
       Statistics.getInstance().addSelection(
           selectionDepth, selectionTime, this._gestureOnlySelection);
+    }
+  }
+
+  // When executed, this function will move the first window created within the next two
+  // seconds to the current location of the mouse pointer. This is always called when an
+  // action is executed as many of them will potentially open windows.
+  _openNextWindowAtPointer() {
+
+    // First cancel any ongoing window-movement timeouts.
+    this._cancelMoveWindowTimeouts();
+
+    // Store pointer location. If a new window is opened, it will be centered at this
+    // position.
+    const [pointerX, pointerY] = global.get_pointer();
+
+    // Wait until the next window is created.
+    this._windowCreatedID = global.display.connect('window-created', () => {
+      this._windowfocusedID = global.display.connect('notify::focus-window', () => {
+        const frame = global.display.focus_window.get_frame_rect();
+        const area  = global.display.focus_window.get_work_area_current_monitor();
+
+        // Center on the pointer.
+        frame.x = pointerX - frame.width / 2;
+        frame.y = pointerY - frame.height / 2;
+
+        // Clamp to the work area.
+        frame.x = Math.min(Math.max(frame.x, area.x), area.x + area.width - frame.width);
+        frame.y =
+            Math.min(Math.max(frame.y, area.y), area.y + area.height - frame.height);
+
+        // Move the window!
+        global.display.focus_window.move_frame(true, frame.x, frame.y);
+
+        // Disconnect, we will only move the window once.
+        global.display.disconnect(this._windowfocusedID);
+        this._windowfocusedID = null;
+      });
+
+      // Disconnect, we will only move the first window created within the timeout period.
+      global.display.disconnect(this._windowCreatedID);
+      this._windowCreatedID = null;
+    });
+
+    // Disconnect the handlers after two seconds (if they were not called).
+    this._cancelMoveWindowID = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
+      this._cancelMoveWindowID = null;
+      this._cancelMoveWindowTimeouts();
+      return false;
+    });
+  }
+
+  // This cancels any pending move-window-pointer operation started with the method above.
+  _cancelMoveWindowTimeouts() {
+    if (this._windowCreatedID) {
+      global.display.disconnect(this._windowCreatedID);
+      this._windowCreatedID = null;
+    }
+
+    if (this._windowfocusedID) {
+      global.display.disconnect(this._windowfocusedID);
+      this._windowfocusedID = null;
+    }
+
+    if (this._cancelMoveWindowID) {
+      GLib.source_remove(this._cancelMoveWindowID);
+      this._cancelMoveWindowID = null;
     }
   }
 };
