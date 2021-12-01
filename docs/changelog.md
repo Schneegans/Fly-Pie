@@ -7,7 +7,7 @@
 
 ## [Fly-Pie 10](https://github.com/schneegans/fly-pie/releases/tag/v10)
 
-**Release Date:** TBD
+**Release Date:** 2021-12-01
 
 #### New Features
 
