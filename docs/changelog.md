@@ -7,6 +7,8 @@
 
 ## [Fly-Pie 10](https://github.com/schneegans/fly-pie/releases/tag/v10)
 
+<a href="https://youtu.be/BGXtckqhEIk"><img align="right" src ="pics/player6.jpg" /></a>
+
 **Release Date:** 2021-12-01
 
 #### New Features
