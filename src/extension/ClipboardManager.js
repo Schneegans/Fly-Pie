@@ -220,10 +220,7 @@ var ClipboardManager = class ClipboardManager {
     // Simulate Ctrl+V. Sometimes, this does not work if done directly. Maybe there's a
     // race condition between simulating the modifiers here and un-grabbing the input of
     // the closed Fly-Pie menu. A short timeout seems to fix it.
-    GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
-      this._input.activateAccelerator('<Primary>v');
-      return false;
-    });
+    this._input.activateAccelerator('<Primary>v');
   }
 
   // If we mess with the clipboard from within Fly-Pie, we can use this to prevent the

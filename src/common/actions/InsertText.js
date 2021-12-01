@@ -112,10 +112,7 @@ var action = {
         // Simulate Ctrl+V. Sometimes, this does not work if done directly. Maybe there's
         // a race condition between simulating the modifiers here and un-grabbing the
         // input of the closed Fly-Pie menu. A short timeout seems to fix it.
-        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
-          InputManipulator.activateAccelerator('<Primary>v');
-          return false;
-        });
+        InputManipulator.activateAccelerator('<Primary>v');
       }
     };
   }
