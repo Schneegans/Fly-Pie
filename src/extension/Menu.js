@@ -542,7 +542,7 @@ var Menu = class Menu {
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();
     Meta.get_backend().disconnect(this._deviceChangedID);
-    this._cancelMoveWindowTimeouts();
+    this._cancelMoveWindowToPointer();
   }
 
   // -------------------------------------------------------------------- public interface
@@ -1297,7 +1297,7 @@ var Menu = class Menu {
   _openNextWindowAtPointer() {
 
     // First cancel any ongoing window-movement timeouts.
-    this._cancelMoveWindowTimeouts();
+    this._cancelMoveWindowToPointer();
 
     // Store pointer location. If a new window is opened, it will be centered at this
     // position.
@@ -1334,13 +1334,13 @@ var Menu = class Menu {
     // Disconnect the handlers after two seconds (if they were not called).
     this._cancelMoveWindowID = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
       this._cancelMoveWindowID = null;
-      this._cancelMoveWindowTimeouts();
+      this._cancelMoveWindowToPointer();
       return false;
     });
   }
 
   // This cancels any pending move-window-pointer operation started with the method above.
-  _cancelMoveWindowTimeouts() {
+  _cancelMoveWindowToPointer() {
     if (this._windowCreatedID) {
       global.display.disconnect(this._windowCreatedID);
       this._windowCreatedID = null;
