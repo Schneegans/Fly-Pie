@@ -11,7 +11,8 @@
 
 #### Bug Fixes
 
-* Fixed a bug which caused two sliders of the advanced settings to be rendered on top of each other under GTK3.
+* Fixed a bug which caused two sliders of the advanced settings to be rendered on top of each other under GTK3 (#175).
+* Fixed a bug which caused the overview to be opened when an item was selected with a mouse click while the <kbd>Super</kbd> key was held down (#176).
 
 ## [Fly-Pie 11](https://github.com/schneegans/fly-pie/releases/tag/v11)
 
