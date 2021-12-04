@@ -295,7 +295,16 @@ var Menu = class Menu {
       // Select something on left mouse button clicks. On touch-based clicks, get_button()
       // returns 0.
       if (action.get_button() == 0 || action.get_button() == 1) {
-        emitSelection();
+        // Only emit selection events if no modifier buttons are still held down. Without,
+        // the main issue is that releasing the Super key after the Fly-Pie menus has been
+        // closed would lead to toggling the overview.
+        const turboModifiers =
+            Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK;
+
+        const mods = global.get_pointer()[2];
+        if ((mods & turboModifiers) == 0) {
+          emitSelection();
+        }
       }
     });
 
