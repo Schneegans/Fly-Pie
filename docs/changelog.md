@@ -5,6 +5,14 @@
 # Changelog of Fly-Pie
 
 
+## [Fly-Pie 12](https://github.com/schneegans/fly-pie/releases/tag/v12)
+
+**Release Date:** TBD
+
+#### Bug Fixes
+
+* Fixed a bug which caused two sliders of the advanced settings to be rendered on top of each other under GTK3.
+
 ## [Fly-Pie 11](https://github.com/schneegans/fly-pie/releases/tag/v11)
 
 
