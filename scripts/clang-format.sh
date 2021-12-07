@@ -15,7 +15,7 @@ set -e
 cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
   { echo "ERROR: Could not find the repo root."; exit 1; }
 
-# Execute clang format for all *.cpp, *.hpp and *.inl files.
+# Execute clang format for all *.js.
 find . -type f -name '*.js' -exec sh -c '
   for file do
     echo "Formatting $file..."
