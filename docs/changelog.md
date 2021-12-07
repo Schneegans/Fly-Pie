@@ -7,7 +7,12 @@
 
 ## [Fly-Pie 12](https://github.com/schneegans/fly-pie/releases/tag/v12)
 
-**Release Date:** TBD
+**Release Date:** 2021-12-07
+
+#### Other Enhancements
+
+* Updated Spanish translation (thank you, Óscar Fernández Díaz!).
+* Renamed `master` branch to `main`.
 
 #### Bug Fixes
 
