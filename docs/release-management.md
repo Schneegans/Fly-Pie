@@ -48,18 +48,18 @@ When this is done, the file has to be committed:
 To do this, a new issue is created with a checklist with all translations which need an update and the corresponding @-mentions.
 Also, last-minute bug fixes should be implemented now.
 
-6. Next, the `release` branch is merged to `master`, deleted, and a tag is created and everything is pushed:
+6. Next, the `release` branch is merged to `main`, deleted, and a tag is created and everything is pushed:
    ```bash
-   git checkout master
+   git checkout main
    git merge feature/v<new version number>
    git tag v<new version number>
    git push origin v<new version number>
-   git push origin master
+   git push origin main
    git push origin :feature/v<new version number>
    git branch -d feature/v<new version number>
    git checkout develop
    git pull origin develop
-   git merge master
+   git merge main
    git push origin develop
    ```
 
