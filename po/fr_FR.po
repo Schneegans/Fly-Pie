@@ -266,7 +266,7 @@ msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
 msgstr ""
-"Le menu <b>Système</b> présente des options pour verrouiller l'écran, 
+"Le menu <b>Système</b> présente des options pour verrouiller l'écran, "
 "éteindre, paramètres, etc."
 
 #. Translators: As in 'Lock the screen.'
@@ -1461,8 +1461,8 @@ msgid ""
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
 "💕️ Vous voulez montrer que vous aimez Fly-Pie ? "
-"<a href=\"https://github.com/sponsors/Schneegans\">Devenez sponsor pour
-seulement 1$ / mois !</a>"
+"<a href=\"https://github.com/sponsors/Schneegans\">Devenez sponsor pour "
+"seulement 1$ / mois !</a>"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/gtk4/settings.ui:707 resources/ui/gtk3/settings.ui:702
@@ -1587,8 +1587,8 @@ msgid ""
 "Pie's Marking Mode!"
 msgstr ""
 "Pour cette session d'entraînement, ouvrez le menu en cliquant sur le gros "
-"bouton. Puis seléctionnez \"%s\" le plus vite possible. Arriverez-vous à 
-obtenir la médaille d'or ?\n"
+"bouton. Puis seléctionnez \"%s\" le plus vite possible. Arriverez-vous à "
+"obtenir la médaille d'or ?\n"
 "\n"
 "Une fois satisfait•e de votre résultat, cliquez sur <b>suivant</b> pour "
 "apprendre le Mode Marking de Fly-Pie !"
