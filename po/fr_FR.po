@@ -1335,52 +1335,52 @@ msgstr "Linéaire"
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:23 resources/ui/gtk3/settings.ui:23
 msgid "Ease"
-msgstr "Fondu"
+msgstr "Ease"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:27 resources/ui/gtk3/settings.ui:27
 msgid "Ease-In"
-msgstr "Fondu en Entrée"
+msgstr "Ease-In"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:31 resources/ui/gtk3/settings.ui:31
 msgid "Ease-Out"
-msgstr "Fondu en Sortie"
+msgstr "Ease-Out"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:35 resources/ui/gtk3/settings.ui:35
 msgid "Ease-In-Out"
-msgstr "Fondu en Entrée-Sortie"
+msgstr "Ease-In-Out"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:39 resources/ui/gtk3/settings.ui:39
 msgid "Ease-In-Quad"
-msgstr "Fondu en Entrée Quad"
+msgstr "Ease-In-Quad"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:43 resources/ui/gtk3/settings.ui:43
 msgid "Ease-Out-Quad"
-msgstr "Fondu en Sortie Quad"
+msgstr "Ease-Out-Quad"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:47 resources/ui/gtk3/settings.ui:47
 msgid "Ease-In-Out-Quad"
-msgstr "Fondu en Entrée-Sortie Quad"
+msgstr "Ease-In-Out-Quad"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:51 resources/ui/gtk3/settings.ui:51
 msgid "Ease-In-Back"
-msgstr "Fondu en Entrée et Retour"
+msgstr "Ease-In-Back"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:55 resources/ui/gtk3/settings.ui:55
 msgid "Ease-Out-Back"
-msgstr "Fondu en Sortie et Retour"
+msgstr "Ease-Out-Back"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:59 resources/ui/gtk3/settings.ui:59
 msgid "Ease-In-Out-Back"
-msgstr "Fondu en Entrée-Sortie et Retour"
+msgstr "Ease-In-Out-Back"
 
 #: resources/ui/gtk4/settings.ui:404 resources/ui/gtk3/settings.ui:441
 msgid "About"
