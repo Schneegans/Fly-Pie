@@ -2002,11 +2002,11 @@ msgstr "Longueur Minimale de Segment"
 #: resources/ui/gtk4/settings.ui:4046 resources/ui/gtk4/settings.ui:4170
 #: resources/ui/gtk3/settings.ui:3987 resources/ui/gtk3/settings.ui:4110
 msgid "Touch Button Settings"
-msgstr "Paramètres du Bouton Touche"
+msgstr "Paramètres du Bouton Tactile"
 
 #: resources/ui/gtk4/settings.ui:4056 resources/ui/gtk3/settings.ui:3997
 msgid "You can show a touch button for each of your menus."
-msgstr "Vous pouvez montrer un bouton touche pour chacun de vos menus."
+msgstr "Vous pouvez montrer un bouton tactile pour chacun de vos menus."
 
 #: resources/ui/gtk4/settings.ui:4074 resources/ui/gtk3/settings.ui:4015
 msgid "Inactive Opacity"
@@ -2235,7 +2235,7 @@ msgstr "Lier à Super + Clic Droit"
 
 #: resources/ui/gtk4/settings.ui:5144 resources/ui/gtk3/settings.ui:5136
 msgid "Show Touch Button"
-msgstr "Montrer le Bouton Touche"
+msgstr "Montrer le Bouton Tactile"
 
 #: resources/ui/gtk4/settings.ui:5160 resources/ui/gtk3/settings.ui:5152
 msgid "Open in Screen Center"
