@@ -229,7 +229,7 @@ msgstr "Fréquemment Utilisées"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/FrequentlyUsed.js:51
 msgid "Shows your frequently used applications."
-msgstr "Montre vos applications fréquemment utilisées."
+msgstr "Affiche vos applications fréquemment utilisées."
 
 #: src/common/menus/FrequentlyUsed.js:55
 msgid ""
@@ -237,7 +237,7 @@ msgid ""
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
 msgstr ""
-"Le menu <b>Fréquemment Utilisées<b> montre une liste d'applications "
+"Le menu <b>Fréquemment Utilisées<b> affiche une liste d'applications "
 "souvent utilisées. Pour des séléctions efficaces, vous devriez limiter le "
 "nombre maximal d'applications affichées à environ douze."
 
@@ -319,14 +319,14 @@ msgstr "Favoris"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:50
 msgid "Shows pinned applications."
-msgstr "Montre les application épinglées."
+msgstr "Affiche les application épinglées."
 
 #: src/common/menus/Favorites.js:54
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
 msgstr ""
-"Le menu <b>Favoris</b> montre les applications que vous avez épinglées "
+"Le menu <b>Favoris</b> affiche les applications que vous avez épinglées "
 "au Dash de GNOME Shell."
 
 #: src/common/menus/RecentFiles.js:34
@@ -337,7 +337,7 @@ msgstr "Fichiers Récents"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RecentFiles.js:41
 msgid "Shows your recently used files."
-msgstr "Montre vos fichiers récemment utilisés."
+msgstr "Affiche vos fichiers récemment utilisés."
 
 #: src/common/menus/RecentFiles.js:45
 msgid ""
@@ -345,7 +345,7 @@ msgid ""
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
 msgstr ""
-"Le menu <b>Fichiers Récents</b> montre une liste de fichiers récemment "
+"Le menu <b>Fichiers Récents</b> affiche une liste de fichiers récemment "
 "utilisés. Pour une séléction efficace, vous devriez limiter le nombre de "
 "fichiers maximum affichés à environ douze."
 
@@ -357,14 +357,14 @@ msgstr "Périphériques"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:40
 msgid "Shows connected devices."
-msgstr "Montre les appareils connectés."
+msgstr "Affiche les appareils connectés."
 
 #: src/common/menus/Devices.js:44
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
 msgstr ""
-"Le menu <b>Périphériques</b> montre un élément pour chaque volume monté, "
+"Le menu <b>Périphériques</b> affiche un élément pour chaque volume monté, "
 "comme les clés USB."
 
 #: src/common/menus/MainMenu.js:33
@@ -375,7 +375,7 @@ msgstr "Menu Principal"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/MainMenu.js:40
 msgid "Shows all installed applications."
-msgstr "Montre toutes les applications installées."
+msgstr "Affiche toutes les applications installées."
 
 #: src/common/menus/MainMenu.js:44
 msgid ""
@@ -383,7 +383,7 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather set up your own menus!"
 msgstr ""
-"Le <b>Menu Principal</b> montre toutes les applications installées. C'est "
+"Le <b>Menu Principal</b> affiche toutes les applications installées. C'est "
 "généralement très encombré et beaucoup de catégories contiennent trop d'éléments "
 "pour être utilisées efficacement. "
 "Vous devriez plutôt créer vos propres menus !"
@@ -397,7 +397,7 @@ msgstr "Applications En Cours d'Exécution"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:54
 msgid "Shows the currently running applications."
-msgstr "Montre les applications en cours d'exécution."
+msgstr "Affiche les applications en cours d'exécution."
 
 #: src/common/menus/RunningApps.js:58
 msgid ""
@@ -405,7 +405,7 @@ msgid ""
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
-"Le menu <b>Applications En Cours d'Exécution</b> montre toutes les applications "
+"Le menu <b>Applications En Cours d'Exécution</b> affiche toutes les applications "
 "en cours d'exécution. C'est similaire à la séléction de fenêtre Alt+Tab. "
 "Comme les entrées changent souvent de position, ce n'est en réalité pas "
 "très efficace."
@@ -455,14 +455,14 @@ msgstr "Marque-Pages"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Bookmarks.js:40
 msgid "Shows your frequently used directories."
-msgstr "Montre vos répértoires fréquemment utilisés."
+msgstr "Affiche vos répértoires fréquemment utilisés."
 
 #: src/common/menus/Bookmarks.js:44
 msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
 msgstr ""
-"Le menu <b>Marque-Pages</b> montre un élément pour la corbeille, le "
+"Le menu <b>Marque-Pages</b> affiche un élément pour la corbeille, le "
 "bureau, et chaque répertoire avec un marque-page."
 
 #: src/common/menus/Clipboard.js:54
@@ -473,11 +473,11 @@ msgstr "Presse-Papier"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Clipboard.js:61
 msgid "Shows recently copied things."
-msgstr "Montre les choses récemment copiés."
+msgstr "Affiche les choses récemment copiés."
 
 #: src/common/menus/Clipboard.js:64
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
-msgstr "Le menu <b>Presse-Papier</b> montre une liste d'éléments récemment copiés."
+msgstr "Le menu <b>Presse-Papier</b> affiche une liste d'éléments récemment copiés."
 
 #: src/common/menus/Clipboard.js:94
 msgid "First Child Angle"
@@ -1302,7 +1302,7 @@ msgstr "Vous avez terminé le succès \"%s\" !"
 #. is shown once an achievement is unlocked.
 #: src/extension/Daemon.js:550
 msgid "Show Achievements"
-msgstr "Montrer les Succès"
+msgstr "Afficher les Succès"
 
 #: resources/ui/gtk4/copyValueButton.ui:6
 #: resources/ui/gtk3/copyValueButton.ui:6
@@ -1776,7 +1776,7 @@ msgstr "Apparence du Centre"
 
 #: resources/ui/gtk4/settings.ui:1888 resources/ui/gtk3/settings.ui:1875
 msgid "The center element shows the currently hovered child's name."
-msgstr "L'élément central montre le nom de l'enfant actuellement survolé."
+msgstr "L'élément central affiche le nom de l'enfant actuellement survolé."
 
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/gtk4/settings.ui:1904 resources/ui/gtk3/settings.ui:1891
@@ -2006,7 +2006,7 @@ msgstr "Paramètres du Bouton Tactile"
 
 #: resources/ui/gtk4/settings.ui:4056 resources/ui/gtk3/settings.ui:3997
 msgid "You can show a touch button for each of your menus."
-msgstr "Vous pouvez montrer un bouton tactile pour chacun de vos menus."
+msgstr "Vous pouvez afficher un bouton tactile pour chacun de vos menus."
 
 #: resources/ui/gtk4/settings.ui:4074 resources/ui/gtk3/settings.ui:4015
 msgid "Inactive Opacity"
@@ -2074,8 +2074,8 @@ msgid ""
 "Menus will be shown after this many milliseconds.\n"
 "Use this to quickly select items without showing the menu."
 msgstr ""
-"Les menus seront montrés après ce temps en millisecondes.\n"
-"Utilisez ceci pour rapidement sélectionner des éléments sans montrer le menu."
+"Les menus seront affichés après ce temps en millisecondes.\n"
+"Utilisez ceci pour rapidement sélectionner des éléments sans afficher le menu."
 
 #: resources/ui/gtk4/settings.ui:4421 resources/ui/gtk3/settings.ui:4355
 msgid "Selection Timeout"
@@ -2103,14 +2103,14 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4503 resources/ui/gtk3/settings.ui:4437
 msgid "Show Screencast Mouse"
-msgstr "Montrer la Souris à l'Écran"
+msgstr "Afficher la Souris à l'Écran"
 
 #: resources/ui/gtk4/settings.ui:4513 resources/ui/gtk3/settings.ui:4447
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
 msgstr ""
-"Montre un gros pointeur de souris et une visualisation des clics.\n"
+"Affiche un gros pointeur de souris et une visualisation des clics.\n"
 "Cela peut être utile si vous voulez capturer une vidéo de Fly-Pie."
 
 #: resources/ui/gtk4/settings.ui:4546 resources/ui/gtk3/settings.ui:4480
@@ -2119,7 +2119,7 @@ msgstr "Notification des Succès"
 
 #: resources/ui/gtk4/settings.ui:4556 resources/ui/gtk3/settings.ui:4490
 msgid "Show a notification whenever you complete an achievement."
-msgstr "Montrer une notification chaque fois que vous complétez un succès."
+msgstr "Afficher une notification chaque fois que vous complétez un succès."
 
 #: resources/ui/gtk4/settings.ui:4618 resources/ui/gtk3/settings.ui:4563
 msgid "Load Preset"
@@ -2235,7 +2235,7 @@ msgstr "Lier à Super + Clic Droit"
 
 #: resources/ui/gtk4/settings.ui:5144 resources/ui/gtk3/settings.ui:5136
 msgid "Show Touch Button"
-msgstr "Montrer le Bouton Tactile"
+msgstr "Afficher le Bouton Tactile"
 
 #: resources/ui/gtk4/settings.ui:5160 resources/ui/gtk3/settings.ui:5152
 msgid "Open in Screen Center"
