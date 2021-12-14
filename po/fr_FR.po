@@ -19,7 +19,7 @@ msgstr ""
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
-msgstr "Activer Raccourci"
+msgstr "Activer Raccourci Clavier"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -33,18 +33,18 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
-"L'action <b>Activer Raccourci</b> simule une combinaison de "
+"L'action <b>Activer Raccourci Clavier</b> simule une combinaison de "
 "touches quand activée. Cela peut par exemple servir à changer de bureau "
 "virtuel, contrôler un lecteur multimédia or annuler/rétablir des actions."
 
 #: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5103
 #: resources/ui/gtk3/settings.ui:5095
 msgid "Shortcut"
-msgstr "Raccourci"
+msgstr "Raccourci Clavier"
 
 #: src/common/actions/Shortcut.js:78
 msgid "This shortcut will be simulated."
-msgstr "Ce raccourci sera simulé."
+msgstr "Ce raccourci clavier sera simulé."
 
 #: src/common/actions/File.js:34
 msgid "Open File"
@@ -211,7 +211,7 @@ msgid ""
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
 "Appuyez sur le raccourci !\n"
-"ESC pour annuler, Retour Arrière pour délier"
+"ESC pour annuler, ou Retour Arrière pour délier"
 
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
