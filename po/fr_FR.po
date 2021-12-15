@@ -564,7 +564,7 @@ msgstr "V"
 #: src/common/Achievements.js:412
 #, javascript-format
 msgid "%s Cancellor"
-msgstr "%s Annulator"
+msgstr "Annulator %s"
 
 #. Translators: The description of the '%s Cancellor' achievement.
 #: src/common/Achievements.js:415
@@ -576,7 +576,7 @@ msgstr "Annuler une sélection %x fois."
 #: src/common/Achievements.js:428
 #, javascript-format
 msgid "%s Pielot"
-msgstr "%s Pie-lote"
+msgstr "Pie-lote %s"
 
 #. Translators: The description of the '%s Pielot' achievement.
 #: src/common/Achievements.js:430
@@ -589,21 +589,21 @@ msgstr "Sélectionner %x éléments."
 #: src/common/Achievements.js:444
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
-msgstr "%s Selecteur-par-Mouvement de Niveau Supérieur"
+msgstr "Selecteur-par-Mouvement de Niveau Supérieur %s"
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:447
 #, javascript-format
 msgid "%s Submenu Gesture-Selector"
-msgstr "%s Selecteur-par-Mouvement de Sous-Menu"
+msgstr "Selecteur-par-Mouvement de Sous-Menu %s"
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:450
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
-msgstr "%s Selecteur-par-Mouvement"
+msgstr "Selecteur-par-Mouvement %s"
 
 #. Translators: The description of the 'Gesture-Selector' achievement.
 #: src/common/Achievements.js:457
@@ -616,21 +616,21 @@ msgstr "Sélectionner %x éléments de profondeur %d en mode tracé."
 #: src/common/Achievements.js:474
 #, javascript-format
 msgid "%s Toplevel Click-Selector"
-msgstr "%s Sélecteur-par-Clic de Niveau Supérieur"
+msgstr "Sélecteur-par-Clic de Niveau Supérieur %s"
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Submenu Click-Selector"
-msgstr "%s Sélecteur-par-Clic de Sous-Menu"
+msgstr "Sélecteur-par-Clic de Sous-Menu %s"
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:480
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
-msgstr "%s Sélecteur-Clic de Sous-Menu"
+msgstr "Sélecteur-Clic de Sous-Menu %s"
 
 #. Translators: The description of the 'Click-Selector' achievement.
 #: src/common/Achievements.js:487
@@ -643,21 +643,21 @@ msgstr "Sélectionner %x éléments de profondeur %d avec des clics souris."
 #: src/common/Achievements.js:509
 #, javascript-format
 msgid "%s Toplevel Selector"
-msgstr "%s Sélecteur de Niveau Supérieur"
+msgstr "Sélecteur de Niveau Supérieur %s"
 
 #. Translators: The name of the 'Select %x items at depth 2 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:512
 #, javascript-format
 msgid "%s Submenu Selector"
-msgstr "%s Sélecteur de Sous-Menu"
+msgstr "Sélecteur de Sous-Menu %s"
 
 #. Translators: The name of the 'Select %x items at depth 3 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:515
 #, javascript-format
 msgid "%s Subsubmenu Selector"
-msgstr "%s Sélecteur de Sous-Menu"
+msgstr "Sélecteur de Sous-Menu %s"
 
 #. Translators: The description of the 'Selector' achievement.
 #: src/common/Achievements.js:527
@@ -703,7 +703,7 @@ msgstr "Générer %x préréglages aléatoires."
 #: src/common/Achievements.js:598
 #, javascript-format
 msgid "%s Preset Exporter"
-msgstr "%s Exportateur•ice de Préréglages"
+msgstr "Exportateur•ice de Préréglages %s"
 
 #. Translators: The description of the '%s Preset Exporter' achievement if
 #. only one preset needs to be exported.
@@ -721,7 +721,7 @@ msgstr "Exporter %x préréglages personnalisés."
 #: src/common/Achievements.js:617
 #, javascript-format
 msgid "%s Preset Importer"
-msgstr "%s Importateur•ice de préréglages"
+msgstr "Importateur•ice de préréglages %s"
 
 #. Translators: The description of the '%s Preset Importer' achievement if
 #. only one preset needs to be imported.
@@ -739,7 +739,7 @@ msgstr "Importer %x préréglages personnalisés."
 #: src/common/Achievements.js:636
 #, javascript-format
 msgid "%s Menu Importer"
-msgstr "%s Importateur•ice de Menu"
+msgstr "Importateur•ice de Menu %s"
 
 #. Translators: The description of the '%s Menu Importer' achievement if
 #. only one menu needs to be imported.
@@ -757,7 +757,7 @@ msgstr "Importer %x configurations de menu."
 #: src/common/Achievements.js:656
 #, javascript-format
 msgid "%s Menu Exporter"
-msgstr "%s Exportateur•ice de Menu"
+msgstr "Exportateur•ice de Menu %s"
 
 #. Translators: The description of the '%s Menu Exporter' achievement if
 #. only one menu needs to be exported.
@@ -788,7 +788,7 @@ msgstr "Créer %x éléments dans l'éditeur de menu."
 #: src/common/Achievements.js:694
 #, javascript-format
 msgid "%s Menu Designer"
-msgstr "%s Designer de Menu"
+msgstr "Designer de Menu %s"
 
 #. Translators: The description of the '%s Menu Designer' achievement.
 #: src/common/Achievements.js:697
