@@ -609,7 +609,7 @@ msgstr "%s Selecteur-par-Mouvement"
 #: src/common/Achievements.js:457
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
-msgstr "Sélectionner %x éléments de profondeur %d en marking mode."
+msgstr "Sélectionner %x éléments de profondeur %d en mode tracé."
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
@@ -1592,7 +1592,7 @@ msgstr ""
 "obtenir la médaille d'or ?\n"
 "\n"
 "Une fois satisfait•e de votre résultat, cliquez sur <b>suivant</b> pour "
-"apprendre le Mode Marking de Fly-Pie !"
+"apprendre le Mode Tracé de Fly-Pie !"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:1164 resources/ui/gtk3/settings.ui:1163
@@ -1613,7 +1613,7 @@ msgstr "Débloqué à moins de 1000 ms"
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:1232 resources/ui/gtk3/settings.ui:1229
 msgid "The Marking Mode of Fly-Pie"
-msgstr "Le Mode Marking de Fly-Pie"
+msgstr "Le Mode Tracé de Fly-Pie"
 
 #: resources/ui/gtk4/settings.ui:1251 resources/ui/gtk3/settings.ui:1247
 msgid ""
@@ -1621,8 +1621,8 @@ msgid ""
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
-"Le <b>Mode Marking</b> de Fly-Pie vous permet de sélectionner des éléments en "
-"<b>dessinant des mouvements</b> ! Pour activer le Mode Marking, cliquez et "
+"Le <b>Mode Tracé</b> de Fly-Pie vous permet de sélectionner des éléments en "
+"<b>dessinant des mouvements</b> ! Pour activer le Mode Tracé, cliquez et "
 "faite glisser un élément. Dès que vous arrêtez de glisser ou faites un virage, "
 "l'élément sera seléctionné."
 
@@ -1660,7 +1660,7 @@ msgid ""
 "tips and tricks!"
 msgstr ""
 "Encore une fois, essayez de sélectionner \"%s\" le plus vite possible. Cependant, "
-"comme vous avez maintenant appris le Mode Marking, le temps requis pour obtenir la"
+"comme vous avez maintenant appris le Mode Tracé, le temps requis pour obtenir la"
 "médaille d'or est bien plus court !\n"
 "\n"
 "Une fois satisfait•e de votre résultat, cliquez sur <b>suivant</b> pour apprendre "
