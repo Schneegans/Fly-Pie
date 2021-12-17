@@ -25,7 +25,7 @@ Once you opened a marking menu, you can seamlessly transition between three alte
 * **Marking-Mode:** Select items by drawing gestures. To do this, click anywhere and drag your mouse. Pausing or making a turn selects the currently dragged item.
 * **Turbo-Mode:** You can also "draw" gestures while holding <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, or <kbd>Alt</kbd> _without having to press your mouse button_! This is especially useful when you opened the menu with a shortcut involving such a modifier.
 
-Do you want to learn more? Have a look at the [usage guide](docs/first-steps)!
+Do you want to learn more? Have a look at the [usage guide](docs/first-steps.md)!
 
 # :heart: Will you love Fly-Pie?
 
