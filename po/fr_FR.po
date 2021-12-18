@@ -504,7 +504,7 @@ msgstr "Image Matricielle"
 #. in the achievement titles.
 #: src/common/Achievements.js:366
 msgid "Novice"
-msgstr "Débutant•e"
+msgstr "Novice"
 
 #. Translators: This is the tier 2 attribute which will be inserted for each %s
 #. in the achievement titles.
@@ -576,7 +576,7 @@ msgstr "Annuler une sélection %x fois."
 #: src/common/Achievements.js:428
 #, javascript-format
 msgid "%s Pielot"
-msgstr "Pie-lote %s"
+msgstr "PieLote %s"
 
 #. Translators: The description of the '%s Pielot' achievement.
 #: src/common/Achievements.js:430
@@ -589,21 +589,21 @@ msgstr "Sélectionner %x éléments."
 #: src/common/Achievements.js:444
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
-msgstr "Selecteur-par-Mouvement de Niveau Supérieur %s"
+msgstr "Sélecteur par Mouvement de Niveau Supérieur %s"
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:447
 #, javascript-format
 msgid "%s Submenu Gesture-Selector"
-msgstr "Selecteur-par-Mouvement de Sous-Menu %s"
+msgstr "Selecteur par Mouvement de Sous-Menu %s"
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:450
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
-msgstr "Selecteur-par-Mouvement %s"
+msgstr "Selecteur par Mouvement %s"
 
 #. Translators: The description of the 'Gesture-Selector' achievement.
 #: src/common/Achievements.js:457
@@ -616,21 +616,21 @@ msgstr "Sélectionner %x éléments de profondeur %d en mode tracé."
 #: src/common/Achievements.js:474
 #, javascript-format
 msgid "%s Toplevel Click-Selector"
-msgstr "Sélecteur-par-Clic de Niveau Supérieur %s"
+msgstr "Sélecteur par Clic de Niveau Supérieur %s"
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Submenu Click-Selector"
-msgstr "Sélecteur-par-Clic de Sous-Menu %s"
+msgstr "Sélecteur par Clic de Sous-Menu %s"
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:480
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
-msgstr "Sélecteur-Clic de Sous-Menu %s"
+msgstr "Sélecteur par Clic de Sous-Menu %s"
 
 #. Translators: The description of the 'Click-Selector' achievement.
 #: src/common/Achievements.js:487
