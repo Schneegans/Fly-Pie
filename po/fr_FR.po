@@ -812,7 +812,7 @@ msgstr "Ouvrir le menu du tutoriel %x fois."
 #. This does not support %s and %i.
 #: src/common/Achievements.js:724
 msgid "Bachelor Pielot"
-msgstr "Pie-lote Diplômé•e"
+msgstr "PieLote Diplômé•e"
 
 #. Translators: The description of the 'Bachelor Pielot' achievement.
 #: src/common/Achievements.js:726
@@ -1700,10 +1700,10 @@ msgid ""
 "\">Github</a>."
 msgstr ""
 "Félicitations ! Si vous avez réussi à débloquer la plupart des médailles, "
-"vous utiliserez Fly-Pie comme un Pie-lote professionel !\n"
+"vous utiliserez Fly-Pie comme un PieLote professionel !\n"
 "\n"
 "Vous pouvez maintenant utiliser les autres page de cette boîte de dialogue "
-"de paramétrage pour configurer Fly-Pie à l'envi. Il y a de nombreuses options !"
+"de paramétrage pour configurer Fly-Pie à l'envi. Il y a de nombreuses options ! "
 "Créez autant de menus que vous le désirez avec des hiérarchies aussi profondes "
 "que vous voulez. Mais essayez de limiter le nombre d'éléments par sous-menu à "
 "<b>douze éléments au plus</b>. Toute quantité au dessus de ce nombre réduira votre efficacité.\n"
