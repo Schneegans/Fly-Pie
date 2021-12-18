@@ -2132,7 +2132,7 @@ msgstr "Charger des paramètres depuis un fichier JSON."
 
 #: resources/ui/gtk4/settings.ui:4637 resources/ui/gtk3/settings.ui:4596
 msgid "Save the settings to a JSON file."
-msgstr "Sauvegarder les paramètres vers un fichier JSON."
+msgstr "Sauvegarder les paramètres dans un fichier JSON."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: resources/ui/gtk4/settings.ui:4660 resources/ui/gtk4/settings.ui:4933
