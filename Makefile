@@ -50,6 +50,7 @@ clean:
 	rm -rf \
 	flypie@schneegans.github.com.zip \
 	resources/flypie.gresource \
+	resources/flypie.gresource.xml \
 	schemas/gschemas.compiled \
 	locale \
 	ui/*.ui~ \
