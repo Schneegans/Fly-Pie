@@ -310,6 +310,18 @@ var Daemon = class Daemon {
     return this._openCustomMenu(json, true, this._lastMenuID, null, null);
   }
 
+  // This closes the currently open menu (if any).
+  CancelMenu() {
+    if (this._menu.getID() == null) {
+      return DBusInterface.errorCodes.eNoActiveMenu;
+    }
+
+    this._menu.cancel();
+    this._menu.close();
+
+    return 0;
+  }
+
   // This selects an item in the currently opened menu.
   // See the README.md for a description of Fly-Pie's DBusInterface.
   SelectItem(path) {

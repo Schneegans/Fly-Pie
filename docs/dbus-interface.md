@@ -217,6 +217,16 @@ gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/exten
            --method org.gnome.Shell.Extensions.flypie.SelectItem '/0'
 ```
 
+## Closing a Menu
+
+There is also a method for closing the currently active menu.
+It will return a negative integer if some goes wrong.
+
+```bash
+gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie \
+           --method org.gnome.Shell.Extensions.flypie.CancelMenu
+```
+
 <p align="center"><img src ="pics/hr.svg" /></p>
 
 <p align="center">
