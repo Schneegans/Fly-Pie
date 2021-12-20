@@ -5,6 +5,15 @@
 # Changelog of Fly-Pie
 
 
+## [Fly-Pie 13](https://github.com/schneegans/fly-pie/releases/tag/v13)
+
+**Release Date:** TBD
+
+#### New Features
+
+* Added a new `CancelMenu` D-Bus method for closing a currently open menu.
+
+
 ## [Fly-Pie 12](https://github.com/schneegans/fly-pie/releases/tag/v12)
 
 **Release Date:** 2021-12-07
