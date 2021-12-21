@@ -50,14 +50,17 @@ var SelectionWedges = GObject.registerClass({
 
     // This is fired when the primary mouse button is pressed inside a wedge. It will also
     // be fired if a gesture was detected (either a corner or a timeout). In the latter
-    // case, the passed boolean will be true.
-    "child-selected-event":   { param_types: [GObject.TYPE_INT, GObject.TYPE_BOOLEAN] },
+    // case, the passed boolean will be true. The first integer is the child's index, the
+    // last two integers are the pixel coordinates of the selection event.
+    "child-selected-event":   { param_types: [GObject.TYPE_INT, GObject.TYPE_BOOLEAN,
+                                              GObject.TYPE_INT, GObject.TYPE_INT] },
 
     // Same as "child-hovered-event", but for the parent wedge.
     "parent-hovered-event":   {},
 
     // Same as "child-selected-event", but for the parent wedge.
-    "parent-selected-event":  { param_types: [GObject.TYPE_BOOLEAN] },
+    "parent-selected-event":  { param_types: [GObject.TYPE_BOOLEAN,
+                                              GObject.TYPE_INT, GObject.TYPE_INT] },
 
     // This is fired if secondary mouse button is pressed. In future there might be ofter
     // reasons for this to get fired.
@@ -343,14 +346,16 @@ class SelectionWedges extends Clutter.Actor {
 
   // This emits 'parent-selected-event' or 'child-selected-event' depending on the
   // currently hovered wedge. It also resets the current gesture detection.
-  emitSelection(fromGesture = false) {
+  emitSelection(coords, fromGesture = false) {
     this._resetStroke();
 
     if (this._hoveredWedge >= 0) {
       if (this._hoveredWedge == this._parentIndex) {
-        this.emit('parent-selected-event', fromGesture);
+        this.emit('parent-selected-event', fromGesture, coords[0], coords[1]);
       } else {
-        this.emit('child-selected-event', this.getHoveredChild(), fromGesture);
+        this.emit(
+            'child-selected-event', this.getHoveredChild(), fromGesture, coords[0],
+            coords[1]);
       }
     }
   }
@@ -439,29 +444,27 @@ class SelectionWedges extends Clutter.Actor {
 
         // It's the first event of this gesture, so we store the current mouse position as
         // start and end. There is nothing more to be done.
-        this._stroke.start = {x: coords[0], y: coords[1]};
-        this._stroke.end   = {x: coords[0], y: coords[1]};
+        this._stroke.start = coords;
+        this._stroke.end   = coords;
 
       } else {
 
         // Calculate the vector S->E in the diagram above.
-        const strokeDir = {
-          x: this._stroke.end.x - this._stroke.start.x,
-          y: this._stroke.end.y - this._stroke.start.y
-        };
+        const strokeDir = [
+          this._stroke.end[0] - this._stroke.start[0],
+          this._stroke.end[1] - this._stroke.start[1]
+        ];
 
         const strokeLength =
-            Math.sqrt(strokeDir.x * strokeDir.x + strokeDir.y * strokeDir.y);
+            Math.sqrt(strokeDir[0] * strokeDir[0] + strokeDir[1] * strokeDir[1]);
 
         if (strokeLength > this._settings.gestureMinStrokeLength) {
 
           // Calculate the vector E->M in the diagram above.
-          const tipDir = {
-            x: coords[0] - this._stroke.end.x,
-            y: coords[1] - this._stroke.end.y
-          };
+          const tipDir =
+              [coords[0] - this._stroke.end[0], coords[1] - this._stroke.end[1]];
 
-          const tipLength = Math.sqrt(tipDir.x * tipDir.x + tipDir.y * tipDir.y);
+          const tipLength = Math.sqrt(tipDir[0] * tipDir[0] + tipDir[1] * tipDir[1]);
 
           if (tipLength > this._settings.gestureJitterThreshold) {
 
@@ -472,28 +475,43 @@ class SelectionWedges extends Clutter.Actor {
               this._stroke.pauseTimeout = null;
             }
 
-            // Update the point M in the diagram above to be the new E for the next motion
-            // event.
-            this._stroke.end = {x: coords[0], y: coords[1]};
-
             // Now compute the angle between S->E and E->M.
             const angle = Math.acos(
-                tipDir.x / tipLength * strokeDir.x / strokeLength +
-                tipDir.y / tipLength * strokeDir.y / strokeLength);
+                tipDir[0] / tipLength * strokeDir[0] / strokeLength +
+                tipDir[1] / tipLength * strokeDir[1] / strokeLength);
 
-            //  Emit the selection events if it exceeds the configured threshold.
+            //  Emit the selection events if it exceeds the configured threshold. We pass
+            //  the coordinates of E for the selection event.
             if (angle * 180 / Math.PI > this._settings.gestureMinStrokeAngle) {
-              this.emitSelection(true);
+              this.emitSelection(this._stroke.end, true);
             }
+
+            // Update the point M in the diagram above to be the new E for the next motion
+            // event.
+            this._stroke.end = coords;
           }
 
           // The stroke is long enough to become a gesture. We register a timer to detect
           // pause-events where the pointer was stationary for some time. These events
-          // also lead to selections.
-          if (this._stroke.pauseTimeout == null) {
+          // also lead to selections. If the selection timeout is set to zero, we emit the
+          // selection instantaneously.
+          if (this._settings.gestureSelectionTimeout == 0) {
+
+            // If the selection timeout is set to zero, we want to select an item as soon
+            // as the pointer exceeds the minimum stroke length. As the pointer may have
+            // moved really quickly, we reconstruct where it left this radius.
+            const scale           = this._settings.gestureMinStrokeLength / strokeLength;
+            const selectionCoords = [
+              this._stroke.start[0] + strokeDir[0] * scale,
+              this._stroke.start[1] + strokeDir[1] * scale
+            ];
+
+            this.emitSelection(selectionCoords, true);
+
+          } else if (this._stroke.pauseTimeout == null) {
             this._stroke.pauseTimeout = GLib.timeout_add(
                 GLib.PRIORITY_DEFAULT, this._settings.gestureSelectionTimeout, () => {
-                  this.emitSelection(true);
+                  this.emitSelection(coords, true);
                   return false;
                 });
           }
@@ -502,7 +520,7 @@ class SelectionWedges extends Clutter.Actor {
 
           // The vector S->E is not long enough to be a gesture, so we only update the end
           // point.
-          this._stroke.end = {x: coords[0], y: coords[1]};
+          this._stroke.end = coords;
         }
       }
     } else {
