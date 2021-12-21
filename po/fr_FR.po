@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the Fly-Pie package.
 # Clément Schotte, 2021.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-12 14:31+1\n"
-"PO-Revision-Date: <2021-12-12> <14:31+1>\n"
-"Last-Translator: Clément Schotte \n"
-"Language-Team: Clément Schotte\n"
+"PO-Revision-Date: 2021-12-21 11:51+0000\n"
+"Last-Translator: Clemovski <schotte.clement@hotmail.fr>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/fly-pie/core/fr/>"
+"\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.10\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -133,7 +135,7 @@ msgstr "Signal D-Bus"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/DBusSignal.js:39
 msgid "Emits a D-Bus signal."
-msgstr "Émet un signal D-Bus"
+msgstr "Émet un signal D-Bus."
 
 #: src/common/actions/DBusSignal.js:43
 msgid ""
@@ -237,8 +239,8 @@ msgid ""
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
 msgstr ""
-"Le menu <b>Fréquemment Utilisées<b> affiche une liste d'applications "
-"souvent utilisées. Pour des séléctions efficaces, vous devriez limiter le "
+"Le menu <b>Fréquemment Utilisées</b> affiche une liste d'applications "
+"souvent utilisées. Pour des sélections efficaces, vous devriez limiter le "
 "nombre maximal d'applications affichées à environ douze."
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
@@ -852,7 +854,7 @@ msgstr "Tous les succès seront perdus !"
 
 #: src/prefs/MenuEditor.js:417
 msgid "No menus configured"
-msgstr "Aucun menu configuré."
+msgstr "Aucun menu configuré"
 
 #: src/prefs/MenuEditor.js:420
 msgid "Create a new menu with the button in the top right corner."
@@ -860,7 +862,7 @@ msgstr "Créez un nouveau menu avec le bouton dans le coin en haut à droite."
 
 #: src/prefs/MenuEditor.js:450
 msgid "Add a new item"
-msgstr "Ajouter un nouvel élément."
+msgstr "Ajouter un nouvel élément"
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag an action in the menu editor to the menu
@@ -1308,7 +1310,7 @@ msgstr "Afficher les Succès"
 #: resources/ui/gtk4/copyValueButton.ui:6
 #: resources/ui/gtk3/copyValueButton.ui:6
 msgid "Copy left value to right side"
-msgstr "Copier la valeur de gauche sur le côté droit."
+msgstr "Copier la valeur de gauche sur le côté droit"
 
 #: resources/ui/gtk4/iconSelectDialog.ui:19
 #: resources/ui/gtk3/iconSelectDialog.ui:19
@@ -1490,7 +1492,7 @@ msgstr "Initialise la plupart des paramètres avec des valeurs aléatoires."
 
 #: resources/ui/gtk4/settings.ui:813 resources/ui/gtk3/settings.ui:808
 msgid "Generate Random Preset"
-msgstr "Générer un Préréglage Aléatoire."
+msgstr "Générer un Préréglage Aléatoire"
 
 #: resources/ui/gtk4/settings.ui:844 resources/ui/gtk3/settings.ui:842
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
@@ -1545,7 +1547,7 @@ msgstr "<big><b>Ouvrir le menu d'exemple !</b></big>"
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:998 resources/ui/gtk3/settings.ui:1000
 msgid "You can click anywhere!"
-msgstr "Vous pouvez cliquer n'importe-où."
+msgstr "Vous pouvez cliquer n'importe-où !"
 
 #: resources/ui/gtk4/settings.ui:1017 resources/ui/gtk3/settings.ui:1018
 msgid ""
@@ -1782,12 +1784,12 @@ msgstr "L'élément central affiche le nom de l'enfant actuellement survolé."
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/gtk4/settings.ui:1904 resources/ui/gtk3/settings.ui:1891
 msgid "With Hovered Child"
-msgstr "Avec Passage de la Souris sur l'enfant."
+msgstr "Avec Passage de la Souris sur l'Enfant"
 
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/gtk4/settings.ui:1917 resources/ui/gtk3/settings.ui:1904
 msgid "Without Hovered Child"
-msgstr "Sans le Passage de la Souris sur l'enfant."
+msgstr "Sans le Passage de la Souris sur l'Enfant"
 
 #: resources/ui/gtk4/settings.ui:1947 resources/ui/gtk4/settings.ui:2873
 #: resources/ui/gtk4/settings.ui:3424 resources/ui/gtk3/settings.ui:1934
