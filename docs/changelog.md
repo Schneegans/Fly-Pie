@@ -13,6 +13,9 @@
 
 * Added a new `CancelMenu` D-Bus method for closing a currently open menu.
 
+#### Other Enhancements
+
+* A completely new translation to French (thank you, [@Clemovski](https://github.com/Clemovski)!).
 
 ## [Fly-Pie 12](https://github.com/schneegans/fly-pie/releases/tag/v12)
 
