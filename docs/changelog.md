@@ -15,6 +15,7 @@
 
 #### Other Enhancements
 
+* The advanced "Selection Timeout" can now be set to zero. If it is set to zero, submenus will be selected instantaneously once the gesture length exceeds the "Minimum Stroke Length".
 * A completely new translation to French (thank you, [@Clemovski](https://github.com/Clemovski)!).
 
 ## [Fly-Pie 12](https://github.com/schneegans/fly-pie/releases/tag/v12)

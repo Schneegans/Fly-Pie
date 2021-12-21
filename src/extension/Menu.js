@@ -75,7 +75,7 @@ var Menu = class Menu {
     // This will contain the latest pointer location, similar to the value returned by
     // global.get_pointer(). However, it is not limited to the mouse pointer position but
     // works for as well for stylus or touch input.
-    this._pointer = {x: 0, y: 0};
+    this._pointerPos = [0, 0];
 
     // This will contain the Clutter.InputDevice which controls an extra cursor (such as a
     // stylus) if it was used most recently by the user. We will try to open the menu at
@@ -131,10 +131,10 @@ var Menu = class Menu {
 
     // This is called further below in various cases. It is not only called on real button
     // release events but also on semantically similar events such as touch end events.
-    const emitSelection = () => {
+    const emitSelection = (coords) => {
       // Forward button release events to the SelectionWedges.
       // This will potentially fire the OnSelect signal.
-      this._selectionWedges.emitSelection();
+      this._selectionWedges.emitSelection(coords);
       // This is for the statistics only: As the mouse button was released, any further
       // (final) selections will not be gesture-only selections.
       this._gestureOnlySelection = false;
@@ -146,7 +146,7 @@ var Menu = class Menu {
       if (event.type() == Clutter.EventType.MOTION ||
           event.type() == Clutter.EventType.TOUCH_UPDATE ||
           event.type() == Clutter.EventType.ENTER) {
-        [this._pointer.x, this._pointer.y] = event.get_coords();
+        this._pointerPos = event.get_coords();
       }
 
       // If we have to open the menu at a secondary pointer (e.g. from a stylus), we use
@@ -155,7 +155,7 @@ var Menu = class Menu {
           this._initialRepositioningRequired) {
         if (event.get_device().get_device_name() ===
             this._lastNonPointerDevice.get_device_name()) {
-          this._setPosition(this._pointer.x, this._pointer.y, false);
+          this._setPosition(this._pointerPos[0], this._pointerPos[1], false);
           this._initialRepositioningRequired = false;
         }
       }
@@ -175,7 +175,7 @@ var Menu = class Menu {
               event.get_key_symbol() == Clutter.KEY_Alt_R ||
               event.get_key_symbol() == Clutter.KEY_Super_L ||
               event.get_key_symbol() == Clutter.KEY_Super_R) {
-            emitSelection();
+            emitSelection(this._pointerPos);
           }
         }
         return Clutter.EVENT_STOP;
@@ -192,7 +192,7 @@ var Menu = class Menu {
             Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK;
 
         if ((event.get_state() & turboModifiers) == 0) {
-          emitSelection();
+          emitSelection(event.get_coords());
         }
         return Clutter.EVENT_STOP;
       }
@@ -303,7 +303,7 @@ var Menu = class Menu {
 
         const mods = global.get_pointer()[2];
         if ((mods & turboModifiers) == 0) {
-          emitSelection();
+          emitSelection(action.get_coords());
         }
       }
     });
@@ -392,7 +392,7 @@ var Menu = class Menu {
 
     // This is fired when the primary mouse button is pressed inside a wedge. This will
     // also be emitted when a gesture is detected.
-    this._selectionWedges.connect('child-selected-event', (o, index, fromGesture) => {
+    this._selectionWedges.connect('child-selected-event', (o, index, gesture, x, y) => {
       const parent = this._menuPath[0];
       const child  = this._menuPath[0].getChildMenuItems()[index];
 
@@ -400,7 +400,7 @@ var Menu = class Menu {
       // when the mouse button or a modifier button is released. An exception is the
       // experimental hover mode in which we also allow selections by gestures.
       const hoverMode = this._settings.get_boolean('hover-mode');
-      if (fromGesture && !hoverMode && child.getChildMenuItems().length == 0) {
+      if (gesture && !hoverMode && child.getChildMenuItems().length == 0) {
         return;
       }
 
@@ -420,12 +420,12 @@ var Menu = class Menu {
       // The newly active item will be shown at the pointer position. To prevent it from
       // going offscreen, we clamp the position to the current monitor bounds (we do it
       // removing background boundaries from mouse pointer).
-      const [clampedX, clampedY] = this._clampToToMonitor(
-          this._pointer.x - this._background.x, this._pointer.y - this._background.y, 10);
+      const [clampedX, clampedY] =
+          this._clampToToMonitor(x - this._background.x, y - this._background.y, 10);
 
       // Warp the mouse pointer to this position if necessary accounting background
       // position as well.
-      if (this._pointer.x != clampedX || this._pointer.y != clampedY) {
+      if (x != clampedX || y != clampedY) {
         this._input.warpPointer(
             clampedX + this._background.x, clampedY + this._background.y);
       }
@@ -482,7 +482,7 @@ var Menu = class Menu {
 
     // If the parent of the currently active item is selected, it becomes the newly active
     // item with the state CENTER_HOVERED.
-    this._selectionWedges.connect('parent-selected-event', () => {
+    this._selectionWedges.connect('parent-selected-event', (o, gesture, x, y) => {
       const parent = this._menuPath[1];
       parent.setState(MenuItemState.CENTER_HOVERED, -1);
 
@@ -492,12 +492,12 @@ var Menu = class Menu {
       // The parent item will be moved to the pointer position. To prevent it from
       // going offscreen, we clamp the position to the current monitor bounds (we do it
       // removing background boundaries from mouse pointer).
-      const [clampedX, clampedY] = this._clampToToMonitor(
-          this._pointer.x - this._background.x, this._pointer.y - this._background.y, 10);
+      const [clampedX, clampedY] =
+          this._clampToToMonitor(x - this._background.x, y - this._background.y, 10);
 
       // Warp the mouse pointer to this position if necessary accounting background
       // position as well.
-      if (this._pointer.x != clampedX || this._pointer.y != clampedY) {
+      if (x != clampedX || y != clampedY) {
         this._input.warpPointer(
             clampedX + this._background.x, clampedY + this._background.y);
       }
