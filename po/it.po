@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-23 14:05+0100\n"
-"PO-Revision-Date: 2021-12-16 08:50+0000\n"
-"Last-Translator: Francesco Modafferi <fmodafferi@gmail.com>\n"
+"PO-Revision-Date: 2021-12-27 14:20+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/>"
 "\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10-dev\n"
+"X-Generator: Weblate 4.10.1\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -1640,6 +1640,13 @@ msgid ""
 "gesture of straight parts. <b>Do not draw curvy paths but rather expressive "
 "zig-zag-lines!</b>"
 msgstr ""
+"Prova a ricordare il percorso di un elemento. Apri il menu e <b>disegna il "
+"percorso con il mouse</b>. Puoi iniziare con i singoli segmenti del "
+"percorso, ma puoi anche provare a disegnare l'intero percorso!\n"
+"\n"
+"Potresti trovare più successo se provi esplicitamente a comporre il tuo "
+"gesto di parti diritte. <b>Non tracciare percorsi sinuosi ma piuttosto linee "
+"espressive a zig-zag!</b>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:1312 resources/ui/gtk3/settings.ui:1306
@@ -2009,23 +2016,23 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4056 resources/ui/gtk3/settings.ui:3997
 msgid "You can show a touch button for each of your menus."
-msgstr ""
+msgstr "Puoi mostrare un pulsante touch per ciascuno dei tuoi menu."
 
 #: resources/ui/gtk4/settings.ui:4074 resources/ui/gtk3/settings.ui:4015
 msgid "Inactive Opacity"
-msgstr ""
+msgstr "Opacità Inattiva"
 
 #: resources/ui/gtk4/settings.ui:4102 resources/ui/gtk3/settings.ui:4043
 msgid "Show in Overview Mode"
-msgstr ""
+msgstr "Mostra in modalità panoramica"
 
 #: resources/ui/gtk4/settings.ui:4124 resources/ui/gtk3/settings.ui:4065
 msgid "Show in Desktop Mode"
-msgstr ""
+msgstr "Mostra in modalità desktop"
 
 #: resources/ui/gtk4/settings.ui:4146 resources/ui/gtk3/settings.ui:4087
 msgid "Show above Fullscreen Windows"
-msgstr ""
+msgstr "Mostra sopra le finestre a schermo intero"
 
 #: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk4/settings.ui:4598
 #: resources/ui/gtk3/settings.ui:4133 resources/ui/gtk3/settings.ui:4531
@@ -2070,13 +2077,15 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4372 resources/ui/gtk3/settings.ui:4306
 msgid "Display Timeout"
-msgstr ""
+msgstr "Timeout visualizzazione"
 
 #: resources/ui/gtk4/settings.ui:4382 resources/ui/gtk3/settings.ui:4316
 msgid ""
 "Menus will be shown after this many milliseconds.\n"
 "Use this to quickly select items without showing the menu."
 msgstr ""
+"I menu verranno visualizzati dopo questo numero di millisecondi.\n"
+"Usalo per selezionare rapidamente gli elementi senza mostrare il menu."
 
 #: resources/ui/gtk4/settings.ui:4421 resources/ui/gtk3/settings.ui:4355
 msgid "Selection Timeout"
@@ -2130,11 +2139,11 @@ msgstr "Carica un Preset"
 
 #: resources/ui/gtk4/settings.ui:4630 resources/ui/gtk3/settings.ui:4583
 msgid "Load settings from a JSON file."
-msgstr ""
+msgstr "Carica le impostazioni da un file JSON."
 
 #: resources/ui/gtk4/settings.ui:4637 resources/ui/gtk3/settings.ui:4596
 msgid "Save the settings to a JSON file."
-msgstr ""
+msgstr "Salva le impostazioni in un file JSON."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: resources/ui/gtk4/settings.ui:4660 resources/ui/gtk4/settings.ui:4933
@@ -2149,7 +2158,7 @@ msgstr "Menu Editore"
 
 #: resources/ui/gtk4/settings.ui:4718 resources/ui/gtk3/settings.ui:4684
 msgid "Add a new menu item."
-msgstr ""
+msgstr "Aggiungi una nuova voce di menu."
 
 #: resources/ui/gtk4/settings.ui:4797 resources/ui/gtk3/settings.ui:4771
 msgid "Stash"
@@ -2157,23 +2166,24 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4813 resources/ui/gtk3/settings.ui:4788
 msgid "Store items here and re-use them later."
-msgstr ""
+msgstr "Memorizza gli oggetti qui e riutilizzali in seguito."
 
 #: resources/ui/gtk4/settings.ui:4857 resources/ui/gtk3/settings.ui:4832
 msgid "Trash"
-msgstr ""
+msgstr "Cestino"
 
 #: resources/ui/gtk4/settings.ui:4873 resources/ui/gtk3/settings.ui:4848
 msgid "Drop items here."
-msgstr ""
+msgstr "Trascina gli oggetti qui."
 
 #: resources/ui/gtk4/settings.ui:4903 resources/ui/gtk3/settings.ui:4878
 msgid "Restore menus from a JSON file. This will override your current menus!"
 msgstr ""
+"Ripristina i menu da un file JSON. Questo sovrascriverà i tuoi menu attuali!"
 
 #: resources/ui/gtk4/settings.ui:4909 resources/ui/gtk3/settings.ui:4890
 msgid "Export all menus to a JSON file."
-msgstr ""
+msgstr "Esporta tutti i menu in un file JSON."
 
 #: resources/ui/gtk4/settings.ui:4986 resources/ui/gtk3/settings.ui:4972
 msgid "Name"
@@ -2190,6 +2200,10 @@ msgid ""
 "#rgb\" to the icon in order to draw a circle with the given RGB color behind "
 "the icon."
 msgstr ""
+"L'icona può essere un percorso di file immagine, un nome di icona dal tema "
+"dell'icona corrente, un URI di dati codificato in base64, testo o un'emoji. "
+"Puoi aggiungere \"-#rgb\" all'icona per disegnare un cerchio con il dato "
+"colore RGB dietro l'icona."
 
 #: resources/ui/gtk4/settings.ui:5055 resources/ui/gtk3/settings.ui:5047
 msgid "Fixed Angle"
@@ -2206,6 +2220,15 @@ msgid ""
 "be removed if an item is dragged to another position in the menu. Use -1 to "
 "disable this feature."
 msgstr ""
+"Gli angoli fissi possono essere utilizzati per garantire che un elemento "
+"rimanga nella stessa posizione anche se vengono aggiunti o rimossi altri "
+"elementi. In questo modo puoi modificare un menu anche se i tuoi muscoli "
+"hanno già appreso la direzione dell'elemento. Tuttavia, c'è una restrizione "
+"sugli angoli fissi. All'interno di un menu gli angoli fissi devono essere "
+"monotonamente crescenti, ovvero ogni angolo fisso deve essere maggiore di "
+"qualsiasi angolo fisso precedente. Per evitare comportamenti strani, gli "
+"angoli fissi verranno rimossi se un elemento viene trascinato in un'altra "
+"posizione nel menu. Usa -1 per disabilitare questa funzione."
 
 #: resources/ui/gtk4/settings.ui:5109 resources/ui/gtk3/settings.ui:5101
 msgid "This will open the menu."
@@ -2216,14 +2239,16 @@ msgid ""
 "Usually, Super + Right Mouse Button opens the window menu. With this "
 "setting, you can instead open a Fly-Pie menu."
 msgstr ""
+"Di solito, Super + Tasto destro del mouse apre il menu della finestra. Con "
+"questa impostazione, puoi invece aprire un menu Fly-Pie."
 
 #: resources/ui/gtk4/settings.ui:5128 resources/ui/gtk3/settings.ui:5120
 msgid "Bind to Super + RMB"
-msgstr ""
+msgstr "Associato a Super + RMB"
 
 #: resources/ui/gtk4/settings.ui:5144 resources/ui/gtk3/settings.ui:5136
 msgid "Show Touch Button"
-msgstr ""
+msgstr "Mostra pulsante touch"
 
 #: resources/ui/gtk4/settings.ui:5160 resources/ui/gtk3/settings.ui:5152
 msgid "Open in Screen Center"
