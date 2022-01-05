@@ -62,27 +62,26 @@ If you want to learn more, use the links below for much more information!
 
 # :revolving_hearts: These people _do_ love Fly-Pie
 
-Do you want to show that you love Fly-Pie too? You may <a href="https://github.com/sponsors/Schneegans">become a sponsor for as little as 1$ / month</a>!
 While coding new features or translating Fly-Pie is the most awesome way to contribute, providing financial support will help me stay motivated to invest my spare time to keep the project alive in the future.
 
-## :1st_place_medal: Current Gold Sponsors
+<h2 align="center">🥇 Current Gold Sponsors</h2>
 <p align="center">
     <a href="https://github.com/dennis1248">Dennis ten Hoove</a><br>
 </p>
 
-## :2nd_place_medal: Current Silver Sponsors
+<h2 align="center">🥈 Current Silver Sponsors</h2>
 <p align="center">
   <a href="https://www.llorachdevs.com/Home">Garsiv</a><br>
   <a href="https://github.com/SimHacker">@SimHacker</a><br>
 </p>
 
-## :3rd_place_medal: Current Bronze Sponsors
+<h2 align="center">🥉 Current Bronze Sponsors</h2>
 <p align="center">
   <a href="https://github.com/lobau">@lobau</a><br>
   <a href="https://github.com/FahriDevZ">@FahriDevZ</a>
 </p>
 
-## :medal_sports: Previous Sponsors and One-Time Donators
+<h2 align="center">🏅 Previous Sponsors and One-Time Donators</h2>
 <p align="center">
   <a href="https://github.com/p2004a">@p2004a</a><br>
   <a href="https://github.com/BakiDance">@BakiDance</a><br>
@@ -90,5 +89,8 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
   <a href="https://github.com/denis-roy">@denis-roy</a><br>
   <a href="https://github.com/ykhurshid">@ykhurshid</a>
 </p>
+
+Do you want to show that you love it too? You may <a href="https://github.com/sponsors/Schneegans">become a sponsor for as little as 1$ / month</a>!
+If you like this extension, you may also want to try one of my other extensions: [🧊 Desktop-Cube](https://github.com/Schneegans/Desktop-Cube) or [🔥 Burn-My-Windows](https://github.com/Schneegans/Burn-My-Windows/)!
 
 <p align="center"><img src ="docs/pics/hr.svg" /></p>
