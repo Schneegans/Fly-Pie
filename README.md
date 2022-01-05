@@ -67,7 +67,7 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
 
 ## :1st_place_medal: Current Gold Sponsors
 <p align="center">
-  <a href="https://github.com/sponsors/Schneegans">Be the first!</a>
+    <a href="https://github.com/dennis1248">Dennis ten Hoove</a><br>
 </p>
 
 ## :2nd_place_medal: Current Silver Sponsors
