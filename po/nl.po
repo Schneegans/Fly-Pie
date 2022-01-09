@@ -8,25 +8,26 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-23 14:05+0100\n"
-"PO-Revision-Date: 2021-09-20 17:52+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"PO-Revision-Date: 2022-01-10 16:55+0000\n"
+"Last-Translator: Jarno Van Schoor <0xjarno@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/fly-pie/core/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.10.1\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
-msgstr ""
+msgstr "Sneltoets activeren"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:50
+#, fuzzy
 msgid "Simulates a key combination."
-msgstr ""
+msgstr "Simuleert een toetsencombinatie."
 
 #: src/common/actions/Shortcut.js:54
 msgid ""
@@ -34,49 +35,55 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
+"De <b>Sneltoets activeren</b> actie simuleert het invoeren van een "
+"toetsencombinatie. Bijvoorbeeld om te wisselen tussen virtuele bureaubladen, "
+"het afspelen van multimedia te regelen of om bewerkingen ongedaan maken / "
+"opnieuw doen."
 
 #: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5103
 #: resources/ui/gtk3/settings.ui:5095
 msgid "Shortcut"
-msgstr ""
+msgstr "Sneltoets"
 
 #: src/common/actions/Shortcut.js:78
 msgid "This shortcut will be simulated."
-msgstr ""
+msgstr "Deze sneltoets zal gesimuleerd worden."
 
 #: src/common/actions/File.js:34
 msgid "Open File"
-msgstr ""
+msgstr "Bestand openen"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:41
 msgid "Opens a file with the default application."
-msgstr ""
+msgstr "Open een bestand met de standaardapplicatie."
 
 #: src/common/actions/File.js:45
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
+"De <b>Bestand openen</b> actie zal het hierboven gespecificeerd bestand "
+"openen met de door het systeem aangeduide standaardapplicatie."
 
 #: src/common/actions/File.js:69
 msgid "File"
-msgstr ""
+msgstr "Bestand"
 
 #: src/common/actions/File.js:69 src/common/actions/Uri.js:68
 msgid "It will be opened with the default app."
-msgstr ""
+msgstr "Het zal door de standaardapplicatie geopend worden."
 
 #: src/common/actions/Command.js:34
 msgid "Launch Application"
-msgstr ""
+msgstr "Open applicatie"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Command.js:41
 msgid "Runs any shell command."
-msgstr ""
+msgstr "Voer een shell-commando uit."
 
 #: src/common/actions/Command.js:45
 msgid ""
@@ -84,24 +91,27 @@ msgid ""
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
 msgstr ""
+"De <b>Open applicatie</b> actie voert een gegeven shell-commando commando "
+"uit. Dit dient voornamelijk om applicaties te openen maar je kan het ook "
+"voor andere dingen gebruiken."
 
 #: src/common/actions/Command.js:69
 msgid "Command"
-msgstr ""
+msgstr "Commando"
 
 #: src/common/actions/Command.js:69
 msgid "Use the button to list installed apps."
-msgstr ""
+msgstr "Gebruik de knop om geïnstalleerde applicaties te tonen."
 
 #: src/common/actions/Uri.js:33
 msgid "Open URI"
-msgstr ""
+msgstr "Open URI"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Uri.js:40
 msgid "Opens an URI with the default application."
-msgstr ""
+msgstr "Open een URI met de standaardapplicatie."
 
 #: src/common/actions/Uri.js:44
 msgid ""
@@ -110,20 +120,24 @@ msgid ""
 "However, it is also possible to open other URIs such as \"mailto:foo@bar.org"
 "\"."
 msgstr ""
+"Wanneer de <b>Open URI</b> actie geactiveerd wordt zal de bovenstaande URI "
+"in de standaardapplicatie geopend worden. Bijvoorbeeld http-URLs worden met "
+"de webbrowser geopend. Het is ook mogelijk om andere URIs te openen zoals "
+"\"mailto:foo@bar.org\"."
 
 #: src/common/actions/Uri.js:68
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: src/common/actions/DBusSignal.js:32
 msgid "D-Bus Signal"
-msgstr ""
+msgstr "D-Bus signaal"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/DBusSignal.js:39
 msgid "Emits a D-Bus signal."
-msgstr ""
+msgstr "Zend een D-Bus signaal uit."
 
 #: src/common/actions/DBusSignal.js:43
 msgid ""
@@ -132,6 +146,10 @@ msgid ""
 "\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
+"De <b>D-Bus signaal</b> actie doet zelf niets. Je kan naar de <a href=\"https"
+"://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-interface.md\">D-Bus "
+"activiteit</a> luisteren. Dit is nuttig om aangepaste menus te openen via de "
+"commandoregel."
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
