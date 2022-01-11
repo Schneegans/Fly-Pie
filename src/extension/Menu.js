@@ -147,6 +147,13 @@ var Menu = class Menu {
           event.type() == Clutter.EventType.TOUCH_UPDATE ||
           event.type() == Clutter.EventType.ENTER) {
         this._pointerPos = event.get_coords();
+
+        // Cancel any pending long-press event if the pointer moved too much.
+        if (this._longPressTimeout >= 0 &&
+            !this._isInDragThreshold(this._pointerPos, this._clickStartPos)) {
+          GLib.source_remove(this._longPressTimeout);
+          this._longPressTimeout = -1;
+        }
       }
 
       // If we have to open the menu at a secondary pointer (e.g. from a stylus), we use
@@ -181,10 +188,48 @@ var Menu = class Menu {
         return Clutter.EVENT_STOP;
       }
 
+      if (event.type() == Clutter.EventType.BUTTON_PRESS ||
+          event.type() == Clutter.EventType.TOUCH_BEGIN) {
+
+        // Store the position where the click started. If the pointer is not moved too,
+        // much, this may become a long-press. This is also used for right-mouse-button
+        // cancelling.
+        this._clickStartPos = this._pointerPos;
+
+        // If the user touches / clicks on the screen, we start a long-press timer. This
+        // is canceled if the pointer is moved to far or if the button / touch is released
+        // again. On touch-based clicks, get_button() returns 0.
+        if (event.get_button() == 0 || event.get_button() == 1) {
+          const delay = Clutter.Settings.get_default().long_press_duration;
+
+          this._longPressTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, delay, () => {
+            this.cancel();
+            this.close();
+            this._longPressTimeout = -1;
+          });
+        }
+      }
+
       // Forward button release events to the selection wedges.
       // Touch-end events are handled as if the left mouse button was released.
       if (event.type() == Clutter.EventType.BUTTON_RELEASE ||
           event.type() == Clutter.EventType.TOUCH_END) {
+
+        // Cancel any pending long-press.
+        if (this._longPressTimeout >= 0) {
+          GLib.source_remove(this._longPressTimeout);
+          this._longPressTimeout = -1;
+        }
+
+        // Cancel the menu on right-button presses, but only if the pointer did not move
+        // too much.
+        if (event.get_button() == 3 && this._clickStartPos &&
+            this._isInDragThreshold(this._pointerPos, this._clickStartPos)) {
+          this.cancel();
+          this.close();
+          return Clutter.EVENT_STOP;
+        }
+
         // Only emit selection events if no modifier buttons are still held down. Without,
         // the main issue is that releasing the Super key after the Fly-Pie menus has been
         // closed would lead to toggling the overview.
@@ -264,51 +309,6 @@ var Menu = class Menu {
 
       return Clutter.EVENT_CONTINUE;
     });
-
-    // We use a ClickAction to handle simple clicks on menu items and long-press events to
-    // close the menu.
-    const action = Clutter.ClickAction.new();
-    action.connect('long-press', (action, actor, state) => {
-      if (state == Clutter.LongPressState.QUERY) {
-        return true;
-      }
-
-      // Close the menu on long press.
-      if (state == Clutter.LongPressState.ACTIVATE) {
-        this.cancel();
-        this.close();
-      }
-    });
-
-    // Activate or abort on click events.
-    action.connect('clicked', (action) => {
-      // Ensure that the latest input position is used for clicking.
-      this._selectionWedges.onMotionEvent(action.get_coords(), action.get_state());
-
-      // Cancel on right mouse button click.
-      if (action.get_button() == 3) {
-        this.cancel();
-        this.close();
-        return;
-      }
-
-      // Select something on left mouse button clicks. On touch-based clicks, get_button()
-      // returns 0.
-      if (action.get_button() == 0 || action.get_button() == 1) {
-        // Only emit selection events if no modifier buttons are still held down. Without,
-        // the main issue is that releasing the Super key after the Fly-Pie menus has been
-        // closed would lead to toggling the overview.
-        const turboModifiers =
-            Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK;
-
-        const mods = global.get_pointer()[2];
-        if ((mods & turboModifiers) == 0) {
-          emitSelection(action.get_coords());
-        }
-      }
-    });
-
-    this._background.add_action(action);
 
     // Delete the currently active menu once the background was faded-out.
     this._background.connect('transitions-completed', () => {
@@ -604,6 +604,9 @@ var Menu = class Menu {
     // Everything seems alright, start opening the menu!
     this._menuID = menuID;
 
+    // This is used for tracking click-events and long-press-events.
+    this._clickStartPos = null;
+
     // This is only for the statistics. This will be set to true at the first drag motion
     // and to false as soon as the mouse button is released without selecting something.
     this._gestureOnlySelection = null;
@@ -778,10 +781,15 @@ var Menu = class Menu {
       return;
     }
 
-    // Cancel the timeout.
+    // Cancel the timeouts.
     if (this._displayTimeoutID >= 0) {
       GLib.source_remove(this._displayTimeoutID);
       this._displayTimeoutID = -1;
+    }
+
+    if (this._longPressTimeout >= 0) {
+      GLib.source_remove(this._longPressTimeout);
+      this._longPressTimeout = -1;
     }
 
     // Fade out the background actor. Once this transition is completed, the _root item
@@ -1165,6 +1173,15 @@ var Menu = class Menu {
 
     // Ensure integer position.
     return [Math.floor(posX), Math.floor(posY)];
+  }
+
+  // This returns true if the distance between the to positions a and b is less than the
+  // dnd_drag_threshold given by Clutter.
+  _isInDragThreshold(a, b) {
+    const diff = [a[0] - b[0], a[1] - b[1]];
+    const dist = Math.sqrt(diff[0] * diff[0] + diff[1] * diff[1]);
+
+    return dist < Clutter.Settings.get_default().dnd_drag_threshold;
   }
 
   // The "trace" of the menu needs to be "idealized". That means, even if the user did
