@@ -19,6 +19,10 @@
 * Better gesture recognition: When making a sharp turn with your pointer, the selected submenu will open closer to where you actually started the turn.
 * A completely new translation to French (thank you, [@Clemovski](https://github.com/Clemovski)!).
 
+#### Bug Fixes
+
+* Fix marking mode on GNOME Shell 3.36 and 3.38.
+
 ## [Fly-Pie 12](https://github.com/schneegans/fly-pie/releases/tag/v12)
 
 **Release Date:** 2021-12-07
