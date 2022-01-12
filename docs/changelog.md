@@ -7,7 +7,7 @@
 
 ## [Fly-Pie 13](https://github.com/schneegans/fly-pie/releases/tag/v13)
 
-**Release Date:** TBD
+**Release Date:** 2022-01-12
 
 #### New Features
 
