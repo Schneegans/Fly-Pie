@@ -84,6 +84,7 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
 
 <h2 align="center">🏅 Previous Sponsors and One-Time Donators</h2>
 <p align="center">
+  <a href="https://github.com/VinnyBoiler">@VinnyBoiler</a><br>
   <a href="https://github.com/p2004a">@p2004a</a><br>
   <a href="https://github.com/BakiDance">@BakiDance</a><br>
   GEPLlinux<br>
