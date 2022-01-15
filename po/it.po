@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-23 14:05+0100\n"
-"PO-Revision-Date: 2021-12-27 14:20+0000\n"
+"PO-Revision-Date: 2022-01-16 17:55+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/>"
 "\n"
@@ -1318,7 +1318,7 @@ msgstr "Copia il valore sinistro sul lato destro"
 #: resources/ui/gtk4/iconSelectDialog.ui:19
 #: resources/ui/gtk3/iconSelectDialog.ui:19
 msgid "Select Icon"
-msgstr "Seleziona l’icona"
+msgstr "Seleziona icona"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/gtk4/iconSelectDialog.ui:44
@@ -1490,7 +1490,7 @@ msgstr ""
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/gtk4/settings.ui:801 resources/ui/gtk3/settings.ui:796
 msgid "Initialize most settings to random values."
-msgstr "inizializza alcune impostazioni a valori casuali."
+msgstr "Inizializza alcune impostazioni a valori casuali."
 
 #: resources/ui/gtk4/settings.ui:813 resources/ui/gtk3/settings.ui:808
 msgid "Generate Random Preset"
