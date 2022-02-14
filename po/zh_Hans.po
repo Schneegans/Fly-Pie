@@ -8,42 +8,42 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-11-23 14:05+0100\n"
-"PO-Revision-Date: 2021-11-17 19:45+0000\n"
-"Last-Translator: jingxuan@nfschina.com <jingxuan@nfschina.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/fly-"
-"pie/core/zh_Hans/>\n"
+"PO-Revision-Date: 2022-02-16 09:59+0000\n"
+"Last-Translator: poi <erbaotao@outlook.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"fly-pie/core/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9.1-dev\n"
+"X-Generator: Weblate 4.11-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
-msgstr "激活快捷方式"
+msgstr "模拟键盘快捷键"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:50
 msgid "Simulates a key combination."
-msgstr "模拟一个密钥组合."
+msgstr "模拟按下键盘组合键。"
 
 #: src/common/actions/Shortcut.js:54
 msgid ""
 "The <b>Activate Shortcut</b> action simulates a key combination when "
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
-msgstr ""
+msgstr "<b>激活快捷键</b>操作可以用来模拟用户按下了一组键盘上的按键。切换虚拟桌面、控制音视频的播放暂停或撤消 / 重做操作等可能用得上此功能。"
 
 #: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5103
 #: resources/ui/gtk3/settings.ui:5095
 msgid "Shortcut"
-msgstr "快捷方式"
+msgstr "键盘组合键"
 
 #: src/common/actions/Shortcut.js:78
 msgid "This shortcut will be simulated."
-msgstr "这条快捷方式将会被模拟."
+msgstr "要模拟的键盘组合键。"
 
 #: src/common/actions/File.js:34
 msgid "Open File"
@@ -53,13 +53,13 @@ msgstr "打开文件"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:41
 msgid "Opens a file with the default application."
-msgstr "以默认应用打开文件."
+msgstr "在默认应用中把文件打开。"
 
 #: src/common/actions/File.js:45
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
-msgstr ""
+msgstr "<b>打开文件</b>操作可以在系统默认的应用程序下把上面指定的文件打开。"
 
 #: src/common/actions/File.js:69
 msgid "File"
@@ -67,42 +67,42 @@ msgstr "文件"
 
 #: src/common/actions/File.js:69 src/common/actions/Uri.js:68
 msgid "It will be opened with the default app."
-msgstr ""
+msgstr "该文件会由默认应用打开。"
 
 #: src/common/actions/Command.js:34
 msgid "Launch Application"
-msgstr ""
+msgstr "启动应用程序"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Command.js:41
 msgid "Runs any shell command."
-msgstr ""
+msgstr "执行 shell 命令。"
 
 #: src/common/actions/Command.js:45
 msgid ""
 "The <b>Launch Application</b> action executes any given command. This is "
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
-msgstr ""
+msgstr "<b>启动应用程序</b>操作可以执行给出的任意命令。这样主要是为了打开应用程序，但也可能有很多别的用法。"
 
 #: src/common/actions/Command.js:69
 msgid "Command"
-msgstr ""
+msgstr "命令"
 
 #: src/common/actions/Command.js:69
 msgid "Use the button to list installed apps."
-msgstr ""
+msgstr "点击按钮，列出安装的应用。"
 
 #: src/common/actions/Uri.js:33
 msgid "Open URI"
-msgstr ""
+msgstr "打开统一资源定位符（URI）"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Uri.js:40
 msgid "Opens an URI with the default application."
-msgstr ""
+msgstr "在默认应用中打开 URI 。"
 
 #: src/common/actions/Uri.js:44
 msgid ""
@@ -111,20 +111,22 @@ msgid ""
 "However, it is also possible to open other URIs such as \"mailto:foo@bar.org"
 "\"."
 msgstr ""
+"<b>打开统一资源定位符（URI）</b>操作会在默认应用中打开上面的 URI 。对于 http "
+"统一资源定位符（URL），就会用浏览器打开。但是，像“mailto:foo@bar.org”这样的 URI 可能也能打开。"
 
 #: src/common/actions/Uri.js:68
 msgid "URI"
-msgstr ""
+msgstr "统一资源标识符（URI）"
 
 #: src/common/actions/DBusSignal.js:32
 msgid "D-Bus Signal"
-msgstr ""
+msgstr "D-Bus 信号"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/DBusSignal.js:39
 msgid "Emits a D-Bus signal."
-msgstr ""
+msgstr "发出 D-Bus 信号。"
 
 #: src/common/actions/DBusSignal.js:43
 msgid ""
@@ -133,24 +135,26 @@ msgid ""
 "\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
+"<b>D-Bus 信号</b>操作本身没用，但您<a href=\"https://github.com/Schneegans/Fly-Pie/blob/"
+"develop/docs/dbus-interface.md\">可以在 D-Bus 上监听操作的激活</a>。这可以用来通过命令行打开菜单。"
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: src/common/actions/DBusSignal.js:67
 msgid "This will be passed to the D-Bus signal."
-msgstr ""
+msgstr "此值会传给 D-Bus 信号。"
 
 #: src/common/actions/InsertText.js:45
 msgid "Insert Text"
-msgstr ""
+msgstr "插入文字"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/InsertText.js:52
 msgid "Types some text automatically."
-msgstr ""
+msgstr "自动键入一些文本。"
 
 #: src/common/actions/InsertText.js:56
 msgid ""
@@ -158,18 +162,19 @@ msgid ""
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
 "write the same things."
 msgstr ""
+"<b>插入文字</b>操作会把所给的文本复制到剪贴板，然后模拟 Ctrl+V 。想想您是不是经常输入同样的文本？如果是的话，可能这功能就很有用了。"
 
 #: src/common/actions/InsertText.js:80
 msgid "Text"
-msgstr ""
+msgstr "文字"
 
 #: src/common/actions/InsertText.js:80
 msgid "This text will be inserted."
-msgstr ""
+msgstr "要插入的文本。"
 
 #: src/common/ConfigWidgetFactory.js:102 src/prefs/ImageChooserButton.js:42
 msgid "Select File"
-msgstr ""
+msgstr "选中文件"
 
 #: src/common/ConfigWidgetFactory.js:103 src/common/ConfigWidgetFactory.js:179
 #: src/prefs/ImageChooserButton.js:43 src/prefs/MenuEditorPage.js:205
@@ -181,19 +186,21 @@ msgstr "取消"
 
 #: src/common/ConfigWidgetFactory.js:178
 msgid "Select Application"
-msgstr ""
+msgstr "选择应用"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
 #: src/prefs/MenuEditor.js:282
 msgid "Not Bound"
-msgstr ""
+msgstr "待绑定按键"
 
 #: src/common/ConfigWidgetFactory.js:318
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
+"按下键盘快捷键！\n"
+"要想退出请按 ESC 键，要想复原请按下 BackSpace"
 
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
@@ -201,148 +208,150 @@ msgstr ""
 #: src/common/ItemRegistry.js:244
 #, javascript-format
 msgid "Insert: %s"
-msgstr ""
+msgstr "插入：%s"
 
 #: src/common/menus/FrequentlyUsed.js:44
 msgid "Frequently Used"
-msgstr ""
+msgstr "常用应用"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/FrequentlyUsed.js:51
 msgid "Shows your frequently used applications."
-msgstr ""
+msgstr "显示您常用的应用程序。"
 
 #: src/common/menus/FrequentlyUsed.js:55
 msgid ""
 "The <b>Frequently Used</b> menu shows a list of frequently used "
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
-msgstr ""
+msgstr "<b>常用应用</b>菜单显示了经常用的应用程序的列表。为了能高效地选择应用，显示的应用程序最好不超过12个左右。"
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
 #: src/common/menus/Clipboard.js:85
 msgid "Max Item Count"
-msgstr ""
+msgstr "最多记录几项"
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
 #: src/common/menus/Clipboard.js:85
+#, fuzzy
 msgid "Limits the number of children."
-msgstr ""
+msgstr "限制子项目的数量。"
 
 #: src/common/menus/System.js:46
 msgid "System"
-msgstr ""
+msgstr "系统"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/System.js:53
 msgid "Allows screen lock, shutdown and other things."
-msgstr ""
+msgstr "可以锁定屏幕、关机等。"
 
 #: src/common/menus/System.js:57
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
-msgstr ""
+msgstr "<b>系统</b>菜单显示了锁定屏幕、关机、设置等的选项。"
 
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:81
 msgid "Lock"
-msgstr ""
+msgstr "锁定"
 
 #: src/common/menus/System.js:90
+#, fuzzy
 msgid "Suspend"
-msgstr ""
+msgstr "悬停"
 
 #: src/common/menus/System.js:99
 msgid "Switch User…"
-msgstr ""
+msgstr "切换用户…"
 
 #: src/common/menus/System.js:108
 msgid "Log Out"
-msgstr ""
+msgstr "退出登录"
 
 #: src/common/menus/System.js:117
 msgid "Power Off…"
-msgstr ""
+msgstr "关机…"
 
 #: src/common/menus/CustomMenu.js:29
 msgid "Custom Menu"
-msgstr ""
+msgstr "自定义菜单"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:36
 msgid "This can contain custom actions and other menus."
-msgstr ""
+msgstr "自定义菜单里面可以有自定义操作和其他菜单。"
 
 #: src/common/menus/CustomMenu.js:40
 msgid ""
 "A <b>Custom Menu</b> can contain any number of actions and submenus. "
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended."
-msgstr ""
+msgstr "<b>自定义菜单</b>里面可以有任意多的操作和子菜单。为便于能准确点中项目，建议项目不要超过十二个。"
 
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:43 src/extension/DefaultMenu.js:79
 msgid "Favorites"
-msgstr ""
+msgstr "收藏的应用"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:50
 msgid "Shows pinned applications."
-msgstr ""
+msgstr "显示收藏标星的应用程序。"
 
 #: src/common/menus/Favorites.js:54
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
-msgstr ""
+msgstr "<b>收藏的应用</b>菜单会显示您钉在 GNOME Shell 上的应用程序。"
 
 #: src/common/menus/RecentFiles.js:34
 msgid "Recent Files"
-msgstr ""
+msgstr "近期文件"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RecentFiles.js:41
 msgid "Shows your recently used files."
-msgstr ""
+msgstr "显示您近期用过的文件。"
 
 #: src/common/menus/RecentFiles.js:45
 msgid ""
 "The <b>Recent Files</b> menu shows a list of recently used files. For "
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
-msgstr ""
+msgstr "<b>近期文件</b>菜单会显示近期使用过的文件的列表。为便于选择文件，您最好不要设置成显示十二个以上的文件。"
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
-msgstr ""
+msgstr "设备"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:40
 msgid "Shows connected devices."
-msgstr ""
+msgstr "显示联到电脑上的设备。"
 
 #: src/common/menus/Devices.js:44
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
-msgstr ""
+msgstr "<b>设备</b>菜单为每一个加载出了的存储设备（比如 U 盘）显示一项。"
 
 #: src/common/menus/MainMenu.js:33
 msgid "Main Menu"
-msgstr ""
+msgstr "主菜单"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/MainMenu.js:40
 msgid "Shows all installed applications."
-msgstr ""
+msgstr "显示所有已安装的应用程序。"
 
 #: src/common/menus/MainMenu.js:44
 msgid ""
@@ -832,7 +841,7 @@ msgstr ""
 #: resources/ui/gtk4/imageChooserButton.ui:16
 #: resources/ui/gtk3/imageChooserButton.ui:16
 msgid "(None)"
-msgstr "（无）"
+msgstr "（空）"
 
 #: src/prefs/MenuEditorPage.js:194 src/prefs/MenuEditorPage.js:264
 #: src/prefs/SettingsPage.js:263 src/prefs/SettingsPage.js:318
@@ -1263,69 +1272,69 @@ msgstr "自定义图标"
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:19 resources/ui/gtk3/settings.ui:19
 msgid "Linear"
-msgstr "线性"
+msgstr "线性动画"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:23 resources/ui/gtk3/settings.ui:23
 msgid "Ease"
-msgstr "擦除"
+msgstr "缓动"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:27 resources/ui/gtk3/settings.ui:27
 msgid "Ease-In"
-msgstr "渐入"
+msgstr "缓和起始"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:31 resources/ui/gtk3/settings.ui:31
 msgid "Ease-Out"
-msgstr "淡出"
+msgstr "缓和停止"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:35 resources/ui/gtk3/settings.ui:35
 msgid "Ease-In-Out"
-msgstr "淡进淡出"
+msgstr "缓和起始与停止"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:39 resources/ui/gtk3/settings.ui:39
 msgid "Ease-In-Quad"
-msgstr "菱形进入"
+msgstr "二次曲线缓和起始"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:43 resources/ui/gtk3/settings.ui:43
 msgid "Ease-Out-Quad"
-msgstr "菱形淡出"
+msgstr "二次曲线缓和停止"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:47 resources/ui/gtk3/settings.ui:47
 msgid "Ease-In-Out-Quad"
-msgstr "菱形淡入"
+msgstr "二次曲线缓和起始与停止"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:51 resources/ui/gtk3/settings.ui:51
 msgid "Ease-In-Back"
-msgstr "由后淡入"
+msgstr "回力进入"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:55 resources/ui/gtk3/settings.ui:55
 msgid "Ease-Out-Back"
-msgstr "由后淡出"
+msgstr "弹性结束"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:59 resources/ui/gtk3/settings.ui:59
 msgid "Ease-In-Out-Back"
-msgstr "缓入缓出"
+msgstr "回力进入与弹性结束"
 
 #: resources/ui/gtk4/settings.ui:404 resources/ui/gtk3/settings.ui:441
 msgid "About"
-msgstr "关于"
+msgstr "软件介绍"
 
 #: resources/ui/gtk4/settings.ui:423 resources/ui/gtk3/settings.ui:420
 msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
-"查看<a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
-"changelog.md\">更新日志</a>。"
+"查看<a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/changelog"
+".md\">更新记录</a>。"
 
 #: resources/ui/gtk4/settings.ui:431 resources/ui/gtk3/settings.ui:428
 msgid ""
@@ -1337,12 +1346,11 @@ msgid ""
 "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
-"基于MIT许可证发布。\n"
-"请访问<a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie的主页</a>了解"
-"详情。\n"
+"以 MIT 许可协议发布。\n"
+"请访问 <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie 的主页</a>了解详情。\n"
 "\n"
-"当你遇到🐞️错误或有🎉️功能要求时，请随时在<a href=\"https://github.com/"
-"Schneegans/Fly-Pie/issues\">Github</a>上报告。"
+"若您遇到🐞️错误，或有🎉️增加功能的要求，您随时可以在 <a href=\"https://github.com/Schneegans/Fly-Pie/"
+"issues\">Github</a> 上报告。"
 
 #: resources/ui/gtk4/settings.ui:448 resources/ui/gtk3/settings.ui:529
 msgid "Credits"
@@ -1350,15 +1358,15 @@ msgstr "制作组"
 
 #: resources/ui/gtk4/settings.ui:461 resources/ui/gtk3/settings.ui:456
 msgid "Created by"
-msgstr "创建者: "
+msgstr "程序设计："
 
 #: resources/ui/gtk4/settings.ui:485 resources/ui/gtk3/settings.ui:480
 msgid "Translated by"
-msgstr "翻译: "
+msgstr "译者："
 
 #: resources/ui/gtk4/settings.ui:509 resources/ui/gtk3/settings.ui:504
 msgid "Artwork by"
-msgstr "界面设计: "
+msgstr "界面设计："
 
 #: resources/ui/gtk4/settings.ui:538 resources/ui/gtk3/settings.ui:658
 msgid "Sponsors"
@@ -1366,19 +1374,19 @@ msgstr "赞助"
 
 #: resources/ui/gtk4/settings.ui:555 resources/ui/gtk3/settings.ui:548
 msgid "🥇️ Gold Sponsors"
-msgstr "🥇️金牌赞助商"
+msgstr "🥇️金牌赞助人"
 
 #: resources/ui/gtk4/settings.ui:567 resources/ui/gtk3/settings.ui:560
 msgid "🥈️ Silver Sponsors"
-msgstr "🥈️银牌赞助商"
+msgstr "🥈️银牌赞助人"
 
 #: resources/ui/gtk4/settings.ui:579 resources/ui/gtk3/settings.ui:572
 msgid "🥉️ Bronze Sponsors"
-msgstr "🥉️铜牌赞助商"
+msgstr "🥉️铜牌赞助人"
 
 #: resources/ui/gtk4/settings.ui:591 resources/ui/gtk3/settings.ui:584
 msgid "🏅️ Past Sponsors"
-msgstr ""
+msgstr "🏅️过往赞助者"
 
 #. Shown in the about-popover if there is no sponsor for a given tier
 #: resources/ui/gtk4/settings.ui:603 resources/ui/gtk4/settings.ui:616
@@ -1386,15 +1394,15 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:596 resources/ui/gtk3/settings.ui:609
 #: resources/ui/gtk3/settings.ui:622 resources/ui/gtk3/settings.ui:635
 msgid "- none -"
-msgstr ""
+msgstr "- 无 -"
 
 #: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:649
 msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
-"💕️ 想表达你对 Fly-Pie 的喜爱吗？ <a href=\"https://github.com/sponsors/"
-"Schneegans\">欢迎赞助，每月只需 1 美元！</a>"
+"💕️ 想表达你对 Fly-Pie 的喜爱吗？<a href=\"https://github.com/sponsors/Schneegans\""
+">欢迎赞助，每月只需 1 美元！</a>"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/gtk4/settings.ui:707 resources/ui/gtk3/settings.ui:702
@@ -1411,13 +1419,13 @@ msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
-"<b>操作 </b>\n"
+"<b>操作</b>\n"
 "可添加到自定义菜单中。"
 
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/gtk4/settings.ui:801 resources/ui/gtk3/settings.ui:796
 msgid "Initialize most settings to random values."
-msgstr "将大多数设置初始化为随机值。"
+msgstr "随机设置大多数的选项。"
 
 #: resources/ui/gtk4/settings.ui:813 resources/ui/gtk3/settings.ui:808
 msgid "Generate Random Preset"
@@ -1443,8 +1451,8 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
-"你可以用 Fly-Pie 来启动应用程序、模拟热键、打开URL等等。本互动教程将教你如何"
-"最有效地使用Fly-Pie。点击下面的大按钮以打开测试菜单！"
+"你可以用 Fly-Pie 来启动应用程序、模拟键盘快捷键、打开网址等等。您看到的互动教程可以帮您最有效地使用 Fly-Pie "
+"。点击下面的大按钮，打开模拟使用菜单！"
 
 #: resources/ui/gtk4/settings.ui:946 resources/ui/gtk3/settings.ui:950
 msgid ""
@@ -1454,11 +1462,11 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
-"- 使用你的<b>鼠标左键来选择项目</b>。\n"
-"- 使用你的<b>鼠标右键来关闭菜单</b>。\n"
-"- 测试菜单仅仅是示范，选择项目没有实际效果。\n"
+"• 使用<b>鼠标左键选择项目</b>。\n"
+"• 使用<b>鼠标右键关闭菜单</b>。\n"
+"• 模拟使用菜单仅仅是示范，选择没有实际效果。\n"
 "\n"
-"如感到舒适，请点击<b>下一步</b>，了解更多细节！"
+"准备好了，就点击<b>下一步</b>，了解更多细节吧！"
 
 #. The text of the big tutorial button.
 #: resources/ui/gtk4/settings.ui:966 resources/ui/gtk4/settings.ui:1049
@@ -1467,22 +1475,22 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:1050 resources/ui/gtk3/settings.ui:1134
 #: resources/ui/gtk3/settings.ui:1276 resources/ui/gtk3/settings.ui:1360
 msgid "<big><b>Open the example menu!</b></big>"
-msgstr "<big><b>打开示例菜单！</b></big> "
+msgstr "<big><b>打开模拟使用菜单！</b></big>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:998 resources/ui/gtk3/settings.ui:1000
 msgid "You can click anywhere!"
-msgstr "你可以点击任何地方!"
+msgstr "点哪儿都好使！"
 
 #: resources/ui/gtk4/settings.ui:1017 resources/ui/gtk3/settings.ui:1018
+#, fuzzy
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
-msgstr ""
-"只要你的鼠标指针停留在项目的楔子里，你是直接点击项目还是在屏幕的边缘点击都没"
-"有关系。"
+msgstr "只要你的鼠标指针停留在项目的楔子里，你是直接点击项目还是在屏幕的边缘点击都没有关系。"
 
 #: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1030
+#, fuzzy
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -1491,11 +1499,11 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
-"<b>通过单击其各个挂件中的任意位置来选择项目</b>。\n"
+"<b>单击其各挂件里任何的位置就可以选中项目</b>。\n"
 "\n"
-"此外，你不必等待动画完成，因为子菜单挂件会立即出现在你单击的位置周围。\n"
+"此外，不用等待动画完成，因为子菜单挂件会立即出现在你单击的位置周围。\n"
 "\n"
-"点击<b>下一步</b>进行练习！"
+"点击<b>下一步</b>试一试！"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:1081 resources/ui/gtk3/settings.ui:1080
