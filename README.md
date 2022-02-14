@@ -71,6 +71,7 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
 
 <h2 align="center">🥈 Current Silver Sponsors</h2>
 <p align="center">
+  <a href="https://twitter.com/tjiiik">tj3k</a><br>
   <a href="https://www.llorachdevs.com/Home">Garsiv</a><br>
   <a href="https://github.com/SimHacker">@SimHacker</a><br>
   <a href="https://github.com/castrojo">Jorge Castro</a>
