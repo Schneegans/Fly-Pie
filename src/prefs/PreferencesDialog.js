@@ -11,6 +11,14 @@
 const {GObject, GLib, Gtk, Gio, Gdk} = imports.gi;
 const ByteArray                      = imports.byteArray;
 
+// libadwaita is available starting with GNOME Shell 42.
+let Adw = null;
+try {
+  Adw = imports.gi.Adw;
+} catch (e) {
+  // Nothing to do.
+}
+
 const _ = imports.gettext.domain('flypie').gettext;
 
 const Me                 = imports.misc.extensionUtils.getCurrentExtension();
@@ -185,7 +193,16 @@ var PreferencesDialog = class PreferencesDialog {
       stackSwitcher.parent.remove(aboutButton);
       stackSwitcher.parent.remove(stackSwitcher);
 
-      if (utils.gtk4()) {
+      if (utils.shellVersionIsAtLeast(42, 'beta')) {
+
+        const titlebar =
+            this._findWidgetByType(this._widget.get_root().get_content(), Adw.HeaderBar);
+
+        titlebar.set_title_widget(stackSwitcher);
+        titlebar.pack_start(aboutButton);
+
+      } else if (utils.gtk4()) {
+
         const titlebar = this._widget.get_root().get_titlebar();
         titlebar.set_title_widget(stackSwitcher);
         titlebar.pack_start(aboutButton);
@@ -254,5 +271,18 @@ var PreferencesDialog = class PreferencesDialog {
     const data   = Gio.resources_lookup_data(path, 0);
     const string = ByteArray.toString(ByteArray.fromGBytes(data));
     return JSON.parse(string);
+  }
+
+  // This traverses the widget tree below the given parent recursively and returns the
+  // first widget of the given type.
+  _findWidgetByType(parent, type) {
+    for (const child of [...parent]) {
+      if (child instanceof type) return child;
+
+      const match = this._findWidgetByType(child, type);
+      if (match) return match;
+    }
+
+    return null;
   }
 }
