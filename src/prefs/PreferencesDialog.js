@@ -193,13 +193,28 @@ var PreferencesDialog = class PreferencesDialog {
       stackSwitcher.parent.remove(aboutButton);
       stackSwitcher.parent.remove(stackSwitcher);
 
+      // On GNOME Shell 42, the settings dialog uses libadwaita. While the preferences
+      // dialog could benefit from using libadwaita's widgets, maintaining three versions
+      // of the UI is just too much work (GTK3 + GTK4 + libadwaita). So I chose to hack
+      // the "features" of the AdwPreferencesWindow away... In the future, when libadwaita
+      // is used more commonly, we should drop support for older GNOME versions and
+      // rewrite the entire dialog using libadwaita widgets!
       if (utils.shellVersionIsAtLeast(42, 'beta')) {
 
-        const titlebar =
-            this._findWidgetByType(this._widget.get_root().get_content(), Adw.HeaderBar);
+        const window = this._widget.get_root().get_content();
 
+        // Add widgets to the titlebar.
+        const titlebar = this._findChildByType(window, Adw.HeaderBar);
         titlebar.set_title_widget(stackSwitcher);
         titlebar.pack_start(aboutButton);
+
+        // "disable" the Adw.Clamp.
+        const clamp        = this._findParentByType(this._widget, Adw.Clamp);
+        clamp.maximum_size = 100000;
+
+        // Disable the Gtk.ScrolledWindow.
+        const scroll = this._findParentByType(this._widget, Gtk.ScrolledWindow);
+        scroll.vscrollbar_policy = Gtk.PolicyType.NEVER;
 
       } else if (utils.gtk4()) {
 
@@ -209,7 +224,9 @@ var PreferencesDialog = class PreferencesDialog {
 
         // This class makes the bottom corners round.
         this._widget.get_root().get_style_context().add_class('fly-pie-window');
+
       } else {
+
         const titlebar = this._widget.get_toplevel().get_titlebar();
         titlebar.set_custom_title(stackSwitcher);
         titlebar.pack_start(aboutButton);
@@ -273,16 +290,28 @@ var PreferencesDialog = class PreferencesDialog {
     return JSON.parse(string);
   }
 
-  // This traverses the widget tree below the given parent recursively and returns the
-  // first widget of the given type.
-  _findWidgetByType(parent, type) {
+  // This traverses the widget tree downwards below the given parent recursively and
+  // returns the first widget of the given type.
+  _findChildByType(parent, type) {
     for (const child of [...parent]) {
       if (child instanceof type) return child;
 
-      const match = this._findWidgetByType(child, type);
+      const match = this._findChildByType(child, type);
       if (match) return match;
     }
 
     return null;
+  }
+
+  // This traverses the widget tree upwards above the given child and returns the first
+  // widget of the given type.
+  _findParentByType(child, type) {
+    const parent = child.get_parent();
+
+    if (!parent) return null;
+
+    if (parent instanceof type) return parent;
+
+    return this._findParentByType(parent, type);
   }
 }
