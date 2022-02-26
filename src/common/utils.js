@@ -11,6 +11,9 @@
 const Cairo                                               = imports.cairo;
 const {GLib, Gdk, Gtk, Gio, Pango, PangoCairo, GdkPixbuf} = imports.gi;
 
+const Config               = imports.misc.config;
+const [GS_MAJOR, GS_MINOR] = Config.PACKAGE_VERSION.split('.');
+
 // We import the St module optionally. When this file is included from the daemon
 // side, it is available and can be used below. If this file is included via the pref.js,
 // it will not be available.
@@ -84,6 +87,34 @@ function getSessionType() {
     _sessionType = GLib.getenv('XDG_SESSION_TYPE');
   }
   return _sessionType;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Two methods for checking the current version of GNOME Shell.                         //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// This method returns true if the current GNOME Shell version matches the given
+// arguments.
+function shellVersionIs(major, minor) {
+  return GS_MAJOR == major && GS_MINOR == minor;
+}
+
+// This method returns true if the current GNOME Shell version is at least as high as the
+// given arguments.
+function shellVersionIsAtLeast(major, minor) {
+  if (GS_MAJOR > major) {
+    return true;
+  }
+
+  if (GS_MAJOR == major) {
+    if (minor == 'alpha') return true;
+    if (minor == 'beta' && GS_MINOR == 'alpha') return false;
+    if (minor == 'beta' && GS_MINOR == 'beta') return true;
+
+    return GS_MINOR >= minor;
+  }
+
+  return false;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
