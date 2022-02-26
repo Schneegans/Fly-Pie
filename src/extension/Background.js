@@ -172,7 +172,7 @@ class Background extends Clutter.Actor {
 
         // Try to grab the complete input. If this fails that's not too bad as we're
         // full-screen.
-        if (Main.pushModal(this)) {
+        if (this._grab()) {
           this._isModal = true;
         } else {
           // Something went wrong while grabbing the input. For now, we continue but log
@@ -201,7 +201,7 @@ class Background extends Clutter.Actor {
   close() {
     // Un-grab the input.
     if (this._isModal) {
-      Main.popModal(this);
+      this._ungrab();
       this._isModal = false;
     }
 
@@ -213,6 +213,27 @@ class Background extends Clutter.Actor {
   }
 
   // ----------------------------------------------------------------------- private stuff
+
+  // This ensures that the entire input is sent to the background actor.
+  _grab() {
+
+    // On GNOME Shell 42, there's a new API.
+    if (utils.shellVersionIsAtLeast(42, 'beta')) {
+      this._lastGrab = global.stage.grab(this);
+      return this._lastGrab != null;
+    }
+
+    return Main.pushModal(this);
+  }
+
+  // Releases a grab created with the method above.
+  _ungrab() {
+    if (utils.shellVersionIsAtLeast(42, 'beta')) {
+      this._lastGrab.dismiss();
+    } else {
+      Main.popModal(this);
+    }
+  }
 
   // This adds one button to the row of control buttons. We use a combination of app
   // switcher and dash button class names hoping that this looks good with most GNOME
