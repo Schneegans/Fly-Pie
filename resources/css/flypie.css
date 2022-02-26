@@ -62,3 +62,9 @@ menubutton.menu-editor-add-button button {
 frame>* {
     border-radius: 8px;
 }
+
+/* Remove the Adw.Clamp's margin. */
+
+clamp>* {
+    margin: 0px;
+}
