@@ -1007,7 +1007,8 @@ var Menu = class Menu {
     // Report an initial motion event at the menu's center. This ensures that gestures
     // are detected properly even if the initial pointer movement is really fast.
     const mods = global.get_pointer()[2];
-    this._selectionWedges.onMotionEvent([clampedX, clampedY], mods);
+    this._selectionWedges.onMotionEvent(
+        [clampedX + this._background.x, clampedY + this._background.y], mods);
   }
 
   // This assigns IDs and angles to each and every item. It also ensures that the root
