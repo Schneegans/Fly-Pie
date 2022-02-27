@@ -165,21 +165,26 @@ var PreferencesDialog = class PreferencesDialog {
     });
 
     // We show an info bar if GNOME Shell's animations are disabled. To make this info
-    // more apparent, we wait some seconds before showing it.
-    this._showAnimationInfoTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
-      // Link the visibility of the info bar with the animations setting.
-      this._shellSettings.bind(
-          'enable-animations', this._builder.get_object('animation-infobar'), 'revealed',
-          Gio.SettingsBindFlags.INVERT_BOOLEAN);
+    // more apparent, we wait some seconds before showing it. On GNOME 40+, Fly-Pie also
+    // works with animations disabled, so we do not need to show this there.
+    if (!utils.shellVersionIsAtLeast(40, 0)) {
+      this._showAnimationInfoTimeout =
+          GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
+            // Link the visibility of the info bar with the animations setting.
+            this._shellSettings.bind(
+                'enable-animations', this._builder.get_object('animation-infobar'),
+                'revealed', Gio.SettingsBindFlags.INVERT_BOOLEAN);
 
-      // Enable animations when the button in the info bar is pressed.
-      this._builder.get_object('enable-animations-button').connect('clicked', () => {
-        this._shellSettings.set_boolean('enable-animations', true);
-      });
+            // Enable animations when the button in the info bar is pressed.
+            this._builder.get_object('enable-animations-button')
+                .connect('clicked', () => {
+                  this._shellSettings.set_boolean('enable-animations', true);
+                });
 
-      this._showAnimationInfoTimeout = 0;
-      return false;
-    });
+            this._showAnimationInfoTimeout = 0;
+            return false;
+          });
+    }
 
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
