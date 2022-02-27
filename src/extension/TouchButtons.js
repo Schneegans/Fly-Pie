@@ -198,7 +198,7 @@ var TouchButtons = class TouchButtons {
         red: this._cachedSettings.textColor.red / 255,
         green: this._cachedSettings.textColor.green / 255,
         blue: this._cachedSettings.textColor.blue / 255
-      });
+       });
 
       const [r, g, b]        = utils.getAverageIconColor(surface, 24);
       const averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
@@ -299,7 +299,7 @@ var TouchButtons = class TouchButtons {
             if (!actor._dragging && !this._menuOpened) {
               this._ease(actor, {opacity: this._cachedSettings.opacity});
             }
-            return Clutter.EVENT_STOP;
+            return Clutter.EVENT_PROPAGATE;
           }
 
           // Now we have to wire up some events. If the pointer enters the touch button,
@@ -471,16 +471,25 @@ var TouchButtons = class TouchButtons {
   // buttons will dragging them around.
   _grab(actor) {
     if (this._latestInputDevice) {
-      this._latestInputDevice.grab(actor);
-      global.begin_modal(global.get_current_time(), 0);
+      // On GNOME Shell 42, there's a new API.
+      if (utils.shellVersionIsAtLeast(42, 'beta')) {
+        this._lastGrab = global.stage.grab(actor);
+      } else {
+        this._latestInputDevice.grab(actor);
+        global.begin_modal(global.get_current_time(), 0);
+      }
     }
   }
 
   // Releases a grab created with the method above.
   _ungrab() {
     if (this._latestInputDevice) {
-      this._latestInputDevice.ungrab();
-      global.end_modal(global.get_current_time());
+      if (utils.shellVersionIsAtLeast(42, 'beta')) {
+        this._lastGrab.dismiss();
+      } else {
+        this._latestInputDevice.ungrab();
+        global.end_modal(global.get_current_time());
+      }
     }
   }
 };
