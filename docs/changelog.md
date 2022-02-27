@@ -5,6 +5,16 @@
 # Changelog of Fly-Pie
 
 
+## [Fly-Pie 14](https://github.com/schneegans/fly-pie/releases/tag/v14)
+
+**Release Date:** TBD
+
+#### Bug Fixes
+
+* The menu position is not smoothly transitioning anymore if opened on a different monitor.
+* Fixed an issue which caused items to be pre-selected when the menu was not opened on the left-most monitor (#206).
+
+
 ## [Fly-Pie 13](https://github.com/schneegans/fly-pie/releases/tag/v13)
 
 **Release Date:** 2022-01-12

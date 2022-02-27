@@ -53,16 +53,6 @@ class Background extends Clutter.Actor {
     this._settings            = utils.createSettings();
     this._settingsConnections = [];
 
-    // We transition everything. This is used for the position when in preview mode, the
-    // opacity and the color.
-    this.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
-
-    // And update it in case of changes.
-    this._settingsConnections.push(
-        this._settings.connect('changed::easing-duration', () => {
-          this.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
-        }));
-
     // Set the background color according to the settings.
     this.backgroundColor =
         Clutter.Color.from_string(this._settings.get_string('background-color'))[1];
@@ -79,9 +69,11 @@ class Background extends Clutter.Actor {
         this._settings.connect('changed::preview-on-right-side', () => {
           if (this._previewMode) {
             // Set x accounting monitor x as a starting point
+            this.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
             this.x = this._settings.get_boolean('preview-on-right-side') ?
                 this.width + Main.layoutManager.currentMonitor.x :
                 Main.layoutManager.currentMonitor.x;
+            this.set_easing_duration(0);
           }
         }));
 
@@ -137,12 +129,13 @@ class Background extends Clutter.Actor {
       // Set background size to one half of the monitor.
       this.width  = Main.layoutManager.currentMonitor.width / 2;
       this.height = Main.layoutManager.currentMonitor.height;
+
       // Set x accounting monitor x as a starting point
       this.x = this._settings.get_boolean('preview-on-right-side') ?
           this.width + Main.layoutManager.currentMonitor.x :
           Main.layoutManager.currentMonitor.x;
-      this.y =
-          Main.layoutManager.currentMonitor.y;  // Needed for vertical monitor alignment
+      this.y = Main.layoutManager.currentMonitor.y;
+
       // Do not draw outside our preview-mode screen-side.
       this.set_clip(0, 0, this.width, this.height);
 
@@ -156,12 +149,11 @@ class Background extends Clutter.Actor {
       // In normal mode, the background covers the entire screen and is pushed as modal,
       // grabbing the complete user input.
       this._controlButtons.visible = false;
-      this.width                   = Main.layoutManager.currentMonitor.width;
-      this.height                  = Main.layoutManager.currentMonitor.height;
-      this.x =
-          Main.layoutManager.currentMonitor.x;  // Needed for horizontal monitor alignment
-      this.y =
-          Main.layoutManager.currentMonitor.y;  // Needed for vertical monitor alignment
+
+      this.width  = Main.layoutManager.currentMonitor.width;
+      this.height = Main.layoutManager.currentMonitor.height;
+      this.x      = Main.layoutManager.currentMonitor.x;
+      this.y      = Main.layoutManager.currentMonitor.y;
 
       // Remove any previous clips set in preview mode.
       this.remove_clip();
@@ -192,7 +184,9 @@ class Background extends Clutter.Actor {
   // The open() method above does not really show the background; it's still translucent.
   // The actual revealing is done by this method.
   reveal() {
+    this.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
     this.opacity = 255;
+    this.set_easing_duration(0);
   }
 
   // This hides the background again. A fade-out animation is used for the opacity, but
@@ -209,7 +203,9 @@ class Background extends Clutter.Actor {
     this.reactive = false;
 
     // Add the fade-out animation.
+    this.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
     this.opacity = 0;
+    this.set_easing_duration(0);
   }
 
   // ----------------------------------------------------------------------- private stuff
