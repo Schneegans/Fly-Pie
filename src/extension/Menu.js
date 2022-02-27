@@ -307,7 +307,7 @@ var Menu = class Menu {
         return Clutter.EVENT_STOP;
       }
 
-      return Clutter.EVENT_CONTINUE;
+      return Clutter.EVENT_PROPAGATE;
     });
 
     // Delete the currently active menu once the background was faded-out.

@@ -308,7 +308,7 @@ var TouchButtons = class TouchButtons {
             if (!actor._dragging) {
               this._ease(actor, {opacity: 255});
             }
-            return Clutter.EVENT_STOP;
+            return Clutter.EVENT_PROPAGATE;
           }
 
           // Reset the touch button state on button release / touch end events.
@@ -352,8 +352,7 @@ var TouchButtons = class TouchButtons {
             return Clutter.EVENT_STOP;
           }
 
-
-          return Clutter.EVENT_CONTINUE;
+          return Clutter.EVENT_PROPAGATE;
         });
 
         // This long-press action is used to initiate dragging as well es opening the
