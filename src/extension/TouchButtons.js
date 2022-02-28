@@ -198,7 +198,7 @@ var TouchButtons = class TouchButtons {
         red: this._cachedSettings.textColor.red / 255,
         green: this._cachedSettings.textColor.green / 255,
         blue: this._cachedSettings.textColor.blue / 255
-       });
+      });
 
       const [r, g, b]        = utils.getAverageIconColor(surface, 24);
       const averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
@@ -272,10 +272,15 @@ var TouchButtons = class TouchButtons {
               (Main.layoutManager.currentMonitor.height - actor.height) / 2;
         }
 
-        // We connect to the 'captured-event' to be able to process the events before the
-        // ClickAction which is created further down. Else we will not receive some events
-        // which are swallowed by the ClickAction.
-        actor.connect('captured-event', (actor, event) => {
+        // On GNOME 42, we need to connect to the 'captured-event' to be able to process
+        // the events before the ClickAction which is created further down. Else we will
+        // not receive some events which are swallowed by the ClickAction. On older GNOME
+        // versions we have to use the normal 'event' as we will else not receive events
+        // during the grab.
+        const event =
+            utils.shellVersionIsAtLeast(42, 'alpha') ? 'captured-event' : 'event';
+
+        actor.connect(event, (actor, event) => {
           // Update the actor's position when dragged around. We also store a reference to
           // the latest input device interacting with the touch button so that we can grab
           // it later.
@@ -309,40 +314,45 @@ var TouchButtons = class TouchButtons {
           }
 
           // The button-release event is used to end a drag operation.
-          if (actor._dragging &&
-              (event.type() == Clutter.EventType.BUTTON_RELEASE ||
-               event.type() == Clutter.EventType.TOUCH_END)) {
+          if (event.type() == Clutter.EventType.BUTTON_RELEASE ||
+              event.type() == Clutter.EventType.TOUCH_END) {
 
-            actor._dragging = false;
+            // Make sure that the long-press action gets canceled.
+            actor.get_actions()[0].release();
 
-            // Release the pointer grab.
-            this._ungrab();
+            if (actor._dragging) {
 
-            // Use the normal cursor again.
-            global.display.set_cursor(Meta.Cursor.DEFAULT);
+              actor._dragging = false;
 
-            // Make the button's size and opacity "normal" again.
-            this._ease(actor, {opacity: 255});
-            this._ease(actor, {scale_x: 1});
-            this._ease(actor, {scale_y: 1});
+              // Release the pointer grab.
+              this._ungrab();
 
-            // Now save the updated touch button position. We retrieve the current
-            // positions list and update the entry for currently dragged item.
-            const positions =
-                this._settings.get_value('touch-button-positions').deep_unpack();
-            positions[i] = [actor.x, actor.y];
+              // Use the normal cursor again.
+              global.display.set_cursor(Meta.Cursor.DEFAULT);
 
-            // It can be possible that there are undefined entries before the current
-            // one, so we set them to [].
-            for (let j = 0; j < i; j++) {
-              positions[j] = positions[j] || [];
+              // Make the button's size and opacity "normal" again.
+              this._ease(actor, {opacity: 255});
+              this._ease(actor, {scale_x: 1});
+              this._ease(actor, {scale_y: 1});
+
+              // Now save the updated touch button position. We retrieve the current
+              // positions list and update the entry for currently dragged item.
+              const positions =
+                  this._settings.get_value('touch-button-positions').deep_unpack();
+              positions[i] = [actor.x, actor.y];
+
+              // It can be possible that there are undefined entries before the current
+              // one, so we set them to [].
+              for (let j = 0; j < i; j++) {
+                positions[j] = positions[j] || [];
+              }
+
+              // Save the updated positions.
+              const variant = new GLib.Variant('aah', positions);
+              this._settings.set_value('touch-button-positions', variant);
+
+              return Clutter.EVENT_STOP;
             }
-
-            // Save the updated positions.
-            const variant = new GLib.Variant('aah', positions);
-            this._settings.set_value('touch-button-positions', variant);
-
-            return Clutter.EVENT_STOP;
           }
 
           return Clutter.EVENT_PROPAGATE;
