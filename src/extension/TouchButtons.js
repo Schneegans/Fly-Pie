@@ -193,12 +193,14 @@ var TouchButtons = class TouchButtons {
     if (this._settings.get_string('center-color-mode-hover') == 'auto') {
 
       // Compute the average color on a smaller version of the icon.
+      // clang-format off
       const iconName = this._settings.get_string('center-background-image-hover');
       const surface  = utils.createIcon(iconName, 24, this._cachedSettings.font, {
         red: this._cachedSettings.textColor.red / 255,
         green: this._cachedSettings.textColor.green / 255,
         blue: this._cachedSettings.textColor.blue / 255
       });
+      // clang-format on
 
       const [r, g, b]        = utils.getAverageIconColor(surface, 24);
       const averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
@@ -211,7 +213,6 @@ var TouchButtons = class TouchButtons {
       // Store the resulting color.
       this._cachedSettings.backgroundColor =
           MenuItem.getAutoColor(averageIconColor, luminance, saturation, opacity);
-
     }
     // Else we simply use the configured fixed color.
     else {
@@ -273,7 +274,15 @@ var TouchButtons = class TouchButtons {
               (Main.layoutManager.currentMonitor.height - actor.height) / 2;
         }
 
-        actor.connect('event', (actor, event) => {
+        // On GNOME 42, we need to connect to the 'captured-event' to be able to process
+        // the events before the ClickAction which is created further down. Else we will
+        // not receive some events which are swallowed by the ClickAction. On older GNOME
+        // versions we have to use the normal 'event' as we will else not receive events
+        // during the grab.
+        const event =
+            utils.shellVersionIsAtLeast(42, 'beta') ? 'captured-event' : 'event';
+
+        actor.connect(event, (actor, event) => {
           // Update the actor's position when dragged around. We also store a reference to
           // the latest input device interacting with the touch button so that we can grab
           // it later.
@@ -286,20 +295,16 @@ var TouchButtons = class TouchButtons {
               const [x, y] = event.get_coords();
               actor.x      = x - actor._dragStartX;
               actor.y      = y - actor._dragStartY;
+
+              return Clutter.EVENT_STOP;
             }
-            return Clutter.EVENT_STOP;
           }
 
           // If the pointer leaves the touch button, we make it somewhat transparent.
           if (event.type() == Clutter.EventType.LEAVE) {
-
-            // Make sure that the long-press action gets canceled.
-            actor.get_actions()[0].release();
-
             if (!actor._dragging && !this._menuOpened) {
               this._ease(actor, {opacity: this._cachedSettings.opacity});
             }
-            return Clutter.EVENT_STOP;
           }
 
           // Now we have to wire up some events. If the pointer enters the touch button,
@@ -308,18 +313,17 @@ var TouchButtons = class TouchButtons {
             if (!actor._dragging) {
               this._ease(actor, {opacity: 255});
             }
-            return Clutter.EVENT_STOP;
           }
 
-          // Reset the touch button state on button release / touch end events.
+          // The button-release event is used to end a drag operation.
           if (event.type() == Clutter.EventType.BUTTON_RELEASE ||
               event.type() == Clutter.EventType.TOUCH_END) {
 
             // Make sure that the long-press action gets canceled.
             actor.get_actions()[0].release();
 
-            // The button-release event is used to end a drag operation.
             if (actor._dragging) {
+
               actor._dragging = false;
 
               // Release the pointer grab.
@@ -348,12 +352,12 @@ var TouchButtons = class TouchButtons {
               // Save the updated positions.
               const variant = new GLib.Variant('aah', positions);
               this._settings.set_value('touch-button-positions', variant);
+
+              return Clutter.EVENT_STOP;
             }
-            return Clutter.EVENT_STOP;
           }
 
-
-          return Clutter.EVENT_CONTINUE;
+          return Clutter.EVENT_PROPAGATE;
         });
 
         // This long-press action is used to initiate dragging as well es opening the
@@ -472,16 +476,25 @@ var TouchButtons = class TouchButtons {
   // buttons will dragging them around.
   _grab(actor) {
     if (this._latestInputDevice) {
-      this._latestInputDevice.grab(actor);
-      global.begin_modal(global.get_current_time(), 0);
+      // On GNOME Shell 42, there's a new API.
+      if (utils.shellVersionIsAtLeast(42, 'beta')) {
+        this._lastGrab = global.stage.grab(actor);
+      } else {
+        this._latestInputDevice.grab(actor);
+        global.begin_modal(global.get_current_time(), 0);
+      }
     }
   }
 
   // Releases a grab created with the method above.
   _ungrab() {
     if (this._latestInputDevice) {
-      this._latestInputDevice.ungrab();
-      global.end_modal(global.get_current_time());
+      if (utils.shellVersionIsAtLeast(42, 'beta')) {
+        this._lastGrab.dismiss();
+      } else {
+        this._latestInputDevice.ungrab();
+        global.end_modal(global.get_current_time());
+      }
     }
   }
 };

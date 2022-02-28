@@ -86,7 +86,7 @@ var Shortcuts = GObject.registerClass(
               }
             }
           }
-          return Clutter.EVENT_CONTINUE;
+          return Clutter.EVENT_PROPAGATE;
         });
       }
 

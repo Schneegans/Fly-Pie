@@ -11,6 +11,14 @@
 const {GObject, GLib, Gtk, Gio, Gdk} = imports.gi;
 const ByteArray                      = imports.byteArray;
 
+// libadwaita is available starting with GNOME Shell 42.
+let Adw = null;
+try {
+  Adw = imports.gi.Adw;
+} catch (e) {
+  // Nothing to do.
+}
+
 const _ = imports.gettext.domain('flypie').gettext;
 
 const Me                 = imports.misc.extensionUtils.getCurrentExtension();
@@ -157,21 +165,26 @@ var PreferencesDialog = class PreferencesDialog {
     });
 
     // We show an info bar if GNOME Shell's animations are disabled. To make this info
-    // more apparent, we wait some seconds before showing it.
-    this._showAnimationInfoTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
-      // Link the visibility of the info bar with the animations setting.
-      this._shellSettings.bind(
-          'enable-animations', this._builder.get_object('animation-infobar'), 'revealed',
-          Gio.SettingsBindFlags.INVERT_BOOLEAN);
+    // more apparent, we wait some seconds before showing it. On GNOME 40+, Fly-Pie also
+    // works with animations disabled, so we do not need to show this there.
+    if (!utils.shellVersionIsAtLeast(40, 0)) {
+      this._showAnimationInfoTimeout =
+          GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
+            // Link the visibility of the info bar with the animations setting.
+            this._shellSettings.bind(
+                'enable-animations', this._builder.get_object('animation-infobar'),
+                'revealed', Gio.SettingsBindFlags.INVERT_BOOLEAN);
 
-      // Enable animations when the button in the info bar is pressed.
-      this._builder.get_object('enable-animations-button').connect('clicked', () => {
-        this._shellSettings.set_boolean('enable-animations', true);
-      });
+            // Enable animations when the button in the info bar is pressed.
+            this._builder.get_object('enable-animations-button')
+                .connect('clicked', () => {
+                  this._shellSettings.set_boolean('enable-animations', true);
+                });
 
-      this._showAnimationInfoTimeout = 0;
-      return false;
-    });
+            this._showAnimationInfoTimeout = 0;
+            return false;
+          });
+    }
 
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
@@ -185,14 +198,40 @@ var PreferencesDialog = class PreferencesDialog {
       stackSwitcher.parent.remove(aboutButton);
       stackSwitcher.parent.remove(stackSwitcher);
 
-      if (utils.gtk4()) {
+      // On GNOME Shell 42, the settings dialog uses libadwaita. While the preferences
+      // dialog could benefit from using libadwaita's widgets, maintaining three versions
+      // of the UI is just too much work (GTK3 + GTK4 + libadwaita). So I chose to hack
+      // the "features" of the AdwPreferencesWindow away... In the future, when libadwaita
+      // is used more commonly, we should drop support for older GNOME versions and
+      // rewrite the entire dialog using libadwaita widgets!
+      if (utils.shellVersionIsAtLeast(42, 'beta')) {
+
+        const window = this._widget.get_root().get_content();
+
+        // Add widgets to the titlebar.
+        const titlebar = this._findChildByType(window, Adw.HeaderBar);
+        titlebar.set_title_widget(stackSwitcher);
+        titlebar.pack_start(aboutButton);
+
+        // "disable" the Adw.Clamp.
+        const clamp        = this._findParentByType(this._widget, Adw.Clamp);
+        clamp.maximum_size = 100000;
+
+        // Disable the Gtk.ScrolledWindow.
+        const scroll = this._findParentByType(this._widget, Gtk.ScrolledWindow);
+        scroll.vscrollbar_policy = Gtk.PolicyType.NEVER;
+
+      } else if (utils.gtk4()) {
+
         const titlebar = this._widget.get_root().get_titlebar();
         titlebar.set_title_widget(stackSwitcher);
         titlebar.pack_start(aboutButton);
 
         // This class makes the bottom corners round.
         this._widget.get_root().get_style_context().add_class('fly-pie-window');
+
       } else {
+
         const titlebar = this._widget.get_toplevel().get_titlebar();
         titlebar.set_custom_title(stackSwitcher);
         titlebar.pack_start(aboutButton);
@@ -254,5 +293,30 @@ var PreferencesDialog = class PreferencesDialog {
     const data   = Gio.resources_lookup_data(path, 0);
     const string = ByteArray.toString(ByteArray.fromGBytes(data));
     return JSON.parse(string);
+  }
+
+  // This traverses the widget tree downwards below the given parent recursively and
+  // returns the first widget of the given type.
+  _findChildByType(parent, type) {
+    for (const child of [...parent]) {
+      if (child instanceof type) return child;
+
+      const match = this._findChildByType(child, type);
+      if (match) return match;
+    }
+
+    return null;
+  }
+
+  // This traverses the widget tree upwards above the given child and returns the first
+  // widget of the given type.
+  _findParentByType(child, type) {
+    const parent = child.get_parent();
+
+    if (!parent) return null;
+
+    if (parent instanceof type) return parent;
+
+    return this._findParentByType(parent, type);
   }
 }

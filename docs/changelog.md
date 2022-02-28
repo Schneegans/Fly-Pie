@@ -9,6 +9,10 @@
 
 **Release Date:** TBD
 
+#### Enhancements
+
+* Added initial support for GNOME Shell 42.
+
 #### Bug Fixes
 
 * The menu position is not smoothly transitioning anymore if opened on a different monitor.
