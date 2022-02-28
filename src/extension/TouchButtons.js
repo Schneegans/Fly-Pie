@@ -193,12 +193,14 @@ var TouchButtons = class TouchButtons {
     if (this._settings.get_string('center-color-mode-hover') == 'auto') {
 
       // Compute the average color on a smaller version of the icon.
+      // clang-format off
       const iconName = this._settings.get_string('center-background-image-hover');
       const surface  = utils.createIcon(iconName, 24, this._cachedSettings.font, {
         red: this._cachedSettings.textColor.red / 255,
         green: this._cachedSettings.textColor.green / 255,
         blue: this._cachedSettings.textColor.blue / 255
       });
+      // clang-format on
 
       const [r, g, b]        = utils.getAverageIconColor(surface, 24);
       const averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
