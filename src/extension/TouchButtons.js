@@ -280,7 +280,7 @@ var TouchButtons = class TouchButtons {
         // versions we have to use the normal 'event' as we will else not receive events
         // during the grab.
         const event =
-            utils.shellVersionIsAtLeast(42, 'alpha') ? 'captured-event' : 'event';
+            utils.shellVersionIsAtLeast(42, 'beta') ? 'captured-event' : 'event';
 
         actor.connect(event, (actor, event) => {
           // Update the actor's position when dragged around. We also store a reference to
