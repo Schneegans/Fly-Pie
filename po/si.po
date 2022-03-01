@@ -129,7 +129,7 @@ msgstr ""
 #: src/common/actions/DBusSignal.js:43
 msgid ""
 "The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
-"\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-interface.md"
+"\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md"
 "\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
@@ -1321,7 +1321,7 @@ msgstr "පිළිබඳව"
 
 #: resources/ui/gtk4/settings.ui:423 resources/ui/gtk3/settings.ui:420
 msgid ""
-"Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
+"Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
 

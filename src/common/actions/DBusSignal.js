@@ -40,7 +40,7 @@ var action = {
 
   // This is the (long) description shown when an item of this type is selected.
   description: _(
-      'The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="https://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-interface.md">can listen on the D-Bus for its activation</a>. This can be very useful in custom menus opened via the command line.'),
+      'The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md">can listen on the D-Bus for its activation</a>. This can be very useful in custom menus opened via the command line.'),
 
   // Items of this type have an additional text configuration parameter which is passed as
   // ID to the D-Bus signals.

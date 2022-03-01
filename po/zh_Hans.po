@@ -132,12 +132,12 @@ msgstr "发出 D-Bus 信号。"
 #: src/common/actions/DBusSignal.js:43
 msgid ""
 "The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
-"\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-interface.md"
+"\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md"
 "\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
 "<b>D-Bus 信号</b>操作本身没用，但您<a href=\"https://github.com/Schneegans/Fly-Pie/blob/"
-"develop/docs/dbus-interface.md\">可以在 D-Bus 上监听操作的激活</a>。这可以用来通过命令行打开菜单。"
+"main/docs/dbus-interface.md\">可以在 D-Bus 上监听操作的激活</a>。这可以用来通过命令行打开菜单。"
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
@@ -1337,10 +1337,10 @@ msgstr "软件介绍"
 
 #: resources/ui/gtk4/settings.ui:423 resources/ui/gtk3/settings.ui:420
 msgid ""
-"Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
+"Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
-"查看<a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/changelog"
+"查看<a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog"
 ".md\">更新记录</a>。"
 
 #: resources/ui/gtk4/settings.ui:431 resources/ui/gtk3/settings.ui:428

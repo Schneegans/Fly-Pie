@@ -140,12 +140,12 @@ msgstr "Émet un signal D-Bus."
 #: src/common/actions/DBusSignal.js:43
 msgid ""
 "The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
-"\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-interface.md"
+"\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md"
 "\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
 "L'action <b>Signal D-Bus</b> ne fait rien en soi. Mais vous pouvez <a href="
-"\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-interface.md"
+"\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md"
 "\">écouter le D-BUS pour son activation.</a>. Ce peut être très utile dans des "
 "menus personnalisés ouvert par ligne de commande."
 
@@ -1390,10 +1390,10 @@ msgstr "À Propos"
 
 #: resources/ui/gtk4/settings.ui:423 resources/ui/gtk3/settings.ui:420
 msgid ""
-"Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
+"Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
-"Lire le <a href=\"https://github.com/Schneegans/Fly-Pie/blob/develop/docs/"
+"Lire le <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
 "changelog.md\">Journal des modifications</a>."
 
 #: resources/ui/gtk4/settings.ui:431 resources/ui/gtk3/settings.ui:428

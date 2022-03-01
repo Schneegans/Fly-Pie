@@ -409,7 +409,7 @@ var MenuEditorPage = class MenuEditorPage {
       _('It is possible to open a menu with a terminal command. You can read more on <a href="%s">Github</a>.')
           .replace(
               '%s',
-              'https://github.com/Schneegans/Fly-Pie/blob/develop/docs/dbus-interface.md'),
+              'https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
       _('You can drop directories, files, links and desktop files into the menu hierarchy on the left.'),
@@ -421,7 +421,7 @@ var MenuEditorPage = class MenuEditorPage {
       _('<a href="%s">Translate Fly-Pie on Hosted Weblate</a>.')
           .replace(
               '%s',
-              'https://github.com/Schneegans/Fly-Pie/blob/develop/docs/translating.md'),
+              'https://github.com/Schneegans/Fly-Pie/blob/main/docs/translating.md'),
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
       _('💕️ Do you want to show your love for Fly-Pie? <a href="%s">Become a sponsor.</a>')

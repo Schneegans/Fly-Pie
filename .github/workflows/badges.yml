@@ -3,7 +3,7 @@ name: Badges
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
   update-badges:

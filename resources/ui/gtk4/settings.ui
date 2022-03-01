@@ -420,7 +420,7 @@
                       <object class="GtkLabel">
                         <property name="halign">center</property>
                         <property name="margin_bottom">20</property>
-                        <property name="label" translatable="yes">Read the &lt;a href=&quot;https://github.com/Schneegans/Fly-Pie/blob/develop/docs/changelog.md&quot;&gt;Changelog&lt;/a&gt;.</property>
+                        <property name="label" translatable="yes">Read the &lt;a href=&quot;https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog.md&quot;&gt;Changelog&lt;/a&gt;.</property>
                         <property name="use_markup">1</property>
                       </object>
                     </child>
