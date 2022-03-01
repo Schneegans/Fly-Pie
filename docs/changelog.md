@@ -12,6 +12,7 @@
 #### Enhancements
 
 * Added initial support for GNOME Shell 42.
+* The branching scheme of Fly-Pie has been simplified, and the corresponding guides have been updated. There is no `develop` branch anymore, and the new default branch is `main`.
 
 #### Bug Fixes
 
