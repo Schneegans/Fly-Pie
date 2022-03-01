@@ -31,7 +31,7 @@ try {
 //////////////////////////////////////////////////////////////////////////////////////////
 // The System menu shows an items for screen-lock, shutdown, settings, etc. The code    //
 // is roughly based on GNOME Shell's tray menu code:                                    //
-// https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/master/js/ui/status/system.js.     //
+// https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/main/js/ui/status/system.js.       //
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
