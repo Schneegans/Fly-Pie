@@ -10,7 +10,7 @@ Whenever you encounter a :beetle: **bug** or have a :tada: **feature request**,
 report this via [Github issues](https://github.com/schneegans/fly-pie/issues).
 
 We are happy to receive contributions to Fly-Pie in the form of **pull requests** via Github.
-Feel free to fork the repository, implement your changes and create a merge request to the `develop` branch.
+Feel free to fork the repository, implement your changes and create a merge request to the `main` branch.
 
 ## Debugging
 
@@ -22,17 +22,12 @@ journalctl -f -o cat | grep -E 'flypie|'
 
 ## Branching Guidelines
 
-<a href="https://www.youtube.com/watch?v=1SXpE08hvGs"><img align="right" width="350px" src ="pics/player2.jpg" /></a>
+The development of Fly-Pie uses a very simple branching scheme:
 
-The development of Fly-Pie follows a simplified version of **git-flow**:
-
-* The `main` branch always contains stable code.
-New features and bug fixes are implemented in `feature/*` branches and are merged to `develop` once they are finished.
-* When a [new version is about to get released](release-management.md), the content of `develop` will be branched to `release/vX` (`X` is the new version number) and the translators get notified.
-* Once the translation work and last minute bugfixing is done, `release/vX` is merged into `main` and a tag is created to mark the release. The last step of the release process is to merge `main` back into `develop` in order to update the translations and bugfixes in the active development branch.
-* In rare and critical cases, hotfixes for the latest release will be created in the `main` branch and merged back to `develop`.
-
-Still unclear? Click the player image above for a good explanation on YouTube!
+* The latest release will be referenced with a tag in the format `v<version number>`.
+* The `main` branch always contains the latest development version.
+* New features are implemented in `feature/*` branches and merged to `main` once they are finished.
+* Bug fixes are implemented in `fix/#<issue number>` branches and merged to `main` once they are finished.
 
 ## Git Commit Messages
 
