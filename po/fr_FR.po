@@ -2,16 +2,16 @@
 # Copyright (C) 2021 Simon Schneegans
 # This file is distributed under the same license as the Fly-Pie package.
 # Clément Schotte, 2021.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-12 14:31+1\n"
+"POT-Creation-Date: 2022-03-01 16:40+0100\n"
 "PO-Revision-Date: 2021-12-21 11:51+0000\n"
 "Last-Translator: Clemovski <schotte.clement@hotmail.fr>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/fly-pie/core/fr/>"
-"\n"
+"Language-Team: French <https://hosted.weblate.org/projects/fly-pie/core/fr/"
+">\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,9 +35,9 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
-"L'action <b>Activer Raccourci Clavier</b> simule une combinaison de "
-"touches quand activée. Cela peut par exemple servir à changer de bureau "
-"virtuel, contrôler un lecteur multimédia or annuler/rétablir des actions."
+"L'action <b>Activer Raccourci Clavier</b> simule une combinaison de touches "
+"quand activée. Cela peut par exemple servir à changer de bureau virtuel, "
+"contrôler un lecteur multimédia or annuler/rétablir des actions."
 
 #: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5103
 #: resources/ui/gtk3/settings.ui:5095
@@ -63,8 +63,8 @@ msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
-"L'action <b>Ouvrir Fichier</b> ouvrira le fichier spécifié ci-dessus "
-"avec l'application par défaut de votre système."
+"L'action <b>Ouvrir Fichier</b> ouvrira le fichier spécifié ci-dessus avec "
+"l'application par défaut de votre système."
 
 #: src/common/actions/File.js:69
 msgid "File"
@@ -91,7 +91,8 @@ msgid ""
 "as well."
 msgstr ""
 "L'action <b>Lancer Application</b> exécute une commande donnée. Cela sert "
-"principalement à ouvrir des applications peut avoir de nombreux autres usages."
+"principalement à ouvrir des applications peut avoir de nombreux autres "
+"usages."
 
 #: src/common/actions/Command.js:69
 msgid "Command"
@@ -146,8 +147,8 @@ msgid ""
 msgstr ""
 "L'action <b>Signal D-Bus</b> ne fait rien en soi. Mais vous pouvez <a href="
 "\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md"
-"\">écouter le D-BUS pour son activation.</a>. Ce peut être très utile dans des "
-"menus personnalisés ouvert par ligne de commande."
+"\">écouter le D-BUS pour son activation.</a>. Ce peut être très utile dans "
+"des menus personnalisés ouvert par ligne de commande."
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
@@ -157,17 +158,17 @@ msgstr "ID"
 msgid "This will be passed to the D-Bus signal."
 msgstr "Cela sera passé au signal D-Bus."
 
-#: src/common/actions/InsertText.js:45
+#: src/common/actions/InsertText.js:48
 msgid "Insert Text"
 msgstr "Insérer Texte"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/InsertText.js:52
+#: src/common/actions/InsertText.js:55
 msgid "Types some text automatically."
 msgstr "Tape du texte automatiquement."
 
-#: src/common/actions/InsertText.js:56
+#: src/common/actions/InsertText.js:59
 msgid ""
 "The <b>Insert Text</b> action copies the given text to the clipboard and "
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
@@ -177,11 +178,11 @@ msgstr ""
 "puis simule un Ctrl+V. Cela peut-être utile si vous vous rendez compte que "
 "vous écrivez souvent la même chose."
 
-#: src/common/actions/InsertText.js:80
+#: src/common/actions/InsertText.js:83
 msgid "Text"
 msgstr "Texte"
 
-#: src/common/actions/InsertText.js:80
+#: src/common/actions/InsertText.js:83
 msgid "This text will be inserted."
 msgstr "Ce texte sera inséré."
 
@@ -308,8 +309,8 @@ msgid ""
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended."
 msgstr ""
-"Un <b>Menu Personnalisé</b> peut contenir de nombreuses actions et sous-menus. "
-"Cependant pour une séléction d'éléments précise, un maximum de douze "
+"Un <b>Menu Personnalisé</b> peut contenir de nombreuses actions et sous-"
+"menus. Cependant pour une séléction d'éléments précise, un maximum de douze "
 "éléments est recommandée."
 
 #. Translators: This is an entry of the default menu.
@@ -328,8 +329,8 @@ msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
 msgstr ""
-"Le menu <b>Favoris</b> affiche les applications que vous avez épinglées "
-"au Dash de GNOME Shell."
+"Le menu <b>Favoris</b> affiche les applications que vous avez épinglées au "
+"Dash de GNOME Shell."
 
 #: src/common/menus/RecentFiles.js:34
 msgid "Recent Files"
@@ -386,9 +387,9 @@ msgid ""
 "You should rather set up your own menus!"
 msgstr ""
 "Le <b>Menu Principal</b> affiche toutes les applications installées. C'est "
-"généralement très encombré et beaucoup de catégories contiennent trop d'éléments "
-"pour être utilisées efficacement. "
-"Vous devriez plutôt créer vos propres menus !"
+"généralement très encombré et beaucoup de catégories contiennent trop "
+"d'éléments pour être utilisées efficacement. Vous devriez plutôt créer vos "
+"propres menus !"
 
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:47 src/extension/DefaultMenu.js:111
@@ -407,10 +408,10 @@ msgid ""
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
-"Le menu <b>Applications En Cours d'Exécution</b> affiche toutes les applications "
-"en cours d'exécution. C'est similaire à la séléction de fenêtre Alt+Tab. "
-"Comme les entrées changent souvent de position, ce n'est en réalité pas "
-"très efficace."
+"Le menu <b>Applications En Cours d'Exécution</b> affiche toutes les "
+"applications en cours d'exécution. C'est similaire à la séléction de fenêtre "
+"Alt+Tab. Comme les entrées changent souvent de position, ce n'est en réalité "
+"pas très efficace."
 
 #: src/common/menus/RunningApps.js:97
 msgid ""
@@ -420,13 +421,13 @@ msgid ""
 "\"Fire\" or \"Water\". A negation would be \"^(?!.*Fire)\" to match anything "
 "but \"Fire\". Remember to use the live preview to instantly see the results!"
 msgstr ""
-"Vous pouvez utiliser ceci pour filtrer les fenêtres affichées. Les expressions "
-"régulières sont supportées : Utilisez une chaîne de caractères simple comme "
-"\"Fire\" pour ne montrer que les fenêtres dont le titre contient \"Fire\" "
-"(ex : Firefox). Utilisez \"Fire|Water\" pour correspondre à \"Fire\" ou "
-"\"Water\". Une négation serait \"^(?!.*Fire)\" pour correspondre à tout sauf "
-"\"Fire\". Utilisez la prévisualisation en direct pour voir les résultats "
-"instantanément !"
+"Vous pouvez utiliser ceci pour filtrer les fenêtres affichées. Les "
+"expressions régulières sont supportées : Utilisez une chaîne de caractères "
+"simple comme \"Fire\" pour ne montrer que les fenêtres dont le titre "
+"contient \"Fire\" (ex : Firefox). Utilisez \"Fire|Water\" pour correspondre "
+"à \"Fire\" ou \"Water\". Une négation serait \"^(?!.*Fire)\" pour "
+"correspondre à tout sauf \"Fire\". Utilisez la prévisualisation en direct "
+"pour voir les résultats instantanément !"
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
@@ -465,8 +466,8 @@ msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
 msgstr ""
-"Le menu <b>Marque-Pages</b> affiche un élément pour la corbeille, le "
-"bureau, et chaque répertoire avec un marque-page."
+"Le menu <b>Marque-Pages</b> affiche un élément pour la corbeille, le bureau, "
+"et chaque répertoire avec un marque-page."
 
 #: src/common/menus/Clipboard.js:54
 msgid "Clipboard"
@@ -480,7 +481,8 @@ msgstr "Affiche les choses récemment copiés."
 
 #: src/common/menus/Clipboard.js:64
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
-msgstr "Le menu <b>Presse-Papier</b> affiche une liste d'éléments récemment copiés."
+msgstr ""
+"Le menu <b>Presse-Papier</b> affiche une liste d'éléments récemment copiés."
 
 #: src/common/menus/Clipboard.js:94
 msgid "First Child Angle"
@@ -664,7 +666,8 @@ msgstr "Sélecteur de Sous-Menu %s"
 #. Translators: The description of the 'Selector' achievement.
 #: src/common/Achievements.js:527
 msgid "Select %x items at depth %d in less than %t milliseconds."
-msgstr "Sélectionner %x éléments de profondeur %d en moins de %t millisecondes."
+msgstr ""
+"Sélectionner %x éléments de profondeur %d en moins de %t millisecondes."
 
 #. Translators: The name of the 'Open the settings dialog %x times.'
 #. achievement.
@@ -879,8 +882,8 @@ msgstr "Les Actions ne peuvent pas devenir des menus de premier niveau."
 #: src/prefs/MenuEditor.js:807
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr ""
-"Vous pouvez uniquement créer des nouveaux éléments d'Action dans "
-"les menus Personnalisés."
+"Vous pouvez uniquement créer des nouveaux éléments d'Action dans les menus "
+"Personnalisés."
 
 #: src/prefs/ImageChooserButton.js:97
 #: resources/ui/gtk4/imageChooserButton.ui:16
@@ -918,7 +921,8 @@ msgstr "L'importation de la configuration du menu a échoué."
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:382
 msgid "You should try to have no more than twelve items in your menus."
-msgstr "Vous devriez essayer de ne pas avoir plus de douze éléments dans vos menus."
+msgstr ""
+"Vous devriez essayer de ne pas avoir plus de douze éléments dans vos menus."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -927,15 +931,16 @@ msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
 msgstr ""
-"Un nombre d'entrées pair rend plus facile l'apprentissage de la position "
-"des éléments. Quarte, six et huit sont de bons nombres."
+"Un nombre d'entrées pair rend plus facile l'apprentissage de la position des "
+"éléments. Quarte, six et huit sont de bons nombres."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:388
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
-msgstr "Fly-Pie est un logiciel libre disponible sur <a href=\"%s\">GitHub</a>."
+msgstr ""
+"Fly-Pie est un logiciel libre disponible sur <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -958,8 +963,8 @@ msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
 msgstr ""
-"Gardez les hiérarchies de menu efficaces en mettant tout ce qui dépasse "
-"8 éléments dans un nouveau sous-menu."
+"Gardez les hiérarchies de menu efficaces en mettant tout ce qui dépasse 8 "
+"éléments dans un nouveau sous-menu."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -976,8 +981,8 @@ msgstr ""
 #: src/prefs/MenuEditorPage.js:406
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr ""
-"Vous pouvez réorganiser les éléments du menu sur la gauche en faisant "
-"un glisser-déposer."
+"Vous pouvez réorganiser les éléments du menu sur la gauche en faisant un "
+"glisser-déposer."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -987,8 +992,8 @@ msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
 "<a href=\"%s\">Github</a>."
 msgstr ""
-"Il est possible d'ouvrir un menu avec une commande de terminal. En savoir plus sur "
-"<a href=\"%s\">GitHub</a>."
+"Il est possible d'ouvrir un menu avec une commande de terminal. En savoir "
+"plus sur <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -997,8 +1002,8 @@ msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
 msgstr ""
-"Vous pouvez déposer des répertoires, fichiers, liens et fichiers "
-"du bureau dans la hiérarchie de menu à gauche."
+"Vous pouvez déposer des répertoires, fichiers, liens et fichiers du bureau "
+"dans la hiérarchie de menu à gauche."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1024,7 +1029,8 @@ msgstr "<a href=\"%s\">Traduire Fly-Pie sur Hosted Weblate</a>."
 msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
 "</a>"
-msgstr "💕️ Vous voulez montrer votre amour à Fly-Pie ? <a href=\"%s\">Devenez sponsor."
+msgstr ""
+"💕️ Vous voulez montrer votre amour à Fly-Pie ? <a href=\"%s\">Devenez sponsor."
 "</a>"
 
 #. Translators: The left-most item of the menu editor bread crumbs.
@@ -1270,13 +1276,13 @@ msgstr "Déplacer la Fenêtre en Haut"
 msgid "Move Window Down"
 msgstr "Déplacer la Fenêtre en Bas"
 
-#: src/extension/Background.js:101
+#: src/extension/Background.js:93
 msgid "Close"
 msgstr "Fermer"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
-#: src/extension/Background.js:107
+#: src/extension/Background.js:99
 msgid "Flip Side"
 msgstr "Changer de côté"
 
@@ -1303,7 +1309,7 @@ msgstr "Vous avez terminé le succès \"%s\" !"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:550
+#: src/extension/Daemon.js:562
 msgid "Show Achievements"
 msgstr "Afficher les Succès"
 
@@ -1407,8 +1413,8 @@ msgid ""
 "\">Github</a>."
 msgstr ""
 "Publié sous Licence MIT.\n"
-"Visitez <a href=\"https://github.com/Schneegans/Fly-Pie\">la page de Fly-Pie</"
-"a> pour plus de détails.\n"
+"Visitez <a href=\"https://github.com/Schneegans/Fly-Pie\">la page de Fly-"
+"Pie</a> pour plus de détails.\n"
 "\n"
 "Quand vous rencontrez un 🐞️ bogue ou désirez 🎉️ une fonctionnalité, n'hésitez "
 "pas à le signaler sur <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
@@ -1463,9 +1469,8 @@ msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
-"💕️ Vous voulez montrer que vous aimez Fly-Pie ? "
-"<a href=\"https://github.com/sponsors/Schneegans\">Devenez sponsor pour "
-"seulement 1$ / mois !</a>"
+"💕️ Vous voulez montrer que vous aimez Fly-Pie ? <a href=\"https://github.com/"
+"sponsors/Schneegans\">Devenez sponsor pour seulement 1$ / mois !</a>"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/gtk4/settings.ui:707 resources/ui/gtk3/settings.ui:702
@@ -1554,8 +1559,8 @@ msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
 msgstr ""
-"Vous pouvez cliquer directement sur un élément ou au bord de votre "
-"écran, tant que votre pointeur reste dans l'angle de votre élément."
+"Vous pouvez cliquer directement sur un élément ou au bord de votre écran, "
+"tant que votre pointeur reste dans l'angle de votre élément."
 
 #: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1030
 msgid ""
@@ -1570,8 +1575,8 @@ msgstr ""
 "respéctif</b>.\n"
 "\n"
 "Vous n'êtes pas non-plus obligé•e d'attendre la fin de l'animation. Puisque "
-"les angles du sous-menu apparaîtront instantanément autour de là où vous avez "
-"cliqué.\n"
+"les angles du sous-menu apparaîtront instantanément autour de là où vous "
+"avez cliqué.\n"
 "\n"
 "Cliquez sur <b>Suivant</b> pour une session d'entraînement !"
 
@@ -1625,8 +1630,8 @@ msgid ""
 msgstr ""
 "Le <b>Mode Tracé</b> de Fly-Pie vous permet de sélectionner des éléments en "
 "<b>dessinant des mouvements</b> ! Pour activer le Mode Tracé, cliquez et "
-"faite glisser un élément. Dès que vous arrêtez de glisser ou faites un virage, "
-"l'élément sera seléctionné."
+"faite glisser un élément. Dès que vous arrêtez de glisser ou faites un "
+"virage, l'élément sera seléctionné."
 
 #: resources/ui/gtk4/settings.ui:1262 resources/ui/gtk3/settings.ui:1258
 msgid ""
@@ -1638,13 +1643,14 @@ msgid ""
 "gesture of straight parts. <b>Do not draw curvy paths but rather expressive "
 "zig-zag-lines!</b>"
 msgstr ""
-"Essayez de vous souvenir du chemin d'un élément. Ouvrez le menu et <b>dessinez "
-"le chemin à la souris</b>. Vous pouvez commencer avec des segments individuels "
-"du chemin, mais vous pouvez aussi essayer de dessiner le chemin entier !\n"
+"Essayez de vous souvenir du chemin d'un élément. Ouvrez le menu et "
+"<b>dessinez le chemin à la souris</b>. Vous pouvez commencer avec des "
+"segments individuels du chemin, mais vous pouvez aussi essayer de dessiner "
+"le chemin entier !\n"
 "\n"
 "Vous y arriverez sans doute mieux si vous essayez de composer vos mouvements "
-"avec des traits droits. <b>Ne dessinez pas des chemins courbes mais plutôt des "
-"lignes en zig-zag expressives !</b>"
+"avec des traits droits. <b>Ne dessinez pas des chemins courbes mais plutôt "
+"des lignes en zig-zag expressives !</b>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:1312 resources/ui/gtk3/settings.ui:1306
@@ -1661,12 +1667,12 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn some final "
 "tips and tricks!"
 msgstr ""
-"Encore une fois, essayez de sélectionner \"%s\" le plus vite possible. Cependant, "
-"comme vous avez maintenant appris le Mode Tracé, le temps requis pour obtenir la"
-"médaille d'or est bien plus court !\n"
+"Encore une fois, essayez de sélectionner \"%s\" le plus vite possible. "
+"Cependant, comme vous avez maintenant appris le Mode Tracé, le temps requis "
+"pour obtenir lamédaille d'or est bien plus court !\n"
 "\n"
-"Une fois satisfait•e de votre résultat, cliquez sur <b>suivant</b> pour apprendre "
-"quelques derniers conseils et astuces !"
+"Une fois satisfait•e de votre résultat, cliquez sur <b>suivant</b> pour "
+"apprendre quelques derniers conseils et astuces !"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:1414 resources/ui/gtk3/settings.ui:1408
@@ -1705,16 +1711,17 @@ msgstr ""
 "vous utiliserez Fly-Pie comme un PieLote professionel !\n"
 "\n"
 "Vous pouvez maintenant utiliser les autres page de cette boîte de dialogue "
-"de paramétrage pour configurer Fly-Pie à l'envi. Il y a de nombreuses options ! "
-"Créez autant de menus que vous le désirez avec des hiérarchies aussi profondes "
-"que vous voulez. Mais essayez de limiter le nombre d'éléments par sous-menu à "
-"<b>douze éléments au plus</b>. Toute quantité au dessus de ce nombre réduira votre efficacité.\n"
+"de paramétrage pour configurer Fly-Pie à l'envi. Il y a de nombreuses "
+"options ! Créez autant de menus que vous le désirez avec des hiérarchies "
+"aussi profondes que vous voulez. Mais essayez de limiter le nombre "
+"d'éléments par sous-menu à <b>douze éléments au plus</b>. Toute quantité au "
+"dessus de ce nombre réduira votre efficacité.\n"
 "\n"
-"Si vous aimez Flye-Pie, je serais heureux que vous laissiez un avis positif sur "
-"<a href=\"https://extensions.gnome.org/extension/3433/fly-pie/\">extensions."
-"gnome.org</a> ! Lorsque vous rencontrez un 🐞️ bogue ou désirez une fonctionalité, "
-"n'hésitez pas à le signaler sur <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
-"\">Github</a>."
+"Si vous aimez Flye-Pie, je serais heureux que vous laissiez un avis positif "
+"sur <a href=\"https://extensions.gnome.org/extension/3433/fly-pie/"
+"\">extensions.gnome.org</a> ! Lorsque vous rencontrez un 🐞️ bogue ou désirez "
+"une fonctionalité, n'hésitez pas à le signaler sur <a href=\"https://github."
+"com/Schneegans/Fly-Pie/issues\">Github</a>."
 
 #. Button for tutorial navigation. Goes back one page.
 #: resources/ui/gtk4/settings.ui:1526 resources/ui/gtk3/settings.ui:1519
@@ -1876,7 +1883,8 @@ msgstr "Apparence des Enfants"
 
 #: resources/ui/gtk4/settings.ui:2522 resources/ui/gtk3/settings.ui:2498
 msgid "Child items are styled differently when their wedge is hovered."
-msgstr "Les éléments enfants apparaissent différemment quand on survole leur coin."
+msgstr ""
+"Les éléments enfants apparaissent différemment quand on survole leur coin."
 
 #. When the mouse pointer is NOT over the item
 #: resources/ui/gtk4/settings.ui:2538 resources/ui/gtk4/settings.ui:3284
@@ -2078,7 +2086,8 @@ msgid ""
 "Use this to quickly select items without showing the menu."
 msgstr ""
 "Les menus seront affichés après ce temps en millisecondes.\n"
-"Utilisez ceci pour rapidement sélectionner des éléments sans afficher le menu."
+"Utilisez ceci pour rapidement sélectionner des éléments sans afficher le "
+"menu."
 
 #: resources/ui/gtk4/settings.ui:4421 resources/ui/gtk3/settings.ui:4355
 msgid "Selection Timeout"
@@ -2169,7 +2178,8 @@ msgstr "Déposer les éléments ici."
 
 #: resources/ui/gtk4/settings.ui:4903 resources/ui/gtk3/settings.ui:4878
 msgid "Restore menus from a JSON file. This will override your current menus!"
-msgstr "Réstaurer les menus depuis un fichier JSON. Cela écrasera vos menus actuels !"
+msgstr ""
+"Réstaurer les menus depuis un fichier JSON. Cela écrasera vos menus actuels !"
 
 #: resources/ui/gtk4/settings.ui:4909 resources/ui/gtk3/settings.ui:4890
 msgid "Export all menus to a JSON file."
@@ -2213,12 +2223,12 @@ msgstr ""
 "Les angles fixes peuvent servir à s'assurer qu'un élément reste à la même "
 "position, même si d'autres éléments sont ajoutés ou retirés. De cette façon "
 "vous pouvez éditer un menu même si vos muscles ont déjà appris la direction "
-"des éléments. Il y a cependant une limitation aux angles fixes. À l'intérieur d'un "
-"menu les angles fixes doivent augmenter de façon monotone. C'est à dire que "
-"chaque angle fixe doit être plus grand que le précédent angle fixe. De façon "
-"à éviter des comportements étranges, les angles fixes seront supprimés si un "
-"élément est glissé vers une autre position dans le menu. Utilisez -1 pour "
-"désactiver cette fonctionalité."
+"des éléments. Il y a cependant une limitation aux angles fixes. À "
+"l'intérieur d'un menu les angles fixes doivent augmenter de façon monotone. "
+"C'est à dire que chaque angle fixe doit être plus grand que le précédent "
+"angle fixe. De façon à éviter des comportements étranges, les angles fixes "
+"seront supprimés si un élément est glissé vers une autre position dans le "
+"menu. Utilisez -1 pour désactiver cette fonctionalité."
 
 #: resources/ui/gtk4/settings.ui:5109 resources/ui/gtk3/settings.ui:5101
 msgid "This will open the menu."
@@ -2229,8 +2239,8 @@ msgid ""
 "Usually, Super + Right Mouse Button opens the window menu. With this "
 "setting, you can instead open a Fly-Pie menu."
 msgstr ""
-"Habituellemennt, Super + Clic Droit ouvre le menu de fenêtre. Avec "
-"ce paramètre, vous pouvez à la place ouvrir un menu Fly-Pie."
+"Habituellemennt, Super + Clic Droit ouvre le menu de fenêtre. Avec ce "
+"paramètre, vous pouvez à la place ouvrir un menu Fly-Pie."
 
 #: resources/ui/gtk4/settings.ui:5128 resources/ui/gtk3/settings.ui:5120
 msgid "Bind to Super + RMB"

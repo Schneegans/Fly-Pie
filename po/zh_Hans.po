@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-23 14:05+0100\n"
+"POT-Creation-Date: 2022-03-01 16:40+0100\n"
 "PO-Revision-Date: 2022-02-23 13:54+0000\n"
 "Last-Translator: poi <erbaotao@outlook.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"fly-pie/core/zh_Hans/>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/fly-"
+"pie/core/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +35,8 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
-"<b>激活键盘快捷键</b>操作可以用来模拟用户按下了一组键盘上的按键。切换虚拟桌面、控制音视频的播放暂停或撤消 / 重做操作等可能用得上此功能。"
+"<b>激活键盘快捷键</b>操作可以用来模拟用户按下了一组键盘上的按键。切换虚拟桌"
+"面、控制音视频的播放暂停或撤消 / 重做操作等可能用得上此功能。"
 
 #: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5103
 #: resources/ui/gtk3/settings.ui:5095
@@ -85,7 +86,9 @@ msgid ""
 "The <b>Launch Application</b> action executes any given command. This is "
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
-msgstr "<b>启动应用程序</b>操作可以执行给出的任意命令。这样主要是为了打开应用程序，但也可能有很多别的用法。"
+msgstr ""
+"<b>启动应用程序</b>操作可以执行给出的任意命令。这样主要是为了打开应用程序，但"
+"也可能有很多别的用法。"
 
 #: src/common/actions/Command.js:69
 msgid "Command"
@@ -113,7 +116,8 @@ msgid ""
 "\"."
 msgstr ""
 "<b>打开统一资源定位符（URI）</b>操作会在默认应用中打开上面的 URI 。对于 http "
-"统一资源定位符（URL），就会用浏览器打开。但是，像“mailto:foo@bar.org”这样的 URI 可能也能打开。"
+"统一资源定位符（URL），就会用浏览器打开。但是，像“mailto:foo@bar.org”这样的 "
+"URI 可能也能打开。"
 
 #: src/common/actions/Uri.js:68
 msgid "URI"
@@ -136,8 +140,9 @@ msgid ""
 "\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
-"<b>D-Bus 信号</b>操作本身没用，但您<a href=\"https://github.com/Schneegans/Fly-Pie/blob/"
-"main/docs/dbus-interface.md\">可以在 D-Bus 上监听操作的激活</a>。这可以用来通过命令行打开菜单。"
+"<b>D-Bus 信号</b>操作本身没用，但您<a href=\"https://github.com/Schneegans/"
+"Fly-Pie/blob/main/docs/dbus-interface.md\">可以在 D-Bus 上监听操作的激活</"
+"a>。这可以用来通过命令行打开菜单。"
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
@@ -147,29 +152,30 @@ msgstr "ID"
 msgid "This will be passed to the D-Bus signal."
 msgstr "此值会传给 D-Bus 信号。"
 
-#: src/common/actions/InsertText.js:45
+#: src/common/actions/InsertText.js:48
 msgid "Insert Text"
 msgstr "插入文字"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/InsertText.js:52
+#: src/common/actions/InsertText.js:55
 msgid "Types some text automatically."
 msgstr "自动键入一些文本。"
 
-#: src/common/actions/InsertText.js:56
+#: src/common/actions/InsertText.js:59
 msgid ""
 "The <b>Insert Text</b> action copies the given text to the clipboard and "
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
 "write the same things."
 msgstr ""
-"<b>插入文字</b>操作会把所给的文本复制到剪贴板，然后模拟 Ctrl+V 。想想您是不是经常输入同样的文本？如果是的话，可能这功能就很有用了。"
+"<b>插入文字</b>操作会把所给的文本复制到剪贴板，然后模拟 Ctrl+V 。想想您是不是"
+"经常输入同样的文本？如果是的话，可能这功能就很有用了。"
 
-#: src/common/actions/InsertText.js:80
+#: src/common/actions/InsertText.js:83
 msgid "Text"
 msgstr "文字"
 
-#: src/common/actions/InsertText.js:80
+#: src/common/actions/InsertText.js:83
 msgid "This text will be inserted."
 msgstr "要插入的文本。"
 
@@ -226,7 +232,9 @@ msgid ""
 "The <b>Frequently Used</b> menu shows a list of frequently used "
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
-msgstr "<b>常用应用</b>菜单显示了经常用的应用程序的列表。为了能高效地选择应用，显示的应用程序最好不超过12个左右。"
+msgstr ""
+"<b>常用应用</b>菜单显示了经常用的应用程序的列表。为了能高效地选择应用，显示的"
+"应用程序最好不超过12个左右。"
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
 #: src/common/menus/Clipboard.js:85
@@ -292,7 +300,9 @@ msgid ""
 "A <b>Custom Menu</b> can contain any number of actions and submenus. "
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended."
-msgstr "<b>自定义菜单</b>里面可以有任意多的操作和子菜单。为便于能准确点中项目，建议项目不要超过十二个。"
+msgstr ""
+"<b>自定义菜单</b>里面可以有任意多的操作和子菜单。为便于能准确点中项目，建议项"
+"目不要超过十二个。"
 
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:43 src/extension/DefaultMenu.js:79
@@ -326,7 +336,9 @@ msgid ""
 "The <b>Recent Files</b> menu shows a list of recently used files. For "
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
-msgstr "<b>近期文件</b>菜单会显示近期使用过的文件的列表。为便于选择文件，您最好不要设置成显示十二个以上的文件。"
+msgstr ""
+"<b>近期文件</b>菜单会显示近期使用过的文件的列表。为便于选择文件，您最好不要设"
+"置成显示十二个以上的文件。"
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
@@ -359,7 +371,9 @@ msgid ""
 "The <b>Main Menu</b> shows all installed applications. Usually, this is very "
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather set up your own menus!"
-msgstr "<b>主菜单</b>可以显示安装的所有应用程序。通常，里面的项目会太多、不好选择，显示会非常杂乱。您最好另行设定菜单！"
+msgstr ""
+"<b>主菜单</b>可以显示安装的所有应用程序。通常，里面的项目会太多、不好选择，显"
+"示会非常杂乱。您最好另行设定菜单！"
 
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:47 src/extension/DefaultMenu.js:111
@@ -378,8 +392,8 @@ msgid ""
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
-"<b>运行着的应用</b>菜单可以显示当前正在运行中的应用程序。这和按下 Alt+Tab "
-"显示出来的选择窗口差不多。里面的项目会实时更新，这也导致这个功能比较占用资源。"
+"<b>运行着的应用</b>菜单可以显示当前正在运行中的应用程序。这和按下 Alt+Tab 显"
+"示出来的选择窗口差不多。里面的项目会实时更新，这也导致这个功能比较占用资源。"
 
 #: src/common/menus/RunningApps.js:97
 msgid ""
@@ -389,9 +403,11 @@ msgid ""
 "\"Fire\" or \"Water\". A negation would be \"^(?!.*Fire)\" to match anything "
 "but \"Fire\". Remember to use the live preview to instantly see the results!"
 msgstr ""
-"此栏是用来限制哪些窗口显示的。支持正则表达式：直接写“Fire”这样的字符串可以直显示出标题包含这个字符串的窗口（比如 Firefox 窗口）。写“火|水"
-"”会显示标题包含“火”字或“水”字的窗口。排除字符串可以写成“^(?!.*Fire)”这样，这样写，只有标题是“Fire”的窗口不会显示出来。本应用程序有"
-"个实时预览功能，可以帮您调试正则表达式！"
+"此栏是用来限制哪些窗口显示的。支持正则表达式：直接写“Fire”这样的字符串可以直"
+"显示出标题包含这个字符串的窗口（比如 Firefox 窗口）。写“火|水”会显示标题包"
+"含“火”字或“水”字的窗口。排除字符串可以写成“^(?!.*Fire)”这样，这样写，只有标题"
+"是“Fire”的窗口不会显示出来。本应用程序有个实时预览功能，可以帮您调试正则表达"
+"式！"
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
@@ -901,7 +917,8 @@ msgstr "Fly-Pie 是自由软件，<a href=\"%s\">GitHub</a> 上有这个软件�
 #: src/prefs/MenuEditorPage.js:392
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
-msgstr "您如果有什么对本软件的建议，可以把建议发表在 <a href=\"%s\">GitHub</a> 上。"
+msgstr ""
+"您如果有什么对本软件的建议，可以把建议发表在 <a href=\"%s\">GitHub</a> 上。"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -916,7 +933,9 @@ msgstr "如果软件有问题，您可以在 <a href=\"%s\">GitHub</a> 上告诉
 msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
-msgstr "如果一个菜单里有超过 8 个项目，建议设立子菜单，把项目分配到子菜单里，这样用起来更高效。"
+msgstr ""
+"如果一个菜单里有超过 8 个项目，建议设立子菜单，把项目分配到子菜单里，这样用起"
+"来更高效。"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -939,7 +958,8 @@ msgstr "您可以拖拽左侧菜单中的项目，调整各项次序。"
 msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
 "<a href=\"%s\">Github</a>."
-msgstr "可以使用终端命令打开菜单。可以在 <a href=\"%s\">Github</a> 上了解详细信息。"
+msgstr ""
+"可以使用终端命令打开菜单。可以在 <a href=\"%s\">Github</a> 上了解详细信息。"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1216,13 +1236,13 @@ msgstr ""
 msgid "Move Window Down"
 msgstr ""
 
-#: src/extension/Background.js:101
+#: src/extension/Background.js:93
 msgid "Close"
 msgstr "关闭"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
-#: src/extension/Background.js:107
+#: src/extension/Background.js:99
 #, fuzzy
 msgid "Flip Side"
 msgstr "换边"
@@ -1250,7 +1270,7 @@ msgstr ""
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:550
+#: src/extension/Daemon.js:562
 msgid "Show Achievements"
 msgstr ""
 
@@ -1340,8 +1360,8 @@ msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
-"查看<a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog"
-".md\">更新记录</a>。"
+"查看<a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog."
+"md\">更新记录</a>。"
 
 #: resources/ui/gtk4/settings.ui:431 resources/ui/gtk3/settings.ui:428
 msgid ""
@@ -1354,10 +1374,11 @@ msgid ""
 "\">Github</a>."
 msgstr ""
 "以 MIT 许可协议发布。\n"
-"请访问 <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie 的主页</a>了解详情。\n"
+"请访问 <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie 的主页</a>了"
+"解详情。\n"
 "\n"
-"若您遇到🐞️错误，或有🎉️增加功能的要求，您随时可以在 <a href=\"https://github.com/Schneegans/Fly-Pie/"
-"issues\">Github</a> 上报告。"
+"若您遇到🐞️错误，或有🎉️增加功能的要求，您随时可以在 <a href=\"https://github."
+"com/Schneegans/Fly-Pie/issues\">Github</a> 上报告。"
 
 #: resources/ui/gtk4/settings.ui:448 resources/ui/gtk3/settings.ui:529
 msgid "Credits"
@@ -1408,8 +1429,8 @@ msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
-"💕️ 想表达你对 Fly-Pie 的喜爱吗？<a href=\"https://github.com/sponsors/Schneegans\""
-">欢迎赞助，每月只需 1 美元！</a>"
+"💕️ 想表达你对 Fly-Pie 的喜爱吗？<a href=\"https://github.com/sponsors/"
+"Schneegans\">欢迎赞助，每月只需 1 美元！</a>"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/gtk4/settings.ui:707 resources/ui/gtk3/settings.ui:702
@@ -1458,8 +1479,8 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
-"你可以用 Fly-Pie 来启动应用程序、模拟键盘快捷键、打开网址等等。您看到的互动教程可以帮您最有效地使用 Fly-Pie "
-"。点击下面的大按钮，打开模拟使用菜单！"
+"你可以用 Fly-Pie 来启动应用程序、模拟键盘快捷键、打开网址等等。您看到的互动教"
+"程可以帮您最有效地使用 Fly-Pie 。点击下面的大按钮，打开模拟使用菜单！"
 
 #: resources/ui/gtk4/settings.ui:946 resources/ui/gtk3/settings.ui:950
 msgid ""
@@ -1494,7 +1515,9 @@ msgstr "点哪儿都好使！"
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
-msgstr "只要你的鼠标指针停留在项目的楔子里，你是直接点击项目还是在屏幕的边缘点击都没有关系。"
+msgstr ""
+"只要你的鼠标指针停留在项目的楔子里，你是直接点击项目还是在屏幕的边缘点击都没"
+"有关系。"
 
 #: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1030
 #, fuzzy
@@ -2084,8 +2107,9 @@ msgid ""
 "#rgb\" to the icon in order to draw a circle with the given RGB color behind "
 "the icon."
 msgstr ""
-"标志栏可以填一张图片文件的路径、当前标志主题中的图标名称、Base64 编码的统一资源标识符（URI）、文本或者 emoji "
-"。注记一个“-#rgb”可以给图标添加一个圆形背景，颜色由“rgb”的值给定。"
+"标志栏可以填一张图片文件的路径、当前标志主题中的图标名称、Base64 编码的统一资"
+"源标识符（URI）、文本或者 emoji 。注记一个“-#rgb”可以给图标添加一个圆形背景，"
+"颜色由“rgb”的值给定。"
 
 #: resources/ui/gtk4/settings.ui:5055 resources/ui/gtk3/settings.ui:5047
 msgid "Fixed Angle"
@@ -2102,8 +2126,10 @@ msgid ""
 "be removed if an item is dragged to another position in the menu. Use -1 to "
 "disable this feature."
 msgstr ""
-"填写“-1”不使用固定角度功能。这个功能可以用来保证即使增删别的项目，现项目也不会改变位置。这样，您编辑菜单时，就不用重新熟悉项目的位置了。这个功能有一个"
-"限制，它要求固定角度从小到大设置，也就是说，新设置的这个项目的固定角度要比以前设置的别的项目的固定角度大。为避免程序出错，项目被拖动改变位置，固定角度这项"
+"填写“-1”不使用固定角度功能。这个功能可以用来保证即使增删别的项目，现项目也不"
+"会改变位置。这样，您编辑菜单时，就不用重新熟悉项目的位置了。这个功能有一个限"
+"制，它要求固定角度从小到大设置，也就是说，新设置的这个项目的固定角度要比以前"
+"设置的别的项目的固定角度大。为避免程序出错，项目被拖动改变位置，固定角度这项"
 "功能就会恢复到不使用的状态。"
 
 #: resources/ui/gtk4/settings.ui:5109 resources/ui/gtk3/settings.ui:5101
@@ -2114,7 +2140,9 @@ msgstr "按下这组键盘快捷键就可以打开菜单。"
 msgid ""
 "Usually, Super + Right Mouse Button opens the window menu. With this "
 "setting, you can instead open a Fly-Pie menu."
-msgstr "Super + 鼠标右键本来通常是用来打开窗口菜单的。打开此开关，把这么按的功能换成打开 Fly-Pie 。"
+msgstr ""
+"Super + 鼠标右键本来通常是用来打开窗口菜单的。打开此开关，把这么按的功能换成"
+"打开 Fly-Pie 。"
 
 #: resources/ui/gtk4/settings.ui:5128 resources/ui/gtk3/settings.ui:5120
 msgid "Bind to Super + RMB"
