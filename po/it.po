@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-23 14:05+0100\n"
+"POT-Creation-Date: 2022-03-01 16:40+0100\n"
 "PO-Revision-Date: 2022-01-16 17:55+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/>"
-"\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
+">\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -159,17 +159,17 @@ msgstr "ID"
 msgid "This will be passed to the D-Bus signal."
 msgstr "Questo verrà passato al segnale D-Bus."
 
-#: src/common/actions/InsertText.js:45
+#: src/common/actions/InsertText.js:48
 msgid "Insert Text"
 msgstr "Inserisci Testo"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/InsertText.js:52
+#: src/common/actions/InsertText.js:55
 msgid "Types some text automatically."
 msgstr "Digita automaticamente del testo."
 
-#: src/common/actions/InsertText.js:56
+#: src/common/actions/InsertText.js:59
 msgid ""
 "The <b>Insert Text</b> action copies the given text to the clipboard and "
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
@@ -179,11 +179,11 @@ msgstr ""
 "quindi simula Ctrl + V. Questo può essere utile se ti rendi conto che scrivi "
 "spesso le stesse cose."
 
-#: src/common/actions/InsertText.js:80
+#: src/common/actions/InsertText.js:83
 msgid "Text"
 msgstr "Testo"
 
-#: src/common/actions/InsertText.js:80
+#: src/common/actions/InsertText.js:83
 msgid "This text will be inserted."
 msgstr "Questo testo verrà inserito."
 
@@ -1273,13 +1273,13 @@ msgstr "Sposta la finestra su"
 msgid "Move Window Down"
 msgstr "Sposta la finestra giù"
 
-#: src/extension/Background.js:101
+#: src/extension/Background.js:93
 msgid "Close"
 msgstr "Chiudi"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
-#: src/extension/Background.js:107
+#: src/extension/Background.js:99
 msgid "Flip Side"
 msgstr "Cambia Lato"
 
@@ -1306,7 +1306,7 @@ msgstr "Hai completato l'obiettivo \"%s\"!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:550
+#: src/extension/Daemon.js:562
 msgid "Show Achievements"
 msgstr "Mostra Risultati"
 

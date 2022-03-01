@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-23 14:05+0100\n"
+"POT-Creation-Date: 2022-03-01 16:40+0100\n"
 "PO-Revision-Date: 2021-11-23 13:12+0000\n"
 "Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/>"
-"\n"
+"Language-Team: German <https://hosted.weblate.org/projects/fly-pie/core/de/"
+">\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -160,17 +160,17 @@ msgstr "ID"
 msgid "This will be passed to the D-Bus signal."
 msgstr "Das wird dem D-Bus Signal übergeben."
 
-#: src/common/actions/InsertText.js:45
+#: src/common/actions/InsertText.js:48
 msgid "Insert Text"
 msgstr "Text einfügen"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/InsertText.js:52
+#: src/common/actions/InsertText.js:55
 msgid "Types some text automatically."
 msgstr "Tippt automatisch einen Text."
 
-#: src/common/actions/InsertText.js:56
+#: src/common/actions/InsertText.js:59
 msgid ""
 "The <b>Insert Text</b> action copies the given text to the clipboard and "
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
@@ -180,11 +180,11 @@ msgstr ""
 "Zwischenablage und simuliert dann Ctrl+V. Das kann nützlich sein, wenn Sie "
 "häufig denselben Text eintippen."
 
-#: src/common/actions/InsertText.js:80
+#: src/common/actions/InsertText.js:83
 msgid "Text"
 msgstr "Text"
 
-#: src/common/actions/InsertText.js:80
+#: src/common/actions/InsertText.js:83
 msgid "This text will be inserted."
 msgstr "Dieser Textwird eingefügt."
 
@@ -1275,13 +1275,13 @@ msgstr "Fenster nach oben verschieben"
 msgid "Move Window Down"
 msgstr "Fenster nach unten verschieben"
 
-#: src/extension/Background.js:101
+#: src/extension/Background.js:93
 msgid "Close"
 msgstr "Schließen"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
-#: src/extension/Background.js:107
+#: src/extension/Background.js:99
 msgid "Flip Side"
 msgstr "Seite wechseln"
 
@@ -1308,7 +1308,7 @@ msgstr "Sie haben den Erfolg \"%s\" erzielt!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:550
+#: src/extension/Daemon.js:562
 msgid "Show Achievements"
 msgstr "Erfolge ansehen"
 
@@ -1398,8 +1398,8 @@ msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
-"Lesen Sie das <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/"
-"docs/changelog.md\">Änderungsprotokoll</a>."
+"Lesen Sie das <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
+"changelog.md\">Änderungsprotokoll</a>."
 
 #: resources/ui/gtk4/settings.ui:431 resources/ui/gtk3/settings.ui:428
 msgid ""
