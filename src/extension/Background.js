@@ -106,6 +106,8 @@ class Background extends Clutter.Actor {
 
   // Disconnects all settings connections.
   destroy() {
+    super.destroy();
+
     this._settingsConnections.forEach(connection => {
       this._settings.disconnect(connection);
     });
