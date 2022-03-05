@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                                                = imports.cairo;
-const {Gio, GLib, Gdk, Clutter, GObject, Pango, GdkPixbuf} = imports.gi;
+const Cairo                                                    = imports.cairo;
+const {Gio, GLib, Gdk, Clutter, GObject, Pango, GdkPixbuf, St} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
@@ -327,7 +327,8 @@ class MenuItem extends Clutter.Actor {
   onSettingsChange(settings) {
 
     // Then parse all settings required during the next call to redraw().
-    const globalScale = settings.get_double('global-scale');
+    const globalScale = settings.get_double('global-scale') *
+        St.ThemeContext.get_for_stage(global.stage).scale_factor;
 
     // clang-format off
     MenuItemSettings = {
@@ -808,7 +809,6 @@ class MenuItem extends Clutter.Actor {
 
       ctx.save();
 
-
       // If a background image is given, we use it. Else we will draw a simple colored
       // circle.
       if (backgroundImage != null) {
@@ -875,6 +875,9 @@ class MenuItem extends Clutter.Actor {
       ctx.$dispose();
     });
 
+    // Apply HiDPI scaling.
+    canvas.set_scale_factor(global.stage.get_resource_scale());
+
     // Trigger initial 'draw' signal emission.
     canvas.invalidate();
 
@@ -911,13 +914,15 @@ class MenuItem extends Clutter.Actor {
     this._name.set_size(nameSize, nameSize);
     this._name.set_color(MenuItemSettings.textColor);
 
-    // Multiply the size of the font by globalScale.
+    // Multiply the size of the font by globalScale. The Clutter.Text automatically obeys
+    // the global scale, so we have to counter this here.
     const fontDescription = Pango.FontDescription.from_string(MenuItemSettings.font);
     const fontSize        = fontDescription.get_size();
+    const hdpiScale       = St.ThemeContext.get_for_stage(global.stage).scale_factor;
     if (fontDescription.get_size_is_absolute()) {
       fontSize = Pango.units_from_double(fontSize);
     }
-    fontDescription.set_size(fontSize * MenuItemSettings.globalScale);
+    fontDescription.set_size(fontSize * MenuItemSettings.globalScale / hdpiScale);
     this._name.set_font_description(fontDescription);
 
     // We also re-draw the trace line to the currently active child if there is any.

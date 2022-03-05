@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Main                       = imports.ui.main;
-const {Meta, Clutter, Gio, GLib} = imports.gi;
+const Main                           = imports.ui.main;
+const {Meta, Clutter, Gio, GLib, St} = imports.gi;
 
 const Me            = imports.misc.extensionUtils.getCurrentExtension();
 const utils         = Me.imports.src.common.utils;
@@ -169,7 +169,8 @@ var TouchButtons = class TouchButtons {
 
     // Now we store a copy of all settings we require to draw the buttons. This makes is
     // unnecessary to query them whenever the menu configuration is changed.
-    const globalScale = this._settings.get_double('global-scale');
+    const globalScale = this._settings.get_double('global-scale') *
+        St.ThemeContext.get_for_stage(global.stage).scale_factor;
 
     // clang-format off
     this._cachedSettings = {

@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                                    = imports.cairo;
-const {Clutter, Cogl, Gio, GObject, GLib, Gtk} = imports.gi;
+const Cairo                                        = imports.cairo;
+const {Clutter, Cogl, Gio, GObject, GLib, Gtk, St} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
@@ -195,7 +195,8 @@ class SelectionWedges extends Clutter.Actor {
   onSettingsChange(settings) {
 
     // Parse all settings required for wedge rendering.
-    const globalScale = settings.get_double('global-scale');
+    const globalScale = settings.get_double('global-scale') *
+        St.ThemeContext.get_for_stage(global.stage).scale_factor;
 
     // clang-format off
     this._settings = {

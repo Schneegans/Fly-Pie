@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Main                            = imports.ui.main;
-const {Clutter, Gdk, Gtk, GLib, Meta} = imports.gi;
+const Main                                = imports.ui.main;
+const {Clutter, Gdk, Gtk, GLib, Meta, St} = imports.gi;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.src.common.utils;
@@ -1160,7 +1160,8 @@ var Menu = class Menu {
     maxSize     = Math.max(maxSize, centerRadius);
     maxSize     = Math.max(maxSize, childRadius);
     maxSize     = Math.max(maxSize, grandchildRadius);
-    maxSize *= 2 * this._settings.get_double('global-scale');
+    maxSize *= 2 * this._settings.get_double('global-scale') *
+        St.ThemeContext.get_for_stage(global.stage).scale_factor;
 
     // Clamp to monitor bounds.
     const monitor = Main.layoutManager.currentMonitor;
@@ -1223,7 +1224,8 @@ var Menu = class Menu {
       // There is a setting for a minimum trace length.
       const idealTraceLength = Math.max(
           this._settings.get_double('trace-min-length') *
-              this._settings.get_double('global-scale'),
+              this._settings.get_double('global-scale') *
+              St.ThemeContext.get_for_stage(global.stage).scale_factor,
           currentTraceLength);
 
       // Based on this trace length, we can compute where the item should be placed

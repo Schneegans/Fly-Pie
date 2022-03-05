@@ -121,6 +121,9 @@ class MouseHighlight extends Clutter.Actor {
       ctx.$dispose();
     });
 
+    // Apply HiDPI scaling.
+    this._canvas.set_scale_factor(global.stage.get_resource_scale());
+
     this._canvas.set_size(size, size);
     this._canvas.invalidate();
 
@@ -146,6 +149,7 @@ class MouseHighlight extends Clutter.Actor {
 
   // Do not attempt to update the cursor when it's deleted.
   destroy() {
+    super.destroy();
     GLib.source_remove(this._updateTimeout);
   }
 });
