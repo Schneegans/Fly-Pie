@@ -474,7 +474,8 @@ class MenuItem extends Clutter.Actor {
       const child = this._childrenContainer.get_children()[this._activeChildIndex];
       this._name.set_text(child.name);
       this._name.set_easing_duration(0);
-      const nameHeight = this._name.get_layout().get_pixel_extents()[1].height;
+      const nameHeight = this._name.get_layout().get_pixel_extents()[1].height /
+          global.stage.get_resource_scale();
       this._name.set_translation(
           Math.floor(-this._name.width / 2), Math.floor(-nameHeight / 2), 0);
       this._name.set_easing_duration(MenuItemSettings.easingDuration);
