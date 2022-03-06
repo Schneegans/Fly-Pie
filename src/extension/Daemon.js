@@ -173,8 +173,11 @@ var Daemon = class Daemon {
     // factor changes.
     const ctx                   = St.ThemeContext.get_for_stage(global.stage);
     this._scaleFactorConnection = ctx.connect('notify::scale-factor', onScaleChange);
-    this._resourceScaleConnection =
-        global.stage.connect('resource-scale-changed', onScaleChange);
+
+    if (utils.shellVersionIsAtLeast(3, 38)) {
+      this._resourceScaleConnection =
+          global.stage.connect('resource-scale-changed', onScaleChange);
+    }
 
     // Whenever settings are changed, we adapt the currently shown menu accordingly.
     this._settingsConnections.push(this._settings.connect('change-event', (o, keys) => {
@@ -281,7 +284,10 @@ var Daemon = class Daemon {
 
     // Disconnect some handlers.
     global.stage.disconnect(this._resourceScaleConnection);
-    St.ThemeContext.get_for_stage(global.stage).disconnect(this._scaleFactorConnection);
+
+    if (utils.shellVersionIsAtLeast(3, 38)) {
+      St.ThemeContext.get_for_stage(global.stage).disconnect(this._scaleFactorConnection);
+    }
   }
 
   // -------------------------------------------------------------- public D-Bus-Interface
