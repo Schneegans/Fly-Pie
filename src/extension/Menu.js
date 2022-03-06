@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Main                                = imports.ui.main;
-const {Clutter, Gdk, Gtk, GLib, Meta, St} = imports.gi;
+const Main                            = imports.ui.main;
+const {Clutter, Gdk, Gtk, GLib, Meta} = imports.gi;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
 const utils            = Me.imports.src.common.utils;

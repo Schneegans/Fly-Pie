@@ -8,8 +8,8 @@
 
 'use strict';
 
-const Cairo                                        = imports.cairo;
-const {Clutter, Cogl, Gio, GObject, GLib, Gtk, St} = imports.gi;
+const Cairo                                    = imports.cairo;
+const {Clutter, Cogl, Gio, GObject, GLib, Gtk} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
