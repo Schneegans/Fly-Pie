@@ -121,11 +121,15 @@ class MouseHighlight extends Clutter.Actor {
       ctx.$dispose();
     });
 
-    // Apply HiDPI scaling.
-    this._canvas.set_scale_factor(global.stage.get_resource_scale());
-
     this._canvas.set_size(size, size);
-    this._canvas.invalidate();
+
+    // Apply HiDPI scaling and trigger an initial 'draw' signal emission. The call to
+    // set_scale_factor() will automatically invalidate the canvas.
+    if (global.stage.get_resource_scale() != 1) {
+      this._canvas.set_scale_factor(global.stage.get_resource_scale());
+    } else {
+      this._canvas.invalidate();
+    }
 
     // Set the size of the anchor. For some reason a small offset is required to make it
     // exactly match the original mouse pointer's position.

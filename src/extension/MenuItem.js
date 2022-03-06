@@ -775,8 +775,13 @@ class MenuItem extends Clutter.Actor {
   }
 
   // Static helper to load the background image of a menu item. If "file" exists, a pixbuf
-  // with the given size will be returned.
+  // with the given size will be returned. If high-dpi scaling is enabled, the returned
+  // image can be actually larger.
   static loadBackgroundImage(file, size) {
+
+    // Apply high-dpi resource scaling.
+    size *= global.stage.get_resource_scale();
+
     // If the path is a relative path, it may be a child of the preset directory.
     if (file != '' && !GLib.path_is_absolute(file)) {
       file = Me.path + '/presets/' + file;
@@ -813,6 +818,10 @@ class MenuItem extends Clutter.Actor {
       // If a background image is given, we use it. Else we will draw a simple colored
       // circle.
       if (backgroundImage != null) {
+
+        // Apply high-dpi scaling.
+        const resourceScale = global.stage.get_resource_scale();
+        ctx.scale(1 / resourceScale, 1 / resourceScale);
 
         // TODO: As Cairo.Operator.MULTIPLY uses normal OVER-alpha-blending, the code
         // below does not really multiply the backgroundImage with the given color. Black
@@ -864,7 +873,12 @@ class MenuItem extends Clutter.Actor {
         ctx.clip();
 
         ctx.translate((backgroundSize - iconSize) / 2, (backgroundSize - iconSize) / 2);
-        utils.paintIcon(ctx, iconName, iconSize, iconOpacity, font, {
+
+        // Apply high-dpi scaling.
+        const resourceScale = global.stage.get_resource_scale();
+        ctx.scale(1 / resourceScale, 1 / resourceScale);
+
+        utils.paintIcon(ctx, iconName, iconSize * resourceScale, iconOpacity, font, {
           red: textColor.red / 255,
           green: textColor.green / 255,
           blue: textColor.blue / 255
@@ -876,11 +890,13 @@ class MenuItem extends Clutter.Actor {
       ctx.$dispose();
     });
 
-    // Apply HiDPI scaling.
-    canvas.set_scale_factor(global.stage.get_resource_scale());
-
-    // Trigger initial 'draw' signal emission.
-    canvas.invalidate();
+    // Apply HiDPI scaling and trigger an initial 'draw' signal emission. The call to
+    // set_scale_factor() will automatically invalidate the canvas.
+    if (global.stage.get_resource_scale() != 1) {
+      canvas.set_scale_factor(global.stage.get_resource_scale());
+    } else {
+      canvas.invalidate();
+    }
 
     // Create a new actor and set the icon canvas to be its content.
     const actor = new Clutter.Actor();
