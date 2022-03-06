@@ -563,7 +563,7 @@ var Daemon = class Daemon {
 
       // For now, we use a hard-coded size of 50. This can be made configurable in the
       // future if anybody needs it.
-      const size = 50 * St.ThemeContext.get_for_stage(global.stage).scale_factor;
+      const size            = 50 * utils.getHDPIScale();
       this._screencastMouse = new MouseHighlight(size);
       global.stage.add_child(this._screencastMouse);
     }

@@ -559,6 +559,42 @@ function roundToMultiple(number, base) {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// These two methods are used for high-dpi scaling support. They cannot be used from    //
+// the preferences dialog.                                                              //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// This returns an actor up-scaling factor. Actors should be enlarged by this amount.
+// On Wayland with fractional scaling enabled, this returns 1. In all other cases (like on
+// X11 or on Wayland with non-fractional scaling), it returns values like this:
+//
+// Scaling Factor      Return Value
+//     100 %                1
+//     150 %                2
+//     200 %                2
+//     250 %                3
+//      ...                ...
+function getHDPIScale() {
+  return St.ThemeContext.get_for_stage(global.stage).scale_factor;
+}
+
+// This returns a resource up-scaling factor. Textures should be enlarged by this amount.
+// In most cases, this returns 1. Only on Wayland with fractional scaling enabled, it may
+// return larger values. Like this:
+//
+// Scaling Factor      Return Value
+//     100 %                1
+//     150 %                2
+//     200 %                2
+//     250 %                3
+//      ...                ...
+function getHDPIResourceScale() {
+  if (shellVersionIsAtLeast(3, 38)) {
+    return global.stage.get_resource_scale();
+  }
+  return global.stage.get_resource_scale()[1];
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 // This method receives an array of objects, each representing an item in a menu level. //
 // For each item it computes an angle defining the direction in which the item should   //
 // be rendered. The angles are returned in an array (of the same length as the input    //

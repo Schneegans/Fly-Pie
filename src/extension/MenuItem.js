@@ -327,8 +327,7 @@ class MenuItem extends Clutter.Actor {
   onSettingsChange(settings) {
 
     // Then parse all settings required during the next call to redraw().
-    const globalScale = settings.get_double('global-scale') *
-        St.ThemeContext.get_for_stage(global.stage).scale_factor;
+    const globalScale = settings.get_double('global-scale') * utils.getHDPIScale();
 
     // clang-format off
     MenuItemSettings = {
@@ -475,7 +474,7 @@ class MenuItem extends Clutter.Actor {
       this._name.set_text(child.name);
       this._name.set_easing_duration(0);
       const nameHeight = this._name.get_layout().get_pixel_extents()[1].height /
-          global.stage.get_resource_scale();
+          utils.getHDPIResourceScale();
       this._name.set_translation(
           Math.floor(-this._name.width / 2), Math.floor(-nameHeight / 2), 0);
       this._name.set_easing_duration(MenuItemSettings.easingDuration);
@@ -780,7 +779,7 @@ class MenuItem extends Clutter.Actor {
   static loadBackgroundImage(file, size) {
 
     // Apply high-dpi resource scaling.
-    size *= global.stage.get_resource_scale();
+    size *= utils.getHDPIResourceScale();
 
     // If the path is a relative path, it may be a child of the preset directory.
     if (file != '' && !GLib.path_is_absolute(file)) {
@@ -820,7 +819,7 @@ class MenuItem extends Clutter.Actor {
       if (backgroundImage != null) {
 
         // Apply high-dpi scaling.
-        const resourceScale = global.stage.get_resource_scale();
+        const resourceScale = utils.getHDPIResourceScale();
         ctx.scale(1 / resourceScale, 1 / resourceScale);
 
         // TODO: As Cairo.Operator.MULTIPLY uses normal OVER-alpha-blending, the code
@@ -875,7 +874,7 @@ class MenuItem extends Clutter.Actor {
         ctx.translate((backgroundSize - iconSize) / 2, (backgroundSize - iconSize) / 2);
 
         // Apply high-dpi scaling.
-        const resourceScale = global.stage.get_resource_scale();
+        const resourceScale = utils.getHDPIResourceScale();
         ctx.scale(1 / resourceScale, 1 / resourceScale);
 
         utils.paintIcon(ctx, iconName, iconSize * resourceScale, iconOpacity, font, {
@@ -892,8 +891,8 @@ class MenuItem extends Clutter.Actor {
 
     // Apply HiDPI scaling and trigger an initial 'draw' signal emission. The call to
     // set_scale_factor() will automatically invalidate the canvas.
-    if (global.stage.get_resource_scale() != 1) {
-      canvas.set_scale_factor(global.stage.get_resource_scale());
+    if (utils.getHDPIResourceScale() != 1) {
+      canvas.set_scale_factor(utils.getHDPIResourceScale());
     } else {
       canvas.invalidate();
     }
@@ -935,7 +934,7 @@ class MenuItem extends Clutter.Actor {
     // the global scale, so we have to counter this here.
     const fontDescription = Pango.FontDescription.from_string(MenuItemSettings.font);
     const fontSize        = fontDescription.get_size();
-    const hdpiScale       = St.ThemeContext.get_for_stage(global.stage).scale_factor;
+    const hdpiScale       = utils.getHDPIScale();
     if (fontDescription.get_size_is_absolute()) {
       fontSize = Pango.units_from_double(fontSize);
     }

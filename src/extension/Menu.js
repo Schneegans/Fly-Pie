@@ -1160,8 +1160,7 @@ var Menu = class Menu {
     maxSize     = Math.max(maxSize, centerRadius);
     maxSize     = Math.max(maxSize, childRadius);
     maxSize     = Math.max(maxSize, grandchildRadius);
-    maxSize *= 2 * this._settings.get_double('global-scale') *
-        St.ThemeContext.get_for_stage(global.stage).scale_factor;
+    maxSize *= 2 * this._settings.get_double('global-scale') * utils.getHDPIScale();
 
     // Clamp to monitor bounds.
     const monitor = Main.layoutManager.currentMonitor;
@@ -1224,8 +1223,7 @@ var Menu = class Menu {
       // There is a setting for a minimum trace length.
       const idealTraceLength = Math.max(
           this._settings.get_double('trace-min-length') *
-              this._settings.get_double('global-scale') *
-              St.ThemeContext.get_for_stage(global.stage).scale_factor,
+              this._settings.get_double('global-scale') * utils.getHDPIScale(),
           currentTraceLength);
 
       // Based on this trace length, we can compute where the item should be placed
