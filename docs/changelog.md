@@ -16,6 +16,7 @@
 
 #### Bug Fixes
 
+* Fly-Pie is now compatible with fractional scaling on Wayland and X11.
 * The menu position is not smoothly transitioning anymore if opened on a different monitor.
 * Fixed an issue which caused items to be pre-selected when the menu was not opened on the left-most monitor (#206).
 
