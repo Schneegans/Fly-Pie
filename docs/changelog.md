@@ -9,10 +9,14 @@
 
 **Release Date:** TBD
 
-#### Enhancements
+#### New Features
 
 * Added initial support for GNOME Shell 42.
+
+#### Other Enhancements
+
 * The branching scheme of Fly-Pie has been simplified, and the corresponding guides have been updated. There is no `develop` branch anymore, and the new default branch is `main`.
+* Fly-Pie now works on GNOME Shell 40+, even if animations are disabled (even though it does not look as slick as it could, but I guess that's the point of disabling animations 😛). Therefore, the corresponding warning in the settings dialog is not shown anymore.
 
 #### Bug Fixes
 
