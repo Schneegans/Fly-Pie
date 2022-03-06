@@ -195,7 +195,7 @@ class SelectionWedges extends Clutter.Actor {
   onSettingsChange(settings) {
 
     // Parse all settings required for wedge rendering.
-    const globalScale = settings.get_double('global-scale');
+    const globalScale = settings.get_double('global-scale') * utils.getHDPIScale();
 
     // clang-format off
     this._settings = {

@@ -169,7 +169,7 @@ var TouchButtons = class TouchButtons {
 
     // Now we store a copy of all settings we require to draw the buttons. This makes is
     // unnecessary to query them whenever the menu configuration is changed.
-    const globalScale = this._settings.get_double('global-scale');
+    const globalScale = this._settings.get_double('global-scale') * utils.getHDPIScale();
 
     // clang-format off
     this._cachedSettings = {

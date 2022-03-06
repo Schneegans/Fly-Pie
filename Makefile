@@ -17,7 +17,7 @@ ZIP_CONTENT = $(JS_FILES) $(LOCALES_MO) resources/$(NAME).gresource \
               presets schemas/gschemas.compiled metadata.json LICENSE
 
 # These five recipes can be invoked by the user.
-.PHONY: zip install uninstall pot clean
+.PHONY: zip install uninstall pot clean test
 
 # The zip recipes only bundles the extension without installing it.
 zip: $(ZIP_NAME)
@@ -48,6 +48,16 @@ clean:
 	       resources/$(NAME).gresource.xml \
 	       schemas/gschemas.compiled \
 	       locale
+
+test:
+	@ for version in 32 33 34 35 36 ; do \
+	  for session in "gnome-xsession" "gnome-wayland-nested" ; do \
+	    echo ; \
+	    echo "Running Tests on Fedora $$version ($$session)." ; \
+	    echo ; \
+	    ./tests/run-test.sh -s $$session -v $$version ; \
+	  done \
+	done
 
 # This bundles the extension and checks whether it is small enough to be uploaded to
 # extensions.gnome.org. We do not use "gnome-extensions pack" for this, as this is not

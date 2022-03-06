@@ -327,7 +327,7 @@ class MenuItem extends Clutter.Actor {
   onSettingsChange(settings) {
 
     // Then parse all settings required during the next call to redraw().
-    const globalScale = settings.get_double('global-scale');
+    const globalScale = settings.get_double('global-scale') * utils.getHDPIScale();
 
     // clang-format off
     MenuItemSettings = {
@@ -473,7 +473,8 @@ class MenuItem extends Clutter.Actor {
       const child = this._childrenContainer.get_children()[this._activeChildIndex];
       this._name.set_text(child.name);
       this._name.set_easing_duration(0);
-      const nameHeight = this._name.get_layout().get_pixel_extents()[1].height;
+      const nameHeight = this._name.get_layout().get_pixel_extents()[1].height /
+          utils.getHDPIResourceScale();
       this._name.set_translation(
           Math.floor(-this._name.width / 2), Math.floor(-nameHeight / 2), 0);
       this._name.set_easing_duration(MenuItemSettings.easingDuration);
@@ -773,8 +774,13 @@ class MenuItem extends Clutter.Actor {
   }
 
   // Static helper to load the background image of a menu item. If "file" exists, a pixbuf
-  // with the given size will be returned.
+  // with the given size will be returned. If high-dpi scaling is enabled, the returned
+  // image can be actually larger.
   static loadBackgroundImage(file, size) {
+
+    // Apply high-dpi resource scaling.
+    size *= utils.getHDPIResourceScale();
+
     // If the path is a relative path, it may be a child of the preset directory.
     if (file != '' && !GLib.path_is_absolute(file)) {
       file = Me.path + '/presets/' + file;
@@ -808,10 +814,13 @@ class MenuItem extends Clutter.Actor {
 
       ctx.save();
 
-
       // If a background image is given, we use it. Else we will draw a simple colored
       // circle.
       if (backgroundImage != null) {
+
+        // Apply high-dpi scaling.
+        const resourceScale = utils.getHDPIResourceScale();
+        ctx.scale(1 / resourceScale, 1 / resourceScale);
 
         // TODO: As Cairo.Operator.MULTIPLY uses normal OVER-alpha-blending, the code
         // below does not really multiply the backgroundImage with the given color. Black
@@ -863,7 +872,12 @@ class MenuItem extends Clutter.Actor {
         ctx.clip();
 
         ctx.translate((backgroundSize - iconSize) / 2, (backgroundSize - iconSize) / 2);
-        utils.paintIcon(ctx, iconName, iconSize, iconOpacity, font, {
+
+        // Apply high-dpi scaling.
+        const resourceScale = utils.getHDPIResourceScale();
+        ctx.scale(1 / resourceScale, 1 / resourceScale);
+
+        utils.paintIcon(ctx, iconName, iconSize * resourceScale, iconOpacity, font, {
           red: textColor.red / 255,
           green: textColor.green / 255,
           blue: textColor.blue / 255
@@ -875,8 +889,13 @@ class MenuItem extends Clutter.Actor {
       ctx.$dispose();
     });
 
-    // Trigger initial 'draw' signal emission.
-    canvas.invalidate();
+    // Apply HiDPI scaling and trigger an initial 'draw' signal emission. The call to
+    // set_scale_factor() will automatically invalidate the canvas.
+    if (utils.getHDPIResourceScale() != 1) {
+      canvas.set_scale_factor(utils.getHDPIResourceScale());
+    } else {
+      canvas.invalidate();
+    }
 
     // Create a new actor and set the icon canvas to be its content.
     const actor = new Clutter.Actor();
@@ -911,13 +930,15 @@ class MenuItem extends Clutter.Actor {
     this._name.set_size(nameSize, nameSize);
     this._name.set_color(MenuItemSettings.textColor);
 
-    // Multiply the size of the font by globalScale.
+    // Multiply the size of the font by globalScale. The Clutter.Text automatically obeys
+    // the global scale, so we have to counter this here.
     const fontDescription = Pango.FontDescription.from_string(MenuItemSettings.font);
     const fontSize        = fontDescription.get_size();
+    const hdpiScale       = utils.getHDPIScale();
     if (fontDescription.get_size_is_absolute()) {
       fontSize = Pango.units_from_double(fontSize);
     }
-    fontDescription.set_size(fontSize * MenuItemSettings.globalScale);
+    fontDescription.set_size(fontSize * MenuItemSettings.globalScale / hdpiScale);
     this._name.set_font_description(fontDescription);
 
     // We also re-draw the trace line to the currently active child if there is any.
