@@ -8,23 +8,26 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-01 16:40+0100\n"
-"PO-Revision-Date: <YYYY-MM-DD> <HM:MM+TIMEZONE>\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-03-10 13:58+0000\n"
+"Last-Translator: Nima Fanniasl <nma.fanniasl@gmail.com>\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/fly-pie/core/fa/>"
+"\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
-msgstr ""
+msgstr "میانبر را فعال کنید"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:50
 msgid "Simulates a key combination."
-msgstr ""
+msgstr "یک ترکیب کلید را شبیه سازی می کند."
 
 #: src/common/actions/Shortcut.js:54
 msgid ""
@@ -32,43 +35,48 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
+"عمل <b>فعال کردن میانبر</b> یک کلید ترکیبی را هنگامی که فعال می شود شبیه "
+"سازی می کند. به عنوان مثال، این می تواند برای تغییر دسکتاپ مجازی، کنترل پخش "
+"چندرسانه ای یا برای خنثی کردن / انجام مجدد عملیات استفاده شود."
 
 #: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5103
 #: resources/ui/gtk3/settings.ui:5095
 msgid "Shortcut"
-msgstr ""
+msgstr "میانبر"
 
 #: src/common/actions/Shortcut.js:78
 msgid "This shortcut will be simulated."
-msgstr ""
+msgstr "این میانبر شبیه سازی خواهد شد."
 
 #: src/common/actions/File.js:34
 msgid "Open File"
-msgstr ""
+msgstr "فایل را باز کنید"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:41
 msgid "Opens a file with the default application."
-msgstr ""
+msgstr "فایلی را با برنامه پیش فرض باز می کند."
 
 #: src/common/actions/File.js:45
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
+"عمل <b>Open File</b> فایل مشخص شده در بالا را با برنامه پیش فرض سیستم شما "
+"باز می کند."
 
 #: src/common/actions/File.js:69
 msgid "File"
-msgstr ""
+msgstr "فایل"
 
 #: src/common/actions/File.js:69 src/common/actions/Uri.js:68
 msgid "It will be opened with the default app."
-msgstr ""
+msgstr "با برنامه پیش فرض باز خواهد شد."
 
 #: src/common/actions/Command.js:34
 msgid "Launch Application"
-msgstr ""
+msgstr "برنامه را راه اندازی کنید"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
