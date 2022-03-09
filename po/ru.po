@@ -8,27 +8,27 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-01 16:40+0100\n"
-"PO-Revision-Date: 2021-11-19 20:52+0000\n"
-"Last-Translator: Artem Kulikov <artem.job.kulikov@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/fly-pie/core/ru/"
-">\n"
+"PO-Revision-Date: 2022-03-10 13:58+0000\n"
+"Last-Translator: Влад <integration.into.society@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/fly-pie/core/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
-msgstr ""
+msgstr "Активировать ярлык"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:50
 msgid "Simulates a key combination."
-msgstr ""
+msgstr "Имитирует комбинацию клавиш."
 
 #: src/common/actions/Shortcut.js:54
 msgid ""
@@ -36,49 +36,55 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
+"Действие <b>Активировать ярлык</b> имитирует комбинацию клавиш при "
+"активации. Например, это можно использовать для переключения виртуальных "
+"рабочих столов, управления воспроизведением мультимедиа или для отмены/"
+"повторения операций."
 
 #: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5103
 #: resources/ui/gtk3/settings.ui:5095
 msgid "Shortcut"
-msgstr ""
+msgstr "Ярлык"
 
 #: src/common/actions/Shortcut.js:78
 msgid "This shortcut will be simulated."
-msgstr ""
+msgstr "Этот ярлык будет симулирован."
 
 #: src/common/actions/File.js:34
 msgid "Open File"
-msgstr ""
+msgstr "Открыть файл"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:41
 msgid "Opens a file with the default application."
-msgstr ""
+msgstr "Открывает файл в приложении по умолчанию."
 
 #: src/common/actions/File.js:45
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
+"Действие <b>Открыть файл</b> открывает файл, указанный выше, с помощью "
+"приложения по умолчанию."
 
 #: src/common/actions/File.js:69
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 #: src/common/actions/File.js:69 src/common/actions/Uri.js:68
 msgid "It will be opened with the default app."
-msgstr ""
+msgstr "Он будет открыт с помощью приложения по умолчанию."
 
 #: src/common/actions/Command.js:34
 msgid "Launch Application"
-msgstr ""
+msgstr "Запустить приложение"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Command.js:41
 msgid "Runs any shell command."
-msgstr ""
+msgstr "Запускает любую команду оболочки."
 
 #: src/common/actions/Command.js:45
 msgid ""
@@ -86,24 +92,27 @@ msgid ""
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
 msgstr ""
+"Действие <b>Запустить приложение</b> выполняет любую заданную команду. Это в "
+"основном используется для открытия приложений, но может иметь и множество "
+"других вариантов использования."
 
 #: src/common/actions/Command.js:69
 msgid "Command"
-msgstr ""
+msgstr "Команда"
 
 #: src/common/actions/Command.js:69
 msgid "Use the button to list installed apps."
-msgstr ""
+msgstr "Используйте кнопку для вывода списка установленных приложений."
 
 #: src/common/actions/Uri.js:33
 msgid "Open URI"
-msgstr ""
+msgstr "Открыть URI"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Uri.js:40
 msgid "Opens an URI with the default application."
-msgstr ""
+msgstr "Открывает URI приложением по умолчанию."
 
 #: src/common/actions/Uri.js:44
 msgid ""
@@ -115,17 +124,17 @@ msgstr ""
 
 #: src/common/actions/Uri.js:68
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: src/common/actions/DBusSignal.js:32
 msgid "D-Bus Signal"
-msgstr ""
+msgstr "D-Bus сигнал"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/DBusSignal.js:39
 msgid "Emits a D-Bus signal."
-msgstr ""
+msgstr "Выдает сигнал шины D-Bus."
 
 #: src/common/actions/DBusSignal.js:43
 msgid ""
@@ -137,21 +146,21 @@ msgstr ""
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: src/common/actions/DBusSignal.js:67
 msgid "This will be passed to the D-Bus signal."
-msgstr ""
+msgstr "Это будет передано сигналу D-Bus."
 
 #: src/common/actions/InsertText.js:48
 msgid "Insert Text"
-msgstr ""
+msgstr "Вставить текст"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/InsertText.js:55
 msgid "Types some text automatically."
-msgstr ""
+msgstr "Автоматически вводит текст."
 
 #: src/common/actions/InsertText.js:59
 msgid ""
@@ -162,15 +171,15 @@ msgstr ""
 
 #: src/common/actions/InsertText.js:83
 msgid "Text"
-msgstr ""
+msgstr "Текст"
 
 #: src/common/actions/InsertText.js:83
 msgid "This text will be inserted."
-msgstr ""
+msgstr "Этот текст будет вставлен."
 
 #: src/common/ConfigWidgetFactory.js:102 src/prefs/ImageChooserButton.js:42
 msgid "Select File"
-msgstr ""
+msgstr "Выбрать файл"
 
 #: src/common/ConfigWidgetFactory.js:103 src/common/ConfigWidgetFactory.js:179
 #: src/prefs/ImageChooserButton.js:43 src/prefs/MenuEditorPage.js:205
@@ -182,19 +191,21 @@ msgstr "Отмена"
 
 #: src/common/ConfigWidgetFactory.js:178
 msgid "Select Application"
-msgstr ""
+msgstr "Выбрать приложение"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
 #: src/prefs/MenuEditor.js:282
 msgid "Not Bound"
-msgstr ""
+msgstr "Не связан"
 
 #: src/common/ConfigWidgetFactory.js:318
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
+"Нажмите сочетание клавиш!\n"
+"ESC для отмены, BackSpace для отвязки"
 
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
@@ -202,17 +213,17 @@ msgstr ""
 #: src/common/ItemRegistry.js:244
 #, javascript-format
 msgid "Insert: %s"
-msgstr ""
+msgstr "Вставка: %s"
 
 #: src/common/menus/FrequentlyUsed.js:44
 msgid "Frequently Used"
-msgstr ""
+msgstr "Часто используемые"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/FrequentlyUsed.js:51
 msgid "Shows your frequently used applications."
-msgstr ""
+msgstr "Показывает часто используемые приложения."
 
 #: src/common/menus/FrequentlyUsed.js:55
 msgid ""
@@ -1817,14 +1828,12 @@ msgstr ""
 "отменит выбор."
 
 #: resources/ui/gtk4/settings.ui:3710 resources/ui/gtk3/settings.ui:3666
-#, fuzzy
 msgid "Wedge Separator Color"
-msgstr "Цвет разделителя клина"
+msgstr "Цвет разделителя"
 
 #: resources/ui/gtk4/settings.ui:3722 resources/ui/gtk3/settings.ui:3678
-#, fuzzy
 msgid "Wedge Separator Thickness"
-msgstr "Толщина разделителя клина"
+msgstr "Толщина разделителя"
 
 #: resources/ui/gtk4/settings.ui:3760 resources/ui/gtk3/settings.ui:3716
 #, fuzzy
