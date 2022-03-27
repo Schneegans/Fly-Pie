@@ -5,6 +5,19 @@
 # Changelog of Fly-Pie
 
 
+## [Fly-Pie 15](https://github.com/schneegans/fly-pie/releases/tag/v15)
+
+**Release Date:** 2022-03-27
+
+#### Enhancements
+
+* Many translation updates. A BIG THANKS to all translators!
+
+#### Bug Fixes
+
+* Fixed the version check for GNOME Shell 42.
+
+
 ## [Fly-Pie 14](https://github.com/schneegans/fly-pie/releases/tag/v14)
 
 **Release Date:** 2022-03-07
