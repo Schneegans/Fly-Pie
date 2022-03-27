@@ -351,9 +351,9 @@ var Daemon = class Daemon {
   // open menu otherwise.   
   ToggleMenu(name) {
     if (this._menu.getID() == null) {
-      return ShowMenu(name);
+      return this.ShowMenu(name);
     } else {
-      return CancelMenu();
+      return this.CancelMenu();
     }
   }
 
