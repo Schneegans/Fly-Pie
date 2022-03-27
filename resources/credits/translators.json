@@ -1,5 +1,79 @@
 [
   {
+    "Norwegian Bokm\u00e5l": [
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        13
+      ],
+      [
+        "epost@anotheragency.no",
+        "Allan Nordh\u00f8y",
+        382
+      ]
+    ]
+  },
+  {
+    "Dutch": [
+      [
+        "0xjarno@gmail.com",
+        "Jarno Van Schoor",
+        23
+      ],
+      [
+        "vistausss@fastmail.com",
+        "Heimen Stoffels",
+        62
+      ]
+    ]
+  },
+  {
+    "Finnish": [
+      [
+        "jiri.gronroos@iki.fi",
+        "Jiri Gr\u00f6nroos",
+        250
+      ]
+    ]
+  },
+  {
+    "Russian": [
+      [
+        "dan.samara@gmail.com",
+        "Daniel' Ishmaev",
+        26
+      ],
+      [
+        "integration.into.society@gmail.com",
+        "\u0412\u043b\u0430\u0434",
+        35
+      ],
+      [
+        "artem.job.kulikov@gmail.com",
+        "Artem Kulikov",
+        74
+      ]
+    ]
+  },
+  {
+    "Sinhala": [
+      [
+        "R45XvezA@protonmail.ch",
+        "HelaBasa",
+        8
+      ]
+    ]
+  },
+  {
+    "Persian": [
+      [
+        "nma.fanniasl@gmail.com",
+        "Nima Fanniasl",
+        11
+      ]
+    ]
+  },
+  {
     "Portuguese (Brazil)": [
       [
         "code@simonschneegans.de",
@@ -20,48 +94,6 @@
         "Guarakami1807@protonmail.ch",
         "Thiago Carmona Monteiro",
         85
-      ]
-    ]
-  },
-  {
-    "German": [
-      [
-        "j.lavoie@net-c.ca",
-        "J. Lavoie",
-        13
-      ],
-      [
-        "philipp.kiemle@gmail.com",
-        "Philipp Kiemle",
-        26
-      ],
-      [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
-        167
-      ]
-    ]
-  },
-  {
-    "Russian": [
-      [
-        "dan.samara@gmail.com",
-        "Daniel' Ishmaev",
-        26
-      ],
-      [
-        "artem.job.kulikov@gmail.com",
-        "Artem Kulikov",
-        74
-      ]
-    ]
-  },
-  {
-    "Portuguese": [
-      [
-        "hugokarvalho@hotmail.com",
-        "Hugo Carvalho",
-        115
       ]
     ]
   },
@@ -90,75 +122,6 @@
     ]
   },
   {
-    "Dutch": [
-      [
-        "0xjarno@gmail.com",
-        "Jarno Van Schoor",
-        23
-      ],
-      [
-        "vistausss@fastmail.com",
-        "Heimen Stoffels",
-        62
-      ]
-    ]
-  },
-  {
-    "Spanish": [
-      [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
-        2
-      ],
-      [
-        "captainjawz@outlook.com",
-        "Danilo Reyes",
-        135
-      ],
-      [
-        "oscfdezdz@tuta.io",
-        "\u00d3scar Fern\u00e1ndez D\u00edaz",
-        289
-      ]
-    ]
-  },
-  {
-    "French": [
-      [
-        "schotte.clement@hotmail.fr",
-        "Cl\u00e9ment Schotte",
-        9
-      ]
-    ]
-  },
-  {
-    "Finnish": [
-      [
-        "jiri.gronroos@iki.fi",
-        "Jiri Gr\u00f6nroos",
-        250
-      ]
-    ]
-  },
-  {
-    "Korean": [
-      [
-        "R45XvezA@protonmail.ch",
-        "HelaBasa",
-        4
-      ]
-    ]
-  },
-  {
-    "Sinhala": [
-      [
-        "R45XvezA@protonmail.ch",
-        "HelaBasa",
-        8
-      ]
-    ]
-  },
-  {
     "Chinese (Simplified)": [
       [
         "jingxuan@nfschina.com",
@@ -178,16 +141,67 @@
     ]
   },
   {
-    "Norwegian Bokm\u00e5l": [
+    "German": [
       [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
+        "j.lavoie@net-c.ca",
+        "J. Lavoie",
         13
       ],
       [
-        "epost@anotheragency.no",
-        "Allan Nordh\u00f8y",
-        382
+        "philipp.kiemle@gmail.com",
+        "Philipp Kiemle",
+        26
+      ],
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        168
+      ]
+    ]
+  },
+  {
+    "French": [
+      [
+        "schotte.clement@hotmail.fr",
+        "Cl\u00e9ment Schotte",
+        9
+      ]
+    ]
+  },
+  {
+    "Korean": [
+      [
+        "R45XvezA@protonmail.ch",
+        "HelaBasa",
+        4
+      ]
+    ]
+  },
+  {
+    "Portuguese": [
+      [
+        "hugokarvalho@hotmail.com",
+        "Hugo Carvalho",
+        115
+      ]
+    ]
+  },
+  {
+    "Spanish": [
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        2
+      ],
+      [
+        "captainjawz@outlook.com",
+        "Danilo Reyes",
+        135
+      ],
+      [
+        "oscfdezdz@tuta.io",
+        "\u00d3scar Fern\u00e1ndez D\u00edaz",
+        289
       ]
     ]
   }
