@@ -347,7 +347,7 @@ var Daemon = class Daemon {
     return 0;
   }
   
-  // Opens a menu with that name if there are currently none open. Closes the currently 
+  // Opens a menu with that name if there are currently none open. Closes the currently
   // open menu otherwise.   
   ToggleMenu(name) {
     if (this._menu.getID() == null) {
