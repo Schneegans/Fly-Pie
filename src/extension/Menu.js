@@ -1384,4 +1384,3 @@ var Menu = class Menu {
     }
   }
 };
-
