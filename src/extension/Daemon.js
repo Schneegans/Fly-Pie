@@ -347,6 +347,16 @@ var Daemon = class Daemon {
     return 0;
   }
 
+  // Opens a menu with that name if there are currently none open. Closes the currently
+  // open menu otherwise.
+  ToggleMenu(name) {
+    if (this._menu.getID() == null) {
+      return this.ShowMenu(name);
+    } else {
+      return this.CancelMenu();
+    }
+  }
+
   // This selects an item in the currently opened menu.
   // See the README.md for a description of Fly-Pie's DBusInterface.
   SelectItem(path) {

@@ -30,6 +30,15 @@ There is also a similar method called `ShowMenuAt` which will open the given men
 gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie \
            --method org.gnome.Shell.Extensions.flypie.ShowMenuAt 'Main Menu' 234 456
 ```
+
+A `ToggleMenu` method toggles the given menu between open and closed states.
+If another menu is currently open, it will also be closed.
+
+```bash
+gdbus call --session --dest org.gnome.Shell --object-path /org/gnome/shell/extensions/flypie \
+           --method org.gnome.Shell.Extensions.flypie.ToggleMenu 'Main Menu'
+```
+
 Lastly, there is a method called `PreviewMenu` which will open the given menu in preview mode.
 
 ```bash
