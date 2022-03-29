@@ -86,6 +86,7 @@ var DBusInterface = {
     eNoSuchMenu: -5,
     eNoActiveMenu: -6,
     eInvalidPath: -7,
+    eHadToCancelAMenu: -8,
   },
 
   // This can be used to translate an error code to a human-readable message.

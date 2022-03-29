@@ -352,9 +352,11 @@ var Daemon = class Daemon {
   ToggleMenu(name) {
     if (this._menu.getID() == null) {
       return this.ShowMenu(name);
-    } else {
-      return this.CancelMenu();
     }
+
+    this.CancelMenu();
+
+    return DBusInterface.errorCodes.eHadToCancelAMenu;
   }
 
   // This selects an item in the currently opened menu.
