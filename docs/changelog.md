@@ -7,11 +7,15 @@
 
 ## [Fly-Pie 16](https://github.com/schneegans/fly-pie/releases/tag/v16)
 
-**Release Date:** TBD
+**Release Date:** 2022-03-29
 
 #### Enhancements
 
 * Add a new `ToggleMenu` D-Bus method which can be used to, well, toggle a menu (thank you [@GestaltEngine](https://github.com/GestaltEngine) for this contribution!).
+
+#### Bug Fixes
+
+* Fixed the version check for GNOME Shell `42.rc` (before it only worked on `42.alpha` and `42.beta`)
 
 
 ## [Fly-Pie 15](https://github.com/schneegans/fly-pie/releases/tag/v15)
