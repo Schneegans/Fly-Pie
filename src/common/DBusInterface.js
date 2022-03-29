@@ -28,6 +28,10 @@ var DBusInterface = {
             <arg name="y"      type="i" direction="in"/>                                 \
             <arg name="menuID" type="i" direction="out"/>                                \
           </method>                                                                      \
+          <method name="ToggleMenu">                                                     \
+            <arg name="name"   type="s" direction="in"/>                                 \
+            <arg name="menuID" type="i" direction="out"/>                                \
+          </method>                                                                      \
           <method name="PreviewMenu">                                                    \
             <arg name="name"   type="s" direction="in"/>                                 \
             <arg name="menuID" type="i" direction="out"/>                                \
@@ -48,10 +52,6 @@ var DBusInterface = {
           </method>                                                                      \
           <method name="CancelMenu">                                                     \
             <arg name="result"  type="i" direction="out"/>                               \
-          </method>                                                                      \
-          <method name="ToggleMenu">                                                     \
-            <arg name="name"   type="s" direction="in"/>                                 \
-            <arg name="menuID" type="i" direction="out"/>                                \
           </method>                                                                      \
           <method name="SelectItem">                                                     \
             <arg name="path"    type="s" direction="in"/>                                \
