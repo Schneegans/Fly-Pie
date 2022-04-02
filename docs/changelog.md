@@ -5,6 +5,15 @@
 # Changelog of Fly-Pie
 
 
+## [Fly-Pie 17](https://github.com/schneegans/fly-pie/releases/tag/v17)
+
+**Release Date:** TBD
+
+#### Enhancements
+
+* All included SVG files have been optimized to reduce the size of the installed extension.
+
+
 ## [Fly-Pie 16](https://github.com/schneegans/fly-pie/releases/tag/v16)
 
 **Release Date:** 2022-03-29
