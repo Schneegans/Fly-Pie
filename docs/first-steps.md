@@ -4,6 +4,8 @@
 
 # First Steps with Fly-Pie
 
+The default menu can be opened with <kbd>Ctrl</kbd>+<kbd>Space</kbd>. You can use this to get used to Fly-Pie, however you should definitely create your own menus!
+
 To open the settings dialog, you can use the `gnome-tweak-tool`, the `gnome-extensions-app` or this command:
 
 ```
@@ -74,9 +76,10 @@ Either via the configured shortcut or with a terminal command as [described on t
 This second approach can be used in combination with other tools.
 Interesting companions are:
 
-* [CustomCorner](https://extensions.gnome.org/extension/1037/customcorner/): Open menus by moving your mouse to one corner of your screen!
+* [Custom Hot Corners - Extended](https://extensions.gnome.org/extension/4167/custom-hot-corners-extended/): Open menus by moving your mouse to one corner of your screen!
+* [Input Remapper](https://github.com/sezanzeb/input-remapper/): Bind menus to your additional mouse buttons!
+* [xbindkeys](http://www.nongnu.org/xbindkeys/xbindkeys.html): X11-only alternative to Input Remapper.
 * [Easystroke](https://github.com/thjaeger/easystroke/wiki): X11 only, use mouse gestures to open menus!
-* [xbindkeys](http://www.nongnu.org/xbindkeys/xbindkeys.html): X11 only, bind menus to your additional mouse buttons!
 
 <p align="center"><img src ="pics/hr.svg" /></p>
 
