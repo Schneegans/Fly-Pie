@@ -665,7 +665,7 @@ var Menu = class Menu {
 
     // Reset the stroke coordinates in case a menu was previously closed without any
     // selection made and SelectionWedges contains previous stroke.
-    this._selectionWedges._resetStroke();
+    this._selectionWedges.resetStroke();
 
     // Calculate menu position. We open the menu in the middle of the screen if necessary
     // accounting background position as well. Else we position it at the mouse pointer
