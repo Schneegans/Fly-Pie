@@ -13,6 +13,10 @@
 
 * All included SVG files have been optimized to reduce the size of the installed extension.
 
+#### Bug Fixes
+
+* Fixed a bug which could lead to an unexpected selection of an item if the previous selection in marking mode was aborted (thank you [@GestaltEngine](https://github.com/GestaltEngine) for this fix!).
+
 
 ## [Fly-Pie 16](https://github.com/schneegans/fly-pie/releases/tag/v16)
 
