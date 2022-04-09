@@ -347,7 +347,7 @@ class SelectionWedges extends Clutter.Actor {
   // This emits 'parent-selected-event' or 'child-selected-event' depending on the
   // currently hovered wedge. It also resets the current gesture detection.
   emitSelection(coords, fromGesture = false) {
-    this._resetStroke();
+    this.resetStroke();
 
     if (this._hoveredWedge >= 0) {
       if (this._hoveredWedge == this._parentIndex) {
@@ -525,7 +525,7 @@ class SelectionWedges extends Clutter.Actor {
       }
     } else {
       // The mouse button is not pressed anymore, so we can abort gesture detection.
-      this._resetStroke();
+      this.resetStroke();
     }
   }
 
@@ -547,6 +547,18 @@ class SelectionWedges extends Clutter.Actor {
     return hoverMode || buttonPressed || shortcutPressed;
   }
 
+  // Resets the current gesture detection. This is done when an item was selected or the
+  // mouse pointer released.
+  resetStroke() {
+    if (this._stroke.pauseTimeout != null) {
+      GLib.source_remove(this._stroke.pauseTimeout);
+      this._stroke.pauseTimeout = null;
+    }
+
+    this._stroke.start = null;
+    this._stroke.end   = null;
+  }
+
   // ----------------------------------------------------------------------- private stuff
 
   // Clutter.ShaderEffect.set_uniform_value() works well if floating point Numbers are
@@ -559,17 +571,5 @@ class SelectionWedges extends Clutter.Actor {
       value += 0.0000001;
     }
     this._wedgeShader.set_uniform_value(name, value);
-  }
-
-  // Resets the current gesture detection. This is done when an item was selected or the
-  // mouse pointer released.
-  _resetStroke() {
-    if (this._stroke.pauseTimeout != null) {
-      GLib.source_remove(this._stroke.pauseTimeout);
-      this._stroke.pauseTimeout = null;
-    }
-
-    this._stroke.start = null;
-    this._stroke.end   = null;
   }
 });
