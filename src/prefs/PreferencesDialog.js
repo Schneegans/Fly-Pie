@@ -198,13 +198,14 @@ var PreferencesDialog = class PreferencesDialog {
       stackSwitcher.parent.remove(aboutButton);
       stackSwitcher.parent.remove(stackSwitcher);
 
-      // On GNOME Shell 42, the settings dialog uses libadwaita. While the preferences
-      // dialog could benefit from using libadwaita's widgets, maintaining three versions
-      // of the UI is just too much work (GTK3 + GTK4 + libadwaita). So I chose to hack
-      // the "features" of the AdwPreferencesWindow away... In the future, when libadwaita
-      // is used more commonly, we should drop support for older GNOME versions and
-      // rewrite the entire dialog using libadwaita widgets!
-      if (utils.shellVersionIsAtLeast(42, 'beta')) {
+      // On GNOME Shell 42, the settings dialog uses libadwaita (at least most of the time
+      // - it seems that pop!_OS does not support libadwaita even on GNOME 42). While the
+      // preferences dialog could benefit from using libadwaita's widgets, maintaining
+      // three versions of the UI is just too much work (GTK3 + GTK4 + libadwaita). So I
+      // chose to hack the "features" of the AdwPreferencesWindow away... In the future,
+      // when libadwaita is used more commonly, we should drop support for older GNOME
+      // versions and rewrite the entire dialog using libadwaita widgets!
+      if (Adw && utils.shellVersionIsAtLeast(42, 'beta')) {
 
         const window = this._widget.get_root().get_content();
 
