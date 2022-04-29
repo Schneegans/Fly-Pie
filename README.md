@@ -79,6 +79,7 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
 
 <h2 align="center">🥉 Current Bronze Sponsors</h2>
 <p align="center">
+  <a href='https://github.com/AngelBrielez'>Angel Brielez</a><br>
   <a href="https://github.com/lobau">@lobau</a><br>
   <a href="https://github.com/FahriDevZ">@FahriDevZ</a>
 </p>
