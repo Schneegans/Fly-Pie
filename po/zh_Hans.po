@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-01 16:40+0100\n"
-"PO-Revision-Date: 2022-02-23 13:54+0000\n"
-"Last-Translator: poi <erbaotao@outlook.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/fly-"
-"pie/core/zh_Hans/>\n"
+"PO-Revision-Date: 2022-05-12 10:19+0000\n"
+"Last-Translator: Eric <alchemillatruth@purelymail.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"fly-pie/core/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -243,7 +243,6 @@ msgstr "最多记录几项"
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
 #: src/common/menus/Clipboard.js:85
-#, fuzzy
 msgid "Limits the number of children."
 msgstr "限制子项目的数量。"
 
@@ -269,7 +268,6 @@ msgid "Lock"
 msgstr "锁定"
 
 #: src/common/menus/System.js:90
-#, fuzzy
 msgid "Suspend"
 msgstr "悬停"
 
@@ -1245,7 +1243,7 @@ msgstr "关闭"
 #: src/extension/Background.js:99
 #, fuzzy
 msgid "Flip Side"
-msgstr "换边"
+msgstr "翻面"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:194
@@ -1386,15 +1384,15 @@ msgstr "制作组"
 
 #: resources/ui/gtk4/settings.ui:461 resources/ui/gtk3/settings.ui:456
 msgid "Created by"
-msgstr "程序设计："
+msgstr "程序设计"
 
 #: resources/ui/gtk4/settings.ui:485 resources/ui/gtk3/settings.ui:480
 msgid "Translated by"
-msgstr "译者："
+msgstr "译者"
 
 #: resources/ui/gtk4/settings.ui:509 resources/ui/gtk3/settings.ui:504
 msgid "Artwork by"
-msgstr "界面设计："
+msgstr "美工"
 
 #: resources/ui/gtk4/settings.ui:538 resources/ui/gtk3/settings.ui:658
 msgid "Sponsors"
@@ -1511,16 +1509,13 @@ msgid "You can click anywhere!"
 msgstr "点哪儿都好使！"
 
 #: resources/ui/gtk4/settings.ui:1017 resources/ui/gtk3/settings.ui:1018
-#, fuzzy
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
-msgstr ""
-"只要你的鼠标指针停留在项目的楔子里，你是直接点击项目还是在屏幕的边缘点击都没"
-"有关系。"
+msgstr "只要你的鼠标指针停留在项目的楔形区域里，你是直接点击项目还是在屏幕的边缘点击"
+"都没有关系。"
 
 #: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1030
-#, fuzzy
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -1529,11 +1524,11 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
-"<b>单击其各挂件里任何的位置就可以选中项目</b>。\n"
+"<b>点击项目各自楔形区域内的任意地方来选中项目</b>。\n"
 "\n"
-"此外，不用等待动画完成，因为子菜单挂件会立即出现在你单击的位置周围。\n"
+"你不必等待动画完成，因为子菜单的楔子会立即出现在你点击的位置附近。\n"
 "\n"
-"点击<b>下一步</b>试一试！"
+"点击 <b>下一步</b> 试一试！"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:1081 resources/ui/gtk3/settings.ui:1080
@@ -1673,9 +1668,8 @@ msgstr "整体放缩"
 
 #. Please keep this short!
 #: resources/ui/gtk4/settings.ui:1704 resources/ui/gtk3/settings.ui:1696
-#, fuzzy
 msgid "Independent of the preset."
-msgstr "与预设中的设置均参与放缩。"
+msgstr "独立于预设。"
 
 #: resources/ui/gtk4/settings.ui:1754 resources/ui/gtk3/settings.ui:1746
 msgid "Font"
@@ -1761,7 +1755,6 @@ msgstr "不透明度"
 #: resources/ui/gtk3/settings.ui:2078 resources/ui/gtk3/settings.ui:2144
 #: resources/ui/gtk3/settings.ui:2545 resources/ui/gtk3/settings.ui:2702
 #: resources/ui/gtk3/settings.ui:3292 resources/ui/gtk3/settings.ui:3345
-#, fuzzy
 msgid "Fixed"
 msgstr "固定"
 
@@ -1785,7 +1778,6 @@ msgstr "标志放缩"
 
 #: resources/ui/gtk4/settings.ui:2403 resources/ui/gtk4/settings.ui:3149
 #: resources/ui/gtk3/settings.ui:2389 resources/ui/gtk3/settings.ui:3125
-#, fuzzy
 msgid "Icon Crop"
 msgstr "图标裁剪"
 
@@ -1829,7 +1821,6 @@ msgstr "同上级"
 
 #: resources/ui/gtk4/settings.ui:2884 resources/ui/gtk4/settings.ui:3435
 #: resources/ui/gtk3/settings.ui:2866 resources/ui/gtk3/settings.ui:3405
-#, fuzzy
 msgid "Offset"
 msgstr "补偿"
 
@@ -1993,13 +1984,12 @@ msgid "Display Timeout"
 msgstr "显示延迟"
 
 #: resources/ui/gtk4/settings.ui:4382 resources/ui/gtk3/settings.ui:4316
-#, fuzzy
 msgid ""
 "Menus will be shown after this many milliseconds.\n"
 "Use this to quickly select items without showing the menu."
 msgstr ""
-"等待此时间（毫秒）后显示菜单。\n"
-"这样，如果选择项目迅速，菜单就不会显示。"
+"这段时间（毫秒）过去之后显示将菜单。\n"
+"使用它可以快速选择项目而不显示菜单。"
 
 #: resources/ui/gtk4/settings.ui:4421 resources/ui/gtk3/settings.ui:4355
 msgid "Selection Timeout"
@@ -2009,7 +1999,9 @@ msgstr "选中延迟"
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
-msgstr "鼠标不动此时间（毫秒）后选中所在项目。"
+msgstr ""
+"如果你的鼠标指针停留了这些毫秒，\n"
+"当前项目将被选中。"
 
 #: resources/ui/gtk4/settings.ui:4470 resources/ui/gtk3/settings.ui:4404
 msgid "Experimental Hover Mode"
@@ -2019,7 +2011,9 @@ msgstr "悬停模式（功能测试中）"
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
-msgstr "打开后选择时不用按下鼠标，也不用按下修饰键。"
+msgstr ""
+"启用后，选择时不用按下鼠标按钮，\n"
+"或按住修饰键。"
 
 #: resources/ui/gtk4/settings.ui:4503 resources/ui/gtk3/settings.ui:4437
 msgid "Show Screencast Mouse"
