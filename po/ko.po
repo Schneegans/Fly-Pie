@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-01 16:40+0100\n"
-"PO-Revision-Date: 2021-04-24 11:21+0000\n"
-"Last-Translator: HelaBasa <R45XvezA@protonmail.ch>\n"
-"Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/"
-">\n"
+"PO-Revision-Date: 2022-06-13 11:19+0000\n"
+"Last-Translator: colder_ <inner5740@gmail.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
-msgstr ""
+msgstr "단축키"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:50
 msgid "Simulates a key combination."
-msgstr ""
+msgstr "키 조합을 입력합니다."
 
 #: src/common/actions/Shortcut.js:54
 msgid ""
@@ -35,74 +35,77 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
+"<b>단축키</b> 동작은 키 조합을 입력합니다. 예를 들어 가상 데스크탑을 바꾸고, "
+"멀티미디어를 조작하거나, 동작을 취소 / 복원할 수 있습니다."
 
 #: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5103
 #: resources/ui/gtk3/settings.ui:5095
 msgid "Shortcut"
-msgstr ""
+msgstr "단축키"
 
 #: src/common/actions/Shortcut.js:78
 msgid "This shortcut will be simulated."
-msgstr ""
+msgstr "아래의 단축키가 입력됩니다."
 
 #: src/common/actions/File.js:34
 msgid "Open File"
-msgstr ""
+msgstr "파일 열기"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:41
 msgid "Opens a file with the default application."
-msgstr ""
+msgstr "기본 앱으로 파일을 엽니다."
 
 #: src/common/actions/File.js:45
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
-msgstr ""
+msgstr "<b>파일 열기</b> 동작은 파일을 시스템의 기본 앱으로 실행합니다."
 
 #: src/common/actions/File.js:69
 msgid "File"
-msgstr ""
+msgstr "파일"
 
 #: src/common/actions/File.js:69 src/common/actions/Uri.js:68
 msgid "It will be opened with the default app."
-msgstr ""
+msgstr "기본 앱으로 실행됩니다."
 
 #: src/common/actions/Command.js:34
 msgid "Launch Application"
-msgstr ""
+msgstr "명령어 실행"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Command.js:41
 msgid "Runs any shell command."
-msgstr ""
+msgstr "쉘 명령어를 실행합니다."
 
 #: src/common/actions/Command.js:45
 msgid ""
 "The <b>Launch Application</b> action executes any given command. This is "
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
-msgstr ""
+msgstr "<b>명령어 실행</b> 동작은 명령어를 실행합니다. 앱을 실행하는 목적이지만, "
+"다른 용도로도 사용이 가능합니다."
 
 #: src/common/actions/Command.js:69
 msgid "Command"
-msgstr ""
+msgstr "명령어"
 
 #: src/common/actions/Command.js:69
 msgid "Use the button to list installed apps."
-msgstr ""
+msgstr "설치된 앱들을 보려면 버튼을 클릭하세요."
 
 #: src/common/actions/Uri.js:33
 msgid "Open URI"
-msgstr ""
+msgstr "URI 열기"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Uri.js:40
 msgid "Opens an URI with the default application."
-msgstr ""
+msgstr "URI를 기본 앱으로 엽니다."
 
 #: src/common/actions/Uri.js:44
 msgid ""
@@ -111,20 +114,23 @@ msgid ""
 "However, it is also possible to open other URIs such as \"mailto:foo@bar.org"
 "\"."
 msgstr ""
+"<b>URI 열기</b> 동작이 실행되었을때, URI를 기본 앱으로 엽니다. 예를 들어 "
+"http URL들은 웹브라우저로 열립니다. \"mailto:이@메일.org\"같은 기타 URI도 열 "
+"수 있습니다."
 
 #: src/common/actions/Uri.js:68
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: src/common/actions/DBusSignal.js:32
 msgid "D-Bus Signal"
-msgstr ""
+msgstr "D-Bus 신호"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/DBusSignal.js:39
 msgid "Emits a D-Bus signal."
-msgstr ""
+msgstr "D-Bus 신호를 보냅니다."
 
 #: src/common/actions/DBusSignal.js:43
 msgid ""
@@ -133,24 +139,28 @@ msgid ""
 "\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
+"<b>D-Bus 신호</b> 동작은 혼자 쓰이면 아무것도 하지 않습니다. 하지만 <a href="
+"\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md\">D-"
+"Bus의 신호를 잡을 수 있다면</a>, 커맨드라인에서 커스텀 메뉴를 열 때 매우 "
+"유용하게 쓰일 수 있습니다."
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: src/common/actions/DBusSignal.js:67
 msgid "This will be passed to the D-Bus signal."
-msgstr ""
+msgstr "D-Bus 신호에 포함됩니다."
 
 #: src/common/actions/InsertText.js:48
 msgid "Insert Text"
-msgstr ""
+msgstr "텍스트 입력"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/InsertText.js:55
 msgid "Types some text automatically."
-msgstr ""
+msgstr "자동으로 텍스트를 입력합니다."
 
 #: src/common/actions/InsertText.js:59
 msgid ""
@@ -158,18 +168,20 @@ msgid ""
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
 "write the same things."
 msgstr ""
+"<b>텍스트 입력</b> 동작은 텍스트를 복사한 뒤 Ctrl+V를 실행합니다. 같은 "
+"텍스트를 입력할 때 유용하게 쓰일 수 있습니다."
 
 #: src/common/actions/InsertText.js:83
 msgid "Text"
-msgstr ""
+msgstr "텍스트"
 
 #: src/common/actions/InsertText.js:83
 msgid "This text will be inserted."
-msgstr ""
+msgstr "이 텍스트가 입력됩니다."
 
 #: src/common/ConfigWidgetFactory.js:102 src/prefs/ImageChooserButton.js:42
 msgid "Select File"
-msgstr ""
+msgstr "파일 선택하기"
 
 #: src/common/ConfigWidgetFactory.js:103 src/common/ConfigWidgetFactory.js:179
 #: src/prefs/ImageChooserButton.js:43 src/prefs/MenuEditorPage.js:205
@@ -177,23 +189,25 @@ msgstr ""
 #: src/prefs/SettingsPage.js:329 resources/ui/gtk4/iconSelectDialog.ui:14
 #: resources/ui/gtk3/iconSelectDialog.ui:14
 msgid "Cancel"
-msgstr ""
+msgstr "취소"
 
 #: src/common/ConfigWidgetFactory.js:178
 msgid "Select Application"
-msgstr ""
+msgstr "앱 선택"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
 #: src/prefs/MenuEditor.js:282
 msgid "Not Bound"
-msgstr ""
+msgstr "설정된 단축키가 없어요"
 
 #: src/common/ConfigWidgetFactory.js:318
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
+"단축키를 눌러보세요!\n"
+"ESC로 취소, Backspace로 삭제"
 
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
@@ -201,17 +215,17 @@ msgstr ""
 #: src/common/ItemRegistry.js:244
 #, javascript-format
 msgid "Insert: %s"
-msgstr ""
+msgstr "입력: %s"
 
 #: src/common/menus/FrequentlyUsed.js:44
 msgid "Frequently Used"
-msgstr ""
+msgstr "자주 쓰는 앱들"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/FrequentlyUsed.js:51
 msgid "Shows your frequently used applications."
-msgstr ""
+msgstr "자주 사용하는 앱들을 표시합니다."
 
 #: src/common/menus/FrequentlyUsed.js:55
 msgid ""
@@ -219,63 +233,65 @@ msgid ""
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
 msgstr ""
+"<b>자주 쓰는 앱들</b> 메뉴는 자주 쓰는 앱들을 나열합니다. 효율적으로 "
+"사용하려면, '최대 표시 개수'를 20개 정도로 설정하세요."
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
 #: src/common/menus/Clipboard.js:85
 msgid "Max Item Count"
-msgstr ""
+msgstr "최대 표시 개수"
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
 #: src/common/menus/Clipboard.js:85
 msgid "Limits the number of children."
-msgstr ""
+msgstr "표시된 항목의 개수를 제한합니다."
 
 #: src/common/menus/System.js:46
 msgid "System"
-msgstr ""
+msgstr "시스템"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/System.js:53
 msgid "Allows screen lock, shutdown and other things."
-msgstr ""
+msgstr "화면 잠금, 전원 끄기 등을 실행합니다."
 
 #: src/common/menus/System.js:57
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
-msgstr ""
+msgstr "<b>시스템</b> 메뉴는 스크린 잠금, 전원 끄기, 환경성정 등 항목을 표시합니다."
 
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:81
 msgid "Lock"
-msgstr ""
+msgstr "잠그기"
 
 #: src/common/menus/System.js:90
 msgid "Suspend"
-msgstr ""
+msgstr "중지"
 
 #: src/common/menus/System.js:99
 msgid "Switch User…"
-msgstr ""
+msgstr "사용자 바꾸기…"
 
 #: src/common/menus/System.js:108
 msgid "Log Out"
-msgstr ""
+msgstr "로그아웃"
 
 #: src/common/menus/System.js:117
 msgid "Power Off…"
-msgstr ""
+msgstr "전원 끄기…"
 
 #: src/common/menus/CustomMenu.js:29
 msgid "Custom Menu"
-msgstr ""
+msgstr "사용자 정의 메뉴"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:36
 msgid "This can contain custom actions and other menus."
-msgstr ""
+msgstr "사용자 정의 동작들과 메뉴들을 포함할수 있습니다."
 
 #: src/common/menus/CustomMenu.js:40
 msgid ""
@@ -283,33 +299,35 @@ msgid ""
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended."
 msgstr ""
+"<b>사용자 정의 메뉴</b>는 여러 동작들과 서브메뉴들을 포함할 수 있습니다. "
+"항목을 정확하게 선택하려면, 20개 정도의 항목을 추천합니다."
 
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:43 src/extension/DefaultMenu.js:79
 msgid "Favorites"
-msgstr ""
+msgstr "즐겨찾기"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:50
 msgid "Shows pinned applications."
-msgstr ""
+msgstr "고정된 앱들을 표시합니다."
 
 #: src/common/menus/Favorites.js:54
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
-msgstr ""
+msgstr "<b>즐겨찾기</b> 메뉴는 그놈 쉘의 대쉬에 고정해둔 앱들을 포함합니다."
 
 #: src/common/menus/RecentFiles.js:34
 msgid "Recent Files"
-msgstr ""
+msgstr "최근 파일"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RecentFiles.js:41
 msgid "Shows your recently used files."
-msgstr ""
+msgstr "최근에 사용했던 파일들을 표시합니다."
 
 #: src/common/menus/RecentFiles.js:45
 msgid ""
@@ -317,32 +335,34 @@ msgid ""
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
 msgstr ""
+"<b>최근 파일</b> 메뉴는 최근에 사용했던 파일들을 나열합니다. 효율적으로 "
+"사용하려면, '최대 표시 개수'를 20개 정도로 설정하세요."
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
-msgstr ""
+msgstr "디바이스"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:40
 msgid "Shows connected devices."
-msgstr ""
+msgstr "연결되어 있는 디바이스들을 표시합니다."
 
 #: src/common/menus/Devices.js:44
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
-msgstr ""
+msgstr "<b>디바이스</b> 메뉴는 USB같은 마운트된 볼륨을 표시합니다."
 
 #: src/common/menus/MainMenu.js:33
 msgid "Main Menu"
-msgstr ""
+msgstr "메인 메뉴"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/MainMenu.js:40
 msgid "Shows all installed applications."
-msgstr ""
+msgstr "설치되어 있는 앱들을 표시합니다."
 
 #: src/common/menus/MainMenu.js:44
 msgid ""
@@ -350,17 +370,20 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather set up your own menus!"
 msgstr ""
+"<b>메인 메뉴</b>는 설치되어 있는 앱들을 표시합니다. 보통 이 메뉴는 항목이 "
+"너무 많아 효율적으로 사용하기 어렵습니다. 사용자 정의 메뉴를 만드는게 더 "
+"좋은 선택일것 같네요!"
 
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:47 src/extension/DefaultMenu.js:111
 msgid "Running Apps"
-msgstr ""
+msgstr "실행중인 앱"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:54
 msgid "Shows the currently running applications."
-msgstr ""
+msgstr "현재 실행중인 앱들을 표시합니다."
 
 #: src/common/menus/RunningApps.js:58
 msgid ""
@@ -368,6 +391,8 @@ msgid ""
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
+"<b>실행중인 앱</b> 메뉴는 현재 실행중인 앱들을 표시합니다. Alt+Tab과 "
+"흡사합니다. 항목들이 보통 자리를 계속 바꿔서, 많이 효율적이지는 않습니다."
 
 #: src/common/menus/RunningApps.js:97
 msgid ""
@@ -380,13 +405,13 @@ msgstr ""
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
-msgstr ""
+msgstr "윈도우 필터"
 
 #: src/common/menus/RunningApps.js:99 resources/ui/gtk4/settings.ui:5010
 #: resources/ui/gtk4/settings.ui:5061 resources/ui/gtk3/settings.ui:4996
 #: resources/ui/gtk3/settings.ui:5053
 msgid "See tooltip for details."
-msgstr ""
+msgstr "자세한 정보를 툴팁을 봐주세요."
 
 #: src/common/menus/RunningApps.js:125
 msgid "Active Workspace Only"
@@ -402,7 +427,7 @@ msgstr ""
 
 #: src/common/menus/Bookmarks.js:33
 msgid "Bookmarks"
-msgstr ""
+msgstr "북마크"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -418,7 +443,7 @@ msgstr ""
 
 #: src/common/menus/Clipboard.js:54
 msgid "Clipboard"
-msgstr ""
+msgstr "클립보드"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -442,375 +467,375 @@ msgstr ""
 #. copied a vector image.
 #: src/common/menus/Clipboard.js:165
 msgid "Vector Image"
-msgstr ""
+msgstr "벡터 이미지"
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a raster image.
 #: src/common/menus/Clipboard.js:177
 msgid "Raster Image"
-msgstr ""
+msgstr "래스터 이미지"
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:366
 msgid "Novice"
-msgstr ""
+msgstr "초보"
 
 #. Translators: This is the tier 2 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:369
 msgid "Capable"
-msgstr ""
+msgstr "중수"
 
 #. Translators: This is the tier 3 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:372
 msgid "Skilled"
-msgstr ""
+msgstr "고수"
 
 #. Translators: This is the tier 4 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:375
 msgid "Expert"
-msgstr ""
+msgstr "전문"
 
 #. Translators: This is the tier 5 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:378
 msgid "Master"
-msgstr ""
+msgstr "마스터"
 
 #. Translators: This is the tier 1 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:384
 msgid "I"
-msgstr ""
+msgstr "I"
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:387
 msgid "II"
-msgstr ""
+msgstr "II"
 
 #. Translators: This is the tier 3 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:390
 msgid "III"
-msgstr ""
+msgstr "III"
 
 #. Translators: This is the tier 4 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:393
 msgid "IV"
-msgstr ""
+msgstr "IV"
 
 #. Translators: This is the tier 5 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:396
 msgid "V"
-msgstr ""
+msgstr "V"
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
 #: src/common/Achievements.js:412
 #, javascript-format
 msgid "%s Cancellor"
-msgstr ""
+msgstr "%s 취소자"
 
 #. Translators: The description of the '%s Cancellor' achievement.
 #: src/common/Achievements.js:415
 #, javascript-format
 msgid "Abort a selection %x times."
-msgstr ""
+msgstr "%x번 선택을 취소합니다."
 
 #. Translators: The name of the 'Select %x items.' achievement.
 #: src/common/Achievements.js:428
 #, javascript-format
 msgid "%s Pielot"
-msgstr ""
+msgstr "%s 파이ㄹ럿"
 
 #. Translators: The description of the '%s Pielot' achievement.
 #: src/common/Achievements.js:430
 #, javascript-format
 msgid "Select %x items."
-msgstr ""
+msgstr "%x개의 항목을 선택하세요."
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:444
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
-msgstr ""
+msgstr "%s 탑레벨 제스처-선택자"
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:447
 #, javascript-format
 msgid "%s Submenu Gesture-Selector"
-msgstr ""
+msgstr "%s 서브메뉴 제스처-선택자"
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:450
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
-msgstr ""
+msgstr "%s 서브-서브메뉴 제스처 선택자"
 
 #. Translators: The description of the 'Gesture-Selector' achievement.
 #: src/common/Achievements.js:457
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
-msgstr ""
+msgstr "마킹 모드에서 %d 깊이에서 %x개의 항목을 선택하세요."
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:474
 #, javascript-format
 msgid "%s Toplevel Click-Selector"
-msgstr ""
+msgstr "%s 탑레벨 클릭-선택자"
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Submenu Click-Selector"
-msgstr ""
+msgstr "%s 서브메뉴 클릭-선택자"
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:480
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
-msgstr ""
+msgstr "%s 서브-서브메뉴 클릭-선택자"
 
 #. Translators: The description of the 'Click-Selector' achievement.
 #: src/common/Achievements.js:487
 #, javascript-format
 msgid "Select %x items at depth %d with mouse clicks."
-msgstr ""
+msgstr "마우스 클릭으로 %d 깊이에서 %x개의 항목을 선택하세요."
 
 #. Translators: The name of the 'Select %x items at depth 1 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:509
 #, javascript-format
 msgid "%s Toplevel Selector"
-msgstr ""
+msgstr "%s 탑레벨 선택자"
 
 #. Translators: The name of the 'Select %x items at depth 2 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:512
 #, javascript-format
 msgid "%s Submenu Selector"
-msgstr ""
+msgstr "%s 서브메뉴 선택자"
 
 #. Translators: The name of the 'Select %x items at depth 3 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:515
 #, javascript-format
 msgid "%s Subsubmenu Selector"
-msgstr ""
+msgstr "%s 서브-서브메뉴 선택자"
 
 #. Translators: The description of the 'Selector' achievement.
 #: src/common/Achievements.js:527
 msgid "Select %x items at depth %d in less than %t milliseconds."
-msgstr ""
+msgstr "%t 밀리초 안에 %d 깊이에서 %x개의 항목을 선택하세요."
 
 #. Translators: The name of the 'Open the settings dialog %x times.'
 #. achievement.
 #: src/common/Achievements.js:547
 msgid "The Journey Is The Reward %i"
-msgstr ""
+msgstr "여행이 곧 보상! %i"
 
 #. Translators: The description of the 'The Journey Is The Reward %i'
 #. achievement.
 #: src/common/Achievements.js:550
 #, javascript-format
 msgid "Open the settings dialog %x times."
-msgstr ""
+msgstr "환경설정 창을 %x번 띄우세요."
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
 #: src/common/Achievements.js:565
 msgid "Nerd Alert %i"
-msgstr ""
+msgstr "덕후 경고!!! 삐용삐용 %i"
 
 #. Translators: The description of the 'Nerd Alert %i' achievement.
 #: src/common/Achievements.js:567
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
-msgstr ""
+msgstr "D-Bus 인터페이스로 %x개의 메뉴를 여세요."
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
 #: src/common/Achievements.js:581
 msgid "Entropie %i"
-msgstr ""
+msgstr "엔트로피 %i"
 
 #: src/common/Achievements.js:585
 #, javascript-format
 msgid "Generate %x random presets."
-msgstr ""
+msgstr "%x개의 랜덤 프리셋을 생성하세요."
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
 #: src/common/Achievements.js:598
 #, javascript-format
 msgid "%s Preset Exporter"
-msgstr ""
+msgstr "%s 프리셋 출력가"
 
 #. Translators: The description of the '%s Preset Exporter' achievement if
 #. only one preset needs to be exported.
 #: src/common/Achievements.js:602
 msgid "Export a custom preset."
-msgstr ""
+msgstr "사용자 정의 프리셋을 내보내세요."
 
 #. Translators: The description of the '%s Preset Exporter' achievement.
 #: src/common/Achievements.js:604
 #, javascript-format
 msgid "Export %x custom presets."
-msgstr ""
+msgstr "사용자 정의 프리셋을 %x개 내보내세요."
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
 #: src/common/Achievements.js:617
 #, javascript-format
 msgid "%s Preset Importer"
-msgstr ""
+msgstr "%s 프리셋 수입자"
 
 #. Translators: The description of the '%s Preset Importer' achievement if
 #. only one preset needs to be imported.
 #: src/common/Achievements.js:621
 msgid "Import a custom preset."
-msgstr ""
+msgstr "사용자 정의 프리셋을 가져오세요."
 
 #. Translators: The description of the '%s Preset Importer' achievement.
 #: src/common/Achievements.js:623
 #, javascript-format
 msgid "Import %x custom presets."
-msgstr ""
+msgstr "사용자 정의 프리셋을 %x개 가져오세요."
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
 #: src/common/Achievements.js:636
 #, javascript-format
 msgid "%s Menu Importer"
-msgstr ""
+msgstr "%s 메뉴 수입자"
 
 #. Translators: The description of the '%s Menu Importer' achievement if
 #. only one menu needs to be imported.
 #: src/common/Achievements.js:640
 msgid "Import a menu configuration."
-msgstr ""
+msgstr "메뉴 설정을 가져오세요."
 
 #. Translators: The description of the '%s Menu Importer' achievement.
 #: src/common/Achievements.js:642
 #, javascript-format
 msgid "Import %x menu configurations."
-msgstr ""
+msgstr "메뉴 설정을 %x개 가져오세요."
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
 #: src/common/Achievements.js:656
 #, javascript-format
 msgid "%s Menu Exporter"
-msgstr ""
+msgstr "%s 메뉴 수출업자"
 
 #. Translators: The description of the '%s Menu Exporter' achievement if
 #. only one menu needs to be exported.
 #: src/common/Achievements.js:660
 msgid "Export a menu configuration."
-msgstr ""
+msgstr "메뉴 설정을 내보내세요."
 
 #. Translators: The description of the '%s Menu Exporter' achievement.
 #: src/common/Achievements.js:662
 #, javascript-format
 msgid "Export %x menu configurations."
-msgstr ""
+msgstr "메뉴 설정을 %x개 내보내세요."
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
 #: src/common/Achievements.js:677
 msgid "There Should Be No More Than Twelve Items…? %i"
-msgstr ""
+msgstr "20개보다 많으면 불편할텐데...? %i"
 
 #. Translators: The description of the 'There Should Be No More Than Twelve
 #. Items…? %i' achievement.
 #: src/common/Achievements.js:680
 #, javascript-format
 msgid "Create %x items in the menu editor."
-msgstr ""
+msgstr "메뉴 편집기에서 %x개의 항목을 만드세요."
 
 #. Translators: The name of the 'Open a preview menu %x times.' achievement.
 #: src/common/Achievements.js:694
 #, javascript-format
 msgid "%s Menu Designer"
-msgstr ""
+msgstr "%s 메뉴 디자이너"
 
 #. Translators: The description of the '%s Menu Designer' achievement.
 #: src/common/Achievements.js:697
 #, javascript-format
 msgid "Open a preview menu %x times."
-msgstr ""
+msgstr "미리보기 메뉴를 %x번 여세요."
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:710
 msgid "Grumpie Rookie"
-msgstr ""
+msgstr "난쟁이 신인"
 
 #. Translators: The description of the 'Grumpie Rookie' achievement.
 #: src/common/Achievements.js:712
 #, javascript-format
 msgid "Open the tutorial menu %x times."
-msgstr ""
+msgstr "튜토리얼 메뉴를 %x번 여세요."
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:724
 msgid "Bachelor Pielot"
-msgstr ""
+msgstr "총각 파이ㄹ럿"
 
 #. Translators: The description of the 'Bachelor Pielot' achievement.
 #: src/common/Achievements.js:726
 msgid "Get all medals of the tutorial."
-msgstr ""
+msgstr "튜토리얼의 모든 메달을 따세요."
 
 #. Translators: The name of the hidden 'Delete all of your menus.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:738
 msgid "Say Good-Pie!"
-msgstr ""
+msgstr "굿-파이!"
 
 #. Translators: The description of the 'Say Good-Pie!' achievement.
 #: src/common/Achievements.js:740
 msgid "Delete all of your menus."
-msgstr ""
+msgstr "메뉴를 모두 삭제하세요."
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
 #. achievement.
 #: src/common/Achievements.js:753
 msgid "That's Philanthropie!"
-msgstr ""
+msgstr "박애주의!"
 
 #. Translators: The description of the 'That's Philanthropie!' achievement.
 #: src/common/Achievements.js:755
 msgid "Consider becoming a sponsor of Fly-Pie."
-msgstr ""
+msgstr "Fly-Pie의 스폰서가 되어주실래요? <3"
 
 #: src/prefs/AchievementsPage.js:117
 msgid "Do you really want to reset all statistics?"
-msgstr ""
+msgstr "정말로 모든 통계를 리셋하시겠어요?"
 
 #: src/prefs/AchievementsPage.js:118
 msgid "All achievements will be lost!"
-msgstr ""
+msgstr "모든 도전과제가 사라집니다!"
 
 #: src/prefs/MenuEditor.js:417
 msgid "No menus configured"
-msgstr ""
+msgstr "설정된 메뉴가 없어요"
 
 #: src/prefs/MenuEditor.js:420
 msgid "Create a new menu with the button in the top right corner."
-msgstr ""
+msgstr "오른쪽 위에 있는 버튼으로 새로운 메뉴를 추가해보세요."
 
 #: src/prefs/MenuEditor.js:450
 msgid "Add a new item"
-msgstr ""
+msgstr "항목 추가하기"
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag an action in the menu editor to the menu
@@ -1317,7 +1342,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:404 resources/ui/gtk3/settings.ui:441
 msgid "About"
-msgstr "약"
+msgstr "정보"
 
 #: resources/ui/gtk4/settings.ui:423 resources/ui/gtk3/settings.ui:420
 msgid ""
@@ -2087,7 +2112,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:5457 resources/ui/gtk3/settings.ui:5425
 msgid "Reset all achievements."
-msgstr ""
+msgstr "모든 도전과제 진행을 초기화합니다."
 
 #~ msgid "Cat"
 #~ msgstr "고양이"
