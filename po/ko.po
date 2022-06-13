@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-01 16:40+0100\n"
-"PO-Revision-Date: 2022-06-13 11:19+0000\n"
+"PO-Revision-Date: 2022-06-14 13:15+0000\n"
 "Last-Translator: colder_ <inner5740@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/>"
 "\n"
@@ -402,6 +402,9 @@ msgid ""
 "\"Fire\" or \"Water\". A negation would be \"^(?!.*Fire)\" to match anything "
 "but \"Fire\". Remember to use the live preview to instantly see the results!"
 msgstr ""
+"이걸로 표시된 창들을 필터링할 수 있습니다. \"Fire\"같은 간략한 단어를 "
+"사용하여 이름에 \"Fire\"가 포함된 창들만 표시하게 할 수 있습니다. 실시간 "
+"미리보기로 보는 것을 잊지 마세요!"
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
@@ -415,15 +418,15 @@ msgstr "자세한 정보를 툴팁을 봐주세요."
 
 #: src/common/menus/RunningApps.js:125
 msgid "Active Workspace Only"
-msgstr ""
+msgstr "사용중인 워크스페이스만"
 
 #: src/common/menus/RunningApps.js:126
 msgid "Group by Application"
-msgstr ""
+msgstr "같은 앱을 그룹으로 표시"
 
 #: src/common/menus/RunningApps.js:127
 msgid "Peek on Hover"
-msgstr ""
+msgstr "마우스를 올려 미리보기"
 
 #: src/common/menus/Bookmarks.js:33
 msgid "Bookmarks"
@@ -433,13 +436,13 @@ msgstr "북마크"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Bookmarks.js:40
 msgid "Shows your frequently used directories."
-msgstr ""
+msgstr "자주 사용하는 디렉토리들을 표시합니다."
 
 #: src/common/menus/Bookmarks.js:44
 msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
-msgstr ""
+msgstr "<b>북마크</b> 메뉴는 휴지통, 데스크탑과 북마크된 디렉토리들을 표시합니다."
 
 #: src/common/menus/Clipboard.js:54
 msgid "Clipboard"
@@ -449,19 +452,19 @@ msgstr "클립보드"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Clipboard.js:61
 msgid "Shows recently copied things."
-msgstr ""
+msgstr "최근에 복사한 것들을 표시합니다."
 
 #: src/common/menus/Clipboard.js:64
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
-msgstr ""
+msgstr "<b>클립보드</b> 메뉴는 최근에 복사한 것들을 표시합니다."
 
 #: src/common/menus/Clipboard.js:94
 msgid "First Child Angle"
-msgstr ""
+msgstr "첫번째 항목 각도"
 
 #: src/common/menus/Clipboard.js:94
 msgid "Direction of the most recent item."
-msgstr ""
+msgstr "가장 최근 항목의 각도를 설정합니다."
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a vector image.
@@ -815,7 +818,7 @@ msgstr "박애주의!"
 #. Translators: The description of the 'That's Philanthropie!' achievement.
 #: src/common/Achievements.js:755
 msgid "Consider becoming a sponsor of Fly-Pie."
-msgstr "Fly-Pie의 스폰서가 되어주실래요? <3"
+msgstr "Fly-Pie의 스폰서가 되어주세요."
 
 #: src/prefs/AchievementsPage.js:117
 msgid "Do you really want to reset all statistics?"
@@ -844,52 +847,52 @@ msgstr "항목 추가하기"
 #. attempts to drag an action in the menu editor to the menu overview.
 #: src/prefs/MenuEditor.js:787 src/prefs/MenuEditorPage.js:927
 msgid "Actions cannot be turned into toplevel menus."
-msgstr ""
+msgstr "동작은 탑레벨 메뉴로 사용할 수 없습니다."
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag external stuff to the menu editor's
 #. overview.
 #: src/prefs/MenuEditor.js:807
 msgid "You can only create new Action items inside of Custom Menus."
-msgstr ""
+msgstr "사용자 정의 메뉴 안에서만 새로운 동작을 생성할 수 있습니다."
 
 #: src/prefs/ImageChooserButton.js:97
 #: resources/ui/gtk4/imageChooserButton.ui:16
 #: resources/ui/gtk3/imageChooserButton.ui:16
 msgid "(None)"
-msgstr ""
+msgstr "(없음)"
 
 #: src/prefs/MenuEditorPage.js:194 src/prefs/MenuEditorPage.js:264
 #: src/prefs/SettingsPage.js:263 src/prefs/SettingsPage.js:318
 msgid "JSON Files"
-msgstr ""
+msgstr "JSON 파일"
 
 #: src/prefs/MenuEditorPage.js:201 src/prefs/MenuEditorPage.js:271
 #: src/prefs/SettingsPage.js:270 src/prefs/SettingsPage.js:325
 msgid "All Files"
-msgstr ""
+msgstr "모든 파일"
 
 #: src/prefs/MenuEditorPage.js:206
 msgid "Export"
-msgstr ""
+msgstr "내보내기"
 
 #: src/prefs/MenuEditorPage.js:235
 msgid "Could not export the menu configuration."
-msgstr ""
+msgstr "메뉴 설정을 내보낼 수 없습니다."
 
 #: src/prefs/MenuEditorPage.js:276
 msgid "Import"
-msgstr ""
+msgstr "불러오기"
 
 #: src/prefs/MenuEditorPage.js:310
 msgid "Could not import the menu configuration."
-msgstr ""
+msgstr "메뉴 설정을 불러올 수 없습니다."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:382
 msgid "You should try to have no more than twelve items in your menus."
-msgstr ""
+msgstr "메뉴 안에 항목들이 20개가 넘게 있으면 불편할 거예요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -897,28 +900,29 @@ msgstr ""
 msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
-msgstr ""
+msgstr "항목들의 수가 짝수라면 각각 항목의 위치를 외우기가 쉬워요. 4, 6, 8개가 "
+"적당해요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:388
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "Fly-Pie는 <a href=\"%s\">GitHub</a>에 있는 오픈소스 프로그램이에요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:392
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "새로운 아이디어가 생각난다면 <a href=\"%s\">GitHub</a>에 올려주세요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:396
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "<a href=\"%s\">GitHub</a>에서 버그를 신고할 수 있어요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -926,7 +930,7 @@ msgstr ""
 msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
-msgstr ""
+msgstr "각 메뉴에 항목을 8개 이상 추가해서 Fly-Pie를 효율적으로 사용해 보세요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -934,13 +938,14 @@ msgstr ""
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
-msgstr ""
+msgstr "모든 메뉴를 삭제하고, 로그아웃했다가 다시 로그인한다면 기본 설정으로 "
+"바뀌어있을거예요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:406
 msgid "You can reorder the menu items on the left via drag and drop."
-msgstr ""
+msgstr "왼쪽에 있는 메뉴 항목들을 드래그&드롭으로 순서를 변경할 수 있어요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -949,7 +954,8 @@ msgstr ""
 msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
 "<a href=\"%s\">Github</a>."
-msgstr ""
+msgstr "터미널 명령어로 메뉴를 열 수도 있어요. 자세한 내용은 <a href=\"%s\">GitHub</"
+"a>에서 찾아보세요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -986,37 +992,37 @@ msgstr ""
 #. Translators: The left-most item of the menu editor bread crumbs.
 #: src/prefs/MenuEditorPage.js:990
 msgid "All Menus"
-msgstr ""
+msgstr "모든 메뉴"
 
 #: src/prefs/SettingsPage.js:275
 msgid "Save"
-msgstr ""
+msgstr "저장"
 
 #: src/prefs/SettingsPage.js:330
 msgid "Load"
-msgstr ""
+msgstr "불러오기"
 
 #: src/prefs/SettingsPage.js:347
 msgid "Failed to load preset!"
-msgstr ""
+msgstr "프리셋 불러오기 실패!"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:182
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big>선택 시간: <b>%d 밀리초</b></big>"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:187
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big>제일 짧은 선택 시간: <b>%d 밀리초</b></big>"
 
 #. Translators: This is the name of the tutorial menu.
 #. Translators: This is the name of the default menu.
 #: src/prefs/ExampleMenu.js:27 src/extension/DefaultMenu.js:29
 msgid "Example Menu"
-msgstr ""
+msgstr "메뉴 예시"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1024,7 +1030,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:66
 msgid "Cold "
-msgstr ""
+msgstr "차가운 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1032,7 +1038,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:71
 msgid "Hot "
-msgstr ""
+msgstr "뜨거운 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1040,7 +1046,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:76
 msgid "Wet "
-msgstr ""
+msgstr "촉촉한 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1048,7 +1054,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:81
 msgid "Deadly "
-msgstr ""
+msgstr "죽음의 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1056,7 +1062,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:86
 msgid "Smelly "
-msgstr ""
+msgstr "냄새나는 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1064,7 +1070,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:91
 msgid "Vegan "
-msgstr ""
+msgstr "채식주의 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1072,7 +1078,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:105
 msgid "Chocolate "
-msgstr ""
+msgstr "초콜릿 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1080,7 +1086,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:110
 msgid "Cherry "
-msgstr ""
+msgstr "체리 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1088,7 +1094,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:115
 msgid "Garlic "
-msgstr ""
+msgstr "마늘 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1096,7 +1102,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:120
 msgid "Apple "
-msgstr ""
+msgstr "사과 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1104,7 +1110,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:125
 msgid "Pepper "
-msgstr ""
+msgstr "고추 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1112,7 +1118,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:139
 msgid "Pie"
-msgstr ""
+msgstr "파이 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1120,7 +1126,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:144
 msgid "Cake"
-msgstr ""
+msgstr "케이크 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1128,7 +1134,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:149
 msgid "Muffin"
-msgstr ""
+msgstr "머핀 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1136,7 +1142,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:154
 msgid "Doughnut"
-msgstr ""
+msgstr "도넛 "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1144,87 +1150,87 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:159
 msgid "Cookie"
-msgstr ""
+msgstr "쿠키 "
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:37
 msgid "Sound"
-msgstr ""
+msgstr "소리"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:42
 msgid "Mute"
-msgstr ""
+msgstr "끄기"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:50
 msgid "Play / Pause"
-msgstr ""
+msgstr "재생 / 일시정지"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:58
 msgid "Next Title"
-msgstr ""
+msgstr "다음 타이틀"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:66
 msgid "Previous Title"
-msgstr ""
+msgstr "이전 타이틀"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:87
 msgid "Maximize Window"
-msgstr ""
+msgstr "창 최대화"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:95
 msgid "Fly-Pie Settings"
-msgstr ""
+msgstr "Fly-Pie 설정"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:103
 msgid "Close Window"
-msgstr ""
+msgstr "창 닫기"
 
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
 #: src/extension/DefaultMenu.js:135
 msgid "Next Workspace"
-msgstr ""
+msgstr "다음 워크스페이스"
 
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
 #: src/extension/DefaultMenu.js:144
 msgid "Previous Workspace"
-msgstr ""
+msgstr "이전 워크스페이스"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:155
 msgid "Switch Workspace"
-msgstr ""
+msgstr "워크스페이스 바꾸기"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:160
 msgid "Go Up"
-msgstr ""
+msgstr "위로"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:168
 msgid "Go Down"
-msgstr ""
+msgstr "아래로"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:181
 msgid "Move Window"
-msgstr ""
+msgstr "창 옮기기"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:186
 msgid "Move Window Up"
-msgstr ""
+msgstr "위로 창 옮기기"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:194
 msgid "Move Window Down"
-msgstr ""
+msgstr "아래로 창 옮기기"
 
 #: src/extension/Background.js:93
 msgid "Close"
@@ -1234,111 +1240,111 @@ msgstr "닫기"
 #. opened'.
 #: src/extension/Background.js:99
 msgid "Flip Side"
-msgstr ""
+msgstr "뒤집기"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:194
 msgid "Fly-Pie Level Up!"
-msgstr ""
+msgstr "Fly-Pie 레벨업!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:196
 msgid "You reached level %i!"
-msgstr ""
+msgstr "이제 레벨 %i네요!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:216
 msgid "Fly-Pie Achievement Completed!"
-msgstr ""
+msgstr "Fly-Pie 도전과제 성공!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:218
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
-msgstr ""
+msgstr "\"%s\" 도전과제를 성공했네요!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
 #: src/extension/Daemon.js:562
 msgid "Show Achievements"
-msgstr ""
+msgstr "도전과제 보기"
 
 #: resources/ui/gtk4/copyValueButton.ui:6
 #: resources/ui/gtk3/copyValueButton.ui:6
 msgid "Copy left value to right side"
-msgstr ""
+msgstr "왼쪽 값은 오른쪽 값으로 복사하기"
 
 #: resources/ui/gtk4/iconSelectDialog.ui:19
 #: resources/ui/gtk3/iconSelectDialog.ui:19
 msgid "Select Icon"
-msgstr ""
+msgstr "아이콘 선택"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/gtk4/iconSelectDialog.ui:44
 #: resources/ui/gtk3/iconSelectDialog.ui:100
 msgid "Icon Theme"
-msgstr ""
+msgstr "아이콘 테마"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/gtk4/iconSelectDialog.ui:106
 #: resources/ui/gtk3/iconSelectDialog.ui:111
 msgid "Custom Icon"
-msgstr ""
+msgstr "사용자 지정 아이콘"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:19 resources/ui/gtk3/settings.ui:19
 msgid "Linear"
-msgstr ""
+msgstr "Linear"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:23 resources/ui/gtk3/settings.ui:23
 msgid "Ease"
-msgstr ""
+msgstr "Ease"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:27 resources/ui/gtk3/settings.ui:27
 msgid "Ease-In"
-msgstr ""
+msgstr "Ease-In"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:31 resources/ui/gtk3/settings.ui:31
 msgid "Ease-Out"
-msgstr ""
+msgstr "Ease-Out"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:35 resources/ui/gtk3/settings.ui:35
 msgid "Ease-In-Out"
-msgstr ""
+msgstr "Ease-In-Out"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:39 resources/ui/gtk3/settings.ui:39
 msgid "Ease-In-Quad"
-msgstr ""
+msgstr "Ease-In-Quad"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:43 resources/ui/gtk3/settings.ui:43
 msgid "Ease-Out-Quad"
-msgstr ""
+msgstr "Ease-Out-Quad"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:47 resources/ui/gtk3/settings.ui:47
 msgid "Ease-In-Out-Quad"
-msgstr ""
+msgstr "Ease-In-Out-Quad"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:51 resources/ui/gtk3/settings.ui:51
 msgid "Ease-In-Back"
-msgstr ""
+msgstr "Ease-In-Back"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:55 resources/ui/gtk3/settings.ui:55
 msgid "Ease-Out-Back"
-msgstr ""
+msgstr "Ease-Out-Back"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:59 resources/ui/gtk3/settings.ui:59
 msgid "Ease-In-Out-Back"
-msgstr ""
+msgstr "Ease-In-Out-Back"
 
 #: resources/ui/gtk4/settings.ui:404 resources/ui/gtk3/settings.ui:441
 msgid "About"
@@ -1403,7 +1409,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:596 resources/ui/gtk3/settings.ui:609
 #: resources/ui/gtk3/settings.ui:622 resources/ui/gtk3/settings.ui:635
 msgid "- none -"
-msgstr ""
+msgstr "- 없음 -"
 
 #: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:649
 msgid ""
@@ -1720,7 +1726,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2545 resources/ui/gtk3/settings.ui:2702
 #: resources/ui/gtk3/settings.ui:3292 resources/ui/gtk3/settings.ui:3345
 msgid "Fixed"
-msgstr ""
+msgstr "고정"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
 #: resources/ui/gtk4/settings.ui:2097 resources/ui/gtk4/settings.ui:2161
@@ -1728,28 +1734,28 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2086 resources/ui/gtk3/settings.ui:2152
 #: resources/ui/gtk3/settings.ui:2553 resources/ui/gtk3/settings.ui:2710
 msgid "Auto"
-msgstr ""
+msgstr "자동"
 
 #: resources/ui/gtk4/settings.ui:2330 resources/ui/gtk4/settings.ui:3036
 #: resources/ui/gtk3/settings.ui:2321 resources/ui/gtk3/settings.ui:3018
 msgid "Icon Opacity"
-msgstr ""
+msgstr "아이콘 투명도"
 
 #: resources/ui/gtk4/settings.ui:2373 resources/ui/gtk4/settings.ui:3130
 #: resources/ui/gtk3/settings.ui:2360 resources/ui/gtk3/settings.ui:3107
 msgid "Icon Scale"
-msgstr ""
+msgstr "아이콘 크기"
 
 #: resources/ui/gtk4/settings.ui:2403 resources/ui/gtk4/settings.ui:3149
 #: resources/ui/gtk3/settings.ui:2389 resources/ui/gtk3/settings.ui:3125
 msgid "Icon Crop"
-msgstr ""
+msgstr "아이콘 잘라내기"
 
 #: resources/ui/gtk4/settings.ui:2454 resources/ui/gtk4/settings.ui:3200
 #: resources/ui/gtk4/settings.ui:3586 resources/ui/gtk3/settings.ui:2439
 #: resources/ui/gtk3/settings.ui:3175 resources/ui/gtk3/settings.ui:3552
 msgid "Background Image"
-msgstr ""
+msgstr "배경 이미지"
 
 #: resources/ui/gtk4/settings.ui:2512 resources/ui/gtk4/settings.ui:3229
 #: resources/ui/gtk3/settings.ui:2488 resources/ui/gtk3/settings.ui:3201
@@ -1786,7 +1792,7 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:2884 resources/ui/gtk4/settings.ui:3435
 #: resources/ui/gtk3/settings.ui:2866 resources/ui/gtk3/settings.ui:3405
 msgid "Offset"
-msgstr ""
+msgstr "오프셋"
 
 #. Draw above (grand)children items. There's an explanation string below in the application.
 #: resources/ui/gtk4/settings.ui:2995 resources/ui/gtk4/settings.ui:3524
@@ -2006,40 +2012,40 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:4660 resources/ui/gtk4/settings.ui:4933
 #: resources/ui/gtk3/settings.ui:4625 resources/ui/gtk3/settings.ui:4918
 msgid "Live Preview"
-msgstr ""
+msgstr "실시간 미리보기"
 
 #. Caption of the menu editor page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:4689 resources/ui/gtk3/settings.ui:5202
 msgid "Menu Editor"
-msgstr ""
+msgstr "메뉴 편집기"
 
 #: resources/ui/gtk4/settings.ui:4718 resources/ui/gtk3/settings.ui:4684
 msgid "Add a new menu item."
-msgstr ""
+msgstr "새로운 메뉴 항목을 추가합니다."
 
 #: resources/ui/gtk4/settings.ui:4797 resources/ui/gtk3/settings.ui:4771
 msgid "Stash"
-msgstr ""
+msgstr "스태쉬"
 
 #: resources/ui/gtk4/settings.ui:4813 resources/ui/gtk3/settings.ui:4788
 msgid "Store items here and re-use them later."
-msgstr ""
+msgstr "여기서 항목을 저장하고 나중에 다시 사용이 가능합니다."
 
 #: resources/ui/gtk4/settings.ui:4857 resources/ui/gtk3/settings.ui:4832
 msgid "Trash"
-msgstr ""
+msgstr "휴지통"
 
 #: resources/ui/gtk4/settings.ui:4873 resources/ui/gtk3/settings.ui:4848
 msgid "Drop items here."
-msgstr ""
+msgstr "여기에 항목들을 드래그하세요."
 
 #: resources/ui/gtk4/settings.ui:4903 resources/ui/gtk3/settings.ui:4878
 msgid "Restore menus from a JSON file. This will override your current menus!"
-msgstr ""
+msgstr "JSON 파일을 불러옵니다. 현재 설정되어있는 메뉴를 덮어씌웁니다!!"
 
 #: resources/ui/gtk4/settings.ui:4909 resources/ui/gtk3/settings.ui:4890
 msgid "Export all menus to a JSON file."
-msgstr ""
+msgstr "모든 메뉴를 JSON 파일로 내보냅니다."
 
 #: resources/ui/gtk4/settings.ui:4986 resources/ui/gtk3/settings.ui:4972
 msgid "Name"
@@ -2047,7 +2053,7 @@ msgstr "이름"
 
 #: resources/ui/gtk4/settings.ui:5004 resources/ui/gtk3/settings.ui:4990
 msgid "Icon"
-msgstr ""
+msgstr "아이콘"
 
 #: resources/ui/gtk4/settings.ui:5022 resources/ui/gtk3/settings.ui:5008
 msgid ""
@@ -2056,10 +2062,13 @@ msgid ""
 "#rgb\" to the icon in order to draw a circle with the given RGB color behind "
 "the icon."
 msgstr ""
+"아이콘은 이미지 파일 경로, 현재 사용하고 있는 아이콘 테마, base64 인코딩된 "
+"데이터 URI, 텍스트, 이모지 중 하나로 선택할 수 있습니다. \"-#rgb\"를 "
+"아이콘에 추가하여 아이콘 뒤에 주어진 RGB 색상의 원을 그릴 수 있습니다."
 
 #: resources/ui/gtk4/settings.ui:5055 resources/ui/gtk3/settings.ui:5047
 msgid "Fixed Angle"
-msgstr ""
+msgstr "고정 각도"
 
 #: resources/ui/gtk4/settings.ui:5071 resources/ui/gtk3/settings.ui:5063
 msgid ""
@@ -2075,7 +2084,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:5109 resources/ui/gtk3/settings.ui:5101
 msgid "This will open the menu."
-msgstr ""
+msgstr "입력하면 메뉴가 열립니다."
 
 #: resources/ui/gtk4/settings.ui:5123 resources/ui/gtk3/settings.ui:5115
 msgid ""
