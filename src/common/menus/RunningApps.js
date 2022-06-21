@@ -180,22 +180,26 @@ var menu = {
         parentMenu.children.push({
           name: window.get_title(),
           icon: icon,
-
+          wasMinimized: false,
           // If selected, we switch to the corresponding window. If window peeking is
           // enabled, this is not required as the hover event was fired already.
           onSelect: () => {
-            if (!data.hoverPeeking) {
-              window.get_workspace().activate_with_focus(
-                  window, global.display.get_current_time_roundtrip());
-            }
+            window.get_workspace().activate_with_focus(
+                window, global.display.get_current_time_roundtrip());
           },
 
           // If hovered, we switch to the corresponding window if window peeking is
           // enabled.
           onHover: () => {
             if (data.hoverPeeking) {
+              this.wasMinimized = window.minimized;
               window.get_workspace().activate_with_focus(
                   window, global.display.get_current_time_roundtrip());
+            }
+          },
+          onUnhover: () => {
+            if (data.hoverPeeking && this.wasMinimized) {
+              window.minimize();
             }
           }
         });

@@ -12,6 +12,7 @@
 #### Enhancements
 
 * All included SVG files have been optimized to reduce the size of the installed extension.
+* In RunningApps, hoverPeeking minimizes if window wasnt already open.
 
 #### Bug Fixes
 
