@@ -19,6 +19,7 @@
 * Fixed a bug which could lead to an unexpected selection of an item if the previous selection in marking mode was aborted (thank you [@GestaltEngine](https://github.com/GestaltEngine) for this fix!).
 * There seem to be cases were `libadwaita` is not available on GNOME 42 (e.g. Pop!_OS 22.04 beta). The preferences dialog now tries to fallback to the GTK4-only variant if `libadwaita is not available`.
 * Fixed garbled text in the tutorial by justifying text to the left.
+* Fixed an issue which made the menu editor not properly show shortcuts involving '<' or '>'.
 
 ## [Fly-Pie 16](https://github.com/schneegans/fly-pie/releases/tag/v16)
 

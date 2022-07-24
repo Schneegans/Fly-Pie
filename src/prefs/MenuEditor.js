@@ -192,8 +192,7 @@ function registerWidgets() {
 
             // The shortcut label is only required for the menu mode.
             if (itemState == ItemState.GRID) {
-              this._shortcutLabel =
-                  new Gtk.Label({ellipsize: Pango.EllipsizeMode.END, use_markup: true});
+              this._shortcutLabel = new Gtk.Label({ellipsize: Pango.EllipsizeMode.END});
               utils.addCSSClass(this._shortcutLabel, 'caption');
               utils.addCSSClass(this._shortcutLabel, 'dim-label');
             }
