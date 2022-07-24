@@ -12,13 +12,13 @@
 #### Enhancements
 
 * All included SVG files have been optimized to reduce the size of the installed extension.
-* In RunningApps, hoverPeeking minimizes if window wasnt already open.
+* The Running-Apps Menu, will now minimize windows which were un-minimized by hover-peeking when the corresponding item is not hovered anymore.
 
 #### Bug Fixes
 
 * Fixed a bug which could lead to an unexpected selection of an item if the previous selection in marking mode was aborted (thank you [@GestaltEngine](https://github.com/GestaltEngine) for this fix!).
 * There seem to be cases were `libadwaita` is not available on GNOME 42 (e.g. Pop!_OS 22.04 beta). The preferences dialog now tries to fallback to the GTK4-only variant if `libadwaita is not available`.
-
+* Fixed garbled text in the tutorial by justifying text to the left.
 
 ## [Fly-Pie 16](https://github.com/schneegans/fly-pie/releases/tag/v16)
 
