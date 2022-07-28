@@ -66,6 +66,7 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
 
 <h2 align="center">🥇 Current Gold Sponsors</h2>
 <p align="center">
+    <a href="https://github.com/D3vil0per">D3vil0per</a><br>
     Maxence Sebald<br>
     <a href="https://github.com/dennis1248">Dennis ten Hoove</a><br>
 </p>
