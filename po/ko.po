@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 16:40+0100\n"
+"POT-Creation-Date: 2022-09-13 21:04+0200\n"
 "PO-Revision-Date: 2022-06-14 13:15+0000\n"
 "Last-Translator: colder_ <inner5740@gmail.com>\n"
-"Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/>"
-"\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/"
+">\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,8 +86,9 @@ msgid ""
 "The <b>Launch Application</b> action executes any given command. This is "
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
-msgstr "<b>명령어 실행</b> 동작은 명령어를 실행합니다. 앱을 실행하는 목적이지만, "
-"다른 용도로도 사용이 가능합니다."
+msgstr ""
+"<b>명령어 실행</b> 동작은 명령어를 실행합니다. 앱을 실행하는 목적이지만, 다"
+"른 용도로도 사용이 가능합니다."
 
 #: src/common/actions/Command.js:69
 msgid "Command"
@@ -141,8 +142,8 @@ msgid ""
 msgstr ""
 "<b>D-Bus 신호</b> 동작은 혼자 쓰이면 아무것도 하지 않습니다. 하지만 <a href="
 "\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md\">D-"
-"Bus의 신호를 잡을 수 있다면</a>, 커맨드라인에서 커스텀 메뉴를 열 때 매우 "
-"유용하게 쓰일 수 있습니다."
+"Bus의 신호를 잡을 수 있다면</a>, 커맨드라인에서 커스텀 메뉴를 열 때 매우 유용"
+"하게 쓰일 수 있습니다."
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
@@ -168,8 +169,8 @@ msgid ""
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
 "write the same things."
 msgstr ""
-"<b>텍스트 입력</b> 동작은 텍스트를 복사한 뒤 Ctrl+V를 실행합니다. 같은 "
-"텍스트를 입력할 때 유용하게 쓰일 수 있습니다."
+"<b>텍스트 입력</b> 동작은 텍스트를 복사한 뒤 Ctrl+V를 실행합니다. 같은 텍스트"
+"를 입력할 때 유용하게 쓰일 수 있습니다."
 
 #: src/common/actions/InsertText.js:83
 msgid "Text"
@@ -197,7 +198,7 @@ msgstr "앱 선택"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
-#: src/prefs/MenuEditor.js:282
+#: src/prefs/MenuEditor.js:281
 msgid "Not Bound"
 msgstr "설정된 단축키가 없어요"
 
@@ -233,8 +234,8 @@ msgid ""
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
 msgstr ""
-"<b>자주 쓰는 앱들</b> 메뉴는 자주 쓰는 앱들을 나열합니다. 효율적으로 "
-"사용하려면, '최대 표시 개수'를 20개 정도로 설정하세요."
+"<b>자주 쓰는 앱들</b> 메뉴는 자주 쓰는 앱들을 나열합니다. 효율적으로 사용하려"
+"면, '최대 표시 개수'를 20개 정도로 설정하세요."
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
 #: src/common/menus/Clipboard.js:85
@@ -260,7 +261,8 @@ msgstr "화면 잠금, 전원 끄기 등을 실행합니다."
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
-msgstr "<b>시스템</b> 메뉴는 스크린 잠금, 전원 끄기, 환경성정 등 항목을 표시합니다."
+msgstr ""
+"<b>시스템</b> 메뉴는 스크린 잠금, 전원 끄기, 환경성정 등 항목을 표시합니다."
 
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:81
@@ -299,8 +301,8 @@ msgid ""
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended."
 msgstr ""
-"<b>사용자 정의 메뉴</b>는 여러 동작들과 서브메뉴들을 포함할 수 있습니다. "
-"항목을 정확하게 선택하려면, 20개 정도의 항목을 추천합니다."
+"<b>사용자 정의 메뉴</b>는 여러 동작들과 서브메뉴들을 포함할 수 있습니다. 항목"
+"을 정확하게 선택하려면, 20개 정도의 항목을 추천합니다."
 
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:43 src/extension/DefaultMenu.js:79
@@ -335,8 +337,8 @@ msgid ""
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
 msgstr ""
-"<b>최근 파일</b> 메뉴는 최근에 사용했던 파일들을 나열합니다. 효율적으로 "
-"사용하려면, '최대 표시 개수'를 20개 정도로 설정하세요."
+"<b>최근 파일</b> 메뉴는 최근에 사용했던 파일들을 나열합니다. 효율적으로 사용"
+"하려면, '최대 표시 개수'를 20개 정도로 설정하세요."
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
@@ -370,9 +372,9 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather set up your own menus!"
 msgstr ""
-"<b>메인 메뉴</b>는 설치되어 있는 앱들을 표시합니다. 보통 이 메뉴는 항목이 "
-"너무 많아 효율적으로 사용하기 어렵습니다. 사용자 정의 메뉴를 만드는게 더 "
-"좋은 선택일것 같네요!"
+"<b>메인 메뉴</b>는 설치되어 있는 앱들을 표시합니다. 보통 이 메뉴는 항목이 너"
+"무 많아 효율적으로 사용하기 어렵습니다. 사용자 정의 메뉴를 만드는게 더 좋은 "
+"선택일것 같네요!"
 
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:47 src/extension/DefaultMenu.js:111
@@ -391,8 +393,8 @@ msgid ""
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
-"<b>실행중인 앱</b> 메뉴는 현재 실행중인 앱들을 표시합니다. Alt+Tab과 "
-"흡사합니다. 항목들이 보통 자리를 계속 바꿔서, 많이 효율적이지는 않습니다."
+"<b>실행중인 앱</b> 메뉴는 현재 실행중인 앱들을 표시합니다. Alt+Tab과 흡사합니"
+"다. 항목들이 보통 자리를 계속 바꿔서, 많이 효율적이지는 않습니다."
 
 #: src/common/menus/RunningApps.js:97
 msgid ""
@@ -402,9 +404,9 @@ msgid ""
 "\"Fire\" or \"Water\". A negation would be \"^(?!.*Fire)\" to match anything "
 "but \"Fire\". Remember to use the live preview to instantly see the results!"
 msgstr ""
-"이걸로 표시된 창들을 필터링할 수 있습니다. \"Fire\"같은 간략한 단어를 "
-"사용하여 이름에 \"Fire\"가 포함된 창들만 표시하게 할 수 있습니다. 실시간 "
-"미리보기로 보는 것을 잊지 마세요!"
+"이걸로 표시된 창들을 필터링할 수 있습니다. \"Fire\"같은 간략한 단어를 사용하"
+"여 이름에 \"Fire\"가 포함된 창들만 표시하게 할 수 있습니다. 실시간 미리보기"
+"로 보는 것을 잊지 마세요!"
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
@@ -442,7 +444,8 @@ msgstr "자주 사용하는 디렉토리들을 표시합니다."
 msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
-msgstr "<b>북마크</b> 메뉴는 휴지통, 데스크탑과 북마크된 디렉토리들을 표시합니다."
+msgstr ""
+"<b>북마크</b> 메뉴는 휴지통, 데스크탑과 북마크된 디렉토리들을 표시합니다."
 
 #: src/common/menus/Clipboard.js:54
 msgid "Clipboard"
@@ -828,15 +831,15 @@ msgstr "정말로 모든 통계를 리셋하시겠어요?"
 msgid "All achievements will be lost!"
 msgstr "모든 도전과제가 사라집니다!"
 
-#: src/prefs/MenuEditor.js:417
+#: src/prefs/MenuEditor.js:416
 msgid "No menus configured"
 msgstr "설정된 메뉴가 없어요"
 
-#: src/prefs/MenuEditor.js:420
+#: src/prefs/MenuEditor.js:419
 msgid "Create a new menu with the button in the top right corner."
 msgstr "오른쪽 위에 있는 버튼으로 새로운 메뉴를 추가해보세요."
 
-#: src/prefs/MenuEditor.js:450
+#: src/prefs/MenuEditor.js:449
 msgid "Add a new item"
 msgstr "항목 추가하기"
 
@@ -845,14 +848,14 @@ msgstr "항목 추가하기"
 #. overview.
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag an action in the menu editor to the menu overview.
-#: src/prefs/MenuEditor.js:787 src/prefs/MenuEditorPage.js:927
+#: src/prefs/MenuEditor.js:786 src/prefs/MenuEditorPage.js:930
 msgid "Actions cannot be turned into toplevel menus."
 msgstr "동작은 탑레벨 메뉴로 사용할 수 없습니다."
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag external stuff to the menu editor's
 #. overview.
-#: src/prefs/MenuEditor.js:807
+#: src/prefs/MenuEditor.js:806
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr "사용자 정의 메뉴 안에서만 새로운 동작을 생성할 수 있습니다."
 
@@ -900,8 +903,9 @@ msgstr "메뉴 안에 항목들이 20개가 넘게 있으면 불편할 거예요
 msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
-msgstr "항목들의 수가 짝수라면 각각 항목의 위치를 외우기가 쉬워요. 4, 6, 8개가 "
-"적당해요."
+msgstr ""
+"항목들의 수가 짝수라면 각각 항목의 위치를 외우기가 쉬워요. 4, 6, 8개가 적당해"
+"요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -938,8 +942,9 @@ msgstr "각 메뉴에 항목을 8개 이상 추가해서 Fly-Pie를 효율적으
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
-msgstr "모든 메뉴를 삭제하고, 로그아웃했다가 다시 로그인한다면 기본 설정으로 "
-"바뀌어있을거예요."
+msgstr ""
+"모든 메뉴를 삭제하고, 로그아웃했다가 다시 로그인한다면 기본 설정으로 바뀌어있"
+"을거예요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -954,7 +959,8 @@ msgstr "왼쪽에 있는 메뉴 항목들을 드래그&드롭으로 순서를 �
 msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
 "<a href=\"%s\">Github</a>."
-msgstr "터미널 명령어로 메뉴를 열 수도 있어요. 자세한 내용은 <a href=\"%s\">GitHub</"
+msgstr ""
+"터미널 명령어로 메뉴를 열 수도 있어요. 자세한 내용은 <a href=\"%s\">GitHub</"
 "a>에서 찾아보세요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
@@ -989,8 +995,16 @@ msgid ""
 "</a>"
 msgstr ""
 
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:431
+msgid ""
+"If you cannot use a specific keyboard shortcut, you may check you system "
+"settings as it may be used already."
+msgstr ""
+
 #. Translators: The left-most item of the menu editor bread crumbs.
-#: src/prefs/MenuEditorPage.js:990
+#: src/prefs/MenuEditorPage.js:993
 msgid "All Menus"
 msgstr "모든 메뉴"
 
@@ -1243,29 +1257,29 @@ msgid "Flip Side"
 msgstr "뒤집기"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:194
+#: src/extension/Daemon.js:212
 msgid "Fly-Pie Level Up!"
 msgstr "Fly-Pie 레벨업!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:196
+#: src/extension/Daemon.js:214
 msgid "You reached level %i!"
 msgstr "이제 레벨 %i네요!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:216
+#: src/extension/Daemon.js:234
 msgid "Fly-Pie Achievement Completed!"
 msgstr "Fly-Pie 도전과제 성공!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:218
+#: src/extension/Daemon.js:236
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
 msgstr "\"%s\" 도전과제를 성공했네요!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:562
+#: src/extension/Daemon.js:598
 msgid "Show Achievements"
 msgstr "도전과제 보기"
 
@@ -2062,9 +2076,9 @@ msgid ""
 "#rgb\" to the icon in order to draw a circle with the given RGB color behind "
 "the icon."
 msgstr ""
-"아이콘은 이미지 파일 경로, 현재 사용하고 있는 아이콘 테마, base64 인코딩된 "
-"데이터 URI, 텍스트, 이모지 중 하나로 선택할 수 있습니다. \"-#rgb\"를 "
-"아이콘에 추가하여 아이콘 뒤에 주어진 RGB 색상의 원을 그릴 수 있습니다."
+"아이콘은 이미지 파일 경로, 현재 사용하고 있는 아이콘 테마, base64 인코딩된 데"
+"이터 URI, 텍스트, 이모지 중 하나로 선택할 수 있습니다. \"-#rgb\"를 아이콘에 "
+"추가하여 아이콘 뒤에 주어진 RGB 색상의 원을 그릴 수 있습니다."
 
 #: resources/ui/gtk4/settings.ui:5055 resources/ui/gtk3/settings.ui:5047
 msgid "Fixed Angle"

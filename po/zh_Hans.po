@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 16:40+0100\n"
+"POT-Creation-Date: 2022-09-13 21:04+0200\n"
 "PO-Revision-Date: 2022-05-12 10:19+0000\n"
 "Last-Translator: Eric <alchemillatruth@purelymail.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"fly-pie/core/zh_Hans/>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/fly-"
+"pie/core/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -197,7 +197,7 @@ msgstr "选择应用"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
-#: src/prefs/MenuEditor.js:282
+#: src/prefs/MenuEditor.js:281
 msgid "Not Bound"
 msgstr "待绑定按键"
 
@@ -829,15 +829,15 @@ msgstr ""
 msgid "All achievements will be lost!"
 msgstr ""
 
-#: src/prefs/MenuEditor.js:417
+#: src/prefs/MenuEditor.js:416
 msgid "No menus configured"
 msgstr "没有设置好的菜单"
 
-#: src/prefs/MenuEditor.js:420
+#: src/prefs/MenuEditor.js:419
 msgid "Create a new menu with the button in the top right corner."
 msgstr "点击右上角的按钮新建菜单。"
 
-#: src/prefs/MenuEditor.js:450
+#: src/prefs/MenuEditor.js:449
 msgid "Add a new item"
 msgstr "新建一项"
 
@@ -846,14 +846,14 @@ msgstr "新建一项"
 #. overview.
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag an action in the menu editor to the menu overview.
-#: src/prefs/MenuEditor.js:787 src/prefs/MenuEditorPage.js:927
+#: src/prefs/MenuEditor.js:786 src/prefs/MenuEditorPage.js:930
 msgid "Actions cannot be turned into toplevel menus."
 msgstr "一项操作不能作为顶级菜单。"
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag external stuff to the menu editor's
 #. overview.
-#: src/prefs/MenuEditor.js:807
+#: src/prefs/MenuEditor.js:806
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr "只有自定义菜单里面才能创建一项新的操作。"
 
@@ -991,8 +991,16 @@ msgid ""
 "</a>"
 msgstr ""
 
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:431
+msgid ""
+"If you cannot use a specific keyboard shortcut, you may check you system "
+"settings as it may be used already."
+msgstr ""
+
 #. Translators: The left-most item of the menu editor bread crumbs.
-#: src/prefs/MenuEditorPage.js:990
+#: src/prefs/MenuEditorPage.js:993
 msgid "All Menus"
 msgstr "所有菜单"
 
@@ -1246,29 +1254,29 @@ msgid "Flip Side"
 msgstr "翻面"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:194
+#: src/extension/Daemon.js:212
 msgid "Fly-Pie Level Up!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:196
+#: src/extension/Daemon.js:214
 msgid "You reached level %i!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:216
+#: src/extension/Daemon.js:234
 msgid "Fly-Pie Achievement Completed!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:218
+#: src/extension/Daemon.js:236
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
 msgstr ""
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:562
+#: src/extension/Daemon.js:598
 msgid "Show Achievements"
 msgstr ""
 
@@ -1512,7 +1520,8 @@ msgstr "点哪儿都好使！"
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
-msgstr "只要你的鼠标指针停留在项目的楔形区域里，你是直接点击项目还是在屏幕的边缘点击"
+msgstr ""
+"只要你的鼠标指针停留在项目的楔形区域里，你是直接点击项目还是在屏幕的边缘点击"
 "都没有关系。"
 
 #: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1030
