@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 16:40+0100\n"
+"POT-Creation-Date: 2022-09-13 21:04+0200\n"
 "PO-Revision-Date: 2022-04-01 18:12+0000\n"
 "Last-Translator: GestaltEngine <sabdenovchingiz@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/fly-pie/core/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/fly-pie/core/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -147,8 +147,8 @@ msgid ""
 "in custom menus opened via the command line."
 msgstr ""
 "Действие <b>D-Bus сигнал</b> само по себе ничего не делает. Но вы <a href="
-"\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md\""
-">можете прослушивать D-Bus, ожидая этот сигнал</a>. Это может быть очень "
+"\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md"
+"\">можете прослушивать D-Bus, ожидая этот сигнал</a>. Это может быть очень "
 "полезно для пользовательских меню открытых через командную строку."
 
 #: src/common/actions/DBusSignal.js:67
@@ -205,7 +205,7 @@ msgstr "Выбрать приложение"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
-#: src/prefs/MenuEditor.js:282
+#: src/prefs/MenuEditor.js:281
 msgid "Not Bound"
 msgstr "Нет сочетания"
 
@@ -421,9 +421,9 @@ msgstr ""
 "Это поле позволяет фильтровать показываемые окна. Есть поддержка регулярных "
 "выражений: простая строка \"Fire\" покажет только те окна, в названиях "
 "которых содержится \"Fire\" (напр. \"Firefox\"). \"Fire|Water\" разрешит "
-"совпадение либо с \"Fire\", либо с \"Water\". Отрицание через \"^(?!.*Fire)\""
-" разрешит всё, кроме \"Fire\". Помните, что предварительный просмотр сразу "
-"покажет вам результат!"
+"совпадение либо с \"Fire\", либо с \"Water\". Отрицание через \"^(?!."
+"*Fire)\" разрешит всё, кроме \"Fire\". Помните, что предварительный просмотр "
+"сразу покажет вам результат!"
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
@@ -849,15 +849,15 @@ msgstr "Вы действительно хотите сбросить всю с�
 msgid "All achievements will be lost!"
 msgstr "Все достижения будут утеряны!"
 
-#: src/prefs/MenuEditor.js:417
+#: src/prefs/MenuEditor.js:416
 msgid "No menus configured"
 msgstr "Нет конфигураций меню"
 
-#: src/prefs/MenuEditor.js:420
+#: src/prefs/MenuEditor.js:419
 msgid "Create a new menu with the button in the top right corner."
 msgstr "Нажмите на кнопку в правом верхнем углу, чтобы создать новое меню."
 
-#: src/prefs/MenuEditor.js:450
+#: src/prefs/MenuEditor.js:449
 msgid "Add a new item"
 msgstr "Добавить"
 
@@ -866,14 +866,14 @@ msgstr "Добавить"
 #. overview.
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag an action in the menu editor to the menu overview.
-#: src/prefs/MenuEditor.js:787 src/prefs/MenuEditorPage.js:927
+#: src/prefs/MenuEditor.js:786 src/prefs/MenuEditorPage.js:930
 msgid "Actions cannot be turned into toplevel menus."
 msgstr "Действие нельзя сделать главным меню."
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag external stuff to the menu editor's
 #. overview.
-#: src/prefs/MenuEditor.js:807
+#: src/prefs/MenuEditor.js:806
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr "Новые действия можно создать только внутри пользовательских меню."
 
@@ -931,8 +931,8 @@ msgstr ""
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr ""
-"Fly-Pie это свободное программное обеспечение доступное на <a href=\"%s\""
-">GitHub</a>."
+"Fly-Pie это свободное программное обеспечение доступное на <a href=\"%s"
+"\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -972,7 +972,8 @@ msgstr ""
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:406
 msgid "You can reorder the menu items on the left via drag and drop."
-msgstr "Вы можете изменить порядок пунктов меню слева с помощью перетаскивания."
+msgstr ""
+"Вы можете изменить порядок пунктов меню слева с помощью перетаскивания."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -982,8 +983,8 @@ msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
 "<a href=\"%s\">Github</a>."
 msgstr ""
-"Меню можно открывать с помощью командной строки. Узнайте больше на <a href=\""
-"%s\">Github</a>."
+"Меню можно открывать с помощью командной строки. Узнайте больше на <a href="
+"\"%s\">Github</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1020,11 +1021,19 @@ msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
 "</a>"
 msgstr ""
-"💕️ Хотите выразить благодарность Fly-Pie? <a href=\"%s\">Станьте "
-"спонсором.</a>"
+"💕️ Хотите выразить благодарность Fly-Pie? <a href=\"%s\">Станьте спонсором.</"
+"a>"
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:431
+msgid ""
+"If you cannot use a specific keyboard shortcut, you may check you system "
+"settings as it may be used already."
+msgstr ""
 
 #. Translators: The left-most item of the menu editor bread crumbs.
-#: src/prefs/MenuEditorPage.js:990
+#: src/prefs/MenuEditorPage.js:993
 msgid "All Menus"
 msgstr "Все меню"
 
@@ -1277,29 +1286,29 @@ msgid "Flip Side"
 msgstr "На другую сторону"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:194
+#: src/extension/Daemon.js:212
 msgid "Fly-Pie Level Up!"
 msgstr "Новый уровень Fly-Pie!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:196
+#: src/extension/Daemon.js:214
 msgid "You reached level %i!"
 msgstr "Вам покорился %i уровень!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:216
+#: src/extension/Daemon.js:234
 msgid "Fly-Pie Achievement Completed!"
 msgstr "Получено достижение Fly-Pie!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:218
+#: src/extension/Daemon.js:236
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
 msgstr "Вы получили достижение \"%s\"!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:562
+#: src/extension/Daemon.js:598
 msgid "Show Achievements"
 msgstr "Показать достижения"
 
@@ -1406,8 +1415,8 @@ msgstr ""
 "Подробности на <a href=\"https://github.com/Schneegans/Fly-Pie\">домашней "
 "странице Fly-Pie</a>.\n"
 "\n"
-"Если вы хотите сообщить о 🐞️ баге или предложить 🎉️ фичу, обращайтесь на "
-"<a href=\"https://github.com/Schneegans/Fly-Pie/issues\">Github</a>."
+"Если вы хотите сообщить о 🐞️ баге или предложить 🎉️ фичу, обращайтесь на <a "
+"href=\"https://github.com/Schneegans/Fly-Pie/issues\">Github</a>."
 
 #: resources/ui/gtk4/settings.ui:448 resources/ui/gtk3/settings.ui:529
 msgid "Credits"
@@ -1701,8 +1710,8 @@ msgstr ""
 "b> в подменю. Больше, и ваша эффективность резко упадёт.\n"
 "\n"
 "Если вам нравится Fly-Pie, я был бы рад, если бы вы оставили положительный "
-"отзыв на <a href=\"https://extensions.gnome.org/extension/3433/fly-pie/\""
-">extensions.gnome.org</a>! Всякий раз, когда вы сталкиваетесь с багом 🐞 ️ "
+"отзыв на <a href=\"https://extensions.gnome.org/extension/3433/fly-pie/"
+"\">extensions.gnome.org</a>! Всякий раз, когда вы сталкиваетесь с багом 🐞 ️ "
 "или у вас есть запрос на функцию, не стесняйтесь сообщать об этом на <a href="
 "\"https://github.com/Schneegans/Fly-Pie/issues\">Github</a>."
 

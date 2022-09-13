@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 16:40+0100\n"
+"POT-Creation-Date: 2022-09-13 21:04+0200\n"
 "PO-Revision-Date: 2022-01-16 17:55+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
@@ -205,7 +205,7 @@ msgstr "Seleziona Applicazione"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
-#: src/prefs/MenuEditor.js:282
+#: src/prefs/MenuEditor.js:281
 msgid "Not Bound"
 msgstr "Non vincolato"
 
@@ -855,15 +855,15 @@ msgstr "Vuoi davvero reimpostare tutte le statistiche?"
 msgid "All achievements will be lost!"
 msgstr "Tutti i risultati andranno persi!"
 
-#: src/prefs/MenuEditor.js:417
+#: src/prefs/MenuEditor.js:416
 msgid "No menus configured"
 msgstr "Nessun menu configurato"
 
-#: src/prefs/MenuEditor.js:420
+#: src/prefs/MenuEditor.js:419
 msgid "Create a new menu with the button in the top right corner."
 msgstr "Crea un nuovo menu con il pulsante nell'angolo in alto a destra."
 
-#: src/prefs/MenuEditor.js:450
+#: src/prefs/MenuEditor.js:449
 msgid "Add a new item"
 msgstr "Aggiungi un nuovo elemento"
 
@@ -872,14 +872,14 @@ msgstr "Aggiungi un nuovo elemento"
 #. overview.
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag an action in the menu editor to the menu overview.
-#: src/prefs/MenuEditor.js:787 src/prefs/MenuEditorPage.js:927
+#: src/prefs/MenuEditor.js:786 src/prefs/MenuEditorPage.js:930
 msgid "Actions cannot be turned into toplevel menus."
 msgstr "Le azioni non possono essere convertite in menù di livello superiore."
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag external stuff to the menu editor's
 #. overview.
-#: src/prefs/MenuEditor.js:807
+#: src/prefs/MenuEditor.js:806
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr ""
 "Puoi creare nuove Azioni esclusivamente all’interno dei Menu Personalizzati."
@@ -1030,8 +1030,16 @@ msgstr ""
 "💕️ Vuoi mostrare il tuo amore per Fly-Pie? <a href=\"%s\">Diventa uno sponsor."
 "</a>"
 
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:431
+msgid ""
+"If you cannot use a specific keyboard shortcut, you may check you system "
+"settings as it may be used already."
+msgstr ""
+
 #. Translators: The left-most item of the menu editor bread crumbs.
-#: src/prefs/MenuEditorPage.js:990
+#: src/prefs/MenuEditorPage.js:993
 msgid "All Menus"
 msgstr "Tutti i menu"
 
@@ -1284,29 +1292,29 @@ msgid "Flip Side"
 msgstr "Cambia Lato"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:194
+#: src/extension/Daemon.js:212
 msgid "Fly-Pie Level Up!"
 msgstr "Fly-Pie Salito di Livello!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:196
+#: src/extension/Daemon.js:214
 msgid "You reached level %i!"
 msgstr "Hai raggiunto il livello %i!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:216
+#: src/extension/Daemon.js:234
 msgid "Fly-Pie Achievement Completed!"
 msgstr "Obiettivo Fly-Pie completato!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:218
+#: src/extension/Daemon.js:236
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
 msgstr "Hai completato l'obiettivo \"%s\"!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:562
+#: src/extension/Daemon.js:598
 msgid "Show Achievements"
 msgstr "Mostra Risultati"
 
