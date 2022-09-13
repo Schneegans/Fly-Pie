@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: flypie\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-01 16:40+0100\n"
+"POT-Creation-Date: 2022-09-13 21:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,8 +106,8 @@ msgstr ""
 msgid ""
 "When the <b>Open URI</b> action is activated, the above URI is opened with "
 "the default application. For http URLs, this will be your web browser. "
-"However, it is also possible to open other URIs such as \"mailto:foo@bar.org"
-"\"."
+"However, it is also possible to open other URIs such as \"mailto:foo@bar."
+"org\"."
 msgstr ""
 
 #: src/common/actions/Uri.js:68
@@ -126,9 +126,9 @@ msgstr ""
 
 #: src/common/actions/DBusSignal.js:43
 msgid ""
-"The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
-"\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md"
-"\">can listen on the D-Bus for its activation</a>. This can be very useful "
+"The <b>D-Bus Signal</b> action does nothing on its own. But you <a "
+"href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface."
+"md\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
 
@@ -183,7 +183,7 @@ msgstr ""
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
-#: src/prefs/MenuEditor.js:282
+#: src/prefs/MenuEditor.js:281
 msgid "Not Bound"
 msgstr ""
 
@@ -798,15 +798,15 @@ msgstr ""
 msgid "All achievements will be lost!"
 msgstr ""
 
-#: src/prefs/MenuEditor.js:417
+#: src/prefs/MenuEditor.js:416
 msgid "No menus configured"
 msgstr ""
 
-#: src/prefs/MenuEditor.js:420
+#: src/prefs/MenuEditor.js:419
 msgid "Create a new menu with the button in the top right corner."
 msgstr ""
 
-#: src/prefs/MenuEditor.js:450
+#: src/prefs/MenuEditor.js:449
 msgid "Add a new item"
 msgstr ""
 
@@ -815,14 +815,14 @@ msgstr ""
 #. overview.
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag an action in the menu editor to the menu overview.
-#: src/prefs/MenuEditor.js:787 src/prefs/MenuEditorPage.js:927
+#: src/prefs/MenuEditor.js:786 src/prefs/MenuEditorPage.js:930
 msgid "Actions cannot be turned into toplevel menus."
 msgstr ""
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag external stuff to the menu editor's
 #. overview.
-#: src/prefs/MenuEditor.js:807
+#: src/prefs/MenuEditor.js:806
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr ""
 
@@ -952,12 +952,20 @@ msgstr ""
 #: src/prefs/MenuEditorPage.js:427
 #, javascript-format
 msgid ""
-"💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
-"</a>"
+"💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a "
+"sponsor.</a>"
+msgstr ""
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:431
+msgid ""
+"If you cannot use a specific keyboard shortcut, you may check you system "
+"settings as it may be used already."
 msgstr ""
 
 #. Translators: The left-most item of the menu editor bread crumbs.
-#: src/prefs/MenuEditorPage.js:990
+#: src/prefs/MenuEditorPage.js:993
 msgid "All Menus"
 msgstr ""
 
@@ -1210,29 +1218,29 @@ msgid "Flip Side"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:194
+#: src/extension/Daemon.js:212
 msgid "Fly-Pie Level Up!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:196
+#: src/extension/Daemon.js:214
 msgid "You reached level %i!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:216
+#: src/extension/Daemon.js:234
 msgid "Fly-Pie Achievement Completed!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:218
+#: src/extension/Daemon.js:236
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
 msgstr ""
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:562
+#: src/extension/Daemon.js:598
 msgid "Show Achievements"
 msgstr ""
 
@@ -1330,8 +1338,8 @@ msgid ""
 "a> for details.\n"
 "\n"
 "Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free to "
-"report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
-"\">Github</a>."
+"report this on <a href=\"https://github.com/Schneegans/Fly-Pie/"
+"issues\">Github</a>."
 msgstr ""
 
 #: resources/ui/gtk4/settings.ui:448 resources/ui/gtk3/settings.ui:529
@@ -1567,8 +1575,8 @@ msgid ""
 "If you like Fly-Pie, I would be happy if you left a positive review on <a "
 "href=\"https://extensions.gnome.org/extension/3433/fly-pie/\">extensions."
 "gnome.org</a>! Whenever you encounter a 🐞️ bug or have feature request, feel "
-"free to report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
-"\">Github</a>."
+"free to report this on <a href=\"https://github.com/Schneegans/Fly-Pie/"
+"issues\">Github</a>."
 msgstr ""
 
 #. Button for tutorial navigation. Goes back one page.
