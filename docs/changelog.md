@@ -15,6 +15,7 @@
 
 #### Enhancements
 
+* Many translations received updates. Thanks to all the translators!
 * All included SVG files have been optimized to reduce the size of the installed extension.
 * The Running-Apps Menu, will now minimize windows which were un-minimized by hover-peeking when the corresponding item is not hovered anymore.
 
