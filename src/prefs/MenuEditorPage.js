@@ -425,7 +425,10 @@ var MenuEditorPage = class MenuEditorPage {
       // Translators: This is one of the hints which are shown in the bottom right corner
       // of the menu editor.
       _('💕️ Do you want to show your love for Fly-Pie? <a href="%s">Become a sponsor.</a>')
-          .replace('%s', 'https://github.com/sponsors/Schneegans')
+          .replace('%s', 'https://github.com/sponsors/Schneegans'),
+      // Translators: This is one of the hints which are shown in the bottom right corner
+      // of the menu editor.
+      _('If you cannot use a specific keyboard shortcut, you may check you system settings as it may be used already.')
     ];
 
     // Every fifteen seconds we hide the current tip...
