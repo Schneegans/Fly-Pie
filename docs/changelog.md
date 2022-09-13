@@ -9,6 +9,10 @@
 
 **Release Date:** TBD
 
+#### New Features
+
+* Added support for GNOME 43.
+
 #### Enhancements
 
 * All included SVG files have been optimized to reduce the size of the installed extension.
