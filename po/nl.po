@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-13 21:04+0200\n"
-"PO-Revision-Date: 2022-01-10 16:55+0000\n"
-"Last-Translator: Jarno Van Schoor <0xjarno@gmail.com>\n"
+"PO-Revision-Date: 2022-09-15 15:23+0000\n"
+"Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/fly-pie/core/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.14.1-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -25,7 +25,6 @@ msgstr "Sneltoets activeren"
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:50
-#, fuzzy
 msgid "Simulates a key combination."
 msgstr "Simuleert een toetsencombinatie."
 
@@ -64,8 +63,8 @@ msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
-"De <b>Bestand openen</b> actie zal het hierboven gespecificeerd bestand "
-"openen met de door het systeem aangeduide standaardapplicatie."
+"De <b>Bestand openen</b>-actie zal het hierboven opgegeven bestand openen "
+"met de standaardapp."
 
 #: src/common/actions/File.js:69
 msgid "File"
@@ -153,21 +152,21 @@ msgstr ""
 
 #: src/common/actions/DBusSignal.js:67
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: src/common/actions/DBusSignal.js:67
 msgid "This will be passed to the D-Bus signal."
-msgstr ""
+msgstr "Dit zal worden doorgegeven aan het D-Bus-signaal."
 
 #: src/common/actions/InsertText.js:48
 msgid "Insert Text"
-msgstr ""
+msgstr "Tekst invoeren"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/InsertText.js:55
 msgid "Types some text automatically."
-msgstr ""
+msgstr "Typt tekst automatisch."
 
 #: src/common/actions/InsertText.js:59
 msgid ""
@@ -175,18 +174,21 @@ msgid ""
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
 "write the same things."
 msgstr ""
+"De actie <b>Tekst invoeren</b> kopieert de gegeven tekst naar het klembord "
+"en plakt deze vervolgens. Dit kan nuttig zijn als u vaak dezelfde dingen "
+"typt."
 
 #: src/common/actions/InsertText.js:83
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 #: src/common/actions/InsertText.js:83
 msgid "This text will be inserted."
-msgstr ""
+msgstr "Deze tekst zal worden ingevoegd."
 
 #: src/common/ConfigWidgetFactory.js:102 src/prefs/ImageChooserButton.js:42
 msgid "Select File"
-msgstr ""
+msgstr "Bestand selecteren"
 
 #: src/common/ConfigWidgetFactory.js:103 src/common/ConfigWidgetFactory.js:179
 #: src/prefs/ImageChooserButton.js:43 src/prefs/MenuEditorPage.js:205
@@ -198,19 +200,21 @@ msgstr "Annuleren"
 
 #: src/common/ConfigWidgetFactory.js:178
 msgid "Select Application"
-msgstr ""
+msgstr "App selecteren"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
 #: src/prefs/MenuEditor.js:281
 msgid "Not Bound"
-msgstr ""
+msgstr "Niet gebonden"
 
 #: src/common/ConfigWidgetFactory.js:318
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
+"Druk op de toetscombinatie!\n"
+"Esc om te annuleren, Backspace om te ontbinden"
 
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
@@ -218,17 +222,17 @@ msgstr ""
 #: src/common/ItemRegistry.js:244
 #, javascript-format
 msgid "Insert: %s"
-msgstr ""
+msgstr "Invoegen: %s"
 
 #: src/common/menus/FrequentlyUsed.js:44
 msgid "Frequently Used"
-msgstr ""
+msgstr "Vaak gebruikt"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/FrequentlyUsed.js:51
 msgid "Shows your frequently used applications."
-msgstr ""
+msgstr "Geeft uw veelgebruikte apps weer."
 
 #: src/common/menus/FrequentlyUsed.js:55
 msgid ""
@@ -236,63 +240,68 @@ msgid ""
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
 msgstr ""
+"Het menu <b>Vaak gebruikt</b> geeft een lijst met veelgebruikte apps weer. "
+"Voor efficiënte selectie kunt u het best het maximum aantal weergegeven apps "
+"limiteren tot ongeveer 12."
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
 #: src/common/menus/Clipboard.js:85
 msgid "Max Item Count"
-msgstr ""
+msgstr "Maximaal aantal items"
 
 #: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
 #: src/common/menus/Clipboard.js:85
 msgid "Limits the number of children."
-msgstr ""
+msgstr "Limiteert het aantal subitems."
 
 #: src/common/menus/System.js:46
 msgid "System"
-msgstr ""
+msgstr "Systeem"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/System.js:53
 msgid "Allows screen lock, shutdown and other things."
-msgstr ""
+msgstr "Vergrendelt het scherm, schakelt uit, en andere dingen."
 
 #: src/common/menus/System.js:57
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
 msgstr ""
+"Het menu <b>Systeem</b> geeft items weer voor schermvergrendeling, "
+"uitschakelen, instellingen, etc."
 
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:81
 msgid "Lock"
-msgstr ""
+msgstr "Vergrendelen"
 
 #: src/common/menus/System.js:90
 msgid "Suspend"
-msgstr ""
+msgstr "Pauzestand"
 
 #: src/common/menus/System.js:99
 msgid "Switch User…"
-msgstr ""
+msgstr "Gebruiker wisselen…"
 
 #: src/common/menus/System.js:108
 msgid "Log Out"
-msgstr ""
+msgstr "Afmelden"
 
 #: src/common/menus/System.js:117
 msgid "Power Off…"
-msgstr ""
+msgstr "Uitschakelen…"
 
 #: src/common/menus/CustomMenu.js:29
 msgid "Custom Menu"
-msgstr ""
+msgstr "Aangepast menu"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:36
 msgid "This can contain custom actions and other menus."
-msgstr ""
+msgstr "Dit kan aangepaste acties en andere menu's bevatten."
 
 #: src/common/menus/CustomMenu.js:40
 msgid ""
@@ -304,13 +313,13 @@ msgstr ""
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:43 src/extension/DefaultMenu.js:79
 msgid "Favorites"
-msgstr ""
+msgstr "Favorieten"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:50
 msgid "Shows pinned applications."
-msgstr ""
+msgstr "Geeft vastgezette apps weer."
 
 #: src/common/menus/Favorites.js:54
 msgid ""
@@ -320,13 +329,13 @@ msgstr ""
 
 #: src/common/menus/RecentFiles.js:34
 msgid "Recent Files"
-msgstr ""
+msgstr "Recente bestanden"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RecentFiles.js:41
 msgid "Shows your recently used files."
-msgstr ""
+msgstr "Geeft uw recent gebruikte bestanden weer."
 
 #: src/common/menus/RecentFiles.js:45
 msgid ""
@@ -337,13 +346,13 @@ msgstr ""
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
-msgstr ""
+msgstr "Apparaten"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:40
 msgid "Shows connected devices."
-msgstr ""
+msgstr "Geeft verbonden apparaten weer."
 
 #: src/common/menus/Devices.js:44
 msgid ""
@@ -353,13 +362,13 @@ msgstr ""
 
 #: src/common/menus/MainMenu.js:33
 msgid "Main Menu"
-msgstr ""
+msgstr "Hoofdmenu"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/MainMenu.js:40
 msgid "Shows all installed applications."
-msgstr ""
+msgstr "Geeft alle geïnstalleerde apps weer."
 
 #: src/common/menus/MainMenu.js:44
 msgid ""
@@ -371,13 +380,13 @@ msgstr ""
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:47 src/extension/DefaultMenu.js:111
 msgid "Running Apps"
-msgstr ""
+msgstr "Draaiende apps"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:54
 msgid "Shows the currently running applications."
-msgstr ""
+msgstr "Geeft de openstaande apps weer."
 
 #: src/common/menus/RunningApps.js:58
 msgid ""
@@ -397,35 +406,35 @@ msgstr ""
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
-msgstr ""
+msgstr "Vensterfilter"
 
 #: src/common/menus/RunningApps.js:99 resources/ui/gtk4/settings.ui:5010
 #: resources/ui/gtk4/settings.ui:5061 resources/ui/gtk3/settings.ui:4996
 #: resources/ui/gtk3/settings.ui:5053
 msgid "See tooltip for details."
-msgstr ""
+msgstr "Zie beschrijving voor details."
 
 #: src/common/menus/RunningApps.js:125
 msgid "Active Workspace Only"
-msgstr ""
+msgstr "Alleen actief werkblad"
 
 #: src/common/menus/RunningApps.js:126
 msgid "Group by Application"
-msgstr ""
+msgstr "Apps groeperen"
 
 #: src/common/menus/RunningApps.js:127
 msgid "Peek on Hover"
-msgstr ""
+msgstr "Voorbeeld bij aanwijzen"
 
 #: src/common/menus/Bookmarks.js:33
 msgid "Bookmarks"
-msgstr ""
+msgstr "Bladwijzers"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Bookmarks.js:40
 msgid "Shows your frequently used directories."
-msgstr ""
+msgstr "Geeft uw veelgebruikte mappen weer."
 
 #: src/common/menus/Bookmarks.js:44
 msgid ""
@@ -435,13 +444,13 @@ msgstr ""
 
 #: src/common/menus/Clipboard.js:54
 msgid "Clipboard"
-msgstr ""
+msgstr "Klembord"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Clipboard.js:61
 msgid "Shows recently copied things."
-msgstr ""
+msgstr "Geeft recent gekopieerde dingen weer."
 
 #: src/common/menus/Clipboard.js:64
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
@@ -449,83 +458,83 @@ msgstr ""
 
 #: src/common/menus/Clipboard.js:94
 msgid "First Child Angle"
-msgstr ""
+msgstr "Hoek van eerste subitem"
 
 #: src/common/menus/Clipboard.js:94
 msgid "Direction of the most recent item."
-msgstr ""
+msgstr "Richting van het meest recente item."
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a vector image.
 #: src/common/menus/Clipboard.js:165
 msgid "Vector Image"
-msgstr ""
+msgstr "Vectorafbeelding"
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a raster image.
 #: src/common/menus/Clipboard.js:177
 msgid "Raster Image"
-msgstr ""
+msgstr "Rasterafbeelding"
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:366
 msgid "Novice"
-msgstr ""
+msgstr "Beginner"
 
 #. Translators: This is the tier 2 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:369
 msgid "Capable"
-msgstr ""
+msgstr "Gevorderde"
 
 #. Translators: This is the tier 3 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:372
 msgid "Skilled"
-msgstr ""
+msgstr "Competent"
 
 #. Translators: This is the tier 4 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:375
 msgid "Expert"
-msgstr ""
+msgstr "Expert"
 
 #. Translators: This is the tier 5 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:378
 msgid "Master"
-msgstr ""
+msgstr "Kampioen"
 
 #. Translators: This is the tier 1 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:384
 msgid "I"
-msgstr ""
+msgstr "I"
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:387
 msgid "II"
-msgstr ""
+msgstr "II"
 
 #. Translators: This is the tier 3 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:390
 msgid "III"
-msgstr ""
+msgstr "III"
 
 #. Translators: This is the tier 4 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:393
 msgid "IV"
-msgstr ""
+msgstr "IV"
 
 #. Translators: This is the tier 5 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:396
 msgid "V"
-msgstr ""
+msgstr "V"
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
 #: src/common/Achievements.js:412
@@ -815,7 +824,7 @@ msgstr ""
 
 #: src/prefs/AchievementsPage.js:118
 msgid "All achievements will be lost!"
-msgstr ""
+msgstr "Alle prestaties zullen verloren gaan!"
 
 #: src/prefs/MenuEditor.js:416
 msgid "No menus configured"
@@ -1261,7 +1270,7 @@ msgstr ""
 #. is shown once an achievement is unlocked.
 #: src/extension/Daemon.js:598
 msgid "Show Achievements"
-msgstr ""
+msgstr "Prestaties weergeven"
 
 #: resources/ui/gtk4/copyValueButton.ui:6
 #: resources/ui/gtk3/copyValueButton.ui:6
@@ -1878,23 +1887,24 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:3913 resources/ui/gtk4/settings.ui:4016
 #: resources/ui/gtk3/settings.ui:3861 resources/ui/gtk3/settings.ui:3963
 msgid "Trace Appearance"
-msgstr ""
+msgstr "Verbindingslijnuiterlijk"
 
 #: resources/ui/gtk4/settings.ui:3923 resources/ui/gtk3/settings.ui:3871
 msgid "The trace is the connecting line between selected menu items."
 msgstr ""
+"De verbindingslijn is de verbindende lijn tussen geselecteerde menu-items."
 
 #: resources/ui/gtk4/settings.ui:3940 resources/ui/gtk3/settings.ui:3888
 msgid "Thickness"
-msgstr ""
+msgstr "Dikte"
 
 #: resources/ui/gtk4/settings.ui:3951 resources/ui/gtk3/settings.ui:3899
 msgid "Color"
-msgstr ""
+msgstr "Kleur"
 
 #: resources/ui/gtk4/settings.ui:4003 resources/ui/gtk3/settings.ui:3951
 msgid "Minimum Segment Length"
-msgstr ""
+msgstr "Minimumsegmentlengte"
 
 #: resources/ui/gtk4/settings.ui:4046 resources/ui/gtk4/settings.ui:4170
 #: resources/ui/gtk3/settings.ui:3987 resources/ui/gtk3/settings.ui:4110
@@ -1924,7 +1934,7 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk4/settings.ui:4598
 #: resources/ui/gtk3/settings.ui:4133 resources/ui/gtk3/settings.ui:4531
 msgid "Advanced Settings"
-msgstr ""
+msgstr "Geavanceerde instellingen"
 
 #: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4143
 msgid "These settings are independent of the presets."
@@ -2008,7 +2018,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4618 resources/ui/gtk3/settings.ui:4563
 msgid "Load Preset"
-msgstr ""
+msgstr "Voorinstelling laden"
 
 #: resources/ui/gtk4/settings.ui:4630 resources/ui/gtk3/settings.ui:4583
 msgid "Load settings from a JSON file."
@@ -2027,7 +2037,7 @@ msgstr ""
 #. Caption of the menu editor page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:4689 resources/ui/gtk3/settings.ui:5202
 msgid "Menu Editor"
-msgstr ""
+msgstr "Menubewerker"
 
 #: resources/ui/gtk4/settings.ui:4718 resources/ui/gtk3/settings.ui:4684
 msgid "Add a new menu item."
@@ -2035,7 +2045,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4797 resources/ui/gtk3/settings.ui:4771
 msgid "Stash"
-msgstr ""
+msgstr "Berging"
 
 #: resources/ui/gtk4/settings.ui:4813 resources/ui/gtk3/settings.ui:4788
 msgid "Store items here and re-use them later."
@@ -2043,7 +2053,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4857 resources/ui/gtk3/settings.ui:4832
 msgid "Trash"
-msgstr ""
+msgstr "Prullenbak"
 
 #: resources/ui/gtk4/settings.ui:4873 resources/ui/gtk3/settings.ui:4848
 msgid "Drop items here."
@@ -2059,11 +2069,11 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4986 resources/ui/gtk3/settings.ui:4972
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: resources/ui/gtk4/settings.ui:5004 resources/ui/gtk3/settings.ui:4990
 msgid "Icon"
-msgstr ""
+msgstr "Pictogram"
 
 #: resources/ui/gtk4/settings.ui:5022 resources/ui/gtk3/settings.ui:5008
 msgid ""
@@ -2114,18 +2124,18 @@ msgstr ""
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:5221 resources/ui/gtk3/settings.ui:5445
 msgid "Achievements"
-msgstr ""
+msgstr "Prestaties"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/gtk4/settings.ui:5415 resources/ui/gtk3/settings.ui:5382
 msgid "In Progress"
-msgstr ""
+msgstr "Bezig"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/gtk4/settings.ui:5429 resources/ui/gtk3/settings.ui:5397
 msgid "Completed"
-msgstr ""
+msgstr "Voltooid"
 
 #: resources/ui/gtk4/settings.ui:5457 resources/ui/gtk3/settings.ui:5425
 msgid "Reset all achievements."
-msgstr ""
+msgstr "Alle prestaties resetten."
