@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 [![Translation status](https://hosted.weblate.org/widgets/fly-pie/-/horizontal-auto.svg)](https://hosted.weblate.org/engage/fly-pie/)
 
 # Translating Fly-Pie

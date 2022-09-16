@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 <p align="center"> 
   <img src ="pics/banner-07.jpg" />
 </p>
