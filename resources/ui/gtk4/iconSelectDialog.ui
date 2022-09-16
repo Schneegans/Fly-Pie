@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+SPDX-License-Identifier: MIT
+-->
+
 <interface domain="flypie">
   <requires lib="gtk" version="4.0" />
 

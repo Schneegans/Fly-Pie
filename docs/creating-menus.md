@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 <p align="center">
   <img src ="pics/banner-02.jpg" />
 </p>
@@ -16,12 +21,15 @@ You should read the code, most of it is explained with inline comments!
 
 ```javascript
 //////////////////////////////////////////////////////////////////////////////////////////
-//        ___            _     ___                                                      //
-//        |   |   \/    | ) |  |           This software may be modified and distri-    //
-//    O-  |-  |   |  -  |   |  |-  -O      buted under the terms of the MIT license.    //
-//        |   |_  |     |   |  |_          See the LICENSE file for details.            //
+//                               ___            _     ___                               //
+//                               |   |   \/    | ) |  |                                 //
+//                           O-  |-  |   |  -  |   |  |-  -O                            //
+//                               |   |_  |     |   |  |_                                //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+
+// SPDX-FileCopyrightText: Your Name <your@email.com>
+// SPDX-License-Identifier: MIT
 
 'use strict';
 

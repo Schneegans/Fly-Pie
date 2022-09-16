@@ -1,3 +1,8 @@
+/*
+SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+SPDX-License-Identifier: MIT
+*/
+
 /* This is used in the tutorial. */
 .tutorial-video {
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);

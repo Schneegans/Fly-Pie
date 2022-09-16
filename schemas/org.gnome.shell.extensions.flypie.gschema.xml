@@ -1,12 +1,10 @@
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-<!--       ___            _     ___                                                    -->
-<!--       |   |   \/    | ) |  |            This software may be modified and distri- -->
-<!--   O-  |-  |   |  -  |   |  |-  -O       buted under the terms of the MIT license. -->
-<!--       |   |_  |     |   |  |_           See the LICENSE file for details.         -->
-<!--                                                                                   -->
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+SPDX-License-Identifier: CC0-1.0
+-->
+
 <schemalist>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

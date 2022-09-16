@@ -1,12 +1,15 @@
 #!/bin/bash
 
 # -------------------------------------------------------------------------------------- #
-#         ___            _     ___                                                       #
-#         |   |   \/    | ) |  |             This software may be modified and distri-   #
-#     O-  |-  |   |  -  |   |  |-  -O        buted under the terms of the MIT license.   #
-#         |   |_  |     |   |  |_            See the LICENSE file for details.           #
+#                                 ___            _     ___                               #
+#                                 |   |   \/    | ) |  |                                 #
+#                             O-  |-  |   |  -  |   |  |-  -O                            #
+#                                 |   |_  |     |   |  |_                                #
 #                                                                                        #
 # -------------------------------------------------------------------------------------- #
+
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: MIT
 
 # This scripts counts the lines of code and comments in all JavaScript files.
 # The copyright-headers are substracted. It uses the command line tool "cloc".
@@ -36,12 +39,12 @@ COMMENT_LINES=${TOKENS[3]}
 LINES_OF_CODE=${TOKENS[4]}
 
 # To make the estimate of commented lines more accurate, we have to substract the
-# copyright header which is included in each file. This header has the length of five
+# copyright header which is included in each file. This header has the length of seven
 # lines. All dumb comments like those /////////// or those // ------------ are also
 # substracted. As cloc does not count inline comments, the overall estimate should be
 # rather conservative.
 DUMB_COMMENTS="$(grep -r -E '//////|// -----' . | wc -l)"
-COMMENT_LINES=$((COMMENT_LINES - 5 * NUMBER_OF_FILES - DUMB_COMMENTS))
+COMMENT_LINES=$((COMMENT_LINES - 7 * NUMBER_OF_FILES - DUMB_COMMENTS))
 
 # Print all results if no arguments are given.
 if [[ $# -eq 0 ]] ; then

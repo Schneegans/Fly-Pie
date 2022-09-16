@@ -1,12 +1,15 @@
 #!/bin/bash
 
 # -------------------------------------------------------------------------------------- #
-#         ___            _     ___                                                       #
-#         |   |   \/    | ) |  |             This software may be modified and distri-   #
-#     O-  |-  |   |  -  |   |  |-  -O        buted under the terms of the MIT license.   #
-#         |   |_  |     |   |  |_            See the LICENSE file for details.           #
+#                                 ___            _     ___                               #
+#                                 |   |   \/    | ) |  |                                 #
+#                             O-  |-  |   |  -  |   |  |-  -O                            #
+#                                 |   |_  |     |   |  |_                                #
 #                                                                                        #
 # -------------------------------------------------------------------------------------- #
+
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: MIT
 
 # This script executes several automated tests on Fly-Pie. To do this, Fly-Pie is
 # installed in a fedora-based container running GNOME Shell on xvfb. The used container is

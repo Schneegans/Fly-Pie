@@ -1,4 +1,7 @@
 ---
+# SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+# SPDX-License-Identifier: CC-BY-4.0
+
 name: Feature Request
 about: Suggest an idea for Fly-Pie.
 title: ''

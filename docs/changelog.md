@@ -1,8 +1,22 @@
+<!--
+SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 <p align="center">
   <img src ="pics/banner-04.jpg" />
 </p>
 
 # Changelog of Fly-Pie
+
+
+## [Fly-Pie 18](https://github.com/schneegans/fly-pie/releases/tag/v18)
+
+**Release Date:** TBD
+
+#### Other Enhancements
+
+* Fly-Pie now follows the [REUSE Specification](https://reuse.software/spec).
 
 
 ## [Fly-Pie 17](https://github.com/schneegans/fly-pie/releases/tag/v17)

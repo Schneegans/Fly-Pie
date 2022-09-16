@@ -1,6 +1,7 @@
-# Licence
-
-All artwork in this directory can be used under the conditions of the CC0 public licence.
+<!--
+SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+SPDX-License-Identifier: CC-BY-4.0
+-->
 
 # Credits
 
