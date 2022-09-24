@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-13 21:04+0200\n"
-"PO-Revision-Date: 2022-09-15 15:23+0000\n"
+"PO-Revision-Date: 2022-09-25 20:28+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/fly-pie/core/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -2032,7 +2032,7 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:4660 resources/ui/gtk4/settings.ui:4933
 #: resources/ui/gtk3/settings.ui:4625 resources/ui/gtk3/settings.ui:4918
 msgid "Live Preview"
-msgstr ""
+msgstr "Live voorvertoning"
 
 #. Caption of the menu editor page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:4689 resources/ui/gtk3/settings.ui:5202
@@ -2041,7 +2041,7 @@ msgstr "Menubewerker"
 
 #: resources/ui/gtk4/settings.ui:4718 resources/ui/gtk3/settings.ui:4684
 msgid "Add a new menu item."
-msgstr ""
+msgstr "Voeg een nieuw menu-item toe."
 
 #: resources/ui/gtk4/settings.ui:4797 resources/ui/gtk3/settings.ui:4771
 msgid "Stash"
@@ -2057,7 +2057,7 @@ msgstr "Prullenbak"
 
 #: resources/ui/gtk4/settings.ui:4873 resources/ui/gtk3/settings.ui:4848
 msgid "Drop items here."
-msgstr ""
+msgstr "Sleep items hiernaartoe."
 
 #: resources/ui/gtk4/settings.ui:4903 resources/ui/gtk3/settings.ui:4878
 msgid "Restore menus from a JSON file. This will override your current menus!"
@@ -2065,7 +2065,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4909 resources/ui/gtk3/settings.ui:4890
 msgid "Export all menus to a JSON file."
-msgstr ""
+msgstr "Alle menu's naar een JSON-bestand exporteren."
 
 #: resources/ui/gtk4/settings.ui:4986 resources/ui/gtk3/settings.ui:4972
 msgid "Name"
@@ -2085,7 +2085,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:5055 resources/ui/gtk3/settings.ui:5047
 msgid "Fixed Angle"
-msgstr ""
+msgstr "Vaste hoek"
 
 #: resources/ui/gtk4/settings.ui:5071 resources/ui/gtk3/settings.ui:5063
 msgid ""
@@ -2101,7 +2101,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:5109 resources/ui/gtk3/settings.ui:5101
 msgid "This will open the menu."
-msgstr ""
+msgstr "Dit zal het menu openen."
 
 #: resources/ui/gtk4/settings.ui:5123 resources/ui/gtk3/settings.ui:5115
 msgid ""
@@ -2111,15 +2111,15 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:5128 resources/ui/gtk3/settings.ui:5120
 msgid "Bind to Super + RMB"
-msgstr ""
+msgstr "Vastmaken aan Super + rechtermuisknop"
 
 #: resources/ui/gtk4/settings.ui:5144 resources/ui/gtk3/settings.ui:5136
 msgid "Show Touch Button"
-msgstr ""
+msgstr "Aanraakknop tonen"
 
 #: resources/ui/gtk4/settings.ui:5160 resources/ui/gtk3/settings.ui:5152
 msgid "Open in Screen Center"
-msgstr ""
+msgstr "In het midden van het scherm openen"
 
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:5221 resources/ui/gtk3/settings.ui:5445
