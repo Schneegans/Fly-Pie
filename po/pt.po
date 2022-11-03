@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-13 21:04+0200\n"
-"PO-Revision-Date: 2022-11-03 18:08+0000\n"
+"PO-Revision-Date: 2022-11-04 19:00+0000\n"
 "Last-Translator: Gustavo Rocha <gugu.r.azevedo@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/fly-pie/core/"
 "pt/>\n"
@@ -27,7 +27,7 @@ msgstr "Ativar Atalho"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:50
 msgid "Simulates a key combination."
-msgstr ""
+msgstr "Simula uma combinação de tecla."
 
 #: src/common/actions/Shortcut.js:54
 msgid ""
