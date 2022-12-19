@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-13 21:04+0200\n"
-"PO-Revision-Date: 2022-12-07 09:48+0000\n"
+"PO-Revision-Date: 2022-12-20 09:48+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/fly-pie/core/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.15-dev\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -673,7 +673,7 @@ msgstr "entropiër %i"
 #: src/common/Achievements.js:585
 #, javascript-format
 msgid "Generate %x random presets."
-msgstr ""
+msgstr "Genereer %x willekeurige voorinstellingen."
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
 #: src/common/Achievements.js:598
@@ -685,13 +685,13 @@ msgstr "%svoorinstellingsexporteur"
 #. only one preset needs to be exported.
 #: src/common/Achievements.js:602
 msgid "Export a custom preset."
-msgstr ""
+msgstr "Exporteer een aangepaste voorinstelling."
 
 #. Translators: The description of the '%s Preset Exporter' achievement.
 #: src/common/Achievements.js:604
 #, javascript-format
 msgid "Export %x custom presets."
-msgstr ""
+msgstr "Exporteer %x aangepaste voorinstellingen."
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
 #: src/common/Achievements.js:617
@@ -703,13 +703,13 @@ msgstr "%svoorinstellingsimporteur"
 #. only one preset needs to be imported.
 #: src/common/Achievements.js:621
 msgid "Import a custom preset."
-msgstr ""
+msgstr "Importeer een aangepaste voorinstelling."
 
 #. Translators: The description of the '%s Preset Importer' achievement.
 #: src/common/Achievements.js:623
 #, javascript-format
 msgid "Import %x custom presets."
-msgstr ""
+msgstr "Importeer %x aangepaste voorinstellingen."
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
 #: src/common/Achievements.js:636
@@ -811,7 +811,7 @@ msgstr ""
 #. achievement.
 #: src/common/Achievements.js:753
 msgid "That's Philanthropie!"
-msgstr ""
+msgstr "Dat is filantroPIE!"
 
 #. Translators: The description of the 'That's Philanthropie!' achievement.
 #: src/common/Achievements.js:755
@@ -1909,7 +1909,7 @@ msgstr "Minimumsegmentlengte"
 #: resources/ui/gtk4/settings.ui:4046 resources/ui/gtk4/settings.ui:4170
 #: resources/ui/gtk3/settings.ui:3987 resources/ui/gtk3/settings.ui:4110
 msgid "Touch Button Settings"
-msgstr ""
+msgstr "Instellingen voor aanraakknoppen"
 
 #: resources/ui/gtk4/settings.ui:4056 resources/ui/gtk3/settings.ui:3997
 msgid "You can show a touch button for each of your menus."
