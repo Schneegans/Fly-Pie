@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-13 21:04+0200\n"
-"PO-Revision-Date: 2022-06-14 13:15+0000\n"
+"PO-Revision-Date: 2023-01-13 05:47+0000\n"
 "Last-Translator: colder_ <inner5740@gmail.com>\n"
-"Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/"
-">\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -756,7 +756,7 @@ msgstr "메뉴 설정을 %x개 내보내세요."
 #. achievement.
 #: src/common/Achievements.js:677
 msgid "There Should Be No More Than Twelve Items…? %i"
-msgstr "20개보다 많으면 불편할텐데...? %i"
+msgstr "20개보다 많으면 안돼는데...? %i"
 
 #. Translators: The description of the 'There Should Be No More Than Twelve
 #. Items…? %i' achievement.
@@ -793,7 +793,7 @@ msgstr "튜토리얼 메뉴를 %x번 여세요."
 #. This does not support %s and %i.
 #: src/common/Achievements.js:724
 msgid "Bachelor Pielot"
-msgstr "총각 파이ㄹ럿"
+msgstr "학사 파이ㄹ럿"
 
 #. Translators: The description of the 'Bachelor Pielot' achievement.
 #: src/common/Achievements.js:726
@@ -881,7 +881,7 @@ msgstr "내보내기"
 
 #: src/prefs/MenuEditorPage.js:235
 msgid "Could not export the menu configuration."
-msgstr "메뉴 설정을 내보낼 수 없습니다."
+msgstr "메뉴 설정을 내보내는데 실패했어요.."
 
 #: src/prefs/MenuEditorPage.js:276
 msgid "Import"
@@ -969,7 +969,8 @@ msgstr ""
 msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
-msgstr ""
+msgstr "왼쪽에 있는 메뉴 하이어키로 디렉토리, 파일, 링크, 데스크탑 파일들을 드롭할 "
+"수 있어요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -977,14 +978,14 @@ msgstr ""
 msgid ""
 "On Wayland, you can copy menu items by holding the Ctrl key while dragging "
 "them to another location."
-msgstr ""
+msgstr "Wayland에선 메뉴 항목들을 드래그하는 중에 Ctrl 키를 눌러 복사할 수 있어요."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:421
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
-msgstr ""
+msgstr "<a href=\"%s\">Hosted Weblate에서 Fly-Pie를 번역하는걸 도와주세요</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -993,7 +994,8 @@ msgstr ""
 msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
 "</a>"
-msgstr ""
+msgstr "💕 Fly-Pie에 대한 사랑을 표현하고 싶으신가요? <a href=\"%s\">스폰서가 "
+"되어보세요!</a>"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1001,7 +1003,8 @@ msgstr ""
 msgid ""
 "If you cannot use a specific keyboard shortcut, you may check you system "
 "settings as it may be used already."
-msgstr ""
+msgstr "특정한 키보드 단축키를 사용할 수 없다면 시스템 설정에서 이미 쓰고 있는지 "
+"확인해 보세요."
 
 #. Translators: The left-most item of the menu editor bread crumbs.
 #: src/prefs/MenuEditorPage.js:993
@@ -1369,6 +1372,8 @@ msgid ""
 "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
 "changelog.md\">Changelog</a>."
 msgstr ""
+"<a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog.md\""
+">체인지로그</a>를 읽어보세요."
 
 #: resources/ui/gtk4/settings.ui:431 resources/ui/gtk3/settings.ui:428
 msgid ""
@@ -1380,42 +1385,48 @@ msgid ""
 "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
+"MIT License 밑에 공개되었습니다.\n"
+"<a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie의 홈페이지</a> 에 "
+"접속하여 더 알아보세요.\n"
+"\n"
+"🐞️ 버그나 🎉️ 기능을 요청하고 싶다면, <a href=\"https://github.com/"
+"Schneegans/Fly-Pie/issues\">깃허브</a>에 이슈를 만들어 주세요."
 
 #: resources/ui/gtk4/settings.ui:448 resources/ui/gtk3/settings.ui:529
 msgid "Credits"
-msgstr ""
+msgstr "크레딧"
 
 #: resources/ui/gtk4/settings.ui:461 resources/ui/gtk3/settings.ui:456
 msgid "Created by"
-msgstr ""
+msgstr "제작자"
 
 #: resources/ui/gtk4/settings.ui:485 resources/ui/gtk3/settings.ui:480
 msgid "Translated by"
-msgstr ""
+msgstr "번역가"
 
 #: resources/ui/gtk4/settings.ui:509 resources/ui/gtk3/settings.ui:504
 msgid "Artwork by"
-msgstr ""
+msgstr "아트워크 제작자"
 
 #: resources/ui/gtk4/settings.ui:538 resources/ui/gtk3/settings.ui:658
 msgid "Sponsors"
-msgstr ""
+msgstr "스폰서"
 
 #: resources/ui/gtk4/settings.ui:555 resources/ui/gtk3/settings.ui:548
 msgid "🥇️ Gold Sponsors"
-msgstr ""
+msgstr "🥇️ 골드 스폰서"
 
 #: resources/ui/gtk4/settings.ui:567 resources/ui/gtk3/settings.ui:560
 msgid "🥈️ Silver Sponsors"
-msgstr ""
+msgstr "🥈️ 실버 스폰서"
 
 #: resources/ui/gtk4/settings.ui:579 resources/ui/gtk3/settings.ui:572
 msgid "🥉️ Bronze Sponsors"
-msgstr ""
+msgstr "🥉️ 브론즈 스폰서"
 
 #: resources/ui/gtk4/settings.ui:591 resources/ui/gtk3/settings.ui:584
 msgid "🏅️ Past Sponsors"
-msgstr ""
+msgstr "🏅️ 스폰서(였던)"
 
 #. Shown in the about-popover if there is no sponsor for a given tier
 #: resources/ui/gtk4/settings.ui:603 resources/ui/gtk4/settings.ui:616
@@ -1430,6 +1441,8 @@ msgid ""
 "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
 "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
 msgstr ""
+"Fly‐Pie에 대한 사랑을 보여주고 싶으신가요? <a href=\"https://github.com/"
+"sponsors/Schneegans\">최소 1달에 1달러로 스폰서가 되어보세요!</a>"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/gtk4/settings.ui:707 resources/ui/gtk3/settings.ui:702
@@ -1437,6 +1450,8 @@ msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
 msgstr ""
+"<b>메뉴</b>\n"
+"서브메뉴나 탑레벨 메뉴가 될 수 있습니다."
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/gtk4/settings.ui:731 resources/ui/gtk3/settings.ui:726
@@ -1444,29 +1459,31 @@ msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
+"<b>동작</b>\n"
+"커스텀 메뉴에 추가할 수 있습니다."
 
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/gtk4/settings.ui:801 resources/ui/gtk3/settings.ui:796
 msgid "Initialize most settings to random values."
-msgstr ""
+msgstr "대부분의 설정을 무작위로 설정합니다."
 
 #: resources/ui/gtk4/settings.ui:813 resources/ui/gtk3/settings.ui:808
 msgid "Generate Random Preset"
-msgstr ""
+msgstr "무작위 프리셋 생성"
 
 #: resources/ui/gtk4/settings.ui:844 resources/ui/gtk3/settings.ui:842
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
-msgstr ""
+msgstr "Fly-Pie는 GNOME Shell의 애니메이션 기능을 필요로 합니다."
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: resources/ui/gtk4/settings.ui:849 resources/ui/gtk3/settings.ui:852
 msgid "Enable Animations"
-msgstr ""
+msgstr "애니메이션 활성화"
 
 #. Caption of the tutorial page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:901 resources/ui/gtk3/settings.ui:1604
 msgid "Tutorial"
-msgstr ""
+msgstr "튜토리얼"
 
 #: resources/ui/gtk4/settings.ui:935 resources/ui/gtk3/settings.ui:939
 msgid ""
@@ -1491,12 +1508,12 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:1050 resources/ui/gtk3/settings.ui:1134
 #: resources/ui/gtk3/settings.ui:1276 resources/ui/gtk3/settings.ui:1360
 msgid "<big><b>Open the example menu!</b></big>"
-msgstr ""
+msgstr "<big><b>예시 메뉴를 열어봅시다!</b></big>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:998 resources/ui/gtk3/settings.ui:1000
 msgid "You can click anywhere!"
-msgstr ""
+msgstr "아무데나 클릭 가능합니다!"
 
 #: resources/ui/gtk4/settings.ui:1017 resources/ui/gtk3/settings.ui:1018
 msgid ""
@@ -1517,7 +1534,7 @@ msgstr ""
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:1081 resources/ui/gtk3/settings.ui:1080
 msgid "Practice Session I"
-msgstr ""
+msgstr "연습 I"
 
 #: resources/ui/gtk4/settings.ui:1091 resources/ui/gtk3/settings.ui:1090
 #, javascript-format
@@ -1571,7 +1588,7 @@ msgstr ""
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:1312 resources/ui/gtk3/settings.ui:1306
 msgid "Practice Session II"
-msgstr ""
+msgstr "연습 II"
 
 #: resources/ui/gtk4/settings.ui:1322 resources/ui/gtk3/settings.ui:1316
 #, javascript-format
@@ -1621,17 +1638,17 @@ msgstr ""
 #. Button for tutorial navigation. Goes back one page.
 #: resources/ui/gtk4/settings.ui:1526 resources/ui/gtk3/settings.ui:1519
 msgid "Previous"
-msgstr ""
+msgstr "이전"
 
 #. Button for tutorial navigation. Goes to the next page.
 #: resources/ui/gtk4/settings.ui:1583 resources/ui/gtk3/settings.ui:1576
 msgid "Next"
-msgstr ""
+msgstr "다음"
 
 #. Caption of the settings page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:1619 resources/ui/gtk3/settings.ui:4646
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 #: resources/ui/gtk4/settings.ui:1652 resources/ui/gtk4/settings.ui:1849
 #: resources/ui/gtk3/settings.ui:1644 resources/ui/gtk3/settings.ui:1841
@@ -1644,35 +1661,35 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:1680 resources/ui/gtk3/settings.ui:1672
 msgid "Animation Duration"
-msgstr ""
+msgstr "애니메이션 길이"
 
 #: resources/ui/gtk4/settings.ui:1694 resources/ui/gtk3/settings.ui:1686
 msgid "Global Scaling"
-msgstr ""
+msgstr "글로벌 스케일"
 
 #. Please keep this short!
 #: resources/ui/gtk4/settings.ui:1704 resources/ui/gtk3/settings.ui:1696
 msgid "Independent of the preset."
-msgstr ""
+msgstr "프리셋에 상관없이 적용됩니다."
 
 #: resources/ui/gtk4/settings.ui:1754 resources/ui/gtk3/settings.ui:1746
 msgid "Font"
-msgstr ""
+msgstr "폰트"
 
 #: resources/ui/gtk4/settings.ui:1764 resources/ui/gtk3/settings.ui:1756
 msgid "Text Color"
-msgstr ""
+msgstr "텍스트 색상"
 
 #: resources/ui/gtk4/settings.ui:1775 resources/ui/gtk4/settings.ui:2384
 #: resources/ui/gtk4/settings.ui:3079 resources/ui/gtk4/settings.ui:3311
 #: resources/ui/gtk3/settings.ui:1767 resources/ui/gtk3/settings.ui:2371
 #: resources/ui/gtk3/settings.ui:3061 resources/ui/gtk3/settings.ui:3277
 msgid "Background Color"
-msgstr ""
+msgstr "배경 색상"
 
 #: resources/ui/gtk4/settings.ui:1837 resources/ui/gtk3/settings.ui:1829
 msgid "Animation Mode"
-msgstr ""
+msgstr "애니메이션 모드"
 
 #: resources/ui/gtk4/settings.ui:1878 resources/ui/gtk4/settings.ui:2483
 #: resources/ui/gtk3/settings.ui:1865 resources/ui/gtk3/settings.ui:2465
@@ -1697,7 +1714,7 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:3424 resources/ui/gtk3/settings.ui:1934
 #: resources/ui/gtk3/settings.ui:2855 resources/ui/gtk3/settings.ui:3394
 msgid "Size"
-msgstr ""
+msgstr "크기"
 
 #: resources/ui/gtk4/settings.ui:1998 resources/ui/gtk4/settings.ui:2049
 #: resources/ui/gtk4/settings.ui:2201 resources/ui/gtk4/settings.ui:2252
@@ -1730,7 +1747,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2635 resources/ui/gtk3/settings.ui:2672
 #: resources/ui/gtk3/settings.ui:2792 resources/ui/gtk3/settings.ui:2809
 msgid "Opacity"
-msgstr ""
+msgstr "투명도"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
 #: resources/ui/gtk4/settings.ui:2090 resources/ui/gtk4/settings.ui:2154
@@ -1784,7 +1801,7 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:2538 resources/ui/gtk4/settings.ui:3284
 #: resources/ui/gtk3/settings.ui:2514 resources/ui/gtk3/settings.ui:3250
 msgid "Standard State"
-msgstr ""
+msgstr "기본 상태"
 
 #. Hovered: When the mouse pointer is over the item
 #. When the mouse pointer is over the item
@@ -1793,7 +1810,7 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:2551 resources/ui/gtk4/settings.ui:3835
 #: resources/ui/gtk3/settings.ui:2527 resources/ui/gtk3/settings.ui:3791
 msgid "Hovered State"
-msgstr ""
+msgstr "호버링 상태"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent's setting
 #: resources/ui/gtk4/settings.ui:2582 resources/ui/gtk4/settings.ui:2736
@@ -1801,7 +1818,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2561 resources/ui/gtk3/settings.ui:2718
 #: resources/ui/gtk3/settings.ui:3300 resources/ui/gtk3/settings.ui:3353
 msgid "Parent"
-msgstr ""
+msgstr "부모"
 
 #: resources/ui/gtk4/settings.ui:2884 resources/ui/gtk4/settings.ui:3435
 #: resources/ui/gtk3/settings.ui:2866 resources/ui/gtk3/settings.ui:3405
@@ -1812,7 +1829,7 @@ msgstr "오프셋"
 #: resources/ui/gtk4/settings.ui:2995 resources/ui/gtk4/settings.ui:3524
 #: resources/ui/gtk3/settings.ui:2977 resources/ui/gtk3/settings.ui:3494
 msgid "Draw Above"
-msgstr ""
+msgstr "위에 표시"
 
 #: resources/ui/gtk4/settings.ui:3005 resources/ui/gtk3/settings.ui:2987
 msgid "Render children above the center item."
@@ -1832,7 +1849,7 @@ msgstr ""
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/gtk4/settings.ui:3297 resources/ui/gtk3/settings.ui:3263
 msgid "With Hovered Parent"
-msgstr ""
+msgstr "호버링 부모"
 
 #: resources/ui/gtk4/settings.ui:3534 resources/ui/gtk3/settings.ui:3504
 msgid "Render grandchildren above children items."
@@ -1849,7 +1866,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:3678 resources/ui/gtk3/settings.ui:3634
 msgid "Inner Radius"
-msgstr ""
+msgstr "안쪽 반지름"
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
 #: resources/ui/gtk4/settings.ui:3689 resources/ui/gtk3/settings.ui:3645
@@ -1877,7 +1894,7 @@ msgstr ""
 #. When the mouse pointer is NOT over the item
 #: resources/ui/gtk4/settings.ui:3822 resources/ui/gtk3/settings.ui:3778
 msgid "Inactive State"
-msgstr ""
+msgstr "비활성 상태"
 
 #: resources/ui/gtk4/settings.ui:3913 resources/ui/gtk4/settings.ui:4016
 #: resources/ui/gtk3/settings.ui:3861 resources/ui/gtk3/settings.ui:3963
@@ -1890,11 +1907,11 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:3940 resources/ui/gtk3/settings.ui:3888
 msgid "Thickness"
-msgstr ""
+msgstr "굵기"
 
 #: resources/ui/gtk4/settings.ui:3951 resources/ui/gtk3/settings.ui:3899
 msgid "Color"
-msgstr ""
+msgstr "색상"
 
 #: resources/ui/gtk4/settings.ui:4003 resources/ui/gtk3/settings.ui:3951
 msgid "Minimum Segment Length"
@@ -1903,7 +1920,7 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:4046 resources/ui/gtk4/settings.ui:4170
 #: resources/ui/gtk3/settings.ui:3987 resources/ui/gtk3/settings.ui:4110
 msgid "Touch Button Settings"
-msgstr ""
+msgstr "터치 버튼 설정"
 
 #: resources/ui/gtk4/settings.ui:4056 resources/ui/gtk3/settings.ui:3997
 msgid "You can show a touch button for each of your menus."
@@ -1911,7 +1928,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4074 resources/ui/gtk3/settings.ui:4015
 msgid "Inactive Opacity"
-msgstr ""
+msgstr "비활성 투명도"
 
 #: resources/ui/gtk4/settings.ui:4102 resources/ui/gtk3/settings.ui:4043
 msgid "Show in Overview Mode"
@@ -1928,19 +1945,19 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk4/settings.ui:4598
 #: resources/ui/gtk3/settings.ui:4133 resources/ui/gtk3/settings.ui:4531
 msgid "Advanced Settings"
-msgstr ""
+msgstr "고급 설정"
 
 #: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4143
 msgid "These settings are independent of the presets."
-msgstr ""
+msgstr "이 설정들은 프리셋에 상관없이 적용됩니다."
 
 #: resources/ui/gtk4/settings.ui:4228 resources/ui/gtk3/settings.ui:4162
 msgid "Minimum Stroke Angle"
-msgstr ""
+msgstr "각도 최솟값"
 
 #: resources/ui/gtk4/settings.ui:4238 resources/ui/gtk3/settings.ui:4172
 msgid "Smaller turns will not lead to selections."
-msgstr ""
+msgstr "더 작은 회전각은 선택으로 판정되지 않습니다."
 
 #: resources/ui/gtk4/settings.ui:4275 resources/ui/gtk3/settings.ui:4209
 msgid "Minimum Stroke Length"
@@ -1951,76 +1968,88 @@ msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
+"더 짧은 제스처들은 선택으로 판정되지 않습니다.\n"
+"이건 글로벌 스케일의 값에 의해 곱해집니다."
 
 #: resources/ui/gtk4/settings.ui:4324 resources/ui/gtk3/settings.ui:4258
 msgid "Jitter Threshold"
-msgstr ""
+msgstr "흔들림 보정"
 
 #: resources/ui/gtk4/settings.ui:4334 resources/ui/gtk3/settings.ui:4268
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
+"더 작은 움직임은 판정되지 않습니다.\n"
+"이건 글로벌 스케일의 값에 의해 곱해집니다."
 
 #: resources/ui/gtk4/settings.ui:4372 resources/ui/gtk3/settings.ui:4306
 msgid "Display Timeout"
-msgstr ""
+msgstr "노출 타임아웃"
 
 #: resources/ui/gtk4/settings.ui:4382 resources/ui/gtk3/settings.ui:4316
 msgid ""
 "Menus will be shown after this many milliseconds.\n"
 "Use this to quickly select items without showing the menu."
 msgstr ""
+"메뉴들은 다음 밀리초 뒤 나타납니다.\n"
+"메뉴를 보이지 않고 항목을 빠르게 선택할 때 사용하세요."
 
 #: resources/ui/gtk4/settings.ui:4421 resources/ui/gtk3/settings.ui:4355
 msgid "Selection Timeout"
-msgstr ""
+msgstr "선택 타임아웃"
 
 #: resources/ui/gtk4/settings.ui:4431 resources/ui/gtk3/settings.ui:4365
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
 msgstr ""
+"포인터가 다음 밀리초 동안 움직이지 않을 때,\n"
+"포인터가 가리키는 항목이 선택됩니다."
 
 #: resources/ui/gtk4/settings.ui:4470 resources/ui/gtk3/settings.ui:4404
 msgid "Experimental Hover Mode"
-msgstr ""
+msgstr "실험적 호버링 모드"
 
 #: resources/ui/gtk4/settings.ui:4480 resources/ui/gtk3/settings.ui:4414
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
 msgstr ""
+"이 설정을 활성화하면 마우스 버튼을 누르지 않아도 됩니다.\n"
+"또한 모드키도 누를 필요가 없습니다."
 
 #: resources/ui/gtk4/settings.ui:4503 resources/ui/gtk3/settings.ui:4437
 msgid "Show Screencast Mouse"
-msgstr ""
+msgstr "화면녹화 마우스 보이기"
 
 #: resources/ui/gtk4/settings.ui:4513 resources/ui/gtk3/settings.ui:4447
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
 msgstr ""
+"마우스 클릭을 보여주는 더 큰 마우스 포인터를 보여줍니다.\n"
+"Fly-Pie를 녹화할때 사용할 수 있습니다."
 
 #: resources/ui/gtk4/settings.ui:4546 resources/ui/gtk3/settings.ui:4480
 msgid "Achievement Notifications"
-msgstr ""
+msgstr "도전과제 알림"
 
 #: resources/ui/gtk4/settings.ui:4556 resources/ui/gtk3/settings.ui:4490
 msgid "Show a notification whenever you complete an achievement."
-msgstr ""
+msgstr "도전과제를 달성할 때마다 알림을 표시합니다."
 
 #: resources/ui/gtk4/settings.ui:4618 resources/ui/gtk3/settings.ui:4563
 msgid "Load Preset"
-msgstr ""
+msgstr "프리셋 로드"
 
 #: resources/ui/gtk4/settings.ui:4630 resources/ui/gtk3/settings.ui:4583
 msgid "Load settings from a JSON file."
-msgstr ""
+msgstr "JSON 파일에서 설정을 불러옵니다."
 
 #: resources/ui/gtk4/settings.ui:4637 resources/ui/gtk3/settings.ui:4596
 msgid "Save the settings to a JSON file."
-msgstr ""
+msgstr "JSON 파일로 설정을 저장합니다."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: resources/ui/gtk4/settings.ui:4660 resources/ui/gtk4/settings.ui:4933
@@ -2095,6 +2124,12 @@ msgid ""
 "be removed if an item is dragged to another position in the menu. Use -1 to "
 "disable this feature."
 msgstr ""
+"고정 각도는 다른 항목이 추가되거나 삭제되었을 때 항목이 같은 자리에 있도록 "
+"해줍니다. 고정 각도는 항목의 위치가 익숙해져도 메뉴를 변경할 수 있게 "
+"해줍니다. 하지만 고정 각도에는 한가지 제약이 있습니다. 메뉴에서 고정 각도는 "
+"단조롭게 증가해야 합니다. 예상 밖의 반응을 방지하기 위해서 항목이 메뉴의 "
+"다른 위치로 이동했을 때 고정 각도는 사라집니다. -1로 이 기능을 비활성화할 수 "
+"있습니다."
 
 #: resources/ui/gtk4/settings.ui:5109 resources/ui/gtk3/settings.ui:5101
 msgid "This will open the menu."
@@ -2104,34 +2139,35 @@ msgstr "입력하면 메뉴가 열립니다."
 msgid ""
 "Usually, Super + Right Mouse Button opens the window menu. With this "
 "setting, you can instead open a Fly-Pie menu."
-msgstr ""
+msgstr "원래 Super + 우클릭은 창 메뉴를 열지만, 이 설정으로 Fly-Pie 메뉴를 열 수 "
+"있어요."
 
 #: resources/ui/gtk4/settings.ui:5128 resources/ui/gtk3/settings.ui:5120
 msgid "Bind to Super + RMB"
-msgstr ""
+msgstr "Super + 우클릭으로 설정"
 
 #: resources/ui/gtk4/settings.ui:5144 resources/ui/gtk3/settings.ui:5136
 msgid "Show Touch Button"
-msgstr ""
+msgstr "터치 버튼 보이기"
 
 #: resources/ui/gtk4/settings.ui:5160 resources/ui/gtk3/settings.ui:5152
 msgid "Open in Screen Center"
-msgstr ""
+msgstr "화면 가운데서 열기"
 
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:5221 resources/ui/gtk3/settings.ui:5445
 msgid "Achievements"
-msgstr ""
+msgstr "도전과제"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/gtk4/settings.ui:5415 resources/ui/gtk3/settings.ui:5382
 msgid "In Progress"
-msgstr ""
+msgstr "진행 중"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/gtk4/settings.ui:5429 resources/ui/gtk3/settings.ui:5397
 msgid "Completed"
-msgstr ""
+msgstr "완료"
 
 #: resources/ui/gtk4/settings.ui:5457 resources/ui/gtk3/settings.ui:5425
 msgid "Reset all achievements."
