@@ -21,7 +21,7 @@ jobs:
       - name: Download Clang-Format
         run: |
           sudo apt update -qq
-          sudo apt install clang-format -qq
+          sudo apt install clang-format-11 -qq
       - name: Run Clang-Format
         run: scripts/clang-format.sh
       - name: Compare Results
