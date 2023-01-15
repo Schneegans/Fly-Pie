@@ -24,6 +24,8 @@
 #                    -v 33: GNOME Shell 3.38
 #                    -v 34: GNOME Shell 40
 #                    -v 35: GNOME Shell 41
+#                    -v 36: GNOME Shell 42
+#                    -v 37: GNOME Shell 43
 # -s session:        This can either be "gnome-xsession" or "gnome-wayland-nested".
 
 # Exit on error.
@@ -55,8 +57,16 @@ EXTENSION="flypie@schneegans.github.com"
 # Run the container. For more info, visit https://github.com/Schneegans/gnome-shell-pod.
 POD=$(podman run --rm --cap-add=SYS_NICE --cap-add=IPC_LOCK -td "${IMAGE}")
 
+# Create a temporary directory.
+WORK_DIR=$(mktemp -d)
+if [[ ! "${WORK_DIR}" || ! -d "${WORK_DIR}" ]]; then
+  echo "Failed to create tmp directory!" >&2
+  exit 1
+fi
+
 # Properly shutdown podman when this script is exited.
 quit() {
+  rm -r "${WORK_DIR}"
   podman kill "${POD}"
   wait
 }
@@ -81,11 +91,15 @@ fail() {
 }
 
 # This searches the virtual screen of the container for a given target image (first
-# parameter). If it is not found, an error message (second paramter) is printed and the
+# parameter). If it is not found, an error message (second parameter) is printed and the
 # script exits via the fail() method above.
 find_target() {
   echo "Looking for ${1} on the screen."
-  POS=$(do_in_pod find-target.sh "${1}") || true
+
+  podman cp "${POD}:/opt/Xvfb_screen0" - | tar xf - --to-command "convert xwd:- ${WORK_DIR}/screen.png"
+
+  POS=$(./tests/find-target.sh "${WORK_DIR}/screen.png" "tests/references/${1}") || true
+
   if [[ -z "${POS}" ]]; then
     fail "${2}"
   fi
@@ -93,11 +107,15 @@ find_target() {
 
 # This searches the virtual screen of the container for a given target image (first
 # parameter) and moves the mouse to the upper left corner of the best match. If the target
-# image is not found, an error message (second paramter) is printed and the script exits
+# image is not found, an error message (second parameter) is printed and the script exits
 # via the fail() method above.
 move_mouse_to_target() {
   echo "Trying to move mouse to ${1}."
-  POS=$(do_in_pod find-target.sh "${1}") || true
+  
+  podman cp "${POD}:/opt/Xvfb_screen0" - | tar xf - --to-command "convert xwd:- ${WORK_DIR}/screen.png"
+
+  POS=$(./tests/find-target.sh "${WORK_DIR}/screen.png" "tests/references/${1}") || true
+
   if [[ -z "${POS}" ]]; then
     fail "${2}"
   fi
@@ -134,10 +152,8 @@ do_in_pod wait-user-bus.sh > /dev/null 2>&1
 # ----------------------------------------------------- install the to-be-tested extension
 
 echo "Installing extension."
-podman cp "tests/references" "${POD}:/home/gnomeshell/references"
 podman cp "${EXTENSION}.zip" "${POD}:/home/gnomeshell"
 do_in_pod gnome-extensions install "${EXTENSION}.zip"
-do_in_pod gnome-extensions enable "${EXTENSION}"
 
 
 # ---------------------------------------------------------------------- start GNOME Shell
@@ -153,14 +169,18 @@ echo "Starting $(do_in_pod gnome-shell --version)."
 do_in_pod systemctl --user start "${SESSION}@:99"
 sleep 10
 
+# Enable the extension.
+do_in_pod gnome-extensions enable "${EXTENSION}"
+
 # Starting with GNOME 40, the overview is the default mode. We close this here by hitting
 # the super key.
 if [[ "${FEDORA_VERSION}" -gt 33 ]]; then
   echo "Closing Overview."
   send_keystroke "super"
-  sleep 3
 fi
 
+# Wait until the extension is enabled and the overview closed.
+sleep 3
 
 # ---------------------------------------------------------------------- perform the tests
 
@@ -169,18 +189,18 @@ fi
 echo "Opening Preferences."
 do_in_pod gnome-extensions prefs "${EXTENSION}"
 sleep 3
-find_target "references/preferences.png" "Failed to open preferences!"
+find_target "preferences.png" "Failed to open preferences!"
 
 # Then we open the default Fly-Pie menu. This is considered to be working if we find a
 # small portion of a screenshot f the default menu on the screen.
 echo "Opening Default Menu."
 send_keystroke "ctrl+space"
 sleep 2
-find_target "references/default_menu.png" "Failed to open default menu!"
+find_target "default_menu.png" "Failed to open default menu!"
 
 # Finally we activate an item in the default menu.
 echo "Activating an item in the default menu."
-move_mouse_to_target "references/default_menu.png" "Failed to find item of the default menu!"
+move_mouse_to_target "default_menu.png" "Failed to find item of the default menu!"
 send_click 1
 sleep 2
 
