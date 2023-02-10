@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-13 21:04+0200\n"
-"PO-Revision-Date: 2022-12-20 09:48+0000\n"
+"PO-Revision-Date: 2023-02-10 16:41+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/fly-pie/core/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.15.1-dev\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -287,7 +287,7 @@ msgstr "Gebruiker wisselen…"
 
 #: src/common/menus/System.js:108
 msgid "Log Out"
-msgstr "Afmelden"
+msgstr "Uitloggen"
 
 #: src/common/menus/System.js:117
 msgid "Power Off…"
@@ -552,7 +552,7 @@ msgstr "Annuleer een selectie %x keer."
 #: src/common/Achievements.js:428
 #, javascript-format
 msgid "%s Pielot"
-msgstr "%svliegenier"
+msgstr "%spieloot"
 
 #. Translators: The description of the '%s Pielot' achievement.
 #: src/common/Achievements.js:430
