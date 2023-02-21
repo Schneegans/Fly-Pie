@@ -14,6 +14,10 @@ SPDX-License-Identifier: CC-BY-4.0
 
 **Release Date:** TBD
 
+#### New Features
+
+* Added support for GNOME 44.
+
 #### Other Enhancements
 
 * Fly-Pie now follows the [REUSE Specification](https://reuse.software/spec).
