@@ -108,7 +108,8 @@ var Menu = class Menu {
     // Here we store the Clutter.InputDevice which controls an extra cursor if it was used
     // most recently by the user. We will try to open the menu at the current position of
     // this device later.
-    this._deviceChangedID = global.backend.connect('last-device-changed', (b, device) => {
+    const backend         = global.backend ? global.backend : Meta.get_backend();
+    this._deviceChangedID = backend.connect('last-device-changed', (b, device) => {
       // Multi-cursor stuff only works on Wayland. For now, I assume that tablets,
       // pens and erasers create a secondary cursor. Is this true?
       if (utils.getSessionType() == 'wayland') {
@@ -552,7 +553,8 @@ var Menu = class Menu {
     this.close();
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();
-    global.backend.disconnect(this._deviceChangedID);
+    const backend = global.backend ? global.backend : Meta.get_backend();
+    backend.disconnect(this._deviceChangedID);
     this._cancelMoveWindowToPointer();
   }
 
