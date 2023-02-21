@@ -108,29 +108,28 @@ var Menu = class Menu {
     // Here we store the Clutter.InputDevice which controls an extra cursor if it was used
     // most recently by the user. We will try to open the menu at the current position of
     // this device later.
-    this._deviceChangedID =
-        Meta.get_backend().connect('last-device-changed', (b, device) => {
-          // Multi-cursor stuff only works on Wayland. For now, I assume that tablets,
-          // pens and erasers create a secondary cursor. Is this true?
-          if (utils.getSessionType() == 'wayland') {
-            if (device.get_device_type() == Clutter.InputDeviceType.TABLET_DEVICE ||
-                device.get_device_type() == Clutter.InputDeviceType.PEN_DEVICE ||
-                device.get_device_type() == Clutter.InputDeviceType.ERASER_DEVICE) {
+    this._deviceChangedID = global.backend.connect('last-device-changed', (b, device) => {
+      // Multi-cursor stuff only works on Wayland. For now, I assume that tablets,
+      // pens and erasers create a secondary cursor. Is this true?
+      if (utils.getSessionType() == 'wayland') {
+        if (device.get_device_type() == Clutter.InputDeviceType.TABLET_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.PEN_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.ERASER_DEVICE) {
 
-              this._lastNonPointerDevice = device;
+          this._lastNonPointerDevice = device;
 
-            }
-            // For all other pointer-input devices, we use the main mouse pointer
-            // location.
-            else if (
-                device.get_device_type() == Clutter.InputDeviceType.POINTER_DEVICE ||
-                device.get_device_type() == Clutter.InputDeviceType.TOUCHPAD_DEVICE ||
-                device.get_device_type() == Clutter.InputDeviceType.TOUCHSCREEN_DEVICE) {
+        }
+        // For all other pointer-input devices, we use the main mouse pointer
+        // location.
+        else if (
+            device.get_device_type() == Clutter.InputDeviceType.POINTER_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.TOUCHPAD_DEVICE ||
+            device.get_device_type() == Clutter.InputDeviceType.TOUCHSCREEN_DEVICE) {
 
-              this._lastNonPointerDevice = null;
-            }
-          }
-        });
+          this._lastNonPointerDevice = null;
+        }
+      }
+    });
 
     // This is called further below in various cases. It is not only called on real button
     // release events but also on semantically similar events such as touch end events.
@@ -553,7 +552,7 @@ var Menu = class Menu {
     this.close();
     Main.layoutManager.removeChrome(this._background);
     this._background.destroy();
-    Meta.get_backend().disconnect(this._deviceChangedID);
+    global.backend.disconnect(this._deviceChangedID);
     this._cancelMoveWindowToPointer();
   }
 
