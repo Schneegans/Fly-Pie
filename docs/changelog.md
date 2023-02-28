@@ -12,7 +12,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## [Fly-Pie 18](https://github.com/schneegans/fly-pie/releases/tag/v18)
 
-**Release Date:** TBD
+**Release Date:** 2023-02-28
 
 #### New Features
 
@@ -21,6 +21,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 #### Other Enhancements
 
+* Many translations received updates. Thanks to all the translators!
 * Fly-Pie now follows the [REUSE Specification](https://reuse.software/spec).
 
 
