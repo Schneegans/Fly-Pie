@@ -4407,6 +4407,39 @@ the current item will be selected.</property>
                             <child>
                               <object class="GtkLabel">
                                 <property name="halign">start</property>
+                                <property name="label" translatable="yes">Open Windows at the Pointer</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="halign">start</property>
+                                <property name="label" translatable="yes">With this enabled, Fly-Pie will attempt to open any windows
+at the current pointer position.</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">10</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkGrid">
+                            <property name="row_spacing">2</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="halign">start</property>
                                 <property name="label" translatable="yes">Experimental Hover Mode</property>
                               </object>
                               <packing>
@@ -4431,7 +4464,7 @@ or hold down a modifier key during selections.</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
-                            <property name="top_attach">10</property>
+                            <property name="top_attach">11</property>
                           </packing>
                         </child>
                         <child>
@@ -4520,13 +4553,23 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkSwitch" id="hover-mode">
+                          <object class="GtkSwitch" id="open-windows-at-pointer">
                             <property name="halign">end</property>
                             <property name="valign">center</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="top_attach">10</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSwitch" id="hover-mode">
+                            <property name="halign">end</property>
+                            <property name="valign">center</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">11</property>
                           </packing>
                         </child>
                       </object>

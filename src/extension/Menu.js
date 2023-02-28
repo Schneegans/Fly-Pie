@@ -1313,7 +1313,10 @@ var Menu = class Menu {
 
       // Then call the activation callback! Oftentimes, this will open a new window. We
       // make sure that this window is opened at the current pointer location!
-      this._openNextWindowAtPointer();
+      if (this._settings.get_boolean('open-windows-at-pointer')) {
+        this._openNextWindowAtPointer();
+      }
+
       child.getSelectionCallback()();
 
       // Report the selection over the D-Bus.

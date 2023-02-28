@@ -4473,6 +4473,39 @@ the current item will be selected.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="halign">start</property>
+                                        <property name="label" translatable="yes">Open Windows at the Pointer</property>
+                                        <layout>
+                                          <property name="column">0</property>
+                                          <property name="row">0</property>
+                                        </layout>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="halign">start</property>
+                                        <property name="label" translatable="yes">With this enabled, Fly-Pie will attempt to open any windows
+at the current pointer position.</property>
+                                        <style>
+                                          <class name="dim-label" />
+                                        </style>
+                                        <layout>
+                                          <property name="column">0</property>
+                                          <property name="row">1</property>
+                                        </layout>
+                                      </object>
+                                    </child>
+                                    <layout>
+                                      <property name="column">0</property>
+                                      <property name="row">10</property>
+                                    </layout>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkGrid">
+                                    <property name="row_spacing">2</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="halign">start</property>
                                         <property name="label" translatable="yes">Experimental Hover Mode</property>
                                         <layout>
                                           <property name="column">0</property>
@@ -4496,7 +4529,7 @@ or hold down a modifier key during selections.</property>
                                     </child>
                                     <layout>
                                       <property name="column">0</property>
-                                      <property name="row">10</property>
+                                      <property name="row">11</property>
                                     </layout>
                                   </object>
                                 </child>
@@ -4571,7 +4604,7 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     </child>
                                     <layout>
                                       <property name="column">0</property>
-                                      <property name="row">14</property>
+                                      <property name="row">13</property>
                                     </layout>
                                   </object>
                                 </child>
@@ -4581,12 +4614,22 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                     <property name="valign">center</property>
                                     <layout>
                                       <property name="column">1</property>
-                                      <property name="row">14</property>
+                                      <property name="row">13</property>
                                     </layout>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkSwitch" id="hover-mode">
+                                    <property name="halign">end</property>
+                                    <property name="valign">center</property>
+                                    <layout>
+                                      <property name="column">1</property>
+                                      <property name="row">11</property>
+                                    </layout>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkSwitch" id="open-windows-at-pointer">
                                     <property name="halign">end</property>
                                     <property name="valign">center</property>
                                     <layout>

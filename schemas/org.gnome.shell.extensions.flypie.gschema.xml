@@ -548,6 +548,12 @@ SPDX-License-Identifier: CC0-1.0
                    used for screencasts.</description>
     </key>
 
+    <key name="open-windows-at-pointer" type="b">
+      <default>true</default>
+      <summary>Open Windows at Pointer</summary>
+      <description>If set to true, Fly-Pie will attempt to open new windows at the pointer.</description>
+    </key>
+
     <key name="hover-mode" type="b">
       <default>false</default>
       <summary>Hover Mode</summary>
