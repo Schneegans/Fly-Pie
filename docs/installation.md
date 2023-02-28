@@ -11,6 +11,9 @@ SPDX-License-Identifier: CC-BY-4.0
 
 You can either install Fly-Pie from extensions.gnome.org (a), download a stable release
 from GitHub (b) or clone the latest version directly with `git` (c).
+There may also be some community-maintained packages for your distribution, such as:
+* [AUR (Arch): latest Fly-Pie release](https://aur.archlinux.org/packages/gnome-shell-extension-fly-pie)
+* [AUR (Arch): directly from git](https://aur.archlinux.org/packages/gnome-shell-extension-fly-pie-git)
 
 ## a) Installing from extensions.gnome.org
 
