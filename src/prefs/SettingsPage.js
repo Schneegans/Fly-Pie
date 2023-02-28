@@ -190,6 +190,7 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('gesture-jitter-threshold');
     this._bindSlider('gesture-min-stroke-length');
     this._bindSlider('gesture-min-stroke-angle');
+    this._bindSwitch('open-windows-at-pointer');
     this._bindSwitch('hover-mode');
     this._bindSwitch('show-screencast-mouse');
     this._bindSwitch('achievement-notifications');

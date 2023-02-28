@@ -17,6 +17,7 @@ SPDX-License-Identifier: CC-BY-4.0
 #### New Features
 
 * Added support for GNOME 44.
+* There is a new option in the advanced settings which allows disabling the move-new-windows-to-pointer feature.
 
 #### Other Enhancements
 
