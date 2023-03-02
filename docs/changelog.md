@@ -9,6 +9,14 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
+## [Fly-Pie 19](https://github.com/schneegans/fly-pie/releases/tag/v19)
+
+**Release Date:** TBD
+
+#### Bug Fixes
+
+* Fixed an issue which made the menu invisible above full-screen windows on Wayland.
+
 
 ## [Fly-Pie 18](https://github.com/schneegans/fly-pie/releases/tag/v18)
 

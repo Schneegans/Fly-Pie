@@ -11,8 +11,8 @@
 
 'use strict';
 
-const Main                        = imports.ui.main;
-const {Clutter, Gio, GObject, St} = imports.gi;
+const Main                              = imports.ui.main;
+const {Clutter, Gio, GObject, Meta, St} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
@@ -72,11 +72,13 @@ class Background extends Clutter.Actor {
         this._settings.connect('changed::preview-on-right-side', () => {
           if (this._previewMode) {
             // Set x accounting monitor x as a starting point
-            this.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
-            this.x = this._settings.get_boolean('preview-on-right-side') ?
-                this.width + Main.layoutManager.currentMonitor.x :
-                Main.layoutManager.currentMonitor.x;
-            this.set_easing_duration(0);
+            this.ease({
+              x: this._settings.get_boolean('preview-on-right-side') ?
+                  this.width + Main.layoutManager.currentMonitor.x :
+                  Main.layoutManager.currentMonitor.x,
+              duration: this._settings.get_double('easing-duration') * 1000,
+              mode: Clutter.AnimationMode.EASE_OUT_QUAD
+            });
           }
         }));
 
@@ -189,9 +191,12 @@ class Background extends Clutter.Actor {
   // The open() method above does not really show the background; it's still translucent.
   // The actual revealing is done by this method.
   reveal() {
-    this.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
-    this.opacity = 255;
-    this.set_easing_duration(0);
+    Meta.disable_unredirect_for_display(global.display);
+    this.ease({
+      opacity: 255,
+      duration: this._settings.get_double('easing-duration') * 1000,
+      mode: Clutter.AnimationMode.EASE_OUT_QUAD
+    });
   }
 
   // This hides the background again. A fade-out animation is used for the opacity, but
@@ -208,9 +213,14 @@ class Background extends Clutter.Actor {
     this.reactive = false;
 
     // Add the fade-out animation.
-    this.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
-    this.opacity = 0;
-    this.set_easing_duration(0);
+    this.ease({
+      opacity: 0,
+      duration: this._settings.get_double('easing-duration') * 1000,
+      mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+      onComplete: () => {
+        Meta.enable_unredirect_for_display(global.display);
+      }
+    });
   }
 
   // ----------------------------------------------------------------------- private stuff
