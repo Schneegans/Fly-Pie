@@ -16,6 +16,7 @@ SPDX-License-Identifier: CC-BY-4.0
 #### Bug Fixes
 
 * Fixed an issue which made the menu invisible above full-screen windows on Wayland.
+* Fixed an issue which could make Fly-Pie unresponsive until the session is restarted if the configured hotkey was pressed multiple times during a configured display timeout. In rare cases this could also lead to completely blocking the user input.
 
 
 ## [Fly-Pie 18](https://github.com/schneegans/fly-pie/releases/tag/v18)
