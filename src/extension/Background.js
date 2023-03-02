@@ -82,13 +82,6 @@ class Background extends Clutter.Actor {
           }
         }));
 
-    // Hide completely once the opacity has been faded to zero.
-    this.connect('transitions-completed', () => {
-      if (this.opacity == 0) {
-        this.visible = false;
-      }
-    });
-
     // Create the control buttons container. This is shown in preview mode only.
     this._controlButtons = new St.Widget({
       style_class: 'switcher-list',
@@ -181,6 +174,10 @@ class Background extends Clutter.Actor {
       }
     }
 
+    // There might be a fade-out ongoing. This would make the actor invisible again once
+    // completed. So we stop the transition if there is any.
+    this.remove_transition('opacity');
+
     // Make the background visible and clickable.
     this.reactive = true;
     this.visible  = true;
@@ -217,8 +214,11 @@ class Background extends Clutter.Actor {
       opacity: 0,
       duration: this._settings.get_double('easing-duration') * 1000,
       mode: Clutter.AnimationMode.EASE_OUT_QUAD,
-      onComplete: () => {
+      onStopped: () => {
         Meta.enable_unredirect_for_display(global.display);
+
+        // Hide completely once the opacity has been faded to zero.
+        this.visible = false;
       }
     });
   }
