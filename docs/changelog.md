@@ -13,6 +13,12 @@ SPDX-License-Identifier: CC-BY-4.0
 
 **Release Date:** TBD
 
+#### Enhancements
+
+* **New donation method: Ko-fi**. Follow me on Ko-fi to get the latest updates regarding my extensions: https://ko-fi.com/schneegans!
+* The custom info-popover has been replaced by a more traditional main menu. It gives access to Fly-Pie's homepage, the bug tracker and some donation options.
+* An about dialog has been added. If available, the `Adw.AboutWindow` is used.
+
 #### Bug Fixes
 
 * Fixed an issue which made the menu invisible above full-screen windows on Wayland.
