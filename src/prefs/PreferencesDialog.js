@@ -138,11 +138,6 @@ var PreferencesDialog = class PreferencesDialog {
       stackSwitcher.parent.remove(menuButton);
       stackSwitcher.parent.remove(stackSwitcher);
 
-      // There is a hidden achievement for viewing the sponsors page...
-      menuButton.connect('activate', () => {
-        Statistics.getInstance().addSponsorsViewed();
-      });
-
       // On GNOME Shell 42, the settings dialog uses libadwaita (at least most of the time
       // - it seems that pop!_OS does not support libadwaita even on GNOME 42). While the
       // preferences dialog could benefit from using libadwaita's widgets, maintaining
@@ -192,15 +187,25 @@ var PreferencesDialog = class PreferencesDialog {
           action.connect('activate', () => Gtk.show_uri(null, uri, Gdk.CURRENT_TIME));
           group.add_action(action);
         };
+        
+        // There is a hidden achievement for viewing the sponsors page...
+        const addSponsorAction = (name, uri) => {
+          const action = Gio.SimpleAction.new(name, null);
+          action.connect('activate', () => {
+            Gtk.show_uri(null, uri, Gdk.CURRENT_TIME);
+            Statistics.getInstance().addSponsorsViewed();
+          });
+          group.add_action(action);
+        };
 
         // clang-format off
-        addURIAction('homepage',      'https://github.com/Schneegans/Fly-Pie');
-        addURIAction('bugs',          'https://github.com/Schneegans/Fly-Pie/issues');
-        addURIAction('changelog',     'https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog.md');
-        addURIAction('translate',     'https://hosted.weblate.org/engage/Fly-Pie/');
-        addURIAction('donate-kofi',   'https://ko-fi.com/schneegans');
-        addURIAction('donate-github', 'https://github.com/sponsors/Schneegans');
-        addURIAction('donate-paypal', 'https://www.paypal.com/donate/?hosted_button_id=3F7UFL8KLVPXE');
+        addURIAction('homepage',  'https://github.com/Schneegans/Fly-Pie');
+        addURIAction('bugs',      'https://github.com/Schneegans/Fly-Pie/issues');
+        addURIAction('changelog', 'https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog.md');
+        addURIAction('translate', 'https://hosted.weblate.org/engage/Fly-Pie/');
+        addSponsorAction('donate-kofi',   'https://ko-fi.com/schneegans');
+        addSponsorAction('donate-github', 'https://github.com/sponsors/Schneegans');
+        addSponsorAction('donate-paypal', 'https://www.paypal.com/donate/?hosted_button_id=3F7UFL8KLVPXE');
         // clang-format on
 
         // Add the about dialog.
@@ -215,7 +220,7 @@ var PreferencesDialog = class PreferencesDialog {
             }
           });
 
-          const sponsors = this._getJSONResource('/credits/sponsors.json');
+          const sponsors     = this._getJSONResource('/credits/sponsors.json');
           const contributors = this._getJSONResource('/credits/contributors.json');
           let dialog;
 
