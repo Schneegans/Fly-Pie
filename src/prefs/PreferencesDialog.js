@@ -292,7 +292,7 @@ var PreferencesDialog = class PreferencesDialog {
           dialog.set_translator_credits([...translators].join('\n'));
           dialog.set_copyright('© 2022 Simon Schneegans');
           dialog.set_website('https://github.com/Schneegans/Fly-Pie');
-          dialog.set_license_type(Gtk.License.MIT);
+          dialog.set_license_type(Gtk.License.MIT_X11);
 
           if (utils.gtk4()) {
             dialog.show();
