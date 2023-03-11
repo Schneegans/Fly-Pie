@@ -187,7 +187,7 @@ var PreferencesDialog = class PreferencesDialog {
           action.connect('activate', () => Gtk.show_uri(null, uri, Gdk.CURRENT_TIME));
           group.add_action(action);
         };
-        
+
         // There is a hidden achievement for viewing the sponsors page...
         const addSponsorAction = (name, uri) => {
           const action = Gio.SimpleAction.new(name, null);
