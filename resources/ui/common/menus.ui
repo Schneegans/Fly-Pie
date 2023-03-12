@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+SPDX-FileCopyrightText: Simon Schneegans <code@simonschneegans.de>
+SPDX-License-Identifier: MIT
+-->
+
+<interface domain="flypie">
+
+  <menu id="main-menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Visit Homepage</attribute>
+        <attribute name="action">prefs.homepage</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">View Changelog</attribute>
+        <attribute name="action">prefs.changelog</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Report a Bug</attribute>
+        <attribute name="action">prefs.bugs</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Translate</attribute>
+        <attribute name="action">prefs.translate</attribute>
+      </item>
+      <submenu>
+        <attribute name="label" translatable="yes">Donate</attribute>
+        <item>
+          <attribute name="label">Ko-fi</attribute>
+          <attribute name="action">prefs.donate-kofi</attribute>
+        </item>
+        <item>
+          <attribute name="label">GitHub</attribute>
+          <attribute name="action">prefs.donate-github</attribute>
+        </item>
+        <item>
+          <attribute name="label">PayPal</attribute>
+          <attribute name="action">prefs.donate-paypal</attribute>
+        </item>
+      </submenu>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">About Fly-Pie</attribute>
+        <attribute name="action">prefs.about</attribute>
+      </item>
+    </section>
+  </menu>
+
+</interface>

@@ -66,6 +66,7 @@ var PreferencesDialog = class PreferencesDialog {
 
     // Load the user interface file.
     this._builder = new Gtk.Builder();
+    this._builder.add_from_resource(`/ui/common/menus.ui`);
     this._builder.add_from_resource(`/ui/${utils.gtk4() ? 'gtk4' : 'gtk3'}/settings.ui`);
 
     // Load the CSS file for the settings dialog.
@@ -95,72 +96,6 @@ var PreferencesDialog = class PreferencesDialog {
 
     // Initialize the Achievements page.
     this._achievementsPage = new AchievementsPage(this._builder, this._settings);
-
-    // Show current version number in about-popover.
-    this._builder.get_object('app-name').label = 'Fly-Pie ' + Me.metadata.version;
-
-    // There is a hidden achievement for viewing the sponsors page...
-    this._builder.get_object('about-stack').connect('notify::visible-child-name', (o) => {
-      if (o.visible_child_name == 'sponsors-page') {
-        Statistics.getInstance().addSponsorsViewed();
-      }
-    });
-
-    // Now add all contributors to the about-popover.
-    {
-
-      // This lambda adds a list of contributors to the given label.
-      const addContributors = (labelID, contributors) => {
-        // Do not touch the label if nothing needs to be done. This ensures that any
-        // default state (like "- none -") is kept.
-        if (Object.keys(contributors).length == 0) {
-          return;
-        }
-
-        // Clear the label first.
-        const label   = this._builder.get_object(labelID);
-        label.label   = '';
-        label.opacity = 1;
-
-        // Then add a new line for each contributor.
-        for (const [contributor, link] of Object.entries(contributors)) {
-          if (link != '') {
-            label.label += `<a href='${link}'>${contributor}</a>\n`;
-          } else {
-            label.label += `${contributor}\n`;
-          }
-        }
-
-        // Remove the last newline.
-        label.label = label.label.slice(0, label.label.length - 1);
-      };
-
-      // Add all contributors to the credits-page of the about-popover.
-      const contributors = this._getJSONResource('/credits/contributors.json');
-      addContributors('credits-created-by', contributors.code);
-      addContributors('credits-artwork-by', contributors.artwork);
-
-      // The JSON report format from weblate is a bit weird. Here we extract all unique
-      // names from the translation report.
-      const data        = this._getJSONResource('/credits/translators.json');
-      const translators = {};
-      data.forEach(i => {
-        for (const j of Object.values(i)) {
-          j.forEach(k => {
-            translators[k[1]] = '';
-          });
-        }
-      });
-
-      addContributors('credits-translated-by', translators);
-
-      // Add all sponsors to the sponsors page of the about-popover.
-      const sponsors = this._getJSONResource('/credits/sponsors.json');
-      addContributors('credits-gold-sponsors', sponsors.gold);
-      addContributors('credits-silver-sponsors', sponsors.silver);
-      addContributors('credits-bronze-sponsors', sponsors.bronze);
-      addContributors('credits-past-sponsors', sponsors.past);
-    }
 
     // Hide the in-app notification when its close button is pressed.
     this._builder.get_object('notification-close-button').connect('clicked', () => {
@@ -192,13 +127,15 @@ var PreferencesDialog = class PreferencesDialog {
     // This is our top-level widget which we will return later.
     this._widget = this._builder.get_object('main-notebook');
 
-    // Because it looks cool, we add the stack switcher and the about button to the
+    // Because it looks cool, we add the stack switcher and the menu button to the
     // window's title bar. We also make the bottom corners rounded.
-    this._widget.connect('realize', () => {
-      const stackSwitcher = this._builder.get_object('main-stack-switcher');
-      const aboutButton   = this._builder.get_object('about-button');
+    this._widget.connect('realize', widget => {
+      const window = utils.gtk4() ? widget.get_root() : widget.get_toplevel();
 
-      stackSwitcher.parent.remove(aboutButton);
+      const stackSwitcher = this._builder.get_object('main-stack-switcher');
+      const menuButton    = this._builder.get_object('menu-button');
+
+      stackSwitcher.parent.remove(menuButton);
       stackSwitcher.parent.remove(stackSwitcher);
 
       // On GNOME Shell 42, the settings dialog uses libadwaita (at least most of the time
@@ -210,35 +147,166 @@ var PreferencesDialog = class PreferencesDialog {
       // versions and rewrite the entire dialog using libadwaita widgets!
       if (Adw && utils.shellVersionIsAtLeast(42, 'beta')) {
 
-        const window = this._widget.get_root().get_content();
-
         // Add widgets to the titlebar.
         const titlebar = this._findChildByType(window, Adw.HeaderBar);
         titlebar.set_title_widget(stackSwitcher);
-        titlebar.pack_start(aboutButton);
+        titlebar.pack_start(menuButton);
 
         // "disable" the Adw.Clamp.
-        const clamp        = this._findParentByType(this._widget, Adw.Clamp);
+        const clamp        = this._findParentByType(widget, Adw.Clamp);
         clamp.maximum_size = 100000;
 
         // Disable the Gtk.ScrolledWindow.
-        const scroll = this._findParentByType(this._widget, Gtk.ScrolledWindow);
+        const scroll             = this._findParentByType(widget, Gtk.ScrolledWindow);
         scroll.vscrollbar_policy = Gtk.PolicyType.NEVER;
 
       } else if (utils.gtk4()) {
 
-        const titlebar = this._widget.get_root().get_titlebar();
+        const titlebar = window.get_titlebar();
         titlebar.set_title_widget(stackSwitcher);
-        titlebar.pack_start(aboutButton);
+        titlebar.pack_start(menuButton);
 
         // This class makes the bottom corners round.
-        this._widget.get_root().get_style_context().add_class('fly-pie-window');
+        window.get_style_context().add_class('fly-pie-window');
 
       } else {
 
-        const titlebar = this._widget.get_toplevel().get_titlebar();
+        const titlebar = window.get_titlebar();
         titlebar.set_custom_title(stackSwitcher);
-        titlebar.pack_start(aboutButton);
+        titlebar.pack_start(menuButton);
+      }
+
+      // Now create all the actions for the main menu.
+      const group = Gio.SimpleActionGroup.new();
+      window.insert_action_group('prefs', group);
+
+      // Add the main menu to the title bar.
+      {
+        const addURIAction = (name, uri) => {
+          const action = Gio.SimpleAction.new(name, null);
+          action.connect('activate', () => Gtk.show_uri(null, uri, Gdk.CURRENT_TIME));
+          group.add_action(action);
+        };
+
+        // There is a hidden achievement for viewing the sponsors page...
+        const addSponsorAction = (name, uri) => {
+          const action = Gio.SimpleAction.new(name, null);
+          action.connect('activate', () => {
+            Gtk.show_uri(null, uri, Gdk.CURRENT_TIME);
+            Statistics.getInstance().addSponsorsViewed();
+          });
+          group.add_action(action);
+        };
+
+        // clang-format off
+        addURIAction('homepage',  'https://github.com/Schneegans/Fly-Pie');
+        addURIAction('bugs',      'https://github.com/Schneegans/Fly-Pie/issues');
+        addURIAction('changelog', 'https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog.md');
+        addURIAction('translate', 'https://hosted.weblate.org/engage/Fly-Pie/');
+        addSponsorAction('donate-kofi',   'https://ko-fi.com/schneegans');
+        addSponsorAction('donate-github', 'https://github.com/sponsors/Schneegans');
+        addSponsorAction('donate-paypal', 'https://www.paypal.com/donate/?hosted_button_id=3F7UFL8KLVPXE');
+        // clang-format on
+
+        // Add the about dialog.
+        const aboutAction = Gio.SimpleAction.new('about', null);
+        aboutAction.connect('activate', () => {
+          // The JSON report format from weblate is a bit weird. Here we extract all
+          // unique names from the translation report.
+          const translators = new Set();
+          this._getJSONResource('/credits/translators.json').forEach(i => {
+            for (const j of Object.values(i)) {
+              j.forEach(k => translators.add(k[1]));
+            }
+          });
+
+          const sponsors     = this._getJSONResource('/credits/sponsors.json');
+          const contributors = this._getJSONResource('/credits/contributors.json');
+          let dialog;
+
+          // We try to use the special Adw.AboutWindow if it is available.
+          if (Adw && Adw.AboutWindow) {
+            let formatSponsors = (sponsors) => {
+              return sponsors.map(s => {
+                if (s.url == '')
+                  return s.name;
+                else
+                  return `${s.name} ${s.url}`;
+              });
+            };
+
+            dialog = new Adw.AboutWindow({transient_for: window, modal: true});
+            dialog.set_application_icon('flypie-symbolic');
+            dialog.set_application_name('Fly-Pie');
+            dialog.set_version(`${Me.metadata.version}`);
+            dialog.set_developer_name('Simon Schneegans');
+            dialog.set_developers(contributors.code);
+            dialog.set_designers(contributors.artwork);
+            dialog.set_issue_url('https://github.com/Schneegans/Fly-Pie/issues');
+            if (sponsors.gold.length > 0) {
+              dialog.add_credit_section(
+                  _('Gold Sponsors'), formatSponsors(sponsors.gold));
+            }
+            if (sponsors.silver.length > 0) {
+              dialog.add_credit_section(
+                  _('Silver Sponsors'), formatSponsors(sponsors.silver));
+            }
+            if (sponsors.bronze.length > 0) {
+              dialog.add_credit_section(
+                  _('Bronze Sponsors'), formatSponsors(sponsors.bronze));
+            }
+            if (sponsors.past.length > 0) {
+              dialog.add_credit_section(
+                  _('Past Sponsors'), formatSponsors(sponsors.past));
+            }
+
+          } else {
+
+            let formatSponsors = (sponsors) => {
+              return sponsors.map(s => {
+                if (s.url == '')
+                  return s.name;
+                else
+                  return `<a href="${s.url}">${s.name}</a>`;
+              });
+            };
+
+            dialog = new Gtk.AboutDialog({transient_for: window, modal: true});
+            dialog.set_logo_icon_name('flypie-symbolic');
+            dialog.set_program_name(`Fly-Pie ${Me.metadata.version}`);
+            dialog.set_authors(contributors.code);
+            dialog.set_artists(contributors.artwork);
+            if (sponsors.gold.length > 0) {
+              dialog.add_credit_section(
+                  _('Gold Sponsors'), formatSponsors(sponsors.gold));
+            }
+            if (sponsors.silver.length > 0) {
+              dialog.add_credit_section(
+                  _('Silver Sponsors'), formatSponsors(sponsors.silver));
+            }
+            if (sponsors.bronze.length > 0) {
+              dialog.add_credit_section(
+                  _('Bronze Sponsors'), formatSponsors(sponsors.bronze));
+            }
+            if (sponsors.past.length > 0) {
+              dialog.add_credit_section(
+                  _('Past Sponsors'), formatSponsors(sponsors.past));
+            }
+          }
+
+          dialog.set_translator_credits([...translators].join('\n'));
+          dialog.set_copyright('© 2022 Simon Schneegans');
+          dialog.set_website('https://github.com/Schneegans/Fly-Pie');
+          dialog.set_license_type(Gtk.License.MIT_X11);
+
+          if (utils.gtk4()) {
+            dialog.show();
+          } else {
+            dialog.show_all();
+          }
+        });
+
+        group.add_action(aboutAction);
       }
     });
 
@@ -277,7 +345,6 @@ var PreferencesDialog = class PreferencesDialog {
     // On GTK3, we have to show the widgets.
     if (!utils.gtk4()) {
       this._widget.show_all();
-      this._builder.get_object('about-popover').foreach(w => w.show_all());
       this._builder.get_object('preset-popover').foreach(w => w.show_all());
     }
   }

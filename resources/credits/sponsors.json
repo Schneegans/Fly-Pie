@@ -1,27 +1,78 @@
 {
-  "gold": {
-    "Maxence Sebald": "",
-    "Dennis ten Hoove": "https://github.com/dennis1248"
-  },
-  "silver": {
-    "Garsiv": "https://www.llorachdevs.com/Home",
-    "Jorge Castro": "https://github.com/castrojo"
-  },
-  "bronze": {
-    "@vlazic": "https://github.com/vlazic",
-    "@lobau": "https://github.com/lobau"
-  },
-  "past": {
-    "D3vil0p3r": "https://github.com/D3vil0p3r",
-    "@SimHacker": "https://github.com/SimHacker",
-    "Angel Brielez": "https://github.com/AngelBrielez",
-    "@FahriDevZ": "https://github.com/FahriDevZ",
-    "tj3k": "https://twitter.com/tjiiik",
-    "@VinnyBoiler": "https://github.com/VinnyBoiler",
-    "@p2004a": "https://github.com/p2004a",
-    "@BakiDance": "https://github.com/BakiDance",
-    "GEPLlinux": "",
-    "@denis-roy": "https://github.com/denis-roy",
-    "@ykhurshid": "https://github.com/ykhurshid"
-  }
+  "gold": [
+    {
+      "name": "Maxence Sebald",
+      "url": ""
+    },
+    {
+      "name": "Dennis ten Hoove",
+      "url": "https://github.com/dennis1248"
+    }
+  ],
+  "silver": [
+    {
+      "name": "Garsiv",
+      "url": "https://www.llorachdevs.com/Home"
+    },
+    {
+      "name": "Jorge Castro",
+      "url": "https://github.com/castrojo"
+    }
+  ],
+  "bronze": [
+    {
+      "name": "@vlazic",
+      "url": "https://github.com/vlazic"
+    },
+    {
+      "name": "@lobau",
+      "url": "https://github.com/lobau"
+    }
+  ],
+  "past": [
+    {
+      "name": "D3vil0p3r",
+      "url": "https://github.com/D3vil0p3r"
+    },
+    {
+      "name": "@SimHacker",
+      "url": "https://github.com/SimHacker"
+    },
+    {
+      "name": "Angel Brielez",
+      "url": "https://github.com/AngelBrielez"
+    },
+    {
+      "name": "@FahriDevZ",
+      "url": "https://github.com/FahriDevZ"
+    },
+    {
+      "name": "tj3k",
+      "url": "https://twitter.com/tjiiik"
+    },
+    {
+      "name": "@VinnyBoiler",
+      "url": "https://github.com/VinnyBoiler"
+    },
+    {
+      "name": "@p2004a",
+      "url": "https://github.com/p2004a"
+    },
+    {
+      "name": "@BakiDance",
+      "url": "https://github.com/BakiDance"
+    },
+    {
+      "name": "GEPLlinux",
+      "url": ""
+    },
+    {
+      "name": "@denis-roy",
+      "url": "https://github.com/denis-roy"
+    },
+    {
+      "name": "@ykhurshid",
+      "url": "https://github.com/ykhurshid"
+    }
+  ]
 }

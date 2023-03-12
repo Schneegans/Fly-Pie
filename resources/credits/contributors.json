@@ -1,10 +1,10 @@
 {
-  "code": {
-    "@Schneegans": "https://github.com/Schneegans",
-    "@daPhipz": "https://github.com/daPhipz",
-    "@GestaltEngine": "https://github.com/GestaltEngine"
-  },
-  "artwork": {
-    "@Schneegans": "https://github.com/Schneegans"
-  }
+  "code": [
+    "Simon Schneegans",
+    "Philipp Kiemle",
+    "@GestaltEngine"
+  ],
+  "artwork": [
+    "Simon Schneegans"
+  ]
 }
