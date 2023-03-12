@@ -72,8 +72,8 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
 
 <h2 align="center">🥇 Current Gold Sponsors</h2>
 <p align="center">
-    Maxence Sebald<br>
-    <a href="https://github.com/dennis1248">Dennis ten Hoove</a><br>
+  <a href="https://github.com/SimHacker">@SimHacker</a><br>
+  Maxence Sebald<br>
 </p>
 
 <h2 align="center">🥈 Current Silver Sponsors</h2>
@@ -90,8 +90,8 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
 
 <h2 align="center">🏅 Previous Sponsors and One-Time Donators</h2>
 <p align="center">
+  <a href="https://github.com/dennis1248">Dennis ten Hoove</a><br>
   <a href="https://github.com/D3vil0p3r">D3vil0p3r</a><br>
-  <a href="https://github.com/SimHacker">@SimHacker</a><br>
   <a href='https://github.com/AngelBrielez'>Angel Brielez</a><br>
   <a href="https://github.com/FahriDevZ">@FahriDevZ</a><br>
   <a href="https://twitter.com/tjiiik">tj3k</a><br>
