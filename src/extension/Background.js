@@ -150,10 +150,10 @@ class Background extends Clutter.Actor {
       // grabbing the complete user input.
       this._controlButtons.visible = false;
 
-      this.width  = Main.layoutManager.currentMonitor.width;
-      this.height = Main.layoutManager.currentMonitor.height;
-      this.x      = Main.layoutManager.currentMonitor.x;
-      this.y      = Main.layoutManager.currentMonitor.y;
+      this.width  = global.stage.width;
+      this.height = global.stage.height;
+      this.x      = 0;
+      this.y      = 0;
 
       // Remove any previous clips set in preview mode.
       this.remove_clip();

@@ -80,15 +80,16 @@ var Menu = class Menu {
     // works for as well for stylus or touch input.
     this._pointerPos = [0, 0];
 
-    // This will contain the Clutter.InputDevice which controls an extra cursor (such as a
-    // stylus) if it was used most recently by the user. We will try to open the menu at
-    // the current position of this device.
-    this._lastNonPointerDevice = null;
+    // This will contain the Clutter.InputDevice which controlled a pointer most recently
+    // (this could be a mouse, a pen or a stylus). We will try to open the menu at the
+    // current position of this device.
+    const seat              = Clutter.get_default_backend().get_default_seat();
+    this._lastPointerDevice = seat.get_pointer();
 
     // When the menu is opened, we cannot directly get the position of the
-    // _lastNonPointerDevice (as Clutter.Seat.query_device_state() is not available).
-    // Therefore we wait for the next ENTER event for this device and move the menu to the
-    // position given by this event.
+    // _lastPointerDevice (as Clutter.Seat.query_device_state() is not properly wrapped
+    // for GJS). Therefore we wait for the next ENTER event for this device and move the
+    // menu to the position given by this event.
     this._initialRepositioningRequired = false;
 
     // The background covers the entire screen. Usually it's transparent and thus
@@ -117,8 +118,7 @@ var Menu = class Menu {
             device.get_device_type() == Clutter.InputDeviceType.PEN_DEVICE ||
             device.get_device_type() == Clutter.InputDeviceType.ERASER_DEVICE) {
 
-          this._lastNonPointerDevice = device;
-
+          this._lastPointerDevice = device;
         }
         // For all other pointer-input devices, we use the main mouse pointer
         // location.
@@ -127,7 +127,8 @@ var Menu = class Menu {
             device.get_device_type() == Clutter.InputDeviceType.TOUCHPAD_DEVICE ||
             device.get_device_type() == Clutter.InputDeviceType.TOUCHSCREEN_DEVICE) {
 
-          this._lastNonPointerDevice = null;
+          const seat              = Clutter.get_default_backend().get_default_seat();
+          this._lastPointerDevice = seat.get_pointer();
         }
       }
     });
@@ -161,11 +162,10 @@ var Menu = class Menu {
 
       // If we have to open the menu at a secondary pointer (e.g. from a stylus), we use
       // this enter event to position the menu.
-      if (event.type() == Clutter.EventType.ENTER && this._lastNonPointerDevice &&
-          this._initialRepositioningRequired) {
+      if (event.type() == Clutter.EventType.ENTER && this._initialRepositioningRequired) {
         if (event.get_device().get_device_name() ===
-            this._lastNonPointerDevice.get_device_name()) {
-          this._setPosition(this._pointerPos[0], this._pointerPos[1], false);
+            this._lastPointerDevice.get_device_name()) {
+          this._setPosition(this._pointerPos[0], this._pointerPos[1]);
           this._initialRepositioningRequired = false;
         }
       }
@@ -268,7 +268,9 @@ var Menu = class Menu {
         }
 
         // Forward the motion event to the selection wedges.
-        this._selectionWedges.onMotionEvent(event.get_coords(), event.get_state());
+        if (!this._initialRepositioningRequired) {
+          this._selectionWedges.onMotionEvent(event.get_coords(), event.get_state());
+        }
 
         // If the primary button is pressed or a modifier is held down (for the
         // "Turbo-Mode"), but we do not have a dragged child yet, we mark the currently
@@ -685,17 +687,13 @@ var Menu = class Menu {
       }
     } else {
 
-      // Use mouse pointer location if no coordinates are given. In many cases, this will
-      // be correct, however, the user may be using touch input, a tablet or something
-      // completely different. Therefore we set _initialRepositioningRequired to true and
-      // attempt to reposition the menu in the next ENTER event.
+      // If no position is given, we set _initialRepositioningRequired to true and
+      // attempt to reposition the menu according to the latest input device in the next
+      // ENTER event.
       if (x != null && y != null) {
-        this._setPosition(x, y, true);
-      } else if (this._lastNonPointerDevice != null) {
-        this._initialRepositioningRequired = true;
+        this._setPosition(x, y);
       } else {
-        [x, y] = global.get_pointer();
-        this._setPosition(x, y, true);
+        this._initialRepositioningRequired = true;
       }
     }
 
@@ -1000,14 +998,17 @@ var Menu = class Menu {
 
   // This is called whenever a menu is opened to position it on the screen. It will not
   // only move the root actor but also the selection wedges.
-  _setPosition(x, y, doPointerWarp) {
+  _setPosition(x, y) {
     const [clampedX, clampedY] =
         this._clampToMonitor(x - this._background.x, y - this._background.y, 10);
+
+    this._root.set_easing_duration(0);
     this._root.set_translation(clampedX, clampedY, 0);
+    this._root.set_easing_duration(this._settings.get_double('easing-duration') * 1000);
     this._selectionWedges.set_translation(clampedX, clampedY, 0);
 
     // Warp the mouse pointer if required.
-    if (doPointerWarp && (x != clampedX || y != clampedY)) {
+    if (x != clampedX || y != clampedY) {
       this._input.warpPointer(
           clampedX + this._background.x, clampedY + this._background.y);
     }
@@ -1171,14 +1172,18 @@ var Menu = class Menu {
     maxSize *= 2 * this._settings.get_double('global-scale') * utils.getHDPIScale();
 
     // Clamp to monitor bounds.
-    const monitor = Main.layoutManager.currentMonitor;
+    let pointer    = new Meta.Rectangle({x: x, y: y, width: 1, height: 1});
+    const monitor  = global.display.get_monitor_index_for_rect(pointer);
+    const geometry = global.display.get_monitor_geometry(monitor);
 
-    const min  = margin + maxSize / 2;
-    const maxX = monitor.width - min;
-    const maxY = monitor.height - min;
+    const size = margin + maxSize / 2;
+    const minX = geometry.x + size;
+    const minY = geometry.y + size;
+    const maxX = geometry.x + geometry.width - size;
+    const maxY = geometry.y + geometry.height - size;
 
-    const posX = Math.min(Math.max(x, min), maxX);
-    const posY = Math.min(Math.max(y, min), maxY);
+    const posX = Math.min(Math.max(x, minX), maxX);
+    const posY = Math.min(Math.max(y, minY), maxY);
 
     // Ensure integer position.
     return [Math.floor(posX), Math.floor(posY)];
