@@ -17,11 +17,13 @@ SPDX-License-Identifier: CC-BY-4.0
 
 * **New donation method: Ko-fi**. Follow me on Ko-fi to get the latest updates regarding my extensions: https://ko-fi.com/schneegans!
 * **New Preset: Catppuccin**. Soothing warm pastel pinks for Fly-Pie!
+* Fly-Pie menus are now opened across all monitors. Before they were limited to the monitor currently having mouse input focus.
 * The custom info-popover has been replaced by a more traditional main menu. It gives access to Fly-Pie's homepage, the bug tracker and some donation options.
 * An about dialog has been added. If available, the `Adw.AboutWindow` is used.
 
 #### Bug Fixes
 
+* Fixed multi-cursor support. Fly-Pie should now properly support multiple pointer input devices on Wayland.
 * Fixed an issue which made the menu invisible above full-screen windows on Wayland.
 * Fixed an issue which could make Fly-Pie unresponsive until the session is restarted if the configured hotkey was pressed multiple times during a configured display timeout. In rare cases this could also lead to completely blocking the user input.
 
