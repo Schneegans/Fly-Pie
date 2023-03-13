@@ -693,6 +693,8 @@ var Menu = class Menu {
       if (x != null && y != null) {
         this._setPosition(x, y);
       } else {
+        [x, y] = global.get_pointer();
+        this._setPosition(x, y);
         this._initialRepositioningRequired = true;
       }
     }
