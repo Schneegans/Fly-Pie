@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-09-13 21:04+0200\n"
-"PO-Revision-Date: 2023-02-10 16:41+0000\n"
+"PO-Revision-Date: 2023-03-15 16:42+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/fly-pie/core/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16-dev\n"
+"X-Generator: Weblate 4.16.2-dev\n"
 
 #: src/common/actions/Shortcut.js:43
 msgid "Activate Shortcut"
@@ -301,7 +301,7 @@ msgstr "Aangepast menu"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:36
 msgid "This can contain custom actions and other menus."
-msgstr "Dit kan aangepaste acties en andere menu's bevatten."
+msgstr "Kan aangepaste acties en andere menu's bevatten"
 
 #: src/common/menus/CustomMenu.js:40
 msgid ""
@@ -309,6 +309,9 @@ msgid ""
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended."
 msgstr ""
+"Een <b>Aangepast menu</b> kan een willekeurig aantal acties en submenu's "
+"bevatten. Voor een nauwkeurige selectie van items wordt echter een maximum "
+"van twaalf items aanbevolen."
 
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:43 src/extension/DefaultMenu.js:79
@@ -319,13 +322,15 @@ msgstr "Favorieten"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:50
 msgid "Shows pinned applications."
-msgstr "Geeft vastgezette apps weer."
+msgstr "Geeft vastgezette apps weer"
 
 #: src/common/menus/Favorites.js:54
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
 msgstr ""
+"Het menu <b>Favorieten</b> toont de apps die u aan de dash van GNOME Shell "
+"heeft vastgemaakt."
 
 #: src/common/menus/RecentFiles.js:34
 msgid "Recent Files"
@@ -335,7 +340,7 @@ msgstr "Recente bestanden"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RecentFiles.js:41
 msgid "Shows your recently used files."
-msgstr "Geeft uw recent gebruikte bestanden weer."
+msgstr "Geeft uw recent gebruikte bestanden weer"
 
 #: src/common/menus/RecentFiles.js:45
 msgid ""
@@ -343,6 +348,9 @@ msgid ""
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
 msgstr ""
+"Het menu <b>Recente bestanden</b> toont een lijst van recent gebruikte "
+"bestanden. Voor efficiënte selecties moet u het maximum aantal getoonde "
+"bestanden beperken tot ongeveer twaalf."
 
 #: src/common/menus/Devices.js:33
 msgid "Devices"
@@ -352,13 +360,15 @@ msgstr "Apparaten"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:40
 msgid "Shows connected devices."
-msgstr "Geeft verbonden apparaten weer."
+msgstr "Geeft verbonden apparaten weer"
 
 #: src/common/menus/Devices.js:44
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
 msgstr ""
+"Het menu <b>Apparaten</b> toont een item voor elk gekoppeld volume, zoals "
+"een USB-stick."
 
 #: src/common/menus/MainMenu.js:33
 msgid "Main Menu"
@@ -368,7 +378,7 @@ msgstr "Hoofdmenu"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/MainMenu.js:40
 msgid "Shows all installed applications."
-msgstr "Geeft alle geïnstalleerde apps weer."
+msgstr "Geeft alle geïnstalleerde apps weer"
 
 #: src/common/menus/MainMenu.js:44
 msgid ""
@@ -376,17 +386,20 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather set up your own menus!"
 msgstr ""
+"Het <b>Hoofdmenu</b> toont alle geïnstalleerde apps. Meestal is dit erg "
+"onoverzichtelijk, omdat veel secties te veel items bevatten om efficiënt te "
+"kunnen worden gebruikt. Stel liever uw eigen menu's samen!"
 
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:47 src/extension/DefaultMenu.js:111
 msgid "Running Apps"
-msgstr "Draaiende apps"
+msgstr "Geopende apps"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:54
 msgid "Shows the currently running applications."
-msgstr "Geeft de openstaande apps weer."
+msgstr "Geeft de openstaande apps weer"
 
 #: src/common/menus/RunningApps.js:58
 msgid ""
@@ -394,6 +407,9 @@ msgid ""
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
+"Het menu <b>Geopende apps</b> toont alle openstaande apps. Dit is "
+"vergelijkbaar met de vensterselectie via Alt+Tab. Aangezien de items vaak "
+"van positie veranderen, is dit eigenlijk niet erg effectief."
 
 #: src/common/menus/RunningApps.js:97
 msgid ""
@@ -403,6 +419,12 @@ msgid ""
 "\"Fire\" or \"Water\". A negation would be \"^(?!.*Fire)\" to match anything "
 "but \"Fire\". Remember to use the live preview to instantly see the results!"
 msgstr ""
+"U kunt dit gebruiken om de weergegeven vensters te filteren. Reguliere "
+"expressies worden ondersteund: Gebruik een eenvoudige tekenreeks als ‘Fire’ "
+"om alleen vensters te tonen waarvan de titel ‘Fire’ bevat (bijv. Firefox). "
+"Gebruik ‘Fire|Water’ om ofwel ‘Fire’ of ‘Water’ weer te geven. Een negatie "
+"zou zijn ‘^(?!.*Fire)’ om alles behalve ‘Fire’ weer te geven. Vergeet niet "
+"de live-voorvertoning te gebruiken om direct de resultaten te zien!"
 
 #: src/common/menus/RunningApps.js:99
 msgid "Window Filter"
@@ -412,7 +434,7 @@ msgstr "Vensterfilter"
 #: resources/ui/gtk4/settings.ui:5061 resources/ui/gtk3/settings.ui:4996
 #: resources/ui/gtk3/settings.ui:5053
 msgid "See tooltip for details."
-msgstr "Zie beschrijving voor details."
+msgstr "Zie beschrijving voor details"
 
 #: src/common/menus/RunningApps.js:125
 msgid "Active Workspace Only"
@@ -434,13 +456,15 @@ msgstr "Bladwijzers"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Bookmarks.js:40
 msgid "Shows your frequently used directories."
-msgstr "Geeft uw veelgebruikte mappen weer."
+msgstr "Geeft uw veelgebruikte mappen weer"
 
 #: src/common/menus/Bookmarks.js:44
 msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
 msgstr ""
+"Het menu <b>Bladwijzers</b> toont een item voor de prullenbak, uw bureaublad "
+"en elke map met bladwijzers."
 
 #: src/common/menus/Clipboard.js:54
 msgid "Clipboard"
@@ -450,11 +474,11 @@ msgstr "Klembord"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Clipboard.js:61
 msgid "Shows recently copied things."
-msgstr "Geeft recent gekopieerde dingen weer."
+msgstr "Geeft recent gekopieerde items weer"
 
 #: src/common/menus/Clipboard.js:64
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
-msgstr ""
+msgstr "Het menu <b>Klembord</b> toont een lijst van recent gekopieerde items."
 
 #: src/common/menus/Clipboard.js:94
 msgid "First Child Angle"
@@ -462,7 +486,7 @@ msgstr "Hoek van eerste subitem"
 
 #: src/common/menus/Clipboard.js:94
 msgid "Direction of the most recent item."
-msgstr "Richting van het meest recente item."
+msgstr "Richting van het meest recente item"
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a vector image.
@@ -565,93 +589,93 @@ msgstr "Selecteer %x items."
 #: src/common/Achievements.js:444
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
-msgstr ""
+msgstr "%stopniveau-gebaarselecteur"
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:447
 #, javascript-format
 msgid "%s Submenu Gesture-Selector"
-msgstr ""
+msgstr "%ssubmenu-gebaarselecteur"
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:450
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
-msgstr ""
+msgstr "%ssubsubmenu-gebaarselecteur"
 
 #. Translators: The description of the 'Gesture-Selector' achievement.
 #: src/common/Achievements.js:457
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
-msgstr ""
+msgstr "Selecteer %x items op diepte %d in markeringsmodus"
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:474
 #, javascript-format
 msgid "%s Toplevel Click-Selector"
-msgstr ""
+msgstr "%stopniveau-klikselecteur"
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Submenu Click-Selector"
-msgstr ""
+msgstr "%ssubmenu-klikselecteur"
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:480
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
-msgstr ""
+msgstr "%ssubsubmenu-klikselecteur"
 
 #. Translators: The description of the 'Click-Selector' achievement.
 #: src/common/Achievements.js:487
 #, javascript-format
 msgid "Select %x items at depth %d with mouse clicks."
-msgstr ""
+msgstr "Selecteer %x items op diepte %d met muiskliks"
 
 #. Translators: The name of the 'Select %x items at depth 1 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:509
 #, javascript-format
 msgid "%s Toplevel Selector"
-msgstr ""
+msgstr "%stopniveau-selecteur"
 
 #. Translators: The name of the 'Select %x items at depth 2 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:512
 #, javascript-format
 msgid "%s Submenu Selector"
-msgstr ""
+msgstr "%ssubmenu-selecteur"
 
 #. Translators: The name of the 'Select %x items at depth 3 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:515
 #, javascript-format
 msgid "%s Subsubmenu Selector"
-msgstr ""
+msgstr "%ssubsubmenu-selecteur"
 
 #. Translators: The description of the 'Selector' achievement.
 #: src/common/Achievements.js:527
 msgid "Select %x items at depth %d in less than %t milliseconds."
-msgstr ""
+msgstr "Selecteer %x items op diepte %d in minder dan %t milliseconden"
 
 #. Translators: The name of the 'Open the settings dialog %x times.'
 #. achievement.
 #: src/common/Achievements.js:547
 msgid "The Journey Is The Reward %i"
-msgstr ""
+msgstr "De reis is de beloning %i"
 
 #. Translators: The description of the 'The Journey Is The Reward %i'
 #. achievement.
 #: src/common/Achievements.js:550
 #, javascript-format
 msgid "Open the settings dialog %x times."
-msgstr ""
+msgstr "Open de instellingendialoog %x keer"
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
@@ -663,7 +687,7 @@ msgstr "Nerd-waarschuwing %i"
 #: src/common/Achievements.js:567
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
-msgstr ""
+msgstr "Open %x menu's met de D-Bus-interface"
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
 #: src/common/Achievements.js:581
@@ -673,7 +697,7 @@ msgstr "entropiër %i"
 #: src/common/Achievements.js:585
 #, javascript-format
 msgid "Generate %x random presets."
-msgstr "Genereer %x willekeurige voorinstellingen."
+msgstr "Genereer %x willekeurige voorinstellingen"
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
 #: src/common/Achievements.js:598
@@ -685,13 +709,13 @@ msgstr "%svoorinstellingsexporteur"
 #. only one preset needs to be exported.
 #: src/common/Achievements.js:602
 msgid "Export a custom preset."
-msgstr "Exporteer een aangepaste voorinstelling."
+msgstr "Exporteer een aangepaste voorinstelling"
 
 #. Translators: The description of the '%s Preset Exporter' achievement.
 #: src/common/Achievements.js:604
 #, javascript-format
 msgid "Export %x custom presets."
-msgstr "Exporteer %x aangepaste voorinstellingen."
+msgstr "Exporteer %x aangepaste voorinstellingen"
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
 #: src/common/Achievements.js:617
@@ -703,13 +727,13 @@ msgstr "%svoorinstellingsimporteur"
 #. only one preset needs to be imported.
 #: src/common/Achievements.js:621
 msgid "Import a custom preset."
-msgstr "Importeer een aangepaste voorinstelling."
+msgstr "Importeer een aangepaste voorinstelling"
 
 #. Translators: The description of the '%s Preset Importer' achievement.
 #: src/common/Achievements.js:623
 #, javascript-format
 msgid "Import %x custom presets."
-msgstr "Importeer %x aangepaste voorinstellingen."
+msgstr "Importeer %x aangepaste voorinstellingen"
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
 #: src/common/Achievements.js:636
@@ -721,13 +745,13 @@ msgstr "%smenuimporteur"
 #. only one menu needs to be imported.
 #: src/common/Achievements.js:640
 msgid "Import a menu configuration."
-msgstr ""
+msgstr "Importeer een menuconfiguratie"
 
 #. Translators: The description of the '%s Menu Importer' achievement.
 #: src/common/Achievements.js:642
 #, javascript-format
 msgid "Import %x menu configurations."
-msgstr ""
+msgstr "Importeer %x menuconfiguraties"
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
 #: src/common/Achievements.js:656
@@ -739,26 +763,26 @@ msgstr "%smenuexporteur"
 #. only one menu needs to be exported.
 #: src/common/Achievements.js:660
 msgid "Export a menu configuration."
-msgstr ""
+msgstr "Exporteer een menuconfiguratie"
 
 #. Translators: The description of the '%s Menu Exporter' achievement.
 #: src/common/Achievements.js:662
 #, javascript-format
 msgid "Export %x menu configurations."
-msgstr ""
+msgstr "Exporteer %x menuconfiguraties"
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
 #: src/common/Achievements.js:677
 msgid "There Should Be No More Than Twelve Items…? %i"
-msgstr ""
+msgstr "Er zouden niet meer dan twaalf items moeten zijn…? %i"
 
 #. Translators: The description of the 'There Should Be No More Than Twelve
 #. Items…? %i' achievement.
 #: src/common/Achievements.js:680
 #, javascript-format
 msgid "Create %x items in the menu editor."
-msgstr ""
+msgstr "Maak %x items aan in de menubewerker"
 
 #. Translators: The name of the 'Open a preview menu %x times.' achievement.
 #: src/common/Achievements.js:694
@@ -770,7 +794,7 @@ msgstr "%smenuontwerper"
 #: src/common/Achievements.js:697
 #, javascript-format
 msgid "Open a preview menu %x times."
-msgstr ""
+msgstr "Open een voorvertoningsmenu %x keer"
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
@@ -782,45 +806,45 @@ msgstr "Chagrijnig groentje"
 #: src/common/Achievements.js:712
 #, javascript-format
 msgid "Open the tutorial menu %x times."
-msgstr ""
+msgstr "Open het tutorial-menu %x keer"
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:724
 msgid "Bachelor Pielot"
-msgstr ""
+msgstr "Bachelor-pieloot"
 
 #. Translators: The description of the 'Bachelor Pielot' achievement.
 #: src/common/Achievements.js:726
 msgid "Get all medals of the tutorial."
-msgstr ""
+msgstr "Verzamel alle medailles van de tutorial"
 
 #. Translators: The name of the hidden 'Delete all of your menus.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:738
 msgid "Say Good-Pie!"
-msgstr ""
+msgstr "Zeg maar dag!"
 
 #. Translators: The description of the 'Say Good-Pie!' achievement.
 #: src/common/Achievements.js:740
 msgid "Delete all of your menus."
-msgstr ""
+msgstr "Verwijder al uw menu's"
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
 #. achievement.
 #: src/common/Achievements.js:753
 msgid "That's Philanthropie!"
-msgstr "Dat is filantroPIE!"
+msgstr "Dat is filantropie!"
 
 #. Translators: The description of the 'That's Philanthropie!' achievement.
 #: src/common/Achievements.js:755
 msgid "Consider becoming a sponsor of Fly-Pie."
-msgstr ""
+msgstr "Overweeg een sponsor van Fly-Pie te worden"
 
 #: src/prefs/AchievementsPage.js:117
 msgid "Do you really want to reset all statistics?"
-msgstr ""
+msgstr "Weet u zeker dat u alle statistieken wilt resetten?"
 
 #: src/prefs/AchievementsPage.js:118
 msgid "All achievements will be lost!"
@@ -832,11 +856,11 @@ msgstr "Geen menu's geconfigureerd"
 
 #: src/prefs/MenuEditor.js:419
 msgid "Create a new menu with the button in the top right corner."
-msgstr ""
+msgstr "Maak een nieuw menu aan met de knop rechtsboven"
 
 #: src/prefs/MenuEditor.js:449
 msgid "Add a new item"
-msgstr ""
+msgstr "Voeg nieuw item toe"
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag an action in the menu editor to the menu
@@ -845,14 +869,14 @@ msgstr ""
 #. attempts to drag an action in the menu editor to the menu overview.
 #: src/prefs/MenuEditor.js:786 src/prefs/MenuEditorPage.js:930
 msgid "Actions cannot be turned into toplevel menus."
-msgstr ""
+msgstr "Acties kunnen niet worden omgezet in topniveau-menu's"
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag external stuff to the menu editor's
 #. overview.
 #: src/prefs/MenuEditor.js:806
 msgid "You can only create new Action items inside of Custom Menus."
-msgstr ""
+msgstr "U kunt enkel nieuwe actie-items aanmaken binnen aangepaste menu's"
 
 #: src/prefs/ImageChooserButton.js:97
 #: resources/ui/gtk4/imageChooserButton.ui:16
@@ -876,7 +900,7 @@ msgstr "Exporteren"
 
 #: src/prefs/MenuEditorPage.js:235
 msgid "Could not export the menu configuration."
-msgstr ""
+msgstr "Kon de menuconfiguratie niet exporteren"
 
 #: src/prefs/MenuEditorPage.js:276
 msgid "Import"
@@ -884,13 +908,13 @@ msgstr "Importeren"
 
 #: src/prefs/MenuEditorPage.js:310
 msgid "Could not import the menu configuration."
-msgstr ""
+msgstr "Kon de menuconfiguratie niet importeren"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:382
 msgid "You should try to have no more than twelve items in your menus."
-msgstr ""
+msgstr "Probeer niet meer dan twaalf items in uw menu's op te nemen"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -899,27 +923,29 @@ msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
 msgstr ""
+"Een evenaantal items zal het makkelijker maken om item-posities te leren. "
+"Vier, zes en acht zijn goede nummers."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:388
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "Fly-Pie is vrije software beschikbaar op <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:392
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "Suggesties kunnen worden gepost op <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:396
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "Fouten kunnen worden gerapporteerd op <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -928,6 +954,8 @@ msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
 msgstr ""
+"Houd menuhiërarchieën efficiënt door alles boven de 8 elementen in een nieuw "
+"menuniveau te plaatsen."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -936,12 +964,15 @@ msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
 msgstr ""
+"Als u alle menu's verwijdert, uitlogt en weer inlogt, wordt de "
+"standaardconfiguratie hersteld."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:406
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr ""
+"U kunt de menu-items aan de linkerkant herschikken via slepen en neerzetten."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -951,6 +982,8 @@ msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
 "<a href=\"%s\">Github</a>."
 msgstr ""
+"Het is mogelijk om een menu te openen met een terminal-opdracht. U kunt meer "
+"lezen op <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -959,6 +992,8 @@ msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
 msgstr ""
+"U kunt mappen, bestanden, links en bureaubladbestanden naar de "
+"menuhiërarchie aan de linkerkant slepen."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -967,13 +1002,15 @@ msgid ""
 "On Wayland, you can copy menu items by holding the Ctrl key while dragging "
 "them to another location."
 msgstr ""
+"Op Wayland kunt u menu-items kopiëren door de Ctrl-toets ingedrukt te houden "
+"terwijl u ze naar een andere locatie sleept."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:421
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
-msgstr ""
+msgstr "<a href=\"%s\">Vertaal Fly-Pie op Hosted Weblate</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -983,6 +1020,7 @@ msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
 "</a>"
 msgstr ""
+"💕️ Wilt u uw liefde voor Fly-Pie tonen? <a href=\"%s\">Word een sponsor</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -991,6 +1029,8 @@ msgid ""
 "If you cannot use a specific keyboard shortcut, you may check you system "
 "settings as it may be used already."
 msgstr ""
+"Als u een bepaalde sneltoets niet kunt gebruiken, kunt u de "
+"systeeminstellingen controleren, omdat deze misschien al wordt gebruikt."
 
 #. Translators: The left-most item of the menu editor bread crumbs.
 #: src/prefs/MenuEditorPage.js:993
@@ -1007,19 +1047,19 @@ msgstr "Laden"
 
 #: src/prefs/SettingsPage.js:347
 msgid "Failed to load preset!"
-msgstr ""
+msgstr "Voorinstelling laden mislukt!"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:182
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big>Laatste selectietijd: <b>%d ms</b></big>"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:187
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big>Beste selectietijd: <b>%d ms</b></big>"
 
 #. Translators: This is the name of the tutorial menu.
 #. Translators: This is the name of the default menu.
@@ -1479,6 +1519,10 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a test menu!"
 msgstr ""
+"U kunt Fly-Pie gebruiken om apps te starten, sneltoetsen te simuleren, URL's "
+"te openen en nog veel meer. Deze interactieve tutorial leert u hoe u Fly-Pie "
+"het meest efficiënt kunt gebruiken. Klik op de grote knop hieronder om een "
+"testmenu te openen!"
 
 #: resources/ui/gtk4/settings.ui:946 resources/ui/gtk3/settings.ui:950
 msgid ""
@@ -1488,6 +1532,12 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"• Gebruik uw <b>linkermuisknop om items te selecteren</b>.\n"
+"• gebruik uw <b>rechtermuisknop om het menu te sluiten</b>.\n"
+"• Het testmenu is slechts een speeltuin, het selecteren van items heeft geen "
+"echt effect.\n"
+"\n"
+"Zodra u zich op uw gemak voelt, drukt u op <b>Volgende</b> voor meer details!"
 
 #. The text of the big tutorial button.
 #: resources/ui/gtk4/settings.ui:966 resources/ui/gtk4/settings.ui:1049
@@ -1508,6 +1558,8 @@ msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
 msgstr ""
+"Het maakt niet uit of u rechtstreeks op een item klikt of aan de rand van uw "
+"scherm, zolang uw muisaanwijzer in de wig van het item blijft."
 
 #: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1030
 msgid ""
@@ -1518,6 +1570,13 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
+"<b>Items worden geselecteerd door ergens in hun respectieve wiggen te "
+"klikken</b>.\n"
+"\n"
+"U hoeft ook niet te wachten tot de animatie klaar is, want de submenu-wiggen "
+"verschijnen onmiddellijk rond de positie waar u klikt.\n"
+"\n"
+"Druk op <b>Volgende</b> voor een oefensessie!"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:1081 resources/ui/gtk3/settings.ui:1080
@@ -1533,6 +1592,11 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!"
 msgstr ""
+"Voor deze oefensessie opent u het menu door op de grote knop te drukken. "
+"Selecteer dan zo snel mogelijk ‘%s’. Kunt u de gouden medaille halen?\n"
+"\n"
+"Zodra u tevreden bent met uw resultaat, druk dan op <b>Volgende</b> om meer "
+"te leren over Fly-Pie's markeermodus!"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:1164 resources/ui/gtk3/settings.ui:1163
@@ -1561,6 +1625,10 @@ msgid ""
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
+"Met de <b>Markeermodus</b> van Fly-Pie kunt u items selecteren door "
+"<b>gebaren te tekenen</b>! Om in de Markeermodus te komen, drukt u op een "
+"item en sleept u deze. Zodra u stopt met slepen of een draai maakt, wordt "
+"het item geselecteerd."
 
 #: resources/ui/gtk4/settings.ui:1262 resources/ui/gtk3/settings.ui:1258
 msgid ""
@@ -1572,6 +1640,13 @@ msgid ""
 "gesture of straight parts. <b>Do not draw curvy paths but rather expressive "
 "zig-zag-lines!</b>"
 msgstr ""
+"Probeer het pad naar een item te onthouden. Open het menu en <b>teken het "
+"pad met uw muis</b>. U kunt beginnen met individuele segmenten van het pad, "
+"maar u kunt ook proberen het hele pad te tekenen!\n"
+"\n"
+"Misschien lukt het beter als u uw gebaar expliciet probeert samen te stellen "
+"uit rechte delen. <b>Teken geen kromme paden, maar expressieve zig-zag-"
+"lijnen!</b>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:1312 resources/ui/gtk3/settings.ui:1306
@@ -1588,6 +1663,12 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn some final "
 "tips and tricks!"
 msgstr ""
+"Ook hier is het doel om zo snel mogelijk ‘%s’ te selecteren. Maar omdat u nu "
+"heeft geleerd over de markeermodus, is de tijd die nodig is om de gouden "
+"medaille te halen veel korter!\n"
+"\n"
+"Als u tevreden bent met het resultaat, drukt u op <b>Volgende</b> om nog wat "
+"laatste tips en trucs te leren!"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:1414 resources/ui/gtk3/settings.ui:1408
@@ -1622,6 +1703,20 @@ msgid ""
 "free to report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
+"Gefeliciteerd! Als het u gelukt is om de meeste medailles vrij te spelen, "
+"zult u Fly-Pie gebruiken als een meester-<b>pie</b>loot!\n"
+"\n"
+"U kunt nu de andere pagina's van deze instellingendialoog gebruiken om Fly-"
+"Pie naar hartenlust te configureren. Er zijn veel opties! Creëer zoveel "
+"menu's als u wilt met zo diepe hiërarchieën als u maar wilt. Probeer echter "
+"het aantal items per submenu te beperken tot <b>maximaal twaalf</b>. Alles "
+"boven dit aantal zal uw efficiëntie drastisch verminderen.\n"
+"\n"
+"Als u fan bent van Fly-Pie, zou ik blij zijn als u een positieve recensie "
+"achterlaat op <a href=\"https://extensions.gnome.org/extension/3433/fly-pie/"
+"\">extensions.gnome.org</a>! Wanneer u een fout tegenkomt of een "
+"functieverzoek heeft, voel u dan vrij om dit te melden op <a href=\"https"
+"://github.com/Schneegans/Fly-Pie/issues\">GitHub</a>."
 
 #. Button for tutorial navigation. Goes back one page.
 #: resources/ui/gtk4/settings.ui:1526 resources/ui/gtk3/settings.ui:1519
@@ -1686,7 +1781,7 @@ msgstr "Centrumuiterlijk"
 
 #: resources/ui/gtk4/settings.ui:1888 resources/ui/gtk3/settings.ui:1875
 msgid "The center element shows the currently hovered child's name."
-msgstr ""
+msgstr "Het middelste element toont de naam van het geselecteerde item."
 
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/gtk4/settings.ui:1904 resources/ui/gtk3/settings.ui:1891
@@ -1783,7 +1878,7 @@ msgstr "Uiterlijk subitems"
 
 #: resources/ui/gtk4/settings.ui:2522 resources/ui/gtk3/settings.ui:2498
 msgid "Child items are styled differently when their wedge is hovered."
-msgstr ""
+msgstr "Subitems worden anders vormgegeven wanneer hun wig is geselecteerd."
 
 #. When the mouse pointer is NOT over the item
 #: resources/ui/gtk4/settings.ui:2538 resources/ui/gtk4/settings.ui:3284
@@ -1821,7 +1916,7 @@ msgstr "Bovenaan tonen"
 
 #: resources/ui/gtk4/settings.ui:3005 resources/ui/gtk3/settings.ui:2987
 msgid "Render children above the center item."
-msgstr ""
+msgstr "Toon subitems boven het middelste item."
 
 #: resources/ui/gtk4/settings.ui:3258 resources/ui/gtk4/settings.ui:3615
 #: resources/ui/gtk3/settings.ui:3224 resources/ui/gtk3/settings.ui:3578
@@ -1833,6 +1928,8 @@ msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
 msgstr ""
+"Subsubitems worden anders vormgegeven wanneer de wig van hun bovenliggende "
+"item wordt aangeraakt."
 
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/gtk4/settings.ui:3297 resources/ui/gtk3/settings.ui:3263
@@ -1841,7 +1938,7 @@ msgstr "Met aangewezen superitem"
 
 #: resources/ui/gtk4/settings.ui:3534 resources/ui/gtk3/settings.ui:3504
 msgid "Render grandchildren above children items."
-msgstr ""
+msgstr "Geef subsubitems boven subitems weer."
 
 #: resources/ui/gtk4/settings.ui:3645 resources/ui/gtk4/settings.ui:3884
 #: resources/ui/gtk3/settings.ui:3601 resources/ui/gtk3/settings.ui:3838
@@ -1850,7 +1947,7 @@ msgstr "Wiguiterlijk"
 
 #: resources/ui/gtk4/settings.ui:3655 resources/ui/gtk3/settings.ui:3611
 msgid "Clicking inside a wedge will activate the corresponding item."
-msgstr ""
+msgstr "Klikken in een wig activeert het bijbehorende item."
 
 #: resources/ui/gtk4/settings.ui:3678 resources/ui/gtk3/settings.ui:3634
 msgid "Inner Radius"
@@ -1862,6 +1959,8 @@ msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr ""
+"Klikken binnen de binnenste straal\n"
+"annuleert de selectie."
 
 #: resources/ui/gtk4/settings.ui:3710 resources/ui/gtk3/settings.ui:3666
 msgid "Wedge Separator Color"
@@ -1913,7 +2012,7 @@ msgstr "Instellingen voor aanraakknoppen"
 
 #: resources/ui/gtk4/settings.ui:4056 resources/ui/gtk3/settings.ui:3997
 msgid "You can show a touch button for each of your menus."
-msgstr ""
+msgstr "U kunt voor elk van uw menu's een touch-knop tonen."
 
 #: resources/ui/gtk4/settings.ui:4074 resources/ui/gtk3/settings.ui:4015
 msgid "Inactive Opacity"
@@ -1921,15 +2020,15 @@ msgstr "Inactieve ondoorzichtigheid"
 
 #: resources/ui/gtk4/settings.ui:4102 resources/ui/gtk3/settings.ui:4043
 msgid "Show in Overview Mode"
-msgstr ""
+msgstr "Tonen in overzicht"
 
 #: resources/ui/gtk4/settings.ui:4124 resources/ui/gtk3/settings.ui:4065
 msgid "Show in Desktop Mode"
-msgstr ""
+msgstr "Tonen op bureaublad"
 
 #: resources/ui/gtk4/settings.ui:4146 resources/ui/gtk3/settings.ui:4087
 msgid "Show above Fullscreen Windows"
-msgstr ""
+msgstr "Tonen in volledig scherm"
 
 #: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk4/settings.ui:4598
 #: resources/ui/gtk3/settings.ui:4133 resources/ui/gtk3/settings.ui:4531
@@ -1938,7 +2037,7 @@ msgstr "Geavanceerde instellingen"
 
 #: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4143
 msgid "These settings are independent of the presets."
-msgstr ""
+msgstr "Deze instellingen zijn onafhankelijk van de voorinstellingen."
 
 #: resources/ui/gtk4/settings.ui:4228 resources/ui/gtk3/settings.ui:4162
 msgid "Minimum Stroke Angle"
@@ -1946,7 +2045,7 @@ msgstr "Minimale ‘stroke’-hoek"
 
 #: resources/ui/gtk4/settings.ui:4238 resources/ui/gtk3/settings.ui:4172
 msgid "Smaller turns will not lead to selections."
-msgstr ""
+msgstr "Kleinere bochten leiden niet tot selecties."
 
 #: resources/ui/gtk4/settings.ui:4275 resources/ui/gtk3/settings.ui:4209
 msgid "Minimum Stroke Length"
@@ -1957,6 +2056,8 @@ msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
+"Kortere gebaren leiden niet tot selecties.\n"
+"Dit wordt vermenigvuldigd met de globale schaalwaarde."
 
 #: resources/ui/gtk4/settings.ui:4324 resources/ui/gtk3/settings.ui:4258
 msgid "Jitter Threshold"
@@ -1967,6 +2068,8 @@ msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
+"Kleinere bewegingen worden niet meegenomen.\n"
+"Dit wordt vermenigvuldigd met de globale schaalwaarde."
 
 #: resources/ui/gtk4/settings.ui:4372 resources/ui/gtk3/settings.ui:4306
 msgid "Display Timeout"
@@ -1977,6 +2080,8 @@ msgid ""
 "Menus will be shown after this many milliseconds.\n"
 "Use this to quickly select items without showing the menu."
 msgstr ""
+"Menu's worden getoond na dit aantal milliseconden.\n"
+"Gebruik dit om snel items te selecteren zonder het menu te tonen."
 
 #: resources/ui/gtk4/settings.ui:4421 resources/ui/gtk3/settings.ui:4355
 msgid "Selection Timeout"
@@ -1987,6 +2092,8 @@ msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
 msgstr ""
+"Als uw aanwijzer dit aantal milliseconden stilstaat wordt het huidige item "
+"geselecteerd."
 
 #: resources/ui/gtk4/settings.ui:4470 resources/ui/gtk3/settings.ui:4404
 msgid "Experimental Hover Mode"
@@ -1997,6 +2104,8 @@ msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
 msgstr ""
+"Als dit is ingeschakeld, hoeft u niet langer een muisknop in te drukken of "
+"een modificatietoets ingedrukt te houden tijdens selecties."
 
 #: resources/ui/gtk4/settings.ui:4503 resources/ui/gtk3/settings.ui:4437
 msgid "Show Screencast Mouse"
@@ -2007,6 +2116,8 @@ msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
 msgstr ""
+"Toont een grote extra muisaanwijzer die muisklikken visualiseert.\n"
+"Dit kan gebruikt worden als u een video wilt opnemen van Fly-Pie."
 
 #: resources/ui/gtk4/settings.ui:4546 resources/ui/gtk3/settings.ui:4480
 msgid "Achievement Notifications"
@@ -2014,7 +2125,7 @@ msgstr "Prestatienotificaties"
 
 #: resources/ui/gtk4/settings.ui:4556 resources/ui/gtk3/settings.ui:4490
 msgid "Show a notification whenever you complete an achievement."
-msgstr ""
+msgstr "Toon een melding wanneer u een prestatie heeft voltooid."
 
 #: resources/ui/gtk4/settings.ui:4618 resources/ui/gtk3/settings.ui:4563
 msgid "Load Preset"
@@ -2022,11 +2133,11 @@ msgstr "Voorinstelling laden"
 
 #: resources/ui/gtk4/settings.ui:4630 resources/ui/gtk3/settings.ui:4583
 msgid "Load settings from a JSON file."
-msgstr ""
+msgstr "Instellingen laden vanuit een JSON-bestand"
 
 #: resources/ui/gtk4/settings.ui:4637 resources/ui/gtk3/settings.ui:4596
 msgid "Save the settings to a JSON file."
-msgstr ""
+msgstr "Instellingen opslaan als een JSON-bestand"
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: resources/ui/gtk4/settings.ui:4660 resources/ui/gtk4/settings.ui:4933
@@ -2041,7 +2152,7 @@ msgstr "Menubewerker"
 
 #: resources/ui/gtk4/settings.ui:4718 resources/ui/gtk3/settings.ui:4684
 msgid "Add a new menu item."
-msgstr "Voeg een nieuw menu-item toe."
+msgstr "Nieuw menu-item toevoegen"
 
 #: resources/ui/gtk4/settings.ui:4797 resources/ui/gtk3/settings.ui:4771
 msgid "Stash"
@@ -2049,7 +2160,7 @@ msgstr "Berging"
 
 #: resources/ui/gtk4/settings.ui:4813 resources/ui/gtk3/settings.ui:4788
 msgid "Store items here and re-use them later."
-msgstr ""
+msgstr "Bewaar items hier en gebruik ze later opnieuw"
 
 #: resources/ui/gtk4/settings.ui:4857 resources/ui/gtk3/settings.ui:4832
 msgid "Trash"
@@ -2057,15 +2168,16 @@ msgstr "Prullenbak"
 
 #: resources/ui/gtk4/settings.ui:4873 resources/ui/gtk3/settings.ui:4848
 msgid "Drop items here."
-msgstr "Sleep items hiernaartoe."
+msgstr "Sleep items hiernaartoe"
 
 #: resources/ui/gtk4/settings.ui:4903 resources/ui/gtk3/settings.ui:4878
 msgid "Restore menus from a JSON file. This will override your current menus!"
 msgstr ""
+"Herstel menu's van een JSON-bestand. Dit overschrijft uw huidige menu's!"
 
 #: resources/ui/gtk4/settings.ui:4909 resources/ui/gtk3/settings.ui:4890
 msgid "Export all menus to a JSON file."
-msgstr "Alle menu's naar een JSON-bestand exporteren."
+msgstr "Alle menu's naar een JSON-bestand exporteren"
 
 #: resources/ui/gtk4/settings.ui:4986 resources/ui/gtk3/settings.ui:4972
 msgid "Name"
@@ -2082,6 +2194,10 @@ msgid ""
 "#rgb\" to the icon in order to draw a circle with the given RGB color behind "
 "the icon."
 msgstr ""
+"Het pictogram kan een pad naar een afbeeldingsbestand zijn, een "
+"pictogramnaam uit het huidige pictogramthema, een base64-gecodeerde gegevens-"
+"URI, tekst, of een emoji. U kunt ‘-#rgb’ aan het pictogram toevoegen om een "
+"cirkel met de opgegeven RGB-kleur achter het pictogram te tekenen."
 
 #: resources/ui/gtk4/settings.ui:5055 resources/ui/gtk3/settings.ui:5047
 msgid "Fixed Angle"
@@ -2098,16 +2214,27 @@ msgid ""
 "be removed if an item is dragged to another position in the menu. Use -1 to "
 "disable this feature."
 msgstr ""
+"Vaste hoeken kunnen worden gebruikt om ervoor te zorgen dat een item op "
+"dezelfde positie blijft, zelfs als andere items worden toegevoegd of "
+"verwijderd. Zo kunt u een menu bewerken, zelfs als uw spieren de richting "
+"van het item al hebben geleerd. Er is echter een beperking op de vaste "
+"hoeken. Binnen een menu moeten de vaste hoeken monotoon toenemen, dat wil "
+"zeggen dat elke vaste hoek groter moet zijn dan elke voorgaande vaste hoek. "
+"Om vreemd gedrag te voorkomen worden vaste hoeken verwijderd als een item "
+"naar een andere positie in het menu wordt gesleept. Gebruik -1 om deze "
+"functie uit te schakelen."
 
 #: resources/ui/gtk4/settings.ui:5109 resources/ui/gtk3/settings.ui:5101
 msgid "This will open the menu."
-msgstr "Dit zal het menu openen."
+msgstr "Opent het menu"
 
 #: resources/ui/gtk4/settings.ui:5123 resources/ui/gtk3/settings.ui:5115
 msgid ""
 "Usually, Super + Right Mouse Button opens the window menu. With this "
 "setting, you can instead open a Fly-Pie menu."
 msgstr ""
+"Normaal gesproken opent Super + Rechtermuisknop het venstermenu. Met deze "
+"instelling kunt u in plaats daarvan een Fly-Pie menu openen."
 
 #: resources/ui/gtk4/settings.ui:5128 resources/ui/gtk3/settings.ui:5120
 msgid "Bind to Super + RMB"
@@ -2138,4 +2265,4 @@ msgstr "Voltooid"
 
 #: resources/ui/gtk4/settings.ui:5457 resources/ui/gtk3/settings.ui:5425
 msgid "Reset all achievements."
-msgstr "Alle prestaties resetten."
+msgstr "Alle prestaties resetten"
