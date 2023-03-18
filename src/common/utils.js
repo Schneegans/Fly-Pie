@@ -258,7 +258,7 @@ function getRoot(widget) {
 // name can either be an icon name from the current icon theme, a path to an image      //
 // file, or a base64 encoded image. If none of this is given, the icon name is written  //
 // to the image. The given font (like 'Sans') and textColor (an object with properties  //
-// 'red', 'green' and 'blue' inthe range 0..1) are used in this case. This is very      //
+// 'red', 'green' and 'blue' in the range 0..1) are used in this case. This is very     //
 // useful for emojis like 😆 or 🌟! Symbolic icons are colored by the given textColor   //
 // as well.                                                                             //
 // To make things fancy, there is the possibility to create circle-shaped icons based   //
@@ -319,7 +319,7 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
       _iconDecor = GdkPixbuf.Pixbuf.new_from_resource('/img/symbolic-icon-decor.svg');
     }
 
-    ctx.save()
+    ctx.save();
     ctx.scale(size / _iconDecor.get_width(), size / _iconDecor.get_height());
     Gdk.cairo_set_source_pixbuf(ctx, _iconDecor, 0, 0);
     ctx.paint();
