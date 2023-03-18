@@ -186,7 +186,7 @@ msgstr "Text"
 
 #: src/common/actions/InsertText.js:83
 msgid "This text will be inserted."
-msgstr "Dieser Textwird eingefügt."
+msgstr "Dieser Text wird eingefügt."
 
 #: src/common/ConfigWidgetFactory.js:102 src/prefs/ImageChooserButton.js:42
 msgid "Select File"
