@@ -11,8 +11,8 @@
 
 'use strict';
 
-const Cairo                                                = imports.cairo;
-const {Gio, GLib, Gdk, Clutter, GObject, Pango, GdkPixbuf} = imports.gi;
+const Cairo                                                            = imports.cairo;
+const {Gio, GLib, Gdk, Clutter, GObject, Pango, PangoCairo, GdkPixbuf} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
@@ -556,10 +556,26 @@ class MenuItem extends Clutter.Actor {
           visualState == MenuItemState.CENTER_HOVERED ||
           visualState == MenuItemState.CHILD ||
           visualState == MenuItemState.CHILD_HOVERED) {
+
+        let label;
+
+        if (visualState == MenuItemState.CHILD ||
+            visualState == MenuItemState.CHILD_HOVERED) {
+          label = this.name;
+        }
+
+        let labelScale = 1.0;
+
+        if (visualState == MenuItemState.CHILD_HOVERED) {
+          const normalSettings = MenuItemSettings.state.get(MenuItemState.CHILD);
+          labelScale           = settings.size / normalSettings.size;
+        }
+
         icon = MenuItem.createIcon(
             backgroundColor, settings.backgroundImage, settings.size, this.icon,
-            settings.iconScale, settings.iconCrop, settings.iconOpacity,
-            MenuItemSettings.textColor, MenuItemSettings.font);
+            settings.iconScale, settings.iconCrop, settings.iconOpacity, label,
+            labelScale, MenuItemSettings.textColor, MenuItemSettings.font);
+
       } else {
         // Grandchildren have only a circle as icon. Therefore no icon name is passed to
         // this method.
@@ -806,7 +822,7 @@ class MenuItem extends Clutter.Actor {
   // (for example the touch buttons).
   static createIcon(
       backgroundColor, backgroundImage, backgroundSize, iconName, iconScale, iconCrop,
-      iconOpacity, textColor, font) {
+      iconOpacity, label, labelScale, textColor, font) {
 
     const canvas = new Clutter.Canvas({height: backgroundSize, width: backgroundSize});
     canvas.connect('draw', (c, ctx, width, height) => {
@@ -866,6 +882,12 @@ class MenuItem extends Clutter.Actor {
 
       // Paint the icon!
       if (iconName != undefined) {
+
+        if (label != undefined) {
+          ctx.pushGroup();
+          ctx.save();
+        }
+
         const iconSize = backgroundSize * iconScale;
 
         // Clip the icon according to the given clip radius. Sqrt(2) is to ensure that the
@@ -885,6 +907,49 @@ class MenuItem extends Clutter.Actor {
           green: textColor.green / 255,
           blue: textColor.blue / 255
         });
+
+        if (label != undefined) {
+          ctx.restore();
+
+          const labelWidth       = backgroundSize * 0.6;
+          const verticalPosition = backgroundSize * 0.85;
+          const gradientStart    = backgroundSize * 0.55;
+          const gradientEnd      = backgroundSize * 0.75;
+
+          const gradient = new Cairo.LinearGradient(0, gradientStart, 0, gradientEnd);
+          gradient.addColorStopRGBA(0, 0, 0, 0, 0);
+          gradient.addColorStopRGBA(1, 1, 1, 1, 1);
+          ctx.setOperator(Cairo.Operator.DEST_OUT);
+          ctx.setSource(gradient);
+          ctx.paint();
+          ctx.setOperator(Cairo.Operator.OVER);
+
+          ctx.popGroupToSource();
+          ctx.paint();
+
+          const fontDescription = Pango.FontDescription.from_string('Cantarell Regular');
+          fontDescription.set_size(Pango.units_from_double(8.0 * labelScale));
+
+          utils.debug(labelScale);
+
+          const layout = PangoCairo.create_layout(ctx);
+          layout.set_font_description(fontDescription);
+          layout.set_alignment(Pango.Alignment.CENTER);
+          layout.set_ellipsize(Pango.EllipsizeMode.END);
+          layout.set_width(Pango.units_from_double(labelWidth));
+          layout.set_text(label, -1);
+
+          const extents = layout.get_pixel_extents()[1];
+          ctx.setSourceRGBA(
+              textColor.red / 255, textColor.green / 255, textColor.blue / 255,
+              iconOpacity);
+          ctx.translate(
+              Math.floor((backgroundSize - labelWidth) / 2),
+              Math.floor(verticalPosition - extents.height));
+
+          PangoCairo.update_layout(ctx, layout);
+          PangoCairo.show_layout(ctx, layout);
+        }
       }
 
       // Explicitly tell Cairo to free the context memory. Is this really necessary?
