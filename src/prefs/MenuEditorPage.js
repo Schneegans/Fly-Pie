@@ -873,7 +873,8 @@ var MenuEditorPage = class MenuEditorPage {
       }
 
       // Update the draw-labels property if the currently selected item has it set.
-      this._builder.get_object('show-child-labels').active = this._selectedItem.showChildLabels;
+      this._builder.get_object('show-child-labels').active =
+          this._selectedItem.showChildLabels;
 
       // Now we check whether the selected item has a config property.
       const config = ItemRegistry.getItemTypes()[selectedType].config;

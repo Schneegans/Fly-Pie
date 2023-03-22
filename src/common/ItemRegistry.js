@@ -125,7 +125,7 @@ var ItemRegistry = class ItemRegistry {
           setShowLabel(child.children || [], show);
         });
       };
-      
+
       setShowLabel(result.children || [], config.showChildLabels || false);
     }
 
