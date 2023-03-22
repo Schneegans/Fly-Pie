@@ -256,7 +256,7 @@ var TouchButtons = class TouchButtons {
             this._cachedSettings.backgroundColor, this._cachedSettings.backgroundImage,
             this._cachedSettings.size, config.icon, this._cachedSettings.iconScale,
             this._cachedSettings.iconCrop, this._cachedSettings.iconOpacity, undefined,
-            1.0, this._cachedSettings.textColor, this._cachedSettings.font);
+            1.0, this._cachedSettings.textColor, this._cachedSettings.font, undefined);
 
         // This way we can identify the actor with the looking glass tool.
         actor.name = `Fly-Pie TouchButton (${config.name})`;

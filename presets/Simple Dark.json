@@ -4,6 +4,7 @@
   "background-color": "rgba(0,0,0,0.266892)",
   "text-color": "rgb(206,206,206)",
   "font": "Open Sans Semi-Bold 11",
+  "label-font": "Open Sans 8",
   "wedge-width": 300,
   "wedge-inner-radius": 58,
   "wedge-color": "rgba(0,0,0,0.192568)",

@@ -90,16 +90,20 @@ SPDX-License-Identifier: CC0-1.0
     <key name="text-color" type="s">
       <default>"rgb(238, 238, 238)"</default>
       <summary>Text Color</summary>
-      <description>The color of the menu text.</description>
+      <description>The color of the center item text.</description>
     </key>
 
     <key name="font" type="s">
       <default>"Cantarell 11"</default>
       <summary>Font</summary>
-      <description>The font used in the menu.</description>
+      <description>The font used for the center item.</description>
     </key>
 
-
+    <key name="label-font" type="s">
+      <default>"Cantarell 8"</default>
+      <summary>Font</summary>
+      <description>The font used for the child labels.</description>
+    </key>
     <!-- Wedge Settings -->
 
     <key name="wedge-width" type="d">

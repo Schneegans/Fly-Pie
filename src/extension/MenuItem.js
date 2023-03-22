@@ -342,6 +342,7 @@ class MenuItem extends Clutter.Actor {
       easingMode:              settings.get_enum('easing-mode'),
       textColor:               Clutter.Color.from_string(settings.get_string('text-color'))[1],
       font:                    settings.get_string('font'),
+      labelFont:               settings.get_string('label-font'),
       traceThickness:          settings.get_double('trace-thickness') * globalScale,
       traceColor:              Clutter.Color.from_string(settings.get_string('trace-color'))[1],
       state: new Map ([
@@ -578,7 +579,8 @@ class MenuItem extends Clutter.Actor {
         icon = MenuItem.createIcon(
             backgroundColor, settings.backgroundImage, settings.size, this.icon,
             settings.iconScale, settings.iconCrop, settings.iconOpacity, label,
-            labelScale, MenuItemSettings.textColor, MenuItemSettings.font);
+            labelScale, MenuItemSettings.textColor, MenuItemSettings.font,
+            MenuItemSettings.labelFont);
 
       } else {
         // Grandchildren have only a circle as icon. Therefore no icon name is passed to
@@ -826,7 +828,7 @@ class MenuItem extends Clutter.Actor {
   // (for example the touch buttons).
   static createIcon(
       backgroundColor, backgroundImage, backgroundSize, iconName, iconScale, iconCrop,
-      iconOpacity, label, labelScale, textColor, font) {
+      iconOpacity, label, labelScale, textColor, font, labelFont) {
 
     const canvas = new Clutter.Canvas({height: backgroundSize, width: backgroundSize});
     canvas.connect('draw', (c, ctx, width, height) => {
@@ -931,8 +933,8 @@ class MenuItem extends Clutter.Actor {
           ctx.popGroupToSource();
           ctx.paint();
 
-          const fontDescription = Pango.FontDescription.from_string('Cantarell Regular');
-          fontDescription.set_size(Pango.units_from_double(8.0 * labelScale));
+          const fontDescription = Pango.FontDescription.from_string(labelFont);
+          fontDescription.set_size(fontDescription.get_size() * labelScale);
 
           const layout = PangoCairo.create_layout(ctx);
           layout.set_font_description(fontDescription);
