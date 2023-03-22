@@ -38,7 +38,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.7268608"
-     inkscape:cx="-62.892833"
+     inkscape:cx="111.30014"
      inkscape:cy="130.00297"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -49,8 +49,8 @@
      inkscape:snap-page="true"
      inkscape:window-width="1582"
      inkscape:window-height="942"
-     inkscape:window-x="37"
-     inkscape:window-y="34"
+     inkscape:window-x="35"
+     inkscape:window-y="32"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata5">
@@ -69,14 +69,14 @@
      inkscape:groupmode="layer"
      id="layer1">
     <circle
-       style="opacity:0.348109;fill:#000000;fill-opacity:1;stroke-width:0.249559;filter:url(#filter1065)"
+       style="opacity:0.4;fill:#000000;fill-opacity:1;stroke-width:0.249559;filter:url(#filter1065)"
        id="circle1404"
        cx="33.866665"
        cy="34.282391"
        r="32.205761"
        transform="matrix(0.99453251,0,0,0.99453251,0.18516398,0.49759323)" />
     <circle
-       style="fill:#24273a;fill-opacity:1;stroke:#c6a0f6;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#24273a;fill-opacity:1;stroke:#c6a0f6;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path1402"
        cx="33.866665"
        cy="33.866665"
