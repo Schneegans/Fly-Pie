@@ -79,7 +79,7 @@ var menu = {
       // Use default data for undefined properties.
       data = {...this.defaultData, ...data};
 
-      const vBox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 5});
+      const vBox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 16});
 
       let toggles   = [];
       let nameRegex = data.nameRegex;
