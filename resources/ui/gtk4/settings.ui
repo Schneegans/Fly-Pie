@@ -4926,6 +4926,36 @@ This can be used if you want to capture a video of Fly-Pie.</property>
                                   </object>
                                 </child>
                                 <child>
+                                  <object class="GtkRevealer" id="item-settings-show-child-labels-revealer">
+                                    <property name="transition_type">slide-up</property>
+                                    <property name="transition_duration">200</property>
+                                    <property name="reveal_child">1</property>
+                                    <property name="child">
+                                      <object class="GtkBox">
+                                        <property name="margin_top">5</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">5</property>
+                                        <child>
+                                          <object class="GtkBox">
+                                            <property name="margin_top">10</property>
+                                            <property name="spacing">10</property>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="hexpand">1</property>
+                                                <property name="halign">start</property>
+                                                <property name="label" translatable="yes">Show Labels</property>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="GtkSwitch" id="show-child-labels" />
+                                            </child>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </property>
+                                  </object>
+                                </child>
+                                <child>
                                   <object class="GtkRevealer" id="info-label-revealer">
                                     <property name="vexpand">1</property>
                                     <property name="reveal_child">1</property>

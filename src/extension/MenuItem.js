@@ -96,6 +96,9 @@ var MenuItem = GObject.registerClass({
       'icon', 'icon', 'The icon to be used by this menu item. ' +
       'Can be an "icon-name", an emoji like "🚀" or a path like "../icon.png".',
       GObject.ParamFlags.READWRITE, 'image-missing'),
+    'show-label': GObject.ParamSpec.boolean(
+      'show-label', 'show-label', 'Wether the item should draw its name.',
+      GObject.ParamFlags.READWRITE, false),
     'id': GObject.ParamSpec.string(
       'id', 'id', 'The ID of the menu item. ',
       GObject.ParamFlags.READWRITE, 'image-missing')
@@ -558,17 +561,18 @@ class MenuItem extends Clutter.Actor {
           visualState == MenuItemState.CHILD_HOVERED) {
 
         let label;
-
-        if (visualState == MenuItemState.CHILD ||
-            visualState == MenuItemState.CHILD_HOVERED) {
-          label = this.name;
-        }
-
         let labelScale = 1.0;
 
-        if (visualState == MenuItemState.CHILD_HOVERED) {
-          const normalSettings = MenuItemSettings.state.get(MenuItemState.CHILD);
-          labelScale           = settings.size / normalSettings.size;
+        if (this.showLabel &&
+            (visualState == MenuItemState.CHILD ||
+             visualState == MenuItemState.CHILD_HOVERED)) {
+
+          label = this.name;
+
+          if (visualState == MenuItemState.CHILD_HOVERED) {
+            const normalSettings = MenuItemSettings.state.get(MenuItemState.CHILD);
+            labelScale           = settings.size / normalSettings.size;
+          }
         }
 
         icon = MenuItem.createIcon(
@@ -929,8 +933,6 @@ class MenuItem extends Clutter.Actor {
 
           const fontDescription = Pango.FontDescription.from_string('Cantarell Regular');
           fontDescription.set_size(Pango.units_from_double(8.0 * labelScale));
-
-          utils.debug(labelScale);
 
           const layout = PangoCairo.create_layout(ctx);
           layout.set_font_description(fontDescription);
