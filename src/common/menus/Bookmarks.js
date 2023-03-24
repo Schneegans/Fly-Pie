@@ -71,6 +71,14 @@ var menu = {
         try {
           const info = file.query_info('standard::icon', 0, null);
           icon       = info.get_icon().to_string();
+
+          // It seems that the folder icons all look the same with some icon themes if the
+          // icon string ends with this items. We just remove them, then they seem to use
+          // the correct images...
+          if (icon.endsWith('-symbolic folder-symbolic')) {
+            icon = icon.slice(0, -25);
+          }
+
         } catch (e) {
         }
 

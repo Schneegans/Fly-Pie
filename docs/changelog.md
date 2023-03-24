@@ -17,6 +17,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 * **New donation method: Ko-fi**. Follow me on Ko-fi to get the latest updates regarding my extensions: https://ko-fi.com/schneegans!
 * **New Preset: Catppuccin**. Soothing warm pastel pinks for Fly-Pie!
+* The Bookmarks submenu now attempts to use directory-specific icons (for directories such as Downloads, Documents, Music, etc.).
 * Fly-Pie menus are now opened across all monitors. Before they were limited to the monitor currently having mouse input focus.
 * The custom info-popover has been replaced by a more traditional main menu. It gives access to Fly-Pie's homepage, the bug tracker and some donation options.
 * An about dialog has been added. If available, the `Adw.AboutWindow` is used.
