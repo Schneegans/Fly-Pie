@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-13 21:04+0200\n"
+"POT-Creation-Date: 2023-03-24 20:33+0100\n"
 "PO-Revision-Date: 2022-05-12 10:19+0000\n"
 "Last-Translator: Eric <alchemillatruth@purelymail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/fly-"
@@ -19,17 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.13-dev\n"
 
-#: src/common/actions/Shortcut.js:43
+#: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
 msgstr "模拟键盘快捷键"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/Shortcut.js:50
+#: src/common/actions/Shortcut.js:53
 msgid "Simulates a key combination."
 msgstr "模拟按下键盘组合键。"
 
-#: src/common/actions/Shortcut.js:54
+#: src/common/actions/Shortcut.js:57
 msgid ""
 "The <b>Activate Shortcut</b> action simulates a key combination when "
 "activated. For example, this can be used to switch virtual desktops, control "
@@ -38,50 +38,50 @@ msgstr ""
 "<b>激活键盘快捷键</b>操作可以用来模拟用户按下了一组键盘上的按键。切换虚拟桌"
 "面、控制音视频的播放暂停或撤消 / 重做操作等可能用得上此功能。"
 
-#: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5103
-#: resources/ui/gtk3/settings.ui:5095
+#: src/common/actions/Shortcut.js:81 resources/ui/gtk4/settings.ui:4875
+#: resources/ui/gtk3/settings.ui:4875
 msgid "Shortcut"
 msgstr "键盘组合键"
 
-#: src/common/actions/Shortcut.js:78
+#: src/common/actions/Shortcut.js:81
 msgid "This shortcut will be simulated."
 msgstr "要模拟的键盘组合键。"
 
-#: src/common/actions/File.js:34
+#: src/common/actions/File.js:37
 msgid "Open File"
 msgstr "打开文件"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/File.js:41
+#: src/common/actions/File.js:44
 msgid "Opens a file with the default application."
 msgstr "在默认应用中把文件打开。"
 
-#: src/common/actions/File.js:45
+#: src/common/actions/File.js:48
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr "<b>打开文件</b>操作可以在系统默认的应用程序下把上面指定的文件打开。"
 
-#: src/common/actions/File.js:69
+#: src/common/actions/File.js:72
 msgid "File"
 msgstr "文件"
 
-#: src/common/actions/File.js:69 src/common/actions/Uri.js:68
+#: src/common/actions/File.js:72 src/common/actions/Uri.js:71
 msgid "It will be opened with the default app."
 msgstr "该文件会由默认应用打开。"
 
-#: src/common/actions/Command.js:34
+#: src/common/actions/Command.js:37
 msgid "Launch Application"
 msgstr "启动应用程序"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/Command.js:41
+#: src/common/actions/Command.js:44
 msgid "Runs any shell command."
 msgstr "执行 shell 命令。"
 
-#: src/common/actions/Command.js:45
+#: src/common/actions/Command.js:48
 msgid ""
 "The <b>Launch Application</b> action executes any given command. This is "
 "primarily used to open applications but may have plenty of other use cases "
@@ -90,25 +90,25 @@ msgstr ""
 "<b>启动应用程序</b>操作可以执行给出的任意命令。这样主要是为了打开应用程序，但"
 "也可能有很多别的用法。"
 
-#: src/common/actions/Command.js:69
+#: src/common/actions/Command.js:72
 msgid "Command"
 msgstr "命令"
 
-#: src/common/actions/Command.js:69
+#: src/common/actions/Command.js:72
 msgid "Use the button to list installed apps."
 msgstr "点击按钮，列出安装的应用。"
 
-#: src/common/actions/Uri.js:33
+#: src/common/actions/Uri.js:36
 msgid "Open URI"
 msgstr "打开统一资源定位符（URI）"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/Uri.js:40
+#: src/common/actions/Uri.js:43
 msgid "Opens an URI with the default application."
 msgstr "在默认应用中打开 URI 。"
 
-#: src/common/actions/Uri.js:44
+#: src/common/actions/Uri.js:47
 msgid ""
 "When the <b>Open URI</b> action is activated, the above URI is opened with "
 "the default application. For http URLs, this will be your web browser. "
@@ -119,21 +119,21 @@ msgstr ""
 "统一资源定位符（URL），就会用浏览器打开。但是，像“mailto:foo@bar.org”这样的 "
 "URI 可能也能打开。"
 
-#: src/common/actions/Uri.js:68
+#: src/common/actions/Uri.js:71
 msgid "URI"
 msgstr "统一资源标识符（URI）"
 
-#: src/common/actions/DBusSignal.js:32
+#: src/common/actions/DBusSignal.js:35
 msgid "D-Bus Signal"
 msgstr "D-Bus 信号"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/DBusSignal.js:39
+#: src/common/actions/DBusSignal.js:42
 msgid "Emits a D-Bus signal."
 msgstr "发出 D-Bus 信号。"
 
-#: src/common/actions/DBusSignal.js:43
+#: src/common/actions/DBusSignal.js:46
 msgid ""
 "The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
 "\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md"
@@ -144,25 +144,25 @@ msgstr ""
 "Fly-Pie/blob/main/docs/dbus-interface.md\">可以在 D-Bus 上监听操作的激活</"
 "a>。这可以用来通过命令行打开菜单。"
 
-#: src/common/actions/DBusSignal.js:67
+#: src/common/actions/DBusSignal.js:70
 msgid "ID"
 msgstr "ID"
 
-#: src/common/actions/DBusSignal.js:67
+#: src/common/actions/DBusSignal.js:70
 msgid "This will be passed to the D-Bus signal."
 msgstr "此值会传给 D-Bus 信号。"
 
-#: src/common/actions/InsertText.js:48
+#: src/common/actions/InsertText.js:51
 msgid "Insert Text"
 msgstr "插入文字"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/InsertText.js:55
+#: src/common/actions/InsertText.js:58
 msgid "Types some text automatically."
 msgstr "自动键入一些文本。"
 
-#: src/common/actions/InsertText.js:59
+#: src/common/actions/InsertText.js:62
 msgid ""
 "The <b>Insert Text</b> action copies the given text to the clipboard and "
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
@@ -171,37 +171,37 @@ msgstr ""
 "<b>插入文字</b>操作会把所给的文本复制到剪贴板，然后模拟 Ctrl+V 。想想您是不是"
 "经常输入同样的文本？如果是的话，可能这功能就很有用了。"
 
-#: src/common/actions/InsertText.js:83
+#: src/common/actions/InsertText.js:86
 msgid "Text"
 msgstr "文字"
 
-#: src/common/actions/InsertText.js:83
+#: src/common/actions/InsertText.js:86
 msgid "This text will be inserted."
 msgstr "要插入的文本。"
 
-#: src/common/ConfigWidgetFactory.js:102 src/prefs/ImageChooserButton.js:42
+#: src/common/ConfigWidgetFactory.js:105 src/prefs/ImageChooserButton.js:45
 msgid "Select File"
 msgstr "选中文件"
 
-#: src/common/ConfigWidgetFactory.js:103 src/common/ConfigWidgetFactory.js:179
-#: src/prefs/ImageChooserButton.js:43 src/prefs/MenuEditorPage.js:205
-#: src/prefs/MenuEditorPage.js:275 src/prefs/SettingsPage.js:274
-#: src/prefs/SettingsPage.js:329 resources/ui/gtk4/iconSelectDialog.ui:14
-#: resources/ui/gtk3/iconSelectDialog.ui:14
+#: src/common/ConfigWidgetFactory.js:106 src/common/ConfigWidgetFactory.js:182
+#: src/prefs/ImageChooserButton.js:46 src/prefs/MenuEditorPage.js:208
+#: src/prefs/MenuEditorPage.js:278 src/prefs/SettingsPage.js:280
+#: src/prefs/SettingsPage.js:335 resources/ui/gtk4/iconSelectDialog.ui:20
+#: resources/ui/gtk3/iconSelectDialog.ui:20
 msgid "Cancel"
 msgstr "取消"
 
-#: src/common/ConfigWidgetFactory.js:178
+#: src/common/ConfigWidgetFactory.js:181
 msgid "Select Application"
 msgstr "选择应用"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
-#: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
-#: src/prefs/MenuEditor.js:281
+#: src/common/ConfigWidgetFactory.js:290 src/common/ConfigWidgetFactory.js:338
+#: src/prefs/MenuEditor.js:284
 msgid "Not Bound"
 msgstr "待绑定按键"
 
-#: src/common/ConfigWidgetFactory.js:318
+#: src/common/ConfigWidgetFactory.js:321
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
@@ -212,22 +212,22 @@ msgstr ""
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
 #. text to insert.
-#: src/common/ItemRegistry.js:244
+#: src/common/ItemRegistry.js:279
 #, javascript-format
 msgid "Insert: %s"
 msgstr "插入：%s"
 
-#: src/common/menus/FrequentlyUsed.js:44
+#: src/common/menus/FrequentlyUsed.js:47
 msgid "Frequently Used"
 msgstr "常用应用"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/FrequentlyUsed.js:51
+#: src/common/menus/FrequentlyUsed.js:54
 msgid "Shows your frequently used applications."
 msgstr "显示您常用的应用程序。"
 
-#: src/common/menus/FrequentlyUsed.js:55
+#: src/common/menus/FrequentlyUsed.js:58
 msgid ""
 "The <b>Frequently Used</b> menu shows a list of frequently used "
 "applications. For efficient selections, you should limit the maximum number "
@@ -236,64 +236,64 @@ msgstr ""
 "<b>常用应用</b>菜单显示了经常用的应用程序的列表。为了能高效地选择应用，显示的"
 "应用程序最好不超过12个左右。"
 
-#: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
-#: src/common/menus/Clipboard.js:85
+#: src/common/menus/FrequentlyUsed.js:82 src/common/menus/RecentFiles.js:72
+#: src/common/menus/Clipboard.js:88
 msgid "Max Item Count"
 msgstr "最多记录几项"
 
-#: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
-#: src/common/menus/Clipboard.js:85
+#: src/common/menus/FrequentlyUsed.js:82 src/common/menus/RecentFiles.js:72
+#: src/common/menus/Clipboard.js:88
 msgid "Limits the number of children."
 msgstr "限制子项目的数量。"
 
-#: src/common/menus/System.js:46
+#: src/common/menus/System.js:49
 msgid "System"
 msgstr "系统"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/System.js:53
+#: src/common/menus/System.js:56
 msgid "Allows screen lock, shutdown and other things."
 msgstr "可以锁定屏幕、关机等。"
 
-#: src/common/menus/System.js:57
+#: src/common/menus/System.js:60
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
 msgstr "<b>系统</b>菜单显示了锁定屏幕、关机、设置等的选项。"
 
 #. Translators: As in 'Lock the screen.'
-#: src/common/menus/System.js:81
+#: src/common/menus/System.js:84
 msgid "Lock"
 msgstr "锁定"
 
-#: src/common/menus/System.js:90
+#: src/common/menus/System.js:93
 msgid "Suspend"
 msgstr "悬停"
 
-#: src/common/menus/System.js:99
+#: src/common/menus/System.js:102
 msgid "Switch User…"
 msgstr "切换用户…"
 
-#: src/common/menus/System.js:108
+#: src/common/menus/System.js:111
 msgid "Log Out"
 msgstr "退出登录"
 
-#: src/common/menus/System.js:117
+#: src/common/menus/System.js:120
 msgid "Power Off…"
 msgstr "关机…"
 
-#: src/common/menus/CustomMenu.js:29
+#: src/common/menus/CustomMenu.js:32
 msgid "Custom Menu"
 msgstr "自定义菜单"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/CustomMenu.js:36
+#: src/common/menus/CustomMenu.js:39
 msgid "This can contain custom actions and other menus."
 msgstr "自定义菜单里面可以有自定义操作和其他菜单。"
 
-#: src/common/menus/CustomMenu.js:40
+#: src/common/menus/CustomMenu.js:43
 msgid ""
 "A <b>Custom Menu</b> can contain any number of actions and submenus. "
 "However, for precise item selection, a maximum number of twelve items is "
@@ -303,33 +303,33 @@ msgstr ""
 "目不要超过十二个。"
 
 #. Translators: This is an entry of the default menu.
-#: src/common/menus/Favorites.js:43 src/extension/DefaultMenu.js:79
+#: src/common/menus/Favorites.js:46 src/extension/DefaultMenu.js:82
 msgid "Favorites"
 msgstr "收藏的应用"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/Favorites.js:50
+#: src/common/menus/Favorites.js:53
 msgid "Shows pinned applications."
 msgstr "显示收藏标星的应用程序。"
 
-#: src/common/menus/Favorites.js:54
+#: src/common/menus/Favorites.js:57
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
 msgstr "<b>收藏的应用</b>菜单会显示您钉在 GNOME Shell 上的应用程序。"
 
-#: src/common/menus/RecentFiles.js:34
+#: src/common/menus/RecentFiles.js:37
 msgid "Recent Files"
 msgstr "近期文件"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/RecentFiles.js:41
+#: src/common/menus/RecentFiles.js:44
 msgid "Shows your recently used files."
 msgstr "显示您近期用过的文件。"
 
-#: src/common/menus/RecentFiles.js:45
+#: src/common/menus/RecentFiles.js:48
 msgid ""
 "The <b>Recent Files</b> menu shows a list of recently used files. For "
 "efficient selections, you should limit the maximum number of shown files to "
@@ -338,33 +338,33 @@ msgstr ""
 "<b>近期文件</b>菜单会显示近期使用过的文件的列表。为便于选择文件，您最好不要设"
 "置成显示十二个以上的文件。"
 
-#: src/common/menus/Devices.js:33
+#: src/common/menus/Devices.js:36
 msgid "Devices"
 msgstr "设备"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/Devices.js:40
+#: src/common/menus/Devices.js:43
 msgid "Shows connected devices."
 msgstr "显示联到电脑上的设备。"
 
-#: src/common/menus/Devices.js:44
+#: src/common/menus/Devices.js:47
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
 msgstr "<b>设备</b>菜单为每一个加载出了的存储设备（比如 U 盘）显示一项。"
 
-#: src/common/menus/MainMenu.js:33
+#: src/common/menus/MainMenu.js:36
 msgid "Main Menu"
 msgstr "主菜单"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/MainMenu.js:40
+#: src/common/menus/MainMenu.js:43
 msgid "Shows all installed applications."
 msgstr "显示所有已安装的应用程序。"
 
-#: src/common/menus/MainMenu.js:44
+#: src/common/menus/MainMenu.js:47
 msgid ""
 "The <b>Main Menu</b> shows all installed applications. Usually, this is very "
 "cluttered as many sections contain too many items to be used efficiently. "
@@ -374,17 +374,17 @@ msgstr ""
 "示会非常杂乱。您最好另行设定菜单！"
 
 #. Translators: This is an entry of the default menu. I
-#: src/common/menus/RunningApps.js:47 src/extension/DefaultMenu.js:111
+#: src/common/menus/RunningApps.js:50 src/extension/DefaultMenu.js:114
 msgid "Running Apps"
 msgstr "运行着的应用"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/RunningApps.js:54
+#: src/common/menus/RunningApps.js:57
 msgid "Shows the currently running applications."
 msgstr "显示正在运行着的应用程序。"
 
-#: src/common/menus/RunningApps.js:58
+#: src/common/menus/RunningApps.js:61
 msgid ""
 "The <b>Running Apps</b> menu shows all currently running applications. This "
 "is similar to the Alt+Tab window selection. As the entries change position "
@@ -393,7 +393,7 @@ msgstr ""
 "<b>运行着的应用</b>菜单可以显示当前正在运行中的应用程序。这和按下 Alt+Tab 显"
 "示出来的选择窗口差不多。里面的项目会实时更新，这也导致这个功能比较占用资源。"
 
-#: src/common/menus/RunningApps.js:97
+#: src/common/menus/RunningApps.js:100
 msgid ""
 "You can use this to filter the displayed windows. Regular expressions are "
 "supported: Use a simple string like \"Fire\" to show only windows whose "
@@ -407,437 +407,437 @@ msgstr ""
 "是“Fire”的窗口不会显示出来。本应用程序有个实时预览功能，可以帮您调试正则表达"
 "式！"
 
-#: src/common/menus/RunningApps.js:99
+#: src/common/menus/RunningApps.js:102
 msgid "Window Filter"
 msgstr "窗口筛选"
 
-#: src/common/menus/RunningApps.js:99 resources/ui/gtk4/settings.ui:5010
-#: resources/ui/gtk4/settings.ui:5061 resources/ui/gtk3/settings.ui:4996
-#: resources/ui/gtk3/settings.ui:5053
+#: src/common/menus/RunningApps.js:102 resources/ui/gtk4/settings.ui:4782
+#: resources/ui/gtk4/settings.ui:4833 resources/ui/gtk3/settings.ui:4776
+#: resources/ui/gtk3/settings.ui:4833
 msgid "See tooltip for details."
 msgstr "了解详细信息，请参阅工具提示。"
 
-#: src/common/menus/RunningApps.js:125
+#: src/common/menus/RunningApps.js:128
 msgid "Active Workspace Only"
 msgstr "只显示使用中的工作区里的应用"
 
-#: src/common/menus/RunningApps.js:126
+#: src/common/menus/RunningApps.js:129
 msgid "Group by Application"
 msgstr "按应用程序分组"
 
-#: src/common/menus/RunningApps.js:127
+#: src/common/menus/RunningApps.js:130
 msgid "Peek on Hover"
 msgstr "鼠标悬停，速览窗口"
 
-#: src/common/menus/Bookmarks.js:33
+#: src/common/menus/Bookmarks.js:36
 msgid "Bookmarks"
 msgstr "书签"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/Bookmarks.js:40
+#: src/common/menus/Bookmarks.js:43
 msgid "Shows your frequently used directories."
 msgstr "显示常用目录。"
 
-#: src/common/menus/Bookmarks.js:44
+#: src/common/menus/Bookmarks.js:47
 msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
 msgstr "<b>书签</b>菜单包含回收站、桌面和有书签标记的目录。"
 
-#: src/common/menus/Clipboard.js:54
+#: src/common/menus/Clipboard.js:57
 msgid "Clipboard"
 msgstr "剪贴板"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/Clipboard.js:61
+#: src/common/menus/Clipboard.js:64
 msgid "Shows recently copied things."
 msgstr "显示近期复制的内容。"
 
-#: src/common/menus/Clipboard.js:64
+#: src/common/menus/Clipboard.js:67
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
 msgstr "<b>剪贴板</b>菜单会列出近期复制下来的东西。"
 
-#: src/common/menus/Clipboard.js:94
+#: src/common/menus/Clipboard.js:97
 msgid "First Child Angle"
 msgstr "第一子项角度"
 
-#: src/common/menus/Clipboard.js:94
+#: src/common/menus/Clipboard.js:97
 msgid "Direction of the most recent item."
 msgstr "最近一条放在哪个角度。"
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a vector image.
-#: src/common/menus/Clipboard.js:165
+#: src/common/menus/Clipboard.js:168
 msgid "Vector Image"
 msgstr "矢量图像"
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a raster image.
-#: src/common/menus/Clipboard.js:177
+#: src/common/menus/Clipboard.js:180
 msgid "Raster Image"
 msgstr "栅格图像"
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
-#: src/common/Achievements.js:366
+#: src/common/Achievements.js:369
 msgid "Novice"
 msgstr ""
 
 #. Translators: This is the tier 2 attribute which will be inserted for each %s
 #. in the achievement titles.
-#: src/common/Achievements.js:369
+#: src/common/Achievements.js:372
 msgid "Capable"
 msgstr ""
 
 #. Translators: This is the tier 3 attribute which will be inserted for each %s
 #. in the achievement titles.
-#: src/common/Achievements.js:372
+#: src/common/Achievements.js:375
 msgid "Skilled"
 msgstr ""
 
 #. Translators: This is the tier 4 attribute which will be inserted for each %s
 #. in the achievement titles.
-#: src/common/Achievements.js:375
+#: src/common/Achievements.js:378
 msgid "Expert"
 msgstr ""
 
 #. Translators: This is the tier 5 attribute which will be inserted for each %s
 #. in the achievement titles.
-#: src/common/Achievements.js:378
+#: src/common/Achievements.js:381
 msgid "Master"
 msgstr ""
 
 #. Translators: This is the tier 1 number which will be inserted for each %i in
 #. the achievement titles.
-#: src/common/Achievements.js:384
+#: src/common/Achievements.js:387
 msgid "I"
 msgstr ""
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
-#: src/common/Achievements.js:387
+#: src/common/Achievements.js:390
 msgid "II"
 msgstr ""
 
 #. Translators: This is the tier 3 number which will be inserted for each %i in
 #. the achievement titles.
-#: src/common/Achievements.js:390
+#: src/common/Achievements.js:393
 msgid "III"
 msgstr ""
 
 #. Translators: This is the tier 4 number which will be inserted for each %i in
 #. the achievement titles.
-#: src/common/Achievements.js:393
+#: src/common/Achievements.js:396
 msgid "IV"
 msgstr ""
 
 #. Translators: This is the tier 5 number which will be inserted for each %i in
 #. the achievement titles.
-#: src/common/Achievements.js:396
+#: src/common/Achievements.js:399
 msgid "V"
 msgstr ""
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
-#: src/common/Achievements.js:412
+#: src/common/Achievements.js:415
 #, javascript-format
 msgid "%s Cancellor"
 msgstr ""
 
 #. Translators: The description of the '%s Cancellor' achievement.
-#: src/common/Achievements.js:415
+#: src/common/Achievements.js:418
 #, javascript-format
 msgid "Abort a selection %x times."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items.' achievement.
-#: src/common/Achievements.js:428
+#: src/common/Achievements.js:431
 #, javascript-format
 msgid "%s Pielot"
 msgstr ""
 
 #. Translators: The description of the '%s Pielot' achievement.
-#: src/common/Achievements.js:430
+#: src/common/Achievements.js:433
 #, javascript-format
 msgid "Select %x items."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:444
+#: src/common/Achievements.js:447
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:447
+#: src/common/Achievements.js:450
 #, javascript-format
 msgid "%s Submenu Gesture-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:450
+#: src/common/Achievements.js:453
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
 msgstr ""
 
 #. Translators: The description of the 'Gesture-Selector' achievement.
-#: src/common/Achievements.js:457
+#: src/common/Achievements.js:460
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:474
+#: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Toplevel Click-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:477
+#: src/common/Achievements.js:480
 #, javascript-format
 msgid "%s Submenu Click-Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:480
+#: src/common/Achievements.js:483
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
 msgstr ""
 
 #. Translators: The description of the 'Click-Selector' achievement.
-#: src/common/Achievements.js:487
+#: src/common/Achievements.js:490
 #, javascript-format
 msgid "Select %x items at depth %d with mouse clicks."
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 1 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:509
+#: src/common/Achievements.js:512
 #, javascript-format
 msgid "%s Toplevel Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 2 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:512
+#: src/common/Achievements.js:515
 #, javascript-format
 msgid "%s Submenu Selector"
 msgstr ""
 
 #. Translators: The name of the 'Select %x items at depth 3 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:515
+#: src/common/Achievements.js:518
 #, javascript-format
 msgid "%s Subsubmenu Selector"
 msgstr ""
 
 #. Translators: The description of the 'Selector' achievement.
-#: src/common/Achievements.js:527
+#: src/common/Achievements.js:530
 msgid "Select %x items at depth %d in less than %t milliseconds."
 msgstr ""
 
 #. Translators: The name of the 'Open the settings dialog %x times.'
 #. achievement.
-#: src/common/Achievements.js:547
+#: src/common/Achievements.js:550
 msgid "The Journey Is The Reward %i"
 msgstr ""
 
 #. Translators: The description of the 'The Journey Is The Reward %i'
 #. achievement.
-#: src/common/Achievements.js:550
+#: src/common/Achievements.js:553
 #, javascript-format
 msgid "Open the settings dialog %x times."
 msgstr ""
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
-#: src/common/Achievements.js:565
+#: src/common/Achievements.js:568
 msgid "Nerd Alert %i"
 msgstr ""
 
 #. Translators: The description of the 'Nerd Alert %i' achievement.
-#: src/common/Achievements.js:567
+#: src/common/Achievements.js:570
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
 msgstr ""
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
-#: src/common/Achievements.js:581
+#: src/common/Achievements.js:584
 msgid "Entropie %i"
 msgstr ""
 
-#: src/common/Achievements.js:585
+#: src/common/Achievements.js:588
 #, javascript-format
 msgid "Generate %x random presets."
 msgstr ""
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
-#: src/common/Achievements.js:598
+#: src/common/Achievements.js:601
 #, javascript-format
 msgid "%s Preset Exporter"
 msgstr ""
 
 #. Translators: The description of the '%s Preset Exporter' achievement if
 #. only one preset needs to be exported.
-#: src/common/Achievements.js:602
+#: src/common/Achievements.js:605
 msgid "Export a custom preset."
 msgstr ""
 
 #. Translators: The description of the '%s Preset Exporter' achievement.
-#: src/common/Achievements.js:604
+#: src/common/Achievements.js:607
 #, javascript-format
 msgid "Export %x custom presets."
 msgstr ""
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
-#: src/common/Achievements.js:617
+#: src/common/Achievements.js:620
 #, javascript-format
 msgid "%s Preset Importer"
 msgstr ""
 
 #. Translators: The description of the '%s Preset Importer' achievement if
 #. only one preset needs to be imported.
-#: src/common/Achievements.js:621
+#: src/common/Achievements.js:624
 msgid "Import a custom preset."
 msgstr ""
 
 #. Translators: The description of the '%s Preset Importer' achievement.
-#: src/common/Achievements.js:623
+#: src/common/Achievements.js:626
 #, javascript-format
 msgid "Import %x custom presets."
 msgstr ""
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
-#: src/common/Achievements.js:636
+#: src/common/Achievements.js:639
 #, javascript-format
 msgid "%s Menu Importer"
 msgstr ""
 
 #. Translators: The description of the '%s Menu Importer' achievement if
 #. only one menu needs to be imported.
-#: src/common/Achievements.js:640
+#: src/common/Achievements.js:643
 msgid "Import a menu configuration."
 msgstr ""
 
 #. Translators: The description of the '%s Menu Importer' achievement.
-#: src/common/Achievements.js:642
+#: src/common/Achievements.js:645
 #, javascript-format
 msgid "Import %x menu configurations."
 msgstr ""
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
-#: src/common/Achievements.js:656
+#: src/common/Achievements.js:659
 #, javascript-format
 msgid "%s Menu Exporter"
 msgstr ""
 
 #. Translators: The description of the '%s Menu Exporter' achievement if
 #. only one menu needs to be exported.
-#: src/common/Achievements.js:660
+#: src/common/Achievements.js:663
 msgid "Export a menu configuration."
 msgstr ""
 
 #. Translators: The description of the '%s Menu Exporter' achievement.
-#: src/common/Achievements.js:662
+#: src/common/Achievements.js:665
 #, javascript-format
 msgid "Export %x menu configurations."
 msgstr ""
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
-#: src/common/Achievements.js:677
+#: src/common/Achievements.js:680
 msgid "There Should Be No More Than Twelve Items…? %i"
 msgstr ""
 
 #. Translators: The description of the 'There Should Be No More Than Twelve
 #. Items…? %i' achievement.
-#: src/common/Achievements.js:680
+#: src/common/Achievements.js:683
 #, javascript-format
 msgid "Create %x items in the menu editor."
 msgstr ""
 
 #. Translators: The name of the 'Open a preview menu %x times.' achievement.
-#: src/common/Achievements.js:694
+#: src/common/Achievements.js:697
 #, javascript-format
 msgid "%s Menu Designer"
 msgstr ""
 
 #. Translators: The description of the '%s Menu Designer' achievement.
-#: src/common/Achievements.js:697
+#: src/common/Achievements.js:700
 #, javascript-format
 msgid "Open a preview menu %x times."
 msgstr ""
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:710
+#: src/common/Achievements.js:713
 msgid "Grumpie Rookie"
 msgstr ""
 
 #. Translators: The description of the 'Grumpie Rookie' achievement.
-#: src/common/Achievements.js:712
+#: src/common/Achievements.js:715
 #, javascript-format
 msgid "Open the tutorial menu %x times."
 msgstr ""
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:724
+#: src/common/Achievements.js:727
 msgid "Bachelor Pielot"
 msgstr ""
 
 #. Translators: The description of the 'Bachelor Pielot' achievement.
-#: src/common/Achievements.js:726
+#: src/common/Achievements.js:729
 msgid "Get all medals of the tutorial."
 msgstr ""
 
 #. Translators: The name of the hidden 'Delete all of your menus.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:738
+#: src/common/Achievements.js:741
 msgid "Say Good-Pie!"
 msgstr ""
 
 #. Translators: The description of the 'Say Good-Pie!' achievement.
-#: src/common/Achievements.js:740
+#: src/common/Achievements.js:743
 msgid "Delete all of your menus."
 msgstr ""
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
 #. achievement.
-#: src/common/Achievements.js:753
+#: src/common/Achievements.js:756
 msgid "That's Philanthropie!"
 msgstr ""
 
 #. Translators: The description of the 'That's Philanthropie!' achievement.
-#: src/common/Achievements.js:755
+#: src/common/Achievements.js:758
 msgid "Consider becoming a sponsor of Fly-Pie."
 msgstr ""
 
-#: src/prefs/AchievementsPage.js:117
+#: src/prefs/AchievementsPage.js:120
 msgid "Do you really want to reset all statistics?"
 msgstr ""
 
-#: src/prefs/AchievementsPage.js:118
+#: src/prefs/AchievementsPage.js:121
 msgid "All achievements will be lost!"
 msgstr ""
 
-#: src/prefs/MenuEditor.js:416
+#: src/prefs/MenuEditor.js:419
 msgid "No menus configured"
 msgstr "没有设置好的菜单"
 
-#: src/prefs/MenuEditor.js:419
+#: src/prefs/MenuEditor.js:422
 msgid "Create a new menu with the button in the top right corner."
 msgstr "点击右上角的按钮新建菜单。"
 
-#: src/prefs/MenuEditor.js:449
+#: src/prefs/MenuEditor.js:452
 msgid "Add a new item"
 msgstr "新建一项"
 
@@ -846,58 +846,74 @@ msgstr "新建一项"
 #. overview.
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag an action in the menu editor to the menu overview.
-#: src/prefs/MenuEditor.js:786 src/prefs/MenuEditorPage.js:930
+#: src/prefs/MenuEditor.js:789 src/prefs/MenuEditorPage.js:949
 msgid "Actions cannot be turned into toplevel menus."
 msgstr "一项操作不能作为顶级菜单。"
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag external stuff to the menu editor's
 #. overview.
-#: src/prefs/MenuEditor.js:806
+#: src/prefs/MenuEditor.js:809
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr "只有自定义菜单里面才能创建一项新的操作。"
 
-#: src/prefs/ImageChooserButton.js:97
-#: resources/ui/gtk4/imageChooserButton.ui:16
-#: resources/ui/gtk3/imageChooserButton.ui:16
+#: src/prefs/PreferencesDialog.js:248 src/prefs/PreferencesDialog.js:281
+msgid "Gold Sponsors"
+msgstr ""
+
+#: src/prefs/PreferencesDialog.js:252 src/prefs/PreferencesDialog.js:285
+msgid "Silver Sponsors"
+msgstr ""
+
+#: src/prefs/PreferencesDialog.js:256 src/prefs/PreferencesDialog.js:289
+msgid "Bronze Sponsors"
+msgstr ""
+
+#: src/prefs/PreferencesDialog.js:260 src/prefs/PreferencesDialog.js:293
+msgid "Past Sponsors"
+msgstr ""
+
+#: src/prefs/ImageChooserButton.js:100
+#: resources/ui/gtk4/imageChooserButton.ui:22
+#: resources/ui/gtk3/imageChooserButton.ui:22
 msgid "(None)"
 msgstr "（空）"
 
-#: src/prefs/MenuEditorPage.js:194 src/prefs/MenuEditorPage.js:264
-#: src/prefs/SettingsPage.js:263 src/prefs/SettingsPage.js:318
+#: src/prefs/MenuEditorPage.js:197 src/prefs/MenuEditorPage.js:267
+#: src/prefs/SettingsPage.js:269 src/prefs/SettingsPage.js:324
 msgid "JSON Files"
 msgstr "JSON 文件"
 
-#: src/prefs/MenuEditorPage.js:201 src/prefs/MenuEditorPage.js:271
-#: src/prefs/SettingsPage.js:270 src/prefs/SettingsPage.js:325
+#: src/prefs/MenuEditorPage.js:204 src/prefs/MenuEditorPage.js:274
+#: src/prefs/SettingsPage.js:276 src/prefs/SettingsPage.js:331
 msgid "All Files"
 msgstr "全部文件"
 
-#: src/prefs/MenuEditorPage.js:206
+#: src/prefs/MenuEditorPage.js:209
 msgid "Export"
 msgstr "导出"
 
-#: src/prefs/MenuEditorPage.js:235
+#: src/prefs/MenuEditorPage.js:238
 msgid "Could not export the menu configuration."
 msgstr "无法导出菜单设置。"
 
-#: src/prefs/MenuEditorPage.js:276
+#: src/prefs/MenuEditorPage.js:279
 msgid "Import"
 msgstr "导入"
 
-#: src/prefs/MenuEditorPage.js:310
+#: src/prefs/MenuEditorPage.js:313
 msgid "Could not import the menu configuration."
 msgstr "无法导入菜单设置。"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:382
+#: src/prefs/MenuEditorPage.js:385
 msgid "You should try to have no more than twelve items in your menus."
 msgstr "尽量不要让菜单有超过十二项内容。"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:385
+#: src/prefs/MenuEditorPage.js:388
 msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
@@ -905,14 +921,14 @@ msgstr "偶数个项目更方便您熟悉项目位置。设置四个、六个、
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:388
+#: src/prefs/MenuEditorPage.js:391
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr "Fly-Pie 是自由软件，<a href=\"%s\">GitHub</a> 上有这个软件。"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:392
+#: src/prefs/MenuEditorPage.js:395
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
 msgstr ""
@@ -920,14 +936,14 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:396
+#: src/prefs/MenuEditorPage.js:399
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
 msgstr "如果软件有问题，您可以在 <a href=\"%s\">GitHub</a> 上告诉我们。"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:400
+#: src/prefs/MenuEditorPage.js:403
 msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
@@ -937,7 +953,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:403
+#: src/prefs/MenuEditorPage.js:406
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
@@ -945,13 +961,13 @@ msgstr "删除所有的菜单，注销账号然后重新登录，设置就会恢
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:406
+#: src/prefs/MenuEditorPage.js:409
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr "您可以拖拽左侧菜单中的项目，调整各项次序。"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:409
+#: src/prefs/MenuEditorPage.js:412
 #, javascript-format
 msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
@@ -961,7 +977,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:415
+#: src/prefs/MenuEditorPage.js:418
 msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
@@ -969,7 +985,7 @@ msgstr "您可以把文件夹、文件、链接和桌面文件拖拽到左侧的
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:418
+#: src/prefs/MenuEditorPage.js:421
 msgid ""
 "On Wayland, you can copy menu items by holding the Ctrl key while dragging "
 "them to another location."
@@ -977,14 +993,14 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:421
+#: src/prefs/MenuEditorPage.js:424
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
 msgstr "<a href=\"%s\">在 Hosted Weblate 上翻译 Fly-Pie</a> 。"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:427
+#: src/prefs/MenuEditorPage.js:430
 #, javascript-format
 msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
@@ -993,44 +1009,44 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:431
+#: src/prefs/MenuEditorPage.js:434
 msgid ""
 "If you cannot use a specific keyboard shortcut, you may check you system "
 "settings as it may be used already."
 msgstr ""
 
 #. Translators: The left-most item of the menu editor bread crumbs.
-#: src/prefs/MenuEditorPage.js:993
+#: src/prefs/MenuEditorPage.js:1012
 msgid "All Menus"
 msgstr "所有菜单"
 
-#: src/prefs/SettingsPage.js:275
+#: src/prefs/SettingsPage.js:281
 msgid "Save"
 msgstr "保存"
 
-#: src/prefs/SettingsPage.js:330
+#: src/prefs/SettingsPage.js:336
 msgid "Load"
 msgstr "载入"
 
-#: src/prefs/SettingsPage.js:347
+#: src/prefs/SettingsPage.js:353
 msgid "Failed to load preset!"
 msgstr "预设加载失败！"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
-#: src/prefs/TutorialPage.js:182
+#: src/prefs/TutorialPage.js:185
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
 msgstr ""
 
 #. Translators: Do not translate '%d'. ms = milliseconds
-#: src/prefs/TutorialPage.js:187
+#: src/prefs/TutorialPage.js:190
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
 msgstr ""
 
 #. Translators: This is the name of the tutorial menu.
 #. Translators: This is the name of the default menu.
-#: src/prefs/ExampleMenu.js:27 src/extension/DefaultMenu.js:29
+#: src/prefs/ExampleMenu.js:30 src/extension/DefaultMenu.js:32
 msgid "Example Menu"
 msgstr "⤬ ⤬ 菜单"
 
@@ -1038,7 +1054,7 @@ msgstr "⤬ ⤬ 菜单"
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:66
+#: src/prefs/ExampleMenu.js:69
 msgid "Cold "
 msgstr "凉了的"
 
@@ -1046,7 +1062,7 @@ msgstr "凉了的"
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:71
+#: src/prefs/ExampleMenu.js:74
 msgid "Hot "
 msgstr "热乎的"
 
@@ -1054,7 +1070,7 @@ msgstr "热乎的"
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:76
+#: src/prefs/ExampleMenu.js:79
 msgid "Wet "
 msgstr "湿了的"
 
@@ -1062,7 +1078,7 @@ msgstr "湿了的"
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:81
+#: src/prefs/ExampleMenu.js:84
 msgid "Deadly "
 msgstr "致命的"
 
@@ -1070,7 +1086,7 @@ msgstr "致命的"
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:86
+#: src/prefs/ExampleMenu.js:89
 msgid "Smelly "
 msgstr "坏了的"
 
@@ -1078,7 +1094,7 @@ msgstr "坏了的"
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:91
+#: src/prefs/ExampleMenu.js:94
 msgid "Vegan "
 msgstr "纯素的"
 
@@ -1086,7 +1102,7 @@ msgstr "纯素的"
 #. Chocolate Muffin". This is one of the middle words. The three words are
 #. directly appended to each other; therefore the trailing space is important. You
 #. can also use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:105
+#: src/prefs/ExampleMenu.js:108
 msgid "Chocolate "
 msgstr "带巧克力的"
 
@@ -1094,7 +1110,7 @@ msgstr "带巧克力的"
 #. Chocolate Muffin". This is one of the middle words. The three words are
 #. directly appended to each other; therefore the trailing space is important. You
 #. can also use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:110
+#: src/prefs/ExampleMenu.js:113
 msgid "Cherry "
 msgstr "带樱桃的"
 
@@ -1102,7 +1118,7 @@ msgstr "带樱桃的"
 #. Chocolate Muffin". This is one of the middle words. The three words are
 #. directly appended to each other; therefore the trailing space is important. You
 #. can also use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:115
+#: src/prefs/ExampleMenu.js:118
 msgid "Garlic "
 msgstr "放了大蒜的"
 
@@ -1110,7 +1126,7 @@ msgstr "放了大蒜的"
 #. Chocolate Muffin". This is one of the middle words. The three words are
 #. directly appended to each other; therefore the trailing space is important. You
 #. can also use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:120
+#: src/prefs/ExampleMenu.js:123
 msgid "Apple "
 msgstr "苹果"
 
@@ -1118,7 +1134,7 @@ msgstr "苹果"
 #. Chocolate Muffin". This is one of the middle words. The three words are
 #. directly appended to each other; therefore the trailing space is important. You
 #. can also use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:125
+#: src/prefs/ExampleMenu.js:128
 msgid "Pepper "
 msgstr "甜椒"
 
@@ -1126,7 +1142,7 @@ msgstr "甜椒"
 #. Chocolate Muffin". This is one of the last words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:139
+#: src/prefs/ExampleMenu.js:142
 msgid "Pie"
 msgstr "水果馅饼"
 
@@ -1134,7 +1150,7 @@ msgstr "水果馅饼"
 #. Chocolate Muffin". This is one of the last words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:144
+#: src/prefs/ExampleMenu.js:147
 msgid "Cake"
 msgstr "奶油蛋糕"
 
@@ -1142,7 +1158,7 @@ msgstr "奶油蛋糕"
 #. Chocolate Muffin". This is one of the last words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:149
+#: src/prefs/ExampleMenu.js:152
 msgid "Muffin"
 msgstr "纸杯蛋糕"
 
@@ -1150,7 +1166,7 @@ msgstr "纸杯蛋糕"
 #. Chocolate Muffin". This is one of the last words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:154
+#: src/prefs/ExampleMenu.js:157
 msgid "Doughnut"
 msgstr "甜甜圈"
 
@@ -1158,288 +1174,231 @@ msgstr "甜甜圈"
 #. Chocolate Muffin". This is one of the last words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:159
+#: src/prefs/ExampleMenu.js:162
 msgid "Cookie"
 msgstr "饼干"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:37
+#: src/extension/DefaultMenu.js:40
 msgid "Sound"
 msgstr "控制音响"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:42
+#: src/extension/DefaultMenu.js:45
 msgid "Mute"
 msgstr "静音"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:50
+#: src/extension/DefaultMenu.js:53
 msgid "Play / Pause"
 msgstr "播放 / 暂停"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:58
+#: src/extension/DefaultMenu.js:61
 msgid "Next Title"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:66
+#: src/extension/DefaultMenu.js:69
 msgid "Previous Title"
 msgstr ""
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:87
+#: src/extension/DefaultMenu.js:90
 msgid "Maximize Window"
 msgstr "把窗口最大化"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:95
+#: src/extension/DefaultMenu.js:98
 msgid "Fly-Pie Settings"
 msgstr "Fly-Pie 设置"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:103
+#: src/extension/DefaultMenu.js:106
 msgid "Close Window"
 msgstr "关闭窗口"
 
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
-#: src/extension/DefaultMenu.js:135
+#: src/extension/DefaultMenu.js:138
 msgid "Next Workspace"
 msgstr "去往后面的工作区"
 
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
-#: src/extension/DefaultMenu.js:144
+#: src/extension/DefaultMenu.js:147
 msgid "Previous Workspace"
 msgstr "去往前面的工作区"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:155
+#: src/extension/DefaultMenu.js:158
 msgid "Switch Workspace"
 msgstr "切换工作区"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:160
+#: src/extension/DefaultMenu.js:163
 msgid "Go Up"
 msgstr ""
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:168
+#: src/extension/DefaultMenu.js:171
 msgid "Go Down"
 msgstr ""
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:181
+#: src/extension/DefaultMenu.js:184
 msgid "Move Window"
 msgstr "移动窗口"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:186
+#: src/extension/DefaultMenu.js:189
 msgid "Move Window Up"
 msgstr ""
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:194
+#: src/extension/DefaultMenu.js:197
 msgid "Move Window Down"
 msgstr ""
 
-#: src/extension/Background.js:93
+#: src/extension/Background.js:91
 msgid "Close"
 msgstr "关闭"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
-#: src/extension/Background.js:99
+#: src/extension/Background.js:97
 #, fuzzy
 msgid "Flip Side"
 msgstr "翻面"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:212
+#: src/extension/Daemon.js:215
 msgid "Fly-Pie Level Up!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:214
+#: src/extension/Daemon.js:217
 msgid "You reached level %i!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:234
+#: src/extension/Daemon.js:237
 msgid "Fly-Pie Achievement Completed!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:236
+#: src/extension/Daemon.js:239
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
 msgstr ""
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:598
+#: src/extension/Daemon.js:601
 msgid "Show Achievements"
 msgstr ""
 
-#: resources/ui/gtk4/copyValueButton.ui:6
-#: resources/ui/gtk3/copyValueButton.ui:6
+#: resources/ui/common/menus.ui:13
+msgid "Visit Homepage"
+msgstr ""
+
+#: resources/ui/common/menus.ui:17
+msgid "View Changelog"
+msgstr ""
+
+#: resources/ui/common/menus.ui:23
+msgid "Report a Bug"
+msgstr ""
+
+#: resources/ui/common/menus.ui:27
+msgid "Translate"
+msgstr ""
+
+#: resources/ui/common/menus.ui:31
+msgid "Donate"
+msgstr ""
+
+#: resources/ui/common/menus.ui:48
+msgid "About Fly-Pie"
+msgstr ""
+
+#: resources/ui/gtk4/copyValueButton.ui:12
+#: resources/ui/gtk3/copyValueButton.ui:12
 msgid "Copy left value to right side"
 msgstr "将左边的值复制到右边"
 
-#: resources/ui/gtk4/iconSelectDialog.ui:19
-#: resources/ui/gtk3/iconSelectDialog.ui:19
+#: resources/ui/gtk4/iconSelectDialog.ui:25
+#: resources/ui/gtk3/iconSelectDialog.ui:25
 msgid "Select Icon"
 msgstr "选择标志"
 
 #. Page title of the icon-select-dialog.
-#: resources/ui/gtk4/iconSelectDialog.ui:44
-#: resources/ui/gtk3/iconSelectDialog.ui:100
+#: resources/ui/gtk4/iconSelectDialog.ui:50
+#: resources/ui/gtk3/iconSelectDialog.ui:106
 msgid "Icon Theme"
 msgstr "标志主题"
 
 #. Page title of the icon-select-dialog.
-#: resources/ui/gtk4/iconSelectDialog.ui:106
-#: resources/ui/gtk3/iconSelectDialog.ui:111
+#: resources/ui/gtk4/iconSelectDialog.ui:112
+#: resources/ui/gtk3/iconSelectDialog.ui:117
 msgid "Custom Icon"
 msgstr "自定义标志"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:19 resources/ui/gtk3/settings.ui:19
+#: resources/ui/gtk4/settings.ui:25 resources/ui/gtk3/settings.ui:25
 msgid "Linear"
 msgstr "线性动画"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:23 resources/ui/gtk3/settings.ui:23
+#: resources/ui/gtk4/settings.ui:29 resources/ui/gtk3/settings.ui:29
 msgid "Ease"
 msgstr "缓动"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:27 resources/ui/gtk3/settings.ui:27
+#: resources/ui/gtk4/settings.ui:33 resources/ui/gtk3/settings.ui:33
 msgid "Ease-In"
 msgstr "缓和起始"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:31 resources/ui/gtk3/settings.ui:31
+#: resources/ui/gtk4/settings.ui:37 resources/ui/gtk3/settings.ui:37
 msgid "Ease-Out"
 msgstr "缓和停止"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:35 resources/ui/gtk3/settings.ui:35
+#: resources/ui/gtk4/settings.ui:41 resources/ui/gtk3/settings.ui:41
 msgid "Ease-In-Out"
 msgstr "缓和起始与停止"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:39 resources/ui/gtk3/settings.ui:39
+#: resources/ui/gtk4/settings.ui:45 resources/ui/gtk3/settings.ui:45
 msgid "Ease-In-Quad"
 msgstr "二次曲线缓和起始"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:43 resources/ui/gtk3/settings.ui:43
+#: resources/ui/gtk4/settings.ui:49 resources/ui/gtk3/settings.ui:49
 msgid "Ease-Out-Quad"
 msgstr "二次曲线缓和停止"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:47 resources/ui/gtk3/settings.ui:47
+#: resources/ui/gtk4/settings.ui:53 resources/ui/gtk3/settings.ui:53
 msgid "Ease-In-Out-Quad"
 msgstr "二次曲线缓和起始与停止"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:51 resources/ui/gtk3/settings.ui:51
+#: resources/ui/gtk4/settings.ui:57 resources/ui/gtk3/settings.ui:57
 msgid "Ease-In-Back"
 msgstr "回力进入"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:55 resources/ui/gtk3/settings.ui:55
+#: resources/ui/gtk4/settings.ui:61 resources/ui/gtk3/settings.ui:61
 msgid "Ease-Out-Back"
 msgstr "弹性结束"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:59 resources/ui/gtk3/settings.ui:59
+#: resources/ui/gtk4/settings.ui:65 resources/ui/gtk3/settings.ui:65
 msgid "Ease-In-Out-Back"
 msgstr "回力进入与弹性结束"
 
-#: resources/ui/gtk4/settings.ui:404 resources/ui/gtk3/settings.ui:441
-msgid "About"
-msgstr "软件介绍"
-
-#: resources/ui/gtk4/settings.ui:423 resources/ui/gtk3/settings.ui:420
-msgid ""
-"Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
-"changelog.md\">Changelog</a>."
-msgstr ""
-"查看<a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog."
-"md\">更新记录</a>。"
-
-#: resources/ui/gtk4/settings.ui:431 resources/ui/gtk3/settings.ui:428
-msgid ""
-"Published under the MIT License.\n"
-"Visit <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie's Homepage</"
-"a> for details.\n"
-"\n"
-"Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free to "
-"report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
-"\">Github</a>."
-msgstr ""
-"以 MIT 许可协议发布。\n"
-"请访问 <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie 的主页</a>了"
-"解详情。\n"
-"\n"
-"若您遇到🐞️错误，或有🎉️增加功能的要求，您随时可以在 <a href=\"https://github."
-"com/Schneegans/Fly-Pie/issues\">Github</a> 上报告。"
-
-#: resources/ui/gtk4/settings.ui:448 resources/ui/gtk3/settings.ui:529
-msgid "Credits"
-msgstr "制作组"
-
-#: resources/ui/gtk4/settings.ui:461 resources/ui/gtk3/settings.ui:456
-msgid "Created by"
-msgstr "程序设计"
-
-#: resources/ui/gtk4/settings.ui:485 resources/ui/gtk3/settings.ui:480
-msgid "Translated by"
-msgstr "译者"
-
-#: resources/ui/gtk4/settings.ui:509 resources/ui/gtk3/settings.ui:504
-msgid "Artwork by"
-msgstr "美工"
-
-#: resources/ui/gtk4/settings.ui:538 resources/ui/gtk3/settings.ui:658
-msgid "Sponsors"
-msgstr "赞助"
-
-#: resources/ui/gtk4/settings.ui:555 resources/ui/gtk3/settings.ui:548
-msgid "🥇️ Gold Sponsors"
-msgstr "🥇️金牌赞助人"
-
-#: resources/ui/gtk4/settings.ui:567 resources/ui/gtk3/settings.ui:560
-msgid "🥈️ Silver Sponsors"
-msgstr "🥈️银牌赞助人"
-
-#: resources/ui/gtk4/settings.ui:579 resources/ui/gtk3/settings.ui:572
-msgid "🥉️ Bronze Sponsors"
-msgstr "🥉️铜牌赞助人"
-
-#: resources/ui/gtk4/settings.ui:591 resources/ui/gtk3/settings.ui:584
-msgid "🏅️ Past Sponsors"
-msgstr "🏅️过往赞助者"
-
-#. Shown in the about-popover if there is no sponsor for a given tier
-#: resources/ui/gtk4/settings.ui:603 resources/ui/gtk4/settings.ui:616
-#: resources/ui/gtk4/settings.ui:629 resources/ui/gtk4/settings.ui:642
-#: resources/ui/gtk3/settings.ui:596 resources/ui/gtk3/settings.ui:609
-#: resources/ui/gtk3/settings.ui:622 resources/ui/gtk3/settings.ui:635
-msgid "- none -"
-msgstr "- 无 -"
-
-#: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:649
-msgid ""
-"💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
-"sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
-msgstr ""
-"💕️ 想表达你对 Fly-Pie 的喜爱吗？<a href=\"https://github.com/sponsors/"
-"Schneegans\">欢迎赞助，每月只需 1 美元！</a>"
-
 #. Heading in the add-new-item-popover of the menu editor.
-#: resources/ui/gtk4/settings.ui:707 resources/ui/gtk3/settings.ui:702
+#: resources/ui/gtk4/settings.ui:415 resources/ui/gtk3/settings.ui:416
 msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
@@ -1448,7 +1407,7 @@ msgstr ""
 "可以是子菜单或顶层菜单。"
 
 #. Heading in the add-new-item-popover of the menu editor.
-#: resources/ui/gtk4/settings.ui:731 resources/ui/gtk3/settings.ui:726
+#: resources/ui/gtk4/settings.ui:439 resources/ui/gtk3/settings.ui:440
 msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
@@ -1457,29 +1416,29 @@ msgstr ""
 "可添加到自定义菜单中。"
 
 #. Tooltip of the generate-a-random-preset button
-#: resources/ui/gtk4/settings.ui:801 resources/ui/gtk3/settings.ui:796
+#: resources/ui/gtk4/settings.ui:509 resources/ui/gtk3/settings.ui:510
 msgid "Initialize most settings to random values."
 msgstr "随机设置大多数的选项。"
 
-#: resources/ui/gtk4/settings.ui:813 resources/ui/gtk3/settings.ui:808
+#: resources/ui/gtk4/settings.ui:521 resources/ui/gtk3/settings.ui:522
 msgid "Generate Random Preset"
 msgstr "生成随机预设"
 
-#: resources/ui/gtk4/settings.ui:844 resources/ui/gtk3/settings.ui:842
+#: resources/ui/gtk4/settings.ui:552 resources/ui/gtk3/settings.ui:556
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
 msgstr "Fly-Pie 需要启用 GNOME Shell 的动画。"
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
-#: resources/ui/gtk4/settings.ui:849 resources/ui/gtk3/settings.ui:852
+#: resources/ui/gtk4/settings.ui:557 resources/ui/gtk3/settings.ui:566
 msgid "Enable Animations"
 msgstr "启用动画"
 
 #. Caption of the tutorial page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:901 resources/ui/gtk3/settings.ui:1604
+#: resources/ui/gtk4/settings.ui:608 resources/ui/gtk3/settings.ui:1319
 msgid "Tutorial"
 msgstr "教程"
 
-#: resources/ui/gtk4/settings.ui:935 resources/ui/gtk3/settings.ui:939
+#: resources/ui/gtk4/settings.ui:642 resources/ui/gtk3/settings.ui:654
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
@@ -1488,7 +1447,7 @@ msgstr ""
 "你可以用 Fly-Pie 来启动应用程序、模拟键盘快捷键、打开网址等等。您看到的互动教"
 "程可以帮您最有效地使用 Fly-Pie 。点击下面的大按钮，打开模拟使用菜单！"
 
-#: resources/ui/gtk4/settings.ui:946 resources/ui/gtk3/settings.ui:950
+#: resources/ui/gtk4/settings.ui:653 resources/ui/gtk3/settings.ui:665
 msgid ""
 "• Use your <b>left mouse button to select items</b>.\n"
 "• Use your <b>right mouse button to close the menu</b>.\n"
@@ -1503,20 +1462,20 @@ msgstr ""
 "准备好了，就点击<b>下一步</b>，了解更多细节吧！"
 
 #. The text of the big tutorial button.
-#: resources/ui/gtk4/settings.ui:966 resources/ui/gtk4/settings.ui:1049
-#: resources/ui/gtk4/settings.ui:1135 resources/ui/gtk4/settings.ui:1280
-#: resources/ui/gtk4/settings.ui:1366 resources/ui/gtk3/settings.ui:970
-#: resources/ui/gtk3/settings.ui:1050 resources/ui/gtk3/settings.ui:1134
-#: resources/ui/gtk3/settings.ui:1276 resources/ui/gtk3/settings.ui:1360
+#: resources/ui/gtk4/settings.ui:673 resources/ui/gtk4/settings.ui:756
+#: resources/ui/gtk4/settings.ui:842 resources/ui/gtk4/settings.ui:987
+#: resources/ui/gtk4/settings.ui:1073 resources/ui/gtk3/settings.ui:685
+#: resources/ui/gtk3/settings.ui:765 resources/ui/gtk3/settings.ui:849
+#: resources/ui/gtk3/settings.ui:991 resources/ui/gtk3/settings.ui:1075
 msgid "<big><b>Open the example menu!</b></big>"
 msgstr "<big><b>打开模拟使用菜单！</b></big>"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:998 resources/ui/gtk3/settings.ui:1000
+#: resources/ui/gtk4/settings.ui:705 resources/ui/gtk3/settings.ui:715
 msgid "You can click anywhere!"
 msgstr "点哪儿都好使！"
 
-#: resources/ui/gtk4/settings.ui:1017 resources/ui/gtk3/settings.ui:1018
+#: resources/ui/gtk4/settings.ui:724 resources/ui/gtk3/settings.ui:733
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
@@ -1524,7 +1483,7 @@ msgstr ""
 "只要你的鼠标指针停留在项目的楔形区域里，你是直接点击项目还是在屏幕的边缘点击"
 "都没有关系。"
 
-#: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1030
+#: resources/ui/gtk4/settings.ui:736 resources/ui/gtk3/settings.ui:745
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -1540,11 +1499,11 @@ msgstr ""
 "点击 <b>下一步</b> 试一试！"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:1081 resources/ui/gtk3/settings.ui:1080
+#: resources/ui/gtk4/settings.ui:788 resources/ui/gtk3/settings.ui:795
 msgid "Practice Session I"
 msgstr "练习一"
 
-#: resources/ui/gtk4/settings.ui:1091 resources/ui/gtk3/settings.ui:1090
+#: resources/ui/gtk4/settings.ui:798 resources/ui/gtk3/settings.ui:805
 #, javascript-format
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
@@ -1555,34 +1514,34 @@ msgid ""
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1164 resources/ui/gtk3/settings.ui:1163
+#: resources/ui/gtk4/settings.ui:871 resources/ui/gtk3/settings.ui:878
 msgid "Unlocked at less than 3000 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1184 resources/ui/gtk3/settings.ui:1183
+#: resources/ui/gtk4/settings.ui:891 resources/ui/gtk3/settings.ui:898
 msgid "Unlocked at less than 2000 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1205 resources/ui/gtk4/settings.ui:1394
-#: resources/ui/gtk3/settings.ui:1204 resources/ui/gtk3/settings.ui:1388
+#: resources/ui/gtk4/settings.ui:912 resources/ui/gtk4/settings.ui:1101
+#: resources/ui/gtk3/settings.ui:919 resources/ui/gtk3/settings.ui:1103
 msgid "Unlocked at less than 1000 ms"
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:1232 resources/ui/gtk3/settings.ui:1229
+#: resources/ui/gtk4/settings.ui:939 resources/ui/gtk3/settings.ui:944
 msgid "The Marking Mode of Fly-Pie"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:1251 resources/ui/gtk3/settings.ui:1247
+#: resources/ui/gtk4/settings.ui:958 resources/ui/gtk3/settings.ui:962
 msgid ""
 "The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:1262 resources/ui/gtk3/settings.ui:1258
+#: resources/ui/gtk4/settings.ui:969 resources/ui/gtk3/settings.ui:973
 msgid ""
 "Try remembering the path to an item. Open the menu and <b>draw the path with "
 "your mouse</b>. You can start with individual segments of the path, put you "
@@ -1594,11 +1553,11 @@ msgid ""
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:1312 resources/ui/gtk3/settings.ui:1306
+#: resources/ui/gtk4/settings.ui:1019 resources/ui/gtk3/settings.ui:1021
 msgid "Practice Session II"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:1322 resources/ui/gtk3/settings.ui:1316
+#: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1031
 #, javascript-format
 msgid ""
 "Again, you should select \"%s\" as quickly as possible. However, as you now "
@@ -1610,22 +1569,22 @@ msgid ""
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1414 resources/ui/gtk3/settings.ui:1408
+#: resources/ui/gtk4/settings.ui:1121 resources/ui/gtk3/settings.ui:1123
 msgid "Unlocked at less than 750 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1435 resources/ui/gtk3/settings.ui:1429
+#: resources/ui/gtk4/settings.ui:1142 resources/ui/gtk3/settings.ui:1144
 msgid "Unlocked at less than 500 ms"
 msgstr ""
 
 #. The user finished the tutorial. Yay!
-#: resources/ui/gtk4/settings.ui:1469 resources/ui/gtk3/settings.ui:1461
+#: resources/ui/gtk4/settings.ui:1176 resources/ui/gtk3/settings.ui:1176
 msgid "Congratulations!"
 msgstr ""
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
-#: resources/ui/gtk4/settings.ui:1481 resources/ui/gtk3/settings.ui:1473
+#: resources/ui/gtk4/settings.ui:1188 resources/ui/gtk3/settings.ui:1188
 msgid ""
 "Congratulations! If you managed to unlock most of the medals, you will be "
 "using Fly-Pie like a master Pielot!\n"
@@ -1644,170 +1603,174 @@ msgid ""
 msgstr ""
 
 #. Button for tutorial navigation. Goes back one page.
-#: resources/ui/gtk4/settings.ui:1526 resources/ui/gtk3/settings.ui:1519
+#: resources/ui/gtk4/settings.ui:1233 resources/ui/gtk3/settings.ui:1234
 msgid "Previous"
 msgstr "上一页"
 
 #. Button for tutorial navigation. Goes to the next page.
-#: resources/ui/gtk4/settings.ui:1583 resources/ui/gtk3/settings.ui:1576
+#: resources/ui/gtk4/settings.ui:1290 resources/ui/gtk3/settings.ui:1291
 msgid "Next"
 msgstr "下一页"
 
 #. Caption of the settings page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:1619 resources/ui/gtk3/settings.ui:4646
+#: resources/ui/gtk4/settings.ui:1326 resources/ui/gtk3/settings.ui:4426
 msgid "Settings"
 msgstr "设置"
 
-#: resources/ui/gtk4/settings.ui:1652 resources/ui/gtk4/settings.ui:1849
-#: resources/ui/gtk3/settings.ui:1644 resources/ui/gtk3/settings.ui:1841
+#: resources/ui/gtk4/settings.ui:1359 resources/ui/gtk4/settings.ui:1578
+#: resources/ui/gtk3/settings.ui:1359 resources/ui/gtk3/settings.ui:1578
 msgid "Global Appearance Settings"
 msgstr "整体外观设置"
 
-#: resources/ui/gtk4/settings.ui:1662 resources/ui/gtk3/settings.ui:1654
+#: resources/ui/gtk4/settings.ui:1369 resources/ui/gtk3/settings.ui:1369
 msgid "These settings affect all menu items."
 msgstr "这些设置适用于所有的菜单内条目。"
 
-#: resources/ui/gtk4/settings.ui:1680 resources/ui/gtk3/settings.ui:1672
+#: resources/ui/gtk4/settings.ui:1387 resources/ui/gtk3/settings.ui:1387
 msgid "Animation Duration"
 msgstr "动画时长"
 
-#: resources/ui/gtk4/settings.ui:1694 resources/ui/gtk3/settings.ui:1686
+#: resources/ui/gtk4/settings.ui:1401 resources/ui/gtk3/settings.ui:1401
 msgid "Global Scaling"
 msgstr "整体放缩"
 
 #. Please keep this short!
-#: resources/ui/gtk4/settings.ui:1704 resources/ui/gtk3/settings.ui:1696
+#: resources/ui/gtk4/settings.ui:1411 resources/ui/gtk3/settings.ui:1411
 msgid "Independent of the preset."
 msgstr "独立于预设。"
 
-#: resources/ui/gtk4/settings.ui:1754 resources/ui/gtk3/settings.ui:1746
-msgid "Font"
-msgstr "字体"
-
-#: resources/ui/gtk4/settings.ui:1764 resources/ui/gtk3/settings.ui:1756
-msgid "Text Color"
-msgstr "文字颜色"
-
-#: resources/ui/gtk4/settings.ui:1775 resources/ui/gtk4/settings.ui:2384
-#: resources/ui/gtk4/settings.ui:3079 resources/ui/gtk4/settings.ui:3311
-#: resources/ui/gtk3/settings.ui:1767 resources/ui/gtk3/settings.ui:2371
-#: resources/ui/gtk3/settings.ui:3061 resources/ui/gtk3/settings.ui:3277
+#: resources/ui/gtk4/settings.ui:1462 resources/ui/gtk4/settings.ui:2113
+#: resources/ui/gtk4/settings.ui:2808 resources/ui/gtk4/settings.ui:3040
+#: resources/ui/gtk3/settings.ui:1462 resources/ui/gtk3/settings.ui:2108
+#: resources/ui/gtk3/settings.ui:2798 resources/ui/gtk3/settings.ui:3014
 msgid "Background Color"
 msgstr "背景颜色"
 
-#: resources/ui/gtk4/settings.ui:1837 resources/ui/gtk3/settings.ui:1829
+#: resources/ui/gtk4/settings.ui:1472 resources/ui/gtk3/settings.ui:1472
+msgid "Font"
+msgstr "字体"
+
+#: resources/ui/gtk4/settings.ui:1482 resources/ui/gtk3/settings.ui:1482
+msgid "Label Font"
+msgstr ""
+
+#: resources/ui/gtk4/settings.ui:1492 resources/ui/gtk3/settings.ui:1492
+msgid "Text Color"
+msgstr "文字颜色"
+
+#: resources/ui/gtk4/settings.ui:1566 resources/ui/gtk3/settings.ui:1566
 msgid "Animation Mode"
 msgstr "动画模式"
 
-#: resources/ui/gtk4/settings.ui:1878 resources/ui/gtk4/settings.ui:2483
-#: resources/ui/gtk3/settings.ui:1865 resources/ui/gtk3/settings.ui:2465
+#: resources/ui/gtk4/settings.ui:1607 resources/ui/gtk4/settings.ui:2212
+#: resources/ui/gtk3/settings.ui:1602 resources/ui/gtk3/settings.ui:2202
 msgid "Center Appearance"
 msgstr "中心区域设置"
 
-#: resources/ui/gtk4/settings.ui:1888 resources/ui/gtk3/settings.ui:1875
+#: resources/ui/gtk4/settings.ui:1617 resources/ui/gtk3/settings.ui:1612
 msgid "The center element shows the currently hovered child's name."
 msgstr "中心区域会在鼠标悬停于子项时显示子项名称。"
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:1904 resources/ui/gtk3/settings.ui:1891
+#: resources/ui/gtk4/settings.ui:1633 resources/ui/gtk3/settings.ui:1628
 msgid "With Hovered Child"
 msgstr "悬停在子项上时"
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:1917 resources/ui/gtk3/settings.ui:1904
+#: resources/ui/gtk4/settings.ui:1646 resources/ui/gtk3/settings.ui:1641
 msgid "Without Hovered Child"
 msgstr "未悬停在子项上时"
 
-#: resources/ui/gtk4/settings.ui:1947 resources/ui/gtk4/settings.ui:2873
-#: resources/ui/gtk4/settings.ui:3424 resources/ui/gtk3/settings.ui:1934
-#: resources/ui/gtk3/settings.ui:2855 resources/ui/gtk3/settings.ui:3394
+#: resources/ui/gtk4/settings.ui:1676 resources/ui/gtk4/settings.ui:2602
+#: resources/ui/gtk4/settings.ui:3153 resources/ui/gtk3/settings.ui:1671
+#: resources/ui/gtk3/settings.ui:2592 resources/ui/gtk3/settings.ui:3131
 msgid "Size"
 msgstr "大小"
 
-#: resources/ui/gtk4/settings.ui:1998 resources/ui/gtk4/settings.ui:2049
-#: resources/ui/gtk4/settings.ui:2201 resources/ui/gtk4/settings.ui:2252
-#: resources/ui/gtk4/settings.ui:2622 resources/ui/gtk4/settings.ui:2683
-#: resources/ui/gtk4/settings.ui:2776 resources/ui/gtk4/settings.ui:2847
-#: resources/ui/gtk3/settings.ui:1985 resources/ui/gtk3/settings.ui:2036
-#: resources/ui/gtk3/settings.ui:2192 resources/ui/gtk3/settings.ui:2243
-#: resources/ui/gtk3/settings.ui:2601 resources/ui/gtk3/settings.ui:2662
-#: resources/ui/gtk3/settings.ui:2758 resources/ui/gtk3/settings.ui:2829
+#: resources/ui/gtk4/settings.ui:1727 resources/ui/gtk4/settings.ui:1778
+#: resources/ui/gtk4/settings.ui:1930 resources/ui/gtk4/settings.ui:1981
+#: resources/ui/gtk4/settings.ui:2351 resources/ui/gtk4/settings.ui:2412
+#: resources/ui/gtk4/settings.ui:2505 resources/ui/gtk4/settings.ui:2576
+#: resources/ui/gtk3/settings.ui:1722 resources/ui/gtk3/settings.ui:1773
+#: resources/ui/gtk3/settings.ui:1929 resources/ui/gtk3/settings.ui:1980
+#: resources/ui/gtk3/settings.ui:2338 resources/ui/gtk3/settings.ui:2399
+#: resources/ui/gtk3/settings.ui:2495 resources/ui/gtk3/settings.ui:2566
 msgid "Saturation"
 msgstr "饱和度"
 
-#: resources/ui/gtk4/settings.ui:2015 resources/ui/gtk4/settings.ui:2059
-#: resources/ui/gtk4/settings.ui:2218 resources/ui/gtk4/settings.ui:2262
-#: resources/ui/gtk4/settings.ui:2639 resources/ui/gtk4/settings.ui:2673
-#: resources/ui/gtk4/settings.ui:2793 resources/ui/gtk4/settings.ui:2837
-#: resources/ui/gtk3/settings.ui:2002 resources/ui/gtk3/settings.ui:2046
-#: resources/ui/gtk3/settings.ui:2209 resources/ui/gtk3/settings.ui:2253
-#: resources/ui/gtk3/settings.ui:2618 resources/ui/gtk3/settings.ui:2652
-#: resources/ui/gtk3/settings.ui:2775 resources/ui/gtk3/settings.ui:2819
+#: resources/ui/gtk4/settings.ui:1744 resources/ui/gtk4/settings.ui:1788
+#: resources/ui/gtk4/settings.ui:1947 resources/ui/gtk4/settings.ui:1991
+#: resources/ui/gtk4/settings.ui:2368 resources/ui/gtk4/settings.ui:2402
+#: resources/ui/gtk4/settings.ui:2522 resources/ui/gtk4/settings.ui:2566
+#: resources/ui/gtk3/settings.ui:1739 resources/ui/gtk3/settings.ui:1783
+#: resources/ui/gtk3/settings.ui:1946 resources/ui/gtk3/settings.ui:1990
+#: resources/ui/gtk3/settings.ui:2355 resources/ui/gtk3/settings.ui:2389
+#: resources/ui/gtk3/settings.ui:2512 resources/ui/gtk3/settings.ui:2556
 msgid "Luminance"
 msgstr "亮度"
 
-#: resources/ui/gtk4/settings.ui:2032 resources/ui/gtk4/settings.ui:2069
-#: resources/ui/gtk4/settings.ui:2235 resources/ui/gtk4/settings.ui:2272
-#: resources/ui/gtk4/settings.ui:2656 resources/ui/gtk4/settings.ui:2693
-#: resources/ui/gtk4/settings.ui:2810 resources/ui/gtk4/settings.ui:2827
-#: resources/ui/gtk3/settings.ui:2019 resources/ui/gtk3/settings.ui:2056
-#: resources/ui/gtk3/settings.ui:2226 resources/ui/gtk3/settings.ui:2263
-#: resources/ui/gtk3/settings.ui:2635 resources/ui/gtk3/settings.ui:2672
-#: resources/ui/gtk3/settings.ui:2792 resources/ui/gtk3/settings.ui:2809
+#: resources/ui/gtk4/settings.ui:1761 resources/ui/gtk4/settings.ui:1798
+#: resources/ui/gtk4/settings.ui:1964 resources/ui/gtk4/settings.ui:2001
+#: resources/ui/gtk4/settings.ui:2385 resources/ui/gtk4/settings.ui:2422
+#: resources/ui/gtk4/settings.ui:2539 resources/ui/gtk4/settings.ui:2556
+#: resources/ui/gtk3/settings.ui:1756 resources/ui/gtk3/settings.ui:1793
+#: resources/ui/gtk3/settings.ui:1963 resources/ui/gtk3/settings.ui:2000
+#: resources/ui/gtk3/settings.ui:2372 resources/ui/gtk3/settings.ui:2409
+#: resources/ui/gtk3/settings.ui:2529 resources/ui/gtk3/settings.ui:2546
 msgid "Opacity"
 msgstr "不透明度"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
-#: resources/ui/gtk4/settings.ui:2090 resources/ui/gtk4/settings.ui:2154
-#: resources/ui/gtk4/settings.ui:2568 resources/ui/gtk4/settings.ui:2722
-#: resources/ui/gtk4/settings.ui:3325 resources/ui/gtk4/settings.ui:3376
-#: resources/ui/gtk3/settings.ui:2078 resources/ui/gtk3/settings.ui:2144
-#: resources/ui/gtk3/settings.ui:2545 resources/ui/gtk3/settings.ui:2702
-#: resources/ui/gtk3/settings.ui:3292 resources/ui/gtk3/settings.ui:3345
+#: resources/ui/gtk4/settings.ui:1819 resources/ui/gtk4/settings.ui:1883
+#: resources/ui/gtk4/settings.ui:2297 resources/ui/gtk4/settings.ui:2451
+#: resources/ui/gtk4/settings.ui:3054 resources/ui/gtk4/settings.ui:3105
+#: resources/ui/gtk3/settings.ui:1815 resources/ui/gtk3/settings.ui:1881
+#: resources/ui/gtk3/settings.ui:2282 resources/ui/gtk3/settings.ui:2439
+#: resources/ui/gtk3/settings.ui:3029 resources/ui/gtk3/settings.ui:3082
 msgid "Fixed"
 msgstr "固定"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
-#: resources/ui/gtk4/settings.ui:2097 resources/ui/gtk4/settings.ui:2161
-#: resources/ui/gtk4/settings.ui:2575 resources/ui/gtk4/settings.ui:2729
-#: resources/ui/gtk3/settings.ui:2086 resources/ui/gtk3/settings.ui:2152
-#: resources/ui/gtk3/settings.ui:2553 resources/ui/gtk3/settings.ui:2710
+#: resources/ui/gtk4/settings.ui:1826 resources/ui/gtk4/settings.ui:1890
+#: resources/ui/gtk4/settings.ui:2304 resources/ui/gtk4/settings.ui:2458
+#: resources/ui/gtk3/settings.ui:1823 resources/ui/gtk3/settings.ui:1889
+#: resources/ui/gtk3/settings.ui:2290 resources/ui/gtk3/settings.ui:2447
 msgid "Auto"
 msgstr "自动"
 
-#: resources/ui/gtk4/settings.ui:2330 resources/ui/gtk4/settings.ui:3036
-#: resources/ui/gtk3/settings.ui:2321 resources/ui/gtk3/settings.ui:3018
+#: resources/ui/gtk4/settings.ui:2059 resources/ui/gtk4/settings.ui:2765
+#: resources/ui/gtk3/settings.ui:2058 resources/ui/gtk3/settings.ui:2755
 msgid "Icon Opacity"
 msgstr "标志不透明度"
 
-#: resources/ui/gtk4/settings.ui:2373 resources/ui/gtk4/settings.ui:3130
-#: resources/ui/gtk3/settings.ui:2360 resources/ui/gtk3/settings.ui:3107
+#: resources/ui/gtk4/settings.ui:2102 resources/ui/gtk4/settings.ui:2859
+#: resources/ui/gtk3/settings.ui:2097 resources/ui/gtk3/settings.ui:2844
 msgid "Icon Scale"
 msgstr "标志放缩"
 
-#: resources/ui/gtk4/settings.ui:2403 resources/ui/gtk4/settings.ui:3149
-#: resources/ui/gtk3/settings.ui:2389 resources/ui/gtk3/settings.ui:3125
+#: resources/ui/gtk4/settings.ui:2132 resources/ui/gtk4/settings.ui:2878
+#: resources/ui/gtk3/settings.ui:2126 resources/ui/gtk3/settings.ui:2862
 msgid "Icon Crop"
 msgstr "图标裁剪"
 
-#: resources/ui/gtk4/settings.ui:2454 resources/ui/gtk4/settings.ui:3200
-#: resources/ui/gtk4/settings.ui:3586 resources/ui/gtk3/settings.ui:2439
-#: resources/ui/gtk3/settings.ui:3175 resources/ui/gtk3/settings.ui:3552
+#: resources/ui/gtk4/settings.ui:2183 resources/ui/gtk4/settings.ui:2929
+#: resources/ui/gtk4/settings.ui:3315 resources/ui/gtk3/settings.ui:2176
+#: resources/ui/gtk3/settings.ui:2912 resources/ui/gtk3/settings.ui:3289
 msgid "Background Image"
 msgstr "背景图片"
 
-#: resources/ui/gtk4/settings.ui:2512 resources/ui/gtk4/settings.ui:3229
-#: resources/ui/gtk3/settings.ui:2488 resources/ui/gtk3/settings.ui:3201
+#: resources/ui/gtk4/settings.ui:2241 resources/ui/gtk4/settings.ui:2958
+#: resources/ui/gtk3/settings.ui:2225 resources/ui/gtk3/settings.ui:2938
 msgid "Children Appearance"
 msgstr "子项外观"
 
-#: resources/ui/gtk4/settings.ui:2522 resources/ui/gtk3/settings.ui:2498
+#: resources/ui/gtk4/settings.ui:2251 resources/ui/gtk3/settings.ui:2235
 msgid "Child items are styled differently when their wedge is hovered."
 msgstr "鼠标悬停于子项所在的放射形条带上时，改变子项显示的样式。"
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/gtk4/settings.ui:2538 resources/ui/gtk4/settings.ui:3284
-#: resources/ui/gtk3/settings.ui:2514 resources/ui/gtk3/settings.ui:3250
+#: resources/ui/gtk4/settings.ui:2267 resources/ui/gtk4/settings.ui:3013
+#: resources/ui/gtk3/settings.ui:2251 resources/ui/gtk3/settings.ui:2987
 msgid "Standard State"
 msgstr "通常状态"
 
@@ -1815,184 +1778,184 @@ msgstr "通常状态"
 #. When the mouse pointer is over the item
 #. Hovered: When the mouse pointer is over the item
 #. When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:2551 resources/ui/gtk4/settings.ui:3835
-#: resources/ui/gtk3/settings.ui:2527 resources/ui/gtk3/settings.ui:3791
+#: resources/ui/gtk4/settings.ui:2280 resources/ui/gtk4/settings.ui:3564
+#: resources/ui/gtk3/settings.ui:2264 resources/ui/gtk3/settings.ui:3528
 msgid "Hovered State"
 msgstr "鼠标悬停状态"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent's setting
-#: resources/ui/gtk4/settings.ui:2582 resources/ui/gtk4/settings.ui:2736
-#: resources/ui/gtk4/settings.ui:3332 resources/ui/gtk4/settings.ui:3383
-#: resources/ui/gtk3/settings.ui:2561 resources/ui/gtk3/settings.ui:2718
-#: resources/ui/gtk3/settings.ui:3300 resources/ui/gtk3/settings.ui:3353
+#: resources/ui/gtk4/settings.ui:2311 resources/ui/gtk4/settings.ui:2465
+#: resources/ui/gtk4/settings.ui:3061 resources/ui/gtk4/settings.ui:3112
+#: resources/ui/gtk3/settings.ui:2298 resources/ui/gtk3/settings.ui:2455
+#: resources/ui/gtk3/settings.ui:3037 resources/ui/gtk3/settings.ui:3090
 msgid "Parent"
 msgstr "同上级"
 
-#: resources/ui/gtk4/settings.ui:2884 resources/ui/gtk4/settings.ui:3435
-#: resources/ui/gtk3/settings.ui:2866 resources/ui/gtk3/settings.ui:3405
+#: resources/ui/gtk4/settings.ui:2613 resources/ui/gtk4/settings.ui:3164
+#: resources/ui/gtk3/settings.ui:2603 resources/ui/gtk3/settings.ui:3142
 msgid "Offset"
 msgstr "补偿"
 
 #. Draw above (grand)children items. There's an explanation string below in the application.
-#: resources/ui/gtk4/settings.ui:2995 resources/ui/gtk4/settings.ui:3524
-#: resources/ui/gtk3/settings.ui:2977 resources/ui/gtk3/settings.ui:3494
+#: resources/ui/gtk4/settings.ui:2724 resources/ui/gtk4/settings.ui:3253
+#: resources/ui/gtk3/settings.ui:2714 resources/ui/gtk3/settings.ui:3231
 #, fuzzy
 msgid "Draw Above"
 msgstr "覆盖中心项目"
 
-#: resources/ui/gtk4/settings.ui:3005 resources/ui/gtk3/settings.ui:2987
+#: resources/ui/gtk4/settings.ui:2734 resources/ui/gtk3/settings.ui:2724
 msgid "Render children above the center item."
 msgstr "在中心项目的上面显示子项。"
 
-#: resources/ui/gtk4/settings.ui:3258 resources/ui/gtk4/settings.ui:3615
-#: resources/ui/gtk3/settings.ui:3224 resources/ui/gtk3/settings.ui:3578
+#: resources/ui/gtk4/settings.ui:2987 resources/ui/gtk4/settings.ui:3344
+#: resources/ui/gtk3/settings.ui:2961 resources/ui/gtk3/settings.ui:3315
 msgid "Grandchildren Appearance"
 msgstr "二级子项外观"
 
-#: resources/ui/gtk4/settings.ui:3268 resources/ui/gtk3/settings.ui:3234
+#: resources/ui/gtk4/settings.ui:2997 resources/ui/gtk3/settings.ui:2971
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
 msgstr "鼠标悬停于上级项目所在的放射形条带上时，改变二级子项显示的样式。"
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:3297 resources/ui/gtk3/settings.ui:3263
+#: resources/ui/gtk4/settings.ui:3026 resources/ui/gtk3/settings.ui:3000
 msgid "With Hovered Parent"
 msgstr "鼠标悬停于上级时"
 
-#: resources/ui/gtk4/settings.ui:3534 resources/ui/gtk3/settings.ui:3504
+#: resources/ui/gtk4/settings.ui:3263 resources/ui/gtk3/settings.ui:3241
 msgid "Render grandchildren above children items."
 msgstr "在子项的上面显示二级子项。"
 
-#: resources/ui/gtk4/settings.ui:3645 resources/ui/gtk4/settings.ui:3884
-#: resources/ui/gtk3/settings.ui:3601 resources/ui/gtk3/settings.ui:3838
+#: resources/ui/gtk4/settings.ui:3374 resources/ui/gtk4/settings.ui:3613
+#: resources/ui/gtk3/settings.ui:3338 resources/ui/gtk3/settings.ui:3575
 msgid "Wedge Appearance"
 msgstr "条带区域外观"
 
-#: resources/ui/gtk4/settings.ui:3655 resources/ui/gtk3/settings.ui:3611
+#: resources/ui/gtk4/settings.ui:3384 resources/ui/gtk3/settings.ui:3348
 msgid "Clicking inside a wedge will activate the corresponding item."
 msgstr "在一项功能所占的放射形条带区域内点击，就可以使用这项功能。"
 
-#: resources/ui/gtk4/settings.ui:3678 resources/ui/gtk3/settings.ui:3634
+#: resources/ui/gtk4/settings.ui:3407 resources/ui/gtk3/settings.ui:3371
 msgid "Inner Radius"
 msgstr "内半径"
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
-#: resources/ui/gtk4/settings.ui:3689 resources/ui/gtk3/settings.ui:3645
+#: resources/ui/gtk4/settings.ui:3418 resources/ui/gtk3/settings.ui:3382
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr "在内半径以里点击可以取消选择。"
 
-#: resources/ui/gtk4/settings.ui:3710 resources/ui/gtk3/settings.ui:3666
+#: resources/ui/gtk4/settings.ui:3439 resources/ui/gtk3/settings.ui:3403
 msgid "Wedge Separator Color"
 msgstr "分割辐线的颜色"
 
-#: resources/ui/gtk4/settings.ui:3722 resources/ui/gtk3/settings.ui:3678
+#: resources/ui/gtk4/settings.ui:3451 resources/ui/gtk3/settings.ui:3415
 msgid "Wedge Separator Thickness"
 msgstr "分割辐线的粗细"
 
-#: resources/ui/gtk4/settings.ui:3760 resources/ui/gtk3/settings.ui:3716
+#: resources/ui/gtk4/settings.ui:3489 resources/ui/gtk3/settings.ui:3453
 msgid "Wedge Color"
 msgstr "条带区域颜色"
 
-#: resources/ui/gtk4/settings.ui:3772 resources/ui/gtk3/settings.ui:3728
+#: resources/ui/gtk4/settings.ui:3501 resources/ui/gtk3/settings.ui:3465
 msgid "Wedge Size"
 msgstr "条带区域大小"
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/gtk4/settings.ui:3822 resources/ui/gtk3/settings.ui:3778
+#: resources/ui/gtk4/settings.ui:3551 resources/ui/gtk3/settings.ui:3515
 msgid "Inactive State"
 msgstr "通常状态"
 
-#: resources/ui/gtk4/settings.ui:3913 resources/ui/gtk4/settings.ui:4016
-#: resources/ui/gtk3/settings.ui:3861 resources/ui/gtk3/settings.ui:3963
+#: resources/ui/gtk4/settings.ui:3642 resources/ui/gtk4/settings.ui:3745
+#: resources/ui/gtk3/settings.ui:3598 resources/ui/gtk3/settings.ui:3700
 msgid "Trace Appearance"
 msgstr "路径线外观"
 
-#: resources/ui/gtk4/settings.ui:3923 resources/ui/gtk3/settings.ui:3871
+#: resources/ui/gtk4/settings.ui:3652 resources/ui/gtk3/settings.ui:3608
 msgid "The trace is the connecting line between selected menu items."
 msgstr "路径线是指连接所选项目的线。"
 
-#: resources/ui/gtk4/settings.ui:3940 resources/ui/gtk3/settings.ui:3888
+#: resources/ui/gtk4/settings.ui:3669 resources/ui/gtk3/settings.ui:3625
 msgid "Thickness"
 msgstr "粗细"
 
-#: resources/ui/gtk4/settings.ui:3951 resources/ui/gtk3/settings.ui:3899
+#: resources/ui/gtk4/settings.ui:3680 resources/ui/gtk3/settings.ui:3636
 msgid "Color"
 msgstr "颜色"
 
-#: resources/ui/gtk4/settings.ui:4003 resources/ui/gtk3/settings.ui:3951
+#: resources/ui/gtk4/settings.ui:3732 resources/ui/gtk3/settings.ui:3688
 msgid "Minimum Segment Length"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4046 resources/ui/gtk4/settings.ui:4170
-#: resources/ui/gtk3/settings.ui:3987 resources/ui/gtk3/settings.ui:4110
+#: resources/ui/gtk4/settings.ui:3775 resources/ui/gtk4/settings.ui:3899
+#: resources/ui/gtk3/settings.ui:3724 resources/ui/gtk3/settings.ui:3847
 msgid "Touch Button Settings"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4056 resources/ui/gtk3/settings.ui:3997
+#: resources/ui/gtk4/settings.ui:3785 resources/ui/gtk3/settings.ui:3734
 msgid "You can show a touch button for each of your menus."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4074 resources/ui/gtk3/settings.ui:4015
+#: resources/ui/gtk4/settings.ui:3803 resources/ui/gtk3/settings.ui:3752
 msgid "Inactive Opacity"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4102 resources/ui/gtk3/settings.ui:4043
+#: resources/ui/gtk4/settings.ui:3831 resources/ui/gtk3/settings.ui:3780
 msgid "Show in Overview Mode"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4124 resources/ui/gtk3/settings.ui:4065
+#: resources/ui/gtk4/settings.ui:3853 resources/ui/gtk3/settings.ui:3802
 msgid "Show in Desktop Mode"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4146 resources/ui/gtk3/settings.ui:4087
+#: resources/ui/gtk4/settings.ui:3875 resources/ui/gtk3/settings.ui:3824
 msgid "Show above Fullscreen Windows"
 msgstr "在全屏窗口上也显示"
 
-#: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk4/settings.ui:4598
-#: resources/ui/gtk3/settings.ui:4133 resources/ui/gtk3/settings.ui:4531
+#: resources/ui/gtk4/settings.ui:3928 resources/ui/gtk4/settings.ui:4370
+#: resources/ui/gtk3/settings.ui:3870 resources/ui/gtk3/settings.ui:4311
 msgid "Advanced Settings"
 msgstr "高级设置"
 
-#: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4143
+#: resources/ui/gtk4/settings.ui:3938 resources/ui/gtk3/settings.ui:3880
 msgid "These settings are independent of the presets."
 msgstr "这些设置会和预设独立作用。"
 
-#: resources/ui/gtk4/settings.ui:4228 resources/ui/gtk3/settings.ui:4162
+#: resources/ui/gtk4/settings.ui:3957 resources/ui/gtk3/settings.ui:3899
 msgid "Minimum Stroke Angle"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4238 resources/ui/gtk3/settings.ui:4172
+#: resources/ui/gtk4/settings.ui:3967 resources/ui/gtk3/settings.ui:3909
 msgid "Smaller turns will not lead to selections."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4275 resources/ui/gtk3/settings.ui:4209
+#: resources/ui/gtk4/settings.ui:4004 resources/ui/gtk3/settings.ui:3946
 msgid "Minimum Stroke Length"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4285 resources/ui/gtk3/settings.ui:4219
+#: resources/ui/gtk4/settings.ui:4014 resources/ui/gtk3/settings.ui:3956
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4324 resources/ui/gtk3/settings.ui:4258
+#: resources/ui/gtk4/settings.ui:4053 resources/ui/gtk3/settings.ui:3995
 msgid "Jitter Threshold"
 msgstr "抖动阈值"
 
-#: resources/ui/gtk4/settings.ui:4334 resources/ui/gtk3/settings.ui:4268
+#: resources/ui/gtk4/settings.ui:4063 resources/ui/gtk3/settings.ui:4005
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4372 resources/ui/gtk3/settings.ui:4306
+#: resources/ui/gtk4/settings.ui:4101 resources/ui/gtk3/settings.ui:4043
 msgid "Display Timeout"
 msgstr "显示延迟"
 
-#: resources/ui/gtk4/settings.ui:4382 resources/ui/gtk3/settings.ui:4316
+#: resources/ui/gtk4/settings.ui:4111 resources/ui/gtk3/settings.ui:4053
 msgid ""
 "Menus will be shown after this many milliseconds.\n"
 "Use this to quickly select items without showing the menu."
@@ -2000,11 +1963,11 @@ msgstr ""
 "这段时间（毫秒）过去之后显示将菜单。\n"
 "使用它可以快速选择项目而不显示菜单。"
 
-#: resources/ui/gtk4/settings.ui:4421 resources/ui/gtk3/settings.ui:4355
+#: resources/ui/gtk4/settings.ui:4150 resources/ui/gtk3/settings.ui:4092
 msgid "Selection Timeout"
 msgstr "选中延迟"
 
-#: resources/ui/gtk4/settings.ui:4431 resources/ui/gtk3/settings.ui:4365
+#: resources/ui/gtk4/settings.ui:4160 resources/ui/gtk3/settings.ui:4102
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
@@ -2012,11 +1975,21 @@ msgstr ""
 "如果你的鼠标指针停留了这些毫秒，\n"
 "当前项目将被选中。"
 
-#: resources/ui/gtk4/settings.ui:4470 resources/ui/gtk3/settings.ui:4404
+#: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk3/settings.ui:4141
+msgid "Open Windows at the Pointer"
+msgstr ""
+
+#: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4151
+msgid ""
+"With this enabled, Fly-Pie will attempt to open any windows\n"
+"at the current pointer position."
+msgstr ""
+
+#: resources/ui/gtk4/settings.ui:4232 resources/ui/gtk3/settings.ui:4174
 msgid "Experimental Hover Mode"
 msgstr "悬停模式（功能测试中）"
 
-#: resources/ui/gtk4/settings.ui:4480 resources/ui/gtk3/settings.ui:4414
+#: resources/ui/gtk4/settings.ui:4242 resources/ui/gtk3/settings.ui:4184
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
@@ -2024,11 +1997,11 @@ msgstr ""
 "启用后，选择时不用按下鼠标按钮，\n"
 "或按住修饰键。"
 
-#: resources/ui/gtk4/settings.ui:4503 resources/ui/gtk3/settings.ui:4437
+#: resources/ui/gtk4/settings.ui:4265 resources/ui/gtk3/settings.ui:4207
 msgid "Show Screencast Mouse"
 msgstr "显示录屏用鼠标光标"
 
-#: resources/ui/gtk4/settings.ui:4513 resources/ui/gtk3/settings.ui:4447
+#: resources/ui/gtk4/settings.ui:4275 resources/ui/gtk3/settings.ui:4217
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
@@ -2036,74 +2009,74 @@ msgstr ""
 "显示一个大鼠标光标强调鼠标点击。\n"
 "能便于录制关于 Fly-Pie 这个软件的视频。"
 
-#: resources/ui/gtk4/settings.ui:4546 resources/ui/gtk3/settings.ui:4480
+#: resources/ui/gtk4/settings.ui:4308 resources/ui/gtk3/settings.ui:4250
 msgid "Achievement Notifications"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4556 resources/ui/gtk3/settings.ui:4490
+#: resources/ui/gtk4/settings.ui:4318 resources/ui/gtk3/settings.ui:4260
 msgid "Show a notification whenever you complete an achievement."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4618 resources/ui/gtk3/settings.ui:4563
+#: resources/ui/gtk4/settings.ui:4390 resources/ui/gtk3/settings.ui:4343
 msgid "Load Preset"
 msgstr "载入预设"
 
-#: resources/ui/gtk4/settings.ui:4630 resources/ui/gtk3/settings.ui:4583
+#: resources/ui/gtk4/settings.ui:4402 resources/ui/gtk3/settings.ui:4363
 msgid "Load settings from a JSON file."
 msgstr "载入 JSON 格式的配置文件。"
 
-#: resources/ui/gtk4/settings.ui:4637 resources/ui/gtk3/settings.ui:4596
+#: resources/ui/gtk4/settings.ui:4409 resources/ui/gtk3/settings.ui:4376
 msgid "Save the settings to a JSON file."
 msgstr "用 JSON 文件保存配置。"
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: resources/ui/gtk4/settings.ui:4660 resources/ui/gtk4/settings.ui:4933
-#: resources/ui/gtk3/settings.ui:4625 resources/ui/gtk3/settings.ui:4918
+#: resources/ui/gtk4/settings.ui:4432 resources/ui/gtk4/settings.ui:4705
+#: resources/ui/gtk3/settings.ui:4405 resources/ui/gtk3/settings.ui:4698
 msgid "Live Preview"
 msgstr "预览效果"
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:4689 resources/ui/gtk3/settings.ui:5202
+#: resources/ui/gtk4/settings.ui:4461 resources/ui/gtk3/settings.ui:5012
 msgid "Menu Editor"
 msgstr "编辑菜单"
 
-#: resources/ui/gtk4/settings.ui:4718 resources/ui/gtk3/settings.ui:4684
+#: resources/ui/gtk4/settings.ui:4490 resources/ui/gtk3/settings.ui:4464
 msgid "Add a new menu item."
 msgstr "新建一个菜单项。"
 
-#: resources/ui/gtk4/settings.ui:4797 resources/ui/gtk3/settings.ui:4771
+#: resources/ui/gtk4/settings.ui:4569 resources/ui/gtk3/settings.ui:4551
 msgid "Stash"
 msgstr "暂存处"
 
-#: resources/ui/gtk4/settings.ui:4813 resources/ui/gtk3/settings.ui:4788
+#: resources/ui/gtk4/settings.ui:4585 resources/ui/gtk3/settings.ui:4568
 msgid "Store items here and re-use them later."
 msgstr "在这儿暂存项目，预备接下来继续使用。"
 
-#: resources/ui/gtk4/settings.ui:4857 resources/ui/gtk3/settings.ui:4832
+#: resources/ui/gtk4/settings.ui:4629 resources/ui/gtk3/settings.ui:4612
 msgid "Trash"
 msgstr "垃圾桶"
 
-#: resources/ui/gtk4/settings.ui:4873 resources/ui/gtk3/settings.ui:4848
+#: resources/ui/gtk4/settings.ui:4645 resources/ui/gtk3/settings.ui:4628
 msgid "Drop items here."
 msgstr "拖拽到这儿删除。"
 
-#: resources/ui/gtk4/settings.ui:4903 resources/ui/gtk3/settings.ui:4878
+#: resources/ui/gtk4/settings.ui:4675 resources/ui/gtk3/settings.ui:4658
 msgid "Restore menus from a JSON file. This will override your current menus!"
 msgstr "读取使用 JSON 文件保存的菜单。当前菜单会被覆盖掉！"
 
-#: resources/ui/gtk4/settings.ui:4909 resources/ui/gtk3/settings.ui:4890
+#: resources/ui/gtk4/settings.ui:4681 resources/ui/gtk3/settings.ui:4670
 msgid "Export all menus to a JSON file."
 msgstr "把全部菜单导出到 JSON 文件里。"
 
-#: resources/ui/gtk4/settings.ui:4986 resources/ui/gtk3/settings.ui:4972
+#: resources/ui/gtk4/settings.ui:4758 resources/ui/gtk3/settings.ui:4752
 msgid "Name"
 msgstr "名称"
 
-#: resources/ui/gtk4/settings.ui:5004 resources/ui/gtk3/settings.ui:4990
+#: resources/ui/gtk4/settings.ui:4776 resources/ui/gtk3/settings.ui:4770
 msgid "Icon"
 msgstr "标志"
 
-#: resources/ui/gtk4/settings.ui:5022 resources/ui/gtk3/settings.ui:5008
+#: resources/ui/gtk4/settings.ui:4794 resources/ui/gtk3/settings.ui:4788
 msgid ""
 "The icon can be either an image file path, an icon name from the current "
 "icon theme, a base64 encoded data URI, text, or an emoji. You can append \"-"
@@ -2114,11 +2087,11 @@ msgstr ""
 "源标识符（URI）、文本或者 emoji 。注记一个“-#rgb”可以给图标添加一个圆形背景，"
 "颜色由“rgb”的值给定。"
 
-#: resources/ui/gtk4/settings.ui:5055 resources/ui/gtk3/settings.ui:5047
+#: resources/ui/gtk4/settings.ui:4827 resources/ui/gtk3/settings.ui:4827
 msgid "Fixed Angle"
 msgstr "固定角度"
 
-#: resources/ui/gtk4/settings.ui:5071 resources/ui/gtk3/settings.ui:5063
+#: resources/ui/gtk4/settings.ui:4843 resources/ui/gtk3/settings.ui:4843
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -2135,11 +2108,11 @@ msgstr ""
 "设置的别的项目的固定角度大。为避免程序出错，项目被拖动改变位置，固定角度这项"
 "功能就会恢复到不使用的状态。"
 
-#: resources/ui/gtk4/settings.ui:5109 resources/ui/gtk3/settings.ui:5101
+#: resources/ui/gtk4/settings.ui:4881 resources/ui/gtk3/settings.ui:4881
 msgid "This will open the menu."
 msgstr "按下这组键盘快捷键就可以打开菜单。"
 
-#: resources/ui/gtk4/settings.ui:5123 resources/ui/gtk3/settings.ui:5115
+#: resources/ui/gtk4/settings.ui:4895 resources/ui/gtk3/settings.ui:4895
 msgid ""
 "Usually, Super + Right Mouse Button opens the window menu. With this "
 "setting, you can instead open a Fly-Pie menu."
@@ -2147,33 +2120,100 @@ msgstr ""
 "Super + 鼠标右键本来通常是用来打开窗口菜单的。打开此开关，把这么按的功能换成"
 "打开 Fly-Pie 。"
 
-#: resources/ui/gtk4/settings.ui:5128 resources/ui/gtk3/settings.ui:5120
+#: resources/ui/gtk4/settings.ui:4900 resources/ui/gtk3/settings.ui:4900
 msgid "Bind to Super + RMB"
 msgstr "绑定到 Super + 鼠标右键"
 
-#: resources/ui/gtk4/settings.ui:5144 resources/ui/gtk3/settings.ui:5136
+#: resources/ui/gtk4/settings.ui:4916 resources/ui/gtk3/settings.ui:4916
 msgid "Show Touch Button"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:5160 resources/ui/gtk3/settings.ui:5152
+#: resources/ui/gtk4/settings.ui:4932 resources/ui/gtk3/settings.ui:4932
 msgid "Open in Screen Center"
 msgstr "在屏幕中心打开"
 
+#: resources/ui/gtk4/settings.ui:4968 resources/ui/gtk3/settings.ui:4968
+msgid "Show Labels"
+msgstr ""
+
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:5221 resources/ui/gtk3/settings.ui:5445
+#: resources/ui/gtk4/settings.ui:5023 resources/ui/gtk3/settings.ui:5255
 msgid "Achievements"
 msgstr "成就"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5415 resources/ui/gtk3/settings.ui:5382
+#: resources/ui/gtk4/settings.ui:5217 resources/ui/gtk3/settings.ui:5192
 msgid "In Progress"
 msgstr "进行中"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5429 resources/ui/gtk3/settings.ui:5397
+#: resources/ui/gtk4/settings.ui:5231 resources/ui/gtk3/settings.ui:5207
 msgid "Completed"
 msgstr "完成"
 
-#: resources/ui/gtk4/settings.ui:5457 resources/ui/gtk3/settings.ui:5425
+#: resources/ui/gtk4/settings.ui:5259 resources/ui/gtk3/settings.ui:5235
 msgid "Reset all achievements."
 msgstr "重置全部成就。"
+
+#~ msgid "About"
+#~ msgstr "软件介绍"
+
+#~ msgid ""
+#~ "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
+#~ "changelog.md\">Changelog</a>."
+#~ msgstr ""
+#~ "查看<a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
+#~ "changelog.md\">更新记录</a>。"
+
+#~ msgid ""
+#~ "Published under the MIT License.\n"
+#~ "Visit <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie's "
+#~ "Homepage</a> for details.\n"
+#~ "\n"
+#~ "Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free to "
+#~ "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
+#~ "\">Github</a>."
+#~ msgstr ""
+#~ "以 MIT 许可协议发布。\n"
+#~ "请访问 <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie 的主页</"
+#~ "a>了解详情。\n"
+#~ "\n"
+#~ "若您遇到🐞️错误，或有🎉️增加功能的要求，您随时可以在 <a href=\"https://github."
+#~ "com/Schneegans/Fly-Pie/issues\">Github</a> 上报告。"
+
+#~ msgid "Credits"
+#~ msgstr "制作组"
+
+#~ msgid "Created by"
+#~ msgstr "程序设计"
+
+#~ msgid "Translated by"
+#~ msgstr "译者"
+
+#~ msgid "Artwork by"
+#~ msgstr "美工"
+
+#~ msgid "Sponsors"
+#~ msgstr "赞助"
+
+#~ msgid "🥇️ Gold Sponsors"
+#~ msgstr "🥇️金牌赞助人"
+
+#~ msgid "🥈️ Silver Sponsors"
+#~ msgstr "🥈️银牌赞助人"
+
+#~ msgid "🥉️ Bronze Sponsors"
+#~ msgstr "🥉️铜牌赞助人"
+
+#~ msgid "🏅️ Past Sponsors"
+#~ msgstr "🏅️过往赞助者"
+
+#~ msgid "- none -"
+#~ msgstr "- 无 -"
+
+#~ msgid ""
+#~ "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
+#~ "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
+#~ msgstr ""
+#~ "💕️ 想表达你对 Fly-Pie 的喜爱吗？<a href=\"https://github.com/sponsors/"
+#~ "Schneegans\">欢迎赞助，每月只需 1 美元！</a>"
