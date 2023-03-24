@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-13 21:04+0200\n"
+"POT-Creation-Date: 2023-03-24 20:33+0100\n"
 "PO-Revision-Date: 2022-01-16 17:55+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
@@ -19,17 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.10.1\n"
 
-#: src/common/actions/Shortcut.js:43
+#: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
 msgstr "Attiva Collegamento"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/Shortcut.js:50
+#: src/common/actions/Shortcut.js:53
 msgid "Simulates a key combination."
 msgstr "Simula una combinazione di tasti."
 
-#: src/common/actions/Shortcut.js:54
+#: src/common/actions/Shortcut.js:57
 msgid ""
 "The <b>Activate Shortcut</b> action simulates a key combination when "
 "activated. For example, this can be used to switch virtual desktops, control "
@@ -40,26 +40,26 @@ msgstr ""
 "virtuali, controllare la riproduzione multimediale o per annullare / "
 "ripetere operazioni."
 
-#: src/common/actions/Shortcut.js:78 resources/ui/gtk4/settings.ui:5103
-#: resources/ui/gtk3/settings.ui:5095
+#: src/common/actions/Shortcut.js:81 resources/ui/gtk4/settings.ui:4875
+#: resources/ui/gtk3/settings.ui:4875
 msgid "Shortcut"
 msgstr "Collegamento"
 
-#: src/common/actions/Shortcut.js:78
+#: src/common/actions/Shortcut.js:81
 msgid "This shortcut will be simulated."
 msgstr "Questo collegamento verrà simulato."
 
-#: src/common/actions/File.js:34
+#: src/common/actions/File.js:37
 msgid "Open File"
 msgstr "Apri File"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/File.js:41
+#: src/common/actions/File.js:44
 msgid "Opens a file with the default application."
 msgstr "Apre un file con l'applicazione predefinita."
 
-#: src/common/actions/File.js:45
+#: src/common/actions/File.js:48
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
@@ -67,25 +67,25 @@ msgstr ""
 "L'azione <b>Apri file</b> aprirà il file sopra specificato con "
 "l'applicazione predefinita del tuo sistema."
 
-#: src/common/actions/File.js:69
+#: src/common/actions/File.js:72
 msgid "File"
 msgstr "File"
 
-#: src/common/actions/File.js:69 src/common/actions/Uri.js:68
+#: src/common/actions/File.js:72 src/common/actions/Uri.js:71
 msgid "It will be opened with the default app."
 msgstr "Verrà aperto con l'app predefinita."
 
-#: src/common/actions/Command.js:34
+#: src/common/actions/Command.js:37
 msgid "Launch Application"
 msgstr "Avvia Applicazione"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/Command.js:41
+#: src/common/actions/Command.js:44
 msgid "Runs any shell command."
 msgstr "Esegue qualsiasi comando di shell."
 
-#: src/common/actions/Command.js:45
+#: src/common/actions/Command.js:48
 msgid ""
 "The <b>Launch Application</b> action executes any given command. This is "
 "primarily used to open applications but may have plenty of other use cases "
@@ -95,25 +95,25 @@ msgstr ""
 "utilizzato principalmente per aprire le applicazioni, ma può avere anche "
 "molti altri casi d'uso."
 
-#: src/common/actions/Command.js:69
+#: src/common/actions/Command.js:72
 msgid "Command"
 msgstr "Comando"
 
-#: src/common/actions/Command.js:69
+#: src/common/actions/Command.js:72
 msgid "Use the button to list installed apps."
 msgstr "Usa il pulsante per elencare le app installate."
 
-#: src/common/actions/Uri.js:33
+#: src/common/actions/Uri.js:36
 msgid "Open URI"
 msgstr "Apri URI"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/Uri.js:40
+#: src/common/actions/Uri.js:43
 msgid "Opens an URI with the default application."
 msgstr "Apre un URI con l'applicazione predefinita."
 
-#: src/common/actions/Uri.js:44
+#: src/common/actions/Uri.js:47
 msgid ""
 "When the <b>Open URI</b> action is activated, the above URI is opened with "
 "the default application. For http URLs, this will be your web browser. "
@@ -125,21 +125,21 @@ msgstr ""
 "web. Tuttavia, è anche possibile aprire altri URI come \"mailto:foo@bar.org"
 "\"."
 
-#: src/common/actions/Uri.js:68
+#: src/common/actions/Uri.js:71
 msgid "URI"
 msgstr "URI"
 
-#: src/common/actions/DBusSignal.js:32
+#: src/common/actions/DBusSignal.js:35
 msgid "D-Bus Signal"
 msgstr "Segnale D-Bus"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/DBusSignal.js:39
+#: src/common/actions/DBusSignal.js:42
 msgid "Emits a D-Bus signal."
 msgstr "Emette un segnale D-Bus."
 
-#: src/common/actions/DBusSignal.js:43
+#: src/common/actions/DBusSignal.js:46
 msgid ""
 "The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
 "\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md"
@@ -151,25 +151,25 @@ msgstr ""
 "ascoltare sul D-Bus la sua attivazione</a>. Questo può essere molto utile in "
 "menu personalizzati aperti tramite la riga di comando."
 
-#: src/common/actions/DBusSignal.js:67
+#: src/common/actions/DBusSignal.js:70
 msgid "ID"
 msgstr "ID"
 
-#: src/common/actions/DBusSignal.js:67
+#: src/common/actions/DBusSignal.js:70
 msgid "This will be passed to the D-Bus signal."
 msgstr "Questo verrà passato al segnale D-Bus."
 
-#: src/common/actions/InsertText.js:48
+#: src/common/actions/InsertText.js:51
 msgid "Insert Text"
 msgstr "Inserisci Testo"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/actions/InsertText.js:55
+#: src/common/actions/InsertText.js:58
 msgid "Types some text automatically."
 msgstr "Digita automaticamente del testo."
 
-#: src/common/actions/InsertText.js:59
+#: src/common/actions/InsertText.js:62
 msgid ""
 "The <b>Insert Text</b> action copies the given text to the clipboard and "
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
@@ -179,37 +179,37 @@ msgstr ""
 "quindi simula Ctrl + V. Questo può essere utile se ti rendi conto che scrivi "
 "spesso le stesse cose."
 
-#: src/common/actions/InsertText.js:83
+#: src/common/actions/InsertText.js:86
 msgid "Text"
 msgstr "Testo"
 
-#: src/common/actions/InsertText.js:83
+#: src/common/actions/InsertText.js:86
 msgid "This text will be inserted."
 msgstr "Questo testo verrà inserito."
 
-#: src/common/ConfigWidgetFactory.js:102 src/prefs/ImageChooserButton.js:42
+#: src/common/ConfigWidgetFactory.js:105 src/prefs/ImageChooserButton.js:45
 msgid "Select File"
 msgstr "Seleziona File"
 
-#: src/common/ConfigWidgetFactory.js:103 src/common/ConfigWidgetFactory.js:179
-#: src/prefs/ImageChooserButton.js:43 src/prefs/MenuEditorPage.js:205
-#: src/prefs/MenuEditorPage.js:275 src/prefs/SettingsPage.js:274
-#: src/prefs/SettingsPage.js:329 resources/ui/gtk4/iconSelectDialog.ui:14
-#: resources/ui/gtk3/iconSelectDialog.ui:14
+#: src/common/ConfigWidgetFactory.js:106 src/common/ConfigWidgetFactory.js:182
+#: src/prefs/ImageChooserButton.js:46 src/prefs/MenuEditorPage.js:208
+#: src/prefs/MenuEditorPage.js:278 src/prefs/SettingsPage.js:280
+#: src/prefs/SettingsPage.js:335 resources/ui/gtk4/iconSelectDialog.ui:20
+#: resources/ui/gtk3/iconSelectDialog.ui:20
 msgid "Cancel"
 msgstr "Cancella"
 
-#: src/common/ConfigWidgetFactory.js:178
+#: src/common/ConfigWidgetFactory.js:181
 msgid "Select Application"
 msgstr "Seleziona Applicazione"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
-#: src/common/ConfigWidgetFactory.js:287 src/common/ConfigWidgetFactory.js:335
-#: src/prefs/MenuEditor.js:281
+#: src/common/ConfigWidgetFactory.js:290 src/common/ConfigWidgetFactory.js:338
+#: src/prefs/MenuEditor.js:284
 msgid "Not Bound"
 msgstr "Non vincolato"
 
-#: src/common/ConfigWidgetFactory.js:318
+#: src/common/ConfigWidgetFactory.js:321
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
@@ -220,22 +220,22 @@ msgstr ""
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
 #. text to insert.
-#: src/common/ItemRegistry.js:244
+#: src/common/ItemRegistry.js:279
 #, javascript-format
 msgid "Insert: %s"
 msgstr "Inserisci: %s"
 
-#: src/common/menus/FrequentlyUsed.js:44
+#: src/common/menus/FrequentlyUsed.js:47
 msgid "Frequently Used"
 msgstr "Usato frequentemente"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/FrequentlyUsed.js:51
+#: src/common/menus/FrequentlyUsed.js:54
 msgid "Shows your frequently used applications."
 msgstr "Mostra le applicazioni utilizzate di frequente."
 
-#: src/common/menus/FrequentlyUsed.js:55
+#: src/common/menus/FrequentlyUsed.js:58
 msgid ""
 "The <b>Frequently Used</b> menu shows a list of frequently used "
 "applications. For efficient selections, you should limit the maximum number "
@@ -245,27 +245,27 @@ msgstr ""
 "utilizzate di frequente. Per selezioni efficienti, dovresti limitare il "
 "numero massimo di applicazioni mostrate a circa dodici."
 
-#: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
-#: src/common/menus/Clipboard.js:85
+#: src/common/menus/FrequentlyUsed.js:82 src/common/menus/RecentFiles.js:72
+#: src/common/menus/Clipboard.js:88
 msgid "Max Item Count"
 msgstr "Numero massimo elementi"
 
-#: src/common/menus/FrequentlyUsed.js:79 src/common/menus/RecentFiles.js:69
-#: src/common/menus/Clipboard.js:85
+#: src/common/menus/FrequentlyUsed.js:82 src/common/menus/RecentFiles.js:72
+#: src/common/menus/Clipboard.js:88
 msgid "Limits the number of children."
 msgstr "Limita il numero di figli."
 
-#: src/common/menus/System.js:46
+#: src/common/menus/System.js:49
 msgid "System"
 msgstr "Sistema"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/System.js:53
+#: src/common/menus/System.js:56
 msgid "Allows screen lock, shutdown and other things."
 msgstr "Consente il blocco dello schermo, lo spegnimento e altre cose."
 
-#: src/common/menus/System.js:57
+#: src/common/menus/System.js:60
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
@@ -274,37 +274,37 @@ msgstr ""
 "spegnimento,le impostazioni, ecc."
 
 #. Translators: As in 'Lock the screen.'
-#: src/common/menus/System.js:81
+#: src/common/menus/System.js:84
 msgid "Lock"
 msgstr "Blocca"
 
-#: src/common/menus/System.js:90
+#: src/common/menus/System.js:93
 msgid "Suspend"
 msgstr "Sospendi"
 
-#: src/common/menus/System.js:99
+#: src/common/menus/System.js:102
 msgid "Switch User…"
 msgstr "Cambia Utente…"
 
-#: src/common/menus/System.js:108
+#: src/common/menus/System.js:111
 msgid "Log Out"
 msgstr "Disconnetti"
 
-#: src/common/menus/System.js:117
+#: src/common/menus/System.js:120
 msgid "Power Off…"
 msgstr "Spegni…"
 
-#: src/common/menus/CustomMenu.js:29
+#: src/common/menus/CustomMenu.js:32
 msgid "Custom Menu"
 msgstr "Menu Personalizzato"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/CustomMenu.js:36
+#: src/common/menus/CustomMenu.js:39
 msgid "This can contain custom actions and other menus."
 msgstr "Questo può contenere azioni personalizzate e altri menu."
 
-#: src/common/menus/CustomMenu.js:40
+#: src/common/menus/CustomMenu.js:43
 msgid ""
 "A <b>Custom Menu</b> can contain any number of actions and submenus. "
 "However, for precise item selection, a maximum number of twelve items is "
@@ -315,17 +315,17 @@ msgstr ""
 "un numero massimo di dodici elementi."
 
 #. Translators: This is an entry of the default menu.
-#: src/common/menus/Favorites.js:43 src/extension/DefaultMenu.js:79
+#: src/common/menus/Favorites.js:46 src/extension/DefaultMenu.js:82
 msgid "Favorites"
 msgstr "Preferiti"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/Favorites.js:50
+#: src/common/menus/Favorites.js:53
 msgid "Shows pinned applications."
 msgstr "Mostra le applicazioni appuntate."
 
-#: src/common/menus/Favorites.js:54
+#: src/common/menus/Favorites.js:57
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
@@ -333,17 +333,17 @@ msgstr ""
 "Il menu <b>Preferiti</b> mostra le applicazioni che hai appuntato alla Dash "
 "di GNOME Shell."
 
-#: src/common/menus/RecentFiles.js:34
+#: src/common/menus/RecentFiles.js:37
 msgid "Recent Files"
 msgstr "File Recenti"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/RecentFiles.js:41
+#: src/common/menus/RecentFiles.js:44
 msgid "Shows your recently used files."
 msgstr "Mostra i file utilizzati di recente."
 
-#: src/common/menus/RecentFiles.js:45
+#: src/common/menus/RecentFiles.js:48
 msgid ""
 "The <b>Recent Files</b> menu shows a list of recently used files. For "
 "efficient selections, you should limit the maximum number of shown files to "
@@ -353,17 +353,17 @@ msgstr ""
 "Per selezioni efficienti, dovresti limitare il numero massimo di file "
 "visualizzati a circa dodici."
 
-#: src/common/menus/Devices.js:33
+#: src/common/menus/Devices.js:36
 msgid "Devices"
 msgstr "Dispositivi"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/Devices.js:40
+#: src/common/menus/Devices.js:43
 msgid "Shows connected devices."
 msgstr "Mostra i dispositivi collegati."
 
-#: src/common/menus/Devices.js:44
+#: src/common/menus/Devices.js:47
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
@@ -371,17 +371,17 @@ msgstr ""
 "Il menu <b>Dispositivi</b> mostra un elemento per ogni volume montato, come "
 "le chiavette USB."
 
-#: src/common/menus/MainMenu.js:33
+#: src/common/menus/MainMenu.js:36
 msgid "Main Menu"
 msgstr "Menu Principale"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/MainMenu.js:40
+#: src/common/menus/MainMenu.js:43
 msgid "Shows all installed applications."
 msgstr "Mostra tutte le applicazioni installate."
 
-#: src/common/menus/MainMenu.js:44
+#: src/common/menus/MainMenu.js:47
 msgid ""
 "The <b>Main Menu</b> shows all installed applications. Usually, this is very "
 "cluttered as many sections contain too many items to be used efficiently. "
@@ -393,17 +393,17 @@ msgstr ""
 "impostare i tuoi menu!"
 
 #. Translators: This is an entry of the default menu. I
-#: src/common/menus/RunningApps.js:47 src/extension/DefaultMenu.js:111
+#: src/common/menus/RunningApps.js:50 src/extension/DefaultMenu.js:114
 msgid "Running Apps"
 msgstr "App in Esecuzione"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/RunningApps.js:54
+#: src/common/menus/RunningApps.js:57
 msgid "Shows the currently running applications."
 msgstr "Mostra le applicazioni attualmente in esecuzione."
 
-#: src/common/menus/RunningApps.js:58
+#: src/common/menus/RunningApps.js:61
 msgid ""
 "The <b>Running Apps</b> menu shows all currently running applications. This "
 "is similar to the Alt+Tab window selection. As the entries change position "
@@ -414,7 +414,7 @@ msgstr ""
 "voci cambiano spesso posizione frequentemente, in realtà non è molto "
 "efficace."
 
-#: src/common/menus/RunningApps.js:97
+#: src/common/menus/RunningApps.js:100
 msgid ""
 "You can use this to filter the displayed windows. Regular expressions are "
 "supported: Use a simple string like \"Fire\" to show only windows whose "
@@ -430,40 +430,40 @@ msgstr ""
 "\". Ricorda di utilizzare l'anteprima dal vivo per vedere immediatamente i "
 "risultati!"
 
-#: src/common/menus/RunningApps.js:99
+#: src/common/menus/RunningApps.js:102
 msgid "Window Filter"
 msgstr "Filtro Finestra"
 
-#: src/common/menus/RunningApps.js:99 resources/ui/gtk4/settings.ui:5010
-#: resources/ui/gtk4/settings.ui:5061 resources/ui/gtk3/settings.ui:4996
-#: resources/ui/gtk3/settings.ui:5053
+#: src/common/menus/RunningApps.js:102 resources/ui/gtk4/settings.ui:4782
+#: resources/ui/gtk4/settings.ui:4833 resources/ui/gtk3/settings.ui:4776
+#: resources/ui/gtk3/settings.ui:4833
 msgid "See tooltip for details."
 msgstr "Vedere dettagli nella descrizione del comando."
 
-#: src/common/menus/RunningApps.js:125
+#: src/common/menus/RunningApps.js:128
 msgid "Active Workspace Only"
 msgstr "Solo Area di Lavoro Attiva"
 
-#: src/common/menus/RunningApps.js:126
+#: src/common/menus/RunningApps.js:129
 msgid "Group by Application"
 msgstr "Gruppo di Applicazioni"
 
-#: src/common/menus/RunningApps.js:127
+#: src/common/menus/RunningApps.js:130
 #, fuzzy
 msgid "Peek on Hover"
 msgstr "Sbircia al passaggio del mouse"
 
-#: src/common/menus/Bookmarks.js:33
+#: src/common/menus/Bookmarks.js:36
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/Bookmarks.js:40
+#: src/common/menus/Bookmarks.js:43
 msgid "Shows your frequently used directories."
 msgstr "Mostra le directory utilizzate di frequente."
 
-#: src/common/menus/Bookmarks.js:44
+#: src/common/menus/Bookmarks.js:47
 msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
@@ -471,399 +471,399 @@ msgstr ""
 "Il menu <b>Segnalibri</b> mostra un elemento per il cestino, il desktop e "
 "ciascuna directory contrassegnata."
 
-#: src/common/menus/Clipboard.js:54
+#: src/common/menus/Clipboard.js:57
 msgid "Clipboard"
 msgstr "Appunti"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
-#: src/common/menus/Clipboard.js:61
+#: src/common/menus/Clipboard.js:64
 msgid "Shows recently copied things."
 msgstr "Mostra le cose copiate di recente."
 
-#: src/common/menus/Clipboard.js:64
+#: src/common/menus/Clipboard.js:67
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
 msgstr "Il menu <b>Appunti</b> mostra un elenco di cose copiate di recente."
 
-#: src/common/menus/Clipboard.js:94
+#: src/common/menus/Clipboard.js:97
 msgid "First Child Angle"
 msgstr "Posizione del primo elemento"
 
-#: src/common/menus/Clipboard.js:94
+#: src/common/menus/Clipboard.js:97
 msgid "Direction of the most recent item."
 msgstr "Direzione dell'elemento più recente."
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a vector image.
-#: src/common/menus/Clipboard.js:165
+#: src/common/menus/Clipboard.js:168
 msgid "Vector Image"
 msgstr "Immagine Vettoriale"
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a raster image.
-#: src/common/menus/Clipboard.js:177
+#: src/common/menus/Clipboard.js:180
 msgid "Raster Image"
 msgstr "Immagine Bitmap"
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
-#: src/common/Achievements.js:366
+#: src/common/Achievements.js:369
 msgid "Novice"
 msgstr "Apprendista"
 
 #. Translators: This is the tier 2 attribute which will be inserted for each %s
 #. in the achievement titles.
-#: src/common/Achievements.js:369
+#: src/common/Achievements.js:372
 msgid "Capable"
 msgstr "Capace"
 
 #. Translators: This is the tier 3 attribute which will be inserted for each %s
 #. in the achievement titles.
-#: src/common/Achievements.js:372
+#: src/common/Achievements.js:375
 msgid "Skilled"
 msgstr "Abile"
 
 #. Translators: This is the tier 4 attribute which will be inserted for each %s
 #. in the achievement titles.
-#: src/common/Achievements.js:375
+#: src/common/Achievements.js:378
 msgid "Expert"
 msgstr "Esperto"
 
 #. Translators: This is the tier 5 attribute which will be inserted for each %s
 #. in the achievement titles.
-#: src/common/Achievements.js:378
+#: src/common/Achievements.js:381
 msgid "Master"
 msgstr "Maestro"
 
 #. Translators: This is the tier 1 number which will be inserted for each %i in
 #. the achievement titles.
-#: src/common/Achievements.js:384
+#: src/common/Achievements.js:387
 msgid "I"
 msgstr "I"
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
-#: src/common/Achievements.js:387
+#: src/common/Achievements.js:390
 msgid "II"
 msgstr "II"
 
 #. Translators: This is the tier 3 number which will be inserted for each %i in
 #. the achievement titles.
-#: src/common/Achievements.js:390
+#: src/common/Achievements.js:393
 msgid "III"
 msgstr "III"
 
 #. Translators: This is the tier 4 number which will be inserted for each %i in
 #. the achievement titles.
-#: src/common/Achievements.js:393
+#: src/common/Achievements.js:396
 msgid "IV"
 msgstr "IV"
 
 #. Translators: This is the tier 5 number which will be inserted for each %i in
 #. the achievement titles.
-#: src/common/Achievements.js:396
+#: src/common/Achievements.js:399
 msgid "V"
 msgstr "V"
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
-#: src/common/Achievements.js:412
+#: src/common/Achievements.js:415
 #, javascript-format
 msgid "%s Cancellor"
 msgstr "%s Eliminatore"
 
 #. Translators: The description of the '%s Cancellor' achievement.
-#: src/common/Achievements.js:415
+#: src/common/Achievements.js:418
 #, javascript-format
 msgid "Abort a selection %x times."
 msgstr "Annulla una selezione %x volte."
 
 #. Translators: The name of the 'Select %x items.' achievement.
-#: src/common/Achievements.js:428
+#: src/common/Achievements.js:431
 #, javascript-format
 msgid "%s Pielot"
 msgstr "%s Pielot"
 
 #. Translators: The description of the '%s Pielot' achievement.
-#: src/common/Achievements.js:430
+#: src/common/Achievements.js:433
 #, javascript-format
 msgid "Select %x items."
 msgstr "Seleziona %x elementi."
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:444
+#: src/common/Achievements.js:447
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
 msgstr "%s Selettore di Gesti di Primo Livello"
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:447
+#: src/common/Achievements.js:450
 #, javascript-format
 msgid "%s Submenu Gesture-Selector"
 msgstr "%s Selettore delle Gesture del Sottomenu"
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
-#: src/common/Achievements.js:450
+#: src/common/Achievements.js:453
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
 msgstr "%s Sottomenu Selettore-Gesture"
 
 #. Translators: The description of the 'Gesture-Selector' achievement.
-#: src/common/Achievements.js:457
+#: src/common/Achievements.js:460
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
 msgstr "Seleziona %x elementi alla profondità %d in modalità di marcatura."
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:474
+#: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Toplevel Click-Selector"
 msgstr "%s Selettore di Clic di Primo Livello"
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:477
+#: src/common/Achievements.js:480
 #, javascript-format
 msgid "%s Submenu Click-Selector"
 msgstr "%s Selettore Clic del Sottomenu"
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
-#: src/common/Achievements.js:480
+#: src/common/Achievements.js:483
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
 msgstr "%s Selettore Clic del Sottomenu"
 
 #. Translators: The description of the 'Click-Selector' achievement.
-#: src/common/Achievements.js:487
+#: src/common/Achievements.js:490
 #, javascript-format
 msgid "Select %x items at depth %d with mouse clicks."
 msgstr "Seleziona %x elementi alla profondità %d con i clic del mouse."
 
 #. Translators: The name of the 'Select %x items at depth 1 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:509
+#: src/common/Achievements.js:512
 #, javascript-format
 msgid "%s Toplevel Selector"
 msgstr "%s Selettore di Primo livello"
 
 #. Translators: The name of the 'Select %x items at depth 2 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:512
+#: src/common/Achievements.js:515
 #, javascript-format
 msgid "%s Submenu Selector"
 msgstr "%s Selettore Sottomenu"
 
 #. Translators: The name of the 'Select %x items at depth 3 in less than %t
 #. milliseconds.' achievement.
-#: src/common/Achievements.js:515
+#: src/common/Achievements.js:518
 #, javascript-format
 msgid "%s Subsubmenu Selector"
 msgstr "%s Selettore sotto sottomenu"
 
 #. Translators: The description of the 'Selector' achievement.
-#: src/common/Achievements.js:527
+#: src/common/Achievements.js:530
 msgid "Select %x items at depth %d in less than %t milliseconds."
 msgstr "Seleziona %x elementi alla profondità %d in meno di %t millisecondi."
 
 #. Translators: The name of the 'Open the settings dialog %x times.'
 #. achievement.
-#: src/common/Achievements.js:547
+#: src/common/Achievements.js:550
 msgid "The Journey Is The Reward %i"
 msgstr "Il Viaggio è la Ricompensa %i"
 
 #. Translators: The description of the 'The Journey Is The Reward %i'
 #. achievement.
-#: src/common/Achievements.js:550
+#: src/common/Achievements.js:553
 #, javascript-format
 msgid "Open the settings dialog %x times."
 msgstr "Apri la finestra di dialogo delle impostazioni %x volte."
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
-#: src/common/Achievements.js:565
+#: src/common/Achievements.js:568
 msgid "Nerd Alert %i"
 msgstr "Avviso Nerd %i"
 
 #. Translators: The description of the 'Nerd Alert %i' achievement.
-#: src/common/Achievements.js:567
+#: src/common/Achievements.js:570
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
 msgstr "Apri i menu %x con l'interfaccia D-Bus."
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
-#: src/common/Achievements.js:581
+#: src/common/Achievements.js:584
 msgid "Entropie %i"
 msgstr "Entropia %i"
 
-#: src/common/Achievements.js:585
+#: src/common/Achievements.js:588
 #, javascript-format
 msgid "Generate %x random presets."
 msgstr "Genera %x preset casuali."
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
-#: src/common/Achievements.js:598
+#: src/common/Achievements.js:601
 #, javascript-format
 msgid "%s Preset Exporter"
 msgstr "%s Esportatore Preset"
 
 #. Translators: The description of the '%s Preset Exporter' achievement if
 #. only one preset needs to be exported.
-#: src/common/Achievements.js:602
+#: src/common/Achievements.js:605
 msgid "Export a custom preset."
 msgstr "Esportare un preset personalizzato."
 
 #. Translators: The description of the '%s Preset Exporter' achievement.
-#: src/common/Achievements.js:604
+#: src/common/Achievements.js:607
 #, javascript-format
 msgid "Export %x custom presets."
 msgstr "Esporta %x preset personalizzati."
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
-#: src/common/Achievements.js:617
+#: src/common/Achievements.js:620
 #, javascript-format
 msgid "%s Preset Importer"
 msgstr "%s Importatore Preset"
 
 #. Translators: The description of the '%s Preset Importer' achievement if
 #. only one preset needs to be imported.
-#: src/common/Achievements.js:621
+#: src/common/Achievements.js:624
 msgid "Import a custom preset."
 msgstr "Importa un preset personalizzato."
 
 #. Translators: The description of the '%s Preset Importer' achievement.
-#: src/common/Achievements.js:623
+#: src/common/Achievements.js:626
 #, javascript-format
 msgid "Import %x custom presets."
 msgstr "Importa %x preset personalizzati."
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
-#: src/common/Achievements.js:636
+#: src/common/Achievements.js:639
 #, javascript-format
 msgid "%s Menu Importer"
 msgstr "%s Importatore di Menu"
 
 #. Translators: The description of the '%s Menu Importer' achievement if
 #. only one menu needs to be imported.
-#: src/common/Achievements.js:640
+#: src/common/Achievements.js:643
 msgid "Import a menu configuration."
 msgstr "Importa una configurazione del menu."
 
 #. Translators: The description of the '%s Menu Importer' achievement.
-#: src/common/Achievements.js:642
+#: src/common/Achievements.js:645
 #, javascript-format
 msgid "Import %x menu configurations."
 msgstr "Importa %x configurazioni del menu."
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
-#: src/common/Achievements.js:656
+#: src/common/Achievements.js:659
 #, javascript-format
 msgid "%s Menu Exporter"
 msgstr "%s Esportatore di Menu"
 
 #. Translators: The description of the '%s Menu Exporter' achievement if
 #. only one menu needs to be exported.
-#: src/common/Achievements.js:660
+#: src/common/Achievements.js:663
 msgid "Export a menu configuration."
 msgstr "Esporta una configurazione del menu."
 
 #. Translators: The description of the '%s Menu Exporter' achievement.
-#: src/common/Achievements.js:662
+#: src/common/Achievements.js:665
 #, javascript-format
 msgid "Export %x menu configurations."
 msgstr "Esporta %x configurazioni del menu."
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
-#: src/common/Achievements.js:677
+#: src/common/Achievements.js:680
 msgid "There Should Be No More Than Twelve Items…? %i"
 msgstr "Non dovrebbero esserci più di dodici elementi ...? %i"
 
 #. Translators: The description of the 'There Should Be No More Than Twelve
 #. Items…? %i' achievement.
-#: src/common/Achievements.js:680
+#: src/common/Achievements.js:683
 #, javascript-format
 msgid "Create %x items in the menu editor."
 msgstr "Crea %x elementi nell'editor del menu."
 
 #. Translators: The name of the 'Open a preview menu %x times.' achievement.
-#: src/common/Achievements.js:694
+#: src/common/Achievements.js:697
 #, javascript-format
 msgid "%s Menu Designer"
 msgstr "%s Designer del Menu"
 
 #. Translators: The description of the '%s Menu Designer' achievement.
-#: src/common/Achievements.js:697
+#: src/common/Achievements.js:700
 #, javascript-format
 msgid "Open a preview menu %x times."
 msgstr "Apri un menu di anteprima %x volte."
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:710
+#: src/common/Achievements.js:713
 msgid "Grumpie Rookie"
 msgstr "Grumpie Rookie"
 
 #. Translators: The description of the 'Grumpie Rookie' achievement.
-#: src/common/Achievements.js:712
+#: src/common/Achievements.js:715
 #, javascript-format
 msgid "Open the tutorial menu %x times."
 msgstr "Apri il menu del tutorial %x volte."
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:724
+#: src/common/Achievements.js:727
 msgid "Bachelor Pielot"
 msgstr "Bachelor Pielot"
 
 #. Translators: The description of the 'Bachelor Pielot' achievement.
-#: src/common/Achievements.js:726
+#: src/common/Achievements.js:729
 msgid "Get all medals of the tutorial."
 msgstr "Ottieni tutte le medaglie del tutorial."
 
 #. Translators: The name of the hidden 'Delete all of your menus.' achievement.
 #. This does not support %s and %i.
-#: src/common/Achievements.js:738
+#: src/common/Achievements.js:741
 msgid "Say Good-Pie!"
 msgstr "Dì Good-Pie!"
 
 #. Translators: The description of the 'Say Good-Pie!' achievement.
-#: src/common/Achievements.js:740
+#: src/common/Achievements.js:743
 msgid "Delete all of your menus."
 msgstr "Elimina tutti i tuoi menu."
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
 #. achievement.
-#: src/common/Achievements.js:753
+#: src/common/Achievements.js:756
 msgid "That's Philanthropie!"
 msgstr "Questa è Filantropia!"
 
 #. Translators: The description of the 'That's Philanthropie!' achievement.
-#: src/common/Achievements.js:755
+#: src/common/Achievements.js:758
 msgid "Consider becoming a sponsor of Fly-Pie."
 msgstr "Considera l'idea di diventare uno sponsor di Fly-Pie."
 
-#: src/prefs/AchievementsPage.js:117
+#: src/prefs/AchievementsPage.js:120
 msgid "Do you really want to reset all statistics?"
 msgstr "Vuoi davvero reimpostare tutte le statistiche?"
 
-#: src/prefs/AchievementsPage.js:118
+#: src/prefs/AchievementsPage.js:121
 msgid "All achievements will be lost!"
 msgstr "Tutti i risultati andranno persi!"
 
-#: src/prefs/MenuEditor.js:416
+#: src/prefs/MenuEditor.js:419
 msgid "No menus configured"
 msgstr "Nessun menu configurato"
 
-#: src/prefs/MenuEditor.js:419
+#: src/prefs/MenuEditor.js:422
 msgid "Create a new menu with the button in the top right corner."
 msgstr "Crea un nuovo menu con il pulsante nell'angolo in alto a destra."
 
-#: src/prefs/MenuEditor.js:449
+#: src/prefs/MenuEditor.js:452
 msgid "Add a new item"
 msgstr "Aggiungi un nuovo elemento"
 
@@ -872,59 +872,75 @@ msgstr "Aggiungi un nuovo elemento"
 #. overview.
 #. Translators: This is shown as an in-app notification when the user
 #. attempts to drag an action in the menu editor to the menu overview.
-#: src/prefs/MenuEditor.js:786 src/prefs/MenuEditorPage.js:930
+#: src/prefs/MenuEditor.js:789 src/prefs/MenuEditorPage.js:949
 msgid "Actions cannot be turned into toplevel menus."
 msgstr "Le azioni non possono essere convertite in menù di livello superiore."
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag external stuff to the menu editor's
 #. overview.
-#: src/prefs/MenuEditor.js:806
+#: src/prefs/MenuEditor.js:809
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr ""
 "Puoi creare nuove Azioni esclusivamente all’interno dei Menu Personalizzati."
 
-#: src/prefs/ImageChooserButton.js:97
-#: resources/ui/gtk4/imageChooserButton.ui:16
-#: resources/ui/gtk3/imageChooserButton.ui:16
+#: src/prefs/PreferencesDialog.js:248 src/prefs/PreferencesDialog.js:281
+msgid "Gold Sponsors"
+msgstr ""
+
+#: src/prefs/PreferencesDialog.js:252 src/prefs/PreferencesDialog.js:285
+msgid "Silver Sponsors"
+msgstr ""
+
+#: src/prefs/PreferencesDialog.js:256 src/prefs/PreferencesDialog.js:289
+msgid "Bronze Sponsors"
+msgstr ""
+
+#: src/prefs/PreferencesDialog.js:260 src/prefs/PreferencesDialog.js:293
+msgid "Past Sponsors"
+msgstr ""
+
+#: src/prefs/ImageChooserButton.js:100
+#: resources/ui/gtk4/imageChooserButton.ui:22
+#: resources/ui/gtk3/imageChooserButton.ui:22
 msgid "(None)"
 msgstr "(Nulla)"
 
-#: src/prefs/MenuEditorPage.js:194 src/prefs/MenuEditorPage.js:264
-#: src/prefs/SettingsPage.js:263 src/prefs/SettingsPage.js:318
+#: src/prefs/MenuEditorPage.js:197 src/prefs/MenuEditorPage.js:267
+#: src/prefs/SettingsPage.js:269 src/prefs/SettingsPage.js:324
 msgid "JSON Files"
 msgstr "File JSON"
 
-#: src/prefs/MenuEditorPage.js:201 src/prefs/MenuEditorPage.js:271
-#: src/prefs/SettingsPage.js:270 src/prefs/SettingsPage.js:325
+#: src/prefs/MenuEditorPage.js:204 src/prefs/MenuEditorPage.js:274
+#: src/prefs/SettingsPage.js:276 src/prefs/SettingsPage.js:331
 msgid "All Files"
 msgstr "Tutti i File"
 
-#: src/prefs/MenuEditorPage.js:206
+#: src/prefs/MenuEditorPage.js:209
 msgid "Export"
 msgstr "Esporta"
 
-#: src/prefs/MenuEditorPage.js:235
+#: src/prefs/MenuEditorPage.js:238
 msgid "Could not export the menu configuration."
 msgstr "Impossibile esportare la configurazione del menu."
 
-#: src/prefs/MenuEditorPage.js:276
+#: src/prefs/MenuEditorPage.js:279
 msgid "Import"
 msgstr "Importa"
 
-#: src/prefs/MenuEditorPage.js:310
+#: src/prefs/MenuEditorPage.js:313
 msgid "Could not import the menu configuration."
 msgstr "Impossibile importare la configurazione del menu."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:382
+#: src/prefs/MenuEditorPage.js:385
 msgid "You should try to have no more than twelve items in your menus."
 msgstr "Dovresti provare a non avere più di dodici voci nei tuoi menu."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:385
+#: src/prefs/MenuEditorPage.js:388
 msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
@@ -934,7 +950,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:388
+#: src/prefs/MenuEditorPage.js:391
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
 msgstr ""
@@ -942,21 +958,21 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:392
+#: src/prefs/MenuEditorPage.js:395
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
 msgstr "I suggerimenti possono essere pubblicati su <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:396
+#: src/prefs/MenuEditorPage.js:399
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
 msgstr "I bug possono essere segnalati su <a href=\"%s\">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:400
+#: src/prefs/MenuEditorPage.js:403
 msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
@@ -966,7 +982,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:403
+#: src/prefs/MenuEditorPage.js:406
 msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
@@ -976,14 +992,14 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:406
+#: src/prefs/MenuEditorPage.js:409
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr ""
 "È possibile riordinare le voci di menu a sinistra tramite trascinamento."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:409
+#: src/prefs/MenuEditorPage.js:412
 #, javascript-format
 msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
@@ -994,7 +1010,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:415
+#: src/prefs/MenuEditorPage.js:418
 msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
@@ -1004,7 +1020,7 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:418
+#: src/prefs/MenuEditorPage.js:421
 msgid ""
 "On Wayland, you can copy menu items by holding the Ctrl key while dragging "
 "them to another location."
@@ -1014,14 +1030,14 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:421
+#: src/prefs/MenuEditorPage.js:424
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
 msgstr "<a href=\"%s\">Traduci Fly-Pie su Hosted Weblate</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:427
+#: src/prefs/MenuEditorPage.js:430
 #, javascript-format
 msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
@@ -1032,44 +1048,44 @@ msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
-#: src/prefs/MenuEditorPage.js:431
+#: src/prefs/MenuEditorPage.js:434
 msgid ""
 "If you cannot use a specific keyboard shortcut, you may check you system "
 "settings as it may be used already."
 msgstr ""
 
 #. Translators: The left-most item of the menu editor bread crumbs.
-#: src/prefs/MenuEditorPage.js:993
+#: src/prefs/MenuEditorPage.js:1012
 msgid "All Menus"
 msgstr "Tutti i menu"
 
-#: src/prefs/SettingsPage.js:275
+#: src/prefs/SettingsPage.js:281
 msgid "Save"
 msgstr "Salva"
 
-#: src/prefs/SettingsPage.js:330
+#: src/prefs/SettingsPage.js:336
 msgid "Load"
 msgstr "Carica"
 
-#: src/prefs/SettingsPage.js:347
+#: src/prefs/SettingsPage.js:353
 msgid "Failed to load preset!"
 msgstr "Impossibile caricare il preset!"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
-#: src/prefs/TutorialPage.js:182
+#: src/prefs/TutorialPage.js:185
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
 msgstr "<big>Ora dell'ultima selezione:<b>%d ms</b></big>"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
-#: src/prefs/TutorialPage.js:187
+#: src/prefs/TutorialPage.js:190
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
 msgstr "<big>Miglior tempo di selezione: <b>%d ms</b></big>"
 
 #. Translators: This is the name of the tutorial menu.
 #. Translators: This is the name of the default menu.
-#: src/prefs/ExampleMenu.js:27 src/extension/DefaultMenu.js:29
+#: src/prefs/ExampleMenu.js:30 src/extension/DefaultMenu.js:32
 msgid "Example Menu"
 msgstr "Menu Esempio"
 
@@ -1077,7 +1093,7 @@ msgstr "Menu Esempio"
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:66
+#: src/prefs/ExampleMenu.js:69
 msgid "Cold "
 msgstr "Freddo"
 
@@ -1085,7 +1101,7 @@ msgstr "Freddo"
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:71
+#: src/prefs/ExampleMenu.js:74
 msgid "Hot "
 msgstr "Caldo"
 
@@ -1093,7 +1109,7 @@ msgstr "Caldo"
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:76
+#: src/prefs/ExampleMenu.js:79
 msgid "Wet "
 msgstr "Bagnato"
 
@@ -1101,7 +1117,7 @@ msgstr "Bagnato"
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:81
+#: src/prefs/ExampleMenu.js:84
 msgid "Deadly "
 msgstr "Mortale "
 
@@ -1109,7 +1125,7 @@ msgstr "Mortale "
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:86
+#: src/prefs/ExampleMenu.js:89
 msgid "Smelly "
 msgstr "Puzzolente "
 
@@ -1117,7 +1133,7 @@ msgstr "Puzzolente "
 #. Chocolate Muffin". This is one of the first words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:91
+#: src/prefs/ExampleMenu.js:94
 msgid "Vegan "
 msgstr "Vegano "
 
@@ -1125,7 +1141,7 @@ msgstr "Vegano "
 #. Chocolate Muffin". This is one of the middle words. The three words are
 #. directly appended to each other; therefore the trailing space is important. You
 #. can also use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:105
+#: src/prefs/ExampleMenu.js:108
 msgid "Chocolate "
 msgstr "Cioccolato "
 
@@ -1133,7 +1149,7 @@ msgstr "Cioccolato "
 #. Chocolate Muffin". This is one of the middle words. The three words are
 #. directly appended to each other; therefore the trailing space is important. You
 #. can also use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:110
+#: src/prefs/ExampleMenu.js:113
 msgid "Cherry "
 msgstr "Ciliegia "
 
@@ -1141,7 +1157,7 @@ msgstr "Ciliegia "
 #. Chocolate Muffin". This is one of the middle words. The three words are
 #. directly appended to each other; therefore the trailing space is important. You
 #. can also use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:115
+#: src/prefs/ExampleMenu.js:118
 msgid "Garlic "
 msgstr "Aglio "
 
@@ -1149,7 +1165,7 @@ msgstr "Aglio "
 #. Chocolate Muffin". This is one of the middle words. The three words are
 #. directly appended to each other; therefore the trailing space is important. You
 #. can also use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:120
+#: src/prefs/ExampleMenu.js:123
 msgid "Apple "
 msgstr "Mela "
 
@@ -1157,7 +1173,7 @@ msgstr "Mela "
 #. Chocolate Muffin". This is one of the middle words. The three words are
 #. directly appended to each other; therefore the trailing space is important. You
 #. can also use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:125
+#: src/prefs/ExampleMenu.js:128
 msgid "Pepper "
 msgstr "Pepe "
 
@@ -1165,7 +1181,7 @@ msgstr "Pepe "
 #. Chocolate Muffin". This is one of the last words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:139
+#: src/prefs/ExampleMenu.js:142
 msgid "Pie"
 msgstr "Torta"
 
@@ -1173,7 +1189,7 @@ msgstr "Torta"
 #. Chocolate Muffin". This is one of the last words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:144
+#: src/prefs/ExampleMenu.js:147
 msgid "Cake"
 msgstr "Torta"
 
@@ -1181,7 +1197,7 @@ msgstr "Torta"
 #. Chocolate Muffin". This is one of the last words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:149
+#: src/prefs/ExampleMenu.js:152
 msgid "Muffin"
 msgstr "Muffin"
 
@@ -1189,7 +1205,7 @@ msgstr "Muffin"
 #. Chocolate Muffin". This is one of the last words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:154
+#: src/prefs/ExampleMenu.js:157
 msgid "Doughnut"
 msgstr "Ciambella"
 
@@ -1197,288 +1213,230 @@ msgstr "Ciambella"
 #. Chocolate Muffin". This is one of the last words. The three words are directly
 #. appended to each other; therefore the trailing space is important. You can also
 #. use hyphens if appropriate.
-#: src/prefs/ExampleMenu.js:159
+#: src/prefs/ExampleMenu.js:162
 msgid "Cookie"
 msgstr "Biscotto"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:37
+#: src/extension/DefaultMenu.js:40
 msgid "Sound"
 msgstr "Suono"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:42
+#: src/extension/DefaultMenu.js:45
 msgid "Mute"
 msgstr "Muto"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:50
+#: src/extension/DefaultMenu.js:53
 msgid "Play / Pause"
 msgstr "Avvia / Pausa"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:58
+#: src/extension/DefaultMenu.js:61
 msgid "Next Title"
 msgstr "Titolo Successivo"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:66
+#: src/extension/DefaultMenu.js:69
 msgid "Previous Title"
 msgstr "Titolo Precedente"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:87
+#: src/extension/DefaultMenu.js:90
 msgid "Maximize Window"
 msgstr "Ingrandisci Finestra"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:95
+#: src/extension/DefaultMenu.js:98
 msgid "Fly-Pie Settings"
 msgstr "Impostazioni di Fly-Pie"
 
 #. Translators: This is an entry of the default menu.
-#: src/extension/DefaultMenu.js:103
+#: src/extension/DefaultMenu.js:106
 msgid "Close Window"
 msgstr "Chiudi Finestra"
 
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
-#: src/extension/DefaultMenu.js:135
+#: src/extension/DefaultMenu.js:138
 msgid "Next Workspace"
 msgstr "Workspace successivo"
 
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
-#: src/extension/DefaultMenu.js:144
+#: src/extension/DefaultMenu.js:147
 msgid "Previous Workspace"
 msgstr "Workspace precedente"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:155
+#: src/extension/DefaultMenu.js:158
 msgid "Switch Workspace"
 msgstr "Cambia Workspace"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:160
+#: src/extension/DefaultMenu.js:163
 msgid "Go Up"
 msgstr "Vai su"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:168
+#: src/extension/DefaultMenu.js:171
 msgid "Go Down"
 msgstr "Vai giù"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:181
+#: src/extension/DefaultMenu.js:184
 msgid "Move Window"
 msgstr "Muovi la finestra"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:186
+#: src/extension/DefaultMenu.js:189
 msgid "Move Window Up"
 msgstr "Sposta la finestra su"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
-#: src/extension/DefaultMenu.js:194
+#: src/extension/DefaultMenu.js:197
 msgid "Move Window Down"
 msgstr "Sposta la finestra giù"
 
-#: src/extension/Background.js:93
+#: src/extension/Background.js:91
 msgid "Close"
 msgstr "Chiudi"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
-#: src/extension/Background.js:99
+#: src/extension/Background.js:97
 msgid "Flip Side"
 msgstr "Cambia Lato"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:212
+#: src/extension/Daemon.js:215
 msgid "Fly-Pie Level Up!"
 msgstr "Fly-Pie Salito di Livello!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:214
+#: src/extension/Daemon.js:217
 msgid "You reached level %i!"
 msgstr "Hai raggiunto il livello %i!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:234
+#: src/extension/Daemon.js:237
 msgid "Fly-Pie Achievement Completed!"
 msgstr "Obiettivo Fly-Pie completato!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:236
+#: src/extension/Daemon.js:239
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
 msgstr "Hai completato l'obiettivo \"%s\"!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:598
+#: src/extension/Daemon.js:601
 msgid "Show Achievements"
 msgstr "Mostra Risultati"
 
-#: resources/ui/gtk4/copyValueButton.ui:6
-#: resources/ui/gtk3/copyValueButton.ui:6
+#: resources/ui/common/menus.ui:13
+msgid "Visit Homepage"
+msgstr ""
+
+#: resources/ui/common/menus.ui:17
+msgid "View Changelog"
+msgstr ""
+
+#: resources/ui/common/menus.ui:23
+msgid "Report a Bug"
+msgstr ""
+
+#: resources/ui/common/menus.ui:27
+msgid "Translate"
+msgstr ""
+
+#: resources/ui/common/menus.ui:31
+msgid "Donate"
+msgstr ""
+
+#: resources/ui/common/menus.ui:48
+msgid "About Fly-Pie"
+msgstr ""
+
+#: resources/ui/gtk4/copyValueButton.ui:12
+#: resources/ui/gtk3/copyValueButton.ui:12
 msgid "Copy left value to right side"
 msgstr "Copia il valore sinistro sul lato destro"
 
-#: resources/ui/gtk4/iconSelectDialog.ui:19
-#: resources/ui/gtk3/iconSelectDialog.ui:19
+#: resources/ui/gtk4/iconSelectDialog.ui:25
+#: resources/ui/gtk3/iconSelectDialog.ui:25
 msgid "Select Icon"
 msgstr "Seleziona icona"
 
 #. Page title of the icon-select-dialog.
-#: resources/ui/gtk4/iconSelectDialog.ui:44
-#: resources/ui/gtk3/iconSelectDialog.ui:100
+#: resources/ui/gtk4/iconSelectDialog.ui:50
+#: resources/ui/gtk3/iconSelectDialog.ui:106
 msgid "Icon Theme"
 msgstr "Tema icona"
 
 #. Page title of the icon-select-dialog.
-#: resources/ui/gtk4/iconSelectDialog.ui:106
-#: resources/ui/gtk3/iconSelectDialog.ui:111
+#: resources/ui/gtk4/iconSelectDialog.ui:112
+#: resources/ui/gtk3/iconSelectDialog.ui:117
 msgid "Custom Icon"
 msgstr "Icona personalizzata"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:19 resources/ui/gtk3/settings.ui:19
+#: resources/ui/gtk4/settings.ui:25 resources/ui/gtk3/settings.ui:25
 msgid "Linear"
 msgstr "Lineare"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:23 resources/ui/gtk3/settings.ui:23
+#: resources/ui/gtk4/settings.ui:29 resources/ui/gtk3/settings.ui:29
 msgid "Ease"
 msgstr "Ease"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:27 resources/ui/gtk3/settings.ui:27
+#: resources/ui/gtk4/settings.ui:33 resources/ui/gtk3/settings.ui:33
 msgid "Ease-In"
 msgstr "Ease-In"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:31 resources/ui/gtk3/settings.ui:31
+#: resources/ui/gtk4/settings.ui:37 resources/ui/gtk3/settings.ui:37
 msgid "Ease-Out"
 msgstr "Ease-Out"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:35 resources/ui/gtk3/settings.ui:35
+#: resources/ui/gtk4/settings.ui:41 resources/ui/gtk3/settings.ui:41
 msgid "Ease-In-Out"
 msgstr "Ease-In-Out"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:39 resources/ui/gtk3/settings.ui:39
+#: resources/ui/gtk4/settings.ui:45 resources/ui/gtk3/settings.ui:45
 msgid "Ease-In-Quad"
 msgstr "Ease-In-Quad"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:43 resources/ui/gtk3/settings.ui:43
+#: resources/ui/gtk4/settings.ui:49 resources/ui/gtk3/settings.ui:49
 msgid "Ease-Out-Quad"
 msgstr "Ease-Out-Quad"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:47 resources/ui/gtk3/settings.ui:47
+#: resources/ui/gtk4/settings.ui:53 resources/ui/gtk3/settings.ui:53
 msgid "Ease-In-Out-Quad"
 msgstr "Ease-In-Out-Quad"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:51 resources/ui/gtk3/settings.ui:51
+#: resources/ui/gtk4/settings.ui:57 resources/ui/gtk3/settings.ui:57
 msgid "Ease-In-Back"
 msgstr "Ease-In-Back"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:55 resources/ui/gtk3/settings.ui:55
+#: resources/ui/gtk4/settings.ui:61 resources/ui/gtk3/settings.ui:61
 msgid "Ease-Out-Back"
 msgstr "Ease-Out-Back"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
-#: resources/ui/gtk4/settings.ui:59 resources/ui/gtk3/settings.ui:59
+#: resources/ui/gtk4/settings.ui:65 resources/ui/gtk3/settings.ui:65
 msgid "Ease-In-Out-Back"
 msgstr "Ease-In-Out-Back"
 
-#: resources/ui/gtk4/settings.ui:404 resources/ui/gtk3/settings.ui:441
-msgid "About"
-msgstr "Informazioni"
-
-#: resources/ui/gtk4/settings.ui:423 resources/ui/gtk3/settings.ui:420
-msgid ""
-"Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
-"changelog.md\">Changelog</a>."
-msgstr ""
-"Leggi il <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
-"changelog.md\">registro dei cambiamenti</a>."
-
-#: resources/ui/gtk4/settings.ui:431 resources/ui/gtk3/settings.ui:428
-msgid ""
-"Published under the MIT License.\n"
-"Visit <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie's Homepage</"
-"a> for details.\n"
-"\n"
-"Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free to "
-"report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
-"\">Github</a>."
-msgstr ""
-"Pubblicato con licenza MIT.\n"
-"Visita <a href=\"https://github.com/Schneegans/Fly-Pie\">Homepage di Fly-"
-"Pie</a> per dettagli.\n"
-"\n"
-"Ogni volta che incontri un 🐞️ bug o hai 🎉️ richieste di nuove funzionalità, "
-"non esitare a segnalarlo su <a href=\"https://github.com/Schneegans/Fly-Pie/"
-"issues\">Github</a>."
-
-#: resources/ui/gtk4/settings.ui:448 resources/ui/gtk3/settings.ui:529
-msgid "Credits"
-msgstr "Crediti"
-
-#: resources/ui/gtk4/settings.ui:461 resources/ui/gtk3/settings.ui:456
-msgid "Created by"
-msgstr "Creato da"
-
-#: resources/ui/gtk4/settings.ui:485 resources/ui/gtk3/settings.ui:480
-msgid "Translated by"
-msgstr "Tradotto da"
-
-#: resources/ui/gtk4/settings.ui:509 resources/ui/gtk3/settings.ui:504
-msgid "Artwork by"
-msgstr "Opera di"
-
-#: resources/ui/gtk4/settings.ui:538 resources/ui/gtk3/settings.ui:658
-msgid "Sponsors"
-msgstr "Sponsor"
-
-#: resources/ui/gtk4/settings.ui:555 resources/ui/gtk3/settings.ui:548
-msgid "🥇️ Gold Sponsors"
-msgstr "🥇️ Sponsor d'oro"
-
-#: resources/ui/gtk4/settings.ui:567 resources/ui/gtk3/settings.ui:560
-msgid "🥈️ Silver Sponsors"
-msgstr "🥈️ Sponsor d'argento"
-
-#: resources/ui/gtk4/settings.ui:579 resources/ui/gtk3/settings.ui:572
-msgid "🥉️ Bronze Sponsors"
-msgstr "🥉️ Sponsor di bronzo"
-
-#: resources/ui/gtk4/settings.ui:591 resources/ui/gtk3/settings.ui:584
-msgid "🏅️ Past Sponsors"
-msgstr "Sponsors passati"
-
-#. Shown in the about-popover if there is no sponsor for a given tier
-#: resources/ui/gtk4/settings.ui:603 resources/ui/gtk4/settings.ui:616
-#: resources/ui/gtk4/settings.ui:629 resources/ui/gtk4/settings.ui:642
-#: resources/ui/gtk3/settings.ui:596 resources/ui/gtk3/settings.ui:609
-#: resources/ui/gtk3/settings.ui:622 resources/ui/gtk3/settings.ui:635
-msgid "- none -"
-msgstr "- nessuno -"
-
-#: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:649
-msgid ""
-"💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
-"sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
-msgstr ""
-"💕️ Vuoi dimostrare di amare Fly-Pie? <a href=\"https://github.com/sponsors/"
-"Schneegans\">Diventa uno Sponsor a partire da 1$ al mese!</a>"
-
 #. Heading in the add-new-item-popover of the menu editor.
-#: resources/ui/gtk4/settings.ui:707 resources/ui/gtk3/settings.ui:702
+#: resources/ui/gtk4/settings.ui:415 resources/ui/gtk3/settings.ui:416
 msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
@@ -1487,7 +1445,7 @@ msgstr ""
 "Possono essere sottomenu o menu di primo livello."
 
 #. Heading in the add-new-item-popover of the menu editor.
-#: resources/ui/gtk4/settings.ui:731 resources/ui/gtk3/settings.ui:726
+#: resources/ui/gtk4/settings.ui:439 resources/ui/gtk3/settings.ui:440
 msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
@@ -1496,29 +1454,29 @@ msgstr ""
 "Può essere aggiunto a menu personalizzati."
 
 #. Tooltip of the generate-a-random-preset button
-#: resources/ui/gtk4/settings.ui:801 resources/ui/gtk3/settings.ui:796
+#: resources/ui/gtk4/settings.ui:509 resources/ui/gtk3/settings.ui:510
 msgid "Initialize most settings to random values."
 msgstr "Inizializza alcune impostazioni a valori casuali."
 
-#: resources/ui/gtk4/settings.ui:813 resources/ui/gtk3/settings.ui:808
+#: resources/ui/gtk4/settings.ui:521 resources/ui/gtk3/settings.ui:522
 msgid "Generate Random Preset"
 msgstr "Genera un predefinito casuale"
 
-#: resources/ui/gtk4/settings.ui:844 resources/ui/gtk3/settings.ui:842
+#: resources/ui/gtk4/settings.ui:552 resources/ui/gtk3/settings.ui:556
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
 msgstr "Fly-Pie richiede che le animazioni di GNOME Shell siano abilitate."
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
-#: resources/ui/gtk4/settings.ui:849 resources/ui/gtk3/settings.ui:852
+#: resources/ui/gtk4/settings.ui:557 resources/ui/gtk3/settings.ui:566
 msgid "Enable Animations"
 msgstr "Abilita animazioni"
 
 #. Caption of the tutorial page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:901 resources/ui/gtk3/settings.ui:1604
+#: resources/ui/gtk4/settings.ui:608 resources/ui/gtk3/settings.ui:1319
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#: resources/ui/gtk4/settings.ui:935 resources/ui/gtk3/settings.ui:939
+#: resources/ui/gtk4/settings.ui:642 resources/ui/gtk3/settings.ui:654
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
@@ -1529,7 +1487,7 @@ msgstr ""
 "insegnerà come utilizzare Fly-Pie in modo più efficiente. Fare clic sul "
 "pulsante grande in basso per aprire un menu di prova!"
 
-#: resources/ui/gtk4/settings.ui:946 resources/ui/gtk3/settings.ui:950
+#: resources/ui/gtk4/settings.ui:653 resources/ui/gtk3/settings.ui:665
 msgid ""
 "• Use your <b>left mouse button to select items</b>.\n"
 "• Use your <b>right mouse button to close the menu</b>.\n"
@@ -1545,20 +1503,20 @@ msgstr ""
 "Quando ti senti a tuo agio, fai clic su <b>avanti</b> per ulteriori dettagli!"
 
 #. The text of the big tutorial button.
-#: resources/ui/gtk4/settings.ui:966 resources/ui/gtk4/settings.ui:1049
-#: resources/ui/gtk4/settings.ui:1135 resources/ui/gtk4/settings.ui:1280
-#: resources/ui/gtk4/settings.ui:1366 resources/ui/gtk3/settings.ui:970
-#: resources/ui/gtk3/settings.ui:1050 resources/ui/gtk3/settings.ui:1134
-#: resources/ui/gtk3/settings.ui:1276 resources/ui/gtk3/settings.ui:1360
+#: resources/ui/gtk4/settings.ui:673 resources/ui/gtk4/settings.ui:756
+#: resources/ui/gtk4/settings.ui:842 resources/ui/gtk4/settings.ui:987
+#: resources/ui/gtk4/settings.ui:1073 resources/ui/gtk3/settings.ui:685
+#: resources/ui/gtk3/settings.ui:765 resources/ui/gtk3/settings.ui:849
+#: resources/ui/gtk3/settings.ui:991 resources/ui/gtk3/settings.ui:1075
 msgid "<big><b>Open the example menu!</b></big>"
 msgstr "<big><b>Apri il menu di esempio!</b></big>"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:998 resources/ui/gtk3/settings.ui:1000
+#: resources/ui/gtk4/settings.ui:705 resources/ui/gtk3/settings.ui:715
 msgid "You can click anywhere!"
 msgstr "Puoi fare clic ovunque!"
 
-#: resources/ui/gtk4/settings.ui:1017 resources/ui/gtk3/settings.ui:1018
+#: resources/ui/gtk4/settings.ui:724 resources/ui/gtk3/settings.ui:733
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
@@ -1567,7 +1525,7 @@ msgstr ""
 "schermo fintanto che il puntatore del mouse rimane nella sezione "
 "dell'elemento."
 
-#: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1030
+#: resources/ui/gtk4/settings.ui:736 resources/ui/gtk3/settings.ui:745
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -1586,11 +1544,11 @@ msgstr ""
 "Fai clic su <b>avanti</b> per una sessione di pratica!"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:1081 resources/ui/gtk3/settings.ui:1080
+#: resources/ui/gtk4/settings.ui:788 resources/ui/gtk3/settings.ui:795
 msgid "Practice Session I"
 msgstr "Sessione Pratica I"
 
-#: resources/ui/gtk4/settings.ui:1091 resources/ui/gtk3/settings.ui:1090
+#: resources/ui/gtk4/settings.ui:798 resources/ui/gtk3/settings.ui:805
 #, javascript-format
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
@@ -1607,27 +1565,27 @@ msgstr ""
 "conoscere la modalità di marcatura di Fly-Pie!"
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1164 resources/ui/gtk3/settings.ui:1163
+#: resources/ui/gtk4/settings.ui:871 resources/ui/gtk3/settings.ui:878
 msgid "Unlocked at less than 3000 ms"
 msgstr "Sbloccato a meno di 3000 ms"
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1184 resources/ui/gtk3/settings.ui:1183
+#: resources/ui/gtk4/settings.ui:891 resources/ui/gtk3/settings.ui:898
 msgid "Unlocked at less than 2000 ms"
 msgstr "Sbloccato a meno di 2000 ms"
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1205 resources/ui/gtk4/settings.ui:1394
-#: resources/ui/gtk3/settings.ui:1204 resources/ui/gtk3/settings.ui:1388
+#: resources/ui/gtk4/settings.ui:912 resources/ui/gtk4/settings.ui:1101
+#: resources/ui/gtk3/settings.ui:919 resources/ui/gtk3/settings.ui:1103
 msgid "Unlocked at less than 1000 ms"
 msgstr "Sbloccato a meno di 1000 ms"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:1232 resources/ui/gtk3/settings.ui:1229
+#: resources/ui/gtk4/settings.ui:939 resources/ui/gtk3/settings.ui:944
 msgid "The Marking Mode of Fly-Pie"
 msgstr "La modalità di marcatura di Fly-Pie"
 
-#: resources/ui/gtk4/settings.ui:1251 resources/ui/gtk3/settings.ui:1247
+#: resources/ui/gtk4/settings.ui:958 resources/ui/gtk3/settings.ui:962
 msgid ""
 "The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
@@ -1638,7 +1596,7 @@ msgstr ""
 "fare clic e trascinare un elemento. Non appena metti in pausa il "
 "trascinamento o effettui una svolta, l'elemento verrà selezionato."
 
-#: resources/ui/gtk4/settings.ui:1262 resources/ui/gtk3/settings.ui:1258
+#: resources/ui/gtk4/settings.ui:969 resources/ui/gtk3/settings.ui:973
 msgid ""
 "Try remembering the path to an item. Open the menu and <b>draw the path with "
 "your mouse</b>. You can start with individual segments of the path, put you "
@@ -1657,11 +1615,11 @@ msgstr ""
 "espressive a zig-zag!</b>"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:1312 resources/ui/gtk3/settings.ui:1306
+#: resources/ui/gtk4/settings.ui:1019 resources/ui/gtk3/settings.ui:1021
 msgid "Practice Session II"
 msgstr "Sessione Pratica II"
 
-#: resources/ui/gtk4/settings.ui:1322 resources/ui/gtk3/settings.ui:1316
+#: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1031
 #, javascript-format
 msgid ""
 "Again, you should select \"%s\" as quickly as possible. However, as you now "
@@ -1679,22 +1637,22 @@ msgstr ""
 "apprendere alcuni suggerimenti e trucchi finali!"
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1414 resources/ui/gtk3/settings.ui:1408
+#: resources/ui/gtk4/settings.ui:1121 resources/ui/gtk3/settings.ui:1123
 msgid "Unlocked at less than 750 ms"
 msgstr "Sbloccato in meno di 750 ms"
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1435 resources/ui/gtk3/settings.ui:1429
+#: resources/ui/gtk4/settings.ui:1142 resources/ui/gtk3/settings.ui:1144
 msgid "Unlocked at less than 500 ms"
 msgstr "Sbloccato in meno di 500 ms"
 
 #. The user finished the tutorial. Yay!
-#: resources/ui/gtk4/settings.ui:1469 resources/ui/gtk3/settings.ui:1461
+#: resources/ui/gtk4/settings.ui:1176 resources/ui/gtk3/settings.ui:1176
 msgid "Congratulations!"
 msgstr "Congratulazioni!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
-#: resources/ui/gtk4/settings.ui:1481 resources/ui/gtk3/settings.ui:1473
+#: resources/ui/gtk4/settings.ui:1188 resources/ui/gtk3/settings.ui:1188
 msgid ""
 "Congratulations! If you managed to unlock most of the medals, you will be "
 "using Fly-Pie like a master Pielot!\n"
@@ -1728,172 +1686,176 @@ msgstr ""
 "Schneegans/Fly-Pie/issues\">Github</a>."
 
 #. Button for tutorial navigation. Goes back one page.
-#: resources/ui/gtk4/settings.ui:1526 resources/ui/gtk3/settings.ui:1519
+#: resources/ui/gtk4/settings.ui:1233 resources/ui/gtk3/settings.ui:1234
 msgid "Previous"
 msgstr "Precedente"
 
 #. Button for tutorial navigation. Goes to the next page.
-#: resources/ui/gtk4/settings.ui:1583 resources/ui/gtk3/settings.ui:1576
+#: resources/ui/gtk4/settings.ui:1290 resources/ui/gtk3/settings.ui:1291
 msgid "Next"
 msgstr "Successivo"
 
 #. Caption of the settings page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:1619 resources/ui/gtk3/settings.ui:4646
+#: resources/ui/gtk4/settings.ui:1326 resources/ui/gtk3/settings.ui:4426
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: resources/ui/gtk4/settings.ui:1652 resources/ui/gtk4/settings.ui:1849
-#: resources/ui/gtk3/settings.ui:1644 resources/ui/gtk3/settings.ui:1841
+#: resources/ui/gtk4/settings.ui:1359 resources/ui/gtk4/settings.ui:1578
+#: resources/ui/gtk3/settings.ui:1359 resources/ui/gtk3/settings.ui:1578
 msgid "Global Appearance Settings"
 msgstr "Impostazioni di aspetto globale"
 
-#: resources/ui/gtk4/settings.ui:1662 resources/ui/gtk3/settings.ui:1654
+#: resources/ui/gtk4/settings.ui:1369 resources/ui/gtk3/settings.ui:1369
 msgid "These settings affect all menu items."
 msgstr "Queste impostazioni influiscono su tutte le voci di menu."
 
-#: resources/ui/gtk4/settings.ui:1680 resources/ui/gtk3/settings.ui:1672
+#: resources/ui/gtk4/settings.ui:1387 resources/ui/gtk3/settings.ui:1387
 msgid "Animation Duration"
 msgstr "Durata Animazione"
 
-#: resources/ui/gtk4/settings.ui:1694 resources/ui/gtk3/settings.ui:1686
+#: resources/ui/gtk4/settings.ui:1401 resources/ui/gtk3/settings.ui:1401
 msgid "Global Scaling"
 msgstr "Scala Globale"
 
 #. Please keep this short!
-#: resources/ui/gtk4/settings.ui:1704 resources/ui/gtk3/settings.ui:1696
+#: resources/ui/gtk4/settings.ui:1411 resources/ui/gtk3/settings.ui:1411
 msgid "Independent of the preset."
 msgstr "Indipendentemente dal predefinito selezionato."
 
-#: resources/ui/gtk4/settings.ui:1754 resources/ui/gtk3/settings.ui:1746
-msgid "Font"
-msgstr "Font"
-
-#: resources/ui/gtk4/settings.ui:1764 resources/ui/gtk3/settings.ui:1756
-msgid "Text Color"
-msgstr "Colore Testo"
-
-#: resources/ui/gtk4/settings.ui:1775 resources/ui/gtk4/settings.ui:2384
-#: resources/ui/gtk4/settings.ui:3079 resources/ui/gtk4/settings.ui:3311
-#: resources/ui/gtk3/settings.ui:1767 resources/ui/gtk3/settings.ui:2371
-#: resources/ui/gtk3/settings.ui:3061 resources/ui/gtk3/settings.ui:3277
+#: resources/ui/gtk4/settings.ui:1462 resources/ui/gtk4/settings.ui:2113
+#: resources/ui/gtk4/settings.ui:2808 resources/ui/gtk4/settings.ui:3040
+#: resources/ui/gtk3/settings.ui:1462 resources/ui/gtk3/settings.ui:2108
+#: resources/ui/gtk3/settings.ui:2798 resources/ui/gtk3/settings.ui:3014
 msgid "Background Color"
 msgstr "Colore Sfondo"
 
-#: resources/ui/gtk4/settings.ui:1837 resources/ui/gtk3/settings.ui:1829
+#: resources/ui/gtk4/settings.ui:1472 resources/ui/gtk3/settings.ui:1472
+msgid "Font"
+msgstr "Font"
+
+#: resources/ui/gtk4/settings.ui:1482 resources/ui/gtk3/settings.ui:1482
+msgid "Label Font"
+msgstr ""
+
+#: resources/ui/gtk4/settings.ui:1492 resources/ui/gtk3/settings.ui:1492
+msgid "Text Color"
+msgstr "Colore Testo"
+
+#: resources/ui/gtk4/settings.ui:1566 resources/ui/gtk3/settings.ui:1566
 msgid "Animation Mode"
 msgstr "Modalità di animazione"
 
-#: resources/ui/gtk4/settings.ui:1878 resources/ui/gtk4/settings.ui:2483
-#: resources/ui/gtk3/settings.ui:1865 resources/ui/gtk3/settings.ui:2465
+#: resources/ui/gtk4/settings.ui:1607 resources/ui/gtk4/settings.ui:2212
+#: resources/ui/gtk3/settings.ui:1602 resources/ui/gtk3/settings.ui:2202
 msgid "Center Appearance"
 msgstr "Aspetto centrale"
 
-#: resources/ui/gtk4/settings.ui:1888 resources/ui/gtk3/settings.ui:1875
+#: resources/ui/gtk4/settings.ui:1617 resources/ui/gtk3/settings.ui:1612
 msgid "The center element shows the currently hovered child's name."
 msgstr "L'elemento centrale mostra il nome del figlio attualmente attivo."
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:1904 resources/ui/gtk3/settings.ui:1891
+#: resources/ui/gtk4/settings.ui:1633 resources/ui/gtk3/settings.ui:1628
 msgid "With Hovered Child"
 msgstr "Con figlio attivo"
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:1917 resources/ui/gtk3/settings.ui:1904
+#: resources/ui/gtk4/settings.ui:1646 resources/ui/gtk3/settings.ui:1641
 msgid "Without Hovered Child"
 msgstr "Senza figlio attivo"
 
-#: resources/ui/gtk4/settings.ui:1947 resources/ui/gtk4/settings.ui:2873
-#: resources/ui/gtk4/settings.ui:3424 resources/ui/gtk3/settings.ui:1934
-#: resources/ui/gtk3/settings.ui:2855 resources/ui/gtk3/settings.ui:3394
+#: resources/ui/gtk4/settings.ui:1676 resources/ui/gtk4/settings.ui:2602
+#: resources/ui/gtk4/settings.ui:3153 resources/ui/gtk3/settings.ui:1671
+#: resources/ui/gtk3/settings.ui:2592 resources/ui/gtk3/settings.ui:3131
 msgid "Size"
 msgstr "Dimensione"
 
-#: resources/ui/gtk4/settings.ui:1998 resources/ui/gtk4/settings.ui:2049
-#: resources/ui/gtk4/settings.ui:2201 resources/ui/gtk4/settings.ui:2252
-#: resources/ui/gtk4/settings.ui:2622 resources/ui/gtk4/settings.ui:2683
-#: resources/ui/gtk4/settings.ui:2776 resources/ui/gtk4/settings.ui:2847
-#: resources/ui/gtk3/settings.ui:1985 resources/ui/gtk3/settings.ui:2036
-#: resources/ui/gtk3/settings.ui:2192 resources/ui/gtk3/settings.ui:2243
-#: resources/ui/gtk3/settings.ui:2601 resources/ui/gtk3/settings.ui:2662
-#: resources/ui/gtk3/settings.ui:2758 resources/ui/gtk3/settings.ui:2829
+#: resources/ui/gtk4/settings.ui:1727 resources/ui/gtk4/settings.ui:1778
+#: resources/ui/gtk4/settings.ui:1930 resources/ui/gtk4/settings.ui:1981
+#: resources/ui/gtk4/settings.ui:2351 resources/ui/gtk4/settings.ui:2412
+#: resources/ui/gtk4/settings.ui:2505 resources/ui/gtk4/settings.ui:2576
+#: resources/ui/gtk3/settings.ui:1722 resources/ui/gtk3/settings.ui:1773
+#: resources/ui/gtk3/settings.ui:1929 resources/ui/gtk3/settings.ui:1980
+#: resources/ui/gtk3/settings.ui:2338 resources/ui/gtk3/settings.ui:2399
+#: resources/ui/gtk3/settings.ui:2495 resources/ui/gtk3/settings.ui:2566
 msgid "Saturation"
 msgstr "Saturazione"
 
-#: resources/ui/gtk4/settings.ui:2015 resources/ui/gtk4/settings.ui:2059
-#: resources/ui/gtk4/settings.ui:2218 resources/ui/gtk4/settings.ui:2262
-#: resources/ui/gtk4/settings.ui:2639 resources/ui/gtk4/settings.ui:2673
-#: resources/ui/gtk4/settings.ui:2793 resources/ui/gtk4/settings.ui:2837
-#: resources/ui/gtk3/settings.ui:2002 resources/ui/gtk3/settings.ui:2046
-#: resources/ui/gtk3/settings.ui:2209 resources/ui/gtk3/settings.ui:2253
-#: resources/ui/gtk3/settings.ui:2618 resources/ui/gtk3/settings.ui:2652
-#: resources/ui/gtk3/settings.ui:2775 resources/ui/gtk3/settings.ui:2819
+#: resources/ui/gtk4/settings.ui:1744 resources/ui/gtk4/settings.ui:1788
+#: resources/ui/gtk4/settings.ui:1947 resources/ui/gtk4/settings.ui:1991
+#: resources/ui/gtk4/settings.ui:2368 resources/ui/gtk4/settings.ui:2402
+#: resources/ui/gtk4/settings.ui:2522 resources/ui/gtk4/settings.ui:2566
+#: resources/ui/gtk3/settings.ui:1739 resources/ui/gtk3/settings.ui:1783
+#: resources/ui/gtk3/settings.ui:1946 resources/ui/gtk3/settings.ui:1990
+#: resources/ui/gtk3/settings.ui:2355 resources/ui/gtk3/settings.ui:2389
+#: resources/ui/gtk3/settings.ui:2512 resources/ui/gtk3/settings.ui:2556
 msgid "Luminance"
 msgstr "Luminanza"
 
-#: resources/ui/gtk4/settings.ui:2032 resources/ui/gtk4/settings.ui:2069
-#: resources/ui/gtk4/settings.ui:2235 resources/ui/gtk4/settings.ui:2272
-#: resources/ui/gtk4/settings.ui:2656 resources/ui/gtk4/settings.ui:2693
-#: resources/ui/gtk4/settings.ui:2810 resources/ui/gtk4/settings.ui:2827
-#: resources/ui/gtk3/settings.ui:2019 resources/ui/gtk3/settings.ui:2056
-#: resources/ui/gtk3/settings.ui:2226 resources/ui/gtk3/settings.ui:2263
-#: resources/ui/gtk3/settings.ui:2635 resources/ui/gtk3/settings.ui:2672
-#: resources/ui/gtk3/settings.ui:2792 resources/ui/gtk3/settings.ui:2809
+#: resources/ui/gtk4/settings.ui:1761 resources/ui/gtk4/settings.ui:1798
+#: resources/ui/gtk4/settings.ui:1964 resources/ui/gtk4/settings.ui:2001
+#: resources/ui/gtk4/settings.ui:2385 resources/ui/gtk4/settings.ui:2422
+#: resources/ui/gtk4/settings.ui:2539 resources/ui/gtk4/settings.ui:2556
+#: resources/ui/gtk3/settings.ui:1756 resources/ui/gtk3/settings.ui:1793
+#: resources/ui/gtk3/settings.ui:1963 resources/ui/gtk3/settings.ui:2000
+#: resources/ui/gtk3/settings.ui:2372 resources/ui/gtk3/settings.ui:2409
+#: resources/ui/gtk3/settings.ui:2529 resources/ui/gtk3/settings.ui:2546
 msgid "Opacity"
 msgstr "Opacità"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
-#: resources/ui/gtk4/settings.ui:2090 resources/ui/gtk4/settings.ui:2154
-#: resources/ui/gtk4/settings.ui:2568 resources/ui/gtk4/settings.ui:2722
-#: resources/ui/gtk4/settings.ui:3325 resources/ui/gtk4/settings.ui:3376
-#: resources/ui/gtk3/settings.ui:2078 resources/ui/gtk3/settings.ui:2144
-#: resources/ui/gtk3/settings.ui:2545 resources/ui/gtk3/settings.ui:2702
-#: resources/ui/gtk3/settings.ui:3292 resources/ui/gtk3/settings.ui:3345
+#: resources/ui/gtk4/settings.ui:1819 resources/ui/gtk4/settings.ui:1883
+#: resources/ui/gtk4/settings.ui:2297 resources/ui/gtk4/settings.ui:2451
+#: resources/ui/gtk4/settings.ui:3054 resources/ui/gtk4/settings.ui:3105
+#: resources/ui/gtk3/settings.ui:1815 resources/ui/gtk3/settings.ui:1881
+#: resources/ui/gtk3/settings.ui:2282 resources/ui/gtk3/settings.ui:2439
+#: resources/ui/gtk3/settings.ui:3029 resources/ui/gtk3/settings.ui:3082
 msgid "Fixed"
 msgstr "Fisso"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
-#: resources/ui/gtk4/settings.ui:2097 resources/ui/gtk4/settings.ui:2161
-#: resources/ui/gtk4/settings.ui:2575 resources/ui/gtk4/settings.ui:2729
-#: resources/ui/gtk3/settings.ui:2086 resources/ui/gtk3/settings.ui:2152
-#: resources/ui/gtk3/settings.ui:2553 resources/ui/gtk3/settings.ui:2710
+#: resources/ui/gtk4/settings.ui:1826 resources/ui/gtk4/settings.ui:1890
+#: resources/ui/gtk4/settings.ui:2304 resources/ui/gtk4/settings.ui:2458
+#: resources/ui/gtk3/settings.ui:1823 resources/ui/gtk3/settings.ui:1889
+#: resources/ui/gtk3/settings.ui:2290 resources/ui/gtk3/settings.ui:2447
 msgid "Auto"
 msgstr "Automatico"
 
-#: resources/ui/gtk4/settings.ui:2330 resources/ui/gtk4/settings.ui:3036
-#: resources/ui/gtk3/settings.ui:2321 resources/ui/gtk3/settings.ui:3018
+#: resources/ui/gtk4/settings.ui:2059 resources/ui/gtk4/settings.ui:2765
+#: resources/ui/gtk3/settings.ui:2058 resources/ui/gtk3/settings.ui:2755
 msgid "Icon Opacity"
 msgstr "Opacità dell'icona"
 
-#: resources/ui/gtk4/settings.ui:2373 resources/ui/gtk4/settings.ui:3130
-#: resources/ui/gtk3/settings.ui:2360 resources/ui/gtk3/settings.ui:3107
+#: resources/ui/gtk4/settings.ui:2102 resources/ui/gtk4/settings.ui:2859
+#: resources/ui/gtk3/settings.ui:2097 resources/ui/gtk3/settings.ui:2844
 msgid "Icon Scale"
 msgstr "Scala icona"
 
-#: resources/ui/gtk4/settings.ui:2403 resources/ui/gtk4/settings.ui:3149
-#: resources/ui/gtk3/settings.ui:2389 resources/ui/gtk3/settings.ui:3125
+#: resources/ui/gtk4/settings.ui:2132 resources/ui/gtk4/settings.ui:2878
+#: resources/ui/gtk3/settings.ui:2126 resources/ui/gtk3/settings.ui:2862
 msgid "Icon Crop"
 msgstr "Ritaglia icona"
 
-#: resources/ui/gtk4/settings.ui:2454 resources/ui/gtk4/settings.ui:3200
-#: resources/ui/gtk4/settings.ui:3586 resources/ui/gtk3/settings.ui:2439
-#: resources/ui/gtk3/settings.ui:3175 resources/ui/gtk3/settings.ui:3552
+#: resources/ui/gtk4/settings.ui:2183 resources/ui/gtk4/settings.ui:2929
+#: resources/ui/gtk4/settings.ui:3315 resources/ui/gtk3/settings.ui:2176
+#: resources/ui/gtk3/settings.ui:2912 resources/ui/gtk3/settings.ui:3289
 msgid "Background Image"
 msgstr "Immagine di sfondo"
 
-#: resources/ui/gtk4/settings.ui:2512 resources/ui/gtk4/settings.ui:3229
-#: resources/ui/gtk3/settings.ui:2488 resources/ui/gtk3/settings.ui:3201
+#: resources/ui/gtk4/settings.ui:2241 resources/ui/gtk4/settings.ui:2958
+#: resources/ui/gtk3/settings.ui:2225 resources/ui/gtk3/settings.ui:2938
 msgid "Children Appearance"
 msgstr "Aspetto elementi figli"
 
-#: resources/ui/gtk4/settings.ui:2522 resources/ui/gtk3/settings.ui:2498
+#: resources/ui/gtk4/settings.ui:2251 resources/ui/gtk3/settings.ui:2235
 #, fuzzy
 msgid "Child items are styled differently when their wedge is hovered."
 msgstr ""
 "Gli elementi figlio hanno uno stile diverso quando il loro cuneo è in bilico."
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/gtk4/settings.ui:2538 resources/ui/gtk4/settings.ui:3284
-#: resources/ui/gtk3/settings.ui:2514 resources/ui/gtk3/settings.ui:3250
+#: resources/ui/gtk4/settings.ui:2267 resources/ui/gtk4/settings.ui:3013
+#: resources/ui/gtk3/settings.ui:2251 resources/ui/gtk3/settings.ui:2987
 msgid "Standard State"
 msgstr "Stato standard"
 
@@ -1901,40 +1863,40 @@ msgstr "Stato standard"
 #. When the mouse pointer is over the item
 #. Hovered: When the mouse pointer is over the item
 #. When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:2551 resources/ui/gtk4/settings.ui:3835
-#: resources/ui/gtk3/settings.ui:2527 resources/ui/gtk3/settings.ui:3791
+#: resources/ui/gtk4/settings.ui:2280 resources/ui/gtk4/settings.ui:3564
+#: resources/ui/gtk3/settings.ui:2264 resources/ui/gtk3/settings.ui:3528
 msgid "Hovered State"
 msgstr "Stato attivo"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent's setting
-#: resources/ui/gtk4/settings.ui:2582 resources/ui/gtk4/settings.ui:2736
-#: resources/ui/gtk4/settings.ui:3332 resources/ui/gtk4/settings.ui:3383
-#: resources/ui/gtk3/settings.ui:2561 resources/ui/gtk3/settings.ui:2718
-#: resources/ui/gtk3/settings.ui:3300 resources/ui/gtk3/settings.ui:3353
+#: resources/ui/gtk4/settings.ui:2311 resources/ui/gtk4/settings.ui:2465
+#: resources/ui/gtk4/settings.ui:3061 resources/ui/gtk4/settings.ui:3112
+#: resources/ui/gtk3/settings.ui:2298 resources/ui/gtk3/settings.ui:2455
+#: resources/ui/gtk3/settings.ui:3037 resources/ui/gtk3/settings.ui:3090
 msgid "Parent"
 msgstr "Genitore"
 
-#: resources/ui/gtk4/settings.ui:2884 resources/ui/gtk4/settings.ui:3435
-#: resources/ui/gtk3/settings.ui:2866 resources/ui/gtk3/settings.ui:3405
+#: resources/ui/gtk4/settings.ui:2613 resources/ui/gtk4/settings.ui:3164
+#: resources/ui/gtk3/settings.ui:2603 resources/ui/gtk3/settings.ui:3142
 msgid "Offset"
 msgstr "Distanza"
 
 #. Draw above (grand)children items. There's an explanation string below in the application.
-#: resources/ui/gtk4/settings.ui:2995 resources/ui/gtk4/settings.ui:3524
-#: resources/ui/gtk3/settings.ui:2977 resources/ui/gtk3/settings.ui:3494
+#: resources/ui/gtk4/settings.ui:2724 resources/ui/gtk4/settings.ui:3253
+#: resources/ui/gtk3/settings.ui:2714 resources/ui/gtk3/settings.ui:3231
 msgid "Draw Above"
 msgstr "Disegna sopra"
 
-#: resources/ui/gtk4/settings.ui:3005 resources/ui/gtk3/settings.ui:2987
+#: resources/ui/gtk4/settings.ui:2734 resources/ui/gtk3/settings.ui:2724
 msgid "Render children above the center item."
 msgstr "Esegui il rendering dei figli sopra l'elemento centrale."
 
-#: resources/ui/gtk4/settings.ui:3258 resources/ui/gtk4/settings.ui:3615
-#: resources/ui/gtk3/settings.ui:3224 resources/ui/gtk3/settings.ui:3578
+#: resources/ui/gtk4/settings.ui:2987 resources/ui/gtk4/settings.ui:3344
+#: resources/ui/gtk3/settings.ui:2961 resources/ui/gtk3/settings.ui:3315
 msgid "Grandchildren Appearance"
 msgstr "Aspetto elementi dei nipoti"
 
-#: resources/ui/gtk4/settings.ui:3268 resources/ui/gtk3/settings.ui:3234
+#: resources/ui/gtk4/settings.ui:2997 resources/ui/gtk3/settings.ui:2971
 #, fuzzy
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
@@ -1944,30 +1906,30 @@ msgstr ""
 "cuneo dell'elemento genitore."
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:3297 resources/ui/gtk3/settings.ui:3263
+#: resources/ui/gtk4/settings.ui:3026 resources/ui/gtk3/settings.ui:3000
 msgid "With Hovered Parent"
 msgstr "Con elemento genitore attivo"
 
-#: resources/ui/gtk4/settings.ui:3534 resources/ui/gtk3/settings.ui:3504
+#: resources/ui/gtk4/settings.ui:3263 resources/ui/gtk3/settings.ui:3241
 msgid "Render grandchildren above children items."
 msgstr "Disegna i nipoti sopra gli elementi figli."
 
-#: resources/ui/gtk4/settings.ui:3645 resources/ui/gtk4/settings.ui:3884
-#: resources/ui/gtk3/settings.ui:3601 resources/ui/gtk3/settings.ui:3838
+#: resources/ui/gtk4/settings.ui:3374 resources/ui/gtk4/settings.ui:3613
+#: resources/ui/gtk3/settings.ui:3338 resources/ui/gtk3/settings.ui:3575
 msgid "Wedge Appearance"
 msgstr "Aspetto del cuneo"
 
-#: resources/ui/gtk4/settings.ui:3655 resources/ui/gtk3/settings.ui:3611
+#: resources/ui/gtk4/settings.ui:3384 resources/ui/gtk3/settings.ui:3348
 msgid "Clicking inside a wedge will activate the corresponding item."
 msgstr ""
 "Facendo clic all'interno di un cuneo si attiverà l'elemento corrispondente."
 
-#: resources/ui/gtk4/settings.ui:3678 resources/ui/gtk3/settings.ui:3634
+#: resources/ui/gtk4/settings.ui:3407 resources/ui/gtk3/settings.ui:3371
 msgid "Inner Radius"
 msgstr "Raggio interno"
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
-#: resources/ui/gtk4/settings.ui:3689 resources/ui/gtk3/settings.ui:3645
+#: resources/ui/gtk4/settings.ui:3418 resources/ui/gtk3/settings.ui:3382
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
@@ -1975,95 +1937,95 @@ msgstr ""
 "Fare clic all'interno del raggio interno\n"
 "annullerà la selezione."
 
-#: resources/ui/gtk4/settings.ui:3710 resources/ui/gtk3/settings.ui:3666
+#: resources/ui/gtk4/settings.ui:3439 resources/ui/gtk3/settings.ui:3403
 msgid "Wedge Separator Color"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3722 resources/ui/gtk3/settings.ui:3678
+#: resources/ui/gtk4/settings.ui:3451 resources/ui/gtk3/settings.ui:3415
 msgid "Wedge Separator Thickness"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3760 resources/ui/gtk3/settings.ui:3716
+#: resources/ui/gtk4/settings.ui:3489 resources/ui/gtk3/settings.ui:3453
 msgid "Wedge Color"
 msgstr "Colore cuneo"
 
-#: resources/ui/gtk4/settings.ui:3772 resources/ui/gtk3/settings.ui:3728
+#: resources/ui/gtk4/settings.ui:3501 resources/ui/gtk3/settings.ui:3465
 msgid "Wedge Size"
 msgstr ""
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/gtk4/settings.ui:3822 resources/ui/gtk3/settings.ui:3778
+#: resources/ui/gtk4/settings.ui:3551 resources/ui/gtk3/settings.ui:3515
 msgid "Inactive State"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3913 resources/ui/gtk4/settings.ui:4016
-#: resources/ui/gtk3/settings.ui:3861 resources/ui/gtk3/settings.ui:3963
+#: resources/ui/gtk4/settings.ui:3642 resources/ui/gtk4/settings.ui:3745
+#: resources/ui/gtk3/settings.ui:3598 resources/ui/gtk3/settings.ui:3700
 msgid "Trace Appearance"
 msgstr "Aspetto della traccia"
 
-#: resources/ui/gtk4/settings.ui:3923 resources/ui/gtk3/settings.ui:3871
+#: resources/ui/gtk4/settings.ui:3652 resources/ui/gtk3/settings.ui:3608
 msgid "The trace is the connecting line between selected menu items."
 msgstr "La traccia è la linea di collegamento tra le voci di menu selezionate."
 
-#: resources/ui/gtk4/settings.ui:3940 resources/ui/gtk3/settings.ui:3888
+#: resources/ui/gtk4/settings.ui:3669 resources/ui/gtk3/settings.ui:3625
 msgid "Thickness"
 msgstr "Spessore"
 
-#: resources/ui/gtk4/settings.ui:3951 resources/ui/gtk3/settings.ui:3899
+#: resources/ui/gtk4/settings.ui:3680 resources/ui/gtk3/settings.ui:3636
 msgid "Color"
 msgstr "Colore"
 
-#: resources/ui/gtk4/settings.ui:4003 resources/ui/gtk3/settings.ui:3951
+#: resources/ui/gtk4/settings.ui:3732 resources/ui/gtk3/settings.ui:3688
 msgid "Minimum Segment Length"
 msgstr "Lunghezza minima del segmento"
 
-#: resources/ui/gtk4/settings.ui:4046 resources/ui/gtk4/settings.ui:4170
-#: resources/ui/gtk3/settings.ui:3987 resources/ui/gtk3/settings.ui:4110
+#: resources/ui/gtk4/settings.ui:3775 resources/ui/gtk4/settings.ui:3899
+#: resources/ui/gtk3/settings.ui:3724 resources/ui/gtk3/settings.ui:3847
 msgid "Touch Button Settings"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4056 resources/ui/gtk3/settings.ui:3997
+#: resources/ui/gtk4/settings.ui:3785 resources/ui/gtk3/settings.ui:3734
 msgid "You can show a touch button for each of your menus."
 msgstr "Puoi mostrare un pulsante touch per ciascuno dei tuoi menu."
 
-#: resources/ui/gtk4/settings.ui:4074 resources/ui/gtk3/settings.ui:4015
+#: resources/ui/gtk4/settings.ui:3803 resources/ui/gtk3/settings.ui:3752
 msgid "Inactive Opacity"
 msgstr "Opacità Inattiva"
 
-#: resources/ui/gtk4/settings.ui:4102 resources/ui/gtk3/settings.ui:4043
+#: resources/ui/gtk4/settings.ui:3831 resources/ui/gtk3/settings.ui:3780
 msgid "Show in Overview Mode"
 msgstr "Mostra in modalità panoramica"
 
-#: resources/ui/gtk4/settings.ui:4124 resources/ui/gtk3/settings.ui:4065
+#: resources/ui/gtk4/settings.ui:3853 resources/ui/gtk3/settings.ui:3802
 msgid "Show in Desktop Mode"
 msgstr "Mostra in modalità desktop"
 
-#: resources/ui/gtk4/settings.ui:4146 resources/ui/gtk3/settings.ui:4087
+#: resources/ui/gtk4/settings.ui:3875 resources/ui/gtk3/settings.ui:3824
 msgid "Show above Fullscreen Windows"
 msgstr "Mostra sopra le finestre a schermo intero"
 
-#: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk4/settings.ui:4598
-#: resources/ui/gtk3/settings.ui:4133 resources/ui/gtk3/settings.ui:4531
+#: resources/ui/gtk4/settings.ui:3928 resources/ui/gtk4/settings.ui:4370
+#: resources/ui/gtk3/settings.ui:3870 resources/ui/gtk3/settings.ui:4311
 msgid "Advanced Settings"
 msgstr "Impostazioni Avanzate"
 
-#: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4143
+#: resources/ui/gtk4/settings.ui:3938 resources/ui/gtk3/settings.ui:3880
 msgid "These settings are independent of the presets."
 msgstr "Questo non è influenzato dai predefiniti."
 
-#: resources/ui/gtk4/settings.ui:4228 resources/ui/gtk3/settings.ui:4162
+#: resources/ui/gtk4/settings.ui:3957 resources/ui/gtk3/settings.ui:3899
 msgid "Minimum Stroke Angle"
 msgstr "Angolo gesto minimo"
 
-#: resources/ui/gtk4/settings.ui:4238 resources/ui/gtk3/settings.ui:4172
+#: resources/ui/gtk4/settings.ui:3967 resources/ui/gtk3/settings.ui:3909
 msgid "Smaller turns will not lead to selections."
 msgstr "Le svolte più piccole non porteranno a selezioni."
 
-#: resources/ui/gtk4/settings.ui:4275 resources/ui/gtk3/settings.ui:4209
+#: resources/ui/gtk4/settings.ui:4004 resources/ui/gtk3/settings.ui:3946
 msgid "Minimum Stroke Length"
 msgstr "Lunghezza minima gesto"
 
-#: resources/ui/gtk4/settings.ui:4285 resources/ui/gtk3/settings.ui:4219
+#: resources/ui/gtk4/settings.ui:4014 resources/ui/gtk3/settings.ui:3956
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
@@ -2071,11 +2033,11 @@ msgstr ""
 "Gesti più brevi non porteranno a selezioni.\n"
 "Questo viene moltiplicato per il valore della Scala Globale."
 
-#: resources/ui/gtk4/settings.ui:4324 resources/ui/gtk3/settings.ui:4258
+#: resources/ui/gtk4/settings.ui:4053 resources/ui/gtk3/settings.ui:3995
 msgid "Jitter Threshold"
 msgstr "Soglia di jitter"
 
-#: resources/ui/gtk4/settings.ui:4334 resources/ui/gtk3/settings.ui:4268
+#: resources/ui/gtk4/settings.ui:4063 resources/ui/gtk3/settings.ui:4005
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
@@ -2083,11 +2045,11 @@ msgstr ""
 "Non saranno presi in considerazione i movimenti più piccoli.\n"
 "Questo viene moltiplicato per il valore della Scala Globale."
 
-#: resources/ui/gtk4/settings.ui:4372 resources/ui/gtk3/settings.ui:4306
+#: resources/ui/gtk4/settings.ui:4101 resources/ui/gtk3/settings.ui:4043
 msgid "Display Timeout"
 msgstr "Timeout visualizzazione"
 
-#: resources/ui/gtk4/settings.ui:4382 resources/ui/gtk3/settings.ui:4316
+#: resources/ui/gtk4/settings.ui:4111 resources/ui/gtk3/settings.ui:4053
 msgid ""
 "Menus will be shown after this many milliseconds.\n"
 "Use this to quickly select items without showing the menu."
@@ -2095,11 +2057,11 @@ msgstr ""
 "I menu verranno visualizzati dopo questo numero di millisecondi.\n"
 "Usalo per selezionare rapidamente gli elementi senza mostrare il menu."
 
-#: resources/ui/gtk4/settings.ui:4421 resources/ui/gtk3/settings.ui:4355
+#: resources/ui/gtk4/settings.ui:4150 resources/ui/gtk3/settings.ui:4092
 msgid "Selection Timeout"
 msgstr "Timeout di selezione"
 
-#: resources/ui/gtk4/settings.ui:4431 resources/ui/gtk3/settings.ui:4365
+#: resources/ui/gtk4/settings.ui:4160 resources/ui/gtk3/settings.ui:4102
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
@@ -2107,12 +2069,22 @@ msgstr ""
 "Se il puntatore è fermo per questo molti millisecondi, \n"
 "l'elemento corrente verrà selezionato."
 
-#: resources/ui/gtk4/settings.ui:4470 resources/ui/gtk3/settings.ui:4404
+#: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk3/settings.ui:4141
+msgid "Open Windows at the Pointer"
+msgstr ""
+
+#: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4151
+msgid ""
+"With this enabled, Fly-Pie will attempt to open any windows\n"
+"at the current pointer position."
+msgstr ""
+
+#: resources/ui/gtk4/settings.ui:4232 resources/ui/gtk3/settings.ui:4174
 #, fuzzy
 msgid "Experimental Hover Mode"
 msgstr "Modalità hover sperimentale"
 
-#: resources/ui/gtk4/settings.ui:4480 resources/ui/gtk3/settings.ui:4414
+#: resources/ui/gtk4/settings.ui:4242 resources/ui/gtk3/settings.ui:4184
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
@@ -2120,11 +2092,11 @@ msgstr ""
 "Con questo abilitato, non è più necessario premere un pulsante del mouse\n"
 "o tenere premuto un tasto di modifica durante le selezioni."
 
-#: resources/ui/gtk4/settings.ui:4503 resources/ui/gtk3/settings.ui:4437
+#: resources/ui/gtk4/settings.ui:4265 resources/ui/gtk3/settings.ui:4207
 msgid "Show Screencast Mouse"
 msgstr "Mostra Screencast del Mouse"
 
-#: resources/ui/gtk4/settings.ui:4513 resources/ui/gtk3/settings.ui:4447
+#: resources/ui/gtk4/settings.ui:4275 resources/ui/gtk3/settings.ui:4217
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
@@ -2133,75 +2105,75 @@ msgstr ""
 "mouse.\n"
 "Questo può essere usato se vuoi catturare un video di Fly-Pie."
 
-#: resources/ui/gtk4/settings.ui:4546 resources/ui/gtk3/settings.ui:4480
+#: resources/ui/gtk4/settings.ui:4308 resources/ui/gtk3/settings.ui:4250
 msgid "Achievement Notifications"
 msgstr "Notifiche sui Risultati"
 
-#: resources/ui/gtk4/settings.ui:4556 resources/ui/gtk3/settings.ui:4490
+#: resources/ui/gtk4/settings.ui:4318 resources/ui/gtk3/settings.ui:4260
 msgid "Show a notification whenever you complete an achievement."
 msgstr "Mostra una notifica ogni volta che completi un obiettivo."
 
-#: resources/ui/gtk4/settings.ui:4618 resources/ui/gtk3/settings.ui:4563
+#: resources/ui/gtk4/settings.ui:4390 resources/ui/gtk3/settings.ui:4343
 msgid "Load Preset"
 msgstr "Carica un Preset"
 
-#: resources/ui/gtk4/settings.ui:4630 resources/ui/gtk3/settings.ui:4583
+#: resources/ui/gtk4/settings.ui:4402 resources/ui/gtk3/settings.ui:4363
 msgid "Load settings from a JSON file."
 msgstr "Carica le impostazioni da un file JSON."
 
-#: resources/ui/gtk4/settings.ui:4637 resources/ui/gtk3/settings.ui:4596
+#: resources/ui/gtk4/settings.ui:4409 resources/ui/gtk3/settings.ui:4376
 msgid "Save the settings to a JSON file."
 msgstr "Salva le impostazioni in un file JSON."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: resources/ui/gtk4/settings.ui:4660 resources/ui/gtk4/settings.ui:4933
-#: resources/ui/gtk3/settings.ui:4625 resources/ui/gtk3/settings.ui:4918
+#: resources/ui/gtk4/settings.ui:4432 resources/ui/gtk4/settings.ui:4705
+#: resources/ui/gtk3/settings.ui:4405 resources/ui/gtk3/settings.ui:4698
 msgid "Live Preview"
 msgstr "Anteprima dal Vivo"
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:4689 resources/ui/gtk3/settings.ui:5202
+#: resources/ui/gtk4/settings.ui:4461 resources/ui/gtk3/settings.ui:5012
 msgid "Menu Editor"
 msgstr "Menu Editore"
 
-#: resources/ui/gtk4/settings.ui:4718 resources/ui/gtk3/settings.ui:4684
+#: resources/ui/gtk4/settings.ui:4490 resources/ui/gtk3/settings.ui:4464
 msgid "Add a new menu item."
 msgstr "Aggiungi una nuova voce di menu."
 
-#: resources/ui/gtk4/settings.ui:4797 resources/ui/gtk3/settings.ui:4771
+#: resources/ui/gtk4/settings.ui:4569 resources/ui/gtk3/settings.ui:4551
 msgid "Stash"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4813 resources/ui/gtk3/settings.ui:4788
+#: resources/ui/gtk4/settings.ui:4585 resources/ui/gtk3/settings.ui:4568
 msgid "Store items here and re-use them later."
 msgstr "Memorizza gli oggetti qui e riutilizzali in seguito."
 
-#: resources/ui/gtk4/settings.ui:4857 resources/ui/gtk3/settings.ui:4832
+#: resources/ui/gtk4/settings.ui:4629 resources/ui/gtk3/settings.ui:4612
 msgid "Trash"
 msgstr "Cestino"
 
-#: resources/ui/gtk4/settings.ui:4873 resources/ui/gtk3/settings.ui:4848
+#: resources/ui/gtk4/settings.ui:4645 resources/ui/gtk3/settings.ui:4628
 msgid "Drop items here."
 msgstr "Trascina gli oggetti qui."
 
-#: resources/ui/gtk4/settings.ui:4903 resources/ui/gtk3/settings.ui:4878
+#: resources/ui/gtk4/settings.ui:4675 resources/ui/gtk3/settings.ui:4658
 msgid "Restore menus from a JSON file. This will override your current menus!"
 msgstr ""
 "Ripristina i menu da un file JSON. Questo sovrascriverà i tuoi menu attuali!"
 
-#: resources/ui/gtk4/settings.ui:4909 resources/ui/gtk3/settings.ui:4890
+#: resources/ui/gtk4/settings.ui:4681 resources/ui/gtk3/settings.ui:4670
 msgid "Export all menus to a JSON file."
 msgstr "Esporta tutti i menu in un file JSON."
 
-#: resources/ui/gtk4/settings.ui:4986 resources/ui/gtk3/settings.ui:4972
+#: resources/ui/gtk4/settings.ui:4758 resources/ui/gtk3/settings.ui:4752
 msgid "Name"
 msgstr "Nome"
 
-#: resources/ui/gtk4/settings.ui:5004 resources/ui/gtk3/settings.ui:4990
+#: resources/ui/gtk4/settings.ui:4776 resources/ui/gtk3/settings.ui:4770
 msgid "Icon"
 msgstr "Icona"
 
-#: resources/ui/gtk4/settings.ui:5022 resources/ui/gtk3/settings.ui:5008
+#: resources/ui/gtk4/settings.ui:4794 resources/ui/gtk3/settings.ui:4788
 msgid ""
 "The icon can be either an image file path, an icon name from the current "
 "icon theme, a base64 encoded data URI, text, or an emoji. You can append \"-"
@@ -2213,11 +2185,11 @@ msgstr ""
 "Puoi aggiungere \"-#rgb\" all'icona per disegnare un cerchio con il dato "
 "colore RGB dietro l'icona."
 
-#: resources/ui/gtk4/settings.ui:5055 resources/ui/gtk3/settings.ui:5047
+#: resources/ui/gtk4/settings.ui:4827 resources/ui/gtk3/settings.ui:4827
 msgid "Fixed Angle"
 msgstr "Angolo Fisso"
 
-#: resources/ui/gtk4/settings.ui:5071 resources/ui/gtk3/settings.ui:5063
+#: resources/ui/gtk4/settings.ui:4843 resources/ui/gtk3/settings.ui:4843
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -2238,11 +2210,11 @@ msgstr ""
 "angoli fissi verranno rimossi se un elemento viene trascinato in un'altra "
 "posizione nel menu. Usa -1 per disabilitare questa funzione."
 
-#: resources/ui/gtk4/settings.ui:5109 resources/ui/gtk3/settings.ui:5101
+#: resources/ui/gtk4/settings.ui:4881 resources/ui/gtk3/settings.ui:4881
 msgid "This will open the menu."
 msgstr "Questo aprirà il menu."
 
-#: resources/ui/gtk4/settings.ui:5123 resources/ui/gtk3/settings.ui:5115
+#: resources/ui/gtk4/settings.ui:4895 resources/ui/gtk3/settings.ui:4895
 msgid ""
 "Usually, Super + Right Mouse Button opens the window menu. With this "
 "setting, you can instead open a Fly-Pie menu."
@@ -2250,36 +2222,104 @@ msgstr ""
 "Di solito, Super + Tasto destro del mouse apre il menu della finestra. Con "
 "questa impostazione, puoi invece aprire un menu Fly-Pie."
 
-#: resources/ui/gtk4/settings.ui:5128 resources/ui/gtk3/settings.ui:5120
+#: resources/ui/gtk4/settings.ui:4900 resources/ui/gtk3/settings.ui:4900
 msgid "Bind to Super + RMB"
 msgstr "Associato a Super + RMB"
 
-#: resources/ui/gtk4/settings.ui:5144 resources/ui/gtk3/settings.ui:5136
+#: resources/ui/gtk4/settings.ui:4916 resources/ui/gtk3/settings.ui:4916
 msgid "Show Touch Button"
 msgstr "Mostra pulsante touch"
 
-#: resources/ui/gtk4/settings.ui:5160 resources/ui/gtk3/settings.ui:5152
+#: resources/ui/gtk4/settings.ui:4932 resources/ui/gtk3/settings.ui:4932
 msgid "Open in Screen Center"
 msgstr "Apri al Centro dello Schermo"
 
+#: resources/ui/gtk4/settings.ui:4968 resources/ui/gtk3/settings.ui:4968
+msgid "Show Labels"
+msgstr ""
+
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:5221 resources/ui/gtk3/settings.ui:5445
+#: resources/ui/gtk4/settings.ui:5023 resources/ui/gtk3/settings.ui:5255
 msgid "Achievements"
 msgstr "Premi"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5415 resources/ui/gtk3/settings.ui:5382
+#: resources/ui/gtk4/settings.ui:5217 resources/ui/gtk3/settings.ui:5192
 msgid "In Progress"
 msgstr "In corso"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5429 resources/ui/gtk3/settings.ui:5397
+#: resources/ui/gtk4/settings.ui:5231 resources/ui/gtk3/settings.ui:5207
 msgid "Completed"
 msgstr "Completato"
 
-#: resources/ui/gtk4/settings.ui:5457 resources/ui/gtk3/settings.ui:5425
+#: resources/ui/gtk4/settings.ui:5259 resources/ui/gtk3/settings.ui:5235
 msgid "Reset all achievements."
 msgstr "Ripristina tutti gli obiettivi."
+
+#~ msgid "About"
+#~ msgstr "Informazioni"
+
+#~ msgid ""
+#~ "Read the <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
+#~ "changelog.md\">Changelog</a>."
+#~ msgstr ""
+#~ "Leggi il <a href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/"
+#~ "changelog.md\">registro dei cambiamenti</a>."
+
+#~ msgid ""
+#~ "Published under the MIT License.\n"
+#~ "Visit <a href=\"https://github.com/Schneegans/Fly-Pie\">Fly-Pie's "
+#~ "Homepage</a> for details.\n"
+#~ "\n"
+#~ "Whenever you encounter a 🐞️ bug or have 🎉️ feature request, feel free to "
+#~ "report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
+#~ "\">Github</a>."
+#~ msgstr ""
+#~ "Pubblicato con licenza MIT.\n"
+#~ "Visita <a href=\"https://github.com/Schneegans/Fly-Pie\">Homepage di Fly-"
+#~ "Pie</a> per dettagli.\n"
+#~ "\n"
+#~ "Ogni volta che incontri un 🐞️ bug o hai 🎉️ richieste di nuove funzionalità, "
+#~ "non esitare a segnalarlo su <a href=\"https://github.com/Schneegans/Fly-"
+#~ "Pie/issues\">Github</a>."
+
+#~ msgid "Credits"
+#~ msgstr "Crediti"
+
+#~ msgid "Created by"
+#~ msgstr "Creato da"
+
+#~ msgid "Translated by"
+#~ msgstr "Tradotto da"
+
+#~ msgid "Artwork by"
+#~ msgstr "Opera di"
+
+#~ msgid "Sponsors"
+#~ msgstr "Sponsor"
+
+#~ msgid "🥇️ Gold Sponsors"
+#~ msgstr "🥇️ Sponsor d'oro"
+
+#~ msgid "🥈️ Silver Sponsors"
+#~ msgstr "🥈️ Sponsor d'argento"
+
+#~ msgid "🥉️ Bronze Sponsors"
+#~ msgstr "🥉️ Sponsor di bronzo"
+
+#~ msgid "🏅️ Past Sponsors"
+#~ msgstr "Sponsors passati"
+
+#~ msgid "- none -"
+#~ msgstr "- nessuno -"
+
+#~ msgid ""
+#~ "💕️ Do you want to show that you love Fly-Pie? <a href=\"https://github.com/"
+#~ "sponsors/Schneegans\">Become a sponsor for as little as 1$ / month!</a>"
+#~ msgstr ""
+#~ "💕️ Vuoi dimostrare di amare Fly-Pie? <a href=\"https://github.com/sponsors/"
+#~ "Schneegans\">Diventa uno Sponsor a partire da 1$ al mese!</a>"
 
 #~ msgid "Can be an icon name, text, emoji or a file."
 #~ msgstr "Può essere il nome di un'icona, testo, emoji o un file."
