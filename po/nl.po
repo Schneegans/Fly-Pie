@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-24 20:33+0100\n"
-"PO-Revision-Date: 2023-03-15 16:42+0000\n"
+"PO-Revision-Date: 2023-03-25 23:44+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/fly-pie/core/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.2-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -880,19 +880,19 @@ msgstr "U kunt enkel nieuwe actie-items aanmaken binnen aangepaste menu's"
 
 #: src/prefs/PreferencesDialog.js:248 src/prefs/PreferencesDialog.js:281
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Gouden sponsoren"
 
 #: src/prefs/PreferencesDialog.js:252 src/prefs/PreferencesDialog.js:285
 msgid "Silver Sponsors"
-msgstr ""
+msgstr "Zilveren sponsoren"
 
 #: src/prefs/PreferencesDialog.js:256 src/prefs/PreferencesDialog.js:289
 msgid "Bronze Sponsors"
-msgstr ""
+msgstr "Bronzen sponsoren"
 
 #: src/prefs/PreferencesDialog.js:260 src/prefs/PreferencesDialog.js:293
 msgid "Past Sponsors"
-msgstr ""
+msgstr "Voormalige sponsoren"
 
 #: src/prefs/ImageChooserButton.js:100
 #: resources/ui/gtk4/imageChooserButton.ui:22
@@ -1330,27 +1330,27 @@ msgstr "Prestaties weergeven"
 
 #: resources/ui/common/menus.ui:13
 msgid "Visit Homepage"
-msgstr ""
+msgstr "Website bezoeken"
 
 #: resources/ui/common/menus.ui:17
 msgid "View Changelog"
-msgstr ""
+msgstr "Wijzigingslogboek bekijken"
 
 #: resources/ui/common/menus.ui:23
 msgid "Report a Bug"
-msgstr ""
+msgstr "Probleem melden"
 
 #: resources/ui/common/menus.ui:27
 msgid "Translate"
-msgstr ""
+msgstr "Vertalen"
 
 #: resources/ui/common/menus.ui:31
 msgid "Donate"
-msgstr ""
+msgstr "Doneren"
 
 #: resources/ui/common/menus.ui:48
 msgid "About Fly-Pie"
-msgstr ""
+msgstr "Over Fly-Pie"
 
 #: resources/ui/gtk4/copyValueButton.ui:12
 #: resources/ui/gtk3/copyValueButton.ui:12
@@ -1727,7 +1727,7 @@ msgstr "Lettertype"
 
 #: resources/ui/gtk4/settings.ui:1482 resources/ui/gtk3/settings.ui:1482
 msgid "Label Font"
-msgstr ""
+msgstr "Labellettertype"
 
 #: resources/ui/gtk4/settings.ui:1492 resources/ui/gtk3/settings.ui:1492
 msgid "Text Color"
@@ -2060,13 +2060,13 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk3/settings.ui:4141
 msgid "Open Windows at the Pointer"
-msgstr ""
+msgstr "Vensters openen bij de aanwijzer"
 
 #: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4151
 msgid ""
 "With this enabled, Fly-Pie will attempt to open any windows\n"
 "at the current pointer position."
-msgstr ""
+msgstr "Probeert om alle vensters bij de huidige aanwijzerlocatie te openen"
 
 #: resources/ui/gtk4/settings.ui:4232 resources/ui/gtk3/settings.ui:4174
 msgid "Experimental Hover Mode"
@@ -2223,7 +2223,7 @@ msgstr "In het midden van het scherm openen"
 
 #: resources/ui/gtk4/settings.ui:4968 resources/ui/gtk3/settings.ui:4968
 msgid "Show Labels"
-msgstr ""
+msgstr "Labels tonen"
 
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:5023 resources/ui/gtk3/settings.ui:5255
