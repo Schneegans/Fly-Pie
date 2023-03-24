@@ -889,6 +889,8 @@ class MenuItem extends Clutter.Actor {
       // Paint the icon!
       if (iconName != undefined) {
 
+        // If a label is given, we draw the icon to an offscreen group in order to be able
+        // to fade out the bottom area of the icon.
         if (label != undefined) {
           ctx.pushGroup();
           ctx.save();
@@ -914,14 +916,18 @@ class MenuItem extends Clutter.Actor {
           blue: textColor.blue / 255
         });
 
+        // If a label is given, we fade out the bottom area of the icon an draw the label
+        // there.
         if (label != undefined) {
           ctx.restore();
 
+          // Size and position of the label are hard-coded for now.
           const labelWidth       = backgroundSize * 0.6;
           const verticalPosition = backgroundSize * 0.85;
           const gradientStart    = backgroundSize * 0.55;
           const gradientEnd      = backgroundSize * 0.75;
 
+          // Fade out the bottom part of the icon with a gradient.
           const gradient = new Cairo.LinearGradient(0, gradientStart, 0, gradientEnd);
           gradient.addColorStopRGBA(0, 0, 0, 0, 0);
           gradient.addColorStopRGBA(1, 1, 1, 1, 1);
@@ -933,6 +939,7 @@ class MenuItem extends Clutter.Actor {
           ctx.popGroupToSource();
           ctx.paint();
 
+          // Setup the font to be used for the label.
           const fontDescription = Pango.FontDescription.from_string(labelFont);
           fontDescription.set_size(fontDescription.get_size() * labelScale);
 
@@ -943,6 +950,7 @@ class MenuItem extends Clutter.Actor {
           layout.set_width(Pango.units_from_double(labelWidth));
           layout.set_text(label, -1);
 
+          // Draw the label at the bottom.
           const extents = layout.get_pixel_extents()[1];
           ctx.setSourceRGBA(
               textColor.red / 255, textColor.green / 255, textColor.blue / 255,
