@@ -4,6 +4,7 @@
   "background-color": "rgba(0,0,0,0.13)",
   "text-color": "#BDC5E6",
   "font": "Cantarell Bold 10",
+  "label-font": "Cantarell 8",
   "wedge-width": 300,
   "wedge-inner-radius": 51,
   "wedge-color": "rgba(0,0,0,0.129992)",

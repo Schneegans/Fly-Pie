@@ -84,6 +84,7 @@ var SettingsPage = class SettingsPage {
     this._bindColorButton('background-color');
     this._bindColorButton('text-color');
     this._bindFontButton('font');
+    this._bindFontButton('label-font');
 
 
     // Wedge Settings.
@@ -136,6 +137,7 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('child-icon-opacity');
     this._bindFlyPieImageChooserButton('child-background-image');
     this._bindSwitch('child-draw-above');
+
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
     this._bindRevealer('child-color-mode-fixed', 'child-fixed-color-revealer');

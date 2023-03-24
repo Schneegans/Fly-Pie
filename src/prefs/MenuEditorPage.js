@@ -616,6 +616,14 @@ var MenuEditorPage = class MenuEditorPage {
       }
     });
 
+    // For menu items, store whether they should draw labels for their child items.
+    this._builder.get_object('show-child-labels').connect('notify::active', (widget) => {
+      if (!this._updatingSidebar) {
+        this._selectedItem.showChildLabels = widget.active;
+        this._saveMenuConfiguration();
+      }
+    });
+
     // For top-level menus, store whether they should be opened in the center of the
     // screen.
     this._builder.get_object('menu-centered').connect('notify::active', (widget) => {
@@ -819,8 +827,13 @@ var MenuEditorPage = class MenuEditorPage {
     // be set.
     const somethingSelected = this._selectedItem != null;
     const toplevelSelected  = this._menuConfigs.indexOf(this._selectedItem) >= 0;
+    const menuSelected      = somethingSelected &&
+        ItemRegistry.getItemTypes()[this._selectedItem.type].class == ItemClass.MENU;
 
     this._builder.get_object('item-settings-revealer').reveal_child = somethingSelected;
+
+    this._builder.get_object('item-settings-show-child-labels-revealer').reveal_child =
+        menuSelected;
 
     this._builder.get_object('item-settings-menu-revealer').reveal_child =
         toplevelSelected;
@@ -836,8 +849,7 @@ var MenuEditorPage = class MenuEditorPage {
 
     if (somethingSelected) {
 
-      // This prevents an update feedback back to the menu editor as long as this method
-      // is executed.
+      // This prevents an infinite update loop as long as this method is executed.
       this._updatingSidebar = true;
 
       // The item's name, icon and description have to be updated in any case if
@@ -859,6 +871,10 @@ var MenuEditorPage = class MenuEditorPage {
       } else {
         this._builder.get_object('item-angle').value = this._selectedItem.angle;
       }
+
+      // Update the draw-labels property if the currently selected item has it set.
+      this._builder.get_object('show-child-labels').active =
+          this._selectedItem.showChildLabels;
 
       // Now we check whether the selected item has a config property.
       const config = ItemRegistry.getItemTypes()[selectedType].config;

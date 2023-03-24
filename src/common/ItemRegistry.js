@@ -93,11 +93,43 @@ var ItemRegistry = class ItemRegistry {
   // required by the menu class). The main difference is that the menu structure may
   // contain significantly more items - while the menu configuration only contains one
   // item for "Bookmarks", the menu structure actually contains all of the bookmarks as
-  // individual items.
+  // individual items. Also, menus in the menu configuration may have the showChildLabels
+  // property set, while in the menu structure, each item gets its own showLabel property.
   // This method assumes a "normalized" config, so you should call the normalizeConfig()
   // above before this one.
   static transformConfig(config) {
-    return this._transformConfig(config, true);
+    const result    = this.getItemTypes()[config.type].createItem(config.data);
+    result.name     = config.name;
+    result.icon     = config.icon;
+    result.centered = config.centered;
+    result.angle    = config.angle;
+
+    // The root's label will never be drawn. Further down the recursion, showLabel will
+    // always be set to the value of showChildLabels of the parent. See below.
+    result.showLabel = false;
+
+    // For custom menus, we load all children recursively.
+    if (config.type == 'CustomMenu') {
+      for (let i = 0; i < config.children.length; i++) {
+        let child       = this.transformConfig(config.children[i]);
+        child.showLabel = config.showChildLabels || false;
+        result.children.push(child);
+      }
+    } else {
+      // For all other item types, we check whether the call to createItem() produced some
+      // child items (e.g. the bookmark menu item will create a child item for each
+      // bookmark). If so, we apply the showChildLabels to all children recursively.
+      const setShowLabel = (children, show) => {
+        children.forEach(child => {
+          child.showLabel = show;
+          setShowLabel(child.children || [], show);
+        });
+      };
+
+      setShowLabel(result.children || [], config.showChildLabels || false);
+    }
+
+    return result;
   }
 
   // Returns an object with all available item types (actions and menus).
@@ -324,12 +356,17 @@ var ItemRegistry = class ItemRegistry {
     // The 'shortcut', 'touchButton', 'superRMB', and 'centered' property is only
     // available on top-level items, the 'angle' property on all other items.
     if (isToplevel) {
-      config.centered    = config.centered != undefined ? config.centered : false;
-      config.shortcut    = config.shortcut != undefined ? config.shortcut : '';
-      config.touchButton = config.touchButton != undefined ? config.touchButton : false;
-      config.superRMB    = config.superRMB != undefined ? config.superRMB : false;
+      config.centered    = config.centered || false;
+      config.shortcut    = config.shortcut || '';
+      config.touchButton = config.touchButton || false;
+      config.superRMB    = config.superRMB || false;
     } else {
       config.angle = config.angle != undefined ? config.angle : -1;
+    }
+
+    // All menus should have the show-labels property set.
+    if (this.getItemTypes()[config.type].class == ItemClass.MENU) {
+      config.showLabels = config.showChildLabels || false;
     }
 
     // Check all children recursively.
@@ -338,31 +375,5 @@ var ItemRegistry = class ItemRegistry {
         this._normalizeConfig(config.children[i], false);
       }
     }
-  }
-
-  // See documentation of transformConfig() above.
-  static _transformConfig(config, isToplevel) {
-
-    // Create the item and then set all the standard-properties later.
-    const result = this.getItemTypes()[config.type].createItem(config.data);
-    result.name  = config.name;
-    result.icon  = config.icon;
-
-    // The 'centered' property is only available on top-level items, the 'angle' property
-    // on all other items.
-    if (isToplevel) {
-      result.centered = config.centered;
-    } else {
-      result.angle = config.angle;
-    }
-
-    // Load all children recursively.
-    if (config.children) {
-      for (let i = 0; i < config.children.length; i++) {
-        result.children.push(this._transformConfig(config.children[i], false));
-      }
-    }
-
-    return result;
   }
 }

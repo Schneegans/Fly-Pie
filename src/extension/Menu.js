@@ -625,6 +625,7 @@ var Menu = class Menu {
         name: item.name,
         icon: item.icon,
         angle: item.angle,
+        showLabel: item.showLabel,
       });
 
       if (item.children) {
@@ -902,6 +903,7 @@ var Menu = class Menu {
               name: newChild.name,
               icon: newChild.icon,
               angle: newChild.angle,
+              showLabel: newChild.showLabel,
             });
             newChild.matchingChild.setSelectionCallback(newConfig.onSelect || null);
             newChild.matchingChild.setHoverCallback(newConfig.onHover || null);
@@ -910,10 +912,11 @@ var Menu = class Menu {
             newChild.matchingChild.onSettingsChange(this._settings);
 
           } else {
-            newChild.matchingChild.id    = newChild.id;
-            newChild.matchingChild.name  = newChild.name;
-            newChild.matchingChild.icon  = newChild.icon;
-            newChild.matchingChild.angle = newChild.angle;
+            newChild.matchingChild.id        = newChild.id;
+            newChild.matchingChild.name      = newChild.name;
+            newChild.matchingChild.icon      = newChild.icon;
+            newChild.matchingChild.angle     = newChild.angle;
+            newChild.matchingChild.showLabel = newChild.showLabel;
             newChild.matchingChild.setSelectionCallback(newConfig.onSelect || null);
             newChild.matchingChild.setHoverCallback(newConfig.onHover || null);
             newChild.matchingChild.setUnhoverCallback(newConfig.onUnhover || null);
