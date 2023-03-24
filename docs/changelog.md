@@ -13,6 +13,10 @@ SPDX-License-Identifier: CC-BY-4.0
 
 **Release Date:** TBD
 
+#### New Features
+
+* It is now possible to show tiny labels on all items of a given submenu. Just enable the new switch "Show Labels" of a menu or submenu!
+
 #### Enhancements
 
 * **New donation method: Ko-fi**. Follow me on Ko-fi to get the latest updates regarding my extensions: https://ko-fi.com/schneegans!
