@@ -360,6 +360,12 @@ class SelectionWedges extends Clutter.Actor {
             'child-selected-event', this.getHoveredChild(), fromGesture, coords[0],
             coords[1]);
       }
+    } else if (!fromGesture) {
+      if (this._parentIndex >= 0) {
+        this.emit('parent-selected-event', fromGesture, coords[0], coords[1]);
+      } else {
+        this.emit('cancel-selection-event');
+      }
     }
   }
 

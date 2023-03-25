@@ -15,7 +15,8 @@ SPDX-License-Identifier: CC-BY-4.0
 
 #### New Features
 
-* It is now possible to show tiny labels on all items of a given submenu. Just enable the new switch "Show Labels" of a menu or submenu!
+* It is now possible to show **tiny item labels** on all items of a given submenu. Just enable the new switch "Show Labels" of a menu or submenu!
+* You can now **click on the center item to navigate to the parent menu**. Clicking in the center of the root menu will dismiss the menu. This is especially useful on touch screens where there is no right click.
 
 #### Enhancements
 
