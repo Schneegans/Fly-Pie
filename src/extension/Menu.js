@@ -239,9 +239,14 @@ var Menu = class Menu {
         const turboModifiers =
             Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK;
 
-        if ((event.get_state() & turboModifiers) == 0) {
+        // Also, only emit a selection if we are either dragging a child around or if the
+        // pointer did not move significantly between click start and click end.
+        if ((event.get_state() & turboModifiers) == 0 &&
+            (this._draggedChild != null || !this._clickStartPos ||
+             this._isInDragThreshold(this._pointerPos, this._clickStartPos))) {
           emitSelection(event.get_coords());
         }
+
         return Clutter.EVENT_STOP;
       }
 
