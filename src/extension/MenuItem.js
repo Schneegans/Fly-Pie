@@ -562,7 +562,7 @@ class MenuItem extends Clutter.Actor {
           visualState == MenuItemState.CHILD_HOVERED) {
 
         let label;
-        let labelScale = 1.0;
+        let labelScale = MenuItemSettings.globalScale;
 
         if (this.showLabel &&
             (visualState == MenuItemState.CHILD ||
@@ -572,7 +572,7 @@ class MenuItem extends Clutter.Actor {
 
           if (visualState == MenuItemState.CHILD_HOVERED) {
             const normalSettings = MenuItemSettings.state.get(MenuItemState.CHILD);
-            labelScale           = settings.size / normalSettings.size;
+            labelScale *= settings.size / normalSettings.size;
           }
         }
 
