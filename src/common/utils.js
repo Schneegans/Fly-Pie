@@ -141,9 +141,12 @@ function getIconTheme() {
 
   if (_iconTheme == null) {
 
-    // If St is available (that means we are in the gnome-shell process), we attempt to
-    // get the theme from St. Else we use the X11-dependent Gtk code.
-    if (St) {
+    // Starting with GNOME 44, St brings its own icon theme class. On older versions, we
+    // create a Gtk.IconTheme from St. If St is not available, we are most likely in the
+    // preferences process and can simply use the X11-dependent Gtk code.
+    if (St.IconTheme) {
+      _iconTheme = new St.IconTheme();
+    } else if (St) {
       _iconTheme = new Gtk.IconTheme();
       _iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
     } else {
