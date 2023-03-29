@@ -130,16 +130,16 @@ class SelectionWedges extends Clutter.Actor {
         // between startAngle and endAngle.
         vec2  pos      = 2.0 * (cogl_tex_coord_in[0].xy - vec2(0.5));
         float distance = sqrt(pos.x * pos.x + pos.y * pos.y);
-        float angle    = 0;
+        float angle    = 0.0;
         if (distance > innerRadius) {
-          angle = acos(pos.x / distance) * 180 / 3.141592653589793;
-          if (pos.y < 0) {
-            angle = 360 - angle;
+          angle = acos(pos.x / distance) * 180.0 / 3.141592653589793;
+          if (pos.y < 0.0) {
+            angle = 360.0 - angle;
           }
           
-          angle = mod((angle + 90), 360);
+          angle = mod((angle + 90.0), 360.0);
           if (angle > startAngle && angle <= endAngle ||
-              angle + 360 > startAngle && angle + 360 <= endAngle) {
+              angle + 360.0 > startAngle && angle + 360.0 <= endAngle) {
 
             cogl_color_out = vec4(rHover, gHover, bHover, aHover);
           }
