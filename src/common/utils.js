@@ -131,9 +131,14 @@ function shellVersionIsAtLeast(major, minor) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Due to this issue https://gitlab.gnome.org/GNOME/mutter/-/issues/960, the static     //
-// function Gtk.IconTheme.get_for_display() may return null when executed from the      //
-// gnome-shell process of Wayland. In this case, we use St to get a valid icon theme.   //
+// This method will either return a Gtk.IconTheme or a St.IconTheme, depending on the   //
+// context:                                                                             //
+//   * In the preferences process it will be ...                                        //
+//     ... a GTK3 IconTheme for GNOME < 40                                              //
+//     ... a GTK4 IconTheme for GNOME >= 40                                             //
+//   * In the GNOME Shell process it will be ...                                        //
+//     ... a GTK3 IconTheme for GNOME < 44                                              //
+//     ... a St IconTheme for GNOME >= 44                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let _iconTheme = null;
@@ -141,9 +146,12 @@ function getIconTheme() {
 
   if (_iconTheme == null) {
 
-    // If St is available (that means we are in the gnome-shell process), we attempt to
-    // get the theme from St. Else we use the X11-dependent Gtk code.
-    if (St) {
+    // Starting with GNOME 44, St brings its own icon theme class. On older versions, we
+    // create a Gtk.IconTheme from St. If St is not available, we are most likely in the
+    // preferences process and can simply use the X11-dependent Gtk code.
+    if (St && St.IconTheme) {
+      _iconTheme = new St.IconTheme();
+    } else if (St) {
       _iconTheme = new Gtk.IconTheme();
       _iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
     } else {
@@ -384,7 +392,10 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
     const gicon = Gio.Icon.new_for_string(iconName);
     let pixbuf  = null;
 
-    if (gtk4()) {
+    // If we are dealing with a Gtk.IconTheme from GTK4, this method will be available. If
+    // it's a IconTheme from Gtk or St, this method will not be available and loading of
+    // the icon will be much easier.
+    if (theme.has_gicon) {
 
       if (theme.has_gicon(gicon)) {
 
@@ -410,8 +421,10 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
 
     } else {
 
-      // To get a pixbuf from an icon is quite simple on GTK3.
-      const info = theme.lookup_by_gicon(gicon, size, Gtk.IconLookupFlags.FORCE_SIZE);
+      // To get a pixbuf from an icon is quite simple on GTK3 / St.
+      const flags = theme instanceof Gtk.IconTheme ? Gtk.IconLookupFlags.FORCE_SIZE :
+                                                     St.IconLookupFlags.FORCE_SIZE;
+      const info  = theme.lookup_by_gicon(gicon, size, flags);
 
       if (info != null) {
         pixbuf = info.load_icon();
