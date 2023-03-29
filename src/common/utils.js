@@ -131,9 +131,14 @@ function shellVersionIsAtLeast(major, minor) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Due to this issue https://gitlab.gnome.org/GNOME/mutter/-/issues/960, the static     //
-// function Gtk.IconTheme.get_for_display() may return null when executed from the      //
-// gnome-shell process of Wayland. In this case, we use St to get a valid icon theme.   //
+// This method will either return a Gtk.IconTheme or a St.IconTheme, depending on the   //
+// context:                                                                             //
+//   * In the preferences process it will be ...                                        //
+//     ... a GTK3 IconTheme for GNOME < 40                                              //
+//     ... a GTK4 IconTheme for GNOME >= 40                                             //
+//   * In the GNOME Shell process it will be ...                                        //
+//     ... a GTK3 IconTheme for GNOME < 44                                              //
+//     ... a St IconTheme for GNOME >= 44                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let _iconTheme = null;
