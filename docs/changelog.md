@@ -32,6 +32,7 @@ SPDX-License-Identifier: CC-BY-4.0
 * Fixed multi-cursor support. Fly-Pie should now properly support multiple pointer input devices on Wayland.
 * Fixed an issue which made the menu invisible above full-screen windows on Wayland.
 * Fixed an issue which could make Fly-Pie unresponsive until the session is restarted if the configured hotkey was pressed multiple times during a configured display timeout. In rare cases this could also lead to completely blocking the user input.
+* Fixed icon loading on GNOME 44. Due to some recent changes in GNOME 44, icons were not loaded correctly anymore.
 
 
 ## [Fly-Pie 18](https://github.com/schneegans/fly-pie/releases/tag/v18)
