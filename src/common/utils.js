@@ -149,7 +149,7 @@ function getIconTheme() {
     // Starting with GNOME 44, St brings its own icon theme class. On older versions, we
     // create a Gtk.IconTheme from St. If St is not available, we are most likely in the
     // preferences process and can simply use the X11-dependent Gtk code.
-    if (St.IconTheme) {
+    if (St && St.IconTheme) {
       _iconTheme = new St.IconTheme();
     } else if (St) {
       _iconTheme = new Gtk.IconTheme();
@@ -422,8 +422,8 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
     } else {
 
       // To get a pixbuf from an icon is quite simple on GTK3 / St.
-      const flags = theme instanceof St.IconTheme ? St.IconLookupFlags.FORCE_SIZE :
-                                                    Gtk.IconLookupFlags.FORCE_SIZE;
+      const flags = theme instanceof Gtk.IconTheme ? Gtk.IconLookupFlags.FORCE_SIZE :
+                                                     St.IconLookupFlags.FORCE_SIZE;
       const info  = theme.lookup_by_gicon(gicon, size, flags);
 
       if (info != null) {
