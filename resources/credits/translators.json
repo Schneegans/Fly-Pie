@@ -1,10 +1,104 @@
 [
   {
+    "Korean": [
+      [
+        "weblate-helabasa@yalu.lk",
+        "HelaBasa Group (\u0dc4\u0dd9\u0dc5\u0db6\u0dc3 \u0dc3\u0db8\u0dd6\u0dc4\u0dba)",
+        3
+      ],
+      [
+        "inner5740@gmail.com",
+        "colder_",
+        475
+      ]
+    ]
+  },
+  {
+    "Persian": [
+      [
+        "nma.fanniasl@gmail.com",
+        "Nima Fanniasl",
+        11
+      ]
+    ]
+  },
+  {
     "Turkish": [
       [
         "libreajans@gmail.com",
         "Sabri \u00dcnal",
         3
+      ]
+    ]
+  },
+  {
+    "German": [
+      [
+        "j.lavoie@net-c.ca",
+        "J. Lavoie",
+        12
+      ],
+      [
+        "philipp.kiemle@gmail.com",
+        "Philipp Kiemle",
+        25
+      ],
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        176
+      ]
+    ]
+  },
+  {
+    "Finnish": [
+      [
+        "jiri.gronroos@iki.fi",
+        "Jiri Gr\u00f6nroos",
+        237
+      ]
+    ]
+  },
+  {
+    "Dutch": [
+      [
+        "0xjarno@gmail.com",
+        "Jarno Van Schoor",
+        23
+      ],
+      [
+        "vistausss@fastmail.com",
+        "Heimen Stoffels",
+        51
+      ],
+      [
+        "philip.goto@gmail.com",
+        "Philip Goto",
+        352
+      ]
+    ]
+  },
+  {
+    "Italian": [
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        23
+      ],
+      [
+        "j.lavoie@net-c.ca",
+        "J. Lavoie",
+        27
+      ],
+      [
+        "fmodafferi@gmail.com",
+        "Francesco Modafferi",
+        38
+      ],
+      [
+        "albano_battistella@hotmail.com",
+        "albanobattistella",
+        134
       ]
     ]
   },
@@ -18,45 +112,35 @@
     ]
   },
   {
-    "Portuguese (Brazil)": [
+    "Chinese (Simplified)": [
       [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
-        1
+        "jingxuan@nfschina.com",
+        "jingxuan@nfschina.com",
+        8
       ],
       [
-        "hugokarvalho@hotmail.com",
-        "Hugo Carvalho",
-        4
+        "noreply+13019@weblate.org",
+        "Deleted User",
+        12
       ],
       [
-        "570cxat11@relay.firefox.com",
-        "Daimar Stein",
-        4
+        "me@wuzhiping.top",
+        "Frank.wu",
+        42
       ],
       [
-        "Guarakami1807@protonmail.ch",
-        "Thiago Carmona Monteiro",
-        85
+        "erbaotao@outlook.com",
+        "poi",
+        309
       ]
     ]
   },
   {
-    "German": [
+    "French": [
       [
-        "j.lavoie@net-c.ca",
-        "J. Lavoie",
-        13
-      ],
-      [
-        "philipp.kiemle@gmail.com",
-        "Philipp Kiemle",
-        26
-      ],
-      [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
-        167
+        "schotte.clement@hotmail.fr",
+        "Cl\u00e9ment Schotte",
+        9
       ]
     ]
   },
@@ -80,7 +164,21 @@
       [
         "sabdenovchingiz@gmail.com",
         "GestaltEngine",
-        305
+        289
+      ]
+    ]
+  },
+  {
+    "Norwegian Bokm\u00e5l": [
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        13
+      ],
+      [
+        "epost@anotheragency.no",
+        "Allan Nordh\u00f8y",
+        365
       ]
     ]
   },
@@ -94,50 +192,7 @@
       [
         "hugokarvalho@hotmail.com",
         "Hugo Carvalho",
-        115
-      ]
-    ]
-  },
-  {
-    "Italian": [
-      [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
-        23
-      ],
-      [
-        "j.lavoie@net-c.ca",
-        "J. Lavoie",
-        30
-      ],
-      [
-        "fmodafferi@gmail.com",
-        "Francesco Modafferi",
-        41
-      ],
-      [
-        "albano_battistella@hotmail.com",
-        "albanobattistella",
-        143
-      ]
-    ]
-  },
-  {
-    "Dutch": [
-      [
-        "0xjarno@gmail.com",
-        "Jarno Van Schoor",
-        23
-      ],
-      [
-        "vistausss@fastmail.com",
-        "Heimen Stoffels",
-        62
-      ],
-      [
-        "philip.goto@gmail.com",
-        "Philip Goto",
-        211
+        104
       ]
     ]
   },
@@ -154,102 +209,52 @@
         2
       ],
       [
+        "fran-carro@hotmail.es",
+        "gallegonovato",
+        16
+      ],
+      [
         "captainjawz@outlook.com",
         "Danilo Reyes",
-        135
+        118
       ],
       [
         "oscfdezdz@tuta.io",
         "\u00d3scar Fern\u00e1ndez D\u00edaz",
-        289
-      ]
-    ]
-  },
-  {
-    "French": [
-      [
-        "schotte.clement@hotmail.fr",
-        "Cl\u00e9ment Schotte",
-        9
-      ]
-    ]
-  },
-  {
-    "Persian": [
-      [
-        "nma.fanniasl@gmail.com",
-        "Nima Fanniasl",
-        11
-      ]
-    ]
-  },
-  {
-    "Finnish": [
-      [
-        "jiri.gronroos@iki.fi",
-        "Jiri Gr\u00f6nroos",
-        250
-      ]
-    ]
-  },
-  {
-    "Korean": [
-      [
-        "R45XvezA@protonmail.ch",
-        "HelaBasa Group (\u0dc4\u0dd9\u0dc5\u0db6\u0dc3 \u0dc3\u0db8\u0dd6\u0dc4\u0dba)",
-        4
-      ],
-      [
-        "inner5740@gmail.com",
-        "colder_",
-        510
+        287
       ]
     ]
   },
   {
     "Sinhala": [
       [
-        "R45XvezA@protonmail.ch",
+        "weblate-helabasa@yalu.lk",
         "HelaBasa Group (\u0dc4\u0dd9\u0dc5\u0db6\u0dc3 \u0dc3\u0db8\u0dd6\u0dc4\u0dba)",
-        8
+        6
       ]
     ]
   },
   {
-    "Chinese (Simplified)": [
-      [
-        "jingxuan@nfschina.com",
-        "jingxuan@nfschina.com",
-        8
-      ],
-      [
-        "noreply+13019@weblate.org",
-        "Deleted User",
-        15
-      ],
-      [
-        "me@wuzhiping.top",
-        "Frank.wu",
-        57
-      ],
-      [
-        "erbaotao@outlook.com",
-        "poi",
-        322
-      ]
-    ]
-  },
-  {
-    "Norwegian Bokm\u00e5l": [
+    "Portuguese (Brazil)": [
       [
         "code@simonschneegans.de",
         "Simon Schneegans",
-        13
+        1
       ],
       [
-        "epost@anotheragency.no",
-        "Allan Nordh\u00f8y",
-        382
+        "hugokarvalho@hotmail.com",
+        "Hugo Carvalho",
+        2
+      ],
+      [
+        "570cxat11@relay.firefox.com",
+        "Daimar Stein",
+        4
+      ],
+      [
+        "Guarakami1807@protonmail.ch",
+        "Thiago Carmona Monteiro",
+        71
       ]
     ]
   }
