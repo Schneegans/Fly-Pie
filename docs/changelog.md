@@ -26,6 +26,7 @@ SPDX-License-Identifier: CC-BY-4.0
 * Fly-Pie menus are now opened across all monitors. Before they were limited to the monitor currently having mouse input focus.
 * The custom info-popover has been replaced by a more traditional main menu. It gives access to Fly-Pie's homepage, the bug tracker and some donation options.
 * An about dialog has been added. If available, the `Adw.AboutWindow` is used.
+* Several translations received updates. Thanks to all the translators!
 
 #### Bug Fixes
 
