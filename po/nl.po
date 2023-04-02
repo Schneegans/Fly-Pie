@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-24 20:33+0100\n"
-"PO-Revision-Date: 2023-03-25 23:44+0000\n"
+"PO-Revision-Date: 2023-04-03 11:41+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/fly-pie/core/nl/>\n"
 "Language: nl\n"
@@ -570,7 +570,7 @@ msgstr "%safbreker"
 #: src/common/Achievements.js:418
 #, javascript-format
 msgid "Abort a selection %x times."
-msgstr "Annuleer een selectie %x keer."
+msgstr "Annuleer een selectie %x keer"
 
 #. Translators: The name of the 'Select %x items.' achievement.
 #: src/common/Achievements.js:431
@@ -582,7 +582,7 @@ msgstr "%spieloot"
 #: src/common/Achievements.js:433
 #, javascript-format
 msgid "Select %x items."
-msgstr "Selecteer %x items."
+msgstr "Selecteer %x items"
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
@@ -1137,7 +1137,7 @@ msgstr "Veganistische "
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:108
 msgid "Chocolate "
-msgstr "Chocolade"
+msgstr "chocolade­"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1145,7 +1145,7 @@ msgstr "Chocolade"
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:113
 msgid "Cherry "
-msgstr "Kersen"
+msgstr "kersen­"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1153,7 +1153,7 @@ msgstr "Kersen"
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:118
 msgid "Garlic "
-msgstr "Knoflook"
+msgstr "knoflook­"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1161,7 +1161,7 @@ msgstr "Knoflook"
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:123
 msgid "Apple "
-msgstr "Appel"
+msgstr "appel­"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1169,7 +1169,7 @@ msgstr "Appel"
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:128
 msgid "Pepper "
-msgstr "Peper"
+msgstr "peper­"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1177,7 +1177,7 @@ msgstr "Peper"
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:142
 msgid "Pie"
-msgstr "Taart"
+msgstr "taart"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1185,7 +1185,7 @@ msgstr "Taart"
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:147
 msgid "Cake"
-msgstr "Cake"
+msgstr "cake"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1193,7 +1193,7 @@ msgstr "Cake"
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:152
 msgid "Muffin"
-msgstr "Muffin"
+msgstr "muffin"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1201,7 +1201,7 @@ msgstr "Muffin"
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:157
 msgid "Doughnut"
-msgstr "Donut"
+msgstr "donut"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1209,7 +1209,7 @@ msgstr "Donut"
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:162
 msgid "Cookie"
-msgstr "Koekje"
+msgstr "koek"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:40
@@ -1342,7 +1342,7 @@ msgstr "Probleem melden"
 
 #: resources/ui/common/menus.ui:27
 msgid "Translate"
-msgstr "Vertalen"
+msgstr "Meehelpen vertalen"
 
 #: resources/ui/common/menus.ui:31
 msgid "Donate"
@@ -1470,7 +1470,7 @@ msgstr "Animaties inschakelen"
 #. Caption of the tutorial page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:608 resources/ui/gtk3/settings.ui:1319
 msgid "Tutorial"
-msgstr "Rondleiding"
+msgstr "Tutorial"
 
 #: resources/ui/gtk4/settings.ui:642 resources/ui/gtk3/settings.ui:654
 msgid ""
@@ -1552,7 +1552,7 @@ msgid ""
 "Pie's Marking Mode!"
 msgstr ""
 "Voor deze oefensessie opent u het menu door op de grote knop te drukken. "
-"Selecteer dan zo snel mogelijk ‘%s’. Kunt u de gouden medaille halen?\n"
+"Selecteer dan zo snel mogelijk ‘%s’. Kunt u de gouden medaille behalen?\n"
 "\n"
 "Zodra u tevreden bent met uw resultaat, druk dan op <b>Volgende</b> om meer "
 "te leren over Fly-Pie's markeermodus!"
