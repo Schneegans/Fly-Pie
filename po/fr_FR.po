@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: Fly-Pie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-24 20:33+0100\n"
-"PO-Revision-Date: 2021-12-21 11:51+0000\n"
-"Last-Translator: Clemovski <schotte.clement@hotmail.fr>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/fly-pie/core/fr/"
-">\n"
+"PO-Revision-Date: 2023-04-06 10:52+0000\n"
+"Last-Translator: Zekovski <zekovski@e.email>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/fly-pie/core/fr/>"
+"\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.10\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -887,19 +887,19 @@ msgstr ""
 
 #: src/prefs/PreferencesDialog.js:248 src/prefs/PreferencesDialog.js:281
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "Soutiens Or"
 
 #: src/prefs/PreferencesDialog.js:252 src/prefs/PreferencesDialog.js:285
 msgid "Silver Sponsors"
-msgstr ""
+msgstr "Soutiens Argent"
 
 #: src/prefs/PreferencesDialog.js:256 src/prefs/PreferencesDialog.js:289
 msgid "Bronze Sponsors"
-msgstr ""
+msgstr "Soutiens Bronze"
 
 #: src/prefs/PreferencesDialog.js:260 src/prefs/PreferencesDialog.js:293
 msgid "Past Sponsors"
-msgstr ""
+msgstr "Anciens Soutiens"
 
 #: src/prefs/ImageChooserButton.js:100
 #: resources/ui/gtk4/imageChooserButton.ui:22
@@ -1056,6 +1056,8 @@ msgid ""
 "If you cannot use a specific keyboard shortcut, you may check you system "
 "settings as it may be used already."
 msgstr ""
+"Si vous ne pouvez pas utiliser un raccourci clavier spécifique, vérifiez "
+"qu'il n'est pas déjà utilisé dans les paramètres de votre système."
 
 #. Translators: The left-most item of the menu editor bread crumbs.
 #: src/prefs/MenuEditorPage.js:1012
@@ -1339,27 +1341,27 @@ msgstr "Afficher les Succès"
 
 #: resources/ui/common/menus.ui:13
 msgid "Visit Homepage"
-msgstr ""
+msgstr "Visiter la page d'accueil"
 
 #: resources/ui/common/menus.ui:17
 msgid "View Changelog"
-msgstr ""
+msgstr "Voir le journal de modifications"
 
 #: resources/ui/common/menus.ui:23
 msgid "Report a Bug"
-msgstr ""
+msgstr "Signaler un bug"
 
 #: resources/ui/common/menus.ui:27
 msgid "Translate"
-msgstr ""
+msgstr "Traduire"
 
 #: resources/ui/common/menus.ui:31
 msgid "Donate"
-msgstr ""
+msgstr "Faire un don"
 
 #: resources/ui/common/menus.ui:48
 msgid "About Fly-Pie"
-msgstr ""
+msgstr "À propos de Fly-Pie"
 
 #: resources/ui/gtk4/copyValueButton.ui:12
 #: resources/ui/gtk3/copyValueButton.ui:12
@@ -1739,7 +1741,7 @@ msgstr "Police"
 
 #: resources/ui/gtk4/settings.ui:1482 resources/ui/gtk3/settings.ui:1482
 msgid "Label Font"
-msgstr ""
+msgstr "Police de l'étiquette"
 
 #: resources/ui/gtk4/settings.ui:1492 resources/ui/gtk3/settings.ui:1492
 msgid "Text Color"
@@ -2073,13 +2075,15 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk3/settings.ui:4141
 msgid "Open Windows at the Pointer"
-msgstr ""
+msgstr "Ouvrir les fenêtres sur le pointeur"
 
 #: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4151
 msgid ""
 "With this enabled, Fly-Pie will attempt to open any windows\n"
 "at the current pointer position."
 msgstr ""
+"Quand activé, Fly-Pie essaiera d'ouvrir toutes les fenêtres à\n"
+"l'emplacement actuel du pointeur."
 
 #: resources/ui/gtk4/settings.ui:4232 resources/ui/gtk3/settings.ui:4174
 msgid "Experimental Hover Mode"
@@ -2236,7 +2240,7 @@ msgstr "Ouvrir au Centre de l'Écran"
 
 #: resources/ui/gtk4/settings.ui:4968 resources/ui/gtk3/settings.ui:4968
 msgid "Show Labels"
-msgstr ""
+msgstr "Montrer les étiquettes"
 
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:5023 resources/ui/gtk3/settings.ui:5255
