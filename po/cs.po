@@ -1,0 +1,2225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Simon Schneegans
+# This file is distributed under the same license as the flypie package.
+# FIRST AUTHOR Amerey.eu <info@amerey.eu>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: flypie\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-24 20:33+0100\n"
+"PO-Revision-Date: 2023-04-05 21:30+0200\n"
+"Last-Translator: Amerey.eu <info@amerey.eu>\n"
+"Language-Team: \n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: src/common/actions/Shortcut.js:46
+msgid "Activate Shortcut"
+msgstr "Aktivovat zkratku"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/actions/Shortcut.js:53
+msgid "Simulates a key combination."
+msgstr "Simuluje kombinaci kláves."
+
+#: src/common/actions/Shortcut.js:57
+msgid ""
+"The <b>Activate Shortcut</b> action simulates a key combination when "
+"activated. For example, this can be used to switch virtual desktops, control "
+"multimedia playback or to undo / redo operations."
+msgstr ""
+"Akce <b>Aktivovat zkratku</b> simuluje při aktivaci kombinaci kláves. To lze "
+"například použít k přepínání virtuálních ploch, ovládání přehrávání "
+"multimédií nebo k vrácení/znovu provedení operací."
+
+#: src/common/actions/Shortcut.js:81 resources/ui/gtk4/settings.ui:4875
+#: resources/ui/gtk3/settings.ui:4875
+msgid "Shortcut"
+msgstr "Zkratka"
+
+#: src/common/actions/Shortcut.js:81
+msgid "This shortcut will be simulated."
+msgstr "Tato zkratka bude simulována."
+
+#: src/common/actions/File.js:37
+msgid "Open File"
+msgstr "Otevřít soubor"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/actions/File.js:44
+msgid "Opens a file with the default application."
+msgstr "Otevře soubor s výchozí aplikací."
+
+#: src/common/actions/File.js:48
+msgid ""
+"The <b>Open File</b> action will open the file specified above with your "
+"system's default application."
+msgstr ""
+"Akce <b>Otevřít soubor</b> otevře výše uvedený soubor pomocí výchozí aplikace "
+"vašeho systému."
+
+#: src/common/actions/File.js:72
+msgid "File"
+msgstr "Soubor"
+
+#: src/common/actions/File.js:72 src/common/actions/Uri.js:71
+msgid "It will be opened with the default app."
+msgstr "Otevře se výchozí aplikací."
+
+#: src/common/actions/Command.js:37
+msgid "Launch Application"
+msgstr "Spustit aplikaci"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/actions/Command.js:44
+msgid "Runs any shell command."
+msgstr "Spustí jakýkoli příkaz shellu."
+
+#: src/common/actions/Command.js:48
+msgid ""
+"The <b>Launch Application</b> action executes any given command. This is "
+"primarily used to open applications but may have plenty of other use cases as "
+"well."
+msgstr ""
+"Akce <b>Spustit aplikaci</b> provede libovolný daný příkaz. To se primárně "
+"používá k otevírání aplikací, ale může mít i spoustu dalších případů použití."
+
+#: src/common/actions/Command.js:72
+msgid "Command"
+msgstr "Příkaz"
+
+#: src/common/actions/Command.js:72
+msgid "Use the button to list installed apps."
+msgstr "Pomocí tlačítka zobrazíte seznam nainstalovaných aplikací."
+
+#: src/common/actions/Uri.js:36
+msgid "Open URI"
+msgstr "Otevřít URI"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/actions/Uri.js:43
+msgid "Opens an URI with the default application."
+msgstr "Otevře URI s výchozí aplikací."
+
+#: src/common/actions/Uri.js:47
+msgid ""
+"When the <b>Open URI</b> action is activated, the above URI is opened with "
+"the default application. For http URLs, this will be your web browser. "
+"However, it is also possible to open other URIs such as \"mailto:foo@bar.org"
+"\"."
+msgstr ""
+"Když je aktivována akce <b>Otevřít URI</b>, otevře se výše uvedený URI ve "
+"výchozí aplikaci. Pro http URL to bude váš webový prohlížeč. Je však také "
+"možné otevřít jiné identifikátory URI, například „mailto:foo@bar.org“."
+
+#: src/common/actions/Uri.js:71
+msgid "URI"
+msgstr "URI"
+
+#: src/common/actions/DBusSignal.js:35
+msgid "D-Bus Signal"
+msgstr "D-Bus signál"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/actions/DBusSignal.js:42
+msgid "Emits a D-Bus signal."
+msgstr "Vysílá signál D-Bus."
+
+#: src/common/actions/DBusSignal.js:46
+msgid ""
+"The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
+"\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md"
+"\">can listen on the D-Bus for its activation</a>. This can be very useful in "
+"custom menus opened via the command line."
+msgstr ""
+"Akce <b>D-Bus Signál</b> sama o sobě nic nedělá. Ale můžete si <a href="
+"\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md\">na "
+"D-Bus poslechnout její aktivaci</a>. To může být velmi užitečné ve vlastních "
+"nabídkách otevíraných pomocí příkazového řádku."
+
+#: src/common/actions/DBusSignal.js:70
+msgid "ID"
+msgstr "ID"
+
+#: src/common/actions/DBusSignal.js:70
+msgid "This will be passed to the D-Bus signal."
+msgstr "To bude předáno signálu D-Bus."
+
+#: src/common/actions/InsertText.js:51
+msgid "Insert Text"
+msgstr "Vložit text"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/actions/InsertText.js:58
+msgid "Types some text automatically."
+msgstr "Automaticky napíše nějaký text."
+
+#: src/common/actions/InsertText.js:62
+msgid ""
+"The <b>Insert Text</b> action copies the given text to the clipboard and then "
+"simulates a Ctrl+V. This can be useful if you realize that you often write "
+"the same things."
+msgstr ""
+"Akce <b>Vložit text</b> zkopíruje daný text do schránky a poté simuluje Ctrl"
+"+V. Toto může být užitečné, pokud často píšete stejné věci."
+
+#: src/common/actions/InsertText.js:86
+msgid "Text"
+msgstr "Text"
+
+#: src/common/actions/InsertText.js:86
+msgid "This text will be inserted."
+msgstr "Tento text bude vložen."
+
+#: src/common/ConfigWidgetFactory.js:105 src/prefs/ImageChooserButton.js:45
+msgid "Select File"
+msgstr "Vybrat soubor"
+
+#: src/common/ConfigWidgetFactory.js:106 src/common/ConfigWidgetFactory.js:182
+#: src/prefs/ImageChooserButton.js:46 src/prefs/MenuEditorPage.js:208
+#: src/prefs/MenuEditorPage.js:278 src/prefs/SettingsPage.js:280
+#: src/prefs/SettingsPage.js:335 resources/ui/gtk4/iconSelectDialog.ui:20
+#: resources/ui/gtk3/iconSelectDialog.ui:20
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: src/common/ConfigWidgetFactory.js:181
+msgid "Select Application"
+msgstr "Vybrat aplikaci"
+
+#. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
+#: src/common/ConfigWidgetFactory.js:290 src/common/ConfigWidgetFactory.js:338
+#: src/prefs/MenuEditor.js:284
+msgid "Not Bound"
+msgstr "Nepřiřazeno"
+
+#: src/common/ConfigWidgetFactory.js:321
+msgid ""
+"Press the shortcut!\n"
+"ESC to cancel, BackSpace to unbind"
+msgstr ""
+"Stiskněte klávesovou zkratku!\n"
+"ESC pro zrušení, BackSpace pro zrušení přiřazení"
+
+#. Translators: If some text is dragged to the menu editor, an insert-text action is
+#. created. This is the name of the newly created action, %s will be replaced by the
+#. text to insert.
+#: src/common/ItemRegistry.js:279
+#, javascript-format
+msgid "Insert: %s"
+msgstr "Vložit: %s"
+
+#: src/common/menus/FrequentlyUsed.js:47
+msgid "Frequently Used"
+msgstr "Často používané"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/menus/FrequentlyUsed.js:54
+msgid "Shows your frequently used applications."
+msgstr "Zobrazí často používané aplikace."
+
+#: src/common/menus/FrequentlyUsed.js:58
+msgid ""
+"The <b>Frequently Used</b> menu shows a list of frequently used applications. "
+"For efficient selections, you should limit the maximum number of shown "
+"applications to about twelve."
+msgstr ""
+"Nabídka <b>Často používané</b> zobrazuje seznam často používaných aplikací. "
+"Pro efektivní výběr byste měli omezit maximální počet zobrazených aplikací na "
+"přibližně dvanáct."
+
+#: src/common/menus/FrequentlyUsed.js:82 src/common/menus/RecentFiles.js:72
+#: src/common/menus/Clipboard.js:88
+msgid "Max Item Count"
+msgstr "Maximální počet položek"
+
+#: src/common/menus/FrequentlyUsed.js:82 src/common/menus/RecentFiles.js:72
+#: src/common/menus/Clipboard.js:88
+msgid "Limits the number of children."
+msgstr "Omezuje počet položek."
+
+#: src/common/menus/System.js:49
+msgid "System"
+msgstr "Systém"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/menus/System.js:56
+msgid "Allows screen lock, shutdown and other things."
+msgstr "Umožňuje uzamknutí obrazovky, vypnutí a další věci."
+
+#: src/common/menus/System.js:60
+msgid ""
+"The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
+"etc."
+msgstr ""
+"Nabídka <b>Systém</b> zobrazuje položky pro zámek obrazovky, vypnutí, "
+"nastavení atd."
+
+#. Translators: As in 'Lock the screen.'
+#: src/common/menus/System.js:84
+msgid "Lock"
+msgstr "Uzamknout"
+
+#: src/common/menus/System.js:93
+msgid "Suspend"
+msgstr "Suspendovat"
+
+#: src/common/menus/System.js:102
+msgid "Switch User…"
+msgstr "Přepnout uživatele…"
+
+#: src/common/menus/System.js:111
+msgid "Log Out"
+msgstr "Odhlásit"
+
+#: src/common/menus/System.js:120
+msgid "Power Off…"
+msgstr "Vypnout…"
+
+#: src/common/menus/CustomMenu.js:32
+msgid "Custom Menu"
+msgstr "Vlastní menu"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/menus/CustomMenu.js:39
+msgid "This can contain custom actions and other menus."
+msgstr "Může obsahovat vlastní akce a další menu."
+
+#: src/common/menus/CustomMenu.js:43
+msgid ""
+"A <b>Custom Menu</b> can contain any number of actions and submenus. However, "
+"for precise item selection, a maximum number of twelve items is recommended."
+msgstr ""
+"<b>Vlastní menu</b> může obsahovat libovolný počet akcí a podmenu. Pro přesný "
+"výběr položek se však doporučuje maximálně dvanáct položek."
+
+#. Translators: This is an entry of the default menu.
+#: src/common/menus/Favorites.js:46 src/extension/DefaultMenu.js:82
+msgid "Favorites"
+msgstr "Oblíbené"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/menus/Favorites.js:53
+msgid "Shows pinned applications."
+msgstr "Zobrazuje připnuté aplikace."
+
+#: src/common/menus/Favorites.js:57
+msgid ""
+"The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
+"Shell's Dash."
+msgstr ""
+"Nabídka <b>Oblíbené</b> zobrazuje aplikace, které jste připnuli do GNOME "
+"Shell's Dash."
+
+#: src/common/menus/RecentFiles.js:37
+msgid "Recent Files"
+msgstr "Nedávné soubory"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/menus/RecentFiles.js:44
+msgid "Shows your recently used files."
+msgstr "Zobrazuje nedávno použité soubory."
+
+#: src/common/menus/RecentFiles.js:48
+msgid ""
+"The <b>Recent Files</b> menu shows a list of recently used files. For "
+"efficient selections, you should limit the maximum number of shown files to "
+"about twelve."
+msgstr ""
+"Nabídka <b>Poslední soubory</b> zobrazuje seznam naposledy použitých souborů. "
+"Pro efektivní výběr byste měli omezit maximální počet zobrazených souborů na "
+"přibližně dvanáct."
+
+#: src/common/menus/Devices.js:36
+msgid "Devices"
+msgstr "Zařízení"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/menus/Devices.js:43
+msgid "Shows connected devices."
+msgstr "Zobrazuje připojená zařízení."
+
+#: src/common/menus/Devices.js:47
+msgid ""
+"The <b>Devices</b> menu shows an item for each mounted volume, like USB "
+"sticks."
+msgstr ""
+"Nabídka <b>Zařízení</b> zobrazuje položku pro každý připojený svazek, "
+"například USB disky."
+
+#: src/common/menus/MainMenu.js:36
+msgid "Main Menu"
+msgstr "Hlavní menu"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/menus/MainMenu.js:43
+msgid "Shows all installed applications."
+msgstr "Zobrazuje všechny nainstalované aplikace."
+
+#: src/common/menus/MainMenu.js:47
+msgid ""
+"The <b>Main Menu</b> shows all installed applications. Usually, this is very "
+"cluttered as many sections contain too many items to be used efficiently. You "
+"should rather set up your own menus!"
+msgstr ""
+"<b>Hlavní nabídka</b> zobrazuje všechny nainstalované aplikace. Obvykle je to "
+"velmi nepřehledné, protože mnoho sekcí obsahuje příliš mnoho položek na to, "
+"aby se daly efektivně využít. Raději si sestavte vlastní menu!"
+
+#. Translators: This is an entry of the default menu. I
+#: src/common/menus/RunningApps.js:50 src/extension/DefaultMenu.js:114
+msgid "Running Apps"
+msgstr "Spuštěné aplikace"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/menus/RunningApps.js:57
+msgid "Shows the currently running applications."
+msgstr "Zobrazuje aktuálně spuštěné aplikace."
+
+#: src/common/menus/RunningApps.js:61
+msgid ""
+"The <b>Running Apps</b> menu shows all currently running applications. This "
+"is similar to the Alt+Tab window selection. As the entries change position "
+"frequently, this is actually not very effective."
+msgstr ""
+"Nabídka <b>Spuštěné aplikace</b> zobrazuje všechny aktuálně spuštěné "
+"aplikace. Je to podobné jako zobrazení s Alt+Tab. Protože položky často mění "
+"polohu, není to ve skutečnosti příliš efektivní."
+
+#: src/common/menus/RunningApps.js:100
+msgid ""
+"You can use this to filter the displayed windows. Regular expressions are "
+"supported: Use a simple string like \"Fire\" to show only windows whose "
+"titles contain \"Fire\" (e.g. Firefox). Use \"Fire|Water\" to match either "
+"\"Fire\" or \"Water\". A negation would be \"^(?!.*Fire)\" to match anything "
+"but \"Fire\". Remember to use the live preview to instantly see the results!"
+msgstr ""
+"Můžete to použít k filtrování zobrazených oken. Regulární výrazy jsou "
+"podporovány: Použijte jednoduchý řetězec jako „Fire“ k zobrazení pouze oken, "
+"jejichž názvy obsahují „Fire“ (např. Firefox). Použijte \"Fire|Water\" k "
+"přiřazení buď \"Fire\" nebo \"Water\". Negace by byla \"^(?!.*Fire)\", aby "
+"odpovídala čemukoli jinému než \"Fire\". Nezapomeňte použít živý náhled, "
+"abyste okamžitě viděli výsledky!"
+
+#: src/common/menus/RunningApps.js:102
+msgid "Window Filter"
+msgstr "Filtr oken"
+
+#: src/common/menus/RunningApps.js:102 resources/ui/gtk4/settings.ui:4782
+#: resources/ui/gtk4/settings.ui:4833 resources/ui/gtk3/settings.ui:4776
+#: resources/ui/gtk3/settings.ui:4833
+msgid "See tooltip for details."
+msgstr "Podrobnosti naleznete v popisku."
+
+#: src/common/menus/RunningApps.js:128
+msgid "Active Workspace Only"
+msgstr "Pouze aktivní pracovní plocha"
+
+#: src/common/menus/RunningApps.js:129
+msgid "Group by Application"
+msgstr "Seskupit podle aplikace"
+
+#: src/common/menus/RunningApps.js:130
+msgid "Peek on Hover"
+msgstr "Náhled při najetí myši"
+
+#: src/common/menus/Bookmarks.js:36
+msgid "Bookmarks"
+msgstr "Záložky"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/menus/Bookmarks.js:43
+msgid "Shows your frequently used directories."
+msgstr "Zobrazuje často používané adresáře."
+
+#: src/common/menus/Bookmarks.js:47
+msgid ""
+"The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
+"bookmarked directory."
+msgstr ""
+"Nabídka <b>Záložky</b> zobrazuje položku pro koš, plochu a každý adresář se "
+"záložkami."
+
+#: src/common/menus/Clipboard.js:57
+msgid "Clipboard"
+msgstr "Schránka"
+
+#. Translators: Please keep this short.
+#. This is the (short) description shown in the add-new-item-popover.
+#: src/common/menus/Clipboard.js:64
+msgid "Shows recently copied things."
+msgstr "Zobrazuje nedávno zkopírované položky."
+
+#: src/common/menus/Clipboard.js:67
+msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
+msgstr ""
+"Nabídka <b>Schránka</b> zobrazuje seznam naposledy zkopírovaných položek."
+
+#: src/common/menus/Clipboard.js:97
+msgid "First Child Angle"
+msgstr "Směr položky"
+
+#: src/common/menus/Clipboard.js:97
+msgid "Direction of the most recent item."
+msgstr "Směr poslední položky."
+
+#. Translators: This is shown as item name in the clipboard menu when the user
+#. copied a vector image.
+#: src/common/menus/Clipboard.js:168
+msgid "Vector Image"
+msgstr "Vektorový obrázek"
+
+#. Translators: This is shown as item name in the clipboard menu when the user
+#. copied a raster image.
+#: src/common/menus/Clipboard.js:180
+msgid "Raster Image"
+msgstr "Rastrový obrázek"
+
+#. Translators: This is the tier 1 attribute which will be inserted for each %s
+#. in the achievement titles.
+#: src/common/Achievements.js:369
+msgid "Novice"
+msgstr "Novice"
+
+#. Translators: This is the tier 2 attribute which will be inserted for each %s
+#. in the achievement titles.
+#: src/common/Achievements.js:372
+msgid "Capable"
+msgstr "Capable"
+
+#. Translators: This is the tier 3 attribute which will be inserted for each %s
+#. in the achievement titles.
+#: src/common/Achievements.js:375
+msgid "Skilled"
+msgstr "Skilled"
+
+#. Translators: This is the tier 4 attribute which will be inserted for each %s
+#. in the achievement titles.
+#: src/common/Achievements.js:378
+msgid "Expert"
+msgstr "Expert"
+
+#. Translators: This is the tier 5 attribute which will be inserted for each %s
+#. in the achievement titles.
+#: src/common/Achievements.js:381
+msgid "Master"
+msgstr "Master"
+
+#. Translators: This is the tier 1 number which will be inserted for each %i in
+#. the achievement titles.
+#: src/common/Achievements.js:387
+msgid "I"
+msgstr "I"
+
+#. Translators: This is the tier 2 number which will be inserted for each %i in
+#. the achievement titles.
+#: src/common/Achievements.js:390
+msgid "II"
+msgstr "II"
+
+#. Translators: This is the tier 3 number which will be inserted for each %i in
+#. the achievement titles.
+#: src/common/Achievements.js:393
+msgid "III"
+msgstr "III"
+
+#. Translators: This is the tier 4 number which will be inserted for each %i in
+#. the achievement titles.
+#: src/common/Achievements.js:396
+msgid "IV"
+msgstr "IV"
+
+#. Translators: This is the tier 5 number which will be inserted for each %i in
+#. the achievement titles.
+#: src/common/Achievements.js:399
+msgid "V"
+msgstr "V"
+
+#. Translators: The name of the 'Abort a selection %x times.' achievement.
+#: src/common/Achievements.js:415
+#, javascript-format
+msgid "%s Cancellor"
+msgstr "%s Cancellor"
+
+#. Translators: The description of the '%s Cancellor' achievement.
+#: src/common/Achievements.js:418
+#, javascript-format
+msgid "Abort a selection %x times."
+msgstr "Zrušení výběru %x krát."
+
+#. Translators: The name of the 'Select %x items.' achievement.
+#: src/common/Achievements.js:431
+#, javascript-format
+msgid "%s Pielot"
+msgstr "%s Pielot"
+
+#. Translators: The description of the '%s Pielot' achievement.
+#: src/common/Achievements.js:433
+#, javascript-format
+msgid "Select %x items."
+msgstr "Vybrání %x položek."
+
+#. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
+#. achievement.
+#: src/common/Achievements.js:447
+#, javascript-format
+msgid "%s Toplevel Gesture-Selector"
+msgstr "%s Toplevel Gesture-Selector"
+
+#. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
+#. achievement.
+#: src/common/Achievements.js:450
+#, javascript-format
+msgid "%s Submenu Gesture-Selector"
+msgstr "%s Submenu Gesture-Selector"
+
+#. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
+#. achievement.
+#: src/common/Achievements.js:453
+#, javascript-format
+msgid "%s Subsubmenu Gesture-Selector"
+msgstr "%s Subsubmenu Gesture-Selector"
+
+#. Translators: The description of the 'Gesture-Selector' achievement.
+#: src/common/Achievements.js:460
+#, javascript-format
+msgid "Select %x items at depth %d in marking mode."
+msgstr "Vybráno %x položek v hloubce %d v režimu gest."
+
+#. Translators: The name of the 'Select %x items at depth 1 with mouse
+#. clicks.' achievement.
+#: src/common/Achievements.js:477
+#, javascript-format
+msgid "%s Toplevel Click-Selector"
+msgstr "%s Toplevel Click-Selector"
+
+#. Translators: The name of the 'Select %x items at depth 2 with mouse
+#. clicks.' achievement.
+#: src/common/Achievements.js:480
+#, javascript-format
+msgid "%s Submenu Click-Selector"
+msgstr "%s Submenu Click-Selector"
+
+#. Translators: The name of the 'Select %x items at depth 3 with mouse
+#. clicks.' achievement.
+#: src/common/Achievements.js:483
+#, javascript-format
+msgid "%s Subsubmenu Click-Selector"
+msgstr "%s Subsubmenu Click-Selector"
+
+#. Translators: The description of the 'Click-Selector' achievement.
+#: src/common/Achievements.js:490
+#, javascript-format
+msgid "Select %x items at depth %d with mouse clicks."
+msgstr "Vybráno %x položek v hloubce %d kliknutím myši."
+
+#. Translators: The name of the 'Select %x items at depth 1 in less than %t
+#. milliseconds.' achievement.
+#: src/common/Achievements.js:512
+#, javascript-format
+msgid "%s Toplevel Selector"
+msgstr "%s Toplevel Selector"
+
+#. Translators: The name of the 'Select %x items at depth 2 in less than %t
+#. milliseconds.' achievement.
+#: src/common/Achievements.js:515
+#, javascript-format
+msgid "%s Submenu Selector"
+msgstr "%s Submenu Selector"
+
+#. Translators: The name of the 'Select %x items at depth 3 in less than %t
+#. milliseconds.' achievement.
+#: src/common/Achievements.js:518
+#, javascript-format
+msgid "%s Subsubmenu Selector"
+msgstr "%s Subsubmenu Selector"
+
+#. Translators: The description of the 'Selector' achievement.
+#: src/common/Achievements.js:530
+msgid "Select %x items at depth %d in less than %t milliseconds."
+msgstr "Vybráno %x položek v hloubce %d za méně než %t milisekund."
+
+#. Translators: The name of the 'Open the settings dialog %x times.'
+#. achievement.
+#: src/common/Achievements.js:550
+msgid "The Journey Is The Reward %i"
+msgstr "The Journey Is The Reward %i"
+
+#. Translators: The description of the 'The Journey Is The Reward %i'
+#. achievement.
+#: src/common/Achievements.js:553
+#, javascript-format
+msgid "Open the settings dialog %x times."
+msgstr "%x krát otevřené dialogové okno nastavení."
+
+#. Translators: The name of the 'Open %x menus with the D-Bus interface.'
+#. achievement.
+#: src/common/Achievements.js:568
+msgid "Nerd Alert %i"
+msgstr "Nerd Alert %i"
+
+#. Translators: The description of the 'Nerd Alert %i' achievement.
+#: src/common/Achievements.js:570
+#, javascript-format
+msgid "Open %x menus with the D-Bus interface."
+msgstr "%x otevřeno menu pomocí rozhraní D-Bus."
+
+#. Translators: The name of the 'Generate %x random presets.' achievement.
+#: src/common/Achievements.js:584
+msgid "Entropie %i"
+msgstr "Entropie %i"
+
+#: src/common/Achievements.js:588
+#, javascript-format
+msgid "Generate %x random presets."
+msgstr "Vygenerováno %x náhodných předvoleb."
+
+#. Translators: The name of the 'Export %x custom presets.' achievement.
+#: src/common/Achievements.js:601
+#, javascript-format
+msgid "%s Preset Exporter"
+msgstr "%s Preset Exporter"
+
+#. Translators: The description of the '%s Preset Exporter' achievement if
+#. only one preset needs to be exported.
+#: src/common/Achievements.js:605
+msgid "Export a custom preset."
+msgstr "Export vlastní předvolby."
+
+#. Translators: The description of the '%s Preset Exporter' achievement.
+#: src/common/Achievements.js:607
+#, javascript-format
+msgid "Export %x custom presets."
+msgstr "Export %x vlastních předvoleb."
+
+#. Translators: The name of the 'Import %x custom presets.' achievement.
+#: src/common/Achievements.js:620
+#, javascript-format
+msgid "%s Preset Importer"
+msgstr "%s Preset Importer"
+
+#. Translators: The description of the '%s Preset Importer' achievement if
+#. only one preset needs to be imported.
+#: src/common/Achievements.js:624
+msgid "Import a custom preset."
+msgstr "Import vlastní předvolby."
+
+#. Translators: The description of the '%s Preset Importer' achievement.
+#: src/common/Achievements.js:626
+#, javascript-format
+msgid "Import %x custom presets."
+msgstr "Import %x vlastních předvoleb."
+
+#. Translators: The name of the 'Import %x menu configurations.' achievement.
+#: src/common/Achievements.js:639
+#, javascript-format
+msgid "%s Menu Importer"
+msgstr "%s Menu Importer"
+
+#. Translators: The description of the '%s Menu Importer' achievement if
+#. only one menu needs to be imported.
+#: src/common/Achievements.js:643
+msgid "Import a menu configuration."
+msgstr "Import konfigurace menu."
+
+#. Translators: The description of the '%s Menu Importer' achievement.
+#: src/common/Achievements.js:645
+#, javascript-format
+msgid "Import %x menu configurations."
+msgstr "Import %x konfigurací menu."
+
+#. Translators: The name of the 'Export %x menu configurations.' achievement.
+#: src/common/Achievements.js:659
+#, javascript-format
+msgid "%s Menu Exporter"
+msgstr "%s Menu Exporter"
+
+#. Translators: The description of the '%s Menu Exporter' achievement if
+#. only one menu needs to be exported.
+#: src/common/Achievements.js:663
+msgid "Export a menu configuration."
+msgstr "Export konfigurace menu."
+
+#. Translators: The description of the '%s Menu Exporter' achievement.
+#: src/common/Achievements.js:665
+#, javascript-format
+msgid "Export %x menu configurations."
+msgstr "Export %x konfigurací menu."
+
+#. Translators: The name of the 'Create %x items in the menu editor.'
+#. achievement.
+#: src/common/Achievements.js:680
+msgid "There Should Be No More Than Twelve Items…? %i"
+msgstr "There Should Be No More Than Twelve Items…? %i"
+
+#. Translators: The description of the 'There Should Be No More Than Twelve
+#. Items…? %i' achievement.
+#: src/common/Achievements.js:683
+#, javascript-format
+msgid "Create %x items in the menu editor."
+msgstr "Vytvořeno %x položek v editoru nabídky."
+
+#. Translators: The name of the 'Open a preview menu %x times.' achievement.
+#: src/common/Achievements.js:697
+#, javascript-format
+msgid "%s Menu Designer"
+msgstr "%s Menu Designer"
+
+#. Translators: The description of the '%s Menu Designer' achievement.
+#: src/common/Achievements.js:700
+#, javascript-format
+msgid "Open a preview menu %x times."
+msgstr "%xkrát otevřena nabídka náhledu."
+
+#. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
+#. This does not support %s and %i.
+#: src/common/Achievements.js:713
+msgid "Grumpie Rookie"
+msgstr "Grumpie Rookie"
+
+#. Translators: The description of the 'Grumpie Rookie' achievement.
+#: src/common/Achievements.js:715
+#, javascript-format
+msgid "Open the tutorial menu %x times."
+msgstr "Výukové menu otevřeno %x krát."
+
+#. Translators: The name of the 'Get all medals of the tutorial.' achievement.
+#. This does not support %s and %i.
+#: src/common/Achievements.js:727
+msgid "Bachelor Pielot"
+msgstr "Bachelor Pielot"
+
+#. Translators: The description of the 'Bachelor Pielot' achievement.
+#: src/common/Achievements.js:729
+msgid "Get all medals of the tutorial."
+msgstr "Získány všechny medaile z tutoriálu."
+
+#. Translators: The name of the hidden 'Delete all of your menus.' achievement.
+#. This does not support %s and %i.
+#: src/common/Achievements.js:741
+msgid "Say Good-Pie!"
+msgstr "Say Good-Pie!"
+
+#. Translators: The description of the 'Say Good-Pie!' achievement.
+#: src/common/Achievements.js:743
+msgid "Delete all of your menus."
+msgstr "Odstraněny všechny vlastní menu."
+
+#. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
+#. This does not support %s and %i.
+#. achievement.
+#: src/common/Achievements.js:756
+msgid "That's Philanthropie!"
+msgstr "That's Philanthropie!"
+
+#. Translators: The description of the 'That's Philanthropie!' achievement.
+#: src/common/Achievements.js:758
+msgid "Consider becoming a sponsor of Fly-Pie."
+msgstr "Zvažte možnost stát se sponzorem Fly-Pie."
+
+#: src/prefs/AchievementsPage.js:120
+msgid "Do you really want to reset all statistics?"
+msgstr "Opravdu chcete resetovat všechny statistiky?"
+
+#: src/prefs/AchievementsPage.js:121
+msgid "All achievements will be lost!"
+msgstr "Všechna ocenění budou ztracena!"
+
+#: src/prefs/MenuEditor.js:419
+msgid "No menus configured"
+msgstr "Nejsou konfigurována žádná menu"
+
+#: src/prefs/MenuEditor.js:422
+msgid "Create a new menu with the button in the top right corner."
+msgstr "Vytvořte nové menu pomocí tlačítka v pravém horním rohu."
+
+#: src/prefs/MenuEditor.js:452
+msgid "Add a new item"
+msgstr "Přidat novou položku"
+
+#. Translators: This is shown as an in-app notification when the
+#. user attempts to drag an action in the menu editor to the menu
+#. overview.
+#. Translators: This is shown as an in-app notification when the user
+#. attempts to drag an action in the menu editor to the menu overview.
+#: src/prefs/MenuEditor.js:789 src/prefs/MenuEditorPage.js:949
+msgid "Actions cannot be turned into toplevel menus."
+msgstr "Akce nelze změnit na menu nejvyšší úrovně."
+
+#. Translators: This is shown as an in-app notification when the
+#. user attempts to drag external stuff to the menu editor's
+#. overview.
+#: src/prefs/MenuEditor.js:809
+msgid "You can only create new Action items inside of Custom Menus."
+msgstr "Nové položky akcí můžete vytvářet pouze uvnitř vlastních menu."
+
+#: src/prefs/PreferencesDialog.js:248 src/prefs/PreferencesDialog.js:281
+msgid "Gold Sponsors"
+msgstr "Zlatí sponzoři"
+
+#: src/prefs/PreferencesDialog.js:252 src/prefs/PreferencesDialog.js:285
+msgid "Silver Sponsors"
+msgstr "Stříbrní sponzoři"
+
+#: src/prefs/PreferencesDialog.js:256 src/prefs/PreferencesDialog.js:289
+msgid "Bronze Sponsors"
+msgstr "Bronzoví sponzoři"
+
+#: src/prefs/PreferencesDialog.js:260 src/prefs/PreferencesDialog.js:293
+msgid "Past Sponsors"
+msgstr "Předchozí sponzoři"
+
+#: src/prefs/ImageChooserButton.js:100
+#: resources/ui/gtk4/imageChooserButton.ui:22
+#: resources/ui/gtk3/imageChooserButton.ui:22
+msgid "(None)"
+msgstr "(Žádný)"
+
+#: src/prefs/MenuEditorPage.js:197 src/prefs/MenuEditorPage.js:267
+#: src/prefs/SettingsPage.js:269 src/prefs/SettingsPage.js:324
+msgid "JSON Files"
+msgstr "Soubory JSON"
+
+#: src/prefs/MenuEditorPage.js:204 src/prefs/MenuEditorPage.js:274
+#: src/prefs/SettingsPage.js:276 src/prefs/SettingsPage.js:331
+msgid "All Files"
+msgstr "Všechny soubory"
+
+#: src/prefs/MenuEditorPage.js:209
+msgid "Export"
+msgstr "Exportovat"
+
+#: src/prefs/MenuEditorPage.js:238
+msgid "Could not export the menu configuration."
+msgstr "Konfiguraci menu se nepodařilo exportovat."
+
+#: src/prefs/MenuEditorPage.js:279
+msgid "Import"
+msgstr "Importovat"
+
+#: src/prefs/MenuEditorPage.js:313
+msgid "Could not import the menu configuration."
+msgstr "Konfiguraci menu se nepodařilo importovat."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:385
+msgid "You should try to have no more than twelve items in your menus."
+msgstr ""
+"Měli byste se snažit, aby ve vašich menu nebylo více než dvanáct položek."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:388
+msgid ""
+"An even number of entries will make it easier to learn item positions. Four, "
+"six and eight are good numbers."
+msgstr ""
+"Sudý počet položek usnadní naučení pozic položek. Čtyři, šest a osm jsou "
+"dobrá čísla."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:391
+#, javascript-format
+msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
+msgstr "Fly-Pie je bezplatný software dostupný na <a href=\"%s\">GitHub</a>."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:395
+#, javascript-format
+msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
+msgstr "Návrhy lze zveřejňovat na <a href=\"%s\">GitHub</a>."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:399
+#, javascript-format
+msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
+msgstr "Chyby lze nahlásit na <a href=\"%s\">GitHub</a>."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:403
+msgid ""
+"Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
+"new menu level."
+msgstr ""
+"Udržujte hierarchii menu efektivní tím, že do nové úrovně menu umístíte "
+"cokoli nad 8 prvků."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:406
+msgid ""
+"If you delete all menus, log out and log in again, the default configuration "
+"will be restored."
+msgstr ""
+"Pokud smažete všechna menu, odhlásíte se a znovu se přihlásíte, obnoví se "
+"výchozí konfigurace."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:409
+msgid "You can reorder the menu items on the left via drag and drop."
+msgstr "Položky menu na levé straně můžete změnit přetažením."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:412
+#, javascript-format
+msgid ""
+"It is possible to open a menu with a terminal command. You can read more on "
+"<a href=\"%s\">Github</a>."
+msgstr ""
+"Menu je možné otevřít příkazem terminálu. Více si můžete přečíst na <a href="
+"\"%s\">Github</a>."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:418
+msgid ""
+"You can drop directories, files, links and desktop files into the menu "
+"hierarchy on the left."
+msgstr ""
+"Adresáře, soubory, odkazy a soubory plochy můžete přesunout do hierarchie "
+"nabídky vlevo."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:421
+msgid ""
+"On Wayland, you can copy menu items by holding the Ctrl key while dragging "
+"them to another location."
+msgstr ""
+"V prostředí Wayland můžete zkopírovat položky nabídky podržením klávesy Ctrl "
+"a jejich přetažením na jiné místo."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:424
+#, javascript-format
+msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
+msgstr "<a href=\"%s\">Přeložte Fly-Pie na Hosted Weblate</a>."
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:430
+#, javascript-format
+msgid ""
+"💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
+"</a>"
+msgstr ""
+"💕️ Chcete dát najevo svou lásku k Fly-Pie? <a href=\"%s\">Staňte se sponzorem."
+"</a>"
+
+#. Translators: This is one of the hints which are shown in the bottom right corner
+#. of the menu editor.
+#: src/prefs/MenuEditorPage.js:434
+msgid ""
+"If you cannot use a specific keyboard shortcut, you may check you system "
+"settings as it may be used already."
+msgstr ""
+"Pokud nemůžete použít konkrétní klávesovou zkratku, můžete zkontrolovat "
+"nastavení systému, protože ji již můžete používat."
+
+#. Translators: The left-most item of the menu editor bread crumbs.
+#: src/prefs/MenuEditorPage.js:1012
+msgid "All Menus"
+msgstr "Všechna menu"
+
+#: src/prefs/SettingsPage.js:281
+msgid "Save"
+msgstr "Uložit"
+
+#: src/prefs/SettingsPage.js:336
+msgid "Load"
+msgstr "Načíst"
+
+#: src/prefs/SettingsPage.js:353
+msgid "Failed to load preset!"
+msgstr "Předvolbu se nepodařilo načíst!"
+
+#. Translators: Do not translate '%d'. ms = milliseconds
+#: src/prefs/TutorialPage.js:185
+#, javascript-format
+msgid "<big>Last selection time: <b>%d ms</b></big>"
+msgstr "<big>Čas posledního výběru: <b>%d ms</b></big>"
+
+#. Translators: Do not translate '%d'. ms = milliseconds
+#: src/prefs/TutorialPage.js:190
+#, javascript-format
+msgid "<big>Best selection time: <b>%d ms</b></big>"
+msgstr "<big>Nejlepší čas výběru: <b>%d ms</b></big>"
+
+#. Translators: This is the name of the tutorial menu.
+#. Translators: This is the name of the default menu.
+#: src/prefs/ExampleMenu.js:30 src/extension/DefaultMenu.js:32
+msgid "Example Menu"
+msgstr "Ukázkové menu"
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:69
+msgid "Cold "
+msgstr "Cold "
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:74
+msgid "Hot "
+msgstr "Hot "
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:79
+msgid "Wet "
+msgstr "Wet "
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:84
+msgid "Deadly "
+msgstr "Deadly "
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:89
+msgid "Smelly "
+msgstr "Smelly "
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the first words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:94
+msgid "Vegan "
+msgstr "Vegan "
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the middle words. The three words are
+#. directly appended to each other; therefore the trailing space is important. You
+#. can also use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:108
+msgid "Chocolate "
+msgstr "Chocolate "
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the middle words. The three words are
+#. directly appended to each other; therefore the trailing space is important. You
+#. can also use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:113
+msgid "Cherry "
+msgstr "Cherry "
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the middle words. The three words are
+#. directly appended to each other; therefore the trailing space is important. You
+#. can also use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:118
+msgid "Garlic "
+msgstr "Garlic "
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the middle words. The three words are
+#. directly appended to each other; therefore the trailing space is important. You
+#. can also use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:123
+msgid "Apple "
+msgstr "Apple "
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the middle words. The three words are
+#. directly appended to each other; therefore the trailing space is important. You
+#. can also use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:128
+msgid "Pepper "
+msgstr "Pepper "
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the last words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:142
+msgid "Pie"
+msgstr "Pie"
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the last words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:147
+msgid "Cake"
+msgstr "Cake"
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the last words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:152
+msgid "Muffin"
+msgstr "Muffin"
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the last words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:157
+msgid "Doughnut"
+msgstr "Doughnut"
+
+#. Translators: The tutorial menu allows selecting triplets such as "Smelly
+#. Chocolate Muffin". This is one of the last words. The three words are directly
+#. appended to each other; therefore the trailing space is important. You can also
+#. use hyphens if appropriate.
+#: src/prefs/ExampleMenu.js:162
+msgid "Cookie"
+msgstr "Cookie"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:40
+msgid "Sound"
+msgstr "Zvuk"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:45
+msgid "Mute"
+msgstr "Ztlumit"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:53
+msgid "Play / Pause"
+msgstr "Přehrát / Pozastavit"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:61
+msgid "Next Title"
+msgstr "Další skladba"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:69
+msgid "Previous Title"
+msgstr "Předchozí skladba"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:90
+msgid "Maximize Window"
+msgstr "Maximalizovat okno"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:98
+msgid "Fly-Pie Settings"
+msgstr "Nastavení Fly-Pie"
+
+#. Translators: This is an entry of the default menu.
+#: src/extension/DefaultMenu.js:106
+msgid "Close Window"
+msgstr "Zavřít okno"
+
+#. Translators: This is an entry of the default menu under GNOME 40 and beyond.
+#: src/extension/DefaultMenu.js:138
+msgid "Next Workspace"
+msgstr "Další Pracovní plocha"
+
+#. Translators: This is an entry of the default menu under GNOME 40 and beyond.
+#: src/extension/DefaultMenu.js:147
+msgid "Previous Workspace"
+msgstr "Předchozí Pracovní plocha"
+
+#. Translators: This is an entry of the default menu under GNOME 3.3x only.
+#: src/extension/DefaultMenu.js:158
+msgid "Switch Workspace"
+msgstr "Přepnout Pracovní plochu"
+
+#. Translators: This is an entry of the default menu under GNOME 3.3x only.
+#: src/extension/DefaultMenu.js:163
+msgid "Go Up"
+msgstr "Přejít nahoru"
+
+#. Translators: This is an entry of the default menu under GNOME 3.3x only.
+#: src/extension/DefaultMenu.js:171
+msgid "Go Down"
+msgstr "Přejít dolů"
+
+#. Translators: This is an entry of the default menu under GNOME 3.3x only.
+#: src/extension/DefaultMenu.js:184
+msgid "Move Window"
+msgstr "Přesunout okno"
+
+#. Translators: This is an entry of the default menu under GNOME 3.3x only.
+#: src/extension/DefaultMenu.js:189
+msgid "Move Window Up"
+msgstr "Přesunout okno nahoru"
+
+#. Translators: This is an entry of the default menu under GNOME 3.3x only.
+#: src/extension/DefaultMenu.js:197
+msgid "Move Window Down"
+msgstr "Přesunout okno dolů"
+
+#: src/extension/Background.js:91
+msgid "Close"
+msgstr "Zavřít"
+
+#. Translators: This means 'Change the side of the screen where the Preview menu is
+#. opened'.
+#: src/extension/Background.js:97
+msgid "Flip Side"
+msgstr "Prohodit stranu"
+
+#. Translators: This is shown in a desktop notifications.
+#: src/extension/Daemon.js:215
+msgid "Fly-Pie Level Up!"
+msgstr "Fly-Pie nová úroveň!"
+
+#. Translators: This is shown in a desktop notifications.
+#: src/extension/Daemon.js:217
+msgid "You reached level %i!"
+msgstr "Dosáhli jste úrovně %i!"
+
+#. Translators: This is shown in a desktop notifications.
+#: src/extension/Daemon.js:237
+msgid "Fly-Pie Achievement Completed!"
+msgstr "Dosaženo ocenění Fly-Pie!"
+
+#. Translators: This is shown in a desktop notifications.
+#: src/extension/Daemon.js:239
+#, javascript-format
+msgid "You finished the achievement \"%s\"!"
+msgstr "Získali jste ocenění „%s“!"
+
+#. Translators: This is shown on the action button of the notification bubble which
+#. is shown once an achievement is unlocked.
+#: src/extension/Daemon.js:601
+msgid "Show Achievements"
+msgstr "Zobrazit úspěchy"
+
+#: resources/ui/common/menus.ui:13
+msgid "Visit Homepage"
+msgstr "Navštívit domovskou stránku"
+
+#: resources/ui/common/menus.ui:17
+msgid "View Changelog"
+msgstr "Zobrazit seznam změn"
+
+#: resources/ui/common/menus.ui:23
+msgid "Report a Bug"
+msgstr "Nahlásit chybu"
+
+#: resources/ui/common/menus.ui:27
+msgid "Translate"
+msgstr "Přeložit"
+
+#: resources/ui/common/menus.ui:31
+msgid "Donate"
+msgstr "Darovat"
+
+#: resources/ui/common/menus.ui:48
+msgid "About Fly-Pie"
+msgstr "O aplikaci Fly-Pie"
+
+#: resources/ui/gtk4/copyValueButton.ui:12
+#: resources/ui/gtk3/copyValueButton.ui:12
+msgid "Copy left value to right side"
+msgstr "Zkopírovat levou hodnotu na pravou stranu"
+
+#: resources/ui/gtk4/iconSelectDialog.ui:25
+#: resources/ui/gtk3/iconSelectDialog.ui:25
+msgid "Select Icon"
+msgstr "Vyberat ikonu"
+
+#. Page title of the icon-select-dialog.
+#: resources/ui/gtk4/iconSelectDialog.ui:50
+#: resources/ui/gtk3/iconSelectDialog.ui:106
+msgid "Icon Theme"
+msgstr "Téma ikony"
+
+#. Page title of the icon-select-dialog.
+#: resources/ui/gtk4/iconSelectDialog.ui:112
+#: resources/ui/gtk3/iconSelectDialog.ui:117
+msgid "Custom Icon"
+msgstr "Vlastní ikona"
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
+#: resources/ui/gtk4/settings.ui:25 resources/ui/gtk3/settings.ui:25
+msgid "Linear"
+msgstr "Linear"
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
+#: resources/ui/gtk4/settings.ui:29 resources/ui/gtk3/settings.ui:29
+msgid "Ease"
+msgstr "Ease"
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
+#: resources/ui/gtk4/settings.ui:33 resources/ui/gtk3/settings.ui:33
+msgid "Ease-In"
+msgstr "Ease-In"
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
+#: resources/ui/gtk4/settings.ui:37 resources/ui/gtk3/settings.ui:37
+msgid "Ease-Out"
+msgstr "Ease-Out"
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
+#: resources/ui/gtk4/settings.ui:41 resources/ui/gtk3/settings.ui:41
+msgid "Ease-In-Out"
+msgstr "Ease-In-Out"
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
+#: resources/ui/gtk4/settings.ui:45 resources/ui/gtk3/settings.ui:45
+msgid "Ease-In-Quad"
+msgstr "Ease-In-Quad"
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
+#: resources/ui/gtk4/settings.ui:49 resources/ui/gtk3/settings.ui:49
+msgid "Ease-Out-Quad"
+msgstr "Ease-Out-Quad"
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
+#: resources/ui/gtk4/settings.ui:53 resources/ui/gtk3/settings.ui:53
+msgid "Ease-In-Out-Quad"
+msgstr "Ease-In-Out-Quad"
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
+#: resources/ui/gtk4/settings.ui:57 resources/ui/gtk3/settings.ui:57
+msgid "Ease-In-Back"
+msgstr "Ease-In-Back"
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
+#: resources/ui/gtk4/settings.ui:61 resources/ui/gtk3/settings.ui:61
+msgid "Ease-Out-Back"
+msgstr "Ease-Out-Back"
+
+#. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
+#: resources/ui/gtk4/settings.ui:65 resources/ui/gtk3/settings.ui:65
+msgid "Ease-In-Out-Back"
+msgstr "Ease-In-Out-Back"
+
+#. Heading in the add-new-item-popover of the menu editor.
+#: resources/ui/gtk4/settings.ui:415 resources/ui/gtk3/settings.ui:416
+msgid ""
+"<b>Menus</b>\n"
+"Can be submenus or top-level menus."
+msgstr ""
+"<b>Menu</b>\n"
+"Může se jednat o podnabídky nebo nabídky nejvyšší úrovně."
+
+#. Heading in the add-new-item-popover of the menu editor.
+#: resources/ui/gtk4/settings.ui:439 resources/ui/gtk3/settings.ui:440
+msgid ""
+"<b>Actions</b>\n"
+"Can be added to custom menus."
+msgstr ""
+"<b>Akce</b>\n"
+"Lze přidat do vlastních nabídek."
+
+#. Tooltip of the generate-a-random-preset button
+#: resources/ui/gtk4/settings.ui:509 resources/ui/gtk3/settings.ui:510
+msgid "Initialize most settings to random values."
+msgstr "Inicializovat většinu nastavení na náhodné hodnoty."
+
+#: resources/ui/gtk4/settings.ui:521 resources/ui/gtk3/settings.ui:522
+msgid "Generate Random Preset"
+msgstr "Generovat náhodné předvolby"
+
+#: resources/ui/gtk4/settings.ui:552 resources/ui/gtk3/settings.ui:556
+msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
+msgstr "Fly-Pie vyžaduje, aby byly povoleny animace prostředí GNOME Shell."
+
+#. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
+#: resources/ui/gtk4/settings.ui:557 resources/ui/gtk3/settings.ui:566
+msgid "Enable Animations"
+msgstr "Povolit animace"
+
+#. Caption of the tutorial page in the window's titlebar.
+#: resources/ui/gtk4/settings.ui:608 resources/ui/gtk3/settings.ui:1319
+msgid "Tutorial"
+msgstr "Výukový program"
+
+#: resources/ui/gtk4/settings.ui:642 resources/ui/gtk3/settings.ui:654
+msgid ""
+"You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
+"much more. This interactive tutorial will teach you how to use Fly-Pie most "
+"efficiently. Click the big button below to open a test menu!"
+msgstr ""
+"Fly-Pie můžete použít ke spouštění aplikací, simulaci klávesových zkratek, "
+"otevírání URL a mnoho dalšího. Tento interaktivní výukový program vás naučí, "
+"jak používat Fly-Pie nejefektivněji. Kliknutím na velké tlačítko níže "
+"otevřete testovací nabídku!"
+
+#: resources/ui/gtk4/settings.ui:653 resources/ui/gtk3/settings.ui:665
+msgid ""
+"• Use your <b>left mouse button to select items</b>.\n"
+"• Use your <b>right mouse button to close the menu</b>.\n"
+"• The test menu is just a playground, selecting items has no real effect.\n"
+"\n"
+"Once you feel comfortable, click <b>next</b> to learn more details!"
+msgstr ""
+"• Použijte <b>levé tlačítko myši k výběru položek</b>.\n"
+"• Pomocí <b>pravého tlačítka myši zavřete nabídku</b>.\n"
+"• V tomto testovacím menu výběr položek nemá žádný skutečný efekt.\n"
+"\n"
+"Kliknutím na <b>další</b> a dozvíte se další podrobnosti!"
+
+#. The text of the big tutorial button.
+#: resources/ui/gtk4/settings.ui:673 resources/ui/gtk4/settings.ui:756
+#: resources/ui/gtk4/settings.ui:842 resources/ui/gtk4/settings.ui:987
+#: resources/ui/gtk4/settings.ui:1073 resources/ui/gtk3/settings.ui:685
+#: resources/ui/gtk3/settings.ui:765 resources/ui/gtk3/settings.ui:849
+#: resources/ui/gtk3/settings.ui:991 resources/ui/gtk3/settings.ui:1075
+msgid "<big><b>Open the example menu!</b></big>"
+msgstr "<big><b>Otevřete ukázkové menu!</b></big>"
+
+#. This is a heading.
+#: resources/ui/gtk4/settings.ui:705 resources/ui/gtk3/settings.ui:715
+msgid "You can click anywhere!"
+msgstr "Můžete kliknout kamkoli!"
+
+#: resources/ui/gtk4/settings.ui:724 resources/ui/gtk3/settings.ui:733
+msgid ""
+"It does not matter whether you click directly on an item or at the edge of "
+"your screen as long as your mouse pointer remains in the item's wedge."
+msgstr ""
+"Nezáleží na tom, zda kliknete přímo na položku nebo na okraj obrazovky, pokud "
+"ukazatel myši zůstane ve výseči položky."
+
+#: resources/ui/gtk4/settings.ui:736 resources/ui/gtk3/settings.ui:745
+msgid ""
+"<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
+"\n"
+"Also, you do not have to wait for the animation to finish as the submenu "
+"wedges will appear instantaneously around the position where you clicked.\n"
+"\n"
+"Click <b>next</b> for a practice session!"
+msgstr ""
+"<b>Položky se vybírají kliknutím kamkoli do příslušných výsečí</b>.\n"
+"\n"
+"Také nemusíte čekat na dokončení animace, protože výseče podnabídky se "
+"okamžitě objeví kolem pozice, na kterou jste klikli.\n"
+"\n"
+"Klikněte na <b>další</b> pro trénink!"
+
+#. This is a heading.
+#: resources/ui/gtk4/settings.ui:788 resources/ui/gtk3/settings.ui:795
+msgid "Practice Session I"
+msgstr "Cvičení I"
+
+#: resources/ui/gtk4/settings.ui:798 resources/ui/gtk3/settings.ui:805
+#, javascript-format
+msgid ""
+"For this practice session, open the menu by clicking the big button. Then "
+"select \"%s\" as quickly as possible. Can you get the gold medal?\n"
+"\n"
+"Once you are pleased with your result, click <b>next</b> to learn about Fly-"
+"Pie's Marking Mode!"
+msgstr ""
+"Pro toto cvičení otevřete nabídku kliknutím na velké tlačítko. Poté vyberte "
+"\"%s\" co nejrychleji. Dokážete získat zlatou medaili?\n"
+"\n"
+"Jakmile budete se svým výsledkem spokojeni, klikněte na <b>další</b> a "
+"zjistěte více o režimu značení Fly-Pie!"
+
+#. ms = milliseconds
+#: resources/ui/gtk4/settings.ui:871 resources/ui/gtk3/settings.ui:878
+msgid "Unlocked at less than 3000 ms"
+msgstr "Odemčeno za méně než 3 000 ms"
+
+#. ms = milliseconds
+#: resources/ui/gtk4/settings.ui:891 resources/ui/gtk3/settings.ui:898
+msgid "Unlocked at less than 2000 ms"
+msgstr "Odemčeno za méně než 2 000 ms"
+
+#. ms = milliseconds
+#: resources/ui/gtk4/settings.ui:912 resources/ui/gtk4/settings.ui:1101
+#: resources/ui/gtk3/settings.ui:919 resources/ui/gtk3/settings.ui:1103
+msgid "Unlocked at less than 1000 ms"
+msgstr "Odemčeno za méně než 1 000 ms"
+
+#. This is a heading.
+#: resources/ui/gtk4/settings.ui:939 resources/ui/gtk3/settings.ui:944
+msgid "The Marking Mode of Fly-Pie"
+msgstr "Režim gest Fly-Pie"
+
+#: resources/ui/gtk4/settings.ui:958 resources/ui/gtk3/settings.ui:962
+msgid ""
+"The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
+"gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
+"pause dragging or make a turn, the item will be selected."
+msgstr ""
+"<b>Režim gest</b> Fly-Pie vám umožňuje vybírat položky <b>kreslením gest</b>! "
+"Chcete-li použít režim gest, klikněte na menu a táhněte. Jakmile tažení "
+"pozastavíte nebo změníte směr, položka bude vybrána."
+
+#: resources/ui/gtk4/settings.ui:969 resources/ui/gtk3/settings.ui:973
+msgid ""
+"Try remembering the path to an item. Open the menu and <b>draw the path with "
+"your mouse</b>. You can start with individual segments of the path, put you "
+"can also try to draw the entire path!\n"
+"\n"
+"You may find it more successful if you explicitly try to compose your gesture "
+"of straight parts. <b>Do not draw curvy paths but rather expressive zig-zag-"
+"lines!</b>"
+msgstr ""
+"Zkuste si zapamatovat cestu k položce. Otevřete menu a <b>nakreslete cestu "
+"myší</b>. Můžete začít s jednotlivými částmi cesty, můžete také zkusit "
+"nakreslit celou cestu!\n"
+"\n"
+"Možná budete mít větší úspěch, když se pokusíte své gesto skládat z rovných "
+"částí. <b>Nekreslete křivky, ale spíše výrazné klikaté čáry!</b>"
+
+#. This is a heading.
+#: resources/ui/gtk4/settings.ui:1019 resources/ui/gtk3/settings.ui:1021
+msgid "Practice Session II"
+msgstr "Cvičení II"
+
+#: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1031
+#, javascript-format
+msgid ""
+"Again, you should select \"%s\" as quickly as possible. However, as you now "
+"learned about the Marking Mode, the time required to get the gold medal is "
+"much shorter!\n"
+"\n"
+"Once you are pleased with your result, click <b>next</b> to learn some final "
+"tips and tricks!"
+msgstr ""
+"Opět byste měli vybrat \"%s\" co nejrychleji. Když jste se nyní dozvěděli o "
+"režimu gest, čas potřebný k získání zlaté medaile je mnohem kratší!\n"
+"\n"
+"Až budete se svým výsledkem spokojeni, klikněte na <b>další</b> a naučte se "
+"poslední tipy a triky!"
+
+#. ms = milliseconds
+#: resources/ui/gtk4/settings.ui:1121 resources/ui/gtk3/settings.ui:1123
+msgid "Unlocked at less than 750 ms"
+msgstr "Odemknuto za méně než 750 ms"
+
+#. ms = milliseconds
+#: resources/ui/gtk4/settings.ui:1142 resources/ui/gtk3/settings.ui:1144
+msgid "Unlocked at less than 500 ms"
+msgstr "Odemknuto za méně než 500 ms"
+
+#. The user finished the tutorial. Yay!
+#: resources/ui/gtk4/settings.ui:1176 resources/ui/gtk3/settings.ui:1176
+msgid "Congratulations!"
+msgstr "Gratulujeme!"
+
+#. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
+#: resources/ui/gtk4/settings.ui:1188 resources/ui/gtk3/settings.ui:1188
+msgid ""
+"Congratulations! If you managed to unlock most of the medals, you will be "
+"using Fly-Pie like a master Pielot!\n"
+"\n"
+"Now you can use the other pages of this settings dialog to configure Fly-Pie "
+"to your heart's desire. There are many options! Create as many menus as you "
+"want with as deep hierarchies as you want. But try to limit the amount of "
+"items per submenu to <b>at most twelve items</b>. Everything above this "
+"number will drastically reduce your efficiency.\n"
+"\n"
+"If you like Fly-Pie, I would be happy if you left a positive review on <a "
+"href=\"https://extensions.gnome.org/extension/3433/fly-pie/\">extensions."
+"gnome.org</a>! Whenever you encounter a 🐞️ bug or have feature request, feel "
+"free to report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
+"\">Github</a>."
+msgstr ""
+"Gratulujeme! Pokud se vám podařilo odemknout většinu medailí, budete Fly-Pie "
+"používat jako mistr!\n"
+"\n"
+"Nyní můžete použít další záložky tohoto dialogového okna ke konfiguraci Fly-"
+"Pie podle vašich představ. Možností je mnoho! Vytvořte tolik nabídek, kolik "
+"chcete, s tak hlubokou hierarchií, jak chcete. Pokuste se však omezit "
+"množství položek v podnabídce na <b>nejvýše dvanáct položek</b>. Vše nad toto "
+"číslo drasticky sníží vaši efektivitu."
+
+#. Button for tutorial navigation. Goes back one page.
+#: resources/ui/gtk4/settings.ui:1233 resources/ui/gtk3/settings.ui:1234
+msgid "Previous"
+msgstr "Předchozí"
+
+#. Button for tutorial navigation. Goes to the next page.
+#: resources/ui/gtk4/settings.ui:1290 resources/ui/gtk3/settings.ui:1291
+msgid "Next"
+msgstr "Následující"
+
+#. Caption of the settings page in the window's titlebar.
+#: resources/ui/gtk4/settings.ui:1326 resources/ui/gtk3/settings.ui:4426
+msgid "Settings"
+msgstr "Nastavení"
+
+#: resources/ui/gtk4/settings.ui:1359 resources/ui/gtk4/settings.ui:1578
+#: resources/ui/gtk3/settings.ui:1359 resources/ui/gtk3/settings.ui:1578
+msgid "Global Appearance Settings"
+msgstr "Globální nastavení vzhledu"
+
+#: resources/ui/gtk4/settings.ui:1369 resources/ui/gtk3/settings.ui:1369
+msgid "These settings affect all menu items."
+msgstr "Tato nastavení ovlivní všechny položky menu."
+
+#: resources/ui/gtk4/settings.ui:1387 resources/ui/gtk3/settings.ui:1387
+msgid "Animation Duration"
+msgstr "Délka animace"
+
+#: resources/ui/gtk4/settings.ui:1401 resources/ui/gtk3/settings.ui:1401
+msgid "Global Scaling"
+msgstr "Globální škálování"
+
+#. Please keep this short!
+#: resources/ui/gtk4/settings.ui:1411 resources/ui/gtk3/settings.ui:1411
+msgid "Independent of the preset."
+msgstr "Nezávisle na předvolbě."
+
+#: resources/ui/gtk4/settings.ui:1462 resources/ui/gtk4/settings.ui:2113
+#: resources/ui/gtk4/settings.ui:2808 resources/ui/gtk4/settings.ui:3040
+#: resources/ui/gtk3/settings.ui:1462 resources/ui/gtk3/settings.ui:2108
+#: resources/ui/gtk3/settings.ui:2798 resources/ui/gtk3/settings.ui:3014
+msgid "Background Color"
+msgstr "Barva pozadí"
+
+#: resources/ui/gtk4/settings.ui:1472 resources/ui/gtk3/settings.ui:1472
+msgid "Font"
+msgstr "Písmo"
+
+#: resources/ui/gtk4/settings.ui:1482 resources/ui/gtk3/settings.ui:1482
+msgid "Label Font"
+msgstr "Písmo štítku"
+
+#: resources/ui/gtk4/settings.ui:1492 resources/ui/gtk3/settings.ui:1492
+msgid "Text Color"
+msgstr "Barva textu"
+
+#: resources/ui/gtk4/settings.ui:1566 resources/ui/gtk3/settings.ui:1566
+msgid "Animation Mode"
+msgstr "Režim animace"
+
+#: resources/ui/gtk4/settings.ui:1607 resources/ui/gtk4/settings.ui:2212
+#: resources/ui/gtk3/settings.ui:1602 resources/ui/gtk3/settings.ui:2202
+msgid "Center Appearance"
+msgstr "Vzhled středu"
+
+#: resources/ui/gtk4/settings.ui:1617 resources/ui/gtk3/settings.ui:1612
+msgid "The center element shows the currently hovered child's name."
+msgstr "Střed zobrazuje jméno aktuálně vybraného menu."
+
+#. Hovered: When the mouse pointer is over the item
+#: resources/ui/gtk4/settings.ui:1633 resources/ui/gtk3/settings.ui:1628
+msgid "With Hovered Child"
+msgstr "Při najetí na menu"
+
+#. Hovered: When the mouse pointer is over the item
+#: resources/ui/gtk4/settings.ui:1646 resources/ui/gtk3/settings.ui:1641
+msgid "Without Hovered Child"
+msgstr "Bez najetí na menu"
+
+#: resources/ui/gtk4/settings.ui:1676 resources/ui/gtk4/settings.ui:2602
+#: resources/ui/gtk4/settings.ui:3153 resources/ui/gtk3/settings.ui:1671
+#: resources/ui/gtk3/settings.ui:2592 resources/ui/gtk3/settings.ui:3131
+msgid "Size"
+msgstr "Velikost"
+
+#: resources/ui/gtk4/settings.ui:1727 resources/ui/gtk4/settings.ui:1778
+#: resources/ui/gtk4/settings.ui:1930 resources/ui/gtk4/settings.ui:1981
+#: resources/ui/gtk4/settings.ui:2351 resources/ui/gtk4/settings.ui:2412
+#: resources/ui/gtk4/settings.ui:2505 resources/ui/gtk4/settings.ui:2576
+#: resources/ui/gtk3/settings.ui:1722 resources/ui/gtk3/settings.ui:1773
+#: resources/ui/gtk3/settings.ui:1929 resources/ui/gtk3/settings.ui:1980
+#: resources/ui/gtk3/settings.ui:2338 resources/ui/gtk3/settings.ui:2399
+#: resources/ui/gtk3/settings.ui:2495 resources/ui/gtk3/settings.ui:2566
+msgid "Saturation"
+msgstr "Saturace"
+
+#: resources/ui/gtk4/settings.ui:1744 resources/ui/gtk4/settings.ui:1788
+#: resources/ui/gtk4/settings.ui:1947 resources/ui/gtk4/settings.ui:1991
+#: resources/ui/gtk4/settings.ui:2368 resources/ui/gtk4/settings.ui:2402
+#: resources/ui/gtk4/settings.ui:2522 resources/ui/gtk4/settings.ui:2566
+#: resources/ui/gtk3/settings.ui:1739 resources/ui/gtk3/settings.ui:1783
+#: resources/ui/gtk3/settings.ui:1946 resources/ui/gtk3/settings.ui:1990
+#: resources/ui/gtk3/settings.ui:2355 resources/ui/gtk3/settings.ui:2389
+#: resources/ui/gtk3/settings.ui:2512 resources/ui/gtk3/settings.ui:2556
+msgid "Luminance"
+msgstr "Jas"
+
+#: resources/ui/gtk4/settings.ui:1761 resources/ui/gtk4/settings.ui:1798
+#: resources/ui/gtk4/settings.ui:1964 resources/ui/gtk4/settings.ui:2001
+#: resources/ui/gtk4/settings.ui:2385 resources/ui/gtk4/settings.ui:2422
+#: resources/ui/gtk4/settings.ui:2539 resources/ui/gtk4/settings.ui:2556
+#: resources/ui/gtk3/settings.ui:1756 resources/ui/gtk3/settings.ui:1793
+#: resources/ui/gtk3/settings.ui:1963 resources/ui/gtk3/settings.ui:2000
+#: resources/ui/gtk3/settings.ui:2372 resources/ui/gtk3/settings.ui:2409
+#: resources/ui/gtk3/settings.ui:2529 resources/ui/gtk3/settings.ui:2546
+msgid "Opacity"
+msgstr "Průhlednost"
+
+#. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
+#: resources/ui/gtk4/settings.ui:1819 resources/ui/gtk4/settings.ui:1883
+#: resources/ui/gtk4/settings.ui:2297 resources/ui/gtk4/settings.ui:2451
+#: resources/ui/gtk4/settings.ui:3054 resources/ui/gtk4/settings.ui:3105
+#: resources/ui/gtk3/settings.ui:1815 resources/ui/gtk3/settings.ui:1881
+#: resources/ui/gtk3/settings.ui:2282 resources/ui/gtk3/settings.ui:2439
+#: resources/ui/gtk3/settings.ui:3029 resources/ui/gtk3/settings.ui:3082
+msgid "Fixed"
+msgstr "Vlastní"
+
+#. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
+#: resources/ui/gtk4/settings.ui:1826 resources/ui/gtk4/settings.ui:1890
+#: resources/ui/gtk4/settings.ui:2304 resources/ui/gtk4/settings.ui:2458
+#: resources/ui/gtk3/settings.ui:1823 resources/ui/gtk3/settings.ui:1889
+#: resources/ui/gtk3/settings.ui:2290 resources/ui/gtk3/settings.ui:2447
+msgid "Auto"
+msgstr "Automatická"
+
+#: resources/ui/gtk4/settings.ui:2059 resources/ui/gtk4/settings.ui:2765
+#: resources/ui/gtk3/settings.ui:2058 resources/ui/gtk3/settings.ui:2755
+msgid "Icon Opacity"
+msgstr "Průhlednost ikony"
+
+#: resources/ui/gtk4/settings.ui:2102 resources/ui/gtk4/settings.ui:2859
+#: resources/ui/gtk3/settings.ui:2097 resources/ui/gtk3/settings.ui:2844
+msgid "Icon Scale"
+msgstr "Měřítko ikony"
+
+#: resources/ui/gtk4/settings.ui:2132 resources/ui/gtk4/settings.ui:2878
+#: resources/ui/gtk3/settings.ui:2126 resources/ui/gtk3/settings.ui:2862
+msgid "Icon Crop"
+msgstr "0říznutí ikony"
+
+#: resources/ui/gtk4/settings.ui:2183 resources/ui/gtk4/settings.ui:2929
+#: resources/ui/gtk4/settings.ui:3315 resources/ui/gtk3/settings.ui:2176
+#: resources/ui/gtk3/settings.ui:2912 resources/ui/gtk3/settings.ui:3289
+msgid "Background Image"
+msgstr "Obrázek pozadí"
+
+#: resources/ui/gtk4/settings.ui:2241 resources/ui/gtk4/settings.ui:2958
+#: resources/ui/gtk3/settings.ui:2225 resources/ui/gtk3/settings.ui:2938
+msgid "Children Appearance"
+msgstr "Vzhled menu"
+
+#: resources/ui/gtk4/settings.ui:2251 resources/ui/gtk3/settings.ui:2235
+msgid "Child items are styled differently when their wedge is hovered."
+msgstr "Položky menu mají jiný styl, když na jejich výseč najedete."
+
+#. When the mouse pointer is NOT over the item
+#: resources/ui/gtk4/settings.ui:2267 resources/ui/gtk4/settings.ui:3013
+#: resources/ui/gtk3/settings.ui:2251 resources/ui/gtk3/settings.ui:2987
+msgid "Standard State"
+msgstr "Standardní stav"
+
+#. Hovered: When the mouse pointer is over the item
+#. When the mouse pointer is over the item
+#. Hovered: When the mouse pointer is over the item
+#. When the mouse pointer is over the item
+#: resources/ui/gtk4/settings.ui:2280 resources/ui/gtk4/settings.ui:3564
+#: resources/ui/gtk3/settings.ui:2264 resources/ui/gtk3/settings.ui:3528
+msgid "Hovered State"
+msgstr "Stav při najetí"
+
+#. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent's setting
+#: resources/ui/gtk4/settings.ui:2311 resources/ui/gtk4/settings.ui:2465
+#: resources/ui/gtk4/settings.ui:3061 resources/ui/gtk4/settings.ui:3112
+#: resources/ui/gtk3/settings.ui:2298 resources/ui/gtk3/settings.ui:2455
+#: resources/ui/gtk3/settings.ui:3037 resources/ui/gtk3/settings.ui:3090
+msgid "Parent"
+msgstr "Jako nadřazený element"
+
+#: resources/ui/gtk4/settings.ui:2613 resources/ui/gtk4/settings.ui:3164
+#: resources/ui/gtk3/settings.ui:2603 resources/ui/gtk3/settings.ui:3142
+msgid "Offset"
+msgstr "Odsazení"
+
+#. Draw above (grand)children items. There's an explanation string below in the application.
+#: resources/ui/gtk4/settings.ui:2724 resources/ui/gtk4/settings.ui:3253
+#: resources/ui/gtk3/settings.ui:2714 resources/ui/gtk3/settings.ui:3231
+msgid "Draw Above"
+msgstr "Zobrazit nad středem"
+
+#: resources/ui/gtk4/settings.ui:2734 resources/ui/gtk3/settings.ui:2724
+msgid "Render children above the center item."
+msgstr "Zobrazit menu nad středovou položkou."
+
+#: resources/ui/gtk4/settings.ui:2987 resources/ui/gtk4/settings.ui:3344
+#: resources/ui/gtk3/settings.ui:2961 resources/ui/gtk3/settings.ui:3315
+msgid "Grandchildren Appearance"
+msgstr "Vzhled podmenu"
+
+#: resources/ui/gtk4/settings.ui:2997 resources/ui/gtk3/settings.ui:2971
+msgid ""
+"Grandchild items are styled differently when their parent item's wedge is "
+"hovered."
+msgstr ""
+"Položky podmenu mají jiný styl, když najedete na výseč nadřazené položky."
+
+#. Hovered: When the mouse pointer is over the item
+#: resources/ui/gtk4/settings.ui:3026 resources/ui/gtk3/settings.ui:3000
+msgid "With Hovered Parent"
+msgstr "Zobrazit nad menu"
+
+#: resources/ui/gtk4/settings.ui:3263 resources/ui/gtk3/settings.ui:3241
+msgid "Render grandchildren above children items."
+msgstr "Zobrazit podmenu nad položkami menu."
+
+#: resources/ui/gtk4/settings.ui:3374 resources/ui/gtk4/settings.ui:3613
+#: resources/ui/gtk3/settings.ui:3338 resources/ui/gtk3/settings.ui:3575
+msgid "Wedge Appearance"
+msgstr "Vzhled výseče"
+
+#: resources/ui/gtk4/settings.ui:3384 resources/ui/gtk3/settings.ui:3348
+msgid "Clicking inside a wedge will activate the corresponding item."
+msgstr "Kliknutím do výseče se aktivuje odpovídající položka."
+
+#: resources/ui/gtk4/settings.ui:3407 resources/ui/gtk3/settings.ui:3371
+msgid "Inner Radius"
+msgstr "Vnitřní poloměr"
+
+#. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
+#: resources/ui/gtk4/settings.ui:3418 resources/ui/gtk3/settings.ui:3382
+msgid ""
+"Clicking inside the inner radius\n"
+"will cancel the selection."
+msgstr ""
+"Kliknutím do vnitřního poloměru\n"
+"se zruší výběr."
+
+#: resources/ui/gtk4/settings.ui:3439 resources/ui/gtk3/settings.ui:3403
+msgid "Wedge Separator Color"
+msgstr "Barva oddělovače výseče"
+
+#: resources/ui/gtk4/settings.ui:3451 resources/ui/gtk3/settings.ui:3415
+msgid "Wedge Separator Thickness"
+msgstr "Tloušťka oddělovače výseče"
+
+#: resources/ui/gtk4/settings.ui:3489 resources/ui/gtk3/settings.ui:3453
+msgid "Wedge Color"
+msgstr "Barva výseče"
+
+#: resources/ui/gtk4/settings.ui:3501 resources/ui/gtk3/settings.ui:3465
+msgid "Wedge Size"
+msgstr "Velikost výseče"
+
+#. When the mouse pointer is NOT over the item
+#: resources/ui/gtk4/settings.ui:3551 resources/ui/gtk3/settings.ui:3515
+msgid "Inactive State"
+msgstr "Neaktivní"
+
+#: resources/ui/gtk4/settings.ui:3642 resources/ui/gtk4/settings.ui:3745
+#: resources/ui/gtk3/settings.ui:3598 resources/ui/gtk3/settings.ui:3700
+msgid "Trace Appearance"
+msgstr "Vzhled spojovací čáry"
+
+#: resources/ui/gtk4/settings.ui:3652 resources/ui/gtk3/settings.ui:3608
+msgid "The trace is the connecting line between selected menu items."
+msgstr "Spojovací čára mezi vybranými položkami menu."
+
+#: resources/ui/gtk4/settings.ui:3669 resources/ui/gtk3/settings.ui:3625
+msgid "Thickness"
+msgstr "Tloušťka"
+
+#: resources/ui/gtk4/settings.ui:3680 resources/ui/gtk3/settings.ui:3636
+msgid "Color"
+msgstr "Barva"
+
+#: resources/ui/gtk4/settings.ui:3732 resources/ui/gtk3/settings.ui:3688
+msgid "Minimum Segment Length"
+msgstr "Minimální délka čáry"
+
+#: resources/ui/gtk4/settings.ui:3775 resources/ui/gtk4/settings.ui:3899
+#: resources/ui/gtk3/settings.ui:3724 resources/ui/gtk3/settings.ui:3847
+msgid "Touch Button Settings"
+msgstr "Nastavení dotykového tlačítka"
+
+#: resources/ui/gtk4/settings.ui:3785 resources/ui/gtk3/settings.ui:3734
+msgid "You can show a touch button for each of your menus."
+msgstr "Pro každé menu můžete zobrazit dotykové tlačítko."
+
+#: resources/ui/gtk4/settings.ui:3803 resources/ui/gtk3/settings.ui:3752
+msgid "Inactive Opacity"
+msgstr "Neaktivní průhlednost"
+
+#: resources/ui/gtk4/settings.ui:3831 resources/ui/gtk3/settings.ui:3780
+msgid "Show in Overview Mode"
+msgstr "Zobrazit v režimu přehledu"
+
+#: resources/ui/gtk4/settings.ui:3853 resources/ui/gtk3/settings.ui:3802
+msgid "Show in Desktop Mode"
+msgstr "Zobrazit v režimu plochy"
+
+#: resources/ui/gtk4/settings.ui:3875 resources/ui/gtk3/settings.ui:3824
+msgid "Show above Fullscreen Windows"
+msgstr "Zobrazit nad okny přes celou obrazovku"
+
+#: resources/ui/gtk4/settings.ui:3928 resources/ui/gtk4/settings.ui:4370
+#: resources/ui/gtk3/settings.ui:3870 resources/ui/gtk3/settings.ui:4311
+msgid "Advanced Settings"
+msgstr "Pokročilá nastavení"
+
+#: resources/ui/gtk4/settings.ui:3938 resources/ui/gtk3/settings.ui:3880
+msgid "These settings are independent of the presets."
+msgstr "Tato nastavení jsou nezávislá na předvolbách."
+
+#: resources/ui/gtk4/settings.ui:3957 resources/ui/gtk3/settings.ui:3899
+msgid "Minimum Stroke Angle"
+msgstr "Minimální úhel gesta"
+
+#: resources/ui/gtk4/settings.ui:3967 resources/ui/gtk3/settings.ui:3909
+msgid "Smaller turns will not lead to selections."
+msgstr "Menší gesta nepovedou k výběru."
+
+#: resources/ui/gtk4/settings.ui:4004 resources/ui/gtk3/settings.ui:3946
+msgid "Minimum Stroke Length"
+msgstr "Minimální délka gesta"
+
+#: resources/ui/gtk4/settings.ui:4014 resources/ui/gtk3/settings.ui:3956
+msgid ""
+"Shorter gestures will not lead to selections.\n"
+"This is multiplied by the Global Scale value."
+msgstr ""
+"Kratší gesta nevedou k výběrům.\n"
+"Tato hodnota se vynásobí hodnotou globálního měřítka."
+
+#: resources/ui/gtk4/settings.ui:4053 resources/ui/gtk3/settings.ui:3995
+msgid "Jitter Threshold"
+msgstr "Délka pohybu"
+
+#: resources/ui/gtk4/settings.ui:4063 resources/ui/gtk3/settings.ui:4005
+msgid ""
+"Smaller movements will not be considered.\n"
+"This is multiplied by the Global Scale value."
+msgstr ""
+"Menší pohyby nebudou brány v úvahu.\n"
+"Tato hodnota se vynásobí hodnotou globálního měřítka."
+
+#: resources/ui/gtk4/settings.ui:4101 resources/ui/gtk3/settings.ui:4043
+msgid "Display Timeout"
+msgstr "Časový limit zobrazení"
+
+#: resources/ui/gtk4/settings.ui:4111 resources/ui/gtk3/settings.ui:4053
+msgid ""
+"Menus will be shown after this many milliseconds.\n"
+"Use this to quickly select items without showing the menu."
+msgstr ""
+"Po uplynutí tohoto počtu milisekund se zobrazí menu.\n"
+"Slouží k rychlému výběru položek bez zobrazení menu."
+
+#: resources/ui/gtk4/settings.ui:4150 resources/ui/gtk3/settings.ui:4092
+msgid "Selection Timeout"
+msgstr "Časový limit výběru"
+
+#: resources/ui/gtk4/settings.ui:4160 resources/ui/gtk3/settings.ui:4102
+msgid ""
+"If your pointer is stationary for this many milliseconds, \n"
+"the current item will be selected."
+msgstr ""
+"Pokud je váš ukazatel nehybný po tento počet milisekund,\n"
+"bude vybrána aktuální položka."
+
+#: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk3/settings.ui:4141
+msgid "Open Windows at the Pointer"
+msgstr "Otevřít menu u kurzoru"
+
+#: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4151
+msgid ""
+"With this enabled, Fly-Pie will attempt to open any windows\n"
+"at the current pointer position."
+msgstr ""
+"Pokud je povoleno, Fly-Pie se pokusí otevřít menu\n"
+"na aktuální pozici kurzoru."
+
+#: resources/ui/gtk4/settings.ui:4232 resources/ui/gtk3/settings.ui:4174
+msgid "Experimental Hover Mode"
+msgstr "Experimentální režim při najetí myši"
+
+#: resources/ui/gtk4/settings.ui:4242 resources/ui/gtk3/settings.ui:4184
+msgid ""
+"With this enabled, you no longer have to press a mouse button\n"
+"or hold down a modifier key during selections."
+msgstr ""
+"Pokud je povoleno, již nemusíte mačkat tlačítko myši\n"
+"nebo při výběru držet modifikační klávesu."
+
+#: resources/ui/gtk4/settings.ui:4265 resources/ui/gtk3/settings.ui:4207
+msgid "Show Screencast Mouse"
+msgstr "Zobrazit myš pro nahrávání"
+
+#: resources/ui/gtk4/settings.ui:4275 resources/ui/gtk3/settings.ui:4217
+msgid ""
+"Shows a big additional mouse pointer visualizing mouse clicks.\n"
+"This can be used if you want to capture a video of Fly-Pie."
+msgstr ""
+"Zobrazuje další velký kurzor vizualizující kliknutí myší.\n"
+"Můžete použít, pokud chcete nahrávat videa z Fly-Pie."
+
+#: resources/ui/gtk4/settings.ui:4308 resources/ui/gtk3/settings.ui:4250
+msgid "Achievement Notifications"
+msgstr "Oznámení o ocenění"
+
+#: resources/ui/gtk4/settings.ui:4318 resources/ui/gtk3/settings.ui:4260
+msgid "Show a notification whenever you complete an achievement."
+msgstr "Zobrazí oznámení, kdykoli získáte ocenění."
+
+#: resources/ui/gtk4/settings.ui:4390 resources/ui/gtk3/settings.ui:4343
+msgid "Load Preset"
+msgstr "Načíst předvolbu"
+
+#: resources/ui/gtk4/settings.ui:4402 resources/ui/gtk3/settings.ui:4363
+msgid "Load settings from a JSON file."
+msgstr "Načíst nastavení ze souboru JSON."
+
+#: resources/ui/gtk4/settings.ui:4409 resources/ui/gtk3/settings.ui:4376
+msgid "Save the settings to a JSON file."
+msgstr "Uložit nastavení do souboru JSON."
+
+#. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
+#: resources/ui/gtk4/settings.ui:4432 resources/ui/gtk4/settings.ui:4705
+#: resources/ui/gtk3/settings.ui:4405 resources/ui/gtk3/settings.ui:4698
+msgid "Live Preview"
+msgstr "Živý náhled"
+
+#. Caption of the menu editor page in the window's titlebar.
+#: resources/ui/gtk4/settings.ui:4461 resources/ui/gtk3/settings.ui:5012
+msgid "Menu Editor"
+msgstr "Editor menu"
+
+#: resources/ui/gtk4/settings.ui:4490 resources/ui/gtk3/settings.ui:4464
+msgid "Add a new menu item."
+msgstr "Přidat novou položku menu."
+
+#: resources/ui/gtk4/settings.ui:4569 resources/ui/gtk3/settings.ui:4551
+msgid "Stash"
+msgstr "Schránka"
+
+#: resources/ui/gtk4/settings.ui:4585 resources/ui/gtk3/settings.ui:4568
+msgid "Store items here and re-use them later."
+msgstr "Zde ukládejte položky a později je znovu použijte."
+
+#: resources/ui/gtk4/settings.ui:4629 resources/ui/gtk3/settings.ui:4612
+msgid "Trash"
+msgstr "Koš"
+
+#: resources/ui/gtk4/settings.ui:4645 resources/ui/gtk3/settings.ui:4628
+msgid "Drop items here."
+msgstr "Sem přetáhněte položky."
+
+#: resources/ui/gtk4/settings.ui:4675 resources/ui/gtk3/settings.ui:4658
+msgid "Restore menus from a JSON file. This will override your current menus!"
+msgstr "Obnovte menu ze souboru JSON. Toto přepíše vaše aktuální menu!"
+
+#: resources/ui/gtk4/settings.ui:4681 resources/ui/gtk3/settings.ui:4670
+msgid "Export all menus to a JSON file."
+msgstr "Exportujte všechna menu do souboru JSON."
+
+#: resources/ui/gtk4/settings.ui:4758 resources/ui/gtk3/settings.ui:4752
+msgid "Name"
+msgstr "Název"
+
+#: resources/ui/gtk4/settings.ui:4776 resources/ui/gtk3/settings.ui:4770
+msgid "Icon"
+msgstr "Ikona"
+
+#: resources/ui/gtk4/settings.ui:4794 resources/ui/gtk3/settings.ui:4788
+msgid ""
+"The icon can be either an image file path, an icon name from the current icon "
+"theme, a base64 encoded data URI, text, or an emoji. You can append \"-#rgb\" "
+"to the icon in order to draw a circle with the given RGB color behind the "
+"icon."
+msgstr ""
+"Ikona může být buď cesta k souboru obrázku, název ikony z aktuálního motivu "
+"ikony, kód base64, text nebo emotikon. K ikoně můžete připojit \"-#rgb\" a "
+"nakreslit za ikonou kruh s danou barvou RGB."
+
+#: resources/ui/gtk4/settings.ui:4827 resources/ui/gtk3/settings.ui:4827
+msgid "Fixed Angle"
+msgstr "Pevný úhel"
+
+#: resources/ui/gtk4/settings.ui:4843 resources/ui/gtk3/settings.ui:4843
+msgid ""
+"Fixed angles can be used to ensure that an item remains at the same position "
+"even if other items are added or removed. This way you can edit a menu even "
+"if your muscles already learned the item's direction. However, there is a "
+"restriction on the fixed angles. Inside a menu the fixed angles must be "
+"monotonically increasing, that is each fixed angle must be larger than any "
+"previous fixed angle. In order to prevent weird behavior, fixed angles will "
+"be removed if an item is dragged to another position in the menu. Use -1 to "
+"disable this feature."
+msgstr ""
+"Pevné úhly lze použít k zajištění toho, že položka zůstane na stejné pozici, "
+"i když jsou přidány nebo odebrány jiné položky. Tímto způsobem můžete upravit "
+"nabídku, i když se vaše svaly již naučily směr položky. Existuje však omezení "
+"na pevné úhly. Uvnitř nabídky se pevné úhly musí monotónně zvětšovat, to "
+"znamená, že každý pevný úhel musí být větší než jakýkoli předchozí pevný "
+"úhel. Aby se předešlo podivnému chování, pevné úhly budou odstraněny, pokud "
+"položku přetáhnete na jiné místo v nabídce. Pomocí -1 tuto funkci "
+"deaktivujete."
+
+#: resources/ui/gtk4/settings.ui:4881 resources/ui/gtk3/settings.ui:4881
+msgid "This will open the menu."
+msgstr "Tím se otevře nabídka."
+
+#: resources/ui/gtk4/settings.ui:4895 resources/ui/gtk3/settings.ui:4895
+msgid ""
+"Usually, Super + Right Mouse Button opens the window menu. With this setting, "
+"you can instead open a Fly-Pie menu."
+msgstr ""
+"Obvykle Super + pravé tlačítko myši (PTM) otevře nabídku okna. S tímto "
+"nastavením můžete místo toho otevřít nabídku Fly-Pie."
+
+#: resources/ui/gtk4/settings.ui:4900 resources/ui/gtk3/settings.ui:4900
+msgid "Bind to Super + RMB"
+msgstr "Přiřadit k Super + PTM"
+
+#: resources/ui/gtk4/settings.ui:4916 resources/ui/gtk3/settings.ui:4916
+msgid "Show Touch Button"
+msgstr "Zobrazit dotykové tlačítko"
+
+#: resources/ui/gtk4/settings.ui:4932 resources/ui/gtk3/settings.ui:4932
+msgid "Open in Screen Center"
+msgstr "Otevřít v centru obrazovky"
+
+#: resources/ui/gtk4/settings.ui:4968 resources/ui/gtk3/settings.ui:4968
+msgid "Show Labels"
+msgstr "Zobrazit štítky"
+
+#. Caption of the achievements page in the window's titlebar.
+#: resources/ui/gtk4/settings.ui:5023 resources/ui/gtk3/settings.ui:5255
+msgid "Achievements"
+msgstr "Ocenění"
+
+#. One of the buttons on the bottom of the achievements page.
+#: resources/ui/gtk4/settings.ui:5217 resources/ui/gtk3/settings.ui:5192
+msgid "In Progress"
+msgstr "Probíhájící"
+
+#. One of the buttons on the bottom of the achievements page.
+#: resources/ui/gtk4/settings.ui:5231 resources/ui/gtk3/settings.ui:5207
+msgid "Completed"
+msgstr "Dokončené"
+
+#: resources/ui/gtk4/settings.ui:5259 resources/ui/gtk3/settings.ui:5235
+msgid "Reset all achievements."
+msgstr "Resetovat všechny ocenění."
