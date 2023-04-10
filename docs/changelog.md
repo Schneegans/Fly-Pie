@@ -9,6 +9,15 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
+## [Fly-Pie 20](https://github.com/schneegans/fly-pie/releases/tag/v20)
+
+**Release Date:** TBD
+
+#### Bug Fixes
+
+* Fixed an issue which caused achievement notifications to be not translated.
+
+
 ## [Fly-Pie 19](https://github.com/schneegans/fly-pie/releases/tag/v19)
 
 **Release Date:** 2023-04-02
