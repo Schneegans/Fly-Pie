@@ -14,6 +14,8 @@
 const Cairo                           = imports.cairo;
 const {Gio, GLib, Gdk, GdkPixbuf, St} = imports.gi;
 
+const _ = imports.gettext.domain('flypie').gettext;
+
 const Main = imports.ui.main;
 
 const Me               = imports.misc.extensionUtils.getCurrentExtension();
