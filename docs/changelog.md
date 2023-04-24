@@ -15,6 +15,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 #### Bug Fixes
 
+* Fixed simulating hotkeys on GNOME 44.
 * Fixed an issue which caused achievement notifications to be not translated.
 
 
