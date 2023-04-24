@@ -11,7 +11,7 @@
 
 'use strict';
 
-const {Clutter, Gdk, Gtk} = imports.gi;
+const {Clutter, Gtk} = imports.gi;
 
 const Me    = imports.misc.extensionUtils.getCurrentExtension();
 const utils = Me.imports.src.common.utils;
@@ -55,7 +55,16 @@ var InputManipulator = class InputManipulator {
     this._releaseModifiers(currentMods);
 
     // Now parse the string and press the buttons accordingly.
-    const [keyval, mods] = Gtk.accelerator_parse(string);
+    const res = Gtk.accelerator_parse(string);
+    let ok, keyval, mods;
+
+    // The return value is different in GTK4.
+    if (utils.gtk4()) {
+      [ok, keyval, mods] = res;
+    } else {
+      [keyval, mods] = res;
+    }
+
     this._pressModifiers(mods);
     this._keyboard.notify_keyval(0, keyval, Clutter.KeyState.PRESSED);
     this._keyboard.notify_keyval(0, keyval, Clutter.KeyState.RELEASED);
@@ -72,23 +81,23 @@ var InputManipulator = class InputManipulator {
 
     // Since we do not know whether left or right version of each key is pressed, we
     // release both...
-    if (modifiers & Gdk.ModifierType.CONTROL_MASK) {
+    if (modifiers & Clutter.ModifierType.CONTROL_MASK) {
       this._keyboard.notify_keyval(0, Clutter.KEY_Control_L, Clutter.KeyState.RELEASED);
       this._keyboard.notify_keyval(0, Clutter.KEY_Control_R, Clutter.KeyState.RELEASED);
     }
 
-    if (modifiers & Gdk.ModifierType.SHIFT_MASK) {
+    if (modifiers & Clutter.ModifierType.SHIFT_MASK) {
       this._keyboard.notify_keyval(0, Clutter.KEY_Shift_L, Clutter.KeyState.RELEASED);
       this._keyboard.notify_keyval(0, Clutter.KEY_Shift_R, Clutter.KeyState.RELEASED);
     }
 
-    if (modifiers & Gdk.ModifierType.MOD1_MASK) {
+    if (modifiers & Clutter.ModifierType.MOD1_MASK) {
       this._keyboard.notify_keyval(0, Clutter.KEY_Alt_L, Clutter.KeyState.RELEASED);
       this._keyboard.notify_keyval(0, Clutter.KEY_Alt_R, Clutter.KeyState.RELEASED);
     }
 
-    if ((modifiers & Gdk.ModifierType.MOD4_MASK) ||
-        (modifiers & Gdk.ModifierType.SUPER_MASK)) {
+    if ((modifiers & Clutter.ModifierType.MOD4_MASK) ||
+        (modifiers & Clutter.ModifierType.SUPER_MASK)) {
       this._keyboard.notify_keyval(0, Clutter.KEY_Super_L, Clutter.KeyState.RELEASED);
       this._keyboard.notify_keyval(0, Clutter.KEY_Super_R, Clutter.KeyState.RELEASED);
     }
@@ -96,20 +105,20 @@ var InputManipulator = class InputManipulator {
 
   // Helper method which 'presses' the desired modifier keys.
   _pressModifiers(modifiers) {
-    if (modifiers & Gdk.ModifierType.CONTROL_MASK) {
+    if (modifiers & Clutter.ModifierType.CONTROL_MASK) {
       this._keyboard.notify_keyval(0, Clutter.KEY_Control_L, Clutter.KeyState.PRESSED);
     }
 
-    if (modifiers & Gdk.ModifierType.SHIFT_MASK) {
+    if (modifiers & Clutter.ModifierType.SHIFT_MASK) {
       this._keyboard.notify_keyval(0, Clutter.KEY_Shift_L, Clutter.KeyState.PRESSED);
     }
 
-    if (modifiers & Gdk.ModifierType.MOD1_MASK) {
+    if (modifiers & Clutter.ModifierType.MOD1_MASK) {
       this._keyboard.notify_keyval(0, Clutter.KEY_Alt_L, Clutter.KeyState.PRESSED);
     }
 
-    if ((modifiers & Gdk.ModifierType.MOD4_MASK) ||
-        (modifiers & Gdk.ModifierType.SUPER_MASK)) {
+    if ((modifiers & Clutter.ModifierType.MOD4_MASK) ||
+        (modifiers & Clutter.ModifierType.SUPER_MASK)) {
       this._keyboard.notify_keyval(0, Clutter.KEY_Super_L, Clutter.KeyState.PRESSED);
     }
   }
