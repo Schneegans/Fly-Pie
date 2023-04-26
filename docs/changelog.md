@@ -11,7 +11,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## [Fly-Pie 20](https://github.com/schneegans/fly-pie/releases/tag/v20)
 
-**Release Date:** TBD
+**Release Date:** 2023-04-26
 
 #### Enhancements
 
