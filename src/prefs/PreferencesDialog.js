@@ -131,7 +131,13 @@ var PreferencesDialog = class PreferencesDialog {
     // window's title bar. We also make the bottom corners rounded.
     this._widget.connect('realize', widget => {
       const window = utils.gtk4() ? widget.get_root() : widget.get_toplevel();
-      window.set_default_size(650, 750);
+
+      // Give some space to the window's widgets.
+      if (utils.gtk4()) {
+        window.set_default_size(650, 750);
+      } else {
+        window.resize(650, 750);
+      }
 
       const stackSwitcher = this._builder.get_object('main-stack-switcher');
       const menuButton    = this._builder.get_object('menu-button');
