@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-24 20:33+0100\n"
+"POT-Creation-Date: 2023-04-26 20:23+0200\n"
 "PO-Revision-Date: 2022-05-12 10:19+0000\n"
 "Last-Translator: Eric <alchemillatruth@purelymail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/fly-"
@@ -38,8 +38,8 @@ msgstr ""
 "<b>激活键盘快捷键</b>操作可以用来模拟用户按下了一组键盘上的按键。切换虚拟桌"
 "面、控制音视频的播放暂停或撤消 / 重做操作等可能用得上此功能。"
 
-#: src/common/actions/Shortcut.js:81 resources/ui/gtk4/settings.ui:4875
-#: resources/ui/gtk3/settings.ui:4875
+#: src/common/actions/Shortcut.js:81 resources/ui/gtk4/settings.ui:4928
+#: resources/ui/gtk3/settings.ui:4923
 msgid "Shortcut"
 msgstr "键盘组合键"
 
@@ -411,9 +411,9 @@ msgstr ""
 msgid "Window Filter"
 msgstr "窗口筛选"
 
-#: src/common/menus/RunningApps.js:102 resources/ui/gtk4/settings.ui:4782
-#: resources/ui/gtk4/settings.ui:4833 resources/ui/gtk3/settings.ui:4776
-#: resources/ui/gtk3/settings.ui:4833
+#: src/common/menus/RunningApps.js:102 resources/ui/gtk4/settings.ui:4835
+#: resources/ui/gtk4/settings.ui:4886 resources/ui/gtk3/settings.ui:4824
+#: resources/ui/gtk3/settings.ui:4881
 msgid "See tooltip for details."
 msgstr "了解详细信息，请参阅工具提示。"
 
@@ -857,19 +857,19 @@ msgstr "一项操作不能作为顶级菜单。"
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr "只有自定义菜单里面才能创建一项新的操作。"
 
-#: src/prefs/PreferencesDialog.js:248 src/prefs/PreferencesDialog.js:281
+#: src/prefs/PreferencesDialog.js:255 src/prefs/PreferencesDialog.js:288
 msgid "Gold Sponsors"
 msgstr ""
 
-#: src/prefs/PreferencesDialog.js:252 src/prefs/PreferencesDialog.js:285
+#: src/prefs/PreferencesDialog.js:259 src/prefs/PreferencesDialog.js:292
 msgid "Silver Sponsors"
 msgstr ""
 
-#: src/prefs/PreferencesDialog.js:256 src/prefs/PreferencesDialog.js:289
+#: src/prefs/PreferencesDialog.js:263 src/prefs/PreferencesDialog.js:296
 msgid "Bronze Sponsors"
 msgstr ""
 
-#: src/prefs/PreferencesDialog.js:260 src/prefs/PreferencesDialog.js:293
+#: src/prefs/PreferencesDialog.js:267 src/prefs/PreferencesDialog.js:300
 msgid "Past Sponsors"
 msgstr ""
 
@@ -1270,29 +1270,29 @@ msgid "Flip Side"
 msgstr "翻面"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:215
+#: src/extension/Daemon.js:217
 msgid "Fly-Pie Level Up!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:217
+#: src/extension/Daemon.js:219
 msgid "You reached level %i!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:237
+#: src/extension/Daemon.js:239
 msgid "Fly-Pie Achievement Completed!"
 msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:239
+#: src/extension/Daemon.js:241
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
 msgstr ""
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:601
+#: src/extension/Daemon.js:603
 msgid "Show Achievements"
 msgstr ""
 
@@ -1434,11 +1434,11 @@ msgid "Enable Animations"
 msgstr "启用动画"
 
 #. Caption of the tutorial page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:608 resources/ui/gtk3/settings.ui:1319
+#: resources/ui/gtk4/settings.ui:608 resources/ui/gtk3/settings.ui:1316
 msgid "Tutorial"
 msgstr "教程"
 
-#: resources/ui/gtk4/settings.ui:642 resources/ui/gtk3/settings.ui:654
+#: resources/ui/gtk4/settings.ui:646 resources/ui/gtk3/settings.ui:657
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
@@ -1447,7 +1447,7 @@ msgstr ""
 "你可以用 Fly-Pie 来启动应用程序、模拟键盘快捷键、打开网址等等。您看到的互动教"
 "程可以帮您最有效地使用 Fly-Pie 。点击下面的大按钮，打开模拟使用菜单！"
 
-#: resources/ui/gtk4/settings.ui:653 resources/ui/gtk3/settings.ui:665
+#: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:667
 msgid ""
 "• Use your <b>left mouse button to select items</b>.\n"
 "• Use your <b>right mouse button to close the menu</b>.\n"
@@ -1462,20 +1462,20 @@ msgstr ""
 "准备好了，就点击<b>下一步</b>，了解更多细节吧！"
 
 #. The text of the big tutorial button.
-#: resources/ui/gtk4/settings.ui:673 resources/ui/gtk4/settings.ui:756
-#: resources/ui/gtk4/settings.ui:842 resources/ui/gtk4/settings.ui:987
-#: resources/ui/gtk4/settings.ui:1073 resources/ui/gtk3/settings.ui:685
-#: resources/ui/gtk3/settings.ui:765 resources/ui/gtk3/settings.ui:849
-#: resources/ui/gtk3/settings.ui:991 resources/ui/gtk3/settings.ui:1075
+#: resources/ui/gtk4/settings.ui:676 resources/ui/gtk4/settings.ui:757
+#: resources/ui/gtk4/settings.ui:842 resources/ui/gtk4/settings.ui:985
+#: resources/ui/gtk4/settings.ui:1070 resources/ui/gtk3/settings.ui:687
+#: resources/ui/gtk3/settings.ui:765 resources/ui/gtk3/settings.ui:848
+#: resources/ui/gtk3/settings.ui:988 resources/ui/gtk3/settings.ui:1071
 msgid "<big><b>Open the example menu!</b></big>"
 msgstr "<big><b>打开模拟使用菜单！</b></big>"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:705 resources/ui/gtk3/settings.ui:715
+#: resources/ui/gtk4/settings.ui:708 resources/ui/gtk3/settings.ui:717
 msgid "You can click anywhere!"
 msgstr "点哪儿都好使！"
 
-#: resources/ui/gtk4/settings.ui:724 resources/ui/gtk3/settings.ui:733
+#: resources/ui/gtk4/settings.ui:726 resources/ui/gtk3/settings.ui:734
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
@@ -1483,7 +1483,7 @@ msgstr ""
 "只要你的鼠标指针停留在项目的楔形区域里，你是直接点击项目还是在屏幕的边缘点击"
 "都没有关系。"
 
-#: resources/ui/gtk4/settings.ui:736 resources/ui/gtk3/settings.ui:745
+#: resources/ui/gtk4/settings.ui:737 resources/ui/gtk3/settings.ui:745
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -1499,11 +1499,11 @@ msgstr ""
 "点击 <b>下一步</b> 试一试！"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:788 resources/ui/gtk3/settings.ui:795
+#: resources/ui/gtk4/settings.ui:789 resources/ui/gtk3/settings.ui:795
 msgid "Practice Session I"
 msgstr "练习一"
 
-#: resources/ui/gtk4/settings.ui:798 resources/ui/gtk3/settings.ui:805
+#: resources/ui/gtk4/settings.ui:798 resources/ui/gtk3/settings.ui:804
 #, javascript-format
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
@@ -1514,34 +1514,34 @@ msgid ""
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:871 resources/ui/gtk3/settings.ui:878
+#: resources/ui/gtk4/settings.ui:871 resources/ui/gtk3/settings.ui:877
 msgid "Unlocked at less than 3000 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:891 resources/ui/gtk3/settings.ui:898
+#: resources/ui/gtk4/settings.ui:891 resources/ui/gtk3/settings.ui:897
 msgid "Unlocked at less than 2000 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:912 resources/ui/gtk4/settings.ui:1101
-#: resources/ui/gtk3/settings.ui:919 resources/ui/gtk3/settings.ui:1103
+#: resources/ui/gtk4/settings.ui:912 resources/ui/gtk4/settings.ui:1098
+#: resources/ui/gtk3/settings.ui:918 resources/ui/gtk3/settings.ui:1099
 msgid "Unlocked at less than 1000 ms"
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:939 resources/ui/gtk3/settings.ui:944
+#: resources/ui/gtk4/settings.ui:939 resources/ui/gtk3/settings.ui:943
 msgid "The Marking Mode of Fly-Pie"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:958 resources/ui/gtk3/settings.ui:962
+#: resources/ui/gtk4/settings.ui:957 resources/ui/gtk3/settings.ui:960
 msgid ""
 "The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:969 resources/ui/gtk3/settings.ui:973
+#: resources/ui/gtk4/settings.ui:967 resources/ui/gtk3/settings.ui:970
 msgid ""
 "Try remembering the path to an item. Open the menu and <b>draw the path with "
 "your mouse</b>. You can start with individual segments of the path, put you "
@@ -1553,11 +1553,11 @@ msgid ""
 msgstr ""
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:1019 resources/ui/gtk3/settings.ui:1021
+#: resources/ui/gtk4/settings.ui:1017 resources/ui/gtk3/settings.ui:1018
 msgid "Practice Session II"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1031
+#: resources/ui/gtk4/settings.ui:1026 resources/ui/gtk3/settings.ui:1027
 #, javascript-format
 msgid ""
 "Again, you should select \"%s\" as quickly as possible. However, as you now "
@@ -1569,22 +1569,22 @@ msgid ""
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1121 resources/ui/gtk3/settings.ui:1123
+#: resources/ui/gtk4/settings.ui:1118 resources/ui/gtk3/settings.ui:1119
 msgid "Unlocked at less than 750 ms"
 msgstr ""
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1142 resources/ui/gtk3/settings.ui:1144
+#: resources/ui/gtk4/settings.ui:1139 resources/ui/gtk3/settings.ui:1140
 msgid "Unlocked at less than 500 ms"
 msgstr ""
 
 #. The user finished the tutorial. Yay!
-#: resources/ui/gtk4/settings.ui:1176 resources/ui/gtk3/settings.ui:1176
+#: resources/ui/gtk4/settings.ui:1173 resources/ui/gtk3/settings.ui:1172
 msgid "Congratulations!"
 msgstr ""
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
-#: resources/ui/gtk4/settings.ui:1188 resources/ui/gtk3/settings.ui:1188
+#: resources/ui/gtk4/settings.ui:1184 resources/ui/gtk3/settings.ui:1183
 msgid ""
 "Congratulations! If you managed to unlock most of the medals, you will be "
 "using Fly-Pie like a master Pielot!\n"
@@ -1603,174 +1603,174 @@ msgid ""
 msgstr ""
 
 #. Button for tutorial navigation. Goes back one page.
-#: resources/ui/gtk4/settings.ui:1233 resources/ui/gtk3/settings.ui:1234
+#: resources/ui/gtk4/settings.ui:1231 resources/ui/gtk3/settings.ui:1231
 msgid "Previous"
 msgstr "上一页"
 
 #. Button for tutorial navigation. Goes to the next page.
-#: resources/ui/gtk4/settings.ui:1290 resources/ui/gtk3/settings.ui:1291
+#: resources/ui/gtk4/settings.ui:1288 resources/ui/gtk3/settings.ui:1288
 msgid "Next"
 msgstr "下一页"
 
 #. Caption of the settings page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:1326 resources/ui/gtk3/settings.ui:4426
+#: resources/ui/gtk4/settings.ui:1324 resources/ui/gtk3/settings.ui:4471
 msgid "Settings"
 msgstr "设置"
 
-#: resources/ui/gtk4/settings.ui:1359 resources/ui/gtk4/settings.ui:1578
-#: resources/ui/gtk3/settings.ui:1359 resources/ui/gtk3/settings.ui:1578
+#: resources/ui/gtk4/settings.ui:1362 resources/ui/gtk4/settings.ui:1584
+#: resources/ui/gtk3/settings.ui:1360 resources/ui/gtk3/settings.ui:1581
 msgid "Global Appearance Settings"
 msgstr "整体外观设置"
 
-#: resources/ui/gtk4/settings.ui:1369 resources/ui/gtk3/settings.ui:1369
+#: resources/ui/gtk4/settings.ui:1372 resources/ui/gtk3/settings.ui:1370
 msgid "These settings affect all menu items."
 msgstr "这些设置适用于所有的菜单内条目。"
 
-#: resources/ui/gtk4/settings.ui:1387 resources/ui/gtk3/settings.ui:1387
+#: resources/ui/gtk4/settings.ui:1390 resources/ui/gtk3/settings.ui:1388
 msgid "Animation Duration"
 msgstr "动画时长"
 
-#: resources/ui/gtk4/settings.ui:1401 resources/ui/gtk3/settings.ui:1401
+#: resources/ui/gtk4/settings.ui:1404 resources/ui/gtk3/settings.ui:1402
 msgid "Global Scaling"
 msgstr "整体放缩"
 
 #. Please keep this short!
-#: resources/ui/gtk4/settings.ui:1411 resources/ui/gtk3/settings.ui:1411
+#: resources/ui/gtk4/settings.ui:1414 resources/ui/gtk3/settings.ui:1412
 msgid "Independent of the preset."
 msgstr "独立于预设。"
 
-#: resources/ui/gtk4/settings.ui:1462 resources/ui/gtk4/settings.ui:2113
-#: resources/ui/gtk4/settings.ui:2808 resources/ui/gtk4/settings.ui:3040
-#: resources/ui/gtk3/settings.ui:1462 resources/ui/gtk3/settings.ui:2108
-#: resources/ui/gtk3/settings.ui:2798 resources/ui/gtk3/settings.ui:3014
+#: resources/ui/gtk4/settings.ui:1465 resources/ui/gtk4/settings.ui:2123
+#: resources/ui/gtk4/settings.ui:2824 resources/ui/gtk4/settings.ui:3062
+#: resources/ui/gtk3/settings.ui:1463 resources/ui/gtk3/settings.ui:2115
+#: resources/ui/gtk3/settings.ui:2811 resources/ui/gtk3/settings.ui:3033
 msgid "Background Color"
 msgstr "背景颜色"
 
-#: resources/ui/gtk4/settings.ui:1472 resources/ui/gtk3/settings.ui:1472
+#: resources/ui/gtk4/settings.ui:1475 resources/ui/gtk3/settings.ui:1473
 msgid "Font"
 msgstr "字体"
 
-#: resources/ui/gtk4/settings.ui:1482 resources/ui/gtk3/settings.ui:1482
+#: resources/ui/gtk4/settings.ui:1485 resources/ui/gtk3/settings.ui:1483
 msgid "Label Font"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:1492 resources/ui/gtk3/settings.ui:1492
+#: resources/ui/gtk4/settings.ui:1495 resources/ui/gtk3/settings.ui:1493
 msgid "Text Color"
 msgstr "文字颜色"
 
-#: resources/ui/gtk4/settings.ui:1566 resources/ui/gtk3/settings.ui:1566
+#: resources/ui/gtk4/settings.ui:1569 resources/ui/gtk3/settings.ui:1567
 msgid "Animation Mode"
 msgstr "动画模式"
 
-#: resources/ui/gtk4/settings.ui:1607 resources/ui/gtk4/settings.ui:2212
-#: resources/ui/gtk3/settings.ui:1602 resources/ui/gtk3/settings.ui:2202
+#: resources/ui/gtk4/settings.ui:1617 resources/ui/gtk4/settings.ui:2224
+#: resources/ui/gtk3/settings.ui:1609 resources/ui/gtk3/settings.ui:2211
 msgid "Center Appearance"
 msgstr "中心区域设置"
 
-#: resources/ui/gtk4/settings.ui:1617 resources/ui/gtk3/settings.ui:1612
+#: resources/ui/gtk4/settings.ui:1627 resources/ui/gtk3/settings.ui:1619
 msgid "The center element shows the currently hovered child's name."
 msgstr "中心区域会在鼠标悬停于子项时显示子项名称。"
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:1633 resources/ui/gtk3/settings.ui:1628
+#: resources/ui/gtk4/settings.ui:1643 resources/ui/gtk3/settings.ui:1635
 msgid "With Hovered Child"
 msgstr "悬停在子项上时"
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:1646 resources/ui/gtk3/settings.ui:1641
+#: resources/ui/gtk4/settings.ui:1656 resources/ui/gtk3/settings.ui:1648
 msgid "Without Hovered Child"
 msgstr "未悬停在子项上时"
 
-#: resources/ui/gtk4/settings.ui:1676 resources/ui/gtk4/settings.ui:2602
-#: resources/ui/gtk4/settings.ui:3153 resources/ui/gtk3/settings.ui:1671
-#: resources/ui/gtk3/settings.ui:2592 resources/ui/gtk3/settings.ui:3131
+#: resources/ui/gtk4/settings.ui:1686 resources/ui/gtk4/settings.ui:2618
+#: resources/ui/gtk4/settings.ui:3175 resources/ui/gtk3/settings.ui:1678
+#: resources/ui/gtk3/settings.ui:2605 resources/ui/gtk3/settings.ui:3150
 msgid "Size"
 msgstr "大小"
 
-#: resources/ui/gtk4/settings.ui:1727 resources/ui/gtk4/settings.ui:1778
-#: resources/ui/gtk4/settings.ui:1930 resources/ui/gtk4/settings.ui:1981
-#: resources/ui/gtk4/settings.ui:2351 resources/ui/gtk4/settings.ui:2412
-#: resources/ui/gtk4/settings.ui:2505 resources/ui/gtk4/settings.ui:2576
-#: resources/ui/gtk3/settings.ui:1722 resources/ui/gtk3/settings.ui:1773
-#: resources/ui/gtk3/settings.ui:1929 resources/ui/gtk3/settings.ui:1980
-#: resources/ui/gtk3/settings.ui:2338 resources/ui/gtk3/settings.ui:2399
-#: resources/ui/gtk3/settings.ui:2495 resources/ui/gtk3/settings.ui:2566
+#: resources/ui/gtk4/settings.ui:1737 resources/ui/gtk4/settings.ui:1788
+#: resources/ui/gtk4/settings.ui:1940 resources/ui/gtk4/settings.ui:1991
+#: resources/ui/gtk4/settings.ui:2367 resources/ui/gtk4/settings.ui:2428
+#: resources/ui/gtk4/settings.ui:2521 resources/ui/gtk4/settings.ui:2592
+#: resources/ui/gtk3/settings.ui:1729 resources/ui/gtk3/settings.ui:1780
+#: resources/ui/gtk3/settings.ui:1936 resources/ui/gtk3/settings.ui:1987
+#: resources/ui/gtk3/settings.ui:2351 resources/ui/gtk3/settings.ui:2412
+#: resources/ui/gtk3/settings.ui:2508 resources/ui/gtk3/settings.ui:2579
 msgid "Saturation"
 msgstr "饱和度"
 
-#: resources/ui/gtk4/settings.ui:1744 resources/ui/gtk4/settings.ui:1788
-#: resources/ui/gtk4/settings.ui:1947 resources/ui/gtk4/settings.ui:1991
-#: resources/ui/gtk4/settings.ui:2368 resources/ui/gtk4/settings.ui:2402
-#: resources/ui/gtk4/settings.ui:2522 resources/ui/gtk4/settings.ui:2566
-#: resources/ui/gtk3/settings.ui:1739 resources/ui/gtk3/settings.ui:1783
-#: resources/ui/gtk3/settings.ui:1946 resources/ui/gtk3/settings.ui:1990
-#: resources/ui/gtk3/settings.ui:2355 resources/ui/gtk3/settings.ui:2389
-#: resources/ui/gtk3/settings.ui:2512 resources/ui/gtk3/settings.ui:2556
+#: resources/ui/gtk4/settings.ui:1754 resources/ui/gtk4/settings.ui:1798
+#: resources/ui/gtk4/settings.ui:1957 resources/ui/gtk4/settings.ui:2001
+#: resources/ui/gtk4/settings.ui:2384 resources/ui/gtk4/settings.ui:2418
+#: resources/ui/gtk4/settings.ui:2538 resources/ui/gtk4/settings.ui:2582
+#: resources/ui/gtk3/settings.ui:1746 resources/ui/gtk3/settings.ui:1790
+#: resources/ui/gtk3/settings.ui:1953 resources/ui/gtk3/settings.ui:1997
+#: resources/ui/gtk3/settings.ui:2368 resources/ui/gtk3/settings.ui:2402
+#: resources/ui/gtk3/settings.ui:2525 resources/ui/gtk3/settings.ui:2569
 msgid "Luminance"
 msgstr "亮度"
 
-#: resources/ui/gtk4/settings.ui:1761 resources/ui/gtk4/settings.ui:1798
-#: resources/ui/gtk4/settings.ui:1964 resources/ui/gtk4/settings.ui:2001
-#: resources/ui/gtk4/settings.ui:2385 resources/ui/gtk4/settings.ui:2422
-#: resources/ui/gtk4/settings.ui:2539 resources/ui/gtk4/settings.ui:2556
-#: resources/ui/gtk3/settings.ui:1756 resources/ui/gtk3/settings.ui:1793
-#: resources/ui/gtk3/settings.ui:1963 resources/ui/gtk3/settings.ui:2000
-#: resources/ui/gtk3/settings.ui:2372 resources/ui/gtk3/settings.ui:2409
-#: resources/ui/gtk3/settings.ui:2529 resources/ui/gtk3/settings.ui:2546
+#: resources/ui/gtk4/settings.ui:1771 resources/ui/gtk4/settings.ui:1808
+#: resources/ui/gtk4/settings.ui:1974 resources/ui/gtk4/settings.ui:2011
+#: resources/ui/gtk4/settings.ui:2401 resources/ui/gtk4/settings.ui:2438
+#: resources/ui/gtk4/settings.ui:2555 resources/ui/gtk4/settings.ui:2572
+#: resources/ui/gtk3/settings.ui:1763 resources/ui/gtk3/settings.ui:1800
+#: resources/ui/gtk3/settings.ui:1970 resources/ui/gtk3/settings.ui:2007
+#: resources/ui/gtk3/settings.ui:2385 resources/ui/gtk3/settings.ui:2422
+#: resources/ui/gtk3/settings.ui:2542 resources/ui/gtk3/settings.ui:2559
 msgid "Opacity"
 msgstr "不透明度"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
-#: resources/ui/gtk4/settings.ui:1819 resources/ui/gtk4/settings.ui:1883
-#: resources/ui/gtk4/settings.ui:2297 resources/ui/gtk4/settings.ui:2451
-#: resources/ui/gtk4/settings.ui:3054 resources/ui/gtk4/settings.ui:3105
-#: resources/ui/gtk3/settings.ui:1815 resources/ui/gtk3/settings.ui:1881
-#: resources/ui/gtk3/settings.ui:2282 resources/ui/gtk3/settings.ui:2439
-#: resources/ui/gtk3/settings.ui:3029 resources/ui/gtk3/settings.ui:3082
+#: resources/ui/gtk4/settings.ui:1829 resources/ui/gtk4/settings.ui:1893
+#: resources/ui/gtk4/settings.ui:2313 resources/ui/gtk4/settings.ui:2467
+#: resources/ui/gtk4/settings.ui:3076 resources/ui/gtk4/settings.ui:3127
+#: resources/ui/gtk3/settings.ui:1822 resources/ui/gtk3/settings.ui:1888
+#: resources/ui/gtk3/settings.ui:2295 resources/ui/gtk3/settings.ui:2452
+#: resources/ui/gtk3/settings.ui:3048 resources/ui/gtk3/settings.ui:3101
 msgid "Fixed"
 msgstr "固定"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
-#: resources/ui/gtk4/settings.ui:1826 resources/ui/gtk4/settings.ui:1890
-#: resources/ui/gtk4/settings.ui:2304 resources/ui/gtk4/settings.ui:2458
-#: resources/ui/gtk3/settings.ui:1823 resources/ui/gtk3/settings.ui:1889
-#: resources/ui/gtk3/settings.ui:2290 resources/ui/gtk3/settings.ui:2447
+#: resources/ui/gtk4/settings.ui:1836 resources/ui/gtk4/settings.ui:1900
+#: resources/ui/gtk4/settings.ui:2320 resources/ui/gtk4/settings.ui:2474
+#: resources/ui/gtk3/settings.ui:1830 resources/ui/gtk3/settings.ui:1896
+#: resources/ui/gtk3/settings.ui:2303 resources/ui/gtk3/settings.ui:2460
 msgid "Auto"
 msgstr "自动"
 
-#: resources/ui/gtk4/settings.ui:2059 resources/ui/gtk4/settings.ui:2765
-#: resources/ui/gtk3/settings.ui:2058 resources/ui/gtk3/settings.ui:2755
+#: resources/ui/gtk4/settings.ui:2069 resources/ui/gtk4/settings.ui:2781
+#: resources/ui/gtk3/settings.ui:2065 resources/ui/gtk3/settings.ui:2768
 msgid "Icon Opacity"
 msgstr "标志不透明度"
 
-#: resources/ui/gtk4/settings.ui:2102 resources/ui/gtk4/settings.ui:2859
-#: resources/ui/gtk3/settings.ui:2097 resources/ui/gtk3/settings.ui:2844
+#: resources/ui/gtk4/settings.ui:2112 resources/ui/gtk4/settings.ui:2875
+#: resources/ui/gtk3/settings.ui:2104 resources/ui/gtk3/settings.ui:2857
 msgid "Icon Scale"
 msgstr "标志放缩"
 
-#: resources/ui/gtk4/settings.ui:2132 resources/ui/gtk4/settings.ui:2878
-#: resources/ui/gtk3/settings.ui:2126 resources/ui/gtk3/settings.ui:2862
+#: resources/ui/gtk4/settings.ui:2142 resources/ui/gtk4/settings.ui:2894
+#: resources/ui/gtk3/settings.ui:2133 resources/ui/gtk3/settings.ui:2875
 msgid "Icon Crop"
 msgstr "图标裁剪"
 
-#: resources/ui/gtk4/settings.ui:2183 resources/ui/gtk4/settings.ui:2929
-#: resources/ui/gtk4/settings.ui:3315 resources/ui/gtk3/settings.ui:2176
-#: resources/ui/gtk3/settings.ui:2912 resources/ui/gtk3/settings.ui:3289
+#: resources/ui/gtk4/settings.ui:2193 resources/ui/gtk4/settings.ui:2945
+#: resources/ui/gtk4/settings.ui:3337 resources/ui/gtk3/settings.ui:2183
+#: resources/ui/gtk3/settings.ui:2925 resources/ui/gtk3/settings.ui:3308
 msgid "Background Image"
 msgstr "背景图片"
 
-#: resources/ui/gtk4/settings.ui:2241 resources/ui/gtk4/settings.ui:2958
-#: resources/ui/gtk3/settings.ui:2225 resources/ui/gtk3/settings.ui:2938
+#: resources/ui/gtk4/settings.ui:2257 resources/ui/gtk4/settings.ui:2976
+#: resources/ui/gtk3/settings.ui:2238 resources/ui/gtk3/settings.ui:2953
 msgid "Children Appearance"
 msgstr "子项外观"
 
-#: resources/ui/gtk4/settings.ui:2251 resources/ui/gtk3/settings.ui:2235
+#: resources/ui/gtk4/settings.ui:2267 resources/ui/gtk3/settings.ui:2248
 msgid "Child items are styled differently when their wedge is hovered."
 msgstr "鼠标悬停于子项所在的放射形条带上时，改变子项显示的样式。"
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/gtk4/settings.ui:2267 resources/ui/gtk4/settings.ui:3013
-#: resources/ui/gtk3/settings.ui:2251 resources/ui/gtk3/settings.ui:2987
+#: resources/ui/gtk4/settings.ui:2283 resources/ui/gtk4/settings.ui:3035
+#: resources/ui/gtk3/settings.ui:2264 resources/ui/gtk3/settings.ui:3006
 msgid "Standard State"
 msgstr "通常状态"
 
@@ -1778,184 +1778,184 @@ msgstr "通常状态"
 #. When the mouse pointer is over the item
 #. Hovered: When the mouse pointer is over the item
 #. When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:2280 resources/ui/gtk4/settings.ui:3564
-#: resources/ui/gtk3/settings.ui:2264 resources/ui/gtk3/settings.ui:3528
+#: resources/ui/gtk4/settings.ui:2296 resources/ui/gtk4/settings.ui:3592
+#: resources/ui/gtk3/settings.ui:2277 resources/ui/gtk3/settings.ui:3553
 msgid "Hovered State"
 msgstr "鼠标悬停状态"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent's setting
-#: resources/ui/gtk4/settings.ui:2311 resources/ui/gtk4/settings.ui:2465
-#: resources/ui/gtk4/settings.ui:3061 resources/ui/gtk4/settings.ui:3112
-#: resources/ui/gtk3/settings.ui:2298 resources/ui/gtk3/settings.ui:2455
-#: resources/ui/gtk3/settings.ui:3037 resources/ui/gtk3/settings.ui:3090
+#: resources/ui/gtk4/settings.ui:2327 resources/ui/gtk4/settings.ui:2481
+#: resources/ui/gtk4/settings.ui:3083 resources/ui/gtk4/settings.ui:3134
+#: resources/ui/gtk3/settings.ui:2311 resources/ui/gtk3/settings.ui:2468
+#: resources/ui/gtk3/settings.ui:3056 resources/ui/gtk3/settings.ui:3109
 msgid "Parent"
 msgstr "同上级"
 
-#: resources/ui/gtk4/settings.ui:2613 resources/ui/gtk4/settings.ui:3164
-#: resources/ui/gtk3/settings.ui:2603 resources/ui/gtk3/settings.ui:3142
+#: resources/ui/gtk4/settings.ui:2629 resources/ui/gtk4/settings.ui:3186
+#: resources/ui/gtk3/settings.ui:2616 resources/ui/gtk3/settings.ui:3161
 msgid "Offset"
 msgstr "补偿"
 
 #. Draw above (grand)children items. There's an explanation string below in the application.
-#: resources/ui/gtk4/settings.ui:2724 resources/ui/gtk4/settings.ui:3253
-#: resources/ui/gtk3/settings.ui:2714 resources/ui/gtk3/settings.ui:3231
+#: resources/ui/gtk4/settings.ui:2740 resources/ui/gtk4/settings.ui:3275
+#: resources/ui/gtk3/settings.ui:2727 resources/ui/gtk3/settings.ui:3250
 #, fuzzy
 msgid "Draw Above"
 msgstr "覆盖中心项目"
 
-#: resources/ui/gtk4/settings.ui:2734 resources/ui/gtk3/settings.ui:2724
+#: resources/ui/gtk4/settings.ui:2750 resources/ui/gtk3/settings.ui:2737
 msgid "Render children above the center item."
 msgstr "在中心项目的上面显示子项。"
 
-#: resources/ui/gtk4/settings.ui:2987 resources/ui/gtk4/settings.ui:3344
-#: resources/ui/gtk3/settings.ui:2961 resources/ui/gtk3/settings.ui:3315
+#: resources/ui/gtk4/settings.ui:3009 resources/ui/gtk4/settings.ui:3368
+#: resources/ui/gtk3/settings.ui:2980 resources/ui/gtk3/settings.ui:3336
 msgid "Grandchildren Appearance"
 msgstr "二级子项外观"
 
-#: resources/ui/gtk4/settings.ui:2997 resources/ui/gtk3/settings.ui:2971
+#: resources/ui/gtk4/settings.ui:3019 resources/ui/gtk3/settings.ui:2990
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
 msgstr "鼠标悬停于上级项目所在的放射形条带上时，改变二级子项显示的样式。"
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:3026 resources/ui/gtk3/settings.ui:3000
+#: resources/ui/gtk4/settings.ui:3048 resources/ui/gtk3/settings.ui:3019
 msgid "With Hovered Parent"
 msgstr "鼠标悬停于上级时"
 
-#: resources/ui/gtk4/settings.ui:3263 resources/ui/gtk3/settings.ui:3241
+#: resources/ui/gtk4/settings.ui:3285 resources/ui/gtk3/settings.ui:3260
 msgid "Render grandchildren above children items."
 msgstr "在子项的上面显示二级子项。"
 
-#: resources/ui/gtk4/settings.ui:3374 resources/ui/gtk4/settings.ui:3613
-#: resources/ui/gtk3/settings.ui:3338 resources/ui/gtk3/settings.ui:3575
+#: resources/ui/gtk4/settings.ui:3402 resources/ui/gtk4/settings.ui:3642
+#: resources/ui/gtk3/settings.ui:3363 resources/ui/gtk3/settings.ui:3602
 msgid "Wedge Appearance"
 msgstr "条带区域外观"
 
-#: resources/ui/gtk4/settings.ui:3384 resources/ui/gtk3/settings.ui:3348
+#: resources/ui/gtk4/settings.ui:3412 resources/ui/gtk3/settings.ui:3373
 msgid "Clicking inside a wedge will activate the corresponding item."
 msgstr "在一项功能所占的放射形条带区域内点击，就可以使用这项功能。"
 
-#: resources/ui/gtk4/settings.ui:3407 resources/ui/gtk3/settings.ui:3371
+#: resources/ui/gtk4/settings.ui:3435 resources/ui/gtk3/settings.ui:3396
 msgid "Inner Radius"
 msgstr "内半径"
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
-#: resources/ui/gtk4/settings.ui:3418 resources/ui/gtk3/settings.ui:3382
+#: resources/ui/gtk4/settings.ui:3446 resources/ui/gtk3/settings.ui:3407
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr "在内半径以里点击可以取消选择。"
 
-#: resources/ui/gtk4/settings.ui:3439 resources/ui/gtk3/settings.ui:3403
+#: resources/ui/gtk4/settings.ui:3467 resources/ui/gtk3/settings.ui:3428
 msgid "Wedge Separator Color"
 msgstr "分割辐线的颜色"
 
-#: resources/ui/gtk4/settings.ui:3451 resources/ui/gtk3/settings.ui:3415
+#: resources/ui/gtk4/settings.ui:3479 resources/ui/gtk3/settings.ui:3440
 msgid "Wedge Separator Thickness"
 msgstr "分割辐线的粗细"
 
-#: resources/ui/gtk4/settings.ui:3489 resources/ui/gtk3/settings.ui:3453
+#: resources/ui/gtk4/settings.ui:3517 resources/ui/gtk3/settings.ui:3478
 msgid "Wedge Color"
 msgstr "条带区域颜色"
 
-#: resources/ui/gtk4/settings.ui:3501 resources/ui/gtk3/settings.ui:3465
+#: resources/ui/gtk4/settings.ui:3529 resources/ui/gtk3/settings.ui:3490
 msgid "Wedge Size"
 msgstr "条带区域大小"
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/gtk4/settings.ui:3551 resources/ui/gtk3/settings.ui:3515
+#: resources/ui/gtk4/settings.ui:3579 resources/ui/gtk3/settings.ui:3540
 msgid "Inactive State"
 msgstr "通常状态"
 
-#: resources/ui/gtk4/settings.ui:3642 resources/ui/gtk4/settings.ui:3745
-#: resources/ui/gtk3/settings.ui:3598 resources/ui/gtk3/settings.ui:3700
+#: resources/ui/gtk4/settings.ui:3675 resources/ui/gtk4/settings.ui:3780
+#: resources/ui/gtk3/settings.ui:3629 resources/ui/gtk3/settings.ui:3733
 msgid "Trace Appearance"
 msgstr "路径线外观"
 
-#: resources/ui/gtk4/settings.ui:3652 resources/ui/gtk3/settings.ui:3608
+#: resources/ui/gtk4/settings.ui:3685 resources/ui/gtk3/settings.ui:3639
 msgid "The trace is the connecting line between selected menu items."
 msgstr "路径线是指连接所选项目的线。"
 
-#: resources/ui/gtk4/settings.ui:3669 resources/ui/gtk3/settings.ui:3625
+#: resources/ui/gtk4/settings.ui:3702 resources/ui/gtk3/settings.ui:3656
 msgid "Thickness"
 msgstr "粗细"
 
-#: resources/ui/gtk4/settings.ui:3680 resources/ui/gtk3/settings.ui:3636
+#: resources/ui/gtk4/settings.ui:3713 resources/ui/gtk3/settings.ui:3667
 msgid "Color"
 msgstr "颜色"
 
-#: resources/ui/gtk4/settings.ui:3732 resources/ui/gtk3/settings.ui:3688
+#: resources/ui/gtk4/settings.ui:3765 resources/ui/gtk3/settings.ui:3719
 msgid "Minimum Segment Length"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3775 resources/ui/gtk4/settings.ui:3899
-#: resources/ui/gtk3/settings.ui:3724 resources/ui/gtk3/settings.ui:3847
+#: resources/ui/gtk4/settings.ui:3814 resources/ui/gtk4/settings.ui:3940
+#: resources/ui/gtk3/settings.ui:3761 resources/ui/gtk3/settings.ui:3886
 msgid "Touch Button Settings"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3785 resources/ui/gtk3/settings.ui:3734
+#: resources/ui/gtk4/settings.ui:3824 resources/ui/gtk3/settings.ui:3771
 msgid "You can show a touch button for each of your menus."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3803 resources/ui/gtk3/settings.ui:3752
+#: resources/ui/gtk4/settings.ui:3842 resources/ui/gtk3/settings.ui:3789
 msgid "Inactive Opacity"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3831 resources/ui/gtk3/settings.ui:3780
+#: resources/ui/gtk4/settings.ui:3870 resources/ui/gtk3/settings.ui:3817
 msgid "Show in Overview Mode"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3853 resources/ui/gtk3/settings.ui:3802
+#: resources/ui/gtk4/settings.ui:3892 resources/ui/gtk3/settings.ui:3839
 msgid "Show in Desktop Mode"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3875 resources/ui/gtk3/settings.ui:3824
+#: resources/ui/gtk4/settings.ui:3914 resources/ui/gtk3/settings.ui:3861
 msgid "Show above Fullscreen Windows"
 msgstr "在全屏窗口上也显示"
 
-#: resources/ui/gtk4/settings.ui:3928 resources/ui/gtk4/settings.ui:4370
-#: resources/ui/gtk3/settings.ui:3870 resources/ui/gtk3/settings.ui:4311
+#: resources/ui/gtk4/settings.ui:3973 resources/ui/gtk4/settings.ui:4417
+#: resources/ui/gtk3/settings.ui:3913 resources/ui/gtk3/settings.ui:4356
 msgid "Advanced Settings"
 msgstr "高级设置"
 
-#: resources/ui/gtk4/settings.ui:3938 resources/ui/gtk3/settings.ui:3880
+#: resources/ui/gtk4/settings.ui:3983 resources/ui/gtk3/settings.ui:3923
 msgid "These settings are independent of the presets."
 msgstr "这些设置会和预设独立作用。"
 
-#: resources/ui/gtk4/settings.ui:3957 resources/ui/gtk3/settings.ui:3899
+#: resources/ui/gtk4/settings.ui:4002 resources/ui/gtk3/settings.ui:3942
 msgid "Minimum Stroke Angle"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:3967 resources/ui/gtk3/settings.ui:3909
+#: resources/ui/gtk4/settings.ui:4012 resources/ui/gtk3/settings.ui:3952
 msgid "Smaller turns will not lead to selections."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4004 resources/ui/gtk3/settings.ui:3946
+#: resources/ui/gtk4/settings.ui:4049 resources/ui/gtk3/settings.ui:3989
 msgid "Minimum Stroke Length"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4014 resources/ui/gtk3/settings.ui:3956
+#: resources/ui/gtk4/settings.ui:4059 resources/ui/gtk3/settings.ui:3999
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4053 resources/ui/gtk3/settings.ui:3995
+#: resources/ui/gtk4/settings.ui:4098 resources/ui/gtk3/settings.ui:4038
 msgid "Jitter Threshold"
 msgstr "抖动阈值"
 
-#: resources/ui/gtk4/settings.ui:4063 resources/ui/gtk3/settings.ui:4005
+#: resources/ui/gtk4/settings.ui:4108 resources/ui/gtk3/settings.ui:4048
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4101 resources/ui/gtk3/settings.ui:4043
+#: resources/ui/gtk4/settings.ui:4146 resources/ui/gtk3/settings.ui:4086
 msgid "Display Timeout"
 msgstr "显示延迟"
 
-#: resources/ui/gtk4/settings.ui:4111 resources/ui/gtk3/settings.ui:4053
+#: resources/ui/gtk4/settings.ui:4156 resources/ui/gtk3/settings.ui:4096
 msgid ""
 "Menus will be shown after this many milliseconds.\n"
 "Use this to quickly select items without showing the menu."
@@ -1963,11 +1963,11 @@ msgstr ""
 "这段时间（毫秒）过去之后显示将菜单。\n"
 "使用它可以快速选择项目而不显示菜单。"
 
-#: resources/ui/gtk4/settings.ui:4150 resources/ui/gtk3/settings.ui:4092
+#: resources/ui/gtk4/settings.ui:4195 resources/ui/gtk3/settings.ui:4135
 msgid "Selection Timeout"
 msgstr "选中延迟"
 
-#: resources/ui/gtk4/settings.ui:4160 resources/ui/gtk3/settings.ui:4102
+#: resources/ui/gtk4/settings.ui:4205 resources/ui/gtk3/settings.ui:4145
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
@@ -1975,21 +1975,21 @@ msgstr ""
 "如果你的鼠标指针停留了这些毫秒，\n"
 "当前项目将被选中。"
 
-#: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk3/settings.ui:4141
+#: resources/ui/gtk4/settings.ui:4244 resources/ui/gtk3/settings.ui:4184
 msgid "Open Windows at the Pointer"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4151
+#: resources/ui/gtk4/settings.ui:4254 resources/ui/gtk3/settings.ui:4194
 msgid ""
 "With this enabled, Fly-Pie will attempt to open any windows\n"
 "at the current pointer position."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4232 resources/ui/gtk3/settings.ui:4174
+#: resources/ui/gtk4/settings.ui:4277 resources/ui/gtk3/settings.ui:4217
 msgid "Experimental Hover Mode"
 msgstr "悬停模式（功能测试中）"
 
-#: resources/ui/gtk4/settings.ui:4242 resources/ui/gtk3/settings.ui:4184
+#: resources/ui/gtk4/settings.ui:4287 resources/ui/gtk3/settings.ui:4227
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
@@ -1997,11 +1997,11 @@ msgstr ""
 "启用后，选择时不用按下鼠标按钮，\n"
 "或按住修饰键。"
 
-#: resources/ui/gtk4/settings.ui:4265 resources/ui/gtk3/settings.ui:4207
+#: resources/ui/gtk4/settings.ui:4310 resources/ui/gtk3/settings.ui:4250
 msgid "Show Screencast Mouse"
 msgstr "显示录屏用鼠标光标"
 
-#: resources/ui/gtk4/settings.ui:4275 resources/ui/gtk3/settings.ui:4217
+#: resources/ui/gtk4/settings.ui:4320 resources/ui/gtk3/settings.ui:4260
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
@@ -2009,74 +2009,74 @@ msgstr ""
 "显示一个大鼠标光标强调鼠标点击。\n"
 "能便于录制关于 Fly-Pie 这个软件的视频。"
 
-#: resources/ui/gtk4/settings.ui:4308 resources/ui/gtk3/settings.ui:4250
+#: resources/ui/gtk4/settings.ui:4353 resources/ui/gtk3/settings.ui:4293
 msgid "Achievement Notifications"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4318 resources/ui/gtk3/settings.ui:4260
+#: resources/ui/gtk4/settings.ui:4363 resources/ui/gtk3/settings.ui:4303
 msgid "Show a notification whenever you complete an achievement."
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4390 resources/ui/gtk3/settings.ui:4343
+#: resources/ui/gtk4/settings.ui:4437 resources/ui/gtk3/settings.ui:4388
 msgid "Load Preset"
 msgstr "载入预设"
 
-#: resources/ui/gtk4/settings.ui:4402 resources/ui/gtk3/settings.ui:4363
+#: resources/ui/gtk4/settings.ui:4449 resources/ui/gtk3/settings.ui:4408
 msgid "Load settings from a JSON file."
 msgstr "载入 JSON 格式的配置文件。"
 
-#: resources/ui/gtk4/settings.ui:4409 resources/ui/gtk3/settings.ui:4376
+#: resources/ui/gtk4/settings.ui:4456 resources/ui/gtk3/settings.ui:4421
 msgid "Save the settings to a JSON file."
 msgstr "用 JSON 文件保存配置。"
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: resources/ui/gtk4/settings.ui:4432 resources/ui/gtk4/settings.ui:4705
-#: resources/ui/gtk3/settings.ui:4405 resources/ui/gtk3/settings.ui:4698
+#: resources/ui/gtk4/settings.ui:4479 resources/ui/gtk4/settings.ui:4753
+#: resources/ui/gtk3/settings.ui:4450 resources/ui/gtk3/settings.ui:4743
 msgid "Live Preview"
 msgstr "预览效果"
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:4461 resources/ui/gtk3/settings.ui:5012
+#: resources/ui/gtk4/settings.ui:4508 resources/ui/gtk3/settings.ui:5062
 msgid "Menu Editor"
 msgstr "编辑菜单"
 
-#: resources/ui/gtk4/settings.ui:4490 resources/ui/gtk3/settings.ui:4464
+#: resources/ui/gtk4/settings.ui:4537 resources/ui/gtk3/settings.ui:4509
 msgid "Add a new menu item."
 msgstr "新建一个菜单项。"
 
-#: resources/ui/gtk4/settings.ui:4569 resources/ui/gtk3/settings.ui:4551
+#: resources/ui/gtk4/settings.ui:4617 resources/ui/gtk3/settings.ui:4596
 msgid "Stash"
 msgstr "暂存处"
 
-#: resources/ui/gtk4/settings.ui:4585 resources/ui/gtk3/settings.ui:4568
+#: resources/ui/gtk4/settings.ui:4633 resources/ui/gtk3/settings.ui:4613
 msgid "Store items here and re-use them later."
 msgstr "在这儿暂存项目，预备接下来继续使用。"
 
-#: resources/ui/gtk4/settings.ui:4629 resources/ui/gtk3/settings.ui:4612
+#: resources/ui/gtk4/settings.ui:4677 resources/ui/gtk3/settings.ui:4657
 msgid "Trash"
 msgstr "垃圾桶"
 
-#: resources/ui/gtk4/settings.ui:4645 resources/ui/gtk3/settings.ui:4628
+#: resources/ui/gtk4/settings.ui:4693 resources/ui/gtk3/settings.ui:4673
 msgid "Drop items here."
 msgstr "拖拽到这儿删除。"
 
-#: resources/ui/gtk4/settings.ui:4675 resources/ui/gtk3/settings.ui:4658
+#: resources/ui/gtk4/settings.ui:4723 resources/ui/gtk3/settings.ui:4703
 msgid "Restore menus from a JSON file. This will override your current menus!"
 msgstr "读取使用 JSON 文件保存的菜单。当前菜单会被覆盖掉！"
 
-#: resources/ui/gtk4/settings.ui:4681 resources/ui/gtk3/settings.ui:4670
+#: resources/ui/gtk4/settings.ui:4729 resources/ui/gtk3/settings.ui:4715
 msgid "Export all menus to a JSON file."
 msgstr "把全部菜单导出到 JSON 文件里。"
 
-#: resources/ui/gtk4/settings.ui:4758 resources/ui/gtk3/settings.ui:4752
+#: resources/ui/gtk4/settings.ui:4811 resources/ui/gtk3/settings.ui:4800
 msgid "Name"
 msgstr "名称"
 
-#: resources/ui/gtk4/settings.ui:4776 resources/ui/gtk3/settings.ui:4770
+#: resources/ui/gtk4/settings.ui:4829 resources/ui/gtk3/settings.ui:4818
 msgid "Icon"
 msgstr "标志"
 
-#: resources/ui/gtk4/settings.ui:4794 resources/ui/gtk3/settings.ui:4788
+#: resources/ui/gtk4/settings.ui:4847 resources/ui/gtk3/settings.ui:4836
 msgid ""
 "The icon can be either an image file path, an icon name from the current "
 "icon theme, a base64 encoded data URI, text, or an emoji. You can append \"-"
@@ -2087,11 +2087,11 @@ msgstr ""
 "源标识符（URI）、文本或者 emoji 。注记一个“-#rgb”可以给图标添加一个圆形背景，"
 "颜色由“rgb”的值给定。"
 
-#: resources/ui/gtk4/settings.ui:4827 resources/ui/gtk3/settings.ui:4827
+#: resources/ui/gtk4/settings.ui:4880 resources/ui/gtk3/settings.ui:4875
 msgid "Fixed Angle"
 msgstr "固定角度"
 
-#: resources/ui/gtk4/settings.ui:4843 resources/ui/gtk3/settings.ui:4843
+#: resources/ui/gtk4/settings.ui:4896 resources/ui/gtk3/settings.ui:4891
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -2108,11 +2108,11 @@ msgstr ""
 "设置的别的项目的固定角度大。为避免程序出错，项目被拖动改变位置，固定角度这项"
 "功能就会恢复到不使用的状态。"
 
-#: resources/ui/gtk4/settings.ui:4881 resources/ui/gtk3/settings.ui:4881
+#: resources/ui/gtk4/settings.ui:4934 resources/ui/gtk3/settings.ui:4929
 msgid "This will open the menu."
 msgstr "按下这组键盘快捷键就可以打开菜单。"
 
-#: resources/ui/gtk4/settings.ui:4895 resources/ui/gtk3/settings.ui:4895
+#: resources/ui/gtk4/settings.ui:4948 resources/ui/gtk3/settings.ui:4943
 msgid ""
 "Usually, Super + Right Mouse Button opens the window menu. With this "
 "setting, you can instead open a Fly-Pie menu."
@@ -2120,38 +2120,38 @@ msgstr ""
 "Super + 鼠标右键本来通常是用来打开窗口菜单的。打开此开关，把这么按的功能换成"
 "打开 Fly-Pie 。"
 
-#: resources/ui/gtk4/settings.ui:4900 resources/ui/gtk3/settings.ui:4900
+#: resources/ui/gtk4/settings.ui:4953 resources/ui/gtk3/settings.ui:4948
 msgid "Bind to Super + RMB"
 msgstr "绑定到 Super + 鼠标右键"
 
-#: resources/ui/gtk4/settings.ui:4916 resources/ui/gtk3/settings.ui:4916
+#: resources/ui/gtk4/settings.ui:4969 resources/ui/gtk3/settings.ui:4964
 msgid "Show Touch Button"
 msgstr ""
 
-#: resources/ui/gtk4/settings.ui:4932 resources/ui/gtk3/settings.ui:4932
+#: resources/ui/gtk4/settings.ui:4985 resources/ui/gtk3/settings.ui:4980
 msgid "Open in Screen Center"
 msgstr "在屏幕中心打开"
 
-#: resources/ui/gtk4/settings.ui:4968 resources/ui/gtk3/settings.ui:4968
+#: resources/ui/gtk4/settings.ui:5021 resources/ui/gtk3/settings.ui:5016
 msgid "Show Labels"
 msgstr ""
 
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:5023 resources/ui/gtk3/settings.ui:5255
+#: resources/ui/gtk4/settings.ui:5078 resources/ui/gtk3/settings.ui:5305
 msgid "Achievements"
 msgstr "成就"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5217 resources/ui/gtk3/settings.ui:5192
+#: resources/ui/gtk4/settings.ui:5272 resources/ui/gtk3/settings.ui:5242
 msgid "In Progress"
 msgstr "进行中"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5231 resources/ui/gtk3/settings.ui:5207
+#: resources/ui/gtk4/settings.ui:5286 resources/ui/gtk3/settings.ui:5257
 msgid "Completed"
 msgstr "完成"
 
-#: resources/ui/gtk4/settings.ui:5259 resources/ui/gtk3/settings.ui:5235
+#: resources/ui/gtk4/settings.ui:5314 resources/ui/gtk3/settings.ui:5285
 msgid "Reset all achievements."
 msgstr "重置全部成就。"
 

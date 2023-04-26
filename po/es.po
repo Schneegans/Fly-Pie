@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-24 20:33+0100\n"
+"POT-Creation-Date: 2023-04-26 20:23+0200\n"
 "PO-Revision-Date: 2023-03-25 23:44+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/fly-pie/core/es/>"
-"\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/fly-pie/core/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,8 +39,8 @@ msgstr ""
 "Por ejemplo, puede usarse para cambiar de escritorio virtual, controlar la "
 "reproducción multimedia o deshacer / rehacer operaciones."
 
-#: src/common/actions/Shortcut.js:81 resources/ui/gtk4/settings.ui:4875
-#: resources/ui/gtk3/settings.ui:4875
+#: src/common/actions/Shortcut.js:81 resources/ui/gtk4/settings.ui:4928
+#: resources/ui/gtk3/settings.ui:4923
 msgid "Shortcut"
 msgstr "Atajo"
 
@@ -430,9 +430,9 @@ msgstr ""
 msgid "Window Filter"
 msgstr "Filtro de ventanas"
 
-#: src/common/menus/RunningApps.js:102 resources/ui/gtk4/settings.ui:4782
-#: resources/ui/gtk4/settings.ui:4833 resources/ui/gtk3/settings.ui:4776
-#: resources/ui/gtk3/settings.ui:4833
+#: src/common/menus/RunningApps.js:102 resources/ui/gtk4/settings.ui:4835
+#: resources/ui/gtk4/settings.ui:4886 resources/ui/gtk3/settings.ui:4824
+#: resources/ui/gtk3/settings.ui:4881
 msgid "See tooltip for details."
 msgstr "Ver información sobre la herramienta para más detalles."
 
@@ -883,19 +883,19 @@ msgstr ""
 "Sólo puede crear elementos de acción nuevos dentro de los menús "
 "personalizados."
 
-#: src/prefs/PreferencesDialog.js:248 src/prefs/PreferencesDialog.js:281
+#: src/prefs/PreferencesDialog.js:255 src/prefs/PreferencesDialog.js:288
 msgid "Gold Sponsors"
 msgstr "Patrocinadores de Oro"
 
-#: src/prefs/PreferencesDialog.js:252 src/prefs/PreferencesDialog.js:285
+#: src/prefs/PreferencesDialog.js:259 src/prefs/PreferencesDialog.js:292
 msgid "Silver Sponsors"
 msgstr "Patrocinadores de Plata"
 
-#: src/prefs/PreferencesDialog.js:256 src/prefs/PreferencesDialog.js:289
+#: src/prefs/PreferencesDialog.js:263 src/prefs/PreferencesDialog.js:296
 msgid "Bronze Sponsors"
 msgstr "Patrocinadores de Bronce"
 
-#: src/prefs/PreferencesDialog.js:260 src/prefs/PreferencesDialog.js:293
+#: src/prefs/PreferencesDialog.js:267 src/prefs/PreferencesDialog.js:300
 msgid "Past Sponsors"
 msgstr "Antiguos patrocinadores"
 
@@ -1309,29 +1309,29 @@ msgid "Flip Side"
 msgstr "Reverso"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:215
+#: src/extension/Daemon.js:217
 msgid "Fly-Pie Level Up!"
 msgstr "¡Ha subido de nivel en Fly-Pie!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:217
+#: src/extension/Daemon.js:219
 msgid "You reached level %i!"
 msgstr "¡Ha alcanzado el nivel %i!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:237
+#: src/extension/Daemon.js:239
 msgid "Fly-Pie Achievement Completed!"
 msgstr "¡Logro de Fly-Pie completado!"
 
 #. Translators: This is shown in a desktop notifications.
-#: src/extension/Daemon.js:239
+#: src/extension/Daemon.js:241
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
 msgstr "¡Ha completado el logro \"%s\"!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
-#: src/extension/Daemon.js:601
+#: src/extension/Daemon.js:603
 msgid "Show Achievements"
 msgstr "Mostrar logros"
 
@@ -1473,11 +1473,11 @@ msgid "Enable Animations"
 msgstr "Habilitar animaciones"
 
 #. Caption of the tutorial page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:608 resources/ui/gtk3/settings.ui:1319
+#: resources/ui/gtk4/settings.ui:608 resources/ui/gtk3/settings.ui:1316
 msgid "Tutorial"
 msgstr "Tutorial"
 
-#: resources/ui/gtk4/settings.ui:642 resources/ui/gtk3/settings.ui:654
+#: resources/ui/gtk4/settings.ui:646 resources/ui/gtk3/settings.ui:657
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
@@ -1488,7 +1488,7 @@ msgstr ""
 "usar Fly-Pie de la manera más eficiente. ¡Haga clic en el gran botón a "
 "continuación para abrir un menú de prueba!"
 
-#: resources/ui/gtk4/settings.ui:653 resources/ui/gtk3/settings.ui:665
+#: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:667
 msgid ""
 "• Use your <b>left mouse button to select items</b>.\n"
 "• Use your <b>right mouse button to close the menu</b>.\n"
@@ -1505,20 +1505,20 @@ msgstr ""
 "más detalles!"
 
 #. The text of the big tutorial button.
-#: resources/ui/gtk4/settings.ui:673 resources/ui/gtk4/settings.ui:756
-#: resources/ui/gtk4/settings.ui:842 resources/ui/gtk4/settings.ui:987
-#: resources/ui/gtk4/settings.ui:1073 resources/ui/gtk3/settings.ui:685
-#: resources/ui/gtk3/settings.ui:765 resources/ui/gtk3/settings.ui:849
-#: resources/ui/gtk3/settings.ui:991 resources/ui/gtk3/settings.ui:1075
+#: resources/ui/gtk4/settings.ui:676 resources/ui/gtk4/settings.ui:757
+#: resources/ui/gtk4/settings.ui:842 resources/ui/gtk4/settings.ui:985
+#: resources/ui/gtk4/settings.ui:1070 resources/ui/gtk3/settings.ui:687
+#: resources/ui/gtk3/settings.ui:765 resources/ui/gtk3/settings.ui:848
+#: resources/ui/gtk3/settings.ui:988 resources/ui/gtk3/settings.ui:1071
 msgid "<big><b>Open the example menu!</b></big>"
 msgstr "<big><b>¡Abra el menú de ejemplo!</b></big>"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:705 resources/ui/gtk3/settings.ui:715
+#: resources/ui/gtk4/settings.ui:708 resources/ui/gtk3/settings.ui:717
 msgid "You can click anywhere!"
 msgstr "¡Puedes hacer clic en cualquier lugar!"
 
-#: resources/ui/gtk4/settings.ui:724 resources/ui/gtk3/settings.ui:733
+#: resources/ui/gtk4/settings.ui:726 resources/ui/gtk3/settings.ui:734
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
@@ -1527,7 +1527,7 @@ msgstr ""
 "pantalla siempre y cuando el puntero del ratón permanezca en la cuña del "
 "elemento seleccionado."
 
-#: resources/ui/gtk4/settings.ui:736 resources/ui/gtk3/settings.ui:745
+#: resources/ui/gtk4/settings.ui:737 resources/ui/gtk3/settings.ui:745
 msgid ""
 "<b>Items are selected by clicking anywhere in their respective wedges</b>.\n"
 "\n"
@@ -1546,11 +1546,11 @@ msgstr ""
 "¡Haga clic en <b>siguiente</b> para una sesión de práctica!"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:788 resources/ui/gtk3/settings.ui:795
+#: resources/ui/gtk4/settings.ui:789 resources/ui/gtk3/settings.ui:795
 msgid "Practice Session I"
 msgstr "Sesión de práctica I"
 
-#: resources/ui/gtk4/settings.ui:798 resources/ui/gtk3/settings.ui:805
+#: resources/ui/gtk4/settings.ui:798 resources/ui/gtk3/settings.ui:804
 #, javascript-format
 msgid ""
 "For this practice session, open the menu by clicking the big button. Then "
@@ -1567,27 +1567,27 @@ msgstr ""
 "para conocer el modo de marcado de Fly-Pie!"
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:871 resources/ui/gtk3/settings.ui:878
+#: resources/ui/gtk4/settings.ui:871 resources/ui/gtk3/settings.ui:877
 msgid "Unlocked at less than 3000 ms"
 msgstr "Desbloqueado a menos de 3000 ms"
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:891 resources/ui/gtk3/settings.ui:898
+#: resources/ui/gtk4/settings.ui:891 resources/ui/gtk3/settings.ui:897
 msgid "Unlocked at less than 2000 ms"
 msgstr "Desbloqueado a menos de 2000 ms"
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:912 resources/ui/gtk4/settings.ui:1101
-#: resources/ui/gtk3/settings.ui:919 resources/ui/gtk3/settings.ui:1103
+#: resources/ui/gtk4/settings.ui:912 resources/ui/gtk4/settings.ui:1098
+#: resources/ui/gtk3/settings.ui:918 resources/ui/gtk3/settings.ui:1099
 msgid "Unlocked at less than 1000 ms"
 msgstr "Desbloqueado a menos de 1000 ms"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:939 resources/ui/gtk3/settings.ui:944
+#: resources/ui/gtk4/settings.ui:939 resources/ui/gtk3/settings.ui:943
 msgid "The Marking Mode of Fly-Pie"
 msgstr "El modo de marcado de Fly-Pie"
 
-#: resources/ui/gtk4/settings.ui:958 resources/ui/gtk3/settings.ui:962
+#: resources/ui/gtk4/settings.ui:957 resources/ui/gtk3/settings.ui:960
 msgid ""
 "The <b>Marking Mode</b> of Fly-Pie allows you to select items by <b>drawing "
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
@@ -1598,7 +1598,7 @@ msgstr ""
 "arrastre un elemento. Tan pronto como suelte el elemento o dé un giro, se "
 "seleccionará el elemento."
 
-#: resources/ui/gtk4/settings.ui:969 resources/ui/gtk3/settings.ui:973
+#: resources/ui/gtk4/settings.ui:967 resources/ui/gtk3/settings.ui:970
 msgid ""
 "Try remembering the path to an item. Open the menu and <b>draw the path with "
 "your mouse</b>. You can start with individual segments of the path, put you "
@@ -1617,11 +1617,11 @@ msgstr ""
 "en zig-zag!</b>"
 
 #. This is a heading.
-#: resources/ui/gtk4/settings.ui:1019 resources/ui/gtk3/settings.ui:1021
+#: resources/ui/gtk4/settings.ui:1017 resources/ui/gtk3/settings.ui:1018
 msgid "Practice Session II"
 msgstr "Sesión de práctica II"
 
-#: resources/ui/gtk4/settings.ui:1029 resources/ui/gtk3/settings.ui:1031
+#: resources/ui/gtk4/settings.ui:1026 resources/ui/gtk3/settings.ui:1027
 #, javascript-format
 msgid ""
 "Again, you should select \"%s\" as quickly as possible. However, as you now "
@@ -1639,22 +1639,22 @@ msgstr ""
 "para conocer algunos trucos y consejos finales!"
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1121 resources/ui/gtk3/settings.ui:1123
+#: resources/ui/gtk4/settings.ui:1118 resources/ui/gtk3/settings.ui:1119
 msgid "Unlocked at less than 750 ms"
 msgstr "Desbloqueado a menos de 750 ms"
 
 #. ms = milliseconds
-#: resources/ui/gtk4/settings.ui:1142 resources/ui/gtk3/settings.ui:1144
+#: resources/ui/gtk4/settings.ui:1139 resources/ui/gtk3/settings.ui:1140
 msgid "Unlocked at less than 500 ms"
 msgstr "Desbloqueado a menos de 500 ms"
 
 #. The user finished the tutorial. Yay!
-#: resources/ui/gtk4/settings.ui:1176 resources/ui/gtk3/settings.ui:1176
+#: resources/ui/gtk4/settings.ui:1173 resources/ui/gtk3/settings.ui:1172
 msgid "Congratulations!"
 msgstr "¡Felicidades!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
-#: resources/ui/gtk4/settings.ui:1188 resources/ui/gtk3/settings.ui:1188
+#: resources/ui/gtk4/settings.ui:1184 resources/ui/gtk3/settings.ui:1183
 msgid ""
 "Congratulations! If you managed to unlock most of the medals, you will be "
 "using Fly-Pie like a master Pielot!\n"
@@ -1688,174 +1688,174 @@ msgstr ""
 "issues\">Github</a>."
 
 #. Button for tutorial navigation. Goes back one page.
-#: resources/ui/gtk4/settings.ui:1233 resources/ui/gtk3/settings.ui:1234
+#: resources/ui/gtk4/settings.ui:1231 resources/ui/gtk3/settings.ui:1231
 msgid "Previous"
 msgstr "Previo"
 
 #. Button for tutorial navigation. Goes to the next page.
-#: resources/ui/gtk4/settings.ui:1290 resources/ui/gtk3/settings.ui:1291
+#: resources/ui/gtk4/settings.ui:1288 resources/ui/gtk3/settings.ui:1288
 msgid "Next"
 msgstr "Siguiente"
 
 #. Caption of the settings page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:1326 resources/ui/gtk3/settings.ui:4426
+#: resources/ui/gtk4/settings.ui:1324 resources/ui/gtk3/settings.ui:4471
 msgid "Settings"
 msgstr "Ajustes"
 
-#: resources/ui/gtk4/settings.ui:1359 resources/ui/gtk4/settings.ui:1578
-#: resources/ui/gtk3/settings.ui:1359 resources/ui/gtk3/settings.ui:1578
+#: resources/ui/gtk4/settings.ui:1362 resources/ui/gtk4/settings.ui:1584
+#: resources/ui/gtk3/settings.ui:1360 resources/ui/gtk3/settings.ui:1581
 msgid "Global Appearance Settings"
 msgstr "Configuración de apariencia global"
 
-#: resources/ui/gtk4/settings.ui:1369 resources/ui/gtk3/settings.ui:1369
+#: resources/ui/gtk4/settings.ui:1372 resources/ui/gtk3/settings.ui:1370
 msgid "These settings affect all menu items."
 msgstr "Estos ajustes afectan a todos los elementos del menú."
 
-#: resources/ui/gtk4/settings.ui:1387 resources/ui/gtk3/settings.ui:1387
+#: resources/ui/gtk4/settings.ui:1390 resources/ui/gtk3/settings.ui:1388
 msgid "Animation Duration"
 msgstr "Duración de la animación"
 
-#: resources/ui/gtk4/settings.ui:1401 resources/ui/gtk3/settings.ui:1401
+#: resources/ui/gtk4/settings.ui:1404 resources/ui/gtk3/settings.ui:1402
 msgid "Global Scaling"
 msgstr "Escala global"
 
 #. Please keep this short!
-#: resources/ui/gtk4/settings.ui:1411 resources/ui/gtk3/settings.ui:1411
+#: resources/ui/gtk4/settings.ui:1414 resources/ui/gtk3/settings.ui:1412
 msgid "Independent of the preset."
 msgstr "Independiente del preajuste."
 
-#: resources/ui/gtk4/settings.ui:1462 resources/ui/gtk4/settings.ui:2113
-#: resources/ui/gtk4/settings.ui:2808 resources/ui/gtk4/settings.ui:3040
-#: resources/ui/gtk3/settings.ui:1462 resources/ui/gtk3/settings.ui:2108
-#: resources/ui/gtk3/settings.ui:2798 resources/ui/gtk3/settings.ui:3014
+#: resources/ui/gtk4/settings.ui:1465 resources/ui/gtk4/settings.ui:2123
+#: resources/ui/gtk4/settings.ui:2824 resources/ui/gtk4/settings.ui:3062
+#: resources/ui/gtk3/settings.ui:1463 resources/ui/gtk3/settings.ui:2115
+#: resources/ui/gtk3/settings.ui:2811 resources/ui/gtk3/settings.ui:3033
 msgid "Background Color"
 msgstr "Color de fondo"
 
-#: resources/ui/gtk4/settings.ui:1472 resources/ui/gtk3/settings.ui:1472
+#: resources/ui/gtk4/settings.ui:1475 resources/ui/gtk3/settings.ui:1473
 msgid "Font"
 msgstr "Fuente"
 
-#: resources/ui/gtk4/settings.ui:1482 resources/ui/gtk3/settings.ui:1482
+#: resources/ui/gtk4/settings.ui:1485 resources/ui/gtk3/settings.ui:1483
 msgid "Label Font"
 msgstr "Fuente de la etiqueta"
 
-#: resources/ui/gtk4/settings.ui:1492 resources/ui/gtk3/settings.ui:1492
+#: resources/ui/gtk4/settings.ui:1495 resources/ui/gtk3/settings.ui:1493
 msgid "Text Color"
 msgstr "Color de texto"
 
-#: resources/ui/gtk4/settings.ui:1566 resources/ui/gtk3/settings.ui:1566
+#: resources/ui/gtk4/settings.ui:1569 resources/ui/gtk3/settings.ui:1567
 msgid "Animation Mode"
 msgstr "Modo de animación"
 
-#: resources/ui/gtk4/settings.ui:1607 resources/ui/gtk4/settings.ui:2212
-#: resources/ui/gtk3/settings.ui:1602 resources/ui/gtk3/settings.ui:2202
+#: resources/ui/gtk4/settings.ui:1617 resources/ui/gtk4/settings.ui:2224
+#: resources/ui/gtk3/settings.ui:1609 resources/ui/gtk3/settings.ui:2211
 msgid "Center Appearance"
 msgstr "Apariencia central"
 
-#: resources/ui/gtk4/settings.ui:1617 resources/ui/gtk3/settings.ui:1612
+#: resources/ui/gtk4/settings.ui:1627 resources/ui/gtk3/settings.ui:1619
 msgid "The center element shows the currently hovered child's name."
 msgstr "El elemento central muestra el nombre del hijo actualmente señalado."
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:1633 resources/ui/gtk3/settings.ui:1628
+#: resources/ui/gtk4/settings.ui:1643 resources/ui/gtk3/settings.ui:1635
 msgid "With Hovered Child"
 msgstr "Con hijo señalado"
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:1646 resources/ui/gtk3/settings.ui:1641
+#: resources/ui/gtk4/settings.ui:1656 resources/ui/gtk3/settings.ui:1648
 msgid "Without Hovered Child"
 msgstr "Sin hijo señalado"
 
-#: resources/ui/gtk4/settings.ui:1676 resources/ui/gtk4/settings.ui:2602
-#: resources/ui/gtk4/settings.ui:3153 resources/ui/gtk3/settings.ui:1671
-#: resources/ui/gtk3/settings.ui:2592 resources/ui/gtk3/settings.ui:3131
+#: resources/ui/gtk4/settings.ui:1686 resources/ui/gtk4/settings.ui:2618
+#: resources/ui/gtk4/settings.ui:3175 resources/ui/gtk3/settings.ui:1678
+#: resources/ui/gtk3/settings.ui:2605 resources/ui/gtk3/settings.ui:3150
 msgid "Size"
 msgstr "Tamaño"
 
-#: resources/ui/gtk4/settings.ui:1727 resources/ui/gtk4/settings.ui:1778
-#: resources/ui/gtk4/settings.ui:1930 resources/ui/gtk4/settings.ui:1981
-#: resources/ui/gtk4/settings.ui:2351 resources/ui/gtk4/settings.ui:2412
-#: resources/ui/gtk4/settings.ui:2505 resources/ui/gtk4/settings.ui:2576
-#: resources/ui/gtk3/settings.ui:1722 resources/ui/gtk3/settings.ui:1773
-#: resources/ui/gtk3/settings.ui:1929 resources/ui/gtk3/settings.ui:1980
-#: resources/ui/gtk3/settings.ui:2338 resources/ui/gtk3/settings.ui:2399
-#: resources/ui/gtk3/settings.ui:2495 resources/ui/gtk3/settings.ui:2566
+#: resources/ui/gtk4/settings.ui:1737 resources/ui/gtk4/settings.ui:1788
+#: resources/ui/gtk4/settings.ui:1940 resources/ui/gtk4/settings.ui:1991
+#: resources/ui/gtk4/settings.ui:2367 resources/ui/gtk4/settings.ui:2428
+#: resources/ui/gtk4/settings.ui:2521 resources/ui/gtk4/settings.ui:2592
+#: resources/ui/gtk3/settings.ui:1729 resources/ui/gtk3/settings.ui:1780
+#: resources/ui/gtk3/settings.ui:1936 resources/ui/gtk3/settings.ui:1987
+#: resources/ui/gtk3/settings.ui:2351 resources/ui/gtk3/settings.ui:2412
+#: resources/ui/gtk3/settings.ui:2508 resources/ui/gtk3/settings.ui:2579
 msgid "Saturation"
 msgstr "Saturación"
 
-#: resources/ui/gtk4/settings.ui:1744 resources/ui/gtk4/settings.ui:1788
-#: resources/ui/gtk4/settings.ui:1947 resources/ui/gtk4/settings.ui:1991
-#: resources/ui/gtk4/settings.ui:2368 resources/ui/gtk4/settings.ui:2402
-#: resources/ui/gtk4/settings.ui:2522 resources/ui/gtk4/settings.ui:2566
-#: resources/ui/gtk3/settings.ui:1739 resources/ui/gtk3/settings.ui:1783
-#: resources/ui/gtk3/settings.ui:1946 resources/ui/gtk3/settings.ui:1990
-#: resources/ui/gtk3/settings.ui:2355 resources/ui/gtk3/settings.ui:2389
-#: resources/ui/gtk3/settings.ui:2512 resources/ui/gtk3/settings.ui:2556
+#: resources/ui/gtk4/settings.ui:1754 resources/ui/gtk4/settings.ui:1798
+#: resources/ui/gtk4/settings.ui:1957 resources/ui/gtk4/settings.ui:2001
+#: resources/ui/gtk4/settings.ui:2384 resources/ui/gtk4/settings.ui:2418
+#: resources/ui/gtk4/settings.ui:2538 resources/ui/gtk4/settings.ui:2582
+#: resources/ui/gtk3/settings.ui:1746 resources/ui/gtk3/settings.ui:1790
+#: resources/ui/gtk3/settings.ui:1953 resources/ui/gtk3/settings.ui:1997
+#: resources/ui/gtk3/settings.ui:2368 resources/ui/gtk3/settings.ui:2402
+#: resources/ui/gtk3/settings.ui:2525 resources/ui/gtk3/settings.ui:2569
 msgid "Luminance"
 msgstr "Luminancia"
 
-#: resources/ui/gtk4/settings.ui:1761 resources/ui/gtk4/settings.ui:1798
-#: resources/ui/gtk4/settings.ui:1964 resources/ui/gtk4/settings.ui:2001
-#: resources/ui/gtk4/settings.ui:2385 resources/ui/gtk4/settings.ui:2422
-#: resources/ui/gtk4/settings.ui:2539 resources/ui/gtk4/settings.ui:2556
-#: resources/ui/gtk3/settings.ui:1756 resources/ui/gtk3/settings.ui:1793
-#: resources/ui/gtk3/settings.ui:1963 resources/ui/gtk3/settings.ui:2000
-#: resources/ui/gtk3/settings.ui:2372 resources/ui/gtk3/settings.ui:2409
-#: resources/ui/gtk3/settings.ui:2529 resources/ui/gtk3/settings.ui:2546
+#: resources/ui/gtk4/settings.ui:1771 resources/ui/gtk4/settings.ui:1808
+#: resources/ui/gtk4/settings.ui:1974 resources/ui/gtk4/settings.ui:2011
+#: resources/ui/gtk4/settings.ui:2401 resources/ui/gtk4/settings.ui:2438
+#: resources/ui/gtk4/settings.ui:2555 resources/ui/gtk4/settings.ui:2572
+#: resources/ui/gtk3/settings.ui:1763 resources/ui/gtk3/settings.ui:1800
+#: resources/ui/gtk3/settings.ui:1970 resources/ui/gtk3/settings.ui:2007
+#: resources/ui/gtk3/settings.ui:2385 resources/ui/gtk3/settings.ui:2422
+#: resources/ui/gtk3/settings.ui:2542 resources/ui/gtk3/settings.ui:2559
 msgid "Opacity"
 msgstr "Opacidad"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
-#: resources/ui/gtk4/settings.ui:1819 resources/ui/gtk4/settings.ui:1883
-#: resources/ui/gtk4/settings.ui:2297 resources/ui/gtk4/settings.ui:2451
-#: resources/ui/gtk4/settings.ui:3054 resources/ui/gtk4/settings.ui:3105
-#: resources/ui/gtk3/settings.ui:1815 resources/ui/gtk3/settings.ui:1881
-#: resources/ui/gtk3/settings.ui:2282 resources/ui/gtk3/settings.ui:2439
-#: resources/ui/gtk3/settings.ui:3029 resources/ui/gtk3/settings.ui:3082
+#: resources/ui/gtk4/settings.ui:1829 resources/ui/gtk4/settings.ui:1893
+#: resources/ui/gtk4/settings.ui:2313 resources/ui/gtk4/settings.ui:2467
+#: resources/ui/gtk4/settings.ui:3076 resources/ui/gtk4/settings.ui:3127
+#: resources/ui/gtk3/settings.ui:1822 resources/ui/gtk3/settings.ui:1888
+#: resources/ui/gtk3/settings.ui:2295 resources/ui/gtk3/settings.ui:2452
+#: resources/ui/gtk3/settings.ui:3048 resources/ui/gtk3/settings.ui:3101
 msgid "Fixed"
 msgstr "Fijo"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
-#: resources/ui/gtk4/settings.ui:1826 resources/ui/gtk4/settings.ui:1890
-#: resources/ui/gtk4/settings.ui:2304 resources/ui/gtk4/settings.ui:2458
-#: resources/ui/gtk3/settings.ui:1823 resources/ui/gtk3/settings.ui:1889
-#: resources/ui/gtk3/settings.ui:2290 resources/ui/gtk3/settings.ui:2447
+#: resources/ui/gtk4/settings.ui:1836 resources/ui/gtk4/settings.ui:1900
+#: resources/ui/gtk4/settings.ui:2320 resources/ui/gtk4/settings.ui:2474
+#: resources/ui/gtk3/settings.ui:1830 resources/ui/gtk3/settings.ui:1896
+#: resources/ui/gtk3/settings.ui:2303 resources/ui/gtk3/settings.ui:2460
 msgid "Auto"
 msgstr "Auto"
 
-#: resources/ui/gtk4/settings.ui:2059 resources/ui/gtk4/settings.ui:2765
-#: resources/ui/gtk3/settings.ui:2058 resources/ui/gtk3/settings.ui:2755
+#: resources/ui/gtk4/settings.ui:2069 resources/ui/gtk4/settings.ui:2781
+#: resources/ui/gtk3/settings.ui:2065 resources/ui/gtk3/settings.ui:2768
 msgid "Icon Opacity"
 msgstr "Opacidad del icono"
 
-#: resources/ui/gtk4/settings.ui:2102 resources/ui/gtk4/settings.ui:2859
-#: resources/ui/gtk3/settings.ui:2097 resources/ui/gtk3/settings.ui:2844
+#: resources/ui/gtk4/settings.ui:2112 resources/ui/gtk4/settings.ui:2875
+#: resources/ui/gtk3/settings.ui:2104 resources/ui/gtk3/settings.ui:2857
 msgid "Icon Scale"
 msgstr "Escala de icono"
 
-#: resources/ui/gtk4/settings.ui:2132 resources/ui/gtk4/settings.ui:2878
-#: resources/ui/gtk3/settings.ui:2126 resources/ui/gtk3/settings.ui:2862
+#: resources/ui/gtk4/settings.ui:2142 resources/ui/gtk4/settings.ui:2894
+#: resources/ui/gtk3/settings.ui:2133 resources/ui/gtk3/settings.ui:2875
 msgid "Icon Crop"
 msgstr "Recorte de icono"
 
-#: resources/ui/gtk4/settings.ui:2183 resources/ui/gtk4/settings.ui:2929
-#: resources/ui/gtk4/settings.ui:3315 resources/ui/gtk3/settings.ui:2176
-#: resources/ui/gtk3/settings.ui:2912 resources/ui/gtk3/settings.ui:3289
+#: resources/ui/gtk4/settings.ui:2193 resources/ui/gtk4/settings.ui:2945
+#: resources/ui/gtk4/settings.ui:3337 resources/ui/gtk3/settings.ui:2183
+#: resources/ui/gtk3/settings.ui:2925 resources/ui/gtk3/settings.ui:3308
 msgid "Background Image"
 msgstr "Imagen de fondo"
 
-#: resources/ui/gtk4/settings.ui:2241 resources/ui/gtk4/settings.ui:2958
-#: resources/ui/gtk3/settings.ui:2225 resources/ui/gtk3/settings.ui:2938
+#: resources/ui/gtk4/settings.ui:2257 resources/ui/gtk4/settings.ui:2976
+#: resources/ui/gtk3/settings.ui:2238 resources/ui/gtk3/settings.ui:2953
 msgid "Children Appearance"
 msgstr "Apariencia del hijo"
 
-#: resources/ui/gtk4/settings.ui:2251 resources/ui/gtk3/settings.ui:2235
+#: resources/ui/gtk4/settings.ui:2267 resources/ui/gtk3/settings.ui:2248
 msgid "Child items are styled differently when their wedge is hovered."
 msgstr "Los hijos tienen un estilo diferente cuando se señala su cuña."
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/gtk4/settings.ui:2267 resources/ui/gtk4/settings.ui:3013
-#: resources/ui/gtk3/settings.ui:2251 resources/ui/gtk3/settings.ui:2987
+#: resources/ui/gtk4/settings.ui:2283 resources/ui/gtk4/settings.ui:3035
+#: resources/ui/gtk3/settings.ui:2264 resources/ui/gtk3/settings.ui:3006
 msgid "Standard State"
 msgstr "Estado estándar"
 
@@ -1863,40 +1863,40 @@ msgstr "Estado estándar"
 #. When the mouse pointer is over the item
 #. Hovered: When the mouse pointer is over the item
 #. When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:2280 resources/ui/gtk4/settings.ui:3564
-#: resources/ui/gtk3/settings.ui:2264 resources/ui/gtk3/settings.ui:3528
+#: resources/ui/gtk4/settings.ui:2296 resources/ui/gtk4/settings.ui:3592
+#: resources/ui/gtk3/settings.ui:2277 resources/ui/gtk3/settings.ui:3553
 msgid "Hovered State"
 msgstr "Estado señalado"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent's setting
-#: resources/ui/gtk4/settings.ui:2311 resources/ui/gtk4/settings.ui:2465
-#: resources/ui/gtk4/settings.ui:3061 resources/ui/gtk4/settings.ui:3112
-#: resources/ui/gtk3/settings.ui:2298 resources/ui/gtk3/settings.ui:2455
-#: resources/ui/gtk3/settings.ui:3037 resources/ui/gtk3/settings.ui:3090
+#: resources/ui/gtk4/settings.ui:2327 resources/ui/gtk4/settings.ui:2481
+#: resources/ui/gtk4/settings.ui:3083 resources/ui/gtk4/settings.ui:3134
+#: resources/ui/gtk3/settings.ui:2311 resources/ui/gtk3/settings.ui:2468
+#: resources/ui/gtk3/settings.ui:3056 resources/ui/gtk3/settings.ui:3109
 msgid "Parent"
 msgstr "Padre"
 
-#: resources/ui/gtk4/settings.ui:2613 resources/ui/gtk4/settings.ui:3164
-#: resources/ui/gtk3/settings.ui:2603 resources/ui/gtk3/settings.ui:3142
+#: resources/ui/gtk4/settings.ui:2629 resources/ui/gtk4/settings.ui:3186
+#: resources/ui/gtk3/settings.ui:2616 resources/ui/gtk3/settings.ui:3161
 msgid "Offset"
 msgstr "Compensación"
 
 #. Draw above (grand)children items. There's an explanation string below in the application.
-#: resources/ui/gtk4/settings.ui:2724 resources/ui/gtk4/settings.ui:3253
-#: resources/ui/gtk3/settings.ui:2714 resources/ui/gtk3/settings.ui:3231
+#: resources/ui/gtk4/settings.ui:2740 resources/ui/gtk4/settings.ui:3275
+#: resources/ui/gtk3/settings.ui:2727 resources/ui/gtk3/settings.ui:3250
 msgid "Draw Above"
 msgstr "Dibujar sobre"
 
-#: resources/ui/gtk4/settings.ui:2734 resources/ui/gtk3/settings.ui:2724
+#: resources/ui/gtk4/settings.ui:2750 resources/ui/gtk3/settings.ui:2737
 msgid "Render children above the center item."
 msgstr "Dibujar el hijo sobre el elemento central."
 
-#: resources/ui/gtk4/settings.ui:2987 resources/ui/gtk4/settings.ui:3344
-#: resources/ui/gtk3/settings.ui:2961 resources/ui/gtk3/settings.ui:3315
+#: resources/ui/gtk4/settings.ui:3009 resources/ui/gtk4/settings.ui:3368
+#: resources/ui/gtk3/settings.ui:2980 resources/ui/gtk3/settings.ui:3336
 msgid "Grandchildren Appearance"
 msgstr "Apariencia de los nietos"
 
-#: resources/ui/gtk4/settings.ui:2997 resources/ui/gtk3/settings.ui:2971
+#: resources/ui/gtk4/settings.ui:3019 resources/ui/gtk3/settings.ui:2990
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
@@ -1904,30 +1904,30 @@ msgstr ""
 "Los nietos tienen un estilo diferente cuando la cuña del padre está señalada."
 
 #. Hovered: When the mouse pointer is over the item
-#: resources/ui/gtk4/settings.ui:3026 resources/ui/gtk3/settings.ui:3000
+#: resources/ui/gtk4/settings.ui:3048 resources/ui/gtk3/settings.ui:3019
 msgid "With Hovered Parent"
 msgstr "Señalando al padre"
 
-#: resources/ui/gtk4/settings.ui:3263 resources/ui/gtk3/settings.ui:3241
+#: resources/ui/gtk4/settings.ui:3285 resources/ui/gtk3/settings.ui:3260
 msgid "Render grandchildren above children items."
 msgstr "Renderice a los nietos por encima de los de los hijos."
 
-#: resources/ui/gtk4/settings.ui:3374 resources/ui/gtk4/settings.ui:3613
-#: resources/ui/gtk3/settings.ui:3338 resources/ui/gtk3/settings.ui:3575
+#: resources/ui/gtk4/settings.ui:3402 resources/ui/gtk4/settings.ui:3642
+#: resources/ui/gtk3/settings.ui:3363 resources/ui/gtk3/settings.ui:3602
 msgid "Wedge Appearance"
 msgstr "Apariencia de la cuña"
 
-#: resources/ui/gtk4/settings.ui:3384 resources/ui/gtk3/settings.ui:3348
+#: resources/ui/gtk4/settings.ui:3412 resources/ui/gtk3/settings.ui:3373
 msgid "Clicking inside a wedge will activate the corresponding item."
 msgstr ""
 "Al hacer clic dentro de una cuña, se activará el elemento correspondiente."
 
-#: resources/ui/gtk4/settings.ui:3407 resources/ui/gtk3/settings.ui:3371
+#: resources/ui/gtk4/settings.ui:3435 resources/ui/gtk3/settings.ui:3396
 msgid "Inner Radius"
 msgstr "Radio interno"
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
-#: resources/ui/gtk4/settings.ui:3418 resources/ui/gtk3/settings.ui:3382
+#: resources/ui/gtk4/settings.ui:3446 resources/ui/gtk3/settings.ui:3407
 msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
@@ -1935,97 +1935,97 @@ msgstr ""
 "Haciendo clic dentro del radio interior\n"
 "cancelará la selección."
 
-#: resources/ui/gtk4/settings.ui:3439 resources/ui/gtk3/settings.ui:3403
+#: resources/ui/gtk4/settings.ui:3467 resources/ui/gtk3/settings.ui:3428
 msgid "Wedge Separator Color"
 msgstr "Color del separador de la cuña"
 
-#: resources/ui/gtk4/settings.ui:3451 resources/ui/gtk3/settings.ui:3415
+#: resources/ui/gtk4/settings.ui:3479 resources/ui/gtk3/settings.ui:3440
 msgid "Wedge Separator Thickness"
 msgstr "Espesor del separador de la cuña"
 
-#: resources/ui/gtk4/settings.ui:3489 resources/ui/gtk3/settings.ui:3453
+#: resources/ui/gtk4/settings.ui:3517 resources/ui/gtk3/settings.ui:3478
 msgid "Wedge Color"
 msgstr "Color de la cuña"
 
-#: resources/ui/gtk4/settings.ui:3501 resources/ui/gtk3/settings.ui:3465
+#: resources/ui/gtk4/settings.ui:3529 resources/ui/gtk3/settings.ui:3490
 msgid "Wedge Size"
 msgstr "Tamaño de la cuña"
 
 #. When the mouse pointer is NOT over the item
-#: resources/ui/gtk4/settings.ui:3551 resources/ui/gtk3/settings.ui:3515
+#: resources/ui/gtk4/settings.ui:3579 resources/ui/gtk3/settings.ui:3540
 msgid "Inactive State"
 msgstr "Estado inactivo"
 
-#: resources/ui/gtk4/settings.ui:3642 resources/ui/gtk4/settings.ui:3745
-#: resources/ui/gtk3/settings.ui:3598 resources/ui/gtk3/settings.ui:3700
+#: resources/ui/gtk4/settings.ui:3675 resources/ui/gtk4/settings.ui:3780
+#: resources/ui/gtk3/settings.ui:3629 resources/ui/gtk3/settings.ui:3733
 msgid "Trace Appearance"
 msgstr "Apariencia del trazo"
 
-#: resources/ui/gtk4/settings.ui:3652 resources/ui/gtk3/settings.ui:3608
+#: resources/ui/gtk4/settings.ui:3685 resources/ui/gtk3/settings.ui:3639
 msgid "The trace is the connecting line between selected menu items."
 msgstr ""
 "El trazo es la línea de conexión entre los elementos seleccionados en el "
 "menú."
 
-#: resources/ui/gtk4/settings.ui:3669 resources/ui/gtk3/settings.ui:3625
+#: resources/ui/gtk4/settings.ui:3702 resources/ui/gtk3/settings.ui:3656
 msgid "Thickness"
 msgstr "Espesor"
 
-#: resources/ui/gtk4/settings.ui:3680 resources/ui/gtk3/settings.ui:3636
+#: resources/ui/gtk4/settings.ui:3713 resources/ui/gtk3/settings.ui:3667
 msgid "Color"
 msgstr "Color"
 
-#: resources/ui/gtk4/settings.ui:3732 resources/ui/gtk3/settings.ui:3688
+#: resources/ui/gtk4/settings.ui:3765 resources/ui/gtk3/settings.ui:3719
 msgid "Minimum Segment Length"
 msgstr "Longitud mínima del segmento"
 
-#: resources/ui/gtk4/settings.ui:3775 resources/ui/gtk4/settings.ui:3899
-#: resources/ui/gtk3/settings.ui:3724 resources/ui/gtk3/settings.ui:3847
+#: resources/ui/gtk4/settings.ui:3814 resources/ui/gtk4/settings.ui:3940
+#: resources/ui/gtk3/settings.ui:3761 resources/ui/gtk3/settings.ui:3886
 msgid "Touch Button Settings"
 msgstr "Configuración del botón táctil"
 
-#: resources/ui/gtk4/settings.ui:3785 resources/ui/gtk3/settings.ui:3734
+#: resources/ui/gtk4/settings.ui:3824 resources/ui/gtk3/settings.ui:3771
 msgid "You can show a touch button for each of your menus."
 msgstr "Puede mostrar un botón táctil para cada uno de sus menús."
 
-#: resources/ui/gtk4/settings.ui:3803 resources/ui/gtk3/settings.ui:3752
+#: resources/ui/gtk4/settings.ui:3842 resources/ui/gtk3/settings.ui:3789
 msgid "Inactive Opacity"
 msgstr "Opacidad inactiva"
 
-#: resources/ui/gtk4/settings.ui:3831 resources/ui/gtk3/settings.ui:3780
+#: resources/ui/gtk4/settings.ui:3870 resources/ui/gtk3/settings.ui:3817
 msgid "Show in Overview Mode"
 msgstr "Mostrar en modo vista general"
 
-#: resources/ui/gtk4/settings.ui:3853 resources/ui/gtk3/settings.ui:3802
+#: resources/ui/gtk4/settings.ui:3892 resources/ui/gtk3/settings.ui:3839
 msgid "Show in Desktop Mode"
 msgstr "Mostrar en modo escritorio"
 
-#: resources/ui/gtk4/settings.ui:3875 resources/ui/gtk3/settings.ui:3824
+#: resources/ui/gtk4/settings.ui:3914 resources/ui/gtk3/settings.ui:3861
 msgid "Show above Fullscreen Windows"
 msgstr "Mostrar por encima de las ventanas a pantalla completa"
 
-#: resources/ui/gtk4/settings.ui:3928 resources/ui/gtk4/settings.ui:4370
-#: resources/ui/gtk3/settings.ui:3870 resources/ui/gtk3/settings.ui:4311
+#: resources/ui/gtk4/settings.ui:3973 resources/ui/gtk4/settings.ui:4417
+#: resources/ui/gtk3/settings.ui:3913 resources/ui/gtk3/settings.ui:4356
 msgid "Advanced Settings"
 msgstr "Ajustes avanzados"
 
-#: resources/ui/gtk4/settings.ui:3938 resources/ui/gtk3/settings.ui:3880
+#: resources/ui/gtk4/settings.ui:3983 resources/ui/gtk3/settings.ui:3923
 msgid "These settings are independent of the presets."
 msgstr "Estos ajustes son independientes de los preajustes."
 
-#: resources/ui/gtk4/settings.ui:3957 resources/ui/gtk3/settings.ui:3899
+#: resources/ui/gtk4/settings.ui:4002 resources/ui/gtk3/settings.ui:3942
 msgid "Minimum Stroke Angle"
 msgstr "Ángulo mínimo del trazo"
 
-#: resources/ui/gtk4/settings.ui:3967 resources/ui/gtk3/settings.ui:3909
+#: resources/ui/gtk4/settings.ui:4012 resources/ui/gtk3/settings.ui:3952
 msgid "Smaller turns will not lead to selections."
 msgstr "Los giros más pequeños no continuaran la selección."
 
-#: resources/ui/gtk4/settings.ui:4004 resources/ui/gtk3/settings.ui:3946
+#: resources/ui/gtk4/settings.ui:4049 resources/ui/gtk3/settings.ui:3989
 msgid "Minimum Stroke Length"
 msgstr "Longitud mínima del trazo"
 
-#: resources/ui/gtk4/settings.ui:4014 resources/ui/gtk3/settings.ui:3956
+#: resources/ui/gtk4/settings.ui:4059 resources/ui/gtk3/settings.ui:3999
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
@@ -2033,11 +2033,11 @@ msgstr ""
 "Los gestos más cortos no darán lugar a selecciones.\n"
 "Esto se multiplica por el valor de la escala global."
 
-#: resources/ui/gtk4/settings.ui:4053 resources/ui/gtk3/settings.ui:3995
+#: resources/ui/gtk4/settings.ui:4098 resources/ui/gtk3/settings.ui:4038
 msgid "Jitter Threshold"
 msgstr "Umbral de fluctuación"
 
-#: resources/ui/gtk4/settings.ui:4063 resources/ui/gtk3/settings.ui:4005
+#: resources/ui/gtk4/settings.ui:4108 resources/ui/gtk3/settings.ui:4048
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
@@ -2045,11 +2045,11 @@ msgstr ""
 "Los movimientos más pequeños no se tendrán en cuenta.\n"
 "Se multiplica por el valor de la escala global."
 
-#: resources/ui/gtk4/settings.ui:4101 resources/ui/gtk3/settings.ui:4043
+#: resources/ui/gtk4/settings.ui:4146 resources/ui/gtk3/settings.ui:4086
 msgid "Display Timeout"
 msgstr "Tiempo de espera en pantalla"
 
-#: resources/ui/gtk4/settings.ui:4111 resources/ui/gtk3/settings.ui:4053
+#: resources/ui/gtk4/settings.ui:4156 resources/ui/gtk3/settings.ui:4096
 msgid ""
 "Menus will be shown after this many milliseconds.\n"
 "Use this to quickly select items without showing the menu."
@@ -2057,11 +2057,11 @@ msgstr ""
 "Los menús se mostrarán después de esta cantidad de milisegundos.\n"
 "Use esto para seleccionar rápidamente los elementos sin mostrar el menú."
 
-#: resources/ui/gtk4/settings.ui:4150 resources/ui/gtk3/settings.ui:4092
+#: resources/ui/gtk4/settings.ui:4195 resources/ui/gtk3/settings.ui:4135
 msgid "Selection Timeout"
 msgstr "Tiempo de espera de selección"
 
-#: resources/ui/gtk4/settings.ui:4160 resources/ui/gtk3/settings.ui:4102
+#: resources/ui/gtk4/settings.ui:4205 resources/ui/gtk3/settings.ui:4145
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
@@ -2069,11 +2069,11 @@ msgstr ""
 "Si el puntero permanece inmóvil durante esta cantidad de milisegundos, \n"
 "se seleccionará el elemento actual."
 
-#: resources/ui/gtk4/settings.ui:4199 resources/ui/gtk3/settings.ui:4141
+#: resources/ui/gtk4/settings.ui:4244 resources/ui/gtk3/settings.ui:4184
 msgid "Open Windows at the Pointer"
 msgstr "Abrir ventanas con el puntero"
 
-#: resources/ui/gtk4/settings.ui:4209 resources/ui/gtk3/settings.ui:4151
+#: resources/ui/gtk4/settings.ui:4254 resources/ui/gtk3/settings.ui:4194
 msgid ""
 "With this enabled, Fly-Pie will attempt to open any windows\n"
 "at the current pointer position."
@@ -2081,11 +2081,11 @@ msgstr ""
 "Con esta opción activada, Fly-Pie intentará abrir cualquier ventana\n"
 "en la posición actual del puntero."
 
-#: resources/ui/gtk4/settings.ui:4232 resources/ui/gtk3/settings.ui:4174
+#: resources/ui/gtk4/settings.ui:4277 resources/ui/gtk3/settings.ui:4217
 msgid "Experimental Hover Mode"
 msgstr "Modo de pasar por encima experimental"
 
-#: resources/ui/gtk4/settings.ui:4242 resources/ui/gtk3/settings.ui:4184
+#: resources/ui/gtk4/settings.ui:4287 resources/ui/gtk3/settings.ui:4227
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
@@ -2093,11 +2093,11 @@ msgstr ""
 "Con esta opción activada, ya no tendrá que pulsar un botón del ratón\n"
 "o mantener pulsada una tecla modificadora durante las selecciones."
 
-#: resources/ui/gtk4/settings.ui:4265 resources/ui/gtk3/settings.ui:4207
+#: resources/ui/gtk4/settings.ui:4310 resources/ui/gtk3/settings.ui:4250
 msgid "Show Screencast Mouse"
 msgstr "Mostrar el ratón de pantalla"
 
-#: resources/ui/gtk4/settings.ui:4275 resources/ui/gtk3/settings.ui:4217
+#: resources/ui/gtk4/settings.ui:4320 resources/ui/gtk3/settings.ui:4260
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
@@ -2106,75 +2106,75 @@ msgstr ""
 "ratón.\n"
 "Se puede usar si se quiere capturar un vídeo de Fly-Pie."
 
-#: resources/ui/gtk4/settings.ui:4308 resources/ui/gtk3/settings.ui:4250
+#: resources/ui/gtk4/settings.ui:4353 resources/ui/gtk3/settings.ui:4293
 msgid "Achievement Notifications"
 msgstr "Notificaciones de logros"
 
-#: resources/ui/gtk4/settings.ui:4318 resources/ui/gtk3/settings.ui:4260
+#: resources/ui/gtk4/settings.ui:4363 resources/ui/gtk3/settings.ui:4303
 msgid "Show a notification whenever you complete an achievement."
 msgstr "Mostrar una notificación cada vez que completes un logro."
 
-#: resources/ui/gtk4/settings.ui:4390 resources/ui/gtk3/settings.ui:4343
+#: resources/ui/gtk4/settings.ui:4437 resources/ui/gtk3/settings.ui:4388
 msgid "Load Preset"
 msgstr "Cargar preajuste"
 
-#: resources/ui/gtk4/settings.ui:4402 resources/ui/gtk3/settings.ui:4363
+#: resources/ui/gtk4/settings.ui:4449 resources/ui/gtk3/settings.ui:4408
 msgid "Load settings from a JSON file."
 msgstr "Cargar la configuración desde un archivo JSON."
 
-#: resources/ui/gtk4/settings.ui:4409 resources/ui/gtk3/settings.ui:4376
+#: resources/ui/gtk4/settings.ui:4456 resources/ui/gtk3/settings.ui:4421
 msgid "Save the settings to a JSON file."
 msgstr "Guardar la configuración en un archivo JSON."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
-#: resources/ui/gtk4/settings.ui:4432 resources/ui/gtk4/settings.ui:4705
-#: resources/ui/gtk3/settings.ui:4405 resources/ui/gtk3/settings.ui:4698
+#: resources/ui/gtk4/settings.ui:4479 resources/ui/gtk4/settings.ui:4753
+#: resources/ui/gtk3/settings.ui:4450 resources/ui/gtk3/settings.ui:4743
 msgid "Live Preview"
 msgstr "Vista previa en vivo"
 
 #. Caption of the menu editor page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:4461 resources/ui/gtk3/settings.ui:5012
+#: resources/ui/gtk4/settings.ui:4508 resources/ui/gtk3/settings.ui:5062
 msgid "Menu Editor"
 msgstr "Editor del menú"
 
-#: resources/ui/gtk4/settings.ui:4490 resources/ui/gtk3/settings.ui:4464
+#: resources/ui/gtk4/settings.ui:4537 resources/ui/gtk3/settings.ui:4509
 msgid "Add a new menu item."
 msgstr "Añadir un elemento de menú nuevo."
 
-#: resources/ui/gtk4/settings.ui:4569 resources/ui/gtk3/settings.ui:4551
+#: resources/ui/gtk4/settings.ui:4617 resources/ui/gtk3/settings.ui:4596
 msgid "Stash"
 msgstr "Reservar"
 
-#: resources/ui/gtk4/settings.ui:4585 resources/ui/gtk3/settings.ui:4568
+#: resources/ui/gtk4/settings.ui:4633 resources/ui/gtk3/settings.ui:4613
 msgid "Store items here and re-use them later."
 msgstr "Guarde los artículos aquí y reúselos más tarde."
 
-#: resources/ui/gtk4/settings.ui:4629 resources/ui/gtk3/settings.ui:4612
+#: resources/ui/gtk4/settings.ui:4677 resources/ui/gtk3/settings.ui:4657
 msgid "Trash"
 msgstr "Papelera"
 
-#: resources/ui/gtk4/settings.ui:4645 resources/ui/gtk3/settings.ui:4628
+#: resources/ui/gtk4/settings.ui:4693 resources/ui/gtk3/settings.ui:4673
 msgid "Drop items here."
 msgstr "Suelte los elementos aquí."
 
-#: resources/ui/gtk4/settings.ui:4675 resources/ui/gtk3/settings.ui:4658
+#: resources/ui/gtk4/settings.ui:4723 resources/ui/gtk3/settings.ui:4703
 msgid "Restore menus from a JSON file. This will override your current menus!"
 msgstr ""
 "Restaurar menús desde un archivo JSON. ¡Esto anulará sus menús actuales!"
 
-#: resources/ui/gtk4/settings.ui:4681 resources/ui/gtk3/settings.ui:4670
+#: resources/ui/gtk4/settings.ui:4729 resources/ui/gtk3/settings.ui:4715
 msgid "Export all menus to a JSON file."
 msgstr "Exportar todos los menús a un archivo JSON."
 
-#: resources/ui/gtk4/settings.ui:4758 resources/ui/gtk3/settings.ui:4752
+#: resources/ui/gtk4/settings.ui:4811 resources/ui/gtk3/settings.ui:4800
 msgid "Name"
 msgstr "Nombre"
 
-#: resources/ui/gtk4/settings.ui:4776 resources/ui/gtk3/settings.ui:4770
+#: resources/ui/gtk4/settings.ui:4829 resources/ui/gtk3/settings.ui:4818
 msgid "Icon"
 msgstr "Icono"
 
-#: resources/ui/gtk4/settings.ui:4794 resources/ui/gtk3/settings.ui:4788
+#: resources/ui/gtk4/settings.ui:4847 resources/ui/gtk3/settings.ui:4836
 msgid ""
 "The icon can be either an image file path, an icon name from the current "
 "icon theme, a base64 encoded data URI, text, or an emoji. You can append \"-"
@@ -2186,11 +2186,11 @@ msgstr ""
 "emoji. Puede añadir \"-#rgb\" al icono para dibujar un círculo con el color "
 "RGB indicado detrás del icono."
 
-#: resources/ui/gtk4/settings.ui:4827 resources/ui/gtk3/settings.ui:4827
+#: resources/ui/gtk4/settings.ui:4880 resources/ui/gtk3/settings.ui:4875
 msgid "Fixed Angle"
 msgstr "Ángulo fijo"
 
-#: resources/ui/gtk4/settings.ui:4843 resources/ui/gtk3/settings.ui:4843
+#: resources/ui/gtk4/settings.ui:4896 resources/ui/gtk3/settings.ui:4891
 msgid ""
 "Fixed angles can be used to ensure that an item remains at the same position "
 "even if other items are added or removed. This way you can edit a menu even "
@@ -2211,11 +2211,11 @@ msgstr ""
 "eliminados si un elemento es arrastrado a otra posición en el menú. Use -1 "
 "para desactivar esta función."
 
-#: resources/ui/gtk4/settings.ui:4881 resources/ui/gtk3/settings.ui:4881
+#: resources/ui/gtk4/settings.ui:4934 resources/ui/gtk3/settings.ui:4929
 msgid "This will open the menu."
 msgstr "Esto abrirá el menú."
 
-#: resources/ui/gtk4/settings.ui:4895 resources/ui/gtk3/settings.ui:4895
+#: resources/ui/gtk4/settings.ui:4948 resources/ui/gtk3/settings.ui:4943
 msgid ""
 "Usually, Super + Right Mouse Button opens the window menu. With this "
 "setting, you can instead open a Fly-Pie menu."
@@ -2223,38 +2223,38 @@ msgstr ""
 "Normalmente, Super + Botón derecho del ratón abre el menú de la ventana. Con "
 "esta configuración, puede abrir en su lugar un menú Fly-Pie."
 
-#: resources/ui/gtk4/settings.ui:4900 resources/ui/gtk3/settings.ui:4900
+#: resources/ui/gtk4/settings.ui:4953 resources/ui/gtk3/settings.ui:4948
 msgid "Bind to Super + RMB"
 msgstr "Asignar a Super + Botón derecho del ratón"
 
-#: resources/ui/gtk4/settings.ui:4916 resources/ui/gtk3/settings.ui:4916
+#: resources/ui/gtk4/settings.ui:4969 resources/ui/gtk3/settings.ui:4964
 msgid "Show Touch Button"
 msgstr "Mostrar botón táctil"
 
-#: resources/ui/gtk4/settings.ui:4932 resources/ui/gtk3/settings.ui:4932
+#: resources/ui/gtk4/settings.ui:4985 resources/ui/gtk3/settings.ui:4980
 msgid "Open in Screen Center"
 msgstr "Abrir en el centro de la pantalla"
 
-#: resources/ui/gtk4/settings.ui:4968 resources/ui/gtk3/settings.ui:4968
+#: resources/ui/gtk4/settings.ui:5021 resources/ui/gtk3/settings.ui:5016
 msgid "Show Labels"
 msgstr "Mostrar las etiquetas"
 
 #. Caption of the achievements page in the window's titlebar.
-#: resources/ui/gtk4/settings.ui:5023 resources/ui/gtk3/settings.ui:5255
+#: resources/ui/gtk4/settings.ui:5078 resources/ui/gtk3/settings.ui:5305
 msgid "Achievements"
 msgstr "Logros"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5217 resources/ui/gtk3/settings.ui:5192
+#: resources/ui/gtk4/settings.ui:5272 resources/ui/gtk3/settings.ui:5242
 msgid "In Progress"
 msgstr "En curso"
 
 #. One of the buttons on the bottom of the achievements page.
-#: resources/ui/gtk4/settings.ui:5231 resources/ui/gtk3/settings.ui:5207
+#: resources/ui/gtk4/settings.ui:5286 resources/ui/gtk3/settings.ui:5257
 msgid "Completed"
 msgstr "Completado"
 
-#: resources/ui/gtk4/settings.ui:5259 resources/ui/gtk3/settings.ui:5235
+#: resources/ui/gtk4/settings.ui:5314 resources/ui/gtk3/settings.ui:5285
 msgid "Reset all achievements."
 msgstr "Restablecer todos los logros."
 
