@@ -32,82 +32,11 @@
     ]
   },
   {
-    "German": [
+    "Polish": [
       [
-        "j.lavoie@net-c.ca",
-        "J. Lavoie",
-        12
-      ],
-      [
-        "philipp.kiemle@gmail.com",
-        "Philipp Kiemle",
-        25
-      ],
-      [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
-        176
-      ]
-    ]
-  },
-  {
-    "Finnish": [
-      [
-        "jiri.gronroos@iki.fi",
-        "Jiri Gr\u00f6nroos",
-        237
-      ]
-    ]
-  },
-  {
-    "Dutch": [
-      [
-        "0xjarno@gmail.com",
-        "Jarno Van Schoor",
-        23
-      ],
-      [
-        "vistausss@fastmail.com",
-        "Heimen Stoffels",
-        51
-      ],
-      [
-        "philip.goto@gmail.com",
-        "Philip Goto",
-        352
-      ]
-    ]
-  },
-  {
-    "Italian": [
-      [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
-        23
-      ],
-      [
-        "j.lavoie@net-c.ca",
-        "J. Lavoie",
-        27
-      ],
-      [
-        "fmodafferi@gmail.com",
-        "Francesco Modafferi",
-        38
-      ],
-      [
-        "albano_battistella@hotmail.com",
-        "albanobattistella",
-        134
-      ]
-    ]
-  },
-  {
-    "Lithuanian": [
-      [
-        "hazap@hotmail.com",
-        "Moo",
-        11
+        "slime714@gmail.com",
+        "Zenic1",
+        104
       ]
     ]
   },
@@ -136,11 +65,44 @@
     ]
   },
   {
+    "German": [
+      [
+        "j.lavoie@net-c.ca",
+        "J. Lavoie",
+        12
+      ],
+      [
+        "philipp.kiemle@gmail.com",
+        "Philipp Kiemle",
+        25
+      ],
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        176
+      ]
+    ]
+  },
+  {
     "French": [
       [
         "schotte.clement@hotmail.fr",
         "Cl\u00e9ment Schotte",
         9
+      ],
+      [
+        "zekovski@e.email",
+        "Zekovski",
+        18
+      ]
+    ]
+  },
+  {
+    "Finnish": [
+      [
+        "jiri.gronroos@iki.fi",
+        "Jiri Gr\u00f6nroos",
+        237
       ]
     ]
   },
@@ -165,6 +127,25 @@
         "sabdenovchingiz@gmail.com",
         "GestaltEngine",
         289
+      ]
+    ]
+  },
+  {
+    "Dutch": [
+      [
+        "0xjarno@gmail.com",
+        "Jarno Van Schoor",
+        23
+      ],
+      [
+        "vistausss@fastmail.com",
+        "Heimen Stoffels",
+        51
+      ],
+      [
+        "philip.goto@gmail.com",
+        "Philip Goto",
+        373
       ]
     ]
   },
@@ -226,11 +207,53 @@
     ]
   },
   {
+    "Italian": [
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        23
+      ],
+      [
+        "j.lavoie@net-c.ca",
+        "J. Lavoie",
+        27
+      ],
+      [
+        "fmodafferi@gmail.com",
+        "Francesco Modafferi",
+        38
+      ],
+      [
+        "albano_battistella@hotmail.com",
+        "albanobattistella",
+        134
+      ]
+    ]
+  },
+  {
+    "Japanese": [
+      [
+        "rinrin0413.valley@gmail.com",
+        "Rinrin.rs",
+        437
+      ]
+    ]
+  },
+  {
     "Sinhala": [
       [
         "weblate-helabasa@yalu.lk",
         "HelaBasa Group (\u0dc4\u0dd9\u0dc5\u0db6\u0dc3 \u0dc3\u0db8\u0dd6\u0dc4\u0dba)",
         6
+      ]
+    ]
+  },
+  {
+    "Lithuanian": [
+      [
+        "hazap@hotmail.com",
+        "Moo",
+        11
       ]
     ]
   },
