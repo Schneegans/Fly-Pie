@@ -16,6 +16,7 @@ SPDX-License-Identifier: CC-BY-4.0
 #### Enhancements
 
 * It is now possible to shrink the preferences window below its initial size.
+* Several translation updates, including a completely new Japanese translation! Thanks to all the translators!
 
 #### Bug Fixes
 
