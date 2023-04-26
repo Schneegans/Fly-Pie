@@ -132,6 +132,13 @@ var PreferencesDialog = class PreferencesDialog {
     this._widget.connect('realize', widget => {
       const window = utils.gtk4() ? widget.get_root() : widget.get_toplevel();
 
+      // Give some space to the window's widgets.
+      if (utils.gtk4()) {
+        window.set_default_size(650, 750);
+      } else {
+        window.resize(650, 750);
+      }
+
       const stackSwitcher = this._builder.get_object('main-stack-switcher');
       const menuButton    = this._builder.get_object('menu-button');
 
