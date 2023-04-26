@@ -13,6 +13,10 @@ SPDX-License-Identifier: CC-BY-4.0
 
 **Release Date:** TBD
 
+#### Enhancements
+
+* It is now possible to shrink the preferences window below its initial size.
+
 #### Bug Fixes
 
 * Fixed simulating hotkeys on GNOME 44.
