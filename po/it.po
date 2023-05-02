@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-26 20:23+0200\n"
-"PO-Revision-Date: 2022-01-16 17:55+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/"
-">\n"
+"PO-Revision-Date: 2023-05-02 04:10+0000\n"
+"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/fly-pie/core/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -1848,7 +1848,6 @@ msgid "Children Appearance"
 msgstr "Aspetto elementi figli"
 
 #: resources/ui/gtk4/settings.ui:2267 resources/ui/gtk3/settings.ui:2248
-#, fuzzy
 msgid "Child items are styled differently when their wedge is hovered."
 msgstr ""
 "Gli elementi figlio hanno uno stile diverso quando il loro cuneo è in bilico."
@@ -1897,7 +1896,6 @@ msgid "Grandchildren Appearance"
 msgstr "Aspetto elementi dei nipoti"
 
 #: resources/ui/gtk4/settings.ui:3019 resources/ui/gtk3/settings.ui:2990
-#, fuzzy
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
