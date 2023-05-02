@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flypie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-26 20:23+0200\n"
-"PO-Revision-Date: 2023-05-01 23:54+0000\n"
-"Last-Translator: Frick <jakobdoesnotapproveofschool@gmail.com>\n"
+"PO-Revision-Date: 2023-05-02 04:10+0000\n"
+"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/fly-pie/core/sv/>"
 "\n"
 "Language: sv\n"
@@ -951,7 +951,7 @@ msgstr ""
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
 msgstr ""
 "Förslag på förändringar eller nya additioner kan postas på <a href=\"%s\""
-">GitHub</a>"
+">GitHub</a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1486,8 +1486,6 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
-"• Använd <b>vänster musknapp för att välja alternativ</b>.\n"
-"\n"
 
 #. The text of the big tutorial button.
 #: resources/ui/gtk4/settings.ui:676 resources/ui/gtk4/settings.ui:757
