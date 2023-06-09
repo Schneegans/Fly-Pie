@@ -2,6 +2,11 @@
     "uuid": "flypie@schneegans.github.com",
     "description": "A marking menu which can be used to launch applications, simulate hotkeys, open URLs and much more.",
     "name": "Fly-Pie",
+    "donations": {
+        "kofi": "schneegans",
+        "github": "schneegans",
+        "custom": "https://www.paypal.com/donate/?hosted_button_id=3F7UFL8KLVPXE"
+    },
     "gettext-domain": "flypie",
     "settings-schema": "org.gnome.shell.extensions.flypie",
     "shell-version": [
