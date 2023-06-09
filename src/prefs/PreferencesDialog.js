@@ -212,7 +212,7 @@ var PreferencesDialog = class PreferencesDialog {
         addURIAction('translate', 'https://hosted.weblate.org/engage/Fly-Pie/');
         addSponsorAction('donate-kofi',   'https://ko-fi.com/schneegans');
         addSponsorAction('donate-github', 'https://github.com/sponsors/Schneegans');
-        addSponsorAction('donate-paypal', 'https://www.paypal.com/donate/?hosted_button_id=3F7UFL8KLVPXE');
+        addSponsorAction('donate-paypal', 'https://www.paypal.me/simonschneegans');
         // clang-format on
 
         // Add the about dialog.
