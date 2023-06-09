@@ -16,7 +16,7 @@ SPDX-License-Identifier: CC-BY-4.0
 #### Enhancements
 
 - Added support for the new donation button on extensions.gnome.org.
-- Several translation updates. Thanks to all the translators!
+- Several translation updates, including a completely new Swedish translation! Thanks to all the translators!
 
 ## [Fly-Pie 20](https://github.com/schneegans/fly-pie/releases/tag/v20)
 
