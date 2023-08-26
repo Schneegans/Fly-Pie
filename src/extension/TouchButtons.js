@@ -11,13 +11,16 @@
 
 'use strict';
 
-const Main                       = imports.ui.main;
-const {Meta, Clutter, Gio, GLib} = imports.gi;
+import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
+import Clutter from 'gi://Clutter';
+import Meta from 'gi://Meta';
 
-const Me            = imports.misc.extensionUtils.getCurrentExtension();
-const utils         = Me.imports.src.common.utils;
-const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
-const MenuItem      = Me.imports.src.extension.MenuItem.MenuItem;
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+
+import {getHDPIScale, createIcon, getAverageIconColor} from '../common/utils.js';
+import {DBusInterface} from '../common/DBusInterface.js';
+import {MenuItem} from './MenuItem.js';
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -30,7 +33,7 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 const DRAG_OPACITY = 100;  // Opacity (0...255) for touch buttons when being dragged.
 const DRAG_SCALE   = 0.7;  // Scale factor for touch buttons when being dragged.
 
-var TouchButtons = class TouchButtons {
+export default class TouchButtons {
 
   // ------------------------------------------------------------ constructor / destructor
 
@@ -172,7 +175,7 @@ var TouchButtons = class TouchButtons {
 
     // Now we store a copy of all settings we require to draw the buttons. This makes is
     // unnecessary to query them whenever the menu configuration is changed.
-    const globalScale = this._settings.get_double('global-scale') * utils.getHDPIScale();
+    const globalScale = this._settings.get_double('global-scale') * getHDPIScale();
 
     // clang-format off
     this._cachedSettings = {
@@ -198,14 +201,14 @@ var TouchButtons = class TouchButtons {
       // Compute the average color on a smaller version of the icon.
       // clang-format off
       const iconName = this._settings.get_string('center-background-image-hover');
-      const surface  = utils.createIcon(iconName, 24, this._cachedSettings.font, {
+      const surface  = createIcon(iconName, 24, this._cachedSettings.font, {
         red: this._cachedSettings.textColor.red / 255,
         green: this._cachedSettings.textColor.green / 255,
         blue: this._cachedSettings.textColor.blue / 255
       });
       // clang-format on
 
-      const [r, g, b]        = utils.getAverageIconColor(surface, 24);
+      const [r, g, b]        = getAverageIconColor(surface, 24);
       const averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
 
       // Now we modify this color based on the configured luminance and saturation values.
@@ -277,15 +280,10 @@ var TouchButtons = class TouchButtons {
               (Main.layoutManager.currentMonitor.height - actor.height) / 2;
         }
 
-        // On GNOME 42, we need to connect to the 'captured-event' to be able to process
-        // the events before the ClickAction which is created further down. Else we will
-        // not receive some events which are swallowed by the ClickAction. On older GNOME
-        // versions we have to use the normal 'event' as we will else not receive events
-        // during the grab.
-        const event =
-            utils.shellVersionIsAtLeast(42, 'beta') ? 'captured-event' : 'event';
-
-        actor.connect(event, (actor, event) => {
+        // We need to connect to the 'captured-event' to be able to process the events
+        // before the ClickAction which is created further down. Else we will not receive
+        // some events which are swallowed by the ClickAction.
+        actor.connect('captured-event', (actor, event) => {
           // Update the actor's position when dragged around. We also store a reference to
           // the latest input device interacting with the touch button so that we can grab
           // it later.
@@ -479,25 +477,14 @@ var TouchButtons = class TouchButtons {
   // buttons will dragging them around.
   _grab(actor) {
     if (this._latestInputDevice) {
-      // On GNOME Shell 42, there's a new API.
-      if (utils.shellVersionIsAtLeast(42, 'beta')) {
-        this._lastGrab = global.stage.grab(actor);
-      } else {
-        this._latestInputDevice.grab(actor);
-        global.begin_modal(global.get_current_time(), 0);
-      }
+      this._lastGrab = global.stage.grab(actor);
     }
   }
 
   // Releases a grab created with the method above.
   _ungrab() {
     if (this._latestInputDevice) {
-      if (utils.shellVersionIsAtLeast(42, 'beta')) {
-        this._lastGrab.dismiss();
-      } else {
-        this._latestInputDevice.ungrab();
-        global.end_modal(global.get_current_time());
-      }
+      this._lastGrab.dismiss();
     }
   }
 };

@@ -11,7 +11,28 @@
 
 'use strict';
 
-const {GLib, Gio} = imports.gi;
+import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
+
+import {debug} from './utils.js';
+import {ItemClass} from './ItemClass.js';
+
+import * as CommandAction from './actions/Command.js';
+import * as ShortcutAction from './actions/Shortcut.js';
+import * as InsertTextAction from './actions/InsertText.js';
+import * as UriAction from './actions/Uri.js';
+import * as FileAction from './actions/File.js';
+import * as DBusSignalAction from './actions/DBusSignal.js';
+
+import * as CustomMenu from './menus/CustomMenu.js';
+import * as ClipboardMenu from './menus/Clipboard.js';
+import * as DevicesMenu from './menus/Devices.js';
+import * as BookmarksMenu from './menus/Bookmarks.js';
+import * as SystemMenu from './menus/System.js';
+import * as FavoritesMenu from './menus/Favorites.js';
+import * as FrequentlyUsedMenu from './menus/FrequentlyUsed.js';
+import * as RecentFilesMenu from './menus/RecentFiles.js';
+import * as RunningAppsMenu from './menus/RunningApps.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
 
@@ -24,19 +45,6 @@ try {
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
-
-const Me      = imports.misc.extensionUtils.getCurrentExtension();
-const actions = Me.imports.src.common.actions;
-const menus   = Me.imports.src.common.menus;
-const utils   = Me.imports.src.common.utils;
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// Menus of Fly-Pie are composed of individual menu items. A menu item can either be an //
-// Action - such an item performs something once activated - or a Menu. Menus do not    //
-// perform anything but may contain a list of child items.                              //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-var ItemClass = {MENU: 0, ACTION: 1};
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The getItemTypes() of the ItemRegistry can be used to access all available action    //
@@ -76,7 +84,7 @@ var ItemClass = {MENU: 0, ACTION: 1};
 
 let _itemTypes = null;
 
-var ItemRegistry = class ItemRegistry {
+export class ItemRegistry {
 
   // ---------------------------------------------------------------------- static methods
 
@@ -139,23 +147,23 @@ var ItemRegistry = class ItemRegistry {
       _itemTypes = {
 
         // Action types.
-        Shortcut: actions.Shortcut.action,
-        InsertText: actions.InsertText.action,
-        Command: actions.Command.action,
-        Uri: actions.Uri.action,
-        File: actions.File.action,
-        DBusSignal: actions.DBusSignal.action,
+        Command: CommandAction,
+        Shortcut: ShortcutAction,
+        InsertText: InsertTextAction,
+        Uri: UriAction,
+        File: FileAction,
+        DBusSignal: DBusSignalAction,
 
         // Menu types.
-        CustomMenu: menus.CustomMenu.menu,
-        Clipboard: menus.Clipboard.menu,
-        Devices: menus.Devices.menu,
-        Bookmarks: menus.Bookmarks.menu,
-        System: menus.System.menu,
-        Favorites: menus.Favorites.menu,
-        FrequentlyUsed: menus.FrequentlyUsed.menu,
-        RecentFiles: menus.RecentFiles.menu,
-        RunningApps: menus.RunningApps.menu,
+        CustomMenu: CustomMenu,
+        Clipboard: ClipboardMenu,
+        Devices: DevicesMenu,
+        Bookmarks: BookmarksMenu,
+        System: SystemMenu,
+        Favorites: FavoritesMenu,
+        FrequentlyUsed: FrequentlyUsedMenu,
+        RecentFiles: RecentFilesMenu,
+        RunningApps: RunningAppsMenu,
       };
 
       // This is only possible if the GMenu typelib is installed on the system.
@@ -307,12 +315,12 @@ var ItemRegistry = class ItemRegistry {
     // 'DBusSignal' otherwise.
     if (this.getItemTypes()[config.type] == undefined) {
       if (config.children == undefined) {
-        utils.debug(
+        debug(
             'Warning: Unknown item type \'' + config.type +
             '\'! Using \'DBusSignal\' instead.');
         config.type = 'DBusSignal';
       } else {
-        utils.debug(
+        debug(
             'Warning: Unknown item type \'' + config.type +
             '\'! Using \'CustomMenu\' instead as this item has children.');
         config.type = 'CustomMenu';

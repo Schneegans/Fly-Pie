@@ -36,6 +36,38 @@ const CopyValueButton    = Me.imports.src.prefs.CopyValueButton;
 const ImageChooserButton = Me.imports.src.prefs.ImageChooserButton;
 const AchievementsPage   = Me.imports.src.prefs.AchievementsPage.AchievementsPage;
 
+import * as Config from 'resource:///org/gnome/Shell/Extensions/js/misc/config.js';
+
+const [GS_MAJOR, GS_MINOR] = Config.PACKAGE_VERSION.split('.').map(toNumericVersion);
+
+// Returns the given argument, except for "alpha", "beta", and "rc". In these cases -3,
+// -2, and -1 are returned respectively.
+function toNumericVersion(x) {
+  switch (x) {
+    case 'alpha':
+      return -3;
+    case 'beta':
+      return -2;
+    case 'rc':
+      return -1;
+  }
+  return x;
+}
+
+// This method returns true if the current GNOME Shell version is at least as high as the
+// given arguments. Supports "alpha" and "beta" for the minor version number.
+function shellVersionIsAtLeast(major, minor) {
+  if (GS_MAJOR > major) {
+    return true;
+  }
+
+  if (GS_MAJOR == major) {
+    return GS_MINOR >= toNumericVersion(minor);
+  }
+
+  return false;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class loads the user interface defined in settings.ui and instantiates the      //
 // classes encapsulating code for the individual pages of the preferences dialog.       //

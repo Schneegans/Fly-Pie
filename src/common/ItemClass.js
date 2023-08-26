@@ -11,35 +11,13 @@
 
 'use strict';
 
-import {debug} from './utils.js';
-
 //////////////////////////////////////////////////////////////////////////////////////////
-// This can be used for some basic profiling by measuring roughly the time some parts   //
-// of the code take.                                                                    //
+// Menus of Fly-Pie are composed of individual menu items. A menu item can either be an //
+// Action - such an item performs something once activated - or a Menu. Menus do not    //
+// perform anything but may contain a list of child items.                              //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-export default class Timer {
-
-  // -------------------------------------------------------------------- public interface
-
-  constructor() {
-    this.reset();
-  }
-
-  // Returns the time in milliseconds since the last time reset() was called.
-  getElapsed() {
-    return Date.now() - this._now;
-  }
-
-  // Stores the current date for future getElapsed() calls.
-  reset() {
-    this._now = Date.now();
-  }
-
-  // Prints the given message together with the time since the last call to reset() or
-  // printElapsedAndReset().
-  printElapsedAndReset(message) {
-    debug(message + ': ' + this.getElapsed() + ' ms');
-    this.reset();
-  }
+export const ItemClass = {
+  MENU: 0,
+  ACTION: 1
 };

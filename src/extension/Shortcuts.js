@@ -11,12 +11,14 @@
 
 'use strict';
 
-const Main                            = imports.ui.main;
-const {Shell, Meta, GObject, Clutter} = imports.gi;
+import Shell from 'gi://Shell';
+import Meta from 'gi://Meta';
+import GObject from 'gi://GObject';
+import Clutter from 'gi://Clutter';
 
-const Config = imports.misc.config;
-const Me     = imports.misc.extensionUtils.getCurrentExtension();
-const utils  = Me.imports.src.common.utils;
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+
+import {debug} from '../common/utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class can be used to bind a function to global hot keys. It's designed in the   //
@@ -28,7 +30,7 @@ const utils  = Me.imports.src.common.utils;
 // the window menu and we can intercept this.                                           //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var Shortcuts = GObject.registerClass(
+export var Shortcuts = GObject.registerClass(
 
     {
       Properties: {},
@@ -115,7 +117,7 @@ var Shortcuts = GObject.registerClass(
             global.display.grab_accelerator(shortcut, Meta.KeyBindingFlags.NONE);
 
         if (action == Meta.KeyBindingAction.NONE) {
-          utils.debug('Unable to grab shortcut ' + shortcut + '!');
+          debug('Unable to grab shortcut ' + shortcut + '!');
         } else {
           const name = Meta.external_binding_name_for_action(action);
           Main.wm.allowKeybinding(name, Shell.ActionMode.ALL);

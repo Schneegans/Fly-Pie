@@ -11,11 +11,10 @@
 
 'use strict';
 
-const _ = imports.gettext.domain('flypie').gettext;
+import {ItemClass} from '../ItemClass.js';
+import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 
-const Me                  = imports.misc.extensionUtils.getCurrentExtension();
-const ItemRegistry        = Me.imports.src.common.ItemRegistry;
-const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
+const _ = imports.gettext.domain('flypie').gettext;
 
 // We have to import the InputManipulator optionally. This is because this file is
 // included from both sides: From prefs.js and from extension.js. When included from
@@ -35,12 +34,12 @@ try {
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var action = {
+export var action = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
-  class: ItemRegistry.ItemClass.ACTION,
+  class: ItemClass.ACTION,
 
   // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Activate Shortcut'),

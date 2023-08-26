@@ -11,13 +11,12 @@
 
 'use strict';
 
-const Gio = imports.gi.Gio;
+import Gio from 'gi://Gio';
+
+import {debug} from '../utils.js';
+import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
-
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.src.common.utils;
-const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The devices menu contains an item for each mounted volume as reported by the         //
@@ -25,12 +24,12 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var menu = {
+export var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
-  class: ItemRegistry.ItemClass.MENU,
+  class: ItemClass.MENU,
 
   // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Devices'),
@@ -61,7 +60,7 @@ var menu = {
             const ctx = global.create_app_launch_context(0, -1);
             Gio.AppInfo.launch_default_for_uri(mount.get_root().get_uri(), ctx);
           } catch (error) {
-            utils.debug('Failed to open "%s": %s'.format(mount.get_name(), error));
+            debug('Failed to open "%s": %s'.format(mount.get_name(), error));
           }
         }
       });

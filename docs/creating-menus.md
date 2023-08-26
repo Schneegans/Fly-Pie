@@ -10,7 +10,7 @@ SPDX-License-Identifier: CC-BY-4.0
 # Creating New Menu Types for Fly-Pie
 
 There are two fundamental item types in Fly-Pie: _Actions_ and _Menus_.
-Actions have an `onSelect()` method which is called when the user selects them; Menus can have child Actions or child Menus. 
+Actions have an `onSelect()` method which is called when the user selects them; Menus can have child Actions or child Menus.
 
 If you want to create a new Menu type for Fly-Pie, this guide is made for you!
 As an example, we will create a Menu which contains three actions, each of which shows a desktop notification when selected.
@@ -31,10 +31,10 @@ You should read the code, most of it is explained with inline comments!
 // SPDX-FileCopyrightText: Your Name <your@email.com>
 // SPDX-License-Identifier: MIT
 
-'use strict';
+"use strict";
 
 // This is required for localization support.
-const _ = imports.gettext.domain('flypie').gettext;
+const _ = imports.gettext.domain("flypie").gettext;
 
 // We have to import the Main module optionally. This is because this file is included
 // from both sides: From prefs.js and from extension.js. When included from prefs.js, the
@@ -50,9 +50,8 @@ try {
 }
 
 // Some extension-local imports we will use further down.
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.src.common.utils;
-const ItemRegistry = Me.imports.src.common.ItemRegistry;
+import { debug } from "../utils.js";
+import { ItemClass } from "../ItemClass.js";
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This simple example menu contains three actions, each of which shows a desktop       //
@@ -61,25 +60,24 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 // This should be always named 'menu'.
 var menu = {
-
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus. In this example we create a Menu!
-  class: ItemRegistry.ItemClass.MENU,
+  class: ItemClass.MENU,
 
   // This will be shown in the add-new-item-popover of the settings dialog.
   // It should be translatable.
-  name: _('ExampleMenu'),
+  name: _("ExampleMenu"),
 
   // This is also used in the add-new-item-popover.
-  icon: 'accessories-clipboard',
+  icon: "accessories-clipboard",
 
   // Translators: Please keep this short.
   // This is the (short) description shown in the add-new-item-popover.
-  subtitle: _('Foo.'),
+  subtitle: _("Foo."),
 
   // This is the (long) description shown when an item of this type is selected.
-  description: _('Bar bar bar bar.'),
+  description: _("Bar bar bar bar."),
 
   // Menus can also have a config field like actions. See the documentation on how-to
   // create custom actions for details. This example menu does not use a config field.
@@ -88,7 +86,7 @@ var menu = {
   // This will be called whenever a menu is opened containing an item of this kind.
   createItem: () => {
     // This will be printed to the log when a menu is opened containing such an item.
-    utils.debug('ExampleMenu Created!');
+    debug("ExampleMenu Created!");
 
     // This method should return an object containing a 'children' array. Each array
     // element has to have a 'name' and an 'icon'. The onSelect() function will be
@@ -96,29 +94,29 @@ var menu = {
     return {
       children: [
         {
-          name: _('First Item'),
-          icon: '♈',
+          name: _("First Item"),
+          icon: "♈",
           onSelect: () => {
-            Main.notify(_('♈ Selected!'), _('This is the first item!'));
-          }
+            Main.notify(_("♈ Selected!"), _("This is the first item!"));
+          },
         },
         {
-          name: _('Second Item'),
-          icon: '♎',
+          name: _("Second Item"),
+          icon: "♎",
           onSelect: () => {
-            Main.notify(_('♎ Selected!'), _('This is the second item!'));
-          }
+            Main.notify(_("♎ Selected!"), _("This is the second item!"));
+          },
         },
         {
-          name: _('Third Item'),
-          icon: '♐',
+          name: _("Third Item"),
+          icon: "♐",
           onSelect: () => {
-            Main.notify(_('♐ Selected!'), _('This is the third item!'));
-          }
-        }
-      ]
+            Main.notify(_("♐ Selected!"), _("This is the third item!"));
+          },
+        },
+      ],
     };
-  }
+  },
 };
 ```
 

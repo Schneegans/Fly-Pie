@@ -11,15 +11,14 @@
 
 'use strict';
 
-const {Gtk, GLib} = imports.gi;
-const ByteArray   = imports.byteArray;
+import Gtk from 'gi://Gtk';
+import GLib from 'gi://GLib';
+
+import {debug} from '../utils.js';
+import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
+import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
-
-const Me                  = imports.misc.extensionUtils.getCurrentExtension();
-const utils               = Me.imports.src.common.utils;
-const ItemRegistry        = Me.imports.src.common.ItemRegistry;
-const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 // We have to import the ClipboardManager module optionally. This is because this file is
 // included from both sides: From prefs.js and from extension.js. When included from
@@ -46,12 +45,12 @@ try {
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var menu = {
+export var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
-  class: ItemRegistry.ItemClass.MENU,
+  class: ItemClass.MENU,
 
   // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Clipboard'),
@@ -138,7 +137,7 @@ var menu = {
       // text as icon and a longer portion as name.
       if (item.type === 'text/plain' || item.type == 'text/plain;charset=utf-8') {
 
-        const text = ByteArray.toString(ByteArray.fromGBytes(item.data));
+        const text = new TextDecoder().decode(item.data.get_data());
 
         child = {
           icon: text.substring(0, 8) + (text.length > 8 ? '…' : ''),
@@ -149,7 +148,7 @@ var menu = {
       // icon and name for the first file.
       else if (item.type === 'x-special/gnome-copied-files') {
 
-        const data   = ByteArray.toString(ByteArray.fromGBytes(item.data));
+        const data   = new TextDecoder().decode(item.data.get_data());
         const lines  = data.split(/\r?\n/);
         const file   = lines[1];  // The first item contains the action (cut, copy).
         const config = ItemRegistry.ItemRegistry.createActionConfig(file);
@@ -182,7 +181,7 @@ var menu = {
       }
       // In all other cases we log an error.
       else {
-        utils.debug(
+        debug(
             `Failed to add clipboard item: Unsupported mime type "${item.type}" given!`);
       }
 

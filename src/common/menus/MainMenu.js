@@ -11,13 +11,12 @@
 
 'use strict';
 
-const GMenu = imports.gi.GMenu;
+import GMenu from 'gi://GMenu';
+
+import {debug} from '../utils.js';
+import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
-
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.src.common.utils;
-const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -25,12 +24,12 @@ const ItemRegistry = Me.imports.src.common.ItemRegistry;
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var menu = {
+export var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
-  class: ItemRegistry.ItemClass.MENU,
+  class: ItemClass.MENU,
 
   // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Main Menu'),
@@ -70,7 +69,7 @@ var menu = {
                 try {
                   app.launch([], ctx);
                 } catch (error) {
-                  utils.debug('Failed to launch app: ' + error);
+                  debug('Failed to launch app: ' + error);
                 }
               }
             };

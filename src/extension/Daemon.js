@@ -11,25 +11,28 @@
 
 'use strict';
 
-const Cairo                           = imports.cairo;
-const {Gio, GLib, Gdk, GdkPixbuf, St} = imports.gi;
+import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
+import Gdk from 'gi://Gdk';
+import Cairo from 'gi://cairo';
+import GdkPixbuf from 'gi://GdkPixbuf';
+import St from 'gi://St';
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-const Main = imports.ui.main;
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-const Me               = imports.misc.extensionUtils.getCurrentExtension();
-const utils            = Me.imports.src.common.utils;
-const Statistics       = Me.imports.src.common.Statistics.Statistics;
-const Achievements     = Me.imports.src.common.Achievements.Achievements;
-const ItemRegistry     = Me.imports.src.common.ItemRegistry.ItemRegistry;
-const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
-const Shortcuts        = Me.imports.src.extension.Shortcuts.Shortcuts;
-const TouchButtons     = Me.imports.src.extension.TouchButtons.TouchButtons;
-const MouseHighlight   = Me.imports.src.extension.MouseHighlight.MouseHighlight;
-const Menu             = Me.imports.src.extension.Menu.Menu;
-const DefaultMenu      = Me.imports.src.extension.DefaultMenu.DefaultMenu;
-const ClipboardManager = Me.imports.src.extension.ClipboardManager.ClipboardManager;
+import {createSettings, debug, getHDPIScale} from '../common/utils.js';
+import Statistics from '../common/Statistics.js';
+import {Achievements} from '../common/Achievements.js';
+import {ItemRegistry} from '../common/ItemRegistry.js';
+import {DBusInterface} from '../common/DBusInterface.js';
+import {Shortcuts} from './Shortcuts.js';
+import TouchButtons from './TouchButtons.js';
+// import MouseHighlight from './MouseHighlight.js';
+import Menu from './Menu.js';
+// import DefaultMenu from './DefaultMenu.js';
+import ClipboardManager from './ClipboardManager.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
@@ -38,14 +41,17 @@ const ClipboardManager = Me.imports.src.extension.ClipboardManager.ClipboardMana
 // menu is shown or updated accordingly.                                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var Daemon = class Daemon {
+export default class Daemon {
 
   // ------------------------------------------------------------ constructor / destructor
 
-  constructor() {
+  constructor(metadata) {
+
+    this._metadata = metadata;
 
     // Load all of Fly-Pie's resources.
-    this._resources = Gio.Resource.load(Me.path + '/resources/flypie.gresource');
+    this._resources =
+        Gio.Resource.load(this._metadata.path + '/resources/flypie.gresource');
     Gio.resources_register(this._resources);
 
     // Make the ShowMenu(), PreviewMenu(), ShowCustomMenu(), and the PreviewCustomMenu()
@@ -63,7 +69,7 @@ var Daemon = class Daemon {
 
     // Create a settings object and listen for menu configuration changes. Once the
     // configuration changes, we bind all the configured shortcuts.
-    this._settings = utils.createSettings();
+    this._settings = createSettings();
 
     // We keep several connections to the Gio.Settings object. Once the extension is
     // unloaded, we use this array to disconnect all of them.
@@ -103,7 +109,7 @@ var Daemon = class Daemon {
     const showMenu = (name) => {
       const result = this.ShowMenu(name);
       if (result < 0) {
-        utils.debug(
+        debug(
             'Failed to open a Fly-Pie menu: ' +
             DBusInterface.getErrorDescription(result));
       }
@@ -178,11 +184,8 @@ var Daemon = class Daemon {
     // factor changes.
     const ctx                   = St.ThemeContext.get_for_stage(global.stage);
     this._scaleFactorConnection = ctx.connect('notify::scale-factor', onScaleChange);
-
-    if (utils.shellVersionIsAtLeast(3, 38)) {
-      this._resourceScaleConnection =
-          global.stage.connect('resource-scale-changed', onScaleChange);
-    }
+    this._resourceScaleConnection =
+        global.stage.connect('resource-scale-changed', onScaleChange);
 
     // Whenever settings are changed, we adapt the currently shown menu accordingly.
     this._settingsConnections.push(this._settings.connect('change-event', (o, keys) => {
@@ -290,9 +293,7 @@ var Daemon = class Daemon {
     // Disconnect some handlers.
     global.stage.disconnect(this._resourceScaleConnection);
 
-    if (utils.shellVersionIsAtLeast(3, 38)) {
-      St.ThemeContext.get_for_stage(global.stage).disconnect(this._scaleFactorConnection);
-    }
+    St.ThemeContext.get_for_stage(global.stage).disconnect(this._scaleFactorConnection);
   }
 
   // -------------------------------------------------------------- public D-Bus-Interface
@@ -404,7 +405,7 @@ var Daemon = class Daemon {
       try {
         config = JSON.parse(config);
       } catch (error) {
-        utils.debug('Failed to parse menu configuration JSON: ' + error);
+        debug('Failed to parse menu configuration JSON: ' + error);
         return DBusInterface.errorCodes.eInvalidJSON;
       }
     }
@@ -413,7 +414,7 @@ var Daemon = class Daemon {
     try {
       ItemRegistry.normalizeConfig(config);
     } catch (error) {
-      utils.debug('Failed to parse menu configuration: ' + error);
+      debug('Failed to parse menu configuration: ' + error);
       return DBusInterface.errorCodes.eInvalidMenuConfiguration;
     }
 
@@ -423,7 +424,7 @@ var Daemon = class Daemon {
     try {
       structure = ItemRegistry.transformConfig(config);
     } catch (error) {
-      utils.debug('Failed to transform menu configuration: ' + error);
+      debug('Failed to transform menu configuration: ' + error);
       return DBusInterface.errorCodes.eInvalidMenuConfiguration;
     }
 
@@ -432,7 +433,7 @@ var Daemon = class Daemon {
     try {
       return this._menu.open(menuID, structure, previewMode, x, y);
     } catch (error) {
-      utils.debug('Failed to show menu: ' + error);
+      debug('Failed to show menu: ' + error);
     }
 
     // Something weird happened.
@@ -474,14 +475,13 @@ var Daemon = class Daemon {
     try {
       this._menuConfigs = JSON.parse(this._settings.get_string('menu-configuration'));
     } catch (error) {
-      utils.debug('Failed to load Fly-Pie menu configuration: ' + error);
+      debug('Failed to load Fly-Pie menu configuration: ' + error);
       this._menuConfigs = [];
     }
 
     // Root element must be an array of menus.
     if (!Array.isArray(this._menuConfigs)) {
-      utils.debug(
-          'Failed to load Fly-Pie menu configuration: Root element must be an array!');
+      debug('Failed to load Fly-Pie menu configuration: Root element must be an array!');
       this._menuConfigs = [];
     }
 
@@ -580,7 +580,7 @@ var Daemon = class Daemon {
 
       // For now, we use a hard-coded size of 50. This can be made configurable in the
       // future if anybody needs it.
-      const size            = 50 * utils.getHDPIScale();
+      const size            = 50 * getHDPIScale();
       this._screencastMouse = new MouseHighlight(size);
       global.stage.add_child(this._screencastMouse);
     }
@@ -605,7 +605,7 @@ var Daemon = class Daemon {
         this._settings.set_string('active-stack-child', 'achievements-page');
 
         // Show the settings dialog.
-        Main.extensionManager.openExtensionPrefs(Me.uuid, '');
+        Main.extensionManager.openExtensionPrefs(this._metadata.uuid, '');
       });
 
       source.showNotification(n);

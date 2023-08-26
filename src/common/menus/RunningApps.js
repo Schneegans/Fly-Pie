@@ -11,14 +11,12 @@
 
 'use strict';
 
-const {Gtk, GLib} = imports.gi;
+import Gtk from 'gi://Gtk';
+
+import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
+import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
-
-const Me                  = imports.misc.extensionUtils.getCurrentExtension();
-const utils               = Me.imports.src.common.utils;
-const ItemRegistry        = Me.imports.src.common.ItemRegistry;
-const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 // We have to import the Shell module optionally. This is because this file is included
 // from both sides: From prefs.js and from extension.js. When included from prefs.js, this
@@ -39,12 +37,12 @@ try {
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var menu = {
+export var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
-  class: ItemRegistry.ItemClass.MENU,
+  class: ItemClass.MENU,
 
   // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Running Apps'),

@@ -11,13 +11,13 @@
 
 'use strict';
 
-const {Gdk, Gtk, GLib} = imports.gi;
+import Gtk from 'gi://Gtk';
+import Gdk from 'gi://Gdk';
+
+import {ItemClass} from '../ItemClass.js';
+import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
-
-const Me                  = imports.misc.extensionUtils.getCurrentExtension();
-const ItemRegistry        = Me.imports.src.common.ItemRegistry;
-const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 // We import the ClipboardManager and InputManipulator optionally. When this file is
 // included from the daemon side, they are available and can be used in the activation
@@ -40,12 +40,12 @@ try {
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var action = {
+export var action = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
-  class: ItemRegistry.ItemClass.ACTION,
+  class: ItemClass.ACTION,
 
   // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Insert Text'),

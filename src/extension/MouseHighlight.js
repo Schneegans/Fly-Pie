@@ -33,130 +33,131 @@ const utils = Me.imports.src.common.utils;
 //////////////////////////////////////////////////////////////////////////////////////////
 
 // clang-format off
-var MouseHighlight = GObject.registerClass({
+export var MouseHighlight = GObject.registerClass({
   Properties: {},
   Signals: {}
 },
 class MouseHighlight extends Clutter.Actor {
-  // clang-format on
+      // clang-format on
 
-  // ------------------------------------------------------------ constructor / destructor
+      // ------------------------------------------------------------ constructor /
+      // destructor
 
-  // The size in pixels is given to the constructor.
-  _init(size) {
-    super._init();
+      // The size in pixels is given to the constructor.
+      _init(size) {
+        super._init();
 
-    // This stores the currently pressed modifiers.
-    this._mods = 0;
+        // This stores the currently pressed modifiers.
+        this._mods = 0;
 
-    // The pointer is drawn to this canvas.
-    this._canvas = new Clutter.Canvas();
-    this._canvas.connect('draw', (canvas, ctx, width, height) => {
-      ctx.setOperator(Cairo.Operator.CLEAR);
-      ctx.paint();
-      ctx.setOperator(Cairo.Operator.OVER);
+        // The pointer is drawn to this canvas.
+        this._canvas = new Clutter.Canvas();
+        this._canvas.connect('draw', (canvas, ctx, width, height) => {
+          ctx.setOperator(Cairo.Operator.CLEAR);
+          ctx.paint();
+          ctx.setOperator(Cairo.Operator.OVER);
 
-      const lineWidth  = 2;
-      const cursorSize = size - 2 * lineWidth;
+          const lineWidth  = 2;
+          const cursorSize = size - 2 * lineWidth;
 
-      // The pointer is made of four points like this:
-      //   A
-      //   | \
-      //   |   \
-      //   |     \
-      //   |       \
-      //   |   C -- D
-      //   | /
-      //   B
+          // The pointer is made of four points like this:
+          //   A
+          //   | \
+          //   |   \
+          //   |     \
+          //   |       \
+          //   |   C -- D
+          //   | /
+          //   B
 
-      const ax = 0.0 * cursorSize + lineWidth;
-      const ay = 0.0 * cursorSize + lineWidth;
+          const ax = 0.0 * cursorSize + lineWidth;
+          const ay = 0.0 * cursorSize + lineWidth;
 
-      const bx = 0.0 * cursorSize + lineWidth;
-      const by = 1.0 * cursorSize + lineWidth;
+          const bx = 0.0 * cursorSize + lineWidth;
+          const by = 1.0 * cursorSize + lineWidth;
 
-      const cx = 0.29 * cursorSize + lineWidth;
-      const cy = 0.707 * cursorSize + lineWidth;
+          const cx = 0.29 * cursorSize + lineWidth;
+          const cy = 0.707 * cursorSize + lineWidth;
 
-      const dx = 0.707 * cursorSize + lineWidth;
-      const dy = 0.707 * cursorSize + lineWidth;
+          const dx = 0.707 * cursorSize + lineWidth;
+          const dy = 0.707 * cursorSize + lineWidth;
 
-      // First draw the left-click area.
-      ctx.moveTo(ax, ay);
-      ctx.lineTo(bx, by);
-      ctx.lineTo(cx, cy);
-      ctx.lineTo(ax, ay);
+          // First draw the left-click area.
+          ctx.moveTo(ax, ay);
+          ctx.lineTo(bx, by);
+          ctx.lineTo(cx, cy);
+          ctx.lineTo(ax, ay);
 
-      if (this._mods & Clutter.ModifierType.BUTTON1_MASK) {
-        ctx.setSourceRGB(0.5, 1.0, 0.5);
-      } else {
-        ctx.setSourceRGB(0, 0, 0);
+          if (this._mods & Clutter.ModifierType.BUTTON1_MASK) {
+            ctx.setSourceRGB(0.5, 1.0, 0.5);
+          } else {
+            ctx.setSourceRGB(0, 0, 0);
+          }
+          ctx.fill();
+
+          // Then draw the right-click area.
+          ctx.moveTo(ax, ay);
+          ctx.lineTo(cx, cy);
+          ctx.lineTo(dx, dy);
+          ctx.lineTo(ax, ay);
+
+          // The right mouse button is BUTTON2 on Wayland and BUTTON3 on X11...
+          if (this._mods & Clutter.ModifierType.BUTTON2_MASK ||
+              this._mods & Clutter.ModifierType.BUTTON3_MASK) {
+            ctx.setSourceRGB(1.0, 0.5, 0.5);
+          } else {
+            ctx.setSourceRGB(0.2, 0.2, 0.2);
+          }
+          ctx.fill();
+
+          // Finally draw the line around the entire cursor.
+          ctx.moveTo(ax, ay);
+          ctx.lineTo(bx, by);
+          ctx.lineTo(cx, cy);
+          ctx.lineTo(dx, dy);
+          ctx.lineTo(ax, ay);
+
+          ctx.setSourceRGB(1, 1, 1);
+          ctx.setLineWidth(lineWidth);
+          ctx.stroke();
+
+          // Explicitly tell Cairo to free the context memory. Is this really necessary?
+          ctx.$dispose();
+        });
+
+        this._canvas.set_size(size, size);
+
+        // Apply HiDPI scaling and trigger an initial 'draw' signal emission. The call to
+        // set_scale_factor() will automatically invalidate the canvas.
+        if (utils.getHDPIResourceScale() != 1) {
+          this._canvas.set_scale_factor(utils.getHDPIResourceScale());
+        } else {
+          this._canvas.invalidate();
+        }
+
+        // Set the size of the anchor. For some reason a small offset is required to make
+        // it exactly match the original mouse pointer's position.
+        this.set_size(size, size);
+        this.set_translation(-3, -3, 0);
+        this.set_content(this._canvas);
+
+        // Update the position of the pointer at 100 Hz.
+        this._updateTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
+          const [x, y, mods] = global.get_pointer();
+          this.set_position(x, y);
+
+          if (this._mods != mods) {
+            this._mods = mods;
+            this._canvas.invalidate();
+          }
+
+          return true;
+        });
       }
-      ctx.fill();
 
-      // Then draw the right-click area.
-      ctx.moveTo(ax, ay);
-      ctx.lineTo(cx, cy);
-      ctx.lineTo(dx, dy);
-      ctx.lineTo(ax, ay);
-
-      // The right mouse button is BUTTON2 on Wayland and BUTTON3 on X11...
-      if (this._mods & Clutter.ModifierType.BUTTON2_MASK ||
-          this._mods & Clutter.ModifierType.BUTTON3_MASK) {
-        ctx.setSourceRGB(1.0, 0.5, 0.5);
-      } else {
-        ctx.setSourceRGB(0.2, 0.2, 0.2);
+      // Do not attempt to update the cursor when it's deleted.
+      destroy() {
+        super.destroy();
+        GLib.source_remove(this._updateTimeout);
       }
-      ctx.fill();
-
-      // Finally draw the line around the entire cursor.
-      ctx.moveTo(ax, ay);
-      ctx.lineTo(bx, by);
-      ctx.lineTo(cx, cy);
-      ctx.lineTo(dx, dy);
-      ctx.lineTo(ax, ay);
-
-      ctx.setSourceRGB(1, 1, 1);
-      ctx.setLineWidth(lineWidth);
-      ctx.stroke();
-
-      // Explicitly tell Cairo to free the context memory. Is this really necessary?
-      ctx.$dispose();
     });
-
-    this._canvas.set_size(size, size);
-
-    // Apply HiDPI scaling and trigger an initial 'draw' signal emission. The call to
-    // set_scale_factor() will automatically invalidate the canvas.
-    if (utils.getHDPIResourceScale() != 1) {
-      this._canvas.set_scale_factor(utils.getHDPIResourceScale());
-    } else {
-      this._canvas.invalidate();
-    }
-
-    // Set the size of the anchor. For some reason a small offset is required to make it
-    // exactly match the original mouse pointer's position.
-    this.set_size(size, size);
-    this.set_translation(-3, -3, 0);
-    this.set_content(this._canvas);
-
-    // Update the position of the pointer at 100 Hz.
-    this._updateTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
-      const [x, y, mods] = global.get_pointer();
-      this.set_position(x, y);
-
-      if (this._mods != mods) {
-        this._mods = mods;
-        this._canvas.invalidate();
-      }
-
-      return true;
-    });
-  }
-
-  // Do not attempt to update the cursor when it's deleted.
-  destroy() {
-    super.destroy();
-    GLib.source_remove(this._updateTimeout);
-  }
-});

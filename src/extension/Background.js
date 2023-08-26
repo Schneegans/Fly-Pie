@@ -11,13 +11,17 @@
 
 'use strict';
 
-const Main                              = imports.ui.main;
-const {Clutter, Gio, GObject, Meta, St} = imports.gi;
+import Gio from 'gi://Gio';
+import Clutter from 'gi://Clutter';
+import GObject from 'gi://GObject';
+import Meta from 'gi://Meta';
+import St from 'gi://St';
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
+
+import {createSettings, debug} from '../common/utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This Clutter.Actor represents the background behind the menu. It can be shown in     //
@@ -28,7 +32,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 //////////////////////////////////////////////////////////////////////////////////////////
 
 // clang-format off
-var Background = GObject.registerClass({
+export var Background = GObject.registerClass({
   Properties: {},
   Signals: {
     // Emitted when the close button is clicked.
@@ -53,7 +57,7 @@ class Background extends Clutter.Actor {
 
     // We keep several connections to the Gio.Settings object. Once the settings dialog is
     // closed, we use this array to disconnect all of them.
-    this._settings            = utils.createSettings();
+    this._settings            = createSettings();
     this._settingsConnections = [];
 
     // Set the background color according to the settings.
@@ -169,7 +173,7 @@ class Background extends Clutter.Actor {
         } else {
           // Something went wrong while grabbing the input. For now, we continue but log
           // an corresponding message.
-          utils.debug('Failed to grab input. Continuing anyways...');
+          debug('Failed to grab input. Continuing anyways...');
         }
       }
     }
@@ -227,23 +231,13 @@ class Background extends Clutter.Actor {
 
   // This ensures that the entire input is sent to the background actor.
   _grab() {
-
-    // On GNOME Shell 42, there's a new API.
-    if (utils.shellVersionIsAtLeast(42, 'beta')) {
-      this._lastGrab = global.stage.grab(this);
-      return this._lastGrab != null;
-    }
-
-    return Main.pushModal(this);
+    this._lastGrab = global.stage.grab(this);
+    return this._lastGrab != null;
   }
 
   // Releases a grab created with the method above.
   _ungrab() {
-    if (utils.shellVersionIsAtLeast(42, 'beta')) {
-      this._lastGrab.dismiss();
-    } else {
-      Main.popModal(this);
-    }
+    this._lastGrab.dismiss();
   }
 
   // This adds one button to the row of control buttons. We use a combination of app

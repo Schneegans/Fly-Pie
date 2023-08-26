@@ -21,7 +21,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 // configured.                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var DefaultMenu = class DefaultMenu {
+export class DefaultMenu {
 
   // ---------------------------------------------------------------------- static methods
 

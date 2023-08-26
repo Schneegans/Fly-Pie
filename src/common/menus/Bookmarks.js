@@ -11,26 +11,25 @@
 
 'use strict';
 
-const {Gio, GLib} = imports.gi;
-const ByteArray   = imports.byteArray;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+
+import {debug} from '../utils.js';
+import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
-
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.src.common.utils;
-const ItemRegistry = Me.imports.src.common.ItemRegistry;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The bookmarks menu contains one entry for the default user directories.              //
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var menu = {
+export var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
-  class: ItemRegistry.ItemClass.MENU,
+  class: ItemClass.MENU,
 
   // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Bookmarks'),
@@ -92,7 +91,7 @@ var menu = {
               const ctx = global.create_app_launch_context(0, -1);
               Gio.AppInfo.launch_default_for_uri(uri, ctx);
             } catch (error) {
-              utils.debug('Failed to open "%s": %s'.format(this.name, error));
+              debug('Failed to open "%s": %s'.format(this.name, error));
             }
           }
         });
@@ -120,7 +119,8 @@ var menu = {
 
       if (ok) {
         // Split the content at line breaks.
-        ByteArray.toString(bookmarks).split(/\r?\n/).forEach(uri => {
+        const string = new TextDecoder().decode(bookmarks);
+        string.split(/\r?\n/).forEach(uri => {
           // Some lines contain an alias for the bookmark. This alias starts
           // at the first space of the line.
           const firstSpace = uri.indexOf(' ');
@@ -133,7 +133,7 @@ var menu = {
         });
       }
     } catch (error) {
-      utils.debug(error);
+      debug(error);
     }
 
     return result;

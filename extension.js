@@ -11,9 +11,9 @@
 
 'use strict';
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me             = imports.misc.extensionUtils.getCurrentExtension();
-const Daemon         = Me.imports.src.extension.Daemon.Daemon;
+import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
+
+import Daemon from './src/extension/Daemon.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Once enabled, Fly-Pie creates an instance of the Daemon class. This daemon will      //
@@ -26,25 +26,20 @@ const Daemon         = Me.imports.src.extension.Daemon.Daemon;
 //   common/     This contains code which is required by extension.js and prefs.js.     //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-let daemon;
+export default class FlyPie extends Extension {
 
-// This function is called once when the extension is loaded, not enabled. For Fly-Pie,
-// we only need to initialize gettext.
-function init() {
-  ExtensionUtils.initTranslations();
-}
+  // This function could be called after the extension is enabled, which could be done
+  // from GNOME Tweaks, when you log in or when the screen is unlocked. We create an
+  // instance of the Daemon class.
+  enable() {
+    this.daemon = new Daemon(this.metadata);
+  }
 
-// This function could be called after the extension is enabled, which could be done from
-// GNOME Tweaks, when you log in or when the screen is unlocked. We create an instance of
-// the Daemon class.
-function enable() {
-  daemon = new Daemon();
-}
-
-// This function could be called after the extension is uninstalled, disabled in GNOME
-// Tweaks, when you log out or when the screen locks. It deletes the previously created
-// damon.
-function disable() {
-  daemon.destroy();
-  daemon = null;
+  // This function could be called after the extension is uninstalled, disabled in GNOME
+  // Tweaks, when you log out or when the screen locks. It deletes the previously created
+  // damon.
+  disable() {
+    this.daemon.destroy();
+    this.daemon = null;
+  }
 }

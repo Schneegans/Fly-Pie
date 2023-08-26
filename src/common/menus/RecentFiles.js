@@ -11,14 +11,14 @@
 
 'use strict';
 
-const {Gio, Gtk} = imports.gi;
+import Gio from 'gi://Gio';
+import Gtk from 'gi://Gtk';
+
+import {debug} from '../utils.js';
+import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
+import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
-
-const Me                  = imports.misc.extensionUtils.getCurrentExtension();
-const utils               = Me.imports.src.common.utils;
-const ItemRegistry        = Me.imports.src.common.ItemRegistry;
-const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Returns an item with entries for each recently used file, as reported by             //
@@ -26,12 +26,12 @@ const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidg
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var menu = {
+export var menu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
-  class: ItemRegistry.ItemClass.MENU,
+  class: ItemClass.MENU,
 
   // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Recent Files'),
@@ -107,7 +107,7 @@ var menu = {
             try {
               Gio.AppInfo.launch_default_for_uri(recentFiles[i].get_uri(), ctx);
             } catch (error) {
-              utils.debug('Failed to open URI: ' + error);
+              debug('Failed to open URI: ' + error);
             }
           }
         });

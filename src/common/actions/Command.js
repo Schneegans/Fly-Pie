@@ -11,14 +11,13 @@
 
 'use strict';
 
-const Gio = imports.gi.Gio;
+import Gio from 'gi://Gio';
+
+import {debug} from '../utils.js';
+import {ItemClass} from '../ItemClass.js';
+import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
-
-const Me                  = imports.misc.extensionUtils.getCurrentExtension();
-const utils               = Me.imports.src.common.utils;
-const ItemRegistry        = Me.imports.src.common.ItemRegistry;
-const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidgetFactory;
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The command actions executes a shell command when activated. This can be used to     //
@@ -26,12 +25,12 @@ const ConfigWidgetFactory = Me.imports.src.common.ConfigWidgetFactory.ConfigWidg
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var action = {
+export const action = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have
   // child Actions or Menus.
-  class: ItemRegistry.ItemClass.ACTION,
+  class: ItemClass.ACTION,
 
   // This will be shown in the add-new-item-popover of the settings dialog.
   name: _('Launch Application'),
@@ -97,7 +96,7 @@ var action = {
               command, null, Gio.AppInfoCreateFlags.NONE);
           item.launch([], ctx);
         } catch (error) {
-          utils.debug('Failed to execute command: ' + error);
+          debug('Failed to execute command: ' + error);
         }
       }
     };

@@ -11,19 +11,21 @@
 
 'use strict';
 
-const Main                            = imports.ui.main;
-const {Clutter, Gdk, Gtk, GLib, Meta} = imports.gi;
+import GLib from 'gi://GLib';
+import Clutter from 'gi://Clutter';
+import Gtk from 'gi://Gtk';
+import Meta from 'gi://Meta';
 
-const Me               = imports.misc.extensionUtils.getCurrentExtension();
-const utils            = Me.imports.src.common.utils;
-const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
-const InputManipulator = Me.imports.src.common.InputManipulator.InputManipulator;
-const Statistics       = Me.imports.src.common.Statistics.Statistics;
-const Timer            = Me.imports.src.common.Timer.Timer;
-const Background       = Me.imports.src.extension.Background.Background;
-const MenuItem         = Me.imports.src.extension.MenuItem.MenuItem;
-const SelectionWedges  = Me.imports.src.extension.SelectionWedges.SelectionWedges;
-const MenuItemState    = Me.imports.src.extension.MenuItem.MenuItemState;
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+
+import {getSessionType, computeItemAngles, getHDPIScale} from '../common/utils.js';
+import {DBusInterface} from '../common/DBusInterface.js';
+import InputManipulator from '../common/InputManipulator.js';
+import Timer from '../common/Timer.js';
+import {Background} from './Background.js';
+import {SelectionWedges} from './SelectionWedges.js';
+import {MenuItem, MenuItemState} from './MenuItem.js';
+import Statistics from '../common/Statistics.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Menu parses the JSON structure given to the ShowMenu method. It creates          //
@@ -32,7 +34,7 @@ const MenuItemState    = Me.imports.src.extension.MenuItem.MenuItemState;
 // individual MenuItems in the hierarchy.                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var Menu = class Menu {
+export default class Menu {
 
   // ------------------------------------------------------------ constructor / destructor
 
@@ -113,7 +115,7 @@ var Menu = class Menu {
     this._deviceChangedID = backend.connect('last-device-changed', (b, device) => {
       // Multi-cursor stuff only works on Wayland. For now, I assume that tablets,
       // pens and erasers create a secondary cursor. Is this true?
-      if (utils.getSessionType() == 'wayland') {
+      if (getSessionType() == 'wayland') {
         if (device.get_device_type() == Clutter.InputDeviceType.TABLET_DEVICE ||
             device.get_device_type() == Clutter.InputDeviceType.PEN_DEVICE ||
             device.get_device_type() == Clutter.InputDeviceType.ERASER_DEVICE) {
@@ -1084,7 +1086,7 @@ var Menu = class Menu {
   _updateItemAngles(items, parentAngle) {
 
     // First use the utils method to compute all item angles.
-    const itemAngles = utils.computeItemAngles(items, parentAngle);
+    const itemAngles = computeItemAngles(items, parentAngle);
 
     // Shouldn't happen, but who knows...
     if (itemAngles == null) {
@@ -1179,7 +1181,7 @@ var Menu = class Menu {
     maxSize     = Math.max(maxSize, centerRadius);
     maxSize     = Math.max(maxSize, childRadius);
     maxSize     = Math.max(maxSize, grandchildRadius);
-    maxSize *= 2 * this._settings.get_double('global-scale') * utils.getHDPIScale();
+    maxSize *= 2 * this._settings.get_double('global-scale') * getHDPIScale();
 
     // Clamp to monitor bounds.
     let pointer    = new Meta.Rectangle({x: x, y: y, width: 1, height: 1});
@@ -1246,7 +1248,7 @@ var Menu = class Menu {
       // There is a setting for a minimum trace length.
       const idealTraceLength = Math.max(
           this._settings.get_double('trace-min-length') *
-              this._settings.get_double('global-scale') * utils.getHDPIScale(),
+              this._settings.get_double('global-scale') * getHDPIScale(),
           currentTraceLength);
 
       // Based on this trace length, we can compute where the item should be placed

@@ -11,11 +11,10 @@
 
 'use strict';
 
-const {Meta, Gio, GLib} = imports.gi;
+import Meta from 'gi://Meta';
+import Gio from 'gi://Gio';
 
-const Me               = imports.misc.extensionUtils.getCurrentExtension();
-const utils            = Me.imports.src.common.utils;
-const InputManipulator = Me.imports.src.common.InputManipulator.InputManipulator;
+import InputManipulator from '../common/InputManipulator.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This singleton class is instantiated whenever the extension is loaded (by the Daemon //
@@ -53,7 +52,7 @@ const MAX_ENTRIES = 20;
 // We will not store things which are larger than 20 MB.
 const MAX_DATA_SIZE_MB = 20;
 
-var ClipboardManager = class ClipboardManager {
+export default class ClipboardManager {
 
   // ---------------------------------------------------------------------- static methods
 

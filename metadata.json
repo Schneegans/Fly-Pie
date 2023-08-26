@@ -10,13 +10,7 @@
     "gettext-domain": "flypie",
     "settings-schema": "org.gnome.shell.extensions.flypie",
     "shell-version": [
-        "3.36",
-        "3.38",
-        "40",
-        "41",
-        "42",
-        "43",
-        "44"
+        "45"
     ],
     "url": "https://github.com/Schneegans/Fly-Pie",
     "version": 22

@@ -11,10 +11,9 @@
 
 'use strict';
 
-const GLib = imports.gi.GLib;
+import GLib from 'gi://GLib';
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+import {createSettings} from './utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Statistics singleton is used to record some statistics of Fly-Pie which are      //
@@ -28,7 +27,7 @@ const utils = Me.imports.src.common.utils;
 // variable stores the singleton instance.
 let _instance = null;
 
-var Statistics = class Statistics {
+export default class Statistics {
 
   // ---------------------------------------------------------------------- static methods
 
@@ -60,7 +59,7 @@ var Statistics = class Statistics {
     // noticeable stutter in Fly-Pie's animations. Applying the settings with half a
     // second delay makes it much more unlikely that an animation is currently in
     // progress.
-    this._settings = utils.createSettings();
+    this._settings = createSettings();
     this._settings.delay();
 
     // As the settings object is in delay-mode, we have to call its apply() method after

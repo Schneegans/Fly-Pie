@@ -11,11 +11,17 @@
 
 'use strict';
 
-const Cairo                                                            = imports.cairo;
-const {Gio, GLib, Gdk, Clutter, GObject, Pango, PangoCairo, GdkPixbuf} = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import Gdk from 'gi://Gdk';
+import Clutter from 'gi://Clutter';
+import GObject from 'gi://GObject';
+import Pango from 'gi://Pango';
+import PangoCairo from 'gi://PangoCairo';
+import GdkPixbuf from 'gi://GdkPixbuf';
+import Cairo from 'gi://cairo';
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+import {getPath, getHDPIResourceScale, getHDPIScale, createIcon, getAverageIconColor, debug, paintIcon} from '../common/utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Then MenuItem is a Clutter.Actor representing one node in the menu tree hierarchy.   //
@@ -44,7 +50,7 @@ const utils = Me.imports.src.common.utils;
 
 // This could be a static member of the class below, but this seems to be not supported
 // yet.
-var MenuItemState = {
+export var MenuItemState = {
   // This is the default state. It is also used for children of grandchildren - those are
   // not shown at all.
   INVISIBLE: 0,
@@ -87,7 +93,7 @@ var MenuItemState = {
 let MenuItemSettings = {};
 
 // clang-format off
-var MenuItem = GObject.registerClass({
+export var MenuItem = GObject.registerClass({
   Properties: {
     'angle': GObject.ParamSpec.double(
       'angle', 'angle', 'The angle of the MenuItem in degrees.',
@@ -333,7 +339,7 @@ class MenuItem extends Clutter.Actor {
   onSettingsChange(settings) {
 
     // Then parse all settings required during the next call to redraw().
-    const globalScale = settings.get_double('global-scale') * utils.getHDPIScale();
+    const globalScale = settings.get_double('global-scale') * getHDPIScale();
 
     // clang-format off
     MenuItemSettings = {
@@ -480,8 +486,8 @@ class MenuItem extends Clutter.Actor {
       const child = this._childrenContainer.get_children()[this._activeChildIndex];
       this._name.set_text(child.name);
       this._name.set_easing_duration(0);
-      const nameHeight = this._name.get_layout().get_pixel_extents()[1].height /
-          utils.getHDPIResourceScale();
+      const nameHeight =
+          this._name.get_layout().get_pixel_extents()[1].height / getHDPIResourceScale();
       this._name.set_translation(
           Math.floor(-this._name.width / 2), Math.floor(-nameHeight / 2), 0);
       this._name.set_easing_duration(MenuItemSettings.easingDuration);
@@ -526,12 +532,12 @@ class MenuItem extends Clutter.Actor {
       if (this._averageIconColor == undefined) {
 
         // We store the average color as a property of this.
-        const surface          = utils.createIcon(this.icon, 24, MenuItemSettings.font, {
+        const surface          = createIcon(this.icon, 24, MenuItemSettings.font, {
           red: MenuItemSettings.textColor.red / 255,
           green: MenuItemSettings.textColor.green / 255,
           blue: MenuItemSettings.textColor.blue / 255
-        });
-        const [r, g, b]        = utils.getAverageIconColor(surface, 24);
+                 });
+        const [r, g, b]        = getAverageIconColor(surface, 24);
         this._averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
       }
 
@@ -804,11 +810,11 @@ class MenuItem extends Clutter.Actor {
   static loadBackgroundImage(file, size) {
 
     // Apply high-dpi resource scaling.
-    size *= utils.getHDPIResourceScale();
+    size *= getHDPIResourceScale();
 
     // If the path is a relative path, it may be a child of the preset directory.
     if (file != '' && !GLib.path_is_absolute(file)) {
-      file = Me.path + '/presets/' + file;
+      file = getPath() + 'presets/' + file;
     }
 
     // Only attempt to load an image if the background image property is set and exists.
@@ -816,7 +822,7 @@ class MenuItem extends Clutter.Actor {
       try {
         return GdkPixbuf.Pixbuf.new_from_file_at_scale(file, size, size, false);
       } catch (error) {
-        utils.debug('Failed to load background image: ' + error);
+        debug('Failed to load background image: ' + error);
       }
     }
 
@@ -844,7 +850,7 @@ class MenuItem extends Clutter.Actor {
       if (backgroundImage != null) {
 
         // Apply high-dpi scaling.
-        const resourceScale = utils.getHDPIResourceScale();
+        const resourceScale = getHDPIResourceScale();
         ctx.scale(1 / resourceScale, 1 / resourceScale);
 
         // TODO: As Cairo.Operator.MULTIPLY uses normal OVER-alpha-blending, the code
@@ -907,10 +913,10 @@ class MenuItem extends Clutter.Actor {
         ctx.translate((backgroundSize - iconSize) / 2, (backgroundSize - iconSize) / 2);
 
         // Apply high-dpi scaling.
-        const resourceScale = utils.getHDPIResourceScale();
+        const resourceScale = getHDPIResourceScale();
         ctx.scale(1 / resourceScale, 1 / resourceScale);
 
-        utils.paintIcon(ctx, iconName, iconSize * resourceScale, iconOpacity, font, {
+        paintIcon(ctx, iconName, iconSize * resourceScale, iconOpacity, font, {
           red: textColor.red / 255,
           green: textColor.green / 255,
           blue: textColor.blue / 255
@@ -971,8 +977,8 @@ class MenuItem extends Clutter.Actor {
 
     // Apply HiDPI scaling and trigger an initial 'draw' signal emission. The call to
     // set_scale_factor() will automatically invalidate the canvas.
-    if (utils.getHDPIResourceScale() != 1) {
-      canvas.set_scale_factor(utils.getHDPIResourceScale());
+    if (getHDPIResourceScale() != 1) {
+      canvas.set_scale_factor(getHDPIResourceScale());
     } else {
       canvas.invalidate();
     }
@@ -1014,7 +1020,7 @@ class MenuItem extends Clutter.Actor {
     // the global scale, so we have to counter this here.
     const fontDescription = Pango.FontDescription.from_string(MenuItemSettings.font);
     const fontSize        = fontDescription.get_size();
-    const hdpiScale       = utils.getHDPIScale();
+    const hdpiScale       = getHDPIScale();
     if (fontDescription.get_size_is_absolute()) {
       fontSize = Pango.units_from_double(fontSize);
     }
