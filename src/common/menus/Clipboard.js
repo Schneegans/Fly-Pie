@@ -88,8 +88,8 @@ export var ClipboardMenu = {
           _('Max Item Count'), _('Limits the number of children.'));
       const countSpinButton = Gtk.SpinButton.new_with_range(1, 20, 1);
       countSpinButton.value = data.maxNum;
-      utils.boxAppend(countBox, countSpinButton);
-      utils.boxAppend(box, countBox);
+      countBox.append(countSpinButton);
+      box.append(countBox);
 
       // Add a spin button for configuring the fixed angle of the most recently copied
       // item.
@@ -97,8 +97,8 @@ export var ClipboardMenu = {
           _('First Child Angle'), _('Direction of the most recent item.'));
       const angleSpinButton = Gtk.SpinButton.new_with_range(-1, 359, 1);
       angleSpinButton.value = data.firstAngle;
-      utils.boxAppend(angleBox, angleSpinButton);
-      utils.boxAppend(box, angleBox);
+      angleBox.append(angleSpinButton);
+      box.append(angleBox);
 
       // This is called whenever one of the widgets is modified.
       const _updateData = () => {

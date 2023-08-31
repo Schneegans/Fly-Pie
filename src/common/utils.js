@@ -127,11 +127,7 @@ export function getIconTheme() {
       _iconTheme = new Gtk.IconTheme();
       _iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
     } else {
-      if (gtk4()) {
-        _iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-      } else {
-        _iconTheme = Gtk.IconTheme.get_default();
-      }
+      _iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
     }
 
     // Print an error if this fails as well.
@@ -144,93 +140,6 @@ export function getIconTheme() {
   }
 
   return _iconTheme;
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// The methods below are helper methods which can be used on either GTK3 or GTK4. They  //
-// all check internally whether we are currently using GTK3 or GTK4 and call the        //
-// respective method.                                                                   //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// This method simply returns true if we are currently using GTK4.
-export function gtk4() {
-  return Gtk.get_major_version() == 4;
-}
-
-// Adds the given css class to the given widget.
-export function addCSSClass(widget, klass) {
-  if (gtk4()) {
-    widget.add_css_class(klass);
-  } else {
-    widget.get_style_context().add_class(klass);
-  }
-}
-
-// Removes all children from the given widget.
-export function clearChildren(container) {
-  if (gtk4()) {
-    while (container.get_first_child() != null) {
-      container.remove(container.get_first_child());
-    }
-  } else {
-    container.foreach(w => container.remove(w));
-  }
-}
-
-// Appends the given child widget to the given Gtk.Box.
-export function boxAppend(box, child, expand = false, fill = false) {
-  if (gtk4()) {
-    box.append(child);
-  } else {
-    box.pack_start(child, expand, fill, 0);
-  }
-}
-
-// Appends the given child to the given one-child container. This could be a Gtk.Button
-// for example. Or a Gtk.Revealer.
-export function setChild(widget, child) {
-  if (gtk4()) {
-    widget.set_child(child);
-  } else {
-    clearChildren(widget);
-    widget.add(child);
-  }
-}
-
-// Calls size_allocate() with the given allocation on the given widget.
-export function sizeAllocate(widget, allocation) {
-  if (gtk4()) {
-    widget.size_allocate(allocation, -1);
-  } else {
-    widget.size_allocate(allocation);
-  }
-}
-
-// Sets the drawing function of the given Gtk.DrawingArea.
-export function setDrawFunc(drawingArea, func) {
-  if (gtk4()) {
-    drawingArea.set_draw_func(func);
-  } else {
-    drawingArea.connect('draw', func);
-  }
-}
-
-// Returns the foreground color of the given widget.
-export function getColor(widget) {
-  if (gtk4()) {
-    return widget.get_style_context().get_color();
-  }
-
-  return widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
-}
-
-// Returns the toplevel parent widget.
-export function getRoot(widget) {
-  if (gtk4()) {
-    return widget.get_root();
-  }
-
-  return widget.get_toplevel();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -24,7 +24,11 @@ const _ = imports.gettext.domain('flypie').gettext;
 // become 'active' and eventually 'completed'.                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var State = {LOCKED: 0, ACTIVE: 1, COMPLETED: 2};
+export var State = {
+  LOCKED: 0,
+  ACTIVE: 1,
+  COMPLETED: 2
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The constants below are the main balancing tools. These can be tweaked in order to   //

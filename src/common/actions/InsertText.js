@@ -29,8 +29,8 @@ let inputManipulator = undefined;
 let clipboardManager = undefined;
 
 try {
-  const InputManipulator = (await import('../InputManipulator.js'))?.default;
-  inputManipulator       = new InputManipulator();
+  // const InputManipulator = (await import('../InputManipulator.js'))?.default;
+  // inputManipulator       = new InputManipulator();
 
   const ClipboardManager = (await import('../ClipboardManager.js'))?.default;
   clipboardManager       = ClipboardManager.getInstance();

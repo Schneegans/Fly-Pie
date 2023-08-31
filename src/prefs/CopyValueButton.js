@@ -11,10 +11,8 @@
 
 'use strict';
 
-const {GObject, Gtk} = imports.gi;
-
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+import GObject from 'gi://GObject';
+import Gtk from 'gi://Gtk';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The CopyValueButton is instantiated many times in Fly-Pie's settings dialog. It is   //
@@ -22,12 +20,12 @@ const utils = Me.imports.src.common.utils;
 // its right side.                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function registerWidget() {
+export function registerWidget() {
   if (GObject.type_from_name('FlyPieCopyValueButton') == null) {
     // clang-format off
       GObject.registerClass({
         GTypeName: 'FlyPieCopyValueButton',
-        Template: `resource:///ui/${utils.gtk4() ? "gtk4" : "gtk3"}/copyValueButton.ui`,
+        Template: `resource:///ui/gtk4/copyValueButton.ui`,
       }, class FlyPieCopyValueButton extends Gtk.Button {});
     // clang-format on
   }

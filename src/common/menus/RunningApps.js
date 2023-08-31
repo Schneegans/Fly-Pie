@@ -102,23 +102,21 @@ export var RunningAppsMenu = {
             nameRegex = text;
             _updateData();
           });
-      utils.boxAppend(vBox, regexEntry);
+      vBox.append(regexEntry);
 
       // Then create the three switches.
       const _createToggle = (i, name, value) => {
         const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL, spacing: 5});
-        utils.boxAppend(
-            hBox, new Gtk.Label({label: name, halign: Gtk.Align.START, hexpand: true}),
-            false, true);
+        hBox.append(new Gtk.Label({label: name, halign: Gtk.Align.START, hexpand: true}));
 
         const toggle = new Gtk.Switch({active: value, halign: Gtk.Align.END});
-        utils.boxAppend(hBox, toggle);
+        hBox.append(toggle);
 
         toggle.connect('notify::active', () => {
           _updateData();
         });
 
-        utils.boxAppend(vBox, hBox);
+        vBox.append(hBox);
 
         return toggle;
       };

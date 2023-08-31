@@ -11,16 +11,16 @@
 
 'use strict';
 
-const {Gio, Gdk, Gtk, GdkPixbuf} = imports.gi;
+import Gio from 'gi://Gio';
+import GdkPixbuf from 'gi://GdkPixbuf';
+import Gdk from 'gi://Gdk';
+
+import {DBusInterface} from '../common/DBusInterface.js';
+import Statistics from '../common/Statistics.js';
+import ExampleMenu from './ExampleMenu.js';
+import Timer from '../common/Timer.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
-
-const Me            = imports.misc.extensionUtils.getCurrentExtension();
-const utils         = Me.imports.src.common.utils;
-const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
-const Timer         = Me.imports.src.common.Timer.Timer;
-const Statistics    = Me.imports.src.common.Statistics.Statistics;
-const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -32,7 +32,7 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 // file.                                                                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var TutorialPage = class TutorialPage {
+export default class TutorialPage {
 
   // ------------------------------------------------------------ constructor / destructor
 
@@ -106,8 +106,8 @@ var TutorialPage = class TutorialPage {
     });
 
     // Draw the Fly-Pie logo with the current theme's foreground color.
-    utils.setDrawFunc(this._builder.get_object('fly-pie-logo'), (widget, ctx) => {
-      const color = utils.getColor(widget);
+    this._builder.get_object('fly-pie-logo').set_draw_func((widget, ctx) => {
+      const color = widget.widget.get_style_context().get_color();
       const logo  = GdkPixbuf.Pixbuf.new_from_resource('/img/logo.svg');
 
       ctx.pushGroup();
@@ -123,13 +123,7 @@ var TutorialPage = class TutorialPage {
     // for now as the GtkVideo does not seem to have a resource property.
     for (let i = 1; i <= 2; i++) {
       const video = this._builder.get_object('tutorial-animation-' + i);
-
-      if (utils.gtk4()) {
-        video.set_resource('/video/video' + i + '.webm');
-      } else {
-        video.set_from_animation(
-            GdkPixbuf.PixbufAnimation.new_from_resource('/video/video' + i + '.gif'));
-      }
+      video.set_resource('/video/video' + i + '.webm');
     }
 
     // Inject the tutorial selection goal (Hot Apple Pie) strings.

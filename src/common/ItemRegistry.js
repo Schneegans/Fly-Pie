@@ -14,7 +14,7 @@
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
 
-import {debug, logProperties} from './utils.js';
+import {debug} from './utils.js';
 import {ItemClass} from './ItemClass.js';
 
 import {CommandAction} from './actions/Command.js';

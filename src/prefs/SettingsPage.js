@@ -11,16 +11,19 @@
 
 'use strict';
 
-const {Gtk, Gio, Gdk, GLib} = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import Gdk from 'gi://Gdk';
+import Gtk from 'gi://Gtk';
+
+import * as utils from '../common/utils.js';
+
+import {DBusInterface} from '../common/DBusInterface.js';
+import Statistics from '../common/Statistics.js';
+import Preset from './Preset.js';
+import ExampleMenu from './ExampleMenu.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
-
-const Me            = imports.misc.extensionUtils.getCurrentExtension();
-const utils         = Me.imports.src.common.utils;
-const DBusInterface = Me.imports.src.common.DBusInterface.DBusInterface;
-const Statistics    = Me.imports.src.common.Statistics.Statistics;
-const Preset        = Me.imports.src.prefs.Preset.Preset;
-const ExampleMenu   = Me.imports.src.prefs.ExampleMenu.ExampleMenu;
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
@@ -32,11 +35,11 @@ const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 // written to its own file.                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var SettingsPage = class SettingsPage {
+export default class SettingsPage {
 
   // ------------------------------------------------------------ constructor / destructor
 
-  constructor(builder, settings) {
+  constructor(builder, settings, extensionPath) {
 
     // Keep a reference to the builder and the settings.
     this._builder  = builder;
@@ -47,7 +50,7 @@ var SettingsPage = class SettingsPage {
     this._settingsConnections = [];
 
     // Initialize all buttons of the preset area.
-    this._initializePresetButtons();
+    this._initializePresetButtons(extensionPath);
 
     // Connect to the server so that we can toggle menus also from the preferences. This
     // is, for example, used for toggling the Live-Preview.
@@ -104,7 +107,7 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('center-icon-scale');
     this._bindSlider('center-icon-crop');
     this._bindSlider('center-icon-opacity');
-    this._bindFlyPieImageChooserButton('center-background-image');
+    this._bindFlyPieImageChooserButton('center-background-image', extensionPath);
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
     this._bindRevealer('center-color-mode-fixed', 'center-fixed-color-revealer');
@@ -135,7 +138,7 @@ var SettingsPage = class SettingsPage {
     this._bindSlider('child-icon-scale');
     this._bindSlider('child-icon-crop');
     this._bindSlider('child-icon-opacity');
-    this._bindFlyPieImageChooserButton('child-background-image');
+    this._bindFlyPieImageChooserButton('child-background-image', extensionPath);
     this._bindSwitch('child-draw-above');
 
 
@@ -161,7 +164,7 @@ var SettingsPage = class SettingsPage {
     this._bindColorButton('grandchild-fixed-color');
     this._bindSlider('grandchild-size');
     this._bindSlider('grandchild-offset');
-    this._bindFlyPieImageChooserButton('grandchild-background-image');
+    this._bindFlyPieImageChooserButton('grandchild-background-image', extensionPath);
     this._bindSwitch('grandchild-draw-above');
 
     // Toggle the color revealers when the color mode radio buttons are toggled.
@@ -208,10 +211,10 @@ var SettingsPage = class SettingsPage {
   // ----------------------------------------------------------------------- private stuff
 
   // This initializes the widgets related to the presets.
-  _initializePresetButtons() {
+  _initializePresetButtons(extensionPath) {
 
     // Store some members will will use frequently.
-    this._presetDirectory = Gio.File.new_for_path(Me.path + '/presets');
+    this._presetDirectory = Gio.File.new_for_path(extensionPath + '/presets');
     this._presetList      = this._builder.get_object('preset-list');
 
     //  The sort column and type cannot be set in glade, so we do this here.
@@ -260,7 +263,7 @@ var SettingsPage = class SettingsPage {
     this._builder.get_object('save-preset-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
         action: Gtk.FileChooserAction.SAVE,
-        transient_for: utils.getRoot(button),
+        transient_for: button.get_root(),
         modal: true
       });
 
@@ -305,17 +308,13 @@ var SettingsPage = class SettingsPage {
         dialog.destroy();
       });
 
-      if (utils.gtk4()) {
-        dialog.show();
-      } else {
-        dialog.show_all();
-      }
+      dialog.show();
     });
 
     this._builder.get_object('load-preset-button').connect('clicked', (button) => {
       const dialog = new Gtk.FileChooserDialog({
         action: Gtk.FileChooserAction.OPEN,
-        transient_for: utils.getRoot(button),
+        transient_for: button.get_root(),
         modal: true
       });
 
@@ -346,7 +345,7 @@ var SettingsPage = class SettingsPage {
 
           } catch (error) {
             const errorMessage = new Gtk.MessageDialog({
-              transient_for: utils.getRoot(button),
+              transient_for: button.get_root(),
               modal: true,
               buttons: Gtk.ButtonsType.CLOSE,
               message_type: Gtk.MessageType.ERROR,
@@ -361,11 +360,7 @@ var SettingsPage = class SettingsPage {
         dialog.destroy();
       });
 
-      if (utils.gtk4()) {
-        dialog.show();
-      } else {
-        dialog.show_all();
-      }
+      dialog.show();
     });
 
     // Create a random preset when the corresponding button is pressed.
@@ -413,7 +408,7 @@ var SettingsPage = class SettingsPage {
   // settings key. It also binds any corresponding copy buttons and '-hover' variants if
   // they exist.
   _bindFontButton(settingsKey) {
-    this._bind(settingsKey, utils.gtk4() ? 'font' : 'font-name');
+    this._bind(settingsKey, 'font');
   }
 
   // Connects a Gtk.ComboBox (or anything else which has an 'active-id' property) to a
@@ -490,7 +485,7 @@ var SettingsPage = class SettingsPage {
   // Me.path are stored as relative paths. The button state is also updated when the
   // corresponding setting changes. It also binds any corresponding copy buttons and
   // '-hover' variants if they exist.
-  _bindFlyPieImageChooserButton(settingsKey) {
+  _bindFlyPieImageChooserButton(settingsKey, extensionPath) {
 
     // Called once for settingsKey and once for settingsKey + '-hover'.
     const impl = (key) => {
@@ -513,7 +508,7 @@ var SettingsPage = class SettingsPage {
           } else {
             // If the path is a relative path, it may be a child of the preset directory.
             if (!GLib.path_is_absolute(path)) {
-              path = Me.path + '/presets/' + path;
+              path = extensionPath + '/presets/' + path;
             }
 
             let file = Gio.File.new_for_path(path);

@@ -24,8 +24,8 @@ const _ = imports.gettext.domain('flypie').gettext;
 let inputManipulator = undefined;
 
 try {
-  const InputManipulator = (await import('../InputManipulator.js'))?.default;
-  inputManipulator       = new InputManipulator();
+  // const InputManipulator = (await import('../InputManipulator.js'))?.default;
+  // inputManipulator       = new InputManipulator();
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }

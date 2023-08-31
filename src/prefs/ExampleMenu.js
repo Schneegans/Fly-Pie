@@ -20,7 +20,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 // leaf items.                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var ExampleMenu = class ExampleMenu {
+export default class ExampleMenu {
 
   // ---------------------------------------------------------------------- static methods
 
