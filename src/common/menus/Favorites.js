@@ -23,7 +23,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 let Shell = undefined;
 
 try {
-  Shell = imports.gi.Shell;
+  Shell = (await import('gi://Shell'))?.default;
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
@@ -34,7 +34,7 @@ try {
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-export var menu = {
+export var FavoritesMenu = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have

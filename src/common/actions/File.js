@@ -25,7 +25,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-export var action = {
+export var FileAction = {
 
   // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
   // onSelect() method which is called when the user selects the item, Menus can have

@@ -14,36 +14,36 @@
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
 
-import {debug} from './utils.js';
+import {debug, logProperties} from './utils.js';
 import {ItemClass} from './ItemClass.js';
 
-import * as CommandAction from './actions/Command.js';
-import * as ShortcutAction from './actions/Shortcut.js';
-import * as InsertTextAction from './actions/InsertText.js';
-import * as UriAction from './actions/Uri.js';
-import * as FileAction from './actions/File.js';
-import * as DBusSignalAction from './actions/DBusSignal.js';
+import {CommandAction} from './actions/Command.js';
+import {ShortcutAction} from './actions/Shortcut.js';
+import {InsertTextAction} from './actions/InsertText.js';
+import {UriAction} from './actions/Uri.js';
+import {FileAction} from './actions/File.js';
+import {DBusSignalAction} from './actions/DBusSignal.js';
 
-import * as CustomMenu from './menus/CustomMenu.js';
-import * as ClipboardMenu from './menus/Clipboard.js';
-import * as DevicesMenu from './menus/Devices.js';
-import * as BookmarksMenu from './menus/Bookmarks.js';
-import * as SystemMenu from './menus/System.js';
-import * as FavoritesMenu from './menus/Favorites.js';
-import * as FrequentlyUsedMenu from './menus/FrequentlyUsed.js';
-import * as RecentFilesMenu from './menus/RecentFiles.js';
-import * as RunningAppsMenu from './menus/RunningApps.js';
+import {CustomMenu} from './menus/CustomMenu.js';
+import {ClipboardMenu} from './menus/Clipboard.js';
+import {DevicesMenu} from './menus/Devices.js';
+import {BookmarksMenu} from './menus/Bookmarks.js';
+import {SystemMenu} from './menus/System.js';
+import {FavoritesMenu} from './menus/Favorites.js';
+import {FrequentlyUsedMenu} from './menus/FrequentlyUsed.js';
+import {RecentFilesMenu} from './menus/RecentFiles.js';
+import {RunningAppsMenu} from './menus/RunningApps.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
 
 // GMenu is not necessarily installed on all systems. So we include it optionally here. If
 // it is not found, the Main Menu Submenu will not be available.
-let GMenu = undefined;
+let MainMenu = undefined;
 
 try {
-  GMenu = imports.gi.GMenu;
+  MainMenu = (await import('./menus/RunningApps.js'))?.default;
 } catch (error) {
-  // Nothing to be done, we're in settings-mode.
+  // Nothing to be done, GMenus will not be available.
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -167,8 +167,8 @@ export class ItemRegistry {
       };
 
       // This is only possible if the GMenu typelib is installed on the system.
-      if (GMenu) {
-        _itemTypes.MainMenu = menus.MainMenu.menu;
+      if (MainMenu) {
+        _itemTypes.MainMenu = MainMenu;
       }
     }
 

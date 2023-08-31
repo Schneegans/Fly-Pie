@@ -11,11 +11,12 @@
 
 'use strict';
 
-const Cairo                    = imports.cairo;
-const {Clutter, GObject, GLib} = imports.gi;
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Clutter from 'gi://Clutter';
+import Cairo from 'gi://cairo';
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+import {getHDPIResourceScale} from '../common/utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This is a Clutter.Actor which draws an additional mouse pointer at your mouse. This  //
@@ -129,8 +130,8 @@ class MouseHighlight extends Clutter.Actor {
 
         // Apply HiDPI scaling and trigger an initial 'draw' signal emission. The call to
         // set_scale_factor() will automatically invalidate the canvas.
-        if (utils.getHDPIResourceScale() != 1) {
-          this._canvas.set_scale_factor(utils.getHDPIResourceScale());
+        if (getHDPIResourceScale() != 1) {
+          this._canvas.set_scale_factor(getHDPIResourceScale());
         } else {
           this._canvas.invalidate();
         }

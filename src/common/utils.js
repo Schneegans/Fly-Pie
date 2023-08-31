@@ -19,19 +19,17 @@ import GdkPixbuf from 'gi://GdkPixbuf';
 import Gtk from 'gi://Gtk';
 import Pango from 'gi://Pango';
 import PangoCairo from 'gi://PangoCairo';
-import St from 'gi://St';
 
-// // We import the St module optionally. When this file is included from the daemon
-// // side, it is available and can be used below. If this file is included via the
-// pref.js,
-// // it will not be available.
-// let St = undefined;
+// We import the St module optionally. When this file is included from the daemon
+// side, it is available and can be used below. If this file is included via the pref.js,
+// it will not be available.
+let St = undefined;
 
-// try {
-//   St = imports.gi.St;
-// } catch (error) {
-//   // Nothing to be done, we're in settings-mode.
-// }
+try {
+  St = (await import('gi://St'))?.default;
+} catch (error) {
+  // Nothing to be done, we're in settings-mode.
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This method can be used to write a message to GNOME Shell's log. This is enhances    //

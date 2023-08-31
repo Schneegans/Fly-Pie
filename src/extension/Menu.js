@@ -15,10 +15,11 @@ import GLib from 'gi://GLib';
 import Clutter from 'gi://Clutter';
 import Gtk from 'gi://Gtk';
 import Meta from 'gi://Meta';
+import Mtk from 'gi://Mtk';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-import {getSessionType, computeItemAngles, getHDPIScale} from '../common/utils.js';
+import {getSessionType, computeItemAngles, getHDPIScale, debug} from '../common/utils.js';
 import {DBusInterface} from '../common/DBusInterface.js';
 import InputManipulator from '../common/InputManipulator.js';
 import Timer from '../common/Timer.js';
@@ -1184,7 +1185,7 @@ export default class Menu {
     maxSize *= 2 * this._settings.get_double('global-scale') * getHDPIScale();
 
     // Clamp to monitor bounds.
-    let pointer    = new Meta.Rectangle({x: x, y: y, width: 1, height: 1});
+    let pointer    = new Mtk.Rectangle({x: x, y: y, width: 1, height: 1});
     const monitor  = global.display.get_monitor_index_for_rect(pointer);
     const geometry = global.display.get_monitor_geometry(monitor);
 

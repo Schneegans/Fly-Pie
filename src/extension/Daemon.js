@@ -29,9 +29,9 @@ import {ItemRegistry} from '../common/ItemRegistry.js';
 import {DBusInterface} from '../common/DBusInterface.js';
 import {Shortcuts} from './Shortcuts.js';
 import TouchButtons from './TouchButtons.js';
-// import MouseHighlight from './MouseHighlight.js';
+import {MouseHighlight} from './MouseHighlight.js';
 import Menu from './Menu.js';
-// import DefaultMenu from './DefaultMenu.js';
+import DefaultMenu from './DefaultMenu.js';
 import ClipboardManager from './ClipboardManager.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////

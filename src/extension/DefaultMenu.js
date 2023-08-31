@@ -11,9 +11,6 @@
 
 'use strict';
 
-const Gio    = imports.gi.Gio;
-const Config = imports.misc.config;
-
 const _ = imports.gettext.domain('flypie').gettext;
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +18,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 // configured.                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-export class DefaultMenu {
+export default class DefaultMenu {
 
   // ---------------------------------------------------------------------- static methods
 
@@ -127,84 +124,23 @@ export class DefaultMenu {
       'data': {}
     };
 
-    // The workspace switcher items are different on GNOME 3.3x and GNOME 40+ as the
-    // workspace layout changed.
-    const [major]      = Config.PACKAGE_VERSION.split('.');
-    const shellVersion = Number.parseInt(major);
-    if (shellVersion >= 40) {
+    menu.children.splice(2, 0, {
+      // Translators: This is an entry of the default menu under GNOME 40 and beyond.
+      'name': _('Next Workspace'),
+      'icon': 'flypie-go-right-symbolic-#6b5',
+      'type': 'Shortcut',
+      'data': {'shortcut': '<Control><Alt>Right'},
+      'angle': -1
+    });
 
-      menu.children.splice(2, 0, {
-        // Translators: This is an entry of the default menu under GNOME 40 and beyond.
-        'name': _('Next Workspace'),
-        'icon': 'flypie-go-right-symbolic-#6b5',
-        'type': 'Shortcut',
-        'data': {'shortcut': '<Control><Alt>Right'},
-        'angle': -1
-      });
-
-      menu.children.splice(6, 0, {
-        // Translators: This is an entry of the default menu under GNOME 40 and beyond.
-        'name': _('Previous Workspace'),
-        'icon': 'flypie-go-left-symbolic-#6b5',
-        'type': 'Shortcut',
-        'data': {'shortcut': '<Control><Alt>Left'},
-        'angle': -1
-      });
-
-    } else {
-
-      menu.children.splice(2, 0, {
-        // Translators: This is an entry of the default menu under GNOME 3.3x only.
-        'name': _('Switch Workspace'),
-        'type': 'CustomMenu',
-        'children': [
-          {
-            // Translators: This is an entry of the default menu under GNOME 3.3x only.
-            'name': _('Go Up'),
-            'icon': 'flypie-go-up-symbolic-#6b5',
-            'type': 'Shortcut',
-            'data': {'shortcut': '<Control><Alt>Up'},
-            'angle': 0
-          },
-          {
-            // Translators: This is an entry of the default menu under GNOME 3.3x only.
-            'name': _('Go Down'),
-            'type': 'Shortcut',
-            'icon': 'flypie-go-down-symbolic-#6b5',
-            'data': {'shortcut': '<Control><Alt>Down'},
-            'angle': 180
-          }
-        ],
-        'icon': 'flypie-go-updown-symbolic-#6b5',
-        'angle': -1
-      });
-
-      menu.children.splice(6, 0, {
-        // Translators: This is an entry of the default menu under GNOME 3.3x only.
-        'name': _('Move Window'),
-        'type': 'CustomMenu',
-        'children': [
-          {
-            // Translators: This is an entry of the default menu under GNOME 3.3x only.
-            'name': _('Move Window Up'),
-            'type': 'Shortcut',
-            'icon': 'flypie-move-up-symbolic-#6b5',
-            'data': {'shortcut': '<Shift><Control><Alt>Up'},
-            'angle': 0
-          },
-          {
-            // Translators: This is an entry of the default menu under GNOME 3.3x only.
-            'name': _('Move Window Down'),
-            'type': 'Shortcut',
-            'icon': 'flypie-move-down-symbolic-#6b5',
-            'data': {'shortcut': '<Shift><Control><Alt>Down'},
-            'angle': 180
-          }
-        ],
-        'icon': 'flypie-move-updown-symbolic-#6b5',
-        'angle': -1
-      });
-    }
+    menu.children.splice(6, 0, {
+      // Translators: This is an entry of the default menu under GNOME 40 and beyond.
+      'name': _('Previous Workspace'),
+      'icon': 'flypie-go-left-symbolic-#6b5',
+      'type': 'Shortcut',
+      'data': {'shortcut': '<Control><Alt>Left'},
+      'angle': -1
+    });
 
     return menu;
   }
