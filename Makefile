@@ -54,7 +54,7 @@ clean:
 	       locale
 
 test:
-	@ for version in 32 33 34 35 36 37 38 ; do \
+	@ for version in "rawhide" ; do \
 	  for session in "gnome-xsession" "gnome-wayland-nested" ; do \
 	    echo ; \
 	    echo "Running Tests on Fedora $$version ($$session)." ; \
