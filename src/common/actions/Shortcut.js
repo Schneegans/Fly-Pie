@@ -21,10 +21,11 @@ const _ = imports.gettext.domain('flypie').gettext;
 // prefs.js, the InputManipulator is not available. This is not a problem, as the
 // preferences will not call the createItem() methods below; they are merely interested in
 // the menu's name, icon and description.
-let InputManipulator = undefined;
+let inputManipulator = undefined;
 
 try {
-  InputManipulator = new Me.imports.src.common.InputManipulator.InputManipulator();
+  const InputManipulator = (await import('../InputManipulator.js'))?.default;
+  inputManipulator       = new InputManipulator();
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
@@ -96,6 +97,6 @@ export var ShortcutAction = {
     }
 
     // The onSelect() function will be called when the user selects this action.
-    return {onSelect: () => InputManipulator.activateAccelerator(shortcut)};
+    return {onSelect: () => inputManipulator.activateAccelerator(shortcut)};
   }
 };

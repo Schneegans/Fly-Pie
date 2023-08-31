@@ -25,10 +25,11 @@ const _ = imports.gettext.domain('flypie').gettext;
 // prefs.js, the module not available. This is not a problem, as the preferences will not
 // call the createItem() methods below; they are merely interested in the menu's name,
 // icon and description.
-let ClipboardManager = undefined;
+let clipboardManager = undefined;
 
 try {
-  ClipboardManager = Me.imports.src.extension.ClipboardManager.ClipboardManager;
+  const ClipboardManager = (await import('../ClipboardManager.js'))?.default;
+  clipboardManager       = ClipboardManager.getInstance();
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
@@ -124,7 +125,7 @@ export var ClipboardMenu = {
     const result = {children: []};
 
     // Get a list of recently copied things from the ClipboardManager.
-    const items = ClipboardManager.getInstance().getItems();
+    const items = clipboardManager.getItems();
 
     // The ClipboardManager stores the copied things in several hard-coded mime type
     // formats (see the documentation of that class for more details). Based on the mime

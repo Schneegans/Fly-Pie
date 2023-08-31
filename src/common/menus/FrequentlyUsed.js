@@ -24,7 +24,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 let Shell = undefined;
 
 try {
-  Shell = imports.gi.Shell;
+  Shell = (await import('gi://Shell'))?.default;
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }

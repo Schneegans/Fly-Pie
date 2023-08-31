@@ -24,8 +24,11 @@ let Shell         = undefined;
 let SystemActions = undefined;
 
 try {
-  Shell         = imports.gi.Shell;
-  SystemActions = new imports.misc.systemActions.getDefault();
+  Shell = (await import('gi://Shell'))?.default;
+
+  Shell         = (await import('gi://Shell'))?.default;
+  SystemActions = (await import('resource:///org/gnome/shell/misc/systemActions.js'))
+                      ?.default.getDefault();
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }

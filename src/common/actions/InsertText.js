@@ -25,12 +25,15 @@ const _ = imports.gettext.domain('flypie').gettext;
 // not be available. But this is not a problem, as the preferences will not call the
 // createItem() methods below; they are merely interested in the action's name, icon and
 // description.
-let InputManipulator = undefined;
-let ClipboardManager = undefined;
+let inputManipulator = undefined;
+let clipboardManager = undefined;
 
 try {
-  InputManipulator = new Me.imports.src.common.InputManipulator.InputManipulator();
-  ClipboardManager = Me.imports.src.extension.ClipboardManager.ClipboardManager;
+  const InputManipulator = (await import('../InputManipulator.js'))?.default;
+  inputManipulator       = new InputManipulator();
+
+  const ClipboardManager = (await import('../ClipboardManager.js'))?.default;
+  clipboardManager       = ClipboardManager.getInstance();
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
@@ -106,14 +109,13 @@ export var InsertTextAction = {
       onSelect: () => {
         // Make sure that the set_text() further below does not affect our clipboard
         // menus.
-        const clipboardManager = ClipboardManager.getInstance();
         clipboardManager.ignoreNextOwnerChange();
 
         const clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default());
         clipboard.set_text(text, -1);
 
         // Finally, simulate Ctrl+V.
-        InputManipulator.activateAccelerator('<Primary>v');
+        inputManipulator.activateAccelerator('<Primary>v');
       }
     };
   }

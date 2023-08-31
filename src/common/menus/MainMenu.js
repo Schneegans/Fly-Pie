@@ -18,7 +18,6 @@ import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-
 //////////////////////////////////////////////////////////////////////////////////////////
 // Returns an item containing the menu tree of all installed applications.              //
 // See common/ItemRegistry.js for a description of the action's format.                 //
