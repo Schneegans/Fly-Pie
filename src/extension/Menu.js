@@ -19,9 +19,9 @@ import Mtk from 'gi://Mtk';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-import {getSessionType, computeItemAngles, getHDPIScale, debug} from '../common/utils.js';
+import * as utils from '../common/utils.js';
 import {DBusInterface} from '../common/DBusInterface.js';
-import InputManipulator from '../common/InputManipulator.js';
+import InputManipulator from './InputManipulator.js';
 import Timer from '../common/Timer.js';
 import {Background} from './Background.js';
 import {SelectionWedges} from './SelectionWedges.js';
@@ -116,7 +116,7 @@ export default class Menu {
     this._deviceChangedID = backend.connect('last-device-changed', (b, device) => {
       // Multi-cursor stuff only works on Wayland. For now, I assume that tablets,
       // pens and erasers create a secondary cursor. Is this true?
-      if (getSessionType() == 'wayland') {
+      if (utils.getSessionType() == 'wayland') {
         if (device.get_device_type() == Clutter.InputDeviceType.TABLET_DEVICE ||
             device.get_device_type() == Clutter.InputDeviceType.PEN_DEVICE ||
             device.get_device_type() == Clutter.InputDeviceType.ERASER_DEVICE) {
@@ -1087,7 +1087,7 @@ export default class Menu {
   _updateItemAngles(items, parentAngle) {
 
     // First use the utils method to compute all item angles.
-    const itemAngles = computeItemAngles(items, parentAngle);
+    const itemAngles = utils.computeItemAngles(items, parentAngle);
 
     // Shouldn't happen, but who knows...
     if (itemAngles == null) {
@@ -1182,7 +1182,7 @@ export default class Menu {
     maxSize     = Math.max(maxSize, centerRadius);
     maxSize     = Math.max(maxSize, childRadius);
     maxSize     = Math.max(maxSize, grandchildRadius);
-    maxSize *= 2 * this._settings.get_double('global-scale') * getHDPIScale();
+    maxSize *= 2 * this._settings.get_double('global-scale') * utils.getHDPIScale();
 
     // Clamp to monitor bounds.
     let pointer    = new Mtk.Rectangle({x: x, y: y, width: 1, height: 1});
@@ -1249,7 +1249,7 @@ export default class Menu {
       // There is a setting for a minimum trace length.
       const idealTraceLength = Math.max(
           this._settings.get_double('trace-min-length') *
-              this._settings.get_double('global-scale') * getHDPIScale(),
+              this._settings.get_double('global-scale') * utils.getHDPIScale(),
           currentTraceLength);
 
       // Based on this trace length, we can compute where the item should be placed

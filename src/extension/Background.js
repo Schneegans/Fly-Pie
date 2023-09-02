@@ -21,7 +21,7 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-import {createSettings, debug} from '../common/utils.js';
+import * as utils from '../common/utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This Clutter.Actor represents the background behind the menu. It can be shown in     //
@@ -57,7 +57,7 @@ class Background extends Clutter.Actor {
 
     // We keep several connections to the Gio.Settings object. Once the settings dialog is
     // closed, we use this array to disconnect all of them.
-    this._settings            = createSettings();
+    this._settings            = utils.createSettings();
     this._settingsConnections = [];
 
     // Set the background color according to the settings.
@@ -173,7 +173,7 @@ class Background extends Clutter.Actor {
         } else {
           // Something went wrong while grabbing the input. For now, we continue but log
           // an corresponding message.
-          debug('Failed to grab input. Continuing anyways...');
+          utils.debug('Failed to grab input. Continuing anyways...');
         }
       }
     }

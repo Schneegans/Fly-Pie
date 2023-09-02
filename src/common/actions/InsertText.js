@@ -28,15 +28,14 @@ const _ = imports.gettext.domain('flypie').gettext;
 let inputManipulator = undefined;
 let clipboardManager = undefined;
 
-try {
-  // const InputManipulator = (await import('../InputManipulator.js'))?.default;
-  // inputManipulator       = new InputManipulator();
+if (typeof global !== 'undefined') {
+  const InputManipulator = (await import('../../extension/InputManipulator.js'))?.default;
+  inputManipulator       = new InputManipulator();
 
-  const ClipboardManager = (await import('../ClipboardManager.js'))?.default;
+  const ClipboardManager = (await import('../../extension/ClipboardManager.js'))?.default;
   clipboardManager       = ClipboardManager.getInstance();
-} catch (error) {
-  // Nothing to be done, we're in settings-mode.
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The insert-text action pastes some text to the current cursor position.              //

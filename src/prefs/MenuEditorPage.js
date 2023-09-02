@@ -119,7 +119,7 @@ export default class MenuEditorPage {
         const size =
             Math.min(widget.get_allocated_width(), widget.get_allocated_height());
         const font  = this._settings.get_string('font');
-        const color = widget.widget.get_style_context().get_color();
+        const color = widget.get_style_context().get_color();
         utils.paintIcon(
             ctx, ItemRegistry.getItemTypes()[type].icon, size, 1, font, color);
         return false;
@@ -489,7 +489,7 @@ export default class MenuEditorPage {
             (widget.get_allocated_width() - size) / 2,
             (widget.get_allocated_height() - size) / 2);
         const font  = this._settings.get_string('font');
-        const color = widget.widget.get_style_context().get_color();
+        const color = widget.get_style_context().get_color();
         utils.paintIcon(ctx, this._selectedItem.icon, size, 1, font, color);
       }
       return false;
@@ -1073,7 +1073,7 @@ export default class MenuEditorPage {
     item.set_draw_func((widget, ctx) => {
       const size  = Math.min(widget.get_allocated_width(), widget.get_allocated_height());
       const font  = this._settings.get_string('font');
-      const color = widget.widget.get_style_context().get_color();
+      const color = widget.get_style_context().get_color();
       utils.paintIcon(ctx, widget.config.icon, size, 1, font, color);
       return false;
     });

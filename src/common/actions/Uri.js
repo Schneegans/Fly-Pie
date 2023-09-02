@@ -13,7 +13,7 @@
 
 import Gio from 'gi://Gio';
 
-import {debug} from '../utils.js';
+import * as utils from '../utils.js';
 import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 import {ItemClass} from '../ItemClass.js';
 
@@ -91,7 +91,7 @@ export var UriAction = {
         try {
           Gio.AppInfo.launch_default_for_uri(uri, null);
         } catch (error) {
-          debug('Failed to open URL: ' + error);
+          utils.debug('Failed to open URL: ' + error);
         }
       }
     };

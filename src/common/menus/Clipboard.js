@@ -14,7 +14,7 @@
 import Gtk from 'gi://Gtk';
 import GLib from 'gi://GLib';
 
-import {debug} from '../utils.js';
+import * as utils from '../utils.js';
 import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 import {ItemClass} from '../ItemClass.js';
 
@@ -27,11 +27,9 @@ const _ = imports.gettext.domain('flypie').gettext;
 // icon and description.
 let clipboardManager = undefined;
 
-try {
-  const ClipboardManager = (await import('../ClipboardManager.js'))?.default;
+if (typeof global !== 'undefined') {
+  const ClipboardManager = (await import('../../extension/ClipboardManager.js'))?.default;
   clipboardManager       = ClipboardManager.getInstance();
-} catch (error) {
-  // Nothing to be done, we're in settings-mode.
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -182,7 +180,7 @@ export var ClipboardMenu = {
       }
       // In all other cases we log an error.
       else {
-        debug(
+        utils.debug(
             `Failed to add clipboard item: Unsupported mime type "${item.type}" given!`);
       }
 

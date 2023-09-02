@@ -14,7 +14,7 @@
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
-import {debug} from '../utils.js';
+import * as utils from '../utils.js';
 import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 import {ItemClass} from '../ItemClass.js';
 
@@ -107,7 +107,7 @@ export var RecentFilesMenu = {
             try {
               Gio.AppInfo.launch_default_for_uri(recentFiles[i].get_uri(), ctx);
             } catch (error) {
-              debug('Failed to open URI: ' + error);
+              utils.debug('Failed to open URI: ' + error);
             }
           }
         });

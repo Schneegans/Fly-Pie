@@ -22,7 +22,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-import {createSettings, debug, getHDPIScale} from '../common/utils.js';
+import * as utils from '../common/utils.js';
 import Statistics from '../common/Statistics.js';
 import {Achievements} from '../common/Achievements.js';
 import {ItemRegistry} from '../common/ItemRegistry.js';
@@ -69,7 +69,7 @@ export default class Daemon {
 
     // Create a settings object and listen for menu configuration changes. Once the
     // configuration changes, we bind all the configured shortcuts.
-    this._settings = createSettings();
+    this._settings = utils.createSettings();
 
     // We keep several connections to the Gio.Settings object. Once the extension is
     // unloaded, we use this array to disconnect all of them.
@@ -109,7 +109,7 @@ export default class Daemon {
     const showMenu = (name) => {
       const result = this.ShowMenu(name);
       if (result < 0) {
-        debug(
+        utils.debug(
             'Failed to open a Fly-Pie menu: ' +
             DBusInterface.getErrorDescription(result));
       }
@@ -405,7 +405,7 @@ export default class Daemon {
       try {
         config = JSON.parse(config);
       } catch (error) {
-        debug('Failed to parse menu configuration JSON: ' + error);
+        utils.debug('Failed to parse menu configuration JSON: ' + error);
         return DBusInterface.errorCodes.eInvalidJSON;
       }
     }
@@ -414,7 +414,7 @@ export default class Daemon {
     try {
       ItemRegistry.normalizeConfig(config);
     } catch (error) {
-      debug('Failed to parse menu configuration: ' + error);
+      utils.debug('Failed to parse menu configuration: ' + error);
       return DBusInterface.errorCodes.eInvalidMenuConfiguration;
     }
 
@@ -424,7 +424,7 @@ export default class Daemon {
     try {
       structure = ItemRegistry.transformConfig(config);
     } catch (error) {
-      debug('Failed to transform menu configuration: ' + error);
+      utils.debug('Failed to transform menu configuration: ' + error);
       return DBusInterface.errorCodes.eInvalidMenuConfiguration;
     }
 
@@ -433,7 +433,7 @@ export default class Daemon {
     try {
       return this._menu.open(menuID, structure, previewMode, x, y);
     } catch (error) {
-      debug('Failed to show menu: ' + error);
+      utils.debug('Failed to show menu: ' + error);
     }
 
     // Something weird happened.
@@ -475,13 +475,14 @@ export default class Daemon {
     try {
       this._menuConfigs = JSON.parse(this._settings.get_string('menu-configuration'));
     } catch (error) {
-      debug('Failed to load Fly-Pie menu configuration: ' + error);
+      utils.debug('Failed to load Fly-Pie menu configuration: ' + error);
       this._menuConfigs = [];
     }
 
     // Root element must be an array of menus.
     if (!Array.isArray(this._menuConfigs)) {
-      debug('Failed to load Fly-Pie menu configuration: Root element must be an array!');
+      utils.debug(
+          'Failed to load Fly-Pie menu configuration: Root element must be an array!');
       this._menuConfigs = [];
     }
 
@@ -580,7 +581,7 @@ export default class Daemon {
 
       // For now, we use a hard-coded size of 50. This can be made configurable in the
       // future if anybody needs it.
-      const size            = 50 * getHDPIScale();
+      const size            = 50 * utils.getHDPIScale();
       this._screencastMouse = new MouseHighlight(size);
       global.stage.add_child(this._screencastMouse);
     }

@@ -13,7 +13,7 @@
 
 import Gio from 'gi://Gio';
 
-import {debug} from '../utils.js';
+import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 
@@ -96,7 +96,7 @@ export const CommandAction = {
               command, null, Gio.AppInfoCreateFlags.NONE);
           item.launch([], ctx);
         } catch (error) {
-          debug('Failed to execute command: ' + error);
+          utils.debug('Failed to execute command: ' + error);
         }
       }
     };

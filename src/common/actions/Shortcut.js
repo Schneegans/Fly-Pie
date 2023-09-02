@@ -23,11 +23,9 @@ const _ = imports.gettext.domain('flypie').gettext;
 // the menu's name, icon and description.
 let inputManipulator = undefined;
 
-try {
-  // const InputManipulator = (await import('../InputManipulator.js'))?.default;
-  // inputManipulator       = new InputManipulator();
-} catch (error) {
-  // Nothing to be done, we're in settings-mode.
+if (typeof global !== 'undefined') {
+  const InputManipulator = (await import('../../extension/InputManipulator.js'))?.default;
+  inputManipulator       = new InputManipulator();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

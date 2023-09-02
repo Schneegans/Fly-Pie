@@ -13,7 +13,7 @@
 
 import Gio from 'gi://Gio';
 
-import {debug} from '../utils.js';
+import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 
@@ -93,7 +93,7 @@ export var FileAction = {
         try {
           Gio.AppInfo.launch_default_for_uri('file://' + file, null);
         } catch (error) {
-          debug('Failed to open file: ' + error);
+          utils.debug('Failed to open file: ' + error);
         }
       }
     };

@@ -107,7 +107,7 @@ export default class TutorialPage {
 
     // Draw the Fly-Pie logo with the current theme's foreground color.
     this._builder.get_object('fly-pie-logo').set_draw_func((widget, ctx) => {
-      const color = widget.widget.get_style_context().get_color();
+      const color = widget.get_style_context().get_color();
       const logo  = GdkPixbuf.Pixbuf.new_from_resource('/img/logo.svg');
 
       ctx.pushGroup();

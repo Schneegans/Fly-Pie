@@ -11,7 +11,7 @@
 
 'use strict';
 
-import {debug} from './utils.js';
+import * as utils from './utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This can be used for some basic profiling by measuring roughly the time some parts   //
@@ -39,7 +39,7 @@ export default class Timer {
   // Prints the given message together with the time since the last call to reset() or
   // printElapsedAndReset().
   printElapsedAndReset(message) {
-    debug(message + ': ' + this.getElapsed() + ' ms');
+    utils.debug(message + ': ' + this.getElapsed() + ' ms');
     this.reset();
   }
 };

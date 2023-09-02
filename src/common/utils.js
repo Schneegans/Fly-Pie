@@ -42,14 +42,14 @@ try {
 export function debug(message) {
   const stack = new Error().stack.split('\n');
 
-  // Remove debug() function call from stack.
+  // Removeutils.debug() function call from stack.
   stack.shift();
 
   // Find the index of the extension directory in the stack entry. We do not want to
   // print the entire absolute file path.
   const extensionRoot = stack[0].indexOf('flypie@schneegans.github.com');
 
-  log('[' + stack[0].slice(extensionRoot) + '] ' + message);
+  console.log('[' + stack[0].slice(extensionRoot) + '] ' + message);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +85,7 @@ export function createSettings() {
 
 export function logProperties(object) {
   for (const element in object) {
-    debug(`${element} [${typeof (object[element])}]`);
+    utils.debug(`${element} [${typeof (object[element])}]`);
   }
 }
 
@@ -132,7 +132,7 @@ export function getIconTheme() {
 
     // Print an error if this fails as well.
     if (_iconTheme == null) {
-      debug('Failed to get a valid icon theme object!');
+      utils.debug('Failed to get a valid icon theme object!');
     }
 
     // Make sure that the icons under resources/img are available as system icons.
@@ -259,7 +259,7 @@ export function paintIcon(ctx, name, size, opacity, font, textColor) {
       throw 'Unknown error.';
     }
   } catch (error) {
-    debug('Failed to draw base64 image: ' + error);
+    utils.debug('Failed to draw base64 image: ' + error);
     iconName = 'flypie-image-symbolic';
   }
 
@@ -343,7 +343,8 @@ export function paintIcon(ctx, name, size, opacity, font, textColor) {
     }
 
   } catch (error) {
-    debug('Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');
+    utils.debug(
+        'Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');
   }
 
   // If no icon was found, write it as plain text. We use a hard-coded font size of 12

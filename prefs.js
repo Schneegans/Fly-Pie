@@ -20,7 +20,6 @@ import Gio from 'gi://Gio';
 import * as utils from './src/common/utils.js';
 
 import Statistics from './src/common/Statistics.js';
-
 import TutorialPage from './src/prefs/TutorialPage.js';
 import SettingsPage from './src/prefs/SettingsPage.js';
 import MenuEditorPage from './src/prefs/MenuEditorPage.js';
@@ -50,6 +49,9 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     // Load all of Fly-Pie's resources.
     this._resources = Gio.Resource.load(this.path + '/resources/flypie.gresource');
     Gio.resources_register(this._resources);
+
+    // Make sure custom icons are found.
+    Gtk.IconTheme.get_for_display(Gdk.Display.get_default()).add_resource_path('/img');
 
     // Register some custom Gtk widgets. This needs to be done before creating the builder
     // below as this will instantiate some of these custom widgets.
@@ -112,14 +114,6 @@ export default class FlyPiePreferences extends ExtensionPreferences {
       titlebar.set_title_widget(stackSwitcher);
       titlebar.pack_start(menuButton);
 
-      // "disable" the Adw.Clamp.
-      const clamp        = this._findParentByType(widget, Adw.Clamp);
-      clamp.maximum_size = 100000;
-
-      // Disable the Gtk.ScrolledWindow.
-      const scroll             = this._findParentByType(widget, Gtk.ScrolledWindow);
-      scroll.vscrollbar_policy = Gtk.PolicyType.NEVER;
-
       // Now create all the actions for the main menu.
       const group = Gio.SimpleActionGroup.new();
       window.insert_action_group('prefs', group);
@@ -143,13 +137,13 @@ export default class FlyPiePreferences extends ExtensionPreferences {
         };
 
         // clang-format off
-         addURIAction('homepage',  'https://github.com/Schneegans/Fly-Pie');
-         addURIAction('bugs',      'https://github.com/Schneegans/Fly-Pie/issues');
-         addURIAction('changelog', 'https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog.md');
-         addURIAction('translate', 'https://hosted.weblate.org/engage/Fly-Pie/');
-         addSponsorAction('donate-kofi',   'https://ko-fi.com/schneegans');
-         addSponsorAction('donate-github', 'https://github.com/sponsors/Schneegans');
-         addSponsorAction('donate-paypal', 'https://www.paypal.me/simonschneegans');
+        addURIAction('homepage',  'https://github.com/Schneegans/Fly-Pie');
+        addURIAction('bugs',      'https://github.com/Schneegans/Fly-Pie/issues');
+        addURIAction('changelog', 'https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog.md');
+        addURIAction('translate', 'https://hosted.weblate.org/engage/Fly-Pie/');
+        addSponsorAction('donate-kofi',   'https://ko-fi.com/schneegans');
+        addSponsorAction('donate-github', 'https://github.com/sponsors/Schneegans');
+        addSponsorAction('donate-paypal', 'https://www.paypal.me/simonschneegans');
         // clang-format on
 
         // Add the about dialog.
@@ -306,17 +300,5 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     }
 
     return null;
-  }
-
-  // This traverses the widget tree upwards above the given child and returns the first
-  // widget of the given type.
-  _findParentByType(child, type) {
-    const parent = child.get_parent();
-
-    if (!parent) return null;
-
-    if (parent instanceof type) return parent;
-
-    return this._findParentByType(parent, type);
   }
 }

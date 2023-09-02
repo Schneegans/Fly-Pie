@@ -14,7 +14,7 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 
-import {debug} from '../utils.js';
+import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
@@ -91,7 +91,7 @@ export var BookmarksMenu = {
               const ctx = global.create_app_launch_context(0, -1);
               Gio.AppInfo.launch_default_for_uri(uri, ctx);
             } catch (error) {
-              debug('Failed to open "%s": %s'.format(this.name, error));
+              utils.debug('Failed to open "%s": %s'.format(this.name, error));
             }
           }
         });
@@ -133,7 +133,7 @@ export var BookmarksMenu = {
         });
       }
     } catch (error) {
-      debug(error);
+      utils.debug(error);
     }
 
     return result;

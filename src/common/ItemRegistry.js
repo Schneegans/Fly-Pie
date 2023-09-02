@@ -14,7 +14,7 @@
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
 
-import {debug} from './utils.js';
+import * as utils from './utils.js';
 import {ItemClass} from './ItemClass.js';
 
 import {CommandAction} from './actions/Command.js';
@@ -315,12 +315,12 @@ export class ItemRegistry {
     // 'DBusSignal' otherwise.
     if (this.getItemTypes()[config.type] == undefined) {
       if (config.children == undefined) {
-        debug(
+        utils.debug(
             'Warning: Unknown item type \'' + config.type +
             '\'! Using \'DBusSignal\' instead.');
         config.type = 'DBusSignal';
       } else {
-        debug(
+        utils.debug(
             'Warning: Unknown item type \'' + config.type +
             '\'! Using \'CustomMenu\' instead as this item has children.');
         config.type = 'CustomMenu';

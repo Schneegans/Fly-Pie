@@ -13,7 +13,7 @@
 
 import Gio from 'gi://Gio';
 
-import {debug} from '../utils.js';
+import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
@@ -60,7 +60,7 @@ export var DevicesMenu = {
             const ctx = global.create_app_launch_context(0, -1);
             Gio.AppInfo.launch_default_for_uri(mount.get_root().get_uri(), ctx);
           } catch (error) {
-            debug('Failed to open "%s": %s'.format(mount.get_name(), error));
+            utils.debug('Failed to open "%s": %s'.format(mount.get_name(), error));
           }
         }
       });

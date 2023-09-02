@@ -164,7 +164,7 @@ export function registerWidgets() {
                   (widget.get_allocated_width() - size) / 2,
                   (widget.get_allocated_height() - size) / 2);
               const font  = this._settings.get_string('font');
-              const color = widget.widget.get_style_context().get_color();
+              const color = widget.get_style_context().get_color();
               utils.paintIcon(ctx, this._config.icon, size, 1, font, color);
               return false;
             });
@@ -474,7 +474,7 @@ export function registerWidgets() {
               ctx.translate(-width / 2, -height / 2);
             }
             ctx.translate((width - size) / 2, (height - size) / 2);
-            const color = widget.widget.get_style_context().get_color();
+            const color = widget.get_style_context().get_color();
             utils.paintIcon(ctx, 'go-previous-symbolic', size, 1, 'Sans', color);
 
             return false;

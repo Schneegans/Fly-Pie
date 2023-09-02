@@ -17,7 +17,7 @@ import Gtk from 'gi://Gtk';
 import GObject from 'gi://GObject';
 import Cairo from 'gi://cairo';
 
-import {getHDPIScale, stringToRGBA} from '../common/utils.js';
+import * as utils from '../common/utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class is instantiated once by the Menu and is responsible for drawing the       //
@@ -202,15 +202,15 @@ class SelectionWedges extends Clutter.Actor {
       onSettingsChange(settings) {
 
         // Parse all settings required for wedge rendering.
-        const globalScale = settings.get_double('global-scale') * getHDPIScale();
+        const globalScale = settings.get_double('global-scale') * utils.getHDPIScale();
 
         // clang-format off
     this._settings = {
       wedgeWidth:              settings.get_double('wedge-width')          * globalScale,
       wedgeInnerRadius:        settings.get_double('wedge-inner-radius')   * globalScale,
-      wedgeColor:              stringToRGBA(settings.get_string('wedge-color')),
-      wedgeColorHover:         stringToRGBA(settings.get_string('wedge-color-hover')),
-      wedgeSeparatorColor:     stringToRGBA(settings.get_string('wedge-separator-color')),
+      wedgeColor:              utils.stringToRGBA(settings.get_string('wedge-color')),
+      wedgeColorHover:         utils.stringToRGBA(settings.get_string('wedge-color-hover')),
+      wedgeSeparatorColor:     utils.stringToRGBA(settings.get_string('wedge-separator-color')),
       wedgeSeparatorWidth:     settings.get_double('wedge-separator-width') * globalScale,
       gestureSelectionTimeout: settings.get_double('gesture-selection-timeout'),
       gestureJitterThreshold:  settings.get_double('gesture-jitter-threshold')  * globalScale,

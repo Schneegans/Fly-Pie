@@ -13,7 +13,7 @@
 
 import GMenu from 'gi://GMenu';
 
-import {debug} from '../utils.js';
+import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
@@ -68,7 +68,7 @@ export var MainMenu = {
                 try {
                   app.launch([], ctx);
                 } catch (error) {
-                  debug('Failed to launch app: ' + error);
+                  utils.debug('Failed to launch app: ' + error);
                 }
               }
             };

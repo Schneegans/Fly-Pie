@@ -13,7 +13,7 @@
 
 import GLib from 'gi://GLib';
 
-import {createSettings} from './utils.js';
+import * as utils from './utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Statistics singleton is used to record some statistics of Fly-Pie which are      //
@@ -59,7 +59,7 @@ export default class Statistics {
     // noticeable stutter in Fly-Pie's animations. Applying the settings with half a
     // second delay makes it much more unlikely that an animation is currently in
     // progress.
-    this._settings = createSettings();
+    this._settings = utils.createSettings();
     this._settings.delay();
 
     // As the settings object is in delay-mode, we have to call its apply() method after

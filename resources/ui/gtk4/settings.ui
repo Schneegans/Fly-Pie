@@ -413,7 +413,7 @@ SPDX-License-Identifier: MIT
                         <property name="margin_start">6</property>
                         <property name="margin_top">10</property>
                         <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">&lt;b&gt;Menus&lt;/b&gt;
-                          Can be submenus or top-level menus.</property>
+Can be submenus or top-level menus.</property>
                         <property name="use_markup">1</property>
                         <style>
                           <class name="dim-label" />
@@ -437,7 +437,7 @@ SPDX-License-Identifier: MIT
                         <property name="margin_start">6</property>
                         <property name="margin_top">10</property>
                         <property name="label" translatable="yes" comments="Heading in the add-new-item-popover of the menu editor.">&lt;b&gt;Actions&lt;/b&gt;
-                          Can be added to custom menus.</property>
+Can be added to custom menus.</property>
                         <property name="use_markup">1</property>
                         <style>
                           <class name="dim-label" />
@@ -536,8 +536,7 @@ SPDX-License-Identifier: MIT
   <!--                                                                                           -->
   <!-- ######################################################################################### -->
 
-  <object class="GtkBox" id="main-notebook">
-    <property name="orientation">vertical</property>
+  <object class="AdwPreferencesPage" id="main-notebook">
 
     <child>
       <object class="GtkBox">
@@ -3423,7 +3422,7 @@ SPDX-License-Identifier: MIT
                                             <property name="halign">start</property>
                                             <property name="margin_end">20</property>
                                             <property name="label" translatable="yes" comments="Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.">Clicking inside the inner radius
-                                              will cancel the selection.</property>
+will cancel the selection.</property>
                                             <style>
                                               <class name="dim-label" />
                                             </style>
@@ -4036,7 +4035,7 @@ SPDX-License-Identifier: MIT
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
                                             <property name="label" translatable="yes">Shorter gestures will not lead to selections.
-                                              This is multiplied by the Global Scale value.</property>
+This is multiplied by the Global Scale value.</property>
                                             <style>
                                               <class name="dim-label" />
                                             </style>
@@ -4085,7 +4084,7 @@ SPDX-License-Identifier: MIT
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
                                             <property name="label" translatable="yes">Smaller movements will not be considered.
-                                              This is multiplied by the Global Scale value.</property>
+This is multiplied by the Global Scale value.</property>
                                             <style>
                                               <class name="dim-label" />
                                             </style>
@@ -4133,7 +4132,7 @@ SPDX-License-Identifier: MIT
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
                                             <property name="label" translatable="yes">Menus will be shown after this many milliseconds.
-                                              Use this to quickly select items without showing the menu.</property>
+Use this to quickly select items without showing the menu.</property>
                                             <style>
                                               <class name="dim-label" />
                                             </style>
@@ -4182,7 +4181,7 @@ SPDX-License-Identifier: MIT
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
                                             <property name="label" translatable="yes">If your pointer is stationary for this many milliseconds,
-                                              the current item will be selected.</property>
+the current item will be selected.</property>
                                             <style>
                                               <class name="dim-label" />
                                             </style>
@@ -4231,7 +4230,7 @@ SPDX-License-Identifier: MIT
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
                                             <property name="label" translatable="yes">With this enabled, Fly-Pie will attempt to open any windows
-                                              at the current pointer position.</property>
+at the current pointer position.</property>
                                             <style>
                                               <class name="dim-label" />
                                             </style>
@@ -4264,7 +4263,7 @@ SPDX-License-Identifier: MIT
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
                                             <property name="label" translatable="yes">With this enabled, you no longer have to press a mouse button
-                                              or hold down a modifier key during selections.</property>
+or hold down a modifier key during selections.</property>
                                             <style>
                                               <class name="dim-label" />
                                             </style>
@@ -4297,7 +4296,7 @@ SPDX-License-Identifier: MIT
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
                                             <property name="label" translatable="yes">Shows a big additional mouse pointer visualizing mouse clicks.
-                                              This can be used if you want to capture a video of Fly-Pie.</property>
+This can be used if you want to capture a video of Fly-Pie.</property>
                                             <style>
                                               <class name="dim-label" />
                                             </style>

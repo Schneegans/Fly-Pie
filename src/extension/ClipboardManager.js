@@ -14,7 +14,7 @@
 import Meta from 'gi://Meta';
 import Gio from 'gi://Gio';
 
-import InputManipulator from '../common/InputManipulator.js';
+import InputManipulator from './InputManipulator.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This singleton class is instantiated whenever the extension is loaded (by the Daemon //

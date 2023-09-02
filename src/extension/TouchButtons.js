@@ -18,7 +18,7 @@ import Meta from 'gi://Meta';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-import {getHDPIScale, createIcon, getAverageIconColor} from '../common/utils.js';
+import * as utils from '../common/utils.js';
 import {DBusInterface} from '../common/DBusInterface.js';
 import {MenuItem} from './MenuItem.js';
 
@@ -175,7 +175,7 @@ export default class TouchButtons {
 
     // Now we store a copy of all settings we require to draw the buttons. This makes is
     // unnecessary to query them whenever the menu configuration is changed.
-    const globalScale = this._settings.get_double('global-scale') * getHDPIScale();
+    const globalScale = this._settings.get_double('global-scale') * utils.getHDPIScale();
 
     // clang-format off
     this._cachedSettings = {
@@ -201,14 +201,14 @@ export default class TouchButtons {
       // Compute the average color on a smaller version of the icon.
       // clang-format off
       const iconName = this._settings.get_string('center-background-image-hover');
-      const surface  = createIcon(iconName, 24, this._cachedSettings.font, {
+      const surface  = utils.createIcon(iconName, 24, this._cachedSettings.font, {
         red: this._cachedSettings.textColor.red / 255,
         green: this._cachedSettings.textColor.green / 255,
         blue: this._cachedSettings.textColor.blue / 255
       });
       // clang-format on
 
-      const [r, g, b]        = getAverageIconColor(surface, 24);
+      const [r, g, b]        = utils.getAverageIconColor(surface, 24);
       const averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
 
       // Now we modify this color based on the configured luminance and saturation values.

@@ -18,8 +18,6 @@ import Clutter from 'gi://Clutter';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-import {debug} from '../common/utils.js';
-
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class can be used to bind a function to global hot keys. It's designed in the   //
 // following way: An  arbitrary number of shortcuts can be registered. If one of the    //
@@ -117,7 +115,7 @@ export var Shortcuts = GObject.registerClass(
             global.display.grab_accelerator(shortcut, Meta.KeyBindingFlags.NONE);
 
         if (action == Meta.KeyBindingAction.NONE) {
-          debug('Unable to grab shortcut ' + shortcut + '!');
+          utils.debug('Unable to grab shortcut ' + shortcut + '!');
         } else {
           const name = Meta.external_binding_name_for_action(action);
           Main.wm.allowKeybinding(name, Shell.ActionMode.ALL);
