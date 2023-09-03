@@ -1,6 +1,6 @@
 {
     "uuid": "flypie@schneegans.github.com",
-    "description": "A marking menu which can be used to launch applications, simulate hotkeys, open URLs and much more.",
+    "description": "A marking menu which can be used to launch applications, simulate hotkeys, open URLs and much more. Once installed, press Ctrl+Space to open the default menu. Open the preferences dialog for an interactive tutorial and for creating custom menus!",
     "name": "Fly-Pie",
     "donations": {
         "kofi": "schneegans",
