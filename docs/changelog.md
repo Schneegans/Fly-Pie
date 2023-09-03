@@ -13,6 +13,10 @@ SPDX-License-Identifier: CC-BY-4.0
 
 **Release Date:** TBD
 
+#### Enhancements
+
+- The default <kbd>Ctrl</kbd>+<kbd>Space</kbd> shortcut is now mentioned in the tutorial as well as in multiple other parts of the documentation.
+
 #### Bug Fixes
 
 - Fixed a compatibility issue with newer versions of GNOME Shell which caused the Insert-Text Action to not work anymore.
