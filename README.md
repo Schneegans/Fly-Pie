@@ -67,7 +67,7 @@ If you want to learn more, use the links below for much more information!
 - [Release Management](docs/release-management.md)
 - [Continuous Integration](docs/continuous-integration.md)
 
-# :revolving*hearts: These people \_do* love Fly-Pie
+# :revolving_hearts: These people _do_ love Fly-Pie
 
 While coding new features or translating Fly-Pie is the most awesome way to contribute, providing financial support will help me stay motivated to invest my spare time to keep the project alive in the future.
 
