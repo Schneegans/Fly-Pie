@@ -25,10 +25,8 @@ const _ = imports.gettext.domain('flypie').gettext;
 // description.
 let Shell = undefined;
 
-try {
+if (typeof global !== 'undefined') {
   Shell = (await import('gi://Shell'))?.default;
-} catch (error) {
-  // Nothing to be done, we're in settings-mode.
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -132,7 +130,7 @@ export var RunningAppsMenu = {
   // This will be called whenever a menu is opened containing an item of this kind.
   createItem: (data) => {
     // Use default data for undefined properties.
-    data = {...menu.config.defaultData, ...data};
+    data = {...RunningAppsMenu.config.defaultData, ...data};
 
     // Retrieve a list of all running apps and sort it alphabetically to make the window
     // positions more deterministic.
@@ -176,10 +174,11 @@ export var RunningAppsMenu = {
 
       // Now add the actual items!
       windows.forEach(window => {
+        let wasMinimized = false;
+
         parentMenu.children.push({
           name: window.get_title(),
           icon: icon,
-          wasMinimized: false,
           // If selected, we switch to the corresponding window. If window peeking is
           // enabled, this is not required as the hover event was fired already.
           onSelect: () => {
@@ -191,13 +190,14 @@ export var RunningAppsMenu = {
           // enabled.
           onHover: () => {
             if (data.hoverPeeking) {
-              this.wasMinimized = window.minimized;
+              wasMinimized = window.minimized;
               window.get_workspace().activate_with_focus(
                   window, global.display.get_current_time_roundtrip());
             }
           },
+
           onUnhover: () => {
-            if (data.hoverPeeking && this.wasMinimized) {
+            if (data.hoverPeeking && wasMinimized) {
               window.minimize();
             }
           }

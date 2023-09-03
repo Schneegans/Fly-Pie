@@ -41,7 +41,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 let MainMenu = undefined;
 
 try {
-  MainMenu = (await import('./menus/RunningApps.js'))?.default;
+  MainMenu = (await import('./menus/MainMenu.js'))?.MainMenu;
 } catch (error) {
   // Nothing to be done, GMenus will not be available.
 }

@@ -117,7 +117,7 @@ export var ClipboardMenu = {
   // have to create a list of items, one for each recently copied item.
   createItem: (data) => {
     // Use default data for undefined properties.
-    data = {...menu.config.defaultData, ...data};
+    data = {...ClipboardMenu.config.defaultData, ...data};
 
     // This menu configuration will be filled with children and returned at the end.
     const result = {children: []};
@@ -160,7 +160,7 @@ export var ClipboardMenu = {
 
         child = {
           icon: 'data:image/svg+xml;base64,' +
-              GLib.base64_encode(ByteArray.fromGBytes(item.data)),
+              GLib.base64_encode(new GLib.Bytes(item.data).unref_to_array()),
           // Translators: This is shown as item name in the clipboard menu when the user
           // copied a vector image.
           name: _('Vector Image')
@@ -172,7 +172,7 @@ export var ClipboardMenu = {
 
         child = {
           icon: 'data:image/png;base64,' +
-              GLib.base64_encode(ByteArray.fromGBytes(item.data)),
+              GLib.base64_encode(new GLib.Bytes(item.data).unref_to_array()),
           // Translators: This is shown as item name in the clipboard menu when the user
           // copied a raster image.
           name: _('Raster Image')
@@ -187,7 +187,7 @@ export var ClipboardMenu = {
       // If we successfully created an item, we add it to the result children list and
       // assign an "onSelect" callback which will paster the contained data.
       if (child) {
-        child.onSelect = () => ClipboardManager.getInstance().pasteItem(item);
+        child.onSelect = () => clipboardManager.pasteItem(item);
         result.children.push(child);
 
         // Assign the configured fixed angle for the first child.

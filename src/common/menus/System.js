@@ -23,14 +23,10 @@ const _ = imports.gettext.domain('flypie').gettext;
 let Shell         = undefined;
 let SystemActions = undefined;
 
-try {
+if (typeof global !== 'undefined') {
   Shell = (await import('gi://Shell'))?.default;
-
-  Shell         = (await import('gi://Shell'))?.default;
-  SystemActions = (await import('resource:///org/gnome/shell/misc/systemActions.js'))
-                      ?.default.getDefault();
-} catch (error) {
-  // Nothing to be done, we're in settings-mode.
+  SystemActions =
+      (await import('resource:///org/gnome/shell/misc/systemActions.js'))?.getDefault();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -23,10 +23,8 @@ const _ = imports.gettext.domain('flypie').gettext;
 // and description.
 let Shell = undefined;
 
-try {
+if (typeof global !== 'undefined') {
   Shell = (await import('gi://Shell'))?.default;
-} catch (error) {
-  // Nothing to be done, we're in settings-mode.
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
