@@ -621,7 +621,17 @@ Can be added to custom menus.</property>
                                     <child>
                                       <object class="GtkLabel">
                                         <property name="valign">start</property>
-                                        <property name="label" translatable="yes">You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and much more. This interactive tutorial will teach you how to use Fly-Pie most efficiently. Click the big button below to open a test menu!</property>
+                                        <property name="label" translatable="yes">Press &lt;b&gt;Ctrl+Space&lt;/b&gt; to open the default menu of Fly-Pie!</property>
+                                        <property name="use_markup">1</property>
+                                        <property name="wrap">1</property>
+                                        <property name="max_width_chars">1</property>
+                                        <property name="xalign">0</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="valign">start</property>
+                                        <property name="label" translatable="yes">You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and much more. This interactive tutorial will teach you how to use Fly-Pie most efficiently. Click the big button below to open a training menu!</property>
                                         <property name="use_markup">1</property>
                                         <property name="wrap">1</property>
                                         <property name="max_width_chars">1</property>
@@ -633,7 +643,7 @@ Can be added to custom menus.</property>
                                         <property name="valign">start</property>
                                         <property name="label" translatable="yes">• Use your &lt;b&gt;left mouse button to select items&lt;/b&gt;.
 • Use your &lt;b&gt;right mouse button to close the menu&lt;/b&gt;.
-• The test menu is just a playground, selecting items has no real effect.
+• The training menu is just a playground, selecting items has no real effect.
 
 Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!</property>
                                         <property name="use_markup">1</property>
@@ -651,7 +661,7 @@ Once you feel comfortable, click &lt;b&gt;next&lt;/b&gt; to learn more details!<
                                           <object class="GtkLabel">
                                             <property name="margin_top">10</property>
                                             <property name="margin_bottom">10</property>
-                                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the training Menu!&lt;/b&gt;&lt;/big&gt;</property>
                                             <property name="use_markup">1</property>
                                             <property name="justify">center</property>
                                           </object>
@@ -732,7 +742,7 @@ Click &lt;b&gt;next&lt;/b&gt; for a practice session!</property>
                                           <object class="GtkLabel">
                                             <property name="margin_top">10</property>
                                             <property name="margin_bottom">10</property>
-                                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the training Menu!&lt;/b&gt;&lt;/big&gt;</property>
                                             <property name="use_markup">1</property>
                                             <property name="justify">center</property>
                                           </object>
@@ -817,7 +827,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn ab
                                           <object class="GtkLabel">
                                             <property name="margin_top">10</property>
                                             <property name="margin_bottom">10</property>
-                                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the training Menu!&lt;/b&gt;&lt;/big&gt;</property>
                                             <property name="use_markup">1</property>
                                             <property name="justify">center</property>
                                           </object>
@@ -960,7 +970,7 @@ You may find it more successful if you explicitly try to compose your gesture of
                                           <object class="GtkLabel">
                                             <property name="margin_top">10</property>
                                             <property name="margin_bottom">10</property>
-                                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the training Menu!&lt;/b&gt;&lt;/big&gt;</property>
                                             <property name="use_markup">1</property>
                                             <property name="justify">center</property>
                                           </object>
@@ -1045,7 +1055,7 @@ Once you are pleased with your result, click &lt;b&gt;next&lt;/b&gt; to learn so
                                           <object class="GtkLabel">
                                             <property name="margin_top">10</property>
                                             <property name="margin_bottom">10</property>
-                                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the example menu!&lt;/b&gt;&lt;/big&gt;</property>
+                                            <property name="label" translatable="yes" comments="The text of the big tutorial button.">&lt;big&gt;&lt;b&gt;Open the training Menu!&lt;/b&gt;&lt;/big&gt;</property>
                                             <property name="use_markup">1</property>
                                             <property name="justify">center</property>
                                           </object>

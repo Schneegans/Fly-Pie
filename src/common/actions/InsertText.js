@@ -11,9 +11,6 @@
 
 'use strict';
 
-import Gtk from 'gi://Gtk';
-import Gdk from 'gi://Gdk';
-
 import {ItemClass} from '../ItemClass.js';
 import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 
@@ -25,13 +22,9 @@ const _ = imports.gettext.domain('flypie').gettext;
 // not be available. But this is not a problem, as the preferences will not call the
 // createItem() methods below; they are merely interested in the action's name, icon and
 // description.
-let inputManipulator = undefined;
 let clipboardManager = undefined;
 
 if (typeof global !== 'undefined') {
-  const InputManipulator = (await import('../../extension/InputManipulator.js'))?.default;
-  inputManipulator       = new InputManipulator();
-
   const ClipboardManager = (await import('../../extension/ClipboardManager.js'))?.default;
   clipboardManager       = ClipboardManager.getInstance();
 }

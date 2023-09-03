@@ -220,7 +220,10 @@ export default class ClipboardManager {
         Meta.SelectionSourceMemory.new(item.type, item.data));
 
     // Finally, simulate Ctrl+V.
-    this._input.activateAccelerator('<Primary>v');
+    GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+      this._input.activateAccelerator('<Primary>v');
+      return GLib.SOURCE_REMOVE;
+    });
   }
 
   // If we mess with the clipboard from within Fly-Pie, we can use this to prevent the
