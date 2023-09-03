@@ -21,6 +21,7 @@ import St from 'gi://St';
 const _ = imports.gettext.domain('flypie').gettext;
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import {Source, Notification} from 'resource:///org/gnome/shell/ui/messageTray.js';
 
 import * as utils from '../common/utils.js';
 import Statistics from '../common/Statistics.js';
@@ -594,10 +595,10 @@ export default class Daemon {
   _notify(label, details, gicon) {
 
     if (this._settings.get_boolean('achievement-notifications')) {
-      const source = new Main.MessageTray.Source('Fly-Pie', '');
+      const source = new Source('Fly-Pie', '');
       Main.messageTray.add(source);
 
-      const n = new Main.MessageTray.Notification(source, label, details, {gicon: gicon});
+      const n = new Notification(source, label, details, {gicon: gicon});
 
       // Translators: This is shown on the action button of the notification bubble which
       // is shown once an achievement is unlocked.

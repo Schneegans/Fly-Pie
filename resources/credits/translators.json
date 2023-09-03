@@ -1,28 +1,5 @@
 [
   {
-    "Korean": [
-      [
-        "weblate-helabasa@yalu.lk",
-        "HelaBasa Group (\u0dc4\u0dd9\u0dc5\u0db6\u0dc3 \u0dc3\u0db8\u0dd6\u0dc4\u0dba)",
-        3
-      ],
-      [
-        "inner5740@gmail.com",
-        "colder_",
-        475
-      ]
-    ]
-  },
-  {
-    "Persian": [
-      [
-        "nma.fanniasl@gmail.com",
-        "Nima Fanniasl",
-        11
-      ]
-    ]
-  },
-  {
     "Turkish": [
       [
         "libreajans@gmail.com",
@@ -32,25 +9,35 @@
     ]
   },
   {
-    "Polish": [
+    "Lithuanian": [
       [
-        "slime714@gmail.com",
-        "Zenic1",
-        104
+        "hazap@hotmail.com",
+        "Moo",
+        11
       ]
     ]
   },
   {
-    "Swedish": [
+    "Portuguese (Brazil)": [
       [
         "code@simonschneegans.de",
         "Simon Schneegans",
+        1
+      ],
+      [
+        "hugokarvalho@hotmail.com",
+        "Hugo Carvalho",
         2
       ],
       [
-        "jakobdoesnotapproveofschool@gmail.com",
-        "Frick",
-        351
+        "570cxat11@relay.firefox.com",
+        "Daimar Stein",
+        4
+      ],
+      [
+        "noreply+34321@weblate.org",
+        "Deleted User",
+        65
       ]
     ]
   },
@@ -69,35 +56,63 @@
       [
         "code@simonschneegans.de",
         "Simon Schneegans",
-        176
+        175
       ]
     ]
   },
   {
-    "Finnish": [
+    "Russian": [
       [
-        "jiri.gronroos@iki.fi",
-        "Jiri Gr\u00f6nroos",
-        237
+        "dan.samara@gmail.com",
+        "Daniel' Ishmaev",
+        26
+      ],
+      [
+        "integration.into.society@gmail.com",
+        "\u0412\u043b\u0430\u0434",
+        35
+      ],
+      [
+        "artem.job.kulikov@gmail.com",
+        "Artem Kulikov",
+        74
+      ],
+      [
+        "sabdenovchingiz@gmail.com",
+        "GestaltEngine",
+        286
       ]
     ]
   },
   {
-    "Dutch": [
+    "Japanese": [
       [
-        "0xjarno@gmail.com",
-        "Jarno Van Schoor",
-        23
+        "rinrin0413.valley@gmail.com",
+        "Rinrin.rs",
+        431
+      ]
+    ]
+  },
+  {
+    "Portuguese": [
+      [
+        "gugu.r.azevedo@gmail.com",
+        "Gustavo Rocha",
+        2
       ],
       [
-        "vistausss@fastmail.com",
-        "Heimen Stoffels",
-        51
-      ],
+        "hugokarvalho@hotmail.com",
+        "Hugo Carvalho",
+        104
+      ]
+    ]
+  },
+  {
+    "Polish": [
       [
-        "philip.goto@gmail.com",
-        "Philip Goto",
-        373
+        "slime714@gmail.com",
+        "Zenic1",
+        104
       ]
     ]
   },
@@ -126,101 +141,21 @@
     ]
   },
   {
-    "Lithuanian": [
+    "Dutch": [
       [
-        "hazap@hotmail.com",
-        "Moo",
-        11
-      ]
-    ]
-  },
-  {
-    "Chinese (Simplified)": [
-      [
-        "jingxuan@nfschina.com",
-        "jingxuan@nfschina.com",
-        8
+        "0xjarno@gmail.com",
+        "Jarno Van Schoor",
+        23
       ],
       [
-        "noreply+13019@weblate.org",
-        "Deleted User",
-        12
+        "vistausss@fastmail.com",
+        "Heimen Stoffels",
+        50
       ],
       [
-        "me@wuzhiping.top",
-        "Frank.wu",
-        42
-      ],
-      [
-        "erbaotao@outlook.com",
-        "poi",
-        309
-      ]
-    ]
-  },
-  {
-    "French": [
-      [
-        "schotte.clement@hotmail.fr",
-        "Cl\u00e9ment Schotte",
-        9
-      ],
-      [
-        "zekovski@e.email",
-        "Zekovski",
-        18
-      ]
-    ]
-  },
-  {
-    "Russian": [
-      [
-        "dan.samara@gmail.com",
-        "Daniel' Ishmaev",
-        26
-      ],
-      [
-        "integration.into.society@gmail.com",
-        "\u0412\u043b\u0430\u0434",
-        35
-      ],
-      [
-        "artem.job.kulikov@gmail.com",
-        "Artem Kulikov",
-        74
-      ],
-      [
-        "sabdenovchingiz@gmail.com",
-        "GestaltEngine",
-        289
-      ]
-    ]
-  },
-  {
-    "Norwegian Bokm\u00e5l": [
-      [
-        "code@simonschneegans.de",
-        "Simon Schneegans",
-        13
-      ],
-      [
-        "epost@anotheragency.no",
-        "Allan Nordh\u00f8y",
-        365
-      ]
-    ]
-  },
-  {
-    "Portuguese": [
-      [
-        "gugu.r.azevedo@gmail.com",
-        "Gustavo Rocha",
-        2
-      ],
-      [
-        "hugokarvalho@hotmail.com",
-        "Hugo Carvalho",
-        104
+        "philip.goto@gmail.com",
+        "Philip Goto",
+        370
       ]
     ]
   },
@@ -244,21 +179,72 @@
       [
         "captainjawz@outlook.com",
         "Danilo Reyes",
-        118
+        112
       ],
       [
         "oscfdezdz@tuta.io",
         "\u00d3scar Fern\u00e1ndez D\u00edaz",
-        287
+        285
       ]
     ]
   },
   {
-    "Japanese": [
+    "French": [
       [
-        "rinrin0413.valley@gmail.com",
-        "Rinrin.rs",
-        437
+        "schotte.clement@hotmail.fr",
+        "Cl\u00e9ment Schotte",
+        9
+      ],
+      [
+        "zekovski@e.email",
+        "Zekovski",
+        18
+      ]
+    ]
+  },
+  {
+    "Swedish": [
+      [
+        "code@simonschneegans.de",
+        "Simon Schneegans",
+        1
+      ],
+      [
+        "jakobdoesnotapproveofschool@gmail.com",
+        "Frick",
+        347
+      ]
+    ]
+  },
+  {
+    "Persian": [
+      [
+        "nma.fanniasl@gmail.com",
+        "Nima Fanniasl",
+        11
+      ]
+    ]
+  },
+  {
+    "Finnish": [
+      [
+        "jiri.gronroos@iki.fi",
+        "Jiri Gr\u00f6nroos",
+        234
+      ]
+    ]
+  },
+  {
+    "Korean": [
+      [
+        "weblate-helabasa@yalu.lk",
+        "HelaBasa Group (\u0dc4\u0dd9\u0dc5\u0db6\u0dc3 \u0dc3\u0db8\u0dd6\u0dc4\u0dba)",
+        3
+      ],
+      [
+        "inner5740@gmail.com",
+        "colder_",
+        470
       ]
     ]
   },
@@ -272,26 +258,40 @@
     ]
   },
   {
-    "Portuguese (Brazil)": [
+    "Chinese (Simplified)": [
+      [
+        "jingxuan@nfschina.com",
+        "jingxuan@nfschina.com",
+        8
+      ],
+      [
+        "noreply+13019@weblate.org",
+        "Deleted User",
+        12
+      ],
+      [
+        "me@wuzhiping.top",
+        "Frank.wu",
+        35
+      ],
+      [
+        "erbaotao@outlook.com",
+        "poi",
+        305
+      ]
+    ]
+  },
+  {
+    "Norwegian Bokm\u00e5l": [
       [
         "code@simonschneegans.de",
         "Simon Schneegans",
-        1
+        11
       ],
       [
-        "hugokarvalho@hotmail.com",
-        "Hugo Carvalho",
-        2
-      ],
-      [
-        "570cxat11@relay.firefox.com",
-        "Daimar Stein",
-        4
-      ],
-      [
-        "noreply+34321@weblate.org",
-        "Deleted User",
-        71
+        "epost@anotheragency.no",
+        "Allan Nordh\u00f8y",
+        355
       ]
     ]
   }
