@@ -9,6 +9,14 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
+## [Fly-Pie 22](https://github.com/schneegans/fly-pie/releases/tag/v22)
+
+**Release Date:** TBD
+
+#### Bug Fixes
+
+- Fixed a compatibility issue with newer versions of GNOME Shell which caused the Insert-Text Action to not work anymore.
+
 ## [Fly-Pie 21](https://github.com/schneegans/fly-pie/releases/tag/v21)
 
 **Release Date:** 2023-06-09
