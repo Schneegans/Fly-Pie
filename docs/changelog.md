@@ -19,6 +19,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 #### Bug Fixes
 
+- Fixed a bug which caused the achievement notification not to be shown on GNOME 44.
 - Fixed a compatibility issue with newer versions of GNOME Shell which caused the Insert-Text Action to not work anymore.
 
 ## [Fly-Pie 21](https://github.com/schneegans/fly-pie/releases/tag/v21)
