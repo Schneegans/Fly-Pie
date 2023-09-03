@@ -106,15 +106,8 @@ export var InsertTextAction = {
     // The onSelect() function will be called when the user selects this action.
     return {
       onSelect: () => {
-        // Make sure that the set_text() further below does not affect our clipboard
-        // menus.
-        clipboardManager.ignoreNextOwnerChange();
-
-        const clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default());
-        clipboard.set_text(text, -1);
-
-        // Finally, simulate Ctrl+V.
-        inputManipulator.activateAccelerator('<Primary>v');
+        clipboardManager.pasteItem(
+            {type: 'text/plain;charset=utf-8', data: new TextEncoder().encode(text)});
       }
     };
   }
