@@ -11,8 +11,6 @@
 
 'use strict';
 
-const {Gdk, Gtk, GLib} = imports.gi;
-
 const _ = imports.gettext.domain('flypie').gettext;
 
 const Me                  = imports.misc.extensionUtils.getCurrentExtension();
@@ -107,13 +105,10 @@ var action = {
         // Make sure that the set_text() further below does not affect our clipboard
         // menus.
         const clipboardManager = ClipboardManager.getInstance();
-        clipboardManager.ignoreNextOwnerChange();
-
-        const clipboard = Gtk.Clipboard.get_default(Gdk.Display.get_default());
-        clipboard.set_text(text, -1);
-
-        // Finally, simulate Ctrl+V.
-        InputManipulator.activateAccelerator('<Primary>v');
+        clipboardManager.pasteItem({
+          type: 'text/plain;charset=utf-8',
+          data: imports.byteArray.fromString(text, 'UTF-8')
+        });
       }
     };
   }
