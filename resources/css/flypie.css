@@ -45,9 +45,6 @@ SPDX-License-Identifier: MIT
     border-radius: 8px 0 0 8px;
 }
 
-/* The top selector is for GTK3, the bottom one for GTK4. */
-
-.menu-editor-add-button,
 menubutton.menu-editor-add-button button {
     border-radius: 0 8px 8px 0;
     border-right: none;
