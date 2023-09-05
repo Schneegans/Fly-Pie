@@ -92,7 +92,6 @@ const TRANSITION_DURATION = 350;
 // type. This method is called by the constructor of the PreferencesDialog.
 export function registerWidgets() {
   let FlyPieMenuEditorItem;
-  let FlyPieMenuEditorBase;
 
   ////////////////////////////////////////////////////////////////////////////////////////
   // Instances of this class are used to draw the individual menu items in the menu     //
@@ -280,38 +279,11 @@ export function registerWidgets() {
   // (e.g. select, drag-and-drop) signals are emitted.                                  //
   ////////////////////////////////////////////////////////////////////////////////////////
 
-  if (GObject.type_from_name('FlyPieMenuEditorBase') == null) {
-
-    // Here's some old legacy which needs to be cleaned up. The problem is the following:
-    // To support both, GTK3 and GTK4 from the same codebase, some weird things had to be
-    // done. On GTK4, everything is fine but creating a custom container widget on
-    // GTK3 is ... challenging. Therefore, the FlyPieMenuEditor is derived from Gtk.Widget
-    // on GTK4 and from Gtk.Fixed on GTK3 (hacky, but possible).
-    // There are also different abstract methods which need to be overridden on GTK43 /
-    // GTK4. Therefore there is a main FlyPieMenuEditorBase class and derived therefrom
-    // different FlyPieMenuEditor's on GTK3 / GTK4. So it looks a bit like this:
-    //
-    //                    GTK3                                    GTK4
-    //
-    //          ,----------------------,                ,----------------------,
-    //          |      Gtk.Fixed       |                |     Gtk.Widget       |
-    //          '----------------------'                '----------------------'
-    //                      ^                                       ^
-    //                      |                                       |
-    //          ,--------------------------------------------------------------,
-    //          |                     FlyPieMenuEditorBase                     |
-    //          '--------------------------------------------------------------'
-    //                      ^                                       ^
-    //                      |                                       |
-    //    ,---------------------------------,      ,---------------------------------,
-    //    | FlyPieMenuEditor (GTK3 Version) |      | FlyPieMenuEditor (GTK4 Version) |
-    //    '---------------------------------'      '---------------------------------'
-    //
-    const BASE_CLASS = Gtk.Widget;
+  if (GObject.type_from_name('FlyPieMenuEditor') == null) {
 
     // clang-format off
-    FlyPieMenuEditorBase = GObject.registerClass({
-        GTypeName: 'FlyPieMenuEditorBase',
+    GObject.registerClass({
+        GTypeName: 'FlyPieMenuEditor',
         Signals: {
           // Emitted whenever an item got selected by the user. The index of the selected
           // item is passed as parameter.
@@ -360,7 +332,7 @@ export function registerWidgets() {
           'notification': { param_types: [GObject.TYPE_STRING]},
         },
       },
-      class FlyPieMenuEditor extends BASE_CLASS {
+      class FlyPieMenuEditor extends Gtk.Widget {
       // clang-format on
 
       // -------------------------------------------------------- constructor / destructor
@@ -821,6 +793,32 @@ export function registerWidgets() {
       // This widget uses standard WIDTH_FOR_HEIGHT sizing.
       vfunc_get_request_mode() {
         return Gtk.SizeRequestMode.WIDTH_FOR_HEIGHT;
+      }
+
+      // This computes the required hight for a given width when in menu overview mode.
+      // In all other cases it simply returns the size required to fit 4x4 grid items.
+      vfunc_measure(orientation, for_size) {
+        const MIN_GRID_SIZE = ItemSize[ItemState.GRID] * 4;
+
+        if (this._inMenuOverviewMode()) {
+          if (orientation == Gtk.Orientation.HORIZONTAL) {
+            return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
+          }
+
+          // The possible amount of columns.
+          const columns = Math.floor(for_size / ItemSize[ItemState.GRID]);
+
+          // The required amount of rows.
+          const rows = Math.ceil(this._items.length / columns);
+
+          // The required height of the grid.
+          const gridHeight = rows * ItemSize[ItemState.GRID];
+          return [gridHeight, gridHeight, -1, -1];
+        }
+
+        // In menu-edit mode we simply return a square shaped region of the same size as
+        // the grid width.
+        return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
       }
 
       // This widget requests a width so that in overview mode at least four items can be
@@ -1505,50 +1503,6 @@ export function registerWidgets() {
         this._addItemHint.size_allocate(allocation, -1);
 
         return allFinished;
-      }
-    });
-  }
-
-  ////////////////////////////////////////////////////////////////////////////////////////
-  // As mentioned in the description of the FlyPieMenuEditorBase class, we need to      //
-  // override different vfuncs on GTK3 / GTK4. Therefore we derive different            //
-  // FlyPieMenuEditors for GTK3 and GTK4.                                               //
-  ////////////////////////////////////////////////////////////////////////////////////////
-
-  if (GObject.type_from_name('FlyPieMenuEditor') == null) {
-
-    const MIN_GRID_SIZE = ItemSize[ItemState.GRID] * 4;
-
-    ////////////////////////////////////////////////////////////////////////////////////
-    // The GTK4 FlyPieMenuEditor.                                                     //
-    ////////////////////////////////////////////////////////////////////////////////////
-
-    GObject.registerClass({GTypeName: 'FlyPieMenuEditor'},
-                          class FlyPieMenuEditor extends FlyPieMenuEditorBase {
-      // ---------------------------------------------------- overridden virtual methods
-
-      // This computes the required hight for a given width when in menu overview mode.
-      // In all other cases it simply returns the size required to fit 4x4 grid items.
-      vfunc_measure(orientation, for_size) {
-        if (this._inMenuOverviewMode()) {
-          if (orientation == Gtk.Orientation.HORIZONTAL) {
-            return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
-          }
-
-          // The possible amount of columns.
-          const columns = Math.floor(for_size / ItemSize[ItemState.GRID]);
-
-          // The required amount of rows.
-          const rows = Math.ceil(this._items.length / columns);
-
-          // The required height of the grid.
-          const gridHeight = rows * ItemSize[ItemState.GRID];
-          return [gridHeight, gridHeight, -1, -1];
-        }
-
-        // In menu-edit mode we simply return a square shaped region of the same size as
-        // the grid width.
-        return [MIN_GRID_SIZE, MIN_GRID_SIZE, -1, -1];
       }
     });
   }
