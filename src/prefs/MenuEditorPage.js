@@ -238,7 +238,6 @@ export default class MenuEditorPage {
         dialog.destroy();
       });
 
-      // Showing the dialog is different on GTK3 / GTK4...
       dialog.show();
     });
 
@@ -713,7 +712,7 @@ export default class MenuEditorPage {
     this._editor.connect('notification', (e, text) => this._showNotification(text));
 
     // Initialize the drop target of the trash area. It's pretty simple, it just accepts
-    // any internal drag operation. Only slight differences between GTK3 and GTK4...
+    // any internal drag operation.
     {
       const trash      = this._builder.get_object('menu-editor-trash');
       const dropTarget = new Gtk.DropTarget({actions: Gdk.DragAction.MOVE});
@@ -725,7 +724,7 @@ export default class MenuEditorPage {
     }
 
     // The stash area is slightly more complex, as a new stash widget needs to be created
-    // on drop events. Only slight differences between GTK3 and GTK4...
+    // on drop events.
     {
       const stash = this._builder.get_object('menu-editor-stash');
 

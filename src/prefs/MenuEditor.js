@@ -381,9 +381,6 @@ export function registerWidgets() {
           this._ifEmptyHint.append(icon);
           this._ifEmptyHint.append(label);
           this._ifEmptyHint.append(description);
-
-          // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
-          // So we have add child items differently.
           this._ifEmptyHint.set_parent(this);
         }
 
@@ -403,9 +400,6 @@ export function registerWidgets() {
           this._addItemHint.margin_top = 8;
           this._addItemHint.append(label);
           this._addItemHint.append(icon);
-
-          // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
-          // So we have add child items differently.
           this._addItemHint.set_parent(this);
         }
 
@@ -453,18 +447,13 @@ export function registerWidgets() {
           });
 
           this._backButton.set_child(icon);
-
-          // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
-          // So we have add child items differently.
           this._backButton.set_parent(this);
         }
 
         // The entire menu editor is a drop target. This is used both for internal
         // drag-and-drop of menu items and external drops for item creation based on URLs
-        // etc. Setting up drag and drop is quite different on GTK3 / GTK4. Therefore this
-        // code looks a bit more difficult than it actually is. There are a few lambdas
-        // involved which are then connected to the various signals of the widget (GTK3)
-        // or the EventController (GTK4).
+        // etc. There are a few lambdas involved which are then connected to the various
+        // signals of the EventController.
         {
 
           // The index of the dragged item.
@@ -823,14 +812,10 @@ export function registerWidgets() {
 
       // This widget requests a width so that in overview mode at least four items can be
       // displayed per row. The height is requested so that all items can be shown at the
-      // given width. However, this is implemented differently on GTK3 and GTK4.
-      // Therefore, there are two different versions of the FlyPieMenuEditor defined at
-      // the bottom of this file overriding the respective vfuncs.
-
-      // This method is responsible for computing the positions of all displayed items.
-      // There are two completely different display modes: The menu overview mode and menu
-      // edit mode. It considers the current _dropIndex so that an artificial gap is
-      // created where a item is about to be dropped.
+      // given width. This method is responsible for computing the positions of all
+      // displayed items. There are two completely different display modes: The menu
+      // overview mode and menu edit mode. It considers the current _dropIndex so that an
+      // artificial gap is created where a item is about to be dropped.
       vfunc_size_allocate(width, height, baseline) {
 
         // This helper lambda assigns animated values to the given item which can be used
@@ -1106,7 +1091,6 @@ export function registerWidgets() {
           oldItems.push(this._centerItem);
         }
 
-        // This is done differently on GTK3 / GTK4.
         oldItems.forEach(item => {
           item.unparent();
         });
@@ -1221,9 +1205,6 @@ export function registerWidgets() {
         // Create the item.
         const item = new FlyPieMenuEditorItem(itemState);
         item.setConfig(config);
-
-        // The MenuEditor is derived from Gtk.Fixed on GTK3 and from Gtk.Widget on GTK4.
-        // So we have add child items differently.
         item.set_parent(this);
         item.set_reveal_child(true);
 
@@ -1245,10 +1226,8 @@ export function registerWidgets() {
 
         // Now we set up the drag source. Most items are draggable, except for center
         // items. The drag source provides a stringified JSON version of the item config.
-        // Setting up drag and drop is quite different on GTK3 / GTK4. Therefore this code
-        // looks a bit more difficult than it actually is. There are a few lambdas
-        // involved which are then connected to the various signals of the widget (GTK3)
-        // or the EventController (GTK4).
+        // There are a few lambdas involved which are then connected to the various
+        // signals of the EventController.
         if (itemState != ItemState.CENTER) {
 
           // At drag begin, we make the icon translucent in overview mode and invisible
