@@ -105,12 +105,8 @@ export function getSessionType() {
 //////////////////////////////////////////////////////////////////////////////////////////
 // This method will either return a Gtk.IconTheme or a St.IconTheme, depending on the   //
 // context:                                                                             //
-//   * In the preferences process it will be ...                                        //
-//     ... a GTK3 IconTheme for GNOME < 40                                              //
-//     ... a GTK4 IconTheme for GNOME >= 40                                             //
-//   * In the GNOME Shell process it will be ...                                        //
-//     ... a GTK3 IconTheme for GNOME < 44                                              //
-//     ... a St IconTheme for GNOME >= 44                                               //
+//   * In the preferences process it will be a GTK4 IconTheme                           //
+//   * In the GNOME Shell process it will be a St IconTheme                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let _iconTheme = null;
