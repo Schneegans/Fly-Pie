@@ -9,6 +9,14 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
+## [Fly-Pie 23](https://github.com/schneegans/fly-pie/releases/tag/v23)
+
+**Release Date:** TBD
+
+#### Major Changes
+
+- This is the first release of Fly-Pie supporting GNOME 45. This required a [major refactoring](https://github.com/Schneegans/Fly-Pie/pull/318/files) of the code base as GJS now uses ESM modules. As a consequence, this version is not compatible with older versions of GNOME Shell anymore. The old code base is still available on the `gnome-3.36-44` branch and if new features are added (especially translations), they can be backported to this branch.
+
 ## [Fly-Pie 22](https://github.com/schneegans/fly-pie/releases/tag/v22)
 
 **Release Date:** 2023-09-04
