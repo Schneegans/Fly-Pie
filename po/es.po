@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: 2023-03-25 23:44+0000\n"
+"PO-Revision-Date: 2023-09-09 12:54+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/fly-pie/core/es/"
-">\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/fly-pie/core/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -1479,7 +1479,7 @@ msgstr "Tutorial"
 
 #: resources/ui/gtk4/settings.ui:646 resources/ui/gtk3/settings.ui:657
 msgid "Press <b>Ctrl+Space</b> to open the default menu of Fly-Pie!"
-msgstr ""
+msgstr "¡Pulsa <b>Ctrl+Espacio</b> para abrir el menú por defecto de Fly-Pie!"
 
 #: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:667
 msgid ""
@@ -1487,6 +1487,10 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a training menu!"
 msgstr ""
+"Puedes utilizar Fly-Pie para iniciar las aplicaciones, simulando el inicio "
+"rápido, abrir las URLs y mucho más. Este tutorial interactivo te enseñará a "
+"utilizar Fly-Pie de la forma más eficiente. ¡Haz clic en el botón de abajo "
+"para abrir el menú para aprender como!"
 
 #: resources/ui/gtk4/settings.ui:666 resources/ui/gtk3/settings.ui:677
 msgid ""
@@ -1497,6 +1501,14 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"• Utiliza el <b>botón izquierdo del ratón para seleccionar los "
+"elementos</b>..\n"
+"• Utiliza el <b>botón derecho del ratón para cerrar el menú</b>.\n"
+"• El menú de entrenamiento es sólo un patio de recreo, la selección de "
+"elementos no tiene ningún efecto real.\n"
+"\n"
+"¡Cuando te sientas cómodo, haz clic en <b>siguiente</b> para conocer más "
+"detalles!"
 
 #. The text of the big tutorial button.
 #: resources/ui/gtk4/settings.ui:686 resources/ui/gtk4/settings.ui:767
@@ -1505,7 +1517,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:775 resources/ui/gtk3/settings.ui:858
 #: resources/ui/gtk3/settings.ui:998 resources/ui/gtk3/settings.ui:1081
 msgid "<big><b>Open the training Menu!</b></big>"
-msgstr ""
+msgstr "<big><b>¡Abrir el menú de formación!</b></big>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:718 resources/ui/gtk3/settings.ui:727
