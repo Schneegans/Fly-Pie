@@ -11,11 +11,17 @@
 
 'use strict';
 
-const Cairo                                                            = imports.cairo;
-const {Gio, GLib, Gdk, Clutter, GObject, Pango, PangoCairo, GdkPixbuf} = imports.gi;
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import Gdk from 'gi://Gdk';
+import Clutter from 'gi://Clutter';
+import GObject from 'gi://GObject';
+import Pango from 'gi://Pango';
+import PangoCairo from 'gi://PangoCairo';
+import GdkPixbuf from 'gi://GdkPixbuf';
+import Cairo from 'gi://cairo';
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+import * as utils from '../common/utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Then MenuItem is a Clutter.Actor representing one node in the menu tree hierarchy.   //
@@ -44,7 +50,7 @@ const utils = Me.imports.src.common.utils;
 
 // This could be a static member of the class below, but this seems to be not supported
 // yet.
-var MenuItemState = {
+export var MenuItemState = {
   // This is the default state. It is also used for children of grandchildren - those are
   // not shown at all.
   INVISIBLE: 0,
@@ -87,7 +93,7 @@ var MenuItemState = {
 let MenuItemSettings = {};
 
 // clang-format off
-var MenuItem = GObject.registerClass({
+export var MenuItem = GObject.registerClass({
   Properties: {
     'angle': GObject.ParamSpec.double(
       'angle', 'angle', 'The angle of the MenuItem in degrees.',
@@ -530,7 +536,7 @@ class MenuItem extends Clutter.Actor {
           red: MenuItemSettings.textColor.red / 255,
           green: MenuItemSettings.textColor.green / 255,
           blue: MenuItemSettings.textColor.blue / 255
-        });
+                 });
         const [r, g, b]        = utils.getAverageIconColor(surface, 24);
         this._averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
       }
@@ -808,7 +814,7 @@ class MenuItem extends Clutter.Actor {
 
     // If the path is a relative path, it may be a child of the preset directory.
     if (file != '' && !GLib.path_is_absolute(file)) {
-      file = Me.path + '/presets/' + file;
+      file = utils.getPath() + 'presets/' + file;
     }
 
     // Only attempt to load an image if the background image property is set and exists.

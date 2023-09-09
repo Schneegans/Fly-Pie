@@ -11,10 +11,9 @@
 
 'use strict';
 
-const GLib = imports.gi.GLib;
+import GLib from 'gi://GLib';
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+import * as utils from './utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Statistics singleton is used to record some statistics of Fly-Pie which are      //
@@ -28,7 +27,7 @@ const utils = Me.imports.src.common.utils;
 // variable stores the singleton instance.
 let _instance = null;
 
-var Statistics = class Statistics {
+export default class Statistics {
 
   // ---------------------------------------------------------------------- static methods
 

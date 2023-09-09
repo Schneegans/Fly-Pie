@@ -11,7 +11,9 @@
 
 'use strict';
 
-const _ = imports.gettext.domain('flypie').gettext;
+import * as utils from '../common/utils.js';
+
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This creates a Demo Menu structure which is shown when the tutorial button is        //
@@ -20,7 +22,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 // leaf items.                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var ExampleMenu = class ExampleMenu {
+export default class ExampleMenu {
 
   // ---------------------------------------------------------------------- static methods
 

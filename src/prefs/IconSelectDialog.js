@@ -11,10 +11,12 @@
 
 'use strict';
 
-const {GObject, GLib, Gtk, Gio, Gdk} = imports.gi;
+import GObject from 'gi://GObject';
+import GLib from 'gi://GLib';
+import Gtk from 'gi://Gtk';
+import Gio from 'gi://Gio';
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+import * as utils from '../common/utils.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This dialog allows selecting an icon. This can be either from the user's icon theme  //
@@ -23,13 +25,13 @@ const utils = Me.imports.src.common.utils;
 // get_icon() method.                                                                   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function registerWidget() {
+export function registerWidget() {
 
   if (GObject.type_from_name('FlyPieIconSelectDialog') == null) {
     // clang-format off
       GObject.registerClass({
         GTypeName: 'FlyPieIconSelectDialog',
-        Template: `resource:///ui/${utils.gtk4() ? "gtk4" : "gtk3"}/iconSelectDialog.ui`,
+        Template: `resource:///ui/gtk4/iconSelectDialog.ui`,
         InternalChildren: ["stack", "iconFileChooser", "iconList", "iconView",
                           "spinner", "iconListFiltered", "filterEntry"],
         Signals: {
@@ -44,11 +46,7 @@ function registerWidget() {
         // Icons are loaded asynchronously. Once this is finished, the little spinner in
         // the top right of the dialog is hidden.
         this._loadIcons().then(() => {
-          if (utils.gtk4()) {
-            this._spinner.spinning = false;
-          } else {
-            this._spinner.active = false;
-          }
+          this._spinner.spinning = false;
         });
 
         // Filter the icon view based on the content of the search field.
@@ -113,14 +111,7 @@ function registerWidget() {
         // Disable sorting for now. Else this is horribly slow...
         this._iconList.set_sort_column_id(-2, Gtk.SortType.ASCENDING);
 
-        const iconTheme = utils.getIconTheme();
-
-        let icons;
-        if (utils.gtk4()) {
-          icons = iconTheme.get_icon_names();
-        } else {
-          icons = iconTheme.list_icons(null);
-        }
+        const icons = utils.getIconTheme().get_icon_names();
 
         // We add icons in batches. This number is somewhat arbitrary - if reduced to 1,
         // the icon loading takes quite long, if increased further the user interface

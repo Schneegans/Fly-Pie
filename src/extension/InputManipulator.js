@@ -11,17 +11,15 @@
 
 'use strict';
 
-const {Clutter, Gtk} = imports.gi;
-
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+import Clutter from 'gi://Clutter';
+import Gtk from 'gi://Gtk';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // An instance of this class can be used to create faked input events. You can use it   //
 // to move the mouse pointer or to press accelerator key strokes.                       //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var InputManipulator = class InputManipulator {
+export default class InputManipulator {
 
   // ------------------------------------------------------------ constructor / destructor
 
@@ -55,15 +53,7 @@ var InputManipulator = class InputManipulator {
     this._releaseModifiers(currentMods);
 
     // Now parse the string and press the buttons accordingly.
-    const res = Gtk.accelerator_parse(string);
-    let ok, keyval, mods;
-
-    // The return value is different in GTK4.
-    if (utils.gtk4()) {
-      [ok, keyval, mods] = res;
-    } else {
-      [keyval, mods] = res;
-    }
+    const [ok, keyval, mods] = Gtk.accelerator_parse(string);
 
     this._pressModifiers(mods);
     this._keyboard.notify_keyval(0, keyval, Clutter.KeyState.PRESSED);

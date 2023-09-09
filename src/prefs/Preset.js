@@ -11,10 +11,8 @@
 
 'use strict';
 
-const {Gio, Gdk, GLib} = imports.gi;
-
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+import Gio from 'gi://Gio';
+import Gdk from 'gi://Gdk';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Presets of Fly-Pie are stored in the JSON format. These files contain values for a   //
@@ -99,7 +97,7 @@ let presetKeys = [
   'touch-buttons-opacity',
 ];
 
-var Preset = class Preset {
+export default class Preset {
 
   // ---------------------------------------------------------------------- static methods
 

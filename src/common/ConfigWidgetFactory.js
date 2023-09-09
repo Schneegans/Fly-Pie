@@ -11,12 +11,13 @@
 
 'use strict';
 
-const {Gio, Gtk, Gdk} = imports.gi;
+import Gio from 'gi://Gio';
+import Gdk from 'gi://Gdk';
+import Gtk from 'gi://Gtk';
 
-const _ = imports.gettext.domain('flypie').gettext;
+import * as utils from './utils.js';
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class contains some static utility functions which can be used to create        //
@@ -28,7 +29,7 @@ const utils = Me.imports.src.common.utils;
 // are oftentimes quite similar and therefore in this file here.                        //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var ConfigWidgetFactory = class ConfigWidgetFactory {
+export default class ConfigWidgetFactory {
 
   // ---------------------------------------------------------------------- static methods
 
@@ -40,7 +41,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     const box = this.createConfigWidgetCaption(name, description);
 
     const entry = new Gtk.Entry({text: text, tooltip_markup: tooltip});
-    utils.boxAppend(box, entry);
+    box.append(entry);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
@@ -59,7 +60,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entry = Gtk.SpinButton.new_with_range(min, max, step);
     entry.value = value;
-    utils.boxAppend(box, entry);
+    box.append(entry);
 
     entry.connect('notify::value', (widget) => {
       callback(widget.value);
@@ -78,18 +79,13 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entryBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
     entryBox.get_style_context().add_class('linked');
-    utils.boxAppend(box, entryBox);
+    box.append(entryBox);
 
-    let button;
-    if (utils.gtk4()) {
-      button = Gtk.Button.new_from_icon_name('view-more-symbolic');
-    } else {
-      button = Gtk.Button.new_from_icon_name('view-more-symbolic', Gtk.IconSize.BUTTON);
-    }
+    const button = Gtk.Button.new_from_icon_name('view-more-symbolic');
 
     const entry = new Gtk.Entry({text: file, hexpand: true});
-    utils.boxAppend(entryBox, entry, false, true);
-    utils.boxAppend(entryBox, button);
+    entryBox.append(entry);
+    entryBox.append(button);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
@@ -99,7 +95,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       const dialog = new Gtk.Dialog({
         use_header_bar: true,
         modal: true,
-        transient_for: utils.getRoot(button),
+        transient_for: button.get_root(),
         title: ''
       });
       dialog.add_button(_('Select File'), Gtk.ResponseType.OK);
@@ -118,7 +114,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         fileChooser.set_file(currentFile);
       }
 
-      utils.boxAppend(dialog.get_content_area(), fileChooser);
+      dialog.get_content_area().append(fileChooser);
 
       dialog.connect('response', (dialog, id) => {
         if (id == Gtk.ResponseType.OK) {
@@ -132,11 +128,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         dialog.destroy();
       });
 
-      if (utils.gtk4()) {
-        dialog.show();
-      } else {
-        dialog.show_all();
-      }
+      dialog.show();
     });
 
 
@@ -154,18 +146,13 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
 
     const entryBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL});
     entryBox.get_style_context().add_class('linked');
-    utils.boxAppend(box, entryBox);
+    box.append(entryBox);
 
-    let button;
-    if (utils.gtk4()) {
-      button = Gtk.Button.new_from_icon_name('view-more-symbolic');
-    } else {
-      button = Gtk.Button.new_from_icon_name('view-more-symbolic', Gtk.IconSize.BUTTON);
-    }
+    const button = Gtk.Button.new_from_icon_name('view-more-symbolic');
 
     const entry = new Gtk.Entry({text: command, hexpand: true});
-    utils.boxAppend(entryBox, entry, false, true);
-    utils.boxAppend(entryBox, button);
+    entryBox.append(entry);
+    entryBox.append(button);
 
     entry.connect('notify::text', (widget) => {
       callback(widget.text);
@@ -175,7 +162,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       const dialog = new Gtk.Dialog({
         use_header_bar: true,
         modal: true,
-        transient_for: utils.getRoot(button),
+        transient_for: button.get_root(),
         title: ''
       });
       dialog.add_button(_('Select Application'), Gtk.ResponseType.OK);
@@ -185,7 +172,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       const appChooser =
           new Gtk.AppChooserWidget({show_all: true, hexpand: true, vexpand: true});
 
-      utils.boxAppend(dialog.get_content_area(), appChooser);
+      dialog.get_content_area().append(appChooser);
 
       const selectApp = (app) => {
         callback(
@@ -205,11 +192,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         dialog.destroy();
       });
 
-      if (utils.gtk4()) {
-        dialog.show();
-      } else {
-        dialog.show_all();
-      }
+      dialog.show();
     });
 
 
@@ -227,7 +210,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     label.set_accelerator(shortcut);
 
     const box = this.createConfigWidgetCaption(name, description);
-    utils.boxAppend(box, container);
+    box.append(container);
 
     return box;
   }
@@ -240,7 +223,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         new Gtk.Box({orientation: Gtk.Orientation.VERTICAL, spacing: 5, margin_top: 20});
     const hBox = new Gtk.Box({orientation: Gtk.Orientation.HORIZONTAL, spacing: 10});
 
-    utils.boxAppend(vBox, hBox);
+    vBox.append(hBox);
 
     // This is shown on the left above the data widget.
     const nameLabel =
@@ -250,8 +233,8 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     const descriptionLabel = new Gtk.Label({label: description});
     descriptionLabel.get_style_context().add_class('dim-label');
 
-    utils.boxAppend(hBox, nameLabel, false, true);
-    utils.boxAppend(hBox, descriptionLabel);
+    hBox.append(nameLabel);
+    hBox.append(descriptionLabel);
 
     return vBox;
   }
@@ -277,13 +260,9 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     const listBox = new Gtk.ListBox();
     const row     = new Gtk.ListBoxRow({height_request: 50});
 
-    utils.setChild(frame, listBox);
+    frame.set_child(listBox);
 
-    if (utils.gtk4()) {
-      listBox.append(row);
-    } else {
-      listBox.add(row);
-    }
+    listBox.append(row);
 
     const label = new Gtk.ShortcutLabel({
       // Translators: This is shown on the shortcut-buttons when no shortcut is selected.
@@ -291,7 +270,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
       halign: Gtk.Align.CENTER,
       valign: Gtk.Align.CENTER
     });
-    utils.setChild(row, label);
+    row.set_child(label);
 
     // Whenever the widget is in the please-select-something-state, the label is cleared
     // and a text indicating that the user should press the shortcut is shown. To be able
@@ -306,13 +285,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     // is waiting for input.
     const grabKeyboard = () => {
       if (doFullGrab) {
-        if (utils.gtk4()) {
-          utils.getRoot(label).get_surface().inhibit_system_shortcuts(null);
-        } else {
-          const seat = Gdk.Display.get_default().get_default_seat();
-          seat.grab(
-              row.get_window(), Gdk.SeatCapabilities.KEYBOARD, false, null, null, null);
-        }
+        label.get_root().get_surface().inhibit_system_shortcuts(null);
       }
       isGrabbed       = true;
       lastAccelerator = label.get_accelerator();
@@ -325,12 +298,7 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
     // bound".
     const cancelGrab = () => {
       if (doFullGrab) {
-        if (utils.gtk4()) {
-          utils.getRoot(label).get_surface().restore_system_shortcuts();
-        } else {
-          const seat = Gdk.Display.get_default().get_default_seat();
-          seat.ungrab();
-        }
+        label.get_root().get_surface().restore_system_shortcuts();
       }
       isGrabbed = false;
       label.set_accelerator(lastAccelerator);
@@ -380,18 +348,10 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         return false;
       };
 
-      if (utils.gtk4()) {
-        const controller = Gtk.EventControllerKey.new();
-        controller.connect(
-            'key-pressed', (c, keyval, keycode, state) => handler(keyval, state));
-        row.add_controller(controller);
-      } else {
-        row.connect('key-press-event', (row, event) => {
-          const keyval = event.get_keyval()[1];
-          const state  = event.get_state()[1];
-          return handler(keyval, state);
-        });
-      }
+      const controller = Gtk.EventControllerKey.new();
+      controller.connect(
+          'key-pressed', (c, keyval, keycode, state) => handler(keyval, state));
+      row.add_controller(controller);
     }
 
     // Clicking somewhere else cancels the shortcut selection.
@@ -404,13 +364,9 @@ var ConfigWidgetFactory = class ConfigWidgetFactory {
         return true;
       };
 
-      if (utils.gtk4()) {
-        const controller = Gtk.EventControllerFocus.new();
-        controller.connect('leave', handler);
-        row.add_controller(controller);
-      } else {
-        row.connect('focus-out-event', handler);
-      }
+      const controller = Gtk.EventControllerFocus.new();
+      controller.connect('leave', handler);
+      row.add_controller(controller);
     }
 
     return [frame, label];

@@ -11,12 +11,14 @@
 
 'use strict';
 
-const {GLib, GObject, GdkPixbuf, Gdk} = imports.gi;
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Gdk from 'gi://Gdk';
+import GdkPixbuf from 'gi://GdkPixbuf';
 
-const _ = imports.gettext.domain('flypie').gettext;
+import * as utils from './utils.js';
 
-const Me    = imports.misc.extensionUtils.getCurrentExtension();
-const utils = Me.imports.src.common.utils;
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Each achievement can have one of three states. If it's 'locked', it will not be      //
@@ -24,7 +26,11 @@ const utils = Me.imports.src.common.utils;
 // become 'active' and eventually 'completed'.                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var State = {LOCKED: 0, ACTIVE: 1, COMPLETED: 2};
+export var State = {
+  LOCKED: 0,
+  ACTIVE: 1,
+  COMPLETED: 2
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The constants below are the main balancing tools. These can be tweaked in order to   //
@@ -68,8 +74,7 @@ const BASE_RANGES = [0, 10, 30, 100, 300, 1000];
 //////////////////////////////////////////////////////////////////////////////////////////
 
 // clang-format off
-var Achievements = GObject.registerClass(
-
+export var Achievements = GObject.registerClass(
     {
       Properties: {},
       Signals: {

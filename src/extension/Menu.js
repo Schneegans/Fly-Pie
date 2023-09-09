@@ -11,19 +11,22 @@
 
 'use strict';
 
-const Main                            = imports.ui.main;
-const {Clutter, Gdk, Gtk, GLib, Meta} = imports.gi;
+import GLib from 'gi://GLib';
+import Clutter from 'gi://Clutter';
+import Gtk from 'gi://Gtk';
+import Meta from 'gi://Meta';
+import Mtk from 'gi://Mtk';
 
-const Me               = imports.misc.extensionUtils.getCurrentExtension();
-const utils            = Me.imports.src.common.utils;
-const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
-const InputManipulator = Me.imports.src.common.InputManipulator.InputManipulator;
-const Statistics       = Me.imports.src.common.Statistics.Statistics;
-const Timer            = Me.imports.src.common.Timer.Timer;
-const Background       = Me.imports.src.extension.Background.Background;
-const MenuItem         = Me.imports.src.extension.MenuItem.MenuItem;
-const SelectionWedges  = Me.imports.src.extension.SelectionWedges.SelectionWedges;
-const MenuItemState    = Me.imports.src.extension.MenuItem.MenuItemState;
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+
+import * as utils from '../common/utils.js';
+import {DBusInterface} from '../common/DBusInterface.js';
+import InputManipulator from './InputManipulator.js';
+import Timer from '../common/Timer.js';
+import {Background} from './Background.js';
+import {SelectionWedges} from './SelectionWedges.js';
+import {MenuItem, MenuItemState} from './MenuItem.js';
+import Statistics from '../common/Statistics.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Menu parses the JSON structure given to the ShowMenu method. It creates          //
@@ -32,7 +35,7 @@ const MenuItemState    = Me.imports.src.extension.MenuItem.MenuItemState;
 // individual MenuItems in the hierarchy.                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var Menu = class Menu {
+export default class Menu {
 
   // ------------------------------------------------------------ constructor / destructor
 
@@ -1182,7 +1185,7 @@ var Menu = class Menu {
     maxSize *= 2 * this._settings.get_double('global-scale') * utils.getHDPIScale();
 
     // Clamp to monitor bounds.
-    let pointer    = new Meta.Rectangle({x: x, y: y, width: 1, height: 1});
+    let pointer    = new Mtk.Rectangle({x: x, y: y, width: 1, height: 1});
     const monitor  = global.display.get_monitor_index_for_rect(pointer);
     const geometry = global.display.get_monitor_geometry(monitor);
 

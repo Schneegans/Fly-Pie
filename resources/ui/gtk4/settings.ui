@@ -536,29 +536,7 @@ Can be added to custom menus.</property>
   <!--                                                                                           -->
   <!-- ######################################################################################### -->
 
-  <object class="GtkBox" id="main-notebook">
-    <property name="orientation">vertical</property>
-
-    <!-- Animation Warning Notification Bar -->
-
-    <child>
-      <object class="GtkInfoBar" id="animation-infobar">
-        <property name="valign">center</property>
-        <property name="message_type">warning</property>
-        <property name="revealed">0</property>
-        <child>
-          <object class="GtkLabel">
-            <property name="halign">start</property>
-            <property name="label" translatable="yes">Fly-Pie requires that GNOME Shell&apos;s animations are enabled.</property>
-          </object>
-        </child>
-        <child type="action">
-          <object class="GtkButton" id="enable-animations-button">
-            <property name="label" translatable="yes" comments="Text of the button of the InfoBar which is shown when GNOME Shell&apos;s animations are disabled.">Enable Animations</property>
-          </object>
-        </child>
-      </object>
-    </child>
+  <object class="AdwPreferencesPage" id="main-notebook">
 
     <child>
       <object class="GtkBox">
@@ -4212,7 +4190,7 @@ Use this to quickly select items without showing the menu.</property>
                                         <child>
                                           <object class="GtkLabel">
                                             <property name="halign">start</property>
-                                            <property name="label" translatable="yes">If your pointer is stationary for this many milliseconds, 
+                                            <property name="label" translatable="yes">If your pointer is stationary for this many milliseconds,
 the current item will be selected.</property>
                                             <style>
                                               <class name="dim-label" />

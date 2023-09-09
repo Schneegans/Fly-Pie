@@ -11,26 +11,29 @@
 
 'use strict';
 
-const Cairo                           = imports.cairo;
-const {Gio, GLib, Gdk, GdkPixbuf, St} = imports.gi;
+import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
+import Gdk from 'gi://Gdk';
+import Cairo from 'gi://cairo';
+import GdkPixbuf from 'gi://GdkPixbuf';
+import St from 'gi://St';
 
-const _ = imports.gettext.domain('flypie').gettext;
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import {Source, Notification} from 'resource:///org/gnome/shell/ui/messageTray.js';
 
-const Main                   = imports.ui.main;
-const {Source, Notification} = imports.ui.messageTray;
+import * as utils from '../common/utils.js';
+import Statistics from '../common/Statistics.js';
+import {Achievements} from '../common/Achievements.js';
+import {ItemRegistry} from '../common/ItemRegistry.js';
+import {DBusInterface} from '../common/DBusInterface.js';
+import {Shortcuts} from './Shortcuts.js';
+import TouchButtons from './TouchButtons.js';
+import {MouseHighlight} from './MouseHighlight.js';
+import Menu from './Menu.js';
+import DefaultMenu from './DefaultMenu.js';
+import ClipboardManager from './ClipboardManager.js';
 
-const Me               = imports.misc.extensionUtils.getCurrentExtension();
-const utils            = Me.imports.src.common.utils;
-const Statistics       = Me.imports.src.common.Statistics.Statistics;
-const Achievements     = Me.imports.src.common.Achievements.Achievements;
-const ItemRegistry     = Me.imports.src.common.ItemRegistry.ItemRegistry;
-const DBusInterface    = Me.imports.src.common.DBusInterface.DBusInterface;
-const Shortcuts        = Me.imports.src.extension.Shortcuts.Shortcuts;
-const TouchButtons     = Me.imports.src.extension.TouchButtons.TouchButtons;
-const MouseHighlight   = Me.imports.src.extension.MouseHighlight.MouseHighlight;
-const Menu             = Me.imports.src.extension.Menu.Menu;
-const DefaultMenu      = Me.imports.src.extension.DefaultMenu.DefaultMenu;
-const ClipboardManager = Me.imports.src.extension.ClipboardManager.ClipboardManager;
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //
@@ -39,14 +42,17 @@ const ClipboardManager = Me.imports.src.extension.ClipboardManager.ClipboardMana
 // menu is shown or updated accordingly.                                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var Daemon = class Daemon {
+export default class Daemon {
 
   // ------------------------------------------------------------ constructor / destructor
 
-  constructor() {
+  constructor(metadata) {
+
+    this._metadata = metadata;
 
     // Load all of Fly-Pie's resources.
-    this._resources = Gio.Resource.load(Me.path + '/resources/flypie.gresource');
+    this._resources =
+        Gio.Resource.load(this._metadata.path + '/resources/flypie.gresource');
     Gio.resources_register(this._resources);
 
     // Make the ShowMenu(), PreviewMenu(), ShowCustomMenu(), and the PreviewCustomMenu()
@@ -179,11 +185,8 @@ var Daemon = class Daemon {
     // factor changes.
     const ctx                   = St.ThemeContext.get_for_stage(global.stage);
     this._scaleFactorConnection = ctx.connect('notify::scale-factor', onScaleChange);
-
-    if (utils.shellVersionIsAtLeast(3, 38)) {
-      this._resourceScaleConnection =
-          global.stage.connect('resource-scale-changed', onScaleChange);
-    }
+    this._resourceScaleConnection =
+        global.stage.connect('resource-scale-changed', onScaleChange);
 
     // Whenever settings are changed, we adapt the currently shown menu accordingly.
     this._settingsConnections.push(this._settings.connect('change-event', (o, keys) => {
@@ -291,9 +294,7 @@ var Daemon = class Daemon {
     // Disconnect some handlers.
     global.stage.disconnect(this._resourceScaleConnection);
 
-    if (utils.shellVersionIsAtLeast(3, 38)) {
-      St.ThemeContext.get_for_stage(global.stage).disconnect(this._scaleFactorConnection);
-    }
+    St.ThemeContext.get_for_stage(global.stage).disconnect(this._scaleFactorConnection);
   }
 
   // -------------------------------------------------------------- public D-Bus-Interface
@@ -606,7 +607,7 @@ var Daemon = class Daemon {
         this._settings.set_string('active-stack-child', 'achievements-page');
 
         // Show the settings dialog.
-        Main.extensionManager.openExtensionPrefs(Me.uuid, '');
+        Main.extensionManager.openExtensionPrefs(this._metadata.uuid, '');
       });
 
       source.showNotification(n);

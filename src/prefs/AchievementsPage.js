@@ -11,13 +11,12 @@
 
 'use strict';
 
-const Gtk = imports.gi.Gtk;
+import Gtk from 'gi://Gtk';
 
-const _ = imports.gettext.domain('flypie').gettext;
+import * as utils from '../common/utils.js';
+import * as Achievements from '../common/Achievements.js';
 
-const Me           = imports.misc.extensionUtils.getCurrentExtension();
-const utils        = Me.imports.src.common.utils;
-const Achievements = Me.imports.src.common.Achievements;
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The AchievementsPage class encapsulates code required for the 'Achievements' page of //
@@ -27,7 +26,7 @@ const Achievements = Me.imports.src.common.Achievements;
 // its own file.                                                                        //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-var AchievementsPage = class AchievementsPage {
+export var AchievementsPage = class AchievementsPage {
 
   // ------------------------------------------------------------ constructor / destructor
 
@@ -113,7 +112,7 @@ var AchievementsPage = class AchievementsPage {
     this._builder.get_object('achievements-reset-button').connect('clicked', button => {
       // Create the question dialog.
       const dialog = new Gtk.MessageDialog({
-        transient_for: utils.getRoot(button),
+        transient_for: button.get_root(),
         modal: true,
         buttons: Gtk.ButtonsType.OK_CANCEL,
         message_type: Gtk.MessageType.QUESTION,
@@ -133,11 +132,7 @@ var AchievementsPage = class AchievementsPage {
         dialog.destroy();
       });
 
-      if (utils.gtk4()) {
-        dialog.show();
-      } else {
-        dialog.show_all();
-      }
+      dialog.show();
     });
 
     // Initialize the user interface with the current setting values.
@@ -239,11 +234,7 @@ var AchievementsPage = class AchievementsPage {
     widgets.sort((a, b) => b.progress - a.progress || a.name.localeCompare(b.name));
 
     for (let i = 1; i < widgets.length; i++) {
-      if (utils.gtk4()) {
-        container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
-      } else {
-        container.reorder_child(widgets[i].revealer, i);
-      }
+      container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
     }
   }
 
@@ -255,11 +246,7 @@ var AchievementsPage = class AchievementsPage {
     widgets.sort((a, b) => b.date - a.date || a.name.localeCompare(b.name));
 
     for (let i = 1; i < widgets.length; i++) {
-      if (utils.gtk4()) {
-        container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
-      } else {
-        container.reorder_child(widgets[i].revealer, i);
-      }
+      container.reorder_child_after(widgets[i].revealer, widgets[i - 1].revealer);
     }
   }
 
@@ -283,9 +270,8 @@ var AchievementsPage = class AchievementsPage {
     }
 
     // Add them to the UI.
-    utils.boxAppend(this._builder.get_object('active-achievements-box'), active.revealer);
-    utils.boxAppend(
-        this._builder.get_object('completed-achievements-box'), completed.revealer);
+    this._builder.get_object('active-achievements-box').append(active.revealer);
+    this._builder.get_object('completed-achievements-box').append(completed.revealer);
   }
 
   // This method creates a set of widgets contained in a Gtk.Revealer to represent an
@@ -316,7 +302,7 @@ var AchievementsPage = class AchievementsPage {
     // Add the icon.
     const icon = new Gtk.DrawingArea({margin_end: 8});
     icon.set_size_request(64, 64);
-    utils.setDrawFunc(icon, (w, ctx) => {
+    icon.set_draw_func((w, ctx) => {
       Achievements.Achievements.paintAchievementIcon(ctx, achievement);
       return false;
     });
@@ -403,7 +389,7 @@ var AchievementsPage = class AchievementsPage {
 
     // Finally wrap the thing in a Gtk.Revealer.
     result.revealer = new Gtk.Revealer();
-    utils.setChild(result.revealer, grid);
+    result.revealer.set_child(grid);
 
     return result;
   }

@@ -11,32 +11,40 @@
 
 'use strict';
 
-const {GLib, Gio} = imports.gi;
+import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
 
-const _ = imports.gettext.domain('flypie').gettext;
+import * as utils from './utils.js';
+import {ItemClass} from './ItemClass.js';
+
+import {getCommandAction} from './actions/Command.js';
+import {getShortcutAction} from './actions/Shortcut.js';
+import {getInsertTextAction} from './actions/InsertText.js';
+import {getUriAction} from './actions/Uri.js';
+import {getFileAction} from './actions/File.js';
+import {getDBusSignalAction} from './actions/DBusSignal.js';
+
+import {getCustomMenu} from './menus/CustomMenu.js';
+import {getClipboardMenu} from './menus/Clipboard.js';
+import {getDevicesMenu} from './menus/Devices.js';
+import {getBookmarksMenu} from './menus/Bookmarks.js';
+import {getSystemMenu} from './menus/System.js';
+import {getFavoritesMenu} from './menus/Favorites.js';
+import {getFrequentlyUsedMenu} from './menus/FrequentlyUsed.js';
+import {getRecentFilesMenu} from './menus/RecentFiles.js';
+import {getRunningAppsMenu} from './menus/RunningApps.js';
+
+const _ = await utils.importGettext();
 
 // GMenu is not necessarily installed on all systems. So we include it optionally here. If
 // it is not found, the Main Menu Submenu will not be available.
-let GMenu = undefined;
+let getMainMenu = undefined;
 
 try {
-  GMenu = imports.gi.GMenu;
+  getMainMenu = (await import('./menus/MainMenu.js'))?.getMainMenu;
 } catch (error) {
-  // Nothing to be done, we're in settings-mode.
+  // Nothing to be done, GMenus will not be available.
 }
-
-const Me      = imports.misc.extensionUtils.getCurrentExtension();
-const actions = Me.imports.src.common.actions;
-const menus   = Me.imports.src.common.menus;
-const utils   = Me.imports.src.common.utils;
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// Menus of Fly-Pie are composed of individual menu items. A menu item can either be an //
-// Action - such an item performs something once activated - or a Menu. Menus do not    //
-// perform anything but may contain a list of child items.                              //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-var ItemClass = {MENU: 0, ACTION: 1};
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The getItemTypes() of the ItemRegistry can be used to access all available action    //
@@ -76,7 +84,7 @@ var ItemClass = {MENU: 0, ACTION: 1};
 
 let _itemTypes = null;
 
-var ItemRegistry = class ItemRegistry {
+export class ItemRegistry {
 
   // ---------------------------------------------------------------------- static methods
 
@@ -139,28 +147,28 @@ var ItemRegistry = class ItemRegistry {
       _itemTypes = {
 
         // Action types.
-        Shortcut: actions.Shortcut.action,
-        InsertText: actions.InsertText.action,
-        Command: actions.Command.action,
-        Uri: actions.Uri.action,
-        File: actions.File.action,
-        DBusSignal: actions.DBusSignal.action,
+        Command: getCommandAction(),
+        Shortcut: getShortcutAction(),
+        InsertText: getInsertTextAction(),
+        Uri: getUriAction(),
+        File: getFileAction(),
+        DBusSignal: getDBusSignalAction(),
 
         // Menu types.
-        CustomMenu: menus.CustomMenu.menu,
-        Clipboard: menus.Clipboard.menu,
-        Devices: menus.Devices.menu,
-        Bookmarks: menus.Bookmarks.menu,
-        System: menus.System.menu,
-        Favorites: menus.Favorites.menu,
-        FrequentlyUsed: menus.FrequentlyUsed.menu,
-        RecentFiles: menus.RecentFiles.menu,
-        RunningApps: menus.RunningApps.menu,
+        CustomMenu: getCustomMenu(),
+        Clipboard: getClipboardMenu(),
+        Devices: getDevicesMenu(),
+        Bookmarks: getBookmarksMenu(),
+        System: getSystemMenu(),
+        Favorites: getFavoritesMenu(),
+        FrequentlyUsed: getFrequentlyUsedMenu(),
+        RecentFiles: getRecentFilesMenu(),
+        RunningApps: getRunningAppsMenu(),
       };
 
       // This is only possible if the GMenu typelib is installed on the system.
-      if (GMenu) {
-        _itemTypes.MainMenu = menus.MainMenu.menu;
+      if (getMainMenu) {
+        _itemTypes.MainMenu = getMainMenu();
       }
     }
 

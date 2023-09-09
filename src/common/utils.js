@@ -11,25 +11,14 @@
 
 'use strict';
 
-const Cairo                                               = imports.cairo;
-const {GLib, Gdk, Gtk, Gio, Pango, PangoCairo, GdkPixbuf} = imports.gi;
-
-// Returns the given argument, except for "alpha", "beta", and "rc". In these cases -3,
-// -2, and -1 are returned respectively.
-function toNumericVersion(x) {
-  switch (x) {
-    case 'alpha':
-      return -3;
-    case 'beta':
-      return -2;
-    case 'rc':
-      return -1;
-  }
-  return x;
-}
-
-const Config               = imports.misc.config;
-const [GS_MAJOR, GS_MINOR] = Config.PACKAGE_VERSION.split('.').map(toNumericVersion);
+import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
+import Gdk from 'gi://Gdk';
+import Cairo from 'gi://cairo';
+import GdkPixbuf from 'gi://GdkPixbuf';
+import Gtk from 'gi://Gtk';
+import Pango from 'gi://Pango';
+import PangoCairo from 'gi://PangoCairo';
 
 // We import the St module optionally. When this file is included from the daemon
 // side, it is available and can be used below. If this file is included via the pref.js,
@@ -37,13 +26,10 @@ const [GS_MAJOR, GS_MINOR] = Config.PACKAGE_VERSION.split('.').map(toNumericVers
 let St = undefined;
 
 try {
-  St = imports.gi.St;
+  St = (await import('gi://St'))?.default;
 } catch (error) {
   // Nothing to be done, we're in settings-mode.
 }
-
-const Me = imports.misc.extensionUtils.getCurrentExtension();
-
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This method can be used to write a message to GNOME Shell's log. This is enhances    //
@@ -53,17 +39,55 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 // journalctl -f -o cat | grep -E 'flypie|'                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function debug(message) {
+export function debug(message) {
   const stack = new Error().stack.split('\n');
 
-  // Remove debug() function call from stack.
+  // Removeutils.debug() function call from stack.
   stack.shift();
 
-  // Find the index of the extension directory (e.g. flypie@schneegans.github.com) in
-  // the stack entry. We do not want to print the entire absolute file path.
-  const extensionRoot = stack[0].indexOf(Me.metadata.uuid);
+  // Find the index of the extension directory in the stack entry. We do not want to
+  // print the entire absolute file path.
+  const extensionRoot = stack[0].indexOf('flypie@schneegans.github.com');
 
-  log('[' + stack[0].slice(extensionRoot) + '] ' + message);
+  console.log('[' + stack[0].slice(extensionRoot) + '] ' + message);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// This method can be used to import a module in the GNOME Shell process only. This     //
+// is useful if you want to use a module in extension.js, but not in the preferences    //
+// process. This method returns null if it is called in the preferences process.        //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+export async function importInShellOnly(module) {
+  if (typeof global !== 'undefined') {
+    const mod = await import(module);
+    return mod.default ? mod.default : mod;
+  }
+  return null;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// This method can be used to import gettext. This is done differently in the           //
+// GNOME Shell process and in the preferences process.                                  //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+export async function importGettext() {
+  if (typeof global === 'undefined') {
+    return (await import('resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js'))
+        .gettext;
+  }
+  return (await import('resource:///org/gnome/shell/extensions/extension.js')).gettext;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Returns the path to the extension's directory. This is useful to load resources from //
+// the extension's directory.                                                           //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+export function getPath() {
+  const extensionRoot = import.meta.url.indexOf('flypie@schneegans.github.com');
+  const path          = import.meta.url.slice(7, extensionRoot);
+  return path + 'flypie@schneegans.github.com/';
 }
 
 
@@ -72,10 +96,9 @@ function debug(message) {
 // returns it.                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function createSettings() {
+export function createSettings() {
   const schema = Gio.SettingsSchemaSource.new_from_directory(
-      Me.dir.get_child('schemas').get_path(), Gio.SettingsSchemaSource.get_default(),
-      false);
+      getPath() + 'schemas', Gio.SettingsSchemaSource.get_default(), false);
 
   return new Gio.Settings(
       {settings_schema: schema.lookup('org.gnome.shell.extensions.flypie', true)});
@@ -87,9 +110,9 @@ function createSettings() {
 // documentation is sparse or outdated...                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function logProperties(object) {
+export function logProperties(object) {
   for (const element in object) {
-    debug(`${element} [${typeof (object[element])}]`);
+    utils.debug(`${element} [${typeof (object[element])}]`);
   }
 }
 
@@ -99,7 +122,7 @@ function logProperties(object) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let _sessionType = null;
-function getSessionType() {
+export function getSessionType() {
   if (_sessionType == null) {
     _sessionType = GLib.getenv('XDG_SESSION_TYPE');
   }
@@ -107,42 +130,14 @@ function getSessionType() {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Two methods for checking the current version of GNOME Shell.                         //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// This method returns true if the current GNOME Shell version matches the given
-// arguments.
-function shellVersionIs(major, minor) {
-  return GS_MAJOR == major && GS_MINOR == toNumericVersion(minor);
-}
-
-// This method returns true if the current GNOME Shell version is at least as high as the
-// given arguments. Supports "alpha" and "beta" for the minor version number.
-function shellVersionIsAtLeast(major, minor) {
-  if (GS_MAJOR > major) {
-    return true;
-  }
-
-  if (GS_MAJOR == major) {
-    return GS_MINOR >= toNumericVersion(minor);
-  }
-
-  return false;
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////
 // This method will either return a Gtk.IconTheme or a St.IconTheme, depending on the   //
 // context:                                                                             //
-//   * In the preferences process it will be ...                                        //
-//     ... a GTK3 IconTheme for GNOME < 40                                              //
-//     ... a GTK4 IconTheme for GNOME >= 40                                             //
-//   * In the GNOME Shell process it will be ...                                        //
-//     ... a GTK3 IconTheme for GNOME < 44                                              //
-//     ... a St IconTheme for GNOME >= 44                                               //
+//   * In the preferences process it will be a GTK4 IconTheme                           //
+//   * In the GNOME Shell process it will be a St IconTheme                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let _iconTheme = null;
-function getIconTheme() {
+export function getIconTheme() {
 
   if (_iconTheme == null) {
 
@@ -155,16 +150,12 @@ function getIconTheme() {
       _iconTheme = new Gtk.IconTheme();
       _iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
     } else {
-      if (gtk4()) {
-        _iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-      } else {
-        _iconTheme = Gtk.IconTheme.get_default();
-      }
+      _iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
     }
 
     // Print an error if this fails as well.
     if (_iconTheme == null) {
-      debug('Failed to get a valid icon theme object!');
+      utils.debug('Failed to get a valid icon theme object!');
     }
 
     // Make sure that the icons under resources/img are available as system icons.
@@ -172,93 +163,6 @@ function getIconTheme() {
   }
 
   return _iconTheme;
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// The methods below are helper methods which can be used on either GTK3 or GTK4. They  //
-// all check internally whether we are currently using GTK3 or GTK4 and call the        //
-// respective method.                                                                   //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// This method simply returns true if we are currently using GTK4.
-function gtk4() {
-  return Gtk.get_major_version() == 4;
-}
-
-// Adds the given css class to the given widget.
-function addCSSClass(widget, klass) {
-  if (gtk4()) {
-    widget.add_css_class(klass);
-  } else {
-    widget.get_style_context().add_class(klass);
-  }
-}
-
-// Removes all children from the given widget.
-function clearChildren(container) {
-  if (gtk4()) {
-    while (container.get_first_child() != null) {
-      container.remove(container.get_first_child());
-    }
-  } else {
-    container.foreach(w => container.remove(w));
-  }
-}
-
-// Appends the given child widget to the given Gtk.Box.
-function boxAppend(box, child, expand = false, fill = false) {
-  if (gtk4()) {
-    box.append(child);
-  } else {
-    box.pack_start(child, expand, fill, 0);
-  }
-}
-
-// Appends the given child to the given one-child container. This could be a Gtk.Button
-// for example. Or a Gtk.Revealer.
-function setChild(widget, child) {
-  if (gtk4()) {
-    widget.set_child(child);
-  } else {
-    clearChildren(widget);
-    widget.add(child);
-  }
-}
-
-// Calls size_allocate() with the given allocation on the given widget.
-function sizeAllocate(widget, allocation) {
-  if (gtk4()) {
-    widget.size_allocate(allocation, -1);
-  } else {
-    widget.size_allocate(allocation);
-  }
-}
-
-// Sets the drawing function of the given Gtk.DrawingArea.
-function setDrawFunc(drawingArea, func) {
-  if (gtk4()) {
-    drawingArea.set_draw_func(func);
-  } else {
-    drawingArea.connect('draw', func);
-  }
-}
-
-// Returns the foreground color of the given widget.
-function getColor(widget) {
-  if (gtk4()) {
-    return widget.get_style_context().get_color();
-  }
-
-  return widget.get_style_context().get_color(Gtk.StateFlags.NORMAL);
-}
-
-// Returns the toplevel parent widget.
-function getRoot(widget) {
-  if (gtk4()) {
-    return widget.get_root();
-  }
-
-  return widget.get_toplevel();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -276,7 +180,7 @@ function getRoot(widget) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 let _iconDecor = null;
-function paintIcon(ctx, name, size, opacity, font, textColor) {
+export function paintIcon(ctx, name, size, opacity, font, textColor) {
 
   // In this case, we will not draw anything...
   if (size <= 0) {
@@ -378,7 +282,7 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
       throw 'Unknown error.';
     }
   } catch (error) {
-    debug('Failed to draw base64 image: ' + error);
+    utils.debug('Failed to draw base64 image: ' + error);
     iconName = 'flypie-image-symbolic';
   }
 
@@ -462,7 +366,8 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
     }
 
   } catch (error) {
-    debug('Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');
+    utils.debug(
+        'Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');
   }
 
   // If no icon was found, write it as plain text. We use a hard-coded font size of 12
@@ -514,7 +419,7 @@ function paintIcon(ctx, name, size, opacity, font, textColor) {
 // be used for icon names.                                                              //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function createIcon(name, size, font, textColor) {
+export function createIcon(name, size, font, textColor) {
   const surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, size, size);
   const ctx     = new Cairo.Context(surface);
   paintIcon(ctx, name, size, 1, font, textColor);
@@ -531,7 +436,7 @@ function createIcon(name, size, font, textColor) {
 // a given Cairo.Surface. This is based on code from Gnome-Pie.                         //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function getAverageIconColor(iconSurface, iconSize) {
+export function getAverageIconColor(iconSurface, iconSize) {
 
   // surface.get_data() as well as surface.get_width() are not available somehow. Therefor
   // we have to pass in the icon size and use the pixbuf conversion below.
@@ -566,7 +471,7 @@ function getAverageIconColor(iconSurface, iconSize) {
 // A simple convenience method to convert a string to a Gdk.RGBA                        //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function stringToRGBA(string) {
+export function stringToRGBA(string) {
   const rgba = new Gdk.RGBA();
   rgba.parse(string);
   return rgba;
@@ -578,7 +483,7 @@ function stringToRGBA(string) {
 // and floating point values and both for positive and negative numbers.                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function roundToMultiple(number, base) {
+export function roundToMultiple(number, base) {
   return ((number % base) > base / 2) ? number + base - number % base :
                                         number - number % base;
 }
@@ -599,7 +504,7 @@ function roundToMultiple(number, base) {
 //     200 %                2
 //     250 %                3
 //      ...                ...
-function getHDPIScale() {
+export function getHDPIScale() {
   return St.ThemeContext.get_for_stage(global.stage).scale_factor;
 }
 
@@ -613,11 +518,8 @@ function getHDPIScale() {
 //     200 %                2
 //     250 %                3
 //      ...                ...
-function getHDPIResourceScale() {
-  if (shellVersionIsAtLeast(3, 38)) {
-    return global.stage.get_resource_scale();
-  }
-  return global.stage.get_resource_scale()[1];
+export function getHDPIResourceScale() {
+  return global.stage.get_resource_scale();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -633,7 +535,7 @@ function getHDPIResourceScale() {
 // if the fixed angles are not monotonically increasing.                                //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function computeItemAngles(items, parentAngle) {
+export function computeItemAngles(items, parentAngle) {
 
   const itemAngles = [];
 
