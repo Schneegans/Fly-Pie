@@ -13,6 +13,7 @@
 
 import Meta from 'gi://Meta';
 import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
 
 import InputManipulator from './InputManipulator.js';
 
