@@ -17,31 +17,31 @@ import Gio from 'gi://Gio';
 import * as utils from './utils.js';
 import {ItemClass} from './ItemClass.js';
 
-import {CommandAction} from './actions/Command.js';
-import {ShortcutAction} from './actions/Shortcut.js';
-import {InsertTextAction} from './actions/InsertText.js';
-import {UriAction} from './actions/Uri.js';
-import {FileAction} from './actions/File.js';
-import {DBusSignalAction} from './actions/DBusSignal.js';
+import {getCommandAction} from './actions/Command.js';
+import {getShortcutAction} from './actions/Shortcut.js';
+import {getInsertTextAction} from './actions/InsertText.js';
+import {getUriAction} from './actions/Uri.js';
+import {getFileAction} from './actions/File.js';
+import {getDBusSignalAction} from './actions/DBusSignal.js';
 
-import {CustomMenu} from './menus/CustomMenu.js';
-import {ClipboardMenu} from './menus/Clipboard.js';
-import {DevicesMenu} from './menus/Devices.js';
-import {BookmarksMenu} from './menus/Bookmarks.js';
-import {SystemMenu} from './menus/System.js';
-import {FavoritesMenu} from './menus/Favorites.js';
-import {FrequentlyUsedMenu} from './menus/FrequentlyUsed.js';
-import {RecentFilesMenu} from './menus/RecentFiles.js';
-import {RunningAppsMenu} from './menus/RunningApps.js';
+import {getCustomMenu} from './menus/CustomMenu.js';
+import {getClipboardMenu} from './menus/Clipboard.js';
+import {getDevicesMenu} from './menus/Devices.js';
+import {getBookmarksMenu} from './menus/Bookmarks.js';
+import {getSystemMenu} from './menus/System.js';
+import {getFavoritesMenu} from './menus/Favorites.js';
+import {getFrequentlyUsedMenu} from './menus/FrequentlyUsed.js';
+import {getRecentFilesMenu} from './menus/RecentFiles.js';
+import {getRunningAppsMenu} from './menus/RunningApps.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
 
 // GMenu is not necessarily installed on all systems. So we include it optionally here. If
 // it is not found, the Main Menu Submenu will not be available.
-let MainMenu = undefined;
+let getMainMenu = undefined;
 
 try {
-  MainMenu = (await import('./menus/MainMenu.js'))?.MainMenu;
+  getMainMenu = (await import('./menus/MainMenu.js'))?.getMainMenu;
 } catch (error) {
   // Nothing to be done, GMenus will not be available.
 }
@@ -147,28 +147,28 @@ export class ItemRegistry {
       _itemTypes = {
 
         // Action types.
-        Command: CommandAction,
-        Shortcut: ShortcutAction,
-        InsertText: InsertTextAction,
-        Uri: UriAction,
-        File: FileAction,
-        DBusSignal: DBusSignalAction,
+        Command: getCommandAction(),
+        Shortcut: getShortcutAction(),
+        InsertText: getInsertTextAction(),
+        Uri: getUriAction(),
+        File: getFileAction(),
+        DBusSignal: getDBusSignalAction(),
 
         // Menu types.
-        CustomMenu: CustomMenu,
-        Clipboard: ClipboardMenu,
-        Devices: DevicesMenu,
-        Bookmarks: BookmarksMenu,
-        System: SystemMenu,
-        Favorites: FavoritesMenu,
-        FrequentlyUsed: FrequentlyUsedMenu,
-        RecentFiles: RecentFilesMenu,
-        RunningApps: RunningAppsMenu,
+        CustomMenu: getCustomMenu(),
+        Clipboard: getClipboardMenu(),
+        Devices: getDevicesMenu(),
+        Bookmarks: getBookmarksMenu(),
+        System: getSystemMenu(),
+        Favorites: getFavoritesMenu(),
+        FrequentlyUsed: getFrequentlyUsedMenu(),
+        RecentFiles: getRecentFilesMenu(),
+        RunningApps: getRunningAppsMenu(),
       };
 
       // This is only possible if the GMenu typelib is installed on the system.
-      if (MainMenu) {
-        _itemTypes.MainMenu = MainMenu;
+      if (getMainMenu) {
+        _itemTypes.MainMenu = getMainMenu();
       }
     }
 

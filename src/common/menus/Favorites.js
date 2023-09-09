@@ -29,44 +29,46 @@ const Shell = await utils.importInShellOnly('gi://Shell');
 // See common/ItemRegistry.js for a description of the action's format.                 //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-export var FavoritesMenu = {
+export function getFavoritesMenu() {
+  return {
 
-  // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
-  // onSelect() method which is called when the user selects the item, Menus can have
-  // child Actions or Menus.
-  class: ItemClass.MENU,
+    // There are two fundamental item types in Fly-Pie: Actions and Menus. Actions have an
+    // onSelect() method which is called when the user selects the item, Menus can have
+    // child Actions or Menus.
+    class: ItemClass.MENU,
 
-  // This will be shown in the add-new-item-popover of the settings dialog.
-  name: _('Favorites'),
+    // This will be shown in the add-new-item-popover of the settings dialog.
+    name: _('Favorites'),
 
-  // This is also used in the add-new-item-popover.
-  icon: 'flypie-menu-favorites-symbolic-#da3',
+    // This is also used in the add-new-item-popover.
+    icon: 'flypie-menu-favorites-symbolic-#da3',
 
-  // Translators: Please keep this short.
-  // This is the (short) description shown in the add-new-item-popover.
-  subtitle: _('Shows pinned applications.'),
+    // Translators: Please keep this short.
+    // This is the (short) description shown in the add-new-item-popover.
+    subtitle: _('Shows pinned applications.'),
 
-  // This is the (long) description shown when an item of this type is selected.
-  description: _(
-      'The <b>Favorites</b> menu shows the applications you have pinned to GNOME Shell\'s Dash.'),
+    // This is the (long) description shown when an item of this type is selected.
+    description: _(
+        'The <b>Favorites</b> menu shows the applications you have pinned to GNOME Shell\'s Dash.'),
 
-  // This will be called whenever a menu is opened containing an item of this kind.
-  createItem: () => {
-    const appNames = global.settings.get_strv('favorite-apps');
-    const result   = {children: []};
+    // This will be called whenever a menu is opened containing an item of this kind.
+    createItem: () => {
+      const appNames = global.settings.get_strv('favorite-apps');
+      const result   = {children: []};
 
-    appNames.forEach(appName => {
-      const app = Shell.AppSystem.get_default().lookup_app(appName);
+      appNames.forEach(appName => {
+        const app = Shell.AppSystem.get_default().lookup_app(appName);
 
-      if (app) {
-        result.children.push({
-          name: app.get_name(),
-          icon: app.get_app_info().get_icon().to_string(),
-          onSelect: () => app.open_new_window(-1)
-        });
-      }
-    });
+        if (app) {
+          result.children.push({
+            name: app.get_name(),
+            icon: app.get_app_info().get_icon().to_string(),
+            onSelect: () => app.open_new_window(-1)
+          });
+        }
+      });
 
-    return result;
-  }
-};
+      return result;
+    }
+  };
+}
