@@ -20,17 +20,13 @@ import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-// We have to import the ClipboardManager module optionally. This is because this file is
-// included from both sides: From prefs.js and from extension.js. When included from
-// prefs.js, the module not available. This is not a problem, as the preferences will not
-// call the createItem() methods below; they are merely interested in the menu's name,
-// icon and description.
-let clipboardManager = undefined;
-
-if (typeof global !== 'undefined') {
-  const ClipboardManager = (await import('../../extension/ClipboardManager.js'))?.default;
-  clipboardManager       = ClipboardManager.getInstance();
-}
+// We import the ClipboardManager optionally. When this file is included from the daemon
+// side, it is available and can be used in the activation code of the action defined
+// below. If this file is included via the pref.js, they will not be available. But this
+// is not a problem, as the preferences will not call the createItem() methods below; they
+// are merely interested in the action's name, icon and description.
+const ClipboardManager =
+    await utils.importInShellOnly('../extension/ClipboardManager.js');
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Returns a menu item with entries for the last things copied to the clipboard.        //
@@ -123,7 +119,8 @@ export var ClipboardMenu = {
     const result = {children: []};
 
     // Get a list of recently copied things from the ClipboardManager.
-    const items = clipboardManager.getItems();
+    const clipboardManager = ClipboardManager.getInstance();
+    const items            = clipboardManager.getItems();
 
     // The ClipboardManager stores the copied things in several hard-coded mime type
     // formats (see the documentation of that class for more details). Based on the mime

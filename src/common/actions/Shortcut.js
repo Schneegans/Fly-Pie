@@ -11,6 +11,7 @@
 
 'use strict';
 
+import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 
@@ -21,12 +22,8 @@ const _ = imports.gettext.domain('flypie').gettext;
 // prefs.js, the InputManipulator is not available. This is not a problem, as the
 // preferences will not call the createItem() methods below; they are merely interested in
 // the menu's name, icon and description.
-let inputManipulator = undefined;
-
-if (typeof global !== 'undefined') {
-  const InputManipulator = (await import('../../extension/InputManipulator.js'))?.default;
-  inputManipulator       = new InputManipulator();
-}
+const InputManipulator =
+    await utils.importInShellOnly('../extension/InputManipulator.js');
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The shortcut action simulates the pressing of a hotkey when activated.               //
@@ -93,6 +90,8 @@ export var ShortcutAction = {
     } else if (data.shortcut != undefined) {
       shortcut = data.shortcut;
     }
+
+    const inputManipulator = new InputManipulator();
 
     // The onSelect() function will be called when the user selects this action.
     return {onSelect: () => inputManipulator.activateAccelerator(shortcut)};

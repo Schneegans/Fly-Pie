@@ -11,6 +11,7 @@
 
 'use strict';
 
+import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
@@ -20,14 +21,10 @@ const _ = imports.gettext.domain('flypie').gettext;
 // from prefs.js, the Shell and SystemActions modules are not available. This is not a
 // problem, as the preferences will not call the createItem() methods below; they are
 // merely interested in the menu's name, icon and description.
-let Shell         = undefined;
-let SystemActions = undefined;
-
-if (typeof global !== 'undefined') {
-  Shell = (await import('gi://Shell'))?.default;
-  SystemActions =
-      (await import('resource:///org/gnome/shell/misc/systemActions.js'))?.getDefault();
-}
+const Shell = await utils.importInShellOnly('gi://Shell');
+const SystemActions =
+    (await utils.importInShellOnly('resource:///org/gnome/shell/misc/systemActions.js'))
+        ?.getDefault();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The System menu shows an items for screen-lock, shutdown, settings, etc. The code    //

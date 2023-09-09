@@ -53,6 +53,33 @@ export function debug(message) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+// This method can be used to import a module in the GNOME Shell process only. This     //
+// is useful if you want to use a module in extension.js, but not in the preferences    //
+// process. This method returns null if it is called in the preferences process.        //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+export async function importInShellOnly(module) {
+  if (typeof global !== 'undefined') {
+    const mod = await import(module);
+    return mod.default ? mod.default : mod;
+  }
+  return null;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// This method can be used to import gettext. This is done differently in the           //
+// GNOME Shell process and in the preferences process.                                  //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+export async function importGettext() {
+  if (typeof global === 'undefined') {
+    return (await import('resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js'))
+        .gettext;
+  }
+  return (await import('resource:///org/gnome/shell/extensions/extension.js')).gettext;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 // Returns the path to the extension's directory. This is useful to load resources from //
 // the extension's directory.                                                           //
 //////////////////////////////////////////////////////////////////////////////////////////

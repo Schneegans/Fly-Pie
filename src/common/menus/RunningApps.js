@@ -13,6 +13,7 @@
 
 import Gtk from 'gi://Gtk';
 
+import * as utils from '../utils.js';
 import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 import {ItemClass} from '../ItemClass.js';
 
@@ -23,11 +24,7 @@ const _ = imports.gettext.domain('flypie').gettext;
 // module is not available. This is not a problem, as the preferences will not call the
 // createItem() methods below; they are merely interested in the menu's name, icon and
 // description.
-let Shell = undefined;
-
-if (typeof global !== 'undefined') {
-  Shell = (await import('gi://Shell'))?.default;
-}
+const Shell = await utils.importInShellOnly('gi://Shell');
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Returns an item with entries for all running applications. Clicking these will bring //

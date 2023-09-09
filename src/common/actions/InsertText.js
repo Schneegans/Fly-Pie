@@ -11,24 +11,19 @@
 
 'use strict';
 
+import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 
 const _ = imports.gettext.domain('flypie').gettext;
 
-// We import the ClipboardManager and InputManipulator optionally. When this file is
-// included from the daemon side, they are available and can be used in the activation
-// code of the action defined below. If this file is included via the pref.js, they will
-// not be available. But this is not a problem, as the preferences will not call the
-// createItem() methods below; they are merely interested in the action's name, icon and
-// description.
-let clipboardManager = undefined;
-
-if (typeof global !== 'undefined') {
-  const ClipboardManager = (await import('../../extension/ClipboardManager.js'))?.default;
-  clipboardManager       = ClipboardManager.getInstance();
-}
-
+// We import the ClipboardManager optionally. When this file is included from the daemon
+// side, it is available and can be used in the activation code of the action defined
+// below. If this file is included via the pref.js, they will not be available. But this
+// is not a problem, as the preferences will not call the createItem() methods below; they
+// are merely interested in the action's name, icon and description.
+const ClipboardManager =
+    await utils.importInShellOnly('../extension/ClipboardManager.js');
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The insert-text action pastes some text to the current cursor position.              //
@@ -95,6 +90,8 @@ export var InsertTextAction = {
     } else if (data.text != undefined) {
       text = data.text;
     }
+
+    const clipboardManager = ClipboardManager.getInstance();
 
     // The onSelect() function will be called when the user selects this action.
     return {
