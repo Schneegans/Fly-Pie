@@ -11,7 +11,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## [Fly-Pie 23](https://github.com/schneegans/fly-pie/releases/tag/v23)
 
-**Release Date:** TBD
+**Release Date:** 2023-09-09
 
 #### Major Changes
 
