@@ -18,7 +18,7 @@ import * as utils from '../utils.js';
 import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 import {ItemClass} from '../ItemClass.js';
 
-const _ = imports.gettext.domain('flypie').gettext;
+const _ = await utils.importGettext();
 
 // We import the ClipboardManager optionally. When this file is included from the daemon
 // side, it is available and can be used in the activation code of the action defined

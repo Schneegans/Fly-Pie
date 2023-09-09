@@ -11,9 +11,10 @@
 
 'use strict';
 
+import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 
-const _ = imports.gettext.domain('flypie').gettext;
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // A menu cannot be activated. It should always contain some children.                  //

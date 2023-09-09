@@ -17,13 +17,12 @@ import Gdk from 'gi://Gdk';
 import Gtk from 'gi://Gtk';
 
 import * as utils from '../common/utils.js';
-
 import {DBusInterface} from '../common/DBusInterface.js';
 import Statistics from '../common/Statistics.js';
 import Preset from './Preset.js';
 import ExampleMenu from './ExampleMenu.js';
 
-const _ = imports.gettext.domain('flypie').gettext;
+const _ = await utils.importGettext();
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 

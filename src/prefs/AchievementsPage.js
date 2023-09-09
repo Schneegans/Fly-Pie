@@ -13,9 +13,10 @@
 
 import Gtk from 'gi://Gtk';
 
+import * as utils from '../common/utils.js';
 import * as Achievements from '../common/Achievements.js';
 
-const _ = imports.gettext.domain('flypie').gettext;
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The AchievementsPage class encapsulates code required for the 'Achievements' page of //

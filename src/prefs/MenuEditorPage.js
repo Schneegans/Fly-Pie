@@ -18,7 +18,6 @@ import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
 
 import * as utils from '../common/utils.js';
-
 import {DBusInterface} from '../common/DBusInterface.js';
 import Statistics from '../common/Statistics.js';
 import {ItemRegistry} from '../common/ItemRegistry.js';
@@ -27,7 +26,7 @@ import ConfigWidgetFactory from '../common/ConfigWidgetFactory.js';
 
 const DBusWrapper = Gio.DBusProxy.makeProxyWrapper(DBusInterface.description);
 
-const _ = imports.gettext.domain('flypie').gettext;
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The MenuEditorPage class encapsulates code required for the 'Menu Editor' page of    //

@@ -18,7 +18,6 @@ import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
 
 import * as utils from './src/common/utils.js';
-
 import Statistics from './src/common/Statistics.js';
 import TutorialPage from './src/prefs/TutorialPage.js';
 import SettingsPage from './src/prefs/SettingsPage.js';
@@ -29,9 +28,7 @@ import * as IconSelectDialog from './src/prefs/IconSelectDialog.js';
 import * as CopyValueButton from './src/prefs/CopyValueButton.js';
 import * as ImageChooserButton from './src/prefs/ImageChooserButton.js';
 
-import {ExtensionPreferences} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
-
-const _ = imports.gettext.domain('flypie').gettext;
+import {ExtensionPreferences, gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 export default class FlyPiePreferences extends ExtensionPreferences {
 

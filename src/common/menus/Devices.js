@@ -16,7 +16,7 @@ import Gio from 'gi://Gio';
 import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 
-const _ = imports.gettext.domain('flypie').gettext;
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The devices menu contains an item for each mounted volume as reported by the         //

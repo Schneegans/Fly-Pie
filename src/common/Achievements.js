@@ -16,7 +16,9 @@ import GObject from 'gi://GObject';
 import Gdk from 'gi://Gdk';
 import GdkPixbuf from 'gi://GdkPixbuf';
 
-const _ = imports.gettext.domain('flypie').gettext;
+import * as utils from './utils.js';
+
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Each achievement can have one of three states. If it's 'locked', it will not be      //

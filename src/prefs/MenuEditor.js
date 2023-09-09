@@ -17,12 +17,11 @@ import Gdk from 'gi://Gdk';
 import Pango from 'gi://Pango';
 
 import * as utils from '../common/utils.js';
-
 import {ItemRegistry} from '../common/ItemRegistry.js';
 import {ItemClass} from '../common/ItemClass.js';
 import {AnimatedValue, AnimationDirection} from './AnimatedValue.js';
 
-const _ = imports.gettext.domain('flypie').gettext;
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The menu editor is the canvas where the menu overview or the editable menu is drawn  //

@@ -11,7 +11,9 @@
 
 'use strict';
 
-const _ = imports.gettext.domain('flypie').gettext;
+import * as utils from '../common/utils.js';
+
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This creates a default menu configuration which is used when the user has no menus   //

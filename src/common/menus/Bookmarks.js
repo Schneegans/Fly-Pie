@@ -17,7 +17,7 @@ import GLib from 'gi://GLib';
 import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 
-const _ = imports.gettext.domain('flypie').gettext;
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The bookmarks menu contains one entry for the default user directories.              //

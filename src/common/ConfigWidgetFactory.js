@@ -15,7 +15,9 @@ import Gio from 'gi://Gio';
 import Gdk from 'gi://Gdk';
 import Gtk from 'gi://Gtk';
 
-const _ = imports.gettext.domain('flypie').gettext;
+import * as utils from './utils.js';
+
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class contains some static utility functions which can be used to create        //

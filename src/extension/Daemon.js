@@ -18,8 +18,6 @@ import Cairo from 'gi://cairo';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import St from 'gi://St';
 
-const _ = imports.gettext.domain('flypie').gettext;
-
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import {Source, Notification} from 'resource:///org/gnome/shell/ui/messageTray.js';
 
@@ -34,6 +32,8 @@ import {MouseHighlight} from './MouseHighlight.js';
 import Menu from './Menu.js';
 import DefaultMenu from './DefaultMenu.js';
 import ClipboardManager from './ClipboardManager.js';
+
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The daemon listens on the D-Bus for show-menu requests and registers a global        //

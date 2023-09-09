@@ -19,9 +19,10 @@ import St from 'gi://St';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-const _ = imports.gettext.domain('flypie').gettext;
-
 import * as utils from '../common/utils.js';
+
+const _ = await utils.importGettext();
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This Clutter.Actor represents the background behind the menu. It can be shown in     //

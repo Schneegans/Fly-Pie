@@ -34,7 +34,7 @@ import {getFrequentlyUsedMenu} from './menus/FrequentlyUsed.js';
 import {getRecentFilesMenu} from './menus/RecentFiles.js';
 import {getRunningAppsMenu} from './menus/RunningApps.js';
 
-const _ = imports.gettext.domain('flypie').gettext;
+const _ = await utils.importGettext();
 
 // GMenu is not necessarily installed on all systems. So we include it optionally here. If
 // it is not found, the Main Menu Submenu will not be available.

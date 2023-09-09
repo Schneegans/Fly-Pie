@@ -14,7 +14,9 @@
 import GObject from 'gi://GObject';
 import Gtk from 'gi://Gtk';
 
-const _ = imports.gettext.domain('flypie').gettext;
+import * as utils from '../common/utils.js';
+
+const _ = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Since the FileChooserButton from GTK3 is gone, we have to provide a similar          //
