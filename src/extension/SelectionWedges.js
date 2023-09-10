@@ -13,7 +13,6 @@
 
 import GLib from 'gi://GLib';
 import Clutter from 'gi://Clutter';
-import Gtk from 'gi://Gtk';
 import GObject from 'gi://GObject';
 import Cairo from 'gi://cairo';
 
@@ -557,9 +556,12 @@ class SelectionWedges extends Clutter.Actor {
              (Clutter.ModifierType.BUTTON1_MASK | Clutter.ModifierType.BUTTON2_MASK |
               Clutter.ModifierType.BUTTON3_MASK)) > 0;
 
-        const shortcutPressed = (mods &
-                                 (Gtk.accelerator_get_default_mod_mask() |
-                                  Clutter.ModifierType.MOD4_MASK)) > 0;
+        const shortcutPressed =
+            (mods &
+             (Clutter.ModifierType.CONTROL_MASK | Clutter.ModifierType.SHIFT_MASK |
+              Clutter.ModifierType.MOD1_MASK | Clutter.ModifierType.SUPER_MASK |
+              Clutter.ModifierType.HYPER_MASK | Clutter.ModifierType.META_MASK |
+              Clutter.ModifierType.MOD4_MASK)) > 0;
 
         return hoverMode || buttonPressed || shortcutPressed;
       }

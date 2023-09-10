@@ -13,7 +13,6 @@
 
 import GLib from 'gi://GLib';
 import Clutter from 'gi://Clutter';
-import Gtk from 'gi://Gtk';
 import Meta from 'gi://Meta';
 import Mtk from 'gi://Mtk';
 
@@ -239,8 +238,10 @@ export default class Menu {
         // Only emit selection events if no modifier buttons are still held down. Without,
         // the main issue is that releasing the Super key after the Fly-Pie menus has been
         // closed would lead to toggling the overview.
-        const turboModifiers =
-            Gtk.accelerator_get_default_mod_mask() | Clutter.ModifierType.MOD4_MASK;
+        const turboModifiers = Clutter.ModifierType.CONTROL_MASK |
+            Clutter.ModifierType.SHIFT_MASK | Clutter.ModifierType.MOD1_MASK |
+            Clutter.ModifierType.SUPER_MASK | Clutter.ModifierType.HYPER_MASK |
+            Clutter.ModifierType.META_MASK | Clutter.ModifierType.MOD4_MASK;
 
         // Also, only emit a selection if we are either dragging a child around or if the
         // pointer did not move significantly between click start and click end.
