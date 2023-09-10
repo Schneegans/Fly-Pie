@@ -308,10 +308,7 @@ export function paintIcon(ctx, name, size, opacity, font, textColor) {
     const gicon = Gio.Icon.new_for_string(iconName);
     let pixbuf  = null;
 
-    // If we are dealing with a Gtk.IconTheme from GTK4, this method will be available. If
-    // it's a IconTheme from Gtk or St, this method will not be available and loading of
-    // the icon will be much easier.
-    if (theme.has_gicon) {
+    if (theme instanceof Gtk.IconTheme) {
 
       if (theme.has_gicon(gicon)) {
 
@@ -336,11 +333,7 @@ export function paintIcon(ctx, name, size, opacity, font, textColor) {
       }
 
     } else {
-
-      // To get a pixbuf from an icon is quite simple on GTK3 / St.
-      const flags = theme instanceof Gtk.IconTheme ? Gtk.IconLookupFlags.FORCE_SIZE :
-                                                     St.IconLookupFlags.FORCE_SIZE;
-      const info  = theme.lookup_by_gicon(gicon, size, flags);
+      const info = theme.lookup_by_gicon(gicon, size, St.IconLookupFlags.FORCE_SIZE);
 
       if (info != null) {
         pixbuf = info.load_icon();
