@@ -40,9 +40,6 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     // Create the Gio.Settings object.
     this._settings = utils.createSettings();
 
-    // This we need to check whether ui animations are enabled.
-    this._shellSettings = Gio.Settings.new('org.gnome.desktop.interface');
-
     // Load all of Fly-Pie's resources.
     this._resources = Gio.Resource.load(this.path + '/resources/flypie.gresource');
     Gio.resources_register(this._resources);
