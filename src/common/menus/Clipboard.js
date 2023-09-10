@@ -11,12 +11,12 @@
 
 'use strict';
 
-import Gtk from 'gi://Gtk';
 import GLib from 'gi://GLib';
 
 import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
 
+const Gtk                 = await utils.importInPrefsOnly('gi://Gtk');
 const ConfigWidgetFactory = await utils.importInPrefsOnly('./ConfigWidgetFactory.js');
 const _                   = await utils.importGettext();
 
