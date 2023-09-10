@@ -15,10 +15,10 @@ import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk';
 
 import * as utils from '../utils.js';
-import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 import {ItemClass} from '../ItemClass.js';
 
-const _ = await utils.importGettext();
+const ConfigWidgetFactory = await utils.importInPrefsOnly('./ConfigWidgetFactory.js');
+const _                   = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // Returns an item with entries for each recently used file, as reported by             //

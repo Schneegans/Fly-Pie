@@ -15,10 +15,10 @@ import Gtk from 'gi://Gtk';
 import GLib from 'gi://GLib';
 
 import * as utils from '../utils.js';
-import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 import {ItemClass} from '../ItemClass.js';
 
-const _ = await utils.importGettext();
+const ConfigWidgetFactory = await utils.importInPrefsOnly('./ConfigWidgetFactory.js');
+const _                   = await utils.importGettext();
 
 // We import the ClipboardManager optionally. When this file is included from the daemon
 // side, it is available and can be used in the activation code of the action defined

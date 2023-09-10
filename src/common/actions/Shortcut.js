@@ -13,9 +13,9 @@
 
 import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
-import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 
-const _ = await utils.importGettext();
+const ConfigWidgetFactory = await utils.importInPrefsOnly('./ConfigWidgetFactory.js');
+const _                   = await utils.importGettext();
 
 // We have to import the InputManipulator optionally. This is because this file is
 // included from both sides: From prefs.js and from extension.js. When included from
