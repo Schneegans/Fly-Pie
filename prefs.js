@@ -38,11 +38,11 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     window.set_default_size(650, 750);
 
     // Create the Gio.Settings object.
-    this._settings = utils.createSettings();
+    const settings = utils.createSettings();
 
     // Load all of Fly-Pie's resources.
-    this._resources = Gio.Resource.load(this.path + '/resources/flypie.gresource');
-    Gio.resources_register(this._resources);
+    const resources = Gio.Resource.load(this.path + '/resources/flypie.gresource');
+    Gio.resources_register(resources);
 
     // Make sure custom icons are found.
     Gtk.IconTheme.get_for_display(Gdk.Display.get_default()).add_resource_path('/img');
@@ -55,9 +55,9 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     CopyValueButton.registerWidget();
 
     // Load the user interface file.
-    this._builder = new Gtk.Builder();
-    this._builder.add_from_resource(`/ui/common/menus.ui`);
-    this._builder.add_from_resource(`/ui/gtk4/settings.ui`);
+    const builder = new Gtk.Builder();
+    builder.add_from_resource(`/ui/common/menus.ui`);
+    builder.add_from_resource(`/ui/gtk4/settings.ui`);
 
     // Load the CSS file for the settings dialog.
     const styleProvider = Gtk.CssProvider.new();
@@ -70,32 +70,32 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     // into separate classes.
 
     // Initialize the Tutorial page.
-    this._tutorialPage = new TutorialPage(this._builder, this._settings);
+    const tutorialPage = new TutorialPage(builder, settings);
 
     // Initialize the Settings page.
-    this._settingsPage = new SettingsPage(this._builder, this._settings, this.path);
+    const settingsPage = new SettingsPage(builder, settings, this.path);
 
     // Initialize the Menu Editor page.
-    this._menuEditorPage = new MenuEditorPage(this._builder, this._settings);
+    const menuEditorPage = new MenuEditorPage(builder, settings);
 
     // Initialize the Achievements page.
-    this._achievementsPage = new AchievementsPage(this._builder, this._settings);
+    const achievementsPage = new AchievementsPage(builder, settings);
 
     // Hide the in-app notification when its close button is pressed.
-    this._builder.get_object('notification-close-button').connect('clicked', () => {
-      this._builder.get_object('notification-revealer').reveal_child = false;
+    builder.get_object('notification-close-button').connect('clicked', () => {
+      builder.get_object('notification-revealer').reveal_child = false;
     });
 
     // This is our top-level widget which we will return later.
-    this._widget = this._builder.get_object('main-notebook');
+    const mainWidget = builder.get_object('main-notebook');
 
     // Because it looks cool, we add the stack switcher and the menu button to the
     // window's title bar. We also make the bottom corners rounded.
-    this._widget.connect('realize', widget => {
+    mainWidget.connect('realize', widget => {
       const window = widget.get_root();
 
-      const stackSwitcher = this._builder.get_object('main-stack-switcher');
-      const menuButton    = this._builder.get_object('menu-button');
+      const stackSwitcher = builder.get_object('main-stack-switcher');
+      const menuButton    = builder.get_object('menu-button');
 
       stackSwitcher.parent.remove(menuButton);
       stackSwitcher.parent.remove(stackSwitcher);
@@ -242,35 +242,31 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     // the settings dialog is shown for the first time. Then, when the user modified
     // something on another page, this will be shown when the settings dialog is shown
     // again.
-    const stack              = this._builder.get_object('main-stack');
-    stack.visible_child_name = this._settings.get_string('active-stack-child');
+    const stack              = builder.get_object('main-stack');
+    stack.visible_child_name = settings.get_string('active-stack-child');
     stack.connect('notify::visible-child-name', (stack) => {
-      this._settings.set_string('active-stack-child', stack.visible_child_name);
+      settings.set_string('active-stack-child', stack.visible_child_name);
     });
 
     // As we do not have something like a destructor, we just listen for the destroy
     // signal of our main widget.
-    this._widget.connect('destroy', () => {
-      if (this._showAnimationInfoTimeout > 0) {
-        GLib.source_remove(this._showAnimationInfoTimeout);
-      }
-
+    mainWidget.connect('destroy', () => {
       // Delete the static settings object of the statistics.
       Statistics.destroyInstance();
 
       // Disconnect some settings handlers of the individual pages.
-      this._tutorialPage.destroy();
-      this._settingsPage.destroy();
-      this._achievementsPage.destroy();
+      tutorialPage.destroy();
+      settingsPage.destroy();
+      achievementsPage.destroy();
 
       // Unregister our resources.
-      Gio.resources_unregister(this._resources);
+      Gio.resources_unregister(resources);
     });
 
     // Record this construction for the statistics.
     Statistics.getInstance().addSettingsOpened();
 
-    window.add(this._widget);
+    window.add(mainWidget);
   }
 
   // ----------------------------------------------------------------------- private stuff
