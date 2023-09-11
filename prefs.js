@@ -89,7 +89,8 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     const mainWidget = builder.get_object('main-notebook');
 
     // Because it looks cool, we add the stack switcher and the menu button to the
-    // window's title bar. We also make the bottom corners rounded.
+    // window's title bar. We should refactor this to use libadwaita widgets in the
+    // future.
     mainWidget.connect('realize', widget => {
       const window = widget.get_root();
 
