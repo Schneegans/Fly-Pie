@@ -173,8 +173,10 @@ class SelectionWedges extends Clutter.Actor {
           const gradient =
               new Cairo.LinearGradient(this._settings.wedgeInnerRadius, 0, width, 0);
           const color = this._settings.wedgeSeparatorColor;
-          gradient.addColorStopRGBA(0, color.red, color.green, color.blue, color.alpha);
-          gradient.addColorStopRGBA(1, color.red, color.green, color.blue, 0);
+          gradient.addColorStopRGBA(
+              0, color.red / 255, color.green / 255, color.blue / 255, color.alpha / 255);
+          gradient.addColorStopRGBA(
+              1, color.red / 255, color.green / 255, color.blue / 255, 0);
 
           ctx.setLineWidth(this._settings.wedgeSeparatorWidth);
           ctx.setLineCap(Cairo.LineCap.ROUND);
@@ -207,9 +209,9 @@ class SelectionWedges extends Clutter.Actor {
     this._settings = {
       wedgeWidth:              settings.get_double('wedge-width')          * globalScale,
       wedgeInnerRadius:        settings.get_double('wedge-inner-radius')   * globalScale,
-      wedgeColor:              utils.stringToRGBA(settings.get_string('wedge-color')),
-      wedgeColorHover:         utils.stringToRGBA(settings.get_string('wedge-color-hover')),
-      wedgeSeparatorColor:     utils.stringToRGBA(settings.get_string('wedge-separator-color')),
+      wedgeColor:              Clutter.Color.from_string(settings.get_string('wedge-color'))[1],
+      wedgeColorHover:         Clutter.Color.from_string(settings.get_string('wedge-color-hover'))[1],
+      wedgeSeparatorColor:     Clutter.Color.from_string(settings.get_string('wedge-separator-color'))[1],
       wedgeSeparatorWidth:     settings.get_double('wedge-separator-width') * globalScale,
       gestureSelectionTimeout: settings.get_double('gesture-selection-timeout'),
       gestureJitterThreshold:  settings.get_double('gesture-jitter-threshold')  * globalScale,
@@ -239,15 +241,15 @@ class SelectionWedges extends Clutter.Actor {
         });
 
         // This could be shortened if we could set vec4's as uniforms...
-        this._setFloatUniform('r', this._settings.wedgeColor.red);
-        this._setFloatUniform('g', this._settings.wedgeColor.green);
-        this._setFloatUniform('b', this._settings.wedgeColor.blue);
-        this._setFloatUniform('a', this._settings.wedgeColor.alpha);
+        this._setFloatUniform('r', this._settings.wedgeColor.red / 255);
+        this._setFloatUniform('g', this._settings.wedgeColor.green / 255);
+        this._setFloatUniform('b', this._settings.wedgeColor.blue / 255);
+        this._setFloatUniform('a', this._settings.wedgeColor.alpha / 255);
 
-        this._setFloatUniform('rHover', this._settings.wedgeColorHover.red);
-        this._setFloatUniform('gHover', this._settings.wedgeColorHover.green);
-        this._setFloatUniform('bHover', this._settings.wedgeColorHover.blue);
-        this._setFloatUniform('aHover', this._settings.wedgeColorHover.alpha);
+        this._setFloatUniform('rHover', this._settings.wedgeColorHover.red / 255);
+        this._setFloatUniform('gHover', this._settings.wedgeColorHover.green / 255);
+        this._setFloatUniform('bHover', this._settings.wedgeColorHover.blue / 255);
+        this._setFloatUniform('aHover', this._settings.wedgeColorHover.alpha / 255);
 
         this._setFloatUniform(
             'innerRadius', this._settings.wedgeInnerRadius / outerRadius);
