@@ -462,16 +462,6 @@ export function getAverageIconColor(iconSurface, iconSize) {
   return [rTotal / total * 255, gTotal / total * 255, bTotal / total * 255];
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////
-// A simple convenience method to convert a string to a Gdk.RGBA                        //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-export function stringToRGBA(string) {
-  const rgba = new Gdk.RGBA();
-  rgba.parse(string);
-  return rgba;
-}
-
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This rounds the given number to the nearest multiple of base. This works for integer //
