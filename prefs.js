@@ -14,7 +14,6 @@
 import Adw from 'gi://Adw';
 import Gtk from 'gi://Gtk';
 import Gdk from 'gi://Gdk';
-import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
 
 import * as utils from './src/common/utils.js';
