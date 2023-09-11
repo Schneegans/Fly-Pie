@@ -12,7 +12,8 @@
 'use strict';
 
 import Clutter from 'gi://Clutter';
-import Gdk from 'gi://Gdk';
+
+import {NameToKeysym} from './keysyms.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // An instance of this class can be used to create faked input events. You can use it   //
@@ -149,9 +150,9 @@ export default class InputManipulator {
     const key = accelerator.replace(/<[^>]+>/g, '');
 
     // Convert the remaining string to a keyval.
-    const keyval = Gdk.keyval_from_name(key);
+    const keyval = NameToKeysym[key];
 
-    if (keyval === Gdk.KEY_VoidSymbol) {
+    if (keyval === undefined) {
       throw new Error(`Could not parse accelerator: ${accelerator}`);
     }
 
