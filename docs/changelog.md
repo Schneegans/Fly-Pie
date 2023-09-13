@@ -17,7 +17,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 - According to new extension review policies, it is not allowed to use GTK in GNOME 45 extensions anymore. This limits some functionalities of Fly-Pie. These features were affected:
   - The "Recent Files" submenu cannot work anymore and has been removed.
-  - The simulation of hotkeys cannot use `Gtk.accelerator_parse()` anymore. The code has been refactored to use `Gdk.keyval_from_name()` instead. Please report any issues you encounter while simulating hotkeys!
+  - The simulation of hotkeys cannot use `Gtk.accelerator_parse()` anymore. The code has been refactored to use a custom parsing code instead. Please report any issues you encounter while simulating hotkeys!
 
 ## [Fly-Pie 23](https://github.com/schneegans/fly-pie/releases/tag/v23)
 
