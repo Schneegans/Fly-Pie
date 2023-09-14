@@ -13,7 +13,6 @@
 
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
-import Gdk from 'gi://Gdk';
 import Cairo from 'gi://cairo';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import St from 'gi://St';
@@ -232,7 +231,7 @@ export default class Daemon {
       const surface = new Cairo.ImageSurface(Cairo.Format.ARGB32, 64, 64);
       const ctx     = new Cairo.Context(surface);
       Achievements.paintAchievementIcon(ctx, achievement);
-      const icon = Gdk.pixbuf_get_from_surface(surface, 0, 0, 64, 64);
+      const icon = St.TextureCache.get_default().load_cairo_surface_to_gicon(surface);
 
       // Explicitly tell Cairo to free the context memory.
       // https://wiki.gnome.org/Projects/GnomeShell/Extensions/TipsOnMemoryManagement#Cairo
