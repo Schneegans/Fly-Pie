@@ -88,12 +88,6 @@ export default class Menu {
     const seat              = Clutter.get_default_backend().get_default_seat();
     this._lastPointerDevice = seat.get_pointer();
 
-    // When the menu is opened, we cannot directly get the position of the
-    // _lastPointerDevice (as Clutter.Seat.query_device_state() is not properly wrapped
-    // for GJS). Therefore we wait for the next ENTER event for this device and move the
-    // menu to the position given by this event.
-    this._initialRepositioningRequired = false;
-
     // The background covers the entire screen. Usually it's transparent and thus
     // invisible but once a menu is shown, it will be pushed as modal capturing the
     // complete user input. The color of the then visible background can be configured via
@@ -159,16 +153,6 @@ export default class Menu {
             !this._isInDragThreshold(this._pointerPos, this._clickStartPos)) {
           GLib.source_remove(this._longPressTimeout);
           this._longPressTimeout = -1;
-        }
-      }
-
-      // If we have to open the menu at a secondary pointer (e.g. from a stylus), we use
-      // this enter event to position the menu.
-      if (event.type() == Clutter.EventType.ENTER && this._initialRepositioningRequired) {
-        if (event.get_device().get_device_name() ===
-            this._lastPointerDevice.get_device_name()) {
-          this._setPosition(this._pointerPos[0], this._pointerPos[1]);
-          this._initialRepositioningRequired = false;
         }
       }
 
@@ -277,9 +261,7 @@ export default class Menu {
         }
 
         // Forward the motion event to the selection wedges.
-        if (!this._initialRepositioningRequired) {
-          this._selectionWedges.onMotionEvent(event.get_coords(), event.get_state());
-        }
+        this._selectionWedges.onMotionEvent(event.get_coords(), event.get_state());
 
         // If the primary button is pressed or a modifier is held down (for the
         // "Turbo-Mode"), but we do not have a dragged child yet, we mark the currently
@@ -697,15 +679,14 @@ export default class Menu {
       }
     } else {
 
-      // If no position is given, we set _initialRepositioningRequired to true and
-      // attempt to reposition the menu according to the latest input device in the next
-      // ENTER event.
+      // If no position is given, we attempt to reposition the menu according to the
+      // latest input device.
       if (x != null && y != null) {
         this._setPosition(x, y);
       } else {
-        [x, y] = global.get_pointer();
-        this._setPosition(x, y);
-        this._initialRepositioningRequired = true;
+        const seat               = Clutter.get_default_backend().get_default_seat();
+        const [ok, coords, mods] = seat.query_state(this._lastPointerDevice, null);
+        this._setPosition(coords.x, coords.y);
       }
     }
 
