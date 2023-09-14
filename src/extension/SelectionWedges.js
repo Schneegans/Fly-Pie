@@ -206,19 +206,19 @@ class SelectionWedges extends Clutter.Actor {
         const globalScale = settings.get_double('global-scale') * utils.getHDPIScale();
 
         // clang-format off
-    this._settings = {
-      wedgeWidth:              settings.get_double('wedge-width')          * globalScale,
-      wedgeInnerRadius:        settings.get_double('wedge-inner-radius')   * globalScale,
-      wedgeColor:              Clutter.Color.from_string(settings.get_string('wedge-color'))[1],
-      wedgeColorHover:         Clutter.Color.from_string(settings.get_string('wedge-color-hover'))[1],
-      wedgeSeparatorColor:     Clutter.Color.from_string(settings.get_string('wedge-separator-color'))[1],
-      wedgeSeparatorWidth:     settings.get_double('wedge-separator-width') * globalScale,
-      gestureSelectionTimeout: settings.get_double('gesture-selection-timeout'),
-      gestureJitterThreshold:  settings.get_double('gesture-jitter-threshold')  * globalScale,
-      gestureMinStrokeLength:  settings.get_double('gesture-min-stroke-length') * globalScale,
-      gestureMinStrokeAngle:   settings.get_double('gesture-min-stroke-angle'),
-      hoverMode:               settings.get_boolean('hover-mode'),
-    };
+        this._settings = {
+          wedgeWidth:              settings.get_double('wedge-width')          * globalScale,
+          wedgeInnerRadius:        settings.get_double('wedge-inner-radius')   * globalScale,
+          wedgeColor:              Clutter.Color.from_string(settings.get_string('wedge-color'))[1],
+          wedgeColorHover:         Clutter.Color.from_string(settings.get_string('wedge-color-hover'))[1],
+          wedgeSeparatorColor:     Clutter.Color.from_string(settings.get_string('wedge-separator-color'))[1],
+          wedgeSeparatorWidth:     settings.get_double('wedge-separator-width') * globalScale,
+          gestureSelectionTimeout: settings.get_double('gesture-selection-timeout'),
+          gestureJitterThreshold:  settings.get_double('gesture-jitter-threshold')  * globalScale,
+          gestureMinStrokeLength:  settings.get_double('gesture-min-stroke-length') * globalScale,
+          gestureMinStrokeAngle:   settings.get_double('gesture-min-stroke-angle'),
+          hoverMode:               settings.get_boolean('hover-mode'),
+        };
         // clang-format on
 
         // Update the size and position of the wedge actor.
