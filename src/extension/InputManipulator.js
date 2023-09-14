@@ -149,8 +149,13 @@ export default class InputManipulator {
     // Remove all modifiers from the string.
     const key = accelerator.replace(/<[^>]+>/g, '');
 
-    // Convert the remaining string to a keyval.
-    const keyval = NameToKeysym[key];
+    // Try to convert the remaining string to a keyval.
+    let keyval = NameToKeysym[key];
+
+    // Some keys have a XF86 prefix.
+    if (keyval === undefined) {
+      keyval = NameToKeysym['XF86' + key];
+    }
 
     if (keyval === undefined) {
       throw new Error(`Could not parse accelerator: ${accelerator}`);
