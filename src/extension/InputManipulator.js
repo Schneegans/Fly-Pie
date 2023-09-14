@@ -154,9 +154,9 @@ export default class InputManipulator {
 
     // Some keys have a XF86 prefix.
     if (keyval === undefined) {
-      keyval = NameToKeysym["XF86" + key];
+      keyval = NameToKeysym['XF86' + key];
     }
-    
+
     if (keyval === undefined) {
       throw new Error(`Could not parse accelerator: ${accelerator}`);
     }
