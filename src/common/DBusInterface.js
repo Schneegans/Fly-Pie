@@ -17,7 +17,7 @@
 // string. For a complete description see README.md.                                    //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-export var DBusInterface = {
+export const DBusInterface = {
   description:
       '<node>                                                                            \
         <interface name="org.gnome.Shell.Extensions.flypie">                             \

@@ -31,7 +31,6 @@ import {getBookmarksMenu} from './menus/Bookmarks.js';
 import {getSystemMenu} from './menus/System.js';
 import {getFavoritesMenu} from './menus/Favorites.js';
 import {getFrequentlyUsedMenu} from './menus/FrequentlyUsed.js';
-import {getRecentFilesMenu} from './menus/RecentFiles.js';
 import {getRunningAppsMenu} from './menus/RunningApps.js';
 
 const _ = await utils.importGettext();
@@ -162,7 +161,6 @@ export class ItemRegistry {
         System: getSystemMenu(),
         Favorites: getFavoritesMenu(),
         FrequentlyUsed: getFrequentlyUsedMenu(),
-        RecentFiles: getRecentFilesMenu(),
         RunningApps: getRunningAppsMenu(),
       };
 

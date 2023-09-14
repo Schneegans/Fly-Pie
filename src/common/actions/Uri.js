@@ -14,10 +14,10 @@
 import Gio from 'gi://Gio';
 
 import * as utils from '../utils.js';
-import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 import {ItemClass} from '../ItemClass.js';
 
-const _ = await utils.importGettext();
+const ConfigWidgetFactory = await utils.importInPrefsOnly('./ConfigWidgetFactory.js');
+const _                   = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The Uri action opens the defined URI with the system's default application.          //

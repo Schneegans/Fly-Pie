@@ -12,7 +12,8 @@
 'use strict';
 
 import Clutter from 'gi://Clutter';
-import Gtk from 'gi://Gtk';
+
+import {NameToKeysym} from './keysyms.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // An instance of this class can be used to create faked input events. You can use it   //
@@ -53,7 +54,7 @@ export default class InputManipulator {
     this._releaseModifiers(currentMods);
 
     // Now parse the string and press the buttons accordingly.
-    const [ok, keyval, mods] = Gtk.accelerator_parse(string);
+    const [keyval, mods] = this._parseAccelerator(string);
 
     this._pressModifiers(mods);
     this._keyboard.notify_keyval(0, keyval, Clutter.KeyState.PRESSED);
@@ -111,5 +112,50 @@ export default class InputManipulator {
         (modifiers & Clutter.ModifierType.SUPER_MASK)) {
       this._keyboard.notify_keyval(0, Clutter.KEY_Super_L, Clutter.KeyState.PRESSED);
     }
+  }
+
+  // Parses the given string and returns the keyval and modifiers. This method attempts is
+  // used as a drop-in replacement for Gtk.accelerator_parse() which we cannot use since
+  // we do not have access to the Gtk library.
+  _parseAccelerator(accelerator) {
+    const accelerators = [
+      {
+        names: ['<control>', '<ctrl>', '<ctl>', '<primary>'],
+        mask: Clutter.ModifierType.CONTROL_MASK
+      },
+      {names: ['<shift>', '<shft>'], mask: Clutter.ModifierType.SHIFT_MASK},
+      {names: ['<alt>', '<mod1>'], mask: Clutter.ModifierType.MOD1_MASK},
+      {names: ['<meta>'], mask: Clutter.ModifierType.META_MASK},
+      {names: ['<super>'], mask: Clutter.ModifierType.SUPER_MASK},
+      {names: ['<hyper>'], mask: Clutter.ModifierType.HYPER_MASK},
+      {names: ['<mod2>'], mask: Clutter.ModifierType.MOD2_MASK},
+      {names: ['<mod3>'], mask: Clutter.ModifierType.MOD3_MASK},
+      {names: ['<mod4>'], mask: Clutter.ModifierType.MOD4_MASK},
+      {names: ['<mod5>'], mask: Clutter.ModifierType.MOD5_MASK},
+    ];
+
+    const acceleratorLower = accelerator.toLowerCase();
+
+    let mods = 0;
+
+    for (const accelerator of accelerators) {
+      for (const name of accelerator.names) {
+        if (acceleratorLower.includes(name)) {
+          mods |= accelerator.mask;
+        }
+      }
+    }
+
+    // Remove all modifiers from the string.
+    const key = accelerator.replace(/<[^>]+>/g, '');
+
+    // Convert the remaining string to a keyval.
+    const keyval = NameToKeysym[key];
+
+    if (keyval === undefined) {
+      throw new Error(`Could not parse accelerator: ${accelerator}`);
+    }
+
+    return [keyval, mods];
   }
 };

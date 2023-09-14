@@ -16,20 +16,14 @@ import Gio from 'gi://Gio';
 import Gdk from 'gi://Gdk';
 import Cairo from 'gi://cairo';
 import GdkPixbuf from 'gi://GdkPixbuf';
-import Gtk from 'gi://Gtk';
 import Pango from 'gi://Pango';
 import PangoCairo from 'gi://PangoCairo';
 
-// We import the St module optionally. When this file is included from the daemon
-// side, it is available and can be used below. If this file is included via the pref.js,
-// it will not be available.
-let St = undefined;
-
-try {
-  St = (await import('gi://St'))?.default;
-} catch (error) {
-  // Nothing to be done, we're in settings-mode.
-}
+// We import some modules optionally. This file is used in the preferences process as well
+// as in the GNOME Shell process. Some modules are only available or required in one of
+// these processes.
+const St  = await importInShellOnly('gi://St');
+const Gtk = await importInPrefsOnly('gi://Gtk');
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This method can be used to write a message to GNOME Shell's log. This is enhances    //
@@ -42,7 +36,7 @@ try {
 export function debug(message) {
   const stack = new Error().stack.split('\n');
 
-  // Removeutils.debug() function call from stack.
+  // Remove debug() function call from stack.
   stack.shift();
 
   // Find the index of the extension directory in the stack entry. We do not want to
@@ -60,6 +54,18 @@ export function debug(message) {
 
 export async function importInShellOnly(module) {
   if (typeof global !== 'undefined') {
+    const mod = await import(module);
+    return mod.default ? mod.default : mod;
+  }
+  return null;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// This method can be used to import a module in the preferences process only.          //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+export async function importInPrefsOnly(module) {
+  if (typeof global === 'undefined') {
     const mod = await import(module);
     return mod.default ? mod.default : mod;
   }
@@ -112,7 +118,7 @@ export function createSettings() {
 
 export function logProperties(object) {
   for (const element in object) {
-    utils.debug(`${element} [${typeof (object[element])}]`);
+    debug(`${element} [${typeof (object[element])}]`);
   }
 }
 
@@ -141,21 +147,18 @@ export function getIconTheme() {
 
   if (_iconTheme == null) {
 
-    // Starting with GNOME 44, St brings its own icon theme class. On older versions, we
-    // create a Gtk.IconTheme from St. If St is not available, we are most likely in the
-    // preferences process and can simply use the X11-dependent Gtk code.
-    if (St && St.IconTheme) {
+    // Starting with GNOME 44, St brings its own icon theme class. If St is not available,
+    // we are most likely in the preferences process and can simply use the X11-dependent
+    // Gtk code.
+    if (typeof global !== 'undefined') {
       _iconTheme = new St.IconTheme();
-    } else if (St) {
-      _iconTheme = new Gtk.IconTheme();
-      _iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
     } else {
       _iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
     }
 
     // Print an error if this fails as well.
     if (_iconTheme == null) {
-      utils.debug('Failed to get a valid icon theme object!');
+      debug('Failed to get a valid icon theme object!');
     }
 
     // Make sure that the icons under resources/img are available as system icons.
@@ -282,7 +285,7 @@ export function paintIcon(ctx, name, size, opacity, font, textColor) {
       throw 'Unknown error.';
     }
   } catch (error) {
-    utils.debug('Failed to draw base64 image: ' + error);
+    debug('Failed to draw base64 image: ' + error);
     iconName = 'flypie-image-symbolic';
   }
 
@@ -296,10 +299,7 @@ export function paintIcon(ctx, name, size, opacity, font, textColor) {
     const gicon = Gio.Icon.new_for_string(iconName);
     let pixbuf  = null;
 
-    // If we are dealing with a Gtk.IconTheme from GTK4, this method will be available. If
-    // it's a IconTheme from Gtk or St, this method will not be available and loading of
-    // the icon will be much easier.
-    if (theme.has_gicon) {
+    if (Gtk && theme instanceof Gtk.IconTheme) {
 
       if (theme.has_gicon(gicon)) {
 
@@ -324,11 +324,7 @@ export function paintIcon(ctx, name, size, opacity, font, textColor) {
       }
 
     } else {
-
-      // To get a pixbuf from an icon is quite simple on GTK3 / St.
-      const flags = theme instanceof Gtk.IconTheme ? Gtk.IconLookupFlags.FORCE_SIZE :
-                                                     St.IconLookupFlags.FORCE_SIZE;
-      const info  = theme.lookup_by_gicon(gicon, size, flags);
+      const info = theme.lookup_by_gicon(gicon, size, St.IconLookupFlags.FORCE_SIZE);
 
       if (info != null) {
         pixbuf = info.load_icon();
@@ -366,8 +362,7 @@ export function paintIcon(ctx, name, size, opacity, font, textColor) {
     }
 
   } catch (error) {
-    utils.debug(
-        'Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');
+    debug('Failed to draw icon \'' + name + '\': ' + error + '! Falling back to text...');
   }
 
   // If no icon was found, write it as plain text. We use a hard-coded font size of 12
@@ -465,16 +460,6 @@ export function getAverageIconColor(iconSurface, iconSize) {
 
   // Create an array based on the calculated values.
   return [rTotal / total * 255, gTotal / total * 255, bTotal / total * 255];
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// A simple convenience method to convert a string to a Gdk.RGBA                        //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-export function stringToRGBA(string) {
-  const rgba = new Gdk.RGBA();
-  rgba.parse(string);
-  return rgba;
 }
 
 

@@ -15,9 +15,9 @@ import Gio from 'gi://Gio';
 
 import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
-import ConfigWidgetFactory from '../ConfigWidgetFactory.js';
 
-const _ = await utils.importGettext();
+const ConfigWidgetFactory = await utils.importInPrefsOnly('./ConfigWidgetFactory.js');
+const _                   = await utils.importGettext();
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // The file action is very similar to the Url action, but only works for files.         //
