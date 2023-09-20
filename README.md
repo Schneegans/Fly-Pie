@@ -71,7 +71,7 @@ If you want to learn more, use the links below for much more information!
 
 # :revolving_hearts: Show that you _do_ love Fly-Pie!
 
-While coding new features or translating Fly-Pie is the most awesome way to contribute, [providing financial support](https://schneegans.github.io/sponsors/) will help me stay motivated to invest my spare time to keep the project alive in the future.
+While coding new features or translating Fly-Pie is the most awesome way to contribute, [providing financial support](https://schneegans.github.io/sponsors/) will encourage me to invest my spare time for developing free and open-source software.
 
 These awesome people have already donated to the development of my open-source projects:
 
