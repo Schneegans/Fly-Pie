@@ -69,44 +69,14 @@ If you want to learn more, use the links below for much more information!
 - [Release Management](docs/release-management.md)
 - [Continuous Integration](docs/continuous-integration.md)
 
-# :revolving_hearts: These people _do_ love Fly-Pie
+# :revolving_hearts: Show that you _do_ love Fly-Pie!
 
-While coding new features or translating Fly-Pie is the most awesome way to contribute, providing financial support will help me stay motivated to invest my spare time to keep the project alive in the future.
+While coding new features or translating Fly-Pie is the most awesome way to contribute, [providing financial support](https://schneegans.github.io/sponsors/) will help me stay motivated to invest my spare time to keep the project alive in the future.
 
-<h2 align="center">🥇 Current Gold Sponsors</h2>
-<p align="center">
-  <a href="https://github.com/SimHacker">@SimHacker</a><br>
-  <a href="https://github.com/D3vil0p3r">D3vil0p3r</a><br>
-  Maxence Sebald<br>
-</p>
+These awesome people have already donated to the development of my open-source projects:
 
-<h2 align="center">🥈 Current Silver Sponsors</h2>
-<p align="center">
-  <a href="https://www.llorachdevs.com/Home">Garsiv</a><br>
-  <a href="https://github.com/castrojo">Jorge Castro</a>
-</p>
+[![Sponsors](https://schneegans.github.io/sponsors/sponsors.svg)](https://schneegans.github.io/sponsors/)
 
-<h2 align="center">🥉 Current Bronze Sponsors</h2>
-<p align="center">
-  <a href='https://github.com/vlazic'>@vlazic</a><br>
-  <a href="https://github.com/lobau">@lobau</a>
-</p>
-
-<h2 align="center">🏅 Previous Sponsors and One-Time Donators</h2>
-<p align="center">
-  <a href="https://github.com/dennis1248">Dennis ten Hoove</a><br>
-  <a href='https://github.com/AngelBrielez'>Angel Brielez</a><br>
-  <a href="https://github.com/FahriDevZ">@FahriDevZ</a><br>
-  <a href="https://twitter.com/tjiiik">tj3k</a><br>
-  <a href="https://github.com/VinnyBoiler">@VinnyBoiler</a><br>
-  <a href="https://github.com/p2004a">@p2004a</a><br>
-  <a href="https://github.com/BakiDance">@BakiDance</a><br>
-  GEPLlinux<br>
-  <a href="https://github.com/denis-roy">@denis-roy</a><br>
-  <a href="https://github.com/ykhurshid">@ykhurshid</a>
-</p>
-
-Do you want to show that you love it too? You may <a href="https://github.com/sponsors/Schneegans">become a sponsor for as little as 1$ / month</a>!
-If you like this extension, you may also want to try one of my other extensions: [🧊 Desktop-Cube](https://github.com/Schneegans/Desktop-Cube) or [🔥 Burn-My-Windows](https://github.com/Schneegans/Burn-My-Windows/)!
+Do you want to show that you love it too? If you donate via [Ko-fi](https://ko-fi.com/schneegans), [GitHub](https://github.com/sponsors/Schneegans), or [PayPal](https://www.paypal.com/donate/?hosted_button_id=3F7UFL8KLVPXE), you will show up in this list as well!
 
 <p align="center"><img src ="docs/pics/hr.svg" /></p>
