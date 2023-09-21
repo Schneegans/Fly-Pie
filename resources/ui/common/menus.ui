@@ -17,16 +17,12 @@ SPDX-License-Identifier: MIT
         <attribute name="label" translatable="yes">View Changelog</attribute>
         <attribute name="action">prefs.changelog</attribute>
       </item>
+      <item>
+        <attribute name="label">View Donors Hall-of-Fame</attribute>
+        <attribute name="action">prefs.show-sponsors</attribute>
+      </item>
     </section>
     <section>
-      <item>
-        <attribute name="label" translatable="yes">Report a Bug</attribute>
-        <attribute name="action">prefs.bugs</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Translate</attribute>
-        <attribute name="action">prefs.translate</attribute>
-      </item>
       <submenu>
         <attribute name="label" translatable="yes">Donate</attribute>
         <item>
@@ -42,6 +38,14 @@ SPDX-License-Identifier: MIT
           <attribute name="action">prefs.donate-paypal</attribute>
         </item>
       </submenu>
+      <item>
+        <attribute name="label" translatable="yes">Report a Bug</attribute>
+        <attribute name="action">prefs.bugs</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Translate</attribute>
+        <attribute name="action">prefs.translate</attribute>
+      </item>
     </section>
     <section>
       <item>

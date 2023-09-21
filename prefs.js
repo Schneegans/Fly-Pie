@@ -135,6 +135,7 @@ export default class FlyPiePreferences extends ExtensionPreferences {
         addURIAction('bugs',      'https://github.com/Schneegans/Fly-Pie/issues');
         addURIAction('changelog', 'https://github.com/Schneegans/Fly-Pie/blob/main/docs/changelog.md');
         addURIAction('translate', 'https://hosted.weblate.org/engage/Fly-Pie/');
+        addSponsorAction('show-sponsors', 'https://schneegans.github.io/sponsors');
         addSponsorAction('donate-kofi',   'https://ko-fi.com/schneegans');
         addSponsorAction('donate-github', 'https://github.com/sponsors/Schneegans');
         addSponsorAction('donate-paypal', 'https://www.paypal.me/simonschneegans');
@@ -152,80 +153,16 @@ export default class FlyPiePreferences extends ExtensionPreferences {
             }
           });
 
-          const sponsors     = this._getJSONResource('/credits/sponsors.json');
           const contributors = this._getJSONResource('/credits/contributors.json');
-          let dialog;
 
-          // We try to use the special Adw.AboutWindow if it is available.
-          if (Adw && Adw.AboutWindow) {
-            let formatSponsors = (sponsors) => {
-              return sponsors.map(s => {
-                if (s.url == '')
-                  return s.name;
-                else
-                  return `${s.name} ${s.url}`;
-              });
-            };
-
-            dialog = new Adw.AboutWindow({transient_for: window, modal: true});
-            dialog.set_application_icon('flypie-symbolic');
-            dialog.set_application_name('Fly-Pie');
-            dialog.set_version(`${this.metadata.version}`);
-            dialog.set_developer_name('Simon Schneegans');
-            dialog.set_developers(contributors.code);
-            dialog.set_designers(contributors.artwork);
-            dialog.set_issue_url('https://github.com/Schneegans/Fly-Pie/issues');
-            if (sponsors.gold.length > 0) {
-              dialog.add_credit_section(
-                  _('Gold Sponsors'), formatSponsors(sponsors.gold));
-            }
-            if (sponsors.silver.length > 0) {
-              dialog.add_credit_section(
-                  _('Silver Sponsors'), formatSponsors(sponsors.silver));
-            }
-            if (sponsors.bronze.length > 0) {
-              dialog.add_credit_section(
-                  _('Bronze Sponsors'), formatSponsors(sponsors.bronze));
-            }
-            if (sponsors.past.length > 0) {
-              dialog.add_credit_section(
-                  _('Past Sponsors'), formatSponsors(sponsors.past));
-            }
-
-          } else {
-
-            let formatSponsors = (sponsors) => {
-              return sponsors.map(s => {
-                if (s.url == '')
-                  return s.name;
-                else
-                  return `<a href="${s.url}">${s.name}</a>`;
-              });
-            };
-
-            dialog = new Gtk.AboutDialog({transient_for: window, modal: true});
-            dialog.set_logo_icon_name('flypie-symbolic');
-            dialog.set_program_name(`Fly-Pie ${this.metadata.version}`);
-            dialog.set_authors(contributors.code);
-            dialog.set_artists(contributors.artwork);
-            if (sponsors.gold.length > 0) {
-              dialog.add_credit_section(
-                  _('Gold Sponsors'), formatSponsors(sponsors.gold));
-            }
-            if (sponsors.silver.length > 0) {
-              dialog.add_credit_section(
-                  _('Silver Sponsors'), formatSponsors(sponsors.silver));
-            }
-            if (sponsors.bronze.length > 0) {
-              dialog.add_credit_section(
-                  _('Bronze Sponsors'), formatSponsors(sponsors.bronze));
-            }
-            if (sponsors.past.length > 0) {
-              dialog.add_credit_section(
-                  _('Past Sponsors'), formatSponsors(sponsors.past));
-            }
-          }
-
+          const dialog = new Adw.AboutWindow({transient_for: window, modal: true});
+          dialog.set_application_icon('flypie-symbolic');
+          dialog.set_application_name('Fly-Pie');
+          dialog.set_version(`${this.metadata.version}`);
+          dialog.set_developer_name('Simon Schneegans');
+          dialog.set_developers(contributors.code);
+          dialog.set_designers(contributors.artwork);
+          dialog.set_issue_url('https://github.com/Schneegans/Fly-Pie/issues');
           dialog.set_translator_credits([...translators].join('\n'));
           dialog.set_copyright('© 2022 Simon Schneegans');
           dialog.set_website('https://github.com/Schneegans/Fly-Pie');
