@@ -18,9 +18,11 @@ SPDX-License-Identifier: CC-BY-4.0
   <a href="scripts/cloc.sh"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json" /></a>
 </p>
 
-**:warning: I am currently working on a follow-up project called [🥧 Kando](https://github.com/kando-menu/kando). I will continue to maintain Fly-Pie until Kando is ready for daily use. If you want to learn more, feel free to visit my [Ko-fi page](https://ko-fi.com/schneegans)!**
+> [!NOTE]
+> I am currently working on a follow-up project called [🥧 Kando](https://github.com/kando-menu/kando). I will continue to maintain Fly-Pie until Kando is ready for daily use. If you want to learn more, feel free to visit my [Ko-fi page](https://ko-fi.com/schneegans)!
 
-**:warning: The code in the `main` branch is for GNOME Shell 45+. For older GNOME versions, please use the `gnome-3.36-44` branch.**
+> [!IMPORTANT]
+> The code in the `main` branch is for GNOME Shell 45+. For older GNOME versions, please use the `gnome-3.36-44` branch.
 
 **Fly-Pie** is an extension for GNOME Shell which lets you open _marking menus_ via keyboard shortcuts.
 You can use it to launch applications, simulate hotkeys, open URLs and much more.
@@ -69,7 +71,7 @@ If you want to learn more, use the links below for much more information!
 - [Release Management](docs/release-management.md)
 - [Continuous Integration](docs/continuous-integration.md)
 
-# :revolving_hearts: Show that you _do_ love Fly-Pie!
+# :revolving*hearts: Show that you \_do* love Fly-Pie!
 
 While coding new features or translating Fly-Pie is the most awesome way to contribute, [providing financial support](https://schneegans.github.io/sponsors/) will encourage me to invest my spare time for developing free and open-source software.
 
