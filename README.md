@@ -71,11 +71,16 @@ If you want to learn more, use the links below for much more information!
 - [Release Management](docs/release-management.md)
 - [Continuous Integration](docs/continuous-integration.md)
 
-# :revolving*hearts: Show that you \_do* love Fly-Pie!
+# 💞 Show that you _do_ love Fly-Pie!
 
-While coding new features or translating Fly-Pie is the most awesome way to contribute, [providing financial support](https://schneegans.github.io/sponsors/) will encourage me to invest my spare time for developing free and open-source software.
+[![kofi](https://img.shields.io/badge/donate-on_Ko--fi-ff5e5b?logo=ko-fi)](https://ko-fi.com/schneegans)
+[![github](https://img.shields.io/badge/donate-on_GitHub-purple?logo=github)](https://github.com/sponsors/Schneegans)
+[![paypal](https://img.shields.io/badge/donate-on_PayPal-009cde?logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=3F7UFL8KLVPXE)
+[![crypto](https://img.shields.io/badge/donate-some_Crypto-f7931a?logo=bitcoin)](https://schneegans.cb.id)
 
-These awesome people have already donated to the development of my open-source projects:
+While coding new features or translating Fly-Pie is the most awesome way to contribute, providing financial support will encourage me to invest my spare time for developing free and open-source software.
+
+**These awesome people have already donated to the development of my open-source projects:**
 
 [![Sponsors](https://schneegans.github.io/sponsors/sponsors.svg)](https://schneegans.github.io/sponsors/)
 
