@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flypie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: 2023-04-21 21:03+0000\n"
+"PO-Revision-Date: 2023-10-20 04:21+0000\n"
 "Last-Translator: \"Rinrin.rs\" <rinrin0413.valley@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/fly-pie/core/ja/"
 ">\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.1\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -381,9 +381,10 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather set up your own menus!"
 msgstr ""
-"<b>メインメニュー</b> は、インストールされた全てのアプリケーションを表示しま"
-"す。多くの場合、あまりにも大量の項目が並び 選びづらくなります。メニューを自分"
-"で設定したほうがいいかもしれません！"
+"<b>メインメニュー</b> "
+"は、インストールされた全てのアプリケーションを表示します。多くの場合、"
+"あまりにも大量のアイテムが並び "
+"選びづらくなります。メニューを自分で設定したほうがいいかもしれません！"
 
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:50 src/extension/DefaultMenu.js:114
@@ -1472,7 +1473,7 @@ msgstr "チュートリアル"
 
 #: resources/ui/gtk4/settings.ui:646 resources/ui/gtk3/settings.ui:657
 msgid "Press <b>Ctrl+Space</b> to open the default menu of Fly-Pie!"
-msgstr ""
+msgstr "<b>Ctrl+Space</b> を押して Fly-Pie のデフォルトメニューを開きましょう!"
 
 #: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:667
 msgid ""
@@ -1480,6 +1481,10 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a training menu!"
 msgstr ""
+"Fly-Pie では、アプリケーションの起動, ショートカットキーの実行, URLを開いたり"
+"など、他にも様々なことができます。この実践可能なチュートリアルでは、Fly-Pie "
+"基本的な使い方を紹介します。下の大きなボタンをクリックして、練習用のメニュー"
+"を開いてみましょう!"
 
 #: resources/ui/gtk4/settings.ui:666 resources/ui/gtk3/settings.ui:677
 msgid ""
@@ -1490,6 +1495,12 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"• <b>マウスを左クリックで項目を選択</b>できます。\n"
+"• <b>マウスを右クリックでメニュを閉じる</b>ことができます。\n"
+"• この練習用メニューは文字通り練習用なので、アイテムを選択しても何かが起こる"
+"ことはありません。\n"
+"\n"
+"慣れてきたら、[<b>次へ</b>] を押して操作方法を学びましょう!"
 
 #. The text of the big tutorial button.
 #: resources/ui/gtk4/settings.ui:686 resources/ui/gtk4/settings.ui:767
@@ -1498,7 +1509,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:775 resources/ui/gtk3/settings.ui:858
 #: resources/ui/gtk3/settings.ui:998 resources/ui/gtk3/settings.ui:1081
 msgid "<big><b>Open the training Menu!</b></big>"
-msgstr ""
+msgstr "<big><b>ここから練習用メニューを開く</b></big>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:718 resources/ui/gtk3/settings.ui:727
@@ -1524,10 +1535,10 @@ msgid ""
 msgstr ""
 "<b>アイテムのそれぞれのウェッジ内をクリックで選択できます</b>。\n"
 "\n"
-"また、クリックした場所の周りにサブメニューのウェッジが瞬時に表示されるので ア"
-"ニメーションが終わるのを待つ必要はありません。\n"
+"また、クリックした場所の周りにサブメニューのウェッジが瞬時に表示されるので "
+"アニメーションが終わるのを待つ必要はありません。\n"
 "\n"
-"<b>次へ</b>を押して練習道場へ進みましょう！"
+"[<b>次へ</b>]を押して練習道場へ進みましょう！"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:799 resources/ui/gtk3/settings.ui:805
@@ -1615,7 +1626,7 @@ msgstr ""
 "今回も できるだけ早く「%s」を選択してもらいます。しかし 現在はマーキングモー"
 "ドを習得しているので、金メダル獲得の難易度が上がっています！\n"
 "\n"
-"満足したら <b>次へ</b> を押して最後のヒントとコツを学びましょう！"
+"満足したら [<b>次へ</b>] を押して最後のヒントとコツを学びましょう！"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:1128 resources/ui/gtk3/settings.ui:1129
