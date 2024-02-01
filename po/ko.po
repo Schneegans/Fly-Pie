@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: 2023-01-13 05:47+0000\n"
-"Last-Translator: colder_ <inner5740@gmail.com>\n"
-"Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/"
-">\n"
+"PO-Revision-Date: 2024-02-02 21:01+0000\n"
+"Last-Translator: SEOA7777 <pleahmacaka@gmail.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/fly-pie/core/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.15.1-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -861,19 +861,19 @@ msgstr "사용자 정의 메뉴 안에서만 새로운 동작을 생성할 수 �
 
 #: src/prefs/PreferencesDialog.js:255 src/prefs/PreferencesDialog.js:288
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "골드 스폰서"
 
 #: src/prefs/PreferencesDialog.js:259 src/prefs/PreferencesDialog.js:292
 msgid "Silver Sponsors"
-msgstr ""
+msgstr "실버 스폰서"
 
 #: src/prefs/PreferencesDialog.js:263 src/prefs/PreferencesDialog.js:296
 msgid "Bronze Sponsors"
-msgstr ""
+msgstr "브론즈 스폰서"
 
 #: src/prefs/PreferencesDialog.js:267 src/prefs/PreferencesDialog.js:300
 msgid "Past Sponsors"
-msgstr ""
+msgstr "과거 후원자"
 
 #: src/prefs/ImageChooserButton.js:100
 #: resources/ui/gtk4/imageChooserButton.ui:22
@@ -1308,27 +1308,27 @@ msgstr "도전과제 보기"
 
 #: resources/ui/common/menus.ui:13
 msgid "Visit Homepage"
-msgstr ""
+msgstr "홈페이지 방문"
 
 #: resources/ui/common/menus.ui:17
 msgid "View Changelog"
-msgstr ""
+msgstr "변경사항 보기"
 
 #: resources/ui/common/menus.ui:23
 msgid "Report a Bug"
-msgstr ""
+msgstr "문제 신고"
 
 #: resources/ui/common/menus.ui:27
 msgid "Translate"
-msgstr ""
+msgstr "번역"
 
 #: resources/ui/common/menus.ui:31
 msgid "Donate"
-msgstr ""
+msgstr "후원"
 
 #: resources/ui/common/menus.ui:48
 msgid "About Fly-Pie"
-msgstr ""
+msgstr "Fly-Pie에 대해"
 
 #: resources/ui/gtk4/copyValueButton.ui:12
 #: resources/ui/gtk3/copyValueButton.ui:12
@@ -1450,7 +1450,7 @@ msgstr "튜토리얼"
 
 #: resources/ui/gtk4/settings.ui:646 resources/ui/gtk3/settings.ui:657
 msgid "Press <b>Ctrl+Space</b> to open the default menu of Fly-Pie!"
-msgstr ""
+msgstr "<b>컨트롤 + 스페이스 </b>를 눌러 Fly-Pie의 기본 메뉴를 여세요!"
 
 #: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:667
 msgid ""
@@ -1458,6 +1458,10 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a training menu!"
 msgstr ""
+"당신은 Fly-Pie로 애플리케이션을 열거나, 단축키를 시뮬레이션 하거나, URL을 "
+"여는 등 그 이상의 것들을 할 수 있습니다. 이 대화형 튜토리얼에선 당신에게 Fly-"
+"Pie를 더욱 효율적이게 사용하는 방법을 알려줄 것입니다. 아래의 큰 버튼을 눌러 "
+"트레이닝 메뉴를 여세요!"
 
 #: resources/ui/gtk4/settings.ui:666 resources/ui/gtk3/settings.ui:677
 msgid ""
@@ -1468,6 +1472,12 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"• <b>마우스 왼쪽 버튼으로 아이템을 선택하세요</b>.\n"
+"• <b>마우스 오른쪽 버튼으로 메뉴를 닫으세요.</b>\n"
+"• 트레이닝 메뉴는 단지 훈련을 위한 것이므로 실제로는 아무것도 되지 않습니다."
+"\n"
+"\n"
+"충분히 익숙해졌다면, <b>다음</b>버튼을 눌러 더 많은 것을 알아보세요!"
 
 #. The text of the big tutorial button.
 #: resources/ui/gtk4/settings.ui:686 resources/ui/gtk4/settings.ui:767
@@ -1476,7 +1486,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:775 resources/ui/gtk3/settings.ui:858
 #: resources/ui/gtk3/settings.ui:998 resources/ui/gtk3/settings.ui:1081
 msgid "<big><b>Open the training Menu!</b></big>"
-msgstr ""
+msgstr "<big><b>트레이닝 메뉴를 여세요!</b></big>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:718 resources/ui/gtk3/settings.ui:727
@@ -1875,7 +1885,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:3695 resources/ui/gtk3/settings.ui:3649
 msgid "The trace is the connecting line between selected menu items."
-msgstr ""
+msgstr "트레이스는 선택한 메뉴 항목 사이를 연결하는 선입니다."
 
 #: resources/ui/gtk4/settings.ui:3712 resources/ui/gtk3/settings.ui:3666
 msgid "Thickness"
@@ -1896,7 +1906,7 @@ msgstr "터치 버튼 설정"
 
 #: resources/ui/gtk4/settings.ui:3834 resources/ui/gtk3/settings.ui:3781
 msgid "You can show a touch button for each of your menus."
-msgstr ""
+msgstr "각 메뉴에 터치 버튼을 표시할 수 있습니다."
 
 #: resources/ui/gtk4/settings.ui:3852 resources/ui/gtk3/settings.ui:3799
 msgid "Inactive Opacity"
@@ -1908,7 +1918,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:3902 resources/ui/gtk3/settings.ui:3849
 msgid "Show in Desktop Mode"
-msgstr ""
+msgstr "데스크탑 모드로 표시"
 
 #: resources/ui/gtk4/settings.ui:3924 resources/ui/gtk3/settings.ui:3871
 msgid "Show above Fullscreen Windows"
@@ -1988,6 +1998,8 @@ msgid ""
 "With this enabled, Fly-Pie will attempt to open any windows\n"
 "at the current pointer position."
 msgstr ""
+"이 기능을 활성화 하면, Fly-Pie는 현재 포인터 위치에 있는\n"
+"모든 창을 열려고 시도합니다."
 
 #: resources/ui/gtk4/settings.ui:4287 resources/ui/gtk3/settings.ui:4227
 msgid "Experimental Hover Mode"
@@ -2138,7 +2150,7 @@ msgstr "화면 가운데서 열기"
 
 #: resources/ui/gtk4/settings.ui:5031 resources/ui/gtk3/settings.ui:5026
 msgid "Show Labels"
-msgstr ""
+msgstr "라벨 보기"
 
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:5088 resources/ui/gtk3/settings.ui:5315
