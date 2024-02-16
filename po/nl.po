@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: 2023-04-03 11:41+0000\n"
+"PO-Revision-Date: 2024-02-17 02:48+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/fly-pie/core/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 5.4\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -1474,7 +1474,7 @@ msgstr "Tutorial"
 
 #: resources/ui/gtk4/settings.ui:646 resources/ui/gtk3/settings.ui:657
 msgid "Press <b>Ctrl+Space</b> to open the default menu of Fly-Pie!"
-msgstr ""
+msgstr "Druk op <b>Ctrl+Spatie</b> om het standaard­menu van Fly-Pie te openen!"
 
 #: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:667
 msgid ""
@@ -1482,6 +1482,10 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a training menu!"
 msgstr ""
+"U kunt Fly-Pie gebruiken om apps te starten, snel­toetsen te simuleren, "
+"URL's te openen en nog veel meer. Deze inter­actieve tutorial leert u hoe u "
+"Fly-Pie het meest efficiënt kunt gebruiken. Druk op de grote knop hieronder "
+"om een trainings­menu te openen!"
 
 #: resources/ui/gtk4/settings.ui:666 resources/ui/gtk3/settings.ui:677
 msgid ""
@@ -1492,6 +1496,12 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"• Gebruik uw <b>linker­muisknop om items te selecteren</b>.\n"
+"• Gebruik uw <b>rechter­muisknop om het menu te sluiten</b>.\n"
+"• Het trainings­menu is slechts een speel­tuin, het selecteren van items "
+"heeft geen echt effect.\n"
+"\n"
+"Zodra u zich op uw gemak voelt, drukt u op <b>volgende</b> voor meer details!"
 
 #. The text of the big tutorial button.
 #: resources/ui/gtk4/settings.ui:686 resources/ui/gtk4/settings.ui:767
@@ -1500,7 +1510,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:775 resources/ui/gtk3/settings.ui:858
 #: resources/ui/gtk3/settings.ui:998 resources/ui/gtk3/settings.ui:1081
 msgid "<big><b>Open the training Menu!</b></big>"
-msgstr ""
+msgstr "<big><b>Trainingsmenu openen</b></big>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:718 resources/ui/gtk3/settings.ui:727
