@@ -17,7 +17,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 - Instead of an always out-of-date list of sponsors, the main menu of the preferences dialog now contains a link to the new [list of all donors](https://schneegans.github.io/sponsors/). This list is semi-automatically updated whenever a new donation is received. Thanks to all the donors!
 - Several translation updates. Thanks to all the translators!
-- All CI jobs are now executed for GNOME 45 as well.
+- All CI jobs are now executed for GNOME 45 and GNOME 46 as well.
 
 ## [Fly-Pie 24](https://github.com/schneegans/fly-pie/releases/tag/v24)
 
