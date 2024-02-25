@@ -19,6 +19,10 @@ SPDX-License-Identifier: CC-BY-4.0
 - Several translation updates. Thanks to all the translators!
 - All CI jobs are now executed for GNOME 45 and GNOME 46 as well.
 
+#### Bug Fixes
+
+- Fixed a regression which caused an error when trying to load theme presets in the settings dialog.
+
 ## [Fly-Pie 24](https://github.com/schneegans/fly-pie/releases/tag/v24)
 
 **Release Date:** 2023-09-14
