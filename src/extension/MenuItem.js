@@ -20,6 +20,7 @@ import Pango from 'gi://Pango';
 import PangoCairo from 'gi://PangoCairo';
 import GdkPixbuf from 'gi://GdkPixbuf';
 import Cairo from 'gi://cairo';
+import St from 'gi://St';
 
 import * as utils from '../common/utils.js';
 
@@ -633,16 +634,6 @@ class MenuItem extends Clutter.Actor {
     updateOpacity(MenuItemState.GRANDCHILD);
     updateOpacity(MenuItemState.GRANDCHILD_HOVERED);
 
-    // Now update the size of the icon container. As there is a layout manager in action,
-    // all icons will update their size accordingly.
-    this._iconContainer.set_easing_duration(easingDuration);
-    this._iconContainer.set_easing_mode(MenuItemSettings.easingMode);
-
-    const size2 = Math.floor(settings.size / 2);
-    this._iconContainer.set_translation(-size2, -size2, 0);
-    this._iconContainer.set_size(100, 100);
-    this._iconContainer.set_scale(settings.size / 100, settings.size / 100);
-
     // Now we update the trace line to the active child if we are in a parent state.
     if (this._state == MenuItemState.PARENT ||
         this._state == MenuItemState.PARENT_HOVERED) {
@@ -702,10 +693,11 @@ class MenuItem extends Clutter.Actor {
     // We need to create the _trace actor if it's not there yet.
     if (this._trace == undefined) {
       this._traceContainer = new Clutter.Actor();
-      this._trace          = new Clutter.Actor({width: 1});
+      this._trace          = new St.DrawingArea({width: 1});
+      this._trace.connect('repaint', (canvas) => {
+        const ctx             = canvas.get_context();
+        const [width, height] = canvas.get_surface_size();
 
-      const canvas = new Clutter.Canvas();
-      canvas.connect('draw', (canvas, ctx, width, height) => {
         ctx.setOperator(Cairo.Operator.CLEAR);
         ctx.paint();
         ctx.setOperator(Cairo.Operator.OVER);
@@ -725,7 +717,6 @@ class MenuItem extends Clutter.Actor {
         ctx.$dispose();
       });
 
-      this._trace.set_content(canvas);
       this.insert_child_below(this._traceContainer, null);
       this._traceContainer.add_child(this._trace);
     }
@@ -829,15 +820,20 @@ class MenuItem extends Clutter.Actor {
     return null;
   }
 
-  // This creates a Clutter.Actor with an attached Clutter.Canvas containing an image of
-  // this MenuItem's icon. It's static so that others can use this to create similar icons
-  // (for example the touch buttons).
+  // This creates a Clutter.Actor containing an image of this MenuItem's icon. It's static
+  // so that others can use this to create similar icons (for example the touch buttons).
   static createIcon(
       backgroundColor, backgroundImage, backgroundSize, iconName, iconScale, iconCrop,
       iconOpacity, label, labelScale, textColor, font, labelFont) {
 
-    const canvas = new Clutter.Canvas({height: backgroundSize, width: backgroundSize});
-    canvas.connect('draw', (c, ctx, width, height) => {
+    const actor = new St.DrawingArea({
+      height: backgroundSize,
+      width: backgroundSize,
+    });
+
+    actor.connect('repaint', (canvas) => {
+      const ctx = canvas.get_context();
+
       // Clear any previous content.
       ctx.setOperator(Cairo.Operator.CLEAR);
       ctx.paint();
@@ -975,20 +971,6 @@ class MenuItem extends Clutter.Actor {
       ctx.$dispose();
     });
 
-    // Apply HiDPI scaling and trigger an initial 'draw' signal emission. The call to
-    // set_scale_factor() will automatically invalidate the canvas.
-    if (utils.getHDPIResourceScale() != 1) {
-      canvas.set_scale_factor(utils.getHDPIResourceScale());
-    } else {
-      canvas.invalidate();
-    }
-
-    // Create a new actor and set the icon canvas to be its content.
-    const actor = new Clutter.Actor();
-    actor.set_content(canvas);
-    actor.set_x_expand(true);
-    actor.set_y_expand(true);
-
     return actor;
   }
 
@@ -1031,6 +1013,20 @@ class MenuItem extends Clutter.Actor {
     if (this._trace != undefined) {
       this._trace.get_content().invalidate();
     }
+
+    // Compute the icon container's size and position. We use the maximum size of all icon
+    // variants.
+    const maxSize = Math.max(
+        MenuItemSettings.state.get(MenuItemState.CENTER).size,
+        MenuItemSettings.state.get(MenuItemState.CENTER_HOVERED).size,
+        MenuItemSettings.state.get(MenuItemState.CHILD).size,
+        MenuItemSettings.state.get(MenuItemState.CHILD_HOVERED).size,
+        MenuItemSettings.state.get(MenuItemState.GRANDCHILD).size,
+        MenuItemSettings.state.get(MenuItemState.GRANDCHILD_HOVERED).size);
+
+    const size2 = Math.floor(maxSize / 2);
+    this._iconContainer.set_size(maxSize, maxSize);
+    this._iconContainer.set_translation(-size2, -size2, 0);
 
     // Finally, call this recursively for all children.
     this._childrenContainer.get_children().forEach(child => child._onSettingsChange());
