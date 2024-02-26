@@ -15,6 +15,7 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Clutter from 'gi://Clutter';
 import Cairo from 'gi://cairo';
+import St from 'gi://St';
 
 import * as utils from '../common/utils.js';
 
@@ -38,7 +39,7 @@ export var MouseHighlight = GObject.registerClass({
   Properties: {},
   Signals: {}
 },
-class MouseHighlight extends Clutter.Actor {
+class MouseHighlight extends St.DrawingArea {
       // clang-format on
 
       // ------------------------------------------------------------ constructor /
@@ -52,8 +53,9 @@ class MouseHighlight extends Clutter.Actor {
         this._mods = 0;
 
         // The pointer is drawn to this canvas.
-        this._canvas = new Clutter.Canvas();
-        this._canvas.connect('draw', (canvas, ctx, width, height) => {
+        this.connect('repaint', (canvas) => {
+          const ctx = canvas.get_context();
+
           ctx.setOperator(Cairo.Operator.CLEAR);
           ctx.paint();
           ctx.setOperator(Cairo.Operator.OVER);
@@ -126,21 +128,10 @@ class MouseHighlight extends Clutter.Actor {
           ctx.$dispose();
         });
 
-        this._canvas.set_size(size, size);
-
-        // Apply HiDPI scaling and trigger an initial 'draw' signal emission. The call to
-        // set_scale_factor() will automatically invalidate the canvas.
-        if (utils.getHDPIResourceScale() != 1) {
-          this._canvas.set_scale_factor(utils.getHDPIResourceScale());
-        } else {
-          this._canvas.invalidate();
-        }
-
         // Set the size of the anchor. For some reason a small offset is required to make
         // it exactly match the original mouse pointer's position.
         this.set_size(size, size);
         this.set_translation(-3, -3, 0);
-        this.set_content(this._canvas);
 
         // Update the position of the pointer at 100 Hz.
         this._updateTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 10, () => {
@@ -149,7 +140,7 @@ class MouseHighlight extends Clutter.Actor {
 
           if (this._mods != mods) {
             this._mods = mods;
-            this._canvas.invalidate();
+            this.queue_repaint();
           }
 
           return true;
