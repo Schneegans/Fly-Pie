@@ -19,6 +19,10 @@ SPDX-License-Identifier: CC-BY-4.0
 - Several translation updates. Thanks to all the translators!
 - All CI jobs are now executed for GNOME 45 and GNOME 46 as well.
 
+#### Changes
+
+- Due to the removal of `Clutter.Canvas` in GNOME 46, the icons of the menu are now drawn with a `St.DrawingArea`. This brings some subtle changes for the menu item transitions when hovering or selecting items.
+
 #### Bug Fixes
 
 - Fixed a regression which caused an error when trying to load theme presets in the settings dialog.
