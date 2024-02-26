@@ -15,6 +15,7 @@ import GLib from 'gi://GLib';
 import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import Cairo from 'gi://cairo';
+import St from 'gi://St';
 
 import * as utils from '../common/utils.js';
 
@@ -162,33 +163,6 @@ class SelectionWedges extends Clutter.Actor {
         this._wedgeActor.add_effect(this._wedgeShader);
         this.add_child(this._wedgeActor);
 
-        // Now we create the Clutter.Canvas which will be used by the separator actors. It
-        // just contains a simple line with a gradient.
-        this._separatorCanvas = new Clutter.Canvas();
-        this._separatorCanvas.connect('draw', (canvas, ctx, width, height) => {
-          ctx.setOperator(Cairo.Operator.CLEAR);
-          ctx.paint();
-          ctx.setOperator(Cairo.Operator.OVER);
-
-          const gradient =
-              new Cairo.LinearGradient(this._settings.wedgeInnerRadius, 0, width, 0);
-          const color = this._settings.wedgeSeparatorColor;
-          gradient.addColorStopRGBA(
-              0, color.red / 255, color.green / 255, color.blue / 255, color.alpha / 255);
-          gradient.addColorStopRGBA(
-              1, color.red / 255, color.green / 255, color.blue / 255, 0);
-
-          ctx.setLineWidth(this._settings.wedgeSeparatorWidth);
-          ctx.setLineCap(Cairo.LineCap.ROUND);
-          ctx.moveTo(this._settings.wedgeInnerRadius, height / 2);
-          ctx.lineTo(width, height / 2);
-          ctx.setSource(gradient);
-          ctx.stroke();
-
-          // Explicitly tell Cairo to free the context memory. Is this really necessary?
-          ctx.$dispose();
-        });
-
         // This actor acts as a group for all separators so that we can easily iterate
         // over them and destroy them once we're done.
         this._separators = new Clutter.Actor();
@@ -226,18 +200,13 @@ class SelectionWedges extends Clutter.Actor {
         this._wedgeActor.set_size(outerRadius * 2, outerRadius * 2);
         this._wedgeActor.set_translation(-outerRadius, -outerRadius, 0);
 
-        // Update and re-draw the separator canvas.
-        this._separatorCanvas.set_size(
-            this._settings.wedgeInnerRadius + this._settings.wedgeWidth,
-            this._settings.wedgeSeparatorWidth + 5);
-        this._separatorCanvas.invalidate();
-
         // Update the size and position of all separator actors.
         this._separators.get_children().forEach(child => {
           child.set_size(
               this._settings.wedgeInnerRadius + this._settings.wedgeWidth,
               this._settings.wedgeSeparatorWidth + 5);
           child.translation_y = -child.height / 2;
+          child.queue_repaint();
         });
 
         // This could be shortened if we could set vec4's as uniforms...
@@ -338,17 +307,46 @@ class SelectionWedges extends Clutter.Actor {
             const separatorAngle = (startAngle + endAngle) / 2;
             this._separatorAngles.push(separatorAngle);
 
-            // Now create the separator actor and rotate it according to the angle.
-            const separator = new Clutter.Actor({
+            // Now create the separator actor and rotate it according to the angle. It
+            // just contains a simple line with a gradient.
+            const separator = new St.DrawingArea({
               width: this._settings.wedgeInnerRadius + this._settings.wedgeWidth,
               height: this._settings.wedgeSeparatorWidth + 5
+            });
+
+            separator.connect('repaint', (canvas) => {
+              const ctx             = canvas.get_context();
+              const [width, height] = canvas.get_surface_size();
+
+              ctx.setOperator(Cairo.Operator.CLEAR);
+              ctx.paint();
+              ctx.setOperator(Cairo.Operator.OVER);
+
+              const gradient =
+                  new Cairo.LinearGradient(this._settings.wedgeInnerRadius, 0, width, 0);
+              const color = this._settings.wedgeSeparatorColor;
+              gradient.addColorStopRGBA(
+                  0, color.red / 255, color.green / 255, color.blue / 255,
+                  color.alpha / 255);
+              gradient.addColorStopRGBA(
+                  1, color.red / 255, color.green / 255, color.blue / 255, 0);
+
+              ctx.setLineWidth(this._settings.wedgeSeparatorWidth);
+              ctx.setLineCap(Cairo.LineCap.ROUND);
+              ctx.moveTo(this._settings.wedgeInnerRadius, height / 2);
+              ctx.lineTo(width, height / 2);
+              ctx.setSource(gradient);
+              ctx.stroke();
+
+              // Explicitly tell Cairo to free the context memory. Is this really
+              // necessary?
+              ctx.$dispose();
             });
 
             // Turn by 90° as 0° is up in our case.
             separator.rotation_angle_z = separatorAngle - 90;
             separator.translation_y    = -separator.height / 2;
             separator.set_pivot_point(0, 0.5);
-            separator.set_content(this._separatorCanvas);
             this._separators.add_child(separator);
           }
         }
