@@ -15,9 +15,18 @@ SPDX-License-Identifier: CC-BY-4.0
 
 #### Enhancements
 
+- The extension has been updated to work with GNOME 46. Some refactoring was required, so please report any issues you encounter!
 - Instead of an always out-of-date list of sponsors, the main menu of the preferences dialog now contains a link to the new [list of all donors](https://schneegans.github.io/sponsors/). This list is semi-automatically updated whenever a new donation is received. Thanks to all the donors!
 - Several translation updates. Thanks to all the translators!
-- All CI jobs are now executed for GNOME 45 as well.
+- All CI jobs are now executed for GNOME 45 and GNOME 46 as well.
+
+#### Changes
+
+- Due to the removal of `Clutter.Canvas` in GNOME 46, the icons of the menu are now drawn with a `St.DrawingArea`. This brings some subtle changes for the menu item transitions when hovering or selecting items.
+
+#### Bug Fixes
+
+- Fixed a regression which caused an error when trying to load theme presets in the settings dialog.
 
 ## [Fly-Pie 24](https://github.com/schneegans/fly-pie/releases/tag/v24)
 

@@ -267,8 +267,16 @@ class Background extends Clutter.Actor {
       width: 100,
       layout_manager: new Clutter.BoxLayout(boxLayoutParams)
     });
-    box.add_actor(icon);
-    box.add_actor(label);
+
+    // Starting from GNOME 46, the add_actor method is removed. We need to use add_child
+    // instead.
+    if (box.add_actor) {
+      box.add_actor(icon);
+      box.add_actor(label);
+    } else {
+      box.add_child(icon);
+      box.add_child(label);
+    }
 
     const button = new St.Button({style_class: 'app-well-app'});
     button.set_child(box);

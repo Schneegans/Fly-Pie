@@ -14,6 +14,8 @@
 import Gio from 'gi://Gio';
 import Gdk from 'gi://Gdk';
 
+import * as utils from '../common/utils.js';
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // Presets of Fly-Pie are stored in the JSON format. These files contain values for a   //
 // subset of Fly-Pie's settings. The subset is defined in the presetKeys list below.    //
