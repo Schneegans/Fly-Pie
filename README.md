@@ -82,7 +82,12 @@ While coding new features or translating Fly-Pie is the most awesome way to cont
 
 **These awesome people have already donated to the development of my open-source projects:**
 
-[![Sponsors](https://schneegans.github.io/sponsors/sponsors.svg)](https://schneegans.github.io/sponsors/)
+<a href="https://schneegans.github.io/sponsors/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://schneegans.github.io/sponsors/sponsors_dark_small.svg">
+    <img alt="Sponsors List" src="https://schneegans.github.io/sponsors/sponsors_light_small.svg#gh-light-mode-only">
+  </picture>
+</a>
 
 Do you want to show that you love it too? If you donate via [Ko-fi](https://ko-fi.com/schneegans), [GitHub](https://github.com/sponsors/Schneegans), or [PayPal](https://www.paypal.com/donate/?hosted_button_id=3F7UFL8KLVPXE), you will show up in this list as well!
 
