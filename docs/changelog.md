@@ -9,6 +9,14 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
+## [unreleased]
+
+**Release Date:** TBD
+
+#### Bug Fixes
+
+- Fixed selecting items on GNOME 46 requiring two clicks.
+
 ## [Fly-Pie 25](https://github.com/schneegans/fly-pie/releases/tag/v25)
 
 **Release Date:** 2024-02-27
