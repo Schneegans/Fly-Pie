@@ -726,7 +726,6 @@ class MenuItem extends Clutter.Actor {
     if (this._trace.get_height() != MenuItemSettings.traceThickness + 2) {
       this._trace.set_height(MenuItemSettings.traceThickness + 2);
       this._trace.set_translation(0, -this._trace.get_height() / 2, 0);
-      this._trace.get_content().set_size(1, MenuItemSettings.traceThickness + 2);
     }
 
     // Fade-in the trace it it's currently invisible.
@@ -1011,7 +1010,7 @@ class MenuItem extends Clutter.Actor {
 
     // We also re-draw the trace line to the currently active child if there is any.
     if (this._trace != undefined) {
-      this._trace.get_content().invalidate();
+      this._trace.queue_repaint();
     }
 
     // Compute the icon container's size and position. We use the maximum size of all icon
