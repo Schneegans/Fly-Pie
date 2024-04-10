@@ -13,9 +13,14 @@ SPDX-License-Identifier: CC-BY-4.0
 
 **Release Date:** TBD
 
+#### Changes
+
+- The settings dialog now uses libadwaita for the tab pages. This brings some minor layout changes.
+
 #### Bug Fixes
 
 - Fixed selecting items on GNOME 46 requiring two clicks.
+- Fixed an issue which allowed the settings dialog to be resized below its minimal size.
 
 ## [Fly-Pie 25](https://github.com/schneegans/fly-pie/releases/tag/v25)
 
