@@ -16,6 +16,7 @@ import Gtk from 'gi://Gtk';
 import Gdk from 'gi://Gdk';
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
+import Adw from 'gi://Adw';
 
 import * as utils from '../common/utils.js';
 import {DBusInterface} from '../common/DBusInterface.js';
@@ -473,7 +474,7 @@ export default class MenuEditorPage {
     // The icon-select dialog is shown when the corresponding button is pressed.
     this._builder.get_object('icon-select-button').connect('clicked', () => {
       iconSelectDialog.set_transient_for(
-          this._builder.get_object('main-notebook').get_root());
+          this._builder.get_object('menu-editor-page').get_root());
       iconSelectDialog.set_icon(this._builder.get_object('icon-name').text);
       iconSelectDialog.show();
     });
@@ -1279,7 +1280,8 @@ export default class MenuEditorPage {
 
   // Shows an in-app notification with the given text.
   _showNotification(text) {
-    this._builder.get_object('notification-revealer').reveal_child = true;
-    this._builder.get_object('notification-label').label           = text;
+    const window = this._builder.get_object('menu-editor-page').get_root();
+    const toast  = Adw.Toast.new(text);
+    window.add_toast(toast);
   }
 }

@@ -34,7 +34,8 @@ export default class FlyPiePreferences extends ExtensionPreferences {
   fillPreferencesWindow(window) {
 
     // Give some space to the window's widgets.
-    window.set_default_size(650, 750);
+    window.set_default_size(850, 800);
+    window.set_size_request(850, 550);
 
     // Create the Gio.Settings object.
     const settings = utils.createSettings();
@@ -80,33 +81,31 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     // Initialize the Achievements page.
     const achievementsPage = new AchievementsPage(builder, settings);
 
-    // Hide the in-app notification when its close button is pressed.
-    builder.get_object('notification-close-button').connect('clicked', () => {
-      builder.get_object('notification-revealer').reveal_child = false;
-    });
-
-    // This is our top-level widget which we will return later.
-    const mainWidget = builder.get_object('main-notebook');
+    // These are our top-level preferences pages which we will return later.
+    this._pages = [
+      builder.get_object('tutorial-page'), builder.get_object('settings-page'),
+      builder.get_object('menu-editor-page'), builder.get_object('achievements-page')
+    ];
 
     // Because it looks cool, we add the stack switcher and the menu button to the
     // window's title bar. We should refactor this to use libadwaita widgets in the
     // future.
-    mainWidget.connect('realize', widget => {
+    this._pages[0].connect('realize', widget => {
       const window = widget.get_root();
 
-      const stackSwitcher = builder.get_object('main-stack-switcher');
-      const menuButton    = builder.get_object('menu-button');
+      // Save the currently active settings page. This way, the tutorial will be shown
+      // when the settings dialog is shown for the first time. Then, when the user
+      // modified something on another page, this will be shown when the settings dialog
+      // is shown again.
+      window.visible_page_name = settings.get_string('active-stack-child');
+      window.connect('notify::visible-page-name', (w) => {
+        settings.set_string('active-stack-child', w.visible_page_name);
+      });
 
-      stackSwitcher.parent.remove(menuButton);
-      stackSwitcher.parent.remove(stackSwitcher);
-
-      // In the future, we should drop support for older GNOME versions and rewrite the
-      // entire dialog using libadwaita widgets!
-
-      // Add widgets to the titlebar.
-      const titlebar = this._findChildByType(window, Adw.HeaderBar);
-      titlebar.set_title_widget(stackSwitcher);
-      titlebar.pack_start(menuButton);
+      // Add the menu to the header bar.
+      const menu   = builder.get_object('menu-button');
+      const header = this._findChildByType(window.get_content(), Adw.HeaderBar);
+      header.pack_start(menu);
 
       // Now create all the actions for the main menu.
       const group = Gio.SimpleActionGroup.new();
@@ -175,19 +174,11 @@ export default class FlyPiePreferences extends ExtensionPreferences {
       }
     });
 
-    // Save the currently active settings page. This way, the tutorial will be shown when
-    // the settings dialog is shown for the first time. Then, when the user modified
-    // something on another page, this will be shown when the settings dialog is shown
-    // again.
-    const stack              = builder.get_object('main-stack');
-    stack.visible_child_name = settings.get_string('active-stack-child');
-    stack.connect('notify::visible-child-name', (stack) => {
-      settings.set_string('active-stack-child', stack.visible_child_name);
-    });
+
 
     // As we do not have something like a destructor, we just listen for the destroy
     // signal of our main widget.
-    mainWidget.connect('destroy', () => {
+    this._pages[0].connect('destroy', () => {
       // Delete the static settings object of the statistics.
       Statistics.destroyInstance();
 
@@ -203,7 +194,9 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     // Record this construction for the statistics.
     Statistics.getInstance().addSettingsOpened();
 
-    window.add(mainWidget);
+    this._pages.forEach(page => {
+      window.add(page);
+    });
   }
 
   // ----------------------------------------------------------------------- private stuff
