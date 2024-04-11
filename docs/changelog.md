@@ -21,6 +21,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 - Fixed selecting items on GNOME 46 requiring two clicks.
 - Fixed an issue which allowed the settings dialog to be resized below its minimal size.
+- Fixed a bug which caused achievement notifications to be not shown on GNOME 46.
 
 ## [Fly-Pie 25](https://github.com/schneegans/fly-pie/releases/tag/v25)
 
