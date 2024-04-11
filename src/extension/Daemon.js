@@ -591,17 +591,25 @@ export default class Daemon {
   // of the icon seems to depend on the currently used theme and cannot be set from here.
   // The notification will also contain a hard-coded button which opens the achievements
   // page of the settings dialog.
-  _notify(label, details, gicon) {
+  _notify(title, body, gicon) {
 
     if (this._settings.get_boolean('achievement-notifications')) {
-      const source = new Source('Fly-Pie', '');
-      Main.messageTray.add(source);
 
-      const n = new Notification(source, label, details, {gicon: gicon});
+      let source, notification;
+
+      if (utils.shellVersionIsAtLeast(46)) {
+        source       = new Source({title: 'Fly-Pie'});
+        notification = new Notification({source, title, body, gicon: gicon});
+      } else {
+        source       = new Source('Fly-Pie', '');
+        notification = new Notification(source, title, body, {gicon: gicon});
+      }
+
+      Main.messageTray.add(source);
 
       // Translators: This is shown on the action button of the notification bubble which
       // is shown once an achievement is unlocked.
-      n.addAction(_('Show Achievements'), () => {
+      notification.addAction(_('Show Achievements'), () => {
         // Make sure the achievements page is shown.
         this._settings.set_string('active-stack-child', 'achievements-page');
 
@@ -609,7 +617,11 @@ export default class Daemon {
         Main.extensionManager.openExtensionPrefs(this._metadata.uuid, '');
       });
 
-      source.showNotification(n);
+      if (source.addNotification) {
+        source.addNotification(notification);
+      } else {
+        source.showNotification(notification);
+      }
     }
   }
 };
