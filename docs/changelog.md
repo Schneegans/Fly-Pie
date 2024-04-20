@@ -9,6 +9,18 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
+## [unreleased]
+
+**Release Date:** TBD
+
+#### Enhancements
+
+- If you drag a file or directory path to the menu editor, the corresponding file or directory will be opened when the newly created item is selected.
+
+#### Bug Fixes
+
+- Dragging `*.desktop` files to the menu editor now works again.
+
 ## [Fly-Pie 26](https://github.com/schneegans/fly-pie/releases/tag/v26)
 
 **Release Date:** 2024-04-11
