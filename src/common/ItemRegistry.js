@@ -209,71 +209,67 @@ export class ItemRegistry {
 
     const uriScheme = GLib.uri_parse_scheme(text);
     let success     = false;
+    const file =
+        uriScheme != null ? Gio.File.new_for_uri(text) : Gio.File.new_for_path(text);
 
-    if (uriScheme != null) {
-      // First we check whether the dragged data contains an URI. If it points to
-      // a *.desktop file, we create a "Launch Application" item for the
-      // corresponding application.
-      if (uriScheme == 'file') {
-        const file = Gio.File.new_for_uri(text);
+    // First we check whether the dragged data contains a file path. If it points to
+    // a *.desktop file, we create a "Launch Application" item for the corresponding
+    // application.
 
-        if (file.query_exists(null)) {
+    if (file.query_exists(null)) {
 
-          if (text.endsWith('.desktop')) {
+      if (text.endsWith('.desktop')) {
 
-            const info = Gio.DesktopAppInfo.new_from_filename(file.get_path());
-            const type = 'Command';
+        const info = Gio.DesktopAppInfo.new_from_filename(file.get_path());
+        const type = 'Command';
 
-            let icon = ItemRegistry.getItemTypes()[type].icon;
-            if (info.get_icon()) {
-              icon = info.get_icon().to_string();
-            }
+        let icon = ItemRegistry.getItemTypes()[type].icon;
+        if (info.get_icon()) {
+          icon = info.get_icon().to_string();
+        }
 
-            if (info != null) {
-              item.data = {command: info.get_commandline()};
-              item.icon = icon;
-              item.name = info.get_display_name();
-              item.type = type;
+        if (info != null) {
+          item.data = {command: info.get_commandline()};
+          item.icon = icon;
+          item.name = info.get_display_name();
+          item.type = type;
 
-              success = true;
-            }
-          }
-
-          // If it's an URI to any other local file, we create an "Open File"
-          // item.
-          if (!success) {
-            const type = 'File';
-            const info = file.query_info('standard::icon', 0, null);
-
-            if (info != null) {
-              // Skip the file://
-              item.data = {file: text.substring(7)};
-              item.icon = info.get_icon().to_string();
-              item.name = file.get_basename();
-              item.type = type;
-
-              success = true;
-            }
-          }
+          success = true;
         }
       }
 
+      // If it's an URI to any other local file, we create an "Open File"
+      // item.
       if (!success) {
+        const type = 'File';
+        const info = file.query_info('standard::icon', 0, null);
 
-        // For any other URI we create an "Open URI" item.
-        const type = 'Uri';
-        const name = text.length < 20 ? text : text.substring(0, 20) + '...';
+        if (info != null) {
+          // Skip the file://
+          item.data = {file: uriScheme != null ? text.substring(7) : text};
+          item.icon = info.get_icon().to_string();
+          item.name = file.get_basename();
+          item.type = type;
 
-        item.data = {uri: text};
-        item.icon = ItemRegistry.getItemTypes()[type].icon;
-        item.name = name;
-        item.type = type;
-        success   = true;
+          success = true;
+        }
       }
     }
 
+    // For any other URI we create an "Open URI" item.
+    if (!success && uriScheme != null) {
+      const type = 'Uri';
+      const name = text.length < 20 ? text : text.substring(0, 20) + '...';
+
+      item.data = {uri: text};
+      item.icon = ItemRegistry.getItemTypes()[type].icon;
+      item.name = name;
+      item.type = type;
+      success   = true;
+    }
+
     // If it's not an URI, we create an "Insert Text" action.
-    else {
+    if (!success) {
       const type = 'InsertText';
       const name = text.length < 20 ? text : text.substring(0, 20) + '...';
 
