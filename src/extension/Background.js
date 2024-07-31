@@ -63,13 +63,13 @@ class Background extends Clutter.Actor {
 
     // Set the background color according to the settings.
     this.backgroundColor =
-        Clutter.Color.from_string(this._settings.get_string('background-color'))[1];
+        utils.parseColor(this._settings.get_string('background-color'))[1];
 
     // And update it in case of changes.
     this._settingsConnections.push(
         this._settings.connect('changed::background-color', () => {
           this.backgroundColor =
-              Clutter.Color.from_string(this._settings.get_string('background-color'))[1];
+              utils.parseColor(this._settings.get_string('background-color'))[1];
         }));
 
     // Switch monitor side when the preview-on-right-side settings key changes.

@@ -180,7 +180,7 @@ export default class TouchButtons {
     // clang-format off
     this._cachedSettings = {
       easingDuration:      this._settings.get_double('easing-duration') * 1000,
-      textColor:           Clutter.Color.from_string(this._settings.get_string('text-color'))[1],
+      textColor:           utils.parseColor(this._settings.get_string('text-color'))[1],
       font:                this._settings.get_string('font'),
       opacity:             this._settings.get_double('touch-buttons-opacity') * 255,
       showInOverview:      this._settings.get_boolean('touch-buttons-show-in-overview-mode'),
@@ -209,7 +209,7 @@ export default class TouchButtons {
       // clang-format on
 
       const [r, g, b]        = utils.getAverageIconColor(surface, 24);
-      const averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
+      const averageIconColor = utils.createColorRGB(r, g, b);
 
       // Now we modify this color based on the configured luminance and saturation values.
       const saturation = this._settings.get_double('center-auto-color-saturation-hover');
@@ -222,7 +222,7 @@ export default class TouchButtons {
     }
     // Else we simply use the configured fixed color.
     else {
-      this._cachedSettings.backgroundColor = Clutter.Color.from_string(
+      this._cachedSettings.backgroundColor = utils.parseColor(
           this._settings.get_string('center-fixed-color-hover'))[1];
     }
 

@@ -183,9 +183,9 @@ class SelectionWedges extends Clutter.Actor {
         this._settings = {
           wedgeWidth:              settings.get_double('wedge-width')          * globalScale,
           wedgeInnerRadius:        settings.get_double('wedge-inner-radius')   * globalScale,
-          wedgeColor:              Clutter.Color.from_string(settings.get_string('wedge-color'))[1],
-          wedgeColorHover:         Clutter.Color.from_string(settings.get_string('wedge-color-hover'))[1],
-          wedgeSeparatorColor:     Clutter.Color.from_string(settings.get_string('wedge-separator-color'))[1],
+          wedgeColor:              utils.parseColor(settings.get_string('wedge-color'))[1],
+          wedgeColorHover:         utils.parseColor(settings.get_string('wedge-color-hover'))[1],
+          wedgeSeparatorColor:     utils.parseColor(settings.get_string('wedge-separator-color'))[1],
           wedgeSeparatorWidth:     settings.get_double('wedge-separator-width') * globalScale,
           gestureSelectionTimeout: settings.get_double('gesture-selection-timeout'),
           gestureJitterThreshold:  settings.get_double('gesture-jitter-threshold')  * globalScale,
