@@ -15,6 +15,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 #### Enhancements
 
+- Ported the extension to GNOME 47.
 - If you drag a file or directory path to the menu editor, the corresponding file or directory will be opened when the newly created item is selected.
 
 #### Bug Fixes
