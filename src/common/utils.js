@@ -535,7 +535,7 @@ export function createColorHSL(h, s, l) {
   if (shellVersionIsAtLeast(47, 'alpha')) {
     return Cogl.Color.init_from_hsl(h, s, l);
   }
-  return Clutter.Color.from_hsl(h, s, l);
+  return Clutter.Color.from_hls(h, l, s);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
