@@ -22,6 +22,6 @@ cd "$( cd "$( dirname "$0" )" && pwd )/.." || \
 find . -type f -name '*.js' -exec sh -c '
   for file do
     echo "Formatting $file..."
-    clang-format -i "$file"
+    clang-format-15 -i "$file"
   done
 ' sh {} +
