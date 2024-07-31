@@ -136,7 +136,7 @@ class MenuItem extends Clutter.Actor {
 
     // This is recursively updated using setParentColor(). It is used for the background
     // coloring when the color mode is set to 'parent'.
-    this._parentColor = utils.createColorRGB( 255, 255, 255);
+    this._parentColor = utils.createColorRGB(255, 255, 255);
 
     // This callback will be executed when the item is selected. Only items without any
     // children but with such a callback can be activated.
@@ -773,7 +773,7 @@ class MenuItem extends Clutter.Actor {
 
     let h, l, s;
     if (utils.shellVersionIsAtLeast(47, 'alpha')) {
-      [h,s,l] = averageColor.to_hsl();
+      [h, s, l] = averageColor.to_hsl();
     } else {
       [h, l, s] = averageColor.to_hls();
     }

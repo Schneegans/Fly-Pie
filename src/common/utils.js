@@ -22,10 +22,10 @@ import PangoCairo from 'gi://PangoCairo';
 // We import some modules optionally. This file is used in the preferences process as well
 // as in the GNOME Shell process. Some modules are only available or required in one of
 // these processes.
-const St  = await importInShellOnly('gi://St');
+const St      = await importInShellOnly('gi://St');
 const Clutter = await importInShellOnly('gi://Clutter');
-const Cogl= await importInShellOnly('gi://Cogl');
-const Gtk = await importInPrefsOnly('gi://Gtk');
+const Cogl    = await importInShellOnly('gi://Cogl');
+const Gtk     = await importInPrefsOnly('gi://Gtk');
 
 // We import the Config module. This is done differently in the GNOME Shell process and in
 // the preferences process.
@@ -521,10 +521,10 @@ export function getAverageIconColor(iconSurface, iconSize) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This methods create a new Clutter.Color or Cogl.Color object, depending on the       //
-// current shell version.                                                              //
+// current shell version.                                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-export function createColorRGB(r, g, b, a=255) {
+export function createColorRGB(r, g, b, a = 255) {
   if (shellVersionIsAtLeast(47, 'alpha')) {
     return new Cogl.Color({red: r, green: g, blue: b, alpha: a});
   }
@@ -539,16 +539,15 @@ export function createColorHSL(h, s, l) {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Converts a hex, rgb, or rgba CSS-like color string to  either a Clutter.Color or a    //
-// Cogl.Color object.                                                                //
+// Converts a hex, rgb, or rgba CSS-like color string to  either a Clutter.Color or a   //
+// Cogl.Color object.                                                                   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 export function parseColor(color) {
-  if (shellVersionIsAtLeast(47, 'alpha')) 
-    { 
-      return Cogl.Color.from_string(color);
-    }
-    return Clutter.Color.from_string(color);
+  if (shellVersionIsAtLeast(47, 'alpha')) {
+    return Cogl.Color.from_string(color);
+  }
+  return Clutter.Color.from_string(color);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

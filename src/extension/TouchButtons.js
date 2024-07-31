@@ -222,8 +222,8 @@ export default class TouchButtons {
     }
     // Else we simply use the configured fixed color.
     else {
-      this._cachedSettings.backgroundColor = utils.parseColor(
-          this._settings.get_string('center-fixed-color-hover'))[1];
+      this._cachedSettings.backgroundColor =
+          utils.parseColor(this._settings.get_string('center-fixed-color-hover'))[1];
     }
 
     // Now (re-)create the buttons!
