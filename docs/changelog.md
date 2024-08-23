@@ -9,14 +9,15 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
-## [unreleased]
+## [Fly-Pie 27](https://github.com/schneegans/fly-pie/releases/tag/v27)
 
-**Release Date:** TBD
+**Release Date:** 2024-08-23
 
 #### Enhancements
 
 - Ported the extension to GNOME 47.
 - If you drag a file or directory path to the menu editor, the corresponding file or directory will be opened when the newly created item is selected.
+- Several translation updates. Thanks to all the translators!
 
 #### Bug Fixes
 
