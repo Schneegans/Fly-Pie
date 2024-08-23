@@ -95,6 +95,9 @@ jobs:
         session:
           - "gnome-xsession"
           - "gnome-wayland-nested"
+        exclude: # The wayland session of the rawhide container does not work for some reason.
+          - session: gnome-wayland-nested
+            version: "39"
     steps:
       - uses: actions/checkout@v2
       - name: Download Dependencies
