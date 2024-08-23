@@ -22,8 +22,10 @@ import PangoCairo from 'gi://PangoCairo';
 // We import some modules optionally. This file is used in the preferences process as well
 // as in the GNOME Shell process. Some modules are only available or required in one of
 // these processes.
-const St  = await importInShellOnly('gi://St');
-const Gtk = await importInPrefsOnly('gi://Gtk');
+const St      = await importInShellOnly('gi://St');
+const Clutter = await importInShellOnly('gi://Clutter');
+const Cogl    = await importInShellOnly('gi://Cogl');
+const Gtk     = await importInPrefsOnly('gi://Gtk');
 
 // We import the Config module. This is done differently in the GNOME Shell process and in
 // the preferences process.
@@ -517,6 +519,36 @@ export function getAverageIconColor(iconSurface, iconSize) {
   return [rTotal / total * 255, gTotal / total * 255, bTotal / total * 255];
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+// This methods create a new Clutter.Color or Cogl.Color object, depending on the       //
+// current shell version.                                                               //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+export function createColorRGB(r, g, b, a = 255) {
+  if (shellVersionIsAtLeast(47, 'alpha')) {
+    return new Cogl.Color({red: r, green: g, blue: b, alpha: a});
+  }
+  return new Clutter.Color({red: r, green: g, blue: b, alpha: a});
+}
+
+export function createColorHSL(h, s, l) {
+  if (shellVersionIsAtLeast(47, 'alpha')) {
+    return Cogl.Color.init_from_hsl(h, s, l);
+  }
+  return Clutter.Color.from_hls(h, l, s);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Converts a hex, rgb, or rgba CSS-like color string to  either a Clutter.Color or a   //
+// Cogl.Color object.                                                                   //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+export function parseColor(color) {
+  if (shellVersionIsAtLeast(47, 'alpha')) {
+    return Cogl.Color.from_string(color);
+  }
+  return Clutter.Color.from_string(color);
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This rounds the given number to the nearest multiple of base. This works for integer //

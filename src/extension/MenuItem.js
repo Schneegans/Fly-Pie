@@ -136,7 +136,7 @@ class MenuItem extends Clutter.Actor {
 
     // This is recursively updated using setParentColor(). It is used for the background
     // coloring when the color mode is set to 'parent'.
-    this._parentColor = new Clutter.Color({red: 255, green: 255, blue: 255});
+    this._parentColor = utils.createColorRGB(255, 255, 255);
 
     // This callback will be executed when the item is selected. Only items without any
     // children but with such a callback can be activated.
@@ -347,11 +347,11 @@ class MenuItem extends Clutter.Actor {
       globalScale:             globalScale,
       easingDuration:          settings.get_double('easing-duration') * 1000,
       easingMode:              settings.get_enum('easing-mode'),
-      textColor:               Clutter.Color.from_string(settings.get_string('text-color'))[1],
+      textColor:               utils.parseColor(settings.get_string('text-color'))[1],
       font:                    settings.get_string('font'),
       labelFont:               settings.get_string('label-font'),
       traceThickness:          settings.get_double('trace-thickness') * globalScale,
-      traceColor:              Clutter.Color.from_string(settings.get_string('trace-color'))[1],
+      traceColor:              utils.parseColor(settings.get_string('trace-color'))[1],
       state: new Map ([
         [MenuItemState.INVISIBLE, {
           colorMode:           '',
@@ -361,7 +361,7 @@ class MenuItem extends Clutter.Actor {
         }],
         [MenuItemState.CENTER, {
           colorMode:           settings.get_string('center-color-mode'),
-          fixedColor:          Clutter.Color.from_string(settings.get_string('center-fixed-color'))[1],
+          fixedColor:          utils.parseColor(settings.get_string('center-fixed-color'))[1],
           size:                settings.get_double('center-size') * globalScale,
           offset:              0,
           iconScale:           settings.get_double('center-icon-scale'),
@@ -376,7 +376,7 @@ class MenuItem extends Clutter.Actor {
         }],
         [MenuItemState.CENTER_HOVERED, {
           colorMode:           settings.get_string('center-color-mode-hover'),
-          fixedColor:          Clutter.Color.from_string(settings.get_string('center-fixed-color-hover'))[1],
+          fixedColor:          utils.parseColor(settings.get_string('center-fixed-color-hover'))[1],
           size:                settings.get_double('center-size-hover') * globalScale,
           offset:              0,
           iconScale:           settings.get_double('center-icon-scale-hover'),
@@ -391,7 +391,7 @@ class MenuItem extends Clutter.Actor {
         }],
         [MenuItemState.CHILD, {
           colorMode:           settings.get_string('child-color-mode'),
-          fixedColor:          Clutter.Color.from_string(settings.get_string('child-fixed-color'))[1],
+          fixedColor:          utils.parseColor(settings.get_string('child-fixed-color'))[1],
           size:                settings.get_double('child-size')     * globalScale,
           offset:              settings.get_double('child-offset')   * globalScale,
           iconScale:           settings.get_double('child-icon-scale'),
@@ -406,7 +406,7 @@ class MenuItem extends Clutter.Actor {
         }],
         [MenuItemState.CHILD_HOVERED, {
           colorMode:           settings.get_string('child-color-mode-hover'),
-          fixedColor:          Clutter.Color.from_string(settings.get_string('child-fixed-color-hover'))[1],
+          fixedColor:          utils.parseColor(settings.get_string('child-fixed-color-hover'))[1],
           size:                settings.get_double('child-size-hover')    * globalScale,
           offset:              settings.get_double('child-offset-hover')  * globalScale,
           iconScale:           settings.get_double('child-icon-scale-hover'),
@@ -421,7 +421,7 @@ class MenuItem extends Clutter.Actor {
         }],
         [MenuItemState.GRANDCHILD, {
           colorMode:           settings.get_string('grandchild-color-mode'),
-          fixedColor:          Clutter.Color.from_string(settings.get_string('grandchild-fixed-color'))[1],
+          fixedColor:          utils.parseColor(settings.get_string('grandchild-fixed-color'))[1],
           size:                settings.get_double('grandchild-size')    * globalScale,
           offset:              settings.get_double('grandchild-offset')  * globalScale,
           iconOpacity:         0,
@@ -431,7 +431,7 @@ class MenuItem extends Clutter.Actor {
         }],
         [MenuItemState.GRANDCHILD_HOVERED, {
           colorMode:           settings.get_string('grandchild-color-mode-hover'),
-          fixedColor:          Clutter.Color.from_string(settings.get_string('grandchild-fixed-color-hover'))[1],
+          fixedColor:          utils.parseColor(settings.get_string('grandchild-fixed-color-hover'))[1],
           size:                settings.get_double('grandchild-size-hover')   * globalScale,
           offset:              settings.get_double('grandchild-offset-hover') * globalScale,
           iconOpacity:         0,
@@ -539,7 +539,7 @@ class MenuItem extends Clutter.Actor {
           blue: MenuItemSettings.textColor.blue / 255
                  });
         const [r, g, b]        = utils.getAverageIconColor(surface, 24);
-        this._averageIconColor = new Clutter.Color({red: r, green: g, blue: b});
+        this._averageIconColor = utils.createColorRGB(r, g, b);
       }
 
       // Now we modify this color based on the configured luminance and saturation values.
@@ -771,7 +771,12 @@ class MenuItem extends Clutter.Actor {
   // but the luminance and saturation values are based on the given input values.
   static getAutoColor(averageColor, luminance, saturation, opacity) {
 
-    let [h, l, s] = averageColor.to_hls();
+    let h, l, s;
+    if (utils.shellVersionIsAtLeast(47, 'alpha')) {
+      [h, s, l] = averageColor.to_hsl();
+    } else {
+      [h, l, s] = averageColor.to_hls();
+    }
 
     // First we increase the base luminance to 0.5 so that we do not create pitch black
     // colors.
@@ -788,7 +793,7 @@ class MenuItem extends Clutter.Actor {
       s          = sFac > 0 ? s * (1 - sFac) + 1 * sFac : s * (sFac + 1);
     }
 
-    const result = Clutter.Color.from_hls(h, l, s);
+    const result = utils.createColorHSL(h, l, s);
     result.alpha = opacity;
 
     return result;
