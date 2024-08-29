@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Fly-Pie 6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: 2024-05-30 12:09+0000\n"
-"Last-Translator: Benjamin Alan Jamie <benjamin@weblate.org>\n"
+"PO-Revision-Date: 2024-08-30 20:09+0000\n"
+"Last-Translator: pyccl <changcongliang@163.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "fly-pie/core/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.7.1-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
-msgstr "模拟键盘快捷键"
+msgstr "激活快捷键"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -173,7 +173,7 @@ msgstr ""
 
 #: src/common/actions/InsertText.js:84
 msgid "Text"
-msgstr "文字"
+msgstr "文本"
 
 #: src/common/actions/InsertText.js:84
 msgid "This text will be inserted."
@@ -305,19 +305,19 @@ msgstr ""
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:46 src/extension/DefaultMenu.js:82
 msgid "Favorites"
-msgstr "收藏的应用"
+msgstr "收藏夹"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:53
 msgid "Shows pinned applications."
-msgstr "显示收藏标星的应用程序。"
+msgstr "显示收藏的应用程序。"
 
 #: src/common/menus/Favorites.js:57
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
-msgstr "<b>收藏的应用</b>菜单会显示您钉在 GNOME Shell 上的应用程序。"
+msgstr "<b>收藏夹</b>菜单会显示您钉在 GNOME Shell 上的应用程序。"
 
 #: src/common/menus/RecentFiles.js:37
 msgid "Recent Files"
@@ -334,9 +334,8 @@ msgid ""
 "The <b>Recent Files</b> menu shows a list of recently used files. For "
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
-msgstr ""
-"<b>近期文件</b>菜单会显示近期使用过的文件的列表。为便于选择文件，您最好不要设"
-"置成显示十二个以上的文件。"
+msgstr "<b>近期文件</b>菜单会显示近期使用过的文件的列表。为便于选择文件，您最好不要设"
+"置成显示12个以上的文件。"
 
 #: src/common/menus/Devices.js:36
 msgid "Devices"
@@ -352,7 +351,7 @@ msgstr "显示联到电脑上的设备。"
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
-msgstr "<b>设备</b>菜单为每一个加载出了的存储设备（比如 U 盘）显示一项。"
+msgstr "<b>设备</b>菜单为每一个挂载的存储设备（比如 U 盘）显示一项。"
 
 #: src/common/menus/MainMenu.js:36
 msgid "Main Menu"
@@ -402,10 +401,10 @@ msgid ""
 "but \"Fire\". Remember to use the live preview to instantly see the results!"
 msgstr ""
 "此栏是用来限制哪些窗口显示的。支持正则表达式：直接写“Fire”这样的字符串可以直"
-"显示出标题包含这个字符串的窗口（比如 Firefox 窗口）。写“火|水”会显示标题包"
-"含“火”字或“水”字的窗口。排除字符串可以写成“^(?!.*Fire)”这样，这样写，只有标题"
-"是“Fire”的窗口不会显示出来。本应用程序有个实时预览功能，可以帮您调试正则表达"
-"式！"
+"显示出标题包含这个字符串的窗口（比如 Firefox 窗口）。写“Fire|Water”会显示标题"
+"包含“Fire”或“Water”的窗口。排除字符串可以写成“^(?!.*Fire)”这样，这样写，只有"
+"标题是“Fire”的窗口不会显示出来。本应用程序有个实时预览功能，可以帮您调试正则"
+"表达式！"
 
 #: src/common/menus/RunningApps.js:102
 msgid "Window Filter"
@@ -549,7 +548,7 @@ msgstr "%s弃者"
 #: src/common/Achievements.js:418
 #, javascript-format
 msgid "Abort a selection %x times."
-msgstr ""
+msgstr "中止选择 %x 次。"
 
 #. Translators: The name of the 'Select %x items.' achievement.
 #: src/common/Achievements.js:431
@@ -561,7 +560,7 @@ msgstr ""
 #: src/common/Achievements.js:433
 #, javascript-format
 msgid "Select %x items."
-msgstr ""
+msgstr "选择 %x 项目。"
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
@@ -654,7 +653,7 @@ msgstr ""
 #: src/common/Achievements.js:553
 #, javascript-format
 msgid "Open the settings dialog %x times."
-msgstr ""
+msgstr "打开设置对话框 %x 次。"
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
@@ -666,7 +665,7 @@ msgstr ""
 #: src/common/Achievements.js:570
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
-msgstr ""
+msgstr "用D-Bus接口打开%x 菜单。"
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
 #: src/common/Achievements.js:584
@@ -688,13 +687,13 @@ msgstr ""
 #. only one preset needs to be exported.
 #: src/common/Achievements.js:605
 msgid "Export a custom preset."
-msgstr ""
+msgstr "导出自定义预设。"
 
 #. Translators: The description of the '%s Preset Exporter' achievement.
 #: src/common/Achievements.js:607
 #, javascript-format
 msgid "Export %x custom presets."
-msgstr ""
+msgstr "导出 %x 自定义预设。"
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
 #: src/common/Achievements.js:620
@@ -706,13 +705,13 @@ msgstr ""
 #. only one preset needs to be imported.
 #: src/common/Achievements.js:624
 msgid "Import a custom preset."
-msgstr ""
+msgstr "导入自定义预设。"
 
 #. Translators: The description of the '%s Preset Importer' achievement.
 #: src/common/Achievements.js:626
 #, javascript-format
 msgid "Import %x custom presets."
-msgstr ""
+msgstr "导入%x自定义预设。"
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
 #: src/common/Achievements.js:639
@@ -724,13 +723,13 @@ msgstr ""
 #. only one menu needs to be imported.
 #: src/common/Achievements.js:643
 msgid "Import a menu configuration."
-msgstr ""
+msgstr "导入菜单配置。"
 
 #. Translators: The description of the '%s Menu Importer' achievement.
 #: src/common/Achievements.js:645
 #, javascript-format
 msgid "Import %x menu configurations."
-msgstr ""
+msgstr "导入%x菜单配置。"
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
 #: src/common/Achievements.js:659
@@ -742,13 +741,13 @@ msgstr ""
 #. only one menu needs to be exported.
 #: src/common/Achievements.js:663
 msgid "Export a menu configuration."
-msgstr ""
+msgstr "导出菜单配置。"
 
 #. Translators: The description of the '%s Menu Exporter' achievement.
 #: src/common/Achievements.js:665
 #, javascript-format
 msgid "Export %x menu configurations."
-msgstr ""
+msgstr "导出%x菜单配置。"
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
@@ -761,7 +760,7 @@ msgstr ""
 #: src/common/Achievements.js:683
 #, javascript-format
 msgid "Create %x items in the menu editor."
-msgstr ""
+msgstr "在菜单编辑器中创建%x项。"
 
 #. Translators: The name of the 'Open a preview menu %x times.' achievement.
 #: src/common/Achievements.js:697
@@ -773,19 +772,20 @@ msgstr ""
 #: src/common/Achievements.js:700
 #, javascript-format
 msgid "Open a preview menu %x times."
-msgstr ""
+msgstr "打开预览菜单%x次。"
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:713
+#, fuzzy
 msgid "Grumpie Rookie"
-msgstr ""
+msgstr "愤怒的菜鸟"
 
 #. Translators: The description of the 'Grumpie Rookie' achievement.
 #: src/common/Achievements.js:715
 #, javascript-format
 msgid "Open the tutorial menu %x times."
-msgstr ""
+msgstr "打开教程菜%x次。"
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
@@ -796,7 +796,7 @@ msgstr ""
 #. Translators: The description of the 'Bachelor Pielot' achievement.
 #: src/common/Achievements.js:729
 msgid "Get all medals of the tutorial."
-msgstr ""
+msgstr "获得教程的所有奖章。"
 
 #. Translators: The name of the hidden 'Delete all of your menus.' achievement.
 #. This does not support %s and %i.
@@ -807,27 +807,27 @@ msgstr ""
 #. Translators: The description of the 'Say Good-Pie!' achievement.
 #: src/common/Achievements.js:743
 msgid "Delete all of your menus."
-msgstr ""
+msgstr "删除所有菜单。"
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
 #. achievement.
 #: src/common/Achievements.js:756
 msgid "That's Philanthropie!"
-msgstr ""
+msgstr "那是慈善！"
 
 #. Translators: The description of the 'That's Philanthropie!' achievement.
 #: src/common/Achievements.js:758
 msgid "Consider becoming a sponsor of Fly-Pie."
-msgstr ""
+msgstr "赞助Fly-Pie."
 
 #: src/prefs/AchievementsPage.js:120
 msgid "Do you really want to reset all statistics?"
-msgstr ""
+msgstr "您真的要重置所有统计信息吗？"
 
 #: src/prefs/AchievementsPage.js:121
 msgid "All achievements will be lost!"
-msgstr ""
+msgstr "所有的成就都将失去！"
 
 #: src/prefs/MenuEditor.js:419
 msgid "No menus configured"
@@ -859,19 +859,19 @@ msgstr "只有自定义菜单里面才能创建一项新的操作。"
 
 #: src/prefs/PreferencesDialog.js:255 src/prefs/PreferencesDialog.js:288
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "金牌赞助商"
 
 #: src/prefs/PreferencesDialog.js:259 src/prefs/PreferencesDialog.js:292
 msgid "Silver Sponsors"
-msgstr ""
+msgstr "银牌赞助商"
 
 #: src/prefs/PreferencesDialog.js:263 src/prefs/PreferencesDialog.js:296
 msgid "Bronze Sponsors"
-msgstr ""
+msgstr "铜牌赞助商"
 
 #: src/prefs/PreferencesDialog.js:267 src/prefs/PreferencesDialog.js:300
 msgid "Past Sponsors"
-msgstr ""
+msgstr "前赞助商"
 
 #: src/prefs/ImageChooserButton.js:100
 #: resources/ui/gtk4/imageChooserButton.ui:22
@@ -1005,7 +1005,7 @@ msgstr "<a href=\"%s\">在 Hosted Weblate 上翻译 Fly-Pie</a> 。"
 msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
 "</a>"
-msgstr ""
+msgstr "💕️你想表达你对 Fly-Pie 的热爱吗？<a href=\"%s\">成为赞助商。</a>"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -1013,7 +1013,8 @@ msgstr ""
 msgid ""
 "If you cannot use a specific keyboard shortcut, you may check you system "
 "settings as it may be used already."
-msgstr ""
+msgstr "如果您不能使用特定的键盘快捷键，您可以检查您的系统设置，因为它可能已经被使用"
+"。"
 
 #. Translators: The left-most item of the menu editor bread crumbs.
 #: src/prefs/MenuEditorPage.js:1012
@@ -1036,19 +1037,19 @@ msgstr "预设加载失败！"
 #: src/prefs/TutorialPage.js:185
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big>上次选择时间： <b>%d 毫秒</b></big>"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:190
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big>最快选择时间： <b>%d 毫秒</b></big>"
 
 #. Translators: This is the name of the tutorial menu.
 #. Translators: This is the name of the default menu.
 #: src/prefs/ExampleMenu.js:30 src/extension/DefaultMenu.js:32
 msgid "Example Menu"
-msgstr "⤬ ⤬ 菜单"
+msgstr "示例菜单"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1181,7 +1182,7 @@ msgstr "饼干"
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:40
 msgid "Sound"
-msgstr "控制音响"
+msgstr "声音"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:45
@@ -1196,12 +1197,12 @@ msgstr "播放 / 暂停"
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:61
 msgid "Next Title"
-msgstr ""
+msgstr "下个标题"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:69
 msgid "Previous Title"
-msgstr ""
+msgstr "上个标题"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:90
@@ -1236,12 +1237,12 @@ msgstr "切换工作区"
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:163
 msgid "Go Up"
-msgstr ""
+msgstr "向上"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:171
 msgid "Go Down"
-msgstr ""
+msgstr "向下"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:184
@@ -1251,12 +1252,12 @@ msgstr "移动窗口"
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:189
 msgid "Move Window Up"
-msgstr ""
+msgstr "向上移动窗口"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:197
 msgid "Move Window Down"
-msgstr ""
+msgstr "向下移动窗口"
 
 #: src/extension/Background.js:91
 msgid "Close"
@@ -1272,29 +1273,29 @@ msgstr "翻面"
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:217
 msgid "Fly-Pie Level Up!"
-msgstr ""
+msgstr "Fly-Pie 升级！"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:219
 msgid "You reached level %i!"
-msgstr ""
+msgstr "你已经升到了 %i 级！"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:239
 msgid "Fly-Pie Achievement Completed!"
-msgstr ""
+msgstr "Fly-Pie 成就完成！"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:241
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
-msgstr ""
+msgstr "你完成了“%s”成就！"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
 #: src/extension/Daemon.js:603
 msgid "Show Achievements"
-msgstr ""
+msgstr "显示成就"
 
 #: resources/ui/common/menus.ui:13
 msgid "Visit Homepage"
@@ -1306,7 +1307,7 @@ msgstr "更新记录"
 
 #: resources/ui/common/menus.ui:23
 msgid "Report a Bug"
-msgstr "告知开发者软件中的错误"
+msgstr "上报Bug"
 
 #: resources/ui/common/menus.ui:27
 msgid "Translate"
@@ -1318,7 +1319,7 @@ msgstr "捐赠"
 
 #: resources/ui/common/menus.ui:48
 msgid "About Fly-Pie"
-msgstr "有关 Fly-Pie"
+msgstr "关于 Fly-Pie"
 
 #: resources/ui/gtk4/copyValueButton.ui:12
 #: resources/ui/gtk3/copyValueButton.ui:12
@@ -1328,19 +1329,19 @@ msgstr "将左边的值复制到右边"
 #: resources/ui/gtk4/iconSelectDialog.ui:25
 #: resources/ui/gtk3/iconSelectDialog.ui:25
 msgid "Select Icon"
-msgstr "选择标志"
+msgstr "选择图标"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/gtk4/iconSelectDialog.ui:50
 #: resources/ui/gtk3/iconSelectDialog.ui:106
 msgid "Icon Theme"
-msgstr "标志主题"
+msgstr "图标主题"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/gtk4/iconSelectDialog.ui:112
 #: resources/ui/gtk3/iconSelectDialog.ui:117
 msgid "Custom Icon"
-msgstr "自定义标志"
+msgstr "自定义图标"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:25 resources/ui/gtk3/settings.ui:25
@@ -1440,14 +1441,15 @@ msgstr "教程"
 
 #: resources/ui/gtk4/settings.ui:646 resources/ui/gtk3/settings.ui:657
 msgid "Press <b>Ctrl+Space</b> to open the default menu of Fly-Pie!"
-msgstr ""
+msgstr "按<b>Ctrl+空格</b>打开Fly-Pie的默认菜单！"
 
 #: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:667
 msgid ""
 "You can use Fly-Pie to launch applications, simulate hotkeys, open URLs and "
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a training menu!"
-msgstr ""
+msgstr "您可以使用Fly-Pie启动应用程序，模拟热键，打开网址等等"
+"。这个交互式教程将教你如何最有效地使用Fly-Pie。点击下面的大按钮打开教程！"
 
 #: resources/ui/gtk4/settings.ui:666 resources/ui/gtk3/settings.ui:677
 msgid ""
@@ -1458,6 +1460,10 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"• 使用<b>鼠标左键选择项目</b>。\n"
+"• 使用<b>鼠标右键关闭菜单</b>。\n"
+"• 教程只是一个游戏，选取项目没有实质效果。\n"
+"一旦您感到满意，请单击<b>下一步</b>了解更多详细信息！"
 
 #. The text of the big tutorial button.
 #: resources/ui/gtk4/settings.ui:686 resources/ui/gtk4/settings.ui:767
@@ -1466,12 +1472,12 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:775 resources/ui/gtk3/settings.ui:858
 #: resources/ui/gtk3/settings.ui:998 resources/ui/gtk3/settings.ui:1081
 msgid "<big><b>Open the training Menu!</b></big>"
-msgstr ""
+msgstr "<big><b>打开教程！</b></big>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:718 resources/ui/gtk3/settings.ui:727
 msgid "You can click anywhere!"
-msgstr "点哪儿都好使！"
+msgstr "你可以点击任何地方！"
 
 #: resources/ui/gtk4/settings.ui:736 resources/ui/gtk3/settings.ui:744
 msgid ""
@@ -1510,27 +1516,30 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!"
 msgstr ""
+"对于这个练习，单击大按钮打开菜单。然后尽快选择“%s”，你能得到金牌吗？\n"
+"\n"
+"一旦您对结果满意，单击<b>下一步</b>了解Fly-Pie的标记模式！"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:881 resources/ui/gtk3/settings.ui:887
 msgid "Unlocked at less than 3000 ms"
-msgstr ""
+msgstr "解锁小于3000毫秒"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:901 resources/ui/gtk3/settings.ui:907
 msgid "Unlocked at less than 2000 ms"
-msgstr ""
+msgstr "解锁小于2000毫秒"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:922 resources/ui/gtk4/settings.ui:1108
 #: resources/ui/gtk3/settings.ui:928 resources/ui/gtk3/settings.ui:1109
 msgid "Unlocked at less than 1000 ms"
-msgstr ""
+msgstr "解锁小于1000毫秒"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:949 resources/ui/gtk3/settings.ui:953
 msgid "The Marking Mode of Fly-Pie"
-msgstr ""
+msgstr "Fly-Pie的标记模式"
 
 #: resources/ui/gtk4/settings.ui:967 resources/ui/gtk3/settings.ui:970
 msgid ""
@@ -1538,6 +1547,8 @@ msgid ""
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
+"Fly-Pie的<b>标记模式</b>允许您通过<b>绘制手势</b>选择项目！要进入标记模式，单"
+"击并拖动一个项目。一旦暂停拖动或转弯，该项将被选中。"
 
 #: resources/ui/gtk4/settings.ui:977 resources/ui/gtk3/settings.ui:980
 msgid ""
@@ -1553,7 +1564,7 @@ msgstr ""
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:1027 resources/ui/gtk3/settings.ui:1028
 msgid "Practice Session II"
-msgstr ""
+msgstr "练习二"
 
 #: resources/ui/gtk4/settings.ui:1036 resources/ui/gtk3/settings.ui:1037
 #, javascript-format
@@ -1565,21 +1576,25 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn some final "
 "tips and tricks!"
 msgstr ""
+"同样，你应该尽快选择“%s”。然而，正如你现在了解的标记模式，获得金牌所需的时间"
+"要短得多！\n"
+"\n"
+"一旦您对结果满意，单击<b>下一步</b>学习一些最后的技巧和窍门！"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:1128 resources/ui/gtk3/settings.ui:1129
 msgid "Unlocked at less than 750 ms"
-msgstr ""
+msgstr "解锁小于750毫秒"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:1149 resources/ui/gtk3/settings.ui:1150
 msgid "Unlocked at less than 500 ms"
-msgstr ""
+msgstr "解锁小于500毫秒"
 
 #. The user finished the tutorial. Yay!
 #: resources/ui/gtk4/settings.ui:1183 resources/ui/gtk3/settings.ui:1182
 msgid "Congratulations!"
-msgstr ""
+msgstr "祝贺你！"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: resources/ui/gtk4/settings.ui:1194 resources/ui/gtk3/settings.ui:1193
@@ -1599,6 +1614,16 @@ msgid ""
 "free to report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
 "\">Github</a>."
 msgstr ""
+"恭喜你！如果你成功解锁了大部分勋章，你将会像Pielot大师一样使用Fly-Pie！\n"
+"\n"
+"现在，您可以使用这个设置对话框的其他页面来配置Fly-Pie，以满足您的愿望。有很多"
+"选项！创建尽可能多的菜单，你想要的深度层次结构。但是尝试将每个子菜单的条目数"
+"量限制为<b>最多12个项目</b>。所有超过这个数字将大大降低您的效率。\n"
+"\n"
+"如果你喜欢Fly-Pie，如果你在<a href=\"https://extensions.gnome.org/extension/"
+"3433/fly-pie/\">extensions.gnome.org</a>上留下积极的评论，我会很高兴的！"
+"每当你遇到一 🐞️个bug或有功能请求，请随时在<a href=\"https://github.com/"
+"Schneegans/Fly-Pie/issues\">Github</a>上报告。"
 
 #. Button for tutorial navigation. Goes back one page.
 #: resources/ui/gtk4/settings.ui:1241 resources/ui/gtk3/settings.ui:1241
@@ -1650,7 +1675,7 @@ msgstr "字体"
 
 #: resources/ui/gtk4/settings.ui:1495 resources/ui/gtk3/settings.ui:1493
 msgid "Label Font"
-msgstr ""
+msgstr "标签字体"
 
 #: resources/ui/gtk4/settings.ui:1505 resources/ui/gtk3/settings.ui:1503
 msgid "Text Color"
@@ -1885,28 +1910,28 @@ msgstr "颜色"
 
 #: resources/ui/gtk4/settings.ui:3775 resources/ui/gtk3/settings.ui:3729
 msgid "Minimum Segment Length"
-msgstr ""
+msgstr "最小线段长度"
 
 #: resources/ui/gtk4/settings.ui:3824 resources/ui/gtk4/settings.ui:3950
 #: resources/ui/gtk3/settings.ui:3771 resources/ui/gtk3/settings.ui:3896
 msgid "Touch Button Settings"
-msgstr ""
+msgstr "触摸按钮设置"
 
 #: resources/ui/gtk4/settings.ui:3834 resources/ui/gtk3/settings.ui:3781
 msgid "You can show a touch button for each of your menus."
-msgstr ""
+msgstr "您可以为每个菜单显示一个触摸按钮。"
 
 #: resources/ui/gtk4/settings.ui:3852 resources/ui/gtk3/settings.ui:3799
 msgid "Inactive Opacity"
-msgstr ""
+msgstr "不透明"
 
 #: resources/ui/gtk4/settings.ui:3880 resources/ui/gtk3/settings.ui:3827
 msgid "Show in Overview Mode"
-msgstr ""
+msgstr "概述模式显示"
 
 #: resources/ui/gtk4/settings.ui:3902 resources/ui/gtk3/settings.ui:3849
 msgid "Show in Desktop Mode"
-msgstr ""
+msgstr "桌面模式显示"
 
 #: resources/ui/gtk4/settings.ui:3924 resources/ui/gtk3/settings.ui:3871
 msgid "Show above Fullscreen Windows"
@@ -1923,21 +1948,23 @@ msgstr "这些设置会和预设独立作用。"
 
 #: resources/ui/gtk4/settings.ui:4012 resources/ui/gtk3/settings.ui:3952
 msgid "Minimum Stroke Angle"
-msgstr ""
+msgstr "最小行程角"
 
 #: resources/ui/gtk4/settings.ui:4022 resources/ui/gtk3/settings.ui:3962
 msgid "Smaller turns will not lead to selections."
-msgstr ""
+msgstr "较小的转弯将不会选择。"
 
 #: resources/ui/gtk4/settings.ui:4059 resources/ui/gtk3/settings.ui:3999
 msgid "Minimum Stroke Length"
-msgstr ""
+msgstr "最小行程长度"
 
 #: resources/ui/gtk4/settings.ui:4069 resources/ui/gtk3/settings.ui:4009
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
+"较短的手势将不会被选择。\n"
+"全局有效。"
 
 #: resources/ui/gtk4/settings.ui:4108 resources/ui/gtk3/settings.ui:4048
 msgid "Jitter Threshold"
@@ -1948,6 +1975,8 @@ msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
+"较小的移动将被忽略。\n"
+"全局有效。"
 
 #: resources/ui/gtk4/settings.ui:4156 resources/ui/gtk3/settings.ui:4096
 msgid "Display Timeout"
@@ -1975,13 +2004,13 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4254 resources/ui/gtk3/settings.ui:4194
 msgid "Open Windows at the Pointer"
-msgstr ""
+msgstr "用鼠标打开窗口"
 
 #: resources/ui/gtk4/settings.ui:4264 resources/ui/gtk3/settings.ui:4204
 msgid ""
 "With this enabled, Fly-Pie will attempt to open any windows\n"
 "at the current pointer position."
-msgstr ""
+msgstr "启用此选项后，Fly-Pie将尝试在鼠标当前位置打开任何窗口。"
 
 #: resources/ui/gtk4/settings.ui:4287 resources/ui/gtk3/settings.ui:4227
 msgid "Experimental Hover Mode"
@@ -2009,11 +2038,11 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4363 resources/ui/gtk3/settings.ui:4303
 msgid "Achievement Notifications"
-msgstr ""
+msgstr "成就通知"
 
 #: resources/ui/gtk4/settings.ui:4373 resources/ui/gtk3/settings.ui:4313
 msgid "Show a notification whenever you complete an achievement."
-msgstr ""
+msgstr "每当你完成一项成就时，都会显示一个通知。"
 
 #: resources/ui/gtk4/settings.ui:4447 resources/ui/gtk3/settings.ui:4398
 msgid "Load Preset"
@@ -2124,7 +2153,7 @@ msgstr "绑定到 Super + 鼠标右键"
 
 #: resources/ui/gtk4/settings.ui:4979 resources/ui/gtk3/settings.ui:4974
 msgid "Show Touch Button"
-msgstr ""
+msgstr "显示触摸按钮"
 
 #: resources/ui/gtk4/settings.ui:4995 resources/ui/gtk3/settings.ui:4990
 msgid "Open in Screen Center"
@@ -2132,7 +2161,7 @@ msgstr "在屏幕中心打开"
 
 #: resources/ui/gtk4/settings.ui:5031 resources/ui/gtk3/settings.ui:5026
 msgid "Show Labels"
-msgstr ""
+msgstr "显示标签"
 
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:5088 resources/ui/gtk3/settings.ui:5315
