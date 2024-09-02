@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flypie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: 2022-09-11 09:19+0000\n"
+"PO-Revision-Date: 2024-09-03 06:41+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/fly-pie/core/"
 "lt/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
 "19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
 "1 : 2);\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -103,13 +103,13 @@ msgstr "Naudokite mygtuką norėdami įvardyti įdiegtas programas."
 
 #: src/common/actions/Uri.js:36
 msgid "Open URI"
-msgstr ""
+msgstr "Atverti URI"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Uri.js:43
 msgid "Opens an URI with the default application."
-msgstr ""
+msgstr "Atveria URI naudojant numatytąją programą."
 
 #: src/common/actions/Uri.js:47
 msgid ""
@@ -121,11 +121,11 @@ msgstr ""
 
 #: src/common/actions/Uri.js:71
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: src/common/actions/DBusSignal.js:35
 msgid "D-Bus Signal"
-msgstr ""
+msgstr "D-Bus signalas"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -143,21 +143,21 @@ msgstr ""
 
 #: src/common/actions/DBusSignal.js:70
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: src/common/actions/DBusSignal.js:70
 msgid "This will be passed to the D-Bus signal."
-msgstr ""
+msgstr "Tai bus perduota D-Bus signalui."
 
 #: src/common/actions/InsertText.js:49
 msgid "Insert Text"
-msgstr ""
+msgstr "Įterpti tekstą"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/InsertText.js:56
 msgid "Types some text automatically."
-msgstr ""
+msgstr "Automatiškai parašo kokį nors tekstą."
 
 #: src/common/actions/InsertText.js:60
 msgid ""
@@ -168,15 +168,15 @@ msgstr ""
 
 #: src/common/actions/InsertText.js:84
 msgid "Text"
-msgstr ""
+msgstr "Tekstas"
 
 #: src/common/actions/InsertText.js:84
 msgid "This text will be inserted."
-msgstr ""
+msgstr "Bus įterptas šis tekstas."
 
 #: src/common/ConfigWidgetFactory.js:105 src/prefs/ImageChooserButton.js:45
 msgid "Select File"
-msgstr ""
+msgstr "Pasirinkti failą"
 
 #: src/common/ConfigWidgetFactory.js:106 src/common/ConfigWidgetFactory.js:182
 #: src/prefs/ImageChooserButton.js:46 src/prefs/MenuEditorPage.js:208
@@ -184,11 +184,11 @@ msgstr ""
 #: src/prefs/SettingsPage.js:335 resources/ui/gtk4/iconSelectDialog.ui:20
 #: resources/ui/gtk3/iconSelectDialog.ui:20
 msgid "Cancel"
-msgstr ""
+msgstr "Atsisakyti"
 
 #: src/common/ConfigWidgetFactory.js:181
 msgid "Select Application"
-msgstr ""
+msgstr "Pasirinkti programą"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:290 src/common/ConfigWidgetFactory.js:338
@@ -208,17 +208,17 @@ msgstr ""
 #: src/common/ItemRegistry.js:279
 #, javascript-format
 msgid "Insert: %s"
-msgstr ""
+msgstr "Įterpti: %s"
 
 #: src/common/menus/FrequentlyUsed.js:47
 msgid "Frequently Used"
-msgstr ""
+msgstr "Dažnai naudojamos"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/FrequentlyUsed.js:54
 msgid "Shows your frequently used applications."
-msgstr ""
+msgstr "Rodo jūsų dažnai naudojamas programas."
 
 #: src/common/menus/FrequentlyUsed.js:58
 msgid ""
@@ -239,7 +239,7 @@ msgstr ""
 
 #: src/common/menus/System.js:49
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -256,33 +256,33 @@ msgstr ""
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:84
 msgid "Lock"
-msgstr ""
+msgstr "Užrakinti"
 
 #: src/common/menus/System.js:93
 msgid "Suspend"
-msgstr ""
+msgstr "Pristabdyti"
 
 #: src/common/menus/System.js:102
 msgid "Switch User…"
-msgstr ""
+msgstr "Perjungti naudotoją…"
 
 #: src/common/menus/System.js:111
 msgid "Log Out"
-msgstr ""
+msgstr "Atsijungti"
 
 #: src/common/menus/System.js:120
 msgid "Power Off…"
-msgstr ""
+msgstr "Išjungti…"
 
 #: src/common/menus/CustomMenu.js:32
 msgid "Custom Menu"
-msgstr ""
+msgstr "Tinkintas meniu"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:39
 msgid "This can contain custom actions and other menus."
-msgstr ""
+msgstr "Čia gali būti tinkintų veiksmų bei kitokių meniu."
 
 #: src/common/menus/CustomMenu.js:43
 msgid ""
@@ -294,13 +294,13 @@ msgstr ""
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:46 src/extension/DefaultMenu.js:82
 msgid "Favorites"
-msgstr ""
+msgstr "Mėgstamos"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:53
 msgid "Shows pinned applications."
-msgstr ""
+msgstr "Rodo prisegtas programas."
 
 #: src/common/menus/Favorites.js:57
 msgid ""
@@ -310,13 +310,13 @@ msgstr ""
 
 #: src/common/menus/RecentFiles.js:37
 msgid "Recent Files"
-msgstr ""
+msgstr "Paskiausi failai"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RecentFiles.js:44
 msgid "Shows your recently used files."
-msgstr ""
+msgstr "Rodo paskiausiai naudotus failus."
 
 #: src/common/menus/RecentFiles.js:48
 msgid ""
@@ -327,13 +327,13 @@ msgstr ""
 
 #: src/common/menus/Devices.js:36
 msgid "Devices"
-msgstr ""
+msgstr "Įrenginiai"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:43
 msgid "Shows connected devices."
-msgstr ""
+msgstr "Rodo prijungtus įrenginius."
 
 #: src/common/menus/Devices.js:47
 msgid ""
@@ -343,13 +343,13 @@ msgstr ""
 
 #: src/common/menus/MainMenu.js:36
 msgid "Main Menu"
-msgstr ""
+msgstr "Pagrindinis meniu"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/MainMenu.js:43
 msgid "Shows all installed applications."
-msgstr ""
+msgstr "Rodo visas įdiegtas programas."
 
 #: src/common/menus/MainMenu.js:47
 msgid ""
@@ -361,13 +361,13 @@ msgstr ""
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:50 src/extension/DefaultMenu.js:114
 msgid "Running Apps"
-msgstr ""
+msgstr "Veikiančios programos"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:57
 msgid "Shows the currently running applications."
-msgstr ""
+msgstr "Rodo šiuo metu veikiančias programas."
 
 #: src/common/menus/RunningApps.js:61
 msgid ""
@@ -397,11 +397,11 @@ msgstr ""
 
 #: src/common/menus/RunningApps.js:128
 msgid "Active Workspace Only"
-msgstr ""
+msgstr "Tik aktyvi darbo sritis"
 
 #: src/common/menus/RunningApps.js:129
 msgid "Group by Application"
-msgstr ""
+msgstr "Grupuoti pagal programą"
 
 #: src/common/menus/RunningApps.js:130
 msgid "Peek on Hover"
