@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: flypie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: 2024-09-03 06:41+0000\n"
+"PO-Revision-Date: 2024-11-11 00:00+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/fly-pie/core/"
 "lt/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
 "19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
 "1 : 2);\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -245,7 +245,7 @@ msgstr "Sistema"
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/System.js:56
 msgid "Allows screen lock, shutdown and other things."
-msgstr ""
+msgstr "Leidžia užrakinti ekraną, išjungti kompiuterį ir kt."
 
 #: src/common/menus/System.js:60
 msgid ""
@@ -409,13 +409,13 @@ msgstr ""
 
 #: src/common/menus/Bookmarks.js:36
 msgid "Bookmarks"
-msgstr ""
+msgstr "Žymelės"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Bookmarks.js:43
 msgid "Shows your frequently used directories."
-msgstr ""
+msgstr "Rodo jūsų dažnai naudojamus katalogus."
 
 #: src/common/menus/Bookmarks.js:47
 msgid ""
@@ -425,17 +425,17 @@ msgstr ""
 
 #: src/common/menus/Clipboard.js:57
 msgid "Clipboard"
-msgstr ""
+msgstr "Iškarpinė"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Clipboard.js:64
 msgid "Shows recently copied things."
-msgstr ""
+msgstr "Rodo nukopijuotus dalykus."
 
 #: src/common/menus/Clipboard.js:67
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
-msgstr ""
+msgstr "Meniu <b>Iškarpinė</b> rodo paskiausiai nukopijuotų dalykų sąrašą."
 
 #: src/common/menus/Clipboard.js:97
 msgid "First Child Angle"
@@ -491,31 +491,31 @@ msgstr ""
 #. the achievement titles.
 #: src/common/Achievements.js:387
 msgid "I"
-msgstr ""
+msgstr "I"
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:390
 msgid "II"
-msgstr ""
+msgstr "II"
 
 #. Translators: This is the tier 3 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:393
 msgid "III"
-msgstr ""
+msgstr "III"
 
 #. Translators: This is the tier 4 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:396
 msgid "IV"
-msgstr ""
+msgstr "IV"
 
 #. Translators: This is the tier 5 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:399
 msgid "V"
-msgstr ""
+msgstr "V"
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
 #: src/common/Achievements.js:415
