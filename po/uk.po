@@ -8,23 +8,27 @@ msgstr ""
 "Project-Id-Version: flypie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-11-28 20:13+0000\n"
+"Last-Translator: yar2001Ti <school15yaroslav@gmail.com>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/fly-pie/core/"
+"uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
-msgstr ""
+msgstr "Активувати ярлик"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:53
 msgid "Simulates a key combination."
-msgstr ""
+msgstr "Симулює комбінацію клавіш."
 
 #: src/common/actions/Shortcut.js:57
 msgid ""
@@ -32,49 +36,55 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
+"Дія <b>Активувати ярлик</b> імітує комбінацію клавіш після активації. "
+"Наприклад, це можна використовувати для перемикання віртуальних робочих "
+"столів, керування відтворенням мультимедіа або для скасування/повторення "
+"операцій."
 
 #: src/common/actions/Shortcut.js:81 resources/ui/gtk4/settings.ui:4938
 #: resources/ui/gtk3/settings.ui:4933
 msgid "Shortcut"
-msgstr ""
+msgstr "Ярлик"
 
 #: src/common/actions/Shortcut.js:81
 msgid "This shortcut will be simulated."
-msgstr ""
+msgstr "Цей ярлик буде імітовано."
 
 #: src/common/actions/File.js:37
 msgid "Open File"
-msgstr ""
+msgstr "Відкрити файл"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:44
 msgid "Opens a file with the default application."
-msgstr ""
+msgstr "Відкриває файл стандартною програмою."
 
 #: src/common/actions/File.js:48
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
+"Дія <b>Відкрити файл</b> відкриє вказаний вище файл за допомогою стандартної "
+"програми вашої системи."
 
 #: src/common/actions/File.js:72
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 #: src/common/actions/File.js:72 src/common/actions/Uri.js:71
 msgid "It will be opened with the default app."
-msgstr ""
+msgstr "Він буде відкритий за допомогою стандартної програми."
 
 #: src/common/actions/Command.js:37
 msgid "Launch Application"
-msgstr ""
+msgstr "Запустити програму"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Command.js:44
 msgid "Runs any shell command."
-msgstr ""
+msgstr "Виконує команду оболонки."
 
 #: src/common/actions/Command.js:48
 msgid ""
@@ -82,24 +92,27 @@ msgid ""
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
 msgstr ""
+"Дія <b>Запуск програми</b> виконує будь-яку подану команду. Це в основному "
+"використовується для відкриття програм, але також може мати багато інших "
+"випадків використання."
 
 #: src/common/actions/Command.js:72
 msgid "Command"
-msgstr ""
+msgstr "Команда"
 
 #: src/common/actions/Command.js:72
 msgid "Use the button to list installed apps."
-msgstr ""
+msgstr "Використовуйте кнопку, щоб переглянути список встановлених програм."
 
 #: src/common/actions/Uri.js:36
 msgid "Open URI"
-msgstr ""
+msgstr "Відкрити посилання"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Uri.js:43
 msgid "Opens an URI with the default application."
-msgstr ""
+msgstr "Відкриває посилання за допомогою стандартної програми."
 
 #: src/common/actions/Uri.js:47
 msgid ""
@@ -108,20 +121,24 @@ msgid ""
 "However, it is also possible to open other URIs such as \"mailto:foo@bar."
 "org\"."
 msgstr ""
+"Коли дію <b>Відкрити URI</b> активовано, вищезгаданий URI відкривається за "
+"допомогою програми за замовчуванням. Для URL-адрес http це буде ваш веб-"
+"переглядач. Однак також можна відкрити інші URI, наприклад \"mailto:foo@bar."
+"org\"."
 
 #: src/common/actions/Uri.js:71
 msgid "URI"
-msgstr ""
+msgstr "Посилання"
 
 #: src/common/actions/DBusSignal.js:35
 msgid "D-Bus Signal"
-msgstr ""
+msgstr "Сигнал D-Bus"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/DBusSignal.js:42
 msgid "Emits a D-Bus signal."
-msgstr ""
+msgstr "Випромінює сигнал D-Bus."
 
 #: src/common/actions/DBusSignal.js:46
 msgid ""
@@ -130,24 +147,28 @@ msgid ""
 "md\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
+"Дія <b>Сигнал D-Bus</b> сама по собі нічого не робить. Але ви <a href=\"https"
+"://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md\">можете "
+"прослухати D-Bus для його активації</a>. Це може бути дуже корисним у "
+"призначених для користувача меню, відкритих за допомогою командного рядка."
 
 #: src/common/actions/DBusSignal.js:70
 msgid "ID"
-msgstr ""
+msgstr "ІД"
 
 #: src/common/actions/DBusSignal.js:70
 msgid "This will be passed to the D-Bus signal."
-msgstr ""
+msgstr "Це буде передано на сигнал D-Bus."
 
 #: src/common/actions/InsertText.js:49
 msgid "Insert Text"
-msgstr ""
+msgstr "Вставити текст"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/InsertText.js:56
 msgid "Types some text automatically."
-msgstr ""
+msgstr "Автоматично вводить текст."
 
 #: src/common/actions/InsertText.js:60
 msgid ""
@@ -155,18 +176,21 @@ msgid ""
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
 "write the same things."
 msgstr ""
+"Дія <b>Вставити текст</b> копіює вказаний текст у буфер обміну, а потім "
+"імітує Ctrl+V. Це може бути корисно, якщо ви розумієте, що часто пишете одне "
+"й те саме."
 
 #: src/common/actions/InsertText.js:84
 msgid "Text"
-msgstr ""
+msgstr "Текст"
 
 #: src/common/actions/InsertText.js:84
 msgid "This text will be inserted."
-msgstr ""
+msgstr "Цей текст буде вставлено."
 
 #: src/common/ConfigWidgetFactory.js:105 src/prefs/ImageChooserButton.js:45
 msgid "Select File"
-msgstr ""
+msgstr "Вибрати файл"
 
 #: src/common/ConfigWidgetFactory.js:106 src/common/ConfigWidgetFactory.js:182
 #: src/prefs/ImageChooserButton.js:46 src/prefs/MenuEditorPage.js:208
@@ -174,23 +198,25 @@ msgstr ""
 #: src/prefs/SettingsPage.js:335 resources/ui/gtk4/iconSelectDialog.ui:20
 #: resources/ui/gtk3/iconSelectDialog.ui:20
 msgid "Cancel"
-msgstr ""
+msgstr "Скасувати"
 
 #: src/common/ConfigWidgetFactory.js:181
 msgid "Select Application"
-msgstr ""
+msgstr "Вибрати програму"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:290 src/common/ConfigWidgetFactory.js:338
 #: src/prefs/MenuEditor.js:284
 msgid "Not Bound"
-msgstr ""
+msgstr "Не зв'язаний"
 
 #: src/common/ConfigWidgetFactory.js:321
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
+"Натисніть ярлик!\n"
+"ESC, щоб скасувати, BackSpace, щоб розв’язати"
 
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
@@ -198,17 +224,17 @@ msgstr ""
 #: src/common/ItemRegistry.js:279
 #, javascript-format
 msgid "Insert: %s"
-msgstr ""
+msgstr "Вставити: %s"
 
 #: src/common/menus/FrequentlyUsed.js:47
 msgid "Frequently Used"
-msgstr ""
+msgstr "Часто використовується"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/FrequentlyUsed.js:54
 msgid "Shows your frequently used applications."
-msgstr ""
+msgstr "Показує програми, які часто використовуються."
 
 #: src/common/menus/FrequentlyUsed.js:58
 msgid ""
@@ -216,32 +242,37 @@ msgid ""
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
 msgstr ""
+"Меню <b>Часто використовувані</b> показує список часто використовуваних "
+"програм. Для ефективного вибору вам слід обмежити максимальну кількість "
+"показаних програм до дванадцяти."
 
 #: src/common/menus/FrequentlyUsed.js:82 src/common/menus/RecentFiles.js:72
 #: src/common/menus/Clipboard.js:88
 msgid "Max Item Count"
-msgstr ""
+msgstr "Максимальна кількість елементів"
 
 #: src/common/menus/FrequentlyUsed.js:82 src/common/menus/RecentFiles.js:72
 #: src/common/menus/Clipboard.js:88
 msgid "Limits the number of children."
-msgstr ""
+msgstr "Обмежує кількість елементів."
 
 #: src/common/menus/System.js:49
 msgid "System"
-msgstr ""
+msgstr "Система"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/System.js:56
 msgid "Allows screen lock, shutdown and other things."
-msgstr ""
+msgstr "Дозволяє блокувати, вимикати екран та інші речі."
 
 #: src/common/menus/System.js:60
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
 msgstr ""
+"Меню <b>Система</b> містить елементи для блокування, вимкнення, налаштувань "
+"екрана тощо."
 
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:84
