@@ -8,23 +8,25 @@ msgstr ""
 "Project-Id-Version: flypie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-12-27 17:00+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/fly-pie/core/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
-msgstr ""
+msgstr "குறுக்குவழியை செயல்படுத்தவும்"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:53
 msgid "Simulates a key combination."
-msgstr ""
+msgstr "ஒரு முக்கிய கலவையை உருவகப்படுத்துகிறது."
 
 #: src/common/actions/Shortcut.js:57
 msgid ""
@@ -32,49 +34,55 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
+"<b> செயல்படுத்தும் குறுக்குவழி </b> செயல் செயல்படுத்தப்படும்போது ஒரு முக்கிய கலவையை "
+"உருவகப்படுத்துகிறது. எடுத்துக்காட்டாக, மெய்நிகர் டெச்க்டாப்புகளை மாற்ற, மல்டிமீடியா "
+"பிளேபேக்கைக் கட்டுப்படுத்த அல்லது செயல்பாடுகளை செயல்தவிர்க்க / மீண்டும் செய்ய இதைப் "
+"பயன்படுத்தலாம்."
 
 #: src/common/actions/Shortcut.js:81 resources/ui/gtk4/settings.ui:4938
 #: resources/ui/gtk3/settings.ui:4933
 msgid "Shortcut"
-msgstr ""
+msgstr "குறுக்குவழி"
 
 #: src/common/actions/Shortcut.js:81
 msgid "This shortcut will be simulated."
-msgstr ""
+msgstr "இந்த குறுக்குவழி உருவகப்படுத்தப்படும்."
 
 #: src/common/actions/File.js:37
 msgid "Open File"
-msgstr ""
+msgstr "கோப்பை திற"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:44
 msgid "Opens a file with the default application."
-msgstr ""
+msgstr "இயல்புநிலை பயன்பாட்டுடன் ஒரு கோப்பைத் திறக்கிறது."
 
 #: src/common/actions/File.js:48
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
+"<b> திறந்த கோப்பு </b> செயல் உங்கள் கணினியின் இயல்புநிலை பயன்பாட்டுடன் மேலே குறிப்பிடப்பட்"
+"ட கோப்பைத் திறக்கும்."
 
 #: src/common/actions/File.js:72
 msgid "File"
-msgstr ""
+msgstr "கோப்பு"
 
 #: src/common/actions/File.js:72 src/common/actions/Uri.js:71
 msgid "It will be opened with the default app."
-msgstr ""
+msgstr "இது இயல்புநிலை பயன்பாட்டுடன் திறக்கப்படும்."
 
 #: src/common/actions/Command.js:37
 msgid "Launch Application"
-msgstr ""
+msgstr "விண்ணப்பத்தைத் தொடங்கவும்"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Command.js:44
 msgid "Runs any shell command."
-msgstr ""
+msgstr "எந்த செல் கட்டளையையும் இயக்குகிறது."
 
 #: src/common/actions/Command.js:48
 msgid ""
@@ -82,24 +90,27 @@ msgid ""
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
 msgstr ""
+"<b> வெளியீட்டு விண்ணப்பம் </b> செயல் எந்தவொரு கட்டளையையும் செயல்படுத்துகிறது. இது "
+"முதன்மையாக பயன்பாடுகளைத் திறக்கப் பயன்படுகிறது, ஆனால் ஏராளமான பிற பயன்பாட்டு "
+"நிகழ்வுகளும் இருக்கலாம்."
 
 #: src/common/actions/Command.js:72
 msgid "Command"
-msgstr ""
+msgstr "கட்டளை"
 
 #: src/common/actions/Command.js:72
 msgid "Use the button to list installed apps."
-msgstr ""
+msgstr "Use the button பெறுநர் பட்டியல் installed apps."
 
 #: src/common/actions/Uri.js:36
 msgid "Open URI"
-msgstr ""
+msgstr "திற யூரி"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Uri.js:43
 msgid "Opens an URI with the default application."
-msgstr ""
+msgstr "திறப்புகள் an யூரி with the இயல்புநிலை application."
 
 #: src/common/actions/Uri.js:47
 msgid ""
@@ -108,20 +119,23 @@ msgid ""
 "However, it is also possible to open other URIs such as \"mailto:foo@bar."
 "org\"."
 msgstr ""
+"<b> திறந்த யூரி </b> செயல் செயல்படுத்தப்படும்போது, மேலே உள்ள யூரி இயல்புநிலை "
+"பயன்பாட்டுடன் திறக்கப்படுகிறது. HTTP முகவரி களுக்கு, இது உங்கள் வலை உலாவியாக இருக்கும்"
+". இருப்பினும், \"மெயில்டோ: foo@bar.org\" போன்ற பிற யூரி களையும் திறக்க முடியும்."
 
 #: src/common/actions/Uri.js:71
 msgid "URI"
-msgstr ""
+msgstr "யூரி"
 
 #: src/common/actions/DBusSignal.js:35
 msgid "D-Bus Signal"
-msgstr ""
+msgstr "டி-பச் சிக்னல்"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/DBusSignal.js:42
 msgid "Emits a D-Bus signal."
-msgstr ""
+msgstr "டி-பச் சிக்னலை வெளியிடுகிறது."
 
 #: src/common/actions/DBusSignal.js:46
 msgid ""
@@ -130,24 +144,28 @@ msgid ""
 "md\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
+"<b> டி-பச் சிக்னல் </b> செயல் அதன் சொந்தமாக எதுவும் செய்யாது. ஆனால் நீங்கள் <a href = "
+"\"https://github.com/schneegans/fly-pie/blob/main/docs/dbus-interface.md\"> "
+"அதன் செயல்பாட்டிற்காக டி-பியூசில் கேட்கலாம் </a>. கட்டளை வரி வழியாக திறக்கப்பட்ட தனிப்பயன்"
+" மெனுக்களில் இது மிகவும் பயனுள்ளதாக இருக்கும்."
 
 #: src/common/actions/DBusSignal.js:70
 msgid "ID"
-msgstr ""
+msgstr "ஐடி"
 
 #: src/common/actions/DBusSignal.js:70
 msgid "This will be passed to the D-Bus signal."
-msgstr ""
+msgstr "இது டி-பச் சிக்னலுக்கு அனுப்பப்படும்."
 
 #: src/common/actions/InsertText.js:49
 msgid "Insert Text"
-msgstr ""
+msgstr "உரையைச் செருகவும்"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/InsertText.js:56
 msgid "Types some text automatically."
-msgstr ""
+msgstr "சில உரையை தானாகவே தட்டச்சு செய்க."
 
 #: src/common/actions/InsertText.js:60
 msgid ""
@@ -155,18 +173,21 @@ msgid ""
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
 "write the same things."
 msgstr ""
+"<b> உரையைச் செருகவும் </b> செயல் கொடுக்கப்பட்ட உரையை இடைநிலைப்பலகைக்கு நகலெடுத்து "
+"பின்னர் ஒரு Ctrl+V ஐ உருவகப்படுத்துகிறது. நீங்கள் அடிக்கடி அதே விசயங்களை எழுதுகிறீர்கள் "
+"என்பதை உணர்ந்தால் இது பயனுள்ளதாக இருக்கும்."
 
 #: src/common/actions/InsertText.js:84
 msgid "Text"
-msgstr ""
+msgstr "உரை"
 
 #: src/common/actions/InsertText.js:84
 msgid "This text will be inserted."
-msgstr ""
+msgstr "இந்த உரை செருகப்படும்."
 
 #: src/common/ConfigWidgetFactory.js:105 src/prefs/ImageChooserButton.js:45
 msgid "Select File"
-msgstr ""
+msgstr "கோப்பைத் தேர்ந்தெடு"
 
 #: src/common/ConfigWidgetFactory.js:106 src/common/ConfigWidgetFactory.js:182
 #: src/prefs/ImageChooserButton.js:46 src/prefs/MenuEditorPage.js:208
@@ -174,23 +195,25 @@ msgstr ""
 #: src/prefs/SettingsPage.js:335 resources/ui/gtk4/iconSelectDialog.ui:20
 #: resources/ui/gtk3/iconSelectDialog.ui:20
 msgid "Cancel"
-msgstr ""
+msgstr "ரத்துசெய்"
 
 #: src/common/ConfigWidgetFactory.js:181
 msgid "Select Application"
-msgstr ""
+msgstr "பயன்பாட்டைத் தேர்ந்தெடுக்கவும்"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:290 src/common/ConfigWidgetFactory.js:338
 #: src/prefs/MenuEditor.js:284
 msgid "Not Bound"
-msgstr ""
+msgstr "பிணைக்கப்படவில்லை"
 
 #: src/common/ConfigWidgetFactory.js:321
 msgid ""
 "Press the shortcut!\n"
 "ESC to cancel, BackSpace to unbind"
 msgstr ""
+"குறுக்குவழியை அழுத்தவும்!\n"
+" ரத்து செய்ய தப்பி, பழுதடைய பேக்ச்பேச்"
 
 #. Translators: If some text is dragged to the menu editor, an insert-text action is
 #. created. This is the name of the newly created action, %s will be replaced by the
@@ -198,17 +221,17 @@ msgstr ""
 #: src/common/ItemRegistry.js:279
 #, javascript-format
 msgid "Insert: %s"
-msgstr ""
+msgstr "செருகு: %s"
 
 #: src/common/menus/FrequentlyUsed.js:47
 msgid "Frequently Used"
-msgstr ""
+msgstr "அடிக்கடி பயன்படுத்தப்படுகிறது"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/FrequentlyUsed.js:54
 msgid "Shows your frequently used applications."
-msgstr ""
+msgstr "நீங்கள் அடிக்கடி பயன்படுத்தப்படும் பயன்பாடுகளைக் காட்டுகிறது."
 
 #: src/common/menus/FrequentlyUsed.js:58
 msgid ""
@@ -216,63 +239,68 @@ msgid ""
 "applications. For efficient selections, you should limit the maximum number "
 "of shown applications to about twelve."
 msgstr ""
+"<b> அடிக்கடி பயன்படுத்தப்படும் </b> பட்டியல் அடிக்கடி பயன்படுத்தப்படும் பயன்பாடுகளின் "
+"பட்டியலைக் காட்டுகிறது. திறமையான தேர்வுகளுக்கு, காட்டப்பட்ட பயன்பாடுகளின் அதிகபட்ச "
+"எண்ணிக்கையை சுமார் பன்னிரண்டு வரை மட்டுப்படுத்த வேண்டும்."
 
 #: src/common/menus/FrequentlyUsed.js:82 src/common/menus/RecentFiles.js:72
 #: src/common/menus/Clipboard.js:88
 msgid "Max Item Count"
-msgstr ""
+msgstr "அதிகபட்ச உருப்படி எண்ணிக்கை"
 
 #: src/common/menus/FrequentlyUsed.js:82 src/common/menus/RecentFiles.js:72
 #: src/common/menus/Clipboard.js:88
 msgid "Limits the number of children."
-msgstr ""
+msgstr "குழந்தைகளின் எண்ணிக்கையை கட்டுப்படுத்துகிறது."
 
 #: src/common/menus/System.js:49
 msgid "System"
-msgstr ""
+msgstr "மண்டலம்"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/System.js:56
 msgid "Allows screen lock, shutdown and other things."
-msgstr ""
+msgstr "திரை பூட்டு, பணிநிறுத்தம் மற்றும் பிற விசயங்களை அனுமதிக்கிறது."
 
 #: src/common/menus/System.js:60
 msgid ""
 "The <b>System</b> menu shows an items for screen-lock, shutdown, settings, "
 "etc."
 msgstr ""
+"<b> சிச்டம் </b> பட்டியல் திரை-பூட்டு, பணிநிறுத்தம், அமைப்புகள் போன்றவற்றுக்கான "
+"உருப்படிகளைக் காட்டுகிறது."
 
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:84
 msgid "Lock"
-msgstr ""
+msgstr "பூட்டு"
 
 #: src/common/menus/System.js:93
 msgid "Suspend"
-msgstr ""
+msgstr "இடைநீக்கம்"
 
 #: src/common/menus/System.js:102
 msgid "Switch User…"
-msgstr ""
+msgstr "பயனரை மாற்றவும்…"
 
 #: src/common/menus/System.js:111
 msgid "Log Out"
-msgstr ""
+msgstr "விடுபதிகை"
 
 #: src/common/menus/System.js:120
 msgid "Power Off…"
-msgstr ""
+msgstr "பவர் ஆஃப்…"
 
 #: src/common/menus/CustomMenu.js:32
 msgid "Custom Menu"
-msgstr ""
+msgstr "தனிப்பயன் பட்டியல்"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:39
 msgid "This can contain custom actions and other menus."
-msgstr ""
+msgstr "இது தனிப்பயன் செயல்கள் மற்றும் பிற மெனுக்களைக் கொண்டிருக்கலாம்."
 
 #: src/common/menus/CustomMenu.js:43
 msgid ""
@@ -280,33 +308,38 @@ msgid ""
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended."
 msgstr ""
+"ஒரு <b> தனிப்பயன் பட்டியல் </b> எத்தனை செயல்களையும் துணைமெனசையும் கொண்டிருக்கலாம். "
+"இருப்பினும், துல்லியமான உருப்படி தேர்வுக்கு, அதிகபட்சமாக பன்னிரண்டு உருப்படிகள் "
+"பரிந்துரைக்கப்படுகின்றன."
 
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:46 src/extension/DefaultMenu.js:82
 msgid "Favorites"
-msgstr ""
+msgstr "பிடித்தவை"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:53
 msgid "Shows pinned applications."
-msgstr ""
+msgstr "பின் செய்யப்பட்ட பயன்பாடுகளைக் காட்டுகிறது."
 
 #: src/common/menus/Favorites.js:57
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
 msgstr ""
+"<b> பிடித்தவை </b> பட்டியல் நீங்கள் க்னோம் செல்லின் கோடுக்கு பொருத்தப்பட்ட பயன்பாடுகளைக் "
+"காட்டுகிறது."
 
 #: src/common/menus/RecentFiles.js:37
 msgid "Recent Files"
-msgstr ""
+msgstr "அண்மைக்கால கோப்புகள்"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RecentFiles.js:44
 msgid "Shows your recently used files."
-msgstr ""
+msgstr "நீங்கள் அண்மைக் காலத்தில் பயன்படுத்திய கோப்புகளைக் காட்டுகிறது."
 
 #: src/common/menus/RecentFiles.js:48
 msgid ""
@@ -314,32 +347,37 @@ msgid ""
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
 msgstr ""
+"<b> அண்மைக் கால கோப்புகள் </b> பட்டியல் அண்மைக் காலத்தில் பயன்படுத்தப்பட்ட கோப்புகளின் "
+"பட்டியலைக் காட்டுகிறது. திறமையான தேர்வுகளுக்கு, காட்டப்பட்ட கோப்புகளின் அதிகபட்ச "
+"எண்ணிக்கையை சுமார் பன்னிரண்டு வரை மட்டுப்படுத்த வேண்டும்."
 
 #: src/common/menus/Devices.js:36
 msgid "Devices"
-msgstr ""
+msgstr "சாதனங்கள்"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:43
 msgid "Shows connected devices."
-msgstr ""
+msgstr "இணைக்கப்பட்ட சாதனங்களைக் காட்டுகிறது."
 
 #: src/common/menus/Devices.js:47
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
 msgstr ""
+"<b> சாதனங்கள் </b> பட்டியல் யூ.எச்.பி குச்சிகள் போன்ற ஒவ்வொரு ஏற்றப்பட்ட தொகுதிக்கும் ஒரு "
+"பொருளைக் காட்டுகிறது."
 
 #: src/common/menus/MainMenu.js:36
 msgid "Main Menu"
-msgstr ""
+msgstr "பட்டியல் விளையாடுங்கள்"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/MainMenu.js:43
 msgid "Shows all installed applications."
-msgstr ""
+msgstr "நிறுவப்பட்ட அனைத்து பயன்பாடுகளையும் காட்டுகிறது."
 
 #: src/common/menus/MainMenu.js:47
 msgid ""
@@ -347,17 +385,20 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather set up your own menus!"
 msgstr ""
+"<b> முதன்மையான பட்டியல் </b> நிறுவப்பட்ட அனைத்து பயன்பாடுகளையும் காட்டுகிறது. வழக்கமா"
+"க, இது மிகவும் இரைச்சலாக உள்ளது, ஏனெனில் பல பிரிவுகளில் திறமையாக பயன்படுத்த பல "
+"உருப்படிகள் உள்ளன. நீங்கள் உங்கள் சொந்த மெனுக்களை அமைக்க வேண்டும்!"
 
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:50 src/extension/DefaultMenu.js:114
 msgid "Running Apps"
-msgstr ""
+msgstr "பயன்பாடுகளை இயக்குகிறது"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:57
 msgid "Shows the currently running applications."
-msgstr ""
+msgstr "தற்போது இயங்கும் பயன்பாடுகளைக் காட்டுகிறது."
 
 #: src/common/menus/RunningApps.js:61
 msgid ""
@@ -365,6 +406,9 @@ msgid ""
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
+"<b> இயங்கும் பயன்பாடுகள் </b> பட்டியல் தற்போது இயங்கும் அனைத்து பயன்பாடுகளையும் "
+"காட்டுகிறது. இது ALT+TAB சாளர தேர்வுக்கு ஒத்ததாகும். உள்ளீடுகள் அடிக்கடி நிலையை "
+"மாற்றும்போது, இது உண்மையில் மிகவும் பயனுள்ளதாக இல்லை."
 
 #: src/common/menus/RunningApps.js:100
 msgid ""
@@ -374,440 +418,453 @@ msgid ""
 "\"Fire\" or \"Water\". A negation would be \"^(?!.*Fire)\" to match anything "
 "but \"Fire\". Remember to use the live preview to instantly see the results!"
 msgstr ""
+"காட்டப்படும் சாளரங்களை வடிகட்ட இதைப் பயன்படுத்தலாம். வழக்கமான வெளிப்பாடுகள் "
+"ஆதரிக்கப்படுகின்றன: \"ஃபயர்\" போன்ற எளிய சரம் பயன்படுத்தவும், அதன் தலைப்புகளில் \"தீ\" "
+"(எ.கா. பயர்பாக்ச்) உள்ளது. \"தீ\" அல்லது \"தண்ணீர்\" உடன் பொருந்த \"தீ | நீர்\" ஐப் "
+"பயன்படுத்தவும். \"தீ\" தவிர வேறு எதையும் பொருத்த ஒரு மறுப்பு \"^(?!.*நெருப்பு)\" "
+"இருக்கும். முடிவுகளை உடனடியாகக் காண நேரடி முன்னோட்டத்தைப் பயன்படுத்த நினைவில் கொள்ளுங்கள்!"
 
 #: src/common/menus/RunningApps.js:102
 msgid "Window Filter"
-msgstr ""
+msgstr "விண்டு வடிகட்டி"
 
 #: src/common/menus/RunningApps.js:102 resources/ui/gtk4/settings.ui:4845
 #: resources/ui/gtk4/settings.ui:4896 resources/ui/gtk3/settings.ui:4834
 #: resources/ui/gtk3/settings.ui:4891
 msgid "See tooltip for details."
-msgstr ""
+msgstr "விவரங்களுக்கு உதவிக்குறிப்பைப் பார்க்கவும்."
 
 #: src/common/menus/RunningApps.js:128
 msgid "Active Workspace Only"
-msgstr ""
+msgstr "செயலில் பணியிடம் மட்டுமே"
 
 #: src/common/menus/RunningApps.js:129
 msgid "Group by Application"
-msgstr ""
+msgstr "பயன்பாடு மூலம் குழு"
 
 #: src/common/menus/RunningApps.js:130
 msgid "Peek on Hover"
-msgstr ""
+msgstr "ஓவர் மீது பாருங்கள்"
 
 #: src/common/menus/Bookmarks.js:36
 msgid "Bookmarks"
-msgstr ""
+msgstr "புக்மார்க்குகள்"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Bookmarks.js:43
 msgid "Shows your frequently used directories."
-msgstr ""
+msgstr "நீங்கள் அடிக்கடி பயன்படுத்தப்படும் கோப்பகங்களைக் காட்டுகிறது."
 
 #: src/common/menus/Bookmarks.js:47
 msgid ""
 "The <b>Bookmarks</b> menu shows an item for the trash, your desktop and each "
 "bookmarked directory."
 msgstr ""
+"<b> புக்மார்க்ச் </b> பட்டியல் குப்பை, உங்கள் டெச்க்டாப் மற்றும் ஒவ்வொரு புக்மார்க்கு செய்யப்பட்ட "
+"கோப்பகத்திற்கான ஒரு பொருளைக் காட்டுகிறது."
 
 #: src/common/menus/Clipboard.js:57
 msgid "Clipboard"
-msgstr ""
+msgstr "இடைநிலைப் பலகை"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Clipboard.js:64
 msgid "Shows recently copied things."
-msgstr ""
+msgstr "நிகழ்ச்சிகள் அண்மைக் காலத்தில் நகலெடுத்தன."
 
 #: src/common/menus/Clipboard.js:67
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
 msgstr ""
+"<b> இடைநிலைப்பலகை </b> பட்டியல் அண்மைக் காலத்தில் நகலெடுக்கப்பட்ட விசயங்களின் பட்டியலைக் "
+"காட்டுகிறது."
 
 #: src/common/menus/Clipboard.js:97
 msgid "First Child Angle"
-msgstr ""
+msgstr "முதல் குழந்தை கோணம்"
 
 #: src/common/menus/Clipboard.js:97
 msgid "Direction of the most recent item."
-msgstr ""
+msgstr "மிக அண்மைக் கால உருப்படியின் திசை."
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a vector image.
 #: src/common/menus/Clipboard.js:168
 msgid "Vector Image"
-msgstr ""
+msgstr "திசையன் படம்"
 
 #. Translators: This is shown as item name in the clipboard menu when the user
 #. copied a raster image.
 #: src/common/menus/Clipboard.js:180
 msgid "Raster Image"
-msgstr ""
+msgstr "ராச்டர் படம்"
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:369
 msgid "Novice"
-msgstr ""
+msgstr "புதியவர்"
 
 #. Translators: This is the tier 2 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:372
 msgid "Capable"
-msgstr ""
+msgstr "திறன்"
 
 #. Translators: This is the tier 3 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:375
 msgid "Skilled"
-msgstr ""
+msgstr "திறமையான"
 
 #. Translators: This is the tier 4 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:378
 msgid "Expert"
-msgstr ""
+msgstr "வல்லுநர்"
 
 #. Translators: This is the tier 5 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:381
 msgid "Master"
-msgstr ""
+msgstr "மாச்டர்"
 
 #. Translators: This is the tier 1 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:387
 msgid "I"
-msgstr ""
+msgstr "I"
 
 #. Translators: This is the tier 2 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:390
 msgid "II"
-msgstr ""
+msgstr "Ii"
 
 #. Translators: This is the tier 3 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:393
 msgid "III"
-msgstr ""
+msgstr "Iii"
 
 #. Translators: This is the tier 4 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:396
 msgid "IV"
-msgstr ""
+msgstr "IV"
 
 #. Translators: This is the tier 5 number which will be inserted for each %i in
 #. the achievement titles.
 #: src/common/Achievements.js:399
 msgid "V"
-msgstr ""
+msgstr "V"
 
 #. Translators: The name of the 'Abort a selection %x times.' achievement.
 #: src/common/Achievements.js:415
 #, javascript-format
 msgid "%s Cancellor"
-msgstr ""
+msgstr "%s ரத்துசெய்தல்"
 
 #. Translators: The description of the '%s Cancellor' achievement.
 #: src/common/Achievements.js:418
 #, javascript-format
 msgid "Abort a selection %x times."
-msgstr ""
+msgstr "%X முறை ஒரு தேர்வை நிறுத்துங்கள்."
 
 #. Translators: The name of the 'Select %x items.' achievement.
 #: src/common/Achievements.js:431
 #, javascript-format
 msgid "%s Pielot"
-msgstr ""
+msgstr "%s பைலட்"
 
 #. Translators: The description of the '%s Pielot' achievement.
 #: src/common/Achievements.js:433
 #, javascript-format
 msgid "Select %x items."
-msgstr ""
+msgstr "%X உருப்படிகளைத் தேர்ந்தெடுக்கவும்."
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:447
 #, javascript-format
 msgid "%s Toplevel Gesture-Selector"
-msgstr ""
+msgstr "%s toplevel சைகை-தேர்ந்தெடுக்கப்பட்டவர்"
 
 #. Translators: The name of the 'Select %x items at depth 2 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:450
 #, javascript-format
 msgid "%s Submenu Gesture-Selector"
-msgstr ""
+msgstr "%s துணை சைகை-தேர்ந்தெடுக்கப்பட்டவர்"
 
 #. Translators: The name of the 'Select %x items at depth 3 in marking mode.'
 #. achievement.
 #: src/common/Achievements.js:453
 #, javascript-format
 msgid "%s Subsubmenu Gesture-Selector"
-msgstr ""
+msgstr "%s SUBSUBMENU சைகை-தேர்ந்தெடுக்கப்பட்டவர்"
 
 #. Translators: The description of the 'Gesture-Selector' achievement.
 #: src/common/Achievements.js:460
 #, javascript-format
 msgid "Select %x items at depth %d in marking mode."
 msgstr ""
+"குறிக்கும் பயன்முறையில் ஆழத்தில் %d இல் %x உருப்படிகளைத் தேர்ந்தெடுக்கவும்."
 
 #. Translators: The name of the 'Select %x items at depth 1 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:477
 #, javascript-format
 msgid "%s Toplevel Click-Selector"
-msgstr ""
+msgstr "%s toplevel Click-selector"
 
 #. Translators: The name of the 'Select %x items at depth 2 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:480
 #, javascript-format
 msgid "%s Submenu Click-Selector"
-msgstr ""
+msgstr "%s துணை கிளிக்-தேர்ந்தெடுக்கப்பட்டவர்"
 
 #. Translators: The name of the 'Select %x items at depth 3 with mouse
 #. clicks.' achievement.
 #: src/common/Achievements.js:483
 #, javascript-format
 msgid "%s Subsubmenu Click-Selector"
-msgstr ""
+msgstr "%s subsubmenu Click-selector"
 
 #. Translators: The description of the 'Click-Selector' achievement.
 #: src/common/Achievements.js:490
 #, javascript-format
 msgid "Select %x items at depth %d with mouse clicks."
 msgstr ""
+"மவுச் கிளிக்குகளுடன் ஆழத்தில் %d இல் %x உருப்படிகளைத் தேர்ந்தெடுக்கவும்."
 
 #. Translators: The name of the 'Select %x items at depth 1 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:512
 #, javascript-format
 msgid "%s Toplevel Selector"
-msgstr ""
+msgstr "%s toplevel தேர்வாளர்"
 
 #. Translators: The name of the 'Select %x items at depth 2 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:515
 #, javascript-format
 msgid "%s Submenu Selector"
-msgstr ""
+msgstr "%s துணை தேர்வாளர்"
 
 #. Translators: The name of the 'Select %x items at depth 3 in less than %t
 #. milliseconds.' achievement.
 #: src/common/Achievements.js:518
 #, javascript-format
 msgid "%s Subsubmenu Selector"
-msgstr ""
+msgstr "%s சப்சப்மெனு தேர்வாளர்"
 
 #. Translators: The description of the 'Selector' achievement.
 #: src/common/Achievements.js:530
 msgid "Select %x items at depth %d in less than %t milliseconds."
 msgstr ""
+"%d மில்லி விநாடிகளுக்கு குறைவாக %d இல் %x உருப்படிகளைத் தேர்ந்தெடுக்கவும்."
 
 #. Translators: The name of the 'Open the settings dialog %x times.'
 #. achievement.
 #: src/common/Achievements.js:550
 msgid "The Journey Is The Reward %i"
-msgstr ""
+msgstr "பயணம் என்பது வெகுமதி %i"
 
 #. Translators: The description of the 'The Journey Is The Reward %i'
 #. achievement.
 #: src/common/Achievements.js:553
 #, javascript-format
 msgid "Open the settings dialog %x times."
-msgstr ""
+msgstr "அமைப்புகள் உரையாடல் %x முறை திறக்கவும்."
 
 #. Translators: The name of the 'Open %x menus with the D-Bus interface.'
 #. achievement.
 #: src/common/Achievements.js:568
 msgid "Nerd Alert %i"
-msgstr ""
+msgstr "முட்டாள்தனமான எச்சரிக்கை %i"
 
 #. Translators: The description of the 'Nerd Alert %i' achievement.
 #: src/common/Achievements.js:570
 #, javascript-format
 msgid "Open %x menus with the D-Bus interface."
-msgstr ""
+msgstr "டி-பச் இடைமுகத்துடன் திறந்த %x மெனுக்கள்."
 
 #. Translators: The name of the 'Generate %x random presets.' achievement.
 #: src/common/Achievements.js:584
 msgid "Entropie %i"
-msgstr ""
+msgstr "என்ட்ரோபீச் %i"
 
 #: src/common/Achievements.js:588
 #, javascript-format
 msgid "Generate %x random presets."
-msgstr ""
+msgstr "%X சீரற்ற முன்னமைவுகளை உருவாக்குங்கள்."
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
 #: src/common/Achievements.js:601
 #, javascript-format
 msgid "%s Preset Exporter"
-msgstr ""
+msgstr "%முன்னுரிமை ஏற்றுமதியாளர்"
 
 #. Translators: The description of the '%s Preset Exporter' achievement if
 #. only one preset needs to be exported.
 #: src/common/Achievements.js:605
 msgid "Export a custom preset."
-msgstr ""
+msgstr "தனிப்பயன் முன்னமைவை ஏற்றுமதி செய்யுங்கள்."
 
 #. Translators: The description of the '%s Preset Exporter' achievement.
 #: src/common/Achievements.js:607
 #, javascript-format
 msgid "Export %x custom presets."
-msgstr ""
+msgstr "ஏற்றுமதி %x தனிப்பயன் முன்னமைவுகள்."
 
 #. Translators: The name of the 'Import %x custom presets.' achievement.
 #: src/common/Achievements.js:620
 #, javascript-format
 msgid "%s Preset Importer"
-msgstr ""
+msgstr "%முன்னமைக்கப்பட்ட இறக்குமதியாளர்"
 
 #. Translators: The description of the '%s Preset Importer' achievement if
 #. only one preset needs to be imported.
 #: src/common/Achievements.js:624
 msgid "Import a custom preset."
-msgstr ""
+msgstr "தனிப்பயன் முன்னமைவை இறக்குமதி செய்யுங்கள்."
 
 #. Translators: The description of the '%s Preset Importer' achievement.
 #: src/common/Achievements.js:626
 #, javascript-format
 msgid "Import %x custom presets."
-msgstr ""
+msgstr "%X தனிப்பயன் முன்னமைவுகளை இறக்குமதி செய்யுங்கள்."
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
 #: src/common/Achievements.js:639
 #, javascript-format
 msgid "%s Menu Importer"
-msgstr ""
+msgstr "%மெனு இறக்குமதியாளர்"
 
 #. Translators: The description of the '%s Menu Importer' achievement if
 #. only one menu needs to be imported.
 #: src/common/Achievements.js:643
 msgid "Import a menu configuration."
-msgstr ""
+msgstr "பட்டியல் உள்ளமைவை இறக்குமதி செய்யுங்கள்."
 
 #. Translators: The description of the '%s Menu Importer' achievement.
 #: src/common/Achievements.js:645
 #, javascript-format
 msgid "Import %x menu configurations."
-msgstr ""
+msgstr "%X பட்டியல் உள்ளமைவுகளை இறக்குமதி செய்யுங்கள்."
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
 #: src/common/Achievements.js:659
 #, javascript-format
 msgid "%s Menu Exporter"
-msgstr ""
+msgstr "%மெனு ஏற்றுமதியாளர்"
 
 #. Translators: The description of the '%s Menu Exporter' achievement if
 #. only one menu needs to be exported.
 #: src/common/Achievements.js:663
 msgid "Export a menu configuration."
-msgstr ""
+msgstr "பட்டியல் உள்ளமைவை ஏற்றுமதி செய்யுங்கள்."
 
 #. Translators: The description of the '%s Menu Exporter' achievement.
 #: src/common/Achievements.js:665
 #, javascript-format
 msgid "Export %x menu configurations."
-msgstr ""
+msgstr "ஏற்றுமதி %x பட்டியல் உள்ளமைவுகள்."
 
 #. Translators: The name of the 'Create %x items in the menu editor.'
 #. achievement.
 #: src/common/Achievements.js:680
 msgid "There Should Be No More Than Twelve Items…? %i"
-msgstr ""
+msgstr "பன்னிரண்டு உருப்படிகளுக்கு மேல் இருக்கக்கூடாது…? %i"
 
 #. Translators: The description of the 'There Should Be No More Than Twelve
 #. Items…? %i' achievement.
 #: src/common/Achievements.js:683
 #, javascript-format
 msgid "Create %x items in the menu editor."
-msgstr ""
+msgstr "பட்டியல் எடிட்டரில் %x உருப்படிகளை உருவாக்கவும்."
 
 #. Translators: The name of the 'Open a preview menu %x times.' achievement.
 #: src/common/Achievements.js:697
 #, javascript-format
 msgid "%s Menu Designer"
-msgstr ""
+msgstr "%மெனு வடிவமைப்பாளர்"
 
 #. Translators: The description of the '%s Menu Designer' achievement.
 #: src/common/Achievements.js:700
 #, javascript-format
 msgid "Open a preview menu %x times."
-msgstr ""
+msgstr "முன்னோட்ட பட்டியல் %x முறை திறக்கவும்."
 
 #. Translators: The name of the 'Open the tutorial menu %x times.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:713
 msgid "Grumpie Rookie"
-msgstr ""
+msgstr "க்ரம்பி ரூக்கி"
 
 #. Translators: The description of the 'Grumpie Rookie' achievement.
 #: src/common/Achievements.js:715
 #, javascript-format
 msgid "Open the tutorial menu %x times."
-msgstr ""
+msgstr "டுடோரியல் மெனுவைத் திறக்கவும் %x முறை."
 
 #. Translators: The name of the 'Get all medals of the tutorial.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:727
 msgid "Bachelor Pielot"
-msgstr ""
+msgstr "இளங்கலை பைலட்"
 
 #. Translators: The description of the 'Bachelor Pielot' achievement.
 #: src/common/Achievements.js:729
 msgid "Get all medals of the tutorial."
-msgstr ""
+msgstr "டுடோரியலின் அனைத்து பதக்கங்களையும் பெறுங்கள்."
 
 #. Translators: The name of the hidden 'Delete all of your menus.' achievement.
 #. This does not support %s and %i.
 #: src/common/Achievements.js:741
 msgid "Say Good-Pie!"
-msgstr ""
+msgstr "நல்ல பை சொல்லுங்கள்!"
 
 #. Translators: The description of the 'Say Good-Pie!' achievement.
 #: src/common/Achievements.js:743
 msgid "Delete all of your menus."
-msgstr ""
+msgstr "உங்கள் மெனுக்கள் அனைத்தையும் நீக்கு."
 
 #. Translators: The name of the hidden 'Consider becoming a sponsor of Fly-Pie.'
 #. This does not support %s and %i.
 #. achievement.
 #: src/common/Achievements.js:756
 msgid "That's Philanthropie!"
-msgstr ""
+msgstr "அது பரோபகாரம்!"
 
 #. Translators: The description of the 'That's Philanthropie!' achievement.
 #: src/common/Achievements.js:758
 msgid "Consider becoming a sponsor of Fly-Pie."
-msgstr ""
+msgstr "ஃப்ளை-பைவின் ச்பான்சராக மாறுவதைக் கவனியுங்கள்."
 
 #: src/prefs/AchievementsPage.js:120
 msgid "Do you really want to reset all statistics?"
 msgstr ""
+"எல்லா புள்ளிவிவரங்களையும் மீட்டமைக்க நீங்கள் உண்மையில் விரும்புகிறீர்களா?"
 
 #: src/prefs/AchievementsPage.js:121
 msgid "All achievements will be lost!"
-msgstr ""
+msgstr "அனைத்து சாதனைகளும் இழக்கப்படும்!"
 
 #: src/prefs/MenuEditor.js:419
 msgid "No menus configured"
-msgstr ""
+msgstr "எந்த மெனுக்களும் கட்டமைக்கப்படவில்லை"
 
 #: src/prefs/MenuEditor.js:422
 msgid "Create a new menu with the button in the top right corner."
-msgstr ""
+msgstr "மேல் வலது மூலையில் உள்ள பொத்தானைக் கொண்டு புதிய மெனுவை உருவாக்கவும்."
 
 #: src/prefs/MenuEditor.js:452
 msgid "Add a new item"
-msgstr ""
+msgstr "புதிய உருப்படியைச் சேர்க்கவும்"
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag an action in the menu editor to the menu
@@ -816,7 +873,7 @@ msgstr ""
 #. attempts to drag an action in the menu editor to the menu overview.
 #: src/prefs/MenuEditor.js:789 src/prefs/MenuEditorPage.js:949
 msgid "Actions cannot be turned into toplevel menus."
-msgstr ""
+msgstr "செயல்களை டோப்ல்வெல் மெனுக்களாக மாற்ற முடியாது."
 
 #. Translators: This is shown as an in-app notification when the
 #. user attempts to drag external stuff to the menu editor's
@@ -824,60 +881,62 @@ msgstr ""
 #: src/prefs/MenuEditor.js:809
 msgid "You can only create new Action items inside of Custom Menus."
 msgstr ""
+"தனிப்பயன் மெனுக்களுக்குள் புதிய செயல் உருப்படிகளை மட்டுமே உருவாக்க முடியும்."
 
 #: src/prefs/PreferencesDialog.js:255 src/prefs/PreferencesDialog.js:288
 msgid "Gold Sponsors"
-msgstr ""
+msgstr "தங்க ஆதரவாளர்கள்"
 
 #: src/prefs/PreferencesDialog.js:259 src/prefs/PreferencesDialog.js:292
 msgid "Silver Sponsors"
-msgstr ""
+msgstr "வெள்ளி ஒப்புரவாளர்கள்"
 
 #: src/prefs/PreferencesDialog.js:263 src/prefs/PreferencesDialog.js:296
 msgid "Bronze Sponsors"
-msgstr ""
+msgstr "வெண்கல ஆதரவாளர்கள்"
 
 #: src/prefs/PreferencesDialog.js:267 src/prefs/PreferencesDialog.js:300
 msgid "Past Sponsors"
-msgstr ""
+msgstr "கடந்த கால ஒப்புரவாளர்கள்"
 
 #: src/prefs/ImageChooserButton.js:100
 #: resources/ui/gtk4/imageChooserButton.ui:22
 #: resources/ui/gtk3/imageChooserButton.ui:22
 msgid "(None)"
-msgstr ""
+msgstr "(எதுவுமில்லை)"
 
 #: src/prefs/MenuEditorPage.js:197 src/prefs/MenuEditorPage.js:267
 #: src/prefs/SettingsPage.js:269 src/prefs/SettingsPage.js:324
 msgid "JSON Files"
-msgstr ""
+msgstr "சேசன் கோப்புகள்"
 
 #: src/prefs/MenuEditorPage.js:204 src/prefs/MenuEditorPage.js:274
 #: src/prefs/SettingsPage.js:276 src/prefs/SettingsPage.js:331
 msgid "All Files"
-msgstr ""
+msgstr "அனைத்து கோப்புகள்"
 
 #: src/prefs/MenuEditorPage.js:209
 msgid "Export"
-msgstr ""
+msgstr "ஏற்றுமதி"
 
 #: src/prefs/MenuEditorPage.js:238
 msgid "Could not export the menu configuration."
-msgstr ""
+msgstr "பட்டியல் உள்ளமைவை ஏற்றுமதி செய்ய முடியவில்லை."
 
 #: src/prefs/MenuEditorPage.js:279
 msgid "Import"
-msgstr ""
+msgstr "இறக்குமதி"
 
 #: src/prefs/MenuEditorPage.js:313
 msgid "Could not import the menu configuration."
-msgstr ""
+msgstr "பட்டியல் உள்ளமைவை இறக்குமதி செய்ய முடியவில்லை."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:385
 msgid "You should try to have no more than twelve items in your menus."
 msgstr ""
+"உங்கள் மெனுக்களில் பன்னிரண்டு பொருட்களுக்கு மேல் இருக்க முயற்சிக்க வேண்டும்."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -886,27 +945,29 @@ msgid ""
 "An even number of entries will make it easier to learn item positions. Four, "
 "six and eight are good numbers."
 msgstr ""
+"உள்ளீடுகளின் எண்ணிக்கை உருப்படி நிலைகளைக் கற்றுக்கொள்வதை எளிதாக்கும். நான்கு, ஆறு மற்றும் "
+"எட்டு நல்ல எண்கள்."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:391
 #, javascript-format
 msgid "Fly-Pie is libre software available on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "ஃப்ளை-பை என்பது லிப்ரே மென்பொருளாகும் <a href = \"%s\"> github </a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:395
 #, javascript-format
 msgid "Suggestions can be posted on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "பரிந்துரைகளை <a href = \"%s\"> github </a> இல் வெளியிடலாம்."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:399
 #, javascript-format
 msgid "Bugs can be reported on <a href=\"%s\">GitHub</a>."
-msgstr ""
+msgstr "பிழைகள் <a href = \"%s\"> github </a> இல் தெரிவிக்கப்படலாம்."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -915,6 +976,8 @@ msgid ""
 "Keep menu hierarchies efficient by putting anything beyond 8 elements into a "
 "new menu level."
 msgstr ""
+"8 உறுப்புகளுக்கு அப்பால் எதையும் புதிய பட்டியல் நிலைக்கு வைப்பதன் மூலம் பட்டியல் "
+"படிநிலைகளை திறம்பட வைத்திருங்கள்."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -923,12 +986,15 @@ msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
 msgstr ""
+"நீங்கள் எல்லா மெனுக்களையும் நீக்கிவிட்டால், வெளியேறி மீண்டும் உள்நுழைகால், இயல்புநிலை உள்ளமைவு"
+" மீட்டமைக்கப்படும்."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
 #: src/prefs/MenuEditorPage.js:409
 msgid "You can reorder the menu items on the left via drag and drop."
 msgstr ""
+"இழுவை மற்றும் டிராப் வழியாக இடதுபுறத்தில் உள்ள பட்டியல் உருப்படிகளை மறுவரிசைப்படுத்தலாம்."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -938,6 +1004,8 @@ msgid ""
 "It is possible to open a menu with a terminal command. You can read more on "
 "<a href=\"%s\">Github</a>."
 msgstr ""
+"முனைய கட்டளையுடன் மெனுவைத் திறக்க முடியும். நீங்கள் <a href = \"%s\"> github </a> இல் "
+"மேலும் படிக்கலாம்."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -946,6 +1014,8 @@ msgid ""
 "You can drop directories, files, links and desktop files into the menu "
 "hierarchy on the left."
 msgstr ""
+"நீங்கள் கோப்பகங்கள், கோப்புகள், இணைப்புகள் மற்றும் டெச்க்டாப் கோப்புகளை இடதுபுறத்தில் பட்டியல் "
+"வரிசைக்குள் கைவிடலாம்."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -954,6 +1024,8 @@ msgid ""
 "On Wayland, you can copy menu items by holding the Ctrl key while dragging "
 "them to another location."
 msgstr ""
+"வேலண்டில், சி.டி.ஆர்.எல் விசையை வைத்திருப்பதன் மூலம் பட்டியல் உருப்படிகளை வேறொரு "
+"இடத்திற்கு இழுக்கும்போது நகலெடுக்கலாம்."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -961,6 +1033,7 @@ msgstr ""
 #, javascript-format
 msgid "<a href=\"%s\">Translate Fly-Pie on Hosted Weblate</a>."
 msgstr ""
+"<a href = \"%s\"> புரவலன் செய்யப்பட்ட வெப்லேட்டில் ஃப்ளை-பை மொழிபெயர்க்கவும் </a>."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -970,6 +1043,8 @@ msgid ""
 "💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a "
 "sponsor.</a>"
 msgstr ""
+"Fly ஃப்ளை-பை மீதான உங்கள் அன்பைக் காட்ட விரும்புகிறீர்களா? <a href = \"%s\"> ஒரு "
+"ச்பான்சராகுங்கள். </a>"
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -978,41 +1053,43 @@ msgid ""
 "If you cannot use a specific keyboard shortcut, you may check you system "
 "settings as it may be used already."
 msgstr ""
+"நீங்கள் ஒரு குறிப்பிட்ட விசைப்பலகை குறுக்குவழியைப் பயன்படுத்த முடியாவிட்டால், கணினி "
+"அமைப்புகள் ஏற்கனவே பயன்படுத்தப்படலாம் என்பதால் அதை சரிபார்க்கலாம்."
 
 #. Translators: The left-most item of the menu editor bread crumbs.
 #: src/prefs/MenuEditorPage.js:1012
 msgid "All Menus"
-msgstr ""
+msgstr "அனைத்து மெனுக்கள்"
 
 #: src/prefs/SettingsPage.js:281
 msgid "Save"
-msgstr ""
+msgstr "சேமி"
 
 #: src/prefs/SettingsPage.js:336
 msgid "Load"
-msgstr ""
+msgstr "சுமை"
 
 #: src/prefs/SettingsPage.js:353
 msgid "Failed to load preset!"
-msgstr ""
+msgstr "முன்னமைவை ஏற்றுவதில் தோல்வி!"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:185
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big> கடைசி தேர்வு நேரம்: <b>%d MS </b> </dig>"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:190
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
-msgstr ""
+msgstr "<big> சிறந்த தேர்வு நேரம்: <b>%d MS </b> </dag>"
 
 #. Translators: This is the name of the tutorial menu.
 #. Translators: This is the name of the default menu.
 #: src/prefs/ExampleMenu.js:30 src/extension/DefaultMenu.js:32
 msgid "Example Menu"
-msgstr ""
+msgstr "எடுத்துக்காட்டு பட்டியல்"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1020,7 +1097,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:69
 msgid "Cold "
-msgstr ""
+msgstr "குளிர்"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1028,7 +1105,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:74
 msgid "Hot "
-msgstr ""
+msgstr "சூடான"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1036,7 +1113,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:79
 msgid "Wet "
-msgstr ""
+msgstr "ஈரமான"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1044,7 +1121,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:84
 msgid "Deadly "
-msgstr ""
+msgstr "கொடிய"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1052,7 +1129,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:89
 msgid "Smelly "
-msgstr ""
+msgstr "மணமான"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1060,7 +1137,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:94
 msgid "Vegan "
-msgstr ""
+msgstr "சைவ உணவு"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1068,7 +1145,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:108
 msgid "Chocolate "
-msgstr ""
+msgstr "சாக்லேட்"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1076,7 +1153,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:113
 msgid "Cherry "
-msgstr ""
+msgstr "செர்ரி"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1084,7 +1161,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:118
 msgid "Garlic "
-msgstr ""
+msgstr "பூண்டு"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1092,7 +1169,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:123
 msgid "Apple "
-msgstr ""
+msgstr "ஆப்பிள்"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1100,7 +1177,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:128
 msgid "Pepper "
-msgstr ""
+msgstr "மிளகு"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1108,7 +1185,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:142
 msgid "Pie"
-msgstr ""
+msgstr "பை"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1116,7 +1193,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:147
 msgid "Cake"
-msgstr ""
+msgstr "கேக்"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1124,7 +1201,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:152
 msgid "Muffin"
-msgstr ""
+msgstr "மஃபின்"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1132,7 +1209,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:157
 msgid "Doughnut"
-msgstr ""
+msgstr "டோனட்"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1140,225 +1217,225 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:162
 msgid "Cookie"
-msgstr ""
+msgstr "குக்கீ"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:40
 msgid "Sound"
-msgstr ""
+msgstr "ஒலி"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:45
 msgid "Mute"
-msgstr ""
+msgstr "முடக்கு"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:53
 msgid "Play / Pause"
-msgstr ""
+msgstr "விளையாடு / இடைநிறுத்தம்"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:61
 msgid "Next Title"
-msgstr ""
+msgstr "அடுத்த தலைப்பு"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:69
 msgid "Previous Title"
-msgstr ""
+msgstr "முந்தைய தலைப்பு"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:90
 msgid "Maximize Window"
-msgstr ""
+msgstr "சாளரத்தை அதிகரிக்கவும்"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:98
 msgid "Fly-Pie Settings"
-msgstr ""
+msgstr "ஃப்ளை-பை அமைப்புகள்"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:106
 msgid "Close Window"
-msgstr ""
+msgstr "சாளரத்தை மூடு"
 
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
 #: src/extension/DefaultMenu.js:138
 msgid "Next Workspace"
-msgstr ""
+msgstr "அடுத்த பணியிடம்"
 
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
 #: src/extension/DefaultMenu.js:147
 msgid "Previous Workspace"
-msgstr ""
+msgstr "முந்தைய பணியிடம்"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:158
 msgid "Switch Workspace"
-msgstr ""
+msgstr "பணியிடத்தை மாற்றவும்"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:163
 msgid "Go Up"
-msgstr ""
+msgstr "மேலே செல்லுங்கள்"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:171
 msgid "Go Down"
-msgstr ""
+msgstr "கீழே செல்லுங்கள்"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:184
 msgid "Move Window"
-msgstr ""
+msgstr "சாளரத்தை நகர்த்தவும்"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:189
 msgid "Move Window Up"
-msgstr ""
+msgstr "சாளரத்தை நகர்த்தவும்"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:197
 msgid "Move Window Down"
-msgstr ""
+msgstr "சாளரத்தை கீழே நகர்த்தவும்"
 
 #: src/extension/Background.js:91
 msgid "Close"
-msgstr ""
+msgstr "மூடு"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
 #: src/extension/Background.js:97
 msgid "Flip Side"
-msgstr ""
+msgstr "பக்கவாட்டு"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:217
 msgid "Fly-Pie Level Up!"
-msgstr ""
+msgstr "ஃப்ளை-பை லெவல் அப்!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:219
 msgid "You reached level %i!"
-msgstr ""
+msgstr "நீங்கள் நிலை %ஐ அடைந்தீர்கள்!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:239
 msgid "Fly-Pie Achievement Completed!"
-msgstr ""
+msgstr "ஃப்ளை-பை சாதனை முடிந்தது!"
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:241
 #, javascript-format
 msgid "You finished the achievement \"%s\"!"
-msgstr ""
+msgstr "நீங்கள் \"%s\" சாதனையை முடித்தீர்கள்!"
 
 #. Translators: This is shown on the action button of the notification bubble which
 #. is shown once an achievement is unlocked.
 #: src/extension/Daemon.js:603
 msgid "Show Achievements"
-msgstr ""
+msgstr "சாதனைகளைக் காட்டு"
 
 #: resources/ui/common/menus.ui:13
 msgid "Visit Homepage"
-msgstr ""
+msgstr "முகப்புப்பக்கத்தைப் பார்வையிடவும்"
 
 #: resources/ui/common/menus.ui:17
 msgid "View Changelog"
-msgstr ""
+msgstr "சேஞ்ச்லாக் காண்க"
 
 #: resources/ui/common/menus.ui:23
 msgid "Report a Bug"
-msgstr ""
+msgstr "ஒரு பிழையைப் புகாரளிக்கவும்"
 
 #: resources/ui/common/menus.ui:27
 msgid "Translate"
-msgstr ""
+msgstr "மொழிபெயர்த்திடு"
 
 #: resources/ui/common/menus.ui:31
 msgid "Donate"
-msgstr ""
+msgstr "நன்கொடை"
 
 #: resources/ui/common/menus.ui:48
 msgid "About Fly-Pie"
-msgstr ""
+msgstr "ஃப்ளை-பை பற்றி"
 
 #: resources/ui/gtk4/copyValueButton.ui:12
 #: resources/ui/gtk3/copyValueButton.ui:12
 msgid "Copy left value to right side"
-msgstr ""
+msgstr "இடது மதிப்பை வலது பக்கமாக நகலெடுக்கவும்"
 
 #: resources/ui/gtk4/iconSelectDialog.ui:25
 #: resources/ui/gtk3/iconSelectDialog.ui:25
 msgid "Select Icon"
-msgstr ""
+msgstr "ஐகானைத் தேர்ந்தெடுக்கவும்"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/gtk4/iconSelectDialog.ui:50
 #: resources/ui/gtk3/iconSelectDialog.ui:106
 msgid "Icon Theme"
-msgstr ""
+msgstr "படவுரு கருப்பொருள்"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/gtk4/iconSelectDialog.ui:112
 #: resources/ui/gtk3/iconSelectDialog.ui:117
 msgid "Custom Icon"
-msgstr ""
+msgstr "தனிப்பயன் படவுரு"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:25 resources/ui/gtk3/settings.ui:25
 msgid "Linear"
-msgstr ""
+msgstr "நேரியல்"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:29 resources/ui/gtk3/settings.ui:29
 msgid "Ease"
-msgstr ""
+msgstr "எளிதானது"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:33 resources/ui/gtk3/settings.ui:33
 msgid "Ease-In"
-msgstr ""
+msgstr "எளிதானது"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:37 resources/ui/gtk3/settings.ui:37
 msgid "Ease-Out"
-msgstr ""
+msgstr "எளிதாக"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:41 resources/ui/gtk3/settings.ui:41
 msgid "Ease-In-Out"
-msgstr ""
+msgstr "எளிதாக"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:45 resources/ui/gtk3/settings.ui:45
 msgid "Ease-In-Quad"
-msgstr ""
+msgstr "எளிதான-க்யூட்"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:49 resources/ui/gtk3/settings.ui:49
 msgid "Ease-Out-Quad"
-msgstr ""
+msgstr "எளிதான-அவுட்-குவாட்"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:53 resources/ui/gtk3/settings.ui:53
 msgid "Ease-In-Out-Quad"
-msgstr ""
+msgstr "எளிதில்-அவுட்-குவாட்"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:57 resources/ui/gtk3/settings.ui:57
 msgid "Ease-In-Back"
-msgstr ""
+msgstr "எளிதில்-பின்"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:61 resources/ui/gtk3/settings.ui:61
 msgid "Ease-Out-Back"
-msgstr ""
+msgstr "எளிதாக-பின்"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:65 resources/ui/gtk3/settings.ui:65
 msgid "Ease-In-Out-Back"
-msgstr ""
+msgstr "எளிதில்-பின்-பின்"
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/gtk4/settings.ui:415 resources/ui/gtk3/settings.ui:416
@@ -1366,6 +1443,8 @@ msgid ""
 "<b>Menus</b>\n"
 "Can be submenus or top-level menus."
 msgstr ""
+"<b> மெனுக்கள் </b>\n"
+" துணைமெனச் அல்லது உயர்மட்ட மெனுக்கள் இருக்கலாம்."
 
 #. Heading in the add-new-item-popover of the menu editor.
 #: resources/ui/gtk4/settings.ui:439 resources/ui/gtk3/settings.ui:440
@@ -1373,33 +1452,37 @@ msgid ""
 "<b>Actions</b>\n"
 "Can be added to custom menus."
 msgstr ""
+"<b> செயல்கள் </b>\n"
+" தனிப்பயன் மெனுக்களில் சேர்க்கலாம்."
 
 #. Tooltip of the generate-a-random-preset button
 #: resources/ui/gtk4/settings.ui:509 resources/ui/gtk3/settings.ui:510
 msgid "Initialize most settings to random values."
-msgstr ""
+msgstr "சீரற்ற மதிப்புகளுக்கு பெரும்பாலான அமைப்புகளைத் தொடங்கவும்."
 
 #: resources/ui/gtk4/settings.ui:521 resources/ui/gtk3/settings.ui:522
 msgid "Generate Random Preset"
-msgstr ""
+msgstr "சீரற்ற முன்னமைவை உருவாக்குங்கள்"
 
 #: resources/ui/gtk4/settings.ui:552 resources/ui/gtk3/settings.ui:556
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
 msgstr ""
+"சினோம் செல்லின் அனிமேசன்கள் இயக்கப்பட்டிருக்க வேண்டும் என்று ஃப்ளை-பை தேவைப்படுகிறது."
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: resources/ui/gtk4/settings.ui:557 resources/ui/gtk3/settings.ui:566
 msgid "Enable Animations"
-msgstr ""
+msgstr "அனிமேசன்களை இயக்கவும்"
 
 #. Caption of the tutorial page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:608 resources/ui/gtk3/settings.ui:1326
 msgid "Tutorial"
-msgstr ""
+msgstr "பயிற்சி"
 
 #: resources/ui/gtk4/settings.ui:646 resources/ui/gtk3/settings.ui:657
 msgid "Press <b>Ctrl+Space</b> to open the default menu of Fly-Pie!"
 msgstr ""
+"ஃப்ளை-பையின் இயல்புநிலை மெனுவைத் திறக்க <b> ctrl+space </b> ஐ அழுத்தவும்!"
 
 #: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:667
 msgid ""
@@ -1407,6 +1490,10 @@ msgid ""
 "much more. This interactive tutorial will teach you how to use Fly-Pie most "
 "efficiently. Click the big button below to open a training menu!"
 msgstr ""
+"பயன்பாடுகளைத் தொடங்க, ஆட்கீய்களை உருவகப்படுத்த, திறந்த முகவரி கள் மற்றும் பலவற்றை நீங்கள் "
+"ஃப்ளை-பை பயன்படுத்தலாம். இந்த ஊடாடும் பயிற்சி ஃப்ளை-பை மிகவும் திறமையாக எவ்வாறு "
+"பயன்படுத்துவது என்பதை உங்களுக்குக் கற்பிக்கும். பயிற்சி மெனுவைத் திறக்க கீழே உள்ள பெரிய "
+"பொத்தானைக் சொடுக்கு செய்க!"
 
 #: resources/ui/gtk4/settings.ui:666 resources/ui/gtk3/settings.ui:677
 msgid ""
@@ -1417,6 +1504,14 @@ msgid ""
 "\n"
 "Once you feel comfortable, click <b>next</b> to learn more details!"
 msgstr ""
+"Teften உருப்படிகளைத் தேர்ந்தெடுக்க உங்கள் <b> இடது சுட்டி பொத்தானைப் பயன்படுத்தவும் </b>."
+"\n"
+" Men மெனுவை மூட உங்கள் <b> வலது சுட்டி பொத்தானைப் பயன்படுத்தவும் </b>.\n"
+" Mena பயிற்சி பட்டியல் ஒரு விளையாட்டு மைதானம் மட்டுமே, உருப்படிகளைத் தேர்ந்தெடுப்பது "
+"உண்மையான விளைவைக் கொண்டிருக்கவில்லை.\n"
+"\n"
+" நீங்கள் வசதியாக உணர்ந்தவுடன், மேலும் விவரங்களை அறிய <b> அடுத்து </b> என்பதைக் சொடுக்கு "
+"செய்க!"
 
 #. The text of the big tutorial button.
 #: resources/ui/gtk4/settings.ui:686 resources/ui/gtk4/settings.ui:767
@@ -1425,18 +1520,20 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:775 resources/ui/gtk3/settings.ui:858
 #: resources/ui/gtk3/settings.ui:998 resources/ui/gtk3/settings.ui:1081
 msgid "<big><b>Open the training Menu!</b></big>"
-msgstr ""
+msgstr "<big> <b> பயிற்சி மெனுவைத் திறக்கவும்! </b> </பெரிய>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:718 resources/ui/gtk3/settings.ui:727
 msgid "You can click anywhere!"
-msgstr ""
+msgstr "நீங்கள் எங்கும் சொடுக்கு செய்யலாம்!"
 
 #: resources/ui/gtk4/settings.ui:736 resources/ui/gtk3/settings.ui:744
 msgid ""
 "It does not matter whether you click directly on an item or at the edge of "
 "your screen as long as your mouse pointer remains in the item's wedge."
 msgstr ""
+"உங்கள் சுட்டி சுட்டிக்காட்டி உருப்படியின் ஆப்பில் இருக்கும் வரை நீங்கள் ஒரு உருப்படியில் "
+"நேரடியாக அல்லது உங்கள் திரையின் விளிம்பில் நேரடியாக சொடுக்கு செய்தாலும் பரவாயில்லை."
 
 #: resources/ui/gtk4/settings.ui:747 resources/ui/gtk3/settings.ui:755
 msgid ""
@@ -1447,11 +1544,18 @@ msgid ""
 "\n"
 "Click <b>next</b> for a practice session!"
 msgstr ""
+"<b> அந்தந்த குடைமிளகாய் எங்கும் சொடுக்கு செய்வதன் மூலம் உருப்படிகள் தேர்ந்தெடுக்கப்படுகின்றன "
+"</b>.\n"
+"\n"
+" மேலும், நீங்கள் சொடுக்கு செய்த நிலையைச் சுற்றி துணைமெனு குடைமிளகாய் உடனடியாகத் தோன்றும் "
+"என்பதால் அனிமேசன் முடிவடையும் வரை நீங்கள் காத்திருக்க வேண்டியதில்லை.\n"
+"\n"
+" ஒரு பயிற்சி அமர்வுக்கு <b> அடுத்து </b> என்பதைக் சொடுக்கு செய்க!"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:799 resources/ui/gtk3/settings.ui:805
 msgid "Practice Session I"
-msgstr ""
+msgstr "பயிற்சி அமர்வு i"
 
 #: resources/ui/gtk4/settings.ui:808 resources/ui/gtk3/settings.ui:814
 #, javascript-format
@@ -1462,27 +1566,32 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn about Fly-"
 "Pie's Marking Mode!"
 msgstr ""
+"இந்த பயிற்சி அமர்வுக்கு, பெரிய பொத்தானைக் சொடுக்கு செய்வதன் மூலம் மெனுவைத் திறக்கவும். "
+"பின்னர் \"%s\" ஐ விரைவாகத் தேர்ந்தெடுக்கவும். தங்கப் பதக்கத்தைப் பெற முடியுமா?\n"
+"\n"
+" உங்கள் முடிவைப் பற்றி நீங்கள் மகிழ்ச்சியடைந்தவுடன், ஃப்ளை-பை குறிக்கும் பயன்முறையைப் பற்றி "
+"அறிய <b> அடுத்து </b> என்பதைக் சொடுக்கு செய்க!"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:881 resources/ui/gtk3/settings.ui:887
 msgid "Unlocked at less than 3000 ms"
-msgstr ""
+msgstr "3000 எம்.எச்"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:901 resources/ui/gtk3/settings.ui:907
 msgid "Unlocked at less than 2000 ms"
-msgstr ""
+msgstr "2000 எம்.எச்"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:922 resources/ui/gtk4/settings.ui:1108
 #: resources/ui/gtk3/settings.ui:928 resources/ui/gtk3/settings.ui:1109
 msgid "Unlocked at less than 1000 ms"
-msgstr ""
+msgstr "1000 எம்.எச்"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:949 resources/ui/gtk3/settings.ui:953
 msgid "The Marking Mode of Fly-Pie"
-msgstr ""
+msgstr "ஃப்ளை-பை குறிக்கும் முறை"
 
 #: resources/ui/gtk4/settings.ui:967 resources/ui/gtk3/settings.ui:970
 msgid ""
@@ -1490,6 +1599,10 @@ msgid ""
 "gestures</b>! To enter Marking Mode, click and drag an item. As soon as you "
 "pause dragging or make a turn, the item will be selected."
 msgstr ""
+"ஃப்ளை-பையின் <b> மார்க்கிங் பயன்முறை </b> <b> வரைதல் சைகைகள் </b> மூலம் உருப்படிகளைத் "
+"தேர்ந்தெடுக்க உங்களை அனுமதிக்கிறது! குறிக்கும் பயன்முறையை உள்ளிட, ஒரு உருப்படியைக் "
+"சொடுக்கு செய்து இழுக்கவும். நீங்கள் இழுத்துச் சென்றவுடன் அல்லது ஒரு திருப்பத்தை செய்தவுடன், "
+"உருப்படி தேர்ந்தெடுக்கப்படும்."
 
 #: resources/ui/gtk4/settings.ui:977 resources/ui/gtk3/settings.ui:980
 msgid ""
@@ -1501,11 +1614,18 @@ msgid ""
 "gesture of straight parts. <b>Do not draw curvy paths but rather expressive "
 "zig-zag-lines!</b>"
 msgstr ""
+"ஒரு பொருளுக்கான பாதையை நினைவில் கொள்ள முயற்சிக்கவும். மெனுவைத் திறந்து <b> உங்கள் "
+"சுட்டியுடன் பாதையை வரையவும் </b>. நீங்கள் பாதையின் தனிப்பட்ட பிரிவுகளுடன் தொடங்கலாம், "
+"முழு பாதையையும் வரைய முயற்சி செய்யலாம்!\n"
+"\n"
+" நேரான பகுதிகளின் சைகையை நீங்கள் வெளிப்படையாக உருவாக்க முயற்சித்தால் அதை மிகவும் "
+"வெற்றிகரமாக காணலாம். <b> வளைவு பாதைகளை வரைய வேண்டாம், மாறாக வெளிப்படையான "
+"சிக்-சாக்-கோடுகள்! </b>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:1027 resources/ui/gtk3/settings.ui:1028
 msgid "Practice Session II"
-msgstr ""
+msgstr "பயிற்சி அமர்வு II"
 
 #: resources/ui/gtk4/settings.ui:1036 resources/ui/gtk3/settings.ui:1037
 #, javascript-format
@@ -1517,21 +1637,27 @@ msgid ""
 "Once you are pleased with your result, click <b>next</b> to learn some final "
 "tips and tricks!"
 msgstr ""
+"மீண்டும், நீங்கள் \"%s\" ஐ விரைவில் தேர்ந்தெடுக்க வேண்டும். இருப்பினும், நீங்கள் இப்போது "
+"குறிக்கும் பயன்முறையைப் பற்றி கற்றுக்கொண்டது போல, தங்கப் பதக்கத்தைப் பெறுவதற்குத் தேவையான "
+"நேரம் மிகக் குறைவு!\n"
+"\n"
+" உங்கள் முடிவில் நீங்கள் மகிழ்ச்சியடைந்தவுடன், சில இறுதி உதவிக்குறிப்புகள் மற்றும் "
+"தந்திரங்களைக் கற்றுக்கொள்ள <b> அடுத்து </b> என்பதைக் சொடுக்கு செய்க!"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:1128 resources/ui/gtk3/settings.ui:1129
 msgid "Unlocked at less than 750 ms"
-msgstr ""
+msgstr "750 எம்.எச்"
 
 #. ms = milliseconds
 #: resources/ui/gtk4/settings.ui:1149 resources/ui/gtk3/settings.ui:1150
 msgid "Unlocked at less than 500 ms"
-msgstr ""
+msgstr "500 எம்.எச்"
 
 #. The user finished the tutorial. Yay!
 #: resources/ui/gtk4/settings.ui:1183 resources/ui/gtk3/settings.ui:1182
 msgid "Congratulations!"
-msgstr ""
+msgstr "வாழ்த்துக்கள்!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: resources/ui/gtk4/settings.ui:1194 resources/ui/gtk3/settings.ui:1193
@@ -1551,91 +1677,106 @@ msgid ""
 "free to report this on <a href=\"https://github.com/Schneegans/Fly-Pie/"
 "issues\">Github</a>."
 msgstr ""
+"வாழ்த்துக்கள்! நீங்கள் பெரும்பாலான பதக்கங்களைத் திறக்க முடிந்தால், நீங்கள் ஒரு மாச்டர் பைலட் போன்"
+"ற ஃப்ளை-பையைப் பயன்படுத்துவீர்கள்!\n"
+"\n"
+" இப்போது நீங்கள் இந்த அமைப்புகள் உரையாடலின் மற்ற பக்கங்களைப் பயன்படுத்தி ஃப்ளை-பைவை உங்கள் "
+"இதயத்தின் விருப்பத்திற்கு உள்ளமைக்கலாம். பல விருப்பங்கள் உள்ளன! நீங்கள் விரும்பும் அளவுக்கு "
+"ஆழமான படிநிலைகளுடன் நீங்கள் விரும்பும் பல மெனுக்களை உருவாக்கவும். ஆனால் ஒரு துணைமெனுவின்"
+" பொருட்களின் அளவை <b> க்கு பன்னிரண்டு உருப்படிகளுக்கு மட்டுப்படுத்த முயற்சிக்கவும் </b>. "
+"இந்த எண்ணுக்கு மேலே உள்ள அனைத்தும் உங்கள் செயல்திறனை வெகுவாகக் குறைக்கும்.\n"
+"\n"
+" நீங்கள் ஃப்ளை-பைவை விரும்பினால், <a href = "
+"\"https://extensions.gnome.org/extension/3433/fly-pie/\"> "
+"extensions.gnome.org </ a>! நீங்கள் ஒரு 🐞🐞 பிழையை சந்திக்கும் போதெல்லாம் அல்லது அம்சக்"
+" கோரிக்கை இருக்கும்போதெல்லாம், இதை <a href = "
+"\"https://github.com/schneegans/fly-pie/issues\"> github </a> இல் தெரிவிக்க "
+"தயங்க."
 
 #. Button for tutorial navigation. Goes back one page.
 #: resources/ui/gtk4/settings.ui:1241 resources/ui/gtk3/settings.ui:1241
 msgid "Previous"
-msgstr ""
+msgstr "முந்தைய"
 
 #. Button for tutorial navigation. Goes to the next page.
 #: resources/ui/gtk4/settings.ui:1298 resources/ui/gtk3/settings.ui:1298
 msgid "Next"
-msgstr ""
+msgstr "அடுத்தது"
 
 #. Caption of the settings page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:1334 resources/ui/gtk3/settings.ui:4481
 msgid "Settings"
-msgstr ""
+msgstr "அமைப்புகள்"
 
 #: resources/ui/gtk4/settings.ui:1372 resources/ui/gtk4/settings.ui:1594
 #: resources/ui/gtk3/settings.ui:1370 resources/ui/gtk3/settings.ui:1591
 msgid "Global Appearance Settings"
-msgstr ""
+msgstr "உலகளாவிய தோற்ற அமைப்புகள்"
 
 #: resources/ui/gtk4/settings.ui:1382 resources/ui/gtk3/settings.ui:1380
 msgid "These settings affect all menu items."
-msgstr ""
+msgstr "இந்த அமைப்புகள் அனைத்து பட்டியல் உருப்படிகளையும் பாதிக்கின்றன."
 
 #: resources/ui/gtk4/settings.ui:1400 resources/ui/gtk3/settings.ui:1398
 msgid "Animation Duration"
-msgstr ""
+msgstr "அனிமேசன் காலம்"
 
 #: resources/ui/gtk4/settings.ui:1414 resources/ui/gtk3/settings.ui:1412
 msgid "Global Scaling"
-msgstr ""
+msgstr "உலகளாவிய அளவிடுதல்"
 
 #. Please keep this short!
 #: resources/ui/gtk4/settings.ui:1424 resources/ui/gtk3/settings.ui:1422
 msgid "Independent of the preset."
-msgstr ""
+msgstr "முன்னமைவிலிருந்து சுயாதீனமாக."
 
 #: resources/ui/gtk4/settings.ui:1475 resources/ui/gtk4/settings.ui:2133
 #: resources/ui/gtk4/settings.ui:2834 resources/ui/gtk4/settings.ui:3072
 #: resources/ui/gtk3/settings.ui:1473 resources/ui/gtk3/settings.ui:2125
 #: resources/ui/gtk3/settings.ui:2821 resources/ui/gtk3/settings.ui:3043
 msgid "Background Color"
-msgstr ""
+msgstr "பின்னணி நிறம்"
 
 #: resources/ui/gtk4/settings.ui:1485 resources/ui/gtk3/settings.ui:1483
 msgid "Font"
-msgstr ""
+msgstr "எழுத்துரு"
 
 #: resources/ui/gtk4/settings.ui:1495 resources/ui/gtk3/settings.ui:1493
 msgid "Label Font"
-msgstr ""
+msgstr "சிட்டை எழுத்துரு"
 
 #: resources/ui/gtk4/settings.ui:1505 resources/ui/gtk3/settings.ui:1503
 msgid "Text Color"
-msgstr ""
+msgstr "உரை நிறம்"
 
 #: resources/ui/gtk4/settings.ui:1579 resources/ui/gtk3/settings.ui:1577
 msgid "Animation Mode"
-msgstr ""
+msgstr "அனிமேசன் பயன்முறை"
 
 #: resources/ui/gtk4/settings.ui:1627 resources/ui/gtk4/settings.ui:2234
 #: resources/ui/gtk3/settings.ui:1619 resources/ui/gtk3/settings.ui:2221
 msgid "Center Appearance"
-msgstr ""
+msgstr "மைய தோற்றம்"
 
 #: resources/ui/gtk4/settings.ui:1637 resources/ui/gtk3/settings.ui:1629
 msgid "The center element shows the currently hovered child's name."
-msgstr ""
+msgstr "சென்டர் உறுப்பு தற்போது குழந்தையின் பெயரைக் காட்டுகிறது."
 
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/gtk4/settings.ui:1653 resources/ui/gtk3/settings.ui:1645
 msgid "With Hovered Child"
-msgstr ""
+msgstr "வட்டமான குழந்தையுடன்"
 
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/gtk4/settings.ui:1666 resources/ui/gtk3/settings.ui:1658
 msgid "Without Hovered Child"
-msgstr ""
+msgstr "வட்டமான குழந்தை இல்லாமல்"
 
 #: resources/ui/gtk4/settings.ui:1696 resources/ui/gtk4/settings.ui:2628
 #: resources/ui/gtk4/settings.ui:3185 resources/ui/gtk3/settings.ui:1688
 #: resources/ui/gtk3/settings.ui:2615 resources/ui/gtk3/settings.ui:3160
 msgid "Size"
-msgstr ""
+msgstr "அளவு"
 
 #: resources/ui/gtk4/settings.ui:1747 resources/ui/gtk4/settings.ui:1798
 #: resources/ui/gtk4/settings.ui:1950 resources/ui/gtk4/settings.ui:2001
@@ -1646,7 +1787,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2361 resources/ui/gtk3/settings.ui:2422
 #: resources/ui/gtk3/settings.ui:2518 resources/ui/gtk3/settings.ui:2589
 msgid "Saturation"
-msgstr ""
+msgstr "தெவிட்டல்"
 
 #: resources/ui/gtk4/settings.ui:1764 resources/ui/gtk4/settings.ui:1808
 #: resources/ui/gtk4/settings.ui:1967 resources/ui/gtk4/settings.ui:2011
@@ -1657,7 +1798,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2378 resources/ui/gtk3/settings.ui:2412
 #: resources/ui/gtk3/settings.ui:2535 resources/ui/gtk3/settings.ui:2579
 msgid "Luminance"
-msgstr ""
+msgstr "ஒளிர்மை"
 
 #: resources/ui/gtk4/settings.ui:1781 resources/ui/gtk4/settings.ui:1818
 #: resources/ui/gtk4/settings.ui:1984 resources/ui/gtk4/settings.ui:2021
@@ -1668,7 +1809,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2395 resources/ui/gtk3/settings.ui:2432
 #: resources/ui/gtk3/settings.ui:2552 resources/ui/gtk3/settings.ui:2569
 msgid "Opacity"
-msgstr ""
+msgstr "ஒளிபுகாநிலை"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
 #: resources/ui/gtk4/settings.ui:1839 resources/ui/gtk4/settings.ui:1903
@@ -1678,7 +1819,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2305 resources/ui/gtk3/settings.ui:2462
 #: resources/ui/gtk3/settings.ui:3058 resources/ui/gtk3/settings.ui:3111
 msgid "Fixed"
-msgstr ""
+msgstr "சரி"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
 #: resources/ui/gtk4/settings.ui:1846 resources/ui/gtk4/settings.ui:1910
@@ -1686,43 +1827,44 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:1840 resources/ui/gtk3/settings.ui:1906
 #: resources/ui/gtk3/settings.ui:2313 resources/ui/gtk3/settings.ui:2470
 msgid "Auto"
-msgstr ""
+msgstr "தானி"
 
 #: resources/ui/gtk4/settings.ui:2079 resources/ui/gtk4/settings.ui:2791
 #: resources/ui/gtk3/settings.ui:2075 resources/ui/gtk3/settings.ui:2778
 msgid "Icon Opacity"
-msgstr ""
+msgstr "படவுரு ஒளிபுகாநிலை"
 
 #: resources/ui/gtk4/settings.ui:2122 resources/ui/gtk4/settings.ui:2885
 #: resources/ui/gtk3/settings.ui:2114 resources/ui/gtk3/settings.ui:2867
 msgid "Icon Scale"
-msgstr ""
+msgstr "படவுரு அளவு"
 
 #: resources/ui/gtk4/settings.ui:2152 resources/ui/gtk4/settings.ui:2904
 #: resources/ui/gtk3/settings.ui:2143 resources/ui/gtk3/settings.ui:2885
 msgid "Icon Crop"
-msgstr ""
+msgstr "படவுரு பயிர்"
 
 #: resources/ui/gtk4/settings.ui:2203 resources/ui/gtk4/settings.ui:2955
 #: resources/ui/gtk4/settings.ui:3347 resources/ui/gtk3/settings.ui:2193
 #: resources/ui/gtk3/settings.ui:2935 resources/ui/gtk3/settings.ui:3318
 msgid "Background Image"
-msgstr ""
+msgstr "பின்னணி படம்"
 
 #: resources/ui/gtk4/settings.ui:2267 resources/ui/gtk4/settings.ui:2986
 #: resources/ui/gtk3/settings.ui:2248 resources/ui/gtk3/settings.ui:2963
 msgid "Children Appearance"
-msgstr ""
+msgstr "குழந்தைகள் தோற்றம்"
 
 #: resources/ui/gtk4/settings.ui:2277 resources/ui/gtk3/settings.ui:2258
 msgid "Child items are styled differently when their wedge is hovered."
 msgstr ""
+"குழந்தை உருப்படிகள் அவற்றின் ஆப்பு இழுக்கப்படும்போது வித்தியாசமாக பாணியில் உள்ளன."
 
 #. When the mouse pointer is NOT over the item
 #: resources/ui/gtk4/settings.ui:2293 resources/ui/gtk4/settings.ui:3045
 #: resources/ui/gtk3/settings.ui:2274 resources/ui/gtk3/settings.ui:3016
 msgid "Standard State"
-msgstr ""
+msgstr "நிலையான நிலை"
 
 #. Hovered: When the mouse pointer is over the item
 #. When the mouse pointer is over the item
@@ -1731,7 +1873,7 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:2306 resources/ui/gtk4/settings.ui:3602
 #: resources/ui/gtk3/settings.ui:2287 resources/ui/gtk3/settings.ui:3563
 msgid "Hovered State"
-msgstr ""
+msgstr "மாநிலம்"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Parent = use the parent's setting
 #: resources/ui/gtk4/settings.ui:2337 resources/ui/gtk4/settings.ui:2491
@@ -1739,55 +1881,57 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2321 resources/ui/gtk3/settings.ui:2478
 #: resources/ui/gtk3/settings.ui:3066 resources/ui/gtk3/settings.ui:3119
 msgid "Parent"
-msgstr ""
+msgstr "பெற்றோர்"
 
 #: resources/ui/gtk4/settings.ui:2639 resources/ui/gtk4/settings.ui:3196
 #: resources/ui/gtk3/settings.ui:2626 resources/ui/gtk3/settings.ui:3171
 msgid "Offset"
-msgstr ""
+msgstr "ஈடுசெய்யும்"
 
 #. Draw above (grand)children items. There's an explanation string below in the application.
 #: resources/ui/gtk4/settings.ui:2750 resources/ui/gtk4/settings.ui:3285
 #: resources/ui/gtk3/settings.ui:2737 resources/ui/gtk3/settings.ui:3260
 msgid "Draw Above"
-msgstr ""
+msgstr "மேலே வரையவும்"
 
 #: resources/ui/gtk4/settings.ui:2760 resources/ui/gtk3/settings.ui:2747
 msgid "Render children above the center item."
-msgstr ""
+msgstr "மைய உருப்படிக்கு மேலே குழந்தைகளை வழங்கவும்."
 
 #: resources/ui/gtk4/settings.ui:3019 resources/ui/gtk4/settings.ui:3378
 #: resources/ui/gtk3/settings.ui:2990 resources/ui/gtk3/settings.ui:3346
 msgid "Grandchildren Appearance"
-msgstr ""
+msgstr "பேரக்குழந்தைகள் தோற்றம்"
 
 #: resources/ui/gtk4/settings.ui:3029 resources/ui/gtk3/settings.ui:3000
 msgid ""
 "Grandchild items are styled differently when their parent item's wedge is "
 "hovered."
 msgstr ""
+"பேரக்குழந்தை உருப்படிகள் அவற்றின் பெற்றோரின் உருப்படியின் ஆப்பு மிதக்கும் போது வித்தியாசமா"
+"க பாணியில் உள்ளன."
 
 #. Hovered: When the mouse pointer is over the item
 #: resources/ui/gtk4/settings.ui:3058 resources/ui/gtk3/settings.ui:3029
 msgid "With Hovered Parent"
-msgstr ""
+msgstr "பெற்ற பெற்றோருடன்"
 
 #: resources/ui/gtk4/settings.ui:3295 resources/ui/gtk3/settings.ui:3270
 msgid "Render grandchildren above children items."
-msgstr ""
+msgstr "குழந்தைகளுக்கு மேலே பேரக்குழந்தைகளை வழங்கவும்."
 
 #: resources/ui/gtk4/settings.ui:3412 resources/ui/gtk4/settings.ui:3652
 #: resources/ui/gtk3/settings.ui:3373 resources/ui/gtk3/settings.ui:3612
 msgid "Wedge Appearance"
-msgstr ""
+msgstr "ஆப்பு தோற்றம்"
 
 #: resources/ui/gtk4/settings.ui:3422 resources/ui/gtk3/settings.ui:3383
 msgid "Clicking inside a wedge will activate the corresponding item."
-msgstr ""
+msgstr "ஒரு ஆப்புக்குள் சொடுக்கு செய்வது தொடர்புடைய உருப்படியை செயல்படுத்தும்."
 
 #: resources/ui/gtk4/settings.ui:3445 resources/ui/gtk3/settings.ui:3406
 msgid "Inner Radius"
-msgstr ""
+msgstr "உள் ஆரம்"
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
 #: resources/ui/gtk4/settings.ui:3456 resources/ui/gtk3/settings.ui:3417
@@ -1795,227 +1939,247 @@ msgid ""
 "Clicking inside the inner radius\n"
 "will cancel the selection."
 msgstr ""
+"உள் ஆரம் உள்ளே சொடுக்கு செய்க\n"
+" தேர்வை ரத்து செய்யும்."
 
 #: resources/ui/gtk4/settings.ui:3477 resources/ui/gtk3/settings.ui:3438
 msgid "Wedge Separator Color"
-msgstr ""
+msgstr "ஆப்பு பிரிப்பான் நிறம்"
 
 #: resources/ui/gtk4/settings.ui:3489 resources/ui/gtk3/settings.ui:3450
 msgid "Wedge Separator Thickness"
-msgstr ""
+msgstr "ஆப்பு பிரிப்பான் தடிமன்"
 
 #: resources/ui/gtk4/settings.ui:3527 resources/ui/gtk3/settings.ui:3488
 msgid "Wedge Color"
-msgstr ""
+msgstr "ஆப்பு நிறம்"
 
 #: resources/ui/gtk4/settings.ui:3539 resources/ui/gtk3/settings.ui:3500
 msgid "Wedge Size"
-msgstr ""
+msgstr "ஆப்பு அளவு"
 
 #. When the mouse pointer is NOT over the item
 #: resources/ui/gtk4/settings.ui:3589 resources/ui/gtk3/settings.ui:3550
 msgid "Inactive State"
-msgstr ""
+msgstr "செயலற்ற நிலை"
 
 #: resources/ui/gtk4/settings.ui:3685 resources/ui/gtk4/settings.ui:3790
 #: resources/ui/gtk3/settings.ui:3639 resources/ui/gtk3/settings.ui:3743
 msgid "Trace Appearance"
-msgstr ""
+msgstr "தேய்மான தோற்றம்"
 
 #: resources/ui/gtk4/settings.ui:3695 resources/ui/gtk3/settings.ui:3649
 msgid "The trace is the connecting line between selected menu items."
 msgstr ""
+"தேர்ந்தெடுக்கப்பட்ட பட்டியல் உருப்படிகளுக்கு இடையில் இணைக்கும் வரி சுவடு."
 
 #: resources/ui/gtk4/settings.ui:3712 resources/ui/gtk3/settings.ui:3666
 msgid "Thickness"
-msgstr ""
+msgstr "தடிமன்"
 
 #: resources/ui/gtk4/settings.ui:3723 resources/ui/gtk3/settings.ui:3677
 msgid "Color"
-msgstr ""
+msgstr "நிறம்"
 
 #: resources/ui/gtk4/settings.ui:3775 resources/ui/gtk3/settings.ui:3729
 msgid "Minimum Segment Length"
-msgstr ""
+msgstr "குறைந்தபட்ச பிரிவு நீளம்"
 
 #: resources/ui/gtk4/settings.ui:3824 resources/ui/gtk4/settings.ui:3950
 #: resources/ui/gtk3/settings.ui:3771 resources/ui/gtk3/settings.ui:3896
 msgid "Touch Button Settings"
-msgstr ""
+msgstr "தொடு பொத்தான் அமைப்புகள்"
 
 #: resources/ui/gtk4/settings.ui:3834 resources/ui/gtk3/settings.ui:3781
 msgid "You can show a touch button for each of your menus."
-msgstr ""
+msgstr "உங்கள் ஒவ்வொரு மெனுக்களுக்கும் தொடு பொத்தானைக் காட்டலாம்."
 
 #: resources/ui/gtk4/settings.ui:3852 resources/ui/gtk3/settings.ui:3799
 msgid "Inactive Opacity"
-msgstr ""
+msgstr "செயலற்ற ஒளிபுகாநிலை"
 
 #: resources/ui/gtk4/settings.ui:3880 resources/ui/gtk3/settings.ui:3827
 msgid "Show in Overview Mode"
-msgstr ""
+msgstr "கண்ணோட்டம் பயன்முறையில் காண்பி"
 
 #: resources/ui/gtk4/settings.ui:3902 resources/ui/gtk3/settings.ui:3849
 msgid "Show in Desktop Mode"
-msgstr ""
+msgstr "டெச்க்டாப் பயன்முறையில் காண்பி"
 
 #: resources/ui/gtk4/settings.ui:3924 resources/ui/gtk3/settings.ui:3871
 msgid "Show above Fullscreen Windows"
-msgstr ""
+msgstr "முழுத்திரை சாளரங்களுக்கு மேலே காண்பி"
 
 #: resources/ui/gtk4/settings.ui:3983 resources/ui/gtk4/settings.ui:4427
 #: resources/ui/gtk3/settings.ui:3923 resources/ui/gtk3/settings.ui:4366
 msgid "Advanced Settings"
-msgstr ""
+msgstr "மேம்பட்ட அமைப்புகள்"
 
 #: resources/ui/gtk4/settings.ui:3993 resources/ui/gtk3/settings.ui:3933
 msgid "These settings are independent of the presets."
-msgstr ""
+msgstr "இந்த அமைப்புகள் முன்னமைவுகளிலிருந்து சுயாதீனமாக உள்ளன."
 
 #: resources/ui/gtk4/settings.ui:4012 resources/ui/gtk3/settings.ui:3952
 msgid "Minimum Stroke Angle"
-msgstr ""
+msgstr "குறைந்தபட்ச பக்கவாதம் கோணம்"
 
 #: resources/ui/gtk4/settings.ui:4022 resources/ui/gtk3/settings.ui:3962
 msgid "Smaller turns will not lead to selections."
-msgstr ""
+msgstr "சிறிய திருப்பங்கள் தேர்வுகளுக்கு வழிவகுக்காது."
 
 #: resources/ui/gtk4/settings.ui:4059 resources/ui/gtk3/settings.ui:3999
 msgid "Minimum Stroke Length"
-msgstr ""
+msgstr "குறைந்தபட்ச பக்கவாதம் நீளம்"
 
 #: resources/ui/gtk4/settings.ui:4069 resources/ui/gtk3/settings.ui:4009
 msgid ""
 "Shorter gestures will not lead to selections.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
+"குறுகிய சைகைகள் தேர்வுகளுக்கு வழிவகுக்காது.\n"
+" இது உலக அளவிலான மதிப்பால் பெருக்கப்படுகிறது."
 
 #: resources/ui/gtk4/settings.ui:4108 resources/ui/gtk3/settings.ui:4048
 msgid "Jitter Threshold"
-msgstr ""
+msgstr "நடுக்கம் வாசல்"
 
 #: resources/ui/gtk4/settings.ui:4118 resources/ui/gtk3/settings.ui:4058
 msgid ""
 "Smaller movements will not be considered.\n"
 "This is multiplied by the Global Scale value."
 msgstr ""
+"சிறிய இயக்கங்கள் கருதப்படாது.\n"
+" இது உலக அளவிலான மதிப்பால் பெருக்கப்படுகிறது."
 
 #: resources/ui/gtk4/settings.ui:4156 resources/ui/gtk3/settings.ui:4096
 msgid "Display Timeout"
-msgstr ""
+msgstr "நேரம் முடிந்தது"
 
 #: resources/ui/gtk4/settings.ui:4166 resources/ui/gtk3/settings.ui:4106
 msgid ""
 "Menus will be shown after this many milliseconds.\n"
 "Use this to quickly select items without showing the menu."
 msgstr ""
+"இந்த பல மில்லி விநாடிகளுக்குப் பிறகு மெனுக்கள் காண்பிக்கப்படும்.\n"
+" மெனுவைக் காட்டாமல் உருப்படிகளை விரைவாகத் தேர்ந்தெடுக்க இதைப் பயன்படுத்தவும்."
 
 #: resources/ui/gtk4/settings.ui:4205 resources/ui/gtk3/settings.ui:4145
 msgid "Selection Timeout"
-msgstr ""
+msgstr "தேர்வு நேரம் முடிந்தது"
 
 #: resources/ui/gtk4/settings.ui:4215 resources/ui/gtk3/settings.ui:4155
 msgid ""
 "If your pointer is stationary for this many milliseconds, \n"
 "the current item will be selected."
 msgstr ""
+"இந்த பல மில்லி விநாடிகளுக்கு உங்கள் சுட்டிக்காட்டி நிலையானதாக இருந்தால்,\n"
+" தற்போதைய உருப்படி தேர்ந்தெடுக்கப்படும்."
 
 #: resources/ui/gtk4/settings.ui:4254 resources/ui/gtk3/settings.ui:4194
 msgid "Open Windows at the Pointer"
-msgstr ""
+msgstr "சுட்டிக்காட்டி சன்னல்களைத் திறக்கவும்"
 
 #: resources/ui/gtk4/settings.ui:4264 resources/ui/gtk3/settings.ui:4204
 msgid ""
 "With this enabled, Fly-Pie will attempt to open any windows\n"
 "at the current pointer position."
 msgstr ""
+"இந்த இயக்கப்பட்டதன் மூலம், ஃப்ளை-பை எந்த சாளரங்களையும் திறக்க முயற்சிக்கும்\n"
+" தற்போதைய சுட்டிக்காட்டி நிலையில்."
 
 #: resources/ui/gtk4/settings.ui:4287 resources/ui/gtk3/settings.ui:4227
 msgid "Experimental Hover Mode"
-msgstr ""
+msgstr "சோதனை ஓவர் பயன்முறை"
 
 #: resources/ui/gtk4/settings.ui:4297 resources/ui/gtk3/settings.ui:4237
 msgid ""
 "With this enabled, you no longer have to press a mouse button\n"
 "or hold down a modifier key during selections."
 msgstr ""
+"இந்த இயக்கப்பட்டவுடன், நீங்கள் இனி ஒரு சுட்டி பொத்தானை அழுத்த வேண்டியதில்லை\n"
+" அல்லது தேர்வுகளின் போது மாற்றியமைக்கும் விசையை அழுத்தவும்."
 
 #: resources/ui/gtk4/settings.ui:4320 resources/ui/gtk3/settings.ui:4260
 msgid "Show Screencast Mouse"
-msgstr ""
+msgstr "ச்கிரீன்காச்ட் மவுசைக் காட்டு"
 
 #: resources/ui/gtk4/settings.ui:4330 resources/ui/gtk3/settings.ui:4270
 msgid ""
 "Shows a big additional mouse pointer visualizing mouse clicks.\n"
 "This can be used if you want to capture a video of Fly-Pie."
 msgstr ""
+"மவுச் கிளிக்குகளை காட்சிப்படுத்தும் ஒரு பெரிய கூடுதல் சுட்டி சுட்டிக்காட்டி காட்டுகிறது."
+"\n"
+" ஃப்ளை-பை வீடியோவைப் பிடிக்க விரும்பினால் இதைப் பயன்படுத்தலாம்."
 
 #: resources/ui/gtk4/settings.ui:4363 resources/ui/gtk3/settings.ui:4303
 msgid "Achievement Notifications"
-msgstr ""
+msgstr "சாதனை அறிவிப்புகள்"
 
 #: resources/ui/gtk4/settings.ui:4373 resources/ui/gtk3/settings.ui:4313
 msgid "Show a notification whenever you complete an achievement."
-msgstr ""
+msgstr "நீங்கள் ஒரு சாதனையை முடிக்கும்போதெல்லாம் அறிவிப்பைக் காட்டுங்கள்."
 
 #: resources/ui/gtk4/settings.ui:4447 resources/ui/gtk3/settings.ui:4398
 msgid "Load Preset"
-msgstr ""
+msgstr "முன்னமைவை ஏற்றவும்"
 
 #: resources/ui/gtk4/settings.ui:4459 resources/ui/gtk3/settings.ui:4418
 msgid "Load settings from a JSON file."
-msgstr ""
+msgstr "சாதொபொகு கோப்பிலிருந்து அமைப்புகளை ஏற்றவும்."
 
 #: resources/ui/gtk4/settings.ui:4466 resources/ui/gtk3/settings.ui:4431
 msgid "Save the settings to a JSON file."
-msgstr ""
+msgstr "அமைப்புகளை சாதொபொகு கோப்பில் சேமிக்கவும்."
 
 #. Text of a button that opens a preview menu to test setting changes on-the-fly. There's a 'Play' button next to the text, so no need to say "Open Live Preview" or similar.
 #: resources/ui/gtk4/settings.ui:4489 resources/ui/gtk4/settings.ui:4763
 #: resources/ui/gtk3/settings.ui:4460 resources/ui/gtk3/settings.ui:4753
 msgid "Live Preview"
-msgstr ""
+msgstr "நேரடி முன்னோட்டம்"
 
 #. Caption of the menu editor page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:4518 resources/ui/gtk3/settings.ui:5072
 msgid "Menu Editor"
-msgstr ""
+msgstr "ஆசிரியர் பட்டியல்"
 
 #: resources/ui/gtk4/settings.ui:4547 resources/ui/gtk3/settings.ui:4519
 msgid "Add a new menu item."
-msgstr ""
+msgstr "புதிய பட்டியல் உருப்படியைச் சேர்க்கவும்."
 
 #: resources/ui/gtk4/settings.ui:4627 resources/ui/gtk3/settings.ui:4606
 msgid "Stash"
-msgstr ""
+msgstr "ச்டாச்"
 
 #: resources/ui/gtk4/settings.ui:4643 resources/ui/gtk3/settings.ui:4623
 msgid "Store items here and re-use them later."
-msgstr ""
+msgstr "பொருட்களை இங்கே சேமித்து பின்னர் அவற்றைப் பயன்படுத்தவும்."
 
 #: resources/ui/gtk4/settings.ui:4687 resources/ui/gtk3/settings.ui:4667
 msgid "Trash"
-msgstr ""
+msgstr "குப்பை"
 
 #: resources/ui/gtk4/settings.ui:4703 resources/ui/gtk3/settings.ui:4683
 msgid "Drop items here."
-msgstr ""
+msgstr "உருப்படிகளை இங்கே விடுங்கள்."
 
 #: resources/ui/gtk4/settings.ui:4733 resources/ui/gtk3/settings.ui:4713
 msgid "Restore menus from a JSON file. This will override your current menus!"
 msgstr ""
+"ஒரு சாதொபொகு கோப்பிலிருந்து மெனுக்களை மீட்டெடுக்கவும். இது உங்கள் தற்போதைய மெனுக்களை "
+"மேலெழுதும்!"
 
 #: resources/ui/gtk4/settings.ui:4739 resources/ui/gtk3/settings.ui:4725
 msgid "Export all menus to a JSON file."
-msgstr ""
+msgstr "அனைத்து மெனுக்களையும் ஒரு சாதொபொகு கோப்பில் ஏற்றுமதி செய்யுங்கள்."
 
 #: resources/ui/gtk4/settings.ui:4821 resources/ui/gtk3/settings.ui:4810
 msgid "Name"
-msgstr ""
+msgstr "பெயர்"
 
 #: resources/ui/gtk4/settings.ui:4839 resources/ui/gtk3/settings.ui:4828
 msgid "Icon"
-msgstr ""
+msgstr "படவுரு"
 
 #: resources/ui/gtk4/settings.ui:4857 resources/ui/gtk3/settings.ui:4846
 msgid ""
@@ -2024,10 +2188,13 @@ msgid ""
 "#rgb\" to the icon in order to draw a circle with the given RGB color behind "
 "the icon."
 msgstr ""
+"படவுரு ஒரு பட கோப்பு பாதை, தற்போதைய படவுரு கருப்பொருளிலிருந்து ஒரு படவுரு பெயர், "
+"ஒரு பேச் 64 குறியிடப்பட்ட தரவு யூரி, உரை அல்லது ஈமோசியாக இருக்கலாம். ஐகானின் பின்னால் "
+"கொடுக்கப்பட்ட RGB வண்ணத்துடன் ஒரு வட்டத்தை வரைய \"-#RGB\" ஐ ஐகானுடன் சேர்க்கலாம்."
 
 #: resources/ui/gtk4/settings.ui:4890 resources/ui/gtk3/settings.ui:4885
 msgid "Fixed Angle"
-msgstr ""
+msgstr "நிலையான கோணம்"
 
 #: resources/ui/gtk4/settings.ui:4906 resources/ui/gtk3/settings.ui:4901
 msgid ""
@@ -2040,48 +2207,58 @@ msgid ""
 "be removed if an item is dragged to another position in the menu. Use -1 to "
 "disable this feature."
 msgstr ""
+"மற்ற உருப்படிகள் சேர்க்கப்பட்டாலும் அல்லது அகற்றப்பட்டாலும் கூட ஒரு உருப்படி ஒரே நிலையில் "
+"இருப்பதை உறுதிசெய்ய நிலையான கோணங்கள் பயன்படுத்தப்படலாம். உங்கள் தசைகள் ஏற்கனவே உருப்படியின்"
+" திசையைக் கற்றுக்கொண்டாலும் இந்த வழியில் மெனுவைத் திருத்தலாம். இருப்பினும், நிலையான "
+"கோணங்களில் ஒரு கட்டுப்பாடு உள்ளது. ஒரு மெனுவின் உள்ளே நிலையான கோணங்கள் ஒரேமாதிரியாக "
+"அதிகரிக்க வேண்டும், அதாவது ஒவ்வொரு நிலையான கோணமும் முந்தைய நிலையான கோணத்தை விட "
+"பெரியதாக இருக்க வேண்டும். வித்தியாசமான நடத்தையைத் தடுப்பதற்காக, பட்டியலில் ஒரு உருப்படி "
+"மற்றொரு நிலைக்கு இழுக்கப்பட்டால் நிலையான கோணங்கள் அகற்றப்படும். இந்த அம்சத்தை முடக்க -1 ஐப் "
+"பயன்படுத்தவும்."
 
 #: resources/ui/gtk4/settings.ui:4944 resources/ui/gtk3/settings.ui:4939
 msgid "This will open the menu."
-msgstr ""
+msgstr "இது மெனுவைத் திறக்கும்."
 
 #: resources/ui/gtk4/settings.ui:4958 resources/ui/gtk3/settings.ui:4953
 msgid ""
 "Usually, Super + Right Mouse Button opens the window menu. With this "
 "setting, you can instead open a Fly-Pie menu."
 msgstr ""
+"வழக்கமாக, சூப்பர் + வலது சுட்டி பொத்தான் சாளர மெனுவைத் திறக்கும். இந்த அமைப்பின் மூலம், "
+"அதற்கு பதிலாக ஒரு ஃப்ளை-பை மெனுவைத் திறக்கலாம்."
 
 #: resources/ui/gtk4/settings.ui:4963 resources/ui/gtk3/settings.ui:4958
 msgid "Bind to Super + RMB"
-msgstr ""
+msgstr "சூப்பர் + ஆர்.எம்.பியுடன் பிணைக்கவும்"
 
 #: resources/ui/gtk4/settings.ui:4979 resources/ui/gtk3/settings.ui:4974
 msgid "Show Touch Button"
-msgstr ""
+msgstr "தொடு பொத்தானைக் காட்டு"
 
 #: resources/ui/gtk4/settings.ui:4995 resources/ui/gtk3/settings.ui:4990
 msgid "Open in Screen Center"
-msgstr ""
+msgstr "திரை மையத்தில் திறக்கவும்"
 
 #: resources/ui/gtk4/settings.ui:5031 resources/ui/gtk3/settings.ui:5026
 msgid "Show Labels"
-msgstr ""
+msgstr "லேபிள்களைக் காட்டு"
 
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:5088 resources/ui/gtk3/settings.ui:5315
 msgid "Achievements"
-msgstr ""
+msgstr "சாதனைகள்"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/gtk4/settings.ui:5282 resources/ui/gtk3/settings.ui:5252
 msgid "In Progress"
-msgstr ""
+msgstr "முன்னேற்றத்தில் உள்ளது"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/gtk4/settings.ui:5296 resources/ui/gtk3/settings.ui:5267
 msgid "Completed"
-msgstr ""
+msgstr "முடிந்தது"
 
 #: resources/ui/gtk4/settings.ui:5324 resources/ui/gtk3/settings.ui:5295
 msgid "Reset all achievements."
-msgstr ""
+msgstr "எல்லா சாதனைகளையும் மீட்டமைக்கவும்."
