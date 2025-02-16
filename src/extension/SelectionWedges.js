@@ -16,6 +16,7 @@ import Clutter from 'gi://Clutter';
 import GObject from 'gi://GObject';
 import Cairo from 'gi://cairo';
 import St from 'gi://St';
+import Cogl from 'gi://Cogl';
 
 import * as utils from '../common/utils.js';
 
@@ -103,7 +104,7 @@ class SelectionWedges extends Clutter.Actor {
         // faster than a Clutter.Canvas.
         this._wedgeActor  = new Clutter.Actor();
         this._wedgeShader = new Clutter.ShaderEffect({
-          shader_type: Clutter.ShaderType.FRAGMENT_SHADER,
+          shader_type: Cogl.ShaderType ? Cogl.ShaderType.FRAGMENT : Clutter.ShaderType.FRAGMENT_SHADER,
         });
 
         // This shader could be simplified by using vec4's for the colors, but I did not
