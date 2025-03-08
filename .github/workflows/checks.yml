@@ -99,7 +99,7 @@ jobs:
       - name: Download Dependencies
         run: |
           sudo apt update -qq
-          sudo apt install gettext libglib2.0-dev -qq
+          sudo apt install gettext imagemagick libglib2.0-dev -qq
       - name: Build Fly-Pie
         run: make
       - name: Test Fly-Pie
