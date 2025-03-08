@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: flypie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: 2024-11-28 20:13+0000\n"
-"Last-Translator: yar2001Ti <school15yaroslav@gmail.com>\n"
+"PO-Revision-Date: 2025-03-08 18:03+0000\n"
+"Last-Translator: Максим Горпиніч <maksimgorpinic2005a@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/fly-pie/core/"
 "uk/>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.10.3-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -277,33 +277,33 @@ msgstr ""
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:84
 msgid "Lock"
-msgstr ""
+msgstr "Замок"
 
 #: src/common/menus/System.js:93
 msgid "Suspend"
-msgstr ""
+msgstr "Призупинити"
 
 #: src/common/menus/System.js:102
 msgid "Switch User…"
-msgstr ""
+msgstr "Змінити користувача…"
 
 #: src/common/menus/System.js:111
 msgid "Log Out"
-msgstr ""
+msgstr "Вийти"
 
 #: src/common/menus/System.js:120
 msgid "Power Off…"
-msgstr ""
+msgstr "Вимкнути…"
 
 #: src/common/menus/CustomMenu.js:32
 msgid "Custom Menu"
-msgstr ""
+msgstr "Спеціальне меню"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:39
 msgid "This can contain custom actions and other menus."
-msgstr ""
+msgstr "Це може містити спеціальні дії та інші меню."
 
 #: src/common/menus/CustomMenu.js:43
 msgid ""
@@ -311,33 +311,37 @@ msgid ""
 "However, for precise item selection, a maximum number of twelve items is "
 "recommended."
 msgstr ""
+"<b>Користувацьке меню</b> може містити будь-яку кількість дій і підменю. "
+"Однак для точного вибору елементів рекомендована максимальна кількість "
+"дванадцяти елементів."
 
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:46 src/extension/DefaultMenu.js:82
 msgid "Favorites"
-msgstr ""
+msgstr "Вибране"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:53
 msgid "Shows pinned applications."
-msgstr ""
+msgstr "Показує закріплені програми."
 
 #: src/common/menus/Favorites.js:57
 msgid ""
 "The <b>Favorites</b> menu shows the applications you have pinned to GNOME "
 "Shell's Dash."
 msgstr ""
+"Меню <b>Вибране</b> показує програми, які ви закріпили в GNOME Shell's Dash."
 
 #: src/common/menus/RecentFiles.js:37
 msgid "Recent Files"
-msgstr ""
+msgstr "Останні файли"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RecentFiles.js:44
 msgid "Shows your recently used files."
-msgstr ""
+msgstr "Показує нещодавно використані файли."
 
 #: src/common/menus/RecentFiles.js:48
 msgid ""
@@ -345,32 +349,37 @@ msgid ""
 "efficient selections, you should limit the maximum number of shown files to "
 "about twelve."
 msgstr ""
+"Меню <b>Останні файли</b> показує список нещодавно використаних файлів. Для "
+"ефективного вибору вам слід обмежити максимальну кількість відображених "
+"файлів до дванадцяти."
 
 #: src/common/menus/Devices.js:36
 msgid "Devices"
-msgstr ""
+msgstr "Пристрої"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:43
 msgid "Shows connected devices."
-msgstr ""
+msgstr "Показує підключені пристрої."
 
 #: src/common/menus/Devices.js:47
 msgid ""
 "The <b>Devices</b> menu shows an item for each mounted volume, like USB "
 "sticks."
 msgstr ""
+"Меню <b>Пристрої</b> показує пункт для кожного підключеного тому, як-от "
+"USB-накопичувачі."
 
 #: src/common/menus/MainMenu.js:36
 msgid "Main Menu"
-msgstr ""
+msgstr "Головне меню"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/MainMenu.js:43
 msgid "Shows all installed applications."
-msgstr ""
+msgstr "Показує всі встановлені програми."
 
 #: src/common/menus/MainMenu.js:47
 msgid ""
@@ -378,17 +387,20 @@ msgid ""
 "cluttered as many sections contain too many items to be used efficiently. "
 "You should rather set up your own menus!"
 msgstr ""
+"У <b>Головному меню</b> відображаються всі встановлені програми. Зазвичай це "
+"дуже захаращено, оскільки багато розділів містять занадто багато елементів, "
+"які не можна використовувати ефективно. Скоріше створюйте власне меню!"
 
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:50 src/extension/DefaultMenu.js:114
 msgid "Running Apps"
-msgstr ""
+msgstr "Запущені програми"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:57
 msgid "Shows the currently running applications."
-msgstr ""
+msgstr "Показує запущені програми."
 
 #: src/common/menus/RunningApps.js:61
 msgid ""
@@ -396,6 +408,9 @@ msgid ""
 "is similar to the Alt+Tab window selection. As the entries change position "
 "frequently, this is actually not very effective."
 msgstr ""
+"Меню <b>Запущені програми</b> показує всі запущені програми. Це схоже на "
+"вибір у вікні Alt+Tab. Оскільки записи часто змінюють положення, це "
+"насправді не дуже ефективно."
 
 #: src/common/menus/RunningApps.js:100
 msgid ""
@@ -405,16 +420,23 @@ msgid ""
 "\"Fire\" or \"Water\". A negation would be \"^(?!.*Fire)\" to match anything "
 "but \"Fire\". Remember to use the live preview to instantly see the results!"
 msgstr ""
+"Ви можете використовувати це для фільтрації відображених вікон. "
+"Підтримуються регулярні вирази: використовуйте простий рядок, як-от «Fire», "
+"щоб відображати лише вікна, заголовки яких містять «Fire» (наприклад, "
+"Firefox). Використовуйте «Вогонь|Вода», щоб відповідати «Вогню» або «Воді». "
+"Запереченням буде \"^(?!.*Fire)\", щоб відповідати будь-чому, крім \"Fire\". "
+"Не забувайте використовувати попередній перегляд, щоб миттєво побачити "
+"результати!"
 
 #: src/common/menus/RunningApps.js:102
 msgid "Window Filter"
-msgstr ""
+msgstr "Віконний фільтр"
 
 #: src/common/menus/RunningApps.js:102 resources/ui/gtk4/settings.ui:4845
 #: resources/ui/gtk4/settings.ui:4896 resources/ui/gtk3/settings.ui:4834
 #: resources/ui/gtk3/settings.ui:4891
 msgid "See tooltip for details."
-msgstr ""
+msgstr "Дивіться підказку для деталей."
 
 #: src/common/menus/RunningApps.js:128
 msgid "Active Workspace Only"
