@@ -9,6 +9,15 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
+## [unreleased]
+
+**Release Date:** TBD
+
+#### Enhancements
+
+- Ported the extension to GNOME 48.
+- Several translation updates. Thanks to all the translators!
+
 ## [Fly-Pie 27](https://github.com/schneegans/fly-pie/releases/tag/v27)
 
 **Release Date:** 2024-08-23
