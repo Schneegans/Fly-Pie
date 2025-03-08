@@ -197,9 +197,9 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     this._pages.forEach(page => {
       window.add(page);
 
-      // Starting with GNOME 48 there is an additional scrolled windo in the adw preference pages which
-      // we do not want. We simply hide it.
-      if (utils.shellVersionIsAtLeast(48, "alpha")) {
+      // Starting with GNOME 48 there is an additional scrolled windo in the adw
+      // preference pages which we do not want. We simply hide it.
+      if (utils.shellVersionIsAtLeast(48, 'alpha')) {
         const scrolledWindow = this._findChildByType(page, Gtk.ScrolledWindow);
         if (scrolledWindow) {
           scrolledWindow.visible = false;

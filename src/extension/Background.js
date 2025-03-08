@@ -226,11 +226,11 @@ class Background extends Clutter.Actor {
       mode: Clutter.AnimationMode.EASE_OUT_QUAD,
       onStopped: () => {
         // Since GNOME 48 this is a "global" method.
-    if (Meta.disable_unredirect_for_display) {
-      Meta.enable_unredirect_for_display(global.display);
-    } else {
-      global.compositor.enable_unredirect();
-    }
+        if (Meta.disable_unredirect_for_display) {
+          Meta.enable_unredirect_for_display(global.display);
+        } else {
+          global.compositor.enable_unredirect();
+        }
 
         // Hide completely once the opacity has been faded to zero.
         this.visible = false;
