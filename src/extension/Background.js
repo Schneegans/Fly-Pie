@@ -193,7 +193,12 @@ class Background extends Clutter.Actor {
   // The open() method above does not really show the background; it's still translucent.
   // The actual revealing is done by this method.
   reveal() {
-    Meta.disable_unredirect_for_display(global.display);
+    // Since GNOME 48 this is a "global" method.
+    if (Meta.disable_unredirect_for_display) {
+      Meta.disable_unredirect_for_display(global.display);
+    } else {
+      global.compositor.disable_unredirect();
+    }
     this.ease({
       opacity: 255,
       duration: this._settings.get_double('easing-duration') * 1000,
@@ -220,7 +225,12 @@ class Background extends Clutter.Actor {
       duration: this._settings.get_double('easing-duration') * 1000,
       mode: Clutter.AnimationMode.EASE_OUT_QUAD,
       onStopped: () => {
-        Meta.enable_unredirect_for_display(global.display);
+        // Since GNOME 48 this is a "global" method.
+        if (Meta.disable_unredirect_for_display) {
+          Meta.enable_unredirect_for_display(global.display);
+        } else {
+          global.compositor.enable_unredirect();
+        }
 
         // Hide completely once the opacity has been faded to zero.
         this.visible = false;
