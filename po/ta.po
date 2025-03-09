@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: flypie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: 2024-12-27 17:00+0000\n"
-"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"PO-Revision-Date: 2025-03-09 11:48+0000\n"
+"Last-Translator: Simon Schneegans <code@simonschneegans.de>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/fly-pie/core/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.10.3-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -570,7 +570,7 @@ msgstr "%s ரத்துசெய்தல்"
 #: src/common/Achievements.js:418
 #, javascript-format
 msgid "Abort a selection %x times."
-msgstr "%X முறை ஒரு தேர்வை நிறுத்துங்கள்."
+msgstr "%x முறை ஒரு தேர்வை நிறுத்துங்கள்."
 
 #. Translators: The name of the 'Select %x items.' achievement.
 #: src/common/Achievements.js:431
@@ -582,7 +582,7 @@ msgstr "%s பைலட்"
 #: src/common/Achievements.js:433
 #, javascript-format
 msgid "Select %x items."
-msgstr "%X உருப்படிகளைத் தேர்ந்தெடுக்கவும்."
+msgstr "%x உருப்படிகளைத் தேர்ந்தெடுக்கவும்."
 
 #. Translators: The name of the 'Select %x items at depth 1 in marking mode.'
 #. achievement.
@@ -700,13 +700,13 @@ msgstr "என்ட்ரோபீச் %i"
 #: src/common/Achievements.js:588
 #, javascript-format
 msgid "Generate %x random presets."
-msgstr "%X சீரற்ற முன்னமைவுகளை உருவாக்குங்கள்."
+msgstr "%x சீரற்ற முன்னமைவுகளை உருவாக்குங்கள்."
 
 #. Translators: The name of the 'Export %x custom presets.' achievement.
 #: src/common/Achievements.js:601
 #, javascript-format
 msgid "%s Preset Exporter"
-msgstr "%முன்னுரிமை ஏற்றுமதியாளர்"
+msgstr "%s முன்னுரிமை ஏற்றுமதியாளர்"
 
 #. Translators: The description of the '%s Preset Exporter' achievement if
 #. only one preset needs to be exported.
@@ -724,7 +724,7 @@ msgstr "ஏற்றுமதி %x தனிப்பயன் முன்ன�
 #: src/common/Achievements.js:620
 #, javascript-format
 msgid "%s Preset Importer"
-msgstr "%முன்னமைக்கப்பட்ட இறக்குமதியாளர்"
+msgstr "%s முன்னமைக்கப்பட்ட இறக்குமதியாளர்"
 
 #. Translators: The description of the '%s Preset Importer' achievement if
 #. only one preset needs to be imported.
@@ -736,13 +736,13 @@ msgstr "தனிப்பயன் முன்னமைவை இறக்க�
 #: src/common/Achievements.js:626
 #, javascript-format
 msgid "Import %x custom presets."
-msgstr "%X தனிப்பயன் முன்னமைவுகளை இறக்குமதி செய்யுங்கள்."
+msgstr "%x தனிப்பயன் முன்னமைவுகளை இறக்குமதி செய்யுங்கள்."
 
 #. Translators: The name of the 'Import %x menu configurations.' achievement.
 #: src/common/Achievements.js:639
 #, javascript-format
 msgid "%s Menu Importer"
-msgstr "%மெனு இறக்குமதியாளர்"
+msgstr "%s மெனு இறக்குமதியாளர்"
 
 #. Translators: The description of the '%s Menu Importer' achievement if
 #. only one menu needs to be imported.
@@ -754,13 +754,13 @@ msgstr "பட்டியல் உள்ளமைவை இறக்கும�
 #: src/common/Achievements.js:645
 #, javascript-format
 msgid "Import %x menu configurations."
-msgstr "%X பட்டியல் உள்ளமைவுகளை இறக்குமதி செய்யுங்கள்."
+msgstr "%x பட்டியல் உள்ளமைவுகளை இறக்குமதி செய்யுங்கள்."
 
 #. Translators: The name of the 'Export %x menu configurations.' achievement.
 #: src/common/Achievements.js:659
 #, javascript-format
 msgid "%s Menu Exporter"
-msgstr "%மெனு ஏற்றுமதியாளர்"
+msgstr "%s மெனு ஏற்றுமதியாளர்"
 
 #. Translators: The description of the '%s Menu Exporter' achievement if
 #. only one menu needs to be exported.
@@ -791,7 +791,7 @@ msgstr "பட்டியல் எடிட்டரில் %x உருப�
 #: src/common/Achievements.js:697
 #, javascript-format
 msgid "%s Menu Designer"
-msgstr "%மெனு வடிவமைப்பாளர்"
+msgstr "%s மெனு வடிவமைப்பாளர்"
 
 #. Translators: The description of the '%s Menu Designer' achievement.
 #: src/common/Achievements.js:700
@@ -1077,13 +1077,13 @@ msgstr "முன்னமைவை ஏற்றுவதில் தோல்�
 #: src/prefs/TutorialPage.js:185
 #, javascript-format
 msgid "<big>Last selection time: <b>%d ms</b></big>"
-msgstr "<big> கடைசி தேர்வு நேரம்: <b>%d MS </b> </dig>"
+msgstr "<big> கடைசி தேர்வு நேரம்: <b>%d MS </b> </big>"
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:190
 #, javascript-format
 msgid "<big>Best selection time: <b>%d ms</b></big>"
-msgstr "<big> சிறந்த தேர்வு நேரம்: <b>%d MS </b> </dag>"
+msgstr "<big> சிறந்த தேர்வு நேரம்: <b>%d MS </b> </big>"
 
 #. Translators: This is the name of the tutorial menu.
 #. Translators: This is the name of the default menu.
@@ -1520,7 +1520,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:775 resources/ui/gtk3/settings.ui:858
 #: resources/ui/gtk3/settings.ui:998 resources/ui/gtk3/settings.ui:1081
 msgid "<big><b>Open the training Menu!</b></big>"
-msgstr "<big> <b> பயிற்சி மெனுவைத் திறக்கவும்! </b> </பெரிய>"
+msgstr "<big> <b> பயிற்சி மெனுவைத் திறக்கவும்! </b> </big>"
 
 #. This is a heading.
 #: resources/ui/gtk4/settings.ui:718 resources/ui/gtk3/settings.ui:727
