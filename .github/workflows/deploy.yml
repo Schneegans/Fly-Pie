@@ -18,7 +18,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update -q
-          sudo apt-get install gettext
+          sudo apt-get install gettext libglib2.0-dev
       - name: Create Release
         run: |
           make zip
