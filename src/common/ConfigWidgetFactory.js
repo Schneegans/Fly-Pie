@@ -326,7 +326,7 @@ export default class ConfigWidgetFactory {
             // Escape cancels the shortcut selection.
             cancelGrab();
 
-          } else if (keyval == Gdk.KEY_BackSpace) {
+          } else if (keyval == Gdk.KEY_BackSpace && mods == 0) {
             // BackSpace removes any bindings.
             lastAccelerator = '';
             onSelect('');
