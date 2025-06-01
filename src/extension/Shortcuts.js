@@ -18,6 +18,8 @@ import Clutter from 'gi://Clutter';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
+import * as utils from '../common/utils.js';
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // This class can be used to bind a function to global hot keys. It's designed in the   //
 // following way: An  arbitrary number of shortcuts can be registered. If one of the    //

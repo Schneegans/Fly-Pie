@@ -15,6 +15,7 @@ import Meta from 'gi://Meta';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 
+import * as utils from '../common/utils.js';
 import InputManipulator from './InputManipulator.js';
 
 //////////////////////////////////////////////////////////////////////////////////////////
