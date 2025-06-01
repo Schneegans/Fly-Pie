@@ -118,7 +118,8 @@ export default class Daemon {
     // Open a menu when the corresponding shortcut is pressed.
     this._shortcuts.connect('activated', (s, shortcut) => {
       for (let i = 0; i < this._menuConfigs.length; i++) {
-        if (shortcut == this._menuConfigs[i].shortcut) {
+        if (shortcut == this._menuConfigs[i].shortcut &&
+            this._menu.getID() != this._menuConfigs[i].id) {
           showMenu(this._menuConfigs[i].name);
           break;
         }
