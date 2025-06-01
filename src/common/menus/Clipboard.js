@@ -15,6 +15,7 @@ import GLib from 'gi://GLib';
 
 import * as utils from '../utils.js';
 import {ItemClass} from '../ItemClass.js';
+import {ItemRegistry} from '../ItemRegistry.js';
 
 const Gtk                 = await utils.importInPrefsOnly('gi://Gtk');
 const ConfigWidgetFactory = await utils.importInPrefsOnly('./ConfigWidgetFactory.js');
@@ -150,7 +151,7 @@ export function getClipboardMenu() {
           const data   = new TextDecoder().decode(item.data.get_data());
           const lines  = data.split(/\r?\n/);
           const file   = lines[1];  // The first item contains the action (cut, copy).
-          const config = ItemRegistry.ItemRegistry.createActionConfig(file);
+          const config = ItemRegistry.createActionConfig(file);
 
           child = {icon: config.icon, name: config.name};
         }
