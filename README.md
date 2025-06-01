@@ -18,11 +18,8 @@ SPDX-License-Identifier: CC-BY-4.0
   <a href="scripts/cloc.sh"><img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Schneegans/8f6459c2417de7534f64d98360dde865/raw/comments.json" /></a>
 </p>
 
-> [!NOTE]
-> I am currently working on a follow-up project called [🥧 Kando](https://github.com/kando-menu/kando). I will continue to maintain Fly-Pie until Kando is ready for daily use. If you want to learn more, feel free to visit my [Ko-fi page](https://ko-fi.com/schneegans)!
-
 > [!IMPORTANT]
-> The code in the `main` branch is for GNOME Shell 45+. For older GNOME versions, please use the `gnome-3.36-44` branch.
+> Fly-Pie is currently in low-maintenance mode as I am working on my follow-up project [🌸 Kando](https://github.com/kando-menu/kando).
 
 **Fly-Pie** is an extension for GNOME Shell which lets you open _marking menus_ via keyboard shortcuts.
 You can use it to launch applications, simulate hotkeys, open URLs and much more.
