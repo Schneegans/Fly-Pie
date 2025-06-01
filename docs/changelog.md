@@ -13,6 +13,10 @@ SPDX-License-Identifier: CC-BY-4.0
 
 **Release Date:** TBD
 
+#### Enhancements
+
+- It is now possible to use the <kbd>Backspace</kbd> plus a modifier key as a menu shortcut. Before, this was not possible because the <kbd>Backspace</kbd> key used to unset the shortcut in the menu editor. Now, it does not unset the shortcut anymore if a modifier key is pressed at the same time.
+
 #### Bug Fixes
 
 - Fixed a bug which mad Fly-Pie fail to load if a shortcut was already bound by another application.
