@@ -171,6 +171,43 @@ export default class FlyPiePreferences extends ExtensionPreferences {
         });
 
         group.add_action(aboutAction);
+
+        // We show an dialog telling the user that Fly-Pie is somewhat deprecated and that
+        // they should consider using Kando instead.
+        window.connect('notify::visible', (window) => {
+          // Do not show the dialog when the window is hidden.
+          if (!window.get_visible()) {
+            return;
+          }
+
+          // Do not show the dialog when the user has disabled it.
+          if (!settings.get_boolean('show-kando-dialog')) {
+            return;
+          }
+
+          const dialog = this._createMessageDialog(
+              'It is time to move on!',
+              `I am not actively maintaining Fly-Pie anymore. However, I've been working on a cross-platform successor called Kando! It has a lot in common with Fly-Pie, but offers some unique features at the same time. And it's not limited to GNOME!
+
+<b>Learn more: <a href='https://kando.menu'>https://kando.menu</a></b>`,
+              window, [
+                {
+                  label: 'Do not show this again!',
+                  destructive: true,
+                  default: false,
+                  action: () => {
+                    settings.set_boolean('show-kando-dialog', false);
+                  }
+                },
+                {
+                  label: 'Remind me later.',
+                  destructive: false,
+                  default: true,
+                }
+              ]);
+
+          dialog.show();
+        });
       }
     });
 
@@ -197,7 +234,7 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     this._pages.forEach(page => {
       window.add(page);
 
-      // Starting with GNOME 48 there is an additional scrolled windo in the adw
+      // Starting with GNOME 48 there is an additional scrolled window in the adw
       // preference pages which we do not want. We simply hide it.
       if (utils.shellVersionIsAtLeast(48, 'alpha')) {
         const scrolledWindow = this._findChildByType(page, Gtk.ScrolledWindow);
@@ -229,5 +266,52 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     }
 
     return null;
+  }
+
+  // Helper function to show a message dialog. The dialog is modal and has a title, a
+  // message and a list of buttons. Each button is an object with a label, a default flag
+  // and a destructive flag. Each button object can also have an "action" callback that is
+  // called when the button is clicked.
+  // This method works on GTK3, GTK4, and libadwaita.
+  _createMessageDialog(title, message, window, buttons) {
+    let dialog = new Adw.MessageDialog({
+      heading: title,
+      body: message,
+      body_use_markup: true,
+      modal: true,
+      default_width: 500,
+    });
+
+    buttons.forEach((button, i) => {
+      const response = i.toString();
+      dialog.add_response(response, button.label);
+
+      if (button.default) {
+        dialog.set_default_response(response);
+        dialog.set_close_response(response);
+      }
+
+      if (button.destructive) {
+        dialog.set_response_appearance(response, Adw.ResponseAppearance.DESTRUCTIVE);
+      }
+    });
+
+    dialog.set_hide_on_close(true);
+    dialog.set_transient_for(window);
+
+    // If the dialog is closed or a button is clicked, we hide the dialog and call the
+    // button's action callback if it exists.
+    dialog.connect('response', (dialog, response) => {
+      const i = parseInt(response);
+
+      const button = buttons[i];
+      if (button && button.action) {
+        button.action();
+      }
+
+      dialog.hide();
+    });
+
+    return dialog;
   }
 }

@@ -585,6 +585,12 @@ SPDX-License-Identifier: CC0-1.0
       <description>Name of the currently active main stack child.</description>
     </key>
 
+     <key name="show-kando-dialog" type="b">
+      <default>true</default>
+      <summary>Show Kando Dialog</summary>
+      <description>If set to false, the Kando migration dialog will never be shown.</description>
+    </key>
+
     <!-- Achievements -->
 
     <key name="stats-achievement-dates" type="a{sx}">

@@ -16,6 +16,7 @@ SPDX-License-Identifier: CC-BY-4.0
 #### Enhancements
 
 - Ported the extension to GNOME 49.
+- When opening the preferences dialog, a dialog is shown which informs the user that Fly-Pie is no longer actively maintained and suggests using the successor [Kando](https://kando.menu) instead.
 - It is now possible to use the <kbd>Backspace</kbd> plus a modifier key as a menu shortcut. Before, this was not possible because the <kbd>Backspace</kbd> key used to unset the shortcut in the menu editor. Now, it does not unset the shortcut anymore if a modifier key is pressed at the same time.
 - Several translation updates. Thanks to all the translators!
 
