@@ -9,9 +9,9 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
-## [unreleased]
+## [Fly-Pie 29](https://github.com/schneegans/fly-pie/releases/tag/v29)
 
-**Release Date:** TBD
+**Release Date:** 2025-08-25
 
 #### Enhancements
 
@@ -22,7 +22,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 #### Bug Fixes
 
-- Fixed a bug which mad Fly-Pie fail to load if a shortcut was already bound by another application.
+- Fixed a bug which made Fly-Pie fail to load if a shortcut was already bound by another application.
 - Fixed a bug which caused the menu to be recreated continuously when the user kept the complete shortcut pressed while the menu was open.
 - Fixed a bug which caused the menu to crash if a clipboard item was used and a file was copied to the clipboard.
 
