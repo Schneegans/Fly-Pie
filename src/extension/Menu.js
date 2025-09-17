@@ -85,8 +85,13 @@ export default class Menu {
     // This will contain the Clutter.InputDevice which controlled a pointer most recently
     // (this could be a mouse, a pen or a stylus). We will try to open the menu at the
     // current position of this device.
-    const seat              = Clutter.get_default_backend().get_default_seat();
-    this._lastPointerDevice = seat.get_pointer();
+    if (utils.shellVersionIsAtLeast(49, "beta")) {
+      const sprite = Clutter.get_default_backend().get_pointer_sprite(global.stage);
+     this._lastPointerDevice = sprite.device;
+    } else {
+      const seat              = Clutter.get_default_backend().get_default_seat();
+      this._lastPointerDevice = seat.get_pointer();
+    }
 
     // The background covers the entire screen. Usually it's transparent and thus
     // invisible but once a menu is shown, it will be pushed as modal capturing the
@@ -122,9 +127,14 @@ export default class Menu {
             device.get_device_type() == Clutter.InputDeviceType.POINTER_DEVICE ||
             device.get_device_type() == Clutter.InputDeviceType.TOUCHPAD_DEVICE ||
             device.get_device_type() == Clutter.InputDeviceType.TOUCHSCREEN_DEVICE) {
-
-          const seat              = Clutter.get_default_backend().get_default_seat();
-          this._lastPointerDevice = seat.get_pointer();
+          
+          if (utils.shellVersionIsAtLeast(49, "beta")) {
+            const sprite = Clutter.get_default_backend().get_pointer_sprite(global.stage);
+            this._lastPointerDevice = sprite.device;
+          } else {
+            const seat              = Clutter.get_default_backend().get_default_seat();
+            this._lastPointerDevice = seat.get_pointer();
+          }
         }
       }
     });
@@ -684,9 +694,21 @@ export default class Menu {
       if (x != null && y != null) {
         this._setPosition(x, y);
       } else {
+        if (utils.shellVersionIsAtLeast(49, 1)) {
+        // This will hopefully work soon: https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/4668
+        // const coords = this._lastPointerDevice.get_coords();
+        // [x, y] = [coords.x, coords.y];
+        [x, y] = global.get_pointer();
+      } else  if (utils.shellVersionIsAtLeast(49, "beta")) {
+        // Between 49 beta and 49.1, there was no way to query the position of a specific
+        // input device. So we just return the main pointer position here.
+        [x, y] = global.get_pointer();
+      } else {
         const seat               = Clutter.get_default_backend().get_default_seat();
         const [ok, coords, mods] = seat.query_state(this._lastPointerDevice, null);
-        this._setPosition(coords.x, coords.y);
+        [x, y]                   = [coords.x, coords.y];
+      }
+        this._setPosition(x, y);
       }
     }
 
