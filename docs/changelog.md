@@ -9,6 +9,14 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
+## [unreleased]
+
+**Release Date:** TBD
+
+#### Bug Fixes
+
+- Fixed a regression on the latest version of GNOME 49 which led to a crash of the extension. Sadly, this involves removing support for multiple pointing devices on Wayland. Hopefully this will be fixed in GNOME Shell 49.1.
+
 ## [Fly-Pie 29](https://github.com/schneegans/fly-pie/releases/tag/v29)
 
 **Release Date:** 2025-08-25
