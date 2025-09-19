@@ -106,7 +106,6 @@ export default class Menu {
     // this device later.
     const backend         = global.backend ? global.backend : Meta.get_backend();
     this._deviceChangedID = backend.connect('last-device-changed', (b, device) => {
-      console.log('Last device changed');
       // Multi-cursor stuff only works on Wayland. For now, I assume that tablets,
       // pens and erasers create a secondary cursor. Is this true?
       if (utils.getSessionType() == 'wayland') {
@@ -692,7 +691,7 @@ export default class Menu {
 
         if (this._lastPointerDevice != null) {
           if (utils.shellVersionIsAtLeast(49, 1)) {
-            // This will hopefully work in the final 49 release:
+            // This will hopefully work in the final 49.1 release:
             // https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/4668
             global.stage.foreach_sprite((stage, sprite) => {
               if (sprite.device == this._lastPointerDevice) {
