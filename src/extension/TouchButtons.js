@@ -265,7 +265,6 @@ export default class TouchButtons {
         actor.height = this._cachedSettings.size;
 
         actor._dragging = false;  // True if the actor is currently dragged around.
-        actor._clicking = false;  // True if the actor is currently clicked.
 
         // Set the actor's position. This is either the stored position or -- if non is
         // stored -- the center of the current monitor.
@@ -279,6 +278,8 @@ export default class TouchButtons {
               (Main.layoutManager.currentMonitor.height - actor.height) / 2;
         }
 
+        // This will be called when the user clicks or touches the button or when the
+        // mouse is dragged away from the button.
         const showMenu = () => {
           // Show the menu directly centered above the touch button.
           this._dbus.ShowMenuAtRemote(
@@ -289,17 +290,14 @@ export default class TouchButtons {
           this._updateVisibility(true);
         };
 
-
-        // We need to connect to the 'captured-event' to be able to process the events
-        // before the ClickAction which is created further down. Else we will not receive
-        // some events which are swallowed by the ClickAction.
+        // We implement all the clicking and dragging logic in a single captured-event
+        // handler.
         actor.connect('captured-event', (actor, event) => {
           // The button-press event may start a drag operation if the user keeps the
           // pointer pressed for a certain time. We use a timeout for this. Else the menu
           // will be opened on release of the pointer.
           if (event.type() == Clutter.EventType.BUTTON_PRESS ||
               event.type() == Clutter.EventType.TOUCH_START) {
-
 
             this._longPressTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
               // First we shrink the button a bit and make it translucent. The pivot point
@@ -338,12 +336,10 @@ export default class TouchButtons {
             }
 
             if (actor._dragging) {
-
               actor._dragging = false;
 
               // Release the pointer grab.
               this._ungrab();
-
 
               // Make the button's size and opacity "normal" again.
               this._ease(actor, {opacity: 255});
@@ -404,12 +400,8 @@ export default class TouchButtons {
             }
           }
 
-
-
           return Clutter.EVENT_PROPAGATE;
         });
-
-
 
         // Finally, save the actor in our list.
         this._touchButtons.push(actor);
