@@ -264,8 +264,8 @@ export default class TouchButtons {
         actor.width  = this._cachedSettings.size;
         actor.height = this._cachedSettings.size;
 
-        actor._dragging   = false;  // True if the actor is currently dragged around.
-        actor._clicking   = false;  // True if the actor is currently clicked.
+        actor._dragging = false;  // True if the actor is currently dragged around.
+        actor._clicking = false;  // True if the actor is currently clicked.
 
         // Set the actor's position. This is either the stored position or -- if non is
         // stored -- the center of the current monitor.
@@ -280,16 +280,16 @@ export default class TouchButtons {
         }
 
         const showMenu = () => {
-           // Show the menu directly centered above the touch button.
-            this._dbus.ShowMenuAtRemote(
-                config.name, actor.x + actor.width / 2, actor.y + actor.height / 2);
-            this._menuOpened = true;
+          // Show the menu directly centered above the touch button.
+          this._dbus.ShowMenuAtRemote(
+              config.name, actor.x + actor.width / 2, actor.y + actor.height / 2);
+          this._menuOpened = true;
 
-            // Hide all touch buttons as long as the menu is opened.
-            this._updateVisibility(true);
+          // Hide all touch buttons as long as the menu is opened.
+          this._updateVisibility(true);
         };
 
-     
+
         // We need to connect to the 'captured-event' to be able to process the events
         // before the ClickAction which is created further down. Else we will not receive
         // some events which are swallowed by the ClickAction.
@@ -298,43 +298,43 @@ export default class TouchButtons {
           // pointer pressed for a certain time. We use a timeout for this. Else the menu
           // will be opened on release of the pointer.
           if (event.type() == Clutter.EventType.BUTTON_PRESS ||
-          event.type() == Clutter.EventType.TOUCH_START) {
-            
+              event.type() == Clutter.EventType.TOUCH_START) {
 
-              this._longPressTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
-                  // First we shrink the button a bit and make it translucent. The pivot point
-          // for shrinking is the pointer position inside the actor.
-          this._longPressTimeout = 0;
-                 let [x, y] = event.get_coords();
-                 let ok;
-                 [ok, x, y] = actor.transform_stage_point(x, y);
-            actor.set_pivot_point(x / actor.width, y / actor.height);
-            this._ease(actor, {opacity: DRAG_OPACITY});
-            this._ease(actor, {scale_x: DRAG_SCALE});
-            this._ease(actor, {scale_y: DRAG_SCALE});
 
-            // Store some dragging state.
-            actor._dragging   = true;
-            actor._dragStartX = x;
-            actor._dragStartY = y;
+            this._longPressTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
+              // First we shrink the button a bit and make it translucent. The pivot point
+              // for shrinking is the pointer position inside the actor.
+              this._longPressTimeout = 0;
+              let [x, y]             = event.get_coords();
+              let ok;
+              [ok, x, y] = actor.transform_stage_point(x, y);
+              actor.set_pivot_point(x / actor.width, y / actor.height);
+              this._ease(actor, {opacity: DRAG_OPACITY});
+              this._ease(actor, {scale_x: DRAG_SCALE});
+              this._ease(actor, {scale_y: DRAG_SCALE});
 
-            // Grab the input so that we do not loose the actor during quick movements.
-            this._grab(actor);
-                  return GLib.SOURCE_REMOVE;
-              });
-           
+              // Store some dragging state.
+              actor._dragging   = true;
+              actor._dragStartX = x;
+              actor._dragStartY = y;
+
+              // Grab the input so that we do not loose the actor during quick movements.
+              this._grab(actor);
+              return GLib.SOURCE_REMOVE;
+            });
+
             return Clutter.EVENT_STOP;
           }
 
-           // The button-release event is used to end a drag operation.
+          // The button-release event is used to end a drag operation.
           if (event.type() == Clutter.EventType.BUTTON_RELEASE ||
               event.type() == Clutter.EventType.TOUCH_END) {
 
             // If the timeout is still active, we simply open the menu.
             if (this._longPressTimeout) {
-                GLib.source_remove(this._longPressTimeout);
-                this._longPressTimeout = 0;
-                showMenu();
+              GLib.source_remove(this._longPressTimeout);
+              this._longPressTimeout = 0;
+              showMenu();
             }
 
             if (actor._dragging) {
@@ -387,9 +387,9 @@ export default class TouchButtons {
 
           // If the pointer leaves the touch button, we make it somewhat transparent.
           if (event.type() == Clutter.EventType.LEAVE) {
-                if (this._longPressTimeout) {
-                GLib.source_remove(this._longPressTimeout);
-                this._longPressTimeout = 0;
+            if (this._longPressTimeout) {
+              GLib.source_remove(this._longPressTimeout);
+              this._longPressTimeout = 0;
               showMenu();
             } else if (!actor._dragging && !this._menuOpened) {
               this._ease(actor, {opacity: this._cachedSettings.opacity});
@@ -404,12 +404,10 @@ export default class TouchButtons {
             }
           }
 
-         
+
 
           return Clutter.EVENT_PROPAGATE;
         });
-
-      
 
 
 
@@ -467,11 +465,11 @@ export default class TouchButtons {
   // Makes sure that all events are passed to the given actor. This is used to ensure
   // that we do not "loose" the touch buttons while dragging them around.
   _grab(actor) {
-      this._lastGrab = global.stage.grab(actor);
+    this._lastGrab = global.stage.grab(actor);
   }
 
   // Releases a grab created with the method above.
   _ungrab() {
-      this._lastGrab.dismiss();
+    this._lastGrab.dismiss();
   }
 };
