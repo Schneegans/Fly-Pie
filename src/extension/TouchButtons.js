@@ -301,7 +301,7 @@ export default class TouchButtons {
           event.type() == Clutter.EventType.TOUCH_START) {
             
 
-              this._longPressTimeout = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 1, () => {
+              this._longPressTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
                   // First we shrink the button a bit and make it translucent. The pivot point
           // for shrinking is the pointer position inside the actor.
           this._longPressTimeout = 0;
