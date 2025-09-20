@@ -11,5 +11,5 @@
   "settings-schema": "org.gnome.shell.extensions.flypie",
   "shell-version": ["45", "46", "47", "48", "49"],
   "url": "https://github.com/Schneegans/Fly-Pie",
-  "version": 30
+  "version": 31
 }
