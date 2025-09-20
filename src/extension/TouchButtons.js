@@ -56,10 +56,6 @@ export default class TouchButtons {
     // mode).
     this._inOverview = false;
 
-    // This stores a reference to the latest input device we received motion events from.
-    // This device will be grabbed when we move the touch buttons around.
-    this._latestInputDevice = null;
-
     // True, if there is currently a Fly-Pie menu opened.
     this._menuOpened = false;
 
@@ -268,6 +264,8 @@ export default class TouchButtons {
         actor.width  = this._cachedSettings.size;
         actor.height = this._cachedSettings.size;
 
+        actor._dragging = false;  // True if the actor is currently dragged around.
+
         // Set the actor's position. This is either the stored position or -- if non is
         // stored -- the center of the current monitor.
         if (positions[i] && positions[i].length == 2) {
@@ -280,58 +278,68 @@ export default class TouchButtons {
               (Main.layoutManager.currentMonitor.height - actor.height) / 2;
         }
 
-        // We need to connect to the 'captured-event' to be able to process the events
-        // before the ClickAction which is created further down. Else we will not receive
-        // some events which are swallowed by the ClickAction.
+        // This will be called when the user clicks or touches the button or when the
+        // mouse is dragged away from the button.
+        const showMenu = () => {
+          // Show the menu directly centered above the touch button.
+          this._dbus.ShowMenuAtRemote(
+              config.name, actor.x + actor.width / 2, actor.y + actor.height / 2);
+          this._menuOpened = true;
+
+          // Hide all touch buttons as long as the menu is opened.
+          this._updateVisibility(true);
+        };
+
+        // We implement all the clicking and dragging logic in a single captured-event
+        // handler.
         actor.connect('captured-event', (actor, event) => {
-          // Update the actor's position when dragged around. We also store a reference to
-          // the latest input device interacting with the touch button so that we can grab
-          // it later.
-          if (event.type() == Clutter.EventType.MOTION ||
-              event.type() == Clutter.EventType.TOUCH_UPDATE) {
+          // The button-press event may start a drag operation if the user keeps the
+          // pointer pressed for a certain time. We use a timeout for this. Else the menu
+          // will be opened on release of the pointer.
+          if (event.type() == Clutter.EventType.BUTTON_PRESS ||
+              event.type() == Clutter.EventType.TOUCH_START) {
 
-            this._latestInputDevice = event.get_device();
+            this._longPressTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
+              // First we shrink the button a bit and make it translucent. The pivot point
+              // for shrinking is the pointer position inside the actor.
+              this._longPressTimeout = 0;
+              let [x, y]             = event.get_coords();
+              let ok;
+              [ok, x, y] = actor.transform_stage_point(x, y);
+              actor.set_pivot_point(x / actor.width, y / actor.height);
+              this._ease(actor, {opacity: DRAG_OPACITY});
+              this._ease(actor, {scale_x: DRAG_SCALE});
+              this._ease(actor, {scale_y: DRAG_SCALE});
 
-            if (actor._dragging) {
-              const [x, y] = event.get_coords();
-              actor.x      = x - actor._dragStartX;
-              actor.y      = y - actor._dragStartY;
+              // Store some dragging state.
+              actor._dragging   = true;
+              actor._dragStartX = x;
+              actor._dragStartY = y;
 
-              return Clutter.EVENT_STOP;
-            }
-          }
+              // Grab the input so that we do not loose the actor during quick movements.
+              this._grab(actor);
+              return GLib.SOURCE_REMOVE;
+            });
 
-          // If the pointer leaves the touch button, we make it somewhat transparent.
-          if (event.type() == Clutter.EventType.LEAVE) {
-            if (!actor._dragging && !this._menuOpened) {
-              this._ease(actor, {opacity: this._cachedSettings.opacity});
-            }
-          }
-
-          // Now we have to wire up some events. If the pointer enters the touch button,
-          // we make it fully opaque.
-          if (event.type() == Clutter.EventType.ENTER) {
-            if (!actor._dragging) {
-              this._ease(actor, {opacity: 255});
-            }
+            return Clutter.EVENT_STOP;
           }
 
           // The button-release event is used to end a drag operation.
           if (event.type() == Clutter.EventType.BUTTON_RELEASE ||
               event.type() == Clutter.EventType.TOUCH_END) {
 
-            // Make sure that the long-press action gets canceled.
-            actor.get_actions()[0].release();
+            // If the timeout is still active, we simply open the menu.
+            if (this._longPressTimeout) {
+              GLib.source_remove(this._longPressTimeout);
+              this._longPressTimeout = 0;
+              showMenu();
+            }
 
             if (actor._dragging) {
-
               actor._dragging = false;
 
               // Release the pointer grab.
               this._ungrab();
-
-              // Use the normal cursor again.
-              global.display.set_cursor(Meta.Cursor.DEFAULT);
 
               // Make the button's size and opacity "normal" again.
               this._ease(actor, {opacity: 255});
@@ -358,68 +366,42 @@ export default class TouchButtons {
             }
           }
 
+          // Update the actor's position when dragged around. We also store a reference to
+          // the latest input device interacting with the touch button so that we can grab
+          // it later.
+          if (event.type() == Clutter.EventType.MOTION ||
+              event.type() == Clutter.EventType.TOUCH_UPDATE) {
+
+            if (actor._dragging) {
+              const [x, y] = event.get_coords();
+              actor.x      = x - actor._dragStartX;
+              actor.y      = y - actor._dragStartY;
+
+              return Clutter.EVENT_STOP;
+            }
+          }
+
+          // If the pointer leaves the touch button, we make it somewhat transparent.
+          if (event.type() == Clutter.EventType.LEAVE) {
+            if (this._longPressTimeout) {
+              GLib.source_remove(this._longPressTimeout);
+              this._longPressTimeout = 0;
+              showMenu();
+            } else if (!actor._dragging && !this._menuOpened) {
+              this._ease(actor, {opacity: this._cachedSettings.opacity});
+            }
+          }
+
+          // Now we have to wire up some events. If the pointer enters the touch button,
+          // we make it fully opaque.
+          if (event.type() == Clutter.EventType.ENTER) {
+            if (!actor._dragging) {
+              this._ease(actor, {opacity: 255});
+            }
+          }
+
           return Clutter.EVENT_PROPAGATE;
         });
-
-        // This long-press action is used to initiate dragging as well es opening the
-        // menu. The latter is done whenever the long press is aborted.
-        const action = Clutter.ClickAction.new();
-        action.connect('long-press', (action, actor, state) => {
-          // We support long presses.
-          if (state == Clutter.LongPressState.QUERY) {
-
-            // This should not be necessary. For some reason, the long-press action is
-            // canceled directly after it started for touch events. With mouse input,
-            // everything works without these two lines, but to get touch input working,
-            // we have to grab the input here. It is released a few lines further below.
-            this._grab(actor);
-
-            return true;
-          }
-
-          // Second part of the workaround mentioned above.
-          this._ungrab();
-
-          // If the long press was executed, we initiate dragging of the actor.
-          if (state == Clutter.LongPressState.ACTIVATE) {
-
-            // First we shrink the button a bit and make it translucent. The pivot point
-            // for shrinking is the pointer position inside the actor.
-            let x, y, ok;
-            [x, y]     = action.get_coords();
-            [ok, x, y] = actor.transform_stage_point(x, y);
-            actor.set_pivot_point(x / actor.width, y / actor.height);
-            this._ease(actor, {opacity: DRAG_OPACITY});
-            this._ease(actor, {scale_x: DRAG_SCALE});
-            this._ease(actor, {scale_y: DRAG_SCALE});
-
-            // Store some dragging state.
-            actor._dragging   = true;
-            actor._dragStartX = x;
-            actor._dragStartY = y;
-
-            // Grab the input so that we do not loose the actor during quick movements.
-            this._grab(actor);
-
-            // Use a dragging graphic for the cursor.
-            global.display.set_cursor(Meta.Cursor.DND_IN_DRAG);
-
-          }
-          // If the long press was canceled (either due to it being to short or because
-          // the pointer moved while the button was pressed), we open the menu.
-          else if (state == Clutter.LongPressState.CANCEL) {
-
-            // Show the menu directly centered above the touch button.
-            this._dbus.ShowMenuAtRemote(
-                config.name, actor.x + actor.width / 2, actor.y + actor.height / 2);
-            this._menuOpened = true;
-
-            // Hide all touch buttons as long as the menu is opened.
-            this._updateVisibility(true);
-          }
-        });
-
-        actor.add_action(action);
 
         // Finally, save the actor in our list.
         this._touchButtons.push(actor);
@@ -472,19 +454,14 @@ export default class TouchButtons {
     }));
   }
 
-  // Makes sure that all events from the pointing device we received last input from is
-  // passed to the given actor. This is used to ensure that we do not "loose" the touch
-  // buttons will dragging them around.
+  // Makes sure that all events are passed to the given actor. This is used to ensure
+  // that we do not "loose" the touch buttons while dragging them around.
   _grab(actor) {
-    if (this._latestInputDevice) {
-      this._lastGrab = global.stage.grab(actor);
-    }
+    this._lastGrab = global.stage.grab(actor);
   }
 
   // Releases a grab created with the method above.
   _ungrab() {
-    if (this._latestInputDevice) {
-      this._lastGrab.dismiss();
-    }
+    this._lastGrab.dismiss();
   }
 };
