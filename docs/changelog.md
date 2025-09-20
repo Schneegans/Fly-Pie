@@ -9,6 +9,14 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
+## [Fly-Pie 31](https://github.com/schneegans/fly-pie/releases/tag/v31)
+
+**Release Date:** 2025-09-21
+
+#### Bug Fixes
+
+- Fixed a small issue which popped up during extension review.
+
 ## [Fly-Pie 30](https://github.com/schneegans/fly-pie/releases/tag/v30)
 
 **Release Date:** 2025-09-20

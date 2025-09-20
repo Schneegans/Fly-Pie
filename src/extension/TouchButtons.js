@@ -108,6 +108,11 @@ export default class TouchButtons {
       Main.layoutManager.disconnect(this._startupCompleteID);
     }
 
+    if (this._longPressTimeout) {
+      GLib.source_remove(this._longPressTimeout);
+      this._longPressTimeout = 0;
+    }
+
     Main.overview.disconnect(this._shownOverviewID);
     Main.overview.disconnect(this._hideOverviewID);
   }
@@ -298,6 +303,10 @@ export default class TouchButtons {
           // will be opened on release of the pointer.
           if (event.type() == Clutter.EventType.BUTTON_PRESS ||
               event.type() == Clutter.EventType.TOUCH_START) {
+
+            if (this._longPressTimeout) {
+              GLib.source_remove(this._longPressTimeout);
+            }
 
             this._longPressTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
               // First we shrink the button a bit and make it translucent. The pivot point
