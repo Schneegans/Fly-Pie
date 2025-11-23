@@ -220,15 +220,15 @@ export class ItemRegistry {
 
       if (text.endsWith('.desktop')) {
 
-        const info = Gio.DesktopAppInfo.new_from_filename(file.get_path());
         const type = 'Command';
-
-        let icon = ItemRegistry.getItemTypes()[type].icon;
-        if (info.get_icon()) {
-          icon = info.get_icon().to_string();
-        }
+        const info = Gio.DesktopAppInfo.new_from_filename(file.get_path());
 
         if (info != null) {
+          let icon = ItemRegistry.getItemTypes()[type].icon;
+          if (info.get_icon()) {
+            icon = info.get_icon().to_string();
+          }
+
           item.data = {command: info.get_commandline()};
           item.icon = icon;
           item.name = info.get_display_name();
