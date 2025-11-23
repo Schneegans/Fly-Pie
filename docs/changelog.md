@@ -9,6 +9,14 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
+## [Fly-Pie 32](https://github.com/schneegans/fly-pie/releases/tag/v32)
+
+**Release Date:** 2025-11-23
+
+#### Bug Fixes
+
+- Fixed pen position detection on GNOME 49.1 and later.
+
 ## [Fly-Pie 31](https://github.com/schneegans/fly-pie/releases/tag/v31)
 
 **Release Date:** 2025-09-21
