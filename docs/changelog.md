@@ -9,9 +9,9 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
-## [unreleased]
+## [Fly-Pie 33](https://github.com/schneegans/fly-pie/releases/tag/v33)
 
-**Release Date:** TBD
+**Release Date:** 2026-03-15
 
 #### Enhancements
 
