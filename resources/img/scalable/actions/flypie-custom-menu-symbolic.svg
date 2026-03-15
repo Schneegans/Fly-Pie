@@ -1,1 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15.978" viewBox="0 0 4.233 4.228"><path d="m2.914.255-.53.53h.397a.132.132 0 0 1 .094.038l.525.525a.132.132 0 0 1 .039.094v.42l.549-.548V.8L3.443.255Zm-.794.794L.268 2.901v1.058h1.074l1.832-1.832v-.63l-.447-.448Z" fill="#2e3436" style="stroke-width:.26458"/></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="16"
+   height="15.978"
+   viewBox="0 0 4.233 4.228"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="flypie-custom-menu-symbolic.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="119.66454"
+     inkscape:cx="8.0015349"
+     inkscape:cy="7.9889998"
+     inkscape:window-width="3840"
+     inkscape:window-height="2123"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     d="m2.914.255-.53.53h.397a.132.132 0 0 1 .094.038l.525.525a.132.132 0 0 1 .039.094v.42l.549-.548V.8L3.443.255Zm-.794.794L.268 2.901v1.058h1.074l1.832-1.832v-.63l-.447-.448Z"
+     fill="#2e3436"
+     style="stroke-width:.26458"
+     id="path1" />
+</svg>
