@@ -9,6 +9,20 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Changelog of Fly-Pie
 
+## [unreleased]
+
+**Release Date:** TBD
+
+#### Enhancements
+
+- Ported the extension to GNOME 50. GNOME versions prior to 49 will not receive this update (it did not change much anyways). Also, this may be one of the last updates of Fly-Pie as I will focus on the successor [Kando](https://kando.menu) from now on.
+- Several translation updates. Thanks to all the translators!
+
+#### Bug Fixes
+
+- Fixed any issue where the settings dialog would be empty on GNOME 49.2+.
+- Fixed some icon size issues in the settings dialog.
+
 ## [Fly-Pie 32](https://github.com/schneegans/fly-pie/releases/tag/v32)
 
 **Release Date:** 2025-11-23
