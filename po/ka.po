@@ -8,18 +8,16 @@ msgstr ""
 "Project-Id-Version: flypie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: 2025-12-28 21:00+0000\n"
-"Last-Translator: Moo <hazap@hotmail.com>\n"
-"Language-Team: Lithuanian <https://hosted.weblate.org/projects/fly-pie/core/"
-"lt/>\n"
-"Language: lt\n"
+"PO-Revision-Date: 2026-02-02 12:01+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <https://hosted.weblate.org/projects/fly-pie/core/"
+"ka/>\n"
+"Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
-"19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
-"1 : 2);\n"
-"X-Generator: Weblate 5.15.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: src/common/actions/Shortcut.js:46
 msgid "Activate Shortcut"
@@ -41,7 +39,7 @@ msgstr ""
 #: src/common/actions/Shortcut.js:81 resources/ui/gtk4/settings.ui:4938
 #: resources/ui/gtk3/settings.ui:4933
 msgid "Shortcut"
-msgstr "Spartusis klavišas"
+msgstr "მალსახმობი"
 
 #: src/common/actions/Shortcut.js:81
 msgid "This shortcut will be simulated."
@@ -49,39 +47,37 @@ msgstr ""
 
 #: src/common/actions/File.js:37
 msgid "Open File"
-msgstr "Atverti failą"
+msgstr "ფაილის გახსნა"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:44
 msgid "Opens a file with the default application."
-msgstr "Atveria failą naudojant numatytąją programą."
+msgstr ""
 
 #: src/common/actions/File.js:48
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
-"Veiksmas <b>Atverti failą</b> atvers aukščiau nurodytą failą naudodamas "
-"sistemos numatytąją programą."
 
 #: src/common/actions/File.js:72
 msgid "File"
-msgstr "Failas"
+msgstr "ფაილი"
 
 #: src/common/actions/File.js:72 src/common/actions/Uri.js:71
 msgid "It will be opened with the default app."
-msgstr "Jis bus atvertas numatytoje programoje."
+msgstr ""
 
 #: src/common/actions/Command.js:37
 msgid "Launch Application"
-msgstr "Paleisti programą"
+msgstr "აპლიკაციის გაშვება"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Command.js:44
 msgid "Runs any shell command."
-msgstr "Paleidžia bet kokią apvalkalo komandą."
+msgstr ""
 
 #: src/common/actions/Command.js:48
 msgid ""
@@ -89,34 +85,31 @@ msgid ""
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
 msgstr ""
-"Veiksmas <b>Paleisti programą</b> įvykdo bet kokią nurodytą komandą. Tai "
-"pirmiausia naudojama programų atvėrimui, bet gali būti naudojama ir daugeliu "
-"kitų atvejų."
 
 #: src/common/actions/Command.js:72
 msgid "Command"
-msgstr "Komanda"
+msgstr "ბრძანება"
 
 #: src/common/actions/Command.js:72
 msgid "Use the button to list installed apps."
-msgstr "Naudokite mygtuką norėdami įvardyti įdiegtas programas."
+msgstr ""
 
 #: src/common/actions/Uri.js:36
 msgid "Open URI"
-msgstr "Atverti URI"
+msgstr "URI-ის გახსნა"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Uri.js:43
 msgid "Opens an URI with the default application."
-msgstr "Atveria URI naudojant numatytąją programą."
+msgstr ""
 
 #: src/common/actions/Uri.js:47
 msgid ""
 "When the <b>Open URI</b> action is activated, the above URI is opened with "
 "the default application. For http URLs, this will be your web browser. "
-"However, it is also possible to open other URIs such as \"mailto:foo@bar.org"
-"\"."
+"However, it is also possible to open other URIs such as \"mailto:foo@bar."
+"org\"."
 msgstr ""
 
 #: src/common/actions/Uri.js:71
@@ -125,7 +118,7 @@ msgstr "URI"
 
 #: src/common/actions/DBusSignal.js:35
 msgid "D-Bus Signal"
-msgstr "D-Bus signalas"
+msgstr "D-Bus-ის სიგნალი"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
@@ -135,9 +128,9 @@ msgstr ""
 
 #: src/common/actions/DBusSignal.js:46
 msgid ""
-"The <b>D-Bus Signal</b> action does nothing on its own. But you <a href="
-"\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md"
-"\">can listen on the D-Bus for its activation</a>. This can be very useful "
+"The <b>D-Bus Signal</b> action does nothing on its own. But you <a "
+"href=\"https://github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface."
+"md\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
 
@@ -147,17 +140,17 @@ msgstr "ID"
 
 #: src/common/actions/DBusSignal.js:70
 msgid "This will be passed to the D-Bus signal."
-msgstr "Tai bus perduota D-Bus signalui."
+msgstr ""
 
 #: src/common/actions/InsertText.js:49
 msgid "Insert Text"
-msgstr "Įterpti tekstą"
+msgstr "ტექსტის ჩასმა"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/InsertText.js:56
 msgid "Types some text automatically."
-msgstr "Automatiškai parašo kokį nors tekstą."
+msgstr ""
 
 #: src/common/actions/InsertText.js:60
 msgid ""
@@ -168,15 +161,15 @@ msgstr ""
 
 #: src/common/actions/InsertText.js:84
 msgid "Text"
-msgstr "Tekstas"
+msgstr "ტექსტი"
 
 #: src/common/actions/InsertText.js:84
 msgid "This text will be inserted."
-msgstr "Bus įterptas šis tekstas."
+msgstr ""
 
 #: src/common/ConfigWidgetFactory.js:105 src/prefs/ImageChooserButton.js:45
 msgid "Select File"
-msgstr "Pasirinkti failą"
+msgstr "აირჩიეთ ფაილი"
 
 #: src/common/ConfigWidgetFactory.js:106 src/common/ConfigWidgetFactory.js:182
 #: src/prefs/ImageChooserButton.js:46 src/prefs/MenuEditorPage.js:208
@@ -184,11 +177,11 @@ msgstr "Pasirinkti failą"
 #: src/prefs/SettingsPage.js:335 resources/ui/gtk4/iconSelectDialog.ui:20
 #: resources/ui/gtk3/iconSelectDialog.ui:20
 msgid "Cancel"
-msgstr "Atsisakyti"
+msgstr "გაუქმება"
 
 #: src/common/ConfigWidgetFactory.js:181
 msgid "Select Application"
-msgstr "Pasirinkti programą"
+msgstr "აირჩიეთ აპლიკაცია"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:290 src/common/ConfigWidgetFactory.js:338
@@ -208,17 +201,17 @@ msgstr ""
 #: src/common/ItemRegistry.js:279
 #, javascript-format
 msgid "Insert: %s"
-msgstr "Įterpti: %s"
+msgstr ""
 
 #: src/common/menus/FrequentlyUsed.js:47
 msgid "Frequently Used"
-msgstr "Dažnai naudojamos"
+msgstr "ხშირად გამოყენებული"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/FrequentlyUsed.js:54
 msgid "Shows your frequently used applications."
-msgstr "Rodo jūsų dažnai naudojamas programas."
+msgstr ""
 
 #: src/common/menus/FrequentlyUsed.js:58
 msgid ""
@@ -239,13 +232,13 @@ msgstr ""
 
 #: src/common/menus/System.js:49
 msgid "System"
-msgstr "Sistema"
+msgstr "სისტემა"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/System.js:56
 msgid "Allows screen lock, shutdown and other things."
-msgstr "Leidžia užrakinti ekraną, išjungti kompiuterį ir kt."
+msgstr ""
 
 #: src/common/menus/System.js:60
 msgid ""
@@ -256,33 +249,33 @@ msgstr ""
 #. Translators: As in 'Lock the screen.'
 #: src/common/menus/System.js:84
 msgid "Lock"
-msgstr "Užrakinti"
+msgstr "ჩაკეტვა"
 
 #: src/common/menus/System.js:93
 msgid "Suspend"
-msgstr "Pristabdyti"
+msgstr "ძილი"
 
 #: src/common/menus/System.js:102
 msgid "Switch User…"
-msgstr "Perjungti naudotoją…"
+msgstr "მომხმარებლის გადართვა…"
 
 #: src/common/menus/System.js:111
 msgid "Log Out"
-msgstr "Atsijungti"
+msgstr "გასვლა"
 
 #: src/common/menus/System.js:120
 msgid "Power Off…"
-msgstr "Išjungti…"
+msgstr "გამორთვა…"
 
 #: src/common/menus/CustomMenu.js:32
 msgid "Custom Menu"
-msgstr "Tinkintas meniu"
+msgstr ""
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/CustomMenu.js:39
 msgid "This can contain custom actions and other menus."
-msgstr "Čia gali būti tinkintų veiksmų bei kitokių meniu."
+msgstr ""
 
 #: src/common/menus/CustomMenu.js:43
 msgid ""
@@ -294,13 +287,13 @@ msgstr ""
 #. Translators: This is an entry of the default menu.
 #: src/common/menus/Favorites.js:46 src/extension/DefaultMenu.js:82
 msgid "Favorites"
-msgstr "Mėgstamos"
+msgstr "რჩეულები"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Favorites.js:53
 msgid "Shows pinned applications."
-msgstr "Rodo prisegtas programas."
+msgstr ""
 
 #: src/common/menus/Favorites.js:57
 msgid ""
@@ -310,13 +303,13 @@ msgstr ""
 
 #: src/common/menus/RecentFiles.js:37
 msgid "Recent Files"
-msgstr "Paskiausi failai"
+msgstr "უახლესი ფაილები"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RecentFiles.js:44
 msgid "Shows your recently used files."
-msgstr "Rodo paskiausiai naudotus failus."
+msgstr ""
 
 #: src/common/menus/RecentFiles.js:48
 msgid ""
@@ -327,13 +320,13 @@ msgstr ""
 
 #: src/common/menus/Devices.js:36
 msgid "Devices"
-msgstr "Įrenginiai"
+msgstr "მოწყობილობები"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Devices.js:43
 msgid "Shows connected devices."
-msgstr "Rodo prijungtus įrenginius."
+msgstr ""
 
 #: src/common/menus/Devices.js:47
 msgid ""
@@ -343,13 +336,13 @@ msgstr ""
 
 #: src/common/menus/MainMenu.js:36
 msgid "Main Menu"
-msgstr "Pagrindinis meniu"
+msgstr "მთავარი მენიუ"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/MainMenu.js:43
 msgid "Shows all installed applications."
-msgstr "Rodo visas įdiegtas programas."
+msgstr ""
 
 #: src/common/menus/MainMenu.js:47
 msgid ""
@@ -361,13 +354,13 @@ msgstr ""
 #. Translators: This is an entry of the default menu. I
 #: src/common/menus/RunningApps.js:50 src/extension/DefaultMenu.js:114
 msgid "Running Apps"
-msgstr "Veikiančios programos"
+msgstr ""
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/RunningApps.js:57
 msgid "Shows the currently running applications."
-msgstr "Rodo šiuo metu veikiančias programas."
+msgstr ""
 
 #: src/common/menus/RunningApps.js:61
 msgid ""
@@ -393,15 +386,15 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:4896 resources/ui/gtk3/settings.ui:4834
 #: resources/ui/gtk3/settings.ui:4891
 msgid "See tooltip for details."
-msgstr "Išsamesnei informacijai žiūrėkite paaiškinimą."
+msgstr ""
 
 #: src/common/menus/RunningApps.js:128
 msgid "Active Workspace Only"
-msgstr "Tik aktyvi darbo sritis"
+msgstr ""
 
 #: src/common/menus/RunningApps.js:129
 msgid "Group by Application"
-msgstr "Grupuoti pagal programą"
+msgstr ""
 
 #: src/common/menus/RunningApps.js:130
 msgid "Peek on Hover"
@@ -409,13 +402,13 @@ msgstr ""
 
 #: src/common/menus/Bookmarks.js:36
 msgid "Bookmarks"
-msgstr "Žymelės"
+msgstr "სანიშნეები"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Bookmarks.js:43
 msgid "Shows your frequently used directories."
-msgstr "Rodo jūsų dažnai naudojamus katalogus."
+msgstr ""
 
 #: src/common/menus/Bookmarks.js:47
 msgid ""
@@ -425,17 +418,17 @@ msgstr ""
 
 #: src/common/menus/Clipboard.js:57
 msgid "Clipboard"
-msgstr "Iškarpinė"
+msgstr "გაცვლის ბუფერი"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/menus/Clipboard.js:64
 msgid "Shows recently copied things."
-msgstr "Rodo nukopijuotus dalykus."
+msgstr ""
 
 #: src/common/menus/Clipboard.js:67
 msgid "The <b>Clipboard</b> menu shows a list of recently copied things."
-msgstr "Meniu <b>Iškarpinė</b> rodo paskiausiai nukopijuotų dalykų sąrašą."
+msgstr ""
 
 #: src/common/menus/Clipboard.js:97
 msgid "First Child Angle"
@@ -455,13 +448,13 @@ msgstr ""
 #. copied a raster image.
 #: src/common/menus/Clipboard.js:180
 msgid "Raster Image"
-msgstr ""
+msgstr "რასტრული გამოსახულება"
 
 #. Translators: This is the tier 1 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:369
 msgid "Novice"
-msgstr ""
+msgstr "ახალბედა"
 
 #. Translators: This is the tier 2 attribute which will be inserted for each %s
 #. in the achievement titles.
@@ -479,13 +472,13 @@ msgstr ""
 #. in the achievement titles.
 #: src/common/Achievements.js:378
 msgid "Expert"
-msgstr ""
+msgstr "ექსპერტი"
 
 #. Translators: This is the tier 5 attribute which will be inserted for each %s
 #. in the achievement titles.
 #: src/common/Achievements.js:381
 msgid "Master"
-msgstr ""
+msgstr "ოსტატი"
 
 #. Translators: This is the tier 1 number which will be inserted for each %i in
 #. the achievement titles.
@@ -801,11 +794,11 @@ msgstr ""
 
 #: src/prefs/AchievementsPage.js:120
 msgid "Do you really want to reset all statistics?"
-msgstr "Ar tikrai norite atstatyti visą statistiką?"
+msgstr ""
 
 #: src/prefs/AchievementsPage.js:121
 msgid "All achievements will be lost!"
-msgstr "Visi pasiekimai bus prarasti!"
+msgstr ""
 
 #: src/prefs/MenuEditor.js:419
 msgid "No menus configured"
@@ -855,33 +848,33 @@ msgstr ""
 #: resources/ui/gtk4/imageChooserButton.ui:22
 #: resources/ui/gtk3/imageChooserButton.ui:22
 msgid "(None)"
-msgstr "(Nėra)"
+msgstr "(არცერთი)"
 
 #: src/prefs/MenuEditorPage.js:197 src/prefs/MenuEditorPage.js:267
 #: src/prefs/SettingsPage.js:269 src/prefs/SettingsPage.js:324
 msgid "JSON Files"
-msgstr "JSON failai"
+msgstr "JSON ფაილები"
 
 #: src/prefs/MenuEditorPage.js:204 src/prefs/MenuEditorPage.js:274
 #: src/prefs/SettingsPage.js:276 src/prefs/SettingsPage.js:331
 msgid "All Files"
-msgstr "Visi failai"
+msgstr "ყველა ფაილი"
 
 #: src/prefs/MenuEditorPage.js:209
 msgid "Export"
-msgstr "Eksportuoti"
+msgstr "გატანა"
 
 #: src/prefs/MenuEditorPage.js:238
 msgid "Could not export the menu configuration."
-msgstr "Nepavyko eksportuoti meniu konfigūracijos."
+msgstr ""
 
 #: src/prefs/MenuEditorPage.js:279
 msgid "Import"
-msgstr "Importuoti"
+msgstr "შემოტანა"
 
 #: src/prefs/MenuEditorPage.js:313
 msgid "Could not import the menu configuration."
-msgstr "Nepavyko importuoti meniu konfigūracijos."
+msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -933,8 +926,6 @@ msgid ""
 "If you delete all menus, log out and log in again, the default configuration "
 "will be restored."
 msgstr ""
-"Jeigu ištrinsite visus meniu, atsijungsite ir vėl prisijungsite, tada bus "
-"atkurta numatytoji konfigūracija."
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
 #. of the menu editor.
@@ -979,8 +970,8 @@ msgstr ""
 #: src/prefs/MenuEditorPage.js:430
 #, javascript-format
 msgid ""
-"💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a sponsor."
-"</a>"
+"💕️ Do you want to show your love for Fly-Pie? <a href=\"%s\">Become a "
+"sponsor.</a>"
 msgstr ""
 
 #. Translators: This is one of the hints which are shown in the bottom right corner
@@ -994,19 +985,19 @@ msgstr ""
 #. Translators: The left-most item of the menu editor bread crumbs.
 #: src/prefs/MenuEditorPage.js:1012
 msgid "All Menus"
-msgstr "Visi meniu"
+msgstr ""
 
 #: src/prefs/SettingsPage.js:281
 msgid "Save"
-msgstr "Įrašyti"
+msgstr "შენახვა"
 
 #: src/prefs/SettingsPage.js:336
 msgid "Load"
-msgstr "Įkelti"
+msgstr "ჩატვირთვა"
 
 #: src/prefs/SettingsPage.js:353
 msgid "Failed to load preset!"
-msgstr "Nepavyko įkelti išankstinės parinkties!"
+msgstr ""
 
 #. Translators: Do not translate '%d'. ms = milliseconds
 #: src/prefs/TutorialPage.js:185
@@ -1024,7 +1015,7 @@ msgstr ""
 #. Translators: This is the name of the default menu.
 #: src/prefs/ExampleMenu.js:30 src/extension/DefaultMenu.js:32
 msgid "Example Menu"
-msgstr "Pavyzdinis meniu"
+msgstr "მენიუს მაგალითი"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1032,7 +1023,7 @@ msgstr "Pavyzdinis meniu"
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:69
 msgid "Cold "
-msgstr ""
+msgstr "ცივი "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1040,7 +1031,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:74
 msgid "Hot "
-msgstr ""
+msgstr "ცხელი "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1048,7 +1039,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:79
 msgid "Wet "
-msgstr ""
+msgstr "სველი "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1056,7 +1047,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:84
 msgid "Deadly "
-msgstr ""
+msgstr "სასიკვდილო "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1064,7 +1055,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:89
 msgid "Smelly "
-msgstr ""
+msgstr "სუნიანი "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the first words. The three words are directly
@@ -1072,7 +1063,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:94
 msgid "Vegan "
-msgstr ""
+msgstr "ვეგანური "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1080,7 +1071,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:108
 msgid "Chocolate "
-msgstr ""
+msgstr "შოკოლადი "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1088,7 +1079,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:113
 msgid "Cherry "
-msgstr ""
+msgstr "ალუბალი "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1096,7 +1087,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:118
 msgid "Garlic "
-msgstr ""
+msgstr "ნიორი "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1104,7 +1095,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:123
 msgid "Apple "
-msgstr ""
+msgstr "ვაშლი "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the middle words. The three words are
@@ -1112,7 +1103,7 @@ msgstr ""
 #. can also use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:128
 msgid "Pepper "
-msgstr ""
+msgstr "პილპილი "
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1120,7 +1111,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:142
 msgid "Pie"
-msgstr ""
+msgstr "წრიული"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1128,7 +1119,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:147
 msgid "Cake"
-msgstr ""
+msgstr "ნამცხვარი"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1136,7 +1127,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:152
 msgid "Muffin"
-msgstr ""
+msgstr "მაფინი"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1144,7 +1135,7 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:157
 msgid "Doughnut"
-msgstr ""
+msgstr "დონატი"
 
 #. Translators: The tutorial menu allows selecting triplets such as "Smelly
 #. Chocolate Muffin". This is one of the last words. The three words are directly
@@ -1152,22 +1143,22 @@ msgstr ""
 #. use hyphens if appropriate.
 #: src/prefs/ExampleMenu.js:162
 msgid "Cookie"
-msgstr ""
+msgstr "ქუქი"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:40
 msgid "Sound"
-msgstr "Garsas"
+msgstr "ხმა"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:45
 msgid "Mute"
-msgstr "Nutildyti"
+msgstr "დადუმება"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:53
 msgid "Play / Pause"
-msgstr "Atkurti / Pristabdyti"
+msgstr "დაკვრა/პაუზა"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:61
@@ -1182,7 +1173,7 @@ msgstr ""
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:90
 msgid "Maximize Window"
-msgstr "Išskleisti langą"
+msgstr "ფანჯრის გადიდება"
 
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:98
@@ -1192,57 +1183,57 @@ msgstr ""
 #. Translators: This is an entry of the default menu.
 #: src/extension/DefaultMenu.js:106
 msgid "Close Window"
-msgstr "Užverti langą"
+msgstr "ფანჯრის დახურვა"
 
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
 #: src/extension/DefaultMenu.js:138
 msgid "Next Workspace"
-msgstr "Kita darbo sritis"
+msgstr "შემდეგი სამუშაო სივრცე"
 
 #. Translators: This is an entry of the default menu under GNOME 40 and beyond.
 #: src/extension/DefaultMenu.js:147
 msgid "Previous Workspace"
-msgstr "Ankstesnė darbo sritis"
+msgstr "წინა სამუშაო სივრცე"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:158
 msgid "Switch Workspace"
-msgstr "Perjungti darbo sritį"
+msgstr ""
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:163
 msgid "Go Up"
-msgstr ""
+msgstr "ასვლა"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:171
 msgid "Go Down"
-msgstr ""
+msgstr "ჩამოსვლა"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:184
 msgid "Move Window"
-msgstr "Perkelti langą"
+msgstr "ფანჯრის გადაადგილება"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:189
 msgid "Move Window Up"
-msgstr ""
+msgstr "ფანჯრის მაღლა ატანა"
 
 #. Translators: This is an entry of the default menu under GNOME 3.3x only.
 #: src/extension/DefaultMenu.js:197
 msgid "Move Window Down"
-msgstr ""
+msgstr "ფანჯრის დაბლა ჩამოტანა"
 
 #: src/extension/Background.js:91
 msgid "Close"
-msgstr "Užverti"
+msgstr "დახურვა"
 
 #. Translators: This means 'Change the side of the screen where the Preview menu is
 #. opened'.
 #: src/extension/Background.js:97
 msgid "Flip Side"
-msgstr "Apversti pusę"
+msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:217
@@ -1252,7 +1243,7 @@ msgstr ""
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:219
 msgid "You reached level %i!"
-msgstr "Jūs pasiekėte %i lygį!"
+msgstr ""
 
 #. Translators: This is shown in a desktop notifications.
 #: src/extension/Daemon.js:239
@@ -1269,63 +1260,63 @@ msgstr ""
 #. is shown once an achievement is unlocked.
 #: src/extension/Daemon.js:603
 msgid "Show Achievements"
-msgstr "Rodyti pasiekimus"
+msgstr ""
 
 #: resources/ui/common/menus.ui:13
 msgid "Visit Homepage"
-msgstr "Aplankyti interneto svetainę"
+msgstr ""
 
 #: resources/ui/common/menus.ui:17
 msgid "View Changelog"
-msgstr "Rodyti keitinių žurnalą"
+msgstr "ცვლილებების ნახვა"
 
 #: resources/ui/common/menus.ui:23
 msgid "Report a Bug"
-msgstr "Pranešti apie klaidą"
+msgstr "შეცდომის პატაკი"
 
 #: resources/ui/common/menus.ui:27
 msgid "Translate"
-msgstr "Versti"
+msgstr "თარგმნა"
 
 #: resources/ui/common/menus.ui:31
 msgid "Donate"
-msgstr "Paremti"
+msgstr "შემოწირულობა"
 
 #: resources/ui/common/menus.ui:48
 msgid "About Fly-Pie"
-msgstr "Apie Fly-Pie"
+msgstr ""
 
 #: resources/ui/gtk4/copyValueButton.ui:12
 #: resources/ui/gtk3/copyValueButton.ui:12
 msgid "Copy left value to right side"
-msgstr "Kopijuoti kairiąją reikšmę į dešinę pusę"
+msgstr ""
 
 #: resources/ui/gtk4/iconSelectDialog.ui:25
 #: resources/ui/gtk3/iconSelectDialog.ui:25
 msgid "Select Icon"
-msgstr "Pasirinkti piktogramą"
+msgstr "არჩიეთ ხატულა"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/gtk4/iconSelectDialog.ui:50
 #: resources/ui/gtk3/iconSelectDialog.ui:106
 msgid "Icon Theme"
-msgstr ""
+msgstr "ხატულების თემა"
 
 #. Page title of the icon-select-dialog.
 #: resources/ui/gtk4/iconSelectDialog.ui:112
 #: resources/ui/gtk3/iconSelectDialog.ui:117
 msgid "Custom Icon"
-msgstr "Tinkinta piktograma"
+msgstr ""
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:25 resources/ui/gtk3/settings.ui:25
 msgid "Linear"
-msgstr ""
+msgstr "წრფივი"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:29 resources/ui/gtk3/settings.ui:29
 msgid "Ease"
-msgstr ""
+msgstr "შენელება"
 
 #. A kind of animation. Feel free to use the english term if there is no simple translation to your language.
 #: resources/ui/gtk4/settings.ui:33 resources/ui/gtk3/settings.ui:33
@@ -1397,22 +1388,21 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:552 resources/ui/gtk3/settings.ui:556
 msgid "Fly-Pie requires that GNOME Shell's animations are enabled."
-msgstr "Fly-Pie reikalauja, kad GNOME apvalkalo animacijos būtų įjungtos."
+msgstr ""
 
 #. Text of the button of the InfoBar which is shown when GNOME Shell's animations are disabled.
 #: resources/ui/gtk4/settings.ui:557 resources/ui/gtk3/settings.ui:566
 msgid "Enable Animations"
-msgstr "Įjungti animacijas"
+msgstr "ანიმაციების ჩართვა"
 
 #. Caption of the tutorial page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:608 resources/ui/gtk3/settings.ui:1326
 msgid "Tutorial"
-msgstr ""
+msgstr "სახელმძღვანელო"
 
 #: resources/ui/gtk4/settings.ui:646 resources/ui/gtk3/settings.ui:657
 msgid "Press <b>Ctrl+Space</b> to open the default menu of Fly-Pie!"
 msgstr ""
-"Paspauskite <b>Vald+Tarpas</b> norėdami atverti numatytąjį Fly-Pie meniu!"
 
 #: resources/ui/gtk4/settings.ui:656 resources/ui/gtk3/settings.ui:667
 msgid ""
@@ -1544,7 +1534,7 @@ msgstr ""
 #. The user finished the tutorial. Yay!
 #: resources/ui/gtk4/settings.ui:1183 resources/ui/gtk3/settings.ui:1182
 msgid "Congratulations!"
-msgstr "Sveikiname!"
+msgstr "გილოცავთ!"
 
 #. Use a similarly bad pun for "Pielot" that works in your language, if you want. Who doesn't love puns? xD
 #: resources/ui/gtk4/settings.ui:1194 resources/ui/gtk3/settings.ui:1193
@@ -1561,24 +1551,24 @@ msgid ""
 "If you like Fly-Pie, I would be happy if you left a positive review on <a "
 "href=\"https://extensions.gnome.org/extension/3433/fly-pie/\">extensions."
 "gnome.org</a>! Whenever you encounter a 🐞️ bug or have feature request, feel "
-"free to report this on <a href=\"https://github.com/Schneegans/Fly-Pie/issues"
-"\">Github</a>."
+"free to report this on <a href=\"https://github.com/Schneegans/Fly-Pie/"
+"issues\">Github</a>."
 msgstr ""
 
 #. Button for tutorial navigation. Goes back one page.
 #: resources/ui/gtk4/settings.ui:1241 resources/ui/gtk3/settings.ui:1241
 msgid "Previous"
-msgstr "Ankstesnis"
+msgstr "წინა"
 
 #. Button for tutorial navigation. Goes to the next page.
 #: resources/ui/gtk4/settings.ui:1298 resources/ui/gtk3/settings.ui:1298
 msgid "Next"
-msgstr "Kitas"
+msgstr "შემდეგი"
 
 #. Caption of the settings page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:1334 resources/ui/gtk3/settings.ui:4481
 msgid "Settings"
-msgstr ""
+msgstr "მორგება"
 
 #: resources/ui/gtk4/settings.ui:1372 resources/ui/gtk4/settings.ui:1594
 #: resources/ui/gtk3/settings.ui:1370 resources/ui/gtk3/settings.ui:1591
@@ -1591,7 +1581,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:1400 resources/ui/gtk3/settings.ui:1398
 msgid "Animation Duration"
-msgstr "Animacijų trukmė"
+msgstr ""
 
 #: resources/ui/gtk4/settings.ui:1414 resources/ui/gtk3/settings.ui:1412
 msgid "Global Scaling"
@@ -1607,11 +1597,11 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:1473 resources/ui/gtk3/settings.ui:2125
 #: resources/ui/gtk3/settings.ui:2821 resources/ui/gtk3/settings.ui:3043
 msgid "Background Color"
-msgstr "Fono spalva"
+msgstr "ფონის ფერი"
 
 #: resources/ui/gtk4/settings.ui:1485 resources/ui/gtk3/settings.ui:1483
 msgid "Font"
-msgstr "Šriftas"
+msgstr "ფონტი"
 
 #: resources/ui/gtk4/settings.ui:1495 resources/ui/gtk3/settings.ui:1493
 msgid "Label Font"
@@ -1619,11 +1609,11 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:1505 resources/ui/gtk3/settings.ui:1503
 msgid "Text Color"
-msgstr "Teksto spalva"
+msgstr "ტექსტის ფერი"
 
 #: resources/ui/gtk4/settings.ui:1579 resources/ui/gtk3/settings.ui:1577
 msgid "Animation Mode"
-msgstr "Animacijų veiksena"
+msgstr ""
 
 #: resources/ui/gtk4/settings.ui:1627 resources/ui/gtk4/settings.ui:2234
 #: resources/ui/gtk3/settings.ui:1619 resources/ui/gtk3/settings.ui:2221
@@ -1648,7 +1638,7 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:3185 resources/ui/gtk3/settings.ui:1688
 #: resources/ui/gtk3/settings.ui:2615 resources/ui/gtk3/settings.ui:3160
 msgid "Size"
-msgstr "Dydis"
+msgstr "ზომა"
 
 #: resources/ui/gtk4/settings.ui:1747 resources/ui/gtk4/settings.ui:1798
 #: resources/ui/gtk4/settings.ui:1950 resources/ui/gtk4/settings.ui:2001
@@ -1659,7 +1649,7 @@ msgstr "Dydis"
 #: resources/ui/gtk3/settings.ui:2361 resources/ui/gtk3/settings.ui:2422
 #: resources/ui/gtk3/settings.ui:2518 resources/ui/gtk3/settings.ui:2589
 msgid "Saturation"
-msgstr ""
+msgstr "გაჯერებულობა"
 
 #: resources/ui/gtk4/settings.ui:1764 resources/ui/gtk4/settings.ui:1808
 #: resources/ui/gtk4/settings.ui:1967 resources/ui/gtk4/settings.ui:2011
@@ -1670,7 +1660,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2378 resources/ui/gtk3/settings.ui:2412
 #: resources/ui/gtk3/settings.ui:2535 resources/ui/gtk3/settings.ui:2579
 msgid "Luminance"
-msgstr ""
+msgstr "განათებულობა"
 
 #: resources/ui/gtk4/settings.ui:1781 resources/ui/gtk4/settings.ui:1818
 #: resources/ui/gtk4/settings.ui:1984 resources/ui/gtk4/settings.ui:2021
@@ -1681,7 +1671,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2395 resources/ui/gtk3/settings.ui:2432
 #: resources/ui/gtk3/settings.ui:2552 resources/ui/gtk3/settings.ui:2569
 msgid "Opacity"
-msgstr "Nepermatomumas"
+msgstr "გაუმჭვირვალობა"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Fixed = not changing dynamically
 #: resources/ui/gtk4/settings.ui:1839 resources/ui/gtk4/settings.ui:1903
@@ -1691,7 +1681,7 @@ msgstr "Nepermatomumas"
 #: resources/ui/gtk3/settings.ui:2305 resources/ui/gtk3/settings.ui:2462
 #: resources/ui/gtk3/settings.ui:3058 resources/ui/gtk3/settings.ui:3111
 msgid "Fixed"
-msgstr ""
+msgstr "ფიქსირებული"
 
 #. Keep this very short! Try to use not more than six or seven letters. This is a label of the coloring type radio button group. Auto = changing dynamically
 #: resources/ui/gtk4/settings.ui:1846 resources/ui/gtk4/settings.ui:1910
@@ -1699,7 +1689,7 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:1840 resources/ui/gtk3/settings.ui:1906
 #: resources/ui/gtk3/settings.ui:2313 resources/ui/gtk3/settings.ui:2470
 msgid "Auto"
-msgstr ""
+msgstr "ავტო"
 
 #: resources/ui/gtk4/settings.ui:2079 resources/ui/gtk4/settings.ui:2791
 #: resources/ui/gtk3/settings.ui:2075 resources/ui/gtk3/settings.ui:2778
@@ -1709,7 +1699,7 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:2122 resources/ui/gtk4/settings.ui:2885
 #: resources/ui/gtk3/settings.ui:2114 resources/ui/gtk3/settings.ui:2867
 msgid "Icon Scale"
-msgstr ""
+msgstr "ხატულის მასშტაბი"
 
 #: resources/ui/gtk4/settings.ui:2152 resources/ui/gtk4/settings.ui:2904
 #: resources/ui/gtk3/settings.ui:2143 resources/ui/gtk3/settings.ui:2885
@@ -1720,7 +1710,7 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:3347 resources/ui/gtk3/settings.ui:2193
 #: resources/ui/gtk3/settings.ui:2935 resources/ui/gtk3/settings.ui:3318
 msgid "Background Image"
-msgstr ""
+msgstr "ფონის სურათი"
 
 #: resources/ui/gtk4/settings.ui:2267 resources/ui/gtk4/settings.ui:2986
 #: resources/ui/gtk3/settings.ui:2248 resources/ui/gtk3/settings.ui:2963
@@ -1752,12 +1742,12 @@ msgstr ""
 #: resources/ui/gtk3/settings.ui:2321 resources/ui/gtk3/settings.ui:2478
 #: resources/ui/gtk3/settings.ui:3066 resources/ui/gtk3/settings.ui:3119
 msgid "Parent"
-msgstr ""
+msgstr "მშობელი"
 
 #: resources/ui/gtk4/settings.ui:2639 resources/ui/gtk4/settings.ui:3196
 #: resources/ui/gtk3/settings.ui:2626 resources/ui/gtk3/settings.ui:3171
 msgid "Offset"
-msgstr ""
+msgstr "წანაცვლება"
 
 #. Draw above (grand)children items. There's an explanation string below in the application.
 #: resources/ui/gtk4/settings.ui:2750 resources/ui/gtk4/settings.ui:3285
@@ -1800,7 +1790,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:3445 resources/ui/gtk3/settings.ui:3406
 msgid "Inner Radius"
-msgstr ""
+msgstr "შიდა რადიუსი"
 
 #. Keep the individual lines short (around 30 characters max)! You can use up to three lines if you want.
 #: resources/ui/gtk4/settings.ui:3456 resources/ui/gtk3/settings.ui:3417
@@ -1841,11 +1831,11 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:3712 resources/ui/gtk3/settings.ui:3666
 msgid "Thickness"
-msgstr ""
+msgstr "სისქე"
 
 #: resources/ui/gtk4/settings.ui:3723 resources/ui/gtk3/settings.ui:3677
 msgid "Color"
-msgstr "Spalva"
+msgstr "ფერი"
 
 #: resources/ui/gtk4/settings.ui:3775 resources/ui/gtk3/settings.ui:3729
 msgid "Minimum Segment Length"
@@ -1874,12 +1864,12 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:3924 resources/ui/gtk3/settings.ui:3871
 msgid "Show above Fullscreen Windows"
-msgstr "Rodyti virš viso ekrano langų"
+msgstr ""
 
 #: resources/ui/gtk4/settings.ui:3983 resources/ui/gtk4/settings.ui:4427
 #: resources/ui/gtk3/settings.ui:3923 resources/ui/gtk3/settings.ui:4366
 msgid "Advanced Settings"
-msgstr ""
+msgstr "დამატებითი პარამეტრები"
 
 #: resources/ui/gtk4/settings.ui:3993 resources/ui/gtk3/settings.ui:3933
 msgid "These settings are independent of the presets."
@@ -1965,7 +1955,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4363 resources/ui/gtk3/settings.ui:4303
 msgid "Achievement Notifications"
-msgstr "Pranešimai apie pasiekimus"
+msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4373 resources/ui/gtk3/settings.ui:4313
 msgid "Show a notification whenever you complete an achievement."
@@ -1973,7 +1963,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4447 resources/ui/gtk3/settings.ui:4398
 msgid "Load Preset"
-msgstr "Įkelti išankstinę parinktį"
+msgstr "პრესეტის ჩატვირთვა"
 
 #: resources/ui/gtk4/settings.ui:4459 resources/ui/gtk3/settings.ui:4418
 msgid "Load settings from a JSON file."
@@ -1987,12 +1977,12 @@ msgstr ""
 #: resources/ui/gtk4/settings.ui:4489 resources/ui/gtk4/settings.ui:4763
 #: resources/ui/gtk3/settings.ui:4460 resources/ui/gtk3/settings.ui:4753
 msgid "Live Preview"
-msgstr ""
+msgstr "ცოცხალი მინიატურა"
 
 #. Caption of the menu editor page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:4518 resources/ui/gtk3/settings.ui:5072
 msgid "Menu Editor"
-msgstr "Meniu redaktorius"
+msgstr "მენიუს რედაქტორი"
 
 #: resources/ui/gtk4/settings.ui:4547 resources/ui/gtk3/settings.ui:4519
 msgid "Add a new menu item."
@@ -2000,7 +1990,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4627 resources/ui/gtk3/settings.ui:4606
 msgid "Stash"
-msgstr ""
+msgstr "საკუჭნაო"
 
 #: resources/ui/gtk4/settings.ui:4643 resources/ui/gtk3/settings.ui:4623
 msgid "Store items here and re-use them later."
@@ -2008,7 +1998,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4687 resources/ui/gtk3/settings.ui:4667
 msgid "Trash"
-msgstr "Šiukšlinė"
+msgstr "ნაგვის ყუთი"
 
 #: resources/ui/gtk4/settings.ui:4703 resources/ui/gtk3/settings.ui:4683
 msgid "Drop items here."
@@ -2016,19 +2006,19 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4733 resources/ui/gtk3/settings.ui:4713
 msgid "Restore menus from a JSON file. This will override your current menus!"
-msgstr "Atkurti meniu iš JSON failo. Tai nustelbs jūsų dabartinius meniu!"
+msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4739 resources/ui/gtk3/settings.ui:4725
 msgid "Export all menus to a JSON file."
-msgstr "Eksportuoti visus meniu į JSON failą."
+msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4821 resources/ui/gtk3/settings.ui:4810
 msgid "Name"
-msgstr "Pavadinimas"
+msgstr "სახელი"
 
 #: resources/ui/gtk4/settings.ui:4839 resources/ui/gtk3/settings.ui:4828
 msgid "Icon"
-msgstr "Piktograma"
+msgstr "ხატულა"
 
 #: resources/ui/gtk4/settings.ui:4857 resources/ui/gtk3/settings.ui:4846
 msgid ""
@@ -2056,7 +2046,7 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4944 resources/ui/gtk3/settings.ui:4939
 msgid "This will open the menu."
-msgstr "Tai atvers meniu."
+msgstr ""
 
 #: resources/ui/gtk4/settings.ui:4958 resources/ui/gtk3/settings.ui:4953
 msgid ""
@@ -2078,23 +2068,23 @@ msgstr ""
 
 #: resources/ui/gtk4/settings.ui:5031 resources/ui/gtk3/settings.ui:5026
 msgid "Show Labels"
-msgstr ""
+msgstr "ჭდეების ჩვენება"
 
 #. Caption of the achievements page in the window's titlebar.
 #: resources/ui/gtk4/settings.ui:5088 resources/ui/gtk3/settings.ui:5315
 msgid "Achievements"
-msgstr "Pasiekimai"
+msgstr "მიღწევები"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/gtk4/settings.ui:5282 resources/ui/gtk3/settings.ui:5252
 msgid "In Progress"
-msgstr "Eigoje"
+msgstr "მიმდინარეობს"
 
 #. One of the buttons on the bottom of the achievements page.
 #: resources/ui/gtk4/settings.ui:5296 resources/ui/gtk3/settings.ui:5267
 msgid "Completed"
-msgstr ""
+msgstr "დასრულებულია"
 
 #: resources/ui/gtk4/settings.ui:5324 resources/ui/gtk3/settings.ui:5295
 msgid "Reset all achievements."
-msgstr "Atstatyti visus pasiekimus."
+msgstr ""
