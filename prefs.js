@@ -234,13 +234,12 @@ export default class FlyPiePreferences extends ExtensionPreferences {
     this._pages.forEach(page => {
       window.add(page);
 
-      // Starting with GNOME 48 there is an additional scrolled window in the adw
-      // preference pages which we do not want. We simply hide it.
-      if (utils.shellVersionIsAtLeast(48, 'alpha')) {
-        const scrolledWindow = this._findChildByType(page, Gtk.ScrolledWindow);
-        if (scrolledWindow) {
-          scrolledWindow.visible = false;
-        }
+      // Starting with GNOME 49, we have to use the Adw.PreferenceGroups. These bring an
+      // Adw.Clamp which breaks Fly-Pie's traditional settings menu layout. We work around
+      // this by setting an extremely high maximum size for the clamp.
+      const clamp = this._findChildByType(page, Adw.Clamp);
+      if (clamp) {
+        clamp.maximum_size = 1000000;
       }
     });
   }

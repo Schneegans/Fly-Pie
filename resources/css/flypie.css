@@ -22,7 +22,6 @@ SPDX-License-Identifier: MIT
 
 
 /* This is used for the unread-achievements counter. */
-
 .counter-label {
     text-shadow: none;
     color: @theme_selected_fg_color;
@@ -33,7 +32,6 @@ SPDX-License-Identifier: MIT
 }
 
 /* This is an entry at the top of the menu editor. */
-
 .menu-editor-path-item {
     border-radius: 0;
     border-left: none;
@@ -50,4 +48,9 @@ menubutton.menu-editor-add-button button {
     border-right: none;
     border-top: none;
     border-bottom: none;
+}
+
+/* Remove the padding inside the Adw.Clamp in the settings dialog. */
+preferencespage clamp>box {
+    margin: 0;
 }
