@@ -8,24 +8,28 @@ msgstr ""
 "Project-Id-Version: flypie\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-03 15:41+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-08-10 15:51+0000\n"
+"Last-Translator: AxM3 <axelmans44@tutamail.com>\n"
+"Language-Team: Esperanto <https://hosted.weblate.org/projects/fly-pie/core/"
+"eo/>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 
 #: src/common/actions/Shortcut.js:46
+#, fuzzy
 msgid "Activate Shortcut"
-msgstr ""
+msgstr "Aktivigi Mallongigon"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Shortcut.js:53
+#, fuzzy
 msgid "Simulates a key combination."
-msgstr ""
+msgstr "Simulas klavkombinon."
 
 #: src/common/actions/Shortcut.js:57
 msgid ""
@@ -33,49 +37,55 @@ msgid ""
 "activated. For example, this can be used to switch virtual desktops, control "
 "multimedia playback or to undo / redo operations."
 msgstr ""
+"La ago <b>Aktivigi Mallongigon</b> simulas klavkombinon kiam aktivigite. "
+"Ekzemple, ĉi tio povas esti uzata por ŝanĝi virtualajn labortablojn, "
+"kontroli multmedian reludigon aŭ por malfari/refari operaciojn."
 
 #: src/common/actions/Shortcut.js:81 resources/ui/gtk4/settings.ui:4938
 #: resources/ui/gtk3/settings.ui:4933
 msgid "Shortcut"
-msgstr ""
+msgstr "Mallongigo"
 
 #: src/common/actions/Shortcut.js:81
 msgid "This shortcut will be simulated."
-msgstr ""
+msgstr "Ĉi tiu mallongigo estos simulita."
 
 #: src/common/actions/File.js:37
 msgid "Open File"
-msgstr ""
+msgstr "Malfermi Dosieron"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/File.js:44
 msgid "Opens a file with the default application."
-msgstr ""
+msgstr "Malfermas dosieron per la defaŭlta aplikaĵo."
 
 #: src/common/actions/File.js:48
 msgid ""
 "The <b>Open File</b> action will open the file specified above with your "
 "system's default application."
 msgstr ""
+"La ago <b>Malfermi Dosieron</b> malfermos la supre specifitan dosieron per "
+"la defaŭlta aplikaĵo de via sistemo."
 
 #: src/common/actions/File.js:72
 msgid "File"
-msgstr ""
+msgstr "Dosiero"
 
 #: src/common/actions/File.js:72 src/common/actions/Uri.js:71
 msgid "It will be opened with the default app."
-msgstr ""
+msgstr "Ĝi malfermiĝos per la defaŭlta aplikaĵo."
 
 #: src/common/actions/Command.js:37
 msgid "Launch Application"
-msgstr ""
+msgstr "Lanĉi Aplikaĵon"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Command.js:44
+#, fuzzy
 msgid "Runs any shell command."
-msgstr ""
+msgstr "Rulas ajnan shell komandon."
 
 #: src/common/actions/Command.js:48
 msgid ""
@@ -83,24 +93,27 @@ msgid ""
 "primarily used to open applications but may have plenty of other use cases "
 "as well."
 msgstr ""
+"La ago <b>Lanĉi Aplikaĵon</b> efektivigas ajnan donitan komandon. Ĉi tio "
+"estas ĉefe uzata por malfermi aplikaĵojn, sed povas havi ankaŭ multajn "
+"aliajn uzokazojn."
 
 #: src/common/actions/Command.js:72
 msgid "Command"
-msgstr ""
+msgstr "Komando"
 
 #: src/common/actions/Command.js:72
 msgid "Use the button to list installed apps."
-msgstr ""
+msgstr "Uzu la butonon por listigi instalitajn aplikaĵojn."
 
 #: src/common/actions/Uri.js:36
 msgid "Open URI"
-msgstr ""
+msgstr "Malferma URI"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/Uri.js:43
 msgid "Opens an URI with the default application."
-msgstr ""
+msgstr "Malfermas URI-on kun la defaŭlta aplikaĵo."
 
 #: src/common/actions/Uri.js:47
 msgid ""
@@ -109,20 +122,24 @@ msgid ""
 "However, it is also possible to open other URIs such as \"mailto:foo@bar."
 "org\"."
 msgstr ""
+"Kiam la ago <b>Malfermi URI-on</b> estas aktivigita, la supra URI "
+"malfermiĝas per la defaŭlta aplikaĵo. Por http-URL-oj, tio estos via TTT-"
+"legilo. Tamen, eblas ankaŭ malfermi aliajn URI-ojn kiel ekzemple "
+"\"mailto:foo@bar.org\"."
 
 #: src/common/actions/Uri.js:71
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: src/common/actions/DBusSignal.js:35
 msgid "D-Bus Signal"
-msgstr ""
+msgstr "D-Bus Signalo"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/DBusSignal.js:42
 msgid "Emits a D-Bus signal."
-msgstr ""
+msgstr "Elsendas D-Bus-signalon."
 
 #: src/common/actions/DBusSignal.js:46
 msgid ""
@@ -131,24 +148,28 @@ msgid ""
 "md\">can listen on the D-Bus for its activation</a>. This can be very useful "
 "in custom menus opened via the command line."
 msgstr ""
+"La ago <b>D-Bus Signalo</b> faras nenion memstare. Sed vi <a href=\"https://"
+"github.com/Schneegans/Fly-Pie/blob/main/docs/dbus-interface.md\">povas "
+"aŭskulti la D-Buson por ĝia aktivigo</a>. Tio povas esti tre utila en "
+"kutimaj menuoj malfermitaj per la komandlinio."
 
 #: src/common/actions/DBusSignal.js:70
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: src/common/actions/DBusSignal.js:70
 msgid "This will be passed to the D-Bus signal."
-msgstr ""
+msgstr "Ĉi tio estos transdonita al la D-Bus-signalo."
 
 #: src/common/actions/InsertText.js:49
 msgid "Insert Text"
-msgstr ""
+msgstr "Enmeti Tekston"
 
 #. Translators: Please keep this short.
 #. This is the (short) description shown in the add-new-item-popover.
 #: src/common/actions/InsertText.js:56
 msgid "Types some text automatically."
-msgstr ""
+msgstr "Tajpas iom da teksto aŭtomate."
 
 #: src/common/actions/InsertText.js:60
 msgid ""
@@ -156,18 +177,21 @@ msgid ""
 "then simulates a Ctrl+V. This can be useful if you realize that you often "
 "write the same things."
 msgstr ""
+"La ago <b>Enmeti Tekston</b> kopias la donitan tekston al la tondujo kaj "
+"poste simulas Ctrl+V. Tio povas esti utila se vi rimarkas, ke vi ofte "
+"skribas la samajn aferojn."
 
 #: src/common/actions/InsertText.js:84
 msgid "Text"
-msgstr ""
+msgstr "Teksto"
 
 #: src/common/actions/InsertText.js:84
 msgid "This text will be inserted."
-msgstr ""
+msgstr "Ĉi tiu teksto estos enigita."
 
 #: src/common/ConfigWidgetFactory.js:105 src/prefs/ImageChooserButton.js:45
 msgid "Select File"
-msgstr ""
+msgstr "Elektu Dosieron"
 
 #: src/common/ConfigWidgetFactory.js:106 src/common/ConfigWidgetFactory.js:182
 #: src/prefs/ImageChooserButton.js:46 src/prefs/MenuEditorPage.js:208
@@ -175,17 +199,17 @@ msgstr ""
 #: src/prefs/SettingsPage.js:335 resources/ui/gtk4/iconSelectDialog.ui:20
 #: resources/ui/gtk3/iconSelectDialog.ui:20
 msgid "Cancel"
-msgstr ""
+msgstr "Nuligi"
 
 #: src/common/ConfigWidgetFactory.js:181
 msgid "Select Application"
-msgstr ""
+msgstr "Elektu Aplikaĵon"
 
 #. Translators: This is shown on the shortcut-buttons when no shortcut is selected.
 #: src/common/ConfigWidgetFactory.js:290 src/common/ConfigWidgetFactory.js:338
 #: src/prefs/MenuEditor.js:284
 msgid "Not Bound"
-msgstr ""
+msgstr "Ne Ligita"
 
 #: src/common/ConfigWidgetFactory.js:321
 msgid ""
