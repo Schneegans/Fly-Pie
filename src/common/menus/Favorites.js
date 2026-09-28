@@ -62,7 +62,7 @@ export function getFavoritesMenu() {
         if (app) {
           result.children.push({
             name: app.get_name(),
-            icon: app.get_app_info().get_icon().to_string(),
+            icon: app.get_app_info()?.get_icon()?.to_string() ?? 'image-missing',
             onSelect: () => app.open_new_window(-1)
           });
         }
